@@ -4,9 +4,9 @@
  "_stamp_rule": "Every section carries `measured_at` and `n`. A measurement of a checkpoint is only true of that checkpoint AS IT STOOD; an unstamped observation cannot be told from a stale one.",
  "sections": {
   "weights": {
-   "measured_by": "safetensors headers (archive weights_audit.csv)",
-   "measured_at": "2026-08 (archive)",
-   "n": 137,
+   "measured_by": "huggingface_hub HfApi().model_info(expand=['safetensors'])",
+   "measured_at": "2026-08-15T18:19:17",
+   "n": 138,
    "models": {
     "01-ai/Yi-1.5-9B": {
      "params_b": 8.829,
@@ -692,7 +692,33 @@
      "params_b": 9.4,
      "weights_format": "safetensors",
      "n_safetensors": 4
+    },
+    "allenai/Olmo-3-7B-Think": {
+     "params_b": 7.298,
+     "n_params": 7298011136,
+     "source": "hf_api:safetensors"
     }
+   },
+   "unmeasured": {
+    "BAAI/AquilaChat2-7B": "no safetensors metadata published",
+    "HuggingFaceH4/mistral-7b-sft-beta": "no safetensors metadata published",
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": "no safetensors metadata published",
+    "RWKV/rwkv-4-7b-pile": "no safetensors metadata published",
+    "RWKV/rwkv-raven-7b": "no safetensors metadata published",
+    "allenai/OLMo-2-0425-1B-DPO": "no safetensors metadata published",
+    "allenai/OLMo-2-0425-1B-SFT": "no safetensors metadata published",
+    "allenai/OLMoE-1B-7B-0125-SFT": "no safetensors metadata published",
+    "baichuan-inc/Baichuan2-7B-Base": "no safetensors metadata published",
+    "baichuan-inc/Baichuan2-7B-Chat": "no safetensors metadata published",
+    "croissantllm/CroissantLLMBase": "no safetensors metadata published",
+    "deepseek-ai/deepseek-llm-7b-base": "no safetensors metadata published",
+    "deepseek-ai/deepseek-llm-7b-chat": "no safetensors metadata published",
+    "internlm/internlm2-base-7b": "no safetensors metadata published",
+    "lomahony/eleuther-pythia6.9b-hh-dpo": "no safetensors metadata published",
+    "lomahony/eleuther-pythia6.9b-hh-sft": "no safetensors metadata published",
+    "togethercomputer/RedPajama-INCITE-7B-Chat": "no safetensors metadata published",
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": "no safetensors metadata published",
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": "no safetensors metadata published"
    }
   },
   "tokenizer": {

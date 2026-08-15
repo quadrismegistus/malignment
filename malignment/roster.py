@@ -231,16 +231,29 @@ def rows():
     #: independent of any outcome -- a representative chosen by a measured
     #: quantity cannot be chosen to favour a result.
     TARGET = 8.0
-    root_params = {}
+    #: **NEAREST-8B IS A TIE-BREAKER, NOT A MEMBERSHIP TEST.** Keying the pick on
+    #: `params_b` left SIX groups with no representative at all -- rwkv,
+    #: baichuan2, croissant, deepseek, internlm2, redpajama -- every one of them a
+    #: group of ONE lineage whose root publishes no safetensors metadata. There is
+    #: nothing to choose between in a group of one, so requiring a size to choose
+    #: with excluded them from every representative-filtered population silently.
+    #: A rule that needs a measurement should apply only where the measurement
+    #: decides something.
+    by_group = collections.defaultdict(list)
     for n in nodes:
-        if n["depth"] == 0 and n["params_b"]:
-            root_params[n["model_id"]] = n["params_b"]
-    best = {}
-    for lin, pbv in root_params.items():
-        g = _find(lin)
-        if g not in best or abs(pbv - TARGET) < abs(root_params[best[g]] - TARGET):
-            best[g] = lin
-    rep = set(best.values())
+        if n["depth"] == 0:
+            by_group[_find(n["lineage"])].append((n["lineage"], n["params_b"]))
+    rep = set()
+    for g, arms in by_group.items():
+        if len(arms) == 1:
+            rep.add(arms[0][0])
+            continue
+        sized = [(l, p) for l, p in arms if p]
+        if not sized:
+            #: A multi-lineage group where NOTHING is measured cannot be picked
+            #: from. Left unrepresented and visible, never picked arbitrarily.
+            continue
+        rep.add(min(sized, key=lambda x: abs(x[1] - TARGET))[0])
     for n in nodes:
         n["scale_group"] = _find(n["lineage"])
         n["is_representative"] = int(n["lineage"] in rep)
