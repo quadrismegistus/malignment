@@ -88,12 +88,22 @@ TOL = 1e-4          #: conservation is exact to ~4e-7 in practice; 1e-4 is loose
 #: re-deciding. `_SUPERSEDED_shard_names/` and four QUARANTINE dirs exist today.
 BAD_PATH = ("QUARANTINE", "RETIRED-", "_SUPERSEDED")
 
+#: **t1 IS IN THE twp_words KEY AND MUST BE.** A twp payload is one row per
+#: (word, FIRST TOKEN): a surface reachable by several token paths gets several
+#: rows, and those rows are a PARTITION -- summed, plus the residual, they come
+#: to 1.0. Measured on 10,908 source cells: **20.4% contain a duplicated
+#: surface**, 10,333 extra rows, `'I'` three times in one pythia cell. Keyed on
+#: (model, prompt, word) the ReplacingMergeTree would collapse them ON MERGE and
+#: silently drop mass -- the storage-engine form of the dict comprehension
+#: `movement.word_probs` refuses, which lost 2.7% of a Chinese distribution. The
+#: loss is larger where a language has more token paths per surface, so it falls
+#: hardest on the cross-language comparison it would be used for.
 DDL = ["""
 CREATE TABLE IF NOT EXISTS {db}.twp_words (
     model String, prompt String, word String,
     t1 UInt32, p Float32,
     source LowCardinality(String), mtime DateTime
-) ENGINE = ReplacingMergeTree(mtime) ORDER BY (model, prompt, word)
+) ENGINE = ReplacingMergeTree(mtime) ORDER BY (model, prompt, word, t1)
 """, """
 CREATE TABLE IF NOT EXISTS {db}.twp_cells (
     model String, prompt String,
