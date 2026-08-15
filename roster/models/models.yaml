@@ -868,17 +868,22 @@ edges:
 - - 01-ai/Yi-1.5-9B
   - instruct
   - 01-ai/Yi-1.5-9B-Chat
+# instruct -> sft. The `instruct` models were finetrained on instruction data using both chat and raw text formats.
 - - AI-Sweden-Models/gpt-sw3-6.7b-v2
-  - instruct
+  - sft
   - AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct
+# instruct -> dpo. In addition to these steps, `Pharia-1-LLM-7B-control-aligned` was aligned for helpfulness and safety using Direct Preference Optimization (DPO).
+#   the parent IS the control (already-tuned) model, so this edge is the DPO step alone
 - - Aleph-Alpha/Pharia-1-LLM-7B-control-hf
-  - instruct
+  - dpo
   - Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf
 - - BAAI/Aquila2-7B
   - sft
   - BAAI/AquilaChat2-7B
+# instruct -> sft. This instructed-tuned variant has been fine-tuned with a collection of 273k instructions, focusing on the performance of Catalan, English and Spanish.
+#   card explicitly denies a preference stage
 - - BSC-LT/salamandra-7b
-  - instruct
+  - sft
   - BSC-LT/salamandra-7b-instruct
 - - ContextualAI/archangel_sft_pythia2-8b
   - dpo
@@ -940,8 +945,10 @@ edges:
 - - LLM360/AmberChat
   - dpo
   - LLM360/AmberSafe
+# instruct -> sft. Lucie-7B-Instruct is fine-tuned on a mixture of human-templated and synthetic instructions (produced by ChatGPT) and a small set of customized prompts
+#   card places preference optimisation in the FUTURE, outside this checkpoint
 - - OpenLLM-France/Lucie-7B
-  - instruct
+  - sft
   - OpenLLM-France/Lucie-7B-Instruct-v1.1
 # dpo -> rlhf: card: Beaver is trained by Safe RLHF, not DPO. `rlhf` and not `ppo`: the card
 # names the framework, not the optimiser, and the algorithm belongs in
@@ -958,11 +965,14 @@ edges:
 - - Qwen/Qwen2.5-7B
   - instruct
   - Qwen/Qwen2.5-7B-Instruct
+# instruct -> distill. The Strong-to-Weak Distillation pipeline is specifically designed to optimize lightweight models, encompassing 5 dense models (Qwen3-0.6B, 1.7B, 4B, 8
+#   card is silent on method; the Qwen3 report names Strong-to-Weak Distillation as the post-training for the small dense models. Confidence low, on the CARD not the claim
 - - Qwen/Qwen3-8B-Base
-  - instruct
+  - distill
   - Qwen/Qwen3-8B
+# instruct -> sft. These are RWKV-4-Pile 1.5/3/7/14B models finetuned on Alpaca, CodeAlpaca, Guanaco, GPT4All, ShareGPT and more.
 - - RWKV/rwkv-4-7b-pile
-  - instruct
+  - sft
   - RWKV/rwkv-raven-7b
 - - TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
   - instruct
@@ -1030,14 +1040,19 @@ edges:
 - - baichuan-inc/Baichuan2-7B-Base
   - instruct
   - baichuan-inc/Baichuan2-7B-Chat
+# instruct -> sft. We present BLOOMZ & mT0, a family of models capable of following human instructions in dozens of languages zero-shot. We finetune BLOOM & mT5 pretrain
 - - bigscience/bloom-7b1
-  - instruct
+  - sft
   - bigscience/bloomz-7b1
+# instruct -> sft. We finetune the base model on public Chat datasets Ultrachat
+#   card alone would only support instruct; the PAPER (5.2.1) names the finetune
 - - croissantllm/CroissantLLMBase
-  - instruct
+  - sft
   - croissantllm/CroissantLLMChat-v0.1
+# instruct -> sft. `deepseek-llm-7b-chat` is a 7B parameter model initialized from `deepseek-llm-7b-base` and fine-tuned on extra instruction data.
+#   paper opposes 'Chat' to 'Chat DPO' as separate models, so this id is the PRE-DPO checkpoint. An inference from the paper's naming, not a direct statement -- confidence medium
 - - deepseek-ai/deepseek-llm-7b-base
-  - instruct
+  - sft
   - deepseek-ai/deepseek-llm-7b-chat
 - - google/gemma-2-9b
   - instruct
@@ -1051,8 +1066,10 @@ edges:
 - - ibm-granite/granite-3.0-8b-base
   - instruct
   - ibm-granite/granite-3.0-8b-instruct
+# instruct -> sft. During instruction tuning, each training example consists of a single-turn or multi-turn prompt and it's response. Instead of one example per sequence
+#   card documents its one stage and names no preference algorithm
 - - inceptionai/jais-family-6p7b
-  - instruct
+  - sft
   - inceptionai/jais-family-6p7b-chat
 - - internlm/internlm2-base-7b
   - sft
@@ -1089,8 +1106,10 @@ edges:
 # dpo -> instruct: card says only "the instruction-tuned version of the neo_7b model" -- no
 # preference stage named anywhere. `dpo` was an inference from the repo name,
 # which is the exact substitution the audit refuses.
+# instruct -> dpo. neo_7b_instruct_v0.1| This repository contains the instruction-tuned version of the neo_7b model.
+#   card says only 'instruction-tuned'; the PAPER names Iterative DPO on top of the SFT model, and this edge's parent IS that SFT checkpoint
 - - m-a-p/neo_7b_sft_v0.1
-  - instruct
+  - dpo
   - m-a-p/neo_7b_instruct_v0.1
 - - meta-llama/Llama-3.1-70B
   - instruct
@@ -1136,8 +1155,9 @@ edges:
 - - mistralai/Mistral-7B-v0.1
   - sft
   - HuggingFaceH4/mistral-7b-sft-beta
+# instruct -> sft. Instruction fined tuned version of [Teuken-7B-base-v0.6](https://huggingface.co/openGPT-X/Teuken-7B-base-v0.6).
 - - openGPT-X/Teuken-7B-base-v0.6
-  - instruct
+  - sft
   - openGPT-X/Teuken-7B-instruct-v0.6
 - - openbmb/MiniCPM5-1B-Base
   - sft
@@ -1179,8 +1199,9 @@ edges:
 - - tiiuae/Falcon3-Mamba-7B-Base
   - instruct
   - tiiuae/Falcon3-Mamba-7B-Instruct
+# instruct -> sft. We are also pleased to introduce the instruction-tuned version of Falcon Mamba, which has been fine-tuned with an additional 5 billion tokens of super
 - - tiiuae/falcon-mamba-7b
-  - instruct
+  - sft
   - tiiuae/falcon-mamba-7b-instruct
 # Falcon3-Mamba-7B-Base was carried as its own lineage root. It is falcon-mamba-7b
 # with more pretraining, so it INHERITS that pretraining run and is a descendant.
@@ -1257,8 +1278,9 @@ edges:
 - - tiiuae/Falcon-H1-1.5B-Instruct
   - scale
   - tiiuae/Falcon-H1-7B-Instruct
+# instruct -> sft. Falcon-7B-Instruct was finetuned on a 250M tokens mixture of instruct/chat datasets.
 - - tiiuae/falcon-7b
-  - instruct
+  - sft
   - tiiuae/falcon-7b-instruct
 - - mistralai/Mistral-7B-v0.1
   - sft
@@ -1275,11 +1297,15 @@ edges:
 - - meta-llama/Llama-3.1-8B
   - instruct
   - NousResearch/Hermes-3-Llama-3.1-8B
+# instruct -> sft. Dolphin 3.0 is the next generation of the Dolphin series of instruct-tuned models. Designed to be the ultimate general purpose local model, enabling c
+#   every dataset listed is an SFT-style instruction mixture
 - - meta-llama/Llama-3.1-8B
-  - instruct
+  - sft
   - cognitivecomputations/Dolphin3.0-Llama3.1-8B
+# instruct -> sft. Instruction fined tuned version of [Teuken-7B-base-v0.4](https://huggingface.co/openGPT-X/Teuken-7B-base-v0.4).
+#   NB the card names a DIFFERENT parent (base-v0.4, private) than this edge declares
 - - openGPT-X/Teuken-7B-base-v0.6
-  - instruct
+  - sft
   - openGPT-X/Teuken-7B-instruct-commercial-v0.4
 - - tiiuae/Falcon3-7B-Base
   - upscale
