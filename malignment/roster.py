@@ -174,10 +174,19 @@ def main():
     if not a.write:
         print("\n  --write to build %s.checkpoints and %s.edges" % (ch.DB, ch.DB))
         return 0
+    #: `CREATE TABLE IF NOT EXISTS` IS A SILENT NO-OP ON A SCHEMA CHANGE. On
+    #: 2026-08-15 three columns were added to the DDL, the statement ran clean
+    #: against the existing table, the insert dropped the unknown columns, and
+    #: the first query for one of them raised UNKNOWN_IDENTIFIER -- after the
+    #: commit. The DDL reported success and changed nothing.
+    #:
+    #: This table is DERIVED from an authored file and costs a second to rebuild,
+    #: so it is dropped rather than reconciled. Anything that cannot be dropped
+    #: needs a migration, not an IF NOT EXISTS.
+    for t in ("checkpoints", "edges"):
+        ch.execute("DROP TABLE IF EXISTS {db}.%s" % t)
     for d in DDL:
         ch.execute(d)
-    ch.execute("TRUNCATE TABLE {db}.checkpoints")
-    ch.execute("TRUNCATE TABLE {db}.edges")
     ch.insert("checkpoints", nodes)
     ch.insert("edges", edges)
     for name, sql in VIEWS.items():
@@ -186,6 +195,14 @@ def main():
             print("  view %s.%s" % (ch.DB, name))
         except Exception as e:
             print("  view %s FAILED: %s" % (name, str(e)[:120]))
+    #: THE CHECK THE DDL COULD NOT DO: every column named in the row dicts must
+    #: exist on the table. A column silently dropped by an insert is a field that
+    #: reads as absent forever after.
+    cols = {c["name"] for c in ch.query(
+        "SELECT name FROM system.columns WHERE database='%s' AND table='checkpoints'" % ch.DB)}
+    want = set(nodes[0]) if nodes else set()
+    if want - cols:
+        raise SystemExit("  SCHEMA MISMATCH: table lacks %s" % sorted(want - cols))
     print("\n  %s.checkpoints %s | %s.edges %s"
           % (ch.DB, ch.scalar("SELECT count() FROM {db}.checkpoints"),
              ch.DB, ch.scalar("SELECT count() FROM {db}.edges")))
