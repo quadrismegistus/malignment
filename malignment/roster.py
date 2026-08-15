@@ -269,49 +269,60 @@ def rows():
         return seen
 
     def _aligned_from(m):
-        """Everything reached from m by ALIGNING ops, at any depth."""
+        """Everything derived from m EXCEPT by a size op, at any depth.
+
+        NOT just ALIGNING. Following aligning ops alone dropped
+        `DeepSeek-R1-Distill-Qwen-7B` and `-Llama-8B`, which reach their base by
+        `distill` -- so two reasoning distils were excluded by a mechanism built
+        for SIZES, having nothing to do with size. **A rule that excludes should
+        exclude for its own reason**; anything derived from the picked checkpoint
+        by a non-size operation is a different model and counts.
+        """
         seen, stack = set(), [m]
         while stack:
             x = stack.pop()
             for op, c in kids.get(x, ()):
-                if op in ALIGNING and c not in seen:
+                if op in DERIVING and op not in SIZE_OPS and c not in seen:
                     seen.add(c); stack.append(c)
         return seen
 
-    #: **THE PICK RUNS OVER THE SCALE GROUP, NOT THE LINEAGE**, because size
-    #: arrives two different ways and only one of them stays inside a lineage:
+    #: **THE PICK RUNS OVER THE LINEAGE, NOT THE SCALE GROUP** -- changed
+    #: 2026-08-15 on RH's reasoning and a measurement.
     #:
-    #:   DERIVED  prune / upscale  -> a CHILD, same lineage   (Falcon3 1B/3B/10B)
-    #:   SIBLING  scale            -> a separate lineage in the same GROUP
-    #:                                (OLMo 7B vs 32B, Qwen 0.5B vs 7B)
+    #: RH: *"if 2 models behave differently then we are not statistically inflating
+    #: n."* Independence is a property of the OUTCOME, not the provenance. Measured,
+    #: per-prompt js_total correlation between comparable edges:
     #:
-    #: Picking within a lineage alone left 149 of 157 checkpoints representative,
-    #: because a within-lineage pick never sees the sibling sizes at all. The
-    #: group is the level at which every size of one recipe is visible together.
-    groups = collections.defaultdict(set)
-    for n in nodes:
-        if n["depth"] == 0:
-            groups[_find(n["lineage"])].add(n["model_id"])
+    #:     Falcon3 7B vs 10B (DERIVED)   0.626      excess over floor +0.307
+    #:     Falcon-H1 7B vs 1.5B          0.440                        +0.121
+    #:     Olmo-3 7B vs 32B              0.425                        +0.106
+    #:     Qwen2.5 7B vs 0.5B            0.152                        -0.167
+    #:     BETWEEN-FAMILY FLOOR          0.319   (Olmo-7B vs Qwen-7B)
+    #:
+    #: Two UNRELATED labs correlate at 0.319 because prompts differ. Sibling sizes
+    #: clear that by ~0.11 and Qwen's pair sits BELOW it, so they carry nearly as
+    #: much independent information as different families do. Only the DERIVED pair
+    #: is genuinely redundant -- the one that shares weights.
+    #:
+    #: So a lineage (one pretraining run) still yields ONE size, and sibling
+    #: lineages each count. Falcon3's 1B/3B/10B stay excluded because they ARE that
+    #: run; Olmo-32B, Llama-70B, Qwen-0.5B and Falcon-H1-1.5B come back.
+    #:
+    #: **AND LAB IMBALANCE IS A DIFFERENT PROBLEM.** Finding U's caveat -- "AI2 is 6
+    #: of the 16" -- is about WEIGHTING (bias), not independence (variance).
+    #: Deleting models fixes a bias problem by discarding variance you have. Weight
+    #: by design, or report with and without the dominant lab, or use a random
+    #: effect for lab; do not delete.
     rep = set()
-    for g, roots_in in groups.items():
-        cand = set()
-        for r0 in roots_in:
-            cand |= _size_side(r0)
+    for root in {n["lineage"] for n in nodes}:
+        cand = [m for m in _size_side(root) if lin_of2.get(m) == root]
         sized = [(m, pb.get(m, 0.0)) for m in cand if pb.get(m)]
-        #: Nearest-8B is a TIE-BREAKER. With nothing measured, or nothing to choose
-        #: between, an arbitrary root would be a silent choice -- so take the
-        #: sorted-first root, which is at least stated and reproducible.
-        #: A DECLARED OVERRIDE BEATS THE SIZE RULE. `is_representative` is derived,
-        #: and a derived flag with no override is a rule nobody can disagree with --
-        #: which is how a convention becomes unfalsifiable. `rulings.representative`
-        #: names the checkpoint that carries a group instead.
         over = (load().get("rulings") or {}).get("representative") or {}
-        pick = over.get(g)
-        if not pick:
-            pick = (min(sized, key=lambda x: abs(x[1] - TARGET))[0] if sized
-                    else sorted(roots_in)[0])
+        pick = over.get(root) or (
+            min(sized, key=lambda x: abs(x[1] - TARGET))[0] if sized else root)
         rep.add(pick)
         rep |= _aligned_from(pick)
+
     for n in nodes:
         n["scale_group"] = _find(n["lineage"])
         n["is_representative"] = int(n["model_id"] in rep)
