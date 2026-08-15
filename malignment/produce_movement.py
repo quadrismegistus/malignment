@@ -68,7 +68,20 @@ from . import ch
 from .movement import CANONICAL, LENS, DRAW, RESIDUAL_KEY, movement
 
 RULES = {"canonical": CANONICAL, "lens": LENS, "draw": DRAW}
-DERIVING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct", "distill")
+
+#: **IMPORTED, NOT RETYPED.** This module's own docstring says "the population is
+#: derived from a declaration, never retyped beside it" -- and then this line was
+#: a hand-copied tuple that had drifted from `roster.DERIVING` by FIVE ops:
+#: apo, continual, rlhf, and -- long before any of those existed -- `upscale` and
+#: `prune`. So Falcon3-10B-Base's upscale edge and Falcon3-1B/3B's prune edges
+#: were never in `movement` at all, and nothing reported their absence: a missing
+#: edge is indistinguishable from an unmeasured one in a table built by iterating
+#: the declaration you happen to hold.
+#:
+#: Found when two corrected edges (beaver, internlm2 -> `rlhf`) vanished from a
+#: rebuild that otherwise looked clean. The duplicate constant is the bug; the
+#: drift is only how it showed.
+from .roster import DERIVING
 
 DDL = """
 CREATE TABLE IF NOT EXISTS {db}.movement (
