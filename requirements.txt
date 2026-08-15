@@ -1,0 +1,27 @@
+# DERIVED FROM THE CODE, not typed from memory: every line below is a module
+# actually imported by malignment/*.py, found by walking the ASTs. Regenerate the
+# list rather than editing it by hand -- a dependency file maintained by memory
+# drifts in the direction that hides work, which is the same failure the ingest's
+# hand-written source registry had (32 declared, 51 on disk).
+#
+# The repo had NO manifest at all until 2026-08-15, so nothing here was
+# installable by anyone but this machine. That is fixed by writing the file, not
+# by adding hashstash to it.
+
+# --- always needed (roster, prompts, store) --------------------------------
+pyyaml                 # roster.py, prompts.py, observe.py -- the authored files
+pandas                 # ch.py query results, models.py
+hashstash              # checkpoint.py -- the twp jsonl engine (RH's own library)
+
+# --- measurement only: not needed to read the store or query ClickHouse -----
+# A machine that only ANALYSES needs nothing below. `Checkpoint` deliberately
+# imports no torch: identity, roster facts and corpus state are all cheap, and
+# only `run_twp()` reaches for `runners`, which imports torch lazily inside the
+# call. So an analysis box installs the three lines above and stops.
+torch                  # twp.py, models.py, runners.py
+transformers           # twp.py, models.py, runners.py
+numpy                  # twp.py
+huggingface_hub        # observe.py -- params_b, revision ladders, tokenizer class
+
+# ClickHouse is reached through the `clickhouse-client` BINARY (see ch.py), not
+# a Python driver, so there is no dependency line for it. It is a system install.

@@ -79,6 +79,7 @@ not a default.
 import argparse
 import json
 import os
+import socket
 import sys
 import time
 
@@ -87,6 +88,12 @@ from .ingest import DATA
 
 #: BESIDE THE CORPUS THE INGEST READS, NOT INSIDE THIS PUBLIC REPO. See above.
 TWP_OUT = os.environ.get("MALIGNMENT_TWP_OUT", os.path.join(DATA, "twp"))
+#: WHO MEASURED THIS. The layout is `twp/<model>/<producer>/`, so two boxes
+#: measuring one checkpoint write different FILES and rsync MERGES them. Measured
+#: without the segment: a 200-cell run overwrote a 500-cell one, silently.
+#: It also lands in the ingest's `source` column, so "which box produced this
+#: cell" stays answerable -- the thing a per-cell store would lose.
+PRODUCER = os.environ.get("MALIGNMENT_PRODUCER") or socket.gethostname().split(".")[0]
 MAX_RL_RETRIES = 5
 
 
@@ -107,7 +114,7 @@ class TWPRunner:
         from transformers import AutoModelForCausalLM
 
         ck = self.ck
-        os.makedirs(ck.out, exist_ok=True)
+        os.makedirs(ck.dir, exist_ok=True)
         have = ck.done()
         todo = [p for p in prompts if p not in have]
         if limit:
@@ -116,10 +123,10 @@ class TWPRunner:
         say("  %s" % ck)
         say("  %d prompts | %d already done | %d to run"
             % (len(prompts), len(have), len(todo)))
-        say("  -> %s" % ck.path)
+        say("  -> %s  (producer %s)" % (ck.dir, PRODUCER))
         if not todo:
-            return {"model": ck.model_id, "written": 0, "skipped": 0,
-                    "already": len(have), "path": ck.path}
+            return {"model": ck.model_id, "producer": PRODUCER, "written": 0,
+                    "skipped": 0, "already": len(have), "path": ck.stash().path}
 
         dev = T.pick_device()
         trie = T.load_prefix_trie(dict_path or T.DICT)
@@ -187,43 +194,56 @@ class TWPRunner:
         stamp = {"theta": T.THETA, "rule_version": T.RULE_VERSION,
                  "dict_sha": T.dict_sha(), "bos_policy": pol,
                  "loader": loader_id, "device": dev,
-                 "revision": ck.revision or "", "compute_dtype": "float16"}
-        with open(ck.path, "a", encoding="utf-8") as fh:
-            for i, p in enumerate(todo, 1):
-                rec = dict(stamp, model=ck.model_id, prompt=p)
-                try:
-                    w, res, _calls = T.expand(model, tok, p, dev, bmask,
-                                              cjk=cjk, bos_policy=pol)
-                except T.SkipPrompt as sk:
-                    rec.update(skipped=str(sk), rows=[], residual=None)
-                    fh.write(json.dumps(rec, ensure_ascii=False) + "\n"); fh.flush()
-                    n_skip += 1
-                    continue
-                except Exception as e:
-                    #: ONE PROMPT MUST NOT END THE CHECKPOINT, for the same reason
-                    #: one model must not end a roster.
-                    rec.update(skipped="%s: %s" % (type(e).__name__, str(e)[:120]),
-                               rows=[], residual=None)
-                    fh.write(json.dumps(rec, ensure_ascii=False) + "\n"); fh.flush()
-                    n_skip += 1
-                    continue
-                rows = [{"word": s, "t1": int(t), "p": float(m)}
-                        for (s, t), m in w.items()]
-                #: THE PAYLOAD CARRIES ITS OWN ARITHMETIC, so the ingest gate can
-                #: refuse a producer that cannot close its books rather than
-                #: averaging it into a table.
-                rec.update(rows=rows, residual=res,
-                           conservation=sum(w.values()) + res["total"])
-                fh.write(json.dumps(rec, ensure_ascii=False) + "\n"); fh.flush()
-                n_ok += 1
-                if verbose and (i % 100 == 0 or i == len(todo)):
-                    el = time.time() - t0
-                    say("     %d/%d  %.1f min  %.2f s/cell  (%d skipped)"
-                        % (i, len(todo), el / 60, el / max(1, i), n_skip))
+                 "revision": ck.revision or "", "compute_dtype": "float16",
+                 "producer": PRODUCER}
+        st = ck.stash()
+        #: **SKIPS GO TO A SIDECAR, NOT INTO THE KEY SPACE.** A skip is an
+        #: ATTEMPT, not a result. Writing one under the cell's key would make
+        #: `key in stash` true, so a later tokenizer fix would find the prompt
+        #: "done" and never re-offer it -- exactly how internlm2's 402 prompts
+        #: would have stayed lost after the LOADER_OVERRIDE that recovered them.
+        #: Kept beside the stash so the refusal and its reason are still
+        #: recorded, just not as an answer.
+        skip_path = os.path.join(os.path.dirname(st.path), "skipped.jsonl")
+        for i, p in enumerate(todo, 1):
+            rec = dict(stamp, model=ck.model_id, prompt=p)
+
+            def _skip(reason):
+                rec.update(skipped=reason, rows=[], residual=None)
+                with open(skip_path, "a", encoding="utf-8") as sf:
+                    sf.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+            try:
+                w, res, _calls = T.expand(model, tok, p, dev, bmask,
+                                          cjk=cjk, bos_policy=pol)
+            except T.SkipPrompt as sk:
+                _skip(str(sk)); n_skip += 1
+                continue
+            except Exception as e:
+                #: ONE PROMPT MUST NOT END THE CHECKPOINT, for the same reason
+                #: one model must not end a roster.
+                _skip("%s: %s" % (type(e).__name__, str(e)[:120])); n_skip += 1
+                continue
+            rows = [{"word": s, "t1": int(t), "p": float(m)}
+                    for (s, t), m in w.items()]
+            #: THE PAYLOAD CARRIES ITS OWN ARITHMETIC, so the ingest gate can
+            #: refuse a producer that cannot close its books rather than
+            #: averaging it into a table.
+            rec.update(rows=rows, residual=res,
+                       conservation=sum(w.values()) + res["total"])
+            #: One append per cell, healed and flushed by the engine. The key
+            #: carries the instrument, so a rule bump writes a NEW key rather
+            #: than overwriting a measurement made by a different instrument.
+            st[ck.key(p)] = rec
+            n_ok += 1
+            if verbose and (i % 100 == 0 or i == len(todo)):
+                el = time.time() - t0
+                say("     %d/%d  %.1f min  %.2f s/cell  (%d skipped)"
+                    % (i, len(todo), el / 60, el / max(1, i), n_skip))
         T.free()
         T.purge_model(ck.model_id, purge)
-        return {"model": ck.model_id, "written": n_ok, "skipped": n_skip,
-                "already": len(have), "path": ck.path,
+        return {"model": ck.model_id, "producer": PRODUCER, "written": n_ok,
+                "skipped": n_skip, "already": len(have), "path": st.path,
                 "minutes": (time.time() - t0) / 60}
 
 

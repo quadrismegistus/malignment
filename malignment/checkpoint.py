@@ -140,89 +140,109 @@ class Checkpoint:
     # -- the run artifact ----------------------------------------------------
 
     @property
-    def out(self):
+    def dir(self):
+        """`<TWP_OUT>/<model>/` -- one directory per checkpoint, producers inside."""
         from .runners import TWP_OUT
-        return self._out or TWP_OUT
-
-    @property
-    def path(self):
-        """Where this checkpoint's jsonl lives."""
         safe = self.model_id.replace("/", "__").replace("@", "__at__")
-        return os.path.join(self.out, "%s.jsonl" % safe)
+        return self._out or os.path.join(TWP_OUT, safe)
 
-    def _records(self):
-        """Every parseable record in the jsonl. Tolerates a truncated last line."""
-        if not os.path.exists(self.path):
-            return
-        with open(self.path, encoding="utf-8") as fh:
-            for ln in fh:
-                try:
-                    yield json.loads(ln)
-                except ValueError:
-                    continue      # partial line from a kill: it will be redone
+    def producers(self):
+        """Every producer that has written this checkpoint here.
 
-    def done(self):
-        """Prompts with a REAL result THIS INSTRUMENT WOULD PRODUCE TODAY.
+        The layout is `twp/<model>/<producer>/`, and the producer segment is the
+        whole reason rsync can merge: two runs of one checkpoint on different
+        machines are different FILES. Measured without it, a 200-cell run
+        overwrote a 500-cell one and the loss was silent.
+        """
+        if not os.path.isdir(self.dir):
+            return []
+        return sorted(d for d in os.listdir(self.dir)
+                      if os.path.isdir(os.path.join(self.dir, d)))
 
-        Two conditions, and the second was missing:
+    def stash(self, producer=None):
+        """The HashStash for one producer. ABSOLUTE root_dir, always.
 
-        **A SKIP IS AN ATTEMPT, NOT A RESULT.** twp writes `rows: []` plus a
-        reason when a prompt does not survive the model's own tokenizer. Counting
-        those as done means a tokenizer fix installs cleanly and recovers
-        nothing.
+        **A bare name silently resolves to `~/.cache/hashstash/`** -- the trap
+        CLAUDE.md warns about for this library, and one this session walked into
+        on its first probe. `self.dir` is absolute by construction.
+        """
+        from hashstash import HashStash
+        from .runners import PRODUCER
+        return HashStash(root_dir=os.path.join(self.dir, producer or PRODUCER),
+                         engine="jsonl", flat=True)
 
-        **AND A RESULT FROM A DIFFERENT INSTRUMENT IS NOT A RESULT.** `done()`
-        gated only on rows, while the INGEST requires `rule_version == 3`. So
-        bumping the rule -- or changing the dictionary, which moves `dict_sha` --
-        gave: done() reports every prompt complete, the runner writes nothing,
-        the ingest then excludes every old-rule record, and the checkpoint
-        VANISHES from ClickHouse while the run prints success. Two independent
-        components each behaving sensibly, and the gap between them is silent.
+    def stashes(self):
+        """Every producer's stash. Resume must see ALL of them, not just ours."""
+        return [(p, self.stash(p)) for p in self.producers()]
 
-        Matching the ingest's own predicate here means a rule bump automatically
-        re-offers every prompt, with nothing to remember.
+    def key(self, prompt):
+        """**THE INSTRUMENT IS PART OF THE KEY.**
+
+        `done()` used to gate on "has rows and is not skipped" while the INGEST
+        additionally required `rule_version == 3`. Nothing tied them, so bumping
+        the rule -- or changing the dictionary, which moves dict_sha -- gave:
+        done() reports complete, the runner writes nothing, the ingest excludes
+        every old-rule record, and the checkpoint VANISHES from ClickHouse while
+        the run prints success.
+
+        Putting rule_version and dict_sha IN THE KEY makes that impossible rather
+        than guarded: a rule bump is a different key, every prompt is re-offered
+        automatically, and the old rows remain for comparison. A defect you
+        cannot express beats one you remember to check.
         """
         from .ingest import RULE_VERSION
-        cur = T.dict_sha()
-        seen = set()
-        for r in self._records():
-            if r.get("skipped") or not r.get("rows"):
-                continue
-            if r.get("rule_version") != RULE_VERSION:
-                continue
-            #: dict_sha absent = predates the stamp; treat as a different
-            #: instrument rather than assuming it matches.
-            if r.get("dict_sha") != cur:
-                continue
-            seen.add(r["prompt"])
-        return seen
+        return {"model": self.model_id, "prompt": prompt,
+                "rule_version": RULE_VERSION, "dict_sha": T.dict_sha()}
 
-    def provenance(self):
-        """What instruments produced this file. A mixed file is legible, not fatal.
+    @property
+    def paths(self):
+        """Every `data.jsonl` for this checkpoint, one per producer."""
+        return [st.path for _, st in self.stashes()]
 
-        Running the same checkpoint on prompts A-C and later D-F APPENDS to one
-        file and `done()` unions them -- which is the intent. This is how you see
-        whether the two halves were measured by the same instrument.
+    def done(self):
+        """Prompts measured BY THIS INSTRUMENT, across every producer.
+
+        A skip is an attempt, not a result: `runners` records refusals in a
+        sidecar and writes NO key for them, so a tokenizer fix re-offers the
+        prompt instead of finding it done -- the failure that would have left
+        internlm2's 402 recovered prompts unmeasured.
         """
-        import collections
-        out = collections.Counter()
-        for r in self._records():
-            out[(r.get("rule_version"), r.get("dict_sha"), r.get("device"))] += 1
+        from .ingest import RULE_VERSION
+        want = (RULE_VERSION, T.dict_sha())
+        out = set()
+        for _, st in self.stashes():
+            for k in st.keys():
+                if not isinstance(k, dict):
+                    continue
+                if (k.get("model") == self.model_id
+                        and (k.get("rule_version"), k.get("dict_sha")) == want):
+                    out.add(k.get("prompt"))
         return out
 
     def skipped(self):
-        """{prompt: reason} for prompts attempted and refused. These are NOT done."""
+        """{prompt: reason}, from the sidecar. Outside the key space on purpose."""
         out = {}
-        if not os.path.exists(self.path):
-            return out
-        with open(self.path, encoding="utf-8") as fh:
-            for ln in fh:
-                try:
-                    r = json.loads(ln)
-                except ValueError:
-                    continue
-                if r.get("skipped"):
-                    out[r["prompt"]] = r["skipped"]
+        for _, st in self.stashes():
+            p = os.path.join(os.path.dirname(st.path), "skipped.jsonl")
+            if not os.path.exists(p):
+                continue
+            with open(p, encoding="utf-8") as fh:
+                for ln in fh:
+                    try:
+                        r = json.loads(ln)
+                    except ValueError:
+                        continue
+                    out[r.get("prompt")] = r.get("skipped")
+        return out
+
+    def provenance(self):
+        """{(producer, rule_version, dict_sha): n}. A mixed tree is legible."""
+        import collections
+        out = collections.Counter()
+        for prod, st in self.stashes():
+            for k in st.keys():
+                if isinstance(k, dict):
+                    out[(prod, k.get("rule_version"), k.get("dict_sha"))] += 1
         return out
 
     # -- the verb, delegated -------------------------------------------------
