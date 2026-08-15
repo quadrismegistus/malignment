@@ -71,6 +71,45 @@ three answers to one question.
 | `twp.py` + `models.py` (1,567 lines) | Measurement, not analysis: they run a model on a GPU and produce the jsonl this repo ingests. Needed for the 104 re-measurement and nothing else yet. `models.py` opens with `from . import *`, which needs untangling. |
 | `cell.py`, `step.py` (471 lines) | Attempt LAST, expecting them to shrink rather than port. They exist to make a key-value store usable per-cell; with ClickHouse primary a cell is a WHERE clause. If most of those lines evaporate, that is the answer rather than a failure. |
 
+## Found here, owed to another seat
+
+### SmolLM3-3B is an M05-shaped ladder we are not using, and its recipe is a DAG
+
+Noted 2026-08-15 while auditing the roster. **This is a note, not a claim on M05** — that is another seat's directory and this records what the roster and the cards say so the decision can be made on evidence rather than rediscovered.
+
+`HuggingFaceTB/SmolLM3-3B-checkpoints` is a **revision container of 133 branches**, verified against the refs API, not a checkpoint:
+
+| group | n | what |
+|---|---|---|
+| `stage1/2/3-step-*` | **118** | pretraining intermediates, 94.4B tokens apiece (86 / 19 / 13, matching the card's own stage table; 118 × 94.4B ≈ 11.1T against a stated 11.2T) |
+| `lc-*-to-*-step-*` | 10 | long-context extension |
+| `it-*` | **4** | `it-mid-training`, `it-SFT`, `it-soup-APO`, `it-LC-expert` |
+| `main` | 1 | |
+
+**The 118 are the M05-type object; the 4 are not.** M05's unit is "the checkpoint within a single training run — the time axis", and its phase 2 (the pretraining ladder, F24's open TODO) currently rests on **OLMo alone**. A claim about the order in which operations install, derived from one training run, is a claim about that run. SmolLM3 is a second complete pretraining ladder — different lab, different corpus, 3B rather than 7B. The 4 post-training refs are stage ENDPOINTS, one per stage, not a trajectory; they are an M01-shaped contribution (four states to compare) and should not be described as an M05 ladder.
+
+**M05's README needs its population named either way.** It states "no family anywhere releases preference-stage trajectories (agent survey, 2026-08-10, `data/model_revisions.json`)". That file holds **8 entries and SmolLM3 is not among them**. The literal claim survives — `it-soup-APO` is an endpoint, not a trajectory through APO — but "no family anywhere" is not what a survey of 8 establishes. The adjacent sentence, that OLMo base + Think-SFT is "the closest thing any vendor releases to a continuous pretraining-to-post-training run", deserves the same re-check: SmolLM3 puts pretraining, long-context and post-training in ONE repo, where OLMo's join crosses two.
+
+**Why the roster does not represent the pipeline, and cannot yet.** The recipe is not the chain it looks like. From the blog: *"Take each APO checkpoint and create a model 'soup'. Combine the model soup with a mid-training checkpoint that has strong long-context performance"*, at *"a linear merge with weights of 0.9 and 0.1"*. So:
+
+    base → it-mid-training → it-SFT → it-soup-APO ─┐
+                                                    ├─ merge 0.9/0.1 → SmolLM3-3B
+           (long-context mid-training checkpoint) ──┘
+
+**The final model has TWO parents.** Three things block declaring it:
+
+- `merge` is not in `DERIVING` or `RELATING`. It is not in the op vocabulary at all.
+- **`par[child] = parent` is a single-parent map** (`roster.py`, `produce_movement.py`). A second parent does not error — it silently overwrites the first, and the lineage walk then reports whichever edge was read last. This is a schema limit that would fail quietly, which is the kind this repo exists to stop.
+- `it-LC-expert` exists as a released revision but **the main card never mentions it**; the blog says they merged rather than shipping a separate expert. Its role is undocumented at card level.
+
+What the roster holds today is a defensible 3-node compression, not the pipeline: `Base --sft--> -checkpoints(it-SFT) --apo--> SmolLM3-3B`. The `sft` edge is correct because the roster pins `revision: it-SFT` and the corpus measured exactly that (`twp_cells.revision = 'it-SFT'`, 2,579 cells). The `apo` edge is the best available label for SFT→final given no APO node exists, and it is imprecise: the LAST operation is a merge, not APO.
+
+**Corpus state: 1 of 4 post-training rungs measured** (`it-SFT`), 0 of 118 pretraining. Declaring the real nodes would make that gap visible instead of hiding it behind one pinned revision — `movement` only builds pairs with both arms present, so declared-but-unmeasured nodes cost nothing and show up as absent rather than as nothing.
+
+**One card-vs-source conflict to resolve before anyone cites a token count:** the model card says midtraining on **140B** reasoning tokens; the blog says **35B** from OpenThoughts3 and Llama-Nemotron. Not reconciled here.
+
+Also worth its own line: SmolLM3 is our **only APO instance** in 157 checkpoints, and the F25 classifier already asserts an *"APO signature: argmax preserved from base (transparent)"* — a claim never measured against an actual APO checkpoint. `it-SFT → it-soup-APO` would test it directly, on the one family where the parent is released.
+
 ## Deliberately never coming
 
 | item | why |

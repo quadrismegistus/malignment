@@ -80,10 +80,16 @@ _JSTERM = ("0.5 * (if({p} > 0, {p} * log2(2 * {p} / ({p} + {q})), 0)"
            "     + if({q} > 0, {q} * log2(2 * {q} / ({p} + {q})), 0))")
 
 VIEWS = {
+    #: `relation` and `depth` JOIN from `{db}.pairs` rather than being read off
+    #: `movement`. They describe the EDGE, not the measurement, and storing them
+    #: beside 52.9M measurement rows meant every models.yaml relabel cost a
+    #: 25-minute recompute to change a string -- and could not even be done by
+    #: re-running, because `relation` sat in the ORDER BY, so a ReplacingMergeTree
+    #: appended the new label beside the old one instead of replacing it.
     "movement_cells": """
 CREATE OR REPLACE VIEW {db}.movement_cells AS
-SELECT m.base AS base, m.aligned AS aligned, m.relation AS relation,
-       m.depth AS depth, m.rule AS rule, m.prompt AS prompt,
+SELECT m.base AS base, m.aligned AS aligned, pr.relation AS relation,
+       pr.depth AS depth, m.rule AS rule, m.prompt AS prompt,
        countIf(m.cls = 'faller')                        AS n_fall,
        countIf(m.cls = 'riser')                         AS n_rise,
        countIf(m.cls = 'still')                         AS n_still,
@@ -99,6 +105,8 @@ SELECT m.base AS base, m.aligned AS aligned, m.relation AS relation,
        %(r)s                                            AS js_tail,
        sum(%(t)s) + %(r)s                               AS js_total
 FROM {db}.movement m
+INNER JOIN {db}.pairs pr
+        ON pr.base = m.base AND pr.aligned = m.aligned
 INNER JOIN (SELECT model, prompt, total FROM {db}.twp_cells) rp
         ON rp.model = m.base    AND rp.prompt = m.prompt
 INNER JOIN (SELECT model, prompt, total FROM {db}.twp_cells) rq
