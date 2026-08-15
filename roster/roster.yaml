@@ -11,6 +11,13 @@
 # can be a FINDING (which stage carries the repression, and does it vary by
 # family and content?) rather than a column name asserting the answer.
 #
+# `revision_ladder: N` = this repo publishes N branches/tags -- a training
+# TRAJECTORY, not one checkpoint. 32 repos do. What is DECLARED here is that
+# the ladder exists and how long it is; WHICH RUNGS WE HAVE MEASURED is a fact
+# about the corpus, not a declaration, and lives in `measured_revisions`.
+# Availability dwarfs coverage: 1,487 revisions published for Olmo-3-1025-7B,
+# 43 measured.
+#
 # OPERATIONS: sft | dpo | rlvr | ppo | kto | slic | distill
 #             instruct = an aligned endpoint of UNDECLARED composition
 #                        (35 edges -- the LARGEST class, larger than dpo)
@@ -33,6 +40,7 @@ nodes:
   Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf:
     family: [pharia]
   Aleph-Alpha/Pharia-1-LLM-7B-control-hf:
+    revision_ladder: 5
     family: [pharia]
   BAAI/Aquila2-7B:
     revision: 9c76e143c6e9621689ca76e078c465b0dee75eb8
@@ -40,8 +48,10 @@ nodes:
   BAAI/AquilaChat2-7B:
     family: [aquila2]
   BSC-LT/salamandra-7b:
+    revision_ladder: 3
     family: [salamandra]
   BSC-LT/salamandra-7b-instruct:
+    revision_ladder: 4
     family: [salamandra]
   ContextualAI/archangel_sft-dpo_pythia2-8b:
     nickname: archangel-dpo
@@ -59,9 +69,11 @@ nodes:
     nickname: archangel-sft
     family: [archangel-dpo, archangel-kto, archangel-ppo, archangel-slic]
   EleutherAI/pythia-2.8b:
+    revision_ladder: 155
     nickname: pythia-2.8b
     family: [archangel-dpo, archangel-kto, archangel-ppo, archangel-slic]
   EleutherAI/pythia-6.9b:
+    revision_ladder: 155
     nickname: pythia
     country: US
     family: [pythia]
@@ -110,9 +122,11 @@ nodes:
     org_type: corporate
     scale: 3B
   HuggingFaceTB/SmolLM3-3B-checkpoints:
+    revision_ladder: 133
     revision: it-SFT
     family: [smol3]
   LLM360/Amber:
+    revision_ladder: 360
     nickname: amber
     country: US
     family: [amber]
@@ -121,6 +135,7 @@ nodes:
     org_type: academic
     scale: 7B
   LLM360/AmberChat:
+    revision_ladder: 2
     nickname: amber-sft
     country: US
     family: [amber]
@@ -128,6 +143,7 @@ nodes:
     open_weight: true
     org_type: academic
   LLM360/AmberSafe:
+    revision_ladder: 3
     nickname: amber-dpo
     country: US
     family: [amber]
@@ -135,6 +151,7 @@ nodes:
     open_weight: true
     org_type: academic
   OpenLLM-France/Lucie-7B:
+    revision_ladder: 42
     family: [lucie]
   OpenLLM-France/Lucie-7B-Instruct-v1.1:
     family: [lucie]
@@ -200,8 +217,10 @@ nodes:
     nickname: tinyllama
     family: [tinyllama]
   Zyphra/Zamba2-7B:
+    revision_ladder: 3
     family: [zamba2]
   Zyphra/Zamba2-7B-Instruct:
+    revision_ladder: 2
     family: [zamba2]
   allenai/Llama-3.1-Tulu-3-8B-DPO:
     nickname: tulu-dpo
@@ -246,6 +265,7 @@ nodes:
     open_weight: true
     org_type: nonprofit
   allenai/Llama-3.1-Tulu-3.1-8B:
+    revision_ladder: 62
     nickname: tulu
     country: US
     family: [tulu]
@@ -253,6 +273,7 @@ nodes:
     open_weight: true
     org_type: nonprofit
   allenai/OLMo-2-0425-1B:
+    revision_ladder: 268
     nickname: olmo-tiny
     country: US
     family: [olmo-tiny]
@@ -268,6 +289,7 @@ nodes:
     open_weight: true
     org_type: nonprofit
   allenai/OLMo-2-0425-1B-Instruct:
+    revision_ladder: 14
     nickname: olmo-tiny-instruct
     country: US
     family: [olmo-tiny]
@@ -282,18 +304,21 @@ nodes:
     open_weight: true
     org_type: nonprofit
   allenai/OLMoE-1B-7B-0125:
+    revision_ladder: 16
     nickname: olmoe
     family: [olmoe]
   allenai/OLMoE-1B-7B-0125-DPO:
     nickname: olmoe-dpo
     family: [olmoe]
   allenai/OLMoE-1B-7B-0125-Instruct:
+    revision_ladder: 45
     nickname: olmoe-instruct
     family: [olmoe]
   allenai/OLMoE-1B-7B-0125-SFT:
     nickname: olmoe-sft
     family: [olmoe]
   allenai/Olmo-3-1025-7B:
+    revision_ladder: 1487
     nickname: olmo
     country: US
     family: [olmo, olmo-think]
@@ -302,9 +327,11 @@ nodes:
     org_type: nonprofit
     scale: 7B
   allenai/Olmo-3-1125-32B:
+    revision_ladder: 719
     nickname: olmo-32b
     family: [olmo-32b]
   allenai/Olmo-3-7B-Instruct:
+    revision_ladder: 9
     nickname: olmo-instruct
     country: US
     family: [olmo]
@@ -335,6 +362,7 @@ nodes:
     open_weight: true
     org_type: nonprofit
   allenai/Olmo-3-7B-Think-SFT:
+    revision_ladder: 44
     nickname: olmo-think-sft
     country: US
     family: [olmo-think]
@@ -351,12 +379,14 @@ nodes:
     nickname: olmo-32b-sft
     family: [olmo-32b]
   allenai/Olmo-Hybrid-7B:
+    revision_ladder: 1497
     nickname: olmo-hybrid
     family: [olmo-hybrid]
   allenai/Olmo-Hybrid-Instruct-DPO-7B:
     nickname: olmo-hybrid-dpo
     family: [olmo-hybrid]
   allenai/Olmo-Hybrid-Instruct-SFT-7B:
+    revision_ladder: 6
     nickname: olmo-hybrid-sft
     family: [olmo-hybrid]
   baichuan-inc/Baichuan2-7B-Base:
@@ -375,6 +405,7 @@ nodes:
     open_weight: true
     org_type: corporate
   bigscience/bloom-7b1:
+    revision_ladder: 3
     nickname: bloom
     family: [bloom]
   bigscience/bloomz-7b1:
@@ -432,12 +463,15 @@ nodes:
   inceptionai/jais-family-6p7b-chat:
     family: [jais]
   internlm/internlm2-base-7b:
+    revision_ladder: 2
     nickname: internlm2
     family: [internlm2]
   internlm/internlm2-chat-7b:
+    revision_ladder: 3
     nickname: internlm2-chat
     family: [internlm2]
   internlm/internlm2-chat-7b-sft:
+    revision_ladder: 2
     nickname: internlm2-sft
     family: [internlm2]
   kakaocorp/kanana-1.5-8b-base:
@@ -504,6 +538,7 @@ nodes:
     open_weight: true
     org_type: corporate
   mistralai/Mistral-7B-v0.1:
+    revision_ladder: 2
     nickname: mistral
     country: FR
     family: [zephyr]
@@ -525,6 +560,7 @@ nodes:
     nickname: minicpm-sft
     family: [minicpm]
   stabilityai/stablelm-2-1_6b:
+    revision_ladder: 3
     nickname: stablelm
     family: [stablelm]
   stabilityai/stablelm-2-1_6b-chat:
@@ -584,12 +620,15 @@ nodes:
     nickname: falcon-mamba-instruct
     family: [falcon-mamba]
   togethercomputer/RedPajama-INCITE-7B-Chat:
+    revision_ladder: 2
     nickname: redpajama-chat
     family: [redpajama]
   togethercomputer/RedPajama-INCITE-7B-Instruct:
+    revision_ladder: 2
     nickname: redpajama-instruct
     family: [redpajama]
   togethercomputer/RedPajama-INCITE-Base-7B-v0.1:
+    revision_ladder: 12
     nickname: redpajama
     family: [redpajama]
   weblab-GENIAC/Tanuki-8B-dpo-v1.0:

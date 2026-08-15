@@ -82,7 +82,9 @@ DDL = ["""
 CREATE TABLE IF NOT EXISTS {db}.checkpoints (
     model_id String, family Array(String),
     org_type LowCardinality(String), country LowCardinality(String),
-    scale LowCardinality(String), open_weight UInt8, open_data UInt8
+    scale LowCardinality(String), open_weight UInt8, open_data UInt8,
+    nickname LowCardinality(String), revision LowCardinality(String),
+    revision_ladder UInt32
 ) ENGINE = ReplacingMergeTree ORDER BY model_id
 """, """
 CREATE TABLE IF NOT EXISTS {db}.edges (
@@ -100,6 +102,18 @@ VIEWS = {
                parent NOT IN (SELECT child FROM {db}.edges WHERE op IN %s) AS from_root
         FROM {db}.edges WHERE op IN %s
     """ % (str(DERIVING), str(ALIGNING)),
+    #: MEASURED, not declared. `revision_ladder` on a node says a trajectory
+    #: EXISTS and how long; this says which rungs we have run. Availability
+    #: dwarfs coverage -- 1,487 revisions published for Olmo-3-1025-7B, 43
+    #: measured -- and conflating the two is how "we have the ladder" comes to
+    #: mean two different things in one sentence.
+    "measured_revisions": """
+        CREATE OR REPLACE VIEW {db}.measured_revisions AS
+        SELECT splitByChar('@', model)[1] AS repo,
+               if(position(model, '@') > 0, splitByChar('@', model)[2], '') AS revision,
+               count() AS cells
+        FROM {db}.twp_cells GROUP BY repo, revision
+    """,
     "roots": """
         CREATE OR REPLACE VIEW {db}.roots AS
         SELECT model_id FROM {db}.checkpoints
@@ -121,7 +135,10 @@ def rows():
               "country": (d or {}).get("country", "") or "",
               "scale": (d or {}).get("scale", "") or "",
               "open_weight": int(bool((d or {}).get("open_weight"))),
-              "open_data": int(bool((d or {}).get("open_data")))}
+              "open_data": int(bool((d or {}).get("open_data"))),
+              "nickname": (d or {}).get("nickname", "") or "",
+              "revision": str((d or {}).get("revision", "") or ""),
+              "revision_ladder": int((d or {}).get("revision_ladder") or 0)}
              for m, d in (A.get("nodes") or {}).items()]
     edges = []
     for e in A.get("edges") or []:
