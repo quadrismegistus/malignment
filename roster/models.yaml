@@ -761,3 +761,19 @@ edges:
   - [tiiuae/Falcon3-1B-Instruct, scale, tiiuae/Falcon3-7B-Instruct]
   - [tiiuae/Falcon3-3B-Base, scale, tiiuae/Falcon3-7B-Base]
   - [tiiuae/Falcon3-3B-Instruct, scale, tiiuae/Falcon3-7B-Instruct]
+
+# DPO-EQUIVALENT RULINGS. Where a lineage carries several aligned arms, WHICH ONE
+# is the canonical aligned endpoint is a human ruling, not a fact. Carried out of
+# `registry.py:582` before that file is dropped -- a ruling living in a Python
+# dict dies with the file.
+#
+# AND THE RULE BEHIND THEM, from the same file: **the aligned arm is the
+# PREFERENCE-OPTIMISED one, not the last one.** RLVR/Instruct sits ABOVE dpo and
+# is a different stage, not a better version of it. (An earlier view here took
+# the highest rung and made Tulu-3.1-8B the representative for the whole Llama
+# lineage over Meta's own Instruct -- exactly the error this rules out.)
+rulings:
+  dpo_equivalent:
+    meta-llama/Llama-3.1-8B: meta-llama/Llama-3.1-8B-Instruct
+    EleutherAI/pythia-2.8b: ContextualAI/archangel_sft-dpo_pythia2-8b
+    allenai/Olmo-3-1025-7B: allenai/Olmo-3-7B-Instruct-DPO

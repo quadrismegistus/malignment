@@ -60,7 +60,7 @@ import sys
 from . import ch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-AUTHORED = os.path.join(ROOT, "roster", "roster.yaml")
+AUTHORED = os.path.join(ROOT, "roster", "models.yaml")
 
 #: TWO KINDS OF EDGE, and conflating them silently moved a population count.
 #:
