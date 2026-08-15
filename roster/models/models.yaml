@@ -162,6 +162,15 @@ nodes:
     revision: it-SFT
     family:
     - smol3
+  # The APO rung, DECLARED AND NOT YET MEASURED -- which is the point. `movement`
+  # only builds pairs with both arms in the corpus, so an undeclared rung is
+  # invisible and a declared-unmeasured one is a named gap. Measuring this repo at
+  # revision it-soup-APO makes SFT->APO and APO->final appear with no list to
+  # maintain.
+  HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO:
+    revision: it-soup-APO
+    family:
+    - smol3
   LLM360/Amber:
     revision_ladder: 360
     nickname: amber
@@ -912,6 +921,18 @@ edges:
 # edge.
 - - HuggingFaceTB/SmolLM3-3B-checkpoints
   - apo
+  - HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO
+# `instruct` = an aligned endpoint of undeclared composition, which is a
+# COMPRESSION here and deliberately so (RH, "for now"). The real last operation is
+# a MERGE: "Take each APO checkpoint and create a model 'soup'. Combine the model
+# soup with a mid-training checkpoint that has strong long-context performance",
+# linear 0.9/0.1. So the final has TWO parents and `it-LC-expert` is the second,
+# not a rung after APO. We cannot declare that yet: `merge` is not in the op
+# vocabulary and `par[child] = parent` is single-parent in roster.py and
+# produce_movement.py -- a second parent would silently overwrite the first.
+# Full reasoning in MANIFEST.md, "Found here, owed to another seat".
+- - HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO
+  - instruct
   - HuggingFaceTB/SmolLM3-3B
 - - LLM360/Amber
   - sft
