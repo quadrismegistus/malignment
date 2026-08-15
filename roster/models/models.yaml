@@ -1260,3 +1260,16 @@ provenance_notes:
     CONFIRMED: Falcon-H1 1.5B/7B (muP, '6 models in parallel'); Olmo-3 7B/32B (three-stage pipeline, both full runs); OLMo-2-1B as predecessor of Olmo-3 (a different generation).
     STILL UNAUDITED: Qwen2.5-0.5B <-> Qwen2.5-7B, and the remaining Olmo/OLMoE predecessor edges. Qwen is the one still deciding a representative pick.
     the lesson: 'a relation imported without reading its source is a claim nobody made. Four card reads: four claims falsified, three confirmed.'
+  scale_collapse_evidence:
+    _about: Whether sibling sizes should collapse is a STATISTICAL question, and derivation is not what settles it -- CORRELATION is. Two models can be separate runs and still be near-identical in outcome, in which case counting both is pseudo-replication regardless of how they were trained.
+    measured: correlation of per-prompt js_total between comparable edges, 2026-08-15
+    results:
+      Falcon3 7B vs 10B (DERIVED): 0.626
+      Falcon-H1 7B vs 1.5B: 0.44
+      Olmo-3 7B vs 32B: 0.425
+      Qwen2.5 7B vs 0.5B: 0.152
+      BETWEEN-FAMILY BASELINE Olmo-7B vs Qwen-7B: 0.319
+    reading: Two different labs' models correlate at 0.319 because PROMPTS differ -- that is the floor. Sibling sizes clear it by only ~0.11, and Qwen's pair sits BELOW it. So sibling sizes carry nearly as much independent information as different families do. Only the DERIVED pair is meaningfully redundant, at twice any sibling's excess -- and that is exactly the case that shares a pretraining run.
+    recommendation_pending_RH: keep the LINEAGE collapse (a fact, and the measurement agrees); drop the SCALE-GROUP collapse for siblings; handle residual correlation with scale_group as a CLUSTER rather than by deletion. Collapsing discards 4 models to fix a variance problem that a cluster-robust SE fixes while keeping them.
+    caveats: 'per-prompt JS is ONE operationalisation and another statistic could correlate differently; these are prompt-level correlations at n~2,600, not model-level ICCs over the 47 groups, which would be the rigorous version. And RH''s original premise -- that OLMo sizes ''share pre and post training'' -- was falsified by the reports before this was measured: OLMo 2 7B/13B/32B have SEPARATE token budgets (4.05T / 5.6T / 6.6T), and OLMo 3 7B/32B both run the full three-stage pipeline.'
+    NOT ACTED ON: is_representative still collapses siblings. The measurement is recorded; the decision is RH's and has not been made.
