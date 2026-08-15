@@ -1200,6 +1200,10 @@ rulings:
     meta-llama/Llama-3.1-8B: meta-llama/Llama-3.1-8B-Instruct
     EleutherAI/pythia-2.8b: ContextualAI/archangel_sft-dpo_pythia2-8b
     allenai/Olmo-3-1025-7B: allenai/Olmo-3-7B-Instruct-DPO
+  representative:
+    _about: '`is_representative` is DERIVED (nearest 8B over the scale group, then everything reached by aligning ops). Until now there was NOWHERE TO DISAGREE with a pick. An entry here names the checkpoint that carries its scale group instead, and the builder honours it over the size rule.'
+    _format: 'scale_group_root: chosen_checkpoint   # with a reason'
+    _none_yet: No override is declared. Every current pick is the size rule's, and that is stated rather than implied.
 directions:
   cognitivecomputations/dolphin-2.6-mistral-7b-dpo:
     direction: inverted
@@ -1238,3 +1242,9 @@ provenance_notes:
     THE BUDGETS ARE NOT COMPARABLE AND ARE RECORDED PER MODEL: 10B 2,000 Gt | 3B 100 Gt | 1B 80 Gt. An earlier version of this note said '80 Gigatokens for the pruned pair' — attributing 1B's figure to both, before the 3B card was read. A 25x spread between 10B and the pruned pair is exactly what an independence argument would turn on, and getting the smaller differences wrong within it is the same error at a smaller scale.
     why prune and upscale stay APART: not merged into one `respec` op, because the amount of training beyond 7B is the whole question and the op name is where a reader sees it.
     THE GENERAL DEFECT: 16 `scale` edges were imported wholesale from the archive's `smaller_sibling_of` and NONE was verified. `scale` asserts *neither was made from the other*; three card reads falsified FOUR of them. The remaining 10 are still unaudited — notably OLMo 1B/7B/32B and Qwen2.5 0.5B/7B, which do the most work in the representative pick.
+  falcon_h1:
+    checked: https://falcon-lm.github.io/blog/falcon-h1/ , read 2026-08-15
+    finding: '"muP hyperparameter transfer for the whole Falcon-H1 series" allowed them to "train 6 models in parallel". muP exists so hyperparameters tuned on a small model transfer to INDEPENDENTLY TRAINED larger ones; six models in parallel is six runs.'
+    so: UNLIKE Falcon3, the H1 sizes are genuine independent pretraining runs. The `scale` edge between H1-1.5B-Base and H1-7B-Base is a CORRECT sibling claim -- the first of the 16 imported ones to be verified rather than falsified.
+    and they are STILL deduped, for a DIFFERENT reason: 'independent RUNS are not independent OBSERVATIONS when they share a recipe and a data mixture. The scale group collapses them because a cross-family statistic counting H1-1.5B and H1-7B twice is counting one design twice. That is a judgement about the population, not a fact about the training -- and it is why `scale` (siblings) and `prune`/`upscale` (derivations) stay separate ops: they are deduped by the same rule for different reasons, and only the op name records which.'
+    caveat: the blog does not state per-size token counts, so 'independent run' rests on '6 models in parallel' plus what muP is for, not on an explicit sentence.

@@ -238,32 +238,83 @@ def rows():
     #: independent of any outcome -- a representative chosen by a measured
     #: quantity cannot be chosen to favour a result.
     TARGET = 8.0
-    #: **NEAREST-8B IS A TIE-BREAKER, NOT A MEMBERSHIP TEST.** Keying the pick on
-    #: `params_b` left SIX groups with no representative at all -- rwkv,
-    #: baichuan2, croissant, deepseek, internlm2, redpajama -- every one of them a
-    #: group of ONE lineage whose root publishes no safetensors metadata. There is
-    #: nothing to choose between in a group of one, so requiring a size to choose
-    #: with excluded them from every representative-filtered population silently.
-    #: A rule that needs a measurement should apply only where the measurement
-    #: decides something.
-    by_group = collections.defaultdict(list)
+    #: **THE FLAG IS PER CHECKPOINT, NOT PER LINEAGE**, and the difference is the
+    #: whole point of the size pick. Marking the lineage let every member inherit
+    #: it: the Falcon3 lineage is ONE pretraining run and still contributed FOUR
+    #: alignment pairs (1B, 3B, 7B, 10B each -instruct-> its own arm), so a
+    #: representative-filtered analysis counted one run four times. Being one
+    #: lineage does not dedupe by size; something has to choose the size.
+    #:
+    #: A checkpoint is representative iff it sits on the SIZE-CHOSEN branch:
+    #:   - the base-side node of its lineage nearest 8B (root, or reached from the
+    #:     root by prune / upscale / scale -- the ops that change SIZE), or
+    #:   - anything reached from that node by ALIGNING ops.
+    #: So Falcon3 yields 7B-Base -> 7B-Instruct and nothing else, while 1B/3B/10B
+    #: stay in the roster, visible, with is_representative = 0.
+    SIZE_OPS = ("prune", "upscale", "scale", "predecessor")
+    kids = collections.defaultdict(list)
+    for e in edges:
+        kids[e["parent"]].append((e["op"], e["child"]))
+    pb = {n["model_id"]: n["params_b"] for n in nodes}
+    lin_of2 = {n["model_id"]: n["lineage"] for n in nodes}
+
+    def _size_side(root):
+        """Root plus everything reachable from it by SIZE ops -- the candidates."""
+        seen, stack = {root}, [root]
+        while stack:
+            m = stack.pop()
+            for op, c in kids.get(m, ()):
+                if op in SIZE_OPS and c not in seen:
+                    seen.add(c); stack.append(c)
+        return seen
+
+    def _aligned_from(m):
+        """Everything reached from m by ALIGNING ops, at any depth."""
+        seen, stack = set(), [m]
+        while stack:
+            x = stack.pop()
+            for op, c in kids.get(x, ()):
+                if op in ALIGNING and c not in seen:
+                    seen.add(c); stack.append(c)
+        return seen
+
+    #: **THE PICK RUNS OVER THE SCALE GROUP, NOT THE LINEAGE**, because size
+    #: arrives two different ways and only one of them stays inside a lineage:
+    #:
+    #:   DERIVED  prune / upscale  -> a CHILD, same lineage   (Falcon3 1B/3B/10B)
+    #:   SIBLING  scale            -> a separate lineage in the same GROUP
+    #:                                (OLMo 7B vs 32B, Qwen 0.5B vs 7B)
+    #:
+    #: Picking within a lineage alone left 149 of 157 checkpoints representative,
+    #: because a within-lineage pick never sees the sibling sizes at all. The
+    #: group is the level at which every size of one recipe is visible together.
+    groups = collections.defaultdict(set)
     for n in nodes:
         if n["depth"] == 0:
-            by_group[_find(n["lineage"])].append((n["lineage"], n["params_b"]))
+            groups[_find(n["lineage"])].add(n["model_id"])
     rep = set()
-    for g, arms in by_group.items():
-        if len(arms) == 1:
-            rep.add(arms[0][0])
-            continue
-        sized = [(l, p) for l, p in arms if p]
-        if not sized:
-            #: A multi-lineage group where NOTHING is measured cannot be picked
-            #: from. Left unrepresented and visible, never picked arbitrarily.
-            continue
-        rep.add(min(sized, key=lambda x: abs(x[1] - TARGET))[0])
+    for g, roots_in in groups.items():
+        cand = set()
+        for r0 in roots_in:
+            cand |= _size_side(r0)
+        sized = [(m, pb.get(m, 0.0)) for m in cand if pb.get(m)]
+        #: Nearest-8B is a TIE-BREAKER. With nothing measured, or nothing to choose
+        #: between, an arbitrary root would be a silent choice -- so take the
+        #: sorted-first root, which is at least stated and reproducible.
+        #: A DECLARED OVERRIDE BEATS THE SIZE RULE. `is_representative` is derived,
+        #: and a derived flag with no override is a rule nobody can disagree with --
+        #: which is how a convention becomes unfalsifiable. `rulings.representative`
+        #: names the checkpoint that carries a group instead.
+        over = (load().get("rulings") or {}).get("representative") or {}
+        pick = over.get(g)
+        if not pick:
+            pick = (min(sized, key=lambda x: abs(x[1] - TARGET))[0] if sized
+                    else sorted(roots_in)[0])
+        rep.add(pick)
+        rep |= _aligned_from(pick)
     for n in nodes:
         n["scale_group"] = _find(n["lineage"])
-        n["is_representative"] = int(n["lineage"] in rep)
+        n["is_representative"] = int(n["model_id"] in rep)
 
     ids = {n["model_id"] for n in nodes}
     dangling = [e for e in edges if e["parent"] not in ids or e["child"] not in ids]
