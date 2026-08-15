@@ -60,7 +60,7 @@ three answers to one question.
 
 | item | state | why not yet |
 |---|---|---|
-| `roster/prompts/` | not started | 2,888 prompts arrived as ~11 populations, and which population a prompt came from is part of its provenance. Split by source, with the loader refusing a prompt that appears in two files — otherwise the multi-source precedence problem is recreated in the authored layer. |
+| ~~`roster/prompts/`~~ **DONE 2026-08-15** | 2,888 prompts admitted; `prompts.py` reads `pairs/`, `generated/`, `flat/` on the fly, keyed by `prompt_id`, refusing duplicates. Original reason kept: | 2,888 prompts arrived as ~11 populations, and which population a prompt came from is part of its provenance. Split by source, with the loader refusing a prompt that appears in two files — otherwise the multi-source precedence problem is recreated in the authored layer. |
 | the 104 markedness prompts | measured cost, not run | `twp_cloud` is the SOLE source of 104 catalogue prompts (~9,900 cells) including the arm that makes the marked/unmarked contrast computable at all: `'He held her underwater until she stopped'` has 249 models, `'...started'` has 0. Excluded because `rule_version` is NULL. **The fix is to re-measure under rule 3, not to widen the gate** — which needs `twp.py` and `models.py`, i.e. a GPU. |
 
 ## Needs work before it can come
@@ -68,7 +68,7 @@ three answers to one question.
 | item | why |
 |---|---|
 | `fields.py` (813 lines, 41 importers) | Ported code would need three things fixed first: the `~/Dropbox` paths are now repo-relative (`lexicons/`), but a missing source still DEGRADES rather than refusing, and the BYU lemmatiser should be spaCy — free, already installed with `en_core_web_sm` + `zh_core_web_sm`, and CONTEXTUAL where BYU is type-level. BYU's POS column is loaded and never read, so the swap is lemma-for-lemma. |
-| `twp.py` + `models.py` (1,567 lines) | Measurement, not analysis: they run a model on a GPU and produce the jsonl this repo ingests. Needed for the 104 re-measurement and nothing else yet. `models.py` opens with `from . import *`, which needs untangling. |
+| ~~`twp.py` + `models.py`~~ **PORTED 2026-08-15** | `dict_sha` verified `b16011275c42955c` unchanged; `models.py`'s `from . import *` untangled to explicit imports; `runners.py` drives them. Original note: measurement, not analysis: they run a model on a GPU and produce the jsonl this repo ingests. Needed for the 104 re-measurement and nothing else yet. `models.py` opens with `from . import *`, which needs untangling. |
 | `cell.py`, `step.py` (471 lines) | Attempt LAST, expecting them to shrink rather than port. They exist to make a key-value store usable per-cell; with ClickHouse primary a cell is a WHERE clause. If most of those lines evaporate, that is the answer rather than a failure. |
 
 ## Found here, owed to another seat
