@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# LICENSED DATA — present locally, NEVER committed. This repository is PUBLIC.
+# `lexicons/external/` holds sources we have access to and may not redistribute:
+# worddb.byu.txt is BNC/COCA/COHA/SOAP frequencies and BYU corpora are purchased
+# access with redistribution prohibited. Copied here rather than read from
+# ~/Dropbox so the CODE PATH is repo-relative instead of machine-specific — the
+# file's location stops being one person's filesystem — while git never sees it.
+#
+# A clone therefore has the code and not the data, which is correct and is
+# exactly why `lexicons/EXTERNAL.md` requires that a missing source REFUSE rather
+# than degrade. An ignored file is invisible; a silently smaller answer is worse.
+lexicons/external/
