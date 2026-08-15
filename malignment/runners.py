@@ -286,8 +286,17 @@ class TWPRunner:
             #: enough to `tail -f`, and still true after the terminal is gone.
             if verbose and (i % 25 == 0 or i == len(todo)):
                 el = time.time() - t0
-                say("     %d/%d  %.1f min  %.2f s/cell  (%d ok, %d skipped)"
-                    % (i, len(todo), el / 60, el / max(1, i), n_ok, n_skip))
+                spc = el / max(1, i)
+                #: ETA IN THE LOG, NOT ONLY IN THE BAR. tqdm's ETA lives on
+                #: stderr and dies with the terminal; the question "when does
+                #: this finish" is asked of a `tail -f` hours later, by someone
+                #: who never saw the bar.
+                left = (len(todo) - i) * spc
+                eta = time.strftime("%H:%M:%S", time.localtime(time.time() + left))
+                say("     %d/%d (%.1f%%)  %.1f min  %.2f s/cell  "
+                    "(%d ok, %d skipped)  left %.0f min  ETA %s"
+                    % (i, len(todo), 100.0 * i / len(todo), el / 60, spc,
+                       n_ok, n_skip, left / 60, eta))
         T.free()
         T.purge_model(ck.model_id, purge)
         return {"model": ck.model_id, "producer": PRODUCER, "written": n_ok,
