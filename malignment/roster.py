@@ -79,7 +79,22 @@ OBSERVED = os.path.join(ROOT, "roster", "models", "measurements.json")
 #: an incoming `scale` edge and stopped counting as pretrained. It is pretrained.
 #: **A view keyed on "any edge" breaks the moment a new edge type means something
 #: different**, and it breaks by changing a number rather than by failing.
-ALIGNING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct")
+#: `rlhf` and `apo` added 2026-08-15 from the card audit. **Both exist so that a
+#: card's own word survives into the schema instead of being translated into a
+#: neighbouring op by whoever transcribed it.**
+#:
+#: `beaver-7b-v1.0` and `internlm2-chat-7b` were both booked `dpo`; their cards
+#: say "Safe RLHF" and "further trained ... by Online RLHF". Both are almost
+#: certainly PPO underneath, and writing `ppo` would have been a fair guess --
+#: but it is a guess about the ALGORITHM that neither card makes, and the
+#: `algorithm` field in `attestations.json` is where that belongs once someone
+#: sources it. An op should carry what the source said.
+#:
+#: `apo` is Anchored Preference Optimization (SmolLM3-3B). It is a preference
+#: method like dpo/kto/slic and aligns, so it goes here rather than beside
+#: distill.
+ALIGNING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct",
+            "rlhf", "apo")
 #: `upscale` DERIVES: Falcon3-10B-Base is depth up-scaled FROM 7B with continual
 #: pretraining, so it inherits 7B's pretraining and is a DESCENDANT. A derived
 #: model is not an independent observation, and `scale` -- a RELATING op -- would
@@ -87,7 +102,23 @@ ALIGNING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct")
 #: healed FROM larger members on 80 Gigatokens, against 10B's 2 Teratokens. Kept
 #: as SEPARATE ops because a 25x difference in post-derivation training is what
 #: any independence argument would turn on.
-DERIVING = ALIGNING + ("distill", "upscale", "prune")
+#: `continual` DERIVES and does NOT align: the child is the parent trained on
+#: more pretraining data, same size, no preference signal. Added 2026-08-15 for
+#: `falcon-mamba-7b -> Falcon3-Mamba-7B-Base` ("Continue Pretrained from
+#: Falcon-Mamba-7b, with another 1500 Gigatokens").
+#:
+#: **It is its own op because the alternatives are each wrong in a way that
+#: would move a number.** `pretrain` is not a DERIVING op at all, so the edge
+#: would vanish from `movement` rather than appear in it -- an op name that
+#: silently deletes an edge is the worst of the three. `sft` would file 1500
+#: Gigatokens of web and code under alignment and pollute the SFT-vs-DPO
+#: division-of-labour GROUP BY, which is a finding. `upscale`/`prune` assert a
+#: size change that did not happen.
+#:
+#: The same shape sits under `Yi-1.5-9B` (continual pretraining on Yi, +500B on
+#: 3.1T) and `OLMoE-1B-7B-0125` (annealed from an 0924 branch); neither parent is
+#: in this roster, so they are annotated in `provenance_notes` rather than edged.
+DERIVING = ALIGNING + ("distill", "upscale", "prune", "continual")
 RELATING = ("scale", "predecessor")
 
 DDL = ["""

@@ -18,9 +18,16 @@
 # Availability dwarfs coverage: 1,487 revisions published for Olmo-3-1025-7B,
 # 43 measured.
 #
-# OPERATIONS: sft | dpo | rlvr | ppo | kto | slic | distill
-#             instruct = an aligned endpoint of UNDECLARED composition
-#                        (35 edges -- the LARGEST class, larger than dpo)
+# OPERATIONS, aligning: sft | dpo | rlvr | ppo | kto | slic | rlhf | apo
+#                       instruct = an aligned endpoint of UNDECLARED composition
+#             deriving, not aligning: distill | continual | upscale | prune
+#             relating (NOT deriving): scale | predecessor
+#
+# `instruct` is still the largest class. A COUNT USED TO SIT ON THIS LINE and it
+# was stale by five before anyone read it -- it said 35 while the file held 40.
+# Run `malign roster` for live counts; a number transcribed into a comment beside
+# the data it describes is a derived value with no producer, which is the exact
+# failure this repository exists to stop.
 
 nodes:
   01-ai/Yi-1.5-9B:
@@ -903,8 +910,11 @@ edges:
 - - OpenLLM-France/Lucie-7B
   - instruct
   - OpenLLM-France/Lucie-7B-Instruct-v1.1
+# dpo -> rlhf: card: Beaver is trained by Safe RLHF, not DPO. `rlhf` and not `ppo`: the card
+# names the framework, not the optimiser, and the algorithm belongs in
+# attestations.json once sourced.
 - - PKU-Alignment/alpaca-7b-reproduced
-  - dpo
+  - rlhf
   - PKU-Alignment/beaver-7b-v1.0
 - - Qwen/Qwen2.5-0.5B
   - instruct
@@ -1014,8 +1024,10 @@ edges:
 - - internlm/internlm2-base-7b
   - sft
   - internlm/internlm2-chat-7b-sft
+# dpo -> rlhf: card: "InternLM2-Chat-7B is further trained from InternLM2-Chat-7B-SFT by
+# Online RLHF." Booked as dpo; no card anywhere says DPO.
 - - internlm/internlm2-chat-7b-sft
-  - dpo
+  - rlhf
   - internlm/internlm2-chat-7b
 - - kakaocorp/kanana-1.5-8b-base
   - instruct
@@ -1041,8 +1053,11 @@ edges:
 - - m-a-p/neo_7b
   - sft
   - m-a-p/neo_7b_sft_v0.1
+# dpo -> instruct: card says only "the instruction-tuned version of the neo_7b model" -- no
+# preference stage named anywhere. `dpo` was an inference from the repo name,
+# which is the exact substitution the audit refuses.
 - - m-a-p/neo_7b_sft_v0.1
-  - dpo
+  - instruct
   - m-a-p/neo_7b_instruct_v0.1
 - - meta-llama/Llama-3.1-70B
   - instruct
@@ -1068,6 +1083,23 @@ edges:
 - - meta-llama/Llama-3.1-8B
   - sft
   - allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data
+# phi-4 was carried as THREE independent lineages. It is one, with two rungs.
+# Found twice, independently: the similarity screen put phi-4-reasoning and
+# Phi-4-reasoning-plus at JS 0.0142 -- the only cross-lineage pair above 0.85
+# argmax agreement anywhere, and 11x closer than a declared SFT edge -- and the
+# card audit then quoted the derivation outright. Cited to the cards, because a
+# structural correction sourced to a metric is unciteable.
+#   "Trained via supervised fine-tuning of Phi-4 on carefully curated set of
+#    'teachable' prompts"                    -- microsoft/Phi-4-reasoning card
+- - microsoft/phi-4
+  - sft
+  - microsoft/phi-4-reasoning
+#   "Following the supervised fine-tuning (SFT) stage described previously, we
+#    applied outcome-based reinforcement learning ... We specifically utilized
+#    the Group Relative Policy Optimization (GRPO) algorithm"
+- - microsoft/phi-4-reasoning
+  - rlvr
+  - microsoft/Phi-4-reasoning-plus
 - - mistralai/Mistral-7B-v0.1
   - sft
   - HuggingFaceH4/mistral-7b-sft-beta
@@ -1077,11 +1109,15 @@ edges:
 - - openbmb/MiniCPM5-1B-Base
   - sft
   - openbmb/MiniCPM5-1B-SFT
+# dpo -> distill: card: "we train specialized RL teachers ... and use On-Policy Distillation
+# (OPD)". This is a distillation edge, not a preference edge.
 - - openbmb/MiniCPM5-1B-SFT
-  - dpo
+  - distill
   - openbmb/MiniCPM5-1B
+# sft -> dpo: card: trained with DPO (Zephyr-style recipe). Booked as sft -- the one
+# conflict pointing the other way, and it ADDS a dpo edge.
 - - stabilityai/stablelm-2-1_6b
-  - sft
+  - dpo
   - stabilityai/stablelm-2-1_6b-chat
 - - stabilityai/stablelm-2-1_6b-chat
   - dpo
@@ -1113,8 +1149,20 @@ edges:
 - - tiiuae/falcon-mamba-7b
   - instruct
   - tiiuae/falcon-mamba-7b-instruct
+# Falcon3-Mamba-7B-Base was carried as its own lineage root. It is falcon-mamba-7b
+# with more pretraining, so it INHERITS that pretraining run and is a descendant.
+#   "Continue Pretrained from [Falcon-Mamba-7b](https://arxiv.org/abs/2410.05355),
+#    with another 1500 Gigatokens of data consisting of web, code, STEM and high
+#    quality data."          -- tiiuae/Falcon3-Mamba-7B-Base card
+# `continual` and not `sft`: 1500 Gigatokens of web and code is not alignment, and
+# filing it as one would pollute the SFT-vs-DPO division-of-labour result.
+- - tiiuae/falcon-mamba-7b
+  - continual
+  - tiiuae/Falcon3-Mamba-7B-Base
+# dpo -> sft: card: "It is fine-tuned on OASST1 and Dolly2 to enhance chatting ability."
+# A supervised finetune. RedPajama predates DPO's release.
 - - togethercomputer/RedPajama-INCITE-7B-Instruct
-  - dpo
+  - sft
   - togethercomputer/RedPajama-INCITE-7B-Chat
 - - togethercomputer/RedPajama-INCITE-Base-7B-v0.1
   - sft
