@@ -898,8 +898,20 @@ edges:
 - - HuggingFaceTB/SmolLM3-3B-Base
   - sft
   - HuggingFaceTB/SmolLM3-3B-checkpoints
+# dpo -> apo. There is NO DPO anywhere in SmolLM3's recipe; the card names the
+# post-training stages as "Mid training, SFT, APO soup, and LC expert", and
+# SmolLM3-3B's own card says "alignment via Anchored Preference Optimization
+# (APO)". `dpo` here was a placeholder for "the preference step".
+#
+# THE PARENT EDGE (Base -sft-> -checkpoints) IS CORRECT AND STAYS, which is not
+# obvious: `-checkpoints` is a REVISION CONTAINER of 133 branches -- 118
+# pretraining intermediates, 10 long-context, 4 post-training -- so the audit
+# scored the REPO as `pretrain`. But this roster pins `revision: it-SFT` and the
+# corpus measured exactly that (twp_cells.revision = 'it-SFT', 2,579 cells), and
+# it-SFT IS the SFT stage. A repo-level method does not settle a revision-level
+# edge.
 - - HuggingFaceTB/SmolLM3-3B-checkpoints
-  - dpo
+  - apo
   - HuggingFaceTB/SmolLM3-3B
 - - LLM360/Amber
   - sft
