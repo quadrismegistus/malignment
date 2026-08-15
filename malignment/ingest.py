@@ -88,22 +88,31 @@ TOL = 1e-4          #: conservation is exact to ~4e-7 in practice; 1e-4 is loose
 #: re-deciding. `_SUPERSEDED_shard_names/` and four QUARANTINE dirs exist today.
 BAD_PATH = ("QUARANTINE", "RETIRED-", "_SUPERSEDED")
 
-#: **t1 IS IN THE twp_words KEY AND MUST BE.** A twp payload is one row per
+#: **SUMMED AT INGEST, WITH THE PATH COUNT KEPT.** A twp payload is one row per
 #: (word, FIRST TOKEN): a surface reachable by several token paths gets several
 #: rows, and those rows are a PARTITION -- summed, plus the residual, they come
 #: to 1.0. Measured on 10,908 source cells: **20.4% contain a duplicated
-#: surface**, 10,333 extra rows, `'I'` three times in one pythia cell. Keyed on
-#: (model, prompt, word) the ReplacingMergeTree would collapse them ON MERGE and
-#: silently drop mass -- the storage-engine form of the dict comprehension
-#: `movement.word_probs` refuses, which lost 2.7% of a Chinese distribution. The
-#: loss is larger where a language has more token paths per surface, so it falls
-#: hardest on the cross-language comparison it would be used for.
+#: surface**, 10,333 extra rows, `'I'` three times in one pythia cell.
+#:
+#: Two ways to be wrong here and only one way to be right. Keyed on
+#: (model, prompt, word) and NOT summed, the ReplacingMergeTree collapses the
+#: paths on merge and drops mass. Keyed on (..., t1) and stored raw, the mass is
+#: safe but **every consumer must remember to sum**, and the evidence is that
+#: they do not: `movement.word_probs` exists partly to refuse the dict
+#: comprehension that lost 2.7% of a Chinese distribution, and
+#: `SELECT p ... WHERE word=` is the most natural query anyone would type.
+#:
+#: So the SUM happens once, here, and `n_paths` keeps the fact that a surface had
+#: several. Nothing downstream consumes the breakdown -- the campaign's own
+#: `movement` table is keyed (base, aligned, prompt, word) with no t1 -- so what
+#: is dropped is a distinction no consumer makes, and what is kept is the count
+#: that says the distinction existed.
 DDL = ["""
 CREATE TABLE IF NOT EXISTS {db}.twp_words (
     model String, prompt String, word String,
-    t1 UInt32, p Float32,
+    p Float32, n_paths UInt8,
     source LowCardinality(String), mtime DateTime
-) ENGINE = ReplacingMergeTree(mtime) ORDER BY (model, prompt, word, t1)
+) ENGINE = ReplacingMergeTree(mtime) ORDER BY (model, prompt, word)
 """, """
 CREATE TABLE IF NOT EXISTS {db}.twp_cells (
     model String, prompt String,
@@ -238,9 +247,15 @@ def main():
                 rej["conservation"] += 1
                 continue
             m, pr = k
+            #: SUM THE PARTITION HERE, ONCE. Folding in SQL later would put the
+            #: rule in two places, which is the failure `movement` warns about.
+            fold = {}
             for w in rows:
-                words.append({"model": m, "prompt": pr, "word": w["word"],
-                              "t1": int(w.get("t1") or 0), "p": float(w["p"]),
+                a = fold.setdefault(w["word"], [0.0, 0])
+                a[0] += float(w["p"]); a[1] += 1
+            for wd, (pp, np_) in fold.items():
+                words.append({"model": m, "prompt": pr, "word": wd,
+                              "p": pp, "n_paths": np_,
                               "source": f["source"], "mtime": mt})
             cells.append({"model": m, "prompt": pr, "n_words": len(rows),
                           "conservation": float(cons),
