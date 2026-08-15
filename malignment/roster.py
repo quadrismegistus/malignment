@@ -62,9 +62,21 @@ from . import ch
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUTHORED = os.path.join(ROOT, "roster", "roster.yaml")
 
-#: Operations that ALIGN. `distill` is a lineage relation, not an alignment step,
-#: so it is excluded here rather than at a call site where it would be invisible.
+#: TWO KINDS OF EDGE, and conflating them silently moved a population count.
+#:
+#: DERIVING  the child was PRODUCED from the parent by training. An incoming
+#:           deriving edge is what makes a checkpoint not-pretrained.
+#: RELATING  two independently-produced checkpoints stand in a relation. Neither
+#:           was made from the other.
+#:
+#: When `scale` edges were added on 2026-08-15 the `roots` view -- defined as
+#: "no incoming edge" -- fell from 54 to 47, because `Olmo-3-1125-32B` acquired
+#: an incoming `scale` edge and stopped counting as pretrained. It is pretrained.
+#: **A view keyed on "any edge" breaks the moment a new edge type means something
+#: different**, and it breaks by changing a number rather than by failing.
 ALIGNING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct")
+DERIVING = ALIGNING + ("distill",)
+RELATING = ("scale", "predecessor")
 
 DDL = ["""
 CREATE TABLE IF NOT EXISTS {db}.checkpoints (
@@ -85,14 +97,14 @@ VIEWS = {
     "alignment_edges": """
         CREATE OR REPLACE VIEW {db}.alignment_edges AS
         SELECT parent, op, child,
-               parent NOT IN (SELECT child FROM {db}.edges) AS from_root
+               parent NOT IN (SELECT child FROM {db}.edges WHERE op IN %s) AS from_root
         FROM {db}.edges WHERE op IN %s
-    """ % (str(ALIGNING),),
+    """ % (str(DERIVING), str(ALIGNING)),
     "roots": """
         CREATE OR REPLACE VIEW {db}.roots AS
         SELECT model_id FROM {db}.checkpoints
-        WHERE model_id NOT IN (SELECT child FROM {db}.edges)
-    """,
+        WHERE model_id NOT IN (SELECT child FROM {db}.edges WHERE op IN %s)
+    """ % (str(DERIVING),),
 }
 
 
@@ -129,7 +141,11 @@ def main():
     a = ap.parse_args()
     nodes, edges, dangling = rows()
     ops = collections.Counter(e["op"] for e in edges)
-    roots = {n["model_id"] for n in nodes} - {e["child"] for e in edges}
+    #: THE SAME PREDICATE AS THE VIEW. This line read `{e["child"] for e in edges}`
+    #: and printed 47 while `{db}.roots` returned 54 -- two definitions of "root"
+    #: in one file, which is the defect this whole repo exists to stop.
+    roots = ({n["model_id"] for n in nodes}
+             - {e["child"] for e in edges if e["op"] in DERIVING})
     print("  authored: %s" % os.path.relpath(AUTHORED, ROOT))
     print("  %d checkpoints | %d edges | %d roots (no incoming edge)"
           % (len(nodes), len(edges), len(roots)))
