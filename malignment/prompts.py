@@ -63,6 +63,11 @@ PROMPTS = os.path.join(ROOT, "roster", "prompts")
 
 _CACHE = {}
 
+#: file -> the SOURCE name the archive gave it. Carried because `source` is how
+#: every existing query names these populations, and dropping it would make the
+#: new catalogue answer a question the old one could and this one could not.
+_PAIR_SOURCE = {'round2_desecration.yaml': 'M01_PAIRS_DESECRATION', 'round2_animal.yaml': 'M01_PAIRS_ANIMAL', 'round2_betrayal.yaml': 'M01_PAIRS_BETRAYAL', 'round2_theft.yaml': 'M01_PAIRS_THEFT', 'round2b_power_v2.yaml': 'M01_PAIRS_POWER_R2B', 'sonnet_covert.yaml': 'M01_PAIRS_COVERT', 'sonnet_sexual.yaml': 'M01_PAIRS_SEXUAL', 'sonnet_threat.yaml': 'M01_PAIRS_THREAT', 'sonnet_unarmed.yaml': 'M01_PAIRS_UNARMED', 'sonnet_weapons.yaml': 'M01_PAIRS_WEAPONS', 'm03_kernel.py': 'M03_SPEAKER_KERNEL'}
+
 
 # ----------------------------------------------------------------- expanders
 
@@ -132,6 +137,7 @@ def _load(force=False):
                      "contrast_type": rec.get("contrast_type"), "swap": rec.get("swap"),
                      "writer": rec.get("writer"),
                      "admitted": bool(rec.get("admitted", True)),
+                     "source": _PAIR_SOURCE.get(base, ""),
                      "family": "pairs", "file": base})
 
     for f in sorted(glob.glob(os.path.join(PROMPTS, "generated", "*.yaml"))):
@@ -149,7 +155,8 @@ def _load(force=False):
                 add({"prompt_id": "%s_%s" % (k["id"], cell_id), "prompt": text,
                      "domain": k.get("domain"), "language": "en",
                      "kernel_id": k["id"], "cell": cell_id, "frame": k.get("frame"),
-                     "admitted": True, "family": "generated", "file": base})
+                     "admitted": True, "source": "M03_SPEAKER_KERNEL",
+                     "family": "generated", "file": base})
 
     for f in sorted(glob.glob(os.path.join(PROMPTS, "flat", "*.yaml"))):
         base = os.path.basename(f)
@@ -218,6 +225,69 @@ class Prompts:
             if all(p._row.get(k) == v for k, v in fields.items()):
                 out.append(p)
         return out
+
+    # ------------------------------------------------------------ populations
+    #
+    # **A NAMED FUNCTION IS THE DEFINITION.** The archive's `representative
+    # pairs` had six answers on one afternoon because the definition lived in six
+    # producers instead of one name. Each helper below states its rule, and each
+    # returns ROWS rather than a count so a reader can see the selection instead
+    # of inferring it from a total.
+
+    @staticmethod
+    def transgressive_pairs(language=None):
+        """MARKED/UNMARKED pairs whose contrast is a TRANSGRESSIVE SWAP.
+
+        1,513 prompts of 2,888 -- the dominant design. One token apart by
+        construction: `sedative -> cinnamon`, `diary -> postcard`. **Not every
+        pair is this**: `pole_swap` (190) forces a choice between two poles and
+        tests superposition, `intensity_ladder` (111) varies degree, and pooling
+        them measures neither -- which is the distinction `finding` was added to
+        the archive's schema to protect.
+        """
+        f = {"contrast_type": "transgressive_swap"}
+        if language:
+            f["language"] = language
+        return Prompts.where(**f)
+
+    @staticmethod
+    def institutional():
+        """The M03 speaker-kernel scenarios. 252 prompts, DERIVED from 18 kernels.
+
+        Institutional against individual stance, crossed with speaker, person and
+        form. These are the only prompts in the catalogue that are GENERATED
+        rather than authored one by one, and editing an output is impossible
+        because outputs are not stored -- see `roster/prompts/generated/`.
+        """
+        return Prompts.where(family="generated")
+
+    @staticmethod
+    def chinese():
+        """The 457 Chinese-language prompts.
+
+        Kept as their own population because the tail behaves differently: a
+        Chinese cell carries more of its mass below theta, so `js_tail` is
+        systematically larger and a pooled JS understates divergence there.
+        """
+        return Prompts.where(language="zh")
+
+    @staticmethod
+    def pairs(contrast_type=None, **fields):
+        """Every prompt that has a partner. `contrast_type` narrows the design."""
+        out = [p for p in Prompts.all() if p._row.get("pair_id")]
+        if contrast_type:
+            out = [p for p in out if p._row.get("contrast_type") == contrast_type]
+        return [p for p in out if all(p._row.get(k) == v for k, v in fields.items())]
+
+    @staticmethod
+    def rejected():
+        """The 232 prompts from pairs NOT admitted to the catalogue.
+
+        Present here and absent from the archive entirely. `admitted: false`
+        records the FACT; for round 2 the REASON was never written down, and
+        `round2_animal` alone is 70 of 120 rejected.
+        """
+        return Prompts.all(admitted=False)
 
     @staticmethod
     def texts(admitted=True):
