@@ -54,13 +54,18 @@ loses the evidence. `roster/roster.yaml` is authored; no script writes it.
 """
 import argparse
 import collections
+import json
 import os
 import sys
 
 from . import ch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-AUTHORED = os.path.join(ROOT, "roster", "models.yaml")
+AUTHORED = os.path.join(ROOT, "roster", "models", "models.yaml")
+#: OBSERVED, not declared: one stamped file, a section per pass. The archive
+#: kept these in six artifacts that each defined "the set of models" and
+#: drifted apart.
+OBSERVED = os.path.join(ROOT, "roster", "models", "measurements.json")
 
 #: TWO KINDS OF EDGE, and conflating them silently moved a population count.
 #:
@@ -84,7 +89,9 @@ CREATE TABLE IF NOT EXISTS {db}.checkpoints (
     org_type LowCardinality(String), country LowCardinality(String),
     scale LowCardinality(String), open_weight UInt8, open_data UInt8,
     nickname LowCardinality(String), revision LowCardinality(String),
-    revision_ladder UInt32, lineage String, depth UInt8
+    revision_ladder UInt32, lineage String, depth UInt8,
+    params_b Float32, scale_group String, is_representative UInt8,
+    vocab_size UInt32, vocab_len UInt32, n_added_tokens UInt32
 ) ENGINE = ReplacingMergeTree ORDER BY model_id
 """, """
 CREATE TABLE IF NOT EXISTS {db}.edges (
@@ -167,6 +174,77 @@ def rows():
         while m in par and m not in seen:
             seen.add(m); m = par[m]; d += 1
         n["lineage"], n["depth"] = m, d
+    #: PARAMS_B IS MEASURED, NOT DECLARED, so it is joined here from
+    #: `data/weights_audit.csv` (safetensors header counts) rather than written
+    #: into the authored YAML. 156 of 159 in the archive's audit; a model absent
+    #: from it gets 0 and is excluded from the size pick rather than guessed at.
+    obs = {}
+    if os.path.exists(OBSERVED):
+        with open(OBSERVED, encoding="utf-8") as fh:
+            obs = json.load(fh).get("sections") or {}
+    pb = {k: v.get("params_b", 0.0)
+          for k, v in (obs.get("weights", {}).get("models") or {}).items()}
+    tok = obs.get("tokenizer", {}).get("models") or {}
+    lad = obs.get("revision_ladders", {}).get("models") or {}
+    for n in nodes:
+        m = n["model_id"]
+        n["params_b"] = pb.get(m, 0.0)
+        t = tok.get(m) or {}
+        n["vocab_size"] = int(t.get("vocab_size") or 0)
+        n["vocab_len"] = int(t.get("vocab_len") or 0)
+        n["n_added_tokens"] = int(t.get("n_added_tokens") or 0)
+        #: OBSERVED WINS over the authored `revision_ladder`. A ladder length is
+        #: something the HF API reports, never something anyone declares -- and
+        #: the authored value was itself imported from this survey.
+        n["revision_ladder"] = int(lad.get(m) or n.get("revision_ladder") or 0)
+
+    #: SCALE GROUP: lineages linked by `scale` or `predecessor` edges — the same
+    #: recipe at several sizes. THE LEVEL ABOVE LINEAGE, and the one RH means by
+    #: "representative": *"a representative is what picks olmo7b instead of 1b or
+    #: 8b"*. 54 lineages collapse to 47 groups; five hold more than one
+    #: (OLMo 1B/7B/32B, Falcon3 1B/3B/7B, Llama 8B/70B, Qwen2.5 0.5B/7B,
+    #: Falcon-H1 1.5B/7B).
+    #:
+    #: **A `family` is a different axis and must not be confused with either.**
+    #: `olmo`, `olmo-32b` and `olmo-tiny` are three families inside ONE scale
+    #: group, and a family can span lineages while a lineage cannot span groups.
+    par = {}
+
+    def _find(x):
+        par.setdefault(x, x)
+        while par[x] != x:
+            par[x] = par[par[x]]
+            x = par[x]
+        return x
+
+    lin_of = {n["model_id"]: n["lineage"] for n in nodes}
+    for n in nodes:
+        _find(n["lineage"])
+    for e in edges:
+        if e["op"] in RELATING:
+            a, b = lin_of.get(e["parent"]), lin_of.get(e["child"])
+            if a and b:
+                ra, rb = _find(a), _find(b)
+                if ra != rb:
+                    par[ra] = rb
+    #: THE PICK IS THE LINEAGE NEAREST 8B, RH's rule. Deterministic, stated, and
+    #: independent of any outcome -- a representative chosen by a measured
+    #: quantity cannot be chosen to favour a result.
+    TARGET = 8.0
+    root_params = {}
+    for n in nodes:
+        if n["depth"] == 0 and n["params_b"]:
+            root_params[n["model_id"]] = n["params_b"]
+    best = {}
+    for lin, pbv in root_params.items():
+        g = _find(lin)
+        if g not in best or abs(pbv - TARGET) < abs(root_params[best[g]] - TARGET):
+            best[g] = lin
+    rep = set(best.values())
+    for n in nodes:
+        n["scale_group"] = _find(n["lineage"])
+        n["is_representative"] = int(n["lineage"] in rep)
+
     ids = {n["model_id"] for n in nodes}
     dangling = [e for e in edges if e["parent"] not in ids or e["child"] not in ids]
     return nodes, edges, dangling

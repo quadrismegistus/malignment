@@ -1,0 +1,1669 @@
+{
+ "_about": "OBSERVED facts about checkpoints — what inspection returned, never what anyone declared. `roster/models/models.yaml` is the authored side; this is the found side; ClickHouse is the join.",
+ "_why_one_file": "The archive kept these in SIX artifacts (tokenizer_properties.json, weights_audit.csv, cjk_coverage.csv, bos_resolution.csv, tokenizer_roundtrip.csv, model_revisions.json), each independently defining 'the set of models', and they drifted: 32 sources declared against 51 on disk, a params audit reading a 9-day-old roster and measuring two thirds of it. One file with a stamped section per pass cannot half-update.",
+ "_stamp_rule": "Every section carries `measured_at` and `n`. A measurement of a checkpoint is only true of that checkpoint AS IT STOOD; an unstamped observation cannot be told from a stale one.",
+ "sections": {
+  "weights": {
+   "measured_by": "safetensors headers (archive weights_audit.csv)",
+   "measured_at": "2026-08 (archive)",
+   "n": 137,
+   "models": {
+    "01-ai/Yi-1.5-9B": {
+     "params_b": 8.829,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "01-ai/Yi-1.5-9B-Chat": {
+     "params_b": 8.829,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "AI-Sweden-Models/gpt-sw3-6.7b": {
+     "params_b": 7.111,
+     "weights_format": "mixed",
+     "n_safetensors": 3
+    },
+    "AI-Sweden-Models/gpt-sw3-6.7b-v2": {
+     "params_b": 7.111,
+     "weights_format": "mixed",
+     "n_safetensors": 3
+    },
+    "AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct": {
+     "params_b": 7.111,
+     "weights_format": "mixed",
+     "n_safetensors": 3
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf": {
+     "params_b": 7.042,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-hf": {
+     "params_b": 7.042,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "BAAI/Aquila2-7B": {
+     "params_b": 7.656,
+     "weights_format": "safetensors",
+     "n_safetensors": 7
+    },
+    "BSC-LT/salamandra-7b": {
+     "params_b": 7.768,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "BSC-LT/salamandra-7b-instruct": {
+     "params_b": 7.768,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+     "params_b": 2.775,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "ContextualAI/archangel_sft-kto_pythia2-8b": {
+     "params_b": 2.775,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+     "params_b": 2.775,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "ContextualAI/archangel_sft-slic_pythia2-8b": {
+     "params_b": 2.775,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "ContextualAI/archangel_sft_pythia2-8b": {
+     "params_b": 2.775,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "EleutherAI/pythia-2.8b": {
+     "params_b": 2.909,
+     "weights_format": "mixed",
+     "n_safetensors": 1
+    },
+    "EleutherAI/pythia-6.9b": {
+     "params_b": 6.992,
+     "weights_format": "mixed",
+     "n_safetensors": 2
+    },
+    "HuggingFaceH4/zephyr-7b-beta": {
+     "params_b": 7.242,
+     "weights_format": "mixed",
+     "n_safetensors": 8
+    },
+    "HuggingFaceTB/SmolLM2-360M": {
+     "params_b": 0.362,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "HuggingFaceTB/SmolLM2-360M-Instruct": {
+     "params_b": 0.362,
+     "weights_format": "mixed",
+     "n_safetensors": 1
+    },
+    "HuggingFaceTB/SmolLM3-3B": {
+     "params_b": 3.075,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "HuggingFaceTB/SmolLM3-3B-Base": {
+     "params_b": 3.075,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "LLM360/Amber": {
+     "params_b": 6.738,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "LLM360/AmberChat": {
+     "params_b": 6.738,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "LLM360/AmberSafe": {
+     "params_b": 6.738,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+     "params_b": 7.242,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "OpenLLM-France/Lucie-7B": {
+     "params_b": 6.707,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+     "params_b": 6.707,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "PKU-Alignment/alpaca-7b-reproduced": {
+     "params_b": 6.738,
+     "weights_format": "safetensors",
+     "n_safetensors": 7
+    },
+    "PKU-Alignment/beaver-7b-v1.0": {
+     "params_b": 6.738,
+     "weights_format": "safetensors",
+     "n_safetensors": 7
+    },
+    "Qwen/Qwen2.5-0.5B": {
+     "params_b": 0.494,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "Qwen/Qwen2.5-0.5B-Instruct": {
+     "params_b": 0.494,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "Qwen/Qwen2.5-7B": {
+     "params_b": 7.616,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "Qwen/Qwen2.5-7B-Instruct": {
+     "params_b": 7.616,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "Qwen/Qwen3-8B": {
+     "params_b": 8.191,
+     "weights_format": "safetensors",
+     "n_safetensors": 5
+    },
+    "Qwen/Qwen3-8B-Base": {
+     "params_b": 8.191,
+     "weights_format": "safetensors",
+     "n_safetensors": 5
+    },
+    "THUDM/glm-4-9b-hf": {
+     "params_b": 9.4,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+     "params_b": 1.1,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+     "params_b": 1.1,
+     "weights_format": "mixed",
+     "n_safetensors": 1
+    },
+    "Zyphra/Zamba2-7B": {
+     "params_b": 7.357,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "Zyphra/Zamba2-7B-Instruct": {
+     "params_b": 7.357,
+     "weights_format": "safetensors",
+     "n_safetensors": 7
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+     "params_b": 8.03,
+     "weights_format": "mixed",
+     "n_safetensors": 4
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "allenai/Llama-3.1-Tulu-3.1-8B": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "allenai/OLMo-2-0425-1B": {
+     "params_b": 1.485,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "allenai/OLMo-2-0425-1B-Instruct": {
+     "params_b": 1.485,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "allenai/OLMoE-1B-7B-0125": {
+     "params_b": 6.919,
+     "weights_format": "safetensors",
+     "n_safetensors": 6
+    },
+    "allenai/OLMoE-1B-7B-0125-DPO": {
+     "params_b": 6.919,
+     "weights_format": "mixed",
+     "n_safetensors": 3
+    },
+    "allenai/OLMoE-1B-7B-0125-Instruct": {
+     "params_b": 6.919,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "allenai/Olmo-3-1025-7B": {
+     "params_b": 7.298,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "allenai/Olmo-3-1125-32B": {
+     "params_b": 32.234,
+     "weights_format": "safetensors",
+     "n_safetensors": 14
+    },
+    "allenai/Olmo-3-7B-Instruct": {
+     "params_b": 7.298,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "allenai/Olmo-3-7B-Instruct-DPO": {
+     "params_b": 7.298,
+     "weights_format": "mixed",
+     "n_safetensors": 3
+    },
+    "allenai/Olmo-3-7B-Instruct-SFT": {
+     "params_b": 7.298,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "allenai/Olmo-3-7B-Think-DPO": {
+     "params_b": 7.298,
+     "weights_format": "mixed",
+     "n_safetensors": 3
+    },
+    "allenai/Olmo-3-7B-Think-SFT": {
+     "params_b": 7.298,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "allenai/Olmo-3.1-32B-Instruct": {
+     "params_b": 32.234,
+     "weights_format": "safetensors",
+     "n_safetensors": 14
+    },
+    "allenai/Olmo-3.1-32B-Instruct-DPO": {
+     "params_b": 32.234,
+     "weights_format": "safetensors",
+     "n_safetensors": 29
+    },
+    "allenai/Olmo-3.1-32B-Instruct-SFT": {
+     "params_b": 32.234,
+     "weights_format": "safetensors",
+     "n_safetensors": 29
+    },
+    "allenai/Olmo-Hybrid-7B": {
+     "params_b": 7.431,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+     "params_b": 7.431,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+     "params_b": 7.431,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "bigscience/bloom-7b1": {
+     "params_b": 7.069,
+     "weights_format": "mixed",
+     "n_safetensors": 2
+    },
+    "bigscience/bloomz-7b1": {
+     "params_b": 7.069,
+     "weights_format": "mixed",
+     "n_safetensors": 1
+    },
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+     "params_b": 7.242,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "croissantllm/CroissantLLMChat-v0.1": {
+     "params_b": 1.345,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Llama-8B": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B": {
+     "params_b": 7.616,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "google/gemma-2-9b": {
+     "params_b": 9.242,
+     "weights_format": "safetensors",
+     "n_safetensors": 8
+    },
+    "google/gemma-2-9b-it": {
+     "params_b": 9.242,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "google/recurrentgemma-9b": {
+     "params_b": 9.629,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "google/recurrentgemma-9b-it": {
+     "params_b": 9.629,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "huggyllama/llama-7b": {
+     "params_b": 6.738,
+     "weights_format": "mixed",
+     "n_safetensors": 2
+    },
+    "ibm-granite/granite-3.0-8b-base": {
+     "params_b": 8.171,
+     "weights_format": "safetensors",
+     "n_safetensors": 7
+    },
+    "ibm-granite/granite-3.0-8b-instruct": {
+     "params_b": 8.171,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "inceptionai/jais-family-6p7b": {
+     "params_b": 7.143,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "inceptionai/jais-family-6p7b-chat": {
+     "params_b": 7.143,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "internlm/internlm2-chat-7b": {
+     "params_b": 7.738,
+     "weights_format": "safetensors",
+     "n_safetensors": 8
+    },
+    "internlm/internlm2-chat-7b-sft": {
+     "params_b": 7.738,
+     "weights_format": "safetensors",
+     "n_safetensors": 8
+    },
+    "kakaocorp/kanana-1.5-8b-base": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "kakaocorp/kanana-1.5-8b-instruct-2505": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "kakaocorp/kanana-2-3b-base": {
+     "params_b": 3.181,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "kakaocorp/kanana-2-3b-instruct": {
+     "params_b": 3.509,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "llm-jp/llm-jp-3-7.2b": {
+     "params_b": 7.292,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct2": {
+     "params_b": 7.292,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct3": {
+     "params_b": 7.292,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "m-a-p/CT-LLM-Base": {
+     "params_b": 2.135,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "m-a-p/CT-LLM-SFT": {
+     "params_b": 2.135,
+     "weights_format": "mixed",
+     "n_safetensors": 1
+    },
+    "m-a-p/CT-LLM-SFT-DPO": {
+     "params_b": 2.135,
+     "weights_format": "mixed",
+     "n_safetensors": 1
+    },
+    "m-a-p/neo_7b": {
+     "params_b": 7.794,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "m-a-p/neo_7b_instruct_v0.1": {
+     "params_b": 7.794,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "m-a-p/neo_7b_sft_v0.1": {
+     "params_b": 7.794,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "meta-llama/Llama-3.1-70B": {
+     "params_b": 70.554,
+     "weights_format": "safetensors",
+     "n_safetensors": 30
+    },
+    "meta-llama/Llama-3.1-70B-Instruct": {
+     "params_b": 70.554,
+     "weights_format": "safetensors",
+     "n_safetensors": 30
+    },
+    "meta-llama/Llama-3.1-8B": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+     "params_b": 8.03,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "microsoft/phi-4": {
+     "params_b": 14.66,
+     "weights_format": "safetensors",
+     "n_safetensors": 6
+    },
+    "microsoft/phi-4-reasoning": {
+     "params_b": 14.66,
+     "weights_format": "safetensors",
+     "n_safetensors": 6
+    },
+    "mistralai/Mistral-7B-v0.1": {
+     "params_b": 7.242,
+     "weights_format": "mixed",
+     "n_safetensors": 2
+    },
+    "openGPT-X/Teuken-7B-base-v0.6": {
+     "params_b": 7.454,
+     "weights_format": "mixed",
+     "n_safetensors": 4
+    },
+    "openGPT-X/Teuken-7B-instruct-v0.6": {
+     "params_b": 7.453,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "openbmb/MiniCPM5-1B": {
+     "params_b": 1.081,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "openbmb/MiniCPM5-1B-Base": {
+     "params_b": 1.081,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "openbmb/MiniCPM5-1B-SFT": {
+     "params_b": 1.081,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "openchat/openchat-3.5-0106": {
+     "params_b": 7.242,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "stabilityai/stablelm-2-1_6b": {
+     "params_b": 1.645,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "stabilityai/stablelm-2-1_6b-chat": {
+     "params_b": 1.645,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "stabilityai/stablelm-2-zephyr-1_6b": {
+     "params_b": 1.645,
+     "weights_format": "mixed",
+     "n_safetensors": 1
+    },
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+     "params_b": 7.512,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "teknium/OpenHermes-2.5-Mistral-7B": {
+     "params_b": 7.242,
+     "weights_format": "mixed",
+     "n_safetensors": 2
+    },
+    "tiiuae/Falcon-H1-1.5B-Base": {
+     "params_b": 1.555,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "tiiuae/Falcon-H1-1.5B-Instruct": {
+     "params_b": 1.555,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "tiiuae/Falcon-H1-7B-Base": {
+     "params_b": 7.586,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "tiiuae/Falcon-H1-7B-Instruct": {
+     "params_b": 7.586,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "tiiuae/Falcon3-10B-Base": {
+     "params_b": 10.306,
+     "weights_format": "safetensors",
+     "n_safetensors": 5
+    },
+    "tiiuae/Falcon3-10B-Instruct": {
+     "params_b": 10.306,
+     "weights_format": "safetensors",
+     "n_safetensors": 5
+    },
+    "tiiuae/Falcon3-1B-Base": {
+     "params_b": 1.669,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "tiiuae/Falcon3-1B-Instruct": {
+     "params_b": 1.669,
+     "weights_format": "safetensors",
+     "n_safetensors": 1
+    },
+    "tiiuae/Falcon3-3B-Base": {
+     "params_b": 3.228,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "tiiuae/Falcon3-3B-Instruct": {
+     "params_b": 3.228,
+     "weights_format": "safetensors",
+     "n_safetensors": 2
+    },
+    "tiiuae/Falcon3-7B-Base": {
+     "params_b": 7.456,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "tiiuae/Falcon3-7B-Instruct": {
+     "params_b": 7.456,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "tiiuae/Falcon3-Mamba-7B-Base": {
+     "params_b": 7.273,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "tiiuae/Falcon3-Mamba-7B-Instruct": {
+     "params_b": 7.273,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "tiiuae/falcon-7b": {
+     "params_b": 7.217,
+     "weights_format": "mixed",
+     "n_safetensors": 2
+    },
+    "tiiuae/falcon-7b-instruct": {
+     "params_b": 7.217,
+     "weights_format": "mixed",
+     "n_safetensors": 2
+    },
+    "tiiuae/falcon-mamba-7b": {
+     "params_b": 7.273,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "tiiuae/falcon-mamba-7b-instruct": {
+     "params_b": 7.273,
+     "weights_format": "safetensors",
+     "n_safetensors": 3
+    },
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+     "params_b": 7.512,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "zai-org/glm-4-9b-chat-hf": {
+     "params_b": 9.4,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    },
+    "zai-org/glm-4-9b-hf": {
+     "params_b": 9.4,
+     "weights_format": "safetensors",
+     "n_safetensors": 4
+    }
+   }
+  },
+  "tokenizer": {
+   "measured_by": "AutoTokenizer + model config (archive)",
+   "measured_at": "2026-08 (archive)",
+   "n": 154,
+   "models": {
+    "01-ai/Yi-1.5-9B": {
+     "vocab_size": 63992,
+     "vocab_len": 63992,
+     "n_added_tokens": 231,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "01-ai/Yi-1.5-9B-Chat": {
+     "vocab_size": 63992,
+     "vocab_len": 63992,
+     "n_added_tokens": 4,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf": {
+     "vocab_size": 127179,
+     "vocab_len": 128000,
+     "n_added_tokens": 824,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-hf": {
+     "vocab_size": 127179,
+     "vocab_len": 128000,
+     "n_added_tokens": 824,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "BAAI/Aquila2-7B": {
+     "vocab_size": 100000,
+     "vocab_len": 100008,
+     "n_added_tokens": 9,
+     "tokenizer_class": "GPT2Tokenizer"
+    },
+    "BAAI/AquilaChat2-7B": {
+     "vocab_size": 100000,
+     "vocab_len": 100008,
+     "n_added_tokens": 9,
+     "tokenizer_class": "GPT2Tokenizer"
+    },
+    "BSC-LT/salamandra-7b": {
+     "vocab_size": 256000,
+     "vocab_len": 256000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "BSC-LT/salamandra-7b-instruct": {
+     "vocab_size": 256000,
+     "vocab_len": 256000,
+     "n_added_tokens": 5,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "ContextualAI/archangel_sft-kto_pythia2-8b": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "ContextualAI/archangel_sft-slic_pythia2-8b": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "ContextualAI/archangel_sft_pythia2-8b": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "EleutherAI/pythia-2.8b": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "EleutherAI/pythia-6.9b": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "HuggingFaceH4/mistral-7b-sft-beta": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "HuggingFaceH4/zephyr-7b-beta": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "HuggingFaceTB/SmolLM2-360M": {
+     "vocab_size": 49152,
+     "vocab_len": 49152,
+     "n_added_tokens": 17,
+     "tokenizer_class": "GPT2Tokenizer"
+    },
+    "HuggingFaceTB/SmolLM2-360M-Instruct": {
+     "vocab_size": 49152,
+     "vocab_len": 49152,
+     "n_added_tokens": 17,
+     "tokenizer_class": "GPT2Tokenizer"
+    },
+    "HuggingFaceTB/SmolLM3-3B": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "HuggingFaceTB/SmolLM3-3B-Base": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "LLM360/Amber": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "LLM360/AmberChat": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "LLM360/AmberSafe": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+     "vocab_size": 32000,
+     "vocab_len": 32002,
+     "n_added_tokens": 5,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "OpenLLM-France/Lucie-7B": {
+     "vocab_size": 65024,
+     "vocab_len": 65024,
+     "n_added_tokens": 4,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+     "vocab_size": 65024,
+     "vocab_len": 65024,
+     "n_added_tokens": 7,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "PKU-Alignment/alpaca-7b-reproduced": {
+     "vocab_size": 32000,
+     "vocab_len": 32001,
+     "n_added_tokens": 4,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "PKU-Alignment/beaver-7b-v1.0": {
+     "vocab_size": 32000,
+     "vocab_len": 32001,
+     "n_added_tokens": 4,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "Qwen/Qwen2.5-0.5B": {
+     "vocab_size": 151643,
+     "vocab_len": 151665,
+     "n_added_tokens": 22,
+     "tokenizer_class": "Qwen2Tokenizer"
+    },
+    "Qwen/Qwen2.5-0.5B-Instruct": {
+     "vocab_size": 151643,
+     "vocab_len": 151665,
+     "n_added_tokens": 22,
+     "tokenizer_class": "Qwen2Tokenizer"
+    },
+    "Qwen/Qwen2.5-7B": {
+     "vocab_size": 151643,
+     "vocab_len": 151665,
+     "n_added_tokens": 22,
+     "tokenizer_class": "Qwen2Tokenizer"
+    },
+    "Qwen/Qwen2.5-7B-Instruct": {
+     "vocab_size": 151643,
+     "vocab_len": 151665,
+     "n_added_tokens": 22,
+     "tokenizer_class": "Qwen2Tokenizer"
+    },
+    "Qwen/Qwen3-8B": {
+     "vocab_size": 151643,
+     "vocab_len": 151669,
+     "n_added_tokens": 26,
+     "tokenizer_class": "Qwen2Tokenizer"
+    },
+    "Qwen/Qwen3-8B-Base": {
+     "vocab_size": 151643,
+     "vocab_len": 151669,
+     "n_added_tokens": 26,
+     "tokenizer_class": "Qwen2Tokenizer"
+    },
+    "RWKV/rwkv-4-7b-pile": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "RWKV/rwkv-raven-7b": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "Zyphra/Zamba2-7B": {
+     "vocab_size": 32000,
+     "vocab_len": 32001,
+     "n_added_tokens": 4,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "Zyphra/Zamba2-7B-Instruct": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+     "vocab_size": 128000,
+     "vocab_len": 128257,
+     "n_added_tokens": 257,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+     "vocab_size": 128000,
+     "vocab_len": 128257,
+     "n_added_tokens": 257,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+     "vocab_size": 128000,
+     "vocab_len": 128257,
+     "n_added_tokens": 257,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+     "vocab_size": 128000,
+     "vocab_len": 128257,
+     "n_added_tokens": 257,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+     "vocab_size": 128000,
+     "vocab_len": 128257,
+     "n_added_tokens": 257,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+     "vocab_size": 128000,
+     "vocab_len": 128257,
+     "n_added_tokens": 257,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Llama-3.1-Tulu-3.1-8B": {
+     "vocab_size": 128000,
+     "vocab_len": 128257,
+     "n_added_tokens": 257,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/OLMo-2-0425-1B": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/OLMo-2-0425-1B-DPO": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/OLMo-2-0425-1B-Instruct": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/OLMo-2-0425-1B-SFT": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/OLMoE-1B-7B-0125": {
+     "vocab_size": 50280,
+     "vocab_len": 50280,
+     "n_added_tokens": 28,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "allenai/OLMoE-1B-7B-0125-DPO": {
+     "vocab_size": 50254,
+     "vocab_len": 50281,
+     "n_added_tokens": 29,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "allenai/OLMoE-1B-7B-0125-Instruct": {
+     "vocab_size": 50254,
+     "vocab_len": 50281,
+     "n_added_tokens": 29,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "allenai/OLMoE-1B-7B-0125-SFT": {
+     "vocab_size": 50254,
+     "vocab_len": 50280,
+     "n_added_tokens": 28,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "allenai/Olmo-3-1025-7B": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3-1125-32B": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3-7B-Instruct": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3-7B-Instruct-DPO": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3-7B-Instruct-SFT": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3-7B-Think-DPO": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3-7B-Think-SFT": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3.1-32B-Instruct": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3.1-32B-Instruct-DPO": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3.1-32B-Instruct-SFT": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-Hybrid-7B": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "baichuan-inc/Baichuan2-7B-Base": {
+     "vocab_size": 125696,
+     "vocab_len": 125696,
+     "n_added_tokens": 3,
+     "tokenizer_class": "BaichuanTokenizer"
+    },
+    "baichuan-inc/Baichuan2-7B-Chat": {
+     "vocab_size": 125696,
+     "vocab_len": 125696,
+     "n_added_tokens": 3,
+     "tokenizer_class": "BaichuanTokenizer"
+    },
+    "bigscience/bloom-7b1": {
+     "vocab_size": 250680,
+     "vocab_len": 250680,
+     "n_added_tokens": 4,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "bigscience/bloomz-7b1": {
+     "vocab_size": 250680,
+     "vocab_len": 250680,
+     "n_added_tokens": 4,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+     "vocab_size": 128000,
+     "vocab_len": 128258,
+     "n_added_tokens": 258,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+     "vocab_size": 32000,
+     "vocab_len": 32001,
+     "n_added_tokens": 4,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "croissantllm/CroissantLLMBase": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 104,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "croissantllm/CroissantLLMChat-v0.1": {
+     "vocab_size": 32000,
+     "vocab_len": 32002,
+     "n_added_tokens": 106,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Llama-8B": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B": {
+     "vocab_size": 151643,
+     "vocab_len": 151665,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "deepseek-ai/deepseek-llm-7b-base": {
+     "vocab_size": 100000,
+     "vocab_len": 100015,
+     "n_added_tokens": 15,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "deepseek-ai/deepseek-llm-7b-chat": {
+     "vocab_size": 100000,
+     "vocab_len": 100015,
+     "n_added_tokens": 15,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "google/gemma-2-9b": {
+     "vocab_size": 256000,
+     "vocab_len": 256000,
+     "n_added_tokens": 249,
+     "tokenizer_class": "GemmaTokenizer"
+    },
+    "google/gemma-2-9b-it": {
+     "vocab_size": 256000,
+     "vocab_len": 256000,
+     "n_added_tokens": 249,
+     "tokenizer_class": "GemmaTokenizer"
+    },
+    "google/recurrentgemma-9b": {
+     "vocab_size": 256000,
+     "vocab_len": 256000,
+     "n_added_tokens": 249,
+     "tokenizer_class": "GemmaTokenizer"
+    },
+    "google/recurrentgemma-9b-it": {
+     "vocab_size": 256000,
+     "vocab_len": 256000,
+     "n_added_tokens": 249,
+     "tokenizer_class": "GemmaTokenizer"
+    },
+    "huggyllama/llama-7b": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "LlamaTokenizer"
+    },
+    "ibm-granite/granite-3.0-8b-base": {
+     "vocab_size": 49152,
+     "vocab_len": 49152,
+     "n_added_tokens": 19,
+     "tokenizer_class": "GPT2Tokenizer"
+    },
+    "ibm-granite/granite-3.0-8b-instruct": {
+     "vocab_size": 49152,
+     "vocab_len": 49155,
+     "n_added_tokens": 22,
+     "tokenizer_class": "GPT2Tokenizer"
+    },
+    "inceptionai/jais-family-6p7b": {
+     "vocab_size": 84992,
+     "vocab_len": 84992,
+     "n_added_tokens": 1,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "inceptionai/jais-family-6p7b-chat": {
+     "vocab_size": 84992,
+     "vocab_len": 84992,
+     "n_added_tokens": 1,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "internlm/internlm2-base-7b": {
+     "vocab_size": 92544,
+     "vocab_len": 92544,
+     "n_added_tokens": 195,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "internlm/internlm2-chat-7b": {
+     "vocab_size": 92544,
+     "vocab_len": 92544,
+     "n_added_tokens": 9,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "internlm/internlm2-chat-7b-sft": {
+     "vocab_size": 92544,
+     "vocab_len": 92544,
+     "n_added_tokens": 9,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "kakaocorp/kanana-1.5-8b-base": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "kakaocorp/kanana-1.5-8b-instruct-2505": {
+     "vocab_size": 128000,
+     "vocab_len": 128259,
+     "n_added_tokens": 259,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "kakaocorp/kanana-2-3b-base": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "kakaocorp/kanana-2-3b-instruct": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "llm-jp/llm-jp-3-7.2b": {
+     "vocab_size": 99574,
+     "vocab_len": 99574,
+     "n_added_tokens": 8,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct2": {
+     "vocab_size": 99574,
+     "vocab_len": 99574,
+     "n_added_tokens": 8,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct3": {
+     "vocab_size": 99574,
+     "vocab_len": 99574,
+     "n_added_tokens": 8,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "lomahony/eleuther-pythia6.9b-hh-dpo": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "lomahony/eleuther-pythia6.9b-hh-sft": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "m-a-p/CT-LLM-Base": {
+     "vocab_size": 125696,
+     "vocab_len": 125699,
+     "n_added_tokens": 6,
+     "tokenizer_class": "BaichuanTokenizer"
+    },
+    "m-a-p/CT-LLM-SFT": {
+     "vocab_size": 125696,
+     "vocab_len": 125699,
+     "n_added_tokens": 6,
+     "tokenizer_class": "BaichuanTokenizer"
+    },
+    "m-a-p/CT-LLM-SFT-DPO": {
+     "vocab_size": 125696,
+     "vocab_len": 125699,
+     "n_added_tokens": 6,
+     "tokenizer_class": "BaichuanTokenizer"
+    },
+    "m-a-p/neo_7b": {
+     "vocab_size": 64000,
+     "vocab_len": 64005,
+     "n_added_tokens": 8,
+     "tokenizer_class": "NEOTokenizer"
+    },
+    "m-a-p/neo_7b_instruct_v0.1": {
+     "vocab_size": 64000,
+     "vocab_len": 64005,
+     "n_added_tokens": 8,
+     "tokenizer_class": "NEOTokenizer"
+    },
+    "m-a-p/neo_7b_sft_v0.1": {
+     "vocab_size": 64000,
+     "vocab_len": 64005,
+     "n_added_tokens": 8,
+     "tokenizer_class": "NEOTokenizer"
+    },
+    "meta-llama/Llama-3.1-70B": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "meta-llama/Llama-3.1-70B-Instruct": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "meta-llama/Llama-3.1-8B": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+     "vocab_size": 128000,
+     "vocab_len": 128256,
+     "n_added_tokens": 256,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "mistralai/Mistral-7B-v0.1": {
+     "vocab_size": 32000,
+     "vocab_len": 32000,
+     "n_added_tokens": 3,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "openGPT-X/Teuken-7B-base-v0.6": {
+     "vocab_size": 250680,
+     "vocab_len": 250680,
+     "n_added_tokens": 260,
+     "tokenizer_class": "SPTokenizer"
+    },
+    "openGPT-X/Teuken-7B-instruct-v0.6": {
+     "vocab_size": 250680,
+     "vocab_len": 250680,
+     "n_added_tokens": 260,
+     "tokenizer_class": "SPTokenizer"
+    },
+    "openbmb/MiniCPM5-1B": {
+     "vocab_size": 130072,
+     "vocab_len": 130560,
+     "n_added_tokens": 510,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "openbmb/MiniCPM5-1B-Base": {
+     "vocab_size": 130072,
+     "vocab_len": 130560,
+     "n_added_tokens": 510,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "openbmb/MiniCPM5-1B-SFT": {
+     "vocab_size": 130072,
+     "vocab_len": 130560,
+     "n_added_tokens": 510,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "openchat/openchat-3.5-0106": {
+     "vocab_size": 32000,
+     "vocab_len": 32002,
+     "n_added_tokens": 5,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "stabilityai/stablelm-2-1_6b": {
+     "vocab_size": 100289,
+     "vocab_len": 100289,
+     "n_added_tokens": 33,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "stabilityai/stablelm-2-1_6b-chat": {
+     "vocab_size": 100289,
+     "vocab_len": 100289,
+     "n_added_tokens": 33,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "stabilityai/stablelm-2-zephyr-1_6b": {
+     "vocab_size": 100289,
+     "vocab_len": 100289,
+     "n_added_tokens": 33,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+     "vocab_size": 65000,
+     "vocab_len": 65024,
+     "n_added_tokens": 36,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "teknium/OpenHermes-2.5-Mistral-7B": {
+     "vocab_size": 32000,
+     "vocab_len": 32002,
+     "n_added_tokens": 5,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon-H1-1.5B-Base": {
+     "vocab_size": 65536,
+     "vocab_len": 65536,
+     "n_added_tokens": 524,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon-H1-1.5B-Instruct": {
+     "vocab_size": 65536,
+     "vocab_len": 65537,
+     "n_added_tokens": 525,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon-H1-7B-Base": {
+     "vocab_size": 130048,
+     "vocab_len": 130048,
+     "n_added_tokens": 1036,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon-H1-7B-Instruct": {
+     "vocab_size": 130048,
+     "vocab_len": 130049,
+     "n_added_tokens": 1037,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-10B-Base": {
+     "vocab_size": 131072,
+     "vocab_len": 131072,
+     "n_added_tokens": 2024,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-10B-Instruct": {
+     "vocab_size": 131072,
+     "vocab_len": 131072,
+     "n_added_tokens": 2024,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-1B-Base": {
+     "vocab_size": 131072,
+     "vocab_len": 131072,
+     "n_added_tokens": 2024,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-1B-Instruct": {
+     "vocab_size": 131072,
+     "vocab_len": 131072,
+     "n_added_tokens": 2024,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-3B-Base": {
+     "vocab_size": 131072,
+     "vocab_len": 131072,
+     "n_added_tokens": 2024,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-3B-Instruct": {
+     "vocab_size": 131072,
+     "vocab_len": 131072,
+     "n_added_tokens": 2024,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-7B-Base": {
+     "vocab_size": 131072,
+     "vocab_len": 131072,
+     "n_added_tokens": 2024,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-7B-Instruct": {
+     "vocab_size": 131072,
+     "vocab_len": 131072,
+     "n_added_tokens": 2024,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-Mamba-7B-Base": {
+     "vocab_size": 65024,
+     "vocab_len": 65024,
+     "n_added_tokens": 12,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/Falcon3-Mamba-7B-Instruct": {
+     "vocab_size": 65024,
+     "vocab_len": 65024,
+     "n_added_tokens": 12,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/falcon-7b": {
+     "vocab_size": 65024,
+     "vocab_len": 65024,
+     "n_added_tokens": 12,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/falcon-7b-instruct": {
+     "vocab_size": 65024,
+     "vocab_len": 65024,
+     "n_added_tokens": 12,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/falcon-mamba-7b": {
+     "vocab_size": 65024,
+     "vocab_len": 65024,
+     "n_added_tokens": 12,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "tiiuae/falcon-mamba-7b-instruct": {
+     "vocab_size": 65024,
+     "vocab_len": 65024,
+     "n_added_tokens": 12,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Chat": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": {
+     "vocab_size": 50254,
+     "vocab_len": 50277,
+     "n_added_tokens": 25,
+     "tokenizer_class": "GPTNeoXTokenizer"
+    },
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+     "vocab_size": 65000,
+     "vocab_len": 65001,
+     "n_added_tokens": 13,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "zai-org/glm-4-9b-chat-hf": {
+     "vocab_size": 151329,
+     "vocab_len": 151343,
+     "n_added_tokens": 14,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "zai-org/glm-4-9b-hf": {
+     "vocab_size": 151329,
+     "vocab_len": 151343,
+     "n_added_tokens": 14,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "microsoft/phi-4": {
+     "vocab_size": 100352,
+     "vocab_len": 100352,
+     "n_added_tokens": 96,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "microsoft/phi-4-reasoning": {
+     "vocab_size": 100352,
+     "vocab_len": 100352,
+     "n_added_tokens": 96,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "allenai/Olmo-3-7B-Think": {
+     "vocab_size": 100278,
+     "vocab_len": 100278,
+     "n_added_tokens": 22,
+     "tokenizer_class": "TokenizersBackend"
+    },
+    "THUDM/glm-4-9b-hf": {
+     "vocab_size": 151329,
+     "vocab_len": 151343,
+     "n_added_tokens": 14,
+     "tokenizer_class": "TokenizersBackend"
+    }
+   }
+  },
+  "revision_ladders": {
+   "measured_by": "HuggingFace branches+tags survey (archive)",
+   "measured_at": "2026-08-10T20:00:40",
+   "n": 32,
+   "models": {
+    "allenai/Olmo-Hybrid-7B": 1497,
+    "allenai/Olmo-3-1025-7B": 1487,
+    "allenai/Olmo-3-1125-32B": 719,
+    "LLM360/Amber": 360,
+    "allenai/OLMo-2-0425-1B": 268,
+    "EleutherAI/pythia-2.8b": 155,
+    "EleutherAI/pythia-6.9b": 155,
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": 133,
+    "allenai/Llama-3.1-Tulu-3.1-8B": 62,
+    "allenai/OLMoE-1B-7B-0125-Instruct": 45,
+    "allenai/Olmo-3-7B-Think-SFT": 44,
+    "OpenLLM-France/Lucie-7B": 42,
+    "allenai/OLMoE-1B-7B-0125": 16,
+    "allenai/OLMo-2-0425-1B-Instruct": 14,
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": 12,
+    "allenai/Olmo-3-7B-Instruct": 9,
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": 6,
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-hf": 5,
+    "BSC-LT/salamandra-7b-instruct": 4,
+    "BSC-LT/salamandra-7b": 3,
+    "LLM360/AmberSafe": 3,
+    "Zyphra/Zamba2-7B": 3,
+    "bigscience/bloom-7b1": 3,
+    "internlm/internlm2-chat-7b": 3,
+    "stabilityai/stablelm-2-1_6b": 3,
+    "LLM360/AmberChat": 2,
+    "Zyphra/Zamba2-7B-Instruct": 2,
+    "internlm/internlm2-base-7b": 2,
+    "internlm/internlm2-chat-7b-sft": 2,
+    "mistralai/Mistral-7B-v0.1": 2,
+    "togethercomputer/RedPajama-INCITE-7B-Chat": 2,
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": 2
+   }
+  }
+ }
+}
