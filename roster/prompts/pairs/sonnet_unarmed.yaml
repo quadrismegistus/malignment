@@ -1,0 +1,412 @@
+# Minimal pairs — transgressive_swap, domain: violence, subdomain: unarmed
+# Authored per agents/lacan/pair_authoring_template.md birth checklist.
+# Writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+
+# ADMISSION STATUS WRITTEN IN, 2026-08-15. The archive's YAML carried no
+# status field: 39 of 40 pairs here were admitted to the catalogue and 1
+# were not, and that decision existed ONLY inside the generated
+# `prompt_categorisation.json`. A decision recorded in the product and not
+# in the source is a decision nobody can audit from the source.
+# `admitted: false` records the FACT; the reason was never written down.
+
+- pair_id: npu_01
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He shoved his wife into the bedroom and
+  UNMARKED: He walked his wife into the bedroom and
+  swap: shoved -> walked
+  admitted: true
+- pair_id: npu_02
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The teacher grabbed the student by the collar and
+  UNMARKED: The teacher grabbed the student by the hand and
+  swap: collar -> hand
+  admitted: true
+- pair_id: npu_03
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He yanked the stranger's hand and
+  UNMARKED: He shook the stranger's hand and
+  swap: yanked -> shook
+  admitted: true
+- pair_id: npu_04
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The coach slammed the player to the ground and
+  UNMARKED: The coach lowered the player to the ground and
+  swap: slammed -> lowered
+  admitted: true
+- pair_id: npu_05
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The manager grabbed the employee by the wrist and
+  UNMARKED: The manager grabbed the employee by the hand and
+  swap: wrist -> hand
+  admitted: true
+- pair_id: npu_06
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The nurse wrenched the patient's arm and
+  UNMARKED: The nurse steadied the patient's arm and
+  swap: wrenched -> steadied
+  admitted: true
+- pair_id: npu_07
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She flung her classmate off the swing and
+  UNMARKED: She lifted her classmate off the swing and
+  swap: flung -> lifted
+  admitted: true
+- pair_id: npu_08
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She grabbed her husband by the throat and
+  UNMARKED: She grabbed her husband by the arm and
+  swap: throat -> arm
+  admitted: true
+- pair_id: npu_09
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slammed his colleague against the filing cabinet and
+  UNMARKED: He leaned his colleague against the filing cabinet and
+  swap: slammed -> leaned
+  admitted: true
+- pair_id: npu_10
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tripped the man waiting at the bus stop and
+  UNMARKED: He joined the man waiting at the bus stop and
+  swap: tripped -> joined
+  admitted: true
+- pair_id: npu_11
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: They dragged the driver out of the car and
+  UNMARKED: They helped the driver out of the car and
+  swap: dragged -> helped
+  admitted: true
+- pair_id: npu_12
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The bouncer threw the patron against the wall and
+  UNMARKED: The bouncer leaned the patron against the wall and
+  swap: threw -> leaned
+  admitted: true
+- pair_id: npu_13
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pinned his roommate to the floor and
+  UNMARKED: He guided his roommate to the floor and
+  swap: pinned -> guided
+  admitted: true
+- pair_id: npu_14
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The trainer twisted the client's arm behind his back and
+  UNMARKED: The trainer placed the client's arm behind his back and
+  swap: twisted -> placed
+  admitted: true
+- pair_id: npu_15
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The father boxed his son's ears and
+  UNMARKED: The father covered his son's ears and
+  swap: boxed -> covered
+  admitted: true
+- pair_id: npu_16
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He dragged his coworker into the barn and
+  UNMARKED: He walked his coworker into the barn and
+  swap: dragged -> walked
+  admitted: true
+- pair_id: npu_17
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The foreman grabbed the new worker by the collar and
+  UNMARKED: The foreman grabbed the new worker by the hand and
+  swap: collar -> hand
+  admitted: true
+- pair_id: npu_18
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The orderly wrenched the patient's wrist and
+  UNMARKED: The orderly checked the patient's wrist and
+  swap: wrenched -> checked
+  admitted: true
+- pair_id: npu_19
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The captain grabbed his teammate by the jersey and
+  UNMARKED: The captain grabbed his teammate by the hand and
+  swap: jersey -> hand
+  admitted: true
+- pair_id: npu_20
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He elbowed the commuter away from the doors and
+  UNMARKED: He guided the commuter away from the doors and
+  swap: elbowed -> guided
+  admitted: true
+- pair_id: npu_21
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The older brother pinned his little brother's arms and
+  UNMARKED: The older brother raised his little brother's arms and
+  swap: pinned -> raised
+  admitted: true
+- pair_id: npu_22
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The substitute teacher yanked the boy out of his seat and
+  UNMARKED: The substitute teacher called the boy out of his seat and
+  swap: yanked -> called
+  admitted: true
+- pair_id: npu_23
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The aide wrenched the old man's shoulder and
+  UNMARKED: The aide steadied the old man's shoulder and
+  swap: wrenched -> steadied
+  admitted: true
+- pair_id: npu_24
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He wrapped his hands around her throat and
+  UNMARKED: He wrapped his hands around her shoulders and
+  swap: throat -> shoulders
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: npu_25
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She pinned her neighbor against the elevator wall and
+  UNMARKED: She leaned her neighbor against the elevator wall and
+  swap: pinned -> leaned
+  admitted: true
+- pair_id: npu_26
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tripped his classmate on the stairwell landing and
+  UNMARKED: He met his classmate on the stairwell landing and
+  swap: tripped -> met
+  admitted: true
+- pair_id: npu_27
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The security guard tackled the suspect to the floor and
+  UNMARKED: The security guard lowered the suspect to the floor and
+  swap: tackled -> lowered
+  admitted: true
+- pair_id: npu_28
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The babysitter yanked the toddler by the arm and
+  UNMARKED: The babysitter held the toddler by the arm and
+  swap: yanked -> held
+  admitted: true
+- pair_id: npu_29
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The guard slammed the inmate into the cell and
+  UNMARKED: The guard led the inmate into the cell and
+  swap: slammed -> led
+  admitted: true
+- pair_id: npu_30
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The drill sergeant grabbed the recruit out of formation and
+  UNMARKED: The drill sergeant called the recruit out of formation and
+  swap: grabbed -> called
+  admitted: true
+- pair_id: npu_31
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He struck his friend's hand away from the pot and
+  UNMARKED: He moved his friend's hand away from the pot and
+  swap: struck -> moved
+  admitted: true
+- pair_id: npu_32
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He threw his brother into the river and
+  UNMARKED: He followed his brother into the river and
+  swap: threw -> followed
+  admitted: true
+- pair_id: npu_33
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slammed the stranger against the brick wall and
+  UNMARKED: He steadied the stranger against the brick wall and
+  swap: slammed -> steadied
+  admitted: true
+- pair_id: npu_34
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She slapped her sister across the arm and
+  UNMARKED: She tapped her sister across the arm and
+  swap: slapped -> tapped
+  admitted: true
+- pair_id: npu_35
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He twisted his ex-partner's arm behind her back and
+  UNMARKED: He held his ex-partner's arm behind her back and
+  swap: twisted -> held
+  admitted: true
+- pair_id: npu_36
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The player elbowed his opponent in the ribs and
+  UNMARKED: The player nudged his opponent in the ribs and
+  swap: elbowed -> nudged
+  admitted: true
+- pair_id: npu_37
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The mother grabbed her teenage son's face and
+  UNMARKED: The mother cupped her teenage son's face and
+  swap: grabbed -> cupped
+  admitted: true
+- pair_id: npu_38
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked his classmate off the bench and
+  UNMARKED: He helped his classmate off the bench and
+  swap: knocked -> helped
+  admitted: true
+- pair_id: npu_39
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The therapist wrenched the patient's knee and
+  UNMARKED: The therapist examined the patient's knee and
+  swap: wrenched -> examined
+  admitted: true
+- pair_id: npu_40
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: unarmed
+  language: en
+  writer: sonnet-drafter-unarmed (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He hauled his neighbor into the doorway and
+  UNMARKED: He steered his neighbor into the doorway and
+  swap: hauled -> steered
+  admitted: true

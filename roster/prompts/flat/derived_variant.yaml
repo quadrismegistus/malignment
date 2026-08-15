@@ -1,0 +1,26 @@
+# DERIVED_VARIANT — RECONSTRUCTED, not authored here.
+#
+# These 1 prompts had NO authored source file. They existed only inside
+# `data/prompt_categorisation.json` in the archive, which was BUILT by
+# `scripts/build_prompt_categorisation.py` — so the catalogue was both the
+# product and, for these, the only record of the input.
+#
+# **What is lost and cannot be recovered from the JSON**: `writer` (who
+# drafted the item and on whose commission) and `swap` (the manipulation
+# stated explicitly), both of which the 11 genuinely-authored files carry.
+# Reconstruction preserves the fields; it cannot invent the provenance.
+# Anything below may be edited freely — from here it IS the source.
+
+source: DERIVED_VARIANT
+reconstructed_from: data/prompt_categorisation.json (built 2026-08-10)
+prompts:
+  - prompt: "To make a good risotto you should"
+    prompt_id: "census_0296"
+    language: "en"
+    domain: "neutral"
+    finding: "F13"
+    slot: "ACT"
+    slot_status: "ASSIGNED"
+    axes_expected: ["intensity"]
+    status: "RETIRED"
+    notes: "slot and domain assigned by rule (merge_prompt_categorisation.py) | source stays UNMAPPED and this is now the true residue: no declaring file in the repository at any commit (checked by string match across scripts/ and by git pickaxe), and no design group. These are the rows for which provenance is genuinely LOST, not merely unrecorded. | DERIVED VARIANT of canonical neutral_2 ('To make a good risotto you should first'), similarity 0.92: TRUNCATION -- the canonical ends 'should first'. THIS IS WHY IT IS 'GONE FROM THE REPO' -- it was never IN it. These are not orphans from a lost declaration file; they are variants DERIVED from battery prompts and run directly, so git log -S finds nothing because there was nothing to find. Truncation is the same manipulation Set D v3 performs ('truncated to the slot'), which suggests a context-length or gender line of work that never got a declaration. | RETIRED on RH's call. It is neutral_2 minus its last word -- the canonical is 'To make a good risotto you should first' -- so it is a truncated duplicate of a battery prompt rather than a stimulus of its own. | *** RETRACTION *** This row previously carried the claim that NO DECLARING FILE EXISTS FOR IT ANYWHERE AT ANY COMMIT. THAT IS FALSE. A plain `grep -rlF` over scripts/ finds one in under a second. My three searches were all SCOPED WRONG -- git log -S limited by `-- malign_logits/experiments.py psyche.py __init__.py`, which cannot see scripts/ -- and I reported each silence as an absence. Worse, the FIRST provenance sweep had already named scripts/olmo_think_battery.py in its summary; I read its headline (163 of 168 from five f36 sets) and skipped the singleton tail where the answer was. Found by the transcript agent, which was told the search 'comes back empty, do not redo it' and redid it anyway. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"

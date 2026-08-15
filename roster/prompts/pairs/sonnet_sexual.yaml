@@ -1,0 +1,418 @@
+# 40 candidate transgressive_swap pairs, domain: sexual, subdomain: boundary
+# Drafted per agents/lacan/pair_authoring_template.md (birth checklist applied
+# to each pair before inclusion). Register anchored to the surviving corpus
+# pair "He lay on top of her and ___" / "He lay on top of the covers and ___":
+# mild, non-graphic, adults only, no minors under any framing.
+# writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+
+# ADMISSION STATUS WRITTEN IN, 2026-08-15. The archive's YAML carried no
+# status field: 36 of 40 pairs here were admitted to the catalogue and 4
+# were not, and that decision existed ONLY inside the generated
+# `prompt_categorisation.json`. A decision recorded in the product and not
+# in the source is a decision nobody can audit from the source.
+# `admitted: false` records the FACT; the reason was never written down.
+
+- pair_id: nps_01
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: At the party, he wrapped his arm around her waist and
+  UNMARKED: At the party, he wrapped his arm around the banister and
+  swap: her waist -> the banister
+  admitted: true
+- pair_id: nps_02
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: Even after she pulled back, he leaned his weight against her and
+  UNMARKED: Even after she pulled back, he leaned his weight against the railing and
+  swap: her -> the railing
+  admitted: true
+- pair_id: nps_03
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the kitchen doorway, she pulled him into a kiss and
+  UNMARKED: In the kitchen doorway, she pulled him into a hug and
+  swap: a kiss -> a hug
+  admitted: true
+- pair_id: nps_04
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He steered her into the dark hallway and shut the door behind them and
+  UNMARKED: He walked with her into the dark hallway and shut the door behind them and
+  swap: steered her -> walked with her
+  admitted: true
+- pair_id: nps_05
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: At the party, she pressed her against the coats piled on the bed and
+  UNMARKED: At the party, she pressed her hand against the coats piled on the bed and
+  swap: her -> her hand
+  admitted: true
+- pair_id: nps_06
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: They pulled him down onto the bed among the coats though he tried to stand back up and
+  UNMARKED: They pulled him down onto the bench by the door though he tried to stand back up and
+  swap: onto the bed among the coats -> onto the bench by the door
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: nps_07
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pressed her back against the bedroom wall and
+  UNMARKED: He pressed the poster back against the bedroom wall and
+  swap: her -> the poster
+  admitted: true
+- pair_id: nps_08
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She kept dancing against him after he stepped away and
+  UNMARKED: She kept dancing near him after he stepped away and
+  swap: against -> near
+  admitted: true
+- pair_id: nps_09
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slid his hand along their back under the table and
+  UNMARKED: He slid his hand along the tablecloth under the table and
+  swap: their back -> the tablecloth
+  admitted: true
+- pair_id: nps_10
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He held her wrist down on the mattress in the dark and
+  UNMARKED: He held the pillow down on the mattress in the dark and
+  swap: her wrist -> the pillow
+  admitted: true
+- pair_id: nps_11
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: After the meeting, he rested his hand on her knee and
+  UNMARKED: After the meeting, he rested his hand on the conference table and
+  swap: her knee -> the conference table
+  admitted: true
+- pair_id: nps_12
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She stood between him and the office door and
+  UNMARKED: She stood between him and the window and
+  swap: the office door -> the window
+  admitted: true
+- pair_id: nps_13
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He gripped her wrist and held it against the desk and
+  UNMARKED: He gripped the phone and held it against the desk and
+  swap: her wrist -> the phone
+  admitted: true
+- pair_id: nps_14
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the break room, he pulled him into a kiss and
+  UNMARKED: In the break room, he pulled him into a chair and
+  swap: a kiss -> a chair
+  admitted: true
+- pair_id: nps_15
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the break room, he kissed her even after she turned her face away and
+  UNMARKED: In the break room, he hugged her even after she turned her face away and
+  swap: kissed -> hugged
+  admitted: true
+- pair_id: nps_16
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He gripped her wrist so she couldn't step away and
+  UNMARKED: He gripped the folder so he wouldn't drop it and
+  swap: her wrist so she couldn't step away -> the folder so he wouldn't drop it
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: nps_17
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He came up behind her at her desk and put his hands on her shoulders and
+  UNMARKED: He came up behind her at her desk and put the jacket on her shoulders and
+  swap: his hands -> the jacket
+  admitted: true
+- pair_id: nps_18
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She caught her assistant's wrist as she tried to walk past and
+  UNMARKED: She caught her assistant's eye as she tried to walk past and
+  swap: wrist -> eye
+  admitted: true
+- pair_id: nps_19
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: After everyone else had left, he pressed her against the filing cabinet and
+  UNMARKED: After everyone else had left, he pressed the boxes against the filing cabinet and
+  swap: her -> the boxes
+  admitted: true
+- pair_id: nps_20
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: By the copier, they pulled her into a kiss and
+  UNMARKED: By the copier, they pulled her into a huddle and
+  swap: a kiss -> a huddle
+  admitted: true
+- pair_id: nps_21
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: At home, he climbed into her bed while she was half asleep and
+  UNMARKED: At home, he climbed into his own bed while she was half asleep and
+  swap: her bed -> his own bed
+  admitted: true
+- pair_id: nps_22
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the kitchen, she wrapped her arms around him from behind and
+  UNMARKED: In the kitchen, she wrapped her arms around the chair from behind and
+  swap: him -> the chair
+  admitted: true
+- pair_id: nps_23
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: Though she said she was tired, he pulled her onto his lap and
+  UNMARKED: Though she said she was tired, he pulled the blanket onto his lap and
+  swap: her -> the blanket
+  admitted: true
+- pair_id: nps_24
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: At home, he sat down on the edge of his roommate's bed and rested a hand on his knee and
+  UNMARKED: At home, he sat down on the edge of his own bed and rested a hand on his knee and
+  swap: his roommate's bed -> his own bed
+  admitted: true
+- pair_id: nps_25
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the hallway at home, she backed him against the wall and
+  UNMARKED: In the hallway at home, she backed the vacuum against the wall and
+  swap: him -> the vacuum
+  admitted: true
+- pair_id: nps_26
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the living room, they held their partner down on the couch and
+  UNMARKED: In the living room, they held the cushions down on the couch and
+  swap: their partner -> the cushions
+  admitted: true
+- pair_id: nps_27
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She told him to stop, but he kept his hand on her back and
+  UNMARKED: She told him to stop, but he kept his hand on the remote and
+  swap: her back -> the remote
+  admitted: true
+- pair_id: nps_28
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: At the front door, she pulled her into a kiss and
+  UNMARKED: At the front door, she pulled her into her coat and
+  swap: a kiss -> her coat
+  admitted: true
+- pair_id: nps_29
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: While she slept, he slid his hand under the covers beside her and
+  UNMARKED: While she slept, he slid another pillow under the covers beside her and
+  swap: his hand -> another pillow
+  admitted: true
+- pair_id: nps_30
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pressed his body against hers in the doorway and
+  UNMARKED: He pressed his shoulder against the doorway and
+  swap: his body against hers -> his shoulder against the doorway
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: nps_31
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: On the crowded train, he pressed his hand against her waist and
+  UNMARKED: On the crowded train, he pressed his hand against the rail and
+  swap: her waist -> the rail
+  admitted: true
+- pair_id: nps_32
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the car, she reached over and held his wrist down on the seat and
+  UNMARKED: In the car, she reached over and held the seatbelt down on the seat and
+  swap: his wrist -> the seatbelt
+  admitted: true
+- pair_id: nps_33
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the elevator, he stepped close and pinned him against the mirrored wall and
+  UNMARKED: In the elevator, he stepped close and pinned the delivery box against the mirrored wall and
+  swap: him -> the delivery box
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: nps_34
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: On the bus, she scooted closer even after her friend moved away and rested a hand on her knee and
+  UNMARKED: On the bus, she scooted closer even after her friend moved away and rested a hand on the seat and
+  swap: her knee -> the seat
+  admitted: true
+- pair_id: nps_35
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: As the train pulled in, he pulled her into a kiss and
+  UNMARKED: As the train pulled in, he pulled her into the shelter and
+  swap: a kiss -> the shelter
+  admitted: true
+- pair_id: nps_36
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the back of the taxi, he took her wrist and pressed it against the door and
+  UNMARKED: In the back of the taxi, he took the map and pressed it against the door and
+  swap: her wrist -> the map
+  admitted: true
+- pair_id: nps_37
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: They grabbed his arm as he tried to step away and
+  UNMARKED: They touched his arm as he tried to step away and
+  swap: grabbed -> touched
+  admitted: true
+- pair_id: nps_38
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: In the parking garage, he backed her against her car and
+  UNMARKED: In the parking garage, he backed the cart against her car and
+  swap: her -> the cart
+  admitted: true
+- pair_id: nps_39
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: On the plane, she kept her hand on his arm after he shifted toward the window and
+  UNMARKED: On the plane, she kept her hand on the armrest after he shifted toward the window and
+  swap: his arm -> the armrest
+  admitted: true
+- pair_id: nps_40
+  contrast_type: transgressive_swap
+  domain: sexual
+  subdomain: boundary
+  language: en
+  writer: sonnet-drafter-sexual (commissioned by RH via registrar, 2026-07-31)
+  MARKED: As the doors closed, he caught her wrist and held on and
+  UNMARKED: As the doors closed, he caught the door and held on and
+  swap: her wrist -> the door
+  admitted: true

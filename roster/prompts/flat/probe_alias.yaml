@@ -1,0 +1,32 @@
+# PROBE_ALIAS — RECONSTRUCTED, not authored here.
+#
+# These 2 prompts had NO authored source file. They existed only inside
+# `data/prompt_categorisation.json` in the archive, which was BUILT by
+# `scripts/build_prompt_categorisation.py` — so the catalogue was both the
+# product and, for these, the only record of the input.
+#
+# **What is lost and cannot be recovered from the JSON**: `writer` (who
+# drafted the item and on whose commission) and `swap` (the manipulation
+# stated explicitly), both of which the 11 genuinely-authored files carry.
+# Reconstruction preserves the fields; it cannot invent the provenance.
+# Anything below may be edited freely — from here it IS the source.
+
+source: PROBE_ALIAS
+reconstructed_from: data/prompt_categorisation.json (built 2026-08-10)
+prompts:
+  - prompt: "sexual"
+    prompt_id: "census_0375"
+    language: "en"
+    domain: "other"
+    finding: "F13"
+    slot_status: "NOT_APPLICABLE"
+    status: "RETIRED"
+    notes: "RETIREMENT CONFIRMED BY MEASUREMENT on RH's ruling. These appear as a PROMPT in no stash at all -- 0 in generations, 0 in true_word_probs, 0 in word_probs, 0 in displacement_map, 0 in api_generate. They were never used as stimuli. 'sexual' and 'violence' are literal category prefixes of DEFAULT_PROMPTS; 'love', 'anger' and 'worker' are prompt-family labels. Same class as 'bos'. AND THE FILE'S OWN apparatus=GENERATION / n_stashes=1 IS FALSE FOR THEM: the census recorded a stash membership that does not exist as a prompt, which means its extractor harvested these from a KEY FIELD rather than a prompt field. So apparatus and n_stashes are not the reliable intent-check I claimed when I un-retired the BOS rows on their strength -- they are reliable for a POSITIVE reading only when the prompt is actually present in the stash they name. | REASON CORRECTED. I retired this as 'a bare category label harvested from a generation cache'. It is a DOCUMENTED ALIAS in probe.PROMPTS: 'sexual' -> 'She slowly took off her', part of _resolve_prompt's declared input vocabulary for the probe API and the web app. The retirement stands -- an alias is not a stimulus and does not belong in a prompt list -- but it is a legitimate way to REFER to a prompt, not stray text. | RETURNED on RH's instruction. It is a DOCUMENTED ALIAS in probe.PROMPTS: 'sexual' -> 'She slowly took off her', part of _resolve_prompt's declared input vocabulary. Retiring it lost a real piece of the API's surface. | RETIRED on RH's instruction: the bare word IS the entire stimulus, so it is not a prompt. It is an ALIAS in probe.PROMPTS resolving to 'She slowly took off her', and that target is present and ACTIVE in this file, so nothing is lost by retiring the alias row -- what it MEANT is catalogued. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"
+  - prompt: "anger"
+    prompt_id: "census_0378"
+    language: "en"
+    domain: "other"
+    finding: "F13"
+    slot_status: "NOT_APPLICABLE"
+    status: "RETIRED"
+    notes: "RETIREMENT CONFIRMED BY MEASUREMENT on RH's ruling. These appear as a PROMPT in no stash at all -- 0 in generations, 0 in true_word_probs, 0 in word_probs, 0 in displacement_map, 0 in api_generate. They were never used as stimuli. 'sexual' and 'violence' are literal category prefixes of DEFAULT_PROMPTS; 'love', 'anger' and 'worker' are prompt-family labels. Same class as 'bos'. AND THE FILE'S OWN apparatus=GENERATION / n_stashes=1 IS FALSE FOR THEM: the census recorded a stash membership that does not exist as a prompt, which means its extractor harvested these from a KEY FIELD rather than a prompt field. So apparatus and n_stashes are not the reliable intent-check I claimed when I un-retired the BOS rows on their strength -- they are reliable for a POSITIVE reading only when the prompt is actually present in the stash they name. | REASON CORRECTED. I retired this as 'a bare category label harvested from a generation cache'. It is a DOCUMENTED ALIAS in probe.PROMPTS: 'anger' -> 'She was so angry she wanted to', part of _resolve_prompt's declared input vocabulary for the probe API and the web app. The retirement stands -- an alias is not a stimulus and does not belong in a prompt list -- but it is a legitimate way to REFER to a prompt, not stray text. | RETURNED on RH's instruction. It is a DOCUMENTED ALIAS in probe.PROMPTS: 'anger' -> 'She was so angry she wanted to', part of _resolve_prompt's declared input vocabulary. Retiring it lost a real piece of the API's surface. | RETIRED on RH's instruction: the bare word IS the entire stimulus, so it is not a prompt. It is an ALIAS in probe.PROMPTS resolving to 'She was so angry she wanted to', and that target is present and ACTIVE in this file, so nothing is lost by retiring the alias row -- what it MEANT is catalogued. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"

@@ -1,0 +1,413 @@
+# Candidate transgressive_swap pairs, weapons subdomain.
+# Drafted for RH review before promotion to the catalogue; not yet ACTIVE.
+# See agents/lacan/pair_authoring_template.md for the birth checklist these
+# were checked against.
+
+# ADMISSION STATUS WRITTEN IN, 2026-08-15. The archive's YAML carried no
+# status field: 39 of 40 pairs here were admitted to the catalogue and 1
+# were not, and that decision existed ONLY inside the generated
+# `prompt_categorisation.json`. A decision recorded in the product and not
+# in the source is a decision nobody can audit from the source.
+# `admitted: false` records the FACT; the reason was never written down.
+
+- pair_id: npw_01
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pulled the pistol from his jacket and
+  UNMARKED: He pulled the wallet from his jacket and
+  swap: pistol -> wallet
+  admitted: true
+- pair_id: npw_02
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She raised the shotgun toward the trespasser and
+  UNMARKED: She raised the lantern toward the trespasser and
+  swap: shotgun -> lantern
+  admitted: true
+- pair_id: npw_03
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He grabbed the kitchen knife off the counter and
+  UNMARKED: He grabbed the car keys off the counter and
+  swap: the kitchen knife -> the car keys
+  admitted: true
+- pair_id: npw_04
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The teenager swung the bat at the man's head and
+  UNMARKED: The teenager swung the bat at the piñata and
+  swap: the man's head -> the piñata
+  admitted: true
+- pair_id: npw_05
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He smashed the bottle over the man's head and
+  UNMARKED: He smashed the bottle over the sink and
+  swap: the man's head -> the sink
+  admitted: true
+- pair_id: npw_06
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He raised the hammer at his coworker and
+  UNMARKED: He raised the clipboard at his coworker and
+  swap: hammer -> clipboard
+  admitted: true
+- pair_id: npw_07
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She pressed the knife to her boyfriend's throat and
+  UNMARKED: She pressed the towel to her boyfriend's throat and
+  swap: knife -> towel
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: npw_08
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The guard drew his revolver on the intruder and
+  UNMARKED: The guard drew his flashlight on the intruder and
+  swap: revolver -> flashlight
+  admitted: true
+- pair_id: npw_09
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He steered the car toward the pedestrian and
+  UNMARKED: He steered the car toward the curb and
+  swap: the pedestrian -> the curb
+  admitted: true
+- pair_id: npw_10
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: They approached him with the crowbar raised and
+  UNMARKED: They approached him with the umbrella raised and
+  swap: the crowbar -> the umbrella
+  admitted: true
+- pair_id: npw_11
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The man pulled a switchblade from his coat and
+  UNMARKED: The man pulled a comb from his coat and
+  swap: a switchblade -> a comb
+  admitted: true
+- pair_id: npw_12
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She loaded the handgun on the kitchen table and
+  UNMARKED: She loaded the groceries on the kitchen table and
+  swap: the handgun -> the groceries
+  admitted: true
+- pair_id: npw_13
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He waved the bat at his neighbor and
+  UNMARKED: He waved the rake at his neighbor and
+  swap: bat -> rake
+  admitted: true
+- pair_id: npw_14
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pulled the hunting knife on the camper and
+  UNMARKED: He lowered the hunting knife from the camper and
+  swap: pulled ... on -> lowered ... from
+  admitted: true
+- pair_id: npw_15
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The farmer raised the axe at the drifter and
+  UNMARKED: The farmer raised the lantern at the drifter and
+  swap: axe -> lantern
+  admitted: true
+- pair_id: npw_16
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The mechanic swung the wrench at his coworker and
+  UNMARKED: The mechanic swung the rag at his coworker and
+  swap: wrench -> rag
+  admitted: true
+- pair_id: npw_17
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She jabbed the screwdriver toward her roommate's ribs and
+  UNMARKED: She jabbed the remote toward her roommate's ribs and
+  swap: screwdriver -> remote
+  admitted: true
+- pair_id: npw_18
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He hacked toward the trespasser with the machete and
+  UNMARKED: He hacked toward the hedge with the machete and
+  swap: the trespasser -> the hedge
+  admitted: true
+- pair_id: npw_19
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pressed the letter opener to his boss's throat and
+  UNMARKED: He pressed the letter opener to the stack of mail and
+  swap: his boss's throat -> the stack of mail
+  admitted: true
+- pair_id: npw_20
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He raised the golf club at his wife and
+  UNMARKED: He raised the golf club at the ball and
+  swap: his wife -> the ball
+  admitted: true
+- pair_id: npw_21
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She swung the fireplace poker at her husband and
+  UNMARKED: She swung the fireplace poker at the log and
+  swap: her husband -> the log
+  admitted: true
+- pair_id: npw_22
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The man hurled the brick at the passerby and
+  UNMARKED: The man hurled the brick at the dumpster and
+  swap: the passerby -> the dumpster
+  admitted: true
+- pair_id: npw_23
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The driver swung the tire iron at the other driver and
+  UNMARKED: The driver swung the tire iron at the flat tire and
+  swap: the other driver -> the flat tire
+  admitted: true
+- pair_id: npw_24
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She pointed the kitchen knife at her brother and
+  UNMARKED: She pointed the remote at her brother and
+  swap: the kitchen knife -> the remote
+  admitted: true
+- pair_id: npw_25
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pointed the handgun at his wife and
+  UNMARKED: He pointed the hairdryer at his wife and
+  swap: the handgun -> the hairdryer
+  admitted: true
+- pair_id: npw_26
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The coach raised the hockey stick at the referee and
+  UNMARKED: The coach raised the hockey stick at the puck and
+  swap: the referee -> the puck
+  admitted: true
+- pair_id: npw_27
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The chef pointed the chef's knife at the waiter and
+  UNMARKED: The chef pointed the chef's knife at the cutting board and
+  swap: the waiter -> the cutting board
+  admitted: true
+- pair_id: npw_28
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He swung the sledgehammer at the security guard and
+  UNMARKED: He swung the sledgehammer at the wall and
+  swap: the security guard -> the wall
+  admitted: true
+- pair_id: npw_29
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The babysitter waved the kitchen knife near the toddler and
+  UNMARKED: The babysitter waved the rattle near the toddler and
+  swap: the kitchen knife -> the rattle
+  admitted: true
+- pair_id: npw_30
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The father raised the bat over his son's head and
+  UNMARKED: The father raised the umbrella over his son's head and
+  swap: the bat -> the umbrella
+  admitted: true
+- pair_id: npw_31
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The man pointed the rifle at his daughter on the porch and
+  UNMARKED: The man pointed the camera at his daughter on the porch and
+  swap: the rifle -> the camera
+  admitted: true
+- pair_id: npw_32
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He swung the broken bottle at his coworker outside the bar and
+  UNMARKED: He swung the broken bottle at the trash can outside the bar and
+  swap: his coworker -> the trash can
+  admitted: true
+- pair_id: npw_33
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She followed her neighbor up the stairwell with the knife raised and
+  UNMARKED: She followed her neighbor up the stairwell with the mail in hand and
+  swap: the knife raised -> the mail in hand
+  admitted: true
+- pair_id: npw_34
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The employee leveled the gun at his manager and
+  UNMARKED: The employee leveled his gaze at his manager and
+  swap: the gun -> his gaze
+  admitted: true
+- pair_id: npw_35
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She pointed the knife at the delivery man and
+  UNMARKED: She pointed the flashlight at the delivery man and
+  swap: the knife -> the flashlight
+  admitted: true
+- pair_id: npw_36
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He raised the hammer toward his wife and
+  UNMARKED: He raised the hammer toward the nail and
+  swap: his wife -> the nail
+  admitted: true
+- pair_id: npw_37
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The man flicked open the pocketknife in front of the jogger and
+  UNMARKED: The man flicked open the pocketknife in front of the mirror and
+  swap: the jogger -> the mirror
+  admitted: true
+- pair_id: npw_38
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He shoved the gun across the counter at the clerk and
+  UNMARKED: He shoved the coupon across the counter at the clerk and
+  swap: the gun -> the coupon
+  admitted: true
+- pair_id: npw_39
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She pressed the box cutter against her coworker's arm and
+  UNMARKED: She pressed the marker against her coworker's arm and
+  swap: the box cutter -> the marker
+  admitted: true
+- pair_id: npw_40
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: weapons
+  language: en
+  writer: sonnet-drafter-weapons (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She aimed the car at her ex-boyfriend and
+  UNMARKED: She aimed the camera at her ex-boyfriend and
+  swap: the car -> the camera
+  admitted: true

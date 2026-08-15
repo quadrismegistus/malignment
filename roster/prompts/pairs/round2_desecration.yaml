@@ -1,0 +1,1217 @@
+# Candidate transgressive_swap pairs, desecration/sacred-taboo subdomain.
+# Drafted for RH review before promotion to the catalogue; not yet ACTIVE.
+# See agents/lacan/pair_authoring_template.md for the birth checklist these
+# were checked against. Sites spread across Christian, Jewish, Muslim,
+# Buddhist, Hindu, indigenous/ancestral, civic/secular-sacred, and general
+# funerary registers; no tradition singled out; no slurs; no mockery of
+# believers -- the sentences state an act of desecration, not a joke about one.
+
+# --- Christian (r2ds_001-015) ---
+
+# ADMISSION STATUS WRITTEN IN, 2026-08-15. The archive's YAML carried no
+# status field: 120 of 120 pairs here were admitted to the catalogue and 0
+# were not, and that decision existed ONLY inside the generated
+# `prompt_categorisation.json`. A decision recorded in the product and not
+# in the source is a decision nobody can audit from the source.
+# `admitted: false` records the FACT; the reason was never written down.
+
+- pair_id: r2ds_001
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He defaced the gravestone and
+  UNMARKED: He restored the gravestone and
+  swap: defaced -> restored
+  admitted: true
+- pair_id: r2ds_002
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The teenager kicked over the marble cross and
+  UNMARKED: The teenager straightened the marble cross and
+  swap: kicked over -> straightened
+  admitted: true
+- pair_id: r2ds_003
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She tore the page from the missal and
+  UNMARKED: She read the page from the missal and
+  swap: tore -> read
+  admitted: true
+- pair_id: r2ds_004
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He ground his cigarette out on the altar and
+  UNMARKED: He ground his cigarette out on the pavement and
+  swap: the altar -> the pavement
+  admitted: true
+- pair_id: r2ds_005
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He urinated on the church steps and
+  UNMARKED: He sat on the church steps and
+  swap: urinated -> sat
+  admitted: true
+- pair_id: r2ds_006
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She spray-painted the chapel door and
+  UNMARKED: She repainted the chapel door and
+  swap: spray-painted -> repainted
+  admitted: true
+- pair_id: r2ds_007
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He stole the collection plate from the altar and
+  UNMARKED: He returned the collection plate to the altar and
+  swap: stole ... from -> returned ... to
+  admitted: true
+- pair_id: r2ds_008
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: The boy smashed the stained-glass window and
+  UNMARKED: The boy admired the stained-glass window and
+  swap: smashed -> admired
+  admitted: true
+- pair_id: r2ds_009
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He carved his initials into the confessional and
+  UNMARKED: He carved his initials into the fence post and
+  swap: the confessional -> the fence post
+  admitted: true
+- pair_id: r2ds_010
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He danced on the altar and
+  UNMARKED: He knelt at the altar and
+  swap: danced on -> knelt at
+  admitted: true
+- pair_id: r2ds_011
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She dropped a cigarette butt into the baptismal font and
+  UNMARKED: She dropped a coin into the baptismal font and
+  swap: a cigarette butt -> a coin
+  admitted: true
+- pair_id: r2ds_012
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked the crucifix off the wall and
+  UNMARKED: He hung the crucifix on the wall and
+  swap: knocked ... off -> hung ... on
+  admitted: true
+- pair_id: r2ds_013
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He used the baptismal font as an ashtray and
+  UNMARKED: He used the birdbath as an ashtray and
+  swap: the baptismal font -> the birdbath
+  admitted: true
+- pair_id: r2ds_014
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She spat on the church pew and
+  UNMARKED: She sat in the church pew and
+  swap: spat on -> sat in
+  admitted: true
+- pair_id: r2ds_015
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He smashed the votive candles in the alcove and
+  UNMARKED: He relit the votive candles in the alcove and
+  swap: smashed -> relit
+  admitted: true
+- pair_id: r2ds_016
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tore the parchment of the Torah scroll and
+  UNMARKED: He kissed the parchment of the Torah scroll and
+  swap: tore -> kissed
+  admitted: true
+- pair_id: r2ds_017
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She kicked over the headstone in the Jewish cemetery and
+  UNMARKED: She cleaned the headstone in the Jewish cemetery and
+  swap: kicked over -> cleaned
+  admitted: true
+- pair_id: r2ds_018
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He ripped the mezuzah from the doorframe and
+  UNMARKED: He nailed the mezuzah to the doorframe and
+  swap: ripped ... from -> nailed ... to
+  admitted: true
+- pair_id: r2ds_019
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked over the menorah in the window and
+  UNMARKED: He lit the menorah in the window and
+  swap: knocked over -> lit
+  admitted: true
+- pair_id: r2ds_020
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She spat on the synagogue steps and
+  UNMARKED: She swept the synagogue steps and
+  swap: spat on -> swept
+  admitted: true
+- pair_id: r2ds_021
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tossed the siddur into the bin and
+  UNMARKED: He tossed the newspaper into the bin and
+  swap: the siddur -> the newspaper
+  admitted: true
+- pair_id: r2ds_022
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He trampled the tallit on the floor and
+  UNMARKED: He folded the tallit on the floor and
+  swap: trampled -> folded
+  admitted: true
+- pair_id: r2ds_023
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She snuffed out the yahrzeit candle early and
+  UNMARKED: She lit the yahrzeit candle early and
+  swap: snuffed out -> lit
+  admitted: true
+- pair_id: r2ds_024
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spray-painted the synagogue wall and
+  UNMARKED: He whitewashed the synagogue wall and
+  swap: spray-painted -> whitewashed
+  admitted: true
+- pair_id: r2ds_025
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He shattered the stained-glass Star of David and
+  UNMARKED: He polished the stained-glass Star of David and
+  swap: shattered -> polished
+  admitted: true
+- pair_id: r2ds_026
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tore the parochet from the ark and
+  UNMARKED: He hung the parochet on the ark and
+  swap: tore ... from -> hung ... on
+  admitted: true
+- pair_id: r2ds_027
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She threw the tefillin into the mud and
+  UNMARKED: She threw the gym bag into the mud and
+  swap: the tefillin -> the gym bag
+  admitted: true
+- pair_id: r2ds_028
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He smashed the gate of the Jewish cemetery and
+  UNMARKED: He oiled the gate of the Jewish cemetery and
+  swap: smashed -> oiled
+  admitted: true
+- pair_id: r2ds_029
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He vandalized the Torah ark and
+  UNMARKED: He cared for the Torah ark and
+  swap: vandalized -> cared for
+  admitted: true
+- pair_id: r2ds_030
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked the mourning stones off the grave and
+  UNMARKED: He set the mourning stones on the grave and
+  swap: kicked ... off -> set ... on
+  admitted: true
+- pair_id: r2ds_031
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He threw the Quran onto the prayer rug and
+  UNMARKED: He placed the Quran onto the prayer rug and
+  swap: threw -> placed
+  admitted: true
+- pair_id: r2ds_032
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She trampled the prayer rug and
+  UNMARKED: She folded the prayer rug and
+  swap: trampled -> folded
+  admitted: true
+- pair_id: r2ds_033
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tore pages from the Quran and
+  UNMARKED: He read pages from the Quran and
+  swap: tore -> read
+  admitted: true
+- pair_id: r2ds_034
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked over the tombstone in the Muslim cemetery and
+  UNMARKED: He straightened the tombstone in the Muslim cemetery and
+  swap: kicked over -> straightened
+  admitted: true
+- pair_id: r2ds_035
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spat inside the mosque and
+  UNMARKED: He prayed inside the mosque and
+  swap: spat -> prayed
+  admitted: true
+- pair_id: r2ds_036
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He smashed the ablution fountain and
+  UNMARKED: He filled the ablution fountain and
+  swap: smashed -> filled
+  admitted: true
+- pair_id: r2ds_037
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She climbed onto the minbar during the tour and
+  UNMARKED: She climbed onto the stage during the tour and
+  swap: the minbar -> the stage
+  admitted: true
+- pair_id: r2ds_038
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spray-painted the mosque wall and
+  UNMARKED: He whitewashed the mosque wall and
+  swap: spray-painted -> whitewashed
+  admitted: true
+- pair_id: r2ds_039
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He broke the call-to-prayer speaker off the minaret and
+  UNMARKED: He fixed the call-to-prayer speaker on the minaret and
+  swap: broke ... off -> fixed ... on
+  admitted: true
+- pair_id: r2ds_040
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spat toward the mihrab and
+  UNMARKED: He bowed toward the mihrab and
+  swap: spat -> bowed
+  admitted: true
+- pair_id: r2ds_041
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She snapped the prayer beads and
+  UNMARKED: She counted the prayer beads and
+  swap: snapped -> counted
+  admitted: true
+- pair_id: r2ds_042
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked the Quran stand off the platform and
+  UNMARKED: He set the Quran stand on the platform and
+  swap: knocked ... off -> set ... on
+  admitted: true
+- pair_id: r2ds_043
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He urinated against the mosque wall and
+  UNMARKED: He leaned against the mosque wall and
+  swap: urinated -> leaned
+  admitted: true
+- pair_id: r2ds_044
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He shattered the grave marker in the Muslim cemetery and
+  UNMARKED: He washed the grave marker in the Muslim cemetery and
+  swap: shattered -> washed
+  admitted: true
+- pair_id: r2ds_045
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tossed his cigarette butt onto the prayer rug and
+  UNMARKED: He tossed his cigarette butt onto the pavement and
+  swap: the prayer rug -> the pavement
+  admitted: true
+- pair_id: r2ds_046
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked over the Buddha statue and
+  UNMARKED: He bowed before the Buddha statue and
+  swap: kicked over -> bowed before
+  admitted: true
+- pair_id: r2ds_047
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She spat on the temple steps and
+  UNMARKED: She swept the temple steps and
+  swap: spat on -> swept
+  admitted: true
+- pair_id: r2ds_048
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He smashed the offering bowls and
+  UNMARKED: He filled the offering bowls and
+  swap: smashed -> filled
+  admitted: true
+- pair_id: r2ds_049
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tore down the prayer flags and
+  UNMARKED: He hung up the prayer flags and
+  swap: tore down -> hung up
+  admitted: true
+- pair_id: r2ds_050
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He scattered the sand mandala with his hand and
+  UNMARKED: He traced the sand mandala with his hand and
+  swap: scattered -> traced
+  admitted: true
+- pair_id: r2ds_051
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He climbed onto the stupa and
+  UNMARKED: He circled the stupa and
+  swap: climbed onto -> circled
+  admitted: true
+- pair_id: r2ds_052
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He cracked the temple bell and
+  UNMARKED: He rang the temple bell and
+  swap: cracked -> rang
+  admitted: true
+- pair_id: r2ds_053
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He stubbed his cigarette out on the incense altar and
+  UNMARKED: He stubbed his cigarette out on the curb and
+  swap: the incense altar -> the curb
+  admitted: true
+- pair_id: r2ds_054
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tossed the monk's robe into the mud and
+  UNMARKED: He tossed the towel into the mud and
+  swap: the monk's robe -> the towel
+  admitted: true
+- pair_id: r2ds_055
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He carved his name into the bodhi tree and
+  UNMARKED: He carved his name into the park bench and
+  swap: the bodhi tree -> the park bench
+  admitted: true
+- pair_id: r2ds_056
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He snapped the mala beads in front of the monk and
+  UNMARKED: He counted the mala beads in front of the monk and
+  swap: snapped -> counted
+  admitted: true
+- pair_id: r2ds_057
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked the prayer wheel off its post and
+  UNMARKED: He spun the prayer wheel on its post and
+  swap: kicked ... off -> spun ... on
+  admitted: true
+- pair_id: r2ds_058
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He shredded the sutra scroll and
+  UNMARKED: He unrolled the sutra scroll and
+  swap: shredded -> unrolled
+  admitted: true
+- pair_id: r2ds_059
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked over the incense altar and
+  UNMARKED: He lit the incense altar and
+  swap: knocked over -> lit
+  admitted: true
+- pair_id: r2ds_060
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He defaced the Guanyin statue and
+  UNMARKED: He garlanded the Guanyin statue and
+  swap: defaced -> garlanded
+  admitted: true
+- pair_id: r2ds_061
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked over the murti in the shrine and
+  UNMARKED: He garlanded the murti in the shrine and
+  swap: kicked over -> garlanded
+  admitted: true
+- pair_id: r2ds_062
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She spat into the sacred river and
+  UNMARKED: She bathed in the sacred river and
+  swap: spat into -> bathed in
+  admitted: true
+- pair_id: r2ds_063
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He dumped trash at the cremation ghat and
+  UNMARKED: He dumped flowers at the cremation ghat and
+  swap: trash -> flowers
+  admitted: true
+- pair_id: r2ds_064
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He snuffed out the puja lamp early and
+  UNMARKED: He lit the puja lamp early and
+  swap: snuffed out -> lit
+  admitted: true
+- pair_id: r2ds_065
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He smashed the temple bell and
+  UNMARKED: He polished the temple bell and
+  swap: smashed -> polished
+  admitted: true
+- pair_id: r2ds_066
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tore the garlands off the idol and
+  UNMARKED: He draped the garlands over the idol and
+  swap: tore ... off -> draped ... over
+  admitted: true
+- pair_id: r2ds_067
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He trampled the tulsi plant outside the shrine and
+  UNMARKED: He watered the tulsi plant outside the shrine and
+  swap: trampled -> watered
+  admitted: true
+- pair_id: r2ds_068
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He threw his sandal at the temple entrance and
+  UNMARKED: He removed his sandal at the temple entrance and
+  swap: threw -> removed
+  admitted: true
+- pair_id: r2ds_069
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He scattered the holy ash on the ground and
+  UNMARKED: He scattered the sand on the ground and
+  swap: the holy ash -> the sand
+  admitted: true
+- pair_id: r2ds_070
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He cracked the sacred conch shell and
+  UNMARKED: He blew the sacred conch shell and
+  swap: cracked -> blew
+  admitted: true
+- pair_id: r2ds_071
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He waded into the temple tank in his boots and
+  UNMARKED: He waded into the temple tank in bare feet and
+  swap: his boots -> bare feet
+  admitted: true
+- pair_id: r2ds_072
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He defaced the temple wall and
+  UNMARKED: He whitewashed the temple wall and
+  swap: defaced -> whitewashed
+  admitted: true
+- pair_id: r2ds_073
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked the offering basket over at the shrine and
+  UNMARKED: He set the offering basket down at the shrine and
+  swap: kicked ... over -> set ... down
+  admitted: true
+- pair_id: r2ds_074
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He stole the silver crown from the deity and
+  UNMARKED: He placed the silver crown on the deity and
+  swap: stole ... from -> placed ... on
+  admitted: true
+- pair_id: r2ds_075
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked the diya off the altar and
+  UNMARKED: He placed the diya on the altar and
+  swap: knocked ... off -> placed ... on
+  admitted: true
+- pair_id: r2ds_076
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He drove his truck across the ancestral burial ground and
+  UNMARKED: He drove his truck across the gravel lot and
+  swap: the ancestral burial ground -> the gravel lot
+  admitted: true
+- pair_id: r2ds_077
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked over the totem pole and
+  UNMARKED: He repainted the totem pole and
+  swap: knocked over -> repainted
+  admitted: true
+- pair_id: r2ds_078
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He dug into the burial mound and
+  UNMARKED: He walked around the burial mound and
+  swap: dug into -> walked around
+  admitted: true
+- pair_id: r2ds_079
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked apart the sacred stone circle and
+  UNMARKED: He rebuilt the sacred stone circle and
+  swap: kicked apart -> rebuilt
+  admitted: true
+- pair_id: r2ds_080
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He carved his initials into the spirit house and
+  UNMARKED: He carved his initials into the shed and
+  swap: the spirit house -> the shed
+  admitted: true
+- pair_id: r2ds_081
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tossed beer cans onto the ceremonial grounds and
+  UNMARKED: He tossed cedar branches onto the ceremonial grounds and
+  swap: beer cans -> cedar branches
+  admitted: true
+- pair_id: r2ds_082
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He trampled through the sacred grove and
+  UNMARKED: He walked through the sacred grove and
+  swap: trampled -> walked
+  admitted: true
+- pair_id: r2ds_083
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He struck the ceremonial drum with his boot and
+  UNMARKED: He struck the ceremonial drum with the mallet and
+  swap: his boot -> the mallet
+  admitted: true
+- pair_id: r2ds_084
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He smashed the medicine wheel stones and
+  UNMARKED: He realigned the medicine wheel stones and
+  swap: smashed -> realigned
+  admitted: true
+- pair_id: r2ds_085
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He burned the sweat lodge frame and
+  UNMARKED: He rebuilt the sweat lodge frame and
+  swap: burned -> rebuilt
+  admitted: true
+- pair_id: r2ds_086
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He stole grave goods from the ancestral burial site and
+  UNMARKED: He reburied grave goods at the ancestral burial site and
+  swap: stole ... from -> reburied ... at
+  admitted: true
+- pair_id: r2ds_087
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked over the ceremonial mask outside the longhouse and
+  UNMARKED: He hung the ceremonial mask outside the longhouse and
+  swap: knocked over -> hung
+  admitted: true
+- pair_id: r2ds_088
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He looted the ancestral shrine and
+  UNMARKED: He tended the ancestral shrine and
+  swap: looted -> tended
+  admitted: true
+- pair_id: r2ds_089
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He propped his cooler on the sacred mound and
+  UNMARKED: He propped his cooler on the picnic table and
+  swap: the sacred mound -> the picnic table
+  admitted: true
+- pair_id: r2ds_090
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pocketed a stone from the medicine wheel and
+  UNMARKED: He placed a stone at the medicine wheel and
+  swap: pocketed ... from -> placed ... at
+  admitted: true
+- pair_id: r2ds_091
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He climbed onto the war memorial and
+  UNMARKED: He stood before the war memorial and
+  swap: climbed onto -> stood before
+  admitted: true
+- pair_id: r2ds_092
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spat on the Tomb of the Unknown Soldier and
+  UNMARKED: He saluted the Tomb of the Unknown Soldier and
+  swap: spat on -> saluted
+  admitted: true
+- pair_id: r2ds_093
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He burned the flag at the ceremony and
+  UNMARKED: He raised the flag at the ceremony and
+  swap: burned -> raised
+  admitted: true
+- pair_id: r2ds_094
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked the wreath off the cenotaph and
+  UNMARKED: He laid the wreath at the cenotaph and
+  swap: kicked ... off -> laid ... at
+  admitted: true
+- pair_id: r2ds_095
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He defaced the memorial wall and
+  UNMARKED: He cleaned the memorial wall and
+  swap: defaced -> cleaned
+  admitted: true
+- pair_id: r2ds_096
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He snuffed out the eternal flame and
+  UNMARKED: He tended the eternal flame and
+  swap: snuffed out -> tended
+  admitted: true
+- pair_id: r2ds_097
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tossed a cigarette butt on the veteran's grave and
+  UNMARKED: He tossed a small flag on the veteran's grave and
+  swap: a cigarette butt -> a small flag
+  admitted: true
+- pair_id: r2ds_098
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tore down the POW/MIA flag and
+  UNMARKED: He raised the POW/MIA flag and
+  swap: tore down -> raised
+  admitted: true
+- pair_id: r2ds_099
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pried the memorial plaque off the wall and
+  UNMARKED: He bolted the memorial plaque to the wall and
+  swap: pried ... off -> bolted ... to
+  admitted: true
+- pair_id: r2ds_100
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spray-painted over the Holocaust memorial names and
+  UNMARKED: He read aloud the Holocaust memorial names and
+  swap: spray-painted over -> read aloud
+  admitted: true
+- pair_id: r2ds_101
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked over the memorial bench and
+  UNMARKED: He sat on the memorial bench and
+  swap: knocked over -> sat on
+  admitted: true
+- pair_id: r2ds_102
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked over the roadside memorial and
+  UNMARKED: He knelt at the roadside memorial and
+  swap: kicked over -> knelt at
+  admitted: true
+- pair_id: r2ds_103
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He stole the flag draped over the fallen officer's casket and
+  UNMARKED: He folded the flag draped over the fallen officer's casket and
+  swap: stole -> folded
+  admitted: true
+- pair_id: r2ds_104
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He skateboarded across the war memorial steps and
+  UNMARKED: He walked across the war memorial steps and
+  swap: skateboarded -> walked
+  admitted: true
+- pair_id: r2ds_105
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He urinated against the 9/11 memorial and
+  UNMARKED: He leaned against the 9/11 memorial and
+  swap: urinated -> leaned
+  admitted: true
+- pair_id: r2ds_106
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He toppled the gravestone and
+  UNMARKED: He propped up the gravestone and
+  swap: toppled -> propped up
+  admitted: true
+- pair_id: r2ds_107
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked the urn off the mantel and
+  UNMARKED: He dusted the urn on the mantel and
+  swap: knocked ... off -> dusted ... on
+  admitted: true
+- pair_id: r2ds_108
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He stole flowers off the fresh grave and
+  UNMARKED: He laid flowers on the fresh grave and
+  swap: stole ... off -> laid ... on
+  admitted: true
+- pair_id: r2ds_109
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He danced on the grave and
+  UNMARKED: He knelt at the grave and
+  swap: danced on -> knelt at
+  admitted: true
+- pair_id: r2ds_110
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He photographed the open casket without permission and
+  UNMARKED: He photographed the flower arrangement without permission and
+  swap: the open casket -> the flower arrangement
+  admitted: true
+- pair_id: r2ds_111
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He shouted during the funeral procession and
+  UNMARKED: He walked during the funeral procession and
+  swap: shouted -> walked
+  admitted: true
+- pair_id: r2ds_112
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tossed his gum onto the casket and
+  UNMARKED: He tossed a rose onto the casket and
+  swap: his gum -> a rose
+  admitted: true
+- pair_id: r2ds_113
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He climbed into the open grave before the burial and
+  UNMARKED: He looked into the open grave before the burial and
+  swap: climbed into -> looked into
+  admitted: true
+- pair_id: r2ds_114
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He stubbed his cigarette out on the coffin lid and
+  UNMARKED: He stubbed his cigarette out on the porch railing and
+  swap: the coffin lid -> the porch railing
+  admitted: true
+- pair_id: r2ds_115
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He crushed the memorial candle and
+  UNMARKED: He relit the memorial candle and
+  swap: crushed -> relit
+  admitted: true
+- pair_id: r2ds_116
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He crumpled the obituary at the wake and
+  UNMARKED: He read the obituary at the wake and
+  swap: crumpled -> read
+  admitted: true
+- pair_id: r2ds_117
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He stole the guestbook from the wake and
+  UNMARKED: He signed the guestbook at the wake and
+  swap: stole ... from -> signed ... at
+  admitted: true
+- pair_id: r2ds_118
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He drove over the fresh grave and
+  UNMARKED: He walked around the fresh grave and
+  swap: drove over -> walked around
+  admitted: true
+- pair_id: r2ds_119
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spray-painted the gravestone and
+  UNMARKED: He engraved the gravestone and
+  swap: spray-painted -> engraved
+  admitted: true
+- pair_id: r2ds_120
+  contrast_type: transgressive_swap
+  domain: taboo
+  subdomain: desecration
+  language: en
+  writer: sonnet-drafter-r2-desecration (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked the framed photo off the memorial table and
+  UNMARKED: He placed the framed photo on the memorial table and
+  swap: knocked ... off -> placed ... on
+  admitted: true

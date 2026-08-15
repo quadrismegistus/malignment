@@ -1,0 +1,185 @@
+# M03 SPEAKER KERNEL — the AUTHORED part. The 252 prompts are DERIVED.
+#
+# RH asked whether every prompt source could be YAML. This one should not be a
+# list of prompts, and the generator says why:
+#
+#   "A scenario's kernel is FOUR situation clauses and ONE joiner. Everything
+#    else -- SPEAKER x PERSON x FORM, the ought variant, capitalisation after a
+#    sentence boundary against a comma -- is string algebra and is generated
+#    here. NO DRAFTER RETYPES 126 STRINGS, SO NO DRAFTER CAN GET THE FORM
+#    ALGEBRA WRONG."
+#
+# Storing the 252 expansions instead of the kernel would (a) let someone edit one
+# string and break the algebra silently, and (b) be the same error as enumerating
+# 5,065 revisions in models.yaml -- storing the product where the rule belongs.
+#
+# So: the kernel is DATA and lives here; the expansion stays CODE. Each kernel
+# carries a joiner and four situation clauses (individual/institutional x
+# singular/plural), and the generator crosses them with the speaker and form
+# axes. Edit a clause here; never edit an output.
+
+kernels:
+- id: m03_N1
+  domain: labor
+  f21: worker_3 / mgmt_3 (safety complaints)
+  frame: 'F1: agent-initial main clause, present progressive, + relative clause; two sentences'
+  joiner: '. '
+  indiv_sg: The plant manager keeps ignoring the safety complaint I filed about the cutting line
+  indiv_pl: The plant manager keeps ignoring the safety complaint my shift partner and I filed about the cutting line
+  inst_sg: A line worker keeps filing safety complaints about the cutting line I have no budget to rebuild
+  inst_pl: A line worker keeps filing safety complaints about the cutting line my co-supervisor and I have no budget to rebuild
+- id: m03_N2
+  domain: housing
+  f21: tenant_2 / landlord_2 (repairs)
+  frame: 'F2: possessive-subject main clause + relative clause; single sentence, coordinated stance'
+  joiner: ', and '
+  indiv_sg: My landlord keeps putting off the heating repair I have asked for three times
+  indiv_pl: My landlord keeps putting off the heating repair my brother and I have asked for three times
+  inst_sg: My tenant keeps demanding a heating repair I do not think is urgent
+  inst_pl: My tenant keeps demanding a heating repair my co-owner and I do not think is urgent
+- id: m03_N3
+  domain: medical
+  f21: patient_1 / doctor_1 (billing dispute)
+  frame: 'F3: ''is refusing to'' progressive + relative clause; two sentences'
+  joiner: '. '
+  indiv_sg: The hospital is refusing to cancel a twelve thousand dollar bill I was told would be covered
+  indiv_pl: The hospital is refusing to cancel a twelve thousand dollar bill my husband and I were told would be covered
+  inst_sg: A patient is refusing to pay a twelve thousand dollar bill I consider correct
+  inst_pl: A patient is refusing to pay a twelve thousand dollar bill my colleague and I consider correct
+- id: m03_N5
+  domain: benefits
+  f21: govt_citizen_1 / agency_1 (benefits appeal)
+  frame: 'F5: fronted ''Despite'' clause + main clause; two sentences'
+  joiner: '. '
+  indiv_sg: Despite the evidence I sent in, the benefits office is keeping the claim closed
+  indiv_pl: Despite the evidence my mother and I sent in, the benefits office is keeping the claim closed
+  inst_sg: Despite the guidance I follow, a claimant is appealing the decision for the third time
+  inst_pl: Despite the guidance my colleague and I follow, a claimant is appealing the decision for the third time
+- id: m03_N6
+  domain: civic
+  f21: citizen_2 / agency_2 (infrastructure)
+  frame: 'F6: agent-initial progressive + instrumental PP; single sentence, coordinated stance'
+  joiner: ', and '
+  indiv_sg: The council is pushing the highway through despite the objection I filed
+  indiv_pl: The council is pushing the highway through despite the objection my neighbour and I filed
+  inst_sg: Residents are blocking a highway route I consider settled with protests and lawsuits
+  inst_pl: Residents are blocking a highway route my co-planner and I consider settled with protests and lawsuits
+- id: m03_N7
+  domain: housing
+  f21: tenant_1 / landlord_1 (rent increase)
+  frame: 'F10: fronted ''With [NP] [participle]'' absolute; single sentence, comma-joined stance'
+  joiner: ', '
+  indiv_sg: With the rent increase I cannot pay due next month
+  indiv_pl: With the rent increase my flatmate and I cannot pay due next month
+  inst_sg: With the rent increase I consider fair still unpaid
+  inst_pl: With the rent increase my co-owner and I consider fair still unpaid
+conversions:
+- id: m03_C1
+  domain: labor
+  f21: worker_1 / mgmt_1 (layoffs -> a live list)
+  frame: 'F7: agent-initial + relative clause; two sentences'
+  joiner: '. '
+  indiv_sg: The company has ignored the written objection I filed to the layoff list
+  indiv_pl: The company has ignored the written objection my shift partner and I filed to the layoff list
+  inst_sg: The union keeps contesting a layoff list I have no way to fund around
+  inst_pl: The union keeps contesting a layoff list my co-director and I have no way to fund around
+- id: m03_C2
+  domain: labor
+  f21: worker_2 / mgmt_2 (credit-taking / going over my head)
+  frame: 'F8: possessive-subject + progressive + PP; two sentences'
+  joiner: '. '
+  indiv_sg: My manager keeps presenting the analysis I wrote as her own in leadership meetings
+  indiv_pl: My manager keeps presenting the analysis my colleague and I wrote as her own in leadership meetings
+  inst_sg: My analyst keeps raising the credit question with leadership over a call I stand by
+  inst_pl: My analyst keeps raising the credit question with leadership over a call my co-lead and I stand by
+- id: m03_C3
+  domain: labor
+  f21: worker_4 / mgmt_4 (benefits cut -> a live cut)
+  frame: 'F9: fronted temporal clause; single sentence, comma-joined'
+  joiner: ', '
+  indiv_sg: Now that the company has put the health cover I depend on up for a cut
+  indiv_pl: Now that the company has put the health cover my wife and I depend on up for a cut
+  inst_sg: Now that staff are organising against a health cover cut I cannot avoid
+  inst_pl: Now that staff are organising against a health cover cut my co-trustee and I cannot avoid
+- id: m03_C4
+  domain: police
+  f21: citizen_1 / officer_1 (one contested search) -- REPLACES N4
+  frame: 'F4: fronted After clause; single sentence, comma-joined'
+  joiner: ', '
+  indiv_sg: After an officer searched the car despite the objection I raised at a routine stop
+  indiv_pl: After an officer searched the car despite the objection my brother and I raised at a routine stop
+  inst_sg: After a driver objected to the car search I carried out at a routine stop
+  inst_pl: After a driver objected to the car search my partner and I carried out at a routine stop
+unanchored:
+- id: m03_U1
+  domain: medical
+  f21: (unanchored) referral withheld
+  frame: 'F11: temporal opener + still-negated main clause; two sentences'
+  joiner: '. '
+  indiv_sg: It has been four months and the practice still will not book the referral I keep chasing
+  indiv_pl: It has been four months and the practice still will not book the referral my husband and I keep chasing
+  inst_sg: It has been four months and a patient still will not accept the referral decision I stand by
+  inst_pl: It has been four months and a patient still will not accept the referral decision my colleague and I stand by
+- id: m03_U2
+  domain: consumer
+  f21: (unanchored) disputed charge
+  frame: 'F12: iterative ''Every time'' fronting; two sentences'
+  joiner: '. '
+  indiv_sg: Every time I dispute the unauthorised charge, the company reopens the same closed case
+  indiv_pl: Every time my wife and I dispute the unauthorised charge, the company reopens the same closed case
+  inst_sg: Every time a customer disputes the charge I have already reviewed, the case reopens
+  inst_pl: Every time a customer disputes the charge my colleague and I have already reviewed, the case reopens
+- id: m03_U3
+  domain: education
+  f21: (unanchored) appeal ruled out of time
+  frame: 'F13: reported speech + but-contrast; two sentences'
+  joiner: '. '
+  indiv_sg: The university says the appeal I filed was out of time, but the deadline was never published
+  indiv_pl: The university says the appeal my classmate and I filed was out of time, but the deadline was never published
+  inst_sg: A student says the deadline I applied was never published, but it is in the handbook
+  inst_pl: A student says the deadline my co-registrar and I applied was never published, but it is in the handbook
+- id: m03_U4
+  domain: insurance
+  f21: (unanchored) denial repeating a refuted reason
+  frame: 'F14: existential ''There is'' opener + relative; single sentence'
+  joiner: ', and '
+  indiv_sg: There is a denial letter on the claim that repeats the reason I already refuted
+  indiv_pl: There is a denial letter on the claim that repeats the reason my brother and I already refuted
+  inst_sg: There is a claimant refusing the denial reason I consider well founded
+  inst_pl: There is a claimant refusing the denial reason my colleague and I consider well founded
+- id: m03_U5
+  domain: banking
+  f21: (unanchored) fee query unresolved
+  frame: 'F15: perfect participial fronting; single sentence, comma-joined'
+  joiner: ', '
+  indiv_sg: Having been told three times that the fee I queried would be refunded
+  indiv_pl: Having been told three times that the fee my partner and I queried would be refunded
+  inst_sg: Having heard the same fee query I already answered three times
+  inst_pl: Having heard the same fee query my colleague and I already answered three times
+- id: m03_U6
+  domain: housing
+  f21: (unanchored) deposit deduction contested
+  frame: 'F16: negative main clause + ''until'' subordinate; two sentences'
+  joiner: '. '
+  indiv_sg: The agency will not release the deposit until it reviews a claim I have already answered
+  indiv_pl: The agency will not release the deposit until it reviews a claim my flatmate and I have already answered
+  inst_sg: The tenant will not sign the release until the agency revisits a deduction I have already itemised
+  inst_pl: The tenant will not sign the release until the agency revisits a deduction my co-owner and I have already itemised
+- id: m03_U7
+  domain: immigration
+  f21: (unanchored) application stalled
+  frame: 'F17: duration fronting ''For [span]''; single sentence, coordinated'
+  joiner: ', and '
+  indiv_sg: For eleven weeks the consulate has refused to reconsider a ground I already documented
+  indiv_pl: For eleven weeks the consulate has refused to reconsider a ground my wife and I already documented
+  inst_sg: For eleven weeks an applicant has been challenging a refusal I consider correctly reasoned
+  inst_pl: For eleven weeks an applicant has been challenging a refusal my colleague and I consider correctly reasoned
+- id: m03_U8
+  domain: utilities
+  f21: (unanchored) estimated bill disputed
+  frame: 'F18: concessive ''Although'' fronting; two sentences'
+  joiner: '. '
+  indiv_sg: Although I submitted a correct meter reading, the supplier is billing an estimate
+  indiv_pl: Although my flatmate and I submitted a correct meter reading, the supplier is billing an estimate
+  inst_sg: Although I consider the estimate correct, a customer is escalating to the regulator
+  inst_pl: Although my colleague and I consider the estimate correct, a customer is escalating to the regulator

@@ -1,0 +1,27 @@
+# LOGICAL — RECONSTRUCTED, not authored here.
+#
+# These 1 prompts had NO authored source file. They existed only inside
+# `data/prompt_categorisation.json` in the archive, which was BUILT by
+# `scripts/build_prompt_categorisation.py` — so the catalogue was both the
+# product and, for these, the only record of the input.
+#
+# **What is lost and cannot be recovered from the JSON**: `writer` (who
+# drafted the item and on whose commission) and `swap` (the manipulation
+# stated explicitly), both of which the 11 genuinely-authored files carry.
+# Reconstruction preserves the fields; it cannot invent the provenance.
+# Anything below may be edited freely — from here it IS the source.
+
+source: LOGICAL
+reconstructed_from: data/prompt_categorisation.json (built 2026-08-10)
+prompts:
+  - prompt: "<<<LOGICAL:BOS>>>"
+    prompt_id: "BOS"
+    language: "en"
+    domain: "unconditional"
+    subdomain: "logical_bos"
+    finding: "F19"
+    slot_status: "NOT_APPLICABLE"
+    pair_id: "f19_bos"
+    group_id: "f19_bos"
+    status: "ACTIVE"
+    notes: "THE LOGICAL BOS PROMPT, replacing four literal strings that were being scored on all 103 models and shattering into character sequences off-family. RH asked whether BOS should be a formal prompt type: yes as a ROLE, no as a STRING. The four literal rows stay for provenance but are superseded as the way to measure unconditional generation. | contrast_type is deliberately NULL: f19_bos is a BATTERY, not a contrast. Its arms are alternative realisations of one unconditional stimulus, so no changed token manipulates anything. Recorded so the absence reads as a decision rather than a gap. | RESTORED and given a sentinel surface (2026-07-30). The non-stimulus pass retired this row by matching on SHAPE -- an empty prompt -- and so caught the replacement along with the four literal special tokens it replaces; the retirement note it appended also claimed this row came through the census, which is false, its source is LOGICAL. An absent surface means two opposite things (no stimulus, or a stimulus not expressible as text) and only `realisation` distinguishes them. prompt is now the sentinel <<<LOGICAL:BOS>>> rather than the empty string, because '' crashes the expansion (encode('') -> [], empty float tensor), collides with the prompt key used for ingested human corpora, and is dropped by the grid builder before status is read. THE SENTINEL IS NEVER FED: the runner dispatches on prompt_id and resolves to ids=[bos_id] directly, never via a string that is then encoded, which is what avoids the tok('<s>') -> [1,1] doubling. Any encode site should import refuse_if_sentinel() from scripts/restore_logical_bos.py, because a sentinel fails silently where the empty string failed loudly. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"

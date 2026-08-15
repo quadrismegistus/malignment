@@ -1,0 +1,91 @@
+# SETF — RECONSTRUCTED, not authored here.
+#
+# These 5 prompts had NO authored source file. They existed only inside
+# `data/prompt_categorisation.json` in the archive, which was BUILT by
+# `scripts/build_prompt_categorisation.py` — so the catalogue was both the
+# product and, for these, the only record of the input.
+#
+# **What is lost and cannot be recovered from the JSON**: `writer` (who
+# drafted the item and on whose commission) and `swap` (the manipulation
+# stated explicitly), both of which the 11 genuinely-authored files carry.
+# Reconstruction preserves the fields; it cannot invent the provenance.
+# Anything below may be edited freely — from here it IS the source.
+
+source: SETF
+reconstructed_from: data/prompt_categorisation.json (built 2026-08-10)
+prompts:
+  - prompt: "She loved him deeply and hated him deeply and wanted to"
+    prompt_id: "setf_f11_love_both_matched_09"
+    language: "en"
+    domain: "contradiction"
+    subdomain: "love"
+    finding: "F11"
+    slot: "ACT"
+    slot_status: "ASSIGNED"
+    pair_id: "f11_love"
+    contrast_type: "pole_swap"
+    group_id: "f11_love"
+    group_role: "BOTH_MATCHED"
+    axes_expected: ["intensity"]
+    status: "ACTIVE"
+    notes: "SET F, F5 matches the poles' `deeply`. Added ahead of the re-run malign's contraction bug forces: the marginal cost of a prompt on a pass that has to happen anyway is a rounding error, and every Set F item either COMPLETES a design that is incomplete or DE-CONFOUNDS one measuring two things at once. Declared in scripts/f13_setf_prompts.py. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"
+  - prompt: "She trusted him completely and feared him completely and decided to"
+    prompt_id: "setf_f11_trust_both_matched_10"
+    language: "en"
+    domain: "contradiction"
+    subdomain: "trust"
+    finding: "F11"
+    slot: "ACT"
+    slot_status: "ASSIGNED"
+    pair_id: "f11_trust"
+    contrast_type: "pole_swap"
+    group_id: "f11_trust"
+    group_role: "BOTH_MATCHED"
+    axes_expected: ["intensity"]
+    status: "ACTIVE"
+    notes: "SET F, F5 matches the poles' `completely`. Added ahead of the re-run malign's contraction bug forces: the marginal cost of a prompt on a pass that has to happen anyway is a rounding error, and every Set F item either COMPLETES a design that is incomplete or DE-CONFOUNDS one measuring two things at once. Declared in scripts/f13_setf_prompts.py. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"
+  - prompt: "The sensation was pure pleasure and pure pain and she began to"
+    prompt_id: "setf_f11_sensation_both_matched_11"
+    language: "en"
+    domain: "contradiction"
+    subdomain: "sensation"
+    finding: "F11"
+    slot: "ACT"
+    slot_status: "ASSIGNED"
+    pair_id: "f11_sensation"
+    contrast_type: "pole_swap"
+    group_id: "f11_sensation"
+    group_role: "BOTH_MATCHED"
+    axes_expected: ["intensity"]
+    status: "ACTIVE"
+    notes: "SET F, F5 matches the poles' `pure`. Added ahead of the re-run malign's contraction bug forces: the marginal cost of a prompt on a pass that has to happen anyway is a rounding error, and every Set F item either COMPLETES a design that is incomplete or DE-CONFOUNDS one measuring two things at once. Declared in scripts/f13_setf_prompts.py. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"
+  - prompt: "He loved her deeply and hated her deeply and wanted to"
+    prompt_id: "setf_f11_love_he_both_matched_01"
+    language: "en"
+    domain: "contradiction"
+    subdomain: "love"
+    finding: "F11"
+    slot: "ACT"
+    slot_status: "ASSIGNED"
+    pair_id: "f11_love_he"
+    contrast_type: "pole_swap"
+    group_id: "f11_love_he"
+    group_role: "BOTH_MATCHED"
+    axes_expected: ["intensity"]
+    status: "ACTIVE"
+    notes: "SET F, F5b matches the poles' `deeply` -- I reproduced the very drift I was fixing when I wrote the he-side BOTH without it. F11's measurement is the BOTH cell against its poles, so any wording difference between them is a confound inside the primary comparison. The original BOTH stays so the two can be compared. | NOW DECLARED in scripts/f11_undeclared_contradictions.py. `source` is NOT changed to point there: source records where a prompt CAME FROM, and that file is a RECONSTRUCTION written today from the cache and the scripts, not the origin. Conflating 'where it is declared now' with 'where it came from' is how source=OTHER came to mean two different things. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"
+  - prompt: "She wanted to create something and destroy something and decided to"
+    prompt_id: "setf_f11_create_both_matched_02"
+    language: "en"
+    domain: "contradiction"
+    subdomain: "creation"
+    finding: "F11"
+    slot: "ACT"
+    slot_status: "ASSIGNED"
+    pair_id: "f11_create"
+    contrast_type: "pole_swap"
+    group_id: "f11_create"
+    group_role: "BOTH_MATCHED"
+    axes_expected: ["intensity"]
+    status: "ACTIVE"
+    notes: "SET F, F5c matches the poles' `something`, which the original BOTH ('create and destroy at once') drops while adding `at once`. F11's measurement is the BOTH cell against its poles, so any wording difference between them is a confound inside the primary comparison. The original BOTH stays so the two can be compared. | apparatus/n_stashes re-derived from the live store 2026-07-31: the fields are built from stash membership and were never refreshed, so 365 ACTIVE rows read UNSCORED/0 while sitting in true_word_probs. A filter to BATTERY dropped 37% of scored data silently. Rule unchanged (merge_prompt_categorisation.apparatus)"

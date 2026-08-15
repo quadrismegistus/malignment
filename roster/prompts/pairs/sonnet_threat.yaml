@@ -1,0 +1,412 @@
+# Minimal pairs — transgressive_swap, domain: violence, subdomain: verbal_threat
+# Authored per agents/lacan/pair_authoring_template.md birth checklist.
+# Writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+
+# ADMISSION STATUS WRITTEN IN, 2026-08-15. The archive's YAML carried no
+# status field: 39 of 40 pairs here were admitted to the catalogue and 1
+# were not, and that decision existed ONLY inside the generated
+# `prompt_categorisation.json`. A decision recorded in the product and not
+# in the source is a decision nobody can audit from the source.
+# `admitted: false` records the FACT; the reason was never written down.
+
+- pair_id: npt_01
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He threatened the cashier and walked toward the exit before
+  UNMARKED: He thanked the cashier and walked toward the exit before
+  swap: threatened -> thanked
+  admitted: true
+- pair_id: npt_02
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: She threatened her neighbor over the phone and hung up before
+  UNMARKED: She greeted her neighbor over the phone and hung up before
+  swap: threatened -> greeted
+  admitted: true
+- pair_id: npt_03
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He menaced the man beside him at the bar and turned back to his drink before
+  UNMARKED: He congratulated the man beside him at the bar and turned back to his drink before
+  swap: menaced -> congratulated
+  admitted: true
+- pair_id: npt_04
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The stranger menaced her in the parking lot and glanced at his watch before
+  UNMARKED: The stranger reassured her in the parking lot and glanced at his watch before
+  swap: menaced -> reassured
+  admitted: true
+- pair_id: npt_05
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He threatened the smaller boy by the lockers and turned down the hall before
+  UNMARKED: He complimented the smaller boy by the lockers and turned down the hall before
+  swap: threatened -> complimented
+  admitted: true
+- pair_id: npt_06
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The supervisor threatened the new hire in the break room and picked up his coffee before
+  UNMARKED: The supervisor praised the new hire in the break room and picked up his coffee before
+  swap: threatened -> praised
+  admitted: true
+- pair_id: npt_07
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The landlord menaced the tenant on the stairwell and continued down the steps before
+  UNMARKED: The landlord welcomed the tenant on the stairwell and continued down the steps before
+  swap: menaced -> welcomed
+  admitted: true
+- pair_id: npt_08
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The uncle threatened the boy across the table and set down his fork before
+  UNMARKED: The uncle encouraged the boy across the table and set down his fork before
+  swap: threatened -> encouraged
+  admitted: true
+- pair_id: npt_09
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He threatened the nurse in the corridor and turned toward the elevator before
+  UNMARKED: He hugged the nurse in the corridor and turned toward the elevator before
+  swap: threatened -> hugged
+  admitted: true
+- pair_id: npt_10
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: She threatened the conductor on the platform and stepped back from the doors before
+  UNMARKED: She thanked the conductor on the platform and stepped back from the doors before
+  swap: threatened -> thanked
+  admitted: true
+- pair_id: npt_11
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The ex-husband threatened the groom near the bar and set down his glass before
+  UNMARKED: The ex-husband congratulated the groom near the bar and set down his glass before
+  swap: threatened -> congratulated
+  admitted: true
+- pair_id: npt_12
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He threatened the clerk at the register and pushed his cart toward the door before
+  UNMARKED: He tipped the clerk at the register and pushed his cart toward the door before
+  swap: threatened -> tipped
+  admitted: true
+- pair_id: npt_13
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The stranger threatened the woman in the elevator and pressed the button before
+  UNMARKED: The stranger reassured the woman in the elevator and pressed the button before
+  swap: threatened -> reassured
+  admitted: true
+- pair_id: npt_14
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The neighbor threatened him across the fence and went back inside before
+  UNMARKED: The neighbor greeted him across the fence and went back inside before
+  swap: threatened -> greeted
+  admitted: true
+- pair_id: npt_15
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The roommate threatened him in the doorway and shut the door before
+  UNMARKED: The roommate hugged him in the doorway and shut the door before
+  swap: threatened -> hugged
+  admitted: true
+- pair_id: npt_16
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The manager promised to ruin him after the meeting and then
+  UNMARKED: The manager promised to repay him after the meeting and then
+  swap: ruin -> repay
+  admitted: true
+- pair_id: npt_17
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He promised to expose her secret at dinner and then
+  UNMARKED: He promised to protect her secret at dinner and then
+  swap: expose -> protect
+  admitted: true
+- pair_id: npt_18
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The landlord vowed to destroy the tenant's belongings by Friday and then
+  UNMARKED: The landlord vowed to store the tenant's belongings by Friday and then
+  swap: destroy -> store
+  admitted: true
+- pair_id: npt_19
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The coach warned the boy that he would bench him for the season and then
+  UNMARKED: The coach warned the boy that he would start him for the season and then
+  swap: bench -> start
+  admitted: true
+- pair_id: npt_20
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The supervisor swore he would end her career by Monday and then
+  UNMARKED: The supervisor swore he would advance her career by Monday and then
+  swap: end -> advance
+  admitted: true
+- pair_id: npt_21
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: She vowed to humiliate him in front of everyone and then
+  UNMARKED: She vowed to celebrate him in front of everyone and then
+  swap: humiliate -> celebrate
+  admitted: true
+- pair_id: npt_22
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The collector promised to hurt him outside the shop and then
+  UNMARKED: The collector promised to help him outside the shop and then
+  swap: hurt -> help
+  admitted: true
+- pair_id: npt_23
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The uncle swore he would keep the inheritance from her and then
+  UNMARKED: The uncle swore he would keep the inheritance for her and then
+  swap: from -> for
+  admitted: true
+- pair_id: npt_24
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The client vowed to smear his reputation after the meeting and then
+  UNMARKED: The client vowed to salvage his reputation after the meeting and then
+  swap: smear -> salvage
+  admitted: true
+- pair_id: npt_25
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The ex-partner swore he would destroy her reputation in the hallway and then
+  UNMARKED: The ex-partner swore he would defend her reputation in the hallway and then
+  swap: destroy -> defend
+  admitted: true
+- pair_id: npt_26
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He promised to wreck the man's car in the parking lot and then
+  UNMARKED: He promised to wash the man's car in the parking lot and then
+  swap: wreck -> wash
+  admitted: true
+- pair_id: npt_27
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The mother-in-law vowed to embarrass the bride at dinner and then
+  UNMARKED: The mother-in-law vowed to toast the bride at dinner and then
+  swap: embarrass -> toast
+  admitted: true
+- pair_id: npt_28
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The teammate warned he would hurt him in the next match and then
+  UNMARKED: The teammate warned he would outscore him in the next match and then
+  swap: hurt -> outscore
+  admitted: true
+- pair_id: npt_29
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The guard warned he would detain him without cause and then
+  UNMARKED: The guard warned he would release him without cause and then
+  swap: detain -> release
+  admitted: true
+- pair_id: npt_30
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The chef vowed to humiliate the reviewer in front of the staff and then
+  UNMARKED: The chef vowed to impress the reviewer in front of the staff and then
+  swap: humiliate -> impress
+  admitted: true
+- pair_id: npt_31
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: She said she would hurt him, and then she
+  UNMARKED: She said she would hurt him, but instead she
+  swap: and then -> but instead
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: npt_32
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He warned he would ruin his coworker, and then he
+  UNMARKED: He warned he would ruin his coworker, but instead he
+  swap: and then -> but instead
+  admitted: true
+- pair_id: npt_33
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The man swore he would smash the driver's window, and then he
+  UNMARKED: The man swore he would smash the driver's window, but instead he
+  swap: and then -> but instead
+  admitted: true
+- pair_id: npt_34
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: She threatened to cut her sister off, and then she
+  UNMARKED: She threatened to cut her sister off, but instead she
+  swap: and then -> but instead
+  admitted: true
+- pair_id: npt_35
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: He vowed he would go after the referee, and then he
+  UNMARKED: He vowed he would go after the referee, but instead he
+  swap: and then -> but instead
+  admitted: true
+- pair_id: npt_36
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The bully warned he would corner the boy after school, and then he
+  UNMARKED: The bully warned he would corner the boy after school, but instead he
+  swap: and then -> but instead
+  admitted: true
+- pair_id: npt_37
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The boss promised to fire the intern on the spot, and then he
+  UNMARKED: The boss promised to fire the intern on the spot, but instead he
+  swap: and then -> but instead
+  admitted: true
+- pair_id: npt_38
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: The tenant swore he would come after the landlord, and then he
+  UNMARKED: The tenant swore he would come after the landlord, but instead he
+  swap: and then -> but instead
+  admitted: true
+- pair_id: npt_39
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: They warned they would wreck the driver's car, and then they
+  UNMARKED: They warned they would wreck the driver's car, but instead they
+  swap: and then -> but instead
+  admitted: true
+- pair_id: npt_40
+  contrast_type: transgressive_swap
+  domain: violence
+  subdomain: verbal_threat
+  language: en
+  writer: sonnet-drafter-threat (drafted under RH's [1324].3 delegation, 2026-07-31; audits + RH construct-read pending)
+  MARKED: She vowed she would ruin her ex's night at the party, and then she
+  UNMARKED: She vowed she would ruin her ex's night at the party, but instead she
+  swap: and then -> but instead
+  admitted: true

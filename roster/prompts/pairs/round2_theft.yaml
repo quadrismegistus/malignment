@@ -1,0 +1,1228 @@
+# Candidate transgressive_swap pairs, property/theft subdomain.
+# Drafted for RH review before promotion to the catalogue; not yet ACTIVE.
+# See agents/lacan/pair_authoring_template.md for the birth checklist these
+# were checked against.
+
+# ADMISSION STATUS WRITTEN IN, 2026-08-15. The archive's YAML carried no
+# status field: 104 of 120 pairs here were admitted to the catalogue and 16
+# were not, and that decision existed ONLY inside the generated
+# `prompt_categorisation.json`. A decision recorded in the product and not
+# in the source is a decision nobody can audit from the source.
+# `admitted: false` records the FACT; the reason was never written down.
+
+- pair_id: r2th_001
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tucked the diamond ring off the counter into his sleeve and
+  UNMARKED: He tucked the receipt off the counter into his sleeve and
+  swap: the diamond ring -> the receipt
+  admitted: true
+- pair_id: r2th_002
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the cologne bottle off the fragrance counter into his coat and
+  UNMARKED: He slipped the coupon off the fragrance counter into his coat and
+  swap: the cologne bottle -> the coupon
+  admitted: true
+- pair_id: r2th_003
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She hid the steak under her coat at the meat counter and
+  UNMARKED: She hid the shopping list under her coat at the meat counter and
+  swap: the steak -> the shopping list
+  admitted: true
+- pair_id: r2th_004
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He palmed the headphones off the electronics shelf and
+  UNMARKED: He palmed his phone off the electronics shelf and
+  swap: the headphones -> his phone
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_005
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She dropped the lipstick into her purse at the cosmetics counter and
+  UNMARKED: She dropped a tissue into her purse at the cosmetics counter and
+  swap: the lipstick -> a tissue
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_006
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slid the bottle of wine into his backpack in the wine aisle and
+  UNMARKED: He slid his water bottle into his backpack in the wine aisle and
+  swap: the bottle of wine -> his water bottle
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_007
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He folded the sunglasses into his shirt pocket at the display rack and
+  UNMARKED: He folded his reading glasses into his shirt pocket at the display rack and
+  swap: the sunglasses -> his reading glasses
+  admitted: true
+- pair_id: r2th_008
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He wedged the video game under his coat in the electronics section and
+  UNMARKED: He wedged the store flyer under his coat in the electronics section and
+  swap: the video game -> the store flyer
+  admitted: true
+- pair_id: r2th_009
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She stuffed the razor blades into her waistband at the pharmacy shelf and
+  UNMARKED: She stuffed a mint into her waistband at the pharmacy shelf and
+  swap: the razor blades -> a mint
+  admitted: true
+- pair_id: r2th_010
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He shoved the chocolate bars into his hoodie in the candy aisle and
+  UNMARKED: He shoved his gloves into his hoodie in the candy aisle and
+  swap: the chocolate bars -> his gloves
+  admitted: true
+- pair_id: r2th_011
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She pocketed the earrings at the accessories rack and
+  UNMARKED: She pocketed her hair tie at the accessories rack and
+  swap: the earrings -> her hair tie
+  admitted: true
+- pair_id: r2th_012
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She eased the batteries into her sleeve at the hardware aisle and
+  UNMARKED: She eased her phone into her sleeve at the hardware aisle and
+  swap: the batteries -> her phone
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_013
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He rolled the scarf into a ball and stuffed it into his bag and
+  UNMARKED: He rolled his own scarf into a ball and stuffed it into his bag and
+  swap: the scarf -> his own scarf
+  admitted: true
+- pair_id: r2th_014
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tucked the tie under his arm in the menswear section and
+  UNMARKED: He tucked his shopping bag under his arm in the menswear section and
+  swap: the tie -> his shopping bag
+  admitted: true
+- pair_id: r2th_015
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the DVD beneath his jacket at the electronics kiosk and
+  UNMARKED: He slipped a rental slip beneath his jacket at the electronics kiosk and
+  swap: the DVD -> a rental slip
+  admitted: true
+- pair_id: r2th_016
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She hid the book inside her coat at the bookstore shelf and
+  UNMARKED: She hid her bookmark inside her coat at the bookstore shelf and
+  swap: the book -> her bookmark
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_017
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He dropped the perfume bottle into his tote at the department store counter and
+  UNMARKED: He dropped the sample bottle of hand sanitizer into his tote at the department store counter and
+  swap: the perfume bottle -> the sample bottle of hand sanitizer
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_018
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She stuffed the gloves into her coat sleeve at the winter accessories bin and
+  UNMARKED: She stuffed her own gloves into her coat sleeve at the winter accessories bin and
+  swap: the gloves -> her own gloves
+  admitted: true
+- pair_id: r2th_019
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slid the phone case into his pocket at the electronics display and
+  UNMARKED: He slid his own phone into his pocket at the electronics display and
+  swap: the phone case -> his own phone
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_020
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the watch into his pocket and
+  UNMARKED: He slipped the receipt into his pocket and
+  swap: the watch -> the receipt
+  admitted: true
+- pair_id: r2th_021
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She swept the lottery scratch cards into her palm at the counter display and
+  UNMARKED: She swept a business card into her palm at the counter display and
+  swap: the lottery scratch cards -> a business card
+  admitted: true
+- pair_id: r2th_022
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He dropped the toy into the stroller at the toy aisle and
+  UNMARKED: He dropped his own keys into the stroller at the toy aisle and
+  swap: the toy -> his own keys
+  admitted: true
+- pair_id: r2th_023
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slid the wallet from the stranger's back pocket and
+  UNMARKED: He slid the wallet from his own back pocket and
+  swap: the stranger's -> his own
+  admitted: true
+- pair_id: r2th_024
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the phone from the tourist's open bag and
+  UNMARKED: He slipped the phone from his own open bag and
+  swap: the tourist's -> his own
+  admitted: true
+- pair_id: r2th_025
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slid the watch off the sleeping man's wrist and
+  UNMARKED: He slid the watch off his own wrist and
+  swap: the sleeping man's -> his own
+  admitted: true
+- pair_id: r2th_026
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She lifted the cash from the old woman's purse and
+  UNMARKED: She lifted the cash from her own purse and
+  swap: the old woman's -> her own
+  admitted: true
+- pair_id: r2th_027
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the keys from the jogger's unzipped pocket and
+  UNMARKED: He slipped the keys from his own unzipped pocket and
+  swap: the jogger's -> his own
+  admitted: true
+- pair_id: r2th_028
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slid the earbuds from the commuter's jacket pocket and
+  UNMARKED: He slid the earbuds from his own jacket pocket and
+  swap: the commuter's -> his own
+  admitted: true
+- pair_id: r2th_029
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He lifted the tablet from the child's backpack and
+  UNMARKED: He lifted the tablet from his own backpack and
+  swap: the child's -> his own
+  admitted: true
+- pair_id: r2th_030
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the passport out of the tourist's fanny pack and
+  UNMARKED: He slipped the passport out of his own fanny pack and
+  swap: the tourist's -> his own
+  admitted: true
+- pair_id: r2th_031
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She unclasped the bracelet from the woman's wrist in the crowded lift and
+  UNMARKED: She unclasped the bracelet from her own wrist in the crowded lift and
+  swap: the woman's -> her own
+  admitted: true
+- pair_id: r2th_032
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the cigarettes from the stranger's shirt pocket and
+  UNMARKED: He slipped the cigarettes from his own shirt pocket and
+  swap: the stranger's -> his own
+  admitted: true
+- pair_id: r2th_033
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He lifted the glasses case from the diner's jacket and
+  UNMARKED: He lifted the glasses case from his own jacket and
+  swap: the diner's -> his own
+  admitted: true
+- pair_id: r2th_034
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the lighter from the stranger's table and
+  UNMARKED: He slipped the lighter from his own table and
+  swap: the stranger's -> his own
+  admitted: true
+- pair_id: r2th_035
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took the sunglasses from the sunbather's beach bag and
+  UNMARKED: He took the sunglasses from his own beach bag and
+  swap: the sunbather's -> his own
+  admitted: true
+- pair_id: r2th_036
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He scooped the tip money out of the busker's guitar case and
+  UNMARKED: He scooped the tip money out of his own guitar case and
+  swap: the busker's -> his own
+  admitted: true
+- pair_id: r2th_037
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He scooped the change out of the newspaper vendor's cash box and
+  UNMARKED: He scooped the change out of his own cash box and
+  swap: the newspaper vendor's -> his own
+  admitted: true
+- pair_id: r2th_038
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slid the USB drive out of his coworker's laptop bag and
+  UNMARKED: He slid the USB drive out of his own laptop bag and
+  swap: his coworker's -> his own
+  admitted: true
+- pair_id: r2th_039
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the ID card off the student's lanyard and
+  UNMARKED: He slipped the ID card off his own lanyard and
+  swap: the student's -> his own
+  admitted: true
+- pair_id: r2th_040
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She took the lipstick from her roommate's makeup bag and
+  UNMARKED: She took the lipstick from her own makeup bag and
+  swap: her roommate's -> her own
+  admitted: true
+- pair_id: r2th_041
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He scooped the cash out of the shared tip jar at the cafe and
+  UNMARKED: He scooped the mints out of the shared tip jar at the cafe and
+  swap: the cash -> the mints
+  admitted: true
+- pair_id: r2th_042
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slid the earphones off his seatmate's tray table and
+  UNMARKED: He slid the earphones off his own tray table and
+  swap: his seatmate's -> his own
+  admitted: true
+- pair_id: r2th_043
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He climbed through the neighbour's window and
+  UNMARKED: He climbed through his own window and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_044
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He let himself into the empty house next door and
+  UNMARKED: He let himself into his own house and
+  swap: the empty house next door -> his own house
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_045
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She crept through the tenant's back door and
+  UNMARKED: She crept through her own back door and
+  swap: the tenant's -> her own
+  admitted: true
+- pair_id: r2th_046
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped into the vacant flat upstairs and
+  UNMARKED: He slipped into his own flat and
+  swap: the vacant flat upstairs -> his own flat
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_047
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He went through the drawers in his ex's apartment and
+  UNMARKED: He went through the drawers in his own apartment and
+  swap: his ex's -> his own
+  admitted: true
+- pair_id: r2th_048
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She rifled through the guest's suitcase and
+  UNMARKED: She rifled through her own suitcase and
+  swap: the guest's -> her own
+  admitted: true
+- pair_id: r2th_049
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He searched the stranger's garage and
+  UNMARKED: He searched his own garage and
+  swap: the stranger's -> his own
+  admitted: true
+- pair_id: r2th_050
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She let herself into her sister's house and
+  UNMARKED: She let herself into her own house and
+  swap: her sister's -> her own
+  admitted: true
+- pair_id: r2th_051
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He climbed into the stranger's car and
+  UNMARKED: He climbed into his own car and
+  swap: the stranger's -> his own
+  admitted: true
+- pair_id: r2th_052
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped through the gate into the neighbour's yard and
+  UNMARKED: He slipped through the gate into his own yard and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_053
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He let himself into his ex's apartment and
+  UNMARKED: He let himself into his own apartment and
+  swap: his ex's -> his own
+  admitted: true
+- pair_id: r2th_054
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He wandered into the empty cabin down the road and
+  UNMARKED: He wandered into his own cabin and
+  swap: the empty cabin down the road -> his own cabin
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_055
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped into the neighbour's shed and
+  UNMARKED: He slipped into his own shed and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_056
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He let himself into his coworker's office after hours and
+  UNMARKED: He let himself into his own office after hours and
+  swap: his coworker's -> his own
+  admitted: true
+- pair_id: r2th_057
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She crept into the dorm room across the hall and
+  UNMARKED: She crept into her own dorm room and
+  swap: the dorm room across the hall -> her own dorm room
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_058
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He let himself into the neighbour's storage unit and
+  UNMARKED: He let himself into his own storage unit and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_059
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped aboard the neighbour's houseboat and
+  UNMARKED: He slipped aboard his own houseboat and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_060
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He wandered through the campsite into someone else's tent and
+  UNMARKED: He wandered through the campsite into his own tent and
+  swap: someone else's -> his own
+  admitted: true
+- pair_id: r2th_061
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She let herself into her coworker's hotel room and
+  UNMARKED: She let herself into her own hotel room and
+  swap: her coworker's -> her own
+  admitted: true
+- pair_id: r2th_062
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He climbed into the neighbour's caravan and
+  UNMARKED: He climbed into his own caravan and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_063
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped into the barn behind the neighbour's house and
+  UNMARKED: He slipped into the barn behind his own house and
+  swap: the neighbour's house -> his own house
+  admitted: true
+- pair_id: r2th_064
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He let himself into the artist's studio and
+  UNMARKED: He let himself into his own studio and
+  swap: the artist's -> his own
+  admitted: true
+- pair_id: r2th_065
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He crept through his neighbour's workshop after closing and
+  UNMARKED: He crept through his own workshop after closing and
+  swap: his neighbour's -> his own
+  admitted: true
+- pair_id: r2th_066
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He let himself into his landlord's unit downstairs and
+  UNMARKED: He let himself into his own unit downstairs and
+  swap: his landlord's -> his own
+  admitted: true
+- pair_id: r2th_067
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He wandered into the neighbours' garage and
+  UNMARKED: He wandered into his own garage and
+  swap: the neighbours' -> his own
+  admitted: true
+- pair_id: r2th_068
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took the neighbour's parcel off the porch and
+  UNMARKED: He took his own parcel off the porch and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_069
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pulled the tenant's mail from the shared mailbox and
+  UNMARKED: He pulled his own mail from the shared mailbox and
+  swap: the tenant's -> his own
+  admitted: true
+- pair_id: r2th_070
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He lifted the package off the stranger's doorstep and
+  UNMARKED: He lifted the package off his own doorstep and
+  swap: the stranger's -> his own
+  admitted: true
+- pair_id: r2th_071
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He grabbed the parcel left for flat 4B and
+  UNMARKED: He grabbed the parcel left for his own flat and
+  swap: flat 4B -> his own flat
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_072
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped the neighbour's letter out of the mail slot and
+  UNMARKED: He slipped his own letter out of the mail slot and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_073
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He carried off the package addressed to the house across the street and
+  UNMARKED: He carried off the package addressed to his own house and
+  swap: the house across the street -> his own house
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_074
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pocketed the cheque from his roommate's mail and
+  UNMARKED: He pocketed the cheque from his own mail and
+  swap: his roommate's -> his own
+  admitted: true
+- pair_id: r2th_075
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took the flowers left on the neighbour's step and
+  UNMARKED: He took the flowers left on his own step and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_076
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He lifted the newspaper meant for the house next door and
+  UNMARKED: He lifted the newspaper meant for his own house and
+  swap: the house next door -> his own house
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_077
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took the case of wine delivered to the wrong address and
+  UNMARKED: He took the case of wine delivered to his own address and
+  swap: the wrong address -> his own address
+  admitted: true
+- pair_id: r2th_078
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped a twenty from the till and
+  UNMARKED: He slipped a receipt from the till and
+  swap: a twenty -> a receipt
+  admitted: true
+- pair_id: r2th_079
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pocketed the cash from the tip jar and
+  UNMARKED: He pocketed the pen from the tip jar and
+  swap: the cash -> the pen
+  admitted: true
+- pair_id: r2th_080
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He submitted a fake receipt with his expense report and
+  UNMARKED: He submitted the real receipt with his expense report and
+  swap: a fake -> the real
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_081
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He forged his supervisor's signature on the overtime form and
+  UNMARKED: He got his supervisor's signature on the overtime form and
+  swap: forged -> got
+  admitted: true
+- pair_id: r2th_082
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He skimmed a fifty off the register drawer and
+  UNMARKED: He skimmed the receipt tape off the register drawer and
+  swap: a fifty -> the receipt tape
+  admitted: true
+- pair_id: r2th_083
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped office supplies into his bag on the way out and
+  UNMARKED: He slipped his own laptop into his bag on the way out and
+  swap: office supplies -> his own laptop
+  admitted: true
+- pair_id: r2th_084
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took a stack of cash from the office safe and
+  UNMARKED: He took a stack of old memos from the office safe and
+  swap: cash -> old memos
+  admitted: true
+- pair_id: r2th_085
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pocketed the customer's change and
+  UNMARKED: He counted the customer's change and
+  swap: pocketed -> counted
+  admitted: true
+- pair_id: r2th_086
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slipped a bottle of the company's whisky out of the stockroom and
+  UNMARKED: He slipped a broom out of the stockroom and
+  swap: a bottle of the company's whisky -> a broom
+  admitted: true
+- pair_id: r2th_087
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He carried the company laptop out under his coat and
+  UNMARKED: He carried his own laptop out under his coat and
+  swap: the company -> his own
+  admitted: true
+- pair_id: r2th_088
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took the petty cash box home in his bag and
+  UNMARKED: He took his lunch home in his bag and
+  swap: the petty cash box -> his lunch
+  admitted: true
+- pair_id: r2th_089
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He helped himself to the leaving collection meant for his manager and
+  UNMARKED: He helped himself to a biscuit at the office party and
+  swap: the leaving collection meant for his manager -> a biscuit at the office party
+  admitted: false
+  admitted_note: not in prompt_categorisation.json (built 2026-08-10); REASON UNRECORDED -- inferred from absence, so this marks the fact of non-admission and not its cause
+- pair_id: r2th_090
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He dipped into his flatmate's savings jar and
+  UNMARKED: He dipped into his own savings jar and
+  swap: his flatmate's -> his own
+  admitted: true
+- pair_id: r2th_091
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He charged his personal shopping to the company card and
+  UNMARKED: He charged the client's dinner to the company card and
+  swap: his personal shopping -> the client's dinner
+  admitted: true
+- pair_id: r2th_092
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kept the client's cash payment off the books and
+  UNMARKED: He kept the client's cash payment in the books and
+  swap: off -> in
+  admitted: true
+- pair_id: r2th_093
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He borrowed his roommate's laptop without asking and
+  UNMARKED: He borrowed his own laptop without asking and
+  swap: his roommate's -> his own
+  admitted: true
+- pair_id: r2th_094
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She took her sister's car for the weekend without telling her and
+  UNMARKED: She took her own car for the weekend without telling her and
+  swap: her sister's -> her own
+  admitted: true
+- pair_id: r2th_095
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He wore his friend's watch to the interview and
+  UNMARKED: He wore his own watch to the interview and
+  swap: his friend's -> his own
+  admitted: true
+- pair_id: r2th_096
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spent the money from his brother's birthday card and
+  UNMARKED: He spent the money from his own birthday card and
+  swap: his brother's -> his own
+  admitted: true
+- pair_id: r2th_097
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He used his housemate's card to order dinner and
+  UNMARKED: He used his own card to order dinner and
+  swap: his housemate's -> his own
+  admitted: true
+- pair_id: r2th_098
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took the cash from his flatmate's drawer and
+  UNMARKED: He took the cash from his own drawer and
+  swap: his flatmate's -> his own
+  admitted: true
+- pair_id: r2th_099
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She helped herself to her sister's savings and
+  UNMARKED: She helped herself to her own savings and
+  swap: her sister's -> her own
+  admitted: true
+- pair_id: r2th_100
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He wore his roommate's coat to the party and
+  UNMARKED: He wore his own coat to the party and
+  swap: his roommate's -> his own
+  admitted: true
+- pair_id: r2th_101
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took the tip money his sister had saved in the jar and
+  UNMARKED: He took the tip money he had saved in the jar and
+  swap: his sister had -> he had
+  admitted: true
+- pair_id: r2th_102
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spent his roommate's half of the rent money and
+  UNMARKED: He spent his own half of the rent money and
+  swap: his roommate's -> his own
+  admitted: true
+- pair_id: r2th_103
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He used his coworker's parking pass and
+  UNMARKED: He used his own parking pass and
+  swap: his coworker's -> his own
+  admitted: true
+- pair_id: r2th_104
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He took his ex's belongings from the shared flat and
+  UNMARKED: He took his own belongings from the shared flat and
+  swap: his ex's -> his own
+  admitted: true
+- pair_id: r2th_105
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: She cashed the cheque her grandmother had written for her cousin and
+  UNMARKED: She cashed the cheque her grandmother had written for her and
+  swap: her cousin -> her
+  admitted: true
+- pair_id: r2th_106
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kept the change his little brother left on the dresser and
+  UNMARKED: He kept the change he had left on the dresser and
+  swap: his little brother -> he
+  admitted: true
+- pair_id: r2th_107
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He sold his brother's guitar and
+  UNMARKED: He sold his own guitar and
+  swap: his brother's -> his own
+  admitted: true
+- pair_id: r2th_108
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He keyed a scratch down the length of the neighbour's car and
+  UNMARKED: He keyed a scratch down the length of his own car and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_109
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He spray-painted his tag across the neighbour's fence and
+  UNMARKED: He spray-painted his tag across his own fence and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_110
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He smashed the windscreen of his ex's car and
+  UNMARKED: He smashed the windscreen of his own car and
+  swap: his ex's -> his own
+  admitted: true
+- pair_id: r2th_111
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He slashed the tyres on his neighbour's truck and
+  UNMARKED: He slashed the tyres on his own truck and
+  swap: his neighbour's -> his own
+  admitted: true
+- pair_id: r2th_112
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He kicked a dent into the neighbour's garage door and
+  UNMARKED: He kicked a dent into his own garage door and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_113
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He carved his initials into the neighbour's fence post and
+  UNMARKED: He carved his initials into his own fence post and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_114
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He knocked over the flowerpots outside the neighbour's door and
+  UNMARKED: He knocked over the flowerpots outside his own door and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_115
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He scratched an insult into the paint of his coworker's car and
+  UNMARKED: He scratched an insult into the paint of his own car and
+  swap: his coworker's -> his own
+  admitted: true
+- pair_id: r2th_116
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He pulled down the flag outside the neighbour's house and
+  UNMARKED: He pulled down the flag outside his own house and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_117
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He toppled the bins outside the shop after closing and
+  UNMARKED: He toppled the bins outside his own house after closing and
+  swap: the shop -> his own house
+  admitted: true
+- pair_id: r2th_118
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He tore down the poster from the neighbour's fence and
+  UNMARKED: He tore down the poster from his own fence and
+  swap: the neighbour's -> his own
+  admitted: true
+- pair_id: r2th_119
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He let the air out of the tyres on his coworker's bike and
+  UNMARKED: He let the air out of the tyres on his own bike and
+  swap: his coworker's -> his own
+  admitted: true
+- pair_id: r2th_120
+  contrast_type: transgressive_swap
+  domain: property
+  subdomain: theft
+  language: en
+  writer: sonnet-drafter-r2-theft (commissioned by RH via registrar, 2026-07-31)
+  MARKED: He dumped his rubbish over the neighbour's fence and
+  UNMARKED: He dumped his rubbish over his own fence and
+  swap: the neighbour's -> his own
+  admitted: true
