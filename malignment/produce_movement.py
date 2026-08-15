@@ -65,7 +65,7 @@ import collections
 import sys
 
 from . import ch
-from .movement import CANONICAL, LENS, DRAW, movement
+from .movement import CANONICAL, LENS, DRAW, RESIDUAL_KEY, movement
 
 RULES = {"canonical": CANONICAL, "lens": LENS, "draw": DRAW}
 DERIVING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct", "distill")
@@ -173,7 +173,21 @@ def main():
             fall = set(mv.fallers)
             rise = set(mv.risers)
             for w, d in mv.delta.items():
-                if w.startswith("__"):     # the residual key is not a word
+                #: **EXACT MATCH, NOT A PREFIX.** This read `w.startswith("__")`
+                #: to skip the residual key `__TAIL__`, and silently deleted
+                #: `____`, `______`, `__________` -- the blank-fill template
+                #: tokens that ARE the OLMo genre-collapse finding ("intermediate
+                #: layers dominated by template tokens (`____`, `kms`); explains
+                #: genre collapse"). 16 words per cell carrying 0.606 of the
+                #: aligned distribution, on the cell where `kill` 0.098 -> 0 and
+                #: `Options` 0 -> 0.097.
+                #:
+                #: Caught by a ledger that would not close: arrived - departed +
+                #: still + resid came to -0.698 where it must be 0. A reserved
+                #: key is a VALUE, and testing a value with a prefix is the same
+                #: text-for-structure substitution that cost this project four
+                #: other results today.
+                if w == RESIDUAL_KEY:
                     continue
                 rows.append({"base": e["base"], "aligned": e["aligned"],
                              "relation": e["relation"], "prompt": prompt, "word": w,
