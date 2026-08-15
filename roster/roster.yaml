@@ -1,0 +1,586 @@
+# THE ROSTER: checkpoints and the training operations between them.
+# AUTHORED. Hand-edit this. No script writes it.
+#
+# NODES are checkpoints. EDGES are what was done to what. There are no
+# `ego`/`superego` slots: those named a PSYCHIC POSITION, and a schema that
+# names one has already answered the question the project is asking. Worse,
+# `superego` was doing two jobs -- for OLMo it meant a released DPO
+# checkpoint, for Llama an instruct model bundling SFT+preference+whatever,
+# composition never separately released. 58 families had a `superego` and
+# only 29 an `ego`. The Freudian reading belongs in the analysis, where it
+# can be a FINDING (which stage carries the repression, and does it vary by
+# family and content?) rather than a column name asserting the answer.
+#
+# OPERATIONS: sft | dpo | rlvr | ppo | kto | slic | distill
+#             instruct = an aligned endpoint of UNDECLARED composition
+#                        (35 edges -- the LARGEST class, larger than dpo)
+
+nodes:
+  01-ai/Yi-1.5-9B:
+    family: [yi]
+  01-ai/Yi-1.5-9B-Chat:
+    country: CN
+    family: [yi]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  AI-Sweden-Models/gpt-sw3-6.7b-v2:
+    family: [gpt-sw3]
+  AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct:
+    family: [gpt-sw3]
+  Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf:
+    family: [pharia]
+  Aleph-Alpha/Pharia-1-LLM-7B-control-hf:
+    family: [pharia]
+  BAAI/Aquila2-7B:
+    family: [aquila2]
+  BAAI/AquilaChat2-7B:
+    family: [aquila2]
+  BSC-LT/salamandra-7b:
+    family: [salamandra]
+  BSC-LT/salamandra-7b-instruct:
+    family: [salamandra]
+  ContextualAI/archangel_sft-dpo_pythia2-8b:
+    family: [archangel-dpo]
+  ContextualAI/archangel_sft-kto_pythia2-8b:
+    family: [archangel-kto]
+  ContextualAI/archangel_sft-ppo_pythia2-8b:
+    family: [archangel-ppo]
+  ContextualAI/archangel_sft-slic_pythia2-8b:
+    family: [archangel-slic]
+  ContextualAI/archangel_sft_pythia2-8b:
+    family: [archangel-dpo, archangel-kto, archangel-ppo, archangel-slic]
+  EleutherAI/pythia-2.8b:
+    family: [archangel-dpo, archangel-kto, archangel-ppo, archangel-slic]
+  EleutherAI/pythia-6.9b:
+    country: US
+    family: [pythia]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+    scale: 7B
+  HuggingFaceH4/mistral-7b-sft-beta:
+    country: US
+    family: [zephyr]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  HuggingFaceH4/zephyr-7b-beta:
+    country: US
+    family: [zephyr]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  HuggingFaceTB/SmolLM2-360M:
+    country: US
+    family: [smol]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 360M
+  HuggingFaceTB/SmolLM2-360M-Instruct:
+    family: [smol]
+    open_data: false
+    open_weight: true
+  HuggingFaceTB/SmolLM3-3B:
+    family: [smol3]
+    open_data: false
+    open_weight: true
+  HuggingFaceTB/SmolLM3-3B-Base:
+    country: US
+    family: [smol3]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 3B
+  HuggingFaceTB/SmolLM3-3B-checkpoints:
+    family: [smol3]
+  LLM360/Amber:
+    country: US
+    family: [amber]
+    open_data: false
+    open_weight: true
+    org_type: academic
+    scale: 7B
+  LLM360/AmberChat:
+    country: US
+    family: [amber]
+    open_data: false
+    open_weight: true
+    org_type: academic
+  LLM360/AmberSafe:
+    country: US
+    family: [amber]
+    open_data: false
+    open_weight: true
+    org_type: academic
+  OpenLLM-France/Lucie-7B:
+    family: [lucie]
+  OpenLLM-France/Lucie-7B-Instruct-v1.1:
+    family: [lucie]
+  PKU-Alignment/alpaca-7b-reproduced:
+    family: [beaver]
+  PKU-Alignment/beaver-7b-v1.0:
+    family: [beaver]
+  Qwen/Qwen2.5-0.5B:
+    country: CN
+    family: [qwen-tiny]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 0.5B
+  Qwen/Qwen2.5-0.5B-Instruct:
+    country: CN
+    family: [qwen-tiny]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  Qwen/Qwen2.5-7B:
+    country: CN
+    family: [qwen]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 7B
+  Qwen/Qwen2.5-7B-Instruct:
+    country: CN
+    family: [qwen]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  Qwen/Qwen3-8B:
+    country: CN
+    family: [qwen3]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  Qwen/Qwen3-8B-Base:
+    country: CN
+    family: [qwen3]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 8B
+  RWKV/rwkv-4-7b-pile:
+    family: [rwkv]
+  RWKV/rwkv-raven-7b:
+    family: [rwkv]
+  TinyLlama/TinyLlama-1.1B-Chat-v1.0:
+    family: [tinyllama]
+  TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T:
+    family: [tinyllama]
+  Zyphra/Zamba2-7B:
+    family: [zamba2]
+  Zyphra/Zamba2-7B-Instruct:
+    family: [zamba2]
+  allenai/Llama-3.1-Tulu-3-8B-DPO:
+    country: US
+    family: [tulu]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Llama-3.1-Tulu-3-8B-SFT:
+    country: US
+    family: [tulu, tulu-sft-full]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data:
+    country: US
+    family: [tulu-sft-nomath]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data:
+    country: US
+    family: [tulu-sft-nopersona]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data:
+    country: US
+    family: [tulu-no-safety]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data:
+    country: US
+    family: [tulu-sft-nowildchat]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Llama-3.1-Tulu-3.1-8B:
+    country: US
+    family: [tulu]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/OLMo-2-0425-1B:
+    country: US
+    family: [olmo-tiny]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+    scale: 1B
+  allenai/OLMo-2-0425-1B-DPO:
+    country: US
+    family: [olmo-tiny]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/OLMo-2-0425-1B-Instruct:
+    country: US
+    family: [olmo-tiny]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/OLMo-2-0425-1B-SFT:
+    country: US
+    family: [olmo-tiny]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/OLMoE-1B-7B-0125:
+    family: [olmoe]
+  allenai/OLMoE-1B-7B-0125-DPO:
+    family: [olmoe]
+  allenai/OLMoE-1B-7B-0125-Instruct:
+    family: [olmoe]
+  allenai/OLMoE-1B-7B-0125-SFT:
+    family: [olmoe]
+  allenai/Olmo-3-1025-7B:
+    country: US
+    family: [olmo, olmo-think]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+    scale: 7B
+  allenai/Olmo-3-1125-32B:
+    family: [olmo-32b]
+  allenai/Olmo-3-7B-Instruct:
+    country: US
+    family: [olmo]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Olmo-3-7B-Instruct-DPO:
+    country: US
+    family: [olmo]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Olmo-3-7B-Instruct-SFT:
+    country: US
+    family: [olmo]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Olmo-3-7B-Think:
+    family: [olmo-think]
+  allenai/Olmo-3-7B-Think-DPO:
+    country: US
+    family: [olmo-think]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Olmo-3-7B-Think-SFT:
+    country: US
+    family: [olmo-think]
+    open_data: false
+    open_weight: true
+    org_type: nonprofit
+  allenai/Olmo-3.1-32B-Instruct:
+    family: [olmo-32b]
+  allenai/Olmo-3.1-32B-Instruct-DPO:
+    family: [olmo-32b]
+  allenai/Olmo-3.1-32B-Instruct-SFT:
+    family: [olmo-32b]
+  allenai/Olmo-Hybrid-7B:
+    family: [olmo-hybrid]
+  allenai/Olmo-Hybrid-Instruct-DPO-7B:
+    family: [olmo-hybrid]
+  allenai/Olmo-Hybrid-Instruct-SFT-7B:
+    family: [olmo-hybrid]
+  baichuan-inc/Baichuan2-7B-Base:
+    country: CN
+    family: [baichuan]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 7B
+  baichuan-inc/Baichuan2-7B-Chat:
+    country: CN
+    family: [baichuan]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  bigscience/bloom-7b1:
+    family: [bloom]
+  bigscience/bloomz-7b1:
+    family: [bloom]
+  croissantllm/CroissantLLMBase:
+    family: [croissant]
+  croissantllm/CroissantLLMChat-v0.1:
+    family: [croissant]
+  deepseek-ai/DeepSeek-R1-Distill-Llama-8B:
+    country: CN
+    family: [llama]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  deepseek-ai/DeepSeek-R1-Distill-Qwen-7B:
+    country: CN
+    family: [qwen]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  deepseek-ai/deepseek-llm-7b-base:
+    country: CN
+    family: [deepseek-7b]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 7B
+  deepseek-ai/deepseek-llm-7b-chat:
+    country: CN
+    family: [deepseek-7b]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  google/gemma-2-9b:
+    family: [gemma2]
+  google/gemma-2-9b-it:
+    family: [gemma2]
+  google/recurrentgemma-9b:
+    family: [recurrentgemma]
+  google/recurrentgemma-9b-it:
+    family: [recurrentgemma]
+  huggyllama/llama-7b:
+    family: [beaver]
+  ibm-granite/granite-3.0-8b-base:
+    family: [granite]
+  ibm-granite/granite-3.0-8b-instruct:
+    family: [granite]
+  inceptionai/jais-family-6p7b:
+    family: [jais]
+  inceptionai/jais-family-6p7b-chat:
+    family: [jais]
+  internlm/internlm2-base-7b:
+    family: [internlm2]
+  internlm/internlm2-chat-7b:
+    family: [internlm2]
+  internlm/internlm2-chat-7b-sft:
+    family: [internlm2]
+  kakaocorp/kanana-1.5-8b-base:
+    family: [kanana]
+  kakaocorp/kanana-1.5-8b-instruct-2505:
+    family: [kanana]
+  kakaocorp/kanana-2-3b-base:
+    family: [kanana2]
+  kakaocorp/kanana-2-3b-instruct:
+    family: [kanana2]
+  llm-jp/llm-jp-3-7.2b:
+    family: [llm-jp-3]
+  llm-jp/llm-jp-3-7.2b-instruct2:
+    family: [llm-jp-3]
+  llm-jp/llm-jp-3-7.2b-instruct3:
+    family: [llm-jp-3]
+  lomahony/eleuther-pythia6.9b-hh-dpo:
+    family: [pythia]
+    open_data: false
+    open_weight: true
+  lomahony/eleuther-pythia6.9b-hh-sft:
+    family: [pythia]
+    open_data: false
+    open_weight: true
+  m-a-p/CT-LLM-Base:
+    family: [ct-llm]
+  m-a-p/CT-LLM-SFT:
+    family: [ct-llm]
+  m-a-p/CT-LLM-SFT-DPO:
+    family: [ct-llm]
+  m-a-p/neo_7b:
+    family: [map-neo]
+  m-a-p/neo_7b_instruct_v0.1:
+    family: [map-neo]
+  m-a-p/neo_7b_sft_v0.1:
+    family: [map-neo]
+  meta-llama/Llama-3.1-70B:
+    family: [llama-70b]
+  meta-llama/Llama-3.1-70B-Instruct:
+    family: [llama-70b]
+  meta-llama/Llama-3.1-8B:
+    country: US
+    family: [llama, tulu, tulu-no-safety, tulu-sft-full, tulu-sft-nomath, tulu-sft-nopersona, tulu-sft-nowildchat]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 8B
+  meta-llama/Llama-3.1-8B-Instruct:
+    country: US
+    family: [llama]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+  mistralai/Mistral-7B-v0.1:
+    country: FR
+    family: [zephyr]
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 7B
+  openGPT-X/Teuken-7B-base-v0.6:
+    family: [teuken]
+  openGPT-X/Teuken-7B-instruct-v0.6:
+    family: [teuken]
+  openbmb/MiniCPM5-1B:
+    family: [minicpm]
+  openbmb/MiniCPM5-1B-Base:
+    family: [minicpm]
+  openbmb/MiniCPM5-1B-SFT:
+    family: [minicpm]
+  stabilityai/stablelm-2-1_6b:
+    family: [stablelm]
+  stabilityai/stablelm-2-1_6b-chat:
+    family: [stablelm]
+  stabilityai/stablelm-2-zephyr-1_6b:
+    family: [stablelm]
+  team-hatakeyama-phase2/Tanuki-8B-base-v1.0:
+    family: [tanuki]
+  tiiuae/Falcon-H1-1.5B-Base:
+    family: [falcon-h1-1.5b]
+  tiiuae/Falcon-H1-1.5B-Instruct:
+    family: [falcon-h1-1.5b]
+  tiiuae/Falcon-H1-7B-Base:
+    family: [falcon-h1-7b]
+  tiiuae/Falcon-H1-7B-Instruct:
+    family: [falcon-h1-7b]
+  tiiuae/Falcon3-10B-Base:
+    family: [falcon3-10b]
+  tiiuae/Falcon3-10B-Instruct:
+    family: [falcon3-10b]
+  tiiuae/Falcon3-1B-Base:
+    family: [falcon3-1b]
+  tiiuae/Falcon3-1B-Instruct:
+    family: [falcon3-1b]
+  tiiuae/Falcon3-3B-Base:
+    family: [falcon3-3b]
+  tiiuae/Falcon3-3B-Instruct:
+    family: [falcon3-3b]
+  tiiuae/Falcon3-7B-Base:
+    family: [falcon3-7b]
+  tiiuae/Falcon3-7B-Instruct:
+    family: [falcon3-7b]
+  tiiuae/Falcon3-Mamba-7B-Base:
+    family: [falcon3-mamba]
+  tiiuae/Falcon3-Mamba-7B-Instruct:
+    family: [falcon3-mamba]
+  tiiuae/falcon-mamba-7b:
+    family: [falcon-mamba]
+  tiiuae/falcon-mamba-7b-instruct:
+    family: [falcon-mamba]
+  togethercomputer/RedPajama-INCITE-7B-Chat:
+    family: [redpajama]
+  togethercomputer/RedPajama-INCITE-7B-Instruct:
+    family: [redpajama]
+  togethercomputer/RedPajama-INCITE-Base-7B-v0.1:
+    family: [redpajama]
+  weblab-GENIAC/Tanuki-8B-dpo-v1.0:
+    family: [tanuki]
+  zai-org/glm-4-9b-chat-hf:
+    family: [glm4]
+  zai-org/glm-4-9b-hf:
+    family: [glm4]
+
+edges:
+  - [01-ai/Yi-1.5-9B, instruct, 01-ai/Yi-1.5-9B-Chat]  # yi
+  - [AI-Sweden-Models/gpt-sw3-6.7b-v2, instruct, AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct]  # gpt-sw3
+  - [Aleph-Alpha/Pharia-1-LLM-7B-control-hf, instruct, Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf]  # pharia
+  - [BAAI/Aquila2-7B, sft, BAAI/AquilaChat2-7B]  # aquila2
+  - [BSC-LT/salamandra-7b, instruct, BSC-LT/salamandra-7b-instruct]  # salamandra
+  - [ContextualAI/archangel_sft_pythia2-8b, dpo, ContextualAI/archangel_sft-dpo_pythia2-8b]  # archangel-dpo
+  - [ContextualAI/archangel_sft_pythia2-8b, dpo, ContextualAI/archangel_sft-kto_pythia2-8b]  # archangel-kto
+  - [ContextualAI/archangel_sft_pythia2-8b, dpo, ContextualAI/archangel_sft-ppo_pythia2-8b]  # archangel-ppo
+  - [ContextualAI/archangel_sft_pythia2-8b, dpo, ContextualAI/archangel_sft-slic_pythia2-8b]  # archangel-slic
+  - [EleutherAI/pythia-2.8b, sft, ContextualAI/archangel_sft_pythia2-8b]  # archangel-dpo, archangel-kto, archangel-ppo, archangel-slic
+  - [EleutherAI/pythia-6.9b, sft, lomahony/eleuther-pythia6.9b-hh-sft]  # pythia
+  - [HuggingFaceH4/mistral-7b-sft-beta, dpo, HuggingFaceH4/zephyr-7b-beta]  # zephyr
+  - [HuggingFaceTB/SmolLM2-360M, instruct, HuggingFaceTB/SmolLM2-360M-Instruct]  # smol
+  - [HuggingFaceTB/SmolLM3-3B-Base, sft, HuggingFaceTB/SmolLM3-3B-checkpoints]  # smol3
+  - [HuggingFaceTB/SmolLM3-3B-checkpoints, dpo, HuggingFaceTB/SmolLM3-3B]  # smol3
+  - [LLM360/Amber, sft, LLM360/AmberChat]  # amber
+  - [LLM360/AmberChat, dpo, LLM360/AmberSafe]  # amber
+  - [OpenLLM-France/Lucie-7B, instruct, OpenLLM-France/Lucie-7B-Instruct-v1.1]  # lucie
+  - [PKU-Alignment/alpaca-7b-reproduced, dpo, PKU-Alignment/beaver-7b-v1.0]  # beaver
+  - [Qwen/Qwen2.5-0.5B, instruct, Qwen/Qwen2.5-0.5B-Instruct]  # qwen-tiny
+  - [Qwen/Qwen2.5-7B, distill, deepseek-ai/DeepSeek-R1-Distill-Qwen-7B]  # qwen
+  - [Qwen/Qwen2.5-7B, instruct, Qwen/Qwen2.5-7B-Instruct]  # qwen
+  - [Qwen/Qwen3-8B-Base, instruct, Qwen/Qwen3-8B]  # qwen3
+  - [RWKV/rwkv-4-7b-pile, instruct, RWKV/rwkv-raven-7b]  # rwkv
+  - [TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T, instruct, TinyLlama/TinyLlama-1.1B-Chat-v1.0]  # tinyllama
+  - [Zyphra/Zamba2-7B, instruct, Zyphra/Zamba2-7B-Instruct]  # zamba2
+  - [allenai/Llama-3.1-Tulu-3-8B-DPO, rlvr, allenai/Llama-3.1-Tulu-3.1-8B]  # tulu
+  - [allenai/Llama-3.1-Tulu-3-8B-SFT, dpo, allenai/Llama-3.1-Tulu-3-8B-DPO]  # tulu
+  - [allenai/OLMo-2-0425-1B, sft, allenai/OLMo-2-0425-1B-SFT]  # olmo-tiny
+  - [allenai/OLMo-2-0425-1B-DPO, rlvr, allenai/OLMo-2-0425-1B-Instruct]  # olmo-tiny
+  - [allenai/OLMo-2-0425-1B-SFT, dpo, allenai/OLMo-2-0425-1B-DPO]  # olmo-tiny
+  - [allenai/OLMoE-1B-7B-0125, sft, allenai/OLMoE-1B-7B-0125-SFT]  # olmoe
+  - [allenai/OLMoE-1B-7B-0125-DPO, rlvr, allenai/OLMoE-1B-7B-0125-Instruct]  # olmoe
+  - [allenai/OLMoE-1B-7B-0125-SFT, dpo, allenai/OLMoE-1B-7B-0125-DPO]  # olmoe
+  - [allenai/Olmo-3-1025-7B, sft, allenai/Olmo-3-7B-Instruct-SFT]  # olmo
+  - [allenai/Olmo-3-1025-7B, sft, allenai/Olmo-3-7B-Think-SFT]  # olmo-think
+  - [allenai/Olmo-3-1125-32B, sft, allenai/Olmo-3.1-32B-Instruct-SFT]  # olmo-32b
+  - [allenai/Olmo-3-7B-Instruct-DPO, rlvr, allenai/Olmo-3-7B-Instruct]  # olmo
+  - [allenai/Olmo-3-7B-Instruct-SFT, dpo, allenai/Olmo-3-7B-Instruct-DPO]  # olmo
+  - [allenai/Olmo-3-7B-Think-DPO, rlvr, allenai/Olmo-3-7B-Think]  # olmo-think
+  - [allenai/Olmo-3-7B-Think-SFT, dpo, allenai/Olmo-3-7B-Think-DPO]  # olmo-think
+  - [allenai/Olmo-3.1-32B-Instruct-DPO, rlvr, allenai/Olmo-3.1-32B-Instruct]  # olmo-32b
+  - [allenai/Olmo-3.1-32B-Instruct-SFT, dpo, allenai/Olmo-3.1-32B-Instruct-DPO]  # olmo-32b
+  - [allenai/Olmo-Hybrid-7B, sft, allenai/Olmo-Hybrid-Instruct-SFT-7B]  # olmo-hybrid
+  - [allenai/Olmo-Hybrid-Instruct-SFT-7B, dpo, allenai/Olmo-Hybrid-Instruct-DPO-7B]  # olmo-hybrid
+  - [baichuan-inc/Baichuan2-7B-Base, instruct, baichuan-inc/Baichuan2-7B-Chat]  # baichuan
+  - [bigscience/bloom-7b1, instruct, bigscience/bloomz-7b1]  # bloom
+  - [croissantllm/CroissantLLMBase, instruct, croissantllm/CroissantLLMChat-v0.1]  # croissant
+  - [deepseek-ai/deepseek-llm-7b-base, instruct, deepseek-ai/deepseek-llm-7b-chat]  # deepseek-7b
+  - [google/gemma-2-9b, instruct, google/gemma-2-9b-it]  # gemma2
+  - [google/recurrentgemma-9b, instruct, google/recurrentgemma-9b-it]  # recurrentgemma
+  - [huggyllama/llama-7b, sft, PKU-Alignment/alpaca-7b-reproduced]  # beaver
+  - [ibm-granite/granite-3.0-8b-base, instruct, ibm-granite/granite-3.0-8b-instruct]  # granite
+  - [inceptionai/jais-family-6p7b, instruct, inceptionai/jais-family-6p7b-chat]  # jais
+  - [internlm/internlm2-base-7b, sft, internlm/internlm2-chat-7b-sft]  # internlm2
+  - [internlm/internlm2-chat-7b-sft, dpo, internlm/internlm2-chat-7b]  # internlm2
+  - [kakaocorp/kanana-1.5-8b-base, instruct, kakaocorp/kanana-1.5-8b-instruct-2505]  # kanana
+  - [kakaocorp/kanana-2-3b-base, instruct, kakaocorp/kanana-2-3b-instruct]  # kanana2
+  - [llm-jp/llm-jp-3-7.2b, sft, llm-jp/llm-jp-3-7.2b-instruct2]  # llm-jp-3
+  - [llm-jp/llm-jp-3-7.2b-instruct2, dpo, llm-jp/llm-jp-3-7.2b-instruct3]  # llm-jp-3
+  - [lomahony/eleuther-pythia6.9b-hh-sft, dpo, lomahony/eleuther-pythia6.9b-hh-dpo]  # pythia
+  - [m-a-p/CT-LLM-Base, sft, m-a-p/CT-LLM-SFT]  # ct-llm
+  - [m-a-p/CT-LLM-SFT, dpo, m-a-p/CT-LLM-SFT-DPO]  # ct-llm
+  - [m-a-p/neo_7b, sft, m-a-p/neo_7b_sft_v0.1]  # map-neo
+  - [m-a-p/neo_7b_sft_v0.1, dpo, m-a-p/neo_7b_instruct_v0.1]  # map-neo
+  - [meta-llama/Llama-3.1-70B, instruct, meta-llama/Llama-3.1-70B-Instruct]  # llama-70b
+  - [meta-llama/Llama-3.1-8B, distill, deepseek-ai/DeepSeek-R1-Distill-Llama-8B]  # llama
+  - [meta-llama/Llama-3.1-8B, instruct, meta-llama/Llama-3.1-8B-Instruct]  # llama
+  - [meta-llama/Llama-3.1-8B, sft, allenai/Llama-3.1-Tulu-3-8B-SFT]  # tulu, tulu-sft-full
+  - [meta-llama/Llama-3.1-8B, sft, allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data]  # tulu-sft-nomath
+  - [meta-llama/Llama-3.1-8B, sft, allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data]  # tulu-sft-nopersona
+  - [meta-llama/Llama-3.1-8B, sft, allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data]  # tulu-no-safety
+  - [meta-llama/Llama-3.1-8B, sft, allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data]  # tulu-sft-nowildchat
+  - [mistralai/Mistral-7B-v0.1, sft, HuggingFaceH4/mistral-7b-sft-beta]  # zephyr
+  - [openGPT-X/Teuken-7B-base-v0.6, instruct, openGPT-X/Teuken-7B-instruct-v0.6]  # teuken
+  - [openbmb/MiniCPM5-1B-Base, sft, openbmb/MiniCPM5-1B-SFT]  # minicpm
+  - [openbmb/MiniCPM5-1B-SFT, dpo, openbmb/MiniCPM5-1B]  # minicpm
+  - [stabilityai/stablelm-2-1_6b, sft, stabilityai/stablelm-2-1_6b-chat]  # stablelm
+  - [stabilityai/stablelm-2-1_6b-chat, dpo, stabilityai/stablelm-2-zephyr-1_6b]  # stablelm
+  - [team-hatakeyama-phase2/Tanuki-8B-base-v1.0, instruct, weblab-GENIAC/Tanuki-8B-dpo-v1.0]  # tanuki
+  - [tiiuae/Falcon-H1-1.5B-Base, instruct, tiiuae/Falcon-H1-1.5B-Instruct]  # falcon-h1-1.5b
+  - [tiiuae/Falcon-H1-7B-Base, instruct, tiiuae/Falcon-H1-7B-Instruct]  # falcon-h1-7b
+  - [tiiuae/Falcon3-10B-Base, instruct, tiiuae/Falcon3-10B-Instruct]  # falcon3-10b
+  - [tiiuae/Falcon3-1B-Base, instruct, tiiuae/Falcon3-1B-Instruct]  # falcon3-1b
+  - [tiiuae/Falcon3-3B-Base, instruct, tiiuae/Falcon3-3B-Instruct]  # falcon3-3b
+  - [tiiuae/Falcon3-7B-Base, instruct, tiiuae/Falcon3-7B-Instruct]  # falcon3-7b
+  - [tiiuae/Falcon3-Mamba-7B-Base, instruct, tiiuae/Falcon3-Mamba-7B-Instruct]  # falcon3-mamba
+  - [tiiuae/falcon-mamba-7b, instruct, tiiuae/falcon-mamba-7b-instruct]  # falcon-mamba
+  - [togethercomputer/RedPajama-INCITE-7B-Instruct, dpo, togethercomputer/RedPajama-INCITE-7B-Chat]  # redpajama
+  - [togethercomputer/RedPajama-INCITE-Base-7B-v0.1, sft, togethercomputer/RedPajama-INCITE-7B-Instruct]  # redpajama
+  - [zai-org/glm-4-9b-hf, instruct, zai-org/glm-4-9b-chat-hf]  # glm4

@@ -1,211 +1,161 @@
-"""The roster: one authored file in, one ClickHouse table out.
+"""The roster: checkpoints and the training operations between them.
 
     python -m malignment.roster            show what would be written
-    python -m malignment.roster --write    build malign_logits.roster
+    python -m malignment.roster --write    build malignment.checkpoints + .edges
 
-WHAT THIS REPLACES, AND WHY IT IS ONE TABLE RATHER THAN FOUR FILES. On
-2026-08-15 the question *"how do you get the representative model pairs?"* was
-put to three seats and produced six answers:
+## NODES AND EDGES, NOT SLOTS
 
-    data/lineage_representative_pairs.txt        46   frozen for one experiment
-    lineage.representative_pairs('frozen')       46
-    lineage.representative_pairs('registry')     51   live, CH-defined
-    CH movement_edges is_representative          52   over 47 bases
-    Registry.base_aligned_pairs()                54   one per base CHECKPOINT
-    base_aligned_pairs collapsed to lineages     48
+RH, 2026-08-15: *"All we need is info on model checkpoints and their training
+edges right? Nodes and edges type data?"* Yes, and it fixes a factual defect as
+well as a theoretical one.
 
-**None of them was wrong.** Each answered a different question and the integer
-did not say which. A document written the day before (`docs/model-populations.md`)
-had already tried to fix this and made it worse by legitimising four defensible
-numbers -- so every seat picked one correctly and reported a bare count.
+The old schema had slots named `base` / `ego` / `superego` / `reinforced_superego`.
 
-The fix is not another function. It is that **the definition lives in ONE place
-that consumers cannot bypass**: a view. A query returns rows, and the rows carry
-the lineage they were collapsed on, so a reader can see the operation rather
-than infer it from a total.
+**A SCHEMA THAT NAMES A PSYCHIC POSITION HAS ALREADY ANSWERED THE QUESTION.** The
+project's best results are about *which stage carries the repression* -- SFT
+takes sexual content and DPO takes violence in OLMo; OLMo is ego-dominant at
+~90% while Amber splits 50/50; the one reliable Tulu ablation arm is
+`no-safety`, which is an SFT ablation. Every one of those says the superego
+FUNCTION is distributed and its distribution varies by family and by content. A
+column called `superego` makes that unsayable.
 
-## AUTHORED vs GENERATED, WHICH IS THE DISTINCTION THE OLD LAYOUT COULD NOT MAKE
+**AND `superego` WAS DOING TWO JOBS.** For OLMo it meant a released DPO
+checkpoint. For Llama it meant `Llama-3.1-8B-Instruct` -- an aligned endpoint
+bundling SFT, preference tuning and whatever else, composition never separately
+released. 58 families carried a `superego`; only 29 carried an `ego`. So for 29
+of them the "superego" was not a preference stage at all. That is the
+heterogeneity behind *"for consistency we've called a pair base->dpo"*: the
+consistency was in the label, not in the objects.
 
-    roster/models.json          AUTHORED. hand-edited. no script writes it.
-    malign_logits.roster        GENERATED from it. no human edits it.
+The same roster, as edges:
 
-The old repo's registry was regenerate-only -- correctly, since *"a cache that
-can outrank its source is how 59 models shadowed 112 for five weeks"* -- but it
-had no authored INPUT file, so declarations fled into `__init__.py` where a hand
-edit survived a rebuild. 691 lines of Python dict as a data store, because the
-data store had no door.
+    instruct  35   <- LARGEST class. aligned endpoint, composition UNDECLARED
+    sft       29
+    dpo       23
+    rlvr       6
+    distill    2
 
-## THE TABLE IS `roster`, NOT `models`
+**The most common aligned checkpoint in the roster is one whose composition we do
+not know**, and the old schema called all 35 of them the superego.
 
-`malign_logits.models` is the OLD repo's table, built 2026-08-11 and four days
-stale by the time this was written. Writing there would break a repo that still
-works. Two tables during the transition is the cost of not breaking it, and the
-manifest records which is which.
+## WHAT THIS BUYS
+
+A pair is no longer forced. `Llama-3.1-8B` has six outgoing edges -- Meta's
+`instruct`, a `distill`, and five Tulu `sft` arms including four data ablations.
+Those are DIFFERENT COMPARISONS, not redundancy, and the graph holds them without
+anyone choosing a representative in advance. An analysis picks its edges and says
+which. The Freudian reading loses nothing: it moves to the analysis, where it can
+be a finding rather than a schema.
+
+## YAML, BECAUSE THE FILE IS HAND-EDITED
+
+JSON cannot hold a comment, and a declaration whose evidence cannot sit beside it
+loses the evidence. `roster/roster.yaml` is authored; no script writes it.
 """
 import argparse
-import json
+import collections
 import os
 import sys
 
 from . import ch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-AUTHORED = os.path.join(ROOT, "roster", "models.json")
-TABLE = "roster"
+AUTHORED = os.path.join(ROOT, "roster", "roster.yaml")
 
-#: The family slots, in ladder order. The slot IS the declared position: a
-#: checkpoint named as `superego` is one, and there is no second place that says
-#: otherwise. The old repo carried `position` in three files that could disagree.
-SLOTS = [("base", "base"), ("ego", "sft"), ("superego", "dpo"),
-         ("reinforced_superego", "rlvr"), ("reasoning", "reasoning")]
+#: Operations that ALIGN. `distill` is a lineage relation, not an alignment step,
+#: so it is excluded here rather than at a call site where it would be invisible.
+ALIGNING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct")
 
-DDL = """
-CREATE TABLE IF NOT EXISTS {db}.roster (
-    model_id    String,
-    family      Array(String),
-    position    LowCardinality(String),
-    stage       LowCardinality(String),
-    lineage     String,
-    org_type    LowCardinality(String),
-    country     LowCardinality(String),
-    scale       LowCardinality(String),
-    open_weight UInt8,
-    open_data   UInt8,
-    note        String
+DDL = ["""
+CREATE TABLE IF NOT EXISTS {db}.checkpoints (
+    model_id String, family Array(String),
+    org_type LowCardinality(String), country LowCardinality(String),
+    scale LowCardinality(String), open_weight UInt8, open_data UInt8
 ) ENGINE = ReplacingMergeTree ORDER BY model_id
-"""
+""", """
+CREATE TABLE IF NOT EXISTS {db}.edges (
+    parent String, op LowCardinality(String), child String
+) ENGINE = ReplacingMergeTree ORDER BY (parent, op, child)
+"""]
+
+VIEWS = {
+    #: EVERY alignment edge, flagged by whether its parent is a pretrained root.
+    #: NOT one per lineage: the Llama root carries Meta's instruct AND five Tulu
+    #: sft arms, and those are different comparisons. The roster does not choose.
+    "alignment_edges": """
+        CREATE OR REPLACE VIEW {db}.alignment_edges AS
+        SELECT parent, op, child,
+               parent NOT IN (SELECT child FROM {db}.edges) AS from_root
+        FROM {db}.edges WHERE op IN %s
+    """ % (str(ALIGNING),),
+    "roots": """
+        CREATE OR REPLACE VIEW {db}.roots AS
+        SELECT model_id FROM {db}.checkpoints
+        WHERE model_id NOT IN (SELECT child FROM {db}.edges)
+    """,
+}
 
 
-def authored():
-    """The hand-edited roster. Raises if absent -- never silently empty."""
+def load():
+    import yaml
     with open(AUTHORED, encoding="utf-8") as fh:
-        return json.load(fh)
+        return yaml.safe_load(fh)
 
 
 def rows():
-    """One row per checkpoint, expanded from the families.
-
-    LINEAGE IS DERIVED, NOT DECLARED -- it is the family's `base` checkpoint.
-    That makes `llama`, `tulu` and `tulu-no-safety` collapse automatically,
-    because all three declare `meta-llama/Llama-3.1-8B` as base: three alignment
-    recipes on ONE pretraining run, which is the unit every cross-family
-    statistic in this project claims to use and has twice been quoted wrong
-    (39 base strings resampled as 39 lineages when they were 34; "23 pairs are
-    20 lineages").
-
-    **A derived lineage cannot go stale and cannot disagree with the roster**,
-    which a separate `lineage_map_models.json` could and did. The one thing it
-    does NOT capture is a declared union of sizes -- the old map unioned
-    Llama-3.1 8B with 70B, and Falcon-H1 1.5B with 7B, on the argument that a
-    size variant is not an independent pretraining run. If that union is wanted
-    it belongs in `models.json` as a declared exception on the family, not in a
-    fourth artifact. It is NOT implemented here, so today 8B and 70B are two
-    lineages, and that is a difference from the old map, stated rather than
-    discovered later.
-    """
-    A = authored()
-    fams, cps = A["families"], A["checkpoints"]
-    out, seen = [], {}
-    for key, fam in sorted(fams.items()):
-        base = fam.get("base")
-        if not base:
-            #: A family with no base cannot anchor a lineage. Refuse loudly --
-            #: silently assigning it one is how a population acquires a member
-            #: nobody declared.
-            raise ValueError("family %r has no base checkpoint" % key)
-        for slot, stage in SLOTS:
-            mid = fam.get(slot)
-            if not mid:
-                continue
-            d = dict(cps.get(mid, {}))
-            row = {"model_id": mid, "family": key, "position": slot,
-                   "stage": d.get("stage", stage), "lineage": base,
-                   "org_type": d.get("org_type", ""), "country": d.get("country", ""),
-                   "scale": d.get("scale", ""),
-                   "open_weight": int(bool(d.get("open_weight"))),
-                   "open_data": int(bool(d.get("open_data"))),
-                   "note": d.get("position_evidence", "")}
-            #: A checkpoint can be named by two families (a shared base). That is
-            #: legitimate; two rows for one model_id is not. First declaration
-            #: wins and the collision is REPORTED, never merged silently.
-            #: FAMILY IS MANY-TO-MANY WITH CHECKPOINT and a scalar column
-            #: cannot hold it. Seven families declare `meta-llama/Llama-3.1-8B`
-            #: (llama, tulu, tulu-no-safety and four SFT ablations); four
-            #: declare `pythia-2.8b` (the archangel method variants). Under
-            #: first-declaration-wins, `tulu-sft-full` vanished ENTIRELY --
-            #: every checkpoint it names was claimed by `tulu` first -- so a
-            #: family disappeared from the roster while every one of its
-            #: checkpoints was present. Array, and every declaring family is
-            #: listed: `WHERE has(family, 'tulu-sft-full')`.
-            if mid in seen:
-                seen[mid]["family"].append(key)
-                continue
-            row["family"] = [key]
-            seen[mid] = row
-            out.append(row)
-    return out, {r["model_id"]: r["family"] for r in out if len(r["family"]) > 1}
-
-
-VIEWS = {
-    #: ONE definition per question, in the only place a consumer cannot bypass.
-    "lineage_representatives": """
-        CREATE OR REPLACE VIEW {db}.lineage_representatives AS
-        SELECT lineage, argMin(model_id, model_id) AS model_id
-        FROM {db}.roster WHERE position = 'base' GROUP BY lineage
-    """,
-    #: A PAIR is (base, aligned) WITHIN one lineage, one row per lineage. The
-    #: aligned arm is the LAST slot present in ladder order -- the endpoint of
-    #: the ladder, not an arbitrary pick -- and `n_aligned` says how many arms
-    #: were collapsed so a reader sees the choice rather than inferring it.
-    "representative_pairs": """
-        CREATE OR REPLACE VIEW {db}.representative_pairs AS
-        SELECT b.lineage AS lineage, b.model_id AS base, a.model_id AS aligned,
-               a.pos AS aligned_position, a.n AS n_aligned
-        FROM (SELECT lineage, any(model_id) AS model_id FROM {db}.roster
-              WHERE position = 'base' GROUP BY lineage) AS b
-        INNER JOIN
-             (SELECT lineage, argMax(model_id, rk) AS model_id,
-                     argMax(position, rk) AS pos, count() AS n
-              FROM (SELECT lineage, model_id, position,
-                           multiIf(position = 'reinforced_superego', 3,
-                                   position = 'superego', 2,
-                                   position = 'ego', 1, 0) AS rk
-                    FROM {db}.roster WHERE position != 'base')
-              GROUP BY lineage) AS a
-        ON b.lineage = a.lineage
-    """,
-}
+    A = load()
+    nodes = [{"model_id": m, "family": (d or {}).get("family") or [],
+              "org_type": (d or {}).get("org_type", "") or "",
+              "country": (d or {}).get("country", "") or "",
+              "scale": (d or {}).get("scale", "") or "",
+              "open_weight": int(bool((d or {}).get("open_weight"))),
+              "open_data": int(bool((d or {}).get("open_data")))}
+             for m, d in (A.get("nodes") or {}).items()]
+    edges = []
+    for e in A.get("edges") or []:
+        #: Refuse a malformed edge rather than skipping it. A training relation
+        #: silently dropped vanishes from every downstream question.
+        if not (isinstance(e, (list, tuple)) and len(e) == 3):
+            raise ValueError("malformed edge: %r" % (e,))
+        edges.append({"parent": e[0], "op": e[1], "child": e[2]})
+    ids = {n["model_id"] for n in nodes}
+    dangling = [e for e in edges if e["parent"] not in ids or e["child"] not in ids]
+    return nodes, edges, dangling
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args()
-
-    rs, dupes = rows()
-    fams = len({k for r in rs for k in r["family"]})
-    lins = len({r["lineage"] for r in rs})
+    nodes, edges, dangling = rows()
+    ops = collections.Counter(e["op"] for e in edges)
+    roots = {n["model_id"] for n in nodes} - {e["child"] for e in edges}
     print("  authored: %s" % os.path.relpath(AUTHORED, ROOT))
-    print("  %d checkpoints | %d families | %d lineages (derived from base)"
-          % (len(rs), fams, lins))
-    if dupes:
-        print("  checkpoints named by MORE THAN ONE family: %d" % len(dupes))
-        for mid, ks in list(dupes.items())[:6]:
-            print("     %-50s %s" % (mid[:50], ", ".join(ks)))
+    print("  %d checkpoints | %d edges | %d roots (no incoming edge)"
+          % (len(nodes), len(edges), len(roots)))
+    print("  operations: %s" % dict(ops.most_common()))
+    if dangling:
+        print("  DANGLING EDGES (endpoint not a declared node): %d" % len(dangling))
+        for e in dangling[:5]:
+            print("     %s -%s-> %s" % (e["parent"], e["op"], e["child"]))
     if not a.write:
-        print("\n  --write to build %s.%s and its views" % (ch.DB, TABLE))
+        print("\n  --write to build %s.checkpoints and %s.edges" % (ch.DB, ch.DB))
         return 0
-
-    ch.execute(DDL)
-    ch.execute("TRUNCATE TABLE {db}.roster")
-    ch.insert(TABLE, rs)
+    for d in DDL:
+        ch.execute(d)
+    ch.execute("TRUNCATE TABLE {db}.checkpoints")
+    ch.execute("TRUNCATE TABLE {db}.edges")
+    ch.insert("checkpoints", nodes)
+    ch.insert("edges", edges)
     for name, sql in VIEWS.items():
-        ch.execute(sql)
-        print("  view %s.%s" % (ch.DB, name))
-    n = ch.scalar("SELECT count() FROM {db}.roster")
-    p = ch.scalar("SELECT count() FROM {db}.representative_pairs")
-    print("\n  wrote %s rows to %s.%s" % (n, ch.DB, TABLE))
-    print("  representative_pairs: %s" % p)
+        try:
+            ch.execute(sql)
+            print("  view %s.%s" % (ch.DB, name))
+        except Exception as e:
+            print("  view %s FAILED: %s" % (name, str(e)[:120]))
+    print("\n  %s.checkpoints %s | %s.edges %s"
+          % (ch.DB, ch.scalar("SELECT count() FROM {db}.checkpoints"),
+             ch.DB, ch.scalar("SELECT count() FROM {db}.edges")))
     return 0
 
 
