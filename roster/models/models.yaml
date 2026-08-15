@@ -1189,6 +1189,12 @@ edges:
 - - tiiuae/Falcon3-7B-Base
   - upscale
   - tiiuae/Falcon3-10B-Base
+- - tiiuae/Falcon3-7B-Base
+  - prune
+  - tiiuae/Falcon3-3B-Base
+- - tiiuae/Falcon3-3B-Base
+  - prune
+  - tiiuae/Falcon3-1B-Base
 rulings:
   dpo_equivalent:
     meta-llama/Llama-3.1-8B: meta-llama/Llama-3.1-8B-Instruct
@@ -1224,8 +1230,11 @@ unavailable:
     note: as above
 provenance_notes:
   falcon3:
-    what: Falcon3-10B-Base is DEPTH UP-SCALED FROM Falcon3-7B-Base with continual pretraining on 2 Teratokens (model card, checked by RH 2026-08-15). It inherits 7B's pretraining and adds to it, so it is a DESCENDANT, not a sibling at another size.
-    edge: Falcon3-7B-Base -upscale-> Falcon3-10B-Base
-    why_it_matters: '`scale` is a RELATING op and asserts *neither was made from the other*. Where that is false it is a wrong claim, not a loose one: it makes a derived model an independent observation. Before this, 10B was its own lineage, its own scale group and its own representative -- fully independent in every population the roster can express.'
-    OPEN: The Falcon3 1B and 3B `scale` edges were REMOVED rather than re-typed. Falcon3's cards describe 1B and 3B as pruned/healed from larger members, which would make them descendants too -- but that has NOT been checked card-by-card here, and asserting `prune` without reading the card would repeat the error being fixed. They are now unrelated pending that check, which is visible (four separate lineages) rather than wrong (a sibling claim nobody verified).
-    AND THE GENERAL DEFECT: 16 `scale` edges were imported wholesale from the archive's smaller_sibling_of relation and NONE was verified. One card check by RH falsified one and cast doubt on three more.
+    the_line_is_a_TREE_rooted_at_7B: checked card-by-card by RH, 2026-08-15. Falcon3-7B-Base is the ONLY pretraining run in the line.
+    7B -upscale-> 10B: '"Depth up-scaled from Falcon3-7B-Base with continual pretraining on 2 TERATOKENS ... 1024 H100 chips"'
+    7B -prune-> 3B: '"Pruned and healed from Falcon3-7B-Base on only 100 GIGATOKENS ... 1024 H100 chips"'
+    3B -prune-> 1B: '"Pruned and healed using larger Falcon models (3B and 7B respectively) on only 80 GIGATOKENS ... 256 H100 chips"'
+    so: FOUR lineages became ONE. 1B, 3B and 10B all inherit 7B's pretraining; none is an independent observation, and the roster previously treated all four as such — each its own lineage, its own scale group, its own representative.
+    THE BUDGETS ARE NOT COMPARABLE AND ARE RECORDED PER MODEL: 10B 2,000 Gt | 3B 100 Gt | 1B 80 Gt. An earlier version of this note said '80 Gigatokens for the pruned pair' — attributing 1B's figure to both, before the 3B card was read. A 25x spread between 10B and the pruned pair is exactly what an independence argument would turn on, and getting the smaller differences wrong within it is the same error at a smaller scale.
+    why prune and upscale stay APART: not merged into one `respec` op, because the amount of training beyond 7B is the whole question and the op name is where a reader sees it.
+    THE GENERAL DEFECT: 16 `scale` edges were imported wholesale from the archive's `smaller_sibling_of` and NONE was verified. `scale` asserts *neither was made from the other*; three card reads falsified FOUR of them. The remaining 10 are still unaudited — notably OLMo 1B/7B/32B and Qwen2.5 0.5B/7B, which do the most work in the representative pick.

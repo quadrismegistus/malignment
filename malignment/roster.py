@@ -83,8 +83,11 @@ ALIGNING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct")
 #: `upscale` DERIVES: Falcon3-10B-Base is depth up-scaled FROM 7B with continual
 #: pretraining, so it inherits 7B's pretraining and is a DESCENDANT. A derived
 #: model is not an independent observation, and `scale` -- a RELATING op -- would
-#: have asserted the opposite.
-DERIVING = ALIGNING + ("distill", "upscale")
+#: have asserted the opposite. `prune` likewise: Falcon3 1B and 3B are pruned and
+#: healed FROM larger members on 80 Gigatokens, against 10B's 2 Teratokens. Kept
+#: as SEPARATE ops because a 25x difference in post-derivation training is what
+#: any independence argument would turn on.
+DERIVING = ALIGNING + ("distill", "upscale", "prune")
 RELATING = ("scale", "predecessor")
 
 DDL = ["""
