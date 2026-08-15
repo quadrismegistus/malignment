@@ -1248,3 +1248,15 @@ provenance_notes:
     so: UNLIKE Falcon3, the H1 sizes are genuine independent pretraining runs. The `scale` edge between H1-1.5B-Base and H1-7B-Base is a CORRECT sibling claim -- the first of the 16 imported ones to be verified rather than falsified.
     and they are STILL deduped, for a DIFFERENT reason: 'independent RUNS are not independent OBSERVATIONS when they share a recipe and a data mixture. The scale group collapses them because a cross-family statistic counting H1-1.5B and H1-7B twice is counting one design twice. That is a judgement about the population, not a fact about the training -- and it is why `scale` (siblings) and `prune`/`upscale` (derivations) stay separate ops: they are deduped by the same rule for different reasons, and only the op name records which.'
     caveat: the blog does not state per-size token counts, so 'independent run' rests on '6 models in parallel' plus what muP is for, not on an explicit sentence.
+  olmo3:
+    checked: arXiv:2512.13961, the Olmo 3 report, text extracted and grepped 2026-08-15
+    quote: '"We develop Olmo 3 Base in three stages of pretraining for up to 5.9T tokens, midtraining for 100 billion tokens, and the newly added long-context extension for 50B (Olmo 3 Base 7B) or 100B (Olmo 3 Base 32B) tokens"'
+    so: 7B and 32B run the SAME three-stage pipeline with different long-context budgets. No pruning, distillation or up-scaling between them -- separate full pretraining runs. The `scale` sibling edge Olmo-3-1025-7B <-> Olmo-3-1125-32B is CORRECT.
+    and there is no Olmo 3 1B: '"Olmo 3 ... 1B" appears ZERO times in the report. The 1B models in it are DATA-ABLATION models (''train 1B models to 100B tokens''), never released. So OLMo-2-0425-1B is a different GENERATION, which is why it is linked by `predecessor` and not `scale` -- also correct.'
+    negative check: 'grepped prun|distill|up-scal|upscal|depth.scal across 18,743 lines: every hit is data filtering or another lab''s models. Absence of a derivation claim is weaker than a positive statement, so the three-stage quote above is what this rests on.'
+  scale_edge_audit:
+    _about: 16 scale/predecessor edges were imported wholesale from the archive's `smaller_sibling_of` and `smaller_predecessor_of`. NONE was verified on import. `scale` asserts *neither was made from the other*, which is a claim, not a formality.
+    FALSIFIED: Falcon3 -- 1B and 3B are pruned/healed from larger members, 10B is depth up-scaled from 7B. Four lineages were one. 6 edges removed, 3 deriving edges written in their place.
+    CONFIRMED: Falcon-H1 1.5B/7B (muP, '6 models in parallel'); Olmo-3 7B/32B (three-stage pipeline, both full runs); OLMo-2-1B as predecessor of Olmo-3 (a different generation).
+    STILL UNAUDITED: Qwen2.5-0.5B <-> Qwen2.5-7B, and the remaining Olmo/OLMoE predecessor edges. Qwen is the one still deciding a representative pick.
+    the lesson: 'a relation imported without reading its source is a claim nobody made. Four card reads: four claims falsified, three confirmed.'
