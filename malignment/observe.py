@@ -124,6 +124,64 @@ def revisions(doc, ids, only_missing=True):
     return len(todo), len(bad)
 
 
+#: Repo files that identify the tokenizer's SURFACE CONVENTION. This is the
+#: property that matters here: SentencePiece writes a word-boundary marker into
+#: the token surface (`▁the`) and falls back to raw bytes (`<0xE5>`) for
+#: unknown characters, so a twp producer that assembles in token space leaves
+#: fingerprints. BPE-family tokenizers leave `Ġ` instead.
+_SP_FILES = ("tokenizer.model", "sentencepiece.bpe.model", "spiece.model")
+
+
+def tokenizers(doc, ids, only_missing=True):
+    """Which tokenizer convention each checkpoint uses -- ONE API call, no download.
+
+    ## WHY THIS IS A ROSTER FIELD AND NOT A FOOTNOTE
+
+    `dolphin-2.6-mistral-7b-dpo` reached the store with 82.2% of its word rows in
+    TOKEN space -- `'▁the'` for `'the'`, plus byte-fallback tokens -- and passed
+    every gate ingest had, because all of them test mass and token probabilities
+    sum to 1.0 just as word probabilities do. `ingest.token_space` now refuses
+    that shape outright.
+
+    **But the defect is in OUR producer, not in the model**, so a gate tells you a
+    checkpoint failed and this tells you which checkpoints could fail. A model
+    with a SentencePiece tokenizer and byte fallback is one where the twp
+    assembly has something to get wrong; a BPE model without byte fallback is
+    not. That is a preflight question -- the runbook's rule, paid for by the L2
+    fleet -- and it wants a measured field, not a memory.
+
+    `list_repo_files` is one call and downloads nothing.
+    """
+    from huggingface_hub import HfApi
+    sec = doc["sections"].setdefault("tokenizers", {"models": {}})
+    have = sec.get("models") or {}
+    todo = [m for m in ids if not (only_missing and m in have)]
+    print("  tokenizers: %d to survey (%d present)" % (len(todo), len(have)))
+    api = HfApi()
+    bad = dict(sec.get("unmeasured") or {})
+    for i, m in enumerate(todo, 1):
+        try:
+            files = set(api.list_repo_files(m))
+            sp = sorted(f for f in files if f in _SP_FILES)
+            have[m] = {
+                "sentencepiece": bool(sp),
+                "sp_files": sp,
+                "has_tokenizer_json": "tokenizer.json" in files,
+                #: NAMED, so a later reader can tell "surveyed and found none"
+                #: from "never surveyed" without consulting the stamp.
+                "marker_risk": "sentencepiece" if sp else "bpe_or_unknown",
+                "source": "hf_api:list_repo_files",
+            }
+            bad.pop(m, None)
+        except Exception as e:
+            bad[m] = "%s: %s" % (type(e).__name__, str(e)[:80])
+        if i % 25 == 0:
+            print("     %d/%d" % (i, len(todo)))
+    sec["models"] = have
+    _stamp(sec, "huggingface_hub HfApi().list_repo_files", len(have), bad)
+    return len(todo), len(bad)
+
+
 def report(doc, ids):
     print("  roster declares %d checkpoints\n" % len(ids))
     for name, sec in doc.get("sections", {}).items():
@@ -142,10 +200,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--weights", action="store_true")
     ap.add_argument("--revisions", action="store_true")
+    ap.add_argument("--tokenizer", action="store_true")
     ap.add_argument("--all", action="store_true", help="re-measure, not just gaps")
     a = ap.parse_args()
     doc, ids = load(), roster_ids()
-    if not (a.weights or a.revisions):
+    if not (a.weights or a.revisions or a.tokenizer):
         return report(doc, ids)
     if a.weights:
         n, bad = weights(doc, ids, only_missing=not a.all)
@@ -153,6 +212,9 @@ def main():
     if a.revisions:
         n, bad = revisions(doc, ids, only_missing=not a.all)
         print("  revisions: attempted %d, %d unmeasurable" % (n, bad))
+    if a.tokenizer:
+        n, bad = tokenizers(doc, ids, only_missing=not a.all)
+        print("  tokenizers: attempted %d, %d unmeasurable" % (n, bad))
     with open(OBSERVED, "w", encoding="utf-8") as fh:
         json.dump(doc, fh, indent=1, ensure_ascii=False)
     print("\n  wrote %s" % os.path.relpath(OBSERVED, ROOT))

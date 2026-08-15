@@ -1690,6 +1690,1189 @@
     "togethercomputer/RedPajama-INCITE-7B-Chat": 2,
     "togethercomputer/RedPajama-INCITE-7B-Instruct": 2
    }
+  },
+  "tokenizers": {
+   "models": {
+    "01-ai/Yi-1.5-9B": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "01-ai/Yi-1.5-9B-Chat": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "AI-Sweden-Models/gpt-sw3-6.7b-v2": {
+     "sentencepiece": true,
+     "sp_files": [
+      "spiece.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct": {
+     "sentencepiece": true,
+     "sp_files": [
+      "spiece.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-hf": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "BAAI/Aquila2-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "BAAI/AquilaChat2-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "BSC-LT/salamandra-7b": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "BSC-LT/salamandra-7b-instruct": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "ContextualAI/archangel_sft-kto_pythia2-8b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "ContextualAI/archangel_sft-slic_pythia2-8b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "ContextualAI/archangel_sft_pythia2-8b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "EleutherAI/pythia-2.8b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "EleutherAI/pythia-6.9b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "HuggingFaceH4/mistral-7b-sft-beta": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "HuggingFaceH4/zephyr-7b-beta": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "HuggingFaceTB/SmolLM2-360M": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "HuggingFaceTB/SmolLM2-360M-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "HuggingFaceTB/SmolLM3-3B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "HuggingFaceTB/SmolLM3-3B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": false,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "LLM360/Amber": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "LLM360/AmberChat": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "LLM360/AmberSafe": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "OpenLLM-France/Lucie-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "PKU-Alignment/alpaca-7b-reproduced": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "PKU-Alignment/beaver-7b-v1.0": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "Qwen/Qwen2.5-0.5B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "Qwen/Qwen2.5-0.5B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "Qwen/Qwen2.5-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "Qwen/Qwen2.5-7B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "Qwen/Qwen3-8B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "Qwen/Qwen3-8B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "RWKV/rwkv-4-7b-pile": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "RWKV/rwkv-raven-7b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "Zyphra/Zamba2-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "Zyphra/Zamba2-7B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Llama-3.1-Tulu-3.1-8B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/OLMo-2-0425-1B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/OLMo-2-0425-1B-DPO": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/OLMo-2-0425-1B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/OLMo-2-0425-1B-SFT": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/OLMoE-1B-7B-0125": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/OLMoE-1B-7B-0125-DPO": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/OLMoE-1B-7B-0125-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/OLMoE-1B-7B-0125-SFT": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3-1025-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3-1125-32B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3-7B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3-7B-Instruct-DPO": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3-7B-Instruct-SFT": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3-7B-Think": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3-7B-Think-DPO": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3-7B-Think-SFT": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3.1-32B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3.1-32B-Instruct-DPO": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-3.1-32B-Instruct-SFT": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-Hybrid-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "baichuan-inc/Baichuan2-7B-Base": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "baichuan-inc/Baichuan2-7B-Chat": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "bigscience/bloom-7b1": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "bigscience/bloomz-7b1": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "croissantllm/CroissantLLMBase": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "croissantllm/CroissantLLMChat-v0.1": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Llama-8B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "deepseek-ai/deepseek-llm-7b-base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "deepseek-ai/deepseek-llm-7b-chat": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "google/gemma-2-9b": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "google/gemma-2-9b-it": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "google/recurrentgemma-9b": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "google/recurrentgemma-9b-it": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "huggyllama/llama-7b": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "ibm-granite/granite-3.0-8b-base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "ibm-granite/granite-3.0-8b-instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "inceptionai/jais-family-6p7b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "inceptionai/jais-family-6p7b-chat": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "internlm/internlm2-base-7b": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "internlm/internlm2-chat-7b": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "internlm/internlm2-chat-7b-sft": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "kakaocorp/kanana-1.5-8b-base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "kakaocorp/kanana-1.5-8b-instruct-2505": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "kakaocorp/kanana-2-3b-base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "kakaocorp/kanana-2-3b-instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "llm-jp/llm-jp-3-7.2b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct2": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct3": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "lomahony/eleuther-pythia6.9b-hh-dpo": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "lomahony/eleuther-pythia6.9b-hh-sft": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "m-a-p/CT-LLM-Base": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "m-a-p/CT-LLM-SFT": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "m-a-p/CT-LLM-SFT-DPO": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "m-a-p/neo_7b": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "m-a-p/neo_7b_instruct_v0.1": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "m-a-p/neo_7b_sft_v0.1": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "meta-llama/Llama-3.1-70B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "meta-llama/Llama-3.1-70B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "meta-llama/Llama-3.1-8B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "microsoft/Phi-4-reasoning-plus": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "microsoft/phi-4": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "microsoft/phi-4-reasoning": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "mistralai/Mistral-7B-v0.1": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "openGPT-X/Teuken-7B-base-v0.6": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "openGPT-X/Teuken-7B-instruct-commercial-v0.4": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "openGPT-X/Teuken-7B-instruct-v0.6": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "openbmb/MiniCPM5-1B": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "openbmb/MiniCPM5-1B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "openbmb/MiniCPM5-1B-SFT": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "openchat/openchat-3.5-0106": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": true,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "stabilityai/stablelm-2-1_6b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "stabilityai/stablelm-2-1_6b-chat": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "stabilityai/stablelm-2-zephyr-1_6b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "teknium/OpenHermes-2.5-Mistral-7B": {
+     "sentencepiece": true,
+     "sp_files": [
+      "tokenizer.model"
+     ],
+     "has_tokenizer_json": false,
+     "marker_risk": "sentencepiece",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon-H1-1.5B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon-H1-1.5B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon-H1-7B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon-H1-7B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-10B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-10B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-1B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-1B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-3B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-3B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-7B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-7B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-Mamba-7B-Base": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/Falcon3-Mamba-7B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/falcon-7b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/falcon-7b-instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/falcon-mamba-7b": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "tiiuae/falcon-mamba-7b-instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Chat": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "zai-org/glm-4-9b-chat-hf": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    },
+    "zai-org/glm-4-9b-hf": {
+     "sentencepiece": false,
+     "sp_files": [],
+     "has_tokenizer_json": true,
+     "marker_risk": "bpe_or_unknown",
+     "source": "hf_api:list_repo_files"
+    }
+   },
+   "measured_by": "huggingface_hub HfApi().list_repo_files",
+   "measured_at": "2026-08-15T20:35:30",
+   "n": 157,
+   "unmeasured": {}
   }
  }
 }

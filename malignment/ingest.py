@@ -71,6 +71,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 from collections import defaultdict
 
@@ -87,6 +88,36 @@ TOL = 1e-4          #: conservation is exact to ~4e-7 in practice; 1e-4 is loose
 #: These are markers the producers already wrote; this honours them rather than
 #: re-deciding. `_SUPERSEDED_shard_names/` and four QUARANTINE dirs exist today.
 BAD_PATH = ("QUARANTINE", "RETIRED-", "_SUPERSEDED")
+
+#: **A WORD SURFACE THAT IS ACTUALLY A TOKEN.** Every other gate in this file
+#: tests MASS, and that is exactly why this one had to be added: token
+#: probabilities sum to 1.0 the same way word probabilities do, so a payload
+#: assembled in token space passes conservation, passes the NaN check, passes the
+#: rule_version stamp, and lands looking perfect.
+#:
+#: `dolphin-2.6-mistral-7b-dpo` did: 82.2% of its 301,074 rows carry the
+#: SentencePiece boundary marker (`'▁the'` where every other model has `'the'`),
+#: 0 conservation failures across 2,579 cells. It was found by a SIMILARITY
+#: screen, not by ingest -- it agreed with its own declared parent on 2 of 473
+#: prompts where unrelated families agree on 48%, because `'▁the'` joins against
+#: nothing. Had its edge built it would have reported JS 0.82 where real
+#: alignment runs 0.04-0.16: the largest displacement in the corpus, entirely an
+#: artefact, on the roster's anti-aligned discriminator.
+#:
+#: The byte-fallback pattern is the one that proves the diagnosis rather than the
+#: marker: a TRUE WORD PROBABILITY IS NEVER HALF A UTF-8 SEQUENCE. `<0xE5>` in a
+#: word column means the prefix trie that composes tokens into words never ran.
+#: So this gate refuses on ANY occurrence -- there is no rate at which a word
+#: dictionary legitimately yields `▁the` or `<0x0A>`, and a threshold here would
+#: only decide how much of a broken model to admit.
+TOKEN_MARKERS = ("▁", "Ġ", "Ċ")   # SentencePiece ▁, GPT-2 BPE Ġ Ċ
+_BYTE_FALLBACK = re.compile(r"^<0x[0-9A-Fa-f]{2}>$")
+
+
+def token_space(word):
+    """True if this surface is a TOKEN, not a word. See TOKEN_MARKERS."""
+    return bool(word) and (word.startswith(TOKEN_MARKERS)
+                           or _BYTE_FALLBACK.match(word) is not None)
 
 #: **SUMMED AT INGEST, WITH THE PATH COUNT KEPT.** A twp payload is one row per
 #: (word, FIRST TOKEN): a surface reachable by several token paths gets several
@@ -226,6 +257,10 @@ def main():
         files = files[:a.limit]
     words, cells = [], []
     rej = defaultdict(int)
+    #: WHICH MODEL AND WHICH SURFACE, not just a count. A rejection counter tells
+    #: you something was refused; only the example tells you whether to re-measure
+    #: a checkpoint or fix a producer.
+    rej_examples = {}
     n_dup = 0
     win, stats = plan(files)
     print("\n  planned %s cells | collisions needing precedence: %s"
@@ -257,6 +292,12 @@ def main():
                 continue
             if any((w.get("p") is None or w["p"] != w["p"]) for w in rows):
                 rej["nan_probability"] += 1
+                continue
+            #: SURFACE SHAPE, WHICH NO MASS GATE CAN SEE. See TOKEN_MARKERS.
+            bad = [w["word"] for w in rows if token_space(w.get("word") or "")]
+            if bad:
+                rej["token_space"] += 1
+                rej_examples.setdefault(k[0], set()).update(bad[:3])
                 continue
             m, pr = k
             #: SUM THE PARTITION HERE, ONCE. Folding in SQL later would put the
@@ -299,6 +340,14 @@ def main():
     print("  refused / skipped, by class:")
     for k, v in sorted(rej.items(), key=lambda x: -x[1]):
         print("     %-24s %s" % (k, format(v, ",")))
+    #: LOUD, AND NAMING THE MODEL. A token-space refusal is not a bad file to be
+    #: skipped past -- it is a checkpoint that must be RE-MEASURED, and it will
+    #: otherwise sit missing from the corpus looking like it was never run.
+    if rej_examples:
+        print("\n  TOKEN-SPACE REFUSALS -- these checkpoints need RE-MEASURING,"
+              "\n  not a marker strip (see TOKEN_MARKERS in this file):")
+        for m, ex in sorted(rej_examples.items()):
+            print("     %-52s e.g. %s" % (m[:52], ", ".join(sorted(ex)[:3])))
     print("\n  %s.twp_cells: %s | twp_words: %s"
           % (ch.DB, format(ch.scalar("SELECT count() FROM {db}.twp_cells"), ","),
              format(ch.scalar("SELECT count() FROM {db}.twp_words"), ",")))
