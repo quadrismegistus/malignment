@@ -80,7 +80,11 @@ OBSERVED = os.path.join(ROOT, "roster", "models", "measurements.json")
 #: **A view keyed on "any edge" breaks the moment a new edge type means something
 #: different**, and it breaks by changing a number rather than by failing.
 ALIGNING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct")
-DERIVING = ALIGNING + ("distill",)
+#: `upscale` DERIVES: Falcon3-10B-Base is depth up-scaled FROM 7B with continual
+#: pretraining, so it inherits 7B's pretraining and is a DESCENDANT. A derived
+#: model is not an independent observation, and `scale` -- a RELATING op -- would
+#: have asserted the opposite.
+DERIVING = ALIGNING + ("distill", "upscale")
 RELATING = ("scale", "predecessor")
 
 DDL = ["""

@@ -1162,24 +1162,6 @@ edges:
 - - tiiuae/Falcon-H1-1.5B-Instruct
   - scale
   - tiiuae/Falcon-H1-7B-Instruct
-- - tiiuae/Falcon3-1B-Base
-  - scale
-  - tiiuae/Falcon3-3B-Base
-- - tiiuae/Falcon3-1B-Base
-  - scale
-  - tiiuae/Falcon3-7B-Base
-- - tiiuae/Falcon3-1B-Instruct
-  - scale
-  - tiiuae/Falcon3-3B-Instruct
-- - tiiuae/Falcon3-1B-Instruct
-  - scale
-  - tiiuae/Falcon3-7B-Instruct
-- - tiiuae/Falcon3-3B-Base
-  - scale
-  - tiiuae/Falcon3-7B-Base
-- - tiiuae/Falcon3-3B-Instruct
-  - scale
-  - tiiuae/Falcon3-7B-Instruct
 - - tiiuae/falcon-7b
   - instruct
   - tiiuae/falcon-7b-instruct
@@ -1204,6 +1186,9 @@ edges:
 - - openGPT-X/Teuken-7B-base-v0.6
   - instruct
   - openGPT-X/Teuken-7B-instruct-commercial-v0.4
+- - tiiuae/Falcon3-7B-Base
+  - upscale
+  - tiiuae/Falcon3-10B-Base
 rulings:
   dpo_equivalent:
     meta-llama/Llama-3.1-8B: meta-llama/Llama-3.1-8B-Instruct
@@ -1237,3 +1222,10 @@ unavailable:
     kind: repo_dead
     permanent: true
     note: as above
+provenance_notes:
+  falcon3:
+    what: Falcon3-10B-Base is DEPTH UP-SCALED FROM Falcon3-7B-Base with continual pretraining on 2 Teratokens (model card, checked by RH 2026-08-15). It inherits 7B's pretraining and adds to it, so it is a DESCENDANT, not a sibling at another size.
+    edge: Falcon3-7B-Base -upscale-> Falcon3-10B-Base
+    why_it_matters: '`scale` is a RELATING op and asserts *neither was made from the other*. Where that is false it is a wrong claim, not a loose one: it makes a derived model an independent observation. Before this, 10B was its own lineage, its own scale group and its own representative -- fully independent in every population the roster can express.'
+    OPEN: The Falcon3 1B and 3B `scale` edges were REMOVED rather than re-typed. Falcon3's cards describe 1B and 3B as pruned/healed from larger members, which would make them descendants too -- but that has NOT been checked card-by-card here, and asserting `prune` without reading the card would repeat the error being fixed. They are now unrelated pending that check, which is visible (four separate lineages) rather than wrong (a sibling claim nobody verified).
+    AND THE GENERAL DEFECT: 16 `scale` edges were imported wholesale from the archive's smaller_sibling_of relation and NONE was verified. One card check by RH falsified one and cast doubt on three more.
