@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS {db}.checkpoints (
     org_type LowCardinality(String), country LowCardinality(String),
     scale LowCardinality(String), open_weight UInt8, open_data UInt8,
     nickname LowCardinality(String), revision LowCardinality(String),
-    revision_ladder UInt32
+    revision_ladder UInt32, lineage String, depth UInt8
 ) ENGINE = ReplacingMergeTree ORDER BY model_id
 """, """
 CREATE TABLE IF NOT EXISTS {db}.edges (
@@ -113,6 +113,14 @@ VIEWS = {
                if(position(model, '@') > 0, splitByChar('@', model)[2], '') AS revision,
                count() AS cells
         FROM {db}.twp_cells GROUP BY repo, revision
+    """,
+    #: Two checkpoints sharing a pretrained root. Was `same_base_as`, 84 declared
+    #: edges; here it is a join and yields 175 pairs.
+    "same_base": """
+        CREATE OR REPLACE VIEW {db}.same_base AS
+        SELECT a.model_id AS a, b.model_id AS b, a.lineage AS lineage
+        FROM {db}.checkpoints a INNER JOIN {db}.checkpoints b USING (lineage)
+        WHERE a.model_id < b.model_id
     """,
     "roots": """
         CREATE OR REPLACE VIEW {db}.roots AS
@@ -147,6 +155,18 @@ def rows():
         if not (isinstance(e, (list, tuple)) and len(e) == 3):
             raise ValueError("malformed edge: %r" % (e,))
         edges.append({"parent": e[0], "op": e[1], "child": e[2]})
+    #: LINEAGE IS DERIVED BY WALKING DERIVING EDGES TO A ROOT, at build time,
+    #: because the whole table is rebuilt from the authored file and so cannot
+    #: drift from it. **This replaces `same_base_as`**, which the archive declared
+    #: as 84 hand-maintained edges: all 84 are derivable from this graph, and the
+    #: graph yields 175 such pairs. A derivable relation that is ALSO maintained
+    #: by hand drifts toward incompleteness -- it had less than half.
+    par = {e["child"]: e["parent"] for e in edges if e["op"] in DERIVING}
+    for n in nodes:
+        m, d, seen = n["model_id"], 0, set()
+        while m in par and m not in seen:
+            seen.add(m); m = par[m]; d += 1
+        n["lineage"], n["depth"] = m, d
     ids = {n["model_id"] for n in nodes}
     dangling = [e for e in edges if e["parent"] not in ids or e["child"] not in ids]
     return nodes, edges, dangling
