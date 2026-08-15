@@ -150,24 +150,65 @@ class Checkpoint:
         safe = self.model_id.replace("/", "__").replace("@", "__at__")
         return os.path.join(self.out, "%s.jsonl" % safe)
 
-    def done(self):
-        """Prompts with a REAL result in the jsonl. Tolerates a truncated line.
-
-        **A SKIP IS AN ATTEMPT, NOT A RESULT.** See `runners.TWPRunner`.
-        """
-        seen = set()
+    def _records(self):
+        """Every parseable record in the jsonl. Tolerates a truncated last line."""
         if not os.path.exists(self.path):
-            return seen
+            return
         with open(self.path, encoding="utf-8") as fh:
             for ln in fh:
                 try:
-                    r = json.loads(ln)
+                    yield json.loads(ln)
                 except ValueError:
-                    continue
-                if r.get("skipped") or not r.get("rows"):
-                    continue
-                seen.add(r["prompt"])
+                    continue      # partial line from a kill: it will be redone
+
+    def done(self):
+        """Prompts with a REAL result THIS INSTRUMENT WOULD PRODUCE TODAY.
+
+        Two conditions, and the second was missing:
+
+        **A SKIP IS AN ATTEMPT, NOT A RESULT.** twp writes `rows: []` plus a
+        reason when a prompt does not survive the model's own tokenizer. Counting
+        those as done means a tokenizer fix installs cleanly and recovers
+        nothing.
+
+        **AND A RESULT FROM A DIFFERENT INSTRUMENT IS NOT A RESULT.** `done()`
+        gated only on rows, while the INGEST requires `rule_version == 3`. So
+        bumping the rule -- or changing the dictionary, which moves `dict_sha` --
+        gave: done() reports every prompt complete, the runner writes nothing,
+        the ingest then excludes every old-rule record, and the checkpoint
+        VANISHES from ClickHouse while the run prints success. Two independent
+        components each behaving sensibly, and the gap between them is silent.
+
+        Matching the ingest's own predicate here means a rule bump automatically
+        re-offers every prompt, with nothing to remember.
+        """
+        from .ingest import RULE_VERSION
+        cur = T.dict_sha()
+        seen = set()
+        for r in self._records():
+            if r.get("skipped") or not r.get("rows"):
+                continue
+            if r.get("rule_version") != RULE_VERSION:
+                continue
+            #: dict_sha absent = predates the stamp; treat as a different
+            #: instrument rather than assuming it matches.
+            if r.get("dict_sha") != cur:
+                continue
+            seen.add(r["prompt"])
         return seen
+
+    def provenance(self):
+        """What instruments produced this file. A mixed file is legible, not fatal.
+
+        Running the same checkpoint on prompts A-C and later D-F APPENDS to one
+        file and `done()` unions them -- which is the intent. This is how you see
+        whether the two halves were measured by the same instrument.
+        """
+        import collections
+        out = collections.Counter()
+        for r in self._records():
+            out[(r.get("rule_version"), r.get("dict_sha"), r.get("device"))] += 1
+        return out
 
     def skipped(self):
         """{prompt: reason} for prompts attempted and refused. These are NOT done."""
