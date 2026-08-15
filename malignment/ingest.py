@@ -78,10 +78,28 @@ from collections import defaultdict
 from . import ch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#: The corpus lives in the archive repo; this reads it in place and copies
-#: nothing. 22 GB of jsonl, 1,896 files.
+#: TWO ROOTS, AND THE PREFIXES ARE LOAD-BEARING. Both are read IN PLACE; nothing
+#: is copied.
+#:
+#:   CORPUS  the ARCHIVE. Read-only legacy: 144 GB, 24.3 GB of it jsonl, holding
+#:           every cell measured before this repo existed.
+#:   DATA    where THIS repo's runs write. Outside both checkouts, because
+#:           `malignment` is PUBLIC and a twp jsonl carries the prompts verbatim
+#:           -- including the transgressive battery -- and because new data in
+#:           the archive would re-entrench the dependency this repo exists to
+#:           break.
+#:
+#: **THE ARCHIVE'S SOURCE LABELS MUST NOT CHANGE.** `scan()` sets `source` to the
+#: directory relative to its root, and its own docstring says that label "is part
+#: of the data's identity -- renaming a directory re-partitions the store". So the
+#: archive keeps prefix "" and its labels are byte-identical to what 400,644
+#: stored cells already carry; only the NEW root is prefixed, where nothing is
+#: partitioned yet. Prefixing both would silently re-partition the whole store
+#: while every count still looked right.
 CORPUS = os.environ.get("MALIGNMENT_CORPUS",
                         "/Users/rj416/github/malign-logits/data")
+DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
+ROOTS = ((CORPUS, ""), (DATA, "malignment-data/"))
 RULE_VERSION = 3
 TOL = 1e-4          #: conservation is exact to ~4e-7 in practice; 1e-4 is loose
 #: A path component that disqualifies a directory however good its records are.
@@ -115,7 +133,17 @@ _BYTE_FALLBACK = re.compile(r"^<0x[0-9A-Fa-f]{2}>$")
 
 
 def token_space(word):
-    """True if this surface is a TOKEN, not a word. See TOKEN_MARKERS."""
+    """True if this surface is a TOKEN, not a word. See TOKEN_MARKERS.
+
+    **A NON-STRING IS ALSO NOT A WORD.** `expand` keys its output by
+    `(surface, first_token_id)`, and a producer that writes the tuple straight
+    into `word` yields `{"word": ["in", 304]}` -- which made this raise
+    AttributeError and take the whole ingest with it instead of refusing one
+    record. A gate that CRASHES on malformed input is not a gate; refusing is
+    the behaviour, and the caller counts it under `token_space`.
+    """
+    if not isinstance(word, str):
+        return bool(word)      # malformed shape: refuse, do not crash
     return bool(word) and (word.startswith(TOKEN_MARKERS)
                            or _BYTE_FALLBACK.match(word) is not None)
 
@@ -161,30 +189,53 @@ CREATE TABLE IF NOT EXISTS {db}.twp_cells (
 def scan():
     """Every includable file, with its source label and mtime.
 
-    The label is the directory relative to the corpus root. **It is part of the
-    data's identity** -- it lands in the `source` column, so renaming a directory
-    re-partitions the store.
+    The label is the directory relative to ITS ROOT, prefixed by the root's own
+    label. **It is part of the data's identity** -- it lands in the `source`
+    column, so renaming a directory re-partitions the store. That is why the
+    ARCHIVE keeps prefix "" (its labels must stay byte-identical to what the
+    stored cells already carry) and only the new root is prefixed.
     """
     out = []
-    for p in sorted(glob.glob(os.path.join(CORPUS, "**", "*.jsonl"), recursive=True)):
-        rel = os.path.relpath(p, CORPUS)
-        if any(b in rel for b in BAD_PATH):
+    seen_paths = set()
+    for root, prefix in ROOTS:
+        if not os.path.isdir(root):
             continue
-        try:
-            with open(p, encoding="utf-8") as fh:
-                first = fh.readline()
-            if not first:
+        for p in sorted(glob.glob(os.path.join(root, "**", "*.jsonl"),
+                                  recursive=True)):
+            #: A root nested inside another would otherwise yield the same file
+            #: twice under two source labels, i.e. one measurement counted as two
+            #: populations.
+            if p in seen_paths:
                 continue
-            r = json.loads(first)
-        except Exception:
-            continue
-        if r.get("rule_version") != RULE_VERSION:
-            continue
-        if "rows" not in r or "residual" not in r:
-            continue
-        out.append({"path": p, "source": os.path.dirname(rel) or ".",
-                    "mtime": os.path.getmtime(p)})
+            seen_paths.add(p)
+            rel = os.path.relpath(p, root)
+            if any(b in rel for b in BAD_PATH):
+                continue
+            out.extend(_maybe(p, prefix + (os.path.dirname(rel) or ".")))
     return out
+
+
+def _maybe(p, source):
+    """[{path, source, mtime}] if this file is includable, else [].
+
+    Inclusion is decided from the PAYLOAD's own stamp, never from the path: the
+    first record must carry the current `rule_version` and the two structural
+    keys. A file whose producer predates rule 3 is not a file to be fixed by
+    widening the gate.
+    """
+    try:
+        with open(p, encoding="utf-8") as fh:
+            first = fh.readline()
+        if not first:
+            return []
+        r = json.loads(first)
+    except Exception:
+        return []
+    if r.get("rule_version") != RULE_VERSION:
+        return []
+    if "rows" not in r or "residual" not in r:
+        return []
+    return [{"path": p, "source": source, "mtime": os.path.getmtime(p)}]
 
 
 def _cells(path):

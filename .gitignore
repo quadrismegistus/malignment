@@ -228,3 +228,13 @@ __marimo__/
 # exactly why `lexicons/EXTERNAL.md` requires that a missing source REFUSE rather
 # than degrade. An ignored file is invisible; a silently smaller answer is worse.
 lexicons/external/
+
+# Measured data NEVER enters this PUBLIC repo. A twp jsonl carries the prompts
+# verbatim -- including the transgressive battery -- plus full word
+# distributions. Runs write to $MALIGNMENT_CORPUS/twp_malignment/ instead.
+data/
+# ...except the CJK dictionary, which IS the instrument: dict_sha b16011275c42955c
+# is computed from it, and a checkpoint measured against a different dict is a
+# different measurement. It is tracked on purpose.
+!data/dict/
+!data/dict/**
