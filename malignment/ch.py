@@ -55,7 +55,11 @@ import re
 import subprocess
 
 CH = os.environ.get("MALIGN_CH_BIN", "/opt/homebrew/bin/clickhouse")
-DB = os.environ.get("MALIGN_CH_DB", "malign_logits")
+#: THE NEW DATABASE. `malign_logits` belongs to the archive repo and is still
+#: read by it. This machine also runs `lltk` at 409 GiB, `abstraction` and
+#: `llmtasks` -- which is why `_guard` refuses any statement not naming the
+#: target database rather than warning about it.
+DB = os.environ.get("MALIGNMENT_CH_DB", "malignment")
 
 #: A FORMAT CLAUSE IS A TRAILING KEYWORD, NOT A SUBSTRING. The first version
 #: of this module tested `"FORMAT" not in sql.upper()`, which matches
