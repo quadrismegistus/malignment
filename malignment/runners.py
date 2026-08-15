@@ -97,6 +97,42 @@ PRODUCER = os.environ.get("MALIGNMENT_PRODUCER") or socket.gethostname().split("
 MAX_RL_RETRIES = 5
 
 
+class _Tee:
+    """Write to the terminal AND to a log beside the data.
+
+    The log lives at `twp/<model>/<producer>/run.log`, so it rsyncs with the
+    cells it describes: a box's output and the account of how it was produced
+    travel together. It is not `.jsonl`, so the ingest walks past it.
+
+    Kept as a tee rather than a shell redirect because the path depends on the
+    model and producer, which only the runner knows -- a redirect the caller has
+    to compose is a redirect someone eventually composes wrong, or forgets.
+    """
+
+    def __init__(self, path):
+        self.stream = sys.stdout
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        self.fh = open(path, "a", encoding="utf-8")
+        self.fh.write("\n===== %s  %s =====\n"
+                      % (time.strftime("%Y-%m-%d %H:%M:%S"), PRODUCER))
+        self.fh.flush()
+
+    def write(self, data):
+        self.stream.write(data)
+        self.fh.write(data)
+        self.fh.flush()          # a killed run keeps its log up to the kill
+
+    def flush(self):
+        self.stream.flush()
+        self.fh.flush()
+
+    def close(self):
+        try:
+            self.fh.close()
+        except Exception:
+            pass
+
+
 def _is_rate_limit(msg):
     """Status code and phrase, never the symptom. See the module docstring."""
     return ("429" in msg or "Too Many Requests" in msg
@@ -197,6 +233,12 @@ class TWPRunner:
                  "revision": ck.revision or "", "compute_dtype": "float16",
                  "producer": PRODUCER}
         st = ck.stash()
+        try:
+            from tqdm import tqdm
+            bar = tqdm(todo, desc=ck.model_id.split("/")[-1][:28], unit="cell",
+                       dynamic_ncols=True, file=sys.stderr)
+        except ImportError:
+            bar = todo
         #: **SKIPS GO TO A SIDECAR, NOT INTO THE KEY SPACE.** A skip is an
         #: ATTEMPT, not a result. Writing one under the cell's key would make
         #: `key in stash` true, so a later tokenizer fix would find the prompt
@@ -205,7 +247,7 @@ class TWPRunner:
         #: Kept beside the stash so the refusal and its reason are still
         #: recorded, just not as an answer.
         skip_path = os.path.join(os.path.dirname(st.path), "skipped.jsonl")
-        for i, p in enumerate(todo, 1):
+        for i, p in enumerate(bar, 1):
             rec = dict(stamp, model=ck.model_id, prompt=p)
 
             def _skip(reason):
@@ -236,10 +278,16 @@ class TWPRunner:
             #: than overwriting a measurement made by a different instrument.
             st[ck.key(p)] = rec
             n_ok += 1
-            if verbose and (i % 100 == 0 or i == len(todo)):
+            if hasattr(bar, "set_postfix"):
+                bar.set_postfix(ok=n_ok, skip=n_skip, refresh=False)
+            #: A DURABLE LINE EVERY 25 (~35 s), because a progress bar is a LIVE
+            #: VIEW on stderr and the log is the RECORD. tqdm's \r updates would
+            #: make the log unreadable, so the heartbeat is plain lines: frequent
+            #: enough to `tail -f`, and still true after the terminal is gone.
+            if verbose and (i % 25 == 0 or i == len(todo)):
                 el = time.time() - t0
-                say("     %d/%d  %.1f min  %.2f s/cell  (%d skipped)"
-                    % (i, len(todo), el / 60, el / max(1, i), n_skip))
+                say("     %d/%d  %.1f min  %.2f s/cell  (%d ok, %d skipped)"
+                    % (i, len(todo), el / 60, el / max(1, i), n_ok, n_skip))
         T.free()
         T.purge_model(ck.model_id, purge)
         return {"model": ck.model_id, "producer": PRODUCER, "written": n_ok,
@@ -257,9 +305,13 @@ def main():
     ap.add_argument("--prompts", default=None, help="txt file, one prompt per line")
     ap.add_argument("--all-prompts", action="store_true",
                     help="every admitted prompt, not just what will pair")
+    ap.add_argument("--log", default=None,
+                    help="default: <twp>/<model>/<producer>/run.log")
     a = ap.parse_args()
 
     ck = Checkpoint(a.model_id)
+    tee = _Tee(a.log or os.path.join(ck.dir, PRODUCER, "run.log"))
+    sys.stdout = tee
     if not ck.declared:
         print("  NOTE: %s is not declared in the roster. It will be measured and"
               "\n  ingested, but `movement` builds only DECLARED edges, so nothing"
@@ -281,8 +333,12 @@ def main():
                   "\n  here could pair. Declare an edge first, or pass --prompts /"
                   "\n  --all-prompts deliberately.")
             return 1
-    print("\n  %s" % json.dumps(ck.run_twp(prompts, purge=a.purge, limit=a.limit),
-                                indent=1))
+    try:
+        print("\n  %s" % json.dumps(
+            ck.run_twp(prompts, purge=a.purge, limit=a.limit), indent=1))
+    finally:
+        sys.stdout = tee.stream
+        tee.close()
     return 0
 
 

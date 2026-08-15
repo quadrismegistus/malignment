@@ -22,6 +22,7 @@ torch                  # twp.py, models.py, runners.py
 transformers           # twp.py, models.py, runners.py
 numpy                  # twp.py
 huggingface_hub        # observe.py -- params_b, revision ladders, tokenizer class
+tqdm                   # runners.py progress bar; falls back to a plain loop if absent
 
 # ClickHouse is reached through the `clickhouse-client` BINARY (see ch.py), not
 # a Python driver, so there is no dependency line for it. It is a system install.
