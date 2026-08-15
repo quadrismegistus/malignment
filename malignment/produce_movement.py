@@ -135,6 +135,27 @@ def buildable():
             par[r["child"]] = r["parent"]
             op[r["child"]] = r["op"]
     have = {r["model"] for r in ch.query("SELECT DISTINCT model FROM {db}.twp_cells")}
+    #: **A GATE AT THE PRODUCER IS NOT REMEDIATION OF THE STORE.**
+    #: `ingest.token_space` refuses token-space payloads at the door, and that
+    #: was treated as quarantining `dolphin-2.6-mistral-7b-dpo`. It was not: the
+    #: rows were ALREADY ingested, so the next movement rebuild read them
+    #: straight out of `twp_words` and produced 588,427 rows whose edge carried
+    #: JS 0.7171 -- the single largest displacement in the corpus, 45% above the
+    #: next, and entirely an artefact of comparing `▁the` against `the`.
+    #:
+    #: The gate prevents recurrence; it cannot undo. So the producer checks the
+    #: STORE it is about to read, every run, and refuses loudly. A model removed
+    #: from the store cannot come back through the ingest, and a model that
+    #: somehow returns cannot reach `movement`.
+    bad = [r["model"] for r in ch.query(
+        r"""SELECT model FROM {db}.twp_words GROUP BY model
+            HAVING countIf(startsWith(word, '▁') OR startsWith(word, 'Ġ')
+                           OR match(word, '^<0x[0-9A-Fa-f]{2}>$')) > 0""")]
+    if bad:
+        print("  REFUSING %d model(s): word surfaces are TOKENS, not words." % len(bad))
+        for m in bad:
+            print("     %s  -- re-measure; do not strip the marker" % m)
+        have -= set(bad)
     out = []
     for m in par:
         x, d = m, 0
