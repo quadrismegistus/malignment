@@ -426,6 +426,8 @@ nodes:
   allenai/Olmo-3-7B-Think:
     family:
     - olmo-think
+    reasoning: true
+    reasoning_note: post-trained for reasoning; the Think branch of the Olmo 3 ladder
   allenai/Olmo-3-7B-Think-DPO:
     nickname: olmo-think-dpo
     country: US
@@ -434,6 +436,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    reasoning: true
+    reasoning_note: as above, DPO rung
   allenai/Olmo-3-7B-Think-SFT:
     revision_ladder: 44
     nickname: olmo-think-sft
@@ -443,6 +447,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    reasoning: true
+    reasoning_note: as above, SFT rung
   allenai/Olmo-3.1-32B-Instruct:
     nickname: olmo-32b-instruct
     family:
@@ -509,6 +515,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    reasoning: true
+    reasoning_note: reasoning DISTILLED from DeepSeek-R1 into Llama-3.1-8B
   deepseek-ai/DeepSeek-R1-Distill-Qwen-7B:
     nickname: r1-qwen
     country: CN
@@ -517,6 +525,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    reasoning: true
+    reasoning_note: reasoning DISTILLED from DeepSeek-R1 into Qwen2.5-7B
   deepseek-ai/deepseek-llm-7b-base:
     nickname: deepseek
     country: CN
@@ -804,9 +814,13 @@ nodes:
   microsoft/phi-4-reasoning:
     family:
     - phi4
+    reasoning: true
+    reasoning_note: reasoning post-training; no base released, so unpairable
   microsoft/Phi-4-reasoning-plus:
     family:
     - phi4
+    reasoning: true
+    reasoning_note: as above
   tiiuae/falcon-7b:
     family:
     - falcon-7b
@@ -1281,3 +1295,16 @@ provenance_notes:
     and OLMo-2-0425-1B is not in this paper: the report introduces "a new family of 7B, 13B and 32B models"; the 1B models mentioned are DATA-ABLATION models ('train 1B models to 100B tokens'). OLMo-2-0425-1B is an April 2025 release, after this January paper, and its training is NOT documented by it. So the 1B's independence is UNVERIFIED -- the pattern across every family checked makes it likely, and likely is not checked.
     negative check: 'grepped prun|distill|up-scal|initializ.*from across 8,234 lines. One hit is a real derivation but an ABLATION, not a release: "on 50 billion tokens, initialized from a 7B model checkpoint pretrained on 4 trillion tokens".'
     OLMo-2-0425-1B VERIFIED: 'https://huggingface.co/allenai/OLMo-2-0425-1B , read 2026-08-15. Trained INDEPENDENTLY FROM SCRATCH: stage 1 ~3.9T tokens of OLMo-mix-1124 (~1 epoch, 95%+ of its budget), stage 2 50B of Dolmino-Mix-1124. Not pruned, not distilled. And a detail that shows it is its own path: "1B Model: only 1 version is trained on a 50B mix (ingredient 3), we did not merge" -- the larger sizes were souped from three runs and the 1B was not. The earlier UNVERIFIED marking is discharged.'
+  reasoning:
+    _about: '`reasoning: true` marks a checkpoint whose POST-TRAINING targets reasoning. It was recorded nowhere: two models reached it by a `distill` edge and five only by having ''Think'' or ''reasoning'' in their NAME.'
+    why a NODE flag and not an op: Olmo's Think branch reaches its base by plain `sft` and `dpo` edges -- STRUCTURALLY IDENTICAL to the Instruct branch. Two post-training recipes from one pretraining run, distinguishable only by the string. Renaming the op would be false (it IS an SFT); the difference is in what the recipe TARGETS, which is a property of the resulting model.
+    what it buys: Olmo-3-1025-7B now carries two labelled ladders from one base -- Instruct (sft->dpo->rlvr) and Think (sft->dpo) -- which is a RECIPE contrast with pretraining held exactly fixed, the cleanest kind in the roster.
+    NOT a mode: distinct from the archive's Circuit Mode.RAW/CHAT/THINK, which switches TEMPLATES on one set of weights. These are different weights.
+    marked:
+    - allenai/Olmo-3-7B-Think
+    - allenai/Olmo-3-7B-Think-DPO
+    - allenai/Olmo-3-7B-Think-SFT
+    - deepseek-ai/DeepSeek-R1-Distill-Llama-8B
+    - deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+    - microsoft/Phi-4-reasoning-plus
+    - microsoft/phi-4-reasoning

@@ -98,7 +98,8 @@ CREATE TABLE IF NOT EXISTS {db}.checkpoints (
     nickname LowCardinality(String), revision LowCardinality(String),
     revision_ladder UInt32, lineage String, depth UInt8,
     params_b Float32, scale_group String, is_representative UInt8,
-    vocab_size UInt32, vocab_len UInt32, n_added_tokens UInt32
+    vocab_size UInt32, vocab_len UInt32, n_added_tokens UInt32,
+    reasoning UInt8
 ) ENGINE = ReplacingMergeTree ORDER BY model_id
 """, """
 CREATE TABLE IF NOT EXISTS {db}.edges (
@@ -160,7 +161,8 @@ def rows():
               "open_data": int(bool((d or {}).get("open_data"))),
               "nickname": (d or {}).get("nickname", "") or "",
               "revision": str((d or {}).get("revision", "") or ""),
-              "revision_ladder": int((d or {}).get("revision_ladder") or 0)}
+              "revision_ladder": int((d or {}).get("revision_ladder") or 0),
+              "reasoning": int(bool((d or {}).get("reasoning")))}
              for m, d in (A.get("nodes") or {}).items()]
     edges = []
     for e in A.get("edges") or []:
