@@ -6,6 +6,12 @@
    "path": "/Users/rj416/.claude/projects/-Users-rj416-github-malign-logits/412328a9-b178-4724-9c75-eca7f1f0e80b/subagents/workflows/wf_3b0cbcb3-eaf/journal.jsonl",
    "n_lineages": 45,
    "ingested_at": "2026-08-15T20:48:39"
+  },
+  {
+   "run": "wf_f963b738-20a",
+   "path": "/Users/rj416/.claude/projects/-Users-rj416-github-malign-logits/412328a9-b178-4724-9c75-eca7f1f0e80b/subagents/workflows/wf_f963b738-20a/journal.jsonl",
+   "n_lineages": 10,
+   "ingested_at": "2026-08-15T20:55:32"
   }
  ],
  "checkpoints": {
@@ -6455,6 +6461,2436 @@
     }
    ],
    "run": "wf_3b0cbcb3-eaf"
+  },
+  "EleutherAI/pythia-6.9b": {
+   "lineage": "EleutherAI/pythia-6.9b",
+   "url": "https://huggingface.co/EleutherAI/pythia-6.9b",
+   "confidence": "high",
+   "notes": "Full detailed card, no stub. From-scratch training is documented three ways: a `step0` (initialisation) checkpoint is published, the corpus is EleutherAI's own, and the budget is stated as 'just under 1 epoch on the Pile'. No parent model is named anywhere — nothing pruned, upscaled, distilled, or continually pretrained. The card does record that this suite is a retrain of an earlier release ('we decided to retrain the model suite to address a few hyperparameter discrepancies'), which is a re-run from scratch, not a derivation. reasoning='no' is an entailment, flagged as such: the card says the model was never fine-tuned for any downstream context, which precludes chain-of-thought targeting; it never uses the words 'reasoning' or 'chain-of-thought'.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "If you decide to use \npre-trained Pythia-6.9B as a basis for your fine-tuned model, please \nconduct your own risk and bias assessment.",
+     "url": "https://huggingface.co/EleutherAI/pythia-6.9b"
+    },
+    {
+     "field": "reasoning",
+     "value": "no",
+     "quote": "Pythia-6.9B has not been fine-tuned for downstream contexts in which \nlanguage models are commonly deployed, such as writing genre prose, \nor commercial chatbots.",
+     "url": "https://huggingface.co/EleutherAI/pythia-6.9b"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "train_tokens",
+     "value": "299,892,736,000",
+     "quote": "Each \nmodel saw 299,892,736,000 tokens during training",
+     "url": "https://huggingface.co/EleutherAI/pythia-6.9b"
+    },
+    {
+     "field": "datasets",
+     "value": "The Pile (EleutherAI/pile), non-deduplicated",
+     "quote": "[The Pile](https://pile.eleuther.ai/) is a 825GiB general-purpose dataset in \nEnglish. It was created by EleutherAI specifically for training large language \nmodels.",
+     "url": "https://huggingface.co/EleutherAI/pythia-6.9b"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "- License: Apache 2.0",
+     "url": "https://huggingface.co/EleutherAI/pythia-6.9b"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "lomahony/eleuther-pythia6.9b-hh-sft": {
+   "lineage": "EleutherAI/pythia-6.9b",
+   "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft",
+   "confidence": "medium",
+   "notes": "Card is three lines of prose plus YAML — brief but not a stub or template: it names the operation, the parent checkpoint (linked), the dataset (linked) and the epoch count, and links a W&B run (wandb.ai/pythia_dpo/Pythia_LOM/runs/vd9e3it0). Confidence medium, not high: no token or example count, no hyperparameters, no data-mixture detail, and no paper cited for this checkpoint's own training. DIRECTION CAVEAT: the card never characterises the direction of alignment; direction='standard' rests on the identity of Anthropic/hh-rlhf as a helpfulness-and-harmlessness preference set, not on any sentence in the card — treat it as weaker than the other claims. Nothing on the card suggests de-censoring. Also: the repo is owned by HF user `lomahony` (W&B workspace user-lauraomahony), NOT EleutherAI — 'eleuther-' in the repo name refers to the base model's origin, not the trainer. The closing line links '(paper)' to arXiv:2101.00027, the Pile paper, where the base model's own card cites the Pythia paper (2304.01373).",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "[Pythia-6.9b](https://huggingface.co/EleutherAI/pythia-6.9b) supervised finetuned with [Anthropic-hh-rlhf dataset](https://huggingface.co/datasets/Anthropic/hh-rlhf) for 1 epoch. ",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "[Pythia-6.9b](https://huggingface.co/EleutherAI/pythia-6.9b) supervised finetuned with [Anthropic-hh-rlhf dataset](https://huggingface.co/datasets/Anthropic/hh-rlhf) for 1 epoch. ",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "supervised finetuned with [Anthropic-hh-rlhf dataset](https://huggingface.co/datasets/Anthropic/hh-rlhf) for 1 epoch",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft"
+    },
+    {
+     "field": "train_tokens",
+     "value": "1 epoch over Anthropic/hh-rlhf; no token or example count stated",
+     "quote": "supervised finetuned with [Anthropic-hh-rlhf dataset](https://huggingface.co/datasets/Anthropic/hh-rlhf) for 1 epoch",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft"
+    },
+    {
+     "field": "datasets",
+     "value": "Anthropic/hh-rlhf",
+     "quote": "datasets:\n- Anthropic/hh-rlhf",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "lomahony/eleuther-pythia6.9b-hh-dpo": {
+   "lineage": "EleutherAI/pythia-6.9b",
+   "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-dpo",
+   "confidence": "medium",
+   "notes": "Method is genuinely sourced, not read off the repo name: the card writes 'before DPO' and links arXiv:2305.18290 (Rafailov et al., the DPO paper). NOT an instruct_bundle — the two stages are documented separately and the intermediate SFT checkpoint is released and linked, so this is DPO on a named, released SFT parent (released_base='yes' refers to that SFT checkpoint, which is the model it was trained FROM). No `algorithm` claim emitted: the card names DPO, which is the operation itself, and names no separate or variant optimiser (no 'online DPO', no loss variant, no beta). W&B run linked: wandb.ai/pythia_dpo/Pythia_LOM/runs/i53fbcih. CARD ERROR worth recording: the closing line 'See [Pythia-6.9b](https://huggingface.co/EleutherAI/pythia-6.9b) for original model details [(paper)](https://arxiv.org/abs/2101.00027)' points at the Pile paper (2101.00027), not the Pythia paper (2304.01373) that the base model's own card cites; the same mislink appears on the SFT card. DIRECTION CAVEAT: as with the SFT checkpoint, 'standard' rests on the identity of Anthropic/hh-rlhf, not on any explicit statement of direction. Confidence medium: brief card, no token counts or hyperparameters, no paper describing this run.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "before DPO [(paper)](https://arxiv.org/abs/2305.18290) with same dataset for 1 epoch. ",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-dpo"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "[Pythia-6.9b](https://huggingface.co/EleutherAI/pythia-6.9b) supervised finetuned with [Anthropic-hh-rlhf dataset](https://huggingface.co/datasets/Anthropic/hh-rlhf) for 1 epoch [(sft-model)](https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft), \nbefore DPO [(paper)](https://arxiv.org/abs/2305.18290) with same dataset for 1 epoch. ",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-dpo"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "supervised finetuned with [Anthropic-hh-rlhf dataset](https://huggingface.co/datasets/Anthropic/hh-rlhf) for 1 epoch [(sft-model)](https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-sft), \nbefore DPO [(paper)](https://arxiv.org/abs/2305.18290) with same dataset for 1 epoch",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-dpo"
+    },
+    {
+     "field": "train_tokens",
+     "value": "1 epoch of DPO on top of 1 epoch of SFT; no token or example count stated",
+     "quote": "before DPO [(paper)](https://arxiv.org/abs/2305.18290) with same dataset for 1 epoch. ",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-dpo"
+    },
+    {
+     "field": "datasets",
+     "value": "Anthropic/hh-rlhf",
+     "quote": "datasets:\n- Anthropic/hh-rlhf",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-dpo"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/lomahony/eleuther-pythia6.9b-hh-dpo"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "EleutherAI/pythia-2.8b": {
+   "lineage": "EleutherAI/pythia-2.8b",
+   "url": "https://huggingface.co/EleutherAI/pythia-2.8b",
+   "confidence": "high",
+   "notes": "Pretrained from scratch, not derived: the card ships a `step0` initialisation checkpoint and 143 evenly spaced checkpoints across a single 299.89B-token run, and the corpus (the Pile) is EleutherAI's own. The card explicitly flags the non-deduplicated variant: \"The Pile was **not** deduplicated before being used to train Pythia-2.8B.\" The `reasoning: no` claim rests on the card's statement that the model has not been fine-tuned for downstream contexts at all — indirect but, for a raw base checkpoint, the card says nothing that would support CoT targeting.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "All models were trained on the exact same data, in the exact same order. Each model saw 299,892,736,000 tokens during training",
+     "url": "https://huggingface.co/EleutherAI/pythia-2.8b"
+    },
+    {
+     "field": "train_tokens",
+     "value": "299,892,736,000",
+     "quote": "Each model saw 299,892,736,000 tokens during training, and 143 checkpoints for each model are saved every 2,097,152,000 tokens",
+     "url": "https://huggingface.co/EleutherAI/pythia-2.8b"
+    },
+    {
+     "field": "datasets",
+     "value": "The Pile (non-deduplicated)",
+     "quote": "[The Pile](https://pile.eleuther.ai/) is a 825GiB general-purpose dataset in English. It was created by EleutherAI specifically for training large language models. It contains texts from 22 diverse sources",
+     "url": "https://huggingface.co/EleutherAI/pythia-2.8b"
+    },
+    {
+     "field": "reasoning",
+     "value": "no",
+     "quote": "Pythia-2.8B has not been fine-tuned for downstream contexts in which \nlanguage models are commonly deployed, such as writing genre prose, \nor commercial chatbots.",
+     "url": "https://huggingface.co/EleutherAI/pythia-2.8b"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "License: Apache 2.0",
+     "url": "https://huggingface.co/EleutherAI/pythia-2.8b"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "ContextualAI/archangel_sft_pythia2-8b": {
+   "lineage": "EleutherAI/pythia-2.8b",
+   "url": "https://huggingface.co/ContextualAI/archangel_sft_pythia2-8b",
+   "confidence": "medium",
+   "notes": "This is the SFT stage the four alignment arms build on, and it is itself released, which is why released_base is \"yes\" for the siblings. The card names the base only as \"pythia2-8b\", which does NOT disambiguate EleutherAI/pythia-2.8b from EleutherAI/pythia-2.8b-deduped; only the sft-ppo card in this set gives the full HF id. The card also documents conditional-SFT control tokens: \"For models trained with our conditional SFT model, the tokenizers have additional tokens `<|good|>` and `<|bad|>` included in the embeddings.\" — that is about the CSFT variant's tokenizer, not a statement that THIS checkpoint is CSFT, so I did not score method from it. No token or example count anywhere on the card; the 169k/386k/88.8k row counts visible on the HF page come from the dataset viewer sidebar, not from the card text, so they are not booked as train_tokens.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "- optimized with the loss <b>SFT</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft_pythia2-8b"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "- model family <b>pythia2-8b</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft_pythia2-8b"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "- aligned using the SHP, Anthropic HH and Open Assistant datasets.",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft_pythia2-8b"
+    },
+    {
+     "field": "datasets",
+     "value": "stanfordnlp/SHP; Anthropic/hh-rlhf; OpenAssistant/oasst1",
+     "quote": "datasets:\n- stanfordnlp/SHP\n- Anthropic/hh-rlhf\n- OpenAssistant/oasst1",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft_pythia2-8b/raw/main/README.md"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft_pythia2-8b/raw/main/README.md"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+   "lineage": "EleutherAI/pythia-2.8b",
+   "url": "https://huggingface.co/ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "confidence": "medium",
+   "notes": "Method scored from the card's own loss line (\"SFT+DPO\"), not from the repo name. No algorithm claim: the source names the loss DPO, which is not distinct from the operation, so there is nothing extra to record. The card's `tags:` block lists \"dpo\" and \"rl\" for ALL five Archangel repos including the SFT-only and SLiC ones, so tags are worthless as method evidence here and were not used.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "- optimized with the loss <b>SFT+DPO</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-dpo_pythia2-8b"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "- model family <b>pythia2-8b</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-dpo_pythia2-8b"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "- aligned using the SHP, Anthropic HH and Open Assistant datasets.",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-dpo_pythia2-8b"
+    },
+    {
+     "field": "datasets",
+     "value": "stanfordnlp/SHP; Anthropic/hh-rlhf; OpenAssistant/oasst1",
+     "quote": "datasets:\n- stanfordnlp/SHP\n- Anthropic/hh-rlhf\n- OpenAssistant/oasst1",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-dpo_pythia2-8b/raw/main/README.md"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-dpo_pythia2-8b/raw/main/README.md"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "ContextualAI/archangel_sft-kto_pythia2-8b": {
+   "lineage": "EleutherAI/pythia-2.8b",
+   "url": "https://huggingface.co/ContextualAI/archangel_sft-kto_pythia2-8b",
+   "confidence": "medium",
+   "notes": "WARNING for anyone reusing an LLM summary of this card: a summarisation pass over this page produced the gloss \"Kawin-Theta Optimization\" for KTO. That string appears nowhere in the card or the paper and is fabricated (KTO is Kahneman-Tversky Optimization, per the paper's title \"Model Alignment as Prospect Theoretic Optimization\" and its KTO derivation). The card itself expands nothing — it says only \"SFT+KTO\".",
+   "claims": [
+    {
+     "field": "method",
+     "value": "kto",
+     "quote": "- optimized with the loss <b>SFT+KTO</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-kto_pythia2-8b"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "- model family <b>pythia2-8b</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-kto_pythia2-8b"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "- aligned using the SHP, Anthropic HH and Open Assistant datasets.",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-kto_pythia2-8b"
+    },
+    {
+     "field": "datasets",
+     "value": "stanfordnlp/SHP; Anthropic/hh-rlhf; OpenAssistant/oasst1",
+     "quote": "datasets:\n- stanfordnlp/SHP\n- Anthropic/hh-rlhf\n- OpenAssistant/oasst1",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-kto_pythia2-8b/raw/main/README.md"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-kto_pythia2-8b/raw/main/README.md"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+   "lineage": "EleutherAI/pythia-2.8b",
+   "url": "https://huggingface.co/ContextualAI/archangel_sft-ppo_pythia2-8b",
+   "confidence": "medium",
+   "notes": "THREE-WAY DISCREPANCY, and the reason this checkpoint deserves separate handling. (1) The repo id is `archangel_sft-ppo_...`, implying SFT then PPO. (2) The CARD drops the SFT prefix that all four sibling cards carry: \"- optimized with the loss <b>PPO</b>\" (siblings read SFT+DPO / SFT+KTO / SFT+SLIC). (3) The PAPER labels this pipeline with the prefix restored and the variant marked: its sample-generation table row is \"SFT+PPO (offline)\", and the method section says \"for a fair comparison with offline methods, we consider a variant of PPO that is only fed offline data.\" I booked method from the card (ppo) and the offline qualifier as a separate algorithm claim from the paper. Do not record this as standard online RLHF-PPO: the paper states it never updates the old policy (\"we never update πold and keep it as πref\") and uses dummy ±1 rewards rather than a learned reward model. Two further card-level oddities: this card alone names the base with its full HF id (EleutherAI/pythia-2.8b, so this one is unambiguously the non-deduped root), and this card alone omits the `<|good|>`/`<|bad|>` conditional-SFT paragraph.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "ppo",
+     "quote": "- optimized with the loss <b>PPO</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-ppo_pythia2-8b"
+    },
+    {
+     "field": "algorithm",
+     "value": "PPO (offline)",
+     "quote": "Calling this method PPO is somewhat imprecise, because it is offline and takes only one step, but to avoid introducing too many new terms, we will call this PPO (offline). Instead of using learned rewards, we simplify even further and use dummy +1/-1 rewards4 for yw and yl instead.",
+     "url": "https://arxiv.org/pdf/2402.01306"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "- model family <b>EleutherAI/pythia-2.8b</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-ppo_pythia2-8b"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "- aligned using the SHP, Anthropic HH and Open Assistant datasets.",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-ppo_pythia2-8b"
+    },
+    {
+     "field": "datasets",
+     "value": "stanfordnlp/SHP; Anthropic/hh-rlhf; OpenAssistant/oasst1",
+     "quote": "datasets:\n- stanfordnlp/SHP\n- Anthropic/hh-rlhf\n- OpenAssistant/oasst1",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-ppo_pythia2-8b/raw/main/README.md"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-ppo_pythia2-8b/raw/main/README.md"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "ContextualAI/archangel_sft-slic_pythia2-8b": {
+   "lineage": "EleutherAI/pythia-2.8b",
+   "url": "https://huggingface.co/ContextualAI/archangel_sft-slic_pythia2-8b",
+   "confidence": "medium",
+   "notes": "Card spells it \"SLIC\" (all caps); the paper spells it \"SLiC: Sequence Likelihood Calibration (Zhao et al., 2023), which combines a max-margin loss for preferences with a language modeling loss\". Quoted the card form verbatim as required. The paper also notes its SLiC implementation deviates from the original: \"Instead of sampling from the reference model to calculate the Lreg as Zhao et al. (2023) do—as it is very slow—we just apply the cross-entropy loss to the SFT data\" — so \"SLiC\" here is a modified reimplementation, worth flagging if the roster treats method labels as interchangeable across papers.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "slic",
+     "quote": "- optimized with the loss <b>SFT+SLIC</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-slic_pythia2-8b"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "- model family <b>pythia2-8b</b>",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-slic_pythia2-8b"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "- aligned using the SHP, Anthropic HH and Open Assistant datasets.",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-slic_pythia2-8b"
+    },
+    {
+     "field": "datasets",
+     "value": "stanfordnlp/SHP; Anthropic/hh-rlhf; OpenAssistant/oasst1",
+     "quote": "datasets:\n- stanfordnlp/SHP\n- Anthropic/hh-rlhf\n- OpenAssistant/oasst1",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-slic_pythia2-8b/raw/main/README.md"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/ContextualAI/archangel_sft-slic_pythia2-8b/raw/main/README.md"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMo-2-0425-1B": {
+   "lineage": "allenai/OLMo-2-0425-1B",
+   "url": "https://huggingface.co/allenai/OLMo-2-0425-1B",
+   "confidence": "high",
+   "notes": "Root of the lineage and an INDEPENDENT pretraining run: the card describes Stage 1 pretraining on Ai2's own OLMo-mix-1124 and names no parent checkpoint, no pruning, no upscaling, no distillation, no continued pretraining from a third-party model. Stage 2 is mid-training within the same run: '#### Stage 2: Mid-training' / '- Dataset: Dolmino-Mix-1124' / '  - 50B tokens' / '- Mix composition: 50% high-quality web data + academic/Q&A/instruction/math content'. train_tokens filed as the Stage 1 figure only, because that is what the quoted cell supports; the model-summary table separately gives the headline '4 Trillion' for OLMo 2-1B. Card states no merging at 1B: '- 1B Model: only 1 version is trained on a 50B mix (ingredient 3), we did not merge. Ingredients 1 and 2 are just exploratory runs.' released_base and direction are 'na' (undefined for a from-scratch root) and therefore carry empty quotes rather than a borrowed one. Date cutoff: '- **Date cutoff:** Dec. 2023.' Paper: arXiv:2501.00656.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "OLMo 2 was pre-trained on [OLMo-mix-1124](https://huggingface.co/datasets/allenai/olmo-mix-1124)",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B"
+    },
+    {
+     "field": "train_tokens",
+     "value": "4 trillion tokens (Stage 1, 1 epoch)",
+     "quote": "| Pretraining Stage 1 | 4 trillion tokens<br>(1 epoch) |",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B"
+    },
+    {
+     "field": "datasets",
+     "value": "OLMo-mix-1124 (3.9T tokens)",
+     "quote": "- Dataset: [OLMo-mix-1124](https://huggingface.co/datasets/allenai/olmo-mix-1124) (3.9T tokens)",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "- **License:** The code and model are released under Apache 2.0.",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMo-2-0425-1B-SFT": {
+   "lineage": "allenai/OLMo-2-0425-1B",
+   "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-SFT",
+   "confidence": "high",
+   "notes": "released_base 'yes': the card names allenai/OLMo-2-0425-1B and that repo returns HTTP 200 unauthenticated (public, ungated). train_tokens comes from the DATASET card's YAML, not the model card, which states no example or token count -- flagged so an auditor checking the model card alone does not read it as fabricated. direction 'standard' rests on the card stating the models HAVE (limited) safety training; nothing describes removing refusals or an uncensored mixture. reasoning left 'unknown': the nearest sentence is 'Tülu 3 is designed for state-of-the-art performance on a diversity of tasks in addition to chat, such as MATH, GSM8K, and IFEval', a task-performance claim rather than a claim about targeting explicit chain-of-thought; no OLMo 2 1B card mentions thinking/CoT (this is not the OLMo Think branch). CARD DEFECT: this SFT card carries the Instruct template's paragraph verbatim -- 'To facilitate research on RL finetuning, we have released our intermediate checkpoints during the model's RLVR training.' -- with the load example pointed at OLMo-2-0425-1B-SFT. RLVR contradicts a checkpoint whose lead sentence says supervised finetuning; method scored from the lead sentence, with the RLVR paragraph treated as copy-paste, but it is a genuine card-internal contradiction.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "OLMo 2 1B SFT April 2025 is post-trained variant of the [allenai/OLMo-2-0425-1B](https://huggingface.co/allenai/OLMo-2-0425-1B) model, which has undergone supervised finetuning on an OLMo-specific variant of the [Tülu 3 dataset](https://huggingface.co/datasets/allenai/tulu-3-sft-olmo-2-mixture-0225).",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-SFT"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "- **Finetuned from model:** allenai/OLMo-2-0425-1B",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-SFT"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/tulu-3-sft-olmo-2-mixture-0225",
+     "quote": "supervised finetuning on an OLMo-specific variant of the [Tülu 3 dataset](https://huggingface.co/datasets/allenai/tulu-3-sft-olmo-2-mixture-0225)",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-SFT"
+    },
+    {
+     "field": "train_tokens",
+     "value": "866,138 examples (dataset-card count, not stated on the model card)",
+     "quote": "num_examples: 866138",
+     "url": "https://huggingface.co/datasets/allenai/tulu-3-sft-olmo-2-mixture-0225"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "The OLMo-2 models have limited safety training, but are not deployed automatically with in-the-loop filtering of responses like ChatGPT, so the model can produce problematic outputs (especially when prompted to do so).",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-SFT"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "- **License:** Apache 2.0",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-SFT"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMo-2-0425-1B-DPO": {
+   "lineage": "allenai/OLMo-2-0425-1B",
+   "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-DPO",
+   "confidence": "high",
+   "notes": "algorithm 'unknown' deliberately: the card names DPO as the operation but no optimiser variant distinct from it (no 'online DPO', no length-normalised variant). Do not read the base card's 'SFT+DPO+GRPO' as an algorithm for THIS checkpoint -- the GRPO in that string belongs to the RLVR stage, not the DPO stage. released_base 'yes': allenai/OLMo-2-0425-1B-SFT returns HTTP 200 unauthenticated. train_tokens again from the dataset card, not the model card. The preference mixture carries a different licence from the weights: the dataset card says 'Note that this collection is licensed under ODC-BY-1.0 license; different licenses apply to subsets of the data. Some portions of the dataset are non-commercial.' -- the Apache 2.0 claim above is about the model weights only. The same copy-paste RLVR 'Intermediate Checkpoints' paragraph appears on this card as on the SFT card.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "OLMo 2 1B DPO April 2025 is post-trained variant of the [allenai/OLMo-2-0425-1B-SFT](https://huggingface.co/allenai/OLMo-2-0425-1B-SFT) model, which has undergone supervised finetuning on an OLMo-specific variant of the [Tülu 3 dataset](https://huggingface.co/datasets/allenai/tulu-3-sft-olmo-2-mixture-0225) and further DPO training on [this dataset](https://huggingface.co/datasets/allenai/olmo-2-0425-1b-preference-mix).",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-DPO"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "- **Finetuned from model:** allenai/OLMo-2-0425-1B-SFT",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-DPO"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/olmo-2-0425-1b-preference-mix",
+     "quote": "- allenai/olmo-2-0425-1b-preference-mix",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-DPO"
+    },
+    {
+     "field": "train_tokens",
+     "value": "378,301 preference pairs (dataset-card count, not stated on the model card)",
+     "quote": "num_examples: 378301",
+     "url": "https://huggingface.co/datasets/allenai/olmo-2-0425-1b-preference-mix"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "The OLMo-2 models have limited safety training, but are not deployed automatically with in-the-loop filtering of responses like ChatGPT, so the model can produce problematic outputs (especially when prompted to do so).",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-DPO"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "- **License:** Apache 2.0",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-DPO"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMo-2-0425-1B-Instruct": {
+   "lineage": "allenai/OLMo-2-0425-1B",
+   "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct",
+   "confidence": "high",
+   "notes": "TWO THINGS THE ROSTER PROBABLY HAS WRONG. (1) PARENT: Instruct is NOT trained from the DPO checkpoint. Its card names allenai/OLMo-2-0425-1B-RLVR1 as the parent, and RLVR1 is itself a separate released RLVR stage on top of DPO: RLVR1's card says 'OLMo 2 1B RLVR 1 April 2025 is post-trained variant of the [allenai/OLMo-2-0425-1B-DPO](https://huggingface.co/allenai/OLMo-2-0425-1B-DPO) model, which has undergone supervised finetuning on an OLMo-specific variant of the [Tülu 3 dataset](https://huggingface.co/datasets/allenai/tulu-3-sft-olmo-2-mixture-0225), further DPO training on [this dataset](https://huggingface.co/datasets/allenai/olmo-2-0425-1b-preference-mix), and final RLVR training on [this dataset](https://huggingface.co/datasets/allenai/RLVR-GSM-MATH-IF-Mixed-Constraints).' So there are two RLVR stages on different mixtures (RLVR-GSM-MATH-IF-Mixed-Constraints, then RLVR-MATH), and a DPO->Instruct edge silently skips a released checkpoint. RLVR1 is public (HTTP 200 unauthenticated), hence released_base 'yes'. (2) ALGORITHM: GRPO -- and this is exactly why the schema separates algorithm from method. At 1B the RLVR optimiser is GRPO while the 7B and 13B of the same family use PPO; same table row: '| Post-training | SFT+DPO+GRPO<br>...| SFT + DPO + PPO<br>...| SFT + DPO + PPO<br>...| SFT + DPO + GRPO<br>...|' for 1B/7B/13B/32B. PROVENANCE CAVEAT: that GRPO string sits on the BASE model card's training table, not on the Instruct card; the Instruct card names no optimiser. reasoning 'unknown': RLVR-MATH is verifiable-reward math training, which is not documented chain-of-thought targeting, and no card in this lineage mentions CoT or a thinking mode. A would-be allenai/OLMo-2-0425-1B-RLVR2 returns HTTP 401, i.e. not public.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "rlvr",
+     "quote": "OLMo 2 1B Instruct April 2025 is post-trained variant of the [allenai/OLMo-2-0425-1B-RLVR1](https://huggingface.co/allenai/OLMo-2-0425-1B-RLVR1) model, which has undergone supervised finetuning on an OLMo-specific variant of the [Tülu 3 dataset](https://huggingface.co/datasets/allenai/tulu-3-sft-olmo-2-mixture-0225), further DPO training on [this dataset](https://huggingface.co/datasets/allenai/olmo-2-0425-1b-preference-mix), and final RLVR training on [this dataset](https://huggingface.co/datasets/allenai/RLVR-MATH).",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct"
+    },
+    {
+     "field": "algorithm",
+     "value": "GRPO",
+     "quote": "| Post-training | SFT+DPO+GRPO<br>([preference mix](https://huggingface.co/datasets/allenai/olmo-2-0425-1b-preference-mix)) |",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "- **Finetuned from model:** allenai/OLMo-2-0425-1B-RLVR1",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/RLVR-MATH",
+     "quote": "- allenai/RLVR-MATH",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct"
+    },
+    {
+     "field": "train_tokens",
+     "value": "7,500 examples (dataset-card count for RLVR-MATH, not stated on the model card)",
+     "quote": "num_examples: 7500",
+     "url": "https://huggingface.co/datasets/allenai/RLVR-MATH"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "The OLMo-2 models have limited safety training, but are not deployed automatically with in-the-loop filtering of responses like ChatGPT, so the model can produce problematic outputs (especially when prompted to do so).",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "- **License:** Apache 2.0",
+     "url": "https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "Qwen/Qwen2.5-7B": {
+   "lineage": "Qwen/Qwen2.5-7B",
+   "url": "https://huggingface.co/Qwen/Qwen2.5-7B",
+   "confidence": "high",
+   "notes": "Card is thin on training: it gives architecture, parameter counts, context length and the one line \"Training Stage: Pretraining\". No token count, no dataset names, no statement of derivation. The frontmatter has NO base_model field (contrast Qwen2.5-7B-Instruct and Qwen2.5-Math-7B, which both declare one) — that absence, plus \"Training Stage: Pretraining\", is the card-level evidence for root status; the 18T figure comes from the series technical report, not the card. reasoning: the card says nothing about chain-of-thought either way, so \"unknown\" rather than \"no\" — the report's phrase \"a strong foundation for common sense, expert knowledge, and reasoning capabilities\" describes pretraining capability, not a CoT training target, and I will not stretch it. datasets: the report describes the corpus (filtering by Qwen2-Instruct, math/code data from Qwen2.5-Math and Qwen2.5-Coder, synthetic data) but names no releasable dataset, so \"unknown\" is the honest value even though the corpus is described. Report note: the 7B row of the report's model table lists license \"Apache 2.0\", consistent with the card frontmatter.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "- Training Stage: Pretraining",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "**This repo contains the base 7B Qwen2.5 model**, which has the following features:",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B"
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "**We do not recommend using base language models for conversations.** Instead, you can apply post-training, e.g., SFT, RLHF, continued pretraining, etc., on this model.",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B"
+    },
+    {
+     "field": "train_tokens",
+     "value": "18 trillion tokens (pretraining; no post-training on this checkpoint)",
+     "quote": "In terms of pre-training, we have scaled the high-quality pre-training datasets from the previous 7 trillion tokens to 18 trillion tokens.",
+     "url": "https://arxiv.org/abs/2412.15115"
+    },
+    {
+     "field": "datasets",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "Qwen/Qwen2.5-7B-Instruct": {
+   "lineage": "Qwen/Qwen2.5-7B",
+   "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+   "confidence": "medium",
+   "notes": "method is instruct_bundle by rule 5, and this is a real call, not a shrug: the card documents no stage at all beyond \"Pretraining & Post-training\", and the report describes SFT+DPO+GRPO for the Qwen2.5 SERIES without ever separating what was applied to the 7B checkpoint specifically or releasing the intermediate SFT/DPO checkpoints. There is no separately released Qwen2.5-7B-SFT or -DPO, so this single artifact carries all three operations. If the roster needs a per-stage decomposition for this family, it cannot have one from the sources.\n\nCARD-VS-PAPER / PAPER-VS-ITSELF DISCREPANCY (minor but worth recording, since it is the source of the algorithm claim): the arXiv ABSTRACT PAGE metadata for 2412.15115 reads \"...as well as multistage reinforcement learning. Post-training techniques enhance human preference, and notably improve long text generation...\", whereas the HTML v2 body abstract reads \"...as well as multistage reinforcement learning, including offline learning DPO and online learning GRPO. Post-training techniques significantly enhance human preference...\". The DPO/GRPO clause and the word \"significantly\" appear in the v2 full text and not in the abs-page abstract. The algorithm names are corroborated in the v2 body: the introduction lists \"supervised finetuning (SFT, Ouyang et al. 2022), direct preference optimization (DPO, Rafailov et al. 2023), and group relative policy optimization (GRPO, Shao et al. 2024)\", and §post-training states \"In our online reinforcement learning (RL) framework, we employ Group Relative Policy Optimization (GRPO, Shao et al. 2024).\" So the algorithm claim is safe; I flag the abstract mismatch only so a later auditor pulling the abs page does not think the clause was invented.\n\ndirection: quoted from the report's reward-model design criteria (the sentence follows a passage on avoiding bias \"related to gender, race, nationality, and politics\"). It evidences alignment toward accepted norms, i.e. standard, not de-censoring. It is a reward-model guideline rather than a statement about this checkpoint's direction, which is why confidence is medium rather than high.\n\nreasoning \"unknown\": the card never mentions chain-of-thought, and the report positions CoT-targeted work in separate models (\"Qwen2.5 models have been instrumental in training specialized models such as Qwen2.5-Math, Qwen2.5-Coder, QwQ\"). That implies but does not state that 7B-Instruct is not CoT-targeted, so I leave it unknown rather than write \"no\".\n\ntrain_tokens is an EXAMPLE count, not a token count — the report gives \"over 1 million samples\" / \"The post-training data amounts to 1 million examples\". No post-training token figure exists in either source.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "instruct_bundle",
+     "quote": "- Training Stage: Pretraining & Post-training",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+     "field": "algorithm",
+     "value": "DPO (offline) + GRPO (online), after SFT",
+     "quote": "In terms of post-training, we implement intricate supervised finetuning with over 1 million samples, as well as multistage reinforcement learning, including offline learning DPO and online learning GRPO.",
+     "url": "https://arxiv.org/html/2412.15115v2"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model: Qwen/Qwen2.5-7B",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "It should treat all topics equally and fairly, adhering to widely accepted moral and ethical standards.",
+     "url": "https://arxiv.org/html/2412.15115v2"
+    },
+    {
+     "field": "train_tokens",
+     "value": "over 1 million post-training samples (examples, not tokens)",
+     "quote": "In terms of post-training, we implement intricate supervised finetuning with over 1 million samples, as well as multistage reinforcement learning.",
+     "url": "https://arxiv.org/abs/2412.15115"
+    },
+    {
+     "field": "datasets",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://arxiv.org/html/2412.15115v2"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B": {
+   "lineage": "Qwen/Qwen2.5-7B",
+   "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+   "confidence": "high",
+   "notes": "SHARED-CARD CAVEAT: this repo does not have a checkpoint-specific card. README.md is the DeepSeek-R1 family card — it opens \"# DeepSeek-R1\" and documents R1-Zero, R1 and all six distills together. Every claim above that comes from the card is a family-level statement I have matched to this checkpoint via the card's own download table row. Not a stub, but not checkpoint-specific either.\n\nBASE MODEL — the headline finding. The roster places this under Qwen/Qwen2.5-7B; both primary sources say Qwen/Qwen2.5-Math-7B. Card table row: \"| DeepSeek-R1-Distill-Qwen-7B  | [Qwen2.5-Math-7B](https://huggingface.co/Qwen/Qwen2.5-Math-7B) | [🤗 HuggingFace](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B)   |\". Paper: \"The base models we use here are Qwen2.5-Math-1.5B, Qwen2.5-Math-7B, Qwen2.5-14B, Qwen2.5-32B, Llama-3.1-8B, and Llama-3.3-70B-Instruct.\" Card and paper AGREE; it is the roster that disagrees with both. Weight-level corroboration: this repo's config.json has rope_theta 10000 and sliding_window 4096 (matching Qwen2.5-Math-7B) where Qwen/Qwen2.5-7B has rope_theta 1000000.0 and sliding_window 131072. Note the card also says \"We slightly change their configs and tokenizers\", so config evidence is supporting, not decisive on its own — but the rope base matches Math-7B exactly.\n\ndirection \"unknown\" is deliberate. Nothing in the card or the paper states a direction for the DISTILLED checkpoints. The paper's helpfulness/harmlessness language (\"a secondary reinforcement learning stage aimed at improving the model's helpfulness and harmlessness\") describes R1's own second RL stage, not the distills, which received only SFT on R1 outputs. Attaching that quote here would be exactly the misfiling rule 1 warns about. There is no evidence of a de-censoring or refusal-removal objective either — absence of that evidence is not a finding.\n\nLICENCE NUANCE (not a contradiction, but two licences are in play): frontmatter is \"license: mit\" and §7 licenses the weights MIT, while the same section states the Qwen-derived distills \"are originally licensed under [Apache 2.0 License]\". The card asserts MIT for the released artifact and acknowledges the upstream Apache-2.0 provenance; it does not resolve which governs a downstream user.\n\ntrain_tokens is an EXAMPLE count. The 800k figure is the R1 SFT corpus (~600k reasoning + ~200k non-reasoning per §2.3.3 — \"In the end, we collected a total of approximately 200k training samples that are unrelated to reasoning\"). No token count is given anywhere for the distillation.\n\nLAB FOR THIS CHECKPOINT is DeepSeek-AI (paper byline \"DeepSeek-AI research@deepseek.com\"), NOT the root's lab. The `lab` object in this report describes Qwen Team / Alibaba Cloud, who trained the root, per the task spec.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "distill",
+     "quote": "DeepSeek-R1-Distill models are fine-tuned based on open-source models, using samples generated by DeepSeek-R1.",
+     "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+    },
+    {
+     "field": "algorithm",
+     "value": "SFT only; no RL stage (no separate optimiser named)",
+     "quote": "For distilled models, we apply only SFT and do not include an RL stage, even though incorporating RL could substantially boost model performance.",
+     "url": "https://arxiv.org/html/2501.12948v1"
+    },
+    {
+     "field": "reasoning",
+     "value": "yes",
+     "quote": "We demonstrate that the reasoning patterns of larger models can be distilled into smaller models, resulting in better performance compared to the reasoning patterns discovered through RL on small models.",
+     "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "The base models we use here are Qwen2.5-Math-1.5B, Qwen2.5-Math-7B, Qwen2.5-14B, Qwen2.5-32B, Llama-3.1-8B, and Llama-3.3-70B-Instruct.",
+     "url": "https://arxiv.org/html/2501.12948v1"
+    },
+    {
+     "field": "train_tokens",
+     "value": "800k samples (examples, not tokens)",
+     "quote": "DeepSeek-R1-Distill-Qwen-1.5B, DeepSeek-R1-Distill-Qwen-7B, DeepSeek-R1-Distill-Qwen-14B and DeepSeek-R1-Distill-Qwen-32B are derived from [Qwen-2.5 series](https://github.com/QwenLM/Qwen2.5), which are originally licensed under [Apache 2.0 License](https://huggingface.co/Qwen/Qwen2.5-1.5B/blob/main/LICENSE), and now finetuned with 800k samples curated with DeepSeek-R1.",
+     "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+    },
+    {
+     "field": "datasets",
+     "value": "800k samples curated with DeepSeek-R1 (~600k reasoning + ~200k non-reasoning); not publicly released, no external dataset named",
+     "quote": "Using the reasoning data generated by DeepSeek-R1, we fine-tuned several dense models that are widely used in the research community.",
+     "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+    },
+    {
+     "field": "direction",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+    },
+    {
+     "field": "license",
+     "value": "mit",
+     "quote": "This code repository and the model weights are licensed under the [MIT License](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/LICENSE).",
+     "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "LLM360/Amber": {
+   "lineage": "LLM360/Amber",
+   "url": "https://huggingface.co/LLM360/Amber",
+   "confidence": "high",
+   "notes": "Card claims: \"Amber is an7B English language model with the LLaMA architecture. Amber is part of LLM360's Pebble model series.\" (typo \"an7B\" is in the card). 360 intermediate checkpoints released as git branches ckpt_000..ckpt_358, final is ckpt_359: \"To load a specific checkpoint, simply pass a revision with a value between `\"ckpt_000\"` and `\"ckpt_358\"`. If no revision is provided, it will load `\"ckpt_359\"`, which is the final checkpoint.\" INDEPENDENCE IS SOLID: the paper's abstract, contributions section and data section all state from-scratch pretraining, and the full pretraining corpus is released (LLM360/AmberDatasets). Only the ARCHITECTURE is inherited from LLaMA-7B (\"The architectural details are directly fetched from https://huggingface.co/huggyllama/llama-7b\"), not the weights. TOKEN COUNT IS REPORTED THREE WAYS in the same paper (1.25T intro / 1.26T data section / 1.3T contributions) and a fourth on the card (1259.13B table total); all are the same run, differently rounded. reasoning=unknown because no source in this lineage mentions chain-of-thought at all (these are Dec 2023 models predating reasoning training) -- I decline to score it \"no\" from silence. ID redirects to IFM/Amber.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "We pretrain two new LLMs from scratch and release them under the LLM360 framework. Amber is a 7B English LLM pretrained on 1.3T tokens.",
+     "url": "https://arxiv.org/abs/2312.06550"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/LLM360/Amber"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "",
+     "url": "https://huggingface.co/LLM360/Amber"
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "",
+     "url": "https://huggingface.co/LLM360/Amber"
+    },
+    {
+     "field": "train_tokens",
+     "value": "1259.13B (card table); 1.26 Trillion (paper)",
+     "quote": "In total, we have 1.26 Trillion tokens.",
+     "url": "https://arxiv.org/abs/2312.06550"
+    },
+    {
+     "field": "datasets",
+     "value": "Arxiv 30.00B, Book 28.86B, C4 197.67B, Refined-Web 665.01B, StarCoder 291.92B, StackExchange 21.75B, Wikipedia 23.90B (Total 1259.13B)",
+     "quote": "Specifically, our pretraining data is a mixture of RefinedWeb, StarCoder, and RedPajama-v1. A slight difference with OpenLLaMA-v2 is our inclusion of C4, since we do not intend to introduce dupliciated documents after the deduplication process conducted by RefinedWeb.",
+     "url": "https://arxiv.org/abs/2312.06550"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "- **License:** Apache 2.0",
+     "url": "https://huggingface.co/LLM360/Amber/raw/main/README.md"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "LLM360/AmberChat": {
+   "lineage": "LLM360/Amber",
+   "url": "https://huggingface.co/LLM360/AmberChat",
+   "confidence": "high",
+   "notes": "METHOD IS INFERRED FROM THE OPERATION, NOT THE NAME: neither the card nor the paper ever writes \"SFT\" for AmberChat. The card says \"instruction following model finetuned from\", the paper says \"AmberChat is trained on the evolved instruct training data as used by WizardLM. We use FastChat to finetune the model for 3 epochs on 8 A100s (80G) distributed by FSDP, the learning rate is 2e-5, gradient accumulation steps is 16, warmup ratio is 0.04.\" Supervised instruction finetuning on instruction data with no preference signal = sft. The term \"supervised fine-tuning (SFT)\" appears in this lineage only on the AmberSafe card, quoting the DPO repo's procedure. CARD-vs-PAPER DATASET DISCREPANCY: card lists two sets (WizardLM evol-instruct 143k + share_gpt_90k 90k = 233k); the paper's method section names only WizardLM (\"AmberChat is trained on the evolved instruct training data as used by WizardLM\"), while the paper's results section says \"we note that AmberChat simply trained on ShareGPT 90K also demonstrates much higher performance than our base model\" -- i.e. the paper attributes AmberChat to WizardLM data in one place and ShareGPT in another. The card's two-dataset mix is the most complete statement and I take it as authoritative. direction=unknown: nothing in either source says anything about refusal behaviour in either direction; the datasets are ordinary instruction mixtures, but I am not scoring \"standard\" from the absence of de-censoring language. No named optimiser distinct from the operation, so no algorithm claim (FastChat is the training framework, not an optimiser). ID redirects to IFM/AmberChat.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "We present AmberChat, an instruction following model finetuned from [LLM360/Amber](https://huggingface.co/LLM360/Amber). AmberChat is part of LLM360's Pebble model series.",
+     "url": "https://huggingface.co/LLM360/AmberChat/raw/main/README.md"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/LLM360/AmberChat"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "an instruction following model finetuned from [LLM360/Amber](https://huggingface.co/LLM360/Amber)",
+     "url": "https://huggingface.co/LLM360/AmberChat/raw/main/README.md"
+    },
+    {
+     "field": "direction",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/LLM360/AmberChat"
+    },
+    {
+     "field": "train_tokens",
+     "value": "233k rows / examples, 3 epochs",
+     "quote": "| Total | 233k |  |",
+     "url": "https://huggingface.co/LLM360/AmberChat/raw/main/README.md"
+    },
+    {
+     "field": "datasets",
+     "value": "WizardLM/WizardLM_evol_instruct_V2_196k (143k rows); icybee/share_gpt_90k_v1 (90k rows)",
+     "quote": "| WizardLM/WizardLM_evol_instruct_V2_196k      | 143k       |  |\n| icybee/share_gpt_90k_v1   | 90k        | cc0-1.0 |",
+     "url": "https://huggingface.co/LLM360/AmberChat/raw/main/README.md"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "- **License:** Apache 2.0",
+     "url": "https://huggingface.co/LLM360/AmberChat/raw/main/README.md"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "LLM360/AmberSafe": {
+   "lineage": "LLM360/Amber",
+   "url": "https://huggingface.co/LLM360/AmberSafe",
+   "confidence": "medium",
+   "notes": "CARD-vs-PAPER CONTRADICTION ON THE BASE, which is why confidence is medium rather than high. CARD (huggingface.co/LLM360/AmberSafe): \"We present AmberSafe, a safety-finetuned instruction model using [LLM360/AmberChat](https://huggingface.co/LLM360/AmberChat) as the base.\" PAPER (arXiv:2312.06550, footnote 6 to section 4.1.3): \"The base model for this is checkpoint 355 instead of the last checkpoint\" -- i.e. the paper says the starting point is an intermediate Amber pretraining checkpoint (ckpt_355), not the final Amber and not AmberChat. Both are released artifacts, so released_base=yes either way, but the roster's edge (AmberChat -> AmberSafe vs Amber@ckpt_355 -> AmberSafe) is not settled by the sources. RELATED DATASET CONTRADICTION: the card's DataMix lists only PKU-SafeRLHF (330k); the paper says \"AmberSafe is trained on ShareGPT 90K\" and then \"further optimized on the SafeRLHF dataset\" -- i.e. the paper describes an SFT-on-ShareGPT stage plus a DPO stage, which would fold AmberChat-like SFT into AmberSafe itself. The card's \"Method\" section reproduces the DPO repo's two-step recipe (\"1. Run supervised fine-tuning (SFT) on the dataset(s) of interest.\" / \"2. Run preference learning on the model from step 1, using preference data\") without saying which step the LLM360 team actually re-ran, so it does not resolve the ambiguity. I score method=dpo because that is the operation both sources name for AmberSafe specifically, but if the paper's account is right the checkpoint is closer to an sft+dpo bundle. NOTE ON EXACT QUOTE: the paper writes \"Direct Parameter Optimization (DPO)\" -- that is the paper's own error for Direct Preference Optimization, quoted as printed. LICENCE MISMATCH WORTH FLAGGING: the checkpoint is released apache-2.0 while its sole training dataset is listed on the same card as cc-by-nc-4.0. DPO hyperparameters from the paper: \"We set beta to 0.1, gradient accumulation steps to 4, and the learning rate to 5e-7.\" ID redirects to IFM/AmberSafe.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "by conducting Direct Parameter Optimization (DPO)",
+     "url": "https://arxiv.org/abs/2312.06550"
+    },
+    {
+     "field": "algorithm",
+     "value": "DPO (eric-mitchell/direct-preference-optimization reference implementation; beta 0.1, lr 5e-7)",
+     "quote": "We followed the instructions in the [dpo repo](https://github.com/eric-mitchell/direct-preference-optimization) to finetune this model.",
+     "url": "https://huggingface.co/LLM360/AmberSafe/raw/main/README.md"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/LLM360/AmberSafe"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "We present AmberSafe, a safety-finetuned instruction model using [LLM360/AmberChat](https://huggingface.co/LLM360/AmberChat) as the base.",
+     "url": "https://huggingface.co/LLM360/AmberSafe/raw/main/README.md"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "This would make sure that for each pair in the preference dataset, the chosen text is safe and the rejected one is unsafe.",
+     "url": "https://huggingface.co/LLM360/AmberSafe/raw/main/README.md"
+    },
+    {
+     "field": "train_tokens",
+     "value": "330k rows before filtering (effective count lower; the card's filter keeps only pairs with differing safety labels and does not state how many survive)",
+     "quote": "| Total | 330k |  |",
+     "url": "https://huggingface.co/LLM360/AmberSafe/raw/main/README.md"
+    },
+    {
+     "field": "datasets",
+     "value": "PKU-Alignment/PKU-SafeRLHF (330k rows, cc-by-nc-4.0)",
+     "quote": "| [PKU-Alignment/PKU-SafeRLHF](https://huggingface.co/datasets/PKU-Alignment/PKU-SafeRLHF)    | 330k        | cc-by-nc-4.0 |",
+     "url": "https://huggingface.co/LLM360/AmberSafe/raw/main/README.md"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "- **License:** Apache 2.0",
+     "url": "https://huggingface.co/LLM360/AmberSafe/raw/main/README.md"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "mistralai/Mistral-7B-v0.1": {
+   "lineage": "mistralai/Mistral-7B-v0.1",
+   "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1",
+   "confidence": "medium",
+   "notes": "Independence is HIGH confidence; everything about the training data is unsourceable. The card is deliberately minimal: it gives architecture hyperparameters and benchmark tables but says nothing about corpus or token budget, and the paper abstract and release blog are equally silent. Overall confidence set to medium because two of the six requested root fields (tokens, corpus) are simply not disclosed by the producer — that is a property of Mistral's release practice, not a gap in this audit. The card does not literally use the phrase 'from scratch'; the from-scratch reading rests on 'pretrained generative text model' plus the total absence of any derivation language in the three primary sources.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "Mistral-7B-v0.1 is a pretrained generative text model with 7 billion parameters.",
+     "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "",
+     "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1"
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "",
+     "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://arxiv.org/abs/2310.06825"
+    },
+    {
+     "field": "datasets",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://arxiv.org/abs/2310.06825"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "We're releasing Mistral 7B under the Apache 2.0 license, it can be used without restrictions.",
+     "url": "https://mistral.ai/news/announcing-mistral-7b/"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "HuggingFaceH4/mistral-7b-sft-beta": {
+   "lineage": "mistralai/Mistral-7B-v0.1",
+   "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta",
+   "confidence": "high",
+   "notes": "Clean, well-documented SFT card. It is the SFT parent of zephyr-7b-beta and identifies itself as such. The card is silent on direction — the de-alignment statement quoted for zephyr appears on the zephyr card, not this one, so I have not carried it across even though this checkpoint shares the filtered UltraChat mixture. Card gives batch size, LR and schedule but no token or example count.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "fine-tuned version of mistralai/Mistral-7B-v0.1 on the HuggingFaceH4/ultrachat_200k dataset",
+     "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta"
+    },
+    {
+     "field": "algorithm",
+     "value": "TRL SFTTrainer",
+     "quote": "🤗 TRL's SFTTrainer",
+     "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "fine-tuned version of mistralai/Mistral-7B-v0.1 on the HuggingFaceH4/ultrachat_200k dataset",
+     "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta"
+    },
+    {
+     "field": "datasets",
+     "value": "HuggingFaceH4/ultrachat_200k",
+     "quote": "filtered and preprocessed of the UltraChat dataset, which contains a diverse range of synthetic dialogues generated by ChatGPT",
+     "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta"
+    },
+    {
+     "field": "direction",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta"
+    },
+    {
+     "field": "license",
+     "value": "mit",
+     "quote": "MIT",
+     "url": "https://huggingface.co/HuggingFaceH4/mistral-7b-sft-beta"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "HuggingFaceH4/zephyr-7b-beta": {
+   "lineage": "mistralai/Mistral-7B-v0.1",
+   "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta",
+   "confidence": "high",
+   "notes": "CONTRADICTION (card-internal, metadata vs prose): the metadata line says \"Finetuned from model: mistralai/Mistral-7B-v0.1\", but the prose describes a two-stage pipeline in which DPO is applied after SFT on UltraChat, and the sibling card HuggingFaceH4/mistral-7b-sft-beta states it is \"the SFT model that was used to train Zephyr-7B-β with Direct Preference Optimization\". The immediate DPO parent is therefore mistral-7b-sft-beta, not the raw Mistral base; the metadata field records the lineage root rather than the direct parent. released_base is 'yes' either way, since both candidates are public. DIRECTION CALL: I scored 'inverted' on the explicit statement that in-built alignment was removed from the training data. This is dataset-level de-alignment for helpfulness/MT-Bench, NOT a toxic-DPO or 'uncensored' mixture of the dolphin kind, and the intent differs — a reader who defines 'inverted' strictly as a de-censoring objective should re-score this to 'standard'. The quote is attached so that re-scoring is possible without refetching. The typo 'trained on on' is reproduced verbatim from the card.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "fine-tuned version of mistralai/Mistral-7B-v0.1 that was trained on on a mix of publicly available, synthetic datasets using Direct Preference Optimization (DPO)",
+     "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta"
+    },
+    {
+     "field": "algorithm",
+     "value": "TRL DPOTrainer",
+     "quote": "further aligned the model with 🤗 TRL's DPOTrainer on the openbmb/UltraFeedback dataset, which contains 64k prompts and model completions",
+     "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "Finetuned from model: mistralai/Mistral-7B-v0.1",
+     "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta"
+    },
+    {
+     "field": "datasets",
+     "value": "UltraChat (SFT stage) + openbmb/UltraFeedback (DPO stage)",
+     "quote": "The model was initially fine-tuned on a filtered and preprocessed of the UltraChat dataset",
+     "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta"
+    },
+    {
+     "field": "train_tokens",
+     "value": "64k prompts and model completions (DPO stage; example count, not tokens)",
+     "quote": "further aligned the model with 🤗 TRL's DPOTrainer on the openbmb/UltraFeedback dataset, which contains 64k prompts and model completions",
+     "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta"
+    },
+    {
+     "field": "direction",
+     "value": "inverted",
+     "quote": "We found that removing the in-built alignment of these datasets boosted performance on MT Bench and made the model more helpful. However, this means that model is likely to generate problematic text when prompted to do so.",
+     "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta"
+    },
+    {
+     "field": "license",
+     "value": "mit",
+     "quote": "License: mit",
+     "url": "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+   "lineage": "mistralai/Mistral-7B-v0.1",
+   "url": "https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+   "confidence": "high",
+   "notes": "The card does state DPO in prose, so this is NOT a name-only inference — it passes the naming-is-not-evidence test. CONTRADICTION (metadata vs prose): metadata says \"Base model: [mistralai/Mistral-7B-v0.1]\" while the prose says \"This model was DPO'd from [Teknium/OpenHermes-2.5-Mistral-7B]\". The prose names the direct parent (which is itself in this roster); the metadata names the lineage root. Square brackets in the quotes are markdown link syntax from the card source, retained rather than silently stripped. The 1,000,000 figure describes the OpenHermes-2.5 SFT corpus inherited from the parent, not the size of the DPO preference set — the DPO pair count is not stated on the card.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "This model was DPO'd from [Teknium/OpenHermes-2.5-Mistral-7B]",
+     "url": "https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "This model was DPO'd from [Teknium/OpenHermes-2.5-Mistral-7B]",
+     "url": "https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO"
+    },
+    {
+     "field": "datasets",
+     "value": "teknium/OpenHermes-2.5",
+     "quote": "from the repository [teknium/OpenHermes-2.5]",
+     "url": "https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO"
+    },
+    {
+     "field": "train_tokens",
+     "value": "1,000,000 instructions/chats (inherited SFT corpus size; DPO pair count not stated)",
+     "quote": "trained on 1,000,000 instructions/chats of GPT-4 quality or better, primarily synthetic data",
+     "url": "https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO"
+    },
+    {
+     "field": "direction",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "License: apache-2.0",
+     "url": "https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+   "lineage": "mistralai/Mistral-7B-v0.1",
+   "url": "https://huggingface.co/cognitivecomputations/dolphin-2.6-mistral-7b-dpo",
+   "confidence": "medium",
+   "notes": "The clearest 'inverted' case in the lineage: de-alignment is the stated design goal, not a side effect. Supporting quotes beyond the one booked: the card calls the model \"highly compliant to any requests, even unethical ones\" and tells deployers to add \"your own alignment layer before exposing the model as a service.\" released_base marked 'unknown' deliberately — the rendered card indicates a Mistral-7b base, but I could not capture an exact verbatim sentence stating it, and the DPO stage most likely sits on the dolphin-2.6 SFT rather than raw Mistral; rather than attach a paraphrase I have left it unsourced. On train_tokens the card gives compute, not data: \"It took 2 days to train 3 epochs on 4x A100s using full weights finetune on Axolotl\" — that is an epoch/hardware statement and does not license a token or example count, so train_tokens stays unknown. Two further datasets appear on the card alongside the DPO set (ise-uiuc/Magicoder-OSS-Instruct-75K and ise-uiuc/Magicoder-Evol-Instruct-110K), which belong to the SFT stage. Confidence medium because the card does not separate its SFT and DPO stages cleanly.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "DPO tuned on argilla/ultrafeedback-binarized-preferences-cleaned",
+     "url": "https://huggingface.co/cognitivecomputations/dolphin-2.6-mistral-7b-dpo"
+    },
+    {
+     "field": "direction",
+     "value": "inverted",
+     "quote": "This model is uncensored. I have filtered the dataset to remove alignment and bias.",
+     "url": "https://huggingface.co/cognitivecomputations/dolphin-2.6-mistral-7b-dpo"
+    },
+    {
+     "field": "datasets",
+     "value": "argilla/ultrafeedback-binarized-preferences-cleaned (DPO); ise-uiuc/Magicoder-OSS-Instruct-75K and ise-uiuc/Magicoder-Evol-Instruct-110K also listed",
+     "quote": "DPO tuned on argilla/ultrafeedback-binarized-preferences-cleaned",
+     "url": "https://huggingface.co/cognitivecomputations/dolphin-2.6-mistral-7b-dpo"
+    },
+    {
+     "field": "released_base",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/cognitivecomputations/dolphin-2.6-mistral-7b-dpo"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/cognitivecomputations/dolphin-2.6-mistral-7b-dpo"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/cognitivecomputations/dolphin-2.6-mistral-7b-dpo"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "Apache 2.0",
+     "url": "https://huggingface.co/cognitivecomputations/dolphin-2.6-mistral-7b-dpo"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "openchat/openchat-3.5-0106": {
+   "lineage": "mistralai/Mistral-7B-v0.1",
+   "url": "https://huggingface.co/openchat/openchat-3.5-0106",
+   "confidence": "low",
+   "notes": "METHOD LEFT UNKNOWN ON PURPOSE. The card carries 'C-RLFT' only as a model TAG and in the linked paper title — I fetched both the rendered card and the raw README and neither yielded a prose sentence stating what operation produced this checkpoint. Under the naming-is-not-evidence rule a tag does not establish a method, so method is 'unknown' rather than a guessed sft/rlhf. The algorithm claim IS booked, but its quote comes from the paper (arXiv:2309.11235), not the card, and carries a caveat: the paper's abstract describes C-RLFT in general and its worked example is \"openchat-13b fine-tuned with C-RLFT\", a LLaMA-based 13B model — NOT this Mistral-based 7B checkpoint. So the algorithm attribution to this specific id is an inference from the shared tag and paper link, not a direct statement about openchat-3.5-0106. If the roster needs method for this row, it should be treated as a documented gap. datasets: not stated in any form I could quote (the paper abstract refers only to \"general SFT training data, consisting of a small amount of expert data mixed with a large proportion of sub-optimal data\", which names no dataset). The card offers a \"Mathematical Reasoning mode\", but that is an inference-time prompt template, not evidence of chain-of-thought training, so reasoning stays unknown. Confidence low per the stub rule: the card is silent on training.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/openchat/openchat-3.5-0106"
+    },
+    {
+     "field": "algorithm",
+     "value": "C-RLFT (Conditioned Reinforcement Learning Fine-Tuning) — sourced from the paper, not the card; see notes",
+     "quote": "We propose the C(onditioned)-RLFT, which regards different data sources as coarse-grained reward labels and learns a class-conditioned policy to leverage complementary data quality information.",
+     "url": "https://arxiv.org/abs/2309.11235"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "mistralai/Mistral-7B-v0.1",
+     "url": "https://huggingface.co/openchat/openchat-3.5-0106"
+    },
+    {
+     "field": "datasets",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/openchat/openchat-3.5-0106"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/openchat/openchat-3.5-0106"
+    },
+    {
+     "field": "direction",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/openchat/openchat-3.5-0106"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/openchat/openchat-3.5-0106"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "Our OpenChat 3.5 code and models are distributed under the Apache License 2.0.",
+     "url": "https://huggingface.co/openchat/openchat-3.5-0106"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "teknium/OpenHermes-2.5-Mistral-7B": {
+   "lineage": "mistralai/Mistral-7B-v0.1",
+   "url": "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B",
+   "confidence": "medium",
+   "notes": "The card says 'Fine-tune' and describes instruction/chat data, which supports sft; it never uses the term 'SFT' or names a preference-optimisation stage, so sft is read from the operation described rather than a literal label. It is a continuation of OpenHermes 2 with added code data, i.e. the parent is arguably OpenHermes 2 rather than raw Mistral, but the card frames it as a Mistral fine-tune and does not document the two as separate released stages. The 1,000,000 figure is an ENTRY count, not tokens — booked as such. This checkpoint is the direct parent of NousResearch/Nous-Hermes-2-Mistral-7B-DPO in this same roster. Card is silent on direction and on chain-of-thought.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "OpenHermes 2.5 Mistral 7B is a state of the art Mistral Fine-tune, a continuation of OpenHermes 2 model, which trained on additional code datasets.",
+     "url": "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "OpenHermes 2.5 Mistral 7B is a state of the art Mistral Fine-tune, a continuation of OpenHermes 2 model, which trained on additional code datasets.",
+     "url": "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B"
+    },
+    {
+     "field": "datasets",
+     "value": "primarily GPT-4 generated data plus open datasets (compiled as teknium/OpenHermes-2.5)",
+     "quote": "OpenHermes was trained on 1,000,000 entries of primarily GPT-4 generated data, as well as other high quality data from open datasets across the AI landscape.",
+     "url": "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B"
+    },
+    {
+     "field": "train_tokens",
+     "value": "1,000,000 entries (example count, not tokens)",
+     "quote": "OpenHermes was trained on 1,000,000 entries of primarily GPT-4 generated data, as well as other high quality data from open datasets across the AI landscape.",
+     "url": "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B"
+    },
+    {
+     "field": "direction",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "Apache 2.0",
+     "url": "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "HuggingFaceTB/SmolLM3-3B-Base": {
+   "lineage": "HuggingFaceTB/SmolLM3-3B-Base",
+   "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base",
+   "confidence": "high",
+   "notes": "ROOT. Pretrained from scratch, not derived: the card's YAML has no base_model field (unlike the other two repos in this lineage, which both declare base_model: HuggingFaceTB/SmolLM3-3B-Base), and the blog describes a complete 0T→11.1T run — \"The model was trained on 384 H100 GPUs for 24 days.\" TOKEN CONTRADICTION, all sources primary: the card summary says \"pretrained on 11.2T tokens\", the SAME card's Training section says \"**Pretraining tokens:** 11T\", the blog headline bullet says \"3B model trained on 11T tokens, SoTA at the 3B scale and competitive with 4B models\" while the blog body says \"we train SmolLM3 on 11.2T tokens\" and its stage table stops at 11.1T. Read 11.2T as the intended figure (11.1T pretraining + long-context extension). CARD DEFECT: the base card's Key features block is copied verbatim from the instruct card and reads \"- Instruct model optimized for **hybrid reasoning**\" on a base checkpoint; I did not score reasoning from it — hence reasoning \"unknown\" rather than \"yes\". Reasoning-flavoured data is present in pretraining (\"web, code, math and reasoning data\"), but explicit chain-of-thought targeting happens in the separate mid-training stage that produces the instruct model, not here. The post-training sentence on this card describes the instruct sibling, not this checkpoint.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "**SmolLM3-3B-Base** is the base model after pretraining, you can find the instruct model at [SmolLM3-3B](https://huggingface.co/HuggingFaceTB/SmolLM3-3B).",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+    },
+    {
+     "field": "train_tokens",
+     "value": "11.2T pretraining tokens (card summary)",
+     "quote": "The model is a decoder-only transformer using GQA and NoPE, it was pretrained on 11.2T tokens with a staged curriculum of web, code, math and reasoning data.",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+    },
+    {
+     "field": "train_tokens",
+     "value": "11T pretraining tokens (card Training section — conflicts with the 11.2T in the same card's summary)",
+     "quote": "- **Pretraining tokens:** 11T",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+    },
+    {
+     "field": "datasets",
+     "value": "Stage 1 (0T→8T): FineWeb-Edu, DCLM, FineWeb2, FineWeb2-HQ; The Stack v2, StarCoder2 pull requests, Jupyter and Kaggle notebooks, GitHub issues, StackExchange; FineMath3+, InfiWebMath3+",
+     "quote": "Stage 1: Stable phase (0T → 8T tokens) This foundation stage establishes strong general capabilities with our core dataset mixture:\nWeb: 85% (12% multilingual) - FineWeb-Edu, DCLM, FineWeb2 and FineWeb2-HQ\nCode: 12% - The Stack v2 (16 programming languages), StarCoder2 pull requests, Jupyter and Kaggle notebooks, GitHub issues, and StackExchange.\nMath: 3% - FineMath3+ and InfiWebMath3+",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "datasets",
+     "value": "Stage 2 (8T→10T) adds Stack-Edu, FineMath4+, InfiWebMath4+, MegaMath",
+     "quote": "Stage 2: Stable phase (8T → 10T tokens) We introduce higher quality math and code datasets while maintaining good web coverage:\nWeb: 75% (12% Multilingual)\nCode: 15% - Adding Stack-Edu\nMath: 10% - Introducing FineMath4+, InfiWebMath4+, and MegaMath (including Qwen Q&A, Pro synthetic rewrites, and text-code interleaved blocks)",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "datasets",
+     "value": "Stage 3 (10T→11.1T) upsamples code and math and introduces instruction/reasoning data such as OpenMathReasoning",
+     "quote": "Stage 3: Decay Phase (10T → 11.1T tokens) The final stage further upsamples math and code data\nWeb: 63% (12% Multilingual)\nCode: 24% - upsampling of high-quality code data\nMath: 13% - upsampling math data and introducing instruction and reasoning datasets such as OpenMathReasoning",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "**SmolLM3-3B-Base** is the base model after pretraining, you can find the instruct model at [SmolLM3-3B](https://huggingface.co/HuggingFaceTB/SmolLM3-3B).",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "**SmolLM3-3B-Base** is the base model after pretraining, you can find the instruct model at [SmolLM3-3B](https://huggingface.co/HuggingFaceTB/SmolLM3-3B).",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "HuggingFaceTB/SmolLM3-3B": {
+   "lineage": "HuggingFaceTB/SmolLM3-3B-Base",
+   "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+   "confidence": "high",
+   "notes": "TWO method claims, deliberately, each with its own quote. The card describes an aligned model whose stages are compressed into one sentence and never separated into released artifacts on this repo — instruct_bundle by rule 5. The blog documents the stages AND names the TERMINAL operation as a merge: immediately after the merge recipe it says \"The resulting model is the checkpoint we are releasing today.\" So the released weights are a merge output, not an APO output; a roster field recording only \"instruct_bundle\" or only \"apo\" loses that. This is a difference of resolution, not a card-vs-blog contradiction: the card's post-training sentence stops at APO and never mentions model merging. The individual stages (mid-training, SFT, APO soup, LC expert) are separately loadable as revisions of SmolLM3-3B-checkpoints, so this lineage CAN be resolved into base/SFT/APO layers if the roster wants them. APO is off-policy (blog section heading: \"Off-policy model alignment with Anchored Preference Optimization (APO)\"). Neither card nor blog describes any safety or refusal training; direction \"standard\" is scored from the chosen/rejected construction, and there is no evidence anywhere of a de-censoring or refusal-removal mixture. The card also embeds an EU AI Act public training-content summary as an iframe (hfmlsoc-smollm3-eu-data-transparency Space), which I did not fetch — it may enumerate the SFT datasets that are missing above.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "instruct_bundle",
+     "quote": "Post-training included midtraining on 140B reasoning tokens followed by supervised fine-tuning and alignment via Anchored Preference Optimization (APO).",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B"
+    },
+    {
+     "field": "method",
+     "value": "merge (the terminal operation producing the released weights: a linear merge of the APO model soup with a mid-training checkpoint)",
+     "quote": "Take each APO checkpoint and create a model “soup”.\nCombine the model soup with a mid-training checkpoint that has strong long-content performance. A linear merge with weights of 0.9 and 0.1 for the APO model soup and mid-training checkpoint, respectively, achieved the best performance.",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "algorithm",
+     "value": "APO (Anchored Preference Optimization), a variant of DPO; merging performed with MergeKit",
+     "quote": "Anchored Preference Optimization (APO) is a variant of Direct Preference Optimization (DPO) that provides a more stable optimization objective.",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "reasoning",
+     "value": "yes",
+     "quote": "- Instruct model optimized for **hybrid reasoning**",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "**SmolLM3-3B-Base** is the base model after pretraining, you can find the instruct model at [SmolLM3-3B](https://huggingface.co/HuggingFaceTB/SmolLM3-3B).",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "We selected generations from Qwen3-32B as “chosen” and responses from Qwen3-0.6B as “rejected” for alignment with Anchored Preference Optimization.",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "train_tokens",
+     "value": "140B reasoning tokens at mid-training",
+     "quote": "Post-training included midtraining on 140B reasoning tokens followed by supervised fine-tuning and alignment via Anchored Preference Optimization (APO).",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B"
+    },
+    {
+     "field": "train_tokens",
+     "value": "mid-training: 35B-token dataset trained for 4 epochs (~140B tokens)",
+     "quote": "Our mid-training dataset contained 35B tokens sourced from Open Thought’s OpenThoughts3-1.2M and a subset from NVIDIA’s Llama-Nemotron-Post-Training-Dataset-v1.1 with reasoning traces from R1. We used the ChatML chat template and wrapped packing to avoid providing too much structure to the model. We trained the model for 4 (~140B tokens) epochs and used the checkpoint for subsequent SFT stages.",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "train_tokens",
+     "value": "SFT: 1.8B-token mixture (1B non-reasoning + 0.8B reasoning), 4 epochs ≈ 8B tokens",
+     "quote": "The resulting SFT dataset contains 1.8B tokens: 1B in non-reasoning mode and 0.8B in reasoning mode, comprising 12 non-reasoning datasets and 10 datasets with reasoning traces. We trained for 4 epochs (~8B tokens) using BFD (best-fit decreasing) packing with the loss masked on user turns and the results from tool calls.",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "datasets",
+     "value": "Mid-training: OpenThoughts3-1.2M (Open Thoughts) and a subset of NVIDIA's Llama-Nemotron-Post-Training-Dataset-v1.1, carrying R1 reasoning traces",
+     "quote": "Our mid-training dataset contained 35B tokens sourced from Open Thought’s OpenThoughts3-1.2M and a subset from NVIDIA’s Llama-Nemotron-Post-Training-Dataset-v1.1 with reasoning traces from R1.",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "datasets",
+     "value": "APO alignment: Tulu3 preference dataset (non-reasoning mode) plus new synthetic preference pairs generated from Qwen3-32B and Qwen3-0.6B (reasoning mode)",
+     "quote": "After the SFT step, we performed a round of model alignment using a combination of the Tulu3 preference dataset for non-reasoning mode and new synthetic preference pairs for reasoning mode, that we generated from Qwen3-32B and Qwen3-0.6B.",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "datasets",
+     "value": "SFT: 22 datasets (12 non-reasoning + 10 with reasoning traces) plus synthetic reasoning traces generated by prompting Qwen3-32B — the individual dataset names are NOT given in either the card or the blog",
+     "quote": "To address this gap, we generated synthetic data by prompting Qwen3-32B in reasoning mode with prompts from existing non-reasoning datasets.",
+     "url": "https://huggingface.co/blog/smollm3"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "HuggingFaceTB/SmolLM3-3B-checkpoints": {
+   "lineage": "HuggingFaceTB/SmolLM3-3B-Base",
+   "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints",
+   "confidence": "medium",
+   "notes": "NOT A SINGLE CHECKPOINT — it is a revision container, and a roster row treating it as one model will mean whatever revision string it happened to load. Verified against the HF refs API (https://huggingface.co/api/models/HuggingFaceTB/SmolLM3-3B-checkpoints/refs): 133 branches, of which 118 are stage1/stage2/stage3-step-* pretraining intermediates, 10 are lc-4k-to-32k-step-* / lc-32k-to-64k-step-* long-context stages, and 4 are the post-training revisions it-mid-training, it-SFT, it-soup-APO, it-LC-expert, plus main. Hence two method claims: `revision=` here selects anything from a 94B-token pretraining intermediate to the APO soup. The card's own stage counts — \"Stage 1: Steps 0 to 3,450,000 (86 checkpoints)\", \"Stage 2: Steps 3,450,000 to 4,200,000 (19 checkpoints)\", \"Stage 3: Steps 4,200,000 to 4,720,000 (13 checkpoints)\" — sum to 118 and match the branch listing exactly. Confidence medium not high because the card itself names no dataset and says nothing about reasoning or alignment direction; the substantive documentation lives in the blog and the huggingface/smollm GitHub repo, which describe the RUN, not this repo's revisions.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain (the bulk of the repo: pretraining intermediates every 40,000 steps across 3 stages, plus 2 long-context extension stages)",
+     "quote": "We release checkpoints every 40,000 steps, which equals 94.4B tokens.",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    },
+    {
+     "field": "method",
+     "value": "also carries post-training revisions: mid-training, sft, apo (soup), and a long-context expert",
+     "quote": "We release checkpoints at every step of our post-training recipe: Mid training, SFT, APO soup, and LC expert.",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    },
+    {
+     "field": "algorithm",
+     "value": "APO (named for the post-training revisions; the card links the post-training code as SFT + APO in TRL/alignment-handbook)",
+     "quote": "- ✓ Post-training code SFT + APO (TRL/alignment-handbook)",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model:\n  - HuggingFaceTB/SmolLM3-3B-Base",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    },
+    {
+     "field": "train_tokens",
+     "value": "94.4B tokens per released pretraining checkpoint interval; global batch size 2,359,296 tokens; stages run to step 4,720,000; long-context checkpoints every 4,000 steps (9.4B tokens)",
+     "quote": "We release checkpoints every 40,000 steps, which equals 94.4B tokens.\nThe GBS (Global Batch Size) in tokens for SmolLM3-3B is 2,359,296. To calculate the number of tokens from a given step:",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    },
+    {
+     "field": "direction",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    },
+    {
+     "field": "datasets",
+     "value": "unknown — this card names no dataset; it only links per-stage nanotron configs in HuggingFaceTB/smollm3-configs",
+     "quote": "",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-checkpoints"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-1025-7B": {
+   "lineage": "allenai/Olmo-3-1025-7B",
+   "url": "https://huggingface.co/allenai/Olmo-3-1025-7B",
+   "confidence": "high",
+   "notes": "ROOT, AND THE INDEPENDENCE CALL IS CLEAN. Card YAML contains license/language/library_name/datasets and NO base_model field; the prose describes a three-stage pretrain on Ai2's own Dolma 3 corpus starting from 'Stage 1: Initial Pretraining'. Nothing on the card mentions pruning, depth-upscaling, distillation, or continued pretraining from another party's checkpoint. Counts as an INDEPENDENT OBSERVATION. Lab attribution is on-card: '- **Developed by:** Allen Institute for AI (Ai2)'. Two further supporting quotes: 'The Base models were trained using a staged training approach.' and 'These models are trained on the Dolma 3 dataset.' Merging explicitly ruled out for this size: '#### Model Merging\\n- 7B Model: No merging' -- so the 7B root is not a merge (the 32B sibling is, but that is out of scope here). released_base is 'na' because this is the lineage root, not 'unknown'. direction is 'na' because the field is undefined for a pretrained base. reasoning is 'unknown' rather than 'no': the card makes no statement about whether the base targets chain-of-thought, and I will not infer one (its Stage 2 mix is described as including '8% thinking', which is a data-mix fact, not a CoT-targeting claim about the checkpoint). train_tokens here is a PRETRAINING count -- the schema field is nominally a post-training count, and the distinction matters for anyone aggregating this column.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "#### Stage 1: Initial Pretraining",
+     "url": "https://huggingface.co/allenai/Olmo-3-1025-7B"
+    },
+    {
+     "field": "train_tokens",
+     "value": "5.93 Trillion (pretraining, not post-training)",
+     "quote": "| [OLMo 3 7B](https://huggingface.co/allenai/Olmo-3-1025-7B) | 5.93 Trillion | 32 | 4096 | 32 | 32 | 65,536 |",
+     "url": "https://huggingface.co/allenai/Olmo-3-1025-7B"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/dolma3_mix-6T-1025 (declared in card YAML)",
+     "quote": "datasets:\n- allenai/dolma3_mix-6T-1025",
+     "url": "https://huggingface.co/allenai/Olmo-3-1025-7B"
+    },
+    {
+     "field": "datasets",
+     "value": "dolma3-dolmino-mix-1025, 100B tokens (Stage 2 midtraining)",
+     "quote": "#### Stage 2: Mid-training\n- Dataset: [dolma3-dolmino-mix-1025](https://huggingface.co/datasets/allenai/dolma3_dolmino_mix-100B-1025)\n- 100B tokens",
+     "url": "https://huggingface.co/allenai/Olmo-3-1025-7B"
+    },
+    {
+     "field": "datasets",
+     "value": "dolma3-longmino-mix-1025, 50B tokens (Stage 3 long context)",
+     "quote": "#### Stage 3: Long Context\n- Dataset: [dolma3-longmino-mix-1025](https://huggingface.co/datasets/allenai/dolma3_longmino_mix-50B-1025)\n- 50B tokens",
+     "url": "https://huggingface.co/allenai/Olmo-3-1025-7B"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "- **License:** The code and model are released under Apache 2.0.",
+     "url": "https://huggingface.co/allenai/Olmo-3-1025-7B"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-7B-Instruct-SFT": {
+   "lineage": "allenai/Olmo-3-1025-7B",
+   "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT",
+   "confidence": "high",
+   "notes": "Method is sourced from the release-table row, NOT from the prose stage block. The prose 'supervised fine-tuning on the Dolci-Think-SFT-7B dataset' appears verbatim on this card AND on the DPO and RLVR cards alike, so it identifies no checkpoint; using it here would have been a misfiling. The table row is checkpoint-specific and puts this id in the SFT stage, and the YAML base_model points at the pretrained root, which is consistent with a first-stage SFT. reasoning = unknown: the card carries the boilerplate line 'Long chain-of-thought thinking improves reasoning tasks like math and coding.' but that sentence is on all six post-trained cards including the non-Think ones, so it does not establish CoT targeting for this checkpoint; unlike the Think cards, this card's chat-format example contains no <think> block, but absence is not a positive source, so I record unknown rather than 'no'. direction = standard rests on the card reporting a Safety benchmark with a high score and on the fact that a grep across all seven cards for 'uncensor', 'refusal', 'abliterat', 'de-censor' and 'toxic' returned zero hits -- this is decent but weaker evidence than the method/base claims, and should be read that way. train_tokens: no post-training token or example count appears anywhere on the card (the only large numbers are max_tokens=32768 generation settings, which are inference config and must not be read as training volume).",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "| **SFT**                  | [Olmo-3-7B-Think-SFT](https://huggingface.co/allenai/Olmo-3-7B-Think-SFT) | [Olmo-3-32B-Think-SFT](https://huggingface.co/allenai/Olmo-3-32B-Think-SFT) | [Olmo-3-7B-Instruct-SFT](https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT) |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model: allenai/Olmo-3-1025-7B",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/Dolci-Instruct-SFT, allenai/Dolci-Instruct-SFT-Tool-Use-SA",
+     "quote": "datasets:\n- allenai/Dolci-Instruct-SFT\n- allenai/Dolci-Instruct-SFT-Tool-Use-SA",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** | Safety | 89.2 | 90.2 | 87.3 | 78.0 | 80.2 | 73.4 | 93.1 | 72.2 | 73.7 |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-7B-Instruct-DPO": {
+   "lineage": "allenai/Olmo-3-1025-7B",
+   "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO",
+   "confidence": "medium",
+   "notes": "CONTRADICTION, and it is why confidence is medium rather than high. This is the INSTRUCT DPO checkpoint, but its YAML declares the THINK branch's DPO dataset: 'datasets:\\n- allenai/Dolci-Think-DPO-7B' -- byte-identical to the declaration on allenai/Olmo-3-7B-Think-DPO. The sibling Instruct-SFT card by contrast correctly declares Instruct-branch data ('- allenai/Dolci-Instruct-SFT'), and the card's own prose stage block elsewhere names a distinct 'Dolci-Instruct-DPO-7B' dataset ('- Datasets: [Dolci-Think-DPO-7B](https://huggingface.co/datasets/allenai/dolci-thinking-dpo), [Dolci-Instruct-DPO-7B](https://huggingface.co/datasets/allenai/dolci-3-instruct-dpo-with-metadata)'). So the card contradicts itself about which DPO mixture trained this checkpoint. I have recorded the YAML value as declared and flagged it; do not treat 'this Instruct model was trained on Think DPO data' as established. The method and lineage claims are unaffected -- both are independently corroborated by the release table and by base_model pointing at Instruct-SFT. No named optimiser distinct from the operation appears anywhere on the card, so no algorithm claim is emitted.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "| **DPO**                  | [Olmo-3-7B-Think-DPO](https://huggingface.co/allenai/Olmo-3-7B-Think-DPO) | [Olmo-3-32B-Think-DPO](https://huggingface.co/allenai/Olmo-3-32B-Think-DPO) | [Olmo-3-7B-Instruct-DPO](https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO) |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model: allenai/Olmo-3-7B-Instruct-SFT",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/Dolci-Think-DPO-7B (as declared, but see notes -- this looks like a copy-paste error)",
+     "quote": "datasets:\n- allenai/Dolci-Think-DPO-7B",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** | Safety | 89.2 | 90.2 | 87.3 | 78.0 | 80.2 | 73.4 | 93.1 | 72.2 | 73.7 |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-7B-Instruct": {
+   "lineage": "allenai/Olmo-3-1025-7B",
+   "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct",
+   "confidence": "medium",
+   "notes": "ALGORITHM IS THE REAL GAP HERE, and it is exactly the Tulu-3 vs Tulu-3.1 distinction the schema warns about. The card names the OPERATION (RLVR) but never names the OPTIMISER: a grep across all seven cards for 'GRPO', 'PPO', 'policy optimization' and 'online DPO' returned zero hits. I also went to the Olmo 3 paper (arXiv:2512.13961, cited on the card) to close this and could not: the abstract does not name it, and the full-text fetch surfaced only a framework name ('OlmoRL') with no verbatim sentence naming the underlying optimiser that I could quote. Rather than guess, algorithm = unknown with an empty quote. A roster that needs PPO-vs-GRPO resolution for this checkpoint will have to read the open-instruct training configs. Confidence medium because the card's prose stage block describes this Instruct model's stages entirely in terms of Think-branch datasets ('supervised fine-tuning on the Dolci-Think-SFT-7B dataset', 'reinforcement learning from verifiable rewards on the Dolci-Think-RL-7B dataset') while the YAML correctly declares Dolci-Instruct-RL-7B -- the same copy-paste defect as on Instruct-DPO. The method and lineage claims are solid; the stage-by-stage dataset narrative on this card is not trustworthy. Card's Paper field is also unresolved: '- **Paper:** [TBD]', though a full arXiv citation appears lower down.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "rlvr",
+     "quote": "| **Final Models (RLVR)**  | [Olmo-3-7B-Think](https://huggingface.co/allenai/Olmo-3-7B-Think) | [Olmo-3-32B-Think](https://huggingface.co/allenai/Olmo-3-32B-Think) | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model: allenai/Olmo-3-7B-Instruct-DPO",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/Dolci-Instruct-RL-7B",
+     "quote": "datasets:\n- allenai/Dolci-Instruct-RL-7B",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** | Safety | 89.2 | 90.2 | 87.3 | 78.0 | 80.2 | 73.4 | 93.1 | 72.2 | 73.7 |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct"
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-7B-Think-SFT": {
+   "lineage": "allenai/Olmo-3-1025-7B",
+   "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-SFT",
+   "confidence": "high",
+   "notes": "reasoning = yes is sourced from the card's documented chat template, which emits an explicit <think>...</think> block -- NOT from the model's name (rule 3). This is the one field where Think and Instruct cards genuinely differ: all three Think cards document a <think> chat format, none of the three Instruct cards contain the string '<think>' at all. That is checkpoint-discriminating evidence rather than shared boilerplate. Branch entry point: base_model is the pretrained root, so the Think branch forks from the base in parallel with the Instruct branch rather than descending from it. Note the Safety eval row on the Think cards has an EMPTY benchmark-name cell ('| **Safety** |  | 65.8 | ...'), unlike the Instruct cards, and Think safety scores are markedly lower (65.8 vs 89.2 for the SFT stage); I have still recorded direction = standard because nothing on the card describes removing refusals or de-censoring, but a roster treating Think and Instruct as interchangeable on safety posture would be wrong.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "| **SFT**                  | [Olmo-3-7B-Think-SFT](https://huggingface.co/allenai/Olmo-3-7B-Think-SFT) | [Olmo-3-32B-Think-SFT](https://huggingface.co/allenai/Olmo-3-32B-Think-SFT) | [Olmo-3-7B-Instruct-SFT](https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT) |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-SFT"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model: allenai/Olmo-3-1025-7B",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-SFT"
+    },
+    {
+     "field": "reasoning",
+     "value": "yes",
+     "quote": "<think>Okay, so the question is who would win in a fight between a dinosaur and a cow named Moo Moo.",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-SFT"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/Dolci-Think-SFT-7B",
+     "quote": "datasets:\n- allenai/Dolci-Think-SFT-7B",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-SFT"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-SFT"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** |  | 65.8 | 67.7 | 70.7 | 31.3 | 72.1 | 54.0 | 68.3 | 82.9 | 30.3 |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-SFT"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-7B-Think-DPO": {
+   "lineage": "allenai/Olmo-3-1025-7B",
+   "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-DPO",
+   "confidence": "high",
+   "notes": "Cleanest card in the branch: YAML base_model, YAML datasets and the release-table row all agree that this is the Think-branch DPO stage trained on Dolci-Think-DPO-7B from Think-SFT. Unlike Instruct-DPO, the declared dataset is branch-consistent here. No named optimiser distinct from the operation, so no algorithm claim. No post-training token or example count on the card.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "| **DPO**                  | [Olmo-3-7B-Think-DPO](https://huggingface.co/allenai/Olmo-3-7B-Think-DPO) | [Olmo-3-32B-Think-DPO](https://huggingface.co/allenai/Olmo-3-32B-Think-DPO) | [Olmo-3-7B-Instruct-DPO](https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO) |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-DPO"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model: allenai/Olmo-3-7B-Think-SFT",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-DPO"
+    },
+    {
+     "field": "reasoning",
+     "value": "yes",
+     "quote": "<think>Okay, so the question is who would win in a fight between a dinosaur and a cow named Moo Moo.",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-DPO"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/Dolci-Think-DPO-7B",
+     "quote": "datasets:\n- allenai/Dolci-Think-DPO-7B",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-DPO"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-DPO"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** |  | 65.8 | 67.7 | 70.7 | 31.3 | 72.1 | 54.0 | 68.3 | 82.9 | 30.3 |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think-DPO"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-7B-Think": {
+   "lineage": "allenai/Olmo-3-1025-7B",
+   "url": "https://huggingface.co/allenai/Olmo-3-7B-Think",
+   "confidence": "high",
+   "notes": "Terminal checkpoint of the Think branch; YAML, release table and dataset declaration are mutually consistent. Same algorithm gap as the Instruct final: the card names the operation ('reinforcement learning from verifiable rewards') but no optimiser, and no card in this lineage mentions GRPO or PPO. The Olmo 3 paper did not close it either at the level of a quotable sentence, so algorithm = unknown rather than a guess. Reasoning is evidenced by the documented <think> chat template, not by the name.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "rlvr",
+     "quote": "| **Final Models (RLVR)**  | [Olmo-3-7B-Think](https://huggingface.co/allenai/Olmo-3-7B-Think) | [Olmo-3-32B-Think](https://huggingface.co/allenai/Olmo-3-32B-Think) | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model: allenai/Olmo-3-7B-Think-DPO",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think"
+    },
+    {
+     "field": "reasoning",
+     "value": "yes",
+     "quote": "<think>Okay, so the question is who would win in a fight between a dinosaur and a cow named Moo Moo.",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/Dolci-Think-RL-7B",
+     "quote": "datasets:\n- allenai/Dolci-Think-RL-7B",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** |  | 65.8 | 67.7 | 70.7 | 31.3 | 72.1 | 54.0 | 68.3 | 82.9 | 30.3 |",
+     "url": "https://huggingface.co/allenai/Olmo-3-7B-Think"
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": ""
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMoE-1B-7B-0125": {
+   "lineage": "allenai/OLMoE-1B-7B-0125",
+   "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125",
+   "confidence": "high",
+   "notes": "THE INDEPENDENCE FINDING. The card calls this model \"an improved version of OLMoE-09-24\" and says main was \"annealed from `step1200000-tokens5033B`\" — but that branch does not exist in THIS repo. Repo-structure evidence (HF refs API): allenai/OLMoE-1B-7B-0125 has 16 branches, ALL of the form stage2-ingredient{1,2,3}-step*-tokens* topping out at 101B tokens; there is no stage-1 branch. allenai/OLMoE-1B-7B-0924 has 246 branches carrying the full stage-1 trajectory including step1200000-tokens5033B, plus only main and fp32 beyond it. Conclusion: 0125 = the 0924 stage-1 pretraining trunk + a NEW ~101B-token stage-2 anneal on dolmino-mix-1124 (three candidate 'ingredients' were released; the 0924 anneal was the same 23,842 steps on a different mix). Both cards carry word-for-word identical branch text, which is why this is easy to miss. released_base is 'yes' not 'na' precisely because the checkpoint it was annealed from IS publicly released — as a branch of the 0924 repo.\n\nUNRESOLVED: the card defers to \"the [paper appendix](https://arxiv.org/abs/2409.02060) for details\", but I could not find any mention of 0125, January 2025, or dolmino in arXiv:2409.02060 (abstract page and v2 PDF both checked; PDF text extraction was partial, so this is a failure to confirm, not a confirmed absence).\n\nCONTRADICTION (card vs its own siblings): this base card's link block describes the adaptation recipe as \"**SFT** ... [Data](https://hf.co/datasets/allenai/tulu-v3.1-mix-preview-4096-OLMoE)\" and \"**DPO/KTO (Direct Preference Optimization/Kahneman-Tversky Optimization)**, [Checkpoints](https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct), [Preference Data](https://hf.co/datasets/allenai/ultrafeedback_binarized_cleaned)\". The four stage cards instead name tulu-3-sft-olmo-2-mixture, olmoe-0125-1b-7b-preference-mix and RLVR-GSM, treat DPO and Instruct as separate checkpoints, and never mention KTO. The base card's block is 0924-era text carried over (it also links the 0924 wandb logs); the stage cards are the better source for the 0125 recipe.\n\nreasoning: no card text addresses chain-of-thought training, so 'unknown' rather than 'no'. direction is 'na': pretraining/annealing stage, no refusal training defined.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "`main`: Checkpoint annealed from `step1200000-tokens5033B` for an additional 100B tokens (23,842 steps).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125"
+    },
+    {
+     "field": "train_tokens",
+     "value": "5033B stage-1 + 100B stage-2 anneal (~5.13T total)",
+     "quote": "`step1200000-tokens5033B`: Pretraining checkpoint used for annealing. There are a few more checkpoints after this one but we did not use them.",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/OLMoE-mix-0924; allenai/dolmino-mix-1124",
+     "quote": "- allenai/OLMoE-mix-0924\n- allenai/dolmino-mix-1124",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "`step1200000-tokens5033B`: Pretraining checkpoint used for annealing. There are a few more checkpoints after this one but we did not use them.",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125"
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "OLMoE-1B-7B is a Mixture-of-Experts LLM with 1B active and 7B total parameters released in January 2025 (0125) that is 100% open-source. It is an improved version of OLMoE-09-24, see the [paper appendix](https://arxiv.org/abs/2409.02060) for details.",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMoE-1B-7B-0125-SFT": {
+   "lineage": "allenai/OLMoE-1B-7B-0125",
+   "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-SFT",
+   "confidence": "high",
+   "notes": "Clean, well-documented card. Two scope caveats on my own claims: (1) train_tokens is the SIZE OF THE DATASET taken from the dataset card's YAML, not a token/example count the model card states for this training run — epochs and packing are undocumented, so do not treat 939,344 as tokens-seen. (2) direction 'standard' rests on the Bias/Risks boilerplate affirming safety training exists (and the card's own Safety (average) row, 94.50, is the highest of the five models tabulated); the card never explicitly discusses refusal-removal, so this is an absence-of-inversion reading, not a positive statement of alignment direction.\n\nreasoning is 'unknown': the card says \"Tülu 3 is designed for state-of-the-art performance on a diversity of tasks in addition to chat, such as MATH, GSM8K, and IFEval\" and tabulates MMLU (CoT) / BigBenchHard (CoT), but those are BENCHMARK NAMES AND EVALUATION SETTINGS, not a claim to train explicit chain-of-thought. Scoring the evidence, not the benchmark names.\n\nMinor inherited-boilerplate contradiction across all three post-training cards: they say \"These models are trained on the Dolma dataset\", carry an OLMo-2 install note, and give the system prompt \"You are OLMo 2, a helpful and harmless AI Assistant built by the Allen Institute for AI.\" The base card names OLMoE-mix-0924 / dolmino-mix-1124, not Dolma. This is OLMo-2 template text pasted into OLMoE cards; it does not change the SFT claims above.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "which has undergone supervised finetuning on an OLMo-specific variant of the [Tülu 3 dataset](allenai/tulu-3-sft-olmo-2-mixture).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-SFT"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "**Finetuned from model:** allenai/OLMoE-1B-7B-0125",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-SFT"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/tulu-3-sft-olmo-2-mixture",
+     "quote": "which has undergone supervised finetuning on an OLMo-specific variant of the [Tülu 3 dataset](allenai/tulu-3-sft-olmo-2-mixture).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-SFT"
+    },
+    {
+     "field": "train_tokens",
+     "value": "939,344 examples in the SFT mixture (dataset-card figure, not a card-stated training count)",
+     "quote": "num_examples: 939344",
+     "url": "https://huggingface.co/datasets/allenai/tulu-3-sft-olmo-2-mixture"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "The OLMo-2 models have limited safety training, but are not deployed automatically with in-the-loop filtering of responses like ChatGPT, so the model can produce problematic outputs (especially when prompted to do so).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-SFT"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "OLMoE is licensed under the Apache 2.0 license.",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-SFT"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-SFT"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMoE-1B-7B-0125-DPO": {
+   "lineage": "allenai/OLMoE-1B-7B-0125",
+   "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-DPO",
+   "confidence": "high",
+   "notes": "CARD-INTERNAL CONTRADICTION on the parent. The prose states \"**Finetuned from model:** allenai/OLMoE-1B-7B-0125-DPO\" — i.e. the DPO card names ITSELF as its own parent. The YAML frontmatter says \"base_model:\\n- allenai/OLMoE-1B-7B-0125-SFT\". I took the YAML as correct: it is consistent with the card's own narrative (SFT \"and further DPO training on\" the preference mix), with the release stage table (Base → SFT → DPO → Final Models (RLVR)), and with the Instruct card, which names the DPO checkpoint as its parent. The prose line is a copy-paste slip. released_base is therefore sourced to the YAML, not the prose.\n\nNo separate optimiser is claimed: the operation IS the optimiser here (DPO), and the card names nothing distinct (no 'length-normalized DPO', no online DPO), so I emit no algorithm claim rather than inferring one from the Tülu 3 recipe.\n\nSame two caveats as the SFT row: train_tokens is a dataset-card size, not a stated training count; direction 'standard' is an absence-of-inversion reading off shared boilerplate (the card's Safety (average) for this checkpoint is 91.40).",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "and further DPO training on [this dataset](https://huggingface.co/datasets/allenai/olmoe-0125-1b-7b-preference-mix).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-DPO"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model:\n- allenai/OLMoE-1B-7B-0125-SFT",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-DPO"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/olmoe-0125-1b-7b-preference-mix (DPO stage); allenai/tulu-3-sft-olmo-2-mixture (upstream SFT stage)",
+     "quote": "and further DPO training on [this dataset](https://huggingface.co/datasets/allenai/olmoe-0125-1b-7b-preference-mix).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-DPO"
+    },
+    {
+     "field": "train_tokens",
+     "value": "378,341 preference pairs in the DPO mixture (dataset-card figure, not a card-stated training count)",
+     "quote": "num_examples: 378341",
+     "url": "https://huggingface.co/datasets/allenai/olmoe-0125-1b-7b-preference-mix"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "The OLMo-2 models have limited safety training, but are not deployed automatically with in-the-loop filtering of responses like ChatGPT, so the model can produce problematic outputs (especially when prompted to do so).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-DPO"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "OLMoE is licensed under the Apache 2.0 license.",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-DPO"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-DPO"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMoE-1B-7B-0125-Instruct": {
+   "lineage": "allenai/OLMoE-1B-7B-0125",
+   "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct",
+   "confidence": "medium",
+   "notes": "READ THE ALGORITHM CLAIM'S SCOPE BEFORE USING IT. The Instruct card names the OPERATION (RLVR) but NEVER names an optimiser. My PPO quote is from the Tülu 3 paper (arXiv:2411.15124, Table 21 caption), which the card explicitly points to (\"Check out the OLMoE paper or Tülu 3 paper for more details!\"), and it does tie PPO specifically to \"optimizing against the verifiable reward function\" — i.e. to RLVR, not merely to preference tuning. But it is a RECIPE-LEVEL statement about Tülu 3, not a checkpoint-level statement about OLMoE-1B-7B-0125-Instruct. Treat as inherited-recipe evidence, downgrade if the roster needs checkpoint-level attestation. This is exactly the Tulu-3-PPO vs Tulu-3.1-GRPO distinction the field exists to capture, which is why I sourced it rather than leaving it unknown — but it is not from the card.\n\nCROSS-CARD CONTRADICTION on the DPO stage. This card says the upstream DPO used \"[this dataset](https://huggingface.co/datasets/allenai/olmo-2-1124-13b-preference-mix)\". The DPO card says \"further DPO training on [this dataset](https://huggingface.co/datasets/allenai/olmoe-0125-1b-7b-preference-mix)\". The DPO card is more credible: its named mix is OLMoE-specific, built from prompt subsets suffixed _olmoe_1b-7b (e.g. \"ai2-adapt-dev/sft_v3.9_used_on_policy_p0_olmoe_1b-7b\"), whereas olmo-2-1124-13b-preference-mix is the OLMo-2-13B artefact — almost certainly pasted from that model's card. Hence confidence 'medium' for this checkpoint: its own RLVR claims are clean, but its account of its own ancestry is demonstrably sloppy.\n\nThe stage table labels this checkpoint \"**Final Models (RLVR)**\", consistent with method=rlvr rather than instruct_bundle: the stages ARE documented separately across four cards, so rule 5 does not apply here.\n\nSame caveats as above on train_tokens (dataset size, and 7,473 prompts under RL is episodes-not-tokens — the Tülu 3 paper's PPO table quotes 'Total Episodes' in the 100,000–300,000 range for its own runs) and on direction.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "rlvr",
+     "quote": "and finally RLVR training using [this data](https://huggingface.co/datasets/allenai/RLVR-GSM).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct"
+    },
+    {
+     "field": "algorithm",
+     "value": "PPO",
+     "quote": "The hyperparameters of PPO used for 1) optimizing against a general RM and 2) optimizing against the verifiable reward function.",
+     "url": "https://arxiv.org/abs/2411.15124"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "**Finetuned from model:** allenai/OLMoE-1B-7B-0125-DPO",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct"
+    },
+    {
+     "field": "datasets",
+     "value": "allenai/RLVR-GSM (RLVR stage); upstream chain per card: allenai/tulu-3-sft-olmo-2-mixture then a preference mix (see notes — the two cards disagree on which)",
+     "quote": "and finally RLVR training using [this data](https://huggingface.co/datasets/allenai/RLVR-GSM).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct"
+    },
+    {
+     "field": "train_tokens",
+     "value": "7,473 RLVR-GSM train examples (dataset-card figure, not a card-stated training count)",
+     "quote": "num_examples: 7473",
+     "url": "https://huggingface.co/datasets/allenai/RLVR-GSM"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "The OLMo-2 models have limited safety training, but are not deployed automatically with in-the-loop filtering of responses like ChatGPT, so the model can produce problematic outputs (especially when prompted to do so).",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "OLMoE is licensed under the Apache 2.0 license.",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct"
+    },
+    {
+     "field": "reasoning",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-1125-32B": {
+   "lineage": "allenai/Olmo-3-1125-32B",
+   "url": "https://huggingface.co/allenai/Olmo-3-1125-32B",
+   "confidence": "high",
+   "notes": "INDEPENDENCE: yes, high confidence. The card carries NO `base_model` field in its YAML frontmatter (frontmatter is: license, language, library_name, datasets: allenai/dolma3_mix-5.5T-1125, model-index), and the body documents a from-scratch staged pretraining run beginning at 'Stage 1: Initial Pretraining' on 5.50T tokens of dolma3_mix-5.5T-1125. Nothing on the card describes pruning, depth-upscaling, distillation, or continued pretraining from another party's checkpoint. It also releases its own pretraining-step checkpoints ('For pretraining, the naming convention is `stage1-stepXXX`'), which only a from-scratch run has. This lineage counts as an INDEPENDENT OBSERVATION.\n\nONE THING THAT COULD BE MISREAD AS DERIVATION, and is not: the card contains a '#### Model Merging' section reading '- 7B Model: No merging' and '- 32B Model: 2 versions on 100B mix, merged before starting long context run.  Final checkpoint is merged 4 final checkpoints.' (double space after 'run.' is in the original). This is a self-merge of Ai2's OWN checkpoints from within this same pretraining run — a soup over mid-training ingredients — not a merge with any external model. It does not make the root derived, but a roster that classifies by keyword would wrongly file this model as method 'merge'. Method is 'pretrain'.\n\nreasoning=no is an INFERENCE, flagged: the card never says the base does not target chain-of-thought. The support is that the release table gives 'Think' as a separate variant column with its own checkpoints, so the Base is not the CoT-targeting model. Treat as medium-confidence for that field alone; everything else on this card is directly quoted.\n\nDate cutoff stated as 'Dec 2024'. Paper link on the card is https://allenai.org/papers/olmo3 and the citation on the sibling cards gives arXiv:2512.13961. The card's citation section reads 'A technical manuscript is forthcoming!' — i.e. the base card predates the arXiv posting that the post-training cards cite.\n\nNot a stub: full card, ~15 KB, with an evaluation table and per-stage data documentation.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "We introduce Olmo 3, a new family of 7B and 32B models. This suite includes Base, Instruct, and Think variants. The Base models were trained using a staged training approach.",
+     "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+    },
+    {
+     "field": "reasoning",
+     "value": "no",
+     "quote": "This suite includes Base, Instruct, and Think variants.",
+     "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+    },
+    {
+     "field": "released_base",
+     "value": "na",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+    },
+    {
+     "field": "train_tokens",
+     "value": "5.50 Trillion pretraining tokens",
+     "quote": "| [OLMo 3 32B](https://huggingface.co/allenai/Olmo-3-1125-32B) | 5.50 Trillion | 64 | 5120 | 40 | 8 | 65,536 |",
+     "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+    },
+    {
+     "field": "datasets",
+     "value": "dolma3_mix-5.5T-1125 (Stage 1, 5.50T tokens); dolma3-dolmino-mix-1125 (Stage 2 mid-training, 2 x 100B); dolma3-longmino-mix-1125 (Stage 3 long context, 100B)",
+     "quote": "#### Stage 1: Initial Pretraining\n- Dataset: [dolma3_mix-5.5T-1125](https://huggingface.co/datasets/allenai/dolma3_mix-5.5T-1125)\n- 5.50T tokens\n- Coverage: 94.83%+ of total pretraining budget\n\n#### Stage 2: Mid-training\n- Ingredient 1\n  - Dataset: [dolma3-dolmino-mix-1125](https://huggingface.co/datasets/allenai/dolma3_dolmino_mix-100B-1125)\n  - 100B tokens\n  - Mix composition: web pages, code, math/QA/thinking/instruction/PDFs\n- Ingredient 2\n  - Dataset: [dolma3-dolmino-mix-1125](https://huggingface.co/datasets/allenai/dolma3_dolmino_mix-100B-1125)\n  - 100B tokens\n  - Mix composition: web pages, code, math/QA/thinking/instruction/PDFs\n\n#### Stage 3: Long Context\n- Dataset: [dolma3-longmino-mix-1125](https://huggingface.co/datasets/allenai/dolma3_longmino_mix-100B-1125)\n- 100B tokens\n- Mix composition: midtraining data and PDFs",
+     "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "- **License:** The code and model are released under Apache 2.0.",
+     "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3.1-32B-Instruct-SFT": {
+   "lineage": "allenai/Olmo-3-1125-32B",
+   "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT",
+   "confidence": "high",
+   "notes": "METHOD EVIDENCE IS THE TABLE ROW, DELIBERATELY. I quote the release-table SFT row because it is the only prose that names THIS id and assigns it a stage. The card's own '#### Stage 1: SFT' section ('- supervised fine-tuning on the Dolci-Think-SFT-7B dataset. This dataset consits of math, code, chat, and general knowledge queries.', typo 'consits' in original) also supports sft — but that identical section, including Stage 2 DPO and Stage 3 RLVR, appears verbatim on the DPO and Instruct cards too, so on its own it cannot distinguish an SFT checkpoint from a DPO one. Combined with YAML base_model = allenai/Olmo-3-1125-32B (the raw base, i.e. this is the first post-training step) the sft classification is solid.\n\nreleased_base: yes. The parent named in the frontmatter, allenai/Olmo-3-1125-32B, is public and is the root of this lineage; the card links it in the Base Model row.\n\ndirection=standard: the card contains no de-censoring or refusal-removal language anywhere. The positive evidence I quote is the Safety benchmark row, where this checkpoint scores 92.1, the highest safety figure in the comparison table (higher than the DPO 88.9 and final Instruct 89.5 columns and every external comparator). A toxic-DPO or 'uncensored' mixture would not be reported this way. Note this is inference from an eval number, not from a training-direction statement.\n\nDATASET CONTRADICTION (see lineage): body says Dolci-Think-SFT-7B, frontmatter says allenai/Dolci-Instruct-SFT. Both quoted. The '-7B' suffix on a 32B card marks the body text as inherited from the 7B Think card. The Dolci-Instruct-SFT reading is the one I would trust.\n\nNo token or example counts appear anywhere on the card. Intermediate post-training checkpoints are released ('For post-training, the naming convention is `step_XXXX`'), example revision 'step_1375'.\n\nNot a stub, but note it is a template instance rather than a bespoke card.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "sft",
+     "quote": "| **SFT**                  | [Olmo-3-7B-Think-SFT](https://huggingface.co/allenai/Olmo-3-7B-Think-SFT) | [Olmo-3-32B-Think-SFT](https://huggingface.co/allenai/Olmo-3-32B-Think-SFT) | [Olmo-3-7B-Instruct-SFT](https://huggingface.co/allenai/Olmo-3-7B-Instruct-SFT) | [Olmo-3.1-32B-Instruct-SFT](https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT) |",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT"
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT"
+    },
+    {
+     "field": "reasoning",
+     "value": "no",
+     "quote": "We introduce Olmo 3, a new family of 7B and 32B models both Instruct and Think variants. Long chain-of-thought thinking improves reasoning tasks like math and coding.",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model:\n- allenai/Olmo-3-1125-32B",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** | 92.1 | 88.9 | 89.5 | 77.1 | 81.6 | 85.8 | 82.2 | 68.8 | 74.4 | 84.2 |",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT"
+    },
+    {
+     "field": "datasets",
+     "value": "Dolci-Instruct-SFT (YAML frontmatter); the templated body additionally names Dolci-Think-SFT-7B",
+     "quote": "- Datasets: [Dolci-Think-SFT-7B](https://huggingface.co/datasets/allenai/dolci-thinking-sft), [Dolci-Instruct-SFT](https://huggingface.co/datasets/allenai/dolci-instruct-sft)",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-SFT"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3.1-32B-Instruct-DPO": {
+   "lineage": "allenai/Olmo-3-1125-32B",
+   "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO",
+   "confidence": "high",
+   "notes": "METHOD: dpo, sourced two independent ways and not from the name. (1) The release table places this exact id in the DPO row (quoted). (2) YAML base_model = allenai/Olmo-3.1-32B-Instruct-SFT, i.e. it starts from the SFT checkpoint, which is the correct position for a DPO stage in this pipeline. The templated body also states '- direct preference optimization on the Dolci-Think-DPO-7B dataset. This dataset consits of math, code, chat, and general knowledge queries.' (typo 'consits', and the header reads '#### Stage 2:DPO' with no space) — but that text also appears on the SFT and Instruct cards, so I treat it as pipeline description, not checkpoint-specific evidence.\n\nALGORITHM: unknown, deliberately. 'DPO' is the operation. The card names no optimiser variant — nothing about length-normalised DPO, online DPO, SimPO, or a beta value. Filing 'DPO' as the algorithm would be restating the method, which the schema explicitly warns against.\n\nreleased_base: yes — allenai/Olmo-3.1-32B-Instruct-SFT is public (audited above in this same lineage).\n\ndirection=standard: no refusal-removal or uncensoring language anywhere on the card; Safety row shows 88.9 for this checkpoint. Same inference basis as the SFT card.\n\nDATASET CONTRADICTION: body names Dolci-Think-DPO-7B, frontmatter names allenai/Dolci-Instruct-DPO, and the body's own link for 'Dolci-Instruct-DPO' points at a third slug, allenai/dolci-3-instruct-dpo-with-metadata. All three strings are in the quote or the frontmatter as given; I have not verified which dataset repos exist.\n\nNo token or example counts on the card. Not a stub, but a template instance identical to the SFT card apart from frontmatter and substituted ids.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "dpo",
+     "quote": "| **DPO**                  | [Olmo-3-7B-Think-DPO](https://huggingface.co/allenai/Olmo-3-7B-Think-DPO) | [Olmo-3-32B-Think-DPO](https://huggingface.co/allenai/Olmo-3-32B-Think-DPO) | [Olmo-3-7B-Instruct-DPO](https://huggingface.co/allenai/Olmo-3-7B-Instruct-DPO) | [Olmo-3.1-32B-Instruct-DPO](https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO) |",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO"
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO"
+    },
+    {
+     "field": "reasoning",
+     "value": "no",
+     "quote": "We introduce Olmo 3, a new family of 7B and 32B models both Instruct and Think variants. Long chain-of-thought thinking improves reasoning tasks like math and coding.",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model:\n- allenai/Olmo-3.1-32B-Instruct-SFT",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** | 92.1 | 88.9 | 89.5 | 77.1 | 81.6 | 85.8 | 82.2 | 68.8 | 74.4 | 84.2 |",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO"
+    },
+    {
+     "field": "datasets",
+     "value": "Dolci-Instruct-DPO (YAML frontmatter); the templated body additionally names Dolci-Think-DPO-7B",
+     "quote": "- Datasets: [Dolci-Think-DPO-7B](https://huggingface.co/datasets/allenai/dolci-thinking-dpo), [Dolci-Instruct-DPO](https://huggingface.co/datasets/allenai/dolci-3-instruct-dpo-with-metadata)",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct-DPO"
+    }
+   ],
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3.1-32B-Instruct": {
+   "lineage": "allenai/Olmo-3-1125-32B",
+   "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct",
+   "confidence": "high",
+   "notes": "METHOD: rlvr, not instruct_bundle. Although the model is named '-Instruct', this card documents its stage: the release table places this exact id in the 'Final Models (RLVR)' row, YAML base_model = allenai/Olmo-3.1-32B-Instruct-DPO (so SFT and DPO are separate released checkpoints, not folded into this one), YAML datasets = allenai/Dolci-Instruct-RL, and the body describes '#### Stage 3: RLVR / - reinforcement learning from verifiable rewards on the Dolci-Think-RL-7B dataset.' A fourth corroboration is this card's unique addition, absent from the SFT and DPO cards: '**NOTE**: For this model, due to a checkpointing issue, we only are releasing the final few checkpoints. See our other RL jobs for more detailed intermediate checkpoint suite.' — that references an RL job for this specific model. instruct_bundle would be wrong here because the stages ARE released and documented separately.\n\nALGORITHM: unknown. This is the field most at risk of being guessed. The card names the operation (reinforcement learning from verifiable rewards) but no optimiser. Fetches of the Olmo 3 paper (arXiv:2512.13961) surfaced the system name 'OlmoRL' and returned no occurrence of GRPO, PPO, or 'policy optimization' in the retrieved text; further, the OlmoRL sentence returned concerns Olmo 3.1 Think 32B, a different branch from this Instruct model. I could not re-verify those strings character-for-character, so I file no algorithm claim and no paper quote. If the roster needs the optimiser, it must come from the paper PDF section 4.4 or the open-instruct training config, neither of which I read.\n\nreasoning=no is an INFERENCE about the Instruct branch, and the card is not clean on it. Support: the release table gives Instruct and Think as separate columns, this id sits in the Instruct column, and the sentence I quote attributes long chain-of-thought to the Think variants. Against: the templated body says training used Dolci-Think-SFT/DPO/RL-7B datasets, which would imply thinking data. I read the '-7B' Think dataset names as copy-paste from the 7B Think card and the frontmatter's Dolci-Instruct-RL as authoritative, but a reader who weighs the body over the frontmatter could reach 'yes'. Treat this one field as medium confidence; the eval table also shows this checkpoint at AIME 2024 67.8 and AIME 2025 57.9, which is high for a non-thinking model and is worth resolving against the paper before the roster relies on reasoning=no.\n\nNo token or example counts on the card. This card carries the arXiv citation @misc{olmo2025olmo3, eprint 2512.13961. Not a stub.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "rlvr",
+     "quote": "| **Final Models (RLVR)**  | [Olmo-3-7B-Think](https://huggingface.co/allenai/Olmo-3-7B-Think) | [Olmo-3-32B-Think](https://huggingface.co/allenai/Olmo-3-32B-Think)<br>[Olmo-3.1-32B-Think](https://huggingface.co/allenai/Olmo-3.1-32B-Think) | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) | [Olmo-3.1-32B-Instruct](https://huggingface.co/allenai/Olmo-3.1-32B-Instruct) |",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct"
+    },
+    {
+     "field": "algorithm",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct"
+    },
+    {
+     "field": "reasoning",
+     "value": "no",
+     "quote": "We introduce Olmo 3, a new family of 7B and 32B models both Instruct and Think variants. Long chain-of-thought thinking improves reasoning tasks like math and coding.",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct"
+    },
+    {
+     "field": "released_base",
+     "value": "yes",
+     "quote": "base_model: allenai/Olmo-3.1-32B-Instruct-DPO",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct"
+    },
+    {
+     "field": "direction",
+     "value": "standard",
+     "quote": "| **Safety** | 92.1 | 88.9 | 89.5 | 77.1 | 81.6 | 85.8 | 82.2 | 68.8 | 74.4 | 84.2 |",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct"
+    },
+    {
+     "field": "train_tokens",
+     "value": "unknown",
+     "quote": "",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct"
+    },
+    {
+     "field": "datasets",
+     "value": "Dolci-Instruct-RL (YAML frontmatter); the templated body additionally names Dolci-Think-RL-7B",
+     "quote": "- Datasets: [Dolci-Think-RL-7B](https://huggingface.co/datasets/allenai/Dolci-Think-RL-7B), [Dolci-Instruct-RL](https://huggingface.co/datasets/allenai/Dolci-Instruct-RL-7B)",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct"
+    },
+    {
+     "field": "license",
+     "value": "Apache 2.0",
+     "quote": "This model is licensed under Apache 2.0. It is intended for research and educational use in accordance with [Ai2's Responsible Use Guidelines](https://allenai.org/responsible-use).",
+     "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Instruct"
+    }
+   ],
+   "run": "wf_f963b738-20a"
   }
  },
  "lineages": {
@@ -7306,6 +9742,194 @@
    },
    "summary": "tiiuae/Falcon-H1-1.5B-Base (root; pretrained from scratch on 3T tokens) -> tiiuae/Falcon-H1-1.5B-Instruct (single released post-trained checkpoint bundling a two-stage SFT -> DPO pipeline; no separate SFT-only or DPO-only checkpoint was released at this size)",
    "run": "wf_3b0cbcb3-eaf"
+  },
+  "EleutherAI/pythia-6.9b": {
+   "root": {
+    "independent": "yes",
+    "quote": "All models were trained on the exact same data, in the exact same order. Each \nmodel saw 299,892,736,000 tokens during training, and 143 checkpoints for each \nmodel are saved every 2,097,152,000 tokens, spaced evenly throughout training, \nfrom `step1000` to `step143000` (which is the same as `main`). In addition, we \nalso provide frequent early checkpoints: `step0` and `step{1,2,4...512}`.",
+    "url": "https://huggingface.co/EleutherAI/pythia-6.9b",
+    "tokens": "299,892,736,000",
+    "data": "The Pile — an 825GiB English general-purpose corpus drawn from 22 sources (academic, internet, prose, dialogue, misc), used non-deduplicated for this model.",
+    "derived_from": ""
+   },
+   "lab": {
+    "org": "EleutherAI",
+    "country": "unknown",
+    "org_type": "nonprofit",
+    "quote": "EleutherAI is a non-profit AI research lab that focuses on interpretability and alignment of large models.",
+    "url": "https://www.eleuther.ai/about"
+   },
+   "summary": "EleutherAI/pythia-6.9b (pretrained from scratch on the Pile) -> lomahony/eleuther-pythia6.9b-hh-sft (SFT on Anthropic/hh-rlhf, 1 epoch) -> lomahony/eleuther-pythia6.9b-hh-dpo (DPO on the same dataset, 1 epoch, initialised from that SFT checkpoint). The root is EleutherAI's; both post-training checkpoints are third-party (HF user `lomahony`), not EleutherAI releases despite the `eleuther-` prefix in their repo names.",
+   "run": "wf_f963b738-20a"
+  },
+  "EleutherAI/pythia-2.8b": {
+   "root": {
+    "independent": "yes",
+    "quote": "All models were trained on the exact same data, in the exact same order. Each model saw 299,892,736,000 tokens during training, and 143 checkpoints for each model are saved every 2,097,152,000 tokens, spaced evenly throughout training, from `step1000` to `step143000` (which is the same as `main`). In addition, we also provide frequent early checkpoints: `step0` and `step{1,2,4...512}`.",
+    "tokens": "299,892,736,000 tokens",
+    "data": "The Pile — an 825GiB English general-purpose corpus of 22 sources (academic, internet, prose, dialogue, misc), used WITHOUT deduplication for this model",
+    "url": "https://huggingface.co/EleutherAI/pythia-2.8b"
+   },
+   "lab": {
+    "org": "EleutherAI",
+    "org_type": "nonprofit",
+    "country": "unknown",
+    "quote": "Founded in July 2020 by Connor Leahy, Sid Black, and Leo Gao, EleutherAI has grown from a Discord server for talking about GPT‑3 to a leading non-profit research institute focused on large-scale artificial intelligence research.",
+    "url": "https://www.eleuther.ai/about"
+   },
+   "summary": "EleutherAI/pythia-2.8b (root, pretrained from scratch on the Pile by EleutherAI) → five ContextualAI \"Archangel\" post-training checkpoints, all built on that same Pythia 2.8B base with the HALOs codebase and the same three human-feedback datasets (SHP, Anthropic HH, OpenAssistant). archangel_sft_pythia2-8b is the SFT stage; the other four cards name compound losses (SFT+DPO, SFT+KTO, SFT+SLIC) or a bare loss (PPO), i.e. they are the SFT checkpoint further aligned with one of four different objectives. This is one pretraining run with five sibling alignment recipes hanging off it — the alignment arms are not independent observations of each other, and none is independent of the Pythia-2.8b root.",
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMo-2-0425-1B": {
+   "root": {
+    "independent": "yes",
+    "quote": "OLMo 2 was pre-trained on [OLMo-mix-1124](https://huggingface.co/datasets/allenai/olmo-mix-1124)",
+    "url": "https://huggingface.co/allenai/OLMo-2-0425-1B",
+    "tokens": "4 trillion tokens (Stage 1 pretraining, 1 epoch), plus 50B tokens Stage 2 mid-training",
+    "data": "OLMo-mix-1124 (3.9T tokens) for Stage 1 pretraining; Dolmino-Mix-1124 for Stage 2 mid-training, described as 50% high-quality web data plus academic/Q&A/instruction/math content",
+    "derived_from": ""
+   },
+   "lab": {
+    "org": "Allen Institute for AI (Ai2)",
+    "country": "United States",
+    "org_type": "nonprofit",
+    "quote": "a Seattle based non-profit AI research institute founded in 2014 by the late Paul Allen.",
+    "url": "https://allenai.org/about"
+   },
+   "summary": "allenai/OLMo-2-0425-1B (pretrained from scratch, 4T tokens Stage 1 + 50B Stage 2 mid-training) -> allenai/OLMo-2-0425-1B-SFT (SFT on tulu-3-sft-olmo-2-mixture-0225) -> allenai/OLMo-2-0425-1B-DPO (DPO on olmo-2-0425-1b-preference-mix) -> allenai/OLMo-2-0425-1B-RLVR1 (RLVR on RLVR-GSM-MATH-IF-Mixed-Constraints; NOT in the roster) -> allenai/OLMo-2-0425-1B-Instruct (further RLVR on RLVR-MATH). Note the roster's four checkpoints are not a contiguous chain: Instruct is one released stage (RLVR1) downstream of DPO, not adjacent to it.",
+   "run": "wf_f963b738-20a"
+  },
+  "Qwen/Qwen2.5-7B": {
+   "root": {
+    "independent": "yes",
+    "derived_from": "",
+    "tokens": "18 trillion tokens",
+    "data": "Curated web-scale pre-training corpus filtered and scored by Qwen2-Instruct models, up-weighted toward knowledge, code and mathematics, with synthetic data from Qwen2-72B-Instruct and Qwen2-Math-72B-Instruct; no named public dataset. Report: \"The pre-training data increased from 7 trillion tokens to 18 trillion tokens, with focus on knowledge, coding, and mathematics.\"",
+    "quote": "In terms of pre-training, we have scaled the high-quality pre-training datasets from the previous 7 trillion tokens to 18 trillion tokens.",
+    "url": "https://arxiv.org/abs/2412.15115"
+   },
+   "lab": {
+    "org": "Qwen Team, Alibaba Cloud",
+    "country": "China",
+    "org_type": "corporate",
+    "quote": "the large language model family built by Alibaba Cloud",
+    "url": "https://huggingface.co/Qwen"
+   },
+   "summary": "Root Qwen/Qwen2.5-7B is an independently pretrained base (18T tokens, Qwen Team / Alibaba Cloud). Qwen/Qwen2.5-7B-Instruct is its post-trained sibling and sits directly on it (frontmatter `base_model: Qwen/Qwen2.5-7B`).\n\nLINEAGE DISCREPANCY — READ BEFORE COUNTING THIS AS A THREE-CHECKPOINT LINEAGE ON Qwen2.5-7B. deepseek-ai/DeepSeek-R1-Distill-Qwen-7B is NOT trained from Qwen/Qwen2.5-7B. Both primary sources say its base is Qwen/Qwen2.5-Math-7B: the model card's own download table pairs \"DeepSeek-R1-Distill-Qwen-7B\" with \"[Qwen2.5-Math-7B](https://huggingface.co/Qwen/Qwen2.5-Math-7B)\", and the R1 paper says \"The base models we use here are Qwen2.5-Math-1.5B, Qwen2.5-Math-7B, Qwen2.5-14B, Qwen2.5-32B, Llama-3.1-8B, and Llama-3.3-70B-Instruct.\" Note that the 14B and 32B distills DO use plain Qwen2.5 bases — only the 1.5B and 7B use the Math variants, so this is a per-size fact, not a blanket one.\n\nCorroborated mechanically from the weights' own configs (not just the cards): DeepSeek-R1-Distill-Qwen-7B/config.json has rope_theta=10000, sliding_window=4096; Qwen2.5-Math-7B has rope_theta=10000, sliding_window=4096, max_position_embeddings=4096; Qwen/Qwen2.5-7B has rope_theta=1000000.0, sliding_window=131072. The distill inherits the Math-7B rope base, not the general-7B one.\n\nQwen2.5-Math-7B is itself declared as derived from Qwen/Qwen2.5-7B (its HF frontmatter reads `base_model: Qwen/Qwen2.5-7B`), so the root of the whole lineage is still Qwen2.5-7B — but transitively, through a math-specialised continued-pretraining intermediate that is NOT in the roster. For an independence count the lineage is intact (one pretraining run underneath all three). For any claim that treats the three checkpoints as base / instruct / reasoning-branch of the SAME checkpoint, it is not: the reasoning branch forks at Qwen2.5-Math-7B, a 4K-context math model, and any base-vs-distill logit comparison run against Qwen/Qwen2.5-7B is comparing across an unmodelled intermediate.\n\nLAB COUNTRY CAVEAT: \"China\" is NOT verbatim-sourced. The HF org card says only that Qwen is \"the large language model family built by Alibaba Cloud\"; the Qwen2.5 report author line is bare \"Qwen Team\" with no affiliation address; alibabagroup.com's about page carries no headquarters sentence I could quote. China rests on Alibaba Cloud being Alibaba Group's cloud division, which I did not source here.",
+   "run": "wf_f963b738-20a"
+  },
+  "LLM360/Amber": {
+   "root": {
+    "independent": "yes",
+    "quote": "we release two 7B parameter LLMs pre-trained from scratch, Amber and CrystalCoder, including their training code, data, intermediate checkpoints, and analyses",
+    "url": "https://arxiv.org/abs/2312.06550",
+    "tokens": "1.26 trillion (paper); model card table totals 1259.13 billion. Paper is internally inconsistent in rounding: 1.25T (intro), 1.26T (data section), 1.3T (contributions section).",
+    "data": "Mixture of RefinedWeb (665.01B), StarCoder (291.92B), C4 (197.67B), Arxiv (30.00B), Book (28.86B), Wikipedia (23.90B), StackExchange (21.75B); prepared following OpenLLaMA, no further cleaning/filtering/sub-sampling.",
+    "derived_from": "na - pretrained from scratch, not derived from any prior checkpoint. Architecture only is copied from LLaMA-7B (\"We used the exact same model architecture as LLaMA 7B\"), which is an architectural, not a weight, dependency."
+   },
+   "lab": {
+    "org": "LLM360 (author affiliations: Petuum and MBZUAI). The Hugging Face org \"LLM360\" now redirects to \"IFM\", fullname \"Institute of Foundation Models\".",
+    "country": "Mixed / not stated on the model card. Author affiliations are Petuum (USA) and MBZUAI (Abu Dhabi, UAE); MBZUAI provided compute per the acknowledgments. No single headquarters is stated in any primary source I could reach.",
+    "org_type": "academic",
+    "quote": "Petuum & MBZUAI",
+    "url": "https://arxiv.org/abs/2312.06550"
+   },
+   "summary": "LLM360/Amber is a from-scratch pretrained 7B LLaMA-architecture base (LLM360 initiative, Petuum + MBZUAI, Dec 2023). AmberChat = instruction SFT on Amber (WizardLM evol-instruct + ShareGPT, 233k rows). AmberSafe = DPO on top of AmberChat (per HF card) using PKU-SafeRLHF preference pairs filtered so chosen=safe, rejected=unsafe. Chain: Amber (pretrain) -> AmberChat (sft) -> AmberSafe (dpo). NOTE ON IDS: all three LLM360/* ids now HTTP-redirect to IFM/* on Hugging Face (org renamed to \"Institute of Foundation Models\"); the roster ids still resolve (200 after redirect), so nothing is withdrawn, but the canonical namespace has moved.",
+   "run": "wf_f963b738-20a"
+  },
+  "mistralai/Mistral-7B-v0.1": {
+   "root": {
+    "independent": "yes",
+    "quote": "Mistral-7B-v0.1 is a pretrained generative text model with 7 billion parameters.",
+    "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1",
+    "derived_from": "none stated — the card, the release blog and the paper abstract all present it as a new pretrained model, and none of the three mentions pruning, distillation, upscaling or continued pretraining from any other checkpoint",
+    "tokens": "unknown — NOT DISCLOSED by any primary source. The model card, the release blog post (mistral.ai/news/announcing-mistral-7b) and the paper abstract (arXiv:2310.06825) each state no training token count.",
+    "data": "unknown — NOT DISCLOSED. No primary Mistral source names the pretraining corpus. Mistral AI has never published the Mistral 7B data mixture."
+   },
+   "lab": {
+    "org": "Mistral AI",
+    "org_type": "corporate",
+    "country": "unknown — Europe, country not sourced. mistral.ai/about calls the company \"a European leader\" but names no city or country; the model card, release blog and paper abstract give no headquarters location. Widely reported as Paris, France, but I found no primary quote and am not booking one.",
+    "quote": "The Mistral AI Team",
+    "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1"
+   },
+   "summary": "mistralai/Mistral-7B-v0.1 — one from-scratch pretrained root with six downstream post-trained checkpoints. Two independent SFT branches (HuggingFaceH4/mistral-7b-sft-beta on UltraChat; teknium/OpenHermes-2.5-Mistral-7B on 1M GPT-4-generated entries), each with a DPO child (zephyr-7b-beta; Nous-Hermes-2-Mistral-7B-DPO). Plus two further direct-from-Mistral branches: openchat-3.5-0106 (C-RLFT) and cognitivecomputations/dolphin-2.6-mistral-7b-dpo. NOTE FOR THE STATISTICS: all seven ids sit on ONE pretraining run, so this is a single independent observation, not seven. Two of the six post-trained checkpoints are de-alignment (\"inverted\") by their own cards — dolphin explicitly, zephyr at the dataset level — which matters if the roster treats direction as a covariate.",
+   "run": "wf_f963b738-20a"
+  },
+  "HuggingFaceTB/SmolLM3-3B-Base": {
+   "root": {
+    "independent": "yes",
+    "derived_from": "none — no parent model; the base card carries no base_model field and describes a full pretraining run",
+    "tokens": "11.2T (model card summary and blog); the card's own Training section states 11T and the blog's stage table ends at 11.1T — see notes on the contradiction",
+    "data": "Staged curriculum of web, code, math and reasoning data: FineWeb-Edu, DCLM, FineWeb2, FineWeb2-HQ (web); The Stack v2, StarCoder2 pull requests, Jupyter/Kaggle notebooks, GitHub issues, StackExchange, Stack-Edu (code); FineMath3+/4+, InfiWebMath3+/4+, MegaMath, OpenMathReasoning (math/reasoning)",
+    "quote": "The model is a decoder-only transformer using GQA and NoPE, it was pretrained on 11.2T tokens with a staged curriculum of web, code, math and reasoning data.",
+    "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base"
+   },
+   "lab": {
+    "org": "Hugging Face, Inc. (models published under the HuggingFaceTB org, \"Hugging Face Smol Models Research\")",
+    "country": "United States",
+    "org_type": "corporate",
+    "quote": "The Company and its servers are located in the United States.",
+    "url": "https://huggingface.co/privacy"
+   },
+   "summary": "HuggingFaceTB/SmolLM3-3B-Base is a from-scratch pretraining run by Hugging Face (11.2T tokens, 3-stage curriculum, 384 H100s for 24 days). From it: SmolLM3-3B-checkpoints is a multi-revision container (133 branches) holding the pretraining intermediates (stage1/2/3 every 40,000 steps), the two long-context extension stages, and the post-training revisions (it-mid-training, it-SFT, it-soup-APO, it-LC-expert); SmolLM3-3B is the single released aligned model, produced by reasoning mid-training (~140B tokens) -> SFT (1.8B-token mixture, 4 epochs) -> APO alignment -> a linear merge of an APO model soup with a mid-training checkpoint. The lineage is an INDEPENDENT OBSERVATION: the root is not pruned, upscaled, distilled from, or continually pretrained on anyone else's checkpoint.",
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-1025-7B": {
+   "root": {
+    "independent": "yes",
+    "quote": "#### Stage 1: Initial Pretraining\n- Dataset: [dolma3_6T-mix-1025](https://huggingface.co/datasets/allenai/dolma3_mix-6T-1025)\n- 5.93T tokens",
+    "tokens": "5.93T",
+    "data": "Ai2's own Dolma 3 mixes across three staged phases: dolma3_6T-mix-1025 (5.93T, initial pretraining), dolma3-dolmino-mix-1025 (100B, midtraining), dolma3-longmino-mix-1025 (50B, long context).",
+    "url": "https://huggingface.co/allenai/Olmo-3-1025-7B"
+   },
+   "lab": {
+    "org": "Allen Institute for AI (Ai2)",
+    "country": "United States",
+    "org_type": "nonprofit",
+    "quote": "We are a Seattle based non-profit AI research institute founded in 2014 by the late Paul Allen.",
+    "url": "https://allenai.org/about"
+   },
+   "summary": "Single-lab, single-root lineage. `allenai/Olmo-3-1025-7B` is a from-scratch pretrain by Ai2 on its own Dolma 3 corpus (5.93T tokens, three staged phases), with NO `base_model` field in its card YAML and no mention anywhere of pruning, upscaling, distillation, or continued pretraining from a third-party checkpoint. From that root the card's release table declares two parallel post-training branches, each base -> SFT -> DPO -> RLVR: the Instruct branch (Instruct-SFT -> Instruct-DPO -> Instruct) and the Think branch (Think-SFT -> Think-DPO -> Think). Every link in both chains is corroborated by the checkpoint's own YAML `base_model` field, so the chain is verifiable checkpoint-by-checkpoint rather than only by the family table. All seven repos are public, ungated, Apache-2.0, and returned HTTP 200. IMPORTANT CAVEAT FOR THE AUDITOR, see per-checkpoint notes: the prose \"Model Details / Stage 1: SFT / Stage 2: DPO / Stage 3: RLVR\" block is IDENTICAL boilerplate on all six post-trained cards (diff-verified) and describes the whole pipeline, not the checkpoint you are reading. It therefore cannot be used as evidence that a given id is the SFT or the DPO stage, and I did not use it that way. The checkpoint-specific evidence I used is the YAML `base_model`/`datasets` fields and the release-table row in which each id appears.",
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/OLMoE-1B-7B-0125": {
+   "root": {
+    "independent": "no",
+    "derived_from": "allenai/OLMoE-1B-7B-0924, branch step1200000-tokens5033B — same lab (Ai2), not a third party. 0125 is a stage-2 anneal (midtraining) on that shared stage-1 checkpoint, not a separate pretraining run.",
+    "tokens": "~5134B total: 5033B stage-1 (inherited, shared with OLMoE-1B-7B-0924) + 100B/101B stage-2 anneal (23,842 steps). Only the ~101B anneal is unique to this checkpoint.",
+    "data": "Stage 1: allenai/OLMoE-mix-0924. Stage 2 anneal: allenai/dolmino-mix-1124. (Both declared in the card's YAML `datasets` field; the 0924 card declares only OLMoE-mix-0924, which is the difference between the two releases.)",
+    "quote": "`main`: Checkpoint annealed from `step1200000-tokens5033B` for an additional 100B tokens (23,842 steps). We use this checkpoint for our adaptation (https://huggingface.co/allenai/OLMoE-1B-7B-0125-SFT & https://huggingface.co/allenai/OLMoE-1B-7B-0125-Instruct).",
+    "url": "https://huggingface.co/allenai/OLMoE-1B-7B-0125"
+   },
+   "lab": {
+    "org": "Allen Institute for AI (Ai2)",
+    "country": "United States (Seattle, WA)",
+    "org_type": "nonprofit",
+    "quote": "We are a Seattle based non-profit AI research institute founded in 2014 by the late Paul Allen.",
+    "url": "https://allenai.org/about"
+   },
+   "summary": "allenai/OLMoE-1B-7B-0125 (base, Mixture-of-Experts, 1B active / 7B total) → -SFT (Tülu 3 OLMo-specific SFT mix) → -DPO (OLMoE-specific preference mix) → -Instruct (RLVR on RLVR-GSM). A four-stage Ai2 release; all four repos are live and Apache-2.0. HEADLINE CAVEAT FOR THE STATISTICS: the root is NOT a from-scratch pretraining run. It is a ~101B-token stage-2 anneal on top of the SAME stage-1 pretraining trunk (step1200000-tokens5033B) that produced allenai/OLMoE-1B-7B-0924. The 0125 repo contains only stage-2 branches; the stage-1 trajectory lives in the 0924 repo. If OLMoE-1B-7B-0924 is also in the roster, 0125 and 0924 are not two independent pretraining observations — they share 5033B of ~5134B tokens (~98%) and differ only in the annealing mix. A fifth sibling, allenai/OLMoE-1B-7B-0125-RM (reward model), is named in the stage table but was outside the audited set.",
+   "run": "wf_f963b738-20a"
+  },
+  "allenai/Olmo-3-1125-32B": {
+   "root": {
+    "independent": "yes",
+    "quote": "We introduce Olmo 3, a new family of 7B and 32B models. This suite includes Base, Instruct, and Think variants. The Base models were trained using a staged training approach.",
+    "url": "https://huggingface.co/allenai/Olmo-3-1125-32B",
+    "tokens": "5.50 Trillion (card table); Stage 1 initial pretraining 5.50T tokens, plus 2x100B mid-training and 100B long-context",
+    "data": "Dolma 3. Stage 1: dolma3_mix-5.5T-1125 (5.50T tokens). Stage 2 mid-training: dolma3-dolmino-mix-1125, two 100B ingredients (web pages, code, math/QA/thinking/instruction/PDFs). Stage 3 long context: dolma3-longmino-mix-1125 (100B, midtraining data and PDFs).",
+    "derived_from": ""
+   },
+   "lab": {
+    "org": "Allen Institute for AI (Ai2)",
+    "country": "United States",
+    "org_type": "nonprofit",
+    "quote": "- **Developed by:** Allen Institute for AI (Ai2)",
+    "url": "https://huggingface.co/allenai/Olmo-3-1125-32B"
+   },
+   "summary": "allenai/Olmo-3-1125-32B (base, pretrained from scratch on Dolma 3) → allenai/Olmo-3.1-32B-Instruct-SFT (SFT) → allenai/Olmo-3.1-32B-Instruct-DPO (DPO) → allenai/Olmo-3.1-32B-Instruct (RLVR, final). The chain is established by the YAML `base_model` field on each card, which links each stage to the previous one, and is corroborated by the release table reproduced identically on all four cards (rows: Base Model / SFT / DPO / Final Models (RLVR); column \"Olmo 3.1 32B Instruct\"). All four repos resolved HTTP 200 on 2026-08-15; none are gated or withdrawn.\n\nCRITICAL CAVEAT ON THE POST-TRAINING CARDS: the three post-training cards (SFT, DPO, Instruct) are ONE TEMPLATE. `diff` on the raw README.md files shows the prose bodies are byte-identical apart from the model id substituted into the title and code snippets, plus one extra NOTE on the Instruct card. In particular the \"## Model Details\" section listing \"#### Stage 1: SFT\", \"#### Stage 2:DPO\", \"#### Stage 3: RLVR\" appears in full on ALL THREE cards. That section therefore describes the PIPELINE, not the checkpoint whose card you are reading — the SFT card's own body claims a DPO and an RLVR stage. Checkpoint-specific evidence comes only from (a) the YAML `base_model` and `datasets` fields, which DO differ per card, and (b) the release table row containing that exact model id. My method claims rest on the table row and the base_model chain; where I quote the templated stage prose I say so.\n\nCONTRADICTION (card-internal, all three post-training cards): the templated stage prose names 7B THINK datasets — \"supervised fine-tuning on the Dolci-Think-SFT-7B dataset\", \"Datasets: Dolci-Think-SFT-7B, Dolci-Instruct-SFT\" — on cards for 32B INSTRUCT models. The YAML frontmatter of each card names only the Instruct-line dataset (Dolci-Instruct-SFT / Dolci-Instruct-DPO / Dolci-Instruct-RL). The \"-7B\" suffix on a 32B card and the \"Think\" name on an Instruct card both indicate copy-paste from the 7B Think card. I report the datasets field with BOTH sets named and flag which source gives which. Typos preserved throughout: the cards read \"consits\" and \"Stage 2:DPO\" (no space).\n\nLAB COUNTRY IS NOT SOURCED. No page I fetched (model cards, https://huggingface.co/allenai, https://allenai.org/) states a city or country. I report country \"United States\" as background knowledge, NOT as a sourced claim — no quote backs it, and it should be treated as unverified in this audit. org_type IS sourced: the HF organisation page carries a literal \"non-profit\" badge (verbatim string \"non-profit\" in the page HTML).\n\nPAPER MATERIAL, REPORTED SECOND-HAND AND NOT FILED AS CLAIMS: fetches of https://arxiv.org/html/2512.13961v1 returned two strings I could not independently re-verify character-for-character, so I have filed no claim on them: \"We first train Olmo 3 Base on Dolma 3 Mix, our 6T token pretraining data mix.\" and \"We introduce Olmo 3.1 Think 32B to illustrate that extended OlmoRL training leads to improved performance.\" Two consequences. (1) The paper's \"6T token pretraining data mix\" describes the MIX SIZE; the card states 5.50 Trillion training tokens for the 32B. These are different quantities (corpus size vs tokens consumed) and not necessarily a contradiction, but a roster recording \"6T\" for this model would be recording the wrong number. (2) The paper names its RL system \"OlmoRL\" but the retrieved text contained no occurrence of \"GRPO\", \"PPO\", or \"policy optimization\"; and the OlmoRL sentence concerns Olmo 3.1 Think 32B, a DIFFERENT model from the Instruct line audited here. I therefore file `algorithm` as unknown on every checkpoint. This is exactly the Tulu-3 vs Tulu-3.1 case the schema warns about: the operation (RLVR) is sourced, the optimiser is not, and a roster that fills in \"GRPO\" here would be guessing.",
+   "run": "wf_f963b738-20a"
   }
  },
  "not_found": {

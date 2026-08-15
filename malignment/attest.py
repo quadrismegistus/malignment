@@ -242,12 +242,97 @@ def report(doc):
     return 0
 
 
+def promote(doc):
+    """PROPOSE edits to models.yaml. Never apply them.
+
+    An attestation is evidence, not a decision. This prints what the cards say
+    that the authored roster does not, each with the quote a reader would need to
+    rule on it -- and stops. The archive is full of derived things stored beside
+    their source and left to drift; the fix is not to automate the promotion, it
+    is to make the promotion cheap to judge and impossible to do by accident.
+    """
+    from . import roster
+    d = roster.load()
+    declared_nodes = set(d.get("nodes") or {})
+    edge_op = {}
+    for p, op, c in (d.get("edges") or []):
+        edge_op[c] = (p, op)
+
+    print("  == PROPOSED NEW EDGES (a root the cards say is derived, parent in roster)")
+    n = 0
+    for lin, rec in sorted(doc["lineages"].items()):
+        r = rec.get("root") or {}
+        if r.get("independent") != "no":
+            continue
+        frm = r.get("derived_from") or ""
+        hit = [m for m in declared_nodes if m and m in frm]
+        if not hit:
+            continue
+        n += 1
+        print("\n  %s" % lin)
+        print("     parent : %s" % max(hit, key=len))
+        print("     quote  : %s" % (r.get("quote") or "")[:170].replace("\n", " "))
+        print("     source : %s" % (r.get("url") or ""))
+    if not n:
+        print("     (none)")
+
+    print("\n  == METHOD DISAGREEMENTS (roster edge op vs the card's own words)")
+    n = 0
+    #: Families of names for the same operation. A disagreement inside a family
+    #: is a vocabulary difference; across families it is a claim about training.
+    SAME = [{"instruct", "instruct_bundle"}, {"rlhf", "ppo", "rlvr", "grpo"},
+            {"pretrain"}, {"distill"}, {"prune"}, {"upscale"}]
+
+    def fam(x):
+        for s in SAME:
+            if x in s:
+                return frozenset(s)
+        return frozenset([x])
+    for mid, c in sorted(doc["checkpoints"].items()):
+        got = next((cl for cl in c["claims"] if cl.get("field") == "method"), None)
+        if not got or mid not in edge_op:
+            continue
+        v = (got.get("value") or "").strip()
+        parent, op = edge_op[mid]
+        #: **A RELATING EDGE MAKES NO CLAIM ABOUT HOW THE CHILD WAS PRODUCED.**
+        #: `scale` says two checkpoints are the same recipe at different sizes;
+        #: `predecessor` says one generation came before another. Comparing
+        #: either against a method turns every scale edge into a false
+        #: disagreement -- Qwen2.5-7B "roster says scale, card says pretrain" is
+        #: two compatible facts, and reporting it would bury the real ones.
+        if op in roster.RELATING:
+            continue
+        if not v or v in DEFAULT_VALUES or fam(v) == fam(op):
+            continue
+        n += 1
+        print("\n  %s" % mid)
+        print("     roster says : %s  (from %s)" % (op, parent))
+        print("     card says   : %s" % v)
+        print("     quote       : %s" % (got.get("quote") or "")[:150].replace("\n", " "))
+    if not n:
+        print("     (none)")
+
+    print("\n  == NOT INDEPENDENT, BUT PARENT NOT IN THIS ROSTER (annotate, do not delete)")
+    for lin, rec in sorted(doc["lineages"].items()):
+        r = rec.get("root") or {}
+        if r.get("independent") != "no":
+            continue
+        if any(m and m in (r.get("derived_from") or "") for m in declared_nodes):
+            continue
+        print("  - %-42s <- %s" % (lin[:42], (r.get("derived_from") or "")[:70]))
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ingest", nargs="*", default=None,
                     help="workflow journal.jsonl paths (globs ok)")
     ap.add_argument("--report", action="store_true")
+    ap.add_argument("--promote", action="store_true",
+                    help="print proposed models.yaml edits; applies nothing")
     a = ap.parse_args()
+    if a.promote:
+        return promote(load())
     if a.ingest is not None:
         paths = []
         for p in a.ingest:
