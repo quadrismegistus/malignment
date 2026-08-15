@@ -243,8 +243,20 @@ def main():
             res = d.get("residual") or {}
             cons = d.get("conservation")
             #: THE PAYLOAD'S OWN ARITHMETIC IS THE GATE. Refused, not dropped.
-            if cons is None or abs(cons - 1.0) > TOL:
+            #: **NaN DEFEATS A COMPARISON GATE AND MUST BE TESTED FOR.**
+            #: `abs(NaN - 1.0) > TOL` is False, so a NaN conservation value
+            #: PASSES the check written to reject non-conserving cells. Two
+            #: cells got in that way (Qwen3-8B-Base and Qwen3-8B on the
+            #: `<<<LOGICAL:BOS>>>` prompt, NaN residual and NaN word probs) and
+            #: killed the movement producer with `NoneType - float` -- Float32
+            #: NaN serialises to JSON null, so it arrives as None downstream.
+            #: A gate built from inequalities is silent on the one value that
+            #: satisfies no inequality.
+            if cons is None or cons != cons or abs(cons - 1.0) > TOL:
                 rej["conservation"] += 1
+                continue
+            if any((w.get("p") is None or w["p"] != w["p"]) for w in rows):
+                rej["nan_probability"] += 1
                 continue
             m, pr = k
             #: SUM THE PARTITION HERE, ONCE. Folding in SQL later would put the
