@@ -55,4 +55,24 @@
 
 ## Amendments
 
-*(none)*
+### A1 — 2026-08-16. The stopping rule's premise was false, and the condition is vacuous.
+
+The rule read *"One run, after the measurement queue drains."* Its premise — that the pending measurements could change this experiment's population — **was assumed and never checked. It is false.**
+
+A qualifying chain is `base -sft-> S -pref-> P`. The three pending checkpoints arrive by a different op:
+
+    gl198976/mpt-7b-instruct     incoming op = sft     not in PREF
+    Alchan/mpt-7b-chat           incoming op = sft     not in PREF
+    allenai/Olmo-3-7B-Think      incoming op = rlvr    not in PREF
+
+So none forms a chain, and none is an arm of an existing one. All **18 declared chains already have every arm measured; 0 are waiting.** The condition is therefore satisfied vacuously rather than by waiting, and the run marked `--pilot` used exactly the population the registered run uses.
+
+**This amendment does not change any hypothesis, threshold, direction or mapping.** It records that a stopping rule was written on an unchecked assumption. The numbers are unchanged by it — they are the same numbers, relabelled — and that is the point of writing it down rather than quietly re-running.
+
+What WOULD have changed the population, and did not: a new lineage with a released preference stage. MPT has none — MosaicML shipped `instruct` and `chat` off the base with no preference checkpoint between — which is itself the selection effect the README names.
+
+### A2 — 2026-08-16. Clustering, declared before it is computed.
+
+18 chains sit on **16 distinct bases**: `allenai/Olmo-3-1025-7B` contributes two (Instruct and Think) and one other base contributes two. H3's sign test treats chains as independent and they are not quite.
+
+**Declared now, before looking:** the H3 result is reported with a cluster check collapsing each base to its mean difference (n = 16). **If the direction survives at base level, the claim stands as registered; if it does not, H3 is reported as NOT SUPPORTED**, not as supported-with-caveat. Writing this after seeing p = 0.0309 at chain level is why it is stated as a rule with a stated failure condition rather than as an observation.
