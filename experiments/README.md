@@ -48,7 +48,14 @@ invites `01a`/`01b` the first time a variant appears. Directories are named for
 their question because the question is the stable thing. A citable handle, if the
 paper needs one, is an `id:` field in the README — so renaming costs nothing.
 
-**THE README IS THE FINDING. There is no `findings/`.** v1 kept 46 findings in a
+**THE FINDING LIVES IN THE QUESTION'S README, AND NOWHERE ELSE.** A subject
+README indexes its questions with a status and a navigational gist; it must not
+restate their numbers. A number in two files is a number that will disagree with
+itself — the failure `movement` had when it stored `relation` beside the
+measurement, and the failure four archive artifacts had when they each defined
+"the population".
+
+**THERE IS NO `findings/`.** v1 kept 46 findings in a
 separate directory and **42 were cited by nothing**: a claim living apart from
 its producer has nothing keeping it true. Put the claim beside the code and a
 stale claim sits next to the code that contradicts it.

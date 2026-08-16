@@ -17,9 +17,15 @@ relationship to the first is knowable only by asking whoever ran it.
 
 ## Questions
 
-| question | status | claim |
+**THE FINDING LIVES IN THE QUESTION'S README, AND NOWHERE ELSE.** This table
+carries status and a navigational gist — never numbers. A restated result is a
+second copy that drifts the moment its question is re-run, and then a reader has
+two answers and no way to tell which is current. Same reason `movement` stopped
+storing `relation`.
+
+| question | status | gist — see its README for the claim |
 |---|---|---|
-| [`sft_share/`](sft_share/) | RUN 2026-08-16 | SFT holds median **0.819** of the displacement. H2 split by branch (Instruct 0.773, Think 0.950). **H3 NOT supported** at the registered base-level test (p = 0.077). |
+| [`sft_share/`](sft_share/) | RUN 2026-08-16 | SFT carries most of the displacement; the split by branch is large; content-dependence not supported |
 
 ## Open, arising from `sft_share`
 
