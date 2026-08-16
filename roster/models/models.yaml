@@ -1346,7 +1346,15 @@ edges:
 #
 # An undeclared family is an ordinary recipe. Absence means ordinary, not unknown.
 families:
-  archangel-dpo: {kind: method_variant, experiment: archangel-halos, method: dpo}
+  # THE GROUP'S REPRESENTATIVE. Excluding all four method_variants removed
+  # pythia-2.8b from the population ENTIRELY -- a whole base lost to a rule meant
+  # to stop double-counting. RH: "in the case of a branch at the endpoint
+  # (archangel) we pick one". `dpo` is the pick because it is the preference op
+  # the rest of the corpus uses (19 edges), so it is the arm comparable to
+  # everything else; numerically the choice is near-free, the four spanning
+  # JS 0.0071-0.0081.
+  archangel-dpo: {kind: method_variant, experiment: archangel-halos, method: dpo,
+                  representative: true}
   archangel-kto: {kind: method_variant, experiment: archangel-halos, method: kto}
   archangel-ppo: {kind: method_variant, experiment: archangel-halos, method: ppo}
   archangel-slic: {kind: method_variant, experiment: archangel-halos, method: slic}
