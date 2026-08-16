@@ -724,6 +724,15 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+  mistralai/Mistral-7B-Instruct-v0.1:
+    nickname: mistral-instruct
+    country: FR
+    family:
+    - mistral
+    open_data: false
+    open_weight: true
+    org_type: corporate
+    scale: 7B
   mistralai/Mistral-7B-v0.1:
     revision_ladder: 2
     nickname: mistral
@@ -1223,6 +1232,25 @@ edges:
 - - microsoft/phi-4-reasoning
   - rlvr
   - microsoft/Phi-4-reasoning-plus
+# ADDED 2026-08-16, RH's instruction. Mistral's OWN instruct, and the only
+# endpoint of this base published by the base's publisher. `base_model:
+# mistralai/Mistral-7B-v0.1` is declared on its card, so the lineage is exact --
+# v0.2 declares no base and v0.3 derives from Mistral-7B-v0.3, a different
+# pretraining checkpoint.
+#
+# IT IS NOT SAFETY-ALIGNED, AND THAT IS WHY IT IS WORTH HAVING. Card: "It does
+# not have any moderation mechanisms. We're looking forward to engaging with the
+# community on ways to make the model finely respect guardrails" -- and it calls
+# itself "a quick demonstration that the base model can be easily fine-tuned".
+# EVERY endpoint of this base is inverted or unmoderated: zephyr and dolphin are
+# attested `direction: inverted`, openchat's method is unknown, Nous-Hermes-2's
+# direction is unknown. So Mistral-7B-v0.1 has no safety-aligned endpoint in
+# existence, which makes this lineage a CONTROL rather than a gap: an effect
+# present in safety-tuned lineages and absent here is evidence the effect is
+# safety-driven and not a generic artefact of instruction tuning.
+- - mistralai/Mistral-7B-v0.1
+  - instruct
+  - mistralai/Mistral-7B-Instruct-v0.1
 - - mistralai/Mistral-7B-v0.1
   - sft
   - HuggingFaceH4/mistral-7b-sft-beta
@@ -1419,6 +1447,42 @@ families:
   # the rest of the corpus uses (19 edges), so it is the arm comparable to
   # everything else; numerically the choice is near-free, the four spanning
   # JS 0.0071-0.0081.
+  # RH's ruling, 2026-08-16. `Olmo-3-1025-7B` heads TWO recipes and both are
+  # allenai's, so the same-publisher rule cannot decide it. `Olmo-3-7B-Instruct`
+  # is the commodity form -- the general chat model an ordinary user receives --
+  # and Think is a specialised reasoning branch.
+  #
+  # THINK STAYS IN THE ROSTER AND THIS DOES NOT REMOVE IT. sft_share's H2
+  # depends on having both: Instruct 0.773 against Think 0.950 is what
+  # established that the recorded "~90% SFT share" is BRANCH-SPECIFIC. This says
+  # only which branch speaks for the lineage in a one-endpoint-per-lineage
+  # statistic -- and because the two sit 0.18 apart, the choice moves OLMo's
+  # contribution materially, which is why it is declared before the numbers
+  # exist rather than after.
+  olmo:
+    kind: recipe
+    representative: true
+  olmo-think:
+    kind: recipe
+  # RH's ruling, 2026-08-16. MPT's base carries two recipes and neither child is
+  # from the original publisher (mosaicml withdrew the repo; these are mirrors),
+  # so the same-publisher rule cannot decide it. `mpt-7b-instruct` is the direct
+  # instruct and is the representative.
+  mpt:
+    kind: recipe
+    representative: true
+  mpt-chat:
+    kind: recipe
+  # RH's ruling, 2026-08-16. Mistral-7B-v0.1 carries five recipes and EVERY other
+  # one is attested `direction: inverted` (zephyr, dolphin) or has an unknown
+  # method (openchat, Nous-Hermes-2). `mistral` is Mistral's own instruct and the
+  # only endpoint published by the base's publisher. It is NOT safety-aligned --
+  # its card says "It does not have any moderation mechanisms" -- and that is
+  # recorded rather than hidden: this lineage is a CONTROL for whether the
+  # effects are safety-driven or generic to instruction tuning.
+  mistral:
+    kind: recipe
+    representative: true
   archangel-dpo: {kind: method_variant, experiment: archangel-halos, method: dpo,
                   representative: true}
   archangel-kto: {kind: method_variant, experiment: archangel-halos, method: kto}
@@ -1470,11 +1534,13 @@ unavailable:
       contact@opengpt-x.de"; unauthenticated API returns 401 where all three roster
       ids return 200. Not withdrawn -- gated.'
   mosaicml/mpt-7b:
-    note: 'RECOVERED 2026-08-16 from mirrors -- see node gl198976/mpt-7b. The
-      ORIGINAL repo is still dead; the weights are not.'
     kind: repo_dead
     permanent: true
-    note: 404 at the HF API, not a permissions error. The repo is gone.
+    note: '404 at the HF API, not a permissions error. The repo is gone. RECOVERED
+      2026-08-16 from mirrors -- see node gl198976/mpt-7b: the ORIGINAL repo is
+      still dead, the weights are not. (These were TWO `note:` keys until
+      2026-08-16; yaml.safe_load keeps the last, so the recovery sentence was
+      silently invisible to every program that read this file.)'
   mosaicml/mpt-7b-instruct:
     kind: repo_dead
     permanent: true

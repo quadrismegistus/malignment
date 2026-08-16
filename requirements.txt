@@ -10,6 +10,14 @@
 
 # --- always needed (roster, prompts, store) --------------------------------
 pyyaml                 # roster.py, prompts.py, observe.py -- the authored files
+ruamel.yaml            # roster.check_authored -- a STRICTER parse of models.yaml.
+                       # yaml.safe_load resolves a duplicate key by keeping the
+                       # last one and says nothing; that was hiding the fact that
+                       # mosaicml/mpt-7b's weights had been recovered from
+                       # mirrors. It also round-trips the file's 235 comments and
+                       # 24 per-edge evidence quotes, so a program can WRITE the
+                       # roster without the safe_dump that destroyed 114 comment
+                       # lines once.
 pandas                 # ch.py query results, models.py
 hashstash              # checkpoint.py -- the twp jsonl engine (RH's own library)
 

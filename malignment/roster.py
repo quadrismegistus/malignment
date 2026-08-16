@@ -530,3 +530,125 @@ def chains():
             continue
         out.append({"base": base, "sft": p, "pref": child, "pref_op": op})
     return out
+
+
+def endpoints(measured=None, attestations=None):
+    """{base: endpoint} — one commodity-form endpoint per pretrained base.
+
+    **THE ROSTER DELIBERATELY DOES NOT CHOOSE** (see the `alignment_edges` view:
+    "the Llama root carries Meta's instruct AND five Tulu sft arms, and those are
+    different comparisons"). This function is an EXPERIMENT'S rule, named and
+    shared rather than retyped -- on 2026-08-16 it was written inline in four
+    separate shell heredocs with slightly different filters each time, one of
+    which matched `"lmo" in base` and so found 4 of 6 OLMo lineages because
+    `OLMo-2` and `OLMoE` are capitalised differently.
+
+    The filter chain, in order, each step justified by a case that forced it:
+
+    1. TERMINAL under DERIVING edges, reached only by ALIGNING ops. Excludes
+       `distill` (DeepSeek-R1-Distill-Llama), `continual`, `upscale`, `prune` --
+       different operations, not alignment.
+    2. NOT a declared `kind: ablation`. Four Tulu SFT arms are terminal only
+       because nothing was built on them; counting them would weight one
+       lineage's SFT five times, and one of them is deliberately safety-ablated.
+    3. NOT attested `direction: inverted`. Four exist and each is quoted:
+       dolphin x2 ("I have filtered the dataset to remove alignment and bias"),
+       zephyr ("removing the in-built alignment of these datasets"), Hermes-3.
+       A de-aligning finetune in an "alignment does X" average drags it toward
+       zero, and its edge op is `sft` like any other.
+    4. If several survive: the one whose family is declared `representative`.
+    5. Else the one published by the BASE'S OWN publisher -- the commodity form,
+       the version end users receive.
+    6. Else return the candidates and let the caller refuse. **An undecided
+       lineage is returned, never silently picked**: `unresolved` is the second
+       element and a caller that ignores it is choosing by accident.
+
+    `measured` optionally restricts to pairs that exist in the corpus.
+    """
+    d = load()
+    nodes, edges = d.get("nodes") or {}, d.get("edges") or []
+    fams = d.get("families") or {}
+    par = {c: (p, op) for p, op, c in edges if op in DERIVING}
+    kids = {}
+    for c, (p, _op) in par.items():
+        kids.setdefault(p, []).append(c)
+
+    inverted = set()
+    for mid, rec in ((attestations or {}).get("checkpoints") or {}).items():
+        for cl in (rec.get("claims") or []):
+            if cl.get("field") == "direction" and cl.get("value") == "inverted":
+                inverted.add(mid)
+
+    def kinds(m):
+        return {fams.get(f, {}).get("kind")
+                for f in (nodes.get(m, {}).get("family") or [])}
+
+    def is_rep(m):
+        return any(fams.get(f, {}).get("representative")
+                   for f in (nodes.get(m, {}).get("family") or []))
+
+    out, unresolved = {}, {}
+    for base, v in nodes.items():
+        if base in par or v.get("pretrained") is False:
+            continue                                   # not a pretrained root
+        cands, stack = [], [(base, [])]
+        while stack:
+            n, ops = stack.pop()
+            ch_ = kids.get(n, [])
+            if not ch_ and n != base:
+                cands.append((n, ops))
+            for c in ch_:
+                stack.append((c, ops + [par[c][1]]))
+        keep = [e for e, ops in cands
+                if set(ops) <= set(ALIGNING)
+                and "ablation" not in kinds(e)
+                and e not in inverted
+                and (measured is None or (base, e) in measured)]
+        if not keep:
+            continue
+        if len(keep) == 1:
+            out[base] = keep[0]
+            continue
+        rep = [e for e in keep if is_rep(e)]
+        if len(rep) == 1:
+            out[base] = rep[0]
+            continue
+        same = [e for e in keep if e.split("/")[0] == base.split("/")[0]]
+        if len(same) == 1:
+            out[base] = same[0]
+            continue
+        unresolved[base] = sorted(keep)
+    return out, unresolved
+
+
+def check_authored(path=None):
+    """Strict re-parse of models.yaml. Returns a list of problems, empty if clean.
+
+    **`yaml.safe_load` SILENTLY KEEPS THE LAST OF A DUPLICATE KEY**, and on
+    2026-08-16 that was hiding a real fact: `unavailable['mosaicml/mpt-7b']` had
+    TWO `note:` entries, and the one recording that the weights had been
+    RECOVERED FROM MIRRORS was the one being dropped. Every program reading the
+    roster saw only "The repo is gone." A human reading the file saw both.
+
+    Nothing reported it, because a silently-resolved duplicate is not an error
+    to the parser that resolves it -- the file loads, the schema is satisfied,
+    and the count of keys is right. It needs a stricter reader to see, which is
+    why `ruamel.yaml` is a dependency for a file we otherwise only read.
+
+    Not called from `load()`: that runs on nearly every code path and this is a
+    whole-file re-parse. Call it from a test, the CLI, or before writing.
+    """
+    from ruamel.yaml import YAML
+    from ruamel.yaml.constructor import DuplicateKeyError
+    y = YAML()
+    y.allow_duplicate_keys = False
+    problems = []
+    try:
+        with open(path or AUTHORED, encoding="utf-8") as fh:
+            y.load(fh)
+    except DuplicateKeyError as e:
+        problems.append("DUPLICATE KEY (safe_load would keep the last, silently): %s"
+                        % str(e).replace("\n", " ")[:400])
+    except Exception as e:                                    # noqa: BLE001
+        problems.append("%s: %s" % (type(e).__name__, str(e)[:300]))
+    return problems
