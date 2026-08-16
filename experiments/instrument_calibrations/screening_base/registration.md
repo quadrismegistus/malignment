@@ -101,6 +101,29 @@ Rank percentile is used rather than raw value so the three are commensurable. **
 
 `population.json` — the explicit model ids, the panel prompt count, the lexicon sha, the date.
 
-## STOPPING RULE
+## THIS IS ONE OPERATIONALISATION OF MEDIAN-NESS, AND OTHERS EXIST HERE ALREADY
 
-This is run **once**. If the declared screener later proves unfit in use, that is a new question with its own registration, not a re-run of this one with a different statistic.
+RH, 2026-08-16: *"the method you used is one method but there are other measurements of median-ness in this corpus/project, right?"* Yes, and naming them is part of the declaration — a registration that does not say what it chose *among* reads as the only available measure.
+
+| measure | what it uses | population | language |
+|---|---|---|---|
+| **THIS ONE** | labelled mass, `wf_sexviolence` | 2,189-prompt panel, 156 models | **English only** |
+| argmax agreement centrality | `{db}.panel_pairs`, 78,106 pairs | balanced 473 prompts, 399 models | agnostic |
+| JS to a corpus centroid | `similarity.js`, full distributions | as above, expensive confirm | agnostic |
+| alignment-edge magnitude | `movement_cells.js_total` | the model's own edge | agnostic |
+
+**Two of those are language-agnostic and this one is not**, which is a real disadvantage of the measure chosen and not a footnote: a model whose transgressive mass sits in Chinese vocabulary is invisible to the lexicon and would read as quiet. On the 2,189-prompt panel that risk is near zero — 1 prompt contains CJK and CJK mass is 0.018–0.029% per candidate — but that is a property of *this panel*, not of the measure.
+
+**Why this one anyway:** screening asks whether a frame carrying *transgressive* vocabulary can move, so an instrument that measures transgressive mass directly is closer to the quantity than a general distributional distance. Argmax agreement would name the model most typical in aggregate, which is a different notion of typical and might be typical in ways irrelevant to the poles.
+
+**That is a judgement, not a derivation.** A screener chosen by argmax-agreement centrality would be a legitimate answer to the same question by a different instrument, and if the two disagree that disagreement is a finding rather than an error.
+
+## STOPPING RULE — BINDS THIS MEASUREMENT, NOT THE QUESTION
+
+RH, 2026-08-16: *"i dont think we should treat instrument registrations as binding for all time, just binding for their measurements."* Adopted, and the first draft of this section overreached in exactly that way.
+
+What is frozen: **this specification.** The population, the three statistics, the combining rule, the refusals. Those may not be changed after seeing this producer's output, and this producer is run once — because re-running *this* rule with a different statistic after seeing the answer is the specification search the registration exists to prevent.
+
+What is **not** frozen: the question. Another operationalisation of median-ness — any row in the table above — is a legitimate new question with its own registration, and it does not need this one to have failed first. **This registration claims no priority over them.** If two measures name different screeners, that is information about how "representative" behaves under different instruments, and the right response is to report both rather than to rank the registrations by date.
+
+The practical difference: a later seat may measure this again by another route without arguing that this one is void, and this one may not quietly become the other after the fact.
