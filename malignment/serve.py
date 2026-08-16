@@ -532,8 +532,77 @@ def _slot(prompt, model_ids, k):
 # transport
 # ---------------------------------------------------------------------------
 
+#: Separate from `_SLOT_LOCK`, which exists for `twp._BATCH`. This one guards
+#: the SentenceTransformer, whose thread-safety is not guaranteed and whose lazy
+#: init is a module-level list. Two locks because they protect two things: an
+#: axis build must not queue behind an 8-second model load it does not need, and
+#: a twp expansion must not queue behind a bge encode.
+_AXIS_LOCK = threading.Lock()
+
+
+def _slot_axis(prompt, naughty, nice, words, probs=None):
+    """The author's poles as an axis, and every candidate's position on it.
+
+    **THIS ROUTE COMPUTES NO MOVEMENT AND CANNOT.** It takes one distribution.
+    `slot_axis.Axis.split` exists and is not reachable from here: showing dN
+    beside the screening controls would make looking at the outcome the default,
+    and the default is where a population choice hides (malign, [6361]). A
+    movement view gets its own route so that choosing it is an act.
+    """
+    from .slot_axis import Axis
+    with _AXIS_LOCK:
+        ax = Axis(prompt, naughty, nice)
+        if not ax.ok:
+            #: A DEGENERATE AXIS IS AN ANSWER, NOT AN ERROR. The poles embed to
+            #: the same point, so there is no direction -- which is a fact about
+            #: the tagging, reported as one.
+            return {"ok": False, "norm": ax.norm, "scores": [],
+                    "note": "the two poles are identical in embedding space"}
+        S = ax.score(sorted(set(words) | set(naughty) | set(nice)))
+        st = ax.stats(probs, S) if probs else {}
+    return dict({
+        "ok": True,
+        "norm": ax.norm,
+        "pole_gap": ax.pole_gap,
+        "purity": ax.purity,
+        "defectors": ax.defectors,
+        "n_poles": [len(naughty), len(nice)],
+        "scores": [{"word": w, "s": v}
+                   for w, v in sorted(S.items(), key=lambda x: -x[1])],
+    }, **st)
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "malignment"
+
+    def do_POST(self):
+        """Only `/slot/axis`, and it is a POST for PAYLOAD SIZE, not side effects.
+
+        The route writes nothing. It takes the candidate word list, which at
+        `k=500` is several kilobytes -- past what a URL can carry reliably, and
+        the archive's GET version of this endpoint was sized for `k=40` and would
+        have truncated silently rather than failed.
+        """
+        parsed = urlparse(self.path)
+        if parsed.path != "/slot/axis":
+            return self._json(404, {"error": "no POST route %s" % parsed.path})
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+            body = json.loads(self.rfile.read(length)) if length else {}
+            prompt = (body.get("prompt") or "").strip()
+            naughty = [w for w in (body.get("naughty") or []) if w]
+            nice = [w for w in (body.get("nice") or []) if w]
+            if not prompt or not naughty or not nice:
+                raise ValueError("prompt, naughty and nice all required")
+            words = [w for w in (body.get("words") or []) if w]
+            probs = body.get("probs") or None
+            self._json(200, _slot_axis(prompt, naughty, nice, words, probs))
+        except ValueError as e:
+            self._json(400, {"error": str(e)})
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            self._json(500, {"error": "%s: %s" % (type(e).__name__, e)})
 
     def do_GET(self):
         parsed = urlparse(self.path)
@@ -662,8 +731,37 @@ class Handler(BaseHTTPRequestHandler):
         #: app works built and fails in development -- the direction that wastes
         #: the most time, since the failure appears only where the debugging happens.
         self.send_header("Access-Control-Allow-Origin", "*")
+        #: Needed for the POST: a JSON content-type makes it non-simple, so the
+        #: browser preflights, and a preflight refused reads to the app as the
+        #: endpoint being down.
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.end_headers()
+        #: **DO NOT INSERT ANYTHING BETWEEN `end_headers()` AND THIS LINE.**
+        #: On 2026-08-16 a CORS edit appended a new method right here, which put
+        #: `do_OPTIONS` between the headers and the write. `_json` then ended at
+        #: `end_headers()` and EVERY response in the server -- GET and POST alike
+        #: -- returned a correct Content-Length and an empty body.
+        #:
+        #: It presented as a POST-only fault for an hour because the GET checks
+        #: were piped to /dev/null and the one visible symptom, a JSON decode
+        #: error on /health, got blamed on a dead server. The server was fine.
+        #: **A response with valid headers and no body reads as a transport
+        #: problem, which is the most expensive thing it could have looked like.**
         self.wfile.write(body)
+
+    def do_OPTIONS(self):
+        """The CORS preflight. 204, and NO BODY -- a 204 must not carry one.
+
+        Not routed through `_json`, which always writes a body: sending one here
+        is malformed, and reusing the helper is how it would happen.
+        """
+        self.send_response(204)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Content-Length", "0")
+        self.end_headers()
 
     def _static(self, path):
         """Serve the built app, if it has been built.

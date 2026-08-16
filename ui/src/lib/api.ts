@@ -126,7 +126,49 @@ export interface SlotResponse {
 	skipped: string | null;
 }
 
+export interface AxisResponse {
+	ok: boolean;
+	norm: number;
+	note?: string;
+	scores: { word: string; s: number }[];
+	pole_gap?: number;
+	purity?: number;
+	defectors?: string[];
+	n_poles?: [number, number];
+	//: Present only when a distribution was sent.
+	N?: number;
+	leverage?: number;
+	flags?: string[];
+	//: **null BY DESIGN.** The archive's thresholds were calibrated on a
+	//: population that has since moved; they are reported for orientation and
+	//: draw no verdict. See `malignment/slot_axis.py`.
+	leverage_verdict?: null;
+	lev_mover?: number;
+	lev_dead?: number;
+	lev_source?: string;
+}
+
+async function post<T>(path: string, body: unknown): Promise<T> {
+	const res = await fetch(`${BASE}${path}`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(body)
+	});
+	const j = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+	if (!res.ok) throw new Error((j as { error?: string }).error || `HTTP ${res.status}`);
+	return j as T;
+}
+
 export const api = {
+	//: POST for PAYLOAD SIZE, not side effects — it writes nothing. At k=500 the
+	//: candidate list is kilobytes, past what a URL carries reliably.
+	slotAxis: (
+		prompt: string,
+		naughty: string[],
+		nice: string[],
+		words: string[],
+		probs?: Record<string, number>
+	) => post<AxisResponse>('/slot/axis', { prompt, naughty, nice, words, probs }),
 	health: () => get<Health>('/health'),
 	inventory: () => get<{ db: string; tables: Table[] }>('/store/inventory'),
 	roster: () => get<RosterSummary>('/roster'),

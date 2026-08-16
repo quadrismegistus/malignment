@@ -42,7 +42,7 @@
 -->
 <script lang="ts">
 	import { api } from '$lib/api';
-	import type { SlotResponse } from '$lib/api';
+	import type { SlotResponse, AxisResponse } from '$lib/api';
 
 	let prompt = $state('She slowly took off her');
 	//: NO DEFAULT MODEL, matching the server. A default pool is a population
@@ -70,11 +70,79 @@
 	let taggedFor = $state('');
 	let clearedNote = $state('');
 
-	//: The axis, when the server can supply one. `null` = never asked or absent.
+	//: ── THE AXIS.
+	//:
+	//: `Record<word, number>` and **scoped to this response, deliberately**. It is
+	//: a function of the POLES, not of the words: malign's [6365] measured the
+	//: same frame under two legitimate pole readings and got `dress +0.1175` on
+	//: one and `-0.0097` on the other, a sign flip, at purity 1.000 on BOTH.
+	//: Persisting this map anywhere keyed on the word alone would be wrong and
+	//: wrong silently. It dies with the tags that made it.
 	let axis = $state<Record<string, number> | null>(null);
-	let axisAvailable = $state<boolean | null>(null);
+	let axisInfo = $state<AxisResponse | null>(null);
+	let axisLoading = $state(false);
 	let axisNote = $state('');
 	let hover = $state<{ word: string; p: number; s: number | null } | null>(null);
+
+	async function runAxis() {
+		if (!resp || !naughty.size || !nice.size) {
+			axis = null;
+			axisInfo = null;
+			return;
+		}
+		axisLoading = true;
+		axisNote = '';
+		try {
+			//: The probabilities go too, so leverage and N come back with the
+			//: scores. `stats()` is the companion call to any reading of the axis,
+			//: not an optional extra — see `split`'s docstring on dN cancelling
+			//: while something large happens.
+			const probs = Object.fromEntries(words.map((w) => [w.word, w.p]));
+			const r = await api.slotAxis(
+				resp.prompt,
+				[...naughty],
+				[...nice],
+				words.map((w) => w.word),
+				probs
+			);
+			axisInfo = r;
+			if (!r.ok) {
+				axis = null;
+				axisNote = r.note ?? 'no axis';
+			} else {
+				axis = Object.fromEntries(r.scores.map((x) => [x.word, x.s]));
+			}
+		} catch (e) {
+			axis = null;
+			axisInfo = null;
+			axisNote = e instanceof Error ? e.message : String(e);
+		} finally {
+			axisLoading = false;
+		}
+	}
+
+	//: AUTO-REPOLE, DEBOUNCED. The axis is a function of the tags, so it should
+	//: not need a button to stay true to them — a stale axis drawn beside fresh
+	//: tags is a plot saying something the data no longer says. Debounced because
+	//: tagging is a burst and each run embeds every candidate on CPU.
+	//:
+	//: KEYED ON THE POLE SETS AND THE WORD LIST, not on `resp`: re-running the
+	//: same prompt with the same tags should re-project, changing a tag should
+	//: re-project, and neither should fire while only a view toggles.
+	let poleKey = $derived(
+		[...naughty].sort().join(',') + '|' + [...nice].sort().join(',') +
+			'|' + words.map((w) => w.word).join(',')
+	);
+	$effect(() => {
+		const k = poleKey;
+		if (!naughty.size || !nice.size || !words.length) {
+			axis = null;
+			axisInfo = null;
+			return;
+		}
+		const t = setTimeout(runAxis, 450);
+		return () => clearTimeout(t);
+	});
 
 	async function run() {
 		if (!prompt.trim()) return;
@@ -482,19 +550,87 @@
 					<span class="val num bad">{resp.n_answered}/{resp.n_models}</span>
 				</div>
 			{/if}
+			{#if axisInfo?.ok}
+				<!--
+				  LEVERAGE IS THE SPREAD OF MASS ALONG THE AXIS, and it is the
+				  quantity branch mass is not. dN = sum dP(w)s(w), so an item can
+				  only register movement if its mass sits at DIFFERENT POSITIONS —
+				  if every word offered has the same s, no redistribution among
+				  them changes N, whatever the branch totals say.
+				-->
+				<div class="branch" title="Spread of probability mass along the axis. An item can only register movement if its mass sits at different positions — branch totals cannot tell you this.">
+					<span class="lbl">leverage</span>
+					<span class="val num">{axisInfo.leverage?.toFixed(4) ?? '—'}</span>
+				</div>
+				<div class="branch" title="Expected position of the model's mass on this axis: N = sum P(w)·s(w). The LEVEL, which carries your pole choice — dN, the movement from base, is the comparable quantity across items and is NOT shown here.">
+					<span class="lbl">N</span>
+					<span class="val num">{axisInfo.N != null ? (axisInfo.N >= 0 ? '+' : '') + axisInfo.N.toFixed(4) : '—'}</span>
+				</div>
+				<div class="branch" title={axisInfo.defectors?.length
+					? `MISTAGGED: ${axisInfo.defectors.join(', ')} — declared on one side of the axis, scoring on the other. Usually a tagging error, and visible with no model run.`
+					: 'Every declared pole word lands on its own side. Only the CENTROIDS are guaranteed to; individual words are not.'}>
+					<span class="lbl">purity</span>
+					<span class="val num" class:good={(axisInfo.purity ?? 0) >= 1}
+						class:bad={(axisInfo.purity ?? 1) < 1}>{axisInfo.purity?.toFixed(2) ?? '—'}</span>
+				</div>
+				<div class="branch dim" title="Distance between the two pole centroids along the axis they define.">
+					<span class="lbl">pole gap</span>
+					<span class="val num">{axisInfo.pole_gap?.toFixed(3) ?? '—'}</span>
+				</div>
+				<div class="branch dim" title="Words tagged on each side. A centroid from ONE embedding rests the whole direction on a single word's neighbourhood.">
+					<span class="lbl">poles</span>
+					<span class="val num">{naughty.size}/{nice.size}</span>
+				</div>
+				{#each axisInfo.flags ?? [] as f (f)}
+					<div class="verdict bad">{f}</div>
+				{/each}
+			{:else if axisLoading}
+				<span class="cnt">building axis…</span>
+			{/if}
 			{#if naughty.size || nice.size}
 				<button class="ghost" onclick={clearTags}>clear</button>
 				<button class="ghost" onclick={copyYaml}>{copied ? 'copied ✓' : 'copy yaml'}</button>
 			{/if}
 		</div>
 
+		{#if axisInfo?.ok}
+			<!--
+			  ── THE THRESHOLDS ARE PRINTED AND DRAW NO VERDICT, and this line is
+			  the whole reason that is safe to show at all.
+
+			  LEV_MOVER 0.1027 / LEV_DEAD 0.0694 were measured in the archive on a
+			  specific instrument, population and k. v3's populations have already
+			  moved under exactly this kind of change — endpoints() went 48 to 50
+			  on 2026-08-16. Rendering a red/green gate from them would assert a
+			  calibration nobody has re-derived, which is the "asserting against a
+			  booked value that is not a measurement" failure with an image on it.
+
+			  So: the numbers, their provenance, and no colour. A reader can
+			  compare and decide; the panel does not decide for them.
+			-->
+			<p class="declare">
+				reference only, NOT a gate &mdash; a known mover read
+				<span class="num">{axisInfo.lev_mover?.toFixed(4)}</span> and a known dead item
+				<span class="num">{axisInfo.lev_dead?.toFixed(4)}</span> in the archive
+				({axisInfo.lev_source}). No verdict is drawn from them here.
+			</p>
+		{/if}
+		{#if axisNote}<p class="declare warn">axis: {axisNote}</p>{/if}
+
 		{#if clearedNote}<p class="clearednote">{clearedNote}</p>{/if}
 
 		{#if !axis}
+			<!--
+			  THE FENCE NOW NAMES WHAT IS MISSING, WHICH IS TAGS AND NOT A PORT.
+			  It used to say the bge projection "has not been ported to v3" —
+			  true when written and false the moment `slot_axis.py` landed. A
+			  fence that outlives its cause is worse than none: it reads as a
+			  standing limitation and nobody re-checks it.
+			-->
 			<p class="declare warn">
-				NO AXIS. The bge projection that gives each word an x has not been ported to v3, so
-				the scatter is not drawn and the list below is ordered by probability alone. A
-				horizontal position here would carry nothing.
+				NO AXIS YET &mdash; tag at least one word on each side and the projection builds
+				itself. Until then the scatter is not drawn, because a horizontal position with no
+				axis behind it would carry nothing, and the list is ordered by probability alone.
 			</p>
 		{/if}
 
