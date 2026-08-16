@@ -61,6 +61,24 @@ def main():
           masked.get("mistralai/Mistral-7B-v0.1"),
           "mistralai/Mistral-7B-Instruct-v0.1")
 
+    print("\npaths")
+    ps = roster.paths()
+    check("paths", len(ps), 48)
+    import collections
+    dist = collections.Counter(p["n_steps"] for p in ps)
+    check("one-step paths", dist[1], 32)
+    check("two-step", dist[2], 11)
+    check("three-step", dist[3], 5)
+    check("ops line up with nodes",
+          all(len(p["ops"]) == len(p["nodes"]) - 1 == p["n_steps"] for p in ps), True)
+    #: THE PATH AND THE CHAIN ARE DIFFERENT ROUTES and both are 16 lineages.
+    #: Asserted so nobody reads the equal counts as the same set.
+    multi = {p["base"] for p in ps if p["n_steps"] >= 2}
+    chain = {c["base"] for c in roster.chains()}
+    check("multi-step lineages", len(multi), 16)
+    check("chain lineages", len(chain), 16)
+    check("...and they are NOT the same 16", multi == chain, False)
+
     print("\npopulations")
     for kind, want in (("all", 160), ("bases", 50), ("aligned", 99),
                        ("endpoints", 48), ("chain_rungs", 52),

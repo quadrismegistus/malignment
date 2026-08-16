@@ -808,3 +808,41 @@ def population(kind="endpoints", measured=False):
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def paths(measured=None):
+    """[{base, endpoint, nodes, ops, n_steps}] -- the FULL path to each lineage's endpoint.
+
+    `endpoints()` returns the two ends and `chains()` returns exactly
+    base->sft->pref. Neither answers "what did this lineage actually go
+    through", and the answer is not uniform: **a path is 2 nodes for a lab that
+    ships one aligned model and 4 for one that publishes every rung.**
+
+        meta-llama/Llama-3.1-8B  -instruct->  Llama-3.1-8B-Instruct      2 nodes
+        LLM360/Amber  -sft->  AmberChat  -dpo->  AmberSafe               3 nodes
+        allenai/Olmo-3-1025-7B -sft-> -SFT -dpo-> -DPO -rlvr-> Instruct  4 nodes
+
+    **THE LENGTH IS A FACT ABOUT THE PUBLISHER, NOT ABOUT THE PIPELINE.**
+    Baichuan2-7B-Chat is one step here and its own paper describes SFT followed
+    by RLHF -- the SFT rung was simply never released. So a 2-node path means
+    "one released rung", never "one training stage", and any per-stage claim over
+    these paths is a claim about the open-science subpopulation.
+
+    `nodes` includes the base; `ops[i]` is the operation from `nodes[i]` to
+    `nodes[i+1]`, so `len(ops) == len(nodes) - 1 == n_steps`.
+    """
+    d = load()
+    par = {c: (p, op) for p, op, c in (d.get("edges") or []) if op in DERIVING}
+    ep, _unresolved = endpoints(measured=measured)
+    out = []
+    for base, end in sorted(ep.items()):
+        nodes_, ops = [end], []
+        cur = end
+        while cur in par and cur != base:
+            p, op = par[cur]
+            ops.insert(0, op)
+            nodes_.insert(0, p)
+            cur = p
+        out.append({"base": base, "endpoint": end, "nodes": nodes_, "ops": ops,
+                    "n_steps": len(ops)})
+    return out

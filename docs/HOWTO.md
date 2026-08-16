@@ -63,6 +63,37 @@ never fired.
 
 **Check `unresolved` is empty.** A caller that ignores it is choosing by accident.
 
+### the full path to an endpoint, however many rungs it has
+
+```python
+roster.paths()      # [{base, endpoint, nodes, ops, n_steps}]
+```
+
+`endpoints()` gives the two ends; `chains()` gives exactly `base→sft→pref`.
+Neither answers *what did this lineage go through*, and the answer is not
+uniform: **32 paths are one step, 11 are two, 5 are three.**
+
+**THE LENGTH IS A FACT ABOUT THE PUBLISHER, NOT THE PIPELINE.**
+`Baichuan2-7B-Chat` is one step here and its own paper describes SFT then RLHF —
+the SFT rung was never released. A 1-step path means *one released rung*, never
+*one training stage*.
+
+**AND THE PATH AND THE CHAIN CAN BE DIFFERENT ROUTES THROUGH ONE LINEAGE. Read
+this before comparing two experiments on "the same" lineage.**
+
+    Llama-3.1-8B     path   -> Llama-3.1-8B-Instruct          (Meta's, 1 step)
+                     chain  -> Tulu-3-8B-SFT -> Tulu-3-8B-DPO (AllenAI's)
+    Mistral-7B-v0.1  path   -> Mistral-7B-Instruct-v0.1
+                     chain  -> mistral-7b-sft-beta -> zephyr-7b-beta
+
+Both are correct and they are not the same measurement. Anything built on
+`chains()` measures Llama through **Tulu** and Mistral through **zephyr** — and
+zephyr is attested as having no safety guardrail at all. Anything built on
+`endpoints()` measures both through the publisher's own instruct. 16 lineages
+have a multi-step path and 16 have a chain, **and they are not the same 16**:
+`stablelm-2-1_6b` and `RedPajama` have 2-step paths that `chains()` excludes
+because their last op is `instruct` rather than a named preference op.
+
 ### any other population
 
 **One function, seven names, so nobody writes an eighth comprehension.**
