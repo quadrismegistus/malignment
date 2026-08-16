@@ -35,11 +35,38 @@
 {/if}
 
 <style>
+	/*
+	  THE MEASURE IS ON THE TEXT BLOCKS, NOT ON THE CONTAINER.
+
+	  This was `max-width: 78ch` on `.md`, with the tables below carrying
+	  `max-width: 100%` and a comment saying they were "allowed to exceed the
+	  prose measure". They were not: 100% of a 78ch parent is 78ch, so every
+	  table was clipped to the measure and scrolled inside it.
+
+	  What that cost: the HYPOTHESIS REGISTER is a four-column table -- id,
+	  claim, where, STATUS -- and it rendered showing id and claim. The two
+	  columns carrying every verdict were off the right edge of a container the
+	  reader has no reason to suspect scrolls. **A truncated table is not a
+	  visibly missing table; it is one that reads as complete**, with clean
+	  headers over the columns that survived.
+
+	  Caught by rendering the page and reading it. The comment asserting the
+	  opposite behaviour sat three lines from the rule that prevented it, which is
+	  why a claim in a comment is worth less than a rule that executes.
+	*/
 	.md {
 		font-size: 13.5px;
 		line-height: 1.6;
 		color: var(--text);
-		max-width: 78ch; /* prose measure; the tables below opt out */
+	}
+	.md :global(p),
+	.md :global(ul),
+	.md :global(ol),
+	.md :global(blockquote),
+	.md :global(h1),
+	.md :global(h2),
+	.md :global(h3) {
+		max-width: 78ch;
 	}
 	.md.compact {
 		font-size: 12.5px;
@@ -122,15 +149,34 @@
 		font-variant-numeric: tabular-nums;
 		font-size: 11.5px;
 		display: block;
-		overflow-x: auto;
+		width: max-content;
+		/* Full panel width, NOT the prose measure. It still scrolls if it
+		   genuinely exceeds the panel, but it is no longer clipped to 78ch by a
+		   rule meant for paragraphs. */
 		max-width: 100%;
+		overflow-x: auto;
 	}
 	.md :global(th),
 	.md :global(td) {
 		border: 1px solid var(--rule);
 		padding: 4px 9px;
 		text-align: left;
+		vertical-align: top;
+	}
+	/*
+	  THE CLAIM COLUMN WRAPS; the short columns do not. `white-space: nowrap` on
+	  every cell is what made the register wider than any panel in the first
+	  place -- a claim is a sentence and forcing it onto one line pushes `status`
+	  off the screen, which is the column the table exists for.
+	*/
+	.md :global(td:nth-child(1)),
+	.md :global(td:nth-child(3)),
+	.md :global(td:nth-child(4)) {
 		white-space: nowrap;
+	}
+	.md :global(td:nth-child(2)) {
+		min-width: 30ch;
+		max-width: 62ch;
 	}
 	.md :global(th) {
 		background: var(--panel);
