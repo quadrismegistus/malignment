@@ -241,3 +241,6 @@ data/
 
 # Scratch work does not live in the repo — see experiments/README.md
 sandbox/
+
+# regenerable from rating_items.json + seed (run.py --stage assemble)
+experiments/sex_violence_lexicon/results/blocks/

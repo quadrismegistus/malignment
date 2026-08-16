@@ -1,0 +1,52 @@
+{
+ "anchors": 150,
+ "audit": 600,
+ "burn_in_excluded": [
+  "cock",
+  "stabbed"
+ ],
+ "controls": 857,
+ "date": "2026-08-16",
+ "expansions": 2122,
+ "generators": {
+  "angles": [
+   "angle-archaic",
+   "angle-clinical",
+   "angle-slang",
+   "angle-vulgar"
+  ],
+  "replicates": [
+   "replicate-1",
+   "replicate-2",
+   "replicate-3",
+   "replicate-4"
+  ]
+ },
+ "proposed_absent_from_corpus": 503,
+ "proposed_in_corpus": 1308,
+ "proposed_total": 1811,
+ "rating_items": 4887,
+ "seed": 20260816,
+ "seeded_words": [
+  "arousal",
+  "blade",
+  "breast",
+  "bruise",
+  "choke",
+  "cock",
+  "kill",
+  "naked",
+  "orgasm",
+  "penis",
+  "seduce",
+  "slaughter",
+  "stab",
+  "strangle",
+  "vagina",
+  "wound"
+ ],
+ "twp_rows": 93444356,
+ "vocabulary_all": 224919,
+ "vocabulary_english": 97804,
+ "vocabulary_query": "SELECT word, count() FROM twp_words WHERE match(word,'^[A-Za-z]+$') GROUP BY word"
+}

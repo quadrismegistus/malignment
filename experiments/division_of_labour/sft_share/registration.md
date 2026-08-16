@@ -76,3 +76,13 @@ What WOULD have changed the population, and did not: a new lineage with a releas
 18 chains sit on **16 distinct bases**: `allenai/Olmo-3-1025-7B` contributes two (Instruct and Think) and one other base contributes two. H3's sign test treats chains as independent and they are not quite.
 
 **Declared now, before looking:** the H3 result is reported with a cluster check collapsing each base to its mean difference (n = 16). **If the direction survives at base level, the claim stands as registered; if it does not, H3 is reported as NOT SUPPORTED**, not as supported-with-caveat. Writing this after seeing p = 0.0309 at chain level is why it is stated as a rule with a stated failure condition rather than as an observation.
+
+### A3 — 2026-08-16. H3 is re-tested at word level, in a different directory, under a prior amendment.
+
+The stopping rule above bars re-running H3 "with a different domain mapping unless an amendment says so first." **This is that amendment, written before any movement row was read through the new instrument.**
+
+`experiments/division_of_labour/lexical_domains/` registers **L1**, which tests the same claim — *"SFT handles sex, DPO handles violence"* — against **word categories from a blind-built lexicon** rather than prompt-domain labels. The a priori reason is the one this registration already stated: `sexual` has 157 live prompts and H3 warned it was near the underpowered boundary. The word-level denominator is ~1,308 lexicon words across the 2,190-prompt panel and does not depend on the sparse prompt set.
+
+**H3's result is unchanged and is not superseded.** It remains NOT SUPPORTED at chain p=0.031 / base p=0.077. L1 is a different measurement of the same claim, and its registration pre-commits that a second null **withdraws the claim** rather than licensing a third instrument.
+
+**No hypothesis, threshold, direction, mapping, unit or population in this file changes.**

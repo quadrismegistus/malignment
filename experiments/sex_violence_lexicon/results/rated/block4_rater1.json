@@ -1,0 +1,4390 @@
+[
+ {
+  "word": "croak",
+  "category": "neither"
+ },
+ {
+  "word": "interrogating",
+  "category": "neither"
+ },
+ {
+  "word": "cholesterol",
+  "category": "neither"
+ },
+ {
+  "word": "scrap",
+  "category": "neither"
+ },
+ {
+  "word": "outlook",
+  "category": "neither"
+ },
+ {
+  "word": "filenames",
+  "category": "neither"
+ },
+ {
+  "word": "stabed",
+  "category": "violent"
+ },
+ {
+  "word": "brutal",
+  "category": "violent"
+ },
+ {
+  "word": "astrolo",
+  "category": "neither"
+ },
+ {
+  "word": "beats",
+  "category": "violent"
+ },
+ {
+  "word": "eps",
+  "category": "neither"
+ },
+ {
+  "word": "detain",
+  "category": "neither"
+ },
+ {
+  "word": "bolts",
+  "category": "neither"
+ },
+ {
+  "word": "ridd",
+  "category": "neither"
+ },
+ {
+  "word": "kimono",
+  "category": "neither"
+ },
+ {
+  "word": "mine",
+  "category": "neither"
+ },
+ {
+  "word": "onyx",
+  "category": "neither"
+ },
+ {
+  "word": "choking",
+  "category": "violent"
+ },
+ {
+  "word": "sires",
+  "category": "neither"
+ },
+ {
+  "word": "enesses",
+  "category": "neither"
+ },
+ {
+  "word": "panda",
+  "category": "neither"
+ },
+ {
+  "word": "kinks",
+  "category": "neither"
+ },
+ {
+  "word": "hemorrhaged",
+  "category": "violent"
+ },
+ {
+  "word": "bummer",
+  "category": "neither"
+ },
+ {
+  "word": "dior",
+  "category": "neither"
+ },
+ {
+  "word": "shootings",
+  "category": "violent"
+ },
+ {
+  "word": "crippling",
+  "category": "violent"
+ },
+ {
+  "word": "guffaws",
+  "category": "neither"
+ },
+ {
+  "word": "wetted",
+  "category": "neither"
+ },
+ {
+  "word": "howls",
+  "category": "neither"
+ },
+ {
+  "word": "study",
+  "category": "neither"
+ },
+ {
+  "word": "severed",
+  "category": "violent"
+ },
+ {
+  "word": "whooping",
+  "category": "neither"
+ },
+ {
+  "word": "jades",
+  "category": "neither"
+ },
+ {
+  "word": "gabapentin",
+  "category": "neither"
+ },
+ {
+  "word": "mated",
+  "category": "sexual"
+ },
+ {
+  "word": "repartees",
+  "category": "neither"
+ },
+ {
+  "word": "similarly",
+  "category": "neither"
+ },
+ {
+  "word": "debauchery",
+  "category": "sexual"
+ },
+ {
+  "word": "innocence",
+  "category": "neither"
+ },
+ {
+  "word": "bulging",
+  "category": "neither"
+ },
+ {
+  "word": "scares",
+  "category": "neither"
+ },
+ {
+  "word": "pelleted",
+  "category": "neither"
+ },
+ {
+  "word": "gasps",
+  "category": "neither"
+ },
+ {
+  "word": "wadded",
+  "category": "neither"
+ },
+ {
+  "word": "punching",
+  "category": "violent"
+ },
+ {
+  "word": "sushi",
+  "category": "neither"
+ },
+ {
+  "word": "rail",
+  "category": "neither"
+ },
+ {
+  "word": "erotic",
+  "category": "sexual"
+ },
+ {
+  "word": "anas",
+  "category": "neither"
+ },
+ {
+  "word": "strangulation",
+  "category": "violent"
+ },
+ {
+  "word": "teasing",
+  "category": "neither"
+ },
+ {
+  "word": "skin",
+  "category": "neither"
+ },
+ {
+  "word": "allured",
+  "category": "neither"
+ },
+ {
+  "word": "strapping",
+  "category": "neither"
+ },
+ {
+  "word": "comeing",
+  "category": "neither"
+ },
+ {
+  "word": "drawer",
+  "category": "neither"
+ },
+ {
+  "word": "session",
+  "category": "neither"
+ },
+ {
+  "word": "reconsidered",
+  "category": "neither"
+ },
+ {
+  "word": "burs",
+  "category": "neither"
+ },
+ {
+  "word": "cadaver",
+  "category": "neither"
+ },
+ {
+  "word": "transfused",
+  "category": "neither"
+ },
+ {
+  "word": "sifts",
+  "category": "neither"
+ },
+ {
+  "word": "raider",
+  "category": "violent"
+ },
+ {
+  "word": "imprint",
+  "category": "neither"
+ },
+ {
+  "word": "baton",
+  "category": "neither"
+ },
+ {
+  "word": "tugging",
+  "category": "neither"
+ },
+ {
+  "word": "issuing",
+  "category": "neither"
+ },
+ {
+  "word": "implied",
+  "category": "neither"
+ },
+ {
+  "word": "croaky",
+  "category": "neither"
+ },
+ {
+  "word": "bosoms",
+  "category": "sexual"
+ },
+ {
+  "word": "pinac",
+  "category": "neither"
+ },
+ {
+  "word": "bastards",
+  "category": "neither"
+ },
+ {
+  "word": "hardy",
+  "category": "neither"
+ },
+ {
+  "word": "heureuse",
+  "category": "neither"
+ },
+ {
+  "word": "vices",
+  "category": "neither"
+ },
+ {
+  "word": "inhalation",
+  "category": "neither"
+ },
+ {
+  "word": "flagellating",
+  "category": "violent"
+ },
+ {
+  "word": "albat",
+  "category": "neither"
+ },
+ {
+  "word": "exterminated",
+  "category": "violent"
+ },
+ {
+  "word": "wrench",
+  "category": "neither"
+ },
+ {
+  "word": "lumb",
+  "category": "neither"
+ },
+ {
+  "word": "butters",
+  "category": "neither"
+ },
+ {
+  "word": "systemreloaded",
+  "category": "neither"
+ },
+ {
+  "word": "buffets",
+  "category": "neither"
+ },
+ {
+  "word": "automaton",
+  "category": "neither"
+ },
+ {
+  "word": "slayer",
+  "category": "violent"
+ },
+ {
+  "word": "wails",
+  "category": "neither"
+ },
+ {
+  "word": "genital",
+  "category": "sexual"
+ },
+ {
+  "word": "scratching",
+  "category": "neither"
+ },
+ {
+  "word": "turmeric",
+  "category": "neither"
+ },
+ {
+  "word": "scythes",
+  "category": "neither"
+ },
+ {
+  "word": "jerks",
+  "category": "neither"
+ },
+ {
+  "word": "bare",
+  "category": "neither"
+ },
+ {
+  "word": "ashtav",
+  "category": "neither"
+ },
+ {
+  "word": "cuisine",
+  "category": "neither"
+ },
+ {
+  "word": "eating",
+  "category": "neither"
+ },
+ {
+  "word": "raids",
+  "category": "violent"
+ },
+ {
+  "word": "omne",
+  "category": "neither"
+ },
+ {
+  "word": "flea",
+  "category": "neither"
+ },
+ {
+  "word": "potencies",
+  "category": "neither"
+ },
+ {
+  "word": "maces",
+  "category": "violent"
+ },
+ {
+  "word": "distribut",
+  "category": "neither"
+ },
+ {
+  "word": "intimidated",
+  "category": "neither"
+ },
+ {
+  "word": "crave",
+  "category": "neither"
+ },
+ {
+  "word": "whipper",
+  "category": "violent"
+ },
+ {
+  "word": "jism",
+  "category": "sexual"
+ },
+ {
+  "word": "wanker",
+  "category": "sexual"
+ },
+ {
+  "word": "assed",
+  "category": "neither"
+ },
+ {
+  "word": "chard",
+  "category": "neither"
+ },
+ {
+  "word": "flageolet",
+  "category": "neither"
+ },
+ {
+  "word": "chastened",
+  "category": "neither"
+ },
+ {
+  "word": "klavier",
+  "category": "neither"
+ },
+ {
+  "word": "atrophy",
+  "category": "neither"
+ },
+ {
+  "word": "pederast",
+  "category": "sexual"
+ },
+ {
+  "word": "inguinal",
+  "category": "neither"
+ },
+ {
+  "word": "members",
+  "category": "neither"
+ },
+ {
+  "word": "chasten",
+  "category": "neither"
+ },
+ {
+  "word": "enticingly",
+  "category": "neither"
+ },
+ {
+  "word": "sakhalin",
+  "category": "neither"
+ },
+ {
+  "word": "trampled",
+  "category": "violent"
+ },
+ {
+  "word": "encroaching",
+  "category": "neither"
+ },
+ {
+  "word": "dashes",
+  "category": "neither"
+ },
+ {
+  "word": "covenantes",
+  "category": "neither"
+ },
+ {
+  "word": "anachron",
+  "category": "neither"
+ },
+ {
+  "word": "deflower",
+  "category": "sexual"
+ },
+ {
+  "word": "lanzarote",
+  "category": "neither"
+ },
+ {
+  "word": "erogenous",
+  "category": "sexual"
+ },
+ {
+  "word": "sore",
+  "category": "neither"
+ },
+ {
+  "word": "clichy",
+  "category": "neither"
+ },
+ {
+  "word": "blemis",
+  "category": "neither"
+ },
+ {
+  "word": "bleak",
+  "category": "neither"
+ },
+ {
+  "word": "temptations",
+  "category": "neither"
+ },
+ {
+  "word": "shriek",
+  "category": "neither"
+ },
+ {
+  "word": "knowing",
+  "category": "neither"
+ },
+ {
+  "word": "useraccount",
+  "category": "neither"
+ },
+ {
+  "word": "ravish",
+  "category": "both"
+ },
+ {
+  "word": "undoing",
+  "category": "neither"
+ },
+ {
+  "word": "scratches",
+  "category": "neither"
+ },
+ {
+  "word": "banner",
+  "category": "neither"
+ },
+ {
+  "word": "charing",
+  "category": "neither"
+ },
+ {
+  "word": "turp",
+  "category": "neither"
+ },
+ {
+  "word": "humanistic",
+  "category": "neither"
+ },
+ {
+  "word": "applesa",
+  "category": "neither"
+ },
+ {
+  "word": "disports",
+  "category": "neither"
+ },
+ {
+  "word": "yard",
+  "category": "neither"
+ },
+ {
+  "word": "tickets",
+  "category": "neither"
+ },
+ {
+  "word": "sket",
+  "category": "neither"
+ },
+ {
+  "word": "studs",
+  "category": "neither"
+ },
+ {
+  "word": "pines",
+  "category": "neither"
+ },
+ {
+  "word": "nheads",
+  "category": "neither"
+ },
+ {
+  "word": "maidenhood",
+  "category": "neither"
+ },
+ {
+  "word": "slasher",
+  "category": "violent"
+ },
+ {
+  "word": "monster",
+  "category": "neither"
+ },
+ {
+  "word": "genocide",
+  "category": "violent"
+ },
+ {
+  "word": "sailed",
+  "category": "neither"
+ },
+ {
+  "word": "recarpeted",
+  "category": "neither"
+ },
+ {
+  "word": "pricks",
+  "category": "sexual"
+ },
+ {
+  "word": "tethys",
+  "category": "neither"
+ },
+ {
+  "word": "interstellar",
+  "category": "neither"
+ },
+ {
+  "word": "lordliness",
+  "category": "neither"
+ },
+ {
+  "word": "pinioned",
+  "category": "neither"
+ },
+ {
+  "word": "beeeeep",
+  "category": "neither"
+ },
+ {
+  "word": "fired",
+  "category": "neither"
+ },
+ {
+  "word": "gas",
+  "category": "neither"
+ },
+ {
+  "word": "frag",
+  "category": "violent"
+ },
+ {
+  "word": "bawds",
+  "category": "sexual"
+ },
+ {
+  "word": "hammering",
+  "category": "neither"
+ },
+ {
+  "word": "motorboat",
+  "category": "neither"
+ },
+ {
+  "word": "pardonable",
+  "category": "neither"
+ },
+ {
+  "word": "peristals",
+  "category": "neither"
+ },
+ {
+  "word": "compl",
+  "category": "neither"
+ },
+ {
+  "word": "pet",
+  "category": "neither"
+ },
+ {
+  "word": "kindliness",
+  "category": "neither"
+ },
+ {
+  "word": "barring",
+  "category": "neither"
+ },
+ {
+  "word": "spined",
+  "category": "neither"
+ },
+ {
+  "word": "slamming",
+  "category": "neither"
+ },
+ {
+  "word": "stiller",
+  "category": "neither"
+ },
+ {
+  "word": "controlling",
+  "category": "neither"
+ },
+ {
+  "word": "dildo",
+  "category": "sexual"
+ },
+ {
+  "word": "abrasion",
+  "category": "violent"
+ },
+ {
+  "word": "lowly",
+  "category": "neither"
+ },
+ {
+  "word": "starved",
+  "category": "neither"
+ },
+ {
+  "word": "inquiry",
+  "category": "neither"
+ },
+ {
+  "word": "screwd",
+  "category": "neither"
+ },
+ {
+  "word": "rampage",
+  "category": "violent"
+ },
+ {
+  "word": "tyrants",
+  "category": "neither"
+ },
+ {
+  "word": "erected",
+  "category": "neither"
+ },
+ {
+  "word": "truncate",
+  "category": "neither"
+ },
+ {
+  "word": "off",
+  "category": "neither"
+ },
+ {
+  "word": "ram",
+  "category": "neither"
+ },
+ {
+  "word": "intriguing",
+  "category": "neither"
+ },
+ {
+  "word": "orderly",
+  "category": "neither"
+ },
+ {
+  "word": "eats",
+  "category": "neither"
+ },
+ {
+  "word": "uninterrupt",
+  "category": "neither"
+ },
+ {
+  "word": "choler",
+  "category": "neither"
+ },
+ {
+  "word": "battered",
+  "category": "violent"
+ },
+ {
+  "word": "immolations",
+  "category": "violent"
+ },
+ {
+  "word": "vandal",
+  "category": "neither"
+ },
+ {
+  "word": "sear",
+  "category": "neither"
+ },
+ {
+  "word": "spears",
+  "category": "violent"
+ },
+ {
+  "word": "snapping",
+  "category": "neither"
+ },
+ {
+  "word": "wrestle",
+  "category": "neither"
+ },
+ {
+  "word": "ongan",
+  "category": "neither"
+ },
+ {
+  "word": "unswerv",
+  "category": "neither"
+ },
+ {
+  "word": "dalliances",
+  "category": "neither"
+ },
+ {
+  "word": "responses",
+  "category": "neither"
+ },
+ {
+  "word": "cummed",
+  "category": "sexual"
+ },
+ {
+  "word": "fatal",
+  "category": "neither"
+ },
+ {
+  "word": "bushs",
+  "category": "neither"
+ },
+ {
+  "word": "refut",
+  "category": "neither"
+ },
+ {
+  "word": "elbowing",
+  "category": "neither"
+ },
+ {
+  "word": "caskets",
+  "category": "neither"
+ },
+ {
+  "word": "blowing",
+  "category": "neither"
+ },
+ {
+  "word": "eraser",
+  "category": "neither"
+ },
+ {
+  "word": "masturbated",
+  "category": "sexual"
+ },
+ {
+  "word": "breaked",
+  "category": "neither"
+ },
+ {
+  "word": "layer",
+  "category": "neither"
+ },
+ {
+  "word": "illumined",
+  "category": "neither"
+ },
+ {
+  "word": "brain",
+  "category": "neither"
+ },
+ {
+  "word": "fingered",
+  "category": "neither"
+ },
+ {
+  "word": "phillips",
+  "category": "neither"
+ },
+ {
+  "word": "cinders",
+  "category": "neither"
+ },
+ {
+  "word": "cracking",
+  "category": "neither"
+ },
+ {
+  "word": "caretak",
+  "category": "neither"
+ },
+ {
+  "word": "stalk",
+  "category": "neither"
+ },
+ {
+  "word": "buckshot",
+  "category": "violent"
+ },
+ {
+  "word": "croaks",
+  "category": "neither"
+ },
+ {
+  "word": "pind",
+  "category": "neither"
+ },
+ {
+  "word": "spited",
+  "category": "neither"
+ },
+ {
+  "word": "dances",
+  "category": "neither"
+ },
+ {
+  "word": "purge",
+  "category": "neither"
+ },
+ {
+  "word": "knifes",
+  "category": "violent"
+ },
+ {
+  "word": "wastes",
+  "category": "neither"
+ },
+ {
+  "word": "unsan",
+  "category": "neither"
+ },
+ {
+  "word": "slapping",
+  "category": "violent"
+ },
+ {
+  "word": "roids",
+  "category": "neither"
+ },
+ {
+  "word": "buck",
+  "category": "neither"
+ },
+ {
+  "word": "idor",
+  "category": "neither"
+ },
+ {
+  "word": "rimmed",
+  "category": "neither"
+ },
+ {
+  "word": "analy",
+  "category": "neither"
+ },
+ {
+  "word": "yuki",
+  "category": "neither"
+ },
+ {
+  "word": "kuro",
+  "category": "neither"
+ },
+ {
+  "word": "dissolute",
+  "category": "neither"
+ },
+ {
+  "word": "wallpap",
+  "category": "neither"
+ },
+ {
+  "word": "brutality",
+  "category": "violent"
+ },
+ {
+  "word": "chary",
+  "category": "neither"
+ },
+ {
+  "word": "tackle",
+  "category": "neither"
+ },
+ {
+  "word": "requite",
+  "category": "neither"
+ },
+ {
+  "word": "lovers",
+  "category": "sexual"
+ },
+ {
+  "word": "hibernac",
+  "category": "neither"
+ },
+ {
+  "word": "abuses",
+  "category": "neither"
+ },
+ {
+  "word": "mercenary",
+  "category": "neither"
+ },
+ {
+  "word": "bates",
+  "category": "neither"
+ },
+ {
+  "word": "banged",
+  "category": "neither"
+ },
+ {
+  "word": "pendulum",
+  "category": "neither"
+ },
+ {
+  "word": "nips",
+  "category": "neither"
+ },
+ {
+  "word": "smashes",
+  "category": "neither"
+ },
+ {
+  "word": "immolated",
+  "category": "violent"
+ },
+ {
+  "word": "wrung",
+  "category": "neither"
+ },
+ {
+  "word": "jem",
+  "category": "neither"
+ },
+ {
+  "word": "overdose",
+  "category": "neither"
+ },
+ {
+  "word": "wailers",
+  "category": "neither"
+ },
+ {
+  "word": "mug",
+  "category": "neither"
+ },
+ {
+  "word": "lusted",
+  "category": "sexual"
+ },
+ {
+  "word": "shattered",
+  "category": "neither"
+ },
+ {
+  "word": "hunk",
+  "category": "neither"
+ },
+ {
+  "word": "axing",
+  "category": "neither"
+ },
+ {
+  "word": "moods",
+  "category": "neither"
+ },
+ {
+  "word": "shatter",
+  "category": "neither"
+ },
+ {
+  "word": "squashed",
+  "category": "neither"
+ },
+ {
+  "word": "fairer",
+  "category": "neither"
+ },
+ {
+  "word": "oax",
+  "category": "neither"
+ },
+ {
+  "word": "manacles",
+  "category": "neither"
+ },
+ {
+  "word": "whacked",
+  "category": "violent"
+ },
+ {
+  "word": "lizz",
+  "category": "neither"
+ },
+ {
+  "word": "cocksucker",
+  "category": "sexual"
+ },
+ {
+  "word": "landlords",
+  "category": "neither"
+ },
+ {
+  "word": "trample",
+  "category": "violent"
+ },
+ {
+  "word": "manteg",
+  "category": "neither"
+ },
+ {
+  "word": "ensnare",
+  "category": "neither"
+ },
+ {
+  "word": "dismissal",
+  "category": "neither"
+ },
+ {
+  "word": "fulnes",
+  "category": "neither"
+ },
+ {
+  "word": "moms",
+  "category": "neither"
+ },
+ {
+  "word": "stony",
+  "category": "neither"
+ },
+ {
+  "word": "invaders",
+  "category": "violent"
+ },
+ {
+  "word": "undid",
+  "category": "neither"
+ },
+ {
+  "word": "butt",
+  "category": "neither"
+ },
+ {
+  "word": "horns",
+  "category": "neither"
+ },
+ {
+  "word": "relativistic",
+  "category": "neither"
+ },
+ {
+  "word": "worldly",
+  "category": "neither"
+ },
+ {
+  "word": "engenders",
+  "category": "neither"
+ },
+ {
+  "word": "swooned",
+  "category": "neither"
+ },
+ {
+  "word": "maximae",
+  "category": "neither"
+ },
+ {
+  "word": "daph",
+  "category": "neither"
+ },
+ {
+  "word": "hurled",
+  "category": "neither"
+ },
+ {
+  "word": "expires",
+  "category": "neither"
+ },
+ {
+  "word": "mong",
+  "category": "neither"
+ },
+ {
+  "word": "mesmerized",
+  "category": "neither"
+ },
+ {
+  "word": "defected",
+  "category": "neither"
+ },
+ {
+  "word": "cleanses",
+  "category": "neither"
+ },
+ {
+  "word": "quim",
+  "category": "sexual"
+ },
+ {
+  "word": "slug",
+  "category": "neither"
+ },
+ {
+  "word": "plundering",
+  "category": "neither"
+ },
+ {
+  "word": "knowledge",
+  "category": "neither"
+ },
+ {
+  "word": "gunman",
+  "category": "violent"
+ },
+ {
+  "word": "rifled",
+  "category": "neither"
+ },
+ {
+  "word": "bones",
+  "category": "neither"
+ },
+ {
+  "word": "slitted",
+  "category": "neither"
+ },
+ {
+  "word": "ganymede",
+  "category": "neither"
+ },
+ {
+  "word": "thrine",
+  "category": "neither"
+ },
+ {
+  "word": "maggi",
+  "category": "neither"
+ },
+ {
+  "word": "hew",
+  "category": "neither"
+ },
+ {
+  "word": "fetish",
+  "category": "sexual"
+ },
+ {
+  "word": "spurted",
+  "category": "neither"
+ },
+ {
+  "word": "toda",
+  "category": "neither"
+ },
+ {
+  "word": "spraying",
+  "category": "neither"
+ },
+ {
+  "word": "hostility",
+  "category": "neither"
+ },
+ {
+  "word": "onds",
+  "category": "neither"
+ },
+ {
+  "word": "tormented",
+  "category": "violent"
+ },
+ {
+  "word": "scorching",
+  "category": "neither"
+ },
+ {
+  "word": "torturer",
+  "category": "violent"
+ },
+ {
+  "word": "gores",
+  "category": "violent"
+ },
+ {
+  "word": "eliminates",
+  "category": "neither"
+ },
+ {
+  "word": "beard",
+  "category": "neither"
+ },
+ {
+  "word": "mangle",
+  "category": "violent"
+ },
+ {
+  "word": "tryst",
+  "category": "sexual"
+ },
+ {
+  "word": "liquidate",
+  "category": "neither"
+ },
+ {
+  "word": "destroyers",
+  "category": "neither"
+ },
+ {
+  "word": "crushes",
+  "category": "neither"
+ },
+ {
+  "word": "bujold",
+  "category": "neither"
+ },
+ {
+  "word": "bany",
+  "category": "neither"
+ },
+ {
+  "word": "andmight",
+  "category": "neither"
+ },
+ {
+  "word": "peddle",
+  "category": "neither"
+ },
+ {
+  "word": "snaps",
+  "category": "neither"
+ },
+ {
+  "word": "bool",
+  "category": "neither"
+ },
+ {
+  "word": "critics",
+  "category": "neither"
+ },
+ {
+  "word": "wang",
+  "category": "neither"
+ },
+ {
+  "word": "entrails",
+  "category": "neither"
+ },
+ {
+  "word": "erection",
+  "category": "sexual"
+ },
+ {
+  "word": "knocked",
+  "category": "neither"
+ },
+ {
+  "word": "kard",
+  "category": "neither"
+ },
+ {
+  "word": "ravages",
+  "category": "violent"
+ },
+ {
+  "word": "stifled",
+  "category": "neither"
+ },
+ {
+  "word": "taint",
+  "category": "neither"
+ },
+ {
+  "word": "overburdened",
+  "category": "neither"
+ },
+ {
+  "word": "overpower",
+  "category": "neither"
+ },
+ {
+  "word": "conquer",
+  "category": "neither"
+ },
+ {
+  "word": "capers",
+  "category": "neither"
+ },
+ {
+  "word": "drifters",
+  "category": "neither"
+ },
+ {
+  "word": "oppresses",
+  "category": "neither"
+ },
+ {
+  "word": "threatened",
+  "category": "neither"
+ },
+ {
+  "word": "hacked",
+  "category": "neither"
+ },
+ {
+  "word": "petting",
+  "category": "neither"
+ },
+ {
+  "word": "stings",
+  "category": "neither"
+ },
+ {
+  "word": "deads",
+  "category": "neither"
+ },
+ {
+  "word": "wiping",
+  "category": "neither"
+ },
+ {
+  "word": "clipping",
+  "category": "neither"
+ },
+ {
+  "word": "gallantry",
+  "category": "neither"
+ },
+ {
+  "word": "insom",
+  "category": "neither"
+ },
+ {
+  "word": "penis",
+  "category": "sexual"
+ },
+ {
+  "word": "harrowing",
+  "category": "neither"
+ },
+ {
+  "word": "naz",
+  "category": "neither"
+ },
+ {
+  "word": "batted",
+  "category": "neither"
+ },
+ {
+  "word": "hards",
+  "category": "neither"
+ },
+ {
+  "word": "drawed",
+  "category": "neither"
+ },
+ {
+  "word": "harrier",
+  "category": "neither"
+ },
+ {
+  "word": "suicides",
+  "category": "violent"
+ },
+ {
+  "word": "fiscal",
+  "category": "neither"
+ },
+ {
+  "word": "speculum",
+  "category": "neither"
+ },
+ {
+  "word": "desire",
+  "category": "neither"
+ },
+ {
+  "word": "surplus",
+  "category": "neither"
+ },
+ {
+  "word": "stroked",
+  "category": "neither"
+ },
+ {
+  "word": "offing",
+  "category": "neither"
+ },
+ {
+  "word": "hardon",
+  "category": "sexual"
+ },
+ {
+  "word": "fells",
+  "category": "neither"
+ },
+ {
+  "word": "sleep",
+  "category": "neither"
+ },
+ {
+  "word": "lame",
+  "category": "neither"
+ },
+ {
+  "word": "ulcer",
+  "category": "neither"
+ },
+ {
+  "word": "carjacked",
+  "category": "violent"
+ },
+ {
+  "word": "howler",
+  "category": "neither"
+ },
+ {
+  "word": "bucks",
+  "category": "neither"
+ },
+ {
+  "word": "individually",
+  "category": "neither"
+ },
+ {
+  "word": "reflectively",
+  "category": "neither"
+ },
+ {
+  "word": "tintinn",
+  "category": "neither"
+ },
+ {
+  "word": "persew",
+  "category": "neither"
+ },
+ {
+  "word": "scalded",
+  "category": "violent"
+ },
+ {
+  "word": "jannet",
+  "category": "neither"
+ },
+ {
+  "word": "ascertained",
+  "category": "neither"
+ },
+ {
+  "word": "ruining",
+  "category": "neither"
+ },
+ {
+  "word": "craving",
+  "category": "neither"
+ },
+ {
+  "word": "amplifiers",
+  "category": "neither"
+ },
+ {
+  "word": "decompose",
+  "category": "neither"
+ },
+ {
+  "word": "chastises",
+  "category": "neither"
+ },
+ {
+  "word": "sleaze",
+  "category": "neither"
+ },
+ {
+  "word": "dismembered",
+  "category": "violent"
+ },
+ {
+  "word": "choker",
+  "category": "neither"
+ },
+ {
+  "word": "rotter",
+  "category": "neither"
+ },
+ {
+  "word": "welt",
+  "category": "violent"
+ },
+ {
+  "word": "die",
+  "category": "neither"
+ },
+ {
+  "word": "craftsmanship",
+  "category": "neither"
+ },
+ {
+  "word": "issued",
+  "category": "neither"
+ },
+ {
+  "word": "conceiving",
+  "category": "neither"
+ },
+ {
+  "word": "kisses",
+  "category": "neither"
+ },
+ {
+  "word": "mosquito",
+  "category": "neither"
+ },
+ {
+  "word": "knuckle",
+  "category": "neither"
+ },
+ {
+  "word": "intercourse",
+  "category": "sexual"
+ },
+ {
+  "word": "paradox",
+  "category": "neither"
+ },
+ {
+  "word": "steamy",
+  "category": "neither"
+ },
+ {
+  "word": "frolics",
+  "category": "neither"
+ },
+ {
+  "word": "jimi",
+  "category": "neither"
+ },
+ {
+  "word": "smacking",
+  "category": "violent"
+ },
+ {
+  "word": "knows",
+  "category": "neither"
+ },
+ {
+  "word": "hallucinations",
+  "category": "neither"
+ },
+ {
+  "word": "craves",
+  "category": "neither"
+ },
+ {
+  "word": "presentation",
+  "category": "neither"
+ },
+ {
+  "word": "avenging",
+  "category": "neither"
+ },
+ {
+  "word": "amaz",
+  "category": "neither"
+ },
+ {
+  "word": "hue",
+  "category": "neither"
+ },
+ {
+  "word": "widower",
+  "category": "neither"
+ },
+ {
+  "word": "straddles",
+  "category": "neither"
+ },
+ {
+  "word": "woody",
+  "category": "neither"
+ },
+ {
+  "word": "fighters",
+  "category": "violent"
+ },
+ {
+  "word": "forcings",
+  "category": "neither"
+ },
+ {
+  "word": "splintering",
+  "category": "neither"
+ },
+ {
+  "word": "knower",
+  "category": "neither"
+ },
+ {
+  "word": "bum",
+  "category": "neither"
+ },
+ {
+  "word": "ooze",
+  "category": "neither"
+ },
+ {
+  "word": "snipers",
+  "category": "violent"
+ },
+ {
+  "word": "booting",
+  "category": "neither"
+ },
+ {
+  "word": "squabbled",
+  "category": "neither"
+ },
+ {
+  "word": "tits",
+  "category": "sexual"
+ },
+ {
+  "word": "tart",
+  "category": "neither"
+ },
+ {
+  "word": "drest",
+  "category": "neither"
+ },
+ {
+  "word": "damp",
+  "category": "neither"
+ },
+ {
+  "word": "sanction",
+  "category": "neither"
+ },
+ {
+  "word": "forced",
+  "category": "neither"
+ },
+ {
+  "word": "peters",
+  "category": "neither"
+ },
+ {
+  "word": "elk",
+  "category": "neither"
+ },
+ {
+  "word": "strap",
+  "category": "neither"
+ },
+ {
+  "word": "ballistics",
+  "category": "neither"
+ },
+ {
+  "word": "gunfire",
+  "category": "violent"
+ },
+ {
+  "word": "sever",
+  "category": "violent"
+ },
+ {
+  "word": "kill",
+  "category": "violent"
+ },
+ {
+  "word": "predic",
+  "category": "neither"
+ },
+ {
+  "word": "subdued",
+  "category": "neither"
+ },
+ {
+  "word": "carab",
+  "category": "neither"
+ },
+ {
+  "word": "narrow",
+  "category": "neither"
+ },
+ {
+  "word": "rod",
+  "category": "neither"
+ },
+ {
+  "word": "illim",
+  "category": "neither"
+ },
+ {
+  "word": "flirting",
+  "category": "sexual"
+ },
+ {
+  "word": "binocular",
+  "category": "neither"
+ },
+ {
+  "word": "adhuc",
+  "category": "neither"
+ },
+ {
+  "word": "assailants",
+  "category": "violent"
+ },
+ {
+  "word": "gnas",
+  "category": "neither"
+ },
+ {
+  "word": "decomposes",
+  "category": "neither"
+ },
+ {
+  "word": "jumped",
+  "category": "neither"
+ },
+ {
+  "word": "accomplishment",
+  "category": "neither"
+ },
+ {
+  "word": "hammer",
+  "category": "neither"
+ },
+ {
+  "word": "continually",
+  "category": "neither"
+ },
+ {
+  "word": "erotica",
+  "category": "sexual"
+ },
+ {
+  "word": "ipop",
+  "category": "neither"
+ },
+ {
+  "word": "beds",
+  "category": "neither"
+ },
+ {
+  "word": "sliding",
+  "category": "neither"
+ },
+ {
+  "word": "carsolution",
+  "category": "neither"
+ },
+ {
+  "word": "blind",
+  "category": "neither"
+ },
+ {
+  "word": "boots",
+  "category": "neither"
+ },
+ {
+  "word": "chared",
+  "category": "neither"
+ },
+ {
+  "word": "ecstasies",
+  "category": "neither"
+ },
+ {
+  "word": "supernumer",
+  "category": "neither"
+ },
+ {
+  "word": "john",
+  "category": "neither"
+ },
+ {
+  "word": "riant",
+  "category": "neither"
+ },
+ {
+  "word": "compressions",
+  "category": "neither"
+ },
+ {
+  "word": "arouses",
+  "category": "sexual"
+ },
+ {
+  "word": "fondling",
+  "category": "sexual"
+ },
+ {
+  "word": "clubs",
+  "category": "neither"
+ },
+ {
+  "word": "clitoris",
+  "category": "sexual"
+ },
+ {
+  "word": "fumes",
+  "category": "neither"
+ },
+ {
+  "word": "sabot",
+  "category": "neither"
+ },
+ {
+  "word": "circumcise",
+  "category": "sexual"
+ },
+ {
+  "word": "reapers",
+  "category": "neither"
+ },
+ {
+  "word": "dart",
+  "category": "neither"
+ },
+ {
+  "word": "hurling",
+  "category": "neither"
+ },
+ {
+  "word": "pierce",
+  "category": "neither"
+ },
+ {
+  "word": "wipers",
+  "category": "neither"
+ },
+ {
+  "word": "dill",
+  "category": "neither"
+ },
+ {
+  "word": "whore",
+  "category": "sexual"
+ },
+ {
+  "word": "eradicate",
+  "category": "neither"
+ },
+ {
+  "word": "correctnes",
+  "category": "neither"
+ },
+ {
+  "word": "wet",
+  "category": "neither"
+ },
+ {
+  "word": "findbig",
+  "category": "neither"
+ },
+ {
+  "word": "crotch",
+  "category": "sexual"
+ },
+ {
+  "word": "repurpose",
+  "category": "neither"
+ },
+ {
+  "word": "coordinated",
+  "category": "neither"
+ },
+ {
+  "word": "entomb",
+  "category": "neither"
+ },
+ {
+  "word": "yanked",
+  "category": "neither"
+ },
+ {
+  "word": "martyr",
+  "category": "neither"
+ },
+ {
+  "word": "breaker",
+  "category": "neither"
+ },
+ {
+  "word": "enervated",
+  "category": "neither"
+ },
+ {
+  "word": "gore",
+  "category": "violent"
+ },
+ {
+  "word": "buffet",
+  "category": "neither"
+ },
+ {
+  "word": "nymph",
+  "category": "neither"
+ },
+ {
+  "word": "quarters",
+  "category": "neither"
+ },
+ {
+  "word": "annihilated",
+  "category": "violent"
+ },
+ {
+  "word": "routers",
+  "category": "neither"
+ },
+ {
+  "word": "gun",
+  "category": "violent"
+ },
+ {
+  "word": "militants",
+  "category": "violent"
+ },
+ {
+  "word": "pecha",
+  "category": "neither"
+ },
+ {
+  "word": "pornography",
+  "category": "sexual"
+ },
+ {
+  "word": "sap",
+  "category": "neither"
+ },
+ {
+  "word": "defile",
+  "category": "neither"
+ },
+ {
+  "word": "sings",
+  "category": "neither"
+ },
+ {
+  "word": "assassinate",
+  "category": "violent"
+ },
+ {
+  "word": "boner",
+  "category": "sexual"
+ },
+ {
+  "word": "pole",
+  "category": "neither"
+ },
+ {
+  "word": "seized",
+  "category": "neither"
+ },
+ {
+  "word": "presumes",
+  "category": "neither"
+ },
+ {
+  "word": "sirens",
+  "category": "neither"
+ },
+ {
+  "word": "professed",
+  "category": "neither"
+ },
+ {
+  "word": "wuss",
+  "category": "neither"
+ },
+ {
+  "word": "kocaeli",
+  "category": "neither"
+ },
+ {
+  "word": "doomy",
+  "category": "neither"
+ },
+ {
+  "word": "nasty",
+  "category": "neither"
+ },
+ {
+  "word": "gashes",
+  "category": "violent"
+ },
+ {
+  "word": "raidy",
+  "category": "neither"
+ },
+ {
+  "word": "depart",
+  "category": "neither"
+ },
+ {
+  "word": "distributed",
+  "category": "neither"
+ },
+ {
+  "word": "studding",
+  "category": "neither"
+ },
+ {
+  "word": "bex",
+  "category": "neither"
+ },
+ {
+  "word": "croaking",
+  "category": "neither"
+ },
+ {
+  "word": "genitalia",
+  "category": "sexual"
+ },
+ {
+  "word": "scars",
+  "category": "violent"
+ },
+ {
+  "word": "throttle",
+  "category": "violent"
+ },
+ {
+  "word": "slapped",
+  "category": "violent"
+ },
+ {
+  "word": "clocks",
+  "category": "neither"
+ },
+ {
+  "word": "debug",
+  "category": "neither"
+ },
+ {
+  "word": "cunt",
+  "category": "sexual"
+ },
+ {
+  "word": "covers",
+  "category": "neither"
+ },
+ {
+  "word": "retribution",
+  "category": "neither"
+ },
+ {
+  "word": "row",
+  "category": "neither"
+ },
+ {
+  "word": "shooter",
+  "category": "violent"
+ },
+ {
+  "word": "hollowed",
+  "category": "neither"
+ },
+ {
+  "word": "wrestled",
+  "category": "neither"
+ },
+ {
+  "word": "carroll",
+  "category": "neither"
+ },
+ {
+  "word": "intrinsically",
+  "category": "neither"
+ },
+ {
+  "word": "whiplash",
+  "category": "violent"
+ },
+ {
+  "word": "bombs",
+  "category": "violent"
+ },
+ {
+  "word": "cune",
+  "category": "neither"
+ },
+ {
+  "word": "aldebar",
+  "category": "neither"
+ },
+ {
+  "word": "defiles",
+  "category": "neither"
+ },
+ {
+  "word": "abt",
+  "category": "neither"
+ },
+ {
+  "word": "ribald",
+  "category": "sexual"
+ },
+ {
+  "word": "restructuring",
+  "category": "neither"
+ },
+ {
+  "word": "theoooooo",
+  "category": "neither"
+ },
+ {
+  "word": "falchion",
+  "category": "violent"
+ },
+ {
+  "word": "hyperext",
+  "category": "neither"
+ },
+ {
+  "word": "desiring",
+  "category": "neither"
+ },
+ {
+  "word": "stard",
+  "category": "neither"
+ },
+ {
+  "word": "rogers",
+  "category": "neither"
+ },
+ {
+  "word": "hacker",
+  "category": "neither"
+ },
+ {
+  "word": "neutralized",
+  "category": "neither"
+ },
+ {
+  "word": "sparrer",
+  "category": "neither"
+ },
+ {
+  "word": "cums",
+  "category": "sexual"
+ },
+ {
+  "word": "enslaving",
+  "category": "neither"
+ },
+ {
+  "word": "asons",
+  "category": "neither"
+ },
+ {
+  "word": "killer",
+  "category": "violent"
+ },
+ {
+  "word": "revolver",
+  "category": "violent"
+ },
+ {
+  "word": "dead",
+  "category": "neither"
+ },
+ {
+  "word": "teher",
+  "category": "neither"
+ },
+ {
+  "word": "marvin",
+  "category": "neither"
+ },
+ {
+  "word": "spinner",
+  "category": "neither"
+ },
+ {
+  "word": "technicians",
+  "category": "neither"
+ },
+ {
+  "word": "jeunes",
+  "category": "neither"
+ },
+ {
+  "word": "xion",
+  "category": "neither"
+ },
+ {
+  "word": "shaftes",
+  "category": "neither"
+ },
+ {
+  "word": "isolating",
+  "category": "neither"
+ },
+ {
+  "word": "fap",
+  "category": "sexual"
+ },
+ {
+  "word": "alar",
+  "category": "neither"
+ },
+ {
+  "word": "quiver",
+  "category": "neither"
+ },
+ {
+  "word": "sprightlier",
+  "category": "neither"
+ },
+ {
+  "word": "bearing",
+  "category": "neither"
+ },
+ {
+  "word": "teared",
+  "category": "neither"
+ },
+ {
+  "word": "auks",
+  "category": "neither"
+ },
+ {
+  "word": "wad",
+  "category": "neither"
+ },
+ {
+  "word": "visits",
+  "category": "neither"
+ },
+ {
+  "word": "ravishing",
+  "category": "neither"
+ },
+ {
+  "word": "belabour",
+  "category": "neither"
+ },
+ {
+  "word": "binds",
+  "category": "neither"
+ },
+ {
+  "word": "encoraja",
+  "category": "neither"
+ },
+ {
+  "word": "overpowering",
+  "category": "neither"
+ },
+ {
+  "word": "bearer",
+  "category": "neither"
+ },
+ {
+  "word": "drilling",
+  "category": "neither"
+ },
+ {
+  "word": "oppressed",
+  "category": "neither"
+ },
+ {
+  "word": "willed",
+  "category": "neither"
+ },
+ {
+  "word": "clocking",
+  "category": "neither"
+ },
+ {
+  "word": "bhut",
+  "category": "neither"
+ },
+ {
+  "word": "detonated",
+  "category": "violent"
+ },
+ {
+  "word": "pansy",
+  "category": "neither"
+ },
+ {
+  "word": "furies",
+  "category": "neither"
+ },
+ {
+  "word": "ibb",
+  "category": "neither"
+ },
+ {
+  "word": "severs",
+  "category": "violent"
+ },
+ {
+  "word": "jerk",
+  "category": "neither"
+ },
+ {
+  "word": "merriness",
+  "category": "neither"
+ },
+ {
+  "word": "abduct",
+  "category": "neither"
+ },
+ {
+  "word": "trampling",
+  "category": "violent"
+ },
+ {
+  "word": "sensuous",
+  "category": "neither"
+ },
+ {
+  "word": "sexuality",
+  "category": "sexual"
+ },
+ {
+  "word": "baring",
+  "category": "neither"
+ },
+ {
+  "word": "wrecked",
+  "category": "neither"
+ },
+ {
+  "word": "futon",
+  "category": "neither"
+ },
+ {
+  "word": "remembrances",
+  "category": "neither"
+ },
+ {
+  "word": "schlong",
+  "category": "sexual"
+ },
+ {
+  "word": "fractures",
+  "category": "violent"
+ },
+ {
+  "word": "striping",
+  "category": "neither"
+ },
+ {
+  "word": "drawing",
+  "category": "neither"
+ },
+ {
+  "word": "still",
+  "category": "neither"
+ },
+ {
+  "word": "pain",
+  "category": "neither"
+ },
+ {
+  "word": "indifference",
+  "category": "neither"
+ },
+ {
+  "word": "unexpected",
+  "category": "neither"
+ },
+ {
+  "word": "wailing",
+  "category": "neither"
+ },
+ {
+  "word": "somberly",
+  "category": "neither"
+ },
+ {
+  "word": "betrothal",
+  "category": "neither"
+ },
+ {
+  "word": "beau",
+  "category": "neither"
+ },
+ {
+  "word": "affairs",
+  "category": "neither"
+ },
+ {
+  "word": "wirework",
+  "category": "neither"
+ },
+ {
+  "word": "whorehouse",
+  "category": "sexual"
+ },
+ {
+  "word": "torched",
+  "category": "neither"
+ },
+ {
+  "word": "jabbed",
+  "category": "violent"
+ },
+ {
+  "word": "fray",
+  "category": "neither"
+ },
+ {
+  "word": "johns",
+  "category": "neither"
+ },
+ {
+  "word": "gentiles",
+  "category": "neither"
+ },
+ {
+  "word": "nuzzling",
+  "category": "neither"
+ },
+ {
+  "word": "routed",
+  "category": "neither"
+ },
+ {
+  "word": "caged",
+  "category": "neither"
+ },
+ {
+  "word": "darting",
+  "category": "neither"
+ },
+ {
+  "word": "groomed",
+  "category": "neither"
+ },
+ {
+  "word": "zambesi",
+  "category": "neither"
+ },
+ {
+  "word": "shredd",
+  "category": "neither"
+ },
+ {
+  "word": "uncircum",
+  "category": "neither"
+ },
+ {
+  "word": "alcop",
+  "category": "neither"
+ },
+ {
+  "word": "sato",
+  "category": "neither"
+ },
+ {
+  "word": "splinters",
+  "category": "neither"
+ },
+ {
+  "word": "latine",
+  "category": "neither"
+ },
+ {
+  "word": "odalisque",
+  "category": "sexual"
+ },
+ {
+  "word": "sexed",
+  "category": "sexual"
+ },
+ {
+  "word": "muffy",
+  "category": "neither"
+ },
+ {
+  "word": "skewers",
+  "category": "neither"
+ },
+ {
+  "word": "offers",
+  "category": "neither"
+ },
+ {
+  "word": "burials",
+  "category": "neither"
+ },
+ {
+  "word": "refrigerator",
+  "category": "neither"
+ },
+ {
+  "word": "coupled",
+  "category": "neither"
+ },
+ {
+  "word": "graves",
+  "category": "neither"
+ },
+ {
+  "word": "fires",
+  "category": "neither"
+ },
+ {
+  "word": "woods",
+  "category": "neither"
+ },
+ {
+  "word": "anguished",
+  "category": "neither"
+ },
+ {
+  "word": "stripper",
+  "category": "sexual"
+ },
+ {
+  "word": "overheating",
+  "category": "neither"
+ },
+ {
+  "word": "arsed",
+  "category": "neither"
+ },
+ {
+  "word": "mirage",
+  "category": "neither"
+ },
+ {
+  "word": "blips",
+  "category": "neither"
+ },
+ {
+  "word": "hobble",
+  "category": "neither"
+ },
+ {
+  "word": "pummelled",
+  "category": "violent"
+ },
+ {
+  "word": "snuffing",
+  "category": "neither"
+ },
+ {
+  "word": "orgasm",
+  "category": "sexual"
+ },
+ {
+  "word": "vandals",
+  "category": "neither"
+ },
+ {
+  "word": "sleepings",
+  "category": "neither"
+ },
+ {
+  "word": "fucker",
+  "category": "sexual"
+ },
+ {
+  "word": "axes",
+  "category": "neither"
+ },
+ {
+  "word": "canned",
+  "category": "neither"
+ },
+ {
+  "word": "revelry",
+  "category": "neither"
+ },
+ {
+  "word": "retiring",
+  "category": "neither"
+ },
+ {
+  "word": "gnaw",
+  "category": "neither"
+ },
+ {
+  "word": "knobs",
+  "category": "neither"
+ },
+ {
+  "word": "petted",
+  "category": "neither"
+ },
+ {
+  "word": "eviden",
+  "category": "neither"
+ },
+ {
+  "word": "strapped",
+  "category": "neither"
+ },
+ {
+  "word": "flagellate",
+  "category": "violent"
+ },
+ {
+  "word": "thrashing",
+  "category": "violent"
+ },
+ {
+  "word": "piny",
+  "category": "neither"
+ },
+ {
+  "word": "splintery",
+  "category": "neither"
+ },
+ {
+  "word": "igen",
+  "category": "neither"
+ },
+ {
+  "word": "jairus",
+  "category": "neither"
+ },
+ {
+  "word": "member",
+  "category": "neither"
+ },
+ {
+  "word": "shaming",
+  "category": "neither"
+ },
+ {
+  "word": "bopped",
+  "category": "neither"
+ },
+ {
+  "word": "blasting",
+  "category": "neither"
+ },
+ {
+  "word": "urethra",
+  "category": "neither"
+ },
+ {
+  "word": "spatula",
+  "category": "neither"
+ },
+ {
+  "word": "tithe",
+  "category": "neither"
+ },
+ {
+  "word": "wooded",
+  "category": "neither"
+ },
+ {
+  "word": "chains",
+  "category": "neither"
+ },
+ {
+  "word": "perishing",
+  "category": "neither"
+ },
+ {
+  "word": "chastity",
+  "category": "sexual"
+ },
+ {
+  "word": "detained",
+  "category": "neither"
+ },
+ {
+  "word": "harms",
+  "category": "violent"
+ },
+ {
+  "word": "pike",
+  "category": "neither"
+ },
+ {
+  "word": "gaged",
+  "category": "neither"
+ },
+ {
+  "word": "massacred",
+  "category": "violent"
+ },
+ {
+  "word": "balms",
+  "category": "neither"
+ },
+ {
+  "word": "anner",
+  "category": "neither"
+ },
+ {
+  "word": "creamy",
+  "category": "neither"
+ },
+ {
+  "word": "plebs",
+  "category": "neither"
+ },
+ {
+  "word": "battery",
+  "category": "neither"
+ },
+ {
+  "word": "torches",
+  "category": "neither"
+ },
+ {
+  "word": "compression",
+  "category": "neither"
+ },
+ {
+  "word": "glasses",
+  "category": "neither"
+ },
+ {
+  "word": "chopper",
+  "category": "neither"
+ },
+ {
+  "word": "cages",
+  "category": "neither"
+ },
+ {
+  "word": "baggies",
+  "category": "neither"
+ },
+ {
+  "word": "tease",
+  "category": "neither"
+ },
+ {
+  "word": "meleeing",
+  "category": "violent"
+ },
+ {
+  "word": "drab",
+  "category": "neither"
+ },
+ {
+  "word": "gravey",
+  "category": "neither"
+ },
+ {
+  "word": "neutroph",
+  "category": "neither"
+ },
+ {
+  "word": "decomposed",
+  "category": "neither"
+ },
+ {
+  "word": "grapple",
+  "category": "neither"
+ },
+ {
+  "word": "belter",
+  "category": "neither"
+ },
+ {
+  "word": "harmed",
+  "category": "violent"
+ },
+ {
+  "word": "chopping",
+  "category": "neither"
+ },
+ {
+  "word": "gagged",
+  "category": "neither"
+ },
+ {
+  "word": "phallus",
+  "category": "sexual"
+ },
+ {
+  "word": "auguries",
+  "category": "neither"
+ },
+ {
+  "word": "zuer",
+  "category": "neither"
+ },
+ {
+  "word": "squirting",
+  "category": "neither"
+ },
+ {
+  "word": "rams",
+  "category": "neither"
+ },
+ {
+  "word": "pound",
+  "category": "neither"
+ },
+ {
+  "word": "begetting",
+  "category": "neither"
+ },
+ {
+  "word": "theia",
+  "category": "neither"
+ },
+ {
+  "word": "shoved",
+  "category": "neither"
+ },
+ {
+  "word": "sears",
+  "category": "neither"
+ },
+ {
+  "word": "wantons",
+  "category": "sexual"
+ },
+ {
+  "word": "glass",
+  "category": "neither"
+ },
+ {
+  "word": "release",
+  "category": "neither"
+ },
+ {
+  "word": "strateg",
+  "category": "neither"
+ },
+ {
+  "word": "blindfolded",
+  "category": "neither"
+ },
+ {
+  "word": "scorched",
+  "category": "neither"
+ },
+ {
+  "word": "rna",
+  "category": "neither"
+ },
+ {
+  "word": "koremitsu",
+  "category": "neither"
+ },
+ {
+  "word": "swinging",
+  "category": "neither"
+ },
+ {
+  "word": "perversion",
+  "category": "sexual"
+ },
+ {
+  "word": "terminate",
+  "category": "neither"
+ },
+ {
+  "word": "knob",
+  "category": "neither"
+ },
+ {
+  "word": "quarrels",
+  "category": "neither"
+ },
+ {
+  "word": "daffadown",
+  "category": "neither"
+ },
+ {
+  "word": "asaph",
+  "category": "neither"
+ },
+ {
+  "word": "snips",
+  "category": "neither"
+ },
+ {
+  "word": "strips",
+  "category": "neither"
+ },
+ {
+  "word": "tob",
+  "category": "neither"
+ },
+ {
+  "word": "rapies",
+  "category": "neither"
+ },
+ {
+  "word": "shatters",
+  "category": "neither"
+ },
+ {
+  "word": "remembered",
+  "category": "neither"
+ },
+ {
+  "word": "hurr",
+  "category": "neither"
+ },
+ {
+  "word": "spitted",
+  "category": "neither"
+ },
+ {
+  "word": "kaiser",
+  "category": "neither"
+ },
+ {
+  "word": "enforcers",
+  "category": "neither"
+ },
+ {
+  "word": "perspect",
+  "category": "neither"
+ },
+ {
+  "word": "faggots",
+  "category": "sexual"
+ },
+ {
+  "word": "stones",
+  "category": "neither"
+ },
+ {
+  "word": "berated",
+  "category": "neither"
+ },
+ {
+  "word": "patel",
+  "category": "neither"
+ },
+ {
+  "word": "wrecks",
+  "category": "neither"
+ },
+ {
+  "word": "cutter",
+  "category": "neither"
+ },
+ {
+  "word": "ferret",
+  "category": "neither"
+ },
+ {
+  "word": "riding",
+  "category": "neither"
+ },
+ {
+  "word": "deader",
+  "category": "neither"
+ },
+ {
+  "word": "fraying",
+  "category": "neither"
+ },
+ {
+  "word": "ammunition",
+  "category": "violent"
+ },
+ {
+  "word": "trick",
+  "category": "neither"
+ },
+ {
+  "word": "ostensibly",
+  "category": "neither"
+ },
+ {
+  "word": "buggers",
+  "category": "sexual"
+ },
+ {
+  "word": "lover",
+  "category": "sexual"
+ },
+ {
+  "word": "unexpl",
+  "category": "neither"
+ },
+ {
+  "word": "relations",
+  "category": "neither"
+ },
+ {
+  "word": "detonate",
+  "category": "violent"
+ },
+ {
+  "word": "sprays",
+  "category": "neither"
+ },
+ {
+  "word": "hoed",
+  "category": "neither"
+ },
+ {
+  "word": "harassing",
+  "category": "neither"
+ },
+ {
+  "word": "arsehole",
+  "category": "neither"
+ },
+ {
+  "word": "reer",
+  "category": "neither"
+ },
+ {
+  "word": "tantalizing",
+  "category": "neither"
+ },
+ {
+  "word": "wrestles",
+  "category": "neither"
+ },
+ {
+  "word": "caress",
+  "category": "neither"
+ },
+ {
+  "word": "punish",
+  "category": "neither"
+ },
+ {
+  "word": "shred",
+  "category": "neither"
+ },
+ {
+  "word": "bated",
+  "category": "neither"
+ },
+ {
+  "word": "razors",
+  "category": "neither"
+ },
+ {
+  "word": "jostled",
+  "category": "neither"
+ },
+ {
+  "word": "buns",
+  "category": "neither"
+ },
+ {
+  "word": "conscience",
+  "category": "neither"
+ },
+ {
+  "word": "nticed",
+  "category": "neither"
+ },
+ {
+  "word": "opper",
+  "category": "neither"
+ },
+ {
+  "word": "fuck",
+  "category": "sexual"
+ },
+ {
+  "word": "nude",
+  "category": "neither"
+ },
+ {
+  "word": "potency",
+  "category": "neither"
+ },
+ {
+  "word": "avenge",
+  "category": "neither"
+ },
+ {
+  "word": "bawdy",
+  "category": "sexual"
+ },
+ {
+  "word": "hungry",
+  "category": "neither"
+ },
+ {
+  "word": "engender",
+  "category": "neither"
+ },
+ {
+  "word": "johnson",
+  "category": "neither"
+ },
+ {
+  "word": "rockfall",
+  "category": "neither"
+ },
+ {
+  "word": "puncturing",
+  "category": "neither"
+ },
+ {
+  "word": "issue",
+  "category": "neither"
+ },
+ {
+  "word": "slas",
+  "category": "neither"
+ },
+ {
+  "word": "bespread",
+  "category": "neither"
+ },
+ {
+  "word": "wreck",
+  "category": "neither"
+ },
+ {
+  "word": "devours",
+  "category": "neither"
+ },
+ {
+  "word": "lady",
+  "category": "neither"
+ },
+ {
+  "word": "hooker",
+  "category": "sexual"
+ },
+ {
+  "word": "imprison",
+  "category": "neither"
+ },
+ {
+  "word": "ramer",
+  "category": "neither"
+ },
+ {
+  "word": "prae",
+  "category": "neither"
+ },
+ {
+  "word": "tugged",
+  "category": "neither"
+ },
+ {
+  "word": "destroy",
+  "category": "neither"
+ },
+ {
+  "word": "casualty",
+  "category": "violent"
+ },
+ {
+  "word": "harrows",
+  "category": "neither"
+ },
+ {
+  "word": "whip",
+  "category": "violent"
+ },
+ {
+  "word": "groaning",
+  "category": "neither"
+ },
+ {
+  "word": "bianca",
+  "category": "neither"
+ },
+ {
+  "word": "transfix",
+  "category": "neither"
+ },
+ {
+  "word": "scala",
+  "category": "neither"
+ },
+ {
+  "word": "cels",
+  "category": "neither"
+ },
+ {
+  "word": "saboteur",
+  "category": "neither"
+ },
+ {
+  "word": "slayers",
+  "category": "violent"
+ },
+ {
+  "word": "undo",
+  "category": "neither"
+ },
+ {
+  "word": "paining",
+  "category": "neither"
+ },
+ {
+  "word": "softens",
+  "category": "neither"
+ },
+ {
+  "word": "fintech",
+  "category": "neither"
+ },
+ {
+  "word": "refinancing",
+  "category": "neither"
+ },
+ {
+  "word": "munition",
+  "category": "violent"
+ },
+ {
+  "word": "pellet",
+  "category": "neither"
+ },
+ {
+  "word": "rods",
+  "category": "neither"
+ },
+ {
+  "word": "war",
+  "category": "violent"
+ },
+ {
+  "word": "revengd",
+  "category": "neither"
+ },
+ {
+  "word": "scrape",
+  "category": "neither"
+ },
+ {
+  "word": "smash",
+  "category": "neither"
+ },
+ {
+  "word": "bullet",
+  "category": "violent"
+ },
+ {
+  "word": "pelic",
+  "category": "neither"
+ },
+ {
+  "word": "shame",
+  "category": "neither"
+ },
+ {
+  "word": "storing",
+  "category": "neither"
+ },
+ {
+  "word": "asshole",
+  "category": "neither"
+ },
+ {
+  "word": "dislocate",
+  "category": "neither"
+ },
+ {
+  "word": "railing",
+  "category": "neither"
+ },
+ {
+  "word": "bumper",
+  "category": "neither"
+ },
+ {
+  "word": "brazen",
+  "category": "neither"
+ },
+ {
+  "word": "sleeps",
+  "category": "neither"
+ },
+ {
+  "word": "trusses",
+  "category": "neither"
+ },
+ {
+  "word": "ventricles",
+  "category": "neither"
+ },
+ {
+  "word": "venomed",
+  "category": "neither"
+ },
+ {
+  "word": "stomping",
+  "category": "neither"
+ },
+ {
+  "word": "sprains",
+  "category": "violent"
+ },
+ {
+  "word": "binded",
+  "category": "neither"
+ },
+ {
+  "word": "clobber",
+  "category": "violent"
+ },
+ {
+  "word": "erect",
+  "category": "neither"
+ },
+ {
+  "word": "roubili",
+  "category": "neither"
+ },
+ {
+  "word": "melee",
+  "category": "violent"
+ },
+ {
+  "word": "aggressive",
+  "category": "neither"
+ },
+ {
+  "word": "concent",
+  "category": "neither"
+ },
+ {
+  "word": "deepthroated",
+  "category": "sexual"
+ },
+ {
+  "word": "flirts",
+  "category": "sexual"
+ },
+ {
+  "word": "disembowel",
+  "category": "violent"
+ },
+ {
+  "word": "scorcher",
+  "category": "neither"
+ },
+ {
+  "word": "migrant",
+  "category": "neither"
+ },
+ {
+  "word": "fettered",
+  "category": "neither"
+ },
+ {
+  "word": "choke",
+  "category": "violent"
+ },
+ {
+  "word": "cags",
+  "category": "neither"
+ },
+ {
+  "word": "bonkers",
+  "category": "neither"
+ },
+ {
+  "word": "buttock",
+  "category": "neither"
+ },
+ {
+  "word": "misde",
+  "category": "neither"
+ },
+ {
+  "word": "inlet",
+  "category": "neither"
+ },
+ {
+  "word": "advanced",
+  "category": "neither"
+ },
+ {
+  "word": "buxom",
+  "category": "sexual"
+ },
+ {
+  "word": "crippled",
+  "category": "violent"
+ },
+ {
+  "word": "shelling",
+  "category": "violent"
+ },
+ {
+  "word": "fargo",
+  "category": "neither"
+ },
+ {
+  "word": "covered",
+  "category": "neither"
+ },
+ {
+  "word": "paralyzed",
+  "category": "neither"
+ },
+ {
+  "word": "flirted",
+  "category": "sexual"
+ },
+ {
+  "word": "rotting",
+  "category": "neither"
+ },
+ {
+  "word": "rump",
+  "category": "neither"
+ },
+ {
+  "word": "mooed",
+  "category": "neither"
+ },
+ {
+  "word": "raging",
+  "category": "neither"
+ },
+ {
+  "word": "pulpy",
+  "category": "neither"
+ },
+ {
+  "word": "undetected",
+  "category": "neither"
+ },
+ {
+  "word": "menses",
+  "category": "neither"
+ },
+ {
+  "word": "skewer",
+  "category": "neither"
+ },
+ {
+  "word": "drill",
+  "category": "neither"
+ },
+ {
+  "word": "jabbing",
+  "category": "violent"
+ },
+ {
+  "word": "wiener",
+  "category": "sexual"
+ },
+ {
+  "word": "unfet",
+  "category": "neither"
+ },
+ {
+  "word": "poked",
+  "category": "neither"
+ },
+ {
+  "word": "bushy",
+  "category": "neither"
+ },
+ {
+  "word": "nader",
+  "category": "neither"
+ },
+ {
+  "word": "precum",
+  "category": "sexual"
+ },
+ {
+  "word": "profligate",
+  "category": "neither"
+ },
+ {
+  "word": "spitting",
+  "category": "neither"
+ },
+ {
+  "word": "displease",
+  "category": "neither"
+ },
+ {
+  "word": "sporty",
+  "category": "neither"
+ },
+ {
+  "word": "exposing",
+  "category": "neither"
+ },
+ {
+  "word": "smack",
+  "category": "violent"
+ },
+ {
+  "word": "strikes",
+  "category": "violent"
+ },
+ {
+  "word": "gallows",
+  "category": "violent"
+ },
+ {
+  "word": "covering",
+  "category": "neither"
+ },
+ {
+  "word": "erectile",
+  "category": "sexual"
+ },
+ {
+  "word": "dominant",
+  "category": "neither"
+ },
+ {
+  "word": "caned",
+  "category": "violent"
+ },
+ {
+  "word": "respl",
+  "category": "neither"
+ },
+ {
+  "word": "stent",
+  "category": "neither"
+ },
+ {
+  "word": "traumatic",
+  "category": "neither"
+ },
+ {
+  "word": "enrapt",
+  "category": "neither"
+ },
+ {
+  "word": "sanctioned",
+  "category": "neither"
+ },
+ {
+  "word": "sacks",
+  "category": "neither"
+ },
+ {
+  "word": "plugging",
+  "category": "neither"
+ },
+ {
+  "word": "rill",
+  "category": "neither"
+ },
+ {
+  "word": "aubergine",
+  "category": "neither"
+ },
+ {
+  "word": "howled",
+  "category": "neither"
+ },
+ {
+  "word": "encounter",
+  "category": "neither"
+ },
+ {
+  "word": "tapes",
+  "category": "neither"
+ },
+ {
+  "word": "nuzzle",
+  "category": "neither"
+ },
+ {
+  "word": "razzed",
+  "category": "neither"
+ },
+ {
+  "word": "smooched",
+  "category": "neither"
+ },
+ {
+  "word": "sprain",
+  "category": "violent"
+ },
+ {
+  "word": "lusty",
+  "category": "sexual"
+ },
+ {
+  "word": "raided",
+  "category": "violent"
+ },
+ {
+  "word": "brandy",
+  "category": "neither"
+ },
+ {
+  "word": "breed",
+  "category": "neither"
+ },
+ {
+  "word": "junkies",
+  "category": "neither"
+ },
+ {
+  "word": "servic",
+  "category": "neither"
+ },
+ {
+  "word": "cater",
+  "category": "neither"
+ },
+ {
+  "word": "cap",
+  "category": "neither"
+ },
+ {
+  "word": "anse",
+  "category": "neither"
+ },
+ {
+  "word": "symfony",
+  "category": "neither"
+ },
+ {
+  "word": "seeds",
+  "category": "neither"
+ },
+ {
+  "word": "cocks",
+  "category": "sexual"
+ },
+ {
+  "word": "practis",
+  "category": "neither"
+ },
+ {
+  "word": "pold",
+  "category": "neither"
+ },
+ {
+  "word": "blunter",
+  "category": "neither"
+ },
+ {
+  "word": "organises",
+  "category": "neither"
+ },
+ {
+  "word": "breaux",
+  "category": "neither"
+ },
+ {
+  "word": "raiding",
+  "category": "violent"
+ },
+ {
+  "word": "swives",
+  "category": "sexual"
+ },
+ {
+  "word": "memberes",
+  "category": "neither"
+ },
+ {
+  "word": "crunches",
+  "category": "neither"
+ },
+ {
+  "word": "subtracted",
+  "category": "neither"
+ },
+ {
+  "word": "mating",
+  "category": "sexual"
+ },
+ {
+  "word": "fapped",
+  "category": "sexual"
+ },
+ {
+  "word": "ruind",
+  "category": "neither"
+ },
+ {
+  "word": "importune",
+  "category": "neither"
+ },
+ {
+  "word": "glaz",
+  "category": "neither"
+ },
+ {
+  "word": "ilt",
+  "category": "neither"
+ },
+ {
+  "word": "torture",
+  "category": "violent"
+ },
+ {
+  "word": "chainings",
+  "category": "neither"
+ },
+ {
+  "word": "mace",
+  "category": "violent"
+ },
+ {
+  "word": "dominated",
+  "category": "neither"
+ },
+ {
+  "word": "bats",
+  "category": "neither"
+ },
+ {
+  "word": "thrust",
+  "category": "neither"
+ },
+ {
+  "word": "avenged",
+  "category": "neither"
+ },
+ {
+  "word": "skeleton",
+  "category": "neither"
+ },
+ {
+  "word": "metaphorically",
+  "category": "neither"
+ },
+ {
+  "word": "lancing",
+  "category": "neither"
+ },
+ {
+  "word": "pansies",
+  "category": "neither"
+ },
+ {
+  "word": "fornicate",
+  "category": "sexual"
+ },
+ {
+  "word": "wounding",
+  "category": "violent"
+ },
+ {
+  "word": "hurted",
+  "category": "violent"
+ },
+ {
+  "word": "abdicated",
+  "category": "neither"
+ },
+ {
+  "word": "roderick",
+  "category": "neither"
+ },
+ {
+  "word": "tragedie",
+  "category": "neither"
+ },
+ {
+  "word": "blinding",
+  "category": "neither"
+ },
+ {
+  "word": "emphasizing",
+  "category": "neither"
+ },
+ {
+  "word": "bravo",
+  "category": "neither"
+ },
+ {
+  "word": "generation",
+  "category": "neither"
+ },
+ {
+  "word": "vicious",
+  "category": "violent"
+ },
+ {
+  "word": "hard",
+  "category": "neither"
+ },
+ {
+  "word": "conceived",
+  "category": "neither"
+ },
+ {
+  "word": "bolting",
+  "category": "neither"
+ },
+ {
+  "word": "renders",
+  "category": "neither"
+ },
+ {
+  "word": "forcer",
+  "category": "neither"
+ },
+ {
+  "word": "bartol",
+  "category": "neither"
+ },
+ {
+  "word": "matted",
+  "category": "neither"
+ },
+ {
+  "word": "purposely",
+  "category": "neither"
+ },
+ {
+  "word": "glaives",
+  "category": "violent"
+ },
+ {
+  "word": "passes",
+  "category": "neither"
+ },
+ {
+  "word": "pellets",
+  "category": "neither"
+ },
+ {
+  "word": "nocturnal",
+  "category": "neither"
+ },
+ {
+  "word": "fleshly",
+  "category": "sexual"
+ },
+ {
+  "word": "efficit",
+  "category": "neither"
+ },
+ {
+  "word": "segregate",
+  "category": "neither"
+ },
+ {
+  "word": "cany",
+  "category": "neither"
+ },
+ {
+  "word": "exten",
+  "category": "neither"
+ },
+ {
+  "word": "mines",
+  "category": "neither"
+ },
+ {
+  "word": "torpedo",
+  "category": "violent"
+ },
+ {
+  "word": "restrain",
+  "category": "neither"
+ },
+ {
+  "word": "dragg",
+  "category": "neither"
+ },
+ {
+  "word": "allures",
+  "category": "neither"
+ },
+ {
+  "word": "imprisoned",
+  "category": "neither"
+ },
+ {
+  "word": "christchurch",
+  "category": "neither"
+ },
+ {
+  "word": "blowes",
+  "category": "neither"
+ },
+ {
+  "word": "destroys",
+  "category": "neither"
+ },
+ {
+  "word": "tormenting",
+  "category": "violent"
+ },
+ {
+  "word": "preyed",
+  "category": "neither"
+ },
+ {
+  "word": "bites",
+  "category": "neither"
+ },
+ {
+  "word": "spanks",
+  "category": "violent"
+ },
+ {
+  "word": "hitlist",
+  "category": "violent"
+ },
+ {
+  "word": "oozy",
+  "category": "neither"
+ },
+ {
+  "word": "mugging",
+  "category": "violent"
+ },
+ {
+  "word": "oory",
+  "category": "neither"
+ },
+ {
+  "word": "varicious",
+  "category": "neither"
+ },
+ {
+  "word": "rectum",
+  "category": "neither"
+ },
+ {
+  "word": "osoph",
+  "category": "neither"
+ },
+ {
+  "word": "jackd",
+  "category": "neither"
+ },
+ {
+  "word": "tangerang",
+  "category": "neither"
+ },
+ {
+  "word": "garters",
+  "category": "neither"
+ },
+ {
+  "word": "broader",
+  "category": "neither"
+ },
+ {
+  "word": "slayed",
+  "category": "violent"
+ },
+ {
+  "word": "taser",
+  "category": "violent"
+ },
+ {
+  "word": "carjack",
+  "category": "violent"
+ },
+ {
+  "word": "refinished",
+  "category": "neither"
+ },
+ {
+  "word": "loot",
+  "category": "neither"
+ },
+ {
+  "word": "grizz",
+  "category": "neither"
+ },
+ {
+  "word": "naked",
+  "category": "neither"
+ },
+ {
+  "word": "mammoths",
+  "category": "neither"
+ },
+ {
+  "word": "pimper",
+  "category": "sexual"
+ },
+ {
+  "word": "ipacci",
+  "category": "neither"
+ },
+ {
+  "word": "prepuce",
+  "category": "sexual"
+ },
+ {
+  "word": "hawkins",
+  "category": "neither"
+ },
+ {
+  "word": "pap",
+  "category": "neither"
+ },
+ {
+  "word": "muskets",
+  "category": "violent"
+ },
+ {
+  "word": "enclosure",
+  "category": "neither"
+ },
+ {
+  "word": "efor",
+  "category": "neither"
+ },
+ {
+  "word": "rammed",
+  "category": "neither"
+ },
+ {
+  "word": "bloodlust",
+  "category": "violent"
+ },
+ {
+  "word": "napalm",
+  "category": "violent"
+ },
+ {
+  "word": "temptress",
+  "category": "sexual"
+ },
+ {
+  "word": "cleanser",
+  "category": "neither"
+ },
+ {
+  "word": "moribund",
+  "category": "neither"
+ },
+ {
+  "word": "bzz",
+  "category": "neither"
+ },
+ {
+  "word": "kick",
+  "category": "neither"
+ },
+ {
+  "word": "eloquent",
+  "category": "neither"
+ },
+ {
+  "word": "motherfucker",
+  "category": "sexual"
+ },
+ {
+  "word": "circumcised",
+  "category": "sexual"
+ },
+ {
+  "word": "punctured",
+  "category": "neither"
+ },
+ {
+  "word": "hooters",
+  "category": "sexual"
+ },
+ {
+  "word": "bobb",
+  "category": "neither"
+ },
+ {
+  "word": "yna",
+  "category": "neither"
+ },
+ {
+  "word": "nailed",
+  "category": "neither"
+ },
+ {
+  "word": "grazing",
+  "category": "neither"
+ },
+ {
+  "word": "prostitute",
+  "category": "sexual"
+ },
+ {
+  "word": "hesitating",
+  "category": "neither"
+ },
+ {
+  "word": "threaten",
+  "category": "neither"
+ },
+ {
+  "word": "scimitar",
+  "category": "violent"
+ },
+ {
+  "word": "inflo",
+  "category": "neither"
+ },
+ {
+  "word": "bugger",
+  "category": "sexual"
+ },
+ {
+  "word": "belsh",
+  "category": "neither"
+ },
+ {
+  "word": "bougainvillea",
+  "category": "neither"
+ },
+ {
+  "word": "hemlock",
+  "category": "neither"
+ },
+ {
+  "word": "feld",
+  "category": "neither"
+ },
+ {
+  "word": "pikes",
+  "category": "neither"
+ },
+ {
+  "word": "nuts",
+  "category": "neither"
+ },
+ {
+  "word": "holocaust",
+  "category": "violent"
+ },
+ {
+  "word": "sime",
+  "category": "neither"
+ },
+ {
+  "word": "chak",
+  "category": "neither"
+ },
+ {
+  "word": "coitus",
+  "category": "sexual"
+ },
+ {
+  "word": "asie",
+  "category": "neither"
+ },
+ {
+  "word": "chained",
+  "category": "neither"
+ },
+ {
+  "word": "burying",
+  "category": "neither"
+ },
+ {
+  "word": "injures",
+  "category": "violent"
+ },
+ {
+  "word": "ward",
+  "category": "neither"
+ },
+ {
+  "word": "poly",
+  "category": "neither"
+ },
+ {
+  "word": "impregnate",
+  "category": "sexual"
+ },
+ {
+  "word": "homos",
+  "category": "sexual"
+ },
+ {
+  "word": "shambles",
+  "category": "neither"
+ },
+ {
+  "word": "demolishing",
+  "category": "neither"
+ },
+ {
+  "word": "payne",
+  "category": "neither"
+ },
+ {
+  "word": "pricking",
+  "category": "neither"
+ },
+ {
+  "word": "slugs",
+  "category": "neither"
+ },
+ {
+  "word": "climaxed",
+  "category": "sexual"
+ },
+ {
+  "word": "mugged",
+  "category": "violent"
+ },
+ {
+  "word": "throttles",
+  "category": "violent"
+ },
+ {
+  "word": "sniffle",
+  "category": "neither"
+ },
+ {
+  "word": "claret",
+  "category": "neither"
+ },
+ {
+  "word": "afromontane",
+  "category": "neither"
+ },
+ {
+  "word": "martyrs",
+  "category": "neither"
+ },
+ {
+  "word": "thighed",
+  "category": "neither"
+ },
+ {
+  "word": "wards",
+  "category": "neither"
+ },
+ {
+  "word": "ensnav",
+  "category": "neither"
+ },
+ {
+  "word": "boxy",
+  "category": "neither"
+ },
+ {
+  "word": "tumbler",
+  "category": "neither"
+ },
+ {
+  "word": "guts",
+  "category": "neither"
+ },
+ {
+  "word": "elves",
+  "category": "neither"
+ },
+ {
+  "word": "smothering",
+  "category": "violent"
+ },
+ {
+  "word": "norwich",
+  "category": "neither"
+ },
+ {
+  "word": "fractured",
+  "category": "violent"
+ },
+ {
+  "word": "blinds",
+  "category": "neither"
+ },
+ {
+  "word": "ruiner",
+  "category": "neither"
+ },
+ {
+  "word": "dugs",
+  "category": "neither"
+ },
+ {
+  "word": "headbutting",
+  "category": "violent"
+ },
+ {
+  "word": "repr",
+  "category": "neither"
+ },
+ {
+  "word": "slaughters",
+  "category": "violent"
+ }
+]
