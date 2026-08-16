@@ -406,6 +406,28 @@ def _roster_population(kind):
 # slot: the one route that measures
 # ---------------------------------------------------------------------------
 
+def _edge_between(model_ids):
+    """`{base, aligned, op}` if these two are a declared ALIGNING edge, else None.
+
+    **THE LICENCE TO READ MOVEMENT, AND IT IS NOT THE CALLER'S TO ASSERT.** Any
+    two models can be pooled; the sum is then a union of vocabularies and the
+    difference between them is not a treatment effect. Only a declared aligning
+    edge makes `dP` the thing alignment did.
+
+    Order-insensitive on input and order-DEFINITE on output: the caller may name
+    the arms either way round, and `base` in the result is always the parent, so
+    a sign error cannot enter by the order someone typed two ids.
+    """
+    if len(model_ids) != 2:
+        return None
+    from . import roster
+    a, b = model_ids
+    for p, op, c in (roster.load().get("edges") or []):
+        if op in roster.ALIGNING and {p, c} == {a, b}:
+            return {"base": p, "aligned": c, "op": op}
+    return None
+
+
 def _slot(prompt, model_ids, k):
     """Pooled word probabilities at the blank, via `twp.expand`.
 
@@ -429,6 +451,7 @@ def _slot(prompt, model_ids, k):
     from .checkpoint import Checkpoint
 
     pooled, res_sum, skipped, n_ok = {}, {}, None, 0
+    per_arm = {}
     with _SLOT_LOCK:
         #: **THE CAP CANNOT BE SMALLER THAN THIS REQUEST.** A pooled call over
         #: three checkpoints under a cap of 2 would evict the first model before
@@ -461,8 +484,21 @@ def _slot(prompt, model_ids, k):
                 skipped = str(sk)
                 continue
             n_ok += 1
+            #: **THE PER-ARM DISTRIBUTIONS ARE KEPT, NOT JUST THE SUM.**
+            #: Pooling requires expanding each rung separately and then adding,
+            #: so both distributions exist in this loop already. Throwing them
+            #: away and recomputing later would be a second pair of model runs
+            #: for numbers we are holding.
+            #:
+            #: This is what makes the diagnostic free (RH's single-pair design):
+            #: dN, suppression and substitution are arithmetic over `per_arm`
+            #: once an axis exists, and the axis is a CPU embedding call. No
+            #: second request, no second load.
+            arm = {}
             for (surface, _t1), mass in w1.items():
                 pooled[surface] = pooled.get(surface, 0.0) + float(mass)
+                arm[surface] = arm.get(surface, 0.0) + float(mass)
+            per_arm[mid] = arm
             #: **THE RESIDUAL IS POOLED THE SAME WAY AS THE WORDS.** The first
             #: version kept the FIRST model's residual and paired it with a mean
             #: over all of them, so `sum(words) + residual` came to 1.0499 on a
@@ -524,6 +560,14 @@ def _slot(prompt, model_ids, k):
         #: RETURNED so the panel can show that the books close. A check whose
         #: result never leaves the server is a check the reader has to trust.
         "conservation": conservation,
+        #: Per-rung distributions, so the client can ask for a movement split
+        #: without a second expansion. Keyed by model id, in the order given.
+        "per_arm": per_arm,
+        #: **WHETHER THIS POOL IS A DECLARED ALIGNMENT EDGE**, which is what
+        #: licenses reading movement off it at all. Two arbitrary models pooled
+        #: are a union of vocabularies; base -> aligned is a treatment. The
+        #: client must not offer a diagnostic when this is None.
+        "edge": _edge_between(model_ids),
         "rule_version": twp.RULE_VERSION,
         "dict_sha": twp.dict_sha(),
         "theta": twp.THETA,
@@ -543,7 +587,8 @@ def _slot(prompt, model_ids, k):
 _AXIS_LOCK = threading.Lock()
 
 
-def _slot_axis(prompt, naughty, nice, words, probs=None):
+def _slot_axis(prompt, naughty, nice, words, probs=None,
+               base_probs=None, aligned_probs=None):
     """The author's poles as an axis, and every candidate's position on it.
 
     **THIS ROUTE COMPUTES NO MOVEMENT AND CANNOT.** It takes one distribution.
@@ -561,9 +606,25 @@ def _slot_axis(prompt, naughty, nice, words, probs=None):
             #: the tagging, reported as one.
             return {"ok": False, "norm": ax.norm, "scores": [],
                     "note": "the two poles are identical in embedding space"}
-        S = ax.score(sorted(set(words) | set(naughty) | set(nice)))
+        vocab = set(words) | set(naughty) | set(nice)
+        #: THE SPLIT IS SCORED OVER THE UNION OF BOTH ARMS, not over the pooled
+        #: word list. A word the aligned model invents and the base never offers
+        #: is the ARRIVAL side of a substitution -- exactly what the diagnostic
+        #: exists to see -- and scoring only the pooled list would drop it if the
+        #: caller trimmed to top-k.
+        if base_probs and aligned_probs:
+            vocab |= set(base_probs) | set(aligned_probs)
+        S = ax.score(sorted(vocab))
         st = ax.stats(probs, S) if probs else {}
+        #: **dN NEVER TRAVELS WITHOUT `leverage`** (malign, [6361]). The axis
+        #: scores substitutions near-neutral, so ΔN can cancel while something
+        #: large happens -- `argue` x3.3 for Jews, `rob` x2.1 for Black men, at a
+        #: dN near zero. `stats()` above is the companion, and the split is
+        #: computed here so the two can only be returned together.
+        split = (ax.split(base_probs, aligned_probs, S)
+                 if base_probs and aligned_probs else None)
     return dict({
+        "split": split,
         "ok": True,
         "norm": ax.norm,
         "pole_gap": ax.pole_gap,
@@ -599,7 +660,16 @@ class Handler(BaseHTTPRequestHandler):
                 raise ValueError("prompt, naughty and nice all required")
             words = [w for w in (body.get("words") or []) if w]
             probs = body.get("probs") or None
-            self._json(200, _slot_axis(prompt, naughty, nice, words, probs))
+            #: BOTH OR NEITHER. A split needs two distributions; one arm alone
+            #: would silently become a diff against an empty dict, which is a
+            #: perfectly finite number describing nothing.
+            bp, ap = body.get("base_probs"), body.get("aligned_probs")
+            if bool(bp) != bool(ap):
+                raise ValueError("base_probs and aligned_probs must be sent "
+                                 "together or not at all -- one alone diffs "
+                                 "against an empty distribution")
+            self._json(200, _slot_axis(prompt, naughty, nice, words, probs,
+                                       bp, ap))
         except ValueError as e:
             self._json(400, {"error": str(e)})
         except Exception as e:

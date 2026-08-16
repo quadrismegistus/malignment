@@ -103,12 +103,20 @@
 			//: not an optional extra — see `split`'s docstring on dN cancelling
 			//: while something large happens.
 			const probs = Object.fromEntries(words.map((w) => [w.word, w.p]));
+			//: **THE SPLIT COMES FREE WHEN THE POOL IS A DECLARED EDGE.** No extra
+			//: request and no extra load — `per_arm` was already returned by the
+			//: expansion that built the pooled y-axis. Sent only when `edge` is
+			//: non-null, because two arbitrary models pooled are a union of
+			//: vocabularies and their difference is not a treatment effect.
+			const e = resp.edge;
 			const r = await api.slotAxis(
 				resp.prompt,
 				[...naughty],
 				[...nice],
 				words.map((w) => w.word),
-				probs
+				probs,
+				e ? resp.per_arm[e.base] : undefined,
+				e ? resp.per_arm[e.aligned] : undefined
 			);
 			axisInfo = r;
 			if (!r.ok) {
@@ -554,11 +562,22 @@
 		  declaration.
 		-->
 		{#if health?.diagnostic_pair?.length}
+			<!--
+			  ── NO MODE, AND NO BUTTON. The diagnostic is not a thing you switch on:
+			  when the two models named are a declared ALIGNING edge, the server has
+			  both distributions in hand from the pooling and the split is arithmetic.
+			  RH's single-pair design is what makes that true.
+
+			  A "diagnose" button lived here for an hour and was a category error
+			  twice over: it filled the SCREENING field with the diagnostic pair, and
+			  it referenced state that did not exist, which the build did not catch
+			  because Svelte templates do not fail on undefined identifiers.
+			-->
 			<button class="ghost pair"
-				title="The declared DIAGNOSTIC pair — out of endpoints() and every chain, so nothing seen through it can select. It is NOT a representative screening base: it sits in the bottom third of the roster for pole mass."
+				title="The declared out-of-sample diagnostic pair. Naming both arms pools them on the y-axis AND yields movement, because a declared alignment edge licenses reading dP as a treatment effect."
 				onclick={() => (model = health.diagnostic_pair.join(','))}>
-				use diagnostic pair
-				<span class="pairids">{health.diagnostic_pair.map((m) => m.split('/').pop()).join(' + ')}</span>
+				use the declared pair
+				<span class="pairids">{health.diagnostic_pair.map((m) => m.split('/').pop()).join(' → ')}</span>
 			</button>
 		{/if}
 		<label>top-k <input class="k" type="number" bind:value={topK} min="5" max="500" /></label>
@@ -596,6 +615,30 @@
 		  a reader is most likely to assume they already know which checkpoint it
 		  was, so it is the case that most needs saying.
 		-->
+		{#if resp.edge}
+			<!--
+			  ── THE CAVEAT BELONGS TO THE DECLARED PAIR, NOT TO ANY EDGE.
+			  The first version hardcoded "it moves 0.0714" into a line that renders
+			  for whatever edge was expanded — so a run on SmolLM2 displayed
+			  Falcon3-10B's movement figure beside SmolLM2's numbers. Caught by
+			  rendering it: a caption describing one pair over a panel showing
+			  another, which is the defect this app keeps being written against.
+
+			  Now the figure appears only when the edge IS the declared pair, and any
+			  other edge is named without one, because this component does not know
+			  what an arbitrary edge's roster-mean comparison is and must not guess.
+			-->
+			<p class="declare">
+				movement from <strong>{resp.edge.base.split('/').pop()}</strong> to
+				<strong>{resp.edge.aligned.split('/').pop()}</strong> ({resp.edge.op}), a declared
+				alignment edge{#if health?.diagnostic_pair?.length === 2 && resp.edge.base === health.diagnostic_pair[0] && resp.edge.aligned === health.diagnostic_pair[1]} and the
+					out-of-sample diagnostic pair &mdash; it moves <span class="num">0.0714</span> against a
+					roster mean of <span class="num">0.1030</span>, so a frame that looks unmoved here may
+					still move on a median lineage{:else} &mdash; NOT the declared diagnostic pair, so
+					anything selected while looking at this may be selecting on the outcome of a measured
+					lineage{/if}
+			</p>
+		{/if}
 		<p class="declare">
 			screened on <strong>{resp.models.join(' + ')}</strong>{#if resp.n_models > 1}, pooled and
 				blind to source &mdash; a word's origin is not returned, so poles are declared on the
@@ -685,6 +728,36 @@
 					<span class="lbl">poles</span>
 					<span class="val num">{naughty.size}/{nice.size}</span>
 				</div>
+				{#if axisInfo.split}
+					<!--
+					  ── MOVEMENT, IN THE SAME ROW AS LEVERAGE (RH: "why not show the
+					  diagnostics next to where all the other diagnostics are?").
+
+					  Not a separate panel and not a mode. dN is the same kind of
+					  object as leverage and N — a scalar about this frame — and
+					  malign's [6361] requires it never to travel without leverage:
+					  the axis scores substitutions near-neutral, so ΔN cancels while
+					  something large happens (`argue` x3.3 for Jews, `rob` x2.1 for
+					  Black men, at a dN near zero). Adjacency IS the guard here.
+
+					  SUPPRESSION AND SUBSTITUTION ARE SHOWN SEPARATELY, not summed
+					  into dN alone, because they are the two events dN conflates: a
+					  model that stops saying the loaded word, and one that says a
+					  milder word instead. The project's claim is about the second.
+					-->
+					<div class="branch mv" title="Movement along this axis from base to aligned: dN = Σ dP(w)·s(w). READ IT WITH LEVERAGE — a dN near zero means 'nothing happened' OR 'a great deal happened symmetrically', and only the spread tells you which.">
+						<span class="lbl">dN</span>
+						<span class="val num">{axisInfo.split.dN >= 0 ? '+' : ''}{axisInfo.split.dN.toFixed(4)}</span>
+					</div>
+					<div class="branch mv" title="The part of dN from mass LEAVING, weighted by where it left from — the model no longer saying the loaded word.">
+						<span class="lbl">suppr</span>
+						<span class="val num">{axisInfo.split.suppression >= 0 ? '+' : ''}{axisInfo.split.suppression.toFixed(4)}</span>
+					</div>
+					<div class="branch mv" title="The part of dN from mass ARRIVING, weighted by where it landed — the model saying a milder word instead. This is the displacement the project is about.">
+						<span class="lbl">subst</span>
+						<span class="val num">{axisInfo.split.substitution >= 0 ? '+' : ''}{axisInfo.split.substitution.toFixed(4)}</span>
+					</div>
+				{/if}
 				{#each axisInfo.flags ?? [] as f (f)}
 					<div class="verdict bad">{f}</div>
 				{/each}
@@ -875,6 +948,11 @@
 	.naughty-b .val { color: var(--red); }
 	.nice-b .val { color: var(--blue); }
 	.branch.dim .val, .branch.dim .lbl { color: var(--text-3); }
+	/* Movement is a different KIND of quantity from the screening statistics
+	   beside it — a contrast, not a level — so it is tinted rather than left to
+	   read as one more scalar in the row. */
+	.branch.mv .lbl { color: var(--red-light); }
+	.branch.mv .val { color: var(--red-light); }
 	.val.good { color: var(--ok); }
 	.val.bad { color: var(--bad); }
 
