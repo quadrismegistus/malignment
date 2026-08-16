@@ -35,6 +35,13 @@ created EMPTY, absorbed everything vaguely related, and reached 250 scripts for
 whatever is nearby.** So the first question of a subject lives flat, and the
 subject appears by promotion when the second arrives.
 
+**A REGISTRATION THAT CANNOT FAIL GOES IN `instrument_calibrations/`.** An
+instrument registration declares how something is BUILT; a hypothesis
+registration declares what would make a claim wrong. `sex_violence_lexicon` lived
+flat and was excluded from the table below by a sentence, which is a rule with
+nowhere to live. RH, 2026-08-16. The container arrived with two occupants, not
+empty.
+
 **AND A FOLLOW-UP IS A NEW QUESTION, NEVER A ROUND.**
 `division_of_labour_round2` is `k_01`…`k_47` with better spelling: a variant
 nobody declared, whose relation to the first is knowable only by asking whoever

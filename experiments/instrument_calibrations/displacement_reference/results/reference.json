@@ -1,0 +1,61 @@
+{
+ "_about": "What each displacement statistic reads between two INDEPENDENTLY PRETRAINED models. No alignment relation exists in any pair. Registers no hypothesis.",
+ "n_bases": 49,
+ "n_pairs": 2352,
+ "n_panel_prompts": 2189,
+ "n_js_prompts": 40,
+ "lexicon_words": 1063,
+ "reference_words": 3812,
+ "statistics": {
+  "transgressive_mass_difference": {
+   "median": 0.0,
+   "q1": -4.099185863889871,
+   "q3": 4.099185863889871,
+   "min": -22.773813815472025,
+   "max": 22.773813815472025,
+   "sd": 6.374918573588178,
+   "n": 2352,
+   "note": "mass(base_i) - mass(base_j) on the 1,063-word lexicon, full panel. Centred by construction; the SPREAD is the reference."
+  },
+  "transgressive_removal_rate": {
+   "median": -1.5653461377730963e-07,
+   "q1": -0.1437225167111635,
+   "q3": 0.12566205052975826,
+   "min": -1.2189640756001168,
+   "max": 0.549339256549455,
+   "sd": 0.2301826932429471,
+   "n": 2352,
+   "note": "as a fraction of base_i's own transgressive mass."
+  },
+  "difference_in_differences": {
+   "median": 6.5591587145447106e-06,
+   "q1": -0.11324147560116019,
+   "q3": 0.09673255925062942,
+   "min": -0.9457998693882157,
+   "max": 0.4373919294086254,
+   "sd": 0.17347044224635685,
+   "n": 2352,
+   "note": "lexicon rate minus reference-vocabulary rate. Near zero means the 3,812-word `neither` set is MATCHED to the lexicon -- the assumption any excess-over-neutral statistic rests on."
+  },
+  "js_divergence": {
+   "median": 0.1277438620681414,
+   "q1": 0.11066823951697931,
+   "q3": 0.15182570201279155,
+   "min": 0.06953633320295989,
+   "max": 0.4781165869277,
+   "sd": 0.06993334199425832,
+   "n": 1176,
+   "note": "PER-PAIR MEDIAN across the full 2189-prompt panel, tail included so it is the same quantity as movement_cells.js_total. n is PAIRS, not cells. Read v3's own movement numbers against this; the archive's battery figures are TOKEN-level and are NOT calibrated by it."
+  },
+  "js_divergence_REAL_ALIGNMENT_EDGES": {
+   "median": 0.10461897481675053,
+   "q1": 0.06698230909103167,
+   "q3": 0.17197522303122453,
+   "min": 0.0068429771941689675,
+   "max": 0.661573961807292,
+   "sd": 0.11953639463723988,
+   "n": 48,
+   "note": "the same statistic on the 48 base->own-endpoint edges. Not part of the reference -- reported beside it so the comparison is like for like by construction rather than by a later join."
+  }
+ }
+}

@@ -1,0 +1,66 @@
+{
+ "_about": "How far OLMo 3 7B moves during each phase of its OWN training. A PROFILE, not a ratio: both phases are front-loaded, so any single ratio is chosen by choosing a denominator.",
+ "panel_prompts": 2272,
+ "stage_tokens_per_step": {
+  "stage1": 4194304,
+  "stage2": 2097152,
+  "stage3": 4194304
+ },
+ "sft_tokens_per_step": 1048576,
+ "rows": [
+  {
+   "phase": "pretraining (full released)",
+   "from": "stage1-step1000",
+   "to": "stage3-step11921",
+   "js": 0.4572019716901463,
+   "n_prompts": 2270,
+   "tokens": 6075805993984.0,
+   "js_per_T": 0.07524960015886747
+  },
+  {
+   "phase": "pretraining (first half)",
+   "from": "stage1-step1000",
+   "to": "stage1-step1413814",
+   "js": 0.4697947573969215,
+   "n_prompts": 2270,
+   "tokens": 5925771411456,
+   "js_per_T": 0.07927993248080589
+  },
+  {
+   "phase": "pretraining (second half)",
+   "from": "stage1-step1413814",
+   "to": "stage3-step11921",
+   "js": 0.10021983848210579,
+   "n_prompts": 2270,
+   "tokens": 150034582528.0,
+   "js_per_T": 0.6679782540362146
+  },
+  {
+   "phase": "SFT (first 1,000 steps)",
+   "from": "stage3-step11921",
+   "to": "step1000",
+   "js": 0.01770889009731439,
+   "n_prompts": 2270,
+   "tokens": 1048576000,
+   "js_per_T": 16.888513657869712
+  },
+  {
+   "phase": "SFT (released ladder)",
+   "from": "step1000",
+   "to": "step43000",
+   "js": 0.12237758314665641,
+   "n_prompts": 2270,
+   "tokens": 44040192000,
+   "js_per_T": 2.778770427400871
+  },
+  {
+   "phase": "SFT (total)",
+   "from": "stage3-step11921",
+   "to": "step43000",
+   "js": 0.13946265333503982,
+   "n_prompts": 2270,
+   "tokens": 45088768000,
+   "js_per_T": 3.093068618220835
+  }
+ ]
+}

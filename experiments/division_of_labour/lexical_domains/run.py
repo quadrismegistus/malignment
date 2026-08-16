@@ -66,7 +66,7 @@ from malignment.prompts import Prompts                              # noqa: E402
 from malignment.wordfield import (WordField, measure, conservation,  # noqa: E402
                                   paired_stats, sign_mde, JS_TERM)
 
-LEXICON = os.path.join(ROOT, "experiments", "sex_violence_lexicon",
+LEXICON = os.path.join(ROOT, "experiments", "instrument_calibrations", "sex_violence_lexicon",
                        "results", "lexicon.json")
 LEXICON_SHA = "d542e7e2bb86bd00"
 FIELD = "sexviolence"

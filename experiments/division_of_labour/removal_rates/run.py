@@ -58,7 +58,7 @@ from malignment import ch, corpus, roster                         # noqa: E402
 from malignment.prompts import Prompts                    # noqa: E402
 from malignment.wordfield import WordField, measure       # noqa: E402
 
-LEXDIR = os.path.join(ROOT, "experiments", "sex_violence_lexicon", "results")
+LEXDIR = os.path.join(ROOT, "experiments", "instrument_calibrations", "sex_violence_lexicon", "results")
 LEXICON_SHA = "d542e7e2bb86bd00"
 FIELD = "removal"
 RESULTS = os.path.join(HERE, "results")
