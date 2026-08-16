@@ -163,6 +163,9 @@ _SLOT_TTL = float(os.environ.get("MALIGNMENT_SLOT_TTL", 600))
 #: a model that is in active use because something else is old.
 _SLOT_USED = {}
 _ALLOW_SLOT = True
+#: Filled by `serve()` after `slots.check_diagnostic_pair` passes. Empty until
+#: then, so a route cannot serve an unverified pair.
+_DIAGNOSTIC_PAIR = ()
 
 
 def _evict_to(n):
@@ -633,6 +636,12 @@ class Handler(BaseHTTPRequestHandler):
                     "slot_loaded": list(_SLOT_MODELS),
                     "slot_max": _SLOT_MAX,
                     "slot_ttl": _SLOT_TTL,
+                    #: SERVED AS A CONSTANT, VERIFIED AT BOOT. The check reads
+                    #: the whole roster, and /health is polled every 15s by an
+                    #: open tab -- so the verification runs once in `serve()`
+                    #: where a stale declaration stops the server, and this is
+                    #: just the value.
+                    "diagnostic_pair": list(_DIAGNOSTIC_PAIR),
                     #: SO THE CLIENT CAN SAY "loading" RATHER THAN "running".
                     #: A 6-second load and a 1-second expansion under one spinner
                     #: are indistinguishable to the user, and the 6-second one is
@@ -847,8 +856,24 @@ def _db_name():
 
 
 def serve(port=8431, host="127.0.0.1", slot=True):
-    global _ALLOW_SLOT
+    global _ALLOW_SLOT, _DIAGNOSTIC_PAIR
     _ALLOW_SLOT = slot
+    #: **VERIFIED AT BOOT, NOT PER REQUEST.** `check_diagnostic_pair` reads the
+    #: whole roster; /health is polled every 15 s by an open tab. Once here is
+    #: the right frequency for a fact that only changes when the roster does.
+    #:
+    #: A FAILURE IS REPORTED AND DOES NOT STOP THE SERVER. Every other route --
+    #: the register, the roster, the result grains -- is unaffected by a
+    #: diagnostic pair that has drifted into a population, and refusing to serve
+    #: a markdown reader because of it would be the wrong trade. `_DIAGNOSTIC_PAIR`
+    #: stays empty, so nothing can quietly use an unverified pair.
+    try:
+        from .slots import check_diagnostic_pair
+        _DIAGNOSTIC_PAIR = check_diagnostic_pair()
+        _dp_note = "%s -> %s" % tuple(m.split("/")[-1] for m in _DIAGNOSTIC_PAIR)
+    except Exception as e:                                     # noqa: BLE001
+        _DIAGNOSTIC_PAIR = ()
+        _dp_note = "UNAVAILABLE -- %s: %s" % (type(e).__name__, str(e)[:150])
     srv = ThreadingHTTPServer((host, port), Handler)
     man = _manifest()
     #: **FLUSHED, BECAUSE THIS BANNER'S WHOLE JOB IS TO BE READ FROM A LOG.**
@@ -865,6 +890,7 @@ def serve(port=8431, host="127.0.0.1", slot=True):
     say("  experiments %d question%s" % (len(man), "" if len(man) == 1 else "s"))
     say("  ui_dist     %s" % (UI_DIST if os.path.isdir(UI_DIST)
                               else "(not built -- use `npm run dev`)"))
+    say("  diagnostic  %s" % _dp_note)
     if slot:
         say("  slot        lazy: 0 resident until a /slot call. At most %d, "
             "released after %.0fs idle" % (_SLOT_MAX, _SLOT_TTL))

@@ -53,6 +53,89 @@ import re
 _CJK = re.compile(r"[一-鿿]")
 
 
+# ---------------------------------------------------------------------------
+# the diagnostic pair
+# ---------------------------------------------------------------------------
+
+#: **RH's ruling, 2026-08-16: "ok lets use falcon3b".** Confirming malign's
+#: [6363] pick against the enumerated alternatives below.
+#:
+#: THE DIAGNOSTIC PAIR ANSWERS "what does the instrument do here" -- dN,
+#: suppression, substitution, dP per word. It is NOT the screening base, which
+#: answers "can this frame move at all" and takes a different answer for a
+#: measured reason: Falcon3-3B sits at the 32nd and 25th percentile of 389
+#: models on naughty-pole mass, so screening frames on it would reject stimuli
+#: that are alive in the models actually measured. That is M01 in reverse.
+#: **Do not prefill this as a screening base.**
+#:
+#: WHY THIS PAIR CANNOT CONTAMINATE. `Falcon3-3B-Base` is `prune`d from
+#: `Falcon3-7B-Base`, and `prune` is DERIVING but not ALIGNING -- so the 3B is
+#: not a lineage root, takes no endpoint, and appears in no chain. Nothing seen
+#: here can select an item into a population it is not in.
+#:
+#: CHOSEN FROM AN ENUMERATED POOL, not by availability. Seven alignment edges sit
+#: outside every experimental population (2026-08-16, >500 cells each):
+#:
+#:     Falcon3-Mamba-7B -> Instruct   instruct  2,641   0.1674
+#:     Falcon3-3B       -> Instruct   instruct  2,663   0.0898   <- THIS
+#:     phi-4            -> reasoning  sft       2,663   0.0749
+#:     Falcon3-10B      -> Instruct   instruct  2,663   0.0714
+#:     Falcon3-1B       -> Instruct   instruct  2,663   0.0501
+#:     Pharia-1-7B      -> aligned    dpo       2,215   0.0311
+#:     phi-4-reasoning  -> -plus      rlvr      2,579   0.0157
+#:
+#: Roster mean over all cells is 0.103. **Two things that pool tells you and no
+#: single choice does.** Falcon3-Mamba moves 1.9x better and is the only free
+#: pair above the roster mean -- passed over because it is an SSM, its roster
+#: environment reads `profile: ssm / box: ssm` rather than this Mac, and SSMs are
+#: untested across devices at any quantity ([6357], and [4917]'s
+#: `selective_scan_cuda` failures). And the pool is four-sevenths `instruct`,
+#: with exactly one `dpo`, one `sft` and one `rlvr`, all of them the quietest in
+#: the set -- **so a diagnostic pair chosen for movement is an `instruct` edge,
+#: and the instrument never gets diagnosed on a preference edge.** That is a
+#: standing limitation of this choice, not a defect in it.
+DIAGNOSTIC_PAIR = ("tiiuae/Falcon3-3B-Base", "tiiuae/Falcon3-3B-Instruct")
+
+
+def check_diagnostic_pair(pair=None):
+    """Verify the pair is still outside every experimental population.
+
+    **A RULE THAT EXECUTES RATHER THAN ONE THAT MUST BE RECALLED.** The comment
+    above states that neither member is an endpoint or a chain rung; that is a
+    fact about the roster TODAY, and the roster changes -- `endpoints()` went 48
+    to 50 on the day this was written. A comment asserting it would go quietly
+    stale, and the failure mode is the worst kind: the pair keeps working, keeps
+    looking safe, and silently starts selecting.
+
+    Returns the pair. Raises `ValueError` naming which member and which
+    population, so the message says what to do rather than that something is
+    wrong.
+    """
+    from . import roster
+    base, aligned = pair or DIAGNOSTIC_PAIR
+    endpoints, _ = roster.endpoints()
+    rungs = set(roster.population("chain_rungs"))
+    chain_members = set()
+    for c in roster.chains():
+        chain_members |= {c["base"], c["sft"], c["pref"]}
+    bad = []
+    for m in (base, aligned):
+        for name, pop in (("endpoints (as a base)", set(endpoints)),
+                          ("endpoints (as a target)", set(endpoints.values())),
+                          ("chain_rungs", rungs),
+                          ("a declared chain", chain_members)):
+            if m in pop:
+                bad.append("%s is in %s" % (m, name))
+    if bad:
+        raise ValueError(
+            "the diagnostic pair is no longer out-of-population: %s. Anything "
+            "screened while looking at it can now select into a population it "
+            "belongs to, which is the contamination this pair exists to avoid. "
+            "Pick another from the free pool (see DIAGNOSTIC_PAIR's comment) or "
+            "re-declare deliberately." % "; ".join(bad))
+    return (base, aligned)
+
+
 def item_id(prompt, top_nice, top_naughty):
     """`nn_reachedforhis_hand-cock` -- RH's format.
 
