@@ -143,12 +143,35 @@ def _untreated():
 
     So the test is on the OPS along the ancestry, not on being a root.
     """
+    #: **THE DECLARATION BEATS THE GRAPH, AND MISSING IT WAS A BUG.**
+    #: The first version inferred treatment from EDGES alone: walk the ancestry,
+    #: look for an ALIGNING op. That misses a model whose aligned parent is not
+    #: in the roster at all -- it has no incoming edge, so the walk finds nothing
+    #: and calls it untreated.
+    #:
+    #: Three models are exactly that, and the roster says so in a field this
+    #: function did not read: `pretrained: false`.
+    #:
+    #:     Aleph-Alpha/Pharia-1-LLM-7B-control-hf   `-control` IS the instruction
+    #:                                              -tuned release, method sft
+    #:     openGPT-X/Teuken-7B-instruct-commercial-v0.4
+    #:     microsoft/phi-4
+    #:
+    #: They are the same three `RESULTS.md` names as the excluded roots --
+    #: *"aligned models whose pretrained ancestor was never released"*. Two of
+    #: them reached the candidate list before this check existed.
+    #:
+    #: **Inference from a graph cannot see a node the graph does not contain.**
+    #: Where a declaration exists it is the evidence; the walk is for the models
+    #: that have no flag, which is 157 of 160.
     doc = roster.load()
     parents = {}
     for p, op, c in (doc.get("edges") or []):
         parents.setdefault(c, []).append((p, op))
     out = set()
-    for m in (doc.get("nodes") or {}):
+    for m, node in (doc.get("nodes") or {}).items():
+        if node.get("pretrained") is False:
+            continue
         seen, stack, treated = set(), [m], False
         while stack:
             cur = stack.pop()

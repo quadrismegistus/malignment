@@ -2,7 +2,9 @@
 
 **Question.** Which released checkpoints are near the middle of the roster for transgressive-vocabulary mass, and are therefore reasonable models to screen slot frames with?
 
-**Status: RUN, 2026-08-16.** 58 UNTREATED models (49 of the 50 declared bases, plus 9 untreated non-roots), 2,189-prompt panel, lexicon sha `d542e7e2bb86bd00`. **15 candidates.**
+**Status: RUN, 2026-08-16.** 56 UNTREATED models, 2,189-prompt panel, lexicon sha `d542e7e2bb86bd00`. **14 candidates.**
+
+**Corrected after a first run.** Three models declared `pretrained: false` — `Pharia-1-LLM-7B-control-hf`, `Teuken-7B-instruct-commercial-v0.4`, `phi-4` — were counted as untreated because the filter inferred treatment from EDGES and none of them has an aligned parent in the roster. Two reached the candidate list. They are the same three `RESULTS.md` names as excluded roots. **Inference from a graph cannot see a node the graph does not contain**; the roster's own `pretrained` flag is now read first.
 
 **id.** `screening_base`
 
@@ -54,6 +56,8 @@ Three statistics rather than one because the per-prompt distribution has a media
 | models | **untreated** (no ALIGNING op anywhere in ancestry), ≥2,000 panel prompts, no `@revision` checkpoints — 58 |
 | instrument | `{db}.wf_sexviolence`, sha `d542e7e2bb86bd00`, 1,063 blind-rated words |
 
+**A DECLARED FLAG BEATS THE GRAPH.** `pretrained: false` excludes outright, before any ancestry walk. 157 of 160 nodes carry no such flag, so the walk is right for almost everything — which is why the three that need it were invisible.
+
 **Untreated, not `population("bases")`.** The screener must be pre-treatment: an aligned model's transgressive mass is what SURVIVED repression, where screening asks what is AVAILABLE to be repressed. But "declared base" means pretrained ROOT, which is too strict — `Falcon3-10B-Base` is `upscale`d and `Falcon3-3B-Base` is `prune`d from the 7B, and `Pharia-1-LLM-7B-control-hf`'s ancestor was never released. `upscale` and `prune` are pretrained-to-pretrained. So the test is on the ops along the ancestry.
 
 **49 of the 50 declared bases are in.** The one missing is `mpt-7b`, which has zero panel cells — a measurement gap, not an exclusion.
@@ -65,5 +69,6 @@ Three statistics rather than one because the per-prompt distribution has a media
 - **The lexicon is English-only** and blind on CJK by construction; its registration requires the unlabelled share to be reported downstream. Here that exposure is negligible — 1 of 2,189 panel prompts contains CJK, and CJK mass is ≤0.03% per candidate — but it is a property of this panel, not of the measure. `run.py` uses `\p{Han}`; the pattern `[\x{4e00}-\x{9fff}]` matches 2,188 of 2,189 in ClickHouse and is wrong.
 - **The panel is not composition-neutral**: balancing keeps 100% of `taboo` and `property` but 42% of `neutral` and 34% of `contradiction`. Representative *of this panel*.
 - **This is one operationalisation of median-ness.** The project holds others that are language-agnostic where this one is not — argmax-agreement centrality over `{db}.panel_pairs` (78,106 pairs, balanced 473-prompt panel), JS to a corpus centroid via `similarity.js`, alignment-edge magnitude via `movement_cells`. A screener chosen by any of those is an equally legitimate answer, and disagreement between them would be informative rather than an error.
+- **Representativeness is not runnability.** `roster.environment()` declares pins and dependencies this measure knows nothing about: `CroissantLLMBase` (rank 1) DELETES CJK CHARACTERS, `Falcon3-Mamba-7B-Base` and `Falcon-H1-7B-Base` need `mamba-ssm` + `causal-conv1d` declared NOT optional, `Baichuan2-7B-Base` cannot run on transformers 5.x. **Choosing a screener combines this ranking with those constraints, and that is a decision rather than a computation.**
 - **Does not transfer to pole mass.** This measures a blind general lexicon over a declared corpus; the app screens author-chosen poles on one frame. Correlated, different instruments.
 - An exploratory version ran before the producer existed, prompted by *"should we default to llama as screener?"*, over a population that had not been restricted to untreated models. **It admitted the author's preferred model (Falcon3-10B, wanted on grounds of locality and family) and the corrected run excludes it.** Recorded because a preference that survives its own correction is the thing worth being suspicious of, and this one did not.

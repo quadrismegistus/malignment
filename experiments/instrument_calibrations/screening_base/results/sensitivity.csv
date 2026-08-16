@@ -1,4 +1,4 @@
 floor,winner,max_dev,n_models
-1500,kakaocorp/kanana-2-3b-base,5.172413793103445,58
-2000,kakaocorp/kanana-2-3b-base,5.172413793103445,58
-2180,kakaocorp/kanana-2-3b-base,5.172413793103445,58
+1500,croissantllm/CroissantLLMBase,7.142857142857146,56
+2000,croissantllm/CroissantLLMBase,7.142857142857146,56
+2180,croissantllm/CroissantLLMBase,7.142857142857146,56
