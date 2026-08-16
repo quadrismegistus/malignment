@@ -712,6 +712,14 @@ class Handler(BaseHTTPRequestHandler):
                     #: where a stale declaration stops the server, and this is
                     #: just the value.
                     "diagnostic_pair": list(_DIAGNOSTIC_PAIR),
+                    #: **THE FLAG IS SERVED BECAUSE A FLAG NOTHING READS IS NOT
+                    #: A FLAG.** It sat in `slots.py` unread for an hour while
+                    #: the panel presented an untested-on-this-machine pair as
+                    #: simply "declared" -- the same defect as the declared
+                    #: constant nobody could reach. True means no `local_mps`
+                    #: observation is booked and a load may fail after the
+                    #: reader has waited for 38 GB.
+                    "diagnostic_pair_provisional": _dp_provisional(),
                     #: SO THE CLIENT CAN SAY "loading" RATHER THAN "running".
                     #: A 6-second load and a 1-second expansion under one spinner
                     #: are indistinguishable to the user, and the 6-second one is
@@ -915,6 +923,22 @@ def _int(v, default, lo, hi):
     #: than a correctness one -- and the payload reports what was actually used,
     #: so a clamped request is visible rather than silently honoured.
     return max(lo, min(hi, n))
+
+
+def _dp_provisional():
+    """Whether the declared pair is unverified on THIS machine.
+
+    Read from `slots` on every call rather than captured at boot: it flips when
+    a seat books an observation, and a value frozen at start-up would keep
+    warning after the thing it warns about was fixed.
+    """
+    try:
+        from .slots import DIAGNOSTIC_PAIR_PROVISIONAL
+        return bool(DIAGNOSTIC_PAIR_PROVISIONAL)
+    except Exception:
+        #: Unknown reads as PROVISIONAL. An import failure must not silently
+        #: promote an unverified pair to verified.
+        return True
 
 
 def _db_name():

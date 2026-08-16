@@ -124,11 +124,29 @@ _CJK = re.compile(r"[一-鿿]")
 #: evidence that it does not.
 DIAGNOSTIC_PAIR = ("tiiuae/Falcon3-10B-Base", "tiiuae/Falcon3-10B-Instruct")
 
-#: Falcon3-3B has a booked MPS observation from [6363] (fp16, ~6 s from local
-#: cache); the 10B arms do not, and both are stubs locally. That is a download
-#: and a load test, not a design question -- unlike `kanana`, nothing about the
-#: 10B's FITNESS is open.
-DIAGNOSTIC_PAIR_PROVISIONAL = True
+#: **VERIFIED ON MPS, 2026-08-16** -- malign's live load test on this machine,
+#: booked in `roster/models/observations.json` as `local_mps / loads` for BOTH
+#: arms. fp16, ~15 s load from local cache (19 GB each), vocab 131072, logits
+#: finite, sane top-5, forward 0.05-0.44 s. **Not inferred from the env row**,
+#: which reads `box=dense` and describes rented hardware.
+#:
+#: An earlier version of this comment said both arms were "stubs locally". That
+#: was wrong -- the 4.4 MB stubs are the *Mamba* arms -- and it was corrected on
+#: the docket at [6369] before it was corrected here, which is the wrong order
+#: and is why it survived a commit.
+#:
+#: **ONE KNOWN REFUSAL, AND IT IS NARROW.** Round-trip is exact for ordinary and
+#: for CJK prompts and FAILS on a space before a period: `took the .357` does not
+#: survive encoding. The same defect is recorded for `Alchan/mpt-7b-chat` and
+#: `gl198976/mpt-7b*`. It costs two declared prompts (`literary_039`,
+#: `literary_047`) -- 2 of 2,706, not a tokenizer that mangles generally.
+#:
+#: **The panel already reports that correctly, by construction rather than by
+#: anyone remembering**: `twp` raises `SkipPrompt`, `/slot` returns it as
+#: `skipped`, and the author sees *"instrument REFUSED this prompt"* with the
+#: reason. An author who writes a period-adjacent numeral into a frame is told,
+#: rather than silently receiving a distribution from one arm.
+DIAGNOSTIC_PAIR_PROVISIONAL = False
 
 
 def check_diagnostic_pair(pair=None):
