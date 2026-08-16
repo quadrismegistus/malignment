@@ -511,8 +511,20 @@ def main():
     if unresolved:
         print("  UNRESOLVED LINEAGES (not written): %s"
               % [b.split("/")[-1] for b in unresolved])
-    ch.insert("endpoints", [{"base": b, "endpoint": e, "resolved_by": "roster.endpoints"}
-                            for b, e in sorted(ep.items())])
+    #: `resolved_by` MUST NAME WHICH ONE DECIDED. Every row said
+    #: `roster.endpoints` including the ones a person chose, so the column that
+    #: exists to carry provenance was asserting the rule chose where it had
+    #: abstained. The chain is re-run unruled to find out -- cheap, and the only
+    #: way to tell from outside.
+    chain, _ = endpoints(apply_rulings=False)
+    ch.insert("endpoints", [
+        {"base": b, "endpoint": e,
+         "resolved_by": "roster.endpoints" if chain.get(b) == e else "rulings.endpoint"}
+        for b, e in sorted(ep.items())])
+    ruled_n = sum(1 for b, e in ep.items() if chain.get(b) != e)
+    if ruled_n:
+        print("  %d endpoint(s) decided by an AUTHORED RULING, not by the chain: %s"
+              % (ruled_n, [b.split("/")[-1] for b in ep if chain.get(b) != ep[b]]))
     pop = []
     for kind in POPULATIONS:
         for m in sorted(population(kind)):
@@ -605,7 +617,7 @@ def attestations():
     return _ATT
 
 
-def endpoints(measured=None, attested=None):
+def endpoints(measured=None, attested=None, apply_rulings=True):
     """{base: endpoint} — one commodity-form endpoint per pretrained base.
 
     **THE ROSTER DELIBERATELY DOES NOT CHOOSE** (see the `alignment_edges` view:
@@ -697,6 +709,45 @@ def endpoints(measured=None, attested=None):
             out[base] = same[0]
             continue
         unresolved[base] = sorted(keep)
+
+    #: 7. AN AUTHORED RULING, APPLIED ONLY TO WHAT THE CHAIN LEFT UNRESOLVED.
+    #: The order is the whole safety property: a ruling can settle a case the
+    #: rules cannot, and can never overturn a case they can. Applied before the
+    #: chain it would be an invisible override of a derivable answer.
+    #:
+    #: Added 2026-08-17 for `stablelm`, whose two arms are both terminal, both
+    #: `stabilityai`, and both attested `direction: standard` -- rules 2, 3 and 5
+    #: all abstain. Before this existed the only ways to express the choice were
+    #: to declare one arm an `ablation` or attest it `inverted`, and BOTH ARE
+    #: FALSE OF IT: encoding a ruling as a fact about the model would have put a
+    #: wrong claim into the file that every other consumer reads.
+    #: The return stays a PAIR. A third element carrying ruling problems would
+    #: be a value callers can ignore, which is the exact failure `unresolved`
+    #: already documents ("a caller that ignores it is choosing by accident").
+    #: So the two kinds of ruling defect go to the two places that cannot be
+    #: ignored: a ruling naming a non-candidate RAISES here, and a ruling the
+    #: chain no longer needs is reported by `check_authored`.
+    #: `apply_rulings=False` returns what the CHAIN ALONE decides. It exists
+    #: because the staleness check needs the pre-ruling state and the first
+    #: version of that check tried to infer it from the post-ruling result --
+    #: it called this function, which had already applied the ruling, and then
+    #: reported the ruling as stale for having worked. **A checker cannot read
+    #: the state it is checking through the thing it is checking.**
+    for b, r in (((d.get("rulings") or {}).get("endpoint") or {})
+                 if apply_rulings else {}).items():
+        if b.startswith("_"):
+            continue
+        e = (r or {}).get("endpoint") if isinstance(r, dict) else r
+        if b not in unresolved:
+            continue                       # stale; `check_authored` reports it
+        if e not in unresolved[b]:
+            raise ValueError(
+                "rulings.endpoint[%r] names %r, which is not one of that base's "
+                "candidates %s. A ruling that resolves to nothing would leave the "
+                "lineage unresolved while reading as decided."
+                % (b, e, unresolved[b]))
+        out[b] = e
+        del unresolved[b]
     return out, unresolved
 
 
@@ -730,6 +781,42 @@ def check_authored(path=None):
                         % str(e).replace("\n", " ")[:400])
     except Exception as e:                                    # noqa: BLE001
         problems.append("%s: %s" % (type(e).__name__, str(e)[:300]))
+
+    #: A `rulings.endpoint` entry the chain no longer needs. `endpoints()`
+    #: cannot report this -- it applies live rulings and returns a pair on
+    #: purpose -- so it surfaces here, where authored-file defects belong.
+    #: **A ruling that decides nothing still READS as in force**, which is the
+    #: shape of a guard killed by a field shift: present, cited, inert.
+    try:
+        ruled = (load().get("rulings") or {}).get("endpoint") or {}
+        if ruled:
+            #: THE CHAIN ALONE. Asking the ruled view whether a ruling was
+            #: needed gets "no" every time it worked.
+            resolved, unres = endpoints(apply_rulings=False)
+            for b, r in ruled.items():
+                if b.startswith("_"):
+                    continue
+                if b in unres:
+                    continue                            # would have raised
+                if b in resolved and resolved[b] == (
+                        (r or {}).get("endpoint") if isinstance(r, dict) else r):
+                    problems.append(
+                        "STALE RULING rulings.endpoint[%r]: the chain now "
+                        "resolves this base on its own. The ruling agrees, so "
+                        "nothing is wrong today -- but it is deciding nothing "
+                        "and should be retired or its `why` re-checked." % b)
+                elif b in resolved:
+                    problems.append(
+                        "CONTRADICTED RULING rulings.endpoint[%r]: the chain "
+                        "resolves to %r without it. Rulings are applied only to "
+                        "unresolved bases, so this one is INERT while reading as "
+                        "decisive." % (b, resolved[b]))
+                else:
+                    problems.append(
+                        "ORPHAN RULING rulings.endpoint[%r]: not a pretrained "
+                        "root with terminal aligned arms." % b)
+    except Exception as e:                                    # noqa: BLE001
+        problems.append("ruling check failed: %s: %s" % (type(e).__name__, str(e)[:200]))
     return problems
 
 

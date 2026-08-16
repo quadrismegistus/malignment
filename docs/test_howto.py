@@ -66,8 +66,11 @@ def main():
     check("paths", len(ps), 50)
     import collections
     dist = collections.Counter(p["n_steps"] for p in ps)
-    check("one-step paths", dist[1], 33)
-    check("two-step", dist[2], 12)
+    #: 33/12 until 2026-08-17. `stablelm`'s second step was a FABRICATED edge
+    #: (docket [6371]): `chat` and `zephyr` are siblings off the base, so that
+    #: lineage moved from a 2-step path to a 1-step one.
+    check("one-step paths", dist[1], 34)
+    check("two-step", dist[2], 11)
     check("three-step", dist[3], 5)
     check("ops line up with nodes",
           all(len(p["ops"]) == len(p["nodes"]) - 1 == p["n_steps"] for p in ps), True)
@@ -75,7 +78,7 @@ def main():
     #: Asserted so nobody reads the equal counts as the same set.
     multi = {p["base"] for p in ps if p["n_steps"] >= 2}
     chain = {c["base"] for c in roster.chains()}
-    check("multi-step lineages", len(multi), 17)
+    check("multi-step lineages", len(multi), 16)
     check("chain lineages", len(chain), 16)
     check("...and they are NOT the same 16", multi == chain, False)
 
@@ -112,7 +115,13 @@ def main():
 
     print("\npanel")
     n, prompts = corpus.panel()
-    check("models crossed", n, 154)
+    #: 154 until 2026-08-17, and the change was NOT a data change. `{db}.pairs`
+    #: is rebuilt only by `produce_movement --run`, and nothing had run it since
+    #: `distill_align` (d9b33aa, 48 -> 50 endpoints) added the Qwen3 and MiniCPM5
+    #: lineages the day before. The panel had been computed against a pair list
+    #: the roster no longer matched. Prompts are unchanged at 2,189, which is why
+    #: nothing looked wrong.
+    check("models crossed", n, 159)
     check("prompts after the live gate", len(prompts), 2189)
 
     print("\ndomains")

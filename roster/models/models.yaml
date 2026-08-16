@@ -1680,12 +1680,33 @@ edges:
 - - openbmb/MiniCPM5-1B-SFT
   - distill_align
   - openbmb/MiniCPM5-1B
-# sft -> dpo: card: trained with DPO (Zephyr-style recipe). Booked as sft -- the one
-# conflict pointing the other way, and it ADDS a dpo edge.
+# CORRECTED 2026-08-17. `chat -dpo-> zephyr` was FABRICATED: the two are SIBLINGS,
+# each finetuned from the base, and the roster booked them as a chain. Raised by
+# dario at docket [6371]; ruled by RH.
+#
+# THE ATTESTATION FILE ALREADY SAID SO, on both arms independently, and nothing
+# read it against the edge:
+#   stablelm-2-1_6b-chat    lineage: stabilityai/stablelm-2-1_6b
+#                           released_base = yes, quoting "**Finetuned from
+#                           model**: .../stablelm-2-1_6b"
+#   stablelm-2-zephyr-1_6b  lineage: stabilityai/stablelm-2-1_6b
+#                           released_base = yes, same quote
+# Neither card names the other as a parent, and chat's card lists zephyr in its
+# BENCHMARK COMPARISON TABLE -- what a card does with a peer, not with a parent.
+#
+# THE STORE SAID SO BEFORE THE CARDS DID (dario's check, worth keeping because it
+# is reusable): base->chat JS 0.2100, base->zephyr 0.1534, chat->zephyr 0.1280.
+# Under the declared chain zephyr accumulates two steps and MUST sit further from
+# the base than chat. It sits nearer. Two siblings moving in similar directions
+# is what those distances look like.
+#
+# The booked op stays `dpo` on both arms: each released checkpoint is SFT -> DPO
+# -> a self-knowledge stage, and `dpo` names the terminal preference operation,
+# which is how the op is chosen everywhere else in this file.
 - - stabilityai/stablelm-2-1_6b
   - dpo
   - stabilityai/stablelm-2-1_6b-chat
-- - stabilityai/stablelm-2-1_6b-chat
+- - stabilityai/stablelm-2-1_6b
   - dpo
   - stabilityai/stablelm-2-zephyr-1_6b
 - - team-hatakeyama-phase2/Tanuki-8B-base-v1.0
@@ -1916,6 +1937,39 @@ rulings:
     _about: '`is_representative` is DERIVED (nearest 8B over the scale group, then everything reached by aligning ops). Until now there was NOWHERE TO DISAGREE with a pick. An entry here names the checkpoint that carries its scale group instead, and the builder honours it over the size rule.'
     _format: 'scale_group_root: chosen_checkpoint   # with a reason'
     _none_yet: No override is declared. Every current pick is the size rule's, and that is stated rather than implied.
+  endpoint:
+    _about: '`endpoints()` returns `unresolved` when its chain cannot choose between two terminal aligned arms. An entry here IS THE CHOICE, made by a person, and it is applied ONLY to a base the chain left unresolved -- it can never overturn an answer the rules produced. A ruling for a base the rules DO resolve is reported as dead rather than applied silently.'
+    _format: 'base: {endpoint: <chosen>, why: <reason>, against: <the evidence that cuts the other way>}'
+    stabilityai/stablelm-2-1_6b:
+      endpoint: stabilityai/stablelm-2-1_6b-chat
+      ruled_by: RH, 2026-08-17, on docket [6371]
+      why: >-
+        Both arms are terminal, both `stabilityai`, both attested `direction: standard`,
+        `safety_data: absent`, `alignment_intent: helpfulness` -- so rules 2, 3 and 5
+        cannot separate them and the chain stops. RULE 5 IS NOT BEING OVERRIDDEN, IT IS
+        BEING APPLIED WHERE ITS PROXY FAILS: its stated purpose is "the commodity form,
+        the version end users receive", and its implementation is a publisher-string
+        comparison, which is blind when both arms carry the same publisher. Between them,
+        `-chat` is stabilityai's own product name; `-zephyr` is named for, and is an
+        implementation of, HuggingFaceH4's published recipe -- its own attestation quotes
+        "We train the model with DPO following the Zephyr recipe [70] and borrowing most
+        of its hyperparameters". Two independent facts agree: chat is LATER (created
+        2024-04-08 against zephyr's 2024-01-19, one day after the base), and chat's
+        attested dataset list is a SUPERSET, adding `teknium/OpenHermes-2.5` and
+        `argilla/dpo-mix-7k`, both recorded as "named on the chat model card only; absent
+        from tech report Table 6". The report (arXiv:2402.17834) documents the zephyr
+        pipeline; chat is the extended one that came after it.
+      against: >-
+        RECORDED BECAUSE IT CUTS THE OTHER WAY AND A RULING THAT ONLY LISTS ITS SUPPORT IS
+        NOT AUDITABLE. By use, zephyr IS the version end users receive: 9,961 downloads/30d
+        and 187 likes against chat's 1,688 and 34 -- roughly 6x and 5x. If rule 5's purpose
+        were read as POPULARITY rather than as PUBLISHER-OF-RECORD, this ruling inverts.
+        It is decided on identity, not on usage. Zephyr also has the fuller provenance,
+        being the checkpoint the technical report describes.
+      note: >-
+        Nothing is deleted. `stablelm-2-zephyr-1_6b` keeps its node, its edge from the base
+        and its cells; it is simply not the arm this lineage contributes to base->endpoint
+        comparisons.
 directions:
   # AUTHORED RULING, 2026-08-16, RH. OVERRIDES the attestation, which says
   # `inverted`. Both readings are kept: attestations.json is not edited, so the

@@ -42,7 +42,23 @@ The filter chain, and each step is there because a case forced it:
 | not attested `direction: inverted` | four exist, each quoted — a de-aligning finetune drags an "alignment does X" average toward zero, and its edge op is `sft` like any other |
 | else the family declared `representative` | RH's rulings: `olmo`, `mpt`, `mistral`, `archangel-dpo` |
 | else same publisher as the base | the commodity form |
+| else an authored `rulings.endpoint` entry | a person's choice, applied **only** where the chain abstained |
 | else **returned as `unresolved`** | never silently picked |
+
+**THE RULING STEP IS LAST ON PURPOSE.** It can settle a case the rules cannot and
+can never overturn one they can, so a ruling is incapable of silently overriding
+a derivable answer. `endpoints(apply_rulings=False)` returns what the chain alone
+decides — today **49 resolved, 1 unresolved** against the ruled view's 50 — and
+`{db}.endpoints.resolved_by` says which decided each row (`roster.endpoints` or
+`rulings.endpoint`). A ruling naming a non-candidate **raises**; a ruling the
+chain no longer needs is reported by `check_authored()`, because a ruling that
+decides nothing still reads as being in force.
+
+It exists because `stablelm` has two terminal arms that are both `stabilityai`
+and both attested `direction: standard`, so steps 2, 3 and 5 all abstain. The
+only alternatives were to declare one arm an `ablation` or attest it `inverted`
+— **both false of it**. Encoding a ruling as a fact about the model would have
+put a wrong claim into the file every other consumer reads.
 
 Without attestations `zephyr-7b-beta` and both dolphins become eligible
 *candidates*.
@@ -89,7 +105,7 @@ roster.paths()      # [{base, endpoint, nodes, ops, n_steps}]
 
 `endpoints()` gives the two ends; `chains()` gives exactly `base→sft→pref`.
 Neither answers *what did this lineage go through*, and the answer is not
-uniform: **33 paths are one step, 12 are two, 5 are three.**
+uniform: **34 paths are one step, 11 are two, 5 are three.**
 
 **THE LENGTH IS A FACT ABOUT THE PUBLISHER, NOT THE PIPELINE.**
 `Baichuan2-7B-Chat` is one step here and its own paper describes SFT then RLHF —
@@ -107,10 +123,17 @@ this before comparing two experiments on "the same" lineage.**
 Both are correct and they are not the same measurement. Anything built on
 `chains()` measures Llama through **Tulu** and Mistral through **zephyr** — and
 zephyr is attested as having no safety guardrail at all. Anything built on
-`endpoints()` measures both through the publisher's own instruct. 17 lineages
-have a multi-step path and 16 have a chain, **and they are not the same lineages**:
-`stablelm-2-1_6b` and `RedPajama` have 2-step paths that `chains()` excludes
-because their last op is `instruct` rather than a named preference op.
+`endpoints()` measures both through the publisher's own instruct. 16 lineages
+have a multi-step path and 16 have a chain, **and they are not the same sixteen**:
+`MiniCPM5-1B-Base` (`sft` → `distill_align`) and `RedPajama-INCITE-Base-7B-v0.1`
+(`sft` → `sft`) have 2-step paths that `chains()` excludes, because neither ends
+in a named preference op.
+
+*Corrected 2026-08-17.* This example used to name `stablelm-2-1_6b` as a 2-step
+path and gave the reason as "their last op is `instruct`". Both were wrong, and
+for different causes: stablelm's second step was a **fabricated edge** (docket
+[6371] — `chat` and `zephyr` are siblings off the base, not a chain), and neither
+surviving example ever ended in `instruct`. A doc example is a claim.
 
 ### any other population
 
@@ -181,12 +204,12 @@ still the right view when you do not want one endpoint per lineage.
 
 ```python
 from malignment import corpus
-n_models, prompts = corpus.panel()      # 154 models, 2,189 prompts
+n_models, prompts = corpus.panel()      # 159 models, 2,189 prompts
 ```
 
 **Never "all prompts".** Prompt sets are fleet-defined and do not nest: the
 universal intersection over all 402 measured models is **one prompt**; over the
-154 in `pairs` it is 2,190, and 2,189 after the live-status gate. The step/ladder
+159 in `pairs` it is 2,190, and 2,189 after the live-status gate. The step/ladder
 population has its own crossed panel of 2,247 which shares only **473** prompts
 with this one — so a ladder result and a pairs result cannot be put on a common
 prompt basis beyond 473.
