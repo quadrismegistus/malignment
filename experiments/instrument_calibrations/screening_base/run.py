@@ -34,7 +34,7 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))))
 
-from malignment import ch                                        # noqa: E402
+from malignment import ch, roster                                # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
@@ -122,14 +122,61 @@ def _rank(models, cov, lab):
     return rows
 
 
-def _population(floor, cov):
-    """Models at or above the floor, EXCLUDING @revision training checkpoints.
+def _untreated():
+    """Models with NO aligning op anywhere in their ancestry.
 
-    The exclusion is declared: a screener must be a released model somebody can
-    name and load, and `pythia-6.9b@step28000` is a point in a trajectory. It is
-    applied here rather than in the ranking so the excluded count is reportable.
+    **THE SCREENER MUST BE PRE-TREATMENT** (RH, 2026-08-16: *"arent we looking
+    for BASE models as the candidate?"*). The first run did not restrict this and
+    14 of its 32 candidates were aligned checkpoints -- `Tulu-3-8B-SFT`,
+    `zephyr-7b-beta`, `OLMoE-1B-7B-0125-SFT`. Their transgressive mass is
+    measured AFTER repression, so a median reading there means *this much
+    survived*, where screening asks *this much is available to be repressed*.
+    Those are different quantities and only one of them answers the question.
+
+    **NOT `roster.population("bases")`, which means pretrained ROOTS.** That
+    filter is too strict in a way that matters: `Falcon3-10B-Base` is `upscale`d
+    from `Falcon3-7B-Base` and `Falcon3-3B-Base` is `prune`d from it, so neither
+    is a root, and `Pharia-1-LLM-7B-control-hf` is a base whose pretrained
+    ancestor was never released. All three are untouched by alignment and all
+    three are legitimate screeners. `upscale` and `prune` are DERIVING but not
+    ALIGNING -- they are pretrained-to-pretrained operations.
+
+    So the test is on the OPS along the ancestry, not on being a root.
     """
-    return sorted(m for m, n in cov.items() if n >= floor and "@" not in m)
+    doc = roster.load()
+    parents = {}
+    for p, op, c in (doc.get("edges") or []):
+        parents.setdefault(c, []).append((p, op))
+    out = set()
+    for m in (doc.get("nodes") or {}):
+        seen, stack, treated = set(), [m], False
+        while stack:
+            cur = stack.pop()
+            if cur in seen:
+                continue
+            seen.add(cur)
+            for p, op in parents.get(cur, []):
+                if op in roster.ALIGNING:
+                    treated = True
+                    break
+                stack.append(p)
+            if treated:
+                break
+        if not treated:
+            out.add(m)
+    return out
+
+
+def _population(floor, cov, untreated):
+    """At or above the floor, UNTREATED, and no `@revision` checkpoints.
+
+    The revision exclusion is declared: a screener must be a released model
+    somebody can name and load, and `pythia-6.9b@step28000` is a point in a
+    trajectory. Applied here rather than in the ranking so the counts are
+    reportable.
+    """
+    return sorted(m for m, n in cov.items()
+                  if n >= floor and "@" not in m and m in untreated)
 
 
 def main():
@@ -142,10 +189,11 @@ def main():
     os.makedirs(RESULTS, exist_ok=True)
 
     cov, lab, sh = _coverage(), _labelled(), _shares()
+    untreated = _untreated()
     n_any = len(cov)
 
     # -- the declared run --------------------------------------------------
-    pop = _population(a.floor, cov)
+    pop = _population(a.floor, cov, untreated)
     rows = _rank(pop, cov, lab)
     rows.sort(key=lambda r: r["max_dev"])
     for r in rows:
@@ -165,7 +213,7 @@ def main():
     # -- refusal 2: does the winner survive the other declared floors? ------
     winners = {}
     for f in SENSITIVITY_FLOORS:
-        rs = _rank(_population(f, cov), cov, lab)
+        rs = _rank(_population(f, cov, untreated), cov, lab)
         rs.sort(key=lambda r: r["max_dev"])
         winners[f] = (rs[0]["model"], rs[0]["max_dev"], len(rs)) if rs else (None, None, 0)
     with open(os.path.join(RESULTS, "sensitivity.csv"), "w", newline="") as fh:
@@ -225,6 +273,8 @@ def main():
             "models_with_any_panel_cells": n_any,
             "models_in_population": len(pop),
             "excluded_below_floor": n_any - len([m for m in cov if cov[m] >= a.floor]),
+            "excluded_treated": len([m for m in cov if cov[m] >= a.floor
+                                     and "@" not in m and m not in untreated]),
             "excluded_revision_suffixed": len([m for m in cov
                                                if cov[m] >= a.floor and "@" in m]),
             "models": pop,

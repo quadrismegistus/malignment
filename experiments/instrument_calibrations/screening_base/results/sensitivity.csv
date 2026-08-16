@@ -1,4 +1,4 @@
 floor,winner,max_dev,n_models
-1500,Aleph-Alpha/Pharia-1-LLM-7B-control-hf,6.12903225806452,155
-2000,Aleph-Alpha/Pharia-1-LLM-7B-control-hf,6.12903225806452,155
-2180,Aleph-Alpha/Pharia-1-LLM-7B-control-hf,6.12903225806452,155
+1500,kakaocorp/kanana-2-3b-base,5.172413793103445,58
+2000,kakaocorp/kanana-2-3b-base,5.172413793103445,58
+2180,kakaocorp/kanana-2-3b-base,5.172413793103445,58

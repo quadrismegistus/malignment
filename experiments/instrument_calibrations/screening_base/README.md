@@ -2,7 +2,7 @@
 
 **Question.** Which released checkpoints are near the middle of the roster for transgressive-vocabulary mass, and are therefore reasonable models to screen slot frames with?
 
-**Status: RUN, 2026-08-16.** 155 models, 2,189-prompt panel, lexicon sha `d542e7e2bb86bd00`. **32 candidates.**
+**Status: RUN, 2026-08-16.** 58 UNTREATED models (49 of the 50 declared bases, plus 9 untreated non-roots), 2,189-prompt panel, lexicon sha `d542e7e2bb86bd00`. **15 candidates.**
 
 **id.** `screening_base`
 
@@ -14,29 +14,33 @@ This is **not** the diagnostic pair and takes a different answer. Screening read
 
 ## Result
 
-**A set, not a winner.** The candidates are the 32 of 155 models within 25 percentile points of the median on *all three* statistics — `results/candidates.csv`. The top of it:
+**A set, not a winner.** 15 of 58 untreated models sit within 25 percentile points of median on *all three* statistics — `results/candidates.csv`.
 
 | model | mean | breadth | intensity | max dev |
 |---|---|---|---|---|
-| Pharia-1-LLM-7B-control-hf | 54% | 56% | 53% | 6.1 |
-| stablelm-2-1_6b | 56% | 58% | 54% | 8.1 |
-| Falcon3-10B-Base | 51% | 49% | 59% | 9.4 |
-| Llama-3.1-Tulu-3-8B-SFT | 45% | 57% | 39% | 10.6 |
-| Olmo-3-1025-7B | 42% | 53% | 39% | 11.3 |
-| Qwen3-8B-Base | 39% | 38% | 58% | 11.9 |
+| kanana-2-3b-base | 45% | 53% | 55% | 5.2 |
+| CroissantLLMBase | 43% | 52% | 50% | 6.9 |
+| kanana-1.5-8b-base | 41% | 45% | 59% | 8.6 |
+| RedPajama-INCITE-Base-7B-v0.1 | 47% | 60% | 48% | 10.3 |
+| stablelm-2-1_6b | 40% | 38% | 62% | 12.1 |
+| Falcon-H1-7B-Base | 36% | 57% | 36% | 13.8 |
+| Pharia-1-LLM-7B-control-hf | 38% | 34% | 60% | 15.5 |
+| Falcon3-Mamba-7B-Base | 53% | 67% | 53% | 17.2 |
 
-**There is no natural break in the gradient** — 6.1, 8.1, 9.4, 10.6, 11.3, 11.3, 11.9, 13.2 — so ranking these against each other is over-reading. Any of them is a defensible screener; the set is the answer.
+No natural break in the gradient, so ranking within the set is over-reading. Stable across all three coverage floors.
 
-**For contrast, the two models actually under discussion:**
+**What falls outside, which is the useful part:**
 
-| | mean | breadth | intensity | max dev | |
+| | mean | breadth | intensity | max dev | rank |
 |---|---|---|---|---|---|
-| Llama-3.1-8B | 95% | 92% | 82% | 45.5 | rank 128/155 — **loud on all three** |
-| Falcon3-3B-Base | 11% | 29% | 8% | 42.3 | rank 109/155 — **quiet on all three** |
+| Falcon3-10B-Base | 33% | 24% | 69% | 25.9 | 17/58 |
+| Mistral-7B-v0.1 | 84% | 91% | 71% | 41.4 | 40/58 |
+| Llama-3.1-8B | 93% | 81% | 86% | 43.1 | 43/58 |
+| Falcon3-3B-Base | 3% | 10% | 3% | 46.6 | 53/58 |
 
-So Llama-3.1-8B is a poor screener, and Falcon3-3B is a poor screener while remaining the right diagnostic pair. Both are outside the candidate set by a wide margin, which is the useful thing this measured.
+**THE UNTREATED RESTRICTION CHANGED THE ANSWER.** A first run over all 155 models put `Falcon3-10B-Base` third of 32 candidates; restricted to untreated it is 17th and outside the set. That is not noise — 97 of those 155 were aligned checkpoints whose transgressive mass has already been repressed, and removing them raises the median, so a moderate model reads as quiet against it. **The mixed-population run was measuring the wrong thing and admitted the author's preferred model; this one excludes it.**
 
-**Inside the band the three statistics still differ**, and that is worth reading before choosing: `zephyr-7b-beta` is breadth 65% / intensity 36%, `OLMoE-1B-7B-0125-SFT` is breadth 40% / intensity 65%. Both are "median" on the mean and behave oppositely.
+`Llama-3.1-8B` remains loud on all three and `Falcon3-3B-Base` is the quietest base measured — 3rd, 10th and 3rd percentile. It stays the right *diagnostic* pair and is a bad screener by a wide margin.
 
 ## Method
 
@@ -47,8 +51,12 @@ Three statistics rather than one because the per-prompt distribution has a media
 | | |
 |---|---|
 | prompts | `{db}.wf_panel`, 2,189 crossed panel prompts |
-| models | ≥2,000 of those prompts measured, `@revision` checkpoints excluded — 155 of 403 |
+| models | **untreated** (no ALIGNING op anywhere in ancestry), ≥2,000 panel prompts, no `@revision` checkpoints — 58 |
 | instrument | `{db}.wf_sexviolence`, sha `d542e7e2bb86bd00`, 1,063 blind-rated words |
+
+**Untreated, not `population("bases")`.** The screener must be pre-treatment: an aligned model's transgressive mass is what SURVIVED repression, where screening asks what is AVAILABLE to be repressed. But "declared base" means pretrained ROOT, which is too strict — `Falcon3-10B-Base` is `upscale`d and `Falcon3-3B-Base` is `prune`d from the 7B, and `Pharia-1-LLM-7B-control-hf`'s ancestor was never released. `upscale` and `prune` are pretrained-to-pretrained. So the test is on the ops along the ancestry.
+
+**49 of the 50 declared bases are in.** The one missing is `mpt-7b`, which has zero panel cells — a measurement gap, not an exclusion.
 
 **Stable across coverage floors** (1500 / 2000 / 2180) — `results/sensitivity.csv`.
 
