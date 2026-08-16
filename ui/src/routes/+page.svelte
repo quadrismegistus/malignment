@@ -48,6 +48,30 @@
 		}
 	}
 	check();
+
+	//: **POLLED, BECAUSE THIS BADGE GOES STALE AND LOOKS FINE DOING IT.**
+	//:
+	//: It was called once on mount. RH asked "2 models resident — is that true?"
+	//: on 2026-08-16 and it WAS: the two claimed models answered in 0.95s and
+	//: 0.76s against 10.2s for a control that was not resident, a 13x gap which
+	//: is the model load. But the control call made it three, and the open tab
+	//: still said two.
+	//:
+	//: So the badge is not wrong when written and is wrong within one Slot run,
+	//: with nothing on screen to distinguish the two states. A number that was
+	//: true when it was rendered is exactly the kind this campaign keeps paying
+	//: for.
+	//:
+	//: `/health` reads a dict and an env var -- no ClickHouse query, no
+	//: filesystem walk -- so the poll is close to free and 15s is not a
+	//: compromise with cost. **Polling rather than refreshing after a Slot run**,
+	//: which would be the narrower fix, because `_SLOT_MODELS` is process state:
+	//: a second tab, another seat's curl, or a server restart all change it
+	//: without this page doing anything.
+	$effect(() => {
+		const t = setInterval(check, 15000);
+		return () => clearInterval(t);
+	});
 </script>
 
 <svelte:head><title>malignment</title></svelte:head>

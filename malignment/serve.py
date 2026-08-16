@@ -71,6 +71,7 @@ on the panel. **A count is a claim about what was DRAWN, not about what was
 loaded.**
 """
 import argparse
+import collections
 import csv
 import json
 import os
@@ -95,10 +96,54 @@ DEFAULT_ROW_CAP = 2000
 MAX_ROW_CAP = 50000
 
 _SLOT_LOCK = threading.Lock()
-#: {model_id: runners.Loaded}. Held for the process lifetime: the point of a
-#: resident model is that the second query is 2.6 s rather than 8 s.
-_SLOT_MODELS = {}
+#: {model_id: runners.Loaded}, ORDERED, least-recently-used first.
+#:
+#: **BOUNDED, BECAUSE THE FIRST VERSION WAS NOT** (RH, 2026-08-16: *"can we not
+#: load models unless necessary"*). Loading was already lazy -- nothing loads at
+#: startup, and only `/slot` ever loads -- but nothing ever UNLOADED, so every
+#: distinct model a caller named was held for the life of the process. An
+#: afternoon of testing left four resident, including SmolLM3-3B and OLMo-2-1B,
+#: none of which any later request wanted.
+#:
+#: That is worse in a server than in a runner. A runner processes one checkpoint
+#: and exits; this process is long-lived and its memory is whatever the union of
+#: everything anyone has ever asked for happens to be.
+_SLOT_MODELS = collections.OrderedDict()
+#: TWO BY DEFAULT because the pooled query is base + its SFT, which is the shape
+#: `/slot` exists for -- so the common case never evicts, and the uncommon one
+#: pays a reload rather than the machine paying for it forever.
+_SLOT_MAX = int(os.environ.get("MALIGNMENT_SLOT_MAX", 2))
 _ALLOW_SLOT = True
+
+
+def _evict_to(n):
+    """Drop least-recently-used entries until at most `n` remain.
+
+    **CALLED BEFORE A LOAD, NEVER AFTER.** `twp.free`'s docstring is explicit
+    about why: evicting after would hold the outgoing model while the incoming
+    one allocates, making the peak two models rather than one. That is the exact
+    defect behind the 2026-07-30 32B OOM booked as *"32B at fp16 is marginal on
+    80 GB"* -- a single 32B is 64 GB and fits; two at once do not.
+
+    **AND THE REFERENCES ARE DROPPED HERE, NOT PASSED TO `free()`.** `free(*objs)`
+    accepts arguments and cannot use them: `del o` inside it unbinds the local
+    parameter while the caller still holds the object. `popitem` dropping the
+    dict's reference is what actually releases it; `free()` then collects the
+    cycles HF modules hold and empties the allocator.
+
+    Caller must hold `_SLOT_LOCK`.
+    """
+    from . import twp
+    dropped = []
+    while len(_SLOT_MODELS) > max(0, n):
+        mid, _ld = _SLOT_MODELS.popitem(last=False)      # least recent first
+        dropped.append(mid)
+    if dropped:
+        #: No arguments. See above.
+        twp.free()
+        print("  slot: evicted %s (cap %d)" % (", ".join(dropped), _SLOT_MAX),
+              flush=True)
+    return dropped
 
 
 # ---------------------------------------------------------------------------
@@ -300,11 +345,24 @@ def _slot(prompt, model_ids, k):
 
     pooled, res_sum, skipped, n_ok = {}, {}, None, 0
     with _SLOT_LOCK:
+        #: **THE CAP CANNOT BE SMALLER THAN THIS REQUEST.** A pooled call over
+        #: three checkpoints under a cap of 2 would evict the first model before
+        #: reaching the third and then report a pool of three, which is a wrong
+        #: number rather than a slow one. The request's own width is the floor.
+        want = len(dict.fromkeys(model_ids))
+        cap = max(_SLOT_MAX, want)
         for mid in model_ids:
             ld = _SLOT_MODELS.get(mid)
             if ld is None:
+                #: EVICT FIRST, THEN LOAD -- so the peak is `cap` models and not
+                #: `cap + 1`. See `_evict_to`.
+                _evict_to(cap - 1)
                 ld = Checkpoint(mid).load()
-                _SLOT_MODELS[mid] = ld
+            #: Re-inserted on every use, not only on load, so `move_to_end`
+            #: semantics hold: LRU order has to track USE or the cache evicts
+            #: whichever model was loaded longest ago regardless of demand.
+            _SLOT_MODELS.pop(mid, None)
+            _SLOT_MODELS[mid] = ld
             try:
                 w1, r1, _calls = twp.expand(
                     ld.model, ld.tok, prompt, ld.dev, ld.bmask,
@@ -415,9 +473,13 @@ class Handler(BaseHTTPRequestHandler):
         one = lambda k, d=None: (q.get(k) or [d])[0]
 
         if path == "/health":
+            #: `slot_loaded` IS IN LRU ORDER, not sorted. The order is
+            #: information -- it says which model the next load will evict --
+            #: and sorting it alphabetically threw that away for tidiness.
             return {"status": "ok", "db": _db_name(),
                     "slot_enabled": _ALLOW_SLOT,
-                    "slot_loaded": sorted(_SLOT_MODELS)}
+                    "slot_loaded": list(_SLOT_MODELS),
+                    "slot_max": _SLOT_MAX}
         if path == "/store/inventory":
             return _store_inventory()
         if path == "/roster":
@@ -596,8 +658,8 @@ def serve(port=8431, host="127.0.0.1", slot=True):
     say("  experiments %d question%s" % (len(man), "" if len(man) == 1 else "s"))
     say("  ui_dist     %s" % (UI_DIST if os.path.isdir(UI_DIST)
                               else "(not built -- use `npm run dev`)"))
-    say("  slot        %s" % ("enabled (loads weights on first call)"
-                              if slot else "REFUSED (--no-slot)"))
+    say("  slot        %s" % ("enabled, lazy, at most %d model(s) resident"
+                              % _SLOT_MAX if slot else "REFUSED (--no-slot)"))
     try:
         srv.serve_forever()
     except KeyboardInterrupt:
@@ -613,7 +675,12 @@ def main():
     ap.add_argument("--no-slot", action="store_true",
                     help="refuse /slot outright, so no route in this process "
                          "can load weights")
+    ap.add_argument("--slot-max", type=int, default=_SLOT_MAX,
+                    help="how many models /slot may hold resident (default %d). "
+                         "A request naming more than this raises the cap for "
+                         "itself rather than evicting mid-pool." % _SLOT_MAX)
     a = ap.parse_args()
+    globals()["_SLOT_MAX"] = a.slot_max
     serve(port=a.port, host=a.host, slot=not a.no_slot)
 
 
