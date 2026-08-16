@@ -57,68 +57,73 @@ _CJK = re.compile(r"[一-鿿]")
 # the diagnostic pair
 # ---------------------------------------------------------------------------
 
-#: **`kakaocorp/kanana-1.5-8b-base -> kanana-1.5-8b-instruct-2505`** (malign,
-#: [6368], superseding Falcon3-3B).
+#: **`tiiuae/Falcon3-10B-Base -> tiiuae/Falcon3-10B-Instruct`** (RH, 2026-08-16).
 #:
-#: ONE PAIR DOES BOTH JOBS NOW (RH's design): the panel pools base+aligned on the
-#: y-axis, so poles are tagged on exactly the vocabulary movement is measured
-#: over. The two-object design had a silent hole -- poles tagged on model A's
-#: vocabulary, dN computed on pair B, so a frame whose poles B barely offers
-#: yields a dN that is arithmetically fine and about nothing.
+#: ## OUT OF SAMPLE IS NON-NEGOTIABLE, AND I BRIEFLY GAVE IT AWAY
 #:
-#: THE REQUIREMENT, IN ONE SENTENCE: a pair whose BASE is typical enough that a
-#: frame looking dead on it is really dead, and whose EDGE moves enough that a
-#: frame looking live on it really moves.
+#: [6368] lifted the out-of-population requirement and recommended `kanana`, on
+#: the grounds that contamination had been withdrawn as a hazard. **It had not.
+#: TWO hazards were in play and only one was withdrawn:**
 #:
-#:     base typical      in the 14 candidates of `instrument_calibrations/
-#:                       screening_base` -- untreated models only
-#:     edge moves        mean JS 0.3960, 3.8x the 0.1030 roster mean
-#:     runnable here     profile=default on BOTH arms
-#:     peripheral        in no finding in the project
+#:     DIRECT         screening frames while looking at movement on a pair that
+#:                    IS in the measured 50 selects frames on the outcome of a
+#:                    measurement we will report. X_safety_ablation §4a, where 39
+#:                    never-scored items reversed the ordering.  NEVER WITHDRAWN.
+#:     CORRELATIONAL  a HELD-OUT pair's movement correlating with in-sample
+#:                    pairs.  Withdrawn by RH, accepted at [6368].
 #:
-#: **AND OUT-OF-POPULATION IS NO LONGER REQUIRED.** [6363] demanded it to prevent
-#: contamination -- selecting frames on the outcome of a pair the findings use.
-#: RH withdrew the hazard and malign accepted the withdrawal at [6368], on the
-#: argument that survives without any claim about how movement transfers:
-#: `removal_rates` compares sexual against frequency-matched neutral ON THE SAME
-#: FRAMES, so a non-differential filter sits identically on both sides and
-#: cancels. Levels stay conditional on the battery, which they already were and
-#: which the population receipts already record; contrasts are protected.
+#: My [6366] withdrew the second. [6368] read it as the first and expanded the
+#: pool to in-sample pairs. **Both arms of `kanana` and of `RedPajama` are in
+#: `endpoints()`** -- verified, not assumed -- so either would have made the
+#: authoring screen select on the outcome of a measured lineage.
 #:
-#: That constraint was also what made the problem hard. It left seven pairs and
-#: forced a choice between a typical base that does not move and a mover that is
-#: not typical. Lifted, several pairs are both.
+#: ## WHAT IS LEFT ONCE THE CONSTRAINT IS RESTORED
 #:
-#: **Falcon3-3B is withdrawn as unfit**: 3rd/10th/3rd percentile, rank 53 of 58
-#: untreated models. Screening on a quiet model rejects frames that are alive
-#: elsewhere. **Falcon3-Mamba-7B is ruled out on availability, not risk**:
-#: `mamba_ssm` and `causal_conv1d` are CUDA-only, absent locally, and both arms
-#: are 4.4 MB stubs -- a ~28 GB download to discover that.
-DIAGNOSTIC_PAIR = ("kakaocorp/kanana-1.5-8b-base",
-                   "kakaocorp/kanana-1.5-8b-instruct-2505")
+#: Out of sample AND runnable on this machine leaves the unused Falcon3s:
+#:
+#:     pair                  screener rank   max_dev   edge JS   env
+#:     Falcon3-10B-Base           16 / 56      26.8     0.0714   default/default
+#:     Falcon3-3B-Base            53 / 58      46.6     0.0898   default/default
+#:     Falcon3-1B-Base                 -          -     0.0501   default/default
+#:
+#: `Falcon3-Mamba-7B` moves best of the free pairs at 0.1674 and is ruled out on
+#: AVAILABILITY: `mamba_ssm` and `causal_conv1d` are CUDA-only and absent, both
+#: arms are 4.4 MB stubs, ~28 GB to find out ([6368] §2).
+#:
+#: **The 10B over the 3B, on the screening half.** 26.8 against 46.6 -- the 3B is
+#: 3rd/10th/3rd percentile and would reject frames that are alive everywhere
+#: else. The 3B moves marginally more (0.0898 vs 0.0714) and both are below the
+#: 0.1030 roster mean anyway, so the movement difference buys less than the
+#: representativeness difference costs.
+#:
+#: ## THE LIMITATION, STATED RATHER THAN DISCOVERED
+#:
+#: **0.0714 is BELOW the roster mean of 0.1030.** A frame that looks unmoved here
+#: may move on a median lineage. That is the price of out-of-sample on this
+#: machine and it belongs on the panel, not in a footnote: the diagnostic is
+#: evidence that a frame DOES move, and weak evidence that it does not.
+DIAGNOSTIC_PAIR = ("tiiuae/Falcon3-10B-Base", "tiiuae/Falcon3-10B-Instruct")
 
-#: **PROVISIONAL PENDING AN MPS LOAD TEST** (malign, [6368]). Neither arm has an
-#: MPS observation and neither is fully cached; malign is running the same timed
-#: fp16 round-trip used for Falcon3-3B and will book the result. If it fails the
-#: fallback is `RedPajama-INCITE-Base-7B-v0.1 -> RedPajama-INCITE-7B-Chat`
-#: (0.4920, Chat arm already cached). Building against kanana on malign's word.
+#: Falcon3-3B has a booked MPS observation from [6363] (fp16, ~6 s from local
+#: cache); the 10B arms do not, and both are stubs locally. That is a download
+#: and a load test, not a design question -- unlike `kanana`, nothing about the
+#: 10B's FITNESS is open.
 DIAGNOSTIC_PAIR_PROVISIONAL = True
 
 
 def check_diagnostic_pair(pair=None):
     """Verify the pair still satisfies what is actually required of it.
 
-    **THE OUT-OF-POPULATION CHECK WAS REMOVED, AND ITS REMOVAL IS THE POINT OF
-    THIS DOCSTRING.** The first version refused any pair whose members appeared
-    in `endpoints()` or a chain, because [6363] required that. [6368] withdrew
-    the requirement -- contamination was retracted as a hazard by RH and by
-    malign -- and the declared pair is now an endpoint pair by design.
+    **THE OUT-OF-POPULATION CHECK IS BACK, AND REMOVING IT WAS MY ERROR.**
+    I took it out on [6368], which lifted the requirement because "contamination
+    has been withdrawn as a hazard". Two hazards were in play and only one was
+    withdrawn -- see `DIAGNOSTIC_PAIR`. The direct one, selecting frames on the
+    outcome of a pair that IS in the measured 50, was never withdrawn by anybody.
 
-    So this guard would have refused the pair it exists to protect. **A guard
-    enforcing a rule that has been withdrawn is worse than no guard**: it fires
-    with authority, names a real-sounding hazard, and sends the next reader to
-    fix something that was deliberately chosen. It is the code form of a figure
-    that revives a retracted result.
+    For an hour this guard would have PASSED a pair with both arms in
+    `endpoints()`. A guard that has been relaxed to admit the thing it was
+    written to refuse is worse than a guard that never existed, because its
+    silence now reads as clearance.
 
     What survives, because it is still required and still cheap:
 
@@ -130,6 +135,8 @@ def check_diagnostic_pair(pair=None):
                                   and dN a measurement of the second treatment.
         the edge IS an ALIGNING   otherwise the pair measures `prune` or
         op                        `upscale` and dN is not about alignment at all
+        OUT OF SAMPLE             neither arm in endpoints(), chain_rungs or any
+                                  declared chain -- the check restored above
 
     What is NOT checked here and must not be inferred from a pass: that the base
     is TYPICAL (a property of `screening_base`'s ranking, which moves when the
@@ -173,6 +180,25 @@ def check_diagnostic_pair(pair=None):
                 stack = []
                 break
             stack.append(p)
+
+    #: **OUT OF SAMPLE.** Neither arm may appear in any population a finding is
+    #: measured over. This is the check that makes looking at movement while
+    #: authoring safe at all: it is what stops frame selection from being
+    #: selection on the outcome of a lineage we report.
+    endpoints, _ = roster.endpoints()
+    rungs = set(roster.population("chain_rungs"))
+    chain_members = set()
+    for ch_ in roster.chains():
+        chain_members |= {ch_["base"], ch_["sft"], ch_["pref"]}
+    for m in (base, aligned):
+        for name, pop in (("endpoints (as a base)", set(endpoints)),
+                          ("endpoints (as a target)", set(endpoints.values())),
+                          ("chain_rungs", rungs),
+                          ("a declared chain", chain_members)):
+            if m in pop:
+                bad.append("%s is in %s, so frames screened while looking at its "
+                           "movement would be selected on the outcome of a "
+                           "measured lineage" % (m, name))
 
     ops = [op for p, op, c in (doc.get("edges") or [])
            if p == base and c == aligned]
