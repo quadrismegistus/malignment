@@ -873,14 +873,26 @@ nodes:
     family:
     - dolphin-llama
   openGPT-X/Teuken-7B-instruct-commercial-v0.4:
-    pretrained: false   # NOT A BASE, and its real base is not here. The card and
-                        # YAML both name `Teuken-7B-base-v0.4`, a DIFFERENT
-                        # pretraining run: "pre-trained on 4 trillion tokens"
-                        # against this roster's v0.6 root at 6 trillion. The edge
-                        # from v0.6 was a substitution, so its JS 0.1536 compared
-                        # two different pretraining runs. Edge removed; the node
-                        # and its 2,663 cells stay, excluded from base->endpoint
-                        # by the same rule that excludes phi-4.
+    pretrained: false   # NOT A BASE, and its real base is not here. Its card and
+                        # YAML name `Teuken-7B-base-v0.4`.
+                        #
+                        # CORRECTED 2026-08-16 after reading arXiv:2410.03730.
+                        # v0.4 and v0.6 are NOT two pretraining runs -- they are
+                        # two CHECKPOINTS OF ONE RUN. The paper's 5.4 "Continued
+                        # Pre-Training": "the initial goal has been to train our
+                        # base model up to 3T tokens ... we decided to train the
+                        # model on an additional 3T tokens and therefore needed to
+                        # define a new learning rate schedule", and "After 4T
+                        # tokens, we replaced the English FineWeb-EDU and continued
+                        # training until 6T tokens with DCLM-Baseline."
+                        #
+                        # The edge is still wrong and still removed: this instruct
+                        # was tuned from the 4T state, and never saw the last 2T
+                        # tokens of the run whose 6T endpoint we hold. But the
+                        # reason is "an earlier checkpoint of the same run", not
+                        # "a different run" -- which is what the first version of
+                        # this note said. Node and its 2,663 cells stay, excluded
+                        # from base->endpoint by the rule that excludes phi-4.
     # NO FAMILY, DELIBERATELY. A family is a RECIPE (one base -> one endpoint),
     # and this checkpoint's base is not in the roster, so no recipe can be formed
     # from it. A one-member `teuken-commercial` tag would have been a family that
@@ -1426,6 +1438,23 @@ unavailable:
     permanent: true
     note: as above
 provenance_notes:
+  teuken:
+    v0.6_IS_a_from_scratch_run: 'arXiv:2410.03730 -- "We present Teuken-7B-Base, a
+      European [LLM that] has been trained from scratch for 6 trillion tokens based
+      on all 24 official European languages." So the root is an INDEPENDENT
+      pretraining run and belongs among the fresh ones.'
+    v0.4_and_v0.6_are_one_run: 'Section 5.4 Continued Pre-Training: "the initial
+      goal has been to train our base model up to 3T tokens ... we decided to train
+      the model on an additional 3T tokens and therefore needed to define a new
+      learning rate schedule." And: "After 4T tokens, we replaced the English
+      FineWeb-EDU and continued training until 6T tokens with DCLM-Baseline." The
+      versions are checkpoints of ONE run at 4T and 6T, not separate runs.'
+    why_this_was_checked: 'The attestation recorded a card-vs-paper tension -- card
+      6T, an earlier paper version worded for 4T -- and I speculated the root might
+      be a continuation rather than a fresh run, like Yi-1.5 and OLMoE-0125. The
+      paper says the opposite. **The speculation was not acted on, and reading the
+      source is what settled it**; the same tension resolved by guess would have
+      moved a lineage out of the fresh-run count for no reason.'
   org_renames:
     THUDM -> zai-org: 'The GLM lineage moved org: the old registry names
       `THUDM/glm-4-9b-hf` and `THUDM/glm-4-9b-chat-hf`; this roster declares
