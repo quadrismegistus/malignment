@@ -339,6 +339,52 @@ class Checkpoint:
         from .runners import load_for_twp
         return load_for_twp(self, **kw)
 
+    def probs(self, prompt, loaded=None, **kw):
+        """The twp word distribution at this prompt. `{surface: probability}`.
+
+        **WANTED BY RH VIA `MANIFEST.md`, AND THE GAP HAD ALREADY COST ME.**
+        `malignment.serve._slot` composed `load()` + `twp.expand` by hand, which
+        made it a SECOND place the instrument is reached -- the exact thing my
+        own [6358] extraction removed from the archive, reintroduced by me one
+        level up. A missing method is not a missing convenience; it is an
+        invitation to a second path, and the second path is always the one
+        without the guards.
+
+        Returns `(words, residual)`. `words` is keyed on the SURFACE with mass
+        summed across token paths, because a word reachable by several paths
+        gets one row per path from `expand` and a caller that ignores that is
+        under-counting: 20.4% of source cells contain a duplicated surface.
+
+        **`loaded=` REUSES AN ALREADY-RESIDENT MODEL AND IS NOT AN OPTIMISATION
+        DETAIL.** A server holding models across requests must not reload per
+        call, and a `probs()` that always loaded would force it to keep its own
+        composition -- which is how this duplication started. Pass a
+        `runners.Loaded`; omit it and this loads, measures and frees.
+
+        `SkipPrompt` PROPAGATES. twp refuses a prompt that does not survive the
+        model's own tokenizer, and that refusal is an answer about the prompt.
+        Swallowing it here would return an empty distribution, which reads as
+        "this model says nothing" rather than "this model cannot be asked".
+        """
+        from . import twp as T
+        own = loaded is None
+        ld = loaded if loaded is not None else self.load(**kw)
+        try:
+            w, res, _calls = T.expand(ld.model, ld.tok, prompt, ld.dev, ld.bmask,
+                                      cjk=ld.cjk, bos_policy=ld.bos_policy)
+        finally:
+            if own:
+                #: Drop OUR references, then free. `T.free` takes arguments and
+                #: cannot use them -- see its docstring. Only the caller that
+                #: loaded may free; a passed-in `Loaded` belongs to whoever
+                #: holds it.
+                ld = None
+                T.free()
+        out = {}
+        for (surface, _t1), mass in w.items():
+            out[surface] = out.get(surface, 0.0) + float(mass)
+        return out, res
+
     def status(self):
         """Everything cheap, in one dict. For a human deciding what to run."""
         return {"model": self.model_id, "revision": self.revision,

@@ -473,9 +473,12 @@ def _slot(prompt, model_ids, k):
             _SLOT_MODELS[mid] = ld
             _SLOT_USED[mid] = _monotonic()
             try:
-                w1, r1, _calls = twp.expand(
-                    ld.model, ld.tok, prompt, ld.dev, ld.bmask,
-                    cjk=ld.cjk, bos_policy=ld.bos_policy)
+                #: **THROUGH `Checkpoint.probs`, NOT A LOCAL COMPOSITION.** This
+                #: was `twp.expand(ld.model, ld.tok, ...)` inline, which made the
+                #: server a second place the instrument is reached and a second
+                #: place the surface-summing rule lives. `loaded=ld` reuses the
+                #: resident model, so the LRU cache above still owns residency.
+                w1, r1 = Checkpoint(mid).probs(prompt, loaded=ld)
             except twp.SkipPrompt as sk:
                 #: THE INSTRUMENT'S REFUSAL IS THE ANSWER, not an error. twp
                 #: refuses a prompt that does not survive the model's own
@@ -494,11 +497,12 @@ def _slot(prompt, model_ids, k):
             #: dN, suppression and substitution are arithmetic over `per_arm`
             #: once an axis exists, and the axis is a CPU embedding call. No
             #: second request, no second load.
-            arm = {}
-            for (surface, _t1), mass in w1.items():
+            #: `probs()` already summed across token paths, so `w1` is keyed on
+            #: the surface. The local re-sum that used to live here was the
+            #: duplicated half of that rule.
+            for surface, mass in w1.items():
                 pooled[surface] = pooled.get(surface, 0.0) + float(mass)
-                arm[surface] = arm.get(surface, 0.0) + float(mass)
-            per_arm[mid] = arm
+            per_arm[mid] = dict(w1)
             #: **THE RESIDUAL IS POOLED THE SAME WAY AS THE WORDS.** The first
             #: version kept the FIRST model's residual and paired it with a mean
             #: over all of them, so `sum(words) + residual` came to 1.0499 on a
