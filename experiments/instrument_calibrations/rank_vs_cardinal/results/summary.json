@@ -1,0 +1,104 @@
+{
+  "base": "gl198976/mpt-7b",
+  "post": "gl198976/mpt-7b-instruct",
+  "producer": "CDH0050",
+  "n_prompts": 197,
+  "n_prompts_drawn": 200,
+  "n_shared_prompts": 2878,
+  "min_vocab": 5,
+  "dropped_min_vocab": [
+    {
+      "prompt": "If a number is even, it is divisible by two. Eight is even, so eight is divisible by",
+      "n_vocab": 4
+    },
+    {
+      "prompt": "The forecast was all doom and",
+      "n_vocab": 3
+    },
+    {
+      "prompt": "The mayor promised law and",
+      "n_vocab": 1
+    }
+  ],
+  "seed": 20260817,
+  "n_unresolved_lineages": 0,
+  "n_leave_one_out_axes": 24,
+  "lexical_pairs": [
+    "naughty-nice",
+    "bad-good",
+    "vice-virtue",
+    "obscene-decent",
+    "explicit-innocent",
+    "indecent-proper",
+    "vulgar-polite",
+    "dirty-clean",
+    "taboo-acceptable",
+    "immoral-moral",
+    "offensive-inoffensive",
+    "violent-gentle"
+  ],
+  "embedder": "BAAI/bge-m3",
+  "residual_mean_base": 0.25714495437865525,
+  "residual_mean_post": 0.2223802571700185,
+  "top1_share_mean": 0.2254620957966614,
+  "ps_width_mean": 0.3880663606734075,
+  "n_straddling_null": 193,
+  "top1_share_rank_mean": 0.22188973219358582,
+  "agreement": {
+    "dN_vs_dN_rank_pearson": 0.7824233408340422,
+    "dN_vs_dN_rank_spearman": 0.8479919886736422,
+    "dN_vs_delta_pearson": 0.6154413477723654,
+    "dN_vs_delta_spearman": 0.7462258553629113,
+    "dN_rank_vs_delta_spearman": 0.9317389161479083,
+    "sign_agree_dN_dN_rank": 0.8426395939086294,
+    "sign_agree_dN_delta": 0.7715736040609137
+  },
+  "axis_stability": {
+    "LOO": {
+      "dN": {
+        "spearman_mean": 0.9921646015735939,
+        "spearman_min": 0.9842096506345964,
+        "pearson_mean": 0.9951588424851265,
+        "sign_agree_mean": 0.9615059221658208,
+        "n_axes": 12
+      },
+      "dN_rank": {
+        "spearman_mean": 0.9917439441551118,
+        "spearman_min": 0.9822947176101637,
+        "pearson_mean": 0.9890096192347441,
+        "sign_agree_mean": 0.9627749576988158,
+        "n_axes": 12
+      },
+      "delta": {
+        "spearman_mean": 0.975580810696837,
+        "spearman_min": 0.961990149082245,
+        "pearson_mean": 0.9783558828092346,
+        "sign_agree_mean": 0.9623519458544839,
+        "n_axes": 12
+      }
+    },
+    "SINGLE": {
+      "dN": {
+        "spearman_mean": 0.6147043573620804,
+        "spearman_min": -0.02603994989781792,
+        "pearson_mean": 0.6380781777047771,
+        "sign_agree_mean": 0.7081218274111675,
+        "n_axes": 12
+      },
+      "dN_rank": {
+        "spearman_mean": 0.6500588083256684,
+        "spearman_min": 0.2395942225528883,
+        "pearson_mean": 0.6550649244345419,
+        "sign_agree_mean": 0.7576142131979694,
+        "n_axes": 12
+      },
+      "delta": {
+        "spearman_mean": 0.6117468060905336,
+        "spearman_min": 0.21329371619436888,
+        "pearson_mean": 0.611305382761926,
+        "sign_agree_mean": 0.751269035532995,
+        "n_axes": 12
+      }
+    }
+  }
+}

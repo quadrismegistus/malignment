@@ -329,6 +329,259 @@ class Axis:
         return {"dN": supp + subs, "suppression": supp, "substitution": subs,
                 "movers": sorted(c.items(), key=lambda x: -abs(x[1]))[:5]}
 
+    def split_rank(self, base, post, S=None):
+        """`split()` with the axis's CARDINAL values replaced by normal scores.
+
+        `dN` consumes `s(w)` as a magnitude, and the magnitudes are the least
+        stable thing this instrument produces. Measured over all 86 round-3
+        items (`experiments/instrument_calibrations/generic_axis`): splitting an
+        author's own tags in half and building two axes from the SAME item gives
+        scorings correlating at r = 0.828, not 0.95. So a third of the variance
+        in `s` is resampling noise over which words the author happened to list,
+        and `dN` inherits every bit of it -- while the ORDER those two halves
+        induce is comparatively stable.
+
+        Each word's `s` is replaced by `Phi^-1(rank / (n+1))` over the union
+        vocabulary, ties averaged, and `dN` recomputed unchanged. Invariant to
+        any monotone transform of the axis scale, so it cannot be moved by the
+        axis's magnitude, by a nonlinear stretch of one region of it, or by a
+        single outlying candidate sitting far out along it.
+
+        **WHAT IT GIVES UP IS LEVERAGE, AND LEVERAGE IS NOT OPTIONAL HERE.**
+        Ranks discard how far apart the words are, which is exactly the quantity
+        `stats()["leverage"]` reports and exactly why a flat axis is a result. An
+        item where every candidate sits at nearly the same `s` has a meaningless
+        ordering, and this statistic will happily rank it anyway. Read it with
+        `stats()`, same as `split()`.
+
+        **DISAGREEMENT WITH `split()` IS THE POINT OF COMPUTING BOTH.** Where
+        they agree, the result does not rest on the cardinal geometry. Where they
+        do not, it does -- and that is the part the split-half number says we can
+        least defend.
+        """
+        vocab = sorted(set(base) | set(post))
+        S = S if S is not None else self.score(vocab)
+        return self.split(base, post, S=_normal_scores(S))
+
+    def superiority(self, base, post, S=None):
+        """Cliff's delta on the axis: rank-based, bounded, no cardinal `s` at all.
+
+            ps      P(a word drawn from POST is more naughty than one from BASE)
+            delta   2*ps - 1, in [-1, +1], signed like dN
+
+        Draw one word from the base model's distribution and one from the aligned
+        model's; how often is the aligned word the more naughty of the two? `ps`
+        of 0.5 is no movement. It depends on NOTHING but the order of the words
+        along the axis, so unlike `split_rank` -- which still weights by `dP` in
+        rank space -- it is the fully non-parametric version, and it is the one
+        that can be said out loud without a units glossary.
+
+        **IT DOES NOT DECOMPOSE.** There is no suppression/substitution split out
+        of an AUC, and that split is load-bearing, so this is a companion to
+        `split()` rather than a replacement for it.
+
+        **BOTH DISTRIBUTIONS ARE RENORMALISED OVER THE SCORED WORDS**, because a
+        probability of superiority has to be a probability. `true_word_probs`
+        sums to `1 - residual`, so the mass in the residual bucket -- which has no
+        position on the axis and cannot be given one -- is dropped rather than
+        parked at zero, where it would read as perfectly neutral. Report
+        `residual` alongside; at a quarter of the distribution the renormalisation
+        is doing real work.
+        """
+        vocab = sorted(set(base) | set(post))
+        S = S if S is not None else self.score(vocab)
+        b = np.array([base.get(w, 0.0) for w in vocab], dtype=float)
+        p = np.array([post.get(w, 0.0) for w in vocab], dtype=float)
+        sb, sp = b.sum(), p.sum()
+        if sb <= 0 or sp <= 0:
+            return {"ps": float("nan"), "delta": float("nan"),
+                    "base_scored_mass": float(sb), "post_scored_mass": float(sp)}
+        b, p = b / sb, p / sp
+        s = np.array([S.get(w, 0.0) for w in vocab], dtype=float)
+        o = np.argsort(s, kind="stable")
+        s, b, p = s[o], b[o], p[o]
+        #: Grouped by TIED VALUE, so a tie contributes half its joint mass. Two
+        #: words at the same position are not evidence of movement either way.
+        ps = 0.0
+        i, below = 0, 0.0
+        while i < len(s):
+            j = i
+            while j < len(s) and s[j] == s[i]:
+                j += 1
+            tie_b, tie_p = b[i:j].sum(), p[i:j].sum()
+            ps += tie_p * below + 0.5 * tie_p * tie_b
+            below += tie_b
+            i = j
+        return {"ps": float(ps), "delta": float(2.0 * ps - 1.0),
+                "base_scored_mass": float(sb), "post_scored_mass": float(sp)}
+
+    def superiority_bounds(self, base, post, base_residual, post_residual, S=None):
+        """`ps` with the residual carried as an interval instead of imputed away.
+
+        `superiority()` renormalises over the scored words, which ASSERTS that the
+        mass below theta is distributed like the mass above it. It is not: on this
+        instrument lexicon words vanish below theta at 27.1% against 16.9% for
+        neutral controls, so the residual is ENRICHED IN EXACTLY THE WORDS THE AXIS
+        IS ABOUT, and renormalising preferentially discards naughty-side mass.
+        `split()`'s dN makes the opposite unstated assumption -- the residual sits
+        at s = 0, perfectly neutral. Neither is a neutral choice; one is quieter.
+
+        **BECAUSE `ps` DEPENDS ONLY ON RANK, THE ASSUMPTION CAN BE REPLACED BY A
+        BOUND.** You do not need to know where the residual sits to know what it
+        could do: put every unit of it below the nicest scored word for one
+        computation and above the naughtiest for the other, on each arm
+        independently in whichever direction is adverse, and the true `ps` is
+        inside the interval whatever the residual actually contains. No
+        distributional assumption is made and none is needed.
+
+        `dN` HAS NO SUCH BOUND. It needs the residual's cardinal positions, and
+        theta is what destroyed them. This is the sharpest practical argument for
+        the rank form: not that it is more robust, but that its dominant
+        assumption is the one that can be discharged.
+
+        The interval is honest, not tight. At a residual of ~0.25 an arm it is
+        wide, and its width IS the report: it says how much of the answer theta
+        is deciding. Where it straddles 0.5 the direction of movement is not
+        established by this instrument at this theta, whatever the point estimate
+        says.
+        """
+        vocab = sorted(set(base) | set(post))
+        S = S if S is not None else self.score(vocab)
+        lo_pos = min(S.values(), default=0.0) - 1.0
+        hi_pos = max(S.values(), default=0.0) + 1.0
+        out = {}
+        #: The adverse pairing on each side. `ps` rises when POST mass sits high
+        #: or BASE mass sits low, so the maximum puts post's residual at the top
+        #: and base's at the bottom, and the minimum reverses it.
+        for name, pp, bp in (("ps_max", hi_pos, lo_pos), ("ps_min", lo_pos, hi_pos)):
+            b2, p2 = dict(base), dict(post)
+            S2 = dict(S)
+            if base_residual > 0:
+                b2["__RESIDUAL__"] = base_residual
+                p2.setdefault("__RESIDUAL__", 0.0)
+                S2["__RESIDUAL__"] = bp
+            if post_residual > 0:
+                #: Two buckets, because the two arms' residuals go to opposite
+                #: ends. One shared key would force them to the same position.
+                p2["__RESIDUAL_POST__"] = post_residual
+                b2.setdefault("__RESIDUAL_POST__", 0.0)
+                S2["__RESIDUAL_POST__"] = pp
+            out[name] = self.superiority(b2, p2, S=S2)["ps"]
+        point = self.superiority(base, post, S=S)
+        return {"ps": point["ps"], "delta": point["delta"],
+                "ps_min": out["ps_min"], "ps_max": out["ps_max"],
+                "width": out["ps_max"] - out["ps_min"],
+                "straddles_null": out["ps_min"] <= 0.5 <= out["ps_max"],
+                "base_residual": float(base_residual),
+                "post_residual": float(post_residual)}
+
+
+def _normal_scores(S):
+    """{word: s} -> {word: van der Waerden score}, ties averaged.
+
+    `statistics.NormalDist` rather than scipy: this module's only hard
+    dependency is numpy and the inverse CDF is in the standard library.
+    """
+    from statistics import NormalDist
+    words = list(S)
+    if not words:
+        return {}
+    v = np.array([S[w] for w in words], dtype=float)
+    order = np.argsort(v, kind="stable")
+    ranks = np.empty(len(v), dtype=float)
+    i = 0
+    while i < len(v):
+        j = i
+        while j < len(v) and v[order[j]] == v[order[i]]:
+            j += 1
+        ranks[order[i:j]] = (i + j + 1) / 2.0   # 1-based, ties averaged
+        i = j
+    nd = NormalDist()
+    n = len(v)
+    return {w: nd.inv_cdf(r / (n + 1.0)) for w, r in zip(words, ranks)}
+
 
 def cache_stats():
     return {"in_process": len(_MEM), "namespace": NAMESPACE, "dir": VEC_DIR}
+
+
+def _selftest():
+    """The claims the rank statistics make, as asserts rather than as prose.
+
+        python -m malignment.slot_axis
+
+    A docstring saying "invariant to any monotone transform" is a rule somebody
+    has to remember to check. These fire.
+    """
+    import random
+    rng = random.Random(20260817)
+    ax = Axis.__new__(Axis)          # S is passed in, so no embedder is touched
+    ax._use_store = False
+    words = ["w%02d" % i for i in range(40)]
+    S = {w: rng.gauss(0, 0.08) for w in words}
+    b = [rng.random() ** 3 for _ in words]
+    p = [rng.random() ** 3 for _ in words]
+    tb, tp = sum(b) * 1.3, sum(p) * 1.3      # 1.3 => a residual, as twp has
+    base = dict(zip(words, (x / tb for x in b)))
+    post = dict(zip(words, (x / tp for x in p)))
+
+    #: 1. dN IS ORIGIN-INVARIANT, which is why the generic axis's misplaced
+    #: origin costs `N` and purity but costs movement nothing.
+    d0 = ax.split(base, post, S=S)["dN"]
+    d1 = ax.split(base, post, S={w: v + 0.37 for w, v in S.items()})["dN"]
+    assert abs(d0 - d1) < 1e-12, "dN moved under an origin shift: %r vs %r" % (d0, d1)
+
+    #: 2. THE RANK STATISTICS ARE INVARIANT TO A MONOTONE TRANSFORM AND `dN` IS
+    #: NOT. A cube stretches the tails and leaves the order alone.
+    T = {w: (v ** 3) * 1e3 for w, v in S.items()}
+    assert abs(ax.split_rank(base, post, S=S)["dN"]
+               - ax.split_rank(base, post, S=T)["dN"]) < 1e-9, "split_rank moved"
+    assert abs(ax.superiority(base, post, S=S)["delta"]
+               - ax.superiority(base, post, S=T)["delta"]) < 1e-12, "delta moved"
+    r0 = ax.split(base, post, S=S)["dN"]
+    r1 = ax.split(base, post, S=T)["dN"]
+    assert abs(r1 - r0) > abs(r0), "the cardinal dN was expected to move a lot"
+
+    #: 3. THE DECOMPOSITION SURVIVES the rank substitution.
+    sr = ax.split_rank(base, post, S=S)
+    assert abs(sr["suppression"] + sr["substitution"] - sr["dN"]) < 1e-12
+
+    #: 4. NO MOVEMENT READS AS NO MOVEMENT, and a tie is worth half.
+    same = ax.superiority(base, base, S=S)
+    assert abs(same["ps"] - 0.5) < 1e-12, "ps != 0.5 against itself: %r" % same["ps"]
+    flat = ax.superiority(base, post, S={w: 0.0 for w in words})
+    assert abs(flat["ps"] - 0.5) < 1e-12, "an all-tied axis must read 0.5"
+
+    #: 5. SIGNS AGREE with `dN` on a constructed one-way move: mass walks from
+    #: the naughtiest word to the nicest, which every statistic must call nice-ward.
+    hi = max(words, key=lambda w: S[w])
+    lo = min(words, key=lambda w: S[w])
+    moved = dict(base)
+    moved[hi], moved[lo] = base[hi] * 0.1, base[lo] + base[hi] * 0.9
+    for f in (ax.split(base, moved, S=S)["dN"],
+              ax.split_rank(base, moved, S=S)["dN"],
+              ax.superiority(base, moved, S=S)["delta"]):
+        assert f < 0, "a nice-ward move did not read negative: %r" % f
+
+    #: 6. AGAINST REFERENCE IMPLEMENTATIONS, so the hand-rolled tie handling and
+    #: inverse CDF are not merely self-consistent. scipy is a test-time import.
+    try:
+        from scipy.stats import norm, rankdata
+    except ImportError:
+        print("selftest: scipy absent, skipped the reference checks")
+    else:
+        v = np.array([S[w] for w in words])
+        ref = norm.ppf(rankdata(v) / (len(v) + 1.0))
+        got = np.array([_normal_scores(S)[w] for w in words])
+        assert np.abs(ref - got).max() < 1e-12, "normal scores differ from scipy"
+        #: PS by brute force over every pair, the definition itself.
+        pv = np.array([post[w] for w in words]); pv = pv / pv.sum()
+        bv = np.array([base[w] for w in words]); bv = bv / bv.sum()
+        gt = sum(pv[i] * bv[j] * (1.0 if v[i] > v[j] else 0.5 if v[i] == v[j] else 0.0)
+                 for i in range(len(v)) for j in range(len(v)))
+        assert abs(gt - ax.superiority(base, post, S=S)["ps"]) < 1e-12, "ps != brute force"
+    print("selftest: 6 checks passed")
+
+
+if __name__ == "__main__":
+    _selftest()
