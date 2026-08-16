@@ -28,7 +28,26 @@ import sys
 from math import comb, sqrt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.dirname(os.path.dirname(HERE)))
+
+
+def _repo_root(start):
+    """Walk up until `malignment/` is found, rather than counting directories.
+
+    The first version did `dirname(dirname(HERE))` -- correct at
+    experiments/<q>/, and broken the moment this moved to
+    experiments/<subject>/<q>/. **A hardcoded depth encodes the layout in every
+    file that uses it**, so the layout cannot change without breaking them all,
+    which is a good way to make a layout permanent by accident.
+    """
+    d = start
+    while d != os.path.dirname(d):
+        if os.path.isdir(os.path.join(d, "malignment")):
+            return d
+        d = os.path.dirname(d)
+    raise RuntimeError("no malignment/ package above %s" % start)
+
+
+sys.path.insert(0, _repo_root(HERE))
 
 from malignment import roster, ch                     # noqa: E402
 from malignment.prompts import Prompts                # noqa: E402

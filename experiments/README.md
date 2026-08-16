@@ -23,6 +23,26 @@ scripts per claim — and the letter prefixes accumulated `k_`×47, `x_`×36, `y
 meant. If a thing is not a flag on the existing question, it is a different
 question and gets its own directory, which forces someone to name it.
 
+**A SECOND LEVEL ONLY WHEN A SUBJECT HAS TWO QUESTIONS, AND THE SUBJECT HOLDS
+NOTHING.** `experiments/<subject>/<question>/` is allowed once a second question
+genuinely exists — and the subject directory then contains a README that INDEXES
+its questions and nothing else: no code, no data, no claims. Anything shared
+between the questions goes in `malignment/`.
+
+That constraint is the whole difference from `meta/M01_displacement`, which was
+created EMPTY, absorbed everything vaguely related, and reached 250 scripts for
+32 findings. **A container that exists before its contents will be filled by
+whatever is nearby.** So the first question of a subject lives flat, and the
+subject appears by promotion when the second arrives.
+
+**AND A FOLLOW-UP IS A NEW QUESTION, NEVER A ROUND.**
+`division_of_labour_round2` is `k_01`…`k_47` with better spelling: a variant
+nobody declared, whose relation to the first is knowable only by asking whoever
+ran it. A follow-up gets its own name, its own registration, and — if it was
+chosen because the first result disappointed — **a line saying so**, because a
+follow-up selected on a disappointing result is a specification search unless it
+is declared as one.
+
 **FLAT. NO NUMBERS.** `01_` encodes creation order, which git already knows, and
 invites `01a`/`01b` the first time a variant appears. Directories are named for
 their question because the question is the stable thing. A citable handle, if the
