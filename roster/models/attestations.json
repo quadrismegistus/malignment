@@ -8891,6 +8891,38 @@
     }
    ],
    "run": "wf_f963b738-20a"
+  },
+  "gl198976/mpt-7b": {
+   "lineage": "gl198976/mpt-7b",
+   "url": "https://huggingface.co/gl198976/mpt-7b",
+   "confidence": "medium",
+   "run": "manual-2026-08-16",
+   "notes": "MIRROR of the withdrawn mosaicml/mpt-7b. Corroborated rather than trusted: gretelai/mpt-7b carries byte-identical weights (sha256 f5782a8714b23c6f / 89642468caaca82f). Confidence medium because the card is MosaicML's but the repo is not, and the original is gone, so no first-party artefact survives to check against -- only agreement between independent copies.",
+   "claims": [
+    {
+     "field": "method",
+     "value": "pretrain",
+     "quote": "MPT-7B is a decoder-style transformer pretrained from scratch on 1T tokens of English text and code. This model was trained by MosaicML.",
+     "url": "https://huggingface.co/gl198976/mpt-7b"
+    },
+    {
+     "field": "train_tokens",
+     "value": "1T",
+     "quote": "pretrained from scratch on 1T tokens of English text and code",
+     "url": "https://huggingface.co/gl198976/mpt-7b"
+    },
+    {
+     "field": "license",
+     "value": "apache-2.0",
+     "quote": "license: apache-2.0",
+     "url": "https://huggingface.co/gl198976/mpt-7b"
+    },
+    {
+     "field": "direction",
+     "value": "na",
+     "quote": ""
+    }
+   ]
   }
  },
  "lineages": {

@@ -559,6 +559,38 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+  gl198976/mpt-7b:
+    # MIRROR. mosaicml/mpt-7b is gone (Databricks acquisition); this is a
+    # surviving copy, CORROBORATED rather than trusted: gretelai/mpt-7b carries
+    # byte-identical weights (sha256 f5782a8714b23c6f / 89642468caaca82f), two
+    # uploaders who do not know each other. The card is MosaicML's own:
+    # "MPT-7B is a decoder-style transformer pretrained from scratch on 1T
+    # tokens of English text and code. This model was trained by MosaicML."
+    nickname: mpt
+    country: US
+    org_type: corporate
+    scale: 7B
+    open_weight: true
+    open_data: false
+    family:
+    - mpt
+    - mpt-chat
+  gl198976/mpt-7b-instruct:
+    # Corroborated by THREE mirrors -- gl198976, oleksandrfluxon, cornuHGF --
+    # all sha256 0693d4371bfecf42 / 13197cfe0fc856d6, and DIFFERENT from the
+    # base's hashes, so it is not a mislabelled copy of it.
+    nickname: mpt-instruct
+    family:
+    - mpt
+  Alchan/mpt-7b-chat:
+    # Corroborated by Alchan and cornuHGF, sha256 07f433e032115bdb /
+    # 8cfcccd916a8b313, distinct from both base and instruct.
+    # NOT Pratye/mpt-7b-chat: that one ships a single pytorch_model.bin plus a
+    # training_args.bin -- different packaging and an artefact of someone's own
+    # finetune, uncorroborated by the other two.
+    nickname: mpt-chat
+    family:
+    - mpt-chat
   google/gemma-2-9b:
     family:
     - gemma2
@@ -1085,6 +1117,14 @@ edges:
 - - deepseek-ai/deepseek-llm-7b-base
   - sft
   - deepseek-ai/deepseek-llm-7b-chat
+# MPT, recovered from mirrors after mosaicml's repos were withdrawn. Two recipes
+# on one base, both first-party MosaicML releases.
+- - gl198976/mpt-7b
+  - sft
+  - gl198976/mpt-7b-instruct
+- - gl198976/mpt-7b
+  - sft
+  - Alchan/mpt-7b-chat
 - - google/gemma-2-9b
   - instruct
   - google/gemma-2-9b-it
@@ -1430,6 +1470,8 @@ unavailable:
       contact@opengpt-x.de"; unauthenticated API returns 401 where all three roster
       ids return 200. Not withdrawn -- gated.'
   mosaicml/mpt-7b:
+    note: 'RECOVERED 2026-08-16 from mirrors -- see node gl198976/mpt-7b. The
+      ORIGINAL repo is still dead; the weights are not.'
     kind: repo_dead
     permanent: true
     note: 404 at the HF API, not a permissions error. The repo is gone.

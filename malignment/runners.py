@@ -133,6 +133,70 @@ class _Tee:
             pass
 
 
+#: **REMOTE CODE IS REFUSED UNLESS THE CONFIG ASKS FOR IT.** RH, 2026-08-16:
+#: "i think only a few of our models need trust_remote_code". Measured across all
+#: 159 declared checkpoints by reading each config.json: **19 declare `auto_map`,
+#: 138 do not.** So passing `trust_remote_code=True` unconditionally -- which
+#: this file did -- enabled arbitrary code execution for 87% of the roster that
+#: never needed it.
+#:
+#: It also HID a failure. With remote code preferred, MPT loaded five-year-old
+#: bundled code that crashes on transformers 5.x, while native MPT support sat
+#: unused. `tiiuae/falcon-7b` and the three Teuken models are the same shape:
+#: `model_type` falcon/llama, natively supported, and still shipping `auto_map`
+#: that was being preferred over the working path.
+#:
+#: The flag now follows the config: `auto_map` present -> allow, absent -> refuse.
+#: A model that needs it declares it, which is the same principle as taking the
+#: ingest population from the payload stamp rather than a maintained list.
+#:
+#: mpt: the bundled remote code imports `_expand_mask` from
+#:      `transformers.models.bloom.modeling_bloom`, a private helper DELETED in
+#:      transformers 5.x -- so `trust_remote_code=True` raises ImportError before
+#:      a single weight loads. transformers has had NATIVE MPT support since
+#:      4.32, and it works, but the repo's five-year-old config.json writes `0`
+#:      where the strict dataclass demands `0.0`.
+#:
+#:      Exactly two fields need coercing, READ OFF THE ANNOTATIONS rather than
+#:      guessed: resid_pdrop and emb_pdrop. **attn_pdrop is annotated `int` and
+#:      must be left alone** -- coercing it "for consistency" fails with the
+#:      mirror-image error, which cost a cycle to learn.
+#:
+#:      Verified on gl198976/mpt-7b: loads as MptForCausalLM in ~104s, forward
+#:      pass gives logits (1, 6, 50432), and "She slept and the house was" ->
+#:      " quiet".
+MPT_DROP = ("auto_map", "architectures", "model_type", "transformers_version",
+            "init_config", "tokenizer_name", "torch_dtype", "verbose")
+MPT_FLOAT = ("resid_pdrop", "emb_pdrop")
+MPT_ATTN_DROP = ("attn_impl", "prefix_lm", "attn_uses_sequence_id")
+
+
+def _mpt_config(repo, revision):
+    """Native MptConfig from a repo whose config.json predates strict typing."""
+    import json
+    from huggingface_hub import hf_hub_download
+    from transformers.models.mpt.configuration_mpt import MptConfig, MptAttentionConfig
+    raw = json.load(open(hf_hub_download(repo, "config.json", revision=revision)))
+    ac = {k: v for k, v in (raw.get("attn_config") or {}).items()
+          if k not in MPT_ATTN_DROP}
+    kw = {k: (float(v) if k in MPT_FLOAT else v) for k, v in raw.items()
+          if k not in MPT_DROP and k != "attn_config"}
+    return MptConfig(attn_config=MptAttentionConfig(**ac), **kw)
+
+
+def _config_facts(repo, revision):
+    """(model_type, declares_auto_map). The config decides, not a maintained list."""
+    import json
+    from huggingface_hub import hf_hub_download
+    try:
+        c = json.load(open(hf_hub_download(repo, "config.json", revision=revision)))
+        return c.get("model_type"), bool(c.get("auto_map"))
+    except Exception:
+        #: UNREADABLE CONFIG -> REFUSE remote code. The safe direction: a model
+        #: whose config cannot be read has not asked for anything.
+        return None, False
+
+
 def _is_rate_limit(msg):
     """Status code and phrase, never the symptom. See the module docstring."""
     return ("429" in msg or "Too Many Requests" in msg
@@ -173,7 +237,17 @@ class TWPRunner:
         for attempt in range(MAX_RL_RETRIES + 1):
             try:
                 tok, loader_id = T.load_tokenizer(ck.repo, revision=ck.revision)
-                kw = {"dtype": torch.float16, "trust_remote_code": True}
+                mtype, has_remote = _config_facts(ck.repo, ck.revision)
+                kw = {"dtype": torch.float16, "trust_remote_code": bool(has_remote)}
+                if has_remote:
+                    say("  config declares auto_map -> remote code ALLOWED")
+                #: MPT is the exception to the exception: it DECLARES auto_map,
+                #: and that code is dead on transformers 5.x. Native impl instead.
+                if mtype == "mpt":
+                    kw = {"dtype": torch.float16, "trust_remote_code": False,
+                          "config": _mpt_config(ck.repo, ck.revision)}
+                    say("  LOADER OVERRIDE mpt: native impl, remote code REFUSED"
+                        " (its `_expand_mask` import is dead on transformers 5.x)")
                 if ck.revision:
                     kw["revision"] = ck.revision
                     say("  PINNED REVISION %s (main is the wrong model here)"
