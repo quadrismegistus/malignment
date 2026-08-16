@@ -42,7 +42,7 @@
 -->
 <script lang="ts">
 	import { api } from '$lib/api';
-	import type { SlotResponse, AxisResponse } from '$lib/api';
+	import type { SlotResponse, AxisResponse, Health } from '$lib/api';
 
 	let prompt = $state('She slowly took off her');
 	//: NO DEFAULT MODEL, matching the server. A default pool is a population
@@ -55,6 +55,11 @@
 	let resp: SlotResponse | null = $state(null);
 	let loading = $state(false);
 	let phase = $state<'idle' | 'loading' | 'expanding'>('idle');
+	//: Fetched once for the declared diagnostic pair, whose ids live on the
+	//: server and are verified out-of-population there. Not polled — the pair
+	//: changes only when the roster does, and the server re-checks at boot.
+	let health = $state<Health | null>(null);
+	api.health().then((h) => (health = h)).catch(() => (health = null));
 	let error = $state('');
 	let elapsed = $state(0);
 
@@ -500,6 +505,34 @@
 		<label>screening base
 			<input class="model" bind:value={model}
 				placeholder="org/base — or a comma-separated pool" /></label>
+		<!--
+		  ── THE DECLARED PAIR, OFFERED AND NOT PREFILLED (RH: "i dont see
+		  falcon3b selected in slot?").
+
+		  It was invisible, which is a real defect: a declared constant nobody can
+		  reach is a constant nobody uses. But prefilling it into THIS field would
+		  silently make it the screening base, and that is the one role it is
+		  measurably wrong for -- 32nd and 25th percentile of 389 models on
+		  naughty-pole mass, so frames screened on it read as dead when they are
+		  alive in the models actually measured. M01 in reverse.
+
+		  So: one click, and the label carries the role. This is the shape I
+		  proposed at [6362] -- "prefilled reads as what this tool measures;
+		  offered reads as what this tool screens with" -- which malign overrode
+		  for a field that IS the diagnostic pair. This field is not that field.
+
+		  The ids come from /health, verified out-of-population at server boot,
+		  rather than typed here. A second copy of a model id is a second
+		  declaration.
+		-->
+		{#if health?.diagnostic_pair?.length}
+			<button class="ghost pair"
+				title="The declared DIAGNOSTIC pair — out of endpoints() and every chain, so nothing seen through it can select. It is NOT a representative screening base: it sits in the bottom third of the roster for pole mass."
+				onclick={() => (model = health.diagnostic_pair.join(','))}>
+				use diagnostic pair
+				<span class="pairids">{health.diagnostic_pair.map((m) => m.split('/').pop()).join(' + ')}</span>
+			</button>
+		{/if}
 		<label>top-k <input class="k" type="number" bind:value={topK} min="5" max="500" /></label>
 		{#if resp}
 			<span class="meta num">
@@ -778,6 +811,10 @@
 	.controls { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
 	.controls.small { font-size: 11px; color: var(--text-3); gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
 	.controls.small label { display: flex; gap: 5px; align-items: center; }
+	/* The declared pair: offered, and visibly a different kind of thing from the
+	   free-text field beside it. */
+	.pair { display: flex; gap: 7px; align-items: baseline; white-space: nowrap; }
+	.pairids { font-family: var(--mono); font-size: 9.5px; color: var(--text-3); }
 	.prompt { flex: 1; font-size: 13px; }
 	.model { width: 300px; font-size: 11px; }
 	.k { width: 62px; font-size: 11px; }

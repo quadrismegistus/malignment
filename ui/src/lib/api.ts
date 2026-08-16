@@ -29,6 +29,9 @@ export interface Health {
 	slot_loaded: string[];
 	slot_max: number;
 	slot_ttl: number;
+	//: The declared diagnostic pair, verified out-of-population at server boot.
+	//: Empty if that check failed — so an unverified pair is never offered.
+	diagnostic_pair: string[];
 	//: {model_id: seconds since last use}. Lets a caller distinguish a model that
 	//: is resident from one about to be released by the idle reaper.
 	slot_idle: Record<string, number>;
