@@ -88,13 +88,34 @@
 	let axisLoading = $state(false);
 	let axisNote = $state('');
 	let hover = $state<{ word: string; p: number; s: number | null } | null>(null);
+	//: The full point, so the raised copy can be drawn at the same coordinates.
+	let hovered = $state<{ word: string; cx: number; cy: number } | null>(null);
+
+	//: ── THE GENERIC AXIS (RH: "show the x/y plot even before words are tagged
+	//: ... from a bge axis of literally 'naughty' - 'nice'").
+	//:
+	//: Before the author has tagged anything the panel had no x at all, so the
+	//: scatter was hidden and the first look at a frame was a bare list. The
+	//: single words `naughty` and `nice` give a real semantic direction with no
+	//: tagging, which is strictly better than an alphabetical x — alphabetical
+	//: would imply an ordering that carries nothing.
+	//:
+	//: **IT IS LABELLED GENERIC AND ITS STATISTICS ARE NOT SHOWN.** Leverage, N
+	//: and purity are properties of THE AUTHOR'S poles; computed against a
+	//: generic axis they are a different quantity wearing the same names, and
+	//: `screening_base` is this session's lesson in what that costs. The generic
+	//: axis gives positions to look at and nothing to gate on.
+	const GENERIC_POLES = { naughty: ['naughty'], nice: ['nice'] };
+	let axisGeneric = $state(false);
 
 	async function runAxis() {
-		if (!resp || !naughty.size || !nice.size) {
+		if (!resp) {
 			axis = null;
 			axisInfo = null;
 			return;
 		}
+		const generic = !naughty.size || !nice.size;
+		axisGeneric = generic;
 		axisLoading = true;
 		axisNote = '';
 		try {
@@ -111,8 +132,8 @@
 			const e = resp.edge;
 			const r = await api.slotAxis(
 				resp.prompt,
-				[...naughty],
-				[...nice],
+				generic ? GENERIC_POLES.naughty : [...naughty],
+				generic ? GENERIC_POLES.nice : [...nice],
 				words.map((w) => w.word),
 				probs,
 				e ? resp.per_arm[e.base] : undefined,
@@ -148,11 +169,14 @@
 	);
 	$effect(() => {
 		const k = poleKey;
-		if (!naughty.size || !nice.size || !words.length) {
+		if (!words.length) {
 			axis = null;
 			axisInfo = null;
 			return;
 		}
+		//: Fires with NO tags as well, so the scatter exists from the first
+		//: expansion. Still debounced: tagging is a burst and each run embeds
+		//: every candidate on CPU.
 		const t = setTimeout(runAxis, 450);
 		return () => clearTimeout(t);
 	});
@@ -254,32 +278,21 @@
 		const ly = words.map((w) => Math.log10(Math.max(w.p, 1e-5)));
 		const ylo = Math.min(...ly), yhi = Math.max(...ly);
 		const yspan = yhi - ylo || 1;
-		//: ── LABEL WHAT CAN BE READ, MARK THE REST, AND SAY HOW MANY.
+		//: ── EVERY WORD IS LABELLED (RH: "show all words, even if they overlap,
+		//: as long as they highlight on hover I can see what's underneath").
 		//:
-		//: y is log10(p), so the low-probability tail piles onto the floor of the
-		//: panel and its labels collide. Rendered at k=50 the bottom band was
-		//: illegible -- `thick`/`belt`, `wedding`/`clothing`, `uniform`/`suit`,
-		//: `scarf`/`apron` all overprinted. **Only the image shows this**: the text
-		//: is present in the DOM, correctly positioned, and no assert or type can
-		//: see that two labels occupy the same pixels.
+		//: This previously labelled the top 24 by probability and drew the rest as
+		//: marks, because the log-scale tail overprints. That traded legibility for
+		//: completeness and RH wants the other trade: overlap is acceptable when
+		//: hover raises the word out of the pile, and a mark you cannot identify is
+		//: worse than a label you have to hover to read.
 		//:
-		//: So the top `LABEL_N` by probability keep their text and the rest become
-		//: marks. That is a WINDOW on the labels and it is declared under the
-		//: panel — the points are all still plotted, and a reader must not have to
-		//: infer that the words they can read are all the words there are.
-		//:
-		//: A TAGGED WORD IS ALWAYS LABELLED whatever its probability. It is the
-		//: author's own declaration, and hiding it would make the pole sets
-		//: unreadable at exactly the moment they are being checked.
-		const ranked = words.map((w, i) => i)
-			.sort((a, b) => words[b].p - words[a].p)
-			.slice(0, LABEL_N);
-		const keep = new Set(ranked);
+		//: The hovered word is re-drawn ON TOP after the loop, because SVG has no
+		//: z-index and paints in document order — CSS alone cannot raise it.
 		return words.map((w, i) => ({
 			word: w.word,
 			p: w.p,
 			s: xs[i],
-			labelled: keep.has(i) || naughty.has(w.word) || nice.has(w.word),
 			cx: 6 + ((xs[i] - xlo) / span) * 88,
 			cy: 92 - ((ly[i] - ylo) / yspan) * 84
 		}));
@@ -288,8 +301,7 @@
 	//: not on a 1560px panel. It is a legibility budget, so it has no better
 	//: justification than the rendered image and should be re-checked if the
 	//: panel geometry changes.
-	const LABEL_N = 24;
-	let nUnlabelled = $derived(pts.filter((q) => !q.labelled).length);
+
 
 	//: The scatter's own pixel width, so the viewBox matches its aspect ratio.
 	//: 420 is the CSS height; if that changes, change it here. This was `0 0 100
@@ -697,7 +709,7 @@
 					<span class="val num bad">{resp.n_answered}/{resp.n_models}</span>
 				</div>
 			{/if}
-			{#if axisInfo?.ok}
+			{#if axisInfo?.ok && !axisGeneric}
 				<!--
 				  LEVERAGE IS THE SPREAD OF MASS ALONG THE AXIS, and it is the
 				  quantity branch mass is not. dN = sum dP(w)s(w), so an item can
@@ -770,7 +782,7 @@
 			{/if}
 		</div>
 
-		{#if axisInfo?.ok}
+		{#if axisInfo?.ok && !axisGeneric}
 			<!--
 			  ── THE THRESHOLDS ARE PRINTED AND DRAW NO VERDICT, and this line is
 			  the whole reason that is safe to show at all.
@@ -796,21 +808,44 @@
 
 		{#if clearedNote}<p class="clearednote">{clearedNote}</p>{/if}
 
-		{#if !axis}
+		{#if axisGeneric && axis}
 			<!--
-			  THE FENCE NOW NAMES WHAT IS MISSING, WHICH IS TAGS AND NOT A PORT.
-			  It used to say the bge projection "has not been ported to v3" —
-			  true when written and false the moment `slot_axis.py` landed. A
-			  fence that outlives its cause is worse than none: it reads as a
-			  standing limitation and nobody re-checks it.
+			  ── THE GENERIC AXIS IS WEAK, AND THE PANEL SAYS SO WITH NUMBERS.
+			
+			  The first version of this line said it was "enough to see the shape of
+			  the frame". Measured on `She slowly took off her`, that is false:
+			
+			      pole gap        generic 0.3788   authored 0.3187
+			      score span      generic 0.0722   authored 0.4468   6.2x narrower
+			      order agreement 37 of 55 pairs = 67%
+			
+			  The poles are WELL separated -- the gap is wider than the authored
+			  one -- but the candidate words project almost orthogonally to the
+			  naughty-nice direction, so the positions are near-noise and INVERT:
+			  `dress` -0.0336 and `shirt` -0.0245 land on the NICE side while
+			  `headscarf` +0.0174 is the most naughty word on the panel.
+			
+			  That is exactly what `slot_axis`'s own docstring warns about a bare-word
+			  axis: it put `dick` at +0.013 (the NAME) and `erection` at -0.037
+			  (buildings), both below `forehead`. Context is what makes the axis work.
+			
+			  It is still shown, because RH asked for a picture before tagging and a
+			  weak picture that says it is weak beats no picture. But "enough to see
+			  the shape" was a claim I had not checked, and checking it took one query.
 			-->
 			<p class="declare warn">
-				NO AXIS YET &mdash; tag at least one word on each side and the projection builds
-				itself. Until then the scatter is not drawn, because a horizontal position with no
-				axis behind it would carry nothing, and the list is ordered by probability alone.
+				GENERIC AXIS, AND IT IS WEAK &mdash; positions come from the bare words
+				<em>naughty</em> and <em>nice</em>, not from your poles. Measured on this frame it
+				spans <span class="num">6.2x</span> less than an authored axis and agrees with one on
+				only <span class="num">67%</span> of orderings, putting <em>dress</em> and <em>shirt</em>
+				on the nice side. Read it as a rough layout, not as a reading. Leverage, N and purity are
+				withheld until the poles are yours.
+			</p>
+		{:else if !axis}
+			<p class="declare warn">
+				NO AXIS &mdash; the projection could not be built. {axisNote || 'The two poles may be identical in embedding space.'}
 			</p>
 		{/if}
-
 		<p class="hint">
 			left-click = nice · right-click = naughty · on the scatter, Enter = nice and Shift+Enter =
 			naughty
@@ -836,10 +871,10 @@
 							y={pt.cy}
 							class:tn={naughty.has(pt.word)}
 							class:tc={nice.has(pt.word)}
-							onmouseenter={() => (hover = { word: pt.word, p: pt.p, s: pt.s })}
-							onmouseleave={() => (hover = null)}
-							onfocus={() => (hover = { word: pt.word, p: pt.p, s: pt.s })}
-							onblur={() => (hover = null)}
+							onmouseenter={() => { hover = { word: pt.word, p: pt.p, s: pt.s }; hovered = pt; }}
+							onmouseleave={() => { hover = null; hovered = null; }}
+							onfocus={() => { hover = { word: pt.word, p: pt.p, s: pt.s }; hovered = pt; }}
+							onblur={() => { hover = null; hovered = null; }}
 							onkeydown={(e) => {
 								if (e.key === 'Enter' || e.key === ' ') {
 									e.preventDefault();
@@ -847,8 +882,21 @@
 								}
 							}}
 							onclick={() => tag(pt.word, 'nice')}
-							oncontextmenu={(e) => tag(pt.word, 'naughty', e)}>{pt.labelled ? pt.word : '·'}</text>
+							oncontextmenu={(e) => tag(pt.word, 'naughty', e)}>{pt.word}</text>
 					{/each}
+					<!--
+					  THE HOVERED WORD, PAINTED AGAIN AND LAST. SVG has no z-index and
+					  paints in document order, so CSS cannot raise a <text> out of the
+					  pile it is buried in. Re-drawing it after the loop is what makes
+					  "overlap is fine if hover shows what is underneath" true rather
+					  than merely intended. The halo is a stroke UNDER the fill, so the
+					  glyph itself is not thickened.
+					-->
+					{#if hovered}
+						<text class="raised" x={(hovered.cx * vbW) / 100} y={hovered.cy}
+							class:tn={naughty.has(hovered.word)} class:tc={nice.has(hovered.word)}
+						>{hovered.word}</text>
+					{/if}
 				</svg>
 				<!--
 				  THE COORDINATE READOUT IS FIXED, NOT A FLOATING TOOLTIP. A tooltip
@@ -876,10 +924,8 @@
 						  infer that the words they can read are all the words there
 						  are — same rule as the row cap on a result table.
 						-->
-						{#if nUnlabelled > 0}
-							&middot; all {pts.length} plotted, {nUnlabelled} shown as
-							&middot; (label would overprint)
-						{/if}
+						&middot; all {pts.length} labelled, overlapping
+						&mdash; hover raises one out of the pile
 					</span>
 					<span>naughty →</span>
 				</div>
@@ -989,6 +1035,18 @@
 		cursor: pointer; text-anchor: middle;
 	}
 	.scatter text:hover { fill: #fff; }
+	/* The raised copy: a halo stroke painted UNDER the fill so the glyph is not
+	   thickened, and pointer-events off so it cannot steal the hover from the
+	   text beneath it and flicker. */
+	.scatter text.raised {
+		fill: #fff;
+		paint-order: stroke;
+		stroke: var(--ground);
+		stroke-width: 1.1px;
+		stroke-linejoin: round;
+		font-weight: 700;
+		pointer-events: none;
+	}
 	.scatter text.tn { fill: var(--red); font-weight: 700; }
 	.scatter text.tc { fill: var(--blue-light); font-weight: 700; }
 	.scatter .mid { stroke: var(--rule); stroke-width: 0.25; stroke-dasharray: 1 1; }
