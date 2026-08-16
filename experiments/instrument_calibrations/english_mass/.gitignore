@@ -1,0 +1,13 @@
+# The 10 MB merged wordlist is NOT committed. Two reasons, both binding:
+#
+#   1. It is DERIVED and cheap -- `python build_list.py --load` rebuilds it from
+#      web2, worddb.byu.txt and the wordfreq package in a few seconds. A derived
+#      artifact in the tree is a second copy that can go stale against the rule
+#      that made it.
+#   2. This repository is PUBLIC. web2, COCA/BNC and wordfreq each carry their
+#      own attribution terms; a merged list is a redistribution of all three
+#      under none of them. The sources stay where their provenance is recorded
+#      (`lexicons/PROVENANCE.md`) and the merge stays local.
+#
+# `english_mass.*.json` IS committed -- it is the result, and it is small.
+results/english_words.tsv
