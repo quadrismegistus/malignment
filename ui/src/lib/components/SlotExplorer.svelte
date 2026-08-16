@@ -147,7 +147,9 @@
 	async function run() {
 		if (!prompt.trim()) return;
 		if (!model.trim()) {
-			error = 'name at least one checkpoint id — there is deliberately no default';
+			error =
+				'name a screening base — there is deliberately no default, because there are ' +
+				'several defensible answers and the choice is a population choice';
 			return;
 		}
 		loading = true;
@@ -371,9 +373,32 @@
 			`  nice_mass: ${niceMass.toFixed(4)}\n` +
 			`  share: ${Number.isNaN(share) ? 'null' : share.toFixed(4)}\n` +
 			`  writer: slot-explorer\n` +
+			//: ── `role: screening`, NAMED (malign, [6363]).
+			//:
+			//: There are TWO roles and this panel only fills one:
+			//:
+			//:   SCREENING BASE   one distribution, no contrast. leverage, purity,
+			//:                    pole_gap, pole mass. "can this frame move at all"
+			//:   DIAGNOSTIC PAIR  base + aligned. dN, suppression, substitution.
+			//:                    "what does the instrument do here"
+			//:
+			//: An item screened on one and diagnosed on another is two facts, and
+			//: one field cannot hold them. So the role is written rather than
+			//: implied, and a later diagnostic pass appends `diagnosed_by`
+			//: alongside instead of overwriting this.
+			//:
+			//: **AND `models` IS A LIST BECAUSE THE PRACTICE POOLS, WHICH THE ROLE
+			//: DESCRIPTION DOES NOT.** [6363] calls screening "one distribution, no
+			//: contrast", and the 86 archive items were nonetheless screened on a
+			//: POOL -- Llama-3.1-8B + Tulu-3-8B-SFT as a mean, recovered from their
+			//: own recorded masses at [6365]. Both readings are defensible: pooling
+			//: buys coverage of arrival-side vocabulary the base never offers. That
+			//: tension is not mine to resolve, so the stamp records what actually
+			//: ran and stays true under either ruling.
 			`  screened_by:\n` +
+			`    role: screening\n` +
 			`    models: ${list(resp.models)}\n` +
-			`    pooled: ${resp.n_models > 1}\n` +
+			`    pooled: ${resp.n_models > 1}${resp.n_models > 1 ? '   # summed then divided by the models that ANSWERED' : ''}\n` +
 			`    displayed: probability          # movement NEVER shown at authoring time\n` +
 			`    rule_version: ${resp.rule_version}\n` +
 			`    dict_sha: ${resp.dict_sha}\n` +
@@ -456,7 +481,25 @@
 		</p>
 	{/if}
 	<div class="controls small">
-		<label>models <input class="model" bind:value={model} placeholder="org/base,org/sft — comma separated" /></label>
+		<!--
+		  LABELLED FOR ITS ROLE, AND LEFT EMPTY (malign, [6363]). This is the
+		  SCREENING base, not the diagnostic pair, and the two take different
+		  answers: screening wants a REPRESENTATIVE model, because selection on
+		  P_base is a pre-treatment covariate and cannot bias a base->aligned
+		  contrast measured after it.
+
+		  Empty on purpose. A default is a population choice hiding in a server
+		  *when there are several defensible answers*, and for the screening base
+		  there are many — so the choice gets made, named and stamped every time.
+		  The diagnostic pair is the opposite case (one declared answer, its
+		  correctness a property of the roster) and WILL be prefilled, on the
+		  movement route, when that route exists. It is not offered here, because
+		  a control that appears to affect a measurement and drives nothing is
+		  worse than an absent one.
+		-->
+		<label>screening base
+			<input class="model" bind:value={model}
+				placeholder="org/base — or a comma-separated pool" /></label>
 		<label>top-k <input class="k" type="number" bind:value={topK} min="5" max="500" /></label>
 		{#if resp}
 			<span class="meta num">
