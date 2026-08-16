@@ -54,7 +54,7 @@ def _repo_root(start):
 ROOT = _repo_root(HERE)
 sys.path.insert(0, ROOT)
 
-from malignment import ch, roster                         # noqa: E402
+from malignment import ch, corpus, roster                         # noqa: E402
 from malignment.prompts import Prompts                    # noqa: E402
 from malignment.wordfield import WordField, measure       # noqa: E402
 
@@ -126,17 +126,6 @@ def build_sets():
     return sets, meta, lex
 
 
-def panel():
-    """Crossed over the pairs population AND declared live. Both gates, always."""
-    live = {p.text for p in Prompts.all()}
-    n = ch.scalar("""SELECT count(DISTINCT m) FROM (
-        SELECT base AS m FROM {db}.pairs UNION DISTINCT SELECT aligned FROM {db}.pairs)""")
-    rows = ch.query("""SELECT prompt FROM {db}.twp_words
-        WHERE model IN (SELECT base FROM {db}.pairs UNION DISTINCT SELECT aligned FROM {db}.pairs)
-        GROUP BY prompt HAVING count(DISTINCT model) = %d""" % n)
-    return n, [r["prompt"] for r in rows if r["prompt"] in live]
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--push", action="store_true")
@@ -154,7 +143,7 @@ def main():
     f.check_sha(LEXICON_SHA)
 
     cs = roster.chains()
-    n_models, prompts = panel()
+    n_models, prompts = corpus.panel(verbose=True)
     print("  panel   %d prompts crossed over %d models" % (len(prompts), n_models))
     print("  chains  %d over %d lineages" % (len(cs), len({c["base"] for c in cs})))
 
@@ -163,11 +152,7 @@ def main():
     cells = measure(pairs, f, prompts=prompts)
     print("  cells   %d (from, to, prompt, set)" % len(cells))
 
-    dom = {}
-    for p in Prompts.all():
-        dv = (p._row.get("domain") or "").strip()
-        if dv:
-            dom.setdefault(p.text, dv)
+    dom = corpus.domains(prompts)
 
     os.makedirs(RESULTS, exist_ok=True)
     with open(os.path.join(RESULTS, "cells.csv"), "w", newline="", encoding="utf-8") as fh:

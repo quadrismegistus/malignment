@@ -387,3 +387,53 @@ def sign_mde(diffs, seed=20260816, power=0.80, n_sim=2000, grid=None):
         if hits / n_sim >= power:
             return shift
     return None
+
+
+def matched_nonmovers(base, aligned, words, tau=0.005, tol=1.0, prompts=None):
+    """For each (prompt, word), the UNMOVED word the aligned model finds equally improbable.
+
+    Carried from the archive's `Movement.matched_nonmover`, which is the only
+    part of `cell.py`/`step.py` (471 lines) that was a MEASUREMENT rather than a
+    WHERE clause.
+
+    **WHY IT IS SHARPER THAN A FREQUENCY-MATCHED CONTROL.** A faller/riser
+    contrast varies two things at once: the word was DEMOTED, and it is
+    IMPROBABLE TO THE ALIGNED MODEL. `removal_rates` controls the first by
+    matching on corpus frequency ACROSS words; this controls the second by
+    matching on `p_aligned` WITHIN the same cell. Different confounds, and the
+    original spec named this one before its run: "a word matched on
+    improbability-under-aligned but NOT demoted by alignment".
+
+    `basis` is the POST arm deliberately. Matching on `p_base` controls what the
+    BASE model expected, which is a different question.
+
+    `tol` is |log2(p_candidate / p_target)|, so tol=1.0 is a factor of two.
+    A non-mover is |delta| <= tau. Returns the CLOSEST qualifying word, not the
+    first -- `argMin` over the log-ratio distance.
+
+    In v3 this is a query, not a class: `movement` already carries p_base,
+    p_aligned, delta and cls per (base, aligned, prompt, word).
+    """
+    ws = "','".join(w.replace("'", "\\'") for w in words)
+    wp = ("AND m.prompt IN (SELECT prompt FROM {db}.wf_panel)"
+          if prompts is not None else "")
+    if prompts is not None:
+        _panel_table(prompts)
+    q = """
+        WITH tgt AS (
+            SELECT prompt, word, p_aligned FROM {db}.movement m
+            WHERE base = '%s' AND aligned = '%s' AND word IN ('%s')
+              AND p_aligned > 0 %s),
+        still AS (
+            SELECT prompt, word, p_aligned FROM {db}.movement m
+            WHERE base = '%s' AND aligned = '%s' AND abs(delta) <= %g
+              AND p_aligned > 0 %s)
+        SELECT t.prompt AS prompt, t.word AS target, t.p_aligned AS p_target,
+               argMin(s.word, abs(log2(s.p_aligned / t.p_aligned))) AS control,
+               min(abs(log2(s.p_aligned / t.p_aligned))) AS log2_gap
+        FROM tgt t INNER JOIN still s ON s.prompt = t.prompt
+        WHERE s.word != t.word AND abs(log2(s.p_aligned / t.p_aligned)) <= %g
+        GROUP BY prompt, target, p_target""" % (
+        base.replace("'", "\\'"), aligned.replace("'", "\\'"), ws, wp,
+        base.replace("'", "\\'"), aligned.replace("'", "\\'"), tau, wp, tol)
+    return ch.query(q)

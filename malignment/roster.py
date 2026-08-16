@@ -652,3 +652,46 @@ def check_authored(path=None):
     except Exception as e:                                    # noqa: BLE001
         problems.append("%s: %s" % (type(e).__name__, str(e)[:300]))
     return problems
+
+
+#: TRAINING ORDER, with INCOMPARABILITY declared. `ALIGNING` is a set and says
+#: nothing about sequence; this says base precedes sft precedes any preference
+#: method precedes rlvr, AND that the preference methods are alternatives rather
+#: than a sequence -- kto->dpo has no direction, and claiming one would invent an
+#: ordering the training never had. Carried from the archive's `step.py`, which
+#: is otherwise a WHERE clause: this tuple is the part that was knowledge.
+STAGE_ORDER = (
+    ("base", "pretrain"),
+    ("sft", "distill", "continual"),
+    ("dpo", "kto", "ppo", "slic", "orpo", "simpo", "instruct", "rlhf", "apo"),
+    ("rlvr",),
+)
+
+
+def stage_rank(op):
+    """Index in STAGE_ORDER, or None if the op is not a training stage."""
+    for i, tier in enumerate(STAGE_ORDER):
+        if op in tier:
+            return i
+    return None
+
+
+def direction(pre_op, post_op):
+    """'forward' | 'reverse' | 'incomparable' | 'unknown'.
+
+    The archive stamped this on every cell rather than refusing a reverse pair,
+    because teacher-forcing base->sft and then sft->base is real work here -- so
+    a step that raised on reverse order would block the experiment. Detectable
+    rather than forbidden. v3 currently holds ZERO reverse pairs, so this has no
+    work today; it is here so that a reverse arm cannot be pooled with a forward
+    one WITHOUT the mixing being visible.
+
+    `incomparable` is not a failure: two preference methods on the same rung are
+    alternatives and their contrast has no direction at all.
+    """
+    a, b = stage_rank(pre_op), stage_rank(post_op)
+    if a is None or b is None:
+        return "unknown"
+    if a == b:
+        return "incomparable"
+    return "forward" if a < b else "reverse"

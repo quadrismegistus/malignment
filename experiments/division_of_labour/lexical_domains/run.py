@@ -61,7 +61,7 @@ def _repo_root(start):
 ROOT = _repo_root(HERE)
 sys.path.insert(0, ROOT)
 
-from malignment import ch, roster                                   # noqa: E402
+from malignment import ch, corpus, roster                                   # noqa: E402
 from malignment.prompts import Prompts                              # noqa: E402
 from malignment.wordfield import (WordField, measure, conservation,  # noqa: E402
                                   paired_stats, sign_mde, JS_TERM)
@@ -78,34 +78,6 @@ RESULTS = os.path.join(HERE, "results")
 
 def field():
     return WordField.from_lexicon(FIELD, LEXICON, key="category")
-
-
-def panel():
-    """Prompts held by EVERY model in the pairs population AND declared live.
-
-    THE STATUS GATE IS APPLIED HERE, NOT ASSUMED. Building the panel from
-    `twp_words` alone takes whatever was measured, which is not the declared
-    population: it admitted `f11_reason_BOTH`, whose status is
-    `MIXED: ACTIVE/DISPUTED` and which `Prompts.all()` excludes. One prompt of
-    1,760 -- but the defect is that the panel was defined by measurement history
-    rather than by the declaration, and a seat struck that prompt for a reason.
-
-    Not "all prompts" either: prompt sets are fleet-defined and do not nest, so
-    the universal intersection over all 402 measured models is ONE prompt; over
-    the 154 in `pairs` it is 2,190.
-    """
-    live = {p.text for p in Prompts.all()}
-    n = ch.scalar("""SELECT count(DISTINCT m) FROM (
-        SELECT base AS m FROM {db}.pairs UNION DISTINCT SELECT aligned FROM {db}.pairs)""")
-    rows = ch.query("""SELECT prompt FROM {db}.twp_words
-        WHERE model IN (SELECT base FROM {db}.pairs UNION DISTINCT SELECT aligned FROM {db}.pairs)
-        GROUP BY prompt HAVING count(DISTINCT model) = %d""" % n)
-    crossed = [r["prompt"] for r in rows]
-    kept = [p for p in crossed if p in live]
-    if len(kept) != len(crossed):
-        print("  panel: %d crossed, %d dropped by the status gate"
-              % (len(crossed), len(crossed) - len(kept)))
-    return n, kept
 
 
 def explicit_prompts():
@@ -269,7 +241,7 @@ def main():
     f.check_sha(LEXICON_SHA)
 
     cs = roster.chains()
-    n_models, prompts = panel()
+    n_models, prompts = corpus.panel(verbose=True)
     print("  panel   %d prompts crossed over %d models" % (len(prompts), n_models))
     print("  chains  %d over %d distinct bases" % (len(cs), len({c["base"] for c in cs})))
     con = conservation((cs[0]["base"], cs[0]["sft"]), prompts)
@@ -280,11 +252,7 @@ def main():
                     + [(c["base"], c["pref"]) for c in cs], f, prompts=prompts)
 
     os.makedirs(RESULTS, exist_ok=True)
-    dom = {}
-    for p in Prompts.all():
-        dv = (p._row.get("domain") or "").strip()
-        if dv:
-            dom.setdefault(p.text, dv)
+    dom = corpus.domains(prompts)
     expl = explicit_prompts()
 
     # THE FINEST GRAIN MEASURED. analyse.py reads this and nothing else, so an
