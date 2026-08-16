@@ -135,6 +135,8 @@ This table exists because separating instrument registrations from hypothesis re
 | **R2** | the register signature is larger for sexual than violent | `register_shift` | not run |
 | **R3** | archaic violent mass rises (`smite`) | `register_shift` | not run — **declared underpowered, ineligible for a headline** |
 | **R4** | every R1/R2 effect survives frequency-matched controls | `register_shift` | not run — **a gate, not a robustness check** |
+| **A** | SEXUAL vocabulary is preferentially removed by SFT (vs frequency-matched neutral) | `division_of_labour/removal_rates` | **SUPPORTED** — +0.0894, CI [+0.023, +0.161]; SFT strips 37.7% of sexual vs 26.8% neutral |
+| **B** | VIOLENT vocabulary is preferentially removed by the preference stage | `division_of_labour/removal_rates` | **NOT SUPPORTED** — bounded to ±0.05; violence is SFT-dominated too |
 
 `sex_violence_lexicon` appears nowhere in this table **on purpose**: it registers no hypothesis. It declares one gate (controls >5% ⇒ the instrument is not admitted) and five construction/custody rules, and says nothing about what alignment does.
 
@@ -153,5 +155,7 @@ The two also fail differently, and the difference is the point:
 ## Withdrawn claims
 
 **2026-08-16 — *"SFT handles sex, DPO handles violence."*** Null at prompt level (H3, base p=0.077) and at word level (L1, +0.0024, CI ±0.047), on two different measurements. `lexical_domains`'s registered stopping rule pre-committed withdrawal on a second null, so it is withdrawn rather than tested a third time. **Nothing in this project may rest on it.** The better instrument did not rescue the effect — it made it smaller (+0.0086 → +0.0052) and less certain (p=0.077 → p=0.45).
+
+**PARTIALLY RECOVERED 2026-08-16 by `removal_rates`.** The claim stays withdrawn *as a conjunction* — its second half (DPO/violence) is bounded to ±0.05. But its **first half is supported** under an operationalisation measuring falls against inherited mass at both real edges: SFT removes 37.7% of inherited sexual mass against 26.8% for frequency-matched neutral words. H3 and L1 measured a symmetric divergence normalised by a path length that never touched the preference step, so neither was evidence about the claim.
 
 **Recorded honestly: L1's operationalisation was later found wrong** — `share` is not a share (JS is not additive along a path), violence was used as sexual's baseline (blind to "SFT handles both"), and the preference step never entered the statistic. The withdrawal fired on a pre-committed test and is **not** being quietly reversed; the claim stands as *not supported as tested*, and the correct test is a new question to be registered with the contrast and baseline agreed first.

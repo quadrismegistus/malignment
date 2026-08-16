@@ -22,6 +22,11 @@ until someone diffed the two definitions.
 
 ## THE THREE THINGS THAT MUST NOT BE RETYPED
 
+**0. `inherited`** -- the mass the aligned side STARTED from, i.e. `sum(p_base)`
+of that edge. For a sequential pipeline this is the only fair denominator: the
+preference stage inherits what SFT already stripped, so comparing raw amounts
+punishes it for arriving second. Removal RATE = departed / inherited.
+
 **1. The per-word JS term.** JS is a sum over words plus a tail, so a label's
 contribution is EXACT, not approximate:
 
@@ -48,7 +53,7 @@ A lexicon labels words (`sexual`/`violent`); a rating scores them (vulgarity
 0-1). Both are word-level annotations joined to the same movement rows, so both
 belong here, but they aggregate differently and must not be silently mixed:
 
-    categorical   group by label; js/departed/arrived per label
+    categorical   group by label; js/departed/arrived/inherited per label
     continuous    mass-weighted sums, so a weighted mean and a delta-correlation
                   can be derived downstream WITHOUT re-querying 54M rows
 
@@ -126,6 +131,22 @@ class WordField:
     def from_dict(cls, name, values, kind="categorical", sha="", source="ad hoc"):
         return cls(name, values, kind, sha=sha, source=source)
 
+    @classmethod
+    def from_sets(cls, name, sets, sha="", source="sets"):
+        """{setname: iterable_of_words} -> a field where A WORD MAY BE IN SEVERAL SETS.
+
+        `from_dict` maps each word to one label, which cannot express
+        `rape` being sexual content AND violent content. That is only sound
+        where the sets are never contrasted with each other: in a difference,
+        a shared word is double-counting; in two INDEPENDENT tests it is simply
+        true. `removal_rates` requires it, and requires it for exactly that
+        reason (see its registration, section 5).
+        """
+        pairs = [(w, setname) for setname, ws in sets.items() for w in ws]
+        f = cls(name, {}, "categorical", sha=sha, source=source)
+        f._pairs = pairs
+        return f
+
     # -- materialise -------------------------------------------------------
     @property
     def table(self):
@@ -138,9 +159,10 @@ class WordField:
             word String, label {col}, sha LowCardinality(String),
             source LowCardinality(String)
         ) ENGINE = MergeTree ORDER BY word""")
+        rows = getattr(self, "_pairs", None) or list(self.values.items())
         ch.insert(self.table, [{"word": w, "label": v, "sha": self.sha,
-                                "source": self.source} for w, v in self.values.items()])
-        return len(self.values)
+                                "source": self.source} for w, v in rows])
+        return len(rows)
 
     def check_sha(self, expected):
         got = ch.scalar(f"SELECT any(sha) FROM {{db}}.{self.table}")
@@ -179,6 +201,7 @@ def measure(pairs, field, prompts=None):
                sum({JS_TERM % {'a': 'm'}}) AS js,
                sum(if(m.delta < 0, -m.delta, 0)) AS departed,
                sum(if(m.delta > 0,  m.delta, 0)) AS arrived,
+               sum(m.p_base) AS inherited,
                count() AS n_words,
                groupUniqArray(m.word) AS words{extra}
         FROM {{db}}.movement m

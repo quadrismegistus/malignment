@@ -132,7 +132,15 @@ def cmd_assemble(args):
         gen = json.load(f)
 
     vocab = vocabulary()
-    vocab_lower = {w.lower(): c for w, c in vocab.items()}
+    # SUM on case collision, do not overwrite. A dict comprehension keyed on
+    # w.lower() lets `Rape` (4 cells) clobber `rape` (3,126) or vice versa
+    # depending only on query order, so `cells` became an arbitrary pick among
+    # case variants. It does NOT affect membership (presence is presence) and
+    # does NOT affect the lexicon sha, which is computed over {word: category} --
+    # but every frequency statement derived from `cells` was wrong.
+    vocab_lower = Counter()
+    for w, c in vocab.items():
+        vocab_lower[w.lower()] += c
 
     # ---- stage B: what the panel proposed, and what the corpus actually holds
     proposed = defaultdict(lambda: {"agents": set(), "cats": Counter(), "regs": Counter(),
@@ -259,12 +267,29 @@ def cmd_score(args):
     # silently relabelled 8 expansions as control/audit in the first run and put
     # one of them in the recall denominator. The collision is now also REPORTED
     # rather than resolved quietly -- a fixed precedence hides the count.
+    # CELL COUNTS ARE RE-QUERIED HERE, CASE-SUMMED, rather than taken from
+    # rating_items.json. The assemble stage keyed a dict on w.lower(), so a
+    # collision OVERWROTE: `rape` was booked at 4 cells (the count for `Rape`)
+    # against a true 3,130, and `raped` at 1 against 3,563. Which variant won
+    # depended only on query order. Membership and the lexicon sha are computed
+    # over {word: category} and are unaffected; every FREQUENCY statement
+    # derived from `cells` was wrong.
+    #
+    # AND `assemble` MUST NOT BE RE-RUN TO FIX IT. Its control pool has since
+    # been corrected too (expansions are now excluded), so re-running would draw
+    # a different sample and orphan the 15 raters' work, which is keyed to the
+    # item list they actually saw. rating_items.json is the artifact of record;
+    # the assemble fixes apply to any FUTURE build.
+    true_cells = {r["w"]: int(r["n"]) for r in ch.query(
+        "SELECT lower(word) AS w, count() AS n FROM {db}.twp_words "
+        "WHERE match(word, '^[A-Za-z]+$') GROUP BY w")}
+
     kind, cells = {}, {}
     collisions = defaultdict(set)
     for it in payload["items"]:
         collisions[it["word"]].add(it["kind"])
         kind.setdefault(it["word"], it["kind"])
-        cells.setdefault(it["word"], it["cells"])
+        cells.setdefault(it["word"], true_cells.get(it["word"], it["cells"]))
     collided = {w: sorted(k) for w, k in collisions.items() if len(k) > 1}
     if collided:
         print(f"  KIND COLLISIONS  : {len(collided)} -> resolved to first kind")

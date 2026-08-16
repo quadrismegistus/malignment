@@ -32,7 +32,7 @@
  "abuse": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3884,
+  "cells": 3888,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -42,7 +42,7 @@
  "abused": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 929,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -152,7 +152,7 @@
  "amorous": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 31,
+  "cells": 401,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -192,7 +192,7 @@
  "anal": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 33,
+  "cells": 37,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -202,7 +202,7 @@
  "analy": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 5,
+  "cells": 76,
   "kind": "expansion",
   "n_raters": 3,
   "register": "clinical",
@@ -282,7 +282,7 @@
  "arousal": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 10,
+  "cells": 127,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -332,7 +332,7 @@
  "arrow": {
   "burn_in": false,
   "category": "violent",
-  "cells": 592,
+  "cells": 593,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -342,7 +342,7 @@
  "arrows": {
   "burn_in": false,
   "category": "violent",
-  "cells": 4,
+  "cells": 1073,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -352,7 +352,7 @@
  "artillery": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 92,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -402,7 +402,7 @@
  "assassin": {
   "burn_in": false,
   "category": "violent",
-  "cells": 33,
+  "cells": 34,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -512,7 +512,7 @@
  "attack": {
   "burn_in": false,
   "category": "violent",
-  "cells": 71,
+  "cells": 15508,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -562,7 +562,7 @@
  "attacks": {
   "burn_in": false,
   "category": "violent",
-  "cells": 456,
+  "cells": 461,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -582,7 +582,7 @@
  "balls": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1883,
+  "cells": 1993,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -602,7 +602,7 @@
  "bash": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 3011,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -612,7 +612,7 @@
  "bashed": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 2783,
   "kind": "expansion",
   "n_raters": 3,
   "register": "slang",
@@ -652,7 +652,7 @@
  "batter": {
   "burn_in": false,
   "category": "violent",
-  "cells": 9,
+  "cells": 1044,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -682,7 +682,7 @@
  "battle": {
   "burn_in": false,
   "category": "violent",
-  "cells": 6415,
+  "cells": 7019,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -702,7 +702,7 @@
  "battles": {
   "burn_in": false,
   "category": "violent",
-  "cells": 5,
+  "cells": 498,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -722,7 +722,7 @@
  "bawd": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 25,
+  "cells": 27,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -752,7 +752,7 @@
  "bayonet": {
   "burn_in": false,
   "category": "violent",
-  "cells": 36,
+  "cells": 37,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -792,7 +792,7 @@
  "beat": {
   "burn_in": false,
   "category": "violent",
-  "cells": 45656,
+  "cells": 46001,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -802,7 +802,7 @@
  "beating": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2115,
+  "cells": 2163,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -812,7 +812,7 @@
  "beatings": {
   "burn_in": false,
   "category": "violent",
-  "cells": 60,
+  "cells": 61,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -822,7 +822,7 @@
  "beats": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1106,
+  "cells": 1266,
   "kind": "expansion",
   "n_raters": 15,
   "register": "plain",
@@ -832,7 +832,7 @@
  "bedded": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 142,
+  "cells": 143,
   "kind": "expansion",
   "n_raters": 3,
   "register": "euphemistic",
@@ -942,7 +942,7 @@
  "bleed": {
   "burn_in": false,
   "category": "violent",
-  "cells": 8144,
+  "cells": 8148,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -962,7 +962,7 @@
  "bleeding": {
   "burn_in": false,
   "category": "violent",
-  "cells": 11,
+  "cells": 2308,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -972,7 +972,7 @@
  "bleeds": {
   "burn_in": false,
   "category": "violent",
-  "cells": 18,
+  "cells": 214,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -992,7 +992,7 @@
  "blitz": {
   "burn_in": false,
   "category": "violent",
-  "cells": 7,
+  "cells": 9,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1012,7 +1012,7 @@
  "bloodshed": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 2,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1032,7 +1032,7 @@
  "bloody": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2130,
+  "cells": 2171,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1052,7 +1052,7 @@
  "blows": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1995,
+  "cells": 1999,
   "kind": "expansion",
   "n_raters": 3,
   "register": "vulgar",
@@ -1102,7 +1102,7 @@
  "bomb": {
   "burn_in": false,
   "category": "violent",
-  "cells": 832,
+  "cells": 842,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1112,7 +1112,7 @@
  "bombard": {
   "burn_in": false,
   "category": "violent",
-  "cells": 34,
+  "cells": 35,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1172,7 +1172,7 @@
  "bondage": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 31,
+  "cells": 154,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1212,7 +1212,7 @@
  "boob": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 54,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -1232,7 +1232,7 @@
  "bosom": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 69,
+  "cells": 8244,
   "kind": "candidate",
   "n_raters": 3,
   "register": "euphemistic",
@@ -1282,7 +1282,7 @@
  "brawl": {
   "burn_in": false,
   "category": "violent",
-  "cells": 24,
+  "cells": 141,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1322,7 +1322,7 @@
  "breast": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 14432,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1352,7 +1352,7 @@
  "breasts": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2658,
+  "cells": 2705,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -1362,7 +1362,7 @@
  "breeding": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 5,
+  "cells": 51,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -1392,7 +1392,7 @@
  "brothels": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 6,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -1442,7 +1442,7 @@
  "brutal": {
   "burn_in": false,
   "category": "violent",
-  "cells": 538,
+  "cells": 541,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1492,7 +1492,7 @@
  "bugger": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 279,
+  "cells": 281,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -1512,7 +1512,7 @@
  "bullet": {
   "burn_in": false,
   "category": "violent",
-  "cells": 6,
+  "cells": 759,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1522,7 +1522,7 @@
  "bullets": {
   "burn_in": false,
   "category": "violent",
-  "cells": 413,
+  "cells": 416,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -1532,7 +1532,7 @@
  "butch": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1069,
+  "cells": 1084,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -1542,7 +1542,7 @@
  "butcher": {
   "burn_in": false,
   "category": "violent",
-  "cells": 274,
+  "cells": 619,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1632,7 +1632,7 @@
  "cannon": {
   "burn_in": false,
   "category": "violent",
-  "cells": 7,
+  "cells": 432,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1702,7 +1702,7 @@
  "carnage": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 90,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -1802,7 +1802,7 @@
  "chaste": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 534,
+  "cells": 549,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -1822,7 +1822,7 @@
  "chastity": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2,
+  "cells": 37,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -1972,7 +1972,7 @@
  "clit": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 3,
+  "cells": 223,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -1982,7 +1982,7 @@
  "clitoris": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 4,
+  "cells": 58,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -2022,7 +2022,7 @@
  "clout": {
   "burn_in": false,
   "category": "violent",
-  "cells": 44,
+  "cells": 51,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -2062,7 +2062,7 @@
  "cock": {
   "burn_in": true,
   "category": "sexual",
-  "cells": 93,
+  "cells": 5863,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -2072,7 +2072,7 @@
  "cockes": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 2,
   "kind": "expansion",
   "n_raters": 3,
   "register": "vulgar",
@@ -2122,7 +2122,7 @@
  "combat": {
   "burn_in": false,
   "category": "violent",
-  "cells": 292,
+  "cells": 319,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -2222,7 +2222,7 @@
  "condoms": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 206,
+  "cells": 207,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -2252,7 +2252,7 @@
  "consummation": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 42,
+  "cells": 46,
   "kind": "candidate",
   "n_raters": 3,
   "register": "euphemistic",
@@ -2302,7 +2302,7 @@
  "corpse": {
   "burn_in": false,
   "category": "violent",
-  "cells": 12,
+  "cells": 1129,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -2392,7 +2392,7 @@
  "crucifixion": {
   "burn_in": false,
   "category": "violent",
-  "cells": 6,
+  "cells": 55,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -2442,7 +2442,7 @@
  "cruelty": {
   "burn_in": false,
   "category": "violent",
-  "cells": 485,
+  "cells": 518,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -2452,7 +2452,7 @@
  "cuck": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 48,
+  "cells": 516,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -2462,7 +2462,7 @@
  "cuckold": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 38,
+  "cells": 55,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -2552,7 +2552,7 @@
  "cum": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2042,
+  "cells": 2061,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -2592,7 +2592,7 @@
  "cums": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 3,
   "kind": "expansion",
   "n_raters": 3,
   "register": "vulgar",
@@ -2612,7 +2612,7 @@
  "dagger": {
   "burn_in": false,
   "category": "violent",
-  "cells": 27,
+  "cells": 884,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -2642,7 +2642,7 @@
  "deadly": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1338,
+  "cells": 1340,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -2652,7 +2652,7 @@
  "debauch": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 23,
+  "cells": 27,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -2662,7 +2662,7 @@
  "debauched": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 9,
   "kind": "expansion",
   "n_raters": 3,
   "register": "archaic",
@@ -2782,7 +2782,7 @@
  "dick": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 107,
+  "cells": 1694,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -2832,7 +2832,7 @@
  "dirk": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 4,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -2952,7 +2952,7 @@
  "dong": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 3,
+  "cells": 172,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -2962,7 +2962,7 @@
  "drown": {
   "burn_in": false,
   "category": "violent",
-  "cells": 309,
+  "cells": 7847,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -2982,7 +2982,7 @@
  "drowned": {
   "burn_in": false,
   "category": "violent",
-  "cells": 106,
+  "cells": 4211,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -2992,7 +2992,7 @@
  "drowning": {
   "burn_in": false,
   "category": "violent",
-  "cells": 743,
+  "cells": 749,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -3032,7 +3032,7 @@
  "duel": {
   "burn_in": false,
   "category": "violent",
-  "cells": 103,
+  "cells": 105,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -3052,7 +3052,7 @@
  "dyke": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 4,
+  "cells": 6,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -3092,7 +3092,7 @@
  "ejaculated": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 7,
+  "cells": 380,
   "kind": "expansion",
   "n_raters": 3,
   "register": "clinical",
@@ -3322,7 +3322,7 @@
  "executed": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1807,
+  "cells": 1820,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -3352,7 +3352,7 @@
  "execution": {
   "burn_in": false,
   "category": "violent",
-  "cells": 468,
+  "cells": 470,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -3472,7 +3472,7 @@
  "fanny": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 5,
+  "cells": 155,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -3542,7 +3542,7 @@
  "fetish": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 28,
+  "cells": 29,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -3552,7 +3552,7 @@
  "fight": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 52699,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -3602,7 +3602,7 @@
  "fingered": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2557,
+  "cells": 2563,
   "kind": "expansion",
   "n_raters": 3,
   "register": "vulgar",
@@ -3692,7 +3692,7 @@
  "flay": {
   "burn_in": false,
   "category": "violent",
-  "cells": 16,
+  "cells": 410,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -3712,7 +3712,7 @@
  "fleshly": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 37,
+  "cells": 45,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -3752,7 +3752,7 @@
  "flog": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 528,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -3762,7 +3762,7 @@
  "flogged": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 86,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -3792,7 +3792,7 @@
  "fondled": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1937,
+  "cells": 1938,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -3912,7 +3912,7 @@
  "frag": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2590,
+  "cells": 2629,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -3922,7 +3922,7 @@
  "frig": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 181,
+  "cells": 182,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -3952,7 +3952,7 @@
  "fuck": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 10945,
+  "cells": 11070,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -3962,7 +3962,7 @@
  "fucked": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2057,
+  "cells": 2061,
   "kind": "expansion",
   "n_raters": 3,
   "register": "vulgar",
@@ -4002,7 +4002,7 @@
  "fucking": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1349,
+  "cells": 1350,
   "kind": "expansion",
   "n_raters": 3,
   "register": "vulgar",
@@ -4022,7 +4022,7 @@
  "gallows": {
   "burn_in": false,
   "category": "violent",
-  "cells": 53,
+  "cells": 101,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -4042,7 +4042,7 @@
  "gash": {
   "burn_in": false,
   "category": "violent",
-  "cells": 12,
+  "cells": 183,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -4082,7 +4082,7 @@
  "gay": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 52,
+  "cells": 6899,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -4132,7 +4132,7 @@
  "genitals": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 478,
+  "cells": 479,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -4212,7 +4212,7 @@
  "gore": {
   "burn_in": false,
   "category": "violent",
-  "cells": 719,
+  "cells": 728,
   "kind": "candidate",
   "n_raters": 15,
   "register": "plain",
@@ -4362,7 +4362,7 @@
  "guillotine": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 58,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -4372,7 +4372,7 @@
  "gun": {
   "burn_in": false,
   "category": "violent",
-  "cells": 31,
+  "cells": 4234,
   "kind": "candidate",
   "n_raters": 15,
   "register": "plain",
@@ -4432,7 +4432,7 @@
  "guns": {
   "burn_in": false,
   "category": "violent",
-  "cells": 14,
+  "cells": 1484,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -4482,7 +4482,7 @@
  "hanged": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1174,
+  "cells": 1305,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -4502,7 +4502,7 @@
  "hangman": {
   "burn_in": false,
   "category": "violent",
-  "cells": 5,
+  "cells": 9,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -4532,7 +4532,7 @@
  "harlot": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 66,
+  "cells": 78,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -4552,7 +4552,7 @@
  "harm": {
   "burn_in": false,
   "category": "violent",
-  "cells": 6810,
+  "cells": 7095,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -4582,7 +4582,7 @@
  "harms": {
   "burn_in": false,
   "category": "violent",
-  "cells": 179,
+  "cells": 184,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -4672,7 +4672,7 @@
  "hit": {
   "burn_in": false,
   "category": "violent",
-  "cells": 77655,
+  "cells": 77689,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -4682,7 +4682,7 @@
  "hits": {
   "burn_in": false,
   "category": "violent",
-  "cells": 22,
+  "cells": 597,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -4712,7 +4712,7 @@
  "ho": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 113,
+  "cells": 19026,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -4722,7 +4722,7 @@
  "hoe": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 46,
+  "cells": 103,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -4742,7 +4742,7 @@
  "holocaust": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 101,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -4752,7 +4752,7 @@
  "homo": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2,
+  "cells": 9,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -4792,7 +4792,7 @@
  "hooker": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 10,
+  "cells": 15,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -4822,7 +4822,7 @@
  "hos": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 22,
+  "cells": 24,
   "kind": "expansion",
   "n_raters": 3,
   "register": "vulgar",
@@ -4842,7 +4842,7 @@
  "hump": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 4,
+  "cells": 464,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -4872,7 +4872,7 @@
  "hurt": {
   "burn_in": false,
   "category": "violent",
-  "cells": 29,
+  "cells": 24595,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -4902,7 +4902,7 @@
  "hurts": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 199,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -4912,7 +4912,7 @@
  "hussy": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 58,
+  "cells": 59,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -4922,7 +4922,7 @@
  "hymen": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 50,
+  "cells": 51,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -4962,7 +4962,7 @@
  "immolation": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 123,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -5092,7 +5092,7 @@
  "injure": {
   "burn_in": false,
   "category": "violent",
-  "cells": 535,
+  "cells": 537,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5102,7 +5102,7 @@
  "injured": {
   "burn_in": false,
   "category": "violent",
-  "cells": 17,
+  "cells": 4743,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5122,7 +5122,7 @@
  "injuries": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 785,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5142,7 +5142,7 @@
  "injury": {
   "burn_in": false,
   "category": "violent",
-  "cells": 712,
+  "cells": 713,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5162,7 +5162,7 @@
  "invade": {
   "burn_in": false,
   "category": "violent",
-  "cells": 581,
+  "cells": 583,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5172,7 +5172,7 @@
  "invaders": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 10,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5202,7 +5202,7 @@
  "invasion": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 38,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5212,7 +5212,7 @@
  "jab": {
   "burn_in": false,
   "category": "violent",
-  "cells": 5633,
+  "cells": 5638,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5282,7 +5282,7 @@
  "jugs": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 6,
+  "cells": 90,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -5292,7 +5292,7 @@
  "kicked": {
   "burn_in": false,
   "category": "violent",
-  "cells": 214,
+  "cells": 57387,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5302,7 +5302,7 @@
  "kicking": {
   "burn_in": false,
   "category": "violent",
-  "cells": 12,
+  "cells": 1852,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5352,7 +5352,7 @@
  "kill": {
   "burn_in": false,
   "category": "violent",
-  "cells": 41017,
+  "cells": 41163,
   "kind": "candidate",
   "n_raters": 15,
   "register": "plain",
@@ -5362,7 +5362,7 @@
  "killed": {
   "burn_in": false,
   "category": "violent",
-  "cells": 33186,
+  "cells": 33333,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5372,7 +5372,7 @@
  "killer": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 461,
   "kind": "candidate",
   "n_raters": 15,
   "register": "plain",
@@ -5382,7 +5382,7 @@
  "killers": {
   "burn_in": false,
   "category": "violent",
-  "cells": 20,
+  "cells": 62,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5392,7 +5392,7 @@
  "killing": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1316,
+  "cells": 1328,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5432,7 +5432,7 @@
  "kinky": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 14,
+  "cells": 16,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -5452,7 +5452,7 @@
  "knife": {
   "burn_in": false,
   "category": "violent",
-  "cells": 77,
+  "cells": 3777,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5552,7 +5552,7 @@
  "lance": {
   "burn_in": false,
   "category": "violent",
-  "cells": 31,
+  "cells": 557,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5572,7 +5572,7 @@
  "lances": {
   "burn_in": false,
   "category": "violent",
-  "cells": 233,
+  "cells": 234,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5602,7 +5602,7 @@
  "lash": {
   "burn_in": false,
   "category": "violent",
-  "cells": 4314,
+  "cells": 4331,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5612,7 +5612,7 @@
  "lashed": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1417,
+  "cells": 1419,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5692,7 +5692,7 @@
  "lesbian": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 33,
+  "cells": 34,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5762,7 +5762,7 @@
  "loins": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 455,
+  "cells": 458,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -5782,7 +5782,7 @@
  "lover": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 6082,
+  "cells": 7247,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5792,7 +5792,7 @@
  "lovers": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 421,
+  "cells": 3026,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5802,7 +5802,7 @@
  "lust": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 4753,
+  "cells": 4989,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5842,7 +5842,7 @@
  "lusts": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 24,
+  "cells": 26,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -5862,7 +5862,7 @@
  "lynch": {
   "burn_in": false,
   "category": "violent",
-  "cells": 4,
+  "cells": 474,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5892,7 +5892,7 @@
  "mace": {
   "burn_in": false,
   "category": "violent",
-  "cells": 48,
+  "cells": 64,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -5962,7 +5962,7 @@
  "maim": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 133,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6022,7 +6022,7 @@
  "manhood": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1543,
+  "cells": 1554,
   "kind": "candidate",
   "n_raters": 3,
   "register": "euphemistic",
@@ -6052,7 +6052,7 @@
  "massacre": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 23,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6132,7 +6132,7 @@
  "mating": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2,
+  "cells": 15,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6162,7 +6162,7 @@
  "melee": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 38,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6222,7 +6222,7 @@
  "mistress": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1635,
+  "cells": 2177,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6232,7 +6232,7 @@
  "mistresses": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 3,
+  "cells": 6,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -6272,7 +6272,7 @@
  "molotov": {
   "burn_in": false,
   "category": "violent",
-  "cells": 8,
+  "cells": 11,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -6282,7 +6282,7 @@
  "mons": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2,
+  "cells": 11,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -6312,7 +6312,7 @@
  "muff": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 200,
+  "cells": 427,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -6362,7 +6362,7 @@
  "murder": {
   "burn_in": false,
   "category": "violent",
-  "cells": 151,
+  "cells": 11214,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6372,7 +6372,7 @@
  "murdered": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3246,
+  "cells": 3255,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -6382,7 +6382,7 @@
  "murderer": {
   "burn_in": false,
   "category": "violent",
-  "cells": 316,
+  "cells": 367,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6402,7 +6402,7 @@
  "murdering": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 9,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -6432,7 +6432,7 @@
  "musket": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 65,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -6592,7 +6592,7 @@
  "obscene": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 79,
+  "cells": 84,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6692,7 +6692,7 @@
  "orgy": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 31,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6742,7 +6742,7 @@
  "paramour": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 4,
+  "cells": 6,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -6812,7 +6812,7 @@
  "penetrates": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 8,
+  "cells": 9,
   "kind": "expansion",
   "n_raters": 3,
   "register": "clinical",
@@ -6842,7 +6842,7 @@
  "penis": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1390,
+  "cells": 1418,
   "kind": "candidate",
   "n_raters": 15,
   "register": "clinical",
@@ -6892,7 +6892,7 @@
  "pervert": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 26,
+  "cells": 27,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -6922,7 +6922,7 @@
  "phallus": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 3,
+  "cells": 96,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -6992,7 +6992,7 @@
  "pimp": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 6,
+  "cells": 18,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -7032,7 +7032,7 @@
  "poison": {
   "burn_in": false,
   "category": "violent",
-  "cells": 53,
+  "cells": 3718,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -7042,7 +7042,7 @@
  "poisoned": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1146,
+  "cells": 1148,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -7062,7 +7062,7 @@
  "poisoning": {
   "burn_in": false,
   "category": "violent",
-  "cells": 5,
+  "cells": 6,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -7172,7 +7172,7 @@
  "prick": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 3,
+  "cells": 2951,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -7192,7 +7192,7 @@
  "privates": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 432,
   "kind": "candidate",
   "n_raters": 3,
   "register": "euphemistic",
@@ -7342,7 +7342,7 @@
  "punch": {
   "burn_in": false,
   "category": "violent",
-  "cells": 8,
+  "cells": 12410,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -7352,7 +7352,7 @@
  "punched": {
   "burn_in": false,
   "category": "violent",
-  "cells": 24319,
+  "cells": 24326,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -7392,7 +7392,7 @@
  "pussy": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 600,
+  "cells": 643,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -7402,7 +7402,7 @@
  "queer": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2,
+  "cells": 1087,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -7522,7 +7522,7 @@
  "rape": {
   "burn_in": false,
   "category": "both",
-  "cells": 4,
+  "cells": 3130,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -7532,7 +7532,7 @@
  "raped": {
   "burn_in": false,
   "category": "both",
-  "cells": 1,
+  "cells": 3563,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -7672,7 +7672,7 @@
  "rend": {
   "burn_in": false,
   "category": "violent",
-  "cells": 22,
+  "cells": 1004,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -7722,7 +7722,7 @@
  "rifle": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 826,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -7742,7 +7742,7 @@
  "riot": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 616,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -7792,7 +7792,7 @@
  "ruffian": {
   "burn_in": false,
   "category": "violent",
-  "cells": 23,
+  "cells": 26,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -7882,7 +7882,7 @@
  "satyr": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 9,
+  "cells": 20,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -7892,7 +7892,7 @@
  "savage": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1303,
+  "cells": 1330,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -7912,7 +7912,7 @@
  "savages": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 200,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -7972,7 +7972,7 @@
  "scar": {
   "burn_in": false,
   "category": "violent",
-  "cells": 324,
+  "cells": 4235,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -7982,7 +7982,7 @@
  "scarred": {
   "burn_in": false,
   "category": "violent",
-  "cells": 544,
+  "cells": 563,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -8002,7 +8002,7 @@
  "scars": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 1102,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -8032,7 +8032,7 @@
  "scimitar": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 3,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -8052,7 +8052,7 @@
  "scourge": {
   "burn_in": false,
   "category": "violent",
-  "cells": 318,
+  "cells": 412,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -8112,7 +8112,7 @@
  "scrotum": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 260,
+  "cells": 261,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -8192,7 +8192,7 @@
  "seduction": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 85,
+  "cells": 88,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8232,7 +8232,7 @@
  "sensual": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 139,
+  "cells": 142,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8252,7 +8252,7 @@
  "sever": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1433,
+  "cells": 1599,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8292,7 +8292,7 @@
  "sex": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 3235,
+  "cells": 3580,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8312,7 +8312,7 @@
  "sexes": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 29,
+  "cells": 30,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -8322,7 +8322,7 @@
  "sext": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 67,
+  "cells": 71,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -8352,7 +8352,7 @@
  "sexual": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2,
+  "cells": 840,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8372,7 +8372,7 @@
  "sexy": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 49,
+  "cells": 327,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8382,7 +8382,7 @@
  "shag": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 8,
+  "cells": 659,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -8422,7 +8422,7 @@
  "shank": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 213,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -8472,7 +8472,7 @@
  "shoot": {
   "burn_in": false,
   "category": "violent",
-  "cells": 66,
+  "cells": 16376,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8502,7 +8502,7 @@
  "shooting": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2243,
+  "cells": 2255,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8522,7 +8522,7 @@
  "shoots": {
   "burn_in": false,
   "category": "violent",
-  "cells": 738,
+  "cells": 768,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -8532,7 +8532,7 @@
  "shotgun": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 83,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8572,7 +8572,7 @@
  "siege": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 10,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8632,7 +8632,7 @@
  "slain": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1286,
+  "cells": 1402,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -8642,7 +8642,7 @@
  "slap": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 7933,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8652,7 +8652,7 @@
  "slapped": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 27694,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -8682,7 +8682,7 @@
  "slash": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 2075,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8732,7 +8732,7 @@
  "slaughter": {
   "burn_in": false,
   "category": "violent",
-  "cells": 9,
+  "cells": 416,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8742,7 +8742,7 @@
  "slaughtered": {
   "burn_in": false,
   "category": "violent",
-  "cells": 998,
+  "cells": 1003,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -8772,7 +8772,7 @@
  "slay": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1980,
+  "cells": 1986,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -8792,7 +8792,7 @@
  "slayer": {
   "burn_in": false,
   "category": "violent",
-  "cells": 36,
+  "cells": 37,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -8862,7 +8862,7 @@
  "slut": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 7,
+  "cells": 78,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -8872,7 +8872,7 @@
  "smack": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 4815,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -8882,7 +8882,7 @@
  "smacked": {
   "burn_in": false,
   "category": "violent",
-  "cells": 7805,
+  "cells": 7806,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -8912,7 +8912,7 @@
  "smite": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 635,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -8952,7 +8952,7 @@
  "smothered": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1685,
+  "cells": 1686,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -8982,7 +8982,7 @@
  "smut": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 78,
+  "cells": 80,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -9082,7 +9082,7 @@
  "spank": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1490,
+  "cells": 1491,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9092,7 +9092,7 @@
  "spanked": {
   "burn_in": false,
   "category": "violent",
-  "cells": 84,
+  "cells": 1159,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -9132,7 +9132,7 @@
  "spar": {
   "burn_in": false,
   "category": "violent",
-  "cells": 35,
+  "cells": 646,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9152,7 +9152,7 @@
  "spear": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1150,
+  "cells": 1241,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9192,7 +9192,7 @@
  "sperm": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 94,
+  "cells": 97,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -9232,7 +9232,7 @@
  "stab": {
   "burn_in": false,
   "category": "violent",
-  "cells": 10955,
+  "cells": 10956,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9342,7 +9342,7 @@
  "strangle": {
   "burn_in": false,
   "category": "violent",
-  "cells": 8449,
+  "cells": 8451,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9392,7 +9392,7 @@
  "strike": {
   "burn_in": false,
   "category": "violent",
-  "cells": 17,
+  "cells": 16943,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9402,7 +9402,7 @@
  "strikes": {
   "burn_in": false,
   "category": "violent",
-  "cells": 34,
+  "cells": 1011,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -9432,7 +9432,7 @@
  "strumpet": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2,
+  "cells": 49,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -9442,7 +9442,7 @@
  "stud": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 697,
+  "cells": 698,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -9452,7 +9452,7 @@
  "suffocate": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 1201,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9502,7 +9502,7 @@
  "suicide": {
   "burn_in": false,
   "category": "violent",
-  "cells": 494,
+  "cells": 495,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9552,7 +9552,7 @@
  "sword": {
   "burn_in": false,
   "category": "violent",
-  "cells": 724,
+  "cells": 5723,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9562,7 +9562,7 @@
  "swords": {
   "burn_in": false,
   "category": "violent",
-  "cells": 874,
+  "cells": 902,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -9572,7 +9572,7 @@
  "taser": {
   "burn_in": false,
   "category": "violent",
-  "cells": 21,
+  "cells": 27,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9582,7 +9582,7 @@
  "tasered": {
   "burn_in": false,
   "category": "violent",
-  "cells": 38,
+  "cells": 54,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -9602,7 +9602,7 @@
  "terrorism": {
   "burn_in": false,
   "category": "violent",
-  "cells": 240,
+  "cells": 269,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9652,7 +9652,7 @@
  "testicle": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 28,
+  "cells": 29,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -9662,7 +9662,7 @@
  "testicles": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 577,
+  "cells": 578,
   "kind": "expansion",
   "n_raters": 3,
   "register": "clinical",
@@ -9702,7 +9702,7 @@
  "thrashed": {
   "burn_in": false,
   "category": "violent",
-  "cells": 571,
+  "cells": 573,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -9752,7 +9752,7 @@
  "thug": {
   "burn_in": false,
   "category": "violent",
-  "cells": 9,
+  "cells": 19,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -9772,7 +9772,7 @@
  "thump": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2,
+  "cells": 620,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9812,7 +9812,7 @@
  "tit": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 580,
+  "cells": 1081,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -9832,7 +9832,7 @@
  "tits": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1,
+  "cells": 247,
   "kind": "candidate",
   "n_raters": 15,
   "register": "slang",
@@ -9872,7 +9872,7 @@
  "torment": {
   "burn_in": false,
   "category": "violent",
-  "cells": 157,
+  "cells": 2444,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -9902,7 +9902,7 @@
  "torments": {
   "burn_in": false,
   "category": "violent",
-  "cells": 100,
+  "cells": 307,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -9922,7 +9922,7 @@
  "torture": {
   "burn_in": false,
   "category": "violent",
-  "cells": 7,
+  "cells": 3812,
   "kind": "candidate",
   "n_raters": 15,
   "register": "plain",
@@ -10022,7 +10022,7 @@
  "trauma": {
   "burn_in": false,
   "category": "violent",
-  "cells": 25,
+  "cells": 119,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -10052,7 +10052,7 @@
  "tryst": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 4,
+  "cells": 232,
   "kind": "candidate",
   "n_raters": 3,
   "register": "euphemistic",
@@ -10082,7 +10082,7 @@
  "twink": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 3,
+  "cells": 347,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -10112,7 +10112,7 @@
  "vagina": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 61,
+  "cells": 62,
   "kind": "candidate",
   "n_raters": 3,
   "register": "clinical",
@@ -10152,7 +10152,7 @@
  "violence": {
   "burn_in": false,
   "category": "violent",
-  "cells": 17,
+  "cells": 1170,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -10162,7 +10162,7 @@
  "violent": {
   "burn_in": false,
   "category": "violent",
-  "cells": 7,
+  "cells": 1153,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -10172,7 +10172,7 @@
  "virgin": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 1547,
+  "cells": 2240,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -10192,7 +10192,7 @@
  "virgins": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 45,
+  "cells": 123,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -10272,7 +10272,7 @@
  "wang": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 33,
+  "cells": 64,
   "kind": "candidate",
   "n_raters": 15,
   "register": "vulgar",
@@ -10322,7 +10322,7 @@
  "wanton": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 699,
+  "cells": 718,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -10332,7 +10332,7 @@
  "wantonness": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 2,
+  "cells": 9,
   "kind": "candidate",
   "n_raters": 3,
   "register": "archaic",
@@ -10352,7 +10352,7 @@
  "war": {
   "burn_in": false,
   "category": "violent",
-  "cells": 2240,
+  "cells": 17170,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -10362,7 +10362,7 @@
  "warfare": {
   "burn_in": false,
   "category": "violent",
-  "cells": 92,
+  "cells": 93,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -10392,7 +10392,7 @@
  "wars": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1058,
+  "cells": 1152,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -10402,7 +10402,7 @@
  "weapon": {
   "burn_in": false,
   "category": "violent",
-  "cells": 10,
+  "cells": 1322,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -10412,7 +10412,7 @@
  "weapons": {
   "burn_in": false,
   "category": "violent",
-  "cells": 20,
+  "cells": 1207,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -10442,7 +10442,7 @@
  "whack": {
   "burn_in": false,
   "category": "violent",
-  "cells": 729,
+  "cells": 731,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -10482,7 +10482,7 @@
  "whip": {
   "burn_in": false,
   "category": "violent",
-  "cells": 1,
+  "cells": 2232,
   "kind": "candidate",
   "n_raters": 15,
   "register": "plain",
@@ -10502,7 +10502,7 @@
  "whipped": {
   "burn_in": false,
   "category": "violent",
-  "cells": 41,
+  "cells": 6451,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",
@@ -10542,7 +10542,7 @@
  "whore": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 194,
+  "cells": 382,
   "kind": "candidate",
   "n_raters": 3,
   "register": "vulgar",
@@ -10562,7 +10562,7 @@
  "whores": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 8,
+  "cells": 10,
   "kind": "expansion",
   "n_raters": 3,
   "register": "vulgar",
@@ -10582,7 +10582,7 @@
  "willy": {
   "burn_in": false,
   "category": "sexual",
-  "cells": 5,
+  "cells": 92,
   "kind": "candidate",
   "n_raters": 3,
   "register": "slang",
@@ -10592,7 +10592,7 @@
  "wound": {
   "burn_in": false,
   "category": "violent",
-  "cells": 134,
+  "cells": 8438,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -10602,7 +10602,7 @@
  "wounded": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3,
+  "cells": 3245,
   "kind": "candidate",
   "n_raters": 3,
   "register": "plain",
@@ -10622,7 +10622,7 @@
  "wounds": {
   "burn_in": false,
   "category": "violent",
-  "cells": 3008,
+  "cells": 3052,
   "kind": "expansion",
   "n_raters": 3,
   "register": "plain",

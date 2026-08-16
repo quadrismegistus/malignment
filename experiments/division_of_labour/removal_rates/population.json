@@ -1,0 +1,128 @@
+{
+ "lexicon_sha": "d542e7e2bb86bd00",
+ "seed": 20260816,
+ "match_tol": 0.25,
+ "panel_prompts": 2189,
+ "panel_models": 154,
+ "n_chains": 18,
+ "n_lineages": 16,
+ "set_sizes": {
+  "sexual": 408,
+  "violent": 669,
+  "neutral": 3812,
+  "neutral_matched_sexual": 408,
+  "neutral_matched_violent": 669
+ },
+ "unmatched_sexual": 0,
+ "unmatched_violent": 0,
+ "chains": [
+  {
+   "base": "EleutherAI/pythia-2.8b",
+   "sft": "ContextualAI/archangel_sft_pythia2-8b",
+   "pref": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "mistralai/Mistral-7B-v0.1",
+   "sft": "HuggingFaceH4/mistral-7b-sft-beta",
+   "pref": "HuggingFaceH4/zephyr-7b-beta",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "HuggingFaceTB/SmolLM3-3B-Base",
+   "sft": "HuggingFaceTB/SmolLM3-3B-checkpoints",
+   "pref": "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO",
+   "pref_op": "apo"
+  },
+  {
+   "base": "LLM360/Amber",
+   "sft": "LLM360/AmberChat",
+   "pref": "LLM360/AmberSafe",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "huggyllama/llama-7b",
+   "sft": "PKU-Alignment/alpaca-7b-reproduced",
+   "pref": "PKU-Alignment/beaver-7b-v1.0",
+   "pref_op": "rlhf"
+  },
+  {
+   "base": "meta-llama/Llama-3.1-8B",
+   "sft": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+   "pref": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "allenai/OLMo-2-0425-1B",
+   "sft": "allenai/OLMo-2-0425-1B-SFT",
+   "pref": "allenai/OLMo-2-0425-1B-DPO",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "allenai/OLMoE-1B-7B-0125",
+   "sft": "allenai/OLMoE-1B-7B-0125-SFT",
+   "pref": "allenai/OLMoE-1B-7B-0125-DPO",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "allenai/Olmo-3-1025-7B",
+   "sft": "allenai/Olmo-3-7B-Instruct-SFT",
+   "pref": "allenai/Olmo-3-7B-Instruct-DPO",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "allenai/Olmo-3-1025-7B",
+   "sft": "allenai/Olmo-3-7B-Think-SFT",
+   "pref": "allenai/Olmo-3-7B-Think-DPO",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "allenai/Olmo-3-1125-32B",
+   "sft": "allenai/Olmo-3.1-32B-Instruct-SFT",
+   "pref": "allenai/Olmo-3.1-32B-Instruct-DPO",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "allenai/Olmo-Hybrid-7B",
+   "sft": "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+   "pref": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "internlm/internlm2-base-7b",
+   "sft": "internlm/internlm2-chat-7b-sft",
+   "pref": "internlm/internlm2-chat-7b",
+   "pref_op": "rlhf"
+  },
+  {
+   "base": "llm-jp/llm-jp-3-7.2b",
+   "sft": "llm-jp/llm-jp-3-7.2b-instruct2",
+   "pref": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "EleutherAI/pythia-6.9b",
+   "sft": "lomahony/eleuther-pythia6.9b-hh-sft",
+   "pref": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "m-a-p/CT-LLM-Base",
+   "sft": "m-a-p/CT-LLM-SFT",
+   "pref": "m-a-p/CT-LLM-SFT-DPO",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "m-a-p/neo_7b",
+   "sft": "m-a-p/neo_7b_sft_v0.1",
+   "pref": "m-a-p/neo_7b_instruct_v0.1",
+   "pref_op": "dpo"
+  },
+  {
+   "base": "mistralai/Mistral-7B-v0.1",
+   "sft": "teknium/OpenHermes-2.5-Mistral-7B",
+   "pref": "NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+   "pref_op": "dpo"
+  }
+ ]
+}
