@@ -122,6 +122,14 @@ DERIVING = ALIGNING + ("distill", "upscale", "prune", "continual")
 RELATING = ("scale", "predecessor")
 
 DDL = ["""
+CREATE TABLE IF NOT EXISTS {db}.populations (
+    kind LowCardinality(String), model String
+) ENGINE = MergeTree ORDER BY (kind, model)
+""", """
+CREATE TABLE IF NOT EXISTS {db}.endpoints (
+    base String, endpoint String, resolved_by LowCardinality(String)
+) ENGINE = MergeTree ORDER BY base
+""", """
 CREATE TABLE IF NOT EXISTS {db}.checkpoints (
     model_id String, family Array(String),
     org_type LowCardinality(String), country LowCardinality(String),
@@ -457,12 +465,32 @@ def main():
     #: This table is DERIVED from an authored file and costs a second to rebuild,
     #: so it is dropped rather than reconciled. Anything that cannot be dropped
     #: needs a migration, not an IF NOT EXISTS.
-    for t in ("checkpoints", "edges"):
+    for t in ("checkpoints", "edges", "populations", "endpoints"):
         ch.execute("DROP TABLE IF EXISTS {db}.%s" % t)
     for d in DDL:
         ch.execute(d)
     ch.insert("checkpoints", nodes)
     ch.insert("edges", edges)
+    #: THE RULE'S OUTPUT, SO SQL CAN JOIN ON IT. `alignment_edges` says "the
+    #: roster does not choose" and that was right when no rule existed. One does
+    #: now (`endpoints()`), and a seat writing SQL could not reach it -- which is
+    #: how the same question got three incompatible answers. These are TABLES and
+    #: not views because the rule lives in Python (it reads attestations and the
+    #: family rulings); they are dropped and rebuilt whole, never appended, so
+    #: they cannot drift from the rule that makes them.
+    ep, unresolved = endpoints()
+    if unresolved:
+        print("  UNRESOLVED LINEAGES (not written): %s"
+              % [b.split("/")[-1] for b in unresolved])
+    ch.insert("endpoints", [{"base": b, "endpoint": e, "resolved_by": "roster.endpoints"}
+                            for b, e in sorted(ep.items())])
+    pop = []
+    for kind in POPULATIONS:
+        for m in sorted(population(kind)):
+            pop.append({"kind": kind, "model": m})
+    ch.insert("populations", pop)
+    print("  %d endpoints | %d population rows across %d kinds"
+          % (len(ep), len(pop), len(POPULATIONS)))
     for name, sql in VIEWS.items():
         try:
             ch.execute(sql)
@@ -483,8 +511,6 @@ def main():
     return 0
 
 
-if __name__ == "__main__":
-    sys.exit(main())
 
 
 #: Preference-optimisation ops. A chain's third rung is one of these.
@@ -532,7 +558,25 @@ def chains():
     return out
 
 
-def endpoints(measured=None, attestations=None):
+ATTESTED_PATH = os.path.join(ROOT, "roster", "models", "attestations.json")
+
+
+def attestations():
+    """The ATTESTED file, or {} if it is absent. Loaded once, cheaply cached."""
+    global _ATT
+    try:
+        return _ATT
+    except NameError:
+        pass
+    try:
+        with open(ATTESTED_PATH, encoding="utf-8") as fh:
+            _ATT = json.load(fh)
+    except Exception:                                          # noqa: BLE001
+        _ATT = {}
+    return _ATT
+
+
+def endpoints(measured=None, attested=None):
     """{base: endpoint} — one commodity-form endpoint per pretrained base.
 
     **THE ROSTER DELIBERATELY DOES NOT CHOOSE** (see the `alignment_edges` view:
@@ -573,8 +617,14 @@ def endpoints(measured=None, attestations=None):
     for c, (p, _op) in par.items():
         kids.setdefault(p, []).append(c)
 
+    #: DEFAULTS TO LOADING THE ATTESTED FILE. It used to default to None, which
+    #: meant NO attestations, which meant the `inverted` filter silently did not
+    #: run -- a default that disables a guard is the guard's worst failure mode,
+    #: and it made every caller pass `attestations=json.load(...)` to get correct
+    #: behaviour. Pass `attested={}` to mean "explicitly none" (the test does).
+    att = attestations() if attested is None else attested
     inverted = set()
-    for mid, rec in ((attestations or {}).get("checkpoints") or {}).items():
+    for mid, rec in ((att or {}).get("checkpoints") or {}).items():
         for cl in (rec.get("claims") or []):
             if cl.get("field") == "direction" and cl.get("value") == "inverted":
                 inverted.add(mid)
@@ -695,3 +745,66 @@ def direction(pre_op, post_op):
     if a == b:
         return "incomparable"
     return "forward" if a < b else "reverse"
+
+
+#: EVERY POPULATION A SEAT MIGHT MEAN, in one place with one name each.
+#: RH: "what about other cases? (all checkpoints of representative families, all
+#: checkpoints, all chains)". Before this they were four different one-off
+#: comprehensions in four files, which is how `panel()` and the endpoint rule
+#: both came to have three incompatible versions.
+POPULATIONS = ("all", "bases", "aligned", "endpoints", "chain_rungs",
+               "representative", "unavailable")
+
+
+def population(kind="endpoints", measured=False):
+    """A named set of model ids. `measured=True` keeps only those with cells.
+
+        all             every declared node                          160
+        bases           pretrained roots (excludes pretrained:false)  50
+        aligned         every child by an ALIGNING op                 99
+        endpoints       one commodity-form endpoint per lineage       48
+        chain_rungs     every rung of a base->sft->pref chain         52
+        representative  members of a family declared representative
+        unavailable     declared and deliberately NOT measurable
+
+    **`endpoints` and `chain_rungs` ARE DIFFERENT POPULATIONS AND BOTH ARE
+    RIGHT.** An endpoint asks "what does a user receive"; a chain rung asks
+    "which stage did it". 48 lineages have an endpoint, 16 have a full chain,
+    because most labs never publish the middle.
+
+    `unavailable` is a population too: `gpt-sw3` is declared with
+    `kind: access_denied, permanent: true` and kept OUT of `nodes` so it cannot
+    inflate a declared population above the measurable one.
+    """
+    if kind not in POPULATIONS:
+        raise ValueError("kind must be one of %s, got %r" % (POPULATIONS, kind))
+    d = load()
+    nodes = d.get("nodes") or {}
+    par = {c: (p, op) for p, op, c in (d.get("edges") or []) if op in DERIVING}
+    fams = d.get("families") or {}
+    if kind == "all":
+        out = set(nodes)
+    elif kind == "bases":
+        out = {m for m, v in nodes.items()
+               if m not in par and v.get("pretrained") is not False}
+    elif kind == "aligned":
+        out = {m for m, (p, op) in par.items() if op in ALIGNING}
+    elif kind == "endpoints":
+        out = set(endpoints()[0].values())
+    elif kind == "chain_rungs":
+        out = {x for c in chains() for x in (c["base"], c["sft"], c["pref"])}
+    elif kind == "representative":
+        rep = {f for f, m in fams.items() if m.get("representative")}
+        out = {m for m, v in nodes.items() if rep & set(v.get("family") or [])}
+    else:                                                       # unavailable
+        return set(d.get("unavailable") or {})
+    if measured:
+        from . import ch
+        have = {r["model"] for r in
+                ch.query("SELECT DISTINCT model FROM {db}.twp_words")}
+        out &= have
+    return out
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -32,10 +32,9 @@ def check(name, got, want):
 
 
 def main():
-    att = json.load(open(os.path.join(ROOT, "roster", "models", "attestations.json")))
 
     print("\nbase -> endpoint pairs")
-    ep, un = roster.endpoints(attestations=att)
+    ep, un = roster.endpoints()
     check("lineages resolved", len(ep), 48)
     check("unresolved (must be empty)", len(un), 0)
     inv = {e for e in ep.values() if "dolphin" in e.lower() or "zephyr-7b-beta" in e}
@@ -47,7 +46,7 @@ def main():
     #: rules mask it. Asserted as a KNOWN PROPERTY rather than quietly dropped,
     #: so that if the roster grows a lineage where it does bite, this line
     #: fails and the howto's claim gets revisited.
-    ep_no, _ = roster.endpoints(attestations=None)
+    ep_no, _ = roster.endpoints(attested={})
     check("attestations change no endpoint (filter unreachable)", ep_no == ep, True)
     import malignment.roster as R
     real = R.load
@@ -55,12 +54,28 @@ def main():
     doc["families"]["mistral"].pop("representative", None)
     R.load = lambda: doc
     try:
-        masked, _ = R.endpoints(attestations=None)
+        masked, _ = R.endpoints(attested={})
     finally:
         R.load = real
     check("even without the ruling, same-publisher still masks it",
           masked.get("mistralai/Mistral-7B-v0.1"),
           "mistralai/Mistral-7B-Instruct-v0.1")
+
+    print("\npopulations")
+    for kind, want in (("all", 160), ("bases", 50), ("aligned", 99),
+                       ("endpoints", 48), ("chain_rungs", 52),
+                       ("representative", 10), ("unavailable", 6)):
+        check("population(%r)" % kind, len(roster.population(kind)), want)
+    check("population('aligned', measured=True)",
+          len(roster.population("aligned", measured=True)), 95)
+
+    print("\nthe same populations in SQL")
+    from malignment import ch
+    check("{db}.endpoints rows", ch.scalar("SELECT count() FROM {db}.endpoints"), 48)
+    check("{db}.populations rows", ch.scalar("SELECT count() FROM {db}.populations"), 425)
+    check("{db}.prompts is current",
+          ch.scalar("SELECT count() FROM {db}.prompts WHERE admitted AND upper(status) IN ('ACTIVE','')"),
+          2783)
 
     print("\nchains")
     cs = roster.chains()

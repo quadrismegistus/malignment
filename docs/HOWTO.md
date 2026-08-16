@@ -22,11 +22,16 @@ so found **4 of 6 OLMo lineages** because `OLMo-2` and `OLMoE` capitalise
 differently.
 
 ```python
-import json
 from malignment import roster
-att = json.load(open("roster/models/attestations.json"))
-endpoints, unresolved = roster.endpoints(attestations=att)   # {base: endpoint}, {base: [candidates]}
+endpoints, unresolved = roster.endpoints()   # {base: endpoint}, {base: [candidates]}
 ```
+
+**No arguments.** The attested file loads itself. An earlier version took
+`attestations=` defaulting to `None` — which meant *no attestations*, which
+meant the `inverted` filter silently did not run, so every caller had to pass
+`json.load(...)` to get correct behaviour. **A default that disables a guard is
+that guard's worst failure mode.** Pass `attested={}` to mean "explicitly none";
+only the test does.
 
 The filter chain, and each step is there because a case forced it:
 
@@ -39,8 +44,8 @@ The filter chain, and each step is there because a case forced it:
 | else same publisher as the base | the commodity form |
 | else **returned as `unresolved`** | never silently picked |
 
-**Pass `attestations=` or the `inverted` filter cannot fire.** Without it,
-`zephyr-7b-beta` and both dolphins become eligible *candidates*.
+Without attestations `zephyr-7b-beta` and both dolphins become eligible
+*candidates*.
 
 **AND TODAY THAT FILTER DECIDES NOTHING. It is UNREACHABLE, and the test found
 that out.** All 48 endpoints resolve identically with and without attestations.
@@ -57,6 +62,25 @@ rulings and the publisher rule, and saying otherwise credits a guard that has
 never fired.
 
 **Check `unresolved` is empty.** A caller that ignores it is choosing by accident.
+
+### any other population
+
+**One function, seven names, so nobody writes an eighth comprehension.**
+
+```python
+roster.population("endpoints")                  # 48   one per lineage
+roster.population("chain_rungs")                # 52   every rung of a full chain
+roster.population("aligned")                    # 99   every ALIGNING child
+roster.population("bases")                      # 50   pretrained roots
+roster.population("all")                        # 160  every declared node
+roster.population("representative")             # 10   members of a representative family
+roster.population("unavailable")                #  6   declared and deliberately unmeasurable
+roster.population("aligned", measured=True)     # 95   ...restricted to those with cells
+```
+
+`endpoints` and `chain_rungs` are **different populations and both are right**:
+an endpoint asks *what does a user receive*, a chain rung asks *which stage did
+it*. 48 lineages have an endpoint; 16 have a full chain.
 
 ### chains: base → sft → preference
 
@@ -80,6 +104,24 @@ roster.direction("sft", "dpo")    # "forward"
 roster.direction("dpo", "sft")    # "reverse"
 roster.direction("kto", "dpo")    # "incomparable" — alternatives, not a sequence
 ```
+
+---
+
+### the same populations, in SQL
+
+`python -m malignment.roster --write` rebuilds two derived tables so a query can
+join on the rule instead of re-deriving it:
+
+```sql
+SELECT * FROM malignment.endpoints                       -- base, endpoint, resolved_by
+SELECT model FROM malignment.populations WHERE kind='aligned'
+```
+
+**They are TABLES, not views, because the rule lives in Python** — it reads the
+attestations and the family rulings. They are dropped and rebuilt whole, never
+appended, so they cannot drift from the rule that makes them. `alignment_edges`
+remains what it always was — *every* alignment edge, choosing nothing — and is
+still the right view when you do not want one endpoint per lineage.
 
 ---
 
@@ -109,6 +151,12 @@ balanced-panel result.
 dom = corpus.domains(prompts)                      # {text: domain}
 corpus.domain_conflicts()                          # 47 texts whose rows disagree
 ```
+
+`{db}.prompts` is **rebuilt whole** by `python -m malignment.prompts --write` and
+is current: 2,783 declared admitted+live, 2,783 in the table, zero difference in
+either direction. But **do not build `{text: domain}` from it** — 2,783 rows are
+2,706 distinct texts, so any collapse to one row per text resolves duplicates by
+row order. That is what `corpus.domains()` is for.
 
 **47 declared texts disagree with themselves about `domain`** — `He slammed her
 against the wall and` is `violence` under `setd_and_M_2` and `other` under

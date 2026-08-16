@@ -231,9 +231,15 @@ def report(doc):
     n_claims = sum(len(c["claims"]) for c in cps.values())
     print("  %d lineages | %d checkpoints | %d claims" % (len(lins), len(cps), n_claims))
     uns = unsourced(doc)
-    print("  asserted-but-unquoted: %d (%.2f%%)"
-          % (len(uns), 100.0 * len(uns) / max(1, n_claims)))
-    for mid, f, v in uns[:6]:
+    #: SPLIT, because "461 unsourced" and "2 asserted" are different facts and
+    #: the first number stops meaning anything if they are pooled. A dataset NAME
+    #: is evidenced by the page that lists it, not by a sentence about each one.
+    sp = unsourced(doc, split=True)
+    print("  sourced to a page but not a sentence: %d (%.1f%%)"
+          % (len(sp["url_no_quote"]), 100.0 * len(sp["url_no_quote"]) / max(1, n_claims)))
+    print("  NO EVIDENCE AT ALL: %d (%.2f%%)"
+          % (len(sp["no_evidence"]), 100.0 * len(sp["no_evidence"]) / max(1, n_claims)))
+    for mid, f, v in sp["no_evidence"][:6]:
         print("     %-46s %-14s %s" % (mid.split("/")[-1][:46], f, v[:44]))
 
     conf = {}
@@ -419,8 +425,6 @@ def main():
     return report(load())
 
 
-if __name__ == "__main__":
-    sys.exit(main())
 
 
 def merge_claims(records, run, url_field="url"):
@@ -469,3 +473,7 @@ def merge_claims(records, run, url_field="url"):
     with open(ATTESTED, "w", encoding="utf-8") as fh:
         json.dump(doc, fh, indent=1, ensure_ascii=False)
     return len(records), n_add, n_new
+
+
+if __name__ == "__main__":
+    sys.exit(main())
