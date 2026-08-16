@@ -57,82 +57,136 @@ _CJK = re.compile(r"[一-鿿]")
 # the diagnostic pair
 # ---------------------------------------------------------------------------
 
-#: **RH's ruling, 2026-08-16: "ok lets use falcon3b".** Confirming malign's
-#: [6363] pick against the enumerated alternatives below.
+#: **`kakaocorp/kanana-1.5-8b-base -> kanana-1.5-8b-instruct-2505`** (malign,
+#: [6368], superseding Falcon3-3B).
 #:
-#: THE DIAGNOSTIC PAIR ANSWERS "what does the instrument do here" -- dN,
-#: suppression, substitution, dP per word. It is NOT the screening base, which
-#: answers "can this frame move at all" and takes a different answer for a
-#: measured reason: Falcon3-3B sits at the 32nd and 25th percentile of 389
-#: models on naughty-pole mass, so screening frames on it would reject stimuli
-#: that are alive in the models actually measured. That is M01 in reverse.
-#: **Do not prefill this as a screening base.**
+#: ONE PAIR DOES BOTH JOBS NOW (RH's design): the panel pools base+aligned on the
+#: y-axis, so poles are tagged on exactly the vocabulary movement is measured
+#: over. The two-object design had a silent hole -- poles tagged on model A's
+#: vocabulary, dN computed on pair B, so a frame whose poles B barely offers
+#: yields a dN that is arithmetically fine and about nothing.
 #:
-#: WHY THIS PAIR CANNOT CONTAMINATE. `Falcon3-3B-Base` is `prune`d from
-#: `Falcon3-7B-Base`, and `prune` is DERIVING but not ALIGNING -- so the 3B is
-#: not a lineage root, takes no endpoint, and appears in no chain. Nothing seen
-#: here can select an item into a population it is not in.
+#: THE REQUIREMENT, IN ONE SENTENCE: a pair whose BASE is typical enough that a
+#: frame looking dead on it is really dead, and whose EDGE moves enough that a
+#: frame looking live on it really moves.
 #:
-#: CHOSEN FROM AN ENUMERATED POOL, not by availability. Seven alignment edges sit
-#: outside every experimental population (2026-08-16, >500 cells each):
+#:     base typical      in the 14 candidates of `instrument_calibrations/
+#:                       screening_base` -- untreated models only
+#:     edge moves        mean JS 0.3960, 3.8x the 0.1030 roster mean
+#:     runnable here     profile=default on BOTH arms
+#:     peripheral        in no finding in the project
 #:
-#:     Falcon3-Mamba-7B -> Instruct   instruct  2,641   0.1674
-#:     Falcon3-3B       -> Instruct   instruct  2,663   0.0898   <- THIS
-#:     phi-4            -> reasoning  sft       2,663   0.0749
-#:     Falcon3-10B      -> Instruct   instruct  2,663   0.0714
-#:     Falcon3-1B       -> Instruct   instruct  2,663   0.0501
-#:     Pharia-1-7B      -> aligned    dpo       2,215   0.0311
-#:     phi-4-reasoning  -> -plus      rlvr      2,579   0.0157
+#: **AND OUT-OF-POPULATION IS NO LONGER REQUIRED.** [6363] demanded it to prevent
+#: contamination -- selecting frames on the outcome of a pair the findings use.
+#: RH withdrew the hazard and malign accepted the withdrawal at [6368], on the
+#: argument that survives without any claim about how movement transfers:
+#: `removal_rates` compares sexual against frequency-matched neutral ON THE SAME
+#: FRAMES, so a non-differential filter sits identically on both sides and
+#: cancels. Levels stay conditional on the battery, which they already were and
+#: which the population receipts already record; contrasts are protected.
 #:
-#: Roster mean over all cells is 0.103. **Two things that pool tells you and no
-#: single choice does.** Falcon3-Mamba moves 1.9x better and is the only free
-#: pair above the roster mean -- passed over because it is an SSM, its roster
-#: environment reads `profile: ssm / box: ssm` rather than this Mac, and SSMs are
-#: untested across devices at any quantity ([6357], and [4917]'s
-#: `selective_scan_cuda` failures). And the pool is four-sevenths `instruct`,
-#: with exactly one `dpo`, one `sft` and one `rlvr`, all of them the quietest in
-#: the set -- **so a diagnostic pair chosen for movement is an `instruct` edge,
-#: and the instrument never gets diagnosed on a preference edge.** That is a
-#: standing limitation of this choice, not a defect in it.
-DIAGNOSTIC_PAIR = ("tiiuae/Falcon3-3B-Base", "tiiuae/Falcon3-3B-Instruct")
+#: That constraint was also what made the problem hard. It left seven pairs and
+#: forced a choice between a typical base that does not move and a mover that is
+#: not typical. Lifted, several pairs are both.
+#:
+#: **Falcon3-3B is withdrawn as unfit**: 3rd/10th/3rd percentile, rank 53 of 58
+#: untreated models. Screening on a quiet model rejects frames that are alive
+#: elsewhere. **Falcon3-Mamba-7B is ruled out on availability, not risk**:
+#: `mamba_ssm` and `causal_conv1d` are CUDA-only, absent locally, and both arms
+#: are 4.4 MB stubs -- a ~28 GB download to discover that.
+DIAGNOSTIC_PAIR = ("kakaocorp/kanana-1.5-8b-base",
+                   "kakaocorp/kanana-1.5-8b-instruct-2505")
+
+#: **PROVISIONAL PENDING AN MPS LOAD TEST** (malign, [6368]). Neither arm has an
+#: MPS observation and neither is fully cached; malign is running the same timed
+#: fp16 round-trip used for Falcon3-3B and will book the result. If it fails the
+#: fallback is `RedPajama-INCITE-Base-7B-v0.1 -> RedPajama-INCITE-7B-Chat`
+#: (0.4920, Chat arm already cached). Building against kanana on malign's word.
+DIAGNOSTIC_PAIR_PROVISIONAL = True
 
 
 def check_diagnostic_pair(pair=None):
-    """Verify the pair is still outside every experimental population.
+    """Verify the pair still satisfies what is actually required of it.
 
-    **A RULE THAT EXECUTES RATHER THAN ONE THAT MUST BE RECALLED.** The comment
-    above states that neither member is an endpoint or a chain rung; that is a
-    fact about the roster TODAY, and the roster changes -- `endpoints()` went 48
-    to 50 on the day this was written. A comment asserting it would go quietly
-    stale, and the failure mode is the worst kind: the pair keeps working, keeps
-    looking safe, and silently starts selecting.
+    **THE OUT-OF-POPULATION CHECK WAS REMOVED, AND ITS REMOVAL IS THE POINT OF
+    THIS DOCSTRING.** The first version refused any pair whose members appeared
+    in `endpoints()` or a chain, because [6363] required that. [6368] withdrew
+    the requirement -- contamination was retracted as a hazard by RH and by
+    malign -- and the declared pair is now an endpoint pair by design.
 
-    Returns the pair. Raises `ValueError` naming which member and which
-    population, so the message says what to do rather than that something is
-    wrong.
+    So this guard would have refused the pair it exists to protect. **A guard
+    enforcing a rule that has been withdrawn is worse than no guard**: it fires
+    with authority, names a real-sounding hazard, and sends the next reader to
+    fix something that was deliberately chosen. It is the code form of a figure
+    that revives a retracted result.
+
+    What survives, because it is still required and still cheap:
+
+        both arms declared        a pair naming a checkpoint the roster does not
+                                  hold is a typo, not a decision
+        base is UNTREATED         `pretrained: false` outright, or an ALIGNING op
+                                  anywhere in its ancestry. A base that is already
+                                  aligned makes the pooled y-axis post-repression
+                                  and dN a measurement of the second treatment.
+        the edge IS an ALIGNING   otherwise the pair measures `prune` or
+        op                        `upscale` and dN is not about alignment at all
+
+    What is NOT checked here and must not be inferred from a pass: that the base
+    is TYPICAL (a property of `screening_base`'s ranking, which moves when the
+    roster does) and that the pair MOVES (a property of `movement_cells`). Both
+    are recorded in `DIAGNOSTIC_PAIR`'s comment with their numbers, and neither
+    is a cheap lookup.
+
+    Returns the pair. Raises `ValueError` naming what failed.
     """
     from . import roster
     base, aligned = pair or DIAGNOSTIC_PAIR
-    endpoints, _ = roster.endpoints()
-    rungs = set(roster.population("chain_rungs"))
-    chain_members = set()
-    for c in roster.chains():
-        chain_members |= {c["base"], c["sft"], c["pref"]}
+    doc = roster.load()
+    nodes = doc.get("nodes") or {}
     bad = []
+
     for m in (base, aligned):
-        for name, pop in (("endpoints (as a base)", set(endpoints)),
-                          ("endpoints (as a target)", set(endpoints.values())),
-                          ("chain_rungs", rungs),
-                          ("a declared chain", chain_members)):
-            if m in pop:
-                bad.append("%s is in %s" % (m, name))
+        if m not in nodes:
+            bad.append("%s is not in the roster" % m)
+
+    #: THE DECLARED FLAG FIRST, THEN THE GRAPH. Reading the graph alone is the
+    #: bug that put three `pretrained: false` checkpoints into an "untreated"
+    #: set: a model whose aligned parent is absent from the roster has no
+    #: incoming edge, so an ancestry walk finds nothing and calls it a base.
+    if nodes.get(base, {}).get("pretrained") is False:
+        bad.append("%s is declared `pretrained: false` -- it is already aligned, "
+                   "so the pooled distribution would be post-repression" % base)
+
+    parents = {}
+    for p, op, c in (doc.get("edges") or []):
+        parents.setdefault(c, []).append((p, op))
+    seen, stack = set(), [base]
+    while stack:
+        cur = stack.pop()
+        if cur in seen:
+            continue
+        seen.add(cur)
+        for p, op in parents.get(cur, []):
+            if op in roster.ALIGNING:
+                bad.append("%s has an ALIGNING op (%s) in its ancestry, so it is "
+                           "not a base" % (base, op))
+                stack = []
+                break
+            stack.append(p)
+
+    ops = [op for p, op, c in (doc.get("edges") or [])
+           if p == base and c == aligned]
+    if not ops:
+        bad.append("no declared edge %s -> %s" % (base, aligned))
+    elif not any(op in roster.ALIGNING for op in ops):
+        bad.append("the edge %s -> %s is %s, which is not an ALIGNING op, so dN "
+                   "over it would not be about alignment"
+                   % (base, aligned, "/".join(ops)))
+
     if bad:
         raise ValueError(
-            "the diagnostic pair is no longer out-of-population: %s. Anything "
-            "screened while looking at it can now select into a population it "
-            "belongs to, which is the contamination this pair exists to avoid. "
-            "Pick another from the free pool (see DIAGNOSTIC_PAIR's comment) or "
-            "re-declare deliberately." % "; ".join(bad))
+            "the declared diagnostic pair is unfit: %s. See DIAGNOSTIC_PAIR's "
+            "comment for what the pair has to satisfy." % "; ".join(bad))
     return (base, aligned)
 
 
