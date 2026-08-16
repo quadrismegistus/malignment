@@ -616,6 +616,25 @@ class Handler(BaseHTTPRequestHandler):
                 raise ValueError("grain %r is neither .csv nor .json" % grain)
             return {"id": d["id"], "grain": grain, **_read_csv(p, cap),
                     "cap": cap}
+        if path == "/slot/item_id":
+            #: **THE ID IS DERIVED HERE AND NOT IN THE CLIENT**, even though it is
+            #: a pure function of three strings the client already holds. See
+            #: `slots.item_id`: it encodes four rules, and a JavaScript port gets
+            #: the character classes wrong for free because Python's `\w` is
+            #: Unicode-aware and JavaScript's is ASCII-only. That divergence
+            #: produces ids that look right and do not match the 86 already
+            #: written.
+            #:
+            #: Cheap enough to ask for on every pole change: three regexes, no
+            #: model, no store.
+            from .slots import item_id
+            prompt = one("prompt", "")
+            nice, naughty = one("nice", ""), one("naughty", "")
+            if not prompt.strip() or not nice or not naughty:
+                raise ValueError("prompt, nice and naughty all required -- "
+                                 "nice and naughty are the HIGHEST-MASS word of "
+                                 "each branch, not the first tagged")
+            return {"item_id": item_id(prompt, nice, naughty)}
         if path == "/slot":
             if not _ALLOW_SLOT:
                 raise ValueError("this server was started with --no-slot")

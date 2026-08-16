@@ -141,6 +141,14 @@ export const api = {
 			`/experiment/result?id=${encodeURIComponent(id)}&grain=${encodeURIComponent(grain)}` +
 				(limit ? `&limit=${limit}` : '')
 		),
+	//: DERIVED SERVER-SIDE. `nice` and `naughty` must be the HIGHEST-MASS word of
+	//: each branch, not the first tagged — the id is a property of the
+	//: distribution, not of the order someone clicked.
+	slotItemId: (prompt: string, nice: string, naughty: string) =>
+		get<{ item_id: string }>(
+			`/slot/item_id?prompt=${encodeURIComponent(prompt)}` +
+				`&nice=${encodeURIComponent(nice)}&naughty=${encodeURIComponent(naughty)}`
+		),
 	slot: (prompt: string, model: string, k: number) =>
 		get<SlotResponse>(
 			`/slot?prompt=${encodeURIComponent(prompt)}&model=${encodeURIComponent(model)}&k=${k}`

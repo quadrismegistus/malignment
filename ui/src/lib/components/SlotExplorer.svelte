@@ -214,6 +214,47 @@
 	//: probabilities with movement never shown is a different instrument from one
 	//: screened while looking at movement, and two provenances in one column is
 	//: exactly the thing being guarded against.
+	//: ── THE DERIVED ID (RH, 2026-08-16).
+	//:
+	//: This emitted `item_id: CHANGEME`, faithfully, because the archive's
+	//: copy-yaml button did too — there the real id was computed in
+	//: `_slot_save`, server-side, and v3 has no save route yet. So the port was
+	//: right and the gap was one level up: nothing in v3 produced the id at all.
+	//:
+	//: `nn_<last3words>_<nice0>-<naughty0>`, and it is not a new convention: 86
+	//: items in the archive's `round3_slots.yaml` already carry ids from this
+	//: function, so changing it orphans them. `malignment/slots.py` is the ported
+	//: rule and reproduces all 86.
+	//:
+	//: FETCHED, NOT COMPUTED HERE. It is three regexes and the temptation to
+	//: inline them is the whole point: Python's `\w` is Unicode-aware and
+	//: JavaScript's is ASCII-only, so a port silently strips accented and CJK
+	//: characters the original keeps, yielding ids that look right and do not
+	//: match what is already written.
+	let itemId = $state('');
+	let idKey = $derived.by(() => {
+		if (!resp || !naughty.size || !nice.size) return '';
+		const top = (set: Set<string>) =>
+			words.filter((w) => set.has(w.word)).sort((a, b) => b.p - a.p)[0]?.word ?? '';
+		return JSON.stringify([resp.prompt, top(nice), top(naughty)]);
+	});
+	$effect(() => {
+		const k = idKey;
+		if (!k) { itemId = ''; return; }
+		const [p, c, n] = JSON.parse(k) as [string, string, string];
+		//: Debounced: tagging is a burst, and the id only changes when the
+		//: HIGHEST-MASS word of a branch changes, which most clicks do not do.
+		const t = setTimeout(() => {
+			api.slotItemId(p, c, n)
+				.then((r) => (itemId = r.item_id))
+				//: A FAILURE FALLS BACK TO THE PLACEHOLDER, never to a guess. An id
+				//: computed here on the error path is the divergence this route
+				//: exists to prevent, arriving exactly when nobody is watching.
+				.catch(() => (itemId = 'CHANGEME'));
+		}, 300);
+		return () => clearTimeout(t);
+	});
+
 	let yaml = $derived.by(() => {
 		if (!resp || (!naughty.size && !nice.size)) return '';
 		//: HIGHEST MASS FIRST, not tag order — the id must be a property of the
@@ -222,10 +263,20 @@
 			words.filter((w) => set.has(w.word)).sort((a, b) => b.p - a.p).map((w) => w.word);
 		const list = (xs: string[]) => `[${xs.join(', ')}]`;
 		return (
-			`- item_id: CHANGEME\n` +
+			`- item_id: ${itemId || 'CHANGEME'}\n` +
 			`  prompt: ${JSON.stringify(resp.prompt)}\n` +
 			`  naughty: ${list(byMass(naughty))}\n` +
 			`  nice: ${list(byMass(nice))}\n` +
+			//: THE BRANCH MASSES, which `_slot_save` wrote and the copy button did
+			//: not. Without them an item records which words were tagged and not
+			//: whether either branch carried anything -- and the two failure modes
+			//: this screen exists to separate are *nothing to move* and *nothing to
+			//: choose*, which are invisible without both totals. A ratio calls 0/0
+			//: and 0.3/0.3 both "balanced", which is why `share` is not enough on
+			//: its own and is written beside them rather than instead of them.
+			`  naughty_mass: ${naughtyMass.toFixed(4)}\n` +
+			`  nice_mass: ${niceMass.toFixed(4)}\n` +
+			`  share: ${Number.isNaN(share) ? 'null' : share.toFixed(4)}\n` +
 			`  writer: slot-explorer\n` +
 			`  screened_by:\n` +
 			`    models: ${list(resp.models)}\n` +
