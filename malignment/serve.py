@@ -406,29 +406,47 @@ def _roster_population(kind):
 # slot: the one route that measures
 # ---------------------------------------------------------------------------
 
-def _edge_between(model_ids):
-    """`{base, aligned, op}` if these two are a declared ALIGNING edge, else None.
+#: **THE DEFAULT SCREENING PAIR** (RH, 2026-08-17). Rank 19 of 56 on
+#: `instrument_calibrations/screening_base`, max_dev 28.6 -- just outside the
+#: candidate band, so middling rather than typical, and chosen on availability
+#: and size rather than on the ranking.
+#:
+#: NOT `stablelm-2-1_6b`, which ranks 6/56 and was withdrawn: its lineage graph
+#: is wrong. `models.yaml` books `chat -dpo-> zephyr` where both HF cards say
+#: each is finetuned FROM THE BASE, so they are siblings; correcting it makes
+#: the lineage UNRESOLVED and the endpoint a ruling for RH. Filed at [6371].
+#: Defaulting an authoring tool to a pair whose graph is wrong would bake the
+#: error into every item authored with it.
+DEFAULT_PAIR_BASE = "HuggingFaceTB/SmolLM3-3B-Base"
 
-    **THE LICENCE TO READ MOVEMENT, AND IT IS NOT THE CALLER'S TO ASSERT.** Any
-    two models can be pooled; the sum is then a union of vocabularies and the
-    difference between them is not a treatment effect. Only a declared aligning
-    edge makes `dP` the thing alignment did.
 
-    Order-insensitive on input and order-DEFINITE on output: the caller may name
-    the arms either way round, and `base` in the result is always the parent, so
-    a sign error cannot enter by the order someone typed two ids.
+def _pairs():
+    """The 50 declared (base, endpoint) pairs, with the PATH between them.
+
+    **`n_steps` IS NOT COSMETIC AND IS WHY THIS IS NOT JUST TWO IDS.** 17 of the
+    50 are multi-step: the default is `SmolLM3-3B-Base -> checkpoints ->
+    @it-soup-APO -> SmolLM3-3B`, three ops (`sft`, `apo`, `instruct`). Pooling
+    the two ENDS of that is a legitimate screening distribution, but "aligned"
+    then means the far end of three operations, not one, and an item stamped
+    without the path records a claim it cannot support.
     """
-    if len(model_ids) != 2:
-        return None
     from . import roster
-    a, b = model_ids
-    for p, op, c in (roster.load().get("edges") or []):
-        if op in roster.ALIGNING and {p, c} == {a, b}:
-            return {"base": p, "aligned": c, "op": op}
-    return None
+    ep, unresolved = roster.endpoints()
+    paths = {p["base"]: p for p in roster.paths()}
+    out = []
+    for b, a in sorted(ep.items()):
+        pa = paths.get(b, {})
+        out.append({"base": b, "endpoint": a,
+                    "n_steps": pa.get("n_steps"), "ops": pa.get("ops") or [],
+                    "label": "%s -> %s" % (b.split("/")[-1], a.split("/")[-1])})
+    #: RETURNED EVEN WHEN EMPTY. `docs/HOWTO.md`: a caller that ignores
+    #: `unresolved` is choosing by accident. A dropdown that silently omitted an
+    #: unresolvable lineage would be that caller.
+    return {"pairs": out, "unresolved": {k: v for k, v in unresolved.items()},
+            "default": DEFAULT_PAIR_BASE}
 
 
-def _slot(prompt, model_ids, k):
+def _slot(prompt, pair_base, k):
     """Pooled word probabilities at the blank, via `twp.expand`.
 
     **POOLED ACROSS THE GIVEN CHECKPOINTS, AND THE SOURCE IS NOT RETURNED.**
@@ -447,11 +465,23 @@ def _slot(prompt, model_ids, k):
     renormalisation across checkpoints -- so it is never written anywhere under
     either id. This route writes nothing at all.
     """
-    from . import twp
+    from . import twp, roster
     from .checkpoint import Checkpoint
 
+    #: MEMBERSHIP, not a pattern -- the same rule as every other parameter here.
+    #: `endpoints()` is the declared population; a base it does not contain is
+    #: not a screening pair, and naming the alternatives beats a 404.
+    ep, _unresolved = roster.endpoints()
+    if pair_base not in ep:
+        raise ValueError(
+            "%r is not a declared base. Screening takes a pair from "
+            "endpoints(); ask /slot/pairs for the %d available."
+            % (pair_base, len(ep)))
+    paths = {p["base"]: p for p in roster.paths()}
+    pa = paths.get(pair_base, {})
+    model_ids = [pair_base, ep[pair_base]]
+
     pooled, res_sum, skipped, n_ok = {}, {}, None, 0
-    per_arm = {}
     with _SLOT_LOCK:
         #: **THE CAP CANNOT BE SMALLER THAN THIS REQUEST.** A pooled call over
         #: three checkpoints under a cap of 2 would evict the first model before
@@ -487,22 +517,17 @@ def _slot(prompt, model_ids, k):
                 skipped = str(sk)
                 continue
             n_ok += 1
-            #: **THE PER-ARM DISTRIBUTIONS ARE KEPT, NOT JUST THE SUM.**
-            #: Pooling requires expanding each rung separately and then adding,
-            #: so both distributions exist in this loop already. Throwing them
-            #: away and recomputing later would be a second pair of model runs
-            #: for numbers we are holding.
-            #:
-            #: This is what makes the diagnostic free (RH's single-pair design):
-            #: dN, suppression and substitution are arithmetic over `per_arm`
-            #: once an axis exists, and the axis is a CPU embedding call. No
-            #: second request, no second load.
             #: `probs()` already summed across token paths, so `w1` is keyed on
             #: the surface. The local re-sum that used to live here was the
             #: duplicated half of that rule.
+            #:
+            #: **ONLY THE TWO ENDS ARE LOADED** (RH: "we just want the endpoints
+            #: for SmolLM3-3B"). The default pair's path runs through
+            #: `SmolLM3-3B-checkpoints` and `@it-soup-APO`; neither is expanded.
+            #: Pooling the ends is a legitimate screening distribution, and the
+            #: intermediate rungs are recorded in `pair.ops` rather than loaded.
             for surface, mass in w1.items():
                 pooled[surface] = pooled.get(surface, 0.0) + float(mass)
-            per_arm[mid] = dict(w1)
             #: **THE RESIDUAL IS POOLED THE SAME WAY AS THE WORDS.** The first
             #: version kept the FIRST model's residual and paired it with a mean
             #: over all of them, so `sum(words) + residual` came to 1.0499 on a
@@ -564,14 +589,16 @@ def _slot(prompt, model_ids, k):
         #: RETURNED so the panel can show that the books close. A check whose
         #: result never leaves the server is a check the reader has to trust.
         "conservation": conservation,
-        #: Per-rung distributions, so the client can ask for a movement split
-        #: without a second expansion. Keyed by model id, in the order given.
-        "per_arm": per_arm,
-        #: **WHETHER THIS POOL IS A DECLARED ALIGNMENT EDGE**, which is what
-        #: licenses reading movement off it at all. Two arbitrary models pooled
-        #: are a union of vocabularies; base -> aligned is a treatment. The
-        #: client must not offer a diagnostic when this is None.
-        "edge": _edge_between(model_ids),
+        #: **THE PAIR AND ITS PATH.** Stamped onto the saved item, because
+        #: "aligned" means the far end of `n_steps` operations and an item that
+        #: records only two ids records a claim it cannot support -- the default
+        #: pair is three ops (sft, apo, instruct).
+        #:
+        #: `per_arm` and `edge` were removed with the diagnostic. They existed
+        #: only to feed a movement split, and unused payload is debt: the next
+        #: reader has to work out whether anything depends on it.
+        "pair": {"base": pair_base, "endpoint": ep[pair_base],
+                 "n_steps": pa.get("n_steps"), "ops": pa.get("ops") or []},
         "rule_version": twp.RULE_VERSION,
         "dict_sha": twp.dict_sha(),
         "theta": twp.THETA,
@@ -734,6 +761,8 @@ class Handler(BaseHTTPRequestHandler):
             return _store_inventory()
         if path == "/roster":
             return _roster_summary()
+        if path == "/slot/pairs":
+            return _pairs()
         if path == "/roster/population":
             return _roster_population(one("kind", "endpoints"))
         if path == "/experiments":
@@ -801,14 +830,25 @@ class Handler(BaseHTTPRequestHandler):
             prompt = one("prompt", "")
             if not prompt.strip():
                 raise ValueError("prompt required")
-            mids = [s.strip() for s in (one("model") or "").split(",") if s.strip()]
-            if not mids:
+            #: **A DECLARED PAIR, NOT A MODEL LIST** (RH, 2026-08-17). The
+            #: panel pools base+endpoint and shows no movement, so pooling is a
+            #: property of the INSTRUMENT rather than a per-query choice. A free
+            #: model list let an author screen on one arm and not know it, which
+            #: is the failure the pooled design exists to prevent: the arrival
+            #: side of a displacement often does not exist in the base at all.
+            #: **A RETIRED PARAMETER IS REFUSED, NOT IGNORED.** `model=` used to
+            #: take a comma-separated pool. Silently dropping it would hand the
+            #: caller the DEFAULT pair while they believed they had named their
+            #: own -- which is precisely the archive's failure, where a client
+            #: default silently overrode the server's and the app ran a
+            #: population the server's own test never exercised.
+            if one("model"):
                 raise ValueError(
-                    "model required -- a comma-separated list of checkpoint ids. "
-                    "There is deliberately no default: a default pool is a "
-                    "population choice, and one made in a server is one nobody "
-                    "reports.")
-            return _slot(prompt, mids, _int(one("k"), 50, 5, 500))
+                    "`model=` was replaced by `pair=<base id>`. Screening pools "
+                    "a declared (base, endpoint) pair, so naming loose models is "
+                    "no longer possible; ask /slot/pairs for the 50 available.")
+            base = one("pair") or DEFAULT_PAIR_BASE
+            return _slot(prompt, base, _int(one("k"), 50, 5, 500))
         return None                                     # -> static
 
     # -- helpers -----------------------------------------------------------

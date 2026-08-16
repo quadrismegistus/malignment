@@ -42,14 +42,24 @@
 -->
 <script lang="ts">
 	import { api } from '$lib/api';
-	import type { SlotResponse, AxisResponse, Health } from '$lib/api';
+	import type { SlotResponse, AxisResponse, Health, Pair } from '$lib/api';
 
 	let prompt = $state('She slowly took off her');
 	//: NO DEFAULT MODEL, matching the server. A default pool is a population
 	//: choice; one baked into a client is one nobody reports. The archive shipped
 	//: a client default that silently overrode the server's, so the app ran a
 	//: population the server's own test never exercised.
-	let model = $state('');
+	//: The declared pair's BASE id. Not a free model string: pooling base and
+	//: endpoint is a property of the instrument, and a text field is how an
+	//: author screens on one arm without noticing.
+	let pairBase = $state('');
+	let pairs = $state<Pair[]>([]);
+	let pairsUnresolved = $state<Record<string, string[]>>({});
+	api.slotPairs().then((r) => {
+		pairs = r.pairs;
+		pairsUnresolved = r.unresolved;
+		if (!pairBase) pairBase = r.default;
+	}).catch(() => (pairs = []));
 	let topK = $state(50);
 
 	let resp: SlotResponse | null = $state(null);
@@ -124,20 +134,12 @@
 			//: not an optional extra — see `split`'s docstring on dN cancelling
 			//: while something large happens.
 			const probs = Object.fromEntries(words.map((w) => [w.word, w.p]));
-			//: **THE SPLIT COMES FREE WHEN THE POOL IS A DECLARED EDGE.** No extra
-			//: request and no extra load — `per_arm` was already returned by the
-			//: expansion that built the pooled y-axis. Sent only when `edge` is
-			//: non-null, because two arbitrary models pooled are a union of
-			//: vocabularies and their difference is not a treatment effect.
-			const e = resp.edge;
 			const r = await api.slotAxis(
 				resp.prompt,
 				generic ? GENERIC_POLES.naughty : [...naughty],
 				generic ? GENERIC_POLES.nice : [...nice],
 				words.map((w) => w.word),
-				probs,
-				e ? resp.per_arm[e.base] : undefined,
-				e ? resp.per_arm[e.aligned] : undefined
+				probs
 			);
 			axisInfo = r;
 			if (!r.ok) {
@@ -183,10 +185,8 @@
 
 	async function run() {
 		if (!prompt.trim()) return;
-		if (!model.trim()) {
-			error =
-				'name a screening base — there is deliberately no default, because there are ' +
-				'several defensible answers and the choice is a population choice';
+		if (!pairBase) {
+			error = 'no declared pair selected';
 			return;
 		}
 		loading = true;
@@ -213,14 +213,15 @@
 		//: it last ran. A stale "resident" here would promise a fast call and
 		//: deliver a slow one, which is the failure this message exists to prevent.
 		try {
-			const want = model.split(',').map((s) => s.trim()).filter(Boolean);
+			const p = pairs.find((x) => x.base === pairBase);
+			const want = p ? [p.base, p.endpoint] : [pairBase];
 			const h = await api.health();
 			phase = want.every((m) => h.slot_loaded.includes(m)) ? 'expanding' : 'loading';
 		} catch {
 			phase = 'expanding';
 		}
 		try {
-			resp = await api.slot(prompt, model, topK);
+			resp = await api.slot(prompt, pairBase, topK);
 			taggedFor = prompt;
 		} catch (e) {
 			error = e instanceof Error ? e.message : String(e);
@@ -550,48 +551,12 @@
 		  a control that appears to affect a measurement and drives nothing is
 		  worse than an absent one.
 		-->
-		<label>screening base
-			<input class="model" bind:value={model}
-				placeholder="org/base — or a comma-separated pool" /></label>
-		<!--
-		  ── THE DECLARED PAIR, OFFERED AND NOT PREFILLED (RH: "i dont see
-		  falcon3b selected in slot?").
-
-		  It was invisible, which is a real defect: a declared constant nobody can
-		  reach is a constant nobody uses. But prefilling it into THIS field would
-		  silently make it the screening base, and that is the one role it is
-		  measurably wrong for -- 32nd and 25th percentile of 389 models on
-		  naughty-pole mass, so frames screened on it read as dead when they are
-		  alive in the models actually measured. M01 in reverse.
-
-		  So: one click, and the label carries the role. This is the shape I
-		  proposed at [6362] -- "prefilled reads as what this tool measures;
-		  offered reads as what this tool screens with" -- which malign overrode
-		  for a field that IS the diagnostic pair. This field is not that field.
-
-		  The ids come from /health, verified out-of-population at server boot,
-		  rather than typed here. A second copy of a model id is a second
-		  declaration.
-		-->
-		{#if health?.diagnostic_pair?.length}
-			<!--
-			  ── NO MODE, AND NO BUTTON. The diagnostic is not a thing you switch on:
-			  when the two models named are a declared ALIGNING edge, the server has
-			  both distributions in hand from the pooling and the split is arithmetic.
-			  RH's single-pair design is what makes that true.
-
-			  A "diagnose" button lived here for an hour and was a category error
-			  twice over: it filled the SCREENING field with the diagnostic pair, and
-			  it referenced state that did not exist, which the build did not catch
-			  because Svelte templates do not fail on undefined identifiers.
-			-->
-			<button class="ghost pair"
-				title="The declared out-of-sample diagnostic pair. Naming both arms pools them on the y-axis AND yields movement, because a declared alignment edge licenses reading dP as a treatment effect."
-				onclick={() => (model = health.diagnostic_pair.join(','))}>
-				use the declared pair
-				<span class="pairids">{health.diagnostic_pair.map((m) => m.split('/').pop()).join(' → ')}</span>
-			</button>
-		{/if}
+		<label>pair
+			<select class="pairsel" bind:value={pairBase}>
+				{#each pairs as p (p.base)}
+					<option value={p.base}>{p.label}{p.n_steps && p.n_steps > 1 ? `  (${p.n_steps} steps)` : ''}</option>
+				{/each}
+			</select></label>
 		<label>top-k <input class="k" type="number" bind:value={topK} min="5" max="500" /></label>
 		{#if resp}
 			<span class="meta num">
@@ -627,37 +592,19 @@
 		  a reader is most likely to assume they already know which checkpoint it
 		  was, so it is the case that most needs saying.
 		-->
-		{#if resp.edge}
-			<!--
-			  ── THE CAVEAT BELONGS TO THE DECLARED PAIR, NOT TO ANY EDGE.
-			  The first version hardcoded "it moves 0.0714" into a line that renders
-			  for whatever edge was expanded — so a run on SmolLM2 displayed
-			  Falcon3-10B's movement figure beside SmolLM2's numbers. Caught by
-			  rendering it: a caption describing one pair over a panel showing
-			  another, which is the defect this app keeps being written against.
-
-			  Now the figure appears only when the edge IS the declared pair, and any
-			  other edge is named without one, because this component does not know
-			  what an arbitrary edge's roster-mean comparison is and must not guess.
-			-->
-			<p class="declare">
-				movement from <strong>{resp.edge.base.split('/').pop()}</strong> to
-				<strong>{resp.edge.aligned.split('/').pop()}</strong> ({resp.edge.op}), a declared
-				alignment edge{#if health?.diagnostic_pair?.length === 2 && resp.edge.base === health.diagnostic_pair[0] && resp.edge.aligned === health.diagnostic_pair[1]} and the
-					out-of-sample diagnostic pair &mdash; its transgressive removal sits at the
-					<span class="num">40th percentile</span> of the 50 measured pairs, so a frame that looks
-					unmoved here may still move on a median lineage{:else} &mdash; NOT the declared diagnostic pair, so
-					anything selected while looking at this may be selecting on the outcome of a measured
-					lineage{/if}
-			</p>
-		{/if}
+		<!--
+		  THE PAIR AND ITS PATH LENGTH, both stamped. "Aligned" means the far end
+		  of `n_steps` operations -- three for the default -- and a panel that
+		  printed two ids would let a reader take it for one hop. Only the two ENDS
+		  are loaded; the intermediate rungs are named, not measured.
+		-->
 		<p class="declare">
-			screened on <strong>{resp.models.join(' + ')}</strong>{#if resp.n_models > 1}, pooled and
-				blind to source &mdash; a word's origin is not returned, so poles are declared on the
-				POOLED vocabulary and not on the base{/if} &mdash; probabilities only, movement is not
-			shown at authoring time
+			pooled over <strong>{resp.pair.base.split('/').pop()}</strong> +
+			<strong>{resp.pair.endpoint.split('/').pop()}</strong>, blind to source &mdash; a word's
+			origin is not returned, so poles are declared on the POOLED vocabulary and not on the
+			base{#if resp.pair.n_steps && resp.pair.n_steps > 1}. <strong>{resp.pair.n_steps} operations
+			apart</strong> ({resp.pair.ops.join(' → ')}), and only the two ends are loaded{/if}
 		</p>
-
 		<div class="branches">
 			<div class="branch naughty-b" title="Summed word probability over every word tagged NAUGHTY.">
 				<span class="lbl">naughty</span>
@@ -740,36 +687,6 @@
 					<span class="lbl">poles</span>
 					<span class="val num">{naughty.size}/{nice.size}</span>
 				</div>
-				{#if axisInfo.split}
-					<!--
-					  ── MOVEMENT, IN THE SAME ROW AS LEVERAGE (RH: "why not show the
-					  diagnostics next to where all the other diagnostics are?").
-
-					  Not a separate panel and not a mode. dN is the same kind of
-					  object as leverage and N — a scalar about this frame — and
-					  malign's [6361] requires it never to travel without leverage:
-					  the axis scores substitutions near-neutral, so ΔN cancels while
-					  something large happens (`argue` x3.3 for Jews, `rob` x2.1 for
-					  Black men, at a dN near zero). Adjacency IS the guard here.
-
-					  SUPPRESSION AND SUBSTITUTION ARE SHOWN SEPARATELY, not summed
-					  into dN alone, because they are the two events dN conflates: a
-					  model that stops saying the loaded word, and one that says a
-					  milder word instead. The project's claim is about the second.
-					-->
-					<div class="branch mv" title="Movement along this axis from base to aligned: dN = Σ dP(w)·s(w). READ IT WITH LEVERAGE — a dN near zero means 'nothing happened' OR 'a great deal happened symmetrically', and only the spread tells you which.">
-						<span class="lbl">dN</span>
-						<span class="val num">{axisInfo.split.dN >= 0 ? '+' : ''}{axisInfo.split.dN.toFixed(4)}</span>
-					</div>
-					<div class="branch mv" title="The part of dN from mass LEAVING, weighted by where it left from — the model no longer saying the loaded word.">
-						<span class="lbl">suppr</span>
-						<span class="val num">{axisInfo.split.suppression >= 0 ? '+' : ''}{axisInfo.split.suppression.toFixed(4)}</span>
-					</div>
-					<div class="branch mv" title="The part of dN from mass ARRIVING, weighted by where it landed — the model saying a milder word instead. This is the displacement the project is about.">
-						<span class="lbl">subst</span>
-						<span class="val num">{axisInfo.split.substitution >= 0 ? '+' : ''}{axisInfo.split.substitution.toFixed(4)}</span>
-					</div>
-				{/if}
 				{#each axisInfo.flags ?? [] as f (f)}
 					<div class="verdict bad">{f}</div>
 				{/each}
@@ -982,7 +899,7 @@
 	.pair { display: flex; gap: 7px; align-items: baseline; white-space: nowrap; }
 	.pairids { font-family: var(--mono); font-size: 9.5px; color: var(--text-3); }
 	.prompt { flex: 1; font-size: 13px; }
-	.model { width: 300px; font-size: 11px; }
+	.pairsel { max-width: 340px; font-size: 11px; }
 	.k { width: 62px; font-size: 11px; }
 	.go { padding: 6px 14px; font-size: 12px; }
 	.meta { font-size: 10px; color: var(--text-3); }

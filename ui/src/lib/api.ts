@@ -102,6 +102,14 @@ export interface ResultJson {
 	json: unknown;
 }
 
+export interface Pair {
+	base: string;
+	endpoint: string;
+	n_steps: number | null;
+	ops: string[];
+	label: string;
+}
+
 export interface SlotWord {
 	word: string;
 	p: number;
@@ -123,31 +131,18 @@ export interface SlotResponse {
 	//: sum(words) + residual.total. The instrument's own accounting identity,
 	//: returned so the panel can show that the books close rather than assert it.
 	conservation: number | null;
-	//: Per-rung distributions, so a movement split needs no second expansion.
-	per_arm: Record<string, Record<string, number>>;
-	//: **THE LICENCE TO READ MOVEMENT.** Non-null only when the two models named
-	//: are a declared ALIGNING edge. Any two models can be pooled; only a
-	//: declared edge makes the difference between them a treatment effect.
-	edge: { base: string; aligned: string; op: string } | null;
+	//: The declared pair and the PATH between its ends. `n_steps` matters:
+	//: 17 of the 50 are multi-step, and the default is three ops — so "aligned"
+	//: means the far end of a path, not one operation.
+	pair: { base: string; endpoint: string; n_steps: number | null; ops: string[] };
 	rule_version: number;
 	dict_sha: string;
 	theta: number;
 	skipped: string | null;
 }
 
-export interface Split {
-	dN: number;
-	suppression: number;
-	substitution: number;
-	movers: [string, number][];
-}
-
 export interface AxisResponse {
 	ok: boolean;
-	//: Present only when both arms were sent. **Never read dN without `leverage`
-	//: from the same response** — the axis scores substitutions near-neutral, so
-	//: ΔN cancels while something large happens.
-	split: Split | null;
 	norm: number;
 	note?: string;
 	scores: { word: string; s: number }[];
@@ -187,16 +182,8 @@ export const api = {
 		naughty: string[],
 		nice: string[],
 		words: string[],
-		probs?: Record<string, number>,
-		//: BOTH OR NEITHER — the server refuses one alone, because a single arm
-		//: diffs against an empty distribution and yields a finite number about
-		//: nothing.
-		base_probs?: Record<string, number>,
-		aligned_probs?: Record<string, number>
-	) =>
-		post<AxisResponse>('/slot/axis', {
-			prompt, naughty, nice, words, probs, base_probs, aligned_probs
-		}),
+		probs?: Record<string, number>
+	) => post<AxisResponse>('/slot/axis', { prompt, naughty, nice, words, probs }),
 	health: () => get<Health>('/health'),
 	inventory: () => get<{ db: string; tables: Table[] }>('/store/inventory'),
 	roster: () => get<RosterSummary>('/roster'),
@@ -219,8 +206,12 @@ export const api = {
 			`/slot/item_id?prompt=${encodeURIComponent(prompt)}` +
 				`&nice=${encodeURIComponent(nice)}&naughty=${encodeURIComponent(naughty)}`
 		),
-	slot: (prompt: string, model: string, k: number) =>
+	//: Takes a declared PAIR, never loose model ids — pooling base+endpoint is a
+	//: property of the instrument, not a per-query choice.
+	slotPairs: () =>
+		get<{ pairs: Pair[]; unresolved: Record<string, string[]>; default: string }>('/slot/pairs'),
+	slot: (prompt: string, pairBase: string, k: number) =>
 		get<SlotResponse>(
-			`/slot?prompt=${encodeURIComponent(prompt)}&model=${encodeURIComponent(model)}&k=${k}`
+			`/slot?prompt=${encodeURIComponent(prompt)}&pair=${encodeURIComponent(pairBase)}&k=${k}`
 		)
 };
