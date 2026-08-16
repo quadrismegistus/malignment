@@ -1504,6 +1504,43 @@ rulings:
     _format: 'scale_group_root: chosen_checkpoint   # with a reason'
     _none_yet: No override is declared. Every current pick is the size rule's, and that is stated rather than implied.
 directions:
+  # AUTHORED RULING, 2026-08-16, RH. OVERRIDES the attestation, which says
+  # `inverted`. Both readings are kept: attestations.json is not edited, so the
+  # disagreement stays visible instead of being resolved by overwrite.
+  #
+  # A SECOND BLIND PASS FOLLOWED THE CITATION AND THE ATTESTATION HAD NOT. The
+  # `inverted` reading rests on the card's sentence "We found that removing the
+  # in-built alignment of these datasets boosted performance on MT Bench and made
+  # the model more helpful" -- deliberate removal, stated intent, exactly the
+  # shape the criterion asks for. Following that sentence to what it NAMES:
+  #   - the removal is documented on the SFT dataset card and is a PERSONA filter,
+  #     "Removal of dialogues where the assistant replies with phrases like 'I do
+  #     not have emotions' or 'I don't have opinions'" -- de-hedging, not
+  #     refusal-stripping
+  #   - the preference set picks "the highest `overall_score` as the 'chosen'
+  #     completion", so REFUSALS ARE NOT THE REJECTED CLASS
+  #   - the safety statement is an absence: "has not been aligned to human
+  #     preferences for safety within the RLHF phase"
+  #
+  # So the gradient points at quality and nobody reversed anything: `standard`.
+  # What is true and NOT captured by that value is that the safety component was
+  # never installed -- which is what `alignment_intent` is for. A low measured
+  # repression for this family must be read as ABSENCE, not as a light-touch
+  # alignment recipe.
+  #
+  # The ruling changes no endpoint: Mistral resolves to Mistral-7B-Instruct-v0.1
+  # through the representative family either way, 48 lineages, 0 unresolved. It is
+  # therefore decided on evidence rather than on consequences.
+  HuggingFaceH4/zephyr-7b-beta:
+    direction: standard
+    alignment_intent: helpfulness
+    overrides_attestation: inverted
+    evidence: 'card sentence reads as deliberate removal, but the SFT filter it
+      names is de-hedging ("I do not have emotions") and the preference set ranks
+      by overall_score with refusals not the rejected class'
+    caveat: 'no safety guardrail exists. "Zephyr-7B-b has not been aligned to human
+      preferences for safety within the RLHF phase or deployed with in-the-loop
+      filtering of responses like ChatGPT."'
   cognitivecomputations/dolphin-2.6-mistral-7b-dpo:
     direction: inverted
     evidence: preference mixture includes unalignment/toxic-dpo-v0.1, whose card describes it as de-censoring with REFUSALS AS THE REJECTED CLASS; the upstream SFT was already refusal-stripped
