@@ -52,6 +52,10 @@ nodes:
     family:
     - pharia
   Aleph-Alpha/Pharia-1-LLM-7B-control-hf:
+    pretrained: false   # ALREADY ALIGNED: `-control` is the instruction-tuned release
+                        # (attested method sft). Its edge to `-control-aligned` is
+                        # therefore SFT->DPO, not base->aligned; the raw Pharia-1-LLM-7B
+                        # is not in this roster.
     revision_ladder: 5
     family:
     - pharia
@@ -834,6 +838,12 @@ nodes:
     family:
     - glm4
   microsoft/phi-4:
+    pretrained: false   # ALREADY ALIGNED. "We align the pretrained model with one
+                        # round of SFT 4.1, one round of DPO on data from our pivotal
+                        # tokens search" -- the phi-4 report. Only the aligned artefact
+                        # was released, so phi-4 -> phi-4-reasoning is aligned->reasoning,
+                        # NOT base->aligned. RH, 2026-08-15: "we decided to retire phi-4
+                        # because it doesn't actually have a base model".
     family:
     - phi4
   microsoft/phi-4-reasoning:
