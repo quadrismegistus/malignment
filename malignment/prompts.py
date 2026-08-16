@@ -211,17 +211,45 @@ class Prompt:
         return Prompt(other) if other in by_id else None
 
 
+#: **A ROW IS LIVE IF ITS STATUS IS ACTIVE OR ABSENT.** RH's ruling, 2026-08-16.
+#:
+#: This port kept the `admitted` gate and DROPPED the status one, so every count
+#: silently included 93 RETIRED, 2 DISPUTED and 10 "MIXED: ACTIVE/DISPUTED"
+#: prompts -- 95 rows a previous seat had struck. The archive's own docstring
+#: says why it defaults on: *"ACTIVE BY DEFAULT. Every count wants the status
+#: filter and forgetting it once produced 'source=OTHER: 55' where the answer
+#: was 4."* Two gates existed for two different reasons; carrying one across is
+#: how the other's work gets quietly undone.
+#:
+#: MISSING COUNTS AS LIVE because 1,852 of 3,120 rows carry no status field at
+#: all -- these predate the field, and reading absence as "retired" would delete
+#: 60% of the corpus on a technicality. Absence is not a withdrawal.
+LIVE_STATUS = ("ACTIVE", "")
+
+
+def _is_live(row):
+    return str(row.get("status") or "").upper() in LIVE_STATUS
+
+
 class Prompts:
     @staticmethod
-    def all(admitted=True):
+    def all(admitted=True, live=True):
+        """Declared prompts. `live=False` opts into RETIRED/DISPUTED as well."""
         by_id, order = _load()
         return [Prompt(p) for p in order
-                if admitted is None or by_id[p].get("admitted") == admitted]
+                if (admitted is None or by_id[p].get("admitted") == admitted)
+                and (not live or _is_live(by_id[p]))]
 
     @staticmethod
-    def where(admitted=True, **fields):
+    def struck():
+        """The rows a seat withdrew: RETIRED, DISPUTED, or MIXED. Visible on purpose."""
+        by_id, order = _load()
+        return [Prompt(p) for p in order if not _is_live(by_id[p])]
+
+    @staticmethod
+    def where(admitted=True, live=True, **fields):
         out = []
-        for p in Prompts.all(admitted=admitted):
+        for p in Prompts.all(admitted=admitted, live=live):
             if all(p._row.get(k) == v for k, v in fields.items()):
                 out.append(p)
         return out
