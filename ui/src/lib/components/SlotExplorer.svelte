@@ -632,9 +632,9 @@
 				movement from <strong>{resp.edge.base.split('/').pop()}</strong> to
 				<strong>{resp.edge.aligned.split('/').pop()}</strong> ({resp.edge.op}), a declared
 				alignment edge{#if health?.diagnostic_pair?.length === 2 && resp.edge.base === health.diagnostic_pair[0] && resp.edge.aligned === health.diagnostic_pair[1]} and the
-					out-of-sample diagnostic pair &mdash; it moves <span class="num">0.0714</span> against a
-					roster mean of <span class="num">0.1030</span>, so a frame that looks unmoved here may
-					still move on a median lineage{:else} &mdash; NOT the declared diagnostic pair, so
+					out-of-sample diagnostic pair &mdash; its transgressive removal sits at the
+					<span class="num">40th percentile</span> of the 50 measured pairs, so a frame that looks
+					unmoved here may still move on a median lineage{:else} &mdash; NOT the declared diagnostic pair, so
 					anything selected while looking at this may be selecting on the outcome of a measured
 					lineage{/if}
 			</p>

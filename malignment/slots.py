@@ -79,29 +79,49 @@ _CJK = re.compile(r"[一-鿿]")
 #:
 #: ## WHAT IS LEFT ONCE THE CONSTRAINT IS RESTORED
 #:
-#: Out of sample AND runnable on this machine leaves the unused Falcon3s:
+#: Out of sample AND runnable on this machine leaves the unused Falcon3s. The
+#: two criteria, and **note which statistic is NOT among them**:
 #:
-#:     pair                  screener rank   max_dev   edge JS   env
-#:     Falcon3-10B-Base           16 / 56      26.8     0.0714   default/default
-#:     Falcon3-3B-Base            53 / 58      46.6     0.0898   default/default
-#:     Falcon3-1B-Base                 -          -     0.0501   default/default
+#:     pair              screener   base mass   transgressive DiD    env
+#:                       max_dev     pctile      value    pctile
+#:     Falcon3-10B-Base    26.8        32%      +0.0716     40%    default
+#:     Falcon3-3B-Base     46.6         2%      +0.1496     70%    default
+#:     Falcon3-Mamba-7B       -        50%      +0.0148     30%    ssm
+#:     Falcon3-1B-Base        -         0%      +0.0060     30%    default
 #:
-#: `Falcon3-Mamba-7B` moves best of the free pairs at 0.1674 and is ruled out on
-#: AVAILABILITY: `mamba_ssm` and `causal_conv1d` are CUDA-only and absent, both
-#: arms are 4.4 MB stubs, ~28 GB to find out ([6368] §2).
+#: **JS IS NOT THE DIAGNOSTIC CRITERION AND USING IT WAS MY MISTAKE** (malign,
+#: [6370], re-ranking the pool on the lexicon). Mean JS is total distributional
+#: change: it counts format and register drift equally with the vocabulary a
+#: slot frame is built from. The quantity the diagnostic needs is transgressive
+#: REMOVAL -- mass leaving the 1,063-word lexicon, differenced against the
+#: 3,812-word matched-neutral set so that a model which simply says less of
+#: everything does not read as repressing.
 #:
-#: **The 10B over the 3B, on the screening half.** 26.8 against 46.6 -- the 3B is
-#: 3rd/10th/3rd percentile and would reject frames that are alive everywhere
-#: else. The 3B moves marginally more (0.0898 vs 0.0714) and both are below the
-#: 0.1030 roster mean anyway, so the movement difference buys less than the
-#: representativeness difference costs.
+#: **The ordering nearly inverts.** `Falcon3-Mamba` led on JS at 0.1674, 1.9x
+#: the current pick, which is exactly why I proposed it at [6366]. On the
+#: lexicon it is the most typical base of the four (50th percentile) and the
+#: WEAKEST remover (30th) -- its JS lead is drift that barely touches the words
+#: in question. **It is not the answer it appeared to be, on a CUDA box either.**
+#:
+#: And `Falcon3-3B` is the best remover of the four (70th) on a base that barely
+#: offers the vocabulary (2nd percentile mass) -- strong removal of almost
+#: nothing, which is the same fact as its being an unusable screener.
+#:
+#: **The 10B is the compromise on both**: 32nd/40th on the lexicon, 26.8 max_dev
+#: on the screening rank. Mediocre at each job and disqualified at neither, which
+#: is what this pool allows.
+#:
+#: The general form, and it generalises past this choice: **a pair chosen for
+#: magnitude is chosen on a quantity that does not carry the signal.** No
+#: magnitude statistic distinguishes alignment from ordinary training.
 #:
 #: ## THE LIMITATION, STATED RATHER THAN DISCOVERED
 #:
-#: **0.0714 is BELOW the roster mean of 0.1030.** A frame that looks unmoved here
-#: may move on a median lineage. That is the price of out-of-sample on this
-#: machine and it belongs on the panel, not in a footnote: the diagnostic is
-#: evidence that a frame DOES move, and weak evidence that it does not.
+#: **The transgressive DiD sits at the 40th percentile of the 50 in-population
+#: pairs.** A frame that looks unmoved here may move on a median lineage. That is
+#: the price of out-of-sample on this machine and it belongs on the panel, not in
+#: a footnote: the diagnostic is evidence that a frame DOES move, and weak
+#: evidence that it does not.
 DIAGNOSTIC_PAIR = ("tiiuae/Falcon3-10B-Base", "tiiuae/Falcon3-10B-Instruct")
 
 #: Falcon3-3B has a booked MPS observation from [6363] (fp16, ~6 s from local
