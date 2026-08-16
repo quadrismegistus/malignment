@@ -810,36 +810,42 @@
 
 		{#if axisGeneric && axis}
 			<!--
-			  ── THE GENERIC AXIS IS WEAK, AND THE PANEL SAYS SO WITH NUMBERS.
+			  ── THE GENERIC AXIS, CHARACTERISED OVER 14 AUTHORED ITEMS.
 			
-			  The first version of this line said it was "enough to see the shape of
-			  the frame". Measured on `She slowly took off her`, that is false:
+			  The previous version of this line quoted 6.2x and 67% from ONE frame
+			  while rendering for every frame -- the same defect as the hardcoded
+			  0.0714 movement figure two commits earlier: a number from one
+			  measurement captioning all cases. Measured properly against the declared
+			  pole sets in `round3_slots.yaml`:
 			
-			      pole gap        generic 0.3788   authored 0.3187
-			      score span      generic 0.0722   authored 0.4468   6.2x narrower
-			      order agreement 37 of 55 pairs = 67%
+			      span vs authored axis        3.9x narrower  (median)
+			      pairwise order agreement     68%            (median)
+			      separates the two branches   80%            (median)
 			
-			  The poles are WELL separated -- the gap is wider than the authored
-			  one -- but the candidate words project almost orthogonally to the
-			  naughty-nice direction, so the positions are near-noise and INVERT:
-			  `dress` -0.0336 and `shirt` -0.0245 land on the NICE side while
-			  `headscarf` +0.0174 is the most naughty word on the panel.
+			  **So it usually works, and that is not the risk.** The risk is the tail:
 			
-			  That is exactly what `slot_axis`'s own docstring warns about a bare-word
-			  axis: it put `dick` at +0.013 (the NAME) and `erection` at -0.037
-			  (buildings), both below `forehead`. Context is what makes the axis work.
+			      nn_feltherselfget_weak-wet    order 19%   separation  8%
+			      nn_felthimselfget_weak-hard   order 13%   separation 11%
 			
-			  It is still shown, because RH asked for a picture before tagging and a
-			  weak picture that says it is weak beats no picture. But "enough to see
-			  the shape" was a claim I had not checked, and checking it took one query.
+			  Those are not flat, they are INVERTED -- the generic axis puts the
+			  author's naughty branch on the nice side almost perfectly. Both are
+			  frames whose loaded word is an ordinary adjective (`wet`, `hard`) that
+			  the bare word "naughty" does not reach.
+			
+			  **An inverted axis is worse than a flat one.** A flat axis is visibly
+			  useless; an inverted one looks like a result. And nothing on the panel
+			  distinguishes them, because the check requires the poles this axis exists
+			  to precede. That is why the warning is unconditional rather than
+			  triggered.
 			-->
 			<p class="declare warn">
-				GENERIC AXIS, AND IT IS WEAK &mdash; positions come from the bare words
-				<em>naughty</em> and <em>nice</em>, not from your poles. Measured on this frame it
-				spans <span class="num">6.2x</span> less than an authored axis and agrees with one on
-				only <span class="num">67%</span> of orderings, putting <em>dress</em> and <em>shirt</em>
-				on the nice side. Read it as a rough layout, not as a reading. Leverage, N and purity are
-				withheld until the poles are yours.
+				GENERIC AXIS &mdash; positions come from the bare words <em>naughty</em> and
+				<em>nice</em>, not from your poles. Over 14 authored items it spans
+				<span class="num">3.9x</span> less than a real axis and agrees on
+				<span class="num">68%</span> of orderings; usually it separates the two branches, and
+				<strong>on some frames it inverts them entirely</strong> &mdash; nothing here tells you
+				which, because that check needs the poles this axis stands in for. A rough layout to
+				click on, not a reading. Leverage, N and purity are withheld until the poles are yours.
 			</p>
 		{:else if !axis}
 			<p class="declare warn">
