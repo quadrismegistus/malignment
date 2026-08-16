@@ -246,14 +246,42 @@
 		const ly = words.map((w) => Math.log10(Math.max(w.p, 1e-5)));
 		const ylo = Math.min(...ly), yhi = Math.max(...ly);
 		const yspan = yhi - ylo || 1;
+		//: ── LABEL WHAT CAN BE READ, MARK THE REST, AND SAY HOW MANY.
+		//:
+		//: y is log10(p), so the low-probability tail piles onto the floor of the
+		//: panel and its labels collide. Rendered at k=50 the bottom band was
+		//: illegible -- `thick`/`belt`, `wedding`/`clothing`, `uniform`/`suit`,
+		//: `scarf`/`apron` all overprinted. **Only the image shows this**: the text
+		//: is present in the DOM, correctly positioned, and no assert or type can
+		//: see that two labels occupy the same pixels.
+		//:
+		//: So the top `LABEL_N` by probability keep their text and the rest become
+		//: marks. That is a WINDOW on the labels and it is declared under the
+		//: panel — the points are all still plotted, and a reader must not have to
+		//: infer that the words they can read are all the words there are.
+		//:
+		//: A TAGGED WORD IS ALWAYS LABELLED whatever its probability. It is the
+		//: author's own declaration, and hiding it would make the pole sets
+		//: unreadable at exactly the moment they are being checked.
+		const ranked = words.map((w, i) => i)
+			.sort((a, b) => words[b].p - words[a].p)
+			.slice(0, LABEL_N);
+		const keep = new Set(ranked);
 		return words.map((w, i) => ({
 			word: w.word,
 			p: w.p,
 			s: xs[i],
+			labelled: keep.has(i) || naughty.has(w.word) || nice.has(w.word),
 			cx: 6 + ((xs[i] - xlo) / span) * 88,
 			cy: 92 - ((ly[i] - ylo) / yspan) * 84
 		}));
 	});
+	//: Measured by looking, not chosen: at 50 the tail overprints, at 24 it does
+	//: not on a 1560px panel. It is a legibility budget, so it has no better
+	//: justification than the rendered image and should be re-checked if the
+	//: panel geometry changes.
+	const LABEL_N = 24;
+	let nUnlabelled = $derived(pts.filter((q) => !q.labelled).length);
 
 	//: The scatter's own pixel width, so the viewBox matches its aspect ratio.
 	//: 420 is the CSS height; if that changes, change it here. This was `0 0 100
@@ -746,7 +774,7 @@
 								}
 							}}
 							onclick={() => tag(pt.word, 'nice')}
-							oncontextmenu={(e) => tag(pt.word, 'naughty', e)}>{pt.word}</text>
+							oncontextmenu={(e) => tag(pt.word, 'naughty', e)}>{pt.labelled ? pt.word : '·'}</text>
 					{/each}
 				</svg>
 				<!--
@@ -766,7 +794,20 @@
 				</div>
 				<div class="axlabels">
 					<span>← nice</span>
-					<span class="ylab">y = probability, placed on log10</span>
+					<span class="ylab">
+						y = probability, placed on log10
+						<!--
+						  THE LABEL WINDOW, DECLARED. All {pts.length} points are
+						  plotted; only the highest-probability ones carry text,
+						  because the log floor overprints. A reader must not have to
+						  infer that the words they can read are all the words there
+						  are — same rule as the row cap on a result table.
+						-->
+						{#if nUnlabelled > 0}
+							&middot; all {pts.length} plotted, {nUnlabelled} shown as
+							&middot; (label would overprint)
+						{/if}
+					</span>
 					<span>naughty →</span>
 				</div>
 			</div>
