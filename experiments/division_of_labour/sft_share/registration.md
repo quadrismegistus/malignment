@@ -86,3 +86,13 @@ The stopping rule above bars re-running H3 "with a different domain mapping unle
 **H3's result is unchanged and is not superseded.** It remains NOT SUPPORTED at chain p=0.031 / base p=0.077. L1 is a different measurement of the same claim, and its registration pre-commits that a second null **withdraws the claim** rather than licensing a third instrument.
 
 **No hypothesis, threshold, direction, mapping, unit or population in this file changes.**
+
+### A4 — 2026-08-16. A2 declared a decisive test the producer did not compute.
+
+A2 named the base-level check decisive. **`run.py` never implemented it.** It printed only the chain-level sign test (p=0.0309); the deciding p=0.077 was computed by hand, outside the producer, and was reproducible only by someone who already knew to collapse bases the way A2 describes.
+
+The number was **right** — recomputed inside `run.py` it is **+0.0086, 12/16 positive, p=0.0768**, and the verdict stands unchanged at **NOT SUPPORTED**. Nothing about H3's result changes.
+
+What was wrong is that a hypothesis's verdict could not be re-derived by running its own experiment, while **the friendlier chain-level number was the one the producer did print**. Anyone re-running this would have seen p=0.0309 and no indication that it was not the test. `run.py` now emits both, labels which decides, and prints the verdict.
+
+**No hypothesis, threshold, direction, mapping, unit or population changes.**

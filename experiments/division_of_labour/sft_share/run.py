@@ -205,8 +205,28 @@ def main():
     else:
         d = [x for _, x in paired]
         pos = sum(1 for x in d if x > 0)
-        print("      mean(share_sexual - share_violence) %+.4f | %d/%d positive | sign p=%.4f"
+        print("      CHAIN level  mean %+.4f | %d/%d positive | sign p=%.4f"
               % (statistics.mean(d), pos, len(d), _sign_p(pos, len(d))))
+
+        # A2 DECLARES THIS TEST DECISIVE, AND UNTIL 2026-08-16 THE PRODUCER DID
+        # NOT COMPUTE IT. The verdict "H3 NOT SUPPORTED" rested on p=0.077 -- a
+        # number produced by hand, outside this file, reproducible only by
+        # someone who already knew to collapse bases the way A2 describes. It was
+        # RIGHT: recomputed here it is 0.0768. But a hypothesis whose verdict
+        # comes from arithmetic the producer does not perform cannot be
+        # re-derived by running the experiment, and the friendlier chain-level
+        # number is the one the producer DID print. Chains sharing a base are not
+        # independent -- 18 chains are 16 bases.
+        per_base = collections.defaultdict(list)
+        for (b, _p), x in paired:
+            per_base[b].append(x)
+        db = [statistics.mean(v) for v in per_base.values()]
+        bpos = sum(1 for x in db if x > 0)
+        bp = _sign_p(bpos, len(db))
+        print("      BASE  level  mean %+.4f | %d/%d positive | sign p=%.4f   <- DECIDES (A2)"
+              % (statistics.mean(db), bpos, len(db), bp))
+        print("      VERDICT: H3 %s"
+              % ("SUPPORTED" if bp < 0.05 and statistics.mean(db) > 0 else "NOT SUPPORTED"))
         print("      registration fixes the DIRECTION: positive supports, negative is a"
               "\n      SURPRISE to be reported as such, not as confirmation.")
     return 0

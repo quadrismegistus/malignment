@@ -61,7 +61,7 @@ Same base, same lab, two products, 18 points apart. Any single number for "OLMo'
     chain level  n=18  mean +0.0110  14/18 positive  p=0.0309
     base  level  n=16  mean +0.0086  12/16 positive  p=0.0768   <- the registered test
 
-Amendment A2 fixed, before computing it, that the base-level check decides. It gives p = 0.077, so **H3 is reported NOT SUPPORTED** rather than supported-with-caveat.
+Amendment A2 fixed, before computing it, that the base-level check decides. It gives **+0.0086, 12/16 positive, p = 0.0768**, so **H3 is reported NOT SUPPORTED** rather than supported-with-caveat. (A4: `run.py` did not compute this until 2026-08-16 — the number was right but was produced by hand. It is now emitted by the producer, labelled as deciding.)
 
 Two things worth keeping from the null. The **direction is consistent** — positive at both levels, 12 of 16 bases — so this is a failure to demonstrate, not a demonstration of absence. And the **magnitude was never large enough to carry the original wording**: +0.011 on a share, inside a system where SFT does ~82% of everything. A dichotomy ("SFT handles X, DPO handles Y") and a 1-point tilt are different claims, and only the second was ever in the data.
 
