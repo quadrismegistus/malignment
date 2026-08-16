@@ -234,6 +234,7 @@ nodes:
     country: CN
     family:
     - qwen
+    - r1-qwen
     open_data: false
     open_weight: true
     org_type: corporate
@@ -527,7 +528,7 @@ nodes:
     nickname: r1-llama
     country: CN
     family:
-    - llama
+    - r1-llama
     open_data: false
     open_weight: true
     org_type: corporate
@@ -537,7 +538,7 @@ nodes:
     nickname: r1-qwen
     country: CN
     family:
-    - qwen
+    - r1-qwen
     open_data: false
     open_weight: true
     org_type: corporate
@@ -671,7 +672,10 @@ nodes:
     nickname: llama
     country: US
     family:
+    - dolphin-llama
+    - hermes-llama
     - llama
+    - r1-llama
     - tulu
     - tulu-no-safety
     - tulu-sft-full
@@ -695,6 +699,10 @@ nodes:
     nickname: mistral
     country: FR
     family:
+    - dolphin-mistral
+    - hermes-mistral
+    - openchat
+    - openhermes-mistral
     - zephyr
     open_data: false
     open_weight: true
@@ -703,6 +711,7 @@ nodes:
   openGPT-X/Teuken-7B-base-v0.6:
     family:
     - teuken
+    - teuken-commercial
   openGPT-X/Teuken-7B-instruct-v0.6:
     family:
     - teuken
@@ -845,7 +854,7 @@ nodes:
     - falcon-7b
   teknium/OpenHermes-2.5-Mistral-7B:
     family:
-    - hermes-mistral
+    - openhermes-mistral
   NousResearch/Nous-Hermes-2-Mistral-7B-DPO:
     family:
     - hermes-mistral
@@ -863,7 +872,7 @@ nodes:
     - dolphin-llama
   openGPT-X/Teuken-7B-instruct-commercial-v0.4:
     family:
-    - teuken
+    - teuken-commercial
 edges:
 - - 01-ai/Yi-1.5-9B
   - instruct
@@ -1316,6 +1325,37 @@ edges:
 - - tiiuae/Falcon3-3B-Base
   - prune
   - tiiuae/Falcon3-1B-Base
+# FAMILY KINDS. A family is (one base -> one endpoint): the ALIGNMENT RECIPE, and
+# the unit for "alignment does X". `lineage` is the pretraining run underneath it
+# and is the CLUSTER, not the unit -- 63 measured families sit on 49 lineages,
+# and using the lineage would force one alignment per base, erasing exactly the
+# plurality the claim is about (7 recipes on Llama-3.1-8B span 0.050-0.189 JS).
+#
+# Only what CANNOT be derived is declared here. First-party vs third-party is
+# derivable (compare the org of base and endpoint); being an ARM OF AN EXPERIMENT
+# is not, and it is the distinction that decides whether a family belongs in a
+# "N of M families do X" claim. RH: "my instinct is ablations should not count".
+#
+#   ablation          one component removed from another family's training mix;
+#                     the contrast is WITHIN the experiment, against its control
+#   ablation_control  the full-mix arm those are compared against
+#   method_variant    same base, same SFT, a different preference ALGORITHM.
+#                     Measured: archangel's four span JS 0.007-0.008 -- four
+#                     algorithms, no difference, so counting them as four
+#                     recipes would quadruple a base's weight for nothing.
+#
+# An undeclared family is an ordinary recipe. Absence means ordinary, not unknown.
+families:
+  archangel-dpo: {kind: method_variant, experiment: archangel-halos, method: dpo}
+  archangel-kto: {kind: method_variant, experiment: archangel-halos, method: kto}
+  archangel-ppo: {kind: method_variant, experiment: archangel-halos, method: ppo}
+  archangel-slic: {kind: method_variant, experiment: archangel-halos, method: slic}
+  tulu-no-safety: {kind: ablation, experiment: tulu-sft-mixture, ablates: safety}
+  tulu-sft-full: {kind: ablation_control, experiment: tulu-sft-mixture}
+  tulu-sft-nomath: {kind: ablation, experiment: tulu-sft-mixture, ablates: math}
+  tulu-sft-nopersona: {kind: ablation, experiment: tulu-sft-mixture, ablates: persona}
+  tulu-sft-nowildchat: {kind: ablation, experiment: tulu-sft-mixture, ablates: wildchat}
+
 rulings:
   dpo_equivalent:
     meta-llama/Llama-3.1-8B: meta-llama/Llama-3.1-8B-Instruct
