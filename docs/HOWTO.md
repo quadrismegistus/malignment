@@ -287,6 +287,87 @@ destroys seven fields on a targeted one.
 
 ---
 
+## What does this checkpoint need, and what do I rent for it?
+
+```python
+from malignment import roster
+roster.environment("Zyphra/Zamba2-7B")          # merged: profile floors + its overrides
+roster.environment("BAAI/Aquila2-7B", engine="0.27.1")   # + the (arch x engine) ruling
+roster.fleet(roster.population("endpoints"))    # -> {boxes, blocked, unassigned}
+```
+
+**Nine sources across two repos, and a caller reads none of them.** The archive
+held this in `model_requirements.json`, `model_load_environments.json`,
+`vllm_engine_support.json`, `cloud_profiles.json`, `weights_audit.csv`,
+`twp.py`'s `LOADER_OVERRIDE`, `build_fleet.py`'s `LAUNCH_PROFILE` and two prose
+docs — and the map between the two profile vocabularies existed only as a dict
+literal on line 78 of a script.
+
+### three fact classes, three keys, and they do not fold into each other
+
+| class | keyed by | lives in |
+|---|---|---|
+| REQUIREMENT | CHECKPOINT | `models.yaml` `nodes[m].env` |
+| OUTCOME | (MODEL × ENVIRONMENT) | `observations.json` `observations` |
+| SUPPORT | (ARCHITECTURE × ENGINE) | `observations.json` `engine_support` |
+
+**`environment()` has no `ok` field and never will.** "Will this load?" has no
+answer keyed on the model alone: seven models carry both a `load_failed` and a
+`loads`, and `LLM360/AmberSafe` did both **on one box, twenty minutes apart**,
+either side of `pip install sentencepiece protobuf`. `observations` comes back
+as a list, possibly contradictory, never collapsed to a verdict. Absence means
+UNTESTED, never "works".
+
+Likewise `engine` is an argument, not a field. `BAAI/Aquila2-7B` is not broken —
+vLLM **deleted** `AquilaForCausalLM` after v0.24.0, so the same model is
+`usable=False` at 0.27.1 and `usable=True` at 0.22.1, with `recovery_box`
+naming where to run it.
+
+### TWO VOCABULARIES SHARE THE WORD `default`, AND THEY ARE DIFFERENT HARDWARE
+
+    PROFILE `default`   what 127 models NEED   -> launches on box `dense`  (48GB)
+    BOX     `default`   a shape you can rent      300GB A100, 80GB          (80GB)
+
+`malign cloud launch --profile default` and a model whose requirement profile is
+`default` do not name the same machine. Say **box** or **profile** every time.
+
+### every checkpoint declares, and that is enforced
+
+```python
+roster.check_environments()    # [] when clean
+```
+
+160 of 160 carry `env:`, every override carries its own `why`, and every box
+physically holds the models routed to it. **A coverage claim that is not a gate
+decays silently**: the next model added would land in `default` and a fleet
+would pay for a download it cannot use.
+
+Four defects were found by that gate on its first run, each of which had been
+sitting in the archive:
+
+- `gl198976/mpt-7b` inherited `blocked: repo_dead` from the **dead** `mosaicml`
+  repo it mirrors — three live checkpoints excluded from every plan, with a
+  reason that reads perfectly true and is about a different repository.
+- Zamba2 was profiled `tf457`, which launches on `dense` — **a box with no
+  kernels**, while its own row demanded `mamba-ssm`. Measured hybrid penalty for
+  missing kernels: 19.3×. It would have run ~19× slow and reported nothing.
+- The Olmo-3-32B quartet sat on a 48 GB box needing 80. `build_fleet.py` emits
+  `launch_profile: dense` and `min_vram_gb: 80` **into the same dict and never
+  compares them**.
+- `phi-4`'s `no_base_released` — a POPULATION ruling — was filed as an
+  ENVIRONMENT block, so `fleet()` skipped three checkpoints that run fine.
+
+### sizing is derived, never transcribed
+
+`min_vram_gb`/`gpus` are a step function of **measured** `params_b`, so they are
+computed, not written onto 160 checkpoints. `needs_vram_gb` is `None` when
+nothing has measured the model — **unknown size is not small.** The first
+version read the wrong JSON level, got `None` for all 160, and `(params_b or 0)`
+turned every one into 24 GB / 1 GPU, including the 70B pair. It planned cleanly
+and would have OOMed after a 140 GB download.
+
+---
+
 ## Running a measurement
 
 ```bash

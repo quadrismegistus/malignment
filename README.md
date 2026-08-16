@@ -45,7 +45,9 @@ and public — a stimulus nobody can read is not reproducible.
 ## Three kinds of claim, three files, three ways to be wrong
 
     roster/models/models.yaml         AUTHORED   RH's rulings, hand-edited
+    roster/environments.yaml          AUTHORED   profiles, boxes, images, launch map
     roster/models/measurements.json   OBSERVED   scripts reading files or the API
+    roster/models/observations.json   OBSERVED   what happened on a box; what vLLM hosts
     roster/models/attestations.json   ATTESTED   an agent reading a card, quoted
 
 An observation is wrong when the measurement is wrong. An attestation is wrong
@@ -59,6 +61,7 @@ indistinguishable a month later.
     50 lineages   base -> endpoint          roster.endpoints()
     18 chains     base -> sft -> preference roster.chains()   (16 distinct bases)
     2,189 prompts crossed over 154 models   corpus.panel()
+    160 checkpoints, each declaring its environment   roster.environment()
 
 The chain population is small because it needs a lab to release the **middle** of
 its pipeline: 50 declared bases, 30 with a released SFT, 16 with a preference

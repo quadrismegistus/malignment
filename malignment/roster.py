@@ -54,6 +54,7 @@ loses the evidence. `roster/roster.yaml` is authored; no script writes it.
 """
 import argparse
 import collections
+import functools
 import json
 import os
 import sys
@@ -880,3 +881,291 @@ def paths(measured=None):
         out.append({"base": base, "endpoint": end, "nodes": nodes_, "ops": ops,
                     "n_steps": len(ops)})
     return out
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ENVIRONMENT: what a checkpoint needs, and what to rent to give it.
+#
+# NINE SOURCES ACROSS TWO REPOS BECAME FOUR FILES, and the point of this section
+# is that a caller reads NONE of them. `malign-logits` held the knowledge in
+# model_requirements.json, model_load_environments.json, vllm_engine_support.json,
+# cloud_profiles.json, weights_audit.csv, twp.py's LOADER_OVERRIDE,
+# build_fleet.py's LAUNCH_PROFILE and two prose docs -- and the map between the
+# two profile vocabularies existed only as a dict literal on line 78 of a script.
+#
+# THREE FACT CLASSES, THREE KEYS, AND THEY DO NOT FOLD INTO EACH OTHER:
+#
+#   REQUIREMENT  per CHECKPOINT              models.yaml  nodes[m].env
+#   OUTCOME      per (MODEL x ENVIRONMENT)   observations.json  observations
+#   SUPPORT      per (ARCHITECTURE x ENGINE) observations.json  engine_support
+#
+# The second is why `environment()` never returns "it works". Seven models carry
+# both a load_failed and a loads; AmberSafe did both ON ONE BOX, twenty minutes
+# apart, either side of `pip install sentencepiece protobuf`. The third is why
+# `engine` is an argument and not a field: Aquila is not broken, vLLM DELETED
+# AquilaForCausalLM after v0.24.0 and it runs on the 0.22.1 image.
+# ─────────────────────────────────────────────────────────────────────────────
+
+ENVIRONMENTS_PATH = os.path.join(ROOT, "roster", "environments.yaml")
+OBSERVATIONS_PATH = os.path.join(ROOT, "roster", "models", "observations.json")
+
+
+@functools.lru_cache(maxsize=1)
+def load_environments():
+    """The authored vocabulary: `profiles`, `boxes`, `launch` map, `sizing`."""
+    import yaml
+    with open(ENVIRONMENTS_PATH, encoding="utf-8") as fh:
+        return yaml.safe_load(fh)
+
+
+@functools.lru_cache(maxsize=1)
+def observations():
+    """OBSERVED: (model x environment) outcomes and (arch x engine) support."""
+    with open(OBSERVATIONS_PATH, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def _sizing(params_b):
+    """(min_vram_gb, gpus) from measured parameters.
+
+    **DERIVED, NEVER TRANSCRIBED.** The archive wrote these per model; across
+    159 rows they are a clean step function of `params_b` with no overlaps, so
+    160 hand-written copies would have been 160 derived values with no producer
+    -- and the first one to go stale would go stale silently.
+    """
+    #: **UNKNOWN SIZE IS NOT SMALL.** Returning a default here is how a
+    #: mis-keyed lookup became a silent downsize: `(params_b or 0)` made every
+    #: unmeasured model 24 GB. (None, None) forces the caller to say so.
+    if not params_b:
+        return None, None
+    steps = load_environments()["sizing"]["steps"]
+    for s in steps:
+        if s["max_params_b"] is None or params_b <= s["max_params_b"]:
+            return s["vram_gb"], s["gpus"]
+    return steps[-1]["vram_gb"], steps[-1]["gpus"]
+
+
+def environment(model, engine=None, measured=None):
+    """Everything `model` needs, merged: profile floors + its own overrides.
+
+        roster.environment("Zyphra/Zamba2-7B")
+        roster.environment("BAAI/Aquila2-7B", engine="0.27.1")
+
+    Returns a dict with `profile`, `box`, `image`, the resolved pins, `why`,
+    `min_vram_gb`/`gpus` (derived from measured params), plus:
+
+      `observations`  every (model x environment) row for this model. **A LIST,
+                      possibly contradictory, never collapsed to a verdict.**
+      `engine`        present only when `engine=` was passed: the
+                      (architecture x engine) ruling, with the recovery image.
+
+    THERE IS NO `ok` FIELD AND THAT IS DELIBERATE. The question "will this
+    load?" has no answer keyed on the model alone, and a boolean here would be
+    read as one. `observations` is what we saw, `blocked` is what was ruled.
+    """
+    envs = load_environments()
+    node = load()["nodes"].get(model)
+    if node is None:
+        raise KeyError("%s is not in the roster" % model)
+    env = dict(node.get("env") or {})
+    prof_name = env.get("profile", "default")
+    prof = dict(envs["profiles"][prof_name])
+    #: A per-model `box:` overrides the profile's default box. The profile
+    #: says what SOFTWARE the model needs; the box must also physically hold it,
+    #: and those are different questions that the archive answered in one field.
+    box_name = env.get("box") or prof.pop("launch")
+    prof.pop("launch", None)
+    prof.pop("why", None)
+
+    out = dict(prof)
+    out.update({k: v for k, v in env.items() if k != "profile"})
+    out["profile"] = prof_name
+    out["box"] = box_name
+    box = envs["boxes"][box_name]
+    out["image"] = box.get("image")
+    #: THE BOX'S PINS AND THE MODEL'S ARE BOTH REQUIRED, and a set union is
+    #: wrong when both name the same package at different versions -- the
+    #: model's is the stricter statement and wins. `ssm` pins
+    #: transformers==4.57.1 for Zamba2 while the profile floor says >=4.57.
+    out["box_pins"] = list(box.get("pins") or [])
+
+    if measured is None:
+        measured = _measured_params()
+    p = measured.get(model)
+    out["params_b"] = p
+    #: TWO SIZES, AND THEY ANSWER DIFFERENT QUESTIONS. `box_*` is what the
+    #: declared box PROVIDES; `needs_*` is what the measured parameters DEMAND,
+    #: and is None when nothing has measured them. Collapsing them into one
+    #: number is what let an unmeasured 70B report 24 GB.
+    out["box_vram_gb"] = box.get("min_gpu_ram")
+    out["box_gpus"] = box.get("num_gpus")
+    out["needs_vram_gb"], out["needs_gpus"] = _sizing(p)
+
+    obs = observations()
+    out["observations"] = [o for o in obs["observations"]
+                           if o["model_id"] == model]
+
+    if engine is not None:
+        out["engine"] = _engine_ruling(model, engine, obs)
+    return out
+
+
+@functools.lru_cache(maxsize=1)
+def _measured_params():
+    """{model: params_b} from measurements.json -- OBSERVED, not authored."""
+    try:
+        with open(os.path.join(ROOT, "roster", "models",
+                               "measurements.json"), encoding="utf-8") as fh:
+            m = json.load(fh)
+    except FileNotFoundError:
+        return {}
+    #: THE RUNS ARE NESTED UNDER `sections`. Reading `m["weights"]` returns
+    #: None, `_sizing(None)` fell through to the FIRST step, and every one of
+    #: 160 checkpoints came back 24 GB / 1 GPU -- including the 70B pair, which
+    #: needs 2x80. It planned cleanly and would have OOMed after paying for a
+    #: 140 GB download. Nothing failed; the number was just quietly the
+    #: smallest one available.
+    w = ((m.get("sections") or {}).get("weights") or {}).get("models") or {}
+    return {k: v.get("params_b") for k, v in w.items() if v.get("params_b")}
+
+
+def _engine_ruling(model, engine, obs):
+    """(architecture x engine) verdict for `model` under vLLM `engine`.
+
+    Keyed on ARCHITECTURE because that is the fact's shape: `BaichuanForCausalLM`
+    was removed after 0.23.0 and every Baichuan goes with it. Returns None when
+    the architecture has no ruling, which means UNTESTED, not supported.
+    """
+    for arch, v in (obs.get("engine_support") or {}).items():
+        if not isinstance(v, dict) or model not in (v.get("models") or []):
+            continue
+        rec = (load_environments().get("engine_recovery") or {})
+        r = {"architecture": arch, "status": v.get("status"),
+             "recovery_box": rec.get(arch),
+             "last_working": v.get("last_working"),
+             "recovery": v.get("recovery"), "do_not": v.get("do_not")}
+        lw = v.get("last_working")
+        if v.get("status") == "removed" and lw:
+            r["usable"] = _ver(engine) <= _ver(lw)
+        return r
+    return None
+
+
+def _ver(s):
+    return tuple(int(x) for x in str(s).split(".") if x.isdigit())
+
+
+def fleet(models, engine=None):
+    """Group `models` into boxes to rent. The plan, not the rental.
+
+        for box in roster.fleet(roster.population("endpoints")):
+            print(box["box"], box["image"], len(box["models"]))
+
+    **GROUPING IS BY REQUIREMENT FIRST AND COUNT SECOND, NEVER THE REVERSE**, and
+    that ordering was paid for: on 2026-08-10 a `dense` box pulled 15 GB of
+    Zamba2 and died on a kernel it did not have, and four more checkpoints burned
+    their downloads on transformers 5.14.1 before `tf457` existed as a name. A
+    box that downloads a model it cannot load has paid for the download anyway.
+
+    **IT REFUSES RATHER THAN GUESSES.** A model with no `env:` is returned under
+    `unassigned`, never silently placed in `default`. Baichuan2 once fell out of
+    every shard when a spec was regenerated, had zero cells anywhere, and no
+    completion count showed it -- a model absent from the plan is absent from
+    the denominator too, so the fleet reported 100% of a roster that had quietly
+    shrunk. Blocked models come back under `blocked` WITH THEIR REASON: a hole
+    with a reason beside it is a decision, a hole without one is an accident
+    nobody can date.
+    """
+    nodes = load()["nodes"]
+    boxes, blocked, unassigned = {}, [], []
+    for m in models:
+        node = nodes.get(m)
+        if node is None or not node.get("env"):
+            unassigned.append(m)
+            continue
+        e = environment(m, engine=engine)
+        if e.get("blocked"):
+            blocked.append({"model": m, "blocked": e["blocked"],
+                            "why": e.get("why")})
+            continue
+        key = (e["box"], e["image"], tuple(sorted(set(e["box_pins"]))),
+               e.get("transformers"), tuple(e.get("kernels") or ()),
+               e.get("compute_dtype"))
+        b = boxes.setdefault(key, {
+            "box": e["box"], "image": e["image"], "gpus": e["box_gpus"],
+            "pins": sorted(set(e["box_pins"])), "transformers": e.get("transformers"),
+            "kernels": list(e.get("kernels") or []),
+            "compute_dtype": e.get("compute_dtype"),
+            "box_vram_gb": e["box_vram_gb"],
+            "needs_vram_gb": None, "unmeasured": [], "models": []})
+        b["models"].append(m)
+        if e["needs_vram_gb"] is None:
+            b["unmeasured"].append(m)
+        else:
+            b["needs_vram_gb"] = max(b["needs_vram_gb"] or 0, e["needs_vram_gb"])
+    return {"boxes": sorted(boxes.values(), key=lambda b: -len(b["models"])),
+            "blocked": blocked, "unassigned": sorted(unassigned)}
+
+
+def check_environments():
+    """Problems in the env declarations. Empty list if clean.
+
+    **THE COVERAGE GATE IS THE POINT.** "Every checkpoint declares its
+    environment" is a claim that decays the moment someone adds a model, and a
+    claim that decays silently is worse than none: `build_fleet` would place the
+    new model in `default` and a fleet would pay for a download it cannot use.
+
+    A `why` is required on every override AND on every non-default profile. The
+    first version of this check asked only whether SOME `why` existed and passed
+    Zamba2, whose `kernels` override was 'explained' by a sentence about
+    transformers -- a coarse predicate standing in for a fine fact.
+    """
+    envs = load_environments()
+    profiles, boxes = envs["profiles"], envs["boxes"]
+    problems = []
+    for m, node in sorted(load()["nodes"].items()):
+        e = node.get("env")
+        if not e:
+            problems.append("%s: no env: block" % m)
+            continue
+        p = e.get("profile")
+        if p not in profiles:
+            problems.append("%s: profile %r is not declared" % (m, p))
+            continue
+        if profiles[p]["launch"] not in boxes:
+            problems.append("%s: profile %r launches on undeclared box %r"
+                            % (m, p, profiles[p]["launch"]))
+        overrides = set(e) - {"profile", "why"}
+        if (overrides or p != "default") and not (e.get("why") or "").strip():
+            problems.append("%s: %s but no why" %
+                            (m, "overrides %s" % sorted(overrides)
+                             if overrides else "profile %r" % p))
+    #: **THE BOX MUST PHYSICALLY HOLD THE MODEL**, and this is the check whose
+    #: absence let four 32B checkpoints sit on a 48 GB profile. Compared against
+    #: `provides_vram_gb` (the card class) and not `min_gpu_ram` (the search
+    #: floor, 47) -- one GB apart and a whole hardware tier apart.
+    for m, node in sorted(load()["nodes"].items()):
+        e = node.get("env") or {}
+        if not e.get("profile"):
+            continue
+        r = environment(m)
+        if r["needs_vram_gb"] is None:
+            continue
+        box = boxes[r["box"]]
+        if r["needs_vram_gb"] > (box.get("provides_vram_gb") or 0):
+            problems.append("%s: %.1fB needs %s GB but box %r provides %s"
+                            % (m, r["params_b"], r["needs_vram_gb"], r["box"],
+                               box.get("provides_vram_gb")))
+        if (r["needs_gpus"] or 1) > (box.get("num_gpus") or 1):
+            problems.append("%s: needs %s GPUs but box %r has %s"
+                            % (m, r["needs_gpus"], r["box"], box.get("num_gpus")))
+
+    #: A profile nothing uses is not an error, but a profile whose BOX cannot
+    #: satisfy its kernels is: that is the Zamba2 defect in its general form.
+    for name, prof in profiles.items():
+        need = set(prof.get("kernels") or ())
+        if need and not need <= set(boxes[prof["launch"]].get("pins") or ()):
+            problems.append("profile %r needs kernels %s but launches on %r, "
+                            "which pins %s" % (name, sorted(need), prof["launch"],
+                                               boxes[prof["launch"]].get("pins")))
+    return problems

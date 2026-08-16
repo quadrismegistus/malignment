@@ -1,0 +1,262 @@
+# ENVIRONMENTS: what a checkpoint needs, and what to rent to give it.
+# AUTHORED. Hand-edit this. Ingested once from the archive on 2026-08-16 by
+# scripts/ingest_environments.py, which is a record of that ingest and not a
+# maintenance tool.
+
+# TWO VOCABULARIES, AND THEY ARE NOT THE SAME ONE. `profiles` are what a MODEL
+# needs. `boxes` are machine SHAPES to rent. They were separate files in the
+# archive with the map between them buried in scripts/build_fleet.py:78, so a
+# seat reading either one alone could not answer "what do I rent for this model".
+
+# WHAT IS NOT HERE: whether a model LOADED. That is a property of
+# (model x environment), not of either, and it lives in
+# roster/models/observations.json -- seven models carry both a failure and a
+# success. Nor (architecture x engine) support: Aquila is not broken, vLLM
+# DELETED it after v0.24.0.
+profiles:
+  # REQUIREMENT profiles -- what a MODEL needs.
+  # `launch:` names the box below. AN ENVIRONMENT IS NOT A MACHINE SHAPE:
+  # `tf457` and `torch26` describe PACKAGE state, so a vast search naming
+  # them finds nothing -- the pin is applied after setup. `torch26`
+  # collapses onto a normal box because every box already pins torch>=2.6,
+  # which is why it exists as a LABEL and not as a provisioning difference.
+  bf16:
+    why: 'compute in bfloat16, NOT float16: fp16 overflows the SSM scan and yields all-NaN logits on prompts >=13 tokens (1/12 finite at fp16, 12/12 at bf16). Storage stays f16.'
+    compute_dtype: bfloat16
+    torch: '>=2.6'
+    transformers: '>=4.57'
+    launch: big80
+  default:
+    why: safetensors, dense, current transformers.
+    torch: '>=2.6'
+    transformers: '>=4.57'
+    launch: dense
+  ssm:
+    why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
+    compute_dtype: bfloat16
+    kernels:
+    - mamba-ssm
+    - causal-conv1d
+    torch: '>=2.6'
+    transformers: '>=4.57'
+    launch: ssm
+  tf457:
+    why: transformers 5.x CANNOT RUN this; pin 4.57.1.
+    torch: '>=2.6'
+    transformers: ==4.57.1
+    launch: dense
+  torch26:
+    why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."
+    torch: '>=2.6'
+    transformers: '>=4.57'
+    launch: dense
+  twogpu:
+    why: ~140GB bf16 per arm; device_map=auto shards across two cards. A single card OOMs AFTER paying for the download.
+    torch: '>=2.6'
+    transformers: '>=4.57'
+    launch: twogpu
+boxes:
+  # BOX shapes for `malign cloud launch --profile NAME`.
+
+  # THERE ARE NO vast.ai TEMPLATES. The template's whole role is played by
+  # `image`, and there are only five distinct images across these entries. A box
+  # is (shape x image x pins); the names below are a partially-enumerated
+  # cross-product, which is why "ssm on the 0.22.1 image" cannot be named today.
+
+  # min_inet_down_mbps IS A SELECTION CRITERION AND WE NEVER FILTERED ON IT until
+  # 2026-08-02: compute parallelises across GPUs and the network does not. A 4xA100
+  # box at identical per-GPU price was the SLOWEST option on the board because its
+  # link was 624 Mbps against a 1.42 TB roster -- 10.0 h -> 15.1 h, $42 -> $63,
+  # entirely on a field nobody was looking at.
+  default:
+    description: One A100 80GB, the shape every twp/grid run has used.
+    image: vllm/vllm-openai:latest
+    gpu_name: A100_SXM4
+    num_gpus: 1
+    min_gpu_ram: 79
+    disk_gb: 300
+    min_inet_down_mbps: 2000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 80
+  bigdisk:
+    description: Same card, 600 GB. For rosters whose cumulative download exceeds the default disk when --purge is not used.
+    image: vllm/vllm-openai:latest
+    gpu_name: A100_SXM4
+    num_gpus: 1
+    min_gpu_ram: 79
+    disk_gb: 600
+    min_inet_down_mbps: 2000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    provides_vram_gb: 80
+  ssm:
+    description: "For SSM/Mamba AND hybrid (Falcon-H1) models. **THE KERNELS ARE NOT OPTIONAL FOR HYBRIDS: MEASURED 19.3x ON Falcon-H1-7B, 2026-08-03** (0.0670 -> 1.2933 cells/s on the twp loop, A100, bf16; 21.4 h -> 1.1 h for 5,166 cells). CORRECTION TO THIS FIELD'S PREVIOUS TEXT, which said kernels gave NO speedup and reasoned that twp re-runs the full sequence per tree node so the scan kernel is not binding. THE MEASUREMENT BEHIND THAT WAS SOUND AND THE GENERALISATION WAS NOT: it was taken on Falcon3-Mamba-7B, a PURE SSM (0.62-0.64 with kernels vs 0.61-0.72 without), and was quoted twice to predict no speedup for Falcon-H1, a HYBRID. Wrong by 19x. **A PRIOR TESTED ON ONE MEMBER OF A CLASS IS NOT A FACT ABOUT THE CLASS** -- pure-SSM and attention/SSM-hybrid have different binding costs. The pure-SSM null still stands for pure SSMs. ALSO REQUIRED FOR Falcon-H1: compute in bfloat16, NOT float16 -- fp16 overflows the SSM scan and yields all-NaN logits on prompts >=13 tokens (1/12 finite at fp16, 12/12 at bf16). TII's own docs: 'always use torch.bfloat16 instead of torch.float16'. Declare it per model as `compute_dtype` in the grid spec; storage stays f16. BUILD NOTE: no prebuilt wheels for cu130/torch2.11/py3.12, so both kernels compile from source. Use TORCH_CUDA_ARCH_LIST=8.0 MAX_JOBS=48 and --no-build-isolation (mamba-ssm's setup.py imports torch, which pip's isolated build env lacks). ~30 min on 128 cores. VERIFY IN USE, NOT MERELY INSTALLED: transformers falls back SILENTLY, so the check is that the log's 'fast path is not available' warning is ABSENT. ALSO PINS transformers==4.57.1 FOR ZAMBA2 -- see pin_reasons; the image's own 5.14.1 cannot load it at all, and the failure presents as a kernel problem."
+    image: vllm/vllm-openai:latest
+    gpu_name: A100_SXM4
+    num_gpus: 1
+    min_gpu_ram: 79
+    disk_gb: 150
+    min_inet_down_mbps: 3000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    - mamba-ssm
+    - causal-conv1d
+    - transformers==4.57.1
+    pin_reasons:
+      mamba-ssm: "the fused selective-scan kernel. Installs ONLY with --no-build-isolation: its setup.py imports torch and pip's isolated build env has none. A finding that says 'install the kernels' without that is not runnable as written."
+      causal-conv1d: the fused depthwise conv; same story
+      transformers==4.57.1: "ZAMBA2 WILL NOT LOAD ON transformers 5.x AND THE ERROR NAMES NEITHER THE VERSION NOR THE MODEL'S REAL PROBLEM. On 5.14.1 (what the vllm image ships, 2026-08-10) Zyphra/Zamba2-7B fails at load with `There is an issue with your definition of tie_weights_keys for ^layers.6.shared_transformer:...` -- a v5 weight-tying validation that Zamba2's config predates: it declares transformers_version 4.49.0.dev0. Pinning 4.57.1 loads it and it scores at 1.23 p/s. 4.57 is also the floor CLAUDE.md records for OLMo 3, so it is the highest version known to satisfy both. **AND THE KERNEL WARNING LIES ON A FAILED LOAD.** While Zamba2 was failing, the log carried 'The fast path is not available because one of (selective_state_update, selective_scan_fn, causal_conv1d_fn, causal_conv1d_update, mamba_inner_fn) is None' -- the very string this profile tells you to check for. The kernels were fine: all five entry points imported, is_mamba_ssm_available() and is_causal_conv1d_available() both returned True, and once a model actually loaded the warning was ABSENT. So a fast-path warning emitted DURING a failed load is not evidence about the kernels, and reading it as such sends you to rebuild kernels that work. Check it on a load that SUCCEEDED."
+    provides_vram_gb: 80
+  dense:
+    description: 'Cheapest 48GB-class card on a fast link, 150GB disk. NO gpu_name filter -- selection is by CAPABILITY (VRAM, link, disk), because the dense roster is one forward pass per prompt and the bill is DOWNLOAD. Peak disk is one model + margin: purge_model fires BEFORE each download and on every exit path including failure.'
+    image: vllm/vllm-openai:latest
+    num_gpus: 1
+    min_gpu_ram: 47
+    disk_gb: 150
+    min_inet_down_mbps: 5000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 48
+  big80:
+    description: One 80GB card, 150GB disk, fast link. For the 32B pair, which needs >48GB VRAM but not two cards and not 600GB of disk.
+    image: vllm/vllm-openai:latest
+    gpu_name: A100_SXM4
+    num_gpus: 1
+    min_gpu_ram: 79
+    disk_gb: 150
+    min_inet_down_mbps: 3000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 80
+  twogpu:
+    description: 2x80GB for the 70B pair (~140GB bf16 each). device_map=auto shards across both; a single card OOMs AFTER paying for the 140GB download.
+    image: vllm/vllm-openai:latest
+    gpu_name: A100_SXM4
+    num_gpus: 2
+    min_gpu_ram: 79
+    disk_gb: 320
+    min_inet_down_mbps: 3000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 80
+  vllm022:
+    description: "Cheapest 48GB-class card on a CONTEMPORARY vLLM 0.22.1 IMAGE. For architectures vLLM SUPPORTED AND REMOVED: Aquila (until v0.24.0), Baichuan (until v0.23.0), jais. Pinning `vllm==0.22.1` onto the :latest image instead is an ABI CASCADE and does not work -- measured 12 Aug: transformers too new, then deep_ep compiled against another NCCL (undefined symbol ncclCommQueryProperties), then flashinfer-jit-cache mismatched against flashinfer, then a plan() TypeError, then EngineDeadError in step(). Four fixes got the model to LOAD and generation still died. The engine's own error names the last working version; take the image that shipped with it."
+    image: vllm/vllm-openai:v0.22.1
+    num_gpus: 1
+    min_gpu_ram: 47
+    disk_gb: 150
+    min_inet_down_mbps: 5000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 48
+  vllm022_a100:
+    description: "A100_SXM4 on the vLLM 0.22.1 image. For the REMOVED architectures (Aquila until v0.24.0, Baichuan until v0.23.0, jais). TURING WILL NOT DO: measured 12 Aug on a Q RTX 8000, the model LOADS and GENERATES at tiny batch but the run dies in FlashInfer's paged-KV prefill -- 'BatchPrefillWithPagedKVCacheRun ... Check failed: (status == cudaSuccess)'. VLLM_ATTENTION_BACKEND is IGNORED in 0.22.1 (the log still reads 'Using FLASHINFER'), so there is no backend workaround; take an sm_80+ card."
+    image: vllm/vllm-openai:v0.22.1
+    gpu_name: A100_SXM4
+    num_gpus: 1
+    min_gpu_ram: 79
+    disk_gb: 150
+    min_inet_down_mbps: 3000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 80
+  vllm0220:
+    description: "Cheapest 48GB-class card on a CONTEMPORARY vLLM 0.22.1 IMAGE. For architectures vLLM SUPPORTED AND REMOVED: Aquila (until v0.24.0), Baichuan (until v0.23.0), jais. Pinning `vllm==0.22.1` onto the :latest image instead is an ABI CASCADE and does not work -- measured 12 Aug: transformers too new, then deep_ep compiled against another NCCL (undefined symbol ncclCommQueryProperties), then flashinfer-jit-cache mismatched against flashinfer, then a plan() TypeError, then EngineDeadError in step(). Four fixes got the model to LOAD and generation still died. The engine's own error names the last working version; take the image that shipped with it."
+    note: 'v0.22.0 is the LAST release hosting JAISLMHeadModel -- v0.22.1 is already too late, and the difference is invisible unless the error message is read exactly. Same contemporary-image rule as vllm022: do NOT pip-pin an old vllm onto a newer image.'
+    image: vllm/vllm-openai:v0.22.0
+    num_gpus: 1
+    min_gpu_ram: 47
+    disk_gb: 150
+    min_inet_down_mbps: 5000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 48
+  vllm0220_a100:
+    description: "Cheapest 48GB-class card on a CONTEMPORARY vLLM 0.22.1 IMAGE. For architectures vLLM SUPPORTED AND REMOVED: Aquila (until v0.24.0), Baichuan (until v0.23.0), jais. Pinning `vllm==0.22.1` onto the :latest image instead is an ABI CASCADE and does not work -- measured 12 Aug: transformers too new, then deep_ep compiled against another NCCL (undefined symbol ncclCommQueryProperties), then flashinfer-jit-cache mismatched against flashinfer, then a plan() TypeError, then EngineDeadError in step(). Four fixes got the model to LOAD and generation still died. The engine's own error names the last working version; take the image that shipped with it."
+    note: 'v0.22.0 is the LAST release hosting JAISLMHeadModel -- v0.22.1 is already too late, and the difference is invisible unless the error message is read exactly. Same contemporary-image rule as vllm022: do NOT pip-pin an old vllm onto a newer image.'
+    image: vllm/vllm-openai:v0.22.0
+    gpu_name: A100_SXM4
+    num_gpus: 1
+    min_gpu_ram: 47
+    disk_gb: 150
+    min_inet_down_mbps: 5000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 48
+  vllm_nightly:
+    description: 'Cheapest 48GB-class card on a fast link, 150GB disk. NO gpu_name filter -- selection is by CAPABILITY (VRAM, link, disk), because the dense roster is one forward pass per prompt and the bill is DOWNLOAD. Peak disk is one model + margin: purge_model fires BEFORE each download and on every exit path including failure.'
+    note: 'For allenai/Olmo-Hybrid ONLY. Support is MERGED (PR #32550) but the RELEASED 0.27.1 loader raises TypeError at olmo_gdn_linear_attn.py:517 (dims[None]). The fix, if it exists, is on main -- so this is the one case where a NEWER engine is the recovery, the mirror image of Aquila/Baichuan/jais needing older ones.'
+    image: vllm/vllm-openai:nightly
+    num_gpus: 1
+    min_gpu_ram: 47
+    disk_gb: 150
+    min_inet_down_mbps: 5000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
+    provides_vram_gb: 48
+engine_recovery:
+  _why: "architecture -> box that can host it, for architectures vLLM REMOVED or never supported. Keyed on ARCHITECTURE because that is the fact's shape: BaichuanForCausalLM went after 0.23.0 and every Baichuan went with it."
+  AquilaForCausalLM: vllm022_a100
+  BaichuanForCausalLM: vllm022_a100
+  JAISLMHeadModel: vllm0220_a100
+  OlmoHybrid: vllm_nightly
+  RwkvForCausalLM:
+  PhariaForCausalLM:
+  Zamba2ForCausalLM:
+  RecurrentGemmaForCausalLM:
+sizing:
+  why: min_vram_gb and num_gpus are a STEP FUNCTION of measured params_b, verified with no overlaps across 159 archive rows. Declared as a rule so 160 checkpoints do not each carry a derived number with no producer.
+  steps:
+  - max_params_b: 9
+    vram_gb: 24
+    gpus: 1
+  - max_params_b: 17
+    vram_gb: 48
+    gpus: 1
+  - max_params_b: 35
+    vram_gb: 80
+    gpus: 1
+  - max_params_b:
+    vram_gb: 80
+    gpus: 2

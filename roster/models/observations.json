@@ -1,0 +1,626 @@
+{
+ "_about": "OBSERVED. What HAPPENED, keyed the way the fact is actually shaped. Neither block is per-checkpoint and neither can be folded into models.yaml without destroying its meaning.",
+ "_why_not_in_models_yaml": "WHETHER A MODEL LOADS IS NOT A PROPERTY OF THE MODEL. Seven models here carry BOTH a load_failed and a loads: AmberSafe failed and then succeeded ON THE SAME BOX after two packages were installed. Authoring 'AmberSafe: load_failed' would state as a model fact something that was true of a box for twenty minutes.",
+ "_absence": "Absence of an observation means UNTESTED, never 'works'.",
+ "_source": "malign-logits/data/model_load_environments.json and data/vllm_engine_support.json, ingested 2026-08-16.",
+ "environments": {
+  "grid_v3_box_initial": {
+   "torch": "2.5.1+cu124",
+   "transformers": "5.14.1",
+   "device": "A100-SXM4-80GB",
+   "packages_absent": [
+    "sentencepiece",
+    "protobuf",
+    "tiktoken"
+   ],
+   "note": "vast.ai instance 46301965 as provisioned. requirements.txt was never installed on it -- sentencepiece and protobuf are DECLARED in the repo and were simply missing."
+  },
+  "grid_v3_box_repaired": {
+   "torch": "2.5.1+cu124",
+   "transformers": "5.14.1",
+   "device": "A100-SXM4-80GB",
+   "packages_present": [
+    "sentencepiece 0.2.2",
+    "protobuf 7.35.1"
+   ],
+   "packages_absent": [
+    "tiktoken"
+   ],
+   "note": "Same box after installing the two declared packages mid-run. tiktoken was DELIBERATELY NOT installed: transformers was falling back to a TikToken extractor for a SentencePiece file, and installing it would have let the WRONG converter succeed silently. The LOAD FAILED was protective."
+  },
+  "local_mps": {
+   "torch": "2.11.0",
+   "transformers": "5.4.0",
+   "device": "MPS (M2 Max)",
+   "packages_present": [
+    "sentencepiece",
+    "protobuf"
+   ],
+   "packages_absent": [
+    "tiktoken"
+   ],
+   "note": "Loads every .bin checkpoint the box refuses, because torch >= 2.6 satisfies check_torch_load_is_safe."
+  },
+  "vast_a100_ssm_kernels": {
+   "torch": "2.11.0+cu130",
+   "transformers": "5.14.1",
+   "device": "A100 SXM4 80GB (CUDA)",
+   "packages_present": [
+    "mamba-ssm",
+    "causal-conv1d"
+   ],
+   "note": "vast.ai `ssm` profile. Kernels built from source with the arch DERIVED on the box (TORCH_CUDA_ARCH_LIST from get_device_capability), not hardcoded to 8.0 as it was until 9 Aug."
+  },
+  "vast_l2_cuda_vllm": {
+   "device": "cuda",
+   "engine": "vllm",
+   "dtype": "float16",
+   "note": "L2 passage generation fleet, 2026-08-09. Q RTX 8000 / RTX 5880 Ada class, vLLM engine, fp16. Turing has NO FA2 and NO bf16 under vLLM."
+  },
+  "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1": {
+   "description": "vast dense box, transformers==4.57.1 with sentencepiece==0.2.1 (NOT 0.2.2). Established 2026-08-10 to recover the internlm2 lineage.",
+   "transformers": "4.57.1",
+   "sentencepiece": "0.2.1",
+   "torch": ">=2.6"
+  },
+  "cloud_cuda_transformers_5.14.1": {
+   "description": "vast dense/ssm box on the UNPINNED default, transformers 5.14.1. This was the twp census fleet's baseline all of 2026-08-10 and it is the environment 13 checkpoints CANNOT run in (the tf457 class), so it is declared as a real environment rather than a mistake -- the observations recorded against it are the evidence for the pins.",
+   "transformers": "5.14.1",
+   "torch": ">=2.6",
+   "note": "Superseded for the tf457 roster by cloud_cuda_transformers_4.57.1 and, for internlm2 specifically, by cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1. Declared 2026-08-10 after test_every_observation_names_a_declared_environment caught 5 observations naming an environment the registry did not know -- written by my own seat's fleet work and never declared."
+  },
+  "vast_vllm_0.27.1_passage_fleet": {
+   "torch": "2.9.x (image default)",
+   "transformers": "5.x (image default)",
+   "device": "CUDA, sm_80+ (A100 / L40S / RTX 5880Ada)",
+   "packages_present": [
+    "vllm==0.27.1"
+   ],
+   "packages_absent": [],
+   "note": "vllm/vllm-openai:latest as of 12 Aug 2026, run with --eager. The passage-corpus fleet. ENGINE, not just environment: this key exists because (architecture x engine) is a fact class the campaign otherwise does not record."
+  }
+ },
+ "observations": [
+  {
+   "model_id": "LLM360/AmberSafe",
+   "environment": "grid_v3_box_initial",
+   "outcome": "load_failed",
+   "cause": "SentencePieceExtractor requires the protobuf library -> falls back to TikToken extractor -> `tiktoken` is required",
+   "fix": "pip install sentencepiece protobuf. The first error named sentencepiece; after installing it the error CHANGED to name protobuf. Following the message beat guessing."
+  },
+  {
+   "model_id": "LLM360/AmberSafe",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "verified before scoring: vocab 32000, ids IDENTICAL to LLM360/Amber on 4 probes incl. Chinese and a literary prompt"
+  },
+  {
+   "model_id": "HuggingFaceH4/mistral-7b-sft-beta",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "load_failed",
+   "cause": "torch.load refusal; safetensors shards PRESENT but model.safetensors.index.json ABSENT, so transformers falls back to the .bin index",
+   "fix": "scripts/repair_safetensors_index.py rebuilds the index from the shard headers over HTTP range requests. use_safetensors=True does NOT help -- the flag selects a format, it does not synthesise the map."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-DPO",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "load_failed",
+   "cause": "bin-only; check_torch_load_is_safe requires torch >= 2.6",
+   "fix": "upgrade torch on the box"
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-DPO",
+   "environment": "local_mps",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "verified interactively: 1.48B params, no complaint. THIS IS THE OBSERVATION THAT IDENTIFIED THE CAUSE -- RH asked why a model runs on MPS and not on the bigger machine."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-SFT",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "load_failed",
+   "cause": "bin-only; torch >= 2.6",
+   "fix": "upgrade torch"
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-SFT",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "load_failed",
+   "cause": "bin-only; torch >= 2.6",
+   "fix": "upgrade torch"
+  },
+  {
+   "model_id": "RWKV/rwkv-4-7b-pile",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "load_failed",
+   "cause": "bin-only; torch >= 2.6",
+   "fix": "upgrade torch"
+  },
+  {
+   "model_id": "RWKV/rwkv-raven-7b",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "load_failed",
+   "cause": "bin-only; torch >= 2.6",
+   "fix": "upgrade torch"
+  },
+  {
+   "model_id": "allenai/Olmo-3-1125-32B",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "32B at fp16 fits an 80GB card at ~93% VRAM (76,113 MiB) and scores at ~1.0 p/s. Purge-before-download held: 247 GB disk free with the model resident."
+  },
+  {
+   "model_id": "HuggingFaceH4/zephyr-7b-beta",
+   "environment": "grid_v3_box_repaired",
+   "outcome": "run_failed",
+   "cause": "MY BUG, not the environment: assert_prompt_survives decoded without skip_special_tokens, so the guard failed the prompt against the BOS its own policy had added. Mistral/Llama-family tokenizers only.",
+   "fix": "skip_special_tokens=True in the guard; all five affected models rescored"
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125",
+   "outcome": "run_failed",
+   "cause": "LOADS FINE, dies in the FORWARD: NotImplementedError 'histogram_mps' not implemented for 'Int' -- transformers/integrations/moe.py:383 grouped_mm_experts_forward calls torch.histc for expert routing. MPS has no integer histc.",
+   "fix": "mdl.to('cpu') and re-run the forward. Recovered in-sweep. The load guard did not catch it because the load SUCCEEDS -- an unhandled exception in the forward killed the whole run at 36/104.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-DPO",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "Completed at bfloat16. The DPO sibling of the checkpoint above did NOT hit the histc path on these prompts -- SAME ARCHITECTURE, DIFFERENT OUTCOME, so MoE-on-MPS is not decidable from the architecture name alone.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "RWKV/rwkv-4-7b-pile",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "Ran on MPS at float32 (native). **The 'SSMs do not work on MPS' prior is FALSE for pure RWKV** -- no CUDA kernels are involved, the naive path is pure torch. Slow, not broken.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "RWKV/rwkv-raven-7b",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "As above, float32.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "Zyphra/Zamba2-7B-Instruct",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "Hybrid SSM, ran at float32 on MPS.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "Zyphra/Zamba2-7B",
+   "outcome": "load_failed",
+   "cause": "AutoTokenizer OSError. The -Instruct sibling loads, so it is the repo's tokenizer files, not the architecture.",
+   "fix": "",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "AI-Sweden-Models/gpt-sw3-6.7b",
+   "outcome": "load_failed",
+   "cause": "AutoTokenizer OSError",
+   "fix": "",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct",
+   "outcome": "load_failed",
+   "cause": "AutoTokenizer OSError",
+   "fix": "",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "mosaicml/mpt-7b",
+   "outcome": "load_failed",
+   "cause": "AutoTokenizer OSError",
+   "fix": "",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "mosaicml/mpt-7b-instruct",
+   "outcome": "load_failed",
+   "cause": "AutoTokenizer OSError",
+   "fix": "",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-70B",
+   "outcome": "load_failed",
+   "cause": "CAPACITY, not compatibility: ~140GB bf16 against 96GB unified memory. Cannot load on this box at native dtype in any configuration.",
+   "fix": "Cloud, >=2x80GB. Quantising is NOT a fix here: dtype is a keyed field because it changes the quantity.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-70B-Instruct",
+   "outcome": "load_failed",
+   "cause": "CAPACITY: ~140GB bf16 against 96GB unified memory.",
+   "fix": "Cloud, >=2x80GB.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "allenai/Olmo-3-1125-32B",
+   "outcome": "load_failed",
+   "cause": "CAPACITY (DISK, not memory): 64GB each, 128GB for the pair, 67GiB free. Would fit in RAM one at a time -- this is a different limit from the 70B pair and fixable by freeing disk.",
+   "fix": "Cloud, or reclaim ~130GB locally.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "allenai/Olmo-3.1-32B-Instruct-DPO",
+   "outcome": "load_failed",
+   "cause": "CAPACITY (DISK): see the base sibling.",
+   "fix": "Cloud, or free disk.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-base",
+   "outcome": "run_failed",
+   "cause": "**LOADS AND RUNS, AND SILENTLY DESTROYS THE PROMPT.** backend pre_tokenizer is Metaspace where the checkpoint's own tokenizer.json declares ByteLevel+Split, so encode('a b') == encode('ab'): every space is deleted before the model sees anything, and CJK decodes to the EMPTY STRING. transformers 5.4.0 / tokenizers 0.22.2.",
+   "fix": "NONE KNOWN in this environment. Caught only by a round-trip assertion decode(encode(p)) == p; no load guard, finiteness check or cell count can see it.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-chat",
+   "outcome": "run_failed",
+   "cause": "As the base sibling: encode('a b') == encode('ab').",
+   "fix": "None known.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "croissantllm/CroissantLLMBase",
+   "outcome": "run_failed",
+   "cause": "Loads; DELETES CJK CHARACTERS. 他既是美丽的又是恶心的，她想要 -> 他是美的是心的想要, dropping 既 丽 又 恶 ， 她 -- including BOTH halves of the 既...又 both-and construction. English is exact.",
+   "fix": "Usable for Latin-script prompts only. Caught by round-trip.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "openGPT-X/Teuken-7B-base-v0.6",
+   "outcome": "run_failed",
+   "cause": "Loads; normalises the FULLWIDTH COMMA to ASCII. Drops only ，. Milder than Croissant and a different kind of loss.",
+   "fix": "Latin-script prompts exact; CJK prompts altered. Round-trip catches it.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "Aleph-Alpha/Pharia-1-LLM-7B-control-hf",
+   "outcome": "loads",
+   "cause": "Round-trip LOOKS broken and is not: decode returns a leading space from SentencePiece's leading marker. encode(p) != encode(' '+p), so the encode is faithful and the space never reaches the model. Its CJK handling IS lossy (fullwidth comma).",
+   "fix": "Allow the leading space ONLY where encode proves it can represent the distinction.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "THUDM/glm-4-9b-hf",
+   "outcome": "loads",
+   "cause": "Round-trip LOOKS broken and is not: prepends [gMASK]<sop> and bos_token_id is None, so a BOS-only strip cannot see them. skip_special_tokens recovers the prompt exactly.",
+   "fix": "Allow a special-token prefix, gated on the tokenizer still distinguishing the text from its space-stripped form.",
+   "environment": "local_mps",
+   "source": "F11 L1 sweep, 2026-08-08"
+  },
+  {
+   "model_id": "tiiuae/Falcon3-Mamba-7B-Base",
+   "environment": "vast_a100_ssm_kernels",
+   "outcome": "loads",
+   "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels'. The four Falcon-H1 checkpoints on the same box emit NO such warning, so the kernels are in use for the hybrid and not for the pure SSM.",
+   "fix": "NONE NEEDED. The kernels are a measured null for pure SSM (0.62-0.64 with vs 0.61-0.72 without); timed 0.7-1.7 min/model here. Installing `kernels` would change the numerical path away from every pure-SSM cell already in the corpus for no gain.",
+   "source": "F11 delta run, 2026-08-09"
+  },
+  {
+   "model_id": "tiiuae/Falcon3-Mamba-7B-Instruct",
+   "environment": "vast_a100_ssm_kernels",
+   "outcome": "loads",
+   "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels'. The four Falcon-H1 checkpoints on the same box emit NO such warning, so the kernels are in use for the hybrid and not for the pure SSM.",
+   "fix": "NONE NEEDED. The kernels are a measured null for pure SSM (0.62-0.64 with vs 0.61-0.72 without); timed 0.7-1.7 min/model here. Installing `kernels` would change the numerical path away from every pure-SSM cell already in the corpus for no gain.",
+   "source": "F11 delta run, 2026-08-09"
+  },
+  {
+   "model_id": "tiiuae/falcon-mamba-7b",
+   "environment": "vast_a100_ssm_kernels",
+   "outcome": "loads",
+   "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels'. The four Falcon-H1 checkpoints on the same box emit NO such warning, so the kernels are in use for the hybrid and not for the pure SSM.",
+   "fix": "NONE NEEDED. The kernels are a measured null for pure SSM (0.62-0.64 with vs 0.61-0.72 without); timed 0.7-1.7 min/model here. Installing `kernels` would change the numerical path away from every pure-SSM cell already in the corpus for no gain.",
+   "source": "F11 delta run, 2026-08-09"
+  },
+  {
+   "model_id": "tiiuae/falcon-mamba-7b-instruct",
+   "environment": "vast_a100_ssm_kernels",
+   "outcome": "loads",
+   "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels'. The four Falcon-H1 checkpoints on the same box emit NO such warning, so the kernels are in use for the hybrid and not for the pure SSM.",
+   "fix": "NONE NEEDED. The kernels are a measured null for pure SSM (0.62-0.64 with vs 0.61-0.72 without); timed 0.7-1.7 min/model here. Installing `kernels` would change the numerical path away from every pure-SSM cell already in the corpus for no gain.",
+   "source": "F11 delta run, 2026-08-09"
+  },
+  {
+   "model_id": "mosaicml/mpt-7b",
+   "environment": "vast_l2_cuda_vllm",
+   "outcome": "load_failed",
+   "cause": "REPO IS GONE: 'not a local folder and is not a valid model identifier'. Previously recorded only under local_mps as an AutoTokenizer OSError, which made it look device-specific. IT IS NOT. Absence of a CUDA observation was not evidence of success.",
+   "fix": "none. Exclude by roster, not by retry."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M",
+   "environment": "vast_l2_cuda_vllm",
+   "outcome": "loads"
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-0.5B",
+   "environment": "vast_l2_cuda_vllm",
+   "outcome": "loads"
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B",
+   "environment": "vast_l2_cuda_vllm",
+   "outcome": "loads"
+  },
+  {
+   "model_id": "google/gemma-2-9b",
+   "environment": "vast_l2_cuda_vllm",
+   "outcome": "load_failed",
+   "cause": "vLLM REFUSES gemma2 at float16: 'does not support float16. Reason: Numerical instability.' A hard validation error, not a warning -- the engine will not start.",
+   "fix": "bfloat16 or float32. Needs an sm_80+ card; Turing cannot do bf16 under vLLM, so gemma-2 belongs on the bf16 roster with Falcon-H1."
+  },
+  {
+   "model_id": "google/gemma-2-9b-it",
+   "environment": "vast_l2_cuda_vllm",
+   "outcome": "load_failed",
+   "cause": "vLLM REFUSES gemma2 at float16: 'does not support float16. Reason: Numerical instability.' A hard validation error, not a warning -- the engine will not start.",
+   "fix": "bfloat16 or float32. Needs an sm_80+ card; Turing cannot do bf16 under vLLM, so gemma-2 belongs on the bf16 roster with Falcon-H1."
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b",
+   "environment": "cloud_cuda_transformers_5.14.1",
+   "outcome": "run_failed",
+   "cause": "Loads and runs; AutoTokenizer resolves to the repo's bundled InternLM2TokenizerFast (fetched under trust_remote_code) whose pre-tokenizer SHIFTS WORD BOUNDARIES. sent 'He lay naked in his bed and' -> got 'H elay n aked inh is bed and'. twp refuses every cell with prompt_does_not_survive_encoding; a fleet wrote 402 skip records (330 English, 72 Chinese -- NOT a CJK defect). A skip is not a stored probability, so the census re-offers all 2,579 prompts forever and the model reads as perpetually owed.",
+   "fix": "LOADER_OVERRIDE -> PreTrainedTokenizerFast, in malign_logits/twp.py. Bypasses AutoTokenizer class resolution; round-trips 2/2. Identical mechanism to the deepseek entry, different offending class. NOTE: DOES NOT REPRODUCE UNDER transformers 5.4.0 (this Mac), where AutoTokenizer picks TokenizersBackend and the round-trip is clean -- a local verdict would have declared this model fine and been wrong about every box."
+  },
+  {
+   "model_id": "internlm/internlm2-base-7b",
+   "environment": "cloud_cuda_transformers_5.14.1",
+   "outcome": "run_failed",
+   "cause": "Same boundary-shift as the chat arm, verified on the box: AutoTokenizer 0/2, PreTrainedTokenizerFast 2/2. BOTH ARMS FAIL IDENTICALLY, so the pair is recoverable rather than lost.",
+   "fix": "LOADER_OVERRIDE -> PreTrainedTokenizerFast."
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-base",
+   "environment": "cloud_cuda_transformers_5.14.1",
+   "outcome": "run_failed",
+   "cause": "RE-CONFIRMED 2026-08-10 at transformers 5.14.1: AutoTokenizer still resolves to LlamaTokenizer and still deletes every space -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand'. Upstream PR #47017 (generic model_type=llama repos) has NOT landed.",
+   "fix": "LOADER_OVERRIDE -> PreTrainedTokenizerFast. The existing entry STAYS; checked because a fix that has silently become unnecessary is as much a defect as one that is missing."
+  },
+  {
+   "model_id": "BAAI/AquilaChat2-7B",
+   "environment": "cloud_cuda_transformers_5.14.1",
+   "outcome": "load_failed",
+   "cause": "KeyError: 'type' in the model's OWN bundled modeling_aquila.py:281 -- `scaling_type = self.config.rope_scaling['type']`. The code was written for transformers ~4.31. On 5.x transformers auto-populates rope_scaling as {'rope_type': 'default', ...}, which is TRUTHY, so Aquila's `if rope_scaling is None` branch is skipped and it reads a key that no longer exists. NOT a model defect and NOT broken on all environments.",
+   "fix": "transformers==4.57.1, where rope_scaling reads None and the model takes its own None branch. Verified: AutoConfig on 4.57.1 gives rope_scaling=None for both arms. SAME CLASS AS ZAMBA2 -- old model code against new transformers -- and the same pin fixes both, so they share the `tf457` environment. Run via data/twp_fill_tf457.json."
+  },
+  {
+   "model_id": "BAAI/Aquila2-7B",
+   "environment": "cloud_cuda_transformers_5.14.1",
+   "outcome": "load_failed",
+   "cause": "Same rope_scaling['type'] KeyError as the chat arm; both share the bundled modeling_aquila.py.",
+   "fix": "transformers==4.57.1. NB this arm ALSO carries a pinned revision (9c76e143...) because BAAI replaced main with a re-tokenised model; the two constraints are independent and both apply."
+  },
+  {
+   "model_id": "internlm/internlm2-base-7b",
+   "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+   "outcome": "ok",
+   "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the whole version space was searched at the transformers level and every rung failed for a DIFFERENT reason -- 5.14.1 shifts word boundaries, 5.4.0 has dropped DynamicCache.from_legacy_cache so the first FORWARD dies, 4.51/4.57 fail the conversion, 4.37/4.44 fail with 'piece must not include null character'. The culprit was one rung below transformers the whole time. protobuf is irrelevant: 3.20.3, 4.25.3 and 6.33.6 behave identically under every transformers tested.",
+   "fix": "transformers==4.57.1 + sentencepiece==0.2.1 (0.2.0 also works; 0.1.99 has no cp312 wheel). Bundled InternLM2TokenizerFast then round-trips 2590/2590 ACTIVE prompts at 0% skip, verified locally AND on the box. The LOADER_OVERRIDE to PreTrainedTokenizerFast must NOT fire here -- that class cannot load internlm2 on 4.x at all, and forcing it made the recovery box fail its first launch minutes after a bare AutoTokenizer probe had passed. Override is now gated on transformers major >= 5 (malign_logits/twp.py, 2a1a7906)."
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b",
+   "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+   "outcome": "ok",
+   "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the whole version space was searched at the transformers level and every rung failed for a DIFFERENT reason -- 5.14.1 shifts word boundaries, 5.4.0 has dropped DynamicCache.from_legacy_cache so the first FORWARD dies, 4.51/4.57 fail the conversion, 4.37/4.44 fail with 'piece must not include null character'. The culprit was one rung below transformers the whole time. protobuf is irrelevant: 3.20.3, 4.25.3 and 6.33.6 behave identically under every transformers tested.",
+   "fix": "transformers==4.57.1 + sentencepiece==0.2.1 (0.2.0 also works; 0.1.99 has no cp312 wheel). Bundled InternLM2TokenizerFast then round-trips 2590/2590 ACTIVE prompts at 0% skip, verified locally AND on the box. The LOADER_OVERRIDE to PreTrainedTokenizerFast must NOT fire here -- that class cannot load internlm2 on 4.x at all, and forcing it made the recovery box fail its first launch minutes after a bare AutoTokenizer probe had passed. Override is now gated on transformers major >= 5 (malign_logits/twp.py, 2a1a7906)."
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b-sft",
+   "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+   "outcome": "ok",
+   "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the whole version space was searched at the transformers level and every rung failed for a DIFFERENT reason -- 5.14.1 shifts word boundaries, 5.4.0 has dropped DynamicCache.from_legacy_cache so the first FORWARD dies, 4.51/4.57 fail the conversion, 4.37/4.44 fail with 'piece must not include null character'. The culprit was one rung below transformers the whole time. protobuf is irrelevant: 3.20.3, 4.25.3 and 6.33.6 behave identically under every transformers tested.",
+   "fix": "transformers==4.57.1 + sentencepiece==0.2.1 (0.2.0 also works; 0.1.99 has no cp312 wheel). Bundled InternLM2TokenizerFast then round-trips 2590/2590 ACTIVE prompts at 0% skip, verified locally AND on the box. The LOADER_OVERRIDE to PreTrainedTokenizerFast must NOT fire here -- that class cannot load internlm2 on 4.x at all, and forcing it made the recovery box fail its first launch minutes after a bare AutoTokenizer probe had passed. Override is now gated on transformers major >= 5 (malign_logits/twp.py, 2a1a7906)."
+  },
+  {
+   "model_id": "google/recurrentgemma-9b",
+   "environment": "vast_vllm_0.27.1_passage_fleet",
+   "outcome": "loads_degraded",
+   "cause": "Griffin's recurrent layers give the scheduler almost nothing to batch: ~255 output tok/s and 25-28% GPU utilisation, steady. ~69 min per 4,096-sequence chunk, ~10 h for the pair against ~1 h for a dense 7B on the same card.",
+   "fix": "None known at the engine level. Treat as a PACKING weight, not a failure -- and do NOT restart it on low utilisation: 25% is not the 0%-twice torch.compile signature, and a pair writes ALL its rows in one block only after both roles and both cross-scoring passes, so a restart discards the WHOLE pair, not an hour."
+  },
+  {
+   "model_id": "BAAI/Aquila2-7B",
+   "environment": "vast_vllm_0.27.1_passage_fleet",
+   "outcome": "load_failed",
+   "cause": "AquilaForCausalLM removed from vLLM after v0.24.0",
+   "fix": "Image vllm/vllm-openai:v0.22.1 on an Ampere card (profiles vllm022 / vllm022_a100). Turing fails later, inside FlashInfer paged-KV prefill, and VLLM_ATTENTION_BACKEND is ignored in 0.22.1."
+  },
+  {
+   "model_id": "baichuan-inc/Baichuan2-7B-Base",
+   "environment": "vast_vllm_0.27.1_passage_fleet",
+   "outcome": "load_failed",
+   "cause": "BaichuanForCausalLM removed from vLLM after v0.23.0",
+   "fix": "As Aquila2: vllm/vllm-openai:v0.22.1 on Ampere."
+  },
+  {
+   "model_id": "openGPT-X/Teuken-7B-base-v0.6",
+   "environment": "vast_vllm_0.27.1_passage_fleet",
+   "outcome": "run_failed",
+   "cause": "sentencepiece IdToPiece: OUT_OF_RANGE during cross-scoring, same defect as m-a-p/CT-LLM-Base",
+   "fix": "Not fixed in-run. The cross-scoring guard drops on the MODEL's vocab size while the crash is in the TOKENIZER's sentencepiece count; the real bound is min(model_vocab, len(tokenizer))."
+  }
+ ],
+ "engine_support": {
+  "AquilaForCausalLM": {
+   "status": "removed",
+   "last_working": "0.24.0",
+   "models": [
+    "BAAI/Aquila2-7B",
+    "BAAI/AquilaChat2-7B"
+   ],
+   "recovery": "image vllm/vllm-openai:v0.22.1 on an sm_80+ card (profile vllm022_a100). CONFIRMED WORKING 12 Aug: 1782/1796 rows.",
+   "do_not": "Do NOT pip-install an old vllm onto a new image. It fails in ABI order through transformers, deep_ep's NCCL symbol, flashinfer-jit-cache and a plan() TypeError, and generation still dies after all four fixes. Take a contemporary IMAGE.",
+   "card_requirement": "Turing will NOT do: the model loads and generates at small batch, then dies in FlashInfer's paged-KV prefill (BatchPrefillWithPagedKVCacheRun, status == cudaSuccess). VLLM_ATTENTION_BACKEND is IGNORED in 0.22.1, so there is no backend workaround."
+  },
+  "BaichuanForCausalLM": {
+   "status": "removed",
+   "last_working": "0.23.0",
+   "models": [
+    "baichuan-inc/Baichuan2-7B-Base",
+    "baichuan-inc/Baichuan2-7B-Chat"
+   ],
+   "recovery": "As Aquila: v0.22.1 on Ampere. CONFIRMED WORKING 12 Aug: 1832/1846 rows.",
+   "card_requirement": "sm_80+"
+  },
+  "JAISLMHeadModel": {
+   "status": "removed",
+   "last_working": "0.22.0",
+   "models": [
+    "inceptionai/jais-family-6p7b",
+    "inceptionai/jais-family-6p7b-chat"
+   ],
+   "recovery": "image vllm/vllm-openai:v0.22.0 — NOT v0.22.1. The Aquila recipe is one tag too late for this one, and the difference is invisible unless the error message is read exactly.",
+   "card_requirement": "assume sm_80+, same FlashInfer era as Aquila"
+  },
+  "RwkvForCausalLM": {
+   "status": "never_implemented",
+   "models": [
+    "RWKV/rwkv-4-7b-pile",
+    "RWKV/rwkv-raven-7b"
+   ],
+   "recovery": "NONE via vLLM at any version. PR #11193 was closed unmerged and covered RWKV6, not RWKV-4. Collecting this pair means the HuggingFace generate() path — a DIFFERENT INSTRUMENT, not a bigger box.",
+   "do_not": "Do not spend on hardware for this. No card and no image changes it."
+  },
+  "PhariaForCausalLM": {
+   "status": "never_implemented",
+   "models": [
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-hf",
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf"
+   ],
+   "recovery": "NONE via vLLM. Same class as RWKV: needs the transformers path.",
+   "do_not": "Do not spend on hardware for this."
+  },
+  "RecurrentGemmaForCausalLM": {
+   "status": "degraded_via_silent_fallback",
+   "models": [
+    "google/recurrentgemma-9b",
+    "google/recurrentgemma-9b-it"
+   ],
+   "note": "Hosted CORRECTLY and roughly 10x slow: ~255 output tok/s, 25-28% GPU utilisation, ~10h for a pair against ~1h for a dense 7B on the same card. Griffin's recurrent layers give the scheduler almost nothing to batch.",
+   "recovery": "Nothing to fix. Treat as a PACKING WEIGHT alongside VRAM — packed by pair count or sequence count alone, one recurrent pair becomes the whole fleet's tail.",
+   "do_not": "Do NOT restart it for low utilisation. 25% is not the 0%-twice torch.compile signature, and a pair writes all its rows only at the very end, so a restart discards the entire pair.",
+   "ROOT_CAUSE_RESEARCHED_20260812": "vLLM HAS NO NATIVE RECURRENTGEMMA IMPLEMENTATION AT ANY VERSION. `RecurrentGemmaForCausalLM` is absent from vllm/model_executor/models/registry.py at v0.27.1 and at every version checked back to v0.4.1, and absent from the explicit _TRANSFORMERS_BACKEND_MODELS allow-list. When an architecture is not in the registry and model_impl=='auto' (the DEFAULT), resolve_model_cls falls through to _try_resolve_transformers(), which pulls the class from the installed `transformers` package and runs it via TransformersForCausalLM. vLLM's own docs state there is NO WARNING that this is fallback behaviour. So we were never running vLLM's code -- we were running HuggingFace's reference PyTorch, whose RG-LRU scan is a literal per-timestep Python loop (`for t in range(...): recurrent_states = gate[:,t]*recurrent_states + x[:,t]`). Google's own recurrentgemma repo says the FLAX path uses a low-level Pallas fused kernel and the PyTorch one is 'un-optimized... for reference'.",
+   "why_the_symptoms_fit": "Sequential small-kernel launches are launch-bound, not compute-bound: the card idles between hundreds of tiny elementwise kernels, which is exactly a steady 20-28% utilisation. And SCORING is disproportionately worse than generation because prompt_logprobs teacher-forcing is pure PREFILL over the full stored sequence -- entirely the O(seq_len) loop, with no O(1)-per-token decode phase to amortise it.",
+   "cheap_wins": "NONE FOUND. Batch width does not reduce the number of sequential timesteps. VLLM_USE_V1 targets the native hybrid/Mamba cache path, which this model never enters because it is not registered at all.",
+   "alternatives": "JAX/Flax official repo is the ONLY path with a source-confirmed FUSED kernel (Pallas). MLX has recurrentgemma.py but with the SAME Python-loop scan, and its batch_generate does not expose per-token logprobs (open issue ml-explore/mlx-lm#1358). llama.cpp does NOT support the architecture at all (issue #6564 closed unimplemented; llama-arch.cpp has no Griffin entry). HF transformers directly is the same code vLLM already falls back to.",
+   "unknown": "Whether the Pallas RG-LRU kernel runs on non-TPU. And NO public RecurrentGemma GPU tokens/sec figure exists anywhere, so our ~255 tok/s is uncompared."
+  },
+  "Zamba2ForCausalLM": {
+   "status": "needs_environment",
+   "models": [
+    "Zyphra/Zamba2-7B",
+    "Zyphra/Zamba2-7B-Instruct"
+   ],
+   "recovery": "transformers==4.57.1 AND mamba-ssm + causal-conv1d kernels (19.3x on the sibling architecture) AND base-arm repo access. Three requirements, each individually satisfiable, never yet tried together.",
+   "blocked_on": "The base arm returns a gated-repo OSError against a published Apache-2.0 licence on an ungated family. The ALIGNED arm is demonstrated locally."
+  },
+  "OlmoHybrid": {
+   "status": "broken_loader",
+   "architecture_string_unconfirmed": true,
+   "models": [
+    "allenai/Olmo-Hybrid-7B",
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B"
+   ],
+   "note": "Support IS merged (PR #32550; olmo_hybrid.py ships in the install). The RELEASED weight loader is broken: olmo_gdn_linear_attn.py:517 indexes dims[loaded_shard_id] with the default None, firing for any checkpoint whose conv1d weights ship fused rather than split.",
+   "recovery": "vLLM from main / a nightly image. The fix, if it exists, is not in 0.27.1, which is PyPI's newest — waiting does not help and upgrading is not available.",
+   "confounds_eliminated": "Identical traceback reproduced on a verified-clean card at gpu_memory_utilization=0.35 with enforce_eager=True. Not memory, not dtype, not eager mode.",
+   "route_CORRECTION_20260812": "THE `nightly` TAG IS NOT NEWER THAN THE RELEASE. Measured on a launched container: vllm/vllm-openai:nightly reports 0.26.1rc1.dev668+g3ee2df303, which PREDATES the 0.27.1 we already run. A fix that postdates 0.27.1 cannot be in it, so the nightly route as specified CANNOT recover this pair and was never going to. Found only because the build was read from the RUNNING CONTAINER at launch rather than inferred from the tag -- @registrar's [5595] condition, which earned its keep immediately.",
+   "route_status": "BLOCKED — no known image carries the fix; needs a source build from main, which is a different cost class."
+  }
+ },
+ "engine_versions": {
+  "0.22.0": "vllm/vllm-openai:v0.22.0 — the last release hosting JAIS",
+  "0.22.1": "vllm/vllm-openai:v0.22.1 — PROVEN 12 Aug: recovered Aquila2 and Baichuan2. Ships transformers 5.10.2 already paired; nothing is uninstalled.",
+  "0.23.0": "last release hosting Baichuan",
+  "0.24.0": "last release hosting Aquila",
+  "0.27.1": "PyPI newest as of Aug 2026; the passage fleet's default image",
+  "nightly": "vllm/vllm-openai:nightly == 0.26.1rc1.dev668+g3ee2df303 as of 12 Aug 2026 -- BEHIND the 0.27.1 release. Do not assume 'nightly' means 'newest'."
+ },
+ "tokenizer_class": {
+  "_note": "NOT architecture x engine — these load and host fine and die in TOKENIZATION or DETOKENIZATION. Kept here because the operational question ('will this fleet lose the pair?') is the same one.",
+  "sentencepiece_out_of_range": {
+   "models": [
+    "m-a-p/CT-LLM-Base",
+    "openGPT-X/Teuken-7B-base-v0.6"
+   ],
+   "error": "IndexError: OUT_OF_RANGE: piece id is out of range — self._processor.IdToPiece(id)",
+   "cause": "The cross-scoring guard dropped on the MODEL's vocab size (embedding rows, routinely padded) while the crash is in the TOKENIZER's piece count. An id can sit under the padding, pass the guard, and still kill the run.",
+   "recovery": "FIXED in scripts/vllm_y_run.py: the bound is min(model_vocab, len(tokenizer)). Re-run both pairs.",
+   "caveat": "The corrected guard drops strictly MORE than the old one, so pairs collected before the fix ran under a looser bound. Declared in amendment §1e.",
+   "status": "fixed",
+   "fixed_in": "01d8668cf1b6",
+   "fixed_note": "Bound corrected to min(model_vocab, len(tokenizer)) in scripts/vllm_y_run.py at 01d8668cf1b6. A box must be running code at or after this commit -- the runner is pulled by `git pull` at launch, so an already-running box does NOT have it.",
+   "measured_padding": {
+    "_note": "MEASURED on the box 12 Aug, not inferred. The gap between embedding rows and tokenizer pieces IS the defect: every id in it passes a model-vocab guard and crashes IdToPiece.",
+    "m-a-p/CT-LLM-Base": {
+     "model_vocab": 125824,
+     "len_tokenizer": 125699,
+     "padded_ids": 125
+    },
+    "m-a-p/CT-LLM-SFT-DPO": {
+     "model_vocab": 125824,
+     "len_tokenizer": 125699,
+     "padded_ids": 125
+    },
+    "openGPT-X/Teuken-7B-base-v0.6": {
+     "model_vocab": 250880,
+     "len_tokenizer": 250680,
+     "padded_ids": 200
+    },
+    "openGPT-X/Teuken-7B-instruct-v0.6": {
+     "model_vocab": 250680,
+     "len_tokenizer": 250680,
+     "padded_ids": 0
+    }
+   },
+   "fix_is_load_bearing": "CONFIRMED by measurement rather than by the run completing. Three of the four arms have a real padding gap, so the corrected min() bound differs from the old one and the ids it newly excludes are exactly the ones that raise IdToPiece. Teuken's INSTRUCT arm has no gap -- the pair is protected by its BASE arm's bound, which is why a per-pair check must look at both arms and not one.",
+   "how_to_check_any_pair": "len(AutoTokenizer.from_pretrained(m)) < AutoConfig.from_pretrained(m).vocab_size -> the pair is exposed. Cheap, needs no weights, and answers it before a box is rented.",
+   "fix_DEMONSTRATED": "OBSERVED FIRING 12 Aug on Teuken: '723/4096 dropped: id >= scorer vocab 250680'. 250,680 is the TOKENIZER's piece count; the old guard would have used the base arm's 250,880 embedding rows, let those 723 sequences through, and raised IdToPiece. This is the fix doing the work, not the pair getting lucky.",
+   "ct_llm_did_NOT_exercise_it": "CT-LLM completed with ZERO drop lines. Its recovery is therefore NOT evidence for the fix -- different box, different card, different sampled ids. Two pairs recovered, only ONE of them tests the guard. Do not cite CT-LLM as confirmation.",
+   "cost_of_correctness": "~17.6% of sequences dropped in the observed chunk. The fix converts a CRASH into MISSINGNESS, which is the right trade but is not free: expect Teuken to carry a high unscorable rate, in the Aquila2 class rather than the 0.03% corpus norm. Per-pair denominators, not the corpus mean."
+  },
+  "detokenizer_none": {
+   "models": [
+    "deepseek-ai/deepseek-llm-7b-base",
+    "deepseek-ai/deepseek-llm-7b-chat"
+   ],
+   "error": "TypeError: 'NoneType' object is not iterable — for ch in raw_token",
+   "cause": "vLLM's incremental detokenizer receives None for a token. Distinct from the transformers-v5 #45488 prompt-mangling defect that LOADER_OVERRIDE addresses — that one is about the PROMPT, this one is about the OUTPUT.",
+   "recovery": "Generate with detokenize=False and decode from full_ids with the HF tokenizer under LOADER_OVERRIDE. The ids are already stored, so nothing is lost.",
+   "note": "The pre-run amendment predicted this pair would collect, arguing from the beam_fc corpus that its TOKENIZER is fine. That argument still stands and was about a different stage. Collectable in one stack is not collecting in another."
+  }
+ },
+ "_error_shape": "REMOVED architectures fail as a pydantic ValidationError at ModelConfig, before weights load, and the message names the last working version. Read it: it is a specification, not a complaint.",
+ "_engine_support_about": "(ARCHITECTURE x ENGINE) support, the fact class the campaign did not key. Every row was paid for with a lost pair."
+}

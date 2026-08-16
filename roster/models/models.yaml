@@ -11,6 +11,13 @@
 # can be a FINDING (which stage carries the repression, and does it vary by
 # family and content?) rather than a column name asserting the answer.
 #
+# `env:` on every node is its ENVIRONMENT REQUIREMENT -- the profile it needs
+# and any deviation from that profile, each with its `why`. The vocabulary
+# (profiles, boxes, images, the launch map) is in roster/environments.yaml; what
+# HAPPENED on a box is in roster/models/observations.json, because whether a
+# model loads is a property of (model x environment) and not of the model.
+# `roster.check_environments()` enforces that all 160 declare one.
+#
 # `revision_ladder: N` = this repo publishes N branches/tags -- a training
 # TRAJECTORY, not one checkpoint. 32 repos do. What is DECLARED here is that
 # the ladder exists and how long it is; WHICH RUNGS WE HAVE MEASURED is a fact
@@ -20,6 +27,10 @@
 #
 # OPERATIONS, aligning: sft | dpo | rlvr | ppo | kto | slic | rlhf | apo
 #                       instruct = an aligned endpoint of UNDECLARED composition
+#                       distill_align = distillation used AS the post-training,
+#                         onto the model's OWN base (Qwen3-8B, MiniCPM5-1B).
+#                         Distinct from `distill` below, which is another lab's
+#                         base retrained on a third model's traces.
 #             deriving, not aligning: distill | continual | upscale | prune
 #             relating (NOT deriving): scale | predecessor
 #
@@ -34,6 +45,8 @@ nodes:
     nickname: yi
     family:
     - yi
+    env:
+      profile: default
   01-ai/Yi-1.5-9B-Chat:
     nickname: yi-chat
     country: CN
@@ -42,9 +55,14 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: default
   Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf:
     family:
     - pharia
+    env:
+      profile: tf457
+      why: transformers 5.x CANNOT RUN this; pin 4.57.1.
   Aleph-Alpha/Pharia-1-LLM-7B-control-hf:
     pretrained: false   # ALREADY ALIGNED: `-control` is the instruction-tuned release
                         # (attested method sft). Its edge to `-control-aligned` is
@@ -53,37 +71,58 @@ nodes:
     revision_ladder: 5
     family:
     - pharia
+    env:
+      profile: tf457
+      why: transformers 5.x CANNOT RUN this; pin 4.57.1.
   BAAI/Aquila2-7B:
     revision: 9c76e143c6e9621689ca76e078c465b0dee75eb8
     family:
     - aquila2
+    env:
+      profile: tf457
+      why: transformers 5.x CANNOT RUN this; pin 4.57.1.
   BAAI/AquilaChat2-7B:
     family:
     - aquila2
+    env:
+      profile: tf457
+      why: transformers 5.x CANNOT RUN this; pin 4.57.1.
   BSC-LT/salamandra-7b:
     revision_ladder: 3
     family:
     - salamandra
+    env:
+      profile: default
   BSC-LT/salamandra-7b-instruct:
     revision_ladder: 4
     family:
     - salamandra
+    env:
+      profile: default
   ContextualAI/archangel_sft-dpo_pythia2-8b:
     nickname: archangel-dpo
     family:
     - archangel-dpo
+    env:
+      profile: default
   ContextualAI/archangel_sft-kto_pythia2-8b:
     nickname: archangel-kto
     family:
     - archangel-kto
+    env:
+      profile: default
   ContextualAI/archangel_sft-ppo_pythia2-8b:
     nickname: archangel-ppo
     family:
     - archangel-ppo
+    env:
+      profile: default
   ContextualAI/archangel_sft-slic_pythia2-8b:
     nickname: archangel-slic
     family:
     - archangel-slic
+    env:
+      profile: default
   ContextualAI/archangel_sft_pythia2-8b:
     nickname: archangel-sft
     family:
@@ -91,6 +130,8 @@ nodes:
     - archangel-kto
     - archangel-ppo
     - archangel-slic
+    env:
+      profile: default
   EleutherAI/pythia-2.8b:
     revision_ladder: 155
     nickname: pythia-2.8b
@@ -99,6 +140,8 @@ nodes:
     - archangel-kto
     - archangel-ppo
     - archangel-slic
+    env:
+      profile: default
   EleutherAI/pythia-6.9b:
     revision_ladder: 155
     nickname: pythia
@@ -109,6 +152,8 @@ nodes:
     open_weight: true
     org_type: nonprofit
     scale: 7B
+    env:
+      profile: default
   HuggingFaceH4/mistral-7b-sft-beta:
     nickname: zephyr-sft
     country: US
@@ -117,6 +162,9 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: torch26
+      why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."
   HuggingFaceH4/zephyr-7b-beta:
     nickname: zephyr
     country: US
@@ -125,6 +173,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: default
   HuggingFaceTB/SmolLM2-360M:
     nickname: smol
     country: US
@@ -134,18 +184,24 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 360M
+    env:
+      profile: default
   HuggingFaceTB/SmolLM2-360M-Instruct:
     nickname: smol-instruct
     family:
     - smol
     open_data: false
     open_weight: true
+    env:
+      profile: default
   HuggingFaceTB/SmolLM3-3B:
     nickname: smol3-instruct
     family:
     - smol3
     open_data: false
     open_weight: true
+    env:
+      profile: default
   HuggingFaceTB/SmolLM3-3B-Base:
     nickname: smol3
     country: US
@@ -155,6 +211,8 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 3B
+    env:
+      profile: default
   HuggingFaceTB/SmolLM3-3B-checkpoints:
     revision_ladder: 133
     revision: it-SFT
@@ -165,10 +223,15 @@ nodes:
   # invisible and a declared-unmeasured one is a named gap. Measuring this repo at
   # revision it-soup-APO makes SFT->APO and APO->final appear with no list to
   # maintain.
+    env:
+      profile: default
   HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO:
     revision: it-soup-APO
     family:
     - smol3
+    env:
+      profile: default
+      why: "a repo@revision checkpoint inherits its repo's requirements: transformers floor, torch floor, kernels, VRAM and dtype are properties of the architecture and the weights' size, and a training step changes none of them."
   LLM360/Amber:
     revision_ladder: 360
     nickname: amber
@@ -179,6 +242,8 @@ nodes:
     open_weight: true
     org_type: academic
     scale: 7B
+    env:
+      profile: default
   LLM360/AmberChat:
     revision_ladder: 2
     nickname: amber-sft
@@ -188,6 +253,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: academic
+    env:
+      profile: default
   LLM360/AmberSafe:
     revision_ladder: 3
     nickname: amber-dpo
@@ -197,19 +264,33 @@ nodes:
     open_data: false
     open_weight: true
     org_type: academic
+    env:
+      profile: default
+      packages:
+        sentencepiece: ''
+        protobuf: ''
+      why: 'sentencepiece: SentencePieceExtractor needs it; without it the loader falls back to TikToken and then demands tiktoken protobuf: the SECOND error, revealed only after sentencepiece was installed'
   OpenLLM-France/Lucie-7B:
     revision_ladder: 42
     family:
     - lucie
+    env:
+      profile: default
   OpenLLM-France/Lucie-7B-Instruct-v1.1:
     family:
     - lucie
+    env:
+      profile: default
   PKU-Alignment/alpaca-7b-reproduced:
     family:
     - beaver
+    env:
+      profile: default
   PKU-Alignment/beaver-7b-v1.0:
     family:
     - beaver
+    env:
+      profile: default
   Qwen/Qwen2.5-0.5B:
     nickname: qwen-tiny
     country: CN
@@ -219,6 +300,8 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 0.5B
+    env:
+      profile: default
   Qwen/Qwen2.5-0.5B-Instruct:
     nickname: qwen-tiny-instruct
     country: CN
@@ -227,6 +310,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: default
   Qwen/Qwen2.5-7B:
     nickname: qwen
     country: CN
@@ -237,6 +322,8 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 7B
+    env:
+      profile: default
   Qwen/Qwen2.5-7B-Instruct:
     nickname: qwen-instruct
     country: CN
@@ -245,6 +332,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: default
   Qwen/Qwen3-8B:
     nickname: qwen3-instruct
     country: CN
@@ -253,6 +342,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: default
   Qwen/Qwen3-8B-Base:
     nickname: qwen3
     country: CN
@@ -262,30 +353,49 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 8B
+    env:
+      profile: default
   RWKV/rwkv-4-7b-pile:
     nickname: rwkv
     family:
     - rwkv
+    env:
+      profile: default
   RWKV/rwkv-raven-7b:
     nickname: rwkv-raven
     family:
     - rwkv
+    env:
+      profile: torch26
+      why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."
   TinyLlama/TinyLlama-1.1B-Chat-v1.0:
     nickname: tinyllama-chat
     family:
     - tinyllama
+    env:
+      profile: default
   TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T:
     nickname: tinyllama
     family:
     - tinyllama
+    env:
+      profile: default
   Zyphra/Zamba2-7B:
     revision_ladder: 3
     family:
     - zamba2
+    env:
+      profile: ssm
+      transformers: ==4.57.1
+      why: 'v5 tie_weights_keys validation on ^layers.6.shared_transformer; config declares transformers_version 4.49.0.dev0. 2026-08-10 CORRECTED ON INGEST, 2026-08-16. The archive profiled Zamba2 `tf457`, which scripts/build_fleet.py:78 launches on `dense` -- a box that installs NO kernels, while the row itself declares kernels [mamba-ssm, causal-conv1d]. Zamba2 is a Mamba2/attention HYBRID and the measured hybrid penalty for missing kernels is 19.3x, so the plan would have run it ~19x slow and reported nothing wrong. The two archive files already disagreed: the `ssm` BOX pins transformers==4.57.1 and its description says it does so FOR ZAMBA2. So `ssm` is the profile that satisfies both constraints, and `tf457` was the half of the requirement that got written down.'
   Zyphra/Zamba2-7B-Instruct:
     revision_ladder: 2
     family:
     - zamba2
+    env:
+      profile: ssm
+      transformers: ==4.57.1
+      why: 'same architecture as the base arm CORRECTED ON INGEST, 2026-08-16. The archive profiled Zamba2 `tf457`, which scripts/build_fleet.py:78 launches on `dense` -- a box that installs NO kernels, while the row itself declares kernels [mamba-ssm, causal-conv1d]. Zamba2 is a Mamba2/attention HYBRID and the measured hybrid penalty for missing kernels is 19.3x, so the plan would have run it ~19x slow and reported nothing wrong. The two archive files already disagreed: the `ssm` BOX pins transformers==4.57.1 and its description says it does so FOR ZAMBA2. So `ssm` is the profile that satisfies both constraints, and `tf457` was the half of the requirement that got written down.'
   allenai/Llama-3.1-Tulu-3-8B-DPO:
     nickname: tulu-dpo
     country: US
@@ -294,6 +404,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Llama-3.1-Tulu-3-8B-SFT:
     nickname: tulu-sft
     country: US
@@ -303,6 +415,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data:
     nickname: tulu-sft-nomath
     country: US
@@ -311,6 +425,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data:
     nickname: tulu-sft-nopersona
     country: US
@@ -319,6 +435,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data:
     nickname: tulu-sft-nosafety
     country: US
@@ -327,6 +445,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data:
     nickname: tulu-sft-nowildchat
     country: US
@@ -335,6 +455,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Llama-3.1-Tulu-3.1-8B:
     revision_ladder: 62
     nickname: tulu
@@ -344,6 +466,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/OLMo-2-0425-1B:
     revision_ladder: 268
     nickname: olmo-tiny
@@ -354,6 +478,8 @@ nodes:
     open_weight: true
     org_type: nonprofit
     scale: 1B
+    env:
+      profile: default
   allenai/OLMo-2-0425-1B-DPO:
     nickname: olmo-tiny-dpo
     country: US
@@ -362,6 +488,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/OLMo-2-0425-1B-Instruct:
     revision_ladder: 14
     nickname: olmo-tiny-instruct
@@ -371,6 +499,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/OLMo-2-0425-1B-SFT:
     nickname: olmo-tiny-sft
     country: US
@@ -379,24 +509,35 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/OLMoE-1B-7B-0125:
     revision_ladder: 16
     nickname: olmoe
     family:
     - olmoe
+    env:
+      profile: default
   allenai/OLMoE-1B-7B-0125-DPO:
     nickname: olmoe-dpo
     family:
     - olmoe
+    env:
+      profile: default
   allenai/OLMoE-1B-7B-0125-Instruct:
     revision_ladder: 45
     nickname: olmoe-instruct
     family:
     - olmoe
+    env:
+      profile: default
   allenai/OLMoE-1B-7B-0125-SFT:
     nickname: olmoe-sft
     family:
     - olmoe
+    env:
+      profile: torch26
+      why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."
   allenai/Olmo-3-1025-7B:
     revision_ladder: 1487
     nickname: olmo
@@ -408,11 +549,17 @@ nodes:
     open_weight: true
     org_type: nonprofit
     scale: 7B
+    env:
+      profile: default
   allenai/Olmo-3-1125-32B:
     revision_ladder: 719
     nickname: olmo-32b
     family:
     - olmo-32b
+    env:
+      profile: default
+      box: big80
+      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them.'
   allenai/Olmo-3-7B-Instruct:
     revision_ladder: 9
     nickname: olmo-instruct
@@ -422,6 +569,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Olmo-3-7B-Instruct-DPO:
     nickname: olmo-dpo
     country: US
@@ -430,6 +579,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Olmo-3-7B-Instruct-SFT:
     nickname: olmo-sft
     country: US
@@ -438,11 +589,15 @@ nodes:
     open_data: false
     open_weight: true
     org_type: nonprofit
+    env:
+      profile: default
   allenai/Olmo-3-7B-Think:
     family:
     - olmo-think
     reasoning: true
     reasoning_note: post-trained for reasoning; the Think branch of the Olmo 3 ladder
+    env:
+      profile: default
   allenai/Olmo-3-7B-Think-DPO:
     nickname: olmo-think-dpo
     country: US
@@ -453,6 +608,8 @@ nodes:
     org_type: nonprofit
     reasoning: true
     reasoning_note: as above, DPO rung
+    env:
+      profile: default
   allenai/Olmo-3-7B-Think-SFT:
     revision_ladder: 44
     nickname: olmo-think-sft
@@ -464,32 +621,52 @@ nodes:
     org_type: nonprofit
     reasoning: true
     reasoning_note: as above, SFT rung
+    env:
+      profile: default
   allenai/Olmo-3.1-32B-Instruct:
     nickname: olmo-32b-instruct
     family:
     - olmo-32b
+    env:
+      profile: default
+      box: big80
+      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them.'
   allenai/Olmo-3.1-32B-Instruct-DPO:
     nickname: olmo-32b-dpo
     family:
     - olmo-32b
+    env:
+      profile: default
+      box: big80
+      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them.'
   allenai/Olmo-3.1-32B-Instruct-SFT:
     nickname: olmo-32b-sft
     family:
     - olmo-32b
+    env:
+      profile: default
+      box: big80
+      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them.'
   allenai/Olmo-Hybrid-7B:
     revision_ladder: 1497
     nickname: olmo-hybrid
     family:
     - olmo-hybrid
+    env:
+      profile: default
   allenai/Olmo-Hybrid-Instruct-DPO-7B:
     nickname: olmo-hybrid-dpo
     family:
     - olmo-hybrid
+    env:
+      profile: default
   allenai/Olmo-Hybrid-Instruct-SFT-7B:
     revision_ladder: 6
     nickname: olmo-hybrid-sft
     family:
     - olmo-hybrid
+    env:
+      profile: default
   baichuan-inc/Baichuan2-7B-Base:
     nickname: baichuan
     country: CN
@@ -499,6 +676,9 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 7B
+    env:
+      profile: tf457
+      why: transformers 5.x CANNOT RUN this; pin 4.57.1.
   baichuan-inc/Baichuan2-7B-Chat:
     nickname: baichuan-chat
     country: CN
@@ -507,21 +687,33 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: tf457
+      why: transformers 5.x CANNOT RUN this; pin 4.57.1.
   bigscience/bloom-7b1:
     revision_ladder: 3
     nickname: bloom
     family:
     - bloom
+    env:
+      profile: default
   bigscience/bloomz-7b1:
     nickname: bloomz
     family:
     - bloom
+    env:
+      profile: default
   croissantllm/CroissantLLMBase:
     family:
     - croissant
+    env:
+      profile: torch26
+      why: DELETES CJK CHARACTERS -- drops both halves of the ji...you both-and construction. English is exact, so an English-only check passes it.
   croissantllm/CroissantLLMChat-v0.1:
     family:
     - croissant
+    env:
+      profile: default
   deepseek-ai/DeepSeek-R1-Distill-Llama-8B:
     nickname: r1-llama
     country: CN
@@ -532,6 +724,8 @@ nodes:
     org_type: corporate
     reasoning: true
     reasoning_note: reasoning DISTILLED from DeepSeek-R1 into Llama-3.1-8B
+    env:
+      profile: default
   deepseek-ai/DeepSeek-R1-Distill-Qwen-7B:
     nickname: r1-qwen
     country: CN
@@ -542,6 +736,8 @@ nodes:
     org_type: corporate
     reasoning: true
     reasoning_note: reasoning DISTILLED from DeepSeek-R1 into Qwen2.5-7B
+    env:
+      profile: default
   deepseek-ai/deepseek-llm-7b-base:
     nickname: deepseek
     country: CN
@@ -551,6 +747,10 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 7B
+    env:
+      profile: default
+      tokenizer_loader: PreTrainedTokenizerFast
+      why: "#45488/#47017 AutoTokenizer resolves to LlamaTokenizer and deletes every space: 'He lay naked in his bed and' -> 'Helaynakedinhisbedand'. Re-confirmed at transformers 5.14.1. Loads and runs and destroys the prompt."
   deepseek-ai/deepseek-llm-7b-chat:
     nickname: deepseek-chat
     country: CN
@@ -559,6 +759,10 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: torch26
+      tokenizer_loader: PreTrainedTokenizerFast
+      why: "#45488/#47017 as the base sibling: encode('a b') == encode('ab')."
   gl198976/mpt-7b:
     # MIRROR. mosaicml/mpt-7b is gone (Databricks acquisition); this is a
     # surviving copy, CORROBORATED rather than trusted: gretelai/mpt-7b carries
@@ -575,6 +779,9 @@ nodes:
     family:
     - mpt
     - mpt-chat
+    env:
+      profile: default
+      why: "REPO IS GONE: 404 at the API, not a permissions error. reversible by: nothing we control; a re-upload by MosaicML mosaicml's repo returned 404 at the API (not a permissions error); weights recovered from this mirror. Requirements inherited from the dead id, which is where the archive keyed them."
   gl198976/mpt-7b-instruct:
     # Corroborated by THREE mirrors -- gl198976, oleksandrfluxon, cornuHGF --
     # all sha256 0693d4371bfecf42 / 13197cfe0fc856d6, and DIFFERENT from the
@@ -582,6 +789,9 @@ nodes:
     nickname: mpt-instruct
     family:
     - mpt
+    env:
+      profile: default
+      why: "repo id DEAD -- 404 at the API. reversible by: nothing we control mosaicml's repo returned 404 at the API (not a permissions error); weights recovered from this mirror. Requirements inherited from the dead id, which is where the archive keyed them."
   Alchan/mpt-7b-chat:
     # Corroborated by Alchan and cornuHGF, sha256 07f433e032115bdb /
     # 8cfcccd916a8b313, distinct from both base and instruct.
@@ -591,113 +801,189 @@ nodes:
     nickname: mpt-chat
     family:
     - mpt-chat
+    env:
+      profile: default
+      why: "REPO IS GONE: 404 at the API, not a permissions error. reversible by: nothing we control; a re-upload by MosaicML mosaicml's repo returned 404 at the API (not a permissions error); weights recovered from this mirror. Requirements inherited from the dead id, which is where the archive keyed them."
   google/gemma-2-9b:
     family:
     - gemma2
+    env:
+      profile: bf16
+      why: 'compute in bfloat16, NOT float16: fp16 overflows the SSM scan and yields all-NaN logits on prompts >=13 tokens (1/12 finite at fp16, 12/12 at bf16). Storage stays f16.'
   google/gemma-2-9b-it:
     family:
     - gemma2
+    env:
+      profile: bf16
+      why: 'compute in bfloat16, NOT float16: fp16 overflows the SSM scan and yields all-NaN logits on prompts >=13 tokens (1/12 finite at fp16, 12/12 at bf16). Storage stays f16.'
   google/recurrentgemma-9b:
     family:
     - recurrentgemma
+    env:
+      profile: default
   google/recurrentgemma-9b-it:
     family:
     - recurrentgemma
+    env:
+      profile: default
   huggyllama/llama-7b:
     family:
     - beaver
+    env:
+      profile: default
   ibm-granite/granite-3.0-8b-base:
     family:
     - granite
+    env:
+      profile: default
   ibm-granite/granite-3.0-8b-instruct:
     family:
     - granite
+    env:
+      profile: default
   inceptionai/jais-family-6p7b:
     family:
     - jais
+    env:
+      profile: default
   inceptionai/jais-family-6p7b-chat:
     family:
     - jais
+    env:
+      profile: default
   internlm/internlm2-base-7b:
     revision_ladder: 2
     nickname: internlm2
     family:
     - internlm2
+    env:
+      profile: tf457
+      packages:
+        sentencepiece: ==0.2.1
+      why: "sentencepiece: 0.2.2 fails internlm2's SentencePiece->fast conversion outright; 0.2.0/0.2.1 convert fine and protobuf has no effect. Resolved locally across the whole version space before renting anything -- tokenizers need no GPU. same boundary shift as the chat arm, verified on the box. Both arms fail identically, so the pair is recoverable rather than lost."
   internlm/internlm2-chat-7b:
     revision_ladder: 3
     nickname: internlm2-chat
     family:
     - internlm2
+    env:
+      profile: tf457
+      packages:
+        sentencepiece: ==0.2.1
+      why: "sentencepiece: 0.2.2 fails internlm2's SentencePiece->fast conversion outright; 0.2.0/0.2.1 convert fine and protobuf has no effect. Resolved locally across the whole version space before renting anything -- tokenizers need no GPU. AutoTokenizer fetches the repo's bundled InternLM2TokenizerFast under trust_remote_code and it SHIFTS WORD BOUNDARIES. PreTrainedTokenizerFast scores 2/2 where AutoTokenizer scores 0/2."
   internlm/internlm2-chat-7b-sft:
     revision_ladder: 2
     nickname: internlm2-sft
     family:
     - internlm2
+    env:
+      profile: tf457
+      packages:
+        sentencepiece: ==0.2.1
+      why: "sentencepiece: 0.2.2 fails internlm2's SentencePiece->fast conversion outright; 0.2.0/0.2.1 convert fine and protobuf has no effect. Resolved locally across the whole version space before renting anything -- tokenizers need no GPU."
   kakaocorp/kanana-1.5-8b-base:
     family:
     - kanana
+    env:
+      profile: default
   kakaocorp/kanana-1.5-8b-instruct-2505:
     family:
     - kanana
+    env:
+      profile: default
   kakaocorp/kanana-2-3b-base:
     family:
     - kanana2
+    env:
+      profile: default
   kakaocorp/kanana-2-3b-instruct:
     family:
     - kanana2
+    env:
+      profile: default
   llm-jp/llm-jp-3-7.2b:
     family:
     - llm-jp-3
+    env:
+      profile: default
   llm-jp/llm-jp-3-7.2b-instruct2:
     family:
     - llm-jp-3
+    env:
+      profile: default
   llm-jp/llm-jp-3-7.2b-instruct3:
     family:
     - llm-jp-3
+    env:
+      profile: default
   lomahony/eleuther-pythia6.9b-hh-dpo:
     nickname: pythia-dpo
     family:
     - pythia
     open_data: false
     open_weight: true
+    env:
+      profile: torch26
+      why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."
   lomahony/eleuther-pythia6.9b-hh-sft:
     nickname: pythia-sft
     family:
     - pythia
     open_data: false
     open_weight: true
+    env:
+      profile: torch26
+      why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."
   m-a-p/CT-LLM-Base:
     nickname: ct-llm
     family:
     - ct-llm
+    env:
+      profile: default
   m-a-p/CT-LLM-SFT:
     nickname: ct-llm-sft
     family:
     - ct-llm
+    env:
+      profile: default
   m-a-p/CT-LLM-SFT-DPO:
     nickname: ct-llm-dpo
     family:
     - ct-llm
+    env:
+      profile: default
   m-a-p/neo_7b:
     nickname: map-neo
     family:
     - map-neo
+    env:
+      profile: default
   m-a-p/neo_7b_instruct_v0.1:
     nickname: map-neo-dpo
     family:
     - map-neo
+    env:
+      profile: default
   m-a-p/neo_7b_sft_v0.1:
     nickname: map-neo-sft
     family:
     - map-neo
+    env:
+      profile: default
   meta-llama/Llama-3.1-70B:
     nickname: llama-70b
     family:
     - llama-70b
+    env:
+      profile: twogpu
+      why: ~140GB bf16 per arm; device_map=auto shards across two cards. A single card OOMs AFTER paying for the download.
   meta-llama/Llama-3.1-70B-Instruct:
     nickname: llama-70b-instruct
     family:
     - llama-70b
+    env:
+      profile: twogpu
+      why: ~140GB bf16 per arm; device_map=auto shards across two cards. A single card OOMs AFTER paying for the download.
   meta-llama/Llama-3.1-8B:
     nickname: llama
     country: US
@@ -716,6 +1002,8 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 8B
+    env:
+      profile: default
   meta-llama/Llama-3.1-8B-Instruct:
     nickname: llama-instruct
     country: US
@@ -724,6 +1012,8 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
+    env:
+      profile: default
   mistralai/Mistral-7B-Instruct-v0.1:
     nickname: mistral-instruct
     country: FR
@@ -733,6 +1023,9 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 7B
+    env:
+      profile: default
+      why: inherited from the same-architecture sibling in this lineage; no row was built for this id before it entered the roster.
   mistralai/Mistral-7B-v0.1:
     revision_ladder: 2
     nickname: mistral
@@ -746,130 +1039,203 @@ nodes:
     open_weight: true
     org_type: corporate
     scale: 7B
+    env:
+      profile: default
   openGPT-X/Teuken-7B-base-v0.6:
     family:
     - teuken
+    env:
+      profile: default
   openGPT-X/Teuken-7B-instruct-v0.6:
     family:
     - teuken
+    env:
+      profile: default
   openbmb/MiniCPM5-1B:
     nickname: minicpm-instruct
     family:
     - minicpm
+    env:
+      profile: default
   openbmb/MiniCPM5-1B-Base:
     nickname: minicpm
     family:
     - minicpm
+    env:
+      profile: default
   openbmb/MiniCPM5-1B-SFT:
     nickname: minicpm-sft
     family:
     - minicpm
+    env:
+      profile: default
   stabilityai/stablelm-2-1_6b:
     revision_ladder: 3
     nickname: stablelm
     family:
     - stablelm
+    env:
+      profile: default
   stabilityai/stablelm-2-1_6b-chat:
     nickname: stablelm-chat
     family:
     - stablelm
+    env:
+      profile: default
   stabilityai/stablelm-2-zephyr-1_6b:
     nickname: stablelm-dpo
     family:
     - stablelm
+    env:
+      profile: default
   team-hatakeyama-phase2/Tanuki-8B-base-v1.0:
     family:
     - tanuki
+    env:
+      profile: default
   tiiuae/Falcon-H1-1.5B-Base:
     nickname: falcon-h1-1.5b
     family:
     - falcon-h1-1.5b
+    env:
+      profile: ssm
+      why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon-H1-1.5B-Instruct:
     nickname: falcon-h1-1.5b-instruct
     family:
     - falcon-h1-1.5b
+    env:
+      profile: ssm
+      why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon-H1-7B-Base:
     nickname: falcon-h1-7b
     family:
     - falcon-h1-7b
+    env:
+      profile: ssm
+      why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon-H1-7B-Instruct:
     nickname: falcon-h1-7b-instruct
     family:
     - falcon-h1-7b
+    env:
+      profile: ssm
+      why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon3-10B-Base:
     nickname: falcon3-10b
     family:
     - falcon3-10b
+    env:
+      profile: default
   tiiuae/Falcon3-10B-Instruct:
     nickname: falcon3-10b-instruct
     family:
     - falcon3-10b
+    env:
+      profile: default
   tiiuae/Falcon3-1B-Base:
     nickname: falcon3-1b
     family:
     - falcon3-1b
+    env:
+      profile: default
   tiiuae/Falcon3-1B-Instruct:
     nickname: falcon3-1b-instruct
     family:
     - falcon3-1b
+    env:
+      profile: default
   tiiuae/Falcon3-3B-Base:
     nickname: falcon3-3b
     family:
     - falcon3-3b
+    env:
+      profile: default
   tiiuae/Falcon3-3B-Instruct:
     nickname: falcon3-3b-instruct
     family:
     - falcon3-3b
+    env:
+      profile: default
   tiiuae/Falcon3-7B-Base:
     nickname: falcon3-7b
     family:
     - falcon3-7b
+    env:
+      profile: default
   tiiuae/Falcon3-7B-Instruct:
     nickname: falcon3-7b-instruct
     family:
     - falcon3-7b
+    env:
+      profile: default
   tiiuae/Falcon3-Mamba-7B-Base:
     nickname: falcon3-mamba
     family:
     - falcon3-mamba
+    env:
+      profile: ssm
+      why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon3-Mamba-7B-Instruct:
     nickname: falcon3-mamba-instruct
     family:
     - falcon3-mamba
+    env:
+      profile: ssm
+      why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/falcon-mamba-7b:
     nickname: falcon-mamba
     family:
     - falcon-mamba
+    env:
+      profile: ssm
+      why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/falcon-mamba-7b-instruct:
     nickname: falcon-mamba-instruct
     family:
     - falcon-mamba
+    env:
+      profile: ssm
+      why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   togethercomputer/RedPajama-INCITE-7B-Chat:
     revision_ladder: 2
     nickname: redpajama-chat
     family:
     - redpajama
+    env:
+      profile: default
   togethercomputer/RedPajama-INCITE-7B-Instruct:
     revision_ladder: 2
     nickname: redpajama-instruct
     family:
     - redpajama
+    env:
+      profile: default
   togethercomputer/RedPajama-INCITE-Base-7B-v0.1:
     revision_ladder: 12
     nickname: redpajama
     family:
     - redpajama
+    env:
+      profile: torch26
+      why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."
   weblab-GENIAC/Tanuki-8B-dpo-v1.0:
     family:
     - tanuki
+    env:
+      profile: default
   zai-org/glm-4-9b-chat-hf:
     nickname: glm4-chat
     family:
     - glm4
+    env:
+      profile: default
   zai-org/glm-4-9b-hf:
     nickname: glm4
     family:
     - glm4
+    env:
+      profile: default
   microsoft/phi-4:
     pretrained: false   # ALREADY ALIGNED. "We align the pretrained model with one
                         # round of SFT 4.1, one round of DPO on data from our pivotal
@@ -879,40 +1245,65 @@ nodes:
                         # because it doesn't actually have a base model".
     family:
     - phi4
+    env:
+      profile: default
   microsoft/phi-4-reasoning:
     family:
     - phi4
     reasoning: true
     reasoning_note: reasoning post-training; no base released, so unpairable
+    env:
+      profile: default
   microsoft/Phi-4-reasoning-plus:
     family:
     - phi4
     reasoning: true
     reasoning_note: as above
+    env:
+      profile: default
+      why: inherited from the same-architecture sibling in this lineage; no row was built for this id before it entered the roster.
   tiiuae/falcon-7b:
     family:
     - falcon-7b
+    env:
+      profile: tf457
+      why: transformers 5.x CANNOT RUN this; pin 4.57.1.
   tiiuae/falcon-7b-instruct:
     family:
     - falcon-7b
+    env:
+      profile: tf457
+      why: transformers 5.x CANNOT RUN this; pin 4.57.1.
   teknium/OpenHermes-2.5-Mistral-7B:
     family:
     - openhermes-mistral
+    env:
+      profile: default
   NousResearch/Nous-Hermes-2-Mistral-7B-DPO:
     family:
     - openhermes-mistral
+    env:
+      profile: default
   openchat/openchat-3.5-0106:
     family:
     - openchat
+    env:
+      profile: default
   cognitivecomputations/dolphin-2.6-mistral-7b-dpo:
     family:
     - dolphin-mistral
+    env:
+      profile: default
   NousResearch/Hermes-3-Llama-3.1-8B:
     family:
     - hermes-llama
+    env:
+      profile: default
   cognitivecomputations/Dolphin3.0-Llama3.1-8B:
     family:
     - dolphin-llama
+    env:
+      profile: default
   openGPT-X/Teuken-7B-instruct-commercial-v0.4:
     pretrained: false   # NOT A BASE, and its real base is not here. Its card and
                         # YAML name `Teuken-7B-base-v0.4`.
@@ -939,6 +1330,9 @@ nodes:
     # from it. A one-member `teuken-commercial` tag would have been a family that
     # is not one -- the assertion caught it. **An absent family here means 'no
     # measurable recipe', which is true, rather than an oversight.**
+    env:
+      profile: default
+      why: inherited from the same-architecture sibling in this lineage; no row was built for this id before it entered the roster.
 edges:
 - - 01-ai/Yi-1.5-9B
   - instruct
@@ -1503,8 +1897,7 @@ families:
   mistral:
     kind: recipe
     representative: true
-  archangel-dpo: {kind: method_variant, experiment: archangel-halos, method: dpo,
-                  representative: true}
+  archangel-dpo: {kind: method_variant, experiment: archangel-halos, method: dpo, representative: true}
   archangel-kto: {kind: method_variant, experiment: archangel-halos, method: kto}
   archangel-ppo: {kind: method_variant, experiment: archangel-halos, method: ppo}
   archangel-slic: {kind: method_variant, experiment: archangel-halos, method: slic}
@@ -1555,12 +1948,8 @@ directions:
     direction: standard
     alignment_intent: helpfulness
     overrides_attestation: inverted
-    evidence: 'card sentence reads as deliberate removal, but the SFT filter it
-      names is de-hedging ("I do not have emotions") and the preference set ranks
-      by overall_score with refusals not the rejected class'
-    caveat: 'no safety guardrail exists. "Zephyr-7B-b has not been aligned to human
-      preferences for safety within the RLHF phase or deployed with in-the-loop
-      filtering of responses like ChatGPT."'
+    evidence: 'card sentence reads as deliberate removal, but the SFT filter it names is de-hedging ("I do not have emotions") and the preference set ranks by overall_score with refusals not the rejected class'
+    caveat: 'no safety guardrail exists. "Zephyr-7B-b has not been aligned to human preferences for safety within the RLHF phase or deployed with in-the-loop filtering of responses like ChatGPT."'
   cognitivecomputations/dolphin-2.6-mistral-7b-dpo:
     direction: inverted
     evidence: preference mixture includes unalignment/toxic-dpo-v0.1, whose card describes it as de-censoring with REFUSALS AS THE REJECTED CLASS; the upstream SFT was already refusal-stripped
@@ -1575,10 +1964,7 @@ unavailable:
   AI-Sweden-Models/gpt-sw3-6.7b-v2:
     kind: access_denied
     permanent: true
-    note: 'as above. REMOVED FROM `nodes` 2026-08-16: it was declared as a node AND
-      listed here, so it entered the recipe population carrying 0 cells and inflated
-      the declared population above the measurable one. A model that cannot be
-      measured is recorded here and nowhere else.'
+    note: 'as above. REMOVED FROM `nodes` 2026-08-16: it was declared as a node AND listed here, so it entered the recipe population carrying 0 cells and inflated the declared population above the measurable one. A model that cannot be measured is recorded here and nowhere else.'
   AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct:
     kind: access_denied
     permanent: true
@@ -1586,49 +1972,23 @@ unavailable:
   openGPT-X/Teuken-7B-base-v0.4:
     kind: private
     permanent: false
-    note: 'The true parent of Teuken-7B-instruct-commercial-v0.4. Its sibling card
-      states "The base model Teuken-7B-base-v0.4 is available on request
-      contact@opengpt-x.de"; unauthenticated API returns 401 where all three roster
-      ids return 200. Not withdrawn -- gated.'
+    note: 'The true parent of Teuken-7B-instruct-commercial-v0.4. Its sibling card states "The base model Teuken-7B-base-v0.4 is available on request contact@opengpt-x.de"; unauthenticated API returns 401 where all three roster ids return 200. Not withdrawn -- gated.'
   mosaicml/mpt-7b:
     kind: repo_dead
     permanent: true
-    note: '404 at the HF API, not a permissions error. The repo is gone. RECOVERED
-      2026-08-16 from mirrors -- see node gl198976/mpt-7b: the ORIGINAL repo is
-      still dead, the weights are not. (These were TWO `note:` keys until
-      2026-08-16; yaml.safe_load keeps the last, so the recovery sentence was
-      silently invisible to every program that read this file.)'
+    note: '404 at the HF API, not a permissions error. The repo is gone. RECOVERED 2026-08-16 from mirrors -- see node gl198976/mpt-7b: the ORIGINAL repo is still dead, the weights are not. (These were TWO `note:` keys until 2026-08-16; yaml.safe_load keeps the last, so the recovery sentence was silently invisible to every program that read this file.)'
   mosaicml/mpt-7b-instruct:
     kind: repo_dead
     permanent: true
     note: as above
 provenance_notes:
   teuken:
-    v0.6_IS_a_from_scratch_run: 'arXiv:2410.03730 -- "We present Teuken-7B-Base, a
-      European [LLM that] has been trained from scratch for 6 trillion tokens based
-      on all 24 official European languages." So the root is an INDEPENDENT
-      pretraining run and belongs among the fresh ones.'
-    v0.4_and_v0.6_are_one_run: 'Section 5.4 Continued Pre-Training: "the initial
-      goal has been to train our base model up to 3T tokens ... we decided to train
-      the model on an additional 3T tokens and therefore needed to define a new
-      learning rate schedule." And: "After 4T tokens, we replaced the English
-      FineWeb-EDU and continued training until 6T tokens with DCLM-Baseline." The
-      versions are checkpoints of ONE run at 4T and 6T, not separate runs.'
-    why_this_was_checked: 'The attestation recorded a card-vs-paper tension -- card
-      6T, an earlier paper version worded for 4T -- and I speculated the root might
-      be a continuation rather than a fresh run, like Yi-1.5 and OLMoE-0125. The
-      paper says the opposite. **The speculation was not acted on, and reading the
-      source is what settled it**; the same tension resolved by guess would have
-      moved a lineage out of the fresh-run count for no reason.'
+    v0.6_IS_a_from_scratch_run: 'arXiv:2410.03730 -- "We present Teuken-7B-Base, a European [LLM that] has been trained from scratch for 6 trillion tokens based on all 24 official European languages." So the root is an INDEPENDENT pretraining run and belongs among the fresh ones.'
+    v0.4_and_v0.6_are_one_run: 'Section 5.4 Continued Pre-Training: "the initial goal has been to train our base model up to 3T tokens ... we decided to train the model on an additional 3T tokens and therefore needed to define a new learning rate schedule." And: "After 4T tokens, we replaced the English FineWeb-EDU and continued training until 6T tokens with DCLM-Baseline." The versions are checkpoints of ONE run at 4T and 6T, not separate runs.'
+    why_this_was_checked: 'The attestation recorded a card-vs-paper tension -- card 6T, an earlier paper version worded for 4T -- and I speculated the root might be a continuation rather than a fresh run, like Yi-1.5 and OLMoE-0125. The paper says the opposite. **The speculation was not acted on, and reading the source is what settled it**; the same tension resolved by guess would have moved a lineage out of the fresh-run count for no reason.'
   org_renames:
-    THUDM -> zai-org: 'The GLM lineage moved org: the old registry names
-      `THUDM/glm-4-9b-hf` and `THUDM/glm-4-9b-chat-hf`; this roster declares
-      `zai-org/glm-4-9b-hf` and `zai-org/glm-4-9b-chat-hf`, which hold 2,663 cells
-      each. SAME MODELS, new path.'
-    why_it_is_written_down: 'A rename presents to a coverage check as a MISSING
-      MODEL -- the old id has no node and no cells, so a diff against any prior
-      artifact reports a gap that is not one. Recorded 2026-08-16 after exactly
-      that check flagged it.'
+    THUDM -> zai-org: 'The GLM lineage moved org: the old registry names `THUDM/glm-4-9b-hf` and `THUDM/glm-4-9b-chat-hf`; this roster declares `zai-org/glm-4-9b-hf` and `zai-org/glm-4-9b-chat-hf`, which hold 2,663 cells each. SAME MODELS, new path.'
+    why_it_is_written_down: 'A rename presents to a coverage check as a MISSING MODEL -- the old id has no node and no cells, so a diff against any prior artifact reports a gap that is not one. Recorded 2026-08-16 after exactly that check flagged it.'
   falcon3:
     the_line_is_a_TREE_rooted_at_7B: checked card-by-card by RH, 2026-08-15. Falcon3-7B-Base is the ONLY pretraining run in the line.
     7B -upscale-> 10B: '"Depth up-scaled from Falcon3-7B-Base with continual pretraining on 2 TERATOKENS ... 1024 H100 chips"'

@@ -129,6 +129,31 @@ def main():
     check("sign test needs 13/16, so this is null", s["sign_p"] > 0.05, True)
     check("MDE exceeds the effect it is asked to see", sign_mde(d) > abs(s["mean"]), True)
 
+    print("\nenvironment")
+    check("every checkpoint declares env:",
+          sum(1 for n in roster.load()["nodes"].values() if n.get("env")), 160)
+    check("check_environments is clean", roster.check_environments(), [])
+    #: THE NAME COLLISION IS ASSERTED so that renaming either one breaks here
+    #: rather than on a rented box: `--profile default` is a 300GB A100 and a
+    #: model whose requirement profile is `default` goes to a 48GB `dense`.
+    E = roster.load_environments()
+    check("profile 'default' launches on box 'dense'",
+          E["profiles"]["default"]["launch"], "dense")
+    check("...and box 'default' is a DIFFERENT, bigger machine",
+          E["boxes"]["default"]["provides_vram_gb"] >
+          E["boxes"]["dense"]["provides_vram_gb"], True)
+    f = roster.fleet(roster.population("all"))
+    check("fleet assigns every checkpoint", len(f["unassigned"]), 0)
+    check("fleet boxes for the full roster", len(f["boxes"]), 7)
+    #: Aquila is NOT broken; vLLM deleted it. Same model, two verdicts.
+    check("Aquila unusable on 0.27.1",
+          roster.environment("BAAI/Aquila2-7B", engine="0.27.1")["engine"]["usable"], False)
+    check("...and usable on 0.22.1",
+          roster.environment("BAAI/Aquila2-7B", engine="0.22.1")["engine"]["usable"], True)
+    #: unknown size must NOT resolve to the smallest box.
+    from malignment.roster import _sizing
+    check("unknown params size to (None, None)", _sizing(None), (None, None))
+
     print("\nroster integrity")
     check("models.yaml parses strictly", roster.check_authored(), [])
 
