@@ -52,43 +52,17 @@ sys.path.insert(0, _repo_root(HERE))
 from malignment import roster, ch                     # noqa: E402
 from malignment.prompts import Prompts                # noqa: E402
 
-PREF = {"dpo", "apo", "kto", "slic", "ppo", "rlhf"}
+#: THE CHAIN POPULATION LIVES IN malignment/roster.py, NOT HERE.
+#: `lexical_domains` (L1-L3) must run on an identical chain set for its result to
+#: be comparable to H3's -- which is its entire purpose. A retyped copy is how
+#: `produce_movement.DERIVING` came to be missing five ops. Imported, never
+#: duplicated.
+from malignment.roster import chains, PREF                # noqa: E402,F401
+
 #: FIXED IN THE REGISTRATION. `taboo` is NOT merged into `sexual`.
 H3_DOMAINS = ("sexual", "violence")
 MIN_PROMPTS_PER_DOMAIN = 20
 MIN_CHAINS_FOR_H3 = 5
-
-
-def chains():
-    """base -sft-> S -pref-> P, using the DECLARED representative where one exists.
-
-    pythia-2.8b's four archangel arms are ONE chain: `archangel-dpo` is the
-    declared representative in models.yaml. Counting all four would quadruple one
-    base's weight over a JS span of 0.0071-0.0081.
-    """
-    d = roster.load()
-    nodes, edges = d.get("nodes") or {}, d.get("edges") or []
-    fams = d.get("families") or {}
-    par = {c: (p, op) for p, op, c in edges if op in roster.DERIVING}
-    #: which endpoints belong to a non-representative method_variant family
-    skip = set()
-    for f, meta in fams.items():
-        if meta.get("kind") == "method_variant" and not meta.get("representative"):
-            for m, v in nodes.items():
-                if f in (v.get("family") or []):
-                    skip.add(m)
-    out = []
-    for child, (p, op) in par.items():
-        if op not in PREF or child in skip:
-            continue
-        gp = par.get(p)
-        if not gp or gp[1] != "sft":
-            continue
-        base = gp[0]
-        if (nodes.get(base) or {}).get("pretrained") is False:
-            continue
-        out.append({"base": base, "sft": p, "pref": child, "pref_op": op})
-    return out
 
 
 def _cells(pairs):

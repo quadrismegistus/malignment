@@ -485,3 +485,48 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+#: Preference-optimisation ops. A chain's third rung is one of these.
+PREF = ("dpo", "apo", "kto", "slic", "ppo", "rlhf")
+
+
+def chains():
+    """Declared `base -sft-> S -pref-> P` chains, one row each.
+
+    LIVES HERE BECAUSE TWO EXPERIMENTS NEED THE SAME POPULATION.
+    `division_of_labour/sft_share` (H1-H3) and `division_of_labour/lexical_domains`
+    (L1-L3) must run on an identical chain set or the second cannot be compared
+    to the first -- and L1 exists precisely to be compared to H3. Retyping it
+    into the second experiment is how `produce_movement.DERIVING` came to be a
+    copy missing five ops, which meant the Falcon3 upscale and prune edges had
+    NEVER been in movement. One definition, imported twice.
+
+    - pythia-2.8b's four archangel arms are ONE chain: `archangel-dpo` is the
+      declared representative in models.yaml. Counting all four would quadruple
+      one base's weight across a JS span of 0.0071-0.0081.
+    - A root asserted `pretrained: false` is an aligned model with no released
+      base (phi-4, Teuken-instruct-commercial) and cannot head a chain.
+    """
+    d = load()
+    nodes, edges = d.get("nodes") or {}, d.get("edges") or []
+    fams = d.get("families") or {}
+    par = {c: (p, op) for p, op, c in edges if op in DERIVING}
+    skip = set()
+    for f, meta in fams.items():
+        if meta.get("kind") == "method_variant" and not meta.get("representative"):
+            for m, v in nodes.items():
+                if f in (v.get("family") or []):
+                    skip.add(m)
+    out = []
+    for child, (p, op) in par.items():
+        if op not in PREF or child in skip:
+            continue
+        gp = par.get(p)
+        if not gp or gp[1] != "sft":
+            continue
+        base = gp[0]
+        if (nodes.get(base) or {}).get("pretrained") is False:
+            continue
+        out.append({"base": base, "sft": p, "pref": child, "pref_op": op})
+    return out

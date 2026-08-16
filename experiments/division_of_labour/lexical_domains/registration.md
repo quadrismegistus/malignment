@@ -63,3 +63,21 @@ If the division of labour is about **content**, `share_sexual` should exceed `sh
 That L1 passes and L2 shows the effect exists only under sexual prompts — a real result that reads exactly like the claim while meaning something narrower. That is the reading L2 exists to make impossible to skip.
 
 And second: that L1 passes cleanly and the temptation is to treat it as vindicating H3. It would not. H3 tested a different quantity and returned null; L1 passing would mean *the content-level claim survives where the prompt-level one did not*, which is a weaker and more interesting sentence than "we were right all along."
+
+---
+
+## Amendments
+
+### A1 — 2026-08-16. "≥20 lexicon words" was ambiguous. Resolved BEFORE any share value existed.
+
+Decision rule 2 requires "≥20 lexicon words in both categories" and **does not say per what**. That is my ambiguity, written into the frozen text.
+
+The first implementation read it as the per-prompt MEAN word count, which turns out to be **unsatisfiable by construction**: a twp cell holds on average **1 sexual and 4 violent** lexicon words, because the per-cell word sets are sparse. Under that reading no chain qualifies and L1 is definitionally underpowered — a threshold that can never be met is not a power criterion, it is a bug wearing one.
+
+**Resolved as: the number of DISTINCT lexicon words observed for that chain in that category, across the panel.** That is the natural reading of "the chain has ≥20 lexicon words", it is a property of the chain rather than of an individual prompt, and it is what the sentence would mean to a reader who had not seen the implementation.
+
+**This is recorded before the fact rather than after.** At the moment of writing, every `share_sexual` and `share_violent` in `results/by_chain.csv` is the empty string — the run under the broken reading produced no shares at all, so no L1 value has been seen by anyone. The resolution therefore cannot have been chosen to favour an outcome, and the empty CSV is the evidence.
+
+Additionally reported, because it is the quantity that actually governs precision: **`n_prompts_<cat>`**, the number of panel prompts where the category is present on BOTH arms. Observed range 195–487 of 2,190. No threshold is attached to it; it is reported so a reader can see the denominator rather than infer it.
+
+**No hypothesis, direction, population, unit or panel changes.**

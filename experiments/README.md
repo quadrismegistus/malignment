@@ -127,9 +127,9 @@ This table exists because separating instrument registrations from hypothesis re
 | **H1** | SFT carries the majority of displacement | `division_of_labour/sft_share` | **SUPPORTED** — median share 0.819 |
 | **H2** | the recorded ~90% SFT figure does not replicate | `division_of_labour/sft_share` | **SPLIT** — Olmo-3 Instruct 0.773, Think 0.950; the figure is branch-specific |
 | **H3** | *"SFT handles sex, DPO handles violence"* — at PROMPT level | `division_of_labour/sft_share` | **NOT SUPPORTED** — chain p=0.031 but base p=0.077, and base was pre-declared decisive |
-| **L1** | the same claim at WORD level, via the lexicon | `division_of_labour/lexical_domains` | not run — **a second null WITHDRAWS the claim** |
-| **L2** | is it content or stimulus? sexual-word displacement measured *inside violence and neutral prompts* | `division_of_labour/lexical_domains` | not run — the test the prompt-level design could not run |
-| **L3** | does displaced mass leave the domain or move within it | `division_of_labour/lexical_domains` | not run — descriptive, no threshold |
+| **L1** | the same claim at WORD level, via the lexicon | `division_of_labour/lexical_domains` | **NOT SUPPORTED** — base +0.0052, 10/16, p=0.45. **CLAIM WITHDRAWN** per the stopping rule |
+| **L2** | is it content or stimulus? sexual-word displacement measured *inside violence and neutral prompts* | `division_of_labour/lexical_domains` | **RUN** — under *sexual* prompts the effect runs BACKWARDS (−0.0499, 6/16) |
+| **L3** | does displaced mass leave the domain or move within it | `division_of_labour/lexical_domains` | **RUN** — both categories lose net mass; departure ≈ 2× arrival |
 | **R1a** | vulgar-register sexual mass FALLS under alignment | `register_shift` | not run |
 | **R1b** | clinical/euphemistic mass RISES — **required**, or it is suppression not displacement | `register_shift` | not run |
 | **R2** | the register signature is larger for sexual than violent | `register_shift` | not run |
@@ -148,3 +148,8 @@ The two also fail differently, and the difference is the point:
     hypothesis registration   worst outcome: "the claim is false and is withdrawn"
 
 **But the separation has a cost and this table is the payment.** Update it in the same commit as any new registration.
+
+
+## Withdrawn claims
+
+**2026-08-16 — *"SFT handles sex, DPO handles violence."*** Null at prompt level (H3, base p=0.077) and at word level (L1, base p=0.45), on two different measurements. `lexical_domains`'s registered stopping rule pre-committed withdrawal on a second null, so it is withdrawn rather than tested a third time. **Nothing in this project may rest on it.** The better instrument did not rescue the effect — it made it smaller (+0.0086 → +0.0052) and less certain (p=0.077 → p=0.45).

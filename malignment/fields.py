@@ -523,3 +523,84 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def as_word_map(source, scale=None, vocab=None):
+    """{word: label} + kind, for joining a declared field to movement.
+
+    THE ADAPTER `wordfield.WordField.from_fields` USES. It lives here, not there,
+    because an absent source must raise `MissingSource` from the module that
+    declares it -- `wordfield` reading these files itself would turn a missing
+    lexicon into a clean empty join, and an empty join is a result of zero rather
+    than an error. Absence and emptiness must not share a shape.
+
+    **RID IS REGEXES, NOT A WORD LIST.** Martindale's dictionary is written as
+    stems (`\\babsinth`, `\\bale\\b`), so it has no word map until it is applied
+    to a vocabulary -- and THAT VOCABULARY IS THEN PART OF THE INSTRUMENT, because
+    which words RID appears to cover depends entirely on which words you asked it
+    about. `vocab` is therefore required for rid, and the caller must record it.
+
+    Categorical sources return the word's FIRST category. A word carrying several
+    (USAS routinely does) is represented once, which is LOSSY: for finer work
+    build an explicit WordField from `usas(word, names=True)` and record what was
+    kept. Returning one tag silently is the coarse-predicate/fine-fact error, so
+    it is named here rather than discovered downstream.
+
+        rid                         categorical, REQUIRES vocab
+        gi / wordnet / usas         categorical
+        k_en / k_zh                 continuous, `scale` required
+        warriner / brysbaert        continuous, `scale` required
+    """
+    if source in ("k_en", "k_zh"):
+        scales, R, _ = _k(source.split("_")[1])
+        if scale not in scales:
+            raise ValueError("scale must be one of %s" % (list(scales),))
+        i = list(scales).index(scale)
+        return ({w: float(v[i]) for w, v in R.items()
+                 if v and v[i] is not None}, "continuous")
+    if source in ("warriner", "brysbaert"):
+        got = {w: d[scale] for w, d in _norms().items()
+               if scale in d and d[scale] is not None}
+        if not got:
+            raise ValueError("no values for scale %r in %r; try norms(word).keys()"
+                             % (scale, source))
+        return {w: float(v) for w, v in got.items()}, "continuous"
+    if source == "rid":
+        if not vocab:
+            raise ValueError("rid is a set of REGEXES and has no word map without a "
+                             "vocabulary; pass vocab= and record it as part of the "
+                             "instrument")
+        pats = _rid()
+        out = {}
+        for w in vocab:
+            for rx, cat, _sub in pats:
+                if rx.search(w):
+                    out[w] = cat
+                    break
+        return out, "categorical"
+    if source == "gi":
+        words = (_gi().get("words") or {})
+        return ({w.lower(): (v[0] if isinstance(v, (list, tuple)) else v)
+                 for w, v in words.items() if v}, "categorical")
+    if source == "wordnet":
+        # The file's OWN _meta says FIRST_SENSE_IS_UNRELIABLE, verified on this
+        # corpus: `found` -> social (the first synset is "set up or found", not
+        # the past of find) and `felt` -> contact. Those are the #1 riser and a
+        # sink. It also says TOO_COARSE_FOR_SPEECH -- whispered/shouted/said/told
+        # share `communication` while the first two rise and the last two fall.
+        # Returned anyway, because refusing a source the caller declared is not
+        # this function's decision, but the warning travels with the numbers.
+        words = (_wordnet().get("words") or {})
+        return ({w: d.get("first") for w, d in words.items() if d.get("first")},
+                "categorical")
+    if source == "usas":
+        skip = {"lemma", "word", "pos"}          # the file's own header row
+        out = {}
+        for w, tags in _usas().items():
+            if w in skip:
+                continue
+            good = sorted(t for t in tags if t and _USAS_MOD.match(t))
+            if good:
+                out[w] = good[0]
+        return out, "categorical"
+    raise ValueError("unknown source %r; declared: %s" % (source, sorted(SOURCES)))
