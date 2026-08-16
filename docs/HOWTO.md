@@ -124,7 +124,7 @@ roster.population("bases")                      # 50   pretrained roots
 roster.population("all")                        # 160  every declared node
 roster.population("representative")             # 10   members of a representative family
 roster.population("unavailable")                #  6   declared and deliberately unmeasurable
-roster.population("aligned", measured=True)     # 97   ...restricted to those with cells
+roster.population("aligned", measured=True)     # 98   ...restricted to those with cells
 ```
 
 `endpoints` and `chain_rungs` are **different populations and both are right**:

@@ -469,6 +469,22 @@
    "outcome": "run_failed",
    "cause": "sentencepiece IdToPiece: OUT_OF_RANGE during cross-scoring, same defect as m-a-p/CT-LLM-Base",
    "fix": "Not fixed in-run. The cross-scoring guard drops on the MODEL's vocab size while the crash is in the TOKENIZER's sentencepiece count; the real bound is min(model_vocab, len(tokenizer))."
+  },
+  {
+   "model_id": "tiiuae/Falcon3-3B-Base",
+   "environment": "local_mps",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "VERIFIED ON MPS 2026-08-16 for the slot-diagnostic role. fp16, ~6s load from local cache (6.0 GB each), vocab 131072, logits finite, sane top-5 on an English frame. Falcon3 1B/3B were PRUNED from larger members, so they sit outside endpoints() AND chains() by declaration -- which is why they can carry full movement display in the app without contaminating any experimental population. Their env row says profile=default/box=dense, which is a CLOUD box and says nothing about MPS; this row is the MPS observation that was missing.",
+   "source": "malign seat, live load test on CDH0050"
+  },
+  {
+   "model_id": "tiiuae/Falcon3-3B-Instruct",
+   "environment": "local_mps",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "VERIFIED ON MPS 2026-08-16 for the slot-diagnostic role. fp16, ~6s load from local cache (6.0 GB each), vocab 131072, logits finite, sane top-5 on an English frame. Falcon3 1B/3B were PRUNED from larger members, so they sit outside endpoints() AND chains() by declaration -- which is why they can carry full movement display in the app without contaminating any experimental population. Their env row says profile=default/box=dense, which is a CLOUD box and says nothing about MPS; this row is the MPS observation that was missing.",
+   "source": "malign seat, live load test on CDH0050"
   }
  ],
  "engine_support": {
