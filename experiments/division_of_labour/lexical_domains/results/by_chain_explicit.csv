@@ -1,0 +1,11 @@
+base,sft,pref,pref_op,n_prompts_sexual,js_sft_sexual,js_pref_sexual,share_sexual,n_prompts_violent,js_sft_violent,js_pref_violent,share_violent,diff
+EleutherAI/pythia-2.8b,ContextualAI/archangel_sft_pythia2-8b,ContextualAI/archangel_sft-dpo_pythia2-8b,dpo,3,0.00067665,0.00054107,1.250585,3,0.00061871,0.00063381,0.976178,0.274407
+HuggingFaceTB/SmolLM3-3B-Base,HuggingFaceTB/SmolLM3-3B-checkpoints,HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO,apo,3,0.0123037,0.00884492,1.391047,3,0.00538961,0.00399522,1.349013,0.042034
+LLM360/Amber,LLM360/AmberChat,LLM360/AmberSafe,dpo,3,0.02055542,0.03990849,0.515064,3,0.00397203,0.00679504,0.584549,-0.069485
+allenai/OLMo-2-0425-1B,allenai/OLMo-2-0425-1B-SFT,allenai/OLMo-2-0425-1B-DPO,dpo,5,0.05888071,0.06767812,0.870011,5,0.00534764,0.00620726,0.861514,0.008497
+allenai/OLMoE-1B-7B-0125,allenai/OLMoE-1B-7B-0125-SFT,allenai/OLMoE-1B-7B-0125-DPO,dpo,3,0.0048144,0.00846494,0.568746,3,0.0115776,0.01276517,0.906968,-0.338222
+allenai/Olmo-3-1125-32B,allenai/Olmo-3.1-32B-Instruct-SFT,allenai/Olmo-3.1-32B-Instruct-DPO,dpo,3,0.01100843,0.01152473,0.9552,3,0.00630686,0.0059424,1.061332,-0.106132
+internlm/internlm2-base-7b,internlm/internlm2-chat-7b-sft,internlm/internlm2-chat-7b,rlhf,4,0.01340306,0.01331184,1.006852,4,0.00378392,0.00289154,1.308617,-0.301765
+llm-jp/llm-jp-3-7.2b,llm-jp/llm-jp-3-7.2b-instruct2,llm-jp/llm-jp-3-7.2b-instruct3,dpo,3,0.03753218,0.04439601,0.845395,3,0.01215618,0.01219102,0.997142,-0.151747
+m-a-p/CT-LLM-Base,m-a-p/CT-LLM-SFT,m-a-p/CT-LLM-SFT-DPO,dpo,4,0.00717269,0.0084032,0.853567,4,0.01693048,0.0177636,0.9531,-0.099533
+m-a-p/neo_7b,m-a-p/neo_7b_sft_v0.1,m-a-p/neo_7b_instruct_v0.1,dpo,3,0.01017786,0.01231367,0.82655,3,0.00276347,0.00389168,0.710098,0.116452

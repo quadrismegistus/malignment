@@ -81,3 +81,17 @@ The first implementation read it as the per-prompt MEAN word count, which turns 
 Additionally reported, because it is the quantity that actually governs precision: **`n_prompts_<cat>`**, the number of panel prompts where the category is present on BOTH arms. Observed range 195–487 of 2,190. No threshold is attached to it; it is reported so a reader can see the denominator rather than infer it.
 
 **No hypothesis, direction, population, unit or panel changes.**
+
+### A2 — 2026-08-16. A defect in L1's implementation, and what I will conclude either way. Written BEFORE recomputing.
+
+**The defect.** `share_sexual` and `share_violent` were each computed on the prompts where that category appears on both arms — and those are different prompt sets: sexual 195–487 prompts per chain, violent 963–1,111. The paired difference therefore contrasts two quantities measured on 3–5× different prompt populations. The "same prompts on both arms" rule was applied within each category and not across them. **This is a defect, not a choice among defensible specifications**, and the corrected form is the only one consistent with the discipline the registration already asserts.
+
+**The correction.** Restrict both categories to the intersection: prompts where BOTH a sexual and a violent lexicon word are present on BOTH arms. The contrast then holds the prompt constant, which is what L2 was written to exploit and what L1 should have done from the start.
+
+**Pre-committed, before the number exists:**
+
+- If the corrected test is **positive and clears at base level**, the withdrawal recorded earlier today is **REVERSED**, and the first L1 run is reported as *defective*, not as a first null. A defective test is not evidence; two nulls of which one is broken are one null. Correcting a defect is not the "third instrument" the stopping rule forbids — that rule bars a NEW instrument after a valid null, and an invalid test does not spend it.
+- If the corrected test is **null**, the withdrawal **stands and is strengthened**, because it then survives the strongest available form of the test.
+- Either way **power is reported**: a sign test at n=16 requires 13/16 to reach p<0.05, so 62.5% of bases positive is indistinguishable from null by construction. **L1 cannot detect a real-but-heterogeneous effect**, and that is a property of the registered test, not of the data. It is stated here whichever way the number falls.
+
+**Also reported, and NOT registered, and therefore not decisive:** a Wilcoxon signed-rank on the same differences. The sign test discards magnitude and is the blunter instrument; quoting a more powerful unregistered test as if it decided anything would be the specification search this document exists to prevent. It is reported as supplementary because withholding a more sensitive reading of a null is its own kind of dishonesty.

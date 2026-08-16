@@ -1,7 +1,7 @@
 {
  "lexicon_sha": "d542e7e2bb86bd00",
  "field": "sexviolence",
- "panel_prompts": 2190,
+ "panel_prompts": 2189,
  "panel_models": 154,
  "n_chains": 18,
  "n_distinct_bases": 16,
@@ -118,6 +118,5 @@
  "categories": [
   "sexual",
   "violent"
- ],
- "min_words_per_category": 20
+ ]
 }

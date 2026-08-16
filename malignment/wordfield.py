@@ -295,3 +295,72 @@ def paired_test(rows, a, b, key="share"):
         "base_p": sign_p(sum(1 for x in db if x > 0), len(db)),
         "ties_dropped": len(pairs) - len(d),
     }
+
+
+def paired_stats(diffs, seed=20260816, n_boot=20000):
+    """Full description of a set of paired differences, not just a p-value.
+
+    A sign test at n=16 needs 13/16 to reach p<0.05, so it cannot distinguish
+    "no effect" from "an effect this instrument cannot see". Reporting p alone
+    is how a null gets called a finding. **A null is quotable only as a bound**,
+    so the interval is returned alongside, and the magnitude-using tests too --
+    withholding a more sensitive reading of a null is its own dishonesty.
+
+    `sign_p` is the registered test wherever a registration says so; `t_p` and
+    `wilcoxon_p` are supplementary and must be labelled as such at the call site.
+    """
+    import random
+    import statistics
+    from math import comb
+
+    d = [x for x in diffs if x != 0]
+    n = len(d)
+    if n < 2:
+        return None
+    pos = sum(1 for x in d if x > 0)
+    sign_p = min(1.0, 2 * sum(comb(n, k) for k in range(pos, n + 1)) / 2 ** n)
+    rng = random.Random(seed)
+    bs = sorted(statistics.mean(rng.choices(d, k=n)) for _ in range(n_boot))
+    out = {"n": n, "ties_dropped": len(diffs) - n, "pos": pos,
+           "mean": statistics.mean(d), "sd": statistics.stdev(d),
+           "sign_p": sign_p,
+           "ci_lo": bs[int(0.025 * n_boot)], "ci_hi": bs[int(0.975 * n_boot)]}
+    try:
+        from scipy import stats
+        out["t_p"] = float(stats.ttest_1samp(d, 0).pvalue)
+        out["wilcoxon_p"] = float(stats.wilcoxon(d).pvalue)
+    except Exception:                                    # noqa: BLE001
+        out["t_p"] = out["wilcoxon_p"] = None
+    return out
+
+
+def sign_mde(diffs, seed=20260816, power=0.80, n_sim=2000, grid=None):
+    """Smallest uniform shift the SIGN TEST detects at `power`, by simulation.
+
+    Registered as a test, this is what the test can see. Quoting a null without
+    it leaves "we found nothing" and "we could not have found anything"
+    indistinguishable, which is the failure this function exists to prevent.
+    """
+    import random
+    import statistics
+    from math import comb
+
+    d = [x for x in diffs if x != 0]
+    n = len(d)
+    if n < 2:
+        return None
+    rng = random.Random(seed)
+
+    def sp(pos, k):
+        return min(1.0, 2 * sum(comb(k, i) for i in range(pos, k + 1)) / 2 ** k)
+
+    for shift in (grid or [x / 100 for x in range(0, 101, 5)]):
+        hits = 0
+        for _ in range(n_sim):
+            s = [x + shift for x in rng.choices(d, k=n)]
+            s = [x for x in s if x != 0]
+            if s and sp(sum(1 for x in s if x > 0), len(s)) < 0.05:
+                hits += 1
+        if hits / n_sim >= power:
+            return shift
+    return None
