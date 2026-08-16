@@ -193,13 +193,49 @@
 		return [...words].sort((a, b) => (axis![b.word] ?? -9) - (axis![a.word] ?? -9));
 	});
 
+	//: ── THE SAVED ITEM CARRIES WHAT SCREENED IT (malign, [6361]).
+	//:
+	//: The first version emitted item_id, prompt, naughty, nice — and **no
+	//: models at all**. So an item recorded which words an author tagged and not
+	//: which checkpoints produced the distribution they were looking at. Two
+	//: items authored against different pairs were indistinguishable afterwards,
+	//: which is the provenance defect this campaign keeps paying for, and it is
+	//: my own rule from [6358]: *a default pool is a population choice, and one
+	//: made in a server is one nobody reports.*
+	//:
+	//: **READ FROM `resp.models`, NEVER FROM THE `model` INPUT.** The input is
+	//: editable after an expansion, so an author who retypes it before copying
+	//: would stamp the item with a pair that did not screen it. The response is
+	//: the record of what actually ran. Same reason the rule_version and dict_sha
+	//: come off the payload rather than being written as constants here.
+	//:
+	//: `displayed: probability` is stated rather than implied, because [6361]
+	//: makes the screening ARM part of the item: an item screened on summed
+	//: probabilities with movement never shown is a different instrument from one
+	//: screened while looking at movement, and two provenances in one column is
+	//: exactly the thing being guarded against.
 	let yaml = $derived.by(() => {
-		if (!naughty.size && !nice.size) return '';
+		if (!resp || (!naughty.size && !nice.size)) return '';
+		//: HIGHEST MASS FIRST, not tag order — the id must be a property of the
+		//: distribution, not of the order the author happened to click.
 		const byMass = (set: Set<string>) =>
 			words.filter((w) => set.has(w.word)).sort((a, b) => b.p - a.p).map((w) => w.word);
+		const list = (xs: string[]) => `[${xs.join(', ')}]`;
 		return (
-			`- item_id: CHANGEME\n  prompt: ${JSON.stringify(prompt)}\n` +
-			`  naughty: ${byMass(naughty).join(', ')}\n  nice: ${byMass(nice).join(', ')}\n`
+			`- item_id: CHANGEME\n` +
+			`  prompt: ${JSON.stringify(resp.prompt)}\n` +
+			`  naughty: ${list(byMass(naughty))}\n` +
+			`  nice: ${list(byMass(nice))}\n` +
+			`  writer: slot-explorer\n` +
+			`  screened_by:\n` +
+			`    models: ${list(resp.models)}\n` +
+			`    pooled: ${resp.n_models > 1}\n` +
+			`    displayed: probability          # movement NEVER shown at authoring time\n` +
+			`    rule_version: ${resp.rule_version}\n` +
+			`    dict_sha: ${resp.dict_sha}\n` +
+			`    theta: ${resp.theta}\n` +
+			`    n_words: ${resp.n_words}\n` +
+			`    top_k: ${resp.shown}\n`
 		);
 	});
 
@@ -298,12 +334,26 @@
 		  blind to source" — it may not say "declared on the base". That sentence is
 		  only true if the reader was told, so it is here rather than in a docstring.
 		-->
-		{#if resp.n_models > 1}
-			<p class="declare">
-				pooled across {resp.n_models} checkpoints, blind to source — a word's origin is not
-				returned, so poles are declared on the POOLED vocabulary and not on the base
-			</p>
-		{/if}
+		<!--
+		  THE SCREENING PAIR IS NAMED ON THE PANEL, ALWAYS (malign, [6361]: "the
+		  pair must be named in the UI and written onto the saved item, never
+		  implied").
+
+		  It reads `resp.models`, not the input above it, so what is shown is what
+		  RAN. An author who edits the model field without re-expanding will see
+		  the field and this line disagree, which is correct: the field is an
+		  intention, this is a record.
+
+		  NO LONGER GATED ON `n_models > 1`. The single-model case is exactly where
+		  a reader is most likely to assume they already know which checkpoint it
+		  was, so it is the case that most needs saying.
+		-->
+		<p class="declare">
+			screened on <strong>{resp.models.join(' + ')}</strong>{#if resp.n_models > 1}, pooled and
+				blind to source &mdash; a word's origin is not returned, so poles are declared on the
+				POOLED vocabulary and not on the base{/if} &mdash; probabilities only, movement is not
+			shown at authoring time
+		</p>
 
 		<div class="branches">
 			<div class="branch naughty-b" title="Summed word probability over every word tagged NAUGHTY.">
