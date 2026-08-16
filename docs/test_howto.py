@@ -154,6 +154,42 @@ def main():
     from malignment.roster import _sizing
     check("unknown params size to (None, None)", _sizing(None), (None, None))
 
+    print("\nimport contract")
+    #: **README PROMISES "three lines suffice to ANALYSE" AND checkpoint.py
+    #: PROMISES "no torch import".** Both were false for months: __init__ pulls
+    #: Checkpoint eagerly, checkpoint pulled twp, twp imports transformers. Run
+    #: in a SUBPROCESS on this same interpreter and assert transformers never
+    #: enters sys.modules -- that works whether or not it is installed, which a
+    #: try/except ImportError here would not.
+    import subprocess
+    for mod in ("ch", "corpus", "roster", "checkpoint"):
+        r = subprocess.run(
+            [sys.executable, "-c",
+             "import sys; sys.path.insert(0, %r); import malignment.%s as _; "
+             "print('torch' in sys.modules or 'transformers' in sys.modules)"
+             % (ROOT, mod)],
+            capture_output=True, text=True)
+        check("malignment.%s pulls no torch/transformers" % mod,
+              r.stdout.strip(), "False")
+
+    print("\nclickhouse guard")
+    #: THE GUARD THIS COMMENT ONCE ONLY CLAIMED TO HAVE. Each case is the case
+    #: where it fires, or the alias case where it must NOT: a guard that
+    #: rejects `t.column` gets switched off within a day.
+    from malignment import ch as _ch
+    def refused(sql):
+        try:
+            _ch._guard(sql.replace("{db}", _ch.DB))
+            return False
+        except _ch.ClickHouseError:
+            return True
+    check("passes an ordinary query", refused("SELECT 1 FROM {db}.movement"), False)
+    check("passes system introspection", refused("SELECT * FROM system.tables"), False)
+    check("passes a TABLE ALIAS", refused("SELECT t.base FROM {db}.pairs AS t"), False)
+    check("REFUSES the 409GiB neighbour", refused("SELECT count() FROM lltk.texts"), True)
+    check("REFUSES the archive db", refused("SELECT 1 FROM malign_logits.twp_cells"), True)
+    check("REFUSES a DROP on a neighbour", refused("DROP TABLE lltk.texts"), True)
+
     print("\nroster integrity")
     check("models.yaml parses strictly", roster.check_authored(), [])
 

@@ -1025,8 +1025,28 @@ def _measured_params():
     #: needs 2x80. It planned cleanly and would have OOMed after paying for a
     #: 140 GB download. Nothing failed; the number was just quietly the
     #: smallest one available.
-    w = ((m.get("sections") or {}).get("weights") or {}).get("models") or {}
-    return {k: v.get("params_b") for k, v in w.items() if v.get("params_b")}
+    #:
+    #: **EVERY SECTION THAT CARRIES params_b IS READ, NOT A NAMED ONE.** The
+    #: safetensors route cannot measure a .bin repo at all -- it recorded 19
+    #: models as "no safetensors metadata published" -- so a second pass by a
+    #: different route is not an exception, it is the normal shape here. Naming
+    #: one section would have meant that pass landing and changing nothing,
+    #: which is the quietest possible way to waste a measurement.
+    #:
+    #: On conflict the LATER `measured_at` wins. A checkpoint's parameters are
+    #: true of it AS IT STOOD -- `Aquila2-7B`'s `main` was replaced with a
+    #: re-tokenised model once already -- so "most recently observed" is the
+    #: only defensible rule, and it needs the stamp the file already requires.
+    out, stamp = {}, {}
+    for name, sec in (m.get("sections") or {}).items():
+        at = sec.get("measured_at") or ""
+        for k, v in (sec.get("models") or {}).items():
+            p = (v or {}).get("params_b") if isinstance(v, dict) else None
+            if not p:
+                continue
+            if k not in out or at >= stamp[k]:
+                out[k], stamp[k] = p, at
+    return out
 
 
 def _engine_ruling(model, engine, obs):

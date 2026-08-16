@@ -34,13 +34,29 @@ chance per site at `[-1]`.
 import json
 import os
 
-from . import twp as T
+#: **NO MODULE-LEVEL `from . import twp`.** This file's docstring promises "no
+#: torch import", README.md promises "three lines suffice to ANALYSE", and both
+#: were FALSE: `__init__.py:11` imports `Checkpoint` eagerly, this line imported
+#: `twp`, and `twp.py:52` imports `transformers`. So `import malignment.roster`
+#: on a machine without transformers raised ModuleNotFoundError, and all four
+#: analysis entry points -- ch, corpus, roster, checkpoint -- failed identically.
+#: dario reproduced it on 2026-08-16 while building a server that only reads.
+#:
+#: The symptom was visible on EVERY invocation as a FutureWarning from
+#: twp.py:405 and was suppressed rather than asked about, including by the seat
+#: that owns this file.
+#:
+#: `T` is now imported inside the four methods that use it -- which is the
+#: idiom this file ALREADY used for `roster` and `ch` at seven other call
+#: sites. Verified safe: no use of `T` at class-definition time (lines 45, 46,
+#: 81, 234, 250, all method bodies).
 
 
 class Checkpoint:
     """One checkpoint, addressable as `repo` or `repo@revision`."""
 
     def __init__(self, model_id, out=None):
+        from . import twp as T
         self.model_id = model_id
         self.repo = T._repo_of(model_id)
         self.revision = T._revision_of(model_id) or self._declared_revision(model_id)
@@ -75,6 +91,7 @@ class Checkpoint:
 
     def check_revision(self):
         """Raise if the id's `@revision` contradicts the roster's pin."""
+        from . import twp as T
         from . import roster
         node = (roster.load().get("nodes") or {}).get(self.model_id) or {}
         declared = str(node.get("revision") or "") or None
@@ -229,6 +246,7 @@ class Checkpoint:
         automatically, and the old rows remain for comparison. A defect you
         cannot express beats one you remember to check.
         """
+        from . import twp as T
         from .ingest import RULE_VERSION
         return {"model": self.model_id, "prompt": prompt,
                 "rule_version": RULE_VERSION, "dict_sha": T.dict_sha()}
@@ -246,6 +264,7 @@ class Checkpoint:
         prompt instead of finding it done -- the failure that would have left
         internlm2's 402 recovered prompts unmeasured.
         """
+        from . import twp as T
         from .ingest import RULE_VERSION
         want = (RULE_VERSION, T.dict_sha())
         out = set()
@@ -300,6 +319,25 @@ class Checkpoint:
                     "here could pair. Declare an edge first, or pass prompts "
                     "explicitly." % self.model_id)
         return TWPRunner(self).run(prompts, **kw)
+
+    def load(self, **kw):
+        """Put this checkpoint on a device. Returns a `runners.Loaded`.
+
+        The same handle as `run_twp`, for the other verb: `run_twp` measures and
+        writes; `load` hands back the loaded model so a caller can measure
+        repeatedly without paying the load again. `malignment.serve` is why it
+        exists -- an interactive `/slot` query is ~2.6 s against ~8 s cold, and
+        only if something holds the model between requests.
+
+        **The torch import stays inside the method**, exactly as `run_twp` does
+        it, so this file keeps the property its docstring claims: importing
+        `Checkpoint` imports no torch.
+
+        **THE CALLER OWNS THE UNLOAD**, which is the whole point. See
+        `runners.load_for_twp`.
+        """
+        from .runners import load_for_twp
+        return load_for_twp(self, **kw)
 
     def status(self):
         """Everything cheap, in one dict. For a human deciding what to run."""

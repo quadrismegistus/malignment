@@ -57,9 +57,64 @@ import subprocess
 CH = os.environ.get("MALIGN_CH_BIN", "/opt/homebrew/bin/clickhouse")
 #: THE NEW DATABASE. `malign_logits` belongs to the archive repo and is still
 #: read by it. This machine also runs `lltk` at 409 GiB, `abstraction` and
-#: `llmtasks` -- which is why `_guard` refuses any statement not naming the
-#: target database rather than warning about it.
+#: `llmtasks` on the same daemon, so a statement naming one of them reaches it.
+#:
+#: **THIS COMMENT DESCRIBED A `_guard` THAT DID NOT EXIST.** dario found it on
+#: 2026-08-16 while building a server that sends SQL to this daemon on behalf of
+#: a browser: `grep _guard malignment/*.py` returned exactly one line -- this
+#: comment. The wording is what made it invisible. It did not say "we should
+#: guard"; it stated the guard existed AND explained a design choice ("refuses
+#: ... rather than warning about it"), and a tag that argues for its own
+#: implementation reads as settled. Nobody tests a decision.
+#:
+#: AND THE DESIGN IT CLAIMED IS NOT IMPLEMENTABLE AS WRITTEN. "Refuses any
+#: statement not naming the target database" would refuse `inventory()`, which
+#: must read `system.tables`. So the guard below enforces the enforceable
+#: version: **no statement may name a database that is neither ours nor
+#: introspection.**
 DB = os.environ.get("MALIGNMENT_CH_DB", "malignment")
+
+#: Introspection databases a statement may legitimately name besides ours.
+ALLOWED_DBS = frozenset(("system", "information_schema", "INFORMATION_SCHEMA"))
+
+
+def _databases():
+    """Every database on this daemon. Cached; bypasses the guard by construction.
+
+    **THE GUARD CHECKS AGAINST REAL DATABASE NAMES, NOT A REGEX FOR `x.y`.**
+    A pattern cannot tell `lltk.corpus` from `t.model` where `t` is a table
+    alias, and a guard that rejects ordinary aliased SQL gets switched off
+    within a day. Asking the server which names are actually databases makes
+    the test exact: an alias is not a database.
+    """
+    global _DBS
+    if _DBS is None:
+        r = subprocess.run([CH, "client", "--query", "SHOW DATABASES"],
+                           capture_output=True, text=True)
+        _DBS = frozenset(x.strip() for x in r.stdout.splitlines() if x.strip())
+    return _DBS
+
+
+_DBS = None
+_QUALIFIER = re.compile(r"(?<![\w.])([A-Za-z_][A-Za-z0-9_]*)\s*\.", re.M)
+
+
+def _guard(sql):
+    """Raise if `sql` names a database other than ours or an introspection one.
+
+    Applies to every path out of this module, `execute` and `insert` included --
+    a DROP is exactly the statement you want refused against a 409 GiB
+    neighbour.
+    """
+    named = {m.group(1) for m in _QUALIFIER.finditer(sql)}
+    foreign = sorted((named & _databases()) - {DB} - ALLOWED_DBS)
+    if foreign:
+        raise ClickHouseError(
+            "REFUSED: statement names database(s) %s. This module talks to %r "
+            "only. `lltk` alone is 409 GiB on this daemon; if you mean to read "
+            "another database, do it deliberately and not through malignment.ch."
+            % (", ".join(foreign), DB), sql)
+    return sql
 
 #: A FORMAT CLAUSE IS A TRAILING KEYWORD, NOT A SUBSTRING. The first version
 #: of this module tested `"FORMAT" not in sql.upper()`, which matches
@@ -97,8 +152,12 @@ class ClickHouseError(RuntimeError):
 
 
 def _run(sql, stdin=None, limit_bytes=DEFAULT_LIMIT_BYTES):
-    sql = sql.replace("{db}", DB)
-    r = subprocess.run([CH, "client", "--query", sql],
+    sql = _guard(sql.replace("{db}", DB))
+    #: `--database` so an UNQUALIFIED name resolves to ours rather than to
+    #: `default`. Without it the guard passes `SELECT * FROM movement` -- which
+    #: names no database and so cannot be foreign -- and the daemon then looks
+    #: it up somewhere we did not choose.
+    r = subprocess.run([CH, "client", "--database", DB, "--query", sql],
                        input=stdin, capture_output=True, text=True)
     if r.returncode:
         raise ClickHouseError(r.stderr, sql)
@@ -161,8 +220,12 @@ def scalar(sql, default=None, **kw):
 
 
 def _run_bytes(sql, limit_bytes=DEFAULT_LIMIT_BYTES):
-    sql = sql.replace("{db}", DB)
-    r = subprocess.run([CH, "client", "--query", sql], capture_output=True)
+    #: **THE SECOND PATH OUT OF THIS MODULE.** `parquet()` and `df()` come
+    #: through here, not `_run`, so guarding only `_run` would have left a
+    #: complete bypass -- the same shape as the archive's second loader.
+    sql = _guard(sql.replace("{db}", DB))
+    r = subprocess.run([CH, "client", "--database", DB, "--query", sql],
+                       capture_output=True)
     if r.returncode:
         raise ClickHouseError(r.stderr.decode("utf-8", "replace"), sql)
     if limit_bytes is not None and len(r.stdout) > limit_bytes:

@@ -77,6 +77,7 @@ on twp"*, and the CH ingest stores neither. 30 GB per fleet that nothing reads i
 not a default.
 """
 import argparse
+import collections
 import json
 import os
 import socket
@@ -203,6 +204,116 @@ def _is_rate_limit(msg):
             or "rate limit" in msg.lower())
 
 
+#: What a loaded checkpoint IS, for `twp.expand`: exactly its argument tuple
+#: plus the two stamp fields. A dict would let a caller reach for a key that is
+#: not there and get `None` into `expand`, where a None `bmask` is not an error,
+#: it is a different word-boundary rule.
+Loaded = collections.namedtuple(
+    "Loaded", "model tok dev bmask cjk bos_policy loader_id")
+
+
+def load_for_twp(ck, dict_path=None, purge=False, say=None):
+    """Put `ck` on a device and build its masks. The inputs `twp.expand` needs.
+
+    **EXTRACTED FROM `TWPRunner.run` ON 2026-08-16, LOGIC UNEDITED**, because a
+    second consumer arrived: `malignment.serve` answers `/slot` from a resident
+    model. The archive did this the other way -- `server.py._get_slot_model`
+    was a SECOND load path, and it drifted: it never grew the MPT override, the
+    rate-limit retry, or the mask guard, so the app could load a model the
+    runner refuses and measure it with a boundary rule the runner would not
+    accept. **A second loader is a second instrument**, and this repo's whole
+    premise is that the second copy is the one without the docstring.
+
+    Nothing here is new. If this function and `run()` ever disagree about how a
+    model is loaded, that is the defect, not a configuration.
+
+    **THE CALLER OWNS THE UNLOAD.** `T.free()` and `T.purge_model` are not
+    called here on success, because the point of loading separately is to HOLD
+    the model across calls. On failure they are, since there is nothing to hold.
+    """
+    import torch
+    from transformers import AutoModelForCausalLM
+
+    say = say or (lambda m: None)
+    dev = T.pick_device()
+    trie = T.load_prefix_trie(dict_path or T.DICT)
+    say("  device %s | rule_version %d | dict_sha %s"
+        % (dev, T.RULE_VERSION, T.dict_sha()))
+
+    model = tok = loader_id = None
+    for attempt in range(MAX_RL_RETRIES + 1):
+        try:
+            #: CONFIG FIRST. The MPT override below refuses remote code,
+            #: and the tokenizer load must be covered by it -- it runs first
+            #: and used to trust remote code unconditionally.
+            mtype, has_remote = _config_facts(ck.repo, ck.revision)
+            tok, loader_id = T.load_tokenizer(
+                ck.repo, revision=ck.revision,
+                trust_remote_code=(mtype != "mpt"))
+            kw = {"dtype": torch.float16, "trust_remote_code": bool(has_remote)}
+            if has_remote:
+                say("  config declares auto_map -> remote code ALLOWED")
+            #: MPT is the exception to the exception: it DECLARES auto_map,
+            #: and that code is dead on transformers 5.x. Native impl instead.
+            if mtype == "mpt":
+                kw = {"dtype": torch.float16, "trust_remote_code": False,
+                      "config": _mpt_config(ck.repo, ck.revision)}
+                say("  LOADER OVERRIDE mpt: native impl, remote code REFUSED"
+                    " (its `_expand_mask` import is dead on transformers 5.x)")
+            if ck.revision:
+                kw["revision"] = ck.revision
+                say("  PINNED REVISION %s (main is the wrong model here)"
+                    % ck.revision)
+            if torch.cuda.is_available() and torch.cuda.device_count() > 1:
+                say("  device_map=auto across %d GPUs" % torch.cuda.device_count())
+                model = AutoModelForCausalLM.from_pretrained(
+                    ck.repo, device_map="auto", **kw).eval()
+            else:
+                model = AutoModelForCausalLM.from_pretrained(
+                    ck.repo, **kw).to(dev).eval()
+            break
+        except Exception as e:
+            msg = str(e)
+            if _is_rate_limit(msg) and attempt < MAX_RL_RETRIES:
+                wait = min(300, 30 * 2 ** attempt)
+                say("  HF RATE LIMIT (attempt %d/%d) -- backing off %ds, then "
+                    "RETRYING. A 429 is a race, not a model defect."
+                    % (attempt + 1, MAX_RL_RETRIES, wait))
+                T.free()
+                time.sleep(wait)
+                continue
+            T.free()
+            T.purge_model(ck.model_id, purge)
+            #: RAISED, not returned as an empty success. A load failure that
+            #: returns {"written": 0} is indistinguishable from a checkpoint
+            #: with nothing left to do -- the ambiguity that printed ALL
+            #: MODELS COMPLETE over a dead fleet.
+            raise RuntimeError("LOAD FAILED for %s: %s%s" % (
+                ck.model_id, msg[:160],
+                "  <- THIS WAS A RATE LIMIT, not a model defect"
+                if _is_rate_limit(msg) else ""))
+
+    T.reset_batch()                 # a new checkpoint gets a fresh ceiling
+    try:
+        bmask = T.boundary_mask(tok, model.config.vocab_size)
+        cjk = None
+        if trie is not None:
+            cids, cstrs, lids, pids = T.cjk_vocab(tok, model.config.vocab_size)
+            if len(cids):
+                cjk = (trie, cids, cstrs, lids, pids)
+                say("  cjk: %s tokens" % format(len(cids), ","))
+    except Exception as e:
+        T.free()
+        raise RuntimeError("MASK FAILED for %s: %s: %s"
+                           % (ck.model_id, type(e).__name__, str(e)[:120]))
+
+    pol = T.bos_policy_for(ck.model_id)
+    if pol != "inherited":
+        say("  bos_policy: %s" % pol)
+
+    return Loaded(model, tok, dev, bmask, cjk, pol, loader_id)
+
+
 class TWPRunner:
     """Measures one `Checkpoint` and appends jsonl. Holds no state of its own."""
 
@@ -228,81 +339,10 @@ class TWPRunner:
             return {"model": ck.model_id, "producer": PRODUCER, "written": 0,
                     "skipped": 0, "already": len(have), "path": ck.stash().path}
 
-        dev = T.pick_device()
-        trie = T.load_prefix_trie(dict_path or T.DICT)
-        say("  device %s | rule_version %d | dict_sha %s"
-            % (dev, T.RULE_VERSION, T.dict_sha()))
-
-        model = tok = loader_id = None
-        for attempt in range(MAX_RL_RETRIES + 1):
-            try:
-                #: CONFIG FIRST. The MPT override below refuses remote code,
-                #: and the tokenizer load must be covered by it -- it runs first
-                #: and used to trust remote code unconditionally.
-                mtype, has_remote = _config_facts(ck.repo, ck.revision)
-                tok, loader_id = T.load_tokenizer(
-                    ck.repo, revision=ck.revision,
-                    trust_remote_code=(mtype != "mpt"))
-                kw = {"dtype": torch.float16, "trust_remote_code": bool(has_remote)}
-                if has_remote:
-                    say("  config declares auto_map -> remote code ALLOWED")
-                #: MPT is the exception to the exception: it DECLARES auto_map,
-                #: and that code is dead on transformers 5.x. Native impl instead.
-                if mtype == "mpt":
-                    kw = {"dtype": torch.float16, "trust_remote_code": False,
-                          "config": _mpt_config(ck.repo, ck.revision)}
-                    say("  LOADER OVERRIDE mpt: native impl, remote code REFUSED"
-                        " (its `_expand_mask` import is dead on transformers 5.x)")
-                if ck.revision:
-                    kw["revision"] = ck.revision
-                    say("  PINNED REVISION %s (main is the wrong model here)"
-                        % ck.revision)
-                if torch.cuda.is_available() and torch.cuda.device_count() > 1:
-                    say("  device_map=auto across %d GPUs" % torch.cuda.device_count())
-                    model = AutoModelForCausalLM.from_pretrained(
-                        ck.repo, device_map="auto", **kw).eval()
-                else:
-                    model = AutoModelForCausalLM.from_pretrained(
-                        ck.repo, **kw).to(dev).eval()
-                break
-            except Exception as e:
-                msg = str(e)
-                if _is_rate_limit(msg) and attempt < MAX_RL_RETRIES:
-                    wait = min(300, 30 * 2 ** attempt)
-                    say("  HF RATE LIMIT (attempt %d/%d) -- backing off %ds, then "
-                        "RETRYING. A 429 is a race, not a model defect."
-                        % (attempt + 1, MAX_RL_RETRIES, wait))
-                    T.free()
-                    time.sleep(wait)
-                    continue
-                T.free()
-                T.purge_model(ck.model_id, purge)
-                #: RAISED, not returned as an empty success. A load failure that
-                #: returns {"written": 0} is indistinguishable from a checkpoint
-                #: with nothing left to do -- the ambiguity that printed ALL
-                #: MODELS COMPLETE over a dead fleet.
-                raise RuntimeError("LOAD FAILED for %s: %s%s" % (
-                    ck.model_id, msg[:160],
-                    "  <- THIS WAS A RATE LIMIT, not a model defect"
-                    if _is_rate_limit(msg) else ""))
-
-        T.reset_batch()                 # a new checkpoint gets a fresh ceiling
-        try:
-            bmask = T.boundary_mask(tok, model.config.vocab_size)
-            cjk = None
-            if trie is not None:
-                cids, cstrs, lids, pids = T.cjk_vocab(tok, model.config.vocab_size)
-                if len(cids):
-                    cjk = (trie, cids, cstrs, lids, pids)
-                    say("  cjk: %s tokens" % format(len(cids), ","))
-        except Exception as e:
-            T.free()
-            raise RuntimeError("MASK FAILED for %s: %s: %s"
-                               % (ck.model_id, type(e).__name__, str(e)[:120]))
-
-        pol = T.bos_policy_for(ck.model_id)
-        if pol != "inherited":
-            say("  bos_policy: %s" % pol)
+        #: ONE LOADER, SHARED WITH `malignment.serve`. See `load_for_twp`.
+        ld = load_for_twp(ck, dict_path=dict_path, purge=purge, say=say)
+        model, tok, dev = ld.model, ld.tok, ld.dev
+        bmask, cjk, pol, loader_id = ld.bmask, ld.cjk, ld.bos_policy, ld.loader_id
 
         n_ok = n_skip = 0
         t0 = time.time()
