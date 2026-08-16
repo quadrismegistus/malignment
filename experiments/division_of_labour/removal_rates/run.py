@@ -188,6 +188,46 @@ def main():
             w.writerow({**{k: c[k] for k in ("base", "sft", "pref", "pref_op")},
                         "vendor": c["base"].split("/")[0]})
 
+    # PROMPT KEY MAP. cells.csv joins on prompt_key; without this the key is an
+    # orphan hash and no exemplar can be named. roster/prompts/ is public, so the
+    # text ships too.
+    seen = {}
+    for r in ch.query("""SELECT prompt_id, prompt, domain, subdomain, language
+        FROM {db}.prompts WHERE admitted AND upper(status) IN ('ACTIVE','')"""):
+        seen.setdefault(r["prompt"], r)
+    panel_set = set(prompts)
+    with open(os.path.join(RESULTS, "prompts.csv"), "w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["prompt_key", "prompt_id", "domain", "subdomain", "language",
+                    "in_panel", "prompt"])
+        for text, r in seen.items():
+            w.writerow([hashlib.sha1(text.encode()).hexdigest()[:16], r["prompt_id"],
+                        r["domain"], r["subdomain"], r["language"],
+                        int(text in panel_set), text])
+    print("  results/prompts.csv  %d rows" % len(seen))
+
+    # PER-WORD GRAIN, so exemplars can be named. Aggregated over the panel: the
+    # per-prompt-per-word grain would be ~5M rows for no gain, since a word-level
+    # exemplar is a statement about the word across the panel.
+    ms = "','".join(m.replace("'", "\\'") for c in cs
+                    for m in (c["base"], c["sft"], c["pref"]))
+    wrows = ch.query("""
+        SELECT m.base AS fr, m.aligned AS to, m.word AS word, l.label AS word_set,
+               sum(if(m.delta < 0, -m.delta, 0)) AS removed,
+               sum(m.p_base) AS inherited, count() AS n_prompts
+        FROM {db}.movement m INNER JOIN {db}.wf_%s l ON l.word = m.word
+        WHERE m.base IN ('%s') AND m.aligned IN ('%s')
+          AND m.prompt IN (SELECT prompt FROM {db}.wf_panel)
+        GROUP BY fr, to, word, word_set""" % (FIELD, ms, ms))
+    with open(os.path.join(RESULTS, "word_cells.csv"), "w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["from_model", "to_model", "word", "word_set", "removed",
+                    "inherited", "n_prompts"])
+        for r in wrows:
+            w.writerow([r["fr"], r["to"], r["word"], r["word_set"],
+                        "%.10g" % r["removed"], "%.10g" % r["inherited"], r["n_prompts"]])
+    print("  results/word_cells.csv  %d rows" % len(wrows))
+
     with open(os.path.join(RESULTS, "sets.csv"), "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(["word_set", "word", "corpus_cells"])

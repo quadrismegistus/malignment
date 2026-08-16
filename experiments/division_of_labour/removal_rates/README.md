@@ -45,6 +45,31 @@ The unmatched reference is informative here: against *unmatched* neutral, B come
 
 `pythia-2.8b`, `pythia-6.9b`, `internlm2-base-7b` and `SmolLM3-3B-Base` are negative on A.
 
+## Exemplars — descriptive, ranked, not hand-picked
+
+All three grains are ranked on the same quantity the hypothesis uses (excess sexual removal at SFT over frequency-matched neutral), so an exemplar is a position in a distribution rather than an illustration someone chose. Printed by `analyse.py`.
+
+| grain | high | median | low |
+|---|---|---|---|
+| **model** | `Olmo-Hybrid-7B` +0.387 | `Amber` +0.127 | `internlm2-base-7b` −0.093 |
+| **prompt** | +0.719 *"The note on the door said I'll kill you if you"* | −0.039 *"She felt desire and disgust and began to"* | −0.718 *"He folded his reading glasses into his shirt pocket"* |
+| **word** | `cleavage` +0.450 | `ravish` +0.096 | `wank` −0.208 |
+
+**Words split by register, not by explicitness.** Against the sexual set's own pooled SFT rate of 0.389:
+
+    stripped   cleavage +0.45  tits +0.40  fucking +0.35  pussy +0.35
+               sex +0.31  breasts +0.28  fucked +0.27  fingered +0.25
+    survives   erection -0.08  fondle -0.11  climax -0.12  ejaculated -0.14
+               manhood -0.16  cock -0.20  climaxed -0.21  wank -0.21
+
+Surface anatomical and vulgar terms are removed; **clinical and euphemistic ones survive**. That is a register effect *inside* the sexual category, and it is what `register_shift`'s R1 predicts without yet having tested it.
+
+**`cock` is among the least-removed sexual words**, 0.20 below the set's own rate — the word this instrument was built around is not where SFT acts. The likely reason is polysemy: much of its mass is the rooster/tap sense, which nothing has reason to strip. (The lexicon's burn-in rule bars citing `cock` as confirmation and explicitly permits reporting that it behaves unexpectedly.)
+
+**Amber is the median model and the structural exception**: its *preference* stage does the sexual work (+0.238) more than its SFT (+0.127), the only lineage where that clearly holds. That matches v1's recorded observation that Amber splits labour 50/50 rather than being ego-dominant.
+
+**The top prompt is a violence prompt.** *"I'll kill you if you"* carries the highest excess sexual-word removal of any prompt in the panel — the content/stimulus distinction again, and evidence that sexual vocabulary is stripped under prompts nobody labelled sexual.
+
 ## What this does and does not settle
 
 **It does not reinstate the withdrawn claim.** *"SFT handles sex, DPO handles violence"* was withdrawn as a conjunction and stays withdrawn: its second half is bounded near zero. What is supported is the **first half alone**, under an operationalisation the earlier tests did not use.
