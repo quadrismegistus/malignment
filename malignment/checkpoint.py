@@ -43,8 +43,47 @@ class Checkpoint:
     def __init__(self, model_id, out=None):
         self.model_id = model_id
         self.repo = T._repo_of(model_id)
-        self.revision = T._revision_of(model_id)
+        self.revision = T._revision_of(model_id) or self._declared_revision(model_id)
         self._out = out
+
+    @staticmethod
+    def _declared_revision(model_id):
+        """The roster's `revision:` pin, for ids that carry no `@`.
+
+        **TWO MECHANISMS, AND ONLY ONE OF THEM USED TO REACH THIS RUNNER.**
+        `@revision` is an IDENTITY mechanism -- two revisions of one repo need
+        distinct ids or the store cannot tell them apart. `revision:` on the node
+        is the PIN. The archive fleet read the pin (Aquila2-7B is stamped at
+        9c76e143..., SmolLM3-3B-checkpoints at it-SFT, both correct); this class
+        read only the `@`, so a bare id silently loaded `main`.
+
+        For SmolLM3 that fails loudly -- main holds a README and no weights. For
+        `BAAI/Aquila2-7B` it would NOT: its main branch was replaced with a
+        RE-TOKENISED model, vocab 143,973 against the pinned 100,008, so the run
+        succeeds and pairs a 100k-vocab model with a 144k tokenizer. A wrong
+        answer that loads is worse than one that crashes.
+
+        Raises on disagreement rather than picking: an id saying one revision
+        while the roster says another is a question for a person.
+        """
+        try:
+            from . import roster
+            node = (roster.load().get("nodes") or {}).get(model_id) or {}
+        except Exception:                                      # noqa: BLE001
+            return None                                        # roster absent: unchanged
+        return str(node.get("revision") or "") or None
+
+    def check_revision(self):
+        """Raise if the id's `@revision` contradicts the roster's pin."""
+        from . import roster
+        node = (roster.load().get("nodes") or {}).get(self.model_id) or {}
+        declared = str(node.get("revision") or "") or None
+        from_id = T._revision_of(self.model_id)
+        if declared and from_id and declared != from_id:
+            raise ValueError(
+                "%s: id pins %r, roster pins %r. One of them is wrong and this "
+                "is not a runner's decision." % (self.model_id, from_id, declared))
+        return self.revision
 
     def __repr__(self):
         return "Checkpoint(%r)" % self.model_id
