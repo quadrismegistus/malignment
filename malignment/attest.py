@@ -200,15 +200,30 @@ def ingest(paths):
     return doc
 
 
-def unsourced(doc):
-    """Non-default values asserted with no quote. The computable half of trust."""
-    out = []
+def unsourced(doc, split=False):
+    """Non-default values asserted with no quote. The computable half of trust.
+
+    `split=True` separates TWO THINGS THIS USED TO CONFLATE, and the difference
+    is the whole point of the gate. A claim with a URL and no quote has been
+    sourced to a page and not to a sentence; a claim with NEITHER has been
+    asserted. On 2026-08-16 an ingest took this count from 3 to 461, and 458 of
+    the new ones were dataset NAMES -- where the evidence unit is the page that
+    lists them, not a sentence about each. Reporting those as "unsourced"
+    alongside a bare assertion would make the gate's number stop meaning
+    anything, and quietly exempting the field would make it stop biting. So it
+    counts both and says which.
+    """
+    no_quote, no_evidence = [], []
     for mid, c in doc["checkpoints"].items():
         for cl in c["claims"]:
             v = (cl.get("value") or "").strip()
-            if v and v not in DEFAULT_VALUES and not (cl.get("quote") or "").strip():
-                out.append((mid, cl.get("field"), v))
-    return out
+            if not v or v in DEFAULT_VALUES or (cl.get("quote") or "").strip():
+                continue
+            (no_quote if (cl.get("url") or "").strip() else no_evidence).append(
+                (mid, cl.get("field"), v))
+    if split:
+        return {"url_no_quote": no_quote, "no_evidence": no_evidence}
+    return no_quote + no_evidence
 
 
 def report(doc):
@@ -406,3 +421,51 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def merge_claims(records, run, url_field="url"):
+    """Add per-CHECKPOINT claims WITHOUT destroying what is already attested.
+
+    **`ingest()` ASSIGNS `doc["checkpoints"][mid] = {...}` AND SO REPLACES THE
+    WHOLE ENTRY.** That is right for the lineage-shaped run it was written for,
+    where one pass produces every claim about a checkpoint. It is wrong for a
+    TARGETED pass: ingesting a direction-only run through it would have dropped
+    `method`, `datasets`, `train_tokens`, `license`, `released_base`,
+    `reasoning` and `algorithm` for every checkpoint it touched, silently,
+    because nothing counts claims before and after.
+
+    **AND A REPEATED FIELD IS KEPT, NOT OVERWRITTEN.** `neo_7b_instruct_v0.1`
+    carries `method=instruct` (a card row) and `method=dpo` (the paper), and the
+    disagreement check has to see both -- reading only the first reported a
+    conflict the attestation itself resolved. Two sources disagreeing is a fact
+    about the sources; collapsing them is a decision, and not this function's.
+
+    `records` are flat dicts with a `model` key. Returns (n_checkpoints,
+    n_added, n_new_checkpoints).
+    """
+    doc = load()
+    n_add = n_new = 0
+    for rec in records:
+        mid = rec.get("model")
+        if not mid:
+            continue
+        entry = doc["checkpoints"].get(mid)
+        if entry is None:
+            entry = {"lineage": "", "url": rec.get(url_field) or "",
+                     "confidence": "", "notes": "", "claims": [], "run": run}
+            doc["checkpoints"][mid] = entry
+            n_new += 1
+        for cl in rec.get("_claims", []):
+            entry["claims"].append({"field": cl["field"], "value": cl["value"],
+                                    "quote": cl.get("quote") or "",
+                                    "url": cl.get("url") or "", "run": run})
+            n_add += 1
+        if rec.get("note"):
+            entry["notes"] = ((entry.get("notes") or "")
+                              + ("\n\n[%s] " % run) + rec["note"]).strip()
+    doc["runs"].append({"run": run, "path": "merge_claims",
+                        "n_lineages": len(records),
+                        "ingested_at": time.strftime("%Y-%m-%dT%H:%M:%S")})
+    with open(ATTESTED, "w", encoding="utf-8") as fh:
+        json.dump(doc, fh, indent=1, ensure_ascii=False)
+    return len(records), n_add, n_new
