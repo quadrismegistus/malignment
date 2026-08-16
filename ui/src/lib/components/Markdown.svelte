@@ -59,14 +59,29 @@
 		line-height: 1.6;
 		color: var(--text);
 	}
-	.md :global(p),
-	.md :global(ul),
-	.md :global(ol),
-	.md :global(blockquote),
-	.md :global(h1),
-	.md :global(h2),
-	.md :global(h3) {
-		max-width: 78ch;
+	/*
+	  NO PROSE MEASURE (RH, 2026-08-16: "i get annoyed by that wrapping").
+
+	  This was `max-width: 78ch`, the conventional 45-90 character measure. What
+	  it did here, measured rather than assumed: the panel is 1248px and
+	  paragraphs rendered at 663px, so slightly over half the available width was
+	  blank and every paragraph wrapped about twice as often as it needed to.
+
+	  Worth being clear about what was NOT the problem, since "unwrap the
+	  paragraph lines" has two readings and only one was true. The repo's markdown
+	  IS hard-wrapped in source -- but `marked` is configured `breaks: false`, so
+	  those newlines are joined into flowing paragraphs correctly. Checked rather
+	  than assumed: 28 rendered paragraphs, 0 containing a `<br>`. The visible
+	  wrapping was entirely this rule.
+
+	  The measure exists for a real reason and is dropped knowingly: on a very
+	  wide display 13.5px text at full width is hard to track back to the next
+	  line. `line-height: 1.6` is carrying that job alone now. If it reads too
+	  long on a bigger monitor, one `max-width` here brings a cap back -- put it
+	  on these text blocks and NOT on `.md`, or it clips the tables again.
+	*/
+	.md :global(pre) {
+		max-width: 100%;
 	}
 	.md.compact {
 		font-size: 12.5px;

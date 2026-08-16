@@ -1,3 +1,9 @@
+# macOS. Finder writes these into any directory it opens, so they appear in
+# `git status` for folders nobody edited -- which is noise in exactly the check
+# that has to stay readable, since staging by explicit path in a shared checkout
+# depends on being able to see what is actually outstanding.
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
