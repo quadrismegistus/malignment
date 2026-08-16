@@ -93,8 +93,36 @@ OBSERVED = os.path.join(ROOT, "roster", "models", "measurements.json")
 #: `apo` is Anchored Preference Optimization (SmolLM3-3B). It is a preference
 #: method like dpo/kto/slic and aligns, so it goes here rather than beside
 #: distill.
+#: `distill_align` is DISTILLATION USED AS THE POST-TRAINING, onto the model's
+#: OWN base. Added 2026-08-16 because `distill` was carrying two unrelated
+#: operations and the conflation was costing two lineages:
+#:
+#:   distill        DeepSeek-R1-Distill-Llama-8B <- Llama-3.1-8B
+#:                  ANOTHER lab's base, retrained on a third model's traces.
+#:                  Not alignment. Correctly excluded.
+#:   distill_align  Qwen3-8B <- Qwen3-8B-Base, MiniCPM5-1B <- ...-SFT
+#:                  the model's OWN base, KL to a teacher, and it IS the
+#:                  post-training. Excluding it says these two labs did not
+#:                  align their models, which is false.
+#:
+#: **The sources name the algorithm and neither names this category.** Qwen3
+#: (arXiv:2505.09388): "Strong-to-Weak Distillation ... encompassing 5 dense
+#: models (Qwen3-0.6B, 1.7B, 4B, 8B, and 14B)", student logits KL'd to
+#: Qwen3-32B/235B. MiniCPM5: "we train specialized RL teachers ... and use
+#: On-Policy Distillation (OPD)". So the op is named for the STRUCTURE (own base,
+#: aligning) and the algorithm stays in `attestations.json`, per the rule above.
+#:
+#: TWO THINGS THIS OP DOES NOT SAY, both quoted from the attesting agents:
+#:   - MiniCPM5's card gives THREE steps -- "SFT, RL, and OPD" -- and only OPD is
+#:     edged, because the RL stage was never released as a checkpoint. "A roster
+#:     reading method alone will not see the RL stage at all."
+#:   - Qwen3-8B's post-training is distillation INSTEAD OF the four-stage
+#:     pipeline, not in addition to it. Its "alignment" is KL-to-a-teacher.
+#:     `Qwen/Qwen3-8B` declares `base_model: [Qwen/Qwen3-8B-Base]`; the report
+#:     never states what the student is initialised from, so the PARENT rests on
+#:     the card and the OP rests on the report.
 ALIGNING = ("sft", "dpo", "rlvr", "ppo", "kto", "slic", "instruct",
-            "rlhf", "apo")
+            "rlhf", "apo", "distill_align")
 #: `upscale` DERIVES: Falcon3-10B-Base is depth up-scaled FROM 7B with continual
 #: pretraining, so it inherits 7B's pretraining and is a DESCENDANT. A derived
 #: model is not an independent observation, and `scale` -- a RELATING op -- would
@@ -713,7 +741,13 @@ def check_authored(path=None):
 STAGE_ORDER = (
     ("base", "pretrain"),
     ("sft", "distill", "continual"),
-    ("dpo", "kto", "ppo", "slic", "orpo", "simpo", "instruct", "rlhf", "apo"),
+    #: `distill_align` sits in the PREFERENCE tier, not beside `distill` in the
+    #: sft tier, because it is the LAST post-training stage in both lineages that
+    #: use it -- MiniCPM5 runs sft THEN opd, so `sft -> distill_align` must read
+    #: forward. It is not claimed to be a preference method; the tier is an
+    #: ordering, and this is where the ordering puts it.
+    ("dpo", "kto", "ppo", "slic", "orpo", "simpo", "instruct", "rlhf", "apo",
+     "distill_align"),
     ("rlvr",),
 )
 

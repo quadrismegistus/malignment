@@ -56,7 +56,7 @@ indistinguishable a month later.
 
 ## The populations, because they are not interchangeable
 
-    48 lineages   base -> endpoint          roster.endpoints()
+    50 lineages   base -> endpoint          roster.endpoints()
     18 chains     base -> sft -> preference roster.chains()   (16 distinct bases)
     2,189 prompts crossed over 154 models   corpus.panel()
 

@@ -47,8 +47,26 @@ The filter chain, and each step is there because a case forced it:
 Without attestations `zephyr-7b-beta` and both dolphins become eligible
 *candidates*.
 
+**`distill` and `distill_align` are different operations and the difference is
+two lineages.** Until 2026-08-16 one op carried both, and the cost was that
+`Qwen/Qwen3-8B` and `openbmb/MiniCPM5-1B` — both fully measured, neither missing
+a cell — were invisible to `endpoints()`, which stood at 48 while
+`population("bases")` stood at 50. **That two-number gap was the symptom and
+nobody read it**; it was found by asking why the roster would not reach an even
+50, not by any check.
+
+    distill        another lab's base, retrained on a third model's traces.
+                   DeepSeek-R1-Distill-Llama-8B <- Llama-3.1-8B. Not alignment.
+    distill_align  the model's OWN base, KL to a teacher, and it IS the
+                   post-training. Qwen3-8B, MiniCPM5-1B.
+
+The tell that the fix is right rather than merely bigger: `bases` was **already**
+50, and closing the op distinction closed the gap exactly, with `unresolved`
+still empty. A change that had widened a rule instead would have moved endpoints
+past bases or left a candidate unresolved.
+
 **AND TODAY THAT FILTER DECIDES NOTHING. It is UNREACHABLE, and the test found
-that out.** All 48 endpoints resolve identically with and without attestations.
+that out.** All 50 endpoints resolve identically with and without attestations.
 Removing the `mistral` representative ruling does not expose it either: the
 same-publisher rule then picks `Mistral-7B-Instruct-v0.1` anyway. Two independent
 rules mask it, so there is no configuration of the present roster in which
@@ -71,7 +89,7 @@ roster.paths()      # [{base, endpoint, nodes, ops, n_steps}]
 
 `endpoints()` gives the two ends; `chains()` gives exactly `base→sft→pref`.
 Neither answers *what did this lineage go through*, and the answer is not
-uniform: **32 paths are one step, 11 are two, 5 are three.**
+uniform: **33 paths are one step, 12 are two, 5 are three.**
 
 **THE LENGTH IS A FACT ABOUT THE PUBLISHER, NOT THE PIPELINE.**
 `Baichuan2-7B-Chat` is one step here and its own paper describes SFT then RLHF —
@@ -89,8 +107,8 @@ this before comparing two experiments on "the same" lineage.**
 Both are correct and they are not the same measurement. Anything built on
 `chains()` measures Llama through **Tulu** and Mistral through **zephyr** — and
 zephyr is attested as having no safety guardrail at all. Anything built on
-`endpoints()` measures both through the publisher's own instruct. 16 lineages
-have a multi-step path and 16 have a chain, **and they are not the same 16**:
+`endpoints()` measures both through the publisher's own instruct. 17 lineages
+have a multi-step path and 16 have a chain, **and they are not the same lineages**:
 `stablelm-2-1_6b` and `RedPajama` have 2-step paths that `chains()` excludes
 because their last op is `instruct` rather than a named preference op.
 
@@ -99,19 +117,19 @@ because their last op is `instruct` rather than a named preference op.
 **One function, seven names, so nobody writes an eighth comprehension.**
 
 ```python
-roster.population("endpoints")                  # 48   one per lineage
+roster.population("endpoints")                  # 50   one per lineage
 roster.population("chain_rungs")                # 52   every rung of a full chain
-roster.population("aligned")                    # 99   every ALIGNING child
+roster.population("aligned")                    # 101  every ALIGNING child
 roster.population("bases")                      # 50   pretrained roots
 roster.population("all")                        # 160  every declared node
 roster.population("representative")             # 10   members of a representative family
 roster.population("unavailable")                #  6   declared and deliberately unmeasurable
-roster.population("aligned", measured=True)     # 95   ...restricted to those with cells
+roster.population("aligned", measured=True)     # 97   ...restricted to those with cells
 ```
 
 `endpoints` and `chain_rungs` are **different populations and both are right**:
 an endpoint asks *what does a user receive*, a chain rung asks *which stage did
-it*. 48 lineages have an endpoint; 16 have a full chain.
+it*. 50 lineages have an endpoint; 16 have a full chain.
 
 ### chains: base → sft → preference
 
@@ -134,6 +152,7 @@ It is capped by which labs publish the *middle* of their pipeline, and
 roster.direction("sft", "dpo")    # "forward"
 roster.direction("dpo", "sft")    # "reverse"
 roster.direction("kto", "dpo")    # "incomparable" — alternatives, not a sequence
+roster.direction("sft", "distill_align")  # "forward" — MiniCPM5 ran sft, then OPD
 ```
 
 ---

@@ -35,7 +35,7 @@ def main():
 
     print("\nbase -> endpoint pairs")
     ep, un = roster.endpoints()
-    check("lineages resolved", len(ep), 48)
+    check("lineages resolved", len(ep), 50)
     check("unresolved (must be empty)", len(un), 0)
     inv = {e for e in ep.values() if "dolphin" in e.lower() or "zephyr-7b-beta" in e}
     check("no inverted endpoint survives", len(inv), 0)
@@ -63,11 +63,11 @@ def main():
 
     print("\npaths")
     ps = roster.paths()
-    check("paths", len(ps), 48)
+    check("paths", len(ps), 50)
     import collections
     dist = collections.Counter(p["n_steps"] for p in ps)
-    check("one-step paths", dist[1], 32)
-    check("two-step", dist[2], 11)
+    check("one-step paths", dist[1], 33)
+    check("two-step", dist[2], 12)
     check("three-step", dist[3], 5)
     check("ops line up with nodes",
           all(len(p["ops"]) == len(p["nodes"]) - 1 == p["n_steps"] for p in ps), True)
@@ -75,22 +75,22 @@ def main():
     #: Asserted so nobody reads the equal counts as the same set.
     multi = {p["base"] for p in ps if p["n_steps"] >= 2}
     chain = {c["base"] for c in roster.chains()}
-    check("multi-step lineages", len(multi), 16)
+    check("multi-step lineages", len(multi), 17)
     check("chain lineages", len(chain), 16)
     check("...and they are NOT the same 16", multi == chain, False)
 
     print("\npopulations")
-    for kind, want in (("all", 160), ("bases", 50), ("aligned", 99),
-                       ("endpoints", 48), ("chain_rungs", 52),
+    for kind, want in (("all", 160), ("bases", 50), ("aligned", 101),
+                       ("endpoints", 50), ("chain_rungs", 52),
                        ("representative", 10), ("unavailable", 6)):
         check("population(%r)" % kind, len(roster.population(kind)), want)
     check("population('aligned', measured=True)",
-          len(roster.population("aligned", measured=True)), 95)
+          len(roster.population("aligned", measured=True)), 97)
 
     print("\nthe same populations in SQL")
     from malignment import ch
-    check("{db}.endpoints rows", ch.scalar("SELECT count() FROM {db}.endpoints"), 48)
-    check("{db}.populations rows", ch.scalar("SELECT count() FROM {db}.populations"), 425)
+    check("{db}.endpoints rows", ch.scalar("SELECT count() FROM {db}.endpoints"), 50)
+    check("{db}.populations rows", ch.scalar("SELECT count() FROM {db}.populations"), 429)
     check("{db}.prompts is current",
           ch.scalar("SELECT count() FROM {db}.prompts WHERE admitted AND upper(status) IN ('ACTIVE','')"),
           2783)
@@ -104,6 +104,11 @@ def main():
     check("sft -> dpo", roster.direction("sft", "dpo"), "forward")
     check("dpo -> sft", roster.direction("dpo", "sft"), "reverse")
     check("kto -> dpo", roster.direction("kto", "dpo"), "incomparable")
+    #: `distill_align` is in the PREFERENCE tier so that MiniCPM5's released
+    #: order (sft THEN opd) reads forward. Asserted because the alternative --
+    #: filing it beside `distill` in the sft tier -- makes that edge
+    #: "incomparable" and silently drops the lineage from anything ordered.
+    check("sft -> distill_align", roster.direction("sft", "distill_align"), "forward")
 
     print("\npanel")
     n, prompts = corpus.panel()

@@ -1037,10 +1037,21 @@ edges:
 - - Qwen/Qwen2.5-7B
   - instruct
   - Qwen/Qwen2.5-7B-Instruct
-# instruct -> distill. The Strong-to-Weak Distillation pipeline is specifically designed to optimize lightweight models, encompassing 5 dense models (Qwen3-0.6B, 1.7B, 4B, 8
-#   card is silent on method; the Qwen3 report names Strong-to-Weak Distillation as the post-training for the small dense models. Confidence low, on the CARD not the claim
+# distill -> distill_align, 2026-08-16, after reading arXiv:2505.09388. "The
+#   Strong-to-Weak Distillation pipeline is specifically designed to optimize
+#   lightweight models, encompassing 5 dense models (Qwen3-0.6B, 1.7B, 4B, 8B, and
+#   14B) and one MoE model"; the student is "fine-tuned by aligning its logits with
+#   those of a teacher model (Qwen3-32B or Qwen3-235B-A22B) to minimize the KL
+#   divergence". So the 8B is NOT one of the four-stage flagship models -- its whole
+#   post-training is distillation from a bigger sibling.
+#   THE PARENT AND THE OP REST ON DIFFERENT SOURCES. The report never says what the
+#   student is initialised from; `Qwen/Qwen3-8B` declares base_model:
+#   [Qwen/Qwen3-8B-Base] on the card, and that is the only evidence the parent is
+#   this base rather than the teacher. Was `distill`, which excluded the lineage
+#   from endpoints() entirely -- see ALIGNING in roster.py for why that op now
+#   means something else.
 - - Qwen/Qwen3-8B-Base
-  - distill
+  - distill_align
   - Qwen/Qwen3-8B
 # instruct -> sft. These are RWKV-4-Pile 1.5/3/7/14B models finetuned on Alpaca, CodeAlpaca, Guanaco, GPT4All, ShareGPT and more.
 - - RWKV/rwkv-4-7b-pile
@@ -1263,8 +1274,17 @@ edges:
   - openbmb/MiniCPM5-1B-SFT
 # dpo -> distill: card: "we train specialized RL teachers ... and use On-Policy Distillation
 # (OPD)". This is a distillation edge, not a preference edge.
+# distill -> distill_align, 2026-08-16. Still not a preference edge; the earlier note
+#   was right about that and wrong about what followed from it. OPD is applied to
+#   openbmb's OWN sft checkpoint and IS the post-training, so filing it under the op
+#   that means "another lab's base, retrained on a third model's traces" said openbmb
+#   never aligned this model.
+#   AND THE EDGE IS LOSSY IN A WAY THE OP CANNOT FIX: the card gives THREE steps,
+#   "SFT, RL, and OPD". The RL stage was never released, so no edge can carry it and
+#   a reader who takes this path for the pipeline will miss it. `alignment_intent`
+#   in attestations.json is where that lives.
 - - openbmb/MiniCPM5-1B-SFT
-  - distill
+  - distill_align
   - openbmb/MiniCPM5-1B
 # sft -> dpo: card: trained with DPO (Zephyr-style recipe). Booked as sft -- the one
 # conflict pointing the other way, and it ADDS a dpo edge.
