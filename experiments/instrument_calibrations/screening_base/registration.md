@@ -30,11 +30,22 @@ Screening asks *can this frame move at all*. It reads one distribution and no co
 
 The first is the failure malign named as *M01 in reverse*. The second is the original M01 failure — *"the prompt and slots were just badly chosen ... accidentally lame, not transgressive at all"* — arriving by a different route. **Both are errors of the same kind and a single-sided gate would catch only one.**
 
-## THIS REGISTERS NO HYPOTHESIS
+## THIS REGISTERS NO HYPOTHESIS — AND STILL NEEDS A REGISTRATION
 
-Like `sex_violence_lexicon`, and for the same reason: a registration that makes no claim about the world cannot be tuned toward a finding, because there is no finding in it to aim at. It declares a selection rule, a population and a set of refusals. It says nothing about what alignment does.
+It makes no claim about the world. It declares a selection rule, a population and a set of refusals, and says nothing about what alignment does. It therefore belongs in `instrument_calibrations/` and **must not** be cited in the hypothesis register.
 
-It therefore belongs in `instrument_calibrations/` and **must not** be cited in the hypothesis register.
+**But "no hypothesis" is not the same as "no registration needed", and the difference is the whole reason this file exists.** `experiments/README.md` makes a registration required under *two* conditions, not one:
+
+> It is required when the result has **a direction you would be disappointed by**, **or when a different specification could give a different answer you would prefer.**
+
+The first condition does not apply: there is no finding here to be disappointed by. **The second applies exactly**, and this is descriptive work that still needs freezing:
+
+- **The specification IS the searchable thing.** Mean, breadth and intensity give *different winners*. `Qwen3-8B` is 17th percentile on mean and 91st on intensity; a rule built on intensity-median names a model that almost never reaches for a labelled word. Every combining rule — mean of percentiles, sum of deviations, max of deviations, a threshold band — admits a different set. Nothing in the data picks among them.
+- **And I have a preferred answer**, declared above: Falcon3-10B-Base, on grounds (same family as the diagnostic pair, already cached, out-of-population) that are conveniences and not evidence.
+- **The tell in `experiments/README.md` is met, not evaded.** *"'This one is just descriptive' is exactly what gets said to avoid registering: if you can name an outcome you would rather see, register."* I can name one.
+- **And it was nearly searched.** The first draft of THE RULE gated on `|pct − 50| <= 8`, chosen after seeing the ranking, admitting four models of which one was the preferred one. That is a specification search with the search step performed silently. It is recorded here because it happened, not as a hypothetical.
+
+So: no hypothesis, and a registration anyway — because what is at risk is not a claim about alignment but **the rule that picks the instrument every later screening decision runs through.**
 
 ## POPULATION
 

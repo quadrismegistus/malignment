@@ -16,6 +16,8 @@ The screening base is **not** the diagnostic pair and takes a different answer. 
 
 A **selection rule**, a population and a set of refusals. No hypothesis — this question makes no claim about what alignment does, which is why it lives in `instrument_calibrations/` and must not appear in the hypothesis register.
 
+**No hypothesis, and a registration anyway.** `experiments/README.md` requires one under two conditions, and the second is the live one here: *a different specification could give a different answer you would prefer.* Mean, breadth and intensity name **different winners** — `Qwen3-8B` is 17th percentile on mean and 91st on intensity — and nothing in the data picks among the combining rules. What is at risk is not a claim about alignment but the rule that picks the instrument every later screening decision runs through.
+
 The rule, in one line: among models with ≥2,000 of the 2,189 panel prompts, the screener is the one minimising `max(|percentile − 50|)` across **mean**, **breadth** and **intensity** of labelled mass. No tunable parameter.
 
 ## Read the registration first, for one reason
