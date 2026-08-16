@@ -104,7 +104,30 @@ Noted 2026-08-15 while auditing the roster. **This is a note, not a claim on M05
 
 What the roster holds today is a defensible 3-node compression, not the pipeline: `Base --sft--> -checkpoints(it-SFT) --apo--> SmolLM3-3B`. The `sft` edge is correct because the roster pins `revision: it-SFT` and the corpus measured exactly that (`twp_cells.revision = 'it-SFT'`, 2,579 cells). The `apo` edge is the best available label for SFT→final given no APO node exists, and it is imprecise: the LAST operation is a merge, not APO.
 
-**Corpus state: 1 of 4 post-training rungs measured** (`it-SFT`), 0 of 118 pretraining. Declaring the real nodes would make that gap visible instead of hiding it behind one pinned revision — `movement` only builds pairs with both arms present, so declared-but-unmeasured nodes cost nothing and show up as absent rather than as nothing.
+**Corpus state, updated 2026-08-16: 2 of 4 post-training rungs measured** (`it-SFT`, and `it-soup-APO` measured locally on this Mac — 2,653 cells, 55.5 min at 1.26 s/cell, no cloud). 0 of 118 pretraining. `it-mid-training` and `it-LC-expert` remain unmeasured.
+
+**What the APO rung showed, and why it matters beyond SmolLM3.**
+
+    Base   -sft->      it-SFT        0.1023
+    it-SFT -apo->      it-soup-APO   0.0137
+    APO    -instruct-> SmolLM3-3B    0.0115
+    Base -> APO   (cumulative)       0.1098
+    Base -> final (cumulative)       0.0909
+
+**The final merge moves the model BACK toward its base** — cumulative displacement *falls* from 0.1098 to 0.0909, so the 0.9/0.1 soup with the long-context mid-training checkpoint undoes ~17% of what alignment accumulated. The DAG described above is not a bookkeeping nicety; it is visible in the metric, and it is why `instruct` on that last edge is a compression rather than a description.
+
+**F25's "APO signature" does not survive the measurement.** The classifier asserts *"transparent: argmax preserved from base (APO signature)"* — written when the roster held no measured APO checkpoint. Argmax preserved across the preference step:
+
+| edge | preserved | edge JS |
+|---|---|---|
+| dpo (archangel) | **95.3%** | 0.0002 |
+| apo (SmolLM3) | 86.9% | 0.0137 |
+| dpo (OLMo-3) | 77.8% | 0.0301 |
+| dpo (Tulu-3) | 75.4% | 0.0418 |
+| dpo (OLMo-2) | 70.5% | 0.0580 |
+| dpo (Amber) | 48.5% | 0.1697 |
+
+APO sits **inside** the DPO range, and archangel's DPO is *more* transparent than APO. Preservation against edge JS gives **r = −0.966 (n=6)**: transparency tracks how far a step moves the distribution, not which algorithm moved it. **n=1 for APO**, so this does not refute an APO-specific mechanism — it removes the evidence that there was one, and names the amplitude confound any future test must beat. Whoever owns F25 should decide whether the claim is withdrawn or re-specified; it is recorded here because the measurement happened here. Declaring the real nodes would make that gap visible instead of hiding it behind one pinned revision — `movement` only builds pairs with both arms present, so declared-but-unmeasured nodes cost nothing and show up as absent rather than as nothing.
 
 **One card-vs-source conflict to resolve before anyone cites a token count:** the model card says midtraining on **140B** reasoning tokens; the blog says **35B** from OpenThoughts3 and Llama-Nemotron. Not reconciled here.
 
