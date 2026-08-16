@@ -485,6 +485,30 @@
    "cause": "",
    "fix": "VERIFIED ON MPS 2026-08-16 for the slot-diagnostic role. fp16, ~6s load from local cache (6.0 GB each), vocab 131072, logits finite, sane top-5 on an English frame. Falcon3 1B/3B were PRUNED from larger members, so they sit outside endpoints() AND chains() by declaration -- which is why they can carry full movement display in the app without contaminating any experimental population. Their env row says profile=default/box=dense, which is a CLOUD box and says nothing about MPS; this row is the MPS observation that was missing.",
    "source": "malign seat, live load test on CDH0050"
+  },
+  {
+   "model_id": "Alchan/mpt-7b-chat",
+   "environment": "local_mps",
+   "outcome": "loads_degraded",
+   "cause": "Tokenizer DELETES THE SPACE BEFORE A PERIOD-INITIAL TOKEN. Verified on the PreTrainedTokenizerFast fallback the loader override selects: 'took the .357 from' -> 'took the.357 from', 'from home ... we' -> 'from home... we'. NARROW, not universal -- an ordinary prompt round-trips exactly, so it is not the deepseek shape (which deletes EVERY space).",
+   "fix": "NONE NEEDED AND NONE APPLIED. The prompt-survival guard refused the two affected cells rather than measure under a mangled prompt, which is correct. Cost: 2 of 2,706 (literary_039, literary_047) -- the only declared prompts containing a space followed by a period. Recorded so the 2,704 is a DECISION with a named cause rather than an unexplained shortfall; a gap without a reason is the thing nobody re-examines.",
+   "source": "malign seat, 2026-08-16, after the run reported skipped:2"
+  },
+  {
+   "environment": "local_mps",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "VERIFIED ON MPS 2026-08-16 for the slot DIAGNOSTIC PAIR role. fp16, ~15s load from local cache (19 GB each), vocab 131072, logits finite, sane top-5, forward 0.05-0.44s. Round-trip: ordinary EXACT, CJK EXACT, but the SPACE-BEFORE-A-PERIOD case FAILS -- 'took the .357' does not survive, the same narrow defect recorded for Alchan/mpt-7b-chat and gl198976/mpt-7b*. Cost is the same two declared prompts (literary_039, literary_047); every ordinary prompt is exact, so this is a 2-of-2,706 refusal and not a tokenizer that mangles generally. Its env row reads profile=default/box=dense, which is a CLOUD box and says nothing about this Mac; this row is the MPS observation that was missing.",
+   "source": "malign seat, live load test on CDH0050",
+   "model_id": "tiiuae/Falcon3-10B-Base"
+  },
+  {
+   "environment": "local_mps",
+   "outcome": "loads",
+   "cause": "",
+   "fix": "VERIFIED ON MPS 2026-08-16 for the slot DIAGNOSTIC PAIR role. fp16, ~15s load from local cache (19 GB each), vocab 131072, logits finite, sane top-5, forward 0.05-0.44s. Round-trip: ordinary EXACT, CJK EXACT, but the SPACE-BEFORE-A-PERIOD case FAILS -- 'took the .357' does not survive, the same narrow defect recorded for Alchan/mpt-7b-chat and gl198976/mpt-7b*. Cost is the same two declared prompts (literary_039, literary_047); every ordinary prompt is exact, so this is a 2-of-2,706 refusal and not a tokenizer that mangles generally. Its env row reads profile=default/box=dense, which is a CLOUD box and says nothing about this Mac; this row is the MPS observation that was missing.",
+   "source": "malign seat, live load test on CDH0050",
+   "model_id": "tiiuae/Falcon3-10B-Instruct"
   }
  ],
  "engine_support": {

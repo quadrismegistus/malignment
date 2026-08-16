@@ -85,7 +85,7 @@ def main():
                        ("representative", 10), ("unavailable", 6)):
         check("population(%r)" % kind, len(roster.population(kind)), want)
     check("population('aligned', measured=True)",
-          len(roster.population("aligned", measured=True)), 98)
+          len(roster.population("aligned", measured=True)), 101)
 
     print("\nthe same populations in SQL")
     from malignment import ch
