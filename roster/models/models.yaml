@@ -698,7 +698,6 @@ nodes:
     country: FR
     family:
     - dolphin-mistral
-    - hermes-mistral
     - openchat
     - openhermes-mistral
     - zephyr
@@ -709,7 +708,6 @@ nodes:
   openGPT-X/Teuken-7B-base-v0.6:
     family:
     - teuken
-    - teuken-commercial
   openGPT-X/Teuken-7B-instruct-v0.6:
     family:
     - teuken
@@ -861,7 +859,7 @@ nodes:
     - openhermes-mistral
   NousResearch/Nous-Hermes-2-Mistral-7B-DPO:
     family:
-    - hermes-mistral
+    - openhermes-mistral
   openchat/openchat-3.5-0106:
     family:
     - openchat
@@ -875,6 +873,14 @@ nodes:
     family:
     - dolphin-llama
   openGPT-X/Teuken-7B-instruct-commercial-v0.4:
+    pretrained: false   # NOT A BASE, and its real base is not here. The card and
+                        # YAML both name `Teuken-7B-base-v0.4`, a DIFFERENT
+                        # pretraining run: "pre-trained on 4 trillion tokens"
+                        # against this roster's v0.6 root at 6 trillion. The edge
+                        # from v0.6 was a substitution, so its JS 0.1536 compared
+                        # two different pretraining runs. Edge removed; the node
+                        # and its 2,663 cells stay, excluded from base->endpoint
+                        # by the same rule that excludes phi-4.
     family:
     - teuken-commercial
 edges:
@@ -1295,7 +1301,14 @@ edges:
 - - mistralai/Mistral-7B-v0.1
   - sft
   - teknium/OpenHermes-2.5-Mistral-7B
-- - mistralai/Mistral-7B-v0.1
+# RE-PARENTED 2026-08-16. Nous-Hermes-2-DPO was declared a depth-1 child of
+# Mistral, alongside OpenHermes-2.5. It is not a sibling of it -- it is its CHILD:
+#   "This model was DPO'd from [Teknium/OpenHermes-2.5-Mistral-7B]"
+# Found because the similarity screen put the two at 0.937 argmax agreement, the
+# only near-duplicate pair in the population, and the card then said why. A
+# behavioural anomaly and a document agreeing is what a structural correction
+# should look like.
+- - teknium/OpenHermes-2.5-Mistral-7B
   - dpo
   - NousResearch/Nous-Hermes-2-Mistral-7B-DPO
 - - mistralai/Mistral-7B-v0.1
@@ -1314,9 +1327,6 @@ edges:
   - cognitivecomputations/Dolphin3.0-Llama3.1-8B
 # instruct -> sft. Instruction fined tuned version of [Teuken-7B-base-v0.4](https://huggingface.co/openGPT-X/Teuken-7B-base-v0.4).
 #   NB the card names a DIFFERENT parent (base-v0.4, private) than this edge declares
-- - openGPT-X/Teuken-7B-base-v0.6
-  - sft
-  - openGPT-X/Teuken-7B-instruct-commercial-v0.4
 - - tiiuae/Falcon3-7B-Base
   - upscale
   - tiiuae/Falcon3-10B-Base
@@ -1397,6 +1407,13 @@ unavailable:
     kind: access_denied
     permanent: true
     note: as above
+  openGPT-X/Teuken-7B-base-v0.4:
+    kind: private
+    permanent: false
+    note: 'The true parent of Teuken-7B-instruct-commercial-v0.4. Its sibling card
+      states "The base model Teuken-7B-base-v0.4 is available on request
+      contact@opengpt-x.de"; unauthenticated API returns 401 where all three roster
+      ids return 200. Not withdrawn -- gated.'
   mosaicml/mpt-7b:
     kind: repo_dead
     permanent: true
