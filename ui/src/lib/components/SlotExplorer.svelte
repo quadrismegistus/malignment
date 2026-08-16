@@ -257,8 +257,18 @@
 
 	let yaml = $derived.by(() => {
 		if (!resp || (!naughty.size && !nice.size)) return '';
-		//: HIGHEST MASS FIRST, not tag order — the id must be a property of the
-		//: distribution, not of the order the author happened to click.
+		//: **MASS-ORDERED, AND NEVER ALPHABETISED.** Two reasons, and the second
+		//: is the one that would get lost:
+		//:
+		//: 1. the id takes the head of each list, so it must be a property of the
+		//:    distribution and not of the order the author happened to click
+		//: 2. **the order is recoverable provenance.** The masses identify the
+		//:    screening pair only because the lists they were summed over are
+		//:    stored verbatim in mass order; sorting them for tidiness on any
+		//:    later migration destroys a check that has already corrected a wrong
+		//:    memory about 86 items ([6365]).
+		//:
+		//: A cosmetic sort here is unrecoverable and looks like housekeeping.
 		const byMass = (set: Set<string>) =>
 			words.filter((w) => set.has(w.word)).sort((a, b) => b.p - a.p).map((w) => w.word);
 		const list = (xs: string[]) => `[${xs.join(', ')}]`;
@@ -267,13 +277,28 @@
 			`  prompt: ${JSON.stringify(resp.prompt)}\n` +
 			`  naughty: ${list(byMass(naughty))}\n` +
 			`  nice: ${list(byMass(nice))}\n` +
-			//: THE BRANCH MASSES, which `_slot_save` wrote and the copy button did
-			//: not. Without them an item records which words were tagged and not
-			//: whether either branch carried anything -- and the two failure modes
-			//: this screen exists to separate are *nothing to move* and *nothing to
-			//: choose*, which are invisible without both totals. A ratio calls 0/0
-			//: and 0.3/0.3 both "balanced", which is why `share` is not enough on
-			//: its own and is written beside them rather than instead of them.
+			//: ── THE BRANCH MASSES ARE THE CHECK ON `screened_by`, NOT A DISPLAY
+			//: FIELD. **Do not delete them as redundant once the stamp exists.**
+			//:
+			//: The reason first written here was that they separate *nothing to
+			//: move* from *nothing to choose*, since a ratio calls 0/0 and 0.3/0.3
+			//: both "balanced". True, and far too weak: it justifies showing them
+			//: on screen, not storing them, so anyone holding `screened_by` would
+			//: reasonably cut them.
+			//:
+			//: The real reason, measured (malign, [6365]). Two floats over an
+			//: author-chosen word set IDENTIFY the checkpoint pair. On
+			//: `nn_tookoffher_coat-dress` the recorded 0.1218 / 0.2635 reproduces
+			//: under Llama-3.1-8B + Tulu-3-8B-SFT pooled as a mean at err 0.0004,
+			//: against 0.0174 for the DPO arm and 0.0918 for Meta's instruct — and
+			//: the best single model out of all 402 with cells is 0.0032. A second
+			//: frame resolved to the same pair independently.
+			//:
+			//: **So the artifact can check its own label.** A stamp declares and
+			//: does not apply; an item whose recorded masses do not reproduce under
+			//: its declared pair is a mislabelled item, detectable with no memory
+			//: and no trust. That is what recovered the provenance of 86 archive
+			//: items whose author remembered the wrong arm.
 			`  naughty_mass: ${naughtyMass.toFixed(4)}\n` +
 			`  nice_mass: ${niceMass.toFixed(4)}\n` +
 			`  share: ${Number.isNaN(share) ? 'null' : share.toFixed(4)}\n` +
