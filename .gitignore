@@ -238,3 +238,6 @@ data/
 # different measurement. It is tracked on purpose.
 !data/dict/
 !data/dict/**
+
+# Scratch work does not live in the repo — see experiments/README.md
+sandbox/
