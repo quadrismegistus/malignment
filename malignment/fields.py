@@ -225,8 +225,68 @@ def _usas():
     return dict(out)
 
 
-def usas(word):
-    return set(_usas().get(word.lower(), set()))
+@functools.lru_cache(maxsize=1)
+def _usas_names():
+    """{code -> name} from the full USAS tagset, 232 base codes."""
+    out = {}
+    with open(_need("usas_tags"), encoding="utf-8") as fh:
+        for line in fh:
+            p = line.rstrip("\n").split("\t")
+            if len(p) >= 2:
+                out[p[0]] = p[1]
+    return out
+
+
+#: A USAS tag is a base code plus MODIFIERS, and the modifiers carry meaning:
+#:   +/-   the pole of an antonym pair. `E3` is "Calm/Violent/Angry", so `E3-`
+#:         is the VIOLENT end and `E3+` the calm one. Dropping the sign inverts
+#:         the reading of every emotion and evaluation tag.
+#:   m/f/n gender marking (`L2mn`)
+#:   c/%/@ further subdivisions
+#:   /     a PORTMANTEAU of two tags (`G2.1-/S3.2`), which must be split or the
+#:         whole thing fails to resolve.
+#: Measured on this corpus's own vocabulary: 5 of 9 codes produced by
+#: stabbed/cock/kiss/blood/killed/raped/beat carry a modifier, so a bare
+#: dictionary lookup resolves fewer than half.
+_USAS_MOD = re.compile(r"^([A-Z]\d[\w.]*?)([+-]+|[mfnc%@]+)?$")
+
+
+def usas(word, names=True):
+    """USAS tags at the FINEST grain, as names by default.
+
+    `names=False` returns the raw codes. With names, a modifier is preserved in
+    brackets rather than discarded -- `E3-` becomes
+    "Calm/Violent/Angry [-]" -- because the sign is the difference between
+    calm and violent and this project needs exactly that distinction.
+
+    The pole is NOT expanded into which side of the slash it means. USAS writes
+    antonym pairs as "X/Y", but `S3.2` is "Relationship: Intimate/sexual", a
+    single concept containing a slash. Guessing which slashes are poles would
+    silently mislabel the ones that are not.
+    """
+    raw = set(_usas().get(word.lower(), set()))
+    if not names:
+        return raw
+    T = _usas_names()
+    out = set()
+    for code in raw:
+        for part in code.split("/"):          # portmanteau
+            part = part.strip()
+            if not part:
+                continue
+            if part in T:
+                out.add(T[part])
+                continue
+            m = _USAS_MOD.match(part)
+            if m and m.group(1) in T:
+                out.add("%s [%s]" % (T[m.group(1)], m.group(2) or ""))
+                continue
+            #: still unresolved: peel trailing modifier chars one at a time
+            base = part
+            while base and base not in T:
+                base = base[:-1]
+            out.add("%s [%s]" % (T[base], part[len(base):]) if base else part)
+    return out
 
 
 # --------------------------------------------------------------- k-ratings
@@ -307,6 +367,117 @@ def norm_cuts():
         if len(vals) > 2:
             q = statistics.quantiles(vals, n=3)
             out[dim] = (round(q[0], 3), round(q[1], 3))
+    return out
+
+
+# ------------------------------------------------------- counting over a text
+
+MFDIR = os.path.join(FIELDS, "metafields")
+
+#: The 13 fields SHARED BY EVERY LEXICON, fixed here so a caller can enumerate
+#: them without reading a CSV, and so a source mapping to something outside this
+#: set is a loud KeyError rather than a quiet new column.
+META_FIELDS = ("body_health", "cognition_mental", "communication_speech",
+               "emotion_affect", "evaluation_modality", "existence_state",
+               "other", "perception_sensation", "physical_action",
+               "possession_exchange", "quantity_degree", "social_interpersonal",
+               "time_aspect")
+
+LOOKUP = {"rid": rid, "gi": gi, "wordnet": wordnet, "usas": usas}
+
+
+@functools.lru_cache(maxsize=8)
+def _map(name):
+    """{native tag -> meta_field} for a lexicon, from metafields/<name>_map.csv."""
+    path = os.path.join(MFDIR, "%s_map.csv" % name)
+    if not os.path.exists(path):
+        raise MissingSource("no meta-field map for %r at %s" % (name, path))
+    out = {}
+    with open(path, encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            out[r["category"]] = r["meta_field"]
+    return out
+
+
+@functools.lru_cache(maxsize=4)
+def _fine(name):
+    """{native tag -> human-readable group} from metafields/<name>.tsv.
+
+    USAS's own taxonomy at full resolution -- `A1.1.2` -> "Damaging and
+    destroying" -- which is finer than the 13 shared fields and is the level at
+    which violence and sex are separable at all.
+    """
+    path = os.path.join(MFDIR, "%s.tsv" % name)
+    if not os.path.exists(path):
+        raise MissingSource("no fine-grain table for %r at %s" % (name, path))
+    out = {}
+    with open(path, encoding="utf-8") as fh:
+        for line in fh:
+            p = line.rstrip("\n").split("\t")
+            if len(p) >= 2:
+                out[p[0]] = p[1]
+    return out
+
+
+def count(text, source="usas", lang="en", content_only=False):
+    """{field: n} plus coverage, over the tokens of `text`.
+
+    source = "usas" | "gi" | "wordnet" | "rid"   the lexicon's own tags.
+                                                 USAS comes back as NAMES at the
+                                                 finest grain, modifiers kept.
+             "meta"                              the 13 SHARED fields, so usas,
+                                                 gi and framenet counts are
+                                                 directly comparable
+
+    **COVERAGE IS RETURNED, NOT OPTIONAL.** A field count without the number of
+    tokens that matched anything is a rate with no denominator. GI is a 1960s
+    resource and misses `stabbed`, `raped`, `desecrated`; comparing two texts on
+    GI counts alone compares how much of each GI happens to know.
+    """
+    toks = TOKEN.findall(text)
+    if content_only:
+        toks = [t for t in toks if is_content_word(t, text, lang)]
+    hits, matched = collections.Counter(), 0
+    for t in toks:
+        if source == "meta":
+            tags = set()
+            #: THE META MAP IS KEYED ON CODES, so this asks usas for codes
+            #: rather than names. A name-keyed lookup would silently match
+            #: nothing and return a clean, wrong zero.
+            m = _map("usas")
+            tags |= {m[x] for x in usas(t, names=False) if x in m}
+            g = _map("gi_primary")
+            tags |= {g[x] for x in gi(t) if x in g}
+        else:
+            tags = LOOKUP[source](t)
+        if tags:
+            matched += 1
+            hits.update(tags)
+    return {"counts": dict(hits), "n_tokens": len(toks), "n_matched": matched,
+            "coverage": round(matched / len(toks), 4) if toks else 0.0,
+            "source": source}
+
+
+def count_all(text, lang="en", content_only=False):
+    """Every source in one call, each with its own coverage.
+
+    Sources are NOT summed. They have different vocabularies and different
+    senses of the same word -- `cock` is `L2mn` (a bird) and `G3` (weapons) to
+    USAS, absent from RID and GI, and vulgarity 7 to the k-ratings. A total over
+    them would be a number about the lexicons, not about the text.
+    """
+    out = {}
+    for src in ("usas", "gi", "wordnet", "rid", "meta"):
+        try:
+            out[src] = count(text, src, lang, content_only)
+        except MissingSource as e:
+            out[src] = {"error": str(e)}
+    ks = [k(t, lang) for t in TOKEN.findall(text)]
+    ks = [x for x in ks if x]
+    if ks:
+        out["k"] = {"n_rated": len(ks),
+                    "max": {s: max(x[s] for x in ks) for s in ks[0]},
+                    "mean": {s: round(sum(x[s] for x in ks) / len(ks), 2) for s in ks[0]}}
     return out
 
 
