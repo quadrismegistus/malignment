@@ -1,0 +1,213 @@
+<!--
+  The shell.
+
+  THREE SECTIONS, NOT SEVENTEEN TABS. The archive's app ended at a flat strip of
+  17 equal-weight tabs, which is the same disease as 477 scripts in one directory
+  expressed in chrome: a container with no hierarchy fills with whatever is
+  nearby, and nothing in the interface can say that `Census` and `Sankey` were
+  dead six weeks before anyone noticed.
+
+  So the sections mirror the repo's own structure rather than an accumulation:
+
+      Experiments   the hypothesis register and its questions   -- the argument
+      Roster        which models am I comparing                 -- the populations
+      Slot          what does the model want to say here        -- the instrument
+
+  A fourth section is a claim that a fourth kind of thing exists. That is a
+  higher bar than adding a tab, deliberately.
+
+  THE STATUS BADGE NAMES THE DATABASE. The archive's said "connected", which is
+  true of a server pointed at any store on this machine -- and this machine also
+  runs `lltk` at 409 GiB. A badge that cannot be wrong is not telling you
+  anything.
+-->
+<script lang="ts">
+	import { api } from '$lib/api';
+	import type { Health } from '$lib/api';
+	import Experiments from '$lib/components/Experiments.svelte';
+	import Roster from '$lib/components/Roster.svelte';
+	import SlotExplorer from '$lib/components/SlotExplorer.svelte';
+
+	const SECTIONS = [
+		{ id: 'experiments', label: 'Experiments', sub: 'the register and its questions' },
+		{ id: 'roster', label: 'Roster', sub: 'which models am I comparing' },
+		{ id: 'slot', label: 'Slot', sub: 'what the model wants to say' }
+	] as const;
+
+	let section: string = $state('experiments');
+	let health: Health | null = $state(null);
+	let down = $state('');
+
+	async function check() {
+		try {
+			health = await api.health();
+			down = '';
+		} catch (e) {
+			health = null;
+			down = e instanceof Error ? e.message : String(e);
+		}
+	}
+	check();
+</script>
+
+<svelte:head><title>malignment</title></svelte:head>
+
+<div class="app">
+	<header>
+		<div class="left">
+			<h1>malignment</h1>
+			<span class="tag">On the Psychopathology of Everyday AI</span>
+		</div>
+		<div class="right">
+			{#if health}
+				<span class="badge ok num">{health.db}</span>
+				{#if health.slot_loaded.length}
+					<span class="badge blue num" title={health.slot_loaded.join('\n')}>
+						{health.slot_loaded.length} model{health.slot_loaded.length > 1 ? 's' : ''} resident
+					</span>
+				{:else if !health.slot_enabled}
+					<span class="badge num" title="started with --no-slot">no slot</span>
+				{/if}
+			{:else}
+				<span class="badge bad num">no server</span>
+				<button class="ghost" onclick={check}>retry</button>
+			{/if}
+		</div>
+	</header>
+
+	<nav>
+		{#each SECTIONS as s (s.id)}
+			<button class:on={section === s.id} onclick={() => (section = s.id)}>
+				{s.label}<span class="sub">{s.sub}</span>
+			</button>
+		{/each}
+	</nav>
+
+	<main>
+		{#if down}
+			<p class="declare warn">
+				{down} &mdash; start it with <code>python -m malignment.serve</code>
+			</p>
+		{/if}
+		{#if section === 'experiments'}
+			<Experiments />
+		{:else if section === 'roster'}
+			<Roster />
+		{:else if section === 'slot'}
+			<SlotExplorer />
+		{/if}
+	</main>
+</div>
+
+<style>
+	.app {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		overflow: hidden;
+	}
+	header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 11px 22px;
+		border-bottom: 1px solid var(--rule);
+		flex-shrink: 0;
+	}
+	.left {
+		display: flex;
+		align-items: baseline;
+		gap: 12px;
+	}
+	h1 {
+		margin: 0;
+		font-size: 17px;
+		font-weight: 600;
+		letter-spacing: -0.4px;
+	}
+	.tag {
+		font-size: 11.5px;
+		color: var(--text-3);
+	}
+	.right {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	.badge {
+		font-size: 10.5px;
+		padding: 2px 9px;
+		border-radius: 10px;
+		background: var(--panel-2);
+		color: var(--text-3);
+		border: 1px solid var(--rule);
+	}
+	.badge.ok {
+		background: rgba(89, 161, 79, 0.13);
+		color: var(--ok);
+		border-color: rgba(89, 161, 79, 0.3);
+	}
+	.badge.bad {
+		background: rgba(225, 87, 89, 0.13);
+		color: var(--bad);
+		border-color: rgba(225, 87, 89, 0.3);
+	}
+	.badge.blue {
+		background: rgba(78, 121, 167, 0.14);
+		color: var(--blue-light);
+		border-color: rgba(78, 121, 167, 0.3);
+	}
+
+	nav {
+		display: flex;
+		gap: 2px;
+		padding: 0 18px;
+		border-bottom: 1px solid var(--rule);
+		flex-shrink: 0;
+	}
+	nav button {
+		background: none;
+		border: 0;
+		border-bottom: 2px solid transparent;
+		padding: 9px 14px 8px;
+		cursor: pointer;
+		color: var(--text-3);
+		font-size: 13px;
+		text-align: left;
+	}
+	nav button:hover {
+		color: var(--text);
+	}
+	nav button.on {
+		color: #fff;
+		border-bottom-color: var(--blue);
+	}
+	/*
+	  THE SUBTITLE IS PART OF THE TAB, not a tooltip. Three sections can each
+	  afford a line saying what question they answer, and a tab bar whose labels
+	  need explaining is how "Census" and "Correlation" sat side by side for
+	  weeks with nobody able to say what either did.
+	*/
+	nav .sub {
+		display: block;
+		font-size: 10px;
+		color: var(--text-3);
+		opacity: 0.75;
+	}
+	nav button.on .sub {
+		color: var(--blue-light);
+		opacity: 1;
+	}
+
+	main {
+		flex: 1;
+		overflow: hidden;
+		padding: 18px 22px 0;
+	}
+	code {
+		background: var(--panel);
+		padding: 1px 5px;
+		border-radius: 3px;
+		font-size: 11px;
+	}
+</style>

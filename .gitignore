@@ -244,3 +244,31 @@ sandbox/
 
 # regenerable from rating_items.json + seed (run.py --stage assemble)
 experiments/sex_violence_lexicon/results/blocks/
+
+# ── the app ────────────────────────────────────────────────────────────────
+ui/node_modules/
+ui/.svelte-kit/
+# **UN-IGNORE `ui/src/lib/`.** Line 17 of this file is a bare `lib/` from the
+# Python template, meaning a virtualenv's lib directory -- and it matches
+# `ui/src/lib/` just as well, which is SvelteKit's `$lib` alias and holds every
+# component plus the whole client API surface.
+#
+# Caught 2026-08-16 by running `git status --untracked-files=all ui/` before
+# staging and noticing six files that should have been listed were not. **Nothing
+# would have failed**: `git add ui/` succeeds, the commit reads as complete, and
+# the repo ends up holding an app whose every `import ... from '$lib/...'`
+# resolves to nothing. Absence of data must read as absence, never as completion
+# -- the same rule the runner applies to skipped prompts, one layer out.
+#
+# A rule written for one language's conventions silently governing another's is
+# not something any check in this repo would have raised, and the same trap is
+# waiting for `bin/`, `include/` and `share/` if a future directory uses them.
+!ui/src/lib/
+!ui/src/lib/**
+# BUILD OUTPUT, DELIBERATELY NOT TRACKED. The archive tracked its `ui_dist` so a
+# clone could serve the app without npm, and paid for it in diff noise: every
+# rebuild rewrites hashed asset filenames, so the history records rebuilds and
+# not changes. This repo already separates authored from derived -- ClickHouse is
+# "derived, rebuildable" and is not in git either. `ui/README.md` says how to
+# build it, which is one command.
+malignment/ui_dist/

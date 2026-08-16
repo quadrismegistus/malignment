@@ -1,0 +1,146 @@
+/*
+  The palette is the archive app's, carried over deliberately: #0d0d1a ground,
+  #141428 panel, #2a2a44 rule, with #4e79a7 / #e15759 / #59a14f as the three
+  accents. Those three are Tableau 10's blue, red and green -- they separate for
+  the common colour deficiencies and they already appear in this project's
+  figures, so a screen and a plot of the same result do not disagree about which
+  colour "aligned" is.
+
+  ONE RULE ABOUT COLOUR, and it is the only one: red and green here mean
+  DIRECTION OF AN EFFECT, never good and bad. A negative displacement is not a
+  failure. `--ok` and `--bad` exist for the two places a judgement is genuinely
+  being rendered -- a server that is down, a guard that refused -- and nowhere
+  near a measurement.
+
+  NUMBERS ARE MONOSPACE AND TABULAR EVERYWHERE. This is an app whose entire
+  content is quantities that get compared down a column; proportional digits put
+  the decimal points out of line and the comparison stops being free.
+*/
+
+:root {
+	--ground: #0d0d1a;
+	--panel: #141428;
+	--panel-2: #1a1a2e;
+	--rule: #2a2a44;
+	--rule-soft: #1f1f38;
+
+	--text: #e0e0e0;
+	--text-2: #a8a8b8;
+	--text-3: #6f6f85;
+
+	--blue: #4e79a7;
+	--blue-light: #7fa8d0;
+	--red: #e15759;
+	--red-light: #e88b8c;
+	--green: #59a14f;
+
+	--ok: #59a14f;
+	--bad: #e15759;
+
+	--mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+	--sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--ground);
+	color: var(--text);
+	font-family: var(--sans);
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Every numeric surface. `tabular-nums` is the whole point. */
+.num,
+code,
+pre,
+th.num,
+td.num {
+	font-family: var(--mono);
+	font-variant-numeric: tabular-nums;
+}
+
+a {
+	color: var(--blue-light);
+}
+
+button {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+}
+
+/* ── the one shared control look ─────────────────────────────────────────── */
+.ghost {
+	font-size: 11px;
+	padding: 3px 9px;
+	border: 1px solid var(--rule);
+	background: var(--panel);
+	border-radius: 3px;
+	cursor: pointer;
+	color: var(--text-2);
+}
+.ghost:hover:not(:disabled) {
+	border-color: var(--blue);
+	color: var(--text);
+}
+.ghost:disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+.ghost.on {
+	border-color: var(--blue);
+	color: var(--text);
+	background: rgba(78, 121, 167, 0.15);
+}
+
+input,
+textarea,
+select {
+	background: var(--ground);
+	border: 1px solid var(--rule);
+	border-radius: 3px;
+	color: var(--text);
+	padding: 5px 8px;
+	font-family: inherit;
+	font-size: 13px;
+}
+input:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+	border-color: var(--blue);
+}
+
+/*
+  A DECLARATION LINE. Every panel showing a subset carries one of these, and it
+  is styled to be read rather than skipped -- the whole failure it guards against
+  is a reader taking a windowed picture for the population. Not small grey text.
+*/
+.declare {
+	font-family: var(--mono);
+	font-size: 11px;
+	color: var(--text-2);
+	background: rgba(78, 121, 167, 0.09);
+	border-left: 2px solid var(--blue);
+	padding: 5px 10px;
+	margin: 0 0 10px;
+}
+.declare.warn {
+	background: rgba(225, 87, 89, 0.09);
+	border-left-color: var(--red);
+	color: var(--red-light);
+}
+
+.muted {
+	color: var(--text-3);
+}
+.err {
+	color: var(--red);
+	font-size: 12px;
+	font-family: var(--mono);
+}

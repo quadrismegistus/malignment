@@ -135,6 +135,24 @@ APO sits **inside** the DPO range, and archangel's DPO is *more* transparent tha
 
 Also worth its own line: SmolLM3 is our **only APO instance** in 157 checkpoints, and the F25 classifier already asserts an *"APO signature: argmax preserved from base (transparent)"* — a claim never measured against an actual APO checkpoint. `it-SFT → it-soup-APO` would test it directly, on the one family where the parent is released.
 
+## 2026-08-16 — the app
+
+RH commissioned a minimal app for v3, replacing the archive's. **The archive's `ui/` is still deliberately never coming** (see below, unchanged): 371 files, 21 components, 20 of them bound to endpoints or CSVs that did not cross. What arrived is a new `ui/` of 12 source files and one ported component, plus its server.
+
+| file | from | why |
+|---|---|---|
+| `malignment/serve.py` | new | The app's server. Stdlib only — no new requirement. **Reads; does not compute.** Every number it returns comes from ClickHouse or a committed `experiments/*/results/` file, because an app is the most seductive place to grow a seventh definition of a population: it is interactive, so a convenience rollup reads as display logic, and it is the copy nobody greps because it is not in `experiments/`. There is no query endpoint and no client string is ever interpolated into SQL — `ch.query` builds statements by string interpolation for a daemon that also serves `lltk` at 409 GiB. The two variable parameters are validated by MEMBERSHIP in sets this process derived (`roster.POPULATIONS`; a manifest walked off disk), never by pattern. |
+| `ui/` (12 source files) | new, on the archive's skeleton | SvelteKit 2 / Svelte 5 runes / adapter-static / TS, which is current and worked. Three sections — Experiments, Roster, Slot — mirroring the repo's own structure. The archive ended at a flat strip of 17 equal-weight tabs, which is 477-scripts-in-one-directory expressed as chrome: nothing in the interface could say that `Census` and `Sankey` had been dead for six weeks. |
+| `ui/src/lib/components/SlotExplorer.svelte` | `malign-logits/ui/.../SlotExplorer.svelte` | RH: the one component worth keeping. Ported with its reasoning comments; differences marked V3. |
+| `runners.load_for_twp` + `Checkpoint.load` | extracted from `TWPRunner.run`, logic unedited | A second consumer arrived. The archive did this the other way — `server.py._get_slot_model` was a SECOND load path and it drifted, never growing the MPT override, the 429 retry or the mask guard, so the app could load a model the runner refuses. **A second loader is a second instrument.** Execution-verified by @malign at `419a66d`: 8 prompts on SmolLM2-360M against a worktree at the pre-edit HEAD, zero field differences. |
+
+**Not ported: the bge axis**, which gives the scatter its x. v3 has no sentence-embedding path — `similarity.py` is JS between models, and `models.get_embeddings` returns the measured model's own input embedding matrix, a different object. **So the scatter is not drawn at all**; the archive's fallback was seeded pseudo-random x, honestly labelled, which is fine as a transient state and wrong as a shipped one. Measured for the port decision (docket [6360]): the `|slot-word` namespace is **16,206 vectors over 159 prompts, 63.3 MB** — not the 40 GB a `du` of `sent_embeddings` reports, 97% of which is passage embeddings the axis never reads.
+
+**Two defects this work found, both invisible to any check but rendering or running the thing:**
+
+- A byte formatter divided by 1024 once and labelled the result MB, so a 37 MB result file displayed as **36270.6 MB**. It compiled, the type was right, and one of its two branches was correct.
+- The pooled `/slot` path returned the FIRST model's residual beside a mean over all of them, so a two-model pool summed to **1.0499** against the instrument's `sum(words) + residual == 1`. No exception; both numbers real; only the relation between them false. The server now asserts the identity and returns it, and the panel shows it.
+
 ## Deliberately never coming
 
 | item | why |
@@ -144,7 +162,7 @@ Also worth its own line: SmolLM3 is our **only APO instance** in 157 checkpoints
 | `lineage.py` (286) | `lineage` and `depth` are derived columns; `same_base` is a view. |
 | `ch_read.py` (346) | Brought and dropped the same hour — a bulk prefetch for an access pattern that moved to SQL. |
 | `logit_probs` / the `.f16` dumps | 1.7B rows at 31% model coverage, and unused. |
-| `meta/` (505 scripts), `ui/` (371 files), `findings/` (45, 42 uncited) | The archive's job. |
+| `meta/` (505 scripts), `ui/` (371 files), `findings/` (45, 42 uncited) | The archive's job. **The `ui/` here is a new one** — see 2026-08-16 above. One component was ported; the other 20 were not. |
 
 ## What would tell us this migration is finished
 
