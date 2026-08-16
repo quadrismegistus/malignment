@@ -283,9 +283,26 @@ def main():
     ap.add_argument("--create", action="store_true")
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--limit", type=int, default=None)
+    #: **A BLANKET RUN IS A POPULATION CHANGE.** `scan()` derives inclusion from
+    #: the payload stamp, which is right -- and it means a new fleet directory
+    #: landing on disk enters the store the next time ANYONE runs the ingest for
+    #: an unrelated reason. Measured 2026-08-16: ingesting one 2,653-cell APO run
+    #: would also have pulled in 213 verse-fleet files across 7 boxes, plus
+    #: falcon_h1_repair and twp_fill -- a different campaign, silently, inside a
+    #: command whose output says only "cells ingested".
+    #:
+    #: The stamp still decides what is ELIGIBLE. This decides what is being asked
+    #: for right now, which is a different question and belongs to the operator.
+    ap.add_argument("--source", default=None,
+                    help="only sources containing this substring (a blanket run "
+                         "ingests every eligible directory on disk)")
     a = ap.parse_args()
 
     files = scan()
+    if getattr(a, "source", None):
+        keep = [f for f in files if a.source in f["source"]]
+        print("  --source %r: %d of %d files" % (a.source, len(keep), len(files)))
+        files = keep
     by_src = defaultdict(int)
     for f in files:
         by_src[f["source"]] += 1
