@@ -42,12 +42,6 @@ nodes:
     open_data: false
     open_weight: true
     org_type: corporate
-  AI-Sweden-Models/gpt-sw3-6.7b-v2:
-    family:
-    - gpt-sw3
-  AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct:
-    family:
-    - gpt-sw3
   Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf:
     family:
     - pharia
@@ -888,9 +882,6 @@ edges:
   - instruct
   - 01-ai/Yi-1.5-9B-Chat
 # instruct -> sft. The `instruct` models were finetrained on instruction data using both chat and raw text formats.
-- - AI-Sweden-Models/gpt-sw3-6.7b-v2
-  - sft
-  - AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct
 # instruct -> dpo. In addition to these steps, `Pharia-1-LLM-7B-control-aligned` was aligned for helpfulness and safety using Direct Preference Optimization (DPO).
 #   the parent IS the control (already-tuned) model, so this edge is the DPO step alone
 - - Aleph-Alpha/Pharia-1-LLM-7B-control-hf
@@ -1398,7 +1389,10 @@ unavailable:
   AI-Sweden-Models/gpt-sw3-6.7b-v2:
     kind: access_denied
     permanent: true
-    note: as above
+    note: 'as above. REMOVED FROM `nodes` 2026-08-16: it was declared as a node AND
+      listed here, so it entered the recipe population carrying 0 cells and inflated
+      the declared population above the measurable one. A model that cannot be
+      measured is recorded here and nowhere else.'
   AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct:
     kind: access_denied
     permanent: true
@@ -1412,6 +1406,15 @@ unavailable:
     permanent: true
     note: as above
 provenance_notes:
+  org_renames:
+    THUDM -> zai-org: 'The GLM lineage moved org: the old registry names
+      `THUDM/glm-4-9b-hf` and `THUDM/glm-4-9b-chat-hf`; this roster declares
+      `zai-org/glm-4-9b-hf` and `zai-org/glm-4-9b-chat-hf`, which hold 2,663 cells
+      each. SAME MODELS, new path.'
+    why_it_is_written_down: 'A rename presents to a coverage check as a MISSING
+      MODEL -- the old id has no node and no cells, so a diff against any prior
+      artifact reports a gap that is not one. Recorded 2026-08-16 after exactly
+      that check flagged it.'
   falcon3:
     the_line_is_a_TREE_rooted_at_7B: checked card-by-card by RH, 2026-08-15. Falcon3-7B-Base is the ONLY pretraining run in the line.
     7B -upscale-> 10B: '"Depth up-scaled from Falcon3-7B-Base with continual pretraining on 2 TERATOKENS ... 1024 H100 chips"'
