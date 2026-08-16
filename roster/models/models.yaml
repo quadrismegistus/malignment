@@ -881,8 +881,11 @@ nodes:
                         # two different pretraining runs. Edge removed; the node
                         # and its 2,663 cells stay, excluded from base->endpoint
                         # by the same rule that excludes phi-4.
-    family:
-    - teuken-commercial
+    # NO FAMILY, DELIBERATELY. A family is a RECIPE (one base -> one endpoint),
+    # and this checkpoint's base is not in the roster, so no recipe can be formed
+    # from it. A one-member `teuken-commercial` tag would have been a family that
+    # is not one -- the assertion caught it. **An absent family here means 'no
+    # measurable recipe', which is true, rather than an oversight.**
 edges:
 - - 01-ai/Yi-1.5-9B
   - instruct
