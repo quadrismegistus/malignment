@@ -79,8 +79,36 @@ A `replaceRegexpOne(word, '^▁', '')` would produce plausible words with token 
 underneath, collide 104 surfaces silently, and repair the view while leaving the
 quantity wrong. **Quarantine and re-measure. Do not strip.**
 
-It had not reached `movement` (0 of 44.5M rows), so nothing downstream is
-contaminated. Had it built, it would have reported JS 0.82 against its parent
+**RESOLVED 2026-08-16, and the correction inverted the finding.** Re-measured
+locally under the current instrument -- 2,663 cells, 131 min at 2.98 s/cell, 0
+skipped, clean word surfaces -- which confirms the diagnosis: ONE BAD PRODUCER
+RUN, not the model or its tokenizer.
+
+    Mistral-7B-v0.1 -dpo-> dolphin-2.6
+      token space   JS 0.7171   largest edge in the corpus
+      re-measured   JS 0.0563   SMALLEST edge in its own branch
+
+A 12.7x error that did not merely inflate the number: it REVERSED THE ORDERING.
+The same checkpoint went from the most-displaced model held to the least-
+displaced tune on its base, so anything using it as an upper bound would have
+been wrong in the direction of its own conclusion.
+
+The corrected value is a result rather than a repair. dolphin is the roster's
+ANTI-ALIGNED checkpoint -- "I have filtered the dataset to remove alignment and
+bias" -- and it moves its base LESS than all five ordinary tunes on Mistral
+(zephyr 0.1017, Nous-Hermes 0.0681, mistral-sft-beta 0.0666, openchat 0.0653,
+OpenHermes 0.0640). De-aligning displaces less than aligning, which is what the
+direction of the training predicts and is now measured.
+
+**AND THE QUARANTINE HAD TO BE DONE TWICE.** The first attempt was an INGEST
+GATE, which stops new data and does nothing about rows already stored: the next
+movement rebuild read them straight out of `twp_words` and wrote 588,427 rows.
+A gate is a claim about the future; remediation is a fact about the past. The
+rows were deleted from the store and `produce_movement.buildable()` now inspects
+the `twp_words` it is about to read.
+
+Before that remediation it had not reached `movement` (0 of 44.5M rows), which is
+what the original note recorded -- Had it built, it would have reported JS 0.82 against its parent
 where real alignment runs 0.04-0.16 -- the largest displacement in the corpus, and
 entirely an artefact. It is also the roster's anti-aligned discriminator, so the
 finding it would have carried is one somebody would have wanted to believe.
