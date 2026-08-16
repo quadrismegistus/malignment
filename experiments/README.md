@@ -113,3 +113,38 @@ typography.
 Does not live here. Use the session scratchpad or a gitignored `sandbox/`. The
 reason v1 accumulated 477 scripts in `scripts/` is that there was nowhere else to
 put something you tried once. **This directory holds questions that have answers.**
+
+---
+
+# THE HYPOTHESIS REGISTER
+
+**Every hypothesis this project has registered, with its status. If a claim is not in this table it is not registered, and if it is here it is findable.**
+
+This table exists because separating instrument registrations from hypothesis registrations — which is right, see below — made the hypotheses hard to FIND. RH asked "where are our hypotheses about sex and violence?" twice on 2026-08-16, and both times the answer was three directories deep. **Separation without an index is just scattering.**
+
+| id | claim | where | status |
+|---|---|---|---|
+| **H1** | SFT carries the majority of displacement | `division_of_labour/sft_share` | **SUPPORTED** — median share 0.819 |
+| **H2** | the recorded ~90% SFT figure does not replicate | `division_of_labour/sft_share` | **SPLIT** — Olmo-3 Instruct 0.773, Think 0.950; the figure is branch-specific |
+| **H3** | *"SFT handles sex, DPO handles violence"* — at PROMPT level | `division_of_labour/sft_share` | **NOT SUPPORTED** — chain p=0.031 but base p=0.077, and base was pre-declared decisive |
+| **L1** | the same claim at WORD level, via the lexicon | `division_of_labour/lexical_domains` | not run — **a second null WITHDRAWS the claim** |
+| **L2** | is it content or stimulus? sexual-word displacement measured *inside violence and neutral prompts* | `division_of_labour/lexical_domains` | not run — the test the prompt-level design could not run |
+| **L3** | does displaced mass leave the domain or move within it | `division_of_labour/lexical_domains` | not run — descriptive, no threshold |
+| **R1a** | vulgar-register sexual mass FALLS under alignment | `register_shift` | not run |
+| **R1b** | clinical/euphemistic mass RISES — **required**, or it is suppression not displacement | `register_shift` | not run |
+| **R2** | the register signature is larger for sexual than violent | `register_shift` | not run |
+| **R3** | archaic violent mass rises (`smite`) | `register_shift` | not run — **declared underpowered, ineligible for a headline** |
+| **R4** | every R1/R2 effect survives frequency-matched controls | `register_shift` | not run — **a gate, not a robustness check** |
+
+`sex_violence_lexicon` appears nowhere in this table **on purpose**: it registers no hypothesis. It declares one gate (controls >5% ⇒ the instrument is not admitted) and five construction/custody rules, and says nothing about what alignment does.
+
+## Why instrument and hypothesis registrations are kept apart
+
+A registration that makes no claim about the world cannot be tuned toward a finding, because there is no finding in it to aim at. Had L1 lived in the lexicon's registration, every judgment in building the instrument — which words to seed, how strict to make the raters, where to set the control ceiling — would have had a preferred answer sitting on the next page.
+
+The two also fail differently, and the difference is the point:
+
+    instrument registration   worst outcome: "the tool is too loose to use"
+    hypothesis registration   worst outcome: "the claim is false and is withdrawn"
+
+**But the separation has a cost and this table is the payment.** Update it in the same commit as any new registration.
