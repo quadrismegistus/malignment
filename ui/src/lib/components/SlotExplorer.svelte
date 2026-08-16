@@ -54,6 +54,7 @@
 
 	let resp: SlotResponse | null = $state(null);
 	let loading = $state(false);
+	let phase = $state<'idle' | 'loading' | 'expanding'>('idle');
 	let error = $state('');
 	let elapsed = $state(0);
 
@@ -95,6 +96,22 @@
 			clearedNote = '';
 		}
 		const t0 = performance.now();
+		//: **"Loading models…" IS A DIFFERENT STATE FROM "running…".** A cold call
+		//: is ~6s on a 360M and ~10s on a 1B; a warm one is under a second. Under
+		//: one spinner those are indistinguishable, and the long one is exactly
+		//: where a user starts wondering whether it has hung and clicks again.
+		//:
+		//: Asked fresh rather than read off the polled badge: the poll is on a 15s
+		//: interval and the models may have been released by the idle reaper since
+		//: it last ran. A stale "resident" here would promise a fast call and
+		//: deliver a slow one, which is the failure this message exists to prevent.
+		try {
+			const want = model.split(',').map((s) => s.trim()).filter(Boolean);
+			const h = await api.health();
+			phase = want.every((m) => h.slot_loaded.includes(m)) ? 'expanding' : 'loading';
+		} catch {
+			phase = 'expanding';
+		}
 		try {
 			resp = await api.slot(prompt, model, topK);
 			taggedFor = prompt;
@@ -104,6 +121,7 @@
 		} finally {
 			elapsed = Math.round(performance.now() - t0);
 			loading = false;
+			phase = 'idle';
 		}
 	}
 
@@ -242,9 +260,21 @@
 			onkeydown={(e) => { if (e.key === 'Enter') run(); }}
 		/>
 		<button class="ghost go" onclick={run} disabled={loading}>
-			{loading ? 'running…' : 'Expand'}
+			{#if phase === 'loading'}Loading models…{:else if phase === 'expanding'}running…{:else}Expand{/if}
 		</button>
 	</div>
+	{#if phase === 'loading'}
+		<!--
+		  NAMED, AND WITH THE REASON. "Loading models..." on its own reads as an
+		  app being slow; saying which weights and roughly how long makes it a
+		  cost the user can decide about. The panel is the only place that knows
+		  this is a one-off per model rather than the normal speed.
+		-->
+		<p class="declare">
+			loading weights for the first call — ~6s at 360M, ~10s at 1B. Held for
+			the session and released after idle, so the next expansion is under a second.
+		</p>
+	{/if}
 	<div class="controls small">
 		<label>models <input class="model" bind:value={model} placeholder="org/base,org/sft — comma separated" /></label>
 		<label>top-k <input class="k" type="number" bind:value={topK} min="5" max="500" /></label>

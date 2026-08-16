@@ -24,7 +24,14 @@ export interface Health {
 	status: string;
 	db: string;
 	slot_enabled: boolean;
+	//: In LRU order, least-recently-used first — so the head is what the next
+	//: load will evict. Not sorted; the order is information.
 	slot_loaded: string[];
+	slot_max: number;
+	slot_ttl: number;
+	//: {model_id: seconds since last use}. Lets a caller distinguish a model that
+	//: is resident from one about to be released by the idle reaper.
+	slot_idle: Record<string, number>;
 }
 
 export interface Table {

@@ -44,6 +44,30 @@ set this process derived itself (`roster.POPULATIONS`, and the manifest walked
 off disk), never by pattern. Membership is what makes `../../etc/passwd` and
 `'; DROP` uninteresting: they are simply not in the set.
 
+## THIS PROCESS SHARES A DEVICE WITH WHATEVER ELSE IS MEASURING
+
+**`/slot` is not the only thing on the card.** On 2026-08-16 this server was
+holding two 360M models while `python -m malignment.runners Alchan/mpt-7b-chat
+--all-prompts` was 51 minutes into a fleet on the same MPS device. Nothing went
+wrong at those sizes, and nothing in either process would have noticed if it had.
+
+The campaign has already paid for this once. `twp.free`'s docstring books the
+2026-07-30 32B OOM that was recorded as *"32B at fp16 is marginal on 80 GB"* --
+a single 32B is 64 GB and fits; **two at once do not**, and the second one was
+the same code holding a model it had finished with.
+
+Two things follow, and neither is a detection mechanism -- sniffing for other
+processes is fragile and would be wrong the first time someone runs a fleet on a
+different box:
+
+- **`_SLOT_TTL` is the mitigation that works without anyone deciding anything.**
+  A model this app loaded is gone ten minutes later whether or not the person who
+  loaded it remembered a fleet was running.
+- **`--no-slot` is the deliberate one.** Serving the app during a large run with
+  `--no-slot` makes every other route work exactly as before and removes any
+  possibility of this process touching the device. That is the right way to read
+  results while something big is measuring.
+
 ## THE SLOT LOCK IS NOT ABOUT LOAD, IT IS ABOUT `_BATCH`
 
 `twp.py` says so itself, under KNOWN DEFECT CARRIED OVER DELIBERATELY: `_BATCH`
@@ -76,6 +100,7 @@ import csv
 import json
 import os
 import threading
+from time import monotonic as _monotonic
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
@@ -113,6 +138,30 @@ _SLOT_MODELS = collections.OrderedDict()
 #: `/slot` exists for -- so the common case never evicts, and the uncommon one
 #: pays a reload rather than the machine paying for it forever.
 _SLOT_MAX = int(os.environ.get("MALIGNMENT_SLOT_MAX", 2))
+#: **AND A MODEL IS RELEASED AFTER THIS MANY SECONDS UNUSED** (RH, 2026-08-16:
+#: *"why does server need to hold any resident at all? ... until then this is a
+#: markdown reader"*).
+#:
+#: The count cap alone was the wrong shape. It bounds the WORST case and does
+#: nothing about the common one: a single Slot excursion left a model resident
+#: for the life of the process, so an app that is a reader 95% of the time held
+#: gigabytes for the 5%.
+#:
+#: **BUT NOT ZERO RESIDENCY, WHICH WAS THE OTHER OPTION AND IS WORSE.** Measured
+#: here: SmolLM2-360M is 5.7s cold against 0.95s warm, OLMo-2-1B ~10s cold.
+#: Slot is an authoring loop -- type, look, retag, retype -- and dropping after
+#: every call makes every iteration pay the load. The residency is not a
+#: convenience, it is what makes the panel usable at all.
+#:
+#: So: hold while someone is working, release when they are not. Ten minutes is
+#: long enough to cover thinking about a prompt and short enough that a session
+#: someone walked away from does not hold a 3B overnight.
+_SLOT_TTL = float(os.environ.get("MALIGNMENT_SLOT_TTL", 600))
+#: {model_id: monotonic seconds at last use}. Separate from `_SLOT_MODELS` so the
+#: eviction order (LRU) and the eviction TRIGGER (idle) stay independent -- they
+#: answer different questions and conflating them is how a cache starts evicting
+#: a model that is in active use because something else is old.
+_SLOT_USED = {}
 _ALLOW_SLOT = True
 
 
@@ -137,6 +186,7 @@ def _evict_to(n):
     dropped = []
     while len(_SLOT_MODELS) > max(0, n):
         mid, _ld = _SLOT_MODELS.popitem(last=False)      # least recent first
+        _SLOT_USED.pop(mid, None)
         dropped.append(mid)
     if dropped:
         #: No arguments. See above.
@@ -144,6 +194,38 @@ def _evict_to(n):
         print("  slot: evicted %s (cap %d)" % (", ".join(dropped), _SLOT_MAX),
               flush=True)
     return dropped
+
+
+def _reap_idle():
+    """Release any model unused for `_SLOT_TTL`, so the process goes back to zero.
+
+    A DAEMON THREAD AND NOT A CHECK ON THE NEXT REQUEST, which was the cheaper
+    design and does not work: the whole point is to free memory during a period
+    when NO request arrives. A lazily-evaluated TTL frees the model at the moment
+    someone comes back to use it, which is precisely backwards.
+    """
+    import time as _time
+    from . import twp
+    while True:
+        _time.sleep(30)
+        try:
+            with _SLOT_LOCK:
+                now = _time.monotonic()
+                stale = [m for m, t in _SLOT_USED.items()
+                         if now - t > _SLOT_TTL and m in _SLOT_MODELS]
+                for mid in stale:
+                    _SLOT_MODELS.pop(mid, None)
+                    _SLOT_USED.pop(mid, None)
+                if stale:
+                    twp.free()
+                    print("  slot: released %s after %.0fs idle (now %d resident)"
+                          % (", ".join(stale), _SLOT_TTL, len(_SLOT_MODELS)),
+                          flush=True)
+        except Exception as e:                             # noqa: BLE001
+            #: A reaper that dies takes the whole TTL with it and leaves no trace,
+            #: which reads exactly like a TTL that is working.
+            print("  slot: reaper error (models stay resident): %s: %s"
+                  % (type(e).__name__, e), flush=True)
 
 
 # ---------------------------------------------------------------------------
@@ -363,6 +445,7 @@ def _slot(prompt, model_ids, k):
             #: whichever model was loaded longest ago regardless of demand.
             _SLOT_MODELS.pop(mid, None)
             _SLOT_MODELS[mid] = ld
+            _SLOT_USED[mid] = _monotonic()
             try:
                 w1, r1, _calls = twp.expand(
                     ld.model, ld.tok, prompt, ld.dev, ld.bmask,
@@ -479,7 +562,14 @@ class Handler(BaseHTTPRequestHandler):
             return {"status": "ok", "db": _db_name(),
                     "slot_enabled": _ALLOW_SLOT,
                     "slot_loaded": list(_SLOT_MODELS),
-                    "slot_max": _SLOT_MAX}
+                    "slot_max": _SLOT_MAX,
+                    "slot_ttl": _SLOT_TTL,
+                    #: SO THE CLIENT CAN SAY "loading" RATHER THAN "running".
+                    #: A 6-second load and a 1-second expansion under one spinner
+                    #: are indistinguishable to the user, and the 6-second one is
+                    #: where they wonder whether it has hung.
+                    "slot_idle": {m: round(_monotonic() - t, 1)
+                                  for m, t in _SLOT_USED.items()}}
         if path == "/store/inventory":
             return _store_inventory()
         if path == "/roster":
@@ -658,8 +748,17 @@ def serve(port=8431, host="127.0.0.1", slot=True):
     say("  experiments %d question%s" % (len(man), "" if len(man) == 1 else "s"))
     say("  ui_dist     %s" % (UI_DIST if os.path.isdir(UI_DIST)
                               else "(not built -- use `npm run dev`)"))
-    say("  slot        %s" % ("enabled, lazy, at most %d model(s) resident"
-                              % _SLOT_MAX if slot else "REFUSED (--no-slot)"))
+    if slot:
+        say("  slot        lazy: 0 resident until a /slot call. At most %d, "
+            "released after %.0fs idle" % (_SLOT_MAX, _SLOT_TTL))
+        #: DAEMON, so a Ctrl-C is not held open by the reaper. Started only when
+        #: slot is enabled -- there is nothing to reap under `--no-slot`, and a
+        #: thread that exists to manage a thing that cannot happen is a thread
+        #: someone later reads as evidence that it can.
+        threading.Thread(target=_reap_idle, daemon=True,
+                         name="slot-reaper").start()
+    else:
+        say("  slot        REFUSED (--no-slot); no route here can load weights")
     try:
         srv.serve_forever()
     except KeyboardInterrupt:
