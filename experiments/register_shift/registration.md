@@ -1,6 +1,8 @@
 # Registration — register_shift
 
-**Frozen 2026-08-16, before any movement row was read through the lexicon.** The lexicon itself is still in stage D as this is written: its admitted membership is unknown, its precision and recall are unmeasured, and no word's `delta` has been looked at. Amendments append below, dated, never edited in place.
+**Frozen 2026-08-16. THE HYPOTHESES IN THIS FILE (R1-R4) WERE SUPERSEDED BEFORE ANY RUN — see amendment A1, which carries the design that was actually frozen. R1-R4 are kept as the record of what was registered solo, not deleted.**
+
+**Originally frozen before any movement row was read through the lexicon.** The lexicon itself is still in stage D as this is written: its admitted membership is unknown, its precision and recall are unmeasured, and no word's `delta` has been looked at. Amendments append below, dated, never edited in place.
 
 ## What licenses freezing this now, and what does not
 
@@ -63,3 +65,53 @@ Whether **SFT** or **DPO** does the sexual/violent work is a different question 
 ---
 
 ## Amendments
+
+### A1 — 2026-08-16. The design is replaced BEFORE ANY RUN, after discussion with RH. Original hypotheses superseded, not deleted.
+
+Nothing in this experiment has been run. R1–R4 above stand as the record of what was registered solo this morning; they are **superseded** by the design below, worked out with RH the same day. Both are kept because a design that changed needs its predecessor visible — otherwise "we always meant this" is unfalsifiable.
+
+**Why the original was wrong.** R1–R4 took the lexicon's `register` field as the instrument and tested per-stage. Two problems, both found by measuring rather than by argument:
+
+- **The lexicon's register labels were never blind-rated.** Categories went through the 15-rater panel (Fleiss κ=0.929); register was **self-reported by whichever generator proposed the word**. Worse, 4 of the 8 generators were *assigned* a register and told to report it: `angle-clinical` returned `clinical` for **439/439** of its words and `angle-slang` returned `slang` for **397/397**. For those the field is an instruction echoed back, not a judgement. (`angle-vulgar` 33% and `angle-archaic` 59% did exercise discretion, and replicate-vs-angle labels agree on 86% of the 372 words carrying both — so the majority vote is not purely definitional. But there is no reliability figure for register anywhere.)
+- **Only 550 of 1,063 admitted words carry a direct register label**; the rest inherit from a stem.
+
+### The design as frozen
+
+**INSTRUMENT: `k_ register_level`, English ∪ Chinese, 1–7 continuous.** RH's suggestion to add `k_zh` is what makes this viable: coverage of the worst model rises from **85.2% to 95.6%** of cell mass (median 99.6%), and — the number that matters — the **within-pair** coverage shift falls from median 0.51pp / max 7.50pp to **median 0.12pp / max 3.73pp**, with pairs shifting >2pp dropping from 15 to 6. A base→endpoint comparison is confounded if the covered subset moves between the arms, and Chinese coverage is what was moving it.
+
+**The two instruments corroborate each other.** `k_ register_level` and the lexicon's register labels agree at **Spearman rho = 0.645 (n=480, p=1e-57)**; vulgar-vs-clinical separates at AUC 0.976 and clinical-vs-plain at 0.715. They were built months apart, by different procedures, for different purposes, neither seeing the other. That agreement is the only evidence either has that it measures register at all, and it is why `k_` can be primary and the lexicon field a corroborating second.
+
+**STATISTIC: mass-weighted mean register** (RH's choice), `Σ(mass × register) / Σ(mass)`. Treating a 1–7 ordinal as interval is accepted deliberately: the assumption-free alternative (comparing full register distributions) cannot be stated as one number per lineage.
+
+**EDGE: base → endpoint**, the commodity form — what a user actually receives, and it sidesteps sequential depletion entirely. Per-stage decomposition is descriptive.
+
+**POPULATION: 64 base→endpoint pairs over 48 LINEAGES**, panel 2,189 (crossed over all 112 models involved, then live-status gated). Three times the n of the chain population, at no cost in panel, because base→endpoint needs no released SFT rung.
+
+### Hypotheses as frozen
+
+    G    the mass-weighted mean register of the distribution RISES, base -> endpoint
+    G1   what LEAVES is low-register    mean_register(removed mass) < distribution mean
+    G2   what ARRIVES is high-register  mean_register(arrived mass) > distribution mean
+
+**G alone cannot distinguish suppression from displacement** — the mean rises either because low-register mass fell or because high-register mass arrived. G1 and G2 separate them, and **`arrived > removed` is the displacement signature**. This is the R1a/R1b split preserved, with an instrument that can actually carry it.
+
+**S** — the same three, restricted to the lexicon's `sexual` set. This is the v1 claim (`cock → penis`) at scale.
+
+### DISCLOSURE, and it is serious
+
+**I have already seen evidence bearing on S.** `removal_rates`' word-level exemplars, computed this afternoon, show that against the sexual set's own SFT removal rate the words stripped hardest are `cleavage +0.45, tits +0.40, fucking +0.35, pussy +0.35, breasts +0.28` and the words surviving are `erection −0.08, climax −0.12, ejaculated −0.14, manhood −0.16, cock −0.20, wank −0.21`. **That is vulgar-out / clinical-retained — S's predicted direction — observed before this was frozen.** S is therefore a confirmatory test of an already-observed pattern and must be reported as such, never as a discovery. G is not contaminated in this way: no register statistic over the whole vocabulary has been computed.
+
+Also disclosed: `k_ratings` is ONE MODEL's judgements at ONE frozen version, by its own `_meta`. And the Chinese scale discriminates less than the English one (sd 0.82 vs 1.04, 74% vs 63% of words at the default 4), so effects on Chinese-heavy lineages are attenuated rather than biased.
+
+### Decision rules
+
+1. **Unit is the LINEAGE (48).** Primary test is magnitude-using with a bootstrap 95% CI; the sign-test MDE is printed before any p-value is read.
+2. **A null is reported as a BOUND**, never as bare non-significance.
+3. **Direction is fixed here.** The opposite direction is a surprise, reported as such.
+4. **Coverage shift is a declared covariate.** Reported per pair, with a pre-committed sensitivity excluding the 6 pairs above 2pp.
+5. **S is confirmatory and labelled so** wherever it appears.
+6. **G1/G2 are required for the word "displacement".** G alone licenses only "the register rises".
+
+### What is NOT in this experiment, and why
+
+**Whether alignment removes transgressive vocabulary at all, base→endpoint.** It has never been tested at this scope and it is the project's foundational assumption. It is deliberately deferred to a **naughty/nice slot design** (`pair_drafts/round3/round3_slots.yaml`, 86 items), which holds context exactly — both continuations are licensed by the same slot, so `share = naughty/(naughty+nice)` is a choice between alternatives rather than a comparison across contexts, and polysemy dissolves because the item fixes the sense. Answering it here with a type-level lexicon would produce a number that design would then supersede. Recorded as a declared gap, not an omission.

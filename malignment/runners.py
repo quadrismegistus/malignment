@@ -236,8 +236,13 @@ class TWPRunner:
         model = tok = loader_id = None
         for attempt in range(MAX_RL_RETRIES + 1):
             try:
-                tok, loader_id = T.load_tokenizer(ck.repo, revision=ck.revision)
+                #: CONFIG FIRST. The MPT override below refuses remote code,
+                #: and the tokenizer load must be covered by it -- it runs first
+                #: and used to trust remote code unconditionally.
                 mtype, has_remote = _config_facts(ck.repo, ck.revision)
+                tok, loader_id = T.load_tokenizer(
+                    ck.repo, revision=ck.revision,
+                    trust_remote_code=(mtype != "mpt"))
                 kw = {"dtype": torch.float16, "trust_remote_code": bool(has_remote)}
                 if has_remote:
                     say("  config declares auto_map -> remote code ALLOWED")

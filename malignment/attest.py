@@ -258,8 +258,13 @@ def promote(doc):
     for p, op, c in (d.get("edges") or []):
         edge_op[c] = (p, op)
 
-    print("  == PROPOSED NEW EDGES (a root the cards say is derived, parent in roster)")
-    n = 0
+    # THREE BUCKETS, BECAUSE "PROPOSED" MUST MEAN "NOT ALREADY THERE".
+    # This block used to print every attested non-independent root as a proposed
+    # NEW edge without diffing against models.yaml -- so `phi-4 -sft-> phi-4-
+    # reasoning` and `falcon-mamba-7b -continual-> Falcon3-Mamba-7B-Base`, both
+    # long declared, were reported as findings and read as "n falls by 2". A
+    # check that does not compare against the artifact it checks is not a check.
+    new_edges, confirmed, conflicts = [], [], []
     for lin, rec in sorted(doc["lineages"].items()):
         r = rec.get("root") or {}
         if r.get("independent") != "no":
@@ -268,13 +273,55 @@ def promote(doc):
         hit = [m for m in declared_nodes if m and m in frm]
         if not hit:
             continue
-        n += 1
+        parent = max(hit, key=len)
+        cur = edge_op.get(lin)
+        if cur is None:
+            new_edges.append((lin, parent, r))
+        elif cur[0] == parent:
+            confirmed.append((lin, parent, cur[1]))
+        else:
+            conflicts.append((lin, parent, cur, r))
+
+    print("  == PROPOSED NEW EDGES (a root the cards say is derived, parent in roster,")
+    print("     AND no edge already declared)")
+    for lin, parent, r in new_edges:
         print("\n  %s" % lin)
-        print("     parent : %s" % max(hit, key=len))
+        print("     parent : %s" % parent)
         print("     quote  : %s" % (r.get("quote") or "")[:170].replace("\n", " "))
         print("     source : %s" % (r.get("url") or ""))
-    if not n:
+    if not new_edges:
         print("     (none)")
+
+    if conflicts:
+        print("\n  == PARENT DISAGREEMENTS (roster declares a DIFFERENT parent)")
+        for lin, parent, cur, r in conflicts:
+            print("  %-44s roster: %s (%s)  |  card: %s"
+                  % (lin.split("/")[-1][:44], cur[0].split("/")[-1], cur[1],
+                     parent.split("/")[-1]))
+
+    if confirmed:
+        print("\n  == ALREADY DECLARED, card agrees (no action): %d" % len(confirmed))
+        for lin, parent, op in confirmed:
+            print("     %-42s <-%s- %s" % (lin.split("/")[-1][:42], op,
+                                           parent.split("/")[-1]))
+
+    # STALENESS. An attestation describes the roster AS IT WAS when the agent
+    # read the card. `SmolLM3-3B-checkpoints` was flagged as a disagreement by a
+    # run ingested at 20:48 against edges declared at 21:47 the SAME EVENING --
+    # a claim about a state that stopped existing an hour later.
+    import subprocess
+    newest = max((r.get("ingested_at") or "") for r in (doc.get("runs") or [{}]))
+    try:
+        mtime = subprocess.run(["git", "log", "-1", "--format=%aI", "--",
+                                "roster/models/models.yaml"], capture_output=True,
+                               text=True, cwd=os.path.dirname(os.path.dirname(
+                                   os.path.abspath(__file__)))).stdout.strip()
+    except Exception:                                        # noqa: BLE001
+        mtime = ""
+    if mtime and newest and mtime[:19] > newest[:19]:
+        print("\n  !! models.yaml last changed %s; newest attestation %s."
+              % (mtime[:19], newest[:19]))
+        print("     Disagreements below may describe a roster state that no longer exists.")
 
     print("\n  == METHOD DISAGREEMENTS (roster edge op vs the card's own words)")
     n = 0
@@ -289,9 +336,23 @@ def promote(doc):
                 return frozenset(s)
         return frozenset([x])
     for mid, c in sorted(doc["checkpoints"].items()):
-        got = next((cl for cl in c["claims"] if cl.get("field") == "method"), None)
-        if not got or mid not in edge_op:
+        #: ALL method claims, not the first. A card and its paper are two
+        #: sources and a checkpoint routinely carries both -- `neo_7b_instruct`
+        #: has `method=instruct` (a one-line row in a card that is BYTE-IDENTICAL
+        #: to its sibling's) and `method=dpo` (the paper, which names Iterative
+        #: DPO with a reward model and a preference dataset). `next()` took the
+        #: card and reported a disagreement the attestation itself resolved,
+        #: against a roster ruling that had already been made, reversed, and
+        #: remade on exactly this evidence. **If ANY claim agrees, there is no
+        #: disagreement**; the roster needs only one source to be right.
+        methods = [cl for cl in c["claims"] if cl.get("field") == "method"]
+        if not methods or mid not in edge_op:
             continue
+        parent0, op0 = edge_op[mid]
+        if any(fam((cl.get("value") or "").strip().split()[0] if (cl.get("value") or "").strip() else "")
+               == fam(op0) for cl in methods):
+            continue
+        got = methods[0]
         v = (got.get("value") or "").strip()
         parent, op = edge_op[mid]
         #: **A RELATING EDGE MAKES NO CLAIM ABOUT HOW THE CHILD WAS PRODUCED.**

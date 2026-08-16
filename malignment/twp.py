@@ -643,7 +643,7 @@ def _override_applies(mid):
     return int(transformers.__version__.split(".")[0]) >= need
 
 
-def load_tokenizer(mid, revision=None):
+def load_tokenizer(mid, revision=None, trust_remote_code=True):
     """Return (tokenizer, loader_id). loader_id is STAMPED ON THE CELL.
 
     **`revision` MUST REACH THE TOKENIZER, NOT ONLY THE WEIGHTS.** The case that
@@ -682,7 +682,28 @@ def load_tokenizer(mid, revision=None):
         # tokenizer_config.json's tokenizer_class field and lands on the broken
         # class regardless of use_fast
         return PreTrainedTokenizerFast.from_pretrained(mid, **kw), f"override:{ov[1]}"
-    return AutoTokenizer.from_pretrained(mid, trust_remote_code=True, **kw), "auto"
+    #: `trust_remote_code` IS A PARAMETER BECAUSE THE TOKENIZER LOADS FIRST.
+    #: runners.py refuses remote code for MPT -- its bundled modelling file is
+    #: dead on transformers 5.x -- but that guard sat on the MODEL load, and the
+    #: tokenizer load runs a line earlier. `Alchan/mpt-7b-chat` therefore
+    #: resolved its tokenizer class through the dynamic-module path and died on
+    #: `import triton_pre_mlir`, having produced 0 of 2,706 cells while the
+    #: fleet moved on. Default stays True so every existing call is unchanged.
+    try:
+        return AutoTokenizer.from_pretrained(mid, trust_remote_code=trust_remote_code,
+                                             **kw), "auto"
+    except Exception:                                          # noqa: BLE001
+        if trust_remote_code:
+            raise
+        #: REFUSING REMOTE CODE SENDS AutoTokenizer BACK THROUGH config.json TO
+        #: resolve the tokenizer class -- and MPT's config fails huggingface_hub's
+        #: strict validation (`resid_pdrop expected float, got int`). So the
+        #: refusal that fixes one failure causes another, and only for the models
+        #: it was meant to rescue. PreTrainedTokenizerFast reads tokenizer.json
+        #: directly and touches neither remote code nor the config.
+        #: Reached ONLY when the caller already refused remote code, so a model
+        #: that loads normally is untouched.
+        return PreTrainedTokenizerFast.from_pretrained(mid, **kw), "fast-bypass"
 
 
 REV_SEP = "@"
