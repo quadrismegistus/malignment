@@ -107,11 +107,13 @@ A gate is a claim about the future; remediation is a fact about the past. The
 rows were deleted from the store and `produce_movement.buildable()` now inspects
 the `twp_words` it is about to read.
 
-Before that remediation it had not reached `movement` (0 of 44.5M rows), which is
-what the original note recorded -- Had it built, it would have reported JS 0.82 against its parent
-where real alignment runs 0.04-0.16 -- the largest displacement in the corpus, and
-entirely an artefact. It is also the roster's anti-aligned discriminator, so the
-finding it would have carried is one somebody would have wanted to believe.
+When first found it had not reached `movement` (0 of 44.5M rows), and that is
+what the original note recorded. It was true when measured and stopped being true
+the moment a later fix let more edges build -- which is exactly why the note is
+kept rather than replaced: **"not contaminated" was a reading of one moment, not
+a property of the data.** And the artefact it would have carried, JS 0.82 on the
+roster's anti-aligned discriminator, is one somebody would have wanted to
+believe.
 """
 import argparse
 import sys
