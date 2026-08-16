@@ -8,7 +8,8 @@ One directory per QUESTION. Not per theme, not per script.
         run.py            THE producer. Writes the result AT ITS GRAIN.
         plot.py           reads the stored result and writes figures/.
         population.json   generated receipt: the exact ids the result used
-        results.csv       the result at its own grain, when it is small
+        results/          one file per GRAIN, named for it:
+                            by_chain.csv, by_chain_domain.csv, ...
         figures/          regenerable output
 
 Only `README.md` and `run.py` are required.
@@ -51,8 +52,19 @@ add a table nobody else queries and a migration nobody wants. What is NOT
 acceptable either way is storing only the mean: the row per chain must exist, so
 the summary can be re-derived and disagreements can surface.
 
-M01 accumulated 455 result files beside its scripts, which is what this looks
-like when there is no size rule. The rule is the size, not the prohibition.
+**ONE EXPERIMENT USUALLY HAS SEVERAL GRAINS, so `results/` holds one file per
+grain and THE FILENAME IS THE GRAIN**: `by_chain.csv`, `by_chain_domain.csv`,
+`by_lineage.csv`. Not `results_2.csv`, not `results_final.csv`.
+
+That naming rule is what keeps a `results/` directory from becoming M01's 455
+files: **two files at the same grain is a defect, not a variant.** If
+`by_chain.csv` and `by_chain_v2.csv` both exist, one of them is stale and the
+question is which — exactly the ambiguity that made 455 files unusable. A new
+grain is a new name and is obvious; a new *version* of a grain overwrites, and
+git holds the history.
+
+Figures follow the same rule: `plot.py` may write several, and a variant is a
+FLAG on it, never a second plotting script.
 
 **A REGISTRATION IS FROZEN OR IT IS NOT A REGISTRATION** — but not every
 experiment needs one. It is required when the result has **a direction you would
