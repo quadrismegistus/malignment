@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS {db}.checkpoints (
     org_type LowCardinality(String), country LowCardinality(String),
     scale LowCardinality(String), open_weight UInt8, open_data UInt8,
     nickname LowCardinality(String), revision LowCardinality(String),
-    revision_ladder UInt32, lineage String, depth UInt8,
+    revision_ladder UInt32, lineage String, depth UInt8, pretrained UInt8,
     params_b Float32, scale_group String, is_representative UInt8,
     vocab_size UInt32, vocab_len UInt32, n_added_tokens UInt32,
     reasoning UInt8
@@ -193,7 +193,14 @@ def rows():
               "nickname": (d or {}).get("nickname", "") or "",
               "revision": str((d or {}).get("revision", "") or ""),
               "revision_ladder": int((d or {}).get("revision_ladder") or 0),
-              "reasoning": int(bool((d or {}).get("reasoning")))}
+              "reasoning": int(bool((d or {}).get("reasoning"))),
+              #: **DEFAULTS TRUE, AND THAT IS THE TRAP.** A node with no incoming
+              #: edge is a base unless something says otherwise, so a checkpoint
+              #: BECOMES a base when an edit removes its edge. phi-4 sat in the
+              #: base->aligned population that way; Teuken-instruct-commercial
+              #: would have, the moment its wrong-run edge came out. Carried into
+              #: the row so the check and the query read the same field.
+              "pretrained": int((d or {}).get("pretrained", True) is not False)}
              for m, d in (A.get("nodes") or {}).items()]
     edges = []
     for e in A.get("edges") or []:
@@ -365,6 +372,59 @@ def rows():
     return nodes, edges, dangling
 
 
+def _report_unasserted_roots(nodes, edges):
+    """Every root must be CORROBORATED as a base, not merely lack a parent.
+
+    **A ROOT IS NOT NECESSARILY A BASE**, and the default runs the wrong way: a
+    node with no incoming edge is treated as a pretrained base unless something
+    says otherwise, so a checkpoint BECOMES a base by an edit that removes its
+    edge. That is not hypothetical -- it happened twice:
+
+      microsoft/phi-4    a root all along, attested `instruct_bundle`. Its card:
+                         "We align the pretrained model with one round of SFT
+                         4.1, one round of DPO". It sat in the base->aligned
+                         population until RH asked where phi-4 appears.
+      Teuken-7B-instruct-commercial-v0.4
+                         BECAME a root the moment its wrong-run edge was removed,
+                         and would have defaulted to base.
+
+    So a root must either declare `pretrained: false` or be attested
+    `method: pretrain`. Reported on every build rather than raised, because a
+    newly added model legitimately has neither until it is audited -- and a check
+    that blocks the build gets removed, while one that prints a name gets fixed.
+    """
+    import json
+    import os
+    par = {e["child"] for e in edges if e["op"] in DERIVING}
+    roots = [n["model_id"] for n in nodes if n["model_id"] not in par]
+    path = os.path.join(ROOT, "roster", "models", "attestations.json")
+    att = {}
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as fh:
+            att = (json.load(fh).get("checkpoints") or {})
+    bad = []
+    for m in roots:
+        #: READ THE ROW, WHICH NOW CARRIES IT. The first version of this check
+        #: read `pretrained` off the built row before `rows()` populated it, so
+        #: it was always None and the check flagged all three DECLARED roots --
+        #: a checker reporting the opposite of the truth because it read a
+        #: different artifact than the one holding the answer.
+        if not next((n.get("pretrained", 1) for n in nodes if n["model_id"] == m), 1):
+            continue
+        claims = (att.get(m) or {}).get("claims") or []
+        if next((c.get("value") for c in claims if c.get("field") == "method"), None) == "pretrain":
+            continue
+        bad.append(m)
+    if bad:
+        print("  ROOTS NOT CORROBORATED AS BASES: %d -- each will enter the"
+              "\n  base->aligned population unasserted. Declare `pretrained: false`"
+              "\n  or attest `method: pretrain`:" % len(bad))
+        for m in bad:
+            print("     %s" % m)
+    else:
+        print("  roots corroborated as bases: %d/%d" % (len(roots), len(roots)))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
@@ -380,6 +440,7 @@ def main():
     print("  %d checkpoints | %d edges | %d roots (no incoming edge)"
           % (len(nodes), len(edges), len(roots)))
     print("  operations: %s" % dict(ops.most_common()))
+    _report_unasserted_roots(nodes, edges)
     if dangling:
         print("  DANGLING EDGES (endpoint not a declared node): %d" % len(dangling))
         for e in dangling[:5]:
