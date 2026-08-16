@@ -19,7 +19,20 @@ ruamel.yaml            # roster.check_authored -- a STRICTER parse of models.yam
                        # roster without the safe_dump that destroyed 114 comment
                        # lines once.
 pandas                 # ch.py query results, models.py
-hashstash              # checkpoint.py -- the twp jsonl engine (RH's own library)
+hashstash              # checkpoint.py -- the twp jsonl engine (RH's own library).
+                       # slot_axis.py uses it too, at engine="lmdb" rather than
+                       # jsonl: an axis build resolves ~400 keys by exact match
+                       # and jsonl must scan the file per key. Measured lmdb at
+                       # 0.07 ms/key, float32 bit-identical on round-trip.
+
+# --- the slot axis ---------------------------------------------------------
+# NOT needed to read the store, query ClickHouse, or run a measurement. Only
+# `slot_axis.py` imports it, and only when an axis is actually built.
+sentence-transformers  # slot_axis.py -- BAAI/bge-m3, ON CPU. RH's ruling is that
+                       # bge on MPS is not to be trusted here, and that turns out
+                       # to be an operational advantage as well: an axis can be
+                       # built while `runners` holds the GPU for a fleet, which
+                       # is not true of anything in twp.py.
 
 # --- measurement only: not needed to read the store or query ClickHouse -----
 # A machine that only ANALYSES needs nothing below. `Checkpoint` deliberately
