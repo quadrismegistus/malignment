@@ -175,10 +175,31 @@ def main():
             w.writerow([f, winners[f][0], winners[f][1], winners[f][2]])
     floor_dependent = len({v[0] for v in winners.values()}) > 1
 
-    # -- refusal 1: is the winner actually representative? ------------------
+    # -- AMENDMENT 1: the output is a SET, at the pre-declared ceiling ------
+    #: **THE CEILING IS `MAX_DEV_REFUSAL`, WHICH WAS FROZEN BEFORE THE RUN.**
+    #: Using it to ADMIT rather than only to REFUSE adds no parameter, and that
+    #: is exactly why it is the boundary rather than a break read off the
+    #: observed gradient -- which has none: 6.1, 8.1, 9.4, 10.6, 11.3, 11.3,
+    #: 11.9, 13.2. An argmin over that manufactures a winner.
+    #:
+    #: The argmin result is still computed and still reported. A reader who
+    #: suspects the band of being self-serving -- it moved the author's stated
+    #: preference from third place to eligible -- can compare the two.
+    band = [r for r in rows if r["max_dev"] <= MAX_DEV_REFUSAL]
+    with open(os.path.join(RESULTS, "candidates.csv"), "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols)
+        w.writeheader()
+        for r in band:
+            w.writerow({k: r[k] for k in cols})
+
+    # -- refusal 1: is ANY model representative? ----------------------------
     top = rows[0]
     refused = top["max_dev"] > MAX_DEV_REFUSAL
     summary = {
+        "candidate_set_size": len(band),
+        "candidates": [r["model"] for r in band],
+        #: KEPT, and no longer the headline. See AMENDMENT 1.
+        "argmin_winner": None if refused else top["model"],
         "declared_screener": None if refused else top["model"],
         "refusal": ("winner is %.1f points from median on some axis, above the "
                     "declared ceiling of %.0f -- NO REPRESENTATIVE MODEL EXISTS "

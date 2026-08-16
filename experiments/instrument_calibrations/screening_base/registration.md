@@ -127,3 +127,29 @@ What is frozen: **this specification.** The population, the three statistics, th
 What is **not** frozen: the question. Another operationalisation of median-ness — any row in the table above — is a legitimate new question with its own registration, and it does not need this one to have failed first. **This registration claims no priority over them.** If two measures name different screeners, that is information about how "representative" behaves under different instruments, and the right response is to report both rather than to rank the registrations by date.
 
 The practical difference: a later seat may measure this again by another route without arguing that this one is void, and this one may not quietly become the other after the fact.
+
+---
+
+## AMENDMENT 1 — 2026-08-16, AFTER THE RUN
+
+**Appended, not edited in place. THE RULE ABOVE RAN AS FROZEN and its output stands: under `argmin max(|pct − 50|)` the winner is `Aleph-Alpha/Pharia-1-LLM-7B-control-hf` at max_dev 6.1, stable across all three declared coverage floors, refusal 1 not triggered.** That result is preserved in `results/summary.json` and is not being revised.
+
+RH, after seeing it: *"we dont need the exact median do we? just a list of candidates."*
+
+**The objection is correct and it is about the measurement, not the answer.** The max_dev gradient has no natural break — 6.1, 8.1, 9.4, 10.6, 11.3, 11.3, 11.9, 13.2, 13.2, 14.5 — so an argmin over a rank statistic across 155 models manufactures a winner out of a smooth distribution. The distance from rank 1 to rank 3 is 3.3 percentile points. **Naming one model asserts a precision this measurement does not have.**
+
+**SO THE REPORTED FORM CHANGES AND THE RULE DOES NOT.** The output is now a CANDIDATE SET: every model within the **already-declared 25-point ceiling** from refusal 1. That ceiling was frozen before the run, for the stated reason that a model more than 25 points off median on any axis is not representative. Using it to admit rather than only to refuse introduces **no new parameter and no post-hoc threshold** — which is the whole reason it is the boundary used, rather than a break chosen from the observed gradient.
+
+The set is **32 of 155 models (21%)**.
+
+### AND THIS CHANGE ADMITS THE MODEL I SAID I PREFERRED
+
+Declared in the selection event above: I would rather `Falcon3-10B-Base` won. Under the frozen argmin it placed **third** (max_dev 9.4). Under the candidate set it is admitted.
+
+**A specification change made after seeing the result, which moves the author's preferred answer from losing to eligible, is the exact shape of a specification search** — and it does not stop being that shape because the objection came from RH and is correct on the merits. What keeps it honest is not the motive but that the boundary was pre-declared and the losing result is preserved above rather than overwritten. A reader who thinks the band is self-serving can compare it against the argmin winner, which is still in `summary.json`.
+
+**What this does not license:** picking `Falcon3-10B-Base` from the set *because* it was preferred, and calling that the calibration's output. The calibration's output is 32 models. Choosing among them is a separate decision on separate grounds — locality, family, licence, size — and those grounds are engineering conveniences that must be named as such, not laundered through this instrument.
+
+### WHAT THE SET SAYS THAT THE ARGMIN DID NOT
+
+The three statistics are not redundant inside the band. `zephyr-7b-beta` sits at breadth 65% / intensity 36%, `OLMoE-1B-7B-0125-SFT` at breadth 40% / intensity 65% — both admitted, both "median" on the mean, and they behave oppositely. **A screener chosen from this set still has a character**, and the set is the right object to choose from precisely because it makes that visible where a single name hid it.

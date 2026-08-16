@@ -1,35 +1,61 @@
 # screening_base
 
-**Question.** Which released checkpoint is representative of the roster's transgressive-vocabulary behaviour, and should therefore screen slot frames?
+**Question.** Which released checkpoints are near the middle of the roster for transgressive-vocabulary mass, and are therefore reasonable models to screen slot frames with?
 
-**Status: REGISTERED, NOT RUN — 2026-08-16.** `registration.md` is frozen; `run.py` does not exist yet. This file will carry the result when it does.
+**Status: RUN, 2026-08-16.** 155 models, 2,189-prompt panel, lexicon sha `d542e7e2bb86bd00`. **32 candidates.**
 
 **id.** `screening_base`
 
-## Why this exists
+## Why it matters which model screens
 
-`SlotExplorer` screens candidate frames by showing what one model wants to say at the blank. That model is a choice, and it is a consequential one in both directions: a **quiet** screener rejects frames that are alive in the models actually measured, and a **loud** one admits frames that are dead in them. The second is the original M01 failure — *"the prompt and slots were just badly chosen … accidentally lame"* — arriving by a different route.
+`SlotExplorer` screens candidate frames by showing what one model wants to say at the blank, and that model biases the screen both ways: a **quiet** one rejects frames that are alive in the models actually measured, a **loud** one admits frames that are dead in them. The second is the original M01 failure — *"the prompt and slots were just badly chosen … accidentally lame"* — by a different route.
 
-The screening base is **not** the diagnostic pair and takes a different answer. Screening reads one distribution and no contrast, so contamination is not its hazard: selection on `P_base` is a pre-treatment covariate and cannot bias a base→aligned contrast measured after it. Representativeness is its hazard. The diagnostic pair (`slots.DIAGNOSTIC_PAIR`, Falcon3-3B) has the opposite requirement and is declared separately.
+This is **not** the diagnostic pair and takes a different answer. Screening reads one distribution and no contrast, so contamination is not its hazard: selection on `P_base` is a pre-treatment covariate and cannot bias a base→aligned contrast measured after it. The diagnostic pair (`slots.DIAGNOSTIC_PAIR`) has the opposite requirement and is declared separately.
 
-## What is registered
+## Result
 
-A **selection rule**, a population and a set of refusals. No hypothesis — this question makes no claim about what alignment does, which is why it lives in `instrument_calibrations/` and must not appear in the hypothesis register.
+**A set, not a winner.** The candidates are the 32 of 155 models within 25 percentile points of the median on *all three* statistics — `results/candidates.csv`. The top of it:
 
-**No hypothesis, and a registration anyway.** `experiments/README.md` requires one under two conditions, and the second is the live one here: *a different specification could give a different answer you would prefer.* Mean, breadth and intensity name **different winners** — `Qwen3-8B` is 17th percentile on mean and 91st on intensity — and nothing in the data picks among the combining rules. What is at risk is not a claim about alignment but the rule that picks the instrument every later screening decision runs through.
+| model | mean | breadth | intensity | max dev |
+|---|---|---|---|---|
+| Pharia-1-LLM-7B-control-hf | 54% | 56% | 53% | 6.1 |
+| stablelm-2-1_6b | 56% | 58% | 54% | 8.1 |
+| Falcon3-10B-Base | 51% | 49% | 59% | 9.4 |
+| Llama-3.1-Tulu-3-8B-SFT | 45% | 57% | 39% | 10.6 |
+| Olmo-3-1025-7B | 42% | 53% | 39% | 11.3 |
+| Qwen3-8B-Base | 39% | 38% | 58% | 11.9 |
 
-The rule, in one line: among models with ≥2,000 of the 2,189 panel prompts, the screener is the one minimising `max(|percentile − 50|)` across **mean**, **breadth** and **intensity** of labelled mass. No tunable parameter.
+**There is no natural break in the gradient** — 6.1, 8.1, 9.4, 10.6, 11.3, 11.3, 11.9, 13.2 — so ranking these against each other is over-reading. Any of them is a defensible screener; the set is the answer.
 
-## Read the registration first, for one reason
+**For contrast, the two models actually under discussion:**
 
-**An exploratory pass was run before the registration existed**, answering RH's question about defaulting to Llama. `registration.md` opens with that selection event, what it licenses and what it does not. In short: this can freeze a rule and give the choice a receipt; it cannot claim Falcon3-10B-Base won a pre-registered contest, because the specification was written knowing the exploratory ranking.
+| | mean | breadth | intensity | max dev | |
+|---|---|---|---|---|---|
+| Llama-3.1-8B | 95% | 92% | 82% | 45.5 | rank 128/155 — **loud on all three** |
+| Falcon3-3B-Base | 11% | 29% | 8% | 42.3 | rank 109/155 — **quiet on all three** |
 
-## Inputs
+So Llama-3.1-8B is a poor screener, and Falcon3-3B is a poor screener while remaining the right diagnostic pair. Both are outside the candidate set by a wide margin, which is the useful thing this measured.
+
+**Inside the band the three statistics still differ**, and that is worth reading before choosing: `zephyr-7b-beta` is breadth 65% / intensity 36%, `OLMoE-1B-7B-0125-SFT` is breadth 40% / intensity 65%. Both are "median" on the mean and behave oppositely.
+
+## Method
+
+Per (model, prompt), the summed probability of lexicon-labelled words at the blank, absent counted as 0. Then per model: **mean** (mass per panel prompt), **breadth** (share of prompts carrying any), **intensity** (mass per prompt that carries any). Rank-percentile each, and take everything within 25 points of median on the worst axis.
+
+Three statistics rather than one because the per-prompt distribution has a median of exactly **0.0000** and a max of **0.71** — the mean alone mixes breadth with intensity, and two models can reach it from opposite directions.
 
 | | |
 |---|---|
 | prompts | `{db}.wf_panel`, 2,189 crossed panel prompts |
-| models | ≥2,000 of those prompts measured — 156 of 403 on the snapshot date |
-| instrument | `{db}.wf_sexviolence`, sha `d542e7e2bb86bd00`, 1,063 words |
+| models | ≥2,000 of those prompts measured, `@revision` checkpoints excluded — 155 of 403 |
+| instrument | `{db}.wf_sexviolence`, sha `d542e7e2bb86bd00`, 1,063 blind-rated words |
 
-**The instrument is English-only and blind on CJK**, and its own registration requires the unlabelled share to be reported downstream. `run.py` must use `\p{Han}` for that check: the exploratory pass used `[\x{4e00}-\x{9fff}]`, which ClickHouse matched against 2,188 of 2,189 prompts where the true count is **1**.
+**Stable across coverage floors** (1500 / 2000 / 2180) — `results/sensitivity.csv`.
+
+## Limits
+
+- **The lexicon is English-only** and blind on CJK by construction; its registration requires the unlabelled share to be reported downstream. Here that exposure is negligible — 1 of 2,189 panel prompts contains CJK, and CJK mass is ≤0.03% per candidate — but it is a property of this panel, not of the measure. `run.py` uses `\p{Han}`; the pattern `[\x{4e00}-\x{9fff}]` matches 2,188 of 2,189 in ClickHouse and is wrong.
+- **The panel is not composition-neutral**: balancing keeps 100% of `taboo` and `property` but 42% of `neutral` and 34% of `contradiction`. Representative *of this panel*.
+- **This is one operationalisation of median-ness.** The project holds others that are language-agnostic where this one is not — argmax-agreement centrality over `{db}.panel_pairs` (78,106 pairs, balanced 473-prompt panel), JS to a corpus centroid via `similarity.js`, alignment-edge magnitude via `movement_cells`. A screener chosen by any of those is an equally legitimate answer, and disagreement between them would be informative rather than an error.
+- **Does not transfer to pole mass.** This measures a blind general lexicon over a declared corpus; the app screens author-chosen poles on one frame. Correlated, different instruments.
+- An exploratory version of this ran before the producer existed, prompted by *"should we default to llama as screener?"*. The numbers were the same; the reason it is written down is that the author's stated preference (Falcon3-10B, on grounds of locality and family) is in the resulting set, and should not be mistaken for something this measured.
