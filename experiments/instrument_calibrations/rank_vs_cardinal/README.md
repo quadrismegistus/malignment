@@ -6,6 +6,17 @@
     dN_rank  s replaced by normal scores   rank-based, decomposition preserved
     delta    2*P(post more naughty) - 1    Cliff's delta; fully non-parametric
 
+## Two producers in one directory, and why
+
+    run.py        -> results/per_prompt.csv           197 prompts, uncapped
+    cap_probe.py  -> results/aperture_by_prompt.csv   159 prompts, three apertures
+
+`experiments/README.md` requires `README.md` and `run.py` and forbids **two files at the same grain**. These two are both one row per prompt, which is why the outputs are named for their QUESTION rather than by prefixing each other -- `cap_per_prompt.csv` was the `by_chain_v2.csv` shape the rule warns about (lacan, [6399]).
+
+**The populations differ and that is the reason the names have to.** `run.py` measures 197 prompts; `cap_probe.py` measures the 159 that clear the top-50 eligibility rule. Two same-grain files whose row sets differ, distinguished only by a prefix, is precisely the ambiguity that made 455 files unusable.
+
+They share a directory rather than splitting because they share the population draw, the axis, the seed and `movement.contrast` -- the cap probe asks whether a different APERTURE changes the same statistics, which is not answerable without the uncapped run beside it. A separate directory would duplicate all of that to compare against it.
+
 All three live in `malignment.slot_axis`; their invariances are asserted by `python -m malignment.slot_axis`, not claimed here. Run: `python run.py`. Pair `gl198976/mpt-7b -> gl198976/mpt-7b-instruct`, 197 of a 200-prompt sample from 2,878 shared `CDH0050` prompts, pooled 12-pair lexical axis.
 
 ## The answer, and it is not the one the question expects

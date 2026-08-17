@@ -152,8 +152,19 @@ def write(out, base_id, post_id, cap, rows, refused, n_shared, n_drawn):
     import csv
     from scipy.stats import pearsonr, spearmanr
     os.makedirs(out, exist_ok=True)
+    #: **THE FILENAME IS THE GRAIN, AND IT NAMES THE QUESTION** (lacan, [6399]).
+    #: These were `cap_per_prompt.csv` and `cap_summary.json` -- a prefix on
+    #: `run.py`'s `per_prompt.csv`, which is the `by_chain_v2.csv` shape
+    #: `experiments/README.md` warns about: a variant disambiguated by a prefix
+    #: rather than a grain named for itself.
+    #:
+    #: And it was worse than a naming smell. **Both files are one row per prompt
+    #: over DIFFERENT POPULATIONS** -- `run.py` measures 197 and this measures
+    #: the 159 that clear `MIN_VOCAB`-plus-eligibility -- so two same-grain files
+    #: sat beside each other with no way to tell from the names which row set
+    #: either held. That is exactly the ambiguity the rule exists to prevent.
     tag = "cap%d" % cap
-    with open(os.path.join(out, "cap_per_prompt.csv"), "w", newline="") as fh:
+    with open(os.path.join(out, "aperture_by_prompt.csv"), "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
@@ -189,7 +200,7 @@ def write(out, base_id, post_id, cap, rows, refused, n_shared, n_drawn):
         "eligible_residual_base_mean": float(col("residual_base").mean()),
         "aperture": aperture, "agreement_vs_UNION": agree,
     }
-    with open(os.path.join(out, "cap_summary.json"), "w") as fh:
+    with open(os.path.join(out, "aperture_summary.json"), "w") as fh:
         json.dump(summary, fh, indent=2)
 
     print("\nELIGIBILITY  '%d candidates on both arms or no comparison'" % cap)
@@ -212,7 +223,7 @@ def write(out, base_id, post_id, cap, rows, refused, n_shared, n_drawn):
     for k, v in agree.items():
         print("    %-22s %8.3f %9.3f %10.3f"
               % (k, v["pearson"], v["spearman"], v["sign_agree"]))
-    print("\nwrote %s" % os.path.join(out, "cap_summary.json"))
+    print("\nwrote %s" % os.path.join(out, "aperture_summary.json"))
 
 
 if __name__ == "__main__":
