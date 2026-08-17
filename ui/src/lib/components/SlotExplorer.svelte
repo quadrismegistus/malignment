@@ -945,8 +945,17 @@
 					placeholder="note (optional) — why this frame, what to watch"
 				/>
 				{#if savedCount !== null}
-					<span class="cnt dim" title="items already written to $MALIGNMENT_DATA/slots/">
-						{savedCount} saved
+					<!--
+					  "N saved" ALONE READ AS A TOTAL AND IS NOT ONE. It counts the
+					  running authoring file only; the 86 ported items are in the
+					  repo and never pass through here. Naming the population in the
+					  label is the difference between a count and a loss report.
+					-->
+					<span
+						class="cnt dim"
+						title="items in $MALIGNMENT_DATA/slots/slot-explorer.yaml — the ported round3 items are in roster/prompts/slots/ and are not counted here"
+					>
+						{savedCount} authored here
 					</span>
 				{/if}
 				{#if census}
@@ -1015,11 +1024,34 @@
 					<span
 						>items per domain · {census.n_total} total, largest {census.max_total}</span
 					>
-					<span class="dim"
-						>round3 {census.files.round3?.n ?? 0} committed · now {census.files
-							.authoring?.n ?? 0} authored · domain is free text and nothing enforces
-						the list</span
-					>
+					<span class="dim">domain is free text and nothing enforces the list</span>
+				</div>
+				<!--
+				  ── BOTH PATHS ARE NAMED, and this is not decoration.
+
+				  RH, 2026-08-17, on seeing "2 saved" beside a census of 88: "wait
+				  there's only 2? what happened to the ones we ported from
+				  round3_slots.yaml?" Nothing had happened to them -- the 86 are
+				  committed in roster/ and the 2 are in $MALIGNMENT_DATA -- but the
+				  panel named neither location, so a small count next to the save
+				  button read as loss.
+
+				  A TWO-POPULATION COUNT THAT DOES NOT SAY WHERE EACH LIVES INVITES
+				  THE READER TO ASSUME ONE STORE. The split is the whole design
+				  (stimulus is tracked, measured data is not), and a column header
+				  reading "round3" carries none of it.
+				-->
+				<div class="paths">
+					{#each census.corpora as c (c)}
+						<div class="pathrow">
+							<span class="pathn">{census.files[c]?.n ?? 0}</span>
+							<span class="pathlab">{c === 'round3' ? 'ported, in the repo' : 'authored here'}</span>
+							<code class="pathp" title={census.files[c]?.path}>{census.files[c]?.path ?? '—'}</code>
+							{#if census.files[c] && !census.files[c].exists}
+								<span class="bad">file missing</span>
+							{/if}
+						</div>
+					{/each}
 				</div>
 				<table class="censustab">
 					<thead>
@@ -1465,6 +1497,34 @@
 		gap: 0.15rem 0.8rem;
 		font-size: 0.72rem;
 		margin-bottom: 0.3rem;
+	}
+	.paths {
+		font-size: 0.68rem;
+		margin: 0 0 0.35rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.05rem;
+	}
+	.pathrow {
+		display: flex;
+		gap: 0.4rem;
+		align-items: baseline;
+	}
+	.pathn {
+		font-variant-numeric: tabular-nums;
+		font-weight: 600;
+		min-width: 2rem;
+		text-align: right;
+	}
+	.pathlab {
+		min-width: 9rem;
+		color: var(--dim, #6b6b66);
+	}
+	.pathp {
+		color: var(--dim, #8b8b86);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	.censustab {
 		border-collapse: collapse;
