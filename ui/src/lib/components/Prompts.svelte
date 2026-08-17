@@ -77,6 +77,28 @@
 		}
 	}
 
+	//: ── THE SAME TEXT CAN BE DECLARED TWICE, AND `prompt_id` IS THE KEY.
+	//:
+	//: 82 prompt texts appear twice in `{db}.prompts` (168 rows) under different
+	//: ids, files and SOURCES -- `angry_want_run` (SETD, violence) and
+	//: `store_g045_5` (OTHER, other) are the same stimulus declared in two
+	//: files, with different `domain`. `prompt_id` is unique; the text is not.
+	//:
+	//: This surfaced as a Svelte `each_key_duplicate` crash, which was the
+	//: cheapest possible way to find out. **The medians are unaffected** --
+	//: checked, both views return exactly one row per prompt, so this is a
+	//: duplicate DECLARATION and not a join fan-out.
+	//:
+	//: Marked rather than merged: the two rows carry different categories for
+	//: one stimulus and the measurement is keyed on TEXT, so they show identical
+	//: movement under different labels. Which of the two is right is a roster
+	//: question, and a panel that silently picked one would be answering it.
+	let dupText = $derived.by(() => {
+		const seen = new Map<string, number>();
+		for (const r of rows) seen.set(r.prompt, (seen.get(r.prompt) ?? 0) + 1);
+		return new Set([...seen].filter(([, n]) => n > 1).map(([t]) => t));
+	});
+
 	let view = $derived.by(() => {
 		const needle = filter.trim().toLowerCase();
 		let out = needle
@@ -173,9 +195,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						{#each view.slice(0, 500) as r (r.prompt)}
+						{#each view.slice(0, 500) as r (r.prompt_id)}
 							<tr onclick={() => open(r.prompt)}>
-								<td class="p" title={r.prompt}>{r.prompt}</td>
+								<td class="p" title={r.prompt}>
+									{r.prompt}{#if dupText.has(r.prompt)}<span
+											class="dup"
+											title="this text is declared more than once in the prompts table, under different ids and categories; the measurement is keyed on the text, so the movement columns are identical across them"
+											>·2</span
+										>{/if}
+								</td>
 								<td>{r.domain ?? ''}</td>
 								<td>{r.subdomain ?? ''}</td>
 								<td>{r.language ?? ''}</td>
@@ -326,4 +354,9 @@
 	.movers .rise { color: var(--blue-light); }
 	.movers .fall { color: var(--red, #c92a2a); }
 	.movers .w { font-family: var(--mono); margin-right: 12px; }
+	.dup {
+		margin-left: 6px; font-size: 9px; padding: 1px 4px; border-radius: 3px;
+		border: 1px solid var(--amber, #b8860b); color: var(--amber, #b8860b);
+		font-family: var(--mono); cursor: help;
+	}
 </style>
