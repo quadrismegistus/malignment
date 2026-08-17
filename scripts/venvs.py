@@ -53,54 +53,146 @@ import subprocess
 import sys
 
 import yaml
+from packaging.specifiers import SpecifierSet
+from packaging.version import InvalidVersion, Version
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODELS_YAML = os.path.join(ROOT, "roster", "models", "models.yaml")
 ENVS_YAML = os.path.join(ROOT, "roster", "environments.yaml")
 
-#: A pin that is a floor (`>=4.57`) does not distinguish an environment -- every
-#: venv we build satisfies it. Only an EXACT pin forces a separate interpreter,
-#: so that is what groups. `None` is the group that takes whatever is current.
-def _exact(pin):
-    pin = (pin or "").strip()
-    return pin[2:].strip() if pin.startswith("==") else None
+#: **THE DECLARATIONS ARE PEP 440 AND ARE READ AS PEP 440.** They always looked
+#: like it (`>=4.57`, `==4.57.1`); what was missing was ever writing a RANGE, so
+#: `tf457` expressed a ceiling by being a separate profile and every other
+#: profile read as "no ceiling" when it meant "ceiling never tested". Grouping on
+#: the specifier rather than on an exact-pin special case is what lets `>=5` and
+#: `>=4.57` share an interpreter while `>=4.57,<5` cannot.
+def _candidates(specs):
+    """Versions worth testing for satisfiability, taken from the specs themselves.
+
+    A SpecifierSet cannot be enumerated, and asking PyPI would put a network call
+    inside a planning step. But an intersection of simple specifiers is non-empty
+    iff it contains a point at one of the boundaries they name -- so the boundary
+    versions, each also bumped by a hair to clear a strict `<`, plus one below all
+    and one above all, decide it without guessing and without a candidate list
+    anybody has to maintain.
+    """
+    out = {Version("0"), Version("9999")}
+    for s in specs:
+        for clause in SpecifierSet(s):
+            try:
+                v = Version(clause.version)
+            except InvalidVersion:
+                continue
+            out.add(v)
+            parts = list(v.release) + [0]
+            parts[-1] += 1
+            out.add(Version(".".join(str(x) for x in parts)))
+            if len(v.release) > 1:
+                bumped = list(v.release)
+                bumped[-1] += 1
+                out.add(Version(".".join(str(x) for x in bumped)))
+    return sorted(out)
 
 
-def _name_for(pin):
-    return ".venv" if pin is None else ".venv-tf%s" % pin.replace(".", "")[:3]
+def _satisfiable(specs):
+    """True if one installed version can satisfy every declaration in `specs`."""
+    specs = [s for s in specs if s]
+    if not specs:
+        return True
+    combined = SpecifierSet(",".join(specs))
+    return any(v in combined for v in _candidates(specs))
+
+
+def _ceiling(sp):
+    """The clauses that bound a spec from ABOVE, as a signature. -> tuple
+
+    **A CEILING IS WHAT FORCES A SECOND ENVIRONMENT; A FLOOR NEVER DOES**, because
+    the newest release satisfies every floor at once. So `>=4.57` and `>=5` share
+    an interpreter and `>=4.57,<5` cannot, and that is the whole partition.
+
+    Grouping instead by "can these share SOME version" is satisfiable-but-wrong:
+    4.57.1 satisfies `>=4.57` and `>=4.57,<5` together, so a merge on that test
+    pins the entire roster to its own floor -- a year-old transformers for 250
+    models that have only ever been measured at 5.x. Fewest environments is not
+    the objective; the NEWEST admissible version for each node is.
+    """
+    return tuple(sorted(str(c) for c in SpecifierSet(sp or "")
+                        if c.operator in ("<", "<=", "==", "===", "~=")))
+
+
+def _name_for(profiles):
+    """`.venv` for the group holding the `default` profile, else `.venv-<profile>`.
+
+    Named after a PROFILE rather than after a version string, because the version
+    is what changes: `.venv-tf457` survives `==4.57.1` being rewritten as the
+    range it always meant, and a directory name that moves on every re-pin would
+    invalidate every path anyone has written down.
+    """
+    named = {p: n for p, n in profiles.items() if p}
+    if "default" in named or not named:
+        return ".venv"
+    #: **COUNTED OVER MODELS, NOT OVER THE SET OF PROFILE NAMES.** Counting the
+    #: set gives every profile a tally of one, so the tie-break decides alone and
+    #: the group of 11 `tf457` nodes gets named for the 2 `ssm` ones that only
+    #: landed here via Zamba2's deviation -- alphabetical order masquerading as
+    #: a constituency.
+    return ".venv-%s" % sorted(named.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
 
 
 def spec():
-    """-> {venv_name: {pin, packages, profiles, models}} derived from the roster."""
+    """-> {venv_name: {specs, packages, profiles, models}} derived from the roster."""
     doc = yaml.safe_load(open(MODELS_YAML))
     envs = yaml.safe_load(open(ENVS_YAML))
     profiles = envs.get("profiles") or {}
 
-    groups = collections.defaultdict(
-        lambda: {"pin": None, "packages": {}, "profiles": set(), "models": []})
+    #: a node's own `transformers:` OVERRIDES its profile's -- that is what a
+    #: deviation is for. Zamba2 is the case (profile `ssm`, its own `>=4.57,<5`),
+    #: and so now is Olmo-Hybrid, whose `default` profile declares a floor its
+    #: own architecture does not exist under.
+    bysp = collections.defaultdict(list)
     for model, node in (doc.get("nodes") or {}).items():
         env = (node or {}).get("env") or {}
-        prof = env.get("profile")
-        #: a node's own `transformers:` OVERRIDES its profile's -- that is what a
-        #: deviation is for, and Zamba2 is the case: profile `ssm` (>=4.57) with
-        #: `transformers: ==4.57.1` beside it.
-        pin = _exact(env.get("transformers")
-                     or (profiles.get(prof) or {}).get("transformers"))
-        g = groups[pin]
-        g["pin"] = pin
-        g["profiles"].add(prof)
-        g["models"].append(model)
-        for pkg, ver in (env.get("packages") or {}).items():
-            prev = g["packages"].get(pkg)
-            #: two EXACT pins for one package inside one venv is unsatisfiable and
-            #: must be reported, not silently resolved by iteration order.
-            if prev and ver and prev != ver:
-                raise ValueError(
-                    "%s: conflicting pins %r and %r declared for the same "
-                    "environment (%s)" % (pkg, prev, ver, _name_for(pin)))
-            if ver or not prev:
-                g["packages"][pkg] = ver or prev or ""
-    return {_name_for(p): g for p, g in groups.items()}
+        sp = (env.get("transformers")
+              or (profiles.get(env.get("profile")) or {}).get("transformers") or "")
+        bysp[str(sp).strip()].append((model, env))
+
+    byceil = collections.defaultdict(
+        lambda: {"specs": set(), "packages": {},
+                 "profiles": collections.Counter(), "models": []})
+    for sp in sorted(bysp, key=lambda s: (-len(bysp[s]), s)):
+        g = byceil[_ceiling(sp)]
+        g["specs"].add(sp)
+        #: every declaration in the group must be jointly satisfiable, and a
+        #: shared ceiling does not guarantee it (`>=5,<5.2` and `>=5.4,<5.2`).
+        if not _satisfiable(g["specs"]):
+            raise ValueError("declarations cannot share an environment: %s"
+                             % ", ".join(sorted(g["specs"])))
+        for model, env in bysp[sp]:
+            g["profiles"][env.get("profile")] += 1
+            g["models"].append(model)
+            for pkg, ver in (env.get("packages") or {}).items():
+                prev = g["packages"].get(pkg)
+                #: two incompatible pins for one package inside one venv is
+                #: unsatisfiable and must be reported, not resolved by iteration
+                #: order.
+                if prev and ver and not _satisfiable([prev, ver]):
+                    raise ValueError(
+                        "%s: declarations %r and %r cannot share an environment"
+                        % (pkg, prev, ver))
+                if ver or not prev:
+                    g["packages"][pkg] = ver or prev or ""
+    out = {}
+    for g in byceil.values():
+        name = _name_for(g["profiles"])
+        #: two groups resolving to one directory would silently drop one of them,
+        #: and the dropped one is the exception -- exactly the models that need
+        #: their own interpreter.
+        if name in out:
+            raise ValueError("two environments both want %s: profiles %s and %s"
+                             % (name, sorted(out[name]["profiles"]),
+                                sorted(g["profiles"])))
+        out[name] = g
+    return out
 
 
 def venv_for(model):
@@ -112,9 +204,12 @@ def venv_for(model):
 
 
 def _requirements(g):
-    out = ["-e", ROOT]
-    if g["pin"]:
-        out.append("transformers==%s" % g["pin"])
+    #: EVERY declaration in the group is passed, not a summary of them -- the
+    #: resolver intersects them, and if that intersection is empty it says so
+    #: rather than us having decided which declaration wins.
+    out = ["-e", "%s[dev]" % ROOT]
+    for sp in sorted(s for s in g["specs"] if s):
+        out.append("transformers" + sp)
     for pkg, ver in sorted(g["packages"].items()):
         out.append(pkg + ver if ver else pkg)
     return out
@@ -135,13 +230,19 @@ def main():
 
     sp = spec()
     for name, g in sorted(sp.items()):
-        print("%-14s transformers %-10s %3d models   profiles: %s"
-              % (name, g["pin"] or "(current)", len(g["models"]),
+        print("%-14s transformers %-16s %3d models   profiles: %s"
+              % (name, ",".join(sorted(s for s in g["specs"] if s)) or "(current)",
+                 len(g["models"]),
                  ", ".join(sorted(str(p) for p in g["profiles"]))))
         print("               install: %s" % " ".join(_requirements(g)))
         if a.action == "build":
             path = os.path.join(ROOT, name)
-            subprocess.run(["uv", "venv", "--python", a.python, path], check=True)
+            #: `--allow-existing` UPDATES IN PLACE rather than recreating. uv
+            #: refuses to overwrite an existing venv without `--clear`, and
+            #: `--clear` here would delete the interpreter this script is running
+            #: on -- `build` is normally invoked from `.venv` itself.
+            subprocess.run(["uv", "venv", "--allow-existing", "--python", a.python,
+                            path], check=True)
             subprocess.run(["uv", "pip", "install", "--python",
                             os.path.join(path, "bin", "python")] + _requirements(g),
                            check=True)

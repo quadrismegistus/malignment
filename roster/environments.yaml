@@ -41,9 +41,14 @@ profiles:
     transformers: '>=4.57'
     launch: ssm
   tf457:
-    why: transformers 5.x CANNOT RUN this; pin 4.57.1.
+    why: 'transformers 5.x CANNOT RUN this. The requirement is a CEILING, and it
+      used to be written `==4.57.1` because the schema had no way to say so --
+      which made every other profile read as "no ceiling" when it meant "ceiling
+      unknown", and let `default` (>=4.57) claim to admit a version in which
+      three of its own nodes do not exist. Written as a RANGE now: same
+      resolution today, but it says which end is the constraint.'
     torch: '>=2.6'
-    transformers: ==4.57.1
+    transformers: '>=4.57,<5'
     launch: dense
   torch26:
     why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."

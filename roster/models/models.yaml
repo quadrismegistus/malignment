@@ -386,7 +386,7 @@ nodes:
     - zamba2
     env:
       profile: ssm
-      transformers: ==4.57.1
+      transformers: '>=4.57,<5'
       why: 'v5 tie_weights_keys validation on ^layers.6.shared_transformer; config declares transformers_version 4.49.0.dev0. 2026-08-10 CORRECTED ON INGEST, 2026-08-16. The archive profiled Zamba2 `tf457`, which scripts/build_fleet.py:78 launches on `dense` -- a box that installs NO kernels, while the row itself declares kernels [mamba-ssm, causal-conv1d]. Zamba2 is a Mamba2/attention HYBRID and the measured hybrid penalty for missing kernels is 19.3x, so the plan would have run it ~19x slow and reported nothing wrong. The two archive files already disagreed: the `ssm` BOX pins transformers==4.57.1 and its description says it does so FOR ZAMBA2. So `ssm` is the profile that satisfies both constraints, and `tf457` was the half of the requirement that got written down.'
   Zyphra/Zamba2-7B-Instruct:
     revision_ladder: 2
@@ -394,7 +394,7 @@ nodes:
     - zamba2
     env:
       profile: ssm
-      transformers: ==4.57.1
+      transformers: '>=4.57,<5'
       why: 'same architecture as the base arm CORRECTED ON INGEST, 2026-08-16. The archive profiled Zamba2 `tf457`, which scripts/build_fleet.py:78 launches on `dense` -- a box that installs NO kernels, while the row itself declares kernels [mamba-ssm, causal-conv1d]. Zamba2 is a Mamba2/attention HYBRID and the measured hybrid penalty for missing kernels is 19.3x, so the plan would have run it ~19x slow and reported nothing wrong. The two archive files already disagreed: the `ssm` BOX pins transformers==4.57.1 and its description says it does so FOR ZAMBA2. So `ssm` is the profile that satisfies both constraints, and `tf457` was the half of the requirement that got written down.'
   allenai/Llama-3.1-Tulu-3-8B-DPO:
     nickname: tulu-dpo
@@ -654,12 +654,27 @@ nodes:
     - olmo-hybrid
     env:
       profile: default
+      transformers: '>=5'
+      why: 'A FLOOR THE PROFILE GOT WRONG, corrected 2026-08-17. `default` declares
+        `>=4.57`, and `model_type: olmo_hybrid` is ABSENT from 4.57.1''s
+        CONFIG_MAPPING_NAMES -- checked in the built .venv-tf457, not inferred. A
+        fleet honouring the profile could pin 4.57.1 and get an unknown-model_type
+        error that reads as a model problem. `>=5` is the tightest floor that is
+        MEASURED: the architecture is absent at 4.57.1 and present at 5.4.0, so
+        the true boundary is inside that gap and this does not pretend to know
+        where. The checkpoint''s own config declares 5.8.1 and every stored cell
+        was produced at 5.14.1, both of which satisfy it.'
   allenai/Olmo-Hybrid-Instruct-DPO-7B:
     nickname: olmo-hybrid-dpo
     family:
     - olmo-hybrid
     env:
       profile: default
+      transformers: '>=5'
+      why: same architecture as the base arm; see allenai/Olmo-Hybrid-7B. This
+        checkpoint's config declares transformers_version 5.0.0.dev0 rather than
+        the base arm's 5.8.1, which is why the floor is stated as >=5 and not
+        higher.
   allenai/Olmo-Hybrid-Instruct-SFT-7B:
     revision_ladder: 6
     nickname: olmo-hybrid-sft
@@ -667,6 +682,8 @@ nodes:
     - olmo-hybrid
     env:
       profile: default
+      transformers: '>=5'
+      why: same architecture as the base arm; see allenai/Olmo-Hybrid-7B.
   baichuan-inc/Baichuan2-7B-Base:
     nickname: baichuan
     country: CN

@@ -30,5 +30,13 @@ packages = ["malignment"]
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements.txt"] }
 
+# NOT in requirements.txt, and deliberately. That file lists what
+# `malignment/*.py` IMPORTS, found by walking their ASTs -- pytest is imported by
+# no module, only by `tests/`, so adding it there would break the one property
+# the file has. `scripts/venvs.py` installs `.[dev]` so a venv built from the
+# declaration can run the suite.
+[project.optional-dependencies]
+dev = ["pytest", "packaging"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
