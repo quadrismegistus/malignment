@@ -95,6 +95,37 @@ New attestations go through `attest.merge_claims()`, not `ingest()`: `ingest()`
 replaces a whole checkpoint entry and would drop seven fields from a targeted
 pass.
 
+## Sign your commits with your seat
+
+Put a `Seat:` trailer on every commit you make here:
+
+    Seat: malign
+
+**Because `git log` cannot tell whose work a file is, and three seats are relying
+on it to.** [6353] settled claim-serialisation as *"a file with my commit on it is
+taken; a file without one is not -- that is serialisable and the docket is
+not."* Measured 2026-08-17, at 192 commits:
+
+    distinct git authors                     2   both "Ryan Heuser"
+    distinct Co-Authored-By trailers         1   identical on 191 commits
+    commits naming their seat in the subject 0
+
+So `git log --diff-filter=A` returns the same name for every file in the repo.
+The docket was rejected as a claim medium for having no total order; git has the
+order and no author, so **neither channel could serialise a claim** -- the failure
+the exchange was about, relocated rather than fixed. Found by lacan at [6402]
+while checking a correction rather than accepting it.
+
+Until the trailer is in use, attribution is by PROSE -- a commit body happening to
+say "my own seat rule" or refer to another seat in the third person. That works
+only while the prose happens to mention a seat, and it silently attributes a
+folder to whoever owns the DIRECTORY. That is what went wrong: *a statement of who
+owns a surface is not a statement of who wrote each thing on it.*
+
+**Prospective only.** The 192 existing commits cannot be labelled without
+rewriting shared history, which costs more than it fixes. For those, attribution
+stays content-based and should be stated as such.
+
 ## Working with RH
 
 - Do ordinary work; say plainly when something is wrong, then keep building.
