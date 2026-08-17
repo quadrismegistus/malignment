@@ -460,10 +460,27 @@ def md_axis(prompt, g, n, r):
          "**naughty** `%s`  \n**nice** `%s`" % (" ".join(g), " ".join(n)), ""]
     sep = r.get("separates") or {}
     ok = bool(sep.get("ok"))
-    L += ["## 1. Gate — `separates`", "",
-          "> **%s** — gap %.4f (floor %.2f), %d/%d pairwise orderings correct."
-          % ("PASS" if ok else "REFUSED", sep.get("gap", 0.0), sep.get("floor", 0.0),
-             sep.get("correct", 0), sep.get("total", 0))]
+    #: **A REFUSAL LEADS WITH WHAT FAILED.** `separates` returns
+    #: `gap >= floor AND correct == total`, so ONE misordered pair refuses however
+    #: large the gap. The line used to read "REFUSED — gap 0.2059 (floor 0.05),
+    #: 53/54 orderings correct", leading with the two numbers that PASSED, and
+    #: opus-sexual had to infer that the 54th pair was the cause. A message whose
+    #: first clause reports a satisfied condition on a failure is the same mislabel
+    #: class this seat spent the day removing elsewhere.
+    g_, f_ = sep.get("gap", 0.0), sep.get("floor", 0.0)
+    c_, t_ = sep.get("correct", 0), sep.get("total", 0)
+    if ok:
+        head = "**PASS** — gap %.4f (floor %.2f), %d/%d pairwise orderings correct." % (g_, f_, c_, t_)
+    elif g_ < f_:
+        head = ("**REFUSED — the gap is too small.** %.4f against a floor of %.2f. "
+                "The poles are not far enough apart. (%d/%d orderings correct.)"
+                % (g_, f_, c_, t_))
+    else:
+        head = ("**REFUSED — %d of %d pairwise orderings are wrong.** Every naughty "
+                "word must outscore every nice one and %d pair%s does not. The gap "
+                "(%.4f) passed its floor (%.2f); that is not the problem."
+                % (t_ - c_, t_, t_ - c_, "" if t_ - c_ == 1 else "s", g_, f_))
+    L += ["## 1. Gate — `separates`", "", "> " + head]
     if not ok:
         L += ["", "**The axis cannot see the contrast you tagged**, so nothing below "
               "means anything. %s" % (sep.get("reason") or ""), "",
