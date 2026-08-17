@@ -209,3 +209,57 @@ wins and §1 is recorded as a proxy that misled, in this file.
 3. **The 3 non-numeric salary-adjacent prompts** (`census_0274` the worker who
    thought their salary too low, `census_0287` the manager and the raise) elicit
    an ACTION, not a number. Different instrument, and I have left them out.
+
+---
+
+## AMENDMENT A1 — 2026-08-17, same day. §2 NAMES THE WRONG BLOCKER.
+
+**The rule I asked for already exists in v3, and the blocker is LOOKAHEAD, not a
+rule.** Appended rather than edited, per this file's own terms.
+
+§2 said the dependency is *"the numeral analogue of the hyphen rule
+`twp_v4.hyphen_intra_ids`"*. **`twp.intra_word` is already that rule, and its
+docstring names this exact case:**
+
+> *True only when the surface so far ends alphanumeric AND the character
+> immediately after the punctuation is alphanumeric -- `don` + `'t`, `100` +
+> `,000`.*
+
+Confirmed as a pure function, no model: `intra_word('150,000', ',000')` is
+**True**. So `$150,000` is representable in v3 by rule.
+
+**IT CANNOT FIRE, FOR THE REASON THE SAME DOCSTRING DECLARES:**
+
+> *LIMIT, declared rather than hidden: a tokenizer that emits the punctuation as
+> its OWN token gives us nothing to look ahead to, so `3` `.` `14` still breaks.*
+
+Measured on four tokenizers, weights never loaded:
+
+    Llama-3.1-8B      ' of' | ' $' | '150' | ',' | '000'      intra-word: False
+    Mistral-7B-v0.1     '0' | ','  | '0'   | '0' | '0'        intra-word: False
+    Qwen2.5-7B          '0' | ','  | '0'   | '0' | '0'        intra-word: False
+    pythia-2.8b       ' of' | ' $' | '150' | ',' | '000'      intra-word: False
+
+**Every one emits the comma alone**, so there is nothing after the punctuation to
+look at and the surface terminates at `150`. **The comma does not terminate by
+rule; it terminates by tokenization**, and that is why the store holds 250
+numeral surfaces with zero commas among them.
+
+### WHAT THIS CHANGES
+
+- **The v4 requirement is LOOKAHEAD, not a numeral rule**, and `expand`
+  structurally lacks it at the point the mask is applied -- the docstring says so.
+  Handing @malign *"write `numeral_group`"* would have been asking for a rule the
+  file already has.
+- **It is not salary-specific.** `3` `.` `14` and every decimal break the same
+  way, so the v4 case is wider than this experiment and should not be argued from
+  this experiment alone.
+- **The experiment may not be blocked at all.** `expand` DISCOVERS surfaces and
+  must stop at a boundary; `score_words` is handed a NAMED target and walks its
+  token path, so `150,000` may be scoreable today with no v4 change. `clean_surface`
+  round-trips it -- **so §2's guess that `score_words` would refuse the target is
+  WRONG and is withdrawn here.** Whether the boundary accounting also reaches it is
+  a question a model load answers and inference does not, and it is unrun.
+
+**Nothing in §3-§6 changes.** The hypotheses, the partition, the preconditions and
+the decision rules are untouched; only the account of what is in the way.
