@@ -35,6 +35,8 @@ The first version of this experiment used leave-one-out alone and reported all t
 
 **`dN` is not `N_post - N_base`.** `stats()` divides by the scored mass and `split()` does not, so where both arms share a scored mass `T` the identity is `dN = T * (N_post - N_base)`, verified at 0.017098 / 0.028029 = 0.610. `T = 1 - residual` runs from 0.712 to 0.929 across the nine checkpoints with `CDH0050` records, so **`dN` carries a hidden per-model scale factor varying by 1.31x**, and two `dN` values from different pairs are not on one scale. `ps` and `N` both renormalise and are immune.
 
+**THIS IS THE EQUAL-`T` SPECIAL CASE AND IT UNDERSTATES THE PROBLEM. Read the sign section below before acting on this paragraph.** The arms do not share `T`, and the general form `dN = T_post*N_post - T_base*N_base` lets the two conventions differ in SIGN rather than only in scale. The paragraph above is kept because it is how the defect was found, and it is flagged because it reads as complete.
+
 **But renormalising imputes rather than solves.** It asserts the ~25% below theta is distributed like the mass above it, and it is not: lexicon words vanish below theta at 27.1% against 16.9% for controls, so the residual is enriched in exactly what the axis measures. `dN` makes the opposite unstated assumption, that the residual sits at `s = 0`. Neither is neutral.
 
 ## The theta bound, which is honest and per-prompt useless
