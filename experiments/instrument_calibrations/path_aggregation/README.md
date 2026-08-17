@@ -73,14 +73,37 @@ since `expand / mass` reproduces the computed `term` exactly where they agree. S
 the two instruments walk the same path with the same mass and disagree only about
 `row[b].sum()`.
 
-`_boundary_for` is one function called from both sites (`twp.py:1211` in
-`expand`, `twp.py:1377` in `score_words`), so a different `b` can only come from
-its two CACHES -- `bcache` and `intra_cache` -- which `expand` populates across a
-whole beam walk and `score_words` starts empty. **Candidate, NOT established:**
-the CJK branch keys `bcache` by surface but is entered under
-`surf[-1].isalnum()`, which is TRUE for CJK characters, so the mask a surface
-gets may depend on what the walk cached before it. Chasing that is the next step
-and it has not been done.
+### the cache hypothesis is KILLED, and batching is real but too small
+
+`_boundary_for` is one function called from both sites, so a different `b` could
+only come from its two caches -- `bcache`/`intra_cache`, which `expand` fills
+across a beam walk and `score_words` starts empty. **Tested and dead:** masks
+computed with caches warmed by ten other surfaces are IDENTICAL to masks computed
+fresh, 0 of 6 differing, same `b.sum()` to the token.
+
+    surface   fresh b.sum   warmed b.sum   identical
+    一个        48171         48171          yes      (6 of 6)
+
+So the mask is the same and the term still differs, which leaves the ROW.
+`next_dist` DOES depend on batch composition -- the same prefix scored alone and
+inside a 251-prefix batch gives:
+
+    一个   term alone 0.2584266   term in batch 0.2581256   rel 1.2e-03
+
+Real, reproducible, and the same class as the prompt-cache non-identity that
+keeps `USE_PROMPT_CACHE` off. **But it is an order of magnitude too small.** The
+observed gap for `一个` is 0.258126 against expand's implied 0.262666, rel
+1.8e-02. Batching contributes and does not explain.
+
+### the live candidate, NOT tested
+
+`expand` accumulates `words[(surf, t1)] += mass * term` at EVERY depth, with
+`surf = clean_surface(tok.decode(pref).strip())`. **If a deeper prefix strips
+back to the SAME surface** -- `一个 ` -> `一个` -- expand adds a second
+contribution under one key. That inflates expand above a single-path scorer for a
+ONE-TOKEN surface, which is the sign and the shape observed, and it is not
+multi-path spelling of the word. Test it by instrumenting `_account` to record
+`(surf, t1, depth)` and looking for a key credited at two depths.
 
 ## TWO HYPOTHESES DIED HERE, BOTH ON EVIDENCE
 
