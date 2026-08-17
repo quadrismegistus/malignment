@@ -4,9 +4,11 @@
     python run.py --models gl198976/mpt-7b --n 25 --write
 
 **THE MEASUREMENT THAT DECIDES v4's SCOPE.** `p(word) = mass x term`, and
-`term = row[b].sum()` sums over EVERY boundary token — 48,197 of them for a
-Latin surface (30,227 static, plus all CJK ids, since a script transition is a
-boundary). On the fragment `murm` that sum is 0.5341 while no single boundary
+`term = row[b].sum()` sums over EVERY boundary token. **The count that used to
+sit here — 48,197 for "a Latin surface" — was measured on a CJK SURFACE and is
+withdrawn ([6390]).** For a Latin surface mpt marks 28,823 space-initial, 1,247
+punct, 155 empty and 2 CJK. Nothing below depends on it; the saturation result is
+about the SHARE of `term` that is diffuse, not about how many tokens carry it. On the fragment `murm` that sum is 0.5341 while no single boundary
 token exceeds 0.003: the model wants `murmured` (`ured` at 0.0160) and `murm`
 scores 0.060 x 0.534 anyway.
 
