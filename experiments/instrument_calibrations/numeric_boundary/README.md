@@ -200,3 +200,27 @@ and stopping at a boundary, and `clean_surface('150,000')` round-trips. Unrun.
 The `hyphen_intra` comparison: the candidate rule on and off, over non-numeric
 prompts, counting words moved. The number that matters is the one that should be
 zero.
+
+## HOW MUCH DO THE GLUED 24 MATTER — 6.62% OF TOKENS, AND THAT IS EXPOSURE NOT DAMAGE
+
+@malign's [6433] calls the glued case a limit of the boundary-mask abstraction
+rather than a bug: it assigns one bit per token and a token that is punctuation
+AND a word needs two, since `term = row[b].sum()` is a sum over a boolean mask.
+Agreed. So the question left is how often the abstraction is asked to do the
+impossible, measured on real stimuli rather than on the probe string.
+
+413 declared Chinese prompts, 8 of the 24 affected models, tokenizers only:
+
+    Aquila2-7B                  10.73%
+    SmolLM3 / Llama-3.1 family   6.18%   (identical counts -- one tokenizer)
+    pooled                       6.62%   712 glued of 10,762 tokens
+
+**Roughly one token in fifteen on Chinese text.** Not negligible, and not a
+corner case.
+
+**BUT THIS IS EXPOSURE, NOT DAMAGE, AND THE DISTINCTION IS THE WHOLE CAVEAT.** A
+glued token appearing in a tokenization is not the same fact as a glued token
+carrying probability mass at a measured position. **This bounds how often the
+abstraction is asked to represent something it cannot; it does not measure how
+much any number moves.** That needs the store and is unrun. Quoting 6.62% as an
+error rate would be the exposure-for-damage substitution this campaign books.
