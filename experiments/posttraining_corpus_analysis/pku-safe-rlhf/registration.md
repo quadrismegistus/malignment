@@ -556,3 +556,19 @@ design supports.
 WITHDRAWN: "displacement has no corpus source" and the fork built on it.
 STANDS: every number, rescoped to this corpus's annotation. README and
 interpretation.md corrected.
+
+---
+
+## A9 — 2026-08-17. The category error, which A8 named only contingently.
+
+RH: a dataset and a model are different objects, and treating the model as a
+walking alignment dataset begs the project's central question -- a model
+generalises and interiorises, so the operation can add what the data lacked and
+drop what it had. A8 gave three fixable defects; this is not fixable.
+
+Already measured better: U_ladder's ablation, no-math - no-safety = -0.000664,
+CI [-0.001434, +0.000108], no difference, no-safety keeps ~90% of the effect.
+P_unnamed_axis: none of eighteen rated norms predicts movement direction.
+
+The corpus results stand as findings about an ANNOTATION REGIME, which is their
+proper object and a political-economy one.

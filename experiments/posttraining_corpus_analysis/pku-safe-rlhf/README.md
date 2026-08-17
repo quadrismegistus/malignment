@@ -211,15 +211,22 @@ read predicting `safer` at 63.6% in the same stratum.
     ATTENUATION   gentler AND vaguer at once  74.2%
     WORDING ALONE gentler, specificity held   48.1%, n=52
 
-## AND IT SAYS NOTHING ABOUT M01. THE SCOPE IS THIS CORPUS.
+## A DATASET IS NOT A MODEL. THE SCOPE IS THIS CORPUS.
 
 An earlier version of this section read the come-apart cell as showing that M01's
-displacement "has no corpus source". **That claim is withdrawn.** No M01 model was
-trained on PKU; 52 LLM-coded pairs do not adjudicate two dozen experiments on
-fifty models; and the two designs do not measure the same object — M01 is a
-within-model, within-prompt probability shift in a held slot, this is a preference
-between two independently generated texts. The word "source" asserted a causal
-relation neither design carries. Full statement in `interpretation.md`.
+displacement "has no corpus source". **Withdrawn, and the first withdrawal was
+still too generous** — it gave contingent defects (wrong corpus, too few pairs,
+mismatched design) as though the question became askable once fixed. It does not.
+**Treating a model as a readout of its training data begs the question the project
+exists to ask**, because the operation between them is the object of study, and it
+can add what the data lacked and drop what it had.
+
+**And this was already measured, better.** `U_ladder.md` ablates the safety corpus
+out of the training mix: `no-math − no-safety` = −0.000664, CI [−0.001434,
++0.000108], NO DIFFERENCE, with `no-safety` retaining ~90% of the effect.
+Removing the safety corpus costs what removing the MATHS corpus costs. A
+corpus-content study was never going to answer this, at any n. Full statement in
+`interpretation.md`.
 
 What stands is a fact about one annotation process: **PKU's `safer` label responds
 to bundled attenuation and to an appended moral frame, and has no detectable view

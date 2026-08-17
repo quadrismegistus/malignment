@@ -119,33 +119,52 @@ with no inter-annotator agreement reported, and LLM coders for the categories.
 preference signal rewards the hedge," which is the claim that matters for what
 gets optimised into a model.
 
-# WHAT THIS CORPUS CAN AND CANNOT SAY ABOUT M01 (RETRACTED AND RESTATED, 2026-08-17)
+# A DATASET IS NOT A MODEL: THE CATEGORY ERROR (RETRACTED AND RESTATED, 2026-08-17)
 
 **An earlier version of this section asked whether displacement "has a corpus
-source" and answered it from PKU. RH: a hasty study of one safety corpus does not
-overturn two dozen experiments on fifty models. The question was malformed, not
-just the answer.**
+source" and answered it from PKU. The question is malformed, and its first
+retraction was still too generous to it.**
 
-Three reasons it cannot be asked here, in increasing order of how badly they
-break it:
+That retraction gave three CONTINGENT defects — wrong corpus, too few pairs,
+mismatched design — each of which implies the question becomes askable once
+fixed. **It does not, and RH's objection is categorical: a dataset and a model
+are different kinds of object, and treating the model as a readout of its
+training data begs the question this entire project exists to ask.**
 
-**1. Wrong corpus.** Not one M01 model was trained on PKU-SafeRLHF. Three roster
-models touch this data at all — `beaver-7b-v1.0`, `AmberSafe`,
-`alpaca-7b-reproduced` — and none of them carries M01's result. A null in a
-corpus no relevant model saw bounds nothing about those models.
+A model generalises. Whatever is in the preference data reaches behaviour through
+an operation that can add what the data never contained and drop what it did.
+**The operation IS the object of study.** To ask "is this behaviour findable in
+the corpus" is to assume in advance that it is a lookup, which is the one thing
+the campaign is trying to characterise rather than presume.
 
-**2. Wrong weight.** M01 is roughly two dozen experiments across fifty models
-with graded findings and replications. The come-apart cell here is 52 pairs coded
-by an LLM in one afternoon, CI [0.340, 0.624]. That is not evidence that
-adjudicates M01 in either direction, and treating it as though it were inverts
-the burden.
+## AND THE CAMPAIGN HAS ALREADY MEASURED THIS, WITH A BETTER DESIGN
 
-**3. Wrong object, and this is the one that makes it incoherent.** M01 measures a
-WITHIN-model, WITHIN-prompt shift: hold the prompt, compare base to aligned,
-watch probability move from `kill` to `scream` in one slot. PKU is a preference
-BETWEEN two independently generated texts. A choice over two different
-completions is not the same kind of thing as a probability shift inside one, so
-"source" was asserting a causal relation that neither design can carry.
+`U_ladder.md` ablates each slice out of the training mix and remeasures:
+
+    no-math - no-safety   -0.000664   95% CI [-0.001434, +0.000108]   NO DIFFERENCE
+
+**Removing the safety corpus costs what removing the MATHS corpus costs.**
+`no-safety` retains about 90% of the full-mix effect. If displacement were the
+safety objective, that arm would collapse; it does not. And `U` locates the work
+at SFT — 74% of the ladder's JS, with removal stopping and addition continuing up
+the rungs (faller share 49.3% -> 28.6% -> 1.0% across 16 families).
+
+`P_unnamed_axis.md` closes the other side: held out by word, **none of the
+eighteen rated norms predicts which way alignment moves a word**, and the unnamed
+residual outpredicts every name tried. The model sorts on a direction that no
+feature vocabulary we possess — corpus-derived or otherwise — recovers.
+
+**So a corpus-content study was never going to answer this, at any n, on any
+corpus.** The one direct experiment on the question removed the safety data and
+found the operation still there.
+
+## WHAT WAS STILL WRONG WITH THE FIRST RETRACTION
+
+It closed by saying the corpus-to-model chain "has three links and we hold none
+of them", which presents that chain as the right shape and merely unbuilt.
+**It is not the right shape.** Even holding all three links, the inference would
+run from what a corpus rewards to what a model interiorised, and U's ablation
+shows those come apart by construction.
 
 ## SO WHAT THE MEASUREMENT ACTUALLY LICENSES
 
@@ -164,14 +183,21 @@ resembling it shaped any model is a separate question with its own requirements.
 operations**, and both are visible in this corpus. What it is not is a bridge
 between this corpus and M01's models.
 
-## WHAT WOULD MAKE IT A QUESTION ABOUT MODELS
+## AND THE CORPUS HAS ITS OWN OBJECT, WHICH IS THE BETTER REASON TO STUDY IT
 
-The chain has three links and we hold none of them: PKU trained model X; model X
-shows the effect; the effect tracks the corpus signal rather than something
-upstream. Only `beaver-7b-v1.0` and `AmberSafe` can even begin it, both wait on
-v4, and Findings U's placement of the cut at SFT is a reason to expect the last
-link to be the hard one. **Until then the model-side and corpus-side results are
-two observations that rhyme, and the rhyme is not an argument.**
+Reading these results as a proxy for the model was the error. **Read as what they
+are, they are about an ANNOTATION REGIME**, and that is a political-economy object
+in its own right: 28+ crowdworkers at USD 8.02-9.07/hr, in an undisclosed mix with
+AI labellers, no inter-annotator agreement reported, producing a preference signal
+that rewards a moral frame regardless of what it frames — OPERATIONAL sits at
+chance, including a sentence coaching evasion of the police — and rewards bundled
+attenuation while having no view on vocabulary alone.
+
+**Both channels are coarse in the same way.** The label responds to the presence
+of a mark and to a gestalt impression, and is blind to the fine-grained version of
+each. That is a fact about what this labour produced and what it was paid to
+produce. It needs no model to be interesting, and it stops being evidence about
+one the moment it is asked to be.
 
 ## THE K ARM RAN FIRST AND FAILED ITS INSTRUMENT (A5, 2026-08-17)
 
