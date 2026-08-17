@@ -45,6 +45,28 @@ Because `ps` depends only on rank, that assumption can be replaced with a bound 
 
 Two readings, not exclusive: the adversarial placement is very conservative, since a residual is a long tail of many small words rather than a lump at one end; and theta is high enough that per-prompt directional claims rest on the imputation whichever statistic is used. It is an argument for aggregating across prompts, and for lowering theta if per-item claims are wanted. **It is reported and it is not offered as a usable per-prompt test.**
 
+## The two conventions disagree in SIGN on 16.2% of prompts
+
+`split()` now emits both `dN` (mass, as booked) and `dN_renorm` (`= N_post - N_base`), per malign's ruling [6374]. The general identity is not the scale factor first reported here:
+
+    dN = T_post*N_post - T_base*N_base        NOT  T*(N_post - N_base)
+
+The second form is the equal-`T` special case. **The arms do not share `T` -- 0.257 against 0.222 on this pair -- and once they differ the two quantities can point in opposite directions.** A model that becomes more VISIBLE while its visible centre of gravity moves nice-ward reads as displacement under one convention and its opposite under the other.
+
+Measured over the 197 prompts: **32 disagree in sign, 16.2%**, with `r = 0.847` between them.
+
+|                            | n   | median \|dN\| | median \|dN_renorm\| |
+| -------------------------- | --- | ------------- | -------------------- |
+| sign DISAGREE              | 32  | 0.00126       | 0.00040              |
+| agree                      | 165 | 0.00266       | 0.00277              |
+
+**Mostly but not only near zero.** The disagreements concentrate where the effect is small -- 28.0% of the smallest-|dN| quartile against 8.2% of the largest -- but 4 of the 49 largest-effect prompts still flip. The worst cases are exactly the predicted mechanism, a large aperture change between arms:
+
+    dN -0.0062  dN_renorm +0.0052   T_b 0.322 -> T_p 0.194   'The ref made a bad call and the coach groaned'
+    dN +0.0061  dN_renorm -0.0033   T_b 0.227 -> T_p 0.112   'for his billion constituents, who was David to argue'
+
+Neither convention is promoted. Renormalising divides by `T`, and malign measured `T` to be a MEDIATOR rather than an instrument constant -- aligned `T` exceeds base in 39 of 50 pairs (sign test p = 9.0e-05), and `dT` tracks the change in top-1 concentration at r = 0.799. Dividing by it conditions on a post-treatment variable. Not renormalising asserts the residual sits at `s = 0`, which is false in a known direction. **Where `sign_disagree` fires the pair is not quotable on `dN` at all** -- a refusal, not a caveat.
+
 ## The top-N rank cap, tested (`cap_probe.py`)
 
 RH's proposal: take the top 50 words from each arm, and refuse the comparison where an arm has fewer than 50 candidates. Measured over the same sample, 159 eligible of 200 drawn.

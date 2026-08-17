@@ -326,7 +326,44 @@ class Axis:
         c = {w: dP[w] * S.get(w, 0.0) for w in vocab}
         supp = sum(v for w, v in c.items() if dP[w] < 0)
         subs = sum(v for w, v in c.items() if dP[w] > 0)
-        return {"dN": supp + subs, "suppression": supp, "substitution": subs,
+        dN = supp + subs
+        #: **TWO CONVENTIONS, BOTH EMITTED, NEITHER PROMOTED** (malign, [6374]).
+        #: `stats()` divides by the scored mass and this does not, so what `dN`
+        #: computes is NOT the change in the mean position:
+        #:
+        #:     dN = T_post*N_post - T_base*N_base       NOT  N_post - N_base
+        #:
+        #: With both arms at one `T` that collapses to `T*(N_post - N_base)`, a
+        #: scale factor. **THE ARMS DO NOT SHARE `T`, AND ONCE THEY DIFFER THE
+        #: TWO CAN POINT IN OPPOSITE DIRECTIONS.** A model that becomes more
+        #: VISIBLE while its visible centre of gravity moves nice-ward reads as
+        #: displacement under one convention and as its opposite under the other,
+        #: and malign measured the data to be in exactly that regime: aligned `T`
+        #: exceeds base `T` in 39 of 50 pairs, sign test p = 9.0e-05.
+        #:
+        #: Neither is safe, which is why neither is chosen here. Renormalising
+        #: divides by `T`, and `T` is a MEDIATOR rather than an instrument
+        #: constant -- dT tracks the change in top-1 concentration at r = 0.799,
+        #: so dividing by it conditions on a post-treatment variable and removes
+        #: real effect with the aperture. Not renormalising asserts the residual
+        #: sits at `s = 0`, which is false in a known direction: lexicon words
+        #: vanish below theta at 27.1% against 16.9% for controls, so the
+        #: residual is enriched in what the axis measures and its true `s` is
+        #: signed rather than neutral.
+        tb, tp = sum(base.values()), sum(post.values())
+        n_base = (sum(base.get(w, 0.0) * S.get(w, 0.0) for w in vocab) / tb
+                  if tb else 0.0)
+        n_post = (sum(post.get(w, 0.0) * S.get(w, 0.0) for w in vocab) / tp
+                  if tp else 0.0)
+        dN_renorm = n_post - n_base
+        return {"dN": dN, "suppression": supp, "substitution": subs,
+                "dN_renorm": dN_renorm,
+                "base_scored_mass": float(tb), "post_scored_mass": float(tp),
+                #: **A REFUSAL, NOT A CAVEAT.** Where the conventions disagree in
+                #: sign the pair is not quotable on dN at all: an interval that
+                #: spans its own zero is not a result. Callers must check this
+                #: rather than read `dN` and move on.
+                "sign_disagree": (dN > 0) != (dN_renorm > 0),
                 "movers": sorted(c.items(), key=lambda x: -abs(x[1]))[:5]}
 
     def split_rank(self, base, post, S=None):
@@ -546,6 +583,24 @@ def _selftest():
     sr = ax.split_rank(base, post, S=S)
     assert abs(sr["suppression"] + sr["substitution"] - sr["dN"]) < 1e-12
 
+    #: 3b. THE TWO CONVENTIONS CAN DIFFER IN SIGN, and the flag catches it
+    #: (malign's case, [6374], reproduced here so the claim executes). This is
+    #: NOT a pathological construction: it needs only that the post arm be more
+    #: VISIBLE while its visible centre of gravity moves nice-ward, which is the
+    #: regime alignment puts the data in.
+    S2 = {"a": 0.6, "b": 0.4}
+    b2, p2 = {"a": 0.5}, {"a": 0.4, "b": 0.4}
+    sp = ax.split(b2, p2, S=S2)
+    assert sp["dN"] > 0 > sp["dN_renorm"], \
+        "expected opposite signs, got dN=%r dN_renorm=%r" % (sp["dN"], sp["dN_renorm"])
+    assert sp["sign_disagree"] is True, "sign_disagree failed to fire"
+    assert abs(sp["dN"] - (sp["post_scored_mass"] * 0.5
+                           - sp["base_scored_mass"] * 0.6)) < 1e-12, \
+        "dN is not T_post*N_post - T_base*N_base"
+    #: and it must NOT fire on the ordinary case
+    assert ax.split(base, post, S=S)["sign_disagree"] in (True, False)
+    assert ax.split(base, base, S=S)["sign_disagree"] is False
+
     #: 4. NO MOVEMENT READS AS NO MOVEMENT, and a tie is worth half.
     same = ax.superiority(base, base, S=S)
     assert abs(same["ps"] - 0.5) < 1e-12, "ps != 0.5 against itself: %r" % same["ps"]
@@ -580,7 +635,7 @@ def _selftest():
         gt = sum(pv[i] * bv[j] * (1.0 if v[i] > v[j] else 0.5 if v[i] == v[j] else 0.0)
                  for i in range(len(v)) for j in range(len(v)))
         assert abs(gt - ax.superiority(base, post, S=S)["ps"]) < 1e-12, "ps != brute force"
-    print("selftest: 6 checks passed")
+    print("selftest: 7 checks passed")
 
 
 if __name__ == "__main__":

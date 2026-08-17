@@ -220,6 +220,14 @@ def stats_for(ax, base, post, S, b_res=None, p_res=None):
         out = {"ps_min": bnd["ps_min"], "ps_max": bnd["ps_max"],
                "ps_width": bnd["width"], "straddles_null": bnd["straddles_null"]}
     out.update({"dN": car["dN"], "suppression": car["suppression"],
+                #: BOTH CONVENTIONS, neither promoted (malign's ruling, [6374]).
+                #: `sign_disagree` is a REFUSAL: where it fires the pair is not
+                #: quotable on dN, because an interval spanning its own zero is
+                #: not a result.
+                "dN_renorm": car["dN_renorm"],
+                "sign_disagree": car["sign_disagree"],
+                "scored_mass_base": car["base_scored_mass"],
+                "scored_mass_post": car["post_scored_mass"],
                 "substitution": car["substitution"],
                 "dN_rank": rnk["dN"], "suppression_rank": rnk["suppression"],
                 "substitution_rank": rnk["substitution"],
@@ -360,6 +368,10 @@ def write(out, base_id, post_id, prompts, rows, per_axis, n_unresolved,
         "residual_mean_base": float(col("residual_base").mean()),
         "residual_mean_post": float(col("residual_post").mean()),
         "top1_share_mean": float(col("top1_share").mean()),
+        "n_sign_disagree": int(sum(1 for r in rows if r["sign_disagree"])),
+        "frac_sign_disagree": float(np.mean([bool(r["sign_disagree"]) for r in rows])),
+        "dN_vs_dN_renorm_pearson": float(pearsonr(col("dN"), col("dN_renorm")).statistic),
+        "dN_vs_dN_renorm_spearman": float(spearmanr(col("dN"), col("dN_renorm")).statistic),
         "ps_width_mean": float(col("ps_width").mean()),
         "n_straddling_null": int(sum(1 for r in rows if r["straddles_null"])),
         "top1_share_rank_mean": float(col("top1_share_rank").mean()),
@@ -371,6 +383,12 @@ def write(out, base_id, post_id, prompts, rows, per_axis, n_unresolved,
 
     print("\nRESIDUAL   base %.3f  post %.3f  (mass with no position on the axis)"
           % (summary["residual_mean_base"], summary["residual_mean_post"]))
+    print("CONVENTION  dN (mass) against dN_renorm (= N_post - N_base)")
+    print("    sign DISAGREE on %d of %d prompts (%.1f%%); r %.3f, rho %.3f"
+          % (summary["n_sign_disagree"], len(rows),
+             100 * summary["frac_sign_disagree"],
+             summary["dN_vs_dN_renorm_pearson"],
+             summary["dN_vs_dN_renorm_spearman"]))
     print("THETA BOUND  ps interval with the residual placed adversarially")
     print("    mean width %.3f   %d of %d prompts straddle 0.5"
           % (summary["ps_width_mean"], summary["n_straddling_null"], len(rows)))
