@@ -308,7 +308,11 @@ def md_screen(prompt, s):
           % (n_ret, n_theta, tot, n_ret, len(top), func), "",
           _table([(w["word"], "%.4f" % w["p"], "%.1f%%" % (100 * w["p"] / tot))
                   for w in disp], ["word", "p", "%returned"])]
-    L += ["", "`%returned` is each word's share of the %.3f returned here, **not** "
+    #: `%%` escaped: the literal `%r` in "`%returned`" was being read as a format
+    #: spec and raised at render time. Caught only because a smoke loop actually ran
+    #: `screen` -- and I first dismissed that failure as a quoting artifact of the
+    #: loop, which is how a real failure gets explained away.
+    L += ["", "`%%returned` is each word's share of the %.3f returned here, **not** "
           "of the whole slot -- the %d words below the cut and the residual are not "
           "in that denominator." % (tot, n_theta - n_ret)]
     if len(top) > SHOW:
