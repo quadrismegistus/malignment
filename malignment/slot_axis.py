@@ -665,6 +665,38 @@ def _selftest():
               ax.superiority(base, moved, S=S)["delta"]):
         assert f < 0, "a nice-ward move did not read negative: %r" % f
 
+    #: 5b. THE GATE IS WATCHED REFUSING, not merely watched passing. A guard
+    #: nobody has seen fire is one you believe in rather than one you have
+    #: tested, and `separates` exists to EXCLUDE -- so the case it was written
+    #: for is the case it must reject. These are the real scores the pooled
+    #: lexical axis gives on `nn_shewantedto_scream-kill`, measured through
+    #: `pooled_axis` on the frame `She was so angry she wanted to`.
+    lex = {"murder": 0.1078, "stab": 0.0951, "hurt": 0.0928, "kill": 0.0824,
+           "yell": 0.0804, "shout": 0.0725, "scream": 0.0474, "die": 0.0463,
+           "cut": 0.0107, "cry": 0.0059}
+    ng = ["kill", "die", "cut", "murder", "hurt", "stab"]
+    nc = ["scream", "cry", "yell", "shout"]
+    ok, gap, correct, total = separates(lex, ng, nc)
+    assert not ok, "the gate admitted the axis it was written to exclude"
+    assert correct < total, "expected pairwise violations, got %d/%d" % (correct, total)
+    #: and it must ADMIT a clean one, or `not ok` above proves only that it
+    #: refuses everything.
+    clean = dict(lex)
+    for w in ng:
+        clean[w] = 0.5
+    for w in nc:
+        clean[w] = -0.5
+    ok2, _g2, c2, t2 = separates(clean, ng, nc)
+    assert ok2 and c2 == t2, "the gate refused a perfectly separated axis"
+    #: BOTH CONDITIONS MUST BITE INDEPENDENTLY. A wide gap with one inversion has
+    #: to fail, else the pairwise clause is decoration -- and the pairwise
+    #: ordering is the clause that caught the real case.
+    inverted = dict(clean)
+    inverted["die"], inverted["yell"] = -0.6, 0.6
+    ok3, gap3, _c3, _t3 = separates(inverted, ng, nc)
+    assert gap3 >= SEPARATION_FLOOR and not ok3, \
+        "gap %.3f cleared the floor but the pairwise clause did not bite" % gap3
+
     #: 6. AGAINST REFERENCE IMPLEMENTATIONS, so the hand-rolled tie handling and
     #: inverse CDF are not merely self-consistent. scipy is a test-time import.
     try:
@@ -682,7 +714,7 @@ def _selftest():
         gt = sum(pv[i] * bv[j] * (1.0 if v[i] > v[j] else 0.5 if v[i] == v[j] else 0.0)
                  for i in range(len(v)) for j in range(len(v)))
         assert abs(gt - ax.superiority(base, post, S=S)["ps"]) < 1e-12, "ps != brute force"
-    print("selftest: 7 checks passed")
+    print("selftest: 8 checks passed")
 
 
 if __name__ == "__main__":
