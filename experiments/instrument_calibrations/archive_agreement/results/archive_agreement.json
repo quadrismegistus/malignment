@@ -1,0 +1,363 @@
+{
+ "archive": {
+  "pct_negative": 91.0,
+  "cells": 82775,
+  "edges": 44,
+  "stimuli": 2199,
+  "clusters_agree": "34/34"
+ },
+ "pooled_pct_negative": 88.12649106099728,
+ "cells": 101857,
+ "pairs": [
+  {
+   "base": "01-ai/Yi-1.5-9B",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "cells": 2222,
+   "neg": 2122,
+   "pct": 95.4995499549955
+  },
+  {
+   "base": "BAAI/Aquila2-7B",
+   "aligned": "BAAI/AquilaChat2-7B",
+   "cells": 2165,
+   "neg": 1581,
+   "pct": 73.02540415704388
+  },
+  {
+   "base": "BSC-LT/salamandra-7b",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "cells": 2222,
+   "neg": 2125,
+   "pct": 95.63456345634563
+  },
+  {
+   "base": "EleutherAI/pythia-2.8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "cells": 37,
+   "neg": 30,
+   "pct": 81.08108108108108
+  },
+  {
+   "base": "EleutherAI/pythia-6.9b",
+   "aligned": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "cells": 349,
+   "neg": 324,
+   "pct": 92.83667621776505
+  },
+  {
+   "base": "HuggingFaceTB/SmolLM2-360M",
+   "aligned": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "cells": 2220,
+   "neg": 2100,
+   "pct": 94.5945945945946
+  },
+  {
+   "base": "HuggingFaceTB/SmolLM3-3B-Base",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "cells": 2210,
+   "neg": 2110,
+   "pct": 95.47511312217195
+  },
+  {
+   "base": "LLM360/Amber",
+   "aligned": "LLM360/AmberSafe",
+   "cells": 2244,
+   "neg": 2230,
+   "pct": 99.37611408199643
+  },
+  {
+   "base": "OpenLLM-France/Lucie-7B",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "cells": 2217,
+   "neg": 1238,
+   "pct": 55.84122688317546
+  },
+  {
+   "base": "Qwen/Qwen2.5-0.5B",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "cells": 1967,
+   "neg": 1430,
+   "pct": 72.69954245043213
+  },
+  {
+   "base": "Qwen/Qwen2.5-7B",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "cells": 2121,
+   "neg": 2036,
+   "pct": 95.992456388496
+  },
+  {
+   "base": "Qwen/Qwen3-8B-Base",
+   "aligned": "Qwen/Qwen3-8B",
+   "cells": 2240,
+   "neg": 2178,
+   "pct": 97.23214285714286
+  },
+  {
+   "base": "RWKV/rwkv-4-7b-pile",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "cells": 1297,
+   "neg": 1106,
+   "pct": 85.27370855821125
+  },
+  {
+   "base": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "cells": 2183,
+   "neg": 2025,
+   "pct": 92.76225377920294
+  },
+  {
+   "base": "Zyphra/Zamba2-7B",
+   "aligned": "Zyphra/Zamba2-7B-Instruct",
+   "cells": 611,
+   "neg": 369,
+   "pct": 60.39279869067103
+  },
+  {
+   "base": "allenai/OLMo-2-0425-1B",
+   "aligned": "allenai/OLMo-2-0425-1B-Instruct",
+   "cells": 2207,
+   "neg": 2036,
+   "pct": 92.25192569098324
+  },
+  {
+   "base": "allenai/OLMoE-1B-7B-0125",
+   "aligned": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "cells": 2208,
+   "neg": 2099,
+   "pct": 95.06340579710145
+  },
+  {
+   "base": "allenai/Olmo-3-1025-7B",
+   "aligned": "allenai/Olmo-3-7B-Instruct",
+   "cells": 2211,
+   "neg": 2099,
+   "pct": 94.93441881501583
+  },
+  {
+   "base": "allenai/Olmo-3-1125-32B",
+   "aligned": "allenai/Olmo-3.1-32B-Instruct",
+   "cells": 2200,
+   "neg": 2155,
+   "pct": 97.95454545454545
+  },
+  {
+   "base": "allenai/Olmo-Hybrid-7B",
+   "aligned": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "cells": 2228,
+   "neg": 2002,
+   "pct": 89.85637342908439
+  },
+  {
+   "base": "baichuan-inc/Baichuan2-7B-Base",
+   "aligned": "baichuan-inc/Baichuan2-7B-Chat",
+   "cells": 2188,
+   "neg": 2102,
+   "pct": 96.06946983546618
+  },
+  {
+   "base": "bigscience/bloom-7b1",
+   "aligned": "bigscience/bloomz-7b1",
+   "cells": 2213,
+   "neg": 1852,
+   "pct": 83.68730230456394
+  },
+  {
+   "base": "croissantllm/CroissantLLMBase",
+   "aligned": "croissantllm/CroissantLLMChat-v0.1",
+   "cells": 2220,
+   "neg": 2191,
+   "pct": 98.69369369369369
+  },
+  {
+   "base": "deepseek-ai/deepseek-llm-7b-base",
+   "aligned": "deepseek-ai/deepseek-llm-7b-chat",
+   "cells": 1833,
+   "neg": 1700,
+   "pct": 92.74413529732679
+  },
+  {
+   "base": "gl198976/mpt-7b",
+   "aligned": "gl198976/mpt-7b-instruct",
+   "cells": 2171,
+   "neg": 2052,
+   "pct": 94.51865499769691
+  },
+  {
+   "base": "google/gemma-2-9b",
+   "aligned": "google/gemma-2-9b-it",
+   "cells": 2229,
+   "neg": 1120,
+   "pct": 50.246747420367875
+  },
+  {
+   "base": "google/recurrentgemma-9b",
+   "aligned": "google/recurrentgemma-9b-it",
+   "cells": 2232,
+   "neg": 2174,
+   "pct": 97.40143369175627
+  },
+  {
+   "base": "huggyllama/llama-7b",
+   "aligned": "PKU-Alignment/beaver-7b-v1.0",
+   "cells": 2242,
+   "neg": 2208,
+   "pct": 98.48349687778769
+  },
+  {
+   "base": "ibm-granite/granite-3.0-8b-base",
+   "aligned": "ibm-granite/granite-3.0-8b-instruct",
+   "cells": 2204,
+   "neg": 2143,
+   "pct": 97.23230490018149
+  },
+  {
+   "base": "inceptionai/jais-family-6p7b",
+   "aligned": "inceptionai/jais-family-6p7b-chat",
+   "cells": 2199,
+   "neg": 2140,
+   "pct": 97.31696225557072
+  },
+  {
+   "base": "internlm/internlm2-base-7b",
+   "aligned": "internlm/internlm2-chat-7b",
+   "cells": 2072,
+   "neg": 1053,
+   "pct": 50.82046332046332
+  },
+  {
+   "base": "kakaocorp/kanana-1.5-8b-base",
+   "aligned": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "cells": 2195,
+   "neg": 2123,
+   "pct": 96.71981776765377
+  },
+  {
+   "base": "kakaocorp/kanana-2-3b-base",
+   "aligned": "kakaocorp/kanana-2-3b-instruct",
+   "cells": 2182,
+   "neg": 2097,
+   "pct": 96.1044912923923
+  },
+  {
+   "base": "llm-jp/llm-jp-3-7.2b",
+   "aligned": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "cells": 2229,
+   "neg": 2111,
+   "pct": 94.70614625392552
+  },
+  {
+   "base": "m-a-p/CT-LLM-Base",
+   "aligned": "m-a-p/CT-LLM-SFT-DPO",
+   "cells": 2233,
+   "neg": 2157,
+   "pct": 96.59650694133452
+  },
+  {
+   "base": "m-a-p/neo_7b",
+   "aligned": "m-a-p/neo_7b_instruct_v0.1",
+   "cells": 2237,
+   "neg": 2160,
+   "pct": 96.5578900312919
+  },
+  {
+   "base": "meta-llama/Llama-3.1-70B",
+   "aligned": "meta-llama/Llama-3.1-70B-Instruct",
+   "cells": 2179,
+   "neg": 1541,
+   "pct": 70.72051399724644
+  },
+  {
+   "base": "meta-llama/Llama-3.1-8B",
+   "aligned": "meta-llama/Llama-3.1-8B-Instruct",
+   "cells": 2214,
+   "neg": 1519,
+   "pct": 68.60885275519422
+  },
+  {
+   "base": "mistralai/Mistral-7B-v0.1",
+   "aligned": "mistralai/Mistral-7B-Instruct-v0.1",
+   "cells": 2230,
+   "neg": 2138,
+   "pct": 95.87443946188341
+  },
+  {
+   "base": "openGPT-X/Teuken-7B-base-v0.6",
+   "aligned": "openGPT-X/Teuken-7B-instruct-v0.6",
+   "cells": 2195,
+   "neg": 2108,
+   "pct": 96.03644646924829
+  },
+  {
+   "base": "openbmb/MiniCPM5-1B-Base",
+   "aligned": "openbmb/MiniCPM5-1B",
+   "cells": 2241,
+   "neg": 2078,
+   "pct": 92.7264614011602
+  },
+  {
+   "base": "stabilityai/stablelm-2-1_6b",
+   "aligned": "stabilityai/stablelm-2-1_6b-chat",
+   "cells": 2211,
+   "neg": 2148,
+   "pct": 97.15061058344641
+  },
+  {
+   "base": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "aligned": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "cells": 1200,
+   "neg": 693,
+   "pct": 57.75
+  },
+  {
+   "base": "tiiuae/Falcon-H1-1.5B-Base",
+   "aligned": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "cells": 2231,
+   "neg": 2114,
+   "pct": 94.75571492604213
+  },
+  {
+   "base": "tiiuae/Falcon-H1-7B-Base",
+   "aligned": "tiiuae/Falcon-H1-7B-Instruct",
+   "cells": 2232,
+   "neg": 2188,
+   "pct": 98.02867383512545
+  },
+  {
+   "base": "tiiuae/Falcon3-7B-Base",
+   "aligned": "tiiuae/Falcon3-7B-Instruct",
+   "cells": 2177,
+   "neg": 2092,
+   "pct": 96.09554432705558
+  },
+  {
+   "base": "tiiuae/falcon-7b",
+   "aligned": "tiiuae/falcon-7b-instruct",
+   "cells": 2160,
+   "neg": 926,
+   "pct": 42.870370370370374
+  },
+  {
+   "base": "tiiuae/falcon-mamba-7b",
+   "aligned": "tiiuae/falcon-mamba-7b-instruct",
+   "cells": 1866,
+   "neg": 1675,
+   "pct": 89.7642015005359
+  },
+  {
+   "base": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "aligned": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "cells": 2244,
+   "neg": 2215,
+   "pct": 98.70766488413547
+  },
+  {
+   "base": "zai-org/glm-4-9b-hf",
+   "aligned": "zai-org/glm-4-9b-chat-hf",
+   "cells": 2239,
+   "neg": 1550,
+   "pct": 69.2273336310853
+  }
+ ]
+}
