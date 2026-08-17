@@ -1,0 +1,113 @@
+model,loaded,notation,vocab,missed_ids,missed_cjk,missed_other,reason
+01-ai/Yi-1.5-9B,1,sentencepiece,63992,72,37,35,
+01-ai/Yi-1.5-9B-Chat,1,sentencepiece,63992,72,37,35,
+BAAI/Aquila2-7B,1,bytelevel,143973,2669,2574,95,
+BAAI/AquilaChat2-7B,1,bytelevel,100008,176,141,35,
+BSC-LT/salamandra-7b,1,sentencepiece,256000,72,1,71,
+BSC-LT/salamandra-7b-instruct,1,sentencepiece,256000,72,1,71,
+ContextualAI/archangel_sft-dpo_pythia2-8b,1,bytelevel,50277,40,14,26,
+EleutherAI/pythia-2.8b,1,bytelevel,50277,40,14,26,
+EleutherAI/pythia-6.9b,1,bytelevel,50277,40,14,26,
+HuggingFaceTB/SmolLM2-360M,1,bytelevel,49152,24,6,18,
+HuggingFaceTB/SmolLM2-360M-Instruct,1,bytelevel,49152,24,6,18,
+HuggingFaceTB/SmolLM3-3B,1,bytelevel,128256,441,359,82,
+HuggingFaceTB/SmolLM3-3B-Base,1,bytelevel,128256,441,359,82,
+LLM360/Amber,1,sentencepiece,32000,27,19,8,
+LLM360/AmberSafe,1,sentencepiece,32000,27,19,8,
+OpenLLM-France/Lucie-7B,1,sentencepiece,65024,40,22,18,
+OpenLLM-France/Lucie-7B-Instruct-v1.1,1,sentencepiece,65024,40,22,18,
+PKU-Alignment/beaver-7b-v1.0,1,sentencepiece,32001,27,19,8,
+Qwen/Qwen2.5-0.5B,1,bytelevel,151665,174,100,74,
+Qwen/Qwen2.5-0.5B-Instruct,1,bytelevel,151665,174,100,74,
+Qwen/Qwen2.5-7B,1,bytelevel,151665,174,100,74,
+Qwen/Qwen2.5-7B-Instruct,1,bytelevel,151665,174,100,74,
+Qwen/Qwen3-8B,1,bytelevel,151669,174,100,74,
+Qwen/Qwen3-8B-Base,1,bytelevel,151669,174,100,74,
+RWKV/rwkv-4-7b-pile,1,bytelevel,50277,40,14,26,
+RWKV/rwkv-raven-7b,1,bytelevel,50277,40,14,26,
+TinyLlama/TinyLlama-1.1B-Chat-v1.0,1,sentencepiece,32000,27,19,8,
+TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T,1,sentencepiece,32000,27,19,8,
+Zyphra/Zamba2-7B,1,sentencepiece,32001,34,19,15,
+Zyphra/Zamba2-7B-Instruct,1,sentencepiece,32000,34,19,15,
+allenai/OLMo-2-0425-1B,0,,,,,,"Validation error for field 'tie_word_embeddings':
+"
+allenai/OLMo-2-0425-1B-Instruct,0,,,,,,"Validation error for field 'tie_word_embeddings':
+"
+allenai/OLMoE-1B-7B-0125,0,,,,,,"Validation error for field 'tie_word_embeddings':
+"
+allenai/OLMoE-1B-7B-0125-Instruct,0,,,,,,"Validation error for field 'tie_word_embeddings':
+"
+allenai/Olmo-3-1025-7B,0,,,,,,"Validation error for field 'tie_word_embeddings':
+"
+allenai/Olmo-3-1125-32B,0,,,,,,"Validation error for field 'tie_word_embeddings':
+"
+allenai/Olmo-3-7B-Instruct,0,,,,,,"Validation error for field 'tie_word_embeddings':
+"
+allenai/Olmo-3.1-32B-Instruct,0,,,,,,"Validation error for field 'tie_word_embeddings':
+"
+allenai/Olmo-Hybrid-7B,1,bytelevel,100278,171,97,74,
+allenai/Olmo-Hybrid-Instruct-DPO-7B,1,bytelevel,100278,171,97,74,
+baichuan-inc/Baichuan2-7B-Base,1,sentencepiece,125696,122,86,36,
+baichuan-inc/Baichuan2-7B-Chat,1,sentencepiece,125696,122,86,36,
+bigscience/bloom-7b1,1,bytelevel,250680,488,365,123,
+bigscience/bloomz-7b1,1,bytelevel,250680,488,365,123,
+croissantllm/CroissantLLMBase,1,sentencepiece,32000,19,8,11,
+croissantllm/CroissantLLMChat-v0.1,1,sentencepiece,32002,19,8,11,
+deepseek-ai/deepseek-llm-7b-base,1,bytelevel,100015,54,40,14,
+deepseek-ai/deepseek-llm-7b-chat,1,bytelevel,100015,54,40,14,
+gl198976/mpt-7b,1,bytelevel,50277,40,14,26,
+gl198976/mpt-7b-instruct,1,bytelevel,50277,40,14,26,
+google/gemma-2-9b,1,sentencepiece,256000,284,196,88,
+google/gemma-2-9b-it,1,sentencepiece,256000,284,196,88,
+google/recurrentgemma-9b,1,sentencepiece,256000,284,196,88,
+google/recurrentgemma-9b-it,1,sentencepiece,256000,284,196,88,
+huggyllama/llama-7b,1,sentencepiece,32000,27,19,8,
+ibm-granite/granite-3.0-8b-base,1,bytelevel,49152,58,41,17,
+ibm-granite/granite-3.0-8b-instruct,1,bytelevel,49155,58,41,17,
+inceptionai/jais-family-6p7b,1,bytelevel,84992,31,11,20,
+inceptionai/jais-family-6p7b-chat,1,bytelevel,84992,31,11,20,
+internlm/internlm2-base-7b,1,sentencepiece,92544,27,21,6,
+internlm/internlm2-chat-7b,1,sentencepiece,92544,27,21,6,
+kakaocorp/kanana-1.5-8b-base,1,bytelevel,128256,441,359,82,
+kakaocorp/kanana-1.5-8b-instruct-2505,1,bytelevel,128259,441,359,82,
+kakaocorp/kanana-2-3b-base,1,bytelevel,128256,656,551,105,
+kakaocorp/kanana-2-3b-instruct,1,bytelevel,128256,656,551,105,
+llm-jp/llm-jp-3-7.2b,1,sentencepiece,99574,128,111,17,
+llm-jp/llm-jp-3-7.2b-instruct3,1,sentencepiece,99574,128,111,17,
+lomahony/eleuther-pythia6.9b-hh-dpo,1,bytelevel,50277,40,14,26,
+m-a-p/CT-LLM-Base,1,sentencepiece,125699,122,86,36,
+m-a-p/CT-LLM-SFT-DPO,1,sentencepiece,125699,122,86,36,
+m-a-p/neo_7b,1,sentencepiece,64005,134,101,33,
+m-a-p/neo_7b_instruct_v0.1,1,sentencepiece,64005,134,101,33,
+meta-llama/Llama-3.1-70B,1,bytelevel,128256,441,359,82,
+meta-llama/Llama-3.1-70B-Instruct,1,bytelevel,128256,441,359,82,
+meta-llama/Llama-3.1-8B,1,bytelevel,128256,441,359,82,
+meta-llama/Llama-3.1-8B-Instruct,1,bytelevel,128256,441,359,82,
+mistralai/Mistral-7B-Instruct-v0.1,1,sentencepiece,32000,34,19,15,
+mistralai/Mistral-7B-v0.1,1,sentencepiece,32000,34,19,15,
+openGPT-X/Teuken-7B-base-v0.6,1,sentencepiece,250680,11,3,8,
+openGPT-X/Teuken-7B-instruct-v0.6,1,sentencepiece,250680,11,3,8,
+openbmb/MiniCPM5-1B,1,bytelevel,130560,3549,3372,177,
+openbmb/MiniCPM5-1B-Base,1,bytelevel,130560,3549,3372,177,
+stabilityai/stablelm-2-1_6b,1,bytelevel,100289,171,97,74,
+stabilityai/stablelm-2-1_6b-chat,1,bytelevel,100289,171,97,74,
+team-hatakeyama-phase2/Tanuki-8B-base-v1.0,1,sentencepiece,65024,107,96,11,
+tiiuae/Falcon-H1-1.5B-Base,0,,,,,,"Validation error for field 'use_cache':
+    TypeEr"
+tiiuae/Falcon-H1-1.5B-Instruct,0,,,,,,"Validation error for field 'use_cache':
+    TypeEr"
+tiiuae/Falcon-H1-7B-Base,0,,,,,,"Validation error for field 'use_cache':
+    TypeEr"
+tiiuae/Falcon-H1-7B-Instruct,0,,,,,,"Validation error for field 'use_cache':
+    TypeEr"
+tiiuae/Falcon3-7B-Base,1,bytelevel,131072,67,15,52,
+tiiuae/Falcon3-7B-Instruct,1,bytelevel,131072,67,15,52,
+tiiuae/falcon-7b,1,bytelevel,65024,48,18,30,
+tiiuae/falcon-7b-instruct,1,bytelevel,65024,48,18,30,
+tiiuae/falcon-mamba-7b,1,bytelevel,65024,48,18,30,
+tiiuae/falcon-mamba-7b-instruct,1,bytelevel,65024,48,18,30,
+togethercomputer/RedPajama-INCITE-7B-Chat,1,bytelevel,50277,40,14,26,
+togethercomputer/RedPajama-INCITE-Base-7B-v0.1,1,bytelevel,50277,40,14,26,
+weblab-GENIAC/Tanuki-8B-dpo-v1.0,1,sentencepiece,65001,107,96,11,
+zai-org/glm-4-9b-chat-hf,1,bytelevel,151343,277,193,84,
+zai-org/glm-4-9b-hf,1,bytelevel,151343,277,193,84,
