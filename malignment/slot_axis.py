@@ -303,7 +303,7 @@ class Axis:
                 "lev_mover": LEV_MOVER, "lev_dead": LEV_DEAD,
                 "lev_source": LEV_SOURCE}
 
-    def split(self, base, post, S=None):
+    def split(self, base, post, S=None, residual_pre=None, residual_post=None):
         """dN and its decomposition. The two parts sum to dN exactly.
 
             SUPPRESSION   mass LEAVING, weighted by where it left from
@@ -364,6 +364,22 @@ class Axis:
                 #: spans its own zero is not a result. Callers must check this
                 #: rather than read `dN` and move on.
                 "sign_disagree": (dN > 0) != (dN_renorm > 0),
+                #: **THE APERTURE TRAVELS WITH THE NUMBER.** Finding N's
+                #: registration: the per-cell worst-case leak bound is "a
+                #: COMPANION COLUMN beside the primary, reported for every cell
+                #: -- not a caveat sentence." It lived in `twp_v4.leak_bound()`
+                #: and nothing called it, which is the `_guard` shape: correct,
+                #: documented, not running. It goes HERE because this is the
+                #: function everyone already calls. Agreed with dario, [6393].
+                #:
+                #: `_floor` IS IN THE NAME ON PURPOSE (dario's ruling). The
+                #: matched estimate assumes the tail is distributed like the
+                #: head, and the measurement contradicting that is in the same
+                #: campaign -- 27.1% of lexicon words vanish below theta against
+                #: 16.9% of controls. **A name that carries its direction makes
+                #: every call site quote the caveat whether or not the author
+                #: read the docstring.**
+                **_leak(base, post, S, residual_pre, residual_post),
                 "movers": sorted(c.items(), key=lambda x: -abs(x[1]))[:5]}
 
     def split_rank(self, base, post, S=None):
@@ -517,6 +533,49 @@ class Axis:
 #: The floor is a tenth of what a purpose-built pole axis reaches on the same
 #: item (+0.39), which is generous; the ordering test is what actually bites.
 SEPARATION_FLOOR = 0.05
+
+
+_LEAK_WARNED = []
+
+
+def _leak(base, post, S, residual_pre, residual_post):
+    """The leak fields for `split()`. Omitted residuals WARN, they do not pass quietly.
+
+    **A `None` FIELD IS A PASSIVE GUARD AND THIS CAMPAIGN IS A CATALOGUE OF
+    PASSIVE GUARDS FAILING** (dario, [6393]). A consumer that ignores a `None`
+    does so silently, and the entire argument for moving the bound into `split()`
+    is that the caveat must not depend on the caller being conscientious. So the
+    run says so, once, rather than the field waiting to be looked at. If a hard
+    refusal is wanted later, this warning is the deprecation path.
+
+    `worst` is rigorous and adversarial: every unit of unresolved mass at the
+    extreme pole AND moving entirely between arms. On `kill->scream` only 8 of
+    50 pairs have an effect exceeding it.
+
+    `matched_floor` assumes the tail looks like the head. **Kept rather than
+    dropped, on dario's argument from their own receipt:** a worst-case-only
+    bound gets ignored -- their theta bound is honest, per-prompt vacuous (mean
+    width 0.388, 193/197 straddling 0.5), and they went on reasoning from the
+    point estimate anyway. Removing the useful number does not remove the
+    reader's need for one; it removes the LABELLED version and leaves them to
+    reconstruct it privately.
+    """
+    if residual_pre is None or residual_post is None:
+        if not _LEAK_WARNED:
+            _LEAK_WARNED.append(1)
+            import warnings
+            warnings.warn(
+                "Axis.split(): residual_pre/residual_post omitted, so dN is "
+                "returned with NO leak bound. Finding N's registration requires "
+                "the per-cell bound beside the primary. Pass twp_cells.total "
+                "for each arm.", stacklevel=3)
+        return {"leak_worst": None, "leak_matched_floor": None}
+    smax = max((abs(v) for v in S.values()), default=0.0)
+    tp, tq = sum(base.values()), sum(post.values())
+    e_pre = sum(p * S.get(w, 0.0) for w, p in base.items()) / tp if tp else 0.0
+    e_post = sum(p * S.get(w, 0.0) for w, p in post.items()) / tq if tq else 0.0
+    return {"leak_worst": (residual_pre + residual_post) * smax,
+            "leak_matched_floor": residual_post * e_post - residual_pre * e_pre}
 
 
 def separates(S, naughty, nice, floor=SEPARATION_FLOOR):

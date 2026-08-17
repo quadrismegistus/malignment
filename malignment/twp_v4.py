@@ -226,6 +226,103 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
     return words, res, meta
 
 
+@torch.no_grad()
+def score_words_paths(model, tok, prompt, targets, dev, bmask, cjk=None,
+                      bos_policy="inherited", theta=T.THETA):
+    """Score named words over ALL token paths, not the canonical one. -> same shape as `twp.score_words`
+
+    **`twp.score_words` IS A LOWER BOUND AND CJK IS WHERE THE BOUND IS LOOSE.**
+    It encodes each target once and scores that path. Measured against `expand`
+    on the same device:
+
+        English (mpt, 'She was so angry...')   103/113 EXACT, max rel 4.5e-08
+        CJK     (mpt, '那个自由的人选择了')      78/183 EXACT, max rel 4.9e-01
+
+    Byte-level tokenizers reach one CJK surface many ways -- mpt encodes `什么`
+    as `['?','?','么']` -- and `expand` accumulates every path that lands on a
+    surface while a single encode captures one. Hence ~0.5.
+
+    **AND `n_paths` COULD NOT HAVE TOLD ME.** It counts distinct FIRST TOKENS
+    (ingest folds jsonl rows by `word`, and a row is already one `(word, t1)`),
+    so `你` is a single token with `n_paths = 1` and still diverges 2.3x. I read
+    that field as a path count twice while diagnosing this.
+
+    ## HOW: A BEAM CONSTRAINED TO THE TARGETS
+
+    Enumerating every tokenization of a string is combinatorial, so this does not
+    enumerate -- it runs `expand`'s own beam and prunes to paths whose decoded
+    surface is still a viable PREFIX of some target. Cost is bounded by the beam,
+    not by the number of tokenizations, and every path `expand` would have taken
+    to a target is taken here.
+
+    Accumulates on `(surface, first_token)`, which is `expand`'s key, so the
+    result is comparable to a stored row rather than merely similar to one.
+    """
+    #: **CANDIDATES COME FROM THE TARGETS, NOT FROM THE VOCABULARY.** The first
+    #: version tested viability by decoding EVERY continuation token for every
+    #: live prefix at every depth -- O(live x vocab) decodes, millions per
+    #: depth, and it never returned. The needed continuations are exactly the
+    #: strings `target[len(surf):][:k]`, so they are looked up in a
+    #: string->ids index instead. O(live x targets x maxlen).
+    pids, _rs, _rid = T._prompt_ids(tok, prompt, bos_policy)
+    want = set(targets)
+    idx = _tok_index(tok)
+    lg = model(torch.tensor([pids], device=dev)).logits[0, -1, :].float()
+    P0 = torch.softmax(lg, -1).cpu().numpy()
+    del lg
+
+    def extensions(done):
+        """(token id, its string) for every token that advances `done` toward a target."""
+        out = []
+        for w in want:
+            if not w.startswith(done) or w == done:
+                continue
+            rest = w[len(done):]
+            for k in range(1, min(len(rest), _MAXTOK) + 1):
+                for tid in idx.get(rest[:k], ()):
+                    out.append((tid, rest[:k]))
+        return out
+
+    #: Seed on the targets' own first pieces, at FULL vocabulary rather than
+    #: theta -- the words this exists to find are precisely the sub-theta ones.
+    live = []
+    for tid, s in extensions(""):
+        live.append(((tid,), float(P0[tid]), tid, s))
+    got, bcache, intra = {}, {}, {}
+    for _ in range(T.MAX_DEPTH):
+        if not live:
+            break
+        dist = T.next_dist(model, tok, pids, [p for p, _, _, _ in live], dev)
+        nxt = []
+        for (pref, mass, t1, done), row in zip(live, dist):
+            surf = T.clean_surface(done.strip())
+            if surf in want and not T.is_mojibake(surf):
+                b = T._boundary_for(surf, bmask, cjk, bcache, intra)
+                k = (surf, int(t1))
+                got[k] = got.get(k, 0.0) + mass * float(row[b].sum())
+            for tid, s in extensions(done):
+                mm = mass * float(row[tid])
+                if mm > 0.0:
+                    nxt.append(((*pref, tid), mm, t1, done + s))
+        live = nxt
+    return got
+
+
+_MAXTOK = 24
+_TOKIDX = {}
+
+
+def _tok_index(tok):
+    """string -> [token ids that decode to it]. Built once per tokenizer."""
+    key = id(tok)
+    if key not in _TOKIDX:
+        d = {}
+        for i in range(tok.vocab_size):
+            d.setdefault(tok.decode([i]), []).append(i)
+        _TOKIDX[key] = d
+    return _TOKIDX[key]
+
+
 def leak_bound(pre, post, S, residual_pre, residual_post):
     """What the UNRESOLVED mass could be doing to an axis statistic. -> dict
 
