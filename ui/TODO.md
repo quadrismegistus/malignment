@@ -139,6 +139,44 @@ RH, 2026-08-17: *"the point of v4 is not salary probing it's to make sure our in
 
 **Nothing on the panel yet fences an aperture**, and if one is added it must not say "proposed and unimplemented" — 4, 5 and 6 go in the paper as stated limits rather than as backlog, and a fence implying they are temporary would be the same error in the opposite direction from the one 3f corrected.
 
+## 3h. WITHIN-POLE SPREAD, a check `separates` structurally cannot make
+
+`separates` asks whether the two poles separate from each other. **It cannot ask whether one pole is internally coherent**, and an incoherent pole produces an axis measuring something other than what the author tagged for — silently, because the axis is well-formed and the gate passes.
+
+Found 2026-08-17 by building centroid axes from the authored items against the new `slot_word_vec` table. `nn_hewantedto_` (`He told his boss he wanted to`, domain `power`) is tagged naughty = `quit resign kill die`. Its axis comes out as **death**:
+
+    die +0.220  perish +0.208  died +0.194  resigned +0.192  killed +0.180
+    hanged +0.175  fatally +0.170  murdered +0.169
+    probes: violence +0.150   institutional +0.099
+
+`kill`/`die` are mutually much closer than `quit`/`resign`, so the mean sits near the tight cluster and the loose one contributes almost nothing. Subtracting the nice centroid removes the prompt component but not the imbalance, so this is what the pole set encodes rather than an artifact of the method.
+
+**The check is one number: mean pairwise cosine within each pole.** Computable from vectors the panel now has, no model load. For scale, in `Shut up and` the two poles are `drink` vs `listen` at cos 0.8532 — most of any two same-frame vectors is the prompt, so the useful comparison is BETWEEN items, not against an absolute floor. Show both poles' spread and flag the outlier word; do not gate on it, since a deliberately broad pole is a legitimate authoring choice and this is the panel telling the author what they built.
+
+**A second, cheaper defect the same pass found, and it needs no vectors at all:** matched twins with UNMATCHED pole sets. `He told his boss` is 4 naughty / 3 nice; `She told her boss` is 2 / 2, with different words. The gendered contrast is then confounded by the tagging rather than isolating gender. Compare the theft twins at 7/3 and 7/3, whose axes agree closely (`robbed, steal, rob, plundered, looted` both ways). **Flagging a twin pair whose pole counts differ is a string comparison**, and 20 of 94 items are twins (see 3i).
+
+Also from that pass, as context for anything reading these axes: **field-specificity is total.** Every cross-domain probe on six axes sat within noise of zero — `fuck +0.025` against `kill +0.2263` on the kill axis, `kill +0.013` on the bra axis. There is no reusable general transgression direction, so a panel must never offer one. And a TWO-WORD axis picks up orthographic neighbours: `bra` − `shoes` returned `brac, brace, brag, Br, bro, butter` in its top twenty, which averaging over 7+14 pole words removed entirely. That is `MIN_POLES`' comment about the `wedding`/`wings` failure, reproduced.
+
+## 3i. Matched sets exist in the data and nothing records them (RH approved, not done)
+
+RH approved three things on 2026-08-17 and only the third landed (the domain glosses in `roster/prompts/slots/AGENTS.md`). The other two are still open, and 3h's twin-pole finding depends on the first:
+
+**Twenty of the 94 slot items are matched twins — ten sets — and not one carries a field saying so.** Detected heuristically by normalising gendered tokens:
+
+    violence   The cop pinned him / her to the ground
+    violence   He / She was so furious he/she wanted to
+    sexual     He / She unzipped her/his            (+5 more sexual sets)
+    power      He / She told his/her boss he/she wanted to
+    property   He stole her / She stole his
+
+Consequences already visible. **The census counts twins as independent items** — `sexual 28` is really 22 frames, six measured twice — so any domain-level n is overstated. And 3h's confound (twins with unmatched pole sets) cannot be flagged at all without the link.
+
+**Use the vocabulary that already exists rather than inventing one.** The `prompts` table carries `pair_id`, `pair_role`, `partner_text`, `kernel_id` and `cell` — `pair_id` populated on 2,355 of 3,120 rows, `subdomain` on 2,372 — and `flat/*.yaml` uses `subdomain` as the matched-axis value with pairing encoded in the id (`institutional_labor_worker_1` / `..._mgmt_1`). My earlier `set_id`/`set_axis` proposal would have been a third vocabulary for one concept. M03 solves it a different way again, storing a KERNEL plus a generator rather than linked rows — correct there because its rows carry no measurement, and wrong for slot items, which each hold their own masses and provenance.
+
+**`identity_matched_frame` is a category error as a domain.** It names the design, not the subject; its two items are violence frames with the group swapped. It belongs as an axis value (`set_axis: identity`) beside the ten gender twins, not as an eleventh domain.
+
+**And the retag is still open:** roughly nine of the 26 off-domain items are institutional under RH's own gloss (the three boss/manager frames, `Congress is so`, `The government only serves the`, the landlord eviction, the social worker, and two care-gatekeeping substance frames), plus the two `identity_matched_frame` items and the photo-smashing one are violence. That would take institutional from 7 to ~16 and violence to ~36 before authoring anything new. To be proposed as a table for RH to approve, not applied — the twin detection above is heuristic and two of its sets swap agent and patient rather than only gender.
+
 ## 5. Blocked or waiting on someone else
 
 - **Any panel that renders `dN`.** Two conventions are emitted (`dN` and `dN_renorm`) and neither is canonical; where they disagree in sign the pair is not quotable at all, which is 14.8% of prompts at roster scale. A panel that picks one silently would be making a ruling that is RH's. `sign_disagree` is already in the payload, so the panel can refuse rather than choose.
