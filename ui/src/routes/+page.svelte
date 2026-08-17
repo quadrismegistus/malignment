@@ -225,7 +225,11 @@
 
 	main {
 		flex: 1;
-		overflow: hidden;
+		/* RH, 2026-08-17: "I can't scroll down". `overflow: hidden` here clipped
+		   every panel taller than the viewport — the slot word list, long result
+		   tables, the markdown pages. The app shell stays 100vh and non-scrolling
+		   so the header and nav are fixed; the CONTENT pane is what scrolls. */
+		overflow-y: auto;
 		padding: 18px 22px 0;
 	}
 	code {

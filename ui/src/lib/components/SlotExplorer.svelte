@@ -304,13 +304,22 @@
 	//: panel geometry changes.
 
 
-	//: The scatter's own pixel width, so the viewBox matches its aspect ratio.
-	//: 420 is the CSS height; if that changes, change it here. This was `0 0 100
-	//: 100` with preserveAspectRatio="none" in a ~1900x420 box, a 4.5x HORIZONTAL
-	//: SCALE ON EVERY GLYPH -- the words came out looking letter-spaced, which is
-	//: a rendering artifact and not a property of anything measured.
+	//: The scatter's own pixel size, so the viewBox matches its aspect ratio.
+	//: With `preserveAspectRatio="none"` a mismatched viewBox scales x and y
+	//: independently: this was `0 0 100 100` in a ~1900x420 box, a 4.5x
+	//: HORIZONTAL SCALE ON EVERY GLYPH, and the words came out looking
+	//: letter-spaced -- a rendering artifact, not a property of anything measured.
+	//:
+	//: **BOTH DIMENSIONS ARE MEASURED NOW.** The height used to be the literal
+	//: 420 from the stylesheet, with a comment saying to change it here too if
+	//: the CSS changed. That is a footgun with a note taped to it, and the note
+	//: does not fire: the panel is now sized in `vh` and the constant would have
+	//: been silently wrong at every viewport but one.
 	let scatterW = $state(0);
-	let vbW = $derived(scatterW > 0 ? Math.max(100, (scatterW / 420) * 100) : 100);
+	let scatterH = $state(0);
+	let vbW = $derived(
+		scatterW > 0 && scatterH > 0 ? Math.max(100, (scatterW / scatterH) * 100) : 100
+	);
 
 	let shown = $derived.by(() => {
 		if (!axis) return words;
@@ -627,12 +636,19 @@
 	  here reads a committed result; this runs an instrument live. A reader who
 	  cannot tell those apart will quote one as the other.
 	-->
-	<p class="declare">
-		this panel MEASURES — it runs twp against a resident checkpoint and writes nothing.
-		Every other panel in this app reads a committed result.
-	</p>
-
+	<!--
+	  RH, 2026-08-17: these declarations cost vertical space the graph wants.
+	  THEY ARE COMPRESSED, NOT DELETED. The distinction they carry is real — a
+	  reader who cannot tell a live instrument from a committed result will quote
+	  one as the other — so each survives as a `title` on a badge that sits in a
+	  row the panel already draws. Zero extra lines, one hover to recover.
+	-->
 	<div class="controls">
+		<span
+			class="badge"
+			title="This panel MEASURES: it runs twp against a resident checkpoint and writes nothing. Every other panel in this app reads a committed result."
+			>measures</span
+		>
 		<input
 			class="prompt"
 			bind:value={prompt}
@@ -719,14 +735,22 @@
 		  printed two ids would let a reader take it for one hop. Only the two ENDS
 		  are loaded; the intermediate rungs are named, not measured.
 		-->
-		<p class="declare">
-			pooled over <strong>{resp.pair.base.split('/').pop()}</strong> +
-			<strong>{resp.pair.endpoint.split('/').pop()}</strong>, blind to source &mdash; a word's
-			origin is not returned, so poles are declared on the POOLED vocabulary and not on the
-			base{#if resp.pair.n_steps && resp.pair.n_steps > 1}. <strong>{resp.pair.n_steps} operations
-			apart</strong> ({resp.pair.ops.join(' → ')}), and only the two ends are loaded{/if}
-		</p>
 		<div class="branches">
+			<!--
+			  The pair is already chosen in the dropdown above, so repeating it in
+			  prose was the redundant half. What is NOT redundant is that the pool is
+			  blind to source and that the path may be multi-step — both live here as
+			  a title on a cell the row already had space for.
+			-->
+			<div
+				class="branch dim"
+				title="Pooled over {resp.pair.base} + {resp.pair.endpoint}, BLIND TO SOURCE — a word's origin is not returned, so poles are declared on the pooled vocabulary and not on the base.{resp.pair.n_steps && resp.pair.n_steps > 1 ? ` ${resp.pair.n_steps} operations apart (${resp.pair.ops.join(' → ')}); only the two ENDS are loaded and the intermediate rungs are named, not measured.` : ''}"
+			>
+				<span class="lbl">pooled</span>
+				<span class="val num"
+					>2 ends{#if resp.pair.n_steps && resp.pair.n_steps > 1} · {resp.pair.n_steps} ops{/if}</span
+				>
+			</div>
 			<div class="branch naughty-b" title="Summed word probability over every word tagged NAUGHTY.">
 				<span class="lbl">naughty</span>
 				<span class="val num">{naughtyMass.toFixed(4)}</span>
@@ -945,15 +969,18 @@
 			  to precede. That is why the warning is unconditional rather than
 			  triggered.
 			-->
-			<p class="declare warn">
-				GENERIC AXIS &mdash; positions come from the bare words <em>naughty</em> and
-				<em>nice</em>, not from your poles. Over 14 authored items it spans
-				<span class="num">3.9x</span> less than a real axis and agrees on
-				<span class="num">68%</span> of orderings; usually it separates the two branches, and
-				<strong>on some frames it inverts them entirely</strong> &mdash; nothing here tells you
-				which, because that check needs the poles this axis stands in for. A rough layout to
-				click on, not a reading. Leverage, N and purity are withheld until the poles are yours.
-			</p>
+			<!--
+			  THE WARNING IS UNCONDITIONAL AND STAYS UNCONDITIONAL, but it is a badge
+			  now. The tail is what it is for: two of 14 authored frames come out
+			  INVERTED rather than flat, and an inverted axis looks like a result
+			  where a flat one is visibly useless. Nothing on the panel can tell them
+			  apart, because the check needs the poles this axis stands in for.
+			-->
+			<span
+				class="badge warn"
+				title="GENERIC AXIS — positions come from the bare words `naughty` and `nice`, not from your poles. Over 14 authored items it spans 3.9x less than a real axis and agrees on 68% of orderings (medians). Usually it separates the two branches; on some frames it INVERTS them entirely — nn_feltherselfget_weak-wet agrees on 19%, nn_felthimselfget_weak-hard on 13% — and nothing here tells you which, because that check needs the poles this axis stands in for. A rough layout to click on, not a reading. Leverage, N and purity are withheld until the poles are yours."
+				>generic axis</span
+			>
 		{:else if !axis}
 			<p class="declare warn">
 				NO AXIS &mdash; the projection could not be built. {axisNote || 'The two poles may be identical in embedding space.'}
@@ -965,8 +992,20 @@
 		</p>
 
 		{#if axis && pts.length}
-			<div class="scatterwrap" bind:clientWidth={scatterW}>
-				<svg viewBox="0 0 {vbW} 100" preserveAspectRatio="none" class="scatter">
+			<div class="scatterwrap">
+				<!--
+				  MEASURED ON THE SVG, NOT ON THE WRAPPER. The wrapper carries 6px of
+				  padding and the readout row beneath, so its height is not the plot's
+				  height and the aspect ratio would come out skewed — which shows up as
+				  the horizontal glyph stretch this viewBox exists to prevent.
+				-->
+				<svg
+					viewBox="0 0 {vbW} 100"
+					preserveAspectRatio="none"
+					class="scatter"
+					bind:clientWidth={scatterW}
+					bind:clientHeight={scatterH}
+				>
 					<line x1={vbW / 2} y1="4" x2={vbW / 2} y2="96" class="mid" />
 					{#each pts as pt (pt.word)}
 						<!--
@@ -1142,12 +1181,36 @@
 		border: 1px solid var(--rule); border-radius: 4px; background: var(--panel);
 		padding: 6px; margin-bottom: 12px;
 	}
-	.scatter { width: 100%; height: 420px; display: block; overflow: visible; }
+	/* RH, 2026-08-17: the graph should take the page. `vh` rather than a flex
+	   fill because `main` scrolls now — a flex-grown child of a scrolling
+	   container collapses to its content. The word list below is still reachable
+	   by scrolling, which is the same fix as the scroll complaint. */
+	.scatter { width: 100%; height: 74vh; min-height: 320px; display: block; overflow: visible; }
+	/* 3.2 user units of a 100-unit viewBox. Was 2.4, which rendered ~10px in the
+	   old 420px box; at 74vh this is ~24px on a 1080p screen. The budget is
+	   legibility against overprinting and it has no better justification than the
+	   rendered image, so re-check it by looking if the geometry changes. */
 	.scatter text {
-		font-family: var(--mono); font-size: 2.4px; fill: var(--text-2);
+		font-family: var(--mono); font-size: 3.2px; fill: var(--text-2);
 		cursor: pointer; text-anchor: middle;
 	}
 	.scatter text:hover { fill: #fff; }
+	/* THE CLICK ARTIFACT (RH, 2026-08-17: "this big post-click thing"). Clicking
+	   an SVG <text role="button" tabindex="0"> leaves it focused, and the browser
+	   paints its default focus indicator over the plot until something else is
+	   clicked. `:focus-visible` fires for KEYBOARD focus only, so the indicator
+	   survives where it is the only way to see where you are and disappears where
+	   the pointer already told you. Removing `:focus` outright would have taken
+	   the keyboard affordance the tabindex exists for. */
+	.scatter text:focus { outline: none; }
+	.scatter text:focus-visible {
+		outline: none;
+		fill: #fff;
+		paint-order: stroke;
+		stroke: var(--blue-light);
+		stroke-width: 0.6px;
+		stroke-linejoin: round;
+	}
 	/* The raised copy: a halo stroke painted UNDER the fill so the glyph is not
 	   thickened, and pointer-events off so it cannot steal the hover from the
 	   text beneath it and flicker. */
@@ -1179,6 +1242,13 @@
 		border: 1px solid var(--rule); border-radius: 4px; color: var(--text-2);
 		font-family: var(--mono); font-size: 11px; white-space: pre-wrap; user-select: all;
 	}
+
+	.badge {
+		font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase;
+		padding: 3px 7px; border: 1px solid var(--rule); border-radius: 3px;
+		color: var(--text-2); background: var(--panel); cursor: help; white-space: nowrap;
+	}
+	.badge.warn { border-color: var(--amber, #b8860b); color: var(--amber, #b8860b); }
 
 	/* ── saving ─────────────────────────────────────────────────────────── */
 	.saverow {
