@@ -1,0 +1,24 @@
+{
+ "floor": 0.001,
+ "n_prompts": 25,
+ "models": {
+  "HuggingFaceTB/SmolLM3-3B-Base": {
+   "n_words": 2384,
+   "total_p": 18.9869950026363,
+   "mass_weighted_tail_share": 0.09484844356642574,
+   "median_term": 0.9935657978057861,
+   "median_tail_frac": 0.07261145191276364,
+   "mean_n_tail": 69326.60654362416,
+   "mean_n_boundary": 69372.37416107382
+  },
+  "Qwen/Qwen2.5-7B": {
+   "n_words": 2389,
+   "total_p": 19.999744946934797,
+   "mass_weighted_tail_share": 0.08968925509817206,
+   "median_term": 0.9953604340553284,
+   "median_tail_frac": 0.07547645668714242,
+   "mean_n_tail": 86623.96274591879,
+   "mean_n_boundary": 86669.47007115948
+  }
+ }
+}

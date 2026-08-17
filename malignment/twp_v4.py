@@ -1,0 +1,205 @@
+#!/usr/bin/env python
+"""twp_v4.py — the word-boundary rule, proposed changes, each one switchable.
+
+    from malignment import twp_v4 as V4
+
+    V4.expand4(model, tok, prompt, dev, bmask, cjk=cjk)          # all rules off == v3
+    V4.expand4(..., rules=V4.Rules(term_floor=0.001))            # one rule on
+    V4.compare(model, tok, prompt, dev, bmask, cjk, rules)       # what moved, and by how much
+
+## WHY A SEPARATE MODULE AND NOT A BRANCH IN `expand`
+
+`twp.expand` is `RULE_VERSION 3`, `dict_sha b16011275c42955c`, and 984,857 stored
+cells were written by it with conservation exactly 1.000000. **v3 must stay
+byte-identical while v4 is unstable**, and the cheapest way to guarantee that is
+to not touch it: this module IMPORTS `_account`'s pieces rather than forking
+them, so a v3 fix reaches v4 automatically and a v4 experiment cannot reach v3.
+
+Tagged `pre-rule-v4` before any of this existed.
+
+## EVERY RULE IS OFF BY DEFAULT AND EVERY RULE IS SEPARATE
+
+`Rules()` with no arguments must reproduce v3 exactly — asserted by
+`compare()` returning zero movement, which is the first thing to run after any
+edit here. **A bundle of four changes that collectively shift every number is
+unattributable**; the point of this file is that each can be switched on alone
+and its effect measured against the same cell.
+
+## THE FOUR CANDIDATES, AND WHAT IS ACTUALLY KNOWN ABOUT EACH
+
+**1. `term_floor` — the one the measurement was for.**
+`p = mass x term`, `term = row[b].sum()` over ~30k-48k boundary tokens. Measured
+on `gl198976/mpt-7b`, 25 prompts, 2,375 words:
+
+    median term                                   0.9993
+    mass-weighted share of p from sub-theta        8.8%
+    median tail fraction of term                   6.7%   (top-20 by p: 11.7%)
+    boundary tokens per word 30,533, sub-floor    30,489
+
+**`term` is NEAR-SATURATED for real words and therefore carries almost no
+information about them** — after "night", essentially anything is a boundary. It
+is fractional only where a surface genuinely wants to continue, i.e. fragments
+(`murm` 0.534, wanting `ured`). So the honest v4 question is not "correct a
+bias" but "should a factor that is 0.999 for every real word be in the product".
+A floor discards the diffuse remainder; the ~8.8% it removes is near-uniform, so
+it should largely cancel in `dP` and entirely in signs — **which is a prediction
+this module exists to test, not an assurance.**
+
+**2. `enumerate_paths` — the CJK gap.**
+`expand` accumulates at every depth reaching a surface; `twp.score_words` scores
+one path and so is a LOWER BOUND: English matches to 4.5e-08, CJK to only ~0.5,
+because byte-level tokenizers reach one CJK surface many ways (`什么` ->
+['?','?','么']). Affects `score_words`, not `expand` — listed here so the union
+top-up and the rule change stay one conversation.
+
+**3. `count_paths` — `n_paths` is misnamed.**
+It counts distinct FIRST TOKENS, because ingest folds jsonl rows by `word` and a
+row is already one `(word, t1)`. I misread it twice while diagnosing (2), and
+dario confirmed nothing of theirs reads it ([6388]) — so it can be renamed now
+at zero cost to consumers, which will not be true later.
+
+**4. `fragment_gate` — NOT RECOMMENDED, kept so it can be refuted with numbers.**
+Suppressing `murm`/`spapers` needs a lexicon, which would also drop legitimate
+rare words, names and neologisms from a full-vocabulary instrument. And after (1)
+it may be moot: fragments are where `term` is fractional, so a floor may remove
+them without a wordlist. **Try (1) before anyone builds a gate.**
+"""
+import dataclasses
+import os
+import sys
+
+import numpy as np
+import torch
+
+from . import twp as T
+
+RULE_VERSION = 4
+
+
+@dataclasses.dataclass(frozen=True)
+class Rules:
+    """One switch per proposed change. All-default MUST reproduce v3.
+
+    `frozen` so a rule set cannot be mutated after a run has been labelled with
+    it -- the stamp-declares-not-applies failure, where a record says which rule
+    made it and the rule changed underneath.
+    """
+    #: Discard boundary tokens below this from `term`. 0.0 == v3 (keep all).
+    term_floor: float = 0.0
+    #: Renormalise `term` over the kept boundary mass. Only meaningful with a
+    #: floor; asserts the discarded tail was noise rather than absent mass.
+    term_renorm: bool = False
+    #: Sum over ALL token paths reaching a surface, not the canonical one.
+    enumerate_paths: bool = False
+
+    def is_v3(self):
+        return (self.term_floor == 0.0 and not self.term_renorm
+                and not self.enumerate_paths)
+
+    def label(self):
+        if self.is_v3():
+            return "v3"
+        bits = []
+        if self.term_floor:
+            bits.append("floor=%g%s" % (self.term_floor, "+renorm" if self.term_renorm else ""))
+        if self.enumerate_paths:
+            bits.append("paths")
+        return "v4[" + ",".join(bits) + "]"
+
+
+@torch.no_grad()
+def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
+            bos_policy="inherited", rules=None):
+    """`twp.expand`'s beam with the v4 switches. Returns (words, residual, meta).
+
+    Mirrors v3's loop deliberately rather than calling it, because the changes
+    are INSIDE the loop -- but every helper (`_prompt_ids`, `next_dist`,
+    `clean_surface`, `_boundary_for`, `is_mojibake`) is v3's, so the rule this
+    diverges from is the rule the store was written with.
+    """
+    rules = rules or Rules()
+    pids, _rs, _rid = T._prompt_ids(tok, prompt, bos_policy)
+    lg = model(torch.tensor([pids], device=dev)).logits[0, -1, :].float()
+    P0 = torch.softmax(lg, -1).cpu().numpy()
+    del lg
+    sel = np.flatnonzero(P0 >= theta)
+    live = [((int(t),), float(P0[t]), int(t)) for t in sel]
+    words, res = {}, dict(tail=float(1.0 - P0[sel].sum()), drop=0.0, mojibake=0.0)
+    #: v4 accounts the mass a floor discards to its OWN channel. Folding it into
+    #: `drop` would make it indistinguishable from sub-theta continuation loss,
+    #: and conservation would still read 1.0 while meaning something different.
+    res["term_floored"] = 0.0
+    paths, bcache, intra = {}, {}, {}
+    for _ in range(T.MAX_DEPTH):
+        if not live:
+            break
+        dist = T.next_dist(model, tok, pids, [p for p, _, _ in live], dev)
+        nxt = []
+        for (pref, mass, t1), row in zip(live, dist):
+            surf = T.clean_surface(tok.decode(list(pref)).strip())
+            b = T._boundary_for(surf, bmask, cjk, bcache, intra)
+            bm = row[b]
+            if rules.term_floor > 0.0:
+                keep = bm >= rules.term_floor
+                term = float(bm[keep].sum())
+                floored = float(bm[~keep].sum())
+                if rules.term_renorm and term > 0:
+                    term = term / (term + floored) * float(bm.sum())
+                    floored = float(bm.sum()) - term
+            else:
+                term, floored = float(bm.sum()), 0.0
+            if surf and not T.is_mojibake(surf):
+                key = (surf, t1)
+                words[key] = words.get(key, 0.0) + mass * term
+                paths[key] = paths.get(key, 0) + 1
+                res["term_floored"] += mass * floored
+            elif surf:
+                res["mojibake"] += mass * (term + floored)
+            else:
+                res["drop"] += mass * (term + floored)
+            cont = np.flatnonzero(~b)
+            m2 = mass * row[cont]
+            k2 = m2 >= theta
+            for t, mm in zip(cont[k2], m2[k2]):
+                nxt.append(((*pref, int(t)), float(mm), t1))
+            res["drop"] += float(m2[~k2].sum())
+        live = nxt
+    res["open"] = float(sum(m for _, m, _ in live))
+    meta = {"rule_version": RULE_VERSION, "rules": dataclasses.asdict(rules),
+            "label": rules.label(),
+            #: THE HONEST FIELD NAME. v3's `n_paths` counts distinct first
+            #: tokens; this counts what the name says.
+            "n_paths_true": dict(paths)}
+    return words, res, meta
+
+
+def compare(model, tok, prompt, dev, bmask, cjk=None, rules=None, top=6):
+    """v3 against v4 on ONE cell. Prints what moved; returns the deltas.
+
+    **RUN THIS WITH `Rules()` FIRST.** All-default must show zero movement; if it
+    does not, this module has drifted from v3 and every v4 number after it is
+    measuring the drift as well as the rule.
+    """
+    rules = rules or Rules()
+    v3 = T.expand(model, tok, prompt, dev, bmask, cjk=cjk)
+    w3 = v3[0] if isinstance(v3, tuple) else v3
+    w4, res4, meta = expand4(model, tok, prompt, dev, bmask, cjk=cjk, rules=rules)
+    keys = set(w3) | set(w4)
+    d = [(w4.get(k, 0.0) - w3.get(k, 0.0), k) for k in keys]
+    moved = [x for x in d if x[0] != 0.0]
+    p3, p4 = sum(w3.values()), sum(w4.values())
+    print("  %s vs v3   %r" % (meta["label"], prompt[:44]))
+    print("    words: v3 %d | v4 %d | only-v3 %d | only-v4 %d"
+          % (len(w3), len(w4), len(set(w3) - set(w4)), len(set(w4) - set(w3))))
+    print("    summed p: %.6f -> %.6f  (%+.2f%%)"
+          % (p3, p4, 100 * (p4 - p3) / p3 if p3 else 0.0))
+    print("    moved: %d of %d words | floored mass %.6f"
+          % (len(moved), len(keys), res4.get("term_floored", 0.0)))
+    if rules.is_v3() and moved:
+        print("    *** Rules() IS NOT v3 -- %d words moved, max %.3e ***"
+              % (len(moved), max(abs(x) for x, _ in moved)))
+    for x, k in sorted(moved, key=lambda z: -abs(z[0]))[:top]:
+        print("       %-18s %.6f -> %.6f  (%+.1f%%)"
+              % (str(k[0])[:18], w3.get(k, 0.0), w4.get(k, 0.0),
+                 100 * x / w3[k] if w3.get(k) else float("inf")))
+    return {"v3": w3, "v4": w4, "res": res4, "meta": meta, "moved": moved}
