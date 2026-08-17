@@ -75,6 +75,22 @@ from . import twp as T
 
 RULE_VERSION = 4
 
+#: **THE SHIPPING RULE SET.** Measured on Qwen2.5-7B, 30 prompts, against v3:
+#:
+#:     GATE Rules()==v3            0.000e+00      identical, 8 prompts
+#:     COST  v3 74.8s -> 71.2s     0.95x          free; the 2.5x was numeric_intra
+#:     en  n=25  resolved  +0.15% median, min +0.00%, max +2.78%
+#:     zh  n=5   resolved  +3.42% median, min +1.68%, max +8.91%
+#:     conservation 1.000000 throughout; word counts unchanged
+#:
+#: **No regressions -- every delta non-negative**, which `numeric_intra` could
+#: not manage (-90.31% on one prompt; see `numeric_intra_ids`). The sign is
+#: structural rather than lucky: marking more tokens as boundaries can only
+#: increase `term = row[b].sum()`, so this RECOVERS mass that was bleeding into
+#: `drop`/`open` rather than moving it between words.
+ADOPTED = None      # set below, once Rules exists
+
+
 
 @dataclasses.dataclass(frozen=True)
 class Rules:
@@ -142,6 +158,8 @@ class Rules:
             bits.append("Z")
         return "v4[" + ",".join(bits) + "]"
 
+
+ADOPTED = Rules(decoded_boundary=True, max_depth=9)
 
 _HYPH = {}
 
