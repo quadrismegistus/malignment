@@ -203,12 +203,35 @@ def venv_for(model):
     raise KeyError("%s is not a node in %s" % (model, MODELS_YAML))
 
 
+#: **A MACHINE CONSTRAINT, NOT A MODEL ONE, WHICH IS WHY IT IS NOT IN THE ROSTER.**
+#: Measured 2026-08-17 on this Mac, same model and dtype, only the environment
+#: differing:
+#:
+#:     transformers 5.4.0  + accelerate 1.13.0   device_map='mps'  loads in 0.2s
+#:     transformers 5.15.0 + accelerate 1.14.0   device_map='mps'  HANGS, >7 min
+#:                                                                 at 0/290 tensors
+#:
+#: `device_map=None` loads in 0.5s under BOTH, so it is the MPS placement that
+#: hangs and not the read. 5.15.0 is not broken in general -- it produced 250
+#: models' cells on the CUDA fleet -- so this belongs to (this machine x this
+#: version) and would be a lie in `models.yaml`, which describes checkpoints.
+#:
+#: It is also the ceiling problem, self-inflicted: `default` declares `>=4.57`
+#: with no upper bound, so building "the newest admissible version" is exactly
+#: what broke local loading. The upper bound is UNBISECTED -- 5.4.0 is the
+#: newest version measured working here, not the newest that works.
+DARWIN_MAX_TRANSFORMERS = "<=5.4.0"
+
+
 def _requirements(g):
     #: EVERY declaration in the group is passed, not a summary of them -- the
     #: resolver intersects them, and if that intersection is empty it says so
     #: rather than us having decided which declaration wins.
     out = ["-e", "%s[dev]" % ROOT]
-    for sp in sorted(s for s in g["specs"] if s):
+    specs = sorted(s for s in g["specs"] if s)
+    if sys.platform == "darwin" and _satisfiable(specs + [DARWIN_MAX_TRANSFORMERS]):
+        specs.append(DARWIN_MAX_TRANSFORMERS)
+    for sp in specs:
         out.append("transformers" + sp)
     for pkg, ver in sorted(g["packages"].items()):
         out.append(pkg + ver if ver else pkg)
