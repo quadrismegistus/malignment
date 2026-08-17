@@ -284,3 +284,11 @@ ui/.svelte-kit/
 # "derived, rebuildable" and is not in git either. `ui/README.md` says how to
 # build it, which is one command.
 malignment/ui_dist/
+
+# Playwright's per-run output: traces, actual/diff images, the HTML report. The
+# SNAPSHOTS under `ui/e2e/**-snapshots/` are tracked on purpose -- they are the
+# baseline the suite compares against, so an untracked one makes the check
+# vacuous on a fresh clone.
+ui/test-results/
+ui/playwright-report/
+ui/blob-report/

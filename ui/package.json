@@ -8,12 +8,15 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"test:e2e": "playwright test",
+		"test:e2e:update": "playwright test --update-snapshots"
 	},
 	"dependencies": {
 		"marked": "^18.0.9"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.61.1",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
