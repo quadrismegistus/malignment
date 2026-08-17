@@ -1,0 +1,3 @@
+lineage,upper_base,upper_aligned,middle_base,middle_aligned,working_base,working_aligned,gap_base,gap_aligned,narrows
+Qwen2.5,45000.0,40000.0,35000.0,30000.0,24360.0,30000.0,20640.0,10000.0,1
+SmolLM2,50000.0,74414.0,49680.0,55725.0,27391.5,30000.0,22608.5,44414.0,0
