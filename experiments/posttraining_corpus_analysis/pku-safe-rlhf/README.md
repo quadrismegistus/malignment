@@ -166,6 +166,68 @@ registration, which must pass this same control before being fitted to `safer`.
 Full account in A5, including that the guard A4 pre-declared passed and was the
 wrong guard.
 
+# THE MILDNESS QUESTION, ANSWERED WITH A BLIND CODER INSTEAD OF A LEXICON
+
+RH's design, after the K instrument failed: show an agent a pair with no labels
+and ask which is milder. `results/mildness/workflow.js`, run `wf_93c14ddb-557`,
+300 both-unsafe pairs, position randomised, 24 agents, no failures. Reproduce
+with `run.py --mildness`.
+
+Three judgments per pair, because they come apart and only the first is M01's
+displacement: **milder_wording** (same act, gentler terms), **less_detail** (less
+operationally specific), **more_severe** (the control).
+
+    AGREEMENT on 60 double-coded   wording 0.867  detail 0.933  severity 0.900
+
+## THE CONTROL PASSES, WHICH IS WHY ANY OF THIS COUNTS
+
+    coder's MORE_SEVERE = the annotators' own higher severity_level
+    70.9%   [0.611, 0.794]   n=103   p=2.7e-05
+
+The K instrument sat at 49.9% on this same check. This one sees severity.
+
+## AND THE CORPUS REWARDS A BUNDLE, NOT A DIMENSION
+
+Severity-EQUAL stratum, 180 pairs, where the annotators rated both responses the
+same, so nothing here is rated severity in disguise:
+
+    MILDER WORDING is the safer response    65.5%  [0.560, 0.742]  n=113  p=0.0013
+    LESS DETAILED is the safer response     58.2%  [0.496, 0.664]  n=141  p=0.064
+
+**But neither dimension survives being separated from the other.** Splitting all
+300 by whether the two judgments point at the same response:
+
+    they COINCIDE (milder AND vaguer)   74.2%  [0.656, 0.816]  n=124  p=6.5e-08
+    they COME APART, milder wins        48.1%  [0.340, 0.624]  n= 52  p=0.89
+    they COME APART, vaguer wins        51.9%  [0.376, 0.660]  n= 52  p=0.89
+
+**The entire effect is carried by pairs where the response is gentler AND less
+specific at once. Force a choice between euphemism and vagueness and the
+annotation is at chance.** What is rewarded is not a lexical judgment but an
+overall attenuation, which is consistent with the coder's own gestalt severity
+read predicting `safer` at 63.6% in the same stratum.
+
+## WHICH IS WHY DISPLACEMENT STILL HAS NO CORPUS SOURCE
+
+M01's displacement holds the slot and changes the filler: content constant, word
+milder. **That is exactly the come-apart cell**, and there the corpus rewards
+nothing detectable. At n=52 the interval rules out an effect anywhere near the
+68-74% found elsewhere; it does not rule out a modest one.
+
+    ADDITION      append a moral frame        68.2% in severity-equal
+    ATTENUATION   gentler AND vaguer at once  74.2%
+    SUBSTITUTION  gentler ALONE               48.1%, n=52
+
+## TWO THINGS THIS DOES NOT HAVE
+
+- **The length control is underpowered, not passed.** Length-matched to within 20
+  words the wording effect is 60.8%, n=51, CI [0.461, 0.742] -- an interval that
+  separates 65.5% from neither 50% nor itself. Unresolved. The milder-worded
+  response is also the shorter one only 56.6% of the time, so length is not an
+  obvious driver, but that is not the same as a control that fired.
+- **The disclaimer confound IS ruled out.** Only 7 of 180 TEST pairs have exactly
+  one disclaiming response; removing them leaves 66.4%, n=110, p=0.0008.
+
 # H3 RESOLVED, AND THE MIXED CONDITIONAL REPLICATES
 
 Registered bet: RH predicted `better` is easier to detect lexically than `safer`;
@@ -207,8 +269,6 @@ stratum. Never pooled with the 550.
 
 # NOT DONE
 
-- **A valid mildness instrument.** The registered one failed its control. See
-  above and A5.
 - **The corpus -> model check.** `alpaca-7b-reproduced` (a response generator
   here) and `beaver-7b-v1.0` (trained on these labels) are both roster models.
   Needs cells; waits on v4.

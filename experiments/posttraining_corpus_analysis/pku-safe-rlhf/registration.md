@@ -525,3 +525,18 @@ H3 NOT SUPPORTED: better minus safer, length-matched, -0.0694 against a +0.03
 threshold. CAUSE=LENGTH holds (words add -0.0847 over length alone), so RH's
 mechanism was right and the ordering was not. MIXED conditional: safer 63.0%,
 n=386, p=4.1e-07.
+
+---
+
+## A7 — 2026-08-17. The mildness question, answered with RH's blind-coder design.
+
+The K instrument failed its control, so the construct was measured directly: 300
+blinded pairs, three judgments, 24 agents, `results/mildness/workflow.js`. The
+control PASSES (coder recovers PKU's own severity ordering, 70.9%, n=103), unlike
+K's 49.9%.
+
+Result: the corpus rewards ATTENUATION, not a dimension. Milder-and-vaguer
+together 74.2% (n=124); the two forced apart, 48.1% / 51.9% (n=52), chance. So
+substitution with content held constant -- M01's displacement -- has no corpus
+source, while the bundle does. Length control underpowered (n=51) and reported
+as unresolved. Numbers in README.

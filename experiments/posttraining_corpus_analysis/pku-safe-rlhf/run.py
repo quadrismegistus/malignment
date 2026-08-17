@@ -216,6 +216,7 @@ def main():
     ap.add_argument("--coded", action="store_true")
     ap.add_argument("--findingb", action="store_true")
     ap.add_argument("--h3", action="store_true")
+    ap.add_argument("--mildness", action="store_true")
     a = ap.parse_args()
     tr, te = load("train"), load("test")
     if a.coded:
@@ -226,6 +227,9 @@ def main():
         return
     if a.h3:
         h3(tr, te)
+        return
+    if a.mildness:
+        mildness()
         return
     if a.check:
         check(tr)
@@ -346,6 +350,81 @@ def lengthcheck(tr):
     w = sum(1 for i, who, dd in sel if (tr["safer_response_id"][i] == who) == (dd > 0))
     print("length ALONE agrees with the safer verdict on %.1f%% of the %d pairs"
           % (100*w/len(sel), len(sel)))
+
+
+def mildness():
+    """RH's design: show a blind coder a pair and ask which is milder. Replaces
+    the K instrument, which failed its positive control by dilution.
+
+    Three judgments, because they come apart and only the first is M01's
+    displacement:
+        milder_wording   same act, gentler terms      -> substitution
+        less_detail      less operationally specific  -> adjacent to P's
+                         enacted->represented axis, NOT a test of it
+        more_severe      the positive control, against PKU's own severity_level
+    """
+    from scipy import stats
+    C = json.load(open(os.path.join(RESULTS, "mildness", "codings.json")))
+    key = json.load(open(os.path.join(RESULTS, "mildness", "key.json")))
+    A = C["coder_A"]
+
+    def rate(ids, pick, target, label):
+        ids = [i for i in ids if A[i][pick] != "EQUIVALENT"]
+        if len(ids) < 30:
+            print("  %-46s n=%-4d UNPOWERED" % (label, len(ids))); return None
+        w = sum(1 for i in ids if A[i][pick] == target(i))
+        r = stats.binomtest(w, len(ids), 0.5); lo, hi = r.proportion_ci()
+        print("  %-46s n=%-4d %5.1f%%  [%.3f, %.3f]  p=%-9.3g%s"
+              % (label, len(ids), 100 * w / len(ids), lo, hi, r.pvalue,
+                 " *" if r.pvalue < 0.05 else ""))
+        return w / len(ids)
+
+    safer_pos = lambda i: "A" if key[i]["safer"] == key[i]["A_is"] else "B"
+    sev_pos = lambda i: "A" if key[i]["sev_A"] > key[i]["sev_B"] else "B"
+    TEST = [i for i in A if key[i]["stratum"] == "TEST"]
+    CTRL = [i for i in A if key[i]["stratum"] == "CONTROL"]
+
+    print("=== POSITIVE CONTROL: does the coder recover PKU's OWN severity ordering? ===")
+    print("   CONTROL stratum, %d pairs, annotator severity_level differs" % len(CTRL))
+    ok = rate(CTRL, "more_severe", sev_pos,
+              "coder's MORE_SEVERE = annotators' higher severity")
+    passed = ok is not None and ok >= 0.55
+    print("   -> %s" % ("CONTROL PASSES the 55%% floor. The instrument sees severity."
+                        if passed else "CONTROL FAILS. Nothing below is interpretable."))
+
+    print("\n=== THE TEST: severity-EQUAL pairs, where annotators rated both the same ===")
+    print("   %d pairs. Any signal here is NOT rated severity in disguise." % len(TEST))
+    rate(TEST, "milder_wording", safer_pos, "MILDER WORDING is the safer response")
+    rate(TEST, "less_detail", safer_pos, "LESS DETAILED is the safer response")
+    rate(TEST, "more_severe", lambda i: "B" if safer_pos(i) == "A" else "A",
+         "LESS SEVERE (coder's own read) is the safer response")
+
+    print("\n=== the same on all 300, reported beside it and not instead ===")
+    allids = list(A)
+    rate(allids, "milder_wording", safer_pos, "MILDER WORDING is the safer response")
+    rate(allids, "less_detail", safer_pos, "LESS DETAILED is the safer response")
+    rate(allids, "more_severe", lambda i: "B" if safer_pos(i) == "A" else "A",
+         "LESS SEVERE is the safer response")
+
+    #: Do the two dimensions come apart? If wording and detail always agree the
+    #: design cannot dissociate them and the two rows above are one measurement.
+    both = [i for i in A if A[i]["milder_wording"] != "EQUIVALENT"
+            and A[i]["less_detail"] != "EQUIVALENT"]
+    same = sum(1 for i in both if A[i]["milder_wording"] == A[i]["less_detail"])
+    print("\nDISSOCIATION CHECK: wording and detail point the same way on %d of %d "
+          "(%.0f%%)." % (same, len(both), 100 * same / len(both)))
+    print("  If that were near 100 the two rows above would be one measurement.")
+
+    rows = [{"id": i, "stratum": key[i]["stratum"], "pair": key[i]["pair"],
+             "milder_wording": A[i]["milder_wording"], "less_detail": A[i]["less_detail"],
+             "more_severe": A[i]["more_severe"], "safer_pos": safer_pos(i),
+             "sev_A": key[i]["sev_A"], "sev_B": key[i]["sev_B"],
+             "note": A[i].get("note", "")} for i in A]
+    with open(os.path.join(RESULTS, "mildness", "coded.csv"), "w", newline="",
+              encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader()
+        for r in rows: w.writerow(r)
+    print("\n  ->", os.path.join(RESULTS, "mildness", "coded.csv"))
 
 
 def h3(tr, te):

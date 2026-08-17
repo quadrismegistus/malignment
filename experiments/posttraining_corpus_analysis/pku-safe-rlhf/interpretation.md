@@ -141,7 +141,33 @@ else. Findings U already place the cut at SFT rather than at the safety data.
 **That is a prediction this collection can test, and it is stated here before the
 K arm runs.**
 
-## THE K ARM HAS NOW RUN AND THE PREDICTION IS STILL UNTESTED (A5, 2026-08-17)
+## MEASURED, AND THE TWO-WAY DISTINCTION WAS TOO CLEAN (A7, 2026-08-17)
+
+A blind coder with a passing positive control replaced the failed lexicon, and
+the answer is neither "addition only" nor "substitution too". **There are three
+cells, not two:**
+
+    ADDITION      append a moral frame           68.2%   severity-equal
+    ATTENUATION   gentler AND vaguer at once     74.2%   n=124
+    SUBSTITUTION  gentler ALONE, content held    48.1%   n= 52, chance
+
+**The corpus rewards a bundle.** Where a response reads as less bad along both
+vocabulary and specificity, it wins at 74.2%. Where those two are forced apart,
+the annotation has no view at all. So what the preference data encodes is not a
+lexical rule but an overall attenuation, which is why the coder's own gestalt
+severity judgement predicts `safer` about as well as any component of it.
+
+**And M01's displacement is precisely the unbundled case** — the slot held, the
+content constant, only the filler softened. That is the cell at chance. So the
+conclusion of the section above survives, but the reason given for it was wrong:
+displacement lacks a corpus source not because mildness goes unrewarded, but
+because what is rewarded is exactly the thing displacement holds constant.
+
+The additive channel is unaffected by any of this and remains separable: the
+disclaimer effect runs at 68.2% inside the severity-equal stratum and is
+strongest where the disclaimer is the SHORTER text.
+
+## THE K ARM RAN FIRST AND FAILED ITS INSTRUMENT (A5, 2026-08-17)
 
 **It agreed with me and it does not count.** The registered arithmetic returned
 `SUBSTITUTION ABSENT` — 51.3% on transgressiveness against a 55% floor, n=32,636

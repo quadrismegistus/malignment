@@ -1,0 +1,2702 @@
+{
+"m000": {
+"pair": 19084,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m001": {
+"pair": 43293,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m002": {
+"pair": 825,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m003": {
+"pair": 47260,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m004": {
+"pair": 11981,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m005": {
+"pair": 38927,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m006": {
+"pair": 71881,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m007": {
+"pair": 70789,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m008": {
+"pair": 36156,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m009": {
+"pair": 5812,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m010": {
+"pair": 49178,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m011": {
+"pair": 51283,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m012": {
+"pair": 53315,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m013": {
+"pair": 12718,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m014": {
+"pair": 41987,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m015": {
+"pair": 30255,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m016": {
+"pair": 69965,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m017": {
+"pair": 5653,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m018": {
+"pair": 7270,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m019": {
+"pair": 46183,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m020": {
+"pair": 68248,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m021": {
+"pair": 15584,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m022": {
+"pair": 52622,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m023": {
+"pair": 35385,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m024": {
+"pair": 36623,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m025": {
+"pair": 33116,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m026": {
+"pair": 63371,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m027": {
+"pair": 49191,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m028": {
+"pair": 69429,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m029": {
+"pair": 53558,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m030": {
+"pair": 62325,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m031": {
+"pair": 53145,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m032": {
+"pair": 5587,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m033": {
+"pair": 48102,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 3,
+"sev_B": 2
+},
+"m034": {
+"pair": 42171,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m035": {
+"pair": 2748,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m036": {
+"pair": 57869,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m037": {
+"pair": 6736,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m038": {
+"pair": 58447,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m039": {
+"pair": 7633,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m040": {
+"pair": 64881,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 3,
+"sev_B": 2
+},
+"m041": {
+"pair": 44348,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m042": {
+"pair": 73087,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m043": {
+"pair": 70433,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m044": {
+"pair": 48473,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m045": {
+"pair": 5397,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m046": {
+"pair": 65624,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m047": {
+"pair": 66644,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m048": {
+"pair": 4851,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m049": {
+"pair": 53672,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m050": {
+"pair": 36968,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m051": {
+"pair": 7503,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m052": {
+"pair": 29335,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m053": {
+"pair": 67584,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m054": {
+"pair": 61084,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m055": {
+"pair": 63345,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m056": {
+"pair": 38633,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m057": {
+"pair": 51630,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m058": {
+"pair": 71115,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m059": {
+"pair": 43605,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m060": {
+"pair": 64018,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m061": {
+"pair": 65502,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m062": {
+"pair": 69917,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m063": {
+"pair": 68964,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m064": {
+"pair": 57291,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m065": {
+"pair": 33609,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m066": {
+"pair": 47827,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m067": {
+"pair": 32600,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m068": {
+"pair": 44607,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m069": {
+"pair": 19362,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m070": {
+"pair": 30925,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m071": {
+"pair": 17053,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m072": {
+"pair": 9930,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m073": {
+"pair": 69068,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m074": {
+"pair": 72838,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m075": {
+"pair": 19918,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m076": {
+"pair": 12625,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m077": {
+"pair": 25162,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m078": {
+"pair": 36329,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m079": {
+"pair": 28004,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m080": {
+"pair": 29968,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m081": {
+"pair": 35615,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m082": {
+"pair": 46326,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m083": {
+"pair": 45300,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m084": {
+"pair": 30272,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m085": {
+"pair": 71856,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m086": {
+"pair": 56432,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m087": {
+"pair": 12016,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m088": {
+"pair": 24149,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m089": {
+"pair": 58504,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m090": {
+"pair": 44044,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m091": {
+"pair": 66507,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m092": {
+"pair": 23851,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m093": {
+"pair": 8856,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m094": {
+"pair": 48573,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m095": {
+"pair": 16332,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m096": {
+"pair": 71524,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m097": {
+"pair": 36825,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m098": {
+"pair": 26099,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 3
+},
+"m099": {
+"pair": 58972,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m100": {
+"pair": 40632,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 3
+},
+"m101": {
+"pair": 55582,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m102": {
+"pair": 7468,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m103": {
+"pair": 44184,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m104": {
+"pair": 38541,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m105": {
+"pair": 57831,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m106": {
+"pair": 43930,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 1
+},
+"m107": {
+"pair": 25238,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m108": {
+"pair": 24456,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m109": {
+"pair": 70351,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m110": {
+"pair": 30286,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m111": {
+"pair": 63844,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m112": {
+"pair": 39855,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m113": {
+"pair": 16826,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m114": {
+"pair": 23504,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m115": {
+"pair": 44988,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m116": {
+"pair": 63934,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m117": {
+"pair": 39472,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m118": {
+"pair": 22421,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m119": {
+"pair": 63602,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m120": {
+"pair": 43808,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m121": {
+"pair": 28596,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m122": {
+"pair": 19621,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m123": {
+"pair": 4076,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m124": {
+"pair": 9347,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m125": {
+"pair": 2873,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m126": {
+"pair": 62222,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m127": {
+"pair": 5882,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m128": {
+"pair": 61890,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m129": {
+"pair": 48956,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 1
+},
+"m130": {
+"pair": 10221,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m131": {
+"pair": 26852,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m132": {
+"pair": 47963,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m133": {
+"pair": 37806,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 1
+},
+"m134": {
+"pair": 25630,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 3,
+"sev_B": 3
+},
+"m135": {
+"pair": 4039,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m136": {
+"pair": 31063,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m137": {
+"pair": 35007,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m138": {
+"pair": 25782,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m139": {
+"pair": 72611,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m140": {
+"pair": 73042,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m141": {
+"pair": 54617,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m142": {
+"pair": 40413,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m143": {
+"pair": 27866,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m144": {
+"pair": 30955,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m145": {
+"pair": 60784,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 1
+},
+"m146": {
+"pair": 44366,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m147": {
+"pair": 13346,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m148": {
+"pair": 53978,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m149": {
+"pair": 69970,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m150": {
+"pair": 13138,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m151": {
+"pair": 39144,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m152": {
+"pair": 25188,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 3
+},
+"m153": {
+"pair": 54081,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 3,
+"sev_B": 3
+},
+"m154": {
+"pair": 15974,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m155": {
+"pair": 13480,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m156": {
+"pair": 58306,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m157": {
+"pair": 49241,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m158": {
+"pair": 46421,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m159": {
+"pair": 52807,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m160": {
+"pair": 54075,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 1
+},
+"m161": {
+"pair": 70394,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m162": {
+"pair": 49254,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m163": {
+"pair": 13591,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m164": {
+"pair": 64725,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m165": {
+"pair": 17608,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m166": {
+"pair": 39944,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m167": {
+"pair": 65220,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m168": {
+"pair": 38829,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m169": {
+"pair": 52174,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m170": {
+"pair": 18695,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m171": {
+"pair": 4999,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m172": {
+"pair": 73379,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 1
+},
+"m173": {
+"pair": 26839,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m174": {
+"pair": 70898,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m175": {
+"pair": 15660,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m176": {
+"pair": 56818,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m177": {
+"pair": 43915,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 3
+},
+"m178": {
+"pair": 5856,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m179": {
+"pair": 57438,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m180": {
+"pair": 55325,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m181": {
+"pair": 41437,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m182": {
+"pair": 63108,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m183": {
+"pair": 50945,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m184": {
+"pair": 23875,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m185": {
+"pair": 35751,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m186": {
+"pair": 670,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m187": {
+"pair": 8792,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m188": {
+"pair": 43436,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m189": {
+"pair": 51497,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m190": {
+"pair": 63071,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m191": {
+"pair": 45008,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m192": {
+"pair": 11612,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m193": {
+"pair": 678,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m194": {
+"pair": 41926,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m195": {
+"pair": 58272,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m196": {
+"pair": 11568,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 1
+},
+"m197": {
+"pair": 4922,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m198": {
+"pair": 40298,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m199": {
+"pair": 46872,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m200": {
+"pair": 50907,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m201": {
+"pair": 12890,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m202": {
+"pair": 60993,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m203": {
+"pair": 70460,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 1
+},
+"m204": {
+"pair": 51748,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m205": {
+"pair": 35129,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m206": {
+"pair": 9373,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m207": {
+"pair": 67889,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m208": {
+"pair": 14441,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 1
+},
+"m209": {
+"pair": 33664,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m210": {
+"pair": 9644,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m211": {
+"pair": 40410,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m212": {
+"pair": 31869,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m213": {
+"pair": 12665,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m214": {
+"pair": 49321,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m215": {
+"pair": 49969,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m216": {
+"pair": 30349,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 3
+},
+"m217": {
+"pair": 21356,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m218": {
+"pair": 63290,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m219": {
+"pair": 62480,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m220": {
+"pair": 63880,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m221": {
+"pair": 25092,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m222": {
+"pair": 22837,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m223": {
+"pair": 60729,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m224": {
+"pair": 14298,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m225": {
+"pair": 25082,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m226": {
+"pair": 54797,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m227": {
+"pair": 12761,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m228": {
+"pair": 46208,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m229": {
+"pair": 53534,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m230": {
+"pair": 15433,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m231": {
+"pair": 67246,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m232": {
+"pair": 4845,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m233": {
+"pair": 37891,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m234": {
+"pair": 20226,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m235": {
+"pair": 58517,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m236": {
+"pair": 2255,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m237": {
+"pair": 59333,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m238": {
+"pair": 41004,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 3,
+"sev_B": 2
+},
+"m239": {
+"pair": 47336,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m240": {
+"pair": 33644,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m241": {
+"pair": 5805,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m242": {
+"pair": 45301,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m243": {
+"pair": 25856,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m244": {
+"pair": 6729,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m245": {
+"pair": 33086,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m246": {
+"pair": 13017,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m247": {
+"pair": 3404,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m248": {
+"pair": 5209,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m249": {
+"pair": 57599,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m250": {
+"pair": 19930,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 3,
+"sev_B": 2
+},
+"m251": {
+"pair": 12732,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m252": {
+"pair": 53537,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m253": {
+"pair": 24282,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m254": {
+"pair": 25533,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m255": {
+"pair": 6365,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m256": {
+"pair": 37459,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 1
+},
+"m257": {
+"pair": 13935,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m258": {
+"pair": 37214,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m259": {
+"pair": 28900,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m260": {
+"pair": 28776,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m261": {
+"pair": 3824,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m262": {
+"pair": 25228,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 3,
+"sev_B": 1
+},
+"m263": {
+"pair": 4673,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m264": {
+"pair": 14411,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 1,
+"sev_B": 2
+},
+"m265": {
+"pair": 17168,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m266": {
+"pair": 50174,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m267": {
+"pair": 13652,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 3
+},
+"m268": {
+"pair": 11075,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m269": {
+"pair": 73629,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m270": {
+"pair": 61943,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m271": {
+"pair": 38708,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m272": {
+"pair": 14706,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m273": {
+"pair": 22341,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 3
+},
+"m274": {
+"pair": 23156,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m275": {
+"pair": 33750,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m276": {
+"pair": 20997,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m277": {
+"pair": 7251,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m278": {
+"pair": 60868,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m279": {
+"pair": 41903,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 2
+},
+"m280": {
+"pair": 15219,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m281": {
+"pair": 47119,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m282": {
+"pair": 16613,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m283": {
+"pair": 25911,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m284": {
+"pair": 17887,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 2
+},
+"m285": {
+"pair": 12831,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m286": {
+"pair": 20012,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m287": {
+"pair": 72174,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m288": {
+"pair": 24270,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m289": {
+"pair": 57350,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 3,
+"sev_B": 2
+},
+"m290": {
+"pair": 50686,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 1
+},
+"m291": {
+"pair": 10970,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m292": {
+"pair": 72462,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m293": {
+"pair": 27318,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 3
+},
+"m294": {
+"pair": 43545,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 1,
+"sev_B": 1
+},
+"m295": {
+"pair": 56046,
+"stratum": "CONTROL",
+"A_is": 1,
+"B_is": 0,
+"safer": 0,
+"sev_A": 2,
+"sev_B": 1
+},
+"m296": {
+"pair": 47288,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m297": {
+"pair": 25719,
+"stratum": "TEST",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+},
+"m298": {
+"pair": 956,
+"stratum": "CONTROL",
+"A_is": 0,
+"B_is": 1,
+"safer": 1,
+"sev_A": 3,
+"sev_B": 2
+},
+"m299": {
+"pair": 8721,
+"stratum": "TEST",
+"A_is": 1,
+"B_is": 0,
+"safer": 1,
+"sev_A": 2,
+"sev_B": 2
+}
+}
