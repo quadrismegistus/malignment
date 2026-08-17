@@ -324,6 +324,96 @@ def ingest_stash(limit=0, verbose=True):
     return out
 
 
+#: The population RH asked for first (2026-08-17): his three live domains, plus the
+#: two SOURCES that carry institutional relations under finer domain names --
+#: M03 files them as labor/housing/medical/police/benefits/civic/banking/insurance/
+#: immigration/utilities/consumer/education, so a domain-only filter misses 252
+#: institutional frames entirely.
+POPULATION = {
+    "domains": ("sexual", "violence", "institutional"),
+    "sources": ("M03_SPEAKER_KERNEL", "INSTITUTIONAL"),
+}
+
+
+def population_prompts(domains=None, sources=None):
+    """Declared prompts in the population that have measured words. -> [str]"""
+    d = domains if domains is not None else POPULATION["domains"]
+    s = sources if sources is not None else POPULATION["sources"]
+    esc = lambda x: x.replace("\\", "\\\\").replace("'", "\\'")
+    cl = []
+    if d:
+        cl.append("p.domain IN (%s)" % ",".join("'%s'" % esc(x) for x in d))
+    if s:
+        cl.append("p.source IN (%s)" % ",".join("'%s'" % esc(x) for x in s))
+    #: **`ORDER BY prompt`, AND IT IS NOT COSMETIC.** A `SELECT DISTINCT` with no
+    #: ORDER BY returns rows in whatever order the read produced, so `[:limit]`
+    #: selects a DIFFERENT SUBSET on each run. That is exactly the defect booked
+    #: against `ch_read.prefetch` -- two runs of unchanged code differing on 4,051
+    #: of 4,413 cells -- and it made the first resumability test compare two
+    #: different populations and report a real feature broken.
+    q = ("SELECT DISTINCT w.prompt FROM {db}.twp_words w INNER JOIN {db}.prompts p "
+         "ON p.prompt = w.prompt WHERE %s ORDER BY w.prompt FORMAT TabSeparated"
+         % " OR ".join(cl))
+    return [l for l in ch.raw(q).strip().splitlines() if l.strip()]
+
+
+def embed_population(domains=None, sources=None, limit=0, verbose=True):
+    """Embed every unmeasured (prompt, word) in the population. -> dict
+
+    **RESUMABLE BY CONSTRUCTION, because three hours is long enough to be
+    interrupted.** Each prompt asks ClickHouse which of its words it already holds
+    and embeds only the rest, so a re-run after a kill costs one query per prompt
+    and no duplicate embedding. There is no checkpoint file to go stale.
+
+    **IT DOES NOT USE `get`, DELIBERATELY.** `get` memoises into `slot_axis._MEM`,
+    which is right for a session with one prompt on screen and fatal here: a
+    million vectors at 4 KB is 4 GB of resident python by the end of the run. This
+    embeds, inserts, and keeps nothing.
+
+    Words are the UNION ACROSS EVERY MODEL that answered the prompt -- ~950 per
+    prompt against the ~90 that clear theta for any one model -- because a vector
+    is a property of the strings, so a store built for one pair would have to be
+    rebuilt for the next.
+    """
+    import numpy as np
+    from . import slot_axis as A
+    create()
+    prompts = sorted(population_prompts(domains, sources))
+    if limit:
+        #: Sliced AFTER sorting. Slicing an unordered list is what made --limit
+        #: mean a different population on every invocation.
+        prompts = prompts[:limit]
+    esc = lambda x: x.replace("\\", "\\\\").replace("'", "\\'")
+    done = new = skipped = 0
+    t0 = __import__("time").time()
+    for i, pr in enumerate(prompts, 1):
+        words = [l for l in ch.raw(
+            "SELECT DISTINCT word FROM {db}.twp_words WHERE prompt = '%s' "
+            "ORDER BY word FORMAT TabSeparated" % esc(pr)).strip().splitlines() if l]
+        if not words:
+            continue
+        have = set(fetch(pr, words))
+        todo = [w for w in words if w not in have]
+        skipped += len(have)
+        if todo:
+            sep = A.sep_for(pr)
+            V = np.asarray(A._model().encode(
+                ["%s%s%s" % (pr, sep, w) for w in todo],
+                normalize_embeddings=True, show_progress_bar=False,
+                batch_size=256), dtype=np.float32)
+            put(pr, todo, V, source="population")
+            new += len(todo)
+        done += 1
+        if verbose and (i % 10 == 0 or i == len(prompts)):
+            el = __import__("time").time() - t0
+            rate = new / el if el else 0
+            left = (len(prompts) - i) / (i / el) / 3600 if i else 0
+            print("  %d/%d prompts | embedded %d (%.0f vec/s) | already had %d | "
+                  "~%.1f h left" % (i, len(prompts), new, rate, skipped, left),
+                  flush=True)
+    return {"prompts": done, "embedded": new, "already_present": skipped}
+
+
 def stats():
     """Row counts by embedder/revision. -> str"""
     if not ch.exists(TABLE):
@@ -341,13 +431,17 @@ def main(argv=None):
     ap.add_argument("--drop", action="store_true", help="with --create, recreate")
     ap.add_argument("--ingest-stash", action="store_true", dest="ingest")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--embed-population", action="store_true", dest="pop",
+                    help="embed RH's three domains + the institutional sources")
     ap.add_argument("--stats", action="store_true")
     a = ap.parse_args(argv)
     if a.create:
         print("created", create(drop=a.drop))
     if a.ingest:
         ingest_stash(limit=a.limit)
-    if a.stats or not (a.create or a.ingest):
+    if a.pop:
+        print(embed_population(limit=a.limit))
+    if a.stats or not (a.create or a.ingest or a.pop):
         print(stats())
     return 0
 
