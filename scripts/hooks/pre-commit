@@ -1,0 +1,135 @@
+#!/bin/sh
+# Refuse a commit built from the SHARED INDEX.  NOT INSTALLED.  See below.
+#
+# ─── WHY ────────────────────────────────────────────────────────────────────
+#
+# Four seats share one clone.  `git commit` commits the INDEX, and the index is
+# shared, so a seat that stages one explicit path can still commit another
+# seat's staged work.  It has happened twice: dario's `slots.py` fix went into
+# malign's commit (docket [6389]), and malign's `path_aggregation/README.md`
+# went into lacan's (docket [6408]) -- the latter under RH's new `Seat:` trailer
+# ruling, which made the commit assert authorship it did not have.
+#
+# Two forms are safe.  Both are recognisable HERE, at the moment of commit,
+# because git tells the hook which index it is building from:
+#
+#     git commit -m MSG -- <paths>          builds from a temporary index
+#     GIT_INDEX_FILE=.git/index-<seat>      builds from a private index
+#
+# ─── THE PREDICATE IS AN ALLOWLIST, AND THAT IS THE WHOLE POINT ─────────────
+#
+# The obvious test -- "GIT_INDEX_FILE is not the shared .git/index" -- ADMITS
+# `git commit -a`, which reports `.git/index.lock`.  That is the one operation
+# neither safe form stops: `-a` reads the WORKING TREE, so it takes another
+# seat's unstaged edits.  Measured, in two scratch repos, by two seats
+# independently (docket [6415], [6416]).
+#
+# So: match the safe forms positively and refuse everything else.  An allowlist
+# whose fallthrough is permissive is a denylist wearing an allowlist's shape,
+# and the value that caught us was precisely one nobody had enumerated.
+#
+#     git add + git commit    .git/index                      REFUSE
+#     git commit -- <paths>   .git/next-index-NNNN.lock       pass
+#     private index           .git/index-<seat>               pass  <- SEE BELOW
+#     git commit -a           .git/index.lock                 REFUSE
+#
+# ─── PROVENANCE OF THOSE FOUR ROWS ─────────────────────────────────────────
+#
+# Tested in throwaway repos by three seats independently, no contact between the
+# first two: dario [6416], malign [6415], lacan [6418].  Four index values have
+# been enumerated and no more -- `index`, `index.lock`, `next-index-*.lock`,
+# `index-<seat>`.  The hole that started this was a value nobody had enumerated,
+# so the allowlist is the right shape AND is not to be trusted past those four.
+#
+# lacan verified the consequence end to end rather than per-form, with the hook
+# live and another seat's file modified: `git commit -am sweep` was REFUSED, no
+# such commit exists, and the other seat's edit survived uncommitted in the
+# working tree.  So `-a` is not forbidden-by-convention here, it is unreachable
+# -- prevention rather than verification, and it needs no seat to know which
+# seat anyone is.
+#
+# `basename` because the value is RELATIVE for the plain form and ABSOLUTE for
+# the others -- so a string compare against ".git/index" fails twice: on `-a`,
+# and on an absolute default.
+#
+# ─── PASSING IS NOT SAFE: THE PRIVATE-INDEX FORM CAN DELETE THE TREE ───────
+#
+# A private index starts EMPTY, and `git commit` commits the index.  So:
+#
+#     GIT_INDEX_FILE=.git/index-x git add d.txt
+#     GIT_INDEX_FILE=.git/index-x git commit -m m
+#     HEAD before  a.txt b.txt c.txt
+#     HEAD after   d.txt                 <- every other tracked file DELETED
+#
+# Exit 0, no warning.  Measured (docket [6421]).  `read-tree` first, always:
+#
+#     GIT_INDEX_FILE=.git/index-<seat> git read-tree HEAD
+#     GIT_INDEX_FILE=.git/index-<seat> git add <paths>
+#     GIT_INDEX_FILE=.git/index-<seat> git commit -m MSG
+#
+# **This hook PASSES the deleting form**, and correctly: it was built to stop one
+# seat committing another's work, and a tree-deleting commit is not that.  A
+# guard that accepts a form does not make the form safe, which is worth stating
+# here because the row above reads like an endorsement.
+#
+# ─── AND THE PATHSPEC FORM CANNOT COMMIT A NEW FILE ────────────────────────
+#
+#     git commit -m a -- brand.txt
+#     error: pathspec 'brand.txt' did not match any file(s) known to git
+#
+# A pathspec matches only what git already tracks.  So the two safe forms are
+# load-bearing for DIFFERENT FILE STATES, not alternatives:
+#
+#     modified tracked file    git commit -m MSG -- <paths>       no add
+#     new file                 private index, AFTER read-tree     see above
+#
+# ─── WHAT IT DOES NOT DO ───────────────────────────────────────────────────
+#
+#   * Nothing about history.  Prospective only; attribution for commits before
+#     2026-08-17 stays content-based and must be stated as such.
+#   * Does not close OVERLAP.  A pathspec commit still carries whatever content
+#     the named file has, including another seat's uncommitted edits to that
+#     same file.  Separate worktrees are the only fix for that.
+#   * `--no-verify` bypasses it.  A guard, not a wall.
+#   * `next-index-*.lock` is git's INTERNAL temp-index naming, not a documented
+#     interface.  If a git version changes it, this refuses the safe form --
+#     loud, and a false refusal rather than a false pass, which is the only
+#     direction worth failing in.  It will look like a broken hook rather than
+#     a version change, so look here first.
+#   * `index-*` accepts anything after the dash, so a typo'd private index
+#     passes.  Harmless for sweeping.  Tightening it needs a list of seat names,
+#     which is per-clone config, which in a shared clone is one value for all
+#     seats -- the thing established at docket [6407] as unavailable.  Left
+#     loose deliberately: it fails toward accepting a safe commit.
+#
+# ─── INSTALLING IS AN ACT ON EVERY SEAT'S COMMITS ──────────────────────────
+#
+# NOT INSTALLED, and not to be installed on one seat's say-so.  `.git/hooks` is
+# not tracked and `core.hooksPath` is per-clone in a shared tree, so the moment
+# this is live, any seat still running `git add && git commit` is refused
+# mid-work with no warning.  That is RH's call.
+#
+#     git config core.hooksPath scripts/hooks      # affects EVERY seat
+#
+# Try it in a scratch clone first; it needs no repo changes to test.
+
+b=$(basename "${GIT_INDEX_FILE:-.git/index}")
+case "$b" in
+    next-index-*.lock)
+        exit 0 ;;
+    index-*)
+        exit 0 ;;
+    index|index.lock)
+        echo "REFUSED: this commit is built from the SHARED index ($b)." >&2
+        echo "  Four seats share this clone, so it may contain another seat's" >&2
+        echo "  staged or unstaged work. Use one of:" >&2
+        echo "    git commit -m MSG -- <paths>" >&2
+        echo "    GIT_INDEX_FILE=.git/index-<seat> git add <paths> && ... git commit" >&2
+        echo "  See the comments in scripts/hooks/pre-commit." >&2
+        exit 1 ;;
+    *)
+        echo "REFUSED: unrecognised index '$b'." >&2
+        echo "  The allowlist knows next-index-*.lock and index-<seat>." >&2
+        echo "  If your git version renamed its temporary index, that is this." >&2
+        exit 1 ;;
+esac
