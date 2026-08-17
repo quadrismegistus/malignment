@@ -84,6 +84,26 @@
 		</div>
 		<div class="right">
 			{#if health}
+				<!--
+				  THE SERVER IS RUNNING CODE THAT NO LONGER EXISTS ON DISK.
+				  A Python server does not hot-reload, and the failure is invisible:
+				  a route added and committed answers "no POST route" until someone
+				  notices the process is hours old — which reads as a missing feature
+				  rather than a stale process. `stale` is checked explicitly rather
+				  than truthily, so an OLDER server that cannot answer (field absent)
+				  shows nothing instead of showing "fresh", because "cannot tell you"
+				  is not the same claim as "not stale".
+				-->
+				{#if health.source?.stale === true}
+					<span
+						class="badge bad num"
+						title="This process loaded a different version of: {health.source.changed.join(
+							', '
+						)}. Started {health.source.booted_at ?? 'unknown'}, pid {health.source
+							.pid}. Restart it — the server cannot reload itself without dropping resident models."
+						>server stale · restart</span
+					>
+				{/if}
 				<span class="badge ok num">{health.db}</span>
 				{#if health.slot_loaded.length}
 					<span class="badge blue num" title={health.slot_loaded.join('\n')}>

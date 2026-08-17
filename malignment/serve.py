@@ -120,6 +120,64 @@ UI_DIST = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ui_dist")
 DEFAULT_ROW_CAP = 2000
 MAX_ROW_CAP = 50000
 
+#: ── IS THIS PROCESS RUNNING THE CODE ON DISK?
+#:
+#: **A PYTHON SERVER DOES NOT HOT-RELOAD, AND A STALE ONE IS INVISIBLE.** On
+#: 2026-08-17 a `/slot/save` route was added, committed and tested, and the
+#: running server answered `no POST route /slot/save` for as long as it took
+#: someone to notice the process had been up six hours. That reads as a missing
+#: feature, not as a stale process, and it is the second failure of this shape:
+#: the symptom describes the wrong object.
+#:
+#: **AND IT IS NOT ONLY THIS FILE.** A lazy `from .slots import x` inside a
+#: handler defers the FIRST import; it does not re-read the file afterwards,
+#: because `sys.modules` caches it. Verified rather than assumed: edit a module
+#: after its first use and the handler keeps returning the old value until
+#: `importlib.reload`. So every `.py` in the package is equally stale, and the
+#: check covers all of them.
+#:
+#: CONTENT HASHES, NOT MTIMES. A `touch`, a save with no edit, or a checkout that
+#: rewrites a file identically are not changes, and reporting them as such trains
+#: the reader to ignore the badge. 23 files, 534 KB, 0.7 ms to hash the lot --
+#: measured, and `/health` is polled every 15 s, so the cheap-looking stat
+#: optimisation would buy 0.7 ms and cost the distinction.
+#:
+#: This DETECTS staleness and does not fix it. Reloading is the thing that cannot
+#: be done safely here: `_SLOT_MODELS` lives in this module's globals, so
+#: reloading `serve` drops the resident weights, which is the expense the reload
+#: would exist to avoid.
+def _source_files():
+    import glob
+    here = os.path.dirname(os.path.abspath(__file__))
+    return sorted(glob.glob(os.path.join(here, "*.py")))
+
+
+def _source_state():
+    import hashlib
+    out = {}
+    for f in _source_files():
+        try:
+            with open(f, "rb") as fh:
+                out[os.path.basename(f)] = hashlib.sha1(fh.read()).hexdigest()
+        except OSError:
+            #: A file that cannot be read is NOT reported as changed. It is
+            #: reported as missing, which is a different fact.
+            out[os.path.basename(f)] = None
+    return out
+
+
+_SOURCE_AT_BOOT = _source_state()
+_BOOTED_AT = None
+
+
+def _source_status():
+    now = _source_state()
+    changed = sorted(k for k in set(now) | set(_SOURCE_AT_BOOT)
+                     if now.get(k) != _SOURCE_AT_BOOT.get(k))
+    return {"stale": bool(changed), "changed": changed,
+            "n_files": len(now), "pid": os.getpid(), "booted_at": _BOOTED_AT}
+
+
 _SLOT_LOCK = threading.Lock()
 #: {model_id: runners.Loaded}, ORDERED, least-recently-used first.
 #:
@@ -789,6 +847,10 @@ class Handler(BaseHTTPRequestHandler):
             #: information -- it says which model the next load will evict --
             #: and sorting it alphabetically threw that away for tidiness.
             return {"status": "ok", "db": _db_name(),
+                    #: **WHETHER THIS PROCESS IS RUNNING THE CODE ON DISK.** See
+                    #: `_source_status`: the server cannot reload itself, so the
+                    #: most it can do is refuse to look current when it is not.
+                    "source": _source_status(),
                     "slot_enabled": _ALLOW_SLOT,
                     "slot_loaded": list(_SLOT_MODELS),
                     "slot_max": _SLOT_MAX,
@@ -1069,6 +1131,9 @@ def _db_name():
 
 
 def serve(port=8431, host="127.0.0.1", slot=True):
+    global _BOOTED_AT
+    import datetime
+    _BOOTED_AT = datetime.datetime.now().isoformat(timespec="seconds")
     global _ALLOW_SLOT, _DIAGNOSTIC_PAIR
     _ALLOW_SLOT = slot
     #: **VERIFIED AT BOOT, NOT PER REQUEST.** `check_diagnostic_pair` reads the

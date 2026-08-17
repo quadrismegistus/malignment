@@ -20,9 +20,25 @@ async function get<T>(path: string): Promise<T> {
 	return body as T;
 }
 
+export interface SourceStatus {
+	//: True when a `.py` in the package differs from what this PROCESS loaded.
+	//: The server cannot reload itself — `_SLOT_MODELS` lives in `serve`'s
+	//: globals, so reloading it drops the resident weights — so the most it can
+	//: do is refuse to look current when it is not.
+	stale: boolean;
+	changed: string[];
+	n_files: number;
+	pid: number;
+	booted_at: string | null;
+}
+
 export interface Health {
 	status: string;
 	db: string;
+	//: Present since 2026-08-17. Optional so an older server does not render as
+	//: broken — absent means "this server cannot tell you", which is not the
+	//: same claim as "not stale".
+	source?: SourceStatus;
 	slot_enabled: boolean;
 	//: In LRU order, least-recently-used first — so the head is what the next
 	//: load will evict. Not sorted; the order is information.
@@ -208,10 +224,11 @@ export interface SavedItem {
 
 export interface SaveResponse {
 	item_id: string;
-	//: `created` | `overwritten` | `unchanged`. Shown verbatim, because saving
-	//: over an unchanged item and replacing a different tagging are different
-	//: events, and the author is the only one who can say whether the second
-	//: was intended.
+	//: `created` | `updated` | `unchanged`. Shown VERBATIM, because saving over an
+	//: unchanged item and replacing a different tagging are different events and
+	//: the author is the only one who can say whether the second was intended.
+	//: (`overwritten` was the value when each item was its own JSON file; the
+	//: running yaml replaces an entry in place, so it is `updated`.)
 	action: string;
 	path: string;
 	item: SavedItem;
