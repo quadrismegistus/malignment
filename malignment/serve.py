@@ -178,6 +178,10 @@ def _source_status():
             "n_files": len(now), "pid": os.getpid(), "booted_at": _BOOTED_AT}
 
 
+#: Returned by a route that has already written its own response. `None` means
+#: "not an API route, try static", so a binary route cannot use it.
+_SENT = object()
+
 _SLOT_LOCK = threading.Lock()
 #: {model_id: runners.Loaded}, ORDERED, least-recently-used first.
 #:
@@ -320,7 +324,14 @@ def _walk_experiments():
         if rel == ".":
             continue
         fs = set(filenames)
-        if not ({"run.py", "registration.md"} & fs):
+        #: **`plot.py` IS A DISCOVERY KEY TOO** (2026-08-17). It was already
+        #: reported in `has` and was not admitting anything, so a folder whose
+        #: only producer is a plot was invisible -- `exploratory/prompt_slopes`
+        #: is exactly that shape: RH put the DATA producer in `movement.py` and
+        #: left the folder holding the figure producer alone. A walk keyed on
+        #: `run.py` assumes every folder computes its own data, which stopped
+        #: being true the moment a producer was shared.
+        if not ({"run.py", "registration.md", "plot.py"} & fs):
             continue
         results = []
         rdir = os.path.join(dirpath, "results")
@@ -835,6 +846,8 @@ class Handler(BaseHTTPRequestHandler):
             import traceback
             traceback.print_exc()
             return self._json(500, {"error": "%s: %s" % (type(e).__name__, e)})
+        if payload is _SENT:
+            return
         if payload is None:
             return self._static(path)
         self._json(200, payload)
@@ -908,6 +921,50 @@ class Handler(BaseHTTPRequestHandler):
                 #: reader checks the receipt rather than a summary of it.
                 "population": _read_json(os.path.join(d["_dir"], "population.json")),
             }
+        if path == "/experiment/figure":
+            #: **VALIDATED BY MEMBERSHIP IN THE MANIFEST THIS PROCESS WALKED,
+            #: never by path.** The name has to be in the `figures` list the
+            #: walk built off disk, which is what makes `../../etc/passwd`
+            #: uninteresting rather than filtered: it is simply not in the set.
+            #: Same rule the result files follow.
+            qs = _manifest()
+            eid = one("id", "")
+            if eid not in qs:
+                raise KeyError("no experiment %r. Ask /experiments." % eid)
+            #: **NOT `q`.** `one` is a closure over the enclosing `q`, the parsed
+            #: QUERY dict, so rebinding `q` to the manifest entry silently
+            #: re-points every later `one(...)` at the wrong mapping. The first
+            #: draft did exactly that and `one("name")` returned `"p"` -- the
+            #: first character of the entry's `name` field, because `[0]` of a
+            #: string is a character and nothing raises. It read as a missing
+            #: figure rather than as a shadowed variable.
+            entry = qs[eid]
+            name = one("name", "")
+            if name not in entry["figures"]:
+                raise ValueError(
+                    "%r has no figure %r. It has: %s"
+                    % (eid, name, ", ".join(entry["figures"]) or "none"))
+            target = os.path.join(entry["_dir"], "figures", name)
+            ctype = {".png": "image/png", ".svg": "image/svg+xml",
+                     ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+                     ".pdf": "application/pdf",
+                     ".webp": "image/webp"}.get(
+                         os.path.splitext(name)[1].lower(),
+                         "application/octet-stream")
+            with open(target, "rb") as fh:
+                body = fh.read()
+            self.send_response(200)
+            self.send_header("Content-Type", ctype)
+            self.send_header("Content-Length", str(len(body)))
+            #: A figure is a file on disk that changes only when a producer is
+            #: re-run, and these are 300 dpi PNGs of a megabyte or so. Letting
+            #: the browser keep one for a minute is the difference between a
+            #: panel that flickers on every click and one that does not.
+            self.send_header("Cache-Control", "max-age=60")
+            self.end_headers()
+            self.wfile.write(body)
+            #: SENTINEL: `_route` returning a payload would double-write.
+            return _SENT
         if path == "/experiment/result":
             d = _question(one("id"))
             grain = one("grain")

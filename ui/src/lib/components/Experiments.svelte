@@ -215,7 +215,46 @@
 				{/each}
 			</div>
 
-			{#if loading}
+			<!--
+			  FIGURES GET THEIR OWN ROW (RH, 2026-08-17), because a figure is not a
+			  grain: a result is read as rows and a figure is looked at, and mixing
+			  them in one strip makes the click ambiguous.
+
+			  THE ROW IS SHOWN EVEN WHEN EMPTY, and that is deliberate. Exactly one
+			  figure was committed repo-wide when this was written, so an absent row
+			  would render "no figures" as "no figures ROW" — and the plot debt is
+			  the thing most worth seeing at the place the results are already being
+			  read. An empty row is a measurement.
+			-->
+			<div class="paneswitch figrow">
+				<span class="rowlbl">figures</span>
+				{#if detail.figures.length}
+					{#each detail.figures as f (f)}
+						<button class="ghost grain" class:on={pane === 'fig:' + f}
+							onclick={() => (pane = 'fig:' + f)}>{f}</button>
+					{/each}
+				{:else}
+					<span class="muted none">none — this experiment has produced no figure</span>
+				{/if}
+			</div>
+
+			{#if pane.startsWith('fig:')}
+				<!--
+				  Full width, natural aspect, and a link to the file itself. These
+				  are 300 dpi artifacts — the same PNG a paper would use — so the
+				  panel shows it scaled and "open" hands over the original rather
+				  than re-rendering anything.
+				-->
+				<figure class="fig">
+					<img src={api.figureUrl(selected, pane.slice(4))} alt={pane.slice(4)} />
+					<figcaption>
+						<code>{pane.slice(4)}</code>
+						<a href={api.figureUrl(selected, pane.slice(4))} target="_blank" rel="noreferrer"
+							>open full size</a
+						>
+					</figcaption>
+				</figure>
+			{:else if loading}
 				<p class="muted">reading…</p>
 			{:else if pane === 'readme'}
 				<Markdown src={detail.readme_md} />
@@ -354,6 +393,21 @@
 		margin-bottom: 14px;
 		padding-bottom: 12px;
 		border-bottom: 1px solid var(--rule);
+	}
+	.figrow { margin-top: 6px; align-items: center; }
+	.rowlbl {
+		font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em;
+		color: var(--text-2); margin-right: 4px;
+	}
+	.figrow .none { font-size: 11px; }
+	.fig { margin: 12px 0 0; }
+	.fig img {
+		width: 100%; height: auto; display: block;
+		border: 1px solid var(--rule); border-radius: 4px; background: #fff;
+	}
+	.fig figcaption {
+		display: flex; gap: 12px; align-items: center;
+		margin-top: 6px; font-size: 11px; color: var(--text-2);
 	}
 	.grain {
 		font-family: var(--mono);

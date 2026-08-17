@@ -271,6 +271,11 @@ export const api = {
 			`/roster/population?kind=${encodeURIComponent(kind)}`
 		),
 	experiments: () => get<Experiments>('/experiments'),
+	//: A URL, not a fetch. The <img> does the request, so the browser caches and
+	//: decodes it — pulling a 300 dpi PNG through `fetch` into a blob would buy
+	//: nothing and lose the cache.
+	figureUrl: (id: string, name: string) =>
+		`${BASE}/experiment/figure?id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`,
 	experiment: (id: string) => get<QuestionDetail>(`/experiment?id=${encodeURIComponent(id)}`),
 	result: (id: string, grain: string, limit?: number) =>
 		get<ResultRows | ResultJson>(
