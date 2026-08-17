@@ -365,7 +365,14 @@ def main():
 #: catalogue, all 30 salary, zero false positives (registration A3). Never the
 #: prompt text, never `finding` -- F13 is on 439 prompts of which 404 are not
 #: salary.
-BEAM_MODELS = ["HuggingFaceTB/SmolLM2-360M", "HuggingFaceTB/SmolLM2-360M-Instruct"]
+#: TWO LINEAGES, chosen to straddle the split rather than to be cheap.
+#: SmolLM2 is byte-level BPE and weak on Chinese -- its zh base IQR starts at
+#: 221, which is noise and not a low salary, so a fluency effect and an
+#: alignment effect are not separable on it. Qwen2.5 is competent in both
+#: languages, so a language difference that survives it is not incoherence
+#: being cleaned up.
+BEAM_MODELS = ["HuggingFaceTB/SmolLM2-360M", "HuggingFaceTB/SmolLM2-360M-Instruct",
+               "Qwen/Qwen2.5-0.5B", "Qwen/Qwen2.5-0.5B-Instruct"]
 
 
 def stage_beam(width=10, depth=10, models=None):
