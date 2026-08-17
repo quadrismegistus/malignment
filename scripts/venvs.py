@@ -34,9 +34,24 @@ editing this file.
 is derived by walking the ASTs of `malignment/*.py`, so it lists what OUR CODE
 imports. `sentencepiece` and `protobuf` are imported by neither: they are needed
 by MODELS (AmberSafe's loader falls back to TikToken without sentencepiece, then
-demands protobuf). Two different dependency sets with two different sources, and
-a venv needs the union. Adding them to `requirements.txt` by hand would break the
-one property that file has.
+demands protobuf). Adding them to `requirements.txt` by hand would break the one
+property that file has.
+
+**THERE ARE THREE SOURCES, NOT TWO.** This docstring named the general form and
+stopped one case short; dario found the third at [6395] by building a venv from
+the declaration and clicking the thing it could not do:
+
+    1. OUR CODE, statically      requirements.txt, AST walk of malignment/*.py
+    2. THE MODELS               roster `packages:` -- sentencepiece, protobuf,
+                                einops, and they travel with the node
+    3. OUR CODE, DYNAMICALLY    pyproject extras. `serve.py`'s /plot/render loads
+                                `experiments/**/plot.py` BY PATH and calls its
+                                `render()`, so plotnine is a real runtime
+                                dependency of the package whose import statement
+                                lives in a file the generator never reads.
+
+Each source is invisible to the other two's discovery method, which is why the
+venv installs the union and why no single file can be made to hold all of it.
 
 ## THE SENTENCEPIECE TRAP, WHICH THE SPLIT HAPPENS TO SOLVE
 
@@ -227,7 +242,18 @@ def _requirements(g):
     #: EVERY declaration in the group is passed, not a summary of them -- the
     #: resolver intersects them, and if that intersection is empty it says so
     #: rather than us having decided which declaration wins.
-    out = ["-e", "%s[dev]" % ROOT]
+    #: **`[dev,plots]`, AND `plots` IS A THIRD DEPENDENCY SOURCE** (dario,
+    #: 2026-08-17). This module's docstring already names two sets with two
+    #: sources -- the AST walk over `malignment/*.py`, and the model-side
+    #: `packages:` the roster declares -- and says a venv needs the union.
+    #: `plots` is a third: packages that the PACKAGE depends on THROUGH A
+    #: DYNAMIC IMPORT. `serve.py`'s `/plot/render` loads
+    #: `experiments/**/plot.py` by path and calls its `render()`, so plotnine is
+    #: a real runtime dependency of the app that no AST walk of
+    #: `malignment/*.py` can see. Measured, not predicted: a venv built from the
+    #: declaration served `/plots` correctly and failed `/plot/render` with
+    #: ModuleNotFoundError: matplotlib.
+    out = ["-e", "%s[dev,plots]" % ROOT]
     specs = sorted(s for s in g["specs"] if s)
     if sys.platform == "darwin" and _satisfiable(specs + [DARWIN_MAX_TRANSFORMERS]):
         specs.append(DARWIN_MAX_TRANSFORMERS)
