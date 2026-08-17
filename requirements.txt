@@ -24,6 +24,27 @@ hashstash              # checkpoint.py -- the twp jsonl engine (RH's own library
                        # jsonl: an axis build resolves ~400 keys by exact match
                        # and jsonl must scan the file per key. Measured lmdb at
                        # 0.07 ms/key, float32 bit-identical on round-trip.
+lmdb                   # hashstash BACKEND for slot_axis's engine="lmdb".
+lz4                    # hashstash BACKEND for its compress="lz4".
+                       #
+                       # TWO DEPENDENCIES NO AST WALK CAN SEE, and the same blind
+                       # spot as plotnine below: hashstash selects both by STRING,
+                       # so nothing in malignment/*.py ever imports them. Both were
+                       # missing from this venv until 2026-08-17 and they failed in
+                       # DIFFERENT WAYS, neither of which announced itself:
+                       #
+                       #   lmdb absent  -> ImportError, swallowed by slot_axis's
+                       #                   except, so the cache was silently OFF
+                       #                   and every axis call re-embedded.
+                       #   lz4  absent  -> NO error. hashstash accepted
+                       #                   compress="lz4" and resolved to
+                       #                   `lmdb.hashstash.RAW`, a third empty
+                       #                   store beside the 3.5 GB / 344,251-key
+                       #                   one, reporting success throughout.
+                       #
+                       # The second is why `slot_axis.STASH_PATH` now asserts the
+                       # RESOLVED path rather than the requested options: a pin the
+                       # library declines to honour looks exactly like no pin.
 
 # --- the slot axis ---------------------------------------------------------
 # NOT needed to read the store, query ClickHouse, or run a measurement. Only

@@ -164,15 +164,115 @@ def _model():
     return _BGE[0]
 
 
+#: **EVERY FORMAT OPTION PINNED, AND THE REASON IS ON DISK ALREADY.** hashstash
+#: encodes serializer/compress/b64 into the PATH -- `lmdb.hashstash.lz4` versus
+#: `lmdb.hashstash.lz4+b64` are different directories -- so an open that relies on
+#: library defaults silently resolves to a DIFFERENT, EMPTY store when a default
+#: moves, and the symptom is a slow re-embed rather than an error. The archive's
+#: `malign_logits/cache.py` documents this and pins all five; this open pinned two
+#: of five and inherited the rest.
+#:
+#: **`b64=False` PINS WHAT THE DATA IS, NOT WHAT THE ARCHIVE USES.** This store's
+#: 3.5 GB / 344,251 keys physically live at `.../slot-word/lmdb.hashstash.lz4`,
+#: written under hashstash 1.2.0 where `b64` defaults False. The archive's
+#: `sent_embeddings` is `lz4+b64` and is a DIFFERENT STORE. Pinning True here to
+#: "match the convention" would orphan every vector we have -- which is the
+#: failure this pin exists to prevent, arrived at from the other side.
+STASH_OPTIONS = dict(
+    engine="lmdb",
+    serializer="hashstash",
+    compress="lz4",
+    b64=False,
+    flat=True,
+    map_size=200 * 1024**3,
+)
+
+
+#: The directory hashstash MUST resolve to, given STASH_OPTIONS. Asserted rather
+#: than assumed -- see `_stash`.
+STASH_PATH = "lmdb.hashstash.lz4"
+
+
 def _stash():
+    """The vector store, or None. Never raises; warns once when it degrades.
+
+    **PINNING THE OPTIONS IS NECESSARY AND NOT SUFFICIENT, and this seat learned
+    it the expensive way on 2026-08-17.** hashstash will accept a pin it cannot
+    honour and quietly resolve elsewhere: with `lz4` not installed,
+    `compress="lz4"` wrote to `lmdb.hashstash.RAW`, a THIRD empty store beside the
+    3.5 GB one, and reported success. A pin the library declines to honour is
+    indistinguishable from no pin, so the only real check is on the RESOLVED PATH.
+
+    Two missing packages, two different failure modes, one symptom:
+
+        lmdb absent   raises ImportError  -> swallowed here -> cache silently OFF
+        lz4  absent   NO error at all     -> writes to a different directory
+
+    The second is worse and neither announced itself. For weeks every axis call
+    re-embedded from scratch; that is why the bge pass looked expensive.
+
+    **The `except` stays, because a cache must not be able to fail the analysis --
+    a broken store means slower, never wrong. But silence is only correct for a
+    TRANSIENT store failure, and a missing dependency is permanent**, so it warns
+    once to stderr instead of being indistinguishable from a cold cache.
+    """
     if not _STASH:
         try:
             from hashstash import HashStash
             os.makedirs(VEC_DIR, exist_ok=True)
-            _STASH.append(HashStash(root_dir=VEC_DIR, engine="lmdb", flat=True))
-        except Exception:
+            st = HashStash(root_dir=VEC_DIR, **STASH_OPTIONS)
+            #: **COMPARED AGAINST WHERE IT ACTUALLY WENT, not against whether the
+            #: expected directory exists.** The first version of this check tested
+            #: `isdir(VEC_DIR/STASH_PATH)` and could never refuse: that directory
+            #: is the 3.5 GB store and is always present, so forcing a bad pin
+            #: (`compress="gz"`) resolved elsewhere and the guard passed. A guard
+            #: I had not watched fail. `path_dirname` is hashstash's own answer.
+            got = os.path.basename(getattr(st, "path_dirname", "") or "")
+            if got != STASH_PATH:
+                import sys
+                print("slot_axis: vector cache resolved to %r, pinned for %r -- "
+                      "the options were not honoured (is `lz4` installed?). The "
+                      "344k cached vectors are NOT in the store being used."
+                      % (got or "?", STASH_PATH), file=sys.stderr)
+            _STASH.append(st)
+        except Exception as e:
+            import sys
+            print("slot_axis: vector cache unavailable (%s: %s). Runs will be "
+                  "slower, not wrong." % (type(e).__name__, e), file=sys.stderr)
             _STASH.append(None)
     return _STASH[0]
+
+
+def _canonical(key):
+    """Sort dict keys so the on-disk key never depends on insertion order.
+
+    hashstash 0.4.0 serialised dicts in INSERTION ORDER, so `{"a":1,"b":2}` and
+    `{"b":2,"a":1}` were different keys and a reader using one order was silently
+    blind to the other; 1.0.1 canonicalises. Sorting here makes the key identical
+    under every version, so this depends on no version's behaviour. Lifted from
+    the archive's `cache.py`, which paid for the lesson on 2026-07-26.
+    """
+    return {k: key[k] for k in sorted(key)} if isinstance(key, dict) else key
+
+
+def vec_key(prompt, word):
+    """The dict key for one (prompt, word) vector. -> dict
+
+    **A DICT, WHICH IS THE HOUSE CONVENTION AND ALSO QUERYABLE** (RH,
+    2026-08-17). The previous key was the fused string `prompt + sep + word`, and
+    fusing cost more than tidiness: the store could be READ but not ASKED. You
+    could fetch a vector knowing the exact prompt and word, and you could not
+    enumerate what it held, because splitting the string back apart is ambiguous
+    by construction -- the separator is a space and prompts end in spaces.
+
+    `sep` IS IN THE KEY, though it is derivable from the prompt. It decides the
+    string that was actually embedded (`""` for CJK, `" "` otherwise), so if that
+    rule ever changes we want the old and new vectors to COLLIDE rather than for
+    a stale one to be silently reused. Provenance that changes the value belongs
+    in the key; `dims` and `normalized` do not, being invariant here.
+    """
+    return _canonical({"embedder": NAMESPACE, "prompt": prompt, "word": word,
+                       "sep": sep_for(prompt)})
 
 
 def embed_cached(prompt, words, use_store=True):
@@ -187,6 +287,8 @@ def embed_cached(prompt, words, use_store=True):
     unwritable the run is slower, never wrong.
     """
     sep = sep_for(prompt)
+    #: `_MEM` stays keyed on the fused string: it is per-process, dies with the
+    #: session, and a tuple key would buy nothing there.
     keys = ["%s%s%s" % (prompt, sep, w) for w in words]
     out, missing = {}, []
     st = _stash() if use_store else None
@@ -195,14 +297,31 @@ def embed_cached(prompt, words, use_store=True):
             out[w] = _MEM[k]
             continue
         if st is not None:
-            try:
-                v = st.get(k)
-            except Exception:
-                v = None
+            v = None
+            #: **THE DICT KEY FIRST, THEN THE LEGACY FUSED STRING.** 344,251
+            #: vectors were written under the old key and re-keying without a
+            #: fallback would orphan every one of them -- 3.5 GB re-embedded for a
+            #: naming change. A legacy hit is REWRITTEN under the new key below,
+            #: so the store migrates as it is used and the fallback goes cold on
+            #: its own rather than needing a migration run.
+            legacy = False
+            for probe in (vec_key(prompt, w), k):
+                try:
+                    v = st.get(probe)
+                except Exception:
+                    v = None
+                if v is not None:
+                    legacy = probe is k
+                    break
             if v is not None:
                 a = np.asarray(v, dtype=np.float32).reshape(-1)
                 _MEM[k] = a
                 out[w] = a
+                if legacy:
+                    try:
+                        st[vec_key(prompt, w)] = a
+                    except Exception:
+                        pass
                 continue
         missing.append((w, k))
     if missing:
@@ -218,7 +337,9 @@ def embed_cached(prompt, words, use_store=True):
                     #: THE ARRAY ITSELF. The default serializer round-trips numpy
                     #: bit-identically (verified), so a list of Python floats
                     #: would widen float32 to float64 and back for nothing.
-                    st[k] = v
+                    #: Written under the DICT key only -- new writes do not
+                    #: reproduce the fused form, so the legacy set can only shrink.
+                    st[vec_key(prompt, w)] = v
                 except Exception:
                     pass
     return np.stack([out[w] for w in words])
