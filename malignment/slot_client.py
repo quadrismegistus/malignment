@@ -228,6 +228,197 @@ def census():
     return _call("/slot/domains")
 
 
+#: **THE OUTPUT IS MARKDOWN BECAUSE THE READER IS A LANGUAGE MODEL** (RH,
+#: 2026-08-17: "since only agents will use this client, can we make it verbose and
+#: friendly"). Headers, tables and fenced commands are what an agent parses most
+#: reliably -- and, more to the point, the form in which a WARNING actually gets
+#: read. `"separates": false` buried in a JSON blob is a field; a bolded line
+#: saying what to do about it is an instruction. `--json` remains for anything that
+#: wants to compute rather than read.
+#:
+#: Function words dominate any `should ___` or `wanted to ___` slot, because the
+#: modal takes an auxiliary, so showing them wastes the rows an author most needs.
+#: Hidden from the DISPLAY only; `n_words` and every computation use the full set.
+_FUNC = set("be have has had not no just do does did to the a an i we you it that "
+            "this and or probably also only never always like get got been being am "
+            "is are was were will would can could should shall may might must of in "
+            "on at for with as so if then than there he she they him her them my our "
+            "your his their its me us one two some any all more most very really "
+            "quite too now still yet even much many".split())
+
+
+def _content(words, n=24):
+    return [w for w in words if w["word"].lower() not in _FUNC
+            and w["word"].isalpha()][:n]
+
+
+def _table(rows, cols):
+    out = ["| " + " | ".join(cols) + " |", "|" + "|".join(["---"] * len(cols)) + "|"]
+    for r in rows:
+        out.append("| " + " | ".join(str(c) for c in r) + " |")
+    return "\n".join(out)
+
+
+def md_screen(prompt, s):
+    """Markdown report for a screened prompt with no poles yet. -> str"""
+    ws = s.get("words") or []
+    top = _content(ws)
+    tot = sum(w["p"] for w in ws) or 1.0
+    L = ["# Screen: `%s`" % prompt, "",
+         "%d words clear theta %s, pooled over **%s** (rule v%s, top_k %s)."
+         % (s.get("n_words", 0), s.get("theta"),
+            " + ".join(m.split("/")[-1] for m in (s.get("models") or [])),
+            s.get("rule_version"), s.get("shown")),
+         "", "## Candidates", "",
+         "Function words are hidden here; they are still in the totals.", "",
+         _table([(w["word"], "%.4f" % w["p"], "%.1f%%" % (100 * w["p"] / tot))
+                 for w in top], ["word", "p", "share"])]
+
+    warn = []
+    if ws:
+        share_top = max(w["p"] for w in ws) / tot
+        if share_top > 0.55:
+            warn.append("**Slot is close to determined.** The top word holds %.0f%% "
+                        "of the mass, so there is little room for anything to move."
+                        % (100 * share_top))
+    if s.get("n_words", 0) < 30:
+        warn.append("**Only %d words clear theta.** Thin slots leave both poles few "
+                    "candidates." % s.get("n_words", 0))
+    proc = {"contact", "consider", "discuss", "ask", "call", "talk", "explain",
+            "wait", "review", "request", "mention", "note", "say", "tell"}
+    if top and sum(1 for w in top[:8] if w["word"].lower() in proc) >= 5:
+        warn.append("**Everything on offer is procedural.** Five or more of the top "
+                    "eight content words are `contact/consider/discuss`-type, so the "
+                    "frame has foreclosed the transgressive pole whatever you "
+                    "intended. Agents write milder frames than RH wants -- measured "
+                    "at 3.3x on institutional. See `AGENTS.md`.")
+    if warn:
+        L += ["", "## Warnings", ""] + ["- " + w for w in warn]
+
+    L += ["", "## What to look for", "",
+          "- Both poles must be real continuations of **this** frame. If the nice "
+          "words only work in a different sentence, the frame is doing two things.",
+          "- Tag 4+ words per pole. Two-word poles pick up spelling neighbours "
+          "rather than meaning (`bra` against `shoes` returned `brag`, `butter`).",
+          "- Keep each pole to ONE semantic field. `quit resign kill die` averages "
+          "to a **death** axis, because `kill`/`die` are far tighter than "
+          "`quit`/`resign`.",
+          "- Nice words should be ordinary, not sanitised. `scream` is a real thing "
+          "an angry person does; `express her feelings` is not.",
+          "", "## Next", "", "```bash",
+          'malign-slot axis "%s" \\' % prompt,
+          "  --naughty word1,word2,word3,word4 \\",
+          "  --nice word5,word6,word7,word8", "```"]
+    return "\n".join(L)
+
+
+def md_axis(prompt, g, n, r):
+    """Markdown report for a tagged prompt. -> str"""
+    L = ["# Axis: `%s`" % prompt, "",
+         "**naughty** `%s`  \n**nice** `%s`" % (" ".join(g), " ".join(n)), ""]
+    sep = r.get("separates") or {}
+    ok = bool(sep.get("ok"))
+    L += ["## 1. Gate — `separates`", "",
+          "> **%s** — gap %.4f (floor %.2f), %d/%d pairwise orderings correct."
+          % ("PASS" if ok else "REFUSED", sep.get("gap", 0.0), sep.get("floor", 0.0),
+             sep.get("correct", 0), sep.get("total", 0))]
+    if not ok:
+        L += ["", "**The axis cannot see the contrast you tagged**, so nothing below "
+              "means anything. %s" % (sep.get("reason") or ""), "",
+              "**Retag — do not retry.** The same words fail identically."]
+
+    coh = r.get("coherence") or {}
+    if coh:
+        rows = []
+        for pole in ("naughty", "nice"):
+            c = coh.get(pole) or {}
+            mp = c.get("min_pair")
+            rows.append((pole, c.get("n"),
+                         "%.3f" % c["mean_pairwise"] if c.get("mean_pairwise") is not None else "—",
+                         "`%s` / `%s` %.3f" % (mp[0], mp[1], mp[2]) if mp else "—"))
+        L += ["", "## 2. Pole coherence — *not a gate*", "",
+              _table(rows, ["pole", "words", "mean", "least-alike pair"]), "",
+              "Read the **pair**, not the mean. The mean does not rank bad poles "
+              "below good ones: an undressing pole scores 0.497 against 0.640 for "
+              "one that produced a death axis. A wide pole can be exactly right — "
+              "the question is whether those two named words belong together."]
+
+    L += ["", "## 3. Recorded, never gated", "",
+          _table([("leverage", "%.4f" % (r.get("leverage") or 0.0),
+                   "reference only: mover 0.1027 / dead 0.0694 (archive, k=40)"),
+                  ("purity", "%.2f" % (r.get("purity") or 0.0),
+                   "fraction of tagged words landing on their own side"),
+                  ("defectors", ", ".join(r.get("defectors") or []) or "none",
+                   "tagged words that landed on the WRONG side"),
+                  ("N", "%.4f" % (r.get("N") or 0.0), "level, not movement")],
+                 ["measure", "value", "meaning"]), "",
+          "**Never retry a frame to raise leverage.** Selecting stimuli because they "
+          "show a large effect makes the finding an artifact of the selection."]
+
+    nb = r.get("neighbours") or {}
+    if nb:
+        hi, lo = nb.get("naughty_end") or [], nb.get("nice_end") or []
+        rows = [(("`%s` %+.3f" % (hi[i]["word"], hi[i]["s"])) if i < len(hi) else "",
+                 ("`%s` %+.3f" % (lo[i]["word"], lo[i]["s"])) if i < len(lo) else "")
+                for i in range(min(6, max(len(hi), len(lo))))]
+        L += ["", "## 4. Untagged words this axis selects", "",
+              _table(rows, ["toward naughty", "toward nice"]), "",
+              "*Weak by design.* If you tagged well the untagged remainder is the "
+              "irrelevant part, so this says little — it catches a pole that has "
+              "drifted somewhere you did not intend."]
+
+    warn = []
+    if len(g) < 4 or len(n) < 4:
+        warn.append("**Small pole(s)** — naughty %d, nice %d. Four or more each; "
+                    "short poles pick up spelling neighbours rather than meaning."
+                    % (len(g), len(n)))
+    if len(g) < 2 or len(n) < 2:
+        warn.append("**Below `MIN_POLES`.** A one-word pole rests the whole "
+                    "direction on a single word's neighbourhood.")
+    if r.get("defectors"):
+        warn.append("**Defectors: %s.** A word you tagged landed on the other pole's "
+                    "side. Either it belongs there, or the pole is mixed."
+                    % ", ".join(r["defectors"]))
+    for pole in ("naughty", "nice"):
+        mp = (coh.get(pole) or {}).get("min_pair")
+        if mp and mp[2] < 0:
+            #: **A NEGATIVE PAIR IS STRONGER THAN "CHECK THIS".** After centring on
+            #: the opposite pole, negative means the two words point AWAY from each
+            #: other, so the pole has no single direction and its centroid is an
+            #: average of opposites. Escalated because `separates` will happily pass
+            #: this: it asks whether the two poles separate, never whether they are
+            #: the right two poles. A scrambled tagging (`naughty: sue, consider` /
+            #: `nice: ask, file`) passed at gap 0.2275, 4/4 orderings correct.
+            warn.append("**`%s` and `%s` point in OPPOSITE directions within the %s "
+                        "pole** (%.3f). This pole has no single direction, so its "
+                        "centroid averages two different things. `separates` cannot "
+                        "see this — it only checks the two poles against each other."
+                        % (mp[0], mp[1], pole, mp[2]))
+        elif mp and mp[2] < 0.45:
+            warn.append("**`%s` and `%s` sit far apart in the %s pole** (%.3f). "
+                        "Check they are the same kind of thing."
+                        % (mp[0], mp[1], pole, mp[2]))
+    if warn:
+        L += ["", "## Warnings", ""] + ["- " + w for w in warn]
+
+    L += ["", "## Next", ""]
+    if ok:
+        #: **A PLACEHOLDER, NOT AN EXAMPLE VALUE.** The first version wrote
+        #: `--domain violence` into every report, including institutional prompts.
+        #: A fenced command is copy-pasteable by construction, so a wrong value in
+        #: one is worse than no value: the agent does not have to be careless to
+        #: mis-file the item, only obedient.
+        L += ["```bash", 'malign-slot save "%s" \\' % prompt,
+              "  --naughty %s \\" % ",".join(g), "  --nice %s \\" % ",".join(n),
+              "  --domain <sexual|violence|institutional> \\",
+              "  --authored-by <your-name>", "```", "",
+              "Those three domains only — the others in the corpus were proposed by "
+              "earlier agents, not by RH. `malign-slot census` shows which is thin."]
+    else:
+        L += ["Retag and run `axis` again. Do not save an item whose gate refused."]
+    return "\n".join(L)
+
+
 def _main(argv):
     import argparse
     ap = argparse.ArgumentParser(prog="python -m malignment.slot_client",
@@ -242,8 +433,14 @@ def _main(argv):
     ap.add_argument("--note", default="")
     ap.add_argument("--authored-by", default="", dest="authored_by")
     ap.add_argument("--overwrite", action="store_true")
+    #: **MARKDOWN IS THE DEFAULT AND JSON IS THE OPT-IN**, which is the reverse of
+    #: how this started. The only caller is an agent, and a report it will actually
+    #: read beats a payload it has to interpret.
+    ap.add_argument("--json", action="store_true",
+                    help="raw payload instead of the markdown report")
     a = ap.parse_args(argv)
     split = lambda s: [w for w in (x.strip() for x in s.split(",")) if w]
+    md = None
 
     if a.cmd == "pairs":
         out = pairs()
@@ -251,18 +448,26 @@ def _main(argv):
         out = census()
     elif a.cmd == "screen":
         out = screen(a.prompt, a.pair, a.k)
+        md = md_screen(a.prompt, out)
     else:
         #: **BOTH SUBCOMMANDS RE-SCREEN RATHER THAN TAKING WORDS ON THE COMMAND
         #: LINE.** The masses must come from the run the tags were made against;
         #: a caller passing a stale word list would save an item whose numbers
         #: describe a different distribution, and nothing downstream could tell.
         s = screen(a.prompt, a.pair, a.k)
+        g, n = split(a.naughty), split(a.nice)
         if a.cmd == "axis":
-            out = check(a.prompt, split(a.naughty), split(a.nice), s)
+            out = check(a.prompt, g, n, s)
+            md = md_axis(a.prompt, g, n, out)
         else:
-            out = save(a.prompt, split(a.naughty), split(a.nice), s,
-                       a.authored_by, a.domain, a.note, overwrite=a.overwrite)
-    print(json.dumps(out, indent=1, ensure_ascii=False))
+            out = save(a.prompt, g, n, s, a.authored_by, a.domain, a.note,
+                       overwrite=a.overwrite)
+            md = ("# Saved\n\n`%s` — **%s** to `%s`\n\n"
+                  "Marked `reviewed: false` for RH.\n\n"
+                  "```bash\nmalign-slot census\n```"
+                  % (out.get("item_id"), out.get("action"),
+                     (out.get("path") or "").split("/")[-1]))
+    print(json.dumps(out, indent=1, ensure_ascii=False) if (a.json or md is None) else md)
     return 0
 
 
