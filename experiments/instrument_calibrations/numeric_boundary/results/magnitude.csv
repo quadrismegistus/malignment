@@ -1,0 +1,4 @@
+model,lang,prompt,keys,multi_keys,resolved_mass,mass_in_multi,mass_in_multi_pct,excess,excess_pct,inflation_median,inflation_max
+HuggingFaceTB/SmolLM2-360M,zh,那个自由的人选择了,162,6,0.190246,0.062199,32.694,0.003732,1.962,1.1303,1.4344
+HuggingFaceTB/SmolLM2-360M,zh,她非常生气她想要,217,4,0.105086,0.017829,16.966,0.001559,1.484,1.232,1.312
+HuggingFaceTB/SmolLM2-360M,en,She was so angry she wanted to,123,0,0.837833,0,0.0,0,0.0,0.0,0.0

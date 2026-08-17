@@ -181,17 +181,125 @@ def stage_tokenizers(limit=None):
     return rows, failed
 
 
+
+#: **THE THIRD ARM: HOW BIG IS THE ERROR THE OTHER TWO DESCRIBE?**
+#: The tokenizer and mask arms establish that `，` is never marked a boundary on
+#: byte-level BPE (84 of 133 models). This one measures what that COSTS, and it
+#: needs weights, unlike the other two.
+#:
+#: The mechanism, established at [6435]: `_account` continues only through
+#: NON-boundary tokens, so `expand` walks through `，` precisely BECAUSE the mask
+#: fails to mark it -- then `clean_surface` strips the mark, and `一个，` is
+#: credited back onto `一个`, which already terminated at the previous depth.
+#: **One surface, two credits.** So the mask defect and the multi-depth crediting
+#: are one phenomenon, and this stage sizes it by instrumenting `_account` to
+#: record every credit rather than by differencing two scorers -- which cannot
+#: work, since both call the same `_boundary_for` and the defect cancels.
+#:
+#: **SCOPE, and it is narrow.** One model, a few prompts. The 84/49 split is
+#: per-MODEL and roster-wide (`--stage mask`); these magnitudes are PER-PROMPT on
+#: one byte-level model. They do not belong in one sentence, and a roster figure
+#: would need this run over the roster.
+MAGNITUDE_PROMPTS = [
+    ("zh", "那个自由的人选择了"),
+    ("zh", "她非常生气她想要"),
+    ("en", "She was so angry she wanted to"),      # control: must be ZERO
+]
+
+
+def stage_magnitude(model_id, device="mps"):
+    """-> rows. Instruments `_account` and reports the excess credit per prompt."""
+    import collections
+    import torch
+    torch.set_grad_enabled(False)
+    from malignment import models as M
+    from malignment import twp as T
+
+    tok, _loader = T.load_tokenizer(model_id)
+    model, _t2 = M.load_model(model_id)
+    bmask = T.boundary_mask(tok, model.config.vocab_size)
+    trie = T.load_prefix_trie()
+    cids, cstrs, lids, pidsi = T.cjk_vocab(tok, model.config.vocab_size)
+    cjk = (trie, cids, cstrs, lids, pidsi) if len(cids) else None
+
+    orig = T._account
+    credits = collections.defaultdict(list)
+
+    def spy(row, b, surf, pref, mass, t1, theta, words, res, nxt):
+        before = words.get((surf, t1), 0.0)
+        orig(row, b, surf, pref, mass, t1, theta, words, res, nxt)
+        d = words.get((surf, t1), 0.0) - before
+        if d > 0:
+            credits[(surf, int(t1))].append(d)
+
+    rows = []
+    T._account = spy
+    try:
+        for lang, prompt in MAGNITUDE_PROMPTS:
+            credits.clear()
+            w = T.expand(model, tok, prompt, device, bmask, cjk=cjk)
+            w = w[0] if isinstance(w, tuple) else w
+            total = sum(w.values())
+            multi = {k: v for k, v in credits.items() if len(v) > 1}
+            #: the FIRST credit is the word terminating legitimately; every later
+            #: one is the same surface reached again through a mark that should
+            #: have ended it. So the excess is the sum of all credits after the
+            #: first, and it is the error -- not the whole mass of affected keys.
+            excess = sum(sum(v[1:]) for v in multi.values())
+            in_multi = sum(sum(v) for v in multi.values())
+            infl = sorted(sum(v) / v[0] for v in multi.values()) or [0.0]
+            rows.append(dict(
+                model=model_id, lang=lang, prompt=prompt,
+                keys=len(credits), multi_keys=len(multi),
+                resolved_mass=round(total, 6),
+                mass_in_multi=round(in_multi, 6),
+                mass_in_multi_pct=round(100 * in_multi / total, 3) if total else 0.0,
+                excess=round(excess, 6),
+                excess_pct=round(100 * excess / total, 3) if total else 0.0,
+                inflation_median=round(infl[len(infl) // 2], 4),
+                inflation_max=round(max(infl), 4)))
+    finally:
+        T._account = orig
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="tokenizers", choices=["tokenizers", "mask"])
+    ap.add_argument("--stage", default="tokenizers", choices=["tokenizers", "mask", "magnitude"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--models-from", default=None,
                     help="file of model ids, one per line -- for the tf457 cohort")
     ap.add_argument("--out", default="by_tokenizer.csv")
+    ap.add_argument("--model", default="HuggingFaceTB/SmolLM2-360M",
+                    help="magnitude stage only -- it needs weights")
+    ap.add_argument("--device", default="mps")
     a = ap.parse_args()
     global MODELS_FROM
     MODELS_FROM = a.models_from
     os.makedirs(RESULTS, exist_ok=True)
+    if a.stage == "magnitude":
+        rows = stage_magnitude(a.model, a.device)
+        cols = ["model","lang","prompt","keys","multi_keys","resolved_mass",
+                "mass_in_multi","mass_in_multi_pct","excess","excess_pct",
+                "inflation_median","inflation_max"]
+        path = os.path.join(RESULTS, "magnitude.csv")
+        with open(path, "w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+            w.writeheader()
+            for r in rows:
+                w.writerow(r)
+        print("\nmagnitude arm: %s" % a.model)
+        for r in rows:
+            print("  %-4s keys=%-4d multi=%-3d  mass in multi %6.2f%%  EXCESS %5.2f%%"
+                  "  inflation med %.3fx max %.3fx"
+                  % (r["lang"], r["keys"], r["multi_keys"], r["mass_in_multi_pct"],
+                     r["excess_pct"], r["inflation_median"], r["inflation_max"]))
+        print("\n  ONE MODEL, %d PROMPTS -- not a roster figure. The 84/49 split is"
+              % len(rows))
+        print("  per-model (--stage mask); these are per-prompt on one model.")
+        print("\n  ->", path)
+        return
+
     if a.stage == "mask":
         rows, failed = stage_mask(a.limit)
         cols = ["model","loaded","reason","cjk_punct_tokens","marked_boundary",
