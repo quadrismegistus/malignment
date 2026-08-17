@@ -1,8 +1,9 @@
 # PKU-SafeRLHF — what does "safer" reward?
 
-**id:** pku_disclaimer **status:** one result, length-controlled, replicated
-out of sample, and its internal structure coded blind by two independent coders.
-Registration `1f35b01`, amendments A1-A3.
+**id:** pku_disclaimer **status:** the registration is worked out. Two positive
+results (the disclaimer effect and its six-way structure; helpfulness is length),
+H3 resolved against RH, one arm withdrawn for a failed instrument control.
+Registration `1f35b01`, amendments A1-A6.
 
 # THE FINDING
 
