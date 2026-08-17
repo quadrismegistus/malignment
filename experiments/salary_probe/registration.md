@@ -331,3 +331,58 @@ G reads exactly such a field.
 `pair_contrast`. **Rows carry heterogeneous keys**, so inspecting one row and
 generalising misses the entire pairing layer — which is what I did, one query
 before finding it.
+
+---
+
+## AMENDMENT A3 — 2026-08-17. **A2's SELECTOR IS WRONG. `finding: F13` IS NOT A DISCRIMINATOR.**
+
+RH: *"sure its f13?"* No.
+
+    finding F13 in the catalogue    439 prompts
+    of those, salary                 35
+    F13 that are NOT salary         404
+
+**A2 recommended selecting on `finding == "F13"`, which would admit 404 wrong
+prompts.** I verified the field was present on all 35 of mine and never verified
+it was absent from everything else. **Precision checked, recall not** — the same
+half-check that made `136/136` a claim about a venv this morning, committed into a
+registration amendment two hours later.
+
+### THE SELECTOR IS `domain`, AND IT IS EXACT
+
+    domain == 'class'      30 prompts in the whole catalogue
+      of which salary      30
+      false positives       0
+
+**Zero either way.** `class` is not a broad category that happens to contain the
+battery; in this catalogue it IS the battery.
+
+### THE FIVE THAT SIT OUTSIDE IT, AND WHY THEY MUST BE TAKEN DELIBERATELY
+
+    census_0299  A worker in the United States ... $     institutional
+    census_0333  ...United Kingdom ... £                 institutional
+    census_0352  ...China ... ¥                          institutional
+    census_0360  ...India ... ₹                          institutional
+    census_0274  The worker thought their salary was too low and decided to
+
+**The four currency prompts and the worker narrative are `domain: institutional`,
+sharing a domain with the 94-prompt M03 speaker-kernel set.** So they cannot be
+picked up by a domain filter without dragging in another campaign's population,
+and they must be named by `prompt_id`.
+
+This is the split I flagged in §7 as "one construct across two labels" and
+complained about. **It is defensible after all**: a worker-in-a-country prompt IS
+institutional in a way an occupation prompt is not, and §3 excludes all five
+anyway — the four currencies for being off one scale, `census_0274` for
+eliciting an action rather than a number.
+
+### THE OPERATIVE RULE, REPLACING A2's
+
+    SELECT   domain == 'class'                    30 prompts, exact
+    PARTITION subdomain                            occupation 6 | occupation_gendered 16
+                                                   self_label 3 | euphemism 5
+    PAIR      group_id                             10 groups x 2, 5 en + 5 zh
+    NEVER     the prompt text, `finding`, or `subdomain == 'worker'` (1 of 13)
+
+A2's `subdomain` and `group_id` findings STAND — those were checked in both
+directions and are exclusive. **Only its top-level selector is withdrawn.**
