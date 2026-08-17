@@ -48,11 +48,13 @@ content, and it is falsifiable: if OPERATIONAL had scored with LEGAL, the findin
 would be "any hedge-marked sentence wins" and there would be nothing to say about
 voice.
 
-# THE CONVERGENCE, AND ONE OF THE THREE IS THE SOURCE
+# A SHARED SHAPE ACROSS THREE CAMPAIGNS. NOT A SOURCE.
 
-Three results from three campaigns describe the same operation from different
-sides. **The first two are model-side and were the puzzle. This one is
-corpus-side and is a candidate answer to it.**
+Three results describe a similar operation from different sides. **The first two
+are model-side, this one is corpus-side, and the relation between them is a
+RESEMBLANCE and not a derivation** -- see the category-error section below, which
+is the controlling scope for everything in this part of the file. Read what
+follows as "these rhyme", never as "this one explains those".
 
 ## M02, `second_order_naming.md` -- alignment adds a predicate ABOUT the scene
 
@@ -85,21 +87,26 @@ identical by measurement and the guilt still added, +5.0 points, p=7.2e-08.
 as the PKU pair: the harmful content is unchanged and a moral sentence is
 appended beside it.
 
-## Y NAMED A PUZZLE THAT THIS COLLECTION ANSWERS
+## Y NAMED A PUZZLE THAT THIS RESEMBLES, AND DOES NOT ANSWER
 
 `Y_diegetic_superego.md` observes: *"RLHF preference data rewards the assistant
 declining. That is the behaviour under direct training, and at this corpus's
 scale it is close to absent."* It then calls the in-scene effect "the one nothing
 in the training objective names."
 
-**PKU says the objective does name it, and that the premise about declining is
-wrong for this corpus.** Explicit refusal differs on 7 of 32,656 both-unsafe
-pairs -- 0.02%, because a response that declines does not get labelled unsafe in
-the first place (A3). What the preference data has to reward, in that stratum, is
-never declining. It is the appended moral frame, at 72.4% against 56.5%.
+In PKU at least, the premise about declining does not hold: explicit refusal
+differs on 7 of 32,656 both-unsafe pairs -- 0.02%, because a response that
+declines does not get labelled unsafe in the first place (A3). What THIS
+preference signal rewards, in that stratum, is never declining. It is the
+appended moral frame, at 72.4% against 56.5%.
 
-**So the behaviour Y found unaccounted for has a candidate account: it is what
-the preference data selects, in the only form the data can express it.**
+**That is a fact about PKU's annotation and NOT an account of Y's models, which
+were never trained on it.** An earlier version of this section read it as "a
+candidate answer to Y's puzzle". **Withdrawn.** U_ladder's safety ablation shows
+the operation survives removing the safety corpus outright, so no corpus-content
+result explains a model-side behaviour, this one least of all. The resemblance is
+worth recording because it tells us the shape is not unique to one measurement.
+It is not evidence about mechanism.
 
 # WHAT THIS DOES NOT LICENSE, AND IT IS THE LOAD-BEARING CAVEAT
 
