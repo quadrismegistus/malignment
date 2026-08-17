@@ -611,3 +611,117 @@ def decompose(pre, post, rule=CANONICAL, residual_pre=0.0, residual_post=0.0):
         "tail_share": (js_t / total) if total > 0 else None,
         "n_fallers": len(m.fallers), "n_risers": len(m.risers),
     }
+
+
+# ---------------------------------------------------------------------------
+# One prompt across many units: the data behind a slopegraph
+# ---------------------------------------------------------------------------
+
+#: **READS `twp_words`, NOT `movement`** (dario, 2026-08-17). `movement` is two
+#: columns by construction -- `p_base` and `p_aligned` -- so a CHAIN with four
+#: rungs has no representation in it, and a caller wanting `base -> sft -> dpo`
+#: would have to stitch overlapping pair rows back into a sequence and hope the
+#: middle arms agree. `twp_words` is `(model, prompt, word, p)`, which is one row
+#: per rung and handles two positions and N positions with the same query.
+#:
+#: It also means this does not require `produce_movement --run` to have been
+#: rerun. The panel's whole point is that a prompt can be asked about now.
+
+
+def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
+    """Per-word probability at ONE prompt across the rungs of each unit.
+
+        units = [("olmo", ["allenai/OLMo-2-1124-7B", "...-Instruct"]), ...]
+        contrast("She was so angry she wanted to", units, top=12)
+
+    A UNIT is a lineage; its RUNGS are the positions on the x axis. Two rungs is
+    a pair, four is a chain, and nothing here cares which -- the caller declares
+    the sequence and this returns it tidied.
+
+    Returns `(rows, meta)`. Rows are dicts:
+
+        unit  position  model  word  p
+
+    **WORD SELECTION IS DECLARED AND BLIND TO MOVEMENT.** The default is the
+    top-N by mass at `select_at`, which is position 0 -- the base. A rule that
+    picked words because they moved would condition every later interval on the
+    selection, and the archive's `plot_prompt_words.py` says so in the subtitle
+    for exactly this reason. Passing `words` explicitly is allowed and is
+    reported in `meta["selection"]` as `curated`, so a figure can print which it
+    was rather than implying the honest one.
+
+    **A WORD MISSING FROM A RUNG IS RETURNED AS ZERO AND COUNTED.** It is not the
+    same fact as a word the instrument never reached: below theta means "smaller
+    than 0.001", not "absent". `meta["below_theta"]` carries how many of the
+    returned cells are that, because a slopegraph of levels will draw them at the
+    floor and a reader cannot otherwise tell a measured small number from a
+    truncation.
+    """
+    from . import ch
+    esc = lambda s: str(s).replace("\\", "\\\\").replace("'", "\\'")
+    seq = [(str(name), [str(m) for m in rungs]) for name, rungs in units]
+    if not seq:
+        raise ValueError("no units given")
+    depth = {len(r) for _, r in seq}
+    if len(depth) != 1:
+        #: Refused rather than padded. Units of different depth on one x axis is
+        #: two different figures overlaid, and the padding choice (repeat the
+        #: last rung? leave a gap?) is a claim about the missing rung.
+        raise ValueError("units have different rung counts: %s -- one figure "
+                         "cannot hold sequences of different length"
+                         % sorted(depth))
+    n_rungs = depth.pop()
+    if not 0 <= select_at < n_rungs:
+        raise ValueError("select_at %d is outside 0..%d" % (select_at, n_rungs - 1))
+
+    models = sorted({m for _, r in seq for m in r})
+    inlist = ",".join("'" + esc(m) + "'" for m in models)
+    got = ch.query("SELECT model, word, p FROM {db}.twp_words WHERE prompt='"
+                   + esc(prompt) + "' AND model IN (" + inlist + ")")
+    by = {}
+    for r in got:
+        by.setdefault(r["model"], {})[r["word"]] = float(r["p"])
+
+    #: A unit missing ANY of its rungs is dropped whole, and the names are
+    #: returned. Half a slope is not a slope, and a unit silently contributing
+    #: one endpoint would tilt a median without appearing in the count.
+    present, missing = [], []
+    for name, rungs in seq:
+        if all(m in by for m in rungs):
+            present.append((name, rungs))
+        else:
+            missing.append({"unit": name,
+                            "absent": [m for m in rungs if m not in by]})
+    if len(present) < min_units:
+        raise ValueError("only %d of %d units have all rungs at this prompt "
+                         "(needed %d). Missing: %s"
+                         % (len(present), len(seq), min_units,
+                            ", ".join(d["unit"] for d in missing[:6])))
+
+    if words:
+        chosen, selection = [str(w) for w in words], "curated"
+    else:
+        #: Summed across units at the SELECTION RUNG, so the choice is a property
+        #: of the population rather than of whichever unit happens to be first.
+        tot = {}
+        for _, rungs in present:
+            for w, p in by[rungs[select_at]].items():
+                tot[w] = tot.get(w, 0.0) + p
+        chosen = [w for w, _ in sorted(tot.items(), key=lambda kv: -kv[1])[:top]]
+        selection = "top %d by mass at position %d" % (top, select_at)
+
+    rows, below = [], 0
+    for name, rungs in present:
+        for i, m in enumerate(rungs):
+            d = by[m]
+            for w in chosen:
+                p = d.get(w, 0.0)
+                if p == 0.0:
+                    below += 1
+                rows.append({"unit": name, "position": i, "model": m,
+                             "word": w, "p": p})
+    meta = {"prompt": prompt, "n_rungs": n_rungs, "n_units": len(present),
+            "n_units_requested": len(seq), "missing_units": missing,
+            "words": chosen, "selection": selection,
+            "below_theta": below, "n_cells": len(rows)}
+    return rows, meta
