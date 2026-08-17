@@ -51,5 +51,19 @@ dev = ["pytest", "packaging"]
 # generator, so it is declared by hand here.
 plots = ["plotnine"]
 
+# A FOURTH SOURCE, and it is NOT the plotnine case. `plots` exists because the
+# PACKAGE depends on plotnine through a dynamic import in `serve.py`, an edge no
+# AST walk can see. Nothing in `malignment/` imports pyarrow and nothing will:
+# this is an EXPERIMENT-ONLY dependency, needed to read HuggingFace dataset
+# caches (`*.arrow`) for post-training corpus analysis, which is text on disk
+# and touches no model, no cell and no boundary rule.
+#
+# Declared here rather than in `requirements.txt` for the same reason `plots` is
+# -- that file is an AST walk of `malignment/*.py` and hand-adding to it breaks
+# its one property -- but the REASON is different and the distinction matters:
+# an experiment dependency does NOT mean the package is incomplete without it.
+# `import malignment` must keep working in a venv that never installed this.
+corpora = ["pyarrow"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

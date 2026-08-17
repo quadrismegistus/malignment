@@ -242,6 +242,12 @@ def _requirements(g):
     #: EVERY declaration in the group is passed, not a summary of them -- the
     #: resolver intersects them, and if that intersection is empty it says so
     #: rather than us having decided which declaration wins.
+    #: `corpora` is a FOURTH source and unlike `plots` it is EXPERIMENT-ONLY --
+    #: pyarrow for reading HuggingFace dataset caches. No module in `malignment/`
+    #: imports it, so a venv without it still has a working package; it is here
+    #: so `build` produces an interpreter the experiments can actually run in,
+    #: rather than one that needs a hand-install nobody records.
+    #:
     #: **`[dev,plots]`, AND `plots` IS A THIRD DEPENDENCY SOURCE** (dario,
     #: 2026-08-17). This module's docstring already names two sets with two
     #: sources -- the AST walk over `malignment/*.py`, and the model-side
@@ -253,7 +259,7 @@ def _requirements(g):
     #: `malignment/*.py` can see. Measured, not predicted: a venv built from the
     #: declaration served `/plots` correctly and failed `/plot/render` with
     #: ModuleNotFoundError: matplotlib.
-    out = ["-e", "%s[dev,plots]" % ROOT]
+    out = ["-e", "%s[dev,plots,corpora]" % ROOT]
     specs = sorted(s for s in g["specs"] if s)
     if sys.platform == "darwin" and _satisfiable(specs + [DARWIN_MAX_TRANSFORMERS]):
         specs.append(DARWIN_MAX_TRANSFORMERS)
