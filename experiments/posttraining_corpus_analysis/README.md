@@ -24,16 +24,28 @@ something the optimisation produces from data that does not look like a word lis
 
 | question | corpus | status |
 |---|---|---|
-| [`hh-rlhf`](hh-rlhf/) | Anthropic/hh-rlhf, 160,800 pairs | registered, not run |
+| [`hh-rlhf`](hh-rlhf/) | Anthropic/hh-rlhf, 160,800 pairs | CLOSED, exploratory — the axis is engage-vs-deflect |
+| [`pku-safe-rlhf`](pku-safe-rlhf/) | PKU-SafeRLHF, 73,907 pairs | registered, NOT RUN |
 
-Named and not started: **PKU-Alignment/pku-safe_rlhf** (73,907 pairs), which
-carries `is_response_N_safe`, a 14-category `harm_category`, `severity_level`,
-and — the reason it is worth its own question — **`better_response_id` and
-`safer_response_id` as separate judgements that disagree on 17,798 pairs (24%)**.
-That is a corpus encoding the quality/safety tradeoff rather than collapsing it.
+**PKU is the one that matters, because it is the only cached corpus that TRAINED
+MODELS WE MEASURE**: `beaver-7b-v1.0` (a declared lineage off `llama-7b`),
+`alpaca-7b-reproduced` (the SFT input to Safe RLHF) and `AmberSafe` (DPO on
+PKU-SafeRLHF alone). A signal found in the corpus can be checked against the
+model trained on it. Neither hh-rlhf nor ultrafeedback offers that — no Anthropic
+model is in the roster.
+
+It carries `is_response_N_safe`, **19** harm categories, `severity_level`, and
+`better_response_id` / `safer_response_id` as separate judgements disagreeing on
+17,798 pairs (24.1%).
 
 `HuggingFaceH4/ultrafeedback_binarized` (61,135 pairs, graded scores, no harm
-labels) is the pure-quality comparison and is also unstarted.
+labels) is the pure-quality comparison and is unstarted.
+
+**Named, not started, and the better design: PROMPTS DERIVED FROM A SAFETY
+CORPUS, RUN ON MODELS NOT TRAINED ON IT** (RH). It inverts the relation — the
+corpus becomes a stimulus source rather than an object — and it breaks the
+circularity, because only beaver and AmberSafe saw this data. Needs a fleet, so
+it waits, and it gets its own question.
 
 ## What is cached locally
 
