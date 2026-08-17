@@ -263,3 +263,71 @@ numeral surfaces with zero commas among them.
 
 **Nothing in §3-§6 changes.** The hypotheses, the partition, the preconditions and
 the decision rules are untouched; only the account of what is in the way.
+
+---
+
+## AMENDMENT A2 — 2026-08-17. §3's PARTITION IS HAND-ROLLED AND THE CATALOGUE ALREADY DECLARES IT.
+
+RH: *"is there not a domain or finding or id format distinguishing salary probe
+prompts"*. There is, on every axis, and §3 reconstructs all of it by substring.
+
+**THE SET IS 35, NOT 24.** §3 selected on `'annual salary of' in p.text`, which is
+English-only, so it silently excluded **10 Chinese translations**. A text
+predicate standing in for a structural one — the defect this seat spent the day
+booking in other people's work, in my own registration's population definition.
+
+    finding: F13        ALL 35            the declared handle for the set
+    language            en 25 | zh 10
+    subdomain           occupation           6 of 6     unmarked + CEO/janitor
+                        occupation_gendered 16 of 16    8 en + 8 zh
+                        self_label           3 of 3     the class ladder
+                        euphemism            5 of 5     comfortable-life
+                        worker               1 of 13    NOT clean, do not use
+
+**Four of the five subdomains are exclusively salary**, and they map one-to-one
+onto §3's hand-written partition. **Select on `finding == "F13"` and partition on
+`subdomain`. Never on the prompt text.**
+
+### AND THE PAIRING IS DECLARED, SO G MUST NOT RECONSTRUCT IT
+
+    group_id        10 groups, EXACTLY 2 members each
+                    gender_the_{doctor,nurse,teacher,engineer},
+                    gender_a_with_a_comfortable_l, and each again `_zh`
+    contrast_type   gender_swap on 20 prompts
+    pair_contrast   'male/female' 8 | 'man/woman' 2 | '男/女' 10
+
+**G's unit is the declared `group_id`, not a pair I assemble by matching strings.**
+The notes record that these were keyed on RH's ruling that FEMALE IS MARKED, and
+that before keying they sat with `group_id=None` inside the wage battery so *no
+pairwise analysis could see them* — which is exactly the analysis G is.
+
+### WHAT THIS DOES TO G AND C, AND THEY MOVE IN OPPOSITE DIRECTIONS
+
+**G GAINS A CROSS-LANGUAGE REPLICATION WITH DECLARED PAIRING.** 5 English groups
+and 5 Chinese, currency held constant at `$` in both, so language is the only
+thing varying. That is stronger than the within-English replication A0 named.
+
+**C GAINS NOTHING.** There is no Chinese class ladder — `self_label` is 3 English
+prompts and no `_zh` counterpart exists. **C stays English-only and its
+replication arm remains CLASS-OCC.**
+
+**AND CHINESE HAS NO UNMARKED ARM.** English is doctor / male doctor / female
+doctor; Chinese is 男性医生 / 女性医生 only. So a cross-language comparison of
+the *marked-vs-unmarked* contrast is not available, and only the gendered
+contrast replicates.
+
+### ONE INHERITED-METADATA HAZARD ALREADY RECORDED IN THE CATALOGUE
+
+The Chinese rows' notes say `pair_contrast` was first inherited verbatim from the
+English parent, naming English tokens *that do not occur in the Chinese prompt*,
+and was cleared to NULL before being re-keyed as `男/女`. **It reads correctly
+now.** Recorded because a translation inheriting its parent's design metadata is
+right for `group`, `role` and `domain` and wrong for anything naming a token, and
+G reads exactly such a field.
+
+### A SMALLER THING THAT COST ME A WRONG SCHEMA
+
+`sal[0]._row.keys()` does **not** list `group_id`, `contrast_type` or
+`pair_contrast`. **Rows carry heterogeneous keys**, so inspecting one row and
+generalising misses the entire pairing layer — which is what I did, one query
+before finding it.
