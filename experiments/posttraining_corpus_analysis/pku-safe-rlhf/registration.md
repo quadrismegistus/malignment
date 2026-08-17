@@ -335,3 +335,97 @@ does not, does disclaiming win"*. The distinction is stated wherever the number
 is, because the unconditional version is what the sparsity has made unaskable.
 
 **REFUSAL is not tested. n=7, and 7 is reported as unpowered, not as a null.**
+
+---
+
+## AMENDMENT A4 — 2026-08-17. FINDING B ALONE. It should never have been a horse race (RH).
+
+**Written before the K arm is run. Nothing has been fitted.** A3 voided the race
+by killing feature set A; RH's ruling is that pairing them was wrong from the
+start, so B is restated as a test in its own right rather than as a survivor.
+
+### WHY THE PAIRING WAS WRONG, AND IT IS NOT JUST THAT A DIED
+
+A1 made refusal and register compete for one verdict, so **each hypothesis could
+only be supported by the other's failure.** That is a comparison between a
+550-pair conditional and a 32,656-pair regression, and A3's sparsity finding was
+not bad luck: refusal is absent from this stratum *by the labelling rule*, since
+a response that declines does not get called unsafe. **A contest whose loser was
+determined by the dataset's construction was never measuring the thing.**
+
+So: does the preference data reward LESSER ACTS? One population, one instrument,
+no opponent.
+
+### THE INSTRUMENT IS CONTAMINATED IN A DIRECTION MEASURED BEFORE FITTING
+
+K percentile ranks over the 27,242-word lexicon, on the two IAA-validated
+dimensions only (`transgressiveness` 0.828, `bodily_harm` 0.879). But the
+disclaimer vocabulary sits at the top of the transgressiveness scale:
+
+    illegal 0.995 · crime 0.994 · criminal 0.993 · unethical 0.989
+    arrested 0.986 · penalties 0.977 · jail 0.970 · victim 0.965
+    harm 0.955 · police 0.923 · consequences 0.912
+
+**A response that moralises about the crime scores as MORE transgressive than one
+that merely commits to explaining it.** Since the disclaiming response is the one
+judged safer 68.4% of the time, the contamination runs OPPOSITE to the mildness
+hypothesis and will mask a real effect rather than manufacture one. Measured
+first, so it is a property of the instrument and not a reading of the outcome.
+
+### THEREFORE THE PRIMARY INSTRUMENT IS THE DISCLAIMER-STRIPPED ONE
+
+    K_full     mean K rank over K-covered words, whole response
+    K_strip    the same, after DELETING every sentence matching the
+               pre-declared REFUSAL or E-ASSIST patterns (A2's M02 battery)
+
+`K_strip` is a declared structural operation on sentences, not a lexicon
+harvested from an arm's outputs, so the Y-pilot provenance rule is satisfied.
+**`K_strip` is PRIMARY because `K_full` is known-contaminated. `K_full` is
+reported beside it and never alone.** Length is recomputed on whatever text the
+K is computed on, so `AUC_match` never mixes a stripped mean with an unstripped
+length.
+
+### THE IMPLEMENTED STATISTIC IS A MEAN, NOT THE "MASS-WEIGHTED" OF A1
+
+`features()` computes the MEAN K rank over covered words. A1's prose said
+mass-weighted. **The mean is adopted and the prose is wrong**: a mass-weighted
+sum grows with length, and length is the confound this registration exists to
+control. Recorded as a prose/artifact mismatch resolved in favour of the
+artifact, with the reason.
+
+### DECISION RULES, AS ARITHMETIC
+
+Thresholds are the ones this campaign already committed to elsewhere (hh-rlhf's
+0.60 SUPPORTED, H1's 0.55 collapse), reused rather than minted.
+
+    AUC on the dataset's own test split, fit on train, sign-randomised at
+    seed 20260817, features = the 2 validated K rank deltas.
+
+    SUBSTITUTION PRESENT   AUC_match(safer | K_strip) >= 0.60
+    SUBSTITUTION ABSENT    AUC_match(safer | K_strip) <  0.55, quoted with MDE
+    UNDECIDED              0.55 <= AUC < 0.60
+
+**AUC cannot state a direction, so a co-primary sign test does:**
+
+    DIRECTION   fraction of both-unsafe pairs where the SAFER response has the
+                LOWER mean transgressiveness rank. Binomial, two-sided.
+
+    PRESENT     >= 55%      ABSENT  < 52.5% with the interval      else UNDECIDED
+
+**The effect-size floor is doing the work, not the p-value.** At n=32,656 a 51%
+rate is p<0.001 and means nothing; a null here is a tight bound and is quotable
+as one.
+
+### WHAT A NULL WOULD MEAN, STATED BEFORE IT COULD BE CONVENIENT
+
+`interpretation.md` predicts, before this runs, that the corpus rewards ADDITION
+and not SUBSTITUTION. **A null here confirms my own prediction, which is the
+reason to be hardest on it.** The guard: a null must survive `K_full` disagreeing
+with `K_strip`. If the two instruments give different answers, the finding is
+about the instrument and neither is reported as an answer about the corpus.
+
+### UNCHANGED
+
+H3 and its pre-registered disagreement. The strata and the rule never to pool
+them. The MIXED n=386 conditional, still unrun. bge as a declared follow-up
+ceiling.
