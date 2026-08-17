@@ -91,10 +91,16 @@ class Rules:
     term_renorm: bool = False
     #: Sum over ALL token paths reaching a surface, not the canonical one.
     enumerate_paths: bool = False
+    #: Treat a hyphen FOLLOWED BY AN ALPHANUMERIC as intra-word, so
+    #: `self` + `-motivated` is one word. v3 unmasks 7 hand-listed English
+    #: contractions (`'s 't 'm 're 'll 've 'd`) and nothing else, so a hyphen is
+    #: terminal like `!` -- see the module docstring for why that is not merely
+    #: wrong but wrong DIFFERENTIALLY.
+    hyphen_intra: bool = False
 
     def is_v3(self):
         return (self.term_floor == 0.0 and not self.term_renorm
-                and not self.enumerate_paths)
+                and not self.enumerate_paths and not self.hyphen_intra)
 
     def label(self):
         if self.is_v3():
@@ -104,7 +110,46 @@ class Rules:
             bits.append("floor=%g%s" % (self.term_floor, "+renorm" if self.term_renorm else ""))
         if self.enumerate_paths:
             bits.append("paths")
+        if self.hyphen_intra:
+            bits.append("hyphen")
         return "v4[" + ",".join(bits) + "]"
+
+
+_HYPH = {}
+
+
+def hyphen_intra_ids(tok):
+    """Vocab ids that CONTINUE a word across a hyphen: `-motivated`, `-based`.
+
+    **DERIVED FROM THE VOCABULARY, NOT HAND-LISTED**, which is the point. v3's
+    intra-word set is 7 English contractions typed out by a person, so it covers
+    `don't` and nothing else -- not `self-motivated`, not French `l'`, not any
+    language nobody thought of. This is a predicate over the actual vocabulary,
+    so it is correct for whatever tokenizer it is handed.
+
+    **NO LEADING SPACE.** ` -motivated` starts a new word; `-motivated` continues
+    one. And the character after the hyphen must be alphanumeric, so `--` and a
+    bare `-` stay terminal: `listen--I` still cuts at the dashes, which is right.
+
+    Counted across the roster's tokenizers, and the spread is the defect:
+
+        mpt-7b, pythia-6.9b       50,254 vocab        0 such ids
+        Llama-3.1-8B, SmolLM3    128,000 vocab    ~1,747
+        Qwen2.5-7B               151,643 vocab     1,746
+
+    **So v3 measures the same English word differently depending on vocabulary
+    size** -- and vocabulary size tracks model recency, which tracks alignment
+    sophistication. A per-tokenizer inconsistency aligned with the treatment axis
+    is the `T`-as-mediator hazard again, one level down.
+    """
+    key = id(tok)
+    if key not in _HYPH:
+        import re
+        pat = re.compile(r"^-[A-Za-z0-9]")
+        ids = [i for i in range(tok.vocab_size)
+               if pat.match(tok.decode([i]) or "")]
+        _HYPH[key] = np.array(ids, dtype=np.int64)
+    return _HYPH[key]
 
 
 @torch.no_grad()
@@ -138,6 +183,14 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
         for (pref, mass, t1), row in zip(live, dist):
             surf = T.clean_surface(tok.decode(list(pref)).strip())
             b = T._boundary_for(surf, bmask, cjk, bcache, intra)
+            #: Applied AFTER v3's rule and only where v3 itself unmasks the
+            #: contractions -- an alphanumeric-final surface. `100` + `-5` and
+            #: `self` + `-motivated` continue; `listen` + `--` does not.
+            if rules.hyphen_intra and surf and surf[-1].isalnum():
+                hy = hyphen_intra_ids(tok)
+                if len(hy):
+                    b = b.copy()
+                    b[hy] = False
             bm = row[b]
             if rules.term_floor > 0.0:
                 keep = bm >= rules.term_floor
