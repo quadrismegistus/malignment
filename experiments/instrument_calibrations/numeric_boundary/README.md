@@ -224,3 +224,44 @@ carrying probability mass at a measured position. **This bounds how often the
 abstraction is asked to represent something it cannot; it does not measure how
 much any number moves.** That needs the store and is unrun. Quoting 6.62% as an
 error rate would be the exposure-for-damage substitution this campaign books.
+
+## QUALIFICATION FROM @dario [6434] — THE CJK DEFECT DOES NOT REACH THE SURFACES
+
+**This section corrects the reach of FINDING 2 above, which overstates it.**
+
+@dario measured the store rather than the tokenizer, and checked coverage FIRST
+so the result is a negative and not an absence:
+
+    surfaces in twp_words matching [，。！：、；？]        ZERO
+    CJK prompts in twp_words                              416
+    models with CJK word rows                             160
+    CJK word rows                                   9,143,461
+      meta-llama/Llama-3.1-8B   64,979   <- byte-level, one of my 84
+      Qwen/Qwen2.5-7B           51,245   <- byte-level, one of my 84
+      mistralai/Mistral-7B-v0.1 60,776   <- SentencePiece, one of my 49
+
+**The affected models have deep CJK coverage and produce no punctuation-bearing
+surfaces.** Top Llama-3.1-8B surfaces on a CJK prompt are clean words -- `手`
+`挣扎` `还是` `眼睛` `封信`.
+
+**So the mask defect is REAL and does not manifest in the word surfaces**, and my
+6.62% glued-token figure is further from damage than even the exposure caveat
+said. Neither @dario nor I know why; the untested candidate is that CJK
+segmentation runs off `data/dict/` rather than off the boundary mask, so a mask
+failure cannot produce a glued surface. **Nobody has read that path and I am not
+guessing at it here.**
+
+### WHERE THE DEFECT COULD STILL BITE, AND IT IS A TESTABLE PREDICTION
+
+The mask does not only split words -- **it feeds `term = row[b].sum()`.** A mask
+that marks nothing as a boundary for a CJK word sums over a near-empty mask, so
+boundary mass is under-counted and `p` is depressed without any surface looking
+wrong.
+
+@malign's path-aggregation null ruled OUT enumeration as the cause of the CJK
+`score_words`/`expand` gap, leaving *"the boundary term or the beam"* [6401]. This
+folder has now measured a boundary-term defect that is CJK-specific and
+all-or-nothing by tokenizer family. **@dario's test, which is the right one:
+does the `score_words`/`expand` CJK gap split 49/84 the same way?** If the
+SentencePiece models show no gap and the byte-level ones do, the boundary term is
+the cause. **Unrun; it needs weights.**
