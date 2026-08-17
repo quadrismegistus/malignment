@@ -253,6 +253,10 @@ def decoded_boundary_ids(tok):
 
 _NUMIDX = {}
 
+#: one-slot prompt-cache handoff, reset by `expand4` on entry. `False` means
+#: "tried and unavailable on this architecture", distinct from `None`.
+_PC4 = {"v": None}
+
 
 def numeric_intra_ids(tok):
     """Ids that should CONTINUE a word when the surface so far ends in a digit.
@@ -325,6 +329,8 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
     diverges from is the rule the store was written with.
     """
     rules = rules or Rules()
+    #: reset per prompt -- the cache is keyed to THIS prompt's tokens
+    _PC4["v"] = None
     #: **CORRECT THE STATIC MASK ONCE, BEFORE THE WALK.** `_boundary_for` derives
     #: every per-surface mask from this one, so fixing it here reaches the CJK
     #: dictionary branch and the intra-word branch without either knowing.
@@ -349,7 +355,30 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
                    else T.MAX_DEPTH):
         if not live:
             break
-        dist = T.next_dist(model, tok, pids, [p for p, _, _ in live], dev)
+        #: **THE PROMPT KV CACHE, WHICH v4 COULD NOT REACH AT ALL.** v3's
+        #: `expand` threads `cache`/`layers` into `next_dist`; expand4 was
+        #: written without them, so `MALIGN_TWP_PROMPT_CACHE=1` did nothing here
+        #: and every v4 run paid full price. Measured at 3.1x on v3.
+        #:
+        #: **STILL OFF BY DEFAULT, AND THE REASON IS NOT PERFORMANCE.** The
+        #: cached path is NOT bit-identical -- fp16 attention accumulates
+        #: differently against a cached K/V, and `puke` moves 0.001015 ->
+        #: 0.001002, ACROSS THETA. So a corpus built half-cached is two
+        #: instruments, which is the defect this whole module exists to avoid.
+        #:
+        #: For a FRESH v4 corpus the objection is weaker than for a v3 top-up --
+        #: there is no existing v4 cell to be inconsistent with -- but only if it
+        #: is ALL-OR-NOTHING and declared. `twp_cells_v4` should carry the choice
+        #: as a field before anyone enables it on a fleet.
+        if T.USE_PROMPT_CACHE and _PC4["v"] is None:
+            try:
+                _PC4["v"] = T.prompt_cache(model, pids, dev)
+            except Exception as e:                              # noqa: BLE001
+                _PC4["v"] = False
+                print("    [prompt-cache off: %s]" % str(e)[:60], flush=True)
+        _pc = _PC4["v"] or (None, None)
+        dist = T.next_dist(model, tok, pids, [p for p, _, _ in live], dev,
+                           cache=_pc[0], layers=_pc[1])
         nxt = []
         for (pref, mass, t1), row in zip(live, dist):
             surf = T.clean_surface(tok.decode(list(pref)).strip())
