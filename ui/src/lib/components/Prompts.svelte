@@ -235,6 +235,57 @@
 		return out;
 	});
 
+	//: ── THE INLINE SLOPEGRAPH.
+	//:
+	//: **SVG HERE RATHER THAN PLOTNINE, AND THE REASON IS THE DATA'S LOCATION.**
+	//: The 145 rows are already in the browser, so this needs no round trip; the
+	//: plotnine path exists for figures that must leave the app at 300 dpi. This
+	//: one is for looking, and the table beneath it holds the exact numbers, so
+	//: the drawing can be a SHAPE rather than a document.
+	//:
+	//: **IT IS NOT THE SAME OBJECT AS THE `prompt_slopes` FIGURE.** That one is a
+	//: MEDIAN ACROSS LINEAGES with bootstrap intervals; this is ONE PAIR, one
+	//: observation, no interval. Saying so on the panel, because two slopegraphs
+	//: of the same prompt that differ in what a line means is exactly the
+	//: confusion a reader cannot see.
+	//:
+	//: **THE SELECTION IS DECLARED.** Drawing 145 lines is an ink blot, so it
+	//: draws the largest movers by |delta| and says how many of how many. A
+	//: figure showing a subset without naming it is the defect this repo keeps
+	//: booking.
+	let showPlot = $state(true);
+	let plotN = $state(25);
+	let hoverW = $state<string | null>(null);
+
+	let plot = $derived.by(() => {
+		if (!pw || !pw.words.length) return null;
+		const picked = pw.words
+			.map((w) => ({ ...w, absdelta: Math.abs(w.delta) }))
+			.sort((a, b) => b.absdelta - a.absdelta)
+			.slice(0, plotN);
+		//: The scale spans BOTH arms of the drawn words, so a line cannot leave
+		//: the panel and the two columns share one axis. Zero is kept as the
+		//: floor rather than clipped: a word going to exactly 0 is the result.
+		const top = Math.max(...picked.flatMap((w) => [w.p_base, w.p_aligned]), 1e-9);
+		const H = 260, W = 560, padT = 14, padB = 26, padL = 54, padR = 96;
+		const y = (v: number) => padT + (1 - v / top) * (H - padT - padB);
+		const x0 = padL, x1 = W - padR;
+		//: Label collision is handled the same way the plotnine version does it:
+		//: push apart in DATA SPACE from the top, moving text and leaving points.
+		const ends = picked
+			.map((w) => ({ word: w.word, v: w.p_aligned, d: w.delta }))
+			.sort((a, b) => b.v - a.v);
+		const gap = 11;
+		let prev = -1e9;
+		const labels = ends.map((e) => {
+			let ly = y(e.v);
+			if (ly - prev < gap) ly = prev + gap;
+			prev = ly;
+			return { ...e, ly };
+		});
+		return { picked, top, H, W, x0, x1, y, labels };
+	});
+
 	const n = (v: unknown, d = 4) => (v == null ? '—' : Number(v).toFixed(d));
 	const short = (m: string) => m.split('/').pop() ?? m;
 </script>
@@ -357,6 +408,59 @@
 					)}</span
 				>
 			</div>
+			{#if plot}
+				<div class="plotbar">
+					<button class="ghost" onclick={() => (showPlot = !showPlot)}
+						>{showPlot ? 'hide' : 'show'} slopegraph</button
+					>
+					{#if showPlot}
+						<label class="nsel"
+							>largest
+							<select bind:value={plotN}>
+								{#each [10, 25, 50, 100] as k (k)}<option value={k}>{k}</option>{/each}
+							</select>
+							movers of {pw.n_words}</label
+						>
+						<span class="muted"
+							>one pair, one observation — not the median-across-lineages figure in Plots</span
+						>
+					{/if}
+				</div>
+			{/if}
+			{#if plot && showPlot}
+				<svg class="slope" viewBox="0 0 {plot.W} {plot.H}" role="img"
+					aria-label="slopegraph of the largest movers">
+					<line x1={plot.x0} y1={plot.y(0)} x2={plot.x1} y2={plot.y(0)} class="axis" />
+					<text x={plot.x0} y={plot.H - 8} class="ax">{short(pw.base)}</text>
+					<text x={plot.x1} y={plot.H - 8} class="ax" text-anchor="end">{short(pw.aligned)}</text>
+					<text x={plot.x0 - 6} y={plot.y(plot.top) + 4} class="ax" text-anchor="end"
+						>{plot.top.toFixed(3)}</text
+					>
+					<text x={plot.x0 - 6} y={plot.y(0) + 4} class="ax" text-anchor="end">0</text>
+					{#each plot.picked as w (w.word)}
+						<line
+							x1={plot.x0} y1={plot.y(w.p_base)} x2={plot.x1} y2={plot.y(w.p_aligned)}
+							class="sl" class:fell={w.delta < 0} class:rose={w.delta > 0}
+							class:dim={hoverW !== null && hoverW !== w.word}
+							class:hot={hoverW === w.word}
+							onmouseenter={() => (hoverW = w.word)}
+							onmouseleave={() => (hoverW = null)}
+							role="presentation"
+						/>
+					{/each}
+					{#each plot.labels as l (l.word)}
+						<text
+							x={plot.x1 + 6} y={l.ly + 3}
+							class="wl" class:fell={l.d < 0} class:rose={l.d > 0}
+							class:dim={hoverW !== null && hoverW !== l.word}
+							onmouseenter={() => (hoverW = l.word)}
+							onmouseleave={() => (hoverW = null)}
+							role="presentation">{l.word}</text
+						>
+					{/each}
+				</svg>
+			{/if}
+
 			<div class="tablewrap">
 				<table>
 					<thead>
@@ -507,6 +611,23 @@
 	.movers .rise { color: var(--blue-light); }
 	.movers .fall { color: var(--red, #c92a2a); }
 	.movers .w { font-family: var(--mono); margin-right: 12px; }
+	.plotbar { display: flex; gap: 14px; align-items: center; margin: 12px 0 4px; font-size: 11px; flex-wrap: wrap; }
+	.nsel select {
+		background: var(--panel); border: 1px solid var(--rule); border-radius: 3px;
+		color: var(--text); font-size: 11px; padding: 2px 4px; margin: 0 2px;
+	}
+	.slope { width: 100%; max-width: 900px; height: auto; display: block; margin-bottom: 10px; }
+	.slope .axis { stroke: var(--rule); stroke-width: 0.6; }
+	.slope .ax { fill: var(--text-2); font-size: 8px; font-family: var(--mono); }
+	.slope .sl { stroke-width: 1.1; opacity: 0.75; cursor: pointer; }
+	.slope .sl.fell { stroke: var(--red, #c92a2a); }
+	.slope .sl.rose { stroke: var(--blue-light); }
+	.slope .sl.dim { opacity: 0.12; }
+	.slope .sl.hot { stroke-width: 2.4; opacity: 1; }
+	.slope .wl { font-size: 8px; font-family: var(--mono); cursor: pointer; }
+	.slope .wl.fell { fill: var(--red, #c92a2a); }
+	.slope .wl.rose { fill: var(--blue-light); }
+	.slope .wl.dim { opacity: 0.25; }
 	.prog { margin: 14px 0; max-width: 520px; }
 	.track {
 		height: 4px; background: var(--panel); border: 1px solid var(--rule);
