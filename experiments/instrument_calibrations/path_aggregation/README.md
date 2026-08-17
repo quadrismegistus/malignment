@@ -95,7 +95,42 @@ keeps `USE_PROMPT_CACHE` off. **But it is an order of magnitude too small.** The
 observed gap for `一个` is 0.258126 against expand's implied 0.262666, rel
 1.8e-02. Batching contributes and does not explain.
 
-### the live candidate, NOT tested
+### CONFIRMED: `expand` CREDITS ONE SURFACE AT SEVERAL DEPTHS
+
+Instrumented `_account` to record every `(surf, t1, depth)` it credits:
+
+    surface  depths       expand total   first depth   inflation
+    一个       [1, 2]       0.0326187      0.0320549     1.02x
+    自己       [4, 5, 5]    0.0123311      0.0114837     1.07x
+    你        [2, 3, 3]    0.0063722      0.0057518     1.11x
+    我        [2, 3, 3]    0.0057578      0.0050940     1.13x
+    什么       [4, 5]       0.0029856      0.0025951     1.15x
+
+    zh   6 of 162 keys credited at more than one depth   (4%)
+    en   0 of 123                                        (0%)
+
+**Those totals ARE expand's stored values and those first-depth figures ARE
+`score_words`'s** -- the decomposition table above reproduces to the last digit.
+So the large disagreements are all this, and the residue is the 1.2e-03 batching
+effect.
+
+`_account` credits `words[(surf, t1)] += mass x term` for every live prefix at
+every depth, with `surf = clean_surface(decode(pref).strip())`. A deeper prefix
+whose extra tokens strip or clean away lands on the SAME surface and is credited
+again -- so the word is counted once for "emit it and stop" and again for "emit
+it, emit a token that cleans away, and stop". **The second term's boundary sum is
+taken AFTER a separator the first term already counted as the boundary.**
+
+English never triggers it because a continuation that cleans away is exactly what
+the whitespace rule already treats as a boundary. CJK triggers it because the
+dictionary rule decides boundaries by lookup, not by whitespace.
+
+**This is a v3 DEFECT in `expand`, not a rule question**, and `expand` wrote all
+984,857 stored cells. Inflation is bounded and small here (<=1.15x on 4% of zh
+keys, 0% of en) but it is unmeasured across the roster, and it inflates exactly
+the CJK cells -- 457 roster prompts are `zh`.
+
+### the candidate this replaced, now closed
 
 `expand` accumulates `words[(surf, t1)] += mass * term` at EVERY depth, with
 `surf = clean_surface(tok.decode(pref).strip())`. **If a deeper prefix strips
