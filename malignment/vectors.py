@@ -308,28 +308,50 @@ def score(prompt, seed, words=None, embedder=None):
 
 
 def rows(sql, **params):
-    """Query through clickhouse-connect. -> list of row tuples
+    """Read rows. JSON when there is nothing to bind, parameters when there is.
 
     **NEVER `ch.raw(... FORMAT TabSeparated)` FOR A STRING COLUMN.** TSV output is
     ESCAPED: a prompt comes back as `"He\\\\'d never seen ... \\\\nThey sprawled"`,
     with literal backslash-quote and backslash-n where the real string has an
     apostrophe and a newline. Feeding that back into `WHERE prompt = '...'` matches
-    NOTHING, and the loop then skips the prompt and reports success.
+    NOTHING, so the loop skips the prompt and reports success. Measured: 1,562 of
+    4,484 prompts (35%) carry a quote, newline or backslash, and every one was being
+    dropped silently.
 
-    That is not hypothetical: `embed_population` ran this way and got through 19
-    prompts only because those happened to contain no character TSV escapes. Every
-    prompt with a quote, backslash or newline was silently dropped -- in a literary
-    corpus, a large fraction. `ch.py`'s own `raw` docstring names this exact defect:
-    *"if you reach for this with FORMAT TSV and then split on tabs, you have
-    re-created defect (2)."*
+    **THE RIGHT TOOL WAS ALREADY IN `ch.py` AND I REACHED PAST IT** (RH: "use JSON
+    read instead of TSV"). `ch.query` is *"rows as dicts, via JSONEachRow. Types
+    survive; escaping is not your problem"*, and `ch.raw`'s own docstring says
+    *"prefer query -- if you reach for this with FORMAT TSV and then split on tabs,
+    you have re-created defect (2)."* Two docstrings, both read earlier today.
 
-    connect returns real python strings and takes real parameters, so neither the
-    escaping nor the quoting is ours to get wrong.
+    So the split, which is about which HALF of the escaping problem each side
+    solves:
+
+        no bound value   -> `ch.query`, JSON. Decodes strings correctly AND stays on
+                            the guarded path, where `ch._guard` still refuses a
+                            statement naming a foreign database.
+        a string goes IN -> clickhouse-connect parameters. JSON fixes reading a
+                            string OUT; it does nothing for interpolating one IN,
+                            and hand-quoting a prompt full of apostrophes is the
+                            other half of the same defect.
+
+    Returns dicts either way, so callers do not care which path ran.
     """
+    if not params:
+        #: Qualify FROM/JOIN targets for `ch.query`, which needs `db.table`, while
+        #: connect is already bound to the database and takes them bare. `{db}`
+        #: cannot be used for both: connect would read it as a parameter
+        #: placeholder. JOIN is in the pattern because `population_prompts` has
+        #: one and a chained `.replace(" FROM ...")` silently missed it.
+        import re as _re
+        return ch.query(_re.sub(
+            r"\b(FROM|JOIN)\s+(twp_words|prompts|slot_word_vec)\b",
+            lambda m: "%s %s.%s" % (m.group(1), ch.DB, m.group(2)), sql))
     cl = client()
     if cl is None:
         raise SystemExit("clickhouse-connect unavailable; see vectors.client()")
-    return cl.query(sql, parameters=params or None).result_rows
+    r = cl.query(sql, parameters=params)
+    return [dict(zip(r.column_names, row)) for row in r.result_rows]
 
 
 def ingest_stash(limit=0, verbose=True):
@@ -362,14 +384,14 @@ def ingest_stash(limit=0, verbose=True):
     create()
     #: ORDER BY, for the reason booked against `population_prompts`: an unordered
     #: DISTINCT means `--limit` selects a different population per invocation.
-    plist = [r[0] for r in rows(
+    plist = [r["prompt"] for r in rows(
         "SELECT DISTINCT prompt FROM twp_words ORDER BY prompt"
         + (" LIMIT %d" % limit if limit else ""))]
     if verbose:
         print("prompts to probe: %d" % len(plist), flush=True)
     hit = miss = skipped = 0
     for i, p in enumerate(plist, 1):
-        ws = [r[0] for r in rows(
+        ws = [r["word"] for r in rows(
             "SELECT DISTINCT word FROM twp_words WHERE prompt = {p:String} "
             "ORDER BY word", p=p)]
         if not ws:
@@ -455,7 +477,7 @@ def population_prompts(domains=None, sources=None):
     #: function. TSV output escapes strings, so prompts carrying a quote, backslash
     #: or newline came back mangled and matched nothing downstream. This query is
     #: where that entered the population run.
-    return [r[0] for r in rows(
+    return [r["prompt"] for r in rows(
         "SELECT DISTINCT w.prompt FROM twp_words w INNER JOIN prompts p "
         "ON p.prompt = w.prompt WHERE %s ORDER BY w.prompt" % " OR ".join(where),
         **par)]
@@ -490,7 +512,7 @@ def embed_population(domains=None, sources=None, limit=0, verbose=True):
     done = new = skipped = 0
     t0 = __import__("time").time()
     for i, pr in enumerate(prompts, 1):
-        words = [r[0] for r in rows(
+        words = [r["word"] for r in rows(
             "SELECT DISTINCT word FROM twp_words WHERE prompt = {p:String} "
             "ORDER BY word", p=pr)]
         if not words:
