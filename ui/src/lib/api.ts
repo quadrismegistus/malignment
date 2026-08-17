@@ -363,6 +363,18 @@ export const api = {
 	//: The rollup is a VIEW (`{db}.prompt_movement`) and the server caches it,
 	//: because it is a measured 14s over 400,267 cells. `computed_at` travels
 	//: so the panel can show when, rather than implying "now".
+	//: Read from lacan's committed calibration, not re-derived. `source: null`
+	//: means the file is absent -- "cannot tell you", which is NOT the same claim
+	//: as "none affected".
+	cjkBoundary: () =>
+		get<{
+			source: string | null;
+			affected: string[];
+			clean: string[];
+			n_affected: number;
+			n_clean: number;
+			note: string;
+		}>('/cjk_boundary'),
 	prompts: () =>
 		get<{
 			n: number;

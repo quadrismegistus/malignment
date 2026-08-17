@@ -302,6 +302,43 @@
 	//: The condition is EXACT, not a heuristic: a surface consisting only of
 	//: digits is affected, and nothing else is. No prompt-sniffing, so no false
 	//: positives and nothing to re-tune when v4 changes the rule.
+	//: ── CJK BOUNDARY: which ARMS carry the double-crediting defect.
+	//:
+	//: On 84 of 133 models `boundary_mask` never marks CJK punctuation, so on a
+	//: CJK prompt `expand` walks through `，` and credits a word at more than one
+	//: depth; `clean_surface` then strips the punctuation, so the SURFACE looks
+	//: correct and the probability behind it is double-counted (docket [6435]).
+	//:
+	//: **I concluded no fence was needed here and was wrong**, because I checked
+	//: the surfaces and the surfaces are the layer that had been cleaned.
+	//:
+	//: Marked per ARM rather than per prompt, because the split is a property of
+	//: the tokenizer family: 49 clean, 84 affected, 0 partial. A blanket warning
+	//: on CJK prompts would flag the clean 49 too, and a fence that fires where
+	//: nothing is wrong trains the reader past the ones that matter.
+	const CJK = /[\u4e00-\u9fff]/;
+	let cjkAffected = $state<Set<string>>(new Set());
+	let cjkSource = $state<string | null>(null);
+	let cjkKnown = $state(false);
+	api
+		.cjkBoundary()
+		.then((r) => {
+			cjkAffected = new Set(r.affected ?? []);
+			cjkSource = r.source;
+			//: The calibration answered. Absent file -> `source` null -> we do not
+			//: claim anything either way.
+			cjkKnown = !!r.source;
+		})
+		.catch(() => (cjkKnown = false));
+
+	let promptIsCJK = $derived(!!selected && CJK.test(selected));
+	let affectedArms = $derived.by(() => {
+		if (!promptIsCJK || !cjkKnown || !profile) return [];
+		return profile.endpoints
+			.flatMap((e) => [e.base, e.aligned])
+			.filter((m) => cjkAffected.has(m));
+	});
+
 	const NUMERIC = /^\d+$/;
 	let numericWords = $derived.by(() => {
 		const src = pw ? pw.words.map((w) => w.word) : [];
@@ -430,6 +467,24 @@
 					)}</span
 				>
 			</div>
+			{#if promptIsCJK && cjkKnown && (cjkAffected.has(pw.base) || cjkAffected.has(pw.aligned))}
+				<p class="fence">
+					<strong>CJK prompt, and
+						{cjkAffected.has(pw.base) && cjkAffected.has(pw.aligned)
+							? 'both arms'
+							: cjkAffected.has(pw.base)
+								? 'the base arm'
+								: 'the aligned arm'} does not mark CJK punctuation as a boundary.</strong>
+					So <code>expand</code> walks through <code>，</code> and credits a word at more than one
+					depth; <code>clean_surface</code> strips the punctuation, so the surfaces below look
+					correct and some probabilities behind them are double-counted. 84 of 133 models are
+					affected and 49 are not, so this is <strong>a reordering that differs by tokenizer
+						family</strong>. Magnitude is not established at roster scale — on one model and two
+					prompts it was 2–4% of keys carrying 17–33% of the mass, under 2% on the total, up to
+					1.43x on a single word, and exactly zero in English. See docket [6435], [6437];
+					classification from <code>{cjkSource}</code>.
+				</p>
+			{/if}
 			{#if numericWords.length}
 				<!--
 				  THE FENCE TRAVELS WITH THE NUMBERS, not in a caption someone
@@ -577,7 +632,15 @@
 				</div>
 			</div>
 
-			<h3>endpoints <span class="muted">{profile.endpoints.length} declared pairs measured here</span></h3>
+			<h3>
+				endpoints <span class="muted">{profile.endpoints.length} declared pairs measured here</span>
+				{#if promptIsCJK && cjkKnown && affectedArms.length}
+					<span class="muted warn"
+						>· {affectedArms.length} arm{affectedArms.length > 1 ? 's' : ''} marked
+						<code>cjk</code> do not mark CJK punctuation as a boundary</span
+					>
+				{/if}
+			</h3>
 			<div class="tablewrap">
 				<table>
 					<thead>
@@ -594,8 +657,20 @@
 					<tbody>
 						{#each epView as e (e.base + e.aligned)}
 							<tr class="click" onclick={() => openPair(e.base, e.aligned)}>
-								<td title={e.base}>{short(e.base)}</td>
-								<td title={e.aligned}>{short(e.aligned)}</td>
+								<td title={e.base}
+									>{short(e.base)}{#if promptIsCJK && cjkKnown && cjkAffected.has(e.base)}<span
+											class="cjkmark"
+											title="this arm does not mark CJK punctuation as a boundary, so some word probabilities on this CJK prompt are double-counted — docket [6435]"
+											>cjk</span
+										>{/if}</td
+								>
+								<td title={e.aligned}
+									>{short(e.aligned)}{#if promptIsCJK && cjkKnown && cjkAffected.has(e.aligned)}<span
+											class="cjkmark"
+											title="this arm does not mark CJK punctuation as a boundary, so some word probabilities on this CJK prompt are double-counted — docket [6435]"
+											>cjk</span
+										>{/if}</td
+								>
 								<td>{e.relation}</td>
 								<td class="num">{n(e.js_total)}</td>
 								<td class="num">{n(e.departed)}</td>
@@ -655,6 +730,11 @@
 		color: var(--text-2); max-width: 92ch;
 	}
 	.fence strong { color: var(--amber, #b8860b); }
+	.cjkmark {
+		margin-left: 5px; font-size: 9px; padding: 0 3px; border-radius: 2px;
+		border: 1px solid var(--amber, #b8860b); color: var(--amber, #b8860b);
+		font-family: var(--mono); cursor: help;
+	}
 	.fence code { font-family: var(--mono); }
 	.plotbar { display: flex; gap: 14px; align-items: center; margin: 12px 0 4px; font-size: 11px; flex-wrap: wrap; }
 	.nsel select {

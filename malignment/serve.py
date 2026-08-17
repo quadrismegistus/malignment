@@ -368,6 +368,56 @@ def _walk_experiments():
     return out
 
 
+#: ── WHICH MODELS MARK CJK PUNCTUATION AS A BOUNDARY.
+#:
+#: **READ FROM A COMMITTED CALIBRATION, NOT RE-DERIVED.**
+#: `numeric_boundary/results/cjk_boundary.csv` is lacan's, and it classifies
+#: every model that has CJK punctuation tokens by whether `boundary_mask` marks
+#: them: 49 do, 84 do not, 0 partial. `marked_boundary == 0` is the affected set.
+#:
+#: WHY THE APP NEEDS IT. On an affected model `，` is in NEITHER the static
+#: `PUNCT` lookup (byte-level BPE hands the mask `ï`, not `，`) NOR
+#: `cjk_vocab`'s ids, so it survives as a CONTINUATION and `expand` walks
+#: through it -- crediting `一个` at depth 1 and again at depth 2 via `一个，`,
+#: which `clean_surface` then strips back to `一个`. The stored SURFACE is clean
+#: and the probability behind it is double-counted (malign, [6435]).
+#:
+#: The shape is what makes this a panel problem rather than a footnote
+#: (malign, [6437], one model / two prompts, so a shape and not a roster
+#: magnitude): 2-4% of keys affected, those keys carrying 17-33% of all resolved
+#: mass because they are the TOP words, aggregate error under 2%, per-word
+#: inflation to 1.43x, and an English control of exactly zero. **A total barely
+#: moves; a ranking moves a lot, and only on some models.** This panel puts 50
+#: pairs side by side on one prompt, which is where a family-dependent
+#: reordering is displayed as a comparison.
+_CJK_MASK = {"at": 0.0, "affected": None, "clean": None, "source": None}
+
+
+def _cjk_mask_status():
+    now = _monotonic()
+    if _CJK_MASK["affected"] is None or now - _CJK_MASK["at"] > 900:
+        path = os.path.join(EXPERIMENTS, "instrument_calibrations",
+                            "numeric_boundary", "results", "cjk_boundary.csv")
+        affected, clean = [], []
+        if os.path.exists(path):
+            with open(path, newline="", encoding="utf-8") as fh:
+                for r in csv.DictReader(fh):
+                    if r.get("loaded") != "1":
+                        continue
+                    try:
+                        n = int(r.get("cjk_punct_tokens") or 0)
+                        marked = int(r.get("marked_boundary") or 0)
+                    except ValueError:
+                        continue
+                    if n <= 0:
+                        continue
+                    (clean if marked == n else affected).append(r["model"])
+        _CJK_MASK.update(at=now, affected=sorted(affected), clean=sorted(clean),
+                         source=os.path.relpath(path, ROOT)
+                         if os.path.exists(path) else None)
+    return _CJK_MASK
+
+
 #: ── PROMPTS: the frames, and how much each one moves.
 #:
 #: **THE ARITHMETIC IS IN `views.py`, NOT HERE.** `prompt_movement` and
@@ -1104,6 +1154,23 @@ class Handler(BaseHTTPRequestHandler):
                 #: reader checks the receipt rather than a summary of it.
                 "population": _read_json(os.path.join(d["_dir"], "population.json")),
             }
+        if path == "/cjk_boundary":
+            st = _cjk_mask_status()
+            return {"source": st["source"],
+                    #: **`null` SOURCE MEANS "CANNOT TELL YOU", NOT "NONE
+                    #: AFFECTED".** The client checks for the file's absence
+                    #: explicitly rather than reading an empty list as a clean
+                    #: bill of health -- the same distinction the stale-server
+                    #: badge makes.
+                    "affected": st["affected"], "clean": st["clean"],
+                    "n_affected": len(st["affected"] or []),
+                    "n_clean": len(st["clean"] or []),
+                    "note": "models whose boundary_mask does not mark CJK "
+                            "punctuation. On a CJK prompt, expand walks through "
+                            "it and credits a word at more than one depth; "
+                            "clean_surface strips the punctuation so the stored "
+                            "surface looks correct. Magnitude is unmeasured at "
+                            "roster scale: see docket [6435], [6437]."}
         if path == "/prompts":
             rows, computed = _prompt_rows()
             return {"n": len(rows), "computed_at": computed,
