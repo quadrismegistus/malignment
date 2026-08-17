@@ -173,6 +173,55 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
     return words, res, meta
 
 
+def leak_bound(pre, post, S, residual_pre, residual_post):
+    """What the UNRESOLVED mass could be doing to an axis statistic. -> dict
+
+    **A STANDING OBLIGATION THIS REPO DOES NOT MEET.** Finding N's registration:
+    *"The per-cell worst-case leak bound is a COMPANION COLUMN beside the
+    primary, reported for every cell — not a caveat sentence. It is the same
+    order as plausible effects."* The archive reports it per cell; `movement.py`
+    was ported without it (grep: no `leak`, no `dR_i`), so every `dN` in this
+    store is currently quoted with no aperture attached.
+
+    Theta gates FIRST TOKENS, so a cell resolves ~74-94% of its mass and the rest
+    is words we never saw. Those words have axis scores too. Two numbers, and
+    **they answer different questions, so both are returned and neither is "the"
+    bound**:
+
+        worst    RIGOROUS and adversarial: every unit of unresolved mass sits at
+                 the extreme pole AND moves entirely between arms.
+                 (residual_pre + residual_post) * max|s|.
+                 Nothing can exceed it. Measured median +/-0.0851 against
+                 measured |dN| of 0.0003..0.0945 -- i.e. WIDER THAN MOST
+                 EFFECTS, exactly as the registration warned.
+
+        matched  The tail is distributed like the HEAD: unresolved mass carries
+                 the same mean axis score as the mass we did resolve. A point
+                 correction, not an interval:
+                 residual_post * E_post[s] - residual_pre * E_pre[s].
+
+    **`matched` IS OPTIMISTIC IN A KNOWN DIRECTION AND MUST NOT BE QUOTED
+    ALONE.** dario measured the residual is NOT matched -- lexicon words vanish
+    below theta at 27.1% against 16.9% for controls, so it is ENRICHED in
+    exactly what an axis weighs. The truth sits between `matched` and `worst`,
+    nearer `matched`, and nobody has measured where.
+
+    The per-cell worst case swamps the per-cell effect. That does NOT sink the
+    aggregates -- `41/50 lineages`, `91% negative` are sign counts over
+    thousands of cells, and they survive if leak contributions are not
+    adversarially CORRELATED across cells. **That is an assumption, it is
+    testable, and it has not been tested.**
+    """
+    smax = max((abs(v) for v in S.values()), default=0.0)
+    tp, tq = sum(pre.values()), sum(post.values())
+    e_pre = sum(p * S.get(w, 0.0) for w, p in pre.items()) / tp if tp else 0.0
+    e_post = sum(p * S.get(w, 0.0) for w, p in post.items()) / tq if tq else 0.0
+    return {"worst": (residual_pre + residual_post) * smax,
+            "matched": residual_post * e_post - residual_pre * e_pre,
+            "residual_pre": residual_pre, "residual_post": residual_post,
+            "s_max": smax, "e_pre": e_pre, "e_post": e_post}
+
+
 def compare(model, tok, prompt, dev, bmask, cjk=None, rules=None, top=6):
     """v3 against v4 on ONE cell. Prints what moved; returns the deltas.
 
