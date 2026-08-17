@@ -114,3 +114,95 @@ just a smaller n or a thinner vocabulary.** Both-unsafe is 32,656 rows against
 mixed's 10,813 — the collapse, if it comes, arrives on the LARGER stratum, which
 is the harder direction to get by accident. Vocabulary size and `sign_mde` are
 reported per stratum so the reader can see it is not power.
+
+---
+
+## AMENDMENT A1 — 2026-08-17. H1's METHOD RESTED ON A FALSE PREMISE. NOTHING HAS RUN.
+
+**Amended before any fit, so this is a specification change and not a
+rationalisation.** The freeze held.
+
+### THE PREMISE WAS MEASURED FALSE
+
+H1's discriminating test assumed refusal is **excluded by construction** from the
+both-unsafe stratum, because both responses comply. RH asked why a refusal signal
+would work there at all — *"it leaked through?"* — and it has:
+
+    % of RESPONSES containing a refusal marker
+    BOTH-UNSAFE   20.4%      <- not excluded. HEDGED COMPLIANCE.
+    MIXED         31.7%
+    BOTH-SAFE     21.5%
+
+**One response in five labelled UNSAFE still says `cannot`, `illegal`,
+`shouldn't`, `don't`** — it supplies the method and disclaims it. I had asserted
+the exclusion from ONE example.
+
+**So the stratum-gap test is VOID.** A collapse would have meant nothing and a
+survival would have meant nothing; the condition it rested on does not hold.
+
+### THE REPLACEMENT: A HORSE RACE ON ONE STRATUM
+
+RH's H1 is better read as a claim about the SAME texts, not a contrast between
+strata: *even where the model complies, what makes one compliance safer is
+disclaimer language rather than gentler wording.* So refusal and mildness compete
+directly, on both-unsafe, where hedging operates without outright refusal to
+swamp it.
+
+    FEATURE SET A   refusal markers, PRE-DECLARED BELOW, counts only
+    FEATURE SET B   K-rating deltas, mass-weighted, per dimension
+
+    H1 SUPPORTED    AUC_match(safer | A) - AUC_match(safer | B) >= 0.05
+    H1 REFUTED      AUC_match(safer | B) - AUC_match(safer | A) >= 0.05
+    UNDECIDED       |difference| < 0.05, reported as such with sign_mde
+
+**The refusal lexicon is fixed here and its per-marker counts are reported**, so
+one word cannot carry it unseen:
+
+    cannot · can't · unable · should not · shouldn't · illegal · not advisable
+    not recommend · I'm sorry · do not · don't · unethical · against the law
+    seek professional · instead
+
+### K RATINGS: WHICH DIMENSIONS, AND WHY NOT THE OBVIOUS ONE
+
+`fields.k(word)` gives seven scales and **`fields.k_warnings()` returns the
+fences programmatically**, so a producer can refuse a dimension rather than rely
+on someone having read a docstring.
+
+**MILDNESS IS TWO THINGS AND ONLY ONE OF THEM IS MEASURABLE HERE.** Measured on
+known pairs:
+
+    same act, politer word   cock->penis    vulgarity +4  register_level -3
+                                            transgressiveness +1  bodily_harm 0
+    LESSER ACT               kill->scream   transgressiveness +5  bodily_harm +6
+                             stab->push                     +5              +6
+                             hit->push                      +1              +2
+
+    PRIMARY   transgressiveness  IAA 0.828   |  bodily_harm  IAA 0.879
+    REPORTED, NOT EVIDENCE
+              register_level     NOT ESTABLISHED, IAA 0.597, rank stability 0.62
+              vulgarity          SPARSE, variance on 463 of 27,242 words
+
+**M01's own `kill -> scream` is a LESSER ACT, not a politer word**, so the
+validated dimensions are the relevant ones and the broken one is not needed.
+
+**RANKS, NEVER ABSOLUTE VALUES.** The instrument's own `level_vs_rank` note:
+charge and concreteness shift in LEVEL between versions while holding ORDER
+(r 0.88). All K statistics are computed on within-pair rank differences.
+
+### SCOPE, PER RH
+
+**Word counts and K ratings only. bge embedding differences are a declared
+FOLLOW-UP and are not in this registration.** When they come, their use is as a
+CEILING for the lexical test — words ≈ embeddings means the signal is a word
+list; embeddings ≫ words measures how much of "safer" is contextual. They are not
+a second answer to the same question.
+
+**And bge has already failed our exact contrast once**: dario's pooled axis
+reaches r 0.740 of a 0.828 self-ceiling and yet MISORDERS `kill -> scream`,
+scoring `scream`, `yell`, `shout` above `die` and `cut`. A pooled validation
+licenses a pooled use, and PKU pairs are items.
+
+### UNCHANGED
+
+H3, its pre-registered disagreement, the strata definitions, the sign
+randomisation, and the arithmetic form of every rule.
