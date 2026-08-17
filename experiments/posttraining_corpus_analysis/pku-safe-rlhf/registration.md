@@ -516,3 +516,12 @@ new question with a line saying why. **The line: the registered statistic failed
 positive control, so a replacement is not a second try at the same test but the
 first valid attempt at it.** It gets its own registration, and it must declare the
 concentration rule and pass the same MIXED control BEFORE being fitted to `safer`.
+
+---
+
+## A6 — 2026-08-17. H3 and the MIXED conditional ran. `run.py --h3`, results in README.
+
+H3 NOT SUPPORTED: better minus safer, length-matched, -0.0694 against a +0.03
+threshold. CAUSE=LENGTH holds (words add -0.0847 over length alone), so RH's
+mechanism was right and the ordering was not. MIXED conditional: safer 63.0%,
+n=386, p=4.1e-07.

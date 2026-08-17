@@ -215,6 +215,7 @@ def main():
     ap.add_argument("--length", action="store_true")
     ap.add_argument("--coded", action="store_true")
     ap.add_argument("--findingb", action="store_true")
+    ap.add_argument("--h3", action="store_true")
     a = ap.parse_args()
     tr, te = load("train"), load("test")
     if a.coded:
@@ -222,6 +223,9 @@ def main():
         return
     if a.findingb:
         findingb(tr, te)
+        return
+    if a.h3:
+        h3(tr, te)
         return
     if a.check:
         check(tr)
@@ -342,6 +346,87 @@ def lengthcheck(tr):
     w = sum(1 for i, who, dd in sel if (tr["safer_response_id"][i] == who) == (dd > 0))
     print("length ALONE agrees with the safer verdict on %.1f%% of the %d pairs"
           % (100*w/len(sel), len(sel)))
+
+
+def h3(tr, te):
+    """H3, frozen in the registration: is `better` easier to detect lexically
+    than `safer`? RH says yes; I say no, and say that if RH is right it is
+    because `better` tracks length and fluency. Also runs A3's MIXED n=386
+    conditional, which was declared and never run."""
+    import numpy as np, scipy.sparse as sp
+    from sklearn.feature_extraction.text import CountVectorizer
+    from scipy import stats
+
+    def strata(d):
+        s0, s1 = d["is_response_0_safe"], d["is_response_1_safe"]
+        n = len(d["response_0"])
+        return {"ALL": list(range(n)),
+                "BOTH-UNSAFE": [i for i in range(n) if not s0[i] and not s1[i]],
+                "MIXED": [i for i in range(n) if s0[i] != s1[i]]}
+
+    Str, Ste = strata(tr), strata(te)
+    vec = CountVectorizer(min_df=20, lowercase=True, token_pattern=r"[a-z']+")
+    vec.fit(tr["response_0"] + tr["response_1"])
+    print("vocabulary: %d terms (min_df=20, fit on TRAIN only)" % len(vec.vocabulary_))
+
+    def mats(d, idx):
+        A = vec.transform([d["response_0"][i] for i in idx])
+        B = vec.transform([d["response_1"][i] for i in idx])
+        X = (A - B).tocsr()
+        L = np.asarray([[len(TOKEN.findall(d["response_0"][i].lower()))
+                         - len(TOKEN.findall(d["response_1"][i].lower()))] for i in idx],
+                       dtype=float)
+        return X, L
+
+    print("\n%-12s %-8s %8s %10s %10s %12s" %
+          ("stratum", "label", "n_test", "AUC_words", "AUC_len", "AUC_match"))
+    got = {}
+    for st in ("ALL", "BOTH-UNSAFE", "MIXED"):
+        Xtr, Ltr = mats(tr, Str[st]); Xte, Lte = mats(te, Ste[st])
+        ytr, s1 = randomise(len(Str[st]), SEED)
+        yte, s2 = randomise(len(Ste[st]), SEED + 1)
+        Xtr = Xtr.multiply(sp.csr_matrix(s1[:, None])).tocsr()
+        Xte = Xte.multiply(sp.csr_matrix(s2[:, None])).tocsr()
+        Ltr, Lte = Ltr * s1[:, None], Lte * s2[:, None]
+        ktr, kte = np.abs(Ltr[:, 0]) <= 5, np.abs(Lte[:, 0]) <= 5
+        for label, col in (("safer", "safer_response_id"), ("better", "better_response_id")):
+            ltr = np.asarray([tr[col][i] for i in Str[st]])
+            lte = np.asarray([te[col][i] for i in Ste[st]])
+            Ytr = np.where(s1 > 0, 1 - ltr, ltr); Yte = np.where(s2 > 0, 1 - lte, lte)
+            aw = auc(Xtr, Ytr, Xte, Yte)[0]
+            al = auc(Ltr, Ytr, Lte, Yte)[0]
+            am = (auc(Xtr[ktr], Ytr[ktr], Xte[kte], Yte[kte])[0]
+                  if kte.sum() >= 50 else float("nan"))
+            got[(st, label)] = (aw, al, am)
+            print("%-12s %-8s %8d %10.4f %10.4f %12.4f"
+                  % (st, label, len(Ste[st]), aw, al, am))
+
+    d3 = got[("ALL", "better")][2] - got[("ALL", "safer")][2]
+    dl = got[("ALL", "better")][2] - got[("ALL", "better")][1]
+    print("\nH3  AUC_match(better,ALL) - AUC_match(safer,ALL) = %+.4f  [threshold 0.03]" % d3)
+    print("    -> %s" % ("H3 SUPPORTED (RH)" if d3 >= 0.03 else
+                         "H3 NOT SUPPORTED (lacan)" if d3 <= -0.03 else "UNDECIDED"))
+    print("    words add %+.4f over length alone  [CAUSE=LENGTH if < 0.03]" % dl)
+    print("    -> %s" % ("CAUSE=LENGTH: better is legible because it is longer and tidier"
+                         if dl < 0.03 else "words carry it, not length"))
+
+    #: A3's MIXED conditional, declared and never run. Reported apart, never
+    #: pooled with the both-unsafe 550.
+    print("\n===== A3's MIXED conditional disclaimer test =====")
+    for name, d in (("train", tr), ("test", te)):
+        sel = []
+        for i in strata(d)[name and "MIXED"]:
+            a = len(E_ASSIST.findall(d["response_0"][i]))
+            b = len(E_ASSIST.findall(d["response_1"][i]))
+            if (a > 0) != (b > 0):
+                sel.append((i, 0 if a > b else 1))
+        for col, lab in (("safer_response_id", "safer"), ("better_response_id", "better")):
+            w = sum(1 for i, who in sel if d[col][i] == who)
+            if len(sel) < 30:
+                print("  %-6s %-7s n=%d UNPOWERED" % (name, lab, len(sel))); continue
+            r = stats.binomtest(w, len(sel), 0.5); lo, hi = r.proportion_ci()
+            print("  %-6s %-7s n=%-5d %.1f%%  [%.3f, %.3f]  p=%.3g"
+                  % (name, lab, len(sel), 100 * w / len(sel), lo, hi, r.pvalue))
 
 
 def strip_disclaimers(t):

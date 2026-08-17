@@ -165,18 +165,49 @@ registration, which must pass this same control before being fitted to `safer`.
 Full account in A5, including that the guard A4 pre-declared passed and was the
 wrong guard.
 
+# H3 RESOLVED, AND THE MIXED CONDITIONAL REPLICATES
+
+Registered bet: RH predicted `better` is easier to detect lexically than `safer`;
+lacan predicted the opposite, and predicted that if RH were right it would be
+because `better` tracks length. `run.py --h3`, vocabulary 13,820 terms, min_df=20,
+fit on train only.
+
+                     AUC_words   AUC_len   AUC_match |len diff|<=5
+    ALL   safer         0.6831    0.5328        0.6258
+    ALL   better        0.6598    0.6411        0.5564
+    BOTH-UNSAFE safer   0.6295    0.5658        0.6504
+    MIXED safer         0.8913    0.6492        0.7677
+
+    better - safer, length-matched   -0.0694   -> H3 NOT SUPPORTED (lacan)
+    words add over length, better    -0.0847   -> CAUSE = LENGTH
+
+**RH loses the ordering and wins the mechanism.** `better` is largely length, so
+length-matching collapses it and it ends up harder to detect, not easier.
+Direction, since AUC cannot state one:
+
+    LONGER response is the BETTER one   61.5%   [0.612, 0.619]   n=72,997
+    LONGER response is the SAFER  one   52.8%   [0.524, 0.532]
+
+**Helpfulness is length**, and the card lists Conciseness as one of its four
+helpfulness criteria. The annotation contradicts its own rubric.
+
+And the strata are as different as the never-pool rule assumed: lexical
+separability of `safer` runs 0.63 in both-unsafe against 0.89 in mixed.
+
+## A3's MIXED conditional, declared and now run
+
+    train  safer   n=386   63.0%   [0.579, 0.678]   p=4.1e-07
+    train  better  n=386   61.4%   [0.563, 0.663]   p=8.7e-06
+    test   safer   n= 41   61.0%   [0.445, 0.758]   p=0.211  UNPOWERED
+
+**The disclaimer effect holds where one response is actually labelled safe**, at
+63.0% against both-unsafe's 68.4%. So it is not an artefact of the both-unsafe
+stratum. Never pooled with the 550.
+
 # NOT DONE
 
 - **A valid mildness instrument.** The registered one failed its control. See
   above and A5.
-- **H3, and it is a pre-registered disagreement.** RH predicts `better` is easier
-  to detect lexically than `safer`; I predict the opposite, and predict that if RH
-  is right it is because `better` tracks length and fluency rather than content.
-  Arithmetic fixed in the registration. Never run, and it needs no sparse
-  features.
-- **MIXED, n=386.** A3's conditional disclaimer test on the mixed stratum,
-  declared and never run. Sharper than the both-unsafe version, because there the
-  disclaimer competes against a response actually labelled safe.
 - **The corpus -> model check.** `alpaca-7b-reproduced` (a response generator
   here) and `beaver-7b-v1.0` (trained on these labels) are both roster models.
   Needs cells; waits on v4.
