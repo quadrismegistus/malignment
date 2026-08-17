@@ -572,3 +572,16 @@ P_unnamed_axis: none of eighteen rated norms predicts movement direction.
 
 The corpus results stand as findings about an ANNOTATION REGIME, which is their
 proper object and a political-economy one.
+
+---
+
+## A10 — 2026-08-17. The "bundle" was overstated. Downgraded to a hypothesis.
+
+RH asked why I was so sure. Checks I had not run: the interaction test (real,
+Fisher p=0.0015, OR 3.10) and an ambiguity control. The gap survives the control,
+but decomposed it sits almost entirely in one 21-pair cell -- severity-EQUAL row
+gap 9.6pp with overlapping CIs and the come-apart cell at 58.1%, not chance.
+
+WITHDRAWN: "the entire effect is carried by the coincide cell" and "at chance when
+they conflict". STANDS: wording predicts safer 65.5% (severity-equal, n=113) /
+67.3% (all 300, n=214), and a real but unlocated interaction with specificity.

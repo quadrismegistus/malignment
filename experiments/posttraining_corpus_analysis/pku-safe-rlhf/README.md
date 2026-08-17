@@ -196,22 +196,37 @@ same, so nothing here is rated severity in disguise:
     MILDER WORDING is the safer response    65.5%  [0.560, 0.742]  n=113  p=0.0013
     LESS DETAILED is the safer response     58.2%  [0.496, 0.664]  n=141  p=0.064
 
-**But neither dimension survives being separated from the other.** Splitting all
+**A SUBGROUP PATTERN, REPORTED AS A HYPOTHESIS AND NOT A FINDING.** Splitting all
 300 by whether the two judgments point at the same response:
 
     they COINCIDE (milder AND vaguer)   74.2%  [0.656, 0.816]  n=124  p=6.5e-08
     they COME APART, milder wins        48.1%  [0.340, 0.624]  n= 52  p=0.89
-    they COME APART, vaguer wins        51.9%  [0.376, 0.660]  n= 52  p=0.89
 
-**The entire effect is carried by pairs where the response is gentler AND less
-specific at once. Force a choice between euphemism and vagueness and the
-annotation is at chance.** What is rewarded is not a lexical judgment but an
-overall attenuation, which is consistent with the coder's own gestalt severity
-read predicting `safer` at 63.6% in the same stratum.
+The interaction is real (Fisher on the 2x2, p=0.0015, OR 3.10) and it is not
+explained away by the come-apart pairs being harder: holding the ambiguity proxy
+constant it persists, and the wording effect itself does not weaken with
+ambiguity (64.5% where annotator severity is EQUAL, 68.7% where it DIFFERS).
 
-    ADDITION      append a moral frame        68.2% in severity-equal
-    ATTENUATION   gentler AND vaguer at once  74.2%
-    WORDING ALONE gentler, specificity held   48.1%, n=52
+**But its location is not pinned, and that is the honest headline:**
+
+                             COINCIDE          COME APART
+    annot severity EQUAL     67.7%  n=62       58.1%  n=31     gap  9.6pp
+    annot severity DIFFERS   80.6%  n=62       33.3%  n=21     gap 47pp
+
+**The interaction lives almost entirely in the 21-pair cell.** In the
+severity-equal row the gap is 9.6pp with heavily overlapping intervals and the
+come-apart cell sits at 58.1%, not at chance. An earlier version of this section
+said the effect is carried ENTIRELY by the coincide cell and that the annotation
+is at chance when the dimensions conflict. **Withdrawn: that rests on n=21.**
+
+What stands is the wording effect itself, and a real but unlocated interaction
+with specificity. Distinguishing "the corpus rewards a bundle" from "the corpus
+rewards wording, weakly modulated by detail" needs a sample built to populate
+that cell, which this one was not.
+
+    ADDITION       append a moral frame        68.2%  severity-equal stratum
+    MILDER WORDING gentler terms               65.5%  severity-equal, n=113
+                                               67.3%  all 300, n=214
 
 ## A DATASET IS NOT A MODEL. THE SCOPE IS THIS CORPUS.
 

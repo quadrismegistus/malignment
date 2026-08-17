@@ -170,13 +170,17 @@ shows those come apart by construction.
 
 A statement about this corpus's annotation, and nothing past it:
 
-    ADDITION      append a moral frame           68.2%   severity-equal
-    ATTENUATION   gentler AND vaguer at once     74.2%   n=124
-    WORDING ALONE gentler, specificity held      48.1%   n= 52, chance
+    ADDITION       append a moral frame        68.2%   severity-equal stratum
+    MILDER WORDING gentler terms                65.5%   severity-equal, n=113
+                                                67.3%   all 300, n=214
 
-**PKU's `safer` label responds to bundled attenuation and to an appended moral
-frame, and has no detectable view on vocabulary once specificity is held
-constant.** That is a finding about one annotation process. Whether anything
+**PKU's `safer` label responds to an appended moral frame and to gentler
+wording.** A subgroup split suggested the wording effect is really a BUNDLE with
+specificity -- 74.2% where the two coincide, 48.1% where they conflict, real
+interaction at p=0.0015 -- **but that interaction sits almost entirely in a
+21-pair cell, and in the matched comparison the gap is 9.6pp with overlapping
+intervals. Reported as a hypothesis, not a finding.** An earlier version of this
+file stated it as established; withdrawn. That is a finding about one annotation process. Whether anything
 resembling it shaped any model is a separate question with its own requirements.
 
 **The additive and substitutive vocabulary is still useful for describing the two
