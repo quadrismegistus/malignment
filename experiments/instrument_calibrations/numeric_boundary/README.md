@@ -74,7 +74,61 @@ the salaries.** So a gender or class contrast computed on cut surfaces can
 reverse in sign. That is a property of the cut, provable rather than measured,
 and it is what decides whether `salary_probe`'s G and C mean anything.
 
-## WHAT STAGE 1 DOES **NOT** ANSWER — the CJK arm
+# FINDING 2 — the CJK arm: the RIGHT SET consulted with the WRONG KEY
+
+**And it needed no weights after all.** My first note here said the CJK arm needs
+`boundary_mask`, which takes the model's vocab size, so it needs a load. Wrong on
+the consequence: `boundary_mask(tok, n)` needs a tokenizer and an **integer**, and
+the predicate it applies to each id is four lines that can be asked of the eight
+tokens actually present. **Stage 2 is free too, and I said it was not.**
+
+    133 models carry CJK punctuation tokens
+     49  ALL marks correctly boundary        SentencePiece family
+     84  NONE marked boundary                byte-level BPE -- 63%
+      0  PARTIAL
+     24  have a token GLUING punctuation to the following word
+
+## `，` IS IN `PUNCT`. THE SET IS NOT THE PROBLEM.
+
+`PUNCT` is a 47-member set and it contains `，。！：、；？` -- every mark tested.
+**So the diagnosis at [6420], that full-width marks "are NOT boundaries", is right
+about the effect and wrong about the cause**, and the difference decides the fix.
+
+`boundary_mask` tests `s[0]` of the token **as the tokenizer represents it**, and a
+byte-level BPE represents `，` as `ï¼Į`:
+
+    Llama-3.1-8B   raw 'ï¼ĮåĽłä¸º'   decoded '，因为'   boundary FALSE
+    Qwen2.5-7B     raw 'ï¼Į'         decoded '，'       boundary FALSE
+    Mistral-7B     raw '，'           decoded '，'       boundary TRUE
+
+**The correct set, consulted with the wrong key.** Adding members would change
+nothing; the lookup never sees a CJK character at all.
+
+**ZERO PARTIAL IS THE CONFIRMATION.** Not one model gets some marks right and
+others wrong. It is all-or-nothing per model, which is the signature of a
+tokenizer-family property rather than a per-token accident — and it means the
+49 that pass are not lucky, they are SentencePiece.
+
+## THE TWO ARMS NEED DIFFERENT REPAIRS, WHICH IS THE OPPOSITE OF WHAT WAS EXPECTED
+
+@malign held the implementation until this was measured, on the reasoning that
+*"a lookahead built for the numeric case alone would be the second incompatible
+patch on one classifier."* Right to hold, and the measurement says the arms
+diverge:
+
+    numeric  the separator IS its own token, and the rule needs to see the
+             NEXT token                              -> LOOKAHEAD
+    CJK      the separator is its own token too, and the rule needs to decode
+             it before testing                       -> DECODE BEFORE THE LOOKUP
+    glued    `，因为` is punctuation AND a word in one token, on 24 models
+             -> NEITHER REPAIR REACHES IT. No boundary FLAG can represent a
+                token that both ends a sentence and begins the next word.
+
+**So they are one question and not one patch.** A context-reading boundary rule
+is still the right shape, and it has to do two different things at two different
+points, with a residual on 24 models that neither addresses.
+
+## WHAT STAGE 1 DOES **NOT** ANSWER — superseded, see FINDING 2
 
 `cjk_comma` and `cjk_stop` columns are in `results/` and **they do not answer the
 CJK question.** Full-width `，` `。` are not in the intra set and should not be --

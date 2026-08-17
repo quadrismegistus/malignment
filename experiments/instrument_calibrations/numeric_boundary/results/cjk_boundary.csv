@@ -1,0 +1,185 @@
+model,loaded,reason,cjk_punct_tokens,marked_boundary,wrong_key,glued_to_word
+01-ai/Yi-1.5-9B,1,,4,4,0,0
+01-ai/Yi-1.5-9B-Chat,1,,4,4,0,0
+Alchan/mpt-7b-chat,1,,4,0,4,0
+Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf,1,,0,0,0,0
+Aleph-Alpha/Pharia-1-LLM-7B-control-hf,1,,0,0,0,0
+BAAI/Aquila2-7B,1,,4,0,4,2
+BAAI/AquilaChat2-7B,1,,4,0,4,0
+BSC-LT/salamandra-7b,1,,1,1,0,0
+BSC-LT/salamandra-7b-instruct,1,,1,1,0,0
+ContextualAI/archangel_sft-dpo_pythia2-8b,1,,4,0,4,0
+ContextualAI/archangel_sft-kto_pythia2-8b,1,,4,0,4,0
+ContextualAI/archangel_sft-ppo_pythia2-8b,1,,4,0,4,0
+ContextualAI/archangel_sft-slic_pythia2-8b,1,,4,0,4,0
+ContextualAI/archangel_sft_pythia2-8b,1,,4,0,4,0
+EleutherAI/pythia-2.8b,1,,4,0,4,0
+EleutherAI/pythia-6.9b,1,,4,0,4,0
+HuggingFaceH4/mistral-7b-sft-beta,1,,4,4,0,0
+HuggingFaceH4/zephyr-7b-beta,1,,4,4,0,0
+HuggingFaceTB/SmolLM2-360M,1,,3,0,3,0
+HuggingFaceTB/SmolLM2-360M-Instruct,1,,3,0,3,0
+HuggingFaceTB/SmolLM3-3B,1,,4,0,4,2
+HuggingFaceTB/SmolLM3-3B-Base,1,,4,0,4,2
+HuggingFaceTB/SmolLM3-3B-checkpoints,0,"ValueError: Couldn't instantiate the backend tokenizer from one of: 
+(1) a `tokenizers` libr",,,,
+HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO,1,,4,0,4,2
+LLM360/Amber,1,,4,4,0,0
+LLM360/AmberChat,1,,4,4,0,0
+LLM360/AmberSafe,1,,4,4,0,0
+NousResearch/Hermes-3-Llama-3.1-8B,1,,4,0,4,2
+NousResearch/Nous-Hermes-2-Mistral-7B-DPO,1,,4,4,0,0
+OpenLLM-France/Lucie-7B,1,,4,4,0,0
+OpenLLM-France/Lucie-7B-Instruct-v1.1,1,,4,4,0,0
+PKU-Alignment/alpaca-7b-reproduced,1,,4,4,0,0
+PKU-Alignment/beaver-7b-v1.0,1,,4,4,0,0
+Qwen/Qwen2.5-0.5B,1,,4,0,4,0
+Qwen/Qwen2.5-0.5B-Instruct,1,,4,0,4,0
+Qwen/Qwen2.5-7B,1,,4,0,4,0
+Qwen/Qwen2.5-7B-Instruct,1,,4,0,4,0
+Qwen/Qwen3-8B,1,,4,0,4,0
+Qwen/Qwen3-8B-Base,1,,4,0,4,0
+RWKV/rwkv-4-7b-pile,1,,4,0,4,0
+RWKV/rwkv-raven-7b,1,,4,0,4,0
+TinyLlama/TinyLlama-1.1B-Chat-v1.0,1,,4,4,0,0
+TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T,1,,4,4,0,0
+Zyphra/Zamba2-7B,1,,4,4,0,0
+Zyphra/Zamba2-7B-Instruct,1,,4,4,0,0
+allenai/Llama-3.1-Tulu-3-8B-DPO,1,,4,0,4,2
+allenai/Llama-3.1-Tulu-3-8B-SFT,1,,4,0,4,2
+allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data,1,,4,0,4,2
+allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data,1,,4,0,4,2
+allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data,1,,4,0,4,2
+allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data,1,,4,0,4,2
+allenai/Llama-3.1-Tulu-3.1-8B,1,,4,0,4,2
+allenai/OLMo-2-0425-1B,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/OLMo-2-0425-1B-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/OLMo-2-0425-1B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/OLMo-2-0425-1B-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/OLMoE-1B-7B-0125,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/OLMoE-1B-7B-0125-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/OLMoE-1B-7B-0125-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/OLMoE-1B-7B-0125-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3-1025-7B,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3-1125-32B,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3-7B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3-7B-Instruct-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3-7B-Instruct-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3-7B-Think,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3-7B-Think-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3-7B-Think-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3.1-32B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3.1-32B-Instruct-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-3.1-32B-Instruct-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field 'tie_word",,,,
+allenai/Olmo-Hybrid-7B,1,,4,0,4,0
+allenai/Olmo-Hybrid-Instruct-DPO-7B,1,,4,0,4,0
+allenai/Olmo-Hybrid-Instruct-SFT-7B,1,,4,0,4,0
+baichuan-inc/Baichuan2-7B-Base,1,,4,4,0,0
+baichuan-inc/Baichuan2-7B-Chat,1,,4,4,0,0
+bigscience/bloom-7b1,1,,4,0,4,0
+bigscience/bloomz-7b1,1,,4,0,4,0
+cognitivecomputations/Dolphin3.0-Llama3.1-8B,1,,4,0,4,2
+cognitivecomputations/dolphin-2.6-mistral-7b-dpo,1,,4,4,0,0
+croissantllm/CroissantLLMBase,1,,1,1,0,0
+croissantllm/CroissantLLMChat-v0.1,1,,1,1,0,0
+deepseek-ai/DeepSeek-R1-Distill-Llama-8B,1,,0,0,0,0
+deepseek-ai/DeepSeek-R1-Distill-Qwen-7B,1,,4,0,4,0
+deepseek-ai/deepseek-llm-7b-base,1,,4,0,4,0
+deepseek-ai/deepseek-llm-7b-chat,1,,4,0,4,0
+gl198976/mpt-7b,1,,4,0,4,0
+gl198976/mpt-7b-instruct,1,,4,0,4,0
+google/gemma-2-9b,1,,4,4,0,0
+google/gemma-2-9b-it,1,,4,4,0,0
+google/recurrentgemma-9b,1,,4,4,0,0
+google/recurrentgemma-9b-it,1,,4,4,0,0
+huggyllama/llama-7b,1,,4,4,0,0
+ibm-granite/granite-3.0-8b-base,1,,4,0,4,0
+ibm-granite/granite-3.0-8b-instruct,1,,4,0,4,0
+inceptionai/jais-family-6p7b,1,,4,0,4,0
+inceptionai/jais-family-6p7b-chat,1,,4,0,4,0
+internlm/internlm2-base-7b,1,,4,4,0,0
+internlm/internlm2-chat-7b,1,,4,4,0,0
+internlm/internlm2-chat-7b-sft,1,,4,4,0,0
+kakaocorp/kanana-1.5-8b-base,1,,4,0,4,2
+kakaocorp/kanana-1.5-8b-instruct-2505,1,,4,0,4,2
+kakaocorp/kanana-2-3b-base,1,,4,0,4,1
+kakaocorp/kanana-2-3b-instruct,1,,4,0,4,1
+llm-jp/llm-jp-3-7.2b,1,,4,4,0,0
+llm-jp/llm-jp-3-7.2b-instruct2,1,,4,4,0,0
+llm-jp/llm-jp-3-7.2b-instruct3,1,,4,4,0,0
+lomahony/eleuther-pythia6.9b-hh-dpo,1,,4,0,4,0
+lomahony/eleuther-pythia6.9b-hh-sft,1,,4,0,4,0
+m-a-p/CT-LLM-Base,1,,4,4,0,0
+m-a-p/CT-LLM-SFT,1,,4,4,0,0
+m-a-p/CT-LLM-SFT-DPO,1,,4,4,0,0
+m-a-p/neo_7b,1,,4,4,0,0
+m-a-p/neo_7b_instruct_v0.1,1,,4,4,0,0
+m-a-p/neo_7b_sft_v0.1,1,,4,4,0,0
+meta-llama/Llama-3.1-70B,1,,4,0,4,2
+meta-llama/Llama-3.1-70B-Instruct,1,,4,0,4,2
+meta-llama/Llama-3.1-8B,1,,4,0,4,2
+meta-llama/Llama-3.1-8B-Instruct,1,,4,0,4,2
+microsoft/Phi-4-reasoning-plus,1,,4,0,4,0
+microsoft/phi-4,1,,4,0,4,0
+microsoft/phi-4-reasoning,1,,4,0,4,0
+mistralai/Mistral-7B-Instruct-v0.1,1,,4,4,0,0
+mistralai/Mistral-7B-v0.1,1,,4,4,0,0
+openGPT-X/Teuken-7B-base-v0.6,1,,1,1,0,0
+openGPT-X/Teuken-7B-instruct-commercial-v0.4,1,,1,1,0,0
+openGPT-X/Teuken-7B-instruct-v0.6,1,,1,1,0,0
+openbmb/MiniCPM5-1B,1,,4,0,4,2
+openbmb/MiniCPM5-1B-Base,1,,4,0,4,2
+openbmb/MiniCPM5-1B-SFT,1,,4,0,4,2
+openchat/openchat-3.5-0106,1,,4,4,0,0
+stabilityai/stablelm-2-1_6b,1,,4,0,4,0
+stabilityai/stablelm-2-1_6b-chat,1,,4,0,4,0
+stabilityai/stablelm-2-zephyr-1_6b,1,,4,0,4,0
+team-hatakeyama-phase2/Tanuki-8B-base-v1.0,1,,1,1,0,0
+teknium/OpenHermes-2.5-Mistral-7B,1,,4,4,0,0
+tiiuae/Falcon-H1-1.5B-Base,0,"StrictDataclassFieldValidationError: Validation error for field 'use_cache':
+    TypeError: Field 'use_cache' with va",,,,
+tiiuae/Falcon-H1-1.5B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'use_cache':
+    TypeError: Field 'use_cache' with va",,,,
+tiiuae/Falcon-H1-7B-Base,0,"StrictDataclassFieldValidationError: Validation error for field 'use_cache':
+    TypeError: Field 'use_cache' with va",,,,
+tiiuae/Falcon-H1-7B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'use_cache':
+    TypeError: Field 'use_cache' with va",,,,
+tiiuae/Falcon3-10B-Base,1,,1,0,1,0
+tiiuae/Falcon3-10B-Instruct,1,,1,0,1,0
+tiiuae/Falcon3-1B-Base,1,,1,0,1,0
+tiiuae/Falcon3-1B-Instruct,1,,1,0,1,0
+tiiuae/Falcon3-3B-Base,1,,1,0,1,0
+tiiuae/Falcon3-3B-Instruct,1,,1,0,1,0
+tiiuae/Falcon3-7B-Base,1,,1,0,1,0
+tiiuae/Falcon3-7B-Instruct,1,,1,0,1,0
+tiiuae/Falcon3-Mamba-7B-Base,1,,1,0,1,0
+tiiuae/Falcon3-Mamba-7B-Instruct,1,,1,0,1,0
+tiiuae/falcon-7b,1,,1,0,1,0
+tiiuae/falcon-7b-instruct,1,,1,0,1,0
+tiiuae/falcon-mamba-7b,1,,1,0,1,0
+tiiuae/falcon-mamba-7b-instruct,1,,1,0,1,0
+togethercomputer/RedPajama-INCITE-7B-Chat,1,,4,0,4,0
+togethercomputer/RedPajama-INCITE-7B-Instruct,1,,4,0,4,0
+togethercomputer/RedPajama-INCITE-Base-7B-v0.1,1,,4,0,4,0
+weblab-GENIAC/Tanuki-8B-dpo-v1.0,1,,1,1,0,0
+zai-org/glm-4-9b-chat-hf,1,,4,0,4,0
+zai-org/glm-4-9b-hf,1,,4,0,4,0

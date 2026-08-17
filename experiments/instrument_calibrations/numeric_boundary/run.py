@@ -69,6 +69,76 @@ def probe(tok, sep, surface):
     return sep_alone, intra, " | ".join(repr(p) for p in hits[:3])
 
 
+CJK_TEXT = "他很高兴，因为下雨了。她说：这很好！"
+CJK_MARKS = "，。！：、；？"
+
+
+def _is_boundary(raw):
+    """`boundary_mask`'s test, reproduced so this stage needs no vocab size.
+
+    Copied deliberately rather than imported: `boundary_mask` allocates an array
+    of n and walks every id, which needs the MODEL's vocab size and is 150k
+    iterations to answer a question about 8 tokens. This asks the same predicate
+    of the tokens actually present. If the two ever disagree that is a defect in
+    this file, and the predicate is four lines so it can be diffed by eye.
+    """
+    from malignment import twp
+    if raw is None:
+        return True
+    if raw.startswith(("\u0120", "\u2581", " ")):
+        return True
+    if raw and (raw[0] in twp.PUNCT or raw.strip() == ""):
+        return True
+    return raw.startswith("<") and raw.endswith(">")
+
+
+def stage_mask(limit=None):
+    """The CJK arm: is the RAW token string the wrong key for PUNCT?
+
+    **`，` and `。` ARE in PUNCT.** The set is correct and the failure is not a
+    missing member -- it is that `boundary_mask` tests `s[0]` of the token as the
+    tokenizer REPRESENTS it, and a byte-level BPE represents `，` as the mojibake
+    `ï¼Į`, whose first character is `ï`. The right set, the wrong key.
+    """
+    from malignment import roster, twp
+    models = sorted(roster.population("all"))
+    if limit:
+        models = models[:limit]
+    if MODELS_FROM:
+        want = set(l.strip() for l in open(MODELS_FROM) if l.strip())
+        models = [m for m in models if m in want]
+    rows = []
+    for i, mid in enumerate(models, 1):
+        try:
+            tok, _ = twp.load_tokenizer(mid)
+        except Exception as e:
+            rows.append({"model": mid, "loaded": 0,
+                         "reason": type(e).__name__ + ": " + str(e)[:80]})
+            continue
+        tot = correct = glued = wrongkey = 0
+        for tid in tok.encode(CJK_TEXT, add_special_tokens=False):
+            raw = tok.convert_ids_to_tokens(tid)
+            dec = tok.decode([tid])
+            if not any(m in dec for m in CJK_MARKS):
+                continue
+            tot += 1
+            if _is_boundary(raw):
+                correct += 1
+            if raw and raw[0] not in twp.PUNCT:
+                wrongkey += 1
+            #: punctuation and a word in ONE token -- no boundary FLAG can
+            #: represent this, whichever way it is set.
+            if len(dec.strip()) > 1:
+                glued += 1
+        rows.append({"model": mid, "loaded": 1, "reason": "",
+                     "cjk_punct_tokens": tot, "marked_boundary": correct,
+                     "wrong_key": wrongkey, "glued_to_word": glued})
+        del tok
+        if i % 20 == 0:
+            print("  %d/%d" % (i, len(models)), file=sys.stderr)
+    return rows, sum(1 for r in rows if not r.get("loaded"))
+
+
 def stage_tokenizers(limit=None):
     from malignment import roster, twp
     #: sorted() because population() returns a SET -- iteration order would be
@@ -113,7 +183,7 @@ def stage_tokenizers(limit=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="tokenizers", choices=["tokenizers"])
+    ap.add_argument("--stage", default="tokenizers", choices=["tokenizers", "mask"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--models-from", default=None,
                     help="file of model ids, one per line -- for the tf457 cohort")
@@ -122,6 +192,27 @@ def main():
     global MODELS_FROM
     MODELS_FROM = a.models_from
     os.makedirs(RESULTS, exist_ok=True)
+    if a.stage == "mask":
+        rows, failed = stage_mask(a.limit)
+        cols = ["model","loaded","reason","cjk_punct_tokens","marked_boundary",
+                "wrong_key","glued_to_word"]
+        path = os.path.join(RESULTS, a.out if a.out != "by_tokenizer.csv"
+                            else "cjk_boundary.csv")
+        with open(path, "w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+            w.writeheader()
+            for r in rows:
+                w.writerow(r)
+        ok = [r for r in rows if r.get("loaded") == 1 and r.get("cjk_punct_tokens")]
+        allc = [r for r in ok if r["marked_boundary"] == r["cjk_punct_tokens"]]
+        none = [r for r in ok if r["marked_boundary"] == 0]
+        print("\nCJK arm: %d models carry CJK punctuation tokens" % len(ok))
+        print("  ALL marks boundary  %d" % len(allc))
+        print("  NONE marked         %d   <- the defect" % len(none))
+        print("  partial             %d" % (len(ok)-len(allc)-len(none)))
+        print("  glued punct+word    %d" % sum(1 for r in ok if r["glued_to_word"]))
+        print("\n  ->", path)
+        return
     rows, failed = stage_tokenizers(a.limit)
 
     cols = ["model", "loaded", "reason"]
