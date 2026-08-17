@@ -140,6 +140,15 @@ def build(rows, meta, stat):
 
 
 def draw(lev, pairs, meta, stat, out_path, rung_labels):
+    #: **`Agg` BEFORE PLOTNINE IMPORTS ANYTHING.** plotnine draws through
+    #: matplotlib, whose default backend on macOS is the GUI one, and a GUI
+    #: FigureManager cannot be created off the main thread: called from the
+    #: app's threaded HTTP server this raises rather than drawing. Setting it
+    #: here rather than at module import keeps the CLI's startup cheap, and it
+    #: must precede the plotnine import because the backend is fixed at first
+    #: use. The archive's script did the same thing for the same reason.
+    import matplotlib
+    matplotlib.use("Agg")
     from plotnine import (ggplot, aes, geom_segment, geom_point, geom_errorbar,
                           geom_text, labs, scale_x_continuous, theme_minimal,
                           theme, element_text, scale_color_manual)
@@ -237,6 +246,77 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels):
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     p.save(out_path, dpi=300, verbose=False)
     return out_path
+
+
+#: ── THE PRODUCER DECLARES ITSELF, AND THE APP READS THE DECLARATION.
+#:
+#: The alternative is a registry of plot types inside `serve.py`, which is a
+#: second definition of what this producer accepts and drifts from it the first
+#: time a parameter changes. The experiment declares; the app reads. Same shape
+#: as the register itself.
+#:
+#: **`prompt` IS TYPE `prompt`, NOT `text`, AND THAT IS A SECURITY BOUNDARY
+#: RATHER THAN A UI HINT.** `serve.py`'s rule is that nothing a client sends
+#: reaches SQL, and a prompt goes straight into a ClickHouse query. The server
+#: validates it by MEMBERSHIP in the set of prompts the store actually holds,
+#: which is the same move as `/slot`'s pair dropdown -- and it is better anyway,
+#: because a prompt with no cells can only ever produce an empty figure.
+PLOT = {
+    "id": "prompt_slopes",
+    "name": "prompt slopes",
+    "blurb": "One prompt, every lineage: what the models put at the blank, "
+             "before and after. Levels, not derived statistics.",
+    "params": [
+        {"name": "prompt", "type": "prompt", "required": True,
+         "label": "prompt",
+         "help": "must be a prompt the store holds; type to search"},
+        {"name": "units", "type": "choice", "default": "endpoints",
+         "choices": ["endpoints", "chains"], "label": "units",
+         "help": "endpoints = 50 declared pairs (2 rungs); "
+                 "chains = 18 lineages at base, sft, pref (3 rungs)"},
+        {"name": "top", "type": "int", "default": 12, "min": 3, "max": 30,
+         "label": "top N words",
+         "help": "declared rule: top N by mass at the base rung, blind to movement"},
+        {"name": "stat", "type": "choice", "default": "median",
+         "choices": ["median", "mean"], "label": "central tendency",
+         "help": "median by default: probabilities are heavy-tailed across "
+                 "families and a mean can be one family's obsession"},
+        {"name": "words", "type": "text", "default": "", "label": "words",
+         "help": "optional comma-separated list; LABELLED as curated, because "
+                 "intervals on words picked because they moved are conditioned "
+                 "on that selection"},
+    ],
+}
+
+
+def render(prompt, units="endpoints", top=12, stat="median", words=""):
+    """Run the whole thing and return `(path, info)`. The app's entry point.
+
+    Shares every line of its arithmetic with the CLI below -- there is no second
+    implementation of the figure, which is the divergence this repo keeps paying
+    for. The CLI is a thin argument parser over this.
+    """
+    wl = [w.strip() for w in words.split(",") if w.strip()] if words else None
+    seq, unit_label = units_for(units, None)
+    rows, meta = movement.contrast(prompt, seq, top=int(top), words=wl)
+    lev, pairs = build(rows, meta, stat)
+    rung_labels = (["base", "aligned"] if meta["n_rungs"] == 2 else
+                   ["base", "sft", "pref"] if meta["n_rungs"] == 3 else
+                   ["rung %d" % i for i in range(meta["n_rungs"])])
+    out = os.path.join(FIGURES, "slope_%s_%s_%s%s.png"
+                       % (slug(prompt), units, stat,
+                          "_curated" if wl else "_top%d" % int(top)))
+    draw(lev, pairs, meta, stat, out, rung_labels)
+    return out, {
+        "unit_label": unit_label,
+        "n_units": meta["n_units"], "n_units_requested": meta["n_units_requested"],
+        "n_rungs": meta["n_rungs"], "selection": meta["selection"],
+        "words": meta["words"], "below_theta": meta["below_theta"],
+        "n_cells": meta["n_cells"],
+        "dropped": [d["unit"] for d in meta["missing_units"]],
+        "faller": {"word": pairs.iloc[0]["word"], "d": float(pairs.iloc[0]["d"])},
+        "riser": {"word": pairs.iloc[-1]["word"], "d": float(pairs.iloc[-1]["d"])},
+    }
 
 
 def slug(s, n=48):

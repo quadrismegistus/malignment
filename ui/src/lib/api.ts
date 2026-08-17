@@ -53,6 +53,30 @@ export interface Health {
 	slot_idle: Record<string, number>;
 }
 
+export interface PlotParam {
+	name: string;
+	type: 'text' | 'int' | 'choice' | 'prompt';
+	label?: string;
+	help?: string;
+	required?: boolean;
+	default?: string | number;
+	choices?: string[];
+	min?: number;
+	max?: number;
+}
+
+export interface PlotSpec {
+	id: string;
+	name: string;
+	blurb?: string;
+	experiment?: string;
+	has_render?: boolean;
+	//: Set when the producer would not import. Shown rather than skipped: a plot
+	//: missing from the list is indistinguishable from one never written.
+	error?: string | null;
+	params: PlotParam[];
+}
+
 export interface Table {
 	name: string;
 	engine: string;
@@ -271,6 +295,31 @@ export const api = {
 			`/roster/population?kind=${encodeURIComponent(kind)}`
 		),
 	experiments: () => get<Experiments>('/experiments'),
+	//: The producers' own declarations. Nothing in the client knows what a plot
+	//: type is; adding one is adding a PLOT dict to a producer.
+	plots: () => get<{ plots: PlotSpec[] }>('/plots'),
+	//: Filtered SERVER-SIDE over a cached set, in Python, never with a LIKE —
+	//: see `serve._plot_prompt_set`. The prompt is validated by membership at
+	//: render time because it reaches a ClickHouse query.
+	plotPrompts: (q: string, limit = 40) =>
+		get<{ n_total: number; n_matched: number; limit: number; prompts: string[] }>(
+			`/plot/prompts?q=${encodeURIComponent(q)}&limit=${limit}`
+		),
+	plotRender: (plot: string, params: Record<string, string>) => {
+		const qs = Object.entries(params)
+			.filter(([, v]) => v !== '' && v != null)
+			.map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+			.join('&');
+		return get<{
+			plot: string;
+			experiment: string;
+			params: Record<string, unknown>;
+			seconds: number;
+			figure: string;
+			url: string;
+			info: Record<string, unknown>;
+		}>(`/plot/render?plot=${encodeURIComponent(plot)}&${qs}`);
+	},
 	//: A URL, not a fetch. The <img> does the request, so the browser caches and
 	//: decodes it — pulling a 300 dpi PNG through `fetch` into a blob would buy
 	//: nothing and lose the cache.

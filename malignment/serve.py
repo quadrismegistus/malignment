@@ -99,6 +99,7 @@ import collections
 import csv
 import json
 import os
+import sys
 import threading
 from time import monotonic as _monotonic
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -183,6 +184,8 @@ def _source_status():
 _SENT = object()
 
 _SLOT_LOCK = threading.Lock()
+#: See `/plot/render`: plotnine's backend is not reentrant across threads.
+_PLOT_LOCK = threading.Lock()
 #: {model_id: runners.Loaded}, ORDERED, least-recently-used first.
 #:
 #: **BOUNDED, BECAUSE THE FIRST VERSION WAS NOT** (RH, 2026-08-16: *"can we not
@@ -363,6 +366,123 @@ def _walk_experiments():
             "_dir": dirpath,
         }
     return out
+
+
+#: ── PLOTS: the producers declare, this reads the declaration.
+#:
+#: **THIS IS THE ONE PLACE THE SERVER RUNS SOMETHING THAT MAKES A NEW ARTIFACT**,
+#: and it is not an exception to the module rule. The rule is that the server
+#: does not COMPUTE -- no mean, no share, no re-filtered population -- because a
+#: number with no producer is not a result. A plot route computes nothing: it
+#: calls a producer that lives in `experiments/`, with parameters that producer
+#: declared, and the producer owns every line of the arithmetic. The app is
+#: choosing which registered thing to run, not doing the work.
+#:
+#: **EVERY PARAMETER IS VALIDATED AGAINST THE DECLARED SPEC**, by membership for
+#: choices and by clamping for ints. The `prompt` type is validated against the
+#: set of prompts the STORE holds, which is the security boundary: a prompt
+#: reaches a ClickHouse query, and this repo's rule is that nothing a client
+#: sends does. Membership makes an injection attempt simply not a member.
+_PLOTS = {}
+_PLOT_PROMPTS = {"at": 0.0, "set": None}
+#: Re-read after this many seconds. The prompt set grows when a fleet lands, and
+#: a server that cached it at boot would refuse a prompt that now has cells.
+_PLOT_PROMPTS_TTL = 300
+
+
+def _plot_specs():
+    """{id: (spec, module)} for every `experiments/**/plot.py` exposing `PLOT`."""
+    if _PLOTS:
+        return _PLOTS
+    import importlib.util
+    for dirpath, dirnames, filenames in os.walk(EXPERIMENTS):
+        dirnames[:] = [d for d in dirnames
+                       if d not in ("__pycache__", "results", "figures",
+                                    "workflows", "sandbox")]
+        if "plot.py" not in filenames:
+            continue
+        path = os.path.join(dirpath, "plot.py")
+        rel = os.path.relpath(dirpath, EXPERIMENTS).replace(os.sep, "/")
+        #: BY PATH, UNDER A UNIQUE NAME. Every experiment folder may hold a
+        #: `plot.py`, so a bare import would resolve to whichever won the path
+        #: race -- the same collision `rank_vs_cardinal` already documents.
+        name = "plot_" + rel.replace("/", "_")
+        try:
+            spec = importlib.util.spec_from_file_location(name, path)
+            mod = importlib.util.module_from_spec(spec)
+            sys.modules[name] = mod
+            spec.loader.exec_module(mod)
+        except Exception as e:
+            #: A producer that will not import is REPORTED, not skipped. A plot
+            #: silently missing from the list is indistinguishable from one that
+            #: was never written.
+            _PLOTS["!" + rel] = ({"id": "!" + rel, "name": rel,
+                                  "error": "%s: %s" % (type(e).__name__, e),
+                                  "params": []}, None)
+            continue
+        p = getattr(mod, "PLOT", None)
+        if not isinstance(p, dict) or not p.get("id"):
+            continue
+        p = dict(p)
+        p["experiment"] = rel
+        p["has_render"] = callable(getattr(mod, "render", None))
+        _PLOTS[p["id"]] = (p, mod)
+    return _PLOTS
+
+
+def _plot_prompt_set():
+    """Prompts the store holds. Cached, and FILTERED IN PYTHON.
+
+    Loaded once and filtered here rather than with a `LIKE` on the client's
+    text, because a substring filter in SQL is client text reaching SQL by a
+    politer route. 4,484 strings is nothing to hold.
+    """
+    from . import ch
+    now = _monotonic()
+    if _PLOT_PROMPTS["set"] is None or now - _PLOT_PROMPTS["at"] > _PLOT_PROMPTS_TTL:
+        rows = ch.query("SELECT DISTINCT prompt FROM {db}.twp_words")
+        _PLOT_PROMPTS["set"] = sorted(r["prompt"] for r in rows)
+        _PLOT_PROMPTS["at"] = now
+    return _PLOT_PROMPTS["set"]
+
+
+def _plot_coerce(spec, one):
+    """Declared params -> validated kwargs. Raises with what it would accept."""
+    kw = {}
+    for f in spec.get("params", []):
+        raw = one(f["name"])
+        t = f.get("type", "text")
+        if raw is None or raw == "":
+            if f.get("required"):
+                raise ValueError("%r is required" % f["name"])
+            kw[f["name"]] = f.get("default", "")
+            continue
+        if t == "choice":
+            if raw not in f["choices"]:
+                raise ValueError("%r must be one of %s, got %r"
+                                 % (f["name"], ", ".join(f["choices"]), raw))
+            kw[f["name"]] = raw
+        elif t == "int":
+            try:
+                v = int(raw)
+            except ValueError:
+                raise ValueError("%r must be a whole number, got %r"
+                                 % (f["name"], raw))
+            lo, hi = f.get("min", -10 ** 9), f.get("max", 10 ** 9)
+            #: CLAMPED AND SAID SO, not refused. A top-N of 500 is a legible
+            #: request for "lots"; silently drawing 30 is the lie, so the caller
+            #: is told in the payload.
+            kw[f["name"]] = max(lo, min(hi, v))
+        elif t == "prompt":
+            if raw not in _plot_prompt_set():
+                raise ValueError(
+                    "that prompt has no cells in the store, so the figure would "
+                    "be empty. Ask /plot/prompts for the %d it holds."
+                    % len(_plot_prompt_set()))
+            kw[f["name"]] = raw
+        else:
+            kw[f["name"]] = raw
+    return kw
 
 
 def _manifest():
@@ -921,6 +1041,41 @@ class Handler(BaseHTTPRequestHandler):
                 #: reader checks the receipt rather than a summary of it.
                 "population": _read_json(os.path.join(d["_dir"], "population.json")),
             }
+        if path == "/plots":
+            specs = _plot_specs()
+            return {"plots": [dict(sp, error=sp.get("error"))
+                              for sp, _ in specs.values()]}
+        if path == "/plot/prompts":
+            #: FILTERED IN PYTHON over a cached set -- see `_plot_prompt_set`.
+            allp = _plot_prompt_set()
+            needle = (one("q") or "").strip().lower()
+            hits = [x for x in allp if needle in x.lower()] if needle else allp
+            lim = _int(one("limit"), 200, 1, 2000)
+            return {"n_total": len(allp), "n_matched": len(hits),
+                    "limit": lim, "prompts": hits[:lim]}
+        if path == "/plot/render":
+            specs = _plot_specs()
+            pid = one("plot", "")
+            if pid not in specs:
+                raise KeyError("no plot %r. Ask /plots for the %d available."
+                               % (pid, len(specs)))
+            spec, mod = specs[pid]
+            if mod is None or not spec.get("has_render"):
+                raise ValueError("%r declares no `render`; it is CLI-only" % pid)
+            kw = _plot_coerce(spec, one)
+            #: SERIALISED. A render is a ClickHouse read plus a matplotlib-backed
+            #: draw, and plotnine's backend is not reentrant across threads --
+            #: the same reason `_SLOT_LOCK` exists for `_BATCH`, one level up.
+            with _PLOT_LOCK:
+                t0 = _monotonic()
+                out, info = mod.render(**kw)
+                took = _monotonic() - t0
+            return {"plot": pid, "experiment": spec["experiment"],
+                    "params": kw, "seconds": round(took, 2),
+                    "figure": os.path.basename(out),
+                    "url": "/experiment/figure?id=%s&name=%s"
+                           % (spec["experiment"], os.path.basename(out)),
+                    "info": info}
         if path == "/experiment/figure":
             #: **VALIDATED BY MEMBERSHIP IN THE MANIFEST THIS PROCESS WALKED,
             #: never by path.** The name has to be in the `figures` list the

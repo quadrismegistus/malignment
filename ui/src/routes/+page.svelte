@@ -27,11 +27,13 @@
 	import Experiments from '$lib/components/Experiments.svelte';
 	import Roster from '$lib/components/Roster.svelte';
 	import SlotExplorer from '$lib/components/SlotExplorer.svelte';
+	import Plots from '$lib/components/Plots.svelte';
 
 	const SECTIONS = [
 		{ id: 'experiments', label: 'Experiments', sub: 'the register and its questions' },
 		{ id: 'roster', label: 'Roster', sub: 'which models am I comparing' },
-		{ id: 'slot', label: 'Slot', sub: 'what the model wants to say' }
+		{ id: 'slot', label: 'Slot', sub: 'what the model wants to say' },
+		{ id: 'plots', label: 'Plots', sub: 'registered figures, run on demand' }
 	] as const;
 
 	let section: string = $state('experiments');
@@ -139,6 +141,8 @@
 			<Roster />
 		{:else if section === 'slot'}
 			<SlotExplorer />
+		{:else if section === 'plots'}
+			<Plots />
 		{/if}
 	</main>
 </div>
