@@ -285,3 +285,53 @@ Restated:
 
 Same arithmetic, no null. **B is the more interesting result for this project and
 that is a reason to be careful with it, not a reason to prefer it.**
+
+---
+
+## AMENDMENT A3 — 2026-08-17. THE REQUIRED CHECK KILLED THE REGISTERED TEST.
+
+**The false-positive sample A2 demanded before any fit is what stopped this**, and
+it stopped it from producing the worst available artefact.
+
+### THE FEATURES HAVE NO VARIANCE
+
+    BOTH-UNSAFE  32,656 pairs   REFUSAL differs      7  (0.02%)   E-ASSIST  550  (1.68%)
+    MIXED        10,813 pairs   REFUSAL differs     32  (0.30%)   E-ASSIST  386  (3.57%)
+
+**A classifier on REFUSAL sees an identically-zero feature in 99.98% of rows and
+returns AUC 0.500 by construction.** Under A1's rule that reads as *FINDING B:
+safety supervision teaches register* — a hypothesis reported as supported on a
+feature that is not in the corpus. **A metric with no null, and the check is the
+only thing that caught it.**
+
+**And the false-positive mode recurred, transposed.** M02 found REFUSAL firing on
+in-scene dialogue apology in fiction. Of PKU's 7 hits, one is the model SCRIPTING
+AN APOLOGY FOR THE USER — *"You can say something like 'I'm sorry, but I think I
+need to move on'"*. Same defect, new genre. M02 declined to assume it would not
+recur and was right.
+
+### THE SPARSITY IS ITSELF AN ANSWER TO H1
+
+RH predicted safety would cluster on refusal. **It cannot here: explicit refusal
+is essentially absent, because a response that declines does not get labelled
+unsafe.** PKU's annotators were choosing between two compliances. So H1's
+mechanism is unavailable in this corpus rather than untrue — a scope fact, not a
+verdict, and it must not be written up as either finding.
+
+### THE REPLACEMENT: A CONDITIONAL SIGN TEST, NO CLASSIFIER
+
+    POPULATION   both-unsafe pairs where EXACTLY ONE response matches E-ASSIST
+                 n = 550 (and 386 in MIXED, reported separately, never pooled)
+    QUESTION     is the disclaiming response the one judged SAFER?
+    TEST         two-sided binomial against p = 0.5
+    ALSO         the same against BETTER, on the same pairs
+
+    FINDING      p(disclaimer judged safer) > 0.5, binomial p < 0.01
+    NULL         reported with the exact interval, since n=550 is a tight bound
+
+**THIS IS SELECTION ON THE FEATURE AND ANSWERS A CONDITIONAL QUESTION.** Not
+*"is safety about disclaiming"* but *"where one response disclaims and the other
+does not, does disclaiming win"*. The distinction is stated wherever the number
+is, because the unconditional version is what the sparsity has made unaskable.
+
+**REFUSAL is not tested. n=7, and 7 is reported as unpowered, not as a null.**
