@@ -65,6 +65,10 @@ Measured over the 197 prompts: **32 disagree in sign, 16.2%**, with `r = 0.847` 
     dN -0.0062  dN_renorm +0.0052   T_b 0.322 -> T_p 0.194   'The ref made a bad call and the coach groaned'
     dN +0.0061  dN_renorm -0.0033   T_b 0.227 -> T_p 0.112   'for his billion constituents, who was David to argue'
 
+**THE ROSTER NUMBERS SUPERSEDE THESE FOR ANYTHING GENERAL** (malign, [6378], `dc8efd4`). Over all 50 pairs the pooled rate is **14.8%**, per-pair rates spanning 10.7% to 22.1%. This pair measures 14.7% on that panel, so the 16.2% here is if anything slightly high rather than the floor it was briefly claimed to be. The quartile shape holds and is sharper: **31.4% of the smallest-|dN| quartile against 3.0% of the largest**, so the largest-effect prompts are safer at roster scale than this pair suggested -- 3 in 100, not 8.
+
+Read the 8.2% above as a fact about `gl198976/mpt-7b`, not about the instrument.
+
 Neither convention is promoted. Renormalising divides by `T`, and malign measured `T` to be a MEDIATOR rather than an instrument constant -- aligned `T` exceeds base in 39 of 50 pairs (sign test p = 9.0e-05), and `dT` tracks the change in top-1 concentration at r = 0.799. Dividing by it conditions on a post-treatment variable. Not renormalising asserts the residual sits at `s = 0`, which is false in a known direction. **Where `sign_disagree` fires the pair is not quotable on `dN` at all** -- a refusal, not a caveat.
 
 ## The top-N rank cap, tested (`cap_probe.py`)
