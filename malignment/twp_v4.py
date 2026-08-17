@@ -287,7 +287,132 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
 
 @torch.no_grad()
 def score_words_paths(model, tok, prompt, targets, dev, bmask, cjk=None,
-                      bos_policy="inherited", theta=T.THETA):
+                      bos_policy="inherited", cache=None, layers=None, cap=None):
+    """Score named words over ALL token paths, not the canonical one.
+
+        got, refused, total, capped = score_words_paths(model, tok, prompt,
+                                                        ["kill", "什么"], ...)
+        got -> {(surface, first_token): probability}      keyed exactly as `expand`
+
+    **THIS CLOSES THE GAP `twp.score_words` DOCUMENTS.** That function encodes
+    each target once and scores that path, which is exact where a surface is
+    reachable one way and a lower bound where it is not:
+
+        English (mpt, 'She was so angry...')   103/113 EXACT, max rel 4.5e-08
+        CJK     (mpt, '那个自由的人选择了')      78/183 EXACT, max rel 4.9e-01
+
+    Byte-level tokenizers reach one CJK surface many ways -- mpt encodes `什么`
+    as three pieces, two of which are half a character -- and `expand`
+    accumulates every path that lands on a surface. This enumerates them (see
+    `enumerate_paths`) and sums `mass x term` over each, which is `_account`'s
+    identity applied per path, not a re-derivation of it.
+
+    **`n_paths` IN THE STORE COULD NOT HAVE PREDICTED THIS.** It counts distinct
+    FIRST TOKENS -- ingest folds jsonl rows by `word`, and a row is already one
+    `(word, t1)` -- so `你` is one token with `n_paths = 1` and still diverged
+    2.3x. I read that field as a path count twice while diagnosing the gap.
+
+    ## IT RETURNS A FOURTH VALUE, AND THAT IS DELIBERATE
+
+    `capped` names any target whose enumeration hit `PATH_CAP`. Everything else
+    here is shaped like `twp.score_words` on purpose, but a cap that binds
+    silently would reintroduce exactly the defect this module exists to remove,
+    so it is returned rather than logged.
+
+    ## NOT YET RUN AGAINST A MODEL -- AND THE COST IS THE OPEN PROBLEM
+
+    `byte_table` and `enumerate_paths` are verified (100/100 roster tokenizers,
+    every enumerated path round-trips). This function is NOT: no forward pass has
+    been made through it. The reason it is parked rather than shipped is that
+    enumeration is faithful but EXPENSIVE -- Yi reaches `scream` by 623 paths and
+    `murmuring` by 1,825, almost all of them through single-byte fallback tokens
+    (`<0x73><0x63>...`) that no model would ever take. Each distinct prefix costs
+    a forward pass, so the honest count is thousands of passes for one word.
+
+    **The fix is to prune by MASS while descending, not to enumerate less.**
+    Depths are already processed in order, so a prefix whose accumulated mass is
+    below `PATH_FLOOR` can be dropped along with every path through it, which
+    kills the byte-fallback paths (their first token is far below theta) while
+    staying exact to within the floor. That is the next edit here, and until it
+    lands `twp.score_words` remains the instrument of record.
+
+    ## HISTORY: THREE FAILED ATTEMPTS, KEPT BECAUSE THE DIAGNOSIS OUTLIVED THEM
+
+    The first version of this function failed three times -- quadratic viability
+    testing (decoding the whole vocabulary per live prefix), an unbounded beam
+    (`mm > 0.0` prunes nothing), and finally a candidate lookup that ignored the
+    leading-space convention and so found **0 of 113 English targets**, a
+    convention handled correctly twenty lines away in `twp.score_words`. It was
+    guarded rather than fixed a fourth time in the same sitting.
+
+    The rewrite took the advice that guard left: it starts from `score_words`'s
+    verified handling and adds aggregation to THAT. It also drops the beam
+    entirely -- the old version walked forward and pruned to viable prefixes,
+    this segments the target's BYTES backwards from a known answer, so there is
+    no frontier to bound and no separator to guess.
+    """
+    pids, _rs, _rid = T._prompt_ids(tok, prompt, bos_policy)
+    lim = PATH_CAP if cap is None else cap
+
+    paths, refused, capped = {}, {}, {}
+    for w in targets:
+        if T.is_mojibake(w):
+            refused[w] = "mojibake"
+            continue
+        enum = enumerate_paths(tok, w, cap=lim)
+        #: **ENUMERATION GUARANTEES THE BYTES, NOT THE SURFACE.** A path spells
+        #: `w` byte for byte and can still decode to something else once the
+        #: tokenizer's own normalisation runs (Teuken turns `…` into `...`), and
+        #: `expand`'s key is the CLEANED surface. So each path must reproduce the
+        #: surface it will be filed under, or it is not comparable to a stored
+        #: row. Same discipline as `score_words`: refused, never guessed.
+        good = [p for p in enum
+                if T.clean_surface(tok.decode(list(p)).strip()) == w]
+        if not good:
+            refused[w] = ("no path round-trips (%d enumerated)" % len(enum)
+                          if enum else "no path spells it in this vocabulary")
+            continue
+        if len(enum) >= lim:
+            capped[w] = len(enum)
+        for p in good:
+            paths[p] = w
+    if not paths:
+        return {}, refused, 0.0, capped
+
+    with torch.no_grad():
+        lg = model(torch.tensor([pids], device=dev)).logits[0, -1, :].float()
+    P0 = torch.softmax(lg, -1).cpu().numpy()
+    del lg
+
+    #: One batched call per DEPTH over the distinct prefixes at that depth --
+    #: `score_words`'s shape, so `next_dist`'s equal-length precondition holds.
+    #: Prefixes are SHARED across paths and across targets, so enumerating many
+    #: paths costs far less than the path count suggests.
+    rows, bydepth = {}, {}
+    for p in paths:
+        for d in range(1, len(p) + 1):
+            bydepth.setdefault(d, set()).add(p[:d])
+    for d in sorted(bydepth):
+        pref = sorted(bydepth[d])
+        dist = T.next_dist(model, tok, pids, pref, dev, cache=cache, layers=layers)
+        for pr, row in zip(pref, dist):
+            rows[pr] = row
+
+    got, bcache, intra_cache, total = {}, {}, {}, 0.0
+    for p, surf in paths.items():
+        m = float(P0[p[0]])
+        for i in range(1, len(p)):
+            m *= float(rows[p[:i]][p[i]])
+        b = T._boundary_for(surf, bmask, cjk, bcache, intra_cache)
+        pr = m * float(rows[p][b].sum())
+        key = (surf, int(p[0]))
+        got[key] = got.get(key, 0.0) + pr
+        total += pr
+    return got, refused, total, capped
+
+
+def _score_words_paths_failed(model, tok, prompt, targets, dev, bmask, cjk=None,
+                              bos_policy="inherited", theta=T.THETA):
     """Score named words over ALL token paths, not the canonical one. -> same shape as `twp.score_words`
 
     **`twp.score_words` IS A LOWER BOUND AND CJK IS WHERE THE BOUND IS LOOSE.**
@@ -430,9 +555,29 @@ PATH_FLOOR = 1e-10
 PATH_WIDTH = 4096
 _TOKIDX = {}
 
+#: The longest byte run any single token may cover. Real vocabularies top out
+#: well under this; it only bounds the inner loop of the segmentation walk.
+_MAXBYTES = 32
+#: A backstop, not a tuning knob. `MAX_DEPTH` already bounds a path to 6 tokens,
+#: which bounds the walk to compositions of a short byte string; this exists so a
+#: pathological vocabulary cannot hang the walk. **When it binds it is RETURNED**
+#: (`capped`), because a silent cap is the defect this module exists to remove.
+PATH_CAP = 4096
+_BYTETAB = {}
+_BYTEIDX = {}
+
 
 def _tok_index(tok):
-    """string -> [token ids that decode to it]. Built once per tokenizer."""
+    """string -> [token ids that decode to it]. Built once per tokenizer.
+
+    **SUPERSEDED BY `byte_index` FOR PATH WORK, AND THE REASON IS THE WHOLE CJK
+    GAP.** This is a CHARACTER index built from `tok.decode([i])`, and a
+    byte-level tokenizer holds tokens that are HALF A CHARACTER -- two of the
+    three pieces mpt uses for `什么` decode to U+FFFD. Those tokens cannot be
+    keyed by their decoded string, so a character index literally cannot
+    represent the paths that path aggregation exists to find. Kept for callers
+    that only want whole-character lookups.
+    """
     key = id(tok)
     if key not in _TOKIDX:
         d = {}
@@ -440,6 +585,177 @@ def _tok_index(tok):
             d.setdefault(tok.decode([i]), []).append(i)
         _TOKIDX[key] = d
     return _TOKIDX[key]
+
+
+def _bytes_to_unicode():
+    """GPT-2's byte <-> printable-unicode map. Copied, not imported, on purpose:
+    it is a fixed table, and importing it from a modelling module would make this
+    file's behaviour depend on which architectures `transformers` still ships."""
+    bs = (list(range(ord("!"), ord("~") + 1)) + list(range(ord("\xa1"), ord("\xac") + 1))
+          + list(range(ord("\xae"), ord("\xff") + 1)))
+    cs = bs[:]
+    n = 0
+    for b in range(256):
+        if b not in bs:
+            bs.append(b)
+            cs.append(256 + n)
+            n += 1
+    return dict(zip(bs, [chr(c) for c in cs]))
+
+
+#: Deliberately mixed: ASCII, contractions, hyphens, CJK (both scripts), Cyrillic,
+#: accented Latin, an em dash, an ellipsis, emoji, maths. The point is to exercise
+#: multi-byte characters that no tokenizer holds as a single token.
+_PROBES = [
+    "She was so angry she wanted to kill him",
+    "don't wouldn't self-motivated re-entry",
+    "那个自由的人选择了什么样的生活",
+    "彼女はとても怒っていた",
+    "Проверка кириллицы",
+    "naïve café résumé — em dash, ellipsis…",
+    "emoji 🙂 and math ∑∫",
+]
+
+
+def _byte_candidates(tok):
+    """-> {kind: [bytes or None per token id]}. Two families, both always built."""
+    toks = tok.convert_ids_to_tokens(list(range(len(tok))))
+    u2b = {v: k for k, v in _bytes_to_unicode().items()}
+
+    bytelevel = []
+    for t in toks:
+        try:
+            bytelevel.append(None if t is None else bytes(u2b[c] for c in t))
+        except KeyError:
+            bytelevel.append(None)
+
+    sentencepiece = []
+    for t in toks:
+        if t is None:
+            sentencepiece.append(None)
+        elif len(t) == 6 and t.startswith("<0x") and t.endswith(">"):
+            try:
+                sentencepiece.append(bytes([int(t[3:5], 16)]))
+            except ValueError:
+                sentencepiece.append(None)
+        elif "�" in t:
+            sentencepiece.append(None)
+        else:
+            sentencepiece.append(t.replace("▁", " ").encode("utf-8"))
+
+    return {"bytelevel": bytelevel, "sentencepiece": sentencepiece}
+
+
+def byte_table(tok):
+    """token id -> its BYTES, verified against the tokenizer's own decoder. -> (table, kind)
+
+    Two notations cover the roster -- GPT-2's byte-level alphabet and
+    sentencepiece's `_`/`<0xAB>` -- but WHICH ONE a checkpoint uses is not
+    declared anywhere we can read, so it is DETECTED, and the detection is a
+    verification rather than a guess: both tables are built, each is asked to
+    reassemble the probes, and exactly one must succeed. Measured over all 100
+    roster endpoints, exactly one does, every time -- **no tokenizer passed both
+    and none passed neither**, so the test discriminates rather than merely
+    accepting.
+
+    ## THE REFERENT IS `tok.decode(ids)`, NOT THE INPUT STRING
+
+    The table's claim is "these ids mean these bytes", so the tokenizer's own
+    decode is what it must reproduce. Verifying against the INPUT instead
+    conflates a wrong table with a LOSSY TOKENIZER, and four checkpoints are
+    lossy: Teuken and Tanuki normalise `…` to `...`, croissant drops Japanese
+    kanji (kana survive), deepseek under `transformers 5.4.0` drops every space
+    and all CJK. My first pass made exactly this mistake and reported four
+    broken tables; all four tables were correct.
+
+    Raises if detection fails, because the alternative is a table that is wrong
+    for some tokens and silently scores a different path.
+    """
+    key = id(tok)
+    if key in _BYTETAB:
+        return _BYTETAB[key]
+    ok = {}
+    for kind, table in _byte_candidates(tok).items():
+        bad = []
+        for s in _PROBES:
+            ids = tok.encode(s, add_special_tokens=False)
+            parts = [table[i] for i in ids if i < len(table)]
+            if len(parts) != len(ids) or any(p is None for p in parts):
+                bad.append(s)
+            elif b"".join(parts).strip() != tok.decode(ids).encode("utf-8").strip():
+                bad.append(s)
+        if not bad:
+            ok[kind] = table
+    if len(ok) != 1:
+        raise ValueError(
+            "byte table undetermined for this tokenizer: %d of 2 notations "
+            "verified (%s). Path aggregation is refused rather than run on a "
+            "table that may be wrong for some tokens; use twp.score_words, "
+            "which is a documented single-path lower bound."
+            % (len(ok), ", ".join(sorted(ok)) or "none"))
+    kind = next(iter(ok))
+    _BYTETAB[key] = (ok[kind], kind)
+    return _BYTETAB[key]
+
+
+def byte_index(tok):
+    """bytes -> tuple of token ids carrying exactly those bytes. Built once."""
+    key = id(tok)
+    if key not in _BYTEIDX:
+        table, _kind = byte_table(tok)
+        d = {}
+        for i, b in enumerate(table):
+            if b:
+                d.setdefault(b, []).append(i)
+        _BYTEIDX[key] = {k: tuple(v) for k, v in d.items()}
+    return _BYTEIDX[key]
+
+
+def enumerate_paths(tok, word, max_depth=None, cap=None):
+    """EVERY token path whose bytes spell `word`, not just the canonical one. -> list of id tuples
+
+    This is the fix for the gap `twp.score_words` documents: it encodes a target
+    once and scores that one path, which is exact wherever a surface is reachable
+    one way (English, essentially always) and a LOWER BOUND wherever it is not
+    (CJK, where mpt reaches `什么` by several routes and `expand` sums them all).
+
+    ## SEGMENTATION OVER BYTES, AND BOTH SEPARATOR FORMS
+
+    Enumerating tokenizations is a DAG walk over the target's UTF-8 bytes, and
+    `MAX_DEPTH` (6) bounds it hard -- a path is at most 6 tokens, so the walk is
+    over compositions of a short byte string into at most 6 parts, each of which
+    must be an actual vocabulary token.
+
+    **Both `word` and `" " + word` are enumerated and the results unioned**,
+    because `expand` decodes tokens sitting directly after the prompt and strips
+    the surface, so both forms reach the same key. `twp.score_words` picks ONE
+    separator by round-trip; that is right for a single path and wrong here,
+    where the other form is not a rival reading but an additional real path.
+    """
+    max_depth = T.MAX_DEPTH if max_depth is None else max_depth
+    cap = PATH_CAP if cap is None else cap
+    idx = byte_index(tok)
+    out, seen = [], set()
+    for form in (word, " " + word):
+        target = form.encode("utf-8")
+        n = len(target)
+
+        def walk(pos, path):
+            if len(out) >= cap:
+                return
+            if pos == n:
+                if path not in seen:
+                    seen.add(path)
+                    out.append(path)
+                return
+            if len(path) == max_depth:
+                return
+            for k in range(1, min(n - pos, _MAXBYTES) + 1):
+                for tid in idx.get(target[pos:pos + k], ()):
+                    walk(pos + k, path + (tid,))
+
+        walk(0, ())
+    return out
 
 
 def leak_bound(pre, post, S, residual_pre, residual_post):
