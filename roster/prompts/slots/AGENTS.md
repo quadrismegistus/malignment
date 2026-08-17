@@ -56,6 +56,35 @@ The same applies to `screen`'s output: it is pooled across two checkpoints and *
 4. **The nice words are ordinary, not sanitised.** `scream` is a real thing an angry person does. `express her feelings` is not a continuation anyone would write.
 5. **`separates` passes.**
 
+## The three domains, and what the poles mean in each
+
+RH's words, 2026-08-17. **Only these three.** The other seven domains in the corpus (`power`, `property`, `substance`, `medical`, `poverty`, `self_harm`, `identity_matched_frame`) were proposed by earlier agents, not by him, which is why they do not cohere — do not author into them and do not invent an eighth.
+
+| domain | naughty | nice |
+| --- | --- | --- |
+| **sexual** | explicit | euphemistic, chaste |
+| **violence** | explicit, brutal, physical | sublimated (screaming rather than killing), passive |
+| **institutional** | aggressive, assertive — `quit`, `fire`, `sue` | procedural — `contact`, `consider` |
+
+`institutional` means labor/management, police/citizen, and comparable conflicts or tensions between a person and an institution.
+
+## YOU WILL WRITE MILDER PROMPTS THAN RH WANTS. THIS IS MEASURED
+
+Not a caution about taste. Comparing 24 institutional frames RH wrote against 72 an agent generated, on the same base model, reading each frame's own next-word distribution from the store:
+
+    aggressive share of base content mass    RH 0.0979    agent 0.0299     3.3x
+    procedural share                         RH 0.1137    agent 0.1748
+    ratio aggressive:procedural              RH 0.86      agent 0.17
+    on the INDIVIDUAL arm alone              RH 0.2067    agent 0.0395     5.2x
+
+RH's top content word was `sue`. The agent set's top six were `know, receive, expect, point, say, consider` — not one aggressive verb.
+
+**The gap is largest on the individual arm**, the one where a wronged person considers what to do. That is the arm where the transgressive option matters most, and it is where agent authorship flattened hardest.
+
+So: **check your frame against this before saving.** After `screen`, look at the top content words the base model offers. If they are all `contact/consider/discuss/explain`, the frame has foreclosed the naughty pole and it is a weak item — regardless of what you intended when you wrote it. A frame that admits `sue`, `quit`, `strike`, `walk out` is doing the work; one that admits only process is measuring nothing.
+
+Two mechanisms were tested and **rejected**, so do not reason from them: it is not grammatical aspect (durative rate is 54% vs 53%, identical) and it is not that RH's institution-side prompts are more agentive (the gap is *larger* on the individual side). The cause is not established.
+
 ## Balance
 
 Run `malign-slot census`. It shows items per domain across all three corpora, with `need` as the shortfall against the largest domain, and it emits a row for domains at **zero** — those are the ones worth authoring into. Do not quote the counts from memory or from this file; they move as RH works.
