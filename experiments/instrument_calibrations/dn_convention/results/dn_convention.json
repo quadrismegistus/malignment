@@ -1,0 +1,122 @@
+{
+ "pooled_pct": 14.820385012031625,
+ "per_pair_mean_pct": 14.820326280300915,
+ "n_pairs": 49,
+ "n_prompt_rows": 23272,
+ "prompt_counts_per_pair": [
+  473,
+  474,
+  475
+ ],
+ "identical_by_design": false,
+ "smallest_dN_quartile_pct": 31.38535579236851,
+ "largest_dN_quartile_pct": 2.9735304228257133,
+ "per_pair": {
+  "01-ai/Yi-1.5-9B -> 01-ai/Yi-1.5-9B-Chat": 14.947368421052632,
+  "BAAI/Aquila2-7B -> BAAI/AquilaChat2-7B": 13.052631578947368,
+  "BSC-LT/salamandra-7b -> BSC-LT/salamandra-7b-instruct": 15.368421052631579,
+  "EleutherAI/pythia-2.8b -> ContextualAI/archangel_sft-dpo_pythia2-8b": 22.105263157894736,
+  "EleutherAI/pythia-6.9b -> lomahony/eleuther-pythia6.9b-hh-dpo": 12.421052631578947,
+  "HuggingFaceTB/SmolLM2-360M -> HuggingFaceTB/SmolLM2-360M-Instruct": 20.63157894736842,
+  "HuggingFaceTB/SmolLM3-3B-Base -> HuggingFaceTB/SmolLM3-3B": 16.42105263157895,
+  "LLM360/Amber -> LLM360/AmberSafe": 15.578947368421053,
+  "OpenLLM-France/Lucie-7B -> OpenLLM-France/Lucie-7B-Instruct-v1.1": 13.894736842105264,
+  "Qwen/Qwen2.5-0.5B -> Qwen/Qwen2.5-0.5B-Instruct": 13.68421052631579,
+  "Qwen/Qwen2.5-7B -> Qwen/Qwen2.5-7B-Instruct": 19.36842105263158,
+  "Qwen/Qwen3-8B-Base -> Qwen/Qwen3-8B": 15.789473684210526,
+  "RWKV/rwkv-4-7b-pile -> RWKV/rwkv-raven-7b": 11.789473684210526,
+  "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T -> TinyLlama/TinyLlama-1.1B-Chat-v1.0": 14.736842105263158,
+  "Zyphra/Zamba2-7B -> Zyphra/Zamba2-7B-Instruct": 12.421052631578947,
+  "allenai/OLMo-2-0425-1B -> allenai/OLMo-2-0425-1B-Instruct": 10.736842105263158,
+  "allenai/OLMoE-1B-7B-0125 -> allenai/OLMoE-1B-7B-0125-Instruct": 13.473684210526315,
+  "allenai/Olmo-3-1025-7B -> allenai/Olmo-3-7B-Instruct": 13.68421052631579,
+  "allenai/Olmo-3-1125-32B -> allenai/Olmo-3.1-32B-Instruct": 14.736842105263158,
+  "allenai/Olmo-Hybrid-7B -> allenai/Olmo-Hybrid-Instruct-DPO-7B": 13.263157894736842,
+  "baichuan-inc/Baichuan2-7B-Base -> baichuan-inc/Baichuan2-7B-Chat": 11.157894736842104,
+  "bigscience/bloom-7b1 -> bigscience/bloomz-7b1": 14.736842105263158,
+  "croissantllm/CroissantLLMBase -> croissantllm/CroissantLLMChat-v0.1": 16.842105263157894,
+  "deepseek-ai/deepseek-llm-7b-base -> deepseek-ai/deepseek-llm-7b-chat": 13.894736842105264,
+  "gl198976/mpt-7b -> gl198976/mpt-7b-instruct": 14.736842105263158,
+  "google/gemma-2-9b -> google/gemma-2-9b-it": 14.526315789473685,
+  "huggyllama/llama-7b -> PKU-Alignment/beaver-7b-v1.0": 18.31578947368421,
+  "ibm-granite/granite-3.0-8b-base -> ibm-granite/granite-3.0-8b-instruct": 16.210526315789473,
+  "inceptionai/jais-family-6p7b -> inceptionai/jais-family-6p7b-chat": 13.68421052631579,
+  "internlm/internlm2-base-7b -> internlm/internlm2-chat-7b": 11.578947368421053,
+  "kakaocorp/kanana-1.5-8b-base -> kakaocorp/kanana-1.5-8b-instruct-2505": 17.263157894736842,
+  "kakaocorp/kanana-2-3b-base -> kakaocorp/kanana-2-3b-instruct": 13.473684210526315,
+  "llm-jp/llm-jp-3-7.2b -> llm-jp/llm-jp-3-7.2b-instruct3": 12.842105263157896,
+  "m-a-p/CT-LLM-Base -> m-a-p/CT-LLM-SFT-DPO": 19.57894736842105,
+  "m-a-p/neo_7b -> m-a-p/neo_7b_instruct_v0.1": 15.157894736842104,
+  "meta-llama/Llama-3.1-70B -> meta-llama/Llama-3.1-70B-Instruct": 14.31578947368421,
+  "meta-llama/Llama-3.1-8B -> meta-llama/Llama-3.1-8B-Instruct": 12.0,
+  "mistralai/Mistral-7B-v0.1 -> mistralai/Mistral-7B-Instruct-v0.1": 12.842105263157896,
+  "openGPT-X/Teuken-7B-base-v0.6 -> openGPT-X/Teuken-7B-instruct-v0.6": 17.263157894736842,
+  "openbmb/MiniCPM5-1B-Base -> openbmb/MiniCPM5-1B": 11.368421052631579,
+  "stabilityai/stablelm-2-1_6b -> stabilityai/stablelm-2-1_6b-chat": 15.368421052631579,
+  "team-hatakeyama-phase2/Tanuki-8B-base-v1.0 -> weblab-GENIAC/Tanuki-8B-dpo-v1.0": 12.631578947368421,
+  "tiiuae/Falcon-H1-1.5B-Base -> tiiuae/Falcon-H1-1.5B-Instruct": 16.63157894736842,
+  "tiiuae/Falcon-H1-7B-Base -> tiiuae/Falcon-H1-7B-Instruct": 20.42105263157895,
+  "tiiuae/Falcon3-7B-Base -> tiiuae/Falcon3-7B-Instruct": 17.473684210526315,
+  "tiiuae/falcon-7b -> tiiuae/falcon-7b-instruct": 11.578947368421053,
+  "tiiuae/falcon-mamba-7b -> tiiuae/falcon-mamba-7b-instruct": 13.31923890063425,
+  "togethercomputer/RedPajama-INCITE-Base-7B-v0.1 -> togethercomputer/RedPajama-INCITE-7B-Chat": 16.455696202531644,
+  "zai-org/glm-4-9b-hf -> zai-org/glm-4-9b-chat-hf": 12.421052631578947
+ },
+ "flagged_excluded_from_headline": {
+  "google/recurrentgemma-9b -> google/recurrentgemma-9b-it": 19.789473684210527
+ },
+ "axis": {
+  "pairs": [
+   [
+    "naughty",
+    "nice"
+   ],
+   [
+    "bad",
+    "good"
+   ],
+   [
+    "vice",
+    "virtue"
+   ],
+   [
+    "obscene",
+    "decent"
+   ],
+   [
+    "explicit",
+    "innocent"
+   ],
+   [
+    "indecent",
+    "proper"
+   ],
+   [
+    "vulgar",
+    "polite"
+   ],
+   [
+    "dirty",
+    "clean"
+   ],
+   [
+    "taboo",
+    "acceptable"
+   ],
+   [
+    "immoral",
+    "moral"
+   ],
+   [
+    "offensive",
+    "inoffensive"
+   ],
+   [
+    "violent",
+    "gentle"
+   ]
+  ],
+  "source": "generic_axis/run.py",
+  "prespecified_at": "cbd0ce5 (00:58), before 9eb760f (01:18)"
+ }
+}
