@@ -57,6 +57,7 @@ import collections
 import functools
 import json
 import os
+import re
 import sys
 
 from . import ch
@@ -538,6 +539,28 @@ def main():
             print("  view %s.%s" % (ch.DB, name))
         except Exception as e:
             print("  view %s FAILED: %s" % (name, str(e)[:120]))
+
+    #: **THE TWO CHECKS THAT BELONG AT THE MOMENT THE WRONG STATE WOULD BE MADE,
+    #: NOT IN A TEST NOBODY RUNS.** There is no CI here. `--write` has just
+    #: refreshed `edges`, so this is the first instant at which `pairs` can be
+    #: known stale, and it is the instant a seat is most likely to act on it.
+    #: **A SILENT PASS IS INDISTINGUISHABLE FROM A CHECK THAT DID NOT RUN**, and
+    #: this repo has shipped a `_guard` that existed only in a comment. Both
+    #: report their reach on success: `0 conflicts` means nothing without the
+    #: `of 7 checkable` beside it.
+    probs, checkable = check_attested_topology()
+    print("  attested topology: %d checkable, %d conflict(s)" % (checkable, len(probs)))
+    for p in probs:
+        print("     %s" % p)
+    stale = check_derived()
+    print("  {db}.pairs: %s".replace("{db}", ch.DB)
+          % ("FRESH" if not stale else "%d problem(s)" % len(stale)))
+    for p in stale:
+        print("     %s" % p)
+    if stale:
+        print("  ^^ {db}.pairs is DERIVED FROM THE EDGES JUST WRITTEN and no "
+              "longer matches them. Anything reading corpus.panel() is on the "
+              "old population until produce_movement --run.")
     #: THE CHECK THE DDL COULD NOT DO: every column named in the row dicts must
     #: exist on the table. A column silently dropped by an insert is a field that
     #: reads as absent forever after.
@@ -749,6 +772,100 @@ def endpoints(measured=None, attested=None, apply_rulings=True):
         out[b] = e
         del unresolved[b]
     return out, unresolved
+
+
+#: Quote fragments that mark a claim as naming a DIRECT PARENT rather than a
+#: lineage root. Both HF card conventions.
+_PARENT_PHRASES = ("inetuned from", "ase model")
+_PARENT_FIELDS = ("released_base", "base", "parent", "finetuned_from")
+_HF_URL = re.compile(r"huggingface\.co/([\w.\-]+/[\w.\-]+)")
+
+
+def check_attested_topology(edges=None, att=None):
+    """AUTHORED edges vs ATTESTED parent quotes. Returns problems, empty if clean.
+
+    **THE TIER THE ROSTER NEVER READ AGAINST ITSELF.** `attest.unsourced()`
+    checks attestations against attestations. Nothing checked them against the
+    graph -- which is how `chat -dpo-> zephyr` survived while BOTH arms carried
+    a quote naming the base as their parent. The refutation was in the repo,
+    quoted, twice, and no code path could see it.
+
+    **IT MUST BE THE PARENT QUOTE, NOT THE `lineage` FIELD.** Comparing attested
+    `lineage` to the computed root would NOT have caught stablelm: under the
+    fabricated chain zephyr's root was still the base. Only the direct-parent
+    claim discriminates, and only because the card says "Finetuned from model"
+    and links it.
+
+    `edges` is a parameter so this can be RUN AGAINST A BROKEN ROSTER and shown
+    to fire. A checker that can only read the current state cannot be
+    demonstrated red, and this repository has shipped three checkers that read
+    clean on the case they existed for.
+
+    Reach today is 7 of 160 checkpoints. That ceiling is how many attestations
+    carry a parseable "Finetuned from" URL -- **a reason to quote more, not to
+    write a cleverer regex.** Silence here is not a clean bill.
+    """
+    if edges is None:
+        edges = load().get("edges") or []
+    att = attestations() if att is None else att
+    parent = {c: p for p, op, c in edges if op in DERIVING}
+    problems, checkable = [], 0
+    for m, rec in ((att or {}).get("checkpoints") or {}).items():
+        for cl in (rec.get("claims") or []):
+            if cl.get("field") not in _PARENT_FIELDS:
+                continue
+            q = cl.get("quote") or ""
+            if not any(p in q for p in _PARENT_PHRASES):
+                continue
+            named = [x.rstrip(".,)") for x in _HF_URL.findall(q)]
+            named = [x for x in named if x != m]
+            if not named:
+                continue
+            checkable += 1
+            p = parent.get(m)
+            if p is not None and p not in named:
+                problems.append(
+                    "TOPOLOGY vs ATTESTATION: %s is authored as a child of %s, "
+                    "but its own attested quote names %s as the parent -- %.160r"
+                    % (m, p, named, q))
+    return problems, checkable
+
+
+def check_derived():
+    """`{db}.pairs` vs the roster it is supposed to be derived from.
+
+    **A ROW COUNT DOES NOT DETECT STALENESS.** `pairs` sat a day behind
+    `distill_align` at 146 rows where the roster implied 151, and 146 was as
+    believable as 151 -- it surfaced only because an unrelated edit moved the
+    number by the wrong amount. `endpoints`, `checkpoints` and `edges` rebuild
+    from `roster --write`; `pairs` rebuilds only from `produce_movement --run`,
+    so a roster edit updates three of four derived tables and silently leaves
+    the fourth.
+
+    Returns problems, empty if fresh. Imports `ch` lazily: this module holds a
+    no-torch/no-daemon import contract that the test suite asserts.
+    """
+    from . import ch
+    #: `buildable()` IS the producer's own definition, imported rather than
+    #: restated. A freshness check that recomputes the target with a second
+    #: implementation tests the two implementations against each other and calls
+    #: their agreement freshness -- and this repo has already paid for two
+    #: definitions of "root" in one file printing 47 against 54.
+    from .produce_movement import buildable
+    if not ch.exists("pairs"):
+        return ["{db}.pairs does not exist"]
+    want = {(e["base"], e["aligned"]) for e in buildable()}
+    got = {(r["base"], r["aligned"]) for r in
+           ch.query("SELECT base, aligned FROM pairs", limit_bytes=None)}
+    out = []
+    if want - got:
+        out.append("STALE {db}.pairs: %d roster pair(s) missing, e.g. %s. "
+                   "Rebuild with `produce_movement --run`."
+                   % (len(want - got), sorted(want - got)[:3]))
+    if got - want:
+        out.append("ORPHAN {db}.pairs: %d row(s) the roster no longer declares, "
+                   "e.g. %s." % (len(got - want), sorted(got - want)[:3]))
+    return out
 
 
 def check_authored(path=None):
