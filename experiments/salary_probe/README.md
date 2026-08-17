@@ -94,3 +94,36 @@ session record); nothing here needs a download.
 **What must not happen meanwhile:** these numbers being quoted as results. They
 are one instrument, two lineages, and a criterion that admits a case it was not
 written for.
+
+## AMENDED 2026-08-17 — the truncation is a MARGINALISATION, and there is now a twp route
+
+**malign [6449], after implementing and rejecting the numeric rule.**
+
+This README says the truncation is not monotone and therefore G and C cannot run
+on cut surfaces. **The non-monotonicity is real and the inference from it was too
+strong.** `25` at 0.0326 is not a broken `25,000`; it is **P(salary begins 25)**
+— the marginal over every salary starting that way. Coarse, and correct.
+
+**So the band-restricted analysis was sound for a better reason than I gave.**
+Within a digit band the surfaces are an ordered marginal; only ACROSS bands does
+ordering fail. The registration's fear was the right shape and the wrong size.
+
+**And `max_depth=9` alone recovers the full numeral**, with no numeric rule and
+no `generate`:
+
+    $100,000   8 tokens   REFUSED at depth 6  ->  0.03174315
+    $50,000    7 tokens   REFUSED             ->  0.05142502
+
+**That is a route to this experiment with CALIBRATED probabilities commensurable
+with the store**, which is exactly what the `generate` arm could not give — its
+sampled distribution sits beside nothing. The estimand objection in FINDING 3 of
+`numeric_boundary` is now answerable rather than a standing cost.
+
+**`generate` remains the right instrument for the CROSS-LINGUAL comparison
+specifically**, because it consults no boundary rule at all and the adopted
+`decoded_boundary` fix is differential by language (+0.15% en against +3.42% zh).
+A twp cross-lingual contrast compares instruments; this one does not.
+
+**None of the results above are re-run.** They stand as a two-lineage pilot on
+sampled data, and the twp route is a better instrument that nobody has pointed at
+this question yet.

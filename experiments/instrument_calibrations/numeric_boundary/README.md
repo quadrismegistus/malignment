@@ -422,3 +422,55 @@ identically, so the counterexample is real about vocabularies and does not reach
 the probes. **The costs-n-not-validity argument stands on all 44 measurable
 pairs** -- and it stands because it was checked on the quantity that matters
 rather than on the one that was easy to compare.
+
+# FINDING 1 IS SUPERSEDED BY THE IMPLEMENTATION — the numeric rule was REJECTED
+
+**2026-08-17, malign [6449]. `Rules(decoded_boundary=True, max_depth=9)` is
+adopted; `numeric_intra` is implemented, measured, and OFF.**
+
+FINDING 1 concluded the numeric arm needs **lookahead**, on the grounds that the
+rule is starved and no list can reach a token that does not exist. The diagnosis
+holds. **The recommendation was wrong, and it was wrong for a reason no
+tokenizer-side measurement could have found.**
+
+    numeric_intra on `salary of £`   moves 90% of resolved mass into `drop`
+
+Unmasking the comma lets the number continue, so the mass spreads over
+`25,000 / 25,500 / 25,750 ...` and **every branch falls below THETA.** The word
+is discovered and then lost.
+
+## AND v3's TRUNCATION IS A MARGINALISATION, NOT A DEFECT
+
+This is the part that corrects how this whole folder framed the problem, mine
+included:
+
+> `25` at 0.0326 **IS** P(salary begins 25). Coarser, and correct.
+
+**A truncated surface is not a broken number — it is the marginal over every
+number starting that way.** I called it a defect that made the salary
+distribution unreadable. It makes the distribution COARSE, which is a different
+thing and a recoverable one: within a digit band the surfaces are an ordered
+marginal, which is why the band-restricted analysis in `salary_probe` worked at
+all.
+
+**Three of the four arms decided a rule that was adopted. This one decided a rule
+that was rejected, and the rejection needed the fix to be BUILT and MEASURED** --
+no amount of counting tokenizers would have shown the mass falling through theta.
+
+## WHAT THE OTHER ARMS PRODUCED, FOR THE RECORD
+
+    decoded_boundary  ADOPTED   the mask arm, generalised. 88 of 88 tokenizers,
+                                all 36 SentencePiece included -- so the 84/49
+                                split here is right FOR CJK PUNCTUATION and the
+                                general miss set spares nobody.
+                                en +0.15% median, zh +3.42% median (Qwen2.5-7B)
+    max_depth=9       ADOPTED   and NEARLY FREE. The frontier COLLAPSES with
+                                depth -- 57.8% of forward passes at depth 1,
+                                0.7% at depth 6. malign's "most expensive item,
+                                superlinear frontier" was wrong; total cost 0.95x
+                                on a 7B, and the 2.5x quoted earlier was
+                                `numeric_intra` alone.
+
+**Note the magnitude came DOWN on a bigger model**: +3.42% median zh on
+Qwen2.5-7B against the +15-28% measured on SmolLM2-360M over three prompts. One
+model and three prompts was never a roster figure and is not one now.
