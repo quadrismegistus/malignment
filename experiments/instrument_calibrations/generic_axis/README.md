@@ -8,7 +8,9 @@ Run: `python run.py`. Writes `results/{per_item,per_item_pair,per_pair,summary}.
 
 **A pooled lexical axis recovers about 89% of the reliability tagging buys. A single antonym pair is a lottery.**
 
-|                                       | pooled 12 pairs | best single (`violent-gentle`) | bare `naughty-nice` | worst (`explicit-innocent`) |
+The `best single` column is the best by RAW COSINE, which is *not* the column the table ranks on: `violent-gentle` is 5th of 12 on score correlation, where the best is `immoral-moral` at r = 0.691 (0.83 of ceiling). Both are shown deliberately, because which pair looks best depends on which measure you read, and that is the point of the section below.
+
+|                                       | pooled 12 pairs | best by cosine (`violent-gentle`) | bare `naughty-nice` | worst (`explicit-innocent`) |
 | ------------------------------------- | --------------- | ------------------------------ | ------------------- | --------------------------- |
 | (a) cos to bare declared centroid diff | 0.155           | 0.148                          | 0.115               | -0.007                      |
 | (b) cos to framed declared axis        | 0.296           | 0.282                          | 0.226               | 0.048                       |
