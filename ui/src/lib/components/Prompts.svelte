@@ -24,7 +24,7 @@
 -->
 <script lang="ts">
 	import { api } from '$lib/api';
-	import type { PromptRow, PromptProfile } from '$lib/api';
+	import type { PromptRow, PromptProfile, PairWords } from '$lib/api';
 
 	let rows = $state<PromptRow[]>([]);
 	let computedAt = $state('');
@@ -152,6 +152,53 @@
 			epDesc = true;
 		}
 	}
+	//: ── LEVEL THREE: every word this pair puts at this prompt.
+	//:
+	//: **DEFAULT SORT IS `delta` ASCENDING**, so the biggest fallers are at the
+	//: top — RH's spec, and the right default: the question this table exists to
+	//: answer is what alignment took away. `absdelta` is a derived column for
+	//: sorting by magnitude, computed HERE rather than served, because a column
+	//: that is a function of another column in the same row is not a
+	//: measurement and does not need a producer.
+	let pair = $state<{ base: string; aligned: string } | null>(null);
+	let pw = $state<PairWords | null>(null);
+	let pwLoading = $state(false);
+	let wSort = $state<'word' | 'p_base' | 'p_aligned' | 'delta' | 'absdelta' | 'cls'>('delta');
+	let wDesc = $state(false);
+
+	function openPair(base: string, aligned: string) {
+		pair = { base, aligned };
+		pw = null;
+		pwLoading = true;
+		wSort = 'delta';
+		wDesc = false;
+		api
+			.pairWords(selected as string, base, aligned)
+			.then((r) => (pw = r))
+			.catch((e) => (error = e instanceof Error ? e.message : String(e)))
+			.finally(() => (pwLoading = false));
+	}
+	function wSortBy(k: typeof wSort) {
+		if (wSort === k) wDesc = !wDesc;
+		else {
+			wSort = k;
+			//: Magnitude and the two levels want DESCENDING first; `delta` wants
+			//: ascending, because that is where the fallers are.
+			wDesc = k !== 'delta' && k !== 'word' && k !== 'cls';
+		}
+	}
+	let wView = $derived.by(() => {
+		if (!pw) return [];
+		const out = pw.words.map((w) => ({ ...w, absdelta: Math.abs(w.delta) }));
+		out.sort((a, b) => {
+			const x = (a as Record<string, unknown>)[wSort];
+			const y = (b as Record<string, unknown>)[wSort];
+			const c = typeof x === 'number' ? (x as number) - (y as number) : String(x).localeCompare(String(y));
+			return wDesc ? -c : c;
+		});
+		return out;
+	});
+
 	const n = (v: unknown, d = 4) => (v == null ? '—' : Number(v).toFixed(d));
 	const short = (m: string) => m.split('/').pop() ?? m;
 </script>
@@ -232,6 +279,61 @@
 				{/if}
 			</div>
 		{/if}
+	{:else if pair}
+		<div class="bar">
+			<button class="ghost" onclick={() => { pair = null; pw = null; }}>← {selected}</button>
+			<button class="ghost" onclick={() => { pair = null; pw = null; selected = null; profile = null; }}>← all prompts</button>
+		</div>
+		<h2 class="pt">{short(pair.base)} → {short(pair.aligned)}</h2>
+		<p class="muted small">{selected}</p>
+		{#if pwLoading}
+			<p class="muted">reading…</p>
+		{:else if pw}
+			<!--
+			  THE APERTURE, ON THE PANEL. The two probability columns do NOT sum
+			  to 1 and the gap is not the same on both arms. Shown as visible mass
+			  plus residual so the books visibly close, rather than leaving a
+			  reader to notice the columns fall short.
+			-->
+			<div class="meta">
+				<span class="kv"><b>words</b> {pw.n_words}</span>
+				<span class="kv"><b>visible mass</b> {n(pw.sum_p_base)} → {n(pw.sum_p_aligned)}</span>
+				<span class="kv"><b>residual</b> {n(pw.residual_base)} → {n(pw.residual_aligned)}</span>
+				<span class="kv"
+					><b>closes to</b>
+					{n((pw.sum_p_base ?? 0) + (pw.residual_base ?? 0))} / {n(
+						(pw.sum_p_aligned ?? 0) + (pw.residual_aligned ?? 0)
+					)}</span
+				>
+			</div>
+			<div class="tablewrap">
+				<table>
+					<thead>
+						<tr>
+							{#each [['word', 'word'], ['p_base', 'base'], ['p_aligned', 'aligned'], ['delta', 'delta'], ['absdelta', '|delta|'], ['cls', 'class']] as [k, l] (k)}
+								<th class:on={wSort === k} class:num={k !== 'word' && k !== 'cls'}>
+									<button onclick={() => wSortBy(k as typeof wSort)}>
+										{l}{#if wSort === k}<span class="dir">{wDesc ? '▾' : '▴'}</span>{/if}
+									</button>
+								</th>
+							{/each}
+						</tr>
+					</thead>
+					<tbody>
+						{#each wView as w (w.word)}
+							<tr class:fell={w.delta < 0} class:rose={w.delta > 0}>
+								<td class="mono">{w.word}</td>
+								<td class="num">{n(w.p_base, 5)}</td>
+								<td class="num">{n(w.p_aligned, 5)}</td>
+								<td class="num d">{w.delta > 0 ? '+' : ''}{n(w.delta, 5)}</td>
+								<td class="num">{n(w.absdelta, 5)}</td>
+								<td>{w.cls}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		{/if}
 	{:else}
 		<div class="bar">
 			<button class="ghost" onclick={() => { selected = null; profile = null; }}>← all prompts</button>
@@ -298,7 +400,7 @@
 					</thead>
 					<tbody>
 						{#each epView as e (e.base + e.aligned)}
-							<tr>
+							<tr class="click" onclick={() => openPair(e.base, e.aligned)}>
 								<td title={e.base}>{short(e.base)}</td>
 								<td title={e.aligned}>{short(e.aligned)}</td>
 								<td>{e.relation}</td>
@@ -354,6 +456,12 @@
 	.movers .rise { color: var(--blue-light); }
 	.movers .fall { color: var(--red, #c92a2a); }
 	.movers .w { font-family: var(--mono); margin-right: 12px; }
+	.small { font-family: var(--mono); font-size: 11px; margin: 0 0 8px; }
+	tr.click { cursor: pointer; }
+	td.mono { font-family: var(--mono); }
+	td.d { font-weight: 600; }
+	tr.fell td.d { color: var(--red, #c92a2a); }
+	tr.rose td.d { color: var(--blue-light); }
 	.dup {
 		margin-left: 6px; font-size: 9px; padding: 1px 4px; border-radius: 3px;
 		border: 1px solid var(--amber, #b8860b); color: var(--amber, #b8860b);

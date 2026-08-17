@@ -1161,6 +1161,50 @@ class Handler(BaseHTTPRequestHandler):
                     #: per-pair number the same size as `departed_median`.
                     "movers_note": "delta summed over the %d endpoint pairs "
                                    "measured at this prompt" % len(per)}
+        if path == "/pair_words":
+            #: Every word this pair puts at this prompt, both arms and the
+            #: delta. The grain `{db}.movement` already stores, so nothing is
+            #: derived: `|delta|` is added by the CLIENT for sorting, because a
+            #: column that is a function of another column in the same row is
+            #: not a measurement and does not need a producer.
+            rows, _ = _prompt_rows()
+            text = one("text", "")
+            if text not in {r["prompt"] for r in rows}:
+                raise KeyError("no such prompt. Ask /prompts for the %d declared."
+                               % len(rows))
+            from . import ch
+            base, aligned = one("base", ""), one("aligned", "")
+            #: MEMBERSHIP IN THE DECLARED ENDPOINTS, not a free model string.
+            #: The pair reaches a query, and an arbitrary (base, aligned) would
+            #: also let a caller ask for a contrast the roster does not declare
+            #: -- which is a population choice made by a URL.
+            pairs = {(r["base"], r["endpoint"]) for r in
+                     ch.query("SELECT base, endpoint FROM {db}.endpoints")}
+            if (base, aligned) not in pairs:
+                raise ValueError(
+                    "%r -> %r is not a declared endpoint pair. Ask /prompt for "
+                    "the pairs measured at this prompt." % (base, aligned))
+            e = lambda x: x.replace("\\", "\\\\").replace("'", "\\'")
+            words = ch.query(
+                "SELECT word, p_base, p_aligned, delta, cls FROM {db}.movement "
+                "WHERE rule = 'canonical' AND prompt = '" + e(text) + "' "
+                "AND base = '" + e(base) + "' AND aligned = '" + e(aligned) + "' "
+                "ORDER BY delta ASC")
+            #: THE RESIDUALS TRAVEL WITH THE WORDS. Both arms are truncated at
+            #: theta and by different amounts, so a table of visible words
+            #: without the invisible mass beside it invites the reader to treat
+            #: the columns as summing to 1. They do not, and the gap is the
+            #: aperture this campaign keeps paying attention to.
+            cells = ch.query(
+                "SELECT model, total, n_words FROM {db}.twp_cells WHERE prompt = '"
+                + e(text) + "' AND model IN ('" + e(base) + "','" + e(aligned) + "')")
+            resid = {c["model"]: c for c in cells}
+            return {"prompt": text, "base": base, "aligned": aligned,
+                    "n_words": len(words), "words": words,
+                    "residual_base": (resid.get(base) or {}).get("total"),
+                    "residual_aligned": (resid.get(aligned) or {}).get("total"),
+                    "sum_p_base": sum(w["p_base"] for w in words),
+                    "sum_p_aligned": sum(w["p_aligned"] for w in words)}
         if path == "/plots":
             specs = _plot_specs()
             return {"plots": [dict(sp, error=sp.get("error"))

@@ -100,6 +100,22 @@ export interface PromptProfile {
 	movers_note: string;
 }
 
+export interface PairWords {
+	prompt: string;
+	base: string;
+	aligned: string;
+	n_words: number;
+	words: { word: string; p_base: number; p_aligned: number; delta: number; cls: string }[];
+	//: Both arms are truncated at theta and BY DIFFERENT AMOUNTS. Carried with
+	//: the words so a table of visible probabilities cannot be read as summing
+	//: to 1 — the gap is the aperture, and it is the thing this campaign keeps
+	//: finding at the bottom of every other question.
+	residual_base: number | null;
+	residual_aligned: number | null;
+	sum_p_base: number;
+	sum_p_aligned: number;
+}
+
 export interface PlotParam {
 	name: string;
 	type: 'text' | 'int' | 'choice' | 'prompt';
@@ -356,6 +372,11 @@ export const api = {
 			rows: PromptRow[];
 		}>('/prompts'),
 	prompt: (text: string) => get<PromptProfile>(`/prompt?text=${encodeURIComponent(text)}`),
+	pairWords: (text: string, base: string, aligned: string) =>
+		get<PairWords>(
+			`/pair_words?text=${encodeURIComponent(text)}&base=${encodeURIComponent(base)}` +
+				`&aligned=${encodeURIComponent(aligned)}`
+		),
 	plots: () => get<{ plots: PlotSpec[] }>('/plots'),
 	//: Filtered SERVER-SIDE over a cached set, in Python, never with a LIKE —
 	//: see `serve._plot_prompt_set`. The prompt is validated by membership at
