@@ -360,8 +360,9 @@ import os
 #: **OUTSIDE THE PUBLIC CHECKOUT**, on the same reasoning as `runners.TWP_OUT`
 #: and `slot_axis.VEC_DIR`: an item carries its prompt verbatim, and the battery
 #: this tool authors is the transgressive one. Landing them in the repo is a
-#: separate, deliberate step -- see `scripts/ingest_slots.py` -- not a side
-#: effect of clicking save.
+#: separate, deliberate step and NOT a side effect of clicking save. **That step
+#: is not written yet** -- an earlier version of this comment cited
+#: `scripts/ingest_slots.py`, which does not exist. See `ui/TODO.md`.
 DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
 SLOT_DIR = os.path.join(DATA, "slots")
 
