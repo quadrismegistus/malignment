@@ -26,6 +26,9 @@ import subprocess
 import sys
 import time
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from venvs import venv_for  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEAS = os.path.join(ROOT, "roster", "models", "measurements.json")
 
@@ -42,7 +45,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tier", nargs="*", default=["FLUENT", "MARGINAL"])
     ap.add_argument("--models", nargs="*")
-    ap.add_argument("--python", default=os.path.join(ROOT, ".venv", "bin", "python"))
+    ap.add_argument("--python", default=None,
+                    help="override; by default each model gets the venv its "
+                         "roster profile requires")
     a = ap.parse_args()
 
     if a.models:
@@ -54,13 +59,24 @@ def main():
                       key=lambda r: -r[1])
     print("queue: %d checkpoints, ordered by cjk_chars desc" % len(todo), flush=True)
     for m, n in todo:
-        print("  %-46s cjk_chars=%d" % (m, n), flush=True)
+        print("  %-46s cjk_chars=%-7d %s"
+              % (m, n, os.path.basename(venv_for(m))), flush=True)
 
     for i, (m, n) in enumerate(todo, 1):
         print("\n%s\n[%d/%d] %s  (cjk_chars=%d)\n%s"
               % ("=" * 68, i, len(todo), m, n, "=" * 68), flush=True)
         t0 = time.time()
-        r = subprocess.run([a.python, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
+        #: **THE VENV COMES FROM THE ROSTER, NOT FROM A DEFAULT.** Baichuan2 is
+        #: profile `tf457` -- *"transformers 5.x CANNOT RUN this; pin 4.57.1"* --
+        #: and this queue hardcoded `.venv` (5.x), so both arms failed 2,706
+        #: prompts each with `Cannot copy out of meta tensor`. That IS the
+        #: declared failure, arriving as a stack trace instead of a refusal.
+        #:
+        #: I built the split this morning and `venvs.py which MODEL` to resolve
+        #: it, then wrote a queue that ignored both. Spent an hour patching
+        #: rotary caches before RH said to read the environment notes.
+        py = a.python or os.path.join(venv_for(m), "bin", "python")
+        r = subprocess.run([py, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
                             "--model", m, "--cache"],
                            cwd=ROOT, capture_output=True, text=True)
         tail = [l for l in (r.stdout or "").splitlines() if l.strip()][-3:]

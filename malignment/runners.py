@@ -356,11 +356,39 @@ class TWPRunner:
         #: so that line is what a later reader would trust. Corrected here, where
         #: the rules ARE known, rather than by threading them into a loader that
         #: does not otherwise need them.
+        model, tok, dev = ld.model, ld.tok, ld.dev
+        #: **PROBE THE CACHE ONCE, WHERE THE MODEL EXISTS, BEFORE ANY KEY IS
+        #: BUILT.** `expand4` disables the prompt cache per-model when the KV
+        #: shape is unexpected (Baichuan2: "'tuple' object has no attribute
+        #: 'layers'"), but the KEY is stamped from `T.USE_PROMPT_CACHE` -- so a
+        #: run that silently fell back would write 2,706 cells claiming
+        #: `prompt_cache=True` while measuring uncached. **A stamp that says what
+        #: was REQUESTED rather than what HAPPENED is this campaign's most-booked
+        #: defect.**
+        #:
+        #: My first attempt put this before `model` was bound, so it caught a
+        #: NameError and disabled the cache for EVERY model -- an honest stamp
+        #: carrying a wrong value, which is the same defect wearing the fix's
+        #: clothes.
+        if rules is not None and T.USE_PROMPT_CACHE:
+            try:
+                #: `bos_policy_for` rather than the local `pol`, which binds
+                #: LATER -- my second attempt caught a NameError on it and
+                #: reported Baichuan2 as cache-incapable for the wrong reason.
+                #: It happens to BE incapable, so the answer was right and the
+                #: evidence was not, which is worse than a wrong answer.
+                _pol = T.bos_policy_for(ck.model_id)
+                T.prompt_cache(model, T._prompt_ids(tok, todo[0], _pol)[0], dev)
+            except Exception as e:                              # noqa: BLE001
+                T.USE_PROMPT_CACHE = False
+                say("  prompt-cache UNAVAILABLE on this architecture (%s)"
+                    " -- cells stamped prompt_cache=False" % str(e)[:46])
+
         if rules is not None:
             say("  INSTRUMENT: rule_version %d | %s | prompt_cache %s"
                 % (__import__("malignment.twp_v4", fromlist=["x"]).RULE_VERSION,
                    rules.label(), bool(T.USE_PROMPT_CACHE)))
-        model, tok, dev = ld.model, ld.tok, ld.dev
+
         bmask, cjk, pol, loader_id = ld.bmask, ld.cjk, ld.bos_policy, ld.loader_id
 
         n_ok = n_skip = 0
