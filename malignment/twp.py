@@ -512,7 +512,47 @@ def _pad(tok, pids, chunk, dev):
     return ids, att
 
 
-def next_dist(model, tok, pids, prefixes, dev, batch=None, readout=None):
+def prompt_cache(model, pids, dev):
+    """The prompt's KV cache, batch 1, plus its per-layer tensors for re-expansion.
+
+    **THE PROMPT WAS BEING RE-ENCODED ONCE PER PREFIX.** `_pad` builds
+    `pids + prefix` for every candidate, so a beam of N prefixes over an L-token
+    prompt costs `N x (L+1)` token-positions where `L + N` suffices. Measured on
+    SmolLM3-3B/MPS, 765 single-token candidates over a 10-token prompt:
+    **5.80 s the old way, 0.81 s with the prompt done once -- 7.1x.** Over a
+    whole population union (1,017 prefixes, 4 depths) it is 7.91 s -> 2.53 s.
+
+    Returns `(cache, layers)` where `layers` is the batch-1 `(k, v)` per layer.
+    The cache OBJECT is consumed by each forward (the model concatenates onto
+    it), so callers rebuild an expanded view per chunk from `layers` rather than
+    reusing this one -- see `_expanded`.
+    """
+    import torch
+    with torch.no_grad():
+        out = model(torch.tensor([pids], device=dev), use_cache=True)
+    c = out.past_key_values
+    return c, [(l.keys, l.values) for l in c.layers]
+
+
+def _expanded(cache, layers, B):
+    """A fresh view of the batch-1 prompt cache, broadcast to batch `B`.
+
+    `.expand` is a VIEW -- no copy, no extra memory -- and the model's `torch.cat`
+    onto it allocates new tensors rather than writing through, so the stored
+    batch-1 tensors survive every chunk. Rebuilt per call because the forward
+    pass reassigns `.keys`/`.values` on whatever object it is handed.
+    """
+    import copy
+    c = copy.copy(cache)
+    c.layers = [copy.copy(l) for l in cache.layers]
+    for lay, (k, v) in zip(c.layers, layers):
+        lay.keys = k.expand(B, -1, -1, -1)
+        lay.values = v.expand(B, -1, -1, -1)
+    return c
+
+
+def next_dist(model, tok, pids, prefixes, dev, batch=None, readout=None,
+              cache=None, layers=None):
     """Batch is ADAPTIVE because it is architecture-blind.
 
     A dense transformer's peak scales with batch x seq x vocab. An SSM's does
@@ -526,13 +566,31 @@ def next_dist(model, tok, pids, prefixes, dev, batch=None, readout=None):
     out, i = [], 0
     while i < len(prefixes):
         ch = prefixes[i:i + batch]
-        ids, att = _pad(tok, pids, ch, dev)
+        #: **THE CACHED PATH FEEDS THE SUFFIX ONLY.** `expand`'s beam is
+        #: depth-synchronous -- every prefix in one call has the same length --
+        #: so there is nothing to pad and the mask is solid ones. That is what
+        #: makes the shared prompt cache safe here and is asserted by the
+        #: bit-identity check in `selftest`.
+        use_cache = cache is not None and layers is not None
+        if use_cache:
+            L = len({len(p) for p in ch})
+            if L != 1:                     # mixed depths: fall back, do not guess
+                use_cache = False
+        if use_cache:
+            ids = torch.tensor([list(p) for p in ch], device=dev)
+            att = torch.ones(len(ch), len(pids) + len(ch[0]),
+                             dtype=torch.long, device=dev)
+        else:
+            ids, att = _pad(tok, pids, ch, dev)
         try:
+            kw = {"attention_mask": att}
+            if use_cache:
+                kw["past_key_values"] = _expanded(cache, layers, len(ch))
             if readout is None:
-                lg = model(ids, attention_mask=att).logits[:, -1, :].float()
+                lg = model(ids, **kw).logits[:, -1, :].float()
             else:
-                lg = readout(model(ids, attention_mask=att,
-                                   output_hidden_states=readout.needs_hidden))
+                lg = readout(model(ids, output_hidden_states=readout.needs_hidden,
+                                   **kw))
         except torch.OutOfMemoryError:
             del ids, att
             gc.collect(); torch.cuda.empty_cache()
@@ -1028,6 +1086,15 @@ def _account(row, b, surf, pref, mass, t1, theta, words, res, nxt):
 _LOGIT = {"v": None}
 _OUT_KEEP = {"v": None}
 _HIDDEN = {"v": None}
+#: Per-prompt, reset by `expand` on entry alongside the other one-slot handoffs.
+#: `False` means "tried and unavailable on this architecture" -- distinct from
+#: `None`, "not built yet" -- so a model whose cache cannot be expanded is asked
+#: once per prompt rather than once per depth.
+_PC = {"v": None}
+#: Off by default until the bit-identity check has been run on the fleet's
+#: architectures. **A speedup that changes a stored value is not a speedup**,
+#: and this producer's outputs are already ingested at RULE_VERSION 3.
+USE_PROMPT_CACHE = os.environ.get("MALIGN_TWP_PROMPT_CACHE", "0") == "1"
 
 
 def _prompt_ids(tok, prompt, bos_policy):
@@ -1070,6 +1137,10 @@ def expand(model, tok, prompt, dev, bmask, theta=THETA, cjk=None,
     """
 
     pids, resolved_surface, resolver_id = _prompt_ids(tok, prompt, bos_policy)
+    #: RESET PER PROMPT. The cache is keyed to THIS prompt's tokens; carrying one
+    #: across prompts would condition every beam on the previous prompt, and the
+    #: numbers would still look entirely plausible.
+    _PC["v"] = None
     #: **HIDDEN STATES, FINAL POSITION ONLY (RH, 2026-08-08 via [5141]).** A flag
     #: on a forward pass we are already running: compute cost zero, ~170 MB over
     #: the whole 104-checkpoint roster. Collected now it is a by-product;
@@ -1125,8 +1196,15 @@ def expand(model, tok, prompt, dev, bmask, theta=THETA, cjk=None,
     for _ in range(MAX_DEPTH):
         if not live:
             break
+        if _PC["v"] is None and USE_PROMPT_CACHE:
+            try:
+                _PC["v"] = prompt_cache(model, pids, dev)
+            except Exception as e:          # architecture without a usable cache
+                _PC["v"] = False
+                print("    [prompt-cache off: %s]" % str(e)[:60], flush=True)
+        pc = _PC["v"] or (None, None)
         dist = next_dist(model, tok, pids, [p for p, _, _ in live], dev,
-                         readout=readout); calls += 1
+                         readout=readout, cache=pc[0], layers=pc[1]); calls += 1
         nxt = []
         for (pref, mass, t1), row in zip(live, dist):
             surf = clean_surface(tok.decode(list(pref)).strip())
@@ -1175,6 +1253,135 @@ def expand(model, tok, prompt, dev, bmask, theta=THETA, cjk=None,
 # not 0 -- the same censoring twp has always had at its floor, and the
 # crossings of that floor are the trajectory. Writing 0 would turn a threshold
 # into a measurement.
+
+@torch.no_grad()
+def score_words(model, tok, prompt, targets, dev, bmask, cjk=None,
+                bos_policy="inherited", cache=None, layers=None):
+    """True probability of each NAMED word, by the same arithmetic as `expand`.
+
+        got, refused, mass = score_words(model, tok, prompt, ["kill","scream"], ...)
+        got  -> {(surface, t1): probability}      keyed exactly as `expand`
+
+    **THE POINT IS THE WORDS THETA HID.** `expand` gates on `P0 >= theta` over
+    FIRST TOKENS, so a word whose first token falls below theta is absent from
+    the record entirely and every consumer imputes zero. Across the 50 declared
+    pairs that is 34.2 base-only and 18.5 aligned-only words per cell -- a set
+    asymmetry running ~2:1, because alignment concentrates and pushes words
+    below the gate. This measures them instead of imputing them.
+
+    ## IT MUST MATCH THE STORE, SO IT REUSES THE STORE'S ARITHMETIC
+
+    `p(word) = mass x term`, with `mass` the product of conditionals along the
+    token path and `term = row[b].sum()` over the boundary mask -- `_account`'s
+    identity, not a re-derivation of it. **Run uncached by default**: the
+    prompt-cache path is ~3x faster and NOT bit-identical (fp16 attention
+    accumulates differently against a cached K/V; `puke` moves 0.001015 ->
+    0.001002, across theta), so using it here would make a topped-up cell two
+    instruments. `cache`/`layers` are accepted for callers who are scoring into
+    a fresh store and have nothing to match.
+
+    ## A WORD THAT DOES NOT ROUND-TRIP IS REFUSED, NOT GUESSED
+
+    `expand` DISCOVERS surfaces by decoding token paths; this goes the other way
+    and must land on the same surface or the value is not comparable to a stored
+    one. So each target is encoded, decoded back through `clean_surface`, and
+    **refused if it does not reproduce itself.** Refusals are returned, never
+    dropped silently -- a receiptless disposition is the defect this module's
+    own ingest was rebuilt to stop.
+
+    ## IT SCORES ONE PATH; `expand` SUMS ALL OF THEM. MEASURED, NOT ASSUMED.
+
+    Acceptance run, SmolLM3-3B-Base on "She was so angry she wanted to", scoring
+    the 107 surfaces `expand` itself found: **107 of 107 keys matched, 0 refused,
+    0 spurious — and 99 of 107 values were EXACT (`diff == 0.0`).** The 8 that
+    differ are MULTI-PATH words: `expand` accumulates `mass x term` at every
+    token path reaching a surface, this scores the one path that round-trips.
+
+        kill   expand 0.17227792   score 0.17160564   rel 3.9e-3
+                                                      (store says n_paths = 2)
+
+    So the returned value is a LOWER BOUND on `expand`'s, tight wherever
+    `n_paths == 1` -- which is 94,183,717 of 94,887,319 stored rows. Rows written
+    from here should carry `n_paths = 1` and be read as such; treating them as
+    equivalent to a beam-derived row would overstate agreement for the handful of
+    surfaces a tokenizer can reach two ways.
+
+    **For the union top-up this bound is not a problem and the reason is
+    structural:** every word it exists to add is sub-theta by construction, so
+    the absolute size of any missed second path is under theta as well.
+
+    ## THE CALLER OWES THE RESIDUAL
+
+    Returns the total mass explained. That mass currently sits inside `tail`
+    (these words are sub-theta by construction), so a caller writing these into
+    a cell **must decrement `tail` by exactly this figure**. Conservation is
+    1.000000 on all 984,857 stored cells; add without subtracting and every
+    topped-up cell reads > 1.
+    """
+    pids, _rs, _rid = _prompt_ids(tok, prompt, bos_policy)
+    #: **THE SEPARATOR IS TRIED, NOT ASSUMED.** `expand` never prepends
+    #: anything -- it decodes tokens sitting directly after the prompt, so a
+    #: leading space is part of the token, and which form reproduces the surface
+    #: is a fact about the tokenizer rather than about the script. `slot_axis`
+    #: has a `sep_for` that hard-codes the CJK rule; this cannot borrow it,
+    #: because a wrong separator here does not fail loudly, it silently scores a
+    #: DIFFERENT token path and returns a plausible number under the right key.
+    cands = ["", " "] if is_cjk(prompt) else [" ", ""]
+
+    paths, refused = {}, {}
+    for w in targets:
+        best = None
+        for sep in cands:
+            ids = tuple(tok.encode(sep + w, add_special_tokens=False))
+            if not ids or len(ids) > MAX_DEPTH:
+                continue
+            if clean_surface(tok.decode(list(ids)).strip()) == w:
+                best = ids
+                break
+        if best is None:
+            ids = tuple(tok.encode(cands[0] + w, add_special_tokens=False))
+            refused[w] = ("encodes to nothing" if not ids else
+                          "%d tokens > MAX_DEPTH %d" % (len(ids), MAX_DEPTH)
+                          if len(ids) > MAX_DEPTH else
+                          "round-trip -> %r" % clean_surface(tok.decode(list(ids)).strip()))
+        elif is_mojibake(w):
+            refused[w] = "mojibake"
+        else:
+            paths[best] = w
+    if not paths:
+        return {}, refused, 0.0
+
+    with torch.no_grad():
+        lg = model(torch.tensor([pids], device=dev)).logits[0, -1, :].float()
+    P0 = torch.softmax(lg, -1).cpu().numpy()
+    del lg
+
+    #: One batched call per DEPTH, over the distinct prefixes at that depth --
+    #: the same shape as `expand`'s beam, so `next_dist`'s equal-length
+    #: precondition holds and the cached path stays usable.
+    rows, bydepth = {}, {}
+    for p in paths:
+        for d in range(1, len(p) + 1):
+            bydepth.setdefault(d, set()).add(p[:d])
+    for d in sorted(bydepth):
+        pref = sorted(bydepth[d])
+        dist = next_dist(model, tok, pids, pref, dev, cache=cache, layers=layers)
+        for pr, row in zip(pref, dist):
+            rows[pr] = row
+
+    got, bcache, intra_cache, total = {}, {}, {}, 0.0
+    for p, surf in paths.items():
+        m = float(P0[p[0]])
+        for i in range(1, len(p)):
+            m *= float(rows[p[:i]][p[i]])
+        b = _boundary_for(surf, bmask, cjk, bcache, intra_cache)
+        term = float(rows[p][b].sum())
+        pr = m * term
+        key = (surf, int(p[0]))
+        got[key] = got.get(key, 0.0) + pr
+        total += pr
+    return got, refused, total
+
 
 def next_dist_multi(model, tok, pids, prefixes, dev, readouts, batch=None):
     """Yield (offset, layer, rows) per chunk x layer. ONE forward per chunk.
