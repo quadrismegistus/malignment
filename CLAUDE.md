@@ -149,6 +149,22 @@ demonstrated the trailer's limit on day zero at [6408]: **a `Seat:` trailer
 identifies who ran `git commit`; it identifies who wrote the files only if that
 commit was constructed from a pathspec.**
 
+**A NEW file must be `git add`ed first** -- `git commit -- <pathspec>` matches
+only paths git already knows, and an untracked file fails loudly with
+*"did not match any file(s) known to git"*. So the full form is: `git add` ONLY
+your own paths, then `git commit -m MSG -- <the same paths>`. Verified with
+another seat's work staged: the commit took only the named new file, left theirs
+staged, and left the tree intact.
+
+**DO NOT USE A PRIVATE INDEX (`GIT_INDEX_FILE`). RETIRED, RH's call.** It works,
+and it has a destructive failure mode that succeeds silently: a private index
+starts EMPTY, `git commit` commits the index, so committing without
+`git read-tree HEAD` first writes a tree containing ONLY the added file and
+**DELETES every other tracked file**, exit 0, no warning (dario, [6421]). The
+allowlist hook passes it, correctly, because that is not sweeping -- **a guard
+accepting a form does not make the form safe.** The add-then-pathspec route above
+handles new files without it, so the hazard buys nothing.
+
 Two caveats, both dario's, both real: it takes the WORKING TREE rather than the
 index, so it is wrong for anyone using `git add -p` to commit a deliberate subset
 of a file's changes; and it refuses during a merge (`cannot do a partial commit
