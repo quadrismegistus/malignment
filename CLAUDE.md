@@ -101,6 +101,10 @@ Put a `Seat:` trailer on every commit you make here:
 
     Seat: malign
 
+**RH's ruling, 2026-08-17: every seat signs off its commit messages with its seat
+name, and nobody backfills the past ones.** Not a convention anyone may opt out
+of, and not mine -- I proposed it at [6403] and RH settled it the same hour.
+
 **Because `git log` cannot tell whose work a file is, and three seats are relying
 on it to.** [6353] settled claim-serialisation as *"a file with my commit on it is
 taken; a file without one is not -- that is serialisable and the docket is
