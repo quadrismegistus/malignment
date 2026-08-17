@@ -82,6 +82,43 @@ from . import ch
 
 TABLE = "slot_word_vec"
 
+#: **DDL GOES THROUGH `ch.execute`; DATA GOES THROUGH clickhouse-connect.** Not a
+#: half-migration -- the split is the point. `ch._guard` refuses any statement
+#: naming a database other than ours, and its docstring gives the reason: *"lltk
+#: alone is 409 GiB on this daemon; a DROP is exactly the statement you want
+#: refused."* A connect client bypasses that guard entirely, so the statements
+#: worth guarding keep going through the guarded path.
+#:
+#: What connect buys is not speed -- embedding at ~55-99 vec/s is 25x slower than
+#: any insert path, so the run time is unchanged. It buys PARAMETER BINDING. The
+#: previous version escaped prompts into SQL with a hand-rolled `esc()` lambda,
+#: and a prompt corpus full of apostrophes and backslashes is the worst possible
+#: input for hand-rolled quoting.
+_CLIENT = []
+
+
+def client():
+    """A clickhouse-connect client, or None. Never raises.
+
+    Same contract as the old stash: a store that cannot be reached makes a run
+    SLOWER, never wrong. Warns once rather than failing silently, because silence
+    is right for a transient outage and wrong for a misconfiguration -- the lesson
+    from `slot_axis._stash`, where a missing package left the cache off for a day.
+    """
+    if not _CLIENT:
+        try:
+            import clickhouse_connect
+            _CLIENT.append(clickhouse_connect.get_client(
+                host=os.environ.get("MALIGNMENT_CH_HOST", "localhost"),
+                port=int(os.environ.get("MALIGNMENT_CH_PORT", 8123)),
+                database=ch.DB))
+        except Exception as e:
+            print("vectors: clickhouse-connect unavailable (%s: %s); vectors will "
+                  "be recomputed and not cached" % (type(e).__name__, e),
+                  file=sys.stderr)
+            _CLIENT.append(None)
+    return _CLIENT[0]
+
 #: What `revision` holds until a snapshot is pinned. See the module docstring --
 #: the point is that this is legible as missing, not that it is a value.
 UNPINNED = "unpinned"
@@ -99,7 +136,23 @@ CHUNK = 2000
 
 
 def create(drop=False):
-    """Create the table. Idempotent unless `drop`."""
+    """Create the table. Idempotent unless `drop`.
+
+    **`CODEC(NONE)` ON `vec` ONLY, and it is measured rather than received advice.**
+    On 338,610 real rows the column compressed 1.24 GiB to 1.24 GiB -- ratio 0.998,
+    so LZ4 was spending CPU on every read and write to make it marginally LARGER.
+    Dense normalised float32 has no exploitable redundancy.
+    #:
+    **The other columns keep their codec, which is why this is per-column.**
+    `prompt` compresses 162x (it repeats once per word of its slot) and `word`
+    2.4x. A table-level `CODEC(NONE)` would have thrown that away.
+
+    **THE CONSTRAINT IS THE POINT OF THE `dims` COLUMN, DONE PROPERLY.** `dims`
+    RECORDS the length; a CHECK REFUSES a wrong one. Same distinction as an assert
+    against a comment, and this seat has spent the day on the difference. All
+    338,610 rows measured 1024 before it was added, so it is satisfiable rather
+    than aspirational.
+    """
     if drop:
         ch.execute("DROP TABLE IF EXISTS {db}.%s" % TABLE)
     ch.execute("""CREATE TABLE IF NOT EXISTS {db}.%s (
@@ -109,32 +162,37 @@ def create(drop=False):
         normalized  UInt8,
         prompt      String,
         word        String,
-        vec         Array(Float32),
+        vec         Array(Float32) CODEC(NONE),
         dims        UInt16,
         source      LowCardinality(String),
-        created_at  DateTime DEFAULT now()
+        created_at  DateTime DEFAULT now(),
+        CONSTRAINT vec_len CHECK length(vec) = 1024
     ) ENGINE = ReplacingMergeTree
       ORDER BY (embedder, revision, sep, normalized, prompt, word)""" % TABLE)
     return TABLE
 
 
-def _rows(prompt, words, vecs, embedder, source):
-    from .slot_axis import sep_for
-    sep = sep_for(prompt)
-    for w, v in zip(words, vecs):
-        yield {"embedder": embedder, "revision": UNPINNED, "sep": sep,
-               "normalized": 1, "prompt": prompt, "word": w,
-               "vec": [float(x) for x in v], "dims": int(len(v)),
-               "source": source}
+COLS = ("embedder", "revision", "sep", "normalized", "prompt", "word", "vec",
+        "dims", "source")
 
 
 def put(prompt, words, vecs, embedder=None, source="slot_axis"):
-    """Insert vectors for one prompt. -> count"""
-    from .slot_axis import NAMESPACE
-    rows = list(_rows(prompt, words, vecs, embedder or NAMESPACE, source))
+    """Insert vectors for one prompt. -> count
+
+    Column-oriented through clickhouse-connect: no JSON encoding of 1024 floats
+    per row, and no SQL string to escape.
+    """
+    from .slot_axis import NAMESPACE, sep_for
+    cl = client()
+    if cl is None:
+        return 0
+    emb, sep = embedder or NAMESPACE, sep_for(prompt)
+    data = [[emb, UNPINNED, sep, 1, prompt, w, [float(x) for x in v],
+             int(len(v)), source] for w, v in zip(words, vecs)]
     n = 0
-    for i in range(0, len(rows), CHUNK):
-        n += ch.insert(TABLE, rows[i:i + CHUNK])
+    for i in range(0, len(data), CHUNK):
+        cl.insert(TABLE, data[i:i + CHUNK], column_names=list(COLS))
+        n += len(data[i:i + CHUNK])
     return n
 
 
@@ -142,26 +200,23 @@ def fetch(prompt, words, embedder=None):
     """Vectors already in ClickHouse for these words. -> {word: list[float]}
 
     One query for the whole prompt, never one per word: the measured 176 ms is
-    fixed round-trip overhead, so 70 words cost the same as 1 and 70 separate
+    fixed round-trip overhead, so 70 words cost what 1 does and 70 separate
     queries cost 70x.
+
+    **PARAMETERS, NOT INTERPOLATION.** The prompt corpus is full of apostrophes
+    and the previous version escaped them by hand into the SQL text.
     """
     from .slot_axis import NAMESPACE, sep_for
-    if not words:
+    cl = client()
+    if cl is None or not words:
         return {}
-    esc = lambda s: s.replace("\\", "\\\\").replace("'", "\\'")
-    lst = ",".join("'%s'" % esc(w) for w in words)
-    q = ("SELECT word, vec FROM {db}.%s WHERE embedder = '%s' AND revision = '%s' "
-         "AND sep = '%s' AND prompt = '%s' AND word IN (%s) FORMAT JSONEachRow"
-         % (TABLE, esc(embedder or NAMESPACE), UNPINNED, esc(sep_for(prompt)),
-            esc(prompt), lst))
-    import json
-    out = {}
-    for line in ch.raw(q).strip().splitlines():
-        if not line.strip():
-            continue
-        d = json.loads(line)
-        out[d["word"]] = d["vec"]
-    return out
+    r = cl.query(
+        "SELECT word, vec FROM " + TABLE + " WHERE embedder = {e:String} AND "
+        "revision = {r:String} AND sep = {s:String} AND normalized = 1 AND "
+        "prompt = {p:String} AND word IN {w:Array(String)}",
+        parameters={"e": embedder or NAMESPACE, "r": UNPINNED,
+                    "s": sep_for(prompt), "p": prompt, "w": list(words)})
+    return {row[0]: row[1] for row in r.result_rows}
 
 
 def get(prompt, words, embedder=None, source="slot_axis", write=True):
@@ -221,36 +276,35 @@ def score(prompt, seed, words=None, embedder=None):
     """Cosine of every stored word against `seed`, computed IN SQL. -> {word: float}
 
     **THE VECTORS NEVER LEAVE THE SERVER, which is the whole point of the table.**
-    A seed direction is 4 KB; the candidates are megabytes. Sending the small
-    thing to the data beats pulling the data to the small thing, and it is what
-    makes an axis pass over hundreds of frames affordable.
+    A seed direction is 4 KB; the candidates are megabytes. Both sides are
+    L2-normalised at write, so `dotProduct` IS cosine -- stated rather than
+    assumed, which is why `normalized` sits in the key: an unnormalised row cannot
+    be pooled with these.
 
-    Both sides are L2-normalised at write, so `dotProduct` IS cosine here. Stated
-    rather than assumed: `normalized` is in the key precisely so a future
-    unnormalised row cannot be pooled with these.
+    **This is a PROJECTION, not a nearest-neighbour search**, which is why there is
+    no HNSW index and no `ORDER BY ... LIMIT`. It scores a named set of words on
+    one prompt. An ANN index would need the distance function to match its
+    declaration and would buy nothing here; brute force over ~1M rows measured
+    ~12 s and is exact.
     """
     import numpy as np
     from .slot_axis import NAMESPACE, sep_for
+    cl = client()
+    if cl is None:
+        return {}
     v = np.asarray(seed, dtype=np.float32).reshape(-1)
     n = float(np.linalg.norm(v))
     if n:
         v = v / n
-    esc = lambda s: s.replace("\\", "\\\\").replace("'", "\\'")
-    seed_sql = "[" + ",".join("%.8f" % float(x) for x in v) + "]"
-    where = ("embedder = '%s' AND revision = '%s' AND sep = '%s' AND normalized = 1 "
-             "AND prompt = '%s'" % (esc(embedder or NAMESPACE), UNPINNED,
-                                   esc(sep_for(prompt)), esc(prompt)))
+    sql = ("SELECT word, dotProduct(vec, {q:Array(Float32)}) AS s FROM " + TABLE +
+           " WHERE embedder = {e:String} AND revision = {r:String} AND "
+           "sep = {s:String} AND normalized = 1 AND prompt = {p:String}")
+    par = {"q": [float(x) for x in v], "e": embedder or NAMESPACE,
+           "r": UNPINNED, "s": sep_for(prompt), "p": prompt}
     if words:
-        where += " AND word IN (%s)" % ",".join("'%s'" % esc(w) for w in words)
-    q = ("SELECT word, dotProduct(vec, CAST(%s AS Array(Float32))) AS s "
-         "FROM {db}.%s WHERE %s FORMAT TabSeparated" % (seed_sql, TABLE, where))
-    out = {}
-    for line in ch.raw(q).strip().splitlines():
-        if not line.strip():
-            continue
-        w, s = line.rsplit("\t", 1)
-        out[w] = float(s)
-    return out
+        sql += " AND word IN {w:Array(String)}"
+        par["w"] = list(words)
+    return {row[0]: float(row[1]) for row in cl.query(sql, parameters=par).result_rows}
 
 
 def ingest_stash(limit=0, verbose=True):
@@ -287,7 +341,6 @@ def ingest_stash(limit=0, verbose=True):
     for p, w in pairs:
         by_prompt.setdefault(p, []).append(w)
     hit = miss = 0
-    buf = []
     for i, (p, ws) in enumerate(sorted(by_prompt.items()), 1):
         sep = A.sep_for(p)
         vs, hits = [], []
@@ -306,17 +359,15 @@ def ingest_stash(limit=0, verbose=True):
             hits.append(w)
             vs.append(np.asarray(v, dtype=np.float32).reshape(-1))
         if hits:
-            buf.extend(_rows(p, hits, vs, A.NAMESPACE, "stash-ingest"))
+            #: **ONE INSERT PATH.** This built rows by hand and sent them through
+            #: ch.insert (JSONEachRow) while put() went through connect. Two
+            #: encoders for one table is how two writers come to disagree about a
+            #: column, so it goes through put() like everything else.
+            put(p, hits, vs, source="stash-ingest")
             hit += len(hits)
-        if len(buf) >= CHUNK:
-            ch.insert(TABLE, buf[:CHUNK])
-            buf = buf[CHUNK:]
         if verbose and i % 200 == 0:
             print("  %d/%d prompts   copied %d   absent %d"
                   % (i, len(by_prompt), hit, miss), flush=True)
-    while buf:
-        ch.insert(TABLE, buf[:CHUNK])
-        buf = buf[CHUNK:]
     out = {"pairs_considered": len(pairs), "copied": hit, "absent_from_stash": miss,
            "prompts": len(by_prompt)}
     if verbose:
