@@ -413,10 +413,13 @@ def md_census(c, target=TARGET):
         L += ["", "## Where they live", "",
               _table([(k, v.get("n", 0), v.get("path", "")) for k, v in files.items()],
                      ["corpus", "items", "file"])]
-    thin = sorted(KEEP, key=lambda d: (rows.get(d) or {}).get("total", 0))
-    L += ["", "## Next", "",
-          "`%s` is thinnest — author there first." % thin[0], "",
-          "```bash", 'malign-slot screen "your new prompt here"', "```"]
+    #: **NO "AUTHOR HERE FIRST".** The census used to end by naming the thinnest
+    #: domain as an instruction, and a tasked agent then had to decide whether the
+    #: tool outranked its assignment -- the violence agent hit exactly that and
+    #: reported it. A report describes; whoever tasked the agent decides. The
+    #: numbers above already say which is thin.
+    L += ["", "## Next", "", "```bash",
+          'malign-slot screen "your new prompt here"', "```"]
     return "\n".join(L)
 
 
