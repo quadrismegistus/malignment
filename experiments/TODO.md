@@ -157,11 +157,29 @@ already the roster-driven version. **Waits on the v4 REBUILD** — all `twp_word
     M03 D_ladder_selection  alignment SELECTS from a repertoire pretraining already
                           built — which is why the effect is sudden
 
-**The most theoretically load-bearing cluster and the thinnest empirically.**
-M05's phase-2 rests on OLMo alone; `MANIFEST.md` already records that SmolLM3-3B
-is a second complete pretraining ladder — **118 revisions, different lab,
-different corpus** — and that M05's "no family anywhere releases preference-stage
-trajectories" was a survey of 8.
+**The most theoretically load-bearing cluster, and CORRECTED 2026-08-17 (RH):
+IT ALREADY HAS TWO INDEPENDENT LADDERS.** I wrote that it rests on OLMo alone,
+taking the line from `MANIFEST.md` and never checking it against M05 —
+a secondary source's characterisation of a primary one, repeated into a work list.
+
+    OLMo ladder      M05's main population
+    Pythia-6.9b      `E_pythia_capacity`, a SEPARATE STUDY, never pooled:
+                     different lab, tokenizer (50,277 vs 100,278) and corpus,
+                     instruments COPIED FROM OLMO so both are read by one rule
+
+**So the cross-ladder comparison already exists**, and `E_pythia`'s own headline
+is that it RESOLVES A TIE the single ladder could not. That is a stronger cluster
+than I described.
+
+**What remains true and is the real gap: both are grade C.** `E_pythia` is
+`STATUS: FIRST LOOK, grade C — one lineage, descriptive, no cross-seat audit`,
+and M05's other seven carry the same grade from one registrar pass on one day.
+**The cluster's weakness is audit, not coverage.**
+
+**SmolLM3 would be a THIRD ladder and the argument for it is narrower than I
+made it:** its distinct value is 118 pretraining revisions AND post-training in
+ONE repo, where OLMo's join crosses two. Also still true: M05's "no family
+anywhere releases preference-stage trajectories" was a survey of 8.
 
 **v3 route: the roster holds pythia-2.8b + the archangel ladder (5 arms), 14 OLMo
 nodes, and SmolLM3's revision container.** `Checkpoint` resolves a pinned
@@ -289,8 +307,10 @@ they are negatives: they bound where the mechanism is not, and `J` plus
    and the zh arm is a real open negative.
 2. **The three field findings (2) as ONE experiment** with the pretraining
    baseline in the figure, since B_field_flow says pretraining does 6x more.
-3. **The second pretraining ladder (4)** — highest theoretical value, and
-   SmolLM3's 118 revisions are already in the roster.
+3. **AUDIT the two ladders M05 already has (4)** — not a third one. Both OLMo
+   and Pythia-6.9b are there and cross-compared; both are grade C from a single
+   pass. A cross-seat audit is worth more than a new ladder, and SmolLM3 is a
+   later question.
 4. **M06 (8)** — never blocked by v4 at all, because it reads generated text.
 
 **Everything on `twp_words` now waits for the REBUILD rather than for the
