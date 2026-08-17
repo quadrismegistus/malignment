@@ -95,40 +95,53 @@ keeps `USE_PROMPT_CACHE` off. **But it is an order of magnitude too small.** The
 observed gap for `一个` is 0.258126 against expand's implied 0.262666, rel
 1.8e-02. Batching contributes and does not explain.
 
-### CONFIRMED: `expand` CREDITS ONE SURFACE AT SEVERAL DEPTHS
+### CORRECTED: `expand` IS RIGHT AND `score_words` UNDER-COUNTS
 
-Instrumented `_account` to record every `(surf, t1, depth)` it credits:
+I called the multi-depth crediting a v3 defect. **It is not.** RH asked whether
+this was just the known multi-record fold, and checking the actual prefixes
+answered a different and better question -- what the extra depth decodes to:
 
-    surface  depths       expand total   first depth   inflation
-    一个       [1, 2]       0.0326187      0.0320549     1.02x
-    自己       [4, 5, 5]    0.0123311      0.0114837     1.07x
-    你        [2, 3, 3]    0.0063722      0.0057518     1.11x
-    我        [2, 3, 3]    0.0057578      0.0050940     1.13x
-    什么       [4, 5]       0.0029856      0.0025951     1.15x
+    SURFACE '一个'  t1=43340
+        ids=[43340]                raw='一个'    cleaned='一个'
+        ids=[43340, 12831]         raw='一个，'   cleaned='一个'
+    SURFACE '你'   t1=18645
+        ids=[18645, 250]           raw='你'     cleaned='你'
+        ids=[18645, 250, 12831]    raw='你，'    cleaned='你'
+        ids=[18645, 250, 19076]    raw='你。'    cleaned='你'
 
-    zh   6 of 162 keys credited at more than one depth   (4%)
-    en   0 of 123                                        (0%)
+The extra depth is the word followed by CJK punctuation -- `，` U+FF0C id 12831,
+`。` U+FF0E id 19076 -- which `clean_surface` strips.
 
-**Those totals ARE expand's stored values and those first-depth figures ARE
-`score_words`'s** -- the decomposition table above reproduces to the last digit.
-So the large disagreements are all this, and the residue is the 1.2e-03 batching
-effect.
+**So it is not double counting.** `_account` continues only through `cont =
+flatnonzero(~b)`, i.e. NON-boundary tokens, so `，` was never counted in the
+depth-1 `term`; the depth-2 credit is the distinct mass flowing through it. And
+under RH's punctuation ruling -- *"the true word in `kill!` is `kill`"* --
+`一个，` IS the word `一个`. `expand` is implementing the declared rule.
 
-`_account` credits `words[(surf, t1)] += mass x term` for every live prefix at
-every depth, with `surf = clean_surface(decode(pref).strip())`. A deeper prefix
-whose extra tokens strip or clean away lands on the SAME surface and is credited
-again -- so the word is counted once for "emit it and stop" and again for "emit
-it, emit a token that cleans away, and stop". **The second term's boundary sum is
-taken AFTER a separator the first term already counted as the boundary.**
+**The direction reverses: `expand` is correct and `score_words` UNDER-counts**,
+because it scores one encoded path and never sees the punctuation-extended route.
+That is a second and independent way `score_words` is a lower bound, on top of
+the single-path one already documented.
 
-English never triggers it because a continuation that cleans away is exactly what
-the whitespace rule already treats as a boundary. CJK triggers it because the
-dictionary rule decides boundaries by lookup, not by whitespace.
+### THE ACTUAL ANOMALY IS ONE LEVEL DOWN: CJK PUNCTUATION IS NOT A BOUNDARY
 
-**This is a v3 DEFECT in `expand`, not a rule question**, and `expand` wrote all
-984,857 stored cells. Inflation is bounded and small here (<=1.15x on 4% of zh
-keys, 0% of en) but it is unmeasured across the roster, and it inflates exactly
-the CJK cells -- 457 roster prompts are `zh`.
+`，` is reached as a CONTINUATION, which means it is not in `b`. ASCII `,` is in
+the static boundary mask, which is why English shows 0 of 123 keys credited at
+more than one depth and Chinese shows 6 of 162. Full-width CJK punctuation is not
+classified as punctuation by `boundary_mask`, so it survives as a continuation
+and is then stripped by `clean_surface`.
+
+Two consequences, neither measured beyond this prompt:
+
+- a CJK word's `term` EXCLUDES its most likely real terminator, so `term` is
+  understated for CJK surfaces and the mass arrives one depth later instead
+- the same surface is credited from several depths, which is correct arithmetic
+  but makes `n_paths` and any depth-based reasoning read oddly for CJK
+
+**This is the v4 question the whole probe was looking for**, and it is a rule
+question rather than a bug: should `boundary_mask` treat full-width punctuation
+as punctuation? RH already ruled on the principle for ASCII. Nobody has asked it
+for `，。！？；：`.
 
 ### the candidate this replaced, now closed
 
