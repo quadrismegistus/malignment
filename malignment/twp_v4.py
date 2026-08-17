@@ -97,10 +97,14 @@ class Rules:
     #: terminal like `!` -- see the module docstring for why that is not merely
     #: wrong but wrong DIFFERENTIALLY.
     hyphen_intra: bool = False
+    #: Divide by the boundary mass at depth 0 -- Pimentel & Meister Thm 2's
+    #: DENOMINATOR, which v3 omits. See `expand4`.
+    apply_z: bool = False
 
     def is_v3(self):
         return (self.term_floor == 0.0 and not self.term_renorm
-                and not self.enumerate_paths and not self.hyphen_intra)
+                and not self.enumerate_paths and not self.hyphen_intra
+                and not self.apply_z)
 
     def label(self):
         if self.is_v3():
@@ -112,6 +116,8 @@ class Rules:
             bits.append("paths")
         if self.hyphen_intra:
             bits.append("hyphen")
+        if self.apply_z:
+            bits.append("Z")
         return "v4[" + ",".join(bits) + "]"
 
 
@@ -218,7 +224,60 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
             res["drop"] += float(m2[~k2].sum())
         live = nxt
     res["open"] = float(sum(m for _, m, _ in live))
+    #: **Z: PIMENTEL & MEISTER THM 2's DENOMINATOR, WHICH v3 OMITS.**
+    #: arXiv:2406.14561, and independently Oh & Schuler arXiv:2406.10851 as
+    #: "whitespace-trailing decoding". For a bow-marking tokenizer the word
+    #: probability is
+    #:
+    #:     p(w | c) = PROD p(tokens)  x  SUM_bow p(s | c o w)
+    #:                                   -------------------
+    #:                                   SUM_bow p(s | c)
+    #:
+    #: v3 computes `mass x term`, which is the NUMERATOR exactly. `Z` is the
+    #: same boundary sum evaluated at depth 0 -- before the word -- and it is
+    #: what makes the quantity `p(w | c, a word starts here)` rather than
+    #: `p(w AND a boundary follows | c)`.
+    #:
+    #: **EOS is in the bow set** on P&M's definition (`S_bow u {EOS}`): a word
+    #: may end by the sequence ending. v3's static mask does not include it.
+    #:
+    #: Measured on our prompt shapes: Z = 0.99788..0.99948, so -log Z is
+    #: 0.0005..0.0021 nats and the correction is ~0.1%. **It is applied because
+    #: it is free and correct, NOT because it changes anything** -- our prompts
+    #: end at clean word boundaries, which is exactly the case where Z -> 1. A
+    #: prompt ending mid-word or with a trailing space is the case where Z
+    #: departs from 1, and that is also the prompt-boundary problem
+    #: (Hayase et al. arXiv:2506.14123), which this does not fix.
+    zb = bmask.copy()
+    eos = getattr(tok, "eos_token_id", None)
+    if eos is not None and 0 <= int(eos) < len(zb):
+        zb[int(eos)] = True
+    Z = float(P0[zb].sum())
+    #: **REFUSED FOR CJK, AND THE MEASUREMENT IS WHY.** P&M scope Theorem 2 to
+    #: BOW-MARKING tokenizers -- a new word signalled by a leading space. CJK is
+    #: not bow-marking, so the depth-0 boundary set captures almost none of the
+    #: mass and `Z` measures "how likely is a space next", which after Chinese
+    #: text is correctly ~2%. Dividing by it inflates everything ~50x:
+    #:
+    #:     'She was so angry she wanted to'   Z=0.997966   sum +0.204%
+    #:     'The mob dragged him into...'      Z=0.999481   sum +0.052%
+    #:     '那个自由的人选择了'                  Z=0.019630   sum 0.355 -> 18.101
+    #:
+    #: **18.1 is Oh & Schuler Thm 1's violation caused BY the correction** --
+    #: word probabilities summing far past one. So this is undefined for CJK
+    #: rather than inaccurate, and it refuses instead of guessing a CJK bow set.
+    #: 457 of the roster's prompts are `language='zh'`.
+    if rules.apply_z:
+        if T.is_cjk(prompt):
+            raise ValueError(
+                "apply_z is undefined for a CJK prompt: Pimentel & Meister Thm 2 "
+                "assumes a bow-marking tokenizer, and Z=%.4f here measures the "
+                "probability of a SPACE, not of a word boundary. Dividing by it "
+                "would inflate this cell ~%.0fx." % (Z, 1.0 / max(Z, 1e-9)))
+        if Z > 0:
+            words = {k: v / Z for k, v in words.items()}
     meta = {"rule_version": RULE_VERSION, "rules": dataclasses.asdict(rules),
+            "Z": Z,
             "label": rules.label(),
             #: THE HONEST FIELD NAME. v3's `n_paths` counts distinct first
             #: tokens; this counts what the name says.
