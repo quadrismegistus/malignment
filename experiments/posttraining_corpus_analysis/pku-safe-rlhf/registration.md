@@ -540,3 +540,19 @@ together 74.2% (n=124); the two forced apart, 48.1% / 51.9% (n=52), chance. So
 substitution with content held constant -- M01's displacement -- has no corpus
 source, while the bundle does. Length control underpowered (n=51) and reported
 as unresolved. Numbers in README.
+
+---
+
+## A8 — 2026-08-17. WITHDRAWN: the claim that PKU says anything about M01's displacement.
+
+RH: a hasty study of one safety corpus does not overturn two dozen experiments on
+fifty models. Correct, and the question was malformed rather than the answer.
+No M01 model was trained on PKU; 52 LLM-coded pairs cannot adjudicate M01 in
+either direction; and the designs measure different objects -- M01 is a
+within-model within-prompt shift in a held slot, this is a preference between two
+independently generated texts, so "source" asserted a causal relation neither
+design supports.
+
+WITHDRAWN: "displacement has no corpus source" and the fork built on it.
+STANDS: every number, rescoped to this corpus's annotation. README and
+interpretation.md corrected.

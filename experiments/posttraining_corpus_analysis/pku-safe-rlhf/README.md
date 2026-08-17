@@ -207,16 +207,24 @@ annotation is at chance.** What is rewarded is not a lexical judgment but an
 overall attenuation, which is consistent with the coder's own gestalt severity
 read predicting `safer` at 63.6% in the same stratum.
 
-## WHICH IS WHY DISPLACEMENT STILL HAS NO CORPUS SOURCE
-
-M01's displacement holds the slot and changes the filler: content constant, word
-milder. **That is exactly the come-apart cell**, and there the corpus rewards
-nothing detectable. At n=52 the interval rules out an effect anywhere near the
-68-74% found elsewhere; it does not rule out a modest one.
-
     ADDITION      append a moral frame        68.2% in severity-equal
     ATTENUATION   gentler AND vaguer at once  74.2%
-    SUBSTITUTION  gentler ALONE               48.1%, n=52
+    WORDING ALONE gentler, specificity held   48.1%, n=52
+
+## AND IT SAYS NOTHING ABOUT M01. THE SCOPE IS THIS CORPUS.
+
+An earlier version of this section read the come-apart cell as showing that M01's
+displacement "has no corpus source". **That claim is withdrawn.** No M01 model was
+trained on PKU; 52 LLM-coded pairs do not adjudicate two dozen experiments on
+fifty models; and the two designs do not measure the same object — M01 is a
+within-model, within-prompt probability shift in a held slot, this is a preference
+between two independently generated texts. The word "source" asserted a causal
+relation neither design carries. Full statement in `interpretation.md`.
+
+What stands is a fact about one annotation process: **PKU's `safer` label responds
+to bundled attenuation and to an appended moral frame, and has no detectable view
+on vocabulary once specificity is held constant** (n=52, CI [0.340, 0.624], which
+rules out an effect the size of the others and not much else).
 
 ## TWO THINGS THIS DOES NOT HAVE
 

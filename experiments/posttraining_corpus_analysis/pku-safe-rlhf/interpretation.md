@@ -119,53 +119,59 @@ with no inter-annotator agreement reported, and LLM coders for the categories.
 preference signal rewards the hedge," which is the claim that matters for what
 gets optimised into a model.
 
-# THE DISTINCTION THIS FORCES: ADDITIVE AND SUBSTITUTIVE
+# WHAT THIS CORPUS CAN AND CANNOT SAY ABOUT M01 (RETRACTED AND RESTATED, 2026-08-17)
 
-**M01's displacement is substitutive. This is additive. They should not be
-collapsed, and the corpus evidence so far supports only the second.**
+**An earlier version of this section asked whether displacement "has a corpus
+source" and answered it from PKU. RH: a hasty study of one safety corpus does not
+overturn two dozen experiments on fifty models. The question was malformed, not
+just the answer.**
 
-    SUBSTITUTIVE   the slot is held and the filler changes
-                   `kill` -> `scream`. The content moves. M01.
-    ADDITIVE       the content is held and a frame is appended
-                   advice + "this is illegal". Nothing moves. PKU, Y.
+Three reasons it cannot be asked here, in increasing order of how badly they
+break it:
 
-The preference data visibly rewards addition. **It has not been shown to reward
-substitution** -- hh-rlhf could not answer that because its chosen/rejected axis
-is engage-versus-deflect, and the mildness arm of this registration has never been
-run (see `README.md`, NOT DONE).
+**1. Wrong corpus.** Not one M01 model was trained on PKU-SafeRLHF. Three roster
+models touch this data at all — `beaver-7b-v1.0`, `AmberSafe`,
+`alpaca-7b-reproduced` — and none of them carries M01's result. A null in a
+corpus no relevant model saw bounds nothing about those models.
 
-**If that gap holds after the mildness arm runs, the fork is the interesting
-one:** displacement in models would not be read off the preference corpus, and
-would have to be produced by the optimisation, by pretraining, or by something
-else. Findings U already place the cut at SFT rather than at the safety data.
-**That is a prediction this collection can test, and it is stated here before the
-K arm runs.**
+**2. Wrong weight.** M01 is roughly two dozen experiments across fifty models
+with graded findings and replications. The come-apart cell here is 52 pairs coded
+by an LLM in one afternoon, CI [0.340, 0.624]. That is not evidence that
+adjudicates M01 in either direction, and treating it as though it were inverts
+the burden.
 
-## MEASURED, AND THE TWO-WAY DISTINCTION WAS TOO CLEAN (A7, 2026-08-17)
+**3. Wrong object, and this is the one that makes it incoherent.** M01 measures a
+WITHIN-model, WITHIN-prompt shift: hold the prompt, compare base to aligned,
+watch probability move from `kill` to `scream` in one slot. PKU is a preference
+BETWEEN two independently generated texts. A choice over two different
+completions is not the same kind of thing as a probability shift inside one, so
+"source" was asserting a causal relation that neither design can carry.
 
-A blind coder with a passing positive control replaced the failed lexicon, and
-the answer is neither "addition only" nor "substitution too". **There are three
-cells, not two:**
+## SO WHAT THE MEASUREMENT ACTUALLY LICENSES
+
+A statement about this corpus's annotation, and nothing past it:
 
     ADDITION      append a moral frame           68.2%   severity-equal
     ATTENUATION   gentler AND vaguer at once     74.2%   n=124
-    SUBSTITUTION  gentler ALONE, content held    48.1%   n= 52, chance
+    WORDING ALONE gentler, specificity held      48.1%   n= 52, chance
 
-**The corpus rewards a bundle.** Where a response reads as less bad along both
-vocabulary and specificity, it wins at 74.2%. Where those two are forced apart,
-the annotation has no view at all. So what the preference data encodes is not a
-lexical rule but an overall attenuation, which is why the coder's own gestalt
-severity judgement predicts `safer` about as well as any component of it.
+**PKU's `safer` label responds to bundled attenuation and to an appended moral
+frame, and has no detectable view on vocabulary once specificity is held
+constant.** That is a finding about one annotation process. Whether anything
+resembling it shaped any model is a separate question with its own requirements.
 
-**And M01's displacement is precisely the unbundled case** — the slot held, the
-content constant, only the filler softened. That is the cell at chance. So the
-conclusion of the section above survives, but the reason given for it was wrong:
-displacement lacks a corpus source not because mildness goes unrewarded, but
-because what is rewarded is exactly the thing displacement holds constant.
+**The additive and substitutive vocabulary is still useful for describing the two
+operations**, and both are visible in this corpus. What it is not is a bridge
+between this corpus and M01's models.
 
-The additive channel is unaffected by any of this and remains separable: the
-disclaimer effect runs at 68.2% inside the severity-equal stratum and is
-strongest where the disclaimer is the SHORTER text.
+## WHAT WOULD MAKE IT A QUESTION ABOUT MODELS
+
+The chain has three links and we hold none of them: PKU trained model X; model X
+shows the effect; the effect tracks the corpus signal rather than something
+upstream. Only `beaver-7b-v1.0` and `AmberSafe` can even begin it, both wait on
+v4, and Findings U's placement of the cut at SFT is a reason to expect the last
+link to be the hard one. **Until then the model-side and corpus-side results are
+two observations that rhyme, and the rhyme is not an argument.**
 
 ## THE K ARM RAN FIRST AND FAILED ITS INSTRUMENT (A5, 2026-08-17)
 
