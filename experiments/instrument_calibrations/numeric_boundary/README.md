@@ -316,3 +316,65 @@ at depth 1. Mass moves between accounting routes rather than appearing or
 vanishing, so the net effect on a word's `p` depends on the row at each depth.
 **Measurable on the 6 of 162 keys where it fires, and to be measured before the
 fix is adopted rather than after.** Unrun.
+
+# FINDING 3 — `generate` WALKS PAST BOTH BLOCKERS. The limits are twp's, not the model's.
+
+`--stage beam`. SmolLM2-360M base + Instruct, all 30 `domain == 'class'` prompts
+(20 en, 10 zh), 100 samples of 10 tokens at temp=1. **6,000 samples.**
+
+    46,204,000    811,387.54    52,948,650    146,594.68    650,000.00
+
+**Ten-plus characters, past the comma that terminates the word AND past
+`MAX_DEPTH` 6.** 4,621 of 6,000 carry a thousands comma.
+
+    boundary rule   `,` terminates       -> `expand` cannot DISCOVER $100,000
+    MAX_DEPTH 6     8 tokens             -> `score_words` REFUSES it  ([6440])
+    generate        consults NEITHER     -> the model writes it
+
+**Both blockers are properties of the twp EXPANSION, not of the model.** @malign
+had recommended restricting to the 40 models where the string fits and withdrew
+it on this: *"that accepts a limit that is not the model's."* **The `MAX_DEPTH`
+change is not needed for the salary question** and it is the most expensive item
+on the v4 table.
+
+## THIS IS NOT A FREE WIN — THE ESTIMAND CHANGES
+
+    twp        EXACT next-token distribution, calibrated, commensurable with
+               984,857 stored cells
+    generate   SAMPLED, n=100 per prompt, commensurable with NOTHING in the store
+
+For a median, an IQR or a gender gap, sampling at n=100 is the ordinary
+estimator. **For anything that must sit beside a stored `p` it is useless.** The
+failure mode to guard is a number from one arriving in a sentence with a number
+from the other.
+
+## THE ENCODING SPLIT, AND WHY THE FIRST FLAG WAS WRONG
+
+My first pass used one `has_separator` boolean, which counted `5401.00` -- a
+DECIMAL, not a thousands separator -- and scored `88K` as a bare truncation when
+it is the most compact way to write eighty-eight thousand. Re-parsed by encoding:
+
+    en  n=4000   comma 91.7%   bare  5.5%   decimal 2.3%   K 0.3%
+    zh  n=2000   comma 47.7%   bare 40.3%   decimal 7.8%   K 1.1%
+
+**In Chinese the model writes `57900` where in English it writes `57,900`.** So
+**the truncation defect's severity is LANGUAGE-DEPENDENT** -- there is often no
+separator to truncate at -- while `MAX_DEPTH` bites the same, because the numeral
+is multi-token either way. **The two blockers do not co-occur at the same rate
+across languages.**
+
+**An 88-tokenizer sweep says what a tokenizer CAN do; this says what a model
+DOES**, and they are not the same population.
+
+## OPEN AXIS, @malign's [6442], NOT MEASURED
+
+**Language is not randomly assigned across this roster.** Chinese-heavy models
+are a family cluster -- Yi, Qwen, InternLM2, Baichuan2, CT-LLM, MAP-Neo, GLM4,
+MiniCPM -- so a defect that bites less in Chinese **bites less on a set of models
+selected by provenance**, which correlates with training corpus and with
+alignment regime. That is a confound in any cross-family comparison of numeric
+prompts and is invisible to a per-tokenizer count and to a per-prompt magnitude
+alike.
+
+**Unmeasured, and it may be small.** This arm is ONE family, so it cannot speak
+to it at all. Recorded as an open axis rather than left to be discovered later.

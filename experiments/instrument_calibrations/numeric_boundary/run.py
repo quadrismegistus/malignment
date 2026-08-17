@@ -32,7 +32,8 @@ A tokenizer that will not load is a row with a reason, not an absence. Roughly a
 dozen roster entries are gated or need transformers 4.57, and a silently shorter
 table would read as a cleaner result.
 """
-import argparse, csv, json, os, sys
+import argparse, csv, json, math, os, re, sys
+import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODELS_FROM = None
@@ -265,11 +266,13 @@ def stage_magnitude(model_id, device="mps"):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="tokenizers", choices=["tokenizers", "mask", "magnitude"])
+    ap.add_argument("--stage", default="tokenizers", choices=["tokenizers", "mask", "magnitude", "beam"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--models-from", default=None,
                     help="file of model ids, one per line -- for the tf457 cohort")
     ap.add_argument("--out", default="by_tokenizer.csv")
+    ap.add_argument("--beam", type=int, default=100)
+    ap.add_argument("--depth", type=int, default=10)
     ap.add_argument("--model", default="HuggingFaceTB/SmolLM2-360M",
                     help="magnitude stage only -- it needs weights")
     ap.add_argument("--device", default="mps")
@@ -300,6 +303,9 @@ def main():
         print("\n  ->", path)
         return
 
+    if a.stage == "beam":
+        stage_beam(width=a.beam, depth=a.depth)
+        return
     if a.stage == "mask":
         rows, failed = stage_mask(a.limit)
         cols = ["model","loaded","reason","cjk_punct_tokens","marked_boundary",
@@ -343,6 +349,101 @@ def main():
         fires = sum(1 for r in seen if r.get(name + "_intra_fires") == 1)
         print("  %-10s separator present in %3d | emitted ALONE in %3d | "
               "intra_word fires in %3d" % (name, len(seen), alone, fires))
+    print("\n  ->", path)
+
+
+
+
+# --------------------------------------------------------------------------
+# Stage 4 -- the beam. THE ONLY ARM THAT NEEDS WEIGHTS.
+# --------------------------------------------------------------------------
+
+#: `domain == 'class'` is the whole battery and is EXACT: 30 prompts in the
+#: catalogue, all 30 salary, zero false positives (registration A3). Never the
+#: prompt text, never `finding` -- F13 is on 439 prompts of which 404 are not
+#: salary.
+BEAM_MODELS = ["HuggingFaceTB/SmolLM2-360M", "HuggingFaceTB/SmolLM2-360M-Instruct"]
+
+
+def stage_beam(width=10, depth=10, models=None):
+    """What does the model SAY when allowed to write? `generate`, nothing custom.
+
+    RH: *"why not just hf generate for 10 tokens 10 times temp=1"*. Right, and
+    the first version of this was a hand-rolled beam over `twp.next_dist` --
+    built to stay commensurable with `expand`, which is a comparison to make
+    AFTERWARDS and not a reason to reimplement a sampler. It cost three wrong
+    signature guesses in ten minutes.
+
+    The question is whether a salary comes out whole: `$150,000` rather than the
+    `150` that `expand` records once the comma terminates the word. `generate`
+    answers that with no boundary rule in the way at all.
+
+    SAMPLED, not greedy, and temp=1 on purpose: greedy returns one continuation
+    and says nothing about the distribution's shape, which is what the salary
+    hypotheses are about.
+
+    WRITES AFTER EVERY PROMPT -- first arm that loads weights, so a crash at
+    prompt 27 costs one row.
+    """
+    import torch
+    from malignment import twp
+    from malignment.checkpoint import Checkpoint
+    from malignment.prompts import Prompts
+
+    #: `domain == 'class'` IS the battery: 30 prompts, all salary, zero false
+    #: positives (registration A3). Not the prompt text, not `finding` -- F13 is
+    #: on 439 prompts of which 404 are not salary.
+    prompts = [p for p in Prompts.all()
+               if str(getattr(p, "domain", "") or "") == "class"]
+    prompts.sort(key=lambda p: (p.language, p.prompt_id))
+    mids = models or BEAM_MODELS
+    print("generate: %d prompts (%d en, %d zh) x %d models, %d samples x %d tokens"
+          % (len(prompts), sum(1 for p in prompts if p.language == "en"),
+             sum(1 for p in prompts if p.language == "zh"), len(mids), width, depth),
+          file=sys.stderr)
+
+    os.makedirs(RESULTS, exist_ok=True)
+    path = os.path.join(RESULTS, "beam.csv")
+    cols = ["model", "prompt_id", "language", "subdomain", "group_id", "prompt",
+            "sample", "continuation", "numeral", "has_separator", "n_digits"]
+    fresh = not os.path.exists(path)
+    fh = open(path, "a", newline="", encoding="utf-8")
+    w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+    if fresh:
+        w.writeheader(); fh.flush()
+
+    for mid in mids:
+        L = Checkpoint(mid).load()
+        for pi, p in enumerate(prompts, 1):
+            ids = L.tok(p.text, return_tensors="pt").to(L.dev)
+            with torch.no_grad():
+                out = L.model.generate(**ids, max_new_tokens=depth,
+                                       do_sample=True, temperature=1.0,
+                                       num_return_sequences=width,
+                                       pad_token_id=L.tok.eos_token_id)
+            n_in = ids["input_ids"].shape[1]
+            got = 0
+            for k in range(out.shape[0]):
+                cont = L.tok.decode(out[k][n_in:], skip_special_tokens=True)
+                m = re.match(r"\s*([\d,\.]*\d)", cont)
+                num = m.group(1) if m else ""
+                sep = ("," in num) or ("." in num)
+                got += bool(sep)
+                w.writerow({"model": mid, "prompt_id": p.prompt_id,
+                            "language": p.language,
+                            "subdomain": getattr(p, "subdomain", "") or "",
+                            "group_id": p._row.get("group_id") or "",
+                            "prompt": p.text, "sample": k + 1,
+                            "continuation": cont, "numeral": num,
+                            "has_separator": int(sep),
+                            "n_digits": sum(c.isdigit() for c in num)})
+            fh.flush(); os.fsync(fh.fileno())
+            print("  %-28s %2d/%d %-16s sep %d/%d"
+                  % (mid.split("/")[-1][:26], pi, len(prompts), p.prompt_id,
+                     got, width), file=sys.stderr)
+        twp.free(L.model)
+        del L
+    fh.close()
     print("\n  ->", path)
 
 
