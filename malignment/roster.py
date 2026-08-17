@@ -1282,8 +1282,13 @@ def _ver(s):
 def fleet(models, engine=None):
     """Group `models` into boxes to rent. The plan, not the rental.
 
-        for box in roster.fleet(roster.population("endpoints")):
+        for box in roster.fleet(roster.population("endpoints"))["boxes"]:
             print(box["box"], box["image"], len(box["models"]))
+
+    A row is a REQUIREMENT GROUP, not a machine: the key is (box, image,
+    box_pins, transformers, kernels, compute_dtype), so one box shape appears
+    once per distinct requirement. `len(...["boxes"])` is therefore a count of
+    groups, and `{b["box"] for b in ...}` is the count of machines.
 
     **GROUPING IS BY REQUIREMENT FIRST AND COUNT SECOND, NEVER THE REVERSE**, and
     that ordering was paid for: on 2026-08-10 a `dense` box pulled 15 GB of

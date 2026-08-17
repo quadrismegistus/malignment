@@ -153,7 +153,16 @@ def main():
           E["boxes"]["dense"]["provides_vram_gb"], True)
     f = roster.fleet(roster.population("all"))
     check("fleet assigns every checkpoint", len(f["unassigned"]), 0)
-    check("fleet boxes for the full roster", len(f["boxes"]), 7)
+    #: **THIS IS NOT A COUNT OF BOXES AND ITS OLD NAME SAID IT WAS.** `fleet()`
+    #: groups on SIX fields (box, image, box_pins, transformers, kernels,
+    #: compute_dtype), so a row is a REQUIREMENT GROUP; the distinct machines
+    #: behind these 8 rows are 4 -- dense x3, ssm x2, big80 x2, twogpu x1 -- and
+    #: that 4 has not moved. lacan caught this at [6397] when the number went
+    #: 7 -> 8 and "boxes 7 -> 8" read as A NEW MACHINE ENTERED THE PLAN. None did.
+    #: It went up because `996b478` gave Olmo-Hybrid x3 `transformers >=5`, a
+    #: value the key had never seen, so `dense` split three ways: 128 / 11 / 3.
+    check("fleet requirement groups for the full roster", len(f["boxes"]), 8)
+    check("...over how many DISTINCT boxes", len({b["box"] for b in f["boxes"]}), 4)
     #: Aquila is NOT broken; vLLM deleted it. Same model, two verdicts.
     check("Aquila unusable on 0.27.1",
           roster.environment("BAAI/Aquila2-7B", engine="0.27.1")["engine"]["usable"], False)
@@ -205,7 +214,16 @@ def main():
     print()
     if FAIL:
         print("  %d HOWTO CLAIMS ARE WRONG: %s" % (len(FAIL), ", ".join(FAIL)))
-        print("  Fix the code or fix HOWTO.md -- they are not allowed to disagree.")
+        #: **NOT EVERY CLAIM HERE HAS A COUNTERPART IN HOWTO.md**, and telling a
+        #: reader to fix a document that contains nothing to change sends them
+        #: looking for a line that does not exist. lacan hit exactly this at
+        #: [6397]: `grep -n "fleet boxes" docs/HOWTO.md README.md MANIFEST.md`
+        #: returns nothing -- the literal lived only in this file. A harness
+        #: assertion with no documented counterpart is a unit test wearing the
+        #: harness's authority, and its message inherits that authority too.
+        print("  Fix the code, or fix the prose IF the claim appears there --")
+        print("  grep the literal first; some checks here have no counterpart in")
+        print("  HOWTO.md and can only be fixed in this file.")
         return 1
     print("  every number in HOWTO.md reproduces")
     return 0

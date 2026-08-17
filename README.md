@@ -60,7 +60,7 @@ indistinguishable a month later.
 
     50 lineages   base -> endpoint          roster.endpoints()
     18 chains     base -> sft -> preference roster.chains()   (16 distinct bases)
-    2,189 prompts crossed over 154 models   corpus.panel()
+    2,189 prompts crossed over 159 models   corpus.panel()
     160 checkpoints, each declaring its environment   roster.environment()
 
 The chain population is small because it needs a lab to release the **middle** of
