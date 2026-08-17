@@ -1,0 +1,72 @@
+{
+ "model": "HuggingFaceTB/SmolLM2-360M",
+ "loader": "auto",
+ "rows": [
+  {
+   "lang": "en",
+   "prompt": "She was so angry she wanted to",
+   "surfaces": 123,
+   "expand_keys": 123,
+   "seconds": {
+    "expand": 0.4,
+    "score_words": 0.2,
+    "score_words_paths": 1.0
+   },
+   "diag": {
+    "capped": 0,
+    "pruned_mass": 8.788805319967641e-07,
+    "dropped_paths": 3360,
+    "forwards": 638
+   },
+   "score_words": {
+    "matched": 123,
+    "exact": 114,
+    "max_rel": 5.014038858322392e-08,
+    "under": 5,
+    "over": 4,
+    "refused": 0
+   },
+   "score_words_paths": {
+    "matched": 123,
+    "exact": 114,
+    "max_rel": 5.014038858322392e-08,
+    "under": 5,
+    "over": 4,
+    "refused": 0
+   }
+  },
+  {
+   "lang": "zh",
+   "prompt": "\u90a3\u4e2a\u81ea\u7531\u7684\u4eba\u9009\u62e9\u4e86",
+   "surfaces": 162,
+   "expand_keys": 162,
+   "seconds": {
+    "expand": 1.0,
+    "score_words": 0.7,
+    "score_words_paths": 2.0
+   },
+   "diag": {
+    "capped": 0,
+    "pruned_mass": 3.7259445103800854e-06,
+    "dropped_paths": 770,
+    "forwards": 854
+   },
+   "score_words": {
+    "matched": 162,
+    "exact": 33,
+    "max_rel": 0.30285918130020284,
+    "under": 57,
+    "over": 66,
+    "refused": 0
+   },
+   "score_words_paths": {
+    "matched": 162,
+    "exact": 33,
+    "max_rel": 0.30285918130020284,
+    "under": 54,
+    "over": 69,
+    "refused": 0
+   }
+  }
+ ]
+}

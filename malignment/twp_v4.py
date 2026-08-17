@@ -290,9 +290,10 @@ def score_words_paths(model, tok, prompt, targets, dev, bmask, cjk=None,
                       bos_policy="inherited", cache=None, layers=None, cap=None):
     """Score named words over ALL token paths, not the canonical one.
 
-        got, refused, total, capped = score_words_paths(model, tok, prompt,
-                                                        ["kill", "什么"], ...)
+        got, refused, total, diag = score_words_paths(model, tok, prompt,
+                                                      ["kill", "什么"], ...)
         got -> {(surface, first_token): probability}      keyed exactly as `expand`
+        diag -> {capped, pruned_mass, forwards}
 
     **THIS CLOSES THE GAP `twp.score_words` DOCUMENTS.** That function encodes
     each target once and scores that path, which is exact where a surface is
@@ -314,27 +315,17 @@ def score_words_paths(model, tok, prompt, targets, dev, bmask, cjk=None,
 
     ## IT RETURNS A FOURTH VALUE, AND THAT IS DELIBERATE
 
-    `capped` names any target whose enumeration hit `PATH_CAP`. Everything else
-    here is shaped like `twp.score_words` on purpose, but a cap that binds
-    silently would reintroduce exactly the defect this module exists to remove,
-    so it is returned rather than logged.
+    Everything else here is shaped like `twp.score_words` on purpose, but three
+    quantities decide whether a returned number can be quoted, and a run that
+    logs them instead of returning them reintroduces exactly the defect this
+    module exists to remove:
 
-    ## NOT YET RUN AGAINST A MODEL -- AND THE COST IS THE OPEN PROBLEM
-
-    `byte_table` and `enumerate_paths` are verified (100/100 roster tokenizers,
-    every enumerated path round-trips). This function is NOT: no forward pass has
-    been made through it. The reason it is parked rather than shipped is that
-    enumeration is faithful but EXPENSIVE -- Yi reaches `scream` by 623 paths and
-    `murmuring` by 1,825, almost all of them through single-byte fallback tokens
-    (`<0x73><0x63>...`) that no model would ever take. Each distinct prefix costs
-    a forward pass, so the honest count is thousands of passes for one word.
-
-    **The fix is to prune by MASS while descending, not to enumerate less.**
-    Depths are already processed in order, so a prefix whose accumulated mass is
-    below `PATH_FLOOR` can be dropped along with every path through it, which
-    kills the byte-fallback paths (their first token is far below theta) while
-    staying exact to within the floor. That is the next edit here, and until it
-    lands `twp.score_words` remains the instrument of record.
+        capped       targets whose enumeration hit `PATH_CAP` -- their value is
+                     a lower bound by an UNKNOWN amount
+        pruned_mass  what the `PATH_FLOOR` walk actually discarded, SUMMED, not
+                     assumed negligible. The bound on the answer, in the units
+                     of the answer.
+        forwards     distinct prefixes evaluated, i.e. what it cost
 
     ## HISTORY: THREE FAILED ATTEMPTS, KEPT BECAUSE THE DIAGNOSIS OUTLIVED THEM
 
@@ -384,31 +375,93 @@ def score_words_paths(model, tok, prompt, targets, dev, bmask, cjk=None,
     P0 = torch.softmax(lg, -1).cpu().numpy()
     del lg
 
-    #: One batched call per DEPTH over the distinct prefixes at that depth --
-    #: `score_words`'s shape, so `next_dist`'s equal-length precondition holds.
-    #: Prefixes are SHARED across paths and across targets, so enumerating many
-    #: paths costs far less than the path count suggests.
-    rows, bydepth = {}, {}
-    for p in paths:
+    #: **THE WALK IS INTERLEAVED WITH THE SCORING, AND THAT IS THE WHOLE COST
+    #: ARGUMENT.** Computing every prefix's row first and multiplying afterwards
+    #: is correct and unaffordable: enumeration is faithful, so it returns the
+    #: byte-fallback routes too -- Yi reaches `scream` by 623 paths and
+    #: `murmuring` by 1,825, nearly all of them spelling the word one BYTE at a
+    #: time (`<0x73><0x63>...`). Those paths are real and their mass is
+    #: essentially zero, because their first token is far below theta.
+    #:
+    #: So mass is accumulated depth by depth and a prefix under `PATH_FLOOR` is
+    #: dropped with every path through it. A dead prefix costs nothing further,
+    #: which kills the byte-fallback fan-out at depth 1 while leaving every path
+    #: that carries reportable mass. Exact to within the floor, and the floor's
+    #: actual cost is SUMMED and returned rather than assumed negligible.
+    #: **THE FLOOR IS RELATIVE TO EACH TARGET'S OWN BEST PATH, AND AN ABSOLUTE
+    #: ONE DOES NOT WORK.** My first version pruned on `mass < PATH_FLOOR` with
+    #: PATH_FLOOR at 1e-10, reasoning that byte-fallback routes sit far below
+    #: theta. They do -- and below theta (1e-3) is nowhere near below 1e-10, so
+    #: in a 151k vocabulary essentially every first token cleared the floor,
+    #: nothing was pruned, and a 0.5B model had not finished after 15 minutes.
+    #:
+    #: A path can never gain mass, so a route starting 1e-6 of the way down from
+    #: its own target's best start cannot end up mattering to that target. That
+    #: is the comparison that scales, because it is made per WORD rather than
+    #: against a constant nobody can set for every vocabulary at once.
+    by_target = {}
+    for p, surf in paths.items():
+        by_target.setdefault(surf, []).append(p)
+    d1 = {p[:1]: float(P0[p[0]]) for p in paths}
+    floor = {}
+    for surf, ps in by_target.items():
+        best = max(d1[p[:1]] for p in ps)
+        floor[surf] = max(PATH_FLOOR, REL_FLOOR * best)
+    #: a prefix shared by two targets lives if EITHER still wants it.
+    pfloor = {}
+    for p, surf in paths.items():
         for d in range(1, len(p) + 1):
-            bydepth.setdefault(d, set()).add(p[:d])
-    for d in sorted(bydepth):
-        pref = sorted(bydepth[d])
-        dist = T.next_dist(model, tok, pids, pref, dev, cache=cache, layers=layers)
-        for pr, row in zip(pref, dist):
-            rows[pr] = row
+            k = p[:d]
+            pfloor[k] = min(pfloor.get(k, float("inf")), floor[surf])
 
     got, bcache, intra_cache, total = {}, {}, {}, 0.0
-    for p, surf in paths.items():
-        m = float(P0[p[0]])
-        for i in range(1, len(p)):
-            m *= float(rows[p[:i]][p[i]])
-        b = T._boundary_for(surf, bmask, cjk, bcache, intra_cache)
-        pr = m * float(rows[p][b].sum())
-        key = (surf, int(p[0]))
-        got[key] = got.get(key, 0.0) + pr
-        total += pr
-    return got, refused, total, capped
+    #: **`pruned_mass` IS AN UPPER BOUND, NOT AN ESTIMATE.** For any path,
+    #: `p = mass_final x term` with both factors <= 1 and mass non-increasing, so
+    #: everything a discarded prefix could still have contributed is at most its
+    #: mass at the moment it was dropped. Summing those makes the returned figure
+    #: an INTERVAL rather than a point -- the result is a certified lower bound
+    #: and this is how far short it can possibly be.
+    pruned, forwards, dropped_paths = 0.0, 0, 0
+    live = {k: m for k, m in d1.items() if m >= pfloor[k]}
+    for k, m in d1.items():
+        if k not in live:
+            pruned += m
+            dropped_paths += 1
+
+    depth = max(len(p) for p in paths)
+    for d in range(1, depth + 1):
+        if not live:
+            break
+        pref = sorted(live)
+        rows = dict(zip(pref, T.next_dist(model, tok, pids, pref, dev,
+                                          cache=cache, layers=layers)))
+        forwards += len(pref)
+        nxt = {}
+        for p, surf in paths.items():
+            if p[:d] not in live:
+                continue
+            if len(p) == d:
+                #: a path is scored at the depth it ENDS, using the row that
+                #: follows its last token -- `_account`'s identity per path.
+                b = T._boundary_for(surf, bmask, cjk, bcache, intra_cache)
+                pr = live[p] * float(rows[p][b].sum())
+                key = (surf, int(p[0]))
+                got[key] = got.get(key, 0.0) + pr
+                total += pr
+            else:
+                k = p[:d + 1]
+                if k in nxt:
+                    continue
+                m = live[p[:d]] * float(rows[p[:d]][p[d]])
+                if m >= pfloor[k]:
+                    nxt[k] = m
+                else:
+                    pruned += m
+                    dropped_paths += 1
+        live = nxt
+    return got, refused, total, {"capped": capped, "pruned_mass": pruned,
+                                 "dropped_paths": dropped_paths,
+                                 "forwards": forwards}
 
 
 def _score_words_paths_failed(model, tok, prompt, targets, dev, bmask, cjk=None,
@@ -553,6 +606,12 @@ _MAXTOK = 24
 #: cap dropped, so a bound that binds says so rather than silently truncating.
 PATH_FLOOR = 1e-10
 PATH_WIDTH = 4096
+#: A path starting this far below its OWN TARGET's best start cannot matter to
+#: that target, because mass never grows along a path. Relative because an
+#: absolute floor cannot be set once for a 32k and a 256k vocabulary; 1e-6 is six
+#: orders down, and whatever it drops is summed and RETURNED as `pruned_mass`, so
+#: the choice bounds the answer instead of silently shaping it.
+REL_FLOOR = 1e-6
 _TOKIDX = {}
 
 #: The longest byte run any single token may cover. Real vocabularies top out
