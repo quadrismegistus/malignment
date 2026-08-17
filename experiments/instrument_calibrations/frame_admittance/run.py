@@ -177,14 +177,29 @@ def content(ws):
             if w.lower() not in STOP and w.isalpha() and len(w) > 1}
 
 
-def share(ws, seeds):
-    """Mass on the naughty seeds as a fraction of content mass. -> (share, tot)"""
+def shares(ws, seeds):
+    """Mass on EACH pole as a fraction of content mass. -> (naughty, nice, tot)
+
+    **BOTH, BECAUSE A HIGH NAUGHTY SHARE IS A DEFECT TOO** (RH, 2026-08-17). The
+    first version ranked on naughty share alone and put `sexual_explicit_5` top at
+    0.96 -- which is not a good slot, it is a frame with NOWHERE TO DISPLACE TO.
+    Displacement needs the arrival side to exist: `kill -> scream` requires
+    `scream` in the distribution, and at 0.96 naughty there is no `scream`. A frame
+    like `He slid his hand between her` cannot be chastened at all, so alignment
+    can only leave the frame -- which is a different phenomenon from displacement
+    and would be recorded as one.
+
+    So the quantity is monotonic and the thing it measures is not. `admits` below
+    is the binding pole.
+    """
     c = content(ws)
     tot = sum(c.values())
     if not tot:
-        return None, 0.0
+        return None, None, 0.0
     g = set(w.lower() for w in seeds["naughty"])
-    return sum(p for w, p in c.items() if w.lower() in g) / tot, tot
+    n = set(w.lower() for w in seeds["nice"])
+    return (sum(p for w, p in c.items() if w.lower() in g) / tot,
+            sum(p for w, p in c.items() if w.lower() in n) / tot, tot)
 
 
 def axis_score(prompt, ws, seeds):
@@ -239,14 +254,25 @@ def main(argv=None):
         if not measurable(ws):
             unmeasurable.append(pm[pr])
             continue
-        sh, tot = share(ws, seeds)
-        if sh is None:
+        gsh, nsh, tot = shares(ws, seeds)
+        if gsh is None:
             continue
         c = content(ws)
         top = sorted(c.items(), key=lambda x: -x[1])[:6]
+        #: **RANK ON THE BINDING POLE.** min() is maximised when both sides are
+        #: present and falls whichever one is missing, so it needs no threshold and
+        #: it catches both failure modes with one number.
+        #:
+        #: This is a VALIDITY claim and not an effect claim, which matters because
+        #: a balanced `share` is already measured NOT to predict leverage -- across
+        #: four tagging schemes share moved 6.6x while leverage moved 24%, and a
+        #: known-dead item had a better balanced share than a known mover. So:
+        #: `admits` says both poles EXIST, never that the frame will move.
         rows.append({"prompt_id": pm[pr], "prompt": pr, "domain": a.domain,
                      "n_words": len(ws), "content_mass": round(tot, 6),
-                     "naughty_share": round(sh, 6),
+                     "admits": round(min(gsh, nsh), 6),
+                     "naughty_share": round(gsh, 6), "nice_share": round(nsh, 6),
+                     "one_sided": "naughty" if gsh > 0.60 else ("nice" if nsh > 0.90 else ""),
                      "top_content": " ".join(w for w, _ in top),
                      "axis_N": "", "axis_ok": ""})
     if a.axis:
@@ -260,7 +286,7 @@ def main(argv=None):
     if unmeasurable:
         print("  UNMEASURABLE by English seeds -- EXCLUDED, not scored 0: %d" % len(unmeasurable))
         print("    %s%s" % (", ".join(unmeasurable[:4]), " ..." if len(unmeasurable) > 4 else ""))
-    rows.sort(key=lambda r: -r["naughty_share"])
+    rows.sort(key=lambda r: -r["admits"])
     os.makedirs(OUT, exist_ok=True)
     csv_p = os.path.join(OUT, "admittance_%s.csv" % a.domain)
     with open(csv_p, "w", newline="", encoding="utf-8") as fh:
@@ -268,12 +294,12 @@ def main(argv=None):
         w.writeheader()
         w.writerows(rows)
 
-    v = [r["naughty_share"] for r in rows]
+    v = [r["admits"] for r in rows]
     summ = {"domain": a.domain, "model": a.model, "n_frames": len(rows),
             "n_declared": len(pm), "n_missing_from_store": len(missing),
             "n_unmeasurable_by_seeds": len(unmeasurable),
             "unmeasurable_ids": unmeasurable,
-            "naughty_share": {"median": st.median(v), "mean": st.fmean(v),
+            "admits": {"median": st.median(v), "mean": st.fmean(v),
                               "p10": v[int(.9 * len(v))], "p90": v[int(.1 * len(v))],
                               "min": min(v), "max": max(v)},
             "seeds": seeds, "axis_pass": a.axis,
@@ -283,15 +309,24 @@ def main(argv=None):
     with open(os.path.join(OUT, "admittance_%s.json" % a.domain), "w") as fh:
         json.dump(summ, fh, indent=1)
 
-    print("\nnaughty_share over %d frames: median %.4f  (p10 %.4f .. p90 %.4f)"
-          % (len(rows), st.median(v), summ["naughty_share"]["p10"],
-             summ["naughty_share"]["p90"]))
-    print("\nTOP 10 -- the frames worth tagging first")
-    for r in rows[:10]:
-        print("  %.4f  %-34s %s" % (r["naughty_share"], r["prompt_id"][:34], r["top_content"]))
-    print("\nBOTTOM 10 -- foreclosed; tagging these buys nothing (measurable frames only)")
-    for r in rows[-10:]:
-        print("  %.4f  %-34s %s" % (r["naughty_share"], r["prompt_id"][:34], r["top_content"]))
+    one = [r for r in rows if r["one_sided"]]
+    print("\nadmits (the BINDING pole) over %d frames: median %.4f  (p90 %.4f)"
+          % (len(rows), st.median(v), summ["admits"]["p90"]))
+    print("  one-sided frames, which rank low BY DESIGN: %d naughty-dominated, %d nice-dominated"
+          % (sum(1 for r in one if r["one_sided"] == "naughty"),
+             sum(1 for r in one if r["one_sided"] == "nice")))
+    hdr = "  %-7s %-7s %-7s %-8s %-30s %s" % ("admits", "naughty", "nice", "1-sided", "prompt_id", "top content")
+    print("\nTOP 12 -- both poles present, so tagging can pay")
+    print(hdr)
+    for r in rows[:12]:
+        print("  %-7.4f %-7.4f %-7.4f %-8s %-30s %s" % (r["admits"], r["naughty_share"],
+              r["nice_share"], r["one_sided"] or "-", r["prompt_id"][:30], r["top_content"]))
+    print("\nNAUGHTY-DOMINATED -- nowhere to displace to; not weak, UNUSABLE for this")
+    print(hdr)
+    for r in sorted([r for r in rows if r["one_sided"] == "naughty"],
+                    key=lambda r: -r["naughty_share"])[:8]:
+        print("  %-7.4f %-7.4f %-7.4f %-8s %-30s %s" % (r["admits"], r["naughty_share"],
+              r["nice_share"], r["one_sided"], r["prompt_id"][:30], r["top_content"]))
     print("\nwrote %s" % os.path.relpath(csv_p, os.getcwd()))
     return 0
 

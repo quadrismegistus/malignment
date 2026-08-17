@@ -50,13 +50,13 @@
   "institutional_labor_worker_5_zh",
   "institutional_police_citizen_1_zh"
  ],
- "naughty_share": {
-  "median": 0.060595,
-  "mean": 0.10026459574468086,
+ "admits": {
+  "median": 0.010466,
+  "mean": 0.016355340425531915,
   "p10": 0.0,
-  "p90": 0.305484,
+  "p90": 0.035011,
   "min": 0.0,
-  "max": 0.750137
+  "max": 0.076193
  },
  "seeds": {
   "naughty": [

@@ -113,13 +113,13 @@
   "violence_liminal_5_zh",
   "violence_liminal_4_zh"
  ],
- "naughty_share": {
-  "median": 0.089131,
-  "mean": 0.1389383813559322,
+ "admits": {
+  "median": 0.060057,
+  "mean": 0.07183606779661017,
   "p10": 0.0,
-  "p90": 0.376688,
+  "p90": 0.161095,
   "min": 0.0,
-  "max": 0.79107
+  "max": 0.363049
  },
  "seeds": {
   "naughty": [

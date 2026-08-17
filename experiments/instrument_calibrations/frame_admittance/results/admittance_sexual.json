@@ -34,13 +34,13 @@
   "sexual_explicit_1_zh",
   "sexual_liminal_4_zh"
  ],
- "naughty_share": {
+ "admits": {
   "median": 0.0,
-  "mean": 0.04041679527559055,
+  "mean": 0.01177063779527559,
   "p10": 0.0,
-  "p90": 0.054998,
+  "p90": 0.016078,
   "min": 0.0,
-  "max": 0.964675
+  "max": 0.268223
  },
  "seeds": {
   "naughty": [
