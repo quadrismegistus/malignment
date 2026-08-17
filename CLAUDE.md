@@ -130,6 +130,17 @@ owns a surface is not a statement of who wrote each thing on it.*
 rewriting shared history, which costs more than it fixes. For those, attribution
 stays content-based and should be stated as such.
 
+**AND IT CANNOT BE AUTOMATED, so do not reach for a hook.** dario established
+this at [6407] while building one they then did not install: all four seats work
+in ONE clone (`git worktree list` shows a single tree -- which is also the
+mechanical reason a `git add -u` of one seat's lands in another's commit). So
+`core.hooksPath`, `git config malignment.seat` and `commit.template` are each
+ONE VALUE FOR EVERY SEAT: per-clone config cannot distinguish processes sharing a
+clone. The only per-seat signal is the invoking process's ENVIRONMENT, and a hook
+refusing when it is unset would block whichever seat had not yet changed its
+shell habit. **The ruling is a discipline, not a mechanism**, and installing a
+shared hook is an act on everyone's tree.
+
 ## Working with RH
 
 - Do ordinary work; say plainly when something is wrong, then keep building.
