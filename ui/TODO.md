@@ -120,6 +120,25 @@ Superseding the magnitude in 3d/3e (malign, [6445], one model / three prompts, s
 
 For this panel: the fence text is corrected, and the consequence is that **a cross-lingual or cross-family comparison on affected cells is comparing instruments** -- +15-28% against +0.12%, on 84 of 133 models and not on the other 49. That is the strongest statement yet of why the per-arm marking exists.
 
+## 3g. Fences for FIXES expire; fences for APERTURES do not
+
+RH, 2026-08-17: *"the point of v4 is not salary probing it's to make sure our instruments are PERFECT."* That settles WHETHER to fix and splits the six known defects into two kinds (malign, [6448]), which is the distinction this panel needs because it decides how a fence should be WORDED:
+
+    FIXABLE -- a fence here is temporary and must be REMOVED when the fix lands
+      1  boundary mask reads the RAW key, not the decoded one   88/88 tokenizers
+      2  numeric separator starves intra_word -> needs lookahead
+      3  MAX_DEPTH 6 -- 69 of 136 tokenizers cannot represent $100,000
+
+    NOT FIXABLE -- declared APERTURES, and a fence here is PERMANENT
+      4  a token that ends a sentence AND begins the next word needs two bits;
+         `term = row[b].sum()` gives it one. A limit of the abstraction, 24 models.
+      5  next_dist depends on batch composition, 1.2e-03, fp16, irreducible
+      6  the theta gate -- sub-theta words absent entirely
+
+**Both fences currently on the panel are of the first kind** and are worded as pending, which is correct: the numeric one cites blockers 2 and 3, the CJK one cites blocker 1. **Both must be deleted rather than edited when their fix lands**, and both name their docket entries so the next reader can check.
+
+**Nothing on the panel yet fences an aperture**, and if one is added it must not say "proposed and unimplemented" — 4, 5 and 6 go in the paper as stated limits rather than as backlog, and a fence implying they are temporary would be the same error in the opposite direction from the one 3f corrected.
+
 ## 5. Blocked or waiting on someone else
 
 - **Any panel that renders `dN`.** Two conventions are emitted (`dN` and `dN_renorm`) and neither is canonical; where they disagree in sign the pair is not quotable at all, which is 14.8% of prompts at roster scale. A panel that picks one silently would be making a ruling that is RH's. `sign_disagree` is already in the payload, so the panel can refuse rather than choose.
