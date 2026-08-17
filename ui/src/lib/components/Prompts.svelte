@@ -302,6 +302,18 @@
 	//: The condition is EXACT, not a heuristic: a surface consisting only of
 	//: digits is affected, and nothing else is. No prompt-sniffing, so no false
 	//: positives and nothing to re-tune when v4 changes the rule.
+	//:
+	//: **THE FENCE USED TO PROMISE A FIX AND THAT HALF WAS WRONG** (docket [6449]).
+	//: It read "two independent blockers, and the proposed fix reaches only one".
+	//: The lookahead rule was then built, measured WORSE than v3 -- it spreads the
+	//: amount over 25,000/25,500/25,750, each below theta, moving 90% of resolved
+	//: mass into `drop` -- and REJECTED. v3's truncation is a MARGINALISATION, not
+	//: an error: `25` at 0.0326 IS P(salary begins 25). Coarser and correct.
+	//:
+	//: So the caution to keep is the ORDERING, which is unchanged, and the one to
+	//: delete is the pending-fix framing. A fence that says a repair is coming
+	//: tells a reader to discount the number and wait; this one has to tell them
+	//: the number is right and the sort is not.
 	//: ── CJK BOUNDARY: which ARMS carry the double-crediting defect.
 	//:
 	//: On 84 of 133 models `boundary_mask` never marks CJK punctuation, so on a
@@ -509,11 +521,14 @@
 					<code>$100</code>, and <code>1</code> may be <code>$1,000,000</code>.
 					<strong>The collapse is not monotone</strong>: sorting these surfaces does not sort the
 					underlying numbers, so a contrast built on them can reverse in sign.
-					<strong>Two independent blockers, and the proposed fix reaches only one</strong>: the
-					boundary rule stops <code>expand</code> discovering <code>$100,000</code>, and at 7–8
-					tokens it also exceeds <code>MAX_DEPTH</code> 6, so <code>score_words</code> refuses it
-					even when named explicitly — 48 of 88 tokenizers exceed the limit on at least one
-					salary string. See docket [6430], [6440].
+					<strong>The coarseness is correct; the ordering is not</strong>. <code>100</code> is a
+					PREFIX CLASS, not a number: read as <em>P(the amount begins 100)</em> it is a valid
+					marginal, which is why the lookahead rule that would have split it was implemented,
+					measured <strong>worse</strong> than this — it pushes 90% of resolved mass into
+					<code>drop</code> — and rejected. So do not wait for a fix here; do not sort on these
+					surfaces. <code>MAX_DEPTH</code> is now 9 and reaches <code>$100,000</code> at
+					0.0317, but <strong>no v4 data is ingested</strong>, so every cell on this panel is
+					v3. See docket [6430], [6440], [6449].
 				</p>
 			{/if}
 			{#if plot}
