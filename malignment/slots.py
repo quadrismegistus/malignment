@@ -397,6 +397,12 @@ SLOT_DIR = os.path.join(ROOT, "roster", "prompts", "slots")
 #: The `writer:` field stays anyway -- a file can be renamed and a field cannot
 #: be renamed by accident.
 SLOT_YAML = os.path.join(SLOT_DIR, "slot-explorer.yaml")
+#: **THE AGENT WRITES ITS OWN FILE** (RH, 2026-08-17), which is the same
+#: writer-in-filename rule as above rather than a new one: a second authoring
+#: tool gets a file instead of interleaving into this one, so "what did I author"
+#: and "what did the agent propose" stay separable by path and not only by field.
+#: `corpora()` scans the directory, so this needs no registration to be counted.
+SLOT_CLIENT_YAML = os.path.join(SLOT_DIR, "slot-client.yaml")
 #: Every save, appended, forever. The yaml holds CURRENT STATE, one entry per
 #: item; this holds what happened. A current-state file alone cannot answer
 #: "what did this item look like before I retagged it", and that question is the
@@ -575,7 +581,8 @@ def _masses(words, tagged):
 
 
 def build_item(prompt, naughty, nice, words, provenance=None, domain="",
-               writer="slot-explorer", note="", variant=None):
+               writer="slot-explorer", note="", variant=None,
+               authored_by=None, reviewed=None):
     """The saved item, derived rather than accepted.
 
     `words` is `{word: probability}` from the run the author is looking at. The
@@ -632,6 +639,23 @@ def build_item(prompt, naughty, nice, words, provenance=None, domain="",
         "share": round(g_mass / tot, 6) if tot else None,
         "writer": writer,
         "note": note,
+        #: **WHO CHOSE THE POLES, AND WHETHER A HUMAN HAS LOOKED** (RH,
+        #: 2026-08-17). `writer` already records WHICH TOOL wrote the row; these
+        #: record WHO MADE THE INTERPRETIVE CALL inside it, which is a different
+        #: fact and the one that decays. Tagging a pole is the judgement an author
+        #: would revise; an agent doing it at speed and a person doing it slowly
+        #: produce byte-identical records without these.
+        #:
+        #: **THE 86 ARE THE PRECEDENT.** They record no provenance at all, so 84
+        #: of them can only be ATTESTED from RH's memory and 2 VERIFIED, and no
+        #: amount of later work recovers the difference. Two fields now cost
+        #: nothing; reconstructing them later is impossible.
+        #:
+        #: Omitted entirely when not passed, so hand-authored items keep the
+        #: shape they have today rather than growing a `reviewed: null` that
+        #: would read as "reviewed and found wanting".
+        **({"authored_by": authored_by} if authored_by else {}),
+        **({"reviewed": bool(reviewed)} if reviewed is not None else {}),
         "screened_by": provenance or {},
     }
 

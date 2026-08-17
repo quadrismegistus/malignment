@@ -924,12 +924,27 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
                base_probs=None, aligned_probs=None):
     """The author's poles as an axis, and every candidate's position on it.
 
-    **THIS ROUTE COMPUTES NO MOVEMENT AND CANNOT.** It takes one distribution.
-    `slot_axis.Axis.split` exists and is not reachable from here: showing dN
-    beside the screening controls would make looking at the outcome the default,
-    and the default is where a population choice hides (malign, [6361]). A
-    movement view gets its own route so that choosing it is an act.
+    **THE GUARANTEE IS REAL AND IT IS NOT WHERE THIS DOCSTRING USED TO PUT IT.**
+    It read *"this route computes no movement and cannot -- `Axis.split` is not
+    reachable from here"*, and that stopped being true when `base_probs`/
+    `aligned_probs` were added: the handler accepts both (both-or-neither, see
+    `do_POST`) and `split` below returns dN whenever they arrive. A docstring
+    asserting a blinding the code does not enforce is worse than none, because it
+    tells a reader the outcome is unreachable when it is one field away.
+
+    **WHAT ACTUALLY WITHHOLDS dN IS THE CALLER.** The panel pools its two
+    checkpoints into ONE distribution and sends that, so `split` is null and no
+    movement exists to display -- and `_slot` never reveals which checkpoint
+    offered a word, which is the half that stops frames being chosen by how large
+    the effect looks. The reasoning for keeping it that way is unchanged (malign,
+    [6361]): showing dN beside the screening controls makes looking at the outcome
+    the default, and the default is where a population choice hides.
+
+    So the accurate statement is that movement is OPT-IN, by sending two arms
+    instead of one, which makes choosing it an act rather than a default. That is
+    a weaker guarantee than the old wording claimed and it is the one in force.
     """
+    from . import slot_axis
     from .slot_axis import Axis
     with _AXIS_LOCK:
         ax = Axis(prompt, naughty, nice)
@@ -956,7 +971,33 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
         #: computed here so the two can only be returned together.
         split = (ax.split(base_probs, aligned_probs, S)
                  if base_probs and aligned_probs else None)
+    #: **THE ADMISSIBILITY GATE, WHICH EXISTED AND WAS NEVER REACHABLE.**
+    #: `slot_axis.separates` had a selftest and no caller: the route returned
+    #: `purity`, `pole_gap` and `defectors` -- every input the gate consumes --
+    #: and left the verdict uncomputed, so the one question an automated author
+    #: most needs to branch on ("can this axis see the contrast it is about to
+    #: weigh?") could not be asked over HTTP.
+    #:
+    #: **IT IS COMPUTED BEFORE `split` IS READ, and that ordering is the whole
+    #: guarantee** (its own docstring): a gate consulted after the result is a
+    #: rationalisation, and only the ordering makes "it would have excluded this
+    #: axis whichever way its number fell" a claim a reader can check. So it is
+    #: returned BESIDE dN rather than instead of it -- a caller that ignores it
+    #: gets the same payload as before, and a caller that honours it can say when
+    #: it decided.
+    sep_ok, sep_gap, sep_correct, sep_total = slot_axis.separates(S, naughty, nice)
     return dict({
+        "separates": {"ok": bool(sep_ok), "gap": float(sep_gap),
+                      "correct": int(sep_correct), "total": int(sep_total),
+                      "floor": slot_axis.SEPARATION_FLOOR,
+                      #: Named so a caller does not have to infer WHICH floor
+                      #: refused it from three numbers.
+                      "reason": (None if sep_ok else
+                                 "a pole is empty after scoring" if not sep_total
+                                 else "gap %.4f below floor %.2f" % (sep_gap, slot_axis.SEPARATION_FLOOR)
+                                 if sep_gap < slot_axis.SEPARATION_FLOOR
+                                 else "%d of %d pairwise orderings correct"
+                                      % (sep_correct, sep_total))},
         "split": split,
         "ok": True,
         "norm": ax.norm,
@@ -1048,13 +1089,39 @@ class Handler(BaseHTTPRequestHandler):
                 raise ValueError("`words` must be a non-empty {word: p} map from "
                                  "the run being saved -- the masses are derived "
                                  "from it here, not accepted from the client")
+            #: **`target` NAMES A CORPUS FROM A CLOSED SET, NEVER A PATH.** An
+            #: automated author writes its own file (RH, 2026-08-17), and the
+            #: obvious way to say which -- a path or a filename from the client --
+            #: is a write-anywhere primitive on a route that writes. So the client
+            #: sends a KEY and the server owns the mapping, which is the same
+            #: membership-not-pattern rule every other parameter here follows.
+            from .slots import SLOT_CLIENT_YAML, SLOT_YAML
+            targets = {"slot-explorer": SLOT_YAML, "slot-client": SLOT_CLIENT_YAML}
+            tgt = (body.get("target") or "slot-explorer").strip()
+            if tgt not in targets:
+                raise ValueError("target must be one of %s; got %r"
+                                 % (", ".join(sorted(targets)), tgt))
+            #: **`reviewed` IS ONLY ACCEPTED AS FALSE, and that is not pedantry.**
+            #: The field exists to mark what a human has not yet checked, so a
+            #: writer that could set it true would be attesting to a review on
+            #: behalf of the reviewer. Marking something reviewed is an act for
+            #: the panel or the yaml, not for the tool that authored it.
+            rev = body.get("reviewed")
+            if rev not in (None, False):
+                raise ValueError(
+                    "reviewed may only be sent as false -- an authoring tool "
+                    "cannot attest to its own review; clear the flag by editing "
+                    "the yaml or from the panel")
             item = build_item(
                 body.get("prompt"), body.get("naughty"), body.get("nice"), words,
                 provenance=body.get("provenance") or {},
                 domain=(body.get("domain") or "").strip(),
                 writer=(body.get("writer") or "slot-explorer").strip(),
-                note=(body.get("note") or "").strip())
-            path, action = save_item(item, overwrite=bool(body.get("overwrite")))
+                note=(body.get("note") or "").strip(),
+                authored_by=(body.get("authored_by") or "").strip() or None,
+                reviewed=rev)
+            path, action = save_item(item, overwrite=bool(body.get("overwrite")),
+                                     path=targets[tgt])
             return self._json(200, {"item_id": item["item_id"], "action": action,
                                     "path": path, "item": item})
         except FileExistsError as e:
