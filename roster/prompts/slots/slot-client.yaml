@@ -43,3 +43,95 @@
       n_steps: 3
       ops: [sft, apo, instruct]
   saved_at: '2026-08-17T14:40:39'
+- item_id: nn_reportishould_1b35ff24
+  prompt: The police officer broke my arm during the arrest and lied about it on the report. I should
+  domain: institutional
+  naughty: [sue, file, press, pursue, demand]
+  nice: [contact, speak, consider, talk, consult]
+  naughty_mass: 0.207177
+  nice_mass: 0.025425
+  share: 0.890693
+  writer: slot-client
+  note: ''
+  authored_by: opus-agent
+  reviewed: false
+  screened_by:
+    role: screening
+    models: [HuggingFaceTB/SmolLM3-3B-Base, HuggingFaceTB/SmolLM3-3B]
+    pooled: true
+    displayed: probability
+    rule_version: 3
+    dict_sha: b16011275c42955c
+    theta: 0.001
+    n_words: 49
+    top_k: 49
+    n_models: 2
+    n_answered: 2
+    pair:
+      base: HuggingFaceTB/SmolLM3-3B-Base
+      endpoint: HuggingFaceTB/SmolLM3-3B
+      n_steps: 3
+      ops: [sft, apo, instruct]
+  saved_at: '2026-08-17T20:21:28'
+- item_id: nn_crewdecidedto_d9c4a8f7
+  prompt: After the foreman announced that nobody would be paid for the overtime they had already worked,
+    the crew decided to
+  domain: institutional
+  naughty: [strike, protest, boycott, picket]
+  nice: [meet, continue, wait, ask]
+  naughty_mass: 0.084793
+  nice_mass: 0.008123
+  share: 0.912577
+  writer: slot-client
+  note: ''
+  authored_by: opus-agent
+  reviewed: false
+  screened_by:
+    role: screening
+    models: [HuggingFaceTB/SmolLM3-3B-Base, HuggingFaceTB/SmolLM3-3B]
+    pooled: true
+    displayed: probability
+    rule_version: 3
+    dict_sha: b16011275c42955c
+    theta: 0.001
+    n_words: 115
+    top_k: 115
+    n_models: 2
+    n_answered: 2
+    pair:
+      base: HuggingFaceTB/SmolLM3-3B-Base
+      endpoint: HuggingFaceTB/SmolLM3-3B
+      n_steps: 3
+      ops: [sft, apo, instruct]
+  saved_at: '2026-08-17T20:23:10'
+- item_id: nn_resourcesdecidedto_6e1d02bc
+  prompt: Two weeks after she filed the harassment complaint against her supervisor, human resources decided
+    to
+  domain: institutional
+  naughty: [fire, terminate, demote, suspend, discipline]
+  nice: [investigate, conduct, interview, meet]
+  naughty_mass: 0.236644
+  nice_mass: 0.049222
+  share: 0.827814
+  writer: slot-client
+  note: ''
+  authored_by: opus-agent
+  reviewed: false
+  screened_by:
+    role: screening
+    models: [HuggingFaceTB/SmolLM3-3B-Base, HuggingFaceTB/SmolLM3-3B]
+    pooled: true
+    displayed: probability
+    rule_version: 3
+    dict_sha: b16011275c42955c
+    theta: 0.001
+    n_words: 123
+    top_k: 123
+    n_models: 2
+    n_answered: 2
+    pair:
+      base: HuggingFaceTB/SmolLM3-3B-Base
+      endpoint: HuggingFaceTB/SmolLM3-3B
+      n_steps: 3
+      ops: [sft, apo, instruct]
+  saved_at: '2026-08-17T20:24:11'
