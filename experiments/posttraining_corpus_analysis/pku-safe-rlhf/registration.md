@@ -429,3 +429,90 @@ about the instrument and neither is reported as an answer about the corpus.
 H3 and its pre-registered disagreement. The strata and the rule never to pool
 them. The MIXED n=386 conditional, still unrun. bge as a declared follow-up
 ceiling.
+
+---
+
+## AMENDMENT A5 — 2026-08-17. FINDING B RAN. THE VERDICT IS WITHHELD: THE INSTRUMENT FAILS ITS POSITIVE CONTROL.
+
+**Written after the run, and it retracts nothing from A4 — it reports that A4's
+arithmetic produced a number the instrument is not entitled to.**
+
+### WHAT THE REGISTERED ARITHMETIC RETURNED
+
+    K_strip (PRIMARY)   AUC_match(safer) 0.4721   n_test_matched 410
+                        AUC(safer) 0.5160  bootstrap 95% [0.4958, 0.5332]
+                        safer has LOWER transgressiveness  51.3%  [0.507, 0.518]
+                        safer has LOWER bodily_harm        51.5%  [0.510, 0.521]
+                        n = 32,636 pairs, 95% detectable deviation +/-0.005
+
+    K_full              AUC(safer) 0.5161, direction 51.3% / 51.6%
+
+By A4's rule that is `SUBSTITUTION ABSENT`, and at this n it would have been
+quotable as a tight bound. **It is not reported as one.**
+
+### THE GUARD I DECLARED PASSED AND WAS THE WRONG GUARD
+
+A4 required that a null "survive `K_full` disagreeing with `K_strip`". They agree
+to the fourth decimal, so the pre-declared guard passed. **It tests the
+instrument for CONTAMINATION and cannot see an instrument that is merely
+INSENSITIVE**, which is a different failure and the one that occurred. Recorded
+because declaring a guard is not the same as declaring the right one, and the
+guard that mattered here was added after the numbers were on screen.
+
+### THE POSITIVE CONTROL, AND IT FAILS
+
+MIXED holds 10,813 pairs where one response is LABELLED SAFE and the other
+LABELLED UNSAFE. That is the largest severity contrast this corpus contains. An
+instrument that measures severity must separate them.
+
+    SAFE has LOWER transgressiveness   49.9%  [0.489, 0.508]  p=0.773
+    SAFE has LOWER bodily_harm         53.5%  [0.526, 0.545]  p=2.8e-13
+
+**Transgressiveness is at chance on the corpus's own safety labels.** Bodily harm
+clears significance at n=10,813 and sits below A4's own 55% effect floor. Neither
+passes.
+
+### WHY: THE MEAN IS DILUTED ABOUT TWENTY TO ONE
+
+    K covers 91.0% of tokens.  Only 3.8% of covered words rank >0.90 on
+    transgressiveness.  Median response: 90 words.
+
+So each response's score is roughly 86 ordinary words against 4 charged ones, and
+a severity difference carried by the charged tail is averaged into noise before
+the comparison happens. **The observed delta SD (0.049) is the order of magnitude
+you get from sampling noise alone over texts this length.**
+
+### SO THE RESULT IS UNINFORMATIVE, NOT NULL
+
+**Every number above is correct for what it measured and wrong for what I would
+have said it measured.** A tight interval around a diluted quantity is a tight
+interval around a diluted quantity.
+
+**And a failed positive control is AMBIGUOUS.** It is consistent with (a) the
+instrument being blind, which the dilution diagnostic supports, and with (b) PKU
+safety labels genuinely not tracking lexical severity, which would itself be a
+finding. **This instrument cannot separate them, and the burden sits on the
+instrument: no null may be claimed from a detector not shown to detect.**
+
+### AND IT CONFIRMED MY OWN PREDICTION, WHICH IS WHY IT GOT THIS TREATMENT
+
+`interpretation.md` predicted, before the run, that this corpus rewards ADDITION
+and not SUBSTITUTION. The registered arithmetic agreed with me. **A4 named that
+in advance as the reason to be hardest on the result, and the outcome is that the
+prediction remains UNTESTED rather than supported.** `interpretation.md` is
+amended to say so.
+
+### THE CONTROL IS NOW COMPILED IN
+
+`findingb()` runs the MIXED control every time and gates the verdict on it, so
+the check fires whether or not anyone remembers it. Knowing a rule is not a check
+that runs.
+
+### THE FOLLOW-UP IS A NEW QUESTION, PER THE STOPPING RULE
+
+A concentrated instrument — the charged tail rather than the mean over
+everything — is a SECOND OPERATIONALISATION, and the STOPPING rule says that is a
+new question with a line saying why. **The line: the registered statistic failed a
+positive control, so a replacement is not a second try at the same test but the
+first valid attempt at it.** It gets its own registration, and it must declare the
+concentration rule and pass the same MIXED control BEFORE being fitted to `safer`.

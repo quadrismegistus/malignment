@@ -141,12 +141,42 @@ the model SCRIPTING AN APOLOGY FOR THE USER — *"You can say something like 'I'
 sorry, but I think I need to move on'"*. M02 found the same pattern firing on
 in-scene dialogue in fiction and declined to assume it would not recur.
 
+# FINDING B RAN, AND ITS INSTRUMENT FAILED A POSITIVE CONTROL
+
+RH ruled the horse race wrong in principle, so the K arm was restated as a test
+in its own right (A4) and run: `run.py --findingb`.
+
+    REGISTERED RESULT   safer has LOWER transgressiveness  51.3%   n=32,636
+                        AUC_match 0.4721  ->  reads SUBSTITUTION ABSENT
+
+    POSITIVE CONTROL    MIXED, 10,813 pairs, one labelled SAFE and one UNSAFE
+                        SAFE has LOWER transgressiveness   49.9%   p=0.773
+                        SAFE has LOWER bodily_harm         53.5%   below the 55% floor
+
+**The instrument cannot separate the corpus's own safety labels, so the result is
+UNINFORMATIVE rather than a tight null.** Cause: K covers 91.0% of tokens and only
+3.8% of covered words rank above 0.90 on transgressiveness, so a 90-word response
+is scored as roughly 86 ordinary words against 4 charged ones.
+
+**The verdict is withheld, and the control is compiled into the stage** so it
+gates the result on every run rather than depending on anyone remembering it. A
+concentrated instrument is a second operationalisation and gets its own
+registration, which must pass this same control before being fitted to `safer`.
+Full account in A5, including that the guard A4 pre-declared passed and was the
+wrong guard.
+
 # NOT DONE
 
-- **The K-ratings arm.** K is DENSE where the markers are sparse, so FINDING B's
-  side is fittable on all 32,656 pairs — but a 550-pair conditional against a
-  32,656-pair regression is not a horse race, and saying so is part of the
-  result.
+- **A valid mildness instrument.** The registered one failed its control. See
+  above and A5.
+- **H3, and it is a pre-registered disagreement.** RH predicts `better` is easier
+  to detect lexically than `safer`; I predict the opposite, and predict that if RH
+  is right it is because `better` tracks length and fluency rather than content.
+  Arithmetic fixed in the registration. Never run, and it needs no sparse
+  features.
+- **MIXED, n=386.** A3's conditional disclaimer test on the mixed stratum,
+  declared and never run. Sharper than the both-unsafe version, because there the
+  disclaimer competes against a response actually labelled safe.
 - **The corpus -> model check.** `alpaca-7b-reproduced` (a response generator
   here) and `beaver-7b-v1.0` (trained on these labels) are both roster models.
   Needs cells; waits on v4.

@@ -214,10 +214,14 @@ def main():
     ap.add_argument("--disclaim", action="store_true")
     ap.add_argument("--length", action="store_true")
     ap.add_argument("--coded", action="store_true")
+    ap.add_argument("--findingb", action="store_true")
     a = ap.parse_args()
     tr, te = load("train"), load("test")
     if a.coded:
         coded(tr)
+        return
+    if a.findingb:
+        findingb(tr, te)
         return
     if a.check:
         check(tr)
@@ -338,6 +342,136 @@ def lengthcheck(tr):
     w = sum(1 for i, who, dd in sel if (tr["safer_response_id"][i] == who) == (dd > 0))
     print("length ALONE agrees with the safer verdict on %.1f%% of the %d pairs"
           % (100*w/len(sel), len(sel)))
+
+
+def strip_disclaimers(t):
+    """A4's primary instrument. Delete whole sentences matching the pre-declared
+    REFUSAL / E-ASSIST patterns. A structural operation on sentences, NOT a
+    lexicon harvested from an arm's outputs, so the Y-pilot provenance rule
+    holds."""
+    return " ".join(s for s in SENT.split(t)
+                    if not (REFUSAL.search(s) or E_ASSIST.search(s)))
+
+
+def findingb(tr, te):
+    """A4: does the preference data reward LESSER ACTS? One population, one
+    instrument, no opponent.
+
+    K_strip is primary because K_full is contaminated in a direction measured
+    before fitting: `illegal` ranks 0.995 on transgressiveness, so a moralising
+    response scores MORE transgressive and the confound MASKS a real effect."""
+    import numpy as np
+    from scipy import stats
+    dims, ranks = k_ranks()
+    cols = [dims.index("transgressiveness"), dims.index("bodily_harm")]
+
+    def build(d, idx, strip):
+        X, L, S, drop = [], [], [], 0
+        for i in idx:
+            row = []
+            for c in ("response_0", "response_1"):
+                t = strip_disclaimers(d[c][i]) if strip else d[c][i]
+                toks = TOKEN.findall(t.lower())
+                ws = [w for w in toks if w in ranks]
+                row.append((np.mean([ranks[w][cols] for w in ws], axis=0)
+                            if ws else None, len(toks)))
+            if row[0][0] is None or row[1][0] is None:
+                drop += 1; continue
+            X.append(row[0][0] - row[1][0]); L.append(row[0][1] - row[1][1])
+            S.append(d["safer_response_id"][i])
+        return np.asarray(X), np.asarray(L, float), np.asarray(S), drop
+
+    itr, ite = both_unsafe(tr), both_unsafe(te)
+    print("both-unsafe: train %d  test %d" % (len(itr), len(ite)))
+    for strip in (True, False):
+        name = "K_strip (PRIMARY)" if strip else "K_full  (contaminated)"
+        Xtr, Ltr, Str, dtr = build(tr, itr, strip)
+        Xte, Lte, Ste, dte = build(te, ite, strip)
+        print("\n===== %s =====" % name)
+        print("  usable pairs: train %d (dropped %d, no K-covered words) test %d (dropped %d)"
+              % (len(Xtr), dtr, len(Xte), dte))
+
+        #: DIRECTION, co-primary. No fitting, so no randomisation: does the
+        #: SAFER response carry the lower mean transgressiveness rank?
+        for j, dim in enumerate(("transgressiveness", "bodily_harm")):
+            lower = np.where(Str == 0, Xtr[:, j] < 0, Xtr[:, j] > 0)
+            n = len(lower); w = int(lower.sum())
+            r = stats.binomtest(w, n, 0.5); lo, hi = r.proportion_ci()
+            mde = 1.96 * np.sqrt(0.25 / n)
+            print("  DIRECTION safer has LOWER %-18s %.1f%%  [%.3f, %.3f]  p=%-9.3g"
+                  "  (n=%d, 95%% detectable deviation +/-%.3f)"
+                  % (dim, 100 * w / n, lo, hi, r.pvalue, n, mde))
+
+        ytr, str_ = randomise(len(Xtr), SEED)
+        yte, ste = randomise(len(Xte), SEED + 1)
+        keep_tr, keep_te = np.abs(Ltr) <= 5, np.abs(Lte) <= 5
+        full, m = auc(Xtr * str_[:, None], ytr, Xte * ste[:, None], yte)
+        match = (auc(Xtr[keep_tr] * str_[keep_tr, None], ytr[keep_tr],
+                     Xte[keep_te] * ste[keep_te, None], yte[keep_te])[0]
+                 if keep_te.sum() >= 50 else float("nan"))
+        #: A null on this n is a tight bound and is quotable as one, so the AUC
+        #: gets an interval rather than a point.
+        rng = np.random.default_rng(SEED)
+        Zte = Xte * ste[:, None]
+        boot = []
+        for _ in range(400):
+            b = rng.integers(0, len(Zte), len(Zte))
+            if len(set(yte[b])) < 2: continue
+            from sklearn.metrics import roc_auc_score
+            boot.append(roc_auc_score(yte[b], m.decision_function(Zte[b])))
+        print("  AUC(safer)          %.4f   bootstrap 95%% [%.4f, %.4f]"
+              % (full, np.percentile(boot, 2.5), np.percentile(boot, 97.5)))
+        print("  AUC_match |len|<=5  %.4f   n_test_matched %d" % (match, int(keep_te.sum())))
+        if strip:
+            verdict = ("SUBSTITUTION PRESENT" if match >= 0.60 else
+                       "SUBSTITUTION ABSENT" if match < 0.55 else "UNDECIDED")
+
+    #: POSITIVE CONTROL, AND IT GATES THE VERDICT (A5).
+    #: A4 pre-declared one guard -- K_full against K_strip -- which tests the
+    #: instrument for CONTAMINATION. It passed, and it was the wrong guard: it
+    #: cannot detect an instrument that is merely INSENSITIVE. So the verdict is
+    #: now conditioned on the instrument separating a labelled-SAFE response
+    #: from a labelled-UNSAFE one in MIXED, which is the largest severity
+    #: contrast this corpus contains. Compiled in rather than remembered.
+    print("\n===== POSITIVE CONTROL: MIXED, safe vs unsafe =====")
+    mixed = [i for i in range(len(tr["response_0"]))
+             if tr["is_response_0_safe"][i] != tr["is_response_1_safe"][i]]
+    D = []
+    for i in mixed:
+        safe = 0 if tr["is_response_0_safe"][i] else 1
+        pair = []
+        for c in (safe, 1 - safe):
+            ws = [w for w in TOKEN.findall(tr["response_%d" % c][i].lower()) if w in ranks]
+            pair.append(np.mean([ranks[w][cols] for w in ws], axis=0) if ws else None)
+        if pair[0] is not None and pair[1] is not None:
+            D.append(pair[0] - pair[1])
+    D = np.asarray(D)
+    passed = True
+    for j, dim in enumerate(("transgressiveness", "bodily_harm")):
+        n = len(D); w = int((D[:, j] < 0).sum())
+        r = stats.binomtest(w, n, 0.5); lo, hi = r.proportion_ci()
+        ok = (w / n) >= 0.55
+        passed &= ok
+        print("  SAFE has LOWER %-18s %.1f%%  [%.3f, %.3f]  p=%-10.3g  %s"
+              % (dim, 100 * w / n, lo, hi, r.pvalue,
+                 "PASSES 55%% floor" if ok else "FAILS the 55% floor"))
+    covered = hi_tail = toks_n = 0
+    for i in both_unsafe(tr)[:2000]:
+        toks = TOKEN.findall(tr["response_0"][i].lower())
+        ws = [w for w in toks if w in ranks]
+        if not ws: continue
+        covered += len(ws); toks_n += len(toks)
+        hi_tail += sum(1 for w in ws if ranks[w][cols[0]] > 0.90)
+    print("  dilution: K covers %.1f%% of tokens and only %.1f%% of covered words "
+          "rank >0.90" % (100 * covered / toks_n, 100 * hi_tail / covered))
+    print("\n  -> registered arithmetic says: %s" % verdict)
+    if passed:
+        print("  -> CONTROL PASSED. The verdict stands.")
+    else:
+        print("  -> CONTROL FAILED, SO THE VERDICT IS WITHHELD. An instrument that")
+        print("     cannot separate labelled-safe from labelled-unsafe cannot")
+        print("     support a null about severity. This is an UNINFORMATIVE result,")
+        print("     not a tight bound. See A5.")
 
 
 def disclaimer_sentences(tr):

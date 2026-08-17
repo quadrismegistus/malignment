@@ -141,6 +141,26 @@ else. Findings U already place the cut at SFT rather than at the safety data.
 **That is a prediction this collection can test, and it is stated here before the
 K arm runs.**
 
+## THE K ARM HAS NOW RUN AND THE PREDICTION IS STILL UNTESTED (A5, 2026-08-17)
+
+**It agreed with me and it does not count.** The registered arithmetic returned
+`SUBSTITUTION ABSENT` — 51.3% on transgressiveness against a 55% floor, n=32,636
+— **and the instrument then failed its positive control**: on the 10,813 MIXED
+pairs, where one response is labelled SAFE and the other UNSAFE, the same
+statistic puts safe-has-lower-transgressiveness at 49.9%, p=0.773. It cannot
+separate the corpus's own safety labels.
+
+The cause is dilution. K covers 91.0% of tokens and only 3.8% of covered words
+rank above 0.90, so a 90-word response is scored as about 86 ordinary words
+against 4 charged ones and the severity signal is averaged away before the
+comparison.
+
+**So the additive/substitutive asymmetry above is still one measured side and one
+unmeasured side.** The additive result stands on its own evidence. The
+substitutive claim has no valid measurement yet, and until a concentrated
+instrument passes the MIXED control, nothing here licenses "the corpus does not
+reward mildness." See A5.
+
 # WHY IT BEARS ON THE THEORY-RETURN
 
 The disclaimer is the aligned surface in its most legible form -- the first thing
