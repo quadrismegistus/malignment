@@ -112,7 +112,24 @@ def default_pair():
     return d.get("default") or (d.get("pairs") or [{}])[0].get("base")
 
 
-def screen(prompt, pair=None, k=50):
+#: **`k` IS A DISPLAY CUT, NOT A BEAM WIDTH, so asking for everything is free.**
+#: `_slot` computes `words` in full and only then slices: `n_words` is the count
+#: above theta, `words[:k]` is what it returns. Raising it costs no compute and
+#: changes no measurement.
+#:
+#: It defaulted to 50, which silently hid candidates from every prompt with more
+#: than 50 above theta -- and an author can only tag from what comes back, so the
+#: cut was shaping the tagging while looking like a display preference. Found by
+#: the Opus authoring agent, which noticed `--k 90` returning the same 46 words on
+#: ITS prompt and correctly concluded theta was binding there; the complementary
+#: case is a prompt with 76 above theta returning 50.
+#:
+#: 500 is the server's own ceiling (`_int(one("k"), 50, 5, 500)`). A prompt with
+#: more than 500 words above theta would still be cut, and the report says so.
+SCREEN_K = 500
+
+
+def screen(prompt, pair=None, k=SCREEN_K):
     """Pooled candidate words at the blank. -> dict with `words`, `probs`, `models`
 
     Pooled across the pair and **blind to which checkpoint offered a word**,
@@ -302,10 +319,12 @@ def md_screen(prompt, s):
     SHOW = 60
     disp, func = top[:SHOW], len(ws) - len(top)
     n_theta, n_ret = s.get("n_words", 0), len(ws)
-    L += ["The server returned the top **%d** of %d words above theta (raise with "
-          "`--k`), summing to %.3f of probability mass. Of those %d: %d content "
-          "words below, %d function words hidden (`have`, `be`, `not` …)."
-          % (n_ret, n_theta, tot, n_ret, len(top), func), "",
+    cut = ("" if n_ret >= n_theta else
+           " — %d more are above theta but were cut; raise `--k`" % (n_theta - n_ret))
+    L += ["The server returned **%d** of %d words above theta%s, summing to %.3f of "
+          "probability mass. Of those %d: %d content words below, %d function words "
+          "hidden (`have`, `be`, `not` …)."
+          % (n_ret, n_theta, cut, tot, n_ret, len(top), func), "",
           _table([(w["word"], "%.4f" % w["p"], "%.1f%%" % (100 * w["p"] / tot))
                   for w in disp], ["word", "p", "%returned"])]
     #: `%%` escaped: the literal `%r` in "`%returned`" was being read as a format
@@ -585,7 +604,9 @@ def _main(argv):
                                     "census"])
     ap.add_argument("prompt", nargs="?", default="")
     ap.add_argument("--pair", default=None, help="base id; ask `pairs` for the list")
-    ap.add_argument("--k", type=int, default=50)
+    ap.add_argument("--k", type=int, default=SCREEN_K,
+                    help="candidates returned; a display cut, not a "
+                         "beam width, so raising it is free (max 500)")
     ap.add_argument("--naughty", default="", help="comma-separated")
     ap.add_argument("--nice", default="", help="comma-separated")
     ap.add_argument("--domain", default="")
