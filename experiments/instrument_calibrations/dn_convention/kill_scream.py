@@ -109,19 +109,17 @@ def main():
     #: **THE GATE RUNS AND PRINTS BEFORE ANY DISPLACEMENT COUNT.** An axis that
     #: cannot separate the poles it is weighing is not a rival measurement, and
     #: reading its answer first is how the gate becomes a rationalisation.
-    import statistics as st
+    #: `slot_axis.separates` -- promoted out of this file so dario can inherit
+    #: it rather than write a second admissibility rule ([6382]).
+    from malignment.slot_axis import separates
     admissible = {}
     print("\n  AXIS SEPARATION GATE (naughty mean - nice mean; pairwise correct)")
     for nm, S in (("declared", S_dec), ("lexical", S_lex)):
-        g = [S[w] for w in NAUGHTY if w in S]
-        n_ = [S[w] for w in NICE if w in S]
-        sep = st.mean(g) - st.mean(n_)
-        ok = sum(1 for a in g for b in n_ if a > b)
-        tot = len(g) * len(n_)
-        admissible[nm] = sep >= SEP_FLOOR and ok == tot
+        ok, sep, correct, tot = separates(S, NAUGHTY, NICE)
+        admissible[nm] = ok
         print("    %-9s %+.4f   %2d/%2d (%3.0f%%)   %s"
-              % (nm, sep, ok, tot, 100.0 * ok / tot,
-                 "ADMISSIBLE" if admissible[nm] else "REPORTED, DOES NOT COUNT"))
+              % (nm, sep, correct, tot, 100.0 * correct / tot,
+                 "ADMISSIBLE" if ok else "REPORTED, DOES NOT COUNT"))
 
     out, missing = [], []
     for b, a in eps:

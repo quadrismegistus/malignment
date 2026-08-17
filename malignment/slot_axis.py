@@ -513,6 +513,53 @@ class Axis:
                 "post_residual": float(post_residual)}
 
 
+#: A rival axis must clear BOTH a mean pole gap and a clean pairwise ordering.
+#: The floor is a tenth of what a purpose-built pole axis reaches on the same
+#: item (+0.39), which is generous; the ordering test is what actually bites.
+SEPARATION_FLOOR = 0.05
+
+
+def separates(S, naughty, nice, floor=SEPARATION_FLOOR):
+    """Can this axis see the contrast it is about to weigh? -> (ok, gap, correct, total)
+
+    **A RIVAL MEASUREMENT THAT CANNOT MEASURE THE THING IS NOT EVIDENCE AGAINST
+    IT**, and treating one as evidence is how a null gets manufactured. On
+    2026-08-17 the pooled 12-pair lexical axis returned 17/50 against a declared
+    axis's 41/50 on `nn_shewantedto_scream-kill`, which reads as a refutation
+    until you ask what it scored:
+
+        DECLARED   gap +0.3904   32/32 pairwise
+        LEXICAL    gap +0.0290   25/32          scream 0.047, yell 0.080 and
+                                                shout 0.073 ABOVE die 0.046 and
+                                                cut 0.011 -- screaming ranked
+                                                naughtier than dying
+
+    The lexical axis is not malfunctioning. It is a GENERAL naughty/nice
+    direction and `scream, cry, yell, shout` are not nice in any general sense --
+    **they are nice only RELATIVE TO KILLING.** A pooled validation (r = 0.740
+    over 86 heterogeneous items) licenses a POOLED USE; it says nothing about
+    whether a given item sits where the axis carries its contrast at all.
+
+    **CALL THIS BEFORE READING THE AXIS'S ANSWER.** The ordering is the whole
+    guarantee: a gate consulted after the result is a rationalisation, and
+    "it would have excluded the axis whichever way its number fell" is the only
+    form of that claim a reader can check.
+
+    Lives here rather than in an experiment folder because dario asked to
+    inherit it rather than write a second one, and two implementations of one
+    admissibility rule is the defect this repo keeps paying for.
+    """
+    import statistics as st
+    g = [S[w] for w in naughty if w in S]
+    n = [S[w] for w in nice if w in S]
+    if not g or not n:
+        return False, 0.0, 0, 0
+    gap = st.mean(g) - st.mean(n)
+    correct = sum(1 for a in g for b in n if a > b)
+    total = len(g) * len(n)
+    return (gap >= floor and correct == total), gap, correct, total
+
+
 def _normal_scores(S):
     """{word: s} -> {word: van der Waerden score}, ties averaged.
 
