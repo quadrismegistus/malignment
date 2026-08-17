@@ -247,15 +247,34 @@ _FUNC = set("be have has had not no just do does did to the a an i we you it tha
             "quite too now still yet even much many".split())
 
 
-def _content(words, n=24):
+def _content(words):
     return [w for w in words if w["word"].lower() not in _FUNC
-            and w["word"].isalpha()][:n]
+            and w["word"].isalpha()]
 
 
 def _table(rows, cols):
-    out = ["| " + " | ".join(cols) + " |", "|" + "|".join(["---"] * len(cols)) + "|"]
-    for r in rows:
-        out.append("| " + " | ".join(str(c) for c in r) + " |")
+    """A fixed-width table inside a fence. -> str
+
+    **ASCII COLUMNS, NOT PIPE TABLES** (RH, 2026-08-17: "would agents be able to
+    read an ASCII-formatted table just as well? easier for me to read"). Yes --
+    pipe syntax exists for RENDERERS, and a language model reads aligned columns at
+    least as well. Fenced, so it is monospace in any markdown viewer AND aligned in
+    a terminal, which serves both readers instead of trading one against the other.
+    """
+    rows = [[("" if c is None else str(c)) for c in r] for r in rows]
+    w = [max(len(cols[i]), *(len(r[i]) for r in rows)) if rows else len(cols[i])
+         for i in range(len(cols))]
+    #: Numeric-looking columns right-align, so decimal points line up and a reader
+    #: can compare magnitudes down the column rather than parsing each cell.
+    num = [all(r[i].replace("-", "").replace("+", "").replace(".", "")
+               .replace("%", "").isdigit() or r[i] == "" for r in rows)
+           for i in range(len(cols))]
+    def fmt(cells):
+        return "  ".join(c.rjust(w[i]) if num[i] else c.ljust(w[i])
+                         for i, c in enumerate(cells)).rstrip()
+    out = ["```", fmt(cols), "  ".join("-" * x for x in w)]
+    out += [fmt(r) for r in rows]
+    out.append("```")
     return "\n".join(out)
 
 
@@ -269,10 +288,32 @@ def md_screen(prompt, s):
          % (s.get("n_words", 0), s.get("theta"),
             " + ".join(m.split("/")[-1] for m in (s.get("models") or [])),
             s.get("rule_version"), s.get("shown")),
-         "", "## Candidates", "",
-         "Function words are hidden here; they are still in the totals.", "",
-         _table([(w["word"], "%.4f" % w["p"], "%.1f%%" % (100 * w["p"] / tot))
-                 for w in top], ["word", "p", "share"])]
+         "", "## Candidates", ""]
+    #: **THE CAP IS DECLARED AND GENEROUS.** The first version showed 24 with no
+    #: note, which is a truncation the reader is not told about -- the defect this
+    #: seat has spent the day finding elsewhere. Tagging needs the whole content
+    #: list, not a screenful.
+    #: **EVERY NUMBER HERE NAMES ITS POPULATION, because the first version did not
+    #: and got both wrong.** It said "showing 41 of 41 content words, 9 function
+    #: words hidden, all 76 are in the totals" -- but the server returns only
+    #: `shown` (top_k) of `n_words`, so 26 never arrived, and the share column was
+    #: a share of the RETURNED mass, not of the slot. Two mislabels in one line,
+    #: which is the defect this seat spent the day finding in other people's work.
+    SHOW = 60
+    disp, func = top[:SHOW], len(ws) - len(top)
+    n_theta, n_ret = s.get("n_words", 0), len(ws)
+    L += ["The server returned the top **%d** of %d words above theta (raise with "
+          "`--k`), summing to %.3f of probability mass. Of those %d: %d content "
+          "words below, %d function words hidden (`have`, `be`, `not` …)."
+          % (n_ret, n_theta, tot, n_ret, len(top), func), "",
+          _table([(w["word"], "%.4f" % w["p"], "%.1f%%" % (100 * w["p"] / tot))
+                  for w in disp], ["word", "p", "%returned"])]
+    L += ["", "`%returned` is each word's share of the %.3f returned here, **not** "
+          "of the whole slot -- the %d words below the cut and the residual are not "
+          "in that denominator." % (tot, n_theta - n_ret)]
+    if len(top) > SHOW:
+        L += ["", "%d further content words fall below `%s`; `--json` returns "
+              "everything the server sent." % (len(top) - SHOW, disp[-1]["word"])]
 
     warn = []
     if ws:
@@ -310,6 +351,81 @@ def md_screen(prompt, s):
           "  --naughty word1,word2,word3,word4 \\",
           "  --nice word5,word6,word7,word8", "```"]
     return "\n".join(L)
+
+
+#: **RH'S THREE DOMAINS.** The other seven in the corpus were proposed by earlier
+#: agents, not by him, which is why they never cohered -- `power` mixes individual
+#: workplace frames with political critique, `self_harm` holds an affect frame.
+KEEP = ("sexual", "violence", "institutional")
+
+#: **RH'S TARGET, NOT THE TOOL'S** (2026-08-17: "we're aiming for 50 (100?) each").
+#: The census's `need` column has always been distance to the LARGEST domain, which
+#: is arithmetic; this is a declaration, and it is a constant here so that changing
+#: it is one edit rather than a number retyped into prose. `--target` overrides.
+TARGET = 50
+
+
+def md_census(c, target=TARGET):
+    """Markdown report for the domain census. -> str"""
+    rows = {r["domain"]: r for r in c.get("rows") or []}
+    L = ["# Slot corpus census", "",
+         "Target: **%d items per domain**, in these three only." % target, ""]
+    body = []
+    for dom in KEEP:
+        r = rows.get(dom) or {"total": 0}
+        have = r.get("total", 0)
+        pct = min(100, int(round(100.0 * have / target))) if target else 0
+        bar = "#" * (pct // 5) + "." * (20 - pct // 5)
+        body.append((dom, have, target, max(0, target - have), "%s %d%%" % (bar, pct)))
+    L += [_table(body, ["domain", "have", "target", "needed", "progress"])]
+    off = [(d, r["total"]) for d, r in sorted(rows.items(), key=lambda x: -x[1]["total"])
+           if d not in KEEP and r["total"]]
+    if off:
+        L += ["", "## Out of scope", "",
+              "Authored by earlier agents, not by RH — **do not add to these**. "
+              "Some are recoverable into the three above; that retag is pending.", "",
+              _table([(d, n) for d, n in off], ["domain", "items"])]
+    files = c.get("files") or {}
+    if files:
+        L += ["", "## Where they live", "",
+              _table([(k, v.get("n", 0), v.get("path", "")) for k, v in files.items()],
+                     ["corpus", "items", "file"])]
+    thin = sorted(KEEP, key=lambda d: (rows.get(d) or {}).get("total", 0))
+    L += ["", "## Next", "",
+          "`%s` is thinnest — author there first." % thin[0], "",
+          "```bash", 'malign-slot screen "your new prompt here"', "```"]
+    return "\n".join(L)
+
+
+def md_help():
+    """The authoring brief, read from the repo. -> str"""
+    import os
+    p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                     "roster", "prompts", "slots", "AGENTS.md")
+    try:
+        with open(p, encoding="utf-8") as fh:
+            brief = fh.read()
+    except Exception as e:
+        brief = ("(could not read %s: %s)\n\nThe brief lives beside the slot "
+                 "corpora in the repo." % (p, e))
+    return ("# malign-slot\n\n"
+            "```\n"
+            "malign-slot help                      this brief\n"
+            "malign-slot census                    what exists, and what is thin\n"
+            "malign-slot pairs                     the 50 declared screening pairs\n"
+            "malign-slot screen \"<prompt>\"          candidate words at the blank\n"
+            "malign-slot axis   \"<prompt>\" --naughty a,b,c --nice d,e,f\n"
+            "malign-slot save   \"<prompt>\" --naughty ... --nice ... \\\n"
+            "                   --domain <sexual|violence|institutional> \\\n"
+            "                   --authored-by <name>\n"
+            "\n"
+            "--json    payload instead of the report\n"
+            "--pair    screen against a different declared pair (stay on one)\n"
+            "--k       widen the returned candidate list\n"
+            "```\n\n"
+            "First call after 10 minutes idle reloads the models (~16 s); after "
+            "that a screen is ~5 s and a full axis ~24 s.\n\n"
+            "---\n\n" + brief)
 
 
 def md_axis(prompt, g, n, r):
@@ -461,7 +577,8 @@ def _main(argv):
     import argparse
     ap = argparse.ArgumentParser(prog="python -m malignment.slot_client",
                                 description=__doc__.splitlines()[0])
-    ap.add_argument("cmd", choices=["pairs", "screen", "axis", "save", "census"])
+    ap.add_argument("cmd", choices=["help", "pairs", "screen", "axis", "save",
+                                    "census"])
     ap.add_argument("prompt", nargs="?", default="")
     ap.add_argument("--pair", default=None, help="base id; ask `pairs` for the list")
     ap.add_argument("--k", type=int, default=50)
@@ -474,16 +591,22 @@ def _main(argv):
     #: **MARKDOWN IS THE DEFAULT AND JSON IS THE OPT-IN**, which is the reverse of
     #: how this started. The only caller is an agent, and a report it will actually
     #: read beats a payload it has to interpret.
+    ap.add_argument("--target", type=int, default=TARGET,
+                    help="items per domain RH is aiming for (default %d)" % TARGET)
     ap.add_argument("--json", action="store_true",
                     help="raw payload instead of the markdown report")
     a = ap.parse_args(argv)
     split = lambda s: [w for w in (x.strip() for x in s.split(",")) if w]
     md = None
 
+    if a.cmd == "help":
+        print(md_help())
+        return 0
     if a.cmd == "pairs":
         out = pairs()
     elif a.cmd == "census":
         out = census()
+        md = md_census(out, a.target)
     elif a.cmd == "screen":
         out = screen(a.prompt, a.pair, a.k)
         md = md_screen(a.prompt, out)
