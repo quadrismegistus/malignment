@@ -72,6 +72,8 @@ The axis is `embed(prompt + sep + word)`, so the framing is part of the axis. Ch
 
 **This folder is unaffected**, because it compares axes to each other and never runs a model. It bounds what comes next: nothing can measure the tagged items on their own prompts until those prompts are declared and run.
 
+**Do not read the 84 as a small local job.** Costed by malign ([6383]) and then corrected by them ([6385]): loading dominates, so these prompts are a RIDER on whatever fleet next loads these checkpoints, not a cargo justifying its own. The local route looked free because 73 of the 100 declared arms have weights on disk -- but weights on disk is not a demonstrated load, and only **3 of those 73 have an observed MPS load, with 66 carrying no observation at all**. Meanwhile 92 of 100 arms have at least one CUDA-produced cell. **The route with evidence behind it is the fleet.** No spend is proposed here and the call is RH's; the number is recorded so the argument has one, not to make the case.
+
 ## What this does and does not license
 
 **It does not license replacing author tags.** Purity, defectors and `MISTAGGED` are properties of a declared pole set and have no generic equivalent; an author who tags is also declaring what they think the item is about, which is a claim this cannot make for them.
