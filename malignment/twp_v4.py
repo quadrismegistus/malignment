@@ -257,7 +257,45 @@ def score_words_paths(model, tok, prompt, targets, dev, bmask, cjk=None,
 
     Accumulates on `(surface, first_token)`, which is `expand`'s key, so the
     result is comparable to a stored row rather than merely similar to one.
+
+    ## FAILURE -- DO NOT USE. THREE ATTEMPTS, THREE DEFECTS, KEPT AS A RECORD
+
+        CJK      score_words 183 matched,  94 exact, max_rel 6.6e-01
+                 paths_v4    106 matched,  55 exact, max_rel 9.0e+00
+        English  score_words 113 matched, 103 exact, max_rel 4.5e-08
+                 paths_v4      0 matched                       <- finds NOTHING
+
+    **1. Quadratic.** Viability tested by decoding every continuation token for
+    every live prefix at every depth: O(live x vocab) decodes. Never returned.
+
+    **2. Unbounded.** Dropping theta was deliberate -- the words this exists to
+    find are sub-theta -- but `mm > 0.0` prunes nothing, so the frontier
+    multiplied by the branching factor at every depth. Also never returned.
+    Fixed with `PATH_FLOOR`/`PATH_WIDTH`, which are sound and stay.
+
+    **3. The leading space.** Candidates are looked up as `rest[:k]` taken from
+    the target, so `kill` searches for `k`, `ki`, `kil`, `kill` -- and the token
+    is `" kill"`. **The bow convention, which `twp.score_words` handles
+    explicitly with `cands = ["", " "]` twenty lines away and which I had got
+    right two hours earlier.** CJK partly works only because CJK has no leading
+    space, which is why the English zero is the informative half and the CJK
+    9x is a symptom of the same miss.
+
+    **Stopped here rather than attempting a fourth fix in the same sitting.**
+    Three failures on one function, the last of them a concept already solved in
+    the neighbouring function, is a signal about the author's state rather than
+    the problem's difficulty. `twp.score_words` remains correct-and-bounded:
+    exact in English, a documented ~0.5 lower bound in CJK.
+
+    A rewrite should start from `score_words`'s verified separator handling and
+    add path aggregation to THAT, rather than rebuild the walk from scratch.
     """
+    raise NotImplementedError(
+        "score_words_paths is BROKEN -- see the docstring's FAILURE section. It "
+        "finds 0 of 113 English targets because candidate lookup ignores the "
+        "leading-space (bow) convention. Use twp.score_words, which is a "
+        "documented lower bound, until this is rewritten.")
+
     #: **CANDIDATES COME FROM THE TARGETS, NOT FROM THE VOCABULARY.** The first
     #: version tested viability by decoding EVERY continuation token for every
     #: live prefix at every depth -- O(live x vocab) decodes, millions per
@@ -302,13 +340,35 @@ def score_words_paths(model, tok, prompt, targets, dev, bmask, cjk=None,
                 got[k] = got.get(k, 0.0) + mass * float(row[b].sum())
             for tid, s in extensions(done):
                 mm = mass * float(row[tid])
-                if mm > 0.0:
+                if mm >= PATH_FLOOR:
                     nxt.append(((*pref, tid), mm, t1, done + s))
+        #: **THE BEAM MUST BE BOUNDED OR IT GROWS MULTIPLICATIVELY.** Dropping
+        #: theta was deliberate -- the words this exists to find are sub-theta --
+        #: but replacing it with `mm > 0` prunes nothing, so `live` multiplies by
+        #: the branching factor at every depth and never returns. That was the
+        #: second performance bug in this function; the first was decoding the
+        #: whole vocabulary per prefix.
+        #:
+        #: `PATH_FLOOR` is 1e-10, far below any word probability we report, and
+        #: `PATH_WIDTH` caps the frontier by mass. Both are ORDERS below theta,
+        #: so neither can drop a path that carries reportable mass -- and if the
+        #: cap ever binds it is recorded, not silent.
+        nxt.sort(key=lambda x: -x[1])
+        if len(nxt) > PATH_WIDTH:
+            dropped = sum(x[1] for x in nxt[PATH_WIDTH:])
+            got.setdefault("__CAPPED__", 0.0)
+            got["__CAPPED__"] += dropped
+            nxt = nxt[:PATH_WIDTH]
         live = nxt
     return got
 
 
 _MAXTOK = 24
+#: Orders of magnitude below theta (1e-3), so neither can drop a path carrying
+#: mass anyone would report. `__CAPPED__` in the result records what the width
+#: cap dropped, so a bound that binds says so rather than silently truncating.
+PATH_FLOOR = 1e-10
+PATH_WIDTH = 4096
 _TOKIDX = {}
 
 
