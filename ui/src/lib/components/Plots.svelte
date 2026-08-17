@@ -38,8 +38,15 @@
 	let values = $state<Record<string, string>>({});
 	let running = $state(false);
 	let error = $state('');
+	//: **NO `url` FIELD.** The server returns one and it is SERVER-RELATIVE
+	//: (`/experiment/figure?...`), while the client prefixes `/api` in dev so
+	//: Vite can proxy. Using the server's string put the browser on a path Vite
+	//: does not proxy and the image silently failed to load -- the render had
+	//: already succeeded, so the panel showed a broken image beside a happy
+	//: "0.81s" and every number correct. The URL is built here, with `BASE`,
+	//: by the same helper the figures row uses.
 	let result = $state<{
-		url: string;
+		experiment: string;
 		figure: string;
 		seconds: number;
 		info: Record<string, unknown>;
@@ -230,10 +237,14 @@
 					{/each}
 				</div>
 				<figure class="fig">
-					<img src={result.url} alt={result.figure} />
+					<img src={api.figureUrl(result.experiment, result.figure)} alt={result.figure} />
 					<figcaption>
 						<code>{result.figure}</code>
-						<a href={result.url} target="_blank" rel="noreferrer">open full size (300 dpi)</a>
+						<a
+							href={api.figureUrl(result.experiment, result.figure)}
+							target="_blank"
+							rel="noreferrer">open full size (300 dpi)</a
+						>
 						<span class="muted">saved to the producer's figures/ folder</span>
 					</figcaption>
 				</figure>

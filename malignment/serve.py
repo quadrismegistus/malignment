@@ -1073,8 +1073,14 @@ class Handler(BaseHTTPRequestHandler):
             return {"plot": pid, "experiment": spec["experiment"],
                     "params": kw, "seconds": round(took, 2),
                     "figure": os.path.basename(out),
-                    "url": "/experiment/figure?id=%s&name=%s"
-                           % (spec["experiment"], os.path.basename(out)),
+                    #: SERVER-RELATIVE, and named so. A client that mounts this
+                    #: API under a prefix -- the dev server proxies `/api` --
+                    #: must build its own URL from `experiment` and `figure`.
+                    #: Handing this string straight to an `<img src>` is how the
+                    #: first version drew a broken image beside a successful
+                    #: render and correct numbers.
+                    "url_server_relative": "/experiment/figure?id=%s&name=%s"
+                                           % (spec["experiment"], os.path.basename(out)),
                     "info": info}
         if path == "/experiment/figure":
             #: **VALIDATED BY MEMBERSHIP IN THE MANIFEST THIS PROCESS WALKED,
