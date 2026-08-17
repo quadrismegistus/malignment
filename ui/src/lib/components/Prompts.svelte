@@ -479,10 +479,15 @@
 					depth; <code>clean_surface</code> strips the punctuation, so the surfaces below look
 					correct and some probabilities behind them are double-counted. 84 of 133 models are
 					affected and 49 are not, so this is <strong>a reordering that differs by tokenizer
-						family</strong>. Magnitude is not established at roster scale — on one model and two
-					prompts it was 2–4% of keys carrying 17–33% of the mass, under 2% on the total, up to
-					1.43x on a single word, and exactly zero in English. See docket [6435], [6437];
-					classification from <code>{cjkSource}</code>.
+						family</strong>. Magnitude is not established at roster scale. On one model and three
+					prompts, correcting the mask moves <strong>+15% to +28% of resolved mass on Chinese
+						prompts</strong> and every word in the cell — this is recovery of mass that was
+					bleeding into <code>drop</code>/<code>open</code>, not redistribution between words.
+					<strong>English is not exempt</strong>: the corrected mask also marks
+					<code>—</code> <code>–</code> <code>…</code> <code>·</code>, so English cells move too,
+					by +0.12%. An earlier version of this fence said English was unaffected, which was true
+					of the double-crediting symptom and false of the fix. See docket [6435], [6437],
+					[6445]; classification from <code>{cjkSource}</code>.
 				</p>
 			{/if}
 			{#if numericWords.length}

@@ -106,6 +106,20 @@ The numeric truncation defect's SEVERITY is language-dependent: in Chinese the m
 
 So: **an open axis, not a warning.** A fence with no exact condition is the cry-wolf case this file has twice argued against, and inventing a provenance list to hang one on would be worse than the confound.
 
+## 3f. The CJK mask fix is a whole-store rebuild, not a Chinese corner
+
+Superseding the magnitude in 3d/3e (malign, [6445], one model / three prompts, so still not a roster figure):
+
+    zh   resolved mass  0.190 -> 0.219   +15.0%   162 of 162 words moved
+    zh2                 0.105 -> 0.134   +27.6%   217 of 217
+    en                  0.8378 -> 0.8389  +0.12%  123 of 123
+
+**The ~2% figure was the double-crediting SYMPTOM, not the fix.** Correcting the mask also adds the separator's mass to `term` at the depth the word terminates, which can only increase `term = row[b].sum()` -- so every word gains and resolved mass rises. That is mass recovered from `drop`/`open`, not moved between words.
+
+**And English is not exempt**, which kills the bounded-rebuild assumption: the corrected mask marks 24 non-ASCII punctuation ids and they are not all CJK -- `—`, `–`, `…`, `·` sit beside `，`, and English prose contains em dashes and ellipses. So all 984,857 cells change, not the 62,246 that are `zh`.
+
+For this panel: the fence text is corrected, and the consequence is that **a cross-lingual or cross-family comparison on affected cells is comparing instruments** -- +15-28% against +0.12%, on 84 of 133 models and not on the other 49. That is the strongest statement yet of why the per-arm marking exists.
+
 ## 5. Blocked or waiting on someone else
 
 - **Any panel that renders `dN`.** Two conventions are emitted (`dN` and `dN_renorm`) and neither is canonical; where they disagree in sign the pair is not quotable at all, which is 14.8% of prompts at roster scale. A panel that picks one silently would be making a ruling that is RH's. `sign_disagree` is already in the payload, so the panel can refuse rather than choose.
