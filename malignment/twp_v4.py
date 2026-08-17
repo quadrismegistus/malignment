@@ -1088,6 +1088,50 @@ def leak_bound(pre, post, S, residual_pre, residual_post):
             "s_max": smax, "e_pre": e_pre, "e_post": e_post}
 
 
+
+def score_words4(model, tok, prompt, targets, dev, bmask, cjk=None,
+                 bos_policy="inherited", cache=None, layers=None, rules=None):
+    """`twp.score_words` under v4's rules. -> (got, refused, total)
+
+    **THE UNION TOP-UP'S SCORER, AND IT MUST AGREE WITH `expand4` ABOUT WHAT A
+    WORD IS.** The v4 migration is two passes: `expand4` discovers what clears
+    theta, then this scores the per-prompt UNION of every word any model cleared
+    theta on -- which is what removes the imputation behind ~30% of falling mass.
+    Pass 2 is only meaningful if it measures the same object as pass 1.
+
+    Two ways it would not have, both silent:
+
+        max_depth   `score_words` capped at `twp.MAX_DEPTH` (6) while `expand4`
+                    walks to 9. A word of 7-8 tokens is REFUSED rather than
+                    scored, and a refusal is not a zero -- pass 2 would find
+                    systematically fewer words than pass 1 and nothing would say
+                    so. 69 of 136 roster tokenizers need 7+ tokens for
+                    `$100,000`.
+        bmask       `decoded_boundary` corrects the mask INSIDE `expand4`, so a
+                    caller passing the raw mask here scores against the
+                    UNCORRECTED boundary rule. Same prompt, same word, two
+                    different `term`s.
+
+    Both are handled here rather than left to the caller, because "the caller
+    must remember" is the shape that has failed all day.
+
+    The lower-bound caveat from `twp.score_words` is unchanged and still applies:
+    this scores ONE token path per target, so it is exact where a surface is
+    reachable one way and a lower bound where it is not. Path aggregation was
+    measured and is a NULL -- see `experiments/instrument_calibrations/
+    path_aggregation/` -- so the bound is tight in practice, not by assumption.
+    """
+    rules = rules or ADOPTED
+    if rules.decoded_boundary:
+        extra = decoded_boundary_ids(tok)
+        if len(extra):
+            bmask = bmask.copy()
+            bmask[extra] = True
+    return T.score_words(model, tok, prompt, targets, dev, bmask, cjk=cjk,
+                         bos_policy=bos_policy, cache=cache, layers=layers,
+                         max_depth=rules.max_depth)
+
+
 def compare(model, tok, prompt, dev, bmask, cjk=None, rules=None, top=6):
     """v3 against v4 on ONE cell. Prints what moved; returns the deltas.
 

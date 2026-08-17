@@ -1256,7 +1256,7 @@ def expand(model, tok, prompt, dev, bmask, theta=THETA, cjk=None,
 
 @torch.no_grad()
 def score_words(model, tok, prompt, targets, dev, bmask, cjk=None,
-                bos_policy="inherited", cache=None, layers=None):
+                bos_policy="inherited", cache=None, layers=None, max_depth=None):
     """True probability of each NAMED word, by the same arithmetic as `expand`.
 
         got, refused, mass = score_words(model, tok, prompt, ["kill","scream"], ...)
@@ -1318,6 +1318,11 @@ def score_words(model, tok, prompt, targets, dev, bmask, cjk=None,
     1.000000 on all 984,857 stored cells; add without subtracting and every
     topped-up cell reads > 1.
     """
+    #: **`max_depth` DEFAULTS TO v3's AND MUST**, or every existing call changes
+    #: behaviour. v4 raises it to 9, and a scorer capped at 6 while `expand4`
+    #: walks to 9 would DISAGREE ABOUT WHAT A WORD IS -- silently, and in the
+    #: direction of finding fewer, since a refusal is not a zero.
+    _md = MAX_DEPTH if max_depth is None else max_depth
     pids, _rs, _rid = _prompt_ids(tok, prompt, bos_policy)
     #: **THE SEPARATOR IS TRIED, NOT ASSUMED.** `expand` never prepends
     #: anything -- it decodes tokens sitting directly after the prompt, so a
@@ -1333,7 +1338,7 @@ def score_words(model, tok, prompt, targets, dev, bmask, cjk=None,
         best = None
         for sep in cands:
             ids = tuple(tok.encode(sep + w, add_special_tokens=False))
-            if not ids or len(ids) > MAX_DEPTH:
+            if not ids or len(ids) > _md:
                 continue
             if clean_surface(tok.decode(list(ids)).strip()) == w:
                 best = ids
@@ -1341,8 +1346,8 @@ def score_words(model, tok, prompt, targets, dev, bmask, cjk=None,
         if best is None:
             ids = tuple(tok.encode(cands[0] + w, add_special_tokens=False))
             refused[w] = ("encodes to nothing" if not ids else
-                          "%d tokens > MAX_DEPTH %d" % (len(ids), MAX_DEPTH)
-                          if len(ids) > MAX_DEPTH else
+                          "%d tokens > max_depth %d" % (len(ids), _md)
+                          if len(ids) > _md else
                           "round-trip -> %r" % clean_surface(tok.decode(list(ids)).strip()))
         elif is_mojibake(w):
             refused[w] = "mojibake"
