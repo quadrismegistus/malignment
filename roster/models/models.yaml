@@ -696,6 +696,13 @@ nodes:
     env:
       profile: tf457
       why: transformers 5.x CANNOT RUN this; pin 4.57.1.
+      prompt_cache: false
+      prompt_cache_why: "twp_v4's prompt KV cache raises 'tuple' object has
+        no attribute 'layers' on this architecture -- its past_key_values is a
+        tuple where `prompt_cache` expects a Cache object. NOT a defect in the
+        model: the runner probes once before any key is built and stamps the
+        cells prompt_cache=false, so the record matches what was measured.
+        Costs ~4.5x here. Measured 2026-08-17 on CDH0050."
   baichuan-inc/Baichuan2-7B-Chat:
     nickname: baichuan-chat
     country: CN
@@ -707,6 +714,13 @@ nodes:
     env:
       profile: tf457
       why: transformers 5.x CANNOT RUN this; pin 4.57.1.
+      prompt_cache: false
+      prompt_cache_why: "twp_v4's prompt KV cache raises 'tuple' object has
+        no attribute 'layers' on this architecture -- its past_key_values is a
+        tuple where `prompt_cache` expects a Cache object. NOT a defect in the
+        model: the runner probes once before any key is built and stamps the
+        cells prompt_cache=false, so the record matches what was measured.
+        Costs ~4.5x here. Measured 2026-08-17 on CDH0050."
   bigscience/bloom-7b1:
     revision_ladder: 3
     nickname: bloom
