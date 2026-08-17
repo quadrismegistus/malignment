@@ -497,8 +497,12 @@
 					the separator alone. So <code>100</code> may be <code>$100,000</code> or
 					<code>$100</code>, and <code>1</code> may be <code>$1,000,000</code>.
 					<strong>The collapse is not monotone</strong>: sorting these surfaces does not sort the
-					underlying numbers, so a contrast built on them can reverse in sign. See docket [6430];
-					a v4 lookahead rule is proposed and unimplemented.
+					underlying numbers, so a contrast built on them can reverse in sign.
+					<strong>Two independent blockers, and the proposed fix reaches only one</strong>: the
+					boundary rule stops <code>expand</code> discovering <code>$100,000</code>, and at 7–8
+					tokens it also exceeds <code>MAX_DEPTH</code> 6, so <code>score_words</code> refuses it
+					even when named explicitly — 48 of 88 tokenizers exceed the limit on at least one
+					salary string. See docket [6430], [6440].
 				</p>
 			{/if}
 			{#if plot}

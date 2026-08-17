@@ -80,6 +80,8 @@ Checked against what v3 actually holds (ClickHouse tables and `experiments/*/res
 
 twp cuts a word at `,` and `.` between digits, in **159 of 159 roster tokenizers with zero exceptions** (lacan, docket [6430]) -- every one emits the separator as its own token, so `$100,000` is recorded as `100`. `twp.intra_word` already implements the numeric case and never fires: it fails on `tok_str[1].isalnum()` because the token has no second character. **The rule is not missing, it is starved**, so no longer list of ids can fix it and the v4 repair is lookahead in the expansion -- proposed, unimplemented, and gated on the CJK arm being measured.
 
+**And the lookahead alone does not reach the target** (malign, [6440]). `$100,000` is 7-8 tokens against a `MAX_DEPTH` of 6, so `score_words` refuses it even when the string is named explicitly, and 48 of 88 tokenizers exceed the limit on at least one salary string. Two independent blockers: the boundary rule stops `expand` DISCOVERING the string, and the depth limit stops it FITTING. Raising `MAX_DEPTH` redefines `RULE_VERSION` and costs a forward pass per depth across ~985k cells, so it is not a cheap follow-on.
+
 **Why this reached the UI rather than staying an instrument note.** The Prompts panel shows, for the real class-contrast salary prompts:
 
     upper-class    100, 50, 1, 10, 200, 40
