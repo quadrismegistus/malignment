@@ -1,0 +1,49 @@
+#!/bin/sh
+# Author slot items from a shell, for an agent that has no venv.
+#
+#   malign-slot census
+#   malign-slot screen "The doctor told her she was probably going to"
+#   malign-slot axis   "..." --naughty die,miscarry --nice live,survive
+#   malign-slot save   "..." --naughty ... --nice ... --domain medical \
+#                            --authored-by sonnet
+#
+# WHY THIS EXISTS: an agent inherits a shell with no venv activated, and on this
+# machine `python` DOES NOT EXIST -- only `python3`. So the two things an agent
+# can get wrong are the interpreter and the working directory, and both fail in
+# unhelpful ways: `command not found`, or `ModuleNotFoundError: malignment` from
+# any directory but the repo root. This pins both.
+#
+# ANY python3 WILL DO, DELIBERATELY. `malignment.slot_client` imports only
+# argparse/json/os/sys/urllib -- no torch, no clickhouse, nothing from either
+# venv -- because it talks to the running server over HTTP instead of loading a
+# model. Keep it that way: the moment the client needs a third-party import, this
+# shim has to start choosing between `.venv` and `.venv-tf457`, and the agent
+# path stops being the trivially reliable one.
+#
+# PYTHONPATH RATHER THAN `cd`: changing directory would silently re-root any
+# relative path in the caller's own arguments.
+set -eu
+
+# `$0` through a symlink names the LINK's directory, not the repo -- so
+# `dirname $0`/.. from ~/.local/bin resolves to ~/.local and finds nothing. This
+# walks the chain. It is the whole reason the shim is testable-through-a-symlink
+# rather than obviously correct.
+SELF=$0
+while [ -L "$SELF" ]; do
+    LINK=$(readlink "$SELF")
+    case $LINK in
+        /*) SELF=$LINK ;;
+        *)  SELF=$(dirname -- "$SELF")/$LINK ;;
+    esac
+done
+ROOT=$(CDPATH= cd -- "$(dirname -- "$SELF")/.." && pwd -P)
+
+PY=${MALIGNMENT_PY:-python3}
+command -v "$PY" >/dev/null 2>&1 || {
+    echo "malign-slot: no '$PY' on PATH. Set MALIGNMENT_PY to an interpreter" >&2
+    echo "  (any python3 works -- the client is stdlib-only)" >&2
+    exit 127
+}
+
+PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}" export PYTHONPATH
+exec "$PY" -m malignment.slot_client "$@"
