@@ -65,7 +65,9 @@ Measured over the 197 prompts: **32 disagree in sign, 16.2%**, with `r = 0.847` 
     dN -0.0062  dN_renorm +0.0052   T_b 0.322 -> T_p 0.194   'The ref made a bad call and the coach groaned'
     dN +0.0061  dN_renorm -0.0033   T_b 0.227 -> T_p 0.112   'for his billion constituents, who was David to argue'
 
-**THE ROSTER NUMBERS SUPERSEDE THESE FOR ANYTHING GENERAL** (malign, [6378], `dc8efd4`). Over all 50 pairs the pooled rate is **14.8%**, per-pair rates spanning 10.7% to 22.1%. This pair measures 14.7% on that panel, so the 16.2% here is if anything slightly high rather than the floor it was briefly claimed to be. The quartile shape holds and is sharper: **31.4% of the smallest-|dN| quartile against 3.0% of the largest**, so the largest-effect prompts are safer at roster scale than this pair suggested -- 3 in 100, not 8.
+**THE ROSTER NUMBERS SUPERSEDE THESE FOR ANYTHING GENERAL** (malign, [6378], `dc8efd4`). Over all 50 pairs the pooled rate is **14.8%**, per-pair rates spanning 10.7% to 22.1%. This pair measures 14.7% on that panel, so the 16.2% here is if anything slightly high rather than the floor it was briefly claimed to be. The quartile shape holds and is sharper: **33.0% of the smallest-|dN| quartile against 2.3% of the largest**, so the largest-effect prompts are safer at roster scale than this pair suggested -- 2 in 100, not 8.
+
+Those quartile figures are the CORRECTED ones (`bf10b68`). The first version cut quartiles on |dN| pooled across all 50 pairs and reported 31.4% / 3.0%; that is a cross-pair comparison of raw `dN` magnitude, which is unlicensed for the same reason everything else here says it is. **The pooled top quartile turned out to be over-represented by the four most aperture-unstable pairs in the roster, in rank order** -- RedPajama, Amber, llama-7b, stablelm -- so it was ranking apertures as much as effects. Worth carrying the nuance: mean base scored mass barely differed between the buckets (0.796 against 0.793), so the enrichment was in aperture VOLATILITY rather than LEVEL, and a check on mean `T` would have missed it.
 
 Read the 8.2% above as a fact about `gl198976/mpt-7b`, not about the instrument.
 
