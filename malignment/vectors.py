@@ -307,6 +307,31 @@ def score(prompt, seed, words=None, embedder=None):
     return {row[0]: float(row[1]) for row in cl.query(sql, parameters=par).result_rows}
 
 
+def rows(sql, **params):
+    """Query through clickhouse-connect. -> list of row tuples
+
+    **NEVER `ch.raw(... FORMAT TabSeparated)` FOR A STRING COLUMN.** TSV output is
+    ESCAPED: a prompt comes back as `"He\\\\'d never seen ... \\\\nThey sprawled"`,
+    with literal backslash-quote and backslash-n where the real string has an
+    apostrophe and a newline. Feeding that back into `WHERE prompt = '...'` matches
+    NOTHING, and the loop then skips the prompt and reports success.
+
+    That is not hypothetical: `embed_population` ran this way and got through 19
+    prompts only because those happened to contain no character TSV escapes. Every
+    prompt with a quote, backslash or newline was silently dropped -- in a literary
+    corpus, a large fraction. `ch.py`'s own `raw` docstring names this exact defect:
+    *"if you reach for this with FORMAT TSV and then split on tabs, you have
+    re-created defect (2)."*
+
+    connect returns real python strings and takes real parameters, so neither the
+    escaping nor the quoting is ours to get wrong.
+    """
+    cl = client()
+    if cl is None:
+        raise SystemExit("clickhouse-connect unavailable; see vectors.client()")
+    return cl.query(sql, parameters=params or None).result_rows
+
+
 def ingest_stash(limit=0, verbose=True):
     """Copy the legacy hashstash vectors into ClickHouse. -> dict
 
@@ -319,6 +344,15 @@ def ingest_stash(limit=0, verbose=True):
 
     That turns an unparseable key from fatal into merely inelegant, and it means
     the ingest covers exactly the pairs the store can be asked about.
+
+    **STREAMED PER PROMPT, NOT MATERIALISED.** The first version pulled all
+    3,839,090 `(prompt, word)` pairs into a python list and then duplicated the
+    references into a dict -- roughly a gigabyte of interpreter objects before any
+    work began, on a box that happened to have 103 GB. `embed_population` was
+    written to stream from the start and this was not; the difference only showed
+    up as a risk I had to flag rather than a failure, which is the worst way to
+    carry a defect. Now it asks for the prompt list, then each prompt's words in
+    turn, and holds one prompt at a time.
     """
     import numpy as np
     from . import slot_axis as A
@@ -326,25 +360,36 @@ def ingest_stash(limit=0, verbose=True):
     if st is None:
         raise SystemExit("legacy stash unavailable -- see slot_axis._stash's warning")
     create()
-    q = ("SELECT DISTINCT prompt, word FROM {db}.twp_words"
-         + (" LIMIT %d" % limit if limit else "") + " FORMAT TabSeparated")
-    pairs = []
-    for line in ch.raw(q).strip().splitlines():
-        if "\t" not in line:
-            continue
-        p, w = line.rsplit("\t", 1)
-        pairs.append((p, w))
+    #: ORDER BY, for the reason booked against `population_prompts`: an unordered
+    #: DISTINCT means `--limit` selects a different population per invocation.
+    plist = [r[0] for r in rows(
+        "SELECT DISTINCT prompt FROM twp_words ORDER BY prompt"
+        + (" LIMIT %d" % limit if limit else ""))]
     if verbose:
-        print("candidate (prompt, word) pairs from twp_words: %d" % len(pairs))
-
-    by_prompt = {}
-    for p, w in pairs:
-        by_prompt.setdefault(p, []).append(w)
-    hit = miss = 0
-    for i, (p, ws) in enumerate(sorted(by_prompt.items()), 1):
+        print("prompts to probe: %d" % len(plist), flush=True)
+    hit = miss = skipped = 0
+    for i, p in enumerate(plist, 1):
+        ws = [r[0] for r in rows(
+            "SELECT DISTINCT word FROM twp_words WHERE prompt = {p:String} "
+            "ORDER BY word", p=p)]
+        if not ws:
+            continue
         sep = A.sep_for(p)
+        #: **ASK CLICKHOUSE FIRST, so a resume is free.** Without this the stage
+        #: re-probed the stash and re-inserted everything it had already copied --
+        #: 251,122 rows on the run that died at errno 28. ReplacingMergeTree would
+        #: collapse the duplicates eventually, but "eventually" means carrying them
+        #: on a volume that had just filled, and re-probing is wasted either way.
+        #: `embed_population` was written this way from the start; this stage was
+        #: not, and the disk failure is what exposed the difference.
+        already = set(fetch(p, ws))
+        todo = [w for w in ws if w not in already]
+        if not todo:
+            skipped += len(ws)
+            continue
+        skipped += len(already)
         vs, hits = [], []
-        for w in ws:
+        for w in todo:
             v = None
             for probe in (A.vec_key(p, w), "%s%s%s" % (p, sep, w)):
                 try:
@@ -366,10 +411,10 @@ def ingest_stash(limit=0, verbose=True):
             put(p, hits, vs, source="stash-ingest")
             hit += len(hits)
         if verbose and i % 200 == 0:
-            print("  %d/%d prompts   copied %d   absent %d"
-                  % (i, len(by_prompt), hit, miss), flush=True)
-    out = {"pairs_considered": len(pairs), "copied": hit, "absent_from_stash": miss,
-           "prompts": len(by_prompt)}
+            print("  %d/%d prompts   copied %d   absent %d   already had %d"
+                  % (i, len(plist), hit, miss, skipped), flush=True)
+    out = {"copied": hit, "absent_from_stash": miss,
+           "already_in_ch": skipped, "prompts": len(plist)}
     if verbose:
         print("\n%s" % out)
     return out
@@ -390,22 +435,30 @@ def population_prompts(domains=None, sources=None):
     """Declared prompts in the population that have measured words. -> [str]"""
     d = domains if domains is not None else POPULATION["domains"]
     s = sources if sources is not None else POPULATION["sources"]
-    esc = lambda x: x.replace("\\", "\\\\").replace("'", "\\'")
-    cl = []
+    where, par = [], {}
     if d:
-        cl.append("p.domain IN (%s)" % ",".join("'%s'" % esc(x) for x in d))
+        where.append("p.domain IN {dom:Array(String)}")
+        par["dom"] = list(d)
     if s:
-        cl.append("p.source IN (%s)" % ",".join("'%s'" % esc(x) for x in s))
+        where.append("p.source IN {src:Array(String)}")
+        par["src"] = list(s)
+    if not where:
+        raise ValueError("give domains or sources")
     #: **`ORDER BY prompt`, AND IT IS NOT COSMETIC.** A `SELECT DISTINCT` with no
     #: ORDER BY returns rows in whatever order the read produced, so `[:limit]`
     #: selects a DIFFERENT SUBSET on each run. That is exactly the defect booked
     #: against `ch_read.prefetch` -- two runs of unchanged code differing on 4,051
     #: of 4,413 cells -- and it made the first resumability test compare two
     #: different populations and report a real feature broken.
-    q = ("SELECT DISTINCT w.prompt FROM {db}.twp_words w INNER JOIN {db}.prompts p "
-         "ON p.prompt = w.prompt WHERE %s ORDER BY w.prompt FORMAT TabSeparated"
-         % " OR ".join(cl))
-    return [l for l in ch.raw(q).strip().splitlines() if l.strip()]
+    #:
+    #: **AND IT GOES THROUGH `rows`, NOT `ch.raw(FORMAT TabSeparated)`** -- see that
+    #: function. TSV output escapes strings, so prompts carrying a quote, backslash
+    #: or newline came back mangled and matched nothing downstream. This query is
+    #: where that entered the population run.
+    return [r[0] for r in rows(
+        "SELECT DISTINCT w.prompt FROM twp_words w INNER JOIN prompts p "
+        "ON p.prompt = w.prompt WHERE %s ORDER BY w.prompt" % " OR ".join(where),
+        **par)]
 
 
 def embed_population(domains=None, sources=None, limit=0, verbose=True):
@@ -434,13 +487,12 @@ def embed_population(domains=None, sources=None, limit=0, verbose=True):
         #: Sliced AFTER sorting. Slicing an unordered list is what made --limit
         #: mean a different population on every invocation.
         prompts = prompts[:limit]
-    esc = lambda x: x.replace("\\", "\\\\").replace("'", "\\'")
     done = new = skipped = 0
     t0 = __import__("time").time()
     for i, pr in enumerate(prompts, 1):
-        words = [l for l in ch.raw(
-            "SELECT DISTINCT word FROM {db}.twp_words WHERE prompt = '%s' "
-            "ORDER BY word FORMAT TabSeparated" % esc(pr)).strip().splitlines() if l]
+        words = [r[0] for r in rows(
+            "SELECT DISTINCT word FROM twp_words WHERE prompt = {p:String} "
+            "ORDER BY word", p=pr)]
         if not words:
             continue
         have = set(fetch(pr, words))
