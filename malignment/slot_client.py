@@ -367,6 +367,44 @@ def md_axis(prompt, g, n, r):
               "irrelevant part, so this says little — it catches a pole that has "
               "drifted somewhere you did not intend."]
 
+    cc = r.get("cross_corpus") or {}
+    if cc and not cc.get("error"):
+        hi, lo = cc.get("naughty_end") or [], cc.get("nice_end") or []
+        rows = [(("`%s` %+.3f *(%d)*" % (hi[i]["word"], hi[i]["s"], hi[i]["prompts"]))
+                 if i < len(hi) else "",
+                 ("`%s` %+.3f *(%d)*" % (lo[i]["word"], lo[i]["s"], lo[i]["prompts"]))
+                 if i < len(lo) else "")
+                for i in range(min(6, max(len(hi), len(lo))))]
+        L += ["", "## 5. What this axis selects across %d OTHER frames"
+              % cc.get("scored_prompts", 0), "",
+              _table(rows, ["toward naughty", "toward nice"]), "",
+              "*(n)* is how many frames the word appears in; each is centred on its "
+              "own frame first. **This is the check that works** — unlike section 4 "
+              "it uses vocabulary your frame never offered, so it can show a pole "
+              "pointing somewhere you did not intend. If these words are not the "
+              "kind of thing you meant, the poles are wrong however good the gate "
+              "looks."]
+
+    stb = r.get("stability") or {}
+    if stb and not stb.get("error"):
+        nbs = stb.get("neighbours") or {}
+        if nbs:
+            rows = [(w, " ".join("`%s`" % x["word"] for x in v[:5]))
+                    for w, v in nbs.items()]
+            L += ["", "## 6. Are these pole words stable outside the frame?", "",
+                  _table(rows, ["pole word", "nearest in general English"]), "",
+                  "From fastText (%d words, no prompt). **This is a different "
+                  "question, not a referee.** In your frame bge reads each word "
+                  "correctly; here there is no frame, so a word with several senses "
+                  "shows them all. `file` returning `jpg png gif` means it is "
+                  "overwhelmingly the *computer* sense in general English — fine "
+                  "inside a grievance frame, a risk if the item is reused or "
+                  "compared against a twin worded differently."
+                  % stb.get("vocab", 0)]
+        if stb.get("missing"):
+            L += ["", "Not in the vocabulary at all: %s"
+                  % " ".join("`%s`" % w for w in stb["missing"])]
+
     warn = []
     if len(g) < 4 or len(n) < 4:
         warn.append("**Small pole(s)** — naughty %d, nice %d. Four or more each; "

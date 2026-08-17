@@ -666,6 +666,202 @@ def embed_vocab(shard=0, n_shards=1, limit=0, batch=512, verbose=True):
             "embedded": new, "already": skipped}
 
 
+FT_TABLE = "ft_word_vec"
+FT_DIR = os.path.join(DATA if "DATA" in dir() else
+                      os.environ.get("MALIGNMENT_DATA",
+                                     os.path.expanduser("~/malignment-data")),
+                      "vecs", "muse")
+
+
+def create_ft(drop=False):
+    """fastText aligned vectors: a THIRD space, en and zh in one alignment.
+
+    **300 DIMENSIONS, NOT 1024, WHICH IS WHY IT IS ITS OWN TABLE AND ITS OWN
+    CHECK.** Copying the working DDL from `word_vec` would have silently accepted
+    300-element rows against a `length(vec) = 1024` constraint -- except it would
+    have refused every row, which is the lucky direction. A table keyed on a
+    different embedder with a different dimensionality cannot share either.
+
+    ## WHAT IT IS FOR, AND WHAT IT IS NOT
+
+    It answers ONE question the bge tables cannot: **is this pole word stable
+    outside its frame?** bge conditions on the prompt, so in `She slowly took off
+    her ___` it reads `glasses` correctly as eyewear. fastText has no frame, so it
+    reads `glasses` as eyewear AND drinkware AND laboratory glass at once, and
+    `bra` mostly as the country code for Brazil.
+
+    **That is not a referee on bge.** For the in-frame measurement bge is right and
+    fastText is wrong. What the disagreement identifies is a POLE WORD whose sense
+    is unstable in general English -- which matters if the item is reused, or
+    compared against a twin whose frame differs.
+
+    Filtered to twp surfaces at load (RH, 2026-08-17), so candidates are words the
+    models actually produce: 2.85M vocabulary down to ~112k rows. Note the filter
+    cleans the CANDIDATES and cannot repair a polysemous SEED -- `bra` still means
+    Brazil, and `ita/gre/arg/esp` survive the filter because models emit them.
+    """
+    if drop:
+        ch.execute("DROP TABLE IF EXISTS {db}.%s" % FT_TABLE)
+    ch.execute("""CREATE TABLE IF NOT EXISTS {db}.%s (
+        embedder    LowCardinality(String),
+        lang        LowCardinality(String),
+        word        String,
+        vec         Array(Float32) CODEC(NONE),
+        dims        UInt16,
+        source      LowCardinality(String),
+        created_at  DateTime DEFAULT now(),
+        CONSTRAINT vec_len CHECK length(vec) = 300
+    ) ENGINE = ReplacingMergeTree ORDER BY (embedder, lang, word)""" % FT_TABLE)
+    return FT_TABLE
+
+
+FTCOLS = ("embedder", "lang", "word", "vec", "dims", "source")
+
+
+def load_ft(lang="en", path=None, only_twp=True, verbose=True):
+    """Stream a `.vec` file into ClickHouse, filtered to twp surfaces. -> dict"""
+    cl = client()
+    if cl is None:
+        raise SystemExit("clickhouse-connect unavailable")
+    create_ft()
+    path = path or os.path.join(FT_DIR, "wiki.%s.align.vec" % lang)
+    keep = None
+    if only_twp:
+        twp = {r["word"] for r in rows("SELECT DISTINCT word FROM twp_words")}
+        keep = twp | {w.lower() for w in twp}
+        if verbose:
+            print("filtering to %d twp surfaces (exact + lowercased)" % len(keep),
+                  flush=True)
+    have = {r["word"] for r in rows(
+        "SELECT word FROM ft_word_vec WHERE lang = '%s'" % lang)}
+    buf, n, seen = [], 0, 0
+    with open(path, encoding="utf-8", errors="replace") as fh:
+        header = fh.readline().split()
+        for line in fh:
+            i = line.find(" ")
+            w = line[:i]
+            seen += 1
+            #: The leading `</s>` sentinel is not a word.
+            if w == "</s>" or (keep is not None and w not in keep) or w in have:
+                continue
+            p = line.rstrip("\n").split(" ")
+            if len(p) != 301:
+                continue
+            buf.append(["fasttext-align", lang, w,
+                        [float(x) for x in p[1:]], 300, "muse"])
+            if len(buf) >= CHUNK:
+                cl.insert(FT_TABLE, buf, column_names=list(FTCOLS))
+                n += len(buf); buf = []
+                if verbose and n % 20000 == 0:
+                    print("  %s: %d loaded (%d lines scanned)" % (lang, n, seen),
+                          flush=True)
+    if buf:
+        cl.insert(FT_TABLE, buf, column_names=list(FTCOLS))
+        n += len(buf)
+    return {"lang": lang, "declared": header[0], "scanned": seen, "loaded": n}
+
+
+def ft_fetch(words, lang="en"):
+    """fastText vectors for these words. -> {word: list[float]}"""
+    cl = client()
+    if cl is None or not words:
+        return {}
+    r = cl.query("SELECT word, vec FROM " + FT_TABLE +
+                 " WHERE lang = {l:String} AND word IN {w:Array(String)}",
+                 parameters={"l": lang, "w": list(words)})
+    return {row[0]: row[1] for row in r.result_rows}
+
+
+def cross_corpus(prompt, naughty, nice, k=8, min_prompts=8):
+    """What this axis selects for across every OTHER measured frame. -> dict
+
+    **THE HELD-OUT CHECK, and the only one of the three that reliably works.** The
+    in-frame version is weak by construction: a well-tagged item leaves only the
+    irrelevant words untagged, so it gets WEAKER as the tagging improves (RH's
+    diagnosis). Demonstrated on `He told his boss he wanted to` tagged
+    `quit resign kill die`, whose in-frame extremes are indistinguishable from the
+    same item tagged `quit resign leave` -- the frame offers no death words, so the
+    death direction is invisible from inside it. Across the corpus the same
+    one-word change is unmistakable:
+
+        quit,resign,kill,die   die, perish, died, resigned, killed, hanged
+        quit,resign,leave      resigned, forsake, divorce, renounce, 放弃
+
+    **EACH CANDIDATE PROMPT IS CENTRED ON ITS OWN MEAN**, because eta^2 is 0.764 --
+    three quarters of a raw score is which frame the word sits in. The SEED needs no
+    centring: it is a difference of two vectors sharing one prompt, so the frame
+    component cancels (measured: each pole is 0.9885 aligned with the frame mean,
+    their difference 0.0172).
+
+    A word's score is averaged over the prompts it appears in, and `min_prompts`
+    keeps a word that appears once out of a ranking that reads as lexical.
+    """
+    import numpy as np
+    from . import slot_axis as A
+    cl = client()
+    if cl is None:
+        return None
+    seed = A.embed_cached(prompt, list(naughty)).mean(0) - \
+        A.embed_cached(prompt, list(nice)).mean(0)
+    seed = (seed / np.linalg.norm(seed)).astype(np.float32)
+    q = ("WITH s AS (SELECT prompt, word, dotProduct(vec, {q:Array(Float32)}) AS raw "
+         "FROM " + TABLE + " WHERE prompt != {p:String}), "
+         "m AS (SELECT prompt, avg(raw) AS mu, count() AS n FROM s GROUP BY prompt "
+         "HAVING n > 50) "
+         "SELECT s.word AS w, avg(s.raw - m.mu) AS c, count() AS n FROM s "
+         "INNER JOIN m ON m.prompt = s.prompt GROUP BY s.word "
+         "HAVING n >= {mp:UInt32} ORDER BY c %s LIMIT {k:UInt32}")
+    par = {"q": [float(x) for x in seed], "p": prompt, "mp": min_prompts, "k": k}
+    out = {}
+    for lab, order in (("naughty_end", "DESC"), ("nice_end", "ASC")):
+        out[lab] = [{"word": w, "s": float(c), "prompts": int(n)}
+                    for w, c, n in cl.query(q % order, parameters=par).result_rows]
+    out["scored_prompts"] = cl.query(
+        "SELECT uniqExact(prompt) AS n FROM " + TABLE).result_rows[0][0]
+    return out
+
+
+def pole_stability(naughty, nice, lang="en"):
+    """Are these pole words stable in general English? -> dict
+
+    **A DIFFERENT QUESTION FROM THE OTHER TWO, not a referee on them.** bge
+    conditions on the prompt, so in `She slowly took off her ___` it reads
+    `glasses` as eyewear and is RIGHT. fastText has no frame, so it reads `glasses`
+    as eyewear and drinkware and laboratory glass at once, and `bra` mostly as the
+    country code for Brazil. For the in-frame measurement bge wins every time.
+
+    What the disagreement identifies is a pole word whose sense is UNSTABLE outside
+    its frame -- which matters when an item is reused, or set against a twin whose
+    wording differs. Reported as: which pole words are missing from a 2.5M-word
+    vocabulary at all, and for those present, each word's nearest neighbours, since
+    a word whose neighbours are country codes is telling you something.
+    """
+    import numpy as np
+    cl = client()
+    if cl is None:
+        return None
+    ws = [w for w in list(naughty) + list(nice)]
+    got = ft_fetch(ws, lang) or ft_fetch([w.lower() for w in ws], lang)
+    lower = {w.lower(): w for w in ws}
+    got = {lower.get(k, k): v for k, v in got.items()}
+    missing = [w for w in ws if w not in got]
+    nb = {}
+    for w in ws:
+        if w not in got:
+            continue
+        v = np.asarray(got[w], dtype=np.float32)
+        v = v / (np.linalg.norm(v) or 1.0)
+        r = cl.query(
+            "SELECT word, dotProduct(vec, {q:Array(Float32)}) AS s FROM " + FT_TABLE +
+            " WHERE lang = {l:String} AND word != {w:String} ORDER BY s DESC LIMIT 5",
+            parameters={"q": [float(x) for x in v], "l": lang, "w": w})
+        nb[w] = [{"word": a, "s": float(b)} for a, b in r.result_rows]
+    return {"lang": lang, "missing": missing, "neighbours": nb,
+            "vocab": cl.query("SELECT count() AS n FROM " + FT_TABLE +
+                              " WHERE lang = {l:String}",
+                              parameters={"l": lang}).result_rows[0][0]}
+
+
 def stats():
     """Row counts by embedder/revision. -> str"""
     if not ch.exists(TABLE):

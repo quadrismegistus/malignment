@@ -999,8 +999,24 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
     #: agent.
     coh = {"naughty": slot_axis.coherence(prompt, naughty, other=nice),
            "nice": slot_axis.coherence(prompt, nice, other=naughty)}
+    #: **THE TWO CHECKS THAT NEEDED A VECTOR STORE, now that there is one.**
+    #: Both are best-effort: a store that is unreachable makes the report thinner,
+    #: never wrong, which is the same contract as the caches.
+    cross = stability = None
+    try:
+        from . import vectors as _V
+        cross = _V.cross_corpus(prompt, naughty, nice)
+    except Exception as e:
+        cross = {"error": "%s: %s" % (type(e).__name__, e)}
+    try:
+        from . import vectors as _V
+        stability = _V.pole_stability(naughty, nice)
+    except Exception as e:
+        stability = {"error": "%s: %s" % (type(e).__name__, e)}
     return dict({
         "coherence": coh,
+        "cross_corpus": cross,
+        "stability": stability,
         "separates": {"ok": bool(sep_ok), "gap": float(sep_gap),
                       "correct": int(sep_correct), "total": int(sep_total),
                       "floor": slot_axis.SEPARATION_FLOOR,
