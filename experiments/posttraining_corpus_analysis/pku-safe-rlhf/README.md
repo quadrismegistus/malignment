@@ -1,9 +1,11 @@
 # PKU-SafeRLHF — what does "safer" reward?
 
-**id:** pku_disclaimer **status:** the registration is worked out. Two positive
-results (the disclaimer effect and its six-way structure; helpfulness is length),
-H3 resolved against RH, one arm withdrawn for a failed instrument control.
-Registration `1f35b01`, amendments A1-A6.
+**id:** pku_disclaimer **status:** worked out. Findings about ONE ANNOTATION
+REGIME: the disclaimer effect and its six-way structure, helpfulness is length,
+the mildness bundle. H3 resolved against RH. One instrument withdrawn for a
+failed control; one CLAIM withdrawn for a category error (A8-A9) -- this corpus
+says nothing about M01's models and could not, at any n.
+Registration `1f35b01`, amendments A1-A9.
 
 # THE FINDING
 
