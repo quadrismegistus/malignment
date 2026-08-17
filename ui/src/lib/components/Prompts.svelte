@@ -42,6 +42,42 @@
 	let epSort = $state<string>('js_total');
 	let epDesc = $state(true);
 
+	//: ── THE FIRST LOAD IS SLOW AND THE BAR IS AN ESTIMATE THAT SAYS SO.
+	//:
+	//: 14s is MEASURED, not guessed: 13.9s for the rollup and 14.7s end to end
+	//: over 400,267 cells. But an estimate is all it is -- the server may be
+	//: cold, another query may be running, and the cache may already be warm, in
+	//: which case this returns in 0.022s.
+	//:
+	//: So the bar has two disciplines that a hardcoded timer usually lacks:
+	//:
+	//: 1. **IT NEVER REACHES 100% ON THE ESTIMATE.** It fills to 95% over the
+	//:    expected time and then STOPS, because the only thing that knows the
+	//:    work is done is the response arriving. A bar sitting full while the
+	//:    request is still in flight is a progress bar lying about the one thing
+	//:    it exists to report.
+	//: 2. **IT DOES NOT FLASH ON A CACHED LOAD.** Nothing is drawn for the first
+	//:    250ms, so the 0.022s cached path shows no bar at all rather than a
+	//:    frame of one.
+	const EXPECTED_MS = 14000;
+	let startedAt = Date.now();
+	let elapsed = $state(0);
+	let ticker: ReturnType<typeof setInterval> | undefined;
+
+	$effect(() => {
+		if (!loading) {
+			clearInterval(ticker);
+			return;
+		}
+		ticker = setInterval(() => (elapsed = Date.now() - startedAt), 100);
+		return () => clearInterval(ticker);
+	});
+
+	//: Capped at 95. See discipline 1.
+	let pct = $derived(Math.min(95, (elapsed / EXPECTED_MS) * 95));
+	let overdue = $derived(elapsed > EXPECTED_MS);
+	let showBar = $derived(loading && elapsed > 250);
+
 	api
 		.prompts()
 		.then((r) => {
@@ -207,7 +243,22 @@
 	{#if !selected}
 		<h2>Prompts <span class="muted">the frames, and how much each one moves</span></h2>
 		{#if loading}
-			<p class="muted">reading the rollup… first call computes it (~14s), then it is cached</p>
+			{#if showBar}
+				<div class="prog">
+					<div class="track"><div class="fill" style="width: {pct}%"></div></div>
+					<p class="muted">
+						{#if overdue}
+							still computing — longer than the usual {Math.round(EXPECTED_MS / 1000)}s
+							({(elapsed / 1000).toFixed(0)}s so far). The rollup is 400,267 cells; it is
+							cached once it lands.
+						{:else}
+							computing the rollup over 400,267 cells — about {Math.round(
+								(EXPECTED_MS - elapsed) / 1000
+							)}s left, then it is cached for 15 minutes
+						{/if}
+					</p>
+				</div>
+			{/if}
 		{:else if error}
 			<p class="bad">{error}</p>
 		{:else}
@@ -456,6 +507,17 @@
 	.movers .rise { color: var(--blue-light); }
 	.movers .fall { color: var(--red, #c92a2a); }
 	.movers .w { font-family: var(--mono); margin-right: 12px; }
+	.prog { margin: 14px 0; max-width: 520px; }
+	.track {
+		height: 4px; background: var(--panel); border: 1px solid var(--rule);
+		border-radius: 3px; overflow: hidden;
+	}
+	.fill {
+		height: 100%; background: var(--blue-light);
+		/* Matches the tick, so the bar moves smoothly rather than in steps. */
+		transition: width 0.1s linear;
+	}
+	.prog p { font-size: 11px; margin: 6px 0 0; }
 	.small { font-family: var(--mono); font-size: 11px; margin: 0 0 8px; }
 	tr.click { cursor: pointer; }
 	td.mono { font-family: var(--mono); }
