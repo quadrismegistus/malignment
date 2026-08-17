@@ -71,6 +71,13 @@ def main():
     from malignment.runners import PRODUCER, _Tee
     logdir = os.path.join(ck.dir, PRODUCER)
     os.makedirs(logdir, exist_ok=True)
+    #: **A CHECKPOINT WITH NO LOCAL v3 CORPUS HAS NO STASH DIRECTORY**, and
+    #: nothing upstream creates it: `Runner.run` makes `ck.dir` but the engine
+    #: sits a level deeper. Every model I tested against was one of the nine that
+    #: already had a local corpus, so this appeared only when the queue reached
+    #: Baichuan2 -- a model measured on the fleet and never here. The load
+    #: succeeded, the INSTRUMENT line printed, and it died on the first write.
+    os.makedirs(os.path.dirname(ck.stash(PRODUCER).path), exist_ok=True)
     tee = _Tee(os.path.join(logdir, "run_v4.log"))
     sys.stdout = tee
     prompts = (ck.neighbour_prompts() if a.neighbours
