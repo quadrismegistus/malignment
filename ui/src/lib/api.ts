@@ -260,13 +260,14 @@ export const api = {
 			`/experiment/result?id=${encodeURIComponent(id)}&grain=${encodeURIComponent(grain)}` +
 				(limit ? `&limit=${limit}` : '')
 		),
-	//: DERIVED SERVER-SIDE. `nice` and `naughty` must be the HIGHEST-MASS word of
-	//: each branch, not the first tagged — the id is a property of the
-	//: distribution, not of the order someone clicked.
-	slotItemId: (prompt: string, nice: string, naughty: string) =>
-		get<{ item_id: string }>(
+	//: DERIVED SERVER-SIDE, AND A FUNCTION OF THE PROMPT ALONE since 2026-08-17.
+	//: The pole words used to be in it and made it unstable — the top-mass word
+	//: is a property of the RUN, so re-screening renamed items, and two frames
+	//: differing only in gender could swap ids. See `slots.item_id`.
+	slotItemId: (prompt: string, variant?: string) =>
+		get<{ item_id: string; note?: string }>(
 			`/slot/item_id?prompt=${encodeURIComponent(prompt)}` +
-				`&nice=${encodeURIComponent(nice)}&naughty=${encodeURIComponent(naughty)}`
+				(variant ? `&variant=${encodeURIComponent(variant)}` : '')
 		),
 	//: Takes a declared PAIR, never loose model ids — pooling base+endpoint is a
 	//: property of the instrument, not a per-query choice.

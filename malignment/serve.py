@@ -866,30 +866,39 @@ class Handler(BaseHTTPRequestHandler):
             #: WITH A CONFIRMATION MESSAGE.** The button is only trustworthy if
             #: the panel can show what is already stored, so this ships with it
             #: rather than after it.
-            from .slots import SLOT_DIR, saved_items
+            from .slots import SLOT_DIR, SLOT_YAML, saved_items
             items = saved_items()
-            return {"dir": SLOT_DIR, "n": len(items),
-                    "items": [{k: v for k, v in d.items() if k != "provenance"}
+            return {"dir": SLOT_DIR, "file": SLOT_YAML, "n": len(items),
+                    #: The stamp is dropped from the LISTING only -- it is the
+                    #: bulkiest field and the list exists to answer "what have I
+                    #: made", not "how was it screened". It is in the file.
+                    "items": [{k: v for k, v in d.items() if k != "screened_by"}
                               for d in items]}
         if path == "/slot/item_id":
-            #: **THE ID IS DERIVED HERE AND NOT IN THE CLIENT**, even though it is
-            #: a pure function of three strings the client already holds. See
-            #: `slots.item_id`: it encodes four rules, and a JavaScript port gets
-            #: the character classes wrong for free because Python's `\w` is
-            #: Unicode-aware and JavaScript's is ASCII-only. That divergence
-            #: produces ids that look right and do not match the 86 already
-            #: written.
+            #: **THE ID IS DERIVED HERE AND NOT IN THE CLIENT.** It is a pure
+            #: function of one string, and that is the argument for not letting
+            #: the client have it: a JavaScript port gets the character classes
+            #: wrong for free (Python's `\w` is Unicode-aware, JavaScript's is
+            #: ASCII-only) and would now also need a matching sha256 over the
+            #: same byte encoding. Two ways to diverge silently, producing ids
+            #: that look right and do not match what is written.
             #:
-            #: Cheap enough to ask for on every pole change: three regexes, no
-            #: model, no store.
+            #: **`nice` AND `naughty` ARE GONE.** The id is a function of the
+            #: PROMPT ALONE since 2026-08-17; see `slots.item_id`. They are still
+            #: accepted and ignored, with a note in the payload, because the
+            #: alternative is a 400 for a caller whose only crime is being the
+            #: version of the app that was open when the server restarted.
             from .slots import item_id
             prompt = one("prompt", "")
-            nice, naughty = one("nice", ""), one("naughty", "")
-            if not prompt.strip() or not nice or not naughty:
-                raise ValueError("prompt, nice and naughty all required -- "
-                                 "nice and naughty are the HIGHEST-MASS word of "
-                                 "each branch, not the first tagged")
-            return {"item_id": item_id(prompt, nice, naughty)}
+            if not prompt.strip():
+                raise ValueError("prompt required")
+            out = {"item_id": item_id(prompt, variant=one("variant") or None)}
+            if one("nice") or one("naughty"):
+                out["note"] = ("nice/naughty are ignored: the id is a function "
+                               "of the prompt alone since 2026-08-17, because "
+                               "the pole words made it unstable under re-screening "
+                               "and let two items swap ids")
+            return out
         if path == "/slot":
             if not _ALLOW_SLOT:
                 raise ValueError("this server was started with --no-slot")

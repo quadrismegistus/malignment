@@ -356,27 +356,29 @@
 	//: characters the original keeps, yielding ids that look right and do not
 	//: match what is already written.
 	let itemId = $state('');
-	let idKey = $derived.by(() => {
-		if (!resp || !naughty.size || !nice.size) return '';
-		const top = (set: Set<string>) =>
-			words.filter((w) => set.has(w.word)).sort((a, b) => b.p - a.p)[0]?.word ?? '';
-		return JSON.stringify([resp.prompt, top(nice), top(naughty)]);
-	});
+	//: A FUNCTION OF THE PROMPT ALONE (RH, 2026-08-17). It used to depend on the
+	//: highest-mass word of each pole, which made it a property of the RUN rather
+	//: than of the item: re-screening the same tagged frame on a different pair
+	//: renamed it, and two frames differing only in gender could SWAP ids —
+	//: `nn_andstartedto_search-beat` and `..._search-choke`, where each item's
+	//: runner-up is the other's top word. See `slots.item_id`.
+	//:
+	//: So the id no longer waits for tags: it exists as soon as a prompt has been
+	//: expanded, and tagging does not move it. Still fetched rather than computed
+	//: here — a JavaScript port would need matching Unicode classes AND a matching
+	//: sha256 over the same byte encoding, two ways to diverge silently.
 	$effect(() => {
-		const k = idKey;
-		if (!k) { itemId = ''; return; }
-		const [p, c, n] = JSON.parse(k) as [string, string, string];
-		//: Debounced: tagging is a burst, and the id only changes when the
-		//: HIGHEST-MASS word of a branch changes, which most clicks do not do.
-		const t = setTimeout(() => {
-			api.slotItemId(p, c, n)
-				.then((r) => (itemId = r.item_id))
-				//: A FAILURE FALLS BACK TO THE PLACEHOLDER, never to a guess. An id
-				//: computed here on the error path is the divergence this route
-				//: exists to prevent, arriving exactly when nobody is watching.
-				.catch(() => (itemId = 'CHANGEME'));
-		}, 300);
-		return () => clearTimeout(t);
+		const p = resp?.prompt;
+		if (!p) {
+			itemId = '';
+			return;
+		}
+		api.slotItemId(p)
+			.then((r) => (itemId = r.item_id))
+			//: A FAILURE FALLS BACK TO THE PLACEHOLDER, never to a guess. An id
+			//: computed here on the error path is the divergence this route exists
+			//: to prevent, arriving exactly when nobody is watching.
+			.catch(() => (itemId = 'CHANGEME'));
 	});
 
 	//: ── ONE PROVENANCE OBJECT, RENDERED TWICE.
@@ -543,6 +545,15 @@
 	let saveError = $state('');
 	let conflict = $state(false);
 	let saveNote = $state('');
+	//: **FREE TEXT WITH SUGGESTIONS, NOT A SELECT** (RH, 2026-08-17: "we also want
+	//: a domain: tag ... for me to later categorise by sexual/violent/etc"). The
+	//: ten values below are what `round3_slots.yaml` actually used; a closed
+	//: dropdown would silently discourage the eleventh category, and the field
+	//: exists to make a later sort possible rather than to settle the taxonomy
+	//: now. The server does not validate it either.
+	const DOMAINS = ['sexual', 'violence', 'power', 'substance', 'property',
+		'identity_matched_frame', 'self_harm', 'poverty', 'medical', 'institutional'];
+	let saveDomain = $state('');
 	let savedCount = $state<number | null>(null);
 	//: The id can CHANGE under retagging rather than collide: it is built from
 	//: the top-mass word of each branch, so promoting a different word to the
@@ -582,6 +593,7 @@
 				nice: [...nice],
 				words: wordP,
 				provenance: screenedBy ?? {},
+				domain: saveDomain.trim(),
 				note: saveNote.trim(),
 				overwrite
 			});
@@ -826,6 +838,16 @@
 
 		{#if naughty.size && nice.size}
 			<div class="saverow">
+				<input
+					class="domainin"
+					list="slot-domains"
+					bind:value={saveDomain}
+					placeholder="domain"
+					title="free text — sexual, violence, power … used to sort later. Nothing enforces the list."
+				/>
+				<datalist id="slot-domains">
+					{#each DOMAINS as d (d)}<option value={d}></option>{/each}
+				</datalist>
 				<input
 					class="notein"
 					bind:value={saveNote}
@@ -1163,8 +1185,13 @@
 		display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
 		margin-top: 8px;
 	}
+	.domainin {
+		flex: 0 0 150px; padding: 5px 8px;
+		background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;
+		color: var(--text); font-family: inherit; font-size: 12px;
+	}
 	.notein {
-		flex: 1 1 220px; min-width: 160px; padding: 5px 8px;
+		flex: 1 1 200px; min-width: 150px; padding: 5px 8px;
 		background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;
 		color: var(--text); font-family: inherit; font-size: 12px;
 	}
