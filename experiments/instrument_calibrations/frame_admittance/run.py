@@ -111,16 +111,38 @@ STOP = set("be have has had not no just do does did to the a an i we you it that
 esc = lambda s: s.replace("\\", "\\\\").replace("'", "\\'")
 
 
-def prompts_for(domain, subdomains=None):
-    """Declared prompts in a domain, from the store. -> {prompt: prompt_id}"""
-    q = ("SELECT prompt_id, prompt FROM malignment.prompts WHERE domain = '%s' "
-         "FORMAT TabSeparated" % esc(domain))
+def prompts_for(domain=None, source=None):
+    """Declared prompts by domain and/or source. -> {prompt: (prompt_id, cell)}
+
+    **SELECTION IS SEPARATE FROM WHICH SEEDS SCORE IT** (RH, 2026-08-17: "could we
+    score the other institutional prompts too? source=M03"). The first version
+    selected on `domain` and therefore missed 252 institutional frames entirely,
+    because M03 records them at FINER grain -- labor, housing, medical, police,
+    benefits, civic, banking, insurance, immigration, utilities, consumer,
+    education, twelve domains that are all institutional relations under RH's
+    gloss. Selecting and scoring are different decisions and conflating them made
+    the scored population an artifact of somebody else's taxonomy.
+
+    `cell` comes back too: for M03 it carries arm_person_form, and the FORM axis
+    moves the next-token distribution hard enough that pooling across it would
+    average four different questions.
+    """
+    where = []
+    if domain:
+        where.append("domain = '%s'" % esc(domain))
+    if source:
+        where.append("source = '%s'" % esc(source))
+    if not where:
+        raise ValueError("give --domain or --source")
+    q = ("SELECT prompt_id, prompt, cell FROM malignment.prompts WHERE %s "
+         "FORMAT TabSeparated" % " AND ".join(where))
     out = {}
     for line in ch.execute(q).strip().splitlines():
         if not line.strip():
             continue
-        pid, txt = line.split("\t", 1)
-        out[txt] = pid
+        parts = line.split("\t")
+        pid, txt, cell = parts[0], parts[1], (parts[2] if len(parts) > 2 else "")
+        out[txt] = (pid, cell)
     return out
 
 
@@ -228,22 +250,35 @@ def axis_score(prompt, ws, seeds):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--domain", required=True, choices=sorted(SEEDS),
-                    help="one at a time: scores are not comparable across domains")
+    ap.add_argument("--domain", default=None,
+                    help="select prompts by the store's domain column")
+    ap.add_argument("--source", default=None,
+                    help="select by source, e.g. M03_SPEAKER_KERNEL or INSTITUTIONAL")
+    ap.add_argument("--seeds", default=None, choices=sorted(SEEDS),
+                    help="which domain's tagged poles to score WITH; defaults to "
+                         "--domain. Required when selecting by --source, because a "
+                         "source spans domains and the instrument must be declared.")
     ap.add_argument("--model", default="HuggingFaceTB/SmolLM3-3B-Base")
     ap.add_argument("--axis", action="store_true",
                     help="add the bge pass (embeds per frame; minutes, not seconds)")
     ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args(argv)
-    seeds = SEEDS[a.domain]
+    seed_dom = a.seeds or a.domain
+    if seed_dom not in SEEDS:
+        ap.error("--seeds must be one of %s (a source spans domains, so the "
+                 "instrument cannot be inferred)" % ", ".join(sorted(SEEDS)))
+    seeds = SEEDS[seed_dom]
+    label = a.source or a.domain
 
-    pm = prompts_for(a.domain)
+    pm_full = prompts_for(a.domain, a.source)
+    pm = {t: v[0] for t, v in pm_full.items()}
+    cells = {t: v[1] for t, v in pm_full.items()}
     if a.limit:
         pm = dict(list(pm.items())[:a.limit])
     wm = base_words(pm, a.model)
     missing = [p for p in pm if p not in wm]
-    print("domain %s: %d declared, %d with base-arm words in the store, %d missing"
-          % (a.domain, len(pm), len(wm), len(missing)))
+    print("%s (scored with %s seeds): %d declared, %d with base-arm words in the "
+          "store, %d missing" % (label, seed_dom, len(pm), len(wm), len(missing)))
     if missing:
         #: Named, not counted. A prompt absent from the store is a coverage fact
         #: and the next reader will want to know WHICH.
@@ -268,7 +303,8 @@ def main(argv=None):
         #: four tagging schemes share moved 6.6x while leverage moved 24%, and a
         #: known-dead item had a better balanced share than a known mover. So:
         #: `admits` says both poles EXIST, never that the frame will move.
-        rows.append({"prompt_id": pm[pr], "prompt": pr, "domain": a.domain,
+        rows.append({"prompt_id": pm[pr], "prompt": pr, "selected": label,
+                     "seeds": seed_dom, "cell": cells.get(pr, ""),
                      "n_words": len(ws), "content_mass": round(tot, 6),
                      "admits": round(min(gsh, nsh), 6),
                      "naughty_share": round(gsh, 6), "nice_share": round(nsh, 6),
@@ -288,14 +324,14 @@ def main(argv=None):
         print("    %s%s" % (", ".join(unmeasurable[:4]), " ..." if len(unmeasurable) > 4 else ""))
     rows.sort(key=lambda r: -r["admits"])
     os.makedirs(OUT, exist_ok=True)
-    csv_p = os.path.join(OUT, "admittance_%s.csv" % a.domain)
+    csv_p = os.path.join(OUT, "admittance_%s.csv" % label.lower())
     with open(csv_p, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
 
     v = [r["admits"] for r in rows]
-    summ = {"domain": a.domain, "model": a.model, "n_frames": len(rows),
+    summ = {"selected": label, "seeds": seed_dom, "model": a.model, "n_frames": len(rows),
             "n_declared": len(pm), "n_missing_from_store": len(missing),
             "n_unmeasurable_by_seeds": len(unmeasurable),
             "unmeasurable_ids": unmeasurable,
@@ -306,7 +342,7 @@ def main(argv=None):
             "note": ("naughty_share and axis_N are DIFFERENT INSTRUMENTS and are not "
                      "averaged. Scores are within-domain only: the seeds differ per "
                      "domain, so cross-domain comparison is not defined.")}
-    with open(os.path.join(OUT, "admittance_%s.json" % a.domain), "w") as fh:
+    with open(os.path.join(OUT, "admittance_%s.json" % label.lower()), "w") as fh:
         json.dump(summ, fh, indent=1)
 
     one = [r for r in rows if r["one_sided"]]
@@ -316,6 +352,16 @@ def main(argv=None):
           % (sum(1 for r in one if r["one_sided"] == "naughty"),
              sum(1 for r in one if r["one_sided"] == "nice")))
     hdr = "  %-7s %-7s %-7s %-8s %-30s %s" % ("admits", "naughty", "nice", "1-sided", "prompt_id", "top content")
+    if any(r["cell"] for r in rows):
+        #: **BROKEN OUT BY CELL, because pooling the FORM axis averages four
+        #: different questions.** `... I should` and `... I` are not the same slot.
+        import collections as _c
+        by = _c.defaultdict(list)
+        for r in rows:
+            by[r["cell"].rsplit("_", 1)[-1] if r["cell"] else "-"].append(r["admits"])
+        print("\nadmits by FORM (the m03 axis):")
+        for k in sorted(by, key=lambda k: -st.median(by[k])):
+            print("  %-12s n=%-4d median %.4f  max %.4f" % (k, len(by[k]), st.median(by[k]), max(by[k])))
     print("\nTOP 12 -- both poles present, so tagging can pay")
     print(hdr)
     for r in rows[:12]:

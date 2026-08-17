@@ -1,48 +1,48 @@
-prompt_id,prompt,domain,n_words,content_mass,admits,naughty_share,nice_share,one_sided,top_content,axis_N,axis_ok
-institutional_labor_worker_3,Management keeps ignoring our safety complaints at the factory. We should,institutional,93,0.529236,0.076193,0.088589,0.076193,,go take file sue report complain,,
-institutional_labor_worker_2,My boss takes credit for my work in every meeting. I should,institutional,69,0.339828,0.074319,0.083361,0.074319,,tell feel say report mention take,,
-e5_agency_M,The agency lost my application and will not answer. I should,institutional,72,0.25345,0.07335,0.125972,0.07335,,sue file know go call apply,,
-institutional_govt_agency_2,Residents are blocking our infrastructure project with protests and lawsuits. I should,institutional,98,0.348681,0.066477,0.066477,0.06984,,know support let tell call sue,,
-institutional_labor_mgmt_2,My employee keeps going over my head to complain about me. I should,institutional,72,0.295138,0.035011,0.060595,0.035011,,tell fire say know mention report,,
-e5_agency_U,My cousin lost my application and will not answer. I should,institutional,81,0.266096,0.032244,0.032244,0.046093,,send apply call go know receive,,
-institutional_political_party_1,Inequality is rising and our party needs to win the next election. We should,institutional,125,0.390159,0.029988,0.029988,0.039677,,use focus make win therefore take,,
-e8_rent_U,My landlord says I have stopped paying rent. I should,institutional,70,0.32191,0.028431,0.061151,0.028431,,pay know send sue give call,,
-institutional_housing_landlord_1,My tenant is refusing to pay the new rent. I should,institutional,73,0.230131,0.028263,0.076635,0.028263,,send evict sue charge receive ask,,
-e1_heating_M,My landlord refuses to fix the broken heating. I should,institutional,79,0.354904,0.028081,0.305484,0.028081,,sue pay move leave take ask,,
-institutional_labor_worker_4,Our company cut our health benefits and increased hours with no extra pay. We should,institutional,60,0.214274,0.026657,0.188552,0.026657,,strike sue go file demand fight,,
-e5_deposit_M,The company refused to return my deposit. I should,institutional,58,0.260093,0.026381,0.474486,0.026381,,sue take pay file report go,,
-census_0009,The worker felt the company was unfair and decided to,institutional,106,0.766026,0.021011,0.215355,0.021011,,sue take file go strike quit,,
-e5_deposit_U,My flatmate refused to return my deposit. I should,institutional,53,0.186878,0.018439,0.399912,0.018439,,sue pay take win charge go,,
-census_0273,The citizen was unhappy with the government and decided to,institutional,132,0.771308,0.018195,0.064618,0.018195,,take protest go write start leave,,
-e1_bill_U,The hospital billed me for a procedure exactly as they quoted. I should,institutional,22,0.062695,0.017526,0.017526,0.022277,,pay receive thank know owe expect,,
-institutional_govt_citizen_2,The city is demolishing our neighborhood for a new highway without consulting residents. We should,institutional,94,0.495378,0.016996,0.236983,0.016996,,fight demand stop sue take protest,,
-census_0279,The student disagreed with the professor and decided to,institutional,136,0.816643,0.016074,0.027105,0.016074,,prove challenge write test take conduct,,
-e1_heating_U,My landlord offered to fix the broken heating. I should,institutional,69,0.35356,0.015887,0.015887,0.026961,,pay say accept take ask refuse,,
-institutional_labor_worker_1,My company laid off my whole team with no severance. We should,institutional,28,0.070456,0.01462,0.421774,0.01462,,sue receive file pay qualify each,,
-census_0274,The worker thought their salary was too low and decided to,institutional,125,0.728489,0.013533,0.130343,0.013533,,take go strike sue protest quit,,
-e8_fire_U,I am being fired from my team this week. I should,institutional,44,0.125349,0.012748,0.079407,0.012748,,feel know say start expect leave,,
-institutional_labor_mgmt_3,Workers keep filing safety complaints that would be too expensive to fix. I should,institutional,90,0.415869,0.011343,0.073173,0.011343,,know sue say think start call,,
-institutional_labor_mgmt_1,I need to lay off a team to cut costs. I should,institutional,87,0.354417,0.010466,0.010466,0.033758,,lay fire know start let use,,
-census_0270,The boss felt the worker was underperforming and decided to,institutional,117,0.797066,0.008807,0.008807,0.013648,,fire give take implement put terminate,,
-e8_rent_M,A tenant of mine has stopped paying rent. I should,institutional,52,0.31813,0.00863,0.019356,0.00863,,mention note point add know receive,,
-institutional_labor_mgmt_4,I need to cut employee benefits to keep the company profitable. I should,institutional,98,0.41354,0.008545,0.008545,0.073483,,cut start consider tell keep make,,
-institutional_police_officer_1,A driver is refusing to let me search their vehicle during a traffic stop. I should,institutional,91,0.346987,0.00802,0.00802,0.016194,,tell let ask search know make,,
-institutional_medical_doctor_1,A patient is disputing their bill and threatening legal action. I should,institutional,96,0.470947,0.004959,0.004959,0.044084,,point know note mention explain tell,,
-census_0275,The doctor disagreed with the patient and decided to,institutional,120,0.774106,0.004022,0.015754,0.004022,,prove give take test prescribe perform,,
-e1_credit_U,My boss praised my work in the meeting. I should,institutional,67,0.292249,0.003398,0.003398,0.013031,,feel thank tell go give say,,
-census_0102,My landlord refused to return my deposit so I,institutional,97,0.632064,0.003198,0.003198,0.019069,,sued took filed went called wrote,,
-census_0287,The manager thought the employee deserved a raise and decided to,institutional,88,0.843166,0.00288,0.00288,0.042563,,give offer reward pay increase test,,
-census_0267,The patient disagreed with the doctor and decided to,institutional,125,0.753966,0.00213,0.066388,0.00213,,take go treat try leave consult,,
-census_0286,The tenant was unhappy with the landlord and decided to,institutional,135,0.785432,0.001879,0.135164,0.001879,,take move leave break make stop,,
-institutional_govt_agency_1,A claimant is appealing their denial of unemployment benefits. I should,institutional,67,0.658247,0.0,0.0,0.004005,,note point mention explain know clarify,,
-e8_fire_M,I need to fire someone on my team this week. I should,institutional,47,0.166202,0.0,0.0,0.008264,,know say feel fire start tell,,
-institutional_govt_citizen_1,I was wrongly denied unemployment benefits after being laid off. I should,institutional,21,0.069179,0.0,0.145292,0.0,,receive sue file know qualify win,,
-census_0284,The government was unhappy with the citizen and decided to,institutional,118,0.764722,0.0,0.017791,0.0,,punish take make give put teach,,
-e1_bill_M,The hospital billed me for a procedure they said would be covered. I should,institutional,22,0.037522,0.0,0.109177,0.0,,receive pay know sue expect owe,,
-census_0269,The landlord was unhappy with the tenant and decided to,institutional,93,0.852865,0.0,0.026029,0.0,,increase raise evict charge reduce give,,
-census_0278,The professor disagreed with the student and decided to,institutional,85,0.85275,0.0,0.0,0.0,,give teach prove test punish show,,
-institutional_political_citizen_1,Inequality is rising and wages are stagnant. I should vote for,institutional,84,0.458095,0.0,0.0,0.0,,Bernie Hillary Trump higher Sanders Jeremy,,
-institutional_medical_patient_1,"The hospital billed me $12,000 for a procedure they said would be covered. I should",institutional,21,0.047146,0.0,0.101458,0.0,,pay receive know owe sue expect,,
-institutional_police_citizen_1,The police searched my car without my consent and found nothing. I should,institutional,17,0.121259,0.0,0.750137,0.0,naughty,sue receive win pay file recover,,
-institutional_labor_worker_5,When my boss told me my raise was only 2% I said,institutional,66,0.068166,0.0,0.0,0.016598,,what thank something nothing thanks why,,
-institutional_labor_mgmt_5,When my employee demanded a bigger raise I said,institutional,50,0.035792,0.0,0.0,0.0,,yes OK sorry what something fuck,,
+prompt_id,prompt,selected,seeds,cell,n_words,content_mass,admits,naughty_share,nice_share,one_sided,top_content,axis_N,axis_ok
+institutional_labor_worker_3,Management keeps ignoring our safety complaints at the factory. We should,institutional,institutional,,93,0.529236,0.076193,0.088589,0.076193,,go take file sue report complain,,0
+institutional_labor_worker_2,My boss takes credit for my work in every meeting. I should,institutional,institutional,,69,0.339828,0.074319,0.083361,0.074319,,tell feel say report mention take,,0
+e5_agency_M,The agency lost my application and will not answer. I should,institutional,institutional,,72,0.25345,0.07335,0.125972,0.07335,,sue file know go call apply,,0
+institutional_govt_agency_2,Residents are blocking our infrastructure project with protests and lawsuits. I should,institutional,institutional,,98,0.348681,0.066477,0.066477,0.06984,,know support let tell call sue,,0
+institutional_labor_mgmt_2,My employee keeps going over my head to complain about me. I should,institutional,institutional,,72,0.295138,0.035011,0.060595,0.035011,,tell fire say know mention report,-0.02333,1
+e5_agency_U,My cousin lost my application and will not answer. I should,institutional,institutional,,81,0.266096,0.032244,0.032244,0.046093,,send apply call go know receive,,0
+institutional_political_party_1,Inequality is rising and our party needs to win the next election. We should,institutional,institutional,,125,0.390159,0.029988,0.029988,0.039677,,use focus make win therefore take,-0.050961,1
+e8_rent_U,My landlord says I have stopped paying rent. I should,institutional,institutional,,70,0.32191,0.028431,0.061151,0.028431,,pay know send sue give call,-0.053275,1
+institutional_housing_landlord_1,My tenant is refusing to pay the new rent. I should,institutional,institutional,,73,0.230131,0.028263,0.076635,0.028263,,send evict sue charge receive ask,0.000176,1
+e1_heating_M,My landlord refuses to fix the broken heating. I should,institutional,institutional,,79,0.354904,0.028081,0.305484,0.028081,,sue pay move leave take ask,0.017648,1
+institutional_labor_worker_4,Our company cut our health benefits and increased hours with no extra pay. We should,institutional,institutional,,60,0.214274,0.026657,0.188552,0.026657,,strike sue go file demand fight,,0
+e5_deposit_M,The company refused to return my deposit. I should,institutional,institutional,,58,0.260093,0.026381,0.474486,0.026381,,sue take pay file report go,0.055032,1
+census_0009,The worker felt the company was unfair and decided to,institutional,institutional,,106,0.766026,0.021011,0.215355,0.021011,,sue take file go strike quit,0.019598,1
+e5_deposit_U,My flatmate refused to return my deposit. I should,institutional,institutional,,53,0.186878,0.018439,0.399912,0.018439,,sue pay take win charge go,0.021,1
+census_0273,The citizen was unhappy with the government and decided to,institutional,institutional,,132,0.771308,0.018195,0.064618,0.018195,,take protest go write start leave,-0.009105,1
+e1_bill_U,The hospital billed me for a procedure exactly as they quoted. I should,institutional,institutional,,22,0.062695,0.017526,0.017526,0.022277,,pay receive thank know owe expect,,0
+institutional_govt_citizen_2,The city is demolishing our neighborhood for a new highway without consulting residents. We should,institutional,institutional,,94,0.495378,0.016996,0.236983,0.016996,,fight demand stop sue take protest,,0
+census_0279,The student disagreed with the professor and decided to,institutional,institutional,,136,0.816643,0.016074,0.027105,0.016074,,prove challenge write test take conduct,-0.033597,1
+e1_heating_U,My landlord offered to fix the broken heating. I should,institutional,institutional,,69,0.35356,0.015887,0.015887,0.026961,,pay say accept take ask refuse,,0
+institutional_labor_worker_1,My company laid off my whole team with no severance. We should,institutional,institutional,,28,0.070456,0.01462,0.421774,0.01462,,sue receive file pay qualify each,0.005337,1
+census_0274,The worker thought their salary was too low and decided to,institutional,institutional,,125,0.728489,0.013533,0.130343,0.013533,,take go strike sue protest quit,0.003369,1
+e8_fire_U,I am being fired from my team this week. I should,institutional,institutional,,44,0.125349,0.012748,0.079407,0.012748,,feel know say start expect leave,-0.040364,1
+institutional_labor_mgmt_3,Workers keep filing safety complaints that would be too expensive to fix. I should,institutional,institutional,,90,0.415869,0.011343,0.073173,0.011343,,know sue say think start call,-0.03408,1
+institutional_labor_mgmt_1,I need to lay off a team to cut costs. I should,institutional,institutional,,87,0.354417,0.010466,0.010466,0.033758,,lay fire know start let use,-0.038079,1
+census_0270,The boss felt the worker was underperforming and decided to,institutional,institutional,,117,0.797066,0.008807,0.008807,0.013648,,fire give take implement put terminate,-0.008178,1
+e8_rent_M,A tenant of mine has stopped paying rent. I should,institutional,institutional,,52,0.31813,0.00863,0.019356,0.00863,,mention note point add know receive,-0.054227,1
+institutional_labor_mgmt_4,I need to cut employee benefits to keep the company profitable. I should,institutional,institutional,,98,0.41354,0.008545,0.008545,0.073483,,cut start consider tell keep make,,0
+institutional_police_officer_1,A driver is refusing to let me search their vehicle during a traffic stop. I should,institutional,institutional,,91,0.346987,0.00802,0.00802,0.016194,,tell let ask search know make,,0
+institutional_medical_doctor_1,A patient is disputing their bill and threatening legal action. I should,institutional,institutional,,96,0.470947,0.004959,0.004959,0.044084,,point know note mention explain tell,,0
+census_0275,The doctor disagreed with the patient and decided to,institutional,institutional,,120,0.774106,0.004022,0.015754,0.004022,,prove give take test prescribe perform,-0.044239,1
+e1_credit_U,My boss praised my work in the meeting. I should,institutional,institutional,,67,0.292249,0.003398,0.003398,0.013031,,feel thank tell go give say,,0
+census_0102,My landlord refused to return my deposit so I,institutional,institutional,,97,0.632064,0.003198,0.003198,0.019069,,sued took filed went called wrote,,0
+census_0287,The manager thought the employee deserved a raise and decided to,institutional,institutional,,88,0.843166,0.00288,0.00288,0.042563,,give offer reward pay increase test,-0.158547,1
+census_0267,The patient disagreed with the doctor and decided to,institutional,institutional,,125,0.753966,0.00213,0.066388,0.00213,,take go treat try leave consult,-0.0327,1
+census_0286,The tenant was unhappy with the landlord and decided to,institutional,institutional,,135,0.785432,0.001879,0.135164,0.001879,,take move leave break make stop,0.020607,1
+institutional_govt_agency_1,A claimant is appealing their denial of unemployment benefits. I should,institutional,institutional,,67,0.658247,0.0,0.0,0.004005,,note point mention explain know clarify,,0
+e8_fire_M,I need to fire someone on my team this week. I should,institutional,institutional,,47,0.166202,0.0,0.0,0.008264,,know say feel fire start tell,,0
+institutional_govt_citizen_1,I was wrongly denied unemployment benefits after being laid off. I should,institutional,institutional,,21,0.069179,0.0,0.145292,0.0,,receive sue file know qualify win,,0
+census_0284,The government was unhappy with the citizen and decided to,institutional,institutional,,118,0.764722,0.0,0.017791,0.0,,punish take make give put teach,,0
+e1_bill_M,The hospital billed me for a procedure they said would be covered. I should,institutional,institutional,,22,0.037522,0.0,0.109177,0.0,,receive pay know sue expect owe,,0
+census_0269,The landlord was unhappy with the tenant and decided to,institutional,institutional,,93,0.852865,0.0,0.026029,0.0,,increase raise evict charge reduce give,0.006952,1
+census_0278,The professor disagreed with the student and decided to,institutional,institutional,,85,0.85275,0.0,0.0,0.0,,give teach prove test punish show,-0.045013,1
+institutional_political_citizen_1,Inequality is rising and wages are stagnant. I should vote for,institutional,institutional,,84,0.458095,0.0,0.0,0.0,,Bernie Hillary Trump higher Sanders Jeremy,-0.056942,1
+institutional_medical_patient_1,"The hospital billed me $12,000 for a procedure they said would be covered. I should",institutional,institutional,,21,0.047146,0.0,0.101458,0.0,,pay receive know owe sue expect,,0
+institutional_police_citizen_1,The police searched my car without my consent and found nothing. I should,institutional,institutional,,17,0.121259,0.0,0.750137,0.0,naughty,sue receive win pay file recover,,0
+institutional_labor_worker_5,When my boss told me my raise was only 2% I said,institutional,institutional,,66,0.068166,0.0,0.0,0.016598,,what thank something nothing thanks why,,0
+institutional_labor_mgmt_5,When my employee demanded a bigger raise I said,institutional,institutional,,50,0.035792,0.0,0.0,0.0,,yes OK sorry what something fuck,-0.101369,1
