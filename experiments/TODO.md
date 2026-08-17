@@ -20,17 +20,34 @@ proceeds because the instrument is wrong, not because a question needs it.
 **UPDATED SAME DAY — v4 IS ADOPTED AND RUNNING, so this is no longer a wait.**
 `Rules(decoded_boundary=True, max_depth=9)`, malign [6449]. The gate is now the
 REBUILD, not the decision, and the numbers are smaller than the pilot suggested:
-**en +0.15% median, zh +3.42% median on Qwen2.5-7B**, against the +15-28% measured
-on one 360M model over three prompts. One model and three prompts was never a
-roster figure.
+**and the size depends on the MODEL, not the tokenizer.** Full 407-cell Chinese
+block, [6450]:
+
+    Qwen2.5-7B   FLUENT   174 missed ids   zh median +4.05%  p90 +11.51%  max +45.55%
+                                           en median +0.19%              max  +7.03%
+    Mistral-7B   PARTIAL   34 missed ids   zh median +0.001%  en median -0.001%
+
+**Presence is a TOKENIZER property; magnitude is a MODEL property.** Both miss
+the marks; only the one that USES them moves. `cjk_tier` predicts it, so which
+checkpoints need re-measuring is a QUERY — **FLUENT is 38 of the 136 measured.**
 
 **So: run against v4 cells, not v3, and check which a table was built from.**
 Anything re-derived from v3 cells will disagree with the store after the rebuild,
 and the disagreement will be small enough to look like noise.
 
-Two things never touched the boundary mask at all and are unaffected either way:
-work reading GENERATED TEXT (M06, passages) and work reading LEXICONS AGAINST
-WORD LISTS (the norms cluster).
+**CORRECTED — ONLY ONE THING IS IMMUNE, AND IT IS NOT THE NORMS CLUSTER.**
+I wrote that lexicon-against-word-list work never touches the boundary mask.
+Traced: M01's norm producers (`k_analysis`, `k_bulk`, `k_delta_interpret`) read
+**`movement`**, and `movement` is built from `twp_words`; M05's read `word_probs`.
+**A lexicon applied to STORED CELLS inherits the mask entirely** — the mask
+decides which surfaces exist and with what probability, and the lexicon only
+labels them. I reasoned from what the work is ABOUT rather than from what it
+READS.
+
+    GENERATED TEXT (M06, passages)   IMMUNE -- no boundary rule in the path
+    tokenizer-only work              IMMUNE
+    the norms cluster                INHERITS IT, via movement
+    everything else on cells         INHERITS IT
 
 ## THE ARCHIVE'S OWN DEFECTS, WHICH DECIDE WHAT IS WORTH CARRYING
 
@@ -74,7 +91,7 @@ and which scale.**
     M05 C_affective_convergence  site-specificity lives in affect; its SIGN under
                               alignment is not robust
 
-**v3 route: ready now, and it does not touch the boundary mask.** `fields.py` is
+**v3 route: `fields.py` is
 ported (813 -> ~330 lines) with `lexicons/norms/` carrying Warriner (valence /
 arousal / dominance), Brysbaert (concreteness) and `k_ratings` in **both en and
 zh** — which is what O_crosslingual needs and did not have cleanly.
@@ -303,15 +320,17 @@ they are negatives: they bound where the mechanism is not, and `J` plus
 
 # WHAT I WOULD DO FIRST, IF ASKED
 
-1. **The norms cluster (1)** — ready now, no boundary dependency, best-supported,
-   and the zh arm is a real open negative.
+1. **M06 (8)** — the ONLY cluster with no boundary dependency, because it reads
+   generated text. Moved to first on the correction above.
 2. **The three field findings (2) as ONE experiment** with the pretraining
    baseline in the figure, since B_field_flow says pretraining does 6x more.
 3. **AUDIT the two ladders M05 already has (4)** — not a third one. Both OLMo
    and Pythia-6.9b are there and cross-compared; both are grade C from a single
    pass. A cross-seat audit is worth more than a new ladder, and SmolLM3 is a
    later question.
-4. **M06 (8)** — never blocked by v4 at all, because it reads generated text.
+4. **The norms cluster (1)** — best-supported and the zh arm is a real open
+   negative, but it reads `movement` and so waits for the rebuild like everything
+   else on cells. It was first in this list on a false premise.
 
 **Everything on `twp_words` now waits for the REBUILD rather than for the
 decision** — clusters 3, 7, and most of 9 and 10. `Mistral-7B-Instruct-v0.1` was
