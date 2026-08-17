@@ -317,6 +317,50 @@
 	//: been silently wrong at every viewport but one.
 	let scatterW = $state(0);
 	let scatterH = $state(0);
+
+	//: ── THE PLOT FILLS WHAT IS LEFT OF THE VIEWPORT (RH, 2026-08-17: "can we
+	//: make sure height stays in page without need for scroll?").
+	//:
+	//: **MEASURED, NOT `calc(100vh - 300px)`.** The content above this plot is not
+	//: a fixed height: the pair line, the axis badges, the cleared-tags note, the
+	//: save row and any error each appear and disappear, and the badges rewrap at
+	//: narrow widths. A subtracted constant is right at exactly one viewport and
+	//: one panel state, and wrong silently everywhere else — the same footgun as
+	//: the literal 420 this file just lost.
+	//:
+	//: No feedback loop: `top` is the distance to the plot's own top edge, which
+	//: depends on the content ABOVE it and not on its own height.
+	let wrapEl = $state<HTMLElement | null>(null);
+	let plotH = $state(420);
+	//: **MEASURED AGAINST THE SCROLL CONTAINER, NOT THE VIEWPORT.** A viewport
+	//: measurement is only correct at `scrollTop === 0`: scroll down, tag a word,
+	//: and the re-fit sees a smaller `top` and grows the plot to fill space that
+	//: is already above the fold. Adding `scrollTop` back makes the offset a
+	//: distance from the CONTENT top, which is what it needs to be.
+	function fitPlot() {
+		if (!wrapEl) return;
+		const box = wrapEl.getBoundingClientRect();
+		const main = wrapEl.closest('main');
+		if (main) {
+			const offset = box.top - main.getBoundingClientRect().top + main.scrollTop;
+			plotH = Math.max(280, Math.round(main.clientHeight - offset - 14));
+		} else {
+			plotH = Math.max(280, Math.round(window.innerHeight - box.top - 14));
+		}
+	}
+	$effect(() => {
+		//: Re-fit when anything above can have changed height. Reading them here is
+		//: what subscribes the effect to them.
+		void [resp, axisInfo, axisNote, error, clearedNote, saved, saveError, naughty.size, nice.size];
+		if (!wrapEl) return;
+		//: After paint, so the row above has its final height.
+		const id = requestAnimationFrame(fitPlot);
+		window.addEventListener('resize', fitPlot);
+		return () => {
+			cancelAnimationFrame(id);
+			window.removeEventListener('resize', fitPlot);
+		};
+	});
 	let vbW = $derived(
 		scatterW > 0 && scatterH > 0 ? Math.max(100, (scatterW / scatterH) * 100) : 100
 	);
@@ -928,12 +972,14 @@
 			  So: the numbers, their provenance, and no colour. A reader can
 			  compare and decide; the panel does not decide for them.
 			-->
-			<p class="declare">
-				reference only, NOT a gate &mdash; a known mover read
-				<span class="num">{axisInfo.lev_mover?.toFixed(4)}</span> and a known dead item
-				<span class="num">{axisInfo.lev_dead?.toFixed(4)}</span> in the archive
-				({axisInfo.lev_source}). No verdict is drawn from them here.
-			</p>
+			<!--
+			  RH, 2026-08-17: removed from the panel. The thresholds are still
+			  RETURNED by `/slot/axis` and `leverage_verdict` is still null, so
+			  nothing here draws a verdict from them and no fence was load-bearing on
+			  this line — it was telling the reader about a gate the panel does not
+			  apply. `slot_axis.LEV_SOURCE` carries the same statement at the place
+			  the numbers actually live.
+			-->
 		{/if}
 		{#if axisNote}<p class="declare warn">axis: {axisNote}</p>{/if}
 
@@ -992,7 +1038,7 @@
 		</p>
 
 		{#if axis && pts.length}
-			<div class="scatterwrap">
+			<div class="scatterwrap" bind:this={wrapEl}>
 				<!--
 				  MEASURED ON THE SVG, NOT ON THE WRAPPER. The wrapper carries 6px of
 				  padding and the readout row beneath, so its height is not the plot's
@@ -1003,6 +1049,7 @@
 					viewBox="0 0 {vbW} 100"
 					preserveAspectRatio="none"
 					class="scatter"
+					style="height: {plotH}px"
 					bind:clientWidth={scatterW}
 					bind:clientHeight={scatterH}
 				>
@@ -1115,7 +1162,11 @@
 </div>
 
 <style>
-	.slot { max-width: 1100px; }
+	/* RH, 2026-08-17: "still not using full width of page". The 1100px measure
+	   was a reading width, and it was capping the PLOT as well as the prose. Gone
+	   from the panel; the only thing that still wants a measure is the yaml
+	   preview, which is read rather than looked at. */
+	.slot { max-width: none; }
 	header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
 	h2 { font-size: 17px; margin: 0; letter-spacing: -0.2px; }
 	.sub { font-size: 12px; color: var(--text-3); }
@@ -1185,13 +1236,14 @@
 	   fill because `main` scrolls now — a flex-grown child of a scrolling
 	   container collapses to its content. The word list below is still reachable
 	   by scrolling, which is the same fix as the scroll complaint. */
-	.scatter { width: 100%; height: 74vh; min-height: 320px; display: block; overflow: visible; }
-	/* 3.2 user units of a 100-unit viewBox. Was 2.4, which rendered ~10px in the
-	   old 420px box; at 74vh this is ~24px on a 1080p screen. The budget is
-	   legibility against overprinting and it has no better justification than the
-	   rendered image, so re-check it by looking if the geometry changes. */
+	/* Height is set inline from the measured fit; this is the pre-hydration fallback. */
+	.scatter { width: 100%; height: 420px; display: block; overflow: visible; }
+	/* 2.8 user units of a 100-unit viewBox: 2.4 was too small at this size and
+	   3.2 too large (RH, both by looking). The budget is legibility against
+	   overprinting and it has no better justification than the rendered image,
+	   so re-check it the same way if the geometry changes. */
 	.scatter text {
-		font-family: var(--mono); font-size: 3.2px; fill: var(--text-2);
+		font-family: var(--mono); font-size: 2.8px; fill: var(--text-2);
 		cursor: pointer; text-anchor: middle;
 	}
 	.scatter text:hover { fill: #fff; }
@@ -1238,6 +1290,7 @@
 	.ylab { color: var(--text-3); }
 
 	.yaml {
+		max-width: 1100px;
 		margin-top: 14px; padding: 10px; background: var(--panel);
 		border: 1px solid var(--rule); border-radius: 4px; color: var(--text-2);
 		font-family: var(--mono); font-size: 11px; white-space: pre-wrap; user-select: all;
