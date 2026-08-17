@@ -28,10 +28,12 @@
 	import Roster from '$lib/components/Roster.svelte';
 	import SlotExplorer from '$lib/components/SlotExplorer.svelte';
 	import Plots from '$lib/components/Plots.svelte';
+	import Prompts from '$lib/components/Prompts.svelte';
 
 	const SECTIONS = [
 		{ id: 'experiments', label: 'Experiments', sub: 'the register and its questions' },
 		{ id: 'roster', label: 'Roster', sub: 'which models am I comparing' },
+		{ id: 'prompts', label: 'Prompts', sub: 'the frames and how much each moves' },
 		{ id: 'slot', label: 'Slot', sub: 'what the model wants to say' },
 		{ id: 'plots', label: 'Plots', sub: 'registered figures, run on demand' }
 	] as const;
@@ -143,6 +145,8 @@
 			<SlotExplorer />
 		{:else if section === 'plots'}
 			<Plots />
+		{:else if section === 'prompts'}
+			<Prompts />
 		{/if}
 	</main>
 </div>

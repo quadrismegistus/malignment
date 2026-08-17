@@ -115,6 +115,54 @@ GROUP BY base, aligned, relation, depth, rule, prompt
 """ % {"t": _JSTERM.format(p="m.p_base", q="m.p_aligned"),
        "r": _JSTERM.format(p="any(rp.total)", q="any(rq.total)")},
 
+    #: ── PER PROMPT, ACROSS THE DECLARED ENDPOINTS (RH, 2026-08-17).
+    #:
+    #: `movement_edges` groups the same cells by EDGE; this groups them by
+    #: PROMPT. Same source, same definitions, different question: which frames
+    #: move, rather than which lineages move.
+    #:
+    #: **RESTRICTED TO `{db}.endpoints` BY JOIN, NOT BY A LIST.** `movement`
+    #: holds every measured pair, and "across endpoints" is a POPULATION CHOICE
+    #: -- one made in a hardcoded list is one nobody reports. The join means the
+    #: population is whatever the roster currently declares, and a roster
+    #: correction propagates rather than needing this file edited.
+    #:
+    #: MEDIAN, not mean, and for the reason the slopegraph gives: these are
+    #: heavy-tailed across families and a mean can be one family's obsession.
+    #: `n_pairs` travels beside every median so a prompt measured on 9 lineages
+    #: cannot be read as one measured on 50.
+    "prompt_movement": """
+CREATE OR REPLACE VIEW {db}.prompt_movement AS
+SELECT mc.prompt                       AS prompt,
+       mc.rule                         AS rule,
+       count()                         AS n_pairs,
+       median(mc.js_total)             AS js_median,
+       median(mc.departed)             AS departed_median,
+       median(mc.arrived)              AS arrived_median,
+       median(mc.arrived - mc.departed) AS net_median,
+       median(mc.n_fall)               AS n_fall_median,
+       median(mc.n_rise)               AS n_rise_median,
+       median(mc.resid_base)           AS resid_base_median,
+       median(mc.resid_aligned)        AS resid_aligned_median
+FROM {db}.movement_cells mc
+INNER JOIN {db}.endpoints e
+        ON e.base = mc.base AND e.endpoint = mc.aligned
+GROUP BY prompt, rule
+""",
+
+    #: How many checkpoints have a twp cell at this prompt. **NOT the same as
+    #: `n_pairs` above**: a cell is one arm, a pair needs both, so a prompt can
+    #: be widely measured and thinly paired. Both are shown because the gap is
+    #: the interesting case.
+    "prompt_coverage": """
+CREATE OR REPLACE VIEW {db}.prompt_coverage AS
+SELECT prompt,
+       uniqExact(model) AS n_models,
+       median(total)    AS resid_median
+FROM {db}.twp_cells
+GROUP BY prompt
+""",
+
     "movement_edges": """
 CREATE OR REPLACE VIEW {db}.movement_edges AS
 SELECT base, aligned, relation, depth, rule,

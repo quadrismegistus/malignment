@@ -47,6 +47,22 @@ An experiment folder can hold `figures/` as well as `results/`, and the panel le
 
 **Expect it to render almost nothing at first, and that is worth seeing.** There is exactly **one** figure committed across every experiment folder in the repo today. A row that is empty for five of six experiments is an accurate picture of the plot debt, and a more useful one than a queue file nobody opens -- the panel would make it visible in the place where the results are already being read.
 
+## 3c. Prompts tab — BUILT, with what is left
+
+Shipped 2026-08-17: a sortable table of the 3,120 declared prompts with their categories and four measured columns, and a per-prompt profile behind a click.
+
+**The measured columns were one view, not a computation.** `movement_cells` already had `departed` (mass fallen), `arrived` (mass risen) and `js_total` (total movement) per `(base, aligned, prompt)`; `prompt_movement` groups them by prompt instead of by edge, restricted to `{db}.endpoints` **by join rather than by a hardcoded list**, so the population is whatever the roster declares. `prompt_coverage` adds `n_models`.
+
+**Cached because it is measured slow, and not materialised.** 13.9s over 400,267 cells. `views.py` says materialise only on a measured reason and that is one -- but a materialised table needs a refresh discipline, and a stale one is invisible, which is exactly what cost a day when `{db}.pairs` went stale with every row count still plausible. The cache carries `computed_at` and the panel shows it.
+
+What is left:
+
+- **The `n_pairs` trap has a label and no guard.** Sorting by `movement` without reading `n_pairs` is the most available mistake the table offers, and nothing stops it: a prompt measured on 9 lineages sorts against one measured on 50. A minimum-`n_pairs` filter, or greying rows below a threshold, would make it harder to do by accident.
+- **1,760 measured prompts are not in the declared `prompts` table.** The count is on the panel; the prompts themselves are unreachable from it. Whether that gap is a backlog or a definition is not a UI question.
+- **`pair_id` groups run to 14 members, so "related frames" is not always a pair.** 2,355 of 3,120 prompts carry one, forming 1,045 groups, and `pair_role` is usually empty -- so the panel cannot say which member is the contrast of which. Populating `pair_role` is a roster job.
+- **The profile's endpoint table and the Plots tab do not know about each other.** Clicking a lineage should offer to draw that prompt's slopegraph for it; the plumbing exists on both sides and nothing connects them.
+- **Movement columns inherit the aperture caveats.** `departed` and `arrived` are mass sums over differently-apertured arms, and the leak is 96% co-signed. They are not `dN` and are not blocked by that ruling, but a panel that ranks prompts by them is ranking partly by residual behaviour.
+
 ## 4. From the archive, with the data check done
 
 Checked against what v3 actually holds (ClickHouse tables and `experiments/*/results/`), because a panel with no data behind it is a request for a fleet, not a UI task.

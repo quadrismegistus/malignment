@@ -53,6 +53,53 @@ export interface Health {
 	slot_idle: Record<string, number>;
 }
 
+export interface PromptRow {
+	prompt: string;
+	prompt_id: string;
+	domain: string | null;
+	subdomain: string | null;
+	family: string | null;
+	language: string | null;
+	contrast_type: string | null;
+	source: string | null;
+	finding: string | null;
+	status: string | null;
+	slot: string | null;
+	pair_id: string | null;
+	pair_role: string | null;
+	//: Checkpoints with a twp cell here. NOT the same as `n_pairs`: a cell is
+	//: one arm and a pair needs both, so a prompt can be widely measured and
+	//: thinly paired.
+	n_models: number | null;
+	resid_median: number | null;
+	//: The denominator of every median in the row. A prompt measured on 9
+	//: lineages and one measured on 50 produce medians that look identical.
+	n_pairs: number | null;
+	js_median: number | null;
+	departed_median: number | null;
+	arrived_median: number | null;
+	net_median: number | null;
+}
+
+export interface PromptProfile {
+	prompt: string;
+	meta: PromptRow;
+	endpoints: {
+		base: string; aligned: string; relation: string; depth: number;
+		js_total: number; departed: number; arrived: number;
+		n_fall: number; n_rise: number; resid_base: number; resid_aligned: number;
+	}[];
+	top_risers: { word: string; d: number; n: number }[];
+	top_fallers: { word: string; d: number; n: number }[];
+	//: `prompt` is REQUIRED even though the rest is partial: the server projects
+	//: a fixed subset and `prompt` is always in it, and a `Partial` that makes it
+	//: optional forces every consumer to handle an undefined that cannot occur.
+	partners: (Partial<PromptRow> & { prompt: string })[];
+	//: Says the movers are SUMMED across the endpoint pairs, not a per-pair
+	//: rate — otherwise they read as the same kind of number as the medians.
+	movers_note: string;
+}
+
 export interface PlotParam {
 	name: string;
 	type: 'text' | 'int' | 'choice' | 'prompt';
@@ -297,6 +344,18 @@ export const api = {
 	experiments: () => get<Experiments>('/experiments'),
 	//: The producers' own declarations. Nothing in the client knows what a plot
 	//: type is; adding one is adding a PLOT dict to a producer.
+	//: The rollup is a VIEW (`{db}.prompt_movement`) and the server caches it,
+	//: because it is a measured 14s over 400,267 cells. `computed_at` travels
+	//: so the panel can show when, rather than implying "now".
+	prompts: () =>
+		get<{
+			n: number;
+			computed_at: string | null;
+			ttl_seconds: number;
+			n_measured_undeclared: number | null;
+			rows: PromptRow[];
+		}>('/prompts'),
+	prompt: (text: string) => get<PromptProfile>(`/prompt?text=${encodeURIComponent(text)}`),
 	plots: () => get<{ plots: PlotSpec[] }>('/plots'),
 	//: Filtered SERVER-SIDE over a cached set, in Python, never with a LIKE —
 	//: see `serve._plot_prompt_set`. The prompt is validated by membership at

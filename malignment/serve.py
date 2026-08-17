@@ -368,6 +368,57 @@ def _walk_experiments():
     return out
 
 
+#: ── PROMPTS: the frames, and how much each one moves.
+#:
+#: **THE ARITHMETIC IS IN `views.py`, NOT HERE.** `prompt_movement` and
+#: `prompt_coverage` are VIEWS; this selects from them and joins the metadata.
+#: The module rule holds: the server is not deriving a median, it is reading one
+#: a view defines, and the view is versioned in a file with the rest of them.
+#:
+#: **CACHED BECAUSE IT IS MEASURED SLOW, NOT BECAUSE IT FELT SLOW.** The rollup
+#: is 13.9 s over 4,484 prompts and 400,267 cells. `views.py` says materialise
+#: only on a measured reason -- that is one, and a MATERIALISED TABLE was still
+#: the wrong answer: it needs a refresh discipline, and a stale one is invisible.
+#: This repo lost a day to exactly that when `{db}.pairs` went stale and every
+#: row count stayed plausible. A cache with a TTL and a `computed_at` the panel
+#: shows is the version whose staleness is on screen.
+_PROMPTS = {"at": 0.0, "rows": None, "computed_at": None, "undeclared": None}
+_PROMPTS_TTL = 900
+
+
+def _prompt_rows():
+    from . import ch
+    now = _monotonic()
+    if _PROMPTS["rows"] is None or now - _PROMPTS["at"] > _PROMPTS_TTL:
+        import datetime
+        rows = ch.query("""
+SELECT p.prompt AS prompt, p.prompt_id AS prompt_id, p.domain AS domain,
+       p.subdomain AS subdomain, p.family AS family, p.language AS language,
+       p.contrast_type AS contrast_type, p.pair_id AS pair_id,
+       p.pair_role AS pair_role, p.source AS source, p.finding AS finding,
+       p.status AS status, p.slot AS slot,
+       cov.n_models AS n_models, cov.resid_median AS resid_median,
+       pm.n_pairs AS n_pairs, pm.js_median AS js_median,
+       pm.departed_median AS departed_median, pm.arrived_median AS arrived_median,
+       pm.net_median AS net_median
+FROM {db}.prompts p
+LEFT JOIN {db}.prompt_coverage cov ON cov.prompt = p.prompt
+LEFT JOIN (SELECT * FROM {db}.prompt_movement WHERE rule = 'canonical') pm
+       ON pm.prompt = p.prompt
+""")
+        #: **DECLARED AGAINST MEASURED, COUNTED.** The `prompts` table declares
+        #: 3,120; `twp_words` holds 4,484 distinct, so ~1,760 measured prompts
+        #: are not in the roster's table. A panel that showed only the declared
+        #: ones without saying so would present a 3,120-row table as the corpus.
+        _PROMPTS["undeclared"] = ch.scalar(
+            "SELECT count() FROM (SELECT DISTINCT prompt FROM {db}.twp_words "
+            "WHERE prompt NOT IN (SELECT prompt FROM {db}.prompts))", 0)
+        _PROMPTS["rows"] = rows
+        _PROMPTS["at"] = now
+        _PROMPTS["computed_at"] = datetime.datetime.now().isoformat(timespec="seconds")
+    return _PROMPTS["rows"], _PROMPTS["computed_at"]
+
+
 #: ── PLOTS: the producers declare, this reads the declaration.
 #:
 #: **THIS IS THE ONE PLACE THE SERVER RUNS SOMETHING THAT MAKES A NEW ARTIFACT**,
@@ -1041,6 +1092,75 @@ class Handler(BaseHTTPRequestHandler):
                 #: reader checks the receipt rather than a summary of it.
                 "population": _read_json(os.path.join(d["_dir"], "population.json")),
             }
+        if path == "/prompts":
+            rows, computed = _prompt_rows()
+            return {"n": len(rows), "computed_at": computed,
+                    "ttl_seconds": _PROMPTS_TTL,
+                    #: Prompts with cells that this table does NOT declare. The
+                    #: panel says so, because a declared-only table read as the
+                    #: corpus is the population defect one level up.
+                    "n_measured_undeclared": _PROMPTS.get("undeclared"),
+                    #: **THE WHOLE TABLE, UNCAPPED, AND THAT IS DELIBERATE.**
+                    #: 4,484 rows is ~1 MB of JSON and the point of the panel is
+                    #: to sort over all of it. A cap here would make every sort a
+                    #: sort of an arbitrary window -- the windowed-view-beside-an
+                    #: -unwindowed-statistic defect, with the sort as the
+                    #: statistic.
+                    "rows": rows}
+        if path == "/prompt":
+            rows, _ = _prompt_rows()
+            text = one("text", "")
+            #: MEMBERSHIP, as everywhere else: the text reaches a ClickHouse
+            #: query, so it has to be one of the prompts the table declares.
+            by = {r["prompt"]: r for r in rows}
+            if text not in by:
+                raise KeyError("no such prompt. Ask /prompts for the %d declared."
+                               % len(by))
+            from . import ch
+            esc = text.replace("\\", "\\\\").replace("'", "\\'")
+            per = ch.query(
+                "SELECT mc.base AS base, mc.aligned AS aligned, "
+                "mc.relation AS relation, mc.depth AS depth, "
+                "mc.js_total AS js_total, mc.departed AS departed, "
+                "mc.arrived AS arrived, mc.n_fall AS n_fall, mc.n_rise AS n_rise, "
+                "mc.resid_base AS resid_base, mc.resid_aligned AS resid_aligned "
+                "FROM {db}.movement_cells mc INNER JOIN {db}.endpoints e "
+                "ON e.base = mc.base AND e.endpoint = mc.aligned "
+                "WHERE mc.rule = 'canonical' AND mc.prompt = '" + esc + "' "
+                "ORDER BY js_total DESC")
+            movers = ch.query(
+                "SELECT word, sum(delta) AS d, count() AS n "
+                "FROM {db}.movement m INNER JOIN {db}.endpoints e "
+                "ON e.base = m.base AND e.endpoint = m.aligned "
+                "WHERE m.rule = 'canonical' AND m.prompt = '" + esc + "' "
+                "GROUP BY word ORDER BY d DESC LIMIT 8")
+            fallers = ch.query(
+                "SELECT word, sum(delta) AS d, count() AS n "
+                "FROM {db}.movement m INNER JOIN {db}.endpoints e "
+                "ON e.base = m.base AND e.endpoint = m.aligned "
+                "WHERE m.rule = 'canonical' AND m.prompt = '" + esc + "' "
+                "GROUP BY word ORDER BY d ASC LIMIT 8")
+            #: THE PARTNER, if this frame is half of a declared contrast. The
+            #: `prompts` table carries `pair_id`/`pair_role`, so the partner is
+            #: the OTHER row with the same `pair_id` -- looked up in the cached
+            #: rows rather than re-queried.
+            meta = by[text]
+            partners = []
+            if meta.get("pair_id"):
+                partners = [
+                    {k: r[k] for k in ("prompt", "pair_role", "domain",
+                                       "js_median", "departed_median",
+                                       "arrived_median", "n_pairs", "n_models")}
+                    for r in rows
+                    if r.get("pair_id") == meta["pair_id"] and r["prompt"] != text]
+            return {"prompt": text, "meta": meta, "endpoints": per,
+                    "top_risers": movers, "top_fallers": fallers,
+                    "partners": partners,
+                    #: Summed across endpoints, so it is a total and not a rate.
+                    #: Said here because a reader will otherwise take it for a
+                    #: per-pair number the same size as `departed_median`.
+                    "movers_note": "delta summed over the %d endpoint pairs "
+                                   "measured at this prompt" % len(per)}
         if path == "/plots":
             specs = _plot_specs()
             return {"plots": [dict(sp, error=sp.get("error"))
