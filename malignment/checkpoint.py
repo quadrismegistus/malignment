@@ -231,7 +231,7 @@ class Checkpoint:
         """Every producer's stash. Resume must see ALL of them, not just ours."""
         return [(p, self.stash(p)) for p in self.producers()]
 
-    def key(self, prompt):
+    def key(self, prompt, rules=None):
         """**THE INSTRUMENT IS PART OF THE KEY.**
 
         `done()` used to gate on "has rows and is not skipped" while the INGEST
@@ -245,35 +245,50 @@ class Checkpoint:
         than guarded: a rule bump is a different key, every prompt is re-offered
         automatically, and the old rows remain for comparison. A defect you
         cannot express beats one you remember to check.
+
+        **`rules=None` IS v3 AND MUST STAY THE EXACT DICT IT WAS.** Adding a
+        field unconditionally -- even one set to `None` -- would change every
+        v3 key and orphan 984,857 stored cells. So the v4 fields appear ONLY
+        when a rule set is passed.
         """
         from . import twp as T
         from .ingest import RULE_VERSION
+        if rules is None:
+            return {"model": self.model_id, "prompt": prompt,
+                    "rule_version": RULE_VERSION, "dict_sha": T.dict_sha()}
+        from .twp_v4 import RULE_VERSION as V4_RULE_VERSION
         return {"model": self.model_id, "prompt": prompt,
-                "rule_version": RULE_VERSION, "dict_sha": T.dict_sha()}
+                "rule_version": V4_RULE_VERSION, "dict_sha": T.dict_sha(),
+                "rules": rules.label(),
+                #: the prompt cache is not bit-identical, so a cached and an
+                #: uncached cell are different measurements of one prompt.
+                "prompt_cache": bool(T.USE_PROMPT_CACHE)}
 
     @property
     def paths(self):
         """Every `data.jsonl` for this checkpoint, one per producer."""
         return [st.path for _, st in self.stashes()]
 
-    def done(self):
+    def done(self, rules=None):
         """Prompts measured BY THIS INSTRUMENT, across every producer.
 
         A skip is an attempt, not a result: `runners` records refusals in a
         sidecar and writes NO key for them, so a tokenizer fix re-offers the
         prompt instead of finding it done -- the failure that would have left
         internlm2's 402 recovered prompts unmeasured.
+        **AND `rules` IS PART OF "DONE", or a v4 run sees v3's cells and
+        concludes it has nothing to do.** The same argument the docstring above
+        makes for `rule_version`, one level in: a rule set is an instrument.
         """
         from . import twp as T
-        from .ingest import RULE_VERSION
-        want = (RULE_VERSION, T.dict_sha())
+        probe = self.key("", rules)
+        want = {k: v for k, v in probe.items() if k != "prompt"}
         out = set()
         for _, st in self.stashes():
             for k in st.keys():
                 if not isinstance(k, dict):
                     continue
-                if (k.get("model") == self.model_id
-                        and (k.get("rule_version"), k.get("dict_sha")) == want):
+                if all(k.get(f) == v for f, v in want.items()):
                     out.add(k.get("prompt"))
         return out
 

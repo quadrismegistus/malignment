@@ -320,13 +320,22 @@ class TWPRunner:
     def __init__(self, checkpoint):
         self.ck = checkpoint
 
-    def run(self, prompts, purge=False, limit=None, dict_path=None, verbose=True):
+    def run(self, prompts, purge=False, limit=None, dict_path=None, verbose=True,
+            rules=None):
+        """`rules=None` is v3 and dispatches to `twp.expand` ITSELF.
+
+        **Not to `expand4(Rules())`, which produces the same numbers.** If v3's
+        path ran through v4 code, v3's correctness would depend on v4 being
+        right, and the whole point of the separate module is that it cannot be.
+        One `if`, and the 984,857 stored cells keep a producer that does not
+        import the thing under test.
+        """
         import torch
         from transformers import AutoModelForCausalLM
 
         ck = self.ck
         os.makedirs(ck.dir, exist_ok=True)
-        have = ck.done()
+        have = ck.done(rules)
         todo = [p for p in prompts if p not in have]
         if limit:
             todo = todo[:limit]
@@ -341,6 +350,16 @@ class TWPRunner:
 
         #: ONE LOADER, SHARED WITH `malignment.serve`. See `load_for_twp`.
         ld = load_for_twp(ck, dict_path=dict_path, purge=purge, say=say)
+        #: **`load_for_twp` PRINTS `T.RULE_VERSION`, WHICH IS ALWAYS 3.** It runs
+        #: before the rules are known and cannot say otherwise, so on a v4 run
+        #: the log named the wrong instrument -- `run.log` rsyncs with the data,
+        #: so that line is what a later reader would trust. Corrected here, where
+        #: the rules ARE known, rather than by threading them into a loader that
+        #: does not otherwise need them.
+        if rules is not None:
+            say("  INSTRUMENT: rule_version %d | %s | prompt_cache %s"
+                % (__import__("malignment.twp_v4", fromlist=["x"]).RULE_VERSION,
+                   rules.label(), bool(T.USE_PROMPT_CACHE)))
         model, tok, dev = ld.model, ld.tok, ld.dev
         bmask, cjk, pol, loader_id = ld.bmask, ld.cjk, ld.bos_policy, ld.loader_id
 
@@ -375,8 +394,18 @@ class TWPRunner:
                     sf.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
             try:
-                w, res, _calls = T.expand(model, tok, p, dev, bmask,
-                                          cjk=cjk, bos_policy=pol)
+                if rules is None:
+                    w, res, _calls = T.expand(model, tok, p, dev, bmask,
+                                              cjk=cjk, bos_policy=pol)
+                else:
+                    from . import twp_v4 as V4
+                    w, res, _meta = V4.expand4(model, tok, p, dev, bmask,
+                                               cjk=cjk, bos_policy=pol,
+                                               rules=rules)
+                    res = dict(res, total=(res['tail'] + res['drop']
+                                           + res['open'] + res['mojibake']
+                                           + res.get('term_floored', 0.0)))
+
             except T.SkipPrompt as sk:
                 _skip(str(sk)); n_skip += 1
                 continue
@@ -395,7 +424,7 @@ class TWPRunner:
             #: One append per cell, healed and flushed by the engine. The key
             #: carries the instrument, so a rule bump writes a NEW key rather
             #: than overwriting a measurement made by a different instrument.
-            st[ck.key(p)] = rec
+            st[ck.key(p, rules)] = rec
             n_ok += 1
             if hasattr(bar, "set_postfix"):
                 bar.set_postfix(ok=n_ok, skip=n_skip, refresh=False)
