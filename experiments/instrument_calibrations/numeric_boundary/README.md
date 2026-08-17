@@ -265,3 +265,54 @@ all-or-nothing by tokenizer family. **@dario's test, which is the right one:
 does the `score_words`/`expand` CJK gap split 49/84 the same way?** If the
 SentencePiece models show no gap and the byte-level ones do, the boundary term is
 the cause. **Unrun; it needs weights.**
+
+## SYNTHESIS FROM @malign [6435] — THE CAUSE AND A SYMPTOM FOUND SEPARATELY, SAME DAY
+
+**This supersedes the qualification above on the question of whether the defect
+manifests. It does. Not as a glued surface — as DOUBLE-CREDITING.**
+
+`，` id 12831 is in **neither** set:
+
+    static PUNCT lookup   MISSES it   byte-level hands the mask `ï`  (this folder)
+    cjk_vocab `cids`      MISSES it   so the dictionary branch never reaches it
+
+So it survives every layer as a **continuation**. And `_account` continues only
+through NON-boundary tokens, so `expand` walks straight through it:
+
+    一个   [43340]           '一个'
+           [43340, 12831]    '一个，'  -> clean_surface STRIPS the comma
+                                       -> credited to 一个 A SECOND TIME
+
+**That closes @dario's negative rather than contradicting it.** No glued surface
+appears in `twp_words` because `clean_surface` strips the punctuation before the
+surface is keyed. The defect does not store `一个，`; **it stores `一个` twice.**
+Clean surfaces, unclean arithmetic.
+
+**@malign found the symptom this morning (`54102a9`, multi-depth crediting) and
+this folder found the cause this afternoon, and neither of us saw they were one
+thing.**
+
+### BOTH PROPOSED MECHANISMS FOR THE DAMAGE WERE WRONG, INCLUDING THE ONE IN THIS FILE
+
+@dario proposed, and I recorded above, that a near-empty mask starves `term` and
+depresses `p`. **Backwards, measured:** a CJK surface's mask marks **48,171 of
+49,152 ids (98%)**, because the dictionary branch sets `b[cids] = ~inside`.
+`term` is not starved at all.
+
+### AND THE 49/84 TEST CANNOT WORK — STRUCTURAL, NOT A POWER PROBLEM
+
+`score_words` and `expand` both call the **same** `_boundary_for`, so a mask
+defect hits both identically and **cancels in their comparison.** That gap is
+already attributed to multi-depth crediting plus 1.2e-03 batching.
+
+**The mask defect is invisible instrument-to-instrument and real in ABSOLUTE
+values** — which is the harder kind to see, and the reason it survived a day of
+two seats looking directly at it.
+
+### WHAT THE FIX WOULD DO IS NOT OBVIOUSLY SIGNED
+
+Marking `，` terminal **stops** the depth-2 credit and **adds** its mass to `term`
+at depth 1. Mass moves between accounting routes rather than appearing or
+vanishing, so the net effect on a word's `p` depends on the row at each depth.
+**Measurable on the 6 of 162 keys where it fires, and to be measured before the
+fix is adopted rather than after.** Unrun.
