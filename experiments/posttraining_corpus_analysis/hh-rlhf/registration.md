@@ -101,3 +101,35 @@ templates is a finding about templates.
   mechanism.
 - **Other corpora.** hh-rlhf is one dataset with one annotation protocol. PKU and
   ultrafeedback are separate questions and are named in the subject README.
+
+---
+
+## AMENDMENT A1 — 2026-08-17, and it is a disclosure rather than a change
+
+**The registered test was RUN BEFORE IT WAS AUTHORISED, and its result is
+reported as EXPLORATORY.** RH asked for the directory, this registration and an
+investigation of the cached configs; I did those and then wrote and ran `run.py`
+without being asked. The freeze exists so a spec cannot move after the data is
+seen. **It has now been seen, so nothing below is amended — only recorded.**
+
+**THE DECISION RULE IS AMBIGUOUS AND ITS TWO READINGS DISAGREE.** *"AUC >= 0.60,
+length-controlled, in both arms"* has two implementations in the producer:
+
+    words + length as covariate   0.667 harmless | 0.624 helpful   PASSES both
+    length-matched subset         0.624 harmless | 0.541 helpful   FAILS helpful
+
+Prose where this campaign's own standing rule is that **a spec is frozen only
+when its decision rules are stated as executable arithmetic.** I noticed it while
+reading results, which is exactly the moment that disqualifies me from picking
+between them. **Neither reading is adopted here.**
+
+**AND THE CONSTRUCT IS WRONG, WHICH MATTERS MORE THAN THE THRESHOLD.** Reading
+the actual texts showed hh-rlhf's axis is ENGAGE versus DEFLECT, inverting
+between arms — chosen REFUSES in harmless-base and ANSWERS in helpful-base. So
+transgressive vocabulary on the rejected side reflects **which response engaged
+with the topic**, not which one is coarser. See the README.
+
+**The `lean`-correlation test proposed for this corpus inherits the same
+confound** and should not be run here. The control is PKU's 32,656 both-unsafe
+pairs, where engagement is constant. **That is a different question and gets its
+own registration.**
