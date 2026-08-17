@@ -539,6 +539,133 @@ def embed_population(domains=None, sources=None, limit=0, verbose=True):
     return {"prompts": done, "embedded": new, "already_present": skipped}
 
 
+WORD_TABLE = "word_vec"
+
+
+def create_words(drop=False):
+    """The BARE-WORD table: one vector per word, no prompt, no separator.
+
+    **A SEPARATE SPACE FROM `slot_word_vec`, AND THEY MUST NOT BE MIXED.** That table
+    holds `prompt + sep + word`; this holds `word`. A cosine between one of each is
+    meaningless, so they are different tables rather than a nullable column -- a NULL
+    prompt would let a join produce exactly that silently.
+
+    ## WHY IT EXISTS (RH, 2026-08-17)
+
+    The in-frame validity check has a defect RH diagnosed better than I did: the
+    panel's untagged candidates are, for a well-tagged item, *the irrelevant
+    remainder* -- "when I tag I pretty much get every relevant word to the poles" --
+    so the check gets WEAKER the better the tagging is. Demonstrated on
+    `He told his boss he wanted to`: tagged `quit resign kill die`, its in-frame
+    untagged extremes are `leave, retire, stop, change, switch`, indistinguishable
+    from the same item tagged `quit resign leave`. The frame offers no death words,
+    so the death direction is invisible from inside it.
+
+    Scored against a WIDE vocabulary the same one-word change is unmistakable:
+
+        quit,resign,kill,die   die, perish, died, resigned, depressed, killed, hanged
+        quit,resign,leave      resigned, resign, forsake, divorce, renounce, 放弃
+
+    So this is the held-out set the in-frame check cannot have, and it works for a
+    prompt that has never been measured -- which is the case that matters while
+    authoring.
+
+    **BUILD THE AXIS FROM BARE POLE VECTORS TOO.** Mixing a prompt-conditioned axis
+    with bare candidates compares across two spaces and returns plausible nonsense.
+    """
+    if drop:
+        ch.execute("DROP TABLE IF EXISTS {db}.%s" % WORD_TABLE)
+    ch.execute("""CREATE TABLE IF NOT EXISTS {db}.%s (
+        embedder    LowCardinality(String),
+        revision    LowCardinality(String),
+        normalized  UInt8,
+        word        String,
+        vec         Array(Float32) CODEC(NONE),
+        dims        UInt16,
+        source      LowCardinality(String),
+        created_at  DateTime DEFAULT now(),
+        CONSTRAINT vec_len CHECK length(vec) = 1024
+    ) ENGINE = ReplacingMergeTree
+      ORDER BY (embedder, revision, normalized, word)""" % WORD_TABLE)
+    return WORD_TABLE
+
+
+WCOLS = ("embedder", "revision", "normalized", "word", "vec", "dims", "source")
+
+
+def put_words(words, vecs, embedder=None, source="vocab"):
+    """Insert bare-word vectors. -> count"""
+    from .slot_axis import EMBEDDER
+    cl = client()
+    if cl is None:
+        return 0
+    emb = embedder or EMBEDDER
+    data = [[emb, UNPINNED, 1, w, [float(x) for x in v], int(len(v)), source]
+            for w, v in zip(words, vecs)]
+    n = 0
+    for i in range(0, len(data), CHUNK):
+        cl.insert(WORD_TABLE, data[i:i + CHUNK], column_names=list(WCOLS))
+        n += len(data[i:i + CHUNK])
+    return n
+
+
+def fetch_words(words, embedder=None):
+    """Bare-word vectors already stored. -> {word: list[float]}"""
+    from .slot_axis import EMBEDDER
+    cl = client()
+    if cl is None or not words:
+        return {}
+    r = cl.query(
+        "SELECT word, vec FROM " + WORD_TABLE + " WHERE embedder = {e:String} AND "
+        "revision = {r:String} AND normalized = 1 AND word IN {w:Array(String)}",
+        parameters={"e": embedder or EMBEDDER, "r": UNPINNED, "w": list(words)})
+    return {row[0]: row[1] for row in r.result_rows}
+
+
+def embed_vocab(shard=0, n_shards=1, limit=0, batch=512, verbose=True):
+    """Embed the distinct `twp_words` vocabulary, bare. -> dict
+
+    **SHARDED BY `cityHash64(word) % n_shards`, so workers partition the vocabulary
+    without coordinating.** Deterministic and balanced, and a worker re-run covers
+    exactly its own slice again -- no shared cursor to corrupt.
+
+    **PARALLELISM IS WORTH IT HERE AND THAT WAS MEASURED, not assumed.** One encode
+    process uses ~243% CPU of 12 cores with the machine 55% idle, so the cores are
+    not the binding constraint at N=1. ClickHouse takes concurrent inserts happily --
+    each becomes a part and merges run in the background -- so the limit is CPU, and
+    there is room for roughly four workers beside a running job.
+
+    Resumable like the others: it asks what is already stored and embeds the rest.
+    """
+    import numpy as np
+    from . import slot_axis as A
+    create_words()
+    q = "SELECT DISTINCT word FROM twp_words"
+    if n_shards > 1:
+        q += " WHERE cityHash64(word) %% %d = %d" % (n_shards, shard)
+    q += " ORDER BY word" + (" LIMIT %d" % limit if limit else "")
+    vocab = [r["word"] for r in rows(q)]
+    if verbose:
+        print("shard %d/%d: %d words" % (shard, n_shards, len(vocab)), flush=True)
+    new = skipped = 0
+    for i in range(0, len(vocab), batch):
+        chunk = vocab[i:i + batch]
+        have = fetch_words(chunk)
+        todo = [w for w in chunk if w not in have]
+        skipped += len(have)
+        if todo:
+            V = np.asarray(A._model().encode(
+                todo, normalize_embeddings=True, show_progress_bar=False,
+                batch_size=256), dtype=np.float32)
+            put_words(todo, V)
+            new += len(todo)
+        if verbose and (i // batch) % 20 == 0:
+            print("  shard %d: %d/%d  embedded %d  had %d"
+                  % (shard, i + len(chunk), len(vocab), new, skipped), flush=True)
+    return {"shard": shard, "n_shards": n_shards, "words": len(vocab),
+            "embedded": new, "already": skipped}
+
+
 def stats():
     """Row counts by embedder/revision. -> str"""
     if not ch.exists(TABLE):

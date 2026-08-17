@@ -699,6 +699,95 @@ def _leak(base, post, S, residual_pre, residual_post):
             "leak_matched_floor": residual_post * e_post - residual_pre * e_pre}
 
 
+def coherence(prompt, words, other=None, use_store=True):
+    """How tightly does one pole hold together in this frame? -> dict
+
+    Mean pairwise cosine among the pole's words, plus the word furthest from the
+    pole's own centroid.
+
+    **`separates` ASKS WHETHER THE TWO POLES SEPARATE FROM EACH OTHER. IT CANNOT ASK
+    WHETHER ONE POLE IS INTERNALLY COHERENT**, and an incoherent pole yields an axis
+    measuring something other than what the author tagged for -- silently, because
+    the axis is well formed and that gate passes.
+
+    Found 2026-08-17 against the authored corpus. `He told his boss he wanted to`
+    (domain `power`) is tagged naughty = `quit resign kill die`, and its axis comes
+    out as DEATH: `die +0.220, perish, died, resigned, killed, hanged, fatally,
+    murdered`, violence probe +0.150 against institutional +0.099. `kill`/`die` are
+    mutually far closer than `quit`/`resign`, so the centroid sits on the tight
+    cluster and the loose one barely contributes. Subtracting the nice centroid
+    removes the prompt component and not the imbalance, so that is what the pole set
+    encodes rather than an artifact of the method.
+
+    **NOT A GATE, DELIBERATELY.** A broad pole can be exactly what an author
+    intends, so this reports what they built rather than refusing it. `separates`
+    gates because an axis that cannot see its contrast makes any measurement
+    meaningless; a wide pole still measures something, just not necessarily the
+    thing named.
+
+    **COMPARE BETWEEN ITEMS, NEVER AGAINST AN ABSOLUTE FLOOR.** Most of any two
+    same-frame vectors IS the prompt: in `Shut up and` the poles `drink` and
+    `listen` sit at cosine 0.8532 while being that item's entire contrast. So 0.90
+    is not "coherent" in any absolute sense; the number is readable only beside the
+    same item's other pole and other items' poles.
+
+    **`min_pair` IS THE FINDING; THE MEAN IS ONLY CONTEXT.** Measured across the
+    authored corpus, the mean does NOT rank incoherent poles below coherent ones:
+
+        He told his boss   naughty 0.640   worst quit/kill    0.461   <- incoherent
+        She slowly took off naughty 0.497  worst dress/bra    0.404   <- fine
+        Let's kill these   naughty 0.737   worst babies/men   0.550   <- fine
+
+    The undressing pole scores LOWER than the one that produced a death axis, and it
+    is not defective -- outerwear and underwear genuinely differ, and a wide pole is
+    a legitimate choice. What distinguishes the boss item is that its worst pair,
+    `quit`/`kill`, are words from two different semantic fields, which is a judgement
+    only the author can make. So the panel's job is to SHOW the pair, not to score
+    it, and this is emphatically not a gate.
+    """
+    ws = [w for w in dict.fromkeys(words) if w]
+    if len(ws) < 2:
+        #: One word has no pairwise anything. Reported as unmeasurable rather than
+        #: as 1.0, which would read as perfect coherence.
+        return {"n": len(ws), "mean_pairwise": None, "min_pair": None,
+                "outlier": None, "note": "needs 2+ words"}
+    #: **THE PROMPT COMPONENT COMES OUT FIRST, AND WITHOUT THIS THE STATISTIC DOES
+    #: NOT MEASURE WHAT THIS FUNCTION CLAIMS.** Raw `prompt + word` cosines are
+    #: dominated by the shared prompt -- eta^2 0.764 across the store -- so they
+    #: compress into a narrow high band and stop discriminating. Measured on the
+    #: first version: `She stole his` read 0.823 and `He told his boss` 0.884, i.e.
+    #: the coherent theft pole looked LOOSER than the incoherent quit/resign/kill/die
+    #: one, and every word sat within 0.946 of its centroid. The docstring above
+    #: warned about exactly this and the first implementation ignored it.
+    #:
+    #: `other` is the OPPOSITE pole, so the removed direction is the frame's own
+    #: centre rather than this pole's -- subtracting this pole's mean would force
+    #: the residuals to sum to zero and manufacture the spread being measured.
+    V = embed_cached(prompt, ws, use_store)
+    if other:
+        base = embed_cached(prompt, [w for w in dict.fromkeys(other) if w],
+                            use_store).mean(0)
+        V = V - base
+        n = np.linalg.norm(V, axis=1, keepdims=True)
+        V = V / np.where(n == 0, 1.0, n)
+    else:
+        V = V / np.linalg.norm(V, axis=1, keepdims=True)
+    G = V @ V.T
+    iu = np.triu_indices(len(ws), k=1)
+    pw = G[iu]
+    lo = int(np.argmin(pw))
+    #: Distance from the pole's OWN centroid, which is what the axis actually uses.
+    #: Not distance from the other words, which would flag a tight sub-cluster's
+    #: neighbour rather than the word pulling the mean off.
+    c = V.mean(0)
+    c = c / (np.linalg.norm(c) or 1.0)
+    sims = V @ c
+    return {"n": len(ws), "mean_pairwise": float(pw.mean()),
+            "min_pair": [ws[iu[0][lo]], ws[iu[1][lo]], float(pw[lo])],
+            "outlier": [ws[int(np.argmin(sims))], float(sims.min())],
+            "to_centroid_mean": float(sims.mean())}
+
+
 def separates(S, naughty, nice, floor=SEPARATION_FLOOR):
     """Can this axis see the contrast it is about to weigh? -> (ok, gap, correct, total)
 

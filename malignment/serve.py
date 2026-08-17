@@ -986,7 +986,21 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
     #: gets the same payload as before, and a caller that honours it can say when
     #: it decided.
     sep_ok, sep_gap, sep_correct, sep_total = slot_axis.separates(S, naughty, nice)
+    #: **WITHIN-POLE COHERENCE, WHICH `separates` STRUCTURALLY CANNOT ASK.** That
+    #: gate tests whether the two poles separate FROM EACH OTHER and says nothing
+    #: about whether one pole holds together. An incoherent pole produces an axis
+    #: measuring something other than what was tagged and passes every check:
+    #: `quit resign kill die` yields a DEATH axis and `separates` is content.
+    #:
+    #: Returned BESIDE `separates`, never inside it, because it is NOT A GATE -- a
+    #: broad pole is a legitimate authoring choice, and `min_pair` is the finding
+    #: while the mean is only context (see `coherence`). Both the Svelte panel and
+    #: `malign-slot axis` read this route, so one wiring serves the human and the
+    #: agent.
+    coh = {"naughty": slot_axis.coherence(prompt, naughty, other=nice),
+           "nice": slot_axis.coherence(prompt, nice, other=naughty)}
     return dict({
+        "coherence": coh,
         "separates": {"ok": bool(sep_ok), "gap": float(sep_gap),
                       "correct": int(sep_correct), "total": int(sep_total),
                       "floor": slot_axis.SEPARATION_FLOOR,
@@ -1005,6 +1019,37 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
         "purity": ax.purity,
         "defectors": ax.defectors,
         "n_poles": [len(naughty), len(nice)],
+        #: **WHAT THE AXIS SELECTS FOR, ON WORDS NOBODY TAGGED** (RH, 2026-08-17:
+        #: "compute the subtraction of centroids and then see if the extremes of
+        #: untagged words relate?").
+        #:
+        #: This is a stronger validity check than `coherence` and it supersedes it as
+        #: the thing to read first. Coherence measures how a pole's INPUTS are
+        #: arranged, and measurement showed it does not rank incoherent poles below
+        #: coherent ones -- an undressing pole scored 0.497 against 0.640 for the
+        #: pole that produced a death axis. These extremes show what the axis
+        #: actually DOES, which is where that defect was visible: `He told his boss
+        #: he wanted to` tagged `quit resign kill die` puts `die, perish, killed,
+        #: hanged` at its top, and a labour frame selecting for dying is legible in
+        #: one glance where 0.640 is not.
+        #:
+        #: **UNTAGGED ONLY, because the tagged words are there by construction.** A
+        #: pole word scoring extremely on its own axis is arithmetic, not evidence;
+        #: it is the held-out words that can disagree.
+        #:
+        #: Shown and not scored, for the same reason as `min_pair`: whether `perish`
+        #: belongs beside `quit` is a judgement about what the author meant, and a
+        #: number asserting it would be this route inventing the answer.
+        "neighbours": {
+            "naughty_end": [{"word": w, "s": v} for w, v in
+                            sorted(((w, v) for w, v in S.items()
+                                    if w not in set(naughty) | set(nice)),
+                                   key=lambda x: -x[1])[:10]],
+            "nice_end": [{"word": w, "s": v} for w, v in
+                         sorted(((w, v) for w, v in S.items()
+                                 if w not in set(naughty) | set(nice)),
+                                key=lambda x: x[1])[:10]],
+        },
         "scores": [{"word": w, "s": v}
                    for w, v in sorted(S.items(), key=lambda x: -x[1])],
     }, **st)
