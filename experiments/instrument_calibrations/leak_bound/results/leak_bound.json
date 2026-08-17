@@ -1,0 +1,362 @@
+{
+ "prompt": "She was so angry she wanted to",
+ "n_pairs": 50,
+ "same_sign": 48,
+ "exceeds_worst": 8,
+ "neg": 41,
+ "neg_corrected": 41,
+ "median_abs_dN": 0.022518758098490292,
+ "median_abs_corrected": 0.019754580680864945,
+ "pairs": [
+  {
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "dN": 0.002281465358398304,
+   "matched": 0.0003704320692060364,
+   "worst": 0.07645033148839742,
+   "corrected": 0.0019110332891922677
+  },
+  {
+   "aligned": "BAAI/AquilaChat2-7B",
+   "dN": -0.210237908932826,
+   "matched": -0.01115954752797598,
+   "worst": 0.028806706111767052,
+   "corrected": -0.19907836140485002
+  },
+  {
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "dN": -0.09051402797637162,
+   "matched": -0.010009737640060868,
+   "worst": 0.06938256247193277,
+   "corrected": -0.08050429033631075
+  },
+  {
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "dN": -0.0002768824616349589,
+   "matched": -0.0001668254640712311,
+   "worst": 0.09122552850234836,
+   "corrected": -0.00011005699756372778
+  },
+  {
+   "aligned": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "dN": -0.0023221397576165294,
+   "matched": -0.0005221882669868461,
+   "worst": 0.08130124793509215,
+   "corrected": -0.0017999514906296833
+  },
+  {
+   "aligned": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "dN": -0.006699573685544356,
+   "matched": -0.00160878629040877,
+   "worst": 0.08988748544316619,
+   "corrected": -0.005090787395135586
+  },
+  {
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "dN": -0.010636155746435377,
+   "matched": -0.0032514022014234877,
+   "worst": 0.11095598164891093,
+   "corrected": -0.007384753545011889
+  },
+  {
+   "aligned": "LLM360/AmberSafe",
+   "dN": -0.09449366239600408,
+   "matched": -0.008250352156402237,
+   "worst": 0.06856709112014114,
+   "corrected": -0.08624331023960184
+  },
+  {
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "dN": 0.0011386695726140453,
+   "matched": 0.0001663863275145846,
+   "worst": 0.09255098558691681,
+   "corrected": 0.0009722832450994607
+  },
+  {
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "dN": -0.017091495172103816,
+   "matched": -0.005847438202296125,
+   "worst": 0.17050297780447485,
+   "corrected": -0.011244056969807691
+  },
+  {
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "dN": 0.0011936241124698103,
+   "matched": -0.0008721065888122421,
+   "worst": 0.13003379289538086,
+   "corrected": 0.0020657307012820524
+  },
+  {
+   "aligned": "Qwen/Qwen3-8B",
+   "dN": 0.02639276626272129,
+   "matched": 0.005661165259426684,
+   "worst": 0.10547016104872942,
+   "corrected": 0.020731601003294606
+  },
+  {
+   "aligned": "RWKV/rwkv-raven-7b",
+   "dN": 0.004086037052567885,
+   "matched": 0.000692240709079807,
+   "worst": 0.07246508115424598,
+   "corrected": 0.0033937963434880775
+  },
+  {
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "dN": -0.046670470545252196,
+   "matched": -0.008622708801446532,
+   "worst": 0.0861439561374736,
+   "corrected": -0.03804776174380566
+  },
+  {
+   "aligned": "Zyphra/Zamba2-7B-Instruct",
+   "dN": -0.027645315000570325,
+   "matched": -0.004289490761328781,
+   "worst": 0.07646906159614651,
+   "corrected": -0.023355824239241544
+  },
+  {
+   "aligned": "allenai/OLMo-2-0425-1B-Instruct",
+   "dN": -0.04301847171059968,
+   "matched": -0.007739509414606783,
+   "worst": 0.09827016699822307,
+   "corrected": -0.035278962295992894
+  },
+  {
+   "aligned": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "dN": -0.043678104003297594,
+   "matched": -0.008099524454198781,
+   "worst": 0.08336467863680094,
+   "corrected": -0.035578579549098814
+  },
+  {
+   "aligned": "allenai/Olmo-3-7B-Instruct",
+   "dN": -0.009651794411472719,
+   "matched": -0.002185348574373443,
+   "worst": 0.1128201320564711,
+   "corrected": -0.007466445837099276
+  },
+  {
+   "aligned": "allenai/Olmo-3.1-32B-Instruct",
+   "dN": -0.04911378471962316,
+   "matched": -0.006761531283882626,
+   "worst": 0.07736898571654469,
+   "corrected": -0.04235225343574053
+  },
+  {
+   "aligned": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "dN": -0.015275929142152271,
+   "matched": -0.0030293249020395575,
+   "worst": 0.10603653841229975,
+   "corrected": -0.012246604240112714
+  },
+  {
+   "aligned": "baichuan-inc/Baichuan2-7B-Chat",
+   "dN": -0.013474050597407132,
+   "matched": -0.002357745328277296,
+   "worst": 0.07906325523765385,
+   "corrected": -0.011116305269129836
+  },
+  {
+   "aligned": "bigscience/bloomz-7b1",
+   "dN": -0.034396917346200366,
+   "matched": -0.006599868986252412,
+   "worst": 0.10188037967261643,
+   "corrected": -0.027797048359947955
+  },
+  {
+   "aligned": "croissantllm/CroissantLLMChat-v0.1",
+   "dN": -0.036482333037975816,
+   "matched": -0.009352316386970021,
+   "worst": 0.08565536287562729,
+   "corrected": -0.027130016651005794
+  },
+  {
+   "aligned": "deepseek-ai/deepseek-llm-7b-chat",
+   "dN": -0.013154380379965091,
+   "matched": -0.001529677734226222,
+   "worst": 0.07314719221084803,
+   "corrected": -0.01162470264573887
+  },
+  {
+   "aligned": "gl198976/mpt-7b-instruct",
+   "dN": 0.011853308808113593,
+   "matched": 0.0005152865229391037,
+   "worst": 0.07951794802518859,
+   "corrected": 0.01133802228517449
+  },
+  {
+   "aligned": "google/gemma-2-9b-it",
+   "dN": -0.1345560744046178,
+   "matched": -0.020520767176927884,
+   "worst": 0.056091061615132394,
+   "corrected": -0.11403530722768992
+  },
+  {
+   "aligned": "google/recurrentgemma-9b-it",
+   "dN": -0.06975011559386901,
+   "matched": -0.013396862685883066,
+   "worst": 0.10700626408138579,
+   "corrected": -0.05635325290798594
+  },
+  {
+   "aligned": "PKU-Alignment/beaver-7b-v1.0",
+   "dN": -0.013662927940193637,
+   "matched": -0.0009928424716867887,
+   "worst": 0.05161983218191767,
+   "corrected": -0.012670085468506847
+  },
+  {
+   "aligned": "ibm-granite/granite-3.0-8b-instruct",
+   "dN": -0.022006673003003373,
+   "matched": -0.0032291126445680904,
+   "worst": 0.07226382918027162,
+   "corrected": -0.018777560358435284
+  },
+  {
+   "aligned": "inceptionai/jais-family-6p7b-chat",
+   "dN": -0.020175861458461494,
+   "matched": -0.00259015050090841,
+   "worst": 0.07481452337989478,
+   "corrected": -0.017585710957553083
+  },
+  {
+   "aligned": "internlm/internlm2-chat-7b",
+   "dN": 0.03094745368605179,
+   "matched": 0.0030520711889951697,
+   "worst": 0.05596637398927116,
+   "corrected": 0.02789538249705662
+  },
+  {
+   "aligned": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "dN": -0.05246773566533351,
+   "matched": -0.009861189333987122,
+   "worst": 0.08563093377959846,
+   "corrected": -0.04260654633134639
+  },
+  {
+   "aligned": "kakaocorp/kanana-2-3b-instruct",
+   "dN": -0.017651825991188513,
+   "matched": -0.0030496826492758715,
+   "worst": 0.08899333969993918,
+   "corrected": -0.014602143341912642
+  },
+  {
+   "aligned": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "dN": -0.07224948231508038,
+   "matched": -0.01198614228051072,
+   "worst": 0.07634651803741818,
+   "corrected": -0.060263340034569665
+  },
+  {
+   "aligned": "m-a-p/CT-LLM-SFT-DPO",
+   "dN": -0.03414186015818717,
+   "matched": -0.0060294482027025385,
+   "worst": 0.06210948811152131,
+   "corrected": -0.02811241195548463
+  },
+  {
+   "aligned": "m-a-p/neo_7b_instruct_v0.1",
+   "dN": -0.015173772378816067,
+   "matched": -0.002876787079486216,
+   "worst": 0.09598456931908518,
+   "corrected": -0.012296985299329852
+  },
+  {
+   "aligned": "meta-llama/Llama-3.1-70B-Instruct",
+   "dN": -0.05472751459158123,
+   "matched": -0.011164316943968779,
+   "worst": 0.08937245284514665,
+   "corrected": -0.043563197647612455
+  },
+  {
+   "aligned": "meta-llama/Llama-3.1-8B-Instruct",
+   "dN": -0.06575672180692241,
+   "matched": -0.014073366329103144,
+   "worst": 0.09944519631006538,
+   "corrected": -0.051683355477819264
+  },
+  {
+   "aligned": "mistralai/Mistral-7B-Instruct-v0.1",
+   "dN": -0.002996156731634728,
+   "matched": -0.00020503943235014067,
+   "worst": 0.06225229738598496,
+   "corrected": -0.002791117299284587
+  },
+  {
+   "aligned": "openGPT-X/Teuken-7B-instruct-v0.6",
+   "dN": -0.04662977655600586,
+   "matched": -0.005855760907563082,
+   "worst": 0.06242592939755738,
+   "corrected": -0.040774015648442775
+  },
+  {
+   "aligned": "openbmb/MiniCPM5-1B",
+   "dN": -0.09302409501629064,
+   "matched": -0.017336949294597725,
+   "worst": 0.08932828993895531,
+   "corrected": -0.07568714572169291
+  },
+  {
+   "aligned": "stabilityai/stablelm-2-1_6b-chat",
+   "dN": -0.12902592768414112,
+   "matched": -0.008865484351793016,
+   "worst": 0.06889077437426877,
+   "corrected": -0.1201604433323481
+  },
+  {
+   "aligned": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "dN": -0.0019220751503858699,
+   "matched": -8.574680230577503e-05,
+   "worst": 0.08047442113650441,
+   "corrected": -0.0018363283480800948
+  },
+  {
+   "aligned": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "dN": -0.08463468899491826,
+   "matched": -0.008374592772116832,
+   "worst": 0.06589642215949183,
+   "corrected": -0.07626009622280143
+  },
+  {
+   "aligned": "tiiuae/Falcon-H1-7B-Instruct",
+   "dN": -0.0959739554767484,
+   "matched": -0.006588862604684473,
+   "worst": 0.05677072976213157,
+   "corrected": -0.08938509287206393
+  },
+  {
+   "aligned": "tiiuae/Falcon3-7B-Instruct",
+   "dN": -0.017815878132512807,
+   "matched": -0.002070999008228487,
+   "worst": 0.06974852541433364,
+   "corrected": -0.01574487912428432
+  },
+  {
+   "aligned": "tiiuae/falcon-7b-instruct",
+   "dN": -0.018700945175875047,
+   "matched": -0.0035343361255441193,
+   "worst": 0.10096163187898993,
+   "corrected": -0.015166609050330928
+  },
+  {
+   "aligned": "tiiuae/falcon-mamba-7b-instruct",
+   "dN": -0.02303084319397721,
+   "matched": -0.001153608279312151,
+   "worst": 0.05796523770555675,
+   "corrected": -0.02187723491466506
+  },
+  {
+   "aligned": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "dN": 0.01010686003635151,
+   "matched": -0.00267702678729146,
+   "worst": 0.043177404531871404,
+   "corrected": 0.012783886823642971
+  },
+  {
+   "aligned": "zai-org/glm-4-9b-chat-hf",
+   "dN": 0.004132869227957165,
+   "matched": 0.0016060579554897309,
+   "worst": 0.15925238105143188,
+   "corrected": 0.0025268112724674344
+  }
+ ]
+}
