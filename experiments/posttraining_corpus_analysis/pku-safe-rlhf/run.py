@@ -28,13 +28,18 @@ to a percentile rank over the lexicon before any averaging.
 `register_level` (IAA 0.597, NOT ESTABLISHED) and `vulgarity` (sparse, variance
 on 463 of 27,242 words) are computed and REPORTED, never used as evidence.
 """
-import argparse, csv, glob, os, re, sys
+import argparse, csv, glob, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
 CACHE = "~/.cache/huggingface/datasets/PKU-Alignment___pku-safe_rlhf"
 SEED = 20260817
 TOKEN = re.compile(r"[a-z']+")
+#: The splitter that produced `results/coding/sentences.jsonl`. It is a constant
+#: rather than a local because the coding ids are `pair_who_SENTENCEINDEX`, so
+#: changing it silently renumbers every id. `coded()` asserts the regenerated
+#: ids still cover the codings.
+SENT = re.compile(r"(?<=[.!?])\s+")
 
 #: VERBATIM from meta/M02_frame_exit/scripts/exit_markers.py. Copied rather than
 #: imported because that repo is the read-only archive; the source is named so
@@ -92,20 +97,18 @@ def k_ranks():
     """Each K dimension as a percentile rank over the lexicon. Never a level."""
     from malignment import fields
     import numpy as np
-    raw = fields._k("en")["ratings"] if hasattr(fields, "_k") else None
-    if raw is None:
-        raise SystemExit("fields._k unavailable")
-    dims = None
+    #: `_k` returns (scales, ratings, meta) -- a TUPLE. The first version of
+    #: this subscripted it as a dict and never fired, because the registered
+    #: test it belongs to never ran. A latent bug in an unexercised path.
+    dims, raw, _meta = fields._k("en")
+    dims = list(dims)
     words, vals = [], []
     for w, v in raw.items():
-        if not isinstance(v, (list, tuple)):
-            continue
-        words.append(w); vals.append(v)
+        if isinstance(v, (list, tuple)) and len(v) == len(dims):
+            words.append(w); vals.append(v)
     V = np.asarray(vals, dtype=float)
-    probe = fields.k(words[0])
-    dims = list(probe) if probe else None
-    if dims is None or V.shape[1] != len(dims):
-        raise SystemExit("dimension mismatch: %s vs width %d" % (dims, V.shape[1]))
+    if not len(V):
+        raise SystemExit("no usable K rows")
     R = np.argsort(np.argsort(V, axis=0), axis=0) / max(len(V) - 1, 1)
     return dims, {w: R[i] for i, w in enumerate(words)}
 
@@ -210,8 +213,12 @@ def main():
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--disclaim", action="store_true")
     ap.add_argument("--length", action="store_true")
+    ap.add_argument("--coded", action="store_true")
     a = ap.parse_args()
     tr, te = load("train"), load("test")
+    if a.coded:
+        coded(tr)
+        return
     if a.check:
         check(tr)
         return
@@ -331,6 +338,80 @@ def lengthcheck(tr):
     w = sum(1 for i, who, dd in sel if (tr["safer_response_id"][i] == who) == (dd > 0))
     print("length ALONE agrees with the safer verdict on %.1f%% of the %d pairs"
           % (100*w/len(sel), len(sel)))
+
+
+def disclaimer_sentences(tr):
+    """The 553 sentences that carry a disclaimer marker, in the 550 pairs where
+    exactly one response disclaims. Regenerated here rather than read back, so
+    the ids in `codings.json` are checked against the corpus every run."""
+    idx, out = both_unsafe(tr), []
+    for i in idx:
+        a = len(E_ASSIST.findall(tr["response_0"][i]))
+        b = len(E_ASSIST.findall(tr["response_1"][i]))
+        if (a > 0) != (b > 0):
+            who = 0 if a > b else 1
+            for j, s in enumerate(SENT.split(tr["response_%d" % who][i])):
+                if E_ASSIST.search(s):
+                    out.append(("%d_%d_%d" % (i, who, j), s,
+                                tr["safer_response_id"][i] == who,
+                                tr["better_response_id"][i] == who))
+    return out
+
+
+def coded(tr):
+    """What KIND of disclaimer wins? Six declared categories, coded blind by two
+    agents that never saw the outcome (`results/coding/workflow.js`).
+
+    THE PRIMARY CODER IS B BECAUSE B IS THE ONLY COMPLETE PASS, not because of
+    anything in the result. Coder A's batch 2 (lines 187-279) was refused by the
+    API, so A has 460 of 553. Choosing the complete pass is forced; choosing the
+    one with the nicer table would not be."""
+    from scipy import stats
+    import collections
+    p = os.path.join(RESULTS, "coding", "codings.json")
+    C = json.load(open(p, encoding="utf-8"))
+    A, B = C["coder_A"], C["coder_B"]
+    sents = disclaimer_sentences(tr)
+    outcome = {i: (safer, better) for i, _, safer, better in sents}
+    missing = [i for i in B if i not in outcome]
+    print("sentences regenerated %d | coder B %d | coder A %d | ids not in corpus %d"
+          % (len(sents), len(B), len(A), len(missing)))
+    assert not missing, "coded ids absent from the corpus: %s" % missing[:5]
+
+    both = [i for i in A if i in B]
+    ag = [i for i in both if A[i] == B[i]]
+    print("AGREEMENT  %d/%d = %.4f  (declared: %s)"
+          % (len(ag), len(both), len(ag) / len(both), C["raw_agreement"]))
+    dis = collections.Counter(tuple(sorted((A[i], B[i]))) for i in both if A[i] != B[i])
+    print("  disagreements: %s"
+          % ", ".join("%s/%s x%d" % (k[0], k[1], n) for k, n in dis.most_common(5)))
+
+    def table(cat, label, col):
+        print("\n-- %s | %s (n=%d)" % (label, col, len(cat)))
+        print("   %-12s %6s %8s   %-18s %s" % ("category", "n", "wins", "95% CI", "p"))
+        for c, _ in collections.Counter(cat.values()).most_common():
+            ids = [i for i, v in cat.items() if v == c]
+            if len(ids) < 30:
+                print("   %-12s %6d   UNPOWERED, not a null" % (c, len(ids))); continue
+            k = 0 if col == "safer" else 1
+            w = sum(1 for i in ids if outcome[i][k])
+            r = stats.binomtest(w, len(ids), 0.5); lo, hi = r.proportion_ci()
+            print("   %-12s %6d %7.1f%%   [%.3f, %.3f]   %-9.3g%s"
+                  % (c, len(ids), 100 * w / len(ids), lo, hi, r.pvalue,
+                     " *" if r.pvalue < 0.05 else ""))
+
+    for col in ("safer", "better"):
+        table(B, "PRIMARY: coder B, complete", col)
+    table({i: A[i] for i in ag}, "SENSITIVITY: both coders agreed", "safer")
+
+    rows = [{"id": i, "sentence": s, "coder_B": B.get(i), "coder_A": A.get(i),
+             "agree": (A.get(i) == B.get(i)) if i in A else None,
+             "safer": int(sa), "better": int(be)} for i, s, sa, be in sents]
+    with open(os.path.join(RESULTS, "coding", "coded.csv"), "w", newline="",
+              encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader()
+        for r in rows: w.writerow(r)
+    print("\n  ->", os.path.join(RESULTS, "coding", "coded.csv"))
 
 
 if __name__ == "__main__":

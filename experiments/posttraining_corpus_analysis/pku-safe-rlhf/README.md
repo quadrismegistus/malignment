@@ -1,7 +1,8 @@
 # PKU-SafeRLHF — what does "safer" reward?
 
 **id:** pku_disclaimer **status:** one result, length-controlled, replicated
-out of sample. Registration `1f35b01`, amendments A1-A3.
+out of sample, and its internal structure coded blind by two independent coders.
+Registration `1f35b01`, amendments A1-A3.
 
 # THE FINDING
 
@@ -47,6 +48,60 @@ and **costs conciseness**. It should be neutral or negative there. It wins 64.5%
 
 **Either the declared decoupling leaks, or hedged advice is being read as more
 informative.** Not resolved here.
+
+# WHICH KIND OF DISCLAIMER? THE ONE THAT HELPS YOU DO IT BUYS NOTHING
+
+All 553 disclaimer sentences were coded into six categories declared before the
+coding, by two agents given the scheme and the sentences and **not the outcome**
+(`results/coding/workflow.js`, run `wf_ec435384-084`). Reproduce with
+`run.py --coded`.
+
+    AGREEMENT  422/460 = 0.917 raw, on the sentences both coders reached
+
+    category      n     safer     better    what the sentence does
+    PERMISSION    76    75.0% *   67.1% *   permits it, conditions HOW
+    LEGAL        170    72.4% *   67.1% *   asserts it is illegal
+    RISK_SELF    118    66.9% *   66.1% *   warns YOU may get caught
+    OPERATIONAL  131    56.5%     51.9%     tactical: planning, what won't work
+    HARM_OTHER    24    unpowered           harm to another party
+    REFUSAL       10    unpowered           declines
+
+    * p < 0.05.  OPERATIONAL: p=0.162 safer, p=0.727 better.
+
+**OPERATIONAL is the one category at chance, and it is at chance on BOTH
+columns.** A sentence that makes the reader better at the harmful act is not
+rewarded — but it is not punished either, which is the part worth sitting with.
+Everything that positions the act against something external to it — the law, the
+reader's own exposure, a condition on conduct — wins by roughly the same margin.
+
+The ordering survives the coder swap and the disagreement drop: on coder A's 460,
+OPERATIONAL 54.6% against LEGAL 72.5%; on the 422 both coders agreed, 58.2%
+against 71.3%.
+
+## THE KEYWORD SPLIT GOT THIS BACKWARDS, WHICH IS WHY THE CODING WAS RUN
+
+An ad-hoc keyword partition of the same 553 sentences put OPERATIONAL level with
+LEGAL and called RISK_SELF the only null. **The coding inverts both cells.** Those
+patterns were exploratory and are not retained, so this is recorded as the reason
+the coding happened and not as a measured contrast — but the direction of the
+error is the lesson: a keyword split left over a third of the sentences unmatched
+and a seventh matching several categories, and the residue was not neutral.
+
+## THREE THINGS THIS CODING DOES NOT HAVE
+
+- **HARM_OTHER is unpowered and the scheme is soft exactly there.** The commonest
+  disagreement by far is HARM_OTHER against RISK_SELF (16 of 38). Coder A put 41
+  sentences in HARM_OTHER, coder B 24. **Whether a warning is about you or about
+  your victim is the boundary the scheme does not draw cleanly**, and no claim
+  rests on that cell.
+- **One batch was refused, not lost.** Coder A's batch 2 (lines 187-279) came back
+  `API Error: Opus 4.8 can't help with this`, request `req_011Ce8vweP9jVumVEeqXRFJs`
+  — 93 harmful instructions in one prompt, stripped of the framing that marks them
+  as data. So coder A is 460 of 553 and **coder B is primary because it is the
+  complete pass**, a choice forced by completeness rather than by the table.
+- **More turtles.** The categories were coded by LLMs, of sentences written by
+  LLMs, labelled by humans and AI in an undisclosed mix. Each layer is named
+  where it enters.
 
 # SCOPE, AND IT IS TURTLES
 
