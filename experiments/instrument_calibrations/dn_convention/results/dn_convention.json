@@ -9,8 +9,14 @@
   475
  ],
  "identical_by_design": false,
- "smallest_dN_quartile_pct": 31.38535579236851,
- "largest_dN_quartile_pct": 2.9735304228257133,
+ "smallest_dN_quartile_pct": 32.99896229678312,
+ "largest_dN_quartile_pct": 2.3175371843652703,
+ "quartiles_cut": "per-pair, then averaged",
+ "WITHDRAWN_pooled_cut": {
+  "smallest": 31.38535579236851,
+  "largest": 2.9735304228257133,
+  "why": "cross-pair |dN| comparison, [6374] rule 3"
+ },
  "per_pair": {
   "01-ai/Yi-1.5-9B -> 01-ai/Yi-1.5-9B-Chat": 14.947368421052632,
   "BAAI/Aquila2-7B -> BAAI/AquilaChat2-7B": 13.052631578947368,

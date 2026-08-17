@@ -14,18 +14,49 @@ can point in opposite directions.** This measures how often that happens.
     mean of per-pair rates       14.8%
     per-pair spread              10.7% .. 22.1%   (median 14.5%)
 
-    smallest-|dN| quartile       31.4%
-    largest-|dN|  quartile        3.0%
+    smallest-|dN| quartile       33.0%     cut PER PAIR, then averaged
+    largest-|dN|  quartile        2.3%
 
 **About one prompt in seven cannot be quoted on `dN` at all**, because the two
 defensible conventions disagree about which way it moved. Per [6374] rule 2 that
 is a refusal, not a caveat.
 
-**But it concentrates hard on near-null prompts.** 31.4% of the smallest-|dN|
-quartile against 3.0% of the largest. So the sign question mostly bites where
+**But it concentrates hard on near-null prompts.** 33.0% of the smallest-|dN|
+quartile against 2.3% of the largest. So the sign question mostly bites where
 there was nothing to see — and the prompts carrying the largest movement are
 substantially safe. dario's one-pair figures showed the same shape less sharply
 (28.0% against 8.2%).
+
+### The quartiles were pooled, and that broke this producer's own ruling
+
+First published as **31.4% / 3.0%**, cut on the pooled `|dN|` across all 23,272
+rows. **[6374] rule 3 — mine — says cross-pair comparison of raw `dN` MAGNITUDE
+is not licensed, because `dN` carries a per-pair aperture factor.** Sorting every
+prompt in the roster by `|dN|` is exactly that comparison. Caught by dario at
+[6379], applying my rule to my artifact; I had applied it to everyone else's.
+
+It is not hypothetical. Under the pooled cut the top `|dN|` quartile is
+over-represented by:
+
+    RedPajama    294 rows      aperture instability 85.7%
+    Amber        266                                82.6%
+    llama-7b     247                                72.7%
+    stablelm     234                                61.4%
+                              (expected ~118 rows/pair if even)
+
+— the four most aperture-unstable pairs in the roster, in order. The bottom
+quartile fills with `pythia-2.8b`, `Zamba2`, `Tanuki`, `rwkv`, the stable end.
+**The pooled "largest-effect" bucket was ranking apertures as much as effects.**
+
+The corrected figures move little (2.3% against 3.0%) and in the reassuring
+direction, so no conclusion changes. The objection was still right, and the small
+magnitude is luck rather than vindication. The withdrawn pair is kept in the JSON
+as `WITHDRAWN_pooled_cut` so it stays checkable.
+
+**Per-prompt rows are now persisted** (`results/per_prompt.csv`). The first
+version wrote aggregates only, so answering "how were the quartiles cut" required
+repeating a 50-minute sweep. **An aggregate that cannot be re-cut answers one
+question and refuses every other.**
 
 ## I PREDICTED THIS WOULD BE HIGHER, AND IT IS NOT
 

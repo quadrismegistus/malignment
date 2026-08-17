@@ -177,18 +177,40 @@ def report(per_pair):
     avg = sum(rates) / max(len(rates), 1)
     counts = {v["n"] for v in keep.values()}
 
-    #: dario's shape check: disagreement concentrated near zero would make this
-    #: a small-effect nuisance. On their pair it was NOT only near zero.
-    ordered = sorted(allrows, key=lambda r: abs(r["dN"]))
-    q = max(len(ordered) // 4, 1)
-    lo = 100.0 * sum(r["sign_disagree"] for r in ordered[:q]) / q
-    hi = 100.0 * sum(r["sign_disagree"] for r in ordered[-q:]) / q
+    #: **THE QUARTILES ARE CUT PER PAIR, THEN AVERAGED. The first version cut
+    #: them on the POOLED |dN| and that broke this producer's own governing
+    #: ruling.** [6374] rule 3: cross-pair comparison of raw `dN` MAGNITUDE is
+    #: not licensed, because `dN` carries a per-pair aperture factor. Sorting all
+    #: 23,272 rows by `|dN|` IS that comparison, so the "largest quartile" was
+    #: partly a highest-aperture bucket rather than a largest-effect one -- and
+    #: that bucket carries the reassuring half of the headline, the number a seat
+    #: actually acts on. Caught by dario at [6379], applying my own rule to my
+    #: own artifact.
+    #:
+    #: Both are computed. The pooled pair is retained ONLY so the withdrawn
+    #: figure stays checkable rather than disappearing.
+    def _quartiles(rows):
+        o = sorted(rows, key=lambda r: abs(r["dN"]))
+        q = max(len(o) // 4, 1)
+        return (100.0 * sum(r["sign_disagree"] for r in o[:q]) / q,
+                100.0 * sum(r["sign_disagree"] for r in o[-q:]) / q)
+
+    per = [_quartiles(v["rows"]) for v in keep.values() if len(v["rows"]) >= 8]
+    lo = sum(x for x, _ in per) / len(per)
+    hi = sum(y for _, y in per) / len(per)
+    pooled_lo, pooled_hi = _quartiles(allrows)
 
     out = {"pooled_pct": pooled, "per_pair_mean_pct": avg,
            "n_pairs": len(keep), "n_prompt_rows": len(allrows),
            "prompt_counts_per_pair": sorted(counts),
            "identical_by_design": len(counts) == 1,
            "smallest_dN_quartile_pct": lo, "largest_dN_quartile_pct": hi,
+           "quartiles_cut": "per-pair, then averaged",
+           #: Kept so the withdrawn figure remains checkable. NOT to be quoted:
+           #: a pooled cut on |dN| is the cross-pair magnitude comparison that
+           #: [6374] rule 3 refuses.
+           "WITHDRAWN_pooled_cut": {"smallest": pooled_lo, "largest": pooled_hi,
+                                    "why": "cross-pair |dN| comparison, [6374] rule 3"},
            "per_pair": {"%s -> %s" % k: 100.0 * v["dis"] / v["n"]
                         for k, v in sorted(keep.items())},
            "flagged_excluded_from_headline": {
@@ -200,8 +222,10 @@ def report(per_pair):
     print("    mean of per-pair rates     %.1f%%" % avg)
     print("    identical by design?       %s (prompt counts %s)"
           % (out["identical_by_design"], sorted(counts)))
-    print("    smallest-|dN| quartile     %.1f%%" % lo)
+    print("    smallest-|dN| quartile     %.1f%%  (cut PER PAIR, then averaged)" % lo)
     print("    largest-|dN|  quartile     %.1f%%" % hi)
+    print("    [withdrawn pooled cut      %.1f%% / %.1f%% -- cross-pair |dN|, "
+          "[6374] rule 3]" % (pooled_lo, pooled_hi))
     print("    pairs %d, prompt-rows %d" % (len(keep), len(allrows)))
     worst = sorted(out["per_pair"].items(), key=lambda kv: -kv[1])[:6]
     print("\n    worst pairs:")
@@ -212,7 +236,21 @@ def report(per_pair):
     os.makedirs(RESULTS, exist_ok=True)
     p = os.path.join(RESULTS, "dn_convention.json")
     json.dump(out, open(p, "w"), indent=1)
-    print("\n  wrote %s" % p)
+    #: **PER-PROMPT ROWS ARE PERSISTED.** The first version wrote aggregates
+    #: only, so dario's question about how the quartiles were cut could not be
+    #: answered without repeating a 50-minute sweep. An aggregate that cannot be
+    #: re-cut is an answer to one question and a refusal of every other.
+    import csv
+    q = os.path.join(RESULTS, "per_prompt.csv")
+    with open(q, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["base", "aligned", "prompt", "dN", "dN_renorm",
+                    "sign_disagree", "base_scored_mass", "post_scored_mass"])
+        for (b, a), v in sorted(per_pair.items()):
+            for r in v["rows"]:
+                w.writerow([b, a, r["prompt"], r["dN"], r["dN_renorm"],
+                            int(r["sign_disagree"]), r["tb"], r["tp"]])
+    print("\n  wrote %s\n  wrote %s" % (p, q))
 
 
 def main():
