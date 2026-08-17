@@ -75,6 +75,21 @@ Read the 8.2% above as a fact about `gl198976/mpt-7b`, not about the instrument.
 
 Neither convention is promoted. Renormalising divides by `T`, and malign measured `T` to be a MEDIATOR rather than an instrument constant -- aligned `T` exceeds base in 39 of 50 pairs (sign test p = 9.0e-05), and `dT` tracks the change in top-1 concentration at r = 0.799. Dividing by it conditions on a post-treatment variable. Not renormalising asserts the residual sits at `s = 0`, which is false in a known direction. **Where `sign_disagree` fires the pair is not quotable on `dN` at all** -- a refusal, not a caveat.
 
+## EVERY RATE ON THIS PAGE ASSUMED LEAK INDEPENDENCE, AND THAT ASSUMPTION IS FALSE
+
+The 16.2% here and the 14.8% roster figure both treat the unresolved mass in each cell as contributing to `dN` in a direction uncorrelated across cells. Measured (malign, [6390], `experiments/instrument_calibrations/leak_bound/`): the matched leak has **the SAME SIGN as `dN` in 48 of 50 pairs, 96%**, where independence predicts 50%.
+
+The mechanism is one this folder already measured from the other end. The residual is enriched in lexicon words (27.1% vanish below theta against 16.9% for controls); alignment pushes lexicon words below theta; so unresolved mass grows in the naughty direction **in the aligned arm specifically**. Same shape as `T` being a mediator rather than an instrument constant.
+
+**The results survive, because the correction is subtractive and small:**
+
+    displacing (dN < 0)              41/50  ->  41/50 after correction
+    median |dN|                    0.02252  ->  0.01975   (88% survives)
+    sign flips                                       0
+    |dN| exceeding the WORST-case bound            8/50
+
+**But 12% is a FLOOR on the correction and must not be quoted as its size.** The correction is `matched`, which assumes the tail looks like the head -- and this folder is where that was measured to be false. A bound built on an assumption its own evidence contradicts is a lower bound, not an estimate.
+
 ## The top-N rank cap, tested (`cap_probe.py`)
 
 RH's proposal: take the top 50 words from each arm, and refuse the comparison where an arm has fewer than 50 candidates. Measured over the same sample, 159 eligible of 200 drawn.

@@ -63,7 +63,8 @@ Checked against what v3 actually holds (ClickHouse tables and `experiments/*/res
 ## 5. Blocked or waiting on someone else
 
 - **Any panel that renders `dN`.** Two conventions are emitted (`dN` and `dN_renorm`) and neither is canonical; where they disagree in sign the pair is not quotable at all, which is 14.8% of prompts at roster scale. A panel that picks one silently would be making a ruling that is RH's. `sign_disagree` is already in the payload, so the panel can refuse rather than choose.
-- **Anything reading `p` closely.** `term` sums the model's diffuse tail across 48,197 boundary tokens and multiplies into every `p`. Whether that is cosmetic for ordinary words is unmeasured, and it is a v4 question.
+- **Anything reading `p` closely.** `term` multiplies into every `p`. I recorded "48,197 boundary tokens" here from [6387]; malign corrected it at [6390] and the number is a CJK surface -- for a Latin surface mpt marks 28,823 space-initial, 1,247 punct, 155 empty and **2** CJK. The `murm` 0.534 figure is model-specific too (0.0065 on mpt, i.e. correctly near-certain the word continues).
+- **What is real is the punctuation boundary, and it is not a defect of ours** -- it is open in the literature, with Pimentel's own code carrying `# ToDo: Should punctuation be a bow as well?` and the mask commented out. Excluding punctuation from the boundary set rescales words DIFFERENTIALLY, so it changes rankings: `kill` 0.93x, `punch` 0.99x, `spit` 0.56x, **`scream` 0.19x, `cry` 0.12x**. It lands hardest on exactly the substitutes the displacement result is about. RH's ruling.
 
 ## 6. Testing, of which there is none
 
