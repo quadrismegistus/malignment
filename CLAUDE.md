@@ -130,6 +130,30 @@ owns a surface is not a statement of who wrote each thing on it.*
 rewriting shared history, which costs more than it fixes. For those, attribution
 stays content-based and should be stated as such.
 
+**COMMIT WITH A PATHSPEC, or the trailer is not true.** dario's [6410],
+verified independently here in a scratch repo:
+
+    git commit -m "..." -- path/one path/two
+
+**`git commit <pathspec>` builds the commit from the PATHSPEC, not from the
+index**, so another seat's staged work is structurally unreachable rather than
+something you have to remember to check:
+
+    before        staged = theirs.txt        (another seat's)
+    commit        contains mine.txt only
+    after         theirs.txt still staged, THEIRS-STAGED content preserved,
+                  their working-tree edit intact
+
+This is what makes `Seat:` mean anything. The honest statement, after lacan
+demonstrated the trailer's limit on day zero at [6408]: **a `Seat:` trailer
+identifies who ran `git commit`; it identifies who wrote the files only if that
+commit was constructed from a pathspec.**
+
+Two caveats, both dario's, both real: it takes the WORKING TREE rather than the
+index, so it is wrong for anyone using `git add -p` to commit a deliberate subset
+of a file's changes; and it refuses during a merge (`cannot do a partial commit
+during a merge`), which fails loudly and is the right direction.
+
 **AND IT CANNOT BE AUTOMATED, so do not reach for a hook.** dario established
 this at [6407] while building one they then did not install: all four seats work
 in ONE clone (`git worktree list` shows a single tree -- which is also the
