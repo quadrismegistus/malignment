@@ -36,6 +36,7 @@ cached and an uncached cell are different measurements of one prompt and both ar
 kept. Do not mix them inside one corpus.
 """
 import argparse
+import os
 import sys
 
 from malignment import twp as T
@@ -58,6 +59,20 @@ def main():
     #: afterwards would stamp a cell with the wrong instrument.
     T.USE_PROMPT_CACHE = bool(a.cache)
     ck = Checkpoint(a.model)
+    #: **THE TEE LIVES IN `runners.main()`, NOT IN `Runner.run()`.** So a caller
+    #: reaching `run_twp` directly -- which this file does, and which was the
+    #: whole point of becoming a thin wrapper -- gets NO run.log. I removed the
+    #: one I had written on the assumption that `Runner` provided it, and
+    #: committed a message saying logging now went beside the data at the moment
+    #: it stopped doing so.
+    #:
+    #: `run.log` rsyncs with the data; a log in /tmp does not travel with the
+    #: cells it describes.
+    from malignment.runners import PRODUCER, _Tee
+    logdir = os.path.join(ck.dir, PRODUCER)
+    os.makedirs(logdir, exist_ok=True)
+    tee = _Tee(os.path.join(logdir, "run_v4.log"))
+    sys.stdout = tee
     prompts = (ck.neighbour_prompts() if a.neighbours
                else sorted({p.text for p in Prompts.all()}))
     prompts.sort(key=lambda p: not T.is_cjk(p))
@@ -65,7 +80,11 @@ def main():
     print("%s\n  rules=%s  cache=%s  prompts=%d (%d CJK first)"
           % (a.model, V4.ADOPTED.label(), bool(a.cache), len(prompts),
              sum(1 for p in prompts if T.is_cjk(p))), flush=True)
-    return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit)
+    try:
+        return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit)
+    finally:
+        sys.stdout = tee.stream
+        tee.close()
 
 
 if __name__ == "__main__":
