@@ -34,6 +34,7 @@ more than the rule.
 import argparse
 import json
 import os
+import sys
 import time
 
 import torch
@@ -51,6 +52,8 @@ def main():
     ap.add_argument("--device", default="mps")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--every", type=int, default=100)
+    ap.add_argument("--neighbours", action="store_true",
+                    help="declared-neighbour prompts instead of every admitted one")
     ap.add_argument("--cache", action="store_true",
                     help="prompt KV cache: ~2x, and NOT bit-identical")
     a = ap.parse_args()
@@ -80,34 +83,45 @@ def main():
                 "rule_version": V4.RULE_VERSION, "dict_sha": T.dict_sha(),
                 "rules": rules.label(), "prompt_cache": bool(a.cache)}
 
-    #: the population is what v3 WROTE, read from its own keys
-    v3keys = [k for k, _v in st.items() if k.get("rule_version") == 3]
-    prompts = []
-    seen = set()
-    for k in v3keys:
-        p = k.get("prompt")
-        if p and p not in seen:
-            seen.add(p)
-            prompts.append(p)
-    #: **CELLS WHERE THE RULE BITES GO FIRST.** v3's stash order put all 407 of
-    #: Mistral's zh prompts at positions 2299-2705, so the first Chinese cell
-    #: would have arrived 117 MINUTES INTO A 138-MINUTE RUN -- every informative
-    #: cell in the last 20 minutes, and a defect in the CJK path invisible until
-    #: then. Ordering by `is_cjk` costs nothing and turns a two-hour wait for the
-    #: first signal into a two-minute one. RH asked for this before the run, not
-    #: after, which is the only reason it was cheap.
+    #: **THE POPULATION IS THE DECLARATION, NOT v3's OUTPUT.** My first version
+    #: read v3's own keys, reasoning that a comparison is only valid on cells v3
+    #: produced. That is right for a PAIRED COMPARISON and wrong for building a
+    #: corpus, because **v3's skips are not neutral**: a prompt v3 skipped for a
+    #: defect v4 FIXES could then never be reached. `checkpoint.py` names this
+    #: exactly -- *"a skip is an ATTEMPT, not a result ... a later tokenizer fix
+    #: would find the prompt 'done' and never re-offer it, exactly how internlm2's
+    #: 402 prompts would have stayed lost."* I imported the failure it documents.
     #:
-    #: Detected from the PROMPT STRING, not from the `prompts` table, so the
-    #: runner keeps working on a corpus the table does not know about.
+    #: And `runners.py:451` already sources from `Prompts`, so v3's own producer
+    #: reads the declaration and I had diverged from the production path for no
+    #: reason. RH caught both.
+    from malignment.prompts import Prompts
+    if a.neighbours:
+        prompts = ck.neighbour_prompts()
+        src = "declared neighbours"
+    else:
+        prompts = sorted({p.text for p in Prompts.all()})
+        src = "Prompts.all() -- every ADMITTED prompt"
+    #: cells where the rule BITES first: v3's stash order put all 407 of
+    #: Mistral's zh prompts last, so the first informative cell arrived 117
+    #: minutes into a 138 minute run.
     prompts.sort(key=lambda p: not T.is_cjk(p))
     if a.limit:
         prompts = prompts[:a.limit]
     todo = [p for p in prompts if v4key(p) not in st]
-    print("%s\n  rules=%s  prompt_cache=%s  v3 cells=%d  todo=%d\n  stash=%s"
+    print("%s\n  rules=%s  prompt_cache=%s  prompts=%d  todo=%d\n  stash=%s"
           % (a.model, rules.label(), bool(a.cache), len(prompts), len(todo),
              st.path), flush=True)
+    print("  population: %s" % src, flush=True)
     if not todo:
         print("  nothing to do"); return
+
+    #: **run.log BESIDE THE DATA, like v3.** `runners.py` tees there deliberately
+    #: -- *"it rsyncs with the data"* -- so a run's provenance travels with its
+    #: output instead of sitting in whatever /tmp file the launcher chose.
+    from malignment.runners import Tee
+    tee = Tee(os.path.join(os.path.dirname(st.path), "run_v4.log"))
+    sys.stdout = tee
 
     torch.set_grad_enabled(False)
     tok, loader = T.load_tokenizer(a.model)
@@ -156,6 +170,8 @@ def main():
             print("  %5d/%d  %.2fs/cell  eta %.0f min"
                   % (i, len(todo), el / i, (len(todo) - i) * el / i / 60), flush=True)
     print("DONE %d cells in %.0f min" % (len(todo), (time.time() - t0) / 60), flush=True)
+    sys.stdout = tee.stream
+    tee.close()
 
 
 if __name__ == "__main__":
