@@ -82,8 +82,20 @@ Checked against what v3 actually holds (ClickHouse tables and `experiments/*/res
 - **Anything reading `p` closely.** `term` multiplies into every `p`. I recorded "48,197 boundary tokens" here from [6387]; malign corrected it at [6390] and the number is a CJK surface -- for a Latin surface mpt marks 28,823 space-initial, 1,247 punct, 155 empty and **2** CJK. The `murm` 0.534 figure is model-specific too (0.0065 on mpt, i.e. correctly near-certain the word continues).
 - **What is real is the punctuation boundary, and it is not a defect of ours** -- it is open in the literature, with Pimentel's own code carrying `# ToDo: Should punctuation be a bow as well?` and the mask commented out. Excluding punctuation from the boundary set rescales words DIFFERENTIALLY, so it changes rankings: `kill` 0.93x, `punch` 0.99x, `spit` 0.56x, **`scream` 0.19x, `cry` 0.12x**. It lands hardest on exactly the substitutes the displacement result is about. RH's ruling.
 
-## 6. Testing, of which there is none
+## 6. Testing — there is some now (`ba769ef`)
 
-The archive shipped Playwright. v3 has no UI test of any kind, and this session shipped three bugs that only the rendered page would have caught: a focus ring drawn over the plot, an aspect ratio measured from the wrong element, and a viewport-relative height that is wrong the moment the page scrolls. All three were found by looking, which does not scale and did not catch them before they were committed.
+Playwright, `npm run test:e2e`. Six tests: five panels plus the three-level drill to a pair's word table. Each assertion traces to a defect that shipped on 2026-08-17 rather than to a coverage target, and each was watched failing.
 
-The cheapest useful test is not a full suite: it is one smoke run that loads each panel against a live server and asserts no console error and a non-empty root. That would have caught none of those three, which is worth saying out loud -- **the class of bug this panel produces is visual, and the honest first test is a screenshot diff, not a DOM assertion.**
+What it catches, in order of cheapness: uncaught page errors (the `each_key_duplicate` crash), failed in-page requests (the broken `<img>` whose URL lacked the `/api` prefix), and screenshot diffs at a 0.5% pixel threshold (the focus ring over the plot, `punch` printed on `cry`).
+
+What it does NOT catch, established by trying: **document-level assets.** Renaming `static/favicon.svg` and running the suite passed, because a favicon is fetched outside the page's request lifecycle. An earlier version of the config claimed otherwise.
+
+Still open:
+
+- **No test presses `draw` on the Plots tab.** A render is ~13s cold and would dominate the suite, so the panel is screenshotted in its pre-draw state. That leaves the plot-render path — the one that broke on the missing plotnine and on the `/api` prefix — covered only by the API-level checks.
+- **The baselines are `chromium-darwin` and machine-specific**, which is Playwright's convention and honest, but means the suite is a local guard rather than a CI one until someone decides what CI here would be.
+- **`docs/test_howto.py` has no UI equivalent.** The Python side has executable documentation; nothing checks that this file's claims about the app are still true.
+
+## 6b. The original note, kept because it was right
+
+The archive shipped Playwright. v3 had no UI test of any kind, and this session shipped three bugs that only the rendered page would have caught. All three were found by looking, which does not scale and did not catch them before they were committed. **The class of bug this panel produces is visual, and the honest first test is a screenshot diff, not a DOM assertion** -- which is what got built.
