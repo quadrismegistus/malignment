@@ -1,0 +1,73 @@
+{
+  "base": "gl198976/mpt-7b",
+  "post": "gl198976/mpt-7b-instruct",
+  "cap": 50,
+  "seed": 20260817,
+  "n_shared_prompts": 2878,
+  "n_drawn": 200,
+  "n_eligible": 159,
+  "n_refused": 41,
+  "refused_residual_base_mean": 0.18578598268097268,
+  "eligible_residual_base_mean": 0.270895666821084,
+  "aperture": {
+    "UNION": {
+      "n_words_mean": 153.8427672955975,
+      "mass_base_mean": 0.7291044412989832,
+      "mass_post_mean": 0.7705155864464004,
+      "aperture_gap_mean": 0.041411145147416874,
+      "aperture_gap_abs_mean": 0.04261901191571223,
+      "one_arm_only_mean": 49.477987421383645,
+      "top1_share_mean": 0.18015039166152988
+    },
+    "CAP_UNION": {
+      "n_words_mean": 59.37106918238994,
+      "mass_base_mean": 0.6421193157562394,
+      "mass_post_mean": 0.7016801189780051,
+      "aperture_gap_mean": 0.05956080322176579,
+      "aperture_gap_abs_mean": 0.06226681808035994,
+      "one_arm_only_mean": 4.056603773584905,
+      "top1_share_mean": 0.21892000830881006
+    },
+    "CAP_INTER": {
+      "n_words_mean": 49.75471698113208,
+      "mass_base_mean": 0.62205155338969,
+      "mass_post_mean": 0.6829478156811583,
+      "aperture_gap_mean": 0.06089626229146825,
+      "aperture_gap_abs_mean": 0.0636192360586402,
+      "one_arm_only_mean": 0.0,
+      "top1_share_mean": 0.2359936075710454
+    }
+  },
+  "agreement_vs_UNION": {
+    "CAP_UNION/dN": {
+      "pearson": 0.9754894636626968,
+      "spearman": 0.953110819202293,
+      "sign_agree": 0.8805031446540881
+    },
+    "CAP_UNION/dN_rank": {
+      "pearson": 0.9764192320001347,
+      "spearman": 0.9709995223310247,
+      "sign_agree": 0.9119496855345912
+    },
+    "CAP_UNION/delta": {
+      "pearson": 0.9855301496129526,
+      "spearman": 0.9734565321232387,
+      "sign_agree": 0.9433962264150944
+    },
+    "CAP_INTER/dN": {
+      "pearson": 0.9626348996298439,
+      "spearman": 0.9338697157869598,
+      "sign_agree": 0.8679245283018868
+    },
+    "CAP_INTER/dN_rank": {
+      "pearson": 0.9601090733314509,
+      "spearman": 0.9493103654167663,
+      "sign_agree": 0.8805031446540881
+    },
+    "CAP_INTER/delta": {
+      "pearson": 0.9707465289670212,
+      "spearman": 0.9416706472414618,
+      "sign_agree": 0.8805031446540881
+    }
+  }
+}

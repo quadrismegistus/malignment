@@ -105,9 +105,29 @@ from malignment import roster, slot_axis                      # noqa: E402
 from malignment.checkpoint import Checkpoint                  # noqa: E402
 from malignment.slot_axis import Axis, _normal_scores         # noqa: E402
 
-sys.path.insert(0, os.path.join(REPO, "experiments", "instrument_calibrations",
-                                "generic_axis"))
-from run import LEXICAL_PAIRS  # noqa: E402,E501  the SAME twelve, imported not retyped
+def _load(name, path):
+    """Import a module by PATH under an explicit name.
+
+    **NOT `sys.path.insert` plus `from run import ...`.** Both this folder and
+    `generic_axis/` contain a `run.py`, so a bare `import run` resolves to
+    whichever directory won the path race -- and any second script in THIS folder
+    importing this one would make `run` resolve to itself, yielding a partially
+    initialised module and an ImportError that names the wrong thing entirely.
+    The collision is guaranteed by the repo's own one-run.py-per-experiment
+    convention, so it has to be addressed by name rather than by ordering.
+    """
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, path)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+#: The SAME twelve pairs, imported rather than retyped.
+LEXICAL_PAIRS = _load("generic_axis_run",
+                      os.path.join(REPO, "experiments", "instrument_calibrations",
+                                   "generic_axis", "run.py")).LEXICAL_PAIRS
 
 BASE = "gl198976/mpt-7b"
 SEED = 20260817

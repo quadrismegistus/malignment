@@ -45,6 +45,26 @@ Because `ps` depends only on rank, that assumption can be replaced with a bound 
 
 Two readings, not exclusive: the adversarial placement is very conservative, since a residual is a long tail of many small words rather than a lump at one end; and theta is high enough that per-prompt directional claims rest on the imputation whichever statistic is used. It is an argument for aggregating across prompts, and for lowering theta if per-item claims are wanted. **It is reported and it is not offered as a usable per-prompt test.**
 
+## The top-N rank cap, tested (`cap_probe.py`)
+
+RH's proposal: take the top 50 words from each arm, and refuse the comparison where an arm has fewer than 50 candidates. Measured over the same sample, 159 eligible of 200 drawn.
+
+| regime | words | mass base | mass post | aperture gap | one-arm-only |
+| --- | --- | --- | --- | --- | --- |
+| `UNION` (theta, as now)          | 153.8 | 0.729 | 0.771 | **+0.0414** | 49.5 |
+| `CAP_UNION` (top-50 each arm)    | 59.4  | 0.642 | 0.702 | **+0.0596** | 4.1 |
+| `CAP_INTER` (top-50 in both)     | 49.8  | 0.622 | 0.683 | **+0.0609** | 0.0 |
+
+**It fixes set membership and worsens mass.** One-arm-only words fall from 49.5 per prompt to 4.1 -- a real gain, that being the asymmetry that biases `dN`. But the mass aperture gap grows ~44%.
+
+The reason is that **theta was partially self-correcting and a rank cap removes the correction**. A probability floor gives a FLAT distribution more words, which claws back some of what a peaked distribution keeps for free. A fixed rank gives both the same count, so the peakier arm -- the aligned one -- simply keeps more mass: top-50 captures 0.702 of post against 0.642 of base. Equalising rank de-equalises mass, and mass is what every statistic here weights by.
+
+**The eligibility rule should not be adopted.** The 41 refused prompts have mean base residual 0.186 against 0.271 for the eligible: it discards the peaked, confident prompts the instrument measures best and keeps the diffuse ones. A filter whose bias runs along the same axis as the treatment cannot be applied silently, and this one runs the wrong way.
+
+**And none of it matters much.** Capped statistics correlate with uncapped at 0.96-0.99, sign agreement 0.87-0.94. The aperture question moves the answer far less than the pole set does. What the cap's one genuine win is really arguing for is UNION RESCORING at production time -- score each arm on the other arm's words -- which removes one-arm-only words without touching the mass aperture and without a selection rule.
+
+**What this probe cannot test:** a real v4 would expand BY RANK and so reach words theta never entered. Those were never measured and no downstream analysis can invent them. Applying a cap to existing records tests the aperture half of the proposal, not the depth half.
+
 ## Exclusions, declared
 
 `MIN_VOCAB = 5`. Three prompts of the 200 drawn had 1, 3 and 4 candidates above theta and are dropped and counted. A prompt with one candidate has no ordering and is not evidence about an instrument that orders -- `The mayor promised law and` resolves to `order` and nothing else. Note that the cardinal form does not announce this: it reports `top1_share` of 1.000, which reads as a finding rather than as a degenerate item.
