@@ -163,6 +163,20 @@ export interface AxisResponse {
 	lev_source?: string;
 }
 
+//: An error that survives the throw with its status attached. `/slot/save`
+//: answers 409 to REFUSE A CLOBBER, which is a question for the author rather
+//: than a failure — and a plain `Error(message)` flattens it into the same red
+//: text as a 400, leaving the caller to pattern-match on prose.
+export class ApiError extends Error {
+	status: number;
+	conflict: boolean;
+	constructor(message: string, status: number, conflict = false) {
+		super(message);
+		this.status = status;
+		this.conflict = conflict;
+	}
+}
+
 async function post<T>(path: string, body: unknown): Promise<T> {
 	const res = await fetch(`${BASE}${path}`, {
 		method: 'POST',
@@ -170,8 +184,51 @@ async function post<T>(path: string, body: unknown): Promise<T> {
 		body: JSON.stringify(body)
 	});
 	const j = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
-	if (!res.ok) throw new Error((j as { error?: string }).error || `HTTP ${res.status}`);
+	if (!res.ok) {
+		const e = j as { error?: string; conflict?: boolean };
+		throw new ApiError(e.error || `HTTP ${res.status}`, res.status, !!e.conflict);
+	}
 	return j as T;
+}
+
+export interface SavedItem {
+	item_id: string;
+	prompt: string;
+	domain: string;
+	naughty: string[];
+	nice: string[];
+	naughty_mass: number;
+	nice_mass: number;
+	share: number | null;
+	writer: string;
+	note: string;
+	saved_at?: string;
+	action?: string;
+}
+
+export interface SaveResponse {
+	item_id: string;
+	//: `created` | `overwritten` | `unchanged`. Shown verbatim, because saving
+	//: over an unchanged item and replacing a different tagging are different
+	//: events, and the author is the only one who can say whether the second
+	//: was intended.
+	action: string;
+	path: string;
+	item: SavedItem;
+}
+
+export interface SaveRequest {
+	prompt: string;
+	naughty: string[];
+	nice: string[];
+	//: `{word: p}` from the run on screen. The masses, their ordering and
+	//: `item_id` are all derived from this SERVER-SIDE — a client-supplied mass
+	//: that disagreed with the tags beside it would be undetectable.
+	words: Record<string, number>;
+	provenance?: Record<string, unknown>;
+	domain?: string;
+	note?: string;
+	overwrite?: boolean;
 }
 
 export const api = {
@@ -184,6 +241,11 @@ export const api = {
 		words: string[],
 		probs?: Record<string, number>
 	) => post<AxisResponse>('/slot/axis', { prompt, naughty, nice, words, probs }),
+	//: **THE ONLY CALL IN THIS CLIENT WITH SIDE EFFECTS.** Writes an authored
+	//: item to `$MALIGNMENT_DATA/slots/`, outside the repo, because a saved item
+	//: carries its prompt verbatim from the transgressive battery.
+	slotSave: (body: SaveRequest) => post<SaveResponse>('/slot/save', body),
+	slotSaved: () => get<{ dir: string; n: number; items: SavedItem[] }>('/slot/saved'),
 	health: () => get<Health>('/health'),
 	inventory: () => get<{ db: string; tables: Table[] }>('/store/inventory'),
 	roster: () => get<RosterSummary>('/roster'),

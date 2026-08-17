@@ -671,14 +671,29 @@ class Handler(BaseHTTPRequestHandler):
     server_version = "malignment"
 
     def do_POST(self):
-        """Only `/slot/axis`, and it is a POST for PAYLOAD SIZE, not side effects.
+        """`/slot/axis` and `/slot/save`. Only the second has side effects.
 
-        The route writes nothing. It takes the candidate word list, which at
-        `k=500` is several kilobytes -- past what a URL can carry reliably, and
-        the archive's GET version of this endpoint was sized for `k=40` and would
-        have truncated silently rather than failed.
+        `/slot/axis` is a POST for PAYLOAD SIZE, not side effects: it takes the
+        candidate word list, which at `k=500` is several kilobytes -- past what a
+        URL can carry reliably, and the archive's GET version of this endpoint
+        was sized for `k=40` and would have truncated silently rather than failed.
+
+        **`/slot/save` IS THE ONE ROUTE HERE THAT WRITES, AND THE RULE IT LOOKS
+        LIKE AN EXCEPTION TO IS NOT THE ONE IT TOUCHES.** The module rule is that
+        the server READS AND DOES NOT COMPUTE, the danger being a seventh
+        definition of a population growing quietly inside a UI. Saving computes
+        nothing: the tags are the author's, the masses come from the run the
+        author is already looking at, and every derivation (`item_id`, the mass
+        ordering, `share`) lives in `slots.py` beside the rule that owns it.
+
+        What it writes is AUTHORED data, and it writes OUTSIDE THE REPO to
+        `$MALIGNMENT_DATA/slots/`. A saved item carries its prompt verbatim from
+        the transgressive battery, so it sits behind the same fence as `runners`
+        output and the bge vectors.
         """
         parsed = urlparse(self.path)
+        if parsed.path == "/slot/save":
+            return self._save()
         if parsed.path != "/slot/axis":
             return self._json(404, {"error": "no POST route %s" % parsed.path})
         try:
@@ -707,6 +722,47 @@ class Handler(BaseHTTPRequestHandler):
             import traceback
             traceback.print_exc()
             self._json(500, {"error": "%s: %s" % (type(e).__name__, e)})
+
+    def _save(self):
+        """Persist one authored item. 200 created/overwritten/unchanged, 409 on collision.
+
+        **THE CLIENT SENDS TAGS AND A DISTRIBUTION, NEVER A COMPUTED FIELD.**
+        `item_id`, the mass ordering and `share` are all derived in `slots.py`
+        from the words it sends, for the same reason `item_id` is not computed in
+        JavaScript: a client-supplied `naughty_mass` that disagreed with the tags
+        beside it would be undetectable and permanent.
+
+        A 409 is a REFUSAL TO CLOBBER, not a failure. Re-saving an id with
+        different tags means the author retagged, and the previous tagging would
+        otherwise vanish with nothing on screen to say so. The client is expected
+        to ask and retry with `overwrite`.
+        """
+        try:
+            from .slots import build_item, save_item
+            length = int(self.headers.get("Content-Length", 0))
+            body = json.loads(self.rfile.read(length)) if length else {}
+            words = body.get("words") or {}
+            if not isinstance(words, dict) or not words:
+                raise ValueError("`words` must be a non-empty {word: p} map from "
+                                 "the run being saved -- the masses are derived "
+                                 "from it here, not accepted from the client")
+            item = build_item(
+                body.get("prompt"), body.get("naughty"), body.get("nice"), words,
+                provenance=body.get("provenance") or {},
+                domain=(body.get("domain") or "").strip(),
+                writer=(body.get("writer") or "slot-explorer").strip(),
+                note=(body.get("note") or "").strip())
+            path, action = save_item(item, overwrite=bool(body.get("overwrite")))
+            return self._json(200, {"item_id": item["item_id"], "action": action,
+                                    "path": path, "item": item})
+        except FileExistsError as e:
+            return self._json(409, {"error": str(e), "conflict": True})
+        except ValueError as e:
+            return self._json(400, {"error": str(e)})
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return self._json(500, {"error": "%s: %s" % (type(e).__name__, e)})
 
     def do_GET(self):
         parsed = urlparse(self.path)
@@ -805,6 +861,16 @@ class Handler(BaseHTTPRequestHandler):
                 raise ValueError("grain %r is neither .csv nor .json" % grain)
             return {"id": d["id"], "grain": grain, **_read_csv(p, cap),
                     "cap": cap}
+        if path == "/slot/saved":
+            #: **A WRITE NOBODY CAN READ BACK IS NOT A SAVE, IT IS A DISCARD
+            #: WITH A CONFIRMATION MESSAGE.** The button is only trustworthy if
+            #: the panel can show what is already stored, so this ships with it
+            #: rather than after it.
+            from .slots import SLOT_DIR, saved_items
+            items = saved_items()
+            return {"dir": SLOT_DIR, "n": len(items),
+                    "items": [{k: v for k, v in d.items() if k != "provenance"}
+                              for d in items]}
         if path == "/slot/item_id":
             #: **THE ID IS DERIVED HERE AND NOT IN THE CLIENT**, even though it is
             #: a pure function of three strings the client already holds. See

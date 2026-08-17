@@ -41,7 +41,7 @@
   has not been made.
 -->
 <script lang="ts">
-	import { api } from '$lib/api';
+	import { api, ApiError } from '$lib/api';
 	import type { SlotResponse, AxisResponse, Health, Pair } from '$lib/api';
 
 	let prompt = $state('She slowly took off her');
@@ -379,8 +379,42 @@
 		return () => clearTimeout(t);
 	});
 
+	//: ── ONE PROVENANCE OBJECT, RENDERED TWICE.
+	//:
+	//: The yaml block below and the `/slot/save` payload describe the same run,
+	//: and two hand-built copies of one description is the drift this file
+	//: documents at every other level. Built once here; the yaml reads its
+	//: fields and the save posts it whole.
+	//:
+	//: **IT CARRIES THREE FIELDS THE YAML BLOCK DOES NOT**, because the saved
+	//: JSON is a new artifact and none of them belongs in a format 86 items
+	//: already use. `pair` is the DECLARED (base, endpoint) and its path —
+	//: `models` is the arms that ran, which is a different claim once a path is
+	//: multi-step, and 17 of the 50 are. `n_answered` is the pool's real
+	//: denominator: it differs from `n_models` when a tokenizer refuses the
+	//: prompt, and dividing by the wrong one is the pooling bug this panel has
+	//: already shipped once.
+	let screenedBy = $derived.by(() => {
+		if (!resp) return null;
+		return {
+			role: 'screening',
+			models: resp.models,
+			pooled: resp.n_models > 1,
+			displayed: 'probability',
+			rule_version: resp.rule_version,
+			dict_sha: resp.dict_sha,
+			theta: resp.theta,
+			n_words: resp.n_words,
+			top_k: resp.shown,
+			n_models: resp.n_models,
+			n_answered: resp.n_answered,
+			pair: resp.pair
+		};
+	});
+
 	let yaml = $derived.by(() => {
 		if (!resp || (!naughty.size && !nice.size)) return '';
+		const sb = screenedBy!;
 		//: **MASS-ORDERED, AND NEVER ALPHABETISED.** Two reasons, and the second
 		//: is the one that would get lost:
 		//:
@@ -450,15 +484,15 @@
 			//: tension is not mine to resolve, so the stamp records what actually
 			//: ran and stays true under either ruling.
 			`  screened_by:\n` +
-			`    role: screening\n` +
-			`    models: ${list(resp.models)}\n` +
-			`    pooled: ${resp.n_models > 1}${resp.n_models > 1 ? '   # summed then divided by the models that ANSWERED' : ''}\n` +
-			`    displayed: probability          # movement NEVER shown at authoring time\n` +
-			`    rule_version: ${resp.rule_version}\n` +
-			`    dict_sha: ${resp.dict_sha}\n` +
-			`    theta: ${resp.theta}\n` +
-			`    n_words: ${resp.n_words}\n` +
-			`    top_k: ${resp.shown}\n`
+			`    role: ${sb.role}\n` +
+			`    models: ${list(sb.models)}\n` +
+			`    pooled: ${sb.pooled}${sb.pooled ? '   # summed then divided by the models that ANSWERED' : ''}\n` +
+			`    displayed: ${sb.displayed}          # movement NEVER shown at authoring time\n` +
+			`    rule_version: ${sb.rule_version}\n` +
+			`    dict_sha: ${sb.dict_sha}\n` +
+			`    theta: ${sb.theta}\n` +
+			`    n_words: ${sb.n_words}\n` +
+			`    top_k: ${sb.top_k}\n`
 		);
 	});
 
@@ -493,6 +527,81 @@
 		if (!ok) error = 'copy blocked by the browser — select the yaml below manually';
 		setTimeout(() => (copied = false), 1600);
 	}
+
+	//: ── SAVING (RH, 2026-08-17).
+	//:
+	//: Writes to `$MALIGNMENT_DATA/slots/`, outside the repo, because a saved
+	//: item carries its prompt verbatim from the transgressive battery.
+	//:
+	//: **THE PAYLOAD IS TAGS AND A DISTRIBUTION. NOTHING DERIVED IS SENT.**
+	//: `item_id`, the mass ordering and `share` are all computed in `slots.py`
+	//: from the words posted here, for the same reason `item_id` is fetched
+	//: rather than built in JavaScript: a client-supplied mass that disagreed
+	//: with the tags beside it would be undetectable and permanent.
+	let saving = $state(false);
+	let saved = $state<{ item_id: string; action: string } | null>(null);
+	let saveError = $state('');
+	let conflict = $state(false);
+	let saveNote = $state('');
+	let savedCount = $state<number | null>(null);
+	//: The id can CHANGE under retagging rather than collide: it is built from
+	//: the top-mass word of each branch, so promoting a different word to the
+	//: head of a pole yields a NEW item instead of replacing one. The panel says
+	//: which ids are already on disk, because a save that quietly creates a
+	//: second item looks exactly like one that updated the first.
+	let savedIds = $state<string[]>([]);
+
+	function refreshSaved() {
+		api.slotSaved()
+			.then((r) => {
+				savedCount = r.n;
+				savedIds = r.items.map((i) => i.item_id);
+			})
+			.catch(() => {
+				savedCount = null;
+				savedIds = [];
+			});
+	}
+	$effect(refreshSaved);
+
+	async function save(overwrite = false) {
+		if (!resp || !naughty.size || !nice.size || saving) return;
+		saving = true;
+		saveError = '';
+		saved = null;
+		try {
+			//: Only the tagged words' probabilities. Sending the whole candidate
+			//: list would post kilobytes the server discards, and `build_item`
+			//: refuses a tag that is absent from what it receives — so the map
+			//: has to cover the tags exactly.
+			const wordP: Record<string, number> = {};
+			for (const w of words) if (naughty.has(w.word) || nice.has(w.word)) wordP[w.word] = w.p;
+			const r = await api.slotSave({
+				prompt: resp.prompt,
+				naughty: [...naughty],
+				nice: [...nice],
+				words: wordP,
+				provenance: screenedBy ?? {},
+				note: saveNote.trim(),
+				overwrite
+			});
+			saved = { item_id: r.item_id, action: r.action };
+			refreshSaved();
+			setTimeout(() => (saved = null), 4000);
+		} catch (e) {
+			//: **A 409 IS A QUESTION, NOT A FAILURE.** The id already exists with
+			//: different tags, which means this prompt was authored before and the
+			//: earlier tagging would be lost. Surfaced as an explicit choice with
+			//: the overwrite button beside it, never retried automatically.
+			const err = e as ApiError;
+			saveError = err.message || 'save failed';
+			conflict = !!err.conflict;
+		} finally {
+			saving = false;
+		}
+	}
+
+	let alreadySaved = $derived(!!itemId && savedIds.includes(itemId));
 </script>
 
 <div class="slot">
@@ -696,8 +805,67 @@
 			{#if naughty.size || nice.size}
 				<button class="ghost" onclick={clearTags}>clear</button>
 				<button class="ghost" onclick={copyYaml}>{copied ? 'copied ✓' : 'copy yaml'}</button>
+				<!--
+				  SAVE. Disabled until BOTH poles carry a tag, because `item_id`
+				  takes the top word of each and an item with one pole has no axis.
+				  The server refuses the same case; the button says so first rather
+				  than letting the author find out by error.
+				-->
+				<button
+					class="ghost save"
+					onclick={() => save(false)}
+					disabled={saving || !naughty.size || !nice.size}
+					title={!naughty.size || !nice.size
+						? 'both poles need a tag — the id takes the top word of each'
+						: `write ${itemId || 'this item'} to the slots directory`}
+				>
+					{saving ? 'saving…' : alreadySaved ? 'save (update)' : 'save'}
+				</button>
 			{/if}
 		</div>
+
+		{#if naughty.size && nice.size}
+			<div class="saverow">
+				<input
+					class="notein"
+					bind:value={saveNote}
+					placeholder="note (optional) — why this frame, what to watch"
+				/>
+				{#if savedCount !== null}
+					<span class="cnt dim" title="items already written to $MALIGNMENT_DATA/slots/">
+						{savedCount} saved
+					</span>
+				{/if}
+				{#if saved}
+					<!--
+					  THE ACTION IS SHOWN VERBATIM, not flattened to "saved ✓".
+					  `created`, `overwritten` and `unchanged` are three different
+					  events and only the author can say whether the second was
+					  intended.
+					-->
+					<span class="ok">{saved.action}: {saved.item_id}</span>
+				{/if}
+				{#if saveError}
+					<span class="bad">{saveError}</span>
+					{#if conflict}
+						<!--
+						  A 409 IS A QUESTION. The id exists with different tags, so
+						  the earlier tagging would be lost. Never retried
+						  automatically; the previous version stays in journal.jsonl
+						  either way, which is what makes this recoverable rather
+						  than merely confirmed.
+						-->
+						<button
+							class="ghost danger"
+							onclick={() => {
+								conflict = false;
+								save(true);
+							}}>overwrite it</button
+						>
+					{/if}
+				{/if}
+			</div>
+		{/if}
 
 		{#if axisInfo?.ok && !axisGeneric}
 			<!--
@@ -989,4 +1157,21 @@
 		border: 1px solid var(--rule); border-radius: 4px; color: var(--text-2);
 		font-family: var(--mono); font-size: 11px; white-space: pre-wrap; user-select: all;
 	}
+
+	/* ── saving ─────────────────────────────────────────────────────────── */
+	.saverow {
+		display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+		margin-top: 8px;
+	}
+	.notein {
+		flex: 1 1 220px; min-width: 160px; padding: 5px 8px;
+		background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;
+		color: var(--text); font-family: inherit; font-size: 12px;
+	}
+	.saverow .ok { color: var(--ok, #2f9e44); font-size: 12px; font-family: var(--mono); }
+	.saverow .bad { color: var(--bad, #c92a2a); font-size: 12px; }
+	/* The overwrite button is the only destructive control on this panel, so it
+	   does not look like the others. It appears ONLY after a refusal — there is
+	   no way to reach it without first having been told what it would replace. */
+	button.danger { border-color: var(--bad, #c92a2a); color: var(--bad, #c92a2a); }
 </style>

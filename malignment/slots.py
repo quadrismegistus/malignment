@@ -280,3 +280,160 @@ def item_id(prompt, top_nice, top_naughty):
         stem = "".join(re.sub(r"[^a-z0-9]", "", w.lower()) for w in p.split()[-3:])
     part = lambda w: re.sub(r"[^\w一-鿿]", "", (w or "none").lower())
     return "nn_%s_%s-%s" % (stem or "prompt", part(top_nice), part(top_naughty))
+
+
+# ---------------------------------------------------------------------------
+# saving an authored item
+# ---------------------------------------------------------------------------
+
+import json
+import os
+
+#: **OUTSIDE THE PUBLIC CHECKOUT**, on the same reasoning as `runners.TWP_OUT`
+#: and `slot_axis.VEC_DIR`: a saved item carries its prompt verbatim, and the
+#: battery this tool authors is the transgressive one. `README.md` is explicit
+#: that this repo holds no measured data, and an authored item carries measured
+#: masses alongside the tags.
+DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
+SLOT_DIR = os.path.join(DATA, "slots")
+#: Every save, appended, forever. See `save_item` for why a current-state
+#: directory is not enough on its own.
+JOURNAL = os.path.join(SLOT_DIR, "journal.jsonl")
+
+
+def _masses(words, tagged):
+    """(mass-ordered tag list, summed mass) for one branch.
+
+    **ORDERED BY MASS, NOT BY TAG ORDER.** `item_id` takes the highest-mass word
+    of each branch and its docstring is explicit that passing tag order yields an
+    id that is a property of the order someone happened to click. The ordering is
+    done HERE, once, so no caller has to remember -- the archive's 86 items are
+    mass-ordered and a hand-ordered item would not match them.
+    """
+    got = [(w, float(words.get(w, 0.0))) for w in tagged]
+    got.sort(key=lambda x: (-x[1], x[0]))
+    return [w for w, _ in got], sum(p for _, p in got)
+
+
+def build_item(prompt, naughty, nice, words, provenance=None, domain="",
+               writer="slot-explorer", note=""):
+    """The round3-shaped item, derived rather than accepted.
+
+    `words` is `{word: probability}` from the run the author is looking at. The
+    masses and the id are computed from it here so that the client cannot supply
+    a `naughty_mass` that disagrees with the tags it sent -- the same argument
+    that keeps `item_id` off the client.
+
+    **PROVENANCE IS RECORDED, WHICH THE ARCHIVE'S 86 ITEMS DO NOT DO.** This
+    module's own docstring names that gap: an item says nothing about which
+    checkpoints produced the distribution. Everything needed is already in the
+    `/slot` response -- the declared pair and its path, `rule_version`,
+    `dict_sha`, `theta`, and how many arms actually answered -- so withholding it
+    would be a choice rather than a limitation.
+    """
+    prompt = (prompt or "").strip()
+    naughty = [w for w in dict.fromkeys(naughty or []) if w]
+    nice = [w for w in dict.fromkeys(nice or []) if w]
+    if not prompt:
+        raise ValueError("prompt required")
+    if not naughty or not nice:
+        raise ValueError("both poles required -- an item with one pole has no "
+                         "axis, and `item_id` needs the top word of each")
+    #: A word tagged into BOTH poles makes `share` exceed 1 and the axis
+    #: incoherent. Caught here rather than trusted, because the UI allows a
+    #: word to be clicked twice.
+    both = sorted(set(naughty) & set(nice))
+    if both:
+        raise ValueError("tagged into both poles: %s" % ", ".join(both))
+    words = {str(k): float(v) for k, v in (words or {}).items()}
+    missing = sorted(w for w in naughty + nice if w not in words)
+    if missing:
+        raise ValueError("tagged words absent from the distribution: %s -- the "
+                         "tags and the run disagree, so the masses would be 0"
+                         % ", ".join(missing))
+    g_words, g_mass = _masses(words, naughty)
+    n_words, n_mass = _masses(words, nice)
+    tot = g_mass + n_mass
+    return {
+        "item_id": item_id(prompt, n_words[0], g_words[0]),
+        "prompt": prompt,
+        "domain": domain,
+        "naughty": g_words,
+        "nice": n_words,
+        "naughty_mass": round(g_mass, 6),
+        "nice_mass": round(n_mass, 6),
+        #: **share is naughty's portion of the TAGGED mass, not of the
+        #: distribution.** Same definition as the 86 archive items. Untagged
+        #: candidates are excluded by construction, which is why an item's share
+        #: is not comparable to a `/slot` panel's branch totals.
+        "share": round(g_mass / tot, 6) if tot else None,
+        "writer": writer,
+        "note": note,
+        "provenance": provenance or {},
+    }
+
+
+def save_item(item, overwrite=False):
+    """Write one authored item. -> (path, action)
+
+    **NEVER SILENTLY OVERWRITES.** Re-saving an id whose stored content differs
+    raises unless `overwrite` is set, because the destructive case here is not a
+    crash -- it is an author who retagged a prompt, saved, and cannot tell that
+    the previous tagging is gone. Identical content is a no-op and reports so.
+
+    **AND EVERY SAVE IS APPENDED TO `journal.jsonl` REGARDLESS.** The directory
+    holds current state; the journal holds what happened. A current-state store
+    alone cannot answer "what did this item look like before I changed it", and
+    that question is the whole reason to be careful about the overwrite.
+    """
+    import datetime
+    os.makedirs(SLOT_DIR, exist_ok=True)
+    path = os.path.join(SLOT_DIR, "%s.json" % item["item_id"])
+    action = "created"
+    if os.path.exists(path):
+        try:
+            with open(path, encoding="utf-8") as fh:
+                old = json.load(fh)
+        except Exception:
+            old = None
+        cmp_keys = lambda d: {k: d.get(k) for k in
+                              ("prompt", "naughty", "nice", "domain", "note")}
+        if old is not None and cmp_keys(old) == cmp_keys(item):
+            action = "unchanged"
+        elif not overwrite:
+            raise FileExistsError(
+                "%s already exists with different tags. Pass overwrite=true to "
+                "replace it; the previous version stays in journal.jsonl either "
+                "way." % item["item_id"])
+        else:
+            action = "overwritten"
+    stamped = dict(item)
+    stamped["saved_at"] = datetime.datetime.now().isoformat(timespec="seconds")
+    stamped["action"] = action
+    with open(JOURNAL, "a", encoding="utf-8") as fh:
+        fh.write(json.dumps(stamped, ensure_ascii=False) + "\n")
+    if action != "unchanged":
+        #: Write to a temp file and replace, so an interrupted save cannot leave
+        #: a half-written item where a valid one was.
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(stamped, fh, ensure_ascii=False, indent=2)
+        os.replace(tmp, path)
+    return path, action
+
+
+def saved_items():
+    """Every saved item, newest first by `saved_at`. Never raises on one bad file."""
+    if not os.path.isdir(SLOT_DIR):
+        return []
+    out = []
+    for name in sorted(os.listdir(SLOT_DIR)):
+        if not name.endswith(".json"):
+            continue
+        try:
+            with open(os.path.join(SLOT_DIR, name), encoding="utf-8") as fh:
+                out.append(json.load(fh))
+        except Exception:
+            continue
+    out.sort(key=lambda d: d.get("saved_at", ""), reverse=True)
+    return out
