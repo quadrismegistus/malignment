@@ -102,6 +102,8 @@ class Rules:
     hyphen_intra: bool = False
     #: Let `,` and `.` CONTINUE a word when the surface so far ends in a digit,
     #: so `100` + `,` + `000` is one word. See `numeric_intra_ids`.
+    #: **MEASURES WORSE THAN v3 FOR ITS OWN USE CASE. Do not enable without
+    #: reading `numeric_intra_ids`' last section.**
     numeric_intra: bool = False
     #: Override `twp.MAX_DEPTH` for this run. None == v3's 6.
     max_depth: int = None
@@ -251,6 +253,31 @@ def numeric_intra_ids(tok):
 
     Multi-character tokens like `,000` and `.5` are included where a vocabulary
     has them -- most do not, which is the whole point.
+
+    ## IT MEASURES WORSE THAN v3, AND THE REASON IS THETA, NOT THE RULE
+
+    On `A worker in the United Kingdom earned an annual salary of £`,
+    SmolLM2-360M, `decoded_boundary+numeric_intra+max_depth=9`:
+
+        v3   resolved 0.909810   '25' .0326  '20' .0295  '23' .0293
+        v4   resolved 0.088134   '20,000' .0061  '25,000' .0052
+             drop 0.9081  <- NINETY PERCENT OF THE MASS
+
+    After `£` the model overwhelmingly wants a comma, so unmasking it collapses
+    `25`'s `term`, sends its mass into continuations, and those SPREAD across
+    `25,000`, `25,500`, `25,750`... each individually below `THETA` (1e-3) and
+    therefore dropped. Conservation holds at 1.000000 -- the mass is accounted,
+    it is simply no longer in `words`.
+
+    **So v3's truncation is a MARGINALISATION, not only a defect.** `25` at
+    0.0326 IS P(the salary begins with 25), summed over every completion. That is
+    coarser than `£25,000` and it is CORRECT, and for "what salary does this
+    model expect" it is more useful than a fragmented set theta destroys.
+
+    The rule is kept, switchable and off, because the measurement is the finding.
+    Enabling it needs a theta policy for numeric continuations, and nobody has
+    one. **A rule that is right about word boundaries and wrong about what the
+    instrument can then see is not an improvement.**
     """
     key = id(tok)
     if key not in _NUMIDX:
@@ -335,16 +362,26 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
                     floored = float(bm.sum()) - term
             else:
                 term, floored = float(bm.sum()), 0.0
-            #: **A SURFACE ENDING IN AN UNMASKED SEPARATOR IS A FRAGMENT.**
-            #: `$100,` is mid-number, not a word -- and `clean_surface` strips
-            #: the comma, so crediting it would add `$100` a SECOND time at a
-            #: deeper depth. That is precisely the double-crediting the CJK arm
-            #: turned out to be, so the rule that creates the continuation must
-            #: also refuse the fragment or it imports the same defect.
-            raw_end = tok.decode(list(pref))[-1:]
-            if rules.numeric_intra and raw_end in ",.":
-                res["drop"] += mass * (term + floored)
-            elif surf and not T.is_mojibake(surf):
+            #: **NO FRAGMENT SUPPRESSION, AND THE FIRST VERSION OF THIS RULE
+            #: HAD IT, WRONGLY.** I dropped the mass of any surface whose raw
+            #: form ended in an unmasked separator, reasoning that `$100,`
+            #: cleans to `$100` and would credit it twice. It does not, and the
+            #: reason is that `numeric_intra` has ALREADY REMOVED that mass from
+            #: the earlier credit: with `,` unmasked, `$100`'s own `term`
+            #: excludes it. So crediting `$100,` -> `$100` at the next depth adds
+            #: back exactly what was taken, and the two events are DISJOINT --
+            #: "ends, next is a non-comma boundary" and "ends, next is a comma
+            #: then a boundary". Summing them is the correct arithmetic.
+            #:
+            #: Measured cost of getting this wrong: one English prompt in twenty
+            #: lost **41.94%** of its resolved mass on Qwen2.5-7B, because a
+            #: number that did not finish inside `max_depth` had its mass
+            #: dropped rather than credited to the number it had already spelled.
+            #:
+            #: The CJK case is NOT this case: there `，` is a BOUNDARY once
+            #: `decoded_boundary` is on, so the walk never continues through it
+            #: and no fragment forms.
+            if surf and not T.is_mojibake(surf):
                 key = (surf, t1)
                 words[key] = words.get(key, 0.0) + mass * term
                 paths[key] = paths.get(key, 0) + 1
