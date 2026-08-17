@@ -49,6 +49,48 @@ READS.
     the norms cluster                INHERITS IT, via movement
     everything else on cells         INHERITS IT
 
+## THE SHARPER CUT — ARGMAX SURVIVES, MAGNITUDE DOES NOT (malign [6452])
+
+**Boundary-dependency is the wrong filter. This is the right one**, measured on
+Qwen2.5-7B, 2,642 comparable v3-vs-v4 cells:
+
+    resolved mass raised   99% of zh cells, 86% of en cells
+    zh median +4.05%       p90 +11.51%   max +45.55%
+    ARGMAX CHANGED         13 of 2,642 (0.5%)  |  4 of 406 zh (1.0%)
+
+**A claim resting on WHICH WORD IS ON TOP is almost untouched. A claim resting on
+HOW MUCH, or on a DIFFERENCE BETWEEN TWO MODELS, is exposed.**
+
+    SURVIVE   argmax-shaped: the substitution DIRECTION, `kill -> scream`,
+              faller/riser identity, N's 91% run-direction
+    EXPOSED   any magnitude, any gap, any null BETWEEN models -- and every
+              cross-lingual contrast, because the instrument difference between
+              FLUENT and PARTIAL models on zh is ~4% and entirely artefactual
+
+**This reorders the clusters more usefully than the immunity question did.**
+Cluster 3's F/G pair splits down the middle: the RATE null is argmax-shaped and
+survives; the MAGNITUDE result (d 0.748) is exposed. Carry-both-or-neither now
+has a cost.
+
+**AND A NULL THAT SURVIVES A 4% DIFFERENTIAL IS A REAL NULL; ONE THAT DOES NOT
+WAS NEVER A FINDING.** That is the test for `O_crosslingual`, which is squarely
+in the exposed half.
+
+### A FLUENT/PARTIAL PAIR EXISTS NOW, NO FLEET, NO RULING
+
+malign holds two complete v4 corpora keyed beside their v3 twins —
+**Qwen2.5-7B (FLUENT) and Mistral-7B (PARTIAL), 2,706 cells each.** That is
+exactly the contrast the cross-lingual cluster needs, and **anything reading
+`movement` for those two models can be re-derived on v4 today.**
+
+### `cjk_tier` PREDICTS *WHICH*, NOT *HOW MUCH* — malign's correction to me
+
+I called it "exactly the right predictor for this". It predicts **which
+checkpoints are affected** and does that well (FLUENT bites, PARTIAL does not,
+38 of 136). It does **not** predict the SIZE on a given model, because size
+depends on how much mass that model puts on the marks — behaviour, not
+vocabulary. **n=2 establishes the ordering and cannot calibrate it.**
+
 ## THE ARCHIVE'S OWN DEFECTS, WHICH DECIDE WHAT IS WORTH CARRYING
 
 Three recur across the 70 and each disqualifies a different thing:
