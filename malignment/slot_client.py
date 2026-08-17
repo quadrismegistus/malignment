@@ -125,18 +125,37 @@ def screen(prompt, pair=None, k=50):
     return _call("/slot", params=p)
 
 
-def check(prompt, naughty, nice, words, probs=None):
+def _words_probs(screened):
+    """Split a `/slot` response into the two shapes the axis route wants.
+
+    **`words` IS A LIST OF STRINGS AND `probs` IS A MAP, and the response carries
+    neither.** It returns `[{"word": w, "p": p}, ...]`, so a caller passing that
+    straight through gets `TypeError: unhashable type: 'dict'` from a `set()` deep
+    in the route -- which is what happened on the first live drive. The panel does
+    this conversion in two lines and this is the same two lines, so both callers
+    cannot disagree about it.
+    """
+    ws = screened.get("words") or []
+    return [w["word"] for w in ws], {w["word"]: w["p"] for w in ws}
+
+
+def check(prompt, naughty, nice, screened):
     """Score the poles and consult the validity gate. -> dict
+
+    Takes the whole `/slot` response, like `save`, **so the caller never chooses
+    a shape.** An earlier signature took `words` and `probs` separately and the
+    first real call passed the response's dicts where strings were wanted; the
+    route then failed 500 rather than 400, because a shape error deep in a `set()`
+    is not input validation.
 
     Returns the axis payload, whose `separates` block is the one an agent should
     branch on. `leverage` is present to be recorded, not to be looped against --
     see the module docstring.
     """
-    body = {"prompt": prompt, "naughty": list(naughty), "nice": list(nice),
-            "words": list(words)}
-    if probs:
-        body["probs"] = probs
-    return _call("/slot/axis", body=body)
+    words, probs = _words_probs(screened)
+    return _call("/slot/axis", body={
+        "prompt": prompt, "naughty": list(naughty), "nice": list(nice),
+        "words": words, "probs": probs})
 
 
 def provenance_from(screened):
@@ -181,8 +200,8 @@ def save(prompt, naughty, nice, screened, authored_by, domain="", note="",
             "so is indistinguishable from a hand-tagged one, which is the gap "
             "that left 84 of the 86 archive items attested rather than verified")
     tagged = set(naughty) | set(nice)
-    probs = {w["word"]: w["p"] for w in (screened.get("words") or [])
-             if w.get("word") in tagged}
+    _all_words, all_probs = _words_probs(screened)
+    probs = {w: p for w, p in all_probs.items() if w in tagged}
     missing = sorted(tagged - set(probs))
     if missing:
         #: Caught here so the message names the words. The server refuses this
@@ -238,9 +257,8 @@ def _main(argv):
         #: a caller passing a stale word list would save an item whose numbers
         #: describe a different distribution, and nothing downstream could tell.
         s = screen(a.prompt, a.pair, a.k)
-        words, probs = s.get("words") or [], s.get("probs") or {}
         if a.cmd == "axis":
-            out = check(a.prompt, split(a.naughty), split(a.nice), words, probs)
+            out = check(a.prompt, split(a.naughty), split(a.nice), s)
         else:
             out = save(a.prompt, split(a.naughty), split(a.nice), s,
                        a.authored_by, a.domain, a.note, overwrite=a.overwrite)

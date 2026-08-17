@@ -49,6 +49,7 @@ transgressive one. Landing them in the repo is a separate deliberate step.
 """
 import hashlib
 import re
+import threading
 
 #: The CJK block, matching the archive's `[一-鿿]` exactly. Written as an escape
 #: rather than as literal characters so that a file-encoding accident cannot
@@ -690,7 +691,13 @@ HEADER = """\
 
 
 def write_items(items, path=None):
-    """Rewrite the running file. Temp-file-and-replace, never a partial write."""
+    """Rewrite the running file. Temp-file-and-replace, never a partial write.
+
+    **"Never a partial write" is a promise to a READER.** It says nothing about a
+    second writer, and it read as though it did -- see the unique temp name below
+    for what concurrency actually did to this. Serialisation is `_SAVE_LOCK`'s job
+    and callers must not rely on this function for it.
+    """
     yaml, Dumper = _yaml()
     path = path or SLOT_YAML
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -721,11 +728,43 @@ def write_items(items, path=None):
         out.append(d)
     body = yaml.dump(out, Dumper=Dumper, sort_keys=False, allow_unicode=True,
                      default_flow_style=False, width=100)
-    tmp = path + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as fh:
-        fh.write(HEADER + body)
-    os.replace(tmp, path)
+    #: **THE TEMP NAME IS UNIQUE, and a fixed one made this unsafe in the exact
+    #: way the docstring denied.** `path + ".tmp"` is shared, so two writers
+    #: collide ON THE TEMP FILE: measured 2026-08-17 at 12 concurrent saves, 7
+    #: raised FileNotFoundError when one `os.replace` consumed the file another
+    #: was about to promote, 11 of 12 items were lost, and one run left the yaml
+    #: UNPARSEABLE. Atomic against a READER, which is what was tested, and not
+    #: against another WRITER.
+    #:
+    #: `_SAVE_LOCK` closes this within a process and is the real fix. This makes
+    #: the remaining cross-process case degrade to a LOST UPDATE rather than a
+    #: corrupt file, which is a severity difference worth two lines.
+    tmp = "%s.%d.tmp" % (path, os.getpid() ^ threading.get_ident())
+    try:
+        with open(tmp, "w", encoding="utf-8") as fh:
+            fh.write(HEADER + body)
+        os.replace(tmp, path)
+    finally:
+        #: A failed write must not leave a stray temp beside the corpus, where
+        #: the next reader globbing the directory would find it.
+        if os.path.exists(tmp):
+            os.unlink(tmp)
     return path
+
+
+#: **THE READ-MODIFY-WRITE BELOW IS NOT ATOMIC AND `write_items` BEING ATOMIC
+#: HIDES IT.** `save_item` reads the file, inserts, and rewrites; the rewrite is
+#: temp-file-and-replace so a reader never sees a torn file, which is exactly why
+#: the race looks safe. Two concurrent saves each read N items and each write
+#: N+1, and one addition is gone -- **with a 200 `created` returned to both.** A
+#: silent success is the worst signature available, and it arrived the moment RH
+#: asked whether several agents could author at once.
+#:
+#: Here rather than in `serve.py` because a lock in the HTTP handler protects the
+#: HTTP path only, and the next caller is a script. Within one process this is
+#: sufficient; **two SERVERS writing one corpus would still race**, and that needs
+#: a file lock rather than this. Not built, because nothing does it today.
+_SAVE_LOCK = threading.RLock()
 
 
 def save_item(item, overwrite=False, path=None):
@@ -741,6 +780,13 @@ def save_item(item, overwrite=False, path=None):
     """
     import datetime
     path = path or SLOT_YAML
+    with _SAVE_LOCK:
+        return _save_item_locked(item, overwrite, path)
+
+
+def _save_item_locked(item, overwrite, path):
+    """The body of `save_item`, which must only run under `_SAVE_LOCK`."""
+    import datetime
     os.makedirs(os.path.dirname(path), exist_ok=True)
     #: **BOTH DIRECTORIES, because they are no longer the same one.** The yaml
     #: moved into the repo on 2026-08-17 and the journal did not, so creating only
