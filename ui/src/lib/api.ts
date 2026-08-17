@@ -296,8 +296,8 @@ async function post<T>(path: string, body: unknown): Promise<T> {
 
 export type DomainRow = {
 	domain: string;
-	round3: number;
-	authoring: number;
+	/** one key per corpus in `corpora` — the list is SCANNED, so it is not fixed. */
+	[corpus: string]: string | number | boolean | null;
 	total: number;
 	suggested: boolean;
 	untagged: boolean;
@@ -307,6 +307,8 @@ export type DomainRow = {
 
 export type DomainCensus = {
 	corpora: string[];
+	/** the corpus the save button writes to, or null if it is not on disk yet. */
+	running: string | null;
 	files: Record<string, { path: string; exists: boolean; n: number }>;
 	domains: string[];
 	rows: DomainRow[];

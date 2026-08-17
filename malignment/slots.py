@@ -363,8 +363,29 @@ import os
 #: separate, deliberate step and NOT a side effect of clicking save. **That step
 #: is not written yet** -- an earlier version of this comment cited
 #: `scripts/ingest_slots.py`, which does not exist. See `ui/TODO.md`.
+#: Repo root, for the corpora below. Resolved from this file rather than from the
+#: cwd: the server is started from wherever the author happens to be standing,
+#: and a census that silently read no file would report a balanced set of zero.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
-SLOT_DIR = os.path.join(DATA, "slots")
+
+#: **THE SLOT CORPORA ARE IN THE REPO** (RH, 2026-08-17: "maybe we should just
+#: put slot-explorer in the roster folder then").
+#:
+#: They were in `$MALIGNMENT_DATA` on the stated ground that "a saved item
+#: carries its prompt verbatim from the transgressive battery" -- and that reason
+#: never distinguished these files from `round3.yaml`, which holds 86 prompts
+#: from the same battery, carries the same `naughty_mass`/`nice_mass`/`share`
+#: fields, and has been committed since `204d511`. A rule that the neighbouring
+#: file already breaks is not a rule, and the split it produced cost RH a
+#: "what happened to the ones we ported?" -- the panel could count the 86 and
+#: never open them.
+#:
+#: Stimulus is tracked deliberately in this repo: a prompt set nobody can read is
+#: not reproducible. A slot item is stimulus plus the pole tagging that makes it
+#: usable, so it belongs with the stimulus.
+SLOT_DIR = os.path.join(ROOT, "roster", "prompts", "slots")
 
 #: **ONE RUNNING FILE, NAMED FOR ITS WRITER** (RH, 2026-08-17). The first version
 #: wrote one JSON per item, which is fine for a machine and wrong for the person
@@ -380,7 +401,17 @@ SLOT_YAML = os.path.join(SLOT_DIR, "slot-explorer.yaml")
 #: item; this holds what happened. A current-state file alone cannot answer
 #: "what did this item look like before I retagged it", and that question is the
 #: whole reason to be careful about overwriting.
-JOURNAL = os.path.join(SLOT_DIR, "journal.jsonl")
+#: **THE JOURNAL STAYS OUT OF THE REPO, and it is the one thing here that does.**
+#: The roster holds WHAT THE PROMPT SET IS; this holds WHAT HAPPENED WHILE
+#: AUTHORING IT, which is a different kind of record. It appends on every save
+#: forever including no-ops, so tracking it would add unbounded churn to a
+#: checkout four seats share, for a file nobody reads as stimulus.
+#:
+#: And tracking the yaml is what makes this safe: **git history is now the retag
+#: record**, shared and pushed, which is most of what the journal existed for.
+#: What remains only here is the `unchanged` event -- a save attempted that wrote
+#: nothing -- and the versions of an item written between two commits.
+JOURNAL = os.path.join(DATA, "slots", "journal.jsonl")
 
 #: Domains seen in `round3_slots.yaml`, offered to the author as suggestions and
 #: NOT enforced. A closed vocabulary invented here would silently discourage the
@@ -393,19 +424,33 @@ DOMAINS = ["sexual", "violence", "power", "substance", "property",
            "institutional"]
 
 
-#: Repo root, for the COMMITTED corpus below. Resolved from this file rather
-#: than from the cwd: the server is started from wherever the author happens to
-#: be standing, and a census that silently reads no file would report a balanced
-#: set of zero.
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def corpora():
+    """Every slot corpus in `SLOT_DIR`, as (name, path). Scanned, not listed.
 
-#: **THE TWO POPULATIONS ARE NAMED AND NEVER SUMMED INTO ONE COLUMN.** `round3`
-#: is the 86 items migrated from the archive and committed; `authoring` is what
-#: is being written now into `SLOT_YAML`. A single pooled count answers neither
-#: question an author has -- "is the set I am building balanced" and "is the
-#: whole corpus balanced" -- and it answers them wrongly in opposite directions.
-CORPORA = [("round3", os.path.join(ROOT, "roster", "prompts", "slots", "round3.yaml")),
-           ("authoring", None)]
+    **THE POPULATIONS ARE NAMED AND NEVER SUMMED INTO ONE COLUMN.** A single
+    pooled count answers neither question an author has -- "is the set I am
+    building balanced" and "is the whole corpus balanced" -- and it answers them
+    wrongly in opposite directions, because a thin domain looks served by
+    inherited items the author did not choose.
+
+    **SCANNED RATHER THAN LISTED, because a hardcoded list is how a corpus goes
+    uncounted.** The 86 ported items were invisible to the panel for exactly that
+    reason. A second authoring tool writes its own file here -- the writer is in
+    the FILENAME by convention -- and it should appear in the census by existing,
+    not by someone remembering to edit a constant.
+
+    `SLOT_YAML` is included even when absent, so a fresh checkout that has
+    authored nothing shows an empty column rather than dropping it.
+    """
+    import glob
+    found = sorted(glob.glob(os.path.join(SLOT_DIR, "*.yaml")))
+    if SLOT_YAML not in found:
+        found.append(SLOT_YAML)
+    #: Running file last: it is the column an author is adding to, and it reads
+    #: better beside the totals than in alphabetical position.
+    def _key(p):
+        return (p == SLOT_YAML, os.path.basename(p))
+    return [(os.path.splitext(os.path.basename(p))[0], p) for p in sorted(found, key=_key)]
 
 
 def _norm_domain(d):
@@ -413,7 +458,7 @@ def _norm_domain(d):
     return re.sub(r"[\s_-]+", "", (d or "").strip().casefold())
 
 
-def domain_census(corpora=None):
+def domain_census(over=None):
     """Items per domain across both slot corpora. -> dict
 
     **A GROUP BY CANNOT PRODUCE A ROW FOR A DOMAIN WITH NO ITEMS, AND THOSE ARE
@@ -436,7 +481,8 @@ def domain_census(corpora=None):
     import collections
     rows = collections.defaultdict(lambda: collections.Counter())
     present, files = [], {}
-    for name, path in (corpora or CORPORA):
+    over = over or corpora()
+    for name, path in over:
         target = path or SLOT_YAML
         files[name] = {"path": target, "exists": os.path.exists(target)}
         items = read_items(target) if files[name]["exists"] else []
@@ -457,7 +503,7 @@ def domain_census(corpora=None):
     for raw in present:
         groups[_norm_domain(raw)].add(raw)
     collisions = sorted([sorted(v) for v in groups.values() if len(v) > 1])
-    names = [n for n, _ in (corpora or CORPORA)]
+    names = [n for n, _ in over]
     out = []
     for dom, c in rows.items():
         total = sum(c.values())
@@ -479,7 +525,13 @@ def domain_census(corpora=None):
     top = max([r["total"] for r in out if not r["untagged"]] or [0])
     for r in out:
         r["deficit_to_max"] = None if r["untagged"] else top - r["total"]
-    return {"corpora": names, "files": files, "domains": DOMAINS,
+    #: **WHICH CORPUS THE SAVE BUTTON WRITES TO, named rather than inferred.** The
+    #: client used to identify it by the literal "authoring"; with the list
+    #: scanned, a name match would colour the wrong column as soon as a second
+    #: authoring tool drops a file here, and it would look right.
+    running = os.path.splitext(os.path.basename(SLOT_YAML))[0]
+    return {"corpora": names, "running": running if running in names else None,
+            "files": files, "domains": DOMAINS,
             "rows": out, "max_total": top,
             "n_total": sum(r["total"] for r in out),
             "collisions": collisions, "untagged_label": UNTAGGED}
@@ -666,6 +718,12 @@ def save_item(item, overwrite=False, path=None):
     import datetime
     path = path or SLOT_YAML
     os.makedirs(os.path.dirname(path), exist_ok=True)
+    #: **BOTH DIRECTORIES, because they are no longer the same one.** The yaml
+    #: moved into the repo on 2026-08-17 and the journal did not, so creating only
+    #: the yaml's parent leaves the append below to fail on any checkout that has
+    #: never written one: the repo path exists from clone and $MALIGNMENT_DATA
+    #: does not.
+    os.makedirs(os.path.dirname(JOURNAL), exist_ok=True)
     items = read_items(path)
     idx = next((i for i, d in enumerate(items)
                 if d.get("item_id") == item["item_id"]), None)

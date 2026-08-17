@@ -42,7 +42,7 @@
 -->
 <script lang="ts">
 	import { api, ApiError } from '$lib/api';
-	import type { SlotResponse, AxisResponse, Health, Pair, DomainCensus } from '$lib/api';
+	import type { SlotResponse, AxisResponse, Health, Pair, DomainCensus, DomainRow } from '$lib/api';
 
 	let prompt = $state('She slowly took off her');
 	//: NO DEFAULT MODEL, matching the server. A default pool is a population
@@ -585,8 +585,14 @@
 
 	//: ── SAVING (RH, 2026-08-17).
 	//:
-	//: Writes to `$MALIGNMENT_DATA/slots/`, outside the repo, because a saved
-	//: item carries its prompt verbatim from the transgressive battery.
+	//: Writes to `roster/prompts/slots/slot-explorer.yaml`, IN THE REPO (RH,
+	//: 2026-08-17). It was in `$MALIGNMENT_DATA` on the ground that "a saved item
+	//: carries its prompt verbatim from the transgressive battery" -- which never
+	//: distinguished it from `round3.yaml`, 86 prompts from that same battery,
+	//: same mass fields, committed since 204d511. Stimulus is tracked here
+	//: deliberately. The JOURNAL stays outside: it appends forever including
+	//: no-ops, and it records what happened while authoring rather than what the
+	//: prompt set is.
 	//:
 	//: **THE PAYLOAD IS TAGS AND A DISTRIBUTION. NOTHING DERIVED IS SENT.**
 	//: `item_id`, the mass ordering and `share` are all computed in `slots.py`
@@ -624,6 +630,17 @@
 			.map((r) => r.domain)
 	]);
 	let censusOpen = $state(false);
+	//: WHICH COLUMN THE SAVE BUTTON WRITES TO, taken from the server rather than
+	//: matched by name. A client that guessed "the one called authoring" would
+	//: colour the wrong column the moment a second authoring tool adds a file,
+	//: and it would look right.
+	let RUNNING = $derived(census?.running ?? '');
+	//: The corpus keys are dynamic because the list is scanned, so `r[c]` is typed
+	//: as the union of every value in the row. This narrows once, here, instead of
+	//: casting at each of the three use sites -- and a non-numeric key returns 0
+	//: rather than rendering `undefined` into a bar width.
+	const cnt = (r: DomainRow, c: string): number =>
+		typeof r[c] === 'number' ? (r[c] as number) : 0;
 	let saveDomain = $state('');
 	let savedCount = $state<number | null>(null);
 	//: The id can CHANGE under retagging rather than collide: it is built from
@@ -1045,7 +1062,7 @@
 					{#each census.corpora as c (c)}
 						<div class="pathrow">
 							<span class="pathn">{census.files[c]?.n ?? 0}</span>
-							<span class="pathlab">{c === 'round3' ? 'ported, in the repo' : 'authored here'}</span>
+							<span class="pathlab">{c === RUNNING ? 'authored here' : 'in the repo'}</span>
 							<code class="pathp" title={census.files[c]?.path}>{census.files[c]?.path ?? '—'}</code>
 							{#if census.files[c] && !census.files[c].exists}
 								<span class="bad">file missing</span>
@@ -1055,10 +1072,17 @@
 				</div>
 				<table class="censustab">
 					<thead>
+						<!--
+						  COLUMNS FOLLOW THE SCAN. They were hardcoded to round3/now,
+						  which is the same defect the scan was introduced to fix: a
+						  corpus present on disk and absent from a list is invisible,
+						  and that is how the 86 ported items went uncounted.
+						-->
 						<tr>
 							<th>domain</th>
-							<th class="n">round3</th>
-							<th class="n">now</th>
+							{#each census.corpora as c (c)}
+								<th class="n" title={census.files[c]?.path}>{c}</th>
+							{/each}
 							<th class="n">total</th>
 							<th class="bar"></th>
 							<th class="n" title="how many more to level with the largest domain">need</th>
@@ -1073,8 +1097,10 @@
 											title="not in the suggestion list — free text, which is allowed">*</span
 										>{/if}
 								</td>
-								<td class="n dim">{r.round3 || ''}</td>
-								<td class="n" class:mine={r.authoring > 0}>{r.authoring || ''}</td>
+								{#each census.corpora as c (c)}
+									<td class="n" class:mine={c === RUNNING && cnt(r, c) > 0}
+										class:dim={c !== RUNNING}>{cnt(r, c) || ''}</td>
+								{/each}
 								<td class="n tot">{r.total}</td>
 								<td class="bar">
 									<!--
@@ -1083,17 +1109,14 @@
 									  part was inherited. Width is against `max_total`, so a
 									  full bar means "this is the largest", not "this is done".
 									-->
-									<span
-										class="seg r3"
-										style="width:{census.max_total
-											? (r.round3 / census.max_total) * 100
-											: 0}%"
-									></span><span
-										class="seg au"
-										style="width:{census.max_total
-											? (r.authoring / census.max_total) * 100
-											: 0}%"
-									></span>
+									{#each census.corpora as c (c)}<span
+											class="seg"
+											class:au={c === RUNNING}
+											class:r3={c !== RUNNING}
+											style="width:{census.max_total
+												? (cnt(r, c) / census.max_total) * 100
+												: 0}%"
+										></span>{/each}
 								</td>
 								<td class="n need">{r.deficit_to_max ?? ''}</td>
 							</tr>
