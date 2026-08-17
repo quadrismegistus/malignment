@@ -41,6 +41,37 @@ The worst item is `nn_handunderher_chin-blouse` at 0.423, five words a side.
 - **Framing is doing real work and is separable from tagging.** `cos(bare, framed)` on the *declared* axis is 0.706, so about a third of the declared axis comes from the prompt rather than the words. A lexical pair embedded in the frame roughly doubles its cosine over the bare version. Whatever else changes, the poles have to be embedded in the item's prompt.
 - **The origin fails, not the direction.** Sign accuracy on declared pole words is 0.816 under the generic origin and 0.890 when the generic *direction* is given the declared origin. Since scores shift by a constant under a change of origin, `spearman` is untouched by this and only the sign split suffers.
 
+## A POOLED r LICENSES A POOLED USE. It does not license a per-item substitution.
+
+**This is the sharpest limit on the headline number and it is not visible in it** (found by malign, [6381], re-derived here). On the `kill -> scream` item -- naughty `kill, die, cut, murder, hurt, stab`, nice `scream, cry, yell, shout` -- the pooled lexical axis does not merely underperform the declared axis, it MISORDERS the poles:
+
+    frame: 'She was so angry she wanted to'      pooled 12-pair lexical axis
+
+        murder   +0.1078   naughty
+        stab     +0.0951   naughty
+        hurt     +0.0928   naughty
+        kill     +0.0824   naughty
+        yell     +0.0804   NICE      <- above
+        shout    +0.0725   NICE      <- above
+        scream   +0.0474   NICE      <- above
+        die      +0.0463   naughty
+        cut      +0.0107   naughty
+        cry      +0.0059   nice
+
+    naughty-mean - nice-mean  +0.0210        pairwise correct 18/24 (75%)
+
+Screaming scores naughtier than dying. **This is not a defect in the axis; it is the axis working as specified.** It is a general naughty/nice direction, and `scream, cry, yell, shout` are not nice in any general sense -- they are nice ONLY relative to killing. The item's poles are locally relative and a global direction cannot see that.
+
+The r = 0.740 above is pooled over 86 heterogeneous items, and **a pooled validation licenses a pooled use**. Any single item can sit anywhere in that distribution, and this one sits below the point where the axis can carry the contrast at all: malign's declared axis separates the same poles at +0.3904 with 32/32 pairwise, about 13x stronger.
+
+**So an axis needs a SEPARATION GATE before its answer is read, not after.** Malign's producer now prints the gate first and only admits axes that clear it, on the reasoning that reading the answer first is how a gate becomes a rationalisation -- it would have excluded this axis whichever way its count fell. Anything in this repo substituting the lexical axis for tagging on a SPECIFIC item should do the same, and this folder does not supply that gate.
+
+## The tagged battery cannot yet be measured on its own frames
+
+The axis is `embed(prompt + sep + word)`, so the framing is part of the axis. Checked against the local store: of the 86 `round3_slots.yaml` prompts, **2 have any twp record and 84 do not**. Malign hit the same wall from the other side -- the declared `kill -> scream` item's prompt is *"She was so FURIOUS she wanted to"*, which has zero cells anywhere in the roster, so their re-derivation used *"so ANGRY"*: a declared pole set on an undeclared framing, which is a reproduction of the claim rather than a measurement of the declared item.
+
+**This folder is unaffected**, because it compares axes to each other and never runs a model. It bounds what comes next: nothing can measure the tagged items on their own prompts until those prompts are declared and run.
+
 ## What this does and does not license
 
 **It does not license replacing author tags.** Purity, defectors and `MISTAGGED` are properties of a declared pole set and have no generic equivalent; an author who tags is also declaring what they think the item is about, which is a claim this cannot make for them.
