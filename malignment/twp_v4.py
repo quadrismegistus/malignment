@@ -100,6 +100,11 @@ class Rules:
     #: terminal like `!` -- see the module docstring for why that is not merely
     #: wrong but wrong DIFFERENTIALLY.
     hyphen_intra: bool = False
+    #: Let `,` and `.` CONTINUE a word when the surface so far ends in a digit,
+    #: so `100` + `,` + `000` is one word. See `numeric_intra_ids`.
+    numeric_intra: bool = False
+    #: Override `twp.MAX_DEPTH` for this run. None == v3's 6.
+    max_depth: int = None
     #: Divide by the boundary mass at depth 0 -- Pimentel & Meister Thm 2's
     #: DENOMINATOR, which v3 omits. See `expand4`.
     apply_z: bool = False
@@ -112,7 +117,8 @@ class Rules:
         #: `decoded_boundary` was missing for exactly one commit.
         return (self.term_floor == 0.0 and not self.term_renorm
                 and not self.enumerate_paths and not self.hyphen_intra
-                and not self.decoded_boundary and not self.apply_z)
+                and not self.decoded_boundary and not self.numeric_intra
+                and self.max_depth is None and not self.apply_z)
 
     def label(self):
         if self.is_v3():
@@ -126,6 +132,10 @@ class Rules:
             bits.append("hyphen")
         if self.decoded_boundary:
             bits.append("decoded")
+        if self.numeric_intra:
+            bits.append("numeric")
+        if self.max_depth is not None:
+            bits.append("depth=%d" % self.max_depth)
         if self.apply_z:
             bits.append("Z")
         return "v4[" + ",".join(bits) + "]"
@@ -220,6 +230,45 @@ def decoded_boundary_ids(tok):
     return _DECIDX[key]
 
 
+
+_NUMIDX = {}
+
+
+def numeric_intra_ids(tok):
+    """Ids that should CONTINUE a word when the surface so far ends in a digit.
+
+    **THE RULE IS NOT MISSING, IT IS STARVED**, which is lacan's finding at
+    [6430] and it decides the implementation. `twp.intra_word` already handles
+    the numeric case -- its docstring names `100` + `,000` -- and never fires,
+    because it ends on `tok_str[1].isalnum()` and **no `,000` TOKEN EXISTS**:
+    159 of 159 roster tokenizers emit the separator ALONE. So a longer id list
+    has nothing to match, exactly as `PUNCT` had nothing to match in
+    `decoded_boundary`. Same classifier, same shape, twice.
+
+    Selected on the DECODED form so a byte-level `Ġ,` and a sentencepiece `▁,`
+    are both seen for what they are, and WITHOUT a leading space: ` ,` starts a
+    new token run, `,` continues the number.
+
+    Multi-character tokens like `,000` and `.5` are included where a vocabulary
+    has them -- most do not, which is the whole point.
+    """
+    key = id(tok)
+    if key not in _NUMIDX:
+        table, _kind = byte_table(tok)
+        out = []
+        for i, b in enumerate(table):
+            if not b:
+                continue
+            try:
+                sfc = b.decode("utf-8")
+            except UnicodeDecodeError:
+                continue
+            if sfc and sfc[0] in ",." and (len(sfc) == 1 or sfc[1:].isdigit()):
+                out.append(i)
+        _NUMIDX[key] = np.array(out, dtype=np.int64)
+    return _NUMIDX[key]
+
+
 @torch.no_grad()
 def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
             bos_policy="inherited", rules=None):
@@ -251,7 +300,8 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
     #: and conservation would still read 1.0 while meaning something different.
     res["term_floored"] = 0.0
     paths, bcache, intra = {}, {}, {}
-    for _ in range(T.MAX_DEPTH):
+    for _ in range(rules.max_depth if rules.max_depth is not None
+                   else T.MAX_DEPTH):
         if not live:
             break
         dist = T.next_dist(model, tok, pids, [p for p, _, _ in live], dev)
@@ -262,6 +312,14 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
             #: Applied AFTER v3's rule and only where v3 itself unmasks the
             #: contractions -- an alphanumeric-final surface. `100` + `-5` and
             #: `self` + `-motivated` continue; `listen` + `--` does not.
+            #: **A SEPARATOR IS ONLY INTRA-WORD AFTER A DIGIT.** Surface-
+            #: conditioned exactly like v3's contraction rule, so `$100` + `,`
+            #: continues and `night` + `,` still terminates.
+            if rules.numeric_intra and surf and surf[-1].isdigit():
+                nm = numeric_intra_ids(tok)
+                if len(nm):
+                    b = b.copy()
+                    b[nm] = False
             if rules.hyphen_intra and surf and surf[-1].isalnum():
                 hy = hyphen_intra_ids(tok)
                 if len(hy):
@@ -277,7 +335,16 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
                     floored = float(bm.sum()) - term
             else:
                 term, floored = float(bm.sum()), 0.0
-            if surf and not T.is_mojibake(surf):
+            #: **A SURFACE ENDING IN AN UNMASKED SEPARATOR IS A FRAGMENT.**
+            #: `$100,` is mid-number, not a word -- and `clean_surface` strips
+            #: the comma, so crediting it would add `$100` a SECOND time at a
+            #: deeper depth. That is precisely the double-crediting the CJK arm
+            #: turned out to be, so the rule that creates the continuation must
+            #: also refuse the fragment or it imports the same defect.
+            raw_end = tok.decode(list(pref))[-1:]
+            if rules.numeric_intra and raw_end in ",.":
+                res["drop"] += mass * (term + floored)
+            elif surf and not T.is_mojibake(surf):
                 key = (surf, t1)
                 words[key] = words.get(key, 0.0) + mass * term
                 paths[key] = paths.get(key, 0) + 1
@@ -634,7 +701,8 @@ def _score_words_paths_failed(model, tok, prompt, targets, dev, bmask, cjk=None,
     for tid, s in extensions(""):
         live.append(((tid,), float(P0[tid]), tid, s))
     got, bcache, intra = {}, {}, {}
-    for _ in range(T.MAX_DEPTH):
+    for _ in range(rules.max_depth if rules.max_depth is not None
+                   else T.MAX_DEPTH):
         if not live:
             break
         dist = T.next_dist(model, tok, pids, [p for p, _, _, _ in live], dev)
