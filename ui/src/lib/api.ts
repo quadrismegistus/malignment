@@ -294,6 +294,29 @@ async function post<T>(path: string, body: unknown): Promise<T> {
 	return j as T;
 }
 
+export type DomainRow = {
+	domain: string;
+	round3: number;
+	authoring: number;
+	total: number;
+	suggested: boolean;
+	untagged: boolean;
+	/** null on the untagged row: it is not a domain, so it is not a balance target. */
+	deficit_to_max: number | null;
+};
+
+export type DomainCensus = {
+	corpora: string[];
+	files: Record<string, { path: string; exists: boolean; n: number }>;
+	domains: string[];
+	rows: DomainRow[];
+	max_total: number;
+	n_total: number;
+	/** raw strings differing only by case or separator — one domain typed twice. */
+	collisions: string[][];
+	untagged_label: string;
+};
+
 export interface SavedItem {
 	item_id: string;
 	prompt: string;
@@ -350,6 +373,7 @@ export const api = {
 	//: carries its prompt verbatim from the transgressive battery.
 	slotSave: (body: SaveRequest) => post<SaveResponse>('/slot/save', body),
 	slotSaved: () => get<{ dir: string; n: number; items: SavedItem[] }>('/slot/saved'),
+	slotDomains: () => get<DomainCensus>('/slot/domains'),
 	health: () => get<Health>('/health'),
 	inventory: () => get<{ db: string; tables: Table[] }>('/store/inventory'),
 	roster: () => get<RosterSummary>('/roster'),

@@ -42,7 +42,7 @@
 -->
 <script lang="ts">
 	import { api, ApiError } from '$lib/api';
-	import type { SlotResponse, AxisResponse, Health, Pair } from '$lib/api';
+	import type { SlotResponse, AxisResponse, Health, Pair, DomainCensus } from '$lib/api';
 
 	let prompt = $state('She slowly took off her');
 	//: NO DEFAULT MODEL, matching the server. A default pool is a population
@@ -604,8 +604,26 @@
 	//: dropdown would silently discourage the eleventh category, and the field
 	//: exists to make a later sort possible rather than to settle the taxonomy
 	//: now. The server does not validate it either.
-	const DOMAINS = ['sexual', 'violence', 'power', 'substance', 'property',
+	//: **THE LIST IS NOW THE SERVER'S** (`/slot/domains`), with this literal only
+	//: as the pre-fetch fallback. Two hand-maintained copies of the same ten
+	//: strings drift silently: the author picks from this datalist while the
+	//: census groups by `slots.DOMAINS`, so a name added in one place makes an
+	//: item that files itself under a domain the other never shows.
+	const DOMAINS_FALLBACK = ['sexual', 'violence', 'power', 'substance', 'property',
 		'identity_matched_frame', 'self_harm', 'poverty', 'medical', 'institutional'];
+	let census = $state<DomainCensus | null>(null);
+	let DOMAINS = $derived(census?.domains ?? DOMAINS_FALLBACK);
+	//: Suggestions first, then any domain already in use that is NOT on the list,
+	//: so an eleventh category typed once is offered the second time instead of
+	//: being retyped from memory and misspelled -- which is what makes the
+	//: `collisions` row below appear.
+	let domainOptions = $derived([
+		...DOMAINS,
+		...(census?.rows ?? [])
+			.filter((r) => !r.suggested && !r.untagged && r.total > 0)
+			.map((r) => r.domain)
+	]);
+	let censusOpen = $state(false);
 	let saveDomain = $state('');
 	let savedCount = $state<number | null>(null);
 	//: The id can CHANGE under retagging rather than collide: it is built from
@@ -616,6 +634,11 @@
 	let savedIds = $state<string[]>([]);
 
 	function refreshSaved() {
+		//: Re-read on every save, because the census is the reason to save into a
+		//: thin domain and a stale one advises the opposite.
+		api.slotDomains()
+			.then((r) => (census = r))
+			.catch(() => (census = null));
 		api.slotSaved()
 			.then((r) => {
 				savedCount = r.n;
@@ -914,7 +937,7 @@
 					title="free text — sexual, violence, power … used to sort later. Nothing enforces the list."
 				/>
 				<datalist id="slot-domains">
-					{#each DOMAINS as d (d)}<option value={d}></option>{/each}
+					{#each domainOptions as d (d)}<option value={d}></option>{/each}
 				</datalist>
 				<input
 					class="notein"
@@ -925,6 +948,16 @@
 					<span class="cnt dim" title="items already written to $MALIGNMENT_DATA/slots/">
 						{savedCount} saved
 					</span>
+				{/if}
+				{#if census}
+					<button
+						class="censustog"
+						class:on={censusOpen}
+						onclick={() => (censusOpen = !censusOpen)}
+						title="items per domain across both slot corpora — for building a balanced set"
+					>
+						{censusOpen ? 'hide' : 'domains'} · {census.n_total}
+					</button>
 				{/if}
 				{#if saved}
 					<!--
@@ -953,6 +986,102 @@
 							}}>overwrite it</button
 						>
 					{/if}
+				{/if}
+			</div>
+		{/if}
+
+		{#if censusOpen && census}
+			<!--
+			  ── ITEMS PER DOMAIN, FOR BUILDING A BALANCED SET.
+
+			  TWO COLUMNS, NEVER ONE. `round3` is the 86 committed items migrated
+			  from the archive; `now` is what is being authored into
+			  $MALIGNMENT_DATA. A single pooled count cannot answer either question
+			  an author has -- "is the set I am adding balanced" and "is the whole
+			  corpus balanced" -- and pooling makes a thin domain look served by
+			  inherited items the author did not choose.
+
+			  A DOMAIN AT ZERO IS A ROW. That is why this is not a GROUP BY: the
+			  rows worth acting on are the ones with nothing in them, and those are
+			  exactly the rows a group-by cannot produce.
+
+			  THE BAR IS THE COMPARISON AND `need` IS ARITHMETIC ON THE COUNTS.
+			  `need` is distance to the LARGEST domain, not to a target -- what a
+			  balanced set should hold is RH's decision, and a column called
+			  `target` would be this panel inventing one.
+			-->
+			<div class="census">
+				<div class="censushead">
+					<span
+						>items per domain · {census.n_total} total, largest {census.max_total}</span
+					>
+					<span class="dim"
+						>round3 {census.files.round3?.n ?? 0} committed · now {census.files
+							.authoring?.n ?? 0} authored · domain is free text and nothing enforces
+						the list</span
+					>
+				</div>
+				<table class="censustab">
+					<thead>
+						<tr>
+							<th>domain</th>
+							<th class="n">round3</th>
+							<th class="n">now</th>
+							<th class="n">total</th>
+							<th class="bar"></th>
+							<th class="n" title="how many more to level with the largest domain">need</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each census.rows as r (r.domain)}
+							<tr class:zero={r.total === 0} class:untag={r.untagged}>
+								<td class="dom">
+									{r.domain}{#if !r.suggested && !r.untagged}<span
+											class="offlist"
+											title="not in the suggestion list — free text, which is allowed">*</span
+										>{/if}
+								</td>
+								<td class="n dim">{r.round3 || ''}</td>
+								<td class="n" class:mine={r.authoring > 0}>{r.authoring || ''}</td>
+								<td class="n tot">{r.total}</td>
+								<td class="bar">
+									<!--
+									  Two stacked segments so the author can see at a glance
+									  which part of a domain's height they authored and which
+									  part was inherited. Width is against `max_total`, so a
+									  full bar means "this is the largest", not "this is done".
+									-->
+									<span
+										class="seg r3"
+										style="width:{census.max_total
+											? (r.round3 / census.max_total) * 100
+											: 0}%"
+									></span><span
+										class="seg au"
+										style="width:{census.max_total
+											? (r.authoring / census.max_total) * 100
+											: 0}%"
+									></span>
+								</td>
+								<td class="n need">{r.deficit_to_max ?? ''}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+				{#if census.collisions.length}
+					<!--
+					  NEAR-MISSES ARE FLAGGED AND NOT MERGED. Two raw strings that
+					  differ only by case or separator are almost always one domain
+					  typed twice, but folding them here would report a balance the
+					  files do not have and hide the slip. Merging is the author's
+					  call; this only says where.
+					-->
+					<div class="collide">
+						same domain typed two ways — merge by hand, nothing folds these:
+						{#each census.collisions as g (g.join('|'))}
+							<code>{g.join(' / ')}</code>
+						{/each}
+					</div>
 				{/if}
 			</div>
 		{/if}
@@ -1307,6 +1436,111 @@
 	.saverow {
 		display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
 		margin-top: 8px;
+	}
+	.censustog {
+		font: inherit;
+		font-size: 0.72rem;
+		background: transparent;
+		border: 1px solid var(--line, #d8d8d4);
+		border-radius: 3px;
+		padding: 0.1rem 0.4rem;
+		cursor: pointer;
+		color: var(--dim, #6b6b66);
+	}
+	.censustog.on,
+	.censustog:hover {
+		background: var(--soft, #f0f0ec);
+		color: inherit;
+	}
+	.census {
+		margin: 0.35rem 0 0.15rem;
+		padding: 0.4rem 0.5rem;
+		border: 1px solid var(--line, #d8d8d4);
+		border-radius: 3px;
+		background: var(--soft, #fafaf7);
+	}
+	.censushead {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.15rem 0.8rem;
+		font-size: 0.72rem;
+		margin-bottom: 0.3rem;
+	}
+	.censustab {
+		border-collapse: collapse;
+		font-size: 0.72rem;
+		width: 100%;
+		max-width: 34rem;
+	}
+	.censustab th {
+		text-align: left;
+		font-weight: 500;
+		color: var(--dim, #6b6b66);
+		border-bottom: 1px solid var(--line, #d8d8d4);
+		padding: 0 0.4rem 0.12rem 0;
+	}
+	.censustab td {
+		padding: 0.06rem 0.4rem 0.06rem 0;
+		white-space: nowrap;
+	}
+	.censustab th.n,
+	.censustab td.n {
+		text-align: right;
+		font-variant-numeric: tabular-nums;
+		width: 3.1rem;
+	}
+	.censustab .tot {
+		font-weight: 600;
+	}
+	.censustab .mine {
+		color: #1a6b3a;
+		font-weight: 600;
+	}
+	.censustab .need {
+		color: var(--dim, #6b6b66);
+	}
+	/* A zero row is CONTENT -- it is the domain worth authoring next -- so it is
+	   dimmed only enough to read as empty, never hidden. */
+	.censustab tr.zero .dom {
+		color: var(--dim, #8b8b86);
+	}
+	.censustab tr.untag .dom {
+		font-style: italic;
+		color: #8a6d3b;
+	}
+	.censustab .dom {
+		width: 12rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.offlist {
+		color: #8a6d3b;
+		padding-left: 0.1rem;
+	}
+	.censustab td.bar,
+	.censustab th.bar {
+		width: auto;
+		min-width: 6rem;
+		padding-right: 0.5rem;
+	}
+	.seg {
+		display: inline-block;
+		height: 0.5rem;
+		vertical-align: middle;
+	}
+	.seg.r3 {
+		background: #b9c6d6;
+	}
+	.seg.au {
+		background: #2f7a4d;
+	}
+	.collide {
+		font-size: 0.7rem;
+		margin-top: 0.3rem;
+		color: #8a6d3b;
+	}
+	.collide code {
+		margin-left: 0.3rem;
 	}
 	.domainin {
 		flex: 0 0 150px; padding: 5px 8px;

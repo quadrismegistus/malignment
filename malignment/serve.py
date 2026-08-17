@@ -1402,6 +1402,21 @@ class Handler(BaseHTTPRequestHandler):
                     #: made", not "how was it screened". It is in the file.
                     "items": [{k: v for k, v in d.items() if k != "screened_by"}
                               for d in items]}
+        if path == "/slot/domains":
+            #: **THE ZEROS ARE THE PAYLOAD.** RH, 2026-08-17: "show how many
+            #: prompts we currently have per domain to help me organise making a
+            #: balanced set." A `GROUP BY` answers the first clause and not the
+            #: second -- it cannot emit a row for a domain with no items, and a
+            #: domain at zero is the one an author building a balanced set most
+            #: needs to see. `slots.domain_census` unions the suggestion list in
+            #: so an unused domain reads as 0 rather than as absent.
+            #:
+            #: **AND IT RETURNS THE DOMAIN LIST**, which the client had its own
+            #: copy of. Two hand-maintained lists of the same ten strings drift,
+            #: and the drift is invisible: an author picks from the client's
+            #: datalist while the census groups by the server's.
+            from .slots import domain_census
+            return domain_census()
         if path == "/slot/item_id":
             #: **THE ID IS DERIVED HERE AND NOT IN THE CLIENT.** It is a pure
             #: function of one string, and that is the argument for not letting

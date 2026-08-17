@@ -386,9 +386,103 @@ JOURNAL = os.path.join(SLOT_DIR, "journal.jsonl")
 #: NOT enforced. A closed vocabulary invented here would silently discourage the
 #: eleventh category, and the point of the field is to make later sorting
 #: possible rather than to decide the taxonomy now.
+UNTAGGED = "(untagged)"
+
 DOMAINS = ["sexual", "violence", "power", "substance", "property",
            "identity_matched_frame", "self_harm", "poverty", "medical",
            "institutional"]
+
+
+#: Repo root, for the COMMITTED corpus below. Resolved from this file rather
+#: than from the cwd: the server is started from wherever the author happens to
+#: be standing, and a census that silently reads no file would report a balanced
+#: set of zero.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+#: **THE TWO POPULATIONS ARE NAMED AND NEVER SUMMED INTO ONE COLUMN.** `round3`
+#: is the 86 items migrated from the archive and committed; `authoring` is what
+#: is being written now into `SLOT_YAML`. A single pooled count answers neither
+#: question an author has -- "is the set I am building balanced" and "is the
+#: whole corpus balanced" -- and it answers them wrongly in opposite directions.
+CORPORA = [("round3", os.path.join(ROOT, "roster", "prompts", "slots", "round3.yaml")),
+           ("authoring", None)]
+
+
+def _norm_domain(d):
+    """The form two domains would share if case and separators did not matter."""
+    return re.sub(r"[\s_-]+", "", (d or "").strip().casefold())
+
+
+def domain_census(corpora=None):
+    """Items per domain across both slot corpora. -> dict
+
+    **A GROUP BY CANNOT PRODUCE A ROW FOR A DOMAIN WITH NO ITEMS, AND THOSE ARE
+    THE ROWS AN AUTHOR BUILDING A BALANCED SET IS LOOKING FOR.** So the row set
+    is the UNION of `DOMAINS` with everything actually present, and a suggested
+    domain nobody has used yet appears at zero rather than not appearing. This is
+    the whole reason the function exists instead of a one-line Counter.
+
+    **DOMAINS ARE COUNTED AS THE RAW STRINGS THEY ARE.** The field is free text
+    by decision (RH, 2026-08-17) and this does not normalise it: folding
+    `Violence` into `violence` would report a balance the file does not have and
+    hide the authoring slip that produced two keys. Near-misses are instead
+    FLAGGED, in `collisions`, so the author can see they need merging and choose
+    to.
+
+    **An untagged item is counted, under `(untagged)`.** It is in no bucket, so
+    it cannot be balanced, and an author who cannot see it has a set that looks
+    complete and is short.
+    """
+    import collections
+    rows = collections.defaultdict(lambda: collections.Counter())
+    present, files = [], {}
+    for name, path in (corpora or CORPORA):
+        target = path or SLOT_YAML
+        files[name] = {"path": target, "exists": os.path.exists(target)}
+        items = read_items(target) if files[name]["exists"] else []
+        files[name]["n"] = len(items)
+        for d in items:
+            raw = (d.get("domain") or "").strip()
+            key = raw or UNTAGGED
+            rows[key][name] += 1
+            if raw:
+                present.append(raw)
+    #: Suggested-but-unused domains enter here; `UNTAGGED` only if it occurred.
+    for d in DOMAINS:
+        rows[d]
+    #: Two raw strings that differ only by case or separator are almost always
+    #: one domain typed twice, but merging them is the author's call and not a
+    #: reader's, so this reports the group and changes nothing.
+    groups = collections.defaultdict(set)
+    for raw in present:
+        groups[_norm_domain(raw)].add(raw)
+    collisions = sorted([sorted(v) for v in groups.values() if len(v) > 1])
+    names = [n for n, _ in (corpora or CORPORA)]
+    out = []
+    for dom, c in rows.items():
+        total = sum(c.values())
+        out.append({"domain": dom,
+                    **{n: c.get(n, 0) for n in names},
+                    "total": total,
+                    "suggested": dom in DOMAINS,
+                    "untagged": dom == UNTAGGED})
+    #: Largest first, then alphabetical, so the long tail and the zeros read as
+    #: one ordered deficit list rather than needing a second sort.
+    out.sort(key=lambda r: (-r["total"], r["domain"]))
+    #: Distance to the LARGEST domain, which is arithmetic on the counts and not
+    #: a target: what a balanced set should hold is the author's decision, and a
+    #: number labelled `target` would be this seat inventing one.
+    #: **`UNTAGGED` IS EXCLUDED FROM THE MAX AND GETS NO DEFICIT.** It is not a
+    #: domain, so it cannot be the thing a balanced set levels up to: counting it
+    #: would mean a mostly-untagged corpus computed every real domain's shortfall
+    #: against a bucket that should be emptied rather than matched.
+    top = max([r["total"] for r in out if not r["untagged"]] or [0])
+    for r in out:
+        r["deficit_to_max"] = None if r["untagged"] else top - r["total"]
+    return {"corpora": names, "files": files, "domains": DOMAINS,
+            "rows": out, "max_total": top,
+            "n_total": sum(r["total"] for r in out),
+            "collisions": collisions, "untagged_label": UNTAGGED}
 
 
 class _Flow(list):
