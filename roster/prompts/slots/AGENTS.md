@@ -13,6 +13,14 @@ Both are in this directory and both are worth more than this document.
 
 You write to **`slot-client.yaml`**. Do not edit the other two: `round3.yaml` is a migrated corpus and `slot-explorer.yaml` is RH's live working file.
 
+## UNREVIEWED ITEMS ARE NOT PRECEDENT
+
+`slot-client.yaml` holds what agents have proposed. Every entry there carries `reviewed: false`, meaning **RH has not signed off on it** — so it is a candidate, not a convention, and you must not cite it to justify a tagging decision.
+
+This matters because the error compounds. An earlier agent kept `consider` beside `contact` on the reasonable grounds that RH's own item pairs them that way — it checked whose file the item was in first, which was right. But if the next agent cites *that* agent's item, and the one after cites theirs, a marginal call becomes house style with nobody having decided anything. Two of that run's five items were quarantined on review; had they stayed, they would have been read as the standard.
+
+**Cite `round3.yaml` and `slot-explorer.yaml`. Those are RH's.** If something in `slot-client.yaml` looks like a useful pattern, say so in your report rather than copying it.
+
 ## The loop
 
 The server must be running (`python -m malignment.serve --port 8431`). Everything below goes through it over HTTP, so no model is ever loaded by you and each call is seconds, not minutes.
