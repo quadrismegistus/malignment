@@ -479,7 +479,13 @@
 					depth; <code>clean_surface</code> strips the punctuation, so the surfaces below look
 					correct and some probabilities behind them are double-counted. 84 of 133 models are
 					affected and 49 are not, so this is <strong>a reordering that differs by tokenizer
-						family</strong>. Magnitude is not established at roster scale. On one model and three
+						family</strong> — <strong>but an UNMARKED arm is not a clean one</strong>. The 49
+					models absent from that list are clean on the CJK marks lacan probed; malign's roster
+					sweep finds <strong>88 of 88 tokenizers missing punctuation ids by the same mechanism,
+						including all 36 SentencePiece</strong> (median 72 missed ids, 33 of them non-CJK —
+					SentencePiece prefixes word-initial tokens with U+2581, so <code>_—</code> misses the em
+					dash because the raw key is not the decoded key). The marking below is a floor, not a
+					partition. Magnitude is not established at roster scale. On one model and three
 					prompts, correcting the mask moves <strong>+15% to +28% of resolved mass on Chinese
 						prompts</strong> and every word in the cell — this is recovery of mass that was
 					bleeding into <code>drop</code>/<code>open</code>, not redistribution between words.
@@ -646,7 +652,8 @@
 				{#if promptIsCJK && cjkKnown && affectedArms.length}
 					<span class="muted warn"
 						>· {affectedArms.length} arm{affectedArms.length > 1 ? 's' : ''} marked
-						<code>cjk</code> do not mark CJK punctuation as a boundary</span
+						<code>cjk</code> miss CJK punctuation — and an unmarked arm is not clean, it is
+						untested on other marks (88 of 88 tokenizers miss some; docket [6447])</span
 					>
 				{/if}
 			</h3>
@@ -669,7 +676,7 @@
 								<td title={e.base}
 									>{short(e.base)}{#if promptIsCJK && cjkKnown && cjkAffected.has(e.base)}<span
 											class="cjkmark"
-											title="this arm does not mark CJK punctuation as a boundary, so some word probabilities on this CJK prompt are double-counted — docket [6435]"
+											title="this arm does not mark CJK punctuation as a boundary, so some word probabilities on this CJK prompt are double-counted (docket [6435]). An UNMARKED arm is not clean: 88 of 88 tokenizers miss punctuation ids by the same mechanism, including all SentencePiece (docket [6447]) — this marking is a floor, not a partition."
 											>cjk</span
 										>{/if}</td
 								>
