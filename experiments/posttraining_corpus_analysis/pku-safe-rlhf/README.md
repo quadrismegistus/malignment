@@ -103,6 +103,10 @@ and a seventh matching several categories, and the residue was not neutral.
   LLMs, labelled by humans and AI in an undisclosed mix. Each layer is named
   where it enters.
 
+**The reading of this result, and what it converges with in M02 and M01/Y, is in
+[`interpretation.md`](interpretation.md)** -- kept separate so the numbers above
+stand or fall without it.
+
 # SCOPE, AND IT IS TURTLES
 
 - **CONDITIONAL BY CONSTRUCTION.** Selected on the feature. This says *where
