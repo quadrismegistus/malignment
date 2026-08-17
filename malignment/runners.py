@@ -398,6 +398,18 @@ class TWPRunner:
                  "loader": loader_id, "device": dev,
                  "revision": ck.revision or "", "compute_dtype": "float16",
                  "producer": PRODUCER}
+        #: **THE BODY MUST CARRY WHAT THE KEY CARRIES.** `ck.key(p, rules)` puts
+        #: `rule_version`, `rules` and `prompt_cache` on the KEY; the ingest reads
+        #: the BODY. A v4 cell stamped with `T.RULE_VERSION` (always 3) and no
+        #: rules would be correctly keyed and would FILE as something else --
+        #: which is what `m-a-p/CT-LLM-Base`'s 2,706 cells did on 2026-08-17,
+        #: key saying `v4[decoded,depth=9]` and body saying `None`.
+        #:
+        #: `ingest._key_body_agree` now refuses that shape. This is the producer
+        #: half: derived FROM the key so the two cannot drift.
+        if rules is not None:
+            stamp.update({f: v for f, v in ck.key("", rules).items()
+                          if f not in ("model", "prompt")})
         st = ck.stash()
         try:
             from tqdm import tqdm

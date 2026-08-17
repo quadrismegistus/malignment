@@ -254,10 +254,55 @@ def _cells(path):
             k = (d.get("model"), d.get("prompt"))
             if k[0] is None or k[1] is None:
                 continue
+            _key_body_agree(d, path)
             if k in seen:
                 dups += 1
             seen[k] = d
     return seen, dups
+
+
+#: Fields that identify the INSTRUMENT and must appear identically in the
+#: record's `__key__` and in its body. `rule_version` and `dict_sha` were always
+#: in both; `rules` and `prompt_cache` arrived with v4 and only reached the key.
+INSTRUMENT_FIELDS = ("rule_version", "dict_sha", "rules", "prompt_cache")
+
+
+def _key_body_agree(d, path):
+    """REFUSE a record whose body disagrees with its own `__key__`.
+
+    **THE KEY DECLARES THE INSTRUMENT AND THE INGEST READS THE BODY**, so a cell
+    can be correctly keyed and ingest as something else entirely. Found 2026-08-17
+    on `m-a-p/CT-LLM-Base`: 2,706 v4 cells whose `__key__` carried
+    `rules: "v4[decoded,depth=9]", prompt_cache: true` and whose BODY carried
+    `rules: None, prompt_cache: None`, because `run_v4.py` built a stamp with
+    those fields and then became a thin wrapper around `Runner`, whose stamp does
+    not know them. The measurement was sound and the provenance was half-written.
+
+    `twp_cells_v4` and `twp_words_v4` put `rules` IN THE SORTING KEY, so every one
+    of those rows would have landed under an empty string -- indistinguishable
+    from a run with no rules at all, and colliding with any future one.
+
+    **A memory would not have caught this and a guard does**, which is the whole
+    argument: a rule that runs only where someone remembers it is not running.
+    Refuses rather than repairing, because a body silently rewritten from its key
+    is a second claim about what happened, and this file's job is to say what
+    the producer wrote.
+    """
+    key = d.get("__key__")
+    if not isinstance(key, dict):
+        return
+    bad = [(f, key.get(f), d.get(f)) for f in INSTRUMENT_FIELDS
+           if f in key and d.get(f) != key.get(f)]
+    if bad:
+        raise ValueError(
+            "%s: record's body disagrees with its __key__ on %s. The key is the "
+            "instrument the cell was measured with; the body is what this ingest "
+            "would file it as. Fix the PRODUCER's stamp -- do not repair the "
+            "body here, and do not ingest a cell whose provenance is two "
+            "different claims. prompt=%r"
+            % (os.path.basename(path),
+               ", ".join("%s key=%r body=%r" % b for b in bad),
+               str(d.get("prompt"))[:40]))
 
 
 def plan(files):
