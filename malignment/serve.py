@@ -445,6 +445,7 @@ def _plot_specs():
     """{id: (spec, module)} for every `experiments/**/plot.py` exposing `PLOT`."""
     if _PLOTS:
         return _PLOTS
+    import importlib
     import importlib.util
     for dirpath, dirnames, filenames in os.walk(EXPERIMENTS):
         dirnames[:] = [d for d in dirnames
@@ -477,6 +478,17 @@ def _plot_specs():
         p = dict(p)
         p["experiment"] = rel
         p["has_render"] = callable(getattr(mod, "render", None))
+        #: **CHECKED AT DISCOVERY, NOT AT RENDER.** A producer's heavy imports
+        #: are usually lazy, so the module imports fine and the missing package
+        #: only surfaces when someone presses the button. Import-checking what
+        #: the spec DECLARES it needs turns that into a fact the list can carry.
+        missing = []
+        for req in (p.get("requires") or []):
+            try:
+                importlib.import_module(req)
+            except Exception:
+                missing.append(req)
+        p["missing_requires"] = missing
         _PLOTS[p["id"]] = (p, mod)
     return _PLOTS
 
@@ -1226,6 +1238,11 @@ class Handler(BaseHTTPRequestHandler):
             spec, mod = specs[pid]
             if mod is None or not spec.get("has_render"):
                 raise ValueError("%r declares no `render`; it is CLI-only" % pid)
+            if spec.get("missing_requires"):
+                raise ValueError(
+                    "%r needs %s, which this interpreter does not have. Install "
+                    "with `pip install -e '.[plots]'` in the venv running this "
+                    "server." % (pid, ", ".join(spec["missing_requires"])))
             kw = _plot_coerce(spec, one)
             #: SERIALISED. A render is a ClickHouse read plus a matplotlib-backed
             #: draw, and plotnine's backend is not reentrant across threads --

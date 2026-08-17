@@ -37,6 +37,19 @@ dependencies = { file = ["requirements.txt"] }
 # declaration can run the suite.
 [project.optional-dependencies]
 dev = ["pytest", "packaging"]
+# Same reasoning as `dev`, one level out. `requirements.txt` is an AST WALK OF
+# `malignment/*.py`, and plotnine is imported by
+# `experiments/exploratory/prompt_slopes/plot.py` -- a producer, not the package
+# -- so the walk correctly cannot see it and adding it there would break the one
+# property that file has.
+#
+# **BUT THE PACKAGE NOW DEPENDS ON IT ANYWAY, THROUGH A DYNAMIC IMPORT.**
+# `serve.py`'s `/plot/render` loads a producer by path and calls its `render()`.
+# No AST walk of `malignment/*.py` can find that edge, which is why the declared
+# venv could serve `/plots` and fail on `/plot/render` with
+# ModuleNotFoundError: matplotlib. The dependency is real and invisible to the
+# generator, so it is declared by hand here.
+plots = ["plotnine"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -263,6 +263,15 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels):
 #: because a prompt with no cells can only ever produce an empty figure.
 PLOT = {
     "id": "prompt_slopes",
+    #: **DECLARED SO DISCOVERY CAN REFUSE BEFORE THE BUTTON IS PRESSED.** The
+    #: plotnine import lives inside `draw()` -- deliberately, to keep the CLI's
+    #: startup cheap and to set the Agg backend first -- and the side effect was
+    #: that this module imports fine without it. So `/plots` listed a figure the
+    #: environment could not draw and the failure arrived on click, as
+    #: `ModuleNotFoundError: matplotlib`. A lazy import moves a failure later,
+    #: which is usually the point and here made an unavailable plot look
+    #: available. Install with `pip install -e '.[plots]'`.
+    "requires": ["plotnine"],
     "name": "prompt slopes",
     "blurb": "One prompt, every lineage: what the models put at the blank, "
              "before and after. Levels, not derived statistics.",
