@@ -76,6 +76,24 @@ Checked against what v3 actually holds (ClickHouse tables and `experiments/*/res
 | `LogitLensChart`, `BeamExplorer`, `TrajectoryChart`, `ResistanceTrajectories`, `SurvivalDecay` | no per-layer, per-beam or trajectory data in v3 | not a UI task |
 | `DataExplorer` (ad-hoc table browsing) | n/a | **deliberately not.** `serve.py` has no query endpoint by design: nothing a client sends reaches SQL, and the archive's `/api/data/csv` grew into a second way to define a population |
 
+## 3d. The numeric-truncation fence is on the panel; the defect is not fixed
+
+twp cuts a word at `,` and `.` between digits, in **159 of 159 roster tokenizers with zero exceptions** (lacan, docket [6430]) -- every one emits the separator as its own token, so `$100,000` is recorded as `100`. `twp.intra_word` already implements the numeric case and never fires: it fails on `tok_str[1].isalnum()` because the token has no second character. **The rule is not missing, it is starved**, so no longer list of ids can fix it and the v4 repair is lookahead in the expansion -- proposed, unimplemented, and gated on the CJK arm being measured.
+
+**Why this reached the UI rather than staying an instrument note.** The Prompts panel shows, for the real class-contrast salary prompts:
+
+    upper-class    100, 50, 1, 10, 200, 40
+    middle-class   50, 40, 60, 30, 45, 75
+
+That reads as a class effect, and `1` is almost certainly `$1,000,000` rendering below `200`. **The collapse is not monotone** -- `$100,000` and `$100` both become `100` while `$95,000` becomes `95` -- so sorting the display inverts the magnitudes. A panel that shows this without a fence hands a reader an inverted ordering as a finding.
+
+Implemented: a warning on the word-level view, shown when a bare-digit surface is present. **The condition is exact** (`^\d+$` on the surface), not a guess about the prompt, so there are no false positives and nothing to re-tune when v4 lands.
+
+Still open:
+
+- **The fence is on the pair view only.** The Prompts table's `movement`/`fallen`/`risen` medians are computed over these same truncated surfaces and carry no warning, because the aggregate does not show which words it summed. Whether a median over collapsed magnitudes means anything is not a UI question.
+- **It will need removing, not editing, when v4 lands.** A stale fence claiming a defect that has been fixed is the same class of error as a stale caption, and this one names its docket entry so the next reader can check whether it still holds.
+
 ## 5. Blocked or waiting on someone else
 
 - **Any panel that renders `dN`.** Two conventions are emitted (`dN` and `dN_renorm`) and neither is canonical; where they disagree in sign the pair is not quotable at all, which is 14.8% of prompts at roster scale. A panel that picks one silently would be making a ruling that is RH's. `sign_disagree` is already in the payload, so the panel can refuse rather than choose.

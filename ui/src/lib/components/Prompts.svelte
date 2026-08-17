@@ -286,6 +286,28 @@
 		return { picked, top, H, W, x0, x1, y, labels };
 	});
 
+	//: ── NUMERIC SURFACES ARE TRUNCATED, AND THE ORDERING IS NOT THE ORDERING.
+	//:
+	//: twp cuts a word at `,` and `.` between digits: every one of the roster's
+	//: 159 tokenizers emits the separator as its own token, so `$100,000` is
+	//: recorded as `100` (lacan, docket [6430], 159/159 with zero exceptions).
+	//:
+	//: **THE COLLAPSE IS NOT MONOTONE**, which is why this needs a fence rather
+	//: than a footnote. `$100,000` and `$100` both become `100`; `$95,000`
+	//: becomes `95`. So a panel row reading `100, 50, 1, 10, 200` -- the real top
+	//: surfaces for an upper-class salary prompt -- puts what is almost certainly
+	//: `$1,000,000` at `1`, below `200`. Sorting the display inverts the
+	//: underlying magnitudes and looks like a class effect while doing it.
+	//:
+	//: The condition is EXACT, not a heuristic: a surface consisting only of
+	//: digits is affected, and nothing else is. No prompt-sniffing, so no false
+	//: positives and nothing to re-tune when v4 changes the rule.
+	const NUMERIC = /^\d+$/;
+	let numericWords = $derived.by(() => {
+		const src = pw ? pw.words.map((w) => w.word) : [];
+		return src.filter((w) => NUMERIC.test(w));
+	});
+
 	const n = (v: unknown, d = 4) => (v == null ? '—' : Number(v).toFixed(d));
 	const short = (m: string) => m.split('/').pop() ?? m;
 </script>
@@ -408,6 +430,22 @@
 					)}</span
 				>
 			</div>
+			{#if numericWords.length}
+				<!--
+				  THE FENCE TRAVELS WITH THE NUMBERS, not in a caption someone
+				  strips. It appears only when a bare-digit surface is on screen,
+				  which is an exact condition rather than a guess about the prompt.
+				-->
+				<p class="fence">
+					<strong>{numericWords.length} of these surfaces are bare digits</strong> and twp cuts a
+					word at <code>,</code> and <code>.</code> between digits — all 159 roster tokenizers emit
+					the separator alone. So <code>100</code> may be <code>$100,000</code> or
+					<code>$100</code>, and <code>1</code> may be <code>$1,000,000</code>.
+					<strong>The collapse is not monotone</strong>: sorting these surfaces does not sort the
+					underlying numbers, so a contrast built on them can reverse in sign. See docket [6430];
+					a v4 lookahead rule is proposed and unimplemented.
+				</p>
+			{/if}
 			{#if plot}
 				<div class="plotbar">
 					<button class="ghost" onclick={() => (showPlot = !showPlot)}
@@ -611,6 +649,13 @@
 	.movers .rise { color: var(--blue-light); }
 	.movers .fall { color: var(--red, #c92a2a); }
 	.movers .w { font-family: var(--mono); margin-right: 12px; }
+	.fence {
+		margin: 10px 0; padding: 8px 10px; font-size: 11px; line-height: 1.5;
+		border: 1px solid var(--amber, #b8860b); border-radius: 4px;
+		color: var(--text-2); max-width: 92ch;
+	}
+	.fence strong { color: var(--amber, #b8860b); }
+	.fence code { font-family: var(--mono); }
 	.plotbar { display: flex; gap: 14px; align-items: center; margin: 12px 0 4px; font-size: 11px; flex-wrap: wrap; }
 	.nsel select {
 		background: var(--panel); border: 1px solid var(--rule); border-radius: 3px;
