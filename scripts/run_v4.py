@@ -75,6 +75,17 @@ def main():
         if p and p not in seen:
             seen.add(p)
             prompts.append(p)
+    #: **CELLS WHERE THE RULE BITES GO FIRST.** v3's stash order put all 407 of
+    #: Mistral's zh prompts at positions 2299-2705, so the first Chinese cell
+    #: would have arrived 117 MINUTES INTO A 138-MINUTE RUN -- every informative
+    #: cell in the last 20 minutes, and a defect in the CJK path invisible until
+    #: then. Ordering by `is_cjk` costs nothing and turns a two-hour wait for the
+    #: first signal into a two-minute one. RH asked for this before the run, not
+    #: after, which is the only reason it was cheap.
+    #:
+    #: Detected from the PROMPT STRING, not from the `prompts` table, so the
+    #: runner keeps working on a corpus the table does not know about.
+    prompts.sort(key=lambda p: not T.is_cjk(p))
     if a.limit:
         prompts = prompts[:a.limit]
     todo = [p for p in prompts if v4key(p) not in st]
