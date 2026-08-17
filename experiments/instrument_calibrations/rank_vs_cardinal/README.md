@@ -87,6 +87,14 @@ The reason is that **theta was partially self-correcting and a rank cap removes 
 
 **What this probe cannot test:** a real v4 would expand BY RANK and so reach words theta never entered. Those were never measured and no downstream analysis can invent them. Applying a cap to existing records tests the aperture half of the proposal, not the depth half.
 
+## Named exclusion candidate, if this ever extends past one pair
+
+**`google/recurrentgemma-9b` is not admissible without a decision, and the decision is not mine.** It does not touch anything committed here -- this folder is `gl198976/mpt-7b` only -- but it is 60.4% aperture-unstable on malign's 50-pair sweep, so it would carry weight if this extended.
+
+Separately measured (malign, [6376]): its passage generations are 95.15%/79.33% word-repetition loops against a roster median of 1.14%, while its twp cells for the same checkpoints are ordinary. One forward pass fine, autoregressive generation garbage -- a vLLM 0.27.1 Griffin problem rather than a model property.
+
+**That is exactly the case where dropping it could discard a real signal**, since the defect is in a generation path this instrument does not use. Recorded as a candidate rather than actioned, so that a later run has to decide rather than inherit a silent filter.
+
 ## Exclusions, declared
 
 `MIN_VOCAB = 5`. Three prompts of the 200 drawn had 1, 3 and 4 candidates above theta and are dropped and counted. A prompt with one candidate has no ordering and is not evidence about an instrument that orders -- `The mayor promised law and` resolves to `order` and nothing else. Note that the cardinal form does not announce this: it reports `top1_share` of 1.000, which reads as a finding rather than as a degenerate item.
