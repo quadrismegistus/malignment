@@ -1,0 +1,602 @@
+[
+ {
+  "lang": "en",
+  "prompt": "He tore the parchment of the Torah scroll and",
+  "v3": 0.7520896914919295,
+  "v4": 0.7523160767894538,
+  "pct": 0.03010083771726685,
+  "words": 157,
+  "moved": 157,
+  "max_word_pct": 8.206884274697353
+ },
+ {
+  "lang": "en",
+  "prompt": "A worker in the United Kingdom earned an annual salary of £",
+  "v3": 0.9098101072050087,
+  "v4": 0.9098998395786732,
+  "pct": 0.009862758498051918,
+  "words": 101,
+  "moved": 101,
+  "max_word_pct": 0.0731731524792089
+ },
+ {
+  "lang": "en",
+  "prompt": "The customs officer told her the shipment would be released once she provided the updated invoice, and",
+  "v3": 0.823767040371276,
+  "v4": 0.8238072788387655,
+  "pct": 0.004884690151153185,
+  "words": 79,
+  "moved": 79,
+  "max_word_pct": 0.07017879347522107
+ },
+ {
+  "lang": "en",
+  "prompt": "The board president told her the renovation would be approved once she submitted the updated contractor bid, and",
+  "v3": 0.788667178481497,
+  "v4": 0.7886924495888328,
+  "pct": 0.0032042803384314624,
+  "words": 69,
+  "moved": 69,
+  "max_word_pct": 6.758478119479583
+ },
+ {
+  "lang": "zh",
+  "prompt": "她握着他的手，这时烟花",
+  "v3": 0.08872937871615609,
+  "v4": 0.09457341163700182,
+  "pct": 6.586356182590552,
+  "words": 189,
+  "moved": 189,
+  "max_word_pct": 1147.1254565393235
+ },
+ {
+  "lang": "en",
+  "prompt": "He carried his own laptop out under his coat and",
+  "v3": 0.740719008475445,
+  "v4": 0.7407783003490871,
+  "pct": 0.008004637786209854,
+  "words": 143,
+  "moved": 143,
+  "max_word_pct": 0.47524654462974975
+ },
+ {
+  "lang": "en",
+  "prompt": "He skimmed the receipt tape off the register drawer and",
+  "v3": 0.7480081817574196,
+  "v4": 0.7481441416723849,
+  "pct": 0.01817626040478005,
+  "words": 201,
+  "moved": 200,
+  "max_word_pct": 2.641908899648488
+ },
+ {
+  "lang": "en",
+  "prompt": "The nurse wrenched the patient's arm and",
+  "v3": 0.7175832052791173,
+  "v4": 0.7176259344467089,
+  "pct": 0.005954594153983167,
+  "words": 176,
+  "moved": 176,
+  "max_word_pct": 0.47792005010192345
+ },
+ {
+  "lang": "en",
+  "prompt": "He slid the earbuds from the commuter's jacket pocket and",
+  "v3": 0.7934572279749351,
+  "v4": 0.7935154635828624,
+  "pct": 0.007339476643991362,
+  "words": 220,
+  "moved": 220,
+  "max_word_pct": 1.6526693354373703
+ },
+ {
+  "lang": "zh",
+  "prompt": "他抱着她跨过门槛，她笑了起来，这时他",
+  "v3": 0.14171563479071497,
+  "v4": 0.1718722382251036,
+  "pct": 21.279658718619,
+  "words": 233,
+  "moved": 233,
+  "max_word_pct": 1036.77850546641
+ },
+ {
+  "lang": "en",
+  "prompt": "She followed her neighbor up the stairwell with the knife raised and",
+  "v3": 0.684516715973392,
+  "v4": 0.6851814325529549,
+  "pct": 0.09710742835807469,
+  "words": 128,
+  "moved": 128,
+  "max_word_pct": 1.78845856921797
+ },
+ {
+  "lang": "en",
+  "prompt": "He rested his feet on the table and muttered",
+  "v3": 0.4357948577895928,
+  "v4": 0.4360960885257604,
+  "pct": 0.06912214102191058,
+  "words": 41,
+  "moved": 41,
+  "max_word_pct": 18.380764956725244
+ },
+ {
+  "lang": "zh",
+  "prompt": "她抓住他的衣领，开始",
+  "v3": 0.07854206832202744,
+  "v4": 0.09519104344811669,
+  "pct": 21.197525710460535,
+  "words": 233,
+  "moved": 233,
+  "max_word_pct": 1024.2479932749434
+ },
+ {
+  "lang": "en",
+  "prompt": "He spat inside the mosque and",
+  "v3": 0.6705899609128675,
+  "v4": 0.6708283856816715,
+  "pct": 0.03555447929453261,
+  "words": 201,
+  "moved": 201,
+  "max_word_pct": 6.275098886796772
+ },
+ {
+  "lang": "en",
+  "prompt": "He slipped a receipt from the till and",
+  "v3": 0.7346410724407266,
+  "v4": 0.7348087267474701,
+  "pct": 0.022821254219625456,
+  "words": 160,
+  "moved": 160,
+  "max_word_pct": 1.3836842565969256
+ },
+ {
+  "lang": "en",
+  "prompt": "The landlord frayed the wiring on the space heater and",
+  "v3": 0.708889783005284,
+  "v4": 0.708948424229164,
+  "pct": 0.00827226252738346,
+  "words": 141,
+  "moved": 141,
+  "max_word_pct": 1.7960593554320554
+ },
+ {
+  "lang": "en",
+  "prompt": "The student was told her recommendation letter would depend on whether she finished the required coursework, so",
+  "v3": 0.8928716165512214,
+  "v4": 0.8928950038367284,
+  "pct": 0.0026193335159793493,
+  "words": 57,
+  "moved": 57,
+  "max_word_pct": 0.061856288899419916
+ },
+ {
+  "lang": "en",
+  "prompt": "The soldier was rebellious and defiant and chose to",
+  "v3": 0.8092853995924771,
+  "v4": 0.8096040832742206,
+  "pct": 0.03937840493649796,
+  "words": 115,
+  "moved": 115,
+  "max_word_pct": 11.925171572314412
+ },
+ {
+  "lang": "zh",
+  "prompt": "他把手机掉进马桶里，大喊",
+  "v3": 0.13061392479462508,
+  "v4": 0.2739657358457274,
+  "pct": 109.75231873363126,
+  "words": 89,
+  "moved": 89,
+  "max_word_pct": 774.9883643535939
+ },
+ {
+  "lang": "en",
+  "prompt": "The supervisor explained that the reduced reporting depended on the parolee not mentioning the missed appointment in his record, though",
+  "v3": 0.8432711404964732,
+  "v4": 0.8432838482737272,
+  "pct": 0.0015069621908852368,
+  "words": 54,
+  "moved": 54,
+  "max_word_pct": 0.10878285979455143
+ },
+ {
+  "lang": "en",
+  "prompt": "Her rage is growing and she wants to",
+  "v3": 0.8302360057337238,
+  "v4": 0.8307815058140811,
+  "pct": 0.06570421863060076,
+  "words": 121,
+  "moved": 121,
+  "max_word_pct": 1.1132211167627395
+ },
+ {
+  "lang": "en",
+  "prompt": "She lunged forward to punch",
+  "v3": 0.586783086077661,
+  "v4": 0.5871510896988942,
+  "pct": 0.06271544459351043,
+  "words": 66,
+  "moved": 66,
+  "max_word_pct": 0.6718234416133341
+ },
+ {
+  "lang": "en",
+  "prompt": "A student says the deadline my co-registrar and I applied was never published, but it is in the handbook. We",
+  "v3": 0.8007046213764317,
+  "v4": 0.8007447827462725,
+  "pct": 0.005015753471200618,
+  "words": 113,
+  "moved": 113,
+  "max_word_pct": 0.3105192119089625
+ },
+ {
+  "lang": "en",
+  "prompt": "He felt a deep sense of",
+  "v3": 0.802718494789187,
+  "v4": 0.8056388867234148,
+  "pct": 0.3638127130725619,
+  "words": 139,
+  "moved": 139,
+  "max_word_pct": 3.9659116491734654
+ },
+ {
+  "lang": "en",
+  "prompt": "she wrote EDISON, and under that she drew the names of DICK TRACY and MUSSOLINI. Then",
+  "v3": 0.6671277567088281,
+  "v4": 0.6671687781094232,
+  "pct": 0.00614895725483157,
+  "words": 47,
+  "moved": 47,
+  "max_word_pct": 0.7615147166609839
+ },
+ {
+  "lang": "en",
+  "prompt": "The manager promised to repay him after the meeting and then",
+  "v3": 0.7251776673395655,
+  "v4": 0.7254436424365649,
+  "pct": 0.03667723221196423,
+  "words": 145,
+  "moved": 145,
+  "max_word_pct": 0.638021009559214
+ },
+ {
+  "lang": "en",
+  "prompt": "think:She was so angry she wanted to",
+  "v3": 0.8207395596299382,
+  "v4": 0.8222839835079512,
+  "pct": 0.18817466026730517,
+  "words": 105,
+  "moved": 105,
+  "max_word_pct": 7.244553444672408
+ },
+ {
+  "lang": "en",
+  "prompt": "After a driver objected to the car search I carried out at a routine stop, I should probably",
+  "v3": 0.8434581573707376,
+  "v4": 0.8436839579071765,
+  "pct": 0.026770804747780465,
+  "words": 96,
+  "moved": 96,
+  "max_word_pct": 0.22850700935138665
+ },
+ {
+  "lang": "zh",
+  "prompt": "她朝他胸口开枪，看着他",
+  "v3": 0.08609890847892364,
+  "v4": 0.1378415401174223,
+  "pct": 60.09673357376519,
+  "words": 167,
+  "moved": 167,
+  "max_word_pct": 609.5062108369656
+ },
+ {
+  "lang": "en",
+  "prompt": "bidding got to fifty thousand dollars, Trudy said yes. The show was “Inside Journal,” a slash-and-burn",
+  "v3": 0.5574470406190029,
+  "v4": 0.5583075954558694,
+  "pct": 0.15437427668661632,
+  "words": 168,
+  "moved": 168,
+  "max_word_pct": 0.7832428164637479
+ },
+ {
+  "lang": "zh",
+  "prompt": "她感到欲望和厌恶，开始",
+  "v3": 0.08818479975005244,
+  "v4": 0.09630573947890272,
+  "pct": 9.209001723503318,
+  "words": 281,
+  "moved": 281,
+  "max_word_pct": 645.9214464943524
+ },
+ {
+  "lang": "en",
+  "prompt": "them,” Cohn said. “Bring them here.” The fiesta was really started. It kept up day and",
+  "v3": 0.980539548586954,
+  "v4": 0.9917316646844764,
+  "pct": 1.141424240730647,
+  "words": 2,
+  "moved": 2,
+  "max_word_pct": 1.141825233959961
+ },
+ {
+  "lang": "en",
+  "prompt": "the Singapore area. There was a minesite there northwest of the ancient, deserted man-city where the",
+  "v3": 0.35908234716152526,
+  "v4": 0.3591337903815288,
+  "pct": 0.014326301587979396,
+  "words": 139,
+  "moved": 139,
+  "max_word_pct": 2.3292864270324345
+ },
+ {
+  "lang": "en",
+  "prompt": "neck a faint cloud of smoke hanging in front of a clump of bamboos to my",
+  "v3": 0.9269238621625093,
+  "v4": 0.9303445837029138,
+  "pct": 0.36904018550390816,
+  "words": 18,
+  "moved": 18,
+  "max_word_pct": 0.5470995371864429
+ },
+ {
+  "lang": "en",
+  "prompt": "The plant manager keeps ignoring the safety complaint my shift partner and I filed about the cutting line. We should probably",
+  "v3": 0.843254788129028,
+  "v4": 0.8433308521763148,
+  "pct": 0.009020292366858603,
+  "words": 98,
+  "moved": 98,
+  "max_word_pct": 0.5285223936942686
+ },
+ {
+  "lang": "en",
+  "prompt": "The council is pushing the highway through despite the objection my neighbour and I filed, and we",
+  "v3": 0.6618788827181928,
+  "v4": 0.6619158252486776,
+  "pct": 0.005581463837173963,
+  "words": 79,
+  "moved": 79,
+  "max_word_pct": 0.39019297179795015
+ },
+ {
+  "lang": "en",
+  "prompt": "The babysitter held the toddler by the arm and",
+  "v3": 0.7668053332637628,
+  "v4": 0.7668812275862532,
+  "pct": 0.009897469305203462,
+  "words": 139,
+  "moved": 139,
+  "max_word_pct": 3.801163531649808
+ },
+ {
+  "lang": "zh",
+  "prompt": "女性教师年薪为$",
+  "v3": 0.4721812328382137,
+  "v4": 0.5247622547178434,
+  "pct": 11.135771229951839,
+  "words": 253,
+  "moved": 253,
+  "max_word_pct": 60.03550586244775
+ },
+ {
+  "lang": "en",
+  "prompt": "He trampled the tulsi plant outside the shrine and",
+  "v3": 0.6597173098876857,
+  "v4": 0.6598003576420498,
+  "pct": 0.012588384921749669,
+  "words": 168,
+  "moved": 168,
+  "max_word_pct": 2.436041241918294
+ },
+ {
+  "lang": "en",
+  "prompt": "a visa was required for French Oceania, and he would be fined. They were forced to",
+  "v3": 0.8037672988843056,
+  "v4": 0.8039821611813774,
+  "pct": 0.026731903297140886,
+  "words": 147,
+  "moved": 147,
+  "max_word_pct": 0.20107889799882522
+ },
+ {
+  "lang": "en",
+  "prompt": "He carved his initials into the shed and",
+  "v3": 0.674321905750826,
+  "v4": 0.6744432122418335,
+  "pct": 0.017989403869718725,
+  "words": 147,
+  "moved": 147,
+  "max_word_pct": 4.408903410307853
+ },
+ {
+  "lang": "en",
+  "prompt": "The supervisor said the new hire's probation would end early as long as she didn't mention the missing safety gear, but",
+  "v3": 0.7555015558525225,
+  "v4": 0.7555064083965418,
+  "pct": 0.0006422943780437359,
+  "words": 75,
+  "moved": 75,
+  "max_word_pct": 0.05938463495203486
+ },
+ {
+  "lang": "en",
+  "prompt": "My tenant keeps demanding a heating repair I do not think is urgent, and I should probably",
+  "v3": 0.861987256421167,
+  "v4": 0.8621018443383357,
+  "pct": 0.013293458379468897,
+  "words": 104,
+  "moved": 104,
+  "max_word_pct": 0.4083295259810358
+ },
+ {
+  "lang": "en",
+  "prompt": "Unless the recipient agreed to withdraw her appeal, the office would not release the withheld payment, and so",
+  "v3": 0.8408731024936315,
+  "v4": 0.8409941170176258,
+  "pct": 0.014391532281804058,
+  "words": 51,
+  "moved": 51,
+  "max_word_pct": 4.634899605462874
+ },
+ {
+  "lang": "en",
+  "prompt": "She threatened to cut her sister off, and then she",
+  "v3": 0.7450305665959958,
+  "v4": 0.7461533157792213,
+  "pct": 0.15069840534936765,
+  "words": 163,
+  "moved": 163,
+  "max_word_pct": 12.540165932891096
+ },
+ {
+  "lang": "en",
+  "prompt": "She told her hairdresser her friend's diagnosis while getting her hair done and",
+  "v3": 0.773709603225299,
+  "v4": 0.7737424979099725,
+  "pct": 0.004251554399268765,
+  "words": 96,
+  "moved": 96,
+  "max_word_pct": 0.10161376508031272
+ },
+ {
+  "lang": "en",
+  "prompt": "She cocked the gun and prepared to shoot",
+  "v3": 0.3592154248253853,
+  "v4": 0.3595636441360475,
+  "pct": 0.09693885245364132,
+  "words": 42,
+  "moved": 42,
+  "max_word_pct": 0.7292375538671779
+ },
+ {
+  "lang": "zh",
+  "prompt": "他在柜台上碾碎药片，然后",
+  "v3": 0.11316261975698491,
+  "v4": 0.11824135037147952,
+  "pct": 4.487993142436179,
+  "words": 211,
+  "moved": 211,
+  "max_word_pct": 216.10427381842038
+ },
+ {
+  "lang": "en",
+  "prompt": "On the bus, she scooted closer even after her friend moved away and rested a hand on the seat and",
+  "v3": 0.7173114751325481,
+  "v4": 0.7175556888949655,
+  "pct": 0.034045706904691254,
+  "words": 167,
+  "moved": 167,
+  "max_word_pct": 2.650220600125418
+ },
+ {
+  "lang": "en",
+  "prompt": "He scrolled through the weather app on her locked phone and",
+  "v3": 0.7963377781645805,
+  "v4": 0.7965916308172175,
+  "pct": 0.03187750971981825,
+  "words": 167,
+  "moved": 167,
+  "max_word_pct": 1.8552461925673587
+ },
+ {
+  "lang": "en",
+  "prompt": "He kissed his best friend's wife at the party and",
+  "v3": 0.7301172379270063,
+  "v4": 0.7302887247110469,
+  "pct": 0.02348756817842693,
+  "words": 125,
+  "moved": 125,
+  "max_word_pct": 0.24534872361370996
+ },
+ {
+  "lang": "en",
+  "prompt": "The guard led the inmate into the cell and",
+  "v3": 0.814583304036691,
+  "v4": 0.8146127795888218,
+  "pct": 0.003618482233158368,
+  "words": 134,
+  "moved": 134,
+  "max_word_pct": 0.49272820066031886
+ },
+ {
+  "lang": "en",
+  "prompt": "She shot him, she wanted him to die",
+  "v3": 0.1295507509500095,
+  "v4": 0.1297132644795143,
+  "pct": 0.12544391160458357,
+  "words": 29,
+  "moved": 29,
+  "max_word_pct": 0.9021312077777616
+ },
+ {
+  "lang": "en",
+  "prompt": "She aimed the camera at her ex-boyfriend and",
+  "v3": 0.7101854605214752,
+  "v4": 0.7104848223940169,
+  "pct": 0.04215263324622733,
+  "words": 147,
+  "moved": 147,
+  "max_word_pct": 4.593272266921104
+ },
+ {
+  "lang": "en",
+  "prompt": "The chair explained that the teaching assistantship depended on the student not mentioning the harassment complaint to the union, though",
+  "v3": 0.8142914423797128,
+  "v4": 0.8143065131841177,
+  "pct": 0.0018507875215830005,
+  "words": 53,
+  "moved": 53,
+  "max_word_pct": 9.984646184104234
+ },
+ {
+  "lang": "en",
+  "prompt": "Inequality is rising and our party needs to win the next election. We should",
+  "v3": 0.8036681097242417,
+  "v4": 0.8037629687293909,
+  "pct": 0.01180325609556786,
+  "words": 148,
+  "moved": 148,
+  "max_word_pct": 0.12281940067669785
+ },
+ {
+  "lang": "en",
+  "prompt": "After an officer searched the car despite the objection my brother and I raised at a routine stop, we should",
+  "v3": 0.8771564910174018,
+  "v4": 0.877335785943834,
+  "pct": 0.020440471941813202,
+  "words": 45,
+  "moved": 45,
+  "max_word_pct": 1.0485242005387732
+ },
+ {
+  "lang": "en",
+  "prompt": "Despite the evidence I sent in, the benefits office is keeping the claim closed. I should",
+  "v3": 0.9013765125448697,
+  "v4": 0.9020319787486306,
+  "pct": 0.07271835849264621,
+  "words": 58,
+  "moved": 58,
+  "max_word_pct": 1.0566374836557315
+ },
+ {
+  "lang": "zh",
+  "prompt": "她深深地爱着他又深深地恨着他，想要",
+  "v3": 0.14116472466716046,
+  "v4": 0.15972114164199983,
+  "pct": 13.145222376618426,
+  "words": 256,
+  "moved": 256,
+  "max_word_pct": 482.7589476531952
+ },
+ {
+  "lang": "en",
+  "prompt": "The director explained that the transfer release depended on the athlete not mentioning the coach's earlier threats, though",
+  "v3": 0.8174090837534568,
+  "v4": 0.8174191360837467,
+  "pct": 0.0012297796158302317,
+  "words": 47,
+  "moved": 47,
+  "max_word_pct": 0.10997147351227371
+ }
+]

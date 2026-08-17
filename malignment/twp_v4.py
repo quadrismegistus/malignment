@@ -91,6 +91,9 @@ class Rules:
     term_renorm: bool = False
     #: Sum over ALL token paths reaching a surface, not the canonical one.
     enumerate_paths: bool = False
+    #: Apply `boundary_mask`'s OWN predicate to each token's DECODED form
+    #: rather than to its raw representation. See `decoded_boundary_ids`.
+    decoded_boundary: bool = False
     #: Treat a hyphen FOLLOWED BY AN ALPHANUMERIC as intra-word, so
     #: `self` + `-motivated` is one word. v3 unmasks 7 hand-listed English
     #: contractions (`'s 't 'm 're 'll 've 'd`) and nothing else, so a hyphen is
@@ -102,9 +105,14 @@ class Rules:
     apply_z: bool = False
 
     def is_v3(self):
+        #: **EVERY FLAG MUST APPEAR HERE.** A rule missing from this predicate
+        #: makes a v4 run report `label() == "v3"` and makes `compare()` assert
+        #: zero movement for it -- the stamp-declares-not-applies failure this
+        #: class is frozen to prevent, arriving through the door it left open.
+        #: `decoded_boundary` was missing for exactly one commit.
         return (self.term_floor == 0.0 and not self.term_renorm
                 and not self.enumerate_paths and not self.hyphen_intra
-                and not self.apply_z)
+                and not self.decoded_boundary and not self.apply_z)
 
     def label(self):
         if self.is_v3():
@@ -116,6 +124,8 @@ class Rules:
             bits.append("paths")
         if self.hyphen_intra:
             bits.append("hyphen")
+        if self.decoded_boundary:
+            bits.append("decoded")
         if self.apply_z:
             bits.append("Z")
         return "v4[" + ",".join(bits) + "]"
@@ -158,6 +168,58 @@ def hyphen_intra_ids(tok):
     return _HYPH[key]
 
 
+_DECIDX = {}
+
+
+def decoded_boundary_ids(tok):
+    """Ids `boundary_mask` SHOULD mark and does not, because it reads the raw key.
+
+    **THE RIGHT SET, CONSULTED WITH THE WRONG KEY.** `PUNCT` has 47 members and
+    contains every mark anyone has asked for -- `，。！：、；？`, the em dash, the
+    ellipsis. `boundary_mask` tests `s[0]` of the token AS THE TOKENIZER SPELLS
+    IT, and a byte-level BPE spells `，` as `ï¼Į`, whose first character is `ï`.
+    A SentencePiece tokenizer spells a word-initial em dash as `▁—`, whose first
+    character is `▁`. **Neither key is ever the mark**, so lengthening `PUNCT`
+    changes nothing -- the same shape as the numeric arm, where no `,000` token
+    exists for a longer list to contain.
+
+    Measured across the roster (`numeric_boundary/results/decode_miss.csv`):
+
+        88 of 88 tokenizers affected, INCLUDING ALL 36 SentencePiece
+          bytelevel      n=52   clean 0   median 171 missed ids
+          sentencepiece  n=36   clean 0   median  72 missed ids
+        missed ids   median 72   max 3,549
+        of those, NON-CJK (em dash, ellipsis, middot)   median 33
+
+    So this is neither a CJK defect nor a byte-level defect. lacan's 84/133 split
+    is correct FOR CJK PUNCTUATION, where SentencePiece happens to spell the mark
+    at position 0; the general miss set spares nobody.
+
+    **DERIVED, NOT LISTED.** The decoding comes from `byte_table`, which detects
+    a tokenizer's notation by verification rather than by guessing, so this is
+    correct for whatever tokenizer it is handed. ASCII is excluded because
+    `boundary_mask` already gets ASCII right and re-marking it would be a second
+    rule dressed as a bug fix.
+    """
+    key = id(tok)
+    if key not in _DECIDX:
+        table, _kind = byte_table(tok)
+        out = []
+        for i, b in enumerate(table):
+            if not b:
+                continue
+            try:
+                sfc = b.decode("utf-8")
+            except UnicodeDecodeError:
+                continue
+            #: a leading space is the bow convention, not part of the mark
+            sfc = sfc.lstrip(" ")
+            if sfc and sfc[0] in T.PUNCT and ord(sfc[0]) > 127:
+                out.append(i)
+        _DECIDX[key] = np.array(out, dtype=np.int64)
+    return _DECIDX[key]
+
+
 @torch.no_grad()
 def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
             bos_policy="inherited", rules=None):
@@ -169,6 +231,14 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
     diverges from is the rule the store was written with.
     """
     rules = rules or Rules()
+    #: **CORRECT THE STATIC MASK ONCE, BEFORE THE WALK.** `_boundary_for` derives
+    #: every per-surface mask from this one, so fixing it here reaches the CJK
+    #: dictionary branch and the intra-word branch without either knowing.
+    if rules.decoded_boundary:
+        extra = decoded_boundary_ids(tok)
+        if len(extra):
+            bmask = bmask.copy()
+            bmask[extra] = True
     pids, _rs, _rid = T._prompt_ids(tok, prompt, bos_policy)
     lg = model(torch.tensor([pids], device=dev)).logits[0, -1, :].float()
     P0 = torch.softmax(lg, -1).cpu().numpy()
