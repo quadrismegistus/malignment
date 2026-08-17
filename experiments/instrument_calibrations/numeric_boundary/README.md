@@ -378,3 +378,47 @@ alike.
 
 **Unmeasured, and it may be small.** This arm is ONE family, so it cannot speak
 to it at all. Recorded as an open axis rather than left to be discovered later.
+
+# FINDING 4 — the DEPTH arm: a second blocker, and @malign's untested caveat does not bite
+
+`--stage depth`, no weights. 136 tokenizers, `twp.MAX_DEPTH` is 6.
+
+    ALL targets fit            67
+    at least one exceeds       69
+
+**`$100,000` token counts: {4: 64, 5: 3, 8: 69} — BIMODAL.** Models either hold
+multi-digit tokens or split digits singly, with almost nothing between. **That is
+the evidence for @malign's digit-tokenisation-policy hypothesis**, and it is
+stronger than a median: a policy split produces two modes, a continuous cause
+would not.
+
+## VOCABULARY SIZE DOES NOT PREDICT IT — REPLICATED, AFTER MY OWN BUG SAID OTHERWISE
+
+    $100,000   vocab>=100k median 8.0 (n=72)  |  vocab<100k median 8.0 (n=64)
+    $95,000                     7.0           |                    7.0
+    $50,000                     7.0           |                    7.0
+
+**@malign's null replicates.** My first run printed 8.0 against 7.0 and I nearly
+had a contradiction: the summary line compared `$100,000` in the high-vocab group
+against **`$95,000`** in the low-vocab group. **Two different strings, one label.**
+Caught by the numbers being interesting, which is the wrong reason to catch
+something.
+
+## THE ASSUMPTION @malign FLAGGED AND DID NOT TEST: IT HOLDS
+
+Their argument that infeasibility costs n rather than validity depends on a
+lineage's two arms sharing a tokenizer, so an unfittable string removes whole
+lineages instead of biasing a within-lineage contrast. They named Tanuki as a
+counterexample -- 65,024 against 65,001 -- and said it *"needs checking per pair
+rather than asserting."* Checked, on all 50, **by comparing the TOKENISED RESULT
+rather than the vocab size**:
+
+    arms AGREE      44
+    arms DIFFER      0
+    unmeasurable     6   (an arm whose tokenizer would not load)
+
+**Zero.** Tanuki's arms differ in vocab size and tokenise these strings
+identically, so the counterexample is real about vocabularies and does not reach
+the probes. **The costs-n-not-validity argument stands on all 44 measurable
+pairs** -- and it stands because it was checked on the quantity that matters
+rather than on the one that was easy to compare.

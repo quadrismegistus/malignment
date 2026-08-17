@@ -1,0 +1,185 @@
+model,loaded,reason,vocab_len,max_depth,all_fit,worst,n_100000,n_95000,n_50000,n_100,n_150000,n_57900
+01-ai/Yi-1.5-9B,1,,63992,6,0,8,8,7,7,4,8,6
+01-ai/Yi-1.5-9B-Chat,1,,63992,6,0,8,8,7,7,4,8,6
+Alchan/mpt-7b-chat,1,,50279,6,1,4,4,4,4,2,3,3
+Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf,1,,128000,6,0,8,8,7,7,4,8,6
+Aleph-Alpha/Pharia-1-LLM-7B-control-hf,1,,128000,6,0,8,8,7,7,4,8,6
+BAAI/Aquila2-7B,1,,143973,6,1,4,4,4,4,2,3,2
+BAAI/AquilaChat2-7B,1,,100008,6,1,4,4,4,4,2,3,2
+BSC-LT/salamandra-7b,1,,256000,6,0,8,8,7,7,4,8,6
+BSC-LT/salamandra-7b-instruct,1,,256000,6,0,8,8,7,7,4,8,6
+ContextualAI/archangel_sft-dpo_pythia2-8b,1,,50277,6,1,4,4,4,4,2,3,3
+ContextualAI/archangel_sft-kto_pythia2-8b,1,,50277,6,1,4,4,4,4,2,3,3
+ContextualAI/archangel_sft-ppo_pythia2-8b,1,,50277,6,1,4,4,4,4,2,3,3
+ContextualAI/archangel_sft-slic_pythia2-8b,1,,50277,6,1,4,4,4,4,2,3,3
+ContextualAI/archangel_sft_pythia2-8b,1,,50277,6,1,4,4,4,4,2,3,3
+EleutherAI/pythia-2.8b,1,,50277,6,1,4,4,4,4,2,3,3
+EleutherAI/pythia-6.9b,1,,50277,6,1,4,4,4,4,2,3,3
+HuggingFaceH4/mistral-7b-sft-beta,1,,32000,6,0,8,8,7,7,4,8,6
+HuggingFaceH4/zephyr-7b-beta,1,,32000,6,0,8,8,7,7,4,8,6
+HuggingFaceTB/SmolLM2-360M,1,,49152,6,0,8,8,7,7,4,7,5
+HuggingFaceTB/SmolLM2-360M-Instruct,1,,49152,6,0,8,8,7,7,4,7,5
+HuggingFaceTB/SmolLM3-3B,1,,128256,6,1,4,4,4,4,2,3,2
+HuggingFaceTB/SmolLM3-3B-Base,1,,128256,6,1,4,4,4,4,2,3,2
+HuggingFaceTB/SmolLM3-3B-checkpoints,0,"ValueError: Couldn't instantiate the backend tokenizer from one of: 
+(1) a `tokeni",,,,,,,,,,
+HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO,1,,128256,6,1,4,4,4,4,2,3,2
+LLM360/Amber,1,,32000,6,0,8,8,7,7,4,8,6
+LLM360/AmberChat,1,,32000,6,0,8,8,7,7,4,8,6
+LLM360/AmberSafe,1,,32000,6,0,8,8,7,7,4,8,6
+NousResearch/Hermes-3-Llama-3.1-8B,1,,128256,6,1,4,4,4,4,2,3,2
+NousResearch/Nous-Hermes-2-Mistral-7B-DPO,1,,32002,6,0,8,8,7,7,4,7,5
+OpenLLM-France/Lucie-7B,1,,65024,6,0,8,8,7,7,4,8,6
+OpenLLM-France/Lucie-7B-Instruct-v1.1,1,,65024,6,0,8,8,7,7,4,8,6
+PKU-Alignment/alpaca-7b-reproduced,1,,32001,6,0,8,8,7,7,4,8,6
+PKU-Alignment/beaver-7b-v1.0,1,,32001,6,0,8,8,7,7,4,8,6
+Qwen/Qwen2.5-0.5B,1,,151665,6,0,8,8,7,7,4,7,5
+Qwen/Qwen2.5-0.5B-Instruct,1,,151665,6,0,8,8,7,7,4,7,5
+Qwen/Qwen2.5-7B,1,,151665,6,0,8,8,7,7,4,7,5
+Qwen/Qwen2.5-7B-Instruct,1,,151665,6,0,8,8,7,7,4,7,5
+Qwen/Qwen3-8B,1,,151669,6,0,8,8,7,7,4,7,5
+Qwen/Qwen3-8B-Base,1,,151669,6,0,8,8,7,7,4,7,5
+RWKV/rwkv-4-7b-pile,1,,50277,6,1,4,4,4,4,2,3,3
+RWKV/rwkv-raven-7b,1,,50277,6,1,4,4,4,4,2,3,3
+TinyLlama/TinyLlama-1.1B-Chat-v1.0,1,,32000,6,0,8,8,7,7,4,8,6
+TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T,1,,32000,6,0,8,8,7,7,4,8,6
+Zyphra/Zamba2-7B,1,,32001,6,0,8,8,7,7,4,8,6
+Zyphra/Zamba2-7B-Instruct,1,,32000,6,0,8,8,7,7,4,8,6
+allenai/Llama-3.1-Tulu-3-8B-DPO,1,,128257,6,1,4,4,4,4,2,3,2
+allenai/Llama-3.1-Tulu-3-8B-SFT,1,,128257,6,1,4,4,4,4,2,3,2
+allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data,1,,128257,6,1,4,4,4,4,2,3,2
+allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data,1,,128257,6,1,4,4,4,4,2,3,2
+allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data,1,,128257,6,1,4,4,4,4,2,3,2
+allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data,1,,128257,6,1,4,4,4,4,2,3,2
+allenai/Llama-3.1-Tulu-3.1-8B,1,,128257,6,1,4,4,4,4,2,3,2
+allenai/OLMo-2-0425-1B,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/OLMo-2-0425-1B-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/OLMo-2-0425-1B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/OLMo-2-0425-1B-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/OLMoE-1B-7B-0125,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/OLMoE-1B-7B-0125-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/OLMoE-1B-7B-0125-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/OLMoE-1B-7B-0125-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3-1025-7B,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3-1125-32B,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3-7B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3-7B-Instruct-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3-7B-Instruct-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3-7B-Think,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3-7B-Think-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3-7B-Think-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3.1-32B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3.1-32B-Instruct-DPO,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-3.1-32B-Instruct-SFT,0,"StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':
+    TypeError: Field",,,,,,,,,,
+allenai/Olmo-Hybrid-7B,1,,100278,6,1,4,4,4,4,2,3,2
+allenai/Olmo-Hybrid-Instruct-DPO-7B,1,,100278,6,1,4,4,4,4,2,3,2
+allenai/Olmo-Hybrid-Instruct-SFT-7B,1,,100278,6,1,4,4,4,4,2,3,2
+baichuan-inc/Baichuan2-7B-Base,1,,125696,6,0,8,8,7,7,4,7,5
+baichuan-inc/Baichuan2-7B-Chat,1,,125696,6,0,8,8,7,7,4,7,5
+bigscience/bloom-7b1,1,,250680,6,1,4,4,4,4,2,3,2
+bigscience/bloomz-7b1,1,,250680,6,1,4,4,4,4,2,3,2
+cognitivecomputations/Dolphin3.0-Llama3.1-8B,1,,128258,6,1,4,4,4,4,2,3,2
+cognitivecomputations/dolphin-2.6-mistral-7b-dpo,1,,32001,6,0,8,8,7,7,4,8,6
+croissantllm/CroissantLLMBase,1,,32000,6,0,8,8,7,7,4,8,6
+croissantllm/CroissantLLMChat-v0.1,1,,32002,6,0,8,8,7,7,4,8,6
+deepseek-ai/DeepSeek-R1-Distill-Llama-8B,1,,128256,6,1,4,4,4,4,2,3,2
+deepseek-ai/DeepSeek-R1-Distill-Qwen-7B,1,,151665,6,0,8,8,7,7,4,7,5
+deepseek-ai/deepseek-llm-7b-base,1,,100015,6,0,8,8,7,7,4,7,5
+deepseek-ai/deepseek-llm-7b-chat,1,,100015,6,0,8,8,7,7,4,7,5
+gl198976/mpt-7b,1,,50277,6,1,4,4,4,4,2,3,3
+gl198976/mpt-7b-instruct,1,,50277,6,1,4,4,4,4,2,3,3
+google/gemma-2-9b,1,,256000,6,0,8,8,7,7,4,7,5
+google/gemma-2-9b-it,1,,256000,6,0,8,8,7,7,4,7,5
+google/recurrentgemma-9b,1,,256000,6,0,8,8,7,7,4,7,5
+google/recurrentgemma-9b-it,1,,256000,6,0,8,8,7,7,4,7,5
+huggyllama/llama-7b,1,,32000,6,0,8,8,7,7,4,8,6
+ibm-granite/granite-3.0-8b-base,1,,49152,6,0,8,8,7,7,4,7,5
+ibm-granite/granite-3.0-8b-instruct,1,,49155,6,0,8,8,7,7,4,7,5
+inceptionai/jais-family-6p7b,1,,84992,6,1,4,4,4,4,2,3,2
+inceptionai/jais-family-6p7b-chat,1,,84992,6,1,4,4,4,4,2,3,2
+internlm/internlm2-base-7b,1,,92544,6,1,4,4,4,4,2,3,2
+internlm/internlm2-chat-7b,1,,92544,6,1,4,4,4,4,2,3,2
+internlm/internlm2-chat-7b-sft,1,,92544,6,1,4,4,4,4,2,3,2
+kakaocorp/kanana-1.5-8b-base,1,,128256,6,1,4,4,4,4,2,3,2
+kakaocorp/kanana-1.5-8b-instruct-2505,1,,128259,6,1,4,4,4,4,2,3,2
+kakaocorp/kanana-2-3b-base,1,,128256,6,1,4,4,4,4,2,3,2
+kakaocorp/kanana-2-3b-instruct,1,,128256,6,1,4,4,4,4,2,3,2
+llm-jp/llm-jp-3-7.2b,1,,99574,6,1,5,5,5,5,2,5,3
+llm-jp/llm-jp-3-7.2b-instruct2,1,,99574,6,1,5,5,5,5,2,5,3
+llm-jp/llm-jp-3-7.2b-instruct3,1,,99574,6,1,5,5,5,5,2,5,3
+lomahony/eleuther-pythia6.9b-hh-dpo,1,,50277,6,1,4,4,4,4,2,3,3
+lomahony/eleuther-pythia6.9b-hh-sft,1,,50277,6,1,4,4,4,4,2,3,3
+m-a-p/CT-LLM-Base,1,,125699,6,0,8,8,7,7,4,7,5
+m-a-p/CT-LLM-SFT,1,,125699,6,0,8,8,7,7,4,7,5
+m-a-p/CT-LLM-SFT-DPO,1,,125699,6,0,8,8,7,7,4,7,5
+m-a-p/neo_7b,1,,64005,6,0,8,8,7,7,4,8,6
+m-a-p/neo_7b_instruct_v0.1,1,,64005,6,0,8,8,7,7,4,8,6
+m-a-p/neo_7b_sft_v0.1,1,,64005,6,0,8,8,7,7,4,8,6
+meta-llama/Llama-3.1-70B,1,,128256,6,1,4,4,4,4,2,3,2
+meta-llama/Llama-3.1-70B-Instruct,1,,128256,6,1,4,4,4,4,2,3,2
+meta-llama/Llama-3.1-8B,1,,128256,6,1,4,4,4,4,2,3,2
+meta-llama/Llama-3.1-8B-Instruct,1,,128256,6,1,4,4,4,4,2,3,2
+microsoft/Phi-4-reasoning-plus,1,,100352,6,1,4,4,4,4,2,3,2
+microsoft/phi-4,1,,100352,6,1,4,4,4,4,2,3,2
+microsoft/phi-4-reasoning,1,,100352,6,1,4,4,4,4,2,3,2
+mistralai/Mistral-7B-Instruct-v0.1,1,,32000,6,0,8,8,7,7,4,8,6
+mistralai/Mistral-7B-v0.1,1,,32000,6,0,8,8,7,7,4,8,6
+openGPT-X/Teuken-7B-base-v0.6,1,,250680,6,0,8,8,7,7,4,8,6
+openGPT-X/Teuken-7B-instruct-commercial-v0.4,1,,250680,6,0,8,8,7,7,4,8,6
+openGPT-X/Teuken-7B-instruct-v0.6,1,,250680,6,0,8,8,7,7,4,8,6
+openbmb/MiniCPM5-1B,1,,130560,6,1,4,4,4,4,2,3,2
+openbmb/MiniCPM5-1B-Base,1,,130560,6,1,4,4,4,4,2,3,2
+openbmb/MiniCPM5-1B-SFT,1,,130560,6,1,4,4,4,4,2,3,2
+openchat/openchat-3.5-0106,1,,32002,6,0,8,8,7,7,4,8,6
+stabilityai/stablelm-2-1_6b,1,,100289,6,0,8,8,7,7,4,7,5
+stabilityai/stablelm-2-1_6b-chat,1,,100289,6,0,8,8,7,7,4,7,5
+stabilityai/stablelm-2-zephyr-1_6b,1,,100289,6,0,8,8,7,7,4,7,5
+team-hatakeyama-phase2/Tanuki-8B-base-v1.0,1,,65024,6,0,8,8,7,7,4,8,6
+teknium/OpenHermes-2.5-Mistral-7B,1,,32002,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon-H1-1.5B-Base,0,"StrictDataclassFieldValidationError: Validation error for field 'use_cache':
+    TypeError: Field 'use_cach",,,,,,,,,,
+tiiuae/Falcon-H1-1.5B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'use_cache':
+    TypeError: Field 'use_cach",,,,,,,,,,
+tiiuae/Falcon-H1-7B-Base,0,"StrictDataclassFieldValidationError: Validation error for field 'use_cache':
+    TypeError: Field 'use_cach",,,,,,,,,,
+tiiuae/Falcon-H1-7B-Instruct,0,"StrictDataclassFieldValidationError: Validation error for field 'use_cache':
+    TypeError: Field 'use_cach",,,,,,,,,,
+tiiuae/Falcon3-10B-Base,1,,131072,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon3-10B-Instruct,1,,131072,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon3-1B-Base,1,,131072,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon3-1B-Instruct,1,,131072,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon3-3B-Base,1,,131072,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon3-3B-Instruct,1,,131072,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon3-7B-Base,1,,131072,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon3-7B-Instruct,1,,131072,6,0,8,8,7,7,4,7,5
+tiiuae/Falcon3-Mamba-7B-Base,1,,65024,6,1,4,4,4,4,2,3,2
+tiiuae/Falcon3-Mamba-7B-Instruct,1,,65024,6,1,4,4,4,4,2,3,2
+tiiuae/falcon-7b,1,,65024,6,1,4,4,4,4,2,3,2
+tiiuae/falcon-7b-instruct,1,,65024,6,1,4,4,4,4,2,3,2
+tiiuae/falcon-mamba-7b,1,,65024,6,1,4,4,4,4,2,3,2
+tiiuae/falcon-mamba-7b-instruct,1,,65024,6,1,4,4,4,4,2,3,2
+togethercomputer/RedPajama-INCITE-7B-Chat,1,,50277,6,1,4,4,4,4,2,3,3
+togethercomputer/RedPajama-INCITE-7B-Instruct,1,,50277,6,1,4,4,4,4,2,3,3
+togethercomputer/RedPajama-INCITE-Base-7B-v0.1,1,,50277,6,1,4,4,4,4,2,3,3
+weblab-GENIAC/Tanuki-8B-dpo-v1.0,1,,65001,6,0,8,8,7,7,4,8,6
+zai-org/glm-4-9b-chat-hf,1,,151343,6,1,4,4,4,4,2,3,3
+zai-org/glm-4-9b-hf,1,,151343,6,1,4,4,4,4,2,3,3

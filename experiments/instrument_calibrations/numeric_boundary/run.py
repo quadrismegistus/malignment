@@ -266,7 +266,7 @@ def stage_magnitude(model_id, device="mps"):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="tokenizers", choices=["tokenizers", "mask", "magnitude", "beam"])
+    ap.add_argument("--stage", default="tokenizers", choices=["tokenizers", "mask", "magnitude", "beam", "depth"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--models-from", default=None,
                     help="file of model ids, one per line -- for the tf457 cohort")
@@ -303,6 +303,9 @@ def main():
         print("\n  ->", path)
         return
 
+    if a.stage == "depth":
+        stage_depth(a.limit)
+        return
     if a.stage == "beam":
         stage_beam(width=a.beam, depth=a.depth)
         return
@@ -445,6 +448,96 @@ def stage_beam(width=10, depth=10, models=None):
         del L
     fh.close()
     print("\n  ->", path)
+
+
+DEPTH_TARGETS = ["$100,000", "$95,000", "$50,000", "$100", "150,000", "57900"]
+
+
+def stage_depth(limit=None):
+    """Does the salary string FIT? A second blocker, independent of the boundary.
+
+    @malign [6440]: `$100,000` is 8 tokens and `twp.MAX_DEPTH` is 6, so
+    `score_words` REFUSES it even when the target is named explicitly. That is
+    not a boundary question at all -- the string does not fit -- and no amount of
+    fixing the comma rule reaches it.
+
+    **AND IT CHECKS THE ASSUMPTION @malign FLAGGED AND DID NOT TEST.** Their
+    argument that this costs n rather than validity rests on a tokenizer being
+    shared between a lineage's two arms, so an infeasible string removes WHOLE
+    LINEAGES rather than biasing a within-lineage contrast. They named one
+    counterexample (Tanuki, 65,024 against 65,001) and said it *"needs checking
+    per pair rather than asserting"*. This checks all 50, by tokenising the
+    probes with each arm and comparing the RESULT, not the vocab size -- two
+    tokenizers can differ in vocab and agree on these strings, or match in size
+    and disagree.
+    """
+    from malignment import roster, twp
+    models = sorted(roster.population("all"))
+    if limit:
+        models = models[:limit]
+    tokcount, rows = {}, []
+    for i, mid in enumerate(models, 1):
+        try:
+            tok, _ = twp.load_tokenizer(mid)
+        except Exception as e:
+            rows.append({"model": mid, "loaded": 0,
+                         "reason": type(e).__name__ + ": " + str(e)[:70]})
+            continue
+        r = {"model": mid, "loaded": 1, "reason": "",
+             "vocab_len": len(tok), "max_depth": twp.MAX_DEPTH}
+        counts = {}
+        for t in DEPTH_TARGETS:
+            n = len(tok.encode(t, add_special_tokens=False))
+            counts[t] = n
+            r["n_" + re.sub(r"[^0-9a-zA-Z]", "", t)] = n
+        r["all_fit"] = int(all(n <= twp.MAX_DEPTH for n in counts.values()))
+        r["worst"] = max(counts.values())
+        tokcount[mid] = counts
+        rows.append(r)
+        del tok
+        if i % 20 == 0:
+            print("  %d/%d" % (i, len(models)), file=sys.stderr)
+
+    os.makedirs(RESULTS, exist_ok=True)
+    cols = (["model", "loaded", "reason", "vocab_len", "max_depth", "all_fit", "worst"]
+            + ["n_" + re.sub(r"[^0-9a-zA-Z]", "", t) for t in DEPTH_TARGETS])
+    with open(os.path.join(RESULTS, "depth.csv"), "w", newline="",
+              encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+        w.writeheader()
+        for r in rows:
+            w.writerow(r)
+
+    ok = [r for r in rows if r.get("loaded") == 1]
+    fit = [r for r in ok if r["all_fit"]]
+    print("\ntokenizers loaded %d | ALL targets fit %d | at least one exceeds %d"
+          % (len(ok), len(fit), len(ok) - len(fit)))
+    hi = [r for r in ok if r["vocab_len"] >= 100000]
+    lo = [r for r in ok if r["vocab_len"] < 100000]
+    med = lambda xs: sorted(xs)[len(xs) // 2] if xs else float("nan")
+    print("  $100,000 median tokens  vocab>=100k %.1f (n=%d) | vocab<100k %.1f (n=%d)"
+          % (med([r["n_100000"] for r in hi]), len(hi),
+             med([r["n_100000"] for r in lo]), len(lo)))
+
+    #: THE PER-PAIR CHECK. Tokenised RESULT, not vocab size.
+    eps, _u = roster.endpoints()
+    same = diff = miss = 0
+    disagree = []
+    for b, a in sorted(eps.items()):
+        if b not in tokcount or a not in tokcount:
+            miss += 1
+            continue
+        if tokcount[b] == tokcount[a]:
+            same += 1
+        else:
+            diff += 1
+            disagree.append((b.split("/")[-1], a.split("/")[-1]))
+    print("\n  PER-PAIR tokenisation of the probes, 50 lineages:")
+    print("    arms AGREE     %d" % same)
+    print("    arms DIFFER    %d   %s" % (diff, disagree[:4]))
+    print("    unmeasurable   %d   (an arm whose tokenizer would not load)" % miss)
+    print("\n  ->", os.path.join(RESULTS, "depth.csv"))
+
 
 
 if __name__ == "__main__":
