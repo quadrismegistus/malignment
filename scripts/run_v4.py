@@ -51,11 +51,25 @@ def main():
     ap.add_argument("--device", default="mps")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--every", type=int, default=100)
+    ap.add_argument("--cache", action="store_true",
+                    help="prompt KV cache: ~2x, and NOT bit-identical")
     a = ap.parse_args()
 
     from malignment.checkpoint import Checkpoint
     from malignment.runners import PRODUCER
 
+    #: **THE CACHE IS PART OF THE KEY, NOT AN OVERRIDE.** RH's call, and it is
+    #: `Checkpoint.key()`'s own rule -- *"THE INSTRUMENT IS PART OF THE KEY"*.
+    #: The prompt KV cache moves values by up to 8.25e-04, which is BELOW THETA
+    #: (1e-3) and can therefore carry a word across the gate. So a cached cell
+    #: and an uncached one are DIFFERENT MEASUREMENTS of the same prompt.
+    #:
+    #: `force=True` would have overwritten one with the other and left the
+    #: corpus unattributable -- the failure `rule_version` and `dict_sha` are in
+    #: the key to prevent, arriving through a flag instead of a rule bump.
+    #: Keyed, they coexist, and the cache's effect at corpus scale becomes a
+    #: free measurement instead of a destroyed one.
+    T.USE_PROMPT_CACHE = bool(a.cache)
     rules = V4.ADOPTED
     ck = Checkpoint(a.model)
     st = ck.stash(PRODUCER)
@@ -64,7 +78,7 @@ def main():
         #: v3's key plus `rules`, so two v4 rule sets cannot collide either.
         return {"model": a.model, "prompt": prompt,
                 "rule_version": V4.RULE_VERSION, "dict_sha": T.dict_sha(),
-                "rules": rules.label()}
+                "rules": rules.label(), "prompt_cache": bool(a.cache)}
 
     #: the population is what v3 WROTE, read from its own keys
     v3keys = [k for k, _v in st.items() if k.get("rule_version") == 3]
@@ -89,8 +103,9 @@ def main():
     if a.limit:
         prompts = prompts[:a.limit]
     todo = [p for p in prompts if v4key(p) not in st]
-    print("%s\n  rules=%s  v3 cells=%d  todo=%d  stash=%s"
-          % (a.model, rules.label(), len(prompts), len(todo), st.path), flush=True)
+    print("%s\n  rules=%s  prompt_cache=%s  v3 cells=%d  todo=%d\n  stash=%s"
+          % (a.model, rules.label(), bool(a.cache), len(prompts), len(todo),
+             st.path), flush=True)
     if not todo:
         print("  nothing to do"); return
 
@@ -106,6 +121,7 @@ def main():
           % (loader, vs, len(cids), len(V4.decoded_boundary_ids(tok))), flush=True)
 
     stamp = dict(theta=T.THETA, rule_version=V4.RULE_VERSION, rules=rules.label(),
+                 prompt_cache=bool(a.cache),
                  dict_sha=T.dict_sha(), bos_policy=T.bos_policy_for(a.model),
                  loader=loader, device=a.device, revision="",
                  compute_dtype="float16", producer=PRODUCER)
