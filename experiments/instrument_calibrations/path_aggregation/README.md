@@ -58,9 +58,39 @@ numbers rule out and rule in:
 - **Scale is CJK-specific.** English is exact to 5.0e-08 on the same model and
   the same run, so it is not a generic arithmetic difference.
 
-The next probe is `_boundary_for` under the CJK dictionary rule, compared
-between `expand`'s call site and `score_words`'s, on one surface where they
-disagree. Not run.
+**RUN 2026-08-17, and it is the TERM.** Decomposing `p = mass x term` for every
+disagreeing key on SmolLM2-360M, zh:
+
+    surface  ntok   expand      score_words   mass       term_sw    term implied
+                                                                    for expand
+    他        2     0.0185310   0.0185310     0.037351   0.496135   0.496135
+    一个       1     0.0326187   0.0320549     0.124183   0.258126   0.262666
+    自己       4     0.0123311   0.0114837     0.019016   0.603897   0.648461
+    我        2     0.0057578   0.0050940     0.018533   0.274865   0.310685
+
+**`mass` is IDENTICAL on every row** -- the agreeing rows prove the decomposition,
+since `expand / mass` reproduces the computed `term` exactly where they agree. So
+the two instruments walk the same path with the same mass and disagree only about
+`row[b].sum()`.
+
+`_boundary_for` is one function called from both sites (`twp.py:1211` in
+`expand`, `twp.py:1377` in `score_words`), so a different `b` can only come from
+its two CACHES -- `bcache` and `intra_cache` -- which `expand` populates across a
+whole beam walk and `score_words` starts empty. **Candidate, NOT established:**
+the CJK branch keys `bcache` by surface but is entered under
+`surf[-1].isalnum()`, which is TRUE for CJK characters, so the mask a surface
+gets may depend on what the walk cached before it. Chasing that is the next step
+and it has not been done.
+
+## TWO HYPOTHESES DIED HERE, BOTH ON EVIDENCE
+
+1. **multi-path spelling** -- enumerating every path moves 3 keys of 162
+2. **depth-wise theta pruning** -- `_account` gates continuations on
+   `mass >= theta` at every depth, which predicted the sign correctly and is
+   still WRONG: zero disagreeing keys have an intermediate mass below theta.
+   The check that appeared to confirm it was partly vacuous, because for a
+   2-token path (the zh median) the only intermediate mass IS `P0[t1]`, which is
+   >= theta by construction for any key `expand` emitted.
 
 ## WHAT THIS FOLDER DOES ESTABLISH
 
