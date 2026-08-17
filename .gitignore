@@ -157,6 +157,12 @@ activemq-data/
 .env
 .envrc
 .venv
+# **THE ROSTER IMPLIES MORE THAN ONE, so a bare `.venv` is not enough.** No single
+# `transformers` satisfies every checkpoint -- 13 nodes cannot run 5.x and 3
+# cannot run 4.57 -- so `scripts/venvs.py` derives one venv per exact pin and
+# names them `.venv-tf457` and so on. The template's single line would have
+# tracked every one of them.
+.venv-*/
 env/
 venv/
 ENV/
