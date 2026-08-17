@@ -295,7 +295,7 @@ def _table(rows, cols):
     return "\n".join(out)
 
 
-def md_screen(prompt, s):
+def md_screen(prompt, s, show=None):
     """Markdown report for a screened prompt with no poles yet. -> str"""
     ws = s.get("words") or []
     top = _content(ws)
@@ -316,7 +316,7 @@ def md_screen(prompt, s):
     #: `shown` (top_k) of `n_words`, so 26 never arrived, and the share column was
     #: a share of the RETURNED mass, not of the slot. Two mislabels in one line,
     #: which is the defect this seat spent the day finding in other people's work.
-    SHOW = 60
+    SHOW = show or 60
     disp, func = top[:SHOW], len(ws) - len(top)
     n_theta, n_ret = s.get("n_words", 0), len(ws)
     cut = ("" if n_ret >= n_theta else
@@ -485,17 +485,27 @@ def md_axis(prompt, g, n, r):
               "one that produced a death axis. A wide pole can be exactly right — "
               "the question is whether those two named words belong together."]
 
+    #: **`leverage` IS NOT PRINTED HERE, and that is the point** (opus-violence-2,
+    #: 2026-08-17). The brief forbids retrying a frame to raise it, and the report
+    #: was printing it before every decision -- so an agent making a legitimate
+    #: retag saw the number move and its trace became indistinguishable from
+    #: leverage-hunting to any later reviewer. Its own words: "a rule you must
+    #: remember to obey is weaker than one the tool enforces by not showing you the
+    #: number."
+    #:
+    #: It is still recorded on the saved item and still in `--json`. Withheld from
+    #: the surface an author reads while deciding, which is the only place it can
+    #: do harm.
     L += ["", "## 3. Recorded, never gated", "",
-          _table([("leverage", "%.4f" % (r.get("leverage") or 0.0),
-                   "reference only: mover 0.1027 / dead 0.0694 (archive, k=40)"),
-                  ("purity", "%.2f" % (r.get("purity") or 0.0),
+          _table([("purity", "%.2f" % (r.get("purity") or 0.0),
                    "fraction of tagged words landing on their own side"),
                   ("defectors", ", ".join(r.get("defectors") or []) or "none",
                    "tagged words that landed on the WRONG side"),
                   ("N", "%.4f" % (r.get("N") or 0.0), "level, not movement")],
                  ["measure", "value", "meaning"]), "",
-          "**Never retry a frame to raise leverage.** Selecting stimuli because they "
-          "show a large effect makes the finding an artifact of the selection."]
+          "`leverage` is deliberately **not shown**: the brief forbids retrying a "
+          "frame to raise it, and a number you cannot see is one you cannot chase. "
+          "It is recorded on the item and available in `--json`."]
 
     nb = r.get("neighbours") or {}
     if nb:
@@ -535,8 +545,11 @@ def md_axis(prompt, g, n, r):
                     for w, v in nbs.items()]
             L += ["", "## 6. Are these pole words stable outside the frame?", "",
                   _table(rows, ["pole word", "nearest in general English"]), "",
-                  "From fastText (%d words, no prompt). **This is a different "
-                  "question, not a referee.** In your frame bge reads each word "
+                  "From fastText (%d words, no prompt). **A different question from "
+                  "sections 1-5, and a REFEREE for one thing:** an item has already "
+                  "been quarantined because `execute` reads here as the compute "
+                  "sense, so treat a pole word whose neighbours are a different "
+                  "sense as a real defect, not a note. In your frame bge reads each word "
                   "correctly; here there is no frame, so a word with several senses "
                   "shows them all. `file` returning `jpg png gif` means it is "
                   "overwhelmingly the *computer* sense in general English — fine "
@@ -607,9 +620,17 @@ def _main(argv):
                                     "census"])
     ap.add_argument("prompt", nargs="?", default="")
     ap.add_argument("--pair", default=None, help="base id; ask `pairs` for the list")
+    #: **`--k` ALREADY RETURNS EVERYTHING and saying otherwise wasted an agent's
+    #: time.** It was documented as "widen the returned candidate list", so
+    #: opus-violence-2 ran `--k 400`, diffed it against the default, found them
+    #: identical and filed it as a broken flag. The flag works; the default is 500
+    #: and no prompt yet exceeds it, so k is never the binding cut -- theta is.
+    #: What it wanted was `--show`, below.
     ap.add_argument("--k", type=int, default=SCREEN_K,
-                    help="candidates returned; a display cut, not a "
-                         "beam width, so raising it is free (max 500)")
+                    help="server-side cut, already 500 so theta binds first; "
+                         "use --show to lengthen the printed table")
+    ap.add_argument("--show", type=int, default=None,
+                    help="rows in the candidate table (default 60)")
     ap.add_argument("--naughty", default="", help="comma-separated")
     ap.add_argument("--nice", default="", help="comma-separated")
     ap.add_argument("--domain", default="")
@@ -637,7 +658,7 @@ def _main(argv):
         md = md_census(out, a.target)
     elif a.cmd == "screen":
         out = screen(a.prompt, a.pair, a.k)
-        md = md_screen(a.prompt, out)
+        md = md_screen(a.prompt, out, a.show)
     else:
         #: **BOTH SUBCOMMANDS RE-SCREEN RATHER THAN TAKING WORDS ON THE COMMAND
         #: LINE.** The masses must come from the run the tags were made against;
