@@ -17,10 +17,20 @@ one, on 88 of 88 tokenizers, and malign's shadow-mask measurement puts the effec
 at **+15-28% resolved mass on Chinese and +0.12% on English**. RH has ruled v4
 proceeds because the instrument is wrong, not because a question needs it.
 
-**So anything below that reads `twp_words` should wait for v4, or be run knowing
-it will need re-running.** Two exceptions, and they are the cheap wins: work that
-reads GENERATED TEXT (M06, passages) and work that reads LEXICONS AGAINST WORD
-LISTS never touches the boundary mask.
+**UPDATED SAME DAY — v4 IS ADOPTED AND RUNNING, so this is no longer a wait.**
+`Rules(decoded_boundary=True, max_depth=9)`, malign [6449]. The gate is now the
+REBUILD, not the decision, and the numbers are smaller than the pilot suggested:
+**en +0.15% median, zh +3.42% median on Qwen2.5-7B**, against the +15-28% measured
+on one 360M model over three prompts. One model and three prompts was never a
+roster figure.
+
+**So: run against v4 cells, not v3, and check which a table was built from.**
+Anything re-derived from v3 cells will disagree with the store after the rebuild,
+and the disagreement will be small enough to look like noise.
+
+Two things never touched the boundary mask at all and are unaffected either way:
+work reading GENERATED TEXT (M06, passages) and work reading LEXICONS AGAINST
+WORD LISTS (the norms cluster).
 
 ## THE ARCHIVE'S OWN DEFECTS, WHICH DECIDE WHAT IS WORTH CARRYING
 
@@ -128,7 +138,7 @@ positive on one instrument, and together they say something neither says alone.
 Carry both or neither.
 
 **v3 route: `movement.py` + `produce_movement` + the `movement` table**, which is
-already the roster-driven version. **Waits on v4** — this is all `twp_words`.
+already the roster-driven version. **Waits on the v4 REBUILD** — all `twp_words`.
 
 ---
 
@@ -208,7 +218,7 @@ cited anywhere.**
 **This cluster is now instrument-blocked in a way it was not before.** The CJK
 boundary defect is +15-28% resolved mass on Chinese against +0.12% English, on 84
 of 133 models — **so every cross-lingual comparison on stored cells is comparing
-instruments.** Nothing here should be re-run until v4 lands, and the archive's
+instruments.** Nothing here should be re-run until the rebuild reaches it, and the archive's
 Chinese results should be read with that differential in mind.
 
 **Exception: anything on generated text.** `zh_fluency_and_ordering` used bge
@@ -281,10 +291,19 @@ they are negatives: they bound where the mechanism is not, and `J` plus
    baseline in the figure, since B_field_flow says pretraining does 6x more.
 3. **The second pretraining ladder (4)** — highest theoretical value, and
    SmolLM3's 118 revisions are already in the roster.
-4. **M06 (8)** — unblocked by v4 because it reads generated text.
+4. **M06 (8)** — never blocked by v4 at all, because it reads generated text.
 
-**Everything on `twp_words` waits for v4.** That is clusters 3, 7, and most of 9
-and 10.
+**Everything on `twp_words` now waits for the REBUILD rather than for the
+decision** — clusters 3, 7, and most of 9 and 10. `Mistral-7B-Instruct-v0.1` was
+the first re-run under the adopted rules.
+
+**AND ONE FRAMING IN THIS FILE WAS WRONG.** I had the numeric truncation down as
+a defect that made numeral distributions unreadable. `numeric_intra` was built,
+measured and REJECTED — it moves 90% of resolved mass into `drop`, because
+unmasking the comma spreads a number over sub-theta branches. **v3's truncation
+is a MARGINALISATION: `25` at 0.0326 IS P(salary begins 25).** Coarse and
+correct. Any cluster here that reads numerals should treat a truncated surface as
+a marginal over a band, not as damage.
 
 ## WHAT SHOULD NOT COME
 
