@@ -96,6 +96,16 @@ Still open:
 - **The fence is on the pair view only.** The Prompts table's `movement`/`fallen`/`risen` medians are computed over these same truncated surfaces and carry no warning, because the aggregate does not show which words it summed. Whether a median over collapsed magnitudes means anything is not a UI question.
 - **It will need removing, not editing, when v4 lands.** A stale fence claiming a defect that has been fixed is the same class of error as a stale caption, and this one names its docket entry so the next reader can check whether it still holds.
 
+## 3e. An open confound the panel cannot fence, recorded rather than acted on
+
+The numeric truncation defect's SEVERITY is language-dependent: in Chinese the model writes `57900` where in English it writes `57,900` -- 40.3% bare digits against 5.5%, over 6,000 generations (lacan, [6441]). So there is often no separator to truncate at.
+
+**And language is not randomly assigned across the roster.** Chinese-heavy models -- Yi, Qwen, InternLM2, Baichuan2, CT-LLM, MAP-Neo, GLM4, MiniCPM -- are a provenance cluster, so a defect that bites less in Chinese bites less on a set of models selected by training corpus, which correlates with alignment regime (malign, [6442]). That is a confound in any cross-family comparison of numeric prompts, and this panel is a cross-family comparison surface: 50 pairs side by side on one prompt.
+
+**It is not fenceable and that is the point of writing it down.** The two fences already on the panel have exact conditions -- a bare-digit surface, and an arm in lacan's `cjk_boundary.csv` affected list. This one has neither: the severity depends on what a model WRITES, which is a `generate` property and is in no committed result, and the provenance cluster is a judgement rather than a column. Malign has not measured it and says it may be small.
+
+So: **an open axis, not a warning.** A fence with no exact condition is the cry-wolf case this file has twice argued against, and inventing a provenance list to hang one on would be worse than the confound.
+
 ## 5. Blocked or waiting on someone else
 
 - **Any panel that renders `dN`.** Two conventions are emitted (`dN` and `dN_renorm`) and neither is canonical; where they disagree in sign the pair is not quotable at all, which is 14.8% of prompts at roster scale. A panel that picks one silently would be making a ruling that is RH's. `sign_disagree` is already in the payload, so the panel can refuse rather than choose.
