@@ -172,3 +172,47 @@ def test_freshness_check_detects_a_missing_pair():
         produce_movement.buildable = real
     assert any("ORPHAN" in p for p in problems), (
         "dropping a pair from the roster side was not reported: %s" % problems)
+
+
+# --------------------------------------------------------------------------
+# TIER 1 (cont.) — a quote that exists is not a quote that says anything
+# --------------------------------------------------------------------------
+
+def test_unsupported_finds_what_unsourced_cannot():
+    """RED RECEIPT, and it is the sibling check's blind spot, not a fixture.
+
+    `unsourced()` reports **0** unsourced `safety_data` claims across the 100
+    declared arms — a clean bill — while `unsupported()` finds 5 `present`
+    claims whose own quote never mentions safety. Asserting both together is the
+    point: the number that matters is that one is 0 while the other is not.
+    """
+    from malignment import attest, ch
+    doc = attest.load()
+    arms = {m for e in ch.query("SELECT base, endpoint FROM endpoints")
+            for m in (e["base"], e["endpoint"])}
+    unsourced_sd = [t for t in attest.unsourced(doc)
+                    if t[0] in arms and t[1] == "safety_data"]
+    assert unsourced_sd == [], "premise changed: unsourced() now flags safety_data"
+    assert attest.unsupported(doc, models=arms), (
+        "unsupported() found nothing where it previously found 5 — either the "
+        "attestations were fixed (good, retire this) or the check went inert")
+
+
+def test_unsupported_is_conditioned_on_the_value():
+    """A NEGATIVE value must not be flagged for a quote that omits the term.
+
+    Constructed red: an earlier pass counted 22 of 50 `safety_data` quotes as
+    silent and that number was meaningless, because 16 were `absent` — where a
+    mix-enumerating quote IS the evidence. If this test fails, the check has
+    reverted to a field-level predicate on a value-level fact.
+    """
+    from malignment import attest
+    doc = {"checkpoints": {
+        "x/absent": {"claims": [{"field": "safety_data", "value": "absent",
+                                 "quote": "trained on math, code and chat data"}]},
+        "x/present_ok": {"claims": [{"field": "safety_data", "value": "present",
+                                     "quote": "we include safety data"}]},
+        "x/present_bad": {"claims": [{"field": "safety_data", "value": "present",
+                                      "quote": "a model for instruction following"}]}}}
+    got = {m for m, _f, _v, _q in attest.unsupported(doc)}
+    assert got == {"x/present_bad"}, got

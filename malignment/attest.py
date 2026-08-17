@@ -226,6 +226,63 @@ def unsourced(doc, split=False):
     return no_quote + no_evidence
 
 
+#: Fields where a POSITIVE value has to be visible in its own quote, with the
+#: pattern the quote must contain. Only positive values: a NEGATIVE value is
+#: legitimately evidenced by enumeration -- "here is the full stated mix and the
+#: thing is not in it" -- so requiring the term there would demand a sentence
+#: that by construction does not exist.
+SUPPORT_REQUIRED = {
+    "safety_data": ("present",
+                    r"safe|harm|toxic|refus|red.?team|guard|abuse|jailbreak|adversar"),
+}
+
+
+def unsupported(doc, models=None):
+    """Positive claims whose own quote never mentions the thing claimed.
+
+    **`unsourced()` CHECKS THAT A QUOTE EXISTS. IT CANNOT CHECK THAT THE QUOTE
+    SAYS ANYTHING.** On 2026-08-17 `unsourced()` reported **0** unsourced
+    `safety_data` claims across the 100 declared arms -- a clean bill -- while
+    5 of the 25 `safety_data: present` claims were backed by quotes like:
+
+        gl198976/mpt-7b-instruct   "MPT-7B-Instruct is a model for short-form
+                                    instruction following."
+        allenai/Olmo-3.1-32B-Instruct
+                                   "This dataset consits of math, code, chat,
+                                    and general knowledge queries."
+
+    The second does not merely fail to support `present`; it enumerates a mix
+    that omits safety. **The claim may still be true** -- the OLMo 3 report does
+    document safety data -- but the quote does not establish it, and a quote that
+    does not establish its claim is the ATTESTED tier failing silently at exactly
+    the point it is trusted.
+
+    **Conditioned on the VALUE, not the field.** An earlier pass counted 22 of 50
+    `safety_data` quotes as silent about safety and that number is meaningless:
+    16 of them are `absent`, where a mix-enumerating quote IS the evidence. A
+    field-level predicate applied to a value-level fact -- the coarse-predicate
+    failure this campaign keeps paying for.
+
+    Returns `[(model, field, value, quote)]`.
+    """
+    import re
+    out = []
+    for mid, c in doc["checkpoints"].items():
+        if models is not None and mid not in models:
+            continue
+        for cl in c["claims"]:
+            spec = SUPPORT_REQUIRED.get(cl.get("field"))
+            if not spec:
+                continue
+            positive, pattern = spec
+            if (cl.get("value") or "").strip() != positive:
+                continue
+            q = cl.get("quote") or ""
+            if not re.search(pattern, q, re.I):
+                out.append((mid, cl.get("field"), cl.get("value"), q))
+    return out
+
+
 def report(doc):
     cps, lins = doc["checkpoints"], doc["lineages"]
     n_claims = sum(len(c["claims"]) for c in cps.values())
