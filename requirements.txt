@@ -45,5 +45,21 @@ numpy                  # twp.py
 huggingface_hub        # observe.py -- params_b, revision ladders, tokenizer class
 tqdm                   # runners.py progress bar; falls back to a plain loop if absent
 
+# --- REQUIRED BY A CALL SITE, NOT BY AN IMPORT -----------------------------
+# **THE AST WALK IS STRUCTURALLY BLIND TO THESE and cannot be fixed to see
+# them.** They are demanded by how we CALL a library, not by anything we import,
+# so nothing in `malignment/*.py` names them and no amount of regenerating this
+# file will produce them. Found 2026-08-17 the only way they can be: a venv built
+# from this file could not load a single model.
+accelerate             # models.py passes `device_map`, and transformers 5.x
+                       # raises ValueError without accelerate installed. Not
+                       # imported anywhere in this package.
+                       #
+                       # A MODEL's own dependency does NOT belong here even
+                       # though it is equally invisible to the AST walk: mpt's
+                       # bundled modelling code imports einops, and that is
+                       # declared in models.yaml's `packages:` beside the three
+                       # mpt nodes, which is what that field is for.
+
 # ClickHouse is reached through the `clickhouse-client` BINARY (see ch.py), not
 # a Python driver, so there is no dependency line for it. It is a system install.

@@ -798,6 +798,13 @@ nodes:
     - mpt-chat
     env:
       profile: default
+      packages:
+        einops: ''
+      packages_why: mpt's BUNDLED modelling code imports einops
+        (attention.py), reaching into our environment through
+        trust_remote_code. Found 2026-08-17 when a venv built from
+        requirements.txt could not load it -- requirements.txt is
+        derived from OUR imports and cannot see a model's.
       why: "REPO IS GONE: 404 at the API, not a permissions error. reversible by: nothing we control; a re-upload by MosaicML mosaicml's repo returned 404 at the API (not a permissions error); weights recovered from this mirror. Requirements inherited from the dead id, which is where the archive keyed them."
   gl198976/mpt-7b-instruct:
     # Corroborated by THREE mirrors -- gl198976, oleksandrfluxon, cornuHGF --
@@ -808,6 +815,13 @@ nodes:
     - mpt
     env:
       profile: default
+      packages:
+        einops: ''
+      packages_why: mpt's BUNDLED modelling code imports einops
+        (attention.py), reaching into our environment through
+        trust_remote_code. Found 2026-08-17 when a venv built from
+        requirements.txt could not load it -- requirements.txt is
+        derived from OUR imports and cannot see a model's.
       why: "repo id DEAD -- 404 at the API. reversible by: nothing we control mosaicml's repo returned 404 at the API (not a permissions error); weights recovered from this mirror. Requirements inherited from the dead id, which is where the archive keyed them."
   Alchan/mpt-7b-chat:
     # Corroborated by Alchan and cornuHGF, sha256 07f433e032115bdb /
@@ -820,6 +834,13 @@ nodes:
     - mpt-chat
     env:
       profile: default
+      packages:
+        einops: ''
+      packages_why: mpt's BUNDLED modelling code imports einops
+        (attention.py), reaching into our environment through
+        trust_remote_code. Found 2026-08-17 when a venv built from
+        requirements.txt could not load it -- requirements.txt is
+        derived from OUR imports and cannot see a model's.
       why: "REPO IS GONE: 404 at the API, not a permissions error. reversible by: nothing we control; a re-upload by MosaicML mosaicml's repo returned 404 at the API (not a permissions error); weights recovered from this mirror. Requirements inherited from the dead id, which is where the archive keyed them."
   google/gemma-2-9b:
     family:
