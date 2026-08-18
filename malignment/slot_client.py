@@ -362,8 +362,13 @@ def md_screen(prompt, s, show=None):
     L += ["", "## What to look for", "",
           "- Both poles must be real continuations of **this** frame. If the nice "
           "words only work in a different sentence, the frame is doing two things.",
-          "- Tag 4+ words per pole. Two-word poles pick up spelling neighbours "
-          "rather than meaning (`bra` against `shoes` returned `brag`, `butter`).",
+          #: Was `4+`, contradicting the brief's floor of three in the surface an
+          #: author reads far more often than the brief. Found by
+          #: opus-institutional-pilot, which read both in one session.
+          "- Tag 3+ words per pole, more where the frame offers them. Two-word "
+          "poles pick up spelling neighbours rather than meaning (`bra` against "
+          "`shoes` returned `brag`, `butter`). **Do not pad a pole to reach a "
+          "number** -- an extra word with no mass adds nothing.",
           "- Keep each pole to ONE semantic field. `quit resign kill die` averages "
           "to a **death** axis, because `kill`/`die` are far tighter than "
           "`quit`/`resign`.",
@@ -542,10 +547,21 @@ def md_axis(prompt, g, n, r):
     #: printing both would read as two instruments agreeing.
     ho = r.get("held_out") or {}
     if ho and not ho.get("error") and ho.get("words"):
-        rows = [("`%s`" % d["word"], d["pole"], "%+.3f" % d["margin"])
-                for d in ho["words"][:3]]
-        L += ["", "### 3b. Which word the axis leans on least — *not a gate*", "",
-              _table(rows, ["word", "tagged", "held-out margin"]), "",
+        _tot = sum(d.get("p") or 0.0 for d in ho["words"]) or 0.0
+        rows = []
+        for d in ho["words"][:3]:
+            p = d.get("p")
+            rows.append(("`%s`" % d["word"], d["pole"], "%+.3f" % d["margin"],
+                         "%.4f" % p if p is not None else "—",
+                         "%.0f%%" % (100.0 * p / _tot) if p and _tot else "—"))
+        L += ["", "## 3b. Which word the axis leans on least — *not a gate*", "",
+              _table(rows, ["word", "tagged", "held-out margin", "p", "share of poles"]), "",
+              "**Read the margin against the mass.** A flagged word carrying "
+              "almost no probability cannot be evidence about much either way — "
+              "dropping it would change nothing, which is exactly why dropping it "
+              "proves nothing. A flag on a word holding most of its pole is the "
+              "one worth thinking about, and it is also the one you must not "
+              "delete.", "",
               "Each word scored against an axis rebuilt **without it**. A low or "
               "negative margin does **not** mean the tag is wrong — measured, it "
               "lands on correct tags routinely, because a contrast can be pragmatic "
@@ -573,7 +589,33 @@ def md_axis(prompt, g, n, r):
               "irrelevant part, so this says little — it catches a pole that has "
               "drifted somewhere you did not intend."]
 
+    #: **A REFEREE THAT DID NOT RUN MUST NOT READ AS A REFEREE THAT PASSED.**
+    #: These two sections were rendered only on success, so a ClickHouse outage
+    #: removed the HEADING and nothing else -- and an author who has not seen the
+    #: section on a previous frame cannot tell a clean report from an absent one.
+    #: opus-institutional-pilot hit exactly this: CH died for ~20s mid-run, item 4
+    #: got no section 5 or 6 on three consecutive identical calls, and the agent
+    #: caught it only by remembering the previous frame had them. Its own finding
+    #: is the reason this is now loud: **had the outage landed one frame earlier,
+    #: `sat` would have shipped** -- section 6 is what caught `sat` reading as the
+    #: Saturday sense.
+    #:
+    #: Same class as a truncated figure caption: the loss exists only in the
+    #: rendered output, and a silent absence is the one failure no assert sees.
+    def _did_not_run(num, title, blk):
+        e = (blk or {}).get("error") if isinstance(blk, dict) else None
+        if blk and not e:
+            return None
+        return ["", "## %s. %s — **DID NOT RUN**" % (num, title), "",
+                "> `%s`" % (e or "no data returned"), "",
+                "**This check did not run, which is not the same as passing it.** "
+                "Do not read its absence as a clean result. Re-run the call; if it "
+                "keeps failing, say so in your report rather than saving around it."]
+
     cc = r.get("cross_corpus") or {}
+    _miss = _did_not_run(5, "What this axis selects across other frames", cc)
+    if _miss:
+        L += _miss
     if cc and not cc.get("error"):
         hi, lo = cc.get("naughty_end") or [], cc.get("nice_end") or []
         rows = [(("`%s` %+.3f *(%d)*" % (hi[i]["word"], hi[i]["s"], hi[i]["prompts"]))
@@ -592,6 +634,9 @@ def md_axis(prompt, g, n, r):
               "looks."]
 
     stb = r.get("stability") or {}
+    _miss = _did_not_run(6, "Are these pole words stable outside the frame?", stb)
+    if _miss:
+        L += _miss
     if stb and not stb.get("error"):
         nbs = stb.get("neighbours") or {}
         if nbs:

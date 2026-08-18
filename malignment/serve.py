@@ -748,6 +748,54 @@ def _pairs():
             "default": DEFAULT_PAIR_BASE}
 
 
+#: **A TTL CACHE OVER SCREENING, BECAUSE `axis` AND `save` BOTH RE-SCREEN.**
+#: The client re-screens on purpose -- masses must come from the run the tags
+#: were made against -- but that makes an author's loop pay a full forward pass
+#: on both checkpoints per call, and an agent reading one section at a time pays
+#: it once per section. An authoring agent was measured running five identical
+#: `axis` calls to grep five different headings: five poolings of one prompt.
+#:
+#: **This does not weaken the guarantee the re-screening exists for, it enforces
+#: it.** Screening is a forward pass with no sampling, so it is deterministic in
+#: (prompt, pair, k); the hazard the comment in `slot_client` names is a caller
+#: supplying words from a DIFFERENT prompt, which a key containing the prompt
+#: cannot do. Cached, `axis` and `save` provably share one screening rather than
+#: two runs that happen to agree.
+#:
+#: Keyed on `rule_version` and `dict_sha` so a rule change cannot be served from
+#: a pool computed under the old one -- the failure that would otherwise be
+#: invisible, since a stale pool is well-formed.
+_SCREEN_CACHE = {}
+_SCREEN_CACHE_LOCK = threading.Lock()
+_SCREEN_TTL = float(os.environ.get("MALIGNMENT_SCREEN_TTL", 1800))
+_SCREEN_CACHE_MAX = int(os.environ.get("MALIGNMENT_SCREEN_MAX", 512))
+
+
+def _screen_cached(prompt, pair_base, k, compute):
+    """Memoise `_slot` for `_SCREEN_TTL` seconds. -> (payload, hit)"""
+    from . import twp
+    key = (prompt, pair_base, int(k), twp.RULE_VERSION, twp.dict_sha())
+    #: `_monotonic`, not wall clock: a TTL measured against a clock that can step
+    #: backwards over an NTP correction would serve a stale pool for the size of
+    #: the step, and nothing about the payload would look wrong.
+    now = _monotonic()
+    with _SCREEN_CACHE_LOCK:
+        hit = _SCREEN_CACHE.get(key)
+        if hit is not None and now - hit[0] < _SCREEN_TTL:
+            return hit[1], True
+    #: Computed OUTSIDE the cache lock. `_slot` takes `_SLOT_LOCK` and can run for
+    #: seconds against a cold pair; holding a second lock across it would serialise
+    #: every reader behind one writer and turn a cache into a bottleneck.
+    val = compute()
+    with _SCREEN_CACHE_LOCK:
+        _SCREEN_CACHE[key] = (now, val)
+        if len(_SCREEN_CACHE) > _SCREEN_CACHE_MAX:
+            for dead in sorted(_SCREEN_CACHE, key=lambda x: _SCREEN_CACHE[x][0]
+                               )[:len(_SCREEN_CACHE) - _SCREEN_CACHE_MAX]:
+                _SCREEN_CACHE.pop(dead, None)
+    return val, False
+
+
 def _slot(prompt, pair_base, k):
     """Pooled word probabilities at the blank, via `twp.expand`.
 
@@ -1018,6 +1066,17 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
     #: thinner report, never a wrong one.
     try:
         heldout = slot_axis.held_out(prompt, naughty, nice)
+        #: **THE MASS BELONGS BESIDE THE MARGIN**, and its absence was the whole
+        #: defect opus-institutional-pilot reported: `withhold` at p=0.0035 and
+        #: `demanded` at p=0.128 were printed identically, so a flag on a word
+        #: carrying nothing looked exactly like a flag on the pole's main word.
+        #: Without it the section offers two actions, do-nothing and delete, and
+        #: the brief forbids delete -- "a section whose only reachable action is
+        #: the forbidden one will get the forbidden one taken." With it there is a
+        #: third: see that the flag cannot be evidence about anything and say so.
+        if isinstance(heldout, dict) and heldout.get("words") and probs:
+            for d in heldout["words"]:
+                d["p"] = float(probs.get(d["word"], 0.0) or 0.0)
     except Exception as e:
         heldout = {"error": "%s: %s" % (type(e).__name__, e)}
     return dict({
@@ -1602,7 +1661,15 @@ class Handler(BaseHTTPRequestHandler):
                     "a declared (base, endpoint) pair, so naming loose models is "
                     "no longer possible; ask /slot/pairs for the 50 available.")
             base = one("pair") or DEFAULT_PAIR_BASE
-            return _slot(prompt, base, _int(one("k"), 50, 5, 500))
+            kk = _int(one("k"), 50, 5, 500)
+            #: `cached` is reported so a reader can tell a served pool from a
+            #: computed one. A cache whose hits are indistinguishable from misses
+            #: cannot be audited, and this one sits under a measurement.
+            payload, was_hit = _screen_cached(
+                prompt, base, kk, lambda: _slot(prompt, base, kk))
+            if isinstance(payload, dict):
+                payload = dict(payload, cached=bool(was_hit))
+            return payload
         return None                                     # -> static
 
     # -- helpers -----------------------------------------------------------
