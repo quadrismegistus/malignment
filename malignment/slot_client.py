@@ -457,8 +457,27 @@ def md_census(c, target=TARGET):
     #: tool outranked its assignment -- the violence agent hit exactly that and
     #: reported it. A report describes; whoever tasked the agent decides. The
     #: numbers above already say which is thin.
-    L += ["", "## Next", "", "```bash",
-          'malign-slot screen "your new prompt here"', "```"]
+    #: **DO NOT RECOMMEND AUTHORING WHEN NOTHING NEEDS AUTHORING.** This printed
+    #: `screen "your new prompt here"` unconditionally, including with every
+    #: domain at target -- an agent reading the census as its orientation would
+    #: be told to keep going after the corpus was full. The same defect class as
+    #: the earlier "author there first" line RH removed: a REPORT that issues an
+    #: instruction its numbers do not support.
+    #:
+    #: Still describes rather than directs when work remains: which domain is
+    #: thin is above, and whoever tasked the agent decides.
+    if any(row[3] for row in body):
+        L += ["", "## Next", "", "```bash",
+              'malign-slot screen "your new prompt here"', "```"]
+    else:
+        L += ["", "## Next", "",
+              "**Every domain is at target.** Nothing here needs authoring. If "
+              "you were tasked to author anyway, the task outranks this report — "
+              "but say in your report that the corpus was already full, because "
+              "whoever tasked you may not have known.", "",
+              "The open work is review: items carry `reviewed: false` until a "
+              "human signs them off, and that is not a thing an authoring agent "
+              "can do for itself."]
     return "\n".join(L)
 
 
