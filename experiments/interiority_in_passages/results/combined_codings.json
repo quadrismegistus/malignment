@@ -1,0 +1,973 @@
+{
+"A": {
+"c000": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c001": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He was scared of what people would think of him if he came out but he wanted to live his truth.",
+"why": "INTERRUPTED"
+},
+"c002": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "That disgusted him so much he took an empty vegetable parcel",
+"why": "INTERRUPTED"
+},
+"c003": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "kiss him and laugh with him and not think, but instead she could never think",
+"why": "UNREADABLE"
+},
+"c004": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c005": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She chose to indulge his whim",
+"why": ""
+},
+"c006": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "He grew to love the desert.",
+"why": "NOT_A_STORY"
+},
+"c007": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c008": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She knew where he would be, and decided to make him come to her",
+"why": ""
+},
+"c009": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": true,
+"span": "",
+"why": ""
+},
+"c010": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": true,
+"span": "",
+"why": ""
+},
+"c011": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": true,
+"span": "",
+"why": ""
+},
+"c012": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "the hardest and most common kind of thief she had ever known.",
+"why": "INTERRUPTED"
+},
+"c013": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c014": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "she had overheard some women slandering the playwright and had not dared to go there",
+"why": ""
+},
+"c015": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The irony of being dismissed as merely a life-saver extinguisher is one that he cannot see.",
+"why": "INTERRUPTED"
+},
+"c016": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c017": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "His heart pounding, he knew he could no longer remain hidden. He must have her. Now.",
+"why": ""
+},
+"c018": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c019": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "Every day that passes I think I have to tell you something.",
+"why": "INTERRUPTED"
+},
+"c020": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "But now she realised that, for all his faults, for all his foibles, she was beginning to care about him.",
+"why": "INTERRUPTED"
+},
+"c021": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c022": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c023": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "I was kind and I was nervous. I did not feel like going into companies.",
+"why": ""
+},
+"c024": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She shuts her eyes and takes a deep breath, releasing the frustration building in her chest.",
+"why": ""
+},
+"c025": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The woman is lost in the thrill of creation and self discovery",
+"why": "NOT_A_STORY"
+},
+"c026": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "his master was so delighted last time when he agreed with the plan, but now he is displeased. Oh no, Darrick’s scheme had backfired.",
+"why": ""
+},
+"c027": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The cake came out perfect, and everyone was happy!",
+"why": "INTERRUPTED"
+},
+"c028": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "She sobbed. Poor darling.",
+"why": ""
+},
+"c029": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c030": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "His love for the bad girls would lead him to fool a woman into hiring a thief to steal lingerie.",
+"why": "UNREADABLE"
+},
+"c031": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Maybe Tom didn't want to do this? Maybe the poor guy just wanted to talk about Squinty bois and fluffy socks.",
+"why": ""
+},
+"c032": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "UNREADABLE"
+},
+"c033": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "After all, she would be just as much a thief as he was.",
+"why": "INTERRUPTED"
+},
+"c034": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Tabrepubby was fed up of his dumb ass belting it out for her every time she came down and danced.",
+"why": "UNREADABLE"
+},
+"c035": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she longed for his mother's life to have shown her, if only once and in a way that would not end",
+"why": "UNREADABLE"
+},
+"c036": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c037": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She let go of her thoughts and worries, surrendering to the pure and simple joy of the night.",
+"why": ""
+},
+"c038": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c039": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c040": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She knew nothing about this until the haya ceremony in which she was made aware of it",
+"why": "NOT_A_STORY"
+},
+"c041": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c042": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "她试图挺住，不去想那些虽然痛苦，但让她远离痛苦的方法。",
+"why": "INTERRUPTED"
+},
+"c043": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She was desperate to get away from him, but she couldn't bring herself to risk putting herself in danger",
+"why": ""
+},
+"c044": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c045": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "it's obvious that Hana wants to protect Mist and not Pristine",
+"why": "NOT_A_STORY"
+},
+"c046": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c047": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "the ugly wives who could not face their reflection in the oblong mirror in the hall of shame",
+"why": "INTERRUPTED"
+},
+"c048": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Or so she thought - what if there was another way of seeing things?",
+"why": ""
+},
+"c049": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Had he really understood her sorrows, suffered through the actual negotiations and signed on the dotted line?",
+"why": ""
+},
+"c050": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she felt like she could not create something when she did not get the supplies she needed",
+"why": "NOT_A_STORY"
+},
+"c051": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c052": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c053": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "He decided to stay at the seaside looking for this lateinit participant",
+"why": "UNREADABLE"
+},
+"c054": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c055": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c056": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she does not want to have abortion anymore and wants to do something and seek outside help",
+"why": "NOT_A_STORY"
+},
+"c057": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "UNREADABLE"
+},
+"c058": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c059": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She contemplated her decision and wondered if she was ready to take the leap.",
+"why": "NOT_A_STORY"
+}
+},
+"B": {
+"c000": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c001": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He was scared of what people would think of him if he came out but he wanted to live his truth.",
+"why": "INTERRUPTED"
+},
+"c002": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "That disgusted him so much he took an empty vegetable parcel",
+"why": "UNREADABLE"
+},
+"c003": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "kiss him and laugh with him and not think, but instead she could never think",
+"why": ""
+},
+"c004": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c005": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "The angel licked his lips, disturbing her.",
+"why": ""
+},
+"c006": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "He grew to love the desert.",
+"why": "INTERRUPTED"
+},
+"c007": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c008": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She knew where he would be, and decided to make him come to her, for he would come to her",
+"why": ""
+},
+"c009": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": true,
+"span": "",
+"why": ""
+},
+"c010": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": true,
+"span": "",
+"why": ""
+},
+"c011": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": true,
+"span": "",
+"why": ""
+},
+"c012": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "the hardest and most common kind of thief she had ever known",
+"why": "UNREADABLE"
+},
+"c013": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c014": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "she discovered that it was now wet with rain",
+"why": ""
+},
+"c015": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The irony of being dismissed as merely a life-saver extinguisher is one that he cannot see.",
+"why": "INTERRUPTED"
+},
+"c016": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c017": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "His heart pounding, he knew he could no longer remain hidden. He must have her. Now.",
+"why": ""
+},
+"c018": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c019": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": true,
+"span": "I've stopped trying to remember who I was.",
+"why": ""
+},
+"c020": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "But now she realised that, for all his faults, for all his foibles, she was beginning to care about him.",
+"why": "INTERRUPTED"
+},
+"c021": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "be a soldier, and he wanted to wear a uniform and be respected",
+"why": "INTERRUPTED"
+},
+"c022": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c023": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "I was kind and I was nervous. I did not feel like going into companies.",
+"why": ""
+},
+"c024": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She shuts her eyes and takes a deep breath, releasing the frustration building in her chest.",
+"why": ""
+},
+"c025": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The woman is lost in the thrill of creation and self discovery",
+"why": "NOT_A_STORY"
+},
+"c026": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Darrick got confused; his master was so delighted last time when he agreed with the plan, but now he is displeased.",
+"why": ""
+},
+"c027": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The cake came out perfect, and everyone was happy!",
+"why": "INTERRUPTED"
+},
+"c028": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She was making excuses, though he knew by the panic in her eyes he wasn't going to hear them.",
+"why": ""
+},
+"c029": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c030": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "His love for the bad girls would lead him to fool a woman into hiring a thief to steal lingerie.",
+"why": "UNREADABLE"
+},
+"c031": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Maybe Tom didn't want to do this? Maybe the poor guy just wanted to talk about Squinty bois and fluffy socks.",
+"why": ""
+},
+"c032": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "UNREADABLE"
+},
+"c033": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "After all, she would be just as much a thief as he was.",
+"why": "INTERRUPTED"
+},
+"c034": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "But she'd changed her mind. She'd decided to marry Tabrepubby.",
+"why": "UNREADABLE"
+},
+"c035": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "kill him like she longed for his mother's life to have shown her, if only once and in a way that would not end.",
+"why": "UNREADABLE"
+},
+"c036": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c037": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She let go of her thoughts and worries, surrendering to the pure and simple joy of the night.",
+"why": ""
+},
+"c038": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c039": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "despite the fact that he may not have liked playing there",
+"why": "NOT_A_STORY"
+},
+"c040": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She knew nothing about this until the haya ceremony in which she was made aware of it",
+"why": "INTERRUPTED"
+},
+"c041": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "UNREADABLE"
+},
+"c042": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "她试图挺住，不去想那些虽然痛苦，但让她远离痛苦的方法。",
+"why": "INTERRUPTED"
+},
+"c043": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She was desperate to get away from him, but she couldn't bring herself to risk putting herself in danger on his behalf.",
+"why": ""
+},
+"c044": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c045": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "it's obvious that Hana wants to protect Mist and not Pristine",
+"why": "NOT_A_STORY"
+},
+"c046": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c047": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "the families with the ugly wives who could not face their reflection in the oblong mirror in the hall of shame",
+"why": "INTERRUPTED"
+},
+"c048": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Or so she thought - what if there was another way of seeing things?",
+"why": ""
+},
+"c049": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Had he really understood her sorrows, suffered through the actual negotiations and signed on the dotted line?",
+"why": ""
+},
+"c050": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she felt like she could not create something when she did not get the supplies she needed",
+"why": "INTERRUPTED"
+},
+"c051": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c052": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "NOT_A_STORY"
+},
+"c053": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "He decided to stay at the seaside looking for this lateinit participant in a demotion region on the different side of the sea.",
+"why": "UNREADABLE"
+},
+"c054": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c055": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Ignoring her disgust, she resumed her examination of the man’s decomposing body.",
+"why": "INTERRUPTED"
+},
+"c056": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "think Walt would help her go free from the society she has to resist throughout the whole section.",
+"why": "NOT_A_STORY"
+},
+"c057": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "UNREADABLE"
+},
+"c058": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": "",
+"why": "INTERRUPTED"
+},
+"c059": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She contemplated her decision and wondered if she was ready to take the leap.",
+"why": "NOT_A_STORY"
+}
+},
+"agree": {
+"degree": 55,
+"drift": 54,
+"mode": 55,
+"narrative": 58,
+"why": 50
+}
+}
