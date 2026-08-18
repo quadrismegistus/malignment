@@ -24,6 +24,9 @@ readme = "README.md"
 requires-python = ">=3.11"
 dynamic = ["dependencies"]
 
+[project.scripts]
+malign = "malignment.cli:main"
+
 [tool.setuptools]
 packages = ["malignment"]
 
