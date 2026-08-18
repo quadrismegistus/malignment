@@ -267,8 +267,16 @@ def sec_share(A):
     row("all cells", xs)
     for s in ("displacement", "churn", "reverse"):
         row("  " + s, by.get(s, []))
-    print("   NOTE the null is ~0.18, not the 0.03 a dimensional argument predicts:")
-    print("        bge-m3 is anisotropic and D lives in the span of ~100 word vectors.")
+    print("   NOTE on the null, because two analytic arguments both undershoot it:")
+    print("        ambient 1024 dims       -> expected |cos| 0.031   (6x too small)")
+    print("        effective dim 67.7      -> expected |cos| 0.122   (1.5x too small)")
+    print("        construction-matched    -> 0.180, what is measured")
+    print("        The gap is that null axes are NOT random directions: they are")
+    print("        centroid differences of 3-11 word sets from the same vocabulary,")
+    print("        so they inherit local structure. Hence an empirical null, not an")
+    print("        analytic one. (Vectors are L2-normalised; global centering is a")
+    print("        verified no-op -- every quantity here is a difference, so the")
+    print("        anisotropy cancels: max |cos| change 1.4e-09 over 120 cells.)")
     dis = by.get("displacement", [])
     if dis:
         print("   r2 in displacement cells is %.3f, so most of the movement there is in"
