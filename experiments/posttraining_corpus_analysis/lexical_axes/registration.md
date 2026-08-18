@@ -260,3 +260,30 @@ does not reach assistant prose.** It predicts where a transfer would work -- a
 preference corpus of narrative text -- and none of the five populations is one.
 
 M06's finding is draft/ungraded/single-pass and is quoted with that fence.
+
+---
+
+## A5 — 2026-08-18. RH: there is no such thing as base-generated assistant prose. The null was STRUCTURAL.
+
+The vector is a base-vs-aligned contrast; base models do not produce assistant
+prose; every response in every preference corpus comes from an instruction-tuned
+generator. **Both sides of every pair sit on the aligned pole**, so the axis was
+asked to discriminate where one of its poles cannot occur. Not a weak test -- an
+unavailable one.
+
+Composition confirms it: UltraFeedback's only base generator is `pythia-12b`, 268
+of ~80,000 completions (0.3%). `run.py --basepole`:
+
+    base on one side        n=  330   54.8%  [0.493, 0.603]  p=0.088
+    SFT-only on one side    n=11,744  54.0%  [0.531, 0.549]  p=4.4e-18
+    both chat/instruct      n=46,993  51.7%  [0.513, 0.522]  p=3.6e-14
+
+Monotone in the predicted direction. **Held loosely: the base cell is
+underpowered and the gradient spans 3 points.** The structural argument carries
+this, not the numbers.
+
+**SUPERSEDES A4.** Genre was true and not binding: a preference corpus of
+narrative text would still hold only aligned-arm responses.
+
+**Scope fact for the collection: a base-vs-aligned instrument cannot be evaluated
+on preference data at all.** That is a property of what preference data is.

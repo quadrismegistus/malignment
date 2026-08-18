@@ -134,6 +134,56 @@ def predict():
     print("\n  ->", out)
 
 
+def basepole():
+    """RH: there is no such thing as base-generated assistant prose.
+
+    The vector is a BASE-vs-ALIGNED contrast, and every response in every
+    preference corpus comes from an instruction-tuned generator -- so both sides
+    of every pair sit on the aligned pole and the axis is asked to discriminate
+    where one of its poles cannot occur. The null was structural, not empirical.
+
+    ONE EXCEPTION EXISTS. UltraFeedback's generator list contains `pythia-12b`,
+    a base model, on 0.3% of completions. If the axis is real and the null is a
+    domain restriction, it should fire exactly there and nowhere else."""
+    import numpy as np
+    from scipy import stats
+    from datasets import load_dataset
+    w, pos, neg = vector()
+    dens = lambda t: (sum(w.get(x, 0.0) for x in TOKEN.findall(t.lower()))
+                      / max(len(TOKEN.findall(t.lower())), 1))
+    o = load_dataset("openbmb/UltraFeedback")["train"]
+    r2m = {}
+    for q in o:
+        for c in q["completions"]:
+            r2m.setdefault(c["response"].strip(), c["model"])
+    uf = load_dataset("HuggingFaceH4/ultrafeedback_binarized")["train_prefs"]
+    tx = lambda m: m[-1]["content"] if isinstance(m, list) else str(m)
+    BASE, SFT = {"pythia-12b"}, {"alpaca-7b", "starchat"}
+    groups = {"base on one side": [], "SFT-only on one side": [], "both chat/instruct": []}
+    for a, b in zip(uf["chosen"], uf["rejected"]):
+        c, r = tx(a), tx(b)
+        mc, mr = r2m.get(c.strip()), r2m.get(r.strip())
+        if not mc or not mr:
+            continue
+        d = dens(c) - dens(r)
+        if d == 0:
+            continue
+        g = ("base on one side" if BASE & {mc, mr} else
+             "SFT-only on one side" if SFT & {mc, mr} else "both chat/instruct")
+        #: sign convention: does the ALIGNED-leaning text win? Where a base model
+        #: is present it is nearly always the rejected side, so a working axis
+        #: predicts the chosen response scores HIGHER.
+        groups[g].append(d > 0)
+    print("%-24s %8s %10s %-18s %s" % ("stratum", "n", "accuracy", "95% CI", "p"))
+    for g, v in groups.items():
+        if len(v) < 30:
+            print("%-24s %8d   UNPOWERED" % (g, len(v))); continue
+        k = int(np.sum(v)); t = stats.binomtest(k, len(v), 0.5)
+        lo, hi = t.proportion_ci()
+        print("%-24s %8d %9.1f%%  [%.3f, %.3f]  %-10.3g" %
+              (g, len(v), 100 * k / len(v), lo, hi, t.pvalue))
+
+
 def inspect():
     import numpy as np
     rows = list(csv.DictReader(open(AUC_TSV, encoding="utf-8"), delimiter="\t"))
@@ -160,10 +210,13 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--vector", action="store_true")
     ap.add_argument("--predict", action="store_true")
+    ap.add_argument("--basepole", action="store_true")
     a = ap.parse_args()
     if a.vector:
         inspect()
     elif a.predict:
         predict()
+    elif a.basepole:
+        basepole()
     else:
         ap.print_help()

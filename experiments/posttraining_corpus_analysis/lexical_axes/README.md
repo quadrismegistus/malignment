@@ -68,39 +68,55 @@ Two raw figures flipped sign under the correction -- hh-harmless 45.2% -> 56.9%,
 hh-helpful 56.0% -> 44.4% -- which is what a deleted pole does and is why the
 first run's numbers should not be cited.
 
-# THE LIMIT IS GENRE, NOT GRAIN -- M06 ALREADY MEASURED THE GRAIN TRANSFER
+# THE REAL LIMIT (RH): THERE IS NO BASE-GENERATED ASSISTANT PROSE
 
-A3 recorded this test as crossing two grains -- `twp_words` next-token
-probabilities against bag-of-words counts -- and treated that as the reason the
-null is weak. **That is wrong, and M06 had already measured it.**
+**A4 said the limit is genre. It is narrower and more structural than that.**
 
-`meta/M06_generation/findings/p_on_passages.md` (producer `m06_p_on_passages.py`,
-232,384 passages, 41 pairs):
+The vector is a BASE-vs-ALIGNED contrast. **Base models do not produce assistant
+prose at all** -- there is no base-arm version of "I'd be happy to help with
+that." And every response in every preference corpus comes from an
+instruction-tuned generator: Alpaca variants in PKU, Anthropic's models in
+hh-rlhf, llama-2-chat / wizardlm / falcon-instruct / gpt-4 / bard in
+UltraFeedback.
 
-    same prompts, same models, both grains   Spearman +0.500   n=600 words
-    canonical-vector context                         +0.444    n=3,613
-    page classifier, real minus null mean    0.387 - 0.499     k=25..200
+**So both sides of every pair sit on the aligned pole, and the axis is asked to
+discriminate inside a region where one of its poles cannot occur.** The null was
+structural. It was not available to be discovered.
 
-> *"Half the distributional ranking survives temperature-1 sampling and ~200
-> tokens of autoregression, on identical prompts and models: grain is the only
-> thing that varies."*
+## THE ONE EXCEPTION, AND IT POINTS THE RIGHT WAY
 
-**So the vector DOES survive the trip from distribution to running text.** What it
-does not survive here is the move from FICTION CONTINUATIONS to ASSISTANT PROSE
-about laundering money.
+UltraFeedback's generator list contains `pythia-12b`, a base model, on **268 of
+~80,000 completions (0.3%)**, plus `alpaca-7b` and `starchat` which are SFT-only
+with no preference stage. `python run.py --basepole`:
 
-**And that failure is already on record in this collection.** `pku-safe-rlhf` A2
-probed three bge refusal centroids against PKU responses and found the responses
-sat FURTHER from the refusal centroids than generic English did, because "the
-spans are erotic-fiction refusals, the responses are assistant prose about
-bribery, and **the genre gap swamps the speech act**." Two instruments, same
-boundary.
+    stratum                    n     accuracy   95% CI            p
+    base on one side          330      54.8%    [0.493, 0.603]   0.088
+    SFT-only on one side   11,744      54.0%    [0.531, 0.549]   4.4e-18
+    both chat/instruct     46,993      51.7%    [0.513, 0.522]   3.6e-14
 
-**The properly specified null: the alignment axis is legible across grains within
-a genre and does not reach assistant prose.** That is a sharper and more useful
-claim than "the axes are unrelated", and it predicts where a transfer WOULD work
--- a preference corpus of narrative text, which none of the five is.
+**Monotone in how un-aligned the weaker generator is**, which is the ordering the
+structural account predicts. **Held loosely: the base cell is n=330 with an
+interval containing 0.5, and the gradient spans 3 points.** The powered
+comparison is SFT-only against both-chat. The structural argument carries this,
+not the gradient.
 
-M06's finding is `status: draft`, `grade: ungraded`, single pass, and not
-audit-grade until a second seat reproduces it. Quoted with that fence.
+## WHAT THAT MEANS BEYOND THIS TEST
+
+**A base-vs-aligned instrument cannot be evaluated on preference data, in
+principle.** Preference corpora record choices BETWEEN aligned outputs; they hold
+no base-arm text to contrast against. Any future attempt to read alignment's
+lexical operation off a preference corpus meets the same wall, and it is a
+property of what preference data IS rather than of any particular corpus or
+instrument.
+
+**This supersedes A4's genre account**, which was true but not the binding
+constraint: even a preference corpus of narrative text would still contain only
+aligned-arm responses.
+
+# SUPERSEDED: THE GRAIN AND GENRE ACCOUNTS
+
+M06 established the grain transfer is solved -- `p_on_passages.md`, Spearman
++0.500 (n=600) and +0.444 (n=3,613) from `twp_words` to running text, page
+classifier real-minus-null 0.39-0.50 across 232,384 passages. So grain was never
+the limit. Genre is real but is downstream of the structural point above.
 
