@@ -418,7 +418,13 @@ def md_screen(prompt, s, show=None):
 #: **RH'S THREE DOMAINS.** The other seven in the corpus were proposed by earlier
 #: agents, not by him, which is why they never cohered -- `power` mixes individual
 #: workplace frames with political critique, `self_harm` holds an affect frame.
-KEEP = ("sexual", "violence", "institutional")
+#: `identity` added 2026-08-18 on RH's instruction: he retagged his two
+#: `identity_matched_frame` items and commissioned more groups on the same
+#: frame. It is a DELIBERATE fourth domain, not one of the agent-proposed
+#: leftovers, and the census was listing it under "authored by earlier agents,
+#: do not add to these" -- which is false and would have stopped anyone
+#: extending it.
+KEEP = ("sexual", "violence", "institutional", "identity")
 
 #: **RH'S TARGET, NOT THE TOOL'S** (2026-08-17: "we're aiming for 50 (100?) each").
 #: The census's `need` column has always been distance to the LARGEST domain, which

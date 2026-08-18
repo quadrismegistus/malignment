@@ -494,7 +494,19 @@ def domain_census(over=None):
         files[name] = {"path": target, "exists": os.path.exists(target)}
         items = read_items(target) if files[name]["exists"] else []
         files[name]["n"] = len(items)
-        for d in items:
+        #: **QUARANTINED ITEMS ARE NOT CORPUS.** They moved into this directory
+        #: on 2026-08-18 so that twp reaches them, and `corpora()` globs the
+        #: directory -- so the census immediately counted 24 quarantined items as
+        #: live and reported sexual 50 -> 56, violence 52 -> 61. A balance report
+        #: that counts withdrawn items tells an author the set is fuller than it
+        #: is, which is the one thing this function exists to prevent.
+        #:
+        #: Filtered here rather than in `corpora()`: the file must stay visible
+        #: to `prompts.py`, which loads it deliberately.
+        live = [d for d in items if not d.get("quarantined")]
+        files[name]["n"] = len(live)
+        files[name]["quarantined"] = len(items) - len(live)
+        for d in live:
             raw = (d.get("domain") or "").strip()
             key = raw or UNTAGGED
             rows[key][name] += 1
