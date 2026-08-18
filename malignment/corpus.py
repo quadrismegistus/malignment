@@ -263,3 +263,37 @@ def topup_todo(model, root=None, ops=None):
         if missing:
             todo[p] = missing
     return todo
+
+
+def pass1_todo(model, rule_version=4, rules=None, prompts=None):
+    """Prompts this model still needs, asked of CLICKHOUSE rather than a stash.
+
+        corpus.pass1_todo("Qwen/Qwen2.5-7B")   -> [prompt, ...]
+
+    **A FLEET BOX CANNOT COMPUTE THIS FOR ITSELF.** `Checkpoint.done()` reads the
+    local stash and a fresh rental has none, so a box asked to "run what is
+    missing" re-measures the entire prompt set and reports success -- the
+    failure-that-looks-like-progress shape, at the cost of a whole rental.
+
+    So the worklist is computed where the knowledge is: ClickHouse holds every
+    ingested cell, and the difference against `Prompts.all()` is what the box
+    should be handed via `runners --prompts FILE`.
+
+    **IT ASKS ABOUT THE INSTRUMENT, NOT JUST THE PROMPT.** A v3 cell does not
+    satisfy a v4 run; `rule_version` and `rules` are part of what "done" means,
+    exactly as they are in `Checkpoint.key`. Passing `rule_version=3` asks the v3
+    question instead.
+    """
+    from . import ch
+    from .prompts import Prompts
+    want = prompts if prompts is not None else sorted({p.text for p in Prompts.all()})
+    q = ("SELECT DISTINCT prompt FROM {db}.twp_cells WHERE model=%s AND rule_version=%d"
+         % (_lit(model), int(rule_version)))
+    if rules:
+        q += " AND rules=%s" % _lit(rules)
+    have = {r["prompt"] for r in ch.query(q)}
+    return [p for p in want if p not in have]
+
+
+def _lit(s):
+    return "'%s'" % str(s).replace("\\", "\\\\").replace("'", "\\'")

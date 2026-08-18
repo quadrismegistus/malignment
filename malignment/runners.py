@@ -604,6 +604,12 @@ def main():
     ap.add_argument("--purge", action="store_true",
                     help="delete the weights afterwards (rented disks)")
     ap.add_argument("--prompts", default=None, help="txt file, one prompt per line")
+    #: **A FLEET BOX CANNOT COMPUTE ITS OWN TODO.** `Checkpoint.done()` reads the
+    #: LOCAL stash, and a fresh box has none -- so it would re-measure everything
+    #: and report success. The worklist is computed HERE against ClickHouse,
+    #: which is the only place that knows what exists, and shipped as `--prompts`.
+    ap.add_argument("--rules", default=None, choices=["v4"],
+                    help="measure under twp_v4.ADOPTED instead of v3")
     ap.add_argument("--all-prompts", action="store_true",
                     help="every admitted prompt, not just what will pair")
     ap.add_argument("--log", default=None,
@@ -635,8 +641,12 @@ def main():
                   "\n  --all-prompts deliberately.")
             return 1
     try:
+        rules = None
+        if a.rules == "v4":
+            from . import twp_v4 as V4
+            rules = V4.ADOPTED
         print("\n  %s" % json.dumps(
-            ck.run_twp(prompts, purge=a.purge, limit=a.limit), indent=1))
+            ck.run_twp(prompts, purge=a.purge, limit=a.limit, rules=rules), indent=1))
     finally:
         sys.stdout = tee.stream
         tee.close()
