@@ -1093,7 +1093,13 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
     cross = stability = None
     try:
         from . import vectors as _V
-        cross = _V.cross_corpus(prompt, naughty, nice)
+        #: **k=20 RATHER THAN THE DEFAULT 8.** This is now the ONLY diagnostic
+        #: the axis report prints (sections 2-4 and 6 were removed 2026-08-18),
+        #: so it carries the whole "are my poles pointing where I think" job on
+        #: its own and eight words a side was sized for a report with five other
+        #: sections. The cost is `LIMIT 20` instead of `LIMIT 8` in one already-
+        #: aggregated query.
+        cross = _V.cross_corpus(prompt, naughty, nice, k=20)
     except Exception as e:
         cross = {"error": "%s: %s" % (type(e).__name__, e)}
     try:

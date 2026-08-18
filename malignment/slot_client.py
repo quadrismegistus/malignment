@@ -279,7 +279,27 @@ def _table(rows, cols):
     a terminal, which serves both readers instead of trading one against the other.
     """
     rows = [[("" if c is None else str(c)) for c in r] for r in rows]
-    w = [max(len(cols[i]), *(len(r[i]) for r in rows)) if rows else len(cols[i])
+
+    #: **PAD BY DISPLAY WIDTH, NOT BY len().** A CJK glyph is one character and
+    #: two columns, so `str.ljust` under-pads every row containing one and the
+    #: table skews right by one column per CJK character. Invisible until the
+    #: cross-corpus check started returning Chinese vocabulary in bulk -- `乳房`
+    #: and `想法` are len 2 and occupy 4 columns each -- and it defeats the whole
+    #: reason RH asked for ASCII columns rather than pipe tables.
+    #:
+    #: 'W' is wide, 'F' is fullwidth; East Asian 'A' (ambiguous) is left at 1
+    #: because its rendering depends on the reader's font and guessing 2 would
+    #: break the common case. Combining marks take no column of their own.
+    def _w(t):
+        import unicodedata as u
+        return sum(0 if u.combining(ch) else
+                   (2 if u.east_asian_width(ch) in ("W", "F") else 1) for ch in t)
+
+    def _pad(t, n, right=False):
+        gap = " " * max(0, n - _w(t))
+        return (gap + t) if right else (t + gap)
+
+    w = [max(_w(cols[i]), *(_w(r[i]) for r in rows)) if rows else _w(cols[i])
          for i in range(len(cols))]
     #: Numeric-looking columns right-align, so decimal points line up and a reader
     #: can compare magnitudes down the column rather than parsing each cell.
@@ -287,7 +307,7 @@ def _table(rows, cols):
                .replace("%", "").isdigit() or r[i] == "" for r in rows)
            for i in range(len(cols))]
     def fmt(cells):
-        return "  ".join(c.rjust(w[i]) if num[i] else c.ljust(w[i])
+        return "  ".join(_pad(c, w[i], right=num[i])
                          for i, c in enumerate(cells)).rstrip()
     out = ["```", fmt(cols), "  ".join("-" * x for x in w)]
     out += [fmt(r) for r in rows]
@@ -564,7 +584,7 @@ def md_axis(prompt, g, n, r):
                  if i < len(hi) else "",
                  ("`%s` %+.3f *(%d)*" % (lo[i]["word"], lo[i]["s"], lo[i]["prompts"]))
                  if i < len(lo) else "")
-                for i in range(min(6, max(len(hi), len(lo))))]
+                for i in range(max(len(hi), len(lo)))]
         L += ["", "## 2. What this axis selects across %d OTHER frames"
               % cc.get("scored_prompts", 0), "",
               _table(rows, ["toward naughty", "toward nice"]), "",
