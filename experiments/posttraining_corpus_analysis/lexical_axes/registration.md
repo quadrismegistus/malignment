@@ -103,3 +103,45 @@ PKU; that is why the corpora matter, not evidence about the checkpoints. **D, if
 positive, says the same lexical axis is legible in both places -- not that the
 corpus put it there.** U_ladder's ablation is the standing reason to expect it
 did not.
+
+---
+
+## A1 — 2026-08-18. `lean` needs a count floor, and step D as written would find a spurious correlation. Amended before running.
+
+`meta/M01_displacement/results/m01_token_counts.csv`, 685 tokens:
+
+    lean = (as_riser - as_faller) / total          range [-1, +1]
+
+    total: median 2, p25 1, p75 8, max 1228
+    241 of 685 tokens have total == 1     -> lean is +/-1 BY CONSTRUCTION
+    423 of 685 sit at exactly +/-1.0
+    spearman(|lean|, total) = -0.632      -> THE EXTREME LEANS ARE THE RARE WORDS
+
+**A logistic coefficient vector has the same pathology** -- unstable extremes on
+low-count features. Correlating the two unfiltered would find agreement produced
+by shared rarity in both vectors, not by shared direction. **That is a
+correlation this design would have reported as a finding.**
+
+    AMENDED D   spearman(w, lean) restricted to tokens with M01 `total` >= 10
+                AND corpus count >= 100, and REPORTED AS A FUNCTION of the
+                M01 floor (>=1, >=5, >=10, >=20) so the artefact stays visible.
+                A correlation that only appears at low floors is the artefact.
+
+    n at total>=10: 153 tokens (19 still at +/-1); at >=20: 94 (7 at +/-1)
+
+**Also available and not previously used: the `vv` flag** (lexical verb, True on
+448 of 685). P's own population is "English lexical verbs only, so part of speech
+is not a confound", so `vv=True AND total>=10` (n=112) is the population closest
+to P's and is reported alongside the unrestricted one.
+
+**Sanity check on that population, recorded because it is the reason to trust the
+vector at all:** its content matches V.6's caption independently.
+
+    most falling  punched -1.00, stabbed -1.00, smashed -0.96, told -0.92,
+                  cut -0.89, dropped -0.89, pushed -0.88, poured -0.83
+    most rising   examined, whispered, stepped, submitted, used, scattered
+
+Contact, motion and force on the falling side; perception, cognition and speech
+on the rising side. That is `V_embedding_regions.md`'s axis caption, arrived at by
+a different instrument. **`shattered` and `scattered` rise and are force verbs, so
+it is not clean, and both sit at lean 1.00 i.e. low count.** Not over-read.
