@@ -292,6 +292,101 @@ by Fisher exact on kept/dropped by arm.
 
 `run.py --filtercal <output>`.
 
+## RUN 9 -- the free narrative classifier. 2026-08-18
+
+RH: *"can you train a logistic regression to predict narrativity?"* Yes, and it
+beats Haiku on every axis at zero token cost.
+
+Trained on the 3,072 passages where both Opus coders agree, char TF-IDF (2-4)
+plus 23 surface features, **leave-one-PAIR-out** so it is tested on models it
+has never seen -- which is the condition it runs in, all 26 remaining pairs
+being unseen.
+
+    AUC 0.859
+
+RH: *"we dont want recall we want precision."* Right, and it reframed the whole
+thing: we are not enumerating the population, we are DRAWING A SAMPLE from it.
+2,000 English passages exist per cell against a target of ~150. Missing narrative
+passages costs nothing; paying Opus to read non-narrative ones costs everything.
+
+    threshold   keeps   precision   arm gap
+      0.20      56.1%     31.6%      +1.6
+      0.70      16.0%     57.3%      +0.4     <- used
+      0.90       3.7%     71.1%      -1.7
+      0.95       1.1%     72.7%      -4.1
+
+**The cheap end is the biased end**: above 0.90 the arm gap opens. Production
+uses TOP-N PER CELL rather than a global threshold, so equal counts per arm are
+guaranteed by construction rather than by the gap holding.
+
+    cost per narrative passage obtained
+      no filter   5.6 coded per narrative one    7,940 tokens each
+      th=0.70     1.75                           2,500 tokens each    3.2x
+
+**One declared cost:** the classifier prefers prototypical scenes and those carry
+more free indirect discourse, so it lifts the SHOWN level 35.1% -> 40.7%. It does
+so equally in both arms (+0.4pp), and the design is a within-pair difference, so
+the level shift cancels. The population becomes "passages a classifier ranks as
+confidently narrative", which is narrower than "narrative passages" and must be
+said.
+
+Producer `run.py` (inline), artifact `results/passC/triage.parquet` (gitignored,
+48 MB, rebuilt by scoring the corpus).
+
+## RUN 10 -- can we predict the OUTCOME too? NO. 2026-08-18
+
+Same question asked of `mode` and `degree`, leave-one-pair-out:
+
+    SHOWN vs TOLD    AUC 0.758   (question-mark count ALONE gets 0.675)
+    degree           r = 0.564, r2 0.32
+
+Tempting, because a noisy predictor over 2,000 passages per cell looked like it
+beat a precise one over 90: MDE 0.010 against 0.068.
+
+**That arithmetic was wrong and the check caught it.** It modelled attenuation
+only. Per-pair residual bias runs +0.071, -0.153, +0.094 -- the same size as the
+effects -- and unlike attenuation it does not shrink with n, because the paired
+test IS a test on those per-pair numbers. Predicted deltas reproduce ONE of three
+signs (+0.202 / -0.042 / -0.057 against true +0.131 / +0.111 / -0.151).
+
+The predictor leans on mental-state verb density; models differ in verb density
+for reasons unrelated to how much mind is in the scene, and that difference is
+constant within a model, so it lands squarely in the contrast.
+
+**Predict well enough to describe, not well enough to compare.**
+
+## RUN 11 -- Sonnet as coder: REJECTED. 2026-08-18
+
+Opus subagents returned 529 for ~25 minutes (four workflow attempts and a single
+trivial probe, all zero tokens; the main loop was fine throughout). RH: *"Let's
+try Sonnet high."* It ran.
+
+L00 salamandra-7b, Sonnet high, single-coded, 400/400, 513K tokens (1,283 per
+coding). Then the calibration that settles it: **1,158 passages Opus had already
+coded** (579 narrative + 579 not, matching the ~51% mix triage feeds), same
+rubric, same text.
+
+    field        Sonnet vs Opus     Opus A-vs-B
+    narrative        0.870             0.867     <- equal
+    mode             0.628             0.850
+    drift            0.638             0.785
+    degree           0.614             0.839
+    mode, narr only  0.555
+
+    span fabrication   Sonnet 1.36%    Opus 0.11%
+
+On the SAME 556 passages: Opus SHOWN 33.5%, Sonnet 24.6%. So L00's 19.7% was the
+coder, not the lineage.
+
+**And it fails the test that matters** -- per-pair deltas Yi -3.4 -> -12.2,
+SmolLM2 -3.3 -> +3.3 (SIGN FLIP), neo -5.9 -> -11.7. Same failure as RUN 10:
+fine in aggregate, useless per pair, and per pair is the unit.
+
+**Sonnet matches Opus on exactly the one field we already get for free.** The
+L00 codings are parked in `results/passC/rejected/` with the reason, not pooled:
+in a paired design the coder is the instrument, so mixing coders across pairs
+confounds coder with lineage.
+
 ---
 
 # STANDING RULES, across every run

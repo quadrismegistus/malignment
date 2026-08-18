@@ -1,0 +1,11 @@
+# Generated per-agent batch files: 694 of them, rebuilt by `run.py --shards N`
+# from triage.parquet plus the corpus. Nothing here is a record.
+results/passC/batches/
+results/passC/lineage/batches/
+results/passC/filtercal/fb-*.json
+results/passC/sonnetcal/sc-*.json
+
+# Derived, 48 MB, rebuilt in seconds by scoring the corpus with the classifier
+# trained on results/passC/codings/. The corpus itself lives in $MALIGNMENT_DATA
+# and is pinned by results/passC/corpus_manifest.json.
+results/passC/triage.parquet

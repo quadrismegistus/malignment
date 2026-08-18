@@ -1,0 +1,262 @@
+{
+ "0": {
+  "batches": 9,
+  "cells": [
+   "BSC-LT/salamandra-7b",
+   "BSC-LT/salamandra-7b-instruct"
+  ],
+  "n": 400,
+  "pair": "BSC-LT/salamandra-7b",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L00-salamandra-7b.js"
+ },
+ "1": {
+  "batches": 9,
+  "cells": [
+   "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "EleutherAI/pythia-2.8b"
+  ],
+  "n": 400,
+  "pair": "EleutherAI/pythia-2.8b",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L01-pythia-2_8b.js"
+ },
+ "2": {
+  "batches": 9,
+  "cells": [
+   "EleutherAI/pythia-6.9b",
+   "lomahony/eleuther-pythia6.9b-hh-dpo"
+  ],
+  "n": 400,
+  "pair": "EleutherAI/pythia-6.9b",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L02-pythia-6_9b.js"
+ },
+ "3": {
+  "batches": 9,
+  "cells": [
+   "HuggingFaceTB/SmolLM3-3B",
+   "HuggingFaceTB/SmolLM3-3B-Base"
+  ],
+  "n": 400,
+  "pair": "HuggingFaceTB/SmolLM3-3B-Base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L03-SmolLM3-3B-Base.js"
+ },
+ "4": {
+  "batches": 9,
+  "cells": [
+   "LLM360/Amber",
+   "LLM360/AmberSafe"
+  ],
+  "n": 400,
+  "pair": "LLM360/Amber",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L04-Amber.js"
+ },
+ "5": {
+  "batches": 9,
+  "cells": [
+   "OpenLLM-France/Lucie-7B",
+   "OpenLLM-France/Lucie-7B-Instruct-v1.1"
+  ],
+  "n": 400,
+  "pair": "OpenLLM-France/Lucie-7B",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L05-Lucie-7B.js"
+ },
+ "6": {
+  "batches": 9,
+  "cells": [
+   "Qwen/Qwen2.5-0.5B",
+   "Qwen/Qwen2.5-0.5B-Instruct"
+  ],
+  "n": 400,
+  "pair": "Qwen/Qwen2.5-0.5B",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L06-Qwen2_5-0_5B.js"
+ },
+ "7": {
+  "batches": 9,
+  "cells": [
+   "Qwen/Qwen2.5-7B",
+   "Qwen/Qwen2.5-7B-Instruct"
+  ],
+  "n": 400,
+  "pair": "Qwen/Qwen2.5-7B",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L07-Qwen2_5-7B.js"
+ },
+ "8": {
+  "batches": 9,
+  "cells": [
+   "Qwen/Qwen3-8B",
+   "Qwen/Qwen3-8B-Base"
+  ],
+  "n": 400,
+  "pair": "Qwen/Qwen3-8B-Base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L08-Qwen3-8B-Base.js"
+ },
+ "9": {
+  "batches": 9,
+  "cells": [
+   "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T"
+  ],
+  "n": 400,
+  "pair": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L09-TinyLlama-1_1B-intermedi.js"
+ },
+ "10": {
+  "batches": 9,
+  "cells": [
+   "allenai/OLMo-2-0425-1B",
+   "allenai/OLMo-2-0425-1B-DPO"
+  ],
+  "n": 400,
+  "pair": "allenai/OLMo-2-0425-1B",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L10-OLMo-2-0425-1B.js"
+ },
+ "11": {
+  "batches": 9,
+  "cells": [
+   "allenai/OLMoE-1B-7B-0125",
+   "allenai/OLMoE-1B-7B-0125-DPO"
+  ],
+  "n": 400,
+  "pair": "allenai/OLMoE-1B-7B-0125",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L11-OLMoE-1B-7B-0125.js"
+ },
+ "12": {
+  "batches": 9,
+  "cells": [
+   "allenai/Olmo-3-1025-7B",
+   "allenai/Olmo-3-7B-Instruct-DPO"
+  ],
+  "n": 400,
+  "pair": "allenai/Olmo-3-1025-7B",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L12-Olmo-3-1025-7B.js"
+ },
+ "13": {
+  "batches": 9,
+  "cells": [
+   "bigscience/bloom-7b1",
+   "bigscience/bloomz-7b1"
+  ],
+  "n": 400,
+  "pair": "bigscience/bloom-7b1",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L13-bloom-7b1.js"
+ },
+ "14": {
+  "batches": 9,
+  "cells": [
+   "PKU-Alignment/beaver-7b-v1.0",
+   "huggyllama/llama-7b"
+  ],
+  "n": 400,
+  "pair": "huggyllama/llama-7b",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L14-llama-7b.js"
+ },
+ "15": {
+  "batches": 9,
+  "cells": [
+   "ibm-granite/granite-3.0-8b-base",
+   "ibm-granite/granite-3.0-8b-instruct"
+  ],
+  "n": 400,
+  "pair": "ibm-granite/granite-3.0-8b-base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L15-granite-3_0-8b-base.js"
+ },
+ "16": {
+  "batches": 9,
+  "cells": [
+   "m-a-p/CT-LLM-Base",
+   "m-a-p/CT-LLM-SFT-DPO"
+  ],
+  "n": 400,
+  "pair": "m-a-p/CT-LLM-Base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L16-CT-LLM-Base.js"
+ },
+ "17": {
+  "batches": 9,
+  "cells": [
+   "meta-llama/Llama-3.1-8B",
+   "meta-llama/Llama-3.1-8B-Instruct"
+  ],
+  "n": 400,
+  "pair": "meta-llama/Llama-3.1-8B",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L17-Llama-3_1-8B.js"
+ },
+ "18": {
+  "batches": 9,
+  "cells": [
+   "HuggingFaceH4/zephyr-7b-beta",
+   "mistralai/Mistral-7B-v0.1"
+  ],
+  "n": 400,
+  "pair": "mistralai/Mistral-7B-v0.1",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L18-Mistral-7B-v0_1.js"
+ },
+ "19": {
+  "batches": 9,
+  "cells": [
+   "openbmb/MiniCPM5-1B",
+   "openbmb/MiniCPM5-1B-Base"
+  ],
+  "n": 400,
+  "pair": "openbmb/MiniCPM5-1B-Base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L19-MiniCPM5-1B-Base.js"
+ },
+ "20": {
+  "batches": 9,
+  "cells": [
+   "tiiuae/Falcon3-10B-Base",
+   "tiiuae/Falcon3-10B-Instruct"
+  ],
+  "n": 400,
+  "pair": "tiiuae/Falcon3-10B-Base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L20-Falcon3-10B-Base.js"
+ },
+ "21": {
+  "batches": 9,
+  "cells": [
+   "tiiuae/Falcon3-1B-Base",
+   "tiiuae/Falcon3-1B-Instruct"
+  ],
+  "n": 400,
+  "pair": "tiiuae/Falcon3-1B-Base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L21-Falcon3-1B-Base.js"
+ },
+ "22": {
+  "batches": 9,
+  "cells": [
+   "tiiuae/Falcon3-3B-Base",
+   "tiiuae/Falcon3-3B-Instruct"
+  ],
+  "n": 400,
+  "pair": "tiiuae/Falcon3-3B-Base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L22-Falcon3-3B-Base.js"
+ },
+ "23": {
+  "batches": 9,
+  "cells": [
+   "tiiuae/Falcon3-7B-Base",
+   "tiiuae/Falcon3-7B-Instruct"
+  ],
+  "n": 400,
+  "pair": "tiiuae/Falcon3-7B-Base",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L23-Falcon3-7B-Base.js"
+ },
+ "24": {
+  "batches": 9,
+  "cells": [
+   "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "togethercomputer/RedPajama-INCITE-Base-7B-v0.1"
+  ],
+  "n": 400,
+  "pair": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L24-RedPajama-INCITE-Base-7B.js"
+ },
+ "25": {
+  "batches": 9,
+  "cells": [
+   "zai-org/glm-4-9b-chat-hf",
+   "zai-org/glm-4-9b-hf"
+  ],
+  "n": 400,
+  "pair": "zai-org/glm-4-9b-hf",
+  "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L25-glm-4-9b-hf.js"
+ }
+}

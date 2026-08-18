@@ -1,0 +1,6 @@
+{
+ "why": "Sonnet-coded. kappa vs Opus 0.628 on mode, 0.555 on narrative-only, span fabrication 1.36%% against Opus 0.11%%, and it does not reproduce per-pair deltas (SmolLM2 sign flip). The coder is the instrument in a paired design, so these cannot be pooled with Opus-coded pairs. Kept for the record, excluded from analysis.",
+ "run": "wf_fe802abc-014",
+ "pair": "BSC-LT/salamandra-7b",
+ "n": 400
+}
