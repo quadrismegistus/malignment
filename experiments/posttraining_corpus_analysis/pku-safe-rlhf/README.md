@@ -196,22 +196,48 @@ same, so nothing here is rated severity in disguise:
     MILDER WORDING is the safer response    65.5%  [0.560, 0.742]  n=113  p=0.0013
     LESS DETAILED is the safer response     58.2%  [0.496, 0.664]  n=141  p=0.064
 
-**AND IT IS WORDING, NOT A BUNDLE.** Split by which dimensions the coder marked
-at all -- the SINGLETON cells are the decisive ones, because there the coder saw a
-difference on one axis and explicitly NO difference on the other:
+**AND THE DECOMPOSITION WAS THE MISTAKE. WHAT PREDICTS IS THE WHOLE JUDGMENT.**
+A pre-matched length control (A13: 240 fresh pairs, |len diff| <= 5 words, mean
+2.7, disjoint from the 300; 210 coded, 2 batches refused) settles it:
 
-    cell                  n     the marked dimension picks safer
-    COMBO, both agree   124    74.2%  [0.656, 0.816]  p=6.5e-08
-    SINGLETON wording    38    71.1%  [0.541, 0.846]  p=0.0139
-    SINGLETON detail     61    52.5%  [0.393, 0.654]  p=0.798
-    come-apart           52    48.1%  [0.340, 0.624]  p=0.89
-    both EQUIVALENT      25    no dimension marked
+                                  unmatched         matched <=5w
+    gestalt LESS SEVERE -> safer  68.3%  n=243      68.3%  n=145   p=1.3e-05
+    COMBO, both dimensions agree  74.2%  n=124      69.7%  n= 66   p=0.0019
+    SINGLETON detail              52.5%  n= 61      57.4%  n= 47   ns
+    SINGLETON wording             71.1%  n= 38      43.2%  n= 37   COLLAPSES
 
-**Wording alone predicts at 71.1%; adding an agreeing detail judgment buys 3
-points. Detail alone is at chance.** So specificity is not a second channel. The
-one anomaly is the come-apart cell, where the euphemistic response is the MORE
-detailed one and the wording effect vanishes -- reframing wins unless it is
-visibly wrapping more content.
+**The coder's overall severity read is identical to the decimal across the two
+samples. Neither component predicts on its own once length is held.** The
+registered A13 test on wording returns 57.7%, n=130, CI [0.487, 0.663], p=0.095 --
+**UNDECIDED** by its own rule, clearing the 0.55 confound floor and missing the
+0.60 bar.
+
+**And the singleton-wording result was substantially LENGTH.** Directly:
+
+    the SHORTER response is the safer one          59.1%  n=298  p=0.002
+    in the unmatched singleton cell, milder and
+      safer point the SAME way on length           71.1%  n= 38  p=0.014
+
+That second figure is the same 71.1% the wording claim was built on. Length
+varied freely in that cell (median |diff| 15 words, p90 51). Matched to 5 words
+it goes to 43.2%, and the difference between samples is real: Fisher p=0.020,
+OR 3.22.
+
+**The gestalt statistic is not a post-hoc rescue.** It was computed and reported
+in the first run before any of this, on the same instrument, and it is the one
+number that did not move.
+
+## THREE READINGS OF THIS CELL, TWO OF THEM MINE AND WRONG
+
+    A10  "a BUNDLE, and neither dimension survives separation"   from 2 cells
+    A11  "WORDING alone, 71.1%"                                  from a 3rd cell
+    A14  the DECOMPOSITION does not survive length; the whole
+         severity judgment does, unchanged at 68.3%
+
+Each revision came from a cell already in the data, not from new data, and A11's
+correction of A10 was itself an artifact of the confound this control was
+registered to test. **The lesson recorded rather than the conclusion: a
+subgroup that overturns a headline deserves the control the headline got.**
 
 ## THE EXEMPLAR: m020, AND BOTH RESPONSES ARE THE SAME TRAFFICKING PLAN
 

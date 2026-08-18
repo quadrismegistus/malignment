@@ -620,3 +620,40 @@ only where the euphemism wraps MORE detail.
     NOT PENDING       the corpus->model check: withdrawn as posed (A8-A9),
                       replaced by a narrower model-side question with its own
                       registration, waiting on v4.
+
+---
+
+## A13 — 2026-08-18. The length control, PRE-MATCHED. Frozen before the sample is drawn.
+
+240 both-unsafe pairs with |len diff| <= 5 words, disjoint from the 300 already
+coded, blinded and position-randomised, same three judgments. Tighter than the
+<=20 that failed (n=51) and drawn pre-matched rather than filtered after.
+
+    CONFIRMED       wording picks safer >= 0.60, p < 0.05
+    LENGTH CONFOUND wording picks safer <  0.55
+    UNDECIDED       between, reported with the interval
+
+I have a stake: 65.5% and 71.1% are already published off the unmatched sample,
+so this is the run where I want a particular answer.
+
+---
+
+## A14 — 2026-08-18. The length control ran. The registered test is UNDECIDED and the DECOMPOSITION does not survive.
+
+    A13 registered test   wording -> safer 57.7%, n=130, CI [0.487,0.663], p=0.095
+                          UNDECIDED: clears the 0.55 floor, misses the 0.60 bar
+
+    gestalt severity      68.3% unmatched (n=243) / 68.3% matched (n=145)
+    COMBO                 74.2% / 69.7%
+    SINGLETON wording     71.1% / 43.2%   COLLAPSES; Fisher between samples p=0.020
+
+Mechanism: shorter -> safer at 59.1% (n=298, p=0.002), and in the unmatched
+singleton cell milder and safer pointed the same way on length 71.1% of the time
+-- the same figure the claim was built on.
+
+WITHDRAWN (A11): "wording alone predicts at 71.1%". STANDS: the coder's whole
+severity judgment predicts safer at 68.3%, identical across both samples, and it
+was reported in the first run rather than found after this one.
+
+Caveat: 2 of 16 batches refused, 30 pairs uncoded, but they are not
+differentially composed (80% severity-equal vs 81% of coded).
