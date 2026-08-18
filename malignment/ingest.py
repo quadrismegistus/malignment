@@ -101,6 +101,13 @@ CORPUS = os.environ.get("MALIGNMENT_CORPUS",
 DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
 ROOTS = ((CORPUS, ""), (DATA, "malignment-data/"))
 RULE_VERSION = 3
+#: **THE TARGET TABLE IS PART OF THE RULE, NOT A FLAG BESIDE IT.** v4 cells carry
+#: `rules`, `prompt_cache` and `topup` in their KEY, and `twp_cells_v4` puts all
+#: three in its SORTING KEY -- so a v4 record written into the v3 table would
+#: collide with its own v3 twin and lose. One switch sets both, and nothing can
+#: select a version without also selecting where it lands.
+_RV = {"v": RULE_VERSION}
+TABLES = {3: ("twp_words", "twp_cells"), 4: ("twp_words_v4", "twp_cells_v4")}
 TOL = 1e-4          #: conservation is exact to ~4e-7 in practice; 1e-4 is loose
 #: A path component that disqualifies a directory however good its records are.
 #: These are markers the producers already wrote; this honours them rather than
@@ -231,7 +238,7 @@ def _maybe(p, source):
         r = json.loads(first)
     except Exception:
         return []
-    if r.get("rule_version") != RULE_VERSION:
+    if r.get("rule_version") != _RV["v"]:
         return []
     if "rows" not in r or "residual" not in r:
         return []
@@ -251,7 +258,15 @@ def _cells(path):
                 d = json.loads(line)
             except Exception:
                 continue
-            k = (d.get("model"), d.get("prompt"))
+            #: **THE DEDUP KEY IS THE INSTRUMENT, NOT JUST THE CELL.** v3's
+            #: identity is (model, prompt) and v4's is not: a topup cell and its
+            #: pass-1 parent share both, differ in `topup`, and are DIFFERENT
+            #: MEASUREMENTS. Keying on the pair silently collapsed 2,583 of
+            #: CT-LLM-Base's 5,289 records into 2,706 and called them duplicates
+            #: -- the topup work vanished and the count looked plausible.
+            k = ((d.get("model"), d.get("prompt")) if _RV["v"] == 3 else
+                 (d.get("model"), d.get("prompt"), d.get("rules"),
+                  bool(d.get("prompt_cache")), bool(d.get("topup"))))
             if k[0] is None or k[1] is None:
                 continue
             _key_body_agree(d, path)
@@ -324,6 +339,8 @@ def plan(files):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--rule-version", type=int, default=3, choices=[3, 4],
+                    help="4 reads v4 records and writes twp_*_v4")
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--create", action="store_true")
     ap.add_argument("--run", action="store_true")
@@ -342,6 +359,7 @@ def main():
                     help="only sources containing this substring (a blanket run "
                          "ingests every eligible directory on disk)")
     a = ap.parse_args()
+    _RV["v"] = a.rule_version
 
     files = scan()
     if getattr(a, "source", None):
@@ -412,7 +430,7 @@ def main():
                 rej["token_space"] += 1
                 rej_examples.setdefault(k[0], set()).update(bad[:3])
                 continue
-            m, pr = k
+            m, pr = k[0], k[1]
             #: SUM THE PARTITION HERE, ONCE. Folding in SQL later would put the
             #: rule in two places, which is the failure `movement` warns about.
             fold = {}
@@ -420,9 +438,14 @@ def main():
                 a = fold.setdefault(w["word"], [0.0, 0])
                 a[0] += float(w["p"]); a[1] += 1
             for wd, (pp, np_) in fold.items():
-                words.append({"model": m, "prompt": pr, "word": wd,
-                              "p": pp, "n_paths": np_,
-                              "source": f["source"], "mtime": mt})
+                w4 = {} if _RV["v"] == 3 else {
+                    "topup": int(bool(d.get("topup"))),
+                    "rule_version": int(d.get("rule_version") or 0),
+                    "rules": d.get("rules") or "",
+                    "prompt_cache": int(bool(d.get("prompt_cache")))}
+                words.append(dict({"model": m, "prompt": pr, "word": wd,
+                                   "p": pp, "n_paths": np_,
+                                   "source": f["source"], "mtime": mt}, **w4))
             cells.append({"model": m, "prompt": pr, "n_words": len(rows),
                           "conservation": float(cons),
                           "tail": float(res.get("tail") or 0),
@@ -439,16 +462,24 @@ def main():
                           "compute_dtype": d.get("compute_dtype") or "",
                           "torch_version": d.get("torch_version") or "",
                           "transformers_version": d.get("transformers_version") or "",
-                          "source": f["source"], "mtime": mt})
+                          "source": f["source"], "mtime": mt,
+                          **({} if _RV["v"] == 3 else {
+                              "rules": d.get("rules") or "",
+                              "prompt_cache": int(bool(d.get("prompt_cache"))),
+                              "topup": int(bool(d.get("topup"))),
+                              "topup_words": int(d.get("topup_words") or 0),
+                              "topup_mass": float(d.get("topup_mass") or 0.0)})})
         if len(words) > 400_000:
-            ch.insert("twp_words", words); words = []
-            ch.insert("twp_cells", cells); cells = []
+            wt, ct = TABLES[_RV["v"]]
+            ch.insert(wt, words); words = []
+            ch.insert(ct, cells); cells = []
             print("     ... %s cells written" % format(
-                ch.scalar("SELECT count() FROM {db}.twp_cells"), ","))
+                ch.scalar("SELECT count() FROM {db}.%s" % ct), ","))
+    wt, ct = TABLES[_RV["v"]]
     if words:
-        ch.insert("twp_words", words)
+        ch.insert(wt, words)
     if cells:
-        ch.insert("twp_cells", cells)
+        ch.insert(ct, cells)
     print("\n  duplicates WITHIN files (last write won): %s" % format(n_dup, ","))
     print("  refused / skipped, by class:")
     for k, v in sorted(rej.items(), key=lambda x: -x[1]):

@@ -184,7 +184,27 @@ def prompt_map():
             for t, rows in _rows_by_text().items()}
 
 
-def lineage_union(root, prompts=None, ops=None):
+#: **THE VERSION SELECTS THE TABLE; IT IS NOT A COLUMN TO FILTER ON.** v4 cells
+#: live in `twp_*_v4` and nowhere else, so `WHERE rule_version=4` against the v3
+#: table is not a narrow query -- it is an EMPTY one, and every consumer reads
+#: empty as "nothing measured yet". That is the direction that costs a rental:
+#: `pass1_todo(rule_version=4)` returned all 2,706 prompts for a model already
+#: fully measured under v4. The same mistake in `topup_todo` sourced `have` from
+#: v3 while applying it to a v4 cell, so words the v4 pass had already found were
+#: classed as missing and re-added on top of themselves -- topup_mass 0.916
+#: against a tail of 0.089.
+TABLES = {3: ("twp_words", "twp_cells"), 4: ("twp_words_v4", "twp_cells_v4")}
+
+
+def _tables(rule_version):
+    try:
+        return TABLES[int(rule_version)]
+    except KeyError:
+        raise ValueError("no tables for rule_version=%r; known: %s"
+                         % (rule_version, sorted(TABLES)))
+
+
+def lineage_union(root, prompts=None, ops=None, rule_version=4):
     """{prompt: set(words)} -- every word ANY member of this lineage cleared.
 
         corpus.lineage_union("meta-llama/Llama-3.1-8B")
@@ -217,19 +237,25 @@ def lineage_union(root, prompts=None, ops=None):
     members = roster.lineages(ops=ops or roster.ALIGNING).get(root)
     if not members:
         raise KeyError("%s is not a lineage root -- see roster.lineages()" % root)
+    wt, _ct = _tables(rule_version)
     ids = ",".join("'%s'" % m.replace("'", "\\'") for m in members)
     where = "model IN (%s)" % ids
+    if rule_version != 3:
+        #: **PASS 1 ONLY.** The union is what pass 1 FOUND; letting pass-2
+        #: additions back in would make the worklist chase its own output
+        #: instead of converging on a fixed point.
+        where += " AND topup = 0"
     if prompts:
         ps = ",".join("'%s'" % p.replace("'", "\\'") for p in prompts)
         where += " AND prompt IN (%s)" % ps
     out = {}
-    for r in ch.query("SELECT prompt, groupUniqArray(word) ws FROM {db}.twp_words "
-                      "WHERE %s GROUP BY prompt" % where):
+    for r in ch.query("SELECT prompt, groupUniqArray(word) ws FROM {db}.%s "
+                      "WHERE %s GROUP BY prompt" % (wt, where)):
         out[r["prompt"]] = set(r["ws"])
     return out
 
 
-def topup_todo(model, root=None, ops=None):
+def topup_todo(model, root=None, ops=None, rule_version=4):
     """{prompt: [words this model lacks that its LINEAGE has]} -- the pass-2 worklist.
 
     Exactly what `twp_v4.score_words4` should be handed. A word already present
@@ -252,10 +278,16 @@ def topup_todo(model, root=None, ops=None):
                 break
         if root is None:
             raise KeyError("%s is in no lineage" % model)
-    union = lineage_union(root, ops=ops)
+    wt, _ct = _tables(rule_version)
+    union = lineage_union(root, ops=ops, rule_version=rule_version)
     have = {}
-    for r in ch.query("SELECT prompt, groupUniqArray(word) ws FROM {db}.twp_words "
-                      "WHERE model='%s' GROUP BY prompt" % model.replace("'", "\\'")):
+    #: `have` DOES include topup rows, where the union does not: a word already
+    #: topped up is present and must never be scored twice. The two asymmetric
+    #: filters are the same rule seen from both ends -- pass 2 adds to pass 1,
+    #: and never to itself.
+    for r in ch.query("SELECT prompt, groupUniqArray(word) ws FROM {db}.%s "
+                      "WHERE model='%s' GROUP BY prompt"
+                      % (wt, model.replace("'", "\\'"))):
         have[r["prompt"]] = set(r["ws"])
     todo = {}
     for p, words in union.items():
@@ -287,8 +319,11 @@ def pass1_todo(model, rule_version=4, rules=None, prompts=None):
     from . import ch
     from .prompts import Prompts
     want = prompts if prompts is not None else sorted({p.text for p in Prompts.all()})
-    q = ("SELECT DISTINCT prompt FROM {db}.twp_cells WHERE model=%s AND rule_version=%d"
-         % (_lit(model), int(rule_version)))
+    _wt, ct = _tables(rule_version)
+    q = ("SELECT DISTINCT prompt FROM {db}.%s WHERE model=%s AND rule_version=%d"
+         % (ct, _lit(model), int(rule_version)))
+    if rule_version != 3:
+        q += " AND topup = 0"
     if rules:
         q += " AND rules=%s" % _lit(rules)
     have = {r["prompt"] for r in ch.query(q)}

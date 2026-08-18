@@ -237,8 +237,15 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
     say = say or (lambda m: None)
     dev = T.pick_device()
     trie = T.load_prefix_trie(dict_path or T.DICT)
-    say("  device %s | rule_version %d | dict_sha %s"
-        % (dev, T.RULE_VERSION, T.dict_sha()))
+    #: **THE LOADER DOES NOT KNOW THE INSTRUMENT AND MUST NOT NAME IT.** This
+    #: line printed `T.RULE_VERSION`, a module constant equal to 3, on every
+    #: caller including v4 ones -- so a topup run under `v4[decoded,depth=9]`
+    #: announced itself as rule_version 3 while stamping every cell it wrote
+    #: with 4. The run was right and the sentence was wrong, which is the shape
+    #: nothing catches: a wrong cell gets found by the next reader, a wrong
+    #: LABEL on a right cell gets found by nobody. The authoritative statement
+    #: is the `INSTRUMENT:` line, emitted by whoever holds the `rules`.
+    say("  device %s | dict_sha %s" % (dev, T.dict_sha()))
 
     model = tok = loader_id = None
     for attempt in range(MAX_RL_RETRIES + 1):
@@ -533,6 +540,8 @@ class TWPRunner:
         os.makedirs(ck.dir, exist_ok=True)
         say = (lambda m: print(m, flush=True)) if verbose else (lambda m: None)
         todo_words = corpus.topup_todo(ck.model_id, root=root)
+        say("  INSTRUMENT: rule_version %d | %s | prompt_cache %s | topup"
+            % (V4.RULE_VERSION, rules.label(), bool(T.USE_PROMPT_CACHE)))
         base_key = lambda p: dict(ck.key(p, rules), topup=True)          # noqa: E731
         st = ck.stash(PRODUCER)
         have1 = {k["prompt"]: v for k, v in st.items()
