@@ -55,6 +55,7 @@ that module was written to prevent cannot occur for pairs.
 import argparse
 import collections
 import glob
+import re
 import os
 import sys
 
@@ -66,6 +67,16 @@ _CACHE = {}
 #: file -> the SOURCE name the archive gave it. Carried because `source` is how
 #: every existing query names these populations, and dropping it would make the
 #: new catalogue answer a question the old one could and this one could not.
+#: One tag per slot file. See the loader for why this is not a single `SLOTS`.
+_SLOT_SOURCE = {"round3.yaml": "SLOT_ROUND3",
+                "slot-explorer.yaml": "SLOT_EXPLORER",
+                "slot-client.yaml": "SLOT_CLIENT",
+                "quarantined.yaml": "SLOT_QUARANTINED"}
+
+#: Same block as `slots._CJK`, written as an escape so a file-encoding accident
+#: cannot silently narrow it.
+_CJK_RE = re.compile(r"[\u4e00-\u9fff]")
+
 _PAIR_SOURCE = {'round2_desecration.yaml': 'M01_PAIRS_DESECRATION', 'round2_animal.yaml': 'M01_PAIRS_ANIMAL', 'round2_betrayal.yaml': 'M01_PAIRS_BETRAYAL', 'round2_theft.yaml': 'M01_PAIRS_THEFT', 'round2b_power_v2.yaml': 'M01_PAIRS_POWER_R2B', 'sonnet_covert.yaml': 'M01_PAIRS_COVERT', 'sonnet_sexual.yaml': 'M01_PAIRS_SEXUAL', 'sonnet_threat.yaml': 'M01_PAIRS_THREAT', 'sonnet_unarmed.yaml': 'M01_PAIRS_UNARMED', 'sonnet_weapons.yaml': 'M01_PAIRS_WEAPONS', 'm03_kernel.py': 'M03_SPEAKER_KERNEL'}
 
 
@@ -157,6 +168,43 @@ def _load(force=False):
                      "kernel_id": k["id"], "cell": cell_id, "frame": k.get("frame"),
                      "admitted": True, "source": "M03_SPEAKER_KERNEL",
                      "family": "generated", "file": base})
+
+    #: **THE SLOT CORPUS, WHICH NO PRODUCER COULD SEE UNTIL NOW.** 173 items sat
+    #: in `roster/prompts/slots/` read only by the authoring stack (`slots.py`,
+    #: `serve.py`, `slot_client.py`), so no fleet worklist could reach them and
+    #: only 2 of 173 had ever been measured beyond their screening pair.
+    #:
+    #: `item_id` becomes `prompt_id` unchanged: it is already a pure function of
+    #: the prompt, already unique across the three files, and collides with none
+    #: of the existing 3,120 ids (checked, not assumed).
+    #:
+    #: **ONE SOURCE PER FILE, because the corpus is two instruments.** The
+    #: `round3` items were screened on `meta-llama/Llama-3.1-8B` and everything
+    #: since on `SmolLM3-3B-Base`, so their masses are not comparable -- saved and
+    #: recomputed `share` agree within 0.01 on only 31 of 96. A single `SLOTS`
+    #: tag would bury that; three tags make it a query.
+    #:
+    #: `admitted` defaults true and is read from the record, so a quarantined
+    #: item can be loaded and measured while staying out of every default
+    #: population -- the same mechanism the 232 rejected pairs already use.
+    for f in sorted(glob.glob(os.path.join(PROMPTS, "slots", "*.yaml"))):
+        base = os.path.basename(f)
+        src = _SLOT_SOURCE.get(base) or ("SLOT_" + re.sub(r"[^A-Z0-9]+", "_",
+                                         base.rsplit(".", 1)[0].upper()).strip("_"))
+        for rec in yaml.safe_load(open(f, encoding="utf-8")) or []:
+            if not rec.get("item_id") or not rec.get("prompt"):
+                continue
+            add({"prompt_id": rec["item_id"], "prompt": rec["prompt"],
+                 "domain": rec.get("domain"), "subdomain": None,
+                 #: Detected rather than assumed: every slot prompt is English
+                 #: today and nothing stops a CJK one being authored tomorrow.
+                 "language": "zh" if _CJK_RE.search(rec["prompt"]) else "en",
+                 "admitted": bool(rec.get("admitted", True)),
+                 #: Carried through so a population can be selected on review
+                 #: state, which is the open work on this corpus.
+                 "reviewed": rec.get("reviewed"),
+                 "authored_by": rec.get("authored_by"),
+                 "source": src, "family": "slots", "file": base})
 
     for f in sorted(glob.glob(os.path.join(PROMPTS, "flat", "*.yaml"))):
         base = os.path.basename(f)
