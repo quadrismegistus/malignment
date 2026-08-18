@@ -94,11 +94,25 @@ with no preference stage. `python run.py --basepole`:
     SFT-only on one side   11,744      54.0%    [0.531, 0.549]   4.4e-18
     both chat/instruct     46,993      51.7%    [0.513, 0.522]   3.6e-14
 
-**Monotone in how un-aligned the weaker generator is**, which is the ordering the
-structural account predicts. **Held loosely: the base cell is n=330 with an
-interval containing 0.5, and the gradient spans 3 points.** The powered
-comparison is SFT-only against both-chat. The structural argument carries this,
-not the gradient.
+**WITHDRAWN AS CORROBORATION (A6, RH).** Pythia is the campaign's outlier for how
+LIGHT its alignment is, so the "base on one side" cell is built on the one family
+where the contrast being tested is known to be near-absent:
+
+    all 53 ladder edges      median JS 0.1087
+    pythia-6.9b base>pref              0.0190   25th percentile
+    archangel sft>pref                 0.0030    2nd percentile
+    all six pythia edges          0.0030-0.0190  bottom quartile
+    their faller shares           0.000-0.060    against U's 49.3% median at base>sft
+
+**Pythia's whole base-to-preference edge moves about a sixth of the median edge
+and removes essentially nothing.** So the stratum is not a test of "the base pole
+present"; it is a test on the checkpoint family least marked by the axis. Already
+underpowered at n=330 with an interval containing 0.5, and now on the wrong
+exemplar.
+
+**The structural argument stands entirely without it.** It does not need a
+gradient: the composition fact -- 0.3% base-model completions, both sides of
+every pair aligned -- is the whole of it.
 
 ## WHAT THAT MEANS BEYOND THIS TEST
 

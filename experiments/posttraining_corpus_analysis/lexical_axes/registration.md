@@ -287,3 +287,28 @@ narrative text would still hold only aligned-arm responses.
 
 **Scope fact for the collection: a base-vs-aligned instrument cannot be evaluated
 on preference data at all.** That is a property of what preference data is.
+
+---
+
+## A6 — 2026-08-18. The --basepole gradient is WITHDRAWN as corroboration. Pythia is the campaign's light-alignment outlier.
+
+RH: pythia is an outlier across our experiments for how light its alignment is;
+its twp differences are nearly zero. `t_ladder_steps.csv` confirms it -- all six
+pythia edges sit in the bottom quartile of 53:
+
+    median JS, all edges              0.1087
+    pythia-6.9b base>pref WHOLE       0.0190   25th pct
+    archangel sft>pref                0.0030    2nd pct
+    six pythia edges             0.0030-0.0190  bottom quartile
+    their faller_share           0.000-0.060    vs U's 49.3% median at base>sft
+
+So A5's "base on one side" stratum tests the axis on the family where the
+base/aligned contrast is nearest to absent. Withdrawn: it was n=330 with an
+interval containing 0.5 AND on the wrong exemplar.
+
+**A5's structural claim is unaffected and needs no gradient.** The composition
+fact carries it: 0.3% base-model completions, both sides of every pair aligned,
+so the axis has no variance to find.
+
+**The check I did not run: is this model representative for the property being
+measured?** One lookup in `t_ladder_steps.csv`, before building a stratum on it.
