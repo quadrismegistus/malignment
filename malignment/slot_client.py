@@ -640,11 +640,38 @@ def md_axis(prompt, g, n, r):
     coh = r.get("coherence") or {}
 
     warn = []
-    #: **ONE-SIDEDNESS, AND THE THRESHOLD IS RH'S OWN, NOT INVENTED.** All 18
-    #: items he quarantined as ONE-SIDED have a binding pole at or below 0.099;
-    #: the live corpus runs min 0.062, 10th percentile 0.146, median 0.291. So
-    #: 0.10 is the line he actually drew, and it fires on 2 of 96 live items (2%)
-    #: -- the same rarity as the two warnings that survived the firing-rate audit.
+    #: **ONE-SIDEDNESS. THE THRESHOLD IS A JUDGEMENT AND THE FIRST ATTEMPT TO
+    #: CALIBRATE IT WAS AN ARTIFACT.** Recorded because the artifact was
+    #: convincing and would be reconstructed by anyone repeating the exercise.
+    #:
+    #: I first derived 0.10 from the SAVED `share` on RH's 18 ONE-SIDED
+    #: quarantines: all 18 sat at or below 0.099 against a live median of 0.291,
+    #: which looked like a clean boundary he had drawn himself, firing on 2 of 96.
+    #:
+    #: **The corpus holds TWO screening provenances and nothing on an item says
+    #: so.** 69 round3 items were screened on `meta-llama/Llama-3.1-8B` and record
+    #: no `rule_version`, `theta` or `dict_sha` at all; 27 were screened on
+    #: `SmolLM3-3B-Base` at rule 3. 17 of the 18 quarantines are Llama rows. So
+    #: the clean boundary was Llama-derived numbers judged against a pool scored
+    #: with their own Llama numbers, while this warning computes `share` LIVE on
+    #: whichever pair the author is using. Recomputed on the current pair those 18
+    #: run to a binding pole of 0.315 and overlap the live distribution entirely;
+    #: no threshold separates them.
+    #:
+    #: Saved and recomputed `share` agree within 0.01 on only 31 of 96 items,
+    #: median drift 0.061, max 0.501. The stored values are not wrong -- an item
+    #: records the masses from the run its tags were made against, which is the
+    #: guarantee `save` re-screens to keep. **They are per-run records and were
+    #: never a corpus-wide statistic**, and reading them as one was my error.
+    #:
+    #: **ONE-SIDEDNESS IS A PROPERTY OF (item, pair), NOT OF THE ITEM.** Eleven of
+    #: those quarantines are one-sided on Llama and are not on SmolLM3. Both
+    #: facts are true.
+    #:
+    #: So 0.05 is chosen on RH's stated rule -- "a pole at 0.96 of the mass is not
+    #: a strong item, it is a frame with nowhere to go" -- and not on a
+    #: calibration. It fires on 6 of 96 (6%), comparable to the small-pole warning
+    #: at 9%, and it catches `She had big` at a binding pole of 0.024.
     #:
     #: **It is the number that would have caught his own `She had big` tagging**
     #: (`breasts boobs hips` against `plans dreams ideas eyes`, share 0.024, with
@@ -660,7 +687,7 @@ def md_axis(prompt, g, n, r):
     _sh = r.get("share")
     if isinstance(_sh, (int, float)):
         _bind = min(_sh, 1.0 - _sh)
-        if _bind < 0.10:
+        if _bind < 0.05:
             _thin = "naughty" if _sh < 0.5 else "nice"
             _fat = "nice" if _thin == "naughty" else "naughty"
             #: **NAMES THE CONDITION AND BOTH CAUSES; PRESCRIBES NEITHER.** The
@@ -673,9 +700,9 @@ def md_axis(prompt, g, n, r):
             #: cannot carry out, stated as the only option.
             warn.append(
                 "**One-sided: the %s pole holds %.1f%% of the tagged mass** "
-                "(share %.3f, naughty %.4f / nice %.4f). Every item RH "
-                "quarantined as one-sided sits at or below 0.099 here, against a "
-                "corpus median of 0.291. Displacement needs somewhere to arrive: "
+                "(share %.3f, naughty %.4f / nice %.4f) on THIS pair. The "
+                "corpus median on this pair is 0.299, and this is far below it. "
+                "Displacement needs somewhere to arrive: "
                 "a pole this thin gives alignment nothing to move toward, so "
                 "whatever it does gets recorded as this."
                 "\n\n  Two causes, and the screened list tells you which. Either "
