@@ -11,6 +11,27 @@ answering the same question three ways and none of them wrong enough to notice*.
 
 ---
 
+
+## Which corpus am I reading? (v3 vs v4)
+
+**There are two twp corpora and the analysis surfaces default to the older one.**
+
+    rule_version 3  ->  twp_cells,    twp_words        full roster
+    rule_version 4  ->  twp_cells_v4, twp_words_v4     23 models as of 2026-08-18
+
+`corpus.retable(sql, rule_version)` rewrites a v3-literal query to point at either. The modules that read the corpus carry a module-level `RULE_VERSION`, defaulting to **3**:
+
+    from malignment import similarity
+    similarity.RULE_VERSION = 4
+    similarity.build_panel()
+
+`similarity`, `movement` and `population` are wired. `views.py` builds ClickHouse VIEWS over v3 only and is deliberately not switchable — see its header. `vectors.py` is the vector store and is unwired.
+
+**Why the default is 3 and not 4.** v4 covers 23 models against v3's full roster, so flipping the default would silently shrink every panel rather than announce anything.
+
+**Why this section exists.** Until 2026-08-18 the v4 corpus was effectively write-only: `ingest` and `corpus` were the only modules that knew `twp_*_v4` existed, so any query for twp data returned a well-formed answer from the wrong corpus. That is worse than an empty result — an empty one at least looks like something is missing, whereas a full result from the previous instrument looks like success and nothing prompts a second reading.
+
+
 ## Which models am I comparing?
 
 ### base → endpoint pairs, one per lineage

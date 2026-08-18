@@ -19,6 +19,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 
 from malignment import corpus, roster                      # noqa: E402
+from malignment import movement, population, similarity    # noqa: E402
 from malignment.wordfield import paired_stats, sign_mde    # noqa: E402
 
 FAIL = []
@@ -31,7 +32,34 @@ def check(name, got, want):
         FAIL.append(name)
 
 
+def _check_corpus_version():
+    """The v3/v4 section. Asserts BEHAVIOUR, never the model count.
+
+    HOWTO says "23 models as of 2026-08-18" and that number is moving under a
+    running queue -- asserting it would make this file fail for being right.
+    Dated prose is the correct home for a moving figure; a test is not.
+    """
+    sql = "SELECT count() FROM {db}.twp_words w JOIN {db}.twp_cells c"
+    check("retable v3 is a no-op", corpus.retable(sql, 3), sql)
+    check("retable v4 rewrites both tables", corpus.retable(sql, 4),
+          "SELECT count() FROM {db}.twp_words_v4 w JOIN {db}.twp_cells_v4 c")
+    for mod, name in ((similarity, "similarity"), (movement, "movement"),
+                      (population, "population")):
+        check("%s.RULE_VERSION defaults to 3" % name, mod.RULE_VERSION, 3)
+    try:
+        corpus.retable(corpus.retable(sql, 4), 4)
+        check("retable refuses double application", "no error", "ValueError")
+    except ValueError:
+        check("retable refuses double application", "ValueError", "ValueError")
+    try:
+        corpus._tables(5)
+        check("unknown rule_version refuses", "no error", "ValueError")
+    except ValueError:
+        check("unknown rule_version refuses", "ValueError", "ValueError")
+
+
 def main():
+    _check_corpus_version()
 
     print("\nbase -> endpoint pairs")
     ep, un = roster.endpoints()

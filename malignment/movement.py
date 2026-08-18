@@ -617,6 +617,11 @@ def decompose(pre, post, rule=CANONICAL, residual_pre=0.0, residual_post=0.0):
 # One prompt across many units: the data behind a slopegraph
 # ---------------------------------------------------------------------------
 
+#: Corpus version this module reads; see `corpus.retable`. Default 3
+#: because v4 covers 23 models against v3's full roster -- flipping it
+#: would shrink every result rather than announce anything.
+RULE_VERSION = 3
+
 #: **READS `twp_words`, NOT `movement`** (dario, 2026-08-17). `movement` is two
 #: columns by construction -- `p_base` and `p_aligned` -- so a CHAIN with four
 #: rungs has no representation in it, and a caller wanting `base -> sft -> dpo`
@@ -658,6 +663,7 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
     truncation.
     """
     from . import ch
+    from . import corpus
     esc = lambda s: str(s).replace("\\", "\\\\").replace("'", "\\'")
     seq = [(str(name), [str(m) for m in rungs]) for name, rungs in units]
     if not seq:
@@ -676,8 +682,9 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
 
     models = sorted({m for _, r in seq for m in r})
     inlist = ",".join("'" + esc(m) + "'" for m in models)
-    got = ch.query("SELECT model, word, p FROM {db}.twp_words WHERE prompt='"
-                   + esc(prompt) + "' AND model IN (" + inlist + ")")
+    got = ch.query(corpus.retable(
+        "SELECT model, word, p FROM {db}.twp_words WHERE prompt='"
+        + esc(prompt) + "' AND model IN (" + inlist + ")", RULE_VERSION))
     by = {}
     for r in got:
         by.setdefault(r["model"], {})[r["word"]] = float(r["p"])

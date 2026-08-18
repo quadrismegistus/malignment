@@ -204,6 +204,36 @@ def _tables(rule_version):
                          % (rule_version, sorted(TABLES)))
 
 
+def retable(sql, rule_version):
+    """Point a v3-literal query at the tables for `rule_version`. Returns SQL.
+
+        ch.query(corpus.retable(SQL, 4))
+
+    **THE v4 CORPUS WAS WRITE-ONLY UNTIL THIS EXISTED.** 15 modules query the twp
+    tables; `ingest` and this one were the only two that knew `twp_*_v4` exists.
+    Every analysis surface -- `similarity.build_panel`, `screen`, `js`,
+    `movement`, `population`, `views`, `vectors` -- read v3 and returned a
+    well-formed answer from the wrong corpus.
+
+    That failure is worse than the empty-query one it mirrors. An empty result at
+    least looks like something ("nothing measured yet", wrong but visible); a
+    full result from the previous instrument looks like success and nothing
+    prompts a second reading of it.
+
+    Rewriting the table name rather than parameterising every query is deliberate:
+    the alternative is 16 hand-edited SQL strings that already carry `%d`
+    formatting, and the second copy is always the one that keeps the old name.
+
+    Idempotent by assertion, not by hope: applying this twice would produce
+    `twp_words_v4_v4`, so it refuses SQL that already names a versioned table.
+    """
+    w, c = _tables(rule_version)
+    if "_v4" in sql:
+        raise ValueError("retable() got SQL that already names a versioned "
+                         "table; it takes v3-literal SQL only")
+    return sql.replace("twp_words", w).replace("twp_cells", c)
+
+
 def lineage_union(root, prompts=None, ops=None, rule_version=4):
     """{prompt: set(words)} -- every word ANY member of this lineage cleared.
 

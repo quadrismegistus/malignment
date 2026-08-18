@@ -119,6 +119,7 @@ import argparse
 import sys
 
 from . import ch
+from . import corpus
 
 #: Models needing this many cells to enter the panel. The bar and the resulting
 #: panel size are reported by --panel; they are not free parameters to tune until
@@ -135,13 +136,20 @@ _JS = ("0.5 * (if(pa > 0, pa * log2(2 * pa / (pa + pb)), 0)"
 MARKERS = {"sentencepiece": "▁", "gpt2_bpe": "Ġ", "leading_space": " "}
 
 
+#: **WHICH CORPUS THIS MODULE READS.** Default 3 and not 4: the v4 corpus covers
+#: 23 models against v3's full roster, so flipping the default would silently
+#: shrink every panel rather than announce anything. Set it explicitly --
+#: `similarity.RULE_VERSION = 4` -- and `report()` prints what it used.
+RULE_VERSION = 3
+
+
 def build_panel():
     """(model, prompt, argmax word) over prompts EVERY qualifying model holds."""
-    n_models = ch.scalar(
+    n_models = ch.scalar(corpus.retable(
         "SELECT count() FROM (SELECT model FROM {db}.twp_words "
-        "GROUP BY model HAVING uniqExact(prompt) >= %d)" % MIN_CELLS)
+        "GROUP BY model HAVING uniqExact(prompt) >= %d)" % MIN_CELLS, RULE_VERSION))
     ch.execute("DROP TABLE IF EXISTS {db}.panel_argmax")
-    ch.execute("""
+    ch.execute(corpus.retable("""
 CREATE TABLE {db}.panel_argmax ENGINE = MergeTree ORDER BY (prompt, word) AS
 WITH big AS (SELECT model FROM {db}.twp_words GROUP BY model
              HAVING uniqExact(prompt) >= %d),
@@ -151,7 +159,7 @@ SELECT model, prompt, argMax(word, p) AS word, max(p) AS pmax
 FROM {db}.twp_words
 WHERE model IN (SELECT model FROM big) AND prompt IN (SELECT prompt FROM panel)
 GROUP BY model, prompt
-""" % (MIN_CELLS, n_models))
+""" % (MIN_CELLS, n_models), RULE_VERSION))
     r = ch.query("SELECT uniqExact(model) m, uniqExact(prompt) p, count() n "
                  "FROM {db}.panel_argmax")[0]
     #: FULLY CROSSED OR NOT AT ALL. If this fails the panel is ragged and every
@@ -185,7 +193,7 @@ def js(a, b):
     The residual is an ARM of the comparison, not a footnote: without it this is a
     divergence between two truncations. `twp_cells.total` holds it.
     """
-    return ch.scalar("""
+    return ch.scalar(corpus.retable("""
 WITH panel AS (SELECT DISTINCT prompt FROM {db}.panel_argmax)
 SELECT avg(js) FROM (
   SELECT w.prompt AS prompt, sum(%s) + any(rterm) AS js FROM (
@@ -201,7 +209,7 @@ SELECT avg(js) FROM (
           WHERE model IN ('%s','%s') AND prompt IN (SELECT prompt FROM panel)
           GROUP BY prompt)) r ON r.prompt = w.prompt
   GROUP BY w.prompt)
-""" % (_JS, a, b, a, b, a, b, a, b))
+""" % (_JS, a, b, a, b, a, b, a, b), RULE_VERSION))
 
 
 def _lineage_map():
@@ -258,7 +266,7 @@ def markers():
     conservation (token probabilities sum to 1 too), invisible to row counts, and
     presents as an enormous alignment effect rather than as an error.
     """
-    rows = ch.query("""
+    rows = ch.query(corpus.retable("""
 SELECT model,
        countIf(startsWith(word, '%s')) AS sp,
        countIf(startsWith(word, '%s')) AS gpt2,
@@ -267,7 +275,7 @@ SELECT model,
 FROM {db}.twp_words GROUP BY model
 HAVING sp > 0 OR gpt2 > 0 OR lead_space > 0
 ORDER BY (sp + gpt2 + lead_space) / n DESC
-""" % (MARKERS["sentencepiece"], MARKERS["gpt2_bpe"]))
+""" % (MARKERS["sentencepiece"], MARKERS["gpt2_bpe"]), RULE_VERSION))
     if not rows:
         print("  no tokenizer-marker contamination")
         return []

@@ -66,6 +66,20 @@ mass in each arm, so it enters the sum as one more bucket:
 
 Omitting it would understate divergence exactly where the tail moved most, which
 is the cross-language case — a Chinese cell carries more of its mass below theta.
+
+
+## THESE VIEWS ARE BUILT OVER v3 AND ONLY v3
+
+Every `{db}.twp_cells` below is the v3 table. A view is a NAMED OBJECT other code
+selects from, so this file is deliberately NOT switchable the way
+`similarity.RULE_VERSION` is: flipping a module constant would silently redefine
+what `movement_cells` means for every existing caller, which is a worse failure
+than the one it fixes.
+
+Serving v4 needs `_v4`-suffixed views built alongside these, so both corpora are
+addressable at once and a query names which it wants. Not done here because it is
+a change to shared objects rather than to a caller's own read -- flagged
+2026-08-18 when `corpus.retable` made the other read surfaces version-aware.
 """
 import argparse
 import sys

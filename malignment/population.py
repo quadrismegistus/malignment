@@ -36,6 +36,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOC = os.path.join(ROOT, "roster", "models", "POPULATION.md")
 
 
+RULE_VERSION = 3
+
+
 def population():
     """(bases, diagnostics). The rule from POPULATION.md, executed."""
     from . import roster, ch
@@ -46,7 +49,12 @@ def population():
     roots = [m for m in nodes if m not in par]
     not_base = [m for m in roots if nodes[m].get("pretrained") is False]
     cand = [m for m in roots if m not in not_base]
-    have = {r["model"] for r in ch.query("SELECT DISTINCT model FROM {db}.twp_cells")}
+    #: **"MEASURED" IS VERSION-RELATIVE.** This set decides who is in the
+    #: population, so reading the wrong corpus does not return wrong numbers --
+    #: it returns a different population, silently. v4 covers 23 models today
+    #: against v3's full roster.
+    have = {r["model"] for r in ch.query(
+        corpus.retable("SELECT DISTINCT model FROM {db}.twp_cells", RULE_VERSION))}
     unmeasured = [m for m in cand if m not in have]
     bases = sorted(m for m in cand if m in have)
 
