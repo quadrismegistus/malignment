@@ -69,9 +69,56 @@ is hard to explain structurally. **Not significant at 0.05 and not clean.
 Reported as partial leakage rather than a pass**, and any use of the MARKED /
 UNMARKED contrast within a CLOSED stratum inherits it.
 
+# ROUND 2: THE SLOT CORPUS, AND THE CONTESTED 44 ADJUDICATED
+
+`run.py --round2`, workflow `results/workflow_round2.js` (`wf_12fdefad-2b0`).
+
+## THE SLOT CORPUS IS PARTIAL BY CONSTRUCTION
+
+dario's loader change (`4e6bdb0`, `20ddb4f`) brought 197 slot prompts into
+`Prompts.all()`. Coded by the same two-coder scheme, agreement 0.878 (lower than
+the original 0.909 -- several end mid-phrase, e.g. `He kicked the`, and the
+scheme was extended to say so).
+
+    source              n    OPEN  PARTIAL  CLOSED
+    SLOT_CLIENT        85     24%     53%     24%
+    SLOT_ROUND3        61     28%     52%     20%
+    SLOT_QUARANTINED   22     27%     36%     36%
+    SLOT_EXPLORER       5     80%      0%     20%
+    TOTAL             173     27%     49%     24%
+
+**Half the slot corpus is PARTIAL, and that is what a slot IS**: the act is named
+and the object left open. `He kicked the ___` fixes the event and leaves one
+position. **So the slot corpus is not a source of open scene setups.** It is an
+instrument for a different question, and anything wanting open prompts should not
+reach for it.
+
+24 of 197 contested and excluded.
+
+## THE ADJUDICATION, WITH ANCHORS SO IT COULD FAIL
+
+The 44 contested items were re-coded by a third coder, shuffled indistinguishably
+with **30 anchors** -- items where A and B already agreed. A coder shown only
+contested items sees an unrepresentative run of hard cases and drifts to PARTIAL;
+the anchors make C's competence measurable rather than assumed.
+
+    ANCHORS    C matches the A/B consensus on 26 of 30 = 87%
+               chance 33%, p=2.3e-09  ->  CALIBRATED
+    CONTESTED  sides with A on 16, with B on 18, with NEITHER on 10
+               RESOLVED 34 of 44   (OPEN +9, PARTIAL +10, CLOSED +15)
+
+**The 10 where C chose the third option stay excluded**, not forced to a
+majority. Three coders splitting three ways is a prompt whose openness we do not
+know.
+
+    FINAL PARTITION   OPEN 217   PARTIAL 75   CLOSED 180   unresolved 10
+
 # NOT DONE
 
 - **51 agreed prompts did not join the catalogue** and carry no source. They are
   in `results/openness.csv` with an empty source column, not dropped.
-- The 44 contested prompts are recorded with `agreed=0` and were never
-  adjudicated. A third coder would settle them; none was run.
+- **The MARKED/UNMARKED leakage (p=0.067) was never re-tested** after
+  adjudication. Adding 34 items could move it either way.
+- The slot corpus has **2 of 197 prompts measured** in v3 (malign, [6460],
+  confirmed independently through ClickHouse). Nothing here depends on that, but
+  any use of these prompts does.

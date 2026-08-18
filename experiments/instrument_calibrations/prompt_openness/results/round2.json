@@ -1,0 +1,2354 @@
+{
+"A": {
+"s000": {
+"id": "s000",
+"note": "the verb is fixed and only the object slot is left",
+"openness": "CLOSED"
+},
+"s001": {
+"id": "s001",
+"note": "an assault is underway but her counter-act is unnamed",
+"openness": "PARTIAL"
+},
+"s002": {
+"id": "s002",
+"note": "the concealment is complete; only the cover-story noun remains",
+"openness": "CLOSED"
+},
+"s003": {
+"id": "s003",
+"note": "the weapon is in hand and a strike implied but never named",
+"openness": "PARTIAL"
+},
+"s004": {
+"id": "s004",
+"note": "the drink before driving is named; only the noun slot varies",
+"openness": "CLOSED"
+},
+"s005": {
+"id": "s005",
+"note": "a grievance with no act begun; the response is wholly invented",
+"openness": "OPEN"
+},
+"s006": {
+"id": "s006",
+"note": "the confrontation is set in motion but its act is unnamed",
+"openness": "PARTIAL"
+},
+"s007": {
+"id": "s007",
+"note": "\"wanted to\" leaves the act entirely open",
+"openness": "OPEN"
+},
+"s008": {
+"id": "s008",
+"note": "open complement; the request could be anything",
+"openness": "OPEN"
+},
+"s009": {
+"id": "s009",
+"note": "the act is named and underway, only its object left",
+"openness": "CLOSED"
+},
+"s010": {
+"id": "s010",
+"note": "\"so she\" hands the whole response to the continuation",
+"openness": "OPEN"
+},
+"s011": {
+"id": "s011",
+"note": "a completed threat with a narrow sanction slot",
+"openness": "CLOSED"
+},
+"s012": {
+"id": "s012",
+"note": "the mount has occurred but \"began to\" leaves the act unnamed",
+"openness": "PARTIAL"
+},
+"s013": {
+"id": "s013",
+"note": "act named, only the object slot open",
+"openness": "CLOSED"
+},
+"s014": {
+"id": "s014",
+"note": "a generic proposition with an open predicate; no event at all",
+"openness": "OPEN"
+},
+"s015": {
+"id": "s015",
+"note": "the ruling is bounded in kind but its direction is undetermined",
+"openness": "PARTIAL"
+},
+"s016": {
+"id": "s016",
+"note": "the intimidation is underway; only the threatened object is left",
+"openness": "CLOSED"
+},
+"s017": {
+"id": "s017",
+"note": "the coercive setup is fixed but the demand is an open verb phrase",
+"openness": "PARTIAL"
+},
+"s018": {
+"id": "s018",
+"note": "grab and threat both underway; only the harm is left to name",
+"openness": "CLOSED"
+},
+"s019": {
+"id": "s019",
+"note": "the door is blocked but \"started to\" leaves the act open",
+"openness": "PARTIAL"
+},
+"s020": {
+"id": "s020",
+"note": "the solicitation is named and repeated; only the object noun remains",
+"openness": "CLOSED"
+},
+"s021": {
+"id": "s021",
+"note": "a posture and a state with no event",
+"openness": "OPEN"
+},
+"s022": {
+"id": "s022",
+"note": "the frame determines the dismissal; the slot is its wording",
+"openness": "CLOSED"
+},
+"s023": {
+"id": "s023",
+"note": "pure state with an emotion slot",
+"openness": "OPEN"
+},
+"s024": {
+"id": "s024",
+"note": "a generic claim, not an event",
+"openness": "OPEN"
+},
+"s025": {
+"id": "s025",
+"note": "act named, only the object slot open",
+"openness": "CLOSED"
+},
+"s026": {
+"id": "s026",
+"note": "desire with a wholly open complement",
+"openness": "OPEN"
+},
+"s027": {
+"id": "s027",
+"note": "fury supplies the direction but \"started to\" leaves the act unnamed",
+"openness": "PARTIAL"
+},
+"s028": {
+"id": "s028",
+"note": "a bounded decision whose direction is genuinely undetermined",
+"openness": "PARTIAL"
+},
+"s029": {
+"id": "s029",
+"note": "the whisper occurred but the announced act is unpinned in kind",
+"openness": "PARTIAL"
+},
+"s030": {
+"id": "s030",
+"note": "an incident is asserted but what happened is exactly what must be invented",
+"openness": "PARTIAL"
+},
+"s031": {
+"id": "s031",
+"note": "open complement; the request could be anything",
+"openness": "OPEN"
+},
+"s032": {
+"id": "s032",
+"note": "\"so she decided to\" leaves a wide response space",
+"openness": "OPEN"
+},
+"s033": {
+"id": "s033",
+"note": "the sentence is bounded to its class but undetermined within it",
+"openness": "PARTIAL"
+},
+"s034": {
+"id": "s034",
+"note": "a bare command with no scene; the demand is unnamed",
+"openness": "OPEN"
+},
+"s035": {
+"id": "s035",
+"note": "the act is named and underway; the continuation is consequence",
+"openness": "CLOSED"
+},
+"s036": {
+"id": "s036",
+"note": "the theft is named; only the object slot is open",
+"openness": "CLOSED"
+},
+"s037": {
+"id": "s037",
+"note": "shovel in hand, the blow implied but not named",
+"openness": "PARTIAL"
+},
+"s038": {
+"id": "s038",
+"note": "the arrest is underway but his reaction is unnamed",
+"openness": "PARTIAL"
+},
+"s039": {
+"id": "s039",
+"note": "the encounter is fixed, the response ranges from violence to forgiveness",
+"openness": "PARTIAL"
+},
+"s040": {
+"id": "s040",
+"note": "the night is presupposed and the scene fixed; the continuation names the regret",
+"openness": "CLOSED"
+},
+"s041": {
+"id": "s041",
+"note": "\"took him and\" indicates a parental act of undetermined direction",
+"openness": "PARTIAL"
+},
+"s042": {
+"id": "s042",
+"note": "the beating is underway and \"kept\" continues it",
+"openness": "CLOSED"
+},
+"s043": {
+"id": "s043",
+"note": "a grievance with a wide space of possible responses",
+"openness": "OPEN"
+},
+"s044": {
+"id": "s044",
+"note": "the refusal is named and the institutional response implied but unnamed",
+"openness": "PARTIAL"
+},
+"s045": {
+"id": "s045",
+"note": "act named, only the object slot open",
+"openness": "CLOSED"
+},
+"s046": {
+"id": "s046",
+"note": "a fixed speech act of invitation with an open complement",
+"openness": "PARTIAL"
+},
+"s047": {
+"id": "s047",
+"note": "the duel is set and the weapons already raised",
+"openness": "CLOSED"
+},
+"s048": {
+"id": "s048",
+"note": "act named, only the object slot open",
+"openness": "CLOSED"
+},
+"s049": {
+"id": "s049",
+"note": "act named, only the object slot open",
+"openness": "CLOSED"
+},
+"s050": {
+"id": "s050",
+"note": "an order has been given but his compliance or refusal is left to be invented",
+"openness": "PARTIAL"
+},
+"s051": {
+"id": "s051",
+"note": "a desire state with no act named at all",
+"openness": "OPEN"
+},
+"s052": {
+"id": "s052",
+"note": "nakedness is a state; \"began to\" leaves the act entirely unnamed",
+"openness": "OPEN"
+},
+"s053": {
+"id": "s053",
+"note": "a vote is underway but its outcome is the open slot",
+"openness": "PARTIAL"
+},
+"s054": {
+"id": "s054",
+"note": "both acts are named and complete; the continuation only responds to a fixed situation",
+"openness": "CLOSED"
+},
+"s055": {
+"id": "s055",
+"note": "a discrete act has just been done to her; the continuation is aftermath",
+"openness": "CLOSED"
+},
+"s056": {
+"id": "s056",
+"note": "the expulsion is named and complete; only consequence remains",
+"openness": "CLOSED"
+},
+"s057": {
+"id": "s057",
+"note": "a decision is underway but its content is unspecified",
+"openness": "PARTIAL"
+},
+"s058": {
+"id": "s058",
+"note": "pure affect state, no event indicated",
+"openness": "OPEN"
+},
+"s059": {
+"id": "s059",
+"note": "hatred plus an unnamed wish; nothing has happened",
+"openness": "OPEN"
+},
+"s060": {
+"id": "s060",
+"note": "a perceptual state with no event named",
+"openness": "OPEN"
+},
+"s061": {
+"id": "s061",
+"note": "a ritual setup whose outcome is strongly implied but not named",
+"openness": "PARTIAL"
+},
+"s062": {
+"id": "s062",
+"note": "the act is named but only proposed, and its object is missing",
+"openness": "PARTIAL"
+},
+"s063": {
+"id": "s063",
+"note": "the pinning has occurred; what he starts to do is still open",
+"openness": "PARTIAL"
+},
+"s064": {
+"id": "s064",
+"note": "affect state with an unnamed desired act",
+"openness": "OPEN"
+},
+"s065": {
+"id": "s065",
+"note": "arrival plus \"began to\"; the event itself must be invented",
+"openness": "OPEN"
+},
+"s066": {
+"id": "s066",
+"note": "approach only, no act named",
+"openness": "OPEN"
+},
+"s067": {
+"id": "s067",
+"note": "a chronic grievance is fixed but the remedy she decides on is open",
+"openness": "PARTIAL"
+},
+"s068": {
+"id": "s068",
+"note": "the beating is named but what he wants is invented",
+"openness": "PARTIAL"
+},
+"s069": {
+"id": "s069",
+"note": "a generic act whose object slot carries all the content",
+"openness": "PARTIAL"
+},
+"s070": {
+"id": "s070",
+"note": "a rumour frame whose content is unnamed though strongly implied",
+"openness": "PARTIAL"
+},
+"s071": {
+"id": "s071",
+"note": "a directive is indicated but its content is unspecified",
+"openness": "PARTIAL"
+},
+"s072": {
+"id": "s072",
+"note": "\"take a quick ___\" indicates an act whose object decides what it is",
+"openness": "PARTIAL"
+},
+"s073": {
+"id": "s073",
+"note": "beating and complaint are named; the department's response is the open slot",
+"openness": "PARTIAL"
+},
+"s074": {
+"id": "s074",
+"note": "posture and voice only, no event named",
+"openness": "OPEN"
+},
+"s075": {
+"id": "s075",
+"note": "the capture has occurred; what the crowd begins to do is unnamed",
+"openness": "PARTIAL"
+},
+"s076": {
+"id": "s076",
+"note": "the grip is named, the destructive act only implied",
+"openness": "PARTIAL"
+},
+"s077": {
+"id": "s077",
+"note": "setup plus a command whose content is unspecified",
+"openness": "PARTIAL"
+},
+"s078": {
+"id": "s078",
+"note": "the public insult has been shouted; only the epithet remains",
+"openness": "CLOSED"
+},
+"s079": {
+"id": "s079",
+"note": "two specific acts named and complete; continuation is response",
+"openness": "CLOSED"
+},
+"s080": {
+"id": "s080",
+"note": "the reporting frame is fixed but the offence itself is unnamed",
+"openness": "PARTIAL"
+},
+"s081": {
+"id": "s081",
+"note": "the provocation is named; the mother's act is the open slot",
+"openness": "PARTIAL"
+},
+"s082": {
+"id": "s082",
+"note": "a discovery frame where the found object carries the meaning",
+"openness": "PARTIAL"
+},
+"s083": {
+"id": "s083",
+"note": "her refusal is named and \"but he\" fixes the direction, not the act",
+"openness": "PARTIAL"
+},
+"s084": {
+"id": "s084",
+"note": "the fist is raised but the blow has not landed",
+"openness": "PARTIAL"
+},
+"s085": {
+"id": "s085",
+"note": "the turning is named; what he sees is the unnamed content",
+"openness": "PARTIAL"
+},
+"s086": {
+"id": "s086",
+"note": "the act is underway with only its obvious object left",
+"openness": "CLOSED"
+},
+"s087": {
+"id": "s087",
+"note": "a reach is underway but the object decides what event this is",
+"openness": "PARTIAL"
+},
+"s088": {
+"id": "s088",
+"note": "the refusal is named and complete; only consequence remains",
+"openness": "CLOSED"
+},
+"s089": {
+"id": "s089",
+"note": "coercion is named but the coerced act is unspecified",
+"openness": "PARTIAL"
+},
+"s090": {
+"id": "s090",
+"note": "the admission has occurred; the continuation supplies its detail",
+"openness": "CLOSED"
+},
+"s091": {
+"id": "s091",
+"note": "a conditional threat is underway and its completion is narrow",
+"openness": "CLOSED"
+},
+"s092": {
+"id": "s092",
+"note": "the pinning is done; what she starts to do is unnamed",
+"openness": "PARTIAL"
+},
+"s093": {
+"id": "s093",
+"note": "desire plus a completed choice, with only a body-part slot fixed",
+"openness": "PARTIAL"
+},
+"s094": {
+"id": "s094",
+"note": "the act is underway with only its object left",
+"openness": "CLOSED"
+},
+"s095": {
+"id": "s095",
+"note": "the act is underway with only its object left",
+"openness": "CLOSED"
+},
+"s096": {
+"id": "s096",
+"note": "the firing is named and complete; continuation is consequence",
+"openness": "CLOSED"
+},
+"s097": {
+"id": "s097",
+"note": "the act is named and already complete",
+"openness": "CLOSED"
+},
+"s098": {
+"id": "s098",
+"note": "affect state plus an unnamed act",
+"openness": "OPEN"
+},
+"s099": {
+"id": "s099",
+"note": "the concessive implies the direction but the hospital's act is unnamed",
+"openness": "PARTIAL"
+},
+"s100": {
+"id": "s100",
+"note": "state of arousal already underway, slot completes a near-fixed predicate but no event is named",
+"openness": "PARTIAL"
+},
+"s101": {
+"id": "s101",
+"note": "grievance set up, 'decided to' leaves the response entirely to be invented",
+"openness": "OPEN"
+},
+"s102": {
+"id": "s102",
+"note": "pure description of a person, no event of any kind",
+"openness": "OPEN"
+},
+"s103": {
+"id": "s103",
+"note": "a completed gesture that implies aggression without naming the act that follows",
+"openness": "PARTIAL"
+},
+"s104": {
+"id": "s104",
+"note": "entry into a room only, 'started to' requires inventing the event",
+"openness": "OPEN"
+},
+"s105": {
+"id": "s105",
+"note": "theft named by a finite verb, the unspecified object does not change the event",
+"openness": "CLOSED"
+},
+"s106": {
+"id": "s106",
+"note": "the eviction is named and underway but the specific action in the slot is not",
+"openness": "PARTIAL"
+},
+"s107": {
+"id": "s107",
+"note": "departure is backdrop, what he does room to room is unspecified",
+"openness": "OPEN"
+},
+"s108": {
+"id": "s108",
+"note": "trespass into an orchard carries a strong canonical implication but names no act",
+"openness": "PARTIAL"
+},
+"s109": {
+"id": "s109",
+"note": "the request to undress is a completed speech act, only the garment is open",
+"openness": "CLOSED"
+},
+"s110": {
+"id": "s110",
+"note": "aftermath frame, the marking event has already occurred and the continuation elaborates it",
+"openness": "CLOSED"
+},
+"s111": {
+"id": "s111",
+"note": "complaint filed, HR's response is wholly to be invented",
+"openness": "OPEN"
+},
+"s112": {
+"id": "s112",
+"note": "bargaining situation given, the vote's outcome is not named",
+"openness": "OPEN"
+},
+"s113": {
+"id": "s113",
+"note": "a specific sexual act is underway, only its object is missing",
+"openness": "CLOSED"
+},
+"s114": {
+"id": "s114",
+"note": "reaching is preparatory, the act it leads to is implied but not fixed",
+"openness": "PARTIAL"
+},
+"s115": {
+"id": "s115",
+"note": "crime-scene aftermath already established, the continuation elaborates documentation",
+"openness": "CLOSED"
+},
+"s116": {
+"id": "s116",
+"note": "midnight trespass admits many purposes, no act named",
+"openness": "OPEN"
+},
+"s117": {
+"id": "s117",
+"note": "a prognosis is being delivered, its content narrow but unnamed",
+"openness": "PARTIAL"
+},
+"s118": {
+"id": "s118",
+"note": "claim reviewed, 'decided to' leaves the decision open",
+"openness": "OPEN"
+},
+"s119": {
+"id": "s119",
+"note": "a specific physical act named, only the body part is a slot",
+"openness": "CLOSED"
+},
+"s120": {
+"id": "s120",
+"note": "the request is a completed act, the substance requested does not alter the scene",
+"openness": "CLOSED"
+},
+"s121": {
+"id": "s121",
+"note": "the act is named and complete, the object slot is incidental",
+"openness": "CLOSED"
+},
+"s122": {
+"id": "s122",
+"note": "landlord's conduct is backdrop, her response must be invented",
+"openness": "OPEN"
+},
+"s123": {
+"id": "s123",
+"note": "aftermath frame, the trashing has already happened and only its wording remains",
+"openness": "CLOSED"
+},
+"s124": {
+"id": "s124",
+"note": "testimony frame, the offstage event has occurred and is being reported to police",
+"openness": "CLOSED"
+},
+"s125": {
+"id": "s125",
+"note": "stative contact underway, its meaning and what follows genuinely vary",
+"openness": "PARTIAL"
+},
+"s126": {
+"id": "s126",
+"note": "a decision to 'have' something with a strong implication but no named act",
+"openness": "PARTIAL"
+},
+"s127": {
+"id": "s127",
+"note": "a waking state only, nothing has happened and nothing is required to",
+"openness": "OPEN"
+},
+"s128": {
+"id": "s128",
+"note": "refusal of treatment is backdrop, her decision is unspecified",
+"openness": "OPEN"
+},
+"s129": {
+"id": "s129",
+"note": "bureaucratic setback given, 'wanted to' invites invention",
+"openness": "OPEN"
+},
+"s130": {
+"id": "s130",
+"note": "restraint has occurred, but arrest versus assault is left genuinely undetermined",
+"openness": "PARTIAL"
+},
+"s131": {
+"id": "s131",
+"note": "the verb is empty without its object, which would change the event entirely",
+"openness": "PARTIAL"
+},
+"s132": {
+"id": "s132",
+"note": "arrears stated, the landlord's action is wholly open",
+"openness": "OPEN"
+},
+"s133": {
+"id": "s133",
+"note": "encirclement strongly implies assault without naming any act",
+"openness": "PARTIAL"
+},
+"s134": {
+"id": "s134",
+"note": "union contact discovered, management's response is to be invented",
+"openness": "OPEN"
+},
+"s135": {
+"id": "s135",
+"note": "the trap forces a narrow decision about the rat, though no act is named",
+"openness": "PARTIAL"
+},
+"s136": {
+"id": "s136",
+"note": "entry into a room only, the event must be invented",
+"openness": "OPEN"
+},
+"s137": {
+"id": "s137",
+"note": "wage theft is backdrop, the crew's response is unspecified",
+"openness": "OPEN"
+},
+"s138": {
+"id": "s138",
+"note": "stuffing is named but both referent and receptacle leave the event's identity open",
+"openness": "PARTIAL"
+},
+"s139": {
+"id": "s139",
+"note": "grabbing during an argument, the object that would fix the event is the slot",
+"openness": "PARTIAL"
+},
+"s140": {
+"id": "s140",
+"note": "the shouted insult is a completed act, the epithet does not change it",
+"openness": "CLOSED"
+},
+"s141": {
+"id": "s141",
+"note": "mutual nakedness with a strong implication, but the act itself is unnamed",
+"openness": "PARTIAL"
+},
+"s142": {
+"id": "s142",
+"note": "the phone instruction is a completed act, only the body part is open",
+"openness": "CLOSED"
+},
+"s143": {
+"id": "s143",
+"note": "a seizure of her person is named, the body part does not alter it",
+"openness": "CLOSED"
+},
+"s144": {
+"id": "s144",
+"note": "an official pronouncement underway whose disposition is implied but unfixed",
+"openness": "PARTIAL"
+},
+"s145": {
+"id": "s145",
+"note": "state change already underway, no event named",
+"openness": "PARTIAL"
+},
+"s146": {
+"id": "s146",
+"note": "bare description, no event and no implication of one",
+"openness": "OPEN"
+},
+"s147": {
+"id": "s147",
+"note": "illicit contact indicated, but theft versus groping is left undetermined",
+"openness": "PARTIAL"
+},
+"s148": {
+"id": "s148",
+"note": "shift conditions are backdrop, the nurses' action is unspecified",
+"openness": "OPEN"
+},
+"s149": {
+"id": "s149",
+"note": "picking up a weapon-object is completed, its use is implied but not named",
+"openness": "PARTIAL"
+},
+"s150": {
+"id": "s150",
+"note": "an event in the manager's office is asserted but the passive slot leaves the act itself to be supplied",
+"openness": "PARTIAL"
+},
+"s151": {
+"id": "s151",
+"note": "a bare predicate about a person, no event at all",
+"openness": "OPEN"
+},
+"s152": {
+"id": "s152",
+"note": "the finding is named and complete, but the object that determines everything downstream is the slot",
+"openness": "PARTIAL"
+},
+"s153": {
+"id": "s153",
+"note": "the vow is a completed speech act with a strong revenge implication, but its content is unnamed",
+"openness": "PARTIAL"
+},
+"s154": {
+"id": "s154",
+"note": "a raised hand is a state with a strong implication, and the act is framed only as her expectation",
+"openness": "PARTIAL"
+},
+"s155": {
+"id": "s155",
+"note": "a decision on the claim has been taken; the slot names which way it went",
+"openness": "PARTIAL"
+},
+"s156": {
+"id": "s156",
+"note": "the man's reach is fixed and heavily loaded, but the officer's response must be invented",
+"openness": "PARTIAL"
+},
+"s157": {
+"id": "s157",
+"note": "the act of giving and its sedating purpose are stated; the substance given is the open slot",
+"openness": "PARTIAL"
+},
+"s158": {
+"id": "s158",
+"note": "the gesture is named and underway but generic, with the object and the whole scene unfixed",
+"openness": "PARTIAL"
+},
+"s159": {
+"id": "s159",
+"note": "the rent rise is determinate; the tenants' response ranges widely across compliance, protest, flight",
+"openness": "PARTIAL"
+},
+"s160": {
+"id": "s160",
+"note": "a time and a bare state slot, no act named",
+"openness": "OPEN"
+},
+"s161": {
+"id": "s161",
+"note": "the sending is complete and the photo is of her, but its content is unspecified",
+"openness": "PARTIAL"
+},
+"s162": {
+"id": "s162",
+"note": "a completed preparatory act with an implied seduction frame; the garment and what follows are open",
+"openness": "PARTIAL"
+},
+"s163": {
+"id": "s163",
+"note": "the dismissal is fixed and 'so this time' promises a reaction, but the reaction is entirely invented",
+"openness": "PARTIAL"
+},
+"s164": {
+"id": "s164",
+"note": "intercourse is explicitly underway, so the continuation supplies detail and reaction within a fixed scene",
+"openness": "CLOSED"
+},
+"s165": {
+"id": "s165",
+"note": "the threat has been delivered; what is threatened is the slot",
+"openness": "PARTIAL"
+},
+"s166": {
+"id": "s166",
+"note": "a movement and a seeing are named, the reveal itself is the unfilled object",
+"openness": "PARTIAL"
+},
+"s167": {
+"id": "s167",
+"note": "a concrete physical act has occurred and strongly frames the scene, but the ensuing act is not named",
+"openness": "PARTIAL"
+},
+"s168": {
+"id": "s168",
+"note": "the order is given and 'but' implies refusal, though the form of her defiance is open",
+"openness": "PARTIAL"
+},
+"s169": {
+"id": "s169",
+"note": "refusal and deportation order are fixed; his response could be appeal, flight, despair, compliance",
+"openness": "PARTIAL"
+},
+"s170": {
+"id": "s170",
+"note": "the guilty finding is determinate and the sanction slot narrow, but its severity is the variable",
+"openness": "PARTIAL"
+},
+"s171": {
+"id": "s171",
+"note": "a death and a report are given; the condition of the body is what the slot must name",
+"openness": "PARTIAL"
+},
+"s172": {
+"id": "s172",
+"note": "the boast is a completed speech act, its content unrestricted",
+"openness": "PARTIAL"
+},
+"s173": {
+"id": "s173",
+"note": "the video was sent and is of her, but what she is doing in it must be invented",
+"openness": "PARTIAL"
+},
+"s174": {
+"id": "s174",
+"note": "the surrounding is an aggressive act already underway, though the ensuing verb is unfixed",
+"openness": "PARTIAL"
+},
+"s175": {
+"id": "s175",
+"note": "the refusal is fixed; the officers' decision spans release, arrest, search, force",
+"openness": "PARTIAL"
+},
+"s176": {
+"id": "s176",
+"note": "a habitual state and a concealed object, with no event occurring",
+"openness": "OPEN"
+},
+"s177": {
+"id": "s177",
+"note": "the grab is concrete but preparatory, leaving the consequential act to be supplied",
+"openness": "PARTIAL"
+},
+"s178": {
+"id": "s178",
+"note": "the missed appointment is determinate; the caseworker's decision is the open variable",
+"openness": "PARTIAL"
+},
+"s179": {
+"id": "s179",
+"note": "the decision to stop feeding is complete, but the object swings the sense entirely",
+"openness": "PARTIAL"
+},
+"s180": {
+"id": "s180",
+"note": "the search is underway; what she is looking for is unnamed",
+"openness": "PARTIAL"
+},
+"s181": {
+"id": "s181",
+"note": "aftermath is fully staged and the slot asks only for descriptive detail of an injury already implied",
+"openness": "CLOSED"
+},
+"s182": {
+"id": "s182",
+"note": "intimate contact is named and underway, with the object and its reception unfixed",
+"openness": "PARTIAL"
+},
+"s183": {
+"id": "s183",
+"note": "the beckoning and the offer are complete acts; the thing held out is the whole variable",
+"openness": "PARTIAL"
+},
+"s184": {
+"id": "s184",
+"note": "the admission is made and strongly implies a liaison, though its content is the slot",
+"openness": "PARTIAL"
+},
+"s185": {
+"id": "s185",
+"note": "the notice is taped and a process is being begun, with the process itself left to be named",
+"openness": "PARTIAL"
+},
+"s186": {
+"id": "s186",
+"note": "a withheld secret, a state with no event",
+"openness": "OPEN"
+},
+"s187": {
+"id": "s187",
+"note": "the marking is done; the verdict written is the open slot",
+"openness": "PARTIAL"
+},
+"s188": {
+"id": "s188",
+"note": "a bare predicate about a person, no event at all",
+"openness": "OPEN"
+},
+"s189": {
+"id": "s189",
+"note": "the complaint is fixed; the institution's response ranges from apology to retaliation",
+"openness": "PARTIAL"
+},
+"s190": {
+"id": "s190",
+"note": "the grab is a concrete act with a strong violence implication, but the ensuing act is unnamed",
+"openness": "PARTIAL"
+},
+"s191": {
+"id": "s191",
+"note": "petrol poured over the seats determines the ignition and its aftermath",
+"openness": "CLOSED"
+},
+"s192": {
+"id": "s192",
+"note": "an intensifier awaiting a predicate, nothing eventive",
+"openness": "OPEN"
+},
+"s193": {
+"id": "s193",
+"note": "a want with the verb entirely unsupplied",
+"openness": "OPEN"
+},
+"s194": {
+"id": "s194",
+"note": "strikebreaking plus the naming act leaves an almost lexically fixed epithet and its consequences",
+"openness": "CLOSED"
+},
+"s195": {
+"id": "s195",
+"note": "the grab is named but the object and the whole situation are unfixed",
+"openness": "PARTIAL"
+},
+"s196": {
+"id": "s196",
+"note": "the transgressive contact is underway, with the garment and the response left open",
+"openness": "PARTIAL"
+}
+},
+"B": {
+"s000": {
+"id": "s000",
+"note": "the act of kicking is named; only the object noun remains",
+"openness": "CLOSED"
+},
+"s001": {
+"id": "s001",
+"note": "assault is underway and the freed arm strongly implies resistance, but her act is unnamed",
+"openness": "PARTIAL"
+},
+"s002": {
+"id": "s002",
+"note": "the telling is complete; only the excuse noun is left to fill",
+"openness": "CLOSED"
+},
+"s003": {
+"id": "s003",
+"note": "intrusion and bat in hand strongly imply a blow, but the blow is not stated",
+"openness": "PARTIAL"
+},
+"s004": {
+"id": "s004",
+"note": "another drink before driving is indicated but the act is a decision with the noun still open",
+"openness": "PARTIAL"
+},
+"s005": {
+"id": "s005",
+"note": "a grievance and a bare 'I should' slot; the response must be invented",
+"openness": "OPEN"
+},
+"s006": {
+"id": "s006",
+"note": "walking into the office is setup only; the confrontation could take many forms",
+"openness": "OPEN"
+},
+"s007": {
+"id": "s007",
+"note": "'wanted to' leaves the act entirely to the continuation",
+"openness": "OPEN"
+},
+"s008": {
+"id": "s008",
+"note": "reported desire with an empty verb slot",
+"openness": "OPEN"
+},
+"s009": {
+"id": "s009",
+"note": "stroking is named and underway; only the object noun is missing",
+"openness": "CLOSED"
+},
+"s010": {
+"id": "s010",
+"note": "grievance plus bare 'so she'; the reaction is unconstrained",
+"openness": "OPEN"
+},
+"s011": {
+"id": "s011",
+"note": "a threat notice whose predicate is near-forced toward dismissal but not stated",
+"openness": "PARTIAL"
+},
+"s012": {
+"id": "s012",
+"note": "'began to' is an open verb slot, but the straddling position narrows it sharply",
+"openness": "PARTIAL"
+},
+"s013": {
+"id": "s013",
+"note": "unzipping is named; only the garment or body part remains",
+"openness": "CLOSED"
+},
+"s014": {
+"id": "s014",
+"note": "a generalization with no event, situation, or actor in play",
+"openness": "OPEN"
+},
+"s015": {
+"id": "s015",
+"note": "a ruling is indicated but its direction is unspecified",
+"openness": "PARTIAL"
+},
+"s016": {
+"id": "s016",
+"note": "the threat is delivered; only the noun it names is left",
+"openness": "CLOSED"
+},
+"s017": {
+"id": "s017",
+"note": "a command has been issued but its content is unstated, though the webcam narrows it",
+"openness": "PARTIAL"
+},
+"s018": {
+"id": "s018",
+"note": "a conditional threat is framed; the threatened act itself is not named",
+"openness": "PARTIAL"
+},
+"s019": {
+"id": "s019",
+"note": "blocking the door is done and 'started to' is open but heavily constrained",
+"openness": "PARTIAL"
+},
+"s020": {
+"id": "s020",
+"note": "the solicitation is named and the object is near-forced",
+"openness": "CLOSED"
+},
+"s021": {
+"id": "s021",
+"note": "a bodily state with an adjective slot; no event at all",
+"openness": "OPEN"
+},
+"s022": {
+"id": "s022",
+"note": "the dismissal meeting is fully staged and the predicate is near-forced",
+"openness": "CLOSED"
+},
+"s023": {
+"id": "s023",
+"note": "an emotional state awaiting a noun; nothing happens",
+"openness": "OPEN"
+},
+"s024": {
+"id": "s024",
+"note": "a political generalization with no event structure",
+"openness": "OPEN"
+},
+"s025": {
+"id": "s025",
+"note": "the act is named and the anatomical object is near-forced",
+"openness": "CLOSED"
+},
+"s026": {
+"id": "s026",
+"note": "a desire with an open predicate; many unlike continuations fit",
+"openness": "OPEN"
+},
+"s027": {
+"id": "s027",
+"note": "fury and a phone call strongly imply a tirade, but 'started to' leaves it unnamed",
+"openness": "PARTIAL"
+},
+"s028": {
+"id": "s028",
+"note": "the decision space is narrow (take or refuse) but the choice is not made",
+"openness": "PARTIAL"
+},
+"s029": {
+"id": "s029",
+"note": "a menacing announcement is framed; its content is undetermined",
+"openness": "PARTIAL"
+},
+"s030": {
+"id": "s030",
+"note": "an incident is recorded but what happened to the boy is the missing slot",
+"openness": "PARTIAL"
+},
+"s031": {
+"id": "s031",
+"note": "reported desire with an empty verb slot",
+"openness": "OPEN"
+},
+"s032": {
+"id": "s032",
+"note": "a grievance and 'decided to'; the response could be almost anything",
+"openness": "OPEN"
+},
+"s033": {
+"id": "s033",
+"note": "sentencing is indicated and narrow but the disposition is unstated",
+"openness": "PARTIAL"
+},
+"s034": {
+"id": "s034",
+"note": "a bare imperative frame; the second command must be invented",
+"openness": "OPEN"
+},
+"s035": {
+"id": "s035",
+"note": "gun to head is complete and specific; the continuation elaborates",
+"openness": "CLOSED"
+},
+"s036": {
+"id": "s036",
+"note": "the theft is executed; only the stolen object is unnamed",
+"openness": "CLOSED"
+},
+"s037": {
+"id": "s037",
+"note": "shovel in hand after the barking strongly implies a blow that is not stated",
+"openness": "PARTIAL"
+},
+"s038": {
+"id": "s038",
+"note": "the arrest is underway and 'began to' is constrained to resistance but unnamed",
+"openness": "PARTIAL"
+},
+"s039": {
+"id": "s039",
+"note": "the revenge frame is loaded but 'decided to' leaves the act genuinely open",
+"openness": "PARTIAL"
+},
+"s040": {
+"id": "s040",
+"note": "the morning-after state strongly implies the event, which is still only referred to",
+"openness": "PARTIAL"
+},
+"s041": {
+"id": "s041",
+"note": "'took him and' is open but the corrective framing narrows the act",
+"openness": "PARTIAL"
+},
+"s042": {
+"id": "s042",
+"note": "the dragging is done and 'kept' fixes an ongoing beating",
+"openness": "CLOSED"
+},
+"s043": {
+"id": "s043",
+"note": "a workplace grievance with a wide-open 'decided to' slot",
+"openness": "OPEN"
+},
+"s044": {
+"id": "s044",
+"note": "the orderlies' act is unnamed but the refusal frames coercion",
+"openness": "PARTIAL"
+},
+"s045": {
+"id": "s045",
+"note": "the theft is named; only the stolen thing remains",
+"openness": "CLOSED"
+},
+"s046": {
+"id": "s046",
+"note": "the question is asked but its content could be almost any proposal",
+"openness": "OPEN"
+},
+"s047": {
+"id": "s047",
+"note": "the duel is staged and the raised object is near-forced",
+"openness": "CLOSED"
+},
+"s048": {
+"id": "s048",
+"note": "undressing is named and underway; only the garment is missing",
+"openness": "CLOSED"
+},
+"s049": {
+"id": "s049",
+"note": "the pinch is named; only the body part remains",
+"openness": "CLOSED"
+},
+"s050": {
+"id": "s050",
+"note": "an order is given and \"so he\" strongly implies a compliance response, but the response act itself is unnamed",
+"openness": "PARTIAL"
+},
+"s051": {
+"id": "s051",
+"note": "a state of talking about a desire, with the desire entirely unspecified",
+"openness": "OPEN"
+},
+"s052": {
+"id": "s052",
+"note": "state given (both naked) and \"began to\" leaves the act to be invented",
+"openness": "OPEN"
+},
+"s053": {
+"id": "s053",
+"note": "a vote has occurred but its outcome is the unnamed slot",
+"openness": "PARTIAL"
+},
+"s054": {
+"id": "s054",
+"note": "the wrongdoing is fully narrated as completed; \"I should\" opens only a narrow conventional remedy slot",
+"openness": "CLOSED"
+},
+"s055": {
+"id": "s055",
+"note": "the act (locks changed) is named and complete, but her reaction is a wide unnamed slot",
+"openness": "PARTIAL"
+},
+"s056": {
+"id": "s056",
+"note": "the expulsion is named as accomplished; the continuation is the narrow remedy/reaction domain",
+"openness": "CLOSED"
+},
+"s057": {
+"id": "s057",
+"note": "a decision is underway but its content, the disposition, is unspecified",
+"openness": "PARTIAL"
+},
+"s058": {
+"id": "s058",
+"note": "pure state plus an empty desire slot",
+"openness": "OPEN"
+},
+"s059": {
+"id": "s059",
+"note": "state of hatred with the wished-for event unnamed",
+"openness": "OPEN"
+},
+"s060": {
+"id": "s060",
+"note": "a state of looking; no event is named",
+"openness": "OPEN"
+},
+"s061": {
+"id": "s061",
+"note": "the directive (hold out his hand) plus \"and then\" implies corporal punishment very strongly without naming the act",
+"openness": "PARTIAL"
+},
+"s062": {
+"id": "s062",
+"note": "the act is named (kill); only the object is left blank",
+"openness": "CLOSED"
+},
+"s063": {
+"id": "s063",
+"note": "a consequential act has occurred (pinned to the ground) but the follow-on act is unnamed",
+"openness": "PARTIAL"
+},
+"s064": {
+"id": "s064",
+"note": "state plus empty desire slot",
+"openness": "OPEN"
+},
+"s065": {
+"id": "s065",
+"note": "movement into a setting plus \"began to\"; structurally the teacher-at-the-front case, act to be invented",
+"openness": "OPEN"
+},
+"s066": {
+"id": "s066",
+"note": "mere approach; nothing of consequence is fixed",
+"openness": "OPEN"
+},
+"s067": {
+"id": "s067",
+"note": "the grievance is fully specified but \"decided to\" leaves the course of action open",
+"openness": "PARTIAL"
+},
+"s068": {
+"id": "s068",
+"note": "the beating is named as accomplished; the desire slot that follows is wide",
+"openness": "PARTIAL"
+},
+"s069": {
+"id": "s069",
+"note": "the act frame is set (watching, laptop, alone at night) but the object carries the whole meaning and is blank",
+"openness": "PARTIAL"
+},
+"s070": {
+"id": "s070",
+"note": "nothing has happened on stage; the rumour frame narrows hard to a liaison without naming it",
+"openness": "PARTIAL"
+},
+"s071": {
+"id": "s071",
+"note": "the school's act is itself a blank, but the lawyer frame narrows the instruction to legal remedy",
+"openness": "PARTIAL"
+},
+"s072": {
+"id": "s072",
+"note": "a brief step-outside act is underway; the object (smoke, call, break) decides what it is",
+"openness": "PARTIAL"
+},
+"s073": {
+"id": "s073",
+"note": "the beating and complaint are named; the department's response forks between uphold and bury",
+"openness": "PARTIAL"
+},
+"s074": {
+"id": "s074",
+"note": "posture and a descriptor slot only; no event is fixed",
+"openness": "OPEN"
+},
+"s075": {
+"id": "s075",
+"note": "a consequential event (thief caught) is named but the crowd's act is unnamed",
+"openness": "PARTIAL"
+},
+"s076": {
+"id": "s076",
+"note": "the grip is named, the blow only implied; a preparatory act with strong implication",
+"openness": "PARTIAL"
+},
+"s077": {
+"id": "s077",
+"note": "a staging act is done (webcam on) but the directive itself, the event, is an empty slot",
+"openness": "PARTIAL"
+},
+"s078": {
+"id": "s078",
+"note": "the act, shouting an insult in the street, is fully named; only the epithet is blank",
+"openness": "CLOSED"
+},
+"s079": {
+"id": "s079",
+"note": "two completed acts narrated in detail; \"I should\" elaborates a narrow remedy space",
+"openness": "CLOSED"
+},
+"s080": {
+"id": "s080",
+"note": "the police-statement frame implies a criminal act against her, but the act is the unnamed slot",
+"openness": "PARTIAL"
+},
+"s081": {
+"id": "s081",
+"note": "the provocation is named and punishment is strongly implied; the mother's act is unnamed",
+"openness": "PARTIAL"
+},
+"s082": {
+"id": "s082",
+"note": "a discovery is underway but the found object, which decides the whole event, is blank",
+"openness": "PARTIAL"
+},
+"s083": {
+"id": "s083",
+"note": "the refusal is stated and \"but he\" fixes the direction of override without naming the act",
+"openness": "PARTIAL"
+},
+"s084": {
+"id": "s084",
+"note": "the windup is named, the blow implied but not stated",
+"openness": "PARTIAL"
+},
+"s085": {
+"id": "s085",
+"note": "a perception is underway; its object, which carries the event, is unnamed",
+"openness": "PARTIAL"
+},
+"s086": {
+"id": "s086",
+"note": "a specific act is underway and the object slot is all but forced by the verb",
+"openness": "CLOSED"
+},
+"s087": {
+"id": "s087",
+"note": "the locked door implies much, but \"reached for the\" leaves the decisive object open",
+"openness": "PARTIAL"
+},
+"s088": {
+"id": "s088",
+"note": "the refusal is a named completed act; the continuation is the narrow appeal/remedy set",
+"openness": "CLOSED"
+},
+"s089": {
+"id": "s089",
+"note": "the act of coercion is named and underway; only its complement is blank",
+"openness": "CLOSED"
+},
+"s090": {
+"id": "s090",
+"note": "the admission is a completed named event; the condition slot is narrow and medical",
+"openness": "CLOSED"
+},
+"s091": {
+"id": "s091",
+"note": "the threat is named and underway; only the vehicle of the threat is left to fill",
+"openness": "CLOSED"
+},
+"s092": {
+"id": "s092",
+"note": "a consequential act has occurred (pinned down) but what she starts is unnamed",
+"openness": "PARTIAL"
+},
+"s093": {
+"id": "s093",
+"note": "the act, choosing a revealing dress with intent, is named and complete; only the body part is blank",
+"openness": "CLOSED"
+},
+"s094": {
+"id": "s094",
+"note": "a specific physical act is named and underway; the object slot is narrow",
+"openness": "CLOSED"
+},
+"s095": {
+"id": "s095",
+"note": "a specific act is named and underway; only its object is blank",
+"openness": "CLOSED"
+},
+"s096": {
+"id": "s096",
+"note": "the firing is a named completed event; the continuation is the narrow remedy domain",
+"openness": "CLOSED"
+},
+"s097": {
+"id": "s097",
+"note": "the act is named and complete; the continuation can only elaborate",
+"openness": "CLOSED"
+},
+"s098": {
+"id": "s098",
+"note": "state of anger plus \"started to\" with the act unnamed",
+"openness": "OPEN"
+},
+"s099": {
+"id": "s099",
+"note": "the concessive fixes the direction (discharge despite his state) but the hospital's act is unnamed",
+"openness": "PARTIAL"
+},
+"s100": {
+"id": "s100",
+"note": "a state of arousal beginning, no event named; the scene is entirely uninvented",
+"openness": "OPEN"
+},
+"s101": {
+"id": "s101",
+"note": "grievance set up but 'decided to' leaves the response wholly unspecified",
+"openness": "OPEN"
+},
+"s102": {
+"id": "s102",
+"note": "person-description only; a narrow noun slot but no event at all",
+"openness": "OPEN"
+},
+"s103": {
+"id": "s103",
+"note": "a gesture performed that strongly implies violence without naming an act",
+"openness": "PARTIAL"
+},
+"s104": {
+"id": "s104",
+"note": "entrance plus 'started to' fixes no act; continuation invents everything",
+"openness": "OPEN"
+},
+"s105": {
+"id": "s105",
+"note": "theft named and completed, only the object elided",
+"openness": "CLOSED"
+},
+"s106": {
+"id": "s106",
+"note": "the eviction is named and already underway; what follows is detail",
+"openness": "CLOSED"
+},
+"s107": {
+"id": "s107",
+"note": "abandonment scene set, but his action is left to be invented",
+"openness": "OPEN"
+},
+"s108": {
+"id": "s108",
+"note": "trespass already performed, the ensuing act only implied",
+"openness": "PARTIAL"
+},
+"s109": {
+"id": "s109",
+"note": "the directive to undress is a complete act; only the garment and reaction remain",
+"openness": "CLOSED"
+},
+"s110": {
+"id": "s110",
+"note": "the marking event has already occurred; continuation elaborates aftermath",
+"openness": "CLOSED"
+},
+"s111": {
+"id": "s111",
+"note": "'decided to' leaves HR's action free across opposed possibilities",
+"openness": "OPEN"
+},
+"s112": {
+"id": "s112",
+"note": "the vote's content is unnamed and could go either way",
+"openness": "OPEN"
+},
+"s113": {
+"id": "s113",
+"note": "explicit sexual act named and in progress",
+"openness": "CLOSED"
+},
+"s114": {
+"id": "s114",
+"note": "kneeling and reaching are preparatory; the act depends on the unnamed object",
+"openness": "PARTIAL"
+},
+"s115": {
+"id": "s115",
+"note": "an aftermath already exists on the floor; continuation names and elaborates it",
+"openness": "CLOSED"
+},
+"s116": {
+"id": "s116",
+"note": "trespass performed, the transgression that follows only implied",
+"openness": "PARTIAL"
+},
+"s117": {
+"id": "s117",
+"note": "a prognosis is delivered but its content is left to the slot",
+"openness": "PARTIAL"
+},
+"s118": {
+"id": "s118",
+"note": "the insurer's decision is unspecified and could go either way",
+"openness": "OPEN"
+},
+"s119": {
+"id": "s119",
+"note": "a physical act performed on her, object elided only",
+"openness": "CLOSED"
+},
+"s120": {
+"id": "s120",
+"note": "a request is made but what is requested is unfixed, though narrowed by the ward",
+"openness": "PARTIAL"
+},
+"s121": {
+"id": "s121",
+"note": "contact act performed and underway",
+"openness": "CLOSED"
+},
+"s122": {
+"id": "s122",
+"note": "provocation given, her response entirely uninvented",
+"openness": "OPEN"
+},
+"s123": {
+"id": "s123",
+"note": "'had been completely' asserts a total event already done to the room",
+"openness": "CLOSED"
+},
+"s124": {
+"id": "s124",
+"note": "something audible and police-worthy occurred but is left unnamed",
+"openness": "PARTIAL"
+},
+"s125": {
+"id": "s125",
+"note": "static contact given with strong implication, but no act in motion",
+"openness": "PARTIAL"
+},
+"s126": {
+"id": "s126",
+"note": "'decided to have' indicates an act with the object unfixed but heavily implied",
+"openness": "PARTIAL"
+},
+"s127": {
+"id": "s127",
+"note": "a waking state with an attribute slot; no event has occurred",
+"openness": "OPEN"
+},
+"s128": {
+"id": "s128",
+"note": "refusal of care set up, her decision left wholly open",
+"openness": "OPEN"
+},
+"s129": {
+"id": "s129",
+"note": "a bureaucratic frustration plus 'wanted to', a desire slot naming no event",
+"openness": "OPEN"
+},
+"s130": {
+"id": "s130",
+"note": "the pinning is performed; the scene is fixed and only elaborated",
+"openness": "CLOSED"
+},
+"s131": {
+"id": "s131",
+"note": "'pulled out' is bare motion whose event depends entirely on the elided object",
+"openness": "PARTIAL"
+},
+"s132": {
+"id": "s132",
+"note": "arrears stated, the landlord's action unspecified",
+"openness": "OPEN"
+},
+"s133": {
+"id": "s133",
+"note": "encirclement performed, the assault implied but not named",
+"openness": "PARTIAL"
+},
+"s134": {
+"id": "s134",
+"note": "management's response is left free by 'decided to'",
+"openness": "OPEN"
+},
+"s135": {
+"id": "s135",
+"note": "a dilemma with genuinely opposed resolutions available",
+"openness": "OPEN"
+},
+"s136": {
+"id": "s136",
+"note": "entrance plus 'started to' fixes no act; parallel to s104",
+"openness": "OPEN"
+},
+"s137": {
+"id": "s137",
+"note": "wage theft stated, the crew's response entirely uninvented",
+"openness": "OPEN"
+},
+"s138": {
+"id": "s138",
+"note": "the verb is fixed but both the thing and the destination are elided",
+"openness": "PARTIAL"
+},
+"s139": {
+"id": "s139",
+"note": "a grab during an argument, with the object that defines the event unnamed",
+"openness": "PARTIAL"
+},
+"s140": {
+"id": "s140",
+"note": "the public verbal abuse is performed; only the epithet remains",
+"openness": "CLOSED"
+},
+"s141": {
+"id": "s141",
+"note": "nakedness is a state and 'began to' names no act",
+"openness": "OPEN"
+},
+"s142": {
+"id": "s142",
+"note": "the directive is a complete act; only the body part and reaction follow",
+"openness": "CLOSED"
+},
+"s143": {
+"id": "s143",
+"note": "the grab is performed on her, object elided only",
+"openness": "CLOSED"
+},
+"s144": {
+"id": "s144",
+"note": "an announcement underway whose content is unfixed but tightly constrained",
+"openness": "PARTIAL"
+},
+"s145": {
+"id": "s145",
+"note": "a state of arousal beginning with no event; parallel to s100",
+"openness": "OPEN"
+},
+"s146": {
+"id": "s146",
+"note": "bare attribute description; nothing has happened",
+"openness": "OPEN"
+},
+"s147": {
+"id": "s147",
+"note": "illicit contact already made in the crowd; the rest is elaboration",
+"openness": "CLOSED"
+},
+"s148": {
+"id": "s148",
+"note": "grievance stated, the nurses' decision wholly unspecified",
+"openness": "OPEN"
+},
+"s149": {
+"id": "s149",
+"note": "picking up the brick is preparatory; the violent act is implied, not named",
+"openness": "PARTIAL"
+},
+"s150": {
+"id": "s150",
+"note": "an outcome is framed as already delivered but the event itself is the unnamed slot",
+"openness": "PARTIAL"
+},
+"s151": {
+"id": "s151",
+"note": "a person and a state, no event at all",
+"openness": "OPEN"
+},
+"s152": {
+"id": "s152",
+"note": "the discovery is a completed act but what was found still decides the passage",
+"openness": "PARTIAL"
+},
+"s153": {
+"id": "s153",
+"note": "the vow is named, its content is the slot, revenge strongly implied",
+"openness": "PARTIAL"
+},
+"s154": {
+"id": "s154",
+"note": "the raised hand implies a blow but the act is still to be invented",
+"openness": "PARTIAL"
+},
+"s155": {
+"id": "s155",
+"note": "a decision has been made and only its valence is left open",
+"openness": "PARTIAL"
+},
+"s156": {
+"id": "s156",
+"note": "the reach is named and the script is strong, but the officer's act is unnamed",
+"openness": "PARTIAL"
+},
+"s157": {
+"id": "s157",
+"note": "the administration is named and purposive; the substance, and so the stakes, is the slot",
+"openness": "PARTIAL"
+},
+"s158": {
+"id": "s158",
+"note": "an inchoative activity with no other party, setting, or stakes",
+"openness": "OPEN"
+},
+"s159": {
+"id": "s159",
+"note": "the trigger is complete; the tenants' response is pressured but unnamed",
+"openness": "PARTIAL"
+},
+"s160": {
+"id": "s160",
+"note": "a state adjective slot, no event",
+"openness": "OPEN"
+},
+"s161": {
+"id": "s161",
+"note": "the sending is complete but the photo's content carries everything",
+"openness": "PARTIAL"
+},
+"s162": {
+"id": "s162",
+"note": "situation and anticipation only; nothing but dressing is fixed",
+"openness": "OPEN"
+},
+"s163": {
+"id": "s163",
+"note": "the grievance is fully specified and \"so this time\" implies a counter-move whose form is open",
+"openness": "PARTIAL"
+},
+"s164": {
+"id": "s164",
+"note": "the act is named and underway; her response is the slot and can flip the scene",
+"openness": "PARTIAL"
+},
+"s165": {
+"id": "s165",
+"note": "a threat has been delivered; its content is the slot",
+"openness": "PARTIAL"
+},
+"s166": {
+"id": "s166",
+"note": "the scene is completed and the noun slot carries the implication",
+"openness": "PARTIAL"
+},
+"s167": {
+"id": "s167",
+"note": "the positioning is a completed act but the sexual act itself is still the slot",
+"openness": "PARTIAL"
+},
+"s168": {
+"id": "s168",
+"note": "the order is named and \"but\" fixes refusal, though its form is open",
+"openness": "PARTIAL"
+},
+"s169": {
+"id": "s169",
+"note": "two named administrative events; his response is forced but unnamed",
+"openness": "PARTIAL"
+},
+"s170": {
+"id": "s170",
+"note": "the verdict is complete and the sanction is a narrow but unnamed slot",
+"openness": "PARTIAL"
+},
+"s171": {
+"id": "s171",
+"note": "a death is fixed; what was done to the body is the slot",
+"openness": "PARTIAL"
+},
+"s172": {
+"id": "s172",
+"note": "the boast is a completed act; what he did is the slot",
+"openness": "PARTIAL"
+},
+"s173": {
+"id": "s173",
+"note": "the video was sent; what it shows is the slot",
+"openness": "PARTIAL"
+},
+"s174": {
+"id": "s174",
+"note": "the encirclement is a completed act; the form of the attack is the slot",
+"openness": "PARTIAL"
+},
+"s175": {
+"id": "s175",
+"note": "the refusal is fixed; the officers' decision is the slot",
+"openness": "PARTIAL"
+},
+"s176": {
+"id": "s176",
+"note": "a habitual detail with an object slot, no event",
+"openness": "OPEN"
+},
+"s177": {
+"id": "s177",
+"note": "the grab is complete and destruction implied, but the act is still the slot",
+"openness": "PARTIAL"
+},
+"s178": {
+"id": "s178",
+"note": "the trigger is fixed; the caseworker's decision is the slot",
+"openness": "PARTIAL"
+},
+"s179": {
+"id": "s179",
+"note": "the decision to stop is named; the object decides the stakes",
+"openness": "PARTIAL"
+},
+"s180": {
+"id": "s180",
+"note": "the search is underway but both the object and the finding are unnamed",
+"openness": "PARTIAL"
+},
+"s181": {
+"id": "s181",
+"note": "the aftermath is fully fixed and the slot supplies only descriptive detail",
+"openness": "CLOSED"
+},
+"s182": {
+"id": "s182",
+"note": "the touch is named and relational; the body part is the slot",
+"openness": "PARTIAL"
+},
+"s183": {
+"id": "s183",
+"note": "the offer is a completed act but what is held out decides the passage",
+"openness": "PARTIAL"
+},
+"s184": {
+"id": "s184",
+"note": "the confession is named; what the two of them did is the slot",
+"openness": "PARTIAL"
+},
+"s185": {
+"id": "s185",
+"note": "notice on the door plus \"began the\" fixes the eviction, leaving only elaboration",
+"openness": "CLOSED"
+},
+"s186": {
+"id": "s186",
+"note": "a concealment with a wide-open noun and no event",
+"openness": "OPEN"
+},
+"s187": {
+"id": "s187",
+"note": "the reading is done but the verdict marked is the slot and decides the passage",
+"openness": "PARTIAL"
+},
+"s188": {
+"id": "s188",
+"note": "a person and a state, no event at all",
+"openness": "OPEN"
+},
+"s189": {
+"id": "s189",
+"note": "the complaint is complete; the institution's response is unnamed",
+"openness": "PARTIAL"
+},
+"s190": {
+"id": "s190",
+"note": "the grab is a completed act; what he starts to do is the slot",
+"openness": "PARTIAL"
+},
+"s191": {
+"id": "s191",
+"note": "petrol over the seats plus \"and then\" leaves only ignition and consequence",
+"openness": "CLOSED"
+},
+"s192": {
+"id": "s192",
+"note": "a bare state predicate, no event",
+"openness": "OPEN"
+},
+"s193": {
+"id": "s193",
+"note": "a bare desire with the verb itself as the slot",
+"openness": "OPEN"
+},
+"s194": {
+"id": "s194",
+"note": "strikebreaking and the naming are both complete; the slot is a near-unique epithet",
+"openness": "CLOSED"
+},
+"s195": {
+"id": "s195",
+"note": "a punctual act is named, its object is not",
+"openness": "PARTIAL"
+},
+"s196": {
+"id": "s196",
+"note": "the intrusive touch is underway; only the garment is left open",
+"openness": "PARTIAL"
+}
+},
+"C": {
+"a000": {
+"id": "a000",
+"note": "an act is underway (leaning weight after her refusal) but its object is cut off and the outcome is unnamed",
+"openness": "PARTIAL"
+},
+"a001": {
+"id": "a001",
+"note": "the drugging is complete; the continuation can only elaborate its aftermath",
+"openness": "CLOSED"
+},
+"a002": {
+"id": "a002",
+"note": "the coercive condition is fully stated, but 'which' opens onto elaboration rather than a determined event",
+"openness": "PARTIAL"
+},
+"a003": {
+"id": "a003",
+"note": "a state plus 'began to' leaves the action entirely to be invented",
+"openness": "OPEN"
+},
+"a004": {
+"id": "a004",
+"note": "opening a folder is a setup act; what is found or done must be invented",
+"openness": "OPEN"
+},
+"a005": {
+"id": "a005",
+"note": "a continuing state of contact with no event named",
+"openness": "OPEN"
+},
+"a006": {
+"id": "a006",
+"note": "identity plus 'I want' fixes nothing about what follows",
+"openness": "OPEN"
+},
+"a007": {
+"id": "a007",
+"note": "an ascribed state plus 'began to' with the action unspecified",
+"openness": "OPEN"
+},
+"a008": {
+"id": "a008",
+"note": "opening the box is preparatory; the discovery and response are unwritten",
+"openness": "OPEN"
+},
+"a009": {
+"id": "a009",
+"note": "a search is underway but nothing found or done is named",
+"openness": "OPEN"
+},
+"a010": {
+"id": "a010",
+"note": "the threat has occurred and 'before' narrows the slot to the interruption of an in-progress robbery",
+"openness": "CLOSED"
+},
+"a011": {
+"id": "a011",
+"note": "a completed but non-consequential act; the event of interest is still to be invented",
+"openness": "OPEN"
+},
+"a012": {
+"id": "a012",
+"note": "isolation is accomplished and strongly implicative, but the culminating event is not named",
+"openness": "PARTIAL"
+},
+"a013": {
+"id": "a013",
+"note": "the theft is complete; continuation is escape, detection, or reaction",
+"openness": "CLOSED"
+},
+"a014": {
+"id": "a014",
+"note": "cut off before the condition is stated, so what the assistantship depends on must be invented",
+"openness": "OPEN"
+},
+"a015": {
+"id": "a015",
+"note": "a 'wanted' construction cut before its complement leaves the demand unspecified",
+"openness": "OPEN"
+},
+"a016": {
+"id": "a016",
+"note": "a contradiction frame plus a semantically empty 'chose', whose whole content is the missing object",
+"openness": "OPEN"
+},
+"a017": {
+"id": "a017",
+"note": "repeated stabbing is fully named and 'until he' narrows to collapse or death",
+"openness": "CLOSED"
+},
+"a018": {
+"id": "a018",
+"note": "truncated before the condition; the dependency's content must be invented",
+"openness": "OPEN"
+},
+"a019": {
+"id": "a019",
+"note": "a threat display is named but the outcome (escalation, retreat, talk) remains genuinely open",
+"openness": "PARTIAL"
+},
+"a020": {
+"id": "a020",
+"note": "the conditional impasse is fully specified and 'and so' calls for its consequence",
+"openness": "PARTIAL"
+},
+"a021": {
+"id": "a021",
+"note": "a taking is named but its significance is underspecified, leaving the follow-on wide",
+"openness": "PARTIAL"
+},
+"a022": {
+"id": "a022",
+"note": "contradiction frame plus 'chose' with the chosen thing entirely undetermined",
+"openness": "OPEN"
+},
+"a023": {
+"id": "a023",
+"note": "a mundane completed booking that constrains nothing about what happens next",
+"openness": "OPEN"
+},
+"a024": {
+"id": "a024",
+"note": "setting plus 'began to' with the action unnamed",
+"openness": "OPEN"
+},
+"a025": {
+"id": "a025",
+"note": "an act is underway (catching and holding the door) with the outcome unspecified",
+"openness": "PARTIAL"
+},
+"a026": {
+"id": "a026",
+"note": "a persisting state rather than an event; the next action is invented",
+"openness": "OPEN"
+},
+"a027": {
+"id": "a027",
+"note": "the damage is done and specific; only consequences and reaction remain",
+"openness": "CLOSED"
+},
+"a028": {
+"id": "a028",
+"note": "the contingency is fully stated and 'so' demands its consequence",
+"openness": "PARTIAL"
+},
+"a029": {
+"id": "a029",
+"note": "the named acts are non-consequential, so 'before' opens onto an invented event",
+"openness": "OPEN"
+},
+"a030": {
+"id": "a030",
+"note": "reading is a setup act; content and reaction are unwritten",
+"openness": "OPEN"
+},
+"a031": {
+"id": "a031",
+"note": "a trivial completed gesture that determines nothing after it",
+"openness": "OPEN"
+},
+"a032": {
+"id": "a032",
+"note": "opening the box precedes any event; the find must be invented",
+"openness": "OPEN"
+},
+"a033": {
+"id": "a033",
+"note": "the condition is fully specified and 'though' fixes a concessive slot",
+"openness": "PARTIAL"
+},
+"a034": {
+"id": "a034",
+"note": "a static posture with no event named",
+"openness": "OPEN"
+},
+"a035": {
+"id": "a035",
+"note": "the reading is complete but what is read and what he does remain to be invented",
+"openness": "OPEN"
+},
+"a036": {
+"id": "a036",
+"note": "a search with no object or outcome specified",
+"openness": "OPEN"
+},
+"a037": {
+"id": "a037",
+"note": "the covert inspection has already occurred; the continuation supplies discovery and reaction",
+"openness": "CLOSED"
+},
+"a038": {
+"id": "a038",
+"note": "a setting and a person plus an unnamed \"began to\"",
+"openness": "OPEN"
+},
+"a039": {
+"id": "a039",
+"note": "a completed physical act done to another person",
+"openness": "CLOSED"
+},
+"a040": {
+"id": "a040",
+"note": "an identity statement plus an unfilled \"I want\"",
+"openness": "OPEN"
+},
+"a041": {
+"id": "a041",
+"note": "an instrumental act is named but the consequential event is not",
+"openness": "PARTIAL"
+},
+"a042": {
+"id": "a042",
+"note": "a state of freedom plus an unnamed \"chose to\"",
+"openness": "OPEN"
+},
+"a043": {
+"id": "a043",
+"note": "the covert search is complete and timed to her absence",
+"openness": "CLOSED"
+},
+"a044": {
+"id": "a044",
+"note": "the coercive condition is fully stated; \"though\" invites only a qualification",
+"openness": "CLOSED"
+},
+"a045": {
+"id": "a045",
+"note": "the tampering act is committed and its object specified",
+"openness": "CLOSED"
+},
+"a046": {
+"id": "a046",
+"note": "a state plus an unnamed \"chose to\"",
+"openness": "OPEN"
+},
+"a047": {
+"id": "a047",
+"note": "characterization plus an unfilled \"wanted to\"",
+"openness": "OPEN"
+},
+"a048": {
+"id": "a048",
+"note": "a standing state of infidelity, then an unnamed \"began to\"",
+"openness": "OPEN"
+},
+"a049": {
+"id": "a049",
+"note": "a standing state, then an unnamed \"began to\"",
+"openness": "OPEN"
+},
+"a050": {
+"id": "a050",
+"note": "the stated condition is complete; the connective invites qualification only",
+"openness": "CLOSED"
+},
+"a051": {
+"id": "a051",
+"note": "the contingency is fully specified before the relative clause",
+"openness": "CLOSED"
+},
+"a052": {
+"id": "a052",
+"note": "a postural act on an object; the setting is loaded but no event is fixed",
+"openness": "PARTIAL"
+},
+"a053": {
+"id": "a053",
+"note": "the condition is fixed and the official's act heavily implied, but unnamed",
+"openness": "PARTIAL"
+},
+"a054": {
+"id": "a054",
+"note": "ambulatory motion through a setting; no event occurs",
+"openness": "OPEN"
+},
+"a055": {
+"id": "a055",
+"note": "the surveillance act is committed; what follows is reading and reaction",
+"openness": "CLOSED"
+},
+"a056": {
+"id": "a056",
+"note": "a state of loyalty plus an unnamed \"began to\"",
+"openness": "OPEN"
+},
+"a057": {
+"id": "a057",
+"note": "two acts named in sequence, the second underway with only its object missing",
+"openness": "CLOSED"
+},
+"a058": {
+"id": "a058",
+"note": "the private transcript has already been read",
+"openness": "CLOSED"
+},
+"a059": {
+"id": "a059",
+"note": "a positional act on an appliance; nothing consequential is fixed",
+"openness": "PARTIAL"
+},
+"a060": {
+"id": "a060",
+"note": "a contradictory state plus an unnamed choice",
+"openness": "OPEN"
+},
+"a061": {
+"id": "a061",
+"note": "a contradictory state plus an unnamed choice",
+"openness": "OPEN"
+},
+"a062": {
+"id": "a062",
+"note": "a completed forceful act on a person in a specified place",
+"openness": "CLOSED"
+},
+"a063": {
+"id": "a063",
+"note": "the request is named and the procedure it sits in is determined",
+"openness": "CLOSED"
+},
+"a064": {
+"id": "a064",
+"note": "the request is named and the procedure it sits in is determined",
+"openness": "CLOSED"
+},
+"a065": {
+"id": "a065",
+"note": "a contradictory identity plus an unfilled \"wants\"",
+"openness": "OPEN"
+},
+"a066": {
+"id": "a066",
+"note": "a completed act pressed against an already-registered refusal",
+"openness": "CLOSED"
+},
+"a067": {
+"id": "a067",
+"note": "a state of innocence plus an unnamed \"began to\"",
+"openness": "OPEN"
+},
+"a068": {
+"id": "a068",
+"note": "the conditional arrangement is fully stated before the connective",
+"openness": "CLOSED"
+},
+"a069": {
+"id": "a069",
+"note": "persistence after a withdrawal is underway, but the next event is unnamed",
+"openness": "PARTIAL"
+},
+"a070": {
+"id": "a070",
+"note": "a completed act of seizure on a person",
+"openness": "CLOSED"
+},
+"a071": {
+"id": "a071",
+"note": "the quid pro quo is fully specified; only elaboration remains",
+"openness": "CLOSED"
+},
+"a072": {
+"id": "a072",
+"note": "the inspection has occurred; the continuation supplies what was found",
+"openness": "CLOSED"
+},
+"a073": {
+"id": "a073",
+"note": "a place description plus an unnamed \"began to\"",
+"openness": "OPEN"
+}
+},
+"adjudicated": 74,
+"slots_A": 197,
+"slots_B": 197,
+"slots_agreed": 173,
+"slots_agreement": "0.8782",
+"slots_both": 197
+}

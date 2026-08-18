@@ -125,14 +125,79 @@ def report():
     print("\n  -> %s" % os.path.join(RESULTS, "openness.csv"))
 
 
+def round2(src=None):
+    """Slot corpus + third-coder adjudication of the contested 44.
+
+    THE ANCHORS ARE THE POINT. A coder shown only contested items sees an
+    unrepresentative run of hard cases and drifts to PARTIAL. 30 items where A
+    and B already agreed were shuffled in indistinguishably, so C's agreement
+    with them CALIBRATES it. If C misses the settled cases, C is a third opinion
+    and the ties stay open."""
+    import collections
+    from scipy import stats
+    p = os.path.join(RESULTS, "round2.json")
+    if src:
+        d = json.load(open(src, encoding="utf-8"))
+        r = d.get("result", d)
+        if isinstance(r, str):
+            r = json.loads(r)
+        json.dump(r, open(p, "w", encoding="utf-8"), indent=0, sort_keys=True)
+        print("saved -> %s" % p)
+    R = json.load(open(p, encoding="utf-8"))
+    A, B, C = R["A"], R["B"], R["C"]
+    SK = json.load(open(os.path.join(RESULTS, "slots_key.json"), encoding="utf-8"))
+    AK = json.load(open(os.path.join(RESULTS, "adjudicate_key.json"), encoding="utf-8"))
+
+    both = [i for i in A if i in B]
+    ag = {i: A[i]["openness"] for i in both if A[i]["openness"] == B[i]["openness"]}
+    print("=== SLOT CORPUS: %d prompts, agreement %s ===" % (len(both), R["slots_agreement"]))
+    print("agreed %d, contested %d EXCLUDED\n" % (len(ag), len(both) - len(ag)))
+    c = collections.Counter(ag.values())
+    for k in ("OPEN", "PARTIAL", "CLOSED"):
+        print("  %-8s %4d  (%.0f%%)" % (k, c[k], 100 * c[k] / len(ag)))
+    print("\n  %-20s %6s %8s %8s %8s" % ("source", "n", "OPEN", "PARTIAL", "CLOSED"))
+    by = collections.defaultdict(collections.Counter)
+    for i, v in ag.items():
+        by[SK[i]["source"]][v] += 1
+    for s_, cc in sorted(by.items(), key=lambda x: -sum(x[1].values())):
+        n = sum(cc.values())
+        print("  %-20s %6d %7.0f%% %7.0f%% %7.0f%%"
+              % (s_, n, 100 * cc["OPEN"] / n, 100 * cc["PARTIAL"] / n, 100 * cc["CLOSED"] / n))
+
+    print("\n=== ADJUDICATION: is the third coder calibrated? ===")
+    anc = [i for i in C if not AK[i]["is_contested"]]
+    hit = sum(1 for i in anc if C[i]["openness"] == AK[i]["A"])
+    t = stats.binomtest(hit, len(anc), 1 / 3)
+    print("  ANCHORS  C matches the A/B consensus on %d of %d = %.0f%%  (chance 33%%, p=%.3g)"
+          % (hit, len(anc), 100 * hit / len(anc), t.pvalue))
+    ok = hit / len(anc) >= 0.70
+    print("  -> %s" % ("CALIBRATED. C's verdicts on the contested items count."
+                       if ok else "NOT CALIBRATED. C is a third opinion; ties stay open."))
+
+    con = [i for i in C if AK[i]["is_contested"]]
+    sideA = sum(1 for i in con if C[i]["openness"] == AK[i]["A"])
+    sideB = sum(1 for i in con if C[i]["openness"] == AK[i]["B"])
+    neither = len(con) - sideA - sideB
+    print("\n  CONTESTED %d: C sides with A on %d, with B on %d, with NEITHER on %d"
+          % (len(con), sideA, sideB, neither))
+    if ok:
+        res = collections.Counter(C[i]["openness"] for i in con if C[i]["openness"] in
+                                  (AK[i]["A"], AK[i]["B"]))
+        print("  resolved %d of %d: %s" % (sideA + sideB, len(con), dict(res)))
+        print("  %d unresolved (C picked the third option) and stay excluded" % neither)
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--save")
     ap.add_argument("--report", action="store_true")
+    ap.add_argument("--round2", nargs="?", const=True)
     a = ap.parse_args()
     if a.save:
         save(a.save)
     elif a.report:
         report()
+    elif a.round2:
+        round2(None if a.round2 is True else a.round2)
     else:
         ap.print_help()
