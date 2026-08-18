@@ -130,6 +130,51 @@ ignored.** Base models degenerate and leak web paratext -- bylines, post dates,
 download links. An interiority measure that does not condition on those is
 measuring fluency in part.
 
+# STEP 3: FRAME EXIT, PER PASSAGE, FROM M02's DECLARED BATTERY
+
+`run.py --exits` -> `results/frame_exit.parquet`. **One row per (model, prompt,
+sample_idx)**, 173,360 rows, key verified UNIQUE, arms exactly balanced at 86,680
+each, all 197 prompts joining `prompt_kind.csv`.
+
+**The battery is M02's, copied VERBATIM from `exit_markers.py`'s TYPES block** --
+seven types, declared a priori, already run there over 190,261 passages and ~714k
+beams. Not a new instrument.
+
+    type          base    aligned    delta
+    E-QUIZ       4.11%     3.71%     -0.40
+    E-QA         4.80%     4.91%     +0.10
+    E-TASK       1.39%     1.05%     -0.33
+    E-ASSIST     0.23%     0.56%     +0.33
+    E-MENTION    0.36%     1.21%     +0.85
+    E-META       0.18%     0.28%     +0.10
+    REFUSAL      0.01%     0.05%     +0.04
+    any_exit     9.21%     9.85%     +0.64
+
+**~9.5% of f11_l2 passages exit the frame, and the rate is near-symmetric across
+arms.** That symmetry is what makes it usable as a filter: dropping exited
+passages removes about the same 9% from each side rather than gutting one arm.
+
+**REFUSAL is EXCLUDED from `any_exit`.** M02 declares it a priori and reports it
+apart from exit always; folding it in would change what `any_exit` means relative
+to every M02 number.
+
+## THE ONE TYPE THAT MOVES
+
+`E-MENTION` runs 3.4x higher in the aligned arm (+0.85pp) -- use-to-mention
+collapse, the model talking ABOUT the word rather than with it. That is adjacent
+to the interiority question rather than merely noise, and should be looked at
+rather than filtered away without a glance. `E-QUIZ` and `E-TASK` run the other
+way, base higher, consistent with base models falling into scraped exercise
+formats.
+
+## WHAT THE BATTERY STILL DOES NOT COVER
+
+**Coherence collapse** -- word-salad, script breakage, referent dissolution --
+which the open coding proposed at 6/6 and no M02 instrument measures. Frame exit
+and degeneration are different failures: a passage can be perfectly coherent
+while answering a quiz, and can collapse into noun-salad without ever leaving the
+frame.
+
 # NOT DONE
 
 - The passage coding itself. Nothing has been measured about what the models
