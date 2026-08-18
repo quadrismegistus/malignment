@@ -492,6 +492,110 @@ class TWPRunner:
                 "minutes": (time.time() - t0) / 60}
 
 
+    def topup(self, rules, root=None, limit=None, dict_path=None, verbose=True):
+        """PASS 2: score the words this model's LINEAGE cleared and it did not.
+
+            Runner(ck).topup(rules=V4.ADOPTED)
+
+        `expand` gates on `P0 >= theta`, so a word below the gate is ABSENT from
+        the cell and every consumer imputes zero -- ~30% of falling mass. This
+        measures them with `score_words4` over `corpus.topup_todo`, which is the
+        lineage union minus what the model already has.
+
+        ## IT WRITES A NEW CELL, IT DOES NOT MUTATE THE OLD ONE
+
+        The key gains `topup: True` beside `rule_version`/`rules`/`prompt_cache`,
+        and the record holds the MERGED distribution -- expand's rows plus the
+        scored ones, with `tail` already decremented. So a consumer asks for
+        topped-up cells or plain ones and gets a self-contained distribution
+        either way, with **no merge protocol to forget**. The pass-1 cell is
+        untouched and remains comparable.
+
+        Same reasoning as `rule_version` being in the key: a different instrument
+        is a different key, and the old rows stay for comparison.
+
+        ## THE `tail` DECREMENT, AND WHY IT CAN REFUSE
+
+        These words' mass sits in `tail` by construction. Writing them without
+        subtracting breaks conservation, which is exactly 1.000000 on all 984,857
+        stored cells. So `tail` is reduced by exactly the mass written -- and if
+        that mass EXCEEDS `tail`, the cell is refused rather than clamped.
+        Measured on CT-LLM-Base before building this: median tail 0.2102 against
+        ~20 sub-theta words, ample -- but **min tail is 0.002668**, which 20 words
+        at up to theta could exceed. The overflow is a real case, and it means the
+        sub-theta words are not where this assumes, which is a refusal and not a
+        rounding error.
+        """
+        from . import corpus
+        from . import twp_v4 as V4
+
+        ck = self.ck
+        os.makedirs(ck.dir, exist_ok=True)
+        say = (lambda m: print(m, flush=True)) if verbose else (lambda m: None)
+        todo_words = corpus.topup_todo(ck.model_id, root=root)
+        base_key = lambda p: dict(ck.key(p, rules), topup=True)          # noqa: E731
+        st = ck.stash(PRODUCER)
+        have1 = {k["prompt"]: v for k, v in st.items()
+                 if k.get("rule_version") == V4.RULE_VERSION
+                 and not k.get("topup")
+                 and k.get("rules") == rules.label()}
+        todo = [p for p in sorted(todo_words) if p in have1 and base_key(p) not in st]
+        if limit:
+            todo = todo[:limit]
+        say("  %s\n  topup: %d prompts with missing words | %d have a pass-1 cell"
+            " | %d to run" % (ck, len(todo_words), len(have1), len(todo)))
+        if not todo:
+            return dict(model=ck.model_id, written=0, refused=0, skipped=0)
+
+        ld = load_for_twp(ck, dict_path=dict_path, purge=False, say=say)
+        model, tok, dev = ld.model, ld.tok, ld.dev
+        bmask, cjk, pol = ld.bmask, ld.cjk, ld.bos_policy
+        n_ok = n_ref = n_skip = 0
+        refuse_path = os.path.join(os.path.dirname(st.path), "topup_refused.jsonl")
+        for i, p in enumerate(todo, 1):
+            rec1 = have1[p]
+            try:
+                got, refused, total = V4.score_words4(
+                    model, tok, p, todo_words[p], dev, bmask, cjk=cjk,
+                    bos_policy=pol, rules=rules)
+            except Exception as e:                                  # noqa: BLE001
+                n_skip += 1
+                continue
+            res = dict(rec1["residual"])
+            #: **REFUSE, DO NOT CLAMP.** More mass than `tail` holds means the
+            #: sub-theta words are not where this assumes.
+            if total > res["tail"]:
+                n_ref += 1
+                with open(refuse_path, "a", encoding="utf-8") as fh:
+                    fh.write(json.dumps({"model": ck.model_id, "prompt": p,
+                                         "topup_mass": total, "tail": res["tail"],
+                                         "n_words": len(got)}, ensure_ascii=False) + "\n")
+                continue
+            res["tail"] = res["tail"] - total
+            #: `n_paths = 1` BY CONSTRUCTION -- a scored row is a single-path
+            #: lower bound, an expand row is beam-accumulated. Marked so nothing
+            #: reads them as the same measurement.
+            rows = list(rec1["rows"]) + [
+                {"word": w, "t1": int(t), "p": float(v), "n_paths": 1, "topup": True}
+                for (w, t), v in got.items()]
+            cons = sum(r["p"] for r in rows) + res["tail"] + res["drop"] + \
+                res["open"] + res["mojibake"] + res.get("term_floored", 0.0)
+            if abs(cons - 1.0) > 1e-4:
+                n_ref += 1
+                with open(refuse_path, "a", encoding="utf-8") as fh:
+                    fh.write(json.dumps({"model": ck.model_id, "prompt": p,
+                                         "conservation": cons}, ensure_ascii=False) + "\n")
+                continue
+            st[base_key(p)] = dict(rec1, rows=rows, residual=res, conservation=cons,
+                                   topup=True, topup_words=len(got),
+                                   topup_mass=total, topup_refused=len(refused))
+            n_ok += 1
+            if verbose and i % 200 == 0:
+                say("    %d/%d  ok=%d refused=%d" % (i, len(todo), n_ok, n_ref))
+        say("  topup done: %d written, %d refused, %d skipped" % (n_ok, n_ref, n_skip))
+        return dict(model=ck.model_id, written=n_ok, refused=n_ref, skipped=n_skip)
+
+
 def main():
     from .checkpoint import Checkpoint
     ap = argparse.ArgumentParser()
