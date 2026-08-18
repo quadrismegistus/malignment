@@ -109,3 +109,24 @@ should NOT move all four aspects together.
 
 **A uniform negative shift across all four is the boring outcome and it is the
 one my reading predicts against.** Reported whatever it is.
+
+---
+
+## A2 — 2026-08-18. Both arms ran. PKU does not replicate; the decomposition is UNDECIDED.
+
+Numbers in README. Three things to record against this registration itself:
+
+**The `n>=100` control threshold was a bad declaration.** It selected 13.7% of the
+data, skewed to gpt-4/gpt-3.5 against llama-2, and returned 20.9% against a pooled
+43.9%. At n>=30, coverage 74.2%, weighted 42.4% -- the control PASSES. I chose a
+threshold for looking stringent without checking what it would pick up, which is
+the `cjk_tier` defect in a new place.
+
+**The A1 magnitude bar (+/-0.15) was set without an estimate of plausible effect
+size.** Observed within-model deltas run 0.049 to 0.101, so the bar could not have
+been cleared by anything short of an effect twice the size of the largest one
+present. UNDECIDED here means the bar was wrong, not that the data is mute.
+
+**And the two aspect analyses disagree by sign**, because within-prompt carries
+generator identity and within-model does not. Registered primary is within-model
+and stands as primary. The disagreement is reported, not resolved.
