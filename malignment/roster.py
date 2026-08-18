@@ -1049,6 +1049,66 @@ if __name__ == "__main__":
     sys.exit(main())
 
 
+
+def lineages(ops=ALIGNING, measured=None):
+    """{root: [every model reached from it]} -- the SIBLING SET, not the path.
+
+        roster.lineages()["meta-llama/Llama-3.1-8B"]
+        -> 11 models: Instruct, Tulu-3 SFT/DPO, the no-safety ablation,
+           Hermes, Dolphin, R1-Distill ...
+
+    **`endpoints()` AND `paths()` BOTH COLLAPSE A LINEAGE TO ONE ENDPOINT**, and
+    that is right for their questions and wrong for this one. RH's comparisons
+    are SIBLING comparisons -- `llama-base` against `llama-instruct`, against
+    `tulu-sft`, against `tulu-dpo`, against the no-safety ablation -- four
+    children of one root, which `endpoints()` reports as a single row. Nothing in
+    the population vocabulary named that set, so the v4 union top-up had to walk
+    the edge list by hand, and the first hand-walk was wrong.
+
+    ## WHY THE DEFAULT IS `ALIGNING` AND NOT `DERIVING`
+
+    `models.yaml` states it and nothing enforced it: **`scale` and `predecessor`
+    are RELATING, NOT DERIVING.** Walking every edge makes
+    `Olmo-3-1025-7B <- predecessor <- OLMo-2-0425-1B` a parent link and reports a
+    fifteen-model OLMo lineage that does not exist -- two different pretraining
+    runs merged because one succeeds the other. `DERIVING` already excludes
+    those, but it still admits `SIZE_OPS` (`upscale`, `prune`), which put
+    Falcon3-1B and Falcon3-10B in one group: a SCALE comparison, not an
+    alignment one.
+
+    So the default is the set the comparisons actually use. Pass `ops=DERIVING`
+    to include distillation and continual pretraining deliberately.
+
+    Every node appears exactly once, including roots with no children -- a
+    lineage of one is a fact about the publisher, not an absence.
+    """
+    d = load()
+    par = {c: p for p, op, c in (d.get("edges") or []) if op in ops}
+
+    def root(m):
+        seen = set()
+        while m in par and m not in seen:
+            seen.add(m)
+            m = par[m]
+        return m
+
+    #: **THE SAME QUERY `population()` USES**, not a private helper. My first
+    #: version called `_measured_ids()`, which does not exist -- an untested
+    #: keyword argument that raised NameError the moment anyone passed it, and
+    #: the three tests I wrote alongside all left it at the default.
+    keep = None
+    if measured:
+        from . import ch
+        keep = {r["model"] for r in
+                ch.query("SELECT DISTINCT model FROM {db}.twp_words")}
+    out = {}
+    for m in sorted(d.get("nodes") or {}):
+        if keep is not None and m not in keep:
+            continue
+        out.setdefault(root(m), []).append(m)
+    return {r: sorted(v) for r, v in sorted(out.items())}
+
+
 def paths(measured=None):
     """[{base, endpoint, nodes, ops, n_steps}] -- the FULL path to each lineage's endpoint.
 

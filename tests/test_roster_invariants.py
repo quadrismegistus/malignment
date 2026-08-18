@@ -216,3 +216,70 @@ def test_unsupported_is_conditioned_on_the_value():
                                       "quote": "a model for instruction following"}]}}}
     got = {m for m, _f, _v, _q in attest.unsupported(doc)}
     assert got == {"x/present_bad"}, got
+
+
+def test_lineages_do_not_follow_relating_edges():
+    """`scale` and `predecessor` RELATE lineages; they do not derive them.
+
+    RED RECEIPT: walk every edge instead of `ALIGNING` and this fails on Olmo-3.
+    `models.yaml` states the rule -- *"relating (NOT deriving): scale |
+    predecessor"* -- and nothing enforced it, so the first hand-walk of the edge
+    list for the v4 union produced a FIFTEEN-model OLMo lineage by following
+    `Olmo-3-1025-7B <- predecessor <- OLMo-2-0425-1B`. Two different pretraining
+    runs merged because one succeeds the other.
+    """
+    L = roster.lineages()
+    assert "allenai/Olmo-3-1025-7B" in L, (
+        "Olmo-3 is not a root -- a relating edge is being followed as a parent")
+    assert "allenai/OLMo-2-0425-1B" in L, "OLMo-2 is not a root"
+    assert len(L["allenai/OLMo-2-0425-1B"]) < 10, (
+        "OLMo-2 has %d members; it absorbed a successor run"
+        % len(L["allenai/OLMo-2-0425-1B"]))
+
+
+def test_lineages_keep_siblings_together():
+    """A lineage is the SIBLING SET, which `endpoints()` collapses to one row.
+
+    RED RECEIPT: implement this over `endpoints()` and it returns 2 for Llama,
+    not 11. The four-way comparison the campaign rests on -- base against
+    instruct, against tulu-sft, against tulu-dpo, against the no-safety ablation
+    -- is four children of ONE root, and `endpoints()` reports one endpoint per
+    lineage by construction.
+    """
+    L = roster.lineages()
+    llama = L.get("meta-llama/Llama-3.1-8B", [])
+    assert len(llama) >= 10, "Llama-3.1-8B has %d members, expected ~11" % len(llama)
+    for want in ("meta-llama/Llama-3.1-8B-Instruct",
+                 "allenai/Llama-3.1-Tulu-3-8B-DPO"):
+        assert want in llama, "%s is not in the Llama lineage" % want
+
+
+def test_every_node_is_in_exactly_one_lineage():
+    """Partition, not a cover. A root with no children is a lineage of one.
+
+    RED RECEIPT: drop the `setdefault` root case and childless roots vanish --
+    silently, since the total only falls by the number of such nodes and nothing
+    reports it. A lineage of one is a fact about the publisher, not an absence.
+    """
+    L = roster.lineages()
+    seen = [m for v in L.values() for m in v]
+    assert len(seen) == len(set(seen)), "a node appears in two lineages"
+    assert len(seen) == len(roster.population("all")), (
+        "%d nodes across lineages, %d declared" % (len(seen), len(roster.population("all"))))
+
+
+def test_lineages_measured_filter_runs():
+    """`measured=True` must EXECUTE, not just parse.
+
+    RED RECEIPT: the first version called `_measured_ids()`, a helper that does
+    not exist. It raised NameError for anyone who passed the argument, and the
+    three tests written beside it all left the default -- **a keyword nobody
+    exercises is a keyword nobody has tested**, and the parameter list makes it
+    look supported.
+    """
+    all_l = roster.lineages()
+    got = roster.lineages(measured=True)
+    assert isinstance(got, dict)
+    n_all = sum(len(v) for v in all_l.values())
+    n_got = sum(len(v) for v in got.values())
+    assert 0 < n_got <= n_all, "measured=True kept %d of %d" % (n_got, n_all)
