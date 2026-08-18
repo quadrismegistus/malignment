@@ -1,8 +1,16 @@
 """Prepare inputs for a taxonomy workflow, and ingest what comes back.
 
-    python run.py --prepare --frames union stroking --pairs llama smol
+    python run.py --prepare --frames union stroking --pairs llama smol \
+                  --orientations fwd rev --raters 2      # prints the run plan
+    python run.py --emit | ...          # rendered prompts, as workflow args
     python run.py --ingest  wf_ba79d894-172
     python run.py --list
+
+`--prepare` ends by stating the run: frames x pairs x orientations x raters, the
+agent count that follows from it, and what was already in the stash. Reversal is
+the factor most easily forgotten, since `rev` is the same measurement read the
+other way and does not feel like more work, so the plan names it and says NO
+REVERSAL when it is absent.
 
 ## WHY A PREPARE/INGEST SPLIT AND NOT ONE SCRIPT
 
@@ -13,10 +21,26 @@ give is an artifact -- the transcripts are on disk under
 chose, and the identity of the cell being coded survives only as a filename
 mentioned inside the prompt text.
 
-So this file owns both ends. `--prepare` writes the input JSONs AND a manifest
-recording what each one is; `--ingest` reads a finished run's transcripts and
-joins on that manifest. Recovering identity by regex over a prompt would work
-today and break the first time the prompt wording changes.
+So this file owns both ends. `--prepare` renders the FULL prompt for each cell
+into a manifest; `--emit` prints those prompts for a workflow to send inline;
+`--ingest` reads a finished run's transcripts and joins back.
+
+**The join is a hash of the prompt as sent.** An earlier version had the rater
+open a JSON file and matched the filename out of the transcript, which cost a
+tool call, left the transcript holding a path instead of the data, and made
+identity depend on a wording that was still moving. Substituting the fragment and
+word table into the template here means the prompt IS the cell: exact join, and a
+record auditable with nothing beside it.
+
+## PREPARE ASKS THE STORE BEFORE SPENDING A RATER
+
+The key is fully determined at prepare time, prompt included, so "has this exact
+instrument already been run on this exact cell for this rater" is a lookup rather
+than an inference from filenames. Cells already stashed are dropped from the
+manifest and never emitted; `--redo` overrides. `make_key()` is shared by both
+ends so they cannot drift into two namespaces -- the failure mode there is silent,
+since the records land and only a lookup that should hit and misses says
+otherwise.
 
 ## THE STASH, AND THE TRAP IN IT
 
@@ -27,7 +51,32 @@ learned after pinning options that were not honoured and never finding out.
 
     engine   jsonl    committable, diffable, greppable
     flat     True     one file, not a tree
-    key      a DICT   {instrument, frame, base, aligned, orientation, rater}
+    key      a DICT   see `make_key`
+
+The key is the full specification of what was asked:
+
+    instrument       version string, read from INSTRUMENT.md's header
+    instrument_sha   sha12 of the fenced PROMPT TEMPLATE ONLY
+    frame_prompt     the slot prompt that was analysed
+    frame_prompt_id  its corpus item_id, e.g. nn_startedstrokinghis_70df8778
+    base, aligned    the two checkpoints
+    orientation      fwd or rev
+    rater            which independent pass. Nothing in a transcript says which
+                     pass an agent was, so `--ingest` assigns it by pairing the
+                     agents that share a prompt against the manifest rows for
+                     that prompt, both sorted -- deterministic, so re-ingesting a
+                     run reproduces the assignment.
+    prompt           the rendered prompt, verbatim
+
+**The sha covers the template and not the rendered prompt**, or every cell would
+be its own instrument; and not the prose around it, or rewording a provenance
+note would orphan every existing key. The version string rides alongside so the
+store is legible without resolving a hash, and is read from the same file as the
+template so there is nothing to remember to bump.
+
+`frame_prompt_id` replaces a hand-chosen nickname. A nickname is a name somebody
+invented for an entry, not a relation to the corpus, and two of them can point at
+one prompt or drift onto another.
 
 A dict key is the point: runs from different workflows, instrument versions and
 orientations land in one stash and stay addressable. Re-ingesting the same run is
@@ -37,15 +86,17 @@ idempotent -- same key, same value.
 
 Everything needed to audit a coding without the workflow:
 
-    prompt     the FULL text the rater received, verbatim
     model      the model that actually answered, read from the transcript
     result     the structured object returned
     run_id     the workflow run, so the transcript can be found again
     agent_id   which agent within it
 
-The prompt is stored per record rather than once per run because the instrument
-changes between runs and a record whose prompt must be reconstructed from a
-version number is a record that will eventually be reconstructed wrongly.
+    meta       the manifest row: domain, arm sizes, nickname, sent_sha
+
+The prompt is in the KEY rather than the value, and verbatim rather than by
+reference, because a record whose prompt must be reconstructed from a version
+number is a record that will eventually be reconstructed wrongly -- and because
+it is what makes the identity of a coding decidable rather than asserted.
 """
 import argparse
 import glob
@@ -60,32 +111,44 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 STASH_DIR = os.path.join(HERE, "results", "stash")
 INPUT_DIR = os.path.join(HERE, "results", "inputs")
 MANIFEST = os.path.join(INPUT_DIR, "manifest.json")
-INSTRUMENT_LABEL = "v3"
+INSTRUMENT_MD = os.path.join(HERE, "INSTRUMENT.md")
 
 
-def instrument_id(prompt):
-    """Stable id for the PROMPT ACTUALLY SENT, not for a version anyone typed.
+def template():
+    """(version, sha12, text) of the PROMPT TEMPLATE block in INSTRUMENT.md.
 
-    `INSTRUMENT_LABEL` is hand-maintained and therefore drifts: edit
-    INSTRUMENT.md, forget to bump the constant, and records get stamped with a
-    version they were not produced under. The campaign has already paid for that
-    class of error -- `k_bulk.py` records ratings moving when a scale set changed,
-    and the same frame scored 0.714 and 1.500 under two prompt versions in one
-    evening.
+    THE SHA IS OF THE TEMPLATE, ONE PER VERSION -- not of a rendered prompt,
+    which would differ per cell and give every record its own instrument. And it
+    covers ONLY the fenced template, not the prose around it, so rewording the
+    provenance notes does not orphan existing keys.
 
-    So identity is a hash of the prompt text itself. Two runs sharing a prompt
-    share a namespace automatically; a changed prompt gets a new one whether or
-    not anyone remembered. A rule that executes rather than one to be recalled.
-
-    NORMALISED FIRST, because the raw prompt carries the input path and the
-    manifest name, which differ per cell and per machine and are not part of the
-    instrument. What survives normalisation is the template. Note this works
-    only because the fragment and word table are NOT in the prompt -- the agent
-    is told to read them from a file -- so the prompt IS the template already.
+    The version string is read from the same file rather than kept as a constant
+    here, so there is one place to change and it is the place the prompt lives.
     """
-    t = re.sub(r'\S*\.json', '<INPUT>', prompt or '')
-    t = re.sub(r'\s+', ' ', t).strip()
-    return hashlib.sha256(t.encode('utf-8')).hexdigest()[:12]
+    s = open(INSTRUMENT_MD).read()
+    v = re.search(r"^# INSTRUMENT: displacement_taxonomy (\S+)", s, re.M)
+    m = re.search(r"## PROMPT TEMPLATE\s*\n+```\n(.*?)\n```", s, re.S)
+    if not (v and m):
+        raise SystemExit("INSTRUMENT.md: could not find version header or "
+                         "fenced PROMPT TEMPLATE block")
+    t = m.group(1)
+    for tok in ("{{fragment}}", "{{word_table}}"):
+        if tok not in t:
+            raise SystemExit("INSTRUMENT.md template is missing %s" % tok)
+    return v.group(1), hashlib.sha256(t.encode("utf-8")).hexdigest()[:12], t
+
+
+def render(fragment, word_table):
+    """The full prompt as sent. No file for the rater to open.
+
+    v3 and earlier told the agent to read a JSON file and quoted the field names
+    into the template. That was indirection with no payoff: it cost a tool call,
+    added a failure mode, and left the transcript holding a path instead of the
+    data, so a record could not be audited without the input file beside it.
+    Substituting here means the prompt in the transcript IS what was asked.
+    """
+    _, _, t = template()
+    return t.replace("{{fragment}}", fragment).replace("{{word_table}}", word_table)
 
 PAIRS = {
     "llama": ("meta-llama/Llama-3.1-8B", "meta-llama/Llama-3.1-8B-Instruct"),
@@ -125,7 +188,26 @@ def _table(m, risers, fallers):
     return "HIGHER UNDER B\n%s\n\nHIGHER UNDER A\n%s" % (block(risers), block(fallers))
 
 
-def prepare(frames, pair_names, orientations):
+def make_key(meta, rater):
+    """THE key. Built in one place so `--prepare` and `--ingest` cannot disagree.
+
+    Two callers constructing the same dict by hand is the classic way a store
+    grows a second namespace nobody notices: the records land, `--list` shows
+    them, and only a lookup that should hit and misses ever says otherwise. So
+    prepare asks this what it would store, and ingest stores what this says.
+
+    Field order is irrelevant to hashstash (verified: a reversed-order dict hits
+    the same record), which is why this can be a plain literal.
+    """
+    return {"instrument": meta["instrument"], "instrument_sha": meta["instrument_sha"],
+            "frame_prompt_id": meta["frame_prompt_id"],
+            "frame_prompt": meta["frame_prompt"],
+            "base": meta["base"], "aligned": meta["aligned"],
+            "orientation": meta["orientation"], "rater": rater,
+            "prompt": meta["prompt"]}
+
+
+def prepare(frames, pair_names, orientations, raters=1, redo=False):
     from malignment import vectors as V
     from malignment.movement import movement, CANONICAL
     from malignment.slots import read_items, corpora
@@ -133,6 +215,19 @@ def prepare(frames, pair_names, orientations):
     items = {d["prompt"]: d for _, p in corpora() for d in read_items(p)}
     os.makedirs(INPUT_DIR, exist_ok=True)
     man = json.load(open(MANIFEST)) if os.path.exists(MANIFEST) else {}
+    #: The manifest ACCUMULATES across prepare calls -- a plan is built up frame
+    #: by frame -- so rows written under an older shape survive and are counted.
+    #: Drop anything predating per-rater rows rather than letting the entry count
+    #: disagree with the agent count, which is the number this file exists to
+    #: state.
+    stale = [k for k, v in man.items() if "rater" not in v]
+    for k in stale:
+        del man[k]
+    if stale:
+        print("dropped %d manifest row(s) written before per-rater rows" % len(stale))
+    st = _stash()
+    rs = list(range(1, raters + 1))
+    plan, have, cells = [], [], []
 
     for fid, prefix in frames.items():
         hit = [p for p in items if p.startswith(prefix)]
@@ -140,6 +235,7 @@ def prepare(frames, pair_names, orientations):
             print("no frame matching %r" % prefix, file=sys.stderr)
             continue
         prompt = hit[0]
+        d = items[prompt]
         for pn in pair_names:
             b, a = PAIRS[pn]
             rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
@@ -169,15 +265,75 @@ def prepare(frames, pair_names, orientations):
                     tbl = _table(_Flip, fal, ris)
                 else:
                     tbl = _table(m, ris, fal)
-                name = "%s__%s__%s" % (fid, pn, o)
-                json.dump({"fragment": prompt + " ___", "word_table": tbl},
-                          open(os.path.join(INPUT_DIR, name + ".json"), "w"), indent=1)
-                man[name] = {"instrument_label": INSTRUMENT_LABEL, "frame": fid, "prompt": prompt,
-                             "pair": pn, "base": b, "aligned": a, "orientation": o,
-                             "n_higher_b": len(ris), "n_higher_a": len(fal)}
-                print("%-34s %2d higher-B  %2d higher-A" % (name, len(ris), len(fal)))
+                base_row = {"instrument": None, "instrument_sha": None,
+                            "frame_prompt": prompt, "frame_prompt_id": d["item_id"],
+                            "domain": d.get("domain"), "nickname": fid,
+                            "pair": pn, "base": b, "aligned": a, "orientation": o,
+                            "n_higher_b": len(ris), "n_higher_a": len(fal)}
+                frag = prompt + " ___"
+                sent = render(frag, tbl)
+                ver, sha, _ = template()
+                base_row["instrument"], base_row["instrument_sha"] = ver, sha
+                base_row["prompt"] = sent
+                #: The join at ingest: hash of the prompt as sent. Exact, and
+                #: independent of any wording inside it.
+                base_row["sent_sha"] = hashlib.sha256(
+                    sent.encode("utf-8")).hexdigest()[:16]
+                #: ONE MANIFEST ROW PER AGENT, and an agent is a (cell, rater).
+                #: Raters are separate rows rather than a count on one row so the
+                #: manifest can be read as the run plan: its length is the number
+                #: of agents to launch, and a rater already in the store simply is
+                #: not in it.
+                for r in rs:
+                    name = "%s__%s__%s__r%d" % (fid, pn, o, r)
+                    row = dict(base_row, rater=r)
+                    #: ASK THE STORE BEFORE SPENDING A RATER. The key is fully
+                    #: determined here, prompt included, so "has this exact
+                    #: instrument already been run on this exact cell for this
+                    #: rater" is a lookup rather than a guess from filenames. A
+                    #: reworded template gets a different `prompt` and therefore
+                    #: a miss, which is correct: it is a different question and
+                    #: the old answer does not cover it.
+                    if not redo and make_key(row, r) in st:
+                        have.append(name)
+                        man.pop(name, None)
+                        continue
+                    man[name] = row
+                    plan.append(name)
+                cells.append("%s__%s__%s" % (fid, pn, o))
+                print("%-30s %2d higher-B  %2d higher-A   %s"
+                      % ("%s__%s__%s" % (fid, pn, o), len(ris), len(fal),
+                         "raters " + ",".join(
+                             str(r) for r in rs
+                             if "%s__%s__%s__r%d" % (fid, pn, o, r) in man) or "all stashed"))
     json.dump(man, open(MANIFEST, "w"), indent=1)
-    print("\nmanifest: %d entries -> %s" % (len(man), MANIFEST))
+
+    #: THE RUN PLAN, STATED. What gets launched is a product of four factors and
+    #: it is easy to be off by one of them -- reversal in particular doubles the
+    #: count and is the factor most often forgotten, because it is the same
+    #: measurement read the other way and does not feel like more work.
+    rows = [man[n] for n in plan]
+    ors = sorted({r["orientation"] for r in rows}) or orientations
+    prs = sorted({r["pair"] for r in rows}) or list(pair_names)
+    fms = sorted({r["nickname"] for r in rows}) or list(frames)
+    def _n(k, word):
+        return "%d %s%s" % (k, word, "" if k == 1 else "s")
+    print("\nPLAN: %s" % _n(len(plan), "agent"))
+    print("  %-12s %s" % (_n(len(fms), "frame"), ", ".join(fms)))
+    print("  %-12s %s" % (_n(len(prs), "pair"), ", ".join(prs)))
+    print("  %-12s %s%s" % (_n(len(ors), "orientation"), ", ".join(ors),
+                            "" if len(ors) > 1 else "   (NO REVERSAL)"))
+    print("  %-12s %s" % (_n(len(rs), "rater"), ", ".join("r%d" % r for r in rs)))
+    #: The grid, then the subtraction. Printing `7 cells x 2 raters = 13 agents`
+    #: is arithmetic that does not hold: partial skips make the product and the
+    #: launch count different numbers, and a plan whose own sum is wrong is worth
+    #: less than no plan.
+    print("  = %s x %s = %s"
+          % (_n(len(cells), "cell"), _n(len(rs), "rater"), _n(len(cells) * len(rs), "agent")))
+    if have:
+        print("    - %s already in the stash" % _n(len(have), "agent"))
+    print("    -> %s TO LAUNCH" % _n(len(plan), "agent"))
+    print("manifest: %d entries -> %s" % (len(man), MANIFEST))
 
 
 def _transcripts(run_id):
@@ -188,25 +344,61 @@ def _transcripts(run_id):
     return hits[0]
 
 
-def ingest(run_id, rater):
+def ingest(run_id):
     man = json.load(open(MANIFEST))
     d = _transcripts(run_id)
     st = _stash()
     n = 0
     seen_instruments = {}
+    #: TWO PASSES, BECAUSE RATER IS A POSITION AND NOT A PROPERTY. With several
+    #: raters the transcripts for one cell are byte-identical prompts and nothing
+    #: in a transcript says which pass it was; rater only ever meant "which
+    #: independent reading". So collect the agents that share a prompt, sort both
+    #: sides deterministically -- agents by id, manifest rows by rater -- and pair
+    #: them off. Re-ingesting the same run reproduces the same assignment, which
+    #: is what makes it idempotent.
+    by_sha = {}
     for f in sorted(glob.glob(os.path.join(d, "agent-*.jsonl"))):
         lines = [json.loads(l) for l in open(f)]
         first = lines[0].get("message", {}).get("content")
         text = first if isinstance(first, str) else " ".join(
             x.get("text", "") for x in (first or []) if isinstance(x, dict))
-        #: The manifest name appears in the prompt as `<dir>/<name>.json`. Match
-        #: against manifest KEYS rather than parsing a path, so a changed input
-        #: directory does not break the join.
-        hit = [k for k in man if "/%s.json" % k in text or " %s.json" % k in text]
-        if len(hit) != 1:
-            print("skip %s: matched %d manifest entries" % (os.path.basename(f), len(hit)),
-                  file=sys.stderr)
+        #: JOIN BY HASH OF THE PROMPT AS SENT. The prompt now carries the
+        #: fragment and word table inline, so it identifies the cell exactly and
+        #: no path or filename has to be parsed out of it.
+        sha = hashlib.sha256((text or "").strip().encode("utf-8")).hexdigest()[:16]
+        by_sha.setdefault(sha, []).append((f, lines))
+
+    rows_by_sha = {}
+    for k, v in man.items():
+        rows_by_sha.setdefault(v.get("sent_sha"), []).append((v.get("rater", 1), k, v))
+    for k in rows_by_sha:
+        rows_by_sha[k].sort()
+
+    for sha, agents in sorted(by_sha.items()):
+        rows = rows_by_sha.get(sha) or []
+        if not rows:
+            print("skip %d agent(s): prompt hash %s in no manifest entry"
+                  % (len(agents), sha), file=sys.stderr)
             continue
+        if len(agents) != len(rows):
+            print("WARNING %s: %d agents against %d manifest raters; pairing the "
+                  "first %d" % (rows[0][1].rsplit("__r", 1)[0], len(agents),
+                                len(rows), min(len(agents), len(rows))),
+                  file=sys.stderr)
+        for (f, lines), (rater, name, _row) in zip(agents, rows):
+            _store(st, man, name, rater, f, lines, run_id, seen_instruments)
+            n += 1
+    print("\ningested %d records into %s" % (n, STASH_DIR))
+    for sha, ver in seen_instruments.items():
+        print("  instrument %s = %s" % (ver, sha))
+    if len(seen_instruments) > 1:
+        print("  NOTE: this run used more than one template. Not an error, but "
+              "records under different instrument shas are not poolable.",
+              file=sys.stderr)
+
+
+def _store(st, man, name, rater, f, lines, run_id, seen_instruments):
         model = next((r["message"].get("model") for r in lines
                       if r.get("type") == "assistant" and r.get("message")), None)
         result = None
@@ -219,29 +411,31 @@ def ingest(run_id, rater):
                     result = blk.get("input")
             if result:
                 break
-        meta = dict(man[hit[0]])
-        #: The key carries the HASH of the prompt that was actually sent; the
-        #: human label rides in the value. A record can therefore be wrong about
-        #: its label and still be correctly addressed.
-        iid = instrument_id(text)
-        key = {"instrument": iid, "frame": meta["frame"],
-               "base": meta["base"], "aligned": meta["aligned"],
-               "orientation": meta["orientation"], "rater": rater}
-        st[key] = {"prompt": text, "model": model, "result": result,
-                   "instrument_label": meta.get("instrument_label"),
-                   "run_id": run_id, "agent_id": os.path.basename(f)[6:-6],
-                   "meta": meta}
-        seen_instruments.setdefault(iid, meta.get("instrument_label"))
-        n += 1
-        print("%-34s rater=%d model=%s %s" % (hit[0], rater, model,
+        meta = dict(man[name])
+        #: THE KEY IS THE FULL SPECIFICATION OF WHAT WAS ASKED. Version for a
+        #: human, sha so a reworded version cannot be mistaken for this one,
+        #: the frame prompt and its slot id rather than a nickname somebody
+        #: invented, the two checkpoints, the orientation, the rater, and the
+        #: prompt verbatim. The value is only what came back.
+        key = make_key(meta, rater)
+        st[key] = {"model": model, "result": result, "run_id": run_id,
+                   "agent_id": os.path.basename(f)[6:-6], "meta": meta}
+        seen_instruments.setdefault(meta["instrument_sha"], meta["instrument"])
+        print("%-34s rater=%d model=%s %s" % (name, rater, model,
                                               "OK" if result else "NO RESULT FOUND"))
-    print("\ningested %d records into %s" % (n, STASH_DIR))
-    for iid, lab in seen_instruments.items():
-        print("  instrument %s  (labelled %s)" % (iid, lab))
-    if len(seen_instruments) > 1:
-        print("  NOTE: this run used more than one prompt. That is not an error, "
-              "but records under different instrument ids are not poolable.",
-              file=sys.stderr)
+
+
+
+def emit(names=None):
+    """Print the rendered prompts as JSON, for passing to a workflow as `args`.
+
+    The workflow then does `agent(args.prompts[name])` and the rater receives the
+    whole thing in one message -- no file, no tool call, and the transcript holds
+    the data rather than a path to it.
+    """
+    man = json.load(open(MANIFEST))
+    sel = {k: v["prompt"] for k, v in man.items() if not names or k in names}
+    print(json.dumps({"prompts": sel}, indent=1))
 
 
 def listing():
@@ -250,17 +444,23 @@ def listing():
     print("%d records in %s" % (len(ks), STASH_DIR))
     labs = {}
     for k in ks:
-        labs.setdefault(k.get("instrument"), (st[k] or {}).get("instrument_label"))
-    for iid, lab in labs.items():
-        print("  instrument %s = %s" % (iid, lab))
+        labs.setdefault(k.get("instrument_sha") or "LEGACY", k.get("instrument") or "--")
+    for sha, ver in labs.items():
+        print("  instrument %s = %s" % (ver, sha))
     print()
-    for k in sorted(ks, key=lambda k: (k.get("frame", ""), k.get("aligned", ""), k.get("orientation", ""))):
+    for k in sorted(ks, key=lambda k: (k.get("frame_prompt_id", ""), k.get("aligned", ""), k.get("orientation", ""))):
         v = st[k]
         r = (v or {}).get("result") or {}
         rel = r.get("relations") or []
-        print("  %-12s %-10s %-30s %-4s r%-2s %-8s %s"
-              % (k.get("instrument"), k.get("frame"),
-                 (k.get("aligned") or "").split("/")[-1],
+        #: A record written before the key gained `instrument_sha` has no way to
+        #: say which template produced it. Print LEGACY rather than None: a blank
+        #: reads as a missing value in a field that could have been filled, and
+        #: these could not.
+        print("  %-4s %-12s %-26s %-28s %-4s r%-2s %-8s %s"
+              % (k.get("instrument") if k.get("instrument_sha") else "--",
+                 k.get("instrument_sha") or "LEGACY",
+                 (k.get("frame_prompt_id") or k.get("frame") or "?")[:26],
+                 (k.get("aligned") or "").split("/")[-1][:28],
                  k.get("orientation"), k.get("rater"), r.get("confidence", "?"),
                  " | ".join(x.get("name", "?") for x in rel)))
 
@@ -270,7 +470,12 @@ def main(argv=None):
     ap.add_argument("--prepare", action="store_true")
     ap.add_argument("--ingest", metavar="RUN_ID")
     ap.add_argument("--list", action="store_true")
-    ap.add_argument("--rater", type=int, default=1)
+    ap.add_argument("--emit", nargs="*", metavar="NAME",
+                    help="print rendered prompts as workflow args JSON")
+    ap.add_argument("--raters", type=int, default=1,
+                    help="independent passes per cell; each is one agent")
+    ap.add_argument("--redo", action="store_true",
+                    help="prepare cells even if already stashed for this rater")
     ap.add_argument("--pairs", nargs="+", default=["llama"])
     ap.add_argument("--orientations", nargs="+", default=["fwd"])
     ap.add_argument("--frames", nargs="+", default=["union"])
@@ -284,9 +489,12 @@ def main(argv=None):
         "unzipped": "She unzipped his",
     }
     if a.prepare:
-        prepare({f: KNOWN.get(f, f) for f in a.frames}, a.pairs, a.orientations)
+        prepare({f: KNOWN.get(f, f) for f in a.frames}, a.pairs, a.orientations,
+                raters=a.raters, redo=a.redo)
     elif a.ingest:
-        ingest(a.ingest, a.rater)
+        ingest(a.ingest)
+    elif a.emit is not None:
+        emit(a.emit or None)
     elif a.list:
         listing()
     else:
