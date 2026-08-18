@@ -68,32 +68,39 @@ Two raw figures flipped sign under the correction -- hh-harmless 45.2% -> 56.9%,
 hh-helpful 56.0% -> 44.4% -- which is what a deleted pole does and is why the
 first run's numbers should not be cited.
 
-# A SCOPE LIMIT THE FIRST VERSION DID NOT STATE
+# THE LIMIT IS GENRE, NOT GRAIN -- M06 ALREADY MEASURED THE GRAIN TRANSFER
 
-`k_word_auc` measures `twp_words` -- NEXT-TOKEN PROBABILITIES at fixed sites in
-fixed prompts, not generated text. This test applies that to BAG-OF-WORDS COUNTS
-over assistant prose. **Two different grains**, and a null across them is weaker
-than a null within one.
+A3 recorded this test as crossing two grains -- `twp_words` next-token
+probabilities against bag-of-words counts -- and treated that as the reason the
+null is weak. **That is wrong, and M06 had already measured it.**
 
-# THE ONE NARROW PASS, HELD LOOSELY
+`meta/M06_generation/findings/p_on_passages.md` (producer `m06_p_on_passages.py`,
+232,384 passages, 41 pairs):
 
-`pku-mixed` at 54.9% is the only stratum where one response is LABELLED SAFE and
-the other UNSAFE, rather than both being graded. Aligned-vocabulary density
-weakly predicts which is the safe one -- which is close to tautological, since a
-response labelled safe is likelier to be in assistant register. **Reported, not
-interpreted.**
+    same prompts, same models, both grains   Spearman +0.500   n=600 words
+    canonical-vector context                         +0.444    n=3,613
+    page classifier, real minus null mean    0.387 - 0.499     k=25..200
 
-# WHAT THIS SETTLES AND WHAT IT DOES NOT
+> *"Half the distributional ranking survives temperature-1 sampling and ~200
+> tokens of autoregression, on identical prompts and models: grain is the only
+> thing that varies."*
 
-**Settles:** the axis models sort on, as this instrument measures it, does NOT
-predict which response an annotator preferred, in any of five populations across
-three annotation regimes, once length is controlled.
+**So the vector DOES survive the trip from distribution to running text.** What it
+does not survive here is the move from FICTION CONTINUATIONS to ASSISTANT PROSE
+about laundering money.
 
-**Does not settle:** whether the axes are unrelated. The vector cannot represent
-the falling half of displacement at all, so this is a null from an instrument
-that can only see one direction. **A signed model-side vector with a real
-negative pole would be a different test**, and building one needs cells.
+**And that failure is already on record in this collection.** `pku-safe-rlhf` A2
+probed three bge refusal centroids against PKU responses and found the responses
+sat FURTHER from the refusal centroids than generic English did, because "the
+spans are erotic-fiction refusals, the responses are assistant prose about
+bribery, and **the genre gap swamps the speech act**." Two instruments, same
+boundary.
 
-**And nothing about causation either way** (A9). This compares two vectors over
-words; it never claimed one produced the other, which is why it was askable at
-all after yesterday's model-level attempt collapsed.
+**The properly specified null: the alignment axis is legible across grains within
+a genre and does not reach assistant prose.** That is a sharper and more useful
+claim than "the axes are unrelated", and it predicts where a transfer WOULD work
+-- a preference corpus of narrative text, which none of the five is.
+
+M06's finding is `status: draft`, `grade: ungraded`, single pass, and not
+audit-grade until a second seat reproduces it. Quoted with that fence.
+

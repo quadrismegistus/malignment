@@ -238,3 +238,25 @@ raw figures flip sign, so no number from the first run is citable.
 not reproducible. All of it is in `run.py`. And the substrate is `twp_words`,
 next-token probabilities at fixed sites, NOT generations -- so this test crosses
 two grains and its null is weaker than a within-grain null would be.
+
+---
+
+## A4 — 2026-08-18. A3's grain objection is withdrawn: M06 measured the grain transfer and it holds. The limit is GENRE.
+
+RH asked whether M06 ran a prediction pass over generations. It did.
+`M06_generation/findings/p_on_passages.md`, 232,384 passages, 41 pairs: the
+distributional ranking transfers to running text at Spearman **+0.500** (n=600)
+and +0.444 (n=3,613), and a page classifier reaches 0.85-0.97 with a
+real-minus-null-mean of 0.39-0.50 against a 200-flip null distribution.
+
+**So `twp` -> running text is a solved transfer, and A3's "two grains" caveat was
+wrong.** What this test crossed is genre: fiction continuations to assistant
+prose. `pku-safe-rlhf` A2 recorded the identical boundary with a different
+instrument -- bge refusal centroids sat further from PKU responses than generic
+English did, "the genre gap swamps the speech act."
+
+Restated null: **the alignment axis is legible across grains WITHIN a genre and
+does not reach assistant prose.** It predicts where a transfer would work -- a
+preference corpus of narrative text -- and none of the five populations is one.
+
+M06's finding is draft/ungraded/single-pass and is quoted with that fence.
