@@ -390,6 +390,33 @@ class TWPRunner:
                 T.USE_PROMPT_CACHE = False
                 say("  prompt-cache UNAVAILABLE on this architecture (%s)"
                     " -- cells stamped prompt_cache=False" % str(e)[:46])
+                #: **THE TODO WAS COMPUTED AGAINST THE REQUESTED SETTING AND THE
+                #: CELLS ARE WRITTEN AGAINST THE ACTUAL ONE.** `prompt_cache` is
+                #: in the KEY, so on a model that cannot cache those are two
+                #: different questions: `done()` asked which prompts have a
+                #: cache=True cell, found none, and the run then wrote cache=False
+                #: cells that the NEXT run would not recognise either.
+                #:
+                #: Measured, not theorised: Baichuan2-7B-Base re-measured 2,702
+                #: cells it already held -- 137 minutes at 2.83 s/cell for 195
+                #: cells of new work. Every non-cacheable model did this on every
+                #: invocation, forever, and it looks like slow progress rather
+                #: than like an error. Nothing raised and every cell was correct;
+                #: only the same values were written twice.
+                #:
+                #: The probe cannot come earlier -- it needs the loaded model --
+                #: so the todo has to come later. Recomputed here against the
+                #: setting the cells will actually carry.
+                have = ck.done(rules)
+                todo = [p for p in prompts if p not in have]
+                if limit:
+                    todo = todo[:limit]
+                say("  todo RECOMPUTED at prompt_cache=False: %d already done,"
+                    " %d to run" % (len(have), len(todo)))
+                if not todo:
+                    return {"model": ck.model_id, "producer": PRODUCER,
+                            "written": 0, "skipped": 0, "already": len(have),
+                            "path": ck.stash().path}
 
         if rules is not None:
             say("  INSTRUMENT: rule_version %d | %s | prompt_cache %s"
