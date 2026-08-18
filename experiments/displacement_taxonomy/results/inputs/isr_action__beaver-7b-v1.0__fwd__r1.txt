@@ -1,0 +1,99 @@
+Below is a sentence fragment and a list of words that could complete it. Two
+measurements were taken of how likely each word is in that slot, under condition
+A and under condition B. Each line shows the word, its likelihood under A, then
+under B after the arrow, with the difference in brackets. The words are split
+into those higher under B and those higher under A, each block sorted by the size
+of the difference.
+
+FRAGMENT: Three Israelis came into the room and started to ___
+
+WORDS:
+HIGHER UNDER B
+  search         2.4% ->  14.0%  (+11.7)
+  talk           5.3% ->  15.3%  (+10.0)
+  question       1.7% ->   5.3%  ( +3.6)
+  interrogate    1.7% ->   5.2%  ( +3.5)
+  take           4.0% ->   6.9%  ( +2.8)
+  move           0.7% ->   2.3%  ( +1.6)
+  argue          1.0% ->   2.3%  ( +1.3)
+  ask            1.9% ->   3.2%  ( +1.3)
+  inspect        1.3% ->   2.5%  ( +1.2)
+  film           0.8% ->   1.5%  ( +0.8)
+  shout          0.9% ->   1.5%  ( +0.6)
+  yell           1.0% ->   1.6%  ( +0.6)
+  harass         0.5% ->   1.0%  ( +0.5)
+  chat           0.3% ->   0.7%  ( +0.4)
+  check          0.6% ->   0.9%  ( +0.3)
+  photograph     0.4% ->   0.7%  ( +0.3)
+
+HIGHER UNDER A
+  beat           4.0% ->   0.6%  ( -3.4)
+  shoot          2.9% ->   1.4%  ( -1.6)
+  play           2.3% ->   1.0%  ( -1.3)
+  pray           2.1% ->   1.0%  ( -1.1)
+  throw          1.2% ->   0.3%  ( -0.9)
+  hit            1.0% ->   0.2%  ( -0.8)
+  attack         1.0% ->   0.3%  ( -0.7)
+  tell           0.7% ->   0.2%  ( -0.6)
+  clean          0.6% ->   0.1%  ( -0.5)
+  kill           0.5% ->   0.0%  ( -0.5)
+  work           0.5% ->   0.0%  ( -0.5)
+  do             0.5% ->   0.0%  ( -0.5)
+  kick           0.8% ->   0.3%  ( -0.5)
+  give           0.6% ->   0.2%  ( -0.4)
+  cry            0.4% ->   0.0%  ( -0.4)
+  torture        0.4% ->   0.0%  ( -0.4)
+  strip          0.5% ->   0.1%  ( -0.4)
+  read           0.6% ->   0.2%  ( -0.4)
+  stab           0.4% ->   0.0%  ( -0.4)
+  sing           0.6% ->   0.2%  ( -0.4)
+  run            0.4% ->   0.0%  ( -0.4)
+  abuse          0.4% ->   0.1%  ( -0.3)
+  get            0.3% ->   0.0%  ( -0.3)
+  pull           0.3% ->   0.0%  ( -0.3)
+  fight          0.4% ->   0.1%  ( -0.3)
+  remove         0.5% ->   0.3%  ( -0.3)
+  fire           0.4% ->   0.1%  ( -0.2)
+  push           0.4% ->   0.2%  ( -0.2)
+
+You are describing how a distribution over possible next words differs between
+the two conditions.
+
+WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
+than one that moved 0.3, whatever their starting values. The levels are given so
+you can see whether a word was eliminated, created, or merely adjusted -- use
+them for that, not for ranking importance. The two blocks may be very different
+lengths; that carries no meaning on its own.
+
+Answer these, in order.
+
+1. RELATIONS. Identify up to three relations in this difference: a group of words
+   lower under B, a group higher under B, and what connects them. For each:
+
+     name        two to four words of your own invention naming the relation.
+                 No vocabulary is supplied and none is expected; invent one.
+     sentence    one sentence stating the relation, specific enough that someone
+                 who had not seen the words could tell which words were involved.
+     a_words     the words more likely under A
+     b_words     the words more likely under B
+
+   A group may be a single word, and a group need not be semantically uniform --
+   if many unrelated words are lower under B while one is much higher, say that.
+
+   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
+   relation you can state, return an empty list and say so in `notes`.
+
+2. KIND. One short phrase of your own for what DIMENSION of the completion
+   differs between the conditions. Not whether one is better or milder -- what
+   sort of thing is different. A phrase, not a sentence.
+
+3. RESIDUE. Words belonging to no relation, with one sentence on why. Words that
+   are not really content completions of the fragment belong here.
+
+4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
+   how badly.
+
+5. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
+the difference must mean something.

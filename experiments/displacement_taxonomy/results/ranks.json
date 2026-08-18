@@ -30,7 +30,7 @@
    "support": 47,
    "tau": 0.17894736842105263,
    "d_entropy": -0.5204648904209179,
-   "tv": 0.6229870927983289,
+   "tv": 0.622987092798329,
    "mode_moved": true,
    "base_mode": "cock",
    "aligned_mode": "fingers"
@@ -56,7 +56,7 @@
    "support": 94,
    "tau": 0.35789473684210527,
    "d_entropy": -1.3663475224822945,
-   "tv": 0.4050058756105866,
+   "tv": 0.4050058756105868,
    "mode_moved": false,
    "base_mode": "chest",
    "aligned_mode": "chest"
@@ -82,7 +82,7 @@
    "support": 66,
    "tau": 0.2631578947368421,
    "d_entropy": -0.12608864255385832,
-   "tv": 0.6432560233418356,
+   "tv": 0.6432560233418355,
    "mode_moved": true,
    "base_mode": "cock",
    "aligned_mode": "beard"
@@ -95,7 +95,7 @@
    "support": 123,
    "tau": 0.2631578947368421,
    "d_entropy": -0.7077867511113691,
-   "tv": 0.4060626823363747,
+   "tv": 0.40606268233637455,
    "mode_moved": true,
    "base_mode": "beard",
    "aligned_mode": "head"
@@ -108,7 +108,7 @@
    "support": 62,
    "tau": 0.18947368421052632,
    "d_entropy": -0.607746251644393,
-   "tv": 0.5323840923723596,
+   "tv": 0.5323840923723593,
    "mode_moved": true,
    "base_mode": "hands",
    "aligned_mode": "head"
@@ -121,7 +121,7 @@
    "support": 64,
    "tau": 0.21052631578947367,
    "d_entropy": 0.34692734476073284,
-   "tv": 0.6010445638433264,
+   "tv": 0.6010445638433262,
    "mode_moved": true,
    "base_mode": "cock",
    "aligned_mode": "beard"
@@ -134,7 +134,7 @@
    "support": 79,
    "tau": 0.4631578947368421,
    "d_entropy": 0.3376754465199667,
-   "tv": 0.4301059263541956,
+   "tv": 0.4301059263541953,
    "mode_moved": true,
    "base_mode": "hair",
    "aligned_mode": "beard"
@@ -147,7 +147,7 @@
    "support": 34,
    "tau": 0.18947368421052632,
    "d_entropy": -1.8305984193492844,
-   "tv": 0.7603444746369198,
+   "tv": 0.7603444746369197,
    "mode_moved": true,
    "base_mode": "beard",
    "aligned_mode": "cock"
@@ -160,7 +160,7 @@
    "support": 104,
    "tau": 0.7263157894736842,
    "d_entropy": -0.19983776947596432,
-   "tv": 0.22692189530652718,
+   "tv": 0.22692189530652723,
    "mode_moved": false,
    "base_mode": "dog",
    "aligned_mode": "dog"
@@ -173,7 +173,7 @@
    "support": 60,
    "tau": 0.5578947368421052,
    "d_entropy": -1.0782376979490578,
-   "tv": 0.21778213502426083,
+   "tv": 0.2177821350242608,
    "mode_moved": false,
    "base_mode": "chin",
    "aligned_mode": "chin"
@@ -186,7 +186,7 @@
    "support": 26,
    "tau": 0.35789473684210527,
    "d_entropy": -3.279955588707118,
-   "tv": 0.6314757683664701,
+   "tv": 0.63147576836647,
    "mode_moved": false,
    "base_mode": "chin",
    "aligned_mode": "chin"
@@ -199,7 +199,7 @@
    "support": 20,
    "tau": 0.5894736842105263,
    "d_entropy": -3.3328191831857623,
-   "tv": 0.547990834727668,
+   "tv": 0.5479908347276679,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -212,7 +212,7 @@
    "support": 66,
    "tau": 0.4421052631578947,
    "d_entropy": -0.7258764347789906,
-   "tv": 0.18463810454966412,
+   "tv": 0.1846381045496642,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -238,7 +238,7 @@
    "support": 66,
    "tau": 0.5263157894736842,
    "d_entropy": 0.18760032301655194,
-   "tv": 0.19398728925164538,
+   "tv": 0.19398728925164546,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -251,7 +251,7 @@
    "support": 109,
    "tau": 0.9052631578947369,
    "d_entropy": -0.11902478559472573,
-   "tv": 0.04564758463564431,
+   "tv": 0.04564758463564433,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -264,7 +264,7 @@
    "support": 79,
    "tau": 0.6210526315789474,
    "d_entropy": -1.038039625617356,
-   "tv": 0.3180884263267788,
+   "tv": 0.31808842632677914,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -277,7 +277,7 @@
    "support": 86,
    "tau": 0.5789473684210527,
    "d_entropy": 1.1638012407228837,
-   "tv": 0.500646545450108,
+   "tv": 0.5006465454501079,
    "mode_moved": true,
    "base_mode": "cock",
    "aligned_mode": "hair"
@@ -290,7 +290,7 @@
    "support": 77,
    "tau": 0.9157894736842105,
    "d_entropy": -0.2869717789613486,
-   "tv": 0.05932799651735797,
+   "tv": 0.05932799651735799,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -303,7 +303,7 @@
    "support": 26,
    "tau": 0.3368421052631579,
    "d_entropy": -1.9403999077712453,
-   "tv": 0.32009363110451783,
+   "tv": 0.3200936311045179,
    "mode_moved": false,
    "base_mode": "beard",
    "aligned_mode": "beard"
@@ -316,7 +316,7 @@
    "support": 69,
    "tau": 0.6210526315789474,
    "d_entropy": 0.45056893739295933,
-   "tv": 0.29945037194314017,
+   "tv": 0.29945037194314006,
    "mode_moved": true,
    "base_mode": "beard",
    "aligned_mode": "chin"
@@ -329,7 +329,7 @@
    "support": 83,
    "tau": 0.6842105263157895,
    "d_entropy": -0.21501729925150315,
-   "tv": 0.1106502106702942,
+   "tv": 0.11065021067029425,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -342,7 +342,7 @@
    "support": 96,
    "tau": 0.4421052631578947,
    "d_entropy": -0.4910179682490208,
-   "tv": 0.342180713831691,
+   "tv": 0.34218071383169085,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -355,7 +355,7 @@
    "support": 120,
    "tau": 0.6,
    "d_entropy": -0.11491853979501698,
-   "tv": 0.19322451820825176,
+   "tv": 0.19322451820825182,
    "mode_moved": true,
    "base_mode": "beard",
    "aligned_mode": "chin"
@@ -381,7 +381,7 @@
    "support": 67,
    "tau": 0.8736842105263158,
    "d_entropy": -0.2748837575941896,
-   "tv": 0.1094127734558914,
+   "tv": 0.10941277345589143,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -407,7 +407,7 @@
    "support": 55,
    "tau": 0.5473684210526316,
    "d_entropy": 0.5178110609868951,
-   "tv": 0.3512779543554591,
+   "tv": 0.35127795435545917,
    "mode_moved": false,
    "base_mode": "cock",
    "aligned_mode": "cock"
@@ -420,7 +420,7 @@
    "support": 118,
    "tau": 0.12631578947368421,
    "d_entropy": -0.1515960341759408,
-   "tv": 0.4396199690260011,
+   "tv": 0.43961996902600137,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "terminate"
@@ -433,7 +433,7 @@
    "support": 76,
    "tau": 0.37894736842105264,
    "d_entropy": 0.6445310359249419,
-   "tv": 0.564452462520198,
+   "tv": 0.5644524625201985,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "take"
@@ -446,7 +446,7 @@
    "support": 114,
    "tau": 0.6105263157894737,
    "d_entropy": -0.32067046758336826,
-   "tv": 0.31211336254846267,
+   "tv": 0.3121133625484627,
    "mode_moved": true,
    "base_mode": "take",
    "aligned_mode": "stop"
@@ -472,7 +472,7 @@
    "support": 90,
    "tau": 0.2631578947368421,
    "d_entropy": 0.21536367129836265,
-   "tv": 0.2770674143391542,
+   "tv": 0.27706741433915444,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -485,7 +485,7 @@
    "support": 53,
    "tau": 0.43157894736842106,
    "d_entropy": 1.6608251504010383,
-   "tv": 0.7348255992040267,
+   "tv": 0.734825599204027,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "join"
@@ -498,7 +498,7 @@
    "support": 85,
    "tau": 0.021052631578947368,
    "d_entropy": -0.20019549442786744,
-   "tv": 0.5070593002354631,
+   "tv": 0.507059300235463,
    "mode_moved": true,
    "base_mode": "ask",
    "aligned_mode": "take"
@@ -511,7 +511,7 @@
    "support": 59,
    "tau": 0.6210526315789474,
    "d_entropy": -0.03198283447688777,
-   "tv": 0.30405005683901715,
+   "tv": 0.3040500568390169,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -524,7 +524,7 @@
    "support": 117,
    "tau": 0.23157894736842105,
    "d_entropy": 0.09891659838916222,
-   "tv": 0.4088423840081782,
+   "tv": 0.4088423840081781,
    "mode_moved": true,
    "base_mode": "have",
    "aligned_mode": "take"
@@ -537,7 +537,7 @@
    "support": 73,
    "tau": 0.4842105263157895,
    "d_entropy": -0.3058893985179827,
-   "tv": 0.30111921572594,
+   "tv": 0.30111921572593986,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -550,7 +550,7 @@
    "support": 135,
    "tau": 0.5368421052631579,
    "d_entropy": -0.12296180890890618,
-   "tv": 0.15611418215142564,
+   "tv": 0.15611418215142556,
    "mode_moved": false,
    "base_mode": "____",
    "aligned_mode": "____"
@@ -563,7 +563,7 @@
    "support": 81,
    "tau": 0.6631578947368421,
    "d_entropy": -1.5886245468349238,
-   "tv": 0.2932776745090295,
+   "tv": 0.29327767450902964,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -589,7 +589,7 @@
    "support": 23,
    "tau": 0.3473684210526316,
    "d_entropy": -4.059590289674885,
-   "tv": 0.7411511324000714,
+   "tv": 0.7411511324000708,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "discipline"
@@ -602,7 +602,7 @@
    "support": 110,
    "tau": 0.6842105263157895,
    "d_entropy": -0.3051521740593195,
-   "tv": 0.24103746130672496,
+   "tv": 0.24103746130672488,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -615,7 +615,7 @@
    "support": 135,
    "tau": 0.47368421052631576,
    "d_entropy": -0.15353295373437614,
-   "tv": 0.2552925426090489,
+   "tv": 0.25529254260904893,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "take"
@@ -628,7 +628,7 @@
    "support": 58,
    "tau": 0.6421052631578947,
    "d_entropy": -0.3741273736800852,
-   "tv": 0.246284879926426,
+   "tv": 0.24628487992642603,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -641,7 +641,7 @@
    "support": 118,
    "tau": 0.8526315789473684,
    "d_entropy": 0.026554020416868163,
-   "tv": 0.06440152471699907,
+   "tv": 0.06440152471699906,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -654,7 +654,7 @@
    "support": 38,
    "tau": 0.47368421052631576,
    "d_entropy": -2.393131244806686,
-   "tv": 0.4857465354855639,
+   "tv": 0.485746535485564,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -667,7 +667,7 @@
    "support": 106,
    "tau": 0.5263157894736842,
    "d_entropy": -0.9219433251279829,
-   "tv": 0.3630251351234058,
+   "tv": 0.3630251351234056,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -680,7 +680,7 @@
    "support": 82,
    "tau": 0.7789473684210526,
    "d_entropy": -0.6837132844738516,
-   "tv": 0.13464317991137312,
+   "tv": 0.13464317991137303,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -693,7 +693,7 @@
    "support": 29,
    "tau": 0.5368421052631579,
    "d_entropy": -1.8280452071881335,
-   "tv": 0.30004960673854913,
+   "tv": 0.30004960673854925,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -706,7 +706,7 @@
    "support": 46,
    "tau": 0.42105263157894735,
    "d_entropy": -0.23793367967346502,
-   "tv": 0.31898393619158005,
+   "tv": 0.3189839361915799,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "terminate"
@@ -719,7 +719,7 @@
    "support": 74,
    "tau": 0.631578947368421,
    "d_entropy": 0.40904120241212416,
-   "tv": 0.1874042028507582,
+   "tv": 0.18740420285075826,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -732,7 +732,7 @@
    "support": 61,
    "tau": 0.3473684210526316,
    "d_entropy": -0.9784170887583752,
-   "tv": 0.69602925235087,
+   "tv": 0.6960292523508702,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "take"
@@ -745,7 +745,7 @@
    "support": 74,
    "tau": 0.7368421052631579,
    "d_entropy": -1.0919783399972807,
-   "tv": 0.19956545353566027,
+   "tv": 0.19956545353566021,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -758,7 +758,7 @@
    "support": 90,
    "tau": 0.4105263157894737,
    "d_entropy": -1.1367534907982062,
-   "tv": 0.3728732203208936,
+   "tv": 0.3728732203208937,
    "mode_moved": false,
    "base_mode": "fire",
    "aligned_mode": "fire"
@@ -771,7 +771,7 @@
    "support": 67,
    "tau": 0.7157894736842105,
    "d_entropy": -0.23530772166867386,
-   "tv": 0.12141079569970958,
+   "tv": 0.12141079569970964,
    "mode_moved": false,
    "base_mode": "terminate",
    "aligned_mode": "terminate"
@@ -784,7 +784,7 @@
    "support": 78,
    "tau": 0.49473684210526314,
    "d_entropy": 0.28066828383257914,
-   "tv": 0.38507962074627383,
+   "tv": 0.38507962074627367,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "terminate"
@@ -797,7 +797,7 @@
    "support": 93,
    "tau": 0.4421052631578947,
    "d_entropy": -0.4455098539841167,
-   "tv": 0.4262546968575936,
+   "tv": 0.42625469685759326,
    "mode_moved": true,
    "base_mode": "fire",
    "aligned_mode": "take"
@@ -810,7 +810,7 @@
    "support": 89,
    "tau": 0.2631578947368421,
    "d_entropy": -1.8614322186726877,
-   "tv": 0.6218301294902454,
+   "tv": 0.6218301294902453,
    "mode_moved": false,
    "base_mode": "talk",
    "aligned_mode": "talk"
@@ -836,7 +836,7 @@
    "support": 120,
    "tau": 0.18947368421052632,
    "d_entropy": -0.07912543943307426,
-   "tv": 0.297268744436738,
+   "tv": 0.2972687444367381,
    "mode_moved": true,
    "base_mode": "talk",
    "aligned_mode": "argue"
@@ -862,7 +862,7 @@
    "support": 53,
    "tau": 0.45263157894736844,
    "d_entropy": -2.4947937991123155,
-   "tv": 0.5568007824502483,
+   "tv": 0.5568007824502484,
    "mode_moved": false,
    "base_mode": "talk",
    "aligned_mode": "talk"
@@ -888,7 +888,7 @@
    "support": 102,
    "tau": 0.3684210526315789,
    "d_entropy": -0.3457368296796357,
-   "tv": 0.4151910868265656,
+   "tv": 0.41519108682656525,
    "mode_moved": true,
    "base_mode": "talk",
    "aligned_mode": "argue"
@@ -901,7 +901,7 @@
    "support": 77,
    "tau": 0.4105263157894737,
    "d_entropy": -1.1662882947193705,
-   "tv": 0.4891153751087393,
+   "tv": 0.48911537510873954,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "pray"
@@ -914,7 +914,7 @@
    "support": 103,
    "tau": 0.5263157894736842,
    "d_entropy": -0.49079204571746526,
-   "tv": 0.3000823332545484,
+   "tv": 0.3000823332545482,
    "mode_moved": true,
    "base_mode": "shoot",
    "aligned_mode": "speak"
@@ -927,7 +927,7 @@
    "support": 20,
    "tau": 0.16842105263157894,
    "d_entropy": -4.689331947246319,
-   "tv": 0.9031389617291969,
+   "tv": 0.903138961729197,
    "mode_moved": true,
    "base_mode": "take",
    "aligned_mode": "help"
@@ -940,7 +940,7 @@
    "support": 100,
    "tau": 0.5894736842105263,
    "d_entropy": -1.4514418474321147,
-   "tv": 0.41977384309293425,
+   "tv": 0.41977384309293414,
    "mode_moved": true,
    "base_mode": "play",
    "aligned_mode": "argue"
@@ -953,7 +953,7 @@
    "support": 195,
    "tau": 0.35789473684210527,
    "d_entropy": -0.04496601451513005,
-   "tv": 0.18964654765483005,
+   "tv": 0.18964654765483008,
    "mode_moved": true,
    "base_mode": "talk",
    "aligned_mode": "attack"
@@ -979,7 +979,7 @@
    "support": 156,
    "tau": 0.9052631578947369,
    "d_entropy": -0.019384877287861535,
-   "tv": 0.054705493588365336,
+   "tv": 0.05470549358836535,
    "mode_moved": false,
    "base_mode": "look",
    "aligned_mode": "look"
@@ -992,7 +992,7 @@
    "support": 100,
    "tau": 0.4,
    "d_entropy": -1.5876822458632933,
-   "tv": 0.4318855933397972,
+   "tv": 0.4318855933397973,
    "mode_moved": false,
    "base_mode": "talk",
    "aligned_mode": "talk"
@@ -1018,7 +1018,7 @@
    "support": 134,
    "tau": 0.6947368421052632,
    "d_entropy": -0.3754374649753105,
-   "tv": 0.189710057267573,
+   "tv": 0.18971005726757298,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "argue"
@@ -1031,7 +1031,7 @@
    "support": 119,
    "tau": 0.3684210526315789,
    "d_entropy": -0.2148439792827066,
-   "tv": 0.2853363198724358,
+   "tv": 0.2853363198724359,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "talk"
@@ -1044,7 +1044,7 @@
    "support": 127,
    "tau": 0.3263157894736842,
    "d_entropy": 0.08063804071844594,
-   "tv": 0.38575930790489005,
+   "tv": 0.3857593079048899,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "talk"
@@ -1057,7 +1057,7 @@
    "support": 128,
    "tau": 0.6421052631578947,
    "d_entropy": -0.30532667744051434,
-   "tv": 0.1776203756252778,
+   "tv": 0.1776203756252777,
    "mode_moved": true,
    "base_mode": "talk",
    "aligned_mode": "take"
@@ -1070,7 +1070,7 @@
    "support": 120,
    "tau": 0.6105263157894737,
    "d_entropy": 0.21579334226422642,
-   "tv": 0.3220938778190654,
+   "tv": 0.32209387781906523,
    "mode_moved": true,
    "base_mode": "shoot",
    "aligned_mode": "argue"
@@ -1083,7 +1083,7 @@
    "support": 136,
    "tau": 0.7684210526315789,
    "d_entropy": 0.18219381586837446,
-   "tv": 0.12475262845880412,
+   "tv": 0.12475262845880405,
    "mode_moved": false,
    "base_mode": "beat",
    "aligned_mode": "beat"
@@ -1096,7 +1096,7 @@
    "support": 144,
    "tau": 0.5578947368421052,
    "d_entropy": -0.22907695514687987,
-   "tv": 0.20751637404104364,
+   "tv": 0.20751637404104378,
    "mode_moved": false,
    "base_mode": "talk",
    "aligned_mode": "talk"
@@ -1109,7 +1109,7 @@
    "support": 106,
    "tau": 0.15789473684210525,
    "d_entropy": -0.8276041231336855,
-   "tv": 0.4003824011304804,
+   "tv": 0.4003824011304807,
    "mode_moved": true,
    "base_mode": "talk",
    "aligned_mode": "speak"
@@ -1122,7 +1122,7 @@
    "support": 113,
    "tau": 0.23157894736842105,
    "d_entropy": -0.9082504328935936,
-   "tv": 0.574678915008461,
+   "tv": 0.5746789150084612,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "speak"
@@ -1135,7 +1135,7 @@
    "support": 105,
    "tau": 0.4105263157894737,
    "d_entropy": -0.1829179726738701,
-   "tv": 0.282653915692231,
+   "tv": 0.2826539156922308,
    "mode_moved": false,
    "base_mode": "talk",
    "aligned_mode": "talk"
@@ -1148,7 +1148,7 @@
    "support": 129,
    "tau": 0.23157894736842105,
    "d_entropy": 0.2800326215304798,
-   "tv": 0.321911686741417,
+   "tv": 0.32191168674141724,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "argue"
@@ -1161,7 +1161,7 @@
    "support": 145,
    "tau": 0.4421052631578947,
    "d_entropy": 0.24101668878406546,
-   "tv": 0.2833427451249883,
+   "tv": 0.28334274512498814,
    "mode_moved": true,
    "base_mode": "shoot",
    "aligned_mode": "dance"
@@ -1174,7 +1174,7 @@
    "support": 78,
    "tau": 0.2,
    "d_entropy": -1.421469156441744,
-   "tv": 0.44167001940404516,
+   "tv": 0.44167001940404527,
    "mode_moved": false,
    "base_mode": "talk",
    "aligned_mode": "talk"
@@ -1187,7 +1187,7 @@
    "support": 119,
    "tau": 0.49473684210526314,
    "d_entropy": -0.4575738396713662,
-   "tv": 0.4276114227950525,
+   "tv": 0.4276114227950524,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "attack"
@@ -1200,7 +1200,7 @@
    "support": 102,
    "tau": 0.43157894736842106,
    "d_entropy": -0.5549474907637117,
-   "tv": 0.39172705968579036,
+   "tv": 0.3917270596857903,
    "mode_moved": false,
    "base_mode": "argue",
    "aligned_mode": "argue"
@@ -1213,7 +1213,7 @@
    "support": 85,
    "tau": 0.3473684210526316,
    "d_entropy": -0.9695340689614484,
-   "tv": 0.38033199589492334,
+   "tv": 0.3803319958949231,
    "mode_moved": false,
    "base_mode": "beat",
    "aligned_mode": "beat"
@@ -1226,7 +1226,7 @@
    "support": 101,
    "tau": 0.4,
    "d_entropy": -0.43056057319859775,
-   "tv": 0.32096900804025547,
+   "tv": 0.3209690080402555,
    "mode_moved": false,
    "base_mode": "shoot",
    "aligned_mode": "shoot"
@@ -1239,7 +1239,7 @@
    "support": 27,
    "tau": 0.042105263157894736,
    "d_entropy": -4.731298671652162,
-   "tv": 0.8508178163008433,
+   "tv": 0.8508178163008431,
    "mode_moved": true,
    "base_mode": "talk",
    "aligned_mode": "sit"
@@ -1265,7 +1265,7 @@
    "support": 196,
    "tau": 0.5473684210526316,
    "d_entropy": -0.03941833881013146,
-   "tv": 0.15508345147555938,
+   "tv": 0.15508345147555935,
    "mode_moved": false,
    "base_mode": "attack",
    "aligned_mode": "attack"
@@ -1278,7 +1278,7 @@
    "support": 127,
    "tau": 0.3368421052631579,
    "d_entropy": 0.385184098679229,
-   "tv": 0.320485822074165,
+   "tv": 0.32048582207416504,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "talk"
@@ -1291,7 +1291,7 @@
    "support": 155,
    "tau": 0.8,
    "d_entropy": -0.03315118050245047,
-   "tv": 0.05840980053500245,
+   "tv": 0.05840980053500246,
    "mode_moved": false,
    "base_mode": "beat",
    "aligned_mode": "beat"
@@ -1304,7 +1304,7 @@
    "support": 110,
    "tau": 0.5052631578947369,
    "d_entropy": -0.7027868482055197,
-   "tv": 0.28278533199893685,
+   "tv": 0.2827853319989368,
    "mode_moved": false,
    "base_mode": "beat",
    "aligned_mode": "beat"
@@ -1317,7 +1317,7 @@
    "support": 140,
    "tau": 0.4631578947368421,
    "d_entropy": -0.08293337409833335,
-   "tv": 0.24847761745978952,
+   "tv": 0.24847761745978938,
    "mode_moved": true,
    "base_mode": "argue",
    "aligned_mode": "talk"
@@ -1330,7 +1330,7 @@
    "support": 130,
    "tau": 0.5368421052631579,
    "d_entropy": -0.12417470173547773,
-   "tv": 0.1272232292316419,
+   "tv": 0.12722322923164195,
    "mode_moved": false,
    "base_mode": "beat",
    "aligned_mode": "beat"
@@ -1343,7 +1343,7 @@
    "support": 123,
    "tau": 0.3473684210526316,
    "d_entropy": -0.15483086554984737,
-   "tv": 0.2820132164566731,
+   "tv": 0.28201321645667304,
    "mode_moved": true,
    "base_mode": "beat",
    "aligned_mode": "throw"
@@ -1356,7 +1356,7 @@
    "support": 117,
    "tau": 0.42105263157894735,
    "d_entropy": -0.06496650383173463,
-   "tv": 0.18892817990796776,
+   "tv": 0.1889281799079678,
    "mode_moved": false,
    "base_mode": "beat",
    "aligned_mode": "beat"
@@ -1369,7 +1369,7 @@
    "support": 126,
    "tau": 0.6842105263157895,
    "d_entropy": -0.11813585836064089,
-   "tv": 0.1805690013929173,
+   "tv": 0.18056900139291718,
    "mode_moved": false,
    "base_mode": "beat",
    "aligned_mode": "beat"
@@ -1382,7 +1382,7 @@
    "support": 110,
    "tau": 0.4,
    "d_entropy": -0.1237097309022035,
-   "tv": 0.346525773936391,
+   "tv": 0.3465257739363909,
    "mode_moved": true,
    "base_mode": "shoot",
    "aligned_mode": "argue"
@@ -1395,7 +1395,7 @@
    "support": 127,
    "tau": 0.8421052631578947,
    "d_entropy": 0.17769514298211675,
-   "tv": 0.11760947371003881,
+   "tv": 0.11760947371003877,
    "mode_moved": false,
    "base_mode": "beat",
    "aligned_mode": "beat"
@@ -1408,7 +1408,7 @@
    "support": 140,
    "tau": 0.6210526315789474,
    "d_entropy": -0.23037051013968757,
-   "tv": 0.23624847090603024,
+   "tv": 0.23624847090603027,
    "mode_moved": false,
    "base_mode": "talk",
    "aligned_mode": "talk"
@@ -1421,7 +1421,7 @@
    "support": 115,
    "tau": 0.2736842105263158,
    "d_entropy": -0.8740266555799927,
-   "tv": 0.4638894377608832,
+   "tv": 0.4638894377608829,
    "mode_moved": true,
    "base_mode": "talk",
    "aligned_mode": "shout"
@@ -1434,7 +1434,7 @@
    "support": 87,
    "tau": 0.4105263157894737,
    "d_entropy": -0.7090075614514468,
-   "tv": 0.4188544860932186,
+   "tv": 0.41885448609321874,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "a"
@@ -1447,7 +1447,7 @@
    "support": 83,
    "tau": 0.7473684210526316,
    "d_entropy": 0.21689474426976663,
-   "tv": 0.2167293491142673,
+   "tv": 0.21672934911426733,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "threatened"
@@ -1486,7 +1486,7 @@
    "support": 58,
    "tau": 0.631578947368421,
    "d_entropy": -0.4614886681717687,
-   "tv": 0.3535805710329719,
+   "tv": 0.3535805710329718,
    "mode_moved": false,
    "base_mode": "that",
    "aligned_mode": "that"
@@ -1499,7 +1499,7 @@
    "support": 80,
    "tau": 0.5368421052631579,
    "d_entropy": -0.8353964555454549,
-   "tv": 0.2952456131880678,
+   "tv": 0.29524561318806763,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"
@@ -1512,7 +1512,7 @@
    "support": 71,
    "tau": 0.631578947368421,
    "d_entropy": 0.45596687433942584,
-   "tv": 0.4941169583983936,
+   "tv": 0.4941169583983937,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "a"
@@ -1525,7 +1525,7 @@
    "support": 52,
    "tau": 0.42105263157894735,
    "d_entropy": -0.5255603268643316,
-   "tv": 0.3366568325328052,
+   "tv": 0.3366568325328053,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "they"
@@ -1538,7 +1538,7 @@
    "support": 63,
    "tau": 0.631578947368421,
    "d_entropy": -1.4374881048302535,
-   "tv": 0.34488406982609787,
+   "tv": 0.34488406982609804,
    "mode_moved": false,
    "base_mode": "a",
    "aligned_mode": "a"
@@ -1551,7 +1551,7 @@
    "support": 13,
    "tau": 0.28205128205128205,
    "d_entropy": -3.261188084560085,
-   "tv": 0.6871582582466227,
+   "tv": 0.6871582582466228,
    "mode_moved": false,
    "base_mode": "that",
    "aligned_mode": "that"
@@ -1564,7 +1564,7 @@
    "support": 80,
    "tau": 0.7368421052631579,
    "d_entropy": -0.2563170705885449,
-   "tv": 0.17391420671079383,
+   "tv": 0.17391420671079388,
    "mode_moved": true,
    "base_mode": "they",
    "aligned_mode": "safer"
@@ -1577,7 +1577,7 @@
    "support": 103,
    "tau": 0.5789473684210527,
    "d_entropy": -0.30222877439505336,
-   "tv": 0.3126109139131749,
+   "tv": 0.31261091391317486,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "threatened"
@@ -1590,7 +1590,7 @@
    "support": 92,
    "tau": 0.6842105263157895,
    "d_entropy": -0.04361638476764451,
-   "tv": 0.21605074324187323,
+   "tv": 0.21605074324187337,
    "mode_moved": false,
    "base_mode": "that",
    "aligned_mode": "that"
@@ -1603,7 +1603,7 @@
    "support": 113,
    "tau": 0.9368421052631579,
    "d_entropy": 0.0073544473530882115,
-   "tv": 0.06262025816506532,
+   "tv": 0.06262025816506533,
    "mode_moved": false,
    "base_mode": "they",
    "aligned_mode": "they"
@@ -1629,7 +1629,7 @@
    "support": 106,
    "tau": 0.7263157894736842,
    "d_entropy": 0.7619209833703549,
-   "tv": 0.2894309710317081,
+   "tv": 0.2894309710317079,
    "mode_moved": true,
    "base_mode": "the",
    "aligned_mode": "threatened"
@@ -1642,7 +1642,7 @@
    "support": 68,
    "tau": 0.7894736842105263,
    "d_entropy": 0.05579572218578388,
-   "tv": 0.11430884242695935,
+   "tv": 0.11430884242695931,
    "mode_moved": false,
    "base_mode": "that",
    "aligned_mode": "that"
@@ -1655,7 +1655,7 @@
    "support": 70,
    "tau": 0.4842105263157895,
    "d_entropy": -0.42335909833785745,
-   "tv": 0.27671656510542136,
+   "tv": 0.2767165651054214,
    "mode_moved": true,
    "base_mode": "they",
    "aligned_mode": "threatened"
@@ -1668,7 +1668,7 @@
    "support": 116,
    "tau": 0.7157894736842105,
    "d_entropy": -0.5552063295671354,
-   "tv": 0.18042631274077853,
+   "tv": 0.18042631274077855,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"
@@ -1694,7 +1694,7 @@
    "support": 84,
    "tau": 0.5473684210526316,
    "d_entropy": -0.5279511277793496,
-   "tv": 0.3285095326894644,
+   "tv": 0.32850953268946453,
    "mode_moved": false,
    "base_mode": "that",
    "aligned_mode": "that"
@@ -1707,7 +1707,7 @@
    "support": 89,
    "tau": 0.8526315789473684,
    "d_entropy": 0.03972108917652761,
-   "tv": 0.09168090688575525,
+   "tv": 0.09168090688575527,
    "mode_moved": false,
    "base_mode": "they",
    "aligned_mode": "they"
@@ -1746,7 +1746,7 @@
    "support": 82,
    "tau": 0.37894736842105264,
    "d_entropy": 0.051765450505404154,
-   "tv": 0.4131299027971559,
+   "tv": 0.413129902797156,
    "mode_moved": true,
    "base_mode": "threatened",
    "aligned_mode": "a"
@@ -1759,7 +1759,7 @@
    "support": 89,
    "tau": 0.6631578947368421,
    "d_entropy": 0.24347989327816144,
-   "tv": 0.21728167609056226,
+   "tv": 0.21728167609056218,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "threatened"
@@ -1772,7 +1772,7 @@
    "support": 78,
    "tau": 0.5368421052631579,
    "d_entropy": -0.43532016286095754,
-   "tv": 0.39507616794755734,
+   "tv": 0.39507616794755746,
    "mode_moved": true,
    "base_mode": "the",
    "aligned_mode": "threatened"
@@ -1785,7 +1785,7 @@
    "support": 123,
    "tau": 0.6631578947368421,
    "d_entropy": 0.32403503496872776,
-   "tv": 0.29525636236470865,
+   "tv": 0.2952563623647087,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "the"
@@ -1798,7 +1798,7 @@
    "support": 59,
    "tau": 0.5894736842105263,
    "d_entropy": -0.6452951076785309,
-   "tv": 0.3964622188953479,
+   "tv": 0.39646221889534783,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "a"
@@ -1811,7 +1811,7 @@
    "support": 70,
    "tau": 0.49473684210526314,
    "d_entropy": -0.813031137726286,
-   "tv": 0.4701931248846899,
+   "tv": 0.47019312488469,
    "mode_moved": true,
    "base_mode": "the",
    "aligned_mode": "threatened"
@@ -1837,7 +1837,7 @@
    "support": 59,
    "tau": 0.3684210526315789,
    "d_entropy": 0.03899048790892934,
-   "tv": 0.37564400451123453,
+   "tv": 0.3756440045112347,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "they"
@@ -1850,7 +1850,7 @@
    "support": 76,
    "tau": 0.5894736842105263,
    "d_entropy": -1.0796239978237532,
-   "tv": 0.349613896451323,
+   "tv": 0.3496138964513232,
    "mode_moved": true,
    "base_mode": "a",
    "aligned_mode": "that"
@@ -1863,7 +1863,7 @@
    "support": 11,
    "tau": 0.3090909090909091,
    "d_entropy": -3.234151331971994,
-   "tv": 0.6770138716255062,
+   "tv": 0.6770138716255059,
    "mode_moved": true,
    "base_mode": "that",
    "aligned_mode": "as"
@@ -1876,7 +1876,7 @@
    "support": 88,
    "tau": 0.7368421052631579,
    "d_entropy": -0.3257573380675023,
-   "tv": 0.22723881456446862,
+   "tv": 0.2272388145644685,
    "mode_moved": true,
    "base_mode": "they",
    "aligned_mode": "threatened"
@@ -1915,7 +1915,7 @@
    "support": 117,
    "tau": 0.9157894736842105,
    "d_entropy": 0.05331476530296708,
-   "tv": 0.059084194339948645,
+   "tv": 0.05908419433994863,
    "mode_moved": false,
    "base_mode": "they",
    "aligned_mode": "they"
@@ -1928,7 +1928,7 @@
    "support": 77,
    "tau": 0.5157894736842106,
    "d_entropy": -1.4990840411783117,
-   "tv": 0.3937109868707701,
+   "tv": 0.3937109868707699,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"
@@ -1941,7 +1941,7 @@
    "support": 110,
    "tau": 0.7368421052631579,
    "d_entropy": 0.8570874084355644,
-   "tv": 0.29100268365158866,
+   "tv": 0.2910026836515887,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"
@@ -1967,7 +1967,7 @@
    "support": 66,
    "tau": 0.4105263157894737,
    "d_entropy": -0.5726014995337936,
-   "tv": 0.2891816998902565,
+   "tv": 0.2891816998902563,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"
@@ -1980,7 +1980,7 @@
    "support": 100,
    "tau": 0.5578947368421052,
    "d_entropy": -0.3781501729417247,
-   "tv": 0.1641944093060456,
+   "tv": 0.16419440930604562,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"
@@ -1993,7 +1993,7 @@
    "support": 83,
    "tau": 0.7473684210526316,
    "d_entropy": -0.346438296361236,
-   "tv": 0.14276529363890364,
+   "tv": 0.1427652936389036,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"
@@ -2006,7 +2006,7 @@
    "support": 109,
    "tau": 0.5263157894736842,
    "d_entropy": -0.4629086926597097,
-   "tv": 0.25879924314679825,
+   "tv": 0.2587992431467983,
    "mode_moved": false,
    "base_mode": "that",
    "aligned_mode": "that"
@@ -2019,7 +2019,7 @@
    "support": 81,
    "tau": 0.7473684210526316,
    "d_entropy": 0.0631914046118407,
-   "tv": 0.08106524527355831,
+   "tv": 0.0810652452735583,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"
@@ -2032,7 +2032,7 @@
    "support": 119,
    "tau": 0.8105263157894737,
    "d_entropy": -0.31809436339007746,
-   "tv": 0.388164498440088,
+   "tv": 0.38816449844008794,
    "mode_moved": true,
    "base_mode": "the",
    "aligned_mode": "threatened"
@@ -2045,7 +2045,7 @@
    "support": 58,
    "tau": 0.5368421052631579,
    "d_entropy": -0.871368444626011,
-   "tv": 0.38921990172838433,
+   "tv": 0.3892199017283843,
    "mode_moved": false,
    "base_mode": "threatened",
    "aligned_mode": "threatened"

@@ -214,9 +214,26 @@ def declared_pairs(prompt):
     """
     from malignment import roster, vectors as V
     ep, unresolved = roster.endpoints()
-    rows = V.rows("SELECT DISTINCT model FROM twp_words_v4 WHERE prompt={p:String}",
-                  p=prompt)
-    have = {r["model"] for r in rows}
+    #: READ IT TWICE AND REFUSE IF THEY DISAGREE. On 2026-08-19, with 144 agents
+    #: saturating the machine, this read returned 17 models and then 15 where the
+    #: settled value is 24 -- SILENTLY, with no error and no short-row warning.
+    #: A population that shrinks under load is the worst failure available here,
+    #: because every statistic downstream is still internally consistent and
+    #: simply describes fewer lineages than the caller believes. Two reads cannot
+    #: prove a read is complete; they do catch a read that is not repeatable,
+    #: which is what this was.
+    def _models():
+        return {r["model"] for r in
+                V.rows("SELECT DISTINCT model FROM twp_words_v4 WHERE prompt={p:String}",
+                       p=prompt)}
+    have, again = _models(), _models()
+    if have != again:
+        raise SystemExit(
+            "twp_words_v4 gave two different model sets for %r on consecutive "
+            "reads (%d then %d, symmetric difference %d). The store is not being "
+            "read repeatably; every pair count derived from it right now is a "
+            "population of unknown size. Re-run when the machine is quiet."
+            % (prompt[:48], len(have), len(again), len(have ^ again)))
     pairs, dropped = {}, []
     for b, a in sorted(ep.items()):
         if b in have and a in have:
