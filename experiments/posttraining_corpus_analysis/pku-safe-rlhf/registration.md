@@ -13,7 +13,7 @@ can measure**. From the roster's own attestations:
 
     huggyllama/llama-7b -> PKU-Alignment/beaver-7b-v1.0   a declared lineage
     PKU-Alignment/alpaca-7b-reproduced                    the SFT input to Safe RLHF
-    LLM360/AmberSafe                                      DPO on PKU-SafeRLHF ALONE
+    LLM360/AmberSafe                                      CONTESTED, see A15
 
 So a lexical signal found here can later be checked against a model trained on
 it. **That check is NOT part of this registration** — it needs cells and waits on
@@ -657,3 +657,34 @@ was reported in the first run rather than found after this one.
 
 Caveat: 2 of 16 batches refused, 30 pairs uncoded, but they are not
 differentially composed (80% severity-equal vs 81% of coded).
+
+---
+
+## A15 — 2026-08-18. "AmberSafe: DPO on PKU-SafeRLHF ALONE" was a CARD CLAIM I asserted as fact. The corpus->model check is not available even at n=1.
+
+RH pointed me at `roster/models/attestations.json`. It records, and rates the
+checkpoint `confidence: medium` because of it:
+
+> "the card's DataMix lists only PKU-SafeRLHF (330k); the paper says 'AmberSafe
+> is trained on ShareGPT 90K' and then 'further optimized on the SafeRLHF
+> dataset' -- i.e. the paper describes an SFT-on-ShareGPT stage plus a DPO stage"
+
+Plus a base contradiction: card says AmberChat, paper says Amber ckpt_355. Y's
+pair is `Amber > AmberSafe`.
+
+**WHAT THIS KILLS.** I found AmberSafe at rank 1 of 32 on Y's in-scene guilt
+measure (+15.46pp against a median of +0.78; +11.44 against +0.51 all-passes),
+tested two confounds, and read it as the corpus->model check finally landing. The
+measurement stands. **The attribution does not**: if AmberSafe carries a
+ShareGPT SFT stage, the delta spans it, and `U_ladder` puts 74% of the ladder's
+JS at SFT. The one uncontrolled stage is the one that does most of the work.
+
+**AND `beaver` IS NOT IN Y OR M02 AT ALL.** My grep matched the ANIMAL in the
+corpus -- "beaver and the prairie rabbit", "beaver cap on his head" -- and a
+vocabulary token `beaverbrook`. A name standing in for a relation, again.
+
+So: rank 1 of 32 is a real and interesting fact about AmberSafe. It is not
+evidence about PKU, and the corpus->model check remains unavailable -- not for
+want of cells, but because the one checkpoint that could carry it has an
+unsettled training description in which the safety corpus is one of two candidate
+stages.

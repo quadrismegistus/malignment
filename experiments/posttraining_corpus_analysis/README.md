@@ -29,8 +29,10 @@ something the optimisation produces from data that does not look like a word lis
 
 **PKU is the one that matters, because it is the only cached corpus that TRAINED
 MODELS WE MEASURE**: `beaver-7b-v1.0` (a declared lineage off `llama-7b`),
-`alpaca-7b-reproduced` (the SFT input to Safe RLHF) and `AmberSafe` (DPO on
-PKU-SafeRLHF alone). A signal found in the corpus can be checked against the
+`alpaca-7b-reproduced` (the SFT input to Safe RLHF) and `AmberSafe` (**card says
+DPO on PKU-SafeRLHF alone; the paper says ShareGPT-90K SFT plus a SafeRLHF DPO
+stage. `roster/models/attestations.json` records the contradiction and rates the
+checkpoint confidence: medium**). A signal found in the corpus can be checked against the
 model trained on it. Neither hh-rlhf nor ultrafeedback offers that — no Anthropic
 model is in the roster.
 
