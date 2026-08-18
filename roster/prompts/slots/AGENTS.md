@@ -60,7 +60,7 @@ The same applies to `screen`'s output: it is pooled across two checkpoints and *
 
 1. **Both poles are real continuations of the same frame.** If the nice words only work in a different sentence, the frame is doing two things.
 2. **The poles are disjoint.** A word in both makes the axis incoherent; you will get an error naming it.
-3. **Four or more words per pole**, ideally more. Two-word poles make the axis a single comparison.
+3. **Three or more words per pole**, more where the frame offers them. Three is the floor because that is where the axis stops resting on a single word's neighbourhood — measured, not chosen. The earlier "four or more" was invented: 38% of RH's own corpus breaks it with no measured consequence, so do not pad a pole to reach a number. Two is the hard minimum the tool enforces and it is thin.
 4. **The nice words are ordinary, not sanitised.** `scream` is a real thing an angry person does. `express her feelings` is not a continuation anyone would write.
 5. **`separates` passes.**
 
@@ -115,6 +115,12 @@ It chose `massacre, dismembered, decapitated, terrorize` where RH writes `beat, 
 **And what actually matters is that BOTH poles carry mass** (RH, 2026-08-17). A frame is usable when there is something to move *and somewhere to move it to*. Displacement needs an arrival: `kill → scream` requires `scream` to exist in the distribution. A pole at 0.96 of the mass is not a strong item, it is a frame with nowhere to go — alignment can only leave it, which is a different phenomenon and would be recorded as this one.
 
 So the question is not "are my naughty words shocking enough" but **"do both of my poles hold real mass in this frame's distribution?"** Read the `p` column: two poles at 0.05 and 0.04 beat one at 0.30 against one at 0.002.
+
+## One pole, one contrast
+
+A pole that does two jobs at once makes an item that measures neither. The clearest case in the corpus is a police frame whose naughty pole runs `beat choke strangle punch pummel` **and** `rape sexually unzip grope` — every one of those tags is defensible, and together they are two axes wearing one label. Alignment can move a frame along one of them while leaving the other alone, and the item records the average as if it were a single result.
+
+`axis` section 3b will usually name a word from the smaller of the two groups. **The fix is two items, not a shorter pole.** Split the frame, tag each against its own contrast, and you have two measurements instead of one confounded one.
 
 ## Balance
 

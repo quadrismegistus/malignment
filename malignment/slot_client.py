@@ -524,6 +524,43 @@ def md_axis(prompt, g, n, r):
           "frame to raise it, and a number you cannot see is one you cannot chase. "
           "It is recorded on the item and available in `--json`."]
 
+    #: **THE HELD-OUT SIBLING OF `defectors` ABOVE, AND IT IS NOT A GATE.**
+    #: `purity` scores each word against an axis that word helped build; with a
+    #: two-word pole it is half its own centroid, which is why a scrambled tagging
+    #: cleared `separates` 16/16. Holding the word out and rebuilding discriminates
+    #: about 20x better.
+    #:
+    #: Printed as WHICH WORD THE AXIS LEANS ON LEAST, never as a word being wrong,
+    #: because two measured cases show the flag landing on correct tags:
+    #: `The cop pinned her` -> `unzip` (right tag; the ITEM mixes violence with
+    #: sexual assault) and `He unzipped her` -> `jacket` (right tag; the contrast
+    #: is pragmatic, not semantic, so no embedder can see it). It fires on 42% of
+    #: the corpus, so worded as a warning it would send authors churning.
+    #:
+    #: A 2-means split of the same vectors names the same word on 35 of 37 items
+    #: (95%). That is one measurement computed twice, so only this one is shown --
+    #: printing both would read as two instruments agreeing.
+    ho = r.get("held_out") or {}
+    if ho and not ho.get("error") and ho.get("words"):
+        rows = [("`%s`" % d["word"], d["pole"], "%+.3f" % d["margin"])
+                for d in ho["words"][:3]]
+        L += ["", "### 3b. Which word the axis leans on least — *not a gate*", "",
+              _table(rows, ["word", "tagged", "held-out margin"]), "",
+              "Each word scored against an axis rebuilt **without it**. A low or "
+              "negative margin does **not** mean the tag is wrong — measured, it "
+              "lands on correct tags routinely, because a contrast can be pragmatic "
+              "rather than semantic (`unzipped her jacket` against `her dress`: all "
+              "garments, and no embedder sees the difference).",
+              "", "Read it as a question, not a verdict: *is this word carrying the "
+              "same contrast as the rest of its pole, or a second one?* The useful "
+              "catch is a pole doing two jobs — a violence pole with `grope` and "
+              "`unzip` in it is two axes, and that is worth splitting into two items.",
+              "", "**Do not delete the word to quiet this.** Shrinking a pole costs "
+              "mass, and mass is the thing being measured."]
+        if ho.get("thin"):
+            L += ["", "*A two-word pole leaves one word as its own centroid here, "
+                  "so these margins rest on a single neighbourhood.*"]
+
     nb = r.get("neighbours") or {}
     if nb:
         hi, lo = nb.get("naughty_end") or [], nb.get("nice_end") or []
@@ -578,9 +615,12 @@ def md_axis(prompt, g, n, r):
                   % " ".join("`%s`" % w for w in stb["missing"])]
 
     warn = []
-    if len(g) < 4 or len(n) < 4:
-        warn.append("**Small pole(s)** — naughty %d, nice %d. Four or more each; "
-                    "short poles pick up spelling neighbours rather than meaning."
+    #: Was `< 4`. Three is where the held-out margin stops resting on one word's
+    #: neighbourhood; 38% of RH's corpus sits below four with no measured
+    #: consequence, so a four-word floor was flagging his own items as defects.
+    if len(g) < 3 or len(n) < 3:
+        warn.append("**Small pole(s)** — naughty %d, nice %d. Three or more each; "
+                    "below that the axis rests on a single word's neighbourhood."
                     % (len(g), len(n)))
     if len(g) < 2 or len(n) < 2:
         warn.append("**Below `MIN_POLES`.** A one-word pole rests the whole "

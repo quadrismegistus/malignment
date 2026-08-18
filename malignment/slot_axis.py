@@ -829,6 +829,75 @@ def separates(S, naughty, nice, floor=SEPARATION_FLOOR):
     return (gap >= floor and correct == total), gap, correct, total
 
 
+def held_out(prompt, naughty, nice, use_store=True):
+    """Per-word margin against an axis rebuilt WITHOUT that word. -> dict
+
+    `purity`/`defectors` ask whether a word lands on its own side of an axis
+    **that word helped build**. With a two-word pole the word is half its own
+    centroid, so the question is close to circular and it passes almost always:
+    a deliberately scrambled tagging cleared `separates` 16/16.
+
+    This holds each word out, rebuilds the axis from the rest, and asks where the
+    word falls. Measured over the live corpus it discriminates about 20x better
+    than the in-sample version.
+
+    **IT IS NOT A GATE AND MUST NOT BECOME ONE.** Its threshold would refuse two
+    of RH's own items, and it fires on 37 of 89 -- 42% of the corpus. Two
+    measured cases fix the wording:
+
+        `The cop pinned her`  worst = `unzip` -0.273, with `sexually`, `grope`.
+            Those tags are RIGHT; the item mixes a violence pole with a sexual
+            one, and the pointer found a real defect.
+
+        `He unzipped her`     worst = `jacket` -0.241, and that tag is right too.
+            nice is `jacket coat suitcase`, naughty is `dress skirt blouse` --
+            all garments. The contrast is PRAGMATIC (what unzipping implies),
+            not semantic, so no embedding can see it.
+
+    So it reports which word the axis leans on LEAST. It never reports a word as
+    wrong. A 2-means split of the same vectors names the same word on 35 of 37
+    items (95%), so that is the same measurement rather than a second opinion and
+    printing both would manufacture corroboration.
+
+    A pole of 2 leaves a single word as its centroid when one is held out; the
+    margin is still defined but rests on one neighbourhood, so `thin` marks it.
+    """
+    import numpy as np
+    g = [w for w in naughty if w]
+    n = [w for w in nice if w]
+    if len(g) < MIN_POLES or len(n) < MIN_POLES:
+        return {"error": "need >= %d words per pole" % MIN_POLES}
+    words = g + n
+    V = embed_cached(prompt, words, use_store=use_store)
+    V = np.asarray(V, dtype="float64")
+    V = V / np.linalg.norm(V, axis=1, keepdims=True)
+    #: Centre on the frame before anything else. eta^2 = 0.764 of a raw
+    #: cross-prompt score is prompt identity, so an uncentred margin measures
+    #: mostly which prompt this is.
+    V = V - V.mean(0)
+    V = V / np.linalg.norm(V, axis=1, keepdims=True)
+    ng = len(g)
+    out = []
+    for i, w in enumerate(words):
+        keep_g = [x for x in range(ng) if x != i]
+        keep_n = [x for x in range(ng, len(words)) if x != i]
+        if not keep_g or not keep_n:
+            continue
+        ax = V[keep_g].mean(0) - V[keep_n].mean(0)
+        nrm = float(np.linalg.norm(ax))
+        if nrm == 0.0:
+            continue
+        s = float(V[i] @ (ax / nrm))
+        out.append({"word": w, "pole": "naughty" if i < ng else "nice",
+                    "margin": s if i < ng else -s})
+    if not out:
+        return {"error": "no word could be held out"}
+    out.sort(key=lambda d: d["margin"])
+    return {"words": out, "weakest": out[0]["word"], "margin": out[0]["margin"],
+            "n_negative": sum(1 for d in out if d["margin"] < 0),
+            "thin": len(g) == MIN_POLES or len(n) == MIN_POLES}
+
+
 def _normal_scores(S):
     """{word: s} -> {word: van der Waerden score}, ties averaged.
 

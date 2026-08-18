@@ -1013,10 +1013,18 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
         stability = _V.pole_stability(naughty, nice)
     except Exception as e:
         stability = {"error": "%s: %s" % (type(e).__name__, e)}
+    #: Held-out sibling of `purity`/`defectors`, which score each word against an
+    #: axis it helped build. Best-effort on the same contract as the two above:
+    #: thinner report, never a wrong one.
+    try:
+        heldout = slot_axis.held_out(prompt, naughty, nice)
+    except Exception as e:
+        heldout = {"error": "%s: %s" % (type(e).__name__, e)}
     return dict({
         "coherence": coh,
         "cross_corpus": cross,
         "stability": stability,
+        "held_out": heldout,
         "separates": {"ok": bool(sep_ok), "gap": float(sep_gap),
                       "correct": int(sep_correct), "total": int(sep_total),
                       "floor": slot_axis.SEPARATION_FLOOR,
