@@ -633,31 +633,43 @@ def md_axis(prompt, g, n, r):
               "kind of thing you meant, the poles are wrong however good the gate "
               "looks."]
 
-    stb = r.get("stability") or {}
-    _miss = _did_not_run(6, "Are these pole words stable outside the frame?", stb)
-    if _miss:
-        L += _miss
-    if stb and not stb.get("error"):
-        nbs = stb.get("neighbours") or {}
-        if nbs:
-            rows = [(w, " ".join("`%s`" % x["word"] for x in v[:5]))
-                    for w, v in nbs.items()]
-            L += ["", "## 6. Are these pole words stable outside the frame?", "",
-                  _table(rows, ["pole word", "nearest in general English"]), "",
-                  "From fastText (%d words, no prompt). **A different question from "
-                  "sections 1-5, and a REFEREE for one thing:** an item has already "
-                  "been quarantined because `execute` reads here as the compute "
-                  "sense, so treat a pole word whose neighbours are a different "
-                  "sense as a real defect, not a note. In your frame bge reads each word "
-                  "correctly; here there is no frame, so a word with several senses "
-                  "shows them all. `file` returning `jpg png gif` means it is "
-                  "overwhelmingly the *computer* sense in general English — fine "
-                  "inside a grievance frame, a risk if the item is reused or "
-                  "compared against a twin worded differently."
-                  % stb.get("vocab", 0)]
-        if stb.get("missing"):
-            L += ["", "Not in the vocabulary at all: %s"
-                  % " ".join("`%s`" % w for w in stb["missing"])]
+    #: **SECTION 6 IS RETIRED FROM THIS REPORT (RH, 2026-08-18). IT WAS ASKING A
+    #: QUESTION THE MEASUREMENT NEVER ASKS.** fastText holds ONE vector per word
+    #: type with no context, so a polysemous word shows every sense it has
+    #: anywhere in English. The models being measured are contextual: conditioned
+    #: on a frame, a competing sense has no mass. The mismatch is structural, not
+    #: a threshold that wanted tuning.
+    #:
+    #: **Its whole flag record, re-tested in frame, is five for five wrong:**
+    #:
+    #:     word      section 6 said        held-out margin IN FRAME
+    #:     sat       reads as Saturday     +0.292   rank 5 of 8
+    #:     talk      reads as wiki-talk    +0.714   rank 7 of 8 (near-strongest)
+    #:     fire      reads as conflagration +0.669  rank 7 of 8 (near-strongest)
+    #:     sue       reads as the name     +0.183   rank 2 of 8
+    #:     execute   reads as compute      +0.512   rank 6 of 13
+    #:
+    #: The cost was real: an author deleted `sat` and `talk` on its say-so, and
+    #: escalated `fire` and `sue` rather than dismissing them -- `sue` being 94%
+    #: of its pole's mass and RH's own top institutional content word, so a strict
+    #: reading of this section disqualified the best word the domain has.
+    #:
+    #: **AND ITS FOUNDING CASE WAS ALSO A FALSE POSITIVE.** The `execute` item was
+    #: quarantined on this section's evidence; the quarantine note itself records
+    #: "in-frame it reads as killing and purity was 1.00", and the stated reason
+    #: is a SPECULATIVE reuse risk -- "would be a poor twin for a differently
+    #: worded comparison". The disconfirming evidence was written down at the
+    #: moment of quarantining and overridden anyway. This section then cited that
+    #: quarantine to authorise the next one.
+    #:
+    #: **The general defect: it defined what counted as a defect and was then
+    #: credited with finding them.** The pilot's report lists `sat` and `talk`
+    #: among the run's real catches for no reason except that this section said so.
+    #:
+    #: `pole_stability` still runs and is in `--json` for anyone doing cross-frame
+    #: lexicon work, where a type-level question is the right one. It is out of
+    #: the surface an author reads while deciding, which is the only place it did
+    #: harm.
 
     warn = []
     #: Was `< 4`. Three is where the held-out margin stops resting on one word's

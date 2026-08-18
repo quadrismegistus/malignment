@@ -583,7 +583,7 @@ def _masses(words, tagged):
 
 def build_item(prompt, naughty, nice, words, provenance=None, domain="",
                writer="slot-explorer", note="", variant=None,
-               authored_by=None, reviewed=None):
+               authored_by=None, reviewed=None, axis=None):
     """The saved item, derived rather than accepted.
 
     `words` is `{word: probability}` from the run the author is looking at. The
@@ -657,6 +657,17 @@ def build_item(prompt, naughty, nice, words, provenance=None, domain="",
         #: would read as "reviewed and found wanting".
         **({"authored_by": authored_by} if authored_by else {}),
         **({"reviewed": bool(reviewed)} if reviewed is not None else {}),
+        #: **THE GATE'S VERDICT AT SAVE TIME, WHICH NOTHING RECORDED UNTIL NOW.**
+        #: A reviewer opening this file could not tell whether `separates` passed
+        #: when the item was written, or which referees were even reachable --
+        #: and a ClickHouse outage has already silently removed two of them from
+        #: an author's report mid-run. `leverage` lives here for the same reason
+        #: it is withheld from the report: recorded so it can be analysed later,
+        #: never shown while a frame is being chosen.
+        #:
+        #: Omitted when absent, like the two fields above, so the 86 archive items
+        #: and hand-authored rows keep the shape they have.
+        **({"axis": axis} if axis else {}),
         "screened_by": provenance or {},
     }
 

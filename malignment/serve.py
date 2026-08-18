@@ -1240,6 +1240,47 @@ class Handler(BaseHTTPRequestHandler):
                     "reviewed may only be sent as false -- an authoring tool "
                     "cannot attest to its own review; clear the flag by editing "
                     "the yaml or from the panel")
+            #: **THE GATE'S VERDICT IS COMPUTED HERE, NOT ACCEPTED, AND NOT
+            #: OPTIONAL.** opus-institutional-pilot: a reviewer opening the yaml
+            #: cannot tell whether `separates` passed at save time or which
+            #: diagnostics were even available -- and that stopped being
+            #: hypothetical the same run, when a ClickHouse outage silently
+            #: removed two checks from the report an author was reading.
+            #:
+            #: `leverage` in particular was computed and DISCARDED: it appears in
+            #: none of the three corpora, while the brief and the axis report both
+            #: told authors it "is recorded on the item". The design is
+            #: record-it-never-chase-it and only the second half was built.
+            #:
+            #: Recomputed server-side from the same `words` the masses derive
+            #: from, for the reason in this method's own docstring: a
+            #: client-supplied `gap` disagreeing with the tags beside it would be
+            #: undetectable and permanent.
+            axis_rec = None
+            try:
+                ws = list(words.keys())
+                a = _slot_axis(body.get("prompt"), body.get("naughty"),
+                               body.get("nice"), ws, probs=words)
+                sep = (a or {}).get("separates") or {}
+                axis_rec = {
+                    "separates": bool(sep.get("ok")),
+                    "gap": round(float(sep.get("gap") or 0.0), 6),
+                    "correct": int(sep.get("correct") or 0),
+                    "total": int(sep.get("total") or 0),
+                    "purity": round(float(a.get("purity") or 0.0), 6),
+                    "defectors": list(a.get("defectors") or []),
+                    #: Recorded, never surfaced to the author while deciding.
+                    "leverage": (round(float(a["leverage"]), 6)
+                                 if a.get("leverage") is not None else None),
+                    #: **WHICH REFEREES ACTUALLY RAN.** A check that did not run
+                    #: must not be reconstructible as a check that passed, and
+                    #: after the fact the yaml is the only witness.
+                    "checks_ran": sorted(
+                        k for k in ("cross_corpus", "stability", "held_out")
+                        if isinstance(a.get(k), dict) and not a[k].get("error")),
+                }
+            except Exception as e:
+                axis_rec = {"error": "%s: %s" % (type(e).__name__, e)}
             item = build_item(
                 body.get("prompt"), body.get("naughty"), body.get("nice"), words,
                 provenance=body.get("provenance") or {},
@@ -1247,7 +1288,7 @@ class Handler(BaseHTTPRequestHandler):
                 writer=(body.get("writer") or "slot-explorer").strip(),
                 note=(body.get("note") or "").strip(),
                 authored_by=(body.get("authored_by") or "").strip() or None,
-                reviewed=rev)
+                reviewed=rev, axis=axis_rec)
             path, action = save_item(item, overwrite=bool(body.get("overwrite")),
                                      path=targets[tgt])
             return self._json(200, {"item_id": item["item_id"], "action": action,
