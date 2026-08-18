@@ -252,6 +252,53 @@ def movement(base, aligned, prompt=None, cls=None, min_abs_delta=None,
     return ch.query(q)
 
 
+def endpoint_movement(cls=None, min_abs_delta=None, prompt=None, limit=None,
+                      rule_version=3):
+    """Movement across ALL 50 base->endpoint pairs, in ONE query.
+
+        corpus.endpoint_movement(cls="faller", min_abs_delta=0.1, limit=50)
+
+    The movement table holds 153 pairs; **50 of them are the declared
+    base->endpoint pairs and 103 are not** -- intermediates, ablations, method
+    variants and inverted-direction arms. Checked rather than assumed: all 50
+    declared pairs are present, none missing.
+
+    Those 103 answer different questions, and averaging over the table as it
+    stands silently mixes them in -- including `zephyr` and `dolphin`, whose
+    training runs the OTHER WAY and which `roster.endpoints()` excludes from
+    SELECTION for exactly that reason. A pair filter written inline in an
+    experiment is the shape that let `"lmo" in base` find 4 of 6 OLMo lineages,
+    so it lives here and is derived from `roster.endpoints()` each call.
+
+    One query with a tuple IN, not fifty round trips.
+    """
+    from . import ch
+    from . import roster
+    if int(rule_version) != 3:
+        raise ValueError("movement holds v3 rows only -- see corpus.movement")
+    eps, unresolved = roster.endpoints()
+    if unresolved:
+        #: `endpoints()` returns candidates rather than picking; a caller that
+        #: ignores that is choosing by accident. Refuse instead.
+        raise ValueError("%d lineages are unresolved: %s -- resolve before "
+                         "aggregating over 'the endpoints'"
+                         % (len(unresolved), sorted(unresolved)[:3]))
+    tup = ",".join("(%s,%s)" % (_lit(b), _lit(a)) for b, a in sorted(eps.items()))
+    where = ["(base, aligned) IN (%s)" % tup]
+    if cls is not None:
+        where.append("cls=%s" % _lit(cls))
+    if prompt is not None:
+        where.append("prompt=%s" % _lit(prompt))
+    if min_abs_delta is not None:
+        where.append("abs(delta) >= %f" % float(min_abs_delta))
+    q = ("SELECT base, aligned, prompt, word, p_base, p_aligned, delta, cls "
+         "FROM {db}.movement WHERE %s ORDER BY abs(delta) DESC"
+         % " AND ".join(where))
+    if limit:
+        q += " LIMIT %d" % int(limit)
+    return ch.query(q)
+
+
 def movement_pairs(rule_version=3):
     """[(base, aligned, rows)] present in the movement table, biggest first."""
     from . import ch

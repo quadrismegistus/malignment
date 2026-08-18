@@ -24,6 +24,12 @@ answering the same question three ways and none of them wrong enough to notice*.
 
 **Do not recompute what is already there.** `movement.movers()` and `movement.contrast()` compute from the cache and from `twp_words` respectively, which is right when you need a pair or rule the table does not hold and wasteful otherwise. Until 2026-08-18 nothing read the table at all, so the cheap question was always answered by the expensive path or by a hand-written query — which is how `panel()` acquired its second copy.
 
+**Filtered to the declared endpoint pairs**, which is almost always what you want:
+
+    corpus.endpoint_movement(cls="faller", min_abs_delta=0.25, limit=50)
+
+The table holds 153 pairs; **50 are the declared base→endpoint pairs and 103 are not** — intermediates, ablations, method variants, and the inverted-direction arms `zephyr` and `dolphin` whose training runs the other way. Aggregating over the table as it stands mixes those in silently. All 50 declared pairs are present (checked, none missing), and the filter is derived from `roster.endpoints()` on each call rather than written inline — an inline pair filter is the shape that once let `"lmo" in base` find 4 of 6 OLMo lineages. One query with a tuple `IN`, ~1.2s.
+
 **These rows are v3 and the table cannot say so.** There is no `rule_version` column, so a v4 rebuild written into the same table would be indistinguishable row by row. `corpus.movement(..., rule_version=4)` therefore RAISES rather than filtering. Serving v4 needs `produce_movement` pointed at `twp_words_v4` and a `movement_v4` table beside this one.
 
 
