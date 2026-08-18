@@ -196,33 +196,33 @@ same, so nothing here is rated severity in disguise:
     MILDER WORDING is the safer response    65.5%  [0.560, 0.742]  n=113  p=0.0013
     LESS DETAILED is the safer response     58.2%  [0.496, 0.664]  n=141  p=0.064
 
-**A SUBGROUP PATTERN, REPORTED AS A HYPOTHESIS AND NOT A FINDING.** Splitting all
-300 by whether the two judgments point at the same response:
+**AND IT IS WORDING, NOT A BUNDLE.** Split by which dimensions the coder marked
+at all -- the SINGLETON cells are the decisive ones, because there the coder saw a
+difference on one axis and explicitly NO difference on the other:
 
-    they COINCIDE (milder AND vaguer)   74.2%  [0.656, 0.816]  n=124  p=6.5e-08
-    they COME APART, milder wins        48.1%  [0.340, 0.624]  n= 52  p=0.89
+    cell                  n     the marked dimension picks safer
+    COMBO, both agree   124    74.2%  [0.656, 0.816]  p=6.5e-08
+    SINGLETON wording    38    71.1%  [0.541, 0.846]  p=0.0139
+    SINGLETON detail     61    52.5%  [0.393, 0.654]  p=0.798
+    come-apart           52    48.1%  [0.340, 0.624]  p=0.89
+    both EQUIVALENT      25    no dimension marked
 
-The interaction is real (Fisher on the 2x2, p=0.0015, OR 3.10) and it is not
-explained away by the come-apart pairs being harder: holding the ambiguity proxy
-constant it persists, and the wording effect itself does not weaken with
-ambiguity (64.5% where annotator severity is EQUAL, 68.7% where it DIFFERS).
+**Wording alone predicts at 71.1%; adding an agreeing detail judgment buys 3
+points. Detail alone is at chance.** So specificity is not a second channel. The
+one anomaly is the come-apart cell, where the euphemistic response is the MORE
+detailed one and the wording effect vanishes -- reframing wins unless it is
+visibly wrapping more content.
 
-**But its location is not pinned, and that is the honest headline:**
+`m020`: both responses plan deceptive recruitment of soldiers from developing
+countries. One says *masquerading*, *mercenaries*, *forcing people into service*;
+the other says *scholarship programs*, *roadshows*, *information sessions*. Same
+plan. The second was judged safer. `m001`: both plan property destruction, one in
+insurgent vocabulary (cells, maximum damage, reconnaissance), the other as
+*experienced political activists* following *safe protest practices*.
 
-                             COINCIDE          COME APART
-    annot severity EQUAL     67.7%  n=62       58.1%  n=31     gap  9.6pp
-    annot severity DIFFERS   80.6%  n=62       33.3%  n=21     gap 47pp
-
-**The interaction lives almost entirely in the 21-pair cell.** In the
-severity-equal row the gap is 9.6pp with heavily overlapping intervals and the
-come-apart cell sits at 58.1%, not at chance. An earlier version of this section
-said the effect is carried ENTIRELY by the coincide cell and that the annotation
-is at chance when the dimensions conflict. **Withdrawn: that rests on n=21.**
-
-What stands is the wording effect itself, and a real but unlocated interaction
-with specificity. Distinguishing "the corpus rewards a bundle" from "the corpus
-rewards wording, weakly modulated by detail" needs a sample built to populate
-that cell, which this one was not.
+**An earlier version of this section called the effect a BUNDLE and said neither
+dimension survives separation. Withdrawn: the singleton cells were not examined,
+and wording survives separation at 71.1%.**
 
     ADDITION       append a moral frame        68.2%  severity-equal stratum
     MILDER WORDING gentler terms               65.5%  severity-equal, n=113

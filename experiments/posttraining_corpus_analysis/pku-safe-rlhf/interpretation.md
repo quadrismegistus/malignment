@@ -182,12 +182,24 @@ A statement about this corpus's annotation, and nothing past it:
                                                 67.3%   all 300, n=214
 
 **PKU's `safer` label responds to an appended moral frame and to gentler
-wording.** A subgroup split suggested the wording effect is really a BUNDLE with
-specificity -- 74.2% where the two coincide, 48.1% where they conflict, real
-interaction at p=0.0015 -- **but that interaction sits almost entirely in a
-21-pair cell, and in the matched comparison the gap is 9.6pp with overlapping
-intervals. Reported as a hypothesis, not a finding.** An earlier version of this
-file stated it as established; withdrawn. That is a finding about one annotation process. Whether anything
+wording. Specificity is not a channel.** The singleton cells decide it: where the
+coder marked a wording difference and explicitly NO detail difference, wording
+still picks the safer response 71.1% of the time (n=38, p=0.014); where it marked
+a detail difference and no wording difference, detail picks it 52.5% of the time
+(n=61, p=0.80). Both dimensions agreeing adds 3 points over wording alone.
+
+**Two earlier readings of this are withdrawn**: that the effect is a BUNDLE
+requiring both, and that it survives only where they coincide. Both came from
+comparing the coincide and come-apart cells without ever looking at the cells
+where one dimension was held explicitly equal -- which is where a single-dimension
+claim is actually tested.
+
+What the corpus rewards is how the act is NAMED. Two responses plan the same
+deceptive recruitment of soldiers from developing countries; the one saying
+*scholarship programs* and *roadshows* beats the one saying *masquerading* and
+*mercenaries*. Two plan the same property destruction; *experienced political
+activists* following *safe protest practices* beats *cells* and *maximum damage*.
+The plans are the same. That is a finding about one annotation process. Whether anything
 resembling it shaped any model is a separate question with its own requirements.
 
 **The additive and substitutive vocabulary is still useful for describing the two

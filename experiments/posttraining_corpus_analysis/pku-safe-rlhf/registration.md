@@ -585,3 +585,21 @@ gap 9.6pp with overlapping CIs and the come-apart cell at 58.1%, not chance.
 WITHDRAWN: "the entire effect is carried by the coincide cell" and "at chance when
 they conflict". STANDS: wording predicts safer 65.5% (severity-equal, n=113) /
 67.3% (all 300, n=214), and a real but unlocated interaction with specificity.
+
+---
+
+## A11 — 2026-08-18. It is WORDING, not a bundle. The singleton cells decide it.
+
+RH asked for singleton and combo passages, which exposed a cell I had never
+analysed: pairs where the coder marked one dimension and explicitly EQUIVALENT on
+the other.
+
+    COMBO both agree   n=124  74.2%  p=6.5e-08
+    SINGLETON wording  n= 38  71.1%  p=0.0139   <- wording ALONE predicts
+    SINGLETON detail   n= 61  52.5%  p=0.798    <- detail ALONE does not
+    come-apart         n= 52  48.1%  p=0.89
+
+WITHDRAWN (A10's replacement reading): the "bundle" hypothesis, and "neither
+dimension survives separation". Wording survives separation at 71.1%. Detail is
+not a channel. A10's interaction is real but is a SUPPRESSION -- wording fails
+only where the euphemism wraps MORE detail.
