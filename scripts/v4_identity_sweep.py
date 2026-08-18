@@ -98,17 +98,31 @@ def main():
             continue
         row = {"model": mid, "byte_notation": note}
         for name, ps in (("latin", lat), ("cjk", zh)):
-            ident, worst = 0, 0.0
+            #: **`n_compared` EXISTS BECAUSE 0/12 MEANT TWO THINGS.** A prompt
+            #: whose expand throws is skipped, so a model where EVERY prompt
+            #: failed scored `identical=0, max_l1=0.0` -- identical output to a
+            #: model measured cleanly where everything differed by nothing. Both
+            #: Pharia arms landed in that state and read as "maximally different"
+            #: when in fact nothing had been measured at all.
+            #:
+            #: Two states, one appearance, in the checker rather than the thing
+            #: checked. The denominator is now what was actually COMPARED, and
+            #: `errors` is carried so a silent zero cannot be read as a result.
+            ident, worst, cmp_n, errs = 0, 0.0, 0, 0
             for p in ps:
                 try:
                     x = V4.expand4(model, tok, p, "mps", bmask, cjk=cjk, rules=V4.Rules())[0]
                     y = V4.expand4(model, tok, p, "mps", bmask, cjk=cjk, rules=V4.ADOPTED)[0]
                 except Exception:                               # noqa: BLE001
+                    errs += 1
                     continue
+                cmp_n += 1
                 d = sum(abs(y.get(k, 0.0) - x.get(k, 0.0)) for k in set(x) | set(y))
                 ident += (d == 0.0)
                 worst = max(worst, d)
             row["%s_identical" % name] = ident
+            row["%s_compared" % name] = cmp_n
+            row["%s_errors" % name] = errs
             row["%s_n" % name] = len(ps)
             row["%s_max_l1" % name] = worst
         out.append(row)
@@ -140,11 +154,13 @@ def main():
         row["peak_rss_gb"] = round(rss, 2)
 
         print("  [%2d/%d] %-40s %-13s latin %2d/%-2d (%.1e)  cjk %2d/%-2d (%.1e)"
-              "  %3.0fs  peak %.1fGB"
+              "  %3.0fs  peak %.1fGB%s"
               % (i, len(todo), mid.split("/")[-1][:40], note,
-                 row["latin_identical"], row["latin_n"], row["latin_max_l1"],
-                 row["cjk_identical"], row["cjk_n"], row["cjk_max_l1"],
-                 time.time() - t0, rss), flush=True)
+                 row["latin_identical"], row["latin_compared"], row["latin_max_l1"],
+                 row["cjk_identical"], row["cjk_compared"], row["cjk_max_l1"],
+                 time.time() - t0, rss,
+                 "" if not (row["latin_errors"] + row["cjk_errors"]) else
+                 "  ERRORS %d" % (row["latin_errors"] + row["cjk_errors"])), flush=True)
         json.dump(out, open(a.out, "w"), indent=1)
 
     print("\nwrote %s" % a.out)
