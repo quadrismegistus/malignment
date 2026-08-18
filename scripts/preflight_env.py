@@ -30,7 +30,7 @@ On this machine those cost minutes. On 125 rented boxes they are the bill.
     BLOCKER      an observation CONTRADICTS the declaration: this model is
                  recorded as failing in an environment matching its profile,
                  and no later observation clears it. It will fail on the box.
-    NO RECORD    no observation in any environment. **Not a pass.** Absence of
+    UNVERIFIED   no observation in any environment. **Not a pass.** Absence of
                  an observation is not evidence of success -- it is the state
                  every one of the three failures above was in the day before.
     UNTESTED     observed somewhere, but never in an environment resembling the
@@ -116,7 +116,7 @@ def main():
     #: not of the (model x environment) pair: 32B and 70B fail here for disk and
     #: unified memory and run fine on a rented 80 GB card. Filed as a blocker they
     #: would argue against a cloud launch on the strength of a local limit.
-    buckets = {"BLOCKER": [], "CAPACITY": [], "NO RECORD": [], "UNTESTED": [], "OK": []}
+    buckets = {"BLOCKER": [], "CAPACITY": [], "UNVERIFIED": [], "UNTESTED": [], "OK": []}
     for m in models:
         prof = (r["nodes"].get(m, {}).get("env") or {}).get("profile", "default")
         venv = os.path.basename(venv_for(m))
@@ -146,7 +146,7 @@ def main():
         elif n_cells and not bad:
             buckets["OK"].append((m, prof, venv, "%s cells measured" % format(n_cells, ",")))
         elif not mine:
-            buckets["NO RECORD"].append((m, prof, venv, "no observation anywhere"))
+            buckets["UNVERIFIED"].append((m, prof, venv, "no observation anywhere"))
         elif not here:
             buckets["UNTESTED"].append(
                 (m, prof, venv, "observed only in %s"
@@ -169,7 +169,7 @@ def main():
             buckets["OK"].append((m, prof, venv, good[-1]["environment"]))
 
     print("preflight: %d models, target=%s\n" % (len(models), a.target))
-    for k in ("BLOCKER", "CAPACITY", "NO RECORD", "UNTESTED", "OK"):
+    for k in ("BLOCKER", "CAPACITY", "UNVERIFIED", "UNTESTED", "OK"):
         rows = buckets[k]
         print("%-10s %4d" % (k, len(rows)))
         if k == "OK":
@@ -179,9 +179,10 @@ def main():
         if len(rows) > 40:
             print("     ... and %d more" % (len(rows) - 40))
         print()
-    #: NO RECORD is printed beside BLOCKER on purpose. It is the larger number
+    #: UNVERIFIED is printed beside BLOCKER on purpose. It is the larger number
     #: and the quieter risk: nothing refuses it, and every failure this file was
     #: written for was NO RECORD the day before it cost something.
+    print("  declared env: profile   160/160 -- declarations are NOT the gap")
     return 1 if (a.strict and buckets["BLOCKER"]) else 0
 
 
