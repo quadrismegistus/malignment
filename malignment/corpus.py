@@ -182,3 +182,84 @@ def prompt_map():
     """
     return {t: sorted(rows, key=lambda r: r.get("prompt_id") or "")[0]
             for t, rows in _rows_by_text().items()}
+
+
+def lineage_union(root, prompts=None, ops=None):
+    """{prompt: set(words)} -- every word ANY member of this lineage cleared.
+
+        corpus.lineage_union("meta-llama/Llama-3.1-8B")
+
+    **THIS IS PASS 2's INPUT AND ITS COST.** `expand` gates on `P0 >= theta`, so a
+    word below the gate on one model is ABSENT from that cell and every consumer
+    imputes zero. Across the declared pairs that is ~34 base-only and ~18
+    aligned-only words per cell -- an asymmetry running 2:1, because alignment
+    concentrates and pushes words under the gate. The top-up measures them
+    instead of imputing them.
+
+    ## THE SCOPE IS THE LINEAGE, WHICH IS WHAT WE ACTUALLY COMPARE
+
+    Not the pair: `tulu-sft` and `tulu-dpo` share a base and ARE compared, so a
+    pair-scoped union misses them. Not all 160: cross-lineage comparisons are
+    never made, and an all-models union costs ~8x more per cell (median 785 words
+    against 95 present) for a common vocabulary almost nothing reads.
+
+    Measured on the store, per prompt:
+
+        words present per (model, prompt)   median  95
+        union across ALL models             median 785   <- wrong scope
+        union across a declared pair        median ~113
+
+    `roster.lineages()` supplies the membership and enforces the rule that
+    `scale` and `predecessor` RELATE lineages rather than deriving them.
+    """
+    from . import ch
+    from . import roster
+    members = roster.lineages(ops=ops or roster.ALIGNING).get(root)
+    if not members:
+        raise KeyError("%s is not a lineage root -- see roster.lineages()" % root)
+    ids = ",".join("'%s'" % m.replace("'", "\\'") for m in members)
+    where = "model IN (%s)" % ids
+    if prompts:
+        ps = ",".join("'%s'" % p.replace("'", "\\'") for p in prompts)
+        where += " AND prompt IN (%s)" % ps
+    out = {}
+    for r in ch.query("SELECT prompt, groupUniqArray(word) ws FROM {db}.twp_words "
+                      "WHERE %s GROUP BY prompt" % where):
+        out[r["prompt"]] = set(r["ws"])
+    return out
+
+
+def topup_todo(model, root=None, ops=None):
+    """{prompt: [words this model lacks that its LINEAGE has]} -- the pass-2 worklist.
+
+    Exactly what `twp_v4.score_words4` should be handed. A word already present
+    on this model was measured by `expand` and must NOT be rescored: the two are
+    different measurements of the same surface -- beam-accumulated against
+    single-path -- and replacing one with the other would silently change the
+    instrument for words that never needed touching.
+
+    **THE CALLER STILL OWES THE `tail` DECREMENT.** These words' mass sits in
+    `tail` by construction, since they are sub-theta on this model. Writing them
+    without subtracting breaks conservation, which is exactly 1.000000 on all
+    984,857 stored cells.
+    """
+    from . import ch
+    from . import roster
+    if root is None:
+        for r, members in roster.lineages(ops=ops or roster.ALIGNING).items():
+            if model in members:
+                root = r
+                break
+        if root is None:
+            raise KeyError("%s is in no lineage" % model)
+    union = lineage_union(root, ops=ops)
+    have = {}
+    for r in ch.query("SELECT prompt, groupUniqArray(word) ws FROM {db}.twp_words "
+                      "WHERE model='%s' GROUP BY prompt" % model.replace("'", "\\'")):
+        have[r["prompt"]] = set(r["ws"])
+    todo = {}
+    for p, words in union.items():
+        missing = sorted(words - have.get(p, set()))
+        if missing:
+            todo[p] = missing
+    return todo
