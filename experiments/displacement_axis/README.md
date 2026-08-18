@@ -2,10 +2,16 @@
 
 Where a model's probability mass sits on a frame's own naughty/nice axis before and after alignment, per (lineage, item), with the words that carried the movement.
 
-    python experiments/displacement_axis/run.py       --out experiments/displacement_axis/results/<name>
-    python experiments/displacement_axis/mechanism.py --run <name>     # reorder vs sharpen
-    python experiments/displacement_axis/axis_share.py --run <name>    # how much of the movement is the axis
-    python experiments/displacement_axis/mechanism_report.py --run <name>
+    python experiments/displacement_axis/analyze.py --out experiments/displacement_axis/results/<name>
+    python experiments/displacement_axis/analyze.py --out .../<name> --flip-ties --force
+    python experiments/displacement_axis/report.py  --run <name> [--only sign,dose] [--words]
+    python experiments/displacement_axis/movers.py  --run <name>
+
+`analyze.py` supersedes the former `run.py`, `mechanism.py` and `axis_share.py`, which
+each rebuilt the per-item Axis independently. `report.py` supersedes both
+`mechanism_report.py` and, more to the point, several results that existed only in shell
+history -- producer-debt Class 1 sub-type B, which makes a published number UNAUDITABLE.
+Validated by reproducing every hand-computed pilot2 figure exactly, per-pair rows included.
 
 Reads `twp_words_v4` / `twp_cells_v4` and imports `slot_axis.Axis`. Runs no checkpoint and needs no server.
 
@@ -15,19 +21,56 @@ Reads `twp_words_v4` / `twp_cells_v4` and imports `slot_axis.Axis`. Runs no chec
 
 This matters for what can be claimed and what cannot. A "rival axis" objection of the form *maybe formality is the real axis and transgression is its shadow* does not apply, because no global axis is being asserted for a global rival to beat. What the corpus asserts is that each frame's author-declared distinction is a real direction in embedding space and that alignment moves along it, and the strength of the result is that this holds across quite heterogeneous kinds of permission rather than for one thing called transgression.
 
+## What the numbers on the axis mean, and what crossing zero would mean
+
+`u = centroid(naughty) - centroid(nice)`, unit length, and the origin is the MIDPOINT between the two pole centroids. So `s(w) = (e(w) - origin).u` puts the naughty centroid at `+gap/2`, the nice centroid at `-gap/2`, and zero exactly halfway. **Negative means on the permitted side of the midpoint between the author's two declared pole centroids, not "acceptable" in any absolute sense.** Zero is an artifact of where those two centroids happen to sit, not a threshold in the model.
+
+The scale, on pilot3:
+
+    pole separation (gap)          median 0.3974   IQR 0.3059 - 0.4448
+    N_base                         median -0.0366, on the permitted side in 70% of cells
+    N_aligned                      median -0.0480, on the permitted side in 74% of cells
+
+**Crossing the midpoint is rare.** Alignment moves a centroid that is usually already on the permitted side a little further onto it:
+
+    naughty side -> nice side        348 cells   6.2%
+    nice side -> naughty side        155 cells   2.8%
+    never crosses, stays nice       3775 cells  67.4%
+    never crosses, stays naughty    1322 cells  23.6%
+
+**And the shift is small against the pole separation:** 1.6% of the gap over all cells, 11.1% in displacement cells, 1.1% in churn, 6.8% in reverse. So "62.7% of cells move nice-ward" must NOT be read as the model ceasing to say the transgressive thing. It means the probability-weighted centre of what it will say moves a small consistent distance. Individual words move a great deal inside an aggregate that moves a little -- `fired` 0.252 -> 0.107 sits inside a centroid shift of 1.6% of the pole gap -- and the word tables are where that is visible. See also the risers-and-fallers section, which measures only the mass that moved and gets 10.1% of the gap.
+
+Displacement and churn differ here by an ORDER OF MAGNITUDE (11.1% against 1.1%), which is a stronger separation than the signature labels alone convey and is the argument for treating them as two phenomena rather than two labels.
+
+**One reading this suggests and does not establish.** If the base already sits on the permitted side in 70% of cells, alignment is intensifying a preference pretraining had already installed rather than closing off a transgressive outside, which is F21's "deference already present in pretraining" as geometry. But 70% is a fact about WHERE THE MIDPOINT FALLS, and the midpoint is defined by the pole word choices: a pole set with more extreme naughty words would push the midpoint naughty-ward and lower that 70%. Suggestive of the F21 reading, not independent evidence for it.
+
 ## One directory per run, and the manifest is the population of record
 
-**The population is discovered, not declared.** `run.py` intersects `roster.endpoints()` with whichever models happen to hold the prompts in the source table, so the same command against the same code returns a different population after every ingest. Give each run its own `--out`; the command refuses a directory that already holds a `manifest.json`.
+**The population is discovered, not declared.** `analyze.py` intersects `roster.endpoints()` with whichever models happen to hold the prompts in the source table, so the same command against the same code returns a different population after every ingest. Give each run its own `--out`; the command refuses a directory that already holds a `manifest.json`.
 
 `results/<run>/manifest.json` enumerates `pairs_run` and `pairs_not_run` with reasons, and the two sum to the declared frame. **Compare runs by `pairs_run`, never by name or by a count.** "8 of 50" is a fact about a store on a day and reads as a fact about the design.
 
-It also carries `n_cells` per pair, because coverage is uneven: pilot2 ranges 209 to 301 of its 303 items across fourteen pairs, so every corpus-wide proportion below is over an unbalanced panel.
+It also carries `n_cells` per pair, because coverage is uneven: pilot3 ranges 36 to 301 of its 303 items across twenty-one pairs, so every corpus-wide proportion below is over an unbalanced panel. `report.py --only pop` prints a THIN COVERAGE warning for any pair under half the best-covered one; in pilot3 that is `rwkv-4-7b-pile -> rwkv-raven-7b` at 36 cells, whose endpoint holds 36 of 253 prompts. A per-pair rate on 36 cells is not comparable to one on 301, and dropping it silently would make the panel look balanced.
 
 ## The runs
 
 **pilot1** (8 pairs, 1,952 cells): churn 71% / displacement 19% / reverse 11%. Heavily skewed, six of eight China-origin, and crucially it did not contain SmolLM3, the checkpoint the poles were balanced against through the slot client. Superseded but kept, because `skipped.jsonl` records what was not measured and a later run against a different population cannot reconstruct it.
 
 **pilot2** (14 pairs, 3,758 cells): churn 69% / displacement 20% / reverse 11%. Adds SmolLM3, Yi-1.5, bloom/bloomz, Llama-3.1, MiniCPM5 and GLM-4. China skew improves to 8 of 14.
+
+**pilot3** (21 pairs, 5,600 cells): churn 69% / displacement 20% / reverse 11%. **The signature split is identical to the percentage point across all three populations.** Current; every figure below is pilot3 unless it says otherwise.
+
+Seven new pairs, and the point of them is that FOUR DISTINCT ALIGNMENT TECHNOLOGIES now sit in one panel, which the bloomz reversal previously had nothing to be compared against:
+
+    EleutherAI/pythia-2.8b      -> ContextualAI/archangel_sft-dpo_pythia2-8b   explicit SFT+DPO
+    LLM360/Amber                -> LLM360/AmberSafe                            safety tuning
+    huggyllama/llama-7b         -> PKU-Alignment/beaver-7b-v1.0                 safety RLHF
+    tiiuae/Falcon3-7B-Base      -> tiiuae/Falcon3-7B-Instruct
+    TinyLlama-1.1B              -> TinyLlama-1.1B-Chat-v1.0
+    stabilityai/stablelm-2-1_6b -> stablelm-2-1_6b-chat
+    RWKV/rwkv-4-7b-pile         -> RWKV/rwkv-raven-7b        endpoint 36/253 prompts, THIN
+
+China skew falls to 9 of 21.
 
 SmolLM3 entering answered pilot1's standing caveat and did not rescue it. It has the best-balanced poles in the set exactly as the balancing intended (share 0.450, base naughty mass 0.071) and sits mid-table at 22% displacement, while Llama-3.1 leads at 32% on a worse share (0.399). **Pole balance transfers and does not buy displacement.**
 
@@ -61,21 +104,29 @@ The two components of `split` have signs that separate cases dN conflates. Verif
 
 ## Does the mass move toward the permitted pole? Yes, and the null is 50.2%
 
-This is a SIGN question and it is answered by the sign of `dN_position`. It needs no embedding geometry, no cos, no anisotropy argument. Over pilot2:
+This is a SIGN question and it is answered by the sign of `dN_position`. It needs no embedding geometry, no cos, no anisotropy argument. Over pilot3:
 
-    2,366 of 3,758 cells nice-ward = 63.0%    z = +15.9
+    3,513 of 5,600 cells nice-ward = 62.7%    z = +19.1
 
-And in the form that carries the weight, **twelve of fourteen lineages replicate it independently**:
+And in the form that carries the weight, **seventeen of twenty-one lineages replicate it independently**:
 
     Llama-3.1-8B-Instruct      77%   z=+9.4        SmolLM3-3B                 62%   z=+4.3
-    neo_7b_instruct            73%   z=+7.9        CT-LLM-SFT-DPO             61%   z=+3.3
-    Yi-1.5-9B-Chat             70%   z=+7.1        Qwen2.5-0.5B-Instruct      59%   z=+3.0
-    glm-4-9b-chat              70%   z=+7.0        Qwen3-8B                   59%   z=+3.1
-    gemma-2-9b-it              70%   z=+5.8        llm-jp-3-7.2b-instruct3    58%   z=+2.3
-    Baichuan2-7B-Chat          69%   z=+5.5        Qwen2.5-7B-Instruct        52%   z=+0.8   null
-    MiniCPM5-1B                68%   z=+6.3        bloomz-7b1                 32%   z=-6.3   REVERSED
+    Amber -> AmberSafe         75%   z=+8.8        CT-LLM-SFT-DPO             61%   z=+3.3
+    neo_7b_instruct            73%   z=+7.9        Falcon3-7B-Instruct        60%   z=+3.6
+    stablelm-2-1_6b-chat       73%   z=+7.9        Qwen2.5-0.5B-Instruct      59%   z=+3.0
+    Yi-1.5-9B-Chat             70%   z=+7.1        Qwen3-8B                   59%   z=+3.1
+    glm-4-9b-chat              70%   z=+7.0        llm-jp-3-7.2b-instruct3    58%   z=+2.3
+    gemma-2-9b-it              70%   z=+5.8        archangel_sft-dpo          56%   z=+2.1
+    Baichuan2-7B-Chat          69%   z=+5.5        rwkv-raven-7b              53%   z=+0.3   null, THIN
+    MiniCPM5-1B                68%   z=+6.3        Qwen2.5-7B-Instruct        52%   z=+0.8   null
+    beaver-7b-v1.0             65%   z=+5.4        TinyLlama-1.1B-Chat        45%   z=-1.9   null
+                                                   bloomz-7b1                 32%   z=-6.3   REVERSED
 
-Twelve separately trained, separately aligned model families each showing the effect on its own. Not one aggregate but twelve replications.
+Seventeen separately trained, separately aligned model families each showing the effect on its own. Not one aggregate but seventeen replications.
+
+**The safety-specific pipelines are at the top and the one explicit DPO pipeline is near the bottom of the significant group.** `Amber -> AmberSafe` at 75% and `llama-7b -> beaver-7b` at 65% are both new; `pythia -> archangel_sft-dpo` is at 56%. Suggestive of an ordering by alignment technology, on one observation per technology.
+
+**Institutional crossed into significance on pilot3** at 53%, z=+2.4, against +1.7 on pilot2 at the same rate. So the earlier non-result was power, not absence -- worth recording because it was reported here as a domain that does not replicate.
 
 **bloomz is genuinely reversed, not merely weak.** It is the only pair aligned by multitask prompting (xP3) rather than RLHF, and it moves mass TOWARD the transgressive pole at z=-6.3. One model, so a hypothesis about alignment technologies rather than a finding, and the sharpest comparative lead in the set.
 
@@ -114,13 +165,14 @@ Every number above is a PROJECTION. `axis_share.py` supplies the missing denomin
 Validated by an IDENTITY rather than a plausibility check: `D.u` recomputed from the full 1024-dim vectors must equal `dN_position` computed from the scores, and the run refuses on the first cell that fails. Passes over 3,758 cells. (The first run refused at 1.311e-09 against a 1e-9 tolerance. The embeddings are float32, eps 1.19e-07, so order-1e-2 quantities carry ~1e-9 error by construction: the tolerance was wrong, not the arithmetic. An assert tying a new quantity to an old one through an identity cannot pass by being approximately right, which is why it is worth more than a range check on the new quantity alone.)
 
                     cells   |D| move   |cos|   null(head)   beats     r2
-    displacement      743     0.0652   0.604       0.197     100%   0.369
-    churn            2580     0.0457   0.262       0.170      75%   0.069
-    reverse           393     0.0512   0.524       0.187      96%   0.278
+    all cells        5600     0.0506   0.374       0.180      88%   0.140
+    displacement     1109     0.0668   0.608       0.198     100%   0.370
+    churn            3864     0.0467   0.290       0.174      79%   0.084
+    reverse           627     0.0507   0.544       0.196      96%   0.296
 
-**The null lands at 0.18, not the 0.03 a dimensional argument predicts.** bge-m3 is strongly anisotropic and `D` lives in the span of the frame's ~100 word vectors, so a naive null would have overstated the axis roughly sixfold. In displacement cells the declared poles beat every draw, and 74% of those cells beat >=95% of nulls individually.
+**The null lands at 0.18, and two analytic arguments both undershoot it.** An ambient-dimension argument gives 0.031 (6x too small); the centered word space has a participation ratio of 67.7, not 1024, which gives 0.122 (still 1.5x too small). The remaining gap is that null axes are not random directions: they are centroid differences of 3-to-11-word sets drawn from the same vocabulary, so they inherit local structure and align with `D` better than a random direction does. That is the argument FOR an empirical null rather than an analytic one, and an earlier draft of this section made it against the wrong baseline. In displacement cells the declared poles beat every draw, and 74% of those cells beat >=95% of nulls individually.
 
-**r2 is 0.369 where the axis works best**, so two thirds of the movement in displacement cells is in directions this instrument does not characterise. That belongs in the paper rather than being left for a reader to compute.
+**r2 is 0.370 where the axis works best**, so two thirds of the movement in displacement cells is in directions this instrument does not characterise. That belongs in the paper rather than being left for a reader to compute.
 
 ## Reordering, not decisiveness
 
@@ -131,17 +183,19 @@ If alignment's signature move were to become more DECISIVE about words it alread
 
 Each counterfactual is a permutation of a real probability vector, so no normalisation choice needs defending. Exact on synthetic pure cases in both directions. The interaction is reported and never folded into either term: on a synthetic case with both mechanisms active it was LARGER than either main effect.
 
-The premise holds. Entropy falls in 82% of cells, median -0.29 nats: alignment really does become more decisive.
+The premise holds. Entropy falls in 85% of cells, median -0.33 nats, and dT rises in 78%: alignment really does become more decisive.
 
 The conclusion does not follow from it.
 
                     cells     total   sharpen   reorder  interact  sharp>ord
-    all cells        3758   -0.0062   -0.0017   -0.0032   -0.0002       37%
-    displacement      756   -0.0385   -0.0046   -0.0274   -0.0009       24%
-    churn            2599   -0.0039   -0.0021   -0.0017   -0.0001       42%
-    reverse           403   +0.0258   +0.0043   +0.0144   +0.0001       37%
+    all cells        5600   -0.0060   -0.0017   -0.0028   -0.0001       40%
+    displacement     1109   -0.0393   -0.0041   -0.0275   -0.0011       27%
+    churn            3864   -0.0041   -0.0022   -0.0016   -0.0001       44%
+    reverse           627   +0.0251   +0.0036   +0.0134   +0.0004       40%
 
-**Reordering carries about twice what sharpening does, and in displacement cells -0.0274 of a -0.0385 shift against sharpening's -0.0046.** Concentration is real and roughly orthogonal to direction. Both rank statistics consequently AGREE with the mass one (rho +0.690 at 80% sign agreement, pole AUC +0.549 at 71%), which is what should happen when reordering dominates: `d_rho` correlates +0.695 with `dN_reorder`, +0.207 with `dN_sharpen`, and +0.066 with the entropy change.
+**Reordering carries -0.0275 of displacement's -0.0393 shift against sharpening's -0.0041**, and sum|reorder|/sum|sharpen| is 1.30 over all cells. Concentration is real and roughly orthogonal to direction. Both rank statistics consequently AGREE with the mass one (rho +0.656 at 78% sign agreement, pole AUC +0.541 at 68%), which is what should happen when reordering dominates: `d_rho` correlates +0.662 with `dN_reorder`, +0.225 with `dN_sharpen`, and +0.166 with the entropy change.
+
+**`sharp>ord` is a COUNT OF CELLS and the ratio is a MAGNITUDE**, and they point different ways: sharpening wins narrowly in 40% of cells while losing badly in the few large ones, which are the displacement cells. Quoting either alone misstates it.
 
 Ranks are therefore a corroborating column and not a better headline. They estimate `dN_reorder`, which is already reported in axis units and additive with the other terms; they cannot see sharpening, so they could not have established that sharpening is the smaller mechanism; they inherit the tie fragility below rather than escaping it; and they weight a move from rank 40 to 39 the same as rank 2 to 1, when the model emits from the head.
 
@@ -150,33 +204,77 @@ Ranks are therefore a corroborating column and not a better headline. They estim
 `--flip-ties` reverses the tie-break secondary key. The zero tail is arbitrary in relative order, and reversing it moves things:
 
     field           median norm   median flip    max |diff|   cells moved
-    dN_total          -0.00624      -0.00624      0.00e+00       0 ( 0%)
-    dN_sharpen        -0.00172      -0.00171      2.02e-03     558 (15%)
-    dN_reorder        -0.00318      -0.00327      8.48e-03    3013 (80%)
-    interaction       -0.00020      -0.00015      8.48e-03    3567 (95%)
+    dN_total          -0.00596      -0.00596      0.00e+00       0 (  0%)
+    dN_sharpen        -0.00174      -0.00173      6.83e-03     513 (  9%)
+    dN_reorder        -0.00280      -0.00260      1.21e-02    4150 ( 74%)
+    interaction       -0.00014      -0.00028      1.21e-02    4659 ( 83%)
 
-The largest single perturbation exceeds the median effect being measured. What does NOT move is the conclusion: medians shift in the fourth decimal, the sharpen-dominant share goes 37.4% to 37.2%, and 32 cells of 3,758 (0.9%) change which mechanism dominates. **So the aggregate is robust and no cell exhibit may be built on this column.**
+The largest single perturbation exceeds the median effect being measured. What does NOT move is the conclusion: medians shift in the fourth decimal, the sharpen-dominant share goes 40.0% to 40.1%, and 62 cells of 5,600 (1.1%) change which mechanism dominates. **So the aggregate is robust and no cell exhibit may be built on this column.**
 
-The cause is the effect under study. `q_reorder` pours into the ALIGNED ordering, and the aligned arm is the concentrated one, so more of its words sit tied at the `theta` floor. Verified rather than reasoned: per-cell perturbation against entropy change gives r = -0.458, the sharpest quartile has median perturbation 3.7e-04, and the quartile where entropy ROSE has median perturbation exactly zero.
+The cause is the effect under study. `q_reorder` pours into the ALIGNED ordering, and the aligned arm is the concentrated one, so more of its words sit tied at the `theta` floor. Verified rather than reasoned: per-cell perturbation against entropy change gives r = -0.565 on pilot3 (-0.458 on pilot2), and on pilot2 the sharpest quartile had median perturbation 3.7e-04 while the quartile where entropy ROSE had exactly zero. `dN_sharpen`, which pours into the base ordering, moves in 9% of cells against `dN_reorder`'s 74%.
+
+## What it means to limit the measurement to risers and fallers
+
+`dN_position` is a centroid over EVERY scored word, and most words do not move. A median pilot3 cell carries 146 scored words, of which CANONICAL finds 14 fallers and 11 risers; 93 are still. Those 93 sit almost exactly at the axis midpoint (median `s_still` -0.036 against an all-cell centroid of the same order), so they contribute nearly nothing to the direction and a great deal to the denominator. The centroid is a weighted average, so a large still population drags any movement toward zero without changing its sign.
+
+**Restricting to movers asks a different and more direct question.** Instead of "where is the centre of the whole distribution, before and after", it asks "where did the mass that moved come FROM, and where did it GO":
+
+    s_fall    axis position of departing mass, weighted by |Q - P| over FALLERS
+    s_rise    axis position of arriving mass, weighted by EXCESS over RISERS
+    travel    s_rise - s_fall      negative = the moved mass went toward the permitted pole
+
+This is what `movers.py` computes. Riser and faller are NOT defined locally: they come from `malignment.movement`, which exists because fourteen scripts had disagreed about the definitions and produced "1,650 cells against 3,366 on the same question". It ships three named rules and this takes **CANONICAL** (min_prob 0.003, fall_ratio 0.5, delta 0.003, null test ON) and says so, per that module's own instruction that new work should.
+
+### The renormalisation null, which is why a local threshold would have been wrong
+
+When fallers lose mass, every surviving word's probability rises **mechanically**, because the distribution renormalises. So "a word that went up" is not a finding. CANONICAL tests each riser against what pure renormalisation would have given it:
+
+    null  = P * (R / S)          R = mass left once fallers have fallen, S = pre-mass of non-fallers
+    riser = gained more than null
+
+`s_rise` is therefore weighted by `excess` (Q - null), the beyond-bookkeeping part, not by raw `Q - P`. Measured both ways the difference is small here (travel -0.0359 against -0.0364), so the bookkeeping is not carrying this result -- but that is a measurement, not a reason to have skipped the null.
+
+**TWO LIMITS, BOTH THE MODULE'S OWN AND NEITHER PATCHED HERE.**
+
+**Fallers are not null-tested.** A faller is a bare ratio rule. `movement.py` states that nothing downstream may describe fallers as "beyond renormalisation", so `s_fall` is the position of mass that fell, NOT of mass that fell for a reason. The two halves of `travel` are not equally rigorous and the asymmetry is declared rather than hidden.
+
+**The null is approximate on this instrument.** It needs total mass, and `true_word_probs` is truncated at `theta`. The residuals from `twp_cells_v4.total` are passed in as explicit non-faller mass, which is the module's honest compromise; `exact_null` is False on all 5,600 pilot3 cells and `residual_share` has median **0.219**. The tail is about a fifth of the distribution and larger than most single words.
+
+### What it buys: sixfold on magnitude, nothing on direction
+
+                     cells    s_fall    s_rise   s_still     travel    dN_pos
+    all cells         5261   -0.0210   -0.0595   -0.0355    -0.0359   -0.0071
+      displacement    1061   +0.0575   -0.0807   -0.0137    -0.1462   -0.0410
+      churn           3629   -0.0353   -0.0701   -0.0464    -0.0265   -0.0047
+      reverse           571   -0.0475   +0.0524   -0.0237    +0.1145   +0.0268
+
+    travel negative in 3,340 of 5,261 cells = 63.5%, z = +19.6   (dN_position: 62.7%)
+    travel as a fraction of the pole gap: median 10.1%           (dN_position: 1.6%)
+
+**Effect size goes from 1.6% of the pole gap to 10.1%. The sign rate does not move: 63.5% against 62.7%.** That is the expected shape and worth stating plainly, because an early 300-cell preview showed 73.5% and 20.5% and I reported it as a thirteen-fold gain. Those first 300 cells are the first items in file order, not a sample. **The still words were diluting MAGNITUDE, not obscuring DIRECTION** -- a diluted average keeps its sign, so no consistency was ever hidden in them.
+
+**Displacement cells cross.** Mass leaves at +0.058, on the transgressive side of the midpoint, and arrives at -0.081, on the permitted side. 14.6% of the pole gap. That is the phenomenon in one line, and it is the measurement to quote for it.
+
+**Churn is nice-to-nicer, and this is the reading that reproduces.** Mass leaves at -0.035 and arrives at -0.070, both permitted, moving further in. An earlier draft of this README quoted -0.038 and -0.059 from a hand pass, then REMOVED them as unreproducible. They were approximately right; they failed to reproduce because they were being recomputed by hand instead of through `movement.py`, not because the reading was wrong. Restored here with a producer behind it.
 
 ## Displacement is conditional, and the condition is transgressive mass
 
-    quartile of base naughty mass   cells   displ   churn    rev   median dN
-    Q1 lowest                        938      1%     93%     5%     -0.0048
-    Q2                               938     10%     80%    10%     -0.0057
-    Q3                               938     28%     60%    13%     -0.0062
-    Q4 highest                       941     41%     44%    15%     -0.0118
+    quartile of base naughty mass   cells   displ   churn    rev   median dN     mass
+    Q1 lowest                       1398      2%     93%     5%     -0.0059   0.0067
+    Q2                              1398     11%     78%    10%     -0.0058   0.0289
+    Q3                              1398     28%     60%    12%     -0.0058   0.0764
+    Q4 highest                      1401     38%     45%    17%     -0.0073   0.2180
 
 Monotonic across four quartiles, 1% to 41%. **A frame with no transgressive mass on a given checkpoint cannot displace on it**, whatever it does on the checkpoint it was written against, so the headline 20% is diluted by cells where displacement was impossible. Layering the two conditions the thesis actually requires:
 
-    all cells                                        3755     20%
-    displacing alignment regime (8 of 14 pairs)      2126     26%
-    transgressive site (base naughty mass >=0.05)    1829     34%
-    BOTH                                             1196     38%
-    BOTH + top-quartile mass                          745     41%
+    all cells                                        5595     20%
+    displacing alignment regime (10 of 21 pairs)     2727     25%
+    transgressive site (base naughty mass >=0.05)    2736     33%
+    BOTH                                             1501     39%
 
     by domain, under both conditions:
-       sexual 52%   violence 45%   institutional 38%   power 35%   identity 25%
+       property 50%   sexual 50%   violence 41%   substance 37%
+       institutional 33%   identity 31%   power 27%
 
 Sexual is the only domain where displacement is the MODAL response. The ordering tracks how hard and how uniformly the alignment regimes push on each domain, which makes displacement rate a comparative measure of alignment pressure rather than a linguistic constant.
 
@@ -184,20 +282,22 @@ Restricting to the 8 pairs that displace at all raises item-level consistency fr
 
 ## Churn is not a null class, and I characterised it wrongly twice
 
-Churn is 69% of cells, so what it is matters more than displacement's share does.
+Churn is 69% of cells in all three pilots, so what it is matters more than displacement's share does. It has been characterised four times below; the fourth is the one with a canonical producer behind it.
 
 **First reading, wrong:** "mass leaves and arrives at the same end of the axis, a shuffle within the permitted region." Aimlessness is not what the data shows: churn cells move nice-ward on balance, median `dN_position` -0.0039 and 62% of cells negative. (An earlier draft of this section quoted mass leaving at -0.038 and arriving at -0.059. Those came from an ad-hoc pilot1 pass whose output was never written to an artifact, so they cannot be reproduced from anything committed and are removed rather than carried. The committed columns give median suppression +0.0090 against median substitution -0.0150, which are the decomposition components and not positions.)
 
 **Second reading, also wrong:** "churn cells move perpendicular to the declared distinction." This came from reading a median SIGNED cos of -0.106 as though it were a magnitude. Median ABSOLUTE cos is 0.262 against a 0.170 null.
 
-**Third reading, which the numbers support:** churn is the class where the axis is ENGAGED and the SIGN IS UNDETERMINED. Real projection onto the declared distinction in both directions, netting to a small nice-ward drift, significant at 62% nice-ward (z=+12.2) which is informative because churn's sign is not fixed by its definition -- unlike displacement's 100% and reverse's 0%, which are definitional and are not evidence.
+**Third reading, on the centroid:** churn is the class where the axis is ENGAGED and the SIGN IS UNDETERMINED. Real projection onto the declared distinction in both directions, netting to a small nice-ward drift, significant at 62% nice-ward (z=+15.2 on pilot3) which is informative because churn's sign is not fixed by its definition -- unlike displacement's 100% and reverse's 0%, which are definitional and not evidence. (Not EXACTLY definitional: `signature` comes from `split()`'s components and `dN_position` from a difference of per-arm centroids, so 2 of 5,600 cells disagree, at |dN_position| 1.8e-04 and 3.7e-03. `report.py` prints the exception count beside the label.)
 
-Churn cells are also not quiet: their centroids move 0.0457 against displacement's 0.0652, only 30% less. Splitting churn by movement magnitude gives two populations, and the loud quartile moves FURTHER than the median displacement cell:
+**Fourth reading, on the mass that actually moved, and this is the one to quote:** restricted to CANONICAL risers and fallers, churn mass leaves at -0.035 and arrives at -0.070. Both permitted, moving further in. So nice-to-nicer after all -- which is where this started, and the reading that was deleted from this file as unreproducible. It failed to reproduce because it was being recomputed by hand rather than through `movement.py`, not because it was wrong.
 
-    quietest churn quartile   |D| 0.0248   |cos| 0.198   null 0.163   beats 62%
-    loudest churn quartile    |D| 0.0872   |cos| 0.314   null 0.176   beats 79%
+Churn cells are also not quiet: their centroids move 0.0467 against displacement's 0.0668, only 30% less. Splitting churn by movement magnitude gives two populations, and the loud quartile moves FURTHER than the median displacement cell:
 
-Sharpening dominates 42% of churn cells against 24% of displacement cells, so churn and displacement differ by MECHANISM and not only by size.
+    quietest churn quartile   |D| 0.0207   |cos| 0.250   beats 71% of nulls
+    loudest churn quartile    |D| 0.0962   |cos| 0.329   beats 83% of nulls
+
+Sharpening dominates 44% of churn cells against 27% of displacement cells, so churn and displacement differ by MECHANISM and not only by size.
 
 ### The register-flattening exhibit
 
@@ -224,6 +324,34 @@ The clearest single churn cell, `Qwen3-8B-Base -> Qwen3-8B` on an institutional 
 `accept` rises forty-fivefold and swallows the vocabulary of accepting. `plead`, `cooperate`, `do`, `confess`, `drop`, and the entire criminal-justice idiom for cooperating -- `rat`, `roll`, `crack`, `fold` -- go to exactly zero. Meanwhile `reject`, the transgressive option, GAINS.
 
 Nothing was suppressed. Eleven ways of saying one thing became one way of saying it. Alignment here does not police what can be said; it polices how many ways it can be said. The loss of `rat`, `roll`, `crack`, `fold` is the loss of a sociolect, replaced by a neutral superordinate.
+
+## Is there one global alignment direction? No, and the count that suggested there was does not hold up
+
+`D = c_aligned - c_base` is the movement of the distribution's centroid in bge space, and every result above is a PROJECTION of it. `movers.py` also asks what `D` is.
+
+    cross-item mean pairwise cos between unit D      +0.0252   (sd 0.169)
+    the same on raw aligned centroids                +0.5123   <- NOT the measure
+    |mean unit D|                                     0.1563   (random baseline 0.0134)
+
+**Movement directions from different frames are near-orthogonal.** There is no single alignment vector that 303 frames are all projections of, so the locality of the poles is real rather than a set of local names for one global shift. The comparison figure on raw centroids is printed because bge-m3 is severely anisotropic (mean pairwise cosine 0.87 between raw word vectors): anything measured on raw vectors reads as consistent, and `D` is a difference of two equally-weighted centroids so the shared mean cancels exactly. Verified: global centering changes `cos_theta` by at most 1.4e-09 over 120 cells.
+
+There IS a faint shared component: `|mean unit D|` is **11.7x** the random baseline.
+
+**AND HERE IS THE CLAIM I MADE AND HAD TO WITHDRAW.** The global drift's cosine with each frame's declared axis is negative -- nice-ward -- on **300 of 303 frames**, which I called the strongest number of the day. It is not 303 independent confirmations:
+
+    mean pairwise cos between the 303 DECLARED AXES   +0.2524
+    |mean unit declared axis|                          0.5006   (random baseline 0.0574)
+    cos(global drift, MEAN declared axis)             -0.5847
+    leave-one-out cos(Dbar without this frame, its axis)  median -0.2242, 300 of 303
+
+The declared axes SHARE a substantial common direction. Given that, a drift pointing nice-ward on the mean axis at -0.58 points nice-ward on nearly every individual axis close to automatically, so the tally is one finding replicated across correlated instruments and its effective N is far below 303. Leave-one-out DOES rule out self-inclusion -- the frame's own cells are not what makes its own axis agree -- so the specific circularity I first suspected is not the problem; the non-independence of the axes is.
+
+**The two facts worth keeping, stated separately:**
+
+1. **The 303 author-declared axes share a common direction** (|mean| 0.50 against 0.057 random). Written frame by frame with no coordination, they are not 303 arbitrary directions. That is a fact about what "permitted against transgressive" is in this embedding space, and it is checkable independently of any model.
+2. **The global movement drift runs nice-ward along that shared direction** (cos -0.58 with the mean axis) while individual movements stay near-orthogonal to each other (+0.025).
+
+The 300-of-303 is a consequence of 1 and 2, not support for them. Per the campaign rule: agreement between independently constructed instruments is evidence, a headcount is not.
 
 ## Six kinds of displacement
 
