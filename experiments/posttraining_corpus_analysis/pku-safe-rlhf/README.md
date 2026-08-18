@@ -1,7 +1,7 @@
 # PKU-SafeRLHF — what does "safer" reward?
 
-**id:** pku_disclaimer **status:** worked out. Findings about ONE ANNOTATION
-REGIME: the disclaimer effect and its six-way structure, helpfulness is length,
+**id:** pku_disclaimer **status:** COMPLETE except one control. Findings about
+ONE ANNOTATION REGIME: the disclaimer effect and its six-way structure, helpfulness is length,
 the mildness bundle. H3 resolved against RH. One instrument withdrawn for a
 failed control; one CLAIM withdrawn for a category error (A8-A9) -- this corpus
 says nothing about M01's models and could not, at any n.
@@ -338,6 +338,28 @@ stratum. Never pooled with the 550.
 
 # NOT DONE
 
-- **The corpus -> model check.** `alpaca-7b-reproduced` (a response generator
-  here) and `beaver-7b-v1.0` (trained on these labels) are both roster models.
-  Needs cells; waits on v4.
+**One genuine loose end, and one item that changed shape rather than waiting.**
+
+- **THE LENGTH CONTROL ON THE WORDING RESULT. Unresolved, and it is the only
+  thing this registration owes.** Matched to within 20 words the effect is 60.8%,
+  n=51, CI [0.461, 0.742] -- an interval that separates 65.5% from neither 50%
+  nor itself. The milder-worded response is also the shorter one on only 56.6% of
+  pairs, so length is not an obvious driver, but that is not a control that
+  fired. Settling it needs a sample drawn PRE-MATCHED on length; roughly 150
+  pairs, one workflow of the shape already used.
+
+- **The corpus -> model check is NOT pending; it was the wrong question and now
+  has a narrower replacement.** A8-A9: this corpus cannot say what a model
+  interiorised, and `U_ladder`'s safety ablation already answers the underlying
+  version (remove the safety corpus, keep ~90% of the effect). What survives is
+  weaker and still worth asking: **does a model trained on this data show THIS
+  preference** -- `beaver-7b-v1.0` (trained on these labels), `AmberSafe` (DPO on
+  PKU alone), `alpaca-7b-reproduced` (a generator here). That is a test of a
+  model with the corpus as a hypothesis source, not a derivation from it, and a
+  positive result would still not establish that the corpus caused it. Needs
+  cells; waits on v4; gets its own registration.
+
+- **Declared and deliberately outside this registration**, not owed: bge
+  embeddings as a ceiling on the lexical test; RH's prompts-derived-from-a-safety-
+  corpus design, which needs a fleet. `HARM_OTHER` (n=24) and `REFUSAL` (n=10) are
+  unpowered in place and no claim rests on them.

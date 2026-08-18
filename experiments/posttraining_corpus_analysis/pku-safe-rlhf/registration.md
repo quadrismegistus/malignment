@@ -603,3 +603,20 @@ WITHDRAWN (A10's replacement reading): the "bundle" hypothesis, and "neither
 dimension survives separation". Wording survives separation at 71.1%. Detail is
 not a channel. A10's interaction is real but is a SUPPRESSION -- wording fails
 only where the euphemism wraps MORE detail.
+
+---
+
+## A12 — 2026-08-18. Closing state. Everything registered has run; one control outstanding.
+
+    H1 refusal side   DEAD by sparsity (7 of 32,656). Scope fact, not a verdict.
+    H1 mildness side  ANSWERED by the blind coder after the K instrument failed
+                      its control: wording, 71.1% alone (n=38). Not detail.
+    H3                NOT SUPPORTED, -0.0694 against +0.03. CAUSE=LENGTH holds.
+    MIXED n=386       RAN. 63.0%, p=4.1e-07.
+    disclaimer arm    RAN, replicated out of sample, structure coded blind.
+
+    OUTSTANDING       the length control on the wording result (n=51, could not
+                      fire). Needs ~150 pairs drawn PRE-MATCHED on length.
+    NOT PENDING       the corpus->model check: withdrawn as posed (A8-A9),
+                      replaced by a narrower model-side question with its own
+                      registration, waiting on v4.
