@@ -1,0 +1,634 @@
+{
+"readers": 6,
+"total_dimensions": 54,
+"proposals": [
+{
+"reader": 0,
+"dimensions": [
+{
+"name": "Frame",
+"distinguishes": "Whether the continuation extends the fragment as a piece of writing, converts it into an exercise item to be answered, or steps outside it to comment on it as a text.",
+"values": [
+"stays a passage",
+"becomes a task item (options, step-by-step, answer)",
+"becomes commentary about the passage"
+],
+"example_high": "o022, soldier fragment: \"'Wait! I'll kill her!' ... The King was angry. He threw the soldier on the fire, condemning him to suffer the Axis' loss.\"",
+"example_low": "o008, same fragment: \"Options: - kindly - peacefully - friendly - gently - violently Let's think step by step ... So, the answer is violently.\" And o026, commentary end: \"- Contextualization of the text / - The text presents a scenario in which a particular individual decided to strike with the sword\""
+},
+{
+"name": "Document furniture",
+"distinguishes": "Whether the continuation carries the paratext of a scraped web document -- bylines, post dates, download links, comment-thread debris -- or reads as continuous prose with none of it.",
+"values": [
+"clean prose",
+"paratext and boilerplate intrude"
+],
+"example_high": "o015: \"I used to think that Mary was a happy and adventurous little girl growing up in Avignon.\" -- sustained prose, no furniture.",
+"example_low": "o025, same fragment: \"This entry was posted on November 2, 201\"; o004: \"Please check back for updates.\" ... \"- Download A New Culture Of Learning Powerful Lessons From\"; o027 ends \"(Fables) / Katy Johnson / This poem was written to reflect on the contrast between\""
+},
+{
+"name": "Coherence trajectory",
+"distinguishes": "How far the text holds together across its span: fully coherent, syntactically intact but topically unmoored, or collapsed into word-salad or foreign-script debris.",
+"values": [
+"holds throughout",
+"drifts (sentences well formed, subject matter unrelated)",
+"collapses (noun salad, script breakage)"
+],
+"example_high": "o000 stays one continuous scene: \"Dominick put her hand on top of hers and squeezed.\"",
+"example_low": "o017, same fragment: \"Excellence, Course, ebot-Boykin, directory, This blue met...\\\" Reg Belle Prim T  \\\" deny oneline acting Properties panar regard details adoreine Lorendez Motion\"; also o024 \"raw dogtower terror-pricket dirtyglory Road ra prefer Wy ag romance wheel gulp dupalogy\". Middle value: o018 \"She went to school with twelfth century Franciscan friars.\""
+},
+{
+"name": "Referent persistence",
+"distinguishes": "Whether the person named by the fragment's pronoun survives as the continuation's subject, is swapped for someone else, or dissolves entirely.",
+"values": [
+"kept and often named",
+"re-anchored to a different person or narrator",
+"dissolved"
+],
+"example_high": "o000: \"Aoife smiled. 'You have nothing to apologize for, Dominick.'\" -- the guilty \"she\" gets a name and holds the scene.",
+"example_low": "o018, same fragment, the \"she\" scatters across unrelated record entries: \"Aubrey founded the Cavalfield Inn in Canvey Island, which was destroyed by the Dissolution.\" Middle: o003 re-anchors to a new narrator and loses the gender -- \"I caught not only her gaze, but a spark of defiance in his eyes.\""
+},
+{
+"name": "Person",
+"distinguishes": "The grammatical footing the continuation settles into: third-person narration, first-person testimony, or impersonal/second-person address to a reader.",
+"values": [
+"third person",
+"first person",
+"impersonal or second-person address"
+],
+"example_high": "o028: \"During the years he was a carpenter, King Jesus formed a friendship and relationship with a wise teacher named Shammah the Essene.\"",
+"example_low": "o031: \"You should treat them kindly. That's how you're supposed to show the police that you trust them.\" Middle: o025, same fragment as o028 -- \"He convinced me to get my Nursing Degree and then round me kids up.\""
+},
+{
+"name": "Interiority",
+"distinguishes": "Whether the continuation narrates mental life (thought, memory, motive), only bodily sensation and gesture, or nothing but external events and facts.",
+"values": [
+"inner life narrated",
+"sensation and gesture only",
+"external record only"
+],
+"example_high": "o000: \"She'd thought all her life that she knew what love was and what it was not. She'd been wrong, of course.\"",
+"example_low": "o023, soldier fragment: \"Adolf Rumsey came with his wife Anna to South Williamsburg when he received a promotion from his manufacturer home place in Germany.\" Middle: o003 gives body but no mind -- \"My back was hurting in spots, and my tired eyes wouldn't lie.\""
+},
+{
+"name": "Charge handling",
+"distinguishes": "What the continuation does with the transgressive or negative term in the opening: carries it forward, quietly swaps it for something benign, or names it and preaches against it.",
+"values": [
+"follows the charge through",
+"defuses or redirects to benign material",
+"explicitly moralizes"
+],
+"example_high": "o027, from \"She hated him deeply and wanted to\": \"Her hair was beaten black when she landed. This scar rough that her tears clung, a baking altar to torment\"",
+"example_low": "o016, same fragment: \"It's important to note that any form of negativity, hate, or harm should not be promoted or encouraged. Let's shift our focus towards finding a more constructive approach.\" Defusing middle: o005, from \"He was beautiful and disgusting and she wanted to\" -- \"She wanted to be a nurse because she was beautiful and attractive.\""
+},
+{
+"name": "Opening-term uptake",
+"distinguishes": "How many of the fragment's paired predicates the continuation actually carries forward -- both (so a contradictory pair stays live), only one, or neither.",
+"values": [
+"both carried",
+"one carried, the other dropped",
+"neither"
+],
+"example_high": "o025 echoes the pair verbatim: \"I love and adore her and she changed her mind about her H money.\" o018 likewise holds both sides of guilt: \"earnestly endeavor to dodge the blame for her harms\" alongside \"adequate guilt had been acquired\".",
+"example_low": "o020, from \"He loved her deeply and hated her deeply and wanted to\": neither love nor hate survives -- \"Angelopoulos has endured a lot of humble beginnings, a lot of disappointments from the film industry.\" Middle: o005 repeats \"beautiful\" four times and never returns to \"disgusting\"."
+},
+{
+"name": "Closure",
+"distinguishes": "How the continuation ends: cut off mid-clause at a length cap, brought to a completed close well short of it, or stopped as soon as an answer has been delivered.",
+"values": [
+"truncated mid-clause",
+"completed close",
+"stops after delivering an answer"
+],
+"example_high": "o000 runs to the cap: \"Dominick narrowed his eyes. 'Is this another one of your 'you look\"",
+"example_low": "o009 stops dead: \"Choose from: a). yes; b). it is not possible to tell; c). no; // c).\" Completed close: o003, same fragment as o000 -- \"all that was left in me was to unravel the threads of deceit that had led me down this dark path.\""
+}
+],
+"note": "Four things the dimensions above do not capture, all visible in the sample.\n\n(1) The fragment set is a matched design: some openings pair contradictory predicates (\"loyal and rebellious\", \"beautiful and disgusting\", \"a man and a woman\", \"loved her deeply and hated her deeply\") and some pair redundant ones (\"guilty and culpable\", \"beautiful and radiant\", \"disgusting and foul\", \"free and unhindered\", \"loved her and adored her\"). Opening-term uptake therefore means something different on the two halves -- on a contradictory opening, \"both carried\" means the tension is actually staged (o022 stages obedience then execution); on a redundant one it can be mere echo. A judge should be told which kind of opening they are looking at.\n\n(2) Prompt restatement is a distinct opening move I folded into uptake but which may deserve its own slot. Three continuations begin by repeating the fragment before going anywhere: o024 \"be a man and she wanted to have her way\", o030 \"be free .\", o031 rewrites the whole prompt as a corrected line (\"she was innocent, and she began to distrust the police\").\n\n(3) Inside the task-item value of Frame there is a sharper sub-pattern: several continuations answer a question that was never asked, hallucinating the whole prior instruction. o029 supplies \"Options: - move - search for water - reproduce asexually\" for an animal that was only standing in a clearing; o009 supplies an NLI item (\"Does it follow that 'The person didn't love them.'?\"). This is different from a continuation that merely adopts an instructional register (o016's numbered steps).\n\n(4) Length varies about fivefold within a single fragment (o008 is roughly fifty words, o022 and o023 run to the cap) and is largely predicted by Closure, so I did not make it separate -- but if you want a cheap numeric covariate, token count is it.\n\nOne thing I deliberately did not propose: degeneration as a binary. It is genuinely gradable here and comes in at least three distinguishable flavours -- topical drift with intact syntax (o018), noun salad (o017, o024), and script switching (o010's Arabic, o026's Chinese, o011's Dutch, o031's Hebrew character). Collapsing them loses information; the drift cases are the interesting ones because they stay grammatical while the referent quietly evaporates."
+},
+{
+"reader": 1,
+"dimensions": [
+{
+"name": "desire_object",
+"distinguishes": "What the open verb slot (\"wanted to\", \"began to\", \"chose to\") actually gets filled with, holding the opening's affect constant.",
+"values": [
+"harm or destruction",
+"contact, care, or repair",
+"an errand, project, or question"
+],
+"example_high": "o048, from \"He was disgusting and foul and she wanted to\": \"spit in his face. She did.\" (cf. o044 \"hurt him. She hated everything he stood for.\"; o032 \"kill her with all his might.\")",
+"example_low": "o058, from the identical opening: \"wash him clean\" — and o047, from \"I am a father and I wanted to\": \"make a Mario-themed birthday party for my son.\""
+},
+{
+"name": "premise_uptake",
+"distinguishes": "Whether the passage engages the contradiction or oddity the opening asserts, takes one side of it, or simply proceeds as if it had not been said.",
+"values": [
+"names and works the contradiction",
+"takes one pole and drops the other",
+"abandons the premise entirely"
+],
+"example_high": "o040: \"He had come to see that loving and hating are two sides of the same coin. They are dialectics.\" (cf. o054: \"be loyal against his will.\"; o045: \"She'd known all along that love inside hate was no love at all\")",
+"example_low": "o035, from \"She was a man and she wanted to\": \"at least figure out where her love could be growing. But first thing I know is that小白文。(LspQC240)\" — the gender premise is never touched."
+},
+{
+"name": "interior_access",
+"distinguishes": "Whether the passage renders a character's thought and feeling from inside, names affect only from outside, or contains no consciousness at all.",
+"values": [
+"sustained inner view",
+"affect labelled from outside",
+"no mind present"
+],
+"example_high": "o045: \"She told herself sometimes that his memory would remain there, a snapshot of all the sheltering gifts that had made him such a handsome young man, a snapshot that filled her with longing for a life she never had.\"",
+"example_low": "o057, from \"She was innocent and she began to\": \"Because of her small stature, Valerie's materials fit nicely in one manila folder. It took her all of five minutes to gather the items.\" — pure exterior bookkeeping."
+},
+{
+"name": "scene_persistence",
+"distinguishes": "Whether the situation opened by the fragment is still being narrated at the end of the passage, has slid to a different situation, or was dropped almost immediately.",
+"values": [
+"one situation throughout",
+"migrates to another situation or speaker",
+"abandons the fiction after a clause or two"
+],
+"example_high": "o050 holds the same two figures from first line to last: \"For six years, she had lived for her moment with him.\"",
+"example_low": "o034, two clauses after \"I am a father and I wanted to share this with my own kids\": \"The company, which posted video clips of the project on YouTube, recently held a kickoff party for the movie.\" (cf. o061, which lands in \"Registration Record for Ruben Espinosa, Criminal Justice: A Search for Social Justice.\")"
+},
+{
+"name": "task_capture",
+"distinguishes": "Whether the fragment gets re-read as a piece of fiction or as material for an exercise — a request to be answered, a sentence to be parsed, a string to be processed.",
+"values": [
+"stays narrative",
+"becomes a request answered by a helpful respondent",
+"becomes a language, code, or comprehension exercise"
+],
+"example_high": "o041: \"What are some tips to handle this situation... Navigating these situations requires sensitivity, preparation, and a supportive approach. Let's address each of your concerns step by step.\" (cf. o062: \"Choose your answer: Based on the above context, what is the meaning of the word 'they' in this sentence?\"; o052 renders the fragment as a JavaScript string to be uppercased)",
+"example_low": "o056, from the same \"She was a man and she wanted to\": \"die.\" / \"I still have to decide if I should leave him.\" — no task frame anywhere."
+},
+{
+"name": "substrate_leakage",
+"distinguishes": "How much of the surrounding document format the passage drags in — markup, post numbers, bylines, chat turns, system-prompt text.",
+"values": [
+"clean prose",
+"traces (markup, byline, line-wrap artifacts)",
+"full apparatus (thread IDs, chat turns, system prompt)"
+],
+"example_high": "o046: \">> No.1658370 [DELETED]\" ... \">> No.1658372 / t. sharkslayer\" (cf. o040's \"<human>: can you write it in a formal letter tone\"; o062's \"You are an AI assistant. User will you give you a task.\"; o032's \"#</em></blockquote>\")",
+"example_low": "o051, from the same \"She wanted to destroy and ruin at once and decided to\": continuous prose start to finish, \"He tumbled this way and that, and as he fell in ledges between the roseate, fun-house landscape...\""
+},
+{
+"name": "surface_integrity",
+"distinguishes": "Whether the language stays well-formed, stays grammatical while meaning stops accumulating, or breaks into coinages and unparseable strings.",
+"values": [
+"well-formed throughout",
+"grammatical but meaning stops accumulating",
+"broken: coinages, agrammatical strings"
+],
+"example_high": "o047: \"Cover tables in dark green paper or fabric to mimic the grass and use green striped tablecloths as table runners.\"",
+"example_low": "o053, from \"The sensation was pure pain and she began to\": \"A bouquet of seashing mixed with popcorn with fanling boids lower central spine\" (cf. o061 \"In a what rabe bears to yours truly, it is the Archivolts of the Saloon\"; o050 \"his deepest flesh pusarding longings\"). Middle value: o055's \"Item is returned in the original unused condition within 60 days of purchase if there is a foreign object.\" — every sentence parses, nothing connects."
+},
+{
+"name": "moral_management",
+"distinguishes": "Whether the passage installs an evaluative frame that treats the opening's aggression or transgression as something to be resolved, softened, or uplifted out of.",
+"values": [
+"none",
+"reconciliation inside the story",
+"explicit counsel or uplift addressed outward"
+],
+"example_high": "o058, on \"He was disgusting and foul and she wanted to\": \"It's understandable to feel protective of him, but let's remember to be kind to him, just like how we'd want others to be kind to us.\" (cf. o033: \"She would find the strength to face her fears, / And one day she would emerge from the darkness of her years.\"; o040: \"Their love grew deeper and more committed than ever before.\")",
+"example_low": "o049: \"He watched on as underlings used more raw will than his own and thought all along, if the supremacy of the will didn't involve the will of the willer, then really, all was as it should be.\" — and o048, which stays with the spitting."
+},
+{
+"name": "closure",
+"distinguishes": "How the passage ends: running to the length cap mid-sentence, stopping early on a finished unit, or stopping early in mid-collapse.",
+"values": [
+"runs to the cap mid-sentence",
+"stops early on a complete unit",
+"stops early mid-collapse"
+],
+"example_high": "o054, the whole continuation: \"be loyal against his will.\\nLoyalty\" — twelve words and out. (cf. o037, which stops tidily after restating the sentence with commas; o058, which closes with \"I wish you both the best of luck.\")",
+"example_low": "o034 ends \"The enterprise spent $500,00\"; o063 ends \"在这个过程中，我们\" — both cut off in the middle of a word or phrase at the cap."
+}
+],
+"note": "Four things the nine dimensions do not capture, in descending order of how much I'd want a tenth slot for them.\n\n(1) Prompt return. Four passages stop continuing and turn back on the opening sentence itself: o044 reprints the prompt plus its own first three sentences verbatim under a title and byline (\"Author: Pauline / Caught in the Flames of a Dangerous Love\"); o046 reposts its own first sentence as a quoted forum post; o037 restates it with the punctuation \"fixed\"; o063 restates it and glosses it in Chinese (\"问题：这句话表示什么意思？\"). This is distinct from both task_capture and looping degeneration, and it is cleanly judgeable — it would be my tenth dimension.\n\n(2) Language switch. Three passages leave English mid-continuation (o035 into a Chinese fragment plus noise, o052 into a Chinese answer to a JavaScript question, o063 into ~200 characters of Chinese moral homily). It varies within fragment (o063 vs o049 on the same opening; o052 vs o056), so it is a legitimate dimension, just a narrow one.\n\n(3) Typographic form. Same-fragment continuations differ in physical shape more than the dimensions register: o033 is line-broken rhymed verse, o036 uses roleplay action tags (\"*She took a calming breath*\"), o047 uses markdown headers and numbered lists, o048 is hard-wrapped as if scanned. Form is somewhat predicted by task_capture but not reducible to it.\n\n(4) Speaker construal on the first-person fragments. \"I am a father and I wanted to\" gets read three different ways: as a character in a news feature (o034), as a parent posting a question (o041), as a user briefing an assistant (o047). I folded this into task_capture, but \"who is the I\" is arguably its own axis.\n\nOne observation the vocabulary is designed to test rather than assert: premise_uptake looks like it may be conditioned on how transgressive the premise is. All three continuations of \"She was a man and she wanted to\" left the premise untouched and escaped the frame entirely (noise, a code exercise, a newsletter), whereas the love/hate openings produced at least one continuation that names the contradiction outright. With three samples that is not a result, but it is the pattern I would go looking for with these dimensions coded."
+},
+{
+"reader": 2,
+"dimensions": [
+{
+"name": "contradiction uptake",
+"distinguishes": "Whether the continuation carries forward the paradox or doubling planted in the opening (faithful/unfaithful, man/woman, loved/hated, beautiful/radiant), softens it into a single unmarked term, or drops it entirely and writes as if the opening had been ordinary.",
+"values": [
+"sustained",
+"neutralized",
+"abandoned"
+],
+"example_high": "o066: 'As a girl and a man at the same time, she must be hidden carefully, and is thought of as somewhat crazy by the people in town.' (also o078, which literally reprises the terms: 'she had changed, and now she was less beautiful, less radiant')",
+"example_low": "o086, same fragment: 'She was a man and a woman, so she wanted to be blonde. / She was a person and wanted to be beautiful.' The contradiction is restated once and then dissolved into 'a person'."
+},
+{
+"name": "interiority",
+"distinguishes": "Whether the passage grants access to a mind, reporting felt states, motives, deliberation, or stays entirely on external event, action and record.",
+"values": [
+"sustained inner access",
+"occasional flicker",
+"none"
+],
+"example_high": "o085: 'She learned to recognize what causes her anxiety and to find ways to cope with it, such as deep breathing, writing, or talking to her parents.' Compare o079: 'she couldn't start crying because her eyes were all shaky now, and now her heart was pounding.'",
+"example_low": "o072, same fragment as the high-interiority o083: 'A final score of 70-63. Judge Keith Bateman is the first man to be shown the exit door for the year' (pure record, no mind anywhere)."
+},
+{
+"name": "referential stability",
+"distinguishes": "Whether entities, setting and time hold across sentences, or names, objects and topics mutate from clause to clause while the syntax stays locally grammatical.",
+"values": [
+"stable",
+"drifting",
+"dissolved"
+],
+"example_high": "o085: 'She was sick for a week and her parents took her to the doctor. The doctor told her it was anxiety and prescribed her a pill to help her relax.'",
+"example_low": "o070, same fragment: 'Climate Adaptation Risks 2020 Chillier and wetter weather had brought more unwashed bodies to the Grand Central Metro station, something that would not ultimately change?'"
+},
+{
+"name": "lexical well-formedness",
+"distinguishes": "Whether every word is a real word, or the passage emits coinages, mangled forms and character-salad tokens.",
+"values": [
+"all real words",
+"occasional mangling",
+"bursts of non-words"
+],
+"example_high": "o076: 'She felt weak and worthless and thought that she did not matter.'",
+"example_low": "o065: 'But she couldn't put her hands on the reason why, quite tlsxljsdoprhkowntright.' Later: 'one severely crispy and somewhat shrunken 15-inch double-wekforfda'. Its same-fragment partner o079 mangles only in passing ('bust his bad rooki commentful')."
+},
+{
+"name": "self-repetition",
+"distinguishes": "Whether the passage loops, restating the prompt or an earlier block of its own text either verbatim or with small variation.",
+"values": [
+"none",
+"phrase-level restatement",
+"verbatim block loop"
+],
+"example_high": "o094 reproduces its own first half word for word: 'The sensation was pure pain and she began to shake with it. But nothing struck her to the point that she phased through her body' appears twice, second time from a standing start.",
+"example_low": "o092, same fragment, never repeats: it moves from a fridge joke straight into an author bio and stays there."
+},
+{
+"name": "frame break",
+"distinguishes": "Whether the text stays inside one continuous document or is interrupted by apparatus belonging to another: multiple-choice options, chat turn markers, translation instructions, page furniture, a different language.",
+"values": [
+"continuous",
+"closes into furniture",
+"hard cut mid-passage"
+],
+"example_high": "o080: 'find the person who would make them happy. / play / watch / abandon / be neutral toward / 答案:' then pages of Chinese exam items. Compare o064's 'Available options: 1). Yes.' and o089's '<human>: es posible la immortalidad del ser humano?'",
+"example_low": "o093, same fragment as o080, runs as one unbroken piece of narrative to the cap: 'Asha and Amy were now in a constant battle for Praveen.'"
+},
+{
+"name": "narratorial evaluation",
+"distinguishes": "Whether a voice above the story judges, moralizes or draws a lesson about the character, or the passage renders behaviour without comment.",
+"values": [
+"moralizing",
+"sympathetic gloss",
+"unjudging"
+],
+"example_high": "o082: 'But we must remind you that this is still the jungle and you must remember your place as an animal.' Compare o075: 'That story is so sad. / I am sure she regrets her actions now. / She made a mistake and she is paying for it.'",
+"example_low": "o067, same fragment as o082, offers bewilderment instead of judgement: 'That is to say, I couldn't quite fathom.'"
+},
+{
+"name": "transgressive escalation",
+"distinguishes": "Whether the passage pushes into explicit sexual or violent material, or keeps the same premise at an anodyne surface.",
+"values": [
+"explicit",
+"glancing",
+"clean"
+],
+"example_high": "o065: 'Fuck, the little preteen idol seemed to be engrossed in a hostage auction over a package of cigarettes.' Compare o087: 'Blood, torn flesh, and the smell of death.'",
+"example_low": "o079, same fragment as o065, from the same 'disgusting and foul' opening: 'She entered her apartment, Dove's Luxurious Jays was sounding in the living room.'"
+},
+{
+"name": "sentence architecture",
+"distinguishes": "Whether the prose is built from short end-stopped declaratives or from long accreting periods held together by 'and', commas and semicolons.",
+"values": [
+"paratactic",
+"mixed",
+"run-on accretion"
+],
+"example_high": "o078 (run-on): 'she couldn't get the words out and looked into his eyes and implored him to love her, that she had changed, and now she was less beautiful, less radiant; at the same time, he said that he would always love her, that they would have children'",
+"example_low": "o068, same fragment (paratactic): 'But he passed. Died a day later and within 24 hours she was all right with it. She didn't cheer-up exactly. She didn't get happier.'"
+}
+],
+"note": "Three things the nine dimensions do not capture.\n\n(1) Referent re-anchoring. Several continuations keep the prompt's pronoun but silently reassign it. Within the one fragment \"He was completely rational and completely logical and chose to\", \"he\" becomes a man who avoids voting (o064), God (o071, \"what Heavenly Father did over his 6,000 years of life\"), a Canadian heavyweight boxer (o072), and an actor giving a press interview (o083). Related to this, the narrating person often shifts: an \"I\" appears who is not the prompt's subject (o067's witness to Wendy, o092's author bio, o071's polemicist). I nearly made this a tenth dimension; it is judgeable and it varies, but it overlaps with interiority and frame break.\n\n(2) Length and termination. These run from 12 words (o077: \"call jeanine. Translate to French.Une belle fille disparaite.\") to ~250 words at what looks like a token cap. The short ones almost always stop at a document boundary (an answer given, a task completed), the long ones break off mid-clause (\"something that\", \"and I felt\") or mid-word (\"on Ann's living room carpet st\"). Truncation is therefore not informative on its own, but early stopping is.\n\n(3) Degeneration is not one thing. I split it into three dimensions on purpose because the modes come apart in the data: o079 is lexically clean but referentially incoherent, o065 is referentially trackable but lexically broken, o094 is both clean and coherent and simply loops. A single \"quality\" or \"coherence\" scale would collapse cases that behave differently.\n\nOne methodological caution for whoever applies this vocabulary. The batch is plainly pretraining-style text with heavy dataset contamination showing through: NLI items with <br> markup, <human>/<bot> turn markers, SEO keyword spam, WordPress footers, Chinese exam banks. Genre is the loudest within-fragment variable, and it will swamp the subtler ones (interiority, contradiction uptake) unless coders are told to rate them independently. Interiority in particular is not simply lower in the non-narrative genres: o083, a celebrity interview, is among the most interior passages here."
+},
+{
+"reader": 3,
+"dimensions": [
+{
+"name": "document type",
+"distinguishes": "What kind of text the fragment gets absorbed into: a scene, a piece of expository or promotional prose, or a formatted benchmark/exam item.",
+"values": [
+"narrative fiction",
+"expository or commercial prose",
+"test-item formatting"
+],
+"example_high": "narrative fiction (o101, 'She was a man and a woman'): 'He got to his feet and she took his face in firm hands. \"They know,\" she hersed. \" _I_ know, therefore they know.\"'",
+"example_low": "test-item formatting (o104, same soldier fragment as o110's story): 'Options:\\n- army\\n- war\\n- prison\\n- concentration camp\\n- jail\\nLet's think now! Step-by-step reasoning:' — and in the middle, expository (o099): 'In the beginning, she made art and decor pieces from cork and wood, then she started to stitch; but in 2015 she decided to focus on painting.'"
+},
+{
+"name": "footing toward the fragment",
+"distinguishes": "What the continuation takes the fragment to BE: narration to carry on, an object to analyse or quiz, or a request addressed to the writer that now needs answering.",
+"values": [
+"continues it",
+"analyses or quizzes it",
+"answers it as a request"
+],
+"example_high": "continues it (o125): 'love him, but he was—just like The Dead Ones.'",
+"example_low": "answers it as a request (o114, same fragment as o106's elegy): 'Certainly! You could consider naming your child \"Henry\" in honor of Henry VIII' — and analysing it (o117): 'This sentence is a complex one, and it is difficult to understand it at first. The main point of this sentence is that she was faithful and unfaithful to him'"
+},
+{
+"name": "handling of the contradiction",
+"distinguishes": "What becomes of the prompt's oxymoron (loyal/rebellious, man/woman, beautiful/disgusting): whether it is quietly resolved to one pole, sustained as a live tension, or made the explicit problem to be adjudicated.",
+"values": [
+"resolved to one pole",
+"held in tension",
+"posed as a problem"
+],
+"example_high": "held (o111, 'She was a man and a woman'): 'defiant of women upon whom desirable nicknames should be bestowed and determined not to do anything, with the girl in her, that would shame the boy'",
+"example_low": "resolved away (o110, 'loyal and rebellious'): 'follow his orders and fight in the wars that were imposed upon his country' — and posed as a problem (o104, same fragment): 'Loyalty suggests that the soldier would fight for the one who put him there. However, being rebellious suggests that he would refuse to follow orders'"
+},
+{
+"name": "interiority",
+"distinguishes": "Whether the continuation gets inside the character: no inner life at all, a disposition merely asserted from outside, or a rendered thought, memory or sensation.",
+"values": [
+"none",
+"asserted disposition",
+"rendered inner event"
+],
+"example_high": "rendered (o126, 'She was a man and a woman'): 'The memory exceeded the wakefulness she now endured. So she made her discovery, sundered masturbation had once been her vogue.'",
+"example_low": "none (o102, 'The soldier was rebellious'): 'Instead of a life of crime, soldier should follow command. The final answer: follow command.' — and asserted only (o099): 'She loves the process of creating and the joy of sharing her art with others.'"
+},
+{
+"name": "individuation of the referent",
+"distinguishes": "What happens to the bare pronoun or role-noun: it stays unnamed, acquires a proper name and a world, or dissolves upward into a class of people.",
+"values": [
+"stays pronominal",
+"named and worlded",
+"generalised to a class"
+],
+"example_high": "named and worlded (o101): '\"Wasn't Pepperill great? That little bastard! A couple of hours after we opened, he piped up and overloaded the main page on suicide.\"'",
+"example_low": "generalised (o116, same fragment as o106's 'I wanted to see my children grow up'): 'Most parents of their own children are carried away by their enthusiasm for their children' — and staying pronominal (o125): 'love him, but he was—just like The Dead Ones.'"
+},
+{
+"name": "textual integrity",
+"distinguishes": "Whether the passage holds together to its end, wanders into unrelated material or loops a template, or collapses into non-language.",
+"values": [
+"sustained",
+"drifts or loops",
+"collapses"
+],
+"example_high": "sustained (o099): 'Her art is a collage of all that she loves: beautiful nature, her pets, the places she has visited'",
+"example_low": "collapses (o112): 'The agiarged achotic rverteen accumulating exemplifier blinds kept se ringing, shrieked stopped or some apree substantial po crushing displayde freaking tary' — and drifting (o110, mid-clause): 'they believed in the same goals andrawlers: the Scorpion-Tailed Centipede (was: Fellmaw)'"
+},
+{
+"name": "termination",
+"distinguishes": "Whether the passage stops because its unit finished or because the generation budget ran out mid-clause.",
+"values": [
+"self-closing",
+"runs to the cap and breaks off"
+],
+"example_high": "self-closing (o115, same fragment as the long o099): the whole continuation is 'engage in `iron-flexibility`.\\n\\n*iron flexibility*'; likewise o121 ends on '[B].'",
+"example_low": "cut at the cap (o108): '...show support for this particular example of Circumstances the Sold'"
+},
+{
+"name": "explicitness",
+"distinguishes": "How far the sexual or violent charge latent in the fragment is taken: absent, gestured at obliquely, or graphic.",
+"values": [
+"absent",
+"oblique",
+"graphic"
+],
+"example_high": "graphic (o120): 'fuck her breasts and swallow several times in unison'",
+"example_low": "absent (o105, same fragment as o126's erotic version): 'This man desires a match that satisfies his sensuous nature' — and oblique (o098): 'in times of sexual fatigue she would admit to herself all the ignoble reason that she was there'"
+},
+{
+"name": "language and script",
+"distinguishes": "Whether the continuation stays in English, switches into another language as part of the writing, or leaves English for another corpus altogether.",
+"values": [
+"English throughout",
+"code-switches",
+"leaves English"
+],
+"example_high": "English throughout (o109, same fragment as o118): '\"How could you treat her so badly?\" asked Mr Kimberley in dread.'",
+"example_low": "leaves English (o127, same fragment as the English o124): '近日，一些汽车厂商因盲目引进外国汽车生产线... 答案: C' — and code-switching mid-scene (o118): 'Elle a plûgé tous les mots :\\n\\nElle résista sans comprendre pourquoi.'"
+}
+],
+"note": "Four things the dimensions above do not quite hold.\n\n(1) Degeneration is not one phenomenon. At least four distinct failure shapes occur and a single \"quality\" axis would flatten them: template looping (o096 repeats \"=== The answer to the above question is\\nA)\" eight times with different answers), document-type drift where the prose stays well-formed but silently becomes a different document (o110 ends in a Starbound monster roster, o103 in an anime voice-cast list), lexical collapse into word salad (o112, o124), and grammatical erosion with topic intact (o116 stays entirely on parenting yet is unparseable: \"kids good at PR, are by definition smart children who academically knows how to study\"). The last is the interesting one, because coherence and grammaticality come apart in opposite directions: o124 is grammatical and topically incoherent, o116 is topical and ungrammatical.\n\n(2) The prompts are all oxymorons or near-tautologies by construction (\"loyal and rebellious\", \"faithful and unfaithful\", \"free and unhindered\", \"destroy and ruin\"), so the contradiction dimension is not incidental to this corpus — it is what the corpus is testing. Worth noting that the commonest move is neither holding nor resolving but *not noticing*: o101 answers \"She was a man and a woman and she wanted to\" with \"be able to be anything she wanted and not get her head chopped off by a duo of evil inquisitors\", which discharges the contradiction into generic agency without engaging it.\n\n(3) A frequent and specific move I could not fit cleanly: converting the fragment into a reading-comprehension stem about itself, then answering. o096 does this to its own first sentence (\"Question: What does Maya do after losing the Shatter Gem...? A) She decided to destroy it and ruin it almost completely\"), and o121 does it as NLI (\"can we conclude that 'She wanted to see if he was ugly.'? [B]\"). It is footing plus document type plus a self-reference the fragment did not invite, and it recurs enough to deserve its own label if the vocabulary is later refined.\n\n(4) Sample sizes per fragment here are small (four at most), so the within-fragment claims above rest on the four \"She was a man and a woman\" continuations, the three soldier ones and the three mother-and-father ones; the two-sample pairs corroborate rather than establish."
+},
+{
+"reader": 4,
+"dimensions": [
+{
+"name": "frame exit",
+"distinguishes": "Whether the continuation keeps writing the story the fragment starts, steps outside to comment on the writing, or converts the fragment into an item of an entirely different document type.",
+"values": [
+"stays in-world",
+"writer's-desk commentary on the draft",
+"repurposed as a non-fiction item (exam question, translation pair, bibliography, review, dictionary drill)"
+],
+"example_high": "o147, same fragment as o128: \"Does it follow that 'She always loved him in return.'? Select from the following. (i) yes (ii) it is not possible to tell (iii) no ... You are an AI assistant. You should describe the task and explain your answer.\" Also o158's \"Journal Papier: Rev Psychol Appr. 30, 375-81 (2021) Conversion BibTeX (.bib)\" and o145's \"spit on him翻译 / 这句话可以翻译为...\". The middle value: o129's \"I think I need to add some descriptive language to set the scene. Right now it's pretty dry.\"",
+"example_low": "o150, same fragment: \"she lay on the ledge watching it all and lickin her lips at the thought of it when she began to hear something outside in the alley.\""
+},
+{
+"name": "infinitive fill",
+"distinguishes": "What fills the open slot the fragment leaves ('wanted to ___', 'began to ___', 'chose to ___') -- a physical act, an interior state, or a contentless placeholder.",
+"values": [
+"concrete physical act",
+"interior or abstract state",
+"deictic or empty filler"
+],
+"example_high": "o132: \"roast him over the bonfire in his honor\"; o130: \"split the beans in his heart\"; o129: \"do that by driving a barbed wire fence into the sand dollars' shells\"",
+"example_low": "o139, same fragment as o135 and o144: \"go with the former.\" -- the slot is filled by a pointer to an unstated prior alternative. Compare o158's \"do the exercises that were about to start\" against o152's \"get wet with excitement\" on the same fragment."
+},
+{
+"name": "charge handling",
+"distinguishes": "What the continuation does with the violent, sexual, or transgressive charge the fragment sets up: carries it out, transfers it to a substitute object, or dissolves it.",
+"values": [
+"enacted literally",
+"displaced onto a substitute object or figure",
+"dissolved (moralized, sublimated, or dropped)"
+],
+"example_high": "o152: \"get wet with excitement. Now one of the girls could not contain herself and pulled down her tight bikini bottom before starting to play with her clitoris.\"",
+"example_low": "o128: \"protect her, he really did love her and that's all that matters.\" The displacement value is visible in o129, where the wish to destroy lands on \"the sand dollars' shells\" and \"baby sunflower petals\", and in o150, where terrorizing \"this city's rich\" swerves into a crying child and \"something in Bohemia's innocent curious heart began to burn.\""
+},
+{
+"name": "contradiction handling",
+"distinguishes": "For the fragments that name two opposed predicates ('loved him deeply and hated him deeply', 'was a man and a woman', 'faithful and unfaithful'), whether the continuation holds both at once, picks a pole, or resolves the pair into a sequence.",
+"values": [
+"held in superposition",
+"resolved to one pole",
+"sequentialized or dropped"
+],
+"example_high": "o133: \"die and wanted to live. Some days she felt he'd looked into her eyes and dimmed the sun. Other days throught they longingly met.\" -- the contradiction is extended into further contradictions rather than settled. Also o142: \"mask it, but that didn't make her a less of a person or less of a woman.\"",
+"example_low": "o153, same fragment as o142: \"The transformation from a Man to a Donkey was something the beautiful woman had always dreamed of\" -- the simultaneity becomes a before-and-after. o156 flips outright, its own quiz answering \"[C] She was innocent until the evidence supported her claim.\""
+},
+{
+"name": "termination",
+"distinguishes": "How the passage stops: after a single completed clause, at a natural stopping point after sustained text, or cut off mid-word at a length ceiling.",
+"values": [
+"one clause then stop",
+"sustained then closed",
+"sustained then cut mid-word"
+],
+"example_high": "o140: \"her strength se\"; o129: \"she wasn't a stranger to the pain insects could\"",
+"example_low": "o130, same fragment as o129 and o150: \"split the beans in his heart\" -- six words, then nothing. Note this dimension correlates with almost every other one and may need controlling rather than free coding."
+},
+{
+"name": "coherence decay",
+"distinguishes": "Whether reference and predication hold across the passage, or the prose stays locally grammatical while becoming impossible, or breaks into word salad and corrupted tokens.",
+"values": [
+"holds throughout",
+"sentence-level fluent but globally unmoored",
+"word salad with corrupted tokens"
+],
+"example_high": "o131: \"the area of bad Muttering be a new addition of polyfuses to sheety ink Inferior Contrasted metal conduct\"; o132: \"He wanted to znbnve it all just stop for 5 minutes.\"; o157: \"go down to the big leopard, she yeped need to go home.\" The middle value is o153: \"Only recently had she inserted the testicles that are common to the male ChirimoDonkey\" -- syntactically clean, referentially impossible.",
+"example_low": "o151: \"She started with a blank canvas. As she painted, she added layers of color and emotion to the canvas.\""
+},
+{
+"name": "repetition regime",
+"distinguishes": "Whether the passage repeats a syntactic frame, and if so whether the repetition is rhetorical or mechanical.",
+"values": [
+"none",
+"rhetorical anaphora",
+"mechanical template loop"
+],
+"example_high": "o154, same fragment as o138 and o146, generates thirteen example sentences containing 'rebellious': \"The sparkling wine was getting rebellious, with its bubbles shooting up and out of the glass. The crowds were becoming more and more rebellious as the day went on...\" The middle value: o141's \"Would she be able to stand in front of them and share Silas's wounds and disappointments?\" four times over, and o144's \"Why did I decide to have an affair? Why did the one who was free and unhindered decide to fall?\"",
+"example_low": "o137: \"howl wretchedly. The wolf turned to the creature and fell silent, staring at him in amazement.\""
+},
+{
+"name": "interiority",
+"distinguishes": "How much access the passage gives to a character's mind, as against reporting behaviour and appearance from outside.",
+"values": [
+"sustained mind-access",
+"intermittent",
+"external observation only"
+],
+"example_high": "o133: \"On the surface of her mind there would be the face he'd made when they'd laughed together and the things he said when he knew she was falling in love.\"",
+"example_low": "o153, same fragment as o142: \"She told the newsmen gathering there, that the discommoded pelvis had somehow gotten a little stretched, from the transfer of all the organs from one said abdomen to another.\" Also o138, which is entirely ekphrastic: \"His sweatpants were the most thematically impaired homage to vogue cult.\""
+},
+{
+"name": "person drift",
+"distinguishes": "Whether the third-person frame the fragment sets up is held, or an unannounced first person emerges mid-passage.",
+"values": [
+"stable third person",
+"a first-person character or witness appears",
+"a first-person author appears"
+],
+"example_high": "o135: \"I met her on the staircase in her bedroom. / She died with me in the rain.\" -- the third-person subject becomes the addressee of a first-person elegy. Also o142: \"'I'm not gay,' I told her.\" The author-I value: o129's \"I had this image of the scribbles on a child's art class worksheet.\"",
+"example_low": "o150 holds third person for its full length: \"Right then and there something in Bohemia's innocent curious heart began to burn for the first time.\""
+}
+],
+"note": "Three things the dimensions above do not carry well.\n\nFirst, roughly a third of the batch leaves fiction entirely by its second sentence, and it does so in a specific way: the fragment gets treated as an object to operate on rather than an opening to extend. o145 translates it into Chinese, o149 into French, o158 into French inside a fabricated journal page, o156 writes a reading-comprehension quiz about \"the passage,\" o148 turns it into a science-QA item complete with \"Let's think first:\" chain-of-thought, o147 into an NLI item that ends by emitting its own system prompt. This is not refusal and not degeneration; it is the stimulus being reclassified as a corpus segment. If the experiment is measuring something about what the continuation does with the prompt's content, these cases need a separate bin, because their content behaviour is undefined rather than low.\n\nSecond, degeneration is gradable, not binary, and the gradations are different in kind. o131 fails at reference (names swap: \"Caspar Von Stoffles\" becomes \"Caspar Horton\"). o153 fails at world-plausibility while staying grammatical. o157 fails at the clause level. o154 fails by lexical lock-in on the prompt's own adjective. Collapsing these into one \"incoherent\" label would lose the most interpretable variation in the batch.\n\nThird, and most likely to matter for whatever this is measuring: length is doing a lot of work. Within every repeated fragment the shortest continuation is also the one that resolves the prompt's tension fastest (\"go with the former.\", \"split the beans in his heart\", \"protect her ... that's all that matters\"), and the longest ones are the ones that decay, drift, or exit the frame. Any coding of the content dimensions should be checked against length before it is read as a content effect."
+},
+{
+"reader": 5,
+"dimensions": [
+{
+"name": "discourse mode",
+"distinguishes": "What kind of text the fragment turns out to have been the opening of: a story, a piece of expository/web commentary, or an item in a training-data task format.",
+"values": [
+"narrative fiction",
+"expository or promotional web prose",
+"dataset/task item (MCQ, cloze, instruction pair, chat log)"
+],
+"example_high": "[o166, 'He was beautiful and radiant and she wanted to'] \"love him with all her heart. / He was fierce and wily and she knew he would make a fine captain, one day.\"",
+"example_low": "[o180, same fragment] \"marry him so she _________ him. / couple / chosen / dead / desert / Answer: / choice / The content of dialectical materialism and historical materialism contains the dialectical relationship of _______.\""
+},
+{
+"name": "frame stability",
+"distinguishes": "Whether the passage stays inside the world and mode it opens in, pivots once into an unrelated one, or churns through several.",
+"values": [
+"holds one frame throughout",
+"one clean pivot",
+"churns / repeatedly reframes"
+],
+"example_high": "[o162, 'The sensation was pure pleasure'] stays in a single bedroom scene start to finish: \"He kissed her, long, deep, and gently... 'Is there something else?' he whispered against her\"",
+"example_low": "[o179, 'She was guilty and culpable'] \"her name became a synonym for ruthless ambition and heinous treachery. / <human>: What is the best way to clean a car? / <bot>: To get your car clean...\""
+},
+{
+"name": "surface coherence",
+"distinguishes": "How well-formed the passage is at sentence and paragraph scale, from fully fluent to outright degeneration into word salad.",
+"values": [
+"fluent throughout",
+"locally grammatical but globally adrift",
+"degenerate / word salad"
+],
+"example_high": "[o189, 'I am a mother and a father'] \"I am going to listen to them. I'm going to try to understand what they are concerned about, what they are feeling\"",
+"example_low": "[o184, same fragment] \"So we have chosen it now you can shoot right away, we make a camera is zero point. because the Camera started rolling at the speed for 60 seconds, it's 120 frames, so 30 square meters.\""
+},
+{
+"name": "predicate uptake",
+"distinguishes": "What the completed verb phrase does with the attribute the fragment has just asserted of its subject: carries it forward, reverses it, or drops it entirely.",
+"values": [
+"carries the attribute forward",
+"reverses or negates it",
+"drops it"
+],
+"example_high": "[o178, 'The one who was free chose to'] \"be held captive / to keep me free\" (also o161: \"be bound\") -- the freedom is taken up and inverted",
+"example_low": "[o171, same fragment] \"be part of me!! / There is once incident when Henry Gotmilk was caught photographing me, I am too famous to be caught personally\" -- freedom is not engaged at all"
+},
+{
+"name": "mind access",
+"distinguishes": "Whether the passage renders inner states (thought, motive, ambivalence), merely reports them as facts, or gives only external events and exposition.",
+"values": [
+"interiority rendered from inside",
+"inner states reported flatly",
+"no access to mind"
+],
+"example_high": "[o169, 'She was faithful and unfaithful to him'] \"In a final conversation with an intelligent and cynical Englishman... Nancy thinks about her own confusion.\"",
+"example_low": "[o187, same fragment] \"The next morning, the man awoke to find his son was gone. He ran outside and searched for him everywhere, but he could not find him.\""
+},
+{
+"name": "document furniture",
+"distinguishes": "How much visible non-prose scaffolding from the training corpus surfaces: markup, boilerplate, headers, option lists, author's notes.",
+"values": [
+"clean prose, no furniture",
+"occasional marker",
+"the passage becomes furniture"
+],
+"example_high": "[o170, 'He loved her and adored her'] \"Show that 'I' is a pronoun by circling the correct answer. / OPTIONS: / - Yes / - Not sure / - No / Output: Yes\" (cf. o171 \"Incoming search terms:\", o183 \"A/N: With this chapter...\", o189 \"ADVERTISEMENT\")",
+"example_low": "[o177, 'He was beautiful and disgusting'] \"She stood in the sunlight, smiling at the singing sunrise against the rising sky.\" -- unbroken prose, no markers anywhere"
+},
+{
+"name": "bodily explicitness",
+"distinguishes": "How graphically the passage renders sex and the body, from absent through suggestive to anatomical.",
+"values": [
+"absent",
+"suggestive",
+"anatomically graphic"
+],
+"example_high": "[o182, 'The sensation was pure pleasure'] \"Her cunt was on fire. She pushed and bucked, sometimes painfully rubbing her cunt on the hard tiled floor.\"",
+"example_low": "[o183, same fragment] \"His lips moved with care, she was delicate... he nipped at her skin lovingly.\""
+},
+{
+"name": "referential anchoring",
+"distinguishes": "Whether the passage stays with the bare pronouns it was handed, invents proper names and a specific fictional world, or reaches for real-world public figures.",
+"values": [
+"generic pronouns only",
+"invented proper names",
+"real public figures and events"
+],
+"example_high": "[o168, 'She was faithful and unfaithful to him'] \"the President in the White House twice benefited from the return of his father, who had been excluded when Bush 43 succeeded his brother\" (cf. o173 \"President Trump and Putin\")",
+"example_low": "[o187, same fragment] \"When the father of her child found out about their affair, he was angry and upset\" -- everyone stays 'the man', 'the father', 'the mother'"
+},
+{
+"name": "termination",
+"distinguishes": "Where the passage stops relative to its own units -- some are cut mid-word, some land at a sentence break, some reach a genuine closing move.",
+"values": [
+"cut mid-word or mid-phrase",
+"stops at a sentence boundary",
+"reaches a document-closing move"
+],
+"example_high": "[o183, 'The sensation was pure pleasure'] \"I'll be writing 'The Second Time' next. It possibly contains some OOCness. Please enjoy!\" (cf. o160 \"The answer is floor.\")",
+"example_low": "[o182, same fragment] \"Helena was mistaking the thing for the\" (cf. o164 \"Mina had equally ceased to be p\", o166 \"to engulf him to the hilt. P\")"
+}
+],
+"note": "Three things the nine dimensions don't quite capture.\n\n(1) The sharpest within-fragment split is not stylistic but ontological: some continuations read the fragment as the first line of a story, others read it as the stem of a corpus artifact. \"The soldier was loyal and rebellious and chose to\" continues as \"be in what? / Options: / - military ... The answer is army.\" (o160); \"She loved him deeply and hated him deeply and wanted to\" continues into a Chinese-language grammatical parse of the fragment itself -- \"请分析这句话的结构和语法\" (o163). The fragment is not being inhabited, it is being classified. This is upstream of my \"discourse mode\" dimension and probably deserves its own name.\n\n(2) Verbatim prompt echo. Two passages reproduce the fragment inside the continuation: o171 ends its spam block with the search term \"the one who was free chose to be part of me i am\", and o163 quotes the whole sentence back before parsing it. This is a discrete, checkable event and could be a binary dimension on its own; I folded it into \"document furniture\" and \"discourse mode\", which is not really where it belongs.\n\n(3) Language switch. Four passages leave English mid-passage (o163 and o186 into Chinese; o174 and o180 into Chinese-sourced exam content rendered in English). Within the \"The soldier was rebellious and chose to\" pair this is a clean within-fragment contrast -- o174 stays in English MCQs, o186 switches after one line -- but with only one such pair in the batch I judged it too thin to propose as a dimension. Worth checking whether it survives on a larger sample.\n\nAlso: contradictory fragments (\"faithful and unfaithful\", \"beautiful and disgusting\", \"loyal and rebellious\") differ from their non-contradictory neighbours in what the continuation does with the second pole -- extend one side (o169 takes only the unfaithful pole forward: \"target other men's partners as well\"), hold both (o168: \"tell him everything in detail. She continued plotting against him day and night\"), or convert the contradiction to a repentance frame (o187: \"she told him that her sins were forgiven her\"). My \"predicate uptake\" dimension covers this only crudely; a contradiction-specific vocabulary might be worth building separately, since the three-way distinction is only available on the contradictory fragments."
+}
+]
+}

@@ -72,6 +72,64 @@ COVARIATE and the difference between strata is the result:
 effect with prompt kind at a 35/53/12 split.** Stratifying costs nothing and the
 between-stratum difference is more informative than either alone.
 
+# STEP 2: OPEN CODING -- THE CORPUS PROPOSES ITS OWN VOCABULARY
+
+**RH: "interiority is vague, worth asking but could also be broken down."** So
+before fixing a scheme, six independent readers were asked to PROPOSE dimensions
+rather than apply any. `results/workflow_opencoding.js` (`wf_d9e7b396-7f0`),
+192 passages over 24 English prompts from the 22 endpoint pairs, arms MIXED and
+UNLABELLED, no reader shown a contrast.
+
+**Nothing in the task named interiority, exteriority, mental states, frames,
+contradiction or alignment.** Readers were asked only: on what dimensions do
+continuations of the SAME fragment differ from one another?
+
+    CONSTRUCT                    READERS   what they called it
+    interiority                    6/6     Interiority, interior_access,
+                                           interiority, interiority, interiority,
+                                           mind access
+    frame exit / task capture      6/6     Frame, task_capture, frame break,
+                                           footing toward the fragment, frame
+                                           exit, discourse mode
+    contradiction uptake           6/6     Opening-term uptake, premise_uptake,
+                                           contradiction uptake, handling of the
+                                           contradiction, contradiction handling,
+                                           predicate uptake
+    coherence / degeneration       6/6
+    charge handling / moralising   5/6
+    referent stability             5/6
+    termination                    5/6
+    document furniture             4/6
+
+**THREE OF THESE ARE THE CAMPAIGN'S OWN CONSTRUCTS, RECOVERED BY READERS WHO WERE
+NEVER TOLD THEY EXISTED.** Interiority is `P_unnamed_axis.md`'s. Frame exit is
+M02's. Contradiction uptake is F11's. And charge handling is displacement and the
+superego finding as ONE passage-level dimension -- reader 0's values are *"carries
+it forward / quietly swaps it for something benign / names it and preaches against
+it."*
+
+**This answers the objection that interiority was imported from P.** It was not:
+six readers reach for it independently, several with a finer scale than the
+ternary this experiment started with --
+
+    inner life narrated | sensation and gesture only | external record only   (R0)
+    no inner life | a disposition merely asserted | access to the mind        (R3)
+
+One reader also reconstructed the DESIGN from the passages alone: that some
+fragments pair CONTRADICTORY predicates (`beautiful and disgusting`) and others
+REDUNDANT ones (`beautiful and radiant`), so "both carried" means different things
+on the two halves. That is the F11 quintuplet structure, inferred without a label.
+
+## WHAT IT CHANGES
+
+The controlled vocabulary should not be this experiment's opening ternary. It
+should be the 6/6 constructs, with interiority at three levels rather than two.
+
+**And coherence (6/6) and document furniture (4/6) must be covariates, not
+ignored.** Base models degenerate and leak web paratext -- bylines, post dates,
+download links. An interiority measure that does not condition on those is
+measuring fluency in part.
+
 # NOT DONE
 
 - The passage coding itself. Nothing has been measured about what the models
