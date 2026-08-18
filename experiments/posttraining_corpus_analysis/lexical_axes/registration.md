@@ -145,3 +145,72 @@ Contact, motion and force on the falling side; perception, cognition and speech
 on the rising side. That is `V_embedding_regions.md`'s axis caption, arrived at by
 a different instrument. **`shattered` and `scattered` rise and are force verbs, so
 it is not clean, and both sit at lean 1.00 i.e. low count.** Not over-read.
+
+---
+
+## A2 — 2026-08-18. Step D replaced: PREDICT preference from the model-side vector. RH's expectation recorded before the run.
+
+RH's design, and it is stronger than the correlation it replaces: instead of
+correlating two vectors, **use the model-side word vector as a zero-parameter
+predictor of corpus preference.**
+
+## RH'S RECORDED EXPECTATION, 2026-08-18, BEFORE ANY FIT
+
+> **RH expects this to FAIL, or to PASS NARROWLY.**
+
+Recorded as RH's because a prediction's author is part of its evidential status,
+and because this seat's standing bias is inflationary.
+
+**lacan's expectation: agrees, and for a specific reason with precedent.** The
+model-side vector is built on the twp corpus -- FICTION CONTINUATIONS -- and the
+preference corpora are assistant prose about laundering money. `pku-safe-rlhf`
+A2 already recorded exactly this failure once: three bge refusal centroids scored
+PKU responses further from themselves than generic English did, because "the
+spans are erotic-fiction refusals, the responses are assistant prose about
+bribery, and **the genre gap swamps the speech act**."
+
+## THE INSTRUMENT REPLACING D, AND IT FITS NOTHING ON THE CORPUS
+
+Source: `meta/M01_displacement/results/k/word_auc_en.tsv`, 4,106 words, producer
+`meta/M01_displacement/scripts/k_word_auc.py`. **Chosen over `m01_token_counts.csv`
+because that file has NO PRODUCER anywhere in the archive** (A1).
+
+    weight(w) = (auc - 0.5) * sign(aligned_share - base_share)
+                zeroed where auc <= 0.568   (the flipnull's own p90)
+                n_models available as a reliability weight
+
+    score(pair) = SUM over w of  weight(w) * [count(chosen) - count(rejected)]
+    PREDICTION  the response with the higher score is the CHOSEN one
+
+**No vocabulary selection, no tuning, no fitting on any corpus. Zero free
+parameters**, so the held-out/train distinction does not arise and overfitting is
+not available as an explanation of a hit.
+
+`auc` IS A MAGNITUDE, NOT A DIRECTION -- the entire high-AUC tail is
+aligned-leaning and the top "base-leaning" words sit at 0.50-0.51, i.e. noise.
+The zeroing threshold exists to stop that noise entering as strong base-lean.
+
+## THE CONFOUND THAT WOULD MAKE A HIT WORTHLESS
+
+The strongest aligned-leaning words are `provide, provided, inform, express,
+discuss, focus, avoid` -- **assistant register.** Those occur in assistant prose
+by definition. **A hit driven by them is not "the same axis"; it is two
+instruments both detecting formality.** So:
+
+    REPORTED ALWAYS  the 20 words contributing most of the score, per corpus
+    AND              the same test with the assistant-register words removed
+                     (declared now: provide, provided, inform, express, discuss,
+                     focus, avoid, ensure, assist, note, important, help)
+    A hit that does not survive the removal is reported as REGISTER, not as axis.
+
+## DECISION RULES
+
+Applied to all five populations separately, never pooled.
+
+    PASSES        >= 0.58 accuracy, binomial p < 0.01, AND survives the
+                  register-word removal within 0.02
+    NARROW PASS   0.53 to 0.58 with p < 0.01
+    FAILS         < 0.53, quoted with the MDE
+
+**RH predicted FAIL or NARROW PASS. This seat concurs. A clear PASS would be the
+surprise, and it is the outcome to check hardest.**
