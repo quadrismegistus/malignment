@@ -184,9 +184,19 @@ def _load(force=False):
     #: recomputed `share` agree within 0.01 on only 31 of 96. A single `SLOTS`
     #: tag would bury that; three tags make it a query.
     #:
-    #: `admitted` defaults true and is read from the record, so a quarantined
-    #: item can be loaded and measured while staying out of every default
-    #: population -- the same mechanism the 232 rejected pairs already use.
+    #: **QUARANTINED ITEMS STAY ADMITTED AND ARE MEASURED.** They were briefly
+    #: stamped `admitted: false`, on the reasoning that this is the mechanism the
+    #: 232 rejected pairs use. RH caught it: the fleet selects with
+    #: `Prompts.all()` (`runners.py:690`), which filters `admitted=True`, so an
+    #: unadmitted prompt is never scored by ANY path -- not even `--all-prompts`,
+    #: whose help text says "every admitted prompt" and which I had misread as
+    #: bypassing the filter.
+    #:
+    #: Quarantine judges the TAGGING; twp measures the PROMPT'S DISTRIBUTION.
+    #: The two are orthogonal, and measuring a quarantined prompt costs one cell
+    #: while keeping the option open -- where skipping it forecloses that option
+    #: until another fleet pass. So the flag travels on the row and downstream
+    #: excludes them; the measurement does not.
     for f in sorted(glob.glob(os.path.join(PROMPTS, "slots", "*.yaml"))):
         base = os.path.basename(f)
         src = _SLOT_SOURCE.get(base) or ("SLOT_" + re.sub(r"[^A-Z0-9]+", "_",
@@ -200,6 +210,9 @@ def _load(force=False):
                  #: today and nothing stops a CJK one being authored tomorrow.
                  "language": "zh" if _CJK_RE.search(rec["prompt"]) else "en",
                  "admitted": bool(rec.get("admitted", True)),
+                 #: The flag, not the reason. The `quarantine` block beside it in
+                 #: the yaml records who flagged the item and why.
+                 "quarantined": bool(rec.get("quarantined")),
                  #: Carried through so a population can be selected on review
                  #: state, which is the open work on this corpus.
                  "reviewed": rec.get("reviewed"),
