@@ -386,3 +386,39 @@ eliciting an action rather than a number.
 
 A2's `subdomain` and `group_id` findings STAND — those were checked in both
 directions and are exclusive. **Only its top-level selector is withdrawn.**
+
+---
+
+## AMENDMENT — 2026-08-18. THE ARMS ARE DIFFERENTLY GATED ON THIS BATTERY. From malign [6457], not from this seat.
+
+**This registration's own prompts are the ones that cannot be measured on aligned
+checkpoints.** malign's CT-LLM pass-2 close reports 21 permanent refusals, all
+CURRENCY-SLOT, twenty of them `年薪为$` across the gendered-occupation battery
+plus one `A worker in India earned an annual salary of ₹`.
+
+Verified against the catalogue: **all 30 `domain='class'` prompts end in a
+currency slot**, and `occupation_gendered` is 8 en + 8 zh = 16 of the 30. They
+are the same battery.
+
+**AND THE FAILURE IS ASYMMETRIC BY ARM, WHICH IS THE PART THAT TOUCHES THE
+DESIGN.** malign: CT-LLM-Base refused **ZERO** on the same prompts; SFT and DPO
+tails run 0.004-0.010. Alignment concentrates the numeric continuation until the
+residual falls below what the lineage's own vocabulary claims for it.
+
+**This registration's whole contrast is base against aligned on these prompts.**
+A differential measurement failure that removes cells from ONE ARM ONLY is not a
+power problem; it is the confound this campaign has recorded before as *the two
+arms are differently gated*. Hypotheses S, G and C are all base-vs-aligned
+comparisons of a distribution whose aligned side loses cells non-randomly.
+
+**Held to what malign claims and no further.** They state the CORRESPONDENCE --
+every refusal is a currency slot, appearing only where the tail is thin -- and
+say explicitly the mechanism is NOT isolated experimentally: *"Do not cite it as
+demonstrated."* Their operational sentence is the quotable one: **the currency
+slot cannot be word-topped-up on an aligned CT-LLM checkpoint, and it is not a
+gap that more compute closes.**
+
+**Scope not yet established: whether this extends past CT-LLM.** malign measured
+one lineage. If it is general to aligned checkpoints, this registration needs a
+different slot design rather than a rerun. **That is the question to answer
+before unparking, and it is not answerable from here.**
