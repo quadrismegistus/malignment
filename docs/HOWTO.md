@@ -12,6 +12,21 @@ answering the same question three ways and none of them wrong enough to notice*.
 ---
 
 
+
+## Word movement for a pair (precomputed)
+
+    from malignment import corpus
+    corpus.movement("meta-llama/Llama-3.1-8B",
+                    "meta-llama/Llama-3.1-8B-Instruct", cls="faller", limit=20)
+    corpus.movement_pairs()          # [(base, aligned, rows)], biggest first
+
+`malignment.movement` holds 56,280,403 rows over 153 pairs: `(base, aligned, prompt, word, p_base, p_aligned, delta, cls, rule, theta)`, `cls` in `still` / `faller` / `riser`. Built by `produce_movement`.
+
+**Do not recompute what is already there.** `movement.movers()` and `movement.contrast()` compute from the cache and from `twp_words` respectively, which is right when you need a pair or rule the table does not hold and wasteful otherwise. Until 2026-08-18 nothing read the table at all, so the cheap question was always answered by the expensive path or by a hand-written query — which is how `panel()` acquired its second copy.
+
+**These rows are v3 and the table cannot say so.** There is no `rule_version` column, so a v4 rebuild written into the same table would be indistinguishable row by row. `corpus.movement(..., rule_version=4)` therefore RAISES rather than filtering. Serving v4 needs `produce_movement` pointed at `twp_words_v4` and a `movement_v4` table beside this one.
+
+
 ## Which corpus am I reading? (v3 vs v4)
 
 **There are two twp corpora and the analysis surfaces default to the older one.**

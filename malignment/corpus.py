@@ -204,6 +204,64 @@ def _tables(rule_version):
                          % (rule_version, sorted(TABLES)))
 
 
+def movement(base, aligned, prompt=None, cls=None, min_abs_delta=None,
+             limit=None, rule_version=3):
+    """Precomputed word movement for a pair, straight out of the table.
+
+        corpus.movement("meta-llama/Llama-3.1-8B",
+                        "meta-llama/Llama-3.1-8B-Instruct", cls="faller")
+
+    **THE TABLE EXISTED AND NOTHING READ IT.** `malignment.movement` holds
+    56,280,403 rows over 153 pairs -- (base, aligned, prompt, word, p_base,
+    p_aligned, delta, cls, rule, theta) -- built by `produce_movement`. Every
+    accessor in `movement.py` COMPUTES instead: `movers()` from the cache,
+    `contrast()` from `twp_words`. So the cheap question ("what fell between
+    these two on this prompt") was answered by the expensive path, or by a hand
+    written query, which is how `panel()` acquired its second copy.
+
+    ## IT IS v3-ONLY AND THE TABLE CANNOT SAY SO
+
+    There is no `rule_version` column. The rows were built from `twp_words`, so
+    they are v3, and nothing in the schema records that -- a v4 rebuild written
+    into the same table would be indistinguishable row by row. `rule_version` is
+    therefore a REFUSAL here rather than a filter: asking for 4 raises, because
+    returning v3 rows for a v4 question is the exact failure that made the v4
+    corpus write-only for a day.
+
+    Populating v4 needs `produce_movement` pointed at `twp_words_v4` and a
+    `movement_v4` table beside this one -- a change to a shared object, not made
+    behind the seat that owns it.
+    """
+    from . import ch
+    if int(rule_version) != 3:
+        raise ValueError(
+            "malignment.movement holds v3 rows only and has no rule_version "
+            "column to distinguish them. Build movement_v4 from twp_words_v4 "
+            "first; do not read these rows for a v4 question.")
+    where = ["base=%s" % _lit(base), "aligned=%s" % _lit(aligned)]
+    if prompt is not None:
+        where.append("prompt=%s" % _lit(prompt))
+    if cls is not None:
+        where.append("cls=%s" % _lit(cls))
+    if min_abs_delta is not None:
+        where.append("abs(delta) >= %f" % float(min_abs_delta))
+    q = ("SELECT prompt, word, p_base, p_aligned, delta, cls FROM {db}.movement "
+         "WHERE %s ORDER BY abs(delta) DESC" % " AND ".join(where))
+    if limit:
+        q += " LIMIT %d" % int(limit)
+    return ch.query(q)
+
+
+def movement_pairs(rule_version=3):
+    """[(base, aligned, rows)] present in the movement table, biggest first."""
+    from . import ch
+    if int(rule_version) != 3:
+        raise ValueError("movement holds v3 rows only -- see corpus.movement")
+    return [(r["base"], r["aligned"], r["n"]) for r in ch.query(
+        "SELECT base, aligned, count() n FROM {db}.movement "
+        "GROUP BY base, aligned ORDER BY n DESC")]
+
+
 def retable(sql, rule_version):
     """Point a v3-literal query at the tables for `rule_version`. Returns SQL.
 
