@@ -107,6 +107,25 @@ RULE_VERSION = 3
 #: collide with its own v3 twin and lose. One switch sets both, and nothing can
 #: select a version without also selecting where it lands.
 _RV = {"v": RULE_VERSION}
+_REPLACE = {"on": False}
+
+
+def _wait_for_mutations(ch, tries=60):
+    """A DELETE in ClickHouse is a MUTATION and returns before it has happened.
+
+    Inserting on top of an unfinished delete is a race whose loser is the NEW
+    row, and it fails the way this whole morning has been failing -- with a
+    plausible count rather than an error.
+    """
+    import time
+    for _ in range(tries):
+        n = ch.scalar("SELECT count() FROM system.mutations "
+                      "WHERE database='malignment' AND is_done=0")
+        if not n:
+            return True
+        time.sleep(2)
+    raise RuntimeError("mutations still running after %ds -- refusing to insert "
+                       "on top of an unfinished delete" % (2 * tries))
 TABLES = {3: ("twp_words", "twp_cells"), 4: ("twp_words_v4", "twp_cells_v4")}
 TOL = 1e-4          #: conservation is exact to ~4e-7 in practice; 1e-4 is loose
 #: A path component that disqualifies a directory however good its records are.
@@ -341,6 +360,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--rule-version", type=int, default=3, choices=[3, 4],
                     help="4 reads v4 records and writes twp_*_v4")
+    ap.add_argument("--replace", action="store_true",
+                    help="delete each planned model's rows at this rule_version "
+                         "before inserting -- makes a re-ingest IDEMPOTENT")
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--create", action="store_true")
     ap.add_argument("--run", action="store_true")
@@ -360,6 +382,7 @@ def main():
                          "ingests every eligible directory on disk)")
     a = ap.parse_args()
     _RV["v"] = a.rule_version
+    _REPLACE["on"] = bool(a.replace)
 
     files = scan()
     if getattr(a, "source", None):
@@ -370,8 +393,13 @@ def main():
     for f in files:
         by_src[f["source"]] += 1
     print("  corpus: %s" % CORPUS)
+    #: `RULE_VERSION` is the v3 CONSTANT, so this line said "rule_version == 3"
+    #: on a --rule-version 4 run whose gate had correctly admitted only v4
+    #: records. Same shape as the loader announcing `rule_version 3` while
+    #: stamping 4: the run right, the sentence wrong, and nothing to catch it
+    #: because the artifact works. Report what the gate USED.
     print("  includable (rule_version == %d): %d files across %d directories\n"
-          % (RULE_VERSION, len(files), len(by_src)))
+          % (_RV["v"], len(files), len(by_src)))
     for s, n in sorted(by_src.items(), key=lambda x: -x[1])[:14]:
         print("     %-46s %4d" % (s[:46], n))
     if a.scan:
@@ -396,6 +424,29 @@ def main():
     win, stats = plan(files)
     print("\n  planned %s cells | collisions needing precedence: %s"
           % (format(len(win), ","), format(stats["collisions"], ",")))
+    #: **PRECEDENCE IS ACROSS FILES; IT HAS NEVER BEEN ACROSS RUNS.** `_plan`
+    #: resolves two files offering the same cell, and that is all it does -- the
+    #: table is not consulted, so a second ingest of the same source INSERTS
+    #: EVERY ROW AGAIN. MergeTree does not deduplicate, so CT-LLM-Base's 2,706
+    #: pass-1 cells read as 5,412 after one re-run.
+    #:
+    #: It went unnoticed because every consumer that matters is immune by
+    #: construction: `lineage_union` and `topup_todo` use groupUniqArray,
+    #: `pass1_todo` uses DISTINCT. Only counts, sums and averages are wrong --
+    #: which is to say only the numbers anyone would QUOTE.
+    #:
+    #: Opt-in rather than automatic: a delete is not recoverable from the table,
+    #: and a source holding one producer's files for a model that another
+    #: producer also measured would lose the other producer's rows.
+    if _REPLACE["on"] and win:
+        models = sorted({k[0] for k in win})
+        print("  --replace: dropping %d model(s) at rule_version %d first"
+              % (len(models), _RV["v"]))
+        for m in models:
+            for t in TABLES[_RV["v"]]:
+                ch.execute("ALTER TABLE {db}.%s DELETE WHERE model='%s'"
+                           % (t, m.replace("'", "\\'")))
+        _wait_for_mutations(ch)
     for f in files:
         seen, dups = _cells(f["path"])
         n_dup += dups
