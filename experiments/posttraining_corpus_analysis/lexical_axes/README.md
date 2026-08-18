@@ -153,3 +153,68 @@ M06 established the grain transfer is solved -- `p_on_passages.md`, Spearman
 classifier real-minus-null 0.39-0.50 across 232,384 passages. So grain was never
 the limit. Genre is real but is downstream of the structural point above.
 
+
+# --genvector: THE SAME NULL FROM A SECOND, INDEPENDENT VECTOR
+
+RH's design, and the control is the DESIGN not the prompts: **same prompts, same
+n, two arms.** `run.py --genvector`, unforced NARR passages from
+`malign_logits.gen_sequences`, 42 base/aligned pairs, 607,902 word cells.
+
+    rate(w, pair, arm) = count / tokens        NORMALISED WITHIN ARM FIRST
+    delta(w, pair)     = rate_aligned - rate_base
+    weight(w)          = share of pairs with delta > 0, minus 0.5
+    unit               = THE PAIR (42), not the row
+
+Three vectors from one contrast, partitioned by prompt stratum, on a shared
+3,416-word comparison vocabulary.
+
+    population       vector    acc    len-matched   verdict
+    hh-harmless      MARKED   52.6%      52.3%      FAILS
+                     UNMARKED 51.3%      51.4%      FAILS
+    hh-helpful       MARKED   50.9%      51.0%      FAILS
+                     UNMARKED 52.4%      52.1%      FAILS
+    pku-unsafe       MARKED   50.9%      49.7%      FAILS
+                     UNMARKED 49.8%      49.0%      FAILS
+    pku-mixed        MARKED   57.2%      56.3%      NARROW
+                     UNMARKED 54.5%      55.1%      NARROW
+    ultrafeedback    MARKED   51.8%      51.1%      FAILS
+                     UNMARKED 52.5%      51.8%      FAILS
+
+**MARKED minus UNMARKED runs +0.9, -1.1, +0.7, +1.2, -0.7 -- ±1.2 points with an
+inconsistent sign. The transgression stratum changes nothing.**
+
+**AND THE DENSITY CONSTRUCTION IS NOT LENGTH-CONFOUNDED**, unlike the twp vector:
+matched and unmatched agree to within 0.6pp everywhere. Normalising within arm
+before differencing is what did that.
+
+## WHY THIS MATTERS MORE THAN THE FIRST NULL
+
+The twp vector and this one are **independently derived from different substrates**
+-- next-token distributions at fixed sites against running text at 256 tokens --
+and they agree: near chance everywhere, `pku-mixed` the lone narrow pass at
+54.9% (twp) and 55.6% (generations). **A null replicated across grains is worth
+more than either null alone.**
+
+`pku-mixed` is the stratum where one response is LABELLED safe and the other
+unsafe rather than both graded. Aligned-register density tracking the labelled-safe
+response there is close to tautological and is reported, not interpreted.
+
+## THE STRATA ARE NOT A CLEAN TRANSGRESSION CONTRAST, PER RH
+
+MARKED/UNMARKED are NOT minimal pairs: **a one-word swap changes the scene, and
+the transgressive half was agent-written and is bland.** They are strata that
+differ in transgressiveness on average. The question they answer is only whether
+that difference changes the result. It does not.
+
+**What this therefore cannot say:** that transgression is irrelevant to the axis.
+Only that this particular stratification, on this corpus, moves nothing.
+
+## WHAT IS NOT AVAILABLE, AND IT BOUNDS THE WHOLE APPROACH
+
+Generation space is **NARR-only**: 144 prompts / 180,448 unforced rows in
+`passage`. Every other slot lives in `beam_fc` at TEN TOKENS (unusable for word
+counts) or at n<=14. `INDIV`/`INST` has no passage generations at all.
+
+**So the slot axis -- the campaign's live construct -- cannot be studied in
+generated text**, and neither can the F21 institutional contrast. Testing either
+needs new generations at passage length, which is a run and not an analysis.

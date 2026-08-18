@@ -134,6 +134,101 @@ def predict():
     print("\n  ->", out)
 
 
+GEN_SQL = """
+SELECT g.pair AS pair, g.role AS role, c.pair_role AS stratum,
+       arrayJoin(extractAll(lower(g.text), '[a-z]{2,}')) AS word
+FROM malign_logits.gen_sequences g
+INNER JOIN malign_logits.prompt_catalogue c ON g.prompt = c.prompt
+WHERE g.corpus='passage' AND g.forced_word='' AND g.pair != ''
+  AND g.role IN ('base','aligned') AND c.slot='NARR'
+"""
+
+
+def genvector(min_pairs=15, min_count=5):
+    """RH's design. The control is the DESIGN, not the prompts: same prompts,
+    same n, two arms. Three vectors from one contrast, partitioned by stratum.
+
+        rate(w, pair, arm) = count / tokens      NORMALISED WITHIN ARM FIRST,
+                                                  so arm verbosity cannot leak in
+        delta(w, pair)     = rate_aligned - rate_base
+        weight(w)          = share of pairs with delta > 0, minus 0.5
+
+    The unit is the PAIR (42 of them), not the row -- U's lineage-clustering
+    warning. MARKED/UNMARKED are NOT treated as minimal pairs: RH established
+    that a one-word swap changes the scene and the transgressive half is bland.
+    They are strata that differ in transgressiveness ON AVERAGE, and the question
+    is only whether that changes the result."""
+    import numpy as np, subprocess, collections
+    from scipy import stats
+    print("querying generations (unforced NARR passages, 42 pairs)...", flush=True)
+    q = ("SELECT pair, role, stratum, word, count() AS n FROM (%s) "
+         "GROUP BY pair, role, stratum, word HAVING n >= %d "
+         "FORMAT TabSeparated" % (GEN_SQL, min_count))
+    out = subprocess.run(["clickhouse", "client", "--query", q],
+                         capture_output=True, text=True, timeout=3600)
+    if out.returncode:
+        raise SystemExit("clickhouse failed: %s" % out.stderr[:300])
+    cnt = collections.defaultdict(int); tot = collections.defaultdict(int)
+    for line in out.stdout.splitlines():
+        p, role, strat, w, n = line.split("\t")
+        n = int(n)
+        cnt[(strat, w, p, role)] += n
+        tot[(strat, p, role)] += n
+    print("  %d (stratum, word, pair, arm) cells" % len(cnt))
+
+    def build(strata, label):
+        words = collections.defaultdict(list)
+        pairs = sorted({p for (s, p, r) in tot if s in strata})
+        for (s, w, p, role) in list(cnt):
+            if s not in strata or role != "aligned":
+                continue
+            tb = tot.get((s, p, "base"), 0); ta = tot.get((s, p, "aligned"), 0)
+            if not tb or not ta:
+                continue
+            ra = cnt[(s, w, p, "aligned")] / ta
+            rb = cnt.get((s, w, p, "base"), 0) / tb
+            words[w].append(1 if ra > rb else (0 if ra < rb else None))
+        vec = {}
+        for w, v in words.items():
+            v = [x for x in v if x is not None]
+            if len(v) >= min_pairs:
+                vec[w] = float(np.mean(v)) - 0.5
+        pos = sum(1 for x in vec.values() if x > 0); neg = sum(1 for x in vec.values() if x < 0)
+        assert neg >= 0.1 * len(vec), "one-sided vector (%d neg of %d)" % (neg, len(vec))
+        print("  %-22s %5d words on >=%d pairs | aligned-leaning %4d  base-leaning %4d"
+              % (label, len(vec), min_pairs, pos, neg))
+        return vec
+
+    V = {"ALL": build({"MARKED", "UNMARKED"}, "ALL"),
+         "MARKED": build({"MARKED"}, "MARKED"),
+         "UNMARKED": build({"UNMARKED"}, "UNMARKED")}
+    shared = set.intersection(*(set(v) for v in V.values()))
+    print("  shared vocabulary across all three: %d words (the comparison set)" % len(shared))
+    V = {k: {w: x for w, x in v.items() if w in shared} for k, v in V.items()}
+
+    pops = populations()
+    ln = lambda t: len(TOKEN.findall(t.lower()))
+    print("\n%-15s %-9s %8s %8s %10s %11s %9s" %
+          ("population", "vector", "acc", "p", "len-match", "n_matched", "verdict"))
+    for lab, prs in pops.items():
+        L = np.asarray([ln(c) - ln(r) for c, r in prs])
+        for k in ("ALL", "MARKED", "UNMARKED"):
+            vec = V[k]
+            dens = lambda t: (sum(vec.get(x, 0.0) for x in TOKEN.findall(t.lower()))
+                              / max(len(TOKEN.findall(t.lower())), 1))
+            d = np.asarray([dens(c) - dens(r) for c, r in prs])
+            nz = d != 0
+            acc = (d[nz] > 0).mean()
+            p = stats.binomtest(int((d[nz] > 0).sum()), int(nz.sum()), 0.5).pvalue
+            m = (np.abs(L) <= 20) & nz
+            lm = (d[m] > 0).mean() if m.sum() >= 200 else float("nan")
+            v = ("PASSES" if lm >= 0.58 else "NARROW" if lm >= 0.53 else "FAILS")
+            print("%-15s %-9s %7.1f%% %8.2g %9.1f%% %11d %9s"
+                  % (lab if k == "ALL" else "", k, 100*acc, p, 100*lm, int(m.sum()), v))
+    print("\n  the M-minus-U column is the question: does whatever transgressiveness")
+    print("  is in MARKED change the result. It is NOT a clean transgression contrast.")
+
+
 def basepole():
     """RH: there is no such thing as base-generated assistant prose.
 
@@ -211,6 +306,7 @@ if __name__ == "__main__":
     ap.add_argument("--vector", action="store_true")
     ap.add_argument("--predict", action="store_true")
     ap.add_argument("--basepole", action="store_true")
+    ap.add_argument("--genvector", action="store_true")
     a = ap.parse_args()
     if a.vector:
         inspect()
@@ -218,5 +314,7 @@ if __name__ == "__main__":
         predict()
     elif a.basepole:
         basepole()
+    elif a.genvector:
+        genvector()
     else:
         ap.print_help()
