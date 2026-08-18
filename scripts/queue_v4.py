@@ -45,6 +45,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tier", nargs="*", default=["FLUENT", "MARGINAL"])
     ap.add_argument("--models", nargs="*")
+    ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None,
+                    help="pass through to run_v4.py: measure one tranche of the "
+                         "population. slots and cjk carry the information; latin "
+                         "is 76%% of the runtime and v4 == v3 on it.")
     ap.add_argument("--python", default=None,
                     help="override; by default each model gets the venv its "
                          "roster profile requires")
@@ -67,6 +71,8 @@ def main():
                        if v["cjk_tier"] in a.tier and cached(m)),
                       key=lambda r: -r[1])
     unknown = [m for m, n in todo if n < 0]
+    if a.only:
+        print("queue: TRANCHE=%s" % a.only, flush=True)
     print("queue: %d checkpoints, ordered by cjk_chars desc%s"
           % (len(todo), "" if not unknown else
              "  (%d not in the vocab measurement, sorted last)" % len(unknown)),
@@ -90,7 +96,8 @@ def main():
         #: rotary caches before RH said to read the environment notes.
         py = a.python or os.path.join(venv_for(m), "bin", "python")
         r = subprocess.run([py, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
-                            "--model", m, "--cache"],
+                            "--model", m, "--cache"]
+                           + (["--only", a.only] if a.only else []),
                            cwd=ROOT, capture_output=True, text=True)
         tail = [l for l in (r.stdout or "").splitlines() if l.strip()][-3:]
         print("  exit=%d  %.1f min" % (r.returncode, (time.time() - t0) / 60), flush=True)

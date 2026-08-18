@@ -51,6 +51,10 @@ def main():
     ap.add_argument("--cache", action="store_true",
                     help="prompt KV cache: ~4.5x, NOT bit-identical, part of the key")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None,
+                    help="measure one TRANCHE of the population instead of all "
+                         "of it. See the note below on why the tranches differ "
+                         "in value by an order of magnitude.")
     ap.add_argument("--neighbours", action="store_true",
                     help="declared-neighbour prompts instead of every admitted one")
     a = ap.parse_args()
@@ -80,12 +84,41 @@ def main():
     os.makedirs(os.path.dirname(ck.stash(PRODUCER).path), exist_ok=True)
     tee = _Tee(os.path.join(logdir, "run_v4.log"))
     sys.stdout = tee
-    prompts = (ck.neighbour_prompts() if a.neighbours
-               else sorted({p.text for p in Prompts.all()}))
+    #: **THE POPULATION IS NOT ONE THING AND ITS PARTS ARE NOT WORTH THE SAME.**
+    #: Measured 2026-08-18 over 81 models:
+    #:
+    #:     slots   277 prompts   22,437 cells    5.0 h   NEVER MEASURED at all
+    #:     cjk     407 prompts   32,967 cells    7.3 h   the ONLY place v4 != v3
+    #:     latin  2299 prompts  186,219 cells   41.4 h   v4 == v3 to the bit
+    #:
+    #: `decoded_boundary` tests the token as spelled, which only changes anything
+    #: on byte-level CJK surfaces. So re-measuring 2,299 Latin prompts under v4
+    #: reproduces v3 cells we already hold -- 76% of the runtime for the tranche
+    #: that answers nothing new. Run `slots` then `cjk` and the two tranches that
+    #: carry information are done in 12 h instead of 54.
+    #:
+    #: Kept as a flag rather than a reordering because "which prompts did this
+    #: run cover" must stay answerable, and a silent priority sort makes a
+    #: partial run indistinguishable from a complete one.
+    if a.neighbours:
+        prompts = ck.neighbour_prompts()
+    else:
+        allp = {p.text: p for p in Prompts.all()}
+        if a.only == "slots":
+            prompts = sorted(t for t, p in allp.items()
+                             if str(getattr(p, "source", "")).startswith("SLOT"))
+        elif a.only == "cjk":
+            prompts = sorted(t for t in allp if T.is_cjk(t))
+        elif a.only == "latin":
+            prompts = sorted(t for t, p in allp.items()
+                             if not T.is_cjk(t)
+                             and not str(getattr(p, "source", "")).startswith("SLOT"))
+        else:
+            prompts = sorted(allp)
     prompts.sort(key=lambda p: not T.is_cjk(p))
 
-    print("%s\n  rules=%s  cache=%s  prompts=%d (%d CJK first)"
-          % (a.model, V4.ADOPTED.label(), bool(a.cache), len(prompts),
+    print("%s\n  rules=%s  cache=%s  tranche=%s  prompts=%d (%d CJK first)"
+          % (a.model, V4.ADOPTED.label(), bool(a.cache), a.only or "ALL", len(prompts),
              sum(1 for p in prompts if T.is_cjk(p))), flush=True)
     try:
         return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit)
