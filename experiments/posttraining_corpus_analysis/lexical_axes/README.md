@@ -114,18 +114,37 @@ exemplar.
 gradient: the composition fact -- 0.3% base-model completions, both sides of
 every pair aligned -- is the whole of it.
 
-## WHAT THAT MEANS BEYOND THIS TEST
+## THE "IN PRINCIPLE" CLAIM IS WITHDRAWN (A7, RH)
 
-**A base-vs-aligned instrument cannot be evaluated on preference data, in
-principle.** Preference corpora record choices BETWEEN aligned outputs; they hold
-no base-arm text to contrast against. Any future attempt to read alignment's
-lexical operation off a preference corpus meets the same wall, and it is a
-property of what preference data IS rather than of any particular corpus or
-instrument.
+An earlier version said a base-vs-aligned instrument cannot be evaluated on
+preference data **in principle**. **That is wrong, and RH's objection is the
+decisive one: preference data is how base models BECOME aligned models.**
 
-**This supersedes A4's genre account**, which was true but not the binding
-constraint: even a preference corpus of narrative text would still contain only
-aligned-arm responses.
+The error was conflating two relations. "The corpus holds no base-arm text" is
+about TEXT CLASSIFICATION -- can the axis tell base-written from aligned-written
+prose. That was never the relevant question. **Preference data does not contain
+the base pole; it specifies the direction of travel away from it.** If alignment
+moves probability from `kill` to `scream` and the corpus rewards responses with
+less `kill` and more `scream`, corpus direction and model movement agree, with
+every response coming from an aligned generator throughout.
+
+**So what survives is a POWER argument, not a structural one**: the
+chosen-vs-rejected variation may be small relative to the base-to-aligned
+distance, leaving the axis little to grip. That is empirical and checkable, and it
+is a much weaker claim than the one it replaces.
+
+**And the relation should if anything be STRONGER than correlation.** For a model
+actually trained on corpus C, C is causally upstream of that model's axis. The
+proper test is therefore not "does the corpus contain base text" but:
+
+    take a model trained on C, compute its own base->aligned word movement,
+    and correlate that against C's chosen-vs-rejected word deltas
+
+UltraFeedback has several such students in the roster with base counterparts --
+`OLMo-2-0425-1B-DPO`, `OLMoE-1B-7B-0125-DPO`, `Llama-3.1-Tulu-3-8B-DPO`,
+`zephyr-7b-beta`. **That test needs cells and is the one worth queueing**; it is
+also the version that does not repeat A9's category error, because the causal
+claim is licensed by the training relation rather than assumed from resemblance.
 
 # SUPERSEDED: THE GRAIN AND GENRE ACCOUNTS
 

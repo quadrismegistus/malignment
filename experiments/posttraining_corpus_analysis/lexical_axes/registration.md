@@ -312,3 +312,32 @@ so the axis has no variance to find.
 
 **The check I did not run: is this model representative for the property being
 measured?** One lookup in `t_ladder_steps.csv`, before building a stratum on it.
+
+---
+
+## A7 — 2026-08-18. The "in principle" claim is WITHDRAWN. RH: preference data is how base models become aligned models.
+
+A5 concluded that a base-vs-aligned instrument cannot be evaluated on preference
+data IN PRINCIPLE, because preference corpora hold no base-arm text. **Wrong.**
+
+The conflation: "holds no base-arm text" is about TEXT CLASSIFICATION. Preference
+data does not contain the base pole, it SPECIFIES THE DIRECTION OF TRAVEL away
+from it. Corpus direction and model movement can agree while every response comes
+from an aligned generator.
+
+    SURVIVES   a POWER argument -- chosen-vs-rejected variation may be small
+               relative to the base-to-aligned distance. Empirical, checkable,
+               much weaker than what it replaces.
+    WITHDRAWN  the structural impossibility, and with it A5's "scope fact for the
+               collection".
+
+**And the relation should be stronger than correlation, not absent.** For a model
+trained on C, C is causally upstream of its axis. The right test:
+
+    a model trained on C -> its own base->aligned word movement
+    correlated against C's chosen-vs-rejected word deltas
+
+UltraFeedback students in the roster with base counterparts: `OLMo-2-0425-1B-DPO`,
+`OLMoE-1B-7B-0125-DPO`, `Llama-3.1-Tulu-3-8B-DPO`, `zephyr-7b-beta`. **Needs
+cells. Queue it.** It does not repeat A9's category error because the causal claim
+is licensed by the training relation rather than assumed from resemblance.
