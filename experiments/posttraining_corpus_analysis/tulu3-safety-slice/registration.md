@@ -106,3 +106,43 @@ and is reported as such.
 
 **A positive here is the more interesting result and that is a reason to be
 careful with it, not a reason to prefer it.**
+
+---
+
+## A1 — 2026-08-18. The registered cross-corpus test has NO VALID POPULATION here. Caught by the confound check.
+
+**All three datasets downloaded** (both AI2 gates accepted by RH):
+
+    coconot        original 11,477 + test 1,001 | contrast 379 | pref 927
+    wildguardmix   train 86,759 | test 1,725
+    wildjailbreak  train 261,559 | eval 2,210
+
+**CoCoNot `pref` looked like the PKU-comparable format and is not one.**
+
+    chosen_model    gpt-4   927 of 927
+    rejected_model  ""      927 of 927
+
+**The winner is fixed by construction.** GPT-4 wrote every chosen response; the
+rejected side is the model output being corrected. So the E-ASSIST contrast --
+disclaiming response chosen 10.4% (29/280, p=2.7e-45), against PKU's 68.4% --
+measures **which generator hedges more**, not what any annotator preferred.
+Length agrees: chosen median 307 words against rejected's 248, longer in 61.8%.
+
+Recorded because the number is striking and would have been reported as a
+cross-corpus REVERSAL. It is not a result about preference. The comparison
+classes were otherwise sound -- refusal is near-absent on both sides (chosen
+0.8%, rejected 5.2%), so it really is compliance-vs-compliance like PKU -- which
+is what made it convincing.
+
+**AND THE SCOPE FACT IS THE REAL ONE: the Tulu safety slice holds no pairwise
+preference data.** It is the SFT mixture: prompts with target responses. CoCoNot
+`pref` is the only pair-shaped subset in it and it is generator-fixed. So the
+cross-corpus replication of PKU's disclaimer finding **cannot be run here at
+all** -- it dies on availability, exactly as PKU's H1 died on sparsity, and for
+the same kind of reason: the comparison the test needs is not what this corpus is.
+
+**What the slice CAN support**, unregistered and descriptive until specified:
+what noncompliance looks like across 11,477 CoCoNot refusals and their five
+categories; the `contrast` set (379) as a declared over-refusal control; and
+WildGuardMix/WildJailbreak's harmful-vs-benign and vanilla-vs-adversarial splits,
+which are labelled and large. None of these is a preference test.
