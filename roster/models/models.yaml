@@ -543,8 +543,8 @@ nodes:
     family:
     - olmoe
     env:
-      profile: torch26
-      why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one."
+      profile: tf457
+      why: "bin-only weights: transformers' check_torch_load_is_safe refuses .bin under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed this way in the July grid and it read as a model problem, not an environment one. **CORRECTED 2026-08-18: torch26, not tf457, was a LIVE DEFECT.** `.venv-torch26` does not exist, so venvs.venv_for fell back to `.venv` -- transformers 5.4.0, the one environment that throws this architecture's `tie_word_embeddings` TypeError. The profile named the torch constraint and silently lost the transformers one. `.venv-tf457` is torch 2.13.0 AND transformers 4.57.1, satisfying both; verified by running 2 cells. A profile that resolves to a non-existent venv fails OPEN, not closed."
   allenai/Olmo-3-1025-7B:
     revision_ladder: 1487
     nickname: olmo
