@@ -954,7 +954,7 @@ def _main(argv):
                                   _ln))
             _sh = _it.get("share")
             md = ("# Saved\n\n`%s` — **%s** to `%s`\n\n%s\n\n"
-                  "share **%s** · gate %s · purity %s · checks that ran: %s\n\n"
+                  "share **%s** · gate %s · purity %s (%s) · checks that ran: %s%s\n\n"
                   "Marked `reviewed: false` for RH.\n\n"
                   "```bash\nmalign-slot census\n```"
                   % (out.get("item_id"), out.get("action"),
@@ -963,7 +963,20 @@ def _main(argv):
                      ("%.3f" % _sh) if isinstance(_sh, (int, float)) else "—",
                      "PASS" if _ax.get("separates") else "REFUSED",
                      ("%.2f" % _ax["purity"]) if _ax.get("purity") is not None else "—",
-                     ", ".join(_ax.get("checks_ran") or []) or "none"))
+                     #: `purity` was printed here and defined nowhere (opus-inst-police).
+                     "fraction of tagged words on their own side",
+                     ", ".join(_ax.get("checks_ran") or []) or "none",
+                     #: **SAY WHEN THE RECORD IS THIN** (opus-inst-health). Items
+                     #: saved during the concurrency outage carry
+                     #: `checks_ran: [held_out]`, and the line read as a quality
+                     #: stamp rather than a coverage report -- "a check not
+                     #: running is not the same as passing it" is the report's own
+                     #: rule and the save confirmation did not apply it.
+                     ("" if len(_ax.get("checks_ran") or []) >= 3 else
+                      "\n\n**Reduced check coverage.** %d of 3 referees ran; the "
+                      "others did not, which is not the same as their passing. "
+                      "Re-run `axis` and save again if you want full coverage on "
+                      "this item." % len(_ax.get("checks_ran") or []))))
     print(json.dumps(out, indent=1, ensure_ascii=False) if (a.json or md is None) else md)
     return 0
 
