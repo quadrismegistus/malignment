@@ -231,12 +231,24 @@ def main(argv=None):
                 for kind, axes in nulls.items():
                     if not axes:
                         continue
-                    cs = [abs(float(D @ v)) / nrm for v in axes]
-                    cs.sort()
+                    signed = [float(D @ v) / nrm for v in axes]
+                    cs = sorted(abs(x) for x in signed)
                     nullstats["null_%s_med" % kind] = cs[len(cs) // 2]
                     nullstats["null_%s_p95" % kind] = cs[int(0.95 * (len(cs) - 1))]
                     nullstats["beats_%s" % kind] = sum(
                         1 for x in cs if abs(cos) > x) / len(cs)
+                    #: **THE SIGNS, KEPT, AND THE FIRST VERSION THREW THEM AWAY.**
+                    #: Summaries of |cos| answer the MAGNITUDE question and cannot
+                    #: answer the direction one. "63% of cells move nice-ward"
+                    #: has null 50% only if the axis orientation is arbitrary, and
+                    #: ours is fixed by the author's labels -- so the real null is
+                    #: whether an arbitrary bisection of the same words produces
+                    #: comparable CONSISTENCY of sign across an item's checkpoints.
+                    #: A null axis carries an arbitrary orientation, held fixed
+                    #: across the item's cells by being built once per item, which
+                    #: is what makes the per-item fraction meaningful.
+                    if kind == "head":
+                        nullstats["null_head_signed"] = [round(x, 6) for x in signed]
             out.append({
                 "item_id": item_id, "base": c["base"], "endpoint": c["endpoint"],
                 "domain": c.get("domain"), "signature": c["signature"],
