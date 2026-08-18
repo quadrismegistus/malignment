@@ -1164,6 +1164,101 @@ def passc_save(src):
              r.get("_stray", 0), p))
 
 
+def passc_recover(write=False):
+    """Rebuild coding files from the workflow JOURNALS in ~/.claude.
+
+    **RH was right and I was wrong.** RESUME.md recorded that a workflow's
+    return value lives only in `/private/tmp/.../tasks/*.output` and dies with
+    the machine, so a completed-but-unsaved shard had to be recoded. It does
+    not:
+
+        ~/.claude/projects/<proj>/<session>/subagents/workflows/<run>/journal.jsonl
+
+    carries one `{"type":"result", ...}` line per agent WITH ITS FULL RETURN
+    VALUE. Verified against the Pass C test shard: 90 passages, both codings
+    each, byte-identical to the file saved from the task output.
+
+    Two things make recovery work despite what the journal does NOT store:
+
+      - `started` lines carry `label=None`, so the journal cannot say which
+        agent was coder A and which was B. It does not need to: both coders get
+        an IDENTICAL prompt, so A and B are two independent draws of one
+        procedure, not two instruments. Pairing by passage id is sufficient and
+        agreement is unaffected by which of the two is called A.
+      - a passage is accepted only with EXACTLY two codings. One means an agent
+        died mid-shard; three would mean an id was issued twice.
+
+    Journals are keyed by session uuid, so this scans every session directory
+    for this project, not only the current one.
+    """
+    import glob, collections
+    import pyarrow.parquet as pq
+    want = set(pq.read_table(PASSC_SAMPLE).to_pydict()["id"])
+    root = os.path.expanduser("~/.claude/projects")
+    proj = sorted(glob.glob(os.path.join(root, "*TheoryMachines*lacan*")))
+    if not proj:
+        print("no project directory under %s" % root)
+        return
+    pat = os.path.join(proj[0], "*", "subagents", "workflows", "*", "journal.jsonl")
+    js = sorted(glob.glob(pat))
+    have = _passc_coded()
+    found = collections.defaultdict(lambda: collections.defaultdict(list))
+    for j in js:
+        run = os.path.basename(os.path.dirname(j))
+        for line in open(j, encoding="utf-8"):
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if r.get("type") != "result":
+                continue
+            res = r.get("result")
+            if isinstance(res, str):          # older runs returned free text
+                try:
+                    res = json.loads(res)
+                except ValueError:
+                    continue
+            if not isinstance(res, dict):
+                continue
+            for c in (res.get("codings") or []):
+                if not isinstance(c, dict):
+                    continue
+                if c.get("id") in want:
+                    found[run][c["id"]].append(
+                        {k: c[k] for k in ("narrative", "mode", "drift", "degree", "span")})
+    print("scanned %d journal(s) under %s" % (len(js), os.path.basename(proj[0])))
+    if not found:
+        print("  no Pass C codings in any journal")
+        return
+    os.makedirs(os.path.join(PASSC, "codings"), exist_ok=True)
+    for run in sorted(found):
+        by = found[run]
+        pairs = {i: v for i, v in by.items() if len(v) == 2}
+        odd = {i: len(v) for i, v in by.items() if len(v) != 2}
+        new = sorted(set(pairs) - have)
+        print("  %-20s %5d ids | %5d with exactly 2 codings | %5d not already saved"
+              % (run, len(by), len(pairs), len(new)))
+        if odd:
+            print("      %d ids with != 2 codings (a partial agent, or an id issued "
+                  "twice): %s" % (len(odd), dict(list(odd.items())[:4])))
+        if not new:
+            continue
+        if not write:
+            continue
+        p = os.path.join(PASSC, "codings", "recovered-%s.json" % run)
+        if os.path.exists(p):
+            print("      %s exists; skipping" % os.path.basename(p))
+            continue
+        json.dump({"_shard": -1, "_recovered_from": run, "_requested": len(new),
+                   "A": {i: pairs[i][0] for i in new},
+                   "B": {i: pairs[i][1] for i in new}},
+                  open(p, "w", encoding="utf-8"), indent=0, sort_keys=True,
+                  ensure_ascii=False)
+        print("      -> %s" % os.path.basename(p))
+    if not write:
+        print("\n  DRY RUN -- add --write to save recovered codings.")
+
+
 def passc_todo():
     """What is coded, what is not. The resume check."""
     import collections
@@ -1340,6 +1435,8 @@ if __name__ == "__main__":
     ap.add_argument("--passc-corpus", action="store_true")
     ap.add_argument("--shards", type=int)
     ap.add_argument("--passc-save")
+    ap.add_argument("--passc-recover", action="store_true")
+    ap.add_argument("--write", action="store_true")
     ap.add_argument("--batch", type=int, default=45)
     ap.add_argument("--per-cell", type=int, default=714)
     ap.add_argument("--lang", default="en")
@@ -1384,5 +1481,7 @@ if __name__ == "__main__":
         passc_shards(nshards=a.shards, per_cell=a.per_cell_now, batch=a.batch)
     elif a.passc_save:
         passc_save(a.passc_save)
+    elif a.passc_recover:
+        passc_recover(write=a.write)
     else:
         ap.print_help()

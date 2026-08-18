@@ -92,19 +92,53 @@ looked promising is the one thing that would compromise this design.
 
 # 4. IF A SHARD FINISHED BUT WAS NEVER SAVED
 
-Workflow artifacts are keyed by SESSION UUID and a new session has a new one.
-This run was built in session `cdbe9c9e-a018-45bf-95e9-6bf81e96e908`.
+    python run.py --passc-recover           # dry run: what is recoverable
+    python run.py --passc-recover --write   # rebuild the coding files
 
-    ~/.claude/projects/<proj>/<uuid>/workflows/scripts/     survives reboot
+**A finished shard is never lost, even if the session died before saving it.**
+
+    ~/.claude/projects/<proj>/<uuid>/workflows/scripts/          the script
     ~/.claude/projects/<proj>/<uuid>/subagents/workflows/<run>/journal.jsonl
-                                                           per-agent results
-    /private/tmp/claude-502/<proj>/<uuid>/tasks/*.output    the return value,
-                                                           LOST ON REBOOT
+                                    one {"type":"result"} line per agent WITH
+                                    ITS FULL RETURN VALUE. Durable.
+    /private/tmp/claude-502/<proj>/<uuid>/tasks/*.output
+                                    the assembled return value. Convenient but
+                                    NOT required, and it is in /private/tmp.
 
-If a `.output` survives, `--passc-save` it. If not, do nothing special: rerun
-`--shards` and that shard's ids come back as TODO. **The cost of a lost shard is
-recoding it, and nothing else is corrupted** -- which is the entire reason the
-run is sharded.
+An earlier version of this file said the codings die with `/private/tmp` and a
+lost shard had to be recoded. **That was wrong** (RH: *"I swear I've seen
+workflow results in .claude"*). Tested end to end: the saved shard was deleted,
+`--passc-recover --write` rebuilt it from the journal, and all 90 passages came
+back with an identical pair of codings.
+
+`--passc-recover` scans EVERY session directory for this project, not just the
+current one, so it works from a cold session that has never seen the run.
+
+Two facts it relies on, both worth knowing before trusting it:
+
+- The journal's `started` lines carry `label=None`, so it cannot say which agent
+  was coder A and which was B. It does not need to: **both coders receive an
+  identical prompt**, so A and B are two independent draws of one procedure
+  rather than two instruments. Pairing by passage id is enough, and agreement is
+  unaffected by which of the two gets called A.
+- A passage is accepted only with EXACTLY two codings. One means an agent died
+  mid-shard; three would mean an id was issued twice. Either is reported, not
+  silently absorbed.
+
+If a shard genuinely cannot be recovered, rerun `--shards` and its ids come back
+as TODO. Nothing else is corrupted -- which is the reason the run is sharded.
+
+## Do not rely on workflow resume
+
+`resumeFromRunId` is same-session only, and worse than it sounds within a run:
+
+> *"Replay follows the order agents started. Cached results stop at the first
+> agent that didn't finish, and every agent that started after that one runs
+> again, even if it completed."*
+
+With ~10 agents in flight at a time, an interruption discards nearly everything
+after the first incomplete one. **The durable unit is the saved coding file, not
+workflow resume.** That is why shards are small and saved the moment they land.
 
 # 5. DECISIONS ALREADY MADE. DO NOT RE-LITIGATE THESE.
 
