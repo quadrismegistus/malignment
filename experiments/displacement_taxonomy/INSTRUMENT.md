@@ -122,6 +122,110 @@ notes              string
 `reading` comes first so the model commits to a reading before it produces
 structure, following `rate_charge_v1`'s ordering.
 
+## SCHEMA JSON
+
+The schema as sent, verbatim. `run.py --schema` reads this block and the workflow
+script is generated from it, so the structure the rater is held to is versioned
+in the repo rather than typed into a session-scoped script that a later session
+cannot find or diff. Lacan's [6464] is the general case; the specific hazard here
+is that a transcript records the tool NAME and the returned input, never the
+schema, so a drift between this file and what was actually sent leaves no witness.
+
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "none"
+      ],
+      "type": "string"
+    },
+    "counterexamples": {
+      "type": "string"
+    },
+    "kind": {
+      "description": "short phrase of your own for what DIMENSION differs",
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "reading": {
+      "description": "FILL FIRST. One or two sentences on what you see in this movement, before committing to any relation.",
+      "type": "string"
+    },
+    "relations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "a_words": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "b_words": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "2-4 words of your own invention naming the relation",
+            "type": "string"
+          },
+          "sentence": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "sentence",
+          "a_words",
+          "b_words"
+        ],
+        "type": "object"
+      },
+      "maxItems": 3,
+      "type": "array"
+    },
+    "residue": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "words": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "words",
+        "description"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "reading",
+    "relations",
+    "kind",
+    "residue",
+    "counterexamples",
+    "confidence",
+    "notes"
+  ],
+  "type": "object"
+}
+```
+
 ## Scoring
 
 SCORE CONFIDENCE, NOT COHERENCE. Measured on 2026-08-18 against a sham arm (same
