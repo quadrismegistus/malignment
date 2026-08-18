@@ -229,6 +229,79 @@ def genvector(min_pairs=15, min_count=5):
     print("  is in MARKED change the result. It is NOT a clean transgression contrast.")
 
 
+def reverse():
+    """RH: can preference data predict the arm? The REVERSE of --genvector.
+
+    NOT symmetric with the forward test, because the CEILINGS differ:
+        forward ceiling  corpus preference is lexically predictable at AUC 0.683
+                         (pku --h3, 13,820 terms). Our model vector got ~0.50.
+        reverse ceiling  base-vs-aligned is predictable from a PAGE at 0.851-0.966
+                         (M06 p_on_passages, fitted). Far more room to fail in.
+
+    So a null here is the stronger claim: the preference signal cannot recover a
+    distinction a fitted classifier gets at 0.9+, i.e. alignment is not a mirror
+    of its preference data.
+
+    Construction mirrors genvector exactly, roles swapped: rate normalised WITHIN
+    RESPONSE, differenced within pair, sign-counted across pairs."""
+    import numpy as np, subprocess, collections
+    from scipy import stats
+    ln = lambda t: len(TOKEN.findall(t.lower()))
+
+    def corpus_vector(pairs, label, min_pairs=200):
+        acc = collections.defaultdict(list)
+        for c, r in pairs:
+            tc, tr = TOKEN.findall(c.lower()), TOKEN.findall(r.lower())
+            if not tc or not tr:
+                continue
+            nc, nr = collections.Counter(tc), collections.Counter(tr)
+            for w in set(nc) | set(nr):
+                a, b = nc[w] / len(tc), nr[w] / len(tr)
+                if a != b:
+                    acc[w].append(1 if a > b else 0)
+        v = {w: float(np.mean(x)) - 0.5 for w, x in acc.items() if len(x) >= min_pairs}
+        pos = sum(1 for x in v.values() if x > 0)
+        print("  %-16s %5d words on >=%d pairs | chosen-leaning %4d  rejected-leaning %4d"
+              % (label, len(v), min_pairs, pos, len(v) - pos))
+        return v
+
+    print("building corpus vectors (chosen vs rejected, normalised within response)...")
+    CV = {k: corpus_vector(p, k) for k, p in populations().items()}
+
+    print("\nfetching base/aligned passages (unforced NARR, matched by prompt)...")
+    q = ("SELECT pair, role, prompt, text FROM malign_logits.gen_sequences "
+         "WHERE corpus='passage' AND forced_word='' AND pair != '' "
+         "AND role IN ('base','aligned') AND modulo(rand(), 6) = 0 FORMAT TabSeparated")
+    out = subprocess.run(["clickhouse", "client", "--query", q],
+                         capture_output=True, text=True, timeout=3600)
+    if out.returncode:
+        raise SystemExit("clickhouse failed: %s" % out.stderr[:300])
+    by = collections.defaultdict(dict)
+    for line in out.stdout.splitlines():
+        f = line.split("\t")
+        if len(f) < 4:
+            continue
+        by[(f[0], f[2])][f[1]] = f[3]
+    matched = [(v["base"], v["aligned"]) for v in by.values()
+               if "base" in v and "aligned" in v]
+    print("  %d matched base/aligned passage pairs (same pair, same prompt)" % len(matched))
+
+    print("\n%-16s %8s %10s %10s %s" % ("corpus vector", "n", "arm acc", "p", "verdict"))
+    print("  M06 fitted-classifier ceiling on this task: 0.851 - 0.966")
+    for k, vec in CV.items():
+        dens = lambda t: (sum(vec.get(x, 0.0) for x in TOKEN.findall(t.lower()))
+                          / max(len(TOKEN.findall(t.lower())), 1))
+        d = np.asarray([dens(a) - dens(b) for b, a in matched])
+        d = d[d != 0]
+        acc = (d > 0).mean()
+        p = stats.binomtest(int((d > 0).sum()), len(d), 0.5).pvalue
+        acc = max(acc, 1 - acc)
+        v = "PREDICTS" if acc >= 0.60 else "WEAK" if acc >= 0.55 else "FAILS"
+        print("%-16s %8d %9.1f%% %10.2g %s" % (k, len(d), 100 * acc, p, v))
+    print("\n  accuracy is direction-free (max of acc, 1-acc): a corpus vector")
+    print("  that predicts the arm BACKWARDS is still predicting it.")
+
+
 def basepole():
     """RH: there is no such thing as base-generated assistant prose.
 
@@ -307,6 +380,7 @@ if __name__ == "__main__":
     ap.add_argument("--predict", action="store_true")
     ap.add_argument("--basepole", action="store_true")
     ap.add_argument("--genvector", action="store_true")
+    ap.add_argument("--reverse", action="store_true")
     a = ap.parse_args()
     if a.vector:
         inspect()
@@ -316,5 +390,7 @@ if __name__ == "__main__":
         basepole()
     elif a.genvector:
         genvector()
+    elif a.reverse:
+        reverse()
     else:
         ap.print_help()
