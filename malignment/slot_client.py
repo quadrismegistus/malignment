@@ -640,6 +640,56 @@ def md_axis(prompt, g, n, r):
     coh = r.get("coherence") or {}
 
     warn = []
+    #: **ONE-SIDEDNESS, AND THE THRESHOLD IS RH'S OWN, NOT INVENTED.** All 18
+    #: items he quarantined as ONE-SIDED have a binding pole at or below 0.099;
+    #: the live corpus runs min 0.062, 10th percentile 0.146, median 0.291. So
+    #: 0.10 is the line he actually drew, and it fires on 2 of 96 live items (2%)
+    #: -- the same rarity as the two warnings that survived the firing-rate audit.
+    #:
+    #: **It is the number that would have caught his own `She had big` tagging**
+    #: (`breasts boobs hips` against `plans dreams ideas eyes`, share 0.024, with
+    #: `plans` and `dreams` alone holding 0.564 of the mass). Until now `share`
+    #: was computed at save time and shown nowhere before it, so an author learnt
+    #: their poles were lopsided only after committing them.
+    #:
+    #: **Its action is ADD, which is why it is safe.** Displacement needs an
+    #: arrival: a pole at 0.98 is not a strong item, it is a frame with nowhere
+    #: to go, and alignment can only leave it. Widening the thin pole cannot
+    #: shrink the measured mass, so this cannot behave like the held-out warning
+    #: that was removed for raising `leverage` whenever it was obeyed.
+    _sh = r.get("share")
+    if isinstance(_sh, (int, float)):
+        _bind = min(_sh, 1.0 - _sh)
+        if _bind < 0.10:
+            _thin = "naughty" if _sh < 0.5 else "nice"
+            _fat = "nice" if _thin == "naughty" else "naughty"
+            #: **NAMES THE CONDITION AND BOTH CAUSES; PRESCRIBES NEITHER.** The
+            #: first draft said "widen the thin pole, do not thin the fat one" and
+            #: that was unexecutable on the very case it was built from: `She had
+            #: big` offers only `breasts boobs tits hips` on the naughty side, so
+            #: widening moves share 0.024 -> 0.029 and the fix that works is
+            #: re-tagging the NICE pole, which the text forbade. Same defect as
+            #: the split advice removed earlier the same day -- a remedy the tool
+            #: cannot carry out, stated as the only option.
+            warn.append(
+                "**One-sided: the %s pole holds %.1f%% of the tagged mass** "
+                "(share %.3f, naughty %.4f / nice %.4f). Every item RH "
+                "quarantined as one-sided sits at or below 0.099 here, against a "
+                "corpus median of 0.291. Displacement needs somewhere to arrive: "
+                "a pole this thin gives alignment nothing to move toward, so "
+                "whatever it does gets recorded as this."
+                "\n\n  Two causes, and the screened list tells you which. Either "
+                "the %s pole has words you have not tagged — widen it. Or the %s "
+                "pole is holding the frame's DEFAULT continuations rather than "
+                "the contrast you mean, in which case it is a register problem "
+                "and the fix is re-tagging it, not trimming it. (`She had big` "
+                "was the second: `plans` and `dreams` alone held 0.564, and the "
+                "usable item was `breasts boobs tits` against `eyes hair hands "
+                "feet ears teeth` — both poles body vocabulary, share 0.23.)"
+                % (_fat, 100 * (1.0 - _bind), _sh,
+                   r.get("naughty_mass") or 0.0, r.get("nice_mass") or 0.0,
+                   _thin, _fat))
+
     #: Was `< 4`. Three is where the held-out margin stops resting on one word's
     #: neighbourhood; 38% of RH's corpus sits below four with no measured
     #: consequence, so a four-word floor was flagging his own items as defects.

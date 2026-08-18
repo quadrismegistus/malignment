@@ -1125,7 +1125,20 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
                 d["p"] = float(probs.get(d["word"], 0.0) or 0.0)
     except Exception as e:
         heldout = {"error": "%s: %s" % (type(e).__name__, e)}
+    #: **THE MASSES BELONG IN THE AXIS PAYLOAD, NOT ONLY ON THE SAVED ITEM.**
+    #: `share` decided 18 quarantines and an author could not see it until after
+    #: saving -- the one number that would have caught RH's own `She had big`
+    #: tagging (0.024, meaning 98% of tagged mass on the nice side) was computed
+    #: at save time and nowhere before it. Same definition as `build_item`:
+    #: naughty's portion of the TAGGED mass, not of the distribution.
+    _pr = probs or {}
+    _gm = sum(float(_pr.get(w, 0.0) or 0.0) for w in naughty)
+    _nm = sum(float(_pr.get(w, 0.0) or 0.0) for w in nice)
+    _tt = _gm + _nm
     return dict({
+        "naughty_mass": round(_gm, 6),
+        "nice_mass": round(_nm, 6),
+        "share": round(_gm / _tt, 6) if _tt else None,
         "coherence": coh,
         "cross_corpus": cross,
         "stability": stability,
