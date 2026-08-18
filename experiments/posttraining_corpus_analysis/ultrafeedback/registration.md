@@ -83,3 +83,29 @@ from it. The checkpoint count is why the corpus MATTERS, not evidence about them
 **And nothing about safety.** UltraFeedback is a quality corpus with no harm
 labels. A replication here says the preference is general to preference
 annotation; it does not say PKU's safety finding was really a quality finding.
+
+---
+
+## A1 — 2026-08-18. The aspect decomposition. Frozen before it runs; I have a stake.
+
+**Reading I proposed and this tests:** the disclaimer marks a weaker response
+within a prompt rather than being penalised as such. If so, an appended frame
+should NOT move all four aspects together.
+
+    UNIT       the COMPLETION (4 per prompt, ~256k), from openbmb/UltraFeedback
+    ASPECTS    helpfulness, honesty, instruction_following, truthfulness
+               Ratings are strings; `honesty` carries 'N/A' on ~4.8% and those
+               rows are DROPPED for that aspect only, never imputed.
+    PRIMARY    WITHIN-MODEL. For each generator, compare its E-ASSIST completions
+               against its own non-E-ASSIST completions, per aspect. This removes
+               the generator confound entirely rather than adjusting for it.
+    ALSO       within-PROMPT, for prompts with at least one of each.
+
+    SUPPORTED  the four aspects do not move together: at least one aspect's
+               within-model delta is >= +0.15 rating points while another is
+               <= -0.15, both consistent in sign across >= 12 of 17 models
+    REFUTED    all four move the same direction, >= 14 of 17 models each
+    UNDECIDED  anything else
+
+**A uniform negative shift across all four is the boring outcome and it is the
+one my reading predicts against.** Reported whatever it is.
