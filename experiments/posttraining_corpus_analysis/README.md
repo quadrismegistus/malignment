@@ -25,7 +25,8 @@ something the optimisation produces from data that does not look like a word lis
 | question | corpus | status |
 |---|---|---|
 | [`hh-rlhf`](hh-rlhf/) | Anthropic/hh-rlhf, 160,800 pairs | CLOSED, exploratory — the axis is engage-vs-deflect |
-| [`pku-safe-rlhf`](pku-safe-rlhf/) | PKU-SafeRLHF, 73,907 pairs | registered, NOT RUN |
+| [`pku-safe-rlhf`](pku-safe-rlhf/) | PKU-SafeRLHF, 73,907 pairs | worked out; one control outstanding |
+| [`tulu3-safety-slice`](tulu3-safety-slice/) | coconot + wildguardmix + wildjailbreak, 110,983 prompts | registered, data not yet downloaded |
 
 **PKU is the one that matters, because it is the only cached corpus that TRAINED
 MODELS WE MEASURE**: `beaver-7b-v1.0` (a declared lineage off `llama-7b`),
