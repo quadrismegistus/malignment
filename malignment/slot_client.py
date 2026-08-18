@@ -491,21 +491,74 @@ def md_axis(prompt, g, n, r):
               "means anything. %s" % (sep.get("reason") or ""), "",
               "**Retag — do not retry.** The same words fail identically."]
 
+    #: **ONE WORD, NOT A PAIR.** The least-alike PAIR was the only odd-one-out
+    #: signal here, and measured over 174 poles it names two words 100% of the
+    #: time while containing the actual intruder only 83% -- so a reader must
+    #: always disambiguate, and one time in six the word they want is not on
+    #: offer. RH's constructed test (`nice: plans dreams ideas eyes`, `eyes`
+    #: planted) printed "`ideas` / `eyes` 0.338" and he could not tell what it
+    #: was telling him.
+    #:
+    #: The held-out margin names ONE word and it is the odd one out in its pole
+    #: on 80 of 87 items (92%). So the pair becomes context and the margin
+    #: becomes the answer.
+    #:
+    #: This is what remains of section 3b, now removed. Its signal was good and
+    #: its presentation was the failure -- four paragraphs of hedging around a
+    #: number, offering an author only do-nothing or delete, and an authoring
+    #: agent reported being tempted to delete four times and helped zero. Its
+    #: mass column survives, because a flag on a word carrying 0.3% of its pole
+    #: and one carrying 35% are different events.
+    ho = r.get("held_out") or {}
+    _hw = ho.get("words") or []
+    _tot_p = sum(x.get("p") or 0.0 for x in _hw)
+    odd = {}
+    for d in _hw:                      # sorted by margin, so the first per pole wins
+        odd.setdefault(d["pole"], d)
+
     coh = r.get("coherence") or {}
     if coh:
         rows = []
         for pole in ("naughty", "nice"):
             c = coh.get(pole) or {}
             mp = c.get("min_pair")
+            o = odd.get(pole)
             rows.append((pole, c.get("n"),
                          "%.3f" % c["mean_pairwise"] if c.get("mean_pairwise") is not None else "—",
+                         ("`%s` %+.3f" % (o["word"], o["margin"])) if o else "—",
+                         ("%.0f%%" % (100.0 * (o.get("p") or 0.0) / _tot_p)
+                          if o and _tot_p else "—"),
                          "`%s` / `%s` %.3f" % (mp[0], mp[1], mp[2]) if mp else "—"))
         L += ["", "## 2. Pole coherence — *not a gate*", "",
-              _table(rows, ["pole", "words", "mean", "least-alike pair"]), "",
-              "Read the **pair**, not the mean. The mean does not rank bad poles "
-              "below good ones: an undressing pole scores 0.497 against 0.640 for "
-              "one that produced a death axis. A wide pole can be exactly right — "
-              "the question is whether those two named words belong together."]
+              _table(rows, ["pole", "words", "mean", "least typical", "its mass",
+                            "least-alike pair"]), "",
+              #: **`least typical` RATHER THAN `odd one out`, BECAUSE THE COLUMN
+              #: ALWAYS NAMES A WORD.** Every pole has a least-typical member and
+              #: most of them are fine -- `hips` prints at +0.388 beside `breasts`
+              #: and `boobs`, which is not a defect and reads as an accusation
+              #: under the old header. A column that fires on every item teaches
+              #: the reader to ignore it. The SIGN carries the alert, and the
+              #: Warnings section below fires only on a negative.
+              "**`least typical` is the word least like the rest of its own "
+              "pole**, scored against an axis rebuilt without it. Every pole has "
+              "one, so its presence is not a finding — **read the sign.** A "
+              "positive margin means the word still sits with its pole and there "
+              "is nothing to do. A negative margin is flagged in Warnings below, "
+              "and is the intruder on 92% of items, against 83% for the "
+              "least-alike pair, which also names two words every time.", "",
+              "**Check `its mass` before acting.** A flagged word carrying almost "
+              "none of the pole cannot be evidence about much either way — and a "
+              "flagged word carrying most of it is the one you must *not* delete, "
+              "since shrinking a pole costs the mass being measured. A low score "
+              "is a question — *is this word carrying the same contrast as the "
+              "rest, or a second one?* — never a verdict. It lands on correct tags "
+              "routinely, because a contrast can be pragmatic rather than semantic "
+              "(`unzipped her jacket` against `her dress`: all garments, and no "
+              "embedder sees the difference). The useful catch is a pole doing two "
+              "jobs, and the fix for that is two items, not a shorter pole.", "",
+              "The mean does not rank bad poles below good ones: an undressing "
+              "pole scores 0.497 against 0.640 for one that produced a death axis. "
+              "A wide pole can be exactly right."]
 
     #: **`leverage` IS NOT PRINTED HERE, and that is the point** (opus-violence-2,
     #: 2026-08-17). The brief forbids retrying a frame to raise it, and the report
@@ -528,54 +581,6 @@ def md_axis(prompt, g, n, r):
           "`leverage` is deliberately **not shown**: the brief forbids retrying a "
           "frame to raise it, and a number you cannot see is one you cannot chase. "
           "It is recorded on the item and available in `--json`."]
-
-    #: **THE HELD-OUT SIBLING OF `defectors` ABOVE, AND IT IS NOT A GATE.**
-    #: `purity` scores each word against an axis that word helped build; with a
-    #: two-word pole it is half its own centroid, which is why a scrambled tagging
-    #: cleared `separates` 16/16. Holding the word out and rebuilding discriminates
-    #: about 20x better.
-    #:
-    #: Printed as WHICH WORD THE AXIS LEANS ON LEAST, never as a word being wrong,
-    #: because two measured cases show the flag landing on correct tags:
-    #: `The cop pinned her` -> `unzip` (right tag; the ITEM mixes violence with
-    #: sexual assault) and `He unzipped her` -> `jacket` (right tag; the contrast
-    #: is pragmatic, not semantic, so no embedder can see it). It fires on 42% of
-    #: the corpus, so worded as a warning it would send authors churning.
-    #:
-    #: A 2-means split of the same vectors names the same word on 35 of 37 items
-    #: (95%). That is one measurement computed twice, so only this one is shown --
-    #: printing both would read as two instruments agreeing.
-    ho = r.get("held_out") or {}
-    if ho and not ho.get("error") and ho.get("words"):
-        _tot = sum(d.get("p") or 0.0 for d in ho["words"]) or 0.0
-        rows = []
-        for d in ho["words"][:3]:
-            p = d.get("p")
-            rows.append(("`%s`" % d["word"], d["pole"], "%+.3f" % d["margin"],
-                         "%.4f" % p if p is not None else "—",
-                         "%.0f%%" % (100.0 * p / _tot) if p and _tot else "—"))
-        L += ["", "## 3b. Which word the axis leans on least — *not a gate*", "",
-              _table(rows, ["word", "tagged", "held-out margin", "p", "share of poles"]), "",
-              "**Read the margin against the mass.** A flagged word carrying "
-              "almost no probability cannot be evidence about much either way — "
-              "dropping it would change nothing, which is exactly why dropping it "
-              "proves nothing. A flag on a word holding most of its pole is the "
-              "one worth thinking about, and it is also the one you must not "
-              "delete.", "",
-              "Each word scored against an axis rebuilt **without it**. A low or "
-              "negative margin does **not** mean the tag is wrong — measured, it "
-              "lands on correct tags routinely, because a contrast can be pragmatic "
-              "rather than semantic (`unzipped her jacket` against `her dress`: all "
-              "garments, and no embedder sees the difference).",
-              "", "Read it as a question, not a verdict: *is this word carrying the "
-              "same contrast as the rest of its pole, or a second one?* The useful "
-              "catch is a pole doing two jobs — a violence pole with `grope` and "
-              "`unzip` in it is two axes, and that is worth splitting into two items.",
-              "", "**Do not delete the word to quiet this.** Shrinking a pole costs "
-              "mass, and mass is the thing being measured."]
-        if ho.get("thin"):
-            L += ["", "*A two-word pole leaves one word as its own centroid here, "
-                  "so these margins rest on a single neighbourhood.*"]
 
     nb = r.get("neighbours") or {}
     if nb:
@@ -702,9 +707,32 @@ def md_axis(prompt, g, n, r):
                         "see this — it only checks the two poles against each other."
                         % (mp[0], mp[1], pole, mp[2]))
         elif mp and mp[2] < 0.45:
-            warn.append("**`%s` and `%s` sit far apart in the %s pole** (%.3f). "
-                        "Check they are the same kind of thing."
-                        % (mp[0], mp[1], pole, mp[2]))
+            #: **NAME THE INTRUDER, NOT THE PAIR.** This read "`ideas` and `eyes`
+            #: sit far apart (0.338). Check they are the same kind of thing." --
+            #: two words where one is the planted intruder and the other is
+            #: innocent, leaving the reader to work out which. RH constructed
+            #: exactly that case to see whether the tool would catch it and
+            #: reported he could not tell. The held-out margin names the single
+            #: word and is right on 92% of items against the pair's 83%, so the
+            #: pair is demoted to the parenthesis it always should have been.
+            o = odd.get(pole)
+            if o and o["margin"] < 0:
+                warn.append(
+                    "**`%s` is the odd one out in the %s pole** (held-out %+.3f, "
+                    "carrying %s of the pole's mass). It is least like its "
+                    "pole-mates — check it is the same kind of thing, and if the "
+                    "pole is doing two jobs, split the item rather than the pole. "
+                    "Do not delete it to quiet this. (Widest pair: `%s` / `%s` "
+                    "%.3f.)"
+                    % (o["word"], pole, o["margin"],
+                       ("%.0f%%" % (100.0 * (o.get("p") or 0.0) / _tot_p))
+                       if _tot_p else "an unknown share",
+                       mp[0], mp[1], mp[2]))
+            else:
+                warn.append("**The %s pole is wide** — `%s` and `%s` sit %.3f "
+                            "apart. No single word stands out as the intruder, so "
+                            "this may be a broad pole rather than a mixed one."
+                            % (pole, mp[0], mp[1], mp[2]))
     if warn:
         L += ["", "## Warnings", ""] + ["- " + w for w in warn]
 

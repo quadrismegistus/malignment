@@ -767,6 +767,19 @@ def _pairs():
 #: invisible, since a stale pool is well-formed.
 _SCREEN_CACHE = {}
 _SCREEN_CACHE_LOCK = threading.Lock()
+#: **THE AXIS IS THE WHOLE REMAINING COST ONCE SCREENING IS CACHED.** Measured
+#: on an identical repeated call: screen alone 0.10s, full axis 2.93s and 5.38s.
+#: The variance is `cross_corpus` reading ClickHouse across ~1,591 frames, so the
+#: first cache moved the bottleneck rather than removing it -- and the caller
+#: that re-runs to read one section pays the new bottleneck exactly as it paid
+#: the old one.
+#:
+#: Cacheable on the same argument as screening: bge vectors are themselves
+#: cached and deterministic, `stability` is static, `held_out` and `purity` are
+#: functions of inputs already in the key. `cross_corpus` is the one moving part
+#: -- it sees more frames as the store grows -- and the TTL is what bounds that.
+_AXIS_CACHE = {}
+_AXIS_CACHE_LOCK = threading.Lock()
 _SCREEN_TTL = float(os.environ.get("MALIGNMENT_SCREEN_TTL", 1800))
 _SCREEN_CACHE_MAX = int(os.environ.get("MALIGNMENT_SCREEN_MAX", 512))
 
@@ -966,6 +979,33 @@ def _slot(prompt, pair_base, k):
 #: axis build must not queue behind an 8-second model load it does not need, and
 #: a twp expansion must not queue behind a bge encode.
 _AXIS_LOCK = threading.Lock()
+
+
+def _axis_cached(prompt, naughty, nice, compute):
+    """Memoise the axis payload for `_SCREEN_TTL`. -> (payload, hit)
+
+    Keyed on the POLES AS TAGGED, order-insensitively: `--naughty kill,punch`
+    and `--naughty punch,kill` are the same axis and must not be two entries.
+    Sorted rather than de-duplicated, because a word repeated in a pole is a
+    caller error `build_item` should still see rather than one this silently
+    repairs.
+    """
+    from . import twp
+    key = (prompt, tuple(sorted(naughty or ())), tuple(sorted(nice or ())),
+           twp.RULE_VERSION, twp.dict_sha())
+    now = _monotonic()
+    with _AXIS_CACHE_LOCK:
+        hit = _AXIS_CACHE.get(key)
+        if hit is not None and now - hit[0] < _SCREEN_TTL:
+            return hit[1], True
+    val = compute()
+    with _AXIS_CACHE_LOCK:
+        _AXIS_CACHE[key] = (now, val)
+        if len(_AXIS_CACHE) > _SCREEN_CACHE_MAX:
+            for dead in sorted(_AXIS_CACHE, key=lambda x: _AXIS_CACHE[x][0]
+                               )[:len(_AXIS_CACHE) - _SCREEN_CACHE_MAX]:
+                _AXIS_CACHE.pop(dead, None)
+    return val, False
 
 
 def _slot_axis(prompt, naughty, nice, words, probs=None,
@@ -1185,8 +1225,22 @@ class Handler(BaseHTTPRequestHandler):
                 raise ValueError("base_probs and aligned_probs must be sent "
                                  "together or not at all -- one alone diffs "
                                  "against an empty distribution")
-            self._json(200, _slot_axis(prompt, naughty, nice, words, probs,
-                                       bp, ap))
+            #: **NOT CACHED WHEN MOVEMENT IS REQUESTED.** `bp`/`ap` change the
+            #: payload (`split` returns dN) and are NOT in the key, so serving a
+            #: cached no-movement axis to a caller that asked for movement would
+            #: silently answer a different question. Opt-in movement stays opt-in
+            #: by bypassing the cache entirely rather than by growing the key,
+            #: because a key that carries two whole distributions is not a key.
+            if bp or ap:
+                self._json(200, _slot_axis(prompt, naughty, nice, words, probs,
+                                           bp, ap))
+            else:
+                payload, was_hit = _axis_cached(
+                    prompt, naughty, nice,
+                    lambda: _slot_axis(prompt, naughty, nice, words, probs))
+                if isinstance(payload, dict):
+                    payload = dict(payload, cached=bool(was_hit))
+                self._json(200, payload)
         except ValueError as e:
             self._json(400, {"error": str(e)})
         except Exception as e:
