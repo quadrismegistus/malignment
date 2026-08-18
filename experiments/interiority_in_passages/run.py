@@ -768,6 +768,267 @@ def combined_report():
         print("  merged why=%-12s -> %s" % (w, dict(x[w])))
 
 
+#: ---------------------------------------------------------------- PASS C ----
+#: The real run, built to survive a session ending mid-way. Three properties,
+#: each of which was ABSENT until RH asked "what if I run out of tokens
+#: midway... this is all saved and resumable?"
+#:
+#:   1. the sample is MATERIALISED to parquet, so no rerun re-queries ClickHouse
+#:      and no result depends on the roster or the corpus being unchanged later
+#:   2. codings land ONE FILE PER SHARD as each finishes, so a kill loses at
+#:      most one shard
+#:   3. the rubric lives in plans/passC_rubric.md and is read at build time, so
+#:      a fresh session cannot silently use a different prompt
+#:
+#: `resumeFromRunId` is SAME-SESSION ONLY. It is not a resume story across a
+#: token exhaustion, which is what this is for.
+
+PASSC = os.path.join(RESULTS, "passC")
+PASSC_SAMPLE = os.path.join(PASSC, "sample.parquet")
+RUBRIC_MD = os.path.join(HERE, "plans", "passC_rubric.md")
+
+
+def rubric_text():
+    """The coder prompt, read from the frozen markdown. Never inlined here."""
+    src = open(RUBRIC_MD, encoding="utf-8").read()
+    parts = src.split("<<<RUBRIC>>>")
+    if len(parts) != 3:
+        raise RuntimeError("expected exactly two <<<RUBRIC>>> markers in %s, found %d"
+                           % (RUBRIC_MD, len(parts) - 1))
+    return parts[1].strip()
+
+
+def passc_sample(per_cell=714, seed=20260818, lang="en"):
+    """Freeze the sample. 29 lineages, both arms, uniform over prompts.
+
+    **ENGLISH ONLY.** Stage 1 is English on all 29 pairs; the zh arm is a
+    separate replication on the 8 `cjk_tier` FLUENT pairs and an English-designed
+    rubric is a different instrument on Chinese. The first build of this file did
+    NOT filter language, so 535 drawn per cell was 271 English per cell and
+    delivered ~76 clean where 150 was the target. Caught by RH asking what was
+    actually in the parquet.
+
+    `per_cell` is SAMPLED passages, not clean ones: 200 clean at the merged
+    form's ~28% narrative yield needs ~714 drawn. The yield is an estimate, so
+    the stored sample is what we committed to draw and the clean count lands
+    where it lands.
+
+    **OVER-PROVISIONED ON PURPOSE.** 714 is n=200 worth while the declared
+    target is n=150. Extending later is then "code more ids from the same frozen
+    file, in the same declared order" -- uniform by construction, with no second
+    draw to defend and no seed argument to have. Selective extension is the only
+    thing that would compromise the design and this makes it impossible by
+    accident.
+
+    **Uniform over the 197 prompts**, which serves all three readings at once:
+    per-stratum rates, the per-pair Wilcoxon, and prompt as a sign-test unit.
+
+    Population is every lineage with BOTH arms present in f11_l2 -- 29 of them,
+    58 models, 100% of the corpus. Not `endpoints()`, which wanted aligned arms
+    this corpus does not have and so dropped 7 whole lineages including the only
+    three base-vs-DPO contrasts and Mistral->zephyr.
+    """
+    import random, subprocess, collections
+    import pyarrow as pa, pyarrow.parquet as pq
+    from malignment import roster
+    os.makedirs(PASSC, exist_ok=True)
+    have = set(subprocess.run(["clickhouse", "client", "--query",
+        "SELECT DISTINCT model FROM malign_logits.gen_sequences WHERE corpus='f11_l2' "
+        "FORMAT TabSeparated"], capture_output=True, text=True, timeout=600).stdout.split())
+    pairs = []
+    for base, arms in roster.lineages().items():
+        if base not in have:
+            continue
+        al = [m for m in arms if m != base and m in have]
+        if len(al) == 1:
+            pairs.append((base, al[0]))
+        elif len(al) > 1:
+            raise RuntimeError("lineage %s has %d aligned arms in f11_l2; the "
+                               "pairing rule assumes one. Decide explicitly."
+                               % (base, len(al)))
+    pairs.sort()
+    models = [m for p in pairs for m in p]
+    print("population: %d lineages, %d models" % (len(pairs), len(models)))
+
+    CJK = _re.compile(r"[\u4e00-\u9fff]")
+    rows = collections.defaultdict(list)
+    q = ("SELECT model, prompt, sample_idx, text FROM malign_logits.gen_sequences "
+         "WHERE corpus='f11_l2' AND model IN (%s) FORMAT JSONEachRow"
+         % ",".join(sql_str(m) for m in models))
+    out = subprocess.run(["clickhouse", "client", "--query", q],
+                         capture_output=True, text=True, timeout=3600)
+    n = 0
+    for line in out.stdout.split("\n"):
+        if not line.strip():
+            continue
+        r = json.loads(line)
+        n += 1
+        r["language"] = "zh" if CJK.search(r["prompt"]) else "en"
+        if lang and r["language"] != lang:
+            continue
+        rows[r["model"]].append(r)
+    kept = sum(len(v) for v in rows.values())
+    print("fetched %s rows (JSONEachRow, so text carries REAL newlines)" % format(n, ","))
+    print("  language filter %r -> %s rows eligible (%.0f%%)"
+          % (lang, format(kept, ","), 100 * kept / n))
+    esc = sum(1 for v in rows.values() for r in v[:50] if "\\n" in r["text"])
+    print("  spot check, literal backslash-n in first 50 per model: %d" % esc)
+
+    arm = {}
+    for b, a in pairs:
+        arm[b] = "base"; arm[a] = "aligned"
+    cols = collections.defaultdict(list)
+    rng = random.Random(seed)
+    for m in models:
+        v = sorted(rows[m], key=lambda r: (r["prompt"], r["sample_idx"]))
+        take = v if len(v) <= per_cell else rng.sample(v, per_cell)
+        for r in sorted(take, key=lambda r: (r["prompt"], r["sample_idx"])):
+            cols["model"].append(m)
+            cols["arm"].append(arm[m])
+            cols["pair"].append([b for b, a in pairs if m in (b, a)][0])
+            cols["prompt"].append(r["prompt"])
+            cols["language"].append(r["language"])
+            cols["sample_idx"].append(int(r["sample_idx"]))
+            cols["text"].append(r["text"])
+    ids = ["p%06d" % i for i in range(len(cols["model"]))]
+    cols["id"] = ids
+    t = pa.table({k: pa.array(v) for k, v in cols.items()})
+    pq.write_table(t, PASSC_SAMPLE, compression="zstd")
+    print("\nwrote %s passages -> %s (%.1f MB)"
+          % (format(len(ids), ","), PASSC_SAMPLE, os.path.getsize(PASSC_SAMPLE) / 1e6))
+    print("  per cell: %d | cells: %d | arms: %s"
+          % (per_cell, len(models), dict(collections.Counter(cols["arm"]))))
+    print("  seed %d -- rerunning with the same seed reproduces this file exactly" % seed)
+
+
+def passc_corpus():
+    """EVERY f11_l2 passage for the 29 lineages, to parquet, split by language.
+
+    RH: *"Can we just save all passages to a parquet in case we want to up the
+    n= to 200 or more?"* -- yes, and it is a DIFFERENT object from
+    `sample.parquet`:
+
+        corpus_en.parquet / corpus_zh.parquet   the frame. everything there is.
+        sample.parquet                          the declared draw, seeded,
+                                                714/cell, what we committed to
+                                                code.
+
+    Keeping them apart matters. Raising n means taking more ids from the frame
+    under the same seeded order, which is auditable; it must never mean redrawing
+    a sample that happens to be bigger.
+
+    **It lives in `$MALIGNMENT_DATA` (default `~/malignment-data`), NOT in the
+    repo.** Same convention as `ingest.py` and `vectors.py`; the README lists it
+    as the private rsync target. A manifest with the row count and the sha256
+    IS committed, so the repo records exactly which bytes the sample was drawn
+    from without carrying them.
+
+    Language is a column, not a file. Stage 1 is English on 29 pairs, stage 2 is
+    Chinese on the 8 `cjk_tier` FLUENT pairs, and a column splits that cleanly.
+    """
+    import subprocess, collections, hashlib
+    import pyarrow as pa, pyarrow.parquet as pq
+    from malignment import roster
+    DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
+    out_dir = os.path.join(DATA, "f11_l2")
+    os.makedirs(out_dir, exist_ok=True)
+    os.makedirs(PASSC, exist_ok=True)
+    have = set(subprocess.run(["clickhouse", "client", "--query",
+        "SELECT DISTINCT model FROM malign_logits.gen_sequences WHERE corpus='f11_l2' "
+        "FORMAT TabSeparated"], capture_output=True, text=True, timeout=600).stdout.split())
+    pairs = []
+    for base, arms in roster.lineages().items():
+        if base not in have:
+            continue
+        al = [m for m in arms if m != base and m in have]
+        if len(al) == 1:
+            pairs.append((base, al[0]))
+    pairs.sort()
+    arm = {}
+    for b, a in pairs:
+        arm[b] = "base"; arm[a] = "aligned"
+    base_of = {m: b for b, a in pairs for m in (b, a)}
+    CJK = _re.compile(r"[\u4e00-\u9fff]")
+    q = ("SELECT model, prompt, sample_idx, text FROM malign_logits.gen_sequences "
+         "WHERE corpus='f11_l2' AND model IN (%s) FORMAT JSONEachRow"
+         % ",".join(sql_str(m) for m in arm))
+    res = subprocess.run(["clickhouse", "client", "--query", q],
+                         capture_output=True, text=True, timeout=3600)
+    rows = []
+    for line in res.stdout.split("\n"):
+        if line.strip():
+            rows.append(json.loads(line))
+    rows.sort(key=lambda r: (r["model"], r["prompt"], r["sample_idx"]))
+    cols = collections.defaultdict(list)
+    for j, r in enumerate(rows):
+        lang = "zh" if CJK.search(r["prompt"]) else "en"
+        cols["id"].append("f%06d" % j)
+        cols["model"].append(r["model"]); cols["arm"].append(arm[r["model"]])
+        cols["pair"].append(base_of[r["model"]]); cols["language"].append(lang)
+        cols["prompt"].append(r["prompt"]); cols["sample_idx"].append(int(r["sample_idx"]))
+        cols["text"].append(r["text"])
+    t = pa.table({k: pa.array(v) for k, v in cols.items()})
+    p = os.path.join(out_dir, "f11_l2_full.parquet")
+    pq.write_table(t, p, compression="zstd", compression_level=19)
+    h = hashlib.sha256(open(p, "rb").read()).hexdigest()
+    mb = os.path.getsize(p) / 1e6
+    print("29 lineages, %d models, %s passages" % (len(arm), format(len(rows), ",")))
+    print("  language: %s" % dict(collections.Counter(cols["language"])))
+    print("  -> %s  (%.1f MB)" % (p, mb))
+    print("     sha256 %s" % h)
+    man = {"path": p, "rows": len(rows), "sha256": h, "bytes": os.path.getsize(p),
+           "columns": list(cols), "pairs": len(pairs), "models": len(arm),
+           "language": dict(collections.Counter(cols["language"])),
+           "source": "malign_logits.gen_sequences WHERE corpus='f11_l2'",
+           "population": "every lineage with base AND exactly one aligned arm present",
+           "rebuild": "python run.py --passc-corpus",
+           "note": ("Lives OUTSIDE the repo in $MALIGNMENT_DATA. This manifest is "
+                    "committed so the repo records which bytes sample.parquet was "
+                    "drawn from. Raising n means taking more ids from the frozen "
+                    "sample under its seeded order, never redrawing from here.")}
+    mp = os.path.join(PASSC, "corpus_manifest.json")
+    json.dump(man, open(mp, "w", encoding="utf-8"), indent=1, sort_keys=True)
+    print("  manifest -> %s" % mp)
+
+
+def passc_todo():
+    """What is coded, what is not. The resume check."""
+    import collections
+    import pyarrow.parquet as pq
+    t = pq.read_table(PASSC_SAMPLE).to_pydict()
+    want = set(t["id"])
+    got = collections.defaultdict(set)
+    d = os.path.join(PASSC, "codings")
+    if os.path.isdir(d):
+        for f in sorted(os.listdir(d)):
+            if not f.endswith(".json"):
+                continue
+            r = json.load(open(os.path.join(d, f), encoding="utf-8"))
+            for coder, m in r.items():
+                if coder.startswith("_"):
+                    continue
+                got[coder].update(m)
+            print("  %-34s %s" % (f, " ".join("%s:%d" % (c, len(m)) for c, m in sorted(r.items()) if not c.startswith("_"))))
+    print("\nsample %s passages" % format(len(want), ","))
+    for coder in sorted(got):
+        have = got[coder] & want
+        stray = got[coder] - want
+        print("  coder %-3s coded %6s of %s  (%.1f%%)%s"
+              % (coder, format(len(have), ","), format(len(want), ","),
+                 100 * len(have) / len(want),
+                 "   STRAY IDS NOT IN SAMPLE: %d" % len(stray) if stray else ""))
+    if got:
+        done = set.intersection(*[got[c] for c in got]) & want
+        print("  coded by ALL coders: %s (%.1f%%)"
+              % (format(len(done), ","), 100 * len(done) / len(want)))
+        left = sorted(want - done)
+        print("  REMAINING: %s" % format(len(left), ","))
+        if left:
+            print("  next shard would start at %s" % left[0])
+    else:
+        print("  nothing coded yet")
+
+
 def roles():
     """Quintuplet role per prompt, from the DECLARED field. Not reconstructed.
 
@@ -901,6 +1162,11 @@ if __name__ == "__main__":
     ap.add_argument("--passb", action="store_true")
     ap.add_argument("--combined-build", action="store_true")
     ap.add_argument("--combined", action="store_true")
+    ap.add_argument("--passc-sample", action="store_true")
+    ap.add_argument("--passc-todo", action="store_true")
+    ap.add_argument("--passc-corpus", action="store_true")
+    ap.add_argument("--per-cell", type=int, default=714)
+    ap.add_argument("--lang", default="en")
     ap.add_argument("--save")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--exits", action="store_true")
@@ -931,5 +1197,11 @@ if __name__ == "__main__":
         combined_build()
     elif a.combined:
         combined_report()
+    elif a.passc_sample:
+        passc_sample(per_cell=a.per_cell, lang=a.lang)
+    elif a.passc_todo:
+        passc_todo()
+    elif a.passc_corpus:
+        passc_corpus()
     else:
         ap.print_help()

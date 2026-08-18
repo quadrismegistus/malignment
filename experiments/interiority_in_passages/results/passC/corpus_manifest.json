@@ -1,0 +1,26 @@
+{
+ "bytes": 72703225,
+ "columns": [
+  "id",
+  "model",
+  "arm",
+  "pair",
+  "language",
+  "prompt",
+  "sample_idx",
+  "text"
+ ],
+ "language": {
+  "en": 116000,
+  "zh": 112520
+ },
+ "models": 58,
+ "note": "Lives OUTSIDE the repo in $MALIGNMENT_DATA. This manifest is committed so the repo records which bytes sample.parquet was drawn from. Raising n means taking more ids from the frozen sample under its seeded order, never redrawing from here.",
+ "pairs": 29,
+ "path": "/Users/rj416/malignment-data/f11_l2/f11_l2_full.parquet",
+ "population": "every lineage with base AND exactly one aligned arm present",
+ "rebuild": "python run.py --passc-corpus",
+ "rows": 228520,
+ "sha256": "a6d80ba27a934f55ddc7ae707cea4d41e547ad2ce9e7e72defd5bebbfc8b44a4",
+ "source": "malign_logits.gen_sequences WHERE corpus='f11_l2'"
+}

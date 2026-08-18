@@ -1,0 +1,118 @@
+# Pass C rubric -- FROZEN. This file IS the coder prompt.
+
+`run.py` reads the block between the two fenced markers below and embeds it
+verbatim in every workflow script. **Edit this file and the next shard uses the
+new text; nothing else needs touching.** Do not edit a generated script.
+
+`rubric_text()` asserts there are EXACTLY two markers and refuses otherwise --
+it fired on its first run, because this paragraph originally quoted the marker
+literally and made three. Do not write the marker anywhere but the fence.
+
+Frozen 2026-08-18. Changes from the smoke-tested merged form (`RUN 6`):
+
+  - `why` DROPPED. RH: *"let's drop why, we want to be conservative in whether
+    it's narrative."* It agreed at 0.773, the weakest field in the form, and its
+    categories bled -- INTERRUPTED and NOT_A_STORY both absorbed passages Pass A
+    called unreadable, because a passage that is both gets either label. It fed
+    nothing: the filter is the binary.
+  - The CONSERVATISM RULE added in its place. When in doubt, `narrative` is
+    false. This costs yield, not validity, and yield is the surplus: ~1,103
+    narrative passages exist per cell against a target of 150.
+
+Five fields. Verbatim agreement from the smoke test, n=60, two coders:
+narrative 0.918, degree 0.874, mode 0.860, drift 0.845.
+
+<<<RUBRIC>>>
+You are reading continuations of a sentence fragment. Each was written by a language model, but that is not what you are judging. Judge the writing.
+
+For each passage return five codes.
+
+## narrative (true / false)
+
+Is this continuous imaginative prose throughout -- a scene or a story, however clumsy -- with nothing interrupting it?
+
+Return false if ANY of the following is true, even for part of the passage:
+  - words are mangled or are not words, or sentences do not mean anything
+  - it is an essay, article, blog comment, obituary, review, list, Q&A pair,
+    quiz item, exercise, or an assistant answering the fragment
+  - it carries web or document furniture: a byline, a post date, a comment
+    widget, share or like counts, a download link, markup tags, a navigation
+    breadcrumb, a section heading that belongs to a document rather than a story
+  - it begins as a scene and is then broken by material of any of those kinds
+
+A story that is badly written, implausible, offensive, or ends mid-sentence is still narrative. Clumsiness does not disqualify it; interruption does.
+
+**When you are unsure, return false.** A passage has to be clearly a scene to count as one.
+
+## span
+
+Find the passage's most interior moment -- the place where a character's mind is most present -- and quote it verbatim, at most 25 words, copied exactly from the text. If no character's mental state appears anywhere, return an empty string. Do this even when narrative is false.
+
+## mode (NONE / TOLD / SHOWN)
+
+Classify THE SPAN YOU QUOTED, not the whole passage.
+
+    NONE    There was no span. No character's mental state appears anywhere:
+            only what a camera would record -- actions, speech, appearances,
+            events, facts.
+
+    TOLD    The state is REPORTED. Named, asserted or summarised from outside.
+            The reader is informed what the character feels or knows.
+            "She was furious."  "He knew he had to talk to her."
+            "She loves the process of creating."
+
+    SHOWN   The state is RENDERED. The mind is given in motion rather than
+            summarised -- thought as it occurs, deliberation, a question in the
+            character's own idiom.
+            "Was it possible he had never meant it?"
+            "She told herself that she had fixed him. She'd known all along that
+             love inside hate was no love at all."
+
+If the span contains both, classify by what the span is mainly doing.
+
+## drift (HOLDS / SHIFTS / UNMOORED)
+
+Does the passage stay in one world? Ask this even when narrative is false.
+
+    HOLDS      One scene or situation throughout. The people, place and time
+               persist, even if the prose is clumsy.
+    SHIFTS     Moves to a different situation and stays there. A cut, not a
+               collapse: the new material is itself coherent.
+    UNMOORED   Serial unrelated material. No situation survives.
+
+This is NOT the same question as `narrative`. A passage can be narrative throughout and still cut from one scene to another, which is SHIFTS. A passage can fail `narrative` for carrying a byline and still HOLD one scene.
+
+## degree (0-3)
+
+How much of the passage is given over to a character's mind?
+
+    0   None of it. Only external event, action, speech, appearance.
+    1   A state named once and left there.
+    2   Interiority present and developed, but not what the passage is about.
+    3   The passage is substantially about a mind.
+
+## Rules
+
+- The mind must belong to a CHARACTER. A first-person narrator who takes part in the scene is a character. A document's author addressing a reader is not: a blog comment, an obituary, a review, an essay expressing the writer's own feelings has no character in it, so mode is NONE and degree is 0 however much feeling it contains.
+- Judge the continuation on its own terms, never against the fragment. The fragment may already name a feeling ("She loved him deeply and wanted to"). A state in the continuation that only repeats the fragment's does not count as a span and does not raise the degree. Something must be added.
+- Speech is not interiority. A character *saying* "I'm frightened" is an event, not a mind rendered.
+- Bodily sensation on its own is not a mental state, unless the passage gives what it is the sensation *of*.
+- Search the whole passage, not its opening.
+<<<RUBRIC>>>
+
+## NOTES FOR US, NOT FOR THE CODER
+
+- The `mode` examples are `o099` and `o045` from `results/open_coding.json`,
+  quoted by open coders who knew nothing about this campaign. **`o045` (SHOWN)
+  is a BASE passage and `o099` (TOLD) an ALIGNED one** -- the example for the
+  category the hypothesis predicts alignment produces LESS of comes from the
+  aligned arm. That is the anchoring guard and it must survive any edit.
+- **Free indirect discourse is never named.** RH's ruling. The operational
+  description reaches it anyway: two of three calibration coders independently
+  quoted `Poor darling.`, two unattributed words inside 1,200 characters.
+- No NONE example is given. The two the open readers offered do not survive a
+  full-passage read, and inventing one would anchor to a register the corpus
+  does not contain.
+- "Search the whole passage, not its opening" exists because reading a window
+  instead of the object is exactly the error two of six open readers made when
+  choosing their own anchors.
