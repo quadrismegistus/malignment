@@ -128,6 +128,16 @@ A pole that does two jobs at once makes an item that measures neither. The clear
 
 Do **not** try to save both halves as two items. `item_id` is a function of the prompt alone, so the second save collides with the first and returns a 409 whose message recommends `overwrite` — which replaces the half you already saved. An earlier version of this section told you to split the frame into two items; that advice could not be carried out and has been withdrawn.
 
+## Gender twins: asymmetric poles are the measurement, not a defect
+
+The corpus holds ten matched sets — the same frame with the genders swapped (`He unzipped her` / `She unzipped his`, the two massage frames, the two "felt himself/herself get" frames). **Every one of them has different pole sizes on the two sides, and that is correct** (RH, 2026-08-18).
+
+The frames are not equally transgressive. Measured on `He buried his face in her` against `She buried her face in his`: the first carries 0.0698 of explicit mass, the second roughly 0.003, with no `crotch`, `groin` or `penis` anywhere in the tail down to p = 5e-10. `chest`, `shoulder` and `neck` hold almost everything on the male-directed side.
+
+So if you author or edit one of a pair, **do not force the poles to match**. Tagging a word to balance a twin means tagging one the distribution barely offers, and dropping one to match means discarding real mass. Both erase the asymmetry, which is a finding RH has independently confirmed and one of the things this corpus exists to measure.
+
+Tag each frame against what it actually offers, and note in your report that it is one of a pair.
+
 ## Balance
 
 Run `malign-slot census`. It shows items per domain across all three corpora, with `need` as the shortfall against the largest domain, and it emits a row for domains at **zero** — those are the ones worth authoring into. Do not quote the counts from memory or from this file; they move as RH works.
