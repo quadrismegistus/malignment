@@ -187,11 +187,99 @@ def round2(src=None):
         print("  %d unresolved (C picked the third option) and stay excluded" % neither)
 
 
+def final(src=None):
+    """Fold both adjudications into one partition and RE-TEST the leakage check.
+
+    The MARKED/UNMARKED check was run BEFORE any adjudication and its p=0.067 has
+    been sitting in the container's table since. 34 items have entered the
+    partition and more are entering now; a caveat quoted against a corpus that has
+    changed is a stale number wearing a fence."""
+    import collections
+    from scipy import stats
+    p = os.path.join(RESULTS, "round3.json")
+    if src:
+        d = json.load(open(src, encoding="utf-8"))
+        r = d.get("result", d)
+        if isinstance(r, str):
+            r = json.loads(r)
+        json.dump(r, open(p, "w", encoding="utf-8"), indent=0, sort_keys=True)
+    C3 = json.load(open(p, encoding="utf-8"))["C"]
+    K3 = json.load(open(os.path.join(RESULTS, "adjudicate_slots_key.json"), encoding="utf-8"))
+
+    anc = [i for i in C3 if not K3[i]["is_contested"]]
+    hit = sum(1 for i in anc if C3[i]["openness"] == K3[i]["A"])
+    t = stats.binomtest(hit, len(anc), 1 / 3)
+    print("=== SLOT ADJUDICATION ===")
+    print("  ANCHORS  %d of %d = %.0f%%  (chance 33%%, p=%.3g)"
+          % (hit, len(anc), 100 * hit / len(anc), t.pvalue))
+    ok3 = hit / len(anc) >= 0.70
+    print("  -> %s" % ("CALIBRATED" if ok3 else "NOT CALIBRATED; slot ties stay open"))
+    con = [i for i in C3 if K3[i]["is_contested"]]
+    sA = sum(1 for i in con if C3[i]["openness"] == K3[i]["A"])
+    sB = sum(1 for i in con if C3[i]["openness"] == K3[i]["B"])
+    print("  CONTESTED %d: sides with A %d, with B %d, NEITHER %d -> resolved %d"
+          % (len(con), sA, sB, len(con) - sA - sB, sA + sB))
+
+    #: ---- the consolidated partition, both populations
+    C1 = json.load(open(CODINGS, encoding="utf-8"))
+    A1, B1 = C1["coder_A"], C1["coder_B"]
+    K1 = json.load(open(os.path.join(RESULTS, "adjudicate_key.json"), encoding="utf-8"))
+    C2 = json.load(open(os.path.join(RESULTS, "round2.json"), encoding="utf-8"))
+    A2, B2 = C2["A"], C2["B"]
+    key = json.load(open(os.path.join(RESULTS, "key.json"), encoding="utf-8"))
+    SK = json.load(open(os.path.join(RESULTS, "slots_key.json"), encoding="utf-8"))
+
+    part = {}
+    for i in A1:
+        if i in B1 and A1[i]["openness"] == B1[i]["openness"]:
+            part[key[i]] = A1[i]["openness"]
+    for a, v in K1.items():
+        if v["is_contested"]:
+            c = json.load(open(os.path.join(RESULTS, "round2.json"), encoding="utf-8"))["C"][a]["openness"]
+            if c in (v["A"], v["B"]):
+                part[key[v["orig_id"]]] = c
+    for i in A2:
+        if i in B2 and A2[i]["openness"] == B2[i]["openness"]:
+            part[SK[i]["prompt"]] = A2[i]["openness"]
+    if ok3:
+        for a, v in K3.items():
+            if v["is_contested"] and C3[a]["openness"] in (v["A"], v["B"]):
+                part[SK[v["orig_id"]]["prompt"]] = C3[a]["openness"]
+
+    c = collections.Counter(part.values())
+    print("\n=== FINAL PARTITION, both populations, all adjudications ===")
+    print("  %d prompts resolved of 679 coded" % len(part))
+    for k in ("OPEN", "PARTIAL", "CLOSED"):
+        print("  %-8s %4d  (%.0f%%)" % (k, c[k], 100 * c[k] / len(part)))
+
+    print("\n=== RE-TEST: does openness track transgressiveness? (was p=0.0667) ===")
+    M = meta()
+    tab = collections.Counter()
+    for pr_text, v in part.items():
+        pr = M.get(pr_text, {}).get("pair_role")
+        if pr in ("MARKED", "UNMARKED"):
+            tab[(pr, v)] += 1
+    for pr in ("MARKED", "UNMARKED"):
+        n = sum(tab[(pr, k)] for k in ("OPEN", "PARTIAL", "CLOSED"))
+        print("  %-10s n=%-4d OPEN %.0f%%  PARTIAL %.0f%%  CLOSED %.0f%%"
+              % (pr, n, 100 * tab[(pr, "OPEN")] / n, 100 * tab[(pr, "PARTIAL")] / n,
+                 100 * tab[(pr, "CLOSED")] / n))
+    tt = [[tab[("MARKED", "OPEN")], tab[("MARKED", "CLOSED")]],
+          [tab[("UNMARKED", "OPEN")], tab[("UNMARKED", "CLOSED")]]]
+    pv = stats.fisher_exact(tt)[1]
+    print("  Fisher, OPEN vs CLOSED: p=%.4g  ->  %s"
+          % (pv, "still borderline/leaking" if pv < 0.15 else "no detectable leakage"))
+    json.dump(part, open(os.path.join(RESULTS, "partition.json"), "w", encoding="utf-8"),
+              ensure_ascii=False, indent=0)
+    print("\n  -> %s" % os.path.join(RESULTS, "partition.json"))
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--save")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--round2", nargs="?", const=True)
+    ap.add_argument("--final", nargs="?", const=True)
     a = ap.parse_args()
     if a.save:
         save(a.save)
@@ -199,5 +287,7 @@ if __name__ == "__main__":
         report()
     elif a.round2:
         round2(None if a.round2 is True else a.round2)
+    elif a.final:
+        final(None if a.final is True else a.final)
     else:
         ap.print_help()

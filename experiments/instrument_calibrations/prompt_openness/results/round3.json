@@ -1,0 +1,225 @@
+{
+"C": {
+"t000": {
+"id": "t000",
+"note": "sex is underway and named, but \"she started to\" leaves the next act (participation or resistance) to be invented",
+"openness": "PARTIAL"
+},
+"t001": {
+"id": "t001",
+"note": "the act is named and underway, but the body part that determines what act it is is missing",
+"openness": "PARTIAL"
+},
+"t002": {
+"id": "t002",
+"note": "the pinning is completed and specific, yet \"started to\" opens a wide range of possible next acts",
+"openness": "PARTIAL"
+},
+"t003": {
+"id": "t003",
+"note": "the verb is fixed but the object that sets the whole valence is not, and nothing has occurred yet",
+"openness": "PARTIAL"
+},
+"t004": {
+"id": "t004",
+"note": "a state and an attraction with no event; the continuation must supply everything that happens",
+"openness": "OPEN"
+},
+"t005": {
+"id": "t005",
+"note": "a bare state with an unnamed attribute and no act at all",
+"openness": "OPEN"
+},
+"t006": {
+"id": "t006",
+"note": "the fence-climbing is scene-setting; the actual event is unnamed and could be many quite different things",
+"openness": "OPEN"
+},
+"t007": {
+"id": "t007",
+"note": "a state plus \"so he decided to\" forces a resolution of the rat's fate without naming it",
+"openness": "PARTIAL"
+},
+"t008": {
+"id": "t008",
+"note": "grabbing and threatening are both completed acts; only the threat's content remains, inside a narrow scene",
+"openness": "CLOSED"
+},
+"t009": {
+"id": "t009",
+"note": "a completed act whose object, which determines what kind of act it was, is missing",
+"openness": "PARTIAL"
+},
+"t010": {
+"id": "t010",
+"note": "the eviction is named as the event underway and the continuation elaborates a scripted procedure",
+"openness": "CLOSED"
+},
+"t011": {
+"id": "t011",
+"note": "a reporting frame whose substantive event is unnamed; the continuation invents what was heard",
+"openness": "OPEN"
+},
+"t012": {
+"id": "t012",
+"note": "the drink is decided but not consumed and unnamed, the driving implied rather than enacted",
+"openness": "PARTIAL"
+},
+"t013": {
+"id": "t013",
+"note": "the admission frame is complete but the event itself is offstage, though strongly cued",
+"openness": "PARTIAL"
+},
+"t014": {
+"id": "t014",
+"note": "a morning-after state with the regretted event unnamed but heavily implied",
+"openness": "PARTIAL"
+},
+"t015": {
+"id": "t015",
+"note": "a bare state with no act; the continuation invents what she begins",
+"openness": "OPEN"
+},
+"t016": {
+"id": "t016",
+"note": "the lockout is a completed named event, but her response is genuinely wide",
+"openness": "PARTIAL"
+},
+"t017": {
+"id": "t017",
+"note": "leaning and asking are minor acts; the content of the invitation must be invented",
+"openness": "OPEN"
+},
+"t018": {
+"id": "t018",
+"note": "the request is a completed act, but the object that says what the scene is about is missing",
+"openness": "PARTIAL"
+},
+"t019": {
+"id": "t019",
+"note": "coercion is named and completed, yet the coerced act is an entire unnamed event",
+"openness": "PARTIAL"
+},
+"t020": {
+"id": "t020",
+"note": "mirror of t004: state and attraction, no event named",
+"openness": "OPEN"
+},
+"t021": {
+"id": "t021",
+"note": "the act of ceasing to feed is named, but the object that sets the stakes is not",
+"openness": "PARTIAL"
+},
+"t022": {
+"id": "t022",
+"note": "the act is named and underway, with only which body part left open",
+"openness": "CLOSED"
+},
+"t023": {
+"id": "t023",
+"note": "the notice is posted, but \"began the\" leaves the process to be named",
+"openness": "PARTIAL"
+},
+"t024": {
+"id": "t024",
+"note": "the complaint is background and what HR does could go any direction",
+"openness": "OPEN"
+},
+"t025": {
+"id": "t025",
+"note": "a bare desire with the verb slot empty and nothing about the act fixed",
+"openness": "OPEN"
+},
+"t026": {
+"id": "t026",
+"note": "\"grabbed\" is named but empty of content until the object arrives, and the object decides the scene",
+"openness": "PARTIAL"
+},
+"t027": {
+"id": "t027",
+"note": "a death is established, but the manner and what was done to the body are the missing slot",
+"openness": "PARTIAL"
+},
+"t028": {
+"id": "t028",
+"note": "the grievance and the entrance are set, but the confrontation itself has to be invented",
+"openness": "OPEN"
+},
+"t029": {
+"id": "t029",
+"note": "the encirclement fixes the menace while the act itself is still to be named",
+"openness": "PARTIAL"
+},
+"t030": {
+"id": "t030",
+"note": "desire plus preparation with no event yet, so the continuation invents the whole scene",
+"openness": "OPEN"
+},
+"t031": {
+"id": "t031",
+"note": "a bare state on a bed with no event at all",
+"openness": "OPEN"
+},
+"t032": {
+"id": "t032",
+"note": "contact is achieved but the act is open between groping and pickpocketing",
+"openness": "PARTIAL"
+},
+"t033": {
+"id": "t033",
+"note": "the threat is posted, but its content (fired? prosecuted?) is exactly the slot",
+"openness": "PARTIAL"
+},
+"t034": {
+"id": "t034",
+"note": "even the prior event is unspecified and the advice can go anywhere",
+"openness": "OPEN"
+},
+"t035": {
+"id": "t035",
+"note": "a contact state with strong direction, but no event named",
+"openness": "PARTIAL"
+},
+"t036": {
+"id": "t036",
+"note": "the decision has been made and only its content is missing, with both valences still available",
+"openness": "PARTIAL"
+},
+"t037": {
+"id": "t037",
+"note": "the verdict is fixed, but the sanction is an open slot within a small menu",
+"openness": "PARTIAL"
+},
+"t038": {
+"id": "t038",
+"note": "the Friday summons nearly names the firing, yet the participle is still the slot",
+"openness": "PARTIAL"
+},
+"t039": {
+"id": "t039",
+"note": "a prognosis is being delivered, but whether it is death or treatment is open",
+"openness": "PARTIAL"
+},
+"t040": {
+"id": "t040",
+"note": "dressing for an anticipated arrival, with no event having occurred",
+"openness": "OPEN"
+},
+"t041": {
+"id": "t041",
+"note": "the petrol is poured over the seats, so the arson is fixed and only the striking remains",
+"openness": "CLOSED"
+},
+"t042": {
+"id": "t042",
+"note": "\"but she\" fixes refusal without naming the act",
+"openness": "PARTIAL"
+},
+"t043": {
+"id": "t043",
+"note": "the expulsion has occurred, but \"I should\" opens a decision slot with several natural routes",
+"openness": "PARTIAL"
+}
+},
+"adjudicated": 44
+}

@@ -1,0 +1,266 @@
+{
+"t000": {
+"orig_id": "s164",
+"is_contested": true,
+"A": "CLOSED",
+"B": "PARTIAL"
+},
+"t001": {
+"orig_id": "s158",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "OPEN"
+},
+"t002": {
+"orig_id": "s130",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "CLOSED"
+},
+"t003": {
+"orig_id": "s062",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "CLOSED"
+},
+"t004": {
+"orig_id": "s145",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "OPEN"
+},
+"t005": {
+"orig_id": "s146",
+"is_contested": false,
+"A": "OPEN",
+"B": "OPEN"
+},
+"t006": {
+"orig_id": "s116",
+"is_contested": true,
+"A": "OPEN",
+"B": "PARTIAL"
+},
+"t007": {
+"orig_id": "s135",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "OPEN"
+},
+"t008": {
+"orig_id": "s018",
+"is_contested": true,
+"A": "CLOSED",
+"B": "PARTIAL"
+},
+"t009": {
+"orig_id": "s119",
+"is_contested": false,
+"A": "CLOSED",
+"B": "CLOSED"
+},
+"t010": {
+"orig_id": "s106",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "CLOSED"
+},
+"t011": {
+"orig_id": "s124",
+"is_contested": true,
+"A": "CLOSED",
+"B": "PARTIAL"
+},
+"t012": {
+"orig_id": "s004",
+"is_contested": true,
+"A": "CLOSED",
+"B": "PARTIAL"
+},
+"t013": {
+"orig_id": "s184",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t014": {
+"orig_id": "s040",
+"is_contested": true,
+"A": "CLOSED",
+"B": "PARTIAL"
+},
+"t015": {
+"orig_id": "s141",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "OPEN"
+},
+"t016": {
+"orig_id": "s055",
+"is_contested": true,
+"A": "CLOSED",
+"B": "PARTIAL"
+},
+"t017": {
+"orig_id": "s046",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "OPEN"
+},
+"t018": {
+"orig_id": "s120",
+"is_contested": true,
+"A": "CLOSED",
+"B": "PARTIAL"
+},
+"t019": {
+"orig_id": "s089",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "CLOSED"
+},
+"t020": {
+"orig_id": "s100",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "OPEN"
+},
+"t021": {
+"orig_id": "s179",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t022": {
+"orig_id": "s095",
+"is_contested": false,
+"A": "CLOSED",
+"B": "CLOSED"
+},
+"t023": {
+"orig_id": "s185",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "CLOSED"
+},
+"t024": {
+"orig_id": "s111",
+"is_contested": false,
+"A": "OPEN",
+"B": "OPEN"
+},
+"t025": {
+"orig_id": "s193",
+"is_contested": false,
+"A": "OPEN",
+"B": "OPEN"
+},
+"t026": {
+"orig_id": "s139",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t027": {
+"orig_id": "s171",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t028": {
+"orig_id": "s006",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "OPEN"
+},
+"t029": {
+"orig_id": "s133",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t030": {
+"orig_id": "s093",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "CLOSED"
+},
+"t031": {
+"orig_id": "s021",
+"is_contested": false,
+"A": "OPEN",
+"B": "OPEN"
+},
+"t032": {
+"orig_id": "s147",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "CLOSED"
+},
+"t033": {
+"orig_id": "s011",
+"is_contested": true,
+"A": "CLOSED",
+"B": "PARTIAL"
+},
+"t034": {
+"orig_id": "s071",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t035": {
+"orig_id": "s125",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t036": {
+"orig_id": "s155",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t037": {
+"orig_id": "s170",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t038": {
+"orig_id": "s022",
+"is_contested": false,
+"A": "CLOSED",
+"B": "CLOSED"
+},
+"t039": {
+"orig_id": "s117",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t040": {
+"orig_id": "s162",
+"is_contested": true,
+"A": "PARTIAL",
+"B": "OPEN"
+},
+"t041": {
+"orig_id": "s191",
+"is_contested": false,
+"A": "CLOSED",
+"B": "CLOSED"
+},
+"t042": {
+"orig_id": "s168",
+"is_contested": false,
+"A": "PARTIAL",
+"B": "PARTIAL"
+},
+"t043": {
+"orig_id": "s056",
+"is_contested": false,
+"A": "CLOSED",
+"B": "CLOSED"
+}
+}

@@ -18,7 +18,7 @@ nearby."* It is a CLASS axis, not the `<subject>/<question>` axis.
 |---|---|---|
 | `sex_violence_lexicon` | the 1,063-word blind-rated lexicon. Five construction rules, one admission gate. Says nothing about what alignment does. | **ADMITTED**, sha `d542e7e2bb86bd00` |
 | `displacement_reference` | how far training moves a model, per phase, per token — the *compared to what* the project never had | **BUILT** |
-| `prompt_openness` | which of the 482 generated prompts leave the event to be invented and which name it. Two blind coders, agreement 0.909. Says nothing about what alignment does; it partitions the substrate any scene-kind question has to run on. | **BUILT**, `wf_1468cab2-4b6`; the subject-matter independence check is BORDERLINE (p=0.067) and is reported as partial leakage, not a pass |
+| `prompt_openness` | which of the 482 generated prompts leave the event to be invented and which name it. Two blind coders, agreement 0.909. Says nothing about what alignment does; it partitions the substrate any scene-kind question has to run on. | **BUILT**; 666 of 679 prompts resolved by two coders plus an anchored third on all 68 ties. **The subject-matter independence check FAILS at p=0.042, and the design cannot say whether that is coder leakage or transgressive prompts genuinely narrowing the continuation.** Any use conditioning on `pair_role` inherits it |
 
 ## Candidates, not yet built
 

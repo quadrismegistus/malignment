@@ -113,12 +113,57 @@ know.
 
     FINAL PARTITION   OPEN 217   PARTIAL 75   CLOSED 180   unresolved 10
 
+## ROUND 3: THE SLOT TIES, AND THE CHECK GOT WORSE
+
+**RH caught that only 44 of 68 disagreements had been adjudicated.** The slot
+corpus's 24 were never sent to a third coder -- the adjudication set was built
+from the original codings in the same script that exported the slot prompts, so
+those ties did not exist yet when the population was fixed. A sequencing
+artifact, not a decision, which is the kind that survives review.
+
+`run.py --final`, workflow `results/workflow_round3.js` (`wf_e5180606-142`),
+same anchored design:
+
+    ANCHORS    16 of 20 = 80%   (chance 33%, p=2.5e-05)  ->  CALIBRATED
+    CONTESTED  sides with A 9, with B 13, NEITHER 2  ->  resolved 22 of 24
+
+    CONSOLIDATED PARTITION, both populations, all three adjudications
+    666 of 679 resolved    OPEN 271 (41%)   PARTIAL 172 (26%)   CLOSED 223 (33%)
+
+### AND THE LEAKAGE CHECK IS NOW SIGNIFICANT
+
+    MARKED     n=140   OPEN 27%   PARTIAL 11%   CLOSED 62%
+    UNMARKED   n=141   OPEN 34%   PARTIAL 22%   CLOSED 44%
+    Fisher, OPEN vs CLOSED:  p=0.042      (was 0.0667 before adjudication)
+
+**It moved against the instrument, which is why it had to be re-run.** A caveat
+quoted against a corpus that has since gained 56 items is a stale number wearing
+a fence.
+
+### BUT THE CHECK CANNOT ATTRIBUTE WHAT IT DETECTS
+
+I designed it as a LEAKAGE detector -- *did coders let subject matter drive the
+code* -- and it cannot answer that, because a second explanation fits equally:
+**transgressive prompts may genuinely narrow the continuation space.** "Locked
+the rabbit in the shed with no water" implies a consequence that "with fresh
+water" does not, so the MARKED member of a structurally matched pair can be more
+CLOSED as a fact about the prompt rather than a fact about the coder.
+
+**The association is real at p=0.042. Its cause is not identified, and this
+design cannot identify it.** Separating them needs prompts where transgressiveness
+and consequence-implication are crossed, which these are not.
+
+**Operationally: any use of this partition that ALSO conditions on
+MARKED/UNMARKED inherits an unresolved confound.** Uses that do not touch
+`pair_role` are unaffected.
+
 # NOT DONE
 
 - **51 agreed prompts did not join the catalogue** and carry no source. They are
   in `results/openness.csv` with an empty source column, not dropped.
-- **The MARKED/UNMARKED leakage (p=0.067) was never re-tested** after
-  adjudication. Adding 34 items could move it either way.
+- **Disentangling coder leakage from a genuine narrowing effect.** The check is
+  significant (p=0.042) and cannot say which. Needs prompts crossing
+  transgressiveness with consequence-implication.
 - The slot corpus has **2 of 197 prompts measured** in v3 (malign, [6460],
   confirmed independently through ClickHouse). Nothing here depends on that, but
   any use of these prompts does.
