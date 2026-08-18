@@ -115,8 +115,28 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--domain", default=None, help="restrict to one domain")
     ap.add_argument("--limit", type=int, default=None, help="first N items")
-    ap.add_argument("--out", default=RESULTS)
+    ap.add_argument("--out", default=RESULTS,
+                    help="run directory; give each run its OWN (results/pilot1, ...)")
+    ap.add_argument("--force", action="store_true",
+                    help="overwrite a run directory that already holds a manifest")
     a = ap.parse_args(argv)
+
+    #: **A RUN DIRECTORY IS WRITE-ONCE UNLESS SAID OTHERWISE.** The population is
+    #: DISCOVERED (`endpoints()` intersected with the models present in the
+    #: store), not declared, so re-running after an ingest silently produces a
+    #: different population at the same path under the same name -- and the
+    #: files open with mode "w". `pilot1` was measured against a store holding 8
+    #: of 50 declared pairs; the SmolLM3 arms the poles were balanced on were
+    #: not in it. Nothing in the output would have said so.
+    #:
+    #: The guard fires on `manifest.json` rather than on the directory being
+    #: non-empty, because a half-written run leaves cells.jsonl behind and
+    #: should be re-runnable without a flag.
+    if os.path.exists(os.path.join(a.out, "manifest.json")) and not a.force:
+        print("refusing: %s already holds a manifest.json. Give this run its own\n"
+              "          --out (results/<name>), or pass --force to replace it."
+              % a.out, file=sys.stderr)
+        return 2
 
     from malignment import roster, vectors as V
     from malignment.slots import read_items, corpora
@@ -170,6 +190,11 @@ def main(argv=None):
 
     n_cells = 0
     sig = collections.Counter()
+    per_pair = collections.Counter()
+    per_domain = collections.Counter()
+    cells_skipped = collections.Counter()
+    items_seen = set()
+    prompts_seen = set()
     for d in items:
         per = store.get(d["prompt"]) or {}
         #: **THE AXIS IS BUILT ONCE PER ITEM, NOT ONCE PER CELL.** It depends on
@@ -184,6 +209,7 @@ def main(argv=None):
             if b not in per or e not in per:
                 fs.write(json.dumps({"kind": "cell", "item_id": d["item_id"], "base": b,
                                      "endpoint": e, "reason": "prompt not measured on this arm"}) + "\n")
+                cells_skipped["prompt not measured on this arm"] += 1
                 continue
             pb, pa = per[b], per[e]
             words = sorted(set(pb) | set(pa))
@@ -257,15 +283,80 @@ def main(argv=None):
                              else "nice" if w in d["nice"] else None),
                 }) + "\n")
             n_cells += 1
+            per_pair[(b, e)] += 1
+            per_domain[d.get("domain")] += 1
+            items_seen.add(d["item_id"])
+            prompts_seen.add(d["prompt"])
             if n_cells % 25 == 0:
                 print("  %d cells" % n_cells, flush=True)
     for f in (fc, fw, fs):
         f.close()
+
+    #: **THE POPULATION IS RECORDED BY ENUMERATION, NOT BY A COUNT** (RH,
+    #: 2026-08-18). "8 of 50 declared pairs" is a fact about the store on one
+    #: day and reads as a fact about the design; the next reader compares run
+    #: names and gets no signal that the populations differ. So the manifest
+    #: names every pair RUN and every pair NOT run with its reason, and the two
+    #: sum to the declared frame. Compare `pairs_run`, never the run name.
+    #:
+    #: `n_cells` per pair is in here because coverage is UNEVEN -- pilot1 ranges
+    #: 209 to 290 of 290 items across its eight pairs -- so any corpus-wide
+    #: proportion is over an unbalanced panel and the manifest is where that is
+    #: visible without reloading the cells.
+    import datetime
+    manifest = {
+        "run": os.path.basename(os.path.normpath(a.out)),
+        "measured_on": datetime.date.today().isoformat(),
+        "note": ("The population is FROZEN here by enumeration. run.py discovers pairs by "
+                 "intersecting roster.endpoints() with the models present in the source "
+                 "table, so a later run against a larger store is a different population "
+                 "under the same code. Compare pairs_run, not run names."),
+        "source_table": TABLE,
+        "residual_table": "twp_cells_v4",
+        "code_commit": _git_head(),
+        "restrictions": {"domain": a.domain, "limit": a.limit},
+        "declared_pairs": len(ep),
+        "pairs_run": [{"base": b, "endpoint": e, "n_cells": n}
+                      for (b, e), n in sorted(per_pair.items())],
+        "pairs_not_run": [{"base": b, "endpoint": e, "reason": why}
+                          for b, e, why in skipped_pairs],
+        "n_cells": n_cells,
+        "n_items": len(items_seen),
+        "n_prompts": len(prompts_seen),
+        "signatures": dict(sig.most_common()),
+        "domains": dict(per_domain.most_common()),
+        "cells_skipped": dict(cells_skipped.most_common()),
+        "files": {"cells.jsonl": "one row per (base, endpoint, item_id)",
+                  "skipped.jsonl": "pairs, items and cells NOT measured, with reasons",
+                  "words.jsonl": "one row per (cell, word); GITIGNORED, working tree only"},
+    }
+    with open(os.path.join(a.out, "manifest.json"), "w", encoding="utf-8") as f:
+        f.write(json.dumps(manifest, indent=2) + "\n")
+
     print("\ncells %d" % n_cells)
     for k, v in sig.most_common():
         print("  %-14s %5d  %4.0f%%" % (k, v, 100.0 * v / max(n_cells, 1)))
+    print("\npairs run %d of %d declared:" % (len(per_pair), len(ep)))
+    for (b, e), n in sorted(per_pair.items()):
+        print("  %-38s -> %-38s %4d" % (b, e, n))
     print("\nwrote %s" % a.out)
     return 0
+
+
+def _git_head():
+    """Commit of the working tree, or None. Records WHICH CODE produced a run.
+
+    Best-effort by design: an experiment folder should not fail to write its
+    manifest because git is unavailable, and a null here is honest about not
+    knowing rather than absent and unremarked.
+    """
+    import subprocess
+    try:
+        r = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+                           text=True, cwd=os.path.dirname(os.path.abspath(__file__)))
+        return r.stdout.strip() or None
+    except Exception:
+        return None
 
 
 if __name__ == "__main__":

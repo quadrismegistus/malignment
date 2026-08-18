@@ -2,15 +2,32 @@
 
 dN and its decomposition, per (lineage, item), with the words that carried it.
 
-    python experiments/displacement_axis/run.py
+    python experiments/displacement_axis/run.py --out experiments/displacement_axis/results/<name>
 
 Reads `twp_words_v4` / `twp_cells_v4` and imports `slot_axis.Axis`. Runs no
 checkpoint and needs no server.
 
-## The pilot population: 8 of 50 declared pairs
+## One directory per run, and the manifest is the population of record
 
-Pairs come from `roster.endpoints()`, never from the model names in the store.
-As of 2026-08-18, 20 models hold slot-corpus prompts in v4 and 8 of them form a
+**The population is discovered, not declared.** `run.py` intersects
+`roster.endpoints()` with whichever models happen to hold the prompts in the
+source table, so the same command against the same code returns a different
+population after every ingest. Give each run its own `--out`; the command
+refuses a directory that already holds a `manifest.json`.
+
+`results/<run>/manifest.json` enumerates `pairs_run` and `pairs_not_run` with
+reasons, and the two sum to the declared frame. **Compare runs by `pairs_run`,
+never by name or by a count** -- "8 of 50" is a fact about a store on a day and
+reads as a fact about the design.
+
+It also carries `n_cells` per pair, because coverage is uneven: `pilot1` ranges
+209 to 290 of 290 items across its eight pairs, so every corpus-wide proportion
+below is over an unbalanced panel.
+
+## pilot1: 8 of 50 declared pairs
+
+Enumerated in `results/pilot1/manifest.json`; this section is the reading of it.
+As of 2026-08-18, 20 models held slot-corpus prompts in v4 and 8 of them formed a
 declared base -> endpoint pair with both arms present:
 
     Qwen/Qwen2.5-0.5B                 -> Qwen/Qwen2.5-0.5B-Instruct
@@ -27,6 +44,21 @@ whichever pairs a local pass happened to reach first, and it is heavily skewed:
 six of eight are China-origin lineages (Qwen x3, Baichuan, CT-LLM, neo), one
 Japanese, one US. Any cross-lineage claim from this pilot is a claim about that
 skew as much as about alignment.
+
+**And the instrument the poles were balanced against is not in it** (RH,
+2026-08-18). Pole balance was judged through the slot client on
+`HuggingFaceTB/SmolLM3-3B`, so every `share` and every mass the corpus was tuned
+to is one model's reading, tested here on eight others. That matters because base
+transgressive mass is what separates the signatures: over pilot1, displacement
+cells carry median base naughty mass 0.119 against churn's 0.027, and in the
+lowest quartile of naughty mass displacement is 1% of cells against churn's 92%.
+A frame with no transgressive mass on THIS checkpoint cannot displace on it
+whatever it does on the one it was written against.
+
+`SmolLM3-3B-Base -> SmolLM3-3B` and `SmolLM2-360M -> SmolLM2-360M-Instruct` are
+both DECLARED pairs already, so they enter as soon as the store holds them and no
+code changes. Until then the pilot's 19% displacement rate is not evidence about
+the frames.
 
 Four more models hold the prompts and cannot pair:
 
