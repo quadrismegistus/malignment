@@ -15,6 +15,19 @@ This is the one case where rewriting a body is justified: the key is the
 producer's own claim about the instrument, not an inference, so the repair is
 deterministic and adds no information. It REFUSES to touch anything else.
 
+**ORDER IS LOAD-BEARING AND IS PRESERVED BY CONSTRUCTION.** The stash files are
+APPEND-ONLY: a delete leaves the record in place and a rewrite supersedes it, so
+`ingest` resolves a repeated key by LAST WRITE WINS. This script makes a single
+pass and appends every line -- modified or not -- in sequence, which is the only
+reason it is safe to run over a file whose earlier records were superseded.
+
+That is not hypothetical. Run over CT-LLM-Base it "fixed" 2,583 records that
+were the CONTAMINATED topup cells, deleted from the stash hours earlier but
+still present in the file. Had it reordered, those would have moved after their
+corrected replacements and the next ingest would have booked the bad ones -- with
+no error, and with a cell count that still looked right. Do not add sorting,
+grouping, or dict-based accumulation here.
+
 **Atomic per file**: writes a sibling and renames, so a kill leaves the original
 intact rather than a half-file. Never run against a stash a producer is writing.
 """
