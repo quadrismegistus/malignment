@@ -324,8 +324,231 @@ def passa_report():
     print("\n  -> %s" % os.path.join(RESULTS, "passA_pilot.csv"))
 
 
+def sql_str(s):
+    """A ClickHouse string LITERAL. Three ways this went wrong in one session.
+
+    `json.dumps(s)`                  escapes non-ASCII to \\uXXXX, so a Chinese
+                                     prompt matched nothing and returned 0 rows.
+    `json.dumps(s, ensure_ascii=0)`  emits DOUBLE quotes, which ClickHouse reads
+                                     as an IDENTIFIER: "Unknown expression or
+                                     function identifier `lomahony/...`".
+    single quotes, unescaped         breaks on any apostrophe in a prompt.
+    """
+    return "'" + s.replace("\\", "\\\\").replace("'", "\\'") + "'"
+
+
+def fetch_clean(rows, nchars=1200):
+    """Passage text with REAL newlines. Use this, never TabSeparated.
+
+    **THE DEFECT THIS EXISTS TO PREVENT.** The Pass A sample was extracted with
+    `FORMAT TabSeparated`, which escapes newlines and quotes. Every one of those
+    880 passages reached its coders carrying literal `\\n` (82.4%) and `\\'`
+    (31.4%) as visible characters, and NOT ONE had a real newline. The source is
+    clean -- 190,473 of 228,520 f11_l2 rows contain a genuine char(10) -- so the
+    damage was entirely in the extraction.
+
+    It was symmetric (base 83.4% carrying escapes against aligned 81.4%, 6.15
+    against 6.72 per passage), so the Pass A arm contrasts stand and that pass
+    was not re-run. Pass B is a judgement about narrative form, where paragraph
+    structure is part of what is being read, so it gets this instead.
+
+    `rows` is a list of dicts with model / prompt / sample_idx.
+    """
+    import subprocess
+    out = []
+    for v in rows:
+        q = ("SELECT text FROM malign_logits.gen_sequences WHERE corpus='f11_l2' "
+             "AND model=%s AND prompt=%s AND sample_idx=%d FORMAT JSONEachRow"
+             % (sql_str(v["model"]), sql_str(v["prompt"]), int(v["sample_idx"])))
+        r = subprocess.run(["clickhouse", "client", "--query", q],
+                           capture_output=True, text=True, timeout=120)
+        got = [json.loads(l) for l in r.stdout.strip().split("\n") if l.strip()]
+        if len(got) != 1:
+            raise RuntimeError("%d rows for %s / %s / %s -- %s"
+                               % (len(got), v["model"], v["prompt"][:30],
+                                  v["sample_idx"], r.stderr[:200]))
+        out.append(got[0]["text"][:nchars])
+    return out
+
+
+def calib(n=20, seed=20260818):
+    """Draw the Pass B calibration set: n at RANDOM from the Pass B population.
+
+    RH: *"maybe we just get 20 random?"* -- right, because hand-picking hard
+    cases calibrates the instrument on MY theory of what is hard, and the
+    resulting agreement is a number about the selection. Random within the
+    population the instrument will actually run on gives an honest IAA estimate.
+
+    The population is the Pass A survivors with ENGLISH prompts, since stage 1
+    is English on all 22 pairs and the zh arm is a separate 8-pair replication.
+
+    `a009` is appended as a NAMED PROBE for the stacked-telling question
+    (beaver-7b, aligned, coherent, eight state reports and nothing rendered).
+    It is reported apart and never counted in the agreement figure.
+    """
+    import random, collections
+    K = json.load(open(os.path.join(RESULTS, "passA_key.json"), encoding="utf-8"))
+    R = json.load(open(PASSA, encoding="utf-8"))
+    A, B = R["A"], R["B"]
+    zh = lambda s: any("一" <= c <= "鿿" for c in s)
+    pool = [i for i in sorted(K)
+            if A[i]["lexical"] == "clean" == B[i]["lexical"]
+            and A[i]["semantic"] == "means" == B[i]["semantic"]
+            and A[i]["frame"] in ("none", "furniture")
+            and B[i]["frame"] in ("none", "furniture")
+            and not zh(K[i]["prompt"])]
+    print("Pass B population in the pilot, English prompts: %d" % len(pool))
+    random.seed(seed)
+    pick = sorted(random.sample(pool, n))
+    print("drawn %d, seed %d | %s"
+          % (n, seed, dict(collections.Counter(K[i]["arm"] for i in pick))))
+    ids = pick + ["a009"]
+    texts = fetch_clean([K[i] for i in ids])
+    out = {}
+    for j, (i, txt) in enumerate(zip(ids, texts)):
+        key = ("q%03d" % j) if i != "a009" else "PROBE"
+        out[key] = {"fragment": K[i]["prompt"], "continuation": txt,
+                    "_src": i, "_model": K[i]["model"], "_arm": K[i]["arm"]}
+    esc = sum(1 for v in out.values() if "\\n" in v["continuation"])
+    nl = sum(1 for v in out.values() if "\n" in v["continuation"])
+    print("extracted %d | still-escaped %d | real newlines in %d" % (len(out), esc, nl))
+    p = os.path.join(RESULTS, "calib20.json")
+    json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print("-> %s\n" % p)
+    for k in sorted(out):
+        v = out[k]
+        print("  %-6s %-3s %-26s %s" % (k, v["_arm"][:3], v["_model"].split("/")[-1][:26],
+                                        " ".join(v["continuation"][:88].split())))
+
+
+def roles():
+    """Quintuplet role per prompt, from the DECLARED field. Not reconstructed.
+
+    `gen_sequences` has `role` and `pair` columns and BOTH ARE EMPTY for
+    f11_l2 -- one distinct value ('') over all 228,520 rows. Checked, not
+    assumed. But the roles are authored in
+    `roster/prompts/flat/quintuplets.yaml` (200 prompts, 44 groups), so this
+    reads them rather than inferring them from prompt text.
+
+        POLE_A / POLE_B     He was beautiful / disgusting and she wanted to
+        BOTH                He was beautiful and disgusting and she wanted to
+        CONTROL_A / _B      He was beautiful and radiant and she wanted to
+
+    **Joined on prompt TEXT, never prompt_id** (RH's standing rule).
+
+    Two facts the file states and this must not flatten:
+      - only 34 of 44 groups have CONTROLS; the other 10 are triplets.
+      - status is CARRIED, NOT FILTERED ([5084].2, "a shape filter is not a
+        membership filter"): 41 groups ACTIVE, 2 MIXED ACTIVE/DISPUTED, 1
+        RETIRED. The population choice is an open construct ruling, so both
+        the full and the ACTIVE-only counts are printed and neither is
+        silently adopted here.
+    """
+    import csv, collections, yaml
+    import pyarrow.parquet as pq
+    SRC = os.path.join(os.path.dirname(os.path.dirname(HERE)),
+                       "roster", "prompts", "flat", "quintuplets.yaml")
+    Q = yaml.safe_load(open(SRC, encoding="utf-8"))["prompts"]
+    role = {q["prompt"]: q["group_role"] for q in Q}
+    group = {q["prompt"]: q["group_id"] for q in Q}
+    status = {q["prompt"]: q.get("status", "") for q in Q}
+    print("declared source: %s" % SRC)
+    print("  %d prompts, %d groups, roles %s"
+          % (len(Q), len(set(group.values())),
+             dict(collections.Counter(role.values()))))
+
+    kind = {}
+    for r in csv.DictReader(open(os.path.join(RESULTS, "prompt_kind.csv"), encoding="utf-8")):
+        if r["unanimous"] == "1":
+            kind[r["prompt"]] = r["kind"]
+
+    t = pq.read_table(os.path.join(RESULTS, "frame_exit.parquet")).to_pydict()
+    pr = sorted(set(t["prompt"]))
+    hit = [p for p in pr if p in role]
+    print("\n%d corpus prompts; %d join the declared file BY TEXT, %d do not"
+          % (len(pr), len(hit), len(pr) - len(hit)))
+    c = collections.Counter(role.get(p, "(not declared)") for p in pr)
+    print("  " + "  ".join("%s %d" % kv for kv in c.most_common()))
+    gs = collections.Counter(status.get(p) for p in hit)
+    print("  status of the joining prompts: %s" % dict(gs))
+    ng = collections.Counter()
+    for p in hit:
+        ng[group[p]] += 1
+    print("  groups represented: %d ; complete 5-member groups in-corpus: %d ; "
+          "3-member: %d" % (len(ng), sum(1 for v in ng.values() if v == 5),
+                            sum(1 for v in ng.values() if v == 3)))
+    if len(pr) - len(hit):
+        print("  NOT DECLARED (first 5): %s"
+              % [p[:44] for p in pr if p not in role][:5])
+
+    print("\n=== Q1. IS ROLE BALANCED ACROSS ARMS? ===")
+    print("  It is balanced BY CONSTRUCTION: every model sees every prompt")
+    print("  exactly 20 times, so no prompt property can confound the arm")
+    print("  contrast. Asserted rather than assumed:")
+    cell = collections.Counter()
+    for j in range(len(t["model"])):
+        cell[(t["arm"][j], role.get(t["prompt"][j], "(not declared)"))] += 1
+    for r in sorted(set(role.get(p, "(not declared)") for p in pr)):
+        b, a = cell[("base", r)], cell[("aligned", r)]
+        print("    %-14s base %7d  aligned %7d  %s" % (r, b, a, "EQUAL" if b == a else "*** UNEQUAL ***"))
+
+    print("\n=== Q2. DOES ROLE CLUSTER IN A PROMPT-KIND STRATUM? ===")
+    print("  If it did, a between-stratum difference could really be a role difference.")
+    x = collections.defaultdict(collections.Counter)
+    for p in pr:
+        if p in kind and p in role:
+            x[role[p]][kind[p]] += 1
+    print("  %-14s %9s %9s %9s %7s" % ("role", "EXTERIOR", "INTERIOR", "NEITHER", "n"))
+    for r in sorted(x):
+        n = sum(x[r].values())
+        print("  %-14s %8d%% %8d%% %8d%% %7d"
+              % (r, round(100*x[r]["EXTERIOR"]/n), round(100*x[r]["INTERIOR"]/n),
+                 round(100*x[r]["NEITHER"]/n), n))
+    print("  %-14s %8d%% %8d%% %8d%% %7d"
+          % ("ALL", round(100*sum(v["EXTERIOR"] for v in x.values())/sum(sum(v.values()) for v in x.values())),
+             round(100*sum(v["INTERIOR"] for v in x.values())/sum(sum(v.values()) for v in x.values())),
+             round(100*sum(v["NEITHER"] for v in x.values())/sum(sum(v.values()) for v in x.values())),
+             sum(sum(v.values()) for v in x.values())))
+
+    print("\n=== Q3. THE REAL HAZARD: DOES THE COHERENCE FILTER RETAIN BY ROLE x ARM? ===")
+    print("  The filter is POST-TREATMENT. If contradiction prompts break base")
+    print("  models harder, filtering leaves the two arms with different role")
+    print("  compositions, and a composition difference is not an arm effect.")
+    try:
+        R = json.load(open(PASSA, encoding="utf-8"))
+        PK = json.load(open(os.path.join(RESULTS, "passA_key.json"), encoding="utf-8"))
+    except IOError:
+        print("  (pilot codings not present)")
+        return
+    A, B = R["A"], R["B"]
+
+    def ok(i, M):
+        return (M[i]["semantic"] == "means" and M[i]["lexical"] == "clean"
+                and M[i]["frame"] in ("none", "furniture"))
+    keep = collections.defaultdict(lambda: [0, 0])
+    for i in sorted(PK):
+        r = role.get(PK[i]["prompt"], "(not declared)")
+        k = (PK[i]["arm"], r)
+        keep[k][1] += 1
+        if ok(i, A) and ok(i, B):
+            keep[k][0] += 1
+    print("  %-14s %18s %18s %10s" % ("role", "base kept", "aligned kept", "gap"))
+    for r in sorted(set(k[1] for k in keep)):
+        b, a = keep[("base", r)], keep[("aligned", r)]
+        if not b[1] or not a[1]:
+            continue
+        yb, ya = 100*b[0]/b[1], 100*a[0]/a[1]
+        print("  %-14s %8.1f%% (%3d/%3d) %8.1f%% (%3d/%3d) %+9.1f"
+              % (r, yb, b[0], b[1], ya, a[0], a[1], ya - yb))
+    print("\n  A CONSTANT gap across roles means the filter is role-neutral and")
+    print("  composition is preserved. A gap that varies by role is the thing to")
+    print("  correct for, by filtering within (prompt, arm) or reweighting.")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
+    ap.add_argument("--roles", action="store_true")
+    ap.add_argument("--calib", action="store_true")
     ap.add_argument("--save")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--exits", action="store_true")
@@ -342,5 +565,9 @@ if __name__ == "__main__":
         passa_save(a.passa_save)
     elif a.passa:
         passa_report()
+    elif a.roles:
+        roles()
+    elif a.calib:
+        calib()
     else:
         ap.print_help()
