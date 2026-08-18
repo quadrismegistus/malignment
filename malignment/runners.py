@@ -560,6 +560,31 @@ class TWPRunner:
         model, tok, dev = ld.model, ld.tok, ld.dev
         bmask, cjk, pol = ld.bmask, ld.cjk, ld.bos_policy
         n_ok = n_ref = n_skip = 0
+        #: ## THE CURRENCY SLOT IS A CLOSED QUESTION. DO NOT RE-OPEN IT.
+        #:
+        #: RH's call, 2026-08-18: "i dont think we ought to chase the
+        #: number/salary issue with twp anymore, we tried hard enough."
+        #:
+        #: On the CT-LLM lineage, pass 2 refused 21 cells and ALL 21 are
+        #: currency slots -- twenty `年薪为$` ("annual salary is $") and one
+        #: `...annual salary of ₹`. Re-running reproduces the identical sets.
+        #: The likely mechanism is the non-disjointness twp_v4 documents at
+        #: line 290 (`,` is a boundary, so "the next word is 25" overlaps
+        #: continuations reading 25,000, and a sum over overlapping events can
+        #: exceed its residual) -- but the CORRESPONDENCE is what was
+        #: established, not the mechanism, and by decision it stays that way.
+        #:
+        #: **WHAT IS ACCEPTED IS NARROWER THAN IT LOOKS.** Pass 1 measures
+        #: these prompts normally; the cells exist and conserve. Only the union
+        #: top-up refuses, so those cells carry IMPUTED ZEROS for the lineage
+        #: words instead of measured ones -- ~600 words on CT-LLM-SFT, ~658 on
+        #: SFT-DPO. That is a stated limitation of any slot-axis analysis over
+        #: currency prompts, not a reason to drop them from the population.
+        #: Dropping them would be a population change and is RH's to make.
+        #:
+        #: A future seat WILL find these refusals and read them as a defect.
+        #: They are not. Adding a rule to rescue them is re-opening a question
+        #: that was closed deliberately.
         refuse_path = os.path.join(os.path.dirname(st.path), "topup_refused.jsonl")
         #: **THIS FILE IS APPEND-ONLY AND OUTLIVES THE RUN THAT WROTE IT.**
         #: CT-LLM-SFT's held 57 records: 55 from the v3-sourced worklist, whose
