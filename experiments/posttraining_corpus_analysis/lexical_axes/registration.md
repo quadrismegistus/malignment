@@ -214,3 +214,27 @@ Applied to all five populations separately, never pooled.
 
 **RH predicted FAIL or NARROW PASS. This seat concurs. A clear PASS would be the
 surprise, and it is the outcome to check hardest.**
+
+---
+
+## A3 — 2026-08-18. WITHDRAWN: "the vector has no negative pole". It was a one-tailed filter on a two-tailed statistic.
+
+RH asked how there could be no base-leaning counts. There are 2,013.
+
+`k_word_auc.py:227` is `roc_auc_score(y, C[:, j])` -- **auc is DIRECTIONAL**, and
+the script's own effect form is `abs(auc - .5) > .15`. I filtered `auc > 0.568`,
+deleting the whole base-leaning half, then **reported the absence as independent
+corroboration of U_ladder's removal-stops gradient.** A filtering artifact
+promoted to evidence for another finding, in the direction that flattered it.
+
+`kill` is at auc 0.1115 on 92 models. Corrected weight is `auc - 0.5` two-sided;
+`run.py:vector()` now carries a refusing assert, since the one-sided form
+produced completely plausible output.
+
+**The verdict is unchanged** -- 4 FAIL, 1 NARROW, RH's prediction holds -- but two
+raw figures flip sign, so no number from the first run is citable.
+
+**Also recorded, per RH:** everything until now ran through shell heredocs and was
+not reproducible. All of it is in `run.py`. And the substrate is `twp_words`,
+next-token probabilities at fixed sites, NOT generations -- so this test crosses
+two grains and its null is weaker than a within-grain null would be.
