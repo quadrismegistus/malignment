@@ -244,24 +244,43 @@ def scan():
 def _maybe(p, source):
     """[{path, source, mtime}] if this file is includable, else [].
 
-    Inclusion is decided from the PAYLOAD's own stamp, never from the path: the
-    first record must carry the current `rule_version` and the two structural
-    keys. A file whose producer predates rule 3 is not a file to be fixed by
-    widening the gate.
+    Inclusion is decided from the PAYLOAD's own stamp, never from the path. A
+    file whose producer predates rule 3 is not a file to be fixed by widening the
+    gate.
+
+    **IT SCANS THE FILE; IT USED TO READ ONE LINE.** The stash is APPEND-ONLY and
+    a checkpoint measured under v3 and later under v4 has both in one file, v3
+    first. Deciding the whole file from record one therefore excluded every such
+    file entirely -- a sample of one, generalised to a file, at the exact place
+    the campaign's own rule about (model x environment) should have been ringing.
+
+    Measured when RH asked why mpt had failed to load "when we literally did mpt
+    yesterday": 7 models and **4,583 measured v4 cells were invisible to
+    ClickHouse**, among them Mistral-7B-Instruct-v0.1 (3,471) and both granite
+    arms. Nothing raised. The cells existed, the run reported success, the ingest
+    reported success, and the corpus simply did not contain them -- so the
+    endpoint-pair count I had been reporting was an undercount and I had no way
+    to see it.
+
+    Early-exits on the first matching record, so a file that qualifies costs one
+    line as before and only a file that does NOT qualify is read through.
     """
     try:
         with open(p, encoding="utf-8") as fh:
-            first = fh.readline()
-        if not first:
-            return []
-        r = json.loads(first)
-    except Exception:
+            for line in fh:
+                if not line.strip():
+                    continue
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                if (r.get("rule_version") == _RV["v"]
+                        and "rows" in r and "residual" in r):
+                    return [{"path": p, "source": source,
+                             "mtime": os.path.getmtime(p)}]
+    except Exception:                                           # noqa: BLE001
         return []
-    if r.get("rule_version") != _RV["v"]:
-        return []
-    if "rows" not in r or "residual" not in r:
-        return []
-    return [{"path": p, "source": source, "mtime": os.path.getmtime(p)}]
+    return []
 
 
 def _cells(path):
