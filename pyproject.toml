@@ -63,7 +63,7 @@ plots = ["plotnine"]
 # its one property -- but the REASON is different and the distinction matters:
 # an experiment dependency does NOT mean the package is incomplete without it.
 # `import malignment` must keep working in a venv that never installed this.
-corpora = ["pyarrow"]
+corpora = ["pyarrow", "datasets"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
