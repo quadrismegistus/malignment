@@ -205,6 +205,93 @@ and a line in the rubric saying the two questions are not the same.
 `lexical` ran pessimistic. Disagreements where the merged form KEEPS what Pass A
 dropped are expected. Disagreements the other way are the ones that matter.
 
+## RUN 7 -- Pass C shard 00. 2026-08-18
+
+The first real shard, and the one that changed the design. 3,120 passages, 3
+lineage pairs (Yi-1.5-9B, SmolLM2-360M, neo_7b), two blind coders, 140 agents at
+Opus high effort, 0 errors, 59 minutes. `wf_c9cbd955-a69`.
+
+MECHANICALLY CLEAN. 3,120 of 3,120, missing 0, stray 0. Spans 98.7% literal,
+1.2% recovered by normalising, **0.09% genuinely absent**.
+
+    narrative 0.867 | mode 0.850 | presence 0.870 | drift 0.785 | degree 0.839
+    told/shown 0.851 on 2,086 -- much better than the test shard's 0.753
+
+**THREE FINDINGS, EACH OF WHICH BREAKS SOMETHING.**
+
+**1. The declared primary statistic is at ceiling.** On narrative passages
+`NONE` is 5.3%: base 94.7% against aligned 94.3%. The narrative filter and the
+presence question are nearly the same measurement -- a coherent scene almost
+always has a character with a mental state in it. Presence was declared primary
+BEFORE any data, which was the right procedure and the wrong choice. All the
+variance is in TOLD 61.3% / SHOWN 33.4%.
+
+**Demoting it is a change of estimand after seeing data**, and presence gave
+p=1.0 while mode gives an effect, which is the shape of choosing the statistic
+that looked best. The defence is that the ceiling is a property of the FILTER
+and would hold whichever way the arms fell. That is a defence, not an exemption:
+both get reported, with the demotion dated to now.
+
+**2. Yield is 18%, not 28%, and it runs 4.5x across cells.**
+
+    Yi-1.5-9B-Chat  29.2%    neo_7b        12.0%
+    Yi-1.5-9B       28.6%    SmolLM2-360M   9.5%
+    neo_7b-instruct 22.4%    SmolLM2-Inst   6.5%
+
+At 714 drawn that is 47 to 208 clean per cell, not a uniform 150, and the small
+models cannot reach 150 at any size the corpus supports (6.5% needs 2,300 drawn
+and 2,000 exist).
+
+**3. The pilot's F13 relation does NOT replicate.** RUN 5 had SHOWN at 29.1% in
+HOLDS against 8.0% in SHIFTS. On the narrative subset it is 33.2% against 41.0%
+-- reversed, though SHIFTS is 39 passages. RUN 5 computed it over ALL passages
+including non-narrative, and conditioning on narrative removes what drove it. It
+was probably an artifact of the passages this design now excludes.
+
+### The first real signal, on the statistic that survives
+
+    pair            n(b/a)     SHOWN|interior      delta
+    Yi-1.5-9B      153/156     44.4 -> 40.7        -3.7
+    neo_7b          64/120     31.7 -> 24.1        -7.6
+    SmolLM2-360M     51/35     26.6 -> 27.7        +1.1
+
+Aligned TELLS more and SHOWS less in two of three. Mean -3.4pp, SD 4.4pp,
+d=0.78 -> at 29 pairs that projects to power 0.98 and an MDE of 2.32pp. **But
+the SD is three numbers**: its 95% CI is 2.5 to 19.2pp, and at 19.2pp the power
+is 0.15. Between-pair base levels vary more (26.6-44.4%, SD 9.2pp) and pairing
+cancels that, so only the delta SD matters.
+
+### COST, and the reason the design changed
+
+8.92M tokens for 6,240 codings -- **1,430 each**, so the remaining 26 pairs are
+~80M. RH: *"that one shard took up 10-20% of my weekly usage."*
+
+**82% of the spend read passages that turned out non-narrative.** Opus at high
+effort, twice, to produce a `false`. RH: *"this is why I wanted to run Pass A
+before Pass B!"* -- correct, and the reason it got merged is that I evaluated
+the merge on whether agreement degraded with six fields (it did not) when the
+question was whether it makes us pay Opus rates for triage (it does). Agreement
+was never the constraint.
+
+## RUN 8 -- Haiku filter calibration. 2026-08-18, IN FLIGHT
+
+Haiku, single-coded, one field, over the SAME 3,210 passages RUN 7 coded, asking
+the `narrative` question VERBATIM from `passC_rubric.md` so it is the same
+construct and not a paraphrase. 33 agents. `wf_7a638e12-336`.
+
+    validation set   3,210 passages, 579 narrative (18%), 2,631 not
+    ground truth     the two Opus coders; 137 where they split are reported apart
+
+**The acceptance test is two-sided and the second half is the real one.** A
+false positive is free -- Opus reads one extra passage. A false negative
+silently removes a passage from the population, and base output is more
+degenerate, so a filter that struggles on hard passages drops base ones more
+often and MANUFACTURES an arm effect in the direction of the hypothesis. So:
+recall high enough to keep the population, AND recall equal across arms, tested
+by Fisher exact on kept/dropped by arm.
+
+`run.py --filtercal <output>`.
+
 ---
 
 # STANDING RULES, across every run

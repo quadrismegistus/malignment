@@ -1362,6 +1362,106 @@ def passc_report():
                      100 * st.mean(a for b, a, _, _ in R.values()), 100 * st.mean(d)))
 
 
+def filtercal(src=None):
+    """Did Haiku's triage match the Opus coders' `narrative` judgement?
+
+    **The number that decides the design is the FALSE-NEGATIVE RATE PER ARM.**
+    A false positive is free -- Opus reads one extra passage and codes it out.
+    A false negative silently removes a passage from the population, and base
+    output is more degenerate than aligned output, so a filter that struggles
+    on hard passages drops base ones more often. That would manufacture an arm
+    effect in exactly the direction of the hypothesis.
+
+    So the acceptance test is two-sided: recall high enough to keep the
+    population, AND recall equal across arms. 90% overall that is 95% aligned
+    against 85% base is worse than useless here.
+    """
+    import glob, collections, math
+    import pyarrow.parquet as pq
+    from scipy import stats
+    P = os.path.join(PASSC, "filtercal", "haiku.json")
+    if src:
+        raw = json.load(open(src, encoding="utf-8"))
+        r = raw.get("result", raw)
+        if isinstance(r, str):
+            r = json.loads(r)
+        json.dump(r, open(P, "w", encoding="utf-8"), indent=0, sort_keys=True)
+        print("saved %d judgements | stray %s | missing %s -> %s"
+              % (len(r["narrative"]), r.get("_stray"), len(r.get("_missing", [])), P))
+    H = json.load(open(P, encoding="utf-8"))["narrative"]
+    t = pq.read_table(PASSC_SAMPLE).to_pydict()
+    K = {i: (m, a) for i, m, a in zip(t["id"], t["model"], t["arm"])}
+    A, B = {}, {}
+    for f in sorted(glob.glob(os.path.join(PASSC, "codings", "*.json"))):
+        r = json.load(open(f, encoding="utf-8"))
+        A.update(r.get("A", {})); B.update(r.get("B", {}))
+    ids = sorted(i for i in H if i in A and i in B)
+    both = [i for i in ids if A[i]["narrative"] == B[i]["narrative"]]
+    split = [i for i in ids if A[i]["narrative"] != B[i]["narrative"]]
+    print("HAIKU TRIAGE vs THE OPUS CODERS -- %s passages\n" % format(len(ids), ","))
+    print("  Opus coders agree on %s (%.1f%%), split on %d"
+          % (format(len(both), ","), 100 * len(both) / len(ids), len(split)))
+
+    def tab(sel, lbl):
+        tp = sum(1 for i in sel if A[i]["narrative"] and H[i])
+        fn = sum(1 for i in sel if A[i]["narrative"] and not H[i])
+        fp = sum(1 for i in sel if not A[i]["narrative"] and H[i])
+        tn = sum(1 for i in sel if not A[i]["narrative"] and not H[i])
+        rec = tp / (tp + fn) if tp + fn else float("nan")
+        pre = tp / (tp + fp) if tp + fp else float("nan")
+        print("  %-26s n=%-6s narrative %-5d | RECALL %5.1f%%  precision %5.1f%%"
+              % (lbl, format(len(sel), ","), tp + fn, 100 * rec, 100 * pre))
+        print("      %-24s haiku keeps %s of %s (%.0f%%) -> Opus would read that many"
+              % ("", format(tp + fp, ","), format(len(sel), ","),
+                 100 * (tp + fp) / len(sel)))
+        return tp, fn, fp, tn, rec
+
+    print("\n=== ON THE %s WHERE BOTH OPUS CODERS AGREE ===" % format(len(both), ","))
+    tp, fn, fp, tn, rec = tab(both, "overall")
+    print("\n=== THE TEST THAT MATTERS: RECALL BY ARM ===")
+    per = {}
+    for arm in ("base", "aligned"):
+        sel = [i for i in both if K[i][1] == arm]
+        per[arm] = tab(sel, arm)
+    rb, ra = per["base"][4], per["aligned"][4]
+    nb, na = per["base"][0] + per["base"][1], per["aligned"][0] + per["aligned"][1]
+    print("\n  recall base %.1f%% vs aligned %.1f%%  -> gap %+.1fpp"
+          % (100 * rb, 100 * ra, 100 * (ra - rb)))
+    if nb and na:
+        tb = stats.fisher_exact([[per["base"][0], per["base"][1]],
+                                 [per["aligned"][0], per["aligned"][1]]])[1]
+        print("  Fisher exact on the 2x2 of kept/dropped by arm: p=%.4f" % tb)
+        print("  %s" % ("ACCEPTABLE -- no detectable differential" if tb > 0.05
+                        else "*** DIFFERENTIAL. This filter would manufacture an arm effect. ***"))
+
+    print("\n=== BY MODEL (a cheap filter fails first where the prose is worst) ===")
+    print("  %-40s %-8s %6s %8s" % ("model", "arm", "narr", "recall"))
+    for m, a in sorted({K[i] for i in both}):
+        sel = [i for i in both if K[i] == (m, a)]
+        tp2 = sum(1 for i in sel if A[i]["narrative"] and H[i])
+        fn2 = sum(1 for i in sel if A[i]["narrative"] and not H[i])
+        print("  %-40s %-8s %6d %7s" % (m.split("/")[-1][:40], a, tp2 + fn2,
+              ("%.1f%%" % (100 * tp2 / (tp2 + fn2))) if tp2 + fn2 else "-"))
+
+    if split:
+        k = sum(1 for i in split if H[i])
+        print("\n=== THE %d WHERE THE OPUS CODERS DISAGREED ===" % len(split))
+        print("  haiku says narrative on %d of %d (%.0f%%) -- these are the genuinely"
+              % (k, len(split), 100 * k / len(split)))
+        print("  hard ones; a filter tracking the construct should sit near 50%%.")
+
+    print("\n=== WHAT IT WOULD COST ===")
+    keep = (tp + fp) / len(both)
+    rem = 27820
+    print("  26 pairs remaining = %s passages" % format(rem, ","))
+    print("  haiku keeps %.0f%% -> Opus codes %s (single) at ~1,430 tok = %.1fM Opus tokens"
+          % (100 * keep, format(int(rem * keep), ","), rem * keep * 1430 / 1e6))
+    print("  against %.1fM if Opus double-codes everything, a %.1fx saving"
+          % (rem * 2 * 1430 / 1e6, (rem * 2) / (rem * keep)))
+    print("  and it loses %.1f%% of the narrative population to false negatives."
+          % (100 * (1 - rec)))
+
+
 def passc_recover(write=False):
     """Rebuild coding files from the workflow JOURNALS in ~/.claude.
 
@@ -1635,6 +1735,7 @@ if __name__ == "__main__":
     ap.add_argument("--passc-save")
     ap.add_argument("--passc-recover", action="store_true")
     ap.add_argument("--passc", action="store_true")
+    ap.add_argument("--filtercal", nargs="?", const="", default=None)
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--batch", type=int, default=45)
     ap.add_argument("--per-cell", type=int, default=714)
@@ -1684,5 +1785,7 @@ if __name__ == "__main__":
         passc_recover(write=a.write)
     elif a.passc:
         passc_report()
+    elif a.filtercal is not None:
+        filtercal(a.filtercal or None)
     else:
         ap.print_help()
