@@ -765,6 +765,51 @@ def _pairs():
 #: Keyed on `rule_version` and `dict_sha` so a rule change cannot be served from
 #: a pool computed under the old one -- the failure that would otherwise be
 #: invisible, since a stale pool is well-formed.
+#: **THE SLOT PATH PINS ITS RULE EXPLICITLY (RH, 2026-08-18).** It reached v3 by
+#: importing `twp` and nothing else, which is correct and accidental: the label
+#: came from a module constant while the instrument came from whichever module
+#: happened to be imported, and those are two independent choices that agreed.
+#:
+#: malign hit the same shape in malign-logits ([6456]) -- a shared loader printed
+#: `rule_version 3` on every caller while a v4 run stamped its cells 4. Their fix
+#: is the one copied here: **the version selects the module, so nothing can pick
+#: a version without also picking where the numbers come from.**
+#:
+#: This matters more here than it looks. `screened_by` on every saved item, and
+#: both cache keys, read this. The corpus ALREADY holds two screening
+#: provenances that no item declares (round3 on Llama-3.1-8B, the rest on
+#: SmolLM3), so a second silent instrument change is the one thing this data
+#: cannot absorb.
+SLOT_RULE_VERSION = 3
+
+
+def _slot_rule():
+    """The rule module the slot path uses, chosen with its version. -> module
+
+    Lazy import so selecting v3 never loads v4. The assert is the point: a
+    module whose `RULE_VERSION` disagrees with the version that selected it is
+    exactly the mislabelling this exists to prevent, and it fires whether anyone
+    remembers this comment or not.
+    """
+    if SLOT_RULE_VERSION == 3:
+        from . import twp as m
+    elif SLOT_RULE_VERSION == 4:
+        from . import twp_v4 as m
+    else:
+        raise ValueError(
+            "SLOT_RULE_VERSION is %r; the slot path knows 3 and 4. Add the "
+            "module here rather than importing it at a call site, so the "
+            "version and the numbers cannot be chosen separately."
+            % (SLOT_RULE_VERSION,))
+    if getattr(m, "RULE_VERSION", None) != SLOT_RULE_VERSION:
+        raise AssertionError(
+            "%s.RULE_VERSION is %r but the slot path selected %r. Every "
+            "`screened_by` block and both cache keys read this, so the label "
+            "and the instrument have diverged."
+            % (m.__name__, getattr(m, "RULE_VERSION", None), SLOT_RULE_VERSION))
+    return m
+
+
 _SCREEN_CACHE = {}
 _SCREEN_CACHE_LOCK = threading.Lock()
 #: **THE AXIS IS THE WHOLE REMAINING COST ONCE SCREENING IS CACHED.** Measured
@@ -786,8 +831,8 @@ _SCREEN_CACHE_MAX = int(os.environ.get("MALIGNMENT_SCREEN_MAX", 512))
 
 def _screen_cached(prompt, pair_base, k, compute):
     """Memoise `_slot` for `_SCREEN_TTL` seconds. -> (payload, hit)"""
-    from . import twp
-    key = (prompt, pair_base, int(k), twp.RULE_VERSION, twp.dict_sha())
+    _T = _slot_rule()
+    key = (prompt, pair_base, int(k), _T.RULE_VERSION, _T.dict_sha())
     #: `_monotonic`, not wall clock: a TTL measured against a clock that can step
     #: backwards over an NTP correction would serve a stale pool for the size of
     #: the step, and nothing about the payload would look wrong.
@@ -829,6 +874,7 @@ def _slot(prompt, pair_base, k):
     either id. This route writes nothing at all.
     """
     from . import twp, roster
+    _T = _slot_rule()
     from .checkpoint import Checkpoint
 
     #: MEMBERSHIP, not a pattern -- the same rule as every other parameter here.
@@ -912,8 +958,8 @@ def _slot(prompt, pair_base, k):
     if not n_ok:
         return {"prompt": prompt, "models": model_ids, "n_models": len(model_ids),
                 "n_words": 0, "shown": 0, "words": [], "residual": None,
-                "rule_version": twp.RULE_VERSION, "dict_sha": twp.dict_sha(),
-                "theta": twp.THETA, "skipped": skipped or "no model produced a cell",
+                "rule_version": _T.RULE_VERSION, "dict_sha": _T.dict_sha(),
+                "theta": _T.THETA, "skipped": skipped or "no model produced a cell",
                 "conservation": None}
 
     #: DIVIDED BY THE MODELS THAT ANSWERED, not by the models asked for. A
@@ -962,9 +1008,9 @@ def _slot(prompt, pair_base, k):
         #: reader has to work out whether anything depends on it.
         "pair": {"base": pair_base, "endpoint": ep[pair_base],
                  "n_steps": pa.get("n_steps"), "ops": pa.get("ops") or []},
-        "rule_version": twp.RULE_VERSION,
-        "dict_sha": twp.dict_sha(),
-        "theta": twp.THETA,
+        "rule_version": _T.RULE_VERSION,
+        "dict_sha": _T.dict_sha(),
+        "theta": _T.THETA,
         "skipped": skipped,
     }
 
@@ -990,9 +1036,9 @@ def _axis_cached(prompt, naughty, nice, compute):
     caller error `build_item` should still see rather than one this silently
     repairs.
     """
-    from . import twp
+    _T = _slot_rule()
     key = (prompt, tuple(sorted(naughty or ())), tuple(sorted(nice or ())),
-           twp.RULE_VERSION, twp.dict_sha())
+           _T.RULE_VERSION, _T.dict_sha())
     now = _monotonic()
     with _AXIS_CACHE_LOCK:
         hit = _AXIS_CACHE.get(key)

@@ -506,6 +506,29 @@ def md_axis(prompt, g, n, r):
                 "(%.4f) passed its floor (%.2f); that is not the problem."
                 % (t_ - c_, t_, t_ - c_, "" if t_ - c_ == 1 else "s", g_, f_))
     L += ["## 1. Gate — `separates`", "", "> " + head]
+    #: **THE MASSES GO HERE, UNCONDITIONALLY** (opus-sexual-2, 2026-08-18). The
+    #: brief's central criterion is "do both of my poles hold real mass"; the
+    #: numbers were in the JSON and the report printed none of them. That agent
+    #: hand-summed the `p` column for every candidate tagging and got 0.0665
+    #: against a recorded 0.0698 -- harmless there, and it was choosing between
+    #: two poles on exactly this quantity while working from its own arithmetic.
+    #:
+    #: I had added these to the payload and then surfaced them ONLY through the
+    #: one-sided warning, which fires on 6 of 96 items. A number reachable only
+    #: via its own alarm is not available to the author who needs it to avoid
+    #: tripping the alarm.
+    _nm, _cm = r.get("naughty_mass"), r.get("nice_mass")
+    _shr = r.get("share")
+    if isinstance(_nm, (int, float)) and isinstance(_cm, (int, float)):
+        L += ["",
+              _table([("naughty", "%.4f" % _nm,
+                       "%.0f%%" % (100 * _shr) if isinstance(_shr, (int, float)) else "—"),
+                      ("nice", "%.4f" % _cm,
+                       "%.0f%%" % (100 * (1 - _shr)) if isinstance(_shr, (int, float)) else "—")],
+                     ["pole", "mass", "of tagged"]), "",
+              "Mass on this pair, over the tagged words only. **Both poles need "
+              "real mass**: displacement needs somewhere to arrive, so two poles "
+              "at 0.05 and 0.04 beat one at 0.30 against one at 0.002."]
     if not ok:
         L += ["", "**The axis cannot see the contrast you tagged**, so nothing below "
               "means anything. %s" % (sep.get("reason") or ""), "",
@@ -575,9 +598,12 @@ def md_axis(prompt, g, n, r):
                 "keeps failing, say so in your report rather than saving around it."]
 
     cc = r.get("cross_corpus") or {}
+    #: Accumulated separately so the Warnings block can be emitted BEFORE this
+    #: 24-line reference table. See the note at the `if warn:` block below.
+    TAIL = []
     _miss = _did_not_run(2, "What this axis selects across other frames", cc)
     if _miss:
-        L += _miss
+        TAIL += _miss
     if cc and not cc.get("error"):
         hi, lo = cc.get("naughty_end") or [], cc.get("nice_end") or []
         rows = [(("`%s` %+.3f *(%d)*" % (hi[i]["word"], hi[i]["s"], hi[i]["prompts"]))
@@ -585,7 +611,7 @@ def md_axis(prompt, g, n, r):
                  ("`%s` %+.3f *(%d)*" % (lo[i]["word"], lo[i]["s"], lo[i]["prompts"]))
                  if i < len(lo) else "")
                 for i in range(max(len(hi), len(lo)))]
-        L += ["", "## 2. What this axis selects across %d OTHER frames"
+        TAIL += ["", "## 2. What this axis selects across %d OTHER frames"
               % cc.get("scored_prompts", 0), "",
               _table(rows, ["toward naughty", "toward nice"]), "",
               "*(n)* is how many frames the word appears in; each is centred on its "
@@ -763,8 +789,20 @@ def md_axis(prompt, g, n, r):
         #: whose two words point in opposite directions genuinely has no single
         #: direction. Rare, serious, and it names no word to delete -- it says the
         #: pole is incoherent, and the fix for that is retagging, not shrinking.
+    #: **WARNINGS MOVE ABOVE THE TABLE** (opus-sexual-2, 2026-08-18). Cutting the
+    #: report to two sections did not shorten the distance from the gate to the
+    #: warnings, because section 2 simultaneously went from 6 rows to 20. That
+    #: agent truncated its reads at line 32, missed the block twice, and SAVED an
+    #: item carrying two `min_pair < 0` warnings it never saw -- catching them
+    #: only on a later sweep, then re-saving with `--overwrite`.
+    #:
+    #: Its diagnosis is right and is the reason this is an ordering fix rather
+    #: than a louder heading: the gate verdict and the warnings both answer "does
+    #: this instrument work", and a 24-line reference table had been inserted
+    #: between them. Reference material goes after the verdicts.
     if warn:
         L += ["", "## Warnings", ""] + ["- " + w for w in warn]
+    L += TAIL
 
     L += ["", "## Next", ""]
     if ok:
