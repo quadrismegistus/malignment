@@ -637,6 +637,137 @@ def passb_report():
     print("\n  -> %s" % os.path.join(RESULTS, "passB_pilot.csv"))
 
 
+def combined_build(n=60, seed=20260819):
+    """Smoke set for a MERGED Pass A+B form: random over ALL 880, not survivors.
+
+    RH: *"do we need all the Pass A questions? can't we just ask 'is this
+    narrative throughout, no interruptions?'"* -- testable, but only against
+    passages that FAIL. The 190 Pass B passages are all survivors, so they
+    cannot test a filter; this draws from the whole Pass A sample, where the
+    survival rate is ~32%.
+
+    Text is re-fetched CLEAN, which means the comparison against Pass A's
+    composite decision carries one known confound: Pass A read escaped text
+    (literal \\n in 82.4%), and escapes push `lexical` toward `mangled`. So
+    Pass A's filter is conservative, and disagreements in the direction of the
+    merged form keeping MORE passages are expected rather than alarming.
+    """
+    import random, collections
+    K = json.load(open(os.path.join(RESULTS, "passA_key.json"), encoding="utf-8"))
+    R = json.load(open(PASSA, encoding="utf-8"))
+    A, B = R["A"], R["B"]
+    zh = lambda s: any("一" <= c <= "鿿" for c in s)
+    pool = [i for i in sorted(K) if not zh(K[i]["prompt"])]
+    random.seed(seed)
+    pick = sorted(random.sample(pool, n))
+
+    def readable(i):
+        return (A[i]["lexical"] == "clean" == B[i]["lexical"]
+                and A[i]["semantic"] == "means" == B[i]["semantic"])
+
+    #: LENIENT was the Pass B pilot's filter and it was WRONG. It admitted
+    #: `frame=furniture` -- web paratext, comment widgets, bylines, post dates --
+    #: on my judgement that a heading above a scene is still a scene. RH:
+    #: *"I thought we agreed to give Pass B only entirely clean narrative text."*
+    #: 21% of the Pass B set carried furniture, base-heavy (27% of base against
+    #: 16% of aligned), and removing it cut the drift arm-difference from +17.4pp
+    #: to +5.4pp. The call is recorded here rather than left in a docstring
+    #: because it changed a reported number.
+    def survives(i):
+        return readable(i) and A[i]["frame"] == "none" == B[i]["frame"]
+
+    def survives_lenient(i):
+        return (readable(i) and A[i]["frame"] in ("none", "furniture")
+                and B[i]["frame"] in ("none", "furniture"))
+    print("English Pass A passages: %d | drawn %d (seed %d)" % (len(pool), n, seed))
+    print("  STRICT (frame=none)      keeps %d, drops %d"
+          % (sum(1 for i in pick if survives(i)), sum(1 for i in pick if not survives(i))))
+    print("  lenient (+furniture)     keeps %d  <- the Pass B pilot's filter, superseded"
+          % sum(1 for i in pick if survives_lenient(i)))
+    print("  arms: %s" % dict(collections.Counter(K[i]["arm"] for i in pick)))
+    texts = fetch_clean([K[i] for i in pick])
+    out = {}
+    for j, (i, txt) in enumerate(zip(pick, texts)):
+        out["c%03d" % j] = {"fragment": K[i]["prompt"], "continuation": txt,
+                            "_src": i, "_model": K[i]["model"], "_arm": K[i]["arm"],
+                            "_passA_keep": survives(i),
+                            "_passA": {"lexical": A[i]["lexical"], "semantic": A[i]["semantic"],
+                                       "frame": A[i]["frame"]}}
+    p = os.path.join(RESULTS, "combined_smoke.json")
+    json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print("  extracted %d clean -> %s" % (len(out), p))
+
+
+def combined_report():
+    """Does one narrative question reproduce Pass A's three-field filter?"""
+    import itertools, collections, statistics as st
+    R = json.load(open(os.path.join(RESULTS, "combined_codings.json"), encoding="utf-8"))
+    K = json.load(open(os.path.join(RESULTS, "combined_smoke.json"), encoding="utf-8"))
+    A, B = R["A"], R["B"]
+    ids = sorted(i for i in A if i in B and i in K)
+    print("MERGED FORM SMOKE -- %d passages, two blind coders\n" % len(ids))
+
+    def kappa(f, lv):
+        obs = sum(1 for i in ids if A[i][f] == B[i][f]) / len(ids)
+        exp = sum((sum(1 for i in ids if A[i][f] == v) / len(ids)) *
+                  (sum(1 for i in ids if B[i][f] == v) / len(ids)) for v in lv)
+        return obs, exp, (obs - exp) / (1 - exp) if exp < 1 else float("nan")
+
+    print("=== AGREEMENT, six fields in one form ===")
+    print("  (Pass B alone, n=190, gave mode 0.893 drift 0.865 degree 0.837)")
+    for f, lv in (("narrative", (True, False)), ("why", ("", "UNREADABLE", "NOT_A_STORY", "INTERRUPTED")),
+                  ("mode", ("NONE", "TOLD", "SHOWN")),
+                  ("drift", ("HOLDS", "SHIFTS", "UNMOORED")), ("degree", (0, 1, 2, 3))):
+        if f not in A[ids[0]]:
+            continue
+        o, e, k = kappa(f, lv)
+        print("  %-10s raw %5.1f%%  chance %5.1f%%  kappa %.3f" % (f, 100*o, 100*e, k))
+
+    print("\n=== DOES ONE QUESTION REPRODUCE THE THREE-FIELD FILTER? ===")
+    cells = collections.Counter()
+    for i in ids:
+        for M in (A, B):
+            cells[(bool(M[i]["narrative"]), bool(K[i]["_passA_keep"]))] += 1
+    n = sum(cells.values())
+    print("  %-22s %12s %12s" % ("", "Pass A KEEP", "Pass A DROP"))
+    for v in (True, False):
+        print("  %-22s %12d %12d" % ("merged " + ("YES" if v else "NO "),
+                                     cells[(v, True)], cells[(v, False)]))
+    agree = (cells[(True, True)] + cells[(False, False)]) / n
+    print("\n  agreement %.1f%%" % (100*agree))
+    print("  merged keeps %.1f%% | Pass A keeps %.1f%%"
+          % (100*(cells[(True, True)] + cells[(True, False)])/n,
+             100*(cells[(True, True)] + cells[(False, True)])/n))
+
+    print("\n  WHERE THEY DIFFER, what did Pass A see?")
+    for mv, pv, lbl in ((True, False, "merged YES, Pass A DROP"),
+                        (False, True, "merged NO,  Pass A KEEP")):
+        sub = [(i, M) for i in ids for M in (A, B)
+               if bool(M[i]["narrative"]) == mv and bool(K[i]["_passA_keep"]) == pv]
+        if not sub:
+            continue
+        c = collections.Counter()
+        for i, M in sub:
+            pa = K[i]["_passA"]
+            c[(pa["lexical"], pa["semantic"], pa["frame"])] += 1
+        print("    %s (%d):" % (lbl, len(sub)))
+        for k2, v in c.most_common(5):
+            print("      lexical=%-8s semantic=%-6s frame=%-9s  %d" % (k2 + (v,)))
+
+    print("\n=== `why` AGAINST PASS A's REASON ===")
+    x = collections.defaultdict(collections.Counter)
+    for i in ids:
+        for M in (A, B):
+            if M[i]["narrative"]:
+                continue
+            pa = K[i]["_passA"]
+            reason = ("UNREADABLE" if pa["lexical"] != "clean" or pa["semantic"] != "means"
+                      else "FRAME" if pa["frame"] in ("task", "assistant") else "(Pass A kept it)")
+            x[M[i].get("why", "")][reason] += 1
+    for w in sorted(x):
+        print("  merged why=%-12s -> %s" % (w, dict(x[w])))
+
+
 def roles():
     """Quintuplet role per prompt, from the DECLARED field. Not reconstructed.
 
@@ -768,6 +899,8 @@ if __name__ == "__main__":
     ap.add_argument("--passb-build", action="store_true")
     ap.add_argument("--passb-save")
     ap.add_argument("--passb", action="store_true")
+    ap.add_argument("--combined-build", action="store_true")
+    ap.add_argument("--combined", action="store_true")
     ap.add_argument("--save")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--exits", action="store_true")
@@ -794,5 +927,9 @@ if __name__ == "__main__":
         passb_save(a.passb_save)
     elif a.passb:
         passb_report()
+    elif a.combined_build:
+        combined_build()
+    elif a.combined:
+        combined_report()
     else:
         ap.print_help()
