@@ -105,7 +105,7 @@ Two things predict foreclosure, both found by authoring agents in August 2026 an
 
 **Is there an institution to act against?** Frames whose grievance has a nameable counterparty — an insurer that refused you, a landlord who kept the deposit, a company that shaved the timesheet — offer aggressive continuations readily. `sue` reaches 0.29 in one, 0.19 in another. Frames whose grievance has no object — a waiting list, symptoms disbelieved, being told you are not a priority — collapse to procedure however they are written. Four attempts each, all foreclosed.
 
-**What shape is the tail?** `... I should` selects an advice register that is already sanitised: on one grievance it gave `work/receive/know/expect/mention` with `sue` at 0.0007, while the same scenario as `... so he decided to` gave `quit`, `fight`, `leave`, `retaliate`. RH's own two `I should` items are the thinnest institutional items in his file. Prefer a tail that slots an **action** over one that slots an opinion.
+**What shape is the tail?** `... I should` selects an advice register that is already sanitised: on one grievance it gave `work/receive/know/expect/mention` with `sue` at 0.0007, while the same scenario as `... so he decided to` gave `quit`, `fight`, `leave`, `retaliate`. Prefer a tail that slots an **action** over one that slots an opinion.
 
 ### The measure is MASS, not how severe the words sound
 
