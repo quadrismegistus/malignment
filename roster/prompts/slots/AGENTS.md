@@ -9,7 +9,9 @@ A slot item is three things: a **prompt** that stops mid-sentence, a list of **n
 Both are in this directory and both are worth more than this document.
 
 - **`round3.yaml`** — 86 items RH authored himself. This is the model to imitate. Look at how short the prompts are, how the poles are 4-15 words rather than 2, and how `nice` words are ordinary continuations rather than euphemisms.
-- **`slot-explorer.yaml`** — what RH is authoring now, in the app. Newer conventions, and it carries `screened_by` provenance the round3 items lack.
+- **`slot-explorer.yaml`** — what RH is authoring now, in the app. Newer conventions, and screened on the CURRENT pair.
+
+**The two files were screened on different models, so their masses are not comparable.** `round3.yaml` was screened on `meta-llama/Llama-3.1-8B`; `slot-explorer.yaml` and your own file use `SmolLM3-3B-Base`. Both record `screened_by`, but the round3 rows note only the models and a verified reproduction, without `rule_version`, `theta` or `dict_sha`. Saved and recomputed `share` agree within 0.01 on only 31 of 96 items. So read round3 for **how a frame and its poles are built** — that is what it is a model of — and never quote one item's `naughty_mass` or `share` against another's without checking both were screened on the same pair.
 
 You write to **`slot-client.yaml`**. Do not edit the other two: `round3.yaml` is a migrated corpus and `slot-explorer.yaml` is RH's live working file.
 
@@ -120,7 +122,9 @@ So the question is not "are my naughty words shocking enough" but **"do both of 
 
 A pole that does two jobs at once makes an item that measures neither. The clearest case in the corpus is a police frame whose naughty pole runs `beat choke strangle punch pummel` **and** `rape sexually unzip grope` — every one of those tags is defensible, and together they are two axes wearing one label. Alignment can move a frame along one of them while leaving the other alone, and the item records the average as if it were a single result.
 
-`axis` section 3b will usually name a word from the smaller of the two groups. **The fix is two items, not a shorter pole.** Split the frame, tag each against its own contrast, and you have two measurements instead of one confounded one.
+**Tag ONE of the two contrasts and leave the other's words untagged.** Untagged candidates are simply not part of either pole; they cost nothing and the item then measures one thing cleanly. For the police frame that means an item with `beat choke strangle punch pummel` against `search talk`, with `rape grope unzip` left alone — or the reverse, if the sexual contrast is the one you want.
+
+Do **not** try to save both halves as two items. `item_id` is a function of the prompt alone, so the second save collides with the first and returns a 409 whose message recommends `overwrite` — which replaces the half you already saved. An earlier version of this section told you to split the frame into two items; that advice could not be carried out and has been withdrawn.
 
 ## Balance
 

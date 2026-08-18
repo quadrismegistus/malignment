@@ -688,7 +688,25 @@ HEADER = """\
 # ONE ENTRY PER item_id, IN FIRST-SAVE ORDER. Re-saving an item REPLACES its
 # entry in place rather than appending a second one, so this file is current
 # state and stays reviewable. Every version ever written, including the
-# replaced ones, is in `journal.jsonl` beside it.
+# replaced ones, is in the append-only journal at
+# `~/malignment-data/slots/journal.jsonl` -- OUTSIDE this checkout, because
+# measured data does not enter the public repo. It is shared by every writer,
+# so one file answers "what happened to this item" whichever tool wrote it.
+#
+# This line used to say "beside it", which stopped being true when the yaml
+# moved into the repo on 2026-08-17 and the journal correctly did not. An
+# authoring agent looked next to the yaml, found nothing, and filed a missing
+# journal; there was never one missing.
+#
+# MASSES ARE PER-RUN AND PAIR-SPECIFIC. `naughty_mass`, `nice_mass` and `share`
+# record the screening run the tags were made against -- that is the guarantee
+# `save` re-screens to keep -- so they are NOT comparable across items screened
+# on different pairs. This corpus holds two: 69 items on
+# `meta-llama/Llama-3.1-8B` (which record `models` and a verified `reproduces`
+# block, but no `rule_version`, `theta` or `dict_sha`) and the rest on
+# `SmolLM3-3B-Base` at rule 3. Saved and recomputed `share` agree within 0.01
+# on only 31 of 96 items, median drift 0.061, max 0.501. Read `screened_by`
+# before comparing any mass across rows.
 #
 # `naughty` and `nice` are YAML LISTS, mass-ordered. The archive's
 # `round3_slots.yaml` wrote them as comma-delimited STRINGS, which parse as one
