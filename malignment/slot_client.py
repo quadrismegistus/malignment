@@ -670,6 +670,39 @@ def md_axis(prompt, g, n, r):
     coh = r.get("coherence") or {}
 
     warn = []
+    #: **THE SERVER'S OWN FLAGS WERE NEVER PRINTED** (opus-inst-labor, 2026-08-18,
+    #: independently hit by opus-inst-health). `Axis.stats` returns
+    #: `flags: ["MISTAGGED"]` when `purity < PURITY_FLOOR` and `POLE-OF-ONE`
+    #: below `MIN_POLES`; this report has never read `r["flags"]`. So a mistagged
+    #: item showed a clean PASS and the flag existed only in `--json`.
+    #:
+    #: Its words, and they are the indictment: "An agent working from the report
+    #: alone would have saved item 3 with `complain` mistagged and never known.
+    #: Either print `flags` ... or stop telling agents the report carries
+    #: warnings." The brief said the report prints warnings; it printed the
+    #: client-computed ones and silently dropped the server's.
+    #:
+    #: I hoisted the Warnings block above the table this morning on the same
+    #: agent-reported evidence and did not check that the block contained
+    #: everything called a warning. Moving a container is not auditing it.
+    for _f in (r.get("flags") or []):
+        if _f == "MISTAGGED":
+            warn.append(
+                "**MISTAGGED — purity %.2f.** At least one tagged word lands on "
+                "the other pole's side of your own axis%s. Either it belongs "
+                "there, or the pole is mixed. **Retag; do not delete it to clear "
+                "this** — if the word is a second contrast, leave it untagged "
+                "rather than removing it from the frame."
+                % (r.get("purity") or 0.0,
+                   (": " + ", ".join("`%s`" % w for w in (r.get("defectors") or [])))
+                   if r.get("defectors") else ""))
+        elif _f == "POLE-OF-ONE":
+            warn.append(
+                "**POLE-OF-ONE.** A pole is below `MIN_POLES`, so the whole "
+                "direction rests on one word's neighbourhood.")
+        else:
+            warn.append("**%s.** Flag raised by the axis; see `--json`." % _f)
+
     #: **ONE-SIDEDNESS. THE THRESHOLD IS A JUDGEMENT AND THE FIRST ATTEMPT TO
     #: CALIBRATE IT WAS AN ARTIFACT.** Recorded because the artifact was
     #: convincing and would be reconstructed by anyone repeating the exercise.
@@ -891,10 +924,34 @@ def _main(argv):
             #: returned in the response and was being thrown away.
             _it = out.get("item") or {}
             _ax = _it.get("axis") or {}
-            _rows = [("naughty", "%.4f" % (_it.get("naughty_mass") or 0.0),
-                      " ".join(_it.get("naughty") or [])[:44]),
-                     ("nice", "%.4f" % (_it.get("nice_mass") or 0.0),
-                      " ".join(_it.get("nice") or [])[:44])]
+            #: **NO SILENT TRUNCATION** (opus-inst-welfare, 2026-08-18). This
+            #: was `[:44]`, which cut `picket` off the end of a saved pole with
+            #: no ellipsis: the agent learned the word had been recorded only by
+            #: opening the yaml. A confirmation that drops part of what it is
+            #: confirming reads as complete, which is the same defect as a
+            #: figure caption cut at the panel edge -- the loss exists only in
+            #: the rendered output and no assert can see it.
+            #:
+            #: Wrapped rather than shortened: the poles are the thing being
+            #: confirmed, so the fix is to show all of them.
+            def _wrapped(ws, width=44):
+                out, line = [], ""
+                for w in ws:
+                    if line and len(line) + 1 + len(w) > width:
+                        out.append(line); line = w
+                    else:
+                        line = (line + " " + w) if line else w
+                if line:
+                    out.append(line)
+                return out or [""]
+
+            _rows = []
+            for _pole, _mk in (("naughty", "naughty_mass"), ("nice", "nice_mass")):
+                _ws = _wrapped(_it.get(_pole) or [])
+                for _i, _ln in enumerate(_ws):
+                    _rows.append((_pole if _i == 0 else "",
+                                  ("%.4f" % (_it.get(_mk) or 0.0)) if _i == 0 else "",
+                                  _ln))
             _sh = _it.get("share")
             md = ("# Saved\n\n`%s` — **%s** to `%s`\n\n%s\n\n"
                   "share **%s** · gate %s · purity %s · checks that ran: %s\n\n"

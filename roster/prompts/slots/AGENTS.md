@@ -44,6 +44,12 @@ malign-slot save   "..." --naughty ... --nice ... --domain violence \
 
 **The mass table under the gate is the number this brief keeps asking about.** Both poles need real mass, because displacement needs somewhere to arrive.
 
+**`--show N` widens the screen table.** It defaults to 60 rows, and in institutional frames the assertive tail routinely sits below that — `warn`, `reprimand`, `sanction`, `march`, `occupy` all past row 35. An author who reads only the default will conclude a frame offers no nice pole and discard a good frame, or invent a word and be refused. Use `--show 150` on anything that looks foreclosed before you believe it.
+
+**The flag that actually fires is `MISTAGGED`**, raised when a tagged word lands on the other pole's side of your own axis. It names the word. Fix it by **re-tagging** — and if the word belongs to a second contrast rather than to either pole, leave it untagged rather than deleting it from your thinking. `POLE-OF-ONE` means a pole is below the minimum. A `min_pair < 0` warning (a pole whose two words point in opposite directions) is rarer, about 3 items in 96.
+
+**An ambiguous word is not a second contrast, and both get left untagged.** A word can sit on either pole for lexical reasons rather than thematic ones — `knocked` reading as force or as a knock at the door, `file` as a lawsuit or a complaint, `stayed` as resistance or as staying up packing. Leave those untagged too. You are not required to tag every candidate, and a word whose pole depends on which sense the reader picks measures nothing either way.
+
 **Warnings are advisory. None of them blocks a save.** Only your judgement does. If a warning fires and you save anyway, say so in your report and say why — an item saved with a known warning and a stated reason is more useful than one silently retagged until the report went quiet. In particular, a `min_pair < 0` warning means a pole has no single direction, which is worth fixing by **re-tagging**, and never by deleting the flagged word to make the line disappear.
 
 Anything the report no longer prints is still in `--json`.

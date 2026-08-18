@@ -1394,6 +1394,13 @@ class Handler(BaseHTTPRequestHandler):
                     #: **WHICH REFEREES ACTUALLY RAN.** A check that did not run
                     #: must not be reconstructible as a check that passed, and
                     #: after the fact the yaml is the only witness.
+                    #: **WHAT THE AXIS FLAGGED, ON THE ITEM** (opus-inst-edulegal,
+                    #: 2026-08-18). The brief tells an author to save through a
+                    #: warning and say so IN THEIR REPORT -- which makes a chat
+                    #: message the only record of a decision that lives in a yaml
+                    #: forever. Its words: "if the rule matters enough to be in
+                    #: the brief twice, `save` should write `flags` into the item."
+                    "flags": list(a.get("flags") or []),
                     "checks_ran": sorted(
                         k for k in ("cross_corpus", "stability", "held_out")
                         if isinstance(a.get(k), dict) and not a[k].get("error")),

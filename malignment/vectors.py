@@ -76,6 +76,7 @@ every row and makes a future pin a key change rather than a migration. It is a
 column that currently carries no information and exists so that it can.
 """
 import os
+import threading
 import sys
 
 from . import ch
@@ -94,30 +95,57 @@ TABLE = "slot_word_vec"
 #: previous version escaped prompts into SQL with a hand-rolled `esc()` lambda,
 #: and a prompt corpus full of apostrophes and backslashes is the worst possible
 #: input for hand-rolled quoting.
-_CLIENT = []
+#: **ONE CLIENT PER THREAD, NOT ONE PER PROCESS** (opus-inst-edulegal,
+#: 2026-08-18). A clickhouse-connect client holds a session and refuses
+#: overlapping queries on it: *"Attempt to execute concurrent queries within the
+#: same session. Please use a separate client instance per thread/process."*
+#:
+#: The server is threaded and six authoring agents were pointed at it at once.
+#: `cross_corpus` failed on 4 of that agent's 6 items, including three
+#: consecutive retries on one -- so the report's only remaining diagnostic was a
+#: coin toss exactly when the most authors were relying on it. Its words: with
+#: six agents on one server "this is the normal condition, not an edge case".
+#:
+#: `threading.local` gives each request thread its own client and its own
+#: session. The failure was invisible before today's `DID NOT RUN` block, which
+#: is the only reason it was reported rather than silently reducing the report.
+_LOCAL = threading.local()
 
 
 def client():
-    """A clickhouse-connect client, or None. Never raises.
+    """A clickhouse-connect client for THIS thread, or None. Never raises.
 
     Same contract as the old stash: a store that cannot be reached makes a run
     SLOWER, never wrong. Warns once rather than failing silently, because silence
     is right for a transient outage and wrong for a misconfiguration -- the lesson
     from `slot_axis._stash`, where a missing package left the cache off for a day.
+
+    Per-thread rather than per-process because the session is the thing that
+    cannot be shared; see the note above.
     """
-    if not _CLIENT:
-        try:
-            import clickhouse_connect
-            _CLIENT.append(clickhouse_connect.get_client(
-                host=os.environ.get("MALIGNMENT_CH_HOST", "localhost"),
-                port=int(os.environ.get("MALIGNMENT_CH_PORT", 8123)),
-                database=ch.DB))
-        except Exception as e:
+    got = getattr(_LOCAL, "client", None)
+    if got is not None:
+        return got[0]
+    try:
+        import clickhouse_connect
+        c = clickhouse_connect.get_client(
+            host=os.environ.get("MALIGNMENT_CH_HOST", "localhost"),
+            port=int(os.environ.get("MALIGNMENT_CH_PORT", 8123)),
+            database=ch.DB)
+    except Exception as e:
+        #: Warn once per process, not once per thread -- a threaded server would
+        #: otherwise print this for every request that arrives during an outage.
+        if not _WARNED:
+            _WARNED.append(1)
             print("vectors: clickhouse-connect unavailable (%s: %s); vectors will "
                   "be recomputed and not cached" % (type(e).__name__, e),
                   file=sys.stderr)
-            _CLIENT.append(None)
-    return _CLIENT[0]
+        c = None
+    _LOCAL.client = (c,)
+    return c
+
+
+_WARNED = []
 
 #: What `revision` holds until a snapshot is pinned. See the module docstring --
 #: the point is that this is legible as missing, not that it is a value.
