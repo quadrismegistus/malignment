@@ -50,17 +50,30 @@ def main():
                          "roster profile requires")
     a = ap.parse_args()
 
+    #: **`--models` USED TO HARDCODE cjk_chars=0**, so an explicit roster printed
+    #: "ordered by cjk_chars desc" above nineteen models all showing 0 -- while
+    #: actually preserving argv order. Harmless to the cells and not to the
+    #: reader: the ordering is the whole reason this file exists (run where the
+    #: rule BITES first, so a defect surfaces on checkpoint one rather than
+    #: twenty), and a header claiming it while not doing it is worse than no
+    #: header. Same lookup for both paths now; a model absent from the vocab
+    #: measurement sorts last and SAYS SO rather than silently reading 0.
+    vocab = json.load(open(MEAS))["sections"]["vocab"]["models"]
     if a.models:
-        todo = [(m, 0) for m in a.models]
+        todo = sorted(((m, vocab.get(m, {}).get("cjk_chars", -1)) for m in a.models),
+                      key=lambda r: -r[1])
     else:
-        vocab = json.load(open(MEAS))["sections"]["vocab"]["models"]
         todo = sorted(((m, v["cjk_chars"]) for m, v in vocab.items()
                        if v["cjk_tier"] in a.tier and cached(m)),
                       key=lambda r: -r[1])
-    print("queue: %d checkpoints, ordered by cjk_chars desc" % len(todo), flush=True)
+    unknown = [m for m, n in todo if n < 0]
+    print("queue: %d checkpoints, ordered by cjk_chars desc%s"
+          % (len(todo), "" if not unknown else
+             "  (%d not in the vocab measurement, sorted last)" % len(unknown)),
+          flush=True)
     for m, n in todo:
-        print("  %-46s cjk_chars=%-7d %s"
-              % (m, n, os.path.basename(venv_for(m))), flush=True)
+        print("  %-46s cjk_chars=%-7s %s"
+              % (m, "?" if n < 0 else n, os.path.basename(venv_for(m))), flush=True)
 
     for i, (m, n) in enumerate(todo, 1):
         print("\n%s\n[%d/%d] %s  (cjk_chars=%d)\n%s"
