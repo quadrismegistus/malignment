@@ -583,7 +583,7 @@ def _masses(words, tagged):
 
 def build_item(prompt, naughty, nice, words, provenance=None, domain="",
                writer="slot-explorer", note="", variant=None,
-               authored_by=None, reviewed=None, axis=None):
+               authored_by=None, reviewed=None, axis=None, untagged=()):
     """The saved item, derived rather than accepted.
 
     `words` is `{word: probability}` from the run the author is looking at. The
@@ -667,6 +667,13 @@ def build_item(prompt, naughty, nice, words, provenance=None, domain="",
         #:
         #: Omitted when absent, like the two fields above, so the 86 archive items
         #: and hand-authored rows keep the shape they have.
+        #: **WORDS THE AUTHOR RULED OUT**, as opposed to never considered.
+        #: Two agents found independently that the brief's most-repeated
+        #: instruction -- leave a second contrast untagged rather than delete
+        #: it -- left no trace here, so a deliberate exclusion and an
+        #: oversight were byte-identical on review.
+        **({"untagged": [w for w in dict.fromkeys(untagged) if w]}
+           if untagged else {}),
         **({"axis": axis} if axis else {}),
         "screened_by": provenance or {},
     }

@@ -1414,7 +1414,8 @@ class Handler(BaseHTTPRequestHandler):
                 writer=(body.get("writer") or "slot-explorer").strip(),
                 note=(body.get("note") or "").strip(),
                 authored_by=(body.get("authored_by") or "").strip() or None,
-                reviewed=rev, axis=axis_rec)
+                reviewed=rev, axis=axis_rec,
+                untagged=body.get("untagged") or ())
             path, action = save_item(item, overwrite=bool(body.get("overwrite")),
                                      path=targets[tgt])
             return self._json(200, {"item_id": item["item_id"], "action": action,

@@ -198,7 +198,7 @@ def provenance_from(screened):
 
 
 def save(prompt, naughty, nice, screened, authored_by, domain="", note="",
-         overwrite=False):
+         overwrite=False, untagged=()):
     """Write one item to the agent's corpus. -> dict with `item_id`, `action`
 
     `screened` is the whole `/slot` response the tags were made against, not a
@@ -232,6 +232,20 @@ def save(prompt, naughty, nice, screened, authored_by, domain="", note="",
             "provenance": provenance_from(screened),
             "writer": "slot-client", "authored_by": authored_by,
             "reviewed": False, "target": "slot-client", "overwrite": overwrite}
+    #: **DELIBERATE EXCLUSIONS, RECORDED** (opus-viol-aftermath and
+    #: opus-sex-verbal, independently, 2026-08-18). The brief says four times to
+    #: leave a second contrast untagged rather than delete it -- and in the saved
+    #: yaml a word ruled out and a word never considered are byte-identical, both
+    #: simply absent. So the most-repeated instruction in the brief produced no
+    #: artifact, could not be audited on review, and the next author editing the
+    #: item had no way to know a word was ruled on rather than missed.
+    #:
+    #: Explicit rather than derived: every screened word an author did not tag is
+    #: not an exclusion, it is the remainder. Only the ones they RULED ON belong
+    #: here, which is why the caller passes them.
+    keep = [w for w in dict.fromkeys(untagged or ()) if w]
+    if keep:
+        body["untagged"] = keep
     return _call("/slot/save", body=body)
 
 
@@ -881,6 +895,11 @@ def _main(argv):
     ap.add_argument("--naughty", default="", help="comma-separated")
     ap.add_argument("--nice", default="", help="comma-separated")
     ap.add_argument("--domain", default="")
+    ap.add_argument("--untagged", default="",
+                    help="words you RULED OUT and why-less: a second contrast, "
+                         "or lexically ambiguous. Recorded on the item so the "
+                         "decision survives; without this a word ruled on and "
+                         "a word never seen are identical in the yaml")
     ap.add_argument("--note", default="")
     ap.add_argument("--authored-by", default="", dest="authored_by")
     ap.add_argument("--overwrite", action="store_true")
@@ -918,7 +937,7 @@ def _main(argv):
             md = md_axis(a.prompt, g, n, out)
         else:
             out = save(a.prompt, g, n, s, a.authored_by, a.domain, a.note,
-                       overwrite=a.overwrite)
+                       overwrite=a.overwrite, untagged=split(a.untagged))
             #: **ECHO WHAT WAS RECORDED** (opus-sexual-2): it had to parse
             #: `slot-client.yaml` to learn what it had just written. The item is
             #: returned in the response and was being thrown away.
