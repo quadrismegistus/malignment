@@ -1,15 +1,27 @@
-# INSTRUMENT: displacement_taxonomy v2
+# INSTRUMENT: displacement_taxonomy v3
 
 The rater prompt, verbatim. Everything below the rule is the instrument; text above it is provenance.
 
 A rating is a property of the instrument VERSION. Any change to the prompt text, the field set, or the model is a new version with a new directory, and outputs from two versions are never pooled. Precedent: `k_bulk.py` records that adding three scales moved `penis` vulgarity 2->4 at temperature 0, and on 2026-08-18 the same frame with the same words and the same question scored 0.714 under one four-scale set and 1.500 under another.
 
-    version   v2
+    version   v3
     date      2026-08-18
     model     to be stamped per run; workflow transcripts record it per turn
     input     one (fragment, arm) pair; arm = pooled 50 endpoint pairs, or one lineage
+    format    two blocks, HIGHER UNDER B then HIGHER UNDER A, each line
+              `word  A% -> B%  (delta)`, blocks sorted by |delta|
     source    `movement` table, rule=canonical, theta=0.001, v3
     fields    see SCHEMA below
+
+## Changes from v2
+
+**Levels are shown, not only differences, and the words are split into two labelled blocks.** Each line is `word  A% -> B%  (delta)`. v2 sent bare deltas, which cannot distinguish a word that was eliminated from one that merely shrank, or a word created from nothing from one that grew. On `He started stroking his ___` twelve words go to a true zero (`cock` 17.0 -> 0.3, `penis` 5.4 -> 0.2, `dick` 4.8 -> 0.0, `shaft`, `member`, `erection`, `crotch`, `erect`, `manhood`, `balls`, `rod`, `groin`) and eight arrive from nothing (`mustache` 0.0 -> 2.3, `goatee`, `fur`, `furry`, `whiskers`, `cat's`, `temples`, `dog's`). Neither fact is visible in a delta column.
+
+The v3 rater on that frame returned the only `high` confidence of any run, named two destinations rather than one (`genitals-to-beard` and `genitals-to-pet`), and caught the `cock`/rooster polysemy and dismissed it with a reason. On the union frame it split v2's single relation into two (`procedural specification` and `termination softened`) and flagged its own problem: `lay` (off) is itself a euphemism yet groups with the blunt outcomes.
+
+**The instruction changed with the format.** v2 said "weight by magnitude"; with two magnitudes on the page that is ambiguous, so v3 says WEIGHT BY THE CHANGE, NOT THE LEVEL and states what the levels are for -- seeing whether a word was eliminated, created, or merely adjusted.
+
+Use ` -> ` as the separator, never a bare `>`, which reads as a comparison.
 
 ## Changes from v1
 
@@ -34,9 +46,10 @@ Direction is shown rather than withheld. Blinding was used to establish that the
 ```
 Below is a sentence fragment and a list of words that could complete it. Two
 measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. The "change" value is B minus A: positive means the word
-is more likely under B, negative means less. The list is sorted from the largest
-positive change to the largest negative one.
+A and under condition B. Each line shows the word, its likelihood under A, then
+under B after the arrow, with the difference in brackets. The words are split
+into those higher under B and those higher under A, each block sorted by the size
+of the difference.
 
 FRAGMENT: {{fragment}}
 
@@ -46,10 +59,11 @@ WORDS:
 You are describing how a distribution over possible next words differs between
 the two conditions.
 
-WEIGHT BY MAGNITUDE. A word that moved 0.20 matters far more than one that moved
-0.003. A description resting on the small movers while ignoring the large ones is
-wrong. The two sides may be very different lengths; that is a property of how
-probability concentrates and carries no meaning on its own.
+WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
+than one that moved 0.3, whatever their starting values. The levels are given so
+you can see whether a word was eliminated, created, or merely adjusted -- use
+them for that, not for ranking importance. The two blocks may be very different
+lengths; that carries no meaning on its own.
 
 Answer these, in order.
 
