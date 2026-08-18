@@ -45,6 +45,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tier", nargs="*", default=["FLUENT", "MARGINAL"])
     ap.add_argument("--models", nargs="*")
+    ap.add_argument("--no-endpoints-first", action="store_true",
+                    help="disable endpoint priority; order by cjk_chars alone")
     ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None,
                     help="pass through to run_v4.py: measure one tranche of the "
                          "population. slots and cjk carry the information; latin "
@@ -70,11 +72,35 @@ def main():
         todo = sorted(((m, v["cjk_chars"]) for m, v in vocab.items()
                        if v["cjk_tier"] in a.tier and cached(m)),
                       key=lambda r: -r[1])
+    #: **THE BASE->ENDPOINT PAIR IS THE UNIT THE PAPER COMPARES**, so those models
+    #: run before the arms that only sit in a lineage. `roster.endpoints()` gives
+    #: 50 bases and their 50 commodity-form endpoints; the other 44 members of
+    #: those lineages are intermediates, ablations and method variants, which
+    #: answer their own questions and block nothing.
+    #:
+    #: Secondary key stays cjk_chars, so within each group the models where the
+    #: v4 rule actually bites still come first. RH's ask, 2026-08-18.
+    if not a.no_endpoints_first:
+        from malignment import roster as _r
+        _eps, _ = _r.endpoints()
+        prio = set(_eps) | set(_eps.values())
+        todo = sorted(todo, key=lambda r: (r[0] not in prio, -r[1]))
+        n_p = sum(1 for m, _n in todo if m in prio)
+        print("queue: ENDPOINTS FIRST -- %d of %d are a base or an endpoint"
+              % (n_p, len(todo)), flush=True)
     unknown = [m for m, n in todo if n < 0]
     if a.only:
         print("queue: TRANCHE=%s" % a.only, flush=True)
-    print("queue: %d checkpoints, ordered by cjk_chars desc%s"
-          % (len(todo), "" if not unknown else
+    #: Names BOTH keys. It said "ordered by cjk_chars desc" while endpoint
+    #: membership was the primary sort -- true of the secondary key and false of
+    #: the order. Fifth time in one day a line described something its run was
+    #: not doing; the others were the loader's rule_version, ingest's includable
+    #: header, the topup instrument line, and this file's own hardcoded
+    #: cjk_chars=0.
+    print("queue: %d checkpoints, ordered by %scjk_chars desc%s"
+          % (len(todo),
+             "" if a.no_endpoints_first else "endpoint membership, then ",
+             "" if not unknown else
              "  (%d not in the vocab measurement, sorted last)" % len(unknown)),
           flush=True)
     for m, n in todo:
