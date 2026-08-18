@@ -143,6 +143,8 @@ The corpus holds ten matched sets — the same frame with the genders swapped (`
 
 The frames are not equally transgressive. Measured on `He buried his face in her` against `She buried her face in his`: the first carries 0.0698 of explicit mass, the second roughly 0.003, with no `crotch`, `groin` or `penis` anywhere in the tail down to p = 5e-10. `chest`, `shoulder` and `neck` hold almost everything on the male-directed side.
 
+**Only the first of those two frames is in the corpus.** The second was screened and deliberately not saved, because a frame with no transgressive pole cannot be an item — which is the finding rather than a gap. So the comparison above is reproducible from the screening but not from the yaml, and anyone checking it must re-screen `She buried her face in his` rather than look for it.
+
 So if you author or edit one of a pair, **do not force the poles to match**. Tagging a word to balance a twin means tagging one the distribution barely offers, and dropping one to match means discarding real mass. Both erase the asymmetry, which is a finding RH has independently confirmed and one of the things this corpus exists to measure.
 
 Tag each frame against what it actually offers, and note in your report that it is one of a pair.
