@@ -259,6 +259,40 @@ def _table(m, risers, fallers):
     return "HIGHER UNDER B\n%s\n\nHIGHER UNDER A\n%s" % (block(risers), block(fallers))
 
 
+MOVER_RE = re.compile(r"^\s{2}(\S+)\s+(-?[\d.]+)%\s*->\s*(-?[\d.]+)%\s*\(\s*([+-][\d.]+)\)\s*$")
+
+
+def parse_movers(prompt):
+    """{higher_b: [...], higher_a: [...]} read back OUT OF THE PROMPT ITSELF.
+
+    **PARSED, NOT RECOMPUTED.** The obvious way to attach movement data to a
+    record is to re-query the store and re-run `movement()`. That is a
+    recomputation whose inputs can move under it -- a ClickHouse insertion, a
+    change to CANONICAL -- and it would attach numbers the rater never saw while
+    looking exactly like provenance. The prompt is a committed artifact holding
+    the table verbatim, so reading it back cannot disagree with what was asked.
+
+    The rounding is the rounding the rater got, to one decimal, which is the
+    right precision for anything downstream: a finer number would be about the
+    distribution and not about the judgment being explained.
+    """
+    out, cur = {"higher_b": [], "higher_a": []}, None
+    for line in (prompt or "").splitlines():
+        if line.startswith("HIGHER UNDER B"):
+            cur = "higher_b"; continue
+        if line.startswith("HIGHER UNDER A"):
+            cur = "higher_a"; continue
+        if cur is None:
+            continue
+        m = MOVER_RE.match(line)
+        if m:
+            out[cur].append({"word": m.group(1), "pre": float(m.group(2)),
+                             "post": float(m.group(3)), "delta": float(m.group(4))})
+        elif line.strip() and not line.startswith("  (none"):
+            cur = None  #: past the table
+    return out
+
+
 def make_key(meta, rater):
     """THE key. Built in one place so `--prepare` and `--ingest` cannot disagree.
 
@@ -530,12 +564,63 @@ def _store(st, man, name, rater, f, lines, run_id, seen_instruments):
         #: invented, the two checkpoints, the orientation, the rater, and the
         #: prompt verbatim. The value is only what came back.
         key = make_key(meta, rater)
-        st[key] = {"model": model, "result": result, "run_id": run_id,
-                   "agent_id": os.path.basename(f)[6:-6], "meta": meta}
+        #: The table the rater saw, as data. Asserted against the counts the
+        #: manifest booked at prepare time, so a parse that silently caught the
+        #: wrong lines cannot pass as movement.
+        mv = parse_movers(meta["prompt"])
+        for side, n in (("higher_b", "n_higher_b"), ("higher_a", "n_higher_a")):
+            if len(mv[side]) != meta[n]:
+                raise SystemExit("%s: parsed %d %s rows, manifest booked %d"
+                                 % (name, len(mv[side]), side, meta[n]))
+        st[key] = {"model": model, "result": result, "movement": mv,
+                   "run_id": run_id, "agent_id": os.path.basename(f)[6:-6],
+                   "meta": meta}
         seen_instruments.setdefault(meta["instrument_sha"], meta["instrument"])
         print("%-34s rater=%d model=%s %s" % (name, rater, model,
                                               "OK" if result else "NO RESULT FOUND"))
 
+
+
+def backfill():
+    """Attach `movement` to records stashed before ingest parsed it.
+
+    Reads each record's OWN stored prompt, so this is a re-derivation from a
+    committed artifact and not a recomputation: it cannot pull in a number the
+    rater did not see. Refuses any record whose parse disagrees with the counts
+    its meta booked, and leaves records that already carry movement alone.
+    """
+    st = _stash()
+    n = skip = 0
+    for k in list(st.keys()):
+        v = st[k]
+        if not v or v.get("movement"):
+            skip += 1
+            continue
+        pr = k.get("prompt") or (v.get("meta") or {}).get("prompt")
+        if not pr:
+            print("no prompt on a record, left alone: %s"
+                  % (k.get("frame_prompt_id") or k.get("frame")), file=sys.stderr)
+            skip += 1
+            continue
+        if "HIGHER UNDER B" not in pr:
+            #: A pre-inline record: the rater was pointed at a JSON file, so its
+            #: stored prompt is the instruction and never held the table. There
+            #: is nothing to parse and nothing wrong. Distinguished from a parse
+            #: failure by the heading, not by the count -- a zero count means
+            #: both things and only the heading tells them apart.
+            print("no table in prompt (pre-inline record), left alone", file=sys.stderr)
+            skip += 1
+            continue
+        mv = parse_movers(pr)
+        meta = v.get("meta") or {}
+        for side, cnt in (("higher_b", "n_higher_b"), ("higher_a", "n_higher_a")):
+            if cnt in meta and len(mv[side]) != meta[cnt]:
+                raise SystemExit("%s: parsed %d %s rows, meta booked %d"
+                                 % (k.get("frame_prompt_id"), len(mv[side]), side, meta[cnt]))
+        v["movement"] = mv
+        st[k] = v
+        n += 1
+    print("backfilled %d record(s), %d left alone" % (n, skip))
 
 
 def emit_schema():
@@ -675,6 +760,8 @@ def main(argv=None):
                     help="print rendered prompts as workflow args JSON")
     ap.add_argument("--schema", action="store_true",
                     help="print the JSON Schema from INSTRUMENT.md")
+    ap.add_argument("--backfill", action="store_true",
+                    help="attach movement to records stashed before it was parsed")
     ap.add_argument("--script", action="store_true",
                     help="generate workflow.js from INSTRUMENT.md + the manifest")
     ap.add_argument("--raters", type=int, default=1,
@@ -698,6 +785,8 @@ def main(argv=None):
                 raters=a.raters, redo=a.redo)
     elif a.ingest:
         ingest(a.ingest)
+    elif a.backfill:
+        backfill()
     elif a.script:
         script()
     elif a.schema:
