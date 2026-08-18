@@ -186,11 +186,151 @@ def exits():
         print("  %-10s %9.2f%% %9.2f%% %+8.2f" % (name, 100*hb/nb, 100*ha/na, 100*ha/na - 100*hb/nb))
 
 
+PASSA = os.path.join(RESULTS, "passA_codings.json")
+
+
+def passa_save(src):
+    """Lift the two coders' returns out of the workflow output."""
+    raw = open(src, encoding="utf-8").read()
+    d = json.loads(raw)
+    r = d.get("result", d)
+    if isinstance(r, str):
+        r = json.loads(r)
+    json.dump({"A": r["A"], "B": r["B"], "agreement": r.get("agreement"),
+               "coded": r.get("coded"), "batches_ok": r.get("batches_ok")},
+              open(PASSA, "w", encoding="utf-8"), indent=0, sort_keys=True,
+              ensure_ascii=False)
+    print("saved %d/%d codings -> %s" % (len(r["A"]), len(r["B"]), PASSA))
+
+
+FIELDS = ("lexical", "semantic", "repetition", "frame")
+#: The value each field takes when NOTHING is wrong. Used only to compute the
+#: chance-agreement baseline honestly: these are skewed distributions and a raw
+#: agreement rate on a skewed field is not comparable across fields.
+LEVELS = {"lexical":    ("clean", "mangled", "nonwords"),
+          "semantic":   ("means", "stalls", "salad"),
+          "repetition": ("none", "phrase", "block"),
+          "frame":      ("none", "furniture", "task", "assistant")}
+
+
+def _kappa(A, B, ids, f):
+    """Cohen's kappa. Raw agreement on a skewed field flatters the instrument."""
+    lv = LEVELS[f]
+    obs = sum(1 for i in ids if A[i][f] == B[i][f]) / len(ids)
+    exp = sum((sum(1 for i in ids if A[i][f] == v) / len(ids)) *
+              (sum(1 for i in ids if B[i][f] == v) / len(ids)) for v in lv)
+    return obs, exp, (obs - exp) / (1 - exp) if exp < 1 else float("nan")
+
+
+def passa_report():
+    import collections
+    R = json.load(open(PASSA, encoding="utf-8"))
+    K = json.load(open(os.path.join(RESULTS, "passA_key.json"), encoding="utf-8"))
+    A, B = R["A"], R["B"]
+    ids = sorted(i for i in A if i in B and i in K)
+    print("PASS A PILOT -- %d passages, two blind coders, arms unlabelled\n" % len(ids))
+
+    print("=== AGREEMENT ===")
+    print("  %-11s %8s %8s %8s   %s" % ("field", "raw", "chance", "kappa", "reading"))
+    for f in FIELDS:
+        obs, exp, k = _kappa(A, B, ids, f)
+        rd = ("substantial" if k >= .6 else "moderate" if k >= .4 else
+              "fair" if k >= .2 else "POOR")
+        print("  %-11s %7.1f%% %7.1f%% %8.3f   %s" % (f, 100*obs, 100*exp, k, rd))
+    allfour = sum(1 for i in ids if all(A[i][f] == B[i][f] for f in FIELDS))
+    print("\n  all four fields agree: %d/%d (%.1f%%)" % (allfour, len(ids), 100*allfour/len(ids)))
+
+    print("\n=== BASE RATES BY ARM (coder-averaged; a field is 'flagged' when not the clean level) ===")
+    print("  %-11s %10s %10s %9s" % ("field", "base", "aligned", "delta"))
+    for f in FIELDS:
+        row = []
+        for arm in ("base", "aligned"):
+            sub = [i for i in ids if K[i]["arm"] == arm]
+            hits = sum(1 for i in sub for M in (A, B) if M[i][f] != LEVELS[f][0])
+            row.append(100 * hits / (2 * len(sub)))
+        print("  %-11s %9.1f%% %9.1f%% %+8.1f" % (f, row[0], row[1], row[1] - row[0]))
+
+    print("\n=== FULL DISTRIBUTIONS (coder A | coder B), by arm ===")
+    for f in FIELDS:
+        print("  %s" % f)
+        for arm in ("base", "aligned"):
+            sub = [i for i in ids if K[i]["arm"] == arm]
+            ca = collections.Counter(A[i][f] for i in sub)
+            cb = collections.Counter(B[i][f] for i in sub)
+            print("    %-8s %s" % (arm, "  ".join(
+                "%s %d|%d" % (v, ca[v], cb[v]) for v in LEVELS[f])))
+
+    print("\n=== CODED `frame` vs THE M02 REGEX BATTERY ===")
+    print("  The battery is the archive's instrument. Where the coders see an")
+    print("  irruption the regexes miss, the regexes are the thing that is wrong.")
+    import pyarrow.parquet as pq
+    t = pq.read_table(os.path.join(RESULTS, "frame_exit.parquet")).to_pydict()
+    reg = {}
+    for j in range(len(t["model"])):
+        reg[(t["model"][j], t["prompt"][j], t["sample_idx"][j])] = (
+            t["any_exit"][j], t["REFUSAL"][j],
+            [n for n, _ in EXIT_TYPES if t[n][j]])
+    miss = 0
+    cells = collections.Counter()
+    unmatched = 0
+    for i in ids:
+        k = (K[i]["model"], K[i]["prompt"], K[i]["sample_idx"])
+        if k not in reg:
+            unmatched += 1
+            continue
+        any_exit, refusal, types = reg[k]
+        for M, tag in ((A, "A"), (B, "B")):
+            coded = M[i]["frame"] != "none"
+            cells[(coded, bool(any_exit))] += 1
+    print("\n  joined on (model, prompt, sample_idx); %d of %d unmatched"
+          % (unmatched, len(ids)))
+    n = sum(cells.values())
+    print("  %-24s %8s %8s" % ("", "regex +", "regex -"))
+    for c in (True, False):
+        print("  %-24s %8d %8d" % ("coder %s" % ("+" if c else "-"),
+                                   cells[(c, True)], cells[(c, False)]))
+    tp, fn = cells[(True, True)], cells[(True, False)]
+    fp, tn = cells[(False, True)], cells[(False, False)]
+    print("\n  coder-positive rate  %.1f%%   regex-positive rate  %.1f%%"
+          % (100*(tp+fn)/n, 100*(tp+fp)/n))
+    if tp + fn:
+        print("  regex RECALL against the coders: %.1f%% (%d of %d coded irruptions caught)"
+              % (100*tp/(tp+fn), tp, tp+fn))
+    if tp + fp:
+        print("  regex PRECISION against the coders: %.1f%%" % (100*tp/(tp+fp)))
+    obs = (tp + tn) / n
+    print("  raw agreement %.1f%%" % (100*obs))
+
+    print("\n  coded `frame` level x what the battery fired on:")
+    by = collections.defaultdict(collections.Counter)
+    for i in ids:
+        k = (K[i]["model"], K[i]["prompt"], K[i]["sample_idx"])
+        if k not in reg:
+            continue
+        _, _, types = reg[k]
+        for M in (A, B):
+            by[M[i]["frame"]][",".join(types) or "(none fired)"] += 1
+    for lvl in LEVELS["frame"]:
+        tot = sum(by[lvl].values())
+        top = ", ".join("%s %d" % (t, c) for t, c in by[lvl].most_common(4))
+        print("    %-10s n=%-5d %s" % (lvl, tot, top))
+
+    with open(os.path.join(RESULTS, "passA_pilot.csv"), "w", encoding="utf-8") as fh:
+        fh.write("id,model,arm,%s\n" % ",".join(
+            "%s_%s" % (f, c) for f in FIELDS for c in "AB"))
+        for i in ids:
+            fh.write("%s,%s,%s,%s\n" % (i, K[i]["model"], K[i]["arm"], ",".join(
+                M[i][f] for f in FIELDS for M in (A, B))))
+    print("\n  -> %s" % os.path.join(RESULTS, "passA_pilot.csv"))
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--save")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--exits", action="store_true")
+    ap.add_argument("--passa-save")
+    ap.add_argument("--passa", action="store_true")
     a = ap.parse_args()
     if a.save:
         save(a.save)
@@ -198,5 +338,9 @@ if __name__ == "__main__":
         report()
     elif a.exits:
         exits()
+    elif a.passa_save:
+        passa_save(a.passa_save)
+    elif a.passa:
+        passa_report()
     else:
         ap.print_help()

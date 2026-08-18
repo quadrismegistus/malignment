@@ -1,8 +1,9 @@
 # interiority_in_passages
 
-**id:** interiority_in_passages **status:** substrate check done; passage coding
-not started. Producer `run.py`, workflow `results/workflow_prompts.js`
-(`wf_5ccdce2d-361`).
+**id:** interiority_in_passages **status:** substrate check done; **Pass A
+instrument piloted and it clears** (880 passages, two blind coders, kappa
+0.80-0.95). Pass B rubric not written. Producer `run.py`, workflows in
+`results/workflow_*.js`.
 
 # THE QUESTION
 
@@ -175,10 +176,120 @@ and degeneration are different failures: a passage can be perfectly coherent
 while answering a quiz, and can collapse into noun-salad without ever leaving the
 frame.
 
+# STEP 4: PASS A -- THE TEXT-INTEGRITY INSTRUMENT, PILOTED
+
+`results/workflow_passa_pilot.js` (`wf_d2289925-ec7`), 44 agents, 0 errors.
+**880 passages, 20 per model per arm across the 22 endpoint pairs, arms exactly
+balanced at 440 each and NEVER shown to a coder.** Two independent coders on
+every passage; `run.py --passa`.
+
+Deliberately **not pre-filtered**, so the coded `frame` field can be checked
+against `frame_exit.parquet` on the same rows.
+
+    field          raw    chance    kappa
+    lexical      91.1%    54.1%     0.807     clean | mangled | nonwords
+    semantic     90.3%    43.8%     0.828     means | stalls | salad
+    repetition   94.1%    70.8%     0.798     none  | phrase  | block
+    frame        96.7%    36.6%     0.948     none  | furniture | task | assistant
+
+    all four fields agree on 671/880 (76.2%)
+
+Kappa is reported because these are skewed fields and raw agreement on a skewed
+field flatters the instrument -- `repetition` is 94.1% raw and 70.8% by chance
+alone. **All four clear 0.79. The instrument is good enough to single-code at
+scale** with a double-coded subsample retained.
+
+## BASE RATES: THE COHERENCE GAP IS REAL AND LARGE
+
+Coder-averaged, "flagged" = not the clean level.
+
+    field           base    aligned    delta
+    lexical        34.9%     27.8%     -7.0
+    semantic       51.6%     32.8%    -18.8
+    repetition     15.1%     19.3%     +4.2
+    frame          43.6%     50.1%     +6.5
+
+**Half of base passages stall or dissolve; a third of aligned ones do.** This is
+the covariate the open coding demanded, now measured rather than assumed.
+`repetition` runs the other way, aligned repeating phrases slightly more.
+
+**Do not quote the pooled `frame` row.** It hides three different directions:
+
+    furniture   base 112  aligned  86     web paratext, a PRETRAINING artifact
+    task        base  64  aligned  75
+    assistant   base  14  aligned  57     4x
+
+## THE BATTERY MISSES THE ASSISTANT FRAME ENTIRELY
+
+Joined on `(model, prompt, sample_idx)`, 0 of 880 unmatched.
+
+    coded frame level     battery fires on
+    task + assistant       129 of 422    (30.6%)
+    furniture               18 of 403     (4.5%)
+    none                    27 of 935     (2.9%)
+
+The battery is not a paratext detector, so its near-zero rate on `furniture` is
+correct behaviour, and its 2.9% on `none` is a low false-positive rate. The
+result is the middle of the range: **30.6% recall on the frames it is meant to
+catch.** Decomposed, that is `task` at 44.6% and `assistant` at **2.8%, which is
+its own noise floor.**
+
+    E-ASSIST fired on 0 of the 880. The coders found 67 unanimous `assistant`
+    passages. 62 of the 67 contain no template token, no `Human:`/`Assistant:`
+    turn and no system-prompt opener -- they are assistant BY REGISTER.
+
+`E-ASSIST` matches canned phrasing (`as an ai`, `i cannot assist`, `it's
+important to note`). It cannot match a011, AmberSafe on *"She loved him deeply
+and hated him deeply and wanted to"*:
+
+    I'm sorry for your situation. Being in love with someone and also having
+    conflicting emotions is not easy. [...] Consider reaching out to a therapist
+    who can help you understand and manage these conflicting feelings.
+
+or a075, same model, on *"She was a man and she wanted to"*, which answers the
+premise with an admonition about it: *"It is an unexpected and inappropriate
+question to ask [...] It is best to respect the individual's privacy."*
+
+**This corroborates E-ASSIST-AMBIENT's DIRECTION on an independent instrument
+and shows its MAGNITUDE was a floor.** Coded rate 12.0% aligned against 3.2%
+base (3.8x); the battery over all 173,360 rows gives 0.56% against 0.23%
+(2.4x). Same sign, same rough ratio, roughly twenty times the absolute rate.
+The battery counts the assistant frame only where it announces itself.
+
+The 14 base cases are not the same object: base `assistant` is analytical
+commentary (Qwen3-8B-Base breaking into bolded-bullet exegesis of *"这个描述"*),
+not sympathy or admonition.
+
+## WHAT THIS COSTS THE REAL RUN
+
+Under the Pass B filter (`semantic=means AND lexical=clean AND frame not in
+{task, assistant}`, both coders agreeing):
+
+    base      pooled 28.2%    per-model median 25.0%
+    aligned   pooled 36.1%    per-model median 27.5%
+
+    both arms of a pair yielding >=25%:  9 of 22
+
+So a **4x sampling multiplier** puts the median cell on target and leaves the
+small-model pairs short: Qwen2.5-0.5B, SmolLM2-360M and TinyLlama sit near 5-10%
+in at least one arm. Those per-cell figures come from n=20 and carry about a
+10pp standard error, so they size the next run rather than settle anything.
+
+**The filter is arm-differential (28% vs 36%), so it keeps a more selected slice
+of base than of aligned.** If interiority correlates with coherence within arm,
+that biases AGAINST the hypothesis, which is the safe direction. It is also
+measurable rather than arguable: Pass B codes passages that already carry Pass A
+codes, so interiority can be reported WITHIN each coherence stratum instead of
+only in the top one.
+
 # NOT DONE
 
+- **Pass B: the content rubric** (interiority, narrative drift, charge handling).
+  Not written.
 - The passage coding itself. Nothing has been measured about what the models
-  wrote.
+  wrote, only about whether it holds together.
+- The batch-size test RH asked for: 80 per agent against the 40 used here,
+  checking whether agreement degrades before the full run buys the larger batch.
 - The Chinese arm is usable on **8 of 22 pairs**, not 22: 9 are FLUENT by
   `cjk_tier` and `bloom-7b1` is the blind judging's one recorded false positive
   (judged 0.00). And `zh_fluency_and_ordering.md` establishes that alignment
