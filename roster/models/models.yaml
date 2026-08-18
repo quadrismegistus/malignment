@@ -517,20 +517,23 @@ nodes:
     family:
     - olmoe
     env:
-      profile: default
+      profile: tf457
+      why: "transformers 5 rejects the OLMoE config: `TypeError: Field 'tie_word_embeddings' expected int, got bool`. The BASE arm fails differently again on 5.4.0 -- NotImplementedError 'histogram_mps' -- which was recorded as an MPS limit and generalised in CLAUDE.md to \"OLMoE's histc really is MPS-only\". It is not: same machine, same device, transformers 4.57.1 runs it. Two distinct defects, one version bound. Verified 2026-08-18, 3/3 cells per arm."
   allenai/OLMoE-1B-7B-0125-DPO:
     nickname: olmoe-dpo
     family:
     - olmoe
     env:
-      profile: default
+      profile: tf457
+      why: "transformers 5 rejects the OLMoE config: `TypeError: Field 'tie_word_embeddings' expected int, got bool`. The BASE arm fails differently again on 5.4.0 -- NotImplementedError 'histogram_mps' -- which was recorded as an MPS limit and generalised in CLAUDE.md to \"OLMoE's histc really is MPS-only\". It is not: same machine, same device, transformers 4.57.1 runs it. Two distinct defects, one version bound. Verified 2026-08-18, 3/3 cells per arm."
   allenai/OLMoE-1B-7B-0125-Instruct:
     revision_ladder: 45
     nickname: olmoe-instruct
     family:
     - olmoe
     env:
-      profile: default
+      profile: tf457
+      why: "transformers 5 rejects the OLMoE config: `TypeError: Field 'tie_word_embeddings' expected int, got bool`. The BASE arm fails differently again on 5.4.0 -- NotImplementedError 'histogram_mps' -- which was recorded as an MPS limit and generalised in CLAUDE.md to \"OLMoE's histc really is MPS-only\". It is not: same machine, same device, transformers 4.57.1 runs it. Two distinct defects, one version bound. Verified 2026-08-18, 3/3 cells per arm."
   allenai/OLMoE-1B-7B-0125-SFT:
     nickname: olmoe-sft
     family:
