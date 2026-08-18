@@ -38,13 +38,15 @@ malign-slot save   "..." --naughty ... --nice ... --domain violence \
 
 `screen` returns the candidate words with pooled probabilities. Tag from **that list only** — a word you invent that the screening did not surface will be refused, because its mass would be zero and the item would record a distribution the tags never saw.
 
-`axis` is the check. Read its `separates` block:
+`axis` is the check. It prints a gate verdict, the mass on each pole, any warnings, and one table of what your axis selects across ~1,600 other frames.
 
-```json
-{"ok": true, "gap": 0.4177, "correct": 16, "total": 16, "floor": 0.05, "reason": null}
-```
+**Section 1 is the only gate.** A REFUSAL means the axis cannot see the contrast you tagged — the poles are not separable in embedding space, so nothing built on them means anything. **Retag, don't retry:** the same words fail identically. The message names which condition failed, a gap below its floor or a wrong pairwise ordering.
 
-`ok: false` means the axis cannot see the contrast you tagged — the poles are not separable in embedding space, so any measurement built on them is meaningless. **Retag, don't retry.** The same tags will fail identically. `reason` says which floor refused you.
+**The mass table under the gate is the number this brief keeps asking about.** Both poles need real mass, because displacement needs somewhere to arrive.
+
+**Warnings are advisory. None of them blocks a save.** Only your judgement does. If a warning fires and you save anyway, say so in your report and say why — an item saved with a known warning and a stated reason is more useful than one silently retagged until the report went quiet. In particular, a `min_pair < 0` warning means a pole has no single direction, which is worth fixing by **re-tagging**, and never by deleting the flagged word to make the line disappear.
+
+Anything the report no longer prints is still in `--json`.
 
 Then `save`. It writes `reviewed: false` and requires `--authored-by`.
 

@@ -355,7 +355,7 @@ def md_screen(prompt, s, show=None):
           "of the whole slot -- the %d words below the cut and the residual are not "
           "in that denominator." % (tot, n_theta - n_ret)]
     if len(top) > SHOW:
-        L += ["", "%d further content words fall below `%s`; `--json` returns "
+        L += ["", "%d further content words fall below `%s`; `--show N` prints "
               "everything the server sent." % (len(top) - SHOW, disp[-1]["word"])]
 
     warn = []
@@ -472,7 +472,11 @@ def md_help():
             "\n"
             "--json    payload instead of the report\n"
             "--pair    screen against a different declared pair (stay on one)\n"
-            "--k       widen the returned candidate list\n"
+            "--show    MORE ROWS in the screen table (default 60). This is\n"
+            "          the flag you want to see further down the list.\n"
+            "--k       server-side cut, ALREADY 500, so theta binds first.\n"
+            "          Raising it changes nothing; three agents have now\n"
+            "          lost time to this line saying otherwise.\n"
             "```\n\n"
             "First call after 10 minutes idle reloads the models (~16 s); after "
             "that a screen is ~5 s and a full axis ~24 s.\n\n"
@@ -882,11 +886,27 @@ def _main(argv):
         else:
             out = save(a.prompt, g, n, s, a.authored_by, a.domain, a.note,
                        overwrite=a.overwrite)
-            md = ("# Saved\n\n`%s` — **%s** to `%s`\n\n"
+            #: **ECHO WHAT WAS RECORDED** (opus-sexual-2): it had to parse
+            #: `slot-client.yaml` to learn what it had just written. The item is
+            #: returned in the response and was being thrown away.
+            _it = out.get("item") or {}
+            _ax = _it.get("axis") or {}
+            _rows = [("naughty", "%.4f" % (_it.get("naughty_mass") or 0.0),
+                      " ".join(_it.get("naughty") or [])[:44]),
+                     ("nice", "%.4f" % (_it.get("nice_mass") or 0.0),
+                      " ".join(_it.get("nice") or [])[:44])]
+            _sh = _it.get("share")
+            md = ("# Saved\n\n`%s` — **%s** to `%s`\n\n%s\n\n"
+                  "share **%s** · gate %s · purity %s · checks that ran: %s\n\n"
                   "Marked `reviewed: false` for RH.\n\n"
                   "```bash\nmalign-slot census\n```"
                   % (out.get("item_id"), out.get("action"),
-                     (out.get("path") or "").split("/")[-1]))
+                     (out.get("path") or "").split("/")[-1],
+                     _table(_rows, ["pole", "mass", "words"]),
+                     ("%.3f" % _sh) if isinstance(_sh, (int, float)) else "—",
+                     "PASS" if _ax.get("separates") else "REFUSED",
+                     ("%.2f" % _ax["purity"]) if _ax.get("purity") is not None else "—",
+                     ", ".join(_ax.get("checks_ran") or []) or "none"))
     print(json.dumps(out, indent=1, ensure_ascii=False) if (a.json or md is None) else md)
     return 0
 
