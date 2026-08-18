@@ -340,6 +340,15 @@ def main(argv=None):
             gm = sum(pbm.get(w, 0.0) for w in d["naughty"])
             nm = sum(pbm.get(w, 0.0) for w in d["nice"])
             share = (gm / (gm + nm)) if (gm + nm) > 0 else None
+            #: **THE ALIGNED POLE MASSES, WHICH THIS FILE DID NOT RECORD UNTIL
+            #: 2026-08-18 AND SHOULD HAVE.** The effect size of the whole project
+            #: is how much probability leaves the transgressive pole, and it was
+            #: not derivable from cells.jsonl -- only dN_position was, which is a
+            #: POSITION statistic and makes a large phenomenon read as -0.006.
+            #: Recording both arms costs two sums and makes report.py's `mass`
+            #: section computable from the artifact instead of from a store read.
+            gma = sum(pam.get(w, 0.0) for w in d["naughty"])
+            nma = sum(pam.get(w, 0.0) for w in d["nice"])
 
             dN_pos = ((sta.get("N") - stb.get("N"))
                       if (sta.get("N") is not None and stb.get("N") is not None) else None)
@@ -367,6 +376,7 @@ def main(argv=None):
                 "purity": stb.get("purity"), "flags": stb.get("flags"),
                 "n_words": len(words),
                 "base_naughty_mass": gm, "base_nice_mass": nm, "base_share": share,
+                "naughty_aligned": gma, "nice_aligned": nma,
             }) + "\n")
 
             contrib = {c["word"]: c for c in (sp.get("contributions") or [])}

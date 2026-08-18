@@ -8,6 +8,7 @@ Sections, in the order the argument decomposes:
 
     pop        the population, from the manifest, with coverage warnings
     sign       DOES the mass move toward the permitted pole, and the pooled null
+    mass       HOW MUCH mass leaves the transgressive pole -- the effect size
     consist    per-item consistency against the null -- the corpus-level FENCE
     share      how much of the movement the declared axis accounts for
     mech       reordering against sharpening, and the rank statistics
@@ -55,7 +56,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
 
-SECTIONS = ["pop", "sign", "consist", "share", "mech", "dose", "frames", "churn", "ties"]
+SECTIONS = ["pop", "sign", "mass", "consist", "share", "mech", "dose", "frames", "churn", "ties"]
 
 
 def load(rundir, name):
@@ -197,6 +198,76 @@ def sec_sign(A):
           % (st.median(fr), min(fr), max(fr), max(abs(x - 0.5) for x in fr)))
     print("      declared beats %d of %d draws"
           % (sum(1 for x in fr if abs(real - 0.5) > abs(x - 0.5)), K))
+
+
+def sec_mass(A):
+    """How much probability mass leaves the transgressive pole.
+
+    **THE EFFECT SIZE, AND IT IS NOT dN_position.** `dN_position` is a POSITION
+    statistic: where the mass-weighted centroid sits on an axis, divided across
+    the whole distribution. It answers "did the distribution move permitted-ward"
+    and it answers it well -- 62.7%, z=+19.1, 17 of 21 lineages. What it does NOT
+    do is say how much was moved, and reporting -0.006 as the effect makes a
+    large phenomenon look negligible. The word tables show `fired` 0.252 -> 0.107
+    and `cock` 0.185 -> 0.068; those are the same events.
+
+    **NEVER CONDITION THIS ON `signature`.** Displacement is DEFINED as both split
+    components negative, so mass loss within displacement cells is the definition
+    restated, not evidence. Conditioning gives -48% and means nothing. Every
+    figure below is over all cells or over a mass threshold fixed in the BASE arm,
+    which is chosen before the outcome and so cannot select on it.
+
+    The permitted pole is the built-in control: if the transgressive pole were
+    losing mass because the whole distribution concentrates, the permitted pole
+    would lose it too. It gains.
+    """
+    c = [x for x in A["cells"] if x.get("base_naughty_mass") is not None
+         and x.get("base_nice_mass") is not None]
+    if not c:
+        print("MASS -- base pole masses not in cells.jsonl (pre-analyze.py run)")
+        return
+    print("MASS ON THE POLES -- the effect size. NO conditioning on signature.")
+
+    def block(lab, g):
+        if not g:
+            return
+        dg = [x["naughty_aligned"] - x["base_naughty_mass"] for x in g]
+        dn = [x["nice_aligned"] - x["base_nice_mass"] for x in g]
+        rg = [(x["naughty_aligned"] - x["base_naughty_mass"]) / x["base_naughty_mass"]
+              for x in g if x["base_naughty_mass"] > 0]
+        kg = sum(1 for v in dg if v < 0)
+        kn = sum(1 for v in dn if v > 0)
+        print("   %-32s n=%d" % (lab, len(g)))
+        print("      transgressive  median %+.4f (%+.1f%% rel)  FELL in %4.1f%%  z=%+.1f"
+              % (st.median(dg), 100 * st.median(rg) if rg else float("nan"),
+                 100 * kg / len(dg), z_binom(kg, len(dg))))
+        print("      permitted      median %+.4f                   ROSE in %4.1f%%  z=%+.1f"
+              % (st.median(dn), 100 * kn / len(dn), z_binom(kn, len(dn))))
+    have = [x for x in c if x.get("naughty_aligned") is not None]
+    if not have:
+        print("   aligned pole masses absent; re-run analyze.py to record them")
+        return
+    block("all cells", have)
+    block("base transgressive mass >= 0.05", [x for x in have if x["base_naughty_mass"] >= 0.05])
+    print()
+    print("   per lineage, transgressive mass fell in what share of cells:")
+    by = collections.defaultdict(list)
+    for x in have:
+        by[(x["base"], x["endpoint"])].append(x)
+    rows = []
+    for k, g in by.items():
+        kk = sum(1 for x in g if x["naughty_aligned"] < x["base_naughty_mass"])
+        rows.append((kk / len(g), short(*k), kk, len(g), z_binom(kk, len(g))))
+    for r, lab, kk, n, zz in sorted(rows, reverse=True):
+        print("      %-40s %4d/%4d %5.1f%%  z=%+5.1f %s"
+              % (lab, kk, n, 100 * r, zz, "***" if abs(zz) > 3 else ""))
+    print("      %d of %d lineages significant" % (sum(1 for r in rows if r[4] > 2), len(rows)))
+    print()
+    print("   NOTE mass and position DISAGREE on some lineages and that is information,")
+    print("        not noise: position registers movement WITHIN the transgressive pole")
+    print("        (kill -> hit) that a pole total cannot see, so it is the more")
+    print("        sensitive detector while mass is the more legible effect size.")
+    print("        Report both. Neither is the real one.")
 
 
 def sec_consist(A):
@@ -603,6 +674,8 @@ def main(argv=None):
             sec_pop(A)
         elif s == "sign":
             sec_sign(A)
+        elif s == "mass":
+            sec_mass(A)
         elif s == "consist":
             sec_consist(A)
         elif s == "share":
