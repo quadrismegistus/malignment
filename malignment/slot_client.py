@@ -506,7 +506,7 @@ def md_help():
             "malign-slot screen \"<prompt>\"          candidate words at the blank\n"
             "malign-slot axis   \"<prompt>\" --naughty a,b,c --nice d,e,f\n"
             "malign-slot save   \"<prompt>\" --naughty ... --nice ... \\\n"
-            "                   --domain <sexual|violence|institutional> \\\n"
+            "                   --domain <sexual|violence|institutional|identity> \\\n"
             "                   --authored-by <name>\n"
             "\n"
             "--json    payload instead of the report\n"
@@ -549,6 +549,26 @@ def md_axis(prompt, g, n, r):
                 "(%.4f) passed its floor (%.2f); that is not the problem."
                 % (t_ - c_, t_, t_ - c_, "" if t_ - c_ == 1 else "s", g_, f_))
     L += ["## 1. Gate — `separates`", "", "> " + head]
+    #: **A TAG WITH NO MASS IS NOT A TAG, AND THE GATE CANNOT SEE THAT**
+    #: (opus-identity, 2026-08-18). The brief says a word the screening did not
+    #: surface "will be refused" -- only `save` refuses. `axis` scored a pole
+    #: containing `kill` when `kill` was absent from the distribution entirely,
+    #: returned PASS at gap 0.4430 with 16/16 orderings, and printed a mass table
+    #: in which that word silently contributed zero. bge embeds any string, so
+    #: the axis geometry is unaffected by whether the model ever offers the word.
+    #:
+    #: An author trusting the verdict would have built an item on a pole a
+    #: quarter of which does not exist, with the only signal being a mass figure
+    #: they had to derive by hand.
+    _zero = r.get("zero_mass") or []
+    if _zero:
+        L += ["", "> **%d tagged word%s carr%s NO MASS in this run: %s.** The axis "
+              "still separates -- bge embeds any string, so geometry says nothing "
+              "about whether the model offers the word. `save` will refuse these. "
+              "Retag from the screened list."
+              % (len(_zero), "" if len(_zero) == 1 else "s",
+                 "ies" if len(_zero) == 1 else "y",
+                 ", ".join("`%s`" % w for w in _zero))]
     #: **THE MASSES GO HERE, UNCONDITIONALLY** (opus-sexual-2, 2026-08-18). The
     #: brief's central criterion is "do both of my poles hold real mass"; the
     #: numbers were in the JSON and the report printed none of them. That agent
@@ -889,10 +909,16 @@ def md_axis(prompt, g, n, r):
         #: mis-file the item, only obedient.
         L += ["```bash", 'malign-slot save "%s" \\' % prompt,
               "  --naughty %s \\" % ",".join(g), "  --nice %s \\" % ",".join(n),
-              "  --domain <sexual|violence|institutional> \\",
+              "  --domain <sexual|violence|institutional|identity> \\",
               "  --authored-by <your-name>", "```", "",
-              "Those three domains only — the others in the corpus were proposed by "
-              "earlier agents, not by RH. `malign-slot census` shows which is thin."]
+              #: Was "three domains only" while `census` tracked four and the
+              #: brief documented four (opus-identity, 2026-08-18): an author
+              #: following the tool rather than the brief would never author
+              #: `identity` at all.
+              "Those four domains only — the others in the corpus were proposed by "
+              "earlier agents, not by RH. `malign-slot census` shows which is thin. "
+              "**`identity` is a matched set** — one frame, one pole set, only the "
+              "group varies — so read the brief before adding to it."]
     else:
         L += ["Retag and run `axis` again. Do not save an item whose gate refused."]
     return "\n".join(L)

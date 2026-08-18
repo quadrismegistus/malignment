@@ -1181,7 +1181,16 @@ def _slot_axis(prompt, naughty, nice, words, probs=None,
     _gm = sum(float(_pr.get(w, 0.0) or 0.0) for w in naughty)
     _nm = sum(float(_pr.get(w, 0.0) or 0.0) for w in nice)
     _tt = _gm + _nm
+    #: **TAGS THE MODEL NEVER OFFERED.** bge embeds any string, so a pole word
+    #: absent from the distribution still contributes geometry and the gate
+    #: passes on it -- opus-identity scored a pole containing `kill` when `kill`
+    #: was absent entirely, got PASS at gap 0.4430 with 16/16 orderings, and the
+    #: only trace was a zero it would have had to derive by hand. `save` refuses
+    #: these; `axis` said nothing. Named here so the panel can.
+    _zero = sorted(w for w in list(naughty) + list(nice)
+                   if not float((probs or {}).get(w, 0.0) or 0.0))
     return dict({
+        "zero_mass": _zero,
         "naughty_mass": round(_gm, 6),
         "nice_mass": round(_nm, 6),
         "share": round(_gm / _tt, 6) if _tt else None,
