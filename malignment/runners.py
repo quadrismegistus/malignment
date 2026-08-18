@@ -561,6 +561,20 @@ class TWPRunner:
         bmask, cjk, pol = ld.bmask, ld.cjk, ld.bos_policy
         n_ok = n_ref = n_skip = 0
         refuse_path = os.path.join(os.path.dirname(st.path), "topup_refused.jsonl")
+        #: **THIS FILE IS APPEND-ONLY AND OUTLIVES THE RUN THAT WROTE IT.**
+        #: CT-LLM-SFT's held 57 records: 55 from the v3-sourced worklist, whose
+        #: refusals ran 0.75-0.93 mass against tails of 0.08-0.46, and 2 from
+        #: the corrected run. Read without that separation it reports a
+        #: catastrophe that was fixed hours earlier -- and unlike the stash,
+        #: nothing here is keyed, so a later record cannot supersede an earlier
+        #: one. A marker line is the cheapest thing that makes the boundary
+        #: legible; purging would destroy the record of a real failure.
+        with open(refuse_path, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps({"_run": True, "model": ck.model_id,
+                                 "rules": rules.label(),
+                                 "prompt_cache": bool(T.USE_PROMPT_CACHE),
+                                 "prompts_todo": len(todo),
+                                 "producer": PRODUCER}) + "\n")
         for i, p in enumerate(todo, 1):
             rec1 = have1[p]
             try:
@@ -576,9 +590,20 @@ class TWPRunner:
             if total > res["tail"]:
                 n_ref += 1
                 with open(refuse_path, "a", encoding="utf-8") as fh:
+                    #: SELF-DESCRIBING, because a marker line and the records
+                    #: it introduces are separated by any crash. Every record
+                    #: carries the instrument that produced it, so the 55
+                    #: v3-sourced refusals in CT-LLM-SFT's log stay
+                    #: distinguishable from the 2 real ones no matter how the
+                    #: file is read or truncated.
                     fh.write(json.dumps({"model": ck.model_id, "prompt": p,
                                          "topup_mass": total, "tail": res["tail"],
-                                         "n_words": len(got)}, ensure_ascii=False) + "\n")
+                                         "n_words": len(got),
+                                         "rules": rules.label(),
+                                         "rule_version": V4.RULE_VERSION,
+                                         "prompt_cache": bool(T.USE_PROMPT_CACHE),
+                                         "producer": PRODUCER},
+                                        ensure_ascii=False) + "\n")
                 continue
             res["tail"] = res["tail"] - total
             #: `n_paths = 1` BY CONSTRUCTION -- a scored row is a single-path
