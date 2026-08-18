@@ -999,11 +999,12 @@ SHARD_TEMPLATE = '''export const meta = {
 
 const RUBRIC = %(rubric)s
 
-//: id -> {f: fragment, c: continuation}. Carried IN THE SCRIPT, not read from a
-//: file: the full passages file for this pass is 33 MB and no agent can read it
-//: to find its 45 ids. Each agent is handed only its own batch, inline.
-const P = %(passages)s
-const IDS = %(ids)s
+//: [{file, ids}] -- one small file per batch, ~45 passages and ~30 KB each.
+//: NOT one big file (the pass is 33 MB and no agent can read that to find its
+//: 45 ids) and NOT inline in this script (the runtime rejects a script over
+//: 524,288 bytes, and inlining made these 3.4 MB).
+const BATCHES = %(batches)s
+const IDS = BATCHES.flatMap(b => b.ids)
 
 const SCHEMA = {
   type: 'object',
@@ -1021,20 +1022,15 @@ const SCHEMA = {
   required: ['codings'], additionalProperties: false,
 }
 
-const BATCH = %(batch)d
-const batches = []
-for (let s = 0; s < IDS.length; s += BATCH) batches.push(IDS.slice(s, s + BATCH))
-log(`shard %(shard)d: ${IDS.length} passages, ${batches.length} batches of <=${BATCH}, two coders`)
+log(`shard %(shard)d: ${IDS.length} passages, ${BATCHES.length} batches, two coders`)
 
 phase('Code')
 const jobs = []
 for (const coder of ['A', 'B']) {
-  batches.forEach((ids, bi) => {
-    const body = ids.map(i =>
-      `### ${i}\\nFRAGMENT: ${P[i].f}\\nCONTINUATION: ${P[i].c}`).join('\\n\\n')
+  BATCHES.forEach((b, bi) => {
     jobs.push(() => agent(
       RUBRIC
-        + `\\n\\n## The passages\\n\\nCode all ${ids.length} below and return every one of them, keyed by the id in its heading. Return nothing else.\\n\\n${body}`,
+        + `\\n\\n## The passages\\n\\nRead ${b.file}. It is a JSON object keyed by passage id; each entry has \\`f\\` (the fragment the model was given) and \\`c\\` (what it wrote). Code EVERY passage in that file -- all ${b.ids.length} of them -- and return every one, keyed by its id. Return nothing else.`,
       { label: `s%(shard)02d:${coder}:b${bi}`, phase: 'Code', schema: SCHEMA, effort: 'high' }
     ).then(r => ({ coder, rows: (r && r.codings) || [] })))
   })
@@ -1118,15 +1114,25 @@ def passc_shards(nshards=6, per_cell=535, batch=45):
     pas = {i: {"f": p, "c": x}
            for i, p, x in zip(t["id"], t["prompt"], t["text"]) if i in todoset}
     os.makedirs(os.path.join(PASSC, "scripts"), exist_ok=True)
+    bdir = os.path.join(PASSC, "batches")
+    os.makedirs(bdir, exist_ok=True)
     plan = {}
+    nb = 0
     for k, ids in enumerate(buckets):
         ids = sorted(ids)
+        bl = []
+        for s0 in range(0, len(ids), batch):
+            chunk = ids[s0:s0 + batch]
+            bf = os.path.join(bdir, "s%02d-b%03d.json" % (k, s0 // batch))
+            json.dump({i: pas[i] for i in chunk}, open(bf, "w", encoding="utf-8"),
+                      ensure_ascii=False)
+            bl.append({"file": bf, "ids": chunk})
+            nb += 1
         src = SHARD_TEMPLATE % {
             "shard": k, "nshards": nshards, "n": len(ids), "batch": batch,
-            "nbatch": (len(ids) + batch - 1) // batch,
+            "nbatch": len(bl),
             "rubric": json.dumps(rubric_text()),
-            "ids": json.dumps(ids),
-            "passages": json.dumps({i: pas[i] for i in ids}, ensure_ascii=False)}
+            "batches": json.dumps(bl)}
         f = os.path.join(PASSC, "scripts", "shard-%02d.js" % k)
         open(f, "w", encoding="utf-8").write(src)
         plan[k] = {"script": f, "n": len(ids), "pairs": sorted({pair_of[i] for i in ids})}
@@ -1162,6 +1168,198 @@ def passc_save(src):
           % (k, len(r["A"]), len(r["B"]), r.get("_requested", -1),
              len(r.get("_missing_A", [])), len(r.get("_missing_B", [])),
              r.get("_stray", 0), p))
+
+
+def _norm(s):
+    """Normalise before declaring a span absent.
+
+    On the test shard 7 of 152 spans failed a literal `in` check and SIX were
+    smart quotes, `&amp;` or collapsed whitespace. Reporting those as
+    fabrications gives a 4.6% rate where the truth is 0.7%.
+    """
+    import unicodedata
+    s = unicodedata.normalize("NFKC", s)
+    for a, b in (("’", "'"), ("‘", "'"), ("“", '"'),
+                 ("”", '"'), ("&amp;", "&"), ("&quot;", '"'), ("&#39;", "'")):
+        s = s.replace(a, b)
+    return _re.sub(r"\s+", " ", s).strip()
+
+
+def passc_report():
+    """Pass C. Wilcoxon on per-pair rate differences; the pair is the unit.
+
+    NOT a sign test. The statistic is a rate difference measured identically in
+    every pair, so magnitudes are comparable and discarding them is pure power
+    loss. RH: *"why do you keep proposing sign tests and throwing away
+    magnitude."* The sign test is reported beside it as a distribution-free
+    check, never as the headline.
+
+    PRIMARY is PRESENCE (mode != NONE): the direct form of the scene-kind claim
+    and the best powered. At n=150/cell with sigma_het=3pp its Wilcoxon MDE is
+    ~3.4pp on a 64% base, against ~4.4pp for the SHOWN-share statistic on a 30%
+    base. Told/shown is the refinement that makes a finding interesting, not the
+    thing that establishes it.
+
+    sigma_het is estimated by method of moments: Var(observed per-pair deltas)
+    minus the mean binomial sampling variance. It is the parameter that decides
+    whether raising n buys anything, because n shrinks the sampling half and
+    does nothing at all to the other.
+    """
+    import collections, math, csv, glob, statistics as st
+    import pyarrow.parquet as pq
+    from scipy import stats
+    t = pq.read_table(PASSC_SAMPLE).to_pydict()
+    K = {i: dict(model=m, arm=a, pair=p, prompt=q, text=x)
+         for i, m, a, p, q, x in zip(t["id"], t["model"], t["arm"], t["pair"],
+                                     t["prompt"], t["text"])}
+    A, B = {}, {}
+    for f in sorted(glob.glob(os.path.join(PASSC, "codings", "*.json"))):
+        r = json.load(open(f, encoding="utf-8"))
+        A.update(r.get("A", {})); B.update(r.get("B", {}))
+    ids = sorted(i for i in A if i in B and i in K)
+    if not ids:
+        print("no codings yet")
+        return
+    print("PASS C -- %s passages coded by both, %d lineages, %d models\n"
+          % (format(len(ids), ","), len({K[i]["pair"] for i in ids}),
+             len({K[i]["model"] for i in ids})))
+
+    print("=== AGREEMENT ===")
+
+    def kap(get, lv):
+        o = sum(1 for i in ids if get(A[i]) == get(B[i])) / len(ids)
+        e = sum((sum(1 for i in ids if get(A[i]) == v) / len(ids)) *
+                (sum(1 for i in ids if get(B[i]) == v) / len(ids)) for v in lv)
+        return o, ((o - e) / (1 - e) if e < 1 else float("nan"))
+    for lbl, get, lv in (
+            ("narrative", lambda d: d["narrative"], (True, False)),
+            ("mode", lambda d: d["mode"], ("NONE", "TOLD", "SHOWN")),
+            ("  presence", lambda d: d["mode"] != "NONE", (True, False)),
+            ("drift", lambda d: d["drift"], ("HOLDS", "SHIFTS", "UNMOORED")),
+            ("degree", lambda d: d["degree"], (0, 1, 2, 3))):
+        o, k = kap(get, lv)
+        print("  %-12s raw %5.1f%%  kappa %.3f" % (lbl, 100 * o, k))
+    sub = [i for i in ids if A[i]["mode"] != "NONE" and B[i]["mode"] != "NONE"]
+    if sub:
+        o = sum(1 for i in sub if A[i]["mode"] == B[i]["mode"]) / len(sub)
+        p = sum(1 for i in sub for M in (A, B) if M[i]["mode"] == "SHOWN") / (2 * len(sub))
+        e = p * p + (1 - p) ** 2
+        print("  %-12s raw %5.1f%%  kappa %.3f   (n=%s, TOLD vs SHOWN only)"
+              % ("  told/shown", 100 * o, (o - e) / (1 - e), format(len(sub), ",")))
+
+    print("\n=== SPANS ===")
+    tot = lit = nrm = absent = 0
+    for i in ids:
+        for M in (A, B):
+            s = M[i]["span"]
+            if not s:
+                continue
+            tot += 1
+            if s in K[i]["text"]:
+                lit += 1
+            elif _norm(s) in _norm(K[i]["text"]):
+                nrm += 1
+            else:
+                absent += 1
+    if tot:
+        print("  %s spans | literal %.1f%% | recovered by normalising %.1f%% | ABSENT %.2f%%"
+              % (format(tot, ","), 100 * lit / tot, 100 * nrm / tot, 100 * absent / tot))
+
+    print("\n=== NARRATIVE YIELD (the filter) ===")
+    keep = [i for i in ids if A[i]["narrative"] and B[i]["narrative"]]
+    print("  both coders say narrative: %s of %s (%.1f%%)   [assumption was 28%%]"
+          % (format(len(keep), ","), format(len(ids), ","), 100 * len(keep) / len(ids)))
+    for arm in ("base", "aligned"):
+        s2 = [i for i in ids if K[i]["arm"] == arm]
+        if s2:
+            print("    %-8s %.1f%%" % (arm, 100 * sum(
+                1 for i in s2 if A[i]["narrative"] and B[i]["narrative"]) / len(s2)))
+    if not keep:
+        return
+    print("\n  everything below is ON THE NARRATIVE SUBSET ONLY.")
+
+    def rates(sel, f):
+        by = collections.defaultdict(lambda: collections.defaultdict(list))
+        for i in sel:
+            by[K[i]["pair"]][K[i]["arm"]].append(i)
+        out = {}
+        for p, v in by.items():
+            if v["base"] and v["aligned"]:
+                out[p] = (sum(1 for i in v["base"] for M in (A, B) if f(M[i])) / (2 * len(v["base"])),
+                          sum(1 for i in v["aligned"] for M in (A, B) if f(M[i])) / (2 * len(v["aligned"])),
+                          len(v["base"]), len(v["aligned"]))
+        return out
+
+    def test(lbl, f, primary=False):
+        R = rates(keep, f)
+        if len(R) < 3:
+            print("  %-26s only %d pairs -- not testable" % (lbl, len(R)))
+            return
+        d = [a - b for b, a, _, _ in R.values()]
+        samp = st.mean(b * (1 - b) / (2 * nb) + a * (1 - a) / (2 * na)
+                       for b, a, nb, na in R.values())
+        het = max(0.0, st.pvariance(d) - samp) ** 0.5
+        try:
+            w = stats.wilcoxon(d).pvalue
+        except ValueError:
+            w = float("nan")
+        up = sum(1 for x in d if x > 0); dn = sum(1 for x in d if x < 0)
+        sg = stats.binomtest(up, up + dn).pvalue if up + dn else float("nan")
+        z = 2.8016 / math.sqrt(len(R)) / math.sqrt(3 / math.pi)
+        print("  %-26s%s" % (lbl, "   <-- PRIMARY" if primary else ""))
+        print("      %d pairs | base %.1f%% aligned %.1f%% | median delta %+.2fpp"
+              % (len(R), 100 * st.mean(b for b, a, _, _ in R.values()),
+                 100 * st.mean(a for b, a, _, _ in R.values()), 100 * st.median(d)))
+        print("      Wilcoxon p=%.4f | sign %d up %d down p=%.4f" % (w, up, dn, sg))
+        print("      sigma_het %.2fpp (sampling %.2fpp) | MDE at this n and spread %.2fpp"
+              % (100 * het, 100 * samp ** 0.5, 100 * z * st.pstdev(d)))
+
+    print("\n=== THE ARM TEST, per lineage pair ===")
+    test("presence  mode != NONE", lambda d: d["mode"] != "NONE", primary=True)
+    test("SHOWN, of all", lambda d: d["mode"] == "SHOWN")
+    test("TOLD, of all", lambda d: d["mode"] == "TOLD")
+    test("drift HOLDS", lambda d: d["drift"] == "HOLDS")
+
+    print("\n=== F13's TRADE-OFF: mode x drift ===")
+    print("  %-10s %8s %8s %8s %8s" % ("drift", "n", "NONE", "TOLD", "SHOWN"))
+    for lv in ("HOLDS", "SHIFTS", "UNMOORED"):
+        s2 = [i for i in keep if A[i]["drift"] == lv == B[i]["drift"]]
+        if not s2:
+            continue
+        c = collections.Counter(M[i]["mode"] for i in s2 for M in (A, B))
+        n = sum(c.values())
+        print("  %-10s %8s %7.1f%% %7.1f%% %7.1f%%"
+              % (lv, format(len(s2), ","), 100 * c["NONE"] / n,
+                 100 * c["TOLD"] / n, 100 * c["SHOWN"] / n))
+
+    print("\n=== STRATA (presence rate, base -> aligned) ===")
+    kind = {}
+    for r in csv.DictReader(open(os.path.join(RESULTS, "prompt_kind.csv"), encoding="utf-8")):
+        if r["unanimous"] == "1":
+            kind[r["prompt"]] = r["kind"]
+    stage = {}
+    try:
+        from malignment import roster
+        for base, arms in roster.lineages().items():
+            for m in arms:
+                if m != base:
+                    stage[base] = ("DPO" if m.upper().endswith("DPO") else
+                                   "zephyr" if "zephyr" in m else "Instruct")
+    except Exception:
+        pass
+    for lbl, keyf in (("prompt kind", lambda i: kind.get(K[i]["prompt"], "?")),
+                      ("alignment stage", lambda i: stage.get(K[i]["pair"], "?"))):
+        print("  %s:" % lbl)
+        for g in sorted({keyf(i) for i in keep}):
+            sel = [i for i in keep if keyf(i) == g]
+            R = rates(sel, lambda d: d["mode"] != "NONE")
+            if not R:
+                continue
+            d = [a - b for b, a, _, _ in R.values()]
+            print("    %-12s %2d pairs %8s passages   %.1f%% -> %.1f%%  (%+.2fpp)"
+                  % (g, len(R), format(len(sel), ","),
+                     100 * st.mean(b for b, a, _, _ in R.values()),
+                     100 * st.mean(a for b, a, _, _ in R.values()), 100 * st.mean(d)))
 
 
 def passc_recover(write=False):
@@ -1436,6 +1634,7 @@ if __name__ == "__main__":
     ap.add_argument("--shards", type=int)
     ap.add_argument("--passc-save")
     ap.add_argument("--passc-recover", action="store_true")
+    ap.add_argument("--passc", action="store_true")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--batch", type=int, default=45)
     ap.add_argument("--per-cell", type=int, default=714)
@@ -1483,5 +1682,7 @@ if __name__ == "__main__":
         passc_save(a.passc_save)
     elif a.passc_recover:
         passc_recover(write=a.write)
+    elif a.passc:
+        passc_report()
     else:
         ap.print_help()
