@@ -13,6 +13,24 @@ displacement:
 `no-safety` retains about 90% of the full-mix effect. That is a model-side null
 about the slice's CONSEQUENCE. **Nobody has looked at its CONTENT.**
 
+## AND THE SLICE IS NOT INERT -- AI2's OWN ABLATION SAYS IT WORKS
+
+Tulu 3 paper (arXiv:2411.15124v5), Table 10, on removing the same three datasets:
+
+    safety average    93.1 -> 74.7      overall average  60.1 -> 58.0
+
+> *"We found that our safety SFT data was generally orthogonal to our other
+> datasets... most skills stayed roughly the same, except the safety average."*
+
+**So the slice does heavy work on the behaviour it was built for and none on
+displacement.** That is a far stronger reading of U's null than "safety data does
+nothing": the corpus is effective, measurably, at the thing it names -- and the
+lexical operation is orthogonal to it in exactly the way AI2 found it orthogonal
+to maths and coding.
+
+**Which is what makes the content question worth asking.** What is in a corpus
+that moves refusal behaviour 18.4 points and moves displacement not at all?
+
 This asks what is in it. It is a corpus question and it needs no cells, no v4 and
 no models.
 
@@ -28,6 +46,13 @@ arm's attestation and not from them.
     allenai/wildjailbreak  50,000
                           -------
                           110,983 of 939,344 = 11.8% of the SFT mixture
+
+**CONFIRMED AGAINST THE PAPER, Table 7, not against the attestation.** The
+attestation's dataset claims carry EMPTY quotes on both arms (19 of 19 on the full
+arm, 15 of 15 on no-safety), and the no-safety card is an unedited auto-generated
+template -- verified by fetching it -- so its slice list is inference. The
+attestation's apparent fourth difference, OpenMathInstruct 2, is a list-building
+artifact and was not removed by the ablation.
 
 **NOT CACHED.** All three need downloading; wildguardmix and wildjailbreak are
 expected to be gated behind a license acceptance on HF, which is RH's to accept,
