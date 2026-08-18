@@ -421,6 +421,222 @@ def calib(n=20, seed=20260818):
                                         " ".join(v["continuation"][:88].split())))
 
 
+def passb_build():
+    """The Pass B pilot set: the ENGLISH Pass A survivors, re-fetched clean.
+
+    **Not a fresh draw.** Pass B only ever runs on survivors, Pass A is already
+    done on these exact passages, and everything joins on one key with no
+    second extraction. RH, on the alternative of a fresh 880: batch size does
+    not shorten wall clock -- it is total-work-over-concurrency -- so the way
+    to a short pilot is fewer codings, not bigger batches.
+
+    English only: stage 1 is English on all 22 pairs; the zh arm is a separate
+    8-pair replication and an English-designed rubric is a different instrument
+    on Chinese.
+
+    NOT balanced by construction, unlike the Pass A draw. Balance buys nothing
+    here -- each arm's rate is computed within arm -- and discarding aligned
+    passages to match base would throw away precision for symmetry's sake.
+    """
+    import collections
+    K = json.load(open(os.path.join(RESULTS, "passA_key.json"), encoding="utf-8"))
+    R = json.load(open(PASSA, encoding="utf-8"))
+    A, B = R["A"], R["B"]
+    zh = lambda s: any("一" <= c <= "鿿" for c in s)
+    keep = [i for i in sorted(K)
+            if A[i]["lexical"] == "clean" == B[i]["lexical"]
+            and A[i]["semantic"] == "means" == B[i]["semantic"]
+            and A[i]["frame"] in ("none", "furniture")
+            and B[i]["frame"] in ("none", "furniture")
+            and not zh(K[i]["prompt"])]
+    print("Pass A survivors: %d | English: %d" % (
+        sum(1 for i in K if A[i]["lexical"] == "clean" == B[i]["lexical"]
+            and A[i]["semantic"] == "means" == B[i]["semantic"]
+            and A[i]["frame"] in ("none", "furniture")
+            and B[i]["frame"] in ("none", "furniture")), len(keep)))
+    print("  arms: %s" % dict(collections.Counter(K[i]["arm"] for i in keep)))
+    print("  models: %d of 44" % len(set(K[i]["model"] for i in keep)))
+    texts = fetch_clean([K[i] for i in keep])
+    out = {}
+    for j, (i, txt) in enumerate(zip(keep, texts)):
+        out["b%03d" % j] = {"fragment": K[i]["prompt"], "continuation": txt,
+                            "_src": i, "_model": K[i]["model"], "_arm": K[i]["arm"],
+                            "_sample_idx": K[i]["sample_idx"]}
+    esc = sum(1 for v in out.values() if "\\n" in v["continuation"])
+    print("  extracted %d | still-escaped %d | real newlines in %d"
+          % (len(out), esc, sum(1 for v in out.values() if "\n" in v["continuation"])))
+    p = os.path.join(RESULTS, "passB_pilot.json")
+    json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print("  -> %s" % p)
+    return out
+
+
+PASSB = os.path.join(RESULTS, "passB_codings.json")
+
+
+def passb_save(src):
+    raw = json.load(open(src, encoding="utf-8"))
+    r = raw.get("result", raw)
+    if isinstance(r, str):
+        r = json.loads(r)
+    json.dump({"A": r["A"], "B": r["B"], "agree": r.get("agree")},
+              open(PASSB, "w", encoding="utf-8"), indent=0, sort_keys=True,
+              ensure_ascii=False)
+    print("saved %d/%d -> %s" % (len(r["A"]), len(r["B"]), PASSB))
+
+
+def passb_report():
+    """Pass B pilot. 190 English Pass A survivors, two blind coders.
+
+    **THE UNIT IS WRONG FOR A TEST AND SAID SO.** 190 passages over 41 models is
+    ~2.3 per model per arm, so the per-pair sign test here is a preview of shape,
+    not a result. Passage-level rates are quoted because they are what this n
+    supports; the real run's unit is the 22 lineage pairs.
+    """
+    import csv, itertools, collections, statistics as st, yaml
+    R = json.load(open(PASSB, encoding="utf-8"))
+    K = json.load(open(os.path.join(RESULTS, "passB_pilot.json"), encoding="utf-8"))
+    A, B = R["A"], R["B"]
+    ids = sorted(i for i in A if i in B and i in K)
+    MODE = ("NONE", "TOLD", "SHOWN")
+    DRIFT = ("HOLDS", "SHIFTS", "UNMOORED")
+
+    def kappa(f, lv):
+        obs = sum(1 for i in ids if A[i][f] == B[i][f]) / len(ids)
+        exp = sum((sum(1 for i in ids if A[i][f] == v) / len(ids)) *
+                  (sum(1 for i in ids if B[i][f] == v) / len(ids)) for v in lv)
+        return obs, exp, (obs - exp) / (1 - exp)
+
+    print("PASS B PILOT -- %d passages, two blind coders, arms unlabelled\n" % len(ids))
+    print("=== AGREEMENT ===")
+    for f, lv in (("mode", MODE), ("drift", DRIFT), ("degree", (0, 1, 2, 3))):
+        o, e, k = kappa(f, lv)
+        print("  %-8s raw %5.1f%%  chance %5.1f%%  kappa %.3f" % (f, 100*o, 100*e, k))
+    w1 = sum(1 for i in ids if abs(A[i]["degree"] - B[i]["degree"]) <= 1) / len(ids)
+    print("  degree within 1 point: %.1f%%" % (100*w1))
+    print("\n  where mode disagrees, what are the pairs?")
+    c = collections.Counter(tuple(sorted((A[i]["mode"], B[i]["mode"])))
+                            for i in ids if A[i]["mode"] != B[i]["mode"])
+    for k2, v in c.most_common():
+        print("    %-16s %d" % ("/".join(k2), v))
+
+    print("\n=== BY ARM (coder-averaged; %d base, %d aligned passages) ==="
+          % (sum(1 for i in ids if K[i]["_arm"] == "base"),
+             sum(1 for i in ids if K[i]["_arm"] == "aligned")))
+    print("  %-22s %10s %10s %9s" % ("", "base", "aligned", "delta"))
+    for lbl, pred in (("mode NONE", lambda M, i: M[i]["mode"] == "NONE"),
+                      ("mode TOLD", lambda M, i: M[i]["mode"] == "TOLD"),
+                      ("mode SHOWN", lambda M, i: M[i]["mode"] == "SHOWN"),
+                      ("any interiority", lambda M, i: M[i]["mode"] != "NONE"),
+                      ("SHOWN | interior", None)):
+        row = []
+        for arm in ("base", "aligned"):
+            sub = [i for i in ids if K[i]["_arm"] == arm]
+            if lbl == "SHOWN | interior":
+                num = sum(1 for i in sub for M in (A, B) if M[i]["mode"] == "SHOWN")
+                den = sum(1 for i in sub for M in (A, B) if M[i]["mode"] != "NONE")
+                row.append(100 * num / den if den else float("nan"))
+            else:
+                row.append(100 * sum(1 for i in sub for M in (A, B) if pred(M, i))
+                           / (2 * len(sub)))
+        print("  %-22s %9.1f%% %9.1f%% %+8.1f" % (lbl, row[0], row[1], row[1] - row[0]))
+    for arm in ("base", "aligned"):
+        sub = [i for i in ids if K[i]["_arm"] == arm]
+        print("  mean degree, %-8s %.3f" % (arm, st.mean(M[i]["degree"] for i in sub for M in (A, B))))
+    print("  %-22s %10s %10s %9s" % ("drift", "base", "aligned", "delta"))
+    for lv in DRIFT:
+        row = [100 * sum(1 for i in ids if K[i]["_arm"] == arm and A[i]["drift"] == lv)
+               / max(sum(1 for i in ids if K[i]["_arm"] == arm), 1) for arm in ("base", "aligned")]
+        print("  %-22s %9.1f%% %9.1f%% %+8.1f" % ("  " + lv, row[0], row[1], row[1] - row[0]))
+
+    print("\n=== F13's TRADE-OFF AT PASSAGE SCALE: mode x drift ===")
+    print("  Does interiority arrive with the scene intact, or where it stops?")
+    print("  %-10s %5s %8s %8s %8s   %s" % ("drift", "n", "NONE", "TOLD", "SHOWN", "mean deg"))
+    for lv in DRIFT:
+        sub = [i for i in ids if A[i]["drift"] == lv == B[i]["drift"]]
+        if not sub:
+            continue
+        cc = collections.Counter(M[i]["mode"] for i in sub for M in (A, B))
+        n = sum(cc.values())
+        print("  %-10s %5d %7.1f%% %7.1f%% %7.1f%%   %.2f"
+              % (lv, len(sub), 100*cc["NONE"]/n, 100*cc["TOLD"]/n, 100*cc["SHOWN"]/n,
+                 st.mean(M[i]["degree"] for i in sub for M in (A, B))))
+    print("\n  and the same split WITHIN each arm (SHOWN share among interior):")
+    for arm in ("base", "aligned"):
+        out = []
+        for lv in DRIFT:
+            sub = [i for i in ids if K[i]["_arm"] == arm and A[i]["drift"] == lv == B[i]["drift"]]
+            num = sum(1 for i in sub for M in (A, B) if M[i]["mode"] == "SHOWN")
+            den = sum(1 for i in sub for M in (A, B) if M[i]["mode"] != "NONE")
+            out.append("%s %s" % (lv[:4], ("%.0f%% (%d)" % (100*num/den, den)) if den else "-"))
+        print("    %-8s %s" % (arm, "   ".join(out)))
+
+    print("\n=== BY PROMPT KIND (the echo check) ===")
+    kind = {}
+    for r in csv.DictReader(open(os.path.join(RESULTS, "prompt_kind.csv"), encoding="utf-8")):
+        if r["unanimous"] == "1":
+            kind[r["prompt"]] = r["kind"]
+    print("  %-10s %5s %10s %10s %9s" % ("kind", "n", "base int%", "algn int%", "delta"))
+    for kk in ("EXTERIOR", "INTERIOR", "NEITHER"):
+        sub = [i for i in ids if kind.get(K[i]["fragment"]) == kk]
+        if not sub:
+            continue
+        row = []
+        for arm in ("base", "aligned"):
+            s2 = [i for i in sub if K[i]["_arm"] == arm]
+            row.append(100 * sum(1 for i in s2 for M in (A, B) if M[i]["mode"] != "NONE")
+                       / (2 * len(s2)) if s2 else float("nan"))
+        print("  %-10s %5d %9.1f%% %9.1f%% %+8.1f" % (kk, len(sub), row[0], row[1], row[1] - row[0]))
+
+    print("\n=== BY QUINTUPLET ROLE ===")
+    SRC = os.path.join(os.path.dirname(os.path.dirname(HERE)),
+                       "roster", "prompts", "flat", "quintuplets.yaml")
+    role = {q["prompt"]: q["group_role"] for q in yaml.safe_load(open(SRC, encoding="utf-8"))["prompts"]}
+    print("  %-14s %5s %10s %10s %9s" % ("role", "n", "base int%", "algn int%", "delta"))
+    for rr in ("POLE_A", "POLE_B", "BOTH", "CONTROL_A", "CONTROL_B"):
+        sub = [i for i in ids if role.get(K[i]["fragment"]) == rr]
+        if not sub:
+            continue
+        row = []
+        for arm in ("base", "aligned"):
+            s2 = [i for i in sub if K[i]["_arm"] == arm]
+            row.append(100 * sum(1 for i in s2 for M in (A, B) if M[i]["mode"] != "NONE")
+                       / (2 * len(s2)) if s2 else float("nan"))
+        print("  %-14s %5d %9.1f%% %9.1f%% %+8.1f" % (rr, len(sub), row[0], row[1], row[1] - row[0]))
+
+    print("\n=== PER-PAIR PREVIEW -- SHAPE ONLY, NOT A TEST ===")
+    from malignment import roster
+    ep = roster.endpoints()[0]
+    rev = {}
+    for b, a in ep.items():
+        rev[b] = b; rev[a] = b
+    per = collections.defaultdict(lambda: collections.defaultdict(list))
+    for i in ids:
+        base = rev.get(K[i]["_model"])
+        if base:
+            per[base][K[i]["_arm"]].append(st.mean(M[i]["degree"] for M in (A, B)))
+    ok = [(p, st.mean(v["base"]), st.mean(v["aligned"]))
+          for p, v in per.items() if v["base"] and v["aligned"]]
+    up = sum(1 for _, b, a in ok if a > b)
+    dn = sum(1 for _, b, a in ok if a < b)
+    print("  pairs with BOTH arms present: %d of 22" % len(ok))
+    print("  aligned mean degree higher in %d, lower in %d, tied %d"
+          % (up, dn, len(ok) - up - dn))
+    print("  median passages per arm in those pairs: %.1f"
+          % st.median([len(v["base"]) + len(v["aligned"]) for p, v in per.items()
+                       if v["base"] and v["aligned"]]))
+    print("  -> at this n a sign test is not worth computing; the real run is 22 pairs")
+
+    with open(os.path.join(RESULTS, "passB_pilot.csv"), "w", encoding="utf-8") as fh:
+        fh.write("id,model,arm,mode_A,mode_B,degree_A,degree_B,drift_A,drift_B,span_A\n")
+        for i in ids:
+            fh.write('%s,%s,%s,%s,%s,%d,%d,%s,%s,"%s"\n'
+                     % (i, K[i]["_model"], K[i]["_arm"], A[i]["mode"], B[i]["mode"],
+                        A[i]["degree"], B[i]["degree"], A[i]["drift"], B[i]["drift"],
+                        A[i]["span"].replace('"', '""')))
+    print("\n  -> %s" % os.path.join(RESULTS, "passB_pilot.csv"))
+
+
 def roles():
     """Quintuplet role per prompt, from the DECLARED field. Not reconstructed.
 
@@ -549,6 +765,9 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--roles", action="store_true")
     ap.add_argument("--calib", action="store_true")
+    ap.add_argument("--passb-build", action="store_true")
+    ap.add_argument("--passb-save")
+    ap.add_argument("--passb", action="store_true")
     ap.add_argument("--save")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--exits", action="store_true")
@@ -569,5 +788,11 @@ if __name__ == "__main__":
         roles()
     elif a.calib:
         calib()
+    elif a.passb_build:
+        passb_build()
+    elif a.passb_save:
+        passb_save(a.passb_save)
+    elif a.passb:
+        passb_report()
     else:
         ap.print_help()

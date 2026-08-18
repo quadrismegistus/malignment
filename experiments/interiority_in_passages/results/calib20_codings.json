@@ -1,0 +1,522 @@
+{
+"degree": {
+"D0": {
+"PROBE": {
+"degree": 3,
+"drift": "SHIFTS"
+},
+"q000": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q001": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q002": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q003": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q004": {
+"degree": 3,
+"drift": "HOLDS"
+},
+"q005": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q006": {
+"degree": 2,
+"drift": "HOLDS"
+},
+"q007": {
+"degree": 1,
+"drift": "UNMOORED"
+},
+"q008": {
+"degree": 2,
+"drift": "SHIFTS"
+},
+"q009": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q010": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q011": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q012": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q013": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q014": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q015": {
+"degree": 3,
+"drift": "HOLDS"
+},
+"q016": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q017": {
+"degree": 0,
+"drift": "SHIFTS"
+},
+"q018": {
+"degree": 2,
+"drift": "UNMOORED"
+},
+"q019": {
+"degree": 1,
+"drift": "HOLDS"
+}
+},
+"D1": {
+"PROBE": {
+"degree": 3,
+"drift": "SHIFTS"
+},
+"q000": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q001": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q002": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q003": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q004": {
+"degree": 2,
+"drift": "HOLDS"
+},
+"q005": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q006": {
+"degree": 2,
+"drift": "HOLDS"
+},
+"q007": {
+"degree": 1,
+"drift": "UNMOORED"
+},
+"q008": {
+"degree": 2,
+"drift": "SHIFTS"
+},
+"q009": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q010": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q011": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q012": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q013": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q014": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q015": {
+"degree": 3,
+"drift": "HOLDS"
+},
+"q016": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q017": {
+"degree": 0,
+"drift": "SHIFTS"
+},
+"q018": {
+"degree": 2,
+"drift": "UNMOORED"
+},
+"q019": {
+"degree": 1,
+"drift": "HOLDS"
+}
+},
+"D2": {
+"PROBE": {
+"degree": 3,
+"drift": "SHIFTS"
+},
+"q000": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q001": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q002": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q003": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q004": {
+"degree": 3,
+"drift": "HOLDS"
+},
+"q005": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q006": {
+"degree": 2,
+"drift": "HOLDS"
+},
+"q007": {
+"degree": 0,
+"drift": "UNMOORED"
+},
+"q008": {
+"degree": 3,
+"drift": "SHIFTS"
+},
+"q009": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q010": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q011": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q012": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q013": {
+"degree": 1,
+"drift": "SHIFTS"
+},
+"q014": {
+"degree": 0,
+"drift": "HOLDS"
+},
+"q015": {
+"degree": 3,
+"drift": "HOLDS"
+},
+"q016": {
+"degree": 1,
+"drift": "HOLDS"
+},
+"q017": {
+"degree": 0,
+"drift": "SHIFTS"
+},
+"q018": {
+"degree": 2,
+"drift": "UNMOORED"
+},
+"q019": {
+"degree": 1,
+"drift": "HOLDS"
+}
+}
+},
+"mode": {
+"M0": {
+"PROBE": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q000": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q001": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q002": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q003": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q004": {
+"drift": "HOLDS",
+"mode": "SHOWN"
+},
+"q005": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q006": {
+"drift": "HOLDS",
+"mode": "SHOWN"
+},
+"q007": {
+"drift": "UNMOORED",
+"mode": "TOLD"
+},
+"q008": {
+"drift": "SHIFTS",
+"mode": "SHOWN"
+},
+"q009": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q010": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q011": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q012": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q013": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q014": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q015": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q016": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q017": {
+"drift": "SHIFTS",
+"mode": "NONE"
+},
+"q018": {
+"drift": "UNMOORED",
+"mode": "SHOWN"
+},
+"q019": {
+"drift": "HOLDS",
+"mode": "TOLD"
+}
+},
+"M1": {
+"PROBE": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q000": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q001": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q002": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q003": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q004": {
+"drift": "HOLDS",
+"mode": "SHOWN"
+},
+"q005": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q006": {
+"drift": "HOLDS",
+"mode": "SHOWN"
+},
+"q007": {
+"drift": "UNMOORED",
+"mode": "NONE"
+},
+"q008": {
+"drift": "SHIFTS",
+"mode": "SHOWN"
+},
+"q009": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q010": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q011": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q012": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q013": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q014": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q015": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q016": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q017": {
+"drift": "SHIFTS",
+"mode": "NONE"
+},
+"q018": {
+"drift": "UNMOORED",
+"mode": "SHOWN"
+},
+"q019": {
+"drift": "HOLDS",
+"mode": "TOLD"
+}
+},
+"M2": {
+"PROBE": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q000": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q001": {
+"drift": "SHIFTS",
+"mode": "NONE"
+},
+"q002": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q003": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q004": {
+"drift": "HOLDS",
+"mode": "SHOWN"
+},
+"q005": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q006": {
+"drift": "HOLDS",
+"mode": "SHOWN"
+},
+"q007": {
+"drift": "UNMOORED",
+"mode": "NONE"
+},
+"q008": {
+"drift": "SHIFTS",
+"mode": "SHOWN"
+},
+"q009": {
+"drift": "UNMOORED",
+"mode": "TOLD"
+},
+"q010": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q011": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q012": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q013": {
+"drift": "SHIFTS",
+"mode": "TOLD"
+},
+"q014": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q015": {
+"drift": "HOLDS",
+"mode": "TOLD"
+},
+"q016": {
+"drift": "HOLDS",
+"mode": "NONE"
+},
+"q017": {
+"drift": "SHIFTS",
+"mode": "NONE"
+},
+"q018": {
+"drift": "UNMOORED",
+"mode": "SHOWN"
+},
+"q019": {
+"drift": "HOLDS",
+"mode": "TOLD"
+}
+}
+}
+}
