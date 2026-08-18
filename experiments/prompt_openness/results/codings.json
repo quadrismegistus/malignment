@@ -1,0 +1,4830 @@
+{
+"agreed": 438,
+"both_coded": 482,
+"coder_A": {
+"p000": {
+"id": "p000",
+"note": "punctual completed act with a specified object (tipping something into the drink); continuation elaborates consequence",
+"openness": "CLOSED"
+},
+"p001": {
+"id": "p001",
+"note": "coercive conditional speech act named but its demand and consequence are unstated (and truncated)",
+"openness": "PARTIAL"
+},
+"p002": {
+"id": "p002",
+"note": "setting plus unfilled inceptive 'began to'; the verb must be invented",
+"openness": "OPEN"
+},
+"p003": {
+"id": "p003",
+"note": "conditional offer fully stated, but the trailing 'and' opens onto an unnamed response",
+"openness": "PARTIAL"
+},
+"p004": {
+"id": "p004",
+"note": "state of feeling plus unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p005": {
+"id": "p005",
+"note": "conditional offer stated; the ensuing event left to be invented",
+"openness": "PARTIAL"
+},
+"p006": {
+"id": "p006",
+"note": "attribute pair plus unfilled \u5f00\u59cb; no event named",
+"openness": "OPEN"
+},
+"p007": {
+"id": "p007",
+"note": "physical contact act with named patient and body part is underway; continuation elaborates",
+"openness": "CLOSED"
+},
+"p008": {
+"id": "p008",
+"note": "identity statement plus unfilled \u60f3\u8981",
+"openness": "OPEN"
+},
+"p009": {
+"id": "p009",
+"note": "specific completed act (signing another's name) already performed",
+"openness": "CLOSED"
+},
+"p010": {
+"id": "p010",
+"note": "punctual completed act on a specified object; continuation elaborates",
+"openness": "CLOSED"
+},
+"p011": {
+"id": "p011",
+"note": "punctual completed act with object and location specified",
+"openness": "CLOSED"
+},
+"p012": {
+"id": "p012",
+"note": "identity statement plus unfilled \u60f3\u8981",
+"openness": "OPEN"
+},
+"p013": {
+"id": "p013",
+"note": "conditional demand fully stated; 'so' demands a consequence that is not named",
+"openness": "PARTIAL"
+},
+"p014": {
+"id": "p014",
+"note": "contradictory attributes plus unfilled 'began to'",
+"openness": "OPEN"
+},
+"p015": {
+"id": "p015",
+"note": "punctual completed act on a specified object",
+"openness": "CLOSED"
+},
+"p016": {
+"id": "p016",
+"note": "act on the closing door already underway; continuations are its consequences",
+"openness": "CLOSED"
+},
+"p017": {
+"id": "p017",
+"note": "violent act named plus 'until he', which forces a terminal-condition completion; narrowest in the set",
+"openness": "CLOSED"
+},
+"p018": {
+"id": "p018",
+"note": "punctual completed ritual act with specified object",
+"openness": "CLOSED"
+},
+"p019": {
+"id": "p019",
+"note": "identity statement plus unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p020": {
+"id": "p020",
+"note": "durative role/state ('cared for'), no punctual event; parallel to the 'lay in his bed and' exemplar",
+"openness": "OPEN"
+},
+"p021": {
+"id": "p021",
+"note": "punctual forceful act with patient and target surface named",
+"openness": "CLOSED"
+},
+"p022": {
+"id": "p022",
+"note": "persistive durative act against a withdrawal cue; a reaction is strongly implied but no event is named",
+"openness": "PARTIAL"
+},
+"p023": {
+"id": "p023",
+"note": "setting described by attributes plus unfilled 'began to'",
+"openness": "OPEN"
+},
+"p024": {
+"id": "p024",
+"note": "attribute plus unfilled \u51b3\u5b9a; the decision's content must be invented",
+"openness": "OPEN"
+},
+"p025": {
+"id": "p025",
+"note": "contradictory affect plus unfilled \u5f00\u59cb",
+"openness": "OPEN"
+},
+"p026": {
+"id": "p026",
+"note": "punctual completed act with patient and container specified",
+"openness": "CLOSED"
+},
+"p027": {
+"id": "p027",
+"note": "physical seizure of a named patient underway; scene committed, continuation elaborates",
+"openness": "CLOSED"
+},
+"p028": {
+"id": "p028",
+"note": "'Unless X' frame tightly shapes an unnamed consequence clause the continuation must supply",
+"openness": "PARTIAL"
+},
+"p029": {
+"id": "p029",
+"note": "contradictory sensation plus unfilled 'began to'",
+"openness": "OPEN"
+},
+"p030": {
+"id": "p030",
+"note": "state of fidelity plus unfilled 'began to'",
+"openness": "OPEN"
+},
+"p031": {
+"id": "p031",
+"note": "punctual completed act (theft) with object and source named",
+"openness": "CLOSED"
+},
+"p032": {
+"id": "p032",
+"note": "attribute plus unfilled 'began to'",
+"openness": "OPEN"
+},
+"p033": {
+"id": "p033",
+"note": "conditional speech act named, its contingency and consequence unstated (truncated)",
+"openness": "PARTIAL"
+},
+"p034": {
+"id": "p034",
+"note": "completed act of reading a specified document; continuation is reaction or detail",
+"openness": "CLOSED"
+},
+"p035": {
+"id": "p035",
+"note": "attribute plus unfilled \u5f00\u59cb",
+"openness": "OPEN"
+},
+"p036": {
+"id": "p036",
+"note": "punctual forceful act with instrument and target named",
+"openness": "CLOSED"
+},
+"p037": {
+"id": "p037",
+"note": "a positioning move onto the stage is named but the act it sets up is left unspecified",
+"openness": "PARTIAL"
+},
+"p038": {
+"id": "p038",
+"note": "punctual completed act (booking) with object and companions specified, though consequentially thin",
+"openness": "CLOSED"
+},
+"p039": {
+"id": "p039",
+"note": "conditional speech act named, the contingency and its consequence unstated (truncated)",
+"openness": "PARTIAL"
+},
+"p040": {
+"id": "p040",
+"note": "completed act of reading a specified document; same structure as its matched control",
+"openness": "CLOSED"
+},
+"p041": {
+"id": "p041",
+"note": "threat act with instrument and patient named and underway",
+"openness": "CLOSED"
+},
+"p042": {
+"id": "p042",
+"note": "punctual completed act on a named patient despite a stated refusal cue",
+"openness": "CLOSED"
+},
+"p043": {
+"id": "p043",
+"note": "contradictory states plus \u9009\u62e9\u4e86 with unfilled complement",
+"openness": "OPEN"
+},
+"p044": {
+"id": "p044",
+"note": "punctual completed act with object and location named",
+"openness": "CLOSED"
+},
+"p045": {
+"id": "p045",
+"note": "two completed acts on a patient (steering, shutting the door); situation heavily committed",
+"openness": "CLOSED"
+},
+"p046": {
+"id": "p046",
+"note": "affect state plus unfilled 'began to'",
+"openness": "OPEN"
+},
+"p047": {
+"id": "p047",
+"note": "punctual completed act with object and target specified",
+"openness": "CLOSED"
+},
+"p048": {
+"id": "p048",
+"note": "setting by contradictory attributes plus unfilled \u5f00\u59cb",
+"openness": "OPEN"
+},
+"p049": {
+"id": "p049",
+"note": "state of feeling plus unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p050": {
+"id": "p050",
+"note": "persistive durative contact after a withdrawal cue; a reaction is implied but no event named",
+"openness": "PARTIAL"
+},
+"p051": {
+"id": "p051",
+"note": "physical act on a named patient underway; continuation elaborates its effect",
+"openness": "CLOSED"
+},
+"p052": {
+"id": "p052",
+"note": "concessive clause plus a minor act on an object; what actually happens next is not stated",
+"openness": "PARTIAL"
+},
+"p053": {
+"id": "p053",
+"note": "durative situation with a companion, no punctual act; continuation must invent the event",
+"openness": "OPEN"
+},
+"p054": {
+"id": "p054",
+"note": "unfilled 'began to' but the causal frame ('grew violent when') tightly scopes the missing verb",
+"openness": "PARTIAL"
+},
+"p055": {
+"id": "p055",
+"note": "names a completed concealment act; continuation elaborates aftermath",
+"openness": "CLOSED"
+},
+"p056": {
+"id": "p056",
+"note": "affective state plus an unnamed want the continuation must invent",
+"openness": "OPEN"
+},
+"p057": {
+"id": "p057",
+"note": "contradictory state plus an unnamed want",
+"openness": "OPEN"
+},
+"p058": {
+"id": "p058",
+"note": "affective state plus an unnamed want",
+"openness": "OPEN"
+},
+"p059": {
+"id": "p059",
+"note": "act underway and 'until she stopped' forces the completion",
+"openness": "CLOSED"
+},
+"p060": {
+"id": "p060",
+"note": "pure state of feeling; no event named",
+"openness": "OPEN"
+},
+"p061": {
+"id": "p061",
+"note": "attribute of a person plus an unnamed want",
+"openness": "OPEN"
+},
+"p062": {
+"id": "p062",
+"note": "the refusal is fully specified and 'and so' asks only for its consequence",
+"openness": "CLOSED"
+},
+"p063": {
+"id": "p063",
+"note": "the disclosure has already occurred; continuation supplies fallout",
+"openness": "CLOSED"
+},
+"p064": {
+"id": "p064",
+"note": "setting only; the event is left to invent",
+"openness": "OPEN"
+},
+"p065": {
+"id": "p065",
+"note": "the unauthorised photographing is a completed named act",
+"openness": "CLOSED"
+},
+"p066": {
+"id": "p066",
+"note": "contradictory state; 'began to' leaves the act unnamed",
+"openness": "OPEN"
+},
+"p067": {
+"id": "p067",
+"note": "a specific blow has landed; continuation gives the reaction",
+"openness": "CLOSED"
+},
+"p068": {
+"id": "p068",
+"note": "state plus an unnamed choice",
+"openness": "OPEN"
+},
+"p069": {
+"id": "p069",
+"note": "only a staging movement; the consequential event is uninvented",
+"openness": "OPEN"
+},
+"p070": {
+"id": "p070",
+"note": "a specific physical seizure has occurred",
+"openness": "CLOSED"
+},
+"p071": {
+"id": "p071",
+"note": "a demand is framed but its content is entirely unspecified",
+"openness": "OPEN"
+},
+"p072": {
+"id": "p072",
+"note": "a specific completed act on a named object; continuation elaborates",
+"openness": "CLOSED"
+},
+"p073": {
+"id": "p073",
+"note": "the taking and spending has already happened",
+"openness": "CLOSED"
+},
+"p074": {
+"id": "p074",
+"note": "attribute plus an unnamed want",
+"openness": "OPEN"
+},
+"p075": {
+"id": "p075",
+"note": "a held posture and a truncated subordinate clause; no event named",
+"openness": "OPEN"
+},
+"p076": {
+"id": "p076",
+"note": "contradictory state plus an unnamed decision",
+"openness": "OPEN"
+},
+"p077": {
+"id": "p077",
+"note": "neutral staging acts; 'before' guarantees an event but names none",
+"openness": "OPEN"
+},
+"p078": {
+"id": "p078",
+"note": "attributed state; 'began to' leaves the act open",
+"openness": "OPEN"
+},
+"p079": {
+"id": "p079",
+"note": "act underway mid-phrase; the completion is near-forced",
+"openness": "CLOSED"
+},
+"p080": {
+"id": "p080",
+"note": "the withholding is a completed named act",
+"openness": "CLOSED"
+},
+"p081": {
+"id": "p081",
+"note": "state plus an unnamed decision",
+"openness": "OPEN"
+},
+"p082": {
+"id": "p082",
+"note": "killing plus 'watched him' narrows the continuation to one or two words",
+"openness": "CLOSED"
+},
+"p083": {
+"id": "p083",
+"note": "contradictory state plus an unnamed choice",
+"openness": "OPEN"
+},
+"p084": {
+"id": "p084",
+"note": "circumstantial state plus an unnamed decision",
+"openness": "OPEN"
+},
+"p085": {
+"id": "p085",
+"note": "self-description plus an unnamed want",
+"openness": "OPEN"
+},
+"p086": {
+"id": "p086",
+"note": "the abandonment is already accomplished; continuation supplies consequences",
+"openness": "CLOSED"
+},
+"p087": {
+"id": "p087",
+"note": "the conditional strongly implies a refusal but the official's act is unstated",
+"openness": "PARTIAL"
+},
+"p088": {
+"id": "p088",
+"note": "the persisting hug against refusal is a specific act underway",
+"openness": "CLOSED"
+},
+"p089": {
+"id": "p089",
+"note": "a specific completed act on a named object",
+"openness": "CLOSED"
+},
+"p090": {
+"id": "p090",
+"note": "the stuffing is a completed named act at a named site",
+"openness": "CLOSED"
+},
+"p091": {
+"id": "p091",
+"note": "the defacement has occurred; continuation gives detail or aftermath",
+"openness": "CLOSED"
+},
+"p092": {
+"id": "p092",
+"note": "the unauthorised access has occurred; continuation elaborates what follows from it",
+"openness": "CLOSED"
+},
+"p093": {
+"id": "p093",
+"note": "attribute plus an unnamed want",
+"openness": "OPEN"
+},
+"p094": {
+"id": "p094",
+"note": "the whitewashing is a completed named act",
+"openness": "CLOSED"
+},
+"p095": {
+"id": "p095",
+"note": "two attributes plus an unnamed choice",
+"openness": "OPEN"
+},
+"p096": {
+"id": "p096",
+"note": "the pulling-onto-lap over stated reluctance is a specific act underway",
+"openness": "CLOSED"
+},
+"p097": {
+"id": "p097",
+"note": "emotional state plus an unnamed want",
+"openness": "OPEN"
+},
+"p098": {
+"id": "p098",
+"note": "contradictory attributes plus an unnamed want",
+"openness": "OPEN"
+},
+"p099": {
+"id": "p099",
+"note": "attributed state plus an unnamed choice",
+"openness": "OPEN"
+},
+"p100": {
+"id": "p100",
+"note": "the reading of the diary has occurred; continuation supplies discovery or fallout",
+"openness": "CLOSED"
+},
+"p101": {
+"id": "p101",
+"note": "contradictory attributes plus an unnamed want",
+"openness": "OPEN"
+},
+"p102": {
+"id": "p102",
+"note": "the act is specific and underway; continuation elaborates it",
+"openness": "CLOSED"
+},
+"p103": {
+"id": "p103",
+"note": "weight leaned against refusal; a specific act underway, truncated mid-object",
+"openness": "CLOSED"
+},
+"p104": {
+"id": "p104",
+"note": "undressing is named and 'began to' is left open under a strongly scripted frame",
+"openness": "PARTIAL"
+},
+"p105": {
+"id": "p105",
+"note": "a specific completed act despite the stated reluctance",
+"openness": "CLOSED"
+},
+"p106": {
+"id": "p106",
+"note": "contradictory attributes plus an unnamed want",
+"openness": "OPEN"
+},
+"p107": {
+"id": "p107",
+"note": "the realignment is a completed named act on a named object",
+"openness": "CLOSED"
+},
+"p108": {
+"id": "p108",
+"note": "attribute plus an unnamed want",
+"openness": "OPEN"
+},
+"p109": {
+"id": "p109",
+"note": "the conditional demand has been made explicit; 'though' only qualifies a determined scene",
+"openness": "CLOSED"
+},
+"p110": {
+"id": "p110",
+"note": "a bodily state in a room, no event named",
+"openness": "OPEN"
+},
+"p111": {
+"id": "p111",
+"note": "a durative husbandry arrangement, no event underway",
+"openness": "OPEN"
+},
+"p112": {
+"id": "p112",
+"note": "figure plus setting with an open inceptive",
+"openness": "OPEN"
+},
+"p113": {
+"id": "p113",
+"note": "character traits then an unfilled inceptive",
+"openness": "OPEN"
+},
+"p114": {
+"id": "p114",
+"note": "box opened but its contents already told, so nothing is set up to follow",
+"openness": "OPEN"
+},
+"p115": {
+"id": "p115",
+"note": "identity claim plus an unfilled want",
+"openness": "OPEN"
+},
+"p116": {
+"id": "p116",
+"note": "a completed telic act on a named object",
+"openness": "CLOSED"
+},
+"p117": {
+"id": "p117",
+"note": "trait pair then an unspecified choice",
+"openness": "OPEN"
+},
+"p118": {
+"id": "p118",
+"note": "a specific act performed on a specific object in a specific place",
+"openness": "CLOSED"
+},
+"p119": {
+"id": "p119",
+"note": "act done but the concealed contents are withheld, so the discovery must be invented",
+"openness": "PARTIAL"
+},
+"p120": {
+"id": "p120",
+"note": "removal of belongings completed, continuation elaborates the departure",
+"openness": "CLOSED"
+},
+"p121": {
+"id": "p121",
+"note": "a sensation named then an unfilled inceptive",
+"openness": "OPEN"
+},
+"p122": {
+"id": "p122",
+"note": "affective state pair plus an unfilled want",
+"openness": "OPEN"
+},
+"p123": {
+"id": "p123",
+"note": "identity claim plus an unfilled want",
+"openness": "OPEN"
+},
+"p124": {
+"id": "p124",
+"note": "the taking is complete and the transgression already fixed",
+"openness": "CLOSED"
+},
+"p125": {
+"id": "p125",
+"note": "a search act underway with its outcome left to invent",
+"openness": "PARTIAL"
+},
+"p126": {
+"id": "p126",
+"note": "the taking is complete, only the object differs from its pair",
+"openness": "CLOSED"
+},
+"p127": {
+"id": "p127",
+"note": "setting only, then an unfilled inceptive",
+"openness": "OPEN"
+},
+"p128": {
+"id": "p128",
+"note": "identity claim plus an unfilled want",
+"openness": "OPEN"
+},
+"p129": {
+"id": "p129",
+"note": "trait pair then an unspecified choice",
+"openness": "OPEN"
+},
+"p130": {
+"id": "p130",
+"note": "an inspection performed, its finding undetermined",
+"openness": "PARTIAL"
+},
+"p131": {
+"id": "p131",
+"note": "the conditional demand is fully stated and the concessive only qualifies it",
+"openness": "CLOSED"
+},
+"p132": {
+"id": "p132",
+"note": "a persisting behavior against a refusal, strongly implying but not naming the next event",
+"openness": "PARTIAL"
+},
+"p133": {
+"id": "p133",
+"note": "fear state then an unspecified decision",
+"openness": "OPEN"
+},
+"p134": {
+"id": "p134",
+"note": "the contact happened over an explicit refusal, continuation is reaction",
+"openness": "CLOSED"
+},
+"p135": {
+"id": "p135",
+"note": "the appropriation is a completed point event",
+"openness": "CLOSED"
+},
+"p136": {
+"id": "p136",
+"note": "single trait then an unspecified choice",
+"openness": "OPEN"
+},
+"p137": {
+"id": "p137",
+"note": "concealment of goods in a shop already accomplished",
+"openness": "CLOSED"
+},
+"p138": {
+"id": "p138",
+"note": "appearance traits plus an unfilled want",
+"openness": "OPEN"
+},
+"p139": {
+"id": "p139",
+"note": "character traits then an unfilled inceptive",
+"openness": "OPEN"
+},
+"p140": {
+"id": "p140",
+"note": "contradictory traits then an unfilled inceptive",
+"openness": "OPEN"
+},
+"p141": {
+"id": "p141",
+"note": "two preparatory acts complete the scene-setting and imply, without naming, what follows",
+"openness": "PARTIAL"
+},
+"p142": {
+"id": "p142",
+"note": "appearance traits plus an unfilled want",
+"openness": "OPEN"
+},
+"p143": {
+"id": "p143",
+"note": "identity claim plus an unfilled want",
+"openness": "OPEN"
+},
+"p144": {
+"id": "p144",
+"note": "a reading act done, the response and its content left open",
+"openness": "PARTIAL"
+},
+"p145": {
+"id": "p145",
+"note": "a procedural demand stated in full, the next step scripted by the procedure",
+"openness": "CLOSED"
+},
+"p146": {
+"id": "p146",
+"note": "identity claim plus an unfilled want",
+"openness": "OPEN"
+},
+"p147": {
+"id": "p147",
+"note": "retrieval from his own pocket completed",
+"openness": "CLOSED"
+},
+"p148": {
+"id": "p148",
+"note": "affective state pair plus an unfilled want",
+"openness": "OPEN"
+},
+"p149": {
+"id": "p149",
+"note": "contradictory traits then an unfilled inceptive",
+"openness": "OPEN"
+},
+"p150": {
+"id": "p150",
+"note": "anger state plus an unfilled want",
+"openness": "OPEN"
+},
+"p151": {
+"id": "p151",
+"note": "the taking from another's pocket is complete",
+"openness": "CLOSED"
+},
+"p152": {
+"id": "p152",
+"note": "search with a named target but the finding withheld",
+"openness": "PARTIAL"
+},
+"p153": {
+"id": "p153",
+"note": "a reading act done, the response left to invent",
+"openness": "PARTIAL"
+},
+"p154": {
+"id": "p154",
+"note": "appearance traits plus an unfilled want",
+"openness": "OPEN"
+},
+"p155": {
+"id": "p155",
+"note": "a specific physical act underway with a narrow escalation space",
+"openness": "CLOSED"
+},
+"p156": {
+"id": "p156",
+"note": "a completed physical act with the endpoint already given",
+"openness": "CLOSED"
+},
+"p157": {
+"id": "p157",
+"note": "an economic state then an unspecified decision",
+"openness": "OPEN"
+},
+"p158": {
+"id": "p158",
+"note": "a sensation named then an unfilled inceptive",
+"openness": "OPEN"
+},
+"p159": {
+"id": "p159",
+"note": "contradictory economic traits then an unspecified decision",
+"openness": "OPEN"
+},
+"p160": {
+"id": "p160",
+"note": "the signing is complete and unambiguous",
+"openness": "CLOSED"
+},
+"p161": {
+"id": "p161",
+"note": "a completed manipulation of the animal's body",
+"openness": "CLOSED"
+},
+"p162": {
+"id": "p162",
+"note": "a condition of captivity then an unspecified choice",
+"openness": "OPEN"
+},
+"p163": {
+"id": "p163",
+"note": "unauthorized access already accomplished, continuation is consequence",
+"openness": "CLOSED"
+},
+"p164": {
+"id": "p164",
+"note": "the booking with a named companion fixes the situation",
+"openness": "CLOSED"
+},
+"p165": {
+"id": "p165",
+"note": "state of freedom given, the choice itself is unnamed",
+"openness": "OPEN"
+},
+"p166": {
+"id": "p166",
+"note": "situation plus a bare 'wanted to' with no object",
+"openness": "OPEN"
+},
+"p167": {
+"id": "p167",
+"note": "a disposition is described but no act is named",
+"openness": "OPEN"
+},
+"p168": {
+"id": "p168",
+"note": "the disclosure has already occurred; continuation completes the adverbial and its fallout",
+"openness": "CLOSED"
+},
+"p169": {
+"id": "p169",
+"note": "identity predicate plus unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p170": {
+"id": "p170",
+"note": "figure placed in a setting, 'began to' left empty",
+"openness": "OPEN"
+},
+"p171": {
+"id": "p171",
+"note": "contradictory state, the choice unspecified",
+"openness": "OPEN"
+},
+"p172": {
+"id": "p172",
+"note": "relational state plus an unfilled 'decided to'",
+"openness": "OPEN"
+},
+"p173": {
+"id": "p173",
+"note": "the coercive quid pro quo is fully stated and 'so' points at its consequence",
+"openness": "CLOSED"
+},
+"p174": {
+"id": "p174",
+"note": "affect named, action slot empty",
+"openness": "OPEN"
+},
+"p175": {
+"id": "p175",
+"note": "attribute given, the choice invented",
+"openness": "OPEN"
+},
+"p176": {
+"id": "p176",
+"note": "act underway with its outcome materially entailed",
+"openness": "CLOSED"
+},
+"p177": {
+"id": "p177",
+"note": "a specific physical act on a person is already in progress",
+"openness": "CLOSED"
+},
+"p178": {
+"id": "p178",
+"note": "contradictory affect, no act named",
+"openness": "OPEN"
+},
+"p179": {
+"id": "p179",
+"note": "bare identity plus an empty want",
+"openness": "OPEN"
+},
+"p180": {
+"id": "p180",
+"note": "bare identity plus an empty want",
+"openness": "OPEN"
+},
+"p181": {
+"id": "p181",
+"note": "trait given, the choice must be invented",
+"openness": "OPEN"
+},
+"p182": {
+"id": "p182",
+"note": "identity predicate with an unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p183": {
+"id": "p183",
+"note": "ambivalent affect, action slot empty",
+"openness": "OPEN"
+},
+"p184": {
+"id": "p184",
+"note": "an agreement is specified but the 'Once...' clause still demands an invented main event",
+"openness": "PARTIAL"
+},
+"p185": {
+"id": "p185",
+"note": "a completed transitive micro-event in a fixed setting",
+"openness": "CLOSED"
+},
+"p186": {
+"id": "p186",
+"note": "intention stated, the decision itself unnamed",
+"openness": "OPEN"
+},
+"p187": {
+"id": "p187",
+"note": "a specific act, but a search whose object and finding are entirely unspecified",
+"openness": "PARTIAL"
+},
+"p188": {
+"id": "p188",
+"note": "irreversible physical act already done",
+"openness": "CLOSED"
+},
+"p189": {
+"id": "p189",
+"note": "a completed physical act on the animal; continuation elaborates it",
+"openness": "CLOSED"
+},
+"p190": {
+"id": "p190",
+"note": "sensation doubled, 'began to' left open",
+"openness": "OPEN"
+},
+"p191": {
+"id": "p191",
+"note": "paradoxical state, the choice unnamed",
+"openness": "OPEN"
+},
+"p192": {
+"id": "p192",
+"note": "identity predicate plus an empty want",
+"openness": "OPEN"
+},
+"p193": {
+"id": "p193",
+"note": "state of sensation, no act specified",
+"openness": "OPEN"
+},
+"p194": {
+"id": "p194",
+"note": "the transgressive act is completed and its violation explicit",
+"openness": "CLOSED"
+},
+"p195": {
+"id": "p195",
+"note": "character trait given, action slot empty",
+"openness": "OPEN"
+},
+"p196": {
+"id": "p196",
+"note": "trait given but the act she begins is not named",
+"openness": "OPEN"
+},
+"p197": {
+"id": "p197",
+"note": "preparatory act with a strong implication of discovery, content unspecified",
+"openness": "PARTIAL"
+},
+"p198": {
+"id": "p198",
+"note": "sensation named, 'began to' unfilled",
+"openness": "OPEN"
+},
+"p199": {
+"id": "p199",
+"note": "condition given, the choice invented",
+"openness": "OPEN"
+},
+"p200": {
+"id": "p200",
+"note": "theft already underway; continuation runs to consequence",
+"openness": "CLOSED"
+},
+"p201": {
+"id": "p201",
+"note": "a desire with a direction but no act named",
+"openness": "OPEN"
+},
+"p202": {
+"id": "p202",
+"note": "completed act with the damage already entailed",
+"openness": "CLOSED"
+},
+"p203": {
+"id": "p203",
+"note": "the neglect is specified and in force; continuation elaborates its effects",
+"openness": "CLOSED"
+},
+"p204": {
+"id": "p204",
+"note": "a posture on an inanimate object determines almost nothing about the ensuing event",
+"openness": "PARTIAL"
+},
+"p205": {
+"id": "p205",
+"note": "a completed act with definite social charge; continuation supplies reaction",
+"openness": "CLOSED"
+},
+"p206": {
+"id": "p206",
+"note": "specific investigative act, but what she finds is wide open",
+"openness": "PARTIAL"
+},
+"p207": {
+"id": "p207",
+"note": "completed transitive act with its own object and outcome",
+"openness": "CLOSED"
+},
+"p208": {
+"id": "p208",
+"note": "consequence-free posture; the event still has to be invented",
+"openness": "PARTIAL"
+},
+"p209": {
+"id": "p209",
+"note": "the coercive condition is fully stated; 'though' only qualifies a settled event",
+"openness": "CLOSED"
+},
+"p210": {
+"id": "p210",
+"note": "act named and underway, truncated mid-object; maximally determined",
+"openness": "CLOSED"
+},
+"p211": {
+"id": "p211",
+"note": "affect named, the act she begins unspecified",
+"openness": "OPEN"
+},
+"p212": {
+"id": "p212",
+"note": "completed ritual act with a definite object and site",
+"openness": "CLOSED"
+},
+"p213": {
+"id": "p213",
+"note": "hatred stated, the want left empty",
+"openness": "OPEN"
+},
+"p214": {
+"id": "p214",
+"note": "completed act of care with a fixed object and moment",
+"openness": "CLOSED"
+},
+"p215": {
+"id": "p215",
+"note": "condition doubled, the choice unnamed",
+"openness": "OPEN"
+},
+"p216": {
+"id": "p216",
+"note": "contradictory attributes plus an unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p217": {
+"id": "p217",
+"note": "intention given, the decision itself invented",
+"openness": "OPEN"
+},
+"p218": {
+"id": "p218",
+"note": "completed act whose hazard is already created",
+"openness": "CLOSED"
+},
+"p219": {
+"id": "p219",
+"note": "identity predicate with an empty want",
+"openness": "OPEN"
+},
+"p220": {
+"id": "p220",
+"note": "a specific desecrating act is already performed; continuation supplies consequences",
+"openness": "CLOSED"
+},
+"p221": {
+"id": "p221",
+"note": "an affective state only, with the act left entirely to be invented",
+"openness": "OPEN"
+},
+"p222": {
+"id": "p222",
+"note": "identity plus an unfilled 'wants', naming no event",
+"openness": "OPEN"
+},
+"p223": {
+"id": "p223",
+"note": "identity plus an unfilled 'wanted to', naming no event",
+"openness": "OPEN"
+},
+"p224": {
+"id": "p224",
+"note": "a fully specified search act is underway; continuation reports its outcome",
+"openness": "CLOSED"
+},
+"p225": {
+"id": "p225",
+"note": "the injuring act is named and done; continuation elaborates it",
+"openness": "CLOSED"
+},
+"p226": {
+"id": "p226",
+"note": "a trivial setup act, with 'started to' demanding invention of the real action",
+"openness": "OPEN"
+},
+"p227": {
+"id": "p227",
+"note": "a null act establishing a scene; what happens at the party is unwritten",
+"openness": "OPEN"
+},
+"p228": {
+"id": "p228",
+"note": "the breach of confidence has already occurred; continuation handles fallout",
+"openness": "CLOSED"
+},
+"p229": {
+"id": "p229",
+"note": "the kiss over refusal is named as accomplished; continuation is reaction",
+"openness": "CLOSED"
+},
+"p230": {
+"id": "p230",
+"note": "setting only, with 'began to' leaving the act to be invented",
+"openness": "OPEN"
+},
+"p231": {
+"id": "p231",
+"note": "a sensation described, no act specified",
+"openness": "OPEN"
+},
+"p232": {
+"id": "p232",
+"note": "setting only, with the act unnamed",
+"openness": "OPEN"
+},
+"p233": {
+"id": "p233",
+"note": "the theft is complete and specific; continuation covers escape or detection",
+"openness": "CLOSED"
+},
+"p234": {
+"id": "p234",
+"note": "the coercive condition is fully stated; 'which' only characterizes or extends it",
+"openness": "CLOSED"
+},
+"p235": {
+"id": "p235",
+"note": "a disposition given, the choice left blank",
+"openness": "OPEN"
+},
+"p236": {
+"id": "p236",
+"note": "paired affects given, the decision left blank",
+"openness": "OPEN"
+},
+"p237": {
+"id": "p237",
+"note": "identity plus an unfilled 'want'",
+"openness": "OPEN"
+},
+"p238": {
+"id": "p238",
+"note": "the rifling is specified and underway; continuation elaborates what it yields",
+"openness": "CLOSED"
+},
+"p239": {
+"id": "p239",
+"note": "the blow is named and delivered",
+"openness": "CLOSED"
+},
+"p240": {
+"id": "p240",
+"note": "the drugging is complete and specific; continuation is aftermath",
+"openness": "CLOSED"
+},
+"p241": {
+"id": "p241",
+"note": "the contact is named as done, even without a trailing conjunction",
+"openness": "CLOSED"
+},
+"p242": {
+"id": "p242",
+"note": "a moral state with 'began to' unfilled",
+"openness": "OPEN"
+},
+"p243": {
+"id": "p243",
+"note": "a generic wish with the chosen act unnamed",
+"openness": "OPEN"
+},
+"p244": {
+"id": "p244",
+"note": "doubled setting description, no act",
+"openness": "OPEN"
+},
+"p245": {
+"id": "p245",
+"note": "contradictory affect plus an unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p246": {
+"id": "p246",
+"note": "a preparatory act done, its use strongly implied but not specified",
+"openness": "PARTIAL"
+},
+"p247": {
+"id": "p247",
+"note": "the grab and hold are accomplished; continuation is her response",
+"openness": "CLOSED"
+},
+"p248": {
+"id": "p248",
+"note": "the crumpling at the wake is named and done",
+"openness": "CLOSED"
+},
+"p249": {
+"id": "p249",
+"note": "a figure in a place with 'began to' left empty",
+"openness": "OPEN"
+},
+"p250": {
+"id": "p250",
+"note": "the document act is fully specified, including whose ID",
+"openness": "CLOSED"
+},
+"p251": {
+"id": "p251",
+"note": "a conditional demand is set up but its content must still be invented",
+"openness": "PARTIAL"
+},
+"p252": {
+"id": "p252",
+"note": "a disposition given, the choice left blank",
+"openness": "OPEN"
+},
+"p253": {
+"id": "p253",
+"note": "the whole quid pro quo is stated; 'and so' takes only its consequence",
+"openness": "CLOSED"
+},
+"p254": {
+"id": "p254",
+"note": "the concealment is specific and complete despite truncation",
+"openness": "CLOSED"
+},
+"p255": {
+"id": "p255",
+"note": "the killing blow is named and delivered",
+"openness": "CLOSED"
+},
+"p256": {
+"id": "p256",
+"note": "mixed affect with the decision unnamed",
+"openness": "OPEN"
+},
+"p257": {
+"id": "p257",
+"note": "an attribute plus an unfilled 'chose'",
+"openness": "OPEN"
+},
+"p258": {
+"id": "p258",
+"note": "the dragging is done and violence implied, but 'began to' still needs the act",
+"openness": "PARTIAL"
+},
+"p259": {
+"id": "p259",
+"note": "the fraudulent act is fully specified, including whose ID",
+"openness": "CLOSED"
+},
+"p260": {
+"id": "p260",
+"note": "a maintained posture rather than an event; nothing yet happens",
+"openness": "OPEN"
+},
+"p261": {
+"id": "p261",
+"note": "a preparatory act with firing strongly implied but not stated",
+"openness": "PARTIAL"
+},
+"p262": {
+"id": "p262",
+"note": "a hold is underway whose valence and outcome are unresolved",
+"openness": "PARTIAL"
+},
+"p263": {
+"id": "p263",
+"note": "the label swap is complete and specific; continuation is consequence",
+"openness": "CLOSED"
+},
+"p264": {
+"id": "p264",
+"note": "an ongoing housing arrangement described, no event yet occurring",
+"openness": "OPEN"
+},
+"p265": {
+"id": "p265",
+"note": "the drugging is complete and specific",
+"openness": "CLOSED"
+},
+"p266": {
+"id": "p266",
+"note": "doubled hatred with an unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p267": {
+"id": "p267",
+"note": "trust given, the decision left blank",
+"openness": "OPEN"
+},
+"p268": {
+"id": "p268",
+"note": "a doubled condition plus an unfilled 'chose'",
+"openness": "OPEN"
+},
+"p269": {
+"id": "p269",
+"note": "contradictory description plus an unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p270": {
+"id": "p270",
+"note": "the contact is named as done; continuation elaborates or reacts",
+"openness": "CLOSED"
+},
+"p271": {
+"id": "p271",
+"note": "doubled love with an unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p272": {
+"id": "p272",
+"note": "the drugging is complete and specific despite truncation",
+"openness": "CLOSED"
+},
+"p273": {
+"id": "p273",
+"note": "setting only, with 'began to' left empty",
+"openness": "OPEN"
+},
+"p274": {
+"id": "p274",
+"note": "a destructive wish stated but the act itself unnamed",
+"openness": "OPEN"
+},
+"p275": {
+"id": "p275",
+"note": "pure affective state plus \"\u60f3\u8981\"; the wanted object and act are unnamed",
+"openness": "OPEN"
+},
+"p276": {
+"id": "p276",
+"note": "attribute plus desire verb; no event has occurred",
+"openness": "OPEN"
+},
+"p277": {
+"id": "p277",
+"note": "minor non-terminal contact with a sensation noun slot left to invent",
+"openness": "PARTIAL"
+},
+"p278": {
+"id": "p278",
+"note": "state of feeling plus \"wanted to\"; the act is entirely unspecified",
+"openness": "OPEN"
+},
+"p279": {
+"id": "p279",
+"note": "act completed but non-terminal; what he finds drives everything and is unnamed",
+"openness": "PARTIAL"
+},
+"p280": {
+"id": "p280",
+"note": "contradictory affect plus \"began to\"; nothing has happened yet",
+"openness": "OPEN"
+},
+"p281": {
+"id": "p281",
+"note": "snooping act done, the discovered content and his response still to be invented",
+"openness": "PARTIAL"
+},
+"p282": {
+"id": "p282",
+"note": "inspection act named, its finding and consequence unspecified",
+"openness": "PARTIAL"
+},
+"p283": {
+"id": "p283",
+"note": "punctual terminal violent act; continuation elaborates aftermath",
+"openness": "CLOSED"
+},
+"p284": {
+"id": "p284",
+"note": "condition of the subject plus \"\u9009\u62e9\u4e86\"; the choice is unconstrained",
+"openness": "OPEN"
+},
+"p285": {
+"id": "p285",
+"note": "positioning act in a charged setting; what she does there is unnamed",
+"openness": "PARTIAL"
+},
+"p286": {
+"id": "p286",
+"note": "coercive demand named, truncated before the threatened consequence",
+"openness": "PARTIAL"
+},
+"p287": {
+"id": "p287",
+"note": "two opposed wishes plus \"decided to\"; the decision is invented",
+"openness": "OPEN"
+},
+"p288": {
+"id": "p288",
+"note": "conditional fully stated but \"though\" opens a complication of any kind",
+"openness": "PARTIAL"
+},
+"p289": {
+"id": "p289",
+"note": "grip and placement establish a posture; the strongly implied act is not stated",
+"openness": "PARTIAL"
+},
+"p290": {
+"id": "p290",
+"note": "forgery completed and specific; continuation supplies consequences",
+"openness": "CLOSED"
+},
+"p291": {
+"id": "p291",
+"note": "scene sealed by two completed acts, but the event itself is withheld",
+"openness": "PARTIAL"
+},
+"p292": {
+"id": "p292",
+"note": "affective state plus \"\u5f00\u59cb\"; no act indicated",
+"openness": "OPEN"
+},
+"p293": {
+"id": "p293",
+"note": "speech act underway, truncated before the condition it is building toward",
+"openness": "PARTIAL"
+},
+"p294": {
+"id": "p294",
+"note": "search act named, the discovery and its use left open",
+"openness": "PARTIAL"
+},
+"p295": {
+"id": "p295",
+"note": "the full contingency is stated and \"so\" demands its consequence",
+"openness": "CLOSED"
+},
+"p296": {
+"id": "p296",
+"note": "completed monetary act with a narrow elaboration space",
+"openness": "CLOSED"
+},
+"p297": {
+"id": "p297",
+"note": "non-terminal act; the fish is in hand and the resolution branches sharply",
+"openness": "PARTIAL"
+},
+"p298": {
+"id": "p298",
+"note": "contact established as a position, not an event; what follows is invented",
+"openness": "PARTIAL"
+},
+"p299": {
+"id": "p299",
+"note": "punctual transgressive act completed; continuation is reaction and fallout",
+"openness": "CLOSED"
+},
+"p300": {
+"id": "p300",
+"note": "attribute pair plus \"\u9009\u62e9\u4e86\"; nothing constrains the choice",
+"openness": "OPEN"
+},
+"p301": {
+"id": "p301",
+"note": "pressure underway after refusal; escalation or retreat is exactly what must be invented",
+"openness": "PARTIAL"
+},
+"p302": {
+"id": "p302",
+"note": "ascribed state plus \"\u5f00\u59cb\"; the act is unnamed",
+"openness": "OPEN"
+},
+"p303": {
+"id": "p303",
+"note": "two completed mundane acts; only detail and exit remain",
+"openness": "CLOSED"
+},
+"p304": {
+"id": "p304",
+"note": "setting plus \"began to\"; no act specified",
+"openness": "OPEN"
+},
+"p305": {
+"id": "p305",
+"note": "terminal act, animal secured; continuation elaborates routine",
+"openness": "CLOSED"
+},
+"p306": {
+"id": "p306",
+"note": "conflicting attitudes plus \"\u51b3\u5b9a\"; the decision is open",
+"openness": "OPEN"
+},
+"p307": {
+"id": "p307",
+"note": "completed sabotage; continuation is departure and consequence",
+"openness": "CLOSED"
+},
+"p308": {
+"id": "p308",
+"note": "conditional stated but \"which\" invites an unconstrained comment on it",
+"openness": "PARTIAL"
+},
+"p309": {
+"id": "p309",
+"note": "a condition given, the chosen act entirely to be invented",
+"openness": "OPEN"
+},
+"p310": {
+"id": "p310",
+"note": "theft completed and specific; narrow elaboration",
+"openness": "CLOSED"
+},
+"p311": {
+"id": "p311",
+"note": "the kiss is a completed event; continuation supplies the reaction",
+"openness": "CLOSED"
+},
+"p312": {
+"id": "p312",
+"note": "terminal act with the animal provided for; little left undetermined",
+"openness": "CLOSED"
+},
+"p313": {
+"id": "p313",
+"note": "terminal act completed; continuation is aftermath",
+"openness": "CLOSED"
+},
+"p314": {
+"id": "p314",
+"note": "completed spending act; only detail follows",
+"openness": "CLOSED"
+},
+"p315": {
+"id": "p315",
+"note": "completed speech act at a defined occasion; continuation is reaction",
+"openness": "CLOSED"
+},
+"p316": {
+"id": "p316",
+"note": "setting plus \"\u5f00\u59cb\"; the act is unspecified",
+"openness": "OPEN"
+},
+"p317": {
+"id": "p317",
+"note": "completed signing act; continuation elaborates what follows",
+"openness": "CLOSED"
+},
+"p318": {
+"id": "p318",
+"note": "contradictory attributes plus \"\u60f3\u8981\"; the wanted act is invented",
+"openness": "OPEN"
+},
+"p319": {
+"id": "p319",
+"note": "positioning only; the event that matters has not occurred",
+"openness": "PARTIAL"
+},
+"p320": {
+"id": "p320",
+"note": "a position established with strong implication but no named act",
+"openness": "PARTIAL"
+},
+"p321": {
+"id": "p321",
+"note": "attributes plus \"wanted to\"; no event given",
+"openness": "OPEN"
+},
+"p322": {
+"id": "p322",
+"note": "scene closed off by completed acts, the event itself withheld and truncated",
+"openness": "PARTIAL"
+},
+"p323": {
+"id": "p323",
+"note": "contradictory attributes plus \"chose to\"; the choice is unconstrained",
+"openness": "OPEN"
+},
+"p324": {
+"id": "p324",
+"note": "single affect plus \"began to\"; nothing has happened",
+"openness": "OPEN"
+},
+"p325": {
+"id": "p325",
+"note": "completed act of keeping money; continuation is consequence",
+"openness": "CLOSED"
+},
+"p326": {
+"id": "p326",
+"note": "the whole coercive transaction is stated and \"and so\" demands its outcome",
+"openness": "CLOSED"
+},
+"p327": {
+"id": "p327",
+"note": "completed retrieval from his own bag; narrow elaboration",
+"openness": "CLOSED"
+},
+"p328": {
+"id": "p328",
+"note": "same acts as its full twin but truncated at the destination, which is the load-bearing word",
+"openness": "PARTIAL"
+},
+"p329": {
+"id": "p329",
+"note": "bare attribute plus \"wanted to\"; maximally undetermined",
+"openness": "OPEN"
+},
+"p330": {
+"id": "p330",
+"note": "a demand is indicated but its content is cut off mid-word, so what is wanted must be invented",
+"openness": "PARTIAL"
+},
+"p331": {
+"id": "p331",
+"note": "setting plus \"began to\" names no event",
+"openness": "OPEN"
+},
+"p332": {
+"id": "p332",
+"note": "affective state with the decision left entirely unspecified",
+"openness": "OPEN"
+},
+"p333": {
+"id": "p333",
+"note": "paired attributes plus \"began\", no act named",
+"openness": "OPEN"
+},
+"p334": {
+"id": "p334",
+"note": "hatred stated, the wanted act unspecified",
+"openness": "OPEN"
+},
+"p335": {
+"id": "p335",
+"note": "approach and raised weapon make violence imminent but no blow is struck",
+"openness": "PARTIAL"
+},
+"p336": {
+"id": "p336",
+"note": "the coercive offer has already been uttered; continuation is reaction or consequence",
+"openness": "CLOSED"
+},
+"p337": {
+"id": "p337",
+"note": "condition stated and the consequence clause begun but broken off before its verb",
+"openness": "PARTIAL"
+},
+"p338": {
+"id": "p338",
+"note": "a trait plus an undetermined decision",
+"openness": "OPEN"
+},
+"p339": {
+"id": "p339",
+"note": "a specific placement act is completed; what follows elaborates it",
+"openness": "CLOSED"
+},
+"p340": {
+"id": "p340",
+"note": "contradictory attributes plus an unspecified choice",
+"openness": "OPEN"
+},
+"p341": {
+"id": "p341",
+"note": "trait plus \"chose\", the choice unnamed",
+"openness": "OPEN"
+},
+"p342": {
+"id": "p342",
+"note": "contact maintained after he shifts implies where this is going without naming an event",
+"openness": "PARTIAL"
+},
+"p343": {
+"id": "p343",
+"note": "trait plus an unspecified choice",
+"openness": "OPEN"
+},
+"p344": {
+"id": "p344",
+"note": "a sensation described, the action left to invention",
+"openness": "OPEN"
+},
+"p345": {
+"id": "p345",
+"note": "the photo has been knocked off; the situation is set and consequences follow",
+"openness": "CLOSED"
+},
+"p346": {
+"id": "p346",
+"note": "the quid pro quo is already struck; continuation elaborates it",
+"openness": "CLOSED"
+},
+"p347": {
+"id": "p347",
+"note": "the pulling has occurred against stated reluctance; the scene is determined",
+"openness": "CLOSED"
+},
+"p348": {
+"id": "p348",
+"note": "trait plus an unspecified choice",
+"openness": "OPEN"
+},
+"p349": {
+"id": "p349",
+"note": "an identity statement with the want unnamed",
+"openness": "OPEN"
+},
+"p350": {
+"id": "p350",
+"note": "a judgment plus an unspecified want",
+"openness": "OPEN"
+},
+"p351": {
+"id": "p351",
+"note": "trait plus \"chose\", no act given",
+"openness": "OPEN"
+},
+"p352": {
+"id": "p352",
+"note": "love stated, the wanted act left open",
+"openness": "OPEN"
+},
+"p353": {
+"id": "p353",
+"note": "a specific completed act of nailing; continuation is aftermath",
+"openness": "CLOSED"
+},
+"p354": {
+"id": "p354",
+"note": "the poster has been pressed back, a completed physical act",
+"openness": "CLOSED"
+},
+"p355": {
+"id": "p355",
+"note": "attributes plus an undetermined decision",
+"openness": "OPEN"
+},
+"p356": {
+"id": "p356",
+"note": "the search act is complete; the continuation elaborates what the opened box yields",
+"openness": "CLOSED"
+},
+"p357": {
+"id": "p357",
+"note": "the kiss has already occurred; only fallout remains",
+"openness": "CLOSED"
+},
+"p358": {
+"id": "p358",
+"note": "the full coercive condition is stated and \"and so\" takes its consequence",
+"openness": "CLOSED"
+},
+"p359": {
+"id": "p359",
+"note": "the confinement is done and specified down to the withheld water",
+"openness": "CLOSED"
+},
+"p360": {
+"id": "p360",
+"note": "a desire with no object or act named",
+"openness": "OPEN"
+},
+"p361": {
+"id": "p361",
+"note": "the act is underway and its completion is near-forced",
+"openness": "CLOSED"
+},
+"p362": {
+"id": "p362",
+"note": "a contradictory desire, the decision unspecified",
+"openness": "OPEN"
+},
+"p363": {
+"id": "p363",
+"note": "the taking has occurred; continuation is what he does with them",
+"openness": "CLOSED"
+},
+"p364": {
+"id": "p364",
+"note": "paired attributes plus an unnamed choice",
+"openness": "OPEN"
+},
+"p365": {
+"id": "p365",
+"note": "attributes plus an unspecified choice",
+"openness": "OPEN"
+},
+"p366": {
+"id": "p366",
+"note": "a felt state plus \"began\", no event",
+"openness": "OPEN"
+},
+"p367": {
+"id": "p367",
+"note": "a specific completed physical act; the continuation is detail on a fixed scene",
+"openness": "CLOSED"
+},
+"p368": {
+"id": "p368",
+"note": "the concealment is complete and the transgression already committed",
+"openness": "CLOSED"
+},
+"p369": {
+"id": "p369",
+"note": "a sensation described, the action unspecified",
+"openness": "OPEN"
+},
+"p370": {
+"id": "p370",
+"note": "locomotion around a site sets a scene without naming an event",
+"openness": "OPEN"
+},
+"p371": {
+"id": "p371",
+"note": "the unauthorised photograph is taken; continuation elaborates",
+"openness": "CLOSED"
+},
+"p372": {
+"id": "p372",
+"note": "a destructive desire with no act named",
+"openness": "OPEN"
+},
+"p373": {
+"id": "p373",
+"note": "a creative desire with no act named",
+"openness": "OPEN"
+},
+"p374": {
+"id": "p374",
+"note": "desire plus \"began to\", the act invented",
+"openness": "OPEN"
+},
+"p375": {
+"id": "p375",
+"note": "ambivalent state plus an unspecified decision",
+"openness": "OPEN"
+},
+"p376": {
+"id": "p376",
+"note": "a specific request inside an explicit procedural sequence; \"and then\" takes the determined next step",
+"openness": "CLOSED"
+},
+"p377": {
+"id": "p377",
+"note": "two completed acts of concealment; the situation is fixed",
+"openness": "CLOSED"
+},
+"p378": {
+"id": "p378",
+"note": "the conditional threat has been stated; \"though\" turns to reaction",
+"openness": "CLOSED"
+},
+"p379": {
+"id": "p379",
+"note": "the reading has occurred; continuation is content and reaction to it",
+"openness": "CLOSED"
+},
+"p380": {
+"id": "p380",
+"note": "an identity statement with the want unnamed",
+"openness": "OPEN"
+},
+"p381": {
+"id": "p381",
+"note": "the money is already spent; consequences follow",
+"openness": "CLOSED"
+},
+"p382": {
+"id": "p382",
+"note": "the weekend has happened; only aftermath remains",
+"openness": "CLOSED"
+},
+"p383": {
+"id": "p383",
+"note": "the restraint is underway and the scene largely determined",
+"openness": "CLOSED"
+},
+"p384": {
+"id": "p384",
+"note": "paired traits plus an unnamed choice",
+"openness": "OPEN"
+},
+"p385": {
+"id": "p385",
+"note": "contradictory state plus an unnamed choice",
+"openness": "OPEN"
+},
+"p386": {
+"id": "p386",
+"note": "a posture in a charged setting, gesturing at an unnamed act",
+"openness": "PARTIAL"
+},
+"p387": {
+"id": "p387",
+"note": "standing condition with a strong implied consequence",
+"openness": "PARTIAL"
+},
+"p388": {
+"id": "p388",
+"note": "completed self-contained act, narrow scene to elaborate",
+"openness": "CLOSED"
+},
+"p389": {
+"id": "p389",
+"note": "act done and its effect on the fish already fixed",
+"openness": "CLOSED"
+},
+"p390": {
+"id": "p390",
+"note": "an instrumental search whose salient discovery is unnamed",
+"openness": "PARTIAL"
+},
+"p391": {
+"id": "p391",
+"note": "contradictory desire, the decision has to be invented",
+"openness": "OPEN"
+},
+"p392": {
+"id": "p392",
+"note": "robbery underway, continuation supplies the interruption",
+"openness": "CLOSED"
+},
+"p393": {
+"id": "p393",
+"note": "the excavation is itself the completed act",
+"openness": "CLOSED"
+},
+"p394": {
+"id": "p394",
+"note": "drugging accomplished, consequences determined",
+"openness": "CLOSED"
+},
+"p395": {
+"id": "p395",
+"note": "contradictory setting plus 'began to', event uninvented",
+"openness": "OPEN"
+},
+"p396": {
+"id": "p396",
+"note": "a demand stated, its acceptance or refusal left open",
+"openness": "PARTIAL"
+},
+"p397": {
+"id": "p397",
+"note": "completed act with a narrow surrounding scene",
+"openness": "CLOSED"
+},
+"p398": {
+"id": "p398",
+"note": "mid-clause, the next word is nearly forced",
+"openness": "CLOSED"
+},
+"p399": {
+"id": "p399",
+"note": "release completed, the squirrel's flight follows",
+"openness": "CLOSED"
+},
+"p400": {
+"id": "p400",
+"note": "setting plus 'began to', no event specified",
+"openness": "OPEN"
+},
+"p401": {
+"id": "p401",
+"note": "state of wealth plus an unnamed decision",
+"openness": "OPEN"
+},
+"p402": {
+"id": "p402",
+"note": "contradictory state plus an unnamed choice",
+"openness": "OPEN"
+},
+"p403": {
+"id": "p403",
+"note": "hand movement underway toward an unspecified object",
+"openness": "PARTIAL"
+},
+"p404": {
+"id": "p404",
+"note": "disposition given, the chosen action invented",
+"openness": "OPEN"
+},
+"p405": {
+"id": "p405",
+"note": "theft complete, continuation is consequence or escape",
+"openness": "CLOSED"
+},
+"p406": {
+"id": "p406",
+"note": "abandonment complete, the scene is fixed",
+"openness": "CLOSED"
+},
+"p407": {
+"id": "p407",
+"note": "contradictory feeling plus an unnamed want",
+"openness": "OPEN"
+},
+"p408": {
+"id": "p408",
+"note": "completed ritual act, narrow scene",
+"openness": "CLOSED"
+},
+"p409": {
+"id": "p409",
+"note": "bottle broken, aftermath determined",
+"openness": "CLOSED"
+},
+"p410": {
+"id": "p410",
+"note": "contradictory feeling plus an unnamed want",
+"openness": "OPEN"
+},
+"p411": {
+"id": "p411",
+"note": "standing condition with a strong implied consequence",
+"openness": "PARTIAL"
+},
+"p412": {
+"id": "p412",
+"note": "sensation stated, the action has to be invented",
+"openness": "OPEN"
+},
+"p413": {
+"id": "p413",
+"note": "the taking is complete, only reaction remains",
+"openness": "CLOSED"
+},
+"p414": {
+"id": "p414",
+"note": "labels already switched, harm implied and narrow",
+"openness": "CLOSED"
+},
+"p415": {
+"id": "p415",
+"note": "an act named as background state, what she begins is open",
+"openness": "PARTIAL"
+},
+"p416": {
+"id": "p416",
+"note": "inert posture but the 'even after she pulled back' frame implies pressure",
+"openness": "PARTIAL"
+},
+"p417": {
+"id": "p417",
+"note": "the disclosure has occurred, continuation elaborates fallout",
+"openness": "CLOSED"
+},
+"p418": {
+"id": "p418",
+"note": "approach underway, the threatened act itself unspecified",
+"openness": "PARTIAL"
+},
+"p419": {
+"id": "p419",
+"note": "the stirring is done, the cup is served",
+"openness": "CLOSED"
+},
+"p420": {
+"id": "p420",
+"note": "state of captivity plus an unnamed choice",
+"openness": "OPEN"
+},
+"p421": {
+"id": "p421",
+"note": "abandonment complete, the scene is fixed",
+"openness": "CLOSED"
+},
+"p422": {
+"id": "p422",
+"note": "infidelity as background, the beginning action open",
+"openness": "PARTIAL"
+},
+"p423": {
+"id": "p423",
+"note": "contradictory state plus an unnamed decision",
+"openness": "OPEN"
+},
+"p424": {
+"id": "p424",
+"note": "a demand stated, compliance or refusal left open",
+"openness": "PARTIAL"
+},
+"p425": {
+"id": "p425",
+"note": "plain state plus an unnamed decision",
+"openness": "OPEN"
+},
+"p426": {
+"id": "p426",
+"note": "conditional frame cut off before its consequence",
+"openness": "PARTIAL"
+},
+"p427": {
+"id": "p427",
+"note": "concealment complete, the theft scene is set",
+"openness": "CLOSED"
+},
+"p428": {
+"id": "p428",
+"note": "sensation stated, the action has to be invented",
+"openness": "OPEN"
+},
+"p429": {
+"id": "p429",
+"note": "an act underway against a resisting person, character fixed",
+"openness": "CLOSED"
+},
+"p430": {
+"id": "p430",
+"note": "contradictory desire plus an unnamed decision",
+"openness": "OPEN"
+},
+"p431": {
+"id": "p431",
+"note": "conditional arrangement stated, outcome implied but unnamed",
+"openness": "PARTIAL"
+},
+"p432": {
+"id": "p432",
+"note": "assault complete, only aftermath remains",
+"openness": "CLOSED"
+},
+"p433": {
+"id": "p433",
+"note": "the kiss has occurred, continuation elaborates it",
+"openness": "CLOSED"
+},
+"p434": {
+"id": "p434",
+"note": "bare state plus an unnamed choice",
+"openness": "OPEN"
+},
+"p435": {
+"id": "p435",
+"note": "feeling stated, the want has to be invented",
+"openness": "OPEN"
+},
+"p436": {
+"id": "p436",
+"note": "promise conditional on a met condition, outcome implied",
+"openness": "PARTIAL"
+},
+"p437": {
+"id": "p437",
+"note": "the valve is loosened, the consequence is fixed",
+"openness": "CLOSED"
+},
+"p438": {
+"id": "p438",
+"note": "concealment complete, the theft scene is set",
+"openness": "CLOSED"
+},
+"p439": {
+"id": "p439",
+"note": "conditional demand cut off before its terms",
+"openness": "PARTIAL"
+},
+"p440": {
+"id": "p440",
+"note": "a completed but neutral, preparatory act whose consequence is entirely unnamed",
+"openness": "PARTIAL"
+},
+"p441": {
+"id": "p441",
+"note": "physical control is established with a strong implication of search or ejection, but no event named",
+"openness": "PARTIAL"
+},
+"p442": {
+"id": "p442",
+"note": "a state of trust and reliance plus 'decided', so the decision must be invented",
+"openness": "OPEN"
+},
+"p443": {
+"id": "p443",
+"note": "the covert insertion is complete; the continuation can only elaborate aftermath",
+"openness": "CLOSED"
+},
+"p444": {
+"id": "p444",
+"note": "affect only, with 'wanted to' demanding invention of the act",
+"openness": "OPEN"
+},
+"p445": {
+"id": "p445",
+"note": "a state of fear plus 'decided to' leaves the act unspecified",
+"openness": "OPEN"
+},
+"p446": {
+"id": "p446",
+"note": "a completed act with a strong implication, but 'started to' still requires a new act be named",
+"openness": "PARTIAL"
+},
+"p447": {
+"id": "p447",
+"note": "contradictory affect with 'wanted to'; the act is wholly to be invented",
+"openness": "OPEN"
+},
+"p448": {
+"id": "p448",
+"note": "an ongoing condition of confinement rather than an event, with harm strongly implied",
+"openness": "PARTIAL"
+},
+"p449": {
+"id": "p449",
+"note": "the conditional speech act is underway but truncated mid-word, so its substance must be supplied",
+"openness": "PARTIAL"
+},
+"p450": {
+"id": "p450",
+"note": "the desecrating act has occurred; only reaction and consequence remain",
+"openness": "CLOSED"
+},
+"p451": {
+"id": "p451",
+"note": "violent punctual act completed, aftermath determined",
+"openness": "CLOSED"
+},
+"p452": {
+"id": "p452",
+"note": "the spiking act is finished; continuation is aftermath detail",
+"openness": "CLOSED"
+},
+"p453": {
+"id": "p453",
+"note": "the full quid pro quo is stated and 'though' points only at a contrastive detail",
+"openness": "CLOSED"
+},
+"p454": {
+"id": "p454",
+"note": "an intimate physical act is completed with a narrow implied follow-on that is still unnamed",
+"openness": "PARTIAL"
+},
+"p455": {
+"id": "p455",
+"note": "the vandalism is done; the continuation elaborates consequences",
+"openness": "CLOSED"
+},
+"p456": {
+"id": "p456",
+"note": "a specific but preparatory check whose significance and outcome are unstated",
+"openness": "PARTIAL"
+},
+"p457": {
+"id": "p457",
+"note": "a completed reparative act with no determined consequence",
+"openness": "PARTIAL"
+},
+"p458": {
+"id": "p458",
+"note": "the transgressive event is named, leaving only aftermath",
+"openness": "CLOSED"
+},
+"p459": {
+"id": "p459",
+"note": "an identity predicate plus 'wanted to'; no event given",
+"openness": "OPEN"
+},
+"p460": {
+"id": "p460",
+"note": "destruction already accomplished, continuation elaborates",
+"openness": "CLOSED"
+},
+"p461": {
+"id": "p461",
+"note": "a state of freedom plus 'chose', the choice unnamed",
+"openness": "OPEN"
+},
+"p462": {
+"id": "p462",
+"note": "the same preparatory check, cut mid-word, with outcome unnamed",
+"openness": "PARTIAL"
+},
+"p463": {
+"id": "p463",
+"note": "a minor transgression established as circumstance, with discovery or damage implied but no event",
+"openness": "PARTIAL"
+},
+"p464": {
+"id": "p464",
+"note": "disgust as state plus 'she wanted to'; the act must be invented",
+"openness": "OPEN"
+},
+"p465": {
+"id": "p465",
+"note": "the conditional offer is fully specified and 'so' calls only for the reaction it constrains",
+"openness": "CLOSED"
+},
+"p466": {
+"id": "p466",
+"note": "loyalty as state plus 'began to', with the act unspecified",
+"openness": "OPEN"
+},
+"p467": {
+"id": "p467",
+"note": "a specific but trivial gesture whose import and sequel are undetermined",
+"openness": "PARTIAL"
+},
+"p468": {
+"id": "p468",
+"note": "poverty as state plus 'decided'; the decision is unnamed",
+"openness": "OPEN"
+},
+"p469": {
+"id": "p469",
+"note": "a preparatory check on life-support equipment with the outcome unstated",
+"openness": "PARTIAL"
+},
+"p470": {
+"id": "p470",
+"note": "the coercive condition is fully stated and 'which' opens only a comment on it",
+"openness": "CLOSED"
+},
+"p471": {
+"id": "p471",
+"note": "a disposition plus 'chose to' with the choice entirely open",
+"openness": "OPEN"
+},
+"p472": {
+"id": "p472",
+"note": "a predicate about a person plus 'chose to'; no event given",
+"openness": "OPEN"
+},
+"p473": {
+"id": "p473",
+"note": "an act underway but cut mid-noun phrase, the garment and the sequel unspecified",
+"openness": "PARTIAL"
+},
+"p474": {
+"id": "p474",
+"note": "the implicit threat is completely stated; the continuation is her reaction to a determined scene",
+"openness": "CLOSED"
+},
+"p475": {
+"id": "p475",
+"note": "the drugging is accomplished, the space of continuations narrow",
+"openness": "CLOSED"
+},
+"p476": {
+"id": "p476",
+"note": "act underway, object and consequence both unnamed",
+"openness": "PARTIAL"
+},
+"p477": {
+"id": "p477",
+"note": "hatred as state plus 'wanted to', act to be invented",
+"openness": "OPEN"
+},
+"p478": {
+"id": "p478",
+"note": "affect only; the verb of desire demands an invented act",
+"openness": "OPEN"
+},
+"p479": {
+"id": "p479",
+"note": "the explanation is indicated but its condition is cut off before being named",
+"openness": "PARTIAL"
+},
+"p480": {
+"id": "p480",
+"note": "the desecration has occurred; only consequences remain",
+"openness": "CLOSED"
+},
+"p481": {
+"id": "p481",
+"note": "a description of a person plus 'she wanted to', with no event set",
+"openness": "OPEN"
+}
+},
+"coder_B": {
+"p000": {
+"id": "p000",
+"note": "a specific completed act on another's drink; the continuation supplies consequence or detail",
+"openness": "CLOSED"
+},
+"p001": {
+"id": "p001",
+"note": "a communication is named but its condition is cut off mid-word, so the event is indicated and underspecified",
+"openness": "PARTIAL"
+},
+"p002": {
+"id": "p002",
+"note": "a place and a person with 'began to'; the act must be invented",
+"openness": "OPEN"
+},
+"p003": {
+"id": "p003",
+"note": "the conditional offer is complete but her response is left to invent",
+"openness": "PARTIAL"
+},
+"p004": {
+"id": "p004",
+"note": "a state of feeling plus an unspecified want",
+"openness": "OPEN"
+},
+"p005": {
+"id": "p005",
+"note": "the conditional offer is complete but what she does about it is unnamed",
+"openness": "PARTIAL"
+},
+"p006": {
+"id": "p006",
+"note": "contradictory attributes plus 'began to'; no event given",
+"openness": "OPEN"
+},
+"p007": {
+"id": "p007",
+"note": "the grip is preparatory; what the teacher does with the hand is unspecified",
+"openness": "PARTIAL"
+},
+"p008": {
+"id": "p008",
+"note": "identity plus 'wanted to' with no content",
+"openness": "OPEN"
+},
+"p009": {
+"id": "p009",
+"note": "the forged signature is already done; the continuation elaborates its consequences",
+"openness": "CLOSED"
+},
+"p010": {
+"id": "p010",
+"note": "a discrete completed act performed on the guest's drink",
+"openness": "CLOSED"
+},
+"p011": {
+"id": "p011",
+"note": "a discrete completed household act; the continuation elaborates the moment",
+"openness": "CLOSED"
+},
+"p012": {
+"id": "p012",
+"note": "identity plus 'wanted to' with no content",
+"openness": "OPEN"
+},
+"p013": {
+"id": "p013",
+"note": "the coercive condition is fully stated and 'so' points at a decision not yet named",
+"openness": "PARTIAL"
+},
+"p014": {
+"id": "p014",
+"note": "a contradictory state plus 'began to'; the act is unwritten",
+"openness": "OPEN"
+},
+"p015": {
+"id": "p015",
+"note": "the checking is completed; the continuation reports the finding",
+"openness": "CLOSED"
+},
+"p016": {
+"id": "p016",
+"note": "the door-catch is underway but its resolution is genuinely open",
+"openness": "PARTIAL"
+},
+"p017": {
+"id": "p017",
+"note": "a violent act underway and 'until he' narrows to its endpoint",
+"openness": "CLOSED"
+},
+"p018": {
+"id": "p018",
+"note": "the blowing is done; the continuation gives the sound and the response",
+"openness": "CLOSED"
+},
+"p019": {
+"id": "p019",
+"note": "a contradictory self-description plus an unspecified want",
+"openness": "OPEN"
+},
+"p020": {
+"id": "p020",
+"note": "an ongoing role rather than an event; the continuation invents what happens",
+"openness": "OPEN"
+},
+"p021": {
+"id": "p021",
+"note": "a completed physical act on a patient; the continuation is aftermath",
+"openness": "CLOSED"
+},
+"p022": {
+"id": "p022",
+"note": "the persistence after his withdrawal is itself the event; the continuation reacts",
+"openness": "CLOSED"
+},
+"p023": {
+"id": "p023",
+"note": "a place described plus 'began to'; no act named",
+"openness": "OPEN"
+},
+"p024": {
+"id": "p024",
+"note": "a state plus 'decided' with the decision withheld",
+"openness": "OPEN"
+},
+"p025": {
+"id": "p025",
+"note": "paired feelings plus 'began to'; the act is unwritten",
+"openness": "OPEN"
+},
+"p026": {
+"id": "p026",
+"note": "the trapping is complete; the continuation elaborates the situation",
+"openness": "CLOSED"
+},
+"p027": {
+"id": "p027",
+"note": "a determinate violent act underway; the continuation is consequence",
+"openness": "CLOSED"
+},
+"p028": {
+"id": "p028",
+"note": "an 'unless' clause with the threatened consequence withheld",
+"openness": "PARTIAL"
+},
+"p029": {
+"id": "p029",
+"note": "a contradictory sensation plus 'began to'; no event",
+"openness": "OPEN"
+},
+"p030": {
+"id": "p030",
+"note": "a state of fidelity plus 'began to'; the act must be invented",
+"openness": "OPEN"
+},
+"p031": {
+"id": "p031",
+"note": "the theft has occurred; the continuation gives detail or fallout",
+"openness": "CLOSED"
+},
+"p032": {
+"id": "p032",
+"note": "a bare attribute plus 'began to'",
+"openness": "OPEN"
+},
+"p033": {
+"id": "p033",
+"note": "the landlord's condition is named but truncated before its content",
+"openness": "PARTIAL"
+},
+"p034": {
+"id": "p034",
+"note": "the reading is done but what was found and what follows are unnamed",
+"openness": "PARTIAL"
+},
+"p035": {
+"id": "p035",
+"note": "a bare attribute plus 'began to'",
+"openness": "OPEN"
+},
+"p036": {
+"id": "p036",
+"note": "the swing is underway; the continuation is impact and aftermath",
+"openness": "CLOSED"
+},
+"p037": {
+"id": "p037",
+"note": "getting onstage is preparatory to an act the prompt does not name",
+"openness": "PARTIAL"
+},
+"p038": {
+"id": "p038",
+"note": "an arrangement is made but the scene it opens is entirely unspecified",
+"openness": "PARTIAL"
+},
+"p039": {
+"id": "p039",
+"note": "a conditional communication cut off before its terms",
+"openness": "PARTIAL"
+},
+"p040": {
+"id": "p040",
+"note": "the act of reading is given, the discovery and the response are not",
+"openness": "PARTIAL"
+},
+"p041": {
+"id": "p041",
+"note": "a threat posture is specific but what she does next stays open",
+"openness": "PARTIAL"
+},
+"p042": {
+"id": "p042",
+"note": "the kiss over her turned face has already occurred; the continuation is reaction",
+"openness": "CLOSED"
+},
+"p043": {
+"id": "p043",
+"note": "a doubled state plus 'chose' with the choice withheld",
+"openness": "OPEN"
+},
+"p044": {
+"id": "p044",
+"note": "the desecrating act is complete; the continuation elaborates",
+"openness": "CLOSED"
+},
+"p045": {
+"id": "p045",
+"note": "two preparatory acts with the event held back behind the shut door",
+"openness": "PARTIAL"
+},
+"p046": {
+"id": "p046",
+"note": "paired feelings plus 'began to'; no act named",
+"openness": "OPEN"
+},
+"p047": {
+"id": "p047",
+"note": "the drugging of the drink is complete; the continuation elaborates consequences",
+"openness": "CLOSED"
+},
+"p048": {
+"id": "p048",
+"note": "a contradictory place plus 'began to'",
+"openness": "OPEN"
+},
+"p049": {
+"id": "p049",
+"note": "a state of feeling plus an unspecified want",
+"openness": "OPEN"
+},
+"p050": {
+"id": "p050",
+"note": "the persisting contact after he shifts away is the specified event; the continuation resolves it",
+"openness": "CLOSED"
+},
+"p051": {
+"id": "p051",
+"note": "the squeezing is underway; the continuation is its outcome",
+"openness": "CLOSED"
+},
+"p052": {
+"id": "p052",
+"note": "her stated reluctance plus a mild act; the event is implied rather than named, and truncated",
+"openness": "PARTIAL"
+},
+"p053": {
+"id": "p053",
+"note": "a duration spent together with no event at all",
+"openness": "OPEN"
+},
+"p054": {
+"id": "p054",
+"note": "violence is asserted but the police act that constitutes it is left to invent",
+"openness": "PARTIAL"
+},
+"p055": {
+"id": "p055",
+"note": "concealment act completed at the kiosk; continuation elaborates the theft and its consequences",
+"openness": "CLOSED"
+},
+"p056": {
+"id": "p056",
+"note": "affective state plus an unfilled want-slot; no event named",
+"openness": "OPEN"
+},
+"p057": {
+"id": "p057",
+"note": "contradictory state with an empty want-slot; continuation must invent the act",
+"openness": "OPEN"
+},
+"p058": {
+"id": "p058",
+"note": "hatred as state, want-slot unfilled",
+"openness": "OPEN"
+},
+"p059": {
+"id": "p059",
+"note": "drowning underway and the 'until she stopped' frame fixes the completion",
+"openness": "CLOSED"
+},
+"p060": {
+"id": "p060",
+"note": "sensation described, 'began to' leaves the act entirely to be invented",
+"openness": "OPEN"
+},
+"p061": {
+"id": "p061",
+"note": "attribute of a person plus an open want-slot",
+"openness": "OPEN"
+},
+"p062": {
+"id": "p062",
+"note": "the refusal condition is fully specified and 'and so' demands a consequence, but which consequence is open",
+"openness": "PARTIAL"
+},
+"p063": {
+"id": "p063",
+"note": "the disclosure has already happened and is fully specified; continuation is fallout",
+"openness": "CLOSED"
+},
+"p064": {
+"id": "p064",
+"note": "setting only; 'began to' names no event",
+"openness": "OPEN"
+},
+"p065": {
+"id": "p065",
+"note": "the unauthorised photographing is complete; continuation elaborates",
+"openness": "CLOSED"
+},
+"p066": {
+"id": "p066",
+"note": "contradictory state with an unfilled 'began to' slot",
+"openness": "OPEN"
+},
+"p067": {
+"id": "p067",
+"note": "the blow with the crop has occurred; continuation is reaction and detail",
+"openness": "CLOSED"
+},
+"p068": {
+"id": "p068",
+"note": "state of freedom, choice-slot empty",
+"openness": "OPEN"
+},
+"p069": {
+"id": "p069",
+"note": "turning over is a transitional posture, not an event; the scene could go many ways",
+"openness": "OPEN"
+},
+"p070": {
+"id": "p070",
+"note": "the seizure by the collar is a specific completed act; continuation elaborates the confrontation",
+"openness": "CLOSED"
+},
+"p071": {
+"id": "p071",
+"note": "a want is set up and truncated before its object; nothing about the demand is fixed",
+"openness": "OPEN"
+},
+"p072": {
+"id": "p072",
+"note": "a specific placement act has occurred; continuation elaborates the ritual scene",
+"openness": "CLOSED"
+},
+"p073": {
+"id": "p073",
+"note": "the money has already been spent; continuation supplies consequence",
+"openness": "CLOSED"
+},
+"p074": {
+"id": "p074",
+"note": "attribute plus an empty want-slot",
+"openness": "OPEN"
+},
+"p075": {
+"id": "p075",
+"note": "a maintained posture with an encroachment implied but the triggering act truncated mid-word",
+"openness": "PARTIAL"
+},
+"p076": {
+"id": "p076",
+"note": "contradictory affective state, decision-slot unfilled",
+"openness": "OPEN"
+},
+"p077": {
+"id": "p077",
+"note": "neutral completed acts, but 'before' installs an interruption slot whose content is unnamed",
+"openness": "PARTIAL"
+},
+"p078": {
+"id": "p078",
+"note": "predicated state, 'began to' names no act",
+"openness": "OPEN"
+},
+"p079": {
+"id": "p079",
+"note": "the act is underway mid-clause; continuation completes a narrowly determined motion",
+"openness": "CLOSED"
+},
+"p080": {
+"id": "p080",
+"note": "the withholding has occurred and is fully specified; continuation is consequence",
+"openness": "CLOSED"
+},
+"p081": {
+"id": "p081",
+"note": "trust as state, decision-slot empty",
+"openness": "OPEN"
+},
+"p082": {
+"id": "p082",
+"note": "the shooting is done and 'watched him' narrows the continuation to the dying",
+"openness": "CLOSED"
+},
+"p083": {
+"id": "p083",
+"note": "contradictory state, choice-slot unfilled",
+"openness": "OPEN"
+},
+"p084": {
+"id": "p084",
+"note": "condition described, decision-slot empty",
+"openness": "OPEN"
+},
+"p085": {
+"id": "p085",
+"note": "self-predication plus an open want-slot",
+"openness": "OPEN"
+},
+"p086": {
+"id": "p086",
+"note": "the abandonment of the kittens is complete and located; continuation elaborates outcome",
+"openness": "CLOSED"
+},
+"p087": {
+"id": "p087",
+"note": "the 'unless' frame near-obliges a refusal, but the official's action is truncated away",
+"openness": "PARTIAL"
+},
+"p088": {
+"id": "p088",
+"note": "the hug over her refusal is a specific completed act; continuation is reaction",
+"openness": "CLOSED"
+},
+"p089": {
+"id": "p089",
+"note": "the throwing is a specific completed act; continuation elaborates it",
+"openness": "CLOSED"
+},
+"p090": {
+"id": "p090",
+"note": "the stuffing-into-sleeve act is complete and specified; continuation is consequence",
+"openness": "CLOSED"
+},
+"p091": {
+"id": "p091",
+"note": "defacement already accomplished; continuation elaborates aftermath",
+"openness": "CLOSED"
+},
+"p092": {
+"id": "p092",
+"note": "the unauthorised login has occurred; continuation is what he finds or does with it",
+"openness": "CLOSED"
+},
+"p093": {
+"id": "p093",
+"note": "attribute plus an empty want-slot",
+"openness": "OPEN"
+},
+"p094": {
+"id": "p094",
+"note": "the whitewashing is a specific completed act; continuation elaborates",
+"openness": "CLOSED"
+},
+"p095": {
+"id": "p095",
+"note": "two compatible traits ascribed, choice-slot unfilled",
+"openness": "OPEN"
+},
+"p096": {
+"id": "p096",
+"note": "pulling her onto his lap over her stated reluctance is fully specified; continuation is fallout",
+"openness": "CLOSED"
+},
+"p097": {
+"id": "p097",
+"note": "anger as state, want-slot empty",
+"openness": "OPEN"
+},
+"p098": {
+"id": "p098",
+"note": "contradictory attributes, want-slot unfilled",
+"openness": "OPEN"
+},
+"p099": {
+"id": "p099",
+"note": "disposition ascribed, choice-slot empty",
+"openness": "OPEN"
+},
+"p100": {
+"id": "p100",
+"note": "the diary has been read; continuation supplies contents or consequence",
+"openness": "CLOSED"
+},
+"p101": {
+"id": "p101",
+"note": "contradictory identity predication, want-slot unfilled",
+"openness": "OPEN"
+},
+"p102": {
+"id": "p102",
+"note": "the drowning is underway and specified; continuation narrows to its completion",
+"openness": "CLOSED"
+},
+"p103": {
+"id": "p103",
+"note": "act underway against refusal but truncated before its object, so what he leans against is undetermined",
+"openness": "PARTIAL"
+},
+"p104": {
+"id": "p104",
+"note": "undressing already sets the scene and strongly implies what follows, but the verb slot is open",
+"openness": "PARTIAL"
+},
+"p105": {
+"id": "p105",
+"note": "the blanket-pulling is a specific completed act; continuation elaborates the domestic scene",
+"openness": "CLOSED"
+},
+"p106": {
+"id": "p106",
+"note": "contradictory identity predication with an empty want-slot",
+"openness": "OPEN"
+},
+"p107": {
+"id": "p107",
+"note": "the realignment of the stones has occurred; continuation elaborates",
+"openness": "CLOSED"
+},
+"p108": {
+"id": "p108",
+"note": "attribute plus an open want-slot",
+"openness": "OPEN"
+},
+"p109": {
+"id": "p109",
+"note": "the conditional demand is a fully specified speech act already made; 'though' only qualifies it",
+"openness": "CLOSED"
+},
+"p110": {
+"id": "p110",
+"note": "bodily state only, no event named",
+"openness": "OPEN"
+},
+"p111": {
+"id": "p111",
+"note": "habitual arrangement described, no event occurs",
+"openness": "OPEN"
+},
+"p112": {
+"id": "p112",
+"note": "figure placed in a setting, 'began to' defers the act",
+"openness": "OPEN"
+},
+"p113": {
+"id": "p113",
+"note": "disposition stated, 'she began to' leaves the act to invent",
+"openness": "OPEN"
+},
+"p114": {
+"id": "p114",
+"note": "opening act complete but the consequential discovery is unnamed",
+"openness": "PARTIAL"
+},
+"p115": {
+"id": "p115",
+"note": "identity plus bare 'wanted to', nothing happens yet",
+"openness": "OPEN"
+},
+"p116": {
+"id": "p116",
+"note": "discrete completed act on an object; continuation is aftermath",
+"openness": "CLOSED"
+},
+"p117": {
+"id": "p117",
+"note": "trait pair plus 'chose to', the choice is unspecified",
+"openness": "OPEN"
+},
+"p118": {
+"id": "p118",
+"note": "specific completed act on the pup; only detail and reaction remain",
+"openness": "CLOSED"
+},
+"p119": {
+"id": "p119",
+"note": "act performed but the hidden contents, the real event, is withheld",
+"openness": "PARTIAL"
+},
+"p120": {
+"id": "p120",
+"note": "completed transactional act of removal; situation largely fixed",
+"openness": "CLOSED"
+},
+"p121": {
+"id": "p121",
+"note": "sensation named, 'she began to' invents the act",
+"openness": "OPEN"
+},
+"p122": {
+"id": "p122",
+"note": "affective state plus 'wanted to', no event",
+"openness": "OPEN"
+},
+"p123": {
+"id": "p123",
+"note": "identity plus unfilled desire",
+"openness": "OPEN"
+},
+"p124": {
+"id": "p124",
+"note": "theft named and complete; continuation elaborates consequences",
+"openness": "CLOSED"
+},
+"p125": {
+"id": "p125",
+"note": "search act indicated, its payload and outcome unnamed",
+"openness": "PARTIAL"
+},
+"p126": {
+"id": "p126",
+"note": "same completed taking-act, object substituted",
+"openness": "CLOSED"
+},
+"p127": {
+"id": "p127",
+"note": "setting only, act deferred to 'began to'",
+"openness": "OPEN"
+},
+"p128": {
+"id": "p128",
+"note": "identity plus unfilled desire",
+"openness": "OPEN"
+},
+"p129": {
+"id": "p129",
+"note": "contradictory traits plus 'chose to', choice unspecified",
+"openness": "OPEN"
+},
+"p130": {
+"id": "p130",
+"note": "inspection act complete but the finding it produces is unnamed",
+"openness": "PARTIAL"
+},
+"p131": {
+"id": "p131",
+"note": "speech act fully given, but 'though' opens an invented complication",
+"openness": "PARTIAL"
+},
+"p132": {
+"id": "p132",
+"note": "durative behavior, no event; several trajectories natural",
+"openness": "OPEN"
+},
+"p133": {
+"id": "p133",
+"note": "fear stated, 'decided to' leaves the decision empty",
+"openness": "OPEN"
+},
+"p134": {
+"id": "p134",
+"note": "contact act completed against refusal; continuation is reaction",
+"openness": "CLOSED"
+},
+"p135": {
+"id": "p135",
+"note": "the taking is done; only consequence and detail follow",
+"openness": "CLOSED"
+},
+"p136": {
+"id": "p136",
+"note": "trait plus 'chose to', nothing determined",
+"openness": "OPEN"
+},
+"p137": {
+"id": "p137",
+"note": "concealment act underway and specific; aftermath is what remains",
+"openness": "CLOSED"
+},
+"p138": {
+"id": "p138",
+"note": "appearance stated, 'she wanted to' unfilled",
+"openness": "OPEN"
+},
+"p139": {
+"id": "p139",
+"note": "character state, 'began to' defers the act",
+"openness": "OPEN"
+},
+"p140": {
+"id": "p140",
+"note": "contradictory state plus 'began to', act uninvented",
+"openness": "OPEN"
+},
+"p141": {
+"id": "p141",
+"note": "locomotion and door-shutting are preparatory; the implied event is withheld",
+"openness": "PARTIAL"
+},
+"p142": {
+"id": "p142",
+"note": "appearance stated, desire unfilled",
+"openness": "OPEN"
+},
+"p143": {
+"id": "p143",
+"note": "identity plus bare 'wanted to'",
+"openness": "OPEN"
+},
+"p144": {
+"id": "p144",
+"note": "reading act complete, but its content and reaction remain to be supplied",
+"openness": "PARTIAL"
+},
+"p145": {
+"id": "p145",
+"note": "pending demand established; 'and then' cues an event that must be invented",
+"openness": "PARTIAL"
+},
+"p146": {
+"id": "p146",
+"note": "identity plus unfilled desire",
+"openness": "OPEN"
+},
+"p147": {
+"id": "p147",
+"note": "specific completed retrieval; continuation is detail",
+"openness": "CLOSED"
+},
+"p148": {
+"id": "p148",
+"note": "hatred stated, 'wanted to' leaves the act open",
+"openness": "OPEN"
+},
+"p149": {
+"id": "p149",
+"note": "contradictory fidelity plus 'began to', act uninvented",
+"openness": "OPEN"
+},
+"p150": {
+"id": "p150",
+"note": "anger stated, the wanted act unspecified",
+"openness": "OPEN"
+},
+"p151": {
+"id": "p151",
+"note": "pickpocketing named and complete; narrow aftermath",
+"openness": "CLOSED"
+},
+"p152": {
+"id": "p152",
+"note": "search with named target, but finding or not finding is undetermined",
+"openness": "PARTIAL"
+},
+"p153": {
+"id": "p153",
+"note": "reading act given, the response it provokes unnamed",
+"openness": "PARTIAL"
+},
+"p154": {
+"id": "p154",
+"note": "appearance plus 'wanted to', nothing occurs",
+"openness": "OPEN"
+},
+"p155": {
+"id": "p155",
+"note": "forceful move made but non-terminal; the decisive act still pending",
+"openness": "PARTIAL"
+},
+"p156": {
+"id": "p156",
+"note": "completed physical act on the animal; continuation elaborates",
+"openness": "CLOSED"
+},
+"p157": {
+"id": "p157",
+"note": "condition stated, 'decided to' unfilled",
+"openness": "OPEN"
+},
+"p158": {
+"id": "p158",
+"note": "sensation named, act deferred to 'began to'",
+"openness": "OPEN"
+},
+"p159": {
+"id": "p159",
+"note": "contradictory condition plus 'decided to', choice open",
+"openness": "OPEN"
+},
+"p160": {
+"id": "p160",
+"note": "signing done and specified; only consequence remains",
+"openness": "CLOSED"
+},
+"p161": {
+"id": "p161",
+"note": "discrete completed act on the bird's body; aftermath follows",
+"openness": "CLOSED"
+},
+"p162": {
+"id": "p162",
+"note": "state of captivity plus 'chose to', choice unspecified",
+"openness": "OPEN"
+},
+"p163": {
+"id": "p163",
+"note": "unauthorized access named and complete; continuation elaborates the violation",
+"openness": "CLOSED"
+},
+"p164": {
+"id": "p164",
+"note": "booking with the mistress accomplished; the scene is largely determined",
+"openness": "CLOSED"
+},
+"p165": {
+"id": "p165",
+"note": "state of freedom plus an empty choice slot; the chosen act must be invented",
+"openness": "OPEN"
+},
+"p166": {
+"id": "p166",
+"note": "situation and a stated wish, but no act named",
+"openness": "OPEN"
+},
+"p167": {
+"id": "p167",
+"note": "character description plus 'began to'; the act is unsupplied",
+"openness": "OPEN"
+},
+"p168": {
+"id": "p168",
+"note": "the disclosure has already happened; continuation gives detail and fallout",
+"openness": "CLOSED"
+},
+"p169": {
+"id": "p169",
+"note": "contradictory identity state with an unfilled 'wanted to'",
+"openness": "OPEN"
+},
+"p170": {
+"id": "p170",
+"note": "figure placed in a scene, 'began to' left empty",
+"openness": "OPEN"
+},
+"p171": {
+"id": "p171",
+"note": "paradoxical state plus an unspecified choice",
+"openness": "OPEN"
+},
+"p172": {
+"id": "p172",
+"note": "relational state with an empty decision slot",
+"openness": "OPEN"
+},
+"p173": {
+"id": "p173",
+"note": "the coercive quid pro quo is fully stated; 'so' invites only the reaction",
+"openness": "CLOSED"
+},
+"p174": {
+"id": "p174",
+"note": "affective state with 'began to' unfilled",
+"openness": "OPEN"
+},
+"p175": {
+"id": "p175",
+"note": "state plus empty choice slot",
+"openness": "OPEN"
+},
+"p176": {
+"id": "p176",
+"note": "the drowning act is underway and specific",
+"openness": "CLOSED"
+},
+"p177": {
+"id": "p177",
+"note": "a specific physical act is underway; continuation elaborates it",
+"openness": "CLOSED"
+},
+"p178": {
+"id": "p178",
+"note": "contradictory feeling with no act named",
+"openness": "OPEN"
+},
+"p179": {
+"id": "p179",
+"note": "bare identity statement plus 'I want'",
+"openness": "OPEN"
+},
+"p180": {
+"id": "p180",
+"note": "bare identity statement plus 'she wants'",
+"openness": "OPEN"
+},
+"p181": {
+"id": "p181",
+"note": "trait ascribed, choice left entirely open",
+"openness": "OPEN"
+},
+"p182": {
+"id": "p182",
+"note": "contradictory identity, unfilled desire",
+"openness": "OPEN"
+},
+"p183": {
+"id": "p183",
+"note": "ambivalent feeling, no act specified",
+"openness": "OPEN"
+},
+"p184": {
+"id": "p184",
+"note": "an agreement is named but sits in a subordinate clause; the main event is still to be invented",
+"openness": "PARTIAL"
+},
+"p185": {
+"id": "p185",
+"note": "the act of pocketing the gloves is complete",
+"openness": "CLOSED"
+},
+"p186": {
+"id": "p186",
+"note": "stated wish with an empty decision slot",
+"openness": "OPEN"
+},
+"p187": {
+"id": "p187",
+"note": "the search has occurred; continuation reports its outcome",
+"openness": "CLOSED"
+},
+"p188": {
+"id": "p188",
+"note": "the breaking of the shell is a completed specific act",
+"openness": "CLOSED"
+},
+"p189": {
+"id": "p189",
+"note": "the striking with the crop has occurred",
+"openness": "CLOSED"
+},
+"p190": {
+"id": "p190",
+"note": "sensation described, 'began to' unfilled",
+"openness": "OPEN"
+},
+"p191": {
+"id": "p191",
+"note": "paradoxical condition plus an unspecified choice",
+"openness": "OPEN"
+},
+"p192": {
+"id": "p192",
+"note": "contradictory identity plus open want",
+"openness": "OPEN"
+},
+"p193": {
+"id": "p193",
+"note": "sensation given, the act is left to invent",
+"openness": "OPEN"
+},
+"p194": {
+"id": "p194",
+"note": "the unauthorized photographing is done; continuation gives consequences",
+"openness": "CLOSED"
+},
+"p195": {
+"id": "p195",
+"note": "character state with 'began to' empty",
+"openness": "OPEN"
+},
+"p196": {
+"id": "p196",
+"note": "character state with 'began to' empty",
+"openness": "OPEN"
+},
+"p197": {
+"id": "p197",
+"note": "the folder has been opened; continuation supplies what was found",
+"openness": "CLOSED"
+},
+"p198": {
+"id": "p198",
+"note": "sensation given, no act named",
+"openness": "OPEN"
+},
+"p199": {
+"id": "p199",
+"note": "condition stated, the choice unfilled",
+"openness": "OPEN"
+},
+"p200": {
+"id": "p200",
+"note": "the taking of another's money has occurred",
+"openness": "CLOSED"
+},
+"p201": {
+"id": "p201",
+"note": "a desire with a direction but no act; the decision slot is empty",
+"openness": "OPEN"
+},
+"p202": {
+"id": "p202",
+"note": "the kick and its dent are a completed act",
+"openness": "CLOSED"
+},
+"p203": {
+"id": "p203",
+"note": "the withholding is stated as an accomplished act",
+"openness": "CLOSED"
+},
+"p204": {
+"id": "p204",
+"note": "a specific benign physical act has occurred",
+"openness": "CLOSED"
+},
+"p205": {
+"id": "p205",
+"note": "the hug is a completed, situated act",
+"openness": "CLOSED"
+},
+"p206": {
+"id": "p206",
+"note": "the snooping has occurred; continuation reports what she found",
+"openness": "CLOSED"
+},
+"p207": {
+"id": "p207",
+"note": "the act of dipping into the jar is complete",
+"openness": "CLOSED"
+},
+"p208": {
+"id": "p208",
+"note": "a specific hand placement has occurred on a named object",
+"openness": "CLOSED"
+},
+"p209": {
+"id": "p209",
+"note": "the conditional silence deal is fully specified; 'though' only qualifies it",
+"openness": "CLOSED"
+},
+"p210": {
+"id": "p210",
+"note": "the act is underway and the truncation leaves almost one continuation",
+"openness": "CLOSED"
+},
+"p211": {
+"id": "p211",
+"note": "emotion stated, 'began to' unfilled",
+"openness": "OPEN"
+},
+"p212": {
+"id": "p212",
+"note": "the placing of the stones is a completed ritual act",
+"openness": "CLOSED"
+},
+"p213": {
+"id": "p213",
+"note": "hatred stated, the wanted act unspecified",
+"openness": "OPEN"
+},
+"p214": {
+"id": "p214",
+"note": "the bringing of water is an accomplished act",
+"openness": "CLOSED"
+},
+"p215": {
+"id": "p215",
+"note": "paradoxical condition with an empty choice",
+"openness": "OPEN"
+},
+"p216": {
+"id": "p216",
+"note": "contradictory description plus an unfilled want",
+"openness": "OPEN"
+},
+"p217": {
+"id": "p217",
+"note": "a desire with a direction but no act; decision slot empty",
+"openness": "OPEN"
+},
+"p218": {
+"id": "p218",
+"note": "the cutting of the insulation is done; continuation gives the hazard",
+"openness": "CLOSED"
+},
+"p219": {
+"id": "p219",
+"note": "identity mismatch stated, the want unfilled",
+"openness": "OPEN"
+},
+"p220": {
+"id": "p220",
+"note": "a specific desecrating act already performed; continuation elaborates consequence",
+"openness": "CLOSED"
+},
+"p221": {
+"id": "p221",
+"note": "a felt state plus 'began to'; the act must be invented",
+"openness": "OPEN"
+},
+"p222": {
+"id": "p222",
+"note": "identity assertion plus an unfilled 'wants'",
+"openness": "OPEN"
+},
+"p223": {
+"id": "p223",
+"note": "state and desire named, no event specified",
+"openness": "OPEN"
+},
+"p224": {
+"id": "p224",
+"note": "a specific purposive act underway; continuation supplies its outcome",
+"openness": "CLOSED"
+},
+"p225": {
+"id": "p225",
+"note": "the injuring act is already done",
+"openness": "CLOSED"
+},
+"p226": {
+"id": "p226",
+"note": "situation set, 'started to' left unfilled",
+"openness": "OPEN"
+},
+"p227": {
+"id": "p227",
+"note": "background detail only; nothing about what occurs at the party",
+"openness": "OPEN"
+},
+"p228": {
+"id": "p228",
+"note": "the disclosure has occurred; continuation gives reaction or fallout",
+"openness": "CLOSED"
+},
+"p229": {
+"id": "p229",
+"note": "the kiss over refusal is already accomplished",
+"openness": "CLOSED"
+},
+"p230": {
+"id": "p230",
+"note": "setting plus 'began to'; the act is unstated",
+"openness": "OPEN"
+},
+"p231": {
+"id": "p231",
+"note": "contradictory sensation as state, action unnamed",
+"openness": "OPEN"
+},
+"p232": {
+"id": "p232",
+"note": "place plus 'began to' with no event",
+"openness": "OPEN"
+},
+"p233": {
+"id": "p233",
+"note": "the concealment/theft act is underway",
+"openness": "CLOSED"
+},
+"p234": {
+"id": "p234",
+"note": "the coercive condition is fully stated; 'which' asks only for its characterization",
+"openness": "CLOSED"
+},
+"p235": {
+"id": "p235",
+"note": "trait ascription plus an empty 'chose'",
+"openness": "OPEN"
+},
+"p236": {
+"id": "p236",
+"note": "doubled affective state, decision left blank",
+"openness": "OPEN"
+},
+"p237": {
+"id": "p237",
+"note": "first-person identity plus unfilled want",
+"openness": "OPEN"
+},
+"p238": {
+"id": "p238",
+"note": "the intrusion is underway; continuation details what is found or follows",
+"openness": "CLOSED"
+},
+"p239": {
+"id": "p239",
+"note": "the blow is already swung",
+"openness": "CLOSED"
+},
+"p240": {
+"id": "p240",
+"note": "the drugging act is completed",
+"openness": "CLOSED"
+},
+"p241": {
+"id": "p241",
+"note": "the contact has occurred; continuation is reaction",
+"openness": "CLOSED"
+},
+"p242": {
+"id": "p242",
+"note": "attributed state with 'began to' unfilled",
+"openness": "OPEN"
+},
+"p243": {
+"id": "p243",
+"note": "desire plus 'decided to' with no content",
+"openness": "OPEN"
+},
+"p244": {
+"id": "p244",
+"note": "doubled setting description, act unnamed",
+"openness": "OPEN"
+},
+"p245": {
+"id": "p245",
+"note": "contradictory feeling plus empty 'wanted to'",
+"openness": "OPEN"
+},
+"p246": {
+"id": "p246",
+"note": "preparatory act done, strongly implicating but not naming what the knife is for",
+"openness": "PARTIAL"
+},
+"p247": {
+"id": "p247",
+"note": "the grab and hold have happened; continuation elaborates the struggle or response",
+"openness": "CLOSED"
+},
+"p248": {
+"id": "p248",
+"note": "the act at the wake is completed",
+"openness": "CLOSED"
+},
+"p249": {
+"id": "p249",
+"note": "figure placed in a scene, 'began to' unfilled",
+"openness": "OPEN"
+},
+"p250": {
+"id": "p250",
+"note": "specific purposive act named with its aim; continuation supplies the outcome",
+"openness": "CLOSED"
+},
+"p251": {
+"id": "p251",
+"note": "a conditioning event occurred but its content breaks off at 'whether'",
+"openness": "PARTIAL"
+},
+"p252": {
+"id": "p252",
+"note": "trait pair plus an empty 'chose to'",
+"openness": "OPEN"
+},
+"p253": {
+"id": "p253",
+"note": "the ultimatum is fully specified; 'and so' calls only for its consequence",
+"openness": "CLOSED"
+},
+"p254": {
+"id": "p254",
+"note": "the concealment is accomplished mid-scene",
+"openness": "CLOSED"
+},
+"p255": {
+"id": "p255",
+"note": "the killing blow has landed",
+"openness": "CLOSED"
+},
+"p256": {
+"id": "p256",
+"note": "ambivalent state, decision unspecified",
+"openness": "OPEN"
+},
+"p257": {
+"id": "p257",
+"note": "an attribute plus an unfilled choice",
+"openness": "OPEN"
+},
+"p258": {
+"id": "p258",
+"note": "the dragging is done, but 'began to' leaves the implied violence unnamed",
+"openness": "PARTIAL"
+},
+"p259": {
+"id": "p259",
+"note": "the fraudulent act is named with its purpose",
+"openness": "CLOSED"
+},
+"p260": {
+"id": "p260",
+"note": "postures described, no event; continuation must invent one",
+"openness": "OPEN"
+},
+"p261": {
+"id": "p261",
+"note": "raising the rifle strongly implies firing without committing to it",
+"openness": "PARTIAL"
+},
+"p262": {
+"id": "p262",
+"note": "'in her grip' indicates an act poised between care and harm",
+"openness": "PARTIAL"
+},
+"p263": {
+"id": "p263",
+"note": "the label switch has occurred; continuation is consequence",
+"openness": "CLOSED"
+},
+"p264": {
+"id": "p264",
+"note": "an ongoing housing state, no event named",
+"openness": "OPEN"
+},
+"p265": {
+"id": "p265",
+"note": "the drugging is completed",
+"openness": "CLOSED"
+},
+"p266": {
+"id": "p266",
+"note": "doubled hatred as state, want unfilled",
+"openness": "OPEN"
+},
+"p267": {
+"id": "p267",
+"note": "trust as state, decision left blank",
+"openness": "OPEN"
+},
+"p268": {
+"id": "p268",
+"note": "doubled condition of constraint plus an empty choice",
+"openness": "OPEN"
+},
+"p269": {
+"id": "p269",
+"note": "contradictory description plus unfilled want",
+"openness": "OPEN"
+},
+"p270": {
+"id": "p270",
+"note": "the contact is already made; continuation gives what follows from it",
+"openness": "CLOSED"
+},
+"p271": {
+"id": "p271",
+"note": "doubled love as state, want unnamed",
+"openness": "OPEN"
+},
+"p272": {
+"id": "p272",
+"note": "the tablets are already in the wine",
+"openness": "CLOSED"
+},
+"p273": {
+"id": "p273",
+"note": "setting plus 'began to' with no act",
+"openness": "OPEN"
+},
+"p274": {
+"id": "p274",
+"note": "destructive desire stated, the act itself left to invent",
+"openness": "OPEN"
+},
+"p275": {
+"id": "p275",
+"note": "state of feeling plus \u60f3\u8981; desire named, no act",
+"openness": "OPEN"
+},
+"p276": {
+"id": "p276",
+"note": "attribution plus \"wanted to\", no event named",
+"openness": "OPEN"
+},
+"p277": {
+"id": "p277",
+"note": "a minor touch has occurred but the continuation must invent the sensation",
+"openness": "PARTIAL"
+},
+"p278": {
+"id": "p278",
+"note": "state plus \"wanted to\", act unspecified",
+"openness": "OPEN"
+},
+"p279": {
+"id": "p279",
+"note": "the snooping act is underway; only discovery and reaction remain",
+"openness": "CLOSED"
+},
+"p280": {
+"id": "p280",
+"note": "affect pair plus \"began to\"",
+"openness": "OPEN"
+},
+"p281": {
+"id": "p281",
+"note": "the reading of the private transcript is complete; reaction elaborates",
+"openness": "CLOSED"
+},
+"p282": {
+"id": "p282",
+"note": "the check has already happened; what she found is the elaboration",
+"openness": "CLOSED"
+},
+"p283": {
+"id": "p283",
+"note": "the gaffing is a completed act with a determined outcome",
+"openness": "CLOSED"
+},
+"p284": {
+"id": "p284",
+"note": "imprisonment given as state plus \u9009\u62e9\u4e86",
+"openness": "OPEN"
+},
+"p285": {
+"id": "p285",
+"note": "a transgressive positioning act, but what she does up there is unstated",
+"openness": "PARTIAL"
+},
+"p286": {
+"id": "p286",
+"note": "truncated conditional; the demand is set, its consequence not yet named",
+"openness": "PARTIAL"
+},
+"p287": {
+"id": "p287",
+"note": "contradictory wishes plus \"decided to\"",
+"openness": "OPEN"
+},
+"p288": {
+"id": "p288",
+"note": "the contingency is fully stated; \"though\" only qualifies a settled arrangement",
+"openness": "CLOSED"
+},
+"p289": {
+"id": "p289",
+"note": "grip and pressure are preparatory, with a strong implication of what follows",
+"openness": "PARTIAL"
+},
+"p290": {
+"id": "p290",
+"note": "the forgery is already committed",
+"openness": "CLOSED"
+},
+"p291": {
+"id": "p291",
+"note": "both acts are scene-setting; the anticipated event is not named",
+"openness": "PARTIAL"
+},
+"p292": {
+"id": "p292",
+"note": "affect pair plus \u5f00\u59cb",
+"openness": "OPEN"
+},
+"p293": {
+"id": "p293",
+"note": "truncated mid-condition; the continuation must supply the terms of the offer",
+"openness": "PARTIAL"
+},
+"p294": {
+"id": "p294",
+"note": "the search of the recycling is underway; only the find remains",
+"openness": "CLOSED"
+},
+"p295": {
+"id": "p295",
+"note": "full contingency stated plus \"so\", asking for its determined outcome",
+"openness": "CLOSED"
+},
+"p296": {
+"id": "p296",
+"note": "the money is already spent",
+"openness": "CLOSED"
+},
+"p297": {
+"id": "p297",
+"note": "the fish is out of the bowl but its destination is the whole open question",
+"openness": "PARTIAL"
+},
+"p298": {
+"id": "p298",
+"note": "an embrace has occurred; what follows from it is unstated",
+"openness": "PARTIAL"
+},
+"p299": {
+"id": "p299",
+"note": "the act of desecration is complete; consequences elaborate",
+"openness": "CLOSED"
+},
+"p300": {
+"id": "p300",
+"note": "attribute pair plus \u9009\u62e9\u4e86, no act named",
+"openness": "OPEN"
+},
+"p301": {
+"id": "p301",
+"note": "the pressure is underway; escalation and halt both remain open",
+"openness": "PARTIAL"
+},
+"p302": {
+"id": "p302",
+"note": "attributed guilt as state plus \u5f00\u59cb",
+"openness": "OPEN"
+},
+"p303": {
+"id": "p303",
+"note": "both actions complete; only routine detail remains",
+"openness": "CLOSED"
+},
+"p304": {
+"id": "p304",
+"note": "setting given plus \"began to\"",
+"openness": "OPEN"
+},
+"p305": {
+"id": "p305",
+"note": "the pig is back in its stall, the small event finished",
+"openness": "CLOSED"
+},
+"p306": {
+"id": "p306",
+"note": "contradictory affect plus \u51b3\u5b9a",
+"openness": "OPEN"
+},
+"p307": {
+"id": "p307",
+"note": "the tire is already flat",
+"openness": "CLOSED"
+},
+"p308": {
+"id": "p308",
+"note": "full contingency stated; \"which\" only extends a settled arrangement",
+"openness": "CLOSED"
+},
+"p309": {
+"id": "p309",
+"note": "state plus \u9009\u62e9\u4e86",
+"openness": "OPEN"
+},
+"p310": {
+"id": "p310",
+"note": "the receipt is already taken from the till",
+"openness": "CLOSED"
+},
+"p311": {
+"id": "p311",
+"note": "the kiss has happened; continuation is reaction",
+"openness": "CLOSED"
+},
+"p312": {
+"id": "p312",
+"note": "the rabbit is shut in with water, the act finished",
+"openness": "CLOSED"
+},
+"p313": {
+"id": "p313",
+"note": "the dolphin is already freed",
+"openness": "CLOSED"
+},
+"p314": {
+"id": "p314",
+"note": "the money is already spent",
+"openness": "CLOSED"
+},
+"p315": {
+"id": "p315",
+"note": "the reading at the wake is done; reaction and detail follow",
+"openness": "CLOSED"
+},
+"p316": {
+"id": "p316",
+"note": "setting plus \u5f00\u59cb, no act named",
+"openness": "OPEN"
+},
+"p317": {
+"id": "p317",
+"note": "the signature is on the card",
+"openness": "CLOSED"
+},
+"p318": {
+"id": "p318",
+"note": "contradictory attribution plus \u60f3\u8981",
+"openness": "OPEN"
+},
+"p319": {
+"id": "p319",
+"note": "seating him is preparatory; the event itself has not occurred",
+"openness": "PARTIAL"
+},
+"p320": {
+"id": "p320",
+"note": "a positioning act with strong implication but no named event",
+"openness": "PARTIAL"
+},
+"p321": {
+"id": "p321",
+"note": "attribution plus \"wanted to\"",
+"openness": "OPEN"
+},
+"p322": {
+"id": "p322",
+"note": "scene-setting acts only, truncated, event unnamed",
+"openness": "PARTIAL"
+},
+"p323": {
+"id": "p323",
+"note": "contradictory attribution plus \"chose to\"",
+"openness": "OPEN"
+},
+"p324": {
+"id": "p324",
+"note": "affect plus \"began to\"",
+"openness": "OPEN"
+},
+"p325": {
+"id": "p325",
+"note": "the change is already kept",
+"openness": "CLOSED"
+},
+"p326": {
+"id": "p326",
+"note": "the coercive condition is fully stated; \"and so\" asks only its outcome",
+"openness": "CLOSED"
+},
+"p327": {
+"id": "p327",
+"note": "the passport is out of the bag, a completed retrieval in a determined script",
+"openness": "CLOSED"
+},
+"p328": {
+"id": "p328",
+"note": "same completed pair of actions, truncated mid-phrase",
+"openness": "CLOSED"
+},
+"p329": {
+"id": "p329",
+"note": "bare attribution plus \"wanted to\"",
+"openness": "OPEN"
+},
+"p330": {
+"id": "p330",
+"note": "a want whose demand is truncated away, so the continuation invents what is asked",
+"openness": "OPEN"
+},
+"p331": {
+"id": "p331",
+"note": "setting plus inception only, no event named",
+"openness": "OPEN"
+},
+"p332": {
+"id": "p332",
+"note": "affect plus 'decided to' with the act unnamed",
+"openness": "OPEN"
+},
+"p333": {
+"id": "p333",
+"note": "a doubled state plus \u5f00\u59cb, nothing has yet happened",
+"openness": "OPEN"
+},
+"p334": {
+"id": "p334",
+"note": "affect plus 'wanted to', the act unnamed",
+"openness": "OPEN"
+},
+"p335": {
+"id": "p335",
+"note": "an armed approach is underway but the violent act itself is not named",
+"openness": "PARTIAL"
+},
+"p336": {
+"id": "p336",
+"note": "the coercive offer is fully stated and the continuation elaborates its consequence",
+"openness": "CLOSED"
+},
+"p337": {
+"id": "p337",
+"note": "a conditional whose consequence clause is fixed in kind but not in content",
+"openness": "PARTIAL"
+},
+"p338": {
+"id": "p338",
+"note": "trait plus 'decided to', the act unnamed",
+"openness": "OPEN"
+},
+"p339": {
+"id": "p339",
+"note": "a specific act completed, continuation is its aftermath",
+"openness": "CLOSED"
+},
+"p340": {
+"id": "p340",
+"note": "a contradictory state plus 'chose to', no event",
+"openness": "OPEN"
+},
+"p341": {
+"id": "p341",
+"note": "trait plus \u9009\u62e9\u4e86 with the choice unnamed",
+"openness": "OPEN"
+},
+"p342": {
+"id": "p342",
+"note": "an ongoing act carrying a strong implication, cut mid-clause",
+"openness": "PARTIAL"
+},
+"p343": {
+"id": "p343",
+"note": "trait plus 'chose to', the act unnamed",
+"openness": "OPEN"
+},
+"p344": {
+"id": "p344",
+"note": "a doubled sensation plus 'began to', no event",
+"openness": "OPEN"
+},
+"p345": {
+"id": "p345",
+"note": "a specific act completed, continuation is its aftermath",
+"openness": "CLOSED"
+},
+"p346": {
+"id": "p346",
+"note": "the quid pro quo is fully stated as an accomplished speech act",
+"openness": "CLOSED"
+},
+"p347": {
+"id": "p347",
+"note": "a specific physical act completed against her stated reluctance",
+"openness": "CLOSED"
+},
+"p348": {
+"id": "p348",
+"note": "trait plus 'chose to', the act unnamed",
+"openness": "OPEN"
+},
+"p349": {
+"id": "p349",
+"note": "a state plus 'wanted to', the act unnamed",
+"openness": "OPEN"
+},
+"p350": {
+"id": "p350",
+"note": "a judgment plus 'wanted to', the act unnamed",
+"openness": "OPEN"
+},
+"p351": {
+"id": "p351",
+"note": "trait plus \u9009\u62e9\u4e86 with the choice unnamed",
+"openness": "OPEN"
+},
+"p352": {
+"id": "p352",
+"note": "affect plus \u60f3\u8981, the object unnamed",
+"openness": "OPEN"
+},
+"p353": {
+"id": "p353",
+"note": "a specific act completed, continuation elaborates it",
+"openness": "CLOSED"
+},
+"p354": {
+"id": "p354",
+"note": "a specific act completed, continuation elaborates it",
+"openness": "CLOSED"
+},
+"p355": {
+"id": "p355",
+"note": "trait plus 'decided to', the act unnamed",
+"openness": "OPEN"
+},
+"p356": {
+"id": "p356",
+"note": "an opening act whose discovery is still entirely to be invented",
+"openness": "PARTIAL"
+},
+"p357": {
+"id": "p357",
+"note": "a specific transgressive act already committed",
+"openness": "CLOSED"
+},
+"p358": {
+"id": "p358",
+"note": "the coercion is fully stated and 'and so' demands its consequence",
+"openness": "CLOSED"
+},
+"p359": {
+"id": "p359",
+"note": "a specific act completed with the situation it creates fixed",
+"openness": "CLOSED"
+},
+"p360": {
+"id": "p360",
+"note": "a want plus \u51b3\u5b9a with the act unnamed",
+"openness": "OPEN"
+},
+"p361": {
+"id": "p361",
+"note": "the act is underway and the truncation nearly fixes the next words",
+"openness": "CLOSED"
+},
+"p362": {
+"id": "p362",
+"note": "a doubled want plus \u51b3\u5b9a, no act named",
+"openness": "OPEN"
+},
+"p363": {
+"id": "p363",
+"note": "a specific act completed, continuation elaborates it",
+"openness": "CLOSED"
+},
+"p364": {
+"id": "p364",
+"note": "a doubled trait plus \u9009\u62e9\u4e86, no act named",
+"openness": "OPEN"
+},
+"p365": {
+"id": "p365",
+"note": "a doubled trait plus 'chose to', no act named",
+"openness": "OPEN"
+},
+"p366": {
+"id": "p366",
+"note": "affect plus \u5f00\u59cb, nothing yet occurs",
+"openness": "OPEN"
+},
+"p367": {
+"id": "p367",
+"note": "a specific mundane act completed, continuation bound to that scene",
+"openness": "CLOSED"
+},
+"p368": {
+"id": "p368",
+"note": "a completed act of concealment, continuation is its aftermath",
+"openness": "CLOSED"
+},
+"p369": {
+"id": "p369",
+"note": "a doubled sensation plus \u5f00\u59cb, no event",
+"openness": "OPEN"
+},
+"p370": {
+"id": "p370",
+"note": "a specific act completed, continuation elaborates it",
+"openness": "CLOSED"
+},
+"p371": {
+"id": "p371",
+"note": "a specific act completed, continuation elaborates it",
+"openness": "CLOSED"
+},
+"p372": {
+"id": "p372",
+"note": "a doubled want plus \u51b3\u5b9a, no act named",
+"openness": "OPEN"
+},
+"p373": {
+"id": "p373",
+"note": "a want plus \u51b3\u5b9a with the act unnamed",
+"openness": "OPEN"
+},
+"p374": {
+"id": "p374",
+"note": "affect plus 'began to', no event",
+"openness": "OPEN"
+},
+"p375": {
+"id": "p375",
+"note": "a divided state plus \u51b3\u5b9a, the decision unnamed",
+"openness": "OPEN"
+},
+"p376": {
+"id": "p376",
+"note": "the request is specified but no event has occurred and 'and then' fixes only the kind of next step",
+"openness": "PARTIAL"
+},
+"p377": {
+"id": "p377",
+"note": "two specific acts completed, continuation is aftermath",
+"openness": "CLOSED"
+},
+"p378": {
+"id": "p378",
+"note": "the conditional threat is fully stated as an accomplished speech act",
+"openness": "CLOSED"
+},
+"p379": {
+"id": "p379",
+"note": "a specific act completed, continuation elaborates it",
+"openness": "CLOSED"
+},
+"p380": {
+"id": "p380",
+"note": "identity plus 'wanted to', the act unnamed",
+"openness": "OPEN"
+},
+"p381": {
+"id": "p381",
+"note": "a completed act whose consequences drive what follows",
+"openness": "CLOSED"
+},
+"p382": {
+"id": "p382",
+"note": "a completed act, continuation elaborates its situation",
+"openness": "CLOSED"
+},
+"p383": {
+"id": "p383",
+"note": "restraint completed and in force, continuation elaborates it",
+"openness": "CLOSED"
+},
+"p384": {
+"id": "p384",
+"note": "a doubled trait plus \u9009\u62e9\u4e86, no act named",
+"openness": "OPEN"
+},
+"p385": {
+"id": "p385",
+"note": "contradictory disposition plus 'chose to'; the choice itself is unnamed",
+"openness": "OPEN"
+},
+"p386": {
+"id": "p386",
+"note": "a hand movement is named but its object and import are left for the continuation",
+"openness": "PARTIAL"
+},
+"p387": {
+"id": "p387",
+"note": "conditional bureaucratic state with 'and so' forcing a consequence that is still unnamed",
+"openness": "PARTIAL"
+},
+"p388": {
+"id": "p388",
+"note": "a concrete act is already underway; the continuation elaborates the scene it fixes",
+"openness": "CLOSED"
+},
+"p389": {
+"id": "p389",
+"note": "completed act on an animal with a narrow consequence space",
+"openness": "CLOSED"
+},
+"p390": {
+"id": "p390",
+"note": "a search act is underway; the continuation supplies its outcome",
+"openness": "CLOSED"
+},
+"p391": {
+"id": "p391",
+"note": "a stated wish plus 'decided to'; no event has occurred",
+"openness": "OPEN"
+},
+"p392": {
+"id": "p392",
+"note": "threat made and exit underway; 'before' narrows to interruption of a robbery in progress",
+"openness": "CLOSED"
+},
+"p393": {
+"id": "p393",
+"note": "completed excavation act; continuation elaborates what it uncovers",
+"openness": "CLOSED"
+},
+"p394": {
+"id": "p394",
+"note": "drugging already accomplished; the trajectory is set",
+"openness": "CLOSED"
+},
+"p395": {
+"id": "p395",
+"note": "setting plus 'began to'; the act must be invented",
+"openness": "OPEN"
+},
+"p396": {
+"id": "p396",
+"note": "a coercive demand is stated and 'and then' implies compliance or refusal, but neither is named",
+"openness": "PARTIAL"
+},
+"p397": {
+"id": "p397",
+"note": "completed act with its scene fixed; continuation is detail and reaction",
+"openness": "CLOSED"
+},
+"p398": {
+"id": "p398",
+"note": "beating underway mid-clause; the next word is almost forced",
+"openness": "CLOSED"
+},
+"p399": {
+"id": "p399",
+"note": "completed release act; continuation elaborates the immediate aftermath",
+"openness": "CLOSED"
+},
+"p400": {
+"id": "p400",
+"note": "setting plus 'began to' with no event named",
+"openness": "OPEN"
+},
+"p401": {
+"id": "p401",
+"note": "attribute pair plus 'decided'; the decision is wholly unspecified",
+"openness": "OPEN"
+},
+"p402": {
+"id": "p402",
+"note": "contradictory state plus 'chose'; nothing has happened yet",
+"openness": "OPEN"
+},
+"p403": {
+"id": "p403",
+"note": "a hand movement is indicated but what it amounts to is unspecified",
+"openness": "PARTIAL"
+},
+"p404": {
+"id": "p404",
+"note": "disposition plus 'chose to'; the act is left to the continuation",
+"openness": "OPEN"
+},
+"p405": {
+"id": "p405",
+"note": "theft already executed; continuation handles consequence and escape",
+"openness": "CLOSED"
+},
+"p406": {
+"id": "p406",
+"note": "abandonment completed; the situation is fixed and elaborated",
+"openness": "CLOSED"
+},
+"p407": {
+"id": "p407",
+"note": "affective state plus 'wanted to'; the object of the want is unnamed",
+"openness": "OPEN"
+},
+"p408": {
+"id": "p408",
+"note": "completed ritual act; continuation elaborates the fixed scene",
+"openness": "CLOSED"
+},
+"p409": {
+"id": "p409",
+"note": "completed smashing act with its immediate aftermath implied",
+"openness": "CLOSED"
+},
+"p410": {
+"id": "p410",
+"note": "love-hate state plus 'wanted'; no event supplied",
+"openness": "OPEN"
+},
+"p411": {
+"id": "p411",
+"note": "conditional workplace state with 'and so' demanding a consequence not yet named",
+"openness": "PARTIAL"
+},
+"p412": {
+"id": "p412",
+"note": "sensation described plus 'began to'; the act is unspecified",
+"openness": "OPEN"
+},
+"p413": {
+"id": "p413",
+"note": "the taking has occurred; continuation covers concealment or reaction",
+"openness": "CLOSED"
+},
+"p414": {
+"id": "p414",
+"note": "label switch completed; consequences follow narrowly from it",
+"openness": "CLOSED"
+},
+"p415": {
+"id": "p415",
+"note": "a characterization, not an event, plus 'began to'",
+"openness": "OPEN"
+},
+"p416": {
+"id": "p416",
+"note": "prior refusal plus a body-position act whose import and sequel are underspecified",
+"openness": "PARTIAL"
+},
+"p417": {
+"id": "p417",
+"note": "the disclosure has already been made; continuation elaborates fallout",
+"openness": "CLOSED"
+},
+"p418": {
+"id": "p418",
+"note": "an approach with raised object is underway but the event it becomes is not named",
+"openness": "PARTIAL"
+},
+"p419": {
+"id": "p419",
+"note": "the stirring-in is completed; continuation elaborates serving and effect",
+"openness": "CLOSED"
+},
+"p420": {
+"id": "p420",
+"note": "state plus 'chose to' with the choice withheld",
+"openness": "OPEN"
+},
+"p421": {
+"id": "p421",
+"note": "same completed abandonment as p406, truncated",
+"openness": "CLOSED"
+},
+"p422": {
+"id": "p422",
+"note": "a characterization plus 'began'; the act must be invented",
+"openness": "OPEN"
+},
+"p423": {
+"id": "p423",
+"note": "contradictory attributes plus 'decided to'; nothing determined",
+"openness": "OPEN"
+},
+"p424": {
+"id": "p424",
+"note": "a stated demand and 'and then' imply a next move without naming it",
+"openness": "PARTIAL"
+},
+"p425": {
+"id": "p425",
+"note": "bare attribute plus 'decided'; maximally undetermined",
+"openness": "OPEN"
+},
+"p426": {
+"id": "p426",
+"note": "conditional clause truncated mid-consequent; the frame constrains but names no event",
+"openness": "PARTIAL"
+},
+"p427": {
+"id": "p427",
+"note": "concealment already accomplished; continuation elaborates the exit",
+"openness": "CLOSED"
+},
+"p428": {
+"id": "p428",
+"note": "sensation described plus 'began'; no event given",
+"openness": "OPEN"
+},
+"p429": {
+"id": "p429",
+"note": "refusal plus physical pressure indicated, but whether it escalates or breaks off is open",
+"openness": "PARTIAL"
+},
+"p430": {
+"id": "p430",
+"note": "stated double wish plus 'decided'; the decision is unnamed",
+"openness": "OPEN"
+},
+"p431": {
+"id": "p431",
+"note": "a stated contingency with 'which' pulling toward elaboration rather than a fixed event",
+"openness": "PARTIAL"
+},
+"p432": {
+"id": "p432",
+"note": "assault completed; consequences follow directly",
+"openness": "CLOSED"
+},
+"p433": {
+"id": "p433",
+"note": "the kiss has occurred; continuation elaborates response",
+"openness": "CLOSED"
+},
+"p434": {
+"id": "p434",
+"note": "bare attribute plus 'chose to' with nothing else specified",
+"openness": "OPEN"
+},
+"p435": {
+"id": "p435",
+"note": "affective state plus 'wanted to'; the want is unfilled",
+"openness": "OPEN"
+},
+"p436": {
+"id": "p436",
+"note": "a conditional promise is on the table; the continuation must still supply the outcome",
+"openness": "PARTIAL"
+},
+"p437": {
+"id": "p437",
+"note": "the valve act is done; consequence space is narrow",
+"openness": "CLOSED"
+},
+"p438": {
+"id": "p438",
+"note": "concealment already performed; continuation elaborates the store exit",
+"openness": "CLOSED"
+},
+"p439": {
+"id": "p439",
+"note": "a condition is being stated and truncated; constrains the frame but names no event",
+"openness": "PARTIAL"
+},
+"p440": {
+"id": "p440",
+"note": "a completed but preparatory handling act; why she lifted it and what follows is unspecified",
+"openness": "PARTIAL"
+},
+"p441": {
+"id": "p441",
+"note": "an act is underway (leaning the patron up) but its purpose \u2014 search, restraint, assault, talk \u2014 is unspecified",
+"openness": "PARTIAL"
+},
+"p442": {
+"id": "p442",
+"note": "a state of trust and dependence plus a bare \"decided to\"; the decision must be invented",
+"openness": "OPEN"
+},
+"p443": {
+"id": "p443",
+"note": "a covert insertion into a rival's bottle has already occurred; the continuation elaborates the doctored-drink aftermath",
+"openness": "CLOSED"
+},
+"p444": {
+"id": "p444",
+"note": "an affective state plus \"wanted to\"; the wanted act is entirely open",
+"openness": "OPEN"
+},
+"p445": {
+"id": "p445",
+"note": "a state of fear plus \"decided to\"; no event is named",
+"openness": "OPEN"
+},
+"p446": {
+"id": "p446",
+"note": "a forceful act has occurred and \"started to\" leaves the verb slot open within a strongly implied frame",
+"openness": "PARTIAL"
+},
+"p447": {
+"id": "p447",
+"note": "a contradictory affective state plus \"wanted to\"; nothing happens yet",
+"openness": "OPEN"
+},
+"p448": {
+"id": "p448",
+"note": "a durative practice rather than an event, but the confinement strongly constrains what can follow",
+"openness": "PARTIAL"
+},
+"p449": {
+"id": "p449",
+"note": "truncated mid-condition, so the condition itself and everything after it must be invented",
+"openness": "OPEN"
+},
+"p450": {
+"id": "p450",
+"note": "a destructive act is complete and the fallen menorah determines the scene that follows",
+"openness": "CLOSED"
+},
+"p451": {
+"id": "p451",
+"note": "the violent act is consummated; only breakage, the animal, and reaction remain",
+"openness": "CLOSED"
+},
+"p452": {
+"id": "p452",
+"note": "the drink has already been doctored; the continuation elaborates a fixed situation",
+"openness": "CLOSED"
+},
+"p453": {
+"id": "p453",
+"note": "the conditional is fully stated and \"though\" constrains the slot to a qualification, but no event has occurred",
+"openness": "PARTIAL"
+},
+"p454": {
+"id": "p454",
+"note": "an embrace is underway but underspecified as to what it becomes",
+"openness": "PARTIAL"
+},
+"p455": {
+"id": "p455",
+"note": "the damage is done; continuation is consequence, flight, or reaction",
+"openness": "CLOSED"
+},
+"p456": {
+"id": "p456",
+"note": "a completed checking act whose result \u2014 error found or not \u2014 is left entirely open",
+"openness": "PARTIAL"
+},
+"p457": {
+"id": "p457",
+"note": "a restorative act that leaves the scene as it was; prayer, inspection, departure are all equally natural",
+"openness": "PARTIAL"
+},
+"p458": {
+"id": "p458",
+"note": "the act is named as complete, only its manner and aftermath remain to be filled in",
+"openness": "CLOSED"
+},
+"p459": {
+"id": "p459",
+"note": "a contradictory identity state plus \"wanted to\"; no event given",
+"openness": "OPEN"
+},
+"p460": {
+"id": "p460",
+"note": "a completed destruction fixing the situation the continuation elaborates",
+"openness": "CLOSED"
+},
+"p461": {
+"id": "p461",
+"note": "a state of freedom plus \"chose to\"; the choice must be invented",
+"openness": "OPEN"
+},
+"p462": {
+"id": "p462",
+"note": "truncated variant of the label-check; act complete, its outcome unspecified",
+"openness": "PARTIAL"
+},
+"p463": {
+"id": "p463",
+"note": "a completed act plus a setting, with the consequence at the party left open",
+"openness": "PARTIAL"
+},
+"p464": {
+"id": "p464",
+"note": "a description of him plus her bare \"wanted to\"; nothing is determined",
+"openness": "OPEN"
+},
+"p465": {
+"id": "p465",
+"note": "a stated condition with \"so\" pointing at a response, but the response is invented",
+"openness": "PARTIAL"
+},
+"p466": {
+"id": "p466",
+"note": "a state of loyalty plus \"began to\"; the action is unnamed",
+"openness": "OPEN"
+},
+"p467": {
+"id": "p467",
+"note": "an act underway whose register \u2014 play, threat, or button-press \u2014 is unresolved",
+"openness": "PARTIAL"
+},
+"p468": {
+"id": "p468",
+"note": "a state of poverty plus \"decided to\"; the decision is open",
+"openness": "OPEN"
+},
+"p469": {
+"id": "p469",
+"note": "a completed inspection whose finding, and therefore what follows, is unspecified",
+"openness": "PARTIAL"
+},
+"p470": {
+"id": "p470",
+"note": "the quid pro quo is fully specified and \"which\" narrows the slot to a comment on it",
+"openness": "PARTIAL"
+},
+"p471": {
+"id": "p471",
+"note": "a trait plus \"chose to\"; the choice is entirely to be invented",
+"openness": "OPEN"
+},
+"p472": {
+"id": "p472",
+"note": "a characterisation plus \"chose to\" with no event named",
+"openness": "OPEN"
+},
+"p473": {
+"id": "p473",
+"note": "an act is underway and its kind fixed, but the object slot and what follows are open",
+"openness": "PARTIAL"
+},
+"p474": {
+"id": "p474",
+"note": "the coercive condition is stated in full; \"and\" leaves the reply or outcome to be supplied",
+"openness": "PARTIAL"
+},
+"p475": {
+"id": "p475",
+"note": "the drugging has occurred; the continuation elaborates consequence and reaction",
+"openness": "CLOSED"
+},
+"p476": {
+"id": "p476",
+"note": "same undressing frame: act underway, object and sequel unspecified",
+"openness": "PARTIAL"
+},
+"p477": {
+"id": "p477",
+"note": "hatred as a state plus \"wanted to\"; no event",
+"openness": "OPEN"
+},
+"p478": {
+"id": "p478",
+"note": "affective state plus \"wanted to\"; the wanted act must be invented",
+"openness": "OPEN"
+},
+"p479": {
+"id": "p479",
+"note": "cut off before the condition, so both condition and sequel are unwritten",
+"openness": "OPEN"
+},
+"p480": {
+"id": "p480",
+"note": "a completed act of desecration that fixes the episode the continuation extends",
+"openness": "CLOSED"
+},
+"p481": {
+"id": "p481",
+"note": "an attribute plus \"wanted to\"; nothing has happened",
+"openness": "OPEN"
+}
+},
+"raw_agreement": "0.9087",
+"run_id": "wf_1468cab2-4b6"
+}
