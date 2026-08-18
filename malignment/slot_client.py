@@ -198,7 +198,7 @@ def provenance_from(screened):
 
 
 def save(prompt, naughty, nice, screened, authored_by, domain="", note="",
-         overwrite=False, untagged=()):
+         overwrite=False, untagged=(), matched_set=None, variant=None):
     """Write one item to the agent's corpus. -> dict with `item_id`, `action`
 
     `screened` is the whole `/slot` response the tags were made against, not a
@@ -220,6 +220,12 @@ def save(prompt, naughty, nice, screened, authored_by, domain="", note="",
     _all_words, all_probs = _words_probs(screened)
     probs = {w: p for w, p in all_probs.items() if w in tagged}
     missing = sorted(tagged - set(probs))
+    #: See `slots.build_item`: in a matched set the pole is fixed by design, so a
+    #: word this screening pair does not offer is recorded as a zero rather than
+    #: refused. Dropping it would make the member incomparable, which is the
+    #: confound the design exists to prevent.
+    if missing and matched_set:
+        missing = []
     if missing:
         #: Caught here so the message names the words. The server refuses this
         #: too, but from the far side of an HTTP round trip.
@@ -246,6 +252,21 @@ def save(prompt, naughty, nice, screened, authored_by, domain="", note="",
     keep = [w for w in dict.fromkeys(untagged or ()) if w]
     if keep:
         body["untagged"] = keep
+    if matched_set:
+        body["matched_set"] = matched_set
+    #: **TWO TAGGINGS OF ONE FRAME.** `item_id` is a function of the prompt
+    #: alone, so a second tagging of the same frame collides with the first and
+    #: `save` answers 409 recommending `overwrite`, which destroys it. `variant`
+    #: has existed in `item_id` and `build_item` since the start and was never
+    #: threaded through here, so the tool refused a thing it was built to do.
+    #:
+    #: The case that forced it: the identity set needs a SHARED-pole tagging (one
+    #: axis, every group, so group is the only variable) AND a GROUP-SPECIFIC one
+    #: (each group's own transgressive field, because what the model offers women
+    #: is sexual where what it offers men is violent). Same frames, two questions,
+    #: and neither answers the other.
+    if variant:
+        body["variant"] = variant
     return _call("/slot/save", body=body)
 
 
@@ -946,6 +967,14 @@ def _main(argv):
     ap.add_argument("--naughty", default="", help="comma-separated")
     ap.add_argument("--nice", default="", help="comma-separated")
     ap.add_argument("--domain", default="")
+    ap.add_argument("--variant", default="",
+                    help="suffix for a SECOND tagging of the same frame. Without it a re-tag collides with the first item and 409s")
+    ap.add_argument("--matched-set", default="", dest="matched_set",
+                    help="name of the matched set this item belongs to. Fixes "
+                         "the pole by design: a tagged word this pair does not "
+                         "offer is recorded as a zero instead of refused, "
+                         "because dropping it would make the member "
+                         "incomparable")
     ap.add_argument("--untagged", default="",
                     help="words you RULED OUT and why-less: a second contrast, "
                          "or lexically ambiguous. Recorded on the item so the "
@@ -988,7 +1017,9 @@ def _main(argv):
             md = md_axis(a.prompt, g, n, out)
         else:
             out = save(a.prompt, g, n, s, a.authored_by, a.domain, a.note,
-                       overwrite=a.overwrite, untagged=split(a.untagged))
+                       overwrite=a.overwrite, untagged=split(a.untagged),
+                       matched_set=a.matched_set or None,
+                       variant=a.variant or None)
             #: **ECHO WHAT WAS RECORDED** (opus-sexual-2): it had to parse
             #: `slot-client.yaml` to learn what it had just written. The item is
             #: returned in the response and was being thrown away.

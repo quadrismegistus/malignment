@@ -1424,7 +1424,9 @@ class Handler(BaseHTTPRequestHandler):
                 note=(body.get("note") or "").strip(),
                 authored_by=(body.get("authored_by") or "").strip() or None,
                 reviewed=rev, axis=axis_rec,
-                untagged=body.get("untagged") or ())
+                untagged=body.get("untagged") or (),
+                matched_set=(body.get("matched_set") or "").strip() or None,
+                variant=(body.get("variant") or "").strip() or None)
             path, action = save_item(item, overwrite=bool(body.get("overwrite")),
                                      path=targets[tgt])
             return self._json(200, {"item_id": item["item_id"], "action": action,

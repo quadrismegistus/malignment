@@ -595,7 +595,8 @@ def _masses(words, tagged):
 
 def build_item(prompt, naughty, nice, words, provenance=None, domain="",
                writer="slot-explorer", note="", variant=None,
-               authored_by=None, reviewed=None, axis=None, untagged=()):
+               authored_by=None, reviewed=None, axis=None, untagged=(),
+               matched_set=None):
     """The saved item, derived rather than accepted.
 
     `words` is `{word: probability}` from the run the author is looking at. The
@@ -630,6 +631,22 @@ def build_item(prompt, naughty, nice, words, provenance=None, domain="",
         raise ValueError("tagged into both poles: %s" % ", ".join(both))
     words = {str(k): float(v) for k, v in (words or {}).items()}
     missing = sorted(w for w in naughty + nice if w not in words)
+    #: **A MATCHED SET OUTRANKS PER-RUN MASS** (RH, 2026-08-18). The refusal below
+    #: exists so an item cannot record a distribution its tags never saw, which is
+    #: right for a free-standing frame. In a matched set the POLE IS FIXED BY
+    #: DESIGN across members, and a member that drops a word because this
+    #: screening pair happens not to offer it stops being comparable -- which is
+    #: the confound the whole design exists to prevent.
+    #:
+    #: It is a screening-pair artifact, not a fact about the word: measured over
+    #: 405 models on one slot prompt, NO word appears in every model and 77% of
+    #: distinct words appear in under 10% of them. `kill` is absent for `women` on
+    #: SmolLM3 and very likely present elsewhere.
+    #:
+    #: So the zero is RECORDED rather than refused, and `zero_mass_at_save` says
+    #: which words carried nothing on the run the tagging was made against.
+    if missing and matched_set:
+        missing = []
     if missing:
         raise ValueError("tagged words absent from the distribution: %s -- the "
                          "tags and the run disagree, so the masses would be 0"
@@ -686,6 +703,13 @@ def build_item(prompt, naughty, nice, words, provenance=None, domain="",
         #: oversight were byte-identical on review.
         **({"untagged": [w for w in dict.fromkeys(untagged) if w]}
            if untagged else {}),
+        #: Set membership, which nothing recorded until now -- ten gender twins
+        #: and an eleven-member identity set existed with no field saying so, so
+        #: no query could find a set and no reviewer could see one.
+        **({"matched_set": matched_set} if matched_set else {}),
+        **({"zero_mass_at_save": sorted(w for w in naughty + nice
+                                        if not words.get(w))}
+           if matched_set and any(not words.get(w) for w in naughty + nice) else {}),
         **({"axis": axis} if axis else {}),
         "screened_by": provenance or {},
     }
