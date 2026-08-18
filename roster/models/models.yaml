@@ -479,7 +479,8 @@ nodes:
     org_type: nonprofit
     scale: 1B
     env:
-      profile: default
+      profile: tf457
+      why: "OBSERVED 2026-08-18: transformers 5.4.0 raises `TypeError: Field 'tie_word_embeddings' expected int, got bool` on this config; 4.57.1 runs it. Ran 2-3 cells here. **The OLMo family splits ACROSS the version boundary in OPPOSITE directions** -- Olmo-Hybrid stays on default because 4.57.1 does not recognise model type `olmo_hybrid` at all. One family, two environments, and neither is a property of the architecture alone."
   allenai/OLMo-2-0425-1B-DPO:
     nickname: olmo-tiny-dpo
     country: US
@@ -489,7 +490,8 @@ nodes:
     open_weight: true
     org_type: nonprofit
     env:
-      profile: default
+      profile: tf457
+      why: "PREDICTED, NOT OBSERVED. Same config schema as the sibling arms observed 2026-08-18 to fail on transformers 5.4.0 with `TypeError: Field 'tie_word_embeddings' expected int, got bool`. Set to the environment that works for those; absence of an observation here is not evidence either way, and tf457 costs nothing if unnecessary."
   allenai/OLMo-2-0425-1B-Instruct:
     revision_ladder: 14
     nickname: olmo-tiny-instruct
@@ -500,7 +502,8 @@ nodes:
     open_weight: true
     org_type: nonprofit
     env:
-      profile: default
+      profile: tf457
+      why: "PREDICTED, NOT OBSERVED. Same config schema as the sibling arms observed 2026-08-18 to fail on transformers 5.4.0 with `TypeError: Field 'tie_word_embeddings' expected int, got bool`. Set to the environment that works for those; absence of an observation here is not evidence either way, and tf457 costs nothing if unnecessary."
   allenai/OLMo-2-0425-1B-SFT:
     nickname: olmo-tiny-sft
     country: US
@@ -510,7 +513,8 @@ nodes:
     open_weight: true
     org_type: nonprofit
     env:
-      profile: default
+      profile: tf457
+      why: "PREDICTED, NOT OBSERVED. Same config schema as the sibling arms observed 2026-08-18 to fail on transformers 5.4.0 with `TypeError: Field 'tie_word_embeddings' expected int, got bool`. Set to the environment that works for those; absence of an observation here is not evidence either way, and tf457 costs nothing if unnecessary."
   allenai/OLMoE-1B-7B-0125:
     revision_ladder: 16
     nickname: olmoe
@@ -553,16 +557,17 @@ nodes:
     org_type: nonprofit
     scale: 7B
     env:
-      profile: default
+      profile: tf457
+      why: "OBSERVED 2026-08-18: transformers 5.4.0 raises `TypeError: Field 'tie_word_embeddings' expected int, got bool` on this config; 4.57.1 runs it. Ran 2-3 cells here. **The OLMo family splits ACROSS the version boundary in OPPOSITE directions** -- Olmo-Hybrid stays on default because 4.57.1 does not recognise model type `olmo_hybrid` at all. One family, two environments, and neither is a property of the architecture alone."
   allenai/Olmo-3-1125-32B:
     revision_ladder: 719
     nickname: olmo-32b
     family:
     - olmo-32b
     env:
-      profile: default
+      profile: tf457
       box: big80
-      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them.'
+      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them. ALSO tf457, PREDICTED not observed: sibling OLMo arms fail on transformers 5.4.0 with a tie_word_embeddings TypeError (2026-08-18). Two independent reasons for one profile; neither supersedes the other.'
   allenai/Olmo-3-7B-Instruct:
     revision_ladder: 9
     nickname: olmo-instruct
@@ -573,7 +578,8 @@ nodes:
     open_weight: true
     org_type: nonprofit
     env:
-      profile: default
+      profile: tf457
+      why: "PREDICTED, NOT OBSERVED. Same config schema as the sibling arms observed 2026-08-18 to fail on transformers 5.4.0 with `TypeError: Field 'tie_word_embeddings' expected int, got bool`. Set to the environment that works for those; absence of an observation here is not evidence either way, and tf457 costs nothing if unnecessary."
   allenai/Olmo-3-7B-Instruct-DPO:
     nickname: olmo-dpo
     country: US
@@ -583,7 +589,8 @@ nodes:
     open_weight: true
     org_type: nonprofit
     env:
-      profile: default
+      profile: tf457
+      why: "PREDICTED, NOT OBSERVED. Same config schema as the sibling arms observed 2026-08-18 to fail on transformers 5.4.0 with `TypeError: Field 'tie_word_embeddings' expected int, got bool`. Set to the environment that works for those; absence of an observation here is not evidence either way, and tf457 costs nothing if unnecessary."
   allenai/Olmo-3-7B-Instruct-SFT:
     nickname: olmo-sft
     country: US
@@ -593,14 +600,16 @@ nodes:
     open_weight: true
     org_type: nonprofit
     env:
-      profile: default
+      profile: tf457
+      why: "PREDICTED, NOT OBSERVED. Same config schema as the sibling arms observed 2026-08-18 to fail on transformers 5.4.0 with `TypeError: Field 'tie_word_embeddings' expected int, got bool`. Set to the environment that works for those; absence of an observation here is not evidence either way, and tf457 costs nothing if unnecessary."
   allenai/Olmo-3-7B-Think:
     family:
     - olmo-think
     reasoning: true
     reasoning_note: post-trained for reasoning; the Think branch of the Olmo 3 ladder
     env:
-      profile: default
+      profile: tf457
+      why: "OBSERVED 2026-08-18: transformers 5.4.0 raises `TypeError: Field 'tie_word_embeddings' expected int, got bool` on this config; 4.57.1 runs it. Ran 2-3 cells here. **The OLMo family splits ACROSS the version boundary in OPPOSITE directions** -- Olmo-Hybrid stays on default because 4.57.1 does not recognise model type `olmo_hybrid` at all. One family, two environments, and neither is a property of the architecture alone."
   allenai/Olmo-3-7B-Think-DPO:
     nickname: olmo-think-dpo
     country: US
@@ -612,7 +621,8 @@ nodes:
     reasoning: true
     reasoning_note: as above, DPO rung
     env:
-      profile: default
+      profile: tf457
+      why: "PREDICTED, NOT OBSERVED. Same config schema as the sibling arms observed 2026-08-18 to fail on transformers 5.4.0 with `TypeError: Field 'tie_word_embeddings' expected int, got bool`. Set to the environment that works for those; absence of an observation here is not evidence either way, and tf457 costs nothing if unnecessary."
   allenai/Olmo-3-7B-Think-SFT:
     revision_ladder: 44
     nickname: olmo-think-sft
@@ -625,31 +635,32 @@ nodes:
     reasoning: true
     reasoning_note: as above, SFT rung
     env:
-      profile: default
+      profile: tf457
+      why: "PREDICTED, NOT OBSERVED. Same config schema as the sibling arms observed 2026-08-18 to fail on transformers 5.4.0 with `TypeError: Field 'tie_word_embeddings' expected int, got bool`. Set to the environment that works for those; absence of an observation here is not evidence either way, and tf457 costs nothing if unnecessary."
   allenai/Olmo-3.1-32B-Instruct:
     nickname: olmo-32b-instruct
     family:
     - olmo-32b
     env:
-      profile: default
+      profile: tf457
       box: big80
-      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them.'
+      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them. ALSO tf457, PREDICTED not observed: sibling OLMo arms fail on transformers 5.4.0 with a tie_word_embeddings TypeError (2026-08-18). Two independent reasons for one profile; neither supersedes the other.'
   allenai/Olmo-3.1-32B-Instruct-DPO:
     nickname: olmo-32b-dpo
     family:
     - olmo-32b
     env:
-      profile: default
+      profile: tf457
       box: big80
-      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them.'
+      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them. ALSO tf457, PREDICTED not observed: sibling OLMo arms fail on transformers 5.4.0 with a tie_word_embeddings TypeError (2026-08-18). Two independent reasons for one profile; neither supersedes the other.'
   allenai/Olmo-3.1-32B-Instruct-SFT:
     nickname: olmo-32b-sft
     family:
     - olmo-32b
     env:
-      profile: default
+      profile: tf457
       box: big80
-      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them.'
+      why: '32.2B measured: needs an 80 GB card. Profile `default` launches on `dense`, which filters for 48 GB, so the declared profile cannot host it. Set on ingest 2026-08-16 after the box-fit check was added -- the archive computed min_vram_gb=80 for these four and emitted launch_profile=dense in the same plan without ever comparing them. ALSO tf457, PREDICTED not observed: sibling OLMo arms fail on transformers 5.4.0 with a tie_word_embeddings TypeError (2026-08-18). Two independent reasons for one profile; neither supersedes the other.'
   allenai/Olmo-Hybrid-7B:
     revision_ladder: 1497
     nickname: olmo-hybrid
