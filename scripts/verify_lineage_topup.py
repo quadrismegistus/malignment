@@ -45,6 +45,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 
 from malignment import ch, corpus, roster  # noqa: E402
+from malignment import twp_v4 as V4  # noqa: E402
 from malignment.checkpoint import Checkpoint  # noqa: E402
 from malignment.runners import PRODUCER  # noqa: E402
 
@@ -74,6 +75,46 @@ def main():
         missing = corpus.topup_todo(m, root=a.root)
         n_missing = sum(len(v) for v in missing.values())
 
+        #: **"OPEN BECAUSE REFUSED" IS NOT "OPEN BECAUSE NOT RUN."** The tail
+        #: guard declines a cell whose topped-up mass exceeds the residual it
+        #: would come out of, and those prompts keep their missing words
+        #: forever -- re-running pass 2 refuses them again. Without this split
+        #: the lineage reports OPEN with no reason attached and the obvious
+        #: response is to re-run, which cannot help.
+        #:
+        #: The known class is numeric continuation: on a `$`-terminated prompt
+        #: the boundary rule makes the events non-disjoint (`,` is a boundary,
+        #: so "next word is 25" overlaps continuations reading 25,000), and a
+        #: sum over overlapping events can exceed its residual. See twp_v4
+        #: line 290.
+        refused_prompts, stale_refusals = set(), set()
+        rules_label = V4.ADOPTED.label()
+        rpath = os.path.join(os.path.dirname(stash.path), "topup_refused.jsonl")
+        if os.path.exists(rpath):
+            import json
+            for line in open(rpath, encoding="utf-8"):
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                #: **AN UNATTRIBUTABLE RECORD EXCUSES NOTHING.** Records written
+                #: before 2026-08-18 carry no `rules`, so there is no way to
+                #: tell whether they came from this instrument or the
+                #: v3-sourced worklist that refused 55 cells on this very
+                #: model. Counting them as explanations would let a prompt
+                #: missing words for an UNRELATED reason be waved through
+                #: because it happens to appear in an old log -- leniency in
+                #: the direction that hides a defect. They are reported and
+                #: they still count as unexplained.
+                if r.get("_run") or r.get("prompt") not in missing:
+                    continue
+                if r.get("rules") == rules_label:
+                    refused_prompts.add(r["prompt"])
+                else:
+                    stale_refusals.add(r["prompt"])
+        n_ref_words = sum(len(missing[p]) for p in refused_prompts)
+        unexplained = n_missing - n_ref_words
+
         # --- 2. conservation, and the tail it was taken from -------------------
         cons, tails, added = [], [], []
         for _k, d in cells:
@@ -99,14 +140,28 @@ def main():
         #: silent one: a member with no cells is reported as VACUOUS, and it
         #: fails unless its worklist was genuinely empty before the run.
         vacuous = not cells
-        ok = (n_missing == 0 and worst < TOL and neg == 0 and inch == len(cells))
+        ok = (unexplained == 0 and worst < TOL and neg == 0 and inch == len(cells))
         verdict = ("PASS" if ok else "**FAIL**") if not vacuous else (
             "VACUOUS -- nothing was topped up; PASS here is an empty set, "
             "not a measurement" if ok else "**FAIL** (and vacuous)")
         bad += [] if ok else [short]
         print("  %-24s %s" % (short, verdict))
         print("     coverage     %s (%d words over %d prompts still missing)"
-              % ("closed" if n_missing == 0 else "OPEN", n_missing, len(missing)))
+              % ("closed" if n_missing == 0 else
+                 ("closed but for refusals" if unexplained == 0 else "OPEN"),
+                 n_missing, len(missing)))
+        if refused_prompts:
+            print("     refused      %d prompt(s), %d words -- tail guard, "
+                  "NOT re-runnable" % (len(refused_prompts), n_ref_words))
+            for p in sorted(refused_prompts)[:3]:
+                print("                  %r" % p[:52])
+        if stale_refusals:
+            print("     stale        %d prompt(s) refused by an UNIDENTIFIED "
+                  "instrument -- counted as unexplained, not excused"
+                  % len(stale_refusals))
+        if unexplained:
+            print("     unexplained  %d words missing with no refusal on record"
+                  "   <-- this is the one to act on" % unexplained)
         print("     conservation worst |1-total| = %.2e over %d topup cells%s"
               % (worst, len(cells), "" if worst < TOL else "   <-- over tolerance"))
         print("     tail         median %.4f, min %.4f, %d negative"
