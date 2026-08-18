@@ -991,6 +991,179 @@ def passc_corpus():
     print("  manifest -> %s" % mp)
 
 
+SHARD_TEMPLATE = '''export const meta = {
+  name: 'passc-shard-%(shard)02d',
+  description: 'Pass C shard %(shard)d of %(nshards)d: two blind coders over %(n)d passages',
+  phases: [{ title: 'Code', detail: '2 coders x %(nbatch)d batches, Opus high effort' }],
+}
+
+const RUBRIC = %(rubric)s
+
+//: id -> {f: fragment, c: continuation}. Carried IN THE SCRIPT, not read from a
+//: file: the full passages file for this pass is 33 MB and no agent can read it
+//: to find its 45 ids. Each agent is handed only its own batch, inline.
+const P = %(passages)s
+const IDS = %(ids)s
+
+const SCHEMA = {
+  type: 'object',
+  properties: {
+    codings: { type: 'array', items: { type: 'object', properties: {
+      id:        { type: 'string' },
+      narrative: { type: 'boolean' },
+      mode:      { type: 'string', enum: ['NONE', 'TOLD', 'SHOWN'] },
+      drift:     { type: 'string', enum: ['HOLDS', 'SHIFTS', 'UNMOORED'] },
+      degree:    { type: 'integer', minimum: 0, maximum: 3 },
+      span:      { type: 'string' },
+    }, required: ['id','narrative','mode','drift','degree','span'],
+       additionalProperties: false } },
+  },
+  required: ['codings'], additionalProperties: false,
+}
+
+const BATCH = %(batch)d
+const batches = []
+for (let s = 0; s < IDS.length; s += BATCH) batches.push(IDS.slice(s, s + BATCH))
+log(`shard %(shard)d: ${IDS.length} passages, ${batches.length} batches of <=${BATCH}, two coders`)
+
+phase('Code')
+const jobs = []
+for (const coder of ['A', 'B']) {
+  batches.forEach((ids, bi) => {
+    const body = ids.map(i =>
+      `### ${i}\\nFRAGMENT: ${P[i].f}\\nCONTINUATION: ${P[i].c}`).join('\\n\\n')
+    jobs.push(() => agent(
+      RUBRIC
+        + `\\n\\n## The passages\\n\\nCode all ${ids.length} below and return every one of them, keyed by the id in its heading. Return nothing else.\\n\\n${body}`,
+      { label: `s%(shard)02d:${coder}:b${bi}`, phase: 'Code', schema: SCHEMA, effort: 'high' }
+    ).then(r => ({ coder, rows: (r && r.codings) || [] })))
+  })
+}
+const done = (await parallel(jobs)).filter(Boolean)
+
+const asked = new Set(IDS)
+const out = { A: {}, B: {} }
+let stray = 0
+for (const d of done) for (const r of d.rows) {
+  if (!asked.has(r.id)) { stray++; continue }   // never accept an id we did not ask for
+  out[d.coder][r.id] = { narrative: r.narrative, mode: r.mode, drift: r.drift,
+                         degree: r.degree, span: r.span }
+}
+const missA = IDS.filter(i => !(i in out.A)), missB = IDS.filter(i => !(i in out.B))
+if (missA.length || missB.length || stray) log(`INCOMPLETE: A missing ${missA.length}, B missing ${missB.length}, stray ${stray}`)
+const both = IDS.filter(i => i in out.A && i in out.B)
+log(`shard %(shard)d done: both=${both.length}/${IDS.length}`)
+return { _shard: %(shard)d, _requested: IDS.length, _stray: stray,
+         _missing_A: missA, _missing_B: missB, A: out.A, B: out.B }
+'''
+
+
+def _passc_coded():
+    """Ids coded by BOTH coders, across every saved shard."""
+    import collections
+    d = os.path.join(PASSC, "codings")
+    got = collections.defaultdict(set)
+    if os.path.isdir(d):
+        for f in sorted(os.listdir(d)):
+            if f.endswith(".json"):
+                r = json.load(open(os.path.join(d, f), encoding="utf-8"))
+                for c in ("A", "B"):
+                    got[c].update(r.get(c, {}))
+    return (got["A"] & got["B"]) if got else set()
+
+
+def passc_shards(nshards=6, per_cell=535, batch=45):
+    """Generate N disjoint workflow scripts over the ids still to code.
+
+    Shards exist so a killed session loses ONE shard, not the run. They are
+    separate top-level Workflow invocations because the concurrency cap is
+    min(16, cores-2) PER WORKFLOW -- 10 on this machine -- so six shards give
+    60 concurrent agents rather than 10. The cap is set by local cores and the
+    work is API calls, which is why it is worth routing around.
+
+    `per_cell` is how many of the frozen 714 to code in this pass; 535 is the
+    n=150 target. Ids are taken in the sample's own order, which is
+    (model, prompt, sample_idx), so "the first 535" is deterministic and raising
+    it later ADDS ids without disturbing any already coded.
+
+    **Shards are cut by LINEAGE, not by row.** A shard that dies then leaves a
+    nameable gap -- these pairs are uncoded -- rather than a random hole.
+    """
+    import collections
+    import pyarrow.parquet as pq
+    t = pq.read_table(PASSC_SAMPLE).to_pydict()
+    bycell = collections.defaultdict(list)
+    for i, m in zip(t["id"], t["model"]):
+        bycell[m].append(i)
+    want = []
+    for m in sorted(bycell):
+        want.extend(bycell[m][:per_cell])
+    done = _passc_coded()
+    todo = [i for i in want if i not in done]
+    print("frozen sample %s | this pass wants %s (%d/cell) | coded %s | TODO %s"
+          % (format(len(t["id"]), ","), format(len(want), ","), per_cell,
+             format(len(done & set(want)), ","), format(len(todo), ",")))
+    if not todo:
+        print("nothing to do")
+        return
+    pair_of = dict(zip(t["id"], t["pair"]))
+    bypair = collections.defaultdict(list)
+    for i in todo:
+        bypair[pair_of[i]].append(i)
+    buckets = [[] for _ in range(nshards)]
+    for p in sorted(bypair, key=lambda p: -len(bypair[p])):
+        buckets.sort(key=len)
+        buckets[0].extend(bypair[p])
+    todoset = set(todo)
+    pas = {i: {"f": p, "c": x}
+           for i, p, x in zip(t["id"], t["prompt"], t["text"]) if i in todoset}
+    os.makedirs(os.path.join(PASSC, "scripts"), exist_ok=True)
+    plan = {}
+    for k, ids in enumerate(buckets):
+        ids = sorted(ids)
+        src = SHARD_TEMPLATE % {
+            "shard": k, "nshards": nshards, "n": len(ids), "batch": batch,
+            "nbatch": (len(ids) + batch - 1) // batch,
+            "rubric": json.dumps(rubric_text()),
+            "ids": json.dumps(ids),
+            "passages": json.dumps({i: pas[i] for i in ids}, ensure_ascii=False)}
+        f = os.path.join(PASSC, "scripts", "shard-%02d.js" % k)
+        open(f, "w", encoding="utf-8").write(src)
+        plan[k] = {"script": f, "n": len(ids), "pairs": sorted({pair_of[i] for i in ids})}
+        print("  shard %02d  %5d passages  %2d pairs  -> %s"
+              % (k, len(ids), len(plan[k]["pairs"]), os.path.basename(f)))
+    json.dump(plan, open(os.path.join(PASSC, "plan.json"), "w", encoding="utf-8"),
+              indent=1, sort_keys=True)
+    tot = sum(len(b) for b in buckets)
+    nag = 2 * sum((len(b) + batch - 1) // batch for b in buckets)
+    print("\n  %s passages x 2 coders = %s codings | %d agents at %d/batch"
+          % (format(tot, ","), format(2 * tot, ","), nag, batch))
+    print("  cover check: union of shards == TODO: %s"
+          % (sorted(i for b in buckets for i in b) == sorted(todo)))
+    print("  disjoint: %s" % (len({i for b in buckets for i in b}) == tot))
+
+
+def passc_save(src):
+    """Persist one shard's result. Call as soon as its workflow returns."""
+    raw = json.load(open(src, encoding="utf-8"))
+    r = raw.get("result", raw)
+    if isinstance(r, str):
+        r = json.loads(r)
+    k = r.get("_shard")
+    if k is None:
+        raise RuntimeError("no _shard in %s -- is this a Pass C shard output?" % src)
+    os.makedirs(os.path.join(PASSC, "codings"), exist_ok=True)
+    p = os.path.join(PASSC, "codings", "shard-%02d.json" % k)
+    if os.path.exists(p):
+        raise RuntimeError("%s exists; refusing to overwrite a saved shard" % p)
+    json.dump(r, open(p, "w", encoding="utf-8"), indent=0, sort_keys=True,
+              ensure_ascii=False)
+    print("shard %02d: A=%d B=%d of %d requested | missing A=%d B=%d | stray %d -> %s"
+          % (k, len(r["A"]), len(r["B"]), r.get("_requested", -1),
+             len(r.get("_missing_A", [])), len(r.get("_missing_B", [])),
+             r.get("_stray", 0), p))
+
+
 def passc_todo():
     """What is coded, what is not. The resume check."""
     import collections
@@ -1165,8 +1338,12 @@ if __name__ == "__main__":
     ap.add_argument("--passc-sample", action="store_true")
     ap.add_argument("--passc-todo", action="store_true")
     ap.add_argument("--passc-corpus", action="store_true")
+    ap.add_argument("--shards", type=int)
+    ap.add_argument("--passc-save")
+    ap.add_argument("--batch", type=int, default=45)
     ap.add_argument("--per-cell", type=int, default=714)
     ap.add_argument("--lang", default="en")
+    ap.add_argument("--per-cell-now", type=int, default=535)
     ap.add_argument("--save")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--exits", action="store_true")
@@ -1203,5 +1380,9 @@ if __name__ == "__main__":
         passc_todo()
     elif a.passc_corpus:
         passc_corpus()
+    elif a.shards:
+        passc_shards(nshards=a.shards, per_cell=a.per_cell_now, batch=a.batch)
+    elif a.passc_save:
+        passc_save(a.passc_save)
     else:
         ap.print_help()
