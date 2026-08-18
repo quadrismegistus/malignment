@@ -150,6 +150,8 @@ def render(fragment, word_table):
     _, _, t = template()
     return t.replace("{{fragment}}", fragment).replace("{{word_table}}", word_table)
 
+#: Hand-named shortcuts, for working on one lineage. `--pairs all` goes to the
+#: roster instead, which is the population.
 PAIRS = {
     "llama": ("meta-llama/Llama-3.1-8B", "meta-llama/Llama-3.1-8B-Instruct"),
     "smol": ("HuggingFaceTB/SmolLM3-3B-Base", "HuggingFaceTB/SmolLM3-3B"),
@@ -157,6 +159,36 @@ PAIRS = {
     "qwen3": ("Qwen/Qwen3-8B-Base", "Qwen/Qwen3-8B"),
     "yi": ("01-ai/Yi-1.5-9B", "01-ai/Yi-1.5-9B-Chat"),
 }
+
+
+def declared_pairs(prompt):
+    """(pairs, dropped) -- the declared endpoints with BOTH arms in v4 here.
+
+    THE POPULATION IS THE ROSTER'S, NOT THIS FILE'S. `roster.endpoints()` is the
+    50 declared (base, endpoint) pairs; a list of five typed in here is a
+    selection nobody declared, and it drifts the moment the roster does.
+
+    A pair is dropped when v4 holds one arm and not the other -- coverage is
+    per-model and per-prompt, so which pairs are available is a property of THIS
+    prompt and cannot be settled once. Both halves are returned because a caller
+    that ignores the drops is choosing its population by accident, and because
+    the count of what was left out is what the panel has to declare.
+
+    The pair is named for its ALIGNED endpoint, which is unique across the 50 and
+    is what a reader recognises; the base is in the row and in the key.
+    """
+    from malignment import roster, vectors as V
+    ep, unresolved = roster.endpoints()
+    rows = V.rows("SELECT DISTINCT model FROM twp_words_v4 WHERE prompt={p:String}",
+                  p=prompt)
+    have = {r["model"] for r in rows}
+    pairs, dropped = {}, []
+    for b, a in sorted(ep.items()):
+        if b in have and a in have:
+            pairs[a.split("/")[-1]] = (b, a)
+        elif b in have or a in have:
+            dropped.append((b, a, "base" if b in have else "aligned"))
+    return pairs, dropped, len(ep), unresolved
 
 
 def _stash():
@@ -181,10 +213,14 @@ def _stash():
 def _table(m, risers, fallers):
     """The v3 two-block format. ` -> ` as separator, never a bare `>`."""
     def block(ws):
+        #: AN EMPTY BLOCK SAYS SO. Some lineages move nothing away from the base
+        #: distribution at all, and that is a result rather than a defect -- but
+        #: a heading followed by whitespace reads as a rendering failure, and a
+        #: rater who thinks the data is truncated will not report the null.
         return "\n".join(
             "  %-12s %5.1f%% -> %5.1f%%  (%+5.1f)"
             % (w, 100 * m.pre.get(w, 0.0), 100 * m.post.get(w, 0.0), 100 * m.delta[w])
-            for w in ws)
+            for w in ws) or "  (none -- no word is higher on this side)"
     return "HIGHER UNDER B\n%s\n\nHIGHER UNDER A\n%s" % (block(risers), block(fallers))
 
 
@@ -236,8 +272,25 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
             continue
         prompt = hit[0]
         d = items[prompt]
-        for pn in pair_names:
-            b, a = PAIRS[pn]
+        #: PAIRS ARE RESOLVED PER FRAME, because v4 coverage is per (model,
+        #: prompt): "which pairs do we have" has no answer until a prompt is
+        #: named. `all` asks the roster; anything else is a hand-named shortcut.
+        if list(pair_names) == ["all"]:
+            pmap, dropped, n_declared, unresolved = declared_pairs(prompt)
+            print("%s: %d of %d declared pairs have both arms in v4"
+                  % (fid, len(pmap), n_declared))
+            if dropped:
+                #: NAMED, NOT COUNTED. A dropped pair is a lineage the figure will
+                #: not speak for, and a reader cannot tell which from a number.
+                print("  %d dropped, one arm only: %s"
+                      % (len(dropped), ", ".join(
+                          "%s (%s only)" % (a.split("/")[-1], w) for _, a, w in dropped)))
+            if unresolved:
+                print("  %d unresolved lineage(s) in the roster: %s"
+                      % (len(unresolved), ", ".join(sorted(unresolved))))
+        else:
+            pmap = {pn: PAIRS[pn] for pn in pair_names}
+        for pn, (b, a) in pmap.items():
             rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                           "FROM twp_words_v4 WHERE prompt={p:String} AND model IN "
                           "{ms:Array(String)} GROUP BY model", p=prompt, ms=[b, a])
@@ -300,6 +353,18 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                         continue
                     man[name] = row
                     plan.append(name)
+                    #: THE PROMPT ALSO LANDS AS A .txt, VERBATIM. A workflow's
+                    #: `args` can only be typed into the tool call by hand, and
+                    #: retyping 30 word tables is the one thing this campaign
+                    #: forbids outright: never transcribe a value you can emit.
+                    #: So the agent is pointed at a file whose ENTIRE CONTENT is
+                    #: the prompt -- not a JSON of fields to be reassembled,
+                    #: which is what v3 did and what made the rater's first act
+                    #: an interpretation. One Read, then the instrument as
+                    #: written. The stash still stores the prompt verbatim, so a
+                    #: record remains auditable with the file deleted.
+                    with open(os.path.join(INPUT_DIR, name + ".txt"), "w") as fh:
+                        fh.write(sent)
                 cells.append("%s__%s__%s" % (fid, pn, o))
                 print("%-30s %2d higher-B  %2d higher-A   %s"
                       % ("%s__%s__%s" % (fid, pn, o), len(ris), len(fal),
@@ -367,6 +432,15 @@ def ingest(run_id):
         #: fragment and word table inline, so it identifies the cell exactly and
         #: no path or filename has to be parsed out of it.
         sha = hashlib.sha256((text or "").strip().encode("utf-8")).hexdigest()[:16]
+        #: TWO ROUTES TO THE SAME CELL, because the prompt reaches the rater one
+        #: of two ways. Sent inline, the first message IS the prompt and its hash
+        #: is the identity. Sent as a pointer to a .txt, the first message names
+        #: the file, so fall back to the manifest name in it. Hash first: it
+        #: cannot match the wrong cell, whereas a name can appear in prose.
+        if sha not in {v.get("sent_sha") for v in man.values()}:
+            named = [v.get("sent_sha") for k, v in man.items() if k + ".txt" in (text or "")]
+            if len(set(named)) == 1:
+                sha = named[0]
         by_sha.setdefault(sha, []).append((f, lines))
 
     rows_by_sha = {}
