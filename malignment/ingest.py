@@ -468,7 +468,18 @@ def main():
                               "prompt_cache": int(bool(d.get("prompt_cache"))),
                               "topup": int(bool(d.get("topup"))),
                               "topup_words": int(d.get("topup_words") or 0),
-                              "topup_mass": float(d.get("topup_mass") or 0.0)})})
+                              "topup_mass": float(d.get("topup_mass") or 0.0),
+                              #: WORDS ASKED FOR AND NOT SCORED. It is 0 across
+                              #: CT-LLM's 24,369 topped-up words -- a MEASURED
+                              #: zero, since `topup_words` is populated in the
+                              #: same records -- but it cannot stay out of the
+                              #: corpus on that basis. A word `score_words4`
+                              #: refuses stays missing, so a lineage with a
+                              #: non-zero rate never reaches coverage 0 and the
+                              #: verifier reports OPEN forever with nothing to
+                              #: say why. The distinction between "asked and
+                              #: refused" and "never asked" only exists here.
+                              "topup_refused": int(d.get("topup_refused") or 0)})})
         if len(words) > 400_000:
             wt, ct = TABLES[_RV["v"]]
             ch.insert(wt, words); words = []
