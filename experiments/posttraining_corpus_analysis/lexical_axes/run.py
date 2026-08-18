@@ -268,10 +268,25 @@ def reverse():
     print("building corpus vectors (chosen vs rejected, normalised within response)...")
     CV = {k: corpus_vector(p, k) for k, p in populations().items()}
 
+    #: RH: inspect the coefficients. hh-rlhf's top features turned out to be
+    #: `https, http, html` -- formatting, not preference. Printed BEFORE any
+    #: accuracy so the words are read on their own terms.
+    MARKUP = {"https", "http", "html", "www", "com", "href", "src", "png", "jpg"}
+    print("\n=== THE COEFFICIENTS ===")
+    for k, v in CV.items():
+        top = sorted(v.items(), key=lambda x: -x[1])
+        mk = [w for w, _ in top[:40] if w in MARKUP] + [w for w, _ in top[-40:] if w in MARKUP]
+        print("\n  %s" % k)
+        print("    CHOSEN-leaning : %s" %
+              ", ".join("%s %+.2f" % (w, x) for w, x in top[:14]))
+        print("    REJECTED-leaning: %s" %
+              ", ".join("%s %+.2f" % (w, x) for w, x in top[-14:][::-1]))
+        print("    markup tokens in either tail: %s" % (", ".join(mk) if mk else "none"))
+
     print("\nfetching base/aligned passages (unforced NARR, matched by prompt)...")
     q = ("SELECT pair, role, prompt, text FROM malign_logits.gen_sequences "
          "WHERE corpus='passage' AND forced_word='' AND pair != '' "
-         "AND role IN ('base','aligned') AND modulo(rand(), 6) = 0 FORMAT TabSeparated")
+         "AND role IN ('base','aligned') AND modulo(cityHash64(pair, prompt), 6) = 0 FORMAT TabSeparated")
     out = subprocess.run(["clickhouse", "client", "--query", q],
                          capture_output=True, text=True, timeout=3600)
     if out.returncode:

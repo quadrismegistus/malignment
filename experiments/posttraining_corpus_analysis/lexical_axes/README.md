@@ -219,41 +219,49 @@ counts) or at n<=14. `INDIV`/`INST` has no passage generations at all.
 generated text**, and neither can the F21 institutional contrast. Testing either
 needs new generations at passage length, which is a run and not an analysis.
 
-# --reverse: THE DIRECTION THAT WORKS, AND ONLY FOR ONE CORPUS
+# --reverse: QUALITY PREFERENCE WEAKLY PREDICTS THE ARM; SAFETY PREFERENCE DOES NOT
 
 RH: *"if pref-unpref data cant predict aligned-base, thats evidence that
-alignment is not simply a mirror for its training data."* Run. **It is not
-symmetric with the forward test, because the CEILINGS differ:**
+alignment is not simply a mirror for its training data."* **Not symmetric with
+the forward test, because the ceilings differ:** forward is AUC 0.683 (pku h3
+fit); reverse is 0.851-0.966 (M06's fitted page classifier). Far more room to
+fail in reverse.
 
-    forward ceiling   corpus preference is lexically predictable at AUC 0.683
-                      (pku --h3, 13,820 terms). Model vector got ~0.50.
-    reverse ceiling   base-vs-aligned is predictable from a PAGE at 0.851-0.966
-                      (M06 p_on_passages, fitted). Far more room to fail in.
+Corpus vector built as `--genvector` with roles swapped, scored on matched
+base/aligned passage pairs, sample seeded on `cityHash64(pair, prompt)`:
 
-Corpus vector built exactly as `--genvector` with roles swapped -- rate
-normalised WITHIN RESPONSE, differenced within pair, sign-counted across pairs --
-then scored on ~6,600 matched base/aligned passage pairs.
+    corpus vector        n     arm acc        p       verdict
+    hh-harmless        1,238    51.4%      0.35      FAILS
+    hh-helpful         1,238    50.1%      0.98      FAILS
+    pku-unsafe         1,238    50.1%      0.98      FAILS
+    pku-mixed          1,236    52.3%      0.12      FAILS
+    ultrafeedback      1,240    57.7%      7.6e-08   WEAK
 
-    corpus vector        n      arm acc        p        verdict
-    hh-harmless        6,622     51.2%      0.051       FAILS
-    hh-helpful         6,622     50.5%      0.42        FAILS
-    pku-unsafe         6,621     51.8%      0.004       FAILS
-    pku-mixed          6,616     52.6%      3.1e-05     FAILS
-    ultrafeedback      6,627     60.1%      6.3e-61     PREDICTS
+**Only UltraFeedback separates from chance, and only weakly.** Against a fitted
+ceiling of 0.851-0.966, a zero-parameter corpus vector recovers 0.577.
 
-**ULTRAFEEDBACK PREDICTS THE ARM. PKU DOES NOT.** Against a fitted ceiling of
-0.851-0.966, a zero-parameter corpus vector recovers 0.601.
+## THE COEFFICIENTS DEFLATE IT, AND THEY WERE THE THING TO READ FIRST
 
-## TWO CONFOUNDS TESTED, BOTH DEAD
+    ultrafeedback CHOSEN   cpp +0.26, captivating +0.22, whispers +0.22,
+                           docs +0.21, viewport +0.21, lang +0.21, amidst +0.20,
+                           symphony +0.19, extraordinary +0.19, tales +0.19
+                  REJECTED ye -0.32, rephrasing -0.20, sorry -0.19,
+                           rephrase -0.18, advise -0.15, unethical -0.14,
+                           sexist, racist, inappropriate, harmful
 
-**Not generator-alignment leakage.** UltraFeedback's chosen responses skew to
-`gpt-4`/`gpt-3.5`/`bard` (win rates 82-84%), which are heavily aligned, so
-"chosen-leaning" could just mean "aligned-model-leaning". Rebuilt on the 35,200
-pairs with NONE of those three on either side: **60.3%**, against 60.2% on all
-61,135. The mechanism is absent.
+The chosen side is **code tokens plus florid literary vocabulary**, and the
+target passages are literary continuations. So the likely mechanism is NOT a
+shared alignment axis but **shared floridity**: UltraFeedback's rubric names
+*Richness of Information*, aligned models write more elaborately, and the vector
+tracks elaborateness in both places. **That reading is invisible in the accuracy
+and obvious in the words.**
 
-**Not vocabulary size.** UltraFeedback's vector has 5,545 words against PKU's
-2,674. At matched top-N by |weight|:
+## TWO CONFOUNDS TESTED AND DEAD, WHICH IS WHY THE 57.7% IS STILL REAL
+
+**Not generator-alignment leakage.** Rebuilt on the 35,200 pairs with no
+`gpt-4`/`gpt-3.5`/`bard` on either side: 60.3% against 60.2% (unseeded sample).
+**Not vocabulary size.** At matched top-N by |weight| UltraFeedback wins at every
+N and PKU is at chance at every N:
 
     corpus          words   N=500   N=1000  N=1500  N=2000
     hh-harmless      1,753   52.0%   52.3%   51.8%     -
@@ -261,33 +269,39 @@ pairs with NONE of those three on either side: **60.3%**, against 60.2% on all
     pku-unsafe       2,674   50.4%   50.4%   50.2%   50.9%
     ultrafeedback    5,545   53.3%   54.2%   54.5%   57.5%
 
-**UltraFeedback wins at every matched N and PKU is at chance at every N.** But
-the headline 60.1% IS partly a size effect: 53.3% at 500 words, climbing
-monotonically. **So the signal is BROAD AND DISTRIBUTED, not carried by a few
-words** -- which is why a top-N restriction costs it.
+The signal is **broad and distributed** -- 53.3% at 500 words climbing
+monotonically -- so there is no short word list to quote and anyone extracting
+one will find the effect dissolves.
 
-## WHAT THIS SAYS, AND IT CORRECTS THE HEADLINE
+## TWO THINGS THE COEFFICIENTS CAUGHT THAT THE ACCURACIES HID
 
-Not "preference data cannot predict the arm". **QUALITY preference can; SAFETY
-preference cannot.** The corpus that 17 roster checkpoints actually train their
-preference stage on carries broad information about what separates an aligned
-model from its base. PKU's safety preference carries none.
+**`hh-helpful` is the markup artifact.** Its rejected tail is
+`http -0.25, https -0.22, www -0.22, html -0.22, org, com, wiki`. The hh-rlhf
+write-up warned about exactly this and its 50.1% would have been quoted as a
+clean null.
 
-**And it makes the forward null sharper rather than softer.** The relation is
-ASYMMETRIC: UltraFeedback preference -> arm works at 0.601, while arm ->
-UltraFeedback preference sat at ~0.50 in `--predict` and `--genvector`. **The two
-directions are not the same claim**, and the asymmetry is the finding.
+**`pku-mixed` recovers the disclaimer finding independently.**
+`sorry +0.41, unfortunately +0.34, cannot +0.31, unethical +0.28, illegal +0.24,
+penalties +0.24` against `phishing -0.32, malware -0.26, exploiting -0.24`. A
+bag-of-words vector arriving at the axis the blind coders found.
 
-    THE CORPUS-SIDE VECTORS ALSO DIFFER STRUCTURALLY
+## THE ASYMMETRY IS STILL THE RESULT
+
+UltraFeedback -> arm reaches 0.577; arm -> UltraFeedback preference sat at ~0.50
+in both `--predict` and `--genvector`. **The two directions are not the same
+claim**, and the forward null cannot be read as "the axes are unrelated" now that
+the reverse is non-null.
+
+    CORPUS-SIDE VECTORS ALSO DIFFER STRUCTURALLY
     pku-unsafe      648 chosen-leaning  /  2,026 rejected-leaning
     ultrafeedback  4,899 chosen-leaning /    646 rejected-leaning
 
-PKU's preference is mostly words that mark the REJECTED response; UltraFeedback's
-mostly words that mark the CHOSEN one. Recorded, not interpreted.
+## TWO DEFECTS IN GETTING HERE
 
-## ONE DEFECT IN THIS RUN
+The first run sampled with `modulo(rand(), 6)` and no seed: n varied 6,595-6,648
+and the reported figure was **60.1%**. The first seed attempt hashed
+`(pair, prompt, role)`, so the two arms of a prompt hashed differently and rarely
+both survived -- matched pairs collapsed to 206 and the figure read 66.7%.
+**Neither is citable.** Seeded on `(pair, prompt)`, n=1,238 and the figure is
+57.7%.
 
-The passage sample uses `modulo(rand(), 6) = 0` with **no seed**, so n varies run
-to run (6,595 / 6,627 / 6,640 / 6,648 observed). The accuracies were stable
-across those draws to within 0.2pp, but **the sample is not reproducible and
-should be seeded before any number here is quoted.**
