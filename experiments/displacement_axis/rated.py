@@ -25,6 +25,54 @@ words -- better powered than the embedding it would replace.
 The statistic is unchanged: `N = sum p(w) r(w) / sum p(w)` per arm, `dN = N_post -
 N_base`, so the comparison to `dN_position` is like for like.
 
+## THE INSTRUMENT, AND THE BANDS THAT MUST TRAVEL WITH EVERY NUMBER
+
+The producer is NOT missing, as an earlier version of this docstring claimed. It is
+`meta/M01_displacement/scripts/k_bulk.py` in the malign-logits repo, the instrument
+is frozen at `results/k/INSTRUMENT.txt` (`k_charge_en_v2`, deepseek-v4-flash,
+temperature 0.0, sha 5b59a44c..., git b9f122bb), and `results/k/iaa.json` carries a
+cross-model reliability study over 475 words (coder A deepseek-v4-flash, coder B
+claude-haiku-4-5).
+
+**`iaa.json` says in its own `_what` that the band travels with every drafted
+number, at the point of use and not in a limits section.** So:
+
+    scale               pearson   exact   vs human norm
+    vulgarity             0.879   97.5%
+    transgressiveness     0.828   77.9%
+    bodily_harm           0.879   91.4%
+    valence               0.901   72.6%   0.862 vs human valence
+    charge                0.873   57.0%   0.597 vs arousal
+    concreteness          0.834   39.4%   0.875 vs Brysbaert
+    register_level        0.597   62.9%
+
+**AND THE SCALES ARE NOT INDEPENDENT, WHICH CHANGES WHAT MAY BE CLAIMED.**
+`iaa.json`'s collinearity block gives transgressiveness~charge +0.646,
+transgressiveness~valence -0.643, transgressiveness~bodily_harm +0.518,
+valence~bodily_harm -0.471, charge~bodily_harm +0.464. Those four scales are
+largely ONE DIMENSION. An earlier reading of this file's output reported five
+separately significant effects; four of them were that one dimension counted four
+times, which is the same headcount error the campaign has booked twice already.
+
+The defensible reading is THREE independent effects, because vulgarity,
+register_level and concreteness are near-orthogonal to everything (max |r| 0.24):
+
+    one transgression dimension  DOWN   (transg / bodily_harm / valence / charge together)
+    register_level               UP     (independent; WEAKEST agreement, r 0.597 -- band matters most here)
+    concreteness                 DOWN   (independent; largest effect; exact agreement only 39.4%
+                                         but calibrates to Brysbaert at r 0.875, so the scale tracks
+                                         a human norm even where two coders split on integers)
+
+One confound is ruled out rather than assumed: every scale correlates below |0.17|
+with log10 COCA frequency, so none of this is a frequency proxy.
+
+**A rating is a property of the INSTRUMENT VERSION.** `k_bulk.py` records that
+adding three scales once moved `penis` vulgarity 2->4 and `defenestrate` charge
+2->4 at temperature 0. Outputs from different versions must never be pooled, and
+that includes any in-context re-rating done with different anchors or a different
+scale set: it is a different instrument, comparable on SEPARATIONS and RANKS but
+never on absolute level.
+
 ## WHAT THIS IS NOT
 
 **These are not human norms and the file says so in capitals.** They are one
