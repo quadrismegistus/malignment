@@ -491,122 +491,59 @@ def md_axis(prompt, g, n, r):
               "means anything. %s" % (sep.get("reason") or ""), "",
               "**Retag — do not retry.** The same words fail identically."]
 
-    #: **ONE WORD, NOT A PAIR.** The least-alike PAIR was the only odd-one-out
-    #: signal here, and measured over 174 poles it names two words 100% of the
-    #: time while containing the actual intruder only 83% -- so a reader must
-    #: always disambiguate, and one time in six the word they want is not on
-    #: offer. RH's constructed test (`nice: plans dreams ideas eyes`, `eyes`
-    #: planted) printed "`ideas` / `eyes` 0.338" and he could not tell what it
-    #: was telling him.
+    #: **SECTIONS 2, 3 AND 4 REMOVED (RH, 2026-08-18).** Measured over 96 items,
+    #: each was noise, record-keeping, or an instruction to do the forbidden
+    #: thing. The `held_out`, `coherence`, `purity`, `defectors`, `N` and
+    #: `neighbours` values all still compute, are all in `--json`, and the axis
+    #: block is now written onto the saved item -- withheld only from the surface
+    #: an author reads WHILE DECIDING, which is the one place they did harm.
     #:
-    #: The held-out margin names ONE word and it is the odd one out in its pole
-    #: on 80 of 87 items (92%). So the pair becomes context and the margin
-    #: becomes the answer.
+    #: **2. Pole coherence.** Its mean does not rank poles and the section said
+    #: so in its own copy (an undressing pole at 0.497 against 0.640 for one that
+    #: produced a death axis). Its least-alike pair fired on 74% of the corpus,
+    #: which is a background hum rather than a warning, and named two words while
+    #: containing the actual intruder only 83% of the time. Its one-word
+    #: replacement was worse: see the leverage note below.
     #:
-    #: This is what remains of section 3b, now removed. Its signal was good and
-    #: its presentation was the failure -- four paragraphs of hedging around a
-    #: number, offering an author only do-nothing or delete, and an authoring
-    #: agent reported being tempted to delete four times and helped zero. Its
-    #: mass column survives, because a flag on a word carrying 0.3% of its pole
-    #: and one carrying 35% are different events.
-    ho = r.get("held_out") or {}
-    _hw = ho.get("words") or []
-    _tot_p = sum(x.get("p") or 0.0 for x in _hw)
-    odd = {}
-    for d in _hw:                      # sorted by margin, so the first per pole wins
-        odd.setdefault(d["pole"], d)
-
-    coh = r.get("coherence") or {}
-    if coh:
-        rows = []
-        for pole in ("naughty", "nice"):
-            c = coh.get(pole) or {}
-            mp = c.get("min_pair")
-            o = odd.get(pole)
-            rows.append((pole, c.get("n"),
-                         "%.3f" % c["mean_pairwise"] if c.get("mean_pairwise") is not None else "—",
-                         ("`%s` %+.3f" % (o["word"], o["margin"])) if o else "—",
-                         ("%.0f%%" % (100.0 * (o.get("p") or 0.0) / _tot_p)
-                          if o and _tot_p else "—"),
-                         "`%s` / `%s` %.3f" % (mp[0], mp[1], mp[2]) if mp else "—"))
-        L += ["", "## 2. Pole coherence — *not a gate*", "",
-              _table(rows, ["pole", "words", "mean", "least typical", "its mass",
-                            "least-alike pair"]), "",
-              #: **`least typical` RATHER THAN `odd one out`, BECAUSE THE COLUMN
-              #: ALWAYS NAMES A WORD.** Every pole has a least-typical member and
-              #: most of them are fine -- `hips` prints at +0.388 beside `breasts`
-              #: and `boobs`, which is not a defect and reads as an accusation
-              #: under the old header. A column that fires on every item teaches
-              #: the reader to ignore it. The SIGN carries the alert, and the
-              #: Warnings section below fires only on a negative.
-              "**`least typical` is the word least like the rest of its own "
-              "pole**, scored against an axis rebuilt without it. Every pole has "
-              "one, so its presence is not a finding — **read the sign.** A "
-              "positive margin means the word still sits with its pole and there "
-              "is nothing to do. A negative margin is flagged in Warnings below, "
-              "and is the intruder on 92% of items, against 83% for the "
-              "least-alike pair, which also names two words every time.", "",
-              "**Check `its mass` before acting.** A flagged word carrying almost "
-              "none of the pole cannot be evidence about much either way — and a "
-              "flagged word carrying most of it is the one you must *not* delete, "
-              "since shrinking a pole costs the mass being measured. A low score "
-              "is a question — *is this word carrying the same contrast as the "
-              "rest, or a second one?* — never a verdict. It lands on correct tags "
-              "routinely, because a contrast can be pragmatic rather than semantic "
-              "(`unzipped her jacket` against `her dress`: all garments, and no "
-              "embedder sees the difference). The useful catch is a pole doing two "
-              "jobs, and the fix for that is two items, not a shorter pole.", "",
-              "The mean does not rank bad poles below good ones: an undressing "
-              "pole scores 0.497 against 0.640 for one that produced a death axis. "
-              "A wide pole can be exactly right."]
-
-    #: **`leverage` IS NOT PRINTED HERE, and that is the point** (opus-violence-2,
-    #: 2026-08-17). The brief forbids retrying a frame to raise it, and the report
-    #: was printing it before every decision -- so an agent making a legitimate
-    #: retag saw the number move and its trace became indistinguishable from
-    #: leverage-hunting to any later reviewer. Its own words: "a rule you must
-    #: remember to obey is weaker than one the tool enforces by not showing you the
-    #: number."
+    #: **3. Recorded, never gated.** `purity` is near-tautological -- a
+    #: deliberately scrambled tagging cleared `separates` 16 of 16 -- `defectors`
+    #: fires on 3 of 96, and `N` is labelled "level, not movement", which is not
+    #: a quantity an author acts on. All three are records, and records belong on
+    #: the item, where they now are.
     #:
-    #: It is still recorded on the saved item and still in `--json`. Withheld from
-    #: the surface an author reads while deciding, which is the only place it can
-    #: do harm.
-    L += ["", "## 3. Recorded, never gated", "",
-          _table([("purity", "%.2f" % (r.get("purity") or 0.0),
-                   "fraction of tagged words landing on their own side"),
-                  ("defectors", ", ".join(r.get("defectors") or []) or "none",
-                   "tagged words that landed on the WRONG side"),
-                  ("N", "%.4f" % (r.get("N") or 0.0), "level, not movement")],
-                 ["measure", "value", "meaning"]), "",
-          "`leverage` is deliberately **not shown**: the brief forbids retrying a "
-          "frame to raise it, and a number you cannot see is one you cannot chase. "
-          "It is recorded on the item and available in `--json`."]
-
-    nb = r.get("neighbours") or {}
-    if nb:
-        hi, lo = nb.get("naughty_end") or [], nb.get("nice_end") or []
-        rows = [(("`%s` %+.3f" % (hi[i]["word"], hi[i]["s"])) if i < len(hi) else "",
-                 ("`%s` %+.3f" % (lo[i]["word"], lo[i]["s"])) if i < len(lo) else "")
-                for i in range(min(6, max(len(hi), len(lo))))]
-        L += ["", "## 4. Untagged words this axis selects", "",
-              _table(rows, ["toward naughty", "toward nice"]), "",
-              "*Weak by design.* If you tagged well the untagged remainder is the "
-              "irrelevant part, so this says little — it catches a pole that has "
-              "drifted somewhere you did not intend."]
-
-    #: **A REFEREE THAT DID NOT RUN MUST NOT READ AS A REFEREE THAT PASSED.**
-    #: These two sections were rendered only on success, so a ClickHouse outage
-    #: removed the HEADING and nothing else -- and an author who has not seen the
-    #: section on a previous frame cannot tell a clean report from an absent one.
-    #: opus-institutional-pilot hit exactly this: CH died for ~20s mid-run, item 4
-    #: got no section 5 or 6 on three consecutive identical calls, and the agent
-    #: caught it only by remembering the previous frame had them. Its own finding
-    #: is the reason this is now loud: **had the outage landed one frame earlier,
-    #: `sat` would have shipped** -- section 6 is what caught `sat` reading as the
-    #: Saturday sense.
+    #: **4. Untagged words this axis selects.** Fourteen lines whose own copy read
+    #: "*Weak by design* ... this says little".
     #:
-    #: Same class as a truncated figure caption: the loss exists only in the
-    #: rendered output, and a silent absence is the one failure no assert sees.
+    #: ## THE HELD-OUT WARNING WAS A LEVERAGE PUMP AND THAT IS WHY IT IS GONE
+    #:
+    #: RH checked what happened to `leverage` when the flagged word was dropped.
+    #: Against a random pole-mate as control, over items carrying a negative flag:
+    #:
+    #:     dropping the FLAGGED word     mean +0.0077   raised in 7 of 7
+    #:     dropping a RANDOM pole-mate   mean -0.0012   raised in 1 of 7
+    #:
+    #: So it is not the mechanical consequence of shrinking a pole; removing an
+    #: arbitrary word slightly LOWERS leverage. `LEV_DEAD` and `LEV_MOVER` are
+    #: 0.0694 and 0.1027, a gap of 0.0333, so obeying the warning is worth about
+    #: a quarter of the distance between a dead item and a mover -- and one item
+    #: made the whole trip in a single deletion: `She unzipped his` went from
+    #: 0.0665 to 0.1072 when `fly` was dropped, crossing both thresholds.
+    #:
+    #: **The entire reason `leverage` is withheld is that it must not be chased.
+    #: A warning whose only available action raises it is a back channel to
+    #: chasing it** -- the author never sees the number, follows instructions
+    #: throughout, and selects on effect size anyway. Worse, the action was
+    #: usually WRONG: the flagged word is typically correctly tagged (`eyes`
+    #: among `plans dreams ideas` is innocent-physical among innocent-abstract,
+    #: and dropping it converts an innocent/transgressive contrast into an
+    #: abstract/transgressive one). And the remedy the text offered instead of
+    #: deletion -- split the item -- CANNOT BE SAVED: `item_id` is a function of
+    #: the prompt alone, so the second half collides with a 409 whose message
+    #: recommends `overwrite`, which destroys the first.
+    #:
+    #: A warning whose correct response is always "do nothing" is not a warning.
+    #: This one's incorrect response was rewarded.
+
     def _did_not_run(num, title, blk):
         e = (blk or {}).get("error") if isinstance(blk, dict) else None
         if blk and not e:
@@ -618,7 +555,7 @@ def md_axis(prompt, g, n, r):
                 "keeps failing, say so in your report rather than saving around it."]
 
     cc = r.get("cross_corpus") or {}
-    _miss = _did_not_run(5, "What this axis selects across other frames", cc)
+    _miss = _did_not_run(2, "What this axis selects across other frames", cc)
     if _miss:
         L += _miss
     if cc and not cc.get("error"):
@@ -628,12 +565,13 @@ def md_axis(prompt, g, n, r):
                  ("`%s` %+.3f *(%d)*" % (lo[i]["word"], lo[i]["s"], lo[i]["prompts"]))
                  if i < len(lo) else "")
                 for i in range(min(6, max(len(hi), len(lo))))]
-        L += ["", "## 5. What this axis selects across %d OTHER frames"
+        L += ["", "## 2. What this axis selects across %d OTHER frames"
               % cc.get("scored_prompts", 0), "",
               _table(rows, ["toward naughty", "toward nice"]), "",
               "*(n)* is how many frames the word appears in; each is centred on its "
-              "own frame first. **This is the check that works** — unlike section 4 "
-              "it uses vocabulary your frame never offered, so it can show a pole "
+              "own frame first. **This is the check that works**, and it is now the only "
+              "diagnostic printed: it uses vocabulary your frame never offered, "
+              "so it can show a pole "
               "pointing somewhere you did not intend. If these words are not the "
               "kind of thing you meant, the poles are wrong however good the gate "
               "looks."]
@@ -676,6 +614,11 @@ def md_axis(prompt, g, n, r):
     #: the surface an author reads while deciding, which is the only place it did
     #: harm.
 
+    #: `coherence` is no longer PRINTED (section 2 removed) but the
+    #: `min_pair < 0` warning below still reads it -- 3 of 96 items, and the
+    #: one coherence signal that survived the firing-rate audit.
+    coh = r.get("coherence") or {}
+
     warn = []
     #: Was `< 4`. Three is where the held-out margin stops resting on one word's
     #: neighbourhood; 38% of RH's corpus sits below four with no measured
@@ -706,33 +649,23 @@ def md_axis(prompt, g, n, r):
                         "centroid averages two different things. `separates` cannot "
                         "see this — it only checks the two poles against each other."
                         % (mp[0], mp[1], pole, mp[2]))
-        elif mp and mp[2] < 0.45:
-            #: **NAME THE INTRUDER, NOT THE PAIR.** This read "`ideas` and `eyes`
-            #: sit far apart (0.338). Check they are the same kind of thing." --
-            #: two words where one is the planted intruder and the other is
-            #: innocent, leaving the reader to work out which. RH constructed
-            #: exactly that case to see whether the tool would catch it and
-            #: reported he could not tell. The held-out margin names the single
-            #: word and is right on 92% of items against the pair's 83%, so the
-            #: pair is demoted to the parenthesis it always should have been.
-            o = odd.get(pole)
-            if o and o["margin"] < 0:
-                warn.append(
-                    "**`%s` is the odd one out in the %s pole** (held-out %+.3f, "
-                    "carrying %s of the pole's mass). It is least like its "
-                    "pole-mates — check it is the same kind of thing, and if the "
-                    "pole is doing two jobs, split the item rather than the pole. "
-                    "Do not delete it to quiet this. (Widest pair: `%s` / `%s` "
-                    "%.3f.)"
-                    % (o["word"], pole, o["margin"],
-                       ("%.0f%%" % (100.0 * (o.get("p") or 0.0) / _tot_p))
-                       if _tot_p else "an unknown share",
-                       mp[0], mp[1], mp[2]))
-            else:
-                warn.append("**The %s pole is wide** — `%s` and `%s` sit %.3f "
-                            "apart. No single word stands out as the intruder, so "
-                            "this may be a broad pole rather than a mixed one."
-                            % (pole, mp[0], mp[1], mp[2]))
+        #: **BOTH REMOVED BRANCHES ARE MEASURED, over 96 items.**
+        #:
+        #: The wide-pole branch (`0 <= min_pair < 0.45`) fired on **71 of 96,
+        #: 74%**. A line appearing on three-quarters of everything is a
+        #: background hum, and RH met it on a frame he had built with a planted
+        #: intruder and could not tell whether it had caught anything.
+        #:
+        #: Its one-word replacement, naming the negative held-out word, fired on
+        #: 33 of 96 (34%) and was a LEVERAGE PUMP -- see the note above section 2.
+        #: Dropping the word it named raised leverage in 7 of 7 items against a
+        #: random-pole-mate control that raised it in 1 of 7, and one deletion
+        #: carried an item from below `LEV_DEAD` to above `LEV_MOVER`.
+        #:
+        #: What survives is the `min_pair < 0` branch above: 3 of 96, and a pole
+        #: whose two words point in opposite directions genuinely has no single
+        #: direction. Rare, serious, and it names no word to delete -- it says the
+        #: pole is incoherent, and the fix for that is retagging, not shrinking.
     if warn:
         L += ["", "## Warnings", ""] + ["- " + w for w in warn]
 
