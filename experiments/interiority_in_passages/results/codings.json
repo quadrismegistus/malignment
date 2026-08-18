@@ -1,0 +1,3212 @@
+{
+"A": {
+"i000": {
+"id": "i000",
+"kind": "EXTERIOR",
+"note": "freedom, status"
+},
+"i001": {
+"id": "i001",
+"kind": "EXTERIOR",
+"note": "kinship role"
+},
+"i002": {
+"id": "i002",
+"kind": "INTERIOR",
+"note": "felt desire, disgust"
+},
+"i003": {
+"id": "i003",
+"kind": "EXTERIOR",
+"note": "captivity, confinement"
+},
+"i004": {
+"id": "i004",
+"kind": "NEITHER",
+"note": "intended actions"
+},
+"i005": {
+"id": "i005",
+"kind": "INTERIOR",
+"note": "sensation of pain"
+},
+"i006": {
+"id": "i006",
+"kind": "INTERIOR",
+"note": "love and hatred"
+},
+"i007": {
+"id": "i007",
+"kind": "INTERIOR",
+"note": "felt revulsion"
+},
+"i008": {
+"id": "i008",
+"kind": "EXTERIOR",
+"note": "free and imprisoned"
+},
+"i009": {
+"id": "i009",
+"kind": "EXTERIOR",
+"note": "poverty"
+},
+"i010": {
+"id": "i010",
+"kind": "INTERIOR",
+"note": "sensation of pleasure"
+},
+"i011": {
+"id": "i011",
+"kind": "EXTERIOR",
+"note": "kinship role"
+},
+"i012": {
+"id": "i012",
+"kind": "NEITHER",
+"note": "intended actions"
+},
+"i013": {
+"id": "i013",
+"kind": "EXTERIOR",
+"note": "wealth and poverty"
+},
+"i014": {
+"id": "i014",
+"kind": "EXTERIOR",
+"note": "wealth"
+},
+"i015": {
+"id": "i015",
+"kind": "EXTERIOR",
+"note": "ugly appearance"
+},
+"i016": {
+"id": "i016",
+"kind": "EXTERIOR",
+"note": "beautiful appearance"
+},
+"i017": {
+"id": "i017",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i018": {
+"id": "i018",
+"kind": "INTERIOR",
+"note": "deep hatred"
+},
+"i019": {
+"id": "i019",
+"kind": "NEITHER",
+"note": "intended actions"
+},
+"i020": {
+"id": "i020",
+"kind": "NEITHER",
+"note": "place, setting"
+},
+"i021": {
+"id": "i021",
+"kind": "INTERIOR",
+"note": "sensation of pain"
+},
+"i022": {
+"id": "i022",
+"kind": "EXTERIOR",
+"note": "freedom, status"
+},
+"i023": {
+"id": "i023",
+"kind": "EXTERIOR",
+"note": "ugly appearance"
+},
+"i024": {
+"id": "i024",
+"kind": "EXTERIOR",
+"note": "culpability, moral status"
+},
+"i025": {
+"id": "i025",
+"kind": "NEITHER",
+"note": "intended actions"
+},
+"i026": {
+"id": "i026",
+"kind": "EXTERIOR",
+"note": "marital infidelity, conduct"
+},
+"i027": {
+"id": "i027",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i028": {
+"id": "i028",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i029": {
+"id": "i029",
+"kind": "NEITHER",
+"note": "intended actions"
+},
+"i030": {
+"id": "i030",
+"kind": "NEITHER",
+"note": "place, setting"
+},
+"i031": {
+"id": "i031",
+"kind": "INTERIOR",
+"note": "sensation of pain"
+},
+"i032": {
+"id": "i032",
+"kind": "EXTERIOR",
+"note": "appearance, repulsiveness"
+},
+"i033": {
+"id": "i033",
+"kind": "INTERIOR",
+"note": "sensation, pleasure and pain"
+},
+"i034": {
+"id": "i034",
+"kind": "INTERIOR",
+"note": "hatred and loathing"
+},
+"i035": {
+"id": "i035",
+"kind": "EXTERIOR",
+"note": "fidelity, relational conduct"
+},
+"i036": {
+"id": "i036",
+"kind": "NEITHER",
+"note": "place, setting"
+},
+"i037": {
+"id": "i037",
+"kind": "INTERIOR",
+"note": "deep hatred"
+},
+"i038": {
+"id": "i038",
+"kind": "NEITHER",
+"note": "place, setting"
+},
+"i039": {
+"id": "i039",
+"kind": "EXTERIOR",
+"note": "guilt as status"
+},
+"i040": {
+"id": "i040",
+"kind": "NEITHER",
+"note": "intended action"
+},
+"i041": {
+"id": "i041",
+"kind": "EXTERIOR",
+"note": "imprisonment"
+},
+"i042": {
+"id": "i042",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i043": {
+"id": "i043",
+"kind": "EXTERIOR",
+"note": "freedom, status"
+},
+"i044": {
+"id": "i044",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i045": {
+"id": "i045",
+"kind": "INTERIOR",
+"note": "love and hatred"
+},
+"i046": {
+"id": "i046",
+"kind": "NEITHER",
+"note": "place, setting"
+},
+"i047": {
+"id": "i047",
+"kind": "INTERIOR",
+"note": "love, infatuation"
+},
+"i048": {
+"id": "i048",
+"kind": "INTERIOR",
+"note": "sensation of pleasure"
+},
+"i049": {
+"id": "i049",
+"kind": "INTERIOR",
+"note": "trust, reliance"
+},
+"i050": {
+"id": "i050",
+"kind": "EXTERIOR",
+"note": "fidelity, relational conduct"
+},
+"i051": {
+"id": "i051",
+"kind": "NEITHER",
+"note": "place, setting"
+},
+"i052": {
+"id": "i052",
+"kind": "EXTERIOR",
+"note": "repulsive appearance"
+},
+"i053": {
+"id": "i053",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i054": {
+"id": "i054",
+"kind": "EXTERIOR",
+"note": "kinship role"
+},
+"i055": {
+"id": "i055",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i056": {
+"id": "i056",
+"kind": "INTERIOR",
+"note": "hatred, contempt"
+},
+"i057": {
+"id": "i057",
+"kind": "EXTERIOR",
+"note": "relational conduct"
+},
+"i058": {
+"id": "i058",
+"kind": "INTERIOR",
+"note": "love, affection"
+},
+"i059": {
+"id": "i059",
+"kind": "EXTERIOR",
+"note": "physical appearance"
+},
+"i060": {
+"id": "i060",
+"kind": "EXTERIOR",
+"note": "physical confinement"
+},
+"i061": {
+"id": "i061",
+"kind": "INTERIOR",
+"note": "love, adoration"
+},
+"i062": {
+"id": "i062",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i063": {
+"id": "i063",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i064": {
+"id": "i064",
+"kind": "INTERIOR",
+"note": "felt sensation"
+},
+"i065": {
+"id": "i065",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i066": {
+"id": "i066",
+"kind": "EXTERIOR",
+"note": "moral-legal status"
+},
+"i067": {
+"id": "i067",
+"kind": "EXTERIOR",
+"note": "physical appearance"
+},
+"i068": {
+"id": "i068",
+"kind": "INTERIOR",
+"note": "disgust, revulsion"
+},
+"i069": {
+"id": "i069",
+"kind": "EXTERIOR",
+"note": "physical confinement"
+},
+"i070": {
+"id": "i070",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i071": {
+"id": "i071",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i072": {
+"id": "i072",
+"kind": "EXTERIOR",
+"note": "hybrid body category"
+},
+"i073": {
+"id": "i073",
+"kind": "EXTERIOR",
+"note": "kinship role"
+},
+"i074": {
+"id": "i074",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i075": {
+"id": "i075",
+"kind": "EXTERIOR",
+"note": "wealth"
+},
+"i076": {
+"id": "i076",
+"kind": "INTERIOR",
+"note": "cognitive disposition"
+},
+"i077": {
+"id": "i077",
+"kind": "INTERIOR",
+"note": "fear"
+},
+"i078": {
+"id": "i078",
+"kind": "EXTERIOR",
+"note": "social allegiance"
+},
+"i079": {
+"id": "i079",
+"kind": "INTERIOR",
+"note": "love, adoration"
+},
+"i080": {
+"id": "i080",
+"kind": "EXTERIOR",
+"note": "moral-legal status"
+},
+"i081": {
+"id": "i081",
+"kind": "EXTERIOR",
+"note": "appearance judgment"
+},
+"i082": {
+"id": "i082",
+"kind": "EXTERIOR",
+"note": "physical confinement"
+},
+"i083": {
+"id": "i083",
+"kind": "EXTERIOR",
+"note": "relational conduct"
+},
+"i084": {
+"id": "i084",
+"kind": "INTERIOR",
+"note": "felt sensation"
+},
+"i085": {
+"id": "i085",
+"kind": "EXTERIOR",
+"note": "social allegiance"
+},
+"i086": {
+"id": "i086",
+"kind": "EXTERIOR",
+"note": "social insubordination"
+},
+"i087": {
+"id": "i087",
+"kind": "EXTERIOR",
+"note": "freedom, unconstraint"
+},
+"i088": {
+"id": "i088",
+"kind": "EXTERIOR",
+"note": "freedom, unconstraint"
+},
+"i089": {
+"id": "i089",
+"kind": "EXTERIOR",
+"note": "moral-legal status"
+},
+"i090": {
+"id": "i090",
+"kind": "INTERIOR",
+"note": "fear, dread"
+},
+"i091": {
+"id": "i091",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i092": {
+"id": "i092",
+"kind": "EXTERIOR",
+"note": "moral-legal status"
+},
+"i093": {
+"id": "i093",
+"kind": "INTERIOR",
+"note": "cognitive disposition"
+},
+"i094": {
+"id": "i094",
+"kind": "INTERIOR",
+"note": "named desire"
+},
+"i095": {
+"id": "i095",
+"kind": "EXTERIOR",
+"note": "freedom, captivity"
+},
+"i096": {
+"id": "i096",
+"kind": "EXTERIOR",
+"note": "appearance judgment"
+},
+"i097": {
+"id": "i097",
+"kind": "EXTERIOR",
+"note": "social insubordination"
+},
+"i098": {
+"id": "i098",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i099": {
+"id": "i099",
+"kind": "EXTERIOR",
+"note": "physical appearance"
+},
+"i100": {
+"id": "i100",
+"kind": "EXTERIOR",
+"note": "social allegiance"
+},
+"i101": {
+"id": "i101",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i102": {
+"id": "i102",
+"kind": "EXTERIOR",
+"note": "physical appearance"
+},
+"i103": {
+"id": "i103",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i104": {
+"id": "i104",
+"kind": "INTERIOR",
+"note": "trust"
+},
+"i105": {
+"id": "i105",
+"kind": "EXTERIOR",
+"note": "freedom, captivity"
+},
+"i106": {
+"id": "i106",
+"kind": "INTERIOR",
+"note": "irrational; mental functioning"
+},
+"i107": {
+"id": "i107",
+"kind": "EXTERIOR",
+"note": "beautiful, radiant; appearance"
+},
+"i108": {
+"id": "i108",
+"kind": "INTERIOR",
+"note": "desire and disgust"
+},
+"i109": {
+"id": "i109",
+"kind": "INTERIOR",
+"note": "the feeling, pleasure"
+},
+"i110": {
+"id": "i110",
+"kind": "INTERIOR",
+"note": "pleasure and delight"
+},
+"i111": {
+"id": "i111",
+"kind": "NEITHER",
+"note": "setting, holy place"
+},
+"i112": {
+"id": "i112",
+"kind": "EXTERIOR",
+"note": "loyal, dutiful; role conduct"
+},
+"i113": {
+"id": "i113",
+"kind": "EXTERIOR",
+"note": "rich, comfortable; wealth"
+},
+"i114": {
+"id": "i114",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i115": {
+"id": "i115",
+"kind": "INTERIOR",
+"note": "felt pleasure and pain"
+},
+"i116": {
+"id": "i116",
+"kind": "EXTERIOR",
+"note": "poor, struggling; wealth"
+},
+"i117": {
+"id": "i117",
+"kind": "INTERIOR",
+"note": "trusted and relied on"
+},
+"i118": {
+"id": "i118",
+"kind": "INTERIOR",
+"note": "trusted him completely"
+},
+"i119": {
+"id": "i119",
+"kind": "EXTERIOR",
+"note": "poor; wealth"
+},
+"i120": {
+"id": "i120",
+"kind": "INTERIOR",
+"note": "irrational; mental functioning"
+},
+"i121": {
+"id": "i121",
+"kind": "INTERIOR",
+"note": "wanted to create; intention"
+},
+"i122": {
+"id": "i122",
+"kind": "EXTERIOR",
+"note": "faithful to him; conduct"
+},
+"i123": {
+"id": "i123",
+"kind": "NEITHER",
+"note": "setting, filthy alley"
+},
+"i124": {
+"id": "i124",
+"kind": "INTERIOR",
+"note": "desire and longing"
+},
+"i125": {
+"id": "i125",
+"kind": "INTERIOR",
+"note": "trusted and feared"
+},
+"i126": {
+"id": "i126",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i127": {
+"id": "i127",
+"kind": "EXTERIOR",
+"note": "innocent; moral status"
+},
+"i128": {
+"id": "i128",
+"kind": "EXTERIOR",
+"note": "faithful, unfaithful; conduct"
+},
+"i129": {
+"id": "i129",
+"kind": "EXTERIOR",
+"note": "captive, bound; unfreedom"
+},
+"i130": {
+"id": "i130",
+"kind": "NEITHER",
+"note": "setting, holy place"
+},
+"i131": {
+"id": "i131",
+"kind": "INTERIOR",
+"note": "felt desire"
+},
+"i132": {
+"id": "i132",
+"kind": "INTERIOR",
+"note": "loved and hated"
+},
+"i133": {
+"id": "i133",
+"kind": "EXTERIOR",
+"note": "faithful to him; conduct"
+},
+"i134": {
+"id": "i134",
+"kind": "NEITHER",
+"note": "setting, holy filthy"
+},
+"i135": {
+"id": "i135",
+"kind": "INTERIOR",
+"note": "felt disgust"
+},
+"i136": {
+"id": "i136",
+"kind": "EXTERIOR",
+"note": "unfaithful to him; conduct"
+},
+"i137": {
+"id": "i137",
+"kind": "EXTERIOR",
+"note": "beautiful and ugly; appearance"
+},
+"i138": {
+"id": "i138",
+"kind": "EXTERIOR",
+"note": "imprisoned; unfreedom"
+},
+"i139": {
+"id": "i139",
+"kind": "INTERIOR",
+"note": "loved and hated"
+},
+"i140": {
+"id": "i140",
+"kind": "INTERIOR",
+"note": "trusted and feared"
+},
+"i141": {
+"id": "i141",
+"kind": "INTERIOR",
+"note": "hated and despised"
+},
+"i142": {
+"id": "i142",
+"kind": "INTERIOR",
+"note": "wanted to create; intention"
+},
+"i143": {
+"id": "i143",
+"kind": "EXTERIOR",
+"note": "free, unhindered; freedom"
+},
+"i144": {
+"id": "i144",
+"kind": "EXTERIOR",
+"note": "beautiful; appearance"
+},
+"i145": {
+"id": "i145",
+"kind": "INTERIOR",
+"note": "deeply loved him"
+},
+"i146": {
+"id": "i146",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i147": {
+"id": "i147",
+"kind": "INTERIOR",
+"note": "loved her deeply"
+},
+"i148": {
+"id": "i148",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i149": {
+"id": "i149",
+"kind": "INTERIOR",
+"note": "felt disgust"
+},
+"i150": {
+"id": "i150",
+"kind": "EXTERIOR",
+"note": "his beauty; appearance"
+},
+"i151": {
+"id": "i151",
+"kind": "INTERIOR",
+"note": "deeply loved her"
+},
+"i152": {
+"id": "i152",
+"kind": "INTERIOR",
+"note": "wanted to create; intention"
+},
+"i153": {
+"id": "i153",
+"kind": "EXTERIOR",
+"note": "rebellious; social stance"
+},
+"i154": {
+"id": "i154",
+"kind": "EXTERIOR",
+"note": "beautiful, radiant; appearance"
+},
+"i155": {
+"id": "i155",
+"kind": "INTERIOR",
+"note": "irrational, illogical; mental"
+},
+"i156": {
+"id": "i156",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i157": {
+"id": "i157",
+"kind": "EXTERIOR",
+"note": "he is repulsive; quality"
+},
+"i158": {
+"id": "i158",
+"kind": "EXTERIOR",
+"note": "rebellious, defiant; stance"
+},
+"i159": {
+"id": "i159",
+"kind": "EXTERIOR",
+"note": "loyalty, rebellion: social stance"
+},
+"i160": {
+"id": "i160",
+"kind": "EXTERIOR",
+"note": "captivity, situational"
+},
+"i161": {
+"id": "i161",
+"kind": "NEITHER",
+"note": "setting described, not person"
+},
+"i162": {
+"id": "i162",
+"kind": "INTERIOR",
+"note": "rationality, mode of mind"
+},
+"i163": {
+"id": "i163",
+"kind": "INTERIOR",
+"note": "fear, affective state"
+},
+"i164": {
+"id": "i164",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i165": {
+"id": "i165",
+"kind": "INTERIOR",
+"note": "trust and fear"
+},
+"i166": {
+"id": "i166",
+"kind": "EXTERIOR",
+"note": "gender, social fact"
+},
+"i167": {
+"id": "i167",
+"kind": "NEITHER",
+"note": "alley setting only"
+},
+"i168": {
+"id": "i168",
+"kind": "EXTERIOR",
+"note": "innocence, moral status"
+},
+"i169": {
+"id": "i169",
+"kind": "INTERIOR",
+"note": "hatred, affective state"
+},
+"i170": {
+"id": "i170",
+"kind": "INTERIOR",
+"note": "a felt agony"
+},
+"i171": {
+"id": "i171",
+"kind": "EXTERIOR",
+"note": "freedom, situational"
+},
+"i172": {
+"id": "i172",
+"kind": "INTERIOR",
+"note": "rationality, mode of mind"
+},
+"i173": {
+"id": "i173",
+"kind": "INTERIOR",
+"note": "desire named as content"
+},
+"i174": {
+"id": "i174",
+"kind": "NEITHER",
+"note": "bare posture, clearing"
+},
+"i175": {
+"id": "i175",
+"kind": "EXTERIOR",
+"note": "beauty, appearance"
+},
+"i176": {
+"id": "i176",
+"kind": "INTERIOR",
+"note": "hatred, affective state"
+},
+"i177": {
+"id": "i177",
+"kind": "INTERIOR",
+"note": "rationality, mode of mind"
+},
+"i178": {
+"id": "i178",
+"kind": "EXTERIOR",
+"note": "foulness, physical quality"
+},
+"i179": {
+"id": "i179",
+"kind": "EXTERIOR",
+"note": "gender, bodily social"
+},
+"i180": {
+"id": "i180",
+"kind": "EXTERIOR",
+"note": "guilt as status"
+},
+"i181": {
+"id": "i181",
+"kind": "EXTERIOR",
+"note": "wealth and poverty"
+},
+"i182": {
+"id": "i182",
+"kind": "EXTERIOR",
+"note": "loyalty, duty: social stance"
+},
+"i183": {
+"id": "i183",
+"kind": "EXTERIOR",
+"note": "parental role, social"
+},
+"i184": {
+"id": "i184",
+"kind": "INTERIOR",
+"note": "hate and loathing"
+},
+"i185": {
+"id": "i185",
+"kind": "NEITHER",
+"note": "setting described, not person"
+},
+"i186": {
+"id": "i186",
+"kind": "EXTERIOR",
+"note": "poverty, destitution"
+},
+"i187": {
+"id": "i187",
+"kind": "NEITHER",
+"note": "place, not person"
+},
+"i188": {
+"id": "i188",
+"kind": "INTERIOR",
+"note": "trust and fear"
+},
+"i189": {
+"id": "i189",
+"kind": "NEITHER",
+"note": "bare posture, clearing"
+},
+"i190": {
+"id": "i190",
+"kind": "EXTERIOR",
+"note": "unfaithfulness, relational conduct"
+},
+"i191": {
+"id": "i191",
+"kind": "INTERIOR",
+"note": "rationality, mode of mind"
+},
+"i192": {
+"id": "i192",
+"kind": "EXTERIOR",
+"note": "paternal role, social"
+},
+"i193": {
+"id": "i193",
+"kind": "EXTERIOR",
+"note": "wealth, affluence"
+},
+"i194": {
+"id": "i194",
+"kind": "EXTERIOR",
+"note": "captivity, situational"
+},
+"i195": {
+"id": "i195",
+"kind": "EXTERIOR",
+"note": "gender, social fact"
+},
+"i196": {
+"id": "i196",
+"kind": "EXTERIOR",
+"note": "ugliness, appearance"
+},
+"i197": {
+"id": "i197",
+"kind": "INTERIOR",
+"note": "fear and dread"
+},
+"i198": {
+"id": "i198",
+"kind": "NEITHER",
+"note": "bare posture, clearing"
+},
+"i199": {
+"id": "i199",
+"kind": "INTERIOR",
+"note": "love, affective state"
+},
+"i200": {
+"id": "i200",
+"kind": "INTERIOR",
+"note": "irrationality, mode of mind"
+},
+"i201": {
+"id": "i201",
+"kind": "EXTERIOR",
+"note": "gender, social fact"
+},
+"i202": {
+"id": "i202",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i203": {
+"id": "i203",
+"kind": "INTERIOR",
+"note": "felt desire"
+},
+"i204": {
+"id": "i204",
+"kind": "INTERIOR",
+"note": "felt desire, longing"
+},
+"i205": {
+"id": "i205",
+"kind": "INTERIOR",
+"note": "desire named as content"
+},
+"i206": {
+"id": "i206",
+"kind": "EXTERIOR",
+"note": "guilt as status"
+},
+"i207": {
+"id": "i207",
+"kind": "NEITHER",
+"note": "temple setting only"
+},
+"i208": {
+"id": "i208",
+"kind": "INTERIOR",
+"note": "love, affective state"
+},
+"i209": {
+"id": "i209",
+"kind": "EXTERIOR",
+"note": "gender, social fact"
+},
+"i210": {
+"id": "i210",
+"kind": "EXTERIOR",
+"note": "freedom, unconstrained circumstance"
+},
+"i211": {
+"id": "i211",
+"kind": "EXTERIOR",
+"note": "freedom and captivity"
+}
+},
+"B": {
+"i000": {
+"id": "i000",
+"kind": "EXTERIOR",
+"note": "freedom, situational"
+},
+"i001": {
+"id": "i001",
+"kind": "EXTERIOR",
+"note": "kinship social role"
+},
+"i002": {
+"id": "i002",
+"kind": "INTERIOR",
+"note": "felt desire, disgust"
+},
+"i003": {
+"id": "i003",
+"kind": "EXTERIOR",
+"note": "captivity, situational"
+},
+"i004": {
+"id": "i004",
+"kind": "NEITHER",
+"note": "want-frame, bare actions"
+},
+"i005": {
+"id": "i005",
+"kind": "INTERIOR",
+"note": "felt pain, torment"
+},
+"i006": {
+"id": "i006",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i007": {
+"id": "i007",
+"kind": "INTERIOR",
+"note": "felt disgust, revulsion"
+},
+"i008": {
+"id": "i008",
+"kind": "EXTERIOR",
+"note": "free and captive"
+},
+"i009": {
+"id": "i009",
+"kind": "EXTERIOR",
+"note": "poverty, wealth"
+},
+"i010": {
+"id": "i010",
+"kind": "INTERIOR",
+"note": "felt pleasure, delight"
+},
+"i011": {
+"id": "i011",
+"kind": "EXTERIOR",
+"note": "maternal social role"
+},
+"i012": {
+"id": "i012",
+"kind": "NEITHER",
+"note": "want-frame, bare actions"
+},
+"i013": {
+"id": "i013",
+"kind": "EXTERIOR",
+"note": "rich and poor"
+},
+"i014": {
+"id": "i014",
+"kind": "EXTERIOR",
+"note": "wealth"
+},
+"i015": {
+"id": "i015",
+"kind": "EXTERIOR",
+"note": "appearance, ugly"
+},
+"i016": {
+"id": "i016",
+"kind": "EXTERIOR",
+"note": "appearance, beautiful"
+},
+"i017": {
+"id": "i017",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i018": {
+"id": "i018",
+"kind": "INTERIOR",
+"note": "hatred, affect"
+},
+"i019": {
+"id": "i019",
+"kind": "NEITHER",
+"note": "want-frame, bare actions"
+},
+"i020": {
+"id": "i020",
+"kind": "NEITHER",
+"note": "setting, not person"
+},
+"i021": {
+"id": "i021",
+"kind": "INTERIOR",
+"note": "felt pain, agony"
+},
+"i022": {
+"id": "i022",
+"kind": "EXTERIOR",
+"note": "freedom, situational"
+},
+"i023": {
+"id": "i023",
+"kind": "EXTERIOR",
+"note": "appearance, ugly"
+},
+"i024": {
+"id": "i024",
+"kind": "EXTERIOR",
+"note": "culpability, moral status"
+},
+"i025": {
+"id": "i025",
+"kind": "NEITHER",
+"note": "want-frame, bare actions"
+},
+"i026": {
+"id": "i026",
+"kind": "EXTERIOR",
+"note": "relational conduct, unfaithful"
+},
+"i027": {
+"id": "i027",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i028": {
+"id": "i028",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i029": {
+"id": "i029",
+"kind": "NEITHER",
+"note": "want-frame, bare actions"
+},
+"i030": {
+"id": "i030",
+"kind": "NEITHER",
+"note": "setting, not person"
+},
+"i031": {
+"id": "i031",
+"kind": "INTERIOR",
+"note": "felt pain"
+},
+"i032": {
+"id": "i032",
+"kind": "EXTERIOR",
+"note": "appearance, beautiful disgusting"
+},
+"i033": {
+"id": "i033",
+"kind": "INTERIOR",
+"note": "felt pleasure, pain"
+},
+"i034": {
+"id": "i034",
+"kind": "INTERIOR",
+"note": "hatred, loathing"
+},
+"i035": {
+"id": "i035",
+"kind": "EXTERIOR",
+"note": "relational conduct, faithful"
+},
+"i036": {
+"id": "i036",
+"kind": "NEITHER",
+"note": "setting, not person"
+},
+"i037": {
+"id": "i037",
+"kind": "INTERIOR",
+"note": "hatred, affect"
+},
+"i038": {
+"id": "i038",
+"kind": "NEITHER",
+"note": "setting, not person"
+},
+"i039": {
+"id": "i039",
+"kind": "EXTERIOR",
+"note": "guilt as status"
+},
+"i040": {
+"id": "i040",
+"kind": "NEITHER",
+"note": "want-frame, bare action"
+},
+"i041": {
+"id": "i041",
+"kind": "EXTERIOR",
+"note": "captivity, situational"
+},
+"i042": {
+"id": "i042",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i043": {
+"id": "i043",
+"kind": "EXTERIOR",
+"note": "freedom, situational"
+},
+"i044": {
+"id": "i044",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i045": {
+"id": "i045",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i046": {
+"id": "i046",
+"kind": "NEITHER",
+"note": "setting, not person"
+},
+"i047": {
+"id": "i047",
+"kind": "INTERIOR",
+"note": "love, attachment"
+},
+"i048": {
+"id": "i048",
+"kind": "INTERIOR",
+"note": "felt pleasure"
+},
+"i049": {
+"id": "i049",
+"kind": "INTERIOR",
+"note": "trust, attitude"
+},
+"i050": {
+"id": "i050",
+"kind": "EXTERIOR",
+"note": "relational conduct, faithful"
+},
+"i051": {
+"id": "i051",
+"kind": "NEITHER",
+"note": "setting, not person"
+},
+"i052": {
+"id": "i052",
+"kind": "EXTERIOR",
+"note": "appearance, physical"
+},
+"i053": {
+"id": "i053",
+"kind": "EXTERIOR",
+"note": "gender/bodily category"
+},
+"i054": {
+"id": "i054",
+"kind": "EXTERIOR",
+"note": "kinship social role"
+},
+"i055": {
+"id": "i055",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i056": {
+"id": "i056",
+"kind": "INTERIOR",
+"note": "hatred, contempt"
+},
+"i057": {
+"id": "i057",
+"kind": "EXTERIOR",
+"note": "relational conduct, infidelity"
+},
+"i058": {
+"id": "i058",
+"kind": "INTERIOR",
+"note": "love, deep affect"
+},
+"i059": {
+"id": "i059",
+"kind": "EXTERIOR",
+"note": "physical appearance"
+},
+"i060": {
+"id": "i060",
+"kind": "EXTERIOR",
+"note": "physical captivity"
+},
+"i061": {
+"id": "i061",
+"kind": "INTERIOR",
+"note": "love, adoration"
+},
+"i062": {
+"id": "i062",
+"kind": "INTERIOR",
+"note": "love and hatred"
+},
+"i063": {
+"id": "i063",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i064": {
+"id": "i064",
+"kind": "INTERIOR",
+"note": "felt sensation, pleasure/pain"
+},
+"i065": {
+"id": "i065",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i066": {
+"id": "i066",
+"kind": "EXTERIOR",
+"note": "moral-legal status"
+},
+"i067": {
+"id": "i067",
+"kind": "EXTERIOR",
+"note": "physical appearance"
+},
+"i068": {
+"id": "i068",
+"kind": "INTERIOR",
+"note": "disgust, revulsion"
+},
+"i069": {
+"id": "i069",
+"kind": "EXTERIOR",
+"note": "physical captivity"
+},
+"i070": {
+"id": "i070",
+"kind": "INTERIOR",
+"note": "love and hatred"
+},
+"i071": {
+"id": "i071",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i072": {
+"id": "i072",
+"kind": "EXTERIOR",
+"note": "species category, bare action"
+},
+"i073": {
+"id": "i073",
+"kind": "EXTERIOR",
+"note": "kinship social role"
+},
+"i074": {
+"id": "i074",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i075": {
+"id": "i075",
+"kind": "EXTERIOR",
+"note": "wealth"
+},
+"i076": {
+"id": "i076",
+"kind": "INTERIOR",
+"note": "cognitive disposition, rationality"
+},
+"i077": {
+"id": "i077",
+"kind": "INTERIOR",
+"note": "fear"
+},
+"i078": {
+"id": "i078",
+"kind": "EXTERIOR",
+"note": "allegiance, social standing"
+},
+"i079": {
+"id": "i079",
+"kind": "INTERIOR",
+"note": "love, adoration"
+},
+"i080": {
+"id": "i080",
+"kind": "EXTERIOR",
+"note": "moral-legal status"
+},
+"i081": {
+"id": "i081",
+"kind": "EXTERIOR",
+"note": "appearance, evaluative attribute"
+},
+"i082": {
+"id": "i082",
+"kind": "EXTERIOR",
+"note": "physical captivity"
+},
+"i083": {
+"id": "i083",
+"kind": "EXTERIOR",
+"note": "relational conduct, fidelity"
+},
+"i084": {
+"id": "i084",
+"kind": "INTERIOR",
+"note": "felt sensation, pleasure/pain"
+},
+"i085": {
+"id": "i085",
+"kind": "EXTERIOR",
+"note": "allegiance, conduct"
+},
+"i086": {
+"id": "i086",
+"kind": "EXTERIOR",
+"note": "rebellious conduct"
+},
+"i087": {
+"id": "i087",
+"kind": "EXTERIOR",
+"note": "situational freedom"
+},
+"i088": {
+"id": "i088",
+"kind": "EXTERIOR",
+"note": "situational freedom"
+},
+"i089": {
+"id": "i089",
+"kind": "EXTERIOR",
+"note": "moral-legal status"
+},
+"i090": {
+"id": "i090",
+"kind": "INTERIOR",
+"note": "fear, dread"
+},
+"i091": {
+"id": "i091",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i092": {
+"id": "i092",
+"kind": "EXTERIOR",
+"note": "moral-legal status"
+},
+"i093": {
+"id": "i093",
+"kind": "INTERIOR",
+"note": "cognitive disposition, rationality"
+},
+"i094": {
+"id": "i094",
+"kind": "INTERIOR",
+"note": "desire, destructive intent"
+},
+"i095": {
+"id": "i095",
+"kind": "EXTERIOR",
+"note": "situational freedom/captivity"
+},
+"i096": {
+"id": "i096",
+"kind": "EXTERIOR",
+"note": "appearance, evaluative attribute"
+},
+"i097": {
+"id": "i097",
+"kind": "EXTERIOR",
+"note": "rebellious conduct"
+},
+"i098": {
+"id": "i098",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i099": {
+"id": "i099",
+"kind": "EXTERIOR",
+"note": "physical appearance"
+},
+"i100": {
+"id": "i100",
+"kind": "EXTERIOR",
+"note": "allegiance, social standing"
+},
+"i101": {
+"id": "i101",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i102": {
+"id": "i102",
+"kind": "EXTERIOR",
+"note": "physical appearance"
+},
+"i103": {
+"id": "i103",
+"kind": "EXTERIOR",
+"note": "gender category"
+},
+"i104": {
+"id": "i104",
+"kind": "INTERIOR",
+"note": "trust, attitude of belief"
+},
+"i105": {
+"id": "i105",
+"kind": "EXTERIOR",
+"note": "situational freedom/captivity"
+},
+"i106": {
+"id": "i106",
+"kind": "INTERIOR",
+"note": "irrational thinking"
+},
+"i107": {
+"id": "i107",
+"kind": "EXTERIOR",
+"note": "beauty, radiance"
+},
+"i108": {
+"id": "i108",
+"kind": "INTERIOR",
+"note": "felt desire, disgust"
+},
+"i109": {
+"id": "i109",
+"kind": "INTERIOR",
+"note": "sensation of pleasure"
+},
+"i110": {
+"id": "i110",
+"kind": "INTERIOR",
+"note": "pleasure and delight"
+},
+"i111": {
+"id": "i111",
+"kind": "NEITHER",
+"note": "holy place setting"
+},
+"i112": {
+"id": "i112",
+"kind": "EXTERIOR",
+"note": "loyal, dutiful conduct"
+},
+"i113": {
+"id": "i113",
+"kind": "EXTERIOR",
+"note": "rich, comfortable"
+},
+"i114": {
+"id": "i114",
+"kind": "EXTERIOR",
+"note": "sex category"
+},
+"i115": {
+"id": "i115",
+"kind": "INTERIOR",
+"note": "pleasure and pain"
+},
+"i116": {
+"id": "i116",
+"kind": "EXTERIOR",
+"note": "poor, struggling"
+},
+"i117": {
+"id": "i117",
+"kind": "INTERIOR",
+"note": "trusted, relied on"
+},
+"i118": {
+"id": "i118",
+"kind": "INTERIOR",
+"note": "trusted him"
+},
+"i119": {
+"id": "i119",
+"kind": "EXTERIOR",
+"note": "poverty"
+},
+"i120": {
+"id": "i120",
+"kind": "INTERIOR",
+"note": "irrational thinking"
+},
+"i121": {
+"id": "i121",
+"kind": "NEITHER",
+"note": "aim to create"
+},
+"i122": {
+"id": "i122",
+"kind": "EXTERIOR",
+"note": "faithful to him"
+},
+"i123": {
+"id": "i123",
+"kind": "NEITHER",
+"note": "filthy alley setting"
+},
+"i124": {
+"id": "i124",
+"kind": "INTERIOR",
+"note": "desire and longing"
+},
+"i125": {
+"id": "i125",
+"kind": "INTERIOR",
+"note": "trust and fear"
+},
+"i126": {
+"id": "i126",
+"kind": "EXTERIOR",
+"note": "sex category"
+},
+"i127": {
+"id": "i127",
+"kind": "EXTERIOR",
+"note": "innocence as status"
+},
+"i128": {
+"id": "i128",
+"kind": "EXTERIOR",
+"note": "fidelity, infidelity"
+},
+"i129": {
+"id": "i129",
+"kind": "EXTERIOR",
+"note": "captive, bound"
+},
+"i130": {
+"id": "i130",
+"kind": "NEITHER",
+"note": "holy place setting"
+},
+"i131": {
+"id": "i131",
+"kind": "INTERIOR",
+"note": "felt desire"
+},
+"i132": {
+"id": "i132",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i133": {
+"id": "i133",
+"kind": "EXTERIOR",
+"note": "faithful to him"
+},
+"i134": {
+"id": "i134",
+"kind": "NEITHER",
+"note": "holy filthy place"
+},
+"i135": {
+"id": "i135",
+"kind": "INTERIOR",
+"note": "felt disgust"
+},
+"i136": {
+"id": "i136",
+"kind": "EXTERIOR",
+"note": "unfaithful to him"
+},
+"i137": {
+"id": "i137",
+"kind": "EXTERIOR",
+"note": "beautiful and ugly"
+},
+"i138": {
+"id": "i138",
+"kind": "EXTERIOR",
+"note": "imprisoned"
+},
+"i139": {
+"id": "i139",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i140": {
+"id": "i140",
+"kind": "INTERIOR",
+"note": "trust and fear"
+},
+"i141": {
+"id": "i141",
+"kind": "INTERIOR",
+"note": "hatred, contempt"
+},
+"i142": {
+"id": "i142",
+"kind": "NEITHER",
+"note": "aim to create"
+},
+"i143": {
+"id": "i143",
+"kind": "EXTERIOR",
+"note": "free, unhindered"
+},
+"i144": {
+"id": "i144",
+"kind": "EXTERIOR",
+"note": "beauty"
+},
+"i145": {
+"id": "i145",
+"kind": "INTERIOR",
+"note": "loved him deeply"
+},
+"i146": {
+"id": "i146",
+"kind": "EXTERIOR",
+"note": "sex category"
+},
+"i147": {
+"id": "i147",
+"kind": "INTERIOR",
+"note": "loved her deeply"
+},
+"i148": {
+"id": "i148",
+"kind": "EXTERIOR",
+"note": "sex category"
+},
+"i149": {
+"id": "i149",
+"kind": "INTERIOR",
+"note": "felt disgust"
+},
+"i150": {
+"id": "i150",
+"kind": "EXTERIOR",
+"note": "beauty"
+},
+"i151": {
+"id": "i151",
+"kind": "INTERIOR",
+"note": "loved her deeply"
+},
+"i152": {
+"id": "i152",
+"kind": "NEITHER",
+"note": "aim to create"
+},
+"i153": {
+"id": "i153",
+"kind": "EXTERIOR",
+"note": "rebellious conduct"
+},
+"i154": {
+"id": "i154",
+"kind": "EXTERIOR",
+"note": "beautiful, radiant"
+},
+"i155": {
+"id": "i155",
+"kind": "INTERIOR",
+"note": "irrational, illogical thinking"
+},
+"i156": {
+"id": "i156",
+"kind": "EXTERIOR",
+"note": "sex category"
+},
+"i157": {
+"id": "i157",
+"kind": "EXTERIOR",
+"note": "disgusting appearance"
+},
+"i158": {
+"id": "i158",
+"kind": "EXTERIOR",
+"note": "rebellious, defiant conduct"
+},
+"i159": {
+"id": "i159",
+"kind": "EXTERIOR",
+"note": "loyal, rebellious; social allegiance"
+},
+"i160": {
+"id": "i160",
+"kind": "EXTERIOR",
+"note": "captive; situational unfreedom"
+},
+"i161": {
+"id": "i161",
+"kind": "EXTERIOR",
+"note": "filthy ruined place"
+},
+"i162": {
+"id": "i162",
+"kind": "INTERIOR",
+"note": "rational and irrational; mode of mind"
+},
+"i163": {
+"id": "i163",
+"kind": "INTERIOR",
+"note": "feared him; affect"
+},
+"i164": {
+"id": "i164",
+"kind": "INTERIOR",
+"note": "loved and hated"
+},
+"i165": {
+"id": "i165",
+"kind": "INTERIOR",
+"note": "trusted and feared"
+},
+"i166": {
+"id": "i166",
+"kind": "EXTERIOR",
+"note": "is a man; social category"
+},
+"i167": {
+"id": "i167",
+"kind": "EXTERIOR",
+"note": "filthy alley; squalid setting"
+},
+"i168": {
+"id": "i168",
+"kind": "EXTERIOR",
+"note": "innocent, blameless; moral status"
+},
+"i169": {
+"id": "i169",
+"kind": "INTERIOR",
+"note": "hated him deeply"
+},
+"i170": {
+"id": "i170",
+"kind": "INTERIOR",
+"note": "feeling of pure pain"
+},
+"i171": {
+"id": "i171",
+"kind": "EXTERIOR",
+"note": "free; situational freedom"
+},
+"i172": {
+"id": "i172",
+"kind": "INTERIOR",
+"note": "rational and irrational; mind"
+},
+"i173": {
+"id": "i173",
+"kind": "INTERIOR",
+"note": "wanted to create and destroy; desire"
+},
+"i174": {
+"id": "i174",
+"kind": "NEITHER",
+"note": "bare setting, no property"
+},
+"i175": {
+"id": "i175",
+"kind": "EXTERIOR",
+"note": "beautiful; appearance"
+},
+"i176": {
+"id": "i176",
+"kind": "INTERIOR",
+"note": "hated her deeply"
+},
+"i177": {
+"id": "i177",
+"kind": "INTERIOR",
+"note": "completely rational; mind"
+},
+"i178": {
+"id": "i178",
+"kind": "EXTERIOR",
+"note": "disgusting, foul; physical quality"
+},
+"i179": {
+"id": "i179",
+"kind": "EXTERIOR",
+"note": "man and woman; social category"
+},
+"i180": {
+"id": "i180",
+"kind": "EXTERIOR",
+"note": "guilty; culpable status"
+},
+"i181": {
+"id": "i181",
+"kind": "EXTERIOR",
+"note": "rich and poor; wealth"
+},
+"i182": {
+"id": "i182",
+"kind": "EXTERIOR",
+"note": "loyal, dutiful; social role"
+},
+"i183": {
+"id": "i183",
+"kind": "EXTERIOR",
+"note": "mother and father; kin role"
+},
+"i184": {
+"id": "i184",
+"kind": "INTERIOR",
+"note": "hated and loathed"
+},
+"i185": {
+"id": "i185",
+"kind": "EXTERIOR",
+"note": "filthy ruined place"
+},
+"i186": {
+"id": "i186",
+"kind": "EXTERIOR",
+"note": "poor, destitute; wealth"
+},
+"i187": {
+"id": "i187",
+"kind": "EXTERIOR",
+"note": "holy and filthy place"
+},
+"i188": {
+"id": "i188",
+"kind": "INTERIOR",
+"note": "trusted and feared"
+},
+"i189": {
+"id": "i189",
+"kind": "NEITHER",
+"note": "bare setting, no property"
+},
+"i190": {
+"id": "i190",
+"kind": "EXTERIOR",
+"note": "unfaithful; relational conduct"
+},
+"i191": {
+"id": "i191",
+"kind": "INTERIOR",
+"note": "completely rational; mind"
+},
+"i192": {
+"id": "i192",
+"kind": "EXTERIOR",
+"note": "is a father; kin role"
+},
+"i193": {
+"id": "i193",
+"kind": "EXTERIOR",
+"note": "rich, affluent; wealth"
+},
+"i194": {
+"id": "i194",
+"kind": "EXTERIOR",
+"note": "captive; situational unfreedom"
+},
+"i195": {
+"id": "i195",
+"kind": "EXTERIOR",
+"note": "is a man; social category"
+},
+"i196": {
+"id": "i196",
+"kind": "EXTERIOR",
+"note": "ugly, misshapen; appearance"
+},
+"i197": {
+"id": "i197",
+"kind": "INTERIOR",
+"note": "feared and dreaded"
+},
+"i198": {
+"id": "i198",
+"kind": "NEITHER",
+"note": "bare setting, no property"
+},
+"i199": {
+"id": "i199",
+"kind": "INTERIOR",
+"note": "loved and was enamored"
+},
+"i200": {
+"id": "i200",
+"kind": "INTERIOR",
+"note": "irrational, illogical; mind"
+},
+"i201": {
+"id": "i201",
+"kind": "EXTERIOR",
+"note": "was a man; social category"
+},
+"i202": {
+"id": "i202",
+"kind": "INTERIOR",
+"note": "loved and hated deeply"
+},
+"i203": {
+"id": "i203",
+"kind": "INTERIOR",
+"note": "felt desire"
+},
+"i204": {
+"id": "i204",
+"kind": "INTERIOR",
+"note": "felt desire and longing"
+},
+"i205": {
+"id": "i205",
+"kind": "INTERIOR",
+"note": "wanted to destroy; desire"
+},
+"i206": {
+"id": "i206",
+"kind": "EXTERIOR",
+"note": "guilty; culpable status"
+},
+"i207": {
+"id": "i207",
+"kind": "EXTERIOR",
+"note": "holy temple; sacred setting"
+},
+"i208": {
+"id": "i208",
+"kind": "INTERIOR",
+"note": "loved her deeply"
+},
+"i209": {
+"id": "i209",
+"kind": "EXTERIOR",
+"note": "was a woman; social category"
+},
+"i210": {
+"id": "i210",
+"kind": "EXTERIOR",
+"note": "free, unconstrained"
+},
+"i211": {
+"id": "i211",
+"kind": "EXTERIOR",
+"note": "free and captive; situation"
+}
+},
+"C": {
+"i000": {
+"id": "i000",
+"kind": "EXTERIOR",
+"note": "freedom, situational status"
+},
+"i001": {
+"id": "i001",
+"kind": "EXTERIOR",
+"note": "kinship social role"
+},
+"i002": {
+"id": "i002",
+"kind": "INTERIOR",
+"note": "felt desire, disgust"
+},
+"i003": {
+"id": "i003",
+"kind": "EXTERIOR",
+"note": "captivity, situational status"
+},
+"i004": {
+"id": "i004",
+"kind": "INTERIOR",
+"note": "stated conflicting want"
+},
+"i005": {
+"id": "i005",
+"kind": "INTERIOR",
+"note": "felt pain, torment"
+},
+"i006": {
+"id": "i006",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i007": {
+"id": "i007",
+"kind": "INTERIOR",
+"note": "felt disgust, revulsion"
+},
+"i008": {
+"id": "i008",
+"kind": "EXTERIOR",
+"note": "free yet imprisoned"
+},
+"i009": {
+"id": "i009",
+"kind": "EXTERIOR",
+"note": "poverty, material circumstance"
+},
+"i010": {
+"id": "i010",
+"kind": "INTERIOR",
+"note": "felt pleasure, delight"
+},
+"i011": {
+"id": "i011",
+"kind": "EXTERIOR",
+"note": "maternal social role"
+},
+"i012": {
+"id": "i012",
+"kind": "INTERIOR",
+"note": "stated destructive want"
+},
+"i013": {
+"id": "i013",
+"kind": "EXTERIOR",
+"note": "rich and poor"
+},
+"i014": {
+"id": "i014",
+"kind": "EXTERIOR",
+"note": "wealth, material circumstance"
+},
+"i015": {
+"id": "i015",
+"kind": "EXTERIOR",
+"note": "ugliness, appearance"
+},
+"i016": {
+"id": "i016",
+"kind": "EXTERIOR",
+"note": "beauty, appearance"
+},
+"i017": {
+"id": "i017",
+"kind": "EXTERIOR",
+"note": "gender identity, both"
+},
+"i018": {
+"id": "i018",
+"kind": "INTERIOR",
+"note": "deep hatred"
+},
+"i019": {
+"id": "i019",
+"kind": "INTERIOR",
+"note": "stated contradictory want"
+},
+"i020": {
+"id": "i020",
+"kind": "NEITHER",
+"note": "setting, no person-property"
+},
+"i021": {
+"id": "i021",
+"kind": "INTERIOR",
+"note": "felt pain, agony"
+},
+"i022": {
+"id": "i022",
+"kind": "EXTERIOR",
+"note": "freedom, situational status"
+},
+"i023": {
+"id": "i023",
+"kind": "EXTERIOR",
+"note": "ugliness, appearance"
+},
+"i024": {
+"id": "i024",
+"kind": "EXTERIOR",
+"note": "guilt as culpability"
+},
+"i025": {
+"id": "i025",
+"kind": "INTERIOR",
+"note": "stated contradictory want"
+},
+"i026": {
+"id": "i026",
+"kind": "EXTERIOR",
+"note": "infidelity, relational conduct"
+},
+"i027": {
+"id": "i027",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i028": {
+"id": "i028",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i029": {
+"id": "i029",
+"kind": "INTERIOR",
+"note": "stated contradictory want"
+},
+"i030": {
+"id": "i030",
+"kind": "NEITHER",
+"note": "setting, holy filthy"
+},
+"i031": {
+"id": "i031",
+"kind": "INTERIOR",
+"note": "felt pure pain"
+},
+"i032": {
+"id": "i032",
+"kind": "EXTERIOR",
+"note": "appearance, beautiful disgusting"
+},
+"i033": {
+"id": "i033",
+"kind": "INTERIOR",
+"note": "felt pleasure pain"
+},
+"i034": {
+"id": "i034",
+"kind": "INTERIOR",
+"note": "hatred, loathing"
+},
+"i035": {
+"id": "i035",
+"kind": "EXTERIOR",
+"note": "relational fidelity, conduct"
+},
+"i036": {
+"id": "i036",
+"kind": "NEITHER",
+"note": "setting, no person-property"
+},
+"i037": {
+"id": "i037",
+"kind": "INTERIOR",
+"note": "deep hatred"
+},
+"i038": {
+"id": "i038",
+"kind": "NEITHER",
+"note": "setting, holy place"
+},
+"i039": {
+"id": "i039",
+"kind": "EXTERIOR",
+"note": "innocence and guilt"
+},
+"i040": {
+"id": "i040",
+"kind": "INTERIOR",
+"note": "stated destructive want"
+},
+"i041": {
+"id": "i041",
+"kind": "EXTERIOR",
+"note": "imprisonment, situational status"
+},
+"i042": {
+"id": "i042",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i043": {
+"id": "i043",
+"kind": "EXTERIOR",
+"note": "freedom, situational status"
+},
+"i044": {
+"id": "i044",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i045": {
+"id": "i045",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i046": {
+"id": "i046",
+"kind": "NEITHER",
+"note": "setting, holy solemn"
+},
+"i047": {
+"id": "i047",
+"kind": "INTERIOR",
+"note": "love, infatuation"
+},
+"i048": {
+"id": "i048",
+"kind": "INTERIOR",
+"note": "felt pure pleasure"
+},
+"i049": {
+"id": "i049",
+"kind": "INTERIOR",
+"note": "trust, an attitude"
+},
+"i050": {
+"id": "i050",
+"kind": "EXTERIOR",
+"note": "relational fidelity, conduct"
+},
+"i051": {
+"id": "i051",
+"kind": "NEITHER",
+"note": "setting, holy filthy"
+},
+"i052": {
+"id": "i052",
+"kind": "EXTERIOR",
+"note": "appearance, disgusting filthy"
+},
+"i053": {
+"id": "i053",
+"kind": "EXTERIOR",
+"note": "sex/gender category"
+},
+"i054": {
+"id": "i054",
+"kind": "EXTERIOR",
+"note": "kinship role"
+},
+"i055": {
+"id": "i055",
+"kind": "EXTERIOR",
+"note": "sex/gender category"
+},
+"i056": {
+"id": "i056",
+"kind": "INTERIOR",
+"note": "hatred, contempt"
+},
+"i057": {
+"id": "i057",
+"kind": "EXTERIOR",
+"note": "relational conduct"
+},
+"i058": {
+"id": "i058",
+"kind": "INTERIOR",
+"note": "love, affect"
+},
+"i059": {
+"id": "i059",
+"kind": "EXTERIOR",
+"note": "appearance"
+},
+"i060": {
+"id": "i060",
+"kind": "EXTERIOR",
+"note": "physical confinement"
+},
+"i061": {
+"id": "i061",
+"kind": "INTERIOR",
+"note": "love, adoration"
+},
+"i062": {
+"id": "i062",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i063": {
+"id": "i063",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i064": {
+"id": "i064",
+"kind": "INTERIOR",
+"note": "felt sensation"
+},
+"i065": {
+"id": "i065",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i066": {
+"id": "i066",
+"kind": "EXTERIOR",
+"note": "innocence status"
+},
+"i067": {
+"id": "i067",
+"kind": "EXTERIOR",
+"note": "appearance"
+},
+"i068": {
+"id": "i068",
+"kind": "INTERIOR",
+"note": "disgust, revulsion"
+},
+"i069": {
+"id": "i069",
+"kind": "EXTERIOR",
+"note": "physical confinement"
+},
+"i070": {
+"id": "i070",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i071": {
+"id": "i071",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i072": {
+"id": "i072",
+"kind": "NEITHER",
+"note": "posture, setting"
+},
+"i073": {
+"id": "i073",
+"kind": "EXTERIOR",
+"note": "kinship role"
+},
+"i074": {
+"id": "i074",
+"kind": "EXTERIOR",
+"note": "sex/gender category"
+},
+"i075": {
+"id": "i075",
+"kind": "EXTERIOR",
+"note": "wealth"
+},
+"i076": {
+"id": "i076",
+"kind": "INTERIOR",
+"note": "cognitive disposition"
+},
+"i077": {
+"id": "i077",
+"kind": "INTERIOR",
+"note": "fear"
+},
+"i078": {
+"id": "i078",
+"kind": "EXTERIOR",
+"note": "allegiance, role"
+},
+"i079": {
+"id": "i079",
+"kind": "INTERIOR",
+"note": "love, adoration"
+},
+"i080": {
+"id": "i080",
+"kind": "EXTERIOR",
+"note": "culpability status"
+},
+"i081": {
+"id": "i081",
+"kind": "EXTERIOR",
+"note": "appearance"
+},
+"i082": {
+"id": "i082",
+"kind": "EXTERIOR",
+"note": "physical confinement"
+},
+"i083": {
+"id": "i083",
+"kind": "EXTERIOR",
+"note": "relational conduct"
+},
+"i084": {
+"id": "i084",
+"kind": "INTERIOR",
+"note": "felt sensation"
+},
+"i085": {
+"id": "i085",
+"kind": "EXTERIOR",
+"note": "allegiance, conduct"
+},
+"i086": {
+"id": "i086",
+"kind": "EXTERIOR",
+"note": "social conduct"
+},
+"i087": {
+"id": "i087",
+"kind": "EXTERIOR",
+"note": "freedom, constraint"
+},
+"i088": {
+"id": "i088",
+"kind": "EXTERIOR",
+"note": "freedom, constraint"
+},
+"i089": {
+"id": "i089",
+"kind": "EXTERIOR",
+"note": "innocence status"
+},
+"i090": {
+"id": "i090",
+"kind": "INTERIOR",
+"note": "fear, dread"
+},
+"i091": {
+"id": "i091",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i092": {
+"id": "i092",
+"kind": "EXTERIOR",
+"note": "guilt status"
+},
+"i093": {
+"id": "i093",
+"kind": "INTERIOR",
+"note": "cognitive disposition"
+},
+"i094": {
+"id": "i094",
+"kind": "INTERIOR",
+"note": "stated desire"
+},
+"i095": {
+"id": "i095",
+"kind": "EXTERIOR",
+"note": "freedom, captivity"
+},
+"i096": {
+"id": "i096",
+"kind": "EXTERIOR",
+"note": "appearance, quality"
+},
+"i097": {
+"id": "i097",
+"kind": "EXTERIOR",
+"note": "social conduct"
+},
+"i098": {
+"id": "i098",
+"kind": "NEITHER",
+"note": "setting only"
+},
+"i099": {
+"id": "i099",
+"kind": "EXTERIOR",
+"note": "appearance"
+},
+"i100": {
+"id": "i100",
+"kind": "EXTERIOR",
+"note": "allegiance, role"
+},
+"i101": {
+"id": "i101",
+"kind": "EXTERIOR",
+"note": "sex/gender category"
+},
+"i102": {
+"id": "i102",
+"kind": "EXTERIOR",
+"note": "appearance"
+},
+"i103": {
+"id": "i103",
+"kind": "EXTERIOR",
+"note": "sex/gender category"
+},
+"i104": {
+"id": "i104",
+"kind": "INTERIOR",
+"note": "trust, attitude"
+},
+"i105": {
+"id": "i105",
+"kind": "EXTERIOR",
+"note": "freedom, captivity"
+},
+"i106": {
+"id": "i106",
+"kind": "INTERIOR",
+"note": "irrational (cognitive state)"
+},
+"i107": {
+"id": "i107",
+"kind": "EXTERIOR",
+"note": "beautiful, radiant (appearance)"
+},
+"i108": {
+"id": "i108",
+"kind": "INTERIOR",
+"note": "felt desire, disgust"
+},
+"i109": {
+"id": "i109",
+"kind": "INTERIOR",
+"note": "pure pleasure (sensation)"
+},
+"i110": {
+"id": "i110",
+"kind": "INTERIOR",
+"note": "pleasure, delight (sensation)"
+},
+"i111": {
+"id": "i111",
+"kind": "NEITHER",
+"note": "holy place (setting)"
+},
+"i112": {
+"id": "i112",
+"kind": "EXTERIOR",
+"note": "loyal, dutiful (allegiance/conduct)"
+},
+"i113": {
+"id": "i113",
+"kind": "EXTERIOR",
+"note": "rich, comfortable (wealth)"
+},
+"i114": {
+"id": "i114",
+"kind": "EXTERIOR",
+"note": "a man (social category)"
+},
+"i115": {
+"id": "i115",
+"kind": "INTERIOR",
+"note": "pleasure and pain (sensation)"
+},
+"i116": {
+"id": "i116",
+"kind": "EXTERIOR",
+"note": "poor, struggling (wealth)"
+},
+"i117": {
+"id": "i117",
+"kind": "INTERIOR",
+"note": "trusted, relied on him"
+},
+"i118": {
+"id": "i118",
+"kind": "INTERIOR",
+"note": "trusted him (attitude)"
+},
+"i119": {
+"id": "i119",
+"kind": "EXTERIOR",
+"note": "poor (wealth)"
+},
+"i120": {
+"id": "i120",
+"kind": "INTERIOR",
+"note": "irrational (cognitive state)"
+},
+"i121": {
+"id": "i121",
+"kind": "INTERIOR",
+"note": "wanted to create (desire)"
+},
+"i122": {
+"id": "i122",
+"kind": "EXTERIOR",
+"note": "faithful to him (relational conduct)"
+},
+"i123": {
+"id": "i123",
+"kind": "NEITHER",
+"note": "filthy alley (setting)"
+},
+"i124": {
+"id": "i124",
+"kind": "INTERIOR",
+"note": "felt desire, longing"
+},
+"i125": {
+"id": "i125",
+"kind": "INTERIOR",
+"note": "trusted, feared him"
+},
+"i126": {
+"id": "i126",
+"kind": "EXTERIOR",
+"note": "a man (social category)"
+},
+"i127": {
+"id": "i127",
+"kind": "EXTERIOR",
+"note": "innocent (moral status)"
+},
+"i128": {
+"id": "i128",
+"kind": "EXTERIOR",
+"note": "faithful, unfaithful (relational conduct)"
+},
+"i129": {
+"id": "i129",
+"kind": "EXTERIOR",
+"note": "captive, bound (physical condition)"
+},
+"i130": {
+"id": "i130",
+"kind": "NEITHER",
+"note": "holy, sacred place (setting)"
+},
+"i131": {
+"id": "i131",
+"kind": "INTERIOR",
+"note": "felt desire"
+},
+"i132": {
+"id": "i132",
+"kind": "INTERIOR",
+"note": "loved and hated her"
+},
+"i133": {
+"id": "i133",
+"kind": "EXTERIOR",
+"note": "faithful to him (relational conduct)"
+},
+"i134": {
+"id": "i134",
+"kind": "NEITHER",
+"note": "holy and filthy place (setting)"
+},
+"i135": {
+"id": "i135",
+"kind": "INTERIOR",
+"note": "felt disgust"
+},
+"i136": {
+"id": "i136",
+"kind": "EXTERIOR",
+"note": "unfaithful to him (relational conduct)"
+},
+"i137": {
+"id": "i137",
+"kind": "EXTERIOR",
+"note": "beautiful and ugly (appearance)"
+},
+"i138": {
+"id": "i138",
+"kind": "EXTERIOR",
+"note": "imprisoned (physical condition)"
+},
+"i139": {
+"id": "i139",
+"kind": "INTERIOR",
+"note": "loved and hated him"
+},
+"i140": {
+"id": "i140",
+"kind": "INTERIOR",
+"note": "trusted, feared him"
+},
+"i141": {
+"id": "i141",
+"kind": "INTERIOR",
+"note": "hated, despised him"
+},
+"i142": {
+"id": "i142",
+"kind": "INTERIOR",
+"note": "wanted to create, build (desire)"
+},
+"i143": {
+"id": "i143",
+"kind": "EXTERIOR",
+"note": "free, unhindered (situational)"
+},
+"i144": {
+"id": "i144",
+"kind": "EXTERIOR",
+"note": "beautiful (appearance)"
+},
+"i145": {
+"id": "i145",
+"kind": "INTERIOR",
+"note": "loved him deeply"
+},
+"i146": {
+"id": "i146",
+"kind": "EXTERIOR",
+"note": "a woman (social category)"
+},
+"i147": {
+"id": "i147",
+"kind": "INTERIOR",
+"note": "loved her deeply"
+},
+"i148": {
+"id": "i148",
+"kind": "EXTERIOR",
+"note": "man and woman (social category)"
+},
+"i149": {
+"id": "i149",
+"kind": "INTERIOR",
+"note": "felt disgust"
+},
+"i150": {
+"id": "i150",
+"kind": "EXTERIOR",
+"note": "beautiful (appearance)"
+},
+"i151": {
+"id": "i151",
+"kind": "INTERIOR",
+"note": "loved her deeply"
+},
+"i152": {
+"id": "i152",
+"kind": "INTERIOR",
+"note": "wanted to create (desire)"
+},
+"i153": {
+"id": "i153",
+"kind": "EXTERIOR",
+"note": "rebellious (stance/conduct)"
+},
+"i154": {
+"id": "i154",
+"kind": "EXTERIOR",
+"note": "beautiful, radiant (appearance)"
+},
+"i155": {
+"id": "i155",
+"kind": "INTERIOR",
+"note": "irrational, illogical (cognitive)"
+},
+"i156": {
+"id": "i156",
+"kind": "EXTERIOR",
+"note": "man and woman (social category)"
+},
+"i157": {
+"id": "i157",
+"kind": "EXTERIOR",
+"note": "disgusting (repellent quality)"
+},
+"i158": {
+"id": "i158",
+"kind": "EXTERIOR",
+"note": "rebellious, defiant (stance/conduct)"
+},
+"i159": {
+"id": "i159",
+"kind": "EXTERIOR",
+"note": "allegiance/conduct trait"
+},
+"i160": {
+"id": "i160",
+"kind": "EXTERIOR",
+"note": "captivity, situational"
+},
+"i161": {
+"id": "i161",
+"kind": "NEITHER",
+"note": "place described, not person"
+},
+"i162": {
+"id": "i162",
+"kind": "INTERIOR",
+"note": "rationality, mode of thought"
+},
+"i163": {
+"id": "i163",
+"kind": "INTERIOR",
+"note": "fear, affective"
+},
+"i164": {
+"id": "i164",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i165": {
+"id": "i165",
+"kind": "INTERIOR",
+"note": "trust and fear"
+},
+"i166": {
+"id": "i166",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i167": {
+"id": "i167",
+"kind": "NEITHER",
+"note": "setting, filthy alley"
+},
+"i168": {
+"id": "i168",
+"kind": "EXTERIOR",
+"note": "moral status, blameless"
+},
+"i169": {
+"id": "i169",
+"kind": "INTERIOR",
+"note": "hatred, affective"
+},
+"i170": {
+"id": "i170",
+"kind": "INTERIOR",
+"note": "feeling of pain"
+},
+"i171": {
+"id": "i171",
+"kind": "EXTERIOR",
+"note": "freedom, situational"
+},
+"i172": {
+"id": "i172",
+"kind": "INTERIOR",
+"note": "rationality, mode of thought"
+},
+"i173": {
+"id": "i173",
+"kind": "INTERIOR",
+"note": "desire to create/destroy"
+},
+"i174": {
+"id": "i174",
+"kind": "NEITHER",
+"note": "bare posture in setting"
+},
+"i175": {
+"id": "i175",
+"kind": "EXTERIOR",
+"note": "appearance, beautiful"
+},
+"i176": {
+"id": "i176",
+"kind": "INTERIOR",
+"note": "hatred, affective"
+},
+"i177": {
+"id": "i177",
+"kind": "INTERIOR",
+"note": "rationality, mode of thought"
+},
+"i178": {
+"id": "i178",
+"kind": "EXTERIOR",
+"note": "appearance, disgusting"
+},
+"i179": {
+"id": "i179",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i180": {
+"id": "i180",
+"kind": "EXTERIOR",
+"note": "culpable status, \u6709\u7f6a"
+},
+"i181": {
+"id": "i181",
+"kind": "EXTERIOR",
+"note": "wealth"
+},
+"i182": {
+"id": "i182",
+"kind": "EXTERIOR",
+"note": "allegiance/conduct trait"
+},
+"i183": {
+"id": "i183",
+"kind": "EXTERIOR",
+"note": "kinship role"
+},
+"i184": {
+"id": "i184",
+"kind": "INTERIOR",
+"note": "hate and loathing"
+},
+"i185": {
+"id": "i185",
+"kind": "NEITHER",
+"note": "place described, not person"
+},
+"i186": {
+"id": "i186",
+"kind": "EXTERIOR",
+"note": "poverty, destitution"
+},
+"i187": {
+"id": "i187",
+"kind": "NEITHER",
+"note": "setting, holy/filthy place"
+},
+"i188": {
+"id": "i188",
+"kind": "INTERIOR",
+"note": "trust and fear"
+},
+"i189": {
+"id": "i189",
+"kind": "NEITHER",
+"note": "bare posture in setting"
+},
+"i190": {
+"id": "i190",
+"kind": "EXTERIOR",
+"note": "relational conduct, unfaithful"
+},
+"i191": {
+"id": "i191",
+"kind": "INTERIOR",
+"note": "rationality, mode of thought"
+},
+"i192": {
+"id": "i192",
+"kind": "EXTERIOR",
+"note": "kinship role"
+},
+"i193": {
+"id": "i193",
+"kind": "EXTERIOR",
+"note": "wealth"
+},
+"i194": {
+"id": "i194",
+"kind": "EXTERIOR",
+"note": "captivity, situational"
+},
+"i195": {
+"id": "i195",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i196": {
+"id": "i196",
+"kind": "EXTERIOR",
+"note": "appearance, misshapen"
+},
+"i197": {
+"id": "i197",
+"kind": "INTERIOR",
+"note": "fear and dread"
+},
+"i198": {
+"id": "i198",
+"kind": "NEITHER",
+"note": "bare posture in setting"
+},
+"i199": {
+"id": "i199",
+"kind": "INTERIOR",
+"note": "love and longing"
+},
+"i200": {
+"id": "i200",
+"kind": "INTERIOR",
+"note": "irrationality, mode of thought"
+},
+"i201": {
+"id": "i201",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i202": {
+"id": "i202",
+"kind": "INTERIOR",
+"note": "love and hate"
+},
+"i203": {
+"id": "i203",
+"kind": "INTERIOR",
+"note": "felt desire"
+},
+"i204": {
+"id": "i204",
+"kind": "INTERIOR",
+"note": "felt desire, longing"
+},
+"i205": {
+"id": "i205",
+"kind": "INTERIOR",
+"note": "stated desire, destructive"
+},
+"i206": {
+"id": "i206",
+"kind": "EXTERIOR",
+"note": "culpable status"
+},
+"i207": {
+"id": "i207",
+"kind": "NEITHER",
+"note": "setting, temple"
+},
+"i208": {
+"id": "i208",
+"kind": "INTERIOR",
+"note": "love, affective"
+},
+"i209": {
+"id": "i209",
+"kind": "EXTERIOR",
+"note": "gender identity"
+},
+"i210": {
+"id": "i210",
+"kind": "EXTERIOR",
+"note": "freedom, situational"
+},
+"i211": {
+"id": "i211",
+"kind": "EXTERIOR",
+"note": "freedom and captivity"
+}
+},
+"all_three": 212,
+"coded": {
+"A": 212,
+"B": 212,
+"C": 212
+},
+"per_coder_distribution": {
+"A": {
+"EXTERIOR": 108,
+"INTERIOR": 75,
+"NEITHER": 29
+},
+"B": {
+"EXTERIOR": 113,
+"INTERIOR": 72,
+"NEITHER": 27
+},
+"C": {
+"EXTERIOR": 107,
+"INTERIOR": 81,
+"NEITHER": 24
+}
+},
+"unanimous": 197
+}

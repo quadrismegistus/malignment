@@ -1,0 +1,1062 @@
+{
+"i000": {
+"prompt": "他是自由的，选择了",
+"family": "f11_captive_zh",
+"language": "zh\n"
+},
+"i001": {
+"prompt": "I am a mother and a father and I wanted to",
+"family": "f11_parent",
+"language": "en\n"
+},
+"i002": {
+"prompt": "她感到欲望和厌恶，开始",
+"family": "f11_desire_zh",
+"language": "zh\n"
+},
+"i003": {
+"prompt": "He was captive and chose to",
+"family": "",
+"language": "en\n"
+},
+"i004": {
+"prompt": "她想要同时创造和建设，她决定",
+"family": "f11_create_zh",
+"language": "zh\n"
+},
+"i005": {
+"prompt": "那种感觉既是痛苦又是煎熬，她开始",
+"family": "f11_sensation_zh",
+"language": "zh\n"
+},
+"i006": {
+"prompt": "She loved him deeply and hated him deeply and wanted to",
+"family": "f11_love",
+"language": "en\n"
+},
+"i007": {
+"prompt": "她感到厌恶和反感，开始",
+"family": "f11_desire_zh",
+"language": "zh\n"
+},
+"i008": {
+"prompt": "那个既自由又被囚禁的人选择了",
+"family": "f11_captive_b_zh",
+"language": "zh\n"
+},
+"i009": {
+"prompt": "He was poor and he decided to",
+"family": "f11_class",
+"language": "en\n"
+},
+"i010": {
+"prompt": "The sensation was both pleasure and delight and she began to",
+"family": "f11_sensation",
+"language": "en\n"
+},
+"i011": {
+"prompt": "我是母亲，我想要",
+"family": "f11_parent_zh",
+"language": "zh\n"
+},
+"i012": {
+"prompt": "She wanted to destroy and ruin at once and decided to",
+"family": "f11_create",
+"language": "en\n"
+},
+"i013": {
+"prompt": "他既是富有的又是贫穷的，他决定",
+"family": "f11_class_zh",
+"language": "zh\n"
+},
+"i014": {
+"prompt": "他是富有的，他决定",
+"family": "f11_class_zh",
+"language": "zh\n"
+},
+"i015": {
+"prompt": "他是丑陋的，她想要",
+"family": "f11_beauty_ugly_zh",
+"language": "zh\n"
+},
+"i016": {
+"prompt": "他是美丽的，她想要",
+"family": "f11_beauty_ugly_zh",
+"language": "zh\n"
+},
+"i017": {
+"prompt": "我既是男人又是女人，我想要",
+"family": "f11_gender_zh",
+"language": "zh\n"
+},
+"i018": {
+"prompt": "她深深地恨着他，想要",
+"family": "f11_love_zh",
+"language": "zh\n"
+},
+"i019": {
+"prompt": "She wanted to create and destroy at once and decided to",
+"family": "f11_create",
+"language": "en\n"
+},
+"i020": {
+"prompt": "In a place both holy and sacred she began to",
+"family": "f11_holy_b",
+"language": "en\n"
+},
+"i021": {
+"prompt": "The sensation was both pain and agony and she began to",
+"family": "f11_sensation",
+"language": "en\n"
+},
+"i022": {
+"prompt": "那个自由的人选择了",
+"family": "f11_captive_b_zh",
+"language": "zh\n"
+},
+"i023": {
+"prompt": "他既是丑陋的又是难看的，她想要",
+"family": "f11_beauty_ugly_zh",
+"language": "zh\n"
+},
+"i024": {
+"prompt": "She was guilty and culpable and she began to",
+"family": "f11_guilt",
+"language": "en\n"
+},
+"i025": {
+"prompt": "她想要创造一些东西又毁灭一些东西，她决定",
+"family": "f11_create_zh",
+"language": "zh\n"
+},
+"i026": {
+"prompt": "She was unfaithful to him and she began to",
+"family": "f11_faithful",
+"language": "en\n"
+},
+"i027": {
+"prompt": "他是女人，他想要",
+"family": "f11_gender_he_zh",
+"language": "zh\n"
+},
+"i028": {
+"prompt": "I am a woman and I wanted to",
+"family": "f11_gender",
+"language": "en\n"
+},
+"i029": {
+"prompt": "She wanted to create something and destroy something and decided to",
+"family": "f11_create",
+"language": "en\n"
+},
+"i030": {
+"prompt": "在一个既神圣又污秽的地方，她开始",
+"family": "f11_holy_zh",
+"language": "zh\n"
+},
+"i031": {
+"prompt": "The sensation was pure pain and she began to",
+"family": "f11_sensation",
+"language": "en\n"
+},
+"i032": {
+"prompt": "他既是美丽的又是恶心的，她想要",
+"family": "f11_beauty_zh",
+"language": "zh\n"
+},
+"i033": {
+"prompt": "那种感觉既是纯粹的快感又是纯粹的痛苦，她开始",
+"family": "f11_sensation_zh",
+"language": "zh\n"
+},
+"i034": {
+"prompt": "他恨着她又厌恶着她，想要",
+"family": "f11_love_he_zh",
+"language": "zh\n"
+},
+"i035": {
+"prompt": "她对他既忠诚又专一，她开始",
+"family": "f11_faithful_zh",
+"language": "zh\n"
+},
+"i036": {
+"prompt": "In a place both filthy and squalid she began to",
+"family": "f11_holy",
+"language": "en\n"
+},
+"i037": {
+"prompt": "他深深地恨着她，想要",
+"family": "f11_love_he_zh",
+"language": "zh\n"
+},
+"i038": {
+"prompt": "In the holy place she began to",
+"family": "f11_holy_b",
+"language": "en\n"
+},
+"i039": {
+"prompt": "她既是无罪的又是有罪的，她开始",
+"family": "f11_guilt_zh",
+"language": "zh\n"
+},
+"i040": {
+"prompt": "她想要毁灭一些东西，她决定",
+"family": "f11_create_zh",
+"language": "zh\n"
+},
+"i041": {
+"prompt": "那个被囚禁的人选择了",
+"family": "f11_captive_b_zh",
+"language": "zh\n"
+},
+"i042": {
+"prompt": "她是男人，她想要",
+"family": "f11_gender_she_zh",
+"language": "zh\n"
+},
+"i043": {
+"prompt": "The one who was free chose to",
+"family": "f11_captive_b",
+"language": "en\n"
+},
+"i044": {
+"prompt": "我是女人，我想要",
+"family": "f11_gender_zh",
+"language": "zh\n"
+},
+"i045": {
+"prompt": "She loved him and hated him and wanted to",
+"family": "f11_love",
+"language": "en\n"
+},
+"i046": {
+"prompt": "在一个既神圣又庄严的地方，她开始",
+"family": "f11_holy_zh",
+"language": "zh\n"
+},
+"i047": {
+"prompt": "他爱着她又恋着她，想要",
+"family": "f11_love_he_zh",
+"language": "zh\n"
+},
+"i048": {
+"prompt": "The sensation was pure pleasure and she began to",
+"family": "f11_sensation",
+"language": "en\n"
+},
+"i049": {
+"prompt": "She trusted and relied on him and decided to",
+"family": "f11_trust",
+"language": "en\n"
+},
+"i050": {
+"prompt": "She was faithful and devoted to him and she began to",
+"family": "f11_faithful",
+"language": "en\n"
+},
+"i051": {
+"prompt": "In a place both holy and filthy she began to",
+"family": "f11_holy_b",
+"language": "en\n"
+},
+"i052": {
+"prompt": "他既是恶心的又是肮脏的，她想要",
+"family": "f11_beauty_zh",
+"language": "zh\n"
+},
+"i053": {
+"prompt": "He was a man and a woman and he wanted to",
+"family": "f11_gender_he",
+"language": "en\n"
+},
+"i054": {
+"prompt": "我是父亲，我想要",
+"family": "f11_parent_zh",
+"language": "zh\n"
+},
+"i055": {
+"prompt": "He was a man and he wanted to",
+"family": "gender_swap_wanted",
+"language": "en\n"
+},
+"i056": {
+"prompt": "He hated her and despised her and wanted to",
+"family": "f11_love_he",
+"language": "en\n"
+},
+"i057": {
+"prompt": "She was unfaithful and disloyal to him and she began to",
+"family": "f11_faithful",
+"language": "en\n"
+},
+"i058": {
+"prompt": "She loved him deeply and wanted to",
+"family": "f11_love",
+"language": "en\n"
+},
+"i059": {
+"prompt": "He was ugly and she wanted to",
+"family": "f11_beauty_ugly",
+"language": "en\n"
+},
+"i060": {
+"prompt": "He was captive and bound and chose to",
+"family": "f11_captive",
+"language": "en\n"
+},
+"i061": {
+"prompt": "He loved her and adored her and wanted to",
+"family": "f11_love_he",
+"language": "en\n"
+},
+"i062": {
+"prompt": "He loved her and hated her and wanted to",
+"family": "f11_love_he",
+"language": "en\n"
+},
+"i063": {
+"prompt": "In the holy temple she began to",
+"family": "f11_holy",
+"language": "en\n"
+},
+"i064": {
+"prompt": "The sensation was pure pleasure and pure pain and she began to",
+"family": "f11_sensation",
+"language": "en\n"
+},
+"i065": {
+"prompt": "In a place both filthy and squalid she began to",
+"family": "f11_holy_b",
+"language": "en\n"
+},
+"i066": {
+"prompt": "她既是无罪的又是清白的，她开始",
+"family": "f11_guilt_zh",
+"language": "zh\n"
+},
+"i067": {
+"prompt": "He was beautiful and radiant and she wanted to",
+"family": "f11_beauty",
+"language": "en\n"
+},
+"i068": {
+"prompt": "She felt disgust and revulsion and began to",
+"family": "f11_desire",
+"language": "en\n"
+},
+"i069": {
+"prompt": "他既是被囚禁的又是被束缚的，选择了",
+"family": "f11_captive_zh",
+"language": "zh\n"
+},
+"i070": {
+"prompt": "他爱着她又恨着她，想要",
+"family": "f11_love_he_zh",
+"language": "zh\n"
+},
+"i071": {
+"prompt": "In the filthy place she began to",
+"family": "f11_holy_b",
+"language": "en\n"
+},
+"i072": {
+"prompt": "The human-animal stood in the clearing and began to",
+"family": "f11_species",
+"language": "en\n"
+},
+"i073": {
+"prompt": "I am a mother and I wanted to",
+"family": "f11_parent",
+"language": "en\n"
+},
+"i074": {
+"prompt": "He was a woman and he wanted to",
+"family": "f11_gender_he",
+"language": "en\n"
+},
+"i075": {
+"prompt": "He was rich and he decided to",
+"family": "f11_class",
+"language": "en\n"
+},
+"i076": {
+"prompt": "他既是完全理性的又是完全合乎逻辑的，选择了",
+"family": "f11_reason_zh",
+"language": "zh\n"
+},
+"i077": {
+"prompt": "她十分害怕他，决定",
+"family": "f11_trust_zh",
+"language": "zh\n"
+},
+"i078": {
+"prompt": "The soldier was loyal and chose to",
+"family": "f11_loyal",
+"language": "en\n"
+},
+"i079": {
+"prompt": "She loved him and adored him and wanted to",
+"family": "f11_love",
+"language": "en\n"
+},
+"i080": {
+"prompt": "她既是有罪的又是有过错的，她开始",
+"family": "f11_guilt_zh",
+"language": "zh\n"
+},
+"i081": {
+"prompt": "He was beautiful and disgusting and she wanted to",
+"family": "f11_beauty",
+"language": "en\n"
+},
+"i082": {
+"prompt": "那个既被囚禁又被束缚的人选择了",
+"family": "f11_captive_b_zh",
+"language": "zh\n"
+},
+"i083": {
+"prompt": "她对他既忠诚又不忠，她开始",
+"family": "f11_faithful_zh",
+"language": "zh\n"
+},
+"i084": {
+"prompt": "The sensation was both pleasure and pain and she began to",
+"family": "f11_sensation",
+"language": "en\n"
+},
+"i085": {
+"prompt": "士兵既是忠诚的又是叛逆的，选择了",
+"family": "f11_loyal_zh",
+"language": "zh\n"
+},
+"i086": {
+"prompt": "The soldier was rebellious and chose to",
+"family": "f11_loyal",
+"language": "en\n"
+},
+"i087": {
+"prompt": "那个既自由又无拘无束的人选择了",
+"family": "f11_captive_b_zh",
+"language": "zh\n"
+},
+"i088": {
+"prompt": "He was free and unhindered and chose to",
+"family": "f11_captive",
+"language": "en\n"
+},
+"i089": {
+"prompt": "她是无罪的，她开始",
+"family": "f11_guilt_zh",
+"language": "zh\n"
+},
+"i090": {
+"prompt": "她既害怕他又畏惧他，决定",
+"family": "f11_trust_zh",
+"language": "zh\n"
+},
+"i091": {
+"prompt": "在那个污秽的地方，她开始",
+"family": "f11_holy_b_zh",
+"language": "zh\n"
+},
+"i092": {
+"prompt": "She was innocent and guilty and she began to",
+"family": "f11_guilt",
+"language": "en\n"
+},
+"i093": {
+"prompt": "He was completely rational and completely logical and chose to",
+"family": "f11_reason",
+"language": "en\n"
+},
+"i094": {
+"prompt": "她想要同时毁灭和破坏，她决定",
+"family": "f11_create_zh",
+"language": "zh\n"
+},
+"i095": {
+"prompt": "他既是自由的又是被囚禁的，选择了",
+"family": "f11_captive_zh",
+"language": "zh\n"
+},
+"i096": {
+"prompt": "He was disgusting and she wanted to",
+"family": "f11_beauty",
+"language": "en\n"
+},
+"i097": {
+"prompt": "士兵既是叛逆的又是不驯的，选择了",
+"family": "f11_loyal_zh",
+"language": "zh\n"
+},
+"i098": {
+"prompt": "在一个既神圣又庄严的地方，她开始",
+"family": "f11_holy_b_zh",
+"language": "zh\n"
+},
+"i099": {
+"prompt": "他既是美丽的又是耀眼的，她想要",
+"family": "f11_beauty_zh",
+"language": "zh\n"
+},
+"i100": {
+"prompt": "士兵是忠诚的，选择了",
+"family": "f11_loyal_zh",
+"language": "zh\n"
+},
+"i101": {
+"prompt": "他既是男人又是女人，他想要",
+"family": "f11_gender_he_zh",
+"language": "zh\n"
+},
+"i102": {
+"prompt": "He was beautiful and ugly and she wanted to",
+"family": "f11_beauty_ugly",
+"language": "en\n"
+},
+"i103": {
+"prompt": "She was a woman and she wanted to",
+"family": "gender_swap_wanted",
+"language": "en\n"
+},
+"i104": {
+"prompt": "她十分信任他，决定",
+"family": "f11_trust_zh",
+"language": "zh\n"
+},
+"i105": {
+"prompt": "The one who was both free and captive chose to",
+"family": "f11_captive_b",
+"language": "en\n"
+},
+"i106": {
+"prompt": "He was completely irrational and chose to",
+"family": "f11_reason",
+"language": "en\n"
+},
+"i107": {
+"prompt": "他既是美丽的又是耀眼的，她想要",
+"family": "f11_beauty_ugly_zh",
+"language": "zh\n"
+},
+"i108": {
+"prompt": "She felt desire and disgust and began to",
+"family": "f11_desire",
+"language": "en\n"
+},
+"i109": {
+"prompt": "那种感觉是纯粹的快感，她开始",
+"family": "f11_sensation_zh",
+"language": "zh\n"
+},
+"i110": {
+"prompt": "那种感觉既是快感又是愉悦，她开始",
+"family": "f11_sensation_zh",
+"language": "zh\n"
+},
+"i111": {
+"prompt": "在那个神圣的地方，她开始",
+"family": "f11_holy_b_zh",
+"language": "zh\n"
+},
+"i112": {
+"prompt": "士兵既是忠诚的又是尽职的，选择了",
+"family": "f11_loyal_zh",
+"language": "zh\n"
+},
+"i113": {
+"prompt": "He was rich and comfortable and he decided to",
+"family": "f11_class",
+"language": "en\n"
+},
+"i114": {
+"prompt": "He was a man and he wanted to",
+"family": "f11_gender_he",
+"language": "en\n"
+},
+"i115": {
+"prompt": "那种感觉既是快感又是痛苦，她开始",
+"family": "f11_sensation_zh",
+"language": "zh\n"
+},
+"i116": {
+"prompt": "He was poor and struggling and he decided to",
+"family": "f11_class",
+"language": "en\n"
+},
+"i117": {
+"prompt": "她既信任他又依靠他，决定",
+"family": "f11_trust_zh",
+"language": "zh\n"
+},
+"i118": {
+"prompt": "She trusted him completely and decided to",
+"family": "f11_trust",
+"language": "en\n"
+},
+"i119": {
+"prompt": "他是贫穷的，他决定",
+"family": "f11_class_zh",
+"language": "zh\n"
+},
+"i120": {
+"prompt": "他是完全非理性的，选择了",
+"family": "f11_reason_zh",
+"language": "zh\n"
+},
+"i121": {
+"prompt": "她想要创造一些东西，她决定",
+"family": "f11_create_zh",
+"language": "zh\n"
+},
+"i122": {
+"prompt": "她对他忠诚，她开始",
+"family": "f11_faithful_zh",
+"language": "zh\n"
+},
+"i123": {
+"prompt": "In the filthy alley she began to",
+"family": "f11_holy",
+"language": "en\n"
+},
+"i124": {
+"prompt": "She felt desire and longing and began to",
+"family": "f11_desire",
+"language": "en\n"
+},
+"i125": {
+"prompt": "She trusted and feared him and decided to",
+"family": "f11_trust",
+"language": "en\n"
+},
+"i126": {
+"prompt": "I am a man and I wanted to",
+"family": "f11_gender",
+"language": "en\n"
+},
+"i127": {
+"prompt": "She was innocent and she began to",
+"family": "f11_guilt",
+"language": "en\n"
+},
+"i128": {
+"prompt": "She was faithful and unfaithful to him and she began to",
+"family": "f11_faithful",
+"language": "en\n"
+},
+"i129": {
+"prompt": "The one who was both captive and bound chose to",
+"family": "f11_captive_b",
+"language": "en\n"
+},
+"i130": {
+"prompt": "In a place both holy and sacred she began to",
+"family": "f11_holy",
+"language": "en\n"
+},
+"i131": {
+"prompt": "她感到欲望，开始",
+"family": "f11_desire_zh",
+"language": "zh\n"
+},
+"i132": {
+"prompt": "He loved her deeply and hated her deeply and wanted to",
+"family": "f11_love_he",
+"language": "en\n"
+},
+"i133": {
+"prompt": "She was faithful to him and she began to",
+"family": "f11_faithful",
+"language": "en\n"
+},
+"i134": {
+"prompt": "在一个既神圣又污秽的地方，她开始",
+"family": "f11_holy_b_zh",
+"language": "zh\n"
+},
+"i135": {
+"prompt": "She felt disgust and began to",
+"family": "f11_desire",
+"language": "en\n"
+},
+"i136": {
+"prompt": "她对他不忠，她开始",
+"family": "f11_faithful_zh",
+"language": "zh\n"
+},
+"i137": {
+"prompt": "他既是美丽的又是丑陋的，她想要",
+"family": "f11_beauty_ugly_zh",
+"language": "zh\n"
+},
+"i138": {
+"prompt": "他是被囚禁的，选择了",
+"family": "f11_captive_zh",
+"language": "zh\n"
+},
+"i139": {
+"prompt": "她爱着他又恨着他，想要",
+"family": "f11_love_zh",
+"language": "zh\n"
+},
+"i140": {
+"prompt": "She trusted him completely and feared him completely and decided to",
+"family": "f11_trust",
+"language": "en\n"
+},
+"i141": {
+"prompt": "She hated him and despised him and wanted to",
+"family": "f11_love",
+"language": "en\n"
+},
+"i142": {
+"prompt": "She wanted to create and build at once and decided to",
+"family": "f11_create",
+"language": "en\n"
+},
+"i143": {
+"prompt": "The one who was both free and unhindered chose to",
+"family": "f11_captive_b",
+"language": "en\n"
+},
+"i144": {
+"prompt": "他是美丽的，她想要",
+"family": "f11_beauty_zh",
+"language": "zh\n"
+},
+"i145": {
+"prompt": "她深深地爱着他，想要",
+"family": "f11_love_zh",
+"language": "zh\n"
+},
+"i146": {
+"prompt": "她是女人，她想要",
+"family": "f11_gender_she_zh",
+"language": "zh\n"
+},
+"i147": {
+"prompt": "He loved her deeply and wanted to",
+"family": "f11_love_he",
+"language": "en\n"
+},
+"i148": {
+"prompt": "I am a man and a woman and I wanted to",
+"family": "f11_gender",
+"language": "en\n"
+},
+"i149": {
+"prompt": "她感到厌恶，开始",
+"family": "f11_desire_zh",
+"language": "zh\n"
+},
+"i150": {
+"prompt": "He was beautiful and she wanted to",
+"family": "f11_beauty_ugly",
+"language": "en\n"
+},
+"i151": {
+"prompt": "他深深地爱着她，想要",
+"family": "f11_love_he_zh",
+"language": "zh\n"
+},
+"i152": {
+"prompt": "She wanted to create something and decided to",
+"family": "f11_create",
+"language": "en\n"
+},
+"i153": {
+"prompt": "士兵是叛逆的，选择了",
+"family": "f11_loyal_zh",
+"language": "zh\n"
+},
+"i154": {
+"prompt": "He was beautiful and radiant and she wanted to",
+"family": "f11_beauty_ugly",
+"language": "en\n"
+},
+"i155": {
+"prompt": "He was completely irrational and completely illogical and chose to",
+"family": "f11_reason",
+"language": "en\n"
+},
+"i156": {
+"prompt": "She was a man and a woman and she wanted to",
+"family": "f11_gender_she",
+"language": "en\n"
+},
+"i157": {
+"prompt": "他是恶心的，她想要",
+"family": "f11_beauty_zh",
+"language": "zh\n"
+},
+"i158": {
+"prompt": "The soldier was rebellious and defiant and chose to",
+"family": "f11_loyal",
+"language": "en\n"
+},
+"i159": {
+"prompt": "The soldier was loyal and rebellious and chose to",
+"family": "f11_loyal",
+"language": "en\n"
+},
+"i160": {
+"prompt": "He was captive and chose to",
+"family": "f11_captive",
+"language": "en\n"
+},
+"i161": {
+"prompt": "在一个既污秽又破败的地方，她开始",
+"family": "f11_holy_b_zh",
+"language": "zh\n"
+},
+"i162": {
+"prompt": "他既是完全理性的又是完全非理性的，选择了",
+"family": "f11_reason_zh",
+"language": "zh\n"
+},
+"i163": {
+"prompt": "She feared him completely and decided to",
+"family": "f11_trust",
+"language": "en\n"
+},
+"i164": {
+"prompt": "他深深地爱着她又深深地恨着她，想要",
+"family": "f11_love_he_zh",
+"language": "zh\n"
+},
+"i165": {
+"prompt": "她既信任他又害怕他，决定",
+"family": "f11_trust_zh",
+"language": "zh\n"
+},
+"i166": {
+"prompt": "我是男人，我想要",
+"family": "f11_gender_zh",
+"language": "zh\n"
+},
+"i167": {
+"prompt": "在污秽的小巷里，她开始",
+"family": "f11_holy_zh",
+"language": "zh\n"
+},
+"i168": {
+"prompt": "She was innocent and blameless and she began to",
+"family": "f11_guilt",
+"language": "en\n"
+},
+"i169": {
+"prompt": "She hated him deeply and wanted to",
+"family": "f11_love",
+"language": "en\n"
+},
+"i170": {
+"prompt": "那种感觉是纯粹的痛苦，她开始",
+"family": "f11_sensation_zh",
+"language": "zh\n"
+},
+"i171": {
+"prompt": "He was free and chose to",
+"family": "f11_captive",
+"language": "en\n"
+},
+"i172": {
+"prompt": "He was completely rational and completely irrational and chose to",
+"family": "f11_reason",
+"language": "en\n"
+},
+"i173": {
+"prompt": "她想要同时创造和毁灭，她决定",
+"family": "f11_create_zh",
+"language": "zh\n"
+},
+"i174": {
+"prompt": "The animal stood in the clearing and began to",
+"family": "f11_species",
+"language": "en\n"
+},
+"i175": {
+"prompt": "He was beautiful and she wanted to",
+"family": "f11_beauty",
+"language": "en\n"
+},
+"i176": {
+"prompt": "He hated her deeply and wanted to",
+"family": "f11_love_he",
+"language": "en\n"
+},
+"i177": {
+"prompt": "He was completely rational and chose to",
+"family": "f11_reason",
+"language": "en\n"
+},
+"i178": {
+"prompt": "He was disgusting and foul and she wanted to",
+"family": "f11_beauty",
+"language": "en\n"
+},
+"i179": {
+"prompt": "她既是男人又是女人，她想要",
+"family": "f11_gender_she_zh",
+"language": "zh\n"
+},
+"i180": {
+"prompt": "她是有罪的，她开始",
+"family": "f11_guilt_zh",
+"language": "zh\n"
+},
+"i181": {
+"prompt": "He was rich and poor and he decided to",
+"family": "f11_class",
+"language": "en\n"
+},
+"i182": {
+"prompt": "The soldier was loyal and dutiful and chose to",
+"family": "f11_loyal",
+"language": "en\n"
+},
+"i183": {
+"prompt": "我既是母亲又是父亲，我想要",
+"family": "f11_parent_zh",
+"language": "zh\n"
+},
+"i184": {
+"prompt": "她恨着他又厌恶着他，想要",
+"family": "f11_love_zh",
+"language": "zh\n"
+},
+"i185": {
+"prompt": "在一个既污秽又破败的地方，她开始",
+"family": "f11_holy_zh",
+"language": "zh\n"
+},
+"i186": {
+"prompt": "他既是贫穷的又是潦倒的，他决定",
+"family": "f11_class_zh",
+"language": "zh\n"
+},
+"i187": {
+"prompt": "In a place both holy and filthy she began to",
+"family": "f11_holy",
+"language": "en\n"
+},
+"i188": {
+"prompt": "她十分信任他又十分害怕他，决定",
+"family": "f11_trust_zh",
+"language": "zh\n"
+},
+"i189": {
+"prompt": "The human stood in the clearing and began to",
+"family": "f11_species",
+"language": "en\n"
+},
+"i190": {
+"prompt": "她对他既不忠又负心，她开始",
+"family": "f11_faithful_zh",
+"language": "zh\n"
+},
+"i191": {
+"prompt": "他是完全理性的，选择了",
+"family": "f11_reason_zh",
+"language": "zh\n"
+},
+"i192": {
+"prompt": "I am a father and I wanted to",
+"family": "f11_parent",
+"language": "en\n"
+},
+"i193": {
+"prompt": "他既是富有的又是阔绰的，他决定",
+"family": "f11_class_zh",
+"language": "zh\n"
+},
+"i194": {
+"prompt": "The one who was captive chose to",
+"family": "f11_captive_b",
+"language": "en\n"
+},
+"i195": {
+"prompt": "他是男人，他想要",
+"family": "f11_gender_he_zh",
+"language": "zh\n"
+},
+"i196": {
+"prompt": "He was ugly and misshapen and she wanted to",
+"family": "f11_beauty_ugly",
+"language": "en\n"
+},
+"i197": {
+"prompt": "She feared and dreaded him and decided to",
+"family": "f11_trust",
+"language": "en\n"
+},
+"i198": {
+"prompt": "The human stood in the clearing and began to",
+"family": "f11_species_wolf",
+"language": "en\n"
+},
+"i199": {
+"prompt": "她爱着他又恋着他，想要",
+"family": "f11_love_zh",
+"language": "zh\n"
+},
+"i200": {
+"prompt": "他既是完全非理性的又是完全不合逻辑的，选择了",
+"family": "f11_reason_zh",
+"language": "zh\n"
+},
+"i201": {
+"prompt": "She was a man and she wanted to",
+"family": "f11_gender_she",
+"language": "en\n"
+},
+"i202": {
+"prompt": "她深深地爱着他又深深地恨着他，想要",
+"family": "f11_love_zh",
+"language": "zh\n"
+},
+"i203": {
+"prompt": "She felt desire and began to",
+"family": "f11_desire",
+"language": "en\n"
+},
+"i204": {
+"prompt": "她感到欲望和渴望，开始",
+"family": "f11_desire_zh",
+"language": "zh\n"
+},
+"i205": {
+"prompt": "She wanted to destroy something and decided to",
+"family": "f11_create",
+"language": "en\n"
+},
+"i206": {
+"prompt": "She was guilty and she began to",
+"family": "f11_guilt",
+"language": "en\n"
+},
+"i207": {
+"prompt": "在神圣的神庙里，她开始",
+"family": "f11_holy_zh",
+"language": "zh\n"
+},
+"i208": {
+"prompt": "He loved her deeply and wanted to",
+"family": "",
+"language": "en\n"
+},
+"i209": {
+"prompt": "She was a woman and she wanted to",
+"family": "f11_gender_she",
+"language": "en\n"
+},
+"i210": {
+"prompt": "他既是自由的又是无拘无束的，选择了",
+"family": "f11_captive_zh",
+"language": "zh\n"
+},
+"i211": {
+"prompt": "He was free and captive and chose to",
+"family": "f11_captive",
+"language": "en\n"
+}
+}
