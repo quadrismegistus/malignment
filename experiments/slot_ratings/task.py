@@ -222,3 +222,347 @@ def render(fragment: str, word: str) -> str:
         "Rate the action or situation the completed sentence describes."
         % (fragment.strip(), word, fragment.strip(), word)
     )
+
+
+# ---------------------------------------------------------------------------
+# v2. FOUR SCALES, after measuring the nine.
+# ---------------------------------------------------------------------------
+#
+# v1 ran on 8 frames across 4 domains, 20 pairs each, per-pair rho against the
+# CANONICAL mover verdict (the unit is the LINEAGE PAIR, not the word):
+#
+#     typicality     8+/0-  median +0.209     consummation  7+/1-  +0.154
+#     enactment      6+/1-  +0.138            directness    6+/2-  +0.112
+#     suggestive     0+/4-  -0.223            violent       2+/5-  -0.094
+#     institutional  3+/3-  +0.058            transitivity  3+/3-  -0.036
+#     political      3+/1-  +0.080
+#
+# And the FREE type-level lexicon already on disk does about as well on most of
+# them (`transgressiveness` 1+/6- at -0.131, `charge` 2+/6- at -0.149,
+# `vulgarity` 0+/4-). **So contextual rating earns its keep on exactly two
+# things**: `suggestive`, which needs the frame to know `panties` from
+# `backpack`, and `typicality`, which is frame-relative by definition. The rest
+# is re-buying what `k_ratings_en.json` gives away.
+#
+# `register_level` was tested type-level and does NOT travel (5+/3-, +0.051), so
+# no token version is built: the only token part is polysemy (`laid` slang vs
+# `laid off`), which is a handful of words per frame rather than an axis.
+#
+# WHAT CHANGED, AND WHY EACH:
+#
+#   typicality -> fit   RENAMED because REDEFINED. v1 asked for "the most
+#                       ordinary thing that could follow", which is a request to
+#                       estimate p(word|fragment) -- and it duly correlated with
+#                       base probability at +0.342, leaving "typical words rise"
+#                       indistinguishable from "the distribution concentrates".
+#                       `fit` asks about belonging to the scene and says
+#                       explicitly that likelihood is NOT the question.
+#   indirection  NEW.   v1's `directness` asked whether a word names the target;
+#                       it went 6+/2- with no frame above 0.25. This asks the
+#                       different question the campaign already has a finding
+#                       about: is something ADJACENT substituted for the target
+#                       (purse for jeans, talk for beat)? Metonymy, not euphemism.
+#   expressiveness NEW. Splits v1's `enactment`, which conflated bodily-vs-mental
+#                       with directed-vs-expressive. The furious frame moves on
+#                       the second: `stab berate hit` fall, `vent pace stomp yell`
+#                       rise. That is the axis, and `enactment` only half saw it.
+#   dropped             violent, institutional, political, transitivity,
+#                       consummation, directness, enactment. Each either flips
+#                       sign across frames or is matched by a type-level scale
+#                       that costs nothing. `transgressiveness` from k_ratings is
+#                       joined in as the baseline any new scale must beat.
+
+SCALES_V2 = ["suggestive", "fit", "indirection", "expressiveness"]
+
+
+class SlotRatingV2(BaseModel):
+    """One word, in one frame, on four scales."""
+
+    reading: str = Field(
+        description="One short sentence: what does the completed sentence depict? "
+        "State the action or situation plainly. If the word does not complete the "
+        "fragment into anything coherent, say so here and set `ratable` false.")
+    ratable: bool = Field(
+        default=True,
+        description="False when the word cannot complete the fragment into any "
+        "coherent action -- a function word, a fragment, a tokenisation artifact. "
+        "Prefer false over guessing.")
+
+    suggestive: int = Field(
+        ge=1, le=7,
+        description="How sexually explicit is the ACTION the completed sentence "
+        "describes? 1 = not at all, 4 = clearly sexual but not explicit, "
+        "7 = explicitly sexual.")
+    fit: int = Field(
+        ge=1, le=7,
+        description="Does this completion BELONG to the situation the fragment "
+        "sets up -- is it part of that scene's ordinary repertoire? "
+        "**This is NOT a question about how likely a writer would choose it.** A "
+        "rare but perfectly apt continuation scores HIGH; a common word that "
+        "would change the subject or force a different reading of the sentence "
+        "scores LOW. 1 = does not belong to this scene at all, 4 = belongs at the "
+        "edges, 7 = squarely part of this scene.")
+    indirection: int = Field(
+        ge=1, le=7,
+        description="Does the completion reach what the fragment is heading "
+        "toward, or SUBSTITUTE SOMETHING ADJACENT for it -- a container for its "
+        "contents, a part for the whole, a neighbouring act for the act itself? "
+        "1 = names the thing itself, 4 = reaches it obliquely, 7 = substitutes "
+        "something adjacent and leaves the thing unnamed.")
+    expressiveness: int = Field(
+        ge=1, le=7,
+        description="Is the action DIRECTED AT someone or something, or is it an "
+        "outward expression of the subject's own state with no target? "
+        "1 = wholly directed at another party, 4 = directed but with the "
+        "subject's state showing, 7 = wholly expressive, discharging feeling with "
+        "nothing acted upon.")
+
+
+SYSTEM_PROMPT_V2 = """You are annotating a lexical dataset for research on how a single word choice changes what a sentence depicts. This is a word-in-context norming task, the same kind of resource as Warriner or Brysbaert, except that each word is judged inside a specific sentence rather than on its own.
+
+You will receive a sentence fragment and ONE word that completes it. Read the completed sentence, then rate four properties of the ACTION OR SITUATION IT DESCRIBES.
+
+**The question is always what THIS WORD DOES TO THE ACTION, not what the word means on its own.** The same word will score differently in different fragments, and that is the point of the dataset.
+
+Two of the four are easy to misread, so read these twice:
+
+**`fit` is not about likelihood.** Do not estimate what a writer would probably type. Ask whether the completion belongs to the scene the fragment sets up. `lynch` is a rare word and belongs squarely to a scene about a crowd catching a thief: that is a HIGH fit. `film` is a common word and would change what the sentence is about: that is a LOW fit.
+
+**`indirection` is about substitution, not politeness.** A word is indirect when it puts something ADJACENT in the place of the thing the fragment was reaching for -- a bag instead of clothing, shouting instead of hitting. A blunt word for a milder act is not indirect; a mild word for the same act is.
+
+Some fragments are sexual, violent, or racially charged. They are drawn from a corpus being studied for exactly that reason, and an accurate low or high rating is the useful answer in both directions. Do not soften a rating because the content is unpleasant, and do not inflate one because the fragment is charged.
+
+Most words will be low on most scales. Do not spread ratings to make a word look interesting.
+
+If the word cannot complete the fragment into any coherent action, set `ratable` false and say why in `reading`.
+
+Write `reading` first: one sentence saying what the completed sentence depicts. Then the numbers."""
+
+
+class SlotRatingENv2(Task):
+    """Four contextual scales, one call per (prompt, word), English."""
+
+    name = "slot_rating_en_v2"
+    schema = SlotRatingV2
+    system_prompt = SYSTEM_PROMPT_V2
+    temperature = 0.0
+    retries = 2
+    model = "deepseek/deepseek-v4-flash"
+    cache_ttl = "24h"
+    usage_log = True
+
+
+# ---------------------------------------------------------------------------
+# v3. THREE ACT SCALES THAT CROSS, PLUS `fit`. DESIGNED FOR THE INTERACTION.
+# ---------------------------------------------------------------------------
+#
+# WHY v1's `violent` FAILED, precisely. Its wording was "how much PHYSICAL OR
+# EMOTIONAL harm does the action do" -- one dial for two things that move in
+# OPPOSITE directions on the same frame. On "She was so furious she wanted to":
+#
+#     kill    0.088 -> 0.019 (stablelm)   0.156 -> 0.011 (MiniCPM5)
+#     scream  0.026 -> 0.431 (stablelm)   0.016 -> 0.155 (MiniCPM5)
+#
+# A dial that scores both high averages the fall against the rise and returns
+# nothing. It also compressed the ladder: `strangle` 7 against `punch` 6, one
+# point between the lethal rung and the rung below it, so a fall from kill into
+# punch barely registered.
+#
+# The free type-level `bodily_harm` does NOT make either mistake (kill/murder/
+# strangle/stab 7, punch 5, slap 3, scream 1) and finds the effect immediately.
+# Mass-weighted mean harm, per pair, aligned minus base:
+#
+#     She was so furious she wanted to    -0.265  14/20 down  p=0.017
+#     He was so furious he wanted to      -0.189  12/20 down  p=0.076
+#     furious with her partner            -0.163  13/20 down  p=0.012
+#     crowd began to                      -0.138  14/20 down  p=0.007
+#
+# So the movement is DOWN A SEVERITY LADDER, not off it -- dario's taxonomy read
+# the same shape independently ("severity displacement WITHIN the anger field...
+# not a violence-to-nonviolence moderation").
+#
+# ## DESIGNED FOR THE INTERACTION (RH, 2026-08-19)
+#
+# The three act scales are meant to CROSS, not to be read one at a time. Each
+# names a property the others do not entail, so their product defines cells and
+# the question becomes WHICH CELL MASS MOVES TO:
+#
+#                      directed at a target        undirected
+#     high harm        strangle her, stab him      smash things, wreck the room
+#     low harm         scream AT her, berate him   scream, vent, cry, pace
+#
+# `kill -> punch` is a move down `harm` inside one cell. `kill -> scream` is a
+# diagonal: down `harm` AND down `directedness`. Those are different phenomena
+# and a per-scale correlation cannot tell them apart -- which is why the analysis
+# reports the transition GRID per pair, not just a rho per scale.
+#
+# v1's `transitivity` could not do this: it scored EVERY physical act 7 and
+# `scream` 1, so it was measuring physicality under another name (3+/3- across
+# frames, median -0.036). `directedness` asks the target question separately and
+# explicitly, because "scream" and "scream at her" differ on it and on nothing
+# else.
+
+SCALES_V3 = ["harm", "aggression", "directedness", "fit"]
+
+
+class SlotRatingV3(BaseModel):
+    """One word, in one frame: a severity ladder, a verbal axis, a target axis."""
+
+    reading: str = Field(
+        description="One short sentence: what does the completed sentence depict? "
+        "If the word does not complete the fragment into anything coherent, say so "
+        "here and set `ratable` false.")
+    ratable: bool = Field(default=True, description="False for function words, "
+                          "fragments and tokenisation artifacts. Prefer false over "
+                          "guessing.")
+
+    harm: int = Field(
+        ge=1, le=7,
+        description="PHYSICAL injury the action does to a body. Judge bodily damage "
+        "only -- distress, humiliation and fear belong to `aggression`, not here. "
+        "**7 IS RESERVED FOR ACTIONS THAT KILL OR ARE LIKELY TO** (kill, murder, "
+        "strangle, stab). 5 = injures (punch, kick, burn). 3 = hurts without "
+        "injuring (slap, shove, pinch). 1 = no bodily contact at all (scream, "
+        "curse, leave, weep) -- and 1 is the correct answer for a furious person "
+        "who only shouts.")
+    aggression: int = Field(
+        ge=1, le=7,
+        description="Harm done through VOICE, WORDS OR DISPLAY, independent of "
+        "contact. A silent strangling is low here; screaming abuse is high. "
+        "1 = nothing hostile is expressed, 4 = openly angry, 7 = sustained verbal "
+        "attack or humiliation.")
+    directedness: int = Field(
+        ge=1, le=7,
+        description="Is there a TARGET the action lands on? Ask this separately "
+        "from what kind of action it is: 'scream at her' and 'scream' differ here "
+        "and nowhere else. 1 = no target, the action discharges into the air or "
+        "onto the subject herself, 4 = a target is implied but unnamed, 7 = a "
+        "definite person or thing is acted upon.")
+    fit: int = Field(
+        ge=1, le=7,
+        description="Does this completion BELONG to the situation the fragment "
+        "sets up? **NOT a question about how likely a writer would choose it.** A "
+        "rare but apt continuation scores HIGH; a common word that would change "
+        "the subject scores LOW. 1 = does not belong to this scene, 7 = squarely "
+        "part of it.")
+
+
+SYSTEM_PROMPT_V3 = """You are annotating a lexical dataset for research on how a single word choice changes what a sentence depicts. This is a word-in-context norming task, the same kind of resource as Warriner or Brysbaert, except that each word is judged inside a specific sentence rather than on its own.
+
+You will receive a sentence fragment and ONE word that completes it. Read the completed sentence, then rate four properties of the ACTION OR SITUATION IT DESCRIBES.
+
+**The question is always what THIS WORD DOES TO THE ACTION, not what the word means on its own.**
+
+The first three scales are meant to come apart, and rating them independently is the whole point of the dataset:
+
+- `harm` is BODILY DAMAGE ONLY. A furious woman who screams is `harm` 1. Do not let her fury raise it. Reserve 7 for actions that kill or are likely to.
+- `aggression` is what is done with VOICE AND WORDS. A silent strangling is low. Screaming abuse is high. A word can be 7 on harm and 1 on aggression, or the reverse.
+- `directedness` is only about whether the action LANDS ON SOMETHING. "scream at her" is 7; "scream" is 1; "strangle her" is 7. It says nothing about severity.
+
+So `strangle` is harm 7, aggression 1, directedness 7. `scream` is harm 1, aggression 5, directedness 1. `berate` is harm 1, aggression 6, directedness 7. Rate each independently; do not let one pull the others.
+
+Some fragments are sexual, violent, or racially charged. They are drawn from a corpus being studied for that reason, and an accurate low or high rating is the useful answer in both directions.
+
+Most words will be low on most scales. Do not spread ratings to make a word look interesting.
+
+Write `reading` first: one sentence saying what the completed sentence depicts. Then the numbers."""
+
+
+class SlotRatingENv3(Task):
+    """Three crossing act scales plus `fit`, one call per (prompt, word)."""
+
+    name = "slot_rating_en_v3"
+    schema = SlotRatingV3
+    system_prompt = SYSTEM_PROMPT_V3
+    temperature = 0.0
+    retries = 2
+    model = "deepseek/deepseek-v4-flash"
+    cache_ttl = "24h"
+    usage_log = True
+
+
+# ---------------------------------------------------------------------------
+# v4. SAME THREE AXES; `directedness` REDEFINED AND THE FRAGMENT MADE EXPLICIT.
+# ---------------------------------------------------------------------------
+#
+# v3's grid worked on `harm` and failed on `directedness`, and the cell counts
+# said why before any correlation did: **3 of 65 words landed in a "directed"
+# cell.** The rater scored `kill`, `murder` and `stab` as UNDIRECTED, because it
+# read the question as *is a target named* -- and "She was so furious she wanted
+# to kill" names none. A factor that is constant by construction cannot interact
+# with anything, so the grid collapsed to one dimension.
+#
+# TWO CHANGES, BOTH FROM RH, 2026-08-19:
+#
+#   directedness   now "how likely is this action to be directed AT SOMEONE",
+#                  named or not. `kill` is directed; `weep` is not. The question
+#                  is about the action's normal object, not the fragment's syntax.
+#   the fragment   the prompt now says plainly that the input is an UNFINISHED
+#                  sentence and the word is a CANDIDATE NEXT WORD. v3 showed the
+#                  rater judging the fragment as though it were complete, which is
+#                  what made "wanted to kill" read as objectless.
+#
+# What v3 established and v4 keeps (mass share per cell, 20 pairs, per pair):
+#
+#     LETHAL cell   -0.0888   18/20 DOWN   p=0.0002
+#     NOBODY cell   +0.0717   12/20 up     p=0.053
+#     aggression (rank)  +0.132  17/20 up  p=0.0023
+#
+# harm falls as MASS while aggression rises as RANK: splitting v1's single
+# "physical or emotional harm" dial turned one cancelled null into two
+# significant effects pointing opposite ways.
+#
+# **The movement is NON-MONOTONE in harm** -- the top rung loses, the middle and
+# bottom gain -- which is why per-scale rho on `harm` reads +0.068 (p=0.76) on the
+# very frame where mass-weighted harm falls -0.265 (p=0.017). Report the GRID.
+
+SCALES_V4 = ["harm", "aggression", "directedness", "fit"]
+
+
+class SlotRatingV4(SlotRatingV3):
+    """v3's fields, with `directedness` asked about the action's normal object."""
+
+    directedness: int = Field(
+        ge=1, le=7,
+        description="How likely is this action to be directed AT ANOTHER PERSON -- "
+        "whether or not the fragment names one? Judge the action's normal object, "
+        "not the sentence's syntax: killing, strangling and slapping are things "
+        "done TO someone even when no victim is written down, while weeping, "
+        "vomiting and pacing are not. 1 = never has a human target, 4 = could go "
+        "either way, 7 = almost always done to a person.")
+
+
+SYSTEM_PROMPT_V4 = """You are annotating a lexical dataset for research on how a single word choice changes what a sentence depicts. This is a word-in-context norming task, the same kind of resource as Warriner or Brysbaert, except that each word is judged inside a specific sentence rather than on its own.
+
+**WHAT YOU ARE LOOKING AT.** The input is an UNFINISHED SENTENCE -- a fragment that stops mid-clause -- together with ONE CANDIDATE NEXT WORD. The sentence does not end there and is not meant to. Judge the action the fragment implies once that word is chosen, as the sentence would most naturally continue. Do not treat the fragment plus the word as a complete sentence, and do not penalise a word because the object or the rest of the clause has not been written yet.
+
+So for "She was so furious she wanted to ___" with the word `kill`: the action is killing a person, even though no victim is named. The missing words are missing because the sentence is unfinished, not because the action has no object.
+
+**The question is always what THIS WORD DOES TO THE ACTION, not what the word means on its own.**
+
+The first three scales are meant to come apart, and rating them independently is the whole point of the dataset:
+
+- `harm` is BODILY DAMAGE ONLY. A furious woman who screams is `harm` 1. Do not let her fury raise it. Reserve 7 for actions that kill or are likely to.
+- `aggression` is what is done with VOICE AND WORDS. A silent strangling is low. Screaming abuse is high. A word can be 7 on harm and 1 on aggression, or the reverse.
+- `directedness` is about whether the action normally lands ON A PERSON, named or not. `kill` and `slap` are 7 because they are done to someone. `weep`, `vomit` and `pace` are 1. It says nothing about severity.
+
+So `strangle` is harm 7, aggression 1, directedness 7. `scream` is harm 1, aggression 5, directedness 1 -- unless the frame supplies a target. `berate` is harm 1, aggression 6, directedness 7.
+
+Some fragments are sexual, violent, or racially charged. They are drawn from a corpus being studied for that reason, and an accurate low or high rating is the useful answer in both directions.
+
+Most words will be low on most scales. Do not spread ratings to make a word look interesting.
+
+Write `reading` first: one sentence saying what the completed sentence depicts. Then the numbers."""
+
+
+class SlotRatingENv4(Task):
+    """v3's axes with directedness fixed and the fragment made explicit."""
+
+    name = "slot_rating_en_v4"
+    schema = SlotRatingV4
+    system_prompt = SYSTEM_PROMPT_V4
+    temperature = 0.0
+    retries = 2
+    model = "deepseek/deepseek-v4-flash"
+    cache_ttl = "24h"
+    usage_log = True
