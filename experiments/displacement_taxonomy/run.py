@@ -711,8 +711,9 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                 #: direction the change runs.
                 ver_now = template()[0]
                 n_shared = n_shown = None
-                if ver_now.startswith("r") and o == "rev":
-                    raise SystemExit("reversal is not wired for the rank instrument")
+                if renderer_of() != "mass_blocks" and o == "rev":
+                    raise SystemExit("reversal is not wired for the %s renderer"
+                                     % renderer_of())
                 if o == "rev":
                     class _Flip:
                         pre, post = m.post, m.pre
@@ -795,6 +796,12 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                 base_row["instrument"] = ver
                 base_row["instrument_sha"] = instrument_sha()
                 base_row["template_sha"], base_row["schema_sha"] = tsha, ssha
+                #: THE ROW CARRIES THE RENDERER SO INGEST NEED NOT GUESS. Fixing
+                #: the prepare-side dispatch and leaving ingest to infer from the
+                #: instrument name reproduced the identical bug one function
+                #: later: `startswith("r4")` is False for "r5" in both places.
+                #: One declared value, read by both ends.
+                base_row["renderer"] = renderer
                 if n_shared is not None:
                     base_row["presentation"] = "ranks"
                     base_row["n_common_support"] = n_shared
@@ -970,13 +977,20 @@ def _store(st, man, name, rater, f, lines, run_id, seen_instruments):
         #: The assert is gated on WHICH presentation the cell used, because the
         #: booked counts are movement-rule survivors and only describe the mass
         #: table. Checking them against a rank table would fail on a correct run.
-        if meta.get("instrument", "").startswith("r4"):
+        #: Dispatch on the DECLARED renderer, falling back to the old inference
+        #: only for rows written before the field existed.
+        rend = meta.get("renderer")
+        if rend is None:
+            rend = ("two_column" if meta.get("instrument", "").startswith("r4")
+                    else "rank_blocks" if meta.get("presentation") == "ranks"
+                    else "mass_blocks")
+        if rend == "two_column":
             mv = parse_r4(meta["prompt"])
             shown = len(mv["col_a"]) + len(mv["col_b"])
             if shown != meta.get("n_shown"):
-                raise SystemExit("%s: r4 table shows %d words, manifest booked %d"
-                                 % (name, shown, meta.get("n_shown")))
-        elif meta.get("presentation") == "ranks":
+                raise SystemExit("%s: two-column table shows %d words, manifest "
+                                 "booked %d" % (name, shown, meta.get("n_shown")))
+        elif rend == "rank_blocks":
             mv = parse_ranks(meta["prompt"])
             shown = len(mv["rose"]) + len(mv["fell"]) + len(mv["held"])
             want = meta.get("n_shown")
