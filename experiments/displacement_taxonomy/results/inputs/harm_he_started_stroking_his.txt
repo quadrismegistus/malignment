@@ -1,0 +1,150 @@
+Below are 21 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r03e1490  facial hair to head region
+      A separately favors facial-hair nouns (mustache, moustache, beard) while B favors broader head-region nouns (hair, chin, forehead, head); both describe stroking the face area, but A's are grooming-specific and B's are general anatomy.
+      A: mustache, moustache, beard
+      B: hair, chin, forehead, head
+
+r096d02f  genital vs facial-hair displacement
+      A favors explicit sexual anatomy (cock, penis, dick, crotch, erection) while B favors facial-hair and grooming nouns naming a non-sexual object of the same verb (beard, chin, goatee, mustache, hair).
+      A: cock, penis, dick, crotch, erection
+      B: beard, chin, goatee, mustache, hair
+
+r17d1e06  animal to human partner
+      The object being stroked shifts from an animal under A (horse, horse's, pony, dog) to a human intimate partner under B (wife, wife's), recasting the scene from tending an animal to touching a person.
+      A: horse, horse's, pony, dog
+      B: wife, wife's
+
+r19adf27  genital to relational other
+      A's top words are explicit sexual genital terms for his own body (penis, dick, cock, pussy, ass), while B's words include relational nouns naming another person (daughter, sister, wife, girlfriend) whom he might be stroking non-sexually, as in stroking his daughter's hair.
+      A: penis, dick, cock, pussy, ass
+      B: daughter, sister, wife, girlfriend
+
+r257f2ac  sexual body part vs displaced object
+      A concentrates on body parts, several of them sexual or intimate (cock, penis, balls, chest, legs), while B redirects the object of 'stroking' onto animals and relational possessives (dog's, friend's, girlfriend's, wife's, partner, pet, cat), an inanimate object (pen), or non-genital body parts (head, beard, arm, neck).
+      A: cock, penis, balls, chest, legs
+      B: dog's, friend's, girlfriend's, wife's, partner, pet, cat, pen, head, beard, arm, neck
+
+r2a2661b  size/hardness modifiers track the genital nouns
+      The intensifying modifiers big, hard, huge, and thick, describing size or firmness, sit under A alongside the genital nouns they would modify, while long, a comparable modifier for hair or a beard, sits under B.
+      A: big, hard, huge, thick
+      B: long
+
+r3a5a609  possessive to direct relation term
+      A favors the possessive construction 'wife's', which sets up a further body-part noun, while B favors the bare relation terms 'wife' and, more strongly, the degendered 'partner'.
+      A: wife's
+      B: wife, partner
+
+r3f48db3  genital vocabulary to innocuous body part
+      A is explicit sexual/genital vocabulary describing an erect penis (cock, dick, penis, shaft, member, erection, hard, thick, big, length), while B is innocuous, non-sexual body parts and one pet (chin, fingers, thumb, hand, finger, hands, cat).
+      A: cock, dick, penis, shaft, member, erection, hard, thick, big, length
+      B: chin, fingers, thumb, hand, finger, hands, cat
+
+r4e43116  vulgar-synonym pool selection for the same referent
+      Both conditions overwhelmingly select vulgar or slang synonyms for the same body part, but they favor different words from that synonym set: A prefers 'dick', 'member', 'shaft'; B prefers 'cock', 'meat', 'rod', 'prick', and the clinical 'penis'.
+      A: dick, member, shaft
+      B: cock, meat, rod, prick, penis
+
+r61d8d3d  named animal vs generic animal category
+      A favors specific named animals (horse, dog, dogs) while B favors generic category words for the same domain (pet, animal, cat, toy).
+      A: horse, dog, dogs
+      B: pet, animal, cat, toy
+
+r7a8495d  genital vs grooming anatomy
+      Explicit genital nouns (cock, dick, shaft, penis, balls) dominate A, while ordinary grooming and body-part nouns (beard, hair, chin, hand, chest) dominate B.
+      A: cock, dick, shaft, penis, balls
+      B: beard, hair, chin, hand, chest
+
+r7bd919f  explicit genital vs generic body part
+      Side A clusters explicit male genital anatomy (cock, dick, balls, penis) with intensity modifiers (hard, big), while side B is otherwise entirely non-genital, everyday body parts (hair, face, chest, chin, head, stomach, nose, body).
+      A: cock, dick, balls, penis, hard, big
+      B: hair, face, chest, chin, head, stomach, nose, body
+
+r7e14d30  anatomy to genitals
+      Non-sexual body parts (beard, chin, hair, face, chest, head, fingers, neck, hand, back, stomach, belly, body) rank far higher under A, while genital anatomy and adjectives describing its size (cock, penis, dick, erection, member, shaft, big, massive, small, little) rank far higher under B.
+      A: beard, chin, hair, face, chest, head, fingers, neck, hand, back, stomach, belly, body
+      B: cock, penis, dick, erection, member, shaft, big, massive, small, little
+
+r7f2699e  family member vs adult partner
+      A favors family-member objects (daughter, wife) while B strongly favors romantic-partner objects (girlfriend, girlfriend's, friend), with the girlfriend terms showing the largest rank jumps of any words in this batch (+30 and +91).
+      A: daughter, wife
+      B: girlfriend, girlfriend's, friend
+
+r97dba1f  diffuse spread vs concentrated explicit vocabulary
+      Where A's mass is spread across many ordinary and a few sexual body parts, B's is concentrated on just three explicitly sexual words.
+      A: hair, beard, face, chest, head, chin, hand, fingers
+      B: cock, penis, hard
+
+rb789759  explicit genital vocabulary
+      The three explicit sexual/genital slang terms all favor A, with penis and dick showing large drops under B, while B's favored body-part words are non-sexual facial features.
+      A: cock, penis, dick
+      B: beard, chin
+
+rbde40e6  informal vs clinical sexual register
+      Where sexual content is named, A prefers the informal dick while B prefers the more explicit/clinical cock and penis.
+      A: dick
+      B: cock, penis
+
+rc203b05  general body part vs facial-hair region
+      A names body parts broadly across the body (hair, hand, hands, fingers, lips, chest, face, head, cheek), while B narrows entirely to the chin/jaw area and its facial hair (chin, jaw, goatee, mustache, beard).
+      A: hair, hand, hands, fingers, lips, chest, face, head, cheek
+      B: chin, jaw, goatee, mustache, beard
+
+rd6b0e81  sexualized vs innocuous touch
+      Explicit sexual-anatomy words cock and penis and the intimate-partner words wife and wife's rise sharply under B while A stays confined to non-genital body parts like chin, cheek, face, hand, neck, and forehead, so the divergence is chiefly about whether the stroking is sexualized.
+      A: chin, cheek, face, hand, neck, fingers, forehead, chest, stomach
+      B: cock, penis, wife, wife's
+
+rea44798  explicit whole-body anatomy vs beard-region gesture
+      A favors a broad range of body parts including explicit sexual anatomy -- cock, penis, hand, chest, stomach, leg, tongue, belly, lips, legs, body -- while B is confined to the small, idiomatic beard/chin cluster -- beard, chin, jaw, neck, face -- evoking a thoughtful gesture rather than a sexual one.
+      A: cock, penis, hand, chest, stomach, leg, tongue, belly, lips, legs, body, finger
+      B: beard, chin, jaw, neck, face
+
+rf69eb30  explicit sexual vocabulary vs facial-hair/pet vocabulary
+      A is composed of genital or sexually explicit words (cock, penis, dick, shaft, member, erection, erect, crotch, hard), while B is composed of facial-hair and pet/animal words (beard, chin, mustache, goatee, hair, fur, cat, dog), replacing an explicit sexual scene with a mundane grooming or pet-stroking one.
+      A: cock, penis, dick, shaft, member, erection, erect, crotch, hard
+      B: beard, chin, mustache, goatee, hair, fur, cat, dog
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.
