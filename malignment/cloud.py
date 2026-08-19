@@ -109,6 +109,29 @@ def vastai(*args, capture=True):
     return (r.stdout or "").strip() if capture else ""
 
 
+def destroy_verified(iid, tries=6, wait=5):
+    """Destroy and CONFIRM it is gone. Returns True only if the id disappears.
+
+    **`vastai destroy` PROMPTS.** Run without a tty it prints `Aborted.` and
+    exits 0, and with `capture=False` nothing checks. On 2026-08-19 the launcher
+    reported "instance destroyed", cleared its state file, and left a box
+    `loading` at $0.68/hr that nothing was tracking -- the exact orphan the state
+    file exists to prevent, produced BY the code that writes it.
+    """
+    vastai("destroy", "instance", str(iid), "--explain") if False else None
+    subprocess.run(["vastai", "destroy", "instance", str(iid)],
+                   input="y\n", capture_output=True, text=True)
+    for _ in range(tries):
+        try:
+            live = {str(i.get("id")) for i in json.loads(vastai("show", "instances", "--raw") or "[]")}
+        except Exception:                                       # noqa: BLE001
+            live = set()
+        if str(iid) not in live:
+            return True
+        time.sleep(wait)
+    return False
+
+
 def _blocked():
     try:
         with open(BLOCKLIST, encoding="utf-8") as fh:
@@ -186,13 +209,40 @@ def offers(name, limit=8):
     return out[:limit]
 
 
-def verify_reachable(host, port, tries=3, wait=10):
-    """(reachable, route). A box that never answers is a STATE, not a race.
+def verify_reachable(host, port, tries=24, wait=15, alt_host=None):
+    """A box that never answers is a STATE, not a race -- but BOOT IS A RACE.
 
-    The runbook's discriminator: retrying is correct for a RACE and never for a
-    STATE. Three tries with a wait covers boot; beyond that the machine is not
-    coming up and the answer is another offer.
+    **CORRECTED 2026-08-19, having destroyed a healthy box for it.** This said
+    three tries with a 10 s wait "covers boot". It does not: 30 seconds after
+    vast.ai publishes an endpoint, sshd is usually not up. RH: *"it often takes
+    a few minutes."* The pilot launch condemned a machine that was still
+    `loading`, blocklisted it, and tried to destroy it -- the runbook's own rule
+    applied to the wrong half, because the discriminator is whether the thing
+    can still change, and a booting box can.
+
+    24 x 15 s = six minutes, which is boot plus margin. A box silent for six
+    minutes is a state; one silent for thirty seconds is starting up.
+
+    `alt_host` is the PUBLIC IP. RH: *"you often need to switch to the ip rather
+    than the domain name"* -- the ssh9.vast.ai style proxy host resolves and
+    answers inconsistently, and the IP is frequently reachable when the name is
+    not. Both are tried each round, so whichever works is found without a second
+    policy.
     """
+    hosts = [h for h in (host, alt_host) if h]
+    for _ in range(tries):
+        for h in hosts:
+            r = subprocess.run(["ssh", "-o", "StrictHostKeyChecking=no",
+                                "-o", "UserKnownHostsFile=/dev/null",
+                                "-o", "LogLevel=ERROR", "-o", "ConnectTimeout=10",
+                                "-p", str(port), "root@%s" % h, "true"],
+                               capture_output=True)
+            if r.returncode == 0:
+                return h
+        time.sleep(wait)
+    return None
+
+def _unused_verify_reachable(host, port, tries=3, wait=10):
     for _ in range(tries):
         r = subprocess.run(["ssh", "-o", "StrictHostKeyChecking=no",
                             "-o", "UserKnownHostsFile=/dev/null",
@@ -293,9 +343,12 @@ def main():
         st = state()
         if not st.get("instance_id"):
             print("  nothing to stop"); return 0
-        vastai("destroy", "instance", str(st["instance_id"]), capture=False)
+        if not destroy_verified(st["instance_id"]):
+            print("  DESTROY DID NOT TAKE -- %s is still listed and billing"
+                  % st["instance_id"])
+            return 1
         state({})
-        print("  destroyed %s" % st["instance_id"])
+        print("  destroyed %s (verified gone)" % st["instance_id"])
         return 0
 
     if a.cmd == "launch":

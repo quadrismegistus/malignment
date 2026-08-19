@@ -228,17 +228,24 @@ def execute(b, models, roots, venv, a):
         return 0
 
     # ---- reachable ---------------------------------------------------------
-    host, port = _wait_ssh(cloud, iid)
-    st.update({"ssh_host": host, "ssh_port": port}); cloud.state(st)
-    if not cloud.verify_reachable(host, port):
+    host, port, ip = _wait_ssh(cloud, iid)
+    st.update({"ssh_host": host, "ssh_port": port, "public_ip": ip}); cloud.state(st)
+    #: Tries the proxy name AND the public IP, for six minutes. Boot is a race.
+    working = cloud.verify_reachable(host, port, alt_host=ip)
+    if working and working != host:
+        print("  note        proxy host did not answer; using the IP %s" % working)
+        st["ssh_host"] = working; cloud.state(st)
+    if not working:
         #: **A BOX THAT NEVER ANSWERS IS A STATE, NOT A RACE.** The runbook's
         #: rule, and the L2 fleet lost 3 of 14 to retrying one. Blocklist the
         #: MACHINE so the next offer query cannot hand it back, then stop.
-        cloud.blocklist(best.get("machine_id"), "ssh never came up after create")
-        cloud.vastai("destroy", "instance", str(iid), capture=False)
-        cloud.state({})
-        raise SystemExit("  UNREACHABLE -- machine blocklisted, instance destroyed. "
-                         "Re-run for another offer.")
+        cloud.blocklist(best.get("machine_id"), "ssh silent for 6 min after create")
+        if cloud.destroy_verified(iid):
+            cloud.state({})
+            raise SystemExit("  UNREACHABLE after 6 min -- machine blocklisted, "
+                             "instance destroyed and CONFIRMED gone.")
+        _billing(cloud, iid, "unreachable AND destroy did not take")
+        raise SystemExit("  UNREACHABLE and still billing -- see above.")
     print("  reachable   %s:%s" % (host, port))
     if a.stop_after == "reachable":
         return 0
@@ -247,7 +254,14 @@ def execute(b, models, roots, venv, a):
     print("  provision   repo + venv %s" % venv)
     r = cloud.ssh_run(st, PROVISION % {"venv": venv})
     if r.returncode:
-        raise SystemExit("  provision FAILED rc=%d\n%s" % (r.returncode, (r.stderr or "")[-600:]))
+        #: **A FAILURE AFTER `create` LEAVES A BOX BILLING.** Raising here without
+        #: saying so is the casualty pattern from the other side: not a box that
+        #: looks alive while doing nothing, but a box nobody remembers renting.
+        #: The id and the destroy command go in the message, and `state()` still
+        #: holds it, so `malign cloud stop` finds it too.
+        _billing(cloud, iid, "provision failed rc=%d" % r.returncode)
+        raise SystemExit("  provision FAILED rc=%d\n%s"
+                         % (r.returncode, (r.stderr or "")[-600:]))
     if a.stop_after == "provision":
         return 0
 
@@ -312,9 +326,11 @@ def execute(b, models, roots, venv, a):
         return 0 if ok else 1
 
     # ---- destroy -----------------------------------------------------------
-    cloud.vastai("destroy", "instance", str(iid), capture=False)
+    if not cloud.destroy_verified(iid):
+        _billing(cloud, iid, "verification PASSED but destroy did not take")
+        return 1
     cloud.state({})
-    print("  destroyed   %s  (verified byte counts first)" % iid)
+    print("  destroyed   %s  (byte counts verified first, destroy CONFIRMED)" % iid)
     return 0
 
 
@@ -328,6 +344,19 @@ python -m pip -q install uv 2>/dev/null || true
 ./%(venv)s/bin/pip -q install -r requirements.txt
 ./%(venv)s/bin/python -c "import torch,transformers;print('torch',torch.__version__,'transformers',transformers.__version__)"
 """.replace("%(repo)s", "https://github.com/rj416/malignment.git")
+
+
+def _billing(cloud, iid, why):
+    """Say loudly that money is still running. Never destroy silently on error.
+
+    Destroying on a failure would also destroy the evidence, and RH's standing
+    gate is that a box is destroyed only after byte-level verification of what it
+    wrote. So the rule is: report, keep state(), let a human look.
+    """
+    print("\n  *** INSTANCE %s IS STILL BILLING *** (%s)" % (iid, why))
+    print("  inspect:  vastai ssh-url %s" % iid)
+    print("  destroy:  vastai destroy instance %s" % iid)
+    print("  state file still holds it, so `malign cloud stop` will find it.")
 
 
 def _contract_id(raw):
@@ -355,7 +384,7 @@ def _wait_ssh(cloud, iid, tries=30, wait=10):
     for _ in range(tries):
         for i in json.loads(cloud.vastai("show", "instances", "--raw") or "[]"):
             if str(i.get("id")) == str(iid) and i.get("ssh_host"):
-                return i["ssh_host"], i.get("ssh_port")
+                return i["ssh_host"], i.get("ssh_port"), i.get("public_ipaddr")
         time.sleep(wait)
     raise SystemExit("  vast.ai never published an ssh endpoint for %s" % iid)
 
