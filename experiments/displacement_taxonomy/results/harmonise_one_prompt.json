@@ -1,0 +1,76 @@
+{
+ "prompt": "He was written up for the third time this month, so he decided to",
+ "mapping": {
+  "rb3e40f1": {
+   "pair": "Yi-1.5-9B-Chat",
+   "index": 0,
+   "confidence": "high"
+  },
+  "r3f968a7": {
+   "pair": "Baichuan2-7B-Chat",
+   "index": 0,
+   "confidence": "medium"
+  },
+  "r6b58c8f": {
+   "pair": "rwkv-raven-7b",
+   "index": 0,
+   "confidence": "medium"
+  },
+  "rd4ca354": {
+   "pair": "salamandra-7b-instruct",
+   "index": 0,
+   "confidence": "high"
+  },
+  "r7edaf2e": {
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "index": 0,
+   "confidence": "high"
+  },
+  "r41083a9": {
+   "pair": "RedPajama-INCITE-7B-Chat",
+   "index": 0,
+   "confidence": "high"
+  },
+  "r5dcda9f": {
+   "pair": "SmolLM3-3B",
+   "index": 0,
+   "confidence": "medium"
+  },
+  "rb78dfc1": {
+   "pair": "Olmo-3-7B-Instruct",
+   "index": 0,
+   "confidence": "high"
+  },
+  "ra9d21c2": {
+   "pair": "Olmo-3-7B-Instruct",
+   "index": 1,
+   "confidence": "medium"
+  },
+  "r7ff5dfe": {
+   "pair": "bloomz-7b1",
+   "index": 0,
+   "confidence": "medium"
+  },
+  "r31bfd4e": {
+   "pair": "Llama-3.1-8B-Instruct",
+   "index": 0,
+   "confidence": "medium"
+  },
+  "r22d0464": {
+   "pair": "Qwen3-8B",
+   "index": 0,
+   "confidence": "medium"
+  },
+  "ra4e5703": {
+   "pair": "AmberSafe",
+   "index": 0,
+   "confidence": "high"
+  },
+  "r43c8113": {
+   "pair": "AmberSafe",
+   "index": 1,
+   "confidence": "medium"
+  }
+ },
+ "n": 14
+}

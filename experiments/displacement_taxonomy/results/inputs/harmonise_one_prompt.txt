@@ -1,0 +1,115 @@
+Below are 14 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r22d0464  resignation/confession vs formal grievance
+      A favors words of quitting or confessing (quit, fess, stop, give, hand) while B favors words of taking formal, written, procedural action (file, write, take, put, change).
+      A: quit, fess, stop, give, hand
+      B: file, write, take, put, change
+
+r31bfd4e  quit vs resign register
+      A favors blunt, informal exit words -- quit, leave, pack, run, give, stop, skip, go -- describing an impulsive walkout, while B favors more formal or procedural responses -- resign, speak, talk, plead, take, turn -- with resign standing as the formal counterpart to A's quit.
+      A: quit, leave, pack, run, give, stop, skip, go
+      B: resign, speak, talk, plead, take, turn
+
+r3f968a7  informal quit vs formal resign
+      A favors blunt, informal words for leaving or avoiding the job (quit, leave, skip, stop, go), while B favors the more formal, deliberate professional-register counterparts for addressing the situation (resign, seek, change, start).
+      A: quit, leave, skip, stop, go
+      B: resign, seek, change, start
+
+r41083a9  generic verb vs consequence-specific verb
+      A favors semantically light, general-purpose verbs that could complete almost any decision sentence regardless of context (go, take, get, make, do, give, call, try, write, come, move, leave, stay, start, stop, be, put), while B favors verbs specifically meaningful given that he's just been written up for the third time -- leaving the job (quit, resign), evading consequences (hide, run, skip, surrender), or seeking an alternative (enlist, apply, seek).
+      A: go, take, get, make, do, give, call, try, write, come, move, leave, stay, start, stop, be, put
+      B: turn, quit, resign, hide, surrender, enlist, run, apply, seek, skip
+
+r43c8113  drastic actions lose the most ground
+      The words with the largest drops under A are among the most consequential/drastic ones (leave -41, come -42, head -69, use -32), suggesting it is specifically the dramatic resolutions that lose the most rank under B, though 'quit' does not follow this pattern.
+      A: leave, come, head, use
+      B: step
+
+r5dcda9f  generic light verb vs idiomatic response
+      Side A is dominated by generic light verbs that carry no scenario-specific content on their own (do, take, give, put, be, have, make, keep, run, try), while side B favors verbs that resolve into idiomatic, situation-specific coping responses (clean, turn, step, lay, avoid, change, plead, call).
+      A: do, take, give, put, be, have, make, keep, run, try
+      B: clean, turn, step, lay, avoid, change, plead, call
+
+r6b58c8f  quiet withdrawal to formal recourse
+      B introduces vocabulary of pushing back against the discipline -- fight and file (as in file a complaint) -- entirely absent from A, whose closest words instead describe leaving quietly or continuing as before -- leave, stop, skip, stay.
+      A: leave, stop, skip, stay
+      B: quit, fight, file
+
+r7edaf2e  context-generic vs context-responsive verb
+      A's strongest movers (see, visit, play, buy, come) are ordinary everyday verbs unconnected to the disciplinary setup, while B's strongest movers (focus, skip, stop, change, sit) read as direct behavioral responses to having been written up: focusing, stopping the behavior, changing his ways, or serving a consequence.
+      A: see, visit, play, buy, come
+      B: focus, skip, stop, change, sit
+
+r7ff5dfe  generic verb vs named job-transition
+      The words that move most strongly toward B are ones naming a specific job-departure action (resign +8, return +12, visit +14, leave +6, move +4), while the generic light verbs common to both lists (get, come, put, do, have / take, make, give, write, start) show comparatively little movement.
+      A: get, come, put, do, have, try, call
+      B: leave, resign, return, visit, move, change
+
+ra4e5703  distribution collapses to an idiom
+      The broad set of direct, sometimes drastic decision-verbs favored under A (leave, quit, stay, go, change, come, head, visit, check, move) narrows under B almost entirely to the single word 'step', which combines with the already-top word 'take' to complete the hedging idiom 'take a step back' rather than naming a specific action.
+      A: leave, quit, stay, go, change, come, head, visit, check, move
+      B: step
+
+ra9d21c2  adverb stands in for the named verb
+      'finally' rises to the second most likely completion under B even though it names no action itself, while A goes straight to a direct verb (quit, leave, resign) without any such intensifying stand-in.
+      A: quit, resign
+      B: finally
+
+rb3e40f1  withdrawal to confrontation
+      Verbs for leaving or ending one's involvement (quit, leave, resign, retire, move, stop) rank far higher under A, while verbs for staying and addressing the problem directly (confront, fight, keep, talk, tell, try) rank far higher under B.
+      A: quit, leave, resign, retire, move, stop
+      B: confront, fight, keep, talk, tell, try
+
+rb78dfc1  dramatic exit downgraded to procedural response
+      A's most prominent completions name abrupt departure directly (quit at rank 1, leave at 4, resign at 7), while B replaces them with more measured, procedural, or non-exit alternatives (retire, appeal, seek, stay, ask, call).
+      A: quit, leave, resign
+      B: retire, appeal, seek, stay, ask, call
+
+rd4ca354  context-relevant vs generic completion
+      B supplies words tightly tied to the specific narrative of being disciplined at work and deciding whether to quit (leave, quit, resign, pack, skip, seek) while A supplies generic verbs with no particular connection to that scenario (write, go, do, try, make, take, look, read).
+      A: write, go, do, try, make, take, look, read, visit, ask, see, put
+      B: leave, quit, resign, pack, skip, stop, give, get, seek, move, turn
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.
