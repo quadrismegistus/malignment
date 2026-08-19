@@ -59,12 +59,15 @@ WORDS:
 
 Answer these, in order.
 
-1. RELATIONS. State every relation you can defend and no more: a group of words
-   on one side, a group on the other, and what connects them. There is no target
-   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
-   difference does not form a relation you would defend to someone who disagreed,
-   return an empty list and say so in `notes`. Do not offer a relation you would
-   withdraw if the measurement were repeated. For each:
+1. RELATIONS. State the relations you find: a group of words on one side, a group
+   on the other, and what connects them. There is no target number. ONE IS THE
+   COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the difference does not form
+   any relation you could state, return an empty list and say so in `notes`.
+
+   A relation you would not defend if the measurement were repeated should be
+   stated and marked `low`, not suppressed. Marking it is more informative than
+   leaving it out, and leaving it out is what produces a list of three confident
+   relations where only one was confident. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
