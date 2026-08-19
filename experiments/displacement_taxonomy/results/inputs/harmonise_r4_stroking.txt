@@ -1,0 +1,340 @@
+Below are 59 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r0218ebe  Periphrasis against plain naming
+      The A side prefers oblique names for the male genitals, the shaft-and-member sort of word that names the organ by a part or by a euphemistic generality, while the B side prefers the three ordinary blunt names for the same organ, so the two sides differ in register while pointing at the same referent.
+      A: shaft, member
+      B: penis, cock, dick
+
+r0425b6b  Genitals enter the field
+      Everything anatomical that A favours is non-genital and mostly visible in public (chin, head, face, cheek, neck, forehead, chest, stomach, hand, hands, fingers), whereas under B two genital nouns, cock and penis, climb from the sixties and thirties into the top twenty, so B admits a class of object that appears nowhere near the top of A's list.
+      A: chin, head, face, cheek, neck, forehead, chest, stomach, hand, hands, fingers
+      B: cock, penis
+
+r0abc035  The verb changes trade
+      B promotes words that select a different sense of "stroking" altogether — the domestic animal one pets, which climbs more than a hundred places from near-invisibility to ninth, and the chin one rubs as a gesture of deliberation, up seventeen — while every word A leads with keeps the verb in its masturbatory sense.
+      A: cock, dick, penis, shaft, erection
+      B: cat, chin
+
+r0b53cf2  Alternative referent eviction
+      The only two completions naming the agent's hand rather than his genitals fall further under B than any other word in the table, from sixth and tenth down to twenty-fifth and thirty-fifth, while every word B favors names the same single referent.
+      A: hand, fingers
+      B: cock, meat, penis, rod, prick
+
+r0c0f062  Tumescence over organ
+      Under B the two words that name the erect state itself, "erection" and "erect", make the two largest gains in the whole set (sixteen and twenty-six places, one of them arriving from position 39), while the plain nouns for the organ, "dick" and "penis", and the colloquial descriptors of its size and firmness, "big" and "hard", all fall.
+      A: dick, penis, big, hard
+      B: erection, erect
+
+r0eed192  Soft surfaces against bristle
+      A keeps live the surfaces on which stroking reads as intimate contact, lips, chest, cheek and hair, while B's surfaces are bone and coarse hair at the jawline, where the same verb reads as a mannerism rather than a caress.
+      A: lips, chest, cheek, hair
+      B: chin, jaw, beard, goatee, mustache
+
+r1584282  Stroking limb as object
+      A keeps the limb that performs the stroking available as the thing stroked, since hand, hands and fingers all sit in A's list and all lose ground under B, while no word on B's side names a limb or any part of one.
+      A: hand, hands, fingers
+      B: chin, beard, goatee, jaw, mustache
+
+r19bfd46  Beard-gesture convergence
+      B's side is confined to the lower face and the hair growing on it, the exact anatomy of the conventional thoughtful beard-stroke, while A's side spreads across head, torso and limbs without settling on any one habitual gesture.
+      A: hair, hand, hands, fingers, lips, chest, face, head, cheek
+      B: chin, beard, goatee, mustache, jaw
+
+r2318021  Beard-line convergence
+      The words B favours name the lower face and the hair that grows on it, chin and jaw and beard and goatee, whereas the words A favours name sites away from that region, the hair on top of the head, the head itself, the chest, and the hand with its fingers.
+      A: hair, hand, hands, fingers, chest, head
+      B: chin, jaw, goatee, beard
+
+r2b27d46  Deferred noun, opposite loading
+      Both sides carry words that cannot end the sentence and demand a further noun, but A's three are tactile and dimensional adjectives that have already fixed an erotic object before that noun arrives, while B's single such word is a bare possessive intensifier that fixes nothing at all.
+      A: hard, big, thick
+      B: own
+
+r2ddd79c  Genital object to gestural object
+      Under A the words carrying the difference name the male genitals directly or by euphemism, together with the adjectives that make them erotic (hardness, bulk, thickness, extent), while under B they name the chin and the hand with its digits, the parts a man touches when stroking himself absently or while thinking.
+      A: cock, dick, penis, shaft, member, erection, length, hard, big, thick
+      B: chin, fingers, thumb, hand, finger, hands
+
+r2e4b6cb  Genitals to surfaces
+      Every explicitly genital or crude anatomical noun in the set falls sharply under B, and the high positions they vacate are taken by neutral, publicly touchable surfaces of the head and torso.
+      A: penis, dick, cock, pussy, ass
+      B: head, chest, chin, forehead, arm
+
+r2e9478e  Tail synonym promotion
+      Three coarse or figurative names for the genitals that sit in A's tail at ranks twenty-four, nineteen and seventeen move into the middle of B's list, roughly into the band vacated by the two hand words and by the euphemism A ranks seventh.
+      A: hand, fingers, member
+      B: meat, rod, prick
+
+r2ee8939  Household hand, outside tie
+      A reaches for what is his in the most immediate sense, his own body and the women of his household (nose, fingers, wife, daughter), whereas B reaches for ties that are elective or held at one remove (girlfriend, friend, girlfriend's, son's).
+      A: nose, fingers, wife, daughter
+      B: girlfriend, friend, girlfriend's, son's
+
+r2f5bba3  same organ, rival slang
+      The two vulgar names for one and the same referent split across the conditions, dick favoured under A and cock under B, so this difference falls between synonyms rather than between an explicit word and a euphemism.
+      A: dick
+      B: cock
+
+r307a0f9  Possession passed onward
+      The two largest movers into B are genitives that hand the possession to a third party instead of completing it (girlfriend's, son's), joined by words that hold the head noun off a further step (own, new), while A's leading words are the possessed noun arriving directly (dog, horse, nose, wife).
+      A: dog, horse, nose, wife
+      B: girlfriend's, son's, own, new
+
+r3430e9b  genital rank collapse
+      The three nouns for male genitals all sit on the A side, and the two that were already lower in the ranking fall ten and thirty-seven places under B, while the positions they vacate are taken by the words for facial hair and the lower face that hold or improve the top of the B list.
+      A: dick, penis, cock
+      B: beard, chin
+
+r3926a04  genital vocabulary recedes
+      Every explicitly sexual or vulgar noun appearing in either list -- penis, dick, cock, pussy, ass -- sits on the A side and drops under B, several of them steeply, while B contains no genital or obscene word whatever and fills its highest places with plain body parts such as head, chest, chin, and forehead.
+      A: penis, dick, cock, pussy, ass
+      B: head, chest, chin, forehead
+
+r4debf98  one hand, not two
+      B's body-part preferences are the single manipulating limb and its components in the singular, hand, thumb, finger and arm, against A's hands, the same noun in the paired plural form.
+      A: hands
+      B: hand, thumb, finger, arm
+
+r50ae50d  Hand leaves his own body
+      The only two words naming a part of the man's own body, nose and fingers, are both on A's side and both fall under B (-13 and -7), and B's side contains no body part whatever, so the reflexive reading in which he strokes something of his own person survives only under A.
+      A: nose, fingers
+      B: (none)
+
+r53a01e6  Spelling splits a referent
+      The same facial hair appears under both spellings and the two spellings go opposite ways, moustache holding rank 15 in both conditions while mustache rises from 20 to 6, so at least part of the difference between the conditions is orthographic register and not a difference about what is being stroked.
+      A: moustache
+      B: mustache
+
+r58de36e  Oblique versus plain naming
+      The words that name the organ by figure, shaft and member, fall on the A side, while the three that name it outright, cock, dick and penis, fall on the B side, even though all five sit at identical ranks under both conditions.
+      A: shaft, member
+      B: cock, dick, penis
+
+r5c08967  Person, not part
+      The bare relational nouns that let the sentence end on a whole person rise under B, one climbing twenty-eight places from 36th to 8th and the other by one, while the possessive form of that same spouse-noun, which cannot end the sentence and must hand off to an anatomical word, falls thirty-four places.
+      A: wife's
+      B: partner, wife
+
+r5c3b9e4  Qualities before objects
+      A's list contains four words that do not name the thing stroked but commit in advance to its state or dimension — the adjective for rigidity, the two adjectives for girth and bulk, and the abstract noun for extent — and these are among the heaviest fallers, whereas B's only comparable pre-noun word is the possessive intensifier, which specifies nothing at all about what follows.
+      A: hard, big, thick, length
+      B: own
+
+r5dca42e  Plural-to-singular hand
+      The words for the hand and its parts stand in the plural under A and in the singular under B, with the two forms of the same body part trading places in the ranking.
+      A: fingers, hands
+      B: hand
+
+r5f9c498  The hand that strokes
+      Only A promotes the parts that perform stroking rather than receive it, so that hand, hands and fingers appear as completions of a verb whose instrument they would ordinarily be, whereas every word B favours is a surface that can only be touched.
+      A: hand, hands, fingers
+      B: chin, beard, goatee, jaw
+
+r6296cbc  deferred head noun
+      All four words that name no body part and instead postpone one, the adverbial way, the possessive intensifier own, and the prenominal adjectives long and big, sit on the A side, whereas every word B favours (hand, thumb, finger, cock, beard, arm) is a bare noun that closes the phrase at once.
+      A: way, own, long, big
+      B: hand, thumb, finger, cock, beard, arm
+
+r6498625  Singular hand parts rise
+      The singular parts of the hand and arm cluster under B and account for all three of the largest upward moves in the table (hand, thumb and arm each gain two places, with finger alongside them), whereas the plural form of that same body part, hands, sits on A's side.
+      A: hands
+      B: hand, thumb, finger, arm
+
+r6734f1b  The innocent reading rises
+      All the visible movement happens among body parts that are not the genitals: hand drops three places and fingers one under B, while chin, the completion that turns the fragment into a gesture of thought rather than a sexual act, jumps fifteen places into the top ten.
+      A: hand, fingers
+      B: chin
+
+r67a77be  Part becomes person
+      Everything favoured under A is a piece of a body, whereas under B four words naming whole people related to the subject climb into the top fifteen, so what is being stroked shifts from an anatomical part to another human being.
+      A: penis, beard, hand, belly, back, neck, fingers
+      B: daughter, sister, wife, girlfriend
+
+r6825bbf  Big falls are the coarse ones
+      The size of the fall tracks how coarse the word is, with the crude anatomical terms dropping twenty to forty-three places (pussy -43, dick and fingers -27, ass -23) while the bland body parts on the same side barely move (neck 0, belly -2, face -2, beard -1), so A's advantage is concentrated in the explicit vocabulary rather than spread across body words generally.
+      A: pussy, dick, ass, cock, penis
+      B: neck, belly, face, beard, back
+
+r685c15f  Jawline against everywhere
+      Every word B favors names a site on the lower head or jawline that a hand can rest on in the conventional pose of thought (chin, beard, jaw, face, neck), whereas the words A favors are distributed over the trunk, the limbs and the extremities (chest, stomach, belly, leg, legs, body, hand, hands, finger).
+      A: chest, stomach, belly, leg, legs, body, hand, hands, finger
+      B: chin, beard, jaw, face, neck
+
+r687401c  Genital nouns sink
+      Every word in either list that names a penis sits on A's side, and two of the three fall steeply under B (dick from 15th to 52nd, penis from 8th to 18th) alongside the possessive naming a spouse's unstated body part, which drops 34 places, while B's list contains no anatomical term below the chin at all.
+      A: dick, penis, cock, wife's
+      B: beard, chin
+
+r6ad15f2  the vanishing possessive
+      The possessive form of the spouse-noun, which would require a further body part after it, falls thirty-four places under B, while the same spouse-noun standing alone as the whole completion holds its rank and a relationship-neutral word for that same person climbs twenty-eight places into the top ten.
+      A: wife's
+      B: wife, partner
+
+r6bc4473  Genitals to extremities
+      Every word A ranks at the top names the male genitals — two vulgar names, one clinical, two euphemisms of the shaft-and-member sort, and the noun for the erect state itself — while B's list replaces all of them with the hand and its parts (singular and plural hand, singular and plural finger, thumb) plus the chin, body parts that carry no sexual reference and that a person can stroke in public.
+      A: cock, dick, penis, shaft, member, erection
+      B: fingers, hand, thumb, finger, hands, chin
+
+r81192d7  Latinate arousal upgrade
+      Under B the erect state is named by its Latinate noun and adjective, which make the two largest moves anywhere in the set, while under A the same state is carried by the plain everyday adjectives for size and firmness.
+      A: big, hard
+      B: erection, erect
+
+r830a6d0  Modifier slot versus noun slot
+      Every word in the comparison that does not name a body part sits on the A side, whether it is a pre-nominal modifier that postpones the noun (own, long, big) or an idiomatic completion that never supplies one (way), while B's list without exception names a body part outright (hand, thumb, finger, cock, beard, arm).
+      A: own, long, big, way
+      B: hand, thumb, finger, cock, beard, arm
+
+r8b6012c  The idiom that resurfaces
+      The single large movement in the table belongs to the one completion that reads the fragment as an ordinary non-sexual gesture, the chin one strokes while thinking, which rises fifteen places under B, whereas the other non-genital body parts on the A side, the hand and its fingers, drift slightly downward.
+      A: hand, fingers
+      B: chin
+
+r8cd978b  Hands leave the tail
+      The only two words in the set that name a body part other than the penis, hand and fingers, are also the two words that fall furthest under B, from 6th to 25th and from 10th to 35th, and the middle ranks they vacate are occupied under B by figurative names for the penis: meat, rod and prick.
+      A: hand, fingers
+      B: meat, rod, prick
+
+r916a90e  Named beast, bare class
+      Under A the creature is named by its species and even its number (horse, dogs, and the unmoved dog), while under B the same slot is filled by the creature's role or category and by an object belonging to that role (pet, animal, toy).
+      A: horse, dogs, dog
+      B: pet, animal, toy
+
+r945dd72  Jawline against body
+      Every word the B measurement favours names the lower face or its immediate border (beard, chin, jaw, neck, face), while the words A favours spread across the torso, limbs and hands (chest, stomach, belly, leg, legs, body, hand, hands, finger), so the difference is between a gesture confined to the jawline and one that can land anywhere on the body.
+      A: chest, stomach, belly, leg, legs, body, hand, hands, finger
+      B: beard, chin, jaw, neck, face
+
+r949c201  Genitals only under A
+      The two explicitly genital words in the display, cock and penis, sit in the A list and have no counterpart anywhere in the B list, and they carry two of the largest falls shown (-32 and -72, the largest single move in the display), while none of the five words B favours is sexually explicit.
+      A: cock, penis
+      B: beard, chin, jaw, neck, face
+
+racd2c95  possession turns human
+      B raises four words that name another person -- daughter, sister, wife, girlfriend -- so that "his" possesses a relative or partner rather than a part of himself, whereas every A word apart from the bare modifiers names a part of the subject's own body.
+      A: penis, hand, hands, fingers, belly, back, neck, face, legs, beard
+      B: daughter, sister, wife, girlfriend
+
+rb4a774e  Demotion, not promotion
+      B's advantage at the top is held rather than won, since chin and beard occupy ranks one and two under both conditions and face and neck gain only five and six places, while the words on A's side move down by eight to seventy-two places, so the difference between the conditions is mostly the sinking of the body-wide options beneath a top that never moved.
+      A: penis, body, right, leg, belly, legs, tongue, stomach
+      B: chin, beard, face, neck
+
+rb7620e8  Animal gives way to spouse
+      The words that make the stroked thing an animal or an animal's part fall a long way under B (horse's 10 to 84, pony 16 to 65, dog 19 to 30), and the words that make it another human being rise by a comparable amount (wife 13 to 2, wife's 25 to 9), so the thing under his hand changes from a mount or a pet to his partner.
+      A: horse's, pony, dog
+      B: wife, wife's
+
+rb801b57  Genitals enter the list
+      The only two words naming genitals rise steeply under B, cock from 61 to 19 and penis from 36 to 14, so that both land inside B's top twenty, while every part of the body that A favours is one that can be touched in company, the chin, cheek, forehead, neck, chest, stomach and face, and no sexual term appears anywhere on the A side.
+      A: chin, cheek, forehead, neck, chest, stomach, face
+      B: cock, penis
+
+rb9bde02  Instrument becomes object
+      Under A the completion names a body part that the hand acts upon, whereas five of B's eight words name the stroking hand itself, its plural, and two of its digits, so that under B the verb folds back onto the very instrument that would have performed it.
+      A: cock, dick, penis, shaft, member, erection, chest
+      B: fingers, thumb, hand, finger, hands
+
+rbcf518f  facial hair to bare head
+      The three facial-hair words -- beard and both spellings of mustache -- are all on the A side, with moustache falling thirty-two places, while the hair-adjacent words B favours are the bare scalp and face regions, head, forehead, and chin, so the grooming-a-beard reading recedes and a hand-on-the-head reading rises.
+      A: beard, mustache, moustache
+      B: head, forehead, chin
+
+rbd2ce59  Genital nouns fall furthest
+      The two words naming male genitals show the two largest single displacements toward A in the list, penis dropping seventy-two places and cock thirty-two, and nothing on B's side names a sexual part of the body at all.
+      A: penis, cock
+      B: chin, beard, jaw, face, neck
+
+rc1f10f2  Ownership handed onward
+      The only two apostrophe-s forms anywhere in the display, girlfriend's and son's, both rise under B and account for the two largest upward moves in the set (+91 and +15), so that under B the completion increasingly inserts a second owner between "his" and the thing eventually touched, whereas A's side contains no genitive form at all.
+      A: (none)
+      B: girlfriend's, son's
+
+rc695189  The head is fixed
+      The five likeliest completions are the same five words under both conditions and in nearly the same order (cock 1 to 1, dick 2 to 3, penis 3 to 2, shaft 4 to 4, hard 5 to 5), so nothing that differs between the conditions touches the front of the field: every word moving more than six places stands at rank 10 or worse in at least one of the two conditions.
+      A: dick, shaft, hard
+      B: cock, penis
+
+rc860769  Manual plurals fall
+      Both plural words for the hand or its parts, "fingers" and "hands", lose ground under B while the singular "hand" gains, so the three hand-words in the set divide by grammatical number rather than by meaning.
+      A: fingers, hands
+      B: hand
+
+rc8fd8f8  Slang climbs from below
+      Every word B raises by more than five places is a metaphorical or coarse noun for the penis starting from rank 17 or lower under A (meat 24, rod 19, prick 17), whereas the words holding those middle ranks under A are the more decorous member and the bare modifier big.
+      A: member, big
+      B: meat, rod, prick
+
+re2502ca  Paired parts and selectors
+      A's list holds the body parts that come in pairs together with the modifiers that pick between them (hand, hands, leg, legs, finger, left, right), whereas every word B favours names a single midline part a person has only one of (chin, jaw, face, neck, beard), which cannot take left or right and so closes the phrase where A's words leave it open.
+      A: hand, hands, leg, legs, finger, left, right
+      B: chin, jaw, face, neck, beard
+
+rebdd3cb  Immobile explicit head
+      The four words sitting in the top five under both conditions move at most one place each, so none of the difference between the conditions is carried by the words at the head of either ranking.
+      A: dick, shaft
+      B: cock, penis
+
+reef86a0  Kissable part demoted
+      Inside the lower face itself the part used for kissing moves opposite to the parts covered in hair: lips falls fourteen places, the largest fall in either list, while jaw rises eight and goatee rises fourteen, so the difference cannot be restated as a move toward the face as a region.
+      A: lips, chest, hair
+      B: jaw, goatee, chin
+
+rf05b60a  From pet to wife
+      Under A the fragment continues toward animals a man grooms or pats (horse, the possessive horse's, pony, dog), while under B the animate object that rises is his spouse in both bare and possessive form (wife, wife's), so the creature on the receiving end of the touch changes from an animal to a person.
+      A: horse, horse's, pony, dog
+      B: wife, wife's
+
+rf22d4c5  Household kin to chosen intimate
+      The two words naming women of the man's own household, wife and daughter, fall under B (-2 and -6) while the words naming an elective, non-marital tie rise sharply (girlfriend +30, girlfriend's +91, friend +19), so the human being implied by the completion shifts from someone he is related to toward someone he has chosen.
+      A: wife, daughter
+      B: girlfriend, girlfriend's, friend
+
+rff23caf  Bare skin to bristle
+      Of the head and face, A favours the bare-skin surfaces, with cheek falling nearly a hundred places and chin, face and forehead all sitting higher under A, while B favours the hairy or hairless scalp and jaw (mustache, bald), so the texture the hand meets shifts from skin to hair.
+      A: cheek, chin, face, forehead
+      B: mustache, bald
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

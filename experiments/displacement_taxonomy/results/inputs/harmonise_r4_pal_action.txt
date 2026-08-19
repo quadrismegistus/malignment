@@ -1,0 +1,295 @@
+Below are 50 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r03a0980  Striking versus settling
+      The four verbs of physical assault, beat, attack, hit and kick, are the words A's side of the difference rests on most and two of them carry the largest falls in the whole table, hit by seventy-four places and kick by sixty, while the largest rises on B's side belong to verbs of coming to rest or of festivity, sit by seventy places and dance by forty-one.
+      A: beat, attack, hit, kick
+      B: sit, dance, set
+
+r0a88bab  Prayer stands alone
+      The single largest displacement in the whole set belongs to the one completion that makes the three men worshippers rather than agents acting on anybody, rising seven places under B while the words for striking, stabbing and questioning a person all fall.
+      A: beat, hit, stab, assault, interrogate
+      B: pray
+
+r0e832aa  Saying into striking
+      Every verb of uttering or of raised voice sits lower under B, with say falling fifty-seven places, ask thirty-four, yell twenty-six and shout twenty, while the verbs of injuring a person or a body sit higher, cut rising thirty-two places, kill twenty-two and fight sixteen.
+      A: say, ask, tell, speak, discuss, shout, yell
+      B: cut, kill, fight, shoot, attack, beat
+
+r0ecca5a  The uneventful option
+      The completions under which nothing much happens, three people coming into a room and sitting, playing, talking, asking or going away again, are all higher under A and include the largest fall in the set (sit, twenty-two places), while B's own large risers all describe something done to the room or to someone in it (chant, drag, search, tear).
+      A: sit, leave, play, talk, ask, speak
+      B: chant, drag, search, tear, beat
+
+r14a7e77  Blows into words
+      Every verb of striking, shooting or killing that heads the A ranking is pushed far down under B, and the top of the list is taken instead by verbs of talking, reciting and praying, so the three entrants change from people who assault the room's occupants to people who address them.
+      A: beat, shoot, kill, attack, hit, fire, throw, pull
+      B: speak, talk, recite, argue, chant, discuss, chat, pray
+
+r158b4fe  Blows before words
+      Under A the fragment is completed by verbs of physical force and weapon use (striking, discharging a firearm, assaulting, hurling, yanking), while under B it is completed by verbs of verbal exchange between parties (disputing, debating, uttering, holding conversation, putting questions).
+      A: beat, shoot, fire, attack, throw, pull
+      B: argue, discuss, speak, talk, ask
+
+r1b7286a  Contention outlasts conversation
+      Speech does not fall as a class: the cooperative speech verbs recede while the adversarial ones hold or advance, so discuss falls 8 to 13, speak 2 to 4 and say 22 to 79 while talk keeps first place and argue moves 3 to 2 alongside fight.
+      A: discuss, speak, say, tell
+      B: talk, argue, fight
+
+r1c648f6  Bodies begin to move
+      Verbs for moving a whole body around the room (dance, move, walk, run, search, play) all rise under B, several of them from far down the list, while under A the non-speech verbs are stationary and directed at others present (point, look, pray), so that no locomotion verb at all favours A.
+      A: point, look, pray
+      B: dance, move, walk, run, search, play
+
+r1d2e198  noise against utterance
+      The two vocal verbs that stay on A's side name unaddressed sound coming out of a single body (scream, sing), while B's vocal verbs name utterance that either follows a script or requires a second party (recite, chant, discuss, chat).
+      A: scream, sing
+      B: recite, chant, discuss, chat
+
+r24aabb8  Hand versus weapon
+      Every verb naming harm the body delivers directly at arm's length sits on A, while the verbs naming harm delivered by a weapon or named only as its outcome sit on B, so what differs is how the violence reaches the victim rather than whether there is violence.
+      A: beat, hit, throw, stab, abuse, assault
+      B: shoot, fire, attack, kill
+
+r2b0e495  Questioning versus conversing
+      Every speech verb A promotes is one in which one party imposes on or extracts from another, asking, interrogating and shouting, while the speech verbs B promotes are ones that take two parties in symmetrical exchange, talking, speaking and arguing.
+      A: ask, interrogate, shout
+      B: talk, speak, argue
+
+r2cb3906  Choral against spoken
+      Every verb of individual utterance or outcry sits higher under A (talk, speak, ask, shout, scream, yell), while the verbs B raises in that same vocal territory are ones a group performs in unison or as shared noise (chant, sing, laugh), so the vocal completions divide by whether one person addresses or cries out and whether several make a common sound.
+      A: talk, speak, ask, shout, scream, yell
+      B: chant, sing, laugh
+
+r3869bfc  Raid against residence
+      A favours the verbs of a forced entry conducted on someone else's premises (searching the place, questioning people, taking things away), whereas B favours the verbs of simply occupying a room as one's own (sitting down, tidying, moving about it, setting something in place, amusing oneself).
+      A: search, interrogate, remove, take
+      B: sit, clean, walk, set, play
+
+r39edc91  Hands on the room
+      Under B the entrants get verbs that require some thing or person in the room to be gripped, ransacked or shifted (search, drag, pull, tear, remove), while the corresponding verbs A holds are ones in which the entrants merely occupy the room and do nothing to it (sit, leave, play), sit dropping further than any other word in the set.
+      A: sit, leave, play
+      B: search, drag, pull, tear, remove
+
+r3c608b9  Chorus against voice
+      The one vocal verb A favours is the choral, scripted, political one, chanting in unison, while every vocal verb B favours is something a single person does to another person, from asking and speaking to screaming and crying.
+      A: chant
+      B: talk, speak, ask, argue, shout, yell, scream, cry
+
+r3cf95bd  A search with no counterpart
+      A additionally carries three verbs that together read as a premises-search or seizure sequence (search, take, remove), and B has nothing of that kind: its only non-vocal members are a shove, a tearing and an act of looking (push, tear, look), which are single contacts or perceptions rather than a procedure carried out on a room and its contents.
+      A: search, take, remove
+      B: push, tear, look
+
+r3f58102  Address-to-locomotion shift
+      Under A the high-ranked completions are things done toward other people in the room, saying, telling, discussing, praying, yelling, screaming, looking and pointing, and every one of these falls under B, while the words that rise into B's top twenty are things done with the whole body in the space of the room, moving, walking, running, searching, throwing and dancing, none of which requires anyone to be addressed.
+      A: point, yell, say, tell, pray, discuss, look, scream, talk
+      B: move, search, dance, throw, run, walk
+
+r4656a21  Harm displaces address
+      Verbs of speaking to someone fall steeply under B while verbs of bodily harm rise out of the tail into the top dozen, so that say drops from 22 to 79 and ask from 19 to 53 in the same movement that carries cut from 44 to 12, kill from 33 to 11 and fight from 23 to 7.
+      A: say, ask, tell, speak, shout, yell
+      B: cut, kill, fight, shoot, attack, beat
+
+r477b3ad  The killing word recedes
+      Among the harm verbs it is the explicit and lethal ones that fall under B (kill by twenty-three places, and with it point, beat and fight) while harm verbs that name an act without spelling out its result hold or climb (attack unmoved, fire and throw up), so what changes is the word the violence is said with rather than whether violence is said.
+      A: kill, point, beat, fight
+      B: attack, fire, throw
+
+r477c487  Room-handling script
+      The A side gathers verbs that presuppose a room already stocked with objects and occupants being worked through one at a time, so that the completion implies a raid or inspection with things to open, take, tear, tie, remove and search and people to question or beat, while the B side gathers verbs describing the three men's own bearing as a group, which need nothing in the room to act upon.
+      A: search, question, remove, tie, take, open, tear, throw, beat, fire
+      B: fight, attack, scream, cry, pray, sing, argue, move, look
+
+r5b9f360  Needs a human object
+      Nearly every word A favours is a transitive verb whose object must be a person or a person's body, so the completion presupposes a victim already in the room, while the words that rise most under B are intransitive activity verbs that need no object at all and leave whether anyone else is present entirely open.
+      A: beat, hit, kick, attack, interrogate, tie, undress, search
+      B: sit, dance, pray, talk, speak, look, argue, play
+
+r60a51fb  Interrogator versus worshipper
+      The single largest move on each side is interrogate six places toward A and pray seven places toward B, opposing a scene in which the three men have somebody in their power to one in which they have entered the room to worship.
+      A: interrogate
+      B: pray
+
+r6816e1e  Chorus over address
+      Under A the words for using the voice are ones aimed at someone else in the room, either plainly (talk, speak, ask) or at volume (shout, scream, yell), whereas under B the words for using the voice are ones a group produces together and needs no listener for (chant, sing, laugh).
+      A: talk, speak, ask, shout, scream, yell
+      B: chant, sing, laugh
+
+r6e9df03  Articulate speech to B
+      The speaking verbs split according to whether they presuppose someone answering back: the two that presuppose a victim already under threat stay on A, while the five that presuppose an interlocutor sit on B, and insult and speak are the largest speech moves at six places each.
+      A: yell, threaten
+      B: speak, talk, insult, argue, ask
+
+r7b0ea63  Raid versus occupancy
+      Under A the fragment is completed with verbs that cast the three people as an assault or search party entering someone else's room, striking, restraining, stripping and questioning an implied occupant, whereas under B it is completed with verbs for people merely being in a room, sitting, dancing, praying, playing, looking and talking among themselves.
+      A: beat, hit, kick, attack, search, interrogate, tie, tear, throw, shout, undress, remove, ask
+      B: sit, dance, pray, play, talk, speak, argue, look, move
+
+r7eea170  Outcry against exchange
+      The verbs of speaking split by whether they need an addressee: A favours undirected noise made at nobody in particular (shout, scream), while B favours articulated exchange that presupposes someone to exchange with (argue, talk, discuss, speak, ask).
+      A: shout, scream
+      B: argue, talk, discuss, speak, ask
+
+r88bb709  Going through the room
+      A alone contains the vocabulary of an entry made over a place and its contents, searching it, taking things and removing them, whereas the only B-favoured verbs that touch anything at all are push and tear, which make contact without carrying anything off.
+      A: search, take, remove
+      B: push, tear
+
+r92bd757  Intruder to occupant
+      A's two non-violent survivors construe the room as someone else's, entered to be gone through or stripped (search, take), while B raises verbs that presuppose the room belongs to the three men and is theirs to use or make ready (clean, prepare, set, light, play, dance, laugh).
+      A: search, take
+      B: clean, prepare, set, light, play, dance, laugh
+
+ra420990  Occupants, not operatives
+      B alone carries actions that presuppose no antagonist and no object to be handled, making the three men ordinary people in a room (praying, singing, playing, looking about, moving), whereas the nearest thing A offers is chant, a collective and political vocalization, and every other A word presupposes either something to be handled or someone to be answered.
+      A: chant, search, question, tie, take, open
+      B: pray, sing, play, look, cry
+
+raa1e443  Blows against words
+      A favours verbs in which the men strike, shoot or hurl something at a body, while B favours verbs in which they open their mouths, so that the same three men either hit people or talk, argue, shout, scream and weep at them.
+      A: beat, attack, hit, shoot, throw
+      B: talk, speak, argue, ask, shout, yell, scream, cry
+
+raa22f53  Step, not episode
+      A favours verbs that name one discrete physical operation carried out on something already in the room (tearing, tying, removing, searching, opening, seizing, striking, discharging), while B favours verbs that name the whole event under its category label, the words a report would use for it (attack, destroy, kill, fight, hit).
+      A: tear, tie, remove, search, open, take, throw, beat, fire
+      B: attack, destroy, kill, fight, hit
+
+rb8f7dad  A victim required
+      The A words are verbs that cannot be uttered without an implied person for them to be done to, whereas most of the B words can complete the fragment absolutely, describing something the three people do without anyone else in the room having to receive it.
+      A: beat, hit, stab, assault, abuse, interrogate, threaten
+      B: pray, talk, speak, shout, scream, argue, look, fight
+
+rb93975b  Outcome recedes, act does not
+      The single verb that names the death of a victim rather than the assault itself, kill, falls 23 places, while the verbs that name only the attack hold or improve, attack unchanged at 7, fire up 7, throw up 12, and shoot still second, so what has gone quiet is the naming of a result and not the presence of violence.
+      A: kill
+      B: attack, fire, throw
+
+rbc8b44c  Promotion outruns suppression
+      The largest movements are asymmetric in kind: B's biggest gains are words A had buried in the fifties (sit 51 to 16, discuss 54 to 19, chant 47 to 22), all naming what a group does together while staying put, whereas A's leaders are demoted but never dropped (beat 1 to 4, shoot 2 to 8) and its biggest falls belong to outcry and weapon-fire (scream, fire, shout), so the difference reads more as words arriving under B than as words disappearing.
+      A: beat, shoot, scream, fire, shout
+      B: sit, discuss, chant
+
+rbfa32bb  Category-level violence
+      Where both sides name violence, A's violent words are specific bodily or instrumented acts carrying a manner with them (beating, tearing, throwing, firing, tying), whereas B's are the superordinate category names for violence as such (attack, kill, destroy, fight), the words one would use to report an event rather than to describe a movement of the body.
+      A: beat, tear, throw, fire, tie
+      B: attack, kill, destroy, fight
+
+rc399407  Dwelling into handling
+      The verbs for merely occupying a room and passing time in it fall under B, while verbs that need the room or its contents as something operated on rise, so the entrants stop being people who sit, eat, read, work, look and sing and become people who search, remove, take, set and draw.
+      A: sit, eat, read, work, look, sing
+      B: search, remove, take, set, draw
+
+rc61fbcd  Raid over occupancy
+      The verbs for settling into a room and staying in it lose ground while the verbs for going through a room and taking from it gain, so sit, eat, read, look and work all fall by nine to twelve places while search rises from 20 to 10 and remove from 30 to 20, with take holding sixth.
+      A: sit, eat, read, work, look
+      B: search, remove, take
+
+rc89fd61  Blows becoming utterances
+      The words A favours most are verbs of bodily assault and projectile force directed at a person (beat, attack, hit, throw, shoot), while the words B favours most are verbs of producing sound with the mouth (yell, shout, scream, cry, argue, talk, speak, ask), so the same three people entering the same room complete the sentence by striking under A and by making noise under B.
+      A: beat, attack, hit, throw, shoot
+      B: yell, shout, scream, cry, argue, talk, speak, ask
+
+rc9083da  striking traded for talking
+      Every verb that would have the three men damage a person or discharge a weapon on entry (beat, shoot, kill, attack, hit, fire, throw, pull) is ranked higher under A, while the verbs that would have them open their mouths at or with someone (speak, talk, chat, discuss, argue, recite, chant, pray) are ranked higher under B.
+      A: beat, shoot, kill, attack, hit, fire, throw, pull
+      B: speak, talk, chat, discuss, argue, recite, chant, pray
+
+rcc8bf32  Demand versus outcry
+      Among the words for using the voice, A favours ones addressed to someone present and seeking an answer, compliance or collective assertion (asking, questioning, talking, shouting, chanting), while B favours ones that are emissions requiring no addressee at all (screaming, crying), the sharpest evidence being that shout falls fifteen places under B while its near-synonym scream rises six.
+      A: ask, question, talk, shout, chant
+      B: scream, cry, speak, argue
+
+rd2de37a  Outcry against liturgy
+      Both conditions allow the men to raise their voices without saying anything propositional, but A puts the undirected loud kinds first (yelling, shrieking, and even singing) while B puts the collective devotional kinds first (praying and chanting).
+      A: shout, scream, sing
+      B: pray, chant
+
+rd4fa165  Directed versus mutual speech
+      Both conditions favour verbs of speaking, but A's are one-directional acts performed on somebody (questioning, demanding, raising the voice at a person) while B's are jointly performed by the three subjects with each other, including the conflictual one, so that conflict as such is not what separates the conditions.
+      A: interrogate, ask, shout
+      B: talk, speak, argue, pray
+
+re0e7712  The chanting standout
+      One speech verb sits on the A side against the general drift, and it is the one that is collective, rhythmic and demonstrative (chant), whereas every speech verb on the B side is either conversational and addressed to someone (talk, speak, ask, argue) or an individual outcry (cry, scream, yell, shout).
+      A: chant
+      B: talk, speak, ask, argue, cry, scream, yell, shout
+
+re5ee9a3  Private voice
+      B alone contains acts of personal feeling and worship, praying, singing, crying, screaming and playing, while A's only comparable words are collective vocalizations directed outward at someone present, chanting, shouting, talking and asking, so that A has no word for an inward or devotional act at all.
+      A: chant, shout, talk, ask
+      B: pray, sing, cry, scream, play
+
+red54f45  raid frame, gathering frame
+      Aside from the outright harm verbs, A's remaining actions treat the room as something to be gone through and taken from (search, take, pull), whereas B's fill the same room with the preparations and observances of a gathering already under way (prepare, set, clean, light, dance, laugh, play).
+      A: search, take, pull
+      B: prepare, set, clean, light, dance, laugh, play
+
+ref0ee49  Raid versus assembly
+      Under A the entering group is cast as carrying out a forcible incursion on persons and property (beating, shooting, firing, attacking, throwing, searching, interrogating, removing, pulling), while under B the same group is cast as an assembly settling into a room to argue, talk, pray, chant, sit, walk, dance, play or clean.
+      A: beat, shoot, fire, attack, throw, search, interrogate, remove, pull
+      B: argue, talk, discuss, speak, ask, pray, chant, sit, walk, play, dance, clean
+
+rf0877b6  Raid script versus room activity
+      Under A the high-ranked verbs assemble into a single recognizable procedure done to someone in the room, searching, questioning, binding, stripping and ransacking, whereas under B the high-ranked verbs do not compose into any procedure at all but name unrelated things a group of people does on its own once it has come in, sitting down, praying, dancing, playing and talking.
+      A: search, interrogate, ask, tie, undress, remove, tear
+      B: sit, dance, pray, play, talk, speak
+
+rfa78560  Single cry, joint talk
+      The vocal verbs that stay on the A side are one-voiced and unaddressed or minimal (scream, sing, ask), whereas the vocal verbs B raises are reciprocal or liturgical and require an interlocutor or a shared text (discuss, chat, argue, recite, chant, pray).
+      A: scream, sing, ask
+      B: discuss, chat, argue, recite, chant, pray
+
+rfcbb094  Reach of the blow
+      Every completion that requires the agent to touch the victim's body with a hand or a held blade sits on the A side, while the completions that kill or injure from a distance or name only the outcome sit on the B side, so the difference between the lists is the distance between the two bodies rather than the amount of harm.
+      A: beat, hit, stab, assault, abuse
+      B: shoot, fire, kill, attack
+
+rfe5df66  Going through the room
+      All the verbs that take the room and its contents as something to be gone through, handled and carried off are higher under B (search, drag, pull, tear, take, remove, move), whereas the A side holds verbs that are intransitive occupancy of the room (sit, leave, play) or are aimed at persons rather than at objects (fight, shoot, stab).
+      A: sit, leave, play, fight, shoot, stab
+      B: search, drag, pull, tear, take, remove, move
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

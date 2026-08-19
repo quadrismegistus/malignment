@@ -1,0 +1,285 @@
+Below are 48 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r0283f75  placed versus characterized
+      Every word that would put the neighbors somewhere, or leave the sentence open for something further rather than ending it, sits under A, while under B the same slot is closed by an adjective and the intensifier that can only introduce an adjective rises alongside those adjectives.
+      A: there, in, at, on, out, outside
+      B: very, friendly, nice, polite, kind, quiet
+
+r0970618  Doings against dispositions
+      Under A the fragment is completed by words that continue into what the neighbors were doing or where they were -- present participles of ordinary activity and bare locative particles that require a following phrase -- whereas under B not one such word appears and every item is either a character adjective or a modifier of one.
+      A: sitting, talking, hanging, playing, making, there, on, in, out, at, outside, around, up
+      B: friendly, peaceful, quiet, welcoming, so, very
+
+r1cafff2  Character into whereabouts
+      The four adjectives that ascribe a settled disposition of warmth to the neighbours are all higher under A, and every word naming a place or a visible position instead of a personality is higher under B, so that A finishes the sentence with what these people are like and B finishes it with where they were and who saw them.
+      A: nice, friendly, polite, kind
+      B: outside, there, home, around, seen, together, at
+
+r2247633  Unseen and in view
+      A's locative and particle completions leave the neighbors unplaced or merely present (there, on), while B's put them where they can be observed from outside the house (out, outside, seen, looking), which is the same visibility that the participles on the B side presuppose.
+      A: there, on
+      B: out, outside, seen, looking
+
+r2a25619  Stationary stereotype, surging strangeness
+      The one A-side word carrying an unflattering group stereotype, loud, holds rank 10 under both conditions and does not move at all, while strange and odd climb from ranks 66 and 134 to 7 and 13, so the unfavourable material B admits is of inscrutability rather than of the noise stereotype, which is unchanged.
+      A: loud
+      B: strange, odd
+
+r2b6b76e  Trait against activity
+      Under A the fragment is completed with words naming a durable characteristic of the neighbors (noisy, loud, rude, late, and just as much nice, friendly, welcome), while under B it is completed with words naming something they are doing or a passing state they are in (talking, arguing, complaining, asking, saying, laughing, smiling, playing, looking, trying).
+      A: noisy, loud, rude, late, nice, friendly, welcome
+      B: arguing, talking, complaining, asking, saying, laughing, smiling, playing, looking, trying
+
+r38ac21f  Wariness to friction
+      The one unfavorable note under A is a quality of guardedness or restraint attributed to the neighbors themselves (suspicious at rank 3, plus careful and quiet), whereas under B the unfavorable words are enacted, audible conflict (fighting, the single largest riser at 105 places, and arguing at 54), so trouble stops being a described temperament and becomes a reported event.
+      A: suspicious, careful, quiet
+      B: arguing, fighting
+
+r39c600e  Loitering against industry
+      The A side's activity participles name idle or disapproved-of street conduct such as brawling, tobacco and standing about, while the B side's name occupation, domestic settledness and being taken up with something, though this is the weakest of the three relations because a near-synonym of the brawling word sits on the B side.
+      A: fighting, smoking, hanging
+      B: working, busy, home, quiet
+
+r3a0e6fd  Reserve versus commotion
+      Where the completion is unflattering, A supplies quiet dispositional words about wariness or restraint (suspicious, careful, quiet) while B supplies audible, public disturbances, and those disturbances are the largest movers anywhere in the set (fighting rises 105 places, smoking 56, arguing 54, against falls of 89 for careful and 11 for suspicious).
+      A: suspicious, careful, quiet
+      B: fighting, arguing, smoking
+
+r3ffee52  Doing versus being
+      A favours completions that keep the sentence going into an action or a location, chiefly the -ing participles and the prepositions and locatives, while B favours completions that end the sentence in an adjective naming what the neighbors were like.
+      A: talking, looking, smiling, trying, getting, in, on, at, there
+      B: friendly, quiet, strange, odd, nice, pleasant
+
+r5ab3f9f  Conflict changes mode
+      The hostile material is present on both sides but attributed differently: A raises words that make trouble a property of the people (noisy, loud, rude, fighting), whereas B raises words that make the same trouble an episode of dispute (arguing, complaining, angry), so the difference is not that B carries less conflict.
+      A: noisy, loud, rude, fighting
+      B: arguing, complaining, angry
+
+r631737b  Trait against tableau
+      Under A the fragment is completed with adjectives that ascribe a lasting character to the neighbors (friendly, cordial, polite, kind, nice, quiet, careful, suspicious), whereas under B it is completed with words for an activity or a passing state one could witness at a given moment (arguing, fighting, talking, smiling, laughing, smoking, making, getting, looking, seen).
+      A: friendly, cordial, polite, kind, nice, quiet, careful, suspicious
+      B: arguing, fighting, talking, smiling, laughing, smoking, making, getting, looking, seen
+
+r686f4d7  stereotype-answering praise
+      Both sides carry approving adjectives, but A's are unspecific all-purpose warmth (nice, good, happy) that barely shift position, while B's are the narrow set that rebuts what the group named in the fragment is commonly accused of being (peaceful and quiet against violence and disturbance, welcoming against hostility), and these are the largest upward movers in the whole display.
+      A: nice, good, happy
+      B: peaceful, quiet, welcoming
+
+r6ea8cac  Courtesy to clamor
+      Among the words that move furthest, A favours terms of good manners and calm (pleasant, kind, polite, nice, good, quiet) while B favours terms for making noise and quarrelling (arguing, fighting, yelling, shouting, complaining), so the neighbours are well-mannered in one condition and audibly disruptive in the other.
+      A: pleasant, kind, polite, nice, good, quiet
+      B: arguing, fighting, yelling, shouting, complaining
+
+r72c65a8  Trait to ongoing act
+      Under A the slot after "always" is filled by adjectives naming a standing disposition of the neighbours, while under B it is filled by present participles naming something they are repeatedly doing, so the same adverb reads as character in one condition and as habitual activity in the other.
+      A: nice, polite, pleasant, kind, good, happy, quiet, loud, suspicious
+      B: complaining, arguing, fighting, shouting, yelling, playing, watching, coming, talking, trying
+
+r7b7b417  Degree words follow adjectives
+      The two bare intensifiers, which can only stand before an evaluative adjective and never before a place word, both sit on the A side, and nothing of their kind appears among the B risers, whose top members are a past participle of perception, a togetherness word and a domestic location.
+      A: very, so
+      B: seen, together, home, outside
+
+r7cf3efc  Attribution rises both ways
+      What rises under B is attribution rather than approval, since the flattering traits (friendly, nice, polite, kind, quiet) rise alongside the unflattering ones (loud, yelling, arguing), which rules out reading the difference as a move toward a more favourable portrayal.
+      A: complaining, shouting, seen, watching
+      B: friendly, nice, polite, kind, quiet, loud, yelling, arguing
+
+r81c841c  Character versus conduct
+      A's favored content words ascribe a settled disposition or availability to the neighbors as people, while B's favored content words describe things they were repeatedly doing, chiefly things heard through a wall.
+      A: nice, happy, courteous, ready, there
+      B: loud, shouting, complaining, talking, making
+
+r81e86c0  commotion versus address
+      Under A the blank is filled by gerunds of self-generated activity whose object would be an event, a noise or a thing (hosting or staging a gathering, producing noise, hurling something, performing music, and the particle that begins "up to something"), while under B it is filled by gerunds of address whose complement would be a person or an utterance (speaking with, uttering, requesting, informing, handing over, and watching).
+      A: having, making, throwing, holding, playing, up
+      B: talking, saying, asking, telling, giving, looking
+
+r83e8331  Particles out, intensifiers in
+      The non-content words A ranks highest are locative particles that would extend the clause (in, on, at, there), each falling nine to seventeen places, whereas the non-content words B ranks highest are degree adverbs that require an adjective after them (very, so, really), with really rising sixty-one places, so the grammatical scaffolding switches from continuing a predicate to modifying one.
+      A: in, on, at, there
+      B: very, so, really
+
+r893565e  Adjective slot versus clause
+      The words A promotes are intensifiers that require an adjective to follow, whereas the words B promotes are participles that keep the sentence going into a predicate, so the two conditions differ in whether the fragment is likely to end on a single word or to continue.
+      A: very, so
+      B: making, talking, shouting, complaining, looking
+
+r89f58b9  Event tail to trait tail
+      Words that would make the blank part of an ongoing activity (talking, looking, smiling, trying, getting) fall between twenty and fifty-nine places under B, while single-word descriptions of settled character (quiet, nice, pleasant, strange, odd) rise into the top fourteen, so the same slot shifts from what the neighbours were doing to what they were like.
+      A: talking, looking, smiling, trying, getting
+      B: quiet, nice, pleasant, strange, odd
+
+r90f2b4f  whereabouts versus disposition
+      A favours completions that leave the sentence unfinished and describe circumstance or ongoing activity (bare prepositions like there, on, in, out, at, outside, around, up, and participles like sitting, talking, hanging, playing, making), whereas B favours completions that close the sentence with a permanent character trait (friendly, peaceful, quiet, welcoming).
+      A: there, on, in, out, at, outside, around, up, sitting, talking, hanging, playing, making
+      B: friendly, peaceful, quiet, welcoming
+
+r9561b26  Runway For An Adjective
+      A promotes the two bare degree modifiers, very and so, which are only useful if an evaluative adjective follows and cannot precede any of the locative continuations B promotes, so their rise under A is the same fact as the adjective's rise seen one word earlier.
+      A: very, so
+      B: outside, there, home, seen, together
+
+r9e60bd4  degree word to determiner
+      A ranks degree adverbs and the copular participle high (very, rather, being), which project a predicate adjective naming a standing trait of the neighbors, whereas B raises determiners and prepositions (a, the, in, at, on), which project a noun phrase or a place-and-situation phrase instead of an adjective.
+      A: very, rather, being
+      B: a, the, in, at, on
+
+r9edc132  Closing versus continuing predicate
+      B raises the words that can finish the sentence on their own as a predicate adjective (friendly, nice, loud, polite, kind, quiet) and raises with them the intensifier that only such an adjective licenses (very), while A raises prepositions, particles and complement-hungry participles that require more sentence after them (there, in, at, on, a, asking, watching, making, having, trying, seen, going, talking).
+      A: there, in, at, on, a, asking, watching, making, having, trying, seen, going, talking
+      B: friendly, nice, loud, polite, kind, quiet, very
+
+ra346fa2  Degree words for place words
+      The non-content words differ in what they set up: B favours the degree adverbs that must be followed by an adjective, while A favours prepositions and locatives that must be followed by a place or an activity phrase.
+      A: in, on, at, there
+      B: very, so, really
+
+ra76c4a4  Generic warmth, named virtue
+      Both conditions supply positive descriptions of the people, but A's are unspecific terms of approval that could be said of anyone, while B's name particular social qualities having to do with noise, harmlessness, and hospitality, and the two of those that climb farthest into B's list are the two most specific of them rather than the two mildest.
+      A: nice, good, happy
+      B: peaceful, quiet, welcoming, friendly
+
+ra9d7f58  Loudness axis opens
+      B introduces the noise dimension at both ends of it, with loud second and quiet eighth alongside shouting and complaining, while nothing on A's side names loudness at all, so what separates the conditions here is the presence of the axis rather than a direction along it.
+      A: (none)
+      B: loud, quiet, shouting, complaining
+
+raa76771  Ascribed character versus observed conduct
+      B raises adjectives naming what sort of people the neighbours are as a standing disposition (friendly, nice, polite, kind, quiet, loud), while A raises the vocabulary of an episode watched and reported from next door (seen, watching, complaining, shouting, talking, outside, asking, there).
+      A: seen, watching, complaining, shouting, talking, outside, asking, there
+      B: friendly, nice, polite, kind, quiet, loud
+
+radc84f6  Heard through the wall
+      The words B raises name things a neighbor registers as sound coming through a shared wall, from the noisy end (loud, shouting, complaining, making) through to its explicit negation (quiet), whereas the words A raises name a disposition held by the people themselves and make no reference to noise at all; the two largest single movers on each side, one pleasantness adjective falling and one noise-frame verb rising, are the clearest instance.
+      A: nice, happy, courteous, ready
+      B: loud, shouting, complaining, making, talking, quiet
+
+rb1141ae  From adjective to participle
+      A prefers to close the fragment with a bare quality word and the degree words that introduce one, while B prefers to close it with an -ing verb that continues into an action, and the split is total in one direction: every progressive verb form in either list sits on the B side, and both general intensifiers sit on the A side.
+      A: very, so, nice, happy, ready, courteous
+      B: making, talking, shouting, complaining, looking
+
+rb294eb7  Character Into Whereabouts
+      The words A favours most describe a disposition the neighbors possess (nice, friendly, polite, kind), while the words B favours most describe a place or physical situation they were in (outside, there, home, around, at), so the completion moves from what they were like to where they were.
+      A: nice, friendly, polite, kind
+      B: outside, there, home, around, at
+
+rb3a93fb  Warmth becomes audible
+      Both conditions supply friendly completions, but under A the warm words are silent dispositions (friendly, polite, cordial, kind, nice) while under B they are performed and perceptible states (smiling, laughing, happy, welcoming), which shows the difference running along the mode of ascription rather than along favorability.
+      A: friendly, polite, cordial, kind, nice
+      B: smiling, laughing, happy, welcoming, welcome
+
+rbcbacbe  Standing trait, present activity
+      A favours adjectives that assign the group a fixed neighborly character, both hostile and approving (loud, noisy, rude, late, nice, friendly, welcome), while B favours participles naming something they could be seen or heard doing at a given moment (talking, arguing, complaining, asking, saying, laughing, smiling, playing).
+      A: loud, noisy, rude, late, nice, friendly, welcome
+      B: talking, arguing, complaining, asking, saying, laughing, smiling, playing, looking, trying
+
+rbfb4a2f  Watched As A Trio
+      The two largest upward moves in the set, seen (70 to 16) and together (61 to 19), both frame the three as something observed from outside and as a single group, whereas A's leading words attribute a quality to them one by one.
+      A: nice, kind, friendly
+      B: seen, together
+
+rc4d70ce  Pleasantness as character or conduct
+      The friendly material splits the same way as the hostile material: A raises words that call the neighbors good people (nice, friendly, welcome), while B raises words that show them doing something cheerful in the moment (smiling, laughing, playing, happy), which is why I would not call this a difference of valence.
+      A: nice, friendly, welcome
+      B: smiling, laughing, playing, happy
+
+rc80fe6d  Strangeness enters late
+      The two words that describe the neighbors as unfamiliar or deviant rather than as pleasing appear only among B's risers, and they are B's two largest movers, whereas every character word that A favours is a term of conventional approval.
+      A: polite, kind, good
+      B: strange, odd
+
+rcea8a37  Deferred predicate
+      A puts words at the very top of its ranking that cannot complete the fragment on their own and postpone the predicate to whatever follows (very, so, a), whereas B's top ranks are occupied by words that are themselves the predicate (talking, arguing, complaining).
+      A: very, so, a
+      B: talking, arguing, complaining
+
+rd760d7a  deed into disposition
+      Under B the blank tends to be filled by a bare adjective naming a standing quality of the neighbors as neighbors, the unflattering kind as much as the approving kind, while under A it tends to be continued by a present participle naming a repeated act, chiefly acts of speech and acts of being observed.
+      A: complaining, shouting, talking, asking, watching, seen
+      B: friendly, nice, polite, kind, quiet, loud
+
+rd770f10  nuisance scene to speech
+      Under A the completions that carry the difference are verbs of throwing, holding, playing, having and making — the vocabulary of parties, noise and complaint that casts the neighbors as a source of disturbance — while under B the words that rise sharply are verbs of speaking and handing over (giving, saying, telling, asking, talking), casting the same neighbors as people who address someone.
+      A: holding, throwing, playing, having, making, complaining, up
+      B: giving, saying, telling, asking, talking
+
+rd77e1c5  Trait becomes activity
+      Almost every content word A favours is a predicative adjective naming a standing disposition, while almost every content word B favours is a present participle naming something the neighbours are doing continuously, so the two conditions differ in the grammatical shape of the completion and not only in its content.
+      A: nice, polite, pleasant, kind, good, happy, quiet, loud, suspicious
+      B: complaining, playing, fighting, arguing, shouting, yelling, watching, talking, coming, trying
+
+re765d02  Degree words demand adjectives
+      B promotes two bare degree modifiers, which cannot stand as completions on their own and so commit the sentence in advance to a scalar trait, while A supplies no intensifier at any position.
+      A: sitting, outside, there, talking
+      B: so, very
+
+re9a92e9  Courtesy yields to quarrel
+      The words of good neighbourliness fall furthest under B (pleasant, kind and polite lose eighteen, thirteen and twelve places) and the words that rise furthest are the vocabulary of audible dispute (arguing, fighting, yelling, shouting, complaining), so the completion moves from describing the neighbours as agreeable to describing them as making a disturbance.
+      A: pleasant, kind, polite, nice, good, happy
+      B: arguing, fighting, yelling, shouting, complaining
+
+recbf315  Civility words swapped
+      Both conditions still want to call these neighbors well-mannered, but they reach for different lexemes for it, A favouring the warm or inner-state words for good character and B favouring the more conventional outward-conduct ones, so that a near-synonym pair is split across the two sides rather than sitting together.
+      A: nice, happy, courteous
+      B: friendly, polite, quiet
+
+rfa6a53c  Disturbance against utterance
+      Among the participles alone, the ones A favours name physical nuisance or the making of a mess (fighting, smoking, making, having, watching) while the ones B favours name speech, and the pair fighting/arguing is the same conflict content routed through the body under A and through talk under B.
+      A: fighting, smoking, making, having, watching
+      B: arguing, talking, saying, asking, complaining, laughing
+
+rfaf1dab  Character to conduct
+      Words that ascribe a settled personal quality to the neighbors sit high under A and fall under B, while words naming an ongoing observable activity sit low under A and rise sharply under B, so the completion moves from stating what sort of people they are to stating what they are doing.
+      A: friendly, polite, cordial, kind, nice, quiet, careful, willing, suspicious
+      B: arguing, fighting, smoking, laughing, smiling, talking, making, getting, looking, busy
+
+rfc53c3c  adjective slot, noun slot
+      A favours the two degree adverbs that require an adjective describing the neighbors to follow, whereas B favours the definite and indefinite articles, which require a noun phrase naming what the neighbors are; the two conditions are reaching for different predicate types, not just different words.
+      A: very, rather
+      B: a, the
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

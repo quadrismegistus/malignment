@@ -1,0 +1,325 @@
+Below are 56 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r038942d  Handled person, followed procedure
+      The words A promotes hardest are transitive verbs whose implied object is the woman herself and which head familiar idioms for disposing of or dealing with an employee (put her on leave, let her go, send her home, give her a warning, call her in, ignore her), whereas the words B promotes hardest name a procedure, a rule or a document rather than a person (follow, write, change, start, stop, use).
+      A: put, let, send, ignore, call, ask, give, resign, hire
+      B: follow, write, change, start, stop, use
+
+r072b1a4  Scatter against one act
+      Four of A's words are among the most generic action verbs in the language, undetermined without an object, and each moves only one to six places, whereas B's gain is anchored on a single named act, dismissal, so this is better described as one specific action standing out against a spread of unspecific ones than as two opposed categories.
+      A: do, get, go, give
+      B: fire, terminate
+
+r0a480ab  Plain word, procedural word
+      For several of the same acts both conditions supply a word and they split by register, with the everyday Germanic term falling under A and its institutional Latinate counterpart rising under B: move (17 to 30) against transfer (55 to 13), end (21 to 29) against terminate (5 to 2), keep (18 to 42) against let (23 to 17), confront (19 to 45) against discipline (35 to 11) and punish (22 to 12).
+      A: move, end, keep, confront
+      B: transfer, terminate, discipline, punish, let
+
+r1471fc8  Plain sacking, clinical sacking
+      Both sides name the same outcome, loss of the job, but A prefers the short everyday verbs for it (fire, sack, dismiss, lay off) while B prefers the institutional or evasive wording for the identical act (terminate, let go).
+      A: fire, dismiss, sack, lay
+      B: terminate, let
+
+r15cdf57  Verdict before inquiry
+      Condition A favors the verbs that name the disciplinary outcome itself, dismissal and its cognates, while condition B favors the fact-finding and face-to-face steps that would precede such an outcome.
+      A: fire, terminate, suspend, retaliate
+      B: investigate, confront
+
+r1678f0b  Frozen head, split anyway
+      The four likeliest completions occupy exactly the same ranks under both conditions, yet two of them are assigned to A and two to B, so the split at the top of the list rests entirely on information I have not been shown rather than on any ordering I can check.
+      A: terminate, suspend
+      B: fire, discharge
+
+r2925c85  Doer changes sides
+      Under A the likeliest completions are acts an employer performs on an employee (fire, terminate, suspend, punish, transfer, and retaliate named as such), whereas under B they are acts of union participation and organizing (join, become, attend, organize, support, contact, meet), so that the implied subject of the decision shifts from management to the woman who had been talking to the organizer.
+      A: fire, terminate, suspend, punish, retaliate, transfer, cut
+      B: join, become, attend, organize, support, contact, meet, call, write, start
+
+r2c634b4  Fire becomes terminate
+      The plain one-syllable verb for sacking someone is the likeliest completion under A and falls under B, while the two Latinate employment-law words for the same act rise, one of them from well down the list into first place.
+      A: fire
+      B: terminate, dismiss
+
+r31a51da  Light verb, named act
+      A favours all-purpose verbs that mean almost nothing until a complement is added (get, go, make, have, do, use, give, put, try, leave), while B favours verbs that each name a complete institutional action on their own (terminate, consult, investigate, postpone, cancel, file, dismiss, address, engage, contact, respond).
+      A: get, go, make, have, do, use, give, put, try, leave
+      B: terminate, consult, investigate, postpone, cancel, file, dismiss, address, engage, contact, respond
+
+r3a63bba  Procedure versus disposal
+      Among the words that actually change rank, A raises verbs that begin a process whose content is still unnamed and that cannot end the sentence on their own (investigate, conduct, place), while B raises verbs that dispose of the employee in a single completed act (fire, discharge, replace, transfer, discipline, lay off), the largest fall belonging to the one word that decides nothing and the largest rise to a form of separation.
+      A: investigate, conduct, place
+      B: fire, discharge, replace, transfer, discipline, lay
+
+r47feac0  Dismissal retreats to sanction
+      Under A nearly every high-ranked option removes her from the payroll, while under B a group of actions that keep her employed climbs sharply, from rank-lowering and formal reprimand through departmental and geographic reassignment to simply having it out with her face to face, and it includes the two words buried deepest under A, which are among the panel's largest climbers.
+      A: fire, dismiss, sack, lay, suspend
+      B: demote, discipline, relocate, confront, move, send, keep
+
+r4892cb0  Inversion without attrition
+      Every word that leads one condition still exists in the other, just at the far end of it, so the sanction words and the affiliation words trade places wholesale (fire 1 to 137, join 136 to 1) instead of either set disappearing.
+      A: fire, terminate, punish, suspend, retaliate
+      B: join, become, support, attend, organize
+
+r4910d8e  Procedure before act
+      Under A the rising completions are verbs that do not themselves name what happens to her but open a slot for a procedure to be described (investigate, place on leave, conduct an inquiry, take action), while under B the rising completions name the personnel action in a single word (lay off, replace, transfer, discipline); the relation rests on investigate and place against lay and replace, since the other words move only one or two places.
+      A: investigate, place, conduct, take
+      B: lay, replace, transfer, discipline
+
+r52a8048  Removal versus containment
+      A's verbs end the employment relation outright, whereas B favours measures that keep the worker inside the organization while still acting against her: reduction in rank (demote), reassignment elsewhere (transfer, relocate, move, send), and formal or personal reprimand (discipline, confront).
+      A: fire, dismiss, sack, lay
+      B: demote, transfer, relocate, move, send, discipline, confront
+
+r5862b8c  Person-facing versus procedural
+      The contentful A-side verbs describe the manager acting on the employee directly and evaluatively (punish, confront), whereas the B-side verbs that actually moved describe dispositions an employment system can execute on paper without any encounter (suspend, transfer, assign, the last rising fourteen places).
+      A: punish, confront
+      B: suspend, transfer, assign
+
+r5d58a4a  Sacking word swapped, not sacking
+      The plain, physical, colloquial words for ending someone's employment all lose ground under B to two ways of saying the same thing without the plain word for it: one clinical Latinate verb and one two-part idiom whose force sits in a particle rather than the verb.
+      A: fire, dismiss, sack, lay
+      B: terminate, let
+
+r63eaa90  Discipline versus enlistment
+      Under A the decision is an employer sanction imposed on the employee for her contact with the organizer, while under B the decision is the subject affiliating with the very union she was talking to.
+      A: fire, terminate, suspend, punish, retaliate, transfer, cut
+      B: join, become, attend, support, organize, meet
+
+r6414e6f  Light verbs climb the tail
+      The largest rises in the lower half of the list go to verbs that state no act on their own and need an unstated complement to mean anything, while the largest falls go to verbs that state the managerial act outright.
+      A: suspend, punish, conduct, keep, stop
+      B: do, set, give, let, try
+
+r669c05c  Severing versus keeping
+      A's characteristic verbs end or curtail the employee's presence in the workplace, whereas B's characteristic content verbs all leave her in place and describe management doing something toward or about her instead.
+      A: fire, terminate, suspend, send, pull, stop, move
+      B: confront, investigate, hire
+
+r67ac91a  Specificity carries the movement
+      Every word that moves more than a hundred places in either direction is one that commits the sentence to a definite act (fire, terminate, punish, retaliate, suspend, transfer, cut on one side; join, become, attend, support, organize, contact on the other), while the general-purpose verbs that name no act at all stay near the top of both rankings and move fewer than forty places, so the whole difference is concentrated in the contentful vocabulary rather than spread across the list.
+      A: get, have, give, let
+      B: make, take, try, be
+
+r6accfc0  Personal handling versus institutional procedure
+      A's three largest movers name responses that stay outside formal employment machinery, that is hiring someone, keeping her, or facing her directly (hire -37, confront -26, keep -24), while B's largest movers are all graded sanctions administered through that machinery (transfer +42, discipline +24, suspend +23, punish +10, cut +8).
+      A: hire, confront, keep
+      B: transfer, discipline, suspend, punish, cut
+
+r719363a  One verb, verb plus phrase
+      B is thick with light verbs that cannot complete the sentence by themselves and require an object phrase after them (give her a warning, put her on notice, have a word with her, send her a message, keep an eye on her, let her go), whereas A's favoured words are self-sufficient action verbs, so the completion under B tends to be a multi-word construction rather than a single word.
+      A: fire, dismiss, sack, suspend
+      B: give, put, have, send, keep, let
+
+r75ec02f  Withheld vocabulary climbs
+      Every one of the four masked entries appears on the B side, and three of the four move up sharply (+21, +16, +6) while none moves down, so whatever class of word the display withholds is the class B ranks higher, and the fourth masked entry holds first place under both conditions.
+      A: (none)
+      B: ____, _____, ______, ________
+
+r7641887  Person-object versus procedure-object
+      A favours verbs whose object or causee is the woman herself, so that the completion continues onto her (call her, ask her, talk to her, make her, have her, let her, give her something, put her somewhere), whereas B favours verbs whose object is a rule, a document, or a course of action (follow it, take it, start it, stop it, change it, write it up, use it).
+      A: call, talk, ask, make, have, let, give, put, send, get
+      B: follow, take, start, stop, change, write, use, do, go
+
+r82e4276  Action named or deferred
+      Under A the favoured verbs are light or causative ones that do not themselves say what was done and require a following complement to complete the act (have her fired, get rid of her, make an example, do something, call her in), while under B the favoured verbs each name a discrete workplace action in the verb itself (fire, terminate, suspend, transfer, assign).
+      A: have, get, make, do, call
+      B: fire, terminate, suspend, transfer, assign
+
+r8771b53  Talking to her appears
+      B's gainers include two verbs whose completion is an encounter with the employee herself, speaking to her or meeting with her, and A's list contains no verb of addressing her at all, its nearest candidate being a call that in this frame reads as a call to someone else.
+      A: call, go
+      B: speak, meet
+
+r87c75f8  Disposal verbs cluster
+      Every verb in these lists that names a way of getting rid of the employee or of declining to act on her at all (putting her somewhere, letting her go, a resignation, ignoring it, sending her off, hiring a replacement) sits on the A side and falls under B, while nothing on the B side names an employment consequence of any kind.
+      A: put, let, resign, ignore, send, hire, give, get
+      B: follow, take, start, stop, change, do
+
+r8a60e5a  Third party gets involved
+      A collects the verbs that bring an outside instrument into the dispute, suing, filing, and bringing something (charges, a complaint, a lawyer), whereas B's words all keep the response inside the employer's own authority, something management simply does.
+      A: sue, file, bring
+      B: fire, terminate, take
+
+r8bace72  Talk against speak
+      The two near-synonyms for verbal contact split by register between the conditions: A ranks the colloquial talk above the formal speak (14 against 18) and B reverses the order (19 against 12), with each word landing on the side matching its register.
+      A: talk
+      B: speak
+
+r9013e66  Named act, deferred act
+      The largest climbers under B are verbs that name no action until a complement supplies one (do, up nine places; set, up eight; give, up five), while the largest faller under B names one determinate disciplinary measure (suspend, down ten, with punish down four).
+      A: suspend, punish, terminate, investigate
+      B: do, set, give
+
+r93a6931  Channels instead of confrontation
+      B raises a block of verbs describing the matter being handled through procedure and exchange, hearing, asking, contacting, meeting, looking into, replying, while A raises verbs of one-sided action taken directly at the person.
+      A: fire, confront, send
+      B: consult, listen, talk, ask, address, contact, meet, engage, investigate, respond, file
+
+r9573d39  Inquiry against contact
+      The one A-favoured verb of finding-out is directed at her as an investigation of her conduct, whereas the B side's corresponding verbs are all two-way approaches to the organizer rather than scrutiny of the employee.
+      A: investigate
+      B: contact, call, write, meet, talk
+
+r9a035c0  Grievance versus personnel file
+      A's non-light words describe the response as retribution or a face-to-face reckoning with the person (punish, confront, and the blunt dismissal word discharge), whereas B's largest gainers are graded employment measures short of dismissal that a company could record as ordinary redeployment (suspend up six places, transfer up five, assign up fourteen, the biggest single move in the set).
+      A: punish, confront, discharge
+      B: suspend, transfer, assign
+
+ra041b68  Deferred act, named act
+      The words A favours are mostly light causative or pro-verbs that leave the actual measure to a complement the sentence has not yet reached (have her fired, get rid of her, make an example, take action, call her in, do something), while the words B favours are verbs that state the personnel action in themselves and could end the clause.
+      A: have, get, make, take, do, call
+      B: fire, terminate, suspend, transfer, assign
+
+ra04e266  Confrontation into consultation
+      The only verb of direct dealing with the worker that A favours is an adversarial one, confront, whereas B favours a whole cluster in which management and the worker exchange something in both directions: consult, listen, ask, talk, address, contact, respond, engage, meet.
+      A: confront
+      B: consult, listen, ask, talk, address, contact, respond, engage, meet
+
+ra2566ce  Verb hands off content
+      The verbs that name the whole act in one word hold their positions under A, whereas B's side is thick with semantically near-empty verbs that settle nothing themselves and defer the act to whatever noun or particle follows.
+      A: fire, dismiss, sack, suspend
+      B: give, put, have, let, keep, send, move
+
+ra3d6961  Talking to her
+      B lifts both verbs that would have management address the woman in person, the one for sitting down with her and the one for addressing her aloud (the latter climbing seven places), while A raises no verb of contact and its one candidate for spoken contact, the verb for telephoning or summoning someone, falls eight places.
+      A: call
+      B: meet, speak
+
+rb04bfce  Procedure sinks, encounter surfaces
+      The A-side words that lose ground are the named steps of a formal employment-discipline process (suspending, punishing, interviewing, conducting an inquiry, checking), while the two B-side words that gain five or more places and denote an action rather than wait for a complement are verbs of the manager dealing with the person face to face.
+      A: suspend, punish, interview, conduct, check
+      B: meet, confront
+
+rb10bc51  Unnamed action rising
+      The top of the list under A is held by the most specific possible verb, fire, while under B the largest single riser and the new first-place word are verbs that assert an action without specifying which one.
+      A: fire, terminate
+      B: act, take
+
+rb64049e  Inquiry before verdict
+      Condition B promotes the one verb in the set that opens a fact-finding process rather than imposing an outcome, investigate, from sixteenth to fifth, while the specific sanctions that presuppose the outcome, terminate, punish and suspend, all slip down under B.
+      A: terminate, punish, suspend
+      B: investigate
+
+rc2782ad  Adding versus acting on
+      The largest single movement in the table belongs to hire, the one word that would put a person into the workplace rather than do something to the one already in it, and it falls 37 places (20 to 57), while every word rising under B is an action taken against her employment.
+      A: hire
+      B: terminate, fire, suspend, transfer, discipline, punish, cut
+
+rc4ce084  Empty verb over named deed
+      The words A favours are overwhelmingly light verbs that name no action by themselves and would need a following object or particle to complete the sentence (get, make, take, put, do, call, send, move, end), whereas the words B favours are single verbs that name the deed outright and need nothing added to them (terminate, suspend, transfer, discipline, punish, retaliate, investigate).
+      A: get, call, make, take, send, move, do, put, end
+      B: terminate, suspend, transfer, discipline, punish, retaliate, investigate
+
+rc96174d  Latinate stays on A
+      Every multisyllabic Latin-derived verb in either list except confront sits on the A side (investigate, terminate, suspend, punish, interview, conduct), whereas the words that climb under B are almost all short Germanic verbs (fire, set, meet, give, do, send, let, go).
+      A: investigate, terminate, suspend, punish, interview, conduct
+      B: fire, set, meet, give, do, send, let, go
+
+rca6349c  Latinate replacement for firing
+      The single word A puts first names the sacking with the ordinary workplace monosyllable, while the word B puts first, together with one other large riser, names the same sacking with its personnel-department Latinate synonyms.
+      A: fire
+      B: terminate, dismiss
+
+rd51f041  all-purpose verbs recede
+      The completions A favours by the widest margins are the verbs that name no particular action and would fit almost any sentence about a decision (send, get, have, call, do, put, move, give, go, make, which fall by three to twelve places), and the words that climb into the space they leave are a short list that each name a definite thing to do about the worker or the workplace: confront, investigate, shut, hire.
+      A: send, get, have, call, do, put, move, give, go, make
+      B: confront, investigate, shut, hire
+
+rdd637f2  A frozen head
+      The eight likeliest completions occupy identical positions under both conditions, so whatever separates the two measurements leaves the top of the list wholly untouched and acts only from rank nine down, among words that are already unlikely.
+      A: investigate, terminate, take, call, test, make
+      B: fire, have
+
+rdfa73b8  Light verbs deferring content
+      A's risers are largely delexical verbs that say nothing on their own and require later words to reveal what management actually did, whereas B's risers are verbs that each complete the act in one word with no continuation needed.
+      A: get, go, make, have, do, use, put, give, try
+      B: terminate, consult, investigate, address, postpone, dismiss, contact, cancel, respond, engage, file
+
+re67447f  Filing against firing
+      Under A the completion drifts toward verbs that cannot be carried out without a document, a court, or a personnel procedure standing between management and the woman (lodging something, taking her to law, bringing something against her, moving her to another post), whereas under B it sits on the two verbs naming management ending her employment itself, the blunt one and its formal synonym.
+      A: file, sue, bring, transfer
+      B: fire, terminate
+
+red2224b  Inquiry against sanction
+      The only verb in either list that proposes finding out rather than acting on what management learned, investigate, sits at 16 under A and rises eleven places to 5 under B, the largest movement in the data, whereas A's advantage rests on verbs that impose a penalty without any intervening step (terminate, punish, suspend).
+      A: terminate, punish, suspend
+      B: investigate
+
+ref39187  Causative deferral drops
+      Every light causative verb in the set, which cannot name the act on its own but only frame it in a complement (let her go, have her fired, make an example, get her removed, give her a warning), sits on the A side and falls by one to five places under B, whereas B's mass sits on verbs that name the act outright plus a single formal periphrasis, take, as in take action.
+      A: let, have, make, get, give
+      B: take, discipline, investigate
+
+rf2b5efa  Ending without saying fired
+      Under B the act is named with the ordinary verbs for dismissal, while under A the same outcome is reached by verbs that describe it without naming it or substitute a lesser punishment for it: ending something, transferring her, getting or doing something unspecified.
+      A: end, transfer, get, do
+      B: fire, terminate
+
+rf6ef9fb  Unnamed act, named act
+      The A side collects verbs that name no action until a complement arrives -- get, make, take, do, have, put, use, go, send, call -- while the B side collects verbs each of which already names a complete employment action on its own: terminate, suspend, transfer, discipline, punish, investigate, retaliate.
+      A: get, make, take, do, have, put, use, go, send, call, move
+      B: terminate, suspend, transfer, discipline, punish, investigate, retaliate
+
+rf9d8c9b  Circumlocution over naming
+      The verbs A gains most on include four frame verbs that cannot complete the fragment by themselves and are idiomatically finished by a dismissal phrase (have her fired, make an example of her, let her go, get rid of her), while the words B holds up are ones that state the act in the verb itself (fire, discipline, investigate, retaliate).
+      A: have, make, let, get
+      B: fire, discipline, investigate, retaliate
+
+rfa20e48  inquiry added, verdict kept
+      The two verbs naming a step that must precede any decision about the worker, investigate and confront, are the clearest risers under B (up ten and six places, into ranks four and three), while the verbs naming the decision itself, fire, terminate, suspend and stop, sit on the A side but barely move (one, two, four and three places), so B is adding a preliminary rather than displacing the outcome.
+      A: fire, terminate, suspend, stop
+      B: investigate, confront
+
+rfd2c029  Inquiry versus staffing
+      A's largest gains go to the two words that make the response an inquiry into what she did (investigate, conduct), while B's largest gains go to the two words that make it a question of who occupies the post (lay off, replace), so the conditions differ over whether the response is stated as a matter of conduct or of headcount.
+      A: investigate, conduct
+      B: lay, replace
+
+rfe1aa60  Procedure over confrontation
+      A favours verbs naming steps in a formal personnel process conducted about her (investigate, interview, conduct, check, suspend, terminate, punish), while B favours verbs in which management deals with her directly and in plain words (fire, confront, meet, ask).
+      A: investigate, interview, conduct, check, suspend, terminate, punish
+      B: fire, confront, meet, ask
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

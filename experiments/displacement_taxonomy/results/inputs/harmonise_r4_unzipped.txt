@@ -1,0 +1,220 @@
+Below are 35 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r00edcd7  Worn garment yields to carried bag
+      The one large movement in the data is an exchange between clothing worn on the lower body and luggage that is carried: shorts drops nine places under B and jeans slips one, while backpack rises ten places into roughly the position shorts vacates and suitcase rises two.
+      A: shorts, jeans
+      B: backpack, suitcase
+
+r02134e8  Naming yields to blank
+      The two largest upward moves belong to items that do not name an object at all, a bare blank rising seven places and the deferring possessive own rising three, while the three largest falls all belong to words naming one definite thing a person could point at: a pair of trousers, a suitcase, a sweater.
+      A: trousers, suitcase, sweater
+      B: ____, own
+
+r071839e  Worn versus carried
+      Every word A favours is something on a person's body, whereas B promotes two zippered objects that are not clothing at all and can be opened with nobody wearing them.
+      A: fly, jeans, trousers, shorts, slacks, zipper
+      B: tent, bag
+
+r11eaf49  aperture over garment
+      Under B the two nouns naming whole articles of clothing other than the trousers themselves each fall exactly two places, while the noun naming the zippered opening of the trousers keeps the first position it already held under A.
+      A: shirt, shorts
+      B: fly
+
+r15b1de8  trousers-synonym concentration
+      The three mutually substitutable dictionary names for full-length trousers all rise under B, while the one abbreviated, casual legwear term falls under it, so B pulls toward the standard whole-garment vocabulary and A keeps the less standard item.
+      A: shorts
+      B: pants, jeans, slacks
+
+r184e2db  Undressing versus unpacking
+      Every word A favours is a garment worn over the hips and legs, so that unzipping it takes clothing off the man, whereas B's side adds the outerwear and the carried luggage that can be unzipped with nobody undressed, and the two largest movements on the panel run exactly this way, shorts falling nine places while backpack rises ten.
+      A: pants, jeans, shorts
+      B: backpack, suitcase, jacket, hoodie
+
+r214985e  Torso garment demoted
+      The only item on the panel that is not worn below the waist takes the largest fall of any word here, three places, while the three trouser nouns either hold the top ranks or gain, so B narrows the completion toward the legs and A leaves room for a coat.
+      A: jacket
+      B: jeans, pants, slacks
+
+r2225a52  Body admitted only under A
+      Two parts of the body that cannot literally be unzipped, mouth and lips, are ranked among A's completions and have no counterpart anywhere in B, every one of whose favored words names an object that actually carries a zip.
+      A: mouth, lips
+      B: fly, jacket, coat, suitcase, trousers, suit
+
+r23e898c  Specific Yields To Generic
+      Each word that falls under A has a coarser or commoner counterpart on the B side that does not fall, so that trousers drops five places and jeans one while pants holds at four, suitcase drops three while bag holds at three, and sweater drops three while jacket holds at two and shirt gains one.
+      A: trousers, jeans, suitcase, sweater
+      B: pants, bag, jacket, shirt
+
+r28cab35  Underlayer against overcoat
+      A promotes the layer worn under or against the body and the generic word for the whole of it (shirt, jeans, pants, clothes), while B promotes the outermost layer put on over everything else and the luggage-like things that go with it (jacket, coat, overcoat, robe, suit, suitcase).
+      A: shirt, jeans, pants, clothes
+      B: jacket, coat, overcoat, robe, suit, suitcase
+
+r32b8a30  Verb-blind possessive frame
+      B's largest rises go to words that commonly follow the possessive his after almost any verb, including continuations that are not objects of an action at all, whereas A's words are selected by this particular verb and would be odd after most others.
+      A: shirt, jacket, jeans, trousers, fly, coat, suit, shorts, sweater, collar, belt, wallet
+      B: head, hands, hand, eyes, back, mind, way, own, first
+
+r4039375  Legwear slips down
+      Both words for garments worn below the waist that carry any movement fall under B, trousers furthest of anything on the panel and jeans by one place, and nothing that rises names lower-body clothing; what gains instead is an upper-body garment and a garment part, shirt and pockets.
+      A: trousers, jeans
+      B: shirt, pockets
+
+r40cea33  Zippable versus unzippable
+      A promotes items of clothing and worn accessories that open by a fastener, including the name of the opening itself, while B promotes parts of a human body, which have no fastener and cannot be opened, so the conditions disagree about whether the object is the garment or the person inside it.
+      A: shirt, jacket, jeans, pants, coat, suit, fly, trousers, shorts, sweater, collar, belt, wallet
+      B: head, hands, hand, arms, arm, eyes, foot, feet, leg, ears, mouth, chest, back
+
+r4a00d5c  Waist down to shoulders up
+      Beneath the shared top-ranked words, A's alternatives all name the lower-body garment or its zip (fly, jeans, trousers, shorts, slacks, zipper) while B's promoted alternatives name things worn on the torso and fastened at the front (parka, hoodie, jacket), so the zipped garment migrates up the body.
+      A: fly, jeans, trousers, shorts, slacks, zipper
+      B: parka, hoodie, jacket
+
+r4de275d  Torso outranks waist
+      The only two completions that gain ground both name garments worn over the chest and shoulders, while every completion naming a lower-body garment loses ground or holds still, so the object being opened migrates upward on the body.
+      A: trousers, jeans, pants, fly
+      B: jacket, coat
+
+r5bdbede  Synonym set versus scatter
+      A's favoured words are a near-interchangeable paradigm for a single referent, four names for the same garment plus two names for its fastening, while B's are a heterogeneous spread across coats, shelter, luggage and a material, so A concentrates its alternatives on one object and B distributes them across several kinds of object.
+      A: jeans, trousers, slacks, shorts, fly, zipper
+      B: parka, hoodie, jacket, tent, bag, leather
+
+r8393ea5  Layers put on over
+      B favors garments worn as an outer layer over other clothing (jacket, coat, overcoat) where A favors the layer beneath or the undifferentiated whole (shirt, jeans, pants, clothes), with parka sitting on A's side as a straightforward exception.
+      A: shirt, jeans, pants, clothes
+      B: jacket, coat, overcoat
+
+r86ccf45  Body or fastening
+      The only two words in either list that name parts of a person rather than an object with a fastening, mouth and lips, are both on A's side and both fall a long way under B (mouth 8 to 21, lips 15 to 65), whereas B's leading word names the fastening itself.
+      A: mouth, lips
+      B: fly
+
+r99d5e96  Garment against its fastening
+      Condition A's difference rests most on the name of the whole garment (pants, listed first among A's words), while condition B's rests most on the opening or closure in it (fly, listed first among B's words, with zipper up two places and flies up one), so the same act is completed by the thing worn under A and by the mechanism that opens it under B.
+      A: pants
+      B: fly, zipper, flies
+
+rb2d9e92  Plain word, dressed word
+      Where the two conditions have a choice between an everyday, unmarked name and a more formal, older or more specific one for the same thing, A takes the plain one and B takes the dressed one, most directly in the pairs pants/trousers and zipper/fly, and in A's pocket and backpack against B's overcoat, robe and suit.
+      A: pants, zipper, jeans, pocket, backpack
+      B: trousers, fly, overcoat, robe, suit
+
+rbbb9e6d  Waist below, torso above
+      Under A the completions that gain are the garments covering the hips and legs together with the fastening at their front (pants, jeans, trousers, fly, zipper), while under B the gain goes entirely to garments worn over the torso and shoulders (jacket, coat).
+      A: pants, jeans, trousers, fly, zipper
+      B: jacket, coat
+
+rbfbb087  Gear alongside garment
+      A's side also contains zippered objects that are not worn at all but carried or camped in (tent, backpack), whereas every word on B's side is a piece of clothing, so the widening of the completion beyond apparel happens only under A.
+      A: tent, backpack
+      B: jacket, coat
+
+rc496be9  Aperture yields to fastener
+      Both words for the slit in a pair of trousers fall a place under B while the word for the metal fastening that closes it climbs two, so the same act is named by its hardware rather than by the opening it exposes.
+      A: fly, flies
+      B: zipper
+
+rc61374e  Worn thing to carried thing
+      Every word A favours is an article of clothing on a person or a part of one, whereas B pulls two objects that are not clothing at all into the top ten from ranks 43 and 13 (tent, bag), so under B the thing unzipped need not be attached to a body.
+      A: jeans, trousers, shorts, slacks, fly, zipper
+      B: tent, bag
+
+rca236ce  Clothes replaced by body
+      Every word A raises names a garment or a worn or carried article that can be opened or taken off him (shirt, jacket, jeans, pants, belt, coat, wallet, suit, fly, trousers, sweater, collar, shorts), while the words B raises in their place name parts of his body that cannot be unzipped or removed (head, hands, hand, arms, arm, eyes, ears, leg, feet, foot, back, mouth, chest).
+      A: shirt, jacket, jeans, pants, belt, coat, wallet, suit, fly, trousers, sweater, collar, shorts
+      B: head, hands, hand, arms, arm, eyes, foot, ears, leg, feet, back, mouth, chest
+
+rca37329  idiom against hardware
+      The trouser fastening is named idiomatically on the A side, by the colloquial noun and its British plural, and named as a piece of literal hardware on the B side, so the same referent changes register rather than changing identity.
+      A: fly, flies
+      B: zipper
+
+rce5a67f  Worn beats carried
+      Every completion naming camping or carrying equipment rather than something worn on the body sits on the A side and none of them gains a place, while the side that gains contains only clothing, so B holds the scene on a dressed person rather than on his kit.
+      A: tent, sleeping, backpack
+      B: jacket, coat
+
+rd4a8623  The fastening, not the garment
+      All three words that name the zip apparatus rather than the item it closes sit on B's side, while A's side names only whole garments, so under B the completion is allowed to stop at the mechanism instead of the thing worn.
+      A: pants, jeans, shorts
+      B: fly, flies, zipper
+
+rd87b610  Waist down, chest up
+      The words A favours are garments worn below the waist, while the words B promotes are garments worn over the torso as an outer layer, so the same act of unzipping is relocated upward on the body.
+      A: jeans, trousers, shorts, slacks
+      B: parka, hoodie, jacket
+
+rdfb3dca  Same garment, rival name
+      The word the A difference rests on most and the word the B difference rests on most are two dialect names for one and the same garment, British "trousers" against American "pants", so the largest single component of the difference is a choice between labels rather than between things.
+      A: trousers
+      B: pants
+
+re5e68ef  Blank Displaces Garment
+      The three largest gains under B all go to items that do not name an article at all, a token consisting only of underscores climbing seven places, the possessive determiner "own" climbing three, and "pockets", a fitting rather than the thing it belongs to, climbing two, whereas every word that recedes under A is the outright name of a wearable or carried object.
+      A: trousers, sweater, suitcase, jeans
+      B: ____, own, pockets
+
+rf60e95d  The opening itself
+      Both words that name the fastening or the slit it closes rather than the garment it belongs to sit on the A side, and no word on the B side names a fastening, so only under A can the completion refer to the aperture instead of the object.
+      A: fly, zipper
+      B: (none)
+
+rf8dde1f  Casual versus tailored naming
+      The same lower-body garment and its opening get a plain, casual, mechanically generic name under A (pants, jeans, the tautological zipper, the catch-all clothes) and a tailored or idiomatic name under B (trousers, fly, suit, robe), with trousers against pants and fly against zipper standing as near-exact minimal pairs for one referent.
+      A: pants, jeans, zipper, clothes
+      B: trousers, fly, suit, robe
+
+rfae9fd8  garment versus opening
+      Every A-side word names a complete article of clothing worn on the body, while the one B-side word names instead the zippered slit in the front of such an article, so the sides differ over whether the thing unzipped is the garment itself or the part of it that actually opens.
+      A: pants, shirt, shorts
+      B: fly
+
+rffc8506  Specific modifier, generic filler
+      Both conditions rank some words that could not themselves be the thing unzipped, but A's are attributive words that still commit the phrase to a particular garment (blue, left, as in a blue jacket or a left sleeve), whereas B's are the generic fillers of the bare possessive idiom (own, first, way, as in his own, his first, his way), which commit the phrase to no object at all.
+      A: blue, left
+      B: own, first, way
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

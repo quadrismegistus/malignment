@@ -1,0 +1,3130 @@
+{
+ "instrument": "r4",
+ "harmoniser_version": "h1",
+ "mode": "per_prompt",
+ "n_raters": 3,
+ "shards": [
+  {
+   "frame": "isr_action",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_isr_action.txt",
+   "n": 52,
+   "lineages": 9
+  },
+  {
+   "frame": "isr_affect",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_isr_affect.txt",
+   "n": 38,
+   "lineages": 8
+  },
+  {
+   "frame": "isr_trait",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_isr_trait.txt",
+   "n": 50,
+   "lineages": 9
+  },
+  {
+   "frame": "pal_action",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_pal_action.txt",
+   "n": 50,
+   "lineages": 9
+  },
+  {
+   "frame": "pal_affect",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_pal_affect.txt",
+   "n": 50,
+   "lineages": 9
+  },
+  {
+   "frame": "pal_trait",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_pal_trait.txt",
+   "n": 48,
+   "lineages": 9
+  },
+  {
+   "frame": "stroking",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_stroking.txt",
+   "n": 59,
+   "lineages": 11
+  },
+  {
+   "frame": "union",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_union.txt",
+   "n": 56,
+   "lineages": 11
+  },
+  {
+   "frame": "unzipped",
+   "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harmonise_r4_unzipped.txt",
+   "n": 35,
+   "lineages": 9
+  }
+ ],
+ "mapping": {
+  "r038a719": {
+   "frame": "isr_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "r05fef05": {
+   "frame": "isr_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r0c9bbc4": {
+   "frame": "isr_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "r13cfebf": {
+   "frame": "isr_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 2
+  },
+  "r1aa5076": {
+   "frame": "isr_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 0
+  },
+  "r1b0a1e2": {
+   "frame": "isr_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 2
+  },
+  "r1f86340": {
+   "frame": "isr_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 2
+  },
+  "r2ad434e": {
+   "frame": "isr_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 0
+  },
+  "r2cd27c0": {
+   "frame": "isr_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 1
+  },
+  "r32f7675": {
+   "frame": "isr_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 2
+  },
+  "r38b0895": {
+   "frame": "isr_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 1
+  },
+  "r3d3dbe6": {
+   "frame": "isr_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 1
+  },
+  "r4621678": {
+   "frame": "isr_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 1
+  },
+  "r49a26ae": {
+   "frame": "isr_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "r4b3011c": {
+   "frame": "isr_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 1
+  },
+  "r540e64c": {
+   "frame": "isr_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 2
+  },
+  "r57b0ec4": {
+   "frame": "isr_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "r58458f2": {
+   "frame": "isr_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "r5eaf568": {
+   "frame": "isr_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  },
+  "r68ceddb": {
+   "frame": "isr_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "r6b03926": {
+   "frame": "isr_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "r6c9b503": {
+   "frame": "isr_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 1
+  },
+  "r73c620c": {
+   "frame": "isr_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 2
+  },
+  "r759a9df": {
+   "frame": "isr_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 2
+  },
+  "r7716784": {
+   "frame": "isr_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r8e20716": {
+   "frame": "isr_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 2
+  },
+  "r9703a5b": {
+   "frame": "isr_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 2
+  },
+  "ra26b989": {
+   "frame": "isr_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "ra307558": {
+   "frame": "isr_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 1
+  },
+  "ra9bc12b": {
+   "frame": "isr_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 2
+  },
+  "raf3fdf9": {
+   "frame": "isr_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "rb77bdcc": {
+   "frame": "isr_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "rb90d9ca": {
+   "frame": "isr_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 2
+  },
+  "rbf34b96": {
+   "frame": "isr_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "rc02869a": {
+   "frame": "isr_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "rc595202": {
+   "frame": "isr_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "rc707cba": {
+   "frame": "isr_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 1
+  },
+  "rc764d10": {
+   "frame": "isr_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 0
+  },
+  "rd01c448": {
+   "frame": "isr_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "rd2da77f": {
+   "frame": "isr_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "rd4411f2": {
+   "frame": "isr_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 0
+  },
+  "rd60fbb6": {
+   "frame": "isr_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 2
+  },
+  "rd7ef4ae": {
+   "frame": "isr_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "rd811fd2": {
+   "frame": "isr_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "re66cf60": {
+   "frame": "isr_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "re859521": {
+   "frame": "isr_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 2
+  },
+  "rec6520a": {
+   "frame": "isr_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "ree0c35e": {
+   "frame": "isr_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 2
+  },
+  "rf23d5eb": {
+   "frame": "isr_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 0
+  },
+  "rf2f579e": {
+   "frame": "isr_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "rfb0eeee": {
+   "frame": "isr_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 2
+  },
+  "rffdab29": {
+   "frame": "isr_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "r05aebcc": {
+   "frame": "isr_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "r06e85a1": {
+   "frame": "isr_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "r0eaae7f": {
+   "frame": "isr_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  },
+  "r140f654": {
+   "frame": "isr_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "r165d914": {
+   "frame": "isr_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 2
+  },
+  "r1d09462": {
+   "frame": "isr_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 1
+  },
+  "r1d45836": {
+   "frame": "isr_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 2
+  },
+  "r2426e1d": {
+   "frame": "isr_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "r25e70d4": {
+   "frame": "isr_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "r2b4aea3": {
+   "frame": "isr_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "r3780f59": {
+   "frame": "isr_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "r402652a": {
+   "frame": "isr_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 1
+  },
+  "r4656aa4": {
+   "frame": "isr_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "r4832fa7": {
+   "frame": "isr_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r49fba71": {
+   "frame": "isr_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "r50ad512": {
+   "frame": "isr_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "r54d74a6": {
+   "frame": "isr_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "r6f36787": {
+   "frame": "isr_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 0
+  },
+  "r80e8c6f": {
+   "frame": "isr_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 2
+  },
+  "r81db5c2": {
+   "frame": "isr_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "r844e9d2": {
+   "frame": "isr_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 1
+  },
+  "r86e2359": {
+   "frame": "isr_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r8705c6f": {
+   "frame": "isr_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r88712d6": {
+   "frame": "isr_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 0
+  },
+  "ra8c3d94": {
+   "frame": "isr_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 2
+  },
+  "rab3963d": {
+   "frame": "isr_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "rae07525": {
+   "frame": "isr_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 2
+  },
+  "raf6e473": {
+   "frame": "isr_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "rb175974": {
+   "frame": "isr_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 0
+  },
+  "rb476eb3": {
+   "frame": "isr_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 1
+  },
+  "rb6b07ab": {
+   "frame": "isr_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "rb9e191d": {
+   "frame": "isr_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 1
+  },
+  "rd024d3e": {
+   "frame": "isr_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "rddae023": {
+   "frame": "isr_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "rdef5508": {
+   "frame": "isr_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "rdf90bd5": {
+   "frame": "isr_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "re75a280": {
+   "frame": "isr_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "rfb904f5": {
+   "frame": "isr_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 1
+  },
+  "r054734c": {
+   "frame": "isr_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 2
+  },
+  "r084e097": {
+   "frame": "isr_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "r0c87bec": {
+   "frame": "isr_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "r120b0c0": {
+   "frame": "isr_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r1561840": {
+   "frame": "isr_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  },
+  "r1e210e6": {
+   "frame": "isr_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r1e57603": {
+   "frame": "isr_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "r268d11b": {
+   "frame": "isr_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "r27f8f14": {
+   "frame": "isr_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 2
+  },
+  "r27fc505": {
+   "frame": "isr_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 2
+  },
+  "r2c1428c": {
+   "frame": "isr_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 1
+  },
+  "r2f92a5e": {
+   "frame": "isr_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "r34069aa": {
+   "frame": "isr_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 1
+  },
+  "r39ba140": {
+   "frame": "isr_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 2
+  },
+  "r39eceac": {
+   "frame": "isr_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "r401a952": {
+   "frame": "isr_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 0
+  },
+  "r44f05cb": {
+   "frame": "isr_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 2
+  },
+  "r4e2474e": {
+   "frame": "isr_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "r5e94805": {
+   "frame": "isr_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 0
+  },
+  "r632df27": {
+   "frame": "isr_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "r64db6ec": {
+   "frame": "isr_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 1
+  },
+  "r65fa359": {
+   "frame": "isr_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "r6ea2dd6": {
+   "frame": "isr_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 1
+  },
+  "r77c25f3": {
+   "frame": "isr_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 2
+  },
+  "r7a98ed4": {
+   "frame": "isr_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "r7bbe13a": {
+   "frame": "isr_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 0
+  },
+  "r7cf80f9": {
+   "frame": "isr_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "r970c975": {
+   "frame": "isr_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 2
+  },
+  "r9a4eefd": {
+   "frame": "isr_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "ra182a74": {
+   "frame": "isr_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "ra5c7a0e": {
+   "frame": "isr_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 1
+  },
+  "ra5d6371": {
+   "frame": "isr_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "ra926ecf": {
+   "frame": "isr_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 1
+  },
+  "raf2cb6d": {
+   "frame": "isr_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "rb891105": {
+   "frame": "isr_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 2
+  },
+  "rb9c4a0a": {
+   "frame": "isr_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 0
+  },
+  "rbd18410": {
+   "frame": "isr_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 2
+  },
+  "rbfe5dd0": {
+   "frame": "isr_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 2
+  },
+  "rcc16e33": {
+   "frame": "isr_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 2
+  },
+  "rd3084d3": {
+   "frame": "isr_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 2
+  },
+  "rd4e9532": {
+   "frame": "isr_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 2
+  },
+  "rd8522c9": {
+   "frame": "isr_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "rd9d3f08": {
+   "frame": "isr_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 1
+  },
+  "rda708f5": {
+   "frame": "isr_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "rdd4aea7": {
+   "frame": "isr_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 0
+  },
+  "re2194f7": {
+   "frame": "isr_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "re72ae89": {
+   "frame": "isr_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "re7f9e0b": {
+   "frame": "isr_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "rebbed17": {
+   "frame": "isr_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 1
+  },
+  "rf20ab39": {
+   "frame": "isr_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "r03a0980": {
+   "frame": "pal_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "r0a88bab": {
+   "frame": "pal_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 2
+  },
+  "r0e832aa": {
+   "frame": "pal_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r0ecca5a": {
+   "frame": "pal_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 2
+  },
+  "r14a7e77": {
+   "frame": "pal_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "r158b4fe": {
+   "frame": "pal_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "r1b7286a": {
+   "frame": "pal_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "r1c648f6": {
+   "frame": "pal_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "r1d2e198": {
+   "frame": "pal_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 2
+  },
+  "r24aabb8": {
+   "frame": "pal_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 0
+  },
+  "r2b0e495": {
+   "frame": "pal_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 2
+  },
+  "r2cb3906": {
+   "frame": "pal_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "r3869bfc": {
+   "frame": "pal_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "r39edc91": {
+   "frame": "pal_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 1
+  },
+  "r3c608b9": {
+   "frame": "pal_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 2
+  },
+  "r3cf95bd": {
+   "frame": "pal_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 1
+  },
+  "r3f58102": {
+   "frame": "pal_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "r4656a21": {
+   "frame": "pal_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "r477b3ad": {
+   "frame": "pal_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "r477c487": {
+   "frame": "pal_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 0
+  },
+  "r5b9f360": {
+   "frame": "pal_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "r60a51fb": {
+   "frame": "pal_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 2
+  },
+  "r6816e1e": {
+   "frame": "pal_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r6e9df03": {
+   "frame": "pal_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 1
+  },
+  "r7b0ea63": {
+   "frame": "pal_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "r7eea170": {
+   "frame": "pal_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "r88bb709": {
+   "frame": "pal_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 1
+  },
+  "r92bd757": {
+   "frame": "pal_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "ra420990": {
+   "frame": "pal_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 2
+  },
+  "raa1e443": {
+   "frame": "pal_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 0
+  },
+  "raa22f53": {
+   "frame": "pal_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 0
+  },
+  "rb8f7dad": {
+   "frame": "pal_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 1
+  },
+  "rb93975b": {
+   "frame": "pal_action",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  },
+  "rbc8b44c": {
+   "frame": "pal_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 2
+  },
+  "rbfa32bb": {
+   "frame": "pal_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 1
+  },
+  "rc399407": {
+   "frame": "pal_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "rc61fbcd": {
+   "frame": "pal_action",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "rc89fd61": {
+   "frame": "pal_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 0
+  },
+  "rc9083da": {
+   "frame": "pal_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "rcc8bf32": {
+   "frame": "pal_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 1
+  },
+  "rd2de37a": {
+   "frame": "pal_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 2
+  },
+  "rd4fa165": {
+   "frame": "pal_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 2
+  },
+  "re0e7712": {
+   "frame": "pal_action",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 2
+  },
+  "re5ee9a3": {
+   "frame": "pal_action",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 2
+  },
+  "red54f45": {
+   "frame": "pal_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "ref0ee49": {
+   "frame": "pal_action",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "rf0877b6": {
+   "frame": "pal_action",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "rfa78560": {
+   "frame": "pal_action",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 2
+  },
+  "rfcbb094": {
+   "frame": "pal_action",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "rfe5df66": {
+   "frame": "pal_action",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 1
+  },
+  "r0352a89": {
+   "frame": "pal_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "r03ce9e4": {
+   "frame": "pal_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 2
+  },
+  "r04e3ac8": {
+   "frame": "pal_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 0
+  },
+  "r0d2bda9": {
+   "frame": "pal_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 2
+  },
+  "r0ea1880": {
+   "frame": "pal_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 1
+  },
+  "r0efe27d": {
+   "frame": "pal_affect",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 1
+  },
+  "r14a586e": {
+   "frame": "pal_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r18eb32a": {
+   "frame": "pal_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 1
+  },
+  "r2051082": {
+   "frame": "pal_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "r32682ec": {
+   "frame": "pal_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "r366a524": {
+   "frame": "pal_affect",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 2
+  },
+  "r37089f0": {
+   "frame": "pal_affect",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 0
+  },
+  "r398de2d": {
+   "frame": "pal_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "r3c61154": {
+   "frame": "pal_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "r40f91bc": {
+   "frame": "pal_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 2
+  },
+  "r43090a7": {
+   "frame": "pal_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 0
+  },
+  "r469ce39": {
+   "frame": "pal_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "r46f4073": {
+   "frame": "pal_affect",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 0
+  },
+  "r4982489": {
+   "frame": "pal_affect",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 1
+  },
+  "r50624e2": {
+   "frame": "pal_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 2
+  },
+  "r543f21f": {
+   "frame": "pal_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r583c37f": {
+   "frame": "pal_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "r6223084": {
+   "frame": "pal_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 2
+  },
+  "r69d129f": {
+   "frame": "pal_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "r70f9f22": {
+   "frame": "pal_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "r7255194": {
+   "frame": "pal_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "r79867fa": {
+   "frame": "pal_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 1
+  },
+  "r7fd5a8c": {
+   "frame": "pal_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "r842917f": {
+   "frame": "pal_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 2
+  },
+  "r933b4f8": {
+   "frame": "pal_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r953ec8e": {
+   "frame": "pal_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "r9b4d6ef": {
+   "frame": "pal_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 2
+  },
+  "r9c69bf1": {
+   "frame": "pal_affect",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 2
+  },
+  "r9f53041": {
+   "frame": "pal_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 2
+  },
+  "ra3b8c3e": {
+   "frame": "pal_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "ra71289a": {
+   "frame": "pal_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 1
+  },
+  "ra87850b": {
+   "frame": "pal_affect",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 0
+  },
+  "raa17360": {
+   "frame": "pal_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "rbb86a14": {
+   "frame": "pal_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "rbf57db5": {
+   "frame": "pal_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "rcf73336": {
+   "frame": "pal_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "rd44d663": {
+   "frame": "pal_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "rd7108d8": {
+   "frame": "pal_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "rdc273e0": {
+   "frame": "pal_affect",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 2
+  },
+  "rdd8dc40": {
+   "frame": "pal_affect",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 1
+  },
+  "re0b332d": {
+   "frame": "pal_affect",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 1
+  },
+  "re7c874e": {
+   "frame": "pal_affect",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "rea5842b": {
+   "frame": "pal_affect",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  },
+  "rf4d0483": {
+   "frame": "pal_affect",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 2
+  },
+  "rf4f742c": {
+   "frame": "pal_affect",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "r0283f75": {
+   "frame": "pal_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 1
+  },
+  "r0970618": {
+   "frame": "pal_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "r1cafff2": {
+   "frame": "pal_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "r2247633": {
+   "frame": "pal_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "r2a25619": {
+   "frame": "pal_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 2
+  },
+  "r2b6b76e": {
+   "frame": "pal_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "r38ac21f": {
+   "frame": "pal_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "r39c600e": {
+   "frame": "pal_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 2
+  },
+  "r3a0e6fd": {
+   "frame": "pal_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r3ffee52": {
+   "frame": "pal_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "r5ab3f9f": {
+   "frame": "pal_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  },
+  "r631737b": {
+   "frame": "pal_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "r686f4d7": {
+   "frame": "pal_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "r6ea8cac": {
+   "frame": "pal_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 1
+  },
+  "r72c65a8": {
+   "frame": "pal_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 0
+  },
+  "r7b7b417": {
+   "frame": "pal_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "r7cf3efc": {
+   "frame": "pal_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 2
+  },
+  "r81c841c": {
+   "frame": "pal_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r81e86c0": {
+   "frame": "pal_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 0
+  },
+  "r83e8331": {
+   "frame": "pal_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "r893565e": {
+   "frame": "pal_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 1
+  },
+  "r89f58b9": {
+   "frame": "pal_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "r90f2b4f": {
+   "frame": "pal_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "r9561b26": {
+   "frame": "pal_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "r9e60bd4": {
+   "frame": "pal_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 1
+  },
+  "r9edc132": {
+   "frame": "pal_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 0
+  },
+  "ra346fa2": {
+   "frame": "pal_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 2
+  },
+  "ra76c4a4": {
+   "frame": "pal_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "ra9d7f58": {
+   "frame": "pal_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 2
+  },
+  "raa76771": {
+   "frame": "pal_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 1
+  },
+  "radc84f6": {
+   "frame": "pal_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 1
+  },
+  "rb1141ae": {
+   "frame": "pal_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "rb294eb7": {
+   "frame": "pal_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "rb3a93fb": {
+   "frame": "pal_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "rbcbacbe": {
+   "frame": "pal_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "rbfb4a2f": {
+   "frame": "pal_trait",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 2
+  },
+  "rc4d70ce": {
+   "frame": "pal_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 2
+  },
+  "rc80fe6d": {
+   "frame": "pal_trait",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "rcea8a37": {
+   "frame": "pal_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 2
+  },
+  "rd760d7a": {
+   "frame": "pal_trait",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 0
+  },
+  "rd770f10": {
+   "frame": "pal_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 0
+  },
+  "rd77e1c5": {
+   "frame": "pal_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "re765d02": {
+   "frame": "pal_trait",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 2
+  },
+  "re9a92e9": {
+   "frame": "pal_trait",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 1
+  },
+  "recbf315": {
+   "frame": "pal_trait",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 2
+  },
+  "rfa6a53c": {
+   "frame": "pal_trait",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "rfaf1dab": {
+   "frame": "pal_trait",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "rfc53c3c": {
+   "frame": "pal_trait",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 1
+  },
+  "r0218ebe": {
+   "frame": "stroking",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "r0425b6b": {
+   "frame": "stroking",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r0abc035": {
+   "frame": "stroking",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 2
+  },
+  "r0b53cf2": {
+   "frame": "stroking",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "r0c0f062": {
+   "frame": "stroking",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "r0eed192": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "r1584282": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "r19bfd46": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "r2318021": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r2b27d46": {
+   "frame": "stroking",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 2
+  },
+  "r2ddd79c": {
+   "frame": "stroking",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "r2e4b6cb": {
+   "frame": "stroking",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "r2e9478e": {
+   "frame": "stroking",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "r2ee8939": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "r2f5bba3": {
+   "frame": "stroking",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 2
+  },
+  "r307a0f9": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "r3430e9b": {
+   "frame": "stroking",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r3926a04": {
+   "frame": "stroking",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "r4debf98": {
+   "frame": "stroking",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 1
+  },
+  "r50ae50d": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r53a01e6": {
+   "frame": "stroking",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "r58de36e": {
+   "frame": "stroking",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 0
+  },
+  "r5c08967": {
+   "frame": "stroking",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 1
+  },
+  "r5c3b9e4": {
+   "frame": "stroking",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "r5dca42e": {
+   "frame": "stroking",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "r5f9c498": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r6296cbc": {
+   "frame": "stroking",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 0
+  },
+  "r6498625": {
+   "frame": "stroking",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 1
+  },
+  "r6734f1b": {
+   "frame": "stroking",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 1
+  },
+  "r67a77be": {
+   "frame": "stroking",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  },
+  "r6825bbf": {
+   "frame": "stroking",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 2
+  },
+  "r685c15f": {
+   "frame": "stroking",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 0
+  },
+  "r687401c": {
+   "frame": "stroking",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "r6ad15f2": {
+   "frame": "stroking",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 1
+  },
+  "r6bc4473": {
+   "frame": "stroking",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "r81192d7": {
+   "frame": "stroking",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "r830a6d0": {
+   "frame": "stroking",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 0
+  },
+  "r8b6012c": {
+   "frame": "stroking",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 1
+  },
+  "r8cd978b": {
+   "frame": "stroking",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "r916a90e": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r945dd72": {
+   "frame": "stroking",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 0
+  },
+  "r949c201": {
+   "frame": "stroking",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 1
+  },
+  "racd2c95": {
+   "frame": "stroking",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "rb4a774e": {
+   "frame": "stroking",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 2
+  },
+  "rb7620e8": {
+   "frame": "stroking",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "rb801b57": {
+   "frame": "stroking",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "rb9bde02": {
+   "frame": "stroking",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "rbcf518f": {
+   "frame": "stroking",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 2
+  },
+  "rbd2ce59": {
+   "frame": "stroking",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 1
+  },
+  "rc1f10f2": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "rc695189": {
+   "frame": "stroking",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "rc860769": {
+   "frame": "stroking",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "rc8fd8f8": {
+   "frame": "stroking",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 2
+  },
+  "re2502ca": {
+   "frame": "stroking",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 2
+  },
+  "rebdd3cb": {
+   "frame": "stroking",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 2
+  },
+  "reef86a0": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "rf05b60a": {
+   "frame": "stroking",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "rf22d4c5": {
+   "frame": "stroking",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "rff23caf": {
+   "frame": "stroking",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "r038942d": {
+   "frame": "union",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r072b1a4": {
+   "frame": "union",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "r0a480ab": {
+   "frame": "union",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "r1471fc8": {
+   "frame": "union",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r15cdf57": {
+   "frame": "union",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r1678f0b": {
+   "frame": "union",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 1
+  },
+  "r2925c85": {
+   "frame": "union",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "r2c634b4": {
+   "frame": "union",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "r31a51da": {
+   "frame": "union",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "r3a63bba": {
+   "frame": "union",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 2,
+   "index": 0
+  },
+  "r47feac0": {
+   "frame": "union",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r4892cb0": {
+   "frame": "union",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 2
+  },
+  "r4910d8e": {
+   "frame": "union",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "r52a8048": {
+   "frame": "union",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "r5862b8c": {
+   "frame": "union",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 1
+  },
+  "r5d58a4a": {
+   "frame": "union",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "r63eaa90": {
+   "frame": "union",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "r6414e6f": {
+   "frame": "union",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 1
+  },
+  "r669c05c": {
+   "frame": "union",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 1
+  },
+  "r67ac91a": {
+   "frame": "union",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  },
+  "r6accfc0": {
+   "frame": "union",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "r719363a": {
+   "frame": "union",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "r75ec02f": {
+   "frame": "union",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "r7641887": {
+   "frame": "union",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r82e4276": {
+   "frame": "union",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 1,
+   "index": 0
+  },
+  "r8771b53": {
+   "frame": "union",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r87c75f8": {
+   "frame": "union",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "r8a60e5a": {
+   "frame": "union",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "r8bace72": {
+   "frame": "union",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "r9013e66": {
+   "frame": "union",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 2
+  },
+  "r93a6931": {
+   "frame": "union",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 2
+  },
+  "r9573d39": {
+   "frame": "union",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "r9a035c0": {
+   "frame": "union",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 1
+  },
+  "ra041b68": {
+   "frame": "union",
+   "pair": "Qwen3-8B",
+   "aligned": "Qwen/Qwen3-8B",
+   "rater": 2,
+   "index": 0
+  },
+  "ra04e266": {
+   "frame": "union",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 2
+  },
+  "ra2566ce": {
+   "frame": "union",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "ra3d6961": {
+   "frame": "union",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "rb04bfce": {
+   "frame": "union",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 0
+  },
+  "rb10bc51": {
+   "frame": "union",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 2
+  },
+  "rb64049e": {
+   "frame": "union",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "rc2782ad": {
+   "frame": "union",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 2
+  },
+  "rc4ce084": {
+   "frame": "union",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "rc96174d": {
+   "frame": "union",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 1
+  },
+  "rca6349c": {
+   "frame": "union",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "rd51f041": {
+   "frame": "union",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "rdd637f2": {
+   "frame": "union",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 2,
+   "index": 2
+  },
+  "rdfa73b8": {
+   "frame": "union",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "re67447f": {
+   "frame": "union",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "red2224b": {
+   "frame": "union",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "ref39187": {
+   "frame": "union",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "rf2b5efa": {
+   "frame": "union",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "rf6ef9fb": {
+   "frame": "union",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "rf9d8c9b": {
+   "frame": "union",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "rfa20e48": {
+   "frame": "union",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 1
+  },
+  "rfd2c029": {
+   "frame": "union",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 1
+  },
+  "rfe1aa60": {
+   "frame": "union",
+   "pair": "archangel_sft-dpo_pythia2-8b",
+   "aligned": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "rater": 1,
+   "index": 0
+  },
+  "r00edcd7": {
+   "frame": "unzipped",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 0
+  },
+  "r02134e8": {
+   "frame": "unzipped",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "r071839e": {
+   "frame": "unzipped",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 2
+  },
+  "r11eaf49": {
+   "frame": "unzipped",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 2,
+   "index": 0
+  },
+  "r15b1de8": {
+   "frame": "unzipped",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 1
+  },
+  "r184e2db": {
+   "frame": "unzipped",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 0
+  },
+  "r214985e": {
+   "frame": "unzipped",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 1
+  },
+  "r2225a52": {
+   "frame": "unzipped",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "r23e898c": {
+   "frame": "unzipped",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "r28cab35": {
+   "frame": "unzipped",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "r32b8a30": {
+   "frame": "unzipped",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 1
+  },
+  "r4039375": {
+   "frame": "unzipped",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "r40cea33": {
+   "frame": "unzipped",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 2,
+   "index": 0
+  },
+  "r4a00d5c": {
+   "frame": "unzipped",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 0
+  },
+  "r4de275d": {
+   "frame": "unzipped",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "r5bdbede": {
+   "frame": "unzipped",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 2
+  },
+  "r8393ea5": {
+   "frame": "unzipped",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 2
+  },
+  "r86ccf45": {
+   "frame": "unzipped",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 2
+  },
+  "r99d5e96": {
+   "frame": "unzipped",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 2,
+   "index": 1
+  },
+  "rb2d9e92": {
+   "frame": "unzipped",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "rbbb9e6d": {
+   "frame": "unzipped",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "rbfbb087": {
+   "frame": "unzipped",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 2,
+   "index": 1
+  },
+  "rc496be9": {
+   "frame": "unzipped",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 2,
+   "index": 0
+  },
+  "rc61374e": {
+   "frame": "unzipped",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 2,
+   "index": 1
+  },
+  "rca236ce": {
+   "frame": "unzipped",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 0
+  },
+  "rca37329": {
+   "frame": "unzipped",
+   "pair": "SmolLM3-3B",
+   "aligned": "HuggingFaceTB/SmolLM3-3B",
+   "rater": 1,
+   "index": 0
+  },
+  "rce5a67f": {
+   "frame": "unzipped",
+   "pair": "Qwen2.5-7B-Instruct",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "rater": 1,
+   "index": 1
+  },
+  "rd4a8623": {
+   "frame": "unzipped",
+   "pair": "Yi-1.5-9B-Chat",
+   "aligned": "01-ai/Yi-1.5-9B-Chat",
+   "rater": 1,
+   "index": 1
+  },
+  "rd87b610": {
+   "frame": "unzipped",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 0
+  },
+  "rdfb3dca": {
+   "frame": "unzipped",
+   "pair": "rwkv-raven-7b",
+   "aligned": "RWKV/rwkv-raven-7b",
+   "rater": 1,
+   "index": 0
+  },
+  "re5e68ef": {
+   "frame": "unzipped",
+   "pair": "Qwen2.5-0.5B-Instruct",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "rater": 1,
+   "index": 0
+  },
+  "rf60e95d": {
+   "frame": "unzipped",
+   "pair": "AmberSafe",
+   "aligned": "LLM360/AmberSafe",
+   "rater": 1,
+   "index": 1
+  },
+  "rf8dde1f": {
+   "frame": "unzipped",
+   "pair": "salamandra-7b-instruct",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "rater": 2,
+   "index": 0
+  },
+  "rfae9fd8": {
+   "frame": "unzipped",
+   "pair": "TinyLlama-1.1B-Chat-v1.0",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "rater": 1,
+   "index": 0
+  },
+  "rffc8506": {
+   "frame": "unzipped",
+   "pair": "Lucie-7B-Instruct-v1.1",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "rater": 1,
+   "index": 1
+  }
+ }
+}

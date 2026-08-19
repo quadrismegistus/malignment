@@ -1,0 +1,235 @@
+Below are 38 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r05aebcc  Security to Mood
+      The completions that lose the most ground going from A to B are the ones stating the neighbours' bodily security or freedom of movement (being safe, being safer, being free, being trapped, being under something), and the ones that gain the most in their place name an everyday interior mood along a discomfort-to-pleasure range (uneasy, uncomfortable, sorry, relieved, happy).
+      A: safe, safer, free, trapped, under
+      B: uneasy, uncomfortable, sorry, relieved, happy
+
+r06e85a1  obligation into apprehension
+      The words A favours most strongly are ones that do not finish the sentence but demand a following infinitive about action, so that the blank reports a pressure or a permission (compelled, obliged, free), whereas the words B favours most strongly finish the sentence by naming an emotional state the neighbours are in (nervous, unsafe, uneasy, sorry, betrayed).
+      A: compelled, obliged, free
+      B: nervous, unsafe, uneasy, sorry, betrayed
+
+r0eaae7f  Clause versus noun phrase
+      A's highest-ranked completions open a clause in which the neighbours felt that something was the case (they, that, it), while B's promote determiners that open a noun phrase naming a thing that was felt (the, a, their, an).
+      A: they, that, it
+      B: the, a, their, an
+
+r140f654  Endangerment supplants reassurance
+      Under A the neighbours' feeling is named with words of security and release (safe, free), while under B it is named with a much larger and more strongly moving set of words for danger, confinement and vulnerability (threatened, unsafe, trapped, exposed, uncomfortable, uneasy), which supply the three largest upward moves in the whole list.
+      A: safe, free
+      B: threatened, unsafe, trapped, exposed, uncomfortable, uneasy
+
+r165d914  absolute versus comparative degree
+      The one degree word on A is the intensifier taking an absolute adjective, while B's degree words are those that select or form a comparative, and B's largest riser is itself a comparative.
+      A: very
+      B: more, much, better, safer
+
+r1d09462  Room to move
+      The two largest content-word movements run in opposite directions along one axis of physical constraint, free falling ten places under B while trapped climbs nineteen and helpless seven, so the conditions score the same axis oppositely rather than one side merely adding vocabulary.
+      A: free
+      B: trapped, helpless
+
+r1d45836  Coercion word swapped
+      The single sense of being made to do something appears on both sides under different words, obliged under A and compelled under B, so this meaning is not confined to either condition and only its wording changes.
+      A: obliged
+      B: compelled
+
+r2426e1d  comparative before predicate
+      A favours words that measure the feeling against some other quantity or baseline and defer naming it (more, less, safer), whereas B favours words that are already the whole predicate and admit no comparison term after them (threatened, intimidated, relieved).
+      A: more, less, safer
+      B: threatened, intimidated, relieved
+
+r25e70d4  Absolute yields to comparative
+      The degree-marking words that A favours are absolute intensifiers taking a bare adjective (so, very), whereas those B favours are comparatives (more, safer), so that on the B side even the surviving safety word appears in graded rather than flat form.
+      A: so, very
+      B: more, safer
+
+r2b4aea3  Infinitive frame drops out
+      The three words that lose the most ground under B are the three that cannot end the sentence, since each requires a following infinitive about what the neighbours then did or could do (compelled, obliged, free), whereas the three that gain the most under B are predicative adjectives that complete the clause by naming an apprehensive state and demand nothing further (nervous, uneasy, unsafe).
+      A: compelled, obliged, free
+      B: nervous, uneasy, unsafe
+
+r3780f59  made to act, made afraid
+      Under A the completions say what the neighbours were moved or licensed to do, with compelled and obliged pushing them into an action and emboldened and empowered giving them the standing to take one, whereas under B the rising words name a fear of being harmed by somebody else, threatened and intimidated.
+      A: compelled, obliged, emboldened, empowered
+      B: threatened, intimidated
+
+r402652a  No benign outcome under A
+      Every affect word that rises under A leaves the neighbours worse off (betrayed, trapped), and the only condition in which completions making them better off rise at all is B (safe, safer, relieved), so the asymmetry is about whether a favourable construal of the arrival is available, not about its intensity.
+      A: betrayed, trapped
+      B: safe, safer, relieved
+
+r4656aa4  Explicit menace asymmetry
+      The only two words that name the neighbours as the object of a hostile act, threatened and intimidated, appear among A's favoured completions and have no counterpart on B, whose single negative word, uneasy, names a diffuse mood with no agent in it.
+      A: threatened, intimidated
+      B: uneasy
+
+r4832fa7  impulse against state
+      Under A the fragment is completed by words that make the feeling into something the neighbours must do or now can do (compelled, obliged, emboldened, empowered), while under B it is completed by words that name a finished emotional condition and nothing beyond it (threatened, intimidated, relieved).
+      A: compelled, obliged, emboldened, empowered
+      B: threatened, intimidated, relieved
+
+r49fba71  Endangerment over reassurance
+      Condition B raises a connected set of words describing the neighbours as unsafe, confined, or visible to harm, while condition A raises the words describing them as secure and unconstrained.
+      A: safe, free
+      B: threatened, unsafe, trapped, exposed, uncomfortable, uneasy
+
+r50ad512  Comparative displaces absolute
+      B's favoured affect and degree words are graded by comparison with an unstated prior state (safer, better, more, much, with safer moving from seventh to first), while A favours the absolute intensifier very and the ungraded states secure and relief.
+      A: very, secure, relief
+      B: safer, better, more, much
+
+r54d74a6  clause deferral versus adjective
+      A favours words opening an embedded clause or possessive continuation, reporting the feeling indirectly as something felt about a situation, whereas B favours words that finish the fragment at once with a predicate adjective.
+      A: that, they, as, it, their
+      B: safer, safe, better, uneasy, free
+
+r6f36787  Security axis swap
+      The affect words rising under A name a wrong suffered in a relationship (betrayed, trapped, obliged), whereas those rising under B all score the same event on a threat-and-safety axis (safe, safer, relieved at one pole, unsafe and intimidated at the other), so the two conditions differ in which axis the feeling is measured on rather than in how strong or how negative the feeling is.
+      A: betrayed, trapped, obliged
+      B: safe, safer, unsafe, relieved, intimidated
+
+r80e8c6f  Weakest distress kept
+      A does hold one word of disquiet, but it is the vaguest and least specific one available ("uneasy", a state with no named cause and no named injury), while the distress words B holds each name a specific harm or a specific incapacity ("threatened", "betrayed", "helpless").
+      A: uneasy
+      B: threatened, betrayed, helpless
+
+r81db5c2  Siege-state to mood-state
+      The completions that rise most under A name a condition of bodily security or captivity imposed from outside (safe, safer, free, trapped, betrayed, and "under" as in under threat or under siege), whereas the ones that rise most under B name a mild self-reported feeling a person could mention to a neighbour (uneasy, uncomfortable, sorry, happy, relieved).
+      A: safer, under, safe, free, trapped, betrayed
+      B: uneasy, happy, sorry, uncomfortable, relieved
+
+r844e9d2  Duty against injury
+      Apart from the safety pair, the only affect words A raises are deontic ones in which the neighbours feel a pressure to act themselves ("obliged", "compelled"), whereas every affect word B raises casts them as the patient of an aggressor or of their own incapacity ("threatened", "betrayed", "helpless").
+      A: obliged, compelled
+      B: threatened, betrayed, helpless
+
+r86e2359  graded versus named
+      All the apparatus for putting the feeling on a scale sits under A, since more, less and safer each require a comparison to be completed, and nothing of that kind appears under B, where the two words that climb are bare participles naming a state outright.
+      A: more, less, safer
+      B: threatened, intimidated
+
+r8705c6f  Deserted versus cornered
+      The affect words A favours name being let down or left behind by someone who has gone away (betrayed, abandoned, and the release word free), whereas the affect words B favours name being acted upon by an agent who is present and close (threatened, violated, trapped, helpless, uneasy).
+      A: betrayed, abandoned, free
+      B: threatened, violated, trapped, helpless, uneasy
+
+r88712d6  Reassurance against menace
+      The condition-A side keeps the two words that make the arrival on the street a source of security for the neighbours ("safe", "safer"), while the condition-B side keeps the words that make the same arrival a source of danger and powerlessness ("threatened", "helpless").
+      A: safe, safer
+      B: threatened, helpless
+
+ra8c3d94  Clause against phrase
+      The grammatical words A favours open a subordinate clause after the verb (felt that they, felt it), whereas B's open a noun phrase or a comparison (felt a, felt an, felt like, felt their), so the conditions differ in the shape of the continuation and not only in which adjective fills it.
+      A: that, they, it
+      B: a, an, like, their
+
+rab3963d  Comparative against absolute
+      Condition B favours words that grade the feeling against a prior state or another party (safer, more), while condition A favours flat intensifiers attached to an absolute state (very, so, alongside the unmodified safe and free).
+      A: safe, free, very, so
+      B: safer, more
+
+rae07525  The single release word
+      One word on A's side, free, is the only completion anywhere in either list that would make the arrival welcome, and nothing on B's side corresponds to it, since every affect word B raises names a harm.
+      A: free
+      B: threatened, violated, uneasy, helpless, trapped
+
+raf6e473  Grievance versus security
+      Under A the neighbours' feeling is named in the vocabulary of wrong done to them and freedom taken from them (betrayed, trapped, obliged), while under B it is named as a judgment about danger and its absence (safe, safer, unsafe, relieved, intimidated), so both lists carry unpleasant feelings but only A's are about being wronged and only B's are about being at risk.
+      A: betrayed, trapped, obliged
+      B: safe, safer, unsafe, relieved, intimidated
+
+rb175974  Menace or reassurance
+      B raises words that say the arrival puts the neighbours in danger and strips their capacity to respond ("threatened", "helpless"), while A raises the words that say the opposite happened, that the neighbours were left unharmed ("safe", "safer").
+      A: safe, safer
+      B: threatened, helpless
+
+rb476eb3  Duty against injury
+      Where condition A leads with two words casting the neighbours as placed under an external pressure to act or comply ("obliged", "compelled"), condition B leads with a word casting them as wronged by someone who owed them faith ("betrayed"), so both sides imply an outside agent but differ in whether it demands something of the neighbours or does something to them.
+      A: obliged, compelled
+      B: betrayed
+
+rb6b07ab  reassurance option withdrawn
+      Every word B raises names discomfort, fear or injury, while the only completions on either list under which the neighbours would end up untroubled (free, safe) sit on A's side, so the range of available states narrows to one sign rather than merely shifting within it.
+      A: free, safe
+      B: uneasy, nervous, unsafe, sorry, betrayed
+
+rb9e191d  One axis, both directions
+      B's content words include a matched positive and negative pair on a single safety scale (safe and safer against unsafe, with relieved on the positive side and intimidated on the negative), whereas A's content words are all on one side of their own scale and have no positive counterpart anywhere in the A list.
+      A: betrayed, trapped
+      B: safe, safer, unsafe, relieved, intimidated
+
+rd024d3e  Desertion versus encroachment
+      The feeling-words A favours describe a bond broken or a protector gone (betrayed, abandoned, and the release-word free), while those B favours describe an agent present and closing in on the one who feels (threatened, violated, helpless, trapped, uneasy).
+      A: betrayed, abandoned, free
+      B: threatened, violated, helpless, trapped, uneasy
+
+rddae023  Deontic polarity collapses together
+      A holds high both the words for being made to act and the word for being at liberty to act, which are opposites in meaning, and B demotes all three at comparable magnitude, so what B removes is not one pole of obligation but the whole question of the neighbours' scope of action, in favour of words reporting only their comfort.
+      A: obliged, compelled, free
+      B: uneasy, nervous, unsafe
+
+rdef5508  named aggression, graded safety
+      The only two words casting the neighbours as targets of someone else's action sit on A, while the words describing their condition as improved or unhindered, including the one that rises to first place under B, sit on B.
+      A: threatened, intimidated
+      B: safer, safe, better, free
+
+rdf90bd5  exchange near the top
+      The two largest movements run in opposite directions and swap one kind of word for another in the region a reader would actually see: compelled drops from tenth to one hundred and fifteenth under B, while intimidated rises from forty-first to ninth and relieved from twenty-ninth to eleventh, so an obligation-word leaves the visible field and two feeling-words enter it.
+      A: compelled
+      B: intimidated, relieved
+
+re75a280  Clause versus Noun
+      A ranks higher the words that would continue "felt" with an embedded clause, a bare pronoun subject or a complementizer, whereas B ranks higher the four determiners that would instead continue it with a noun phrase naming the feeling as a thing.
+      A: they, that, it
+      B: the, a, an, their
+
+rfb904f5  Clause before noun
+      The function words A favours open a reported thought after the verb (felt that, felt they, felt it, felt the), while those B favours open a noun phrase or a simile instead (felt a, felt an, felt like, felt their).
+      A: that, they, it, the
+      B: a, an, like, their
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.
