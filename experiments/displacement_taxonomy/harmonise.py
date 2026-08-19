@@ -52,12 +52,23 @@ def corpus(instrument):
             #: The id is a hash of what identifies the relation, so re-running
             #: `--prepare` gives the same ids and two harmonisation runs can be
             #: compared. Not a counter, which would renumber if a cell were added.
-            seed = "%s|%s|%s|%d" % (instrument, meta.get("nickname"), meta.get("pair"), i)
-            rid = "r" + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:5]
+            #: THE RATER IS PART OF THE IDENTITY. Without it two raters' relation
+            #: 0 on one cell hash to the same id, the mapping dict keeps one, and
+            #: the corpus silently ships a duplicate id -- which would also have
+            #: destroyed the construct-agreement measurement, since the whole
+            #: point is that the harmoniser sees both raters' relations as
+            #: separate items and may or may not group them together.
+            seed = "%s|%s|%s|r%s|%d" % (instrument, meta.get("nickname"),
+                                        meta.get("pair"), k.get("rater"), i)
+            #: 7 hex chars, not 5. At 438 relations a 5-char space (16^5) has a
+            #: ~9% chance of at least one birthday collision and produced one; 7
+            #: chars drops that to ~4e-4. The assert below is what actually
+            #: guarantees it, since a wider id only makes collisions rarer.
+            rid = "r" + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:7]
             byframe[meta.get("nickname")].append(
                 (rid, rel["name"], rel["sentence"],
                  {"frame": meta.get("nickname"), "pair": meta.get("pair"),
-                  "aligned": k.get("aligned"), "index": i}))
+                  "aligned": k.get("aligned"), "rater": k.get("rater"), "index": i}))
     frames = sorted(byframe)
     for f in frames:
         byframe[f].sort(key=lambda x: x[0])
@@ -74,6 +85,16 @@ def prepare(instrument):
     rows = corpus(instrument)
     if not rows:
         raise SystemExit("no codings under instrument %r in the stash" % instrument)
+    #: IDS MUST BE UNIQUE OR THE MAPPING SILENTLY LOSES RELATIONS. A duplicate id
+    #: means the corpus ships two different relations under one label, the mapping
+    #: dict keeps whichever was written last, and every grouping the harmoniser
+    #: makes on that id is unattributable afterwards. Caught this way: 438
+    #: relations resolved to 231 distinct ids because the seed omitted the rater.
+    ids = [r[0] for r in rows]
+    if len(set(ids)) != len(ids):
+        dup = [i for i in set(ids) if ids.count(i) > 1]
+        raise SystemExit("%d duplicate relation id(s) out of %d: %s -- the corpus "
+                         "cannot ship" % (len(dup), len(ids), dup[:5]))
     src = open(INSTRUMENT_MD).read()
     import re
     ver = re.search(r"^# INSTRUMENT: \S+ (\S+)", src, re.M).group(1)

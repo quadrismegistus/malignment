@@ -50,6 +50,8 @@ Both `ranks.py` and `holdout.py` should be run after ANY change to the stash or 
 
 ## What is established
 
+- **Inter-rater agreement, measured 2026-08-19** (`RESULTS_interrater.md`). 84 cells coded twice under r4 on identical tables: word-level Jaccard 0.800 / 0.833. But that is WORD agreement, not CONSTRUCT agreement -- a coding is a reliable guide to which words carry a difference and an unvalidated guide to what the difference is. Construct agreement is unmeasured and comes free from harmonisation.
+
 - **Alignment converts an obligation into a grievance** (`RESULTS_identity.md`). The base completes *the neighbours felt* with `compelled/obliged/obligated`; the aligned model with `threatened`. Obligation falls on **23 of 24** lineages for both groups, p < 0.0001 -- the most uniform effect in this project.
 - **The group gap is pretraining's.** Palestinians carry more threat mass in the base on 22 of 24; alignment raises threat for both groups and does NOT widen the gap (12 of 24, p = 1.0).
 - **Direction of content movement is not uniform** (`RESULTS_stroking_30.md`). Explicit mass on the sexual frame: 14 lineages down, 6 flat, 10 UP. RedPajama 40.3% -> 80.7%.
@@ -58,6 +60,9 @@ Both `ranks.py` and `holdout.py` should be run after ANY change to the stash or 
 - **Ranks are the concentration-free instrument.** r^2 against entropy 0.023 for rank reordering against 0.040 for mass, on the 145-cell floored population, while still correlating with mass moved at r = +0.70.
 
 ## Explicit nulls, recorded so nobody re-derives them as findings
+
+- **No table-size effect on rater agreement.** r = -0.000 over 84 cells. A quartile table appearing to show one was frame composition leaking into size bins; withdrawn.
+- **Union's low agreement (0.637) is UNEXPLAINED.** Not size -- same-size non-union cells sit at 0.833. The graded-sequence account failed its only test: r(agreement, v3 confidence) = +0.132, and union has the second-highest v3 confidence with the lowest agreement.
 
 - **Policing versus rioting is NOT there.** p = 0.61 both directions, median DiD -0.91 and -0.11 pp. The lists were built by hand from rater phrases and tested on the cells those raters read. See `holdout.py`'s docstring for why that construction is unfalsifiable rather than merely weak.
 - The threat gap does not widen under alignment (12/24, p = 1.0).
