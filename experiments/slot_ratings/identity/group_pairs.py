@@ -80,7 +80,14 @@ def main():
                 return ("%+7.3f %3d/%-2d %6.3g%s"
                         % (t[0], t[1], t[2], t[3], "*" if t[3] < .05 else " ")) if t else "%20s" % "-"
             print("     %-14s %s %s | %s" % (s, f(tb), f(ta), f(td)))
+            #: THE PER-LINEAGE VECTORS ARE SAVED, not just the summaries. A
+            #: DiD is a distribution over lineages and its mean says little
+            #: without the spread; anything plotting it needs the points, and
+            #: recomputing them from base_side.json is friction that leads to
+            #: plots of the summary instead.
             saved.append(dict(a=A, b=B, scale=s, n_lineages=len(shared),
+                              lineages=shared, base_values=gb, aligned_values=ga,
+                              did_values=gd,
                               base_gap=tb[0], base_pos=tb[1], base_p=tb[3],
                               aligned_gap=ta[0] if ta else None,
                               aligned_p=ta[3] if ta else None,

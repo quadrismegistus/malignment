@@ -82,8 +82,12 @@ def main():
             tot[owner(s)] += 1
             if p < b:
                 pas[owner(s)] += 1
+            #: bool(...) and the default=float below: a numpy bool or float64
+            #: raises inside json.dump AFTER it has already written part of the
+            #: file, leaving a TRUNCATED artifact that still looks committed.
+            #: This file was 150 bytes of valid-looking JSON for a day.
             saved.append(dict(sweep=sweep, scale=s, instrument=owner(s),
-                              friedman=p, passes=p < b, blocks=nl))
+                              friedman=float(p), passes=bool(p < b), blocks=int(nl)))
     print("Bonferroni pass rate BY INSTRUMENT, over the three sweeps:")
     for o in ("v6-general", "v3-instit", "BOTH"):
         print("  %-11s %2d of %2d  (%.0f%%)" % (o, pas[o], tot[o],
@@ -118,9 +122,12 @@ def main():
           "pearson %.3f exact %.0f%% mean|diff| %.2f"
           % (rel["n"], rel["spearman"], rel["pearson"], 100 * rel["exact"],
              rel["mean_abs_diff"]))
-    json.dump(dict(by_scale=saved, v6_profile=prof, reliability=rel,
-                   pass_rate={o: [pas[o], tot[o]] for o in tot}),
-              open(os.path.join(OUT, "by_instrument.json"), "w"), indent=1)
+    payload = dict(by_scale=saved, v6_profile=prof, reliability=rel,
+                   pass_rate={o: [pas[o], tot[o]] for o in tot})
+    #: serialise to a STRING first, so a type error cannot leave a half-written
+    #: file on disk. Only write once the whole payload is known to encode.
+    blob = json.dumps(json.loads(json.dumps(payload, default=float)), indent=1)
+    open(os.path.join(OUT, "by_instrument.json"), "w").write(blob)
     print("-> results/by_instrument.json")
 
 

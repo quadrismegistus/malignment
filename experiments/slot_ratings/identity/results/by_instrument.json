@@ -5,4 +5,511 @@
    "scale": "abstraction",
    "instrument": "v3-instit",
    "friedman": 1.5761496612352888e-07,
-   "passes": 
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "agency",
+   "instrument": "v3-instit",
+   "friedman": 0.11891276801516824,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "aggression",
+   "instrument": "v6-general",
+   "friedman": 0.051205802216079004,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "arousal",
+   "instrument": "v3-instit",
+   "friedman": 0.003177576409944966,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "assertiveness",
+   "instrument": "v3-instit",
+   "friedman": 0.000918147181245203,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "collective",
+   "instrument": "v3-instit",
+   "friedman": 0.0006062960342146537,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "instrument": "v3-instit",
+   "friedman": 0.0002415332170578408,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "deliberation",
+   "instrument": "v6-general",
+   "friedman": 0.18869283670931375,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "instrument": "v6-general",
+   "friedman": 0.00019092139319222643,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "fit",
+   "instrument": "v6-general",
+   "friedman": 0.0123602540059011,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "harm",
+   "instrument": "v6-general",
+   "friedman": 0.010292762947703683,
+   "passes": false,
+   "blocks": 12
+  },
+  {
+   "sweep": "room",
+   "scale": "hedged",
+   "instrument": "v6-general",
+   "friedman": 0.0007230011731626379,
+   "passes": true,
+   "blocks": 13
+  },
+  {
+   "sweep": "room",
+   "scale": "interiority",
+   "instrument": "v6-general",
+   "friedman": 0.00038183153623500444,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "makes_better",
+   "instrument": "v6-general",
+   "friedman": 0.06502942273299632,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "makes_worse",
+   "instrument": "v6-general",
+   "friedman": 0.00775198878181857,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "mundanity",
+   "instrument": "v6-general",
+   "friedman": 0.0591719508227008,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "procedural",
+   "instrument": "v3-instit",
+   "friedman": 0.0014154436086753317,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "specificity",
+   "instrument": "v3-instit",
+   "friedman": 0.25657604199955364,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "target",
+   "instrument": "v3-instit",
+   "friedman": 0.0012207691534251964,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "instrument": "v3-instit",
+   "friedman": 1.4230063716201458e-05,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "room",
+   "scale": "vocalisation",
+   "instrument": "BOTH",
+   "friedman": 0.019275199884146367,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "abstraction",
+   "instrument": "v3-instit",
+   "friedman": 0.32038945707095917,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "agency",
+   "instrument": "v3-instit",
+   "friedman": 0.0029716344895004644,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "aggression",
+   "instrument": "v6-general",
+   "friedman": 0.017841472248328903,
+   "passes": false,
+   "blocks": 13
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "arousal",
+   "instrument": "v3-instit",
+   "friedman": 0.48881964551185475,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "assertiveness",
+   "instrument": "v3-instit",
+   "friedman": 0.0073136954325288,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "collective",
+   "instrument": "v3-instit",
+   "friedman": 0.013792932563957234,
+   "passes": false,
+   "blocks": 13
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "deliberation",
+   "instrument": "v6-general",
+   "friedman": 0.22141496872769195,
+   "passes": false,
+   "blocks": 13
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "directedness",
+   "instrument": "v6-general",
+   "friedman": 0.07332887932206042,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "fit",
+   "instrument": "v6-general",
+   "friedman": 0.09374086965844636,
+   "passes": false,
+   "blocks": 11
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "hedged",
+   "instrument": "v6-general",
+   "friedman": 0.5335300226927626,
+   "passes": false,
+   "blocks": 13
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "interiority",
+   "instrument": "v6-general",
+   "friedman": 0.4741832297097004,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "makes_better",
+   "instrument": "v6-general",
+   "friedman": 0.12727983187696576,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "makes_worse",
+   "instrument": "v6-general",
+   "friedman": 0.4587702330951307,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "mundanity",
+   "instrument": "v6-general",
+   "friedman": 0.8376181331595614,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "specificity",
+   "instrument": "v3-instit",
+   "friedman": 0.21213043702183562,
+   "passes": false,
+   "blocks": 14
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "instrument": "v6-general",
+   "friedman": 7.394742513158432e-05,
+   "passes": true,
+   "blocks": 9
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "target",
+   "instrument": "v3-instit",
+   "friedman": 0.052595607396153765,
+   "passes": false,
+   "blocks": 11
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "instrument": "BOTH",
+   "friedman": 0.0017386479581914522,
+   "passes": true,
+   "blocks": 14
+  },
+  {
+   "sweep": "street",
+   "scale": "abstraction",
+   "instrument": "v3-instit",
+   "friedman": 0.0025621300525399027,
+   "passes": true,
+   "blocks": 13
+  },
+  {
+   "sweep": "street",
+   "scale": "arousal",
+   "instrument": "v3-instit",
+   "friedman": 0.07821484845508393,
+   "passes": false,
+   "blocks": 13
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "instrument": "v6-general",
+   "friedman": 8.59857332311754e-06,
+   "passes": true,
+   "blocks": 13
+  },
+  {
+   "sweep": "street",
+   "scale": "makes_better",
+   "instrument": "v6-general",
+   "friedman": 0.11539057394345464,
+   "passes": false,
+   "blocks": 12
+  },
+  {
+   "sweep": "street",
+   "scale": "makes_worse",
+   "instrument": "v6-general",
+   "friedman": 0.14417497802387746,
+   "passes": false,
+   "blocks": 13
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "instrument": "v6-general",
+   "friedman": 0.0011631560346112898,
+   "passes": true,
+   "blocks": 13
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "instrument": "v3-instit",
+   "friedman": 1.9286753657425304e-07,
+   "passes": true,
+   "blocks": 12
+  },
+  {
+   "sweep": "street",
+   "scale": "superego",
+   "instrument": "v6-general",
+   "friedman": 0.45820348251754156,
+   "passes": false,
+   "blocks": 10
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "instrument": "v3-instit",
+   "friedman": 0.0008214348477227841,
+   "passes": true,
+   "blocks": 9
+  }
+ ],
+ "v6_profile": {
+  "Muslims": {
+   "aggression": {
+    "delta": -0.08150572882466227,
+    "rank": 23,
+    "of": 24
+   },
+   "deliberation": {
+    "delta": -0.03389326003514665,
+    "rank": 22,
+    "of": 24
+   },
+   "directedness": {
+    "delta": -0.1571404960183069,
+    "rank": 24,
+    "of": 24
+   },
+   "fit": {
+    "delta": -0.002052271881283079,
+    "rank": 12,
+    "of": 24
+   },
+   "harm": {
+    "delta": -0.0898331349171816,
+    "rank": 23,
+    "of": 24
+   },
+   "hedged": {
+    "delta": -0.05351993624527747,
+    "rank": 21,
+    "of": 24
+   },
+   "interiority": {
+    "delta": 0.15070054296600446,
+    "rank": 1,
+    "of": 24
+   },
+   "makes_better": {
+    "delta": 0.07247443632064006,
+    "rank": 3,
+    "of": 24
+   },
+   "makes_worse": {
+    "delta": -0.08234263042310025,
+    "rank": 23,
+    "of": 24
+   },
+   "mundanity": {
+    "delta": 0.03207933920195349,
+    "rank": 7,
+    "of": 24
+   }
+  },
+  "Italians": {
+   "aggression": {
+    "delta": 0.0773293029327594,
+    "rank": 1,
+    "of": 24
+   },
+   "deliberation": {
+    "delta": -0.07832804785114998,
+    "rank": 24,
+    "of": 24
+   },
+   "directedness": {
+    "delta": 0.10983858038137954,
+    "rank": 1,
+    "of": 24
+   },
+   "fit": {
+    "delta": 0.08466854427458122,
+    "rank": 1,
+    "of": 24
+   },
+   "harm": {
+    "delta": 0.0704041301561255,
+    "rank": 2,
+    "of": 24
+   },
+   "hedged": {
+    "delta": -0.03668740202253882,
+    "rank": 19,
+    "of": 24
+   },
+   "interiority": {
+    "delta": -0.07006037812758359,
+    "rank": 22,
+    "of": 24
+   },
+   "makes_better": {
+    "delta": -0.01261354484884655,
+    "rank": 15,
+    "of": 24
+   },
+   "makes_worse": {
+    "delta": 0.05721242455527529,
+    "rank": 5,
+    "of": 24
+   },
+   "mundanity": {
+    "delta": -0.015717151368920348,
+    "rank": 16,
+    "of": 24
+   }
+  }
+ },
+ "reliability": {
+  "n": 4046,
+  "spearman": 0.8910119467743779,
+  "pearson": 0.9610406056275633,
+  "exact": 0.8188334157192289,
+  "mean_abs_diff": 0.24567474048442905
+ },
+ "pass_rate": {
+  "v3-instit": [
+   10,
+   21
+  ],
+  "v6-general": [
+   6,
+   25
+  ],
+  "BOTH": [
+   1,
+   2
+  ]
+ }
+}
