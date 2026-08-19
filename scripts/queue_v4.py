@@ -54,6 +54,11 @@ def main():
     ap.add_argument("--python", default=None,
                     help="override; by default each model gets the venv its "
                          "roster profile requires")
+    ap.add_argument("--max-model-min", type=float, default=90.0,
+                    help="kill a model exceeding this many minutes and move on. "
+                         "0 disables. Default 90: generous for a 7B cold load "
+                         "plus 2,983 cells at any plausible rate, and far under "
+                         "the 152 HOURS Zamba2-7B would have taken.")
     a = ap.parse_args()
 
     #: **`--models` USED TO HARDCODE cjk_chars=0**, so an explicit roster printed
@@ -121,10 +126,30 @@ def main():
         #: it, then wrote a queue that ignored both. Spent an hour patching
         #: rotary caches before RH said to read the environment notes.
         py = a.python or os.path.join(venv_for(m), "bin", "python")
-        r = subprocess.run([py, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
-                            "--model", m, "--cache"]
-                           + (["--only", a.only] if a.only else []),
-                           cwd=ROOT, capture_output=True, text=True)
+        #: **A PER-MODEL WALL-CLOCK CEILING, BECAUSE ONE MODEL CAN EAT A SHARD.**
+        #: `Zyphra/Zamba2-7B` measured **183 s/cell** on an RTX 4090 -- 152 hours
+        #: for its 2,983 cells -- while the fleet planner, having no recorded rate
+        #: for it, priced it at the 0.35 s/cell fallback. It is a hybrid SSM and
+        #: the box had no `mamba_ssm`/`causal_conv1d`, so it ran the slow path.
+        #:
+        #: Without a ceiling that model blocks the other TEN in its shard forever,
+        #: and every health signal reads normal: tmux up, GPU at 100%, cells
+        #: creeping up one per three minutes. **A guessed rate can be wrong by
+        #: 500x, so the guess must not be able to consume the run** -- the model is
+        #: killed, RECORDED as timed out, and the queue moves on. Nothing is lost:
+        #: twp writes and flushes per prompt, so its cells survive and a later run
+        #: resumes from them.
+        try:
+            r = subprocess.run([py, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
+                                "--model", m, "--cache"]
+                               + (["--only", a.only] if a.only else []),
+                               cwd=ROOT, capture_output=True, text=True,
+                               timeout=(a.max_model_min * 60 if a.max_model_min else None))
+        except subprocess.TimeoutExpired:
+            print("  TIMED OUT after %.0f min -- moving on. This model is not "
+                  "broken, it is SLOW: measure it and give it its own run rather "
+                  "than letting it block the shard." % a.max_model_min, flush=True)
+            continue
         tail = [l for l in (r.stdout or "").splitlines() if l.strip()][-3:]
         print("  exit=%d  %.1f min" % (r.returncode, (time.time() - t0) / 60), flush=True)
         for l in tail:
