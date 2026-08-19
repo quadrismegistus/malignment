@@ -561,11 +561,15 @@ cd /root/malignment
 # reason the split exists".
 command -v uv >/dev/null || pip -q install uv
 python3 scripts/venvs.py build --python 3.11
-./%(venv)s/bin/pip -q install --upgrade pip
 # **AND THE PACKAGE ITSELF.** requirements.txt lists DEPENDENCIES; without
 # `pip install -e .` every script dies on `ModuleNotFoundError: malignment` --
 # after the venv built, after the payload shipped, with the rental running.
-./%(venv)s/bin/pip -q install -e .
+# **uv's venvs HAVE NO `pip`.** `venvs.py build` uses `uv venv`, which omits it
+# by design, so `./<venv>/bin/pip` is `No such file or directory` -- which is what
+# it was, immediately after the roster-derived build finally installed the right
+# transformers. Install through uv, targeting the venv's interpreter, exactly as
+# venvs.py does.
+uv pip install -q --python ./%(venv)s/bin/python -e .
 # **AND THE PIN IS ASSERTED, NOT ANNOUNCED.** A build that prints a version
 # nobody compares is how 5.15.0 ran for an hour under a name meaning 4.57.1.
 # The expected value is this checkout's OWN venv, so the box matches the machine
@@ -574,10 +578,17 @@ python3 scripts/venvs.py build --python 3.11
 import sys, torch, transformers
 want, got = "%(want)s", transformers.__version__
 print("torch", torch.__version__, "transformers", got, "cuda", torch.cuda.is_available())
-if want and got != want:
-    print("VENV MISMATCH: %(venv)s has transformers", got, "but this roster declares", want)
+#: **COMPARED ON MAJOR.MINOR, WHICH IS THE GRAIN THE PROFILE IS NAMED FOR.** The
+#: first version demanded exact equality and would have REJECTED A GOOD BOX: this
+#: Mac pinned 4.57.1, the box legitimately resolved 4.57.6, and `tf457` means the
+#: 4.57 line. The defect this guards against is 5.15.0 wearing that name, which
+#: major.minor catches and patch-equality would have buried under false alarms.
+mm = lambda v: ".".join(v.split(".")[:2])
+if want and mm(got) != mm(want):
+    print("VENV MISMATCH: %(venv)s has transformers", got,
+          "but this roster declares", want)
     sys.exit(4)
-print("VENV OK: transformers", got, "matches the roster pin")
+print("VENV OK: transformers", got, "on the", mm(want) or "?", "line")
 VEOF
 # **THE BOX'S OWN NETWORK CONFIG IS NOT TRUSTED.** Fleet box 48145433 shipped with
 # an HF proxy at http://117.175.104.83 and 10 of its 11 models died on 404 -- a
