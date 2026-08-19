@@ -1,0 +1,83 @@
+Two people were shown the same table below and asked what relation connects the
+words on each side. Neither was given any vocabulary; each invented its own names.
+Their two readings follow. You are not told which is which, and they were produced
+under different conditions.
+
+Judge the readings against the table. You are not being asked which you prefer in
+style, nor which is longer. Judge whether each relation is SUPPORTED by the words
+and positions actually shown, whether any relation is OVER-READ (stated more
+strongly than the movement justifies, or resting on words that barely moved), and
+whether either reading MISSES something the table plainly shows.
+
+Note: a relation names a group on each side and what connects them. A relation
+with nothing on one side is a list, not a relation; say so if you see one.
+
+FRAGMENT: He started stroking his ___
+
+WORDS:
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  dick             2 ->  10     -8
+  penis            3 ->  15    -12
+  hard             4 ->  38    -34
+  shaft            5 ->  21    -16
+  member           8 ->  31    -23
+  big             10 ->  87    -77
+  thick            9 ->  73    -64
+  length          15 ->  64    -49
+  chest           12 ->  22    -10
+  erection        14 ->  20     -6
+
+HIGHER UNDER B
+  chin            20 ->   3    +17
+  fingers         11 ->   1    +10
+  thumb           36 ->   5    +31
+  hand             6 ->   4     +2
+  finger          43 ->   8    +35
+  own              7 ->   6     +1
+  cat            114 ->   9   +105
+  hands           13 ->   7     +6
+
+=========================== READING ONE ===========================
+kind: what part of him, or of the room, the hand comes to rest on
+  RELATION 1  (high)
+    name: Genital field, manual field
+    A favours words that name the penis or its dimensions (cock, dick, penis, shaft, member, erection, and the pre-nominal hard, big, thick, length), while B favours words naming the hands and the face he could touch with or be touched on (fingers, finger, thumb, hand, hands, chin).
+    A-side: cock, dick, penis, shaft, member, erection, hard, big, thick, length
+    B-side: fingers, finger, thumb, hand, hands, chin
+  RELATION 2  (medium)
+    name: Cat among fingers
+    Every other word B favours names a part of the man's own body, whereas cat names a separate creature and makes the stroking transitive on something outside him; it is also the largest single mover in either direction, rising from position 114 to position 9.
+    A-side: cock, dick, penis, shaft, member, erection
+    B-side: cat
+  RELATION 3  (low)
+    name: Attribute before object
+    A's steepest fallers are words that describe a thing without naming it and require a further noun after them (hard falls 34 places, big 77, thick 64, length 49), while the words B raises are concrete nouns that fill the slot outright (fingers, thumb, chin, hand), so A defers the naming where B completes it.
+    A-side: hard, big, thick, length
+    B-side: fingers, thumb, chin, hand, hands
+
+=========================== READING TWO ===========================
+kind: anatomical explicitness of the touched part
+  RELATION 1  (high)
+    name: genitals to hand-parts
+    The genital and erogenous nouns cock, dick, penis, shaft, member, erection, and chest that dominate under A are answered under B by the non-genital parts actually doing the touching -- chin, fingers, thumb, hand, finger, hands -- as if the sentence's object relocates from the body part being stroked to the stroker's own hand.
+    A-side: cock, dick, penis, shaft, member, erection, chest
+    B-side: chin, fingers, thumb, hand, finger, hands
+  RELATION 2  (low)
+    name: flight to a pet
+    Beyond softening to hand-parts, B's single largest positional swing in the cell belongs to cat (114th under A to 9th under B), suggesting the strongest available move is to abandon a human body part for a pet entirely.
+    A-side: cock, dick, penis, shaft, member, erection
+    B-side: cat
+
+Answer these, in order.
+
+1. PER READING. For each of READING ONE and READING TWO: how many of its relations
+   are well supported, how many are over-read, and one sentence naming the single
+   weakest relation and why.
+2. MISSED. Anything the table plainly shows that neither reading names, or that
+   only one names. Be specific about words and positions.
+3. BETTER. Which reading you would rather have, and one sentence on why. If they
+   are equivalent say so; that is a legitimate answer.
+4. CONFIDENCE. high / medium / low.
+
+Write sentences, not labels. Do not speculate about who wrote either reading.

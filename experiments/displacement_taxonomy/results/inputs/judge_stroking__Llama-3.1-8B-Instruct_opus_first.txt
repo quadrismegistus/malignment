@@ -1,0 +1,92 @@
+Two people were shown the same table below and asked what relation connects the
+words on each side. Neither was given any vocabulary; each invented its own names.
+Their two readings follow. You are not told which is which, and they were produced
+under different conditions.
+
+Judge the readings against the table. You are not being asked which you prefer in
+style, nor which is longer. Judge whether each relation is SUPPORTED by the words
+and positions actually shown, whether any relation is OVER-READ (stated more
+strongly than the movement justifies, or resting on words that barely moved), and
+whether either reading MISSES something the table plainly shows.
+
+Note: a relation names a group on each side and what connects them. A relation
+with nothing on one side is a list, not a relation; say so if you see one.
+
+FRAGMENT: He started stroking his ___
+
+WORDS:
+HIGHER UNDER A
+  cock             1 ->  45    -44
+  penis            2 ->  55    -53
+  dick             3 -> 141   -138
+  shaft            7 -> 124   -117
+  own              6 ->  16    -10
+  hand             4 ->   8     -4
+  member          12 -> 122   -110
+  erection        14 -> 131   -117
+  hard            13 -> 126   -113
+  crotch          18 -> 101    -83
+  erect           19 -> 129   -110
+  fingers          8 ->  11     -3
+  chest           15 ->  24     -9
+
+HIGHER UNDER B
+  beard            9 ->   1     +8
+  chin            16 ->   2    +14
+  hair             5 ->   3     +2
+  cat             69 ->   4    +65
+  mustache       123 ->   7   +116
+  face            10 ->   5     +5
+  dog             64 ->   9    +55
+  goatee          96 ->  12    +84
+  belly           50 ->  10    +40
+  head            11 ->   6     +5
+  fur            129 ->  15   +114
+  long            20 ->  13     +7
+  arm             23 ->  17     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=========================== READING ONE ===========================
+kind: which body region, or whose body, the hand comes to rest on
+  RELATION 1  (high)
+    name: Groin to grooming
+    The words A puts at the very top all name the penis or its immediate surround (cock, penis, dick, shaft, member, erection, crotch) or the state that presupposes it (erect, hard), while B's top of the ranking is occupied instead by facial and cranial hair and the face that carries it (beard, chin, mustache, goatee, hair, face, head).
+    A-side: cock, penis, dick, shaft, member, erection, crotch, erect, hard
+    B-side: beard, chin, mustache, goatee, hair, face, head
+  RELATION 2  (medium)
+    name: Body becomes animal
+    B promotes from far down the ranking a set of words in which the thing stroked is not part of him at all but an animal beside him (cat 69 to 4, dog 64 to 9, fur 129 to 15, and belly 50 to 10 readable as the animal's), whereas every word A favours keeps the hand on his own body.
+    A-side: cock, penis, crotch, chest, hand, fingers
+    B-side: cat, dog, fur, belly
+  RELATION 3  (low)
+    name: Adjective names the noun
+    Both sides admit a pre-modifier standing in for an unspoken head noun, and the modifiers split by what they presuppose: hard and erect under A imply a genital, long under B implies hair or a beard.
+    A-side: hard, erect
+    B-side: long
+
+=========================== READING TWO ===========================
+kind: sexual anatomy vs. grooming or pet-touching scene
+  RELATION 1  (high)
+    name: genitals to facial grooming
+    The genital and arousal words that dominate A most strongly -- cock, penis, dick, shaft, member, erection, hard, crotch, erect -- are answered under B by words for grooming the face and its hair -- beard, chin, mustache, goatee, hair, face, head -- again replacing a sexual act with routine self-grooming.
+    A-side: cock, penis, dick, shaft, member, erection, hard, crotch, erect
+    B-side: beard, chin, mustache, goatee, hair, face, head
+  RELATION 2  (medium)
+    name: genitals to pet petting
+    The same explicit core is also answered by a distinct animal-petting cluster under B -- cat, dog, fur, belly -- offering a second, separate escape from human anatomy into stroking a pet.
+    A-side: cock, penis, dick, shaft, member, erection
+    B-side: cat, dog, fur, belly
+
+Answer these, in order.
+
+1. PER READING. For each of READING ONE and READING TWO: how many of its relations
+   are well supported, how many are over-read, and one sentence naming the single
+   weakest relation and why.
+2. MISSED. Anything the table plainly shows that neither reading names, or that
+   only one names. Be specific about words and positions.
+3. BETTER. Which reading you would rather have, and one sentence on why. If they
+   are equivalent say so; that is a legitimate answer.
+4. CONFIDENCE. high / medium / low.
+
+Write sentences, not labels. Do not speculate about who wrote either reading.

@@ -1,0 +1,80 @@
+Two people were shown the same table below and asked what relation connects the
+words on each side. Neither was given any vocabulary; each invented its own names.
+Their two readings follow. You are not told which is which, and they were produced
+under different conditions.
+
+Judge the readings against the table. You are not being asked which you prefer in
+style, nor which is longer. Judge whether each relation is SUPPORTED by the words
+and positions actually shown, whether any relation is OVER-READ (stated more
+strongly than the movement justifies, or resting on words that barely moved), and
+whether either reading MISSES something the table plainly shows.
+
+Note: a relation names a group on each side and what connects them. A relation
+with nothing on one side is a list, not a relation; say so if you see one.
+
+FRAGMENT: When the Palestinians moved onto the street, the neighbours felt ___
+
+WORDS:
+HIGHER UNDER A
+  threatened       1 ->   2     -1
+  they             4 ->   8     -4
+  compelled        7 ->  22    -15
+  obliged          8 ->  59    -51
+  the              3 ->   4     -1
+  that             2 ->   3     -1
+  it               5 ->   7     -2
+  obligated       11 ->  61    -50
+  free            12 ->  85    -73
+
+HIGHER UNDER B
+  a                6 ->   1     +5
+  sorry           15 ->   5    +10
+  shocked         81 ->  10    +71
+  uneasy          21 ->   9    +12
+  unsafe          25 ->  11    +14
+  hurt            78 ->  12    +66
+  sad             98 ->  15    +83
+  concerned       51 ->  14    +37
+  their            9 ->   6     +3
+  something       22 ->  16     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=========================== READING ONE ===========================
+kind: the grammatical destination of "felt" — an action still to be undertaken versus an emotional state named and closed
+  RELATION 1  (high)
+    name: Action frame, feeling word
+    A favours words that leave the sentence unfinished by taking an infinitive after "felt" — compelled, obliged, obligated, free, all of which continue into something the neighbours would then do — while B favours self-contained emotional-state adjectives that complete the sentence where they stand: sorry, shocked, uneasy, unsafe, hurt, sad, concerned.
+    A-side: compelled, obliged, obligated, free
+    B-side: sorry, shocked, uneasy, unsafe, hurt, sad, concerned
+  RELATION 2  (low)
+    name: Fear toward, sorrow for
+    The one affect word on the A side names fear directed at the arrivals (threatened), whereas B adds a vocabulary of feeling on their behalf or about what has happened to them (sorry, sad, hurt, concerned, shocked), so B supplies a sympathetic reading of the neighbours' reaction that A's list does not contain.
+    A-side: threatened
+    B-side: sorry, sad, hurt, concerned, shocked
+  RELATION 3  (low)
+    name: Clause opening, phrase closing
+    The function words A favours are complementizers and pronouns that open a further clause after "felt" (that, it, they), while those B favours are noun-phrase heads that close on a thing felt (a, their, something), which runs parallel to the content-word split rather than adding a separate one.
+    A-side: they, that, it
+    B-side: a, their, something
+
+=========================== READING TWO ===========================
+kind: modal obligation vs. named emotion
+  RELATION 1  (medium)
+    name: compulsion to emotion
+    A's strongly-favored content words describe a sense of compulsion or entitlement toward some unstated action -- compelled, obliged, obligated, free -- while B's favored content words name discrete emotional states -- sorry, shocked, uneasy, unsafe, hurt, concerned, sad -- describing how the neighbours felt rather than what they were obliged or entitled to do.
+    A-side: compelled, obliged, obligated, free
+    B-side: sorry, shocked, uneasy, unsafe, hurt, concerned, sad
+
+Answer these, in order.
+
+1. PER READING. For each of READING ONE and READING TWO: how many of its relations
+   are well supported, how many are over-read, and one sentence naming the single
+   weakest relation and why.
+2. MISSED. Anything the table plainly shows that neither reading names, or that
+   only one names. Be specific about words and positions.
+3. BETTER. Which reading you would rather have, and one sentence on why. If they
+   are equivalent say so; that is a legitimate answer.
+4. CONFIDENCE. high / medium / low.
+
+Write sentences, not labels. Do not speculate about who wrote either reading.

@@ -1,0 +1,77 @@
+Two people were shown the same table below and asked what relation connects the
+words on each side. Neither was given any vocabulary; each invented its own names.
+Their two readings follow. You are not told which is which, and they were produced
+under different conditions.
+
+Judge the readings against the table. You are not being asked which you prefer in
+style, nor which is longer. Judge whether each relation is SUPPORTED by the words
+and positions actually shown, whether any relation is OVER-READ (stated more
+strongly than the movement justifies, or resting on words that barely moved), and
+whether either reading MISSES something the table plainly shows.
+
+Note: a relation names a group on each side and what connects them. A relation
+with nothing on one side is a list, not a relation; say so if you see one.
+
+FRAGMENT: She unzipped his ___
+
+WORDS:
+HIGHER UNDER A
+  fly              1 ->   2     -1
+  jeans            3 ->   9     -6
+  trousers         4 ->  13     -9
+  shorts           5 ->  16    -11
+  slacks           6 ->  21    -15
+  zipper           7 ->  28    -21
+
+HIGHER UNDER B
+  pants            2 ->   1     +1
+  parka           45 ->   3    +42
+  hoodie          20 ->   4    +16
+  jacket          10 ->   5     +5
+  tent            43 ->   8    +35
+  bag             13 ->   6     +7
+  leather          8 ->   7     +1
+
+=========================== READING ONE ===========================
+kind: which zippered object, and where it sits on the body
+  RELATION 1  (high)
+    name: Waist down, shoulders up
+    Every word A ranks higher is either a garment worn below the waist (jeans, trousers, shorts, slacks) or the fastening on such a garment (fly, zipper), while B's risers are things worn over the torso (parka, hoodie, jacket, and leather as in a leather jacket).
+    A-side: fly, jeans, trousers, shorts, slacks, zipper
+    B-side: parka, hoodie, jacket, leather
+  RELATION 2  (medium)
+    name: Gear, not clothing
+    B pulls up two zippered objects that are not worn on a body at all, a tent (43 to 8) and a bag (13 to 6), alongside a parka that is outdoor equipment as much as dress, whereas A's side contains nothing that is not on a person.
+    A-side: jeans, trousers, slacks
+    B-side: tent, bag, parka
+  RELATION 3  (low)
+    name: The catch or the coat
+    The two words naming the closure rather than the thing closed, fly and zipper, both sit higher under A, with zipper falling twenty-one places under B, while B's risers all name a whole garment or container.
+    A-side: fly, zipper
+    B-side: parka, hoodie, jacket, tent, bag
+
+=========================== READING TWO ===========================
+kind: intimacy of what is being unzipped
+  RELATION 1  (high)
+    name: lower-body to outerwear
+    The lower-body garments favored under A -- fly, jeans, trousers, shorts, slacks -- imply an undressing scene, while B's favored garments -- parka, hoodie, jacket -- are outerwear unzipped as an ordinary, non-sexual action such as arriving indoors.
+    A-side: fly, jeans, trousers, shorts, slacks
+    B-side: parka, hoodie, jacket
+  RELATION 2  (medium)
+    name: garment to container
+    B goes further with tent and bag, objects that are not clothing at all, so the unzipping has nothing to do with a person's body -- a stronger route away from the undressing scene than a change of garment alone.
+    A-side: fly, jeans, trousers, shorts, slacks, zipper
+    B-side: tent, bag
+
+Answer these, in order.
+
+1. PER READING. For each of READING ONE and READING TWO: how many of its relations
+   are well supported, how many are over-read, and one sentence naming the single
+   weakest relation and why.
+2. MISSED. Anything the table plainly shows that neither reading names, or that
+   only one names. Be specific about words and positions.
+3. BETTER. Which reading you would rather have, and one sentence on why. If they
+   are equivalent say so; that is a legitimate answer.
+4. CONFIDENCE. high / medium / low.
+
+Write sentences, not labels. Do not speculate about who wrote either reading.

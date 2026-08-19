@@ -1,0 +1,98 @@
+[
+ {
+  "cell": "stroking__AmberSafe",
+  "order": "opus_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_stroking__AmberSafe_opus_first.txt",
+  "reading_one": "opus/unbatched"
+ },
+ {
+  "cell": "stroking__AmberSafe",
+  "order": "sonnet_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_stroking__AmberSafe_sonnet_first.txt",
+  "reading_one": "sonnet/xhigh"
+ },
+ {
+  "cell": "stroking__Baichuan2-7B-Chat",
+  "order": "opus_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_stroking__Baichuan2-7B-Chat_opus_first.txt",
+  "reading_one": "opus/unbatched"
+ },
+ {
+  "cell": "stroking__Baichuan2-7B-Chat",
+  "order": "sonnet_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_stroking__Baichuan2-7B-Chat_sonnet_first.txt",
+  "reading_one": "sonnet/xhigh"
+ },
+ {
+  "cell": "stroking__Llama-3.1-8B-Instruct",
+  "order": "opus_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_stroking__Llama-3.1-8B-Instruct_opus_first.txt",
+  "reading_one": "opus/unbatched"
+ },
+ {
+  "cell": "stroking__Llama-3.1-8B-Instruct",
+  "order": "sonnet_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_stroking__Llama-3.1-8B-Instruct_sonnet_first.txt",
+  "reading_one": "sonnet/xhigh"
+ },
+ {
+  "cell": "union__AmberSafe",
+  "order": "opus_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_union__AmberSafe_opus_first.txt",
+  "reading_one": "opus/unbatched"
+ },
+ {
+  "cell": "union__AmberSafe",
+  "order": "sonnet_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_union__AmberSafe_sonnet_first.txt",
+  "reading_one": "sonnet/xhigh"
+ },
+ {
+  "cell": "union__Baichuan2-7B-Chat",
+  "order": "opus_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_union__Baichuan2-7B-Chat_opus_first.txt",
+  "reading_one": "opus/unbatched"
+ },
+ {
+  "cell": "union__Baichuan2-7B-Chat",
+  "order": "sonnet_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_union__Baichuan2-7B-Chat_sonnet_first.txt",
+  "reading_one": "sonnet/xhigh"
+ },
+ {
+  "cell": "union__Llama-3.1-8B-Instruct",
+  "order": "opus_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_union__Llama-3.1-8B-Instruct_opus_first.txt",
+  "reading_one": "opus/unbatched"
+ },
+ {
+  "cell": "union__Llama-3.1-8B-Instruct",
+  "order": "sonnet_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_union__Llama-3.1-8B-Instruct_sonnet_first.txt",
+  "reading_one": "sonnet/xhigh"
+ },
+ {
+  "cell": "unzipped__AmberSafe",
+  "order": "opus_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_unzipped__AmberSafe_opus_first.txt",
+  "reading_one": "opus/unbatched"
+ },
+ {
+  "cell": "unzipped__AmberSafe",
+  "order": "sonnet_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_unzipped__AmberSafe_sonnet_first.txt",
+  "reading_one": "sonnet/xhigh"
+ },
+ {
+  "cell": "pal_affect__AmberSafe",
+  "order": "opus_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_pal_affect__AmberSafe_opus_first.txt",
+  "reading_one": "opus/unbatched"
+ },
+ {
+  "cell": "pal_affect__AmberSafe",
+  "order": "sonnet_first",
+  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/judge_pal_affect__AmberSafe_sonnet_first.txt",
+  "reading_one": "sonnet/xhigh"
+ }
+]

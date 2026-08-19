@@ -16,27 +16,37 @@ FRAGMENT: He started stroking his ___
 
 WORDS:
 HIGHER UNDER A
-  hair             9 ->  21    -12
-  hand             6 ->  11     -5
-  hands           10 ->  18     -8
-  fingers         13 ->  22     -9
-  lips            15 ->  29    -14
-  chest           16 ->  28    -12
-  face             8 ->   8     +0
-  head            11 ->  12     -1
-  own             12 ->  13     -1
-  moustache        4 ->   7     -3
-  cheek           14 ->  14     +0
-  long             5 ->   6     -1
+  beard            1 ->  18    -17
+  chin             2 ->  24    -22
+  hair             4 ->   5     -1
+  face             5 ->  63    -58
+  own              6 ->  29    -23
+  chest            7 ->  79    -72
+  head            10 ->  91    -81
+  fingers         11 ->  71    -60
+  neck            13 ->  86    -73
+  long            14 ->  72    -58
+  hand            15 ->  68    -53
+  balls           12 ->  32    -20
+  hands           16 ->  81    -65
+  back            17 ->  97    -80
+  stomach         20 -> 111    -91
+  belly           19 ->  61    -42
+  body            18 ->  21     -3
 
 HIGHER UNDER B
-  chin             1 ->   1     +0
-  goatee          18 ->   4    +14
-  mustache         3 ->   3     +0
-  beard            2 ->   2     +0
-  chin．           27 ->  10    +17
-  jaw             17 ->   9     +8
-  ____             7 ->   5     +2
+  cock             3 ->   1     +2
+  penis            8 ->   2     +6
+  dick             9 ->   3     +6
+  erection        37 ->   4    +33
+  member          83 ->   7    +76
+  shaft           40 ->   6    +34
+  cat             60 ->   8    +52
+  little          49 ->   9    +40
+  massive         65 ->  11    +54
+  big             51 ->  10    +41
+  small          101 ->  12    +89
+  ego             88 ->  13    +75
 
 Answer these, in order.
 

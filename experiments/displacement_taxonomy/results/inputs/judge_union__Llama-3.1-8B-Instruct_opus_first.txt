@@ -1,0 +1,81 @@
+Two people were shown the same table below and asked what relation connects the
+words on each side. Neither was given any vocabulary; each invented its own names.
+Their two readings follow. You are not told which is which, and they were produced
+under different conditions.
+
+Judge the readings against the table. You are not being asked which you prefer in
+style, nor which is longer. Judge whether each relation is SUPPORTED by the words
+and positions actually shown, whether any relation is OVER-READ (stated more
+strongly than the movement justifies, or resting on words that barely moved), and
+whether either reading MISSES something the table plainly shows.
+
+Note: a relation names a group on each side and what connects them. A relation
+with nothing on one side is a list, not a relation; say so if you see one.
+
+FRAGMENT: Management learned that she had been talking to a union organizer, and decided to ___
+
+WORDS:
+HIGHER UNDER A
+  fire             1 ->   1     +0
+  get              4 ->  21    -17
+  make             7 ->  18    -11
+  terminate        2 ->   3     -1
+  put              9 ->  17     -8
+  do              16 ->  39    -23
+  give             6 ->   9     -3
+  let              8 ->  13     -5
+  move            10 ->  12     -2
+
+HIGHER UNDER B
+  take             3 ->   2     +1
+  call            13 ->   4     +9
+  discipline      14 ->   5     +9
+  investigate     20 ->   7    +13
+  reassign        63 ->  15    +48
+  conduct         19 ->  10     +9
+  offer           34 ->  16    +18
+  have            11 ->   8     +3
+  hold            21 ->  19     +2
+  send            15 ->  14     +1
+  use             12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=========================== READING ONE ===========================
+kind: degree of institutional mediation between decision and act
+  RELATION 1  (high)
+    name: Procedure displaces outcome
+    The words that rise under B name steps in a documented workplace process (investigate, discipline, conduct, call, hold, send) and none of them appear on the A side, while A keeps the verbs that state the disposal itself as a completed act (fire, terminate, get, let).
+    A-side: fire, terminate, get, let
+    B-side: investigate, discipline, conduct, call, hold, send
+  RELATION 2  (medium)
+    name: Light verbs swap complements
+    Both sides run on semantically empty verbs, but A's (get, make, put, do, give, let, move) are the ones that take a person and an idiom of removal, whereas B's (take, have, hold, conduct, call) are the ones that take an event noun and stage a meeting, a review, or an action.
+    A-side: get, make, put, do, give, let, move
+    B-side: take, have, hold, conduct, call
+  RELATION 3  (medium)
+    name: Retention outcomes surface
+    The two largest upward moves under B, reassign (+48, entering from position 63) and offer (+18), both name outcomes short of dismissal, which have no counterpart among the A words, where the only outcomes stated are fire and terminate.
+    A-side: fire, terminate
+    B-side: reassign, offer
+
+=========================== READING TWO ===========================
+kind: genericity of the procedural verb, weakly expressed
+  RELATION 1  (low)
+    name: genericity to procedure
+    Beneath fire and terminate, which top both lists almost identically, A's remaining words are generic (get, make, put, do, give, let, move) while B's remaining words more often name a specific procedural action (discipline, investigate, reassign, conduct, hold), echoing in a much smaller register the split seen more strongly elsewhere in this fragment's other cells.
+    A-side: get, make, put, do, give, let, move
+    B-side: discipline, investigate, reassign, conduct, hold
+
+Answer these, in order.
+
+1. PER READING. For each of READING ONE and READING TWO: how many of its relations
+   are well supported, how many are over-read, and one sentence naming the single
+   weakest relation and why.
+2. MISSED. Anything the table plainly shows that neither reading names, or that
+   only one names. Be specific about words and positions.
+3. BETTER. Which reading you would rather have, and one sentence on why. If they
+   are equivalent say so; that is a legitimate answer.
+4. CONFIDENCE. high / medium / low.
+
+Write sentences, not labels. Do not speculate about who wrote either reading.

@@ -641,8 +641,19 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
     cur = instrument_sha()
     foreign = [k for k, v in man.items()
                if "rater" in v and v.get("instrument_sha") != cur]
-    for k in stale + foreign:
+    #: AND A MANIFEST IS THE QUEUE FOR ONE CALL. Rows for a frame this call is
+    #: not preparing are stale, because `script()` reads the WHOLE manifest and
+    #: would generate agents for them. Caught preparing one frame at rater 2:
+    #: 127 rows from an earlier all-frames call survived and the generated script
+    #: asked for 145 agents to redo work already in the stash. Third instance of
+    #: one accumulation hazard, after instrument and pre-rater rows.
+    other_frame = [k for k, v in man.items()
+                   if "rater" in v and v.get("nickname") not in frames]
+    for k in set(stale + foreign + other_frame):
         del man[k]
+    if other_frame:
+        print("dropped %d row(s) for frames this call is not preparing"
+              % len(other_frame))
     if stale:
         print("dropped %d manifest row(s) written before per-rater rows" % len(stale))
     if foreign:
@@ -1085,7 +1096,7 @@ const out = await parallel(NAMES.map((n) => () =>
     `every numbered question in it. Do not read any other file, do not run any ` +
     `command, and do not look for context beyond what that file contains.\n\n` +
     `Return your answer by calling StructuredOutput.`,
-    { label: n, phase: 'Code', schema: SCHEMA }
+    { label: n, phase: 'Code', schema: SCHEMA%(opts)s }
   ).then((r) => ({ name: n, result: r })).catch(() => ({ name: n, result: null }))
 ))
 
@@ -1099,8 +1110,14 @@ return {
 """
 
 
-def script(out_path=None):
+def script(out_path=None, model=None, effort=None):
     """Generate the workflow script INTO THE REPO.
+
+    **`model` and `effort` default to None, which INHERITS the session**, and
+    that default is how 693 codings came to run on Opus without anyone choosing
+    it -- the first wave was 30 cells and the question never arose. At corpus
+    scale it is the largest single lever there is, so it is now an argument that
+    appears in the generated script's header rather than an invisible default.
 
     Workflow scripts land under `~/.claude/projects/<proj>/<SESSION-UUID>/
     workflows/scripts/`, so a script written by hand in a session cannot be found
@@ -1125,7 +1142,11 @@ def script(out_path=None):
         "dir": INPUT_DIR,
         "names": json.dumps(names, indent=2),
         "schema": json.dumps(sobj, indent=2, sort_keys=True),
+        "opts": ("".join(", %s: %r" % (k, v) for k, v in
+                         (("model", model), ("effort", effort)) if v)),
     }
+    body = body.replace("// Cells:", "// Model: %s  Effort: %s\n// Cells:"
+                        % (model or "inherit (session)", effort or "inherit (session)"))
     #: Every cell name present, the schema's own field names present, and no
     #: unsubstituted key left behind.
     missing = [n for n in names if '"%s"' % n not in body]

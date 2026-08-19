@@ -16,27 +16,30 @@ FRAGMENT: He started stroking his ___
 
 WORDS:
 HIGHER UNDER A
-  hair             9 ->  21    -12
-  hand             6 ->  11     -5
-  hands           10 ->  18     -8
-  fingers         13 ->  22     -9
-  lips            15 ->  29    -14
-  chest           16 ->  28    -12
-  face             8 ->   8     +0
-  head            11 ->  12     -1
-  own             12 ->  13     -1
-  moustache        4 ->   7     -3
-  cheek           14 ->  14     +0
-  long             5 ->   6     -1
+  cock             1 ->   2     -1
+  dick             2 ->   9     -7
+  hard            15 ->  63    -48
+  big             13 ->  41    -28
+  balls            9 ->  16     -7
+  penis            6 ->  11     -5
+  hands           16 ->  19     -3
 
 HIGHER UNDER B
-  chin             1 ->   1     +0
-  goatee          18 ->   4    +14
-  mustache         3 ->   3     +0
-  beard            2 ->   2     +0
-  chin．           27 ->  10    +17
-  jaw             17 ->   9     +8
-  ____             7 ->   5     +2
+  hair             4 ->   1     +3
+  face             7 ->   3     +4
+  chest            5 ->   4     +1
+  own             14 ->   7     +7
+  chin             8 ->   6     +2
+  head            11 ->   8     +3
+  stomach         56 ->  12    +44
+  nose            55 ->  15    +40
+  pussy           51 ->  18    +33
+  dog             52 ->  20    +32
+  wife's          32 ->  17    +15
+  body            19 ->  14     +5
+  long            10 ->  10     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 

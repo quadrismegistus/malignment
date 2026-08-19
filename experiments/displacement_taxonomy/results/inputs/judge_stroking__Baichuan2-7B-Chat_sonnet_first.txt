@@ -1,0 +1,84 @@
+Two people were shown the same table below and asked what relation connects the
+words on each side. Neither was given any vocabulary; each invented its own names.
+Their two readings follow. You are not told which is which, and they were produced
+under different conditions.
+
+Judge the readings against the table. You are not being asked which you prefer in
+style, nor which is longer. Judge whether each relation is SUPPORTED by the words
+and positions actually shown, whether any relation is OVER-READ (stated more
+strongly than the movement justifies, or resting on words that barely moved), and
+whether either reading MISSES something the table plainly shows.
+
+Note: a relation names a group on each side and what connects them. A relation
+with nothing on one side is a list, not a relation; say so if you see one.
+
+FRAGMENT: He started stroking his ___
+
+WORDS:
+HIGHER UNDER A
+  cock             1 ->  12    -11
+  penis            4 ->  17    -13
+  dick             5 ->  21    -16
+  crotch           7 -> 117   -110
+  face             9 ->  23    -14
+  erection        11 ->  97    -86
+  chest            6 ->   6     +0
+  fingers         12 ->  26    -14
+  arm             16 ->  37    -21
+  wife            14 ->  18     -4
+  own             13 ->  15     -2
+
+HIGHER UNDER B
+  beard            2 ->   1     +1
+  chin             3 ->   2     +1
+  goatee          20 ->   3    +17
+  mustache        24 ->   5    +19
+  hair             8 ->   4     +4
+  cat             61 ->   8    +53
+  long            21 ->   7    +14
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=========================== READING ONE ===========================
+kind: sexual anatomy vs. facial-hair grooming
+  RELATION 1  (high)
+    name: genitals to facial hair
+    The genital nouns cock, penis, dick, crotch, and erection that lead under A are answered under B by beard, chin, goatee, mustache, and hair, replacing an erotic touch with the habitual gesture of stroking one's own facial hair.
+    A-side: cock, penis, dick, crotch, erection
+    B-side: beard, chin, goatee, mustache, hair
+  RELATION 2  (low)
+    name: pet as escape route
+    The same genital core is also answered under B by cat (61st under A to 8th under B), the same kind of wholesale swap away from human anatomy seen with the facial-hair words, just further afield.
+    A-side: cock, penis, dick, crotch, erection
+    B-side: cat
+
+=========================== READING TWO ===========================
+kind: which sense of stroking, and hence what gets stroked
+  RELATION 1  (high)
+    name: Genitals to whiskers
+    The five genital or arousal words leading the ranking under A (cock at 1, penis, dick, crotch, erection) are displaced under B by a beard-and-chin cluster (beard, chin, goatee, mustache, hair) that takes the first five B positions, so the thing stroked moves from the groin to the lower face.
+    A-side: cock, penis, dick, crotch, erection
+    B-side: beard, chin, goatee, mustache, hair
+  RELATION 2  (medium)
+    name: Verb sense reassigned
+    Words that fit only the sexual sense of stroking (erection, crotch, dick) and words that fit stroking an animal or stroking a beard while thinking (cat, goatee, mustache) show the largest moves on their respective sides, which reads as the verb being taken in a different sense rather than the same act being named more decorously.
+    A-side: erection, crotch, dick
+    B-side: cat, goatee, mustache
+  RELATION 3  (low)
+    name: Partner becomes pet
+    The only animate object of the gesture on the A side is another person, his wife, and the only one on the B side is an animal, the cat rising from 61 to 8, so where the thing stroked is not his own body it changes from human to household pet.
+    A-side: wife
+    B-side: cat
+
+Answer these, in order.
+
+1. PER READING. For each of READING ONE and READING TWO: how many of its relations
+   are well supported, how many are over-read, and one sentence naming the single
+   weakest relation and why.
+2. MISSED. Anything the table plainly shows that neither reading names, or that
+   only one names. Be specific about words and positions.
+3. BETTER. Which reading you would rather have, and one sentence on why. If they
+   are equivalent say so; that is a legitimate answer.
+4. CONFIDENCE. high / medium / low.
+
+Write sentences, not labels. Do not speculate about who wrote either reading.
