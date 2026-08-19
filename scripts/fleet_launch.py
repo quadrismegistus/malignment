@@ -291,6 +291,22 @@ def execute(b, models, roots, venv, a):
                          "experiments", "*.egg-info"))
     print("  provision   venv %s" % venv)
     r = cloud.ssh_run(st, PROVISION % {"venv": venv})
+    if r.returncode == 3:
+        #: **rc=3 IS THE HF REACHABILITY ASSERT, AND IT IS A MACHINE DEFECT.**
+        #: Box 48145433 carried an HF proxy at http://117.175.104.83 and 404'd 10
+        #: of its 11 models. That is a property of the HOST, not a race, so the
+        #: runbook's rule applies: blocklist the machine and take another offer,
+        #: never retry the same one. Destroying here is safe because the assert
+        #: runs BEFORE any model is fetched -- there is nothing on the box to lose.
+        cloud.blocklist(best.get("machine_id"), "HF unreachable from this host")
+        print("  HF UNREACHABLE from this machine -- blocklisted.\n%s"
+              % (r.stdout or "")[-300:])
+        if cloud.destroy_verified(iid):
+            cloud.state({})
+            raise SystemExit("  destroyed and CONFIRMED gone. Re-run to take a "
+                             "different offer.")
+        _billing(cloud, iid, "HF unreachable AND destroy did not take")
+        raise SystemExit("  HF unreachable and still billing -- see above.")
     if r.returncode:
         #: **A FAILURE AFTER `create` LEAVES A BOX BILLING.** Raising here without
         #: saying so is the casualty pattern from the other side: not a box that
@@ -335,7 +351,8 @@ def execute(b, models, roots, venv, a):
     #: have removed that dependency; the flag that does so was never passed.
     cmds += ["./%s/bin/python scripts/topup_lineage.py --root %s --from-stash%s"
              % (venv, r_, only) for r_ in roots]
-    script = ["cd /root/malignment", "rm -f /root/DONE /root/FAILED"]
+    script = ["cd /root/malignment", ". /root/hfenv.sh",
+              "rm -f /root/DONE /root/FAILED"]
     for i, c in enumerate(cmds):
         script.append("%s > /root/stage%d.log 2>&1 || touch /root/FAILED" % (c, i))
     script.append("touch /root/DONE")
@@ -451,6 +468,29 @@ python3 -m venv %(venv)s 2>/dev/null || true
 # after the venv built, after the payload shipped, with the rental running.
 ./%(venv)s/bin/pip -q install -e .
 ./%(venv)s/bin/python -c "import torch,transformers;print('torch',torch.__version__,'transformers',transformers.__version__,'cuda',torch.cuda.is_available())"
+# **THE BOX'S OWN NETWORK CONFIG IS NOT TRUSTED.** Fleet box 48145433 shipped with
+# an HF proxy at http://117.175.104.83 and 10 of its 11 models died on 404 -- a
+# machine property we paid to provision, ship to, and run a whole shard against
+# before learning. Normalise the endpoint and drop inherited proxies, then PROVE
+# the box can reach HF before any model is asked for.
+cat > /root/hfenv.sh <<'HFEOF'
+export HF_ENDPOINT=https://huggingface.co
+unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy ALL_PROXY all_proxy
+HFEOF
+. /root/hfenv.sh
+# A REACHABILITY ASSERT, NOT A PING. It fetches the same way the runner does --
+# through huggingface_hub, from the venv that will do the work -- because a
+# curl that succeeds proves nothing about a library reading a different env.
+./%(venv)s/bin/python - <<'PYEOF'
+import sys
+from huggingface_hub import hf_hub_download
+try:
+    p = hf_hub_download("hf-internal-testing/tiny-random-gpt2", "config.json")
+    print("HF REACHABLE:", p)
+except Exception as e:
+    print("HF UNREACHABLE:", type(e).__name__, str(e)[:200])
+    sys.exit(3)
+PYEOF
 """
 
 

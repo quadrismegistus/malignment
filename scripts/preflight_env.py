@@ -120,6 +120,45 @@ def _cells(model):
         return 0
 
 
+def gated(models, timeout=8):
+    """{model: reason} for repos a TOKENLESS box cannot fetch. Measured, not guessed.
+
+    **THE PREFLIGHT MISSED THE ONE THING THAT KILLED A REAL SHARD.** Fleet box
+    48145433 reported `BLOCKER=0 OK=7` and then failed to load all 11 of its
+    models: `401 Client Error ... Make sure to have access to it at
+    huggingface.co/Zyphra/Zamba2-7B`. The gate whose entire job is "refuse to
+    spend on a shard that cannot load its models" did not check whether the models
+    could be FETCHED.
+
+    It never surfaced locally because this Mac holds an HF token in the shell
+    profile, so every gated repo resolves here and nowhere else. **A check run
+    only on the machine that holds the credential cannot see a credential
+    problem** -- so this asks UNAUTHENTICATED, which is the box's condition, not
+    ours.
+
+    Network is required and a failure to reach HF is reported as UNKNOWN rather
+    than as OK: an unreachable check that returns a pass is worse than no check.
+    """
+    import urllib.error
+    import urllib.request
+    out = {}
+    for m in models:
+        url = "https://huggingface.co/api/models/%s" % m
+        req = urllib.request.Request(url)   # deliberately NO Authorization header
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as fh:
+                d = json.loads(fh.read().decode("utf-8"))
+            g = d.get("gated")
+            if g not in (False, None):
+                out[m] = "gated=%s -- a tokenless box gets 401" % g
+        except urllib.error.HTTPError as e:
+            out[m] = ("HTTP %s unauthenticated -- a tokenless box cannot fetch it"
+                      % e.code)
+        except Exception as e:                                  # noqa: BLE001
+            out[m] = "UNKNOWN: %s" % str(e)[:60]
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="*")
