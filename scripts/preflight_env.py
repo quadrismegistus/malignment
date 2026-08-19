@@ -79,9 +79,34 @@ PROFILE_ENV = {"tf457": ("local_mps_tf457",),
                "bf16": ("local_mps",), "twogpu": ("local_mps",),
                "ssm": ("local_mps_tf457",)}
 LOCAL = ("local_mps", "local_mps_tf457")
+#: **A vLLM OBSERVATION IS NOT EVIDENCE ABOUT A twp RUN.** RH, 2026-08-19:
+#: *"these could just be generation/vllm issues?"* -- and two of the four cloud
+#: BLOCKERs were exactly that. `Teuken` was blocked on `sentencepiece IdToPiece:
+#: OUT_OF_RANGE during CROSS-SCORING`, an operation twp never performs, and
+#: `Aquila2-7B` on `AquilaForCausalLM removed from vLLM after v0.24.0`, which
+#: says nothing about whether transformers can load it. A twp fleet runs
+#: transformers through `models.py`; vLLM is a different code path in a different
+#: package, and treating its failures as ours excludes models on evidence about
+#: something else.
+#:
+#: This is the same scoping error already fixed for local in PROFILE_ENV, left
+#: unfixed on the cloud side for a day because nothing had exercised it.
+CLOUD_VLLM = ("vast_l2_cuda_vllm", "vast_vllm_0.27.1_passage_fleet")
+#: transformers-based CUDA runs -- the only ones that speak to a twp fleet
 CLOUD = ("grid_v3_box_initial", "grid_v3_box_repaired", "vast_a100_ssm_kernels",
-         "vast_l2_cuda_vllm", "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
-         "cloud_cuda_transformers_5.14.1", "vast_vllm_0.27.1_passage_fleet")
+         "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+         "cloud_cuda_transformers_5.14.1")
+#: **AND THE TRANSFORMERS VERSION IS PART OF THE ENVIRONMENT.** `cloud_cuda_
+#: transformers_5.14.1` failed both Aquila arms on a `rope_scaling['type']`
+#: KeyError in the model's OWN bundled code. Both arms declare profile `tf457`,
+#: i.e. transformers 4.57.1 -- a different major. A failure at 5.14.1 is not
+#: evidence about a 4.57.1 run any more than an MPS failure is evidence about
+#: CUDA, and the whole file exists to stop that inference.
+PROFILE_CLOUD_ENV = {
+    "tf457": ("grid_v3_box_initial", "grid_v3_box_repaired",
+              "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1"),
+    "ssm": ("vast_a100_ssm_kernels",),
+}
 GOOD = ("load_ok", "loads", "ok", "loads_degraded")
 
 
@@ -122,7 +147,7 @@ def main():
         venv = os.path.basename(venv_for(m))
         mine = obs.get(m, [])
         envs = (PROFILE_ENV.get(prof, default_envs) if a.target == "local"
-                else default_envs)
+                else PROFILE_CLOUD_ENV.get(prof, default_envs))
         here = [o for o in mine if o["environment"] in envs]
         #: **CAPACITY IS NOT PROFILE-SCOPED.** Disk and unified memory are
         #: properties of the BOX; changing a model's transformers pin does not
