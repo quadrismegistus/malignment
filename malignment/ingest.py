@@ -302,6 +302,21 @@ def _cells(path):
             #: MEASUREMENTS. Keying on the pair silently collapsed 2,583 of
             #: CT-LLM-Base's 5,289 records into 2,706 and called them duplicates
             #: -- the topup work vanished and the count looked plausible.
+            #: **PER-RECORD GATE. `_maybe` DECIDES THE FILE, NOT THE RECORD.**
+            #: When `_maybe` read one line, a file was includable only if its
+            #: FIRST record matched, and mixed files were excluded whole -- which
+            #: hid 4,583 measured cells and was rightly fixed to scan. But the
+            #: scan made a file includable if ANY record matches, and nothing
+            #: here filtered the rest, so every v3 record in a mixed file poured
+            #: into the v4 table: 11,916 cells across 6 models, carrying
+            #: rule_version=3 and rules=''.
+            #:
+            #: The fix to one gate removed the guarantee the next stage was
+            #: relying on without stating it. File-level includability and
+            #: record-level admissibility are different questions and both have
+            #: to be asked.
+            if d.get("rule_version") != _RV["v"]:
+                continue
             k = ((d.get("model"), d.get("prompt")) if _RV["v"] == 3 else
                  (d.get("model"), d.get("prompt"), d.get("rules"),
                   bool(d.get("prompt_cache")), bool(d.get("topup"))))
