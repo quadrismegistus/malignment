@@ -993,3 +993,100 @@ from a deed into a process. Both changes make the encounter more governable and
 neither makes it more equal: the party that must use a channel is given more
 channel, and the party that acts directly is given better words for acting
 directly.
+
+## 15. The per-scenario sign test, which explains the pooled results
+
+Producers: `per_scenario.py`, `ishould_per_pair.py`. Tables:
+`results/base_side/per_scenario.json`, `results/base_side/ishould_per_pair.json`.
+
+Sections 11 to 14 tested the position gap pooled, two ways: lineage as the unit
+with prompts averaged away, and a crossed lineage-by-cluster bootstrap. Neither
+can see whether the scenarios AGREE. **A pooled null can be cancellation across
+scenarios that disagree in sign, and a pooled significance can be one scenario
+carrying the rest.** The sexual study surfaced that defect and it applies here.
+
+So: each matched scenario alone, its own lineages as the unit, two-sided sign
+test, then count how many agree.
+
+### `procedural` is split, and that is why M03 pooled to zero
+
+```
+                clusters   significant   positive   negative   unanimous
+F21                12          10            6          4         no
+M03               126         112           51         61         no
+slotpov             6           6            6          0        YES
+```
+
+**M03's pooled −0.031 was never a small effect.** 112 of its 126 scenarios show a
+significant procedural gap individually and they split near even. Only slotpov is
+unanimous, which is exactly where the pooled value was +1.677. Proceduralisation
+is a property of the slot perspective pairs, not of institutional prompts as
+such.
+
+`arousal` is the robust one, confirming the crossed test at scenario level: F21
+1 positive against 10 negative, M03 15 against 90, slotpov 0 against 5.
+
+### At the fixed site, pooling F21 and M03: which base gaps hold up
+
+The 52 prompts ending `"I should"`, 24 matched pairs, 50 lineages, tested per
+pair.
+
+```
+CONSISTENT      arousal      4 pos / 17 neg /  3 ns
+                mediation    4 pos / 16 neg /  4 ns
+                collective  12 pos /  3 neg /  0 ns
+SPLIT           procedural  10 pos /  9 neg /  5 ns
+                deference    9 pos / 10 neg /  5 ns
+                abstraction  9 pos / 10 neg /  5 ns
+```
+
+**Only three of thirteen scales survive scenario-level scrutiny**, and F21's two
+headline scales are not among them.
+
+**And F21 and M03 disagree on `procedural` at the SAME grammatical site**, both
+significantly and in opposite directions:
+
+```
+F21 only  (6 pairs)    +0.300   47/50 lineages   p=3.7e-11
+M03 only (18 pairs)    -0.059   16/50 lineages   p=0.015
+```
+
+That is not a site effect, not power, and not a difference of instruments. It is
+a difference between the two prompt sets, and section 11's "F21 and M03 do not
+disagree, sites do" is therefore too strong: at one site, they still do.
+
+### The delta gaps ARE significant with the lineage as the unit
+
+This is the part earlier sections reported as null under the crossed test.
+
+```
+scale          pairs pos:neg   pooled delta   lineages    p
+abstraction        8:0         +0.110         41/50      5.6e-06     UNANIMOUS
+procedural         1:7         -0.071         16/50      0.015
+mediation          1:4         -0.105         15/50      0.0066
+termination        5:3         +0.067         35/50      0.0066
+```
+
+**`abstraction` is the only delta gap with zero disagreeing pairs.** Alignment
+abstracts the institution further relative to the individual, consistently: 8 of
+24 scenarios significant, all in the same direction, 41 of 50 lineages. That
+confirms the crossed-test result with per-scenario unanimity behind it.
+
+`mediation` −0.105 at 4:1 pairs and 15/50 lineages restores, at the fixed site
+with both corpora pooled, the claim section 12 had to restrict to F21 alone --
+though 19 of 24 pairs individually do not clear, so it rests on a minority of
+scenarios and should be quoted that way.
+
+### What this changes
+
+The standing summary of sections 11 to 14 -- large symmetric main effects, base
+asymmetry inherited, `abstraction` the one thing alignment adds -- survives. What
+changes is the confidence attached to each part:
+
+- **`arousal` and `mediation`** are the base asymmetries that hold scenario by
+  scenario. The institution is calmer and acts more directly, at 16 and 17 of 24
+  scenarios.
+- **`procedural` and `deference` are corpus- and scenario-dependent**, and should
+  not be quoted as general properties of institutional prompts.
+- **`abstraction` is the robust alignment effect**, now on two independent
+  criteria.
