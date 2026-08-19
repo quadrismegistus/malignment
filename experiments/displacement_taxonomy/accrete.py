@@ -79,7 +79,29 @@ def domains():
 
 
 def constructs_for(prompt):
-    """Core constructs for one prompt under MODEL, as {name: [rids]}, plus rel map."""
+    """Core constructs for one prompt under MODEL, with the harmonisers' own prose.
+
+    CARRY `definition` AND `nearest`, NOT JUST THE NAME. Harmonisation already
+    writes both, and the first accretion run passed neither: the merge step saw a
+    name and some word lists and was asked to judge sameness with the reasoning
+    withheld. It refused 36 merges of 40.
+
+    `definition` is a subject-independent statement of the operation -- "One pole
+    names verbs of ending one's involvement and withdrawing from a situation
+    altogether; the other names verbs of remaining in place and directly voicing
+    a grievance or demand" -- which is exactly the `basis` a cross-prompt
+    comparison needs, and it was assumed not to exist.
+
+    `nearest` is worth more still: it names the construct this one is CLOSEST to
+    and says why it is not that one. A stated boundary is strictly better
+    evidence than a boundary the reader has to reconstruct, and it is the only
+    field in the pipeline that records a distinction someone actively considered
+    and rejected.
+
+    Both come from harmoniser 1, whose partition defines the cores. The other two
+    harmonisers wrote their own and they are not merged: averaging prose produces
+    prose nobody wrote, and the core already encodes where the three agreed.
+    """
     st = HP._stash()
     recs = {k["harmoniser"]: st[k] for k in st.keys()
             if k["frame_prompt"] == prompt and k.get("model") == MODEL}
@@ -89,6 +111,8 @@ def constructs_for(prompt):
     rel = dict(items)
     S = {i: [(c["name"], frozenset(c["members"])) for c in recs[i]["result"]["constructs"]]
          for i in recs}
+    prose = {c["name"]: (c.get("definition"), c.get("nearest"))
+             for c in recs[1]["result"]["constructs"]}
     keep = {}
     for name, m in S[1]:
         core, ok = set(m), True
@@ -98,7 +122,7 @@ def constructs_for(prompt):
                 ok = False
             core &= best
         if ok and core:
-            keep[name] = sorted(core)
+            keep[name] = (sorted(core), prose.get(name, (None, None)))
     return keep, rel
 
 
@@ -112,11 +136,11 @@ def plan():
                 skipped.append((d, p))
                 continue
             rows.append({"prompt": p, "constructs": [
-                {"cid": "c%02d" % i, "name": n,
+                {"cid": "c%02d" % i, "name": n, "definition": pr[0], "nearest": pr[1],
                  "ex": [{"a": rel[r]["a_words"], "b": rel[r]["b_words"],
                          "s": rel[r]["sentence"]} for r in ids[:MAX_EXEMPLARS]],
                  "n_members": len(ids)}
-                for i, (n, ids) in enumerate(sorted(cons.items()))]})
+                for i, (n, (ids, pr)) in enumerate(sorted(cons.items()))]})
         if len(rows) >= 2:
             steps.append({"domain": d, "prompts": rows})
     return steps, skipped
@@ -154,25 +178,38 @@ def prepare(build_only=False):
     print("  workflow %s\n\nNOT RUN." % out)
 
 
-def ingest(run_id):
+def ingest(run_id, output=None):
     import glob
     base = os.path.expanduser("~/.claude/projects")
     hits = glob.glob(os.path.join(base, "*", "*", "subagents", "workflows", run_id))
     if not hits:
         raise SystemExit("no transcript dir for %r" % run_id)
+    #: THE FOLD IS NOT IN THE JOURNAL. Accretion is sequential, so the finished
+    #: vocabulary exists only as the script's fold over the steps; the journal
+    #: holds each agent's `decisions` array and nothing that reconstructs it.
+    #: The workflow's RETURN VALUE is the artifact, and that lands in the task
+    #: output file rather than the journal. Same lesson as the discriminate
+    #: ingest, one level up: the journal records agents, not the orchestration.
     tail = None
-    for line in open(os.path.join(hits[0], "journal.jsonl")):
-        d = json.loads(line)
-        if d.get("type") == "result" and isinstance(d.get("result"), dict) \
-                and "vocabularies" in d["result"]:
-            tail = d["result"]
-    #: The accretion is SEQUENTIAL, so the finished vocabulary exists only as the
-    #: script's fold over the steps. Per-agent results are single decisions and
-    #: do not reconstruct it; the workflow's own return value is the artifact.
+    #: The task output directory is NOT under the workflow transcript root; it
+    #: lives in the harness scratch tree, which is environment-specific. So the
+    #: path is given rather than inferred, and an inferred fallback is offered
+    #: only as a convenience.
+    cands = [output] if output else sorted(
+        glob.glob(os.path.join(os.path.dirname(hits[0]), "..", "..", "tasks", "*.output")),
+        key=os.path.getmtime, reverse=True)
+    for c in cands:
+        try:
+            d = json.load(open(c))
+        except (ValueError, IOError):
+            continue
+        r = d.get("result")
+        if isinstance(r, dict) and "vocabularies" in r:
+            tail = r
+            break
     if tail is None:
-        out = os.path.join(hits[0], "..", "..", "..", "..")
-        raise SystemExit("no vocabulary in the journal; the workflow returns it, so read "
-                         "the task output for %s" % run_id)
+        raise SystemExit("no workflow return holding `vocabularies` found under %s; "
+                         "pass the task output path explicitly" % tasks)
     json.dump(tail, open(os.path.join(HERE, "results", "accrete_result.json"), "w"), indent=1)
     print("stored vocabularies for %d domain(s)" % len(tail["vocabularies"]))
 
@@ -218,20 +255,63 @@ function fmtEx(e) {
 }
 function fmtVocab(v) {
   if (!v.length) return 'The vocabulary is empty; every candidate below starts it.'
-  return 'CURRENT VOCABULARY:\\n\\n' + v.map((en, i) =>
-    `ENTRY ${L[i]}  ${en.name}\\n` + en.ex.map(fmtEx).join('\\n\\n')).join('\\n\\n')
+  return 'CURRENT VOCABULARY:\\n\\n' + v.map((en, i) => {
+    const src = [...new Set(en.sources.map((x) => x.split('|')[0]))]
+    // THE OPERATION STATEMENT LEADS. It is the only part of an entry written to
+    // survive a change of subject matter, and the first run showed the name and
+    // the word lists and nothing else -- discarding the one field built for this
+    // comparison. Words come last and are labelled as illustration, because
+    // across sentences they are the variable and the operation is the invariant.
+    let out = `ENTRY ${L[i]}  ${en.name}\\n`
+    out += `  operation: ${en.basis}\\n`
+    // The harmoniser's `nearest`: which construct this one was judged closest to
+    // and why it is NOT that one. A boundary somebody actively considered and
+    // rejected is stronger evidence than one the reader has to reconstruct, and
+    // it is the only record in the pipeline of a distinction being tested.
+    if (en.nearest) out += `  distinguished from: ${en.nearest}\\n`
+    if (en.names.length > 1) out += `  also named: ${en.names.slice(1).join('; ')}\\n`
+    // THE FRAME IS SHOWN IN FULL, NEVER ABBREVIATED. It was first added
+    // truncated at 46 characters, which cut before the completion slot: the
+    // reader could not tell what the example words completed, and the line still
+    // read as though it had told them. The correction for a clip is the whole
+    // string, not the deletion of it -- an entry resting on one exemplar is
+    // underdetermined without its frame, and seeing that two entries come from
+    // DIFFERENT frames is what makes "the words will not match" concrete rather
+    // than an assertion in the instructions. Hiding the subject matter is not
+    // what the validated instruments did: discrimination held it CONSTANT.
+    out += `  seen in ${src.length} sentence(s):\\n`
+    out += src.map((x) => `    "${x}"`).join('\\n') + '\\n'
+    out += `  example words (illustration; they will NOT match across sentences):\\n`
+    return out + en.ex.map(fmtEx).join('\\n\\n')
+  }).join('\\n\\n')
 }
-function fmtCands(cs) {
-  return cs.map((c) => `CANDIDATE ${c.cid}  ${c.name}\\n` +
-    c.ex.map(fmtEx).join('\\n\\n')).join('\\n\\n')
+function fmtCands(cs, prompt) {
+  // Every candidate in a step comes from ONE sentence, so the frame is stated
+  // once at the head rather than repeated on each candidate.
+  return `All of the following describe completions of this sentence:\\n\\n    "${prompt}"\\n\\n` +
+    cs.map((c) => `CANDIDATE ${c.cid}  ${c.name}\\n` +
+      `  operation: ${c.definition}\\n` +
+      (c.nearest ? `  distinguished from: ${c.nearest}\\n` : '') +
+      `  example words (illustration; they will NOT match across sentences):\\n` +
+      c.ex.map(fmtEx).join('\\n\\n')).join('\\n\\n')
 }
 
 const vocabularies = {}
 const counts = { merged: 0, new: 0 }
 const results = await parallel(STEPS.map((S) => async () => {
   // Seed the vocabulary with the FIRST prompt's constructs; no judgement needed.
+  // Seed entries have no `basis`: nothing has judged them yet. They carry their
+  // constituent name and source, and the field is left explicitly unstated rather
+  // than back-filled from the name, which would fabricate an operation statement
+  // no reader wrote.
+  // Seed entries inherit the HARMONISER'S OWN prose. They are not unjudged:
+  // three harmonisers grouped these relations and one wrote a definition and a
+  // boundary statement for each. Treating them as blank was a bug, not a fact
+  // about the data, and it made the first step of every domain compare names
+  // and word lists with the reasoning withheld.
   let vocab = S.prompts[0].constructs.map((c) => ({
-    name: c.name, ex: c.ex, sources: [`${S.prompts[0].prompt}|${c.name}`] }))
+    name: c.name, ex: c.ex, basis: c.definition, nearest: c.nearest,
+    names: [c.name], sources: [`${S.prompts[0].prompt}|${c.name}`] }))
   const log_ = []
   // THE SATURATION CURVE IS THIS ARRAY. Whether successive prompts stop adding
   // new constructs is the merge judgement, so it can only be counted where the
@@ -243,7 +323,7 @@ const results = await parallel(STEPS.map((S) => async () => {
   for (let i = 1; i < S.prompts.length; i++) {
     const P = S.prompts[i]
     const text = TMPL.replace('{{vocab_section}}', fmtVocab(vocab))
-                     .replace('{{candidates}}', fmtCands(P.constructs))
+                     .replace('{{candidates}}', fmtCands(P.constructs, P.prompt))
     const r = await agent(text, { label: `${S.domain}-step${i}`, phase: 'Accrete',
                                   schema: SCHEMA, model: %(model)s, effort: %(effort)s })
       .catch(() => null)
@@ -256,6 +336,14 @@ const results = await parallel(STEPS.map((S) => async () => {
       if (d.merge !== 'new' && idx >= 0 && idx < vocab.length) {
         vocab[idx].sources.push(`${P.prompt}|${c.name}`)
         vocab[idx].name = d.name || vocab[idx].name
+        // The merging reader's basis supersedes: it was written knowing BOTH
+        // members, so it is the more general statement of the two.
+        if (d.basis) vocab[idx].basis = d.basis
+        // The absorbed construct's boundary statement referred to a distinction
+        // from ANOTHER construct; once merged it may no longer hold, so it is
+        // dropped rather than carried, and the merging reader's basis stands.
+        vocab[idx].nearest = null
+        if (!vocab[idx].names.includes(c.name)) vocab[idx].names.push(c.name)
         counts.merged++; sMerged++
       } else {
         // A merge naming an entry letter that does not exist is recorded as new
@@ -263,7 +351,9 @@ const results = await parallel(STEPS.map((S) => async () => {
         // silent fallback would report a refusal the rater never made.
         if (d.merge !== 'new' && !(idx >= 0 && idx < vocab.length))
           log_.push(`${S.domain} step ${i}: ${d.candidate} named entry ${d.merge}, out of range`)
-        vocab.push({ name: d.name || c.name, ex: c.ex, sources: [`${P.prompt}|${c.name}`] })
+        vocab.push({ name: d.name || c.name, ex: c.ex,
+                     basis: d.basis || c.definition, nearest: c.nearest,
+                     names: [c.name], sources: [`${P.prompt}|${c.name}`] })
         counts.new++; sFresh++
       }
     }
@@ -292,6 +382,7 @@ if __name__ == "__main__":
     ap.add_argument("--build", action="store_true")
     ap.add_argument("--prepare", action="store_true")
     ap.add_argument("--ingest", metavar="RUN_ID")
+    ap.add_argument("--output", metavar="PATH", help="workflow task .output file")
     ap.add_argument("--report", action="store_true")
     a = ap.parse_args()
     if a.build:
@@ -299,7 +390,7 @@ if __name__ == "__main__":
     elif a.prepare:
         prepare()
     elif a.ingest:
-        ingest(a.ingest)
+        ingest(a.ingest, a.output)
     elif a.report:
         report()
     else:

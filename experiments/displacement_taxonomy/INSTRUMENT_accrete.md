@@ -46,22 +46,37 @@ NEW CANDIDATES, from a sentence not yet folded in:
 For each candidate decide whether it names the SAME KIND OF CHANGE as one of the
 existing entries, or a kind not yet in the vocabulary.
 
-All of these candidates and entries come from sentences on similar subject
-matter, so the words will overlap heavily and overlap tells you nothing. The
-question is what KIND of change happens between A and B: what sort of thing is
-different, in terms that would apply equally to a sentence about something else.
+WHAT TO COMPARE, AND WHAT TO IGNORE.
 
-Merge only when the SAME OPERATION is being performed. Two changes can involve
-the same words and be different operations, and two can involve unrelated words
-and be the same operation. In particular, check the DIRECTION of travel: a
-change from explicit to innocuous and a change from innocuous to explicit are
-not the same operation, and one has already been found folded wrongly into the
-other.
+The entries and candidates come from DIFFERENT sentences. Across sentences the
+words are the variable and the operation is the invariant, so the word lists will
+not match even when the operation is identical, and matching words are weak
+evidence rather than strong. Two changes involving the same words can be
+different operations, and two involving no shared words at all can be the same
+one. Read the operation statement first and treat the words as illustration.
 
-Do not merge to be tidy. A vocabulary that collapses everything is worthless,
-and a candidate that is genuinely a new kind of change should be marked `new`.
-Equally, do not keep something apart merely because it is worded differently;
-the entries were named by different people who never conferred.
+The question to ask of each pair is: if you described this change without naming
+any of the words, would the same description fit both?
+
+DO NOT SPLIT TO BE SAFE, AND DO NOT MERGE TO BE TIDY. These fail in opposite
+directions and BOTH are failures.
+
+A vocabulary that collapses everything is worthless: it says only that something
+changed. But a vocabulary that refuses every merge is equally worthless, because
+it is just the input list rewritten, and it makes the false claim that every
+sentence performs its own unique operations. If you keep two entries apart you
+are asserting that a reader could reliably tell them apart; if you cannot say
+what that difference IS, in terms that do not name the words, then it is not a
+difference and they should be merged.
+
+Different wording is not a difference. The entries were named and described by
+different people who never conferred, working on different sentences, and the
+same operation will routinely arrive under two unrelated names.
+
+The one thing that IS a real difference, and worth checking every time: the
+DIRECTION of travel. A change from explicit to innocuous and a change from
+innocuous to explicit are opposite operations even when they involve identical
+words, and one has already been found folded wrongly into the other.
 
 For each candidate give:
 
@@ -71,7 +86,11 @@ For each candidate give:
               the name you would give the merged entry, which may be the
               existing name or a better one covering both.
   basis       one sentence saying what the operation is, phrased so it would
-              apply to a sentence on some other subject.
+              apply to a sentence on some other subject. THIS SENTENCE IS
+              CARRIED FORWARD as the entry's definition and is what the next
+              reader will compare against, so write it to survive a change of
+              subject matter: name what sort of thing is different, not which
+              words differ.
   confidence  high / medium / low
 
 Answer every candidate.
@@ -142,3 +161,18 @@ Answer every candidate.
   rater has to produce one anyway, but the discrimination run found boundaries
   recoverable from exemplars alone, so a merge justified only by similar wording
   is not a merge.
+- An entry carries its `basis`, its constituent names, and its source prompts,
+  not only the exemplar word lists. The first accretion run showed the merged
+  name and up to three exemplars and NOTHING ELSE, which discarded the one field
+  written to survive a change of subject. It refused 36 merges of 40, including a
+  pair that three harmonisers and a six-rater discrimination panel had both
+  independently treated as one construct.
+- Word overlap between entries is NOT supplied and must not be inferred as a
+  signal. Measured over the 171 institutional entry pairs from that run, the pair
+  known to belong together ranked 60th at a mean Jaccard of 0.024, while the top
+  pair at 0.500 was a coincidence of two tiny word sets. Token overlap indexes
+  subject matter, which is the confound, so it points the wrong way.
+- Uncapping exemplars was considered and is minor: it adds 29% more exemplars and
+  cannot help the 37 of 68 entries that rest on a single relation. Thin entries
+  are a DATA limit, fixed by more cells per prompt, not by showing more of what
+  is not there.
