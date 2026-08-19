@@ -491,6 +491,31 @@ def execute(b, models, roots, venv, a):
         lg = cloud.ssh_run(st, "cat /root/stage%d.log 2>/dev/null" % i)
         open(os.path.join(logdir, "stage%d.log" % i), "w").write(lg.stdout or "")
     print("  logs        %s" % logdir)
+    #: **AND THE RATES THE BOX MEASURED, WHICH OTHERWISE DIE WITH IT.**
+    #: `runners.run` records one observation per model into the repo's own
+    #: `data/model_twp_rates.jsonl` -- on the BOX. The pull fetches twp data and
+    #: nothing else, so a 12-box fleet would measure 144 models on real CUDA and
+    #: destroy every rate it learned, leaving the next plan on the same fallbacks
+    #: that mispriced Zamba2 by 500x.
+    #:
+    #: MERGED, never overwritten: the local file holds every earlier observation
+    #: and the box holds only its own, so copying over the top would be a silent
+    #: deletion. `rates.load` tolerates duplicates and `rate_for` takes a median,
+    #: so appending is safe and re-running is harmless.
+    rp = cloud.ssh_run(st, "cat /root/malignment/data/model_twp_rates.jsonl "
+                           "2>/dev/null")
+    got = [l for l in (rp.stdout or "").splitlines() if l.strip()]
+    if got:
+        from malignment import rates as _rates
+        have = {l.strip() for l in
+                (open(_rates.PATH, encoding="utf-8") if os.path.exists(_rates.PATH)
+                 else [])}
+        new_rows = [l for l in got if l.strip() not in have]
+        with open(_rates.PATH, "a", encoding="utf-8") as fh:
+            for l in new_rows:
+                fh.write(l + "\n")
+        print("  rates       %d observation(s) from the box, %d new"
+              % (len(got), len(new_rows)))
     dst = os.path.expanduser("~/malignment-data/twp")
     cloud.rsync(st, "/root/malignment-data/twp", dst, from_remote=True)
     print("  pulled      into %s" % dst)
@@ -724,8 +749,17 @@ def _await(cloud, st, models, iid, a):
 #: name said 15 models; the roster says 10, and the roster is right.
 SSM_KERNELS = """
 echo "SSM shard: installing mamba kernels (this COMPILES and is slow)"
-uv pip install -q --python ./%(venv)s/bin/python --no-build-isolation \
-    causal-conv1d mamba-ssm || echo "kernel install returned non-zero"
+# **`--system-certs`, AND THE OUTPUT IS KEPT.** Without it uv rejects a host that
+# intercepts TLS -- `invalid peer certificate: UnknownIssuer` on
+# files.pythonhosted.org, which is the same machine-level interference as the HF
+# proxy that killed an earlier box, and invisible to the HF assert because
+# huggingface_hub uses SYSTEM certs while uv bundles its own trust store.
+#
+# The first version ended `|| echo "returned non-zero"` and ran with `-q`, so the
+# failure arrived as "SSM KERNELS MISSING" with the REASON discarded. A guard that
+# hides why it fired costs a whole round trip to a live box to recover.
+uv pip install --system-certs --python ./%(venv)s/bin/python \
+    --no-build-isolation causal-conv1d mamba-ssm 2>&1 | tail -25
 ./%(venv)s/bin/python - <<'KEOF'
 import importlib.util, sys
 missing = [m for m in ("mamba_ssm", "causal_conv1d")
