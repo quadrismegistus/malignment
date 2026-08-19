@@ -465,94 +465,106 @@ min_prob eligibility, none of them in these prompts.
 point every word has base mass and the arm A / arm B split dissolves. The ratings key on
 (prompt, word) and survive that transition untouched; only the population rule changes.
 
-## 11. Was the base already proceduralised? F21's claim as a level
+## 11. Was the base already proceduralised? All three position corpora
 
-Producer: `base_side_f21.py`. Table: `results/base_side/f21.json`.
+Producer: `base_side_positions.py`. Tables: `results/base_side/{f21,m03,slotpov}.json`.
 
-Everything above this section measures movement, and F21's "deference already
-present in pretraining, no emancipatory outside" is a claim about a LEVEL. A
-movement statistic cannot test it: a word already dominant in the base has
-nowhere to rise, so an inherited disposition reads as no effect. The measure is
-the mass-weighted conditional mean used in `slot_ratings/identity/base_side.py`,
-`E[scale|rated] = sum p(w)r(w) / sum p(w)`, computed per arm with no eligibility
-gate, which also lets the arm A and arm B ratings merge.
+**This section replaces an earlier one that used `twp_words_v4_best` and got 8
+lineages for F21.** `run_f21.py` and `run_m03.py` read the `movement` table,
+which holds all 50 endpoint pairs and carries `p_base` and `p_aligned` directly,
+so the level measure was being decomposed against movement results computed on a
+different and much smaller population. At the correct source F21 has 50
+lineages, not 8, and the differential-movement claim I called underpowered is
+significant. `base_side_f21.py` is kept but superseded; its numbers should not be
+quoted.
 
-Position labels are the prompts table's own `subdomain`, 12 individual against
-12 institutional. **Eight lineages**, which is the binding constraint on
-everything below.
+Movement measures which words rise and fall. F21's "deference already present in
+pretraining" is a claim about a LEVEL, and a movement statistic cannot test it: a
+word already dominant in the base has nowhere to rise. The measure is
+`E[scale|rated] = sum p(w)r(w) / sum p(w)` per arm, no eligibility gate, arms
+merged, then `aligned_gap = base_gap + delta_gap`.
 
-### The decomposition: aligned_gap = base_gap + delta_gap
+Three corpora, differing in how they control the grammatical site, which is
+first-order here (changing `I should ___` to `...and I ___` moves `procedural`
++0.221, larger than the position contrast itself):
 
-Gap is institution minus individual, per lineage, median over 8.
-
-| scale | base gap | aligned gap | delta gap | p base | p delta | inherited |
-| --- | --- | --- | --- | --- | --- | --- |
-| collective | −0.974 | −1.035 | −0.147 | 0.0078 | 0.15 | 94% |
-| mediation | −0.974 | −1.173 | −0.271 | 0.0078 | 0.20 | 83% |
-| arousal | −0.688 | −0.932 | −0.165 | 0.0078 | 0.38 | 74% |
-| deference | **+0.343** | **+0.483** | **+0.031** | **0.016** | **0.64** | **71%** |
-| specificity | −0.576 | −0.822 | −0.185 | 0.0078 | 0.15 | 70% |
-| agency | −0.384 | −0.653 | −0.177 | 0.0078 | 0.25 | 59% |
-| procedural | +0.140 | +0.274 | −0.024 | 0.078 | 0.38 | 51% |
-| abstraction | +0.029 | +0.302 | +0.103 | 0.31 | 0.0078 | 10% |
-
-**F21's level claim is supported.** The base already separates the institutional
-from the individual position, unanimously across all 8 lineages on collective,
-mediation, arousal, specificity and agency, and on 7 of 8 for deference. On
-deference specifically, the aligned gap is +0.483 and alignment's own
-contribution to it is +0.031, which is not significant (p=0.64, 3 of 8
-lineages). Roughly seven-tenths of the deference gap the aligned model shows was
-already in the base.
-
-`abstraction` is the one scale that inverts this: 10% inherited, and the only
-delta that reaches significance. Whatever else alignment does to these prompts,
-raising the institution's abstraction is its own contribution.
-
-**Do not quote the inherited fraction where the aligned gap is near zero.**
-`delay` reads 586% and `vocalisation` 248% because they are ratios with a
-denominator close to zero, not because alignment reversed something dramatic.
-They are omitted from the table for that reason.
-
-### The differential-movement claim is underpowered here, not refuted
-
-F21 also reports that alignment proceduralises the individual and not the
-institution. That is a claim about deltas, and on these 8 lineages:
-
-| scale | delta indiv | delta inst | difference | p |
+| corpus | prompts | lineages | site control | rated share of mass |
 | --- | --- | --- | --- | --- |
-| procedural | +0.2953 | +0.1372 | +0.1113 | 0.055 (6/8) |
-| mediation | +0.4290 | +0.1157 | +0.3256 | 0.11 |
-| assertiveness | +0.0956 | −0.0925 | +0.2623 | 0.11 |
-| abstraction | +0.2435 | +0.3365 | −0.1168 | 0.016 |
+| F21 | 24 | 50 | none, mixed sites | 0.243 |
+| M03 | 252 | 50 | stratified: gap taken within (person, modal) | 0.283 |
+| slotpov | 12 | 32 | identical by construction | 0.621 |
 
-`procedural` is in F21's direction and does not reach significance. **With 8
-lineages a two-sided Wilcoxon cannot return anything below 0.0078, and 7 of 8
-gives 0.055, so this table can only detect near-unanimous effects.** Reading the
-non-significant rows as absence would be reading the power ceiling as a result.
-The honest statement is that the level claim is tested and supported here and the
-differential-movement claim is not tested with adequate power.
+Each corpus uses the source its own producer used. slotpov's 12 slot prompts have
+**zero** rows in `movement` (checked), so they come from `twp_words_v4_best`.
 
-### Coverage, and why it is not what produces the gap
+### The level claim replicates in all three, and is the strongest result here
 
-Rated mass is much thinner than in the identity sweeps (0.585 to 0.767 there):
+The base gap is significant on 13 of 13 scales in F21, 13 of 13 in M03 and 10 of
+13 in slotpov, at p as low as 1.8e-15. Alignment's own contribution is small:
+of 39 delta tests, most are not significant, and where the aligned gap is large
+enough for a ratio the inherited fraction runs 70 to 103 percent.
 
 ```
-             base    aligned
-individual   0.153   0.228
-institution  0.256   0.358
+F21       arousal 100%   collective 97%   target 93%   termination 91%   deference 90%
+M03       arousal 103%   termination 100%   assertiveness 99%   collective 99%   mediation 99%
+slotpov   procedural 103%   target 100%   abstraction 98%   deference 97%
 ```
 
-Institutional prompts carry about 1.7x the rated mass, so the two positions'
-conditional means are taken over different fractions of the distribution. Two
-checks say this is not what produces the gap:
+**Whatever separates the institutional position from the individual one,
+pretraining had already done nearly all of it.** That is F21's claim, and it
+holds on three independent corpora.
 
-- Coverage does not predict the level. rho(coverage, E_base) is −0.028 for
-  deference, −0.134 procedural, +0.105 agency, +0.089 collective, none
-  significant over 165 cells.
-- Clipping both positions to their shared coverage band strengthens rather than
-  weakens every gap: deference +0.343 to +0.492, procedural +0.140 to +0.407
-  (p=0.016), agency −0.384 to −0.526.
+### But the SIGN of the position gap does not replicate
 
-The clip does not fully equalise the medians (0.186 against 0.252), so the first
-check is the load-bearing one. The remaining exposure is that the unrated 65 to
-85% of the mass could behave differently, which this design cannot see.
+| scale | F21 | M03 | slotpov | |
+| --- | --- | --- | --- | --- |
+| procedural | +0.232 | **−0.031** | +1.677 | disagree |
+| deference | +0.193 | **−0.031** | +1.196 | disagree |
+| assertiveness | −0.286 | −0.119 | **+0.364** | disagree |
+| arousal | −0.599 | −0.286 | −0.621 | agree |
+| collective | −0.831 | −0.134 | −0.285 | agree |
+| target | +0.274 | +0.149 | +1.505 | agree |
+| abstraction | +0.016 | +0.130 | +0.199 | agree |
+
+Sign agreement where all three are significant: **6 of 9**.
+
+M03 dissents on `procedural` and `deference`, the two scales F21's finding is
+about. The obvious explanation is that M03 controls the grammatical site and the
+others do not, so the F21 gap is a site artifact. **That explanation is wrong.**
+slotpov holds the site identical by construction, which is stricter control than
+M03's stratification, and it shows the largest procedural gap of the three
+(+1.677). If site were carrying the effect, slotpov would look like M03 and it
+looks like a stronger F21.
+
+So M03 is the outlier for some other reason, consistent with the standing note
+that its institutional arm drifted off F21's contrast. What can be said is that
+the position gap is real and large in two corpora, absent in the third, and that
+the third is not the one with the best site control.
+
+### F21's second claim does not replicate; a weaker version does
+
+"Alignment proceduralises the individual and not the institution" is a claim
+about deltas:
+
+| scale | F21 | M03 | slotpov | replicates |
+| --- | --- | --- | --- | --- |
+| agency | IND p=0.00038 | IND p=0.012 | IND p=0.0018 | **all three** |
+| specificity | IND p=1.6e-05 | IND p=0.001 | p=0.0013 | 2 of 3 |
+| mediation | IND p=3.6e-06 | p=0.42 | IND p=0.041 | 2 of 3 |
+| **procedural** | **IND p=0.0078** | **p=0.98** | **p=0.17** | **1 of 3** |
+
+On `procedural` specifically, F21's own prompts show it and neither other corpus
+does. What replicates on all three is `agency`: the individual position's agency
+moves more under alignment than the institution's. That is a weaker and
+different claim than proceduralisation, and it is the one the three corpora
+support jointly.
+
+### Caveats
+
+Rated share of the distribution is 0.243 (F21), 0.283 (M03) and 0.621
+(slotpov), so two of the three rest on under a third of the mass and the unrated
+remainder is unseen. The three corpora differ in prompt count by a factor of 21,
+so equal p-values do not mean equal evidence. And `inherited` is a ratio: it is
+suppressed wherever the aligned gap is under 0.05, because near zero it is
+unstable rather than informative.
+

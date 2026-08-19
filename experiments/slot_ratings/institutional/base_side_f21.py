@@ -1,4 +1,13 @@
-"""Was the base ALREADY proceduralised? F21's claim as a level, not a movement.
+"""SUPERSEDED by base_side_positions.py. Do not quote these numbers.
+
+This read `twp_words_v4_best` and got 8 lineages; `run_f21.py` reads the
+`movement` table, which holds all 50 endpoint pairs and carries p_base and
+p_aligned directly. The level measure here was therefore decomposed against
+movement results computed on a different and much smaller population, and the
+differential-movement claim it called underpowered is significant at n=50.
+Kept because it records what was measured and when.
+
+Was the base ALREADY proceduralised? F21's claim as a level, not a movement.
 
     python experiments/slot_ratings/institutional/base_side_f21.py
 
