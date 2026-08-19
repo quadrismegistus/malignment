@@ -342,6 +342,49 @@ toward the institution. Two claims, not seven.** `target`/`vocalisation` at
 Independent, and carrying their own weight: `termination`, `mediation`,
 `abstraction`, `procedural`, `deference`, `delay`, `collective`.
 
+# 6g. FOUR CORPORA: THE MAIN EFFECTS ARE THE RESULT
+
+`run_slotdomain.py --domain institutional` rates ALL 62 institutional slot frames,
+not just the 6 that carry a perspective pair. Those 56 have no POV structure, so
+this is a main-effect run on a fourth population with a different prompt shape
+again: short slot frames, author-declared naughty/nice poles, no speaker contrast.
+
+                    M03(252)   F21(24)   SLOT(12)   SLOT62(62)
+    abstraction      +0.126     +0.128    +0.089     +0.091     all significant
+    procedural       +0.103     +0.071    +0.106     +0.066     all significant
+    mediation        +0.041     +0.067    +0.101     +0.061     all significant
+    termination      -0.096     -0.092    -0.049     -0.047     3 of 4 significant
+    deference        +0.068     +0.048    +0.041     +0.018     3 of 4 significant
+
+**Five effects, four prompt sets written at different times by different hands,
+same sign throughout.** Alignment keeps the matter OPEN (`termination` down),
+routes it through a THIRD PARTY (`mediation` up), and makes it ABSTRACT and
+PROCEDURAL -- regardless of who is speaking.
+
+SLOT62 arm A in full, unit = lineage (21):
+
+    abstraction  +0.091 17/21 p=0.00085     collective   +0.066 18/21 p=0.00035
+    procedural   +0.066 18/21 p=0.00085     mediation    +0.061 14/21 p=0.0071
+    vocalisation +0.059 19/21 p=0.00061     termination  -0.047  6/21 p=0.022
+    delay        +0.044 15/21 p=0.035       target       +0.037 18/21 p=0.0029
+    assertiveness+0.035 14/21 p=0.029       deference    +0.018 15/21 p=0.038
+    specificity  +0.032 13/21 p=0.19        agency       -0.002 10/21 p=0.61
+                                            arousal      -0.001 10/21 p=0.73
+
+**`agency` and `arousal` are FLAT here** -- -0.002 and -0.001, 10 of 21 lineages,
+the two flattest numbers in the table. They are two of the four members of the
+collinear cluster that carried the POV asymmetry (section 6f). On a corpus with
+no individual/institution contrast that cluster does nothing at all, which is
+consistent with it being a SPEAKER effect rather than something alignment does to
+institutional language: it needs two positions to appear.
+
+**`collective` at +0.066, 18/21, p=0.0004 is the surprise.** It was near-dead on
+M03 and F21 arm A and is the second-largest effect here. These 62 frames carry
+the strike and organising vocabulary (`unionize`, `organize`, `stage`) the M03 and
+F21 scenarios mostly do not offer -- so it was a scale starved of vocabulary
+rather than a scale that does not work. **A flat scale is a claim about the
+prompts as much as about the scale.**
+
 # 7. THE ABSTRACTION / AGENCY TRADE-OFF
 
 Across (prompt x lineage) cells, whichever side gains abstract process loses concrete agency:
