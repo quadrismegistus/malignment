@@ -48,14 +48,25 @@ L2 fleet lost 3 of 14 and the grid lost 6 of 14 in provisioning, and every one
 needed a human. 12 boxes at 1.08x critical beats 20 at 1.00x on every axis that
 matters.
 
-## THE RATE IS A DEVICE PROPERTY AND THIS SCRIPT MUST NOT ASSUME MPS
+## THERE IS NO SINGLE RATE, AND TWO CORRECTIONS WERE NEEDED TO SEE IT
 
-`SEC_PER_CELL` was 0.8 — the MPS rate — while every box in this plan is CUDA, and
-the pilot measured **0.19 s/cell on an RTX 6000 Ada**. Every hour printed here was
-4x too high, and it was quoted into a launch discussion as though it described the
-fleet. Same defect as the OLMoE deferral (a 3-cell sample read as a throughput),
-so the constant now carries its device and its provenance and `--sec-per-cell`
-makes the assumption visible at the call site rather than buried at line 150.
+`SEC_PER_CELL` was a constant here, and it was wrong twice for different reasons:
+
+    0.8    the MPS rate, while every box in this plan is CUDA          4x slow
+    0.19   CUDA, but measured on ONE model (kanana, 8B)                ~3x fast
+           for bloom-7b1 -- 250,880-token vocabulary against 128k
+
+**Correcting the first to the second fixed the DEVICE and left the sampling error
+untouched**, which is how one class of error survived its own correction: both
+numbers were a single measurement standing in for 144 models. twp expands a beam
+over the token tree, so vocabulary size is the mechanism and not a correlate, and
+no single number can carry it.
+
+So the constant is gone. `malignment.rates` stores an observation per run --
+model, device, card, vocab size, n_cells, load and compute SEPARATELY -- and
+`seconds()` prices a shard at per-model recorded rates, returning the models it
+had to guess for alongside the total. RH's ask: *"why don't we store
+model-specific twp rates?"*
 
 Packing is longest-processing-time-first with a venv-compatibility constraint, so
 a box never holds two lineages needing different interpreters.
@@ -72,7 +83,7 @@ sys.path.insert(0, HERE)
 
 from venvs import venv_for                                   # noqa: E402
 
-from malignment import ch, roster                            # noqa: E402
+from malignment import ch, rates, roster                     # noqa: E402
 from malignment.prompts import Prompts                       # noqa: E402
 
 #: **A TOKENIZER DEFECT IS SCOPED TO A PROMPT CLASS, NOT TO A MODEL.** Re-tested
@@ -105,14 +116,32 @@ TOKENIZER_DEAD_CJK = {"croissantllm/CroissantLLMBase",
 #: nothing is dead on every prompt class as of this test
 TOKENIZER_DEAD = set()
 
-#: **CUDA, measured on the pilot box (RTX 6000 Ada, 2026-08-19), not MPS.** MPS is
-#: ~0.8 and that is the number this script used to print for a CUDA fleet. Override
-#: with --sec-per-cell if you are planning for a different device.
-SEC_PER_CELL = 0.19
+#: **KEPT ONLY AS THE NAME OF A MISTAKE.** Nothing reads it. Planning goes through
+#: `seconds()` -> `rates.rate_for(model, device)`; a module-level scalar is exactly
+#: the shape that let one model's measurement price a 144-model fleet.
+SEC_PER_CELL = None
+
+
+def seconds(remaining, device="cuda", only=None):
+    """(seconds, guessed_models) for {model: cells}, at PER-MODEL recorded rates.
+
+    **A rate is a property of (model x device), not of twp.** `SEC_PER_CELL` was a
+    single number twice, and both times it was one model's measurement standing in
+    for 144: 0.8 was MPS while the fleet was CUDA, and 0.19 was kanana while
+    bloom-7b1 -- 250,880-token vocabulary against 128k -- runs about 3x slower on
+    the same card. twp expands a beam over the token tree, so vocabulary is the
+    mechanism rather than a correlate, and one number cannot carry it.
+
+    Models never measured fall back, and **the fallback list comes back with the
+    answer** so a caller cannot quote the total without also being handed how much
+    of it is a guess.
+    """
+    est, guessed = rates.estimate(sorted(remaining), device, only=only)
+    return sum(remaining[m] * est[m][0] for m in remaining), guessed
 
 
 def lineage_work(pop=None):
-    """[(root, members, venv, cells_remaining)] over ENDPOINT lineages only."""
+    """[(root, members, venv, cells_remaining, {model: cells})] -- ENDPOINTS only."""
     pop = pop or len({p.text for p in Prompts.all()})
     eps, unresolved = roster.endpoints()
     if unresolved:
@@ -135,20 +164,22 @@ def lineage_work(pop=None):
             #: needs two interpreters and the box must build both -- a decision,
             #: not something to paper over in a packer.
             raise SystemExit("lineage %s spans %s -- decide explicitly" % (r, venvs))
-        out.append((r, ms, venvs.pop(), sum(max(0, pop - have.get(m, 0)) for m in ms)))
+        per = {m: max(0, pop - have.get(m, 0)) for m in ms}
+        out.append((r, ms, venvs.pop(), sum(per.values()), per))
     return out
 
 
 def pack(work, nboxes):
     """Longest-processing-time-first, never mixing venvs on one box."""
-    bins = [{"cells": 0, "lineages": [], "models": [], "venv": None}
+    bins = [{"cells": 0, "lineages": [], "models": [], "venv": None, "per": {}}
             for _ in range(nboxes)]
-    for root, ms, venv, cells in sorted(work, key=lambda x: -x[3]):
+    for root, ms, venv, cells, per in sorted(work, key=lambda x: -x[3]):
         cand = [b for b in bins if b["venv"] in (None, venv)] or bins
         b = min(cand, key=lambda b: b["cells"])
         b["cells"] += cells
         b["lineages"].append(root)
         b["models"] += ms
+        b["per"].update(per)
         b["venv"] = venv
     return bins
 
@@ -157,28 +188,38 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--boxes", type=int, default=12)
     ap.add_argument("--write", default=None)
-    ap.add_argument("--sec-per-cell", type=float, default=SEC_PER_CELL,
-                    help="default %.2f = CUDA, measured on the pilot. MPS is ~0.8."
-                         % SEC_PER_CELL)
+    ap.add_argument("--device", default="cuda",
+                    help="which device's recorded rates to plan against")
     a = ap.parse_args()
-    sec = a.sec_per_cell
     work = lineage_work()
     tot = sum(w[3] for w in work)
-    crit = max(work, key=lambda w: w[3])
     bins = [b for b in pack(work, a.boxes) if b["lineages"]]
-    print("endpoint lineages %d | models %d | %s cells | %.1f GPU-h @%.2fs/cell"
+
+    tot_s, guessed = seconds({m: c for w in work for m, c in w[4].items()}, a.device)
+    crit = max(work, key=lambda w: seconds(w[4], a.device)[0])
+    crit_s = seconds(crit[4], a.device)[0]
+    print("endpoint lineages %d | models %d | %s cells | %.1f GPU-h on %s"
           % (len(work), sum(len(w[1]) for w in work), format(tot, ","),
-             tot * sec / 3600, sec))
+             tot_s / 3600, a.device))
+    #: **THE GUESSED COUNT IS PRINTED WITH THE TOTAL, NOT UNDER IT.** An estimate
+    #: whose provenance sits three lines down gets quoted without it -- which is
+    #: how a single model's rate became the fleet's rate, twice.
+    print("             %d of %d models have a RECORDED rate; %d fall back to %s"
+          % (sum(len(w[1]) for w in work) - len(guessed),
+             sum(len(w[1]) for w in work), len(guessed),
+             rates.FALLBACK.get(a.device)))
     print("critical path: %s, %d models, %s cells, %.1f h -- a lineage is NOT splittable"
-          % (crit[0], len(crit[1]), format(crit[3], ","), crit[3] * sec / 3600))
+          % (crit[0], len(crit[1]), format(crit[3], ","), crit_s / 3600))
     print("\n%-4s %-13s %-9s %-7s %s" % ("box", "venv", "cells", "hours", "lineages"))
-    for i, b in enumerate(sorted(bins, key=lambda b: -b["cells"]), 1):
+    for i, b in enumerate(sorted(bins, key=lambda b: -seconds(b["per"], a.device)[0]), 1):
         print("%-4d %-13s %-9s %-7.1f %d: %s"
-              % (i, b["venv"], format(b["cells"], ","), b["cells"] * sec / 3600,
+              % (i, b["venv"], format(b["cells"], ","),
+                 seconds(b["per"], a.device)[0] / 3600,
                  len(b["lineages"]),
                  ", ".join(r.split("/")[-1] for r in b["lineages"])[:52]))
     if a.write:
         json.dump({"boxes": [{"venv": b["venv"], "cells": b["cells"],
+                              "per": b["per"],
                               "lineages": b["lineages"], "models": b["models"]}
                              for b in bins]},
                   open(a.write, "w"), indent=1)

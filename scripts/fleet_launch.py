@@ -64,6 +64,8 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
 
+from fleet_shards import seconds               # noqa: E402
+
 DEFAULT_IMAGE = "pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel"
 
 #: **DERIVED FROM THE CHECKOUT, NOT TYPED.** I typed `rj416/malignment` from
@@ -130,6 +132,14 @@ def main():
                          "rent an A100 for a job that asked for `dense`, and the "
                          "bill is the only place that shows.")
     ap.add_argument("--stop-after", choices=STAGES, default=None)
+    ap.add_argument("--poll", type=int, default=120,
+                    help="seconds between health polls once the run is detached")
+    ap.add_argument("--stall-min", type=float, default=25.0,
+                    help="minutes with NO new cells written, tmux still up, before "
+                         "the box is called stalled. Must exceed the slowest cold "
+                         "model load in the shard, or a normal load reads as a "
+                         "stall -- the one number here that is a judgement.")
+    ap.add_argument("--max-hours", type=float, default=6.0)
     ap.add_argument("--i-have-rh-authorisation", action="store_true",
                     help="asserts RH said to spend on THIS launch, not a "
                          "remembered earlier yes")
@@ -146,7 +156,13 @@ def main():
     print("  venv      %s" % venv)
     print("  lineages  %d: %s" % (len(roots), ", ".join(r.split("/")[-1] for r in roots)))
     print("  models    %d" % len(models))
-    print("  cells     %s  (~%.1f h @0.8s)" % (format(b["cells"], ","), b["cells"] * .8 / 3600))
+    #: Priced at PER-MODEL recorded rates, and the guess count is on the same
+    #: line as the estimate -- see fleet_shards.seconds.
+    b_per = b.get("per") or {m: b["cells"] // max(1, len(models)) for m in models}
+    est_s, guessed = seconds(b_per, "cuda")
+    print("  cells     %s  (~%.1f h; %d of %d models have a recorded rate)"
+          % (format(b["cells"], ","), est_s / 3600,
+             len(models) - len(guessed), len(models)))
 
     ok, n = preflight(models)
     print("  preflight %s" % " ".join("%s=%d" % (k, v) for k, v in sorted(n.items())))
@@ -201,9 +217,11 @@ def execute(b, models, roots, venv, a):
     print("  best offer  #%s  %sx %s  $%s/hr  %s"
           % (best.get("id"), best.get("num_gpus"), best.get("gpu_name"),
              best.get("dph_total"), best.get("geolocation")))
-    est = float(best.get("dph_total") or 0) * (b["cells"] * .8 / 3600)
+    hrs = seconds(b.get("per") or {m: b["cells"] // max(1, len(models))
+                                   for m in models}, "cuda")[0] / 3600
+    est = float(best.get("dph_total") or 0) * hrs
     print("  estimated   $%.2f for %.1f h of compute (EXCLUDES download time, "
-          "which dominates on a fresh box)" % (est, b["cells"] * .8 / 3600))
+          "which dominates on a fresh box)" % (est, hrs))
     if a.stop_after == "offer":
         print("\n  STOPPED AFTER offer -- nothing rented.")
         return 0
@@ -299,20 +317,50 @@ def execute(b, models, roots, venv, a):
         return 0
 
     # ---- run ---------------------------------------------------------------
+    #: **DETACHED UNDER tmux, THEN POLLED.** This used to send each command as
+    #: `nohup ... > /root/stage.log` with NO `&`, through an `ssh_run` that has no
+    #: timeout -- so the ssh channel was held open for the entire measurement, a
+    #: dropped connection killed the work, and each command overwrote the previous
+    #: one's log. Survivable while a human watches a 40-minute pilot; precisely
+    #: what cannot be left alone. Under tmux the BOX owns the work and ssh is only
+    #: how we ask about it, so a dropped poll costs one poll.
     only = (" --only %s" % a.only) if a.only else ""
-    cmds = ["cd /root/malignment && ./%s/bin/python scripts/queue_v4.py --models %s%s"
+    cmds = ["./%s/bin/python scripts/queue_v4.py --models %s%s"
             % (venv, " ".join(models), only)]
-    cmds += ["cd /root/malignment && ./%s/bin/python scripts/topup_lineage.py "
-             "--root %s%s" % (venv, r_, only) for r_ in roots]
+    cmds += ["./%s/bin/python scripts/topup_lineage.py --root %s%s"
+             % (venv, r_, only) for r_ in roots]
+    script = ["cd /root/malignment", "rm -f /root/DONE /root/FAILED"]
+    for i, c in enumerate(cmds):
+        script.append("%s > /root/stage%d.log 2>&1 || touch /root/FAILED" % (c, i))
+    script.append("touch /root/DONE")
+    cloud.ssh_run(st, "cat > /root/run.sh <<'MLEOF'\n%s\nMLEOF" % "\n".join(script))
+    cloud.ssh_run(st, "command -v tmux >/dev/null || (apt-get update -qq && "
+                      "apt-get install -y -qq tmux)")
+    rr = cloud.ssh_run(st, "tmux new-session -d -s fleet 'bash /root/run.sh'")
+    if rr.returncode:
+        _billing(cloud, iid, "tmux would not start rc=%d" % rr.returncode)
+        raise SystemExit("  could not detach the run: %s" % (rr.stderr or "")[-300:])
+    print("  run         %d commands detached under tmux 'fleet'" % len(cmds))
     for c in cmds:
-        print("  run         %s" % c[:96])
-        rr = cloud.ssh_run(st, "nohup bash -lc %s > /root/stage.log 2>&1" % json.dumps(c))
-        if rr.returncode:
-            print("     rc=%d %s" % (rr.returncode, (rr.stderr or "")[-300:]))
+        print("                %s" % c[:92])
     if a.stop_after == "run":
+        print("\n  STOPPED AFTER run -- the box is WORKING and BILLING. It will "
+              "not destroy itself.")
         return 0
 
+    if not _await(cloud, st, models, iid, a):
+        return 1
+
     # ---- pull --------------------------------------------------------------
+    #: **THE LOGS COME BACK TOO, AND BEFORE THE DESTROY.** A box is the only place
+    #: its own logs exist; destroying it on a clean verification also destroys the
+    #: record of every refusal, warning and slow arm inside a run that "passed".
+    logdir = os.path.join(ROOT, "data", "fleet_logs", str(iid))
+    os.makedirs(logdir, exist_ok=True)
+    for i in range(len(cmds)):
+        lg = cloud.ssh_run(st, "cat /root/stage%d.log 2>/dev/null" % i)
+        open(os.path.join(logdir, "stage%d.log" % i), "w").write(lg.stdout or "")
+    print("  logs        %s" % logdir)
     dst = os.path.expanduser("~/malignment-data/twp")
     cloud.rsync(st, "/root/malignment-data/twp", dst, from_remote=True)
     print("  pulled      into %s" % dst)
@@ -378,6 +426,81 @@ python3 -m venv %(venv)s 2>/dev/null || true
 ./%(venv)s/bin/pip -q install -e .
 ./%(venv)s/bin/python -c "import torch,transformers;print('torch',torch.__version__,'transformers',transformers.__version__,'cuda',torch.cuda.is_available())"
 """
+
+
+def _written(cloud, st):
+    """Cells the box has WRITTEN. Counted from the stash, never from a message.
+
+    The runbook's rule and the reason this poll exists: *"an orphaned engine makes
+    every unit complete in 0.3 min having produced nothing, and the health loop
+    reports it as throughput. Check what was WRITTEN, never what was attempted."*
+    A completion line, a progress bar and an exit code are all things the box SAYS;
+    lines in `data.jsonl` are the only thing it has done.
+    """
+    r = cloud.ssh_run(st, "cat /root/malignment-data/twp/*/*/jsonl.hashstash.raw/"
+                          "data.jsonl 2>/dev/null | wc -l")
+    try:
+        return int((r.stdout or "0").strip().split()[-1])
+    except (ValueError, IndexError):
+        return -1
+
+
+def _await(cloud, st, models, iid, a):
+    """Poll until DONE, and distinguish the three ways that never arrives.
+
+    **A box has more states than done/not-done, and they need different actions:**
+
+        DONE sentinel            finished -- go verify
+        FAILED sentinel          a command exited non-zero -- keep it, look
+        tmux gone, no sentinel   died without writing either -- keep it, look
+        cells not moving         ALIVE AND PRODUCING NOTHING -- the dangerous one
+
+    The last is the casualty pattern, and it is the only one that looks healthy
+    from every angle except the one that counts. It is reported as a STALL rather
+    than destroyed, because destroying it destroys the evidence of why -- and RH's
+    standing gate is byte-level verification before any box goes.
+    """
+    import time
+    t0 = time.time()
+    last_n, last_change, ticks = -1, time.time(), 0
+    while True:
+        if time.time() - t0 > a.max_hours * 3600:
+            _billing(cloud, iid, "exceeded --max-hours %.1f" % a.max_hours)
+            return False
+        time.sleep(a.poll)
+        ticks += 1
+        n = _written(cloud, st)
+        done = cloud.ssh_run(st, "ls /root/DONE 2>/dev/null").returncode == 0
+        failed = cloud.ssh_run(st, "ls /root/FAILED 2>/dev/null").returncode == 0
+        alive = cloud.ssh_run(st, "tmux has-session -t fleet 2>/dev/null").returncode == 0
+        if n != last_n:
+            last_n, last_change = n, time.time()
+        idle = (time.time() - last_change) / 60.0
+        print("  poll %-3d    %s cells written | tmux %s | %.0f min elapsed%s"
+              % (ticks, format(max(n, 0), ","), "up" if alive else "GONE",
+                 (time.time() - t0) / 60.0,
+                 " | IDLE %.0f min" % idle if idle > 2 else ""))
+        if done:
+            print("  complete    DONE after %.0f min, %s cells written"
+                  % ((time.time() - t0) / 60.0, format(max(n, 0), ",")))
+            if failed:
+                #: A stage failed and later stages still ran. Not fatal -- pass 1
+                #: can fail for one arm while the rest close -- but never silent.
+                print("  NOTE        /root/FAILED exists: at least one command "
+                      "exited non-zero. Logs pulled below; verify decides.")
+            return True
+        if not alive:
+            _billing(cloud, iid, "tmux session gone with no DONE sentinel")
+            print("  last log:")
+            print((cloud.ssh_run(st, "tail -n 25 /root/stage*.log").stdout or "")[-1500:])
+            return False
+        if idle >= a.stall_min:
+            #: **ALIVE AND PRODUCING NOTHING.** Do not retry and do not destroy.
+            _billing(cloud, iid, "STALL: no new cells for %.0f min while tmux is up"
+                                 % idle)
+            print("  last log:")
+            print((cloud.ssh_run(st, "tail -n 25 /root/stage*.log").stdout or "")[-1500:])
+            return False
 
 
 def _billing(cloud, iid, why):

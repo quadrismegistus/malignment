@@ -198,6 +198,18 @@ def _config_facts(repo, revision):
         return None, False
 
 
+def _gpu_name():
+    """The card, or the empty string. Cards differ among themselves, and a rate
+    recorded without one cannot be compared to the next box's."""
+    try:
+        import torch
+        if torch.cuda.is_available():
+            return torch.cuda.get_device_name(0)
+    except Exception:                                           # noqa: BLE001
+        pass
+    return ""
+
+
 def _is_rate_limit(msg):
     """Status code and phrase, never the symptom. See the module docstring."""
     return ("429" in msg or "Too Many Requests" in msg
@@ -208,8 +220,11 @@ def _is_rate_limit(msg):
 #: plus the two stamp fields. A dict would let a caller reach for a key that is
 #: not there and get `None` into `expand`, where a None `bmask` is not an error,
 #: it is a different word-boundary rule.
+#: `load_s` and `vocab_size` ride along so a run can record its own rate WITHOUT
+#: a second timer: load is paid once per arm and compute per cell, and blending
+#: them is exactly how a 3-cell sample became a throughput fact for OLMoE.
 Loaded = collections.namedtuple(
-    "Loaded", "model tok dev bmask cjk bos_policy loader_id")
+    "Loaded", "model tok dev bmask cjk bos_policy loader_id load_s vocab_size")
 
 
 def load_for_twp(ck, dict_path=None, purge=False, say=None):
@@ -235,6 +250,7 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
     from transformers import AutoModelForCausalLM
 
     say = say or (lambda m: None)
+    _t_load = time.time()
     dev = T.pick_device()
     trie = T.load_prefix_trie(dict_path or T.DICT)
     #: **THE LOADER DOES NOT KNOW THE INSTRUMENT AND MUST NOT NAME IT.** This
@@ -318,7 +334,9 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
     if pol != "inherited":
         say("  bos_policy: %s" % pol)
 
-    return Loaded(model, tok, dev, bmask, cjk, pol, loader_id)
+    return Loaded(model, tok, dev, bmask, cjk, pol, loader_id,
+                  time.time() - _t_load,
+                  int(getattr(model.config, "vocab_size", 0) or 0))
 
 
 class TWPRunner:
@@ -519,11 +537,29 @@ class TWPRunner:
                     "(%d ok, %d skipped)  left %.0f min  ETA %s"
                     % (i, len(todo), 100.0 * i / len(todo), el / 60, spc,
                        n_ok, n_skip, left / 60, eta))
+        #: **RECORD THE RATE HERE, WHERE BOTH HALVES ARE KNOWN.** `run` has always
+        #: COMPUTED s/cell for its heartbeat and then thrown it away, so every
+        #: planning number in this repo came from a human reading a log line and
+        #: retyping it -- which is how `SEC_PER_CELL` was 0.8 (MPS) while planning
+        #: a CUDA fleet, and then 0.19 (ONE model, 8B) while bloom-7b1 with its
+        #: 250,880-token vocabulary runs several times slower. Divided by `n_ok`,
+        #: what was WRITTEN, never by `len(todo)`, what was attempted.
+        _elapsed = time.time() - t0
+        try:
+            from malignment import rates
+            rates.record(model=ck.model_id, device=dev, gpu=_gpu_name(),
+                         vocab_size=ld.vocab_size, load_s=ld.load_s,
+                         n_cells=n_ok, compute_s=_elapsed,
+                         rules=rules.label() if rules is not None else None,
+                         topup=False)
+        except Exception as e:                                  # noqa: BLE001
+            #: Bookkeeping must never kill a measurement that succeeded.
+            say("  (rate not recorded: %s)" % e)
         T.free()
         T.purge_model(ck.model_id, purge)
         return {"model": ck.model_id, "producer": PRODUCER, "written": n_ok,
                 "skipped": n_skip, "already": len(have), "path": st.path,
-                "minutes": (time.time() - t0) / 60}
+                "minutes": _elapsed / 60}
 
 
     def topup(self, rules, root=None, limit=None, dict_path=None, verbose=True,
