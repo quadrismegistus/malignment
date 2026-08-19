@@ -216,6 +216,28 @@ def _is_rate_limit(msg):
             or "rate limit" in msg.lower())
 
 
+def _is_transient(msg):
+    """A network failure that RETRYING FIXES. Distinct from a broken checkpoint.
+
+    **A TRUNCATED DOWNLOAD IS A RACE, AND THE RETRY ALREADY HERE ONLY COVERED
+    429s.** Fleet box 48153389 lost `Zyphra/Zamba2-7B-Instruct` to
+    `IncompleteRead(1572863264 bytes read, 3237314888 more expected)` -- 1.5 GB
+    of a 4.8 GB shard arrived and the connection broke. The queue recorded a load
+    failure and moved on, which is right for not blocking the other ten models
+    and wrong for this one: nothing about the checkpoint was bad.
+
+    The runbook's rule is the discriminator: **retry a RACE, never a STATE.** A
+    429 and a half-arrived file are both races. A missing repo, a tokenizer that
+    mangles the prompt, a config transformers cannot parse -- those are states and
+    retrying them burns rental time to learn what the first attempt already said.
+    """
+    m = msg.lower()
+    return ("incompleteread" in m or "connection broken" in m
+            or "connection reset" in m or "connection aborted" in m
+            or "timed out" in m or "temporary failure in name resolution" in m
+            or "remote end closed connection" in m)
+
+
 #: What a loaded checkpoint IS, for `twp.expand`: exactly its argument tuple
 #: plus the two stamp fields. A dict would let a caller reach for a key that is
 #: not there and get `None` into `expand`, where a None `bmask` is not an error,
@@ -297,11 +319,13 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
             break
         except Exception as e:
             msg = str(e)
-            if _is_rate_limit(msg) and attempt < MAX_RL_RETRIES:
+            if (_is_rate_limit(msg) or _is_transient(msg)) and attempt < MAX_RL_RETRIES:
                 wait = min(300, 30 * 2 ** attempt)
-                say("  HF RATE LIMIT (attempt %d/%d) -- backing off %ds, then "
-                    "RETRYING. A 429 is a race, not a model defect."
-                    % (attempt + 1, MAX_RL_RETRIES, wait))
+                say("  %s (attempt %d/%d) -- backing off %ds, then RETRYING. "
+                    "A race, not a model defect."
+                    % ("HF RATE LIMIT" if _is_rate_limit(msg)
+                       else "TRANSIENT NETWORK FAILURE",
+                       attempt + 1, MAX_RL_RETRIES, wait))
                 T.free()
                 time.sleep(wait)
                 continue
@@ -314,7 +338,9 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
             raise RuntimeError("LOAD FAILED for %s: %s%s" % (
                 ck.model_id, msg[:160],
                 "  <- THIS WAS A RATE LIMIT, not a model defect"
-                if _is_rate_limit(msg) else ""))
+                if _is_rate_limit(msg) else
+                "  <- THIS WAS A TRANSIENT NETWORK FAILURE, not a model defect"
+                if _is_transient(msg) else ""))
 
     T.reset_batch()                 # a new checkpoint gets a fresh ceiling
     try:
