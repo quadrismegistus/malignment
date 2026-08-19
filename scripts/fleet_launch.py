@@ -289,6 +289,37 @@ def execute(b, models, roots, venv, a):
                 exclude=(".git", ".venv*", "__pycache__", "*.pyc",
                          "data/raw", "data/*.json", "data/*.csv", "data/*.parquet",
                          "experiments", "*.egg-info"))
+    # ---- token (SHIPPED BEFORE PROVISION) -----------------------------------
+    #: **BEFORE provision, because provision READS it.** Ordered after, the
+    #: token file did not exist when `hfenv.sh` was written and sourced -- and
+    #: that file's `[ -f token ] && export ...` returns 1 when absent, which
+    #: under `set -e` aborted the whole provision with rc=1. Two of my own lines
+    #: disagreeing about ordering, and the symptom was a bare `provision FAILED
+    #: rc=1` with empty stderr.
+    #:
+    #: The `&&` is now an `if`, so the ordering and the guard are independently
+    #: correct rather than jointly.
+    tok_path = os.path.expanduser("~/.cache/huggingface/token")
+    if not os.path.exists(tok_path):
+        env_tok = (os.environ.get("HF_TOKEN")
+                   or os.environ.get("HUGGING_FACE_HUB_TOKEN"))
+        if env_tok:
+            import stat
+            os.makedirs(os.path.dirname(tok_path), exist_ok=True)
+            with open(tok_path, "w") as fh:
+                fh.write(env_tok.strip())
+            os.chmod(tok_path, stat.S_IRUSR | stat.S_IWUSR)
+            print("  token       wrote %s from the environment" % tok_path)
+    if os.path.exists(tok_path):
+        cloud.ssh_run(st, "mkdir -p /root/.cache/huggingface")
+        cloud.rsync(st, tok_path, "/root/.cache/huggingface/token")
+        cloud.ssh_run(st, "chmod 600 /root/.cache/huggingface/token")
+        print("  token       shipped to /root/.cache/huggingface/token")
+    else:
+        from preflight_env import gated as _gated
+        print("  token       NO ~/.cache/huggingface/token and none in env -- "
+              "%d gated model(s) in this shard WILL fail" % len(_gated(models)))
+
     print("  provision   venv %s" % venv)
     r = cloud.ssh_run(st, PROVISION % {"venv": venv})
     if r.returncode == 3:
@@ -316,61 +347,25 @@ def execute(b, models, roots, venv, a):
         _billing(cloud, iid, "provision failed rc=%d" % r.returncode)
         raise SystemExit("  provision FAILED rc=%d\n%s"
                          % (r.returncode, (r.stderr or "")[-600:]))
-    if a.stop_after == "provision":
-        return 0
-
-    # ---- token -------------------------------------------------------------
-    #: Asked UNAUTHENTICATED, which is the BOX's condition rather than ours --
-    #: this Mac holds a token in its shell profile, so every gated repo resolves
-    #: here and nowhere else, which is why two pilots never surfaced it.
-    from preflight_env import gated as _gated
-    gated_here = _gated(models)
-    #: **12 OF 144 MODELS ARE GATED AND A TOKENLESS BOX CANNOT FETCH THEM.**
-    #: Measured unauthenticated by `preflight_env.gated()` -- including
-    #: `meta-llama/Llama-3.1-8B`, a whole lineage root. RH, 2026-08-19: *"I have
-    #: HF_TOKEN here just rsync it over."*
-    #:
-    #: **The value never touches an argv, a log, or a commit.** It is written to a
-    #: 0600 temp file and rsynced to the location huggingface_hub reads by itself,
-    #: because `ssh_run(st, "echo $TOK > ...")` would put a live credential in the
-    #: local process table and in this script's own output. `hfenv.sh` then exports
-    #: it by READING that file, so the script text never contains it either.
-    #: **THE LOCAL TOKEN FILE IS THE SOURCE, AND IT IS SHIPPED AUTOMATICALLY.**
-    #: RH, 2026-08-19: *"save the token to ~/.cache/huggingface/token too / then in
-    #: the box launcher script make the rsync of that file automatic."* So the
-    #: same path holds it on both machines and the transfer is a plain file copy
-    #: with no credential in any argv. The env var is a FALLBACK for a shell that
-    #: exports one without having written the file; when it is used, the file is
-    #: created first, so there is exactly one thing to ship either way.
-    tok_path = os.path.expanduser("~/.cache/huggingface/token")
-    if not os.path.exists(tok_path):
-        env_tok = (os.environ.get("HF_TOKEN")
-                   or os.environ.get("HUGGING_FACE_HUB_TOKEN"))
-        if env_tok:
-            import stat
-            os.makedirs(os.path.dirname(tok_path), exist_ok=True)
-            with open(tok_path, "w") as fh:
-                fh.write(env_tok.strip())
-            os.chmod(tok_path, stat.S_IRUSR | stat.S_IWUSR)
-            print("  token       wrote %s from the environment" % tok_path)
+    #: **CONFIRMED BY ASKING THE BOX WHO IT IS**, not by trusting that the copy
+    #: succeeded. A token that arrives and does not authenticate fails 12 gated
+    #: models three hours later; here it fails in seconds, with the box kept.
     if os.path.exists(tok_path):
-        cloud.ssh_run(st, "mkdir -p /root/.cache/huggingface")
-        cloud.rsync(st, tok_path, "/root/.cache/huggingface/token")
-        cloud.ssh_run(st, "chmod 600 /root/.cache/huggingface/token")
-        #: Confirmed by asking the BOX who it is, not by trusting the copy.
+        from preflight_env import gated as _gated
+        gated_here = _gated(models)
         who = cloud.ssh_run(st, "cd /root/malignment && . /root/hfenv.sh && "
                                 "./%s/bin/python -c \"from huggingface_hub import "
                                 "whoami; print('HF AUTH OK as', whoami()['name'])\""
                             % venv)
-        line = (who.stdout or "").strip().splitlines()[-1:] or ["(no answer)"]
-        print("  token       %s" % line[0][:70])
+        line = ((who.stdout or "").strip().splitlines() or ["(no answer)"])[-1]
+        print("  auth        %s  (%d gated model(s) in this shard)"
+              % (line[:60], len(gated_here)))
         if "HF AUTH OK" not in (who.stdout or ""):
             _billing(cloud, iid, "HF token did not authenticate on the box")
-            raise SystemExit("  the token did not authenticate -- 12 gated models "
+            raise SystemExit("  the token did not authenticate -- gated models "
                              "would fail. Box kept for inspection.")
-    else:
-        print("  token       NO ~/.cache/huggingface/token and none in env -- "
-              "%d gated model(s) in this shard WILL fail" % len(gated_here))
+    if a.stop_after == "provision":
+        return 0
 
     # ---- payload -----------------------------------------------------------
     #: The cells for the WHOLE lineage, so the box can build its own union.
@@ -529,7 +524,9 @@ python3 -m venv %(venv)s 2>/dev/null || true
 cat > /root/hfenv.sh <<'HFEOF'
 export HF_ENDPOINT=https://huggingface.co
 unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy ALL_PROXY all_proxy
-[ -f /root/.cache/huggingface/token ] && export HF_TOKEN=$(cat /root/.cache/huggingface/token)
+if [ -f /root/.cache/huggingface/token ]; then
+  export HF_TOKEN=$(cat /root/.cache/huggingface/token)
+fi
 HFEOF
 . /root/hfenv.sh
 # A REACHABILITY ASSERT, NOT A PING. It fetches the same way the runner does --
