@@ -225,6 +225,87 @@ def from_stash(root=None, path=PATH, write=True, min_cells=MIN_CELLS):
     return out
 
 
+def from_mtimes(root, min_cells=MIN_CELLS):
+    """Bound s/cell from consecutive file mtimes, for stashes with no timestamps.
+
+    **RH's question: "is there no way to infer speed from mtime on old jsonls we
+    downloaded from other boxes? was the old repo rsyncing without preserving
+    mtime?"** It was not: `rsync -az` implies `-a`, which implies `-t`, so the
+    modification time on every pulled file is the BOX's, not ours. (Birth time is
+    ours -- stamped when rsync created the file locally -- so `mtime - birthtime`
+    is meaningless and only `mtime` carries information.)
+
+    That gives one timestamp per file, which is nothing on its own. But a producer
+    that wrote its models IN SEQUENCE leaves each file's mtime marking the end of
+    its own work and the start of the next, so consecutive mtimes BRACKET a model.
+
+    Immediately useful: `raw/twp_fill/twpssm` predates `__written_at__` entirely,
+    and this recovers that Zamba2-7B-Instruct did 2,579 cells in 38.9 minutes --
+    **<=0.905 s/cell** against the **183 s/cell** the same model showed on a fleet
+    box without mamba kernels. A 200x gap that says the environment was the cause
+    and the model is fine.
+
+    ## THE ASSUMPTION, AND WHY THE RESULT IS A BOUND EITHER WAY
+
+    Sequential writing is an ASSUMPTION, and it fails in both directions:
+
+        sequential   the gap includes download and load, so the implied rate is
+                     an OVER-estimate -- safe for planning
+        parallel     two models writing at once leaves small gaps for long work,
+                     so it UNDER-estimates -- dangerous, and invisible
+
+    So this refuses when the evidence for sequence is weak: if the summed gaps do
+    not account for most of the wall span, the files were not written one at a
+    time and no bound is emitted. Every row is marked `note`, which `rate_for`
+    ranks below a real measurement.
+    """
+    import glob
+    out = []
+    files = []
+    for f in sorted(glob.glob(os.path.join(root, "*.jsonl"))):
+        n = 0
+        model = None
+        for line in open(f, encoding="utf-8", errors="replace"):
+            if not line.strip():
+                continue
+            n += 1
+            if model is None:
+                try:
+                    model = json.loads(line).get("model")
+                except ValueError:
+                    pass
+        files.append((os.stat(f).st_mtime, f, n, model))
+    files.sort()
+    if len(files) < 2:
+        return out
+    span = files[-1][0] - files[0][0]
+    gaps = sum(files[i + 1][0] - files[i][0] for i in range(len(files) - 1))
+    if span <= 0 or gaps < 0.9 * span:
+        return out                      # not one-at-a-time; emit nothing
+    for i in range(1, len(files)):
+        mt, _f, n, model = files[i]
+        dt = mt - files[i - 1][0]
+        #: **A NEAR-ZERO GAP IS NOT A FAST MODEL, IT IS A BROKEN BRACKET.** Two
+        #: files sharing a timestamp (written together, or copied in one
+        #: operation) imply 0.000 s/cell, which would enter the store as the
+        #: fastest model ever measured and price a shard at nothing. Floor at
+        #: 0.01 s/cell -- an order of magnitude below the fastest real
+        #: observation here (SmolLM2-360M at 0.131) -- and drop the pair.
+        if not model or n < min_cells or dt <= 0 or (dt / n) < 0.01:
+            continue
+        out.append({"model": model, "device": None, "gpu": None,
+                    "vocab_size": None, "rules": None, "only": None,
+                    "topup": False, "n_cells": n, "load_s": None,
+                    "compute_s": round(dt, 1),
+                    "sec_per_cell": round(dt / n, 4),
+                    "estimator": "mtime_bracket",
+                    "note": "UPPER BOUND from consecutive file mtimes; "
+                            "includes download and load",
+                    "observed": time.strftime("%Y-%m-%dT%H:%M:%S",
+                                              time.localtime(mt))})
+    return out
+
+
 def load(path=PATH):
     if not os.path.exists(path):
         return []
