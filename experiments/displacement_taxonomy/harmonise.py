@@ -41,7 +41,22 @@ N_HARMONISERS = 3
 
 
 def corpus(instrument):
-    """[(id, name, sentence)] interleaved across frames, plus the mapping."""
+    """[(id, name, sentence)] interleaved across frames, plus the mapping.
+
+    **ORIENTATION MUST BE UNIFORM AND IS ASSERTED BELOW.** Column A is the base
+    arm and column B the aligned arm on a `fwd` cell, and exactly the opposite on
+    a `rev` one -- reversal is the same measurement read the other way, which is
+    the point of running it. But the rater is never told which arm is which, so a
+    relation reads `a_words -> b_words` with no direction attached, and a corpus
+    mixing the two orientations asks a harmoniser to group "genitals give way to
+    grooming" with "grooming gives way to genitals" as though they were one
+    claim. It would either merge them, hiding a reversal, or split one construct
+    in two. Neither failure announces itself.
+
+    Normalising rev cells by swapping a_words and b_words would also work and is
+    NOT done, because the swap would have to be trusted rather than checked and
+    the relation SENTENCES would still read backwards.
+    """
     st = run._stash()
     byframe = collections.defaultdict(list)
     for k in st.keys():
@@ -69,6 +84,14 @@ def corpus(instrument):
                 (rid, rel["name"], rel["sentence"],
                  {"frame": meta.get("nickname"), "pair": meta.get("pair"),
                   "aligned": k.get("aligned"), "rater": k.get("rater"), "index": i}))
+    ors = {k.get("orientation") for k in st.keys()
+           if k.get("instrument") == instrument}
+    if len(ors) > 1:
+        raise SystemExit(
+            "instrument %r has codings in %d orientations (%s). Column A is the "
+            "base arm on fwd and the aligned arm on rev, the rater is not told "
+            "which, so relations from both cannot be harmonised together. Prepare "
+            "one orientation at a time." % (instrument, len(ors), ", ".join(sorted(map(str, ors)))))
     frames = sorted(byframe)
     for f in frames:
         byframe[f].sort(key=lambda x: x[0])
