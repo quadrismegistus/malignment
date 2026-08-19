@@ -1,0 +1,1622 @@
+[
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 1,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 2,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "claude-sonnet-5",
+  "rater": 3,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 1,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 2,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "1",
+  "confidence": "low"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-pro",
+  "rater": 3,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "3",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 1,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 2,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "tf19883",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "ta943de",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "tb5af78",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "3",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "td1ce62",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t957127",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "low"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "tce035d",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t1e79f8",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t667a6b",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t154762",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "2",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t8f4093",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t9e54e5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t034e29",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t33d065",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "1",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t351d4c",
+  "kind": "neg",
+  "odd_pos": 2,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t022b5f",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "tadde52",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t70c7f7",
+  "kind": "neg",
+  "odd_pos": 3,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "t5a87a5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "high"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "tb6e3d5",
+  "kind": "pos",
+  "odd_pos": null,
+  "odd": "none",
+  "confidence": "medium"
+ },
+ {
+  "model": "deepseek-v4-flash",
+  "rater": 3,
+  "tid": "td064a3",
+  "kind": "neg",
+  "odd_pos": 1,
+  "odd": "none",
+  "confidence": "medium"
+ }
+]

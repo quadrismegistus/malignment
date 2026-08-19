@@ -805,3 +805,74 @@ distribution, so this characterises the rated portion. And `mediation` does not
 separate the positions on slotpov (2.54 against 2.60), where the two sides end at
 an identical site; the asymmetry may need the role asymmetry in the frame to
 appear at all, which is itself worth knowing.
+
+## 13. THE MAIN EFFECT, which every test above was blind to
+
+Producer: `bundle_ishould.py`. Table: `results/base_side/ishould.json`.
+
+Sections 11 and 12 test gaps between positions and changes in those gaps. Both
+are differences. **A difference-in-differences is null when both sides move
+together**, and that is exactly what happens here, so the whole apparatus above
+was measuring the residual after differencing away the effect.
+
+Selection instead of design: keep every prompt ending in `"I should"`, pooling
+F21 and M03, which both read the `movement` table. 52 prompts (F21 16, M03 36),
+24 individual and 28 institutional, 50 lineages, 2,600 cells. Every cell sits at
+the same bare-infinitive slot, so the site confound is removed by construction.
+slotpov contributes nothing, its frames ending `"so X decided to"`, which is the
+selection working rather than a loss.
+
+### Alignment proceduralises everyone
+
+Within each position, base against aligned, crossed (lineage x prompt) bootstrap:
+
+| scale | INDIVIDUAL | p | INSTITUTION | p | direction |
+| --- | --- | --- | --- | --- | --- |
+| procedural | +0.216 | <0.001 | +0.148 | <0.001 | works within the system |
+| mediation | +0.236 | <0.001 | +0.125 | 0.001 | routed through a channel |
+| directedness | +0.265 | <0.001 | +0.211 | <0.001 | |
+| abstraction | +0.106 | 0.001 | +0.237 | <0.001 | |
+| fit | +0.145 | <0.001 | +0.153 | <0.001 | |
+| makes_better | +0.112 | <0.001 | +0.124 | <0.001 | |
+| deference | +0.087 | 0.012 | +0.081 | <0.001 | accepts institutional judgement |
+| termination | **−0.156** | 0.002 | **−0.112** | 0.016 | KEEPS the relationship going |
+| hedged | −0.079 | 0.009 | −0.092 | 0.023 | |
+
+**Both parties are made more procedural, more deferential to institutional
+judgement, more routed through channels, and less willing to end the
+relationship.** `termination` falling on both sides is the sharpest form: nobody
+quits, nobody fires, nobody walks out. Alignment forecloses exit symmetrically.
+
+This is F21's proceduralisation claim confirmed and generalised. F21 reported it
+as something done to the individual and not the institution. It is done to both.
+
+### The asymmetries ride on top, and they point opposite ways
+
+Paired within scenario, 24 clusters holding both positions (F21 6, M03 18):
+
+| scale | d indiv | d inst | ratio | indiv − inst [95% CI] | p |
+| --- | --- | --- | --- | --- | --- |
+| mediation | +0.236 | +0.133 | **1.77x** | +0.102 [+0.010, +0.208] | **0.025** |
+| abstraction | +0.106 | +0.218 | **0.49x** | −0.110 [−0.172, −0.052] | **<0.001** |
+| procedural | +0.216 | +0.146 | 1.48x | +0.072 [−0.003, +0.149] | 0.061 |
+| deference | +0.087 | +0.084 | 1.04x | +0.006 [−0.059, +0.068] | 0.868 |
+
+Two asymmetries survive and they are on different axes. **The individual is
+routed roughly twice as far; the institution is abstracted roughly twice as
+far.** `procedural` is 1.48x in the individual's direction but does not clear
+(p=0.061, interval touching zero) and should not be quoted as established.
+`deference` moves at 1.04x: dead even.
+
+So alignment does not defer on the institution's behalf. It defers on everyone's
+behalf equally, forecloses exit for everyone equally, and then differentially
+**routes the individual and abstracts the institution.**
+
+### What this costs sections 11 and 12
+
+Their gap and difference-in-differences results stand as arithmetic and were the
+wrong quantity to lead with. `abstraction` appearing there as "the one thing
+alignment adds" was an artifact of the same blindness: it is the one scale whose
+two positions move by DIFFERENT amounts, so it is the one that survives
+differencing. The scales where alignment does the most work, `procedural`,
+`mediation`, `directedness` and `termination`, were invisible precisely because
+it does that work to both sides.

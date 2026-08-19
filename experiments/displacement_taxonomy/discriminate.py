@@ -422,3 +422,31 @@ if __name__ == "__main__":
         report()
     else:
         ap.print_help()
+
+
+def gold_triads():
+    """The FROZEN gold set, read from disc_state.json, not regenerated.
+
+    `triads()` derives its triads from whatever is currently in the harmonise
+    stash. That was fine when the stash held one model's harmonisation of two
+    prompts; once ten more prompts were ingested it silently returned a
+    DIFFERENT twenty triads, sharing not one id with the set the 0.92/0.92
+    agent baseline was measured on. Every later run was scored against a gold
+    set that had moved, and the comparison read as a harness effect.
+
+    A benchmark that recomputes its own items is not a benchmark. This reads the
+    state file written when the baseline was run, and rebuilds only the relation
+    text, which is keyed by relation id and stable given the coding stash.
+    """
+    import json as _json
+    st = _json.load(open(os.path.join(HERE, "results", "disc_state.json")))
+    ts = st["triads"]
+    C = {}
+    for prompt in {t["prompt"] for t in ts}:
+        _, items, _, _, _ = HP.shard(prompt[:26])
+        C[prompt] = {"_": (None, dict(items))}
+    missing = [r for t in ts for r in t["items"] if r not in C[t["prompt"]]["_"][1]]
+    if missing:
+        raise SystemExit("%d relation id(s) in the frozen gold set no longer "
+                         "resolve: %s" % (len(missing), missing[:3]))
+    return ts, C
