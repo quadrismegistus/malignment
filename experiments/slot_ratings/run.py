@@ -76,8 +76,16 @@ def population(prompt=None, item_id=None):
     prompt = mine[0]["prompt"]
 
     models = sorted({c["base"] for c in mine} | {c["endpoint"] for c in mine})
+    #: `_best`, NOT `twp_words_v4`. The raw table carries pass-1 and merged rows
+    #: for the same (model, prompt, word) -- 12,300,833 rows over 9,993,876 keys --
+    #: and a dict(zip(ws, ps)) keeps whichever came last, arbitrarily. The view does
+    #: argMax(p, topup) internally: merged where a topup cell exists, pass 1 where
+    #: it does not, one row per key. Impact measured before switching: mean
+    #: |pmax-pmin| 1.02e-07 and FOURTEEN keys in the whole table where the choice
+    #: flips CANONICAL min_prob -- none of them in these 303 frames. Correctness
+    #: fix, not a results fix. (malign, send-peer, 2026-08-19.)
     rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
-                  "FROM twp_words_v4 WHERE prompt={p:String} "
+                  "FROM twp_words_v4_best WHERE prompt={p:String} "
                   "AND model IN {ms:Array(String)} GROUP BY model",
                   p=prompt, ms=models)
     store = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in rows}
@@ -142,12 +150,20 @@ def per_pair(prompt, cells, rated):
         return {}, 0
     _row = next(iter(rat.values()))
     seen, SCALES = set(), []
-    for s in (_t.SCALES + _t.SCALES_V2 + _t.SCALES_V3 + _t.SCALES_V4):      # dedup: `suggestive` is in BOTH
+    for s in (_t.SCALES + _t.SCALES_V2 + _t.SCALES_V3 + _t.SCALES_V4 + _t.SCALES_V5 + _t.SCALES_V6):      # dedup: `suggestive` is in BOTH
         if s in _row and s not in seen:
             seen.add(s); SCALES.append(s)
     models = sorted({c["base"] for c in cells} | {c["endpoint"] for c in cells})
+    #: `_best`, NOT `twp_words_v4`. The raw table carries pass-1 and merged rows
+    #: for the same (model, prompt, word) -- 12,300,833 rows over 9,993,876 keys --
+    #: and a dict(zip(ws, ps)) keeps whichever came last, arbitrarily. The view does
+    #: argMax(p, topup) internally: merged where a topup cell exists, pass 1 where
+    #: it does not, one row per key. Impact measured before switching: mean
+    #: |pmax-pmin| 1.02e-07 and FOURTEEN keys in the whole table where the choice
+    #: flips CANONICAL min_prob -- none of them in these 303 frames. Correctness
+    #: fix, not a results fix. (malign, send-peer, 2026-08-19.)
     rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
-                  "FROM twp_words_v4 WHERE prompt={p:String} "
+                  "FROM twp_words_v4_best WHERE prompt={p:String} "
                   "AND model IN {ms:Array(String)} GROUP BY model",
                   p=prompt, ms=models)
     store = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in rows}
@@ -183,6 +199,10 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--prompt")
     ap.add_argument("--item")
+    ap.add_argument("--v6", action="store_true",
+                    help="THE CORPUS INSTRUMENT: twelve contextual axes.")
+    ap.add_argument("--v5", action="store_true",
+                    help="WIDE: twelve axes, one per prior campaign finding.")
     ap.add_argument("--v4", action="store_true",
                     help="v3's axes with `directedness` asked about the action's "
                          "normal object rather than a named one, and the FRAGMENT "
@@ -226,7 +246,11 @@ def main(argv=None):
                       for f in (lambda n: n < 0, lambda n: n > 0, lambda n: n == 0)))
     if a.dry:
         return
-    if a.v4:
+    if a.v6:
+        from task import SlotRatingENv6 as TaskCls, SCALES_V6 as SCALES, render
+    elif a.v5:
+        from task import SlotRatingENv5 as TaskCls, SCALES_V5 as SCALES, render
+    elif a.v4:
         from task import SlotRatingENv4 as TaskCls, SCALES_V4 as SCALES, render
     elif a.v3:
         from task import SlotRatingENv3 as TaskCls, SCALES_V3 as SCALES, render
@@ -234,12 +258,12 @@ def main(argv=None):
         from task import SlotRatingENv2 as TaskCls, SCALES_V2 as SCALES, render
     else:
         from task import SlotRatingEN as TaskCls, SCALES, render
-    VER = "_v4" if a.v4 else "_v3" if a.v3 else "_v2" if a.v2 else ""
+    VER = "_v6" if a.v6 else "_v5" if a.v5 else "_v4" if a.v4 else "_v3" if a.v3 else "_v2" if a.v2 else ""
     t = TaskCls()
     errs = {}
     res = t.map([render(prompt, d["word"]) for d in content],
                 metadata_list=[{"prompt": prompt, "word": d["word"]} for d in content],
-                num_workers=24, errors=errs)
+                num_workers=32, errors=errs)
     print("errors: %d" % len(errs))
     for d, r in zip(content, res):
         if r is None:

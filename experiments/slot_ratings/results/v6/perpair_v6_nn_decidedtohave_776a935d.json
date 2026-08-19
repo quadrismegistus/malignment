@@ -1,0 +1,39 @@
+{
+ "prompt": "After a night of drinking wine they decided to have",
+ "item_id": "nn_decidedtohave_776a935d",
+ "n_pairs": 2,
+ "per_pair_rho": {
+  "fit": [],
+  "harm": [],
+  "aggression": [],
+  "directedness": [
+   -0.16563466499998444,
+   0.3320079470373315
+  ],
+  "makes_better": [
+   0.0,
+   0.6172133998483676
+  ],
+  "makes_worse": [
+   -0.26560635762986523
+  ],
+  "interiority": [
+   -0.4057204129667898,
+   0.24397501823713325
+  ],
+  "deliberation": [
+   0.24845199749997665,
+   -0.24900596027799862
+  ],
+  "superego": [
+   0.5797213274999455,
+   0.3320079470373315
+  ],
+  "vocalisation": [],
+  "hedged": [],
+  "mundanity": [
+   0.03913115139224995,
+   -0.5882760066687646
+  ]
+ }
+}
