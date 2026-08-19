@@ -390,6 +390,18 @@ def ingest(run_id):
                        "agent_id": os.path.basename(f)[6:-6], "meta": row}
             seen.add(cid)
             n += 1
+    #: RECORD THE RUN ID IN THE STATE FILE. `--prepare` runs before the workflow
+    #: exists, so the run id is only knowable afterwards -- and until it is
+    #: written down it lives solely in the launching session's transcript. The
+    #: journal is durable and `--ingest` finds it from any session, but only if
+    #: someone can still name the run. That is a single point of failure sitting
+    #: in a conversation, which is the one place nothing else in this folder
+    #: depends on.
+    state.setdefault("runs", [])
+    if run_id not in state["runs"]:
+        state["runs"].append(run_id)
+        json.dump(state, open(STATE, "w"), indent=1)
+        print("recorded run %s in %s" % (run_id, os.path.basename(STATE)))
     print("ingested %d codings (%d cells issued, %d not returned)"
           % (n, len(cells), len(cells) - len(seen)))
     print("  %d relations, %d one-sided (%.1f%%) -- flagged on the row as "
