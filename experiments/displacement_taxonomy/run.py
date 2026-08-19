@@ -184,6 +184,31 @@ def instrument_sha():
     return hashlib.sha256(("%s|%s" % (tsha, ssha)).encode("utf-8")).hexdigest()[:12]
 
 
+#: Block headings each renderer emits, used both to dispatch and to check that
+#: the instructions describe the table the rater is actually shown.
+RENDERERS = {"two_column": ("HIGHER UNDER A", "HIGHER UNDER B"),
+             "rank_blocks": ("ROSE UNDER B", "FELL UNDER B"),
+             "mass_blocks": ("HIGHER UNDER B", "HIGHER UNDER A")}
+
+
+def renderer_of():
+    """Which table this instrument declares, from its own `renderer:` line.
+
+    Declared rather than inferred, because inferring it from the version string
+    is what shipped 145 cells whose instructions described one table and whose
+    body was another. An instrument that does not say gets the mass table, which
+    is what v3 used and what every instrument before the rank family used.
+    """
+    m = re.search(r"^\s*renderer\s+(\S+)\s*$", open(INSTRUMENT_MD).read(), re.M)
+    if not m:
+        return "mass_blocks"
+    if m.group(1) not in RENDERERS:
+        raise SystemExit("%s declares renderer %r, which is not one of %s"
+                         % (os.path.basename(INSTRUMENT_MD), m.group(1),
+                            ", ".join(sorted(RENDERERS))))
+    return m.group(1)
+
+
 def render(fragment, word_table):
     """The full prompt as sent. No file for the rater to open.
 
@@ -695,19 +720,29 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                     tbl = _table(_Flip, fal, ris)
                 else:
                     tbl = _table(m, ris, fal)
-                if ver_now.startswith("r4"):
+                #: THE RENDERER IS DECLARED BY THE INSTRUMENT, NOT INFERRED FROM
+                #: ITS NAME. This dispatched on `ver_now.startswith("r4")`, which
+                #: is False for "r5", so the r5 wave rendered the r1-r3 table
+                #: while its instructions described the r4 one -- 145 cells coded
+                #: against a table under a description of a different table.
+                #: Nothing raised, because both renderers produce a valid table
+                #: and both parsers accept their own output. A version prefix is
+                #: not a type.
+                renderer = renderer_of()
+                if renderer == "two_column":
                     if TOPUP != 1:
-                        raise SystemExit("r4 is a topped-up instrument: a word "
-                                         "above the floor in one arm may have no "
-                                         "position in the other simply because it "
-                                         "was never measured there. Pass --topup.")
+                        raise SystemExit("this instrument renders two columns from "
+                                         "topped-up cells: a word above the floor "
+                                         "in one arm may have no position in the "
+                                         "other simply because it was never "
+                                         "measured there. Pass --topup.")
                     nb = {w: p / sum(W[b].values()) for w, p in W[b].items()}
                     na = {w: p / sum(W[a].values()) for w, p in W[a].items()}
                     tbl = _table_r4(nb, na)
                     n_shared = len(set(nb) & set(na))
                     n_shown = sum(1 for ln in tbl.splitlines()
                                   if ln.startswith("  ") and "->" in ln)
-                elif ver_now.startswith("r"):
+                elif renderer == "rank_blocks":
                     #: Ranks are over the arms' own fields, not over the movement
                     #: rule's survivors, so the r1 table is built from W directly.
                     nb = {w: p / sum(W[b].values()) for w, p in W[b].items()}
@@ -731,6 +766,30 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                             "presentation": "mass"}
                 frag = prompt + " ___"
                 sent = render(frag, tbl)
+                #: THE PROMPT MUST BE INTERNALLY CONSISTENT. The instructions and
+                #: the table are assembled from different places and nothing
+                #: previously checked they described the same thing -- r5's
+                #: instructions said "the first list holds words the A measurement
+                #: favours" over a table headed ROSE UNDER B. Each renderer's
+                #: block headings must appear in the prose above the table, which
+                #: is the cheapest statement of "these two halves agree".
+                #: WHITESPACE-NORMALISED, because the template is hard-wrapped and
+                #: the first version of this check looked for "first list holds
+                #: words" in prose that reads "The first list\\nholds words". It
+                #: refused a correct instrument, which is the expensive direction:
+                #: a false refusal sends someone to rewrite a prompt that was fine.
+                instr = re.sub(r"\s+", " ", sent.split("WORDS:")[0]).lower()
+                cue = {"two_column": "first list holds words",
+                       "rank_blocks": "split into those that rose",
+                       "mass_blocks": "split into those higher under b"}[renderer]
+                heads = [h.lower() for h in RENDERERS[renderer]]
+                if cue not in instr and not any(h in instr for h in heads):
+                    raise SystemExit(
+                        "%s renders %s (blocks %s) but its instructions never "
+                        "describe that table. The prompt would tell the rater it "
+                        "is reading something it is not."
+                        % (os.path.basename(INSTRUMENT_MD), renderer,
+                           " / ".join(RENDERERS[renderer])))
                 ver, tsha, _ = template()
                 ssha, _ = schema()
                 base_row["instrument"] = ver

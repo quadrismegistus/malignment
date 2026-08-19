@@ -5,6 +5,7 @@ fragment, same word field, same raters, same schema. Only what is put in front o
 them changes.
 
     version   r3
+    renderer  rank_blocks
     fields    identical to v3, see SCHEMA JSON below
     pairs     with v3 on the same cells, so the two are directly comparable
 

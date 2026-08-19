@@ -5,6 +5,7 @@ instead of probabilities. Settled with RH over thirteen variants; the reasoning
 for each clause is in `ITERATIONS.md`.
 
     version   r4
+    renderer  two_column
     fields    identical to v3, see SCHEMA JSON below
     data      topped-up cells only
 

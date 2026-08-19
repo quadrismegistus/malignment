@@ -1,77 +1,79 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: Three Palestinians came into the room and started to ___
 
 WORDS:
-HIGHER UNDER B
-  argue          1.0% ->   3.5%  ( +2.5)
-  discuss        0.6% ->   1.9%  ( +1.2)
-  chant          0.5% ->   1.5%  ( +1.0)
-  make           1.2% ->   2.0%  ( +0.8)
-  speak          2.0% ->   2.7%  ( +0.8)
-  pray           0.9% ->   1.6%  ( +0.7)
-  fight          0.2% ->   0.9%  ( +0.7)
-  set            1.1% ->   1.8%  ( +0.7)
-  frantically    0.0% ->   0.6%  ( +0.6)
-  sing           0.6% ->   1.2%  ( +0.5)
-  chat           0.4% ->   0.9%  ( +0.5)
-  clean          0.8% ->   1.3%  ( +0.5)
-  get            0.4% ->   0.9%  ( +0.4)
-  stare          0.2% ->   0.6%  ( +0.4)
-  rummage        0.0% ->   0.4%  ( +0.4)
-  prepare        0.3% ->   0.7%  ( +0.4)
-  taunt          0.2% ->   0.6%  ( +0.4)
-  cause          0.0% ->   0.3%  ( +0.3)
-
 HIGHER UNDER A
-  beat           7.0% ->   2.2%  ( -4.8)
-  ask            3.5% ->   1.2%  ( -2.3)
-  interrogate    2.7% ->   0.8%  ( -2.0)
-  question       1.8% ->   0.9%  ( -1.0)
-  hit            0.9% ->   0.2%  ( -0.7)
-  scream         0.8% ->   0.3%  ( -0.4)
-  kick           0.5% ->   0.2%  ( -0.4)
-  tie            0.6% ->   0.2%  ( -0.3)
-  check          0.6% ->   0.3%  ( -0.3)
-  drag           0.3% ->   0.0%  ( -0.3)
-  pull           0.5% ->   0.2%  ( -0.3)
-  torture        0.4% ->   0.1%  ( -0.3)
-  unload         0.4% ->   0.1%  ( -0.3)
-  harass         0.5% ->   0.2%  ( -0.3)
-  cut            0.5% ->   0.2%  ( -0.3)
-  tear           0.5% ->   0.2%  ( -0.2)
+  beat             1 ->   5     -4
+  talk             2 ->   2     +0
+  ask              3 ->  16    -13
+  interrogate      5 ->  27    -22
+  question         8 ->  24    -16
+  hit             20 ->  99    -79
+  shoot            6 ->  13     -7
+  take             4 ->   4     +0
+  tell            15 ->  31    -16
+  play            11 ->  18     -7
+  look            12 ->  19     -7
+  yell            17 ->  26     -9
+  throw           13 ->  20     -7
+  remove          21 ->  25     -4
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
+HIGHER UNDER B
+  argue           19 ->   1    +18
+  discuss         28 ->   7    +21
+  chant           45 ->  12    +33
+  make            14 ->   6     +8
+  speak            7 ->   3     +4
+  set             16 ->   8     +8
+  pray            22 ->  11    +11
+  fight           95 ->  21    +74
+  sing            29 ->  17    +12
+  clean           23 ->  14     +9
+  chat            57 ->  22    +35
+  get             48 ->  23    +25
+  dance           18 ->  15     +3
+  shout           10 ->   9     +1
 
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+1 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State the relations you find: a group of words on one side, a group
+   on the other, and what connects them. There is no target number. ONE IS THE
+   COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the difference does not form
+   any relation you could state, return an empty list and say so in `notes`.
+
+   A relation you would not defend if the measurement were repeated should be
+   stated and marked `low`, not suppressed. Marking it is more informative than
+   leaving it out, and leaving it out is what produces a list of three confident
+   relations where only one was confident. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words under A
+     b_words     the words under B
+     confidence  high / medium / low -- how far you would defend THIS relation,
+                 independently of the others. A relation you state because it is
+                 there but would not argue for is low, and low is a normal
+                 answer rather than a failure.
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what
@@ -83,7 +85,9 @@ Answer these, in order.
 4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
    how badly.
 
-5. CONFIDENCE. high / medium / low / none.
+5. CONFIDENCE. high / medium / low / none, for the reading as a whole. Each
+   relation carries its own confidence above; this one is about whether you have
+   understood the difference at all.
 
 Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
 the difference must mean something.

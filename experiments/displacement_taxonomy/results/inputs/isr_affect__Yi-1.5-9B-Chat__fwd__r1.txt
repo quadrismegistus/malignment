@@ -45,12 +45,15 @@ HIGHER UNDER B
 
 Answer these, in order.
 
-1. RELATIONS. State every relation you can defend and no more: a group of words
-   on one side, a group on the other, and what connects them. There is no target
-   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
-   difference does not form a relation you would defend to someone who disagreed,
-   return an empty list and say so in `notes`. Do not offer a relation you would
-   withdraw if the measurement were repeated. For each:
+1. RELATIONS. State the relations you find: a group of words on one side, a group
+   on the other, and what connects them. There is no target number. ONE IS THE
+   COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the difference does not form
+   any relation you could state, return an empty list and say so in `notes`.
+
+   A relation you would not defend if the measurement were repeated should be
+   stated and marked `low`, not suppressed. Marking it is more informative than
+   leaving it out, and leaving it out is what produces a list of three confident
+   relations where only one was confident. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
@@ -58,6 +61,10 @@ Answer these, in order.
                  who had not seen the words could tell which words were involved.
      a_words     the words under A
      b_words     the words under B
+     confidence  high / medium / low -- how far you would defend THIS relation,
+                 independently of the others. A relation you state because it is
+                 there but would not argue for is low, and low is a normal
+                 answer rather than a failure.
 
    A group may be a single word, and a group need not be semantically uniform --
    if many unrelated words sit on one side while one stands out, say that.
@@ -72,7 +79,9 @@ Answer these, in order.
 4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
    how badly.
 
-5. CONFIDENCE. high / medium / low / none.
+5. CONFIDENCE. high / medium / low / none, for the reading as a whole. Each
+   relation carries its own confidence above; this one is about whether you have
+   understood the difference at all.
 
 Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
 the difference must mean something.

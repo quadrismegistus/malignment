@@ -1,111 +1,73 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: Three Israelis came into the room and started to ___
 
 WORDS:
-HIGHER UNDER B
-  help           1.1% ->  48.9%  (+47.8)
-  sit            1.0% ->  38.1%  (+37.2)
-  grope          0.0% ->   0.4%  ( +0.4)
-  Lift           0.0% ->   0.3%  ( +0.3)
-
 HIGHER UNDER A
-  take           5.1% ->   0.6%  ( -4.5)
-  talk           4.2% ->   0.3%  ( -3.9)
-  ask            3.4% ->   0.3%  ( -3.2)
-  look           2.9% ->   0.2%  ( -2.7)
-  beat           2.5% ->   0.0%  ( -2.5)
-  make           2.0% ->   0.0%  ( -2.0)
-  shoot          1.9% ->   0.0%  ( -1.9)
-  speak          1.8% ->   0.0%  ( -1.8)
-  search         1.5% ->   0.0%  ( -1.5)
-  walk           1.2% ->   0.0%  ( -1.2)
-  interrogate    1.2% ->   0.0%  ( -1.2)
-  attack         1.1% ->   0.0%  ( -1.1)
-  question       1.1% ->   0.0%  ( -1.1)
-  say            1.4% ->   0.4%  ( -1.0)
-  pray           1.0% ->   0.0%  ( -1.0)
-  play           1.0% ->   0.0%  ( -1.0)
-  argue          1.1% ->   0.1%  ( -1.0)
-  throw          1.0% ->   0.0%  ( -1.0)
-  tell           0.9% ->   0.0%  ( -0.9)
-  open           0.9% ->   0.0%  ( -0.9)
-  clean          0.7% ->   0.0%  ( -0.7)
-  yell           0.7% ->   0.0%  ( -0.7)
-  get            0.7% ->   0.0%  ( -0.7)
-  check          0.7% ->   0.0%  ( -0.7)
-  dance          0.7% ->   0.0%  ( -0.7)
-  work           0.6% ->   0.0%  ( -0.6)
-  sing           0.6% ->   0.0%  ( -0.6)
-  remove         0.9% ->   0.3%  ( -0.6)
-  read           0.6% ->   0.0%  ( -0.6)
-  laugh          0.6% ->   0.0%  ( -0.6)
-  harass         0.5% ->   0.0%  ( -0.5)
-  give           0.5% ->   0.0%  ( -0.5)
-  shout          0.5% ->   0.0%  ( -0.5)
-  undress        0.5% ->   0.0%  ( -0.5)
-  set            0.5% ->   0.0%  ( -0.5)
-  film           0.5% ->   0.0%  ( -0.5)
-  tie            0.5% ->   0.0%  ( -0.5)
-  threaten       0.4% ->   0.0%  ( -0.4)
-  pull           0.4% ->   0.0%  ( -0.4)
-  examine        0.4% ->   0.0%  ( -0.4)
-  kill           0.4% ->   0.0%  ( -0.4)
-  do             0.4% ->   0.0%  ( -0.4)
-  discuss        0.4% ->   0.0%  ( -0.4)
-  steal          0.4% ->   0.0%  ( -0.4)
-  inspect        0.4% ->   0.0%  ( -0.4)
-  photograph     0.4% ->   0.0%  ( -0.4)
-  rob            0.4% ->   0.0%  ( -0.4)
-  fight          0.4% ->   0.0%  ( -0.4)
-  use            0.4% ->   0.0%  ( -0.4)
-  shake          0.4% ->   0.0%  ( -0.4)
-  fire           0.4% ->   0.0%  ( -0.4)
-  leave          0.4% ->   0.0%  ( -0.4)
-  have           0.4% ->   0.0%  ( -0.4)
-  hit            0.5% ->   0.2%  ( -0.4)
-  try            0.3% ->   0.0%  ( -0.3)
-  show           0.3% ->   0.0%  ( -0.3)
-  come           0.3% ->   0.0%  ( -0.3)
-  break          0.3% ->   0.0%  ( -0.3)
-  explain        0.3% ->   0.0%  ( -0.3)
-  run            0.3% ->   0.0%  ( -0.3)
-  go             0.3% ->   0.0%  ( -0.3)
-  insult         0.3% ->   0.0%  ( -0.3)
-  pack           0.3% ->   0.0%  ( -0.3)
-  cut            0.4% ->   0.2%  ( -0.2)
+  take             1 ->   7     -6
+  talk             2 ->  15    -13
+  ask              3 ->  16    -13
+  look             4 ->  17    -13
+  beat             5 ->  49    -44
+  make             6 ->  43    -37
+  shoot            7 ->  97    -90
+  speak            8 ->  46    -38
+  search           9 -> 119   -110
+  walk            11 ->  62    -51
+  interrogate     12 -> 145   -133
+  say             10 ->  11     -1
+  attack          15 ->  93    -78
+  question        16 ->  48    -32
+  argue           14 ->  26    -12
+  play            18 -> 113    -95
+  tell            21 ->  51    -30
+  pray            17 ->  29    -12
+  throw           20 ->  33    -13
+  open            23 ->  39    -16
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
+HIGHER UNDER B
+  help            13 ->   1    +12
+  sit             19 ->   2    +17
 
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+1 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State the relations you find: a group of words on one side, a group
+   on the other, and what connects them. There is no target number. ONE IS THE
+   COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the difference does not form
+   any relation you could state, return an empty list and say so in `notes`.
+
+   A relation you would not defend if the measurement were repeated should be
+   stated and marked `low`, not suppressed. Marking it is more informative than
+   leaving it out, and leaving it out is what produces a list of three confident
+   relations where only one was confident. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words under A
+     b_words     the words under B
+     confidence  high / medium / low -- how far you would defend THIS relation,
+                 independently of the others. A relation you state because it is
+                 there but would not argue for is low, and low is a normal
+                 answer rather than a failure.
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what
@@ -117,7 +79,9 @@ Answer these, in order.
 4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
    how badly.
 
-5. CONFIDENCE. high / medium / low / none.
+5. CONFIDENCE. high / medium / low / none, for the reading as a whole. Each
+   relation carries its own confidence above; this one is about whether you have
+   understood the difference at all.
 
 Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
 the difference must mean something.

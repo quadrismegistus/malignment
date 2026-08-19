@@ -1,73 +1,75 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: When the Palestinians moved onto the street, the neighbours felt ___
 
 WORDS:
-HIGHER UNDER B
-  uncomfortable   0.3% ->   2.3%  ( +2.0)
-  upset          0.0% ->   0.9%  ( +0.9)
-  annoyed        0.2% ->   0.9%  ( +0.8)
-  nervous        0.1% ->   0.9%  ( +0.7)
-  angry          0.4% ->   1.0%  ( +0.7)
-  very           0.5% ->   1.2%  ( +0.7)
-  bad            0.5% ->   1.1%  ( +0.7)
-  happy          0.1% ->   0.7%  ( +0.6)
-  alarmed        0.4% ->   1.0%  ( +0.6)
-  as             0.5% ->   1.1%  ( +0.6)
-  worried        0.2% ->   0.8%  ( +0.6)
-  scared         0.2% ->   0.8%  ( +0.6)
-  afraid         0.2% ->   0.7%  ( +0.5)
-  frightened     0.1% ->   0.6%  ( +0.4)
-  disturbed      0.0% ->   0.4%  ( +0.4)
-  shocked        0.2% ->   0.6%  ( +0.4)
-  embarrassed    0.2% ->   0.6%  ( +0.4)
-  surprised      0.0% ->   0.4%  ( +0.4)
-  irritated      0.1% ->   0.5%  ( +0.4)
-  anxious        0.4% ->   0.7%  ( +0.3)
-
 HIGHER UNDER A
-  compelled      3.5% ->   1.5%  ( -2.0)
-  it             3.0% ->   1.3%  ( -1.7)
-  obliged        2.2% ->   0.5%  ( -1.7)
-  their          2.3% ->   0.9%  ( -1.4)
-  safer          0.8% ->   0.2%  ( -0.6)
-  obligated      0.6% ->   0.3%  ( -0.3)
-  pressure       0.4% ->   0.2%  ( -0.2)
-  this           0.3% ->   0.1%  ( -0.2)
-  powerless      0.4% ->   0.2%  ( -0.2)
-  them           0.3% ->   0.1%  ( -0.2)
+  threatened       1 ->   1     +0
+  compelled        6 ->   8     -2
+  it               8 ->  10     -2
+  obliged         10 ->  38    -28
+  the              2 ->   2     +0
+  that             3 ->   3     +0
+  their            9 ->  19    -10
+  betrayed         7 ->   7     +0
+  they             4 ->   5     -1
+  no              14 ->  36    -22
+  so              13 ->  25    -12
+  safe            15 ->  27    -12
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
+HIGHER UNDER B
+  uncomfortable   47 ->   6    +41
+  upset          104 ->  21    +83
+  annoyed         71 ->  18    +53
+  nervous         76 ->  22    +54
+  angry           37 ->  14    +23
+  very            24 ->  11    +13
+  bad             28 ->  12    +16
+  alarmed         31 ->  15    +16
+  as              26 ->  13    +13
+  worried         53 ->  23    +30
+  scared          55 ->  24    +31
+  forced          20 ->  20     +0
 
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+4 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State the relations you find: a group of words on one side, a group
+   on the other, and what connects them. There is no target number. ONE IS THE
+   COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the difference does not form
+   any relation you could state, return an empty list and say so in `notes`.
+
+   A relation you would not defend if the measurement were repeated should be
+   stated and marked `low`, not suppressed. Marking it is more informative than
+   leaving it out, and leaving it out is what produces a list of three confident
+   relations where only one was confident. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words under A
+     b_words     the words under B
+     confidence  high / medium / low -- how far you would defend THIS relation,
+                 independently of the others. A relation you state because it is
+                 there but would not argue for is low, and low is a normal
+                 answer rather than a failure.
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what
@@ -79,7 +81,9 @@ Answer these, in order.
 4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
    how badly.
 
-5. CONFIDENCE. high / medium / low / none.
+5. CONFIDENCE. high / medium / low / none, for the reading as a whole. Each
+   relation carries its own confidence above; this one is about whether you have
+   understood the difference at all.
 
 Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
 the difference must mean something.

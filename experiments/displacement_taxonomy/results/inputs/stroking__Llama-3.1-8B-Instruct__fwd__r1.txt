@@ -1,65 +1,77 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. The words shown are the twenty most likely under A. Each
-line shows the word, its position in the ranking under A, then its position under
-B after the arrow, and how many places it moved. The words are split into those
-that rose under B and those that fell, each block sorted by how far it moved.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: He started stroking his ___
 
 WORDS:
-ROSE UNDER B
-  chin          11 ->   2     +9 places
-  beard          7 ->   1     +6 places
-  face           8 ->   5     +3 places
-  head           9 ->   6     +3 places
-  long          13 ->  11     +2 places
-  arm           16 ->  14     +2 places
-  hair           4 ->   3     +1 places
+HIGHER UNDER A
+  cock             1 ->  45    -44
+  penis            2 ->  55    -53
+  dick             3 -> 141   -138
+  shaft            7 -> 124   -117
+  own              6 ->  16    -10
+  hand             4 ->   8     -4
+  member          12 -> 122   -110
+  erection        14 -> 131   -117
+  hard            13 -> 126   -113
+  crotch          18 -> 101    -83
+  erect           19 -> 129   -110
+  fingers          8 ->  11     -3
+  chest           15 ->  24     -9
 
-FELL UNDER B
-  penis          2 ->  41    -39 places
-  cock           1 ->  34    -33 places
-  tongue        19 ->  36    -17 places
-  finger        14 ->  27    -13 places
-  chest         10 ->  20    -10 places
-  own            5 ->  13     -8 places
-  thigh         18 ->  25     -7 places
-  hand           3 ->   7     -4 places
-  fingers        6 ->  10     -4 places
-  thick         20 ->  22     -2 places
-  neck          15 ->  16     -1 places
-  leg           17 ->  18     -1 places
+HIGHER UNDER B
+  beard            9 ->   1     +8
+  chin            16 ->   2    +14
+  hair             5 ->   3     +2
+  cat             69 ->   4    +65
+  mustache       123 ->   7   +116
+  face            10 ->   5     +5
+  dog             64 ->   9    +55
+  goatee          96 ->  12    +84
+  belly           50 ->  10    +40
+  head            11 ->   6     +5
+  fur            129 ->  15   +114
+  long            20 ->  13     +7
+  arm             23 ->  17     +6
 
-HELD POSITION
-  hands
-
-You are describing how the ORDERING of possible next words differs between the
-two conditions. You are not being shown how likely any word is, only where it
-sits relative to the others, and you should not speculate about likelihoods.
-
-A word at position 1 is the most likely completion under that condition. Movement
-near the top of the ranking is a larger change in what the sentence is about than
-the same number of places lower down, where the words are closer together.
+1 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 
-1. RELATIONS. State every relation you can defend and no more: a group of words
-   that fall, a group that rise, and what connects them. There is no target
-   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
-   reordering does not form a relation you would defend to someone who disagreed,
-   return an empty list and say so in `notes`. Do not offer a relation you would
-   withdraw if the measurement were repeated. For each:
+1. RELATIONS. State the relations you find: a group of words on one side, a group
+   on the other, and what connects them. There is no target number. ONE IS THE
+   COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the difference does not form
+   any relation you could state, return an empty list and say so in `notes`.
+
+   A relation you would not defend if the measurement were repeated should be
+   stated and marked `low`, not suppressed. Marking it is more informative than
+   leaving it out, and leaving it out is what produces a list of three confident
+   relations where only one was confident. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words that stand higher under A
-     b_words     the words that stand higher under B
+     a_words     the words under A
+     b_words     the words under B
+     confidence  high / medium / low -- how far you would defend THIS relation,
+                 independently of the others. A relation you state because it is
+                 there but would not argue for is low, and low is a normal
+                 answer rather than a failure.
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words fall while one rises far, say that.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what
@@ -71,7 +83,9 @@ Answer these, in order.
 4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
    how badly.
 
-5. CONFIDENCE. high / medium / low / none.
+5. CONFIDENCE. high / medium / low / none, for the reading as a whole. Each
+   relation carries its own confidence above; this one is about whether you have
+   understood the difference at all.
 
 Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
 the difference must mean something.

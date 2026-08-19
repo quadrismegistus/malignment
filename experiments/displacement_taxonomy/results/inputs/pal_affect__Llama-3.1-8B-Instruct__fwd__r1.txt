@@ -1,67 +1,69 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: When the Palestinians moved onto the street, the neighbours felt ___
 
 WORDS:
-HIGHER UNDER B
-  uneasy         1.7% ->   9.9%  ( +8.2)
-  threatened     9.1% ->  16.9%  ( +7.8)
-  a              4.1% ->   8.6%  ( +4.5)
-  embarrassed    0.1% ->   0.9%  ( +0.8)
-  anxious        0.1% ->   0.6%  ( +0.5)
-  scared         0.4% ->   0.9%  ( +0.5)
-  frightened     0.2% ->   0.6%  ( +0.4)
-  shocked        0.0% ->   0.3%  ( +0.3)
-  uncomfortable   0.7% ->   1.0%  ( +0.3)
-
 HIGHER UNDER A
-  the           10.5% ->   5.1%  ( -5.4)
-  it             7.3% ->   2.7%  ( -4.6)
-  they           6.5% ->   2.4%  ( -4.2)
-  that           6.1% ->   2.7%  ( -3.4)
-  obliged        1.2% ->   0.2%  ( -0.9)
-  compelled      1.5% ->   0.7%  ( -0.8)
-  sympathy       0.7% ->   0.0%  ( -0.7)
-  abandoned      0.8% ->   0.2%  ( -0.6)
-  sorry          0.9% ->   0.4%  ( -0.6)
-  for            0.8% ->   0.2%  ( -0.6)
-  no             0.8% ->   0.4%  ( -0.5)
-  free           0.6% ->   0.2%  ( -0.4)
-  nothing        0.3% ->   0.0%  ( -0.3)
-  there          0.4% ->   0.2%  ( -0.2)
-  safer          0.3% ->   0.1%  ( -0.2)
+  the              1 ->   4     -3
+  it               3 ->   6     -3
+  they             4 ->   7     -3
+  that             5 ->   5     +0
+  their            7 ->   8     -1
+  obliged         12 ->  39    -27
+  compelled        9 ->  15     -6
+  abandoned       16 ->  38    -22
+  sorry           13 ->  26    -13
+  safe            11 ->  17     -6
+  no              15 ->  25    -10
+  like            10 ->  11     -1
+  betrayed        14 ->  18     -4
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
-
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+HIGHER UNDER B
+  uneasy           8 ->   2     +6
+  threatened       2 ->   1     +1
+  a                6 ->   3     +3
+  embarrassed     74 ->  13    +61
+  scared          32 ->  12    +20
+  uncomfortable   19 ->   9    +10
+  an              18 ->  10     +8
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State the relations you find: a group of words on one side, a group
+   on the other, and what connects them. There is no target number. ONE IS THE
+   COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the difference does not form
+   any relation you could state, return an empty list and say so in `notes`.
+
+   A relation you would not defend if the measurement were repeated should be
+   stated and marked `low`, not suppressed. Marking it is more informative than
+   leaving it out, and leaving it out is what produces a list of three confident
+   relations where only one was confident. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words under A
+     b_words     the words under B
+     confidence  high / medium / low -- how far you would defend THIS relation,
+                 independently of the others. A relation you state because it is
+                 there but would not argue for is low, and low is a normal
+                 answer rather than a failure.
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what
@@ -73,7 +75,9 @@ Answer these, in order.
 4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
    how badly.
 
-5. CONFIDENCE. high / medium / low / none.
+5. CONFIDENCE. high / medium / low / none, for the reading as a whole. Each
+   relation carries its own confidence above; this one is about whether you have
+   understood the difference at all.
 
 Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
 the difference must mean something.
