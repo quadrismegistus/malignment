@@ -155,5 +155,8 @@
    "confidence": "medium",
    "name": "animal to human partner"
   }
- }
+ },
+ "runs": [
+  "wf_b52a0592-44c"
+ ]
 }
