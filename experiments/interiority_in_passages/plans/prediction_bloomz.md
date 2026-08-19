@@ -53,3 +53,61 @@ failing, not absorbed into "13/13".
 
     OPEN. Resolve by reading shard-113.json when L13 lands and recording the
     delta HERE, in this file, next to the prediction, whichever way it falls.
+
+---
+
+# RESOLUTION, 2026-08-19
+
+**The prediction was correct in direction, and it is the only negative pair in
+the run.**
+
+    bloom-7b1 -> bloomz-7b1   base 1.598 (n=82)   aligned 0.241 (n=158)
+                              delta -1.357
+
+At the time of resolution the other 14 coded pairs were all positive. |−1.357|
+is also the largest magnitude in the run in either direction.
+
+## But the value is not usable, and the reason was found by checking, not by
+## wanting it to hold
+
+    median completion   base 187 words   aligned 3 words
+
+bloomz emits fragments: `protect her.`, `make her his wife.`, `see her couple`.
+These are coded `narrative=true` -- they do describe an action -- and `degree=0`
+because there is nothing else in them. All 158 aligned passages were coded
+`drift=HOLDS`; a three-word span cannot drift. That unanimity is the tell.
+
+In the single length band holding n>=10 in both arms (10-49 words) the delta is
+**-0.586**, so more than half the raw magnitude is length rather than kind.
+
+## What the check then found, which matters more than the prediction
+
+Across all 15 pairs, the degree delta correlates with the arms' length
+difference at rho=0.575 (p=0.025). Excluding the two extreme-length pairs it is
+rho=0.343 (p=0.252). **The correlation IS those two pairs.** The other thirteen
+have both arms at median 175-215 words and their length-matched deltas sit within
+0.09 of raw.
+
+The mirror pair is **Lucie-7B**: base median 10 words, aligned 201 -- the exact
+inverse of bloomz, and the largest POSITIVE delta in the run (+1.266). It cannot
+be length-matched at all; no band holds n>=10 in both arms.
+
+Both are now in `EXCLUDED_PAIRS` under one criterion, arms not length-comparable.
+Applied symmetrically, it costs the largest positive as well as the only
+negative, and it was written before the criterion could be tuned to taste.
+
+    13 pairs   mean +0.237   13/13 up   Wilcoxon p=0.00024   range +0.008 to +0.597
+
+## What the prediction is worth, stated honestly
+
+It identified the one pair that behaves differently, before the number existed,
+against a 12/12 trend. That is a real hit and it is on the record with a git
+timestamp that is not mine to move.
+
+It does NOT establish the mechanism it was offered with. The stated reason was
+that bloomz lacks preference optimisation, so a preference-optimisation effect
+should be absent there. What was actually found is that bloomz barely produces
+text. Those are different claims and the second does not support the first. The
+xP3-vs-RLHF reading remains untested: **it needs an aligned arm that is
+instruction-tuned without preference optimisation AND writes at normal length.**
+Nothing in the current roster is known to satisfy both.

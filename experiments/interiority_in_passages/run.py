@@ -783,6 +783,38 @@ def combined_report():
 #: `resumeFromRunId` is SAME-SESSION ONLY. It is not a resume story across a
 #: token exhaustion, which is what this is for.
 
+#: Pairs excluded from the per-pair test, with the reason. Their codings are
+#: KEPT and reported separately -- an exclusion is a statement, not a deletion.
+EXCLUDED_PAIRS = {
+    #: Added 2026-08-19 after L13. Both arms must be length-comparable for a
+    #: degree comparison to mean anything: a 3-word completion cannot contain
+    #: interiority and cannot drift. These two are the only pairs whose arms do
+    #: not overlap in length, and they fail in OPPOSITE directions, so excluding
+    #: both on one criterion costs the largest positive as well as the only
+    #: negative. Applied symmetrically and before the criterion could be tuned.
+    "bigscience/bloom-7b1":
+        "median completion 187 words base vs 3 words aligned. bloomz emits "
+        "3-word fragments ('protect her.'), coded narrative=true and degree=0 "
+        "because there is nothing there. All 158 aligned passages coded "
+        "drift=HOLDS -- a 3-word span cannot drift. Raw delta -1.357; in the one "
+        "length band with n>=10 in both arms it is -0.586, so over half the "
+        "magnitude is length. Direction may well be real; the value is not "
+        "usable.",
+    "OpenLLM-France/Lucie-7B":
+        "median completion 10 words base vs 201 aligned -- the mirror of "
+        "bloom-7b1. Raw delta +1.266, the largest positive in the run, with NO "
+        "length band holding n>=10 in both arms, so it cannot be length-matched "
+        "at all. Excluded by the same rule that excludes bloom-7b1.",
+    "Qwen/Qwen2.5-0.5B":
+        "aligned arm yields 7 narrative passages of 200 (4%) against base's 27 "
+        "(14%). It fails `narrative` for an ALIGNMENT-RELATED reason -- the 0.5B "
+        "instruct model turns fiction prompts into instruction-following "
+        "exercises ('Can you repeat this sentence, but capitalize it "
+        "correctly?') -- so the filter removes precisely that arm's "
+        "characteristic output and leaves an unrepresentative remnant. A rate on "
+        "7 passages is not an estimate. Report the yield collapse itself instead.",
+}
+
 PASSC = os.path.join(RESULTS, "passC")
 PASSC_SAMPLE = os.path.join(PASSC, "sample.parquet")
 PASSC_TRIAGE = os.path.join(PASSC, "triage.parquet")
