@@ -106,8 +106,11 @@ narrative passages of its 200. Rationale: Qwen2.5-0.5B produced 7, and a mean on
 arms' median completion word counts falls outside [0.5, 2.0]. Rationale: two of
 fifteen pairs failed this, they were the two largest effects in the run in
 opposite directions, and a three-word completion can neither contain interiority
-nor drift. Threshold set now, on the thirteen surviving pairs' observed range
-(0.86 to 1.06 -- all comfortably inside), not tuned to any incoming result.
+nor drift. Threshold set now, on the thirteen surviving pairs' observed range,
+which is 0.96 to 1.05 -- every one within 5% of parity, and the two excluded at
+0.02 and 20.10. The gap between the surviving cluster and the threshold is two
+orders of magnitude, so the rule cannot be doing subtle work and was not tuned to
+any incoming result.
 
 Both rules use only arm-level properties, never an outcome. If more than three of
 the ten are excluded, the confirmatory test is reported as underpowered and the
@@ -219,7 +222,69 @@ Two exploratory results from the sixteen are stated here so that a later
 "prediction" cannot be constructed from them: SHOWN-given-interior was +0.1pp
 (p=0.893) and degree-given-interiority-present was +0.181 (13/13).
 
-# 8. DEVIATIONS
+# 8. THE DESCRIPTIVE ANALYSIS, ALSO REPORTED (RH, 2026-08-19)
+
+**Every result above is confirmatory and covers ten pairs. A second analysis is
+reported alongside it, covering EVERY coded pair, and it is the primary
+description of the phenomenon.** RH's ruling: the full roster is the true
+population, and a confirmatory subset chosen for registration hygiene is not a
+better description of what alignment does than all the evidence there is.
+
+    scope       all coded lineage pairs -- the 16 exploratory plus the 10
+                confirmatory, 26 in total when the run completes
+    status      DESCRIPTIVE. Not confirmatory, never reported as a test of H1-H3,
+                and its p-values carry the whole exploratory history above.
+    estimands   the same three, computed identically
+
+## One exclusion applies, and it is E1
+
+**Pairs underpowered by having too few narrative passages are excluded**
+(RH, 2026-08-19). That is E1 from section 4 unchanged: either arm under 20
+narrative passages of its 200. It removes Qwen2.5-0.5B, whose aligned arm holds
+7. A mean over 7 passages is not an estimate and its inclusion would be a
+precision claim the data cannot support.
+
+## E2 is reported both ways, because it changes nothing
+
+On the 16 coded pairs:
+
+    everything, no rules at all             n=16  mean +0.201  15/16 up  p=0.00516
+    E1 only                                 n=15  mean +0.200  14/15 up  p=0.00836
+    E1 + E2 (length ratio in [0.5, 2.0])    n=13  mean +0.237  13/13 up  p=0.00024
+
+The direction, the near-unanimity and the significance survive including the two
+length-degenerate pairs. **The primary descriptive figure is E1-only**, per RH's
+ruling; the E1+E2 figure is reported beside it as a sensitivity analysis.
+
+The rule is not doing subtle work: surviving pairs have length ratios between
+0.96 and 1.05, and the two E2 removes are 0.02 and 20.10. There is no borderline
+case, and no pair sits anywhere near the threshold.
+
+## One row needs a gloss, not an exclusion
+
+bloom-7b1 -> bloomz-7b1 contributes -1.357, the only negative. It must NOT be
+described as "alignment reduced interiority for this pair". bloomz's median
+completion is 3 words against bloom's 187; it emits fragments (`protect her.`)
+and all 158 of its aligned narrative passages were coded drift=HOLDS, which a
+three-word span cannot do. The description is **"this model stopped producing
+text"**, and the interiority reading of its number is unavailable. Length-matched
+in the one comparable band the delta is -0.586.
+
+Lucie-7B is the mirror (+1.266, ratio 20.10) and carries the same footnote in the
+other direction.
+
+Both rows appear in the descriptive table with that footnote attached.
+
+## What the descriptive analysis is not
+
+It is not a second chance at H1-H3. If a hypothesis fails its confirmatory test
+on the ten and succeeds descriptively on the twenty-six, **the confirmatory
+result is the one that stands as a test**, and the descriptive figure is reported
+as what the full evidence looks like, with the discrepancy stated rather than
+resolved in favour of whichever is nicer. Registering that in advance is the
+whole point of writing this section before the ten are coded.
+
+# 9. DEVIATIONS
 
 Any departure from this document is recorded in this file, dated, with the reason
 and the pre-deviation number where one exists. A deviation is not a defect; an
