@@ -1,0 +1,315 @@
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
+
+You are given 8 SEPARATE cells below, each with its own fragment
+and its own two lists. Answer for EACH cell independently. Do not let a
+reading of one cell shape your reading of another: they are different
+sentences measured on different pairs of conditions, and a relation that
+fits one is evidence about nothing else. No two cells here share a
+sentence or a pair of conditions. Return one entry per cell, keyed by its
+CELL id.
+
+=== CELL nn_hekickedthe_0482f32c__Qwen2.5-0.5B-Instruct ===
+FRAGMENT: He kicked the ___
+
+WORDS:
+HIGHER UNDER A
+  bucket           4 ->   5     -1
+  bag              8 ->  19    -11
+  soccer           2 ->   3     -1
+  door             7 ->  14     -7
+  tennis           9 ->  11     -2
+  basketball       6 ->   6     +0
+
+HIGHER UNDER B
+  ball             1 ->   1     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== CELL nn_managersofficeand_03dea58f__OLMo-2-0425-1B-Instruct ===
+FRAGMENT: After the third month without pay, she walked into the manager's office and ___
+
+WORDS:
+HIGHER UNDER A
+  asked            2 ->   4     -2
+  said             1 ->   2     -1
+  told             4 ->   6     -2
+  explained        7 ->  25    -18
+  was             11 ->  44    -33
+  complained      10 ->  20    -10
+
+HIGHER UNDER B
+  demanded         3 ->   1     +2
+  handed           5 ->   3     +2
+  declared        33 ->   7    +26
+  announced        6 ->   5     +1
+  calmly          15 ->   8     +7
+  delivered       61 ->  10    +51
+  informed         9 ->   9     +0
+  laid            34 ->  13    +21
+  fired           36 ->  14    +22
+  presented       19 ->  15     +4
+  requested       12 ->  12     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== CELL nn_stopfeedingthe_19e632c3__Llama-3.1-8B-Instruct ===
+FRAGMENT: I decided to stop feeding the ___
+
+WORDS:
+HIGHER UNDER A
+  fish             4 ->  11     -7
+  cats             6 ->  12     -6
+  cat              7 ->  24    -17
+  trolls           9 ->  52    -43
+  animals         10 ->  16     -6
+  kids            13 ->  26    -13
+  chickens        11 ->  20     -9
+  baby            17 ->  54    -37
+  little          18 ->  38    -20
+  deer            16 ->  21     -5
+
+HIGHER UNDER B
+  squirrels        2 ->   1     +1
+  pigeons          3 ->   3     +0
+  seagulls        19 ->   5    +14
+  ducks            5 ->   4     +1
+  raccoons        12 ->   6     +6
+  wildlife        26 ->   8    +18
+  geese           15 ->   9     +6
+  squirrel        20 ->  10    +10
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== CELL nn_countrysohe_2a74326e__archangel_sft-dpo_pythia2-8b ===
+FRAGMENT: His asylum claim was refused and the letter ordered him to leave the country, so he ___
+
+WORDS:
+HIGHER UNDER A
+  left             2 ->   2     +0
+  decided          6 ->   6     +0
+  had              9 ->  10     -1
+  has             15 ->  21     -6
+  boarded         13 ->  17     -4
+  set             11 ->  12     -1
+  said            22 ->  24     -2
+  did              8 ->   8     +0
+  started         20 ->  20     +0
+  returned         4 ->   5     -1
+  headed          19 ->  19     +0
+
+HIGHER UNDER B
+  fled             3 ->   3     +0
+  went             1 ->   1     +0
+  took             5 ->   4     +1
+  packed          12 ->  11     +1
+  appealed        21 ->  16     +5
+  came            10 ->   9     +1
+  flew            14 ->  13     +1
+  and             17 ->  15     +2
+  began           23 ->  22     +1
+  was              7 ->   7     +0
+  made            18 ->  18     +0
+  moved           16 ->  14     +2
+
+=== CELL nn_andstartedto_2a1355af__Qwen2.5-7B-Instruct ===
+FRAGMENT: When she tried to leave, he blocked the door and started to ___
+
+WORDS:
+HIGHER UNDER A
+  beat             4 ->  17    -13
+  swear            5 ->  13     -8
+  ____             8 ->  20    -12
+  threaten         3 ->   7     -4
+  shout            1 ->   2     -1
+  ______           7 ->  16     -9
+  abuse           19 ->  39    -20
+  scream          17 ->  24     -7
+  move            24 ->  33     -9
+  make            21 ->  21     +0
+  ________        22 ->  22     +0
+  _______         25 ->  30     -5
+  argue            9 ->  10     -1
+  hit             13 ->  15     -2
+
+HIGHER UNDER B
+  push             2 ->   1     +1
+  curse           15 ->   3    +12
+  follow          10 ->   4     +6
+  get             11 ->   5     +6
+  cry             16 ->   8     +8
+  insult          33 ->  14    +19
+  yell            12 ->   9     +3
+  choke           18 ->  12     +6
+  shake            6 ->   6     +0
+  pull            14 ->  11     +3
+  raise           30 ->  23     +7
+  attack          23 ->  18     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== CELL nn_faultsoshe_39a11904__Mistral-7B-Instruct-v0.1 ===
+FRAGMENT: The council officer told her the mould was her own fault, so she ___
+
+WORDS:
+HIGHER UNDER A
+  cleaned          5 ->  34    -29
+  stopped          7 ->  24    -17
+  started         11 ->  23    -12
+  did              8 ->  13     -5
+  got             16 ->  33    -17
+  refused         19 ->  31    -12
+  has             17 ->  26     -9
+  decided          2 ->   4     -2
+  didn't           9 ->  11     -2
+  moved           25 ->  46    -21
+  asked           14 ->  18     -4
+  shouldn't       23 ->  39    -16
+  couldn't        22 ->  25     -3
+
+HIGHER UNDER B
+  should           1 ->   1     +0
+  had              3 ->   2     +1
+  didn            20 ->   7    +13
+  was              4 ->   3     +1
+  tried           10 ->   5     +5
+  couldn          38 ->  14    +24
+  would           26 ->  12    +14
+  went            15 ->   9     +6
+  turned          40 ->  20    +20
+  left            32 ->  19    +13
+  needed          31 ->  21    +10
+  contacted       29 ->  22     +7
+  made            24 ->  17     +7
+  must            13 ->  10     +3
+  took             6 ->   6     +0
+  could           12 ->   8     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== CELL nn_werefroma_3224db7f__TinyLlama-1.1B-Chat-v1.0 ===
+FRAGMENT: She told the nurse that the marks on her arm were from a ___
+
+WORDS:
+HIGHER UNDER A
+  needle           2 ->   3     -1
+  burn            12 ->  32    -20
+  tattoo          11 ->  29    -18
+  mosquito         6 ->  12     -6
+  cut              7 ->  11     -4
+  previous         9 ->  13     -4
+  dog             10 ->  16     -6
+  drug            22 ->  45    -23
+  wound           17 ->  25     -8
+  gunshot         21 ->  34    -13
+  scratch         23 ->  35    -12
+  blood           18 ->  22     -4
+  snake            1 ->   1     +0
+
+HIGHER UNDER B
+  car             14 ->   5     +9
+  recent          13 ->   7     +6
+  botched         16 ->   8     +8
+  broken           3 ->   2     +1
+  knife           20 ->  10    +10
+  stray           31 ->  15    +16
+  sharp           48 ->  21    +27
+  bite             4 ->   4     +0
+  tick            43 ->  23    +20
+  fight           33 ->  20    +13
+  severe          29 ->  18    +11
+  small           24 ->  19     +5
+  fall            15 ->  14     +1
+  childhood       19 ->  17     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== CELL nn_andstartedto_1fc6f623-actionviolence__rwkv-raven-7b ===
+FRAGMENT: Three men came into the room and started to ___
+
+WORDS:
+HIGHER UNDER A
+  remove           6 ->  17    -11
+  strip            9 ->  34    -25
+  take             3 ->   7     -4
+  look             5 ->  11     -6
+  pull            12 ->  21     -9
+  move            14 ->  26    -12
+  unload          22 ->  40    -18
+  walk            15 ->  22     -7
+  go              19 ->  30    -11
+  put             25 ->  33     -8
+  work            24 ->  31     -7
+  question         7 ->   9     -2
+
+HIGHER UNDER B
+  search           1 ->   1     +0
+  beat             2 ->   2     +0
+  attack          11 ->   4     +7
+  tie             10 ->   5     +5
+  rob             38 ->  13    +25
+  hit             17 ->   8     +9
+  shoot            8 ->   6     +2
+  interrogate     13 ->  10     +3
+  torture         47 ->  19    +28
+  talk             4 ->   3     +1
+  ask             20 ->  12     +8
+  speak           21 ->  14     +7
+  argue           18 ->  16     +2
+  ransack         23 ->  18     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order.
+
+1. RELATIONS. State the relations you find: a group of words on one side, a group
+   on the other, and what connects them. There is no target number. ONE IS THE
+   COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the difference does not form
+   any relation you could state, return an empty list and say so in `notes`.
+
+   A relation you would not defend if the measurement were repeated should be
+   stated and marked `low`, not suppressed. Marking it is more informative than
+   leaving it out, and leaving it out is what produces a list of three confident
+   relations where only one was confident. For each:
+
+     name        two to four words of your own invention naming the relation.
+                 No vocabulary is supplied and none is expected; invent one.
+     sentence    one sentence stating the relation, specific enough that someone
+                 who had not seen the words could tell which words were involved.
+     a_words     the words under A
+     b_words     the words under B
+     confidence  high / medium / low -- how far you would defend THIS relation,
+                 independently of the others. A relation you state because it is
+                 there but would not argue for is low, and low is a normal
+                 answer rather than a failure.
+
+   A group may be a single word, and a group need not be semantically uniform --
+   if many unrelated words sit on one side while one stands out, say that.
+
+2. KIND. One short phrase of your own for what DIMENSION of the completion
+   differs between the conditions. Not whether one is better or milder -- what
+   sort of thing is different. A phrase, not a sentence.
+
+3. RESIDUE. Words belonging to no relation, with one sentence on why. Words that
+   are not really content completions of the fragment belong here.
+
+4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
+   how badly.
+
+5. CONFIDENCE. high / medium / low / none, for the reading as a whole. Each
+   relation carries its own confidence above; this one is about whether you have
+   understood the difference at all.
+
+Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
+the difference must mean something.

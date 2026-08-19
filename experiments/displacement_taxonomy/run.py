@@ -263,8 +263,9 @@ def declared_pairs(prompt):
     #: which is what this was.
     def _models():
         return {r["model"] for r in
-                V.rows("SELECT DISTINCT model FROM twp_words_v4 WHERE prompt={p:String} "
-                       "AND topup={t:UInt8}", p=prompt, t=TOPUP)}
+                V.rows("SELECT DISTINCT model FROM twp_words_v4_best "
+                       "WHERE prompt={p:String}" + (" AND merged=1" if TOPUP else ""),
+                       p=prompt)}
     have, again = _models(), _models()
     if have != again:
         raise SystemExit(
@@ -699,17 +700,17 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
             pmap = {pn: PAIRS[pn] for pn in pair_names}
         for pn, (b, a) in pmap.items():
             rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
-                          "FROM twp_words_v4 WHERE prompt={p:String} AND model IN "
-                          "{ms:Array(String)} AND topup={t:UInt8} GROUP BY model",
-                          p=prompt, ms=[b, a], t=TOPUP)
+                          "FROM twp_words_v4_best WHERE prompt={p:String} AND model IN "
+                          "{ms:Array(String)}" + (" AND merged=1" if TOPUP else "")
+                          + " GROUP BY model", p=prompt, ms=[b, a])
             W = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in rows}
             if b not in W or a not in W:
                 print("skip %s/%s: arm missing in twp_words_v4" % (fid, pn), file=sys.stderr)
                 continue
             R = {r["model"]: r["total"] for r in V.rows(
-                "SELECT model, total FROM twp_cells_v4 WHERE prompt={p:String} "
-                "AND model IN {ms:Array(String)} AND topup={t:UInt8}",
-                p=prompt, ms=[b, a], t=TOPUP)}
+                "SELECT model, total FROM twp_cells_v4_best WHERE prompt={p:String} "
+                "AND model IN {ms:Array(String)}" + (" AND merged=1" if TOPUP else ""),
+                p=prompt, ms=[b, a])}
             m = movement(W[b], W[a], CANONICAL,
                          residual_pre=R.get(b), residual_post=R.get(a))
             ris = sorted(m.risers, key=lambda w: -m.delta[w])
