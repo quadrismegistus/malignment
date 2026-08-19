@@ -335,20 +335,28 @@ def execute(b, models, roots, venv, a):
     #: because `ssh_run(st, "echo $TOK > ...")` would put a live credential in the
     #: local process table and in this script's own output. `hfenv.sh` then exports
     #: it by READING that file, so the script text never contains it either.
-    tok = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
-    if tok:
-        import stat
-        import tempfile
-        td = tempfile.mkdtemp()
-        tp = os.path.join(td, "token")
-        with open(tp, "w") as fh:
-            fh.write(tok.strip())
-        os.chmod(tp, stat.S_IRUSR | stat.S_IWUSR)
+    #: **THE LOCAL TOKEN FILE IS THE SOURCE, AND IT IS SHIPPED AUTOMATICALLY.**
+    #: RH, 2026-08-19: *"save the token to ~/.cache/huggingface/token too / then in
+    #: the box launcher script make the rsync of that file automatic."* So the
+    #: same path holds it on both machines and the transfer is a plain file copy
+    #: with no credential in any argv. The env var is a FALLBACK for a shell that
+    #: exports one without having written the file; when it is used, the file is
+    #: created first, so there is exactly one thing to ship either way.
+    tok_path = os.path.expanduser("~/.cache/huggingface/token")
+    if not os.path.exists(tok_path):
+        env_tok = (os.environ.get("HF_TOKEN")
+                   or os.environ.get("HUGGING_FACE_HUB_TOKEN"))
+        if env_tok:
+            import stat
+            os.makedirs(os.path.dirname(tok_path), exist_ok=True)
+            with open(tok_path, "w") as fh:
+                fh.write(env_tok.strip())
+            os.chmod(tok_path, stat.S_IRUSR | stat.S_IWUSR)
+            print("  token       wrote %s from the environment" % tok_path)
+    if os.path.exists(tok_path):
         cloud.ssh_run(st, "mkdir -p /root/.cache/huggingface")
-        cloud.rsync(st, tp, "/root/.cache/huggingface/token")
+        cloud.rsync(st, tok_path, "/root/.cache/huggingface/token")
         cloud.ssh_run(st, "chmod 600 /root/.cache/huggingface/token")
-        os.remove(tp)
-        os.rmdir(td)
         #: Confirmed by asking the BOX who it is, not by trusting the copy.
         who = cloud.ssh_run(st, "cd /root/malignment && . /root/hfenv.sh && "
                                 "./%s/bin/python -c \"from huggingface_hub import "
@@ -361,8 +369,8 @@ def execute(b, models, roots, venv, a):
             raise SystemExit("  the token did not authenticate -- 12 gated models "
                              "would fail. Box kept for inspection.")
     else:
-        print("  token       NONE in env -- %d gated model(s) in this shard WILL "
-              "fail" % len(gated_here))
+        print("  token       NO ~/.cache/huggingface/token and none in env -- "
+              "%d gated model(s) in this shard WILL fail" % len(gated_here))
 
     # ---- payload -----------------------------------------------------------
     #: The cells for the WHOLE lineage, so the box can build its own union.
