@@ -88,17 +88,32 @@ def prompts():
     return out
 
 
-def load(prefix):
+def load(prefix, mode="batched"):
+    """mode: 'batched' | 'unbatched' | 'both'.
+
+    The unbatched codings ran one cell per agent and average 2.6-2.8 defended
+    relations per cell against the batched 1.62, so they are the density
+    comparison: whether more relations per cell yields richer GROUPS or merely
+    more singletons.
+    """
     st, rels, prompt = R._stash(), [], None
     for k in st.keys():
         m = (st[k].get("meta") or {})
-        if not (m.get("batch") and m["frame_prompt"].startswith(prefix)):
+        if not m.get("frame_prompt"):
+            continue
+        b = bool(m.get("batch"))
+        if mode == "batched" and not b:
+            continue
+        if mode == "unbatched" and b:
+            continue
+        if not m["frame_prompt"].startswith(prefix):
             continue
         prompt = m["frame_prompt"]
         for x in st[k]["result"]["relations"]:
             if x.get("a_words") and x.get("b_words"):
                 rels.append({"pair": m["pair"], "name": x["name"],
                              "conf": x.get("confidence"),
+                             "batch": bool(m.get("batch")),
                              "A": {_norm(w) for w in x["a_words"]},
                              "B": {_norm(w) for w in x["b_words"]}})
     if prompt is None:
