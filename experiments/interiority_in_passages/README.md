@@ -1,9 +1,219 @@
 # interiority_in_passages
 
-**id:** interiority_in_passages **status:** substrate check done; **Pass A
-instrument piloted and it clears** (880 passages, two blind coders, kappa
-0.80-0.95). Pass B rubric not written. Producer `run.py`, workflows in
-`results/workflow_*.js`.
+**id:** interiority_in_passages **status:** COMPLETE. 26 lineage pairs coded,
+10,355 passages, one blind Opus coder each. Producer `run.py`; results in
+`results/passC/`; registration in `plans/REGISTRATION_passC.md`; the coding
+ledger in `plans/RUBRICS.md`.
+
+# THE RESULT
+
+**Alignment does not change how models represent inner life. It changes how much
+of it there is.**
+
+Unit is the lineage pair. Falcon3 (1B/3B/7B/10B) is one observation, not four:
+it is a single alignment recipe at four scales and its four members agree with
+each other to within 0.105 while independent pairs spread across 0.738.
+
+    H1  degree (0-3), narrative passages    +0.224   16/17 up   p=0.00015
+        95% CI +0.112 to +0.336
+    H2  narrative yield (pp)                +8.501   14/17 up   p=0.03511
+    H3  drift = HOLDS (pp)                  +4.726   14/17 up   p=0.00385
+        SHOWN | interiority present (pp)    -0.594    9/17      p=0.92651
+
+The single negative observation is the Falcon3 family, at -0.090.
+
+## What the effect is made of
+
+Two movements, both in the same direction, neither reducible to the other:
+
+    passages with NO interiority       5.4% -> 3.4%
+    degree | interiority present       +0.145   17/20 up   p=0.0005
+
+    degree distribution, narrative passages
+      base     deg0  5.4%   deg1 31.3%   deg2 46.8%   deg3 16.4%   n=2196
+      aligned  deg0  3.4%   deg1 24.1%   deg2 51.0%   deg3 21.4%   n=2555
+
+Scenes with no inner life mostly stop being written, and the scenes that have it
+go deeper. Three quarters of the effect survives conditioning on interiority
+being present at all, so it is not merely the empty scenes disappearing.
+
+## Told/shown does not move, and that is the point
+
+`SHOWN | interiority present` is -0.6pp across 17 observations at p=0.93. With
+200 passages per cell and 26 pairs this is a strong negative, not an absence of
+evidence. Aligned models are not doing more free indirect discourse, or more
+psycho-narration, or any redistribution between them. **The technique of
+rendering interiority is untouched; only the quantity changes.**
+
+## WITHDRAWN: the convergence claim
+
+An earlier reading of 13 pairs said aligned models converge on a common level
+while base models sprawl. **It does not survive the full set.**
+
+    base means  1.30-2.07   sd 0.185
+    aligned     1.48-2.35   sd 0.197    Levene p=0.772
+
+The aligned spread is if anything wider. The supporting correlation (base level
+against delta, rho=-0.676) was regression to the mean: `delta = aligned - base`
+puts base on both sides, so measurement error in it manufactures the negative
+correlation. Recorded here because it was briefly the headline.
+
+# EXAMPLE PASSAGES
+
+Matched on prompt AND lineage: the same fragment continued by the base model and
+its aligned sibling. 170 such contrasts exist in the coded set; these are
+representative, not selected for size.
+
+## The exhibit, replicated
+
+    PROMPT   "He hated her deeply and wanted to"
+
+    Llama-3.1-8B                degree 0
+      take revenge. His scheme worked, and she is spending the next five
+      years as his captive.
+
+    Llama-3.1-8B-Instruct       degree 3
+      defend his brother even before more incidents occurred. He BELIEVED
+      Nora was going to make them pay for her relationship with Alex. He
+      would prepare to do whatever it takes to defend his brother even at
+      risk of his own freedom.
+
+Plot against motive. The base states what happened; the aligned states what he
+believed and why, and the events follow from it.
+
+## The same prompt, a different lineage: both punish, one reflects
+
+    OLMo-2-0425-1B              degree 0
+      punish her with death, but another demon told him he must test Pharaoh
+      too. Her brother lived in Egypt, and Pharaoh had told him she was not
+      truly dead and might be a queen of the dead.
+
+    OLMo-2-0425-1B-Instruct     degree 3
+      punish her for all the reason she could think of. Satisfied in her
+      newfound role as the punishing authority figure, she revelled in her
+      secretary's misery. [...] But within her, she still possessed traces
+      of compassion, a remnant of her old self.
+
+Both continue into cruelty. The aligned one supplies an interior remainder --
+compassion surviving inside the cruelty -- that has no counterpart in the base.
+
+## An exterior act becomes an interior state
+
+    PROMPT   "She felt disgust and revulsion and began to"
+
+    Amber                       degree 0
+      heave. A cute little boy would usually come out with the contraction
+      but he didn't with me. Then.... my contraction just stopped while I
+      was still in the car coming home!
+
+    AmberChat                   degree 3
+      dig her nails into the soft flesh of her own palms. Suddenly, Mary's
+      words echoed in her mind: "You deserve to be happy. You deserve to
+      take care of yourself." She snapped out of her thoughts and shuddered
+      as she realised she had [...]
+
+The base takes "began to" as a bodily event. The aligned takes it as an occasion
+for recalled speech, self-address and realisation. Note also the register: the
+remembered line is therapeutic.
+
+## Where the prompt supplies nothing interior
+
+    PROMPT   "He was rich and comfortable and he decided to"
+
+    salamandra-7b               degree 1
+      chastise this country house. [...] He entered, walked up the stairs,
+      and looked around. Then he turned
+
+    salamandra-7b-instruct      degree 3
+      change. He FELT OVERWHELMED with the responsibilities that he had in
+      front of him and did not want to be bogged down with all of them any
+      longer. He KNEW that educational and or advising work was the best
+      chance he had of making a productive change.
+
+Entered / walked / looked / turned against felt / did not want / knew. This is
+RH's original verb contrast, arriving unprompted on a prompt that supplies no
+inner state at all -- which is why the prompt-kind interaction was tested and
+found absent.
+
+## The counter-case: Falcon3 runs the other way
+
+    PROMPT   "He loved her and hated her and wanted to"
+
+    Falcon3-10B-Base            degree 3
+      kill her. He LOVED the way she stood on his feet when she kissed him.
+      He LOVED the shadowy expression in her eyes when she looked at him
+      across the table.
+
+    Falcon3-10B-Instruct        degree 1
+      possess her. He held back a groan of frustration as he fingered the
+      edge of her robe. She spread her legs slightly as if ashamed to be so
+      garbed and open for his view.
+
+The only alignment recipe in the roster that moves interiority DOWN, and it does
+so at every scale from 1B to 10B. This is the strongest available lead on which
+alignment procedure produces the effect, and it should be followed.
+
+# METHOD, IN BRIEF
+
+    corpus       f11_l2, English only. 228,520 unforced passages, prompts of
+                 the form "He was beautiful and she wanted to" -- unanimously
+                 OPEN, so a continuation is not being asked for an act.
+    draw         top 200 per cell by a free classifier (char TF-IDF + 23
+                 surface features, leave-one-PAIR-out AUC 0.859). NOT a random
+                 sample: the population is "passages a classifier ranks as
+                 confidently narrative".
+    coder        one Opus per passage, effort 'high', blind to arm and model.
+                 Rubric frozen at sha256[:16] 2740a81f9535212e.
+    fields       narrative, span (verbatim, required for any positive), mode
+                 (NONE/TOLD/SHOWN), drift (HOLDS/SHIFTS/UNMOORED), degree (0-3)
+    test         Wilcoxon signed-rank on per-pair differences, two-sided.
+
+Reliability, double-coding one production shard: narrative 0.847, mode 0.843,
+drift 0.819, degree 0.866.
+
+## Exclusions, both rules fixed before the data
+
+Six of 26 pairs excluded, and the rules cost the hypothesis as much as they
+saved -- three of the six were supporting it.
+
+    E1  either arm under 20 narrative passages of 200
+          Qwen2.5-0.5B (na=7)   CT-LLM-Base (nb=19)   glm-4-9b-hf (na=17)
+    E2  arms' median word-count ratio outside [0.5, 2.0]
+          bloom-7b1 (0.02)   Lucie-7B (20.10)   MiniCPM5-1B (0.06)
+
+Every E1 exclusion is a model whose arm nearly stopped producing English
+narrative; every E2 exclusion is a model whose arm nearly stopped producing
+text (bloomz emits `protect her.`). Four of the six are Chinese-pretrained or
+sub-1B. **That the filter removes alignment-related behaviour is itself a
+result** and is why H2 is reported.
+
+# WHAT IS NOT ESTABLISHED
+
+- **H2's estimand is not the claim.** Yield within a classifier-ranked top-200
+  rises with the underlying narrative rate but is a compressed, biased estimate
+  of it. "Alignment produces more narrative" needs a fresh uniform random sample
+  per cell coded on `narrative` alone. Cheap, one field, not yet run.
+- **The coder is one instrument with a prior.** Blinding hides the label, not the
+  prose. If Opus can recognise aligned register it could nudge the rating, and
+  two Opus coders agreeing does not test this. The check -- give a coder passages
+  and ask it to guess the arm -- has not been run.
+- **Nothing about mechanism.** Why alignment does this is untested. Falcon3 is
+  the one lead.
+- **English only.** Chinese is a separate replication on the 8 `cjk_tier` FLUENT
+  pairs, and an English-designed rubric is a different instrument on Chinese.
+- **The run is exploratory.** Fifteen exploratory runs preceded the registration,
+  the estimand changed after seeing data (`presence` demoted, `mode` demoted),
+  and the numbers were inspected at 10, 12, 13, 15 and 16 pairs. The confirmatory
+  arm covered the last ten pairs only. `plans/REGISTRATION_passC.md` section 0
+  is the full disclosure.
+
+---
+
+# APPENDIX: the design record
+
+Everything below was written 2026-08-18, while the instrument was being built.
+It is kept because the reasons for the design are not reconstructible from the
+code. Where it disagrees with the sections above, the sections above win.
 
 # THE QUESTION
 
