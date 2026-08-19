@@ -65,7 +65,15 @@ import collections
 import sys
 
 from . import ch
+from . import corpus
 from .movement import CANONICAL, LENS, DRAW, RESIDUAL_KEY, movement
+
+#: **THE RULE VERSION SELECTS THE SOURCE TABLES AND THE DESTINATION.** v4 cells
+#: live in twp_*_v4 and their movement lands in `movement_v4`, never mixed into
+#: `movement` -- which has no rule_version column and could not tell them apart
+#: row by row.
+_RV = {"v": 3}
+MOVEMENT_TABLE = {3: "movement", 4: "movement_v4"}
 
 RULES = {"canonical": CANONICAL, "lens": LENS, "draw": DRAW}
 
@@ -101,7 +109,7 @@ from .roster import DERIVING
 #: They now live in `{db}.pairs` (143 rows, rebuilt in milliseconds from the
 #: roster) and the views JOIN it. A models.yaml relabel is now free.
 DDL = """
-CREATE TABLE IF NOT EXISTS {db}.movement (
+CREATE TABLE IF NOT EXISTS {db}.%(tbl)s (
     base String, aligned String,
     prompt String, word String,
     p_base Float32, p_aligned Float32, delta Float32,
@@ -134,7 +142,9 @@ def buildable():
         if r["op"] in DERIVING:
             par[r["child"]] = r["parent"]
             op[r["child"]] = r["op"]
-    have = {r["model"] for r in ch.query("SELECT DISTINCT model FROM {db}.twp_cells")}
+    _c = corpus.TABLES[_RV["v"]][1]
+    have = {r["model"] for r in ch.query(
+        "SELECT DISTINCT model FROM {db}.%s" % _c)}
     #: **A GATE AT THE PRODUCER IS NOT REMEDIATION OF THE STORE.**
     #: `ingest.token_space` refuses token-space payloads at the door, and that
     #: was treated as quarantining `dolphin-2.6-mistral-7b-dpo`. It was not: the
@@ -148,7 +158,7 @@ def buildable():
     #: from the store cannot come back through the ingest, and a model that
     #: somehow returns cannot reach `movement`.
     bad = [r["model"] for r in ch.query(
-        r"""SELECT model FROM {db}.twp_words GROUP BY model
+        (r"""SELECT model FROM {db}.%s GROUP BY model""" % corpus.TABLES[_RV["v"]][0]) + r"""
             HAVING countIf(startsWith(word, '▁') OR startsWith(word, 'Ġ')
                            OR match(word, '^<0x[0-9A-Fa-f]{2}>$')) > 0""")]
     if bad:
@@ -174,14 +184,40 @@ def _arm(model):
     """{prompt: ({word: p}, residual_total)} for one model, in ONE query.
 
     Bulk, not per-cell: the access shape is the variable, not the store.
+
+    ## AT v4 THIS PREFERS THE MERGED (TOPUP) CELL, AND THAT IS THE POINT
+
+    Pass 2 measures the words a model's LINEAGE cleared and it did not -- words
+    every consumer would otherwise impute as zero, which is most of the reason
+    topup was built. So `movement` over merged cells is the intended product and
+    not a variant of it. RH, 2026-08-19: *"not comparable is fine, movement with
+    topup was part of motivation for topup."*
+
+    **The v3 and v4 movement numbers are therefore NOT COMPARABLE**, and not only
+    because the boundary rule changed: `departed` and `arrived` are computed over
+    a LARGER SUPPORT at v4, since the merged cell carries sub-theta words the
+    pass-1 cell never had. Two tables, deliberately, with no path between them.
+
+    A merged cell already contains pass 1's rows -- `topup` writes expand's rows
+    plus the scored ones with `tail` decremented -- so preferring it is a choice
+    of ONE row per (model, prompt), never a union of two. Where no topup cell
+    exists the pass-1 cell is used, so coverage is never reduced by asking.
     """
+    esc = model.replace("'", "\\'")
+    if _RV["v"] == 3:
+        wq = "SELECT prompt, word, p FROM {db}.twp_words WHERE model='%s'" % esc
+        cq = "SELECT prompt, total FROM {db}.twp_cells WHERE model='%s'" % esc
+    else:
+        #: argMax over `topup` picks the merged cell where one exists and the
+        #: pass-1 cell where it does not -- one row per prompt either way.
+        wq = ("SELECT prompt, word, argMax(p, topup) AS p FROM {db}.twp_words_v4 "
+              "WHERE model='%s' GROUP BY prompt, word" % esc)
+        cq = ("SELECT prompt, argMax(total, topup) AS total FROM {db}.twp_cells_v4 "
+              "WHERE model='%s' GROUP BY prompt" % esc)
     words = collections.defaultdict(dict)
-    for r in ch.query("SELECT prompt, word, p FROM {db}.twp_words WHERE model='%s'"
-                      % model.replace("'", "\\'")):
+    for r in ch.query(wq):
         words[r["prompt"]][r["word"]] = r["p"]
-    resid = {r["prompt"]: r["total"] for r in ch.query(
-        "SELECT prompt, total FROM {db}.twp_cells WHERE model='%s'"
-        % model.replace("'", "\\'"))}
+    resid = {r["prompt"]: r["total"] for r in ch.query(cq)}
     return words, resid
 
 
@@ -190,10 +226,15 @@ def main():
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--rule", default="canonical", choices=sorted(RULES))
+    ap.add_argument("--rule-version", type=int, default=3, choices=[3, 4],
+                    help="4 reads twp_*_v4 (merged topup cells) and writes "
+                         "movement_v4. The two tables are NOT comparable and are "
+                         "kept separate for that reason.")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--all", action="store_true",
                     help="recompute every pair, not just missing ones")
     a = ap.parse_args()
+    _RV["v"] = a.rule_version
     rule = RULES[a.rule]
 
     edges = buildable()
@@ -208,7 +249,7 @@ def main():
     if a.scan or not a.run:
         return 0
 
-    ch.execute(DDL)
+    ch.execute(DDL % {"tbl": MOVEMENT_TABLE[_RV["v"]]})
     #: THE GRAPH, REWRITTEN EVERY RUN AND FREE. CREATE OR REPLACE, so it cannot
     #: hold a pair the roster no longer declares.
     ch.execute(PAIRS_DDL)
@@ -281,11 +322,11 @@ def main():
                                     ("riser" if w in rise else "still"),
                              "rule": rule.name, "theta": rule.theta})
         if len(rows) > 500_000:
-            ch.insert("movement", rows); rows = []
+            ch.insert(MOVEMENT_TABLE[_RV["v"]], rows); rows = []
             print("     ... %s rows" % format(
                 ch.scalar("SELECT count() FROM {db}.movement"), ","))
     if rows:
-        ch.insert("movement", rows)
+        ch.insert(MOVEMENT_TABLE[_RV["v"]], rows)
     print("\n  cells computed: %s | refused (no residual): %s"
           % (format(n_cells, ","), format(n_refused, ",")))
     print("  %s.movement: %s rows"
