@@ -389,6 +389,63 @@ confounds coder with lineage.
 
 ---
 
+## RUN 12 -- PRODUCTION: the lineage shards. 2026-08-19, IN FLIGHT
+
+The real run. One shard per lineage pair, `results/passC/lineage/L00..L25`.
+
+    population   TRIAGE draw (`f######`), top-200 per cell by classifier score.
+                 NOT the frozen sample draw (`p######`) that RUNS 5-7 used.
+                 The two are ALTERNATIVE POPULATIONS and must not be pooled.
+    coders       ONE Opus coder per passage, effort 'high'. No `model:` key.
+    fields       narrative, span, mode, drift, degree   (`presence` dropped,
+                 see RUN 7; `charge` and `why` cut earlier)
+    cost         ~0.57M tokens and ~8 minutes per shard, 9 agents of 45.
+
+**Reliability was re-established on THIS population before trusting it.** L01 was
+double-coded: narrative 0.847, mode 0.843, drift 0.819, degree 0.866 -- within
+0.035 of the sample-draw figures. The instrument did not change when the
+population narrowed. Every other lineage shard is single-coded and `_coders: 1`
+records that in the file.
+
+### Result at 12 pairs
+
+    degree, narrative passages   mean +0.350   12/12 up   Wilcoxon p=0.0005
+      Instruct stratum   n=9     +0.399   9/9
+      DPO stratum        n=3     +0.203   3/3
+    score-matched                +0.418   8/10   p=0.010
+    MSV-residualised             +0.332   9/10   p=0.004
+    SHOWN | interior             +0.73    6/10   p=0.492   <- NOT the effect
+
+Convergence rather than a shift: aligned means 1.72-2.15 across all twelve, base
+means 0.58-2.11.
+
+### Two things RUN 12 overturned
+
+- **RUN 7's null on degree** (+0.03, p=1.000, three pairs) does not hold. The
+  three sample-draw pairs were unrepresentative, not the population wrong.
+- **RUN 7's prompt-kind INTERACTION does not replicate.** It was the headline of
+  that run and the only 3-of-3 it had. At 12 pairs every stratum moves the same
+  way: EXTERIOR +0.366 (p=0.020), INTERIOR +0.503 (p=0.004), NEITHER +0.493
+  (p=0.039). No stimulus dependence. HANDOFF.md 6a records the withdrawal.
+
+### One exclusion, declared in code
+
+`EXCLUDED_PAIRS` in run.py, currently Qwen/Qwen2.5-0.5B: its aligned arm yields 7
+narrative passages of 200 (4%) against base's 27 (14%), because the 0.5B instruct
+model answers fiction prompts as instructions. Codings kept, pair dropped from the
+per-pair test. The narrative YIELD difference (+9.5pp, 7/10, p=0.152) is reported
+beside the degree result rather than discarded, because the filter removes
+alignment-related behaviour and saying so is part of the result.
+
+### Known defect in the data
+
+L10 (OLMo-2-0425-1B) lost batch b02 to a 529: 45 base passages, 0 aligned, so
+that cell is 155 not 200. Checked and NOT a truncation -- the lost and kept ids
+have the same score distribution (median 0.867 vs 0.864). Less precise, not
+biased. Left as coded.
+
+---
+
 # STANDING RULES, across every run
 
 - **Coders never see the arm, the model, or any other coder's judgement.** Every

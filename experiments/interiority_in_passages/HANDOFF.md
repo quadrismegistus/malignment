@@ -3,7 +3,9 @@
 For a session that knows nothing. Everything needed is in this repo or in
 `$MALIGNMENT_DATA`; nothing needed is in a Claude session directory.
 
-Written 2026-08-19, mid-run: **3 of 29 lineage pairs coded, 26 to go.**
+Written 2026-08-19, PAUSED mid-run: **16 of 29 lineage pairs coded, 10 shards
+left (L16-L25).** Paused because the session usage limit was nearly full, NOT
+because of anything in the data. That distinction matters: see section 7.
 
 ---
 
@@ -162,52 +164,133 @@ both arms, and the design is a within-pair difference, so the level shift
 cancels. The population is "passages a classifier ranks as confidently
 narrative", which is narrower than "narrative passages" and must be said.
 
-# 6. WHAT THE THREE CODED PAIRS SAY
+# 6. WHAT THE CODED PAIRS SAY
 
-Yi-1.5-9B, SmolLM2-360M, neo_7b. 3,210 passages, two Opus coders.
-Agreement 0.785-0.870 across five fields; told/shown 0.851 on 2,086.
+## 6a. SUPERSEDED: what the first three pairs said
 
-**The amount of interiority does not change.**
+Yi-1.5-9B, SmolLM2-360M, neo_7b, on the SAMPLE draw (`p######`), two Opus
+coders, 3,210 passages. Agreement 0.785-0.870 across five fields.
 
-    degree, narrative passages   base 1.720 -> aligned 1.750   +0.03   p=1.000
-    any interiority              94.7% -> 94.3%                        p=1.000
+That run reported (a) that the amount of interiority does not change
+(+0.03, p=1.000) and (b) an INTERACTION with prompt kind -- alignment adding
+interiority to EXTERIOR prompts (+0.23) and damping it on INTERIOR ones
+(-0.18), 3 of 3 pairs.
 
-**And `presence` should be dropped: it is a word list.** 92.6% reproducible by a
-bare mental-state-verb regex, which is why it sits at 94% and why "his teeth and
-claws only thought of ripping her apart" counts as interiority.
+**Both are superseded by 6b. Do not quote them.** Kept here because a reader who
+finds them in RUBRICS.md or in an old draft needs to know they were withdrawn
+rather than lost.
 
-**The finding is an INTERACTION with what the prompt supplies:**
+Two further things from that run that DO still stand:
 
-                          mean degree      SHOWN | interior
-    EXTERIOR prompts         +0.23              +4.4       2 of 3 pairs
-    INTERIOR prompts         -0.18             -13.2       3 of 3 pairs
+- **`presence` is a word list** -- 92.6% reproducible by a bare mental-state-verb
+  regex, which is why it sat at 94% and why "his teeth and claws only thought of
+  ripping her apart" counted. Dropped as an estimand.
+- **The pilot's F13 relation did not survive.** SHOWN was 29.1% in HOLDS vs 8.0%
+  in SHIFTS; on the narrative subset 33.2% vs 41.0%. The pilot computed it over
+  all passages including non-narrative.
 
-Alignment adds interiority to prompts that supply none and damps it on prompts
-that supply some. The pooled figure is those two cancelling, which is what made
-it look like a null. **This is the only 3-of-3 in anything measured.**
+## 6b. CURRENT: twelve pairs on the TRIAGE draw
 
-Powered for: at ~113 narrative per cell over 26 pairs the interaction MDE is
-8.5pp against 17.6pp observed, and the INTERIOR-prompt effect 6.0pp against
-13.2pp. The pooled statistic is NOT powered and should not be the target.
+Single Opus coder per passage, `effort: 'high'`, top-200 per cell by classifier
+score. Reliability re-established ON THIS POPULATION by double-coding L01:
+narrative 0.847, mode 0.843, drift 0.819, degree 0.866 -- within 0.035 of the
+sample draw, so the instrument did not change when the population did.
 
-## Two things that did not survive
+**The amount of interiority DOES change, and it is the strongest thing measured.**
 
-**The pilot's F13 relation.** SHOWN was 29.1% in HOLDS vs 8.0% in SHIFTS;
-on the narrative subset it is 33.2% vs 41.0%. The pilot computed it over all
-passages including non-narrative.
+    degree, narrative passages   mean +0.350   12/12 up   Wilcoxon p=0.0005
+      Instruct stratum   n=9     mean +0.399    9/9 up
+      DPO stratum        n=3     mean +0.203    3/3 up
 
-**Presence as primary.** Declared before data, at ceiling once data arrived.
-Demoting it is a change of estimand AFTER seeing numbers and is recorded as such,
-dated, with both statistics to be reported. The defence is that the ceiling is a
-property of the filter and holds whichever way the arms fall. That is a defence,
-not an exemption.
+Two confounds tested on the ten-pair version and cleared:
 
-# 7. STOPPING RULE, NOT YET SET
+    score-matched (classifier rank held constant)   +0.418   8/10   p=0.010
+    MSV-vocabulary residualised                     +0.332   9/10   p=0.004
 
-26 shards can be stopped after any one, which is convenient and is also optional
-stopping. Decide before looking: run ten, look once, then decide about the
-remaining sixteen. Nothing is registered -- eleven exploratory runs with the
-hypothesis direction known to the designer throughout.
+**The shape is convergence, not a constant shift.** Aligned means occupy
+1.72-2.15 across all twelve pairs; base means run 0.58-2.11. Lucie-7B moves
++1.27 from a base of 0.58; Olmo-3-1025-7B moves +0.12 from a base of 1.99.
+Alignment pulls models to a common level rather than adding a fixed amount.
+Distributionally: degree-3 passages 12.5% -> 24.5%, degree-0 13.0% -> 3.5%.
+
+**The prompt-kind interaction did NOT replicate.** At 12 pairs every stratum
+moves the same way -- EXTERIOR +0.366 (8/10, p=0.020), INTERIOR +0.503
+(9/10, p=0.004), NEITHER +0.493 (7/9, p=0.039). There is no stimulus
+dependence. `mode` (SHOWN | interior) is +0.73, 6/10, p=0.492: **told/shown is
+NOT where the effect lives, degree is.**
+
+## 6c. ONE PAIR IS EXCLUDED, AND WHY IT MATTERS
+
+`EXCLUDED_PAIRS` in run.py holds Qwen/Qwen2.5-0.5B with its reason. Its aligned
+arm yields 7 narrative passages of 200 (4%) against base's 27 (14%), because the
+0.5B instruct model turns fiction prompts into instruction-following exercises
+("Can you repeat this sentence, but capitalize it correctly?"). Its codings are
+KEPT; it is dropped from the per-pair test only.
+
+**This is the one place the narrative filter's selection bites visibly.** RH's
+ruling stands and is correct -- interiority is undefined on a passage with no
+scene, so filtering defines the population rather than selecting on an outcome.
+But the excluded passages are excluded for an alignment-related reason, so the
+YIELD ITSELF is a result and must be reported next to the degree figure, not
+silently discarded:
+
+    narrative yield, aligned minus base   mean +9.5pp   7/10 up   p=0.152
+
+Spread is wide (Amber +47.5, TinyLlama +30.5, Lucie -13.5, Qwen2.5-0.5B -10.0)
+and the test does not reach significance. Recompute it over all pairs at the end.
+
+# 7. WHERE THE RUN STOPPED, AND WHY
+
+**Paused after L15 with 10 shards uncoded, because the session usage limit was
+nearly full.** The reason is external to the data and is recorded here so a later
+reader can tell it apart from stopping because a result looked good. The
+remaining 10 pairs are L16-L25 and nothing about them was inspected before the
+decision.
+
+The earlier plan in this file said: run ten, look once, then decide. That was not
+honoured -- the numbers were looked at at 10, 12, 13 and 15 pairs. This is
+optional stopping and the run is exploratory. It is the fifteenth exploratory run
+with the hypothesis direction known to the designer throughout, and **nothing is
+registered.**
+
+## The cheapest available repair, not yet taken
+
+Ten uncoded pairs is a confirmatory arm sitting there for free. A registration
+written now -- before L16-L25 are coded -- would state the prediction the first
+sixteen produced (+0.237, all pairs positive), the exclusion rule, the estimand
+and the test, and then the remaining ten would test it without the designer
+having seen them. That is worth more than ten more exploratory pairs.
+
+It requires writing the registration BEFORE launching L16. Launching first and
+registering after is worth nothing.
+
+## THE LENGTH CHECK IS NOW MANDATORY, on every pair
+
+Added 2026-08-19 after L13. **Before a pair's delta is used, check that its two
+arms overlap in completion length.** Two of fifteen pairs failed this and they
+were the two largest effects in the run, in opposite directions:
+
+    bloom-7b1    base median 187 words   aligned   3   raw -1.357
+    Lucie-7B     base median  10 words   aligned 201   raw +1.266
+
+A three-word completion cannot contain interiority and cannot drift -- all 158
+bloomz passages were coded drift=HOLDS, which is the tell. Both are now in
+`EXCLUDED_PAIRS`, under one criterion applied symmetrically.
+
+Across all 15 pairs, degree delta correlated with the arms' length difference at
+rho=0.575 (p=0.025). Excluding those two: rho=0.343 (p=0.252). **The correlation
+was those two pairs**, and the other thirteen (both arms at median 175-215 words)
+have length-matched deltas within 0.09 of raw. So the headline is not a length
+artifact -- but that is something to be established per pair, not assumed.
+
+    13 pairs   mean +0.237   13/13 up   p=0.00024   range +0.008 to +0.597
+
+## The recorded prediction
+
+`plans/prediction_bloomz.md`. RH called bloomz to go the other way at 12/12,
+before shard-113 existed; it was committed at 05f5d42 before the file it predicts
+was written. It held in direction and failed as a measurement, and the file says
+both. It is the only thing in this run with a genuine failure mode.
 
 # 8. THE OTHER DOCS
 
