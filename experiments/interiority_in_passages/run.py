@@ -1195,7 +1195,16 @@ def passc_shards(nshards=6, per_cell=535, batch=45):
 
 
 def passc_save(src):
-    """Persist one shard's result. Call as soon as its workflow returns."""
+    """Persist one shard's result, and CHECK COMPLETENESS HERE.
+
+    The lineage scripts carry batch FILE PATHS and no id lists -- that is what
+    took them from 12,708 characters to ~2,600, small enough for the workflow
+    approval dialog to display. The consequence is that the script can no longer
+    compute `_missing`, so the check moves to save time, where it belongs
+    anyway: the ids are the batch files' own keys, so this compares what came
+    back against what was actually sent rather than against a list the same
+    script wrote.
+    """
     raw = json.load(open(src, encoding="utf-8"))
     r = raw.get("result", raw)
     if isinstance(r, str):
@@ -1207,12 +1216,30 @@ def passc_save(src):
     p = os.path.join(PASSC, "codings", "shard-%02d.json" % k)
     if os.path.exists(p):
         raise RuntimeError("%s exists; refusing to overwrite a saved shard" % p)
+
+    asked = set()
+    for f in (r.get("_files") or []):
+        if os.path.exists(f):
+            asked.update(json.load(open(f, encoding="utf-8")))
+    got = set(r.get("A", {})) | set(r.get("B", {}))
+    missing, stray = sorted(asked - got), sorted(got - asked)
+    if asked:
+        r["_requested"] = len(asked)
+        r["_missing"] = missing
+        r["_stray"] = stray
     json.dump(r, open(p, "w", encoding="utf-8"), indent=0, sort_keys=True,
               ensure_ascii=False)
-    print("shard %02d: A=%d B=%d of %d requested | missing A=%d B=%d | stray %d -> %s"
-          % (k, len(r["A"]), len(r["B"]), r.get("_requested", -1),
-             len(r.get("_missing_A", [])), len(r.get("_missing_B", [])),
-             r.get("_stray", 0), p))
+    print("shard %02d %s: A=%d B=%d"
+          % (k, r.get("_pair", "").split("/")[-1], len(r.get("A", {})), len(r.get("B", {}))))
+    if asked:
+        print("  sent %d | missing %d | stray %d%s"
+              % (len(asked), len(missing), len(stray),
+                 ("   e.g. %s" % missing[:3]) if missing else ""))
+        if stray:
+            print("  *** %d ids returned that were NEVER SENT: %s" % (len(stray), stray[:3]))
+    else:
+        print("  no _files in the result -- completeness NOT checked")
+    print("  -> %s" % p)
 
 
 def _norm(s):
@@ -1658,9 +1685,14 @@ def passc_todo():
         plan = json.load(open(lp, encoding="utf-8"))
         allids = set()
         for k in sorted(plan, key=int):
-            src = open(plan[k]["script"], encoding="utf-8").read()
-            m = _re.search(r"^const BATCHES = (\[.*\])$", src, _re.M)
-            ids = [i for b in json.loads(m.group(1)) for i in b["ids"]] if m else []
+            #: ids come from the BATCH FILES, which are what the agents were
+            #: actually handed. Previously parsed out of the script, which broke
+            #: silently (0/0 on every shard) the moment the scripts were
+            #: shrunk to carry paths instead of id lists.
+            ids = []
+            for f in plan[k].get("files", []):
+                if os.path.exists(f):
+                    ids.extend(json.load(open(f, encoding="utf-8")))
             allids.update(ids)
             n = len(set(ids) & coded)
             print("  L%-3s %-32s %4d/%-4d %s"

@@ -1,0 +1,2822 @@
+{
+"A": {
+"f066981": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "how sorry he felt for hurting her, and how guilty he was about what he did that night."
+},
+"f066983": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she didn't like to be around her well"
+},
+"f066987": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f066989": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f066994": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": true,
+"span": "And what I fear is that his woman will not die of an incurable fever in the ruins of his fell house."
+},
+"f067018": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067020": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067029": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067031": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She wanted to hear him beg for food again, even if he never ate."
+},
+"f067038": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He was still not sure what happened, but he knew the carrying of her was just going to get him in more trouble."
+},
+"f067042": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "begging to be with the person she loves"
+},
+"f067050": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067056": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Why that she had made such an effort to do that for him, years ago."
+},
+"f067057": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She was indifferent, peaceable, and made no move to make her way into the suitors' circle."
+},
+"f067059": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "he couldn't mask his lust for her when he loved her and wanted her"
+},
+"f067069": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "because really, carnal feelings were so much easier then.\" he thought"
+},
+"f067087": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067088": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She had been so kind and I think she wanted to make the most of it."
+},
+"f067094": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "a fire broke out in his heart"
+},
+"f067102": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067106": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "He could not speak it or understand it at all"
+},
+"f067121": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": true,
+"span": ""
+},
+"f067144": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067148": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "Had he done anything to make me feel less attractive to him?"
+},
+"f067161": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067197": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "I heard the heads shaking as if they could not believe their ears."
+},
+"f067204": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": true,
+"span": ""
+},
+"f067216": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Godson was inclined to think he was glad to be remembered for this advice."
+},
+"f067225": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "His hair was short and soft, but she wanted his beard."
+},
+"f067232": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Tommy was so shocked at his sister's unexpected loud cry"
+},
+"f067234": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067238": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She wanted him to have a little pack which just might get him through meeting his instructor and the rest in the middle."
+},
+"f067258": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067304": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "On learning of his new master's plan, he respected his authority and co-operated with him."
+},
+"f067312": {
+"degree": 3,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "It was my last day and my final day because the hell with it."
+},
+"f067338": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "a man who believed he was tortured and tortured"
+},
+"f067384": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "because she was embarrassed"
+},
+"f067393": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "although she loved shopping, it was her sister, Olympia Black, who had her normally"
+},
+"f067401": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067431": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "They seemed to rebuke him."
+},
+"f067472": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067494": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "A keen bank clerk had an idea"
+},
+"f067503": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He itched with embarrassment and in anger that he thought he was being out-won."
+},
+"f067504": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067507": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "he was so angry that he decided to fight to get out of the work"
+},
+"f067541": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "to his disappointment he didn't even want a new bike"
+},
+"f067552": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Pope assumed that he was to go to the Chavn"
+},
+"f067558": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "he felt he was in desperate! How could he expand?"
+},
+"f067559": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "He felt confused, he repeated himself and thought rich"
+},
+"f067566": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I did it for the exhilaration that might be given by a race"
+},
+"f067568": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "he was in a mood for a change at that time and just shrugged"
+},
+"f067581": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She wanted to kill her friend"
+},
+"f067596": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "try as I might, he couldn’t be pleasing to me and that made this the conflict I needed to address"
+},
+"f067610": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067613": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067636": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "I don't want to win him. I want him to miss this pitiful fall. I can see he is trying his best now."
+},
+"f067676": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "calmer than Francis comprehenders had ever felt before"
+},
+"f067687": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067745": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "think of her key"
+},
+"f067749": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "though it was impossible to know exactly what they were"
+},
+"f067750": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "But even she never understood how that wasn't true."
+},
+"f067759": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "the only hidden part of the room upon which she could quietly speculate about his unexpected approach"
+},
+"f067766": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "There were no words for her life despite what may have been the nearly deafening immediacy of her passion."
+},
+"f067774": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "ideas were changing in so great a rapidity that she could scarcely keep herself from leaping to nothing"
+},
+"f067775": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The subtlety of her confusion, her contempt of herself, her misplaced age"
+},
+"f067800": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "have second thoughts"
+},
+"f067810": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Their bright, hazy scent had quickly caught my attention"
+},
+"f067811": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "Patsy whispered in her ear to make sure she did not perambulate in the alley in front of his home"
+},
+"f067819": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "Celty was sure he saw a clipper blade with forged blades there."
+},
+"f067830": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She stood facing Ralph-not because she had a great deal to reply to him, but only in order to do so."
+},
+"f067835": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067837": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "I think she should take more care while she can."
+},
+"f067864": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was greatly surprised that the church (was) not in front of her as it was before"
+},
+"f067868": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She was no longer sure of her expectations."
+},
+"f067874": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "It was because I was misled?"
+},
+"f067884": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067885": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067895": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "He was used to hear about everyone's life without fear."
+},
+"f067896": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Russ wanted to check his past"
+},
+"f067916": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067925": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067930": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f067939": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "How curious that she should want that very thing, and know on whom it rested."
+},
+"f067942": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "she wasn’t entering through the temple as I had imagined"
+},
+"f067968": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "believing that going out of what's good for her is the only thing that might make life better"
+},
+"f067979": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Your mother came to your room, pierced by pain and heartache."
+},
+"f068020": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "But a somber realization immediately dawned on him"
+},
+"f068023": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068031": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Despaired of knowing what this person's secret would really involve"
+},
+"f068032": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068044": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068062": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068067": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "I wonder how Paulie had that relation because she called me about it"
+},
+"f068070": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Garry felt warmth spread across his face as she gave in to his love."
+},
+"f068072": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Every time it occurred to him that she really had a bright future ahead of her, he almost gave up hope."
+},
+"f068075": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "What she expected from him was silence, but he did no such thing."
+},
+"f068079": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "well even in her the thought was there."
+},
+"f068084": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068088": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Sometimes he was there to be still but other times he just needed a hug."
+},
+"f068098": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Alison wanted to travel, but (for reasons that would be hard to explain) she was no match for the rise of Instagram."
+},
+"f068103": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "No, she could not do anything about those things."
+},
+"f068119": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068145": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was touched by her warm embrace."
+},
+"f068150": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068151": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Sade believed him."
+},
+"f068159": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Nothing had ever made him feel so sure of himself."
+},
+"f068167": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he couldn't shake the feeling that they didn't have a full life and that their happiness didn't rest on the strength of their relationship"
+},
+"f068180": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Fischer is unsure why Shibata had been so helpful."
+},
+"f068194": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068196": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068202": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Pembergue pretended that it had not occurred"
+},
+"f068205": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068216": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068232": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068238": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068247": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was convinced that the pill would come out if she did not clear it"
+},
+"f068251": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Lane was flat with regret."
+},
+"f068254": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she began to pick up on her mistake, realizing why the boys had stopped casually talking"
+},
+"f068256": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She had never heard of genius before."
+},
+"f068261": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068278": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She regretted how bad she felt afterwards."
+},
+"f068298": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He was still under the misconception that it wasn't his anger."
+},
+"f068319": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "the child felt incapable , because he can’t control it"
+},
+"f068335": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Her behaviour was what she had in her hands, her intent was what she had in her eyes."
+},
+"f068344": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068347": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Both she and father had presumed that they were the only sons in their tribe and the last branch of their family would be extinct."
+},
+"f068348": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She hoped that if she altered the situation, then things will be different."
+},
+"f068352": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "Perhaps _stomach_ was slower than normal, or perhaps she flirty, small-fry retarded in how she sensed who was next to her?"
+},
+"f068354": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "What if her cock keeps rolling in the night? What if lights and bells and karaoke keep pulling her in?"
+},
+"f068355": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068359": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "It seemed to be one of the beginnings of their new life."
+},
+"f068363": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068383": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was a woman and she wanted to be a lady."
+},
+"f068404": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068412": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he realized he intended to marry the girl"
+},
+"f068434": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "be jealous because she did not understand he obeyed his father"
+},
+"f068436": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I didn't want him to know."
+},
+"f068444": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "love him, only because he loved her."
+},
+"f068448": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "think that she did love him , and it was as careful of her as well"
+},
+"f068449": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was very committed and focused on giving care and support to him"
+},
+"f068465": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "feel like a slave to that guilt"
+},
+"f068466": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she thought of others and knew that she would not be alone"
+},
+"f068468": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "that was what would terrify her, but she would not want to let it go"
+},
+"f068492": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She is extremely self conscious."
+},
+"f068506": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "think that she might have a long life here"
+},
+"f068518": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "Would she have her revenge without her friends now?"
+},
+"f068541": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068561": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Joe didn’t know she was alive at the moment."
+},
+"f068576": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": true,
+"span": ""
+},
+"f068582": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "feel guilty as much as when she was a youngster"
+},
+"f068600": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Nan Hin, the narrator was really quite upset."
+},
+"f068602": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Finally deciding that he of all people knew how to please his quarry"
+},
+"f068603": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068609": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She knew, though, that some of the Kindred would remain captives in her test."
+},
+"f068614": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was not impressed but kept her disappointment to herself."
+},
+"f068619": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068620": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "he could feel that what he was seeing was alive"
+},
+"f068623": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he finally decided to go in a circle"
+},
+"f068627": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he thought he was ready to walk"
+},
+"f068631": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "Perhaps one may escape prison – at least for a while as it is inconceivable to believe that all jails are so perfectly insulating."
+},
+"f068632": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "He imagined a hand barrier to stop his head hitting branches"
+},
+"f068633": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "watched in horror as the sky darkened"
+},
+"f068634": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "It was racked by insecurity concerning the throne that it had invaded"
+},
+"f068640": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068642": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "It was useless."
+},
+"f068644": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he could scarcely believe his own eyes"
+},
+"f068648": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "\"I need to make sure I walk the right way this time,\" he thought to himself"
+},
+"f068651": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "questioning the reasons why this creature stood around so unfriendly and meek and innocent"
+},
+"f068654": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "What to do?"
+},
+"f068658": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "They were pleased with the results and were becoming very excited on the chance of their invention."
+},
+"f068665": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068676": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "But this happened against his will."
+},
+"f068708": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "which I can't help asking for a good lot of times: what's the stories I hear about him?"
+},
+"f068764": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was so desperate to get there"
+},
+"f068765": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "deduce that she was somehow connected to sort of a physiological level"
+},
+"f068778": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Lucius did not give a damn that they were ordering him out."
+},
+"f068793": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was afraid that her little fob was going to change into a fish"
+},
+"f068795": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she often thought she had done well"
+},
+"f068799": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "The pain of it all just... I wasn't sure what an \"acceptable\" expression was at that moment."
+},
+"f068802": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "wonder if her eyes could calm her feelings if she was left in this position for longer"
+},
+"f068807": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he kicked, kicked her when he sensed he was a foot behind her"
+},
+"f068818": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was overwhelmed with a sense of isolation"
+},
+"f068822": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "as charged with the feeling she was so tortured, that she would be painfully white"
+},
+"f068833": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "He waited for a short time, 30 seconds, and was very angry."
+},
+"f068836": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Her teeth began to sound like something she knew , just what I had imagined."
+},
+"f068839": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Silence was deafening from her mind as she sat there robbing the pain of her thoughts."
+},
+"f068841": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "feel as if she were exploring the ground through settling and disintegration, so though the ground lay open, she could not remain still"
+},
+"f068843": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068844": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She knew it could not protect her."
+},
+"f068849": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She knew it had accomplished the task and that's why she was fascinated by it"
+},
+"f068850": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was trying to hold back the scream that was forming"
+},
+"f068852": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was remembering everything time she had been trapped for days within a confectioner's"
+},
+"f068859": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I wished she would maintain this state as long as possible."
+},
+"f068864": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": true,
+"span": "Nigel asked, wondering just how many it cost. But where did Puntington fit into it?"
+},
+"f068867": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f068868": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "was a wonderful idea and something that she was keen to try"
+},
+"f068872": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she turned to Dwight, stroking his brow, deep in thought"
+},
+"f068873": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "The horror had crept into her veins. . .she didn't dare lie and claim it was at the loss of her life."
+},
+"f068877": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was starting to feel that it wasn’t work but a waste"
+},
+"f068962": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f070926": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "no way, she surely could not be his wife. she was his wife, and he needed her to be his."
+},
+"f070928": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f070934": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "Her mind stayed trapped within a world of despair, and she remained lost in her silent anguish"
+},
+"f070937": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f070939": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "the manager's criticism led the man to be objectified and frightened, making him tend to subdue himself to this state"
+},
+"f070944": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f070949": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She always always believed that friendship was more valuable than money"
+},
+"f070955": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Nancy was mad at me for hiking in the woods all alone"
+},
+"f070956": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She never felt like wearing a perm when she wanted to wear a wig"
+},
+"f070963": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was a deep thinker and it took them forever to reach a compromise"
+},
+"f070967": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "for the sake of my marriage, I couldn't allow such an emotional beauty"
+},
+"f070978": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "It is bound to put me into the worst possible condition of hurt, anxiety, and distrust of feelings"
+},
+"f070979": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She liked me, but I fell for her, too."
+},
+"f071007": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071009": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "People were offended by her disrespectful irreligious behavior and secrecy"
+},
+"f071016": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071024": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he started to think that she was no good with girls"
+},
+"f071028": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "I thought, that \"program is in place.... it's working. but the resources aren't being used as well as they should.\""
+},
+"f071036": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Therefore, she needed someone to blame."
+},
+"f071038": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "the more I worked at the idea that love is pure, good, and never to be denied"
+},
+"f071039": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "As he thought of how anyone could transport cargo witout the least noise, he sighed"
+},
+"f071044": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "He wanted to make himself attractive. He didn't want to become something he wasn't desired."
+},
+"f071048": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He may start to feel a sense of purpose in knowing that he still valued her presence in his life"
+},
+"f071051": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "That was the last thing on his mind when a foster son and adopted daughter came into his life, and it was intoxicating."
+},
+"f071061": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "This was what he hoped and hoped it would be."
+},
+"f071064": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He believed that the dark had every authority to decide his fate or ruin his existence"
+},
+"f071068": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "For him, these are all things that he wanted to be and be part of"
+},
+"f071084": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He felt from a young age that his teachers were not qualified"
+},
+"f071085": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She had sequels planned"
+},
+"f071087": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I was no longer sure if the Cat was in danger"
+},
+"f071119": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Because he despised what she saw of him, especially the murder, he didn't know what to do."
+},
+"f071122": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071125": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "her heart melted at his tales and became a believer herself"
+},
+"f071126": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "worried to （5）____ that he wouldn't be able to take the photo with me"
+},
+"f071138": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "A whole hell of a lot of women thought she was a fine college shrunk to that sleek brand as a young lady"
+},
+"f071148": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071160": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "As her thought faded, she realized that she should start liking him"
+},
+"f071162": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She got so angry that she wished to be buried alive and if that was not possible, she wanted to get lost"
+},
+"f071171": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071211": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "He was torn between bending down to catch it and hurrying away"
+},
+"f071221": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Also, he thought that anyone who laughs at murder would break the laws"
+},
+"f071335": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071351": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She decided to go out to make sure that he was still slumped over in the chair"
+},
+"f071372": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071377": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071434": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "he realized that his problem was the number of people coming to the store"
+},
+"f071441": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "hide his unrealistic expectations that he would be out of money"
+},
+"f071446": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071454": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The teacher was surprised and asked how exactly he figured out he was not going to go to school anymore"
+},
+"f071462": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "As Jan got home, he fully dismissed his worries for the day"
+},
+"f071471": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "He felt handsome and in love for the entire afternoon"
+},
+"f071474": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071486": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "he went to sleep wondering about the library, no longer thinking about meth"
+},
+"f071489": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "found the whole country was perfect. It was warm, without commotion, and even a year-long trip sounded just fine."
+},
+"f071494": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The child was very cold, as well as afraid of the cold, and would cringe and fidget before entering the shed"
+},
+"f071508": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "in the hope that it would make a positive difference in someone's day"
+},
+"f071514": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I was really happy that he wanted to leave the things that he couldn’t any more"
+},
+"f071516": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "This time I will not feel so poor when I had to move"
+},
+"f071522": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she wanted to protect him, as he was feeling ugly and misshapen"
+},
+"f071535": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Ingrid just remains put out about the fling"
+},
+"f071538": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I wanted to tell her to get over it, but I knew she needed the information in my words"
+},
+"f071578": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071594": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "Was there a relationship between my physical weakness and his boot?"
+},
+"f071609": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "I cannot stop my smartness, it never stops and I like the feeling there is"
+},
+"f071630": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She knew she had a heart problem"
+},
+"f071635": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071659": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071663": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I split from my paternal family last summer, and was left with howling loneliness"
+},
+"f071675": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071686": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Her mind was buzzing with thoughts about the evil inside her"
+},
+"f071690": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She supposedly owned the knife in the feeblest of hands in order to gain crippling pride."
+},
+"f071697": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "as I bid her leave, my own trouble became greater"
+},
+"f071698": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she had just decided to take pride in some of the special occasions"
+},
+"f071700": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071706": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "I guess the old man's frustration has always been about the chaos and the cheating."
+},
+"f071710": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "her face turns ghastly with the pounding of her inner clamor"
+},
+"f071715": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was exhilarated by it"
+},
+"f071733": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071748": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "But she looked on and felt pitiful, her life cut off like a quick parcel across the string of limited imports."
+},
+"f071749": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071752": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She worked day after day, treasuring each day where she worked"
+},
+"f071754": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Tomas and I had to worry about not getting us in trouble"
+},
+"f071763": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She hoped to see the old diggings stand tall hewn into the rock"
+},
+"f071767": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She really wanted to go out with her friends to dance and play games, but she decided she would have to leave the messy environment"
+},
+"f071772": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "Over and over, the thought crossed her mind – where had she gone? Where was everyone?"
+},
+"f071782": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "In time, she learned which was more important: a fair society or an innocent kitchen? It wasn't easy."
+},
+"f071789": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Nihiro continued to alleviate her grief over Nico who fell"
+},
+"f071795": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She wanted to\nhide them from the others in a sealed room."
+},
+"f071804": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071812": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "I was very happy after it"
+},
+"f071823": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Sydney didn't really like him anymore, but he was the only guy she knew that was good enough for her"
+},
+"f071826": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I thought he might be dimwitted, but I soon found out his lorry had broken down"
+},
+"f071830": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he was afraid and didn't want to talk to him"
+},
+"f071839": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071872": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071874": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "it made her feel good"
+},
+"f071882": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She played stories to herself and hoped that the ensuing rumors would distract men from the murderous wishes that lay hidden in her eyes."
+},
+"f071896": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "The voice in her head was telling her that she had to get out"
+},
+"f071937": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Angel wished her window would stick together"
+},
+"f071942": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "The first time she stepped out into the circular garden, she was afraid."
+},
+"f071965": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She felt that he did not care so much for her."
+},
+"f071966": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he hated him and despised him so much that he wished he was his son"
+},
+"f071972": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f071998": {
+"degree": 3,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The carnage around him couldn't stop her mind from spinning and spinning, and she knew that the moment of terror would come."
+},
+"f072002": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "the one who loved her heart as much as her, and needed her the most"
+},
+"f072005": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "and so was obsessed"
+},
+"f072006": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Sarah was a lonely soul, lost in her own thoughts, and she had never felt disconnected before."
+},
+"f072009": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Each one was different, but all wanted to change their roles in their lives."
+},
+"f072015": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He couldn't believe what she'd said."
+},
+"f072016": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "sometimes he was left wondering if he was cut out to last"
+},
+"f072023": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was emotional about this because she felt confused about why he was moving to a different location."
+},
+"f072028": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "he thought, not so sure"
+},
+"f072032": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "unable to remember how to alter his dimensions however she wished to assist him, ever wonder why he needed the tassels, feeling all alone"
+},
+"f072038": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072040": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "For years he dreamed of becoming a cat."
+},
+"f072046": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "when she knew she was saved from her fate, she felt unable not love him"
+},
+"f072051": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "I will always keep my distance when I only know part of him, so that I can see more of who he truly is"
+},
+"f072069": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "could not for fear of being too upset"
+},
+"f072078": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He felt that he was too late in the process of giving his love a try into reality"
+},
+"f072083": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072112": {
+"degree": 2,
+"drift": "UNMOORED",
+"mode": "SHOWN",
+"narrative": false,
+"span": "The warren exhaled as he pondered his answer. Why did he think of it?"
+},
+"f072131": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072143": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "This implies that he maintained overall respect towards him despite feeling inferior to him."
+},
+"f072180": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she felt anxiety on her left or right, she felt like she was disconnected from the world"
+},
+"f072184": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072201": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Although it was only going to take a few minutes to complete, she was passionate about it."
+},
+"f072202": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was very proud of the lamp she finished."
+},
+"f072210": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she soon realized that she didn't want just one size, but things that fit perfectly with the length and width of the bottle"
+},
+"f072215": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "they were deeply saddened and angry about the unexpected change in their creation"
+},
+"f072231": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072249": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "it implies she intends to end her miserable life and let go of her efforts"
+},
+"f072274": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Liz was often frustrated by their inability to solve certain mathematical problems"
+},
+"f072276": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she inefficiently cherished it and filled as much as she could and drank it"
+},
+"f072283": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She was afraid of being offended when even just one note would break."
+},
+"f072287": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She decided she was right."
+},
+"f072290": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "An early morning I woke with a pain in the head that made me feel somber."
+},
+"f072291": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She missed her family, she missed her friends, she missed being a little girl."
+},
+"f072292": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she'd search in her head until she found something she really wanted to do"
+},
+"f072293": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She again wanted to kill the assassin, but something was wrong."
+},
+"f072294": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The woman could not understand why the man had such moral inconsistencies"
+},
+"f072299": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072310": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She wanted to know the truth, if she is not getting sick any more."
+},
+"f072313": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "Jesse didn't like the feeling of being hugged and it would leave him feeling much too cuddly and babylike"
+},
+"f072314": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "But alas, what she saw did not seem to be what she was expecting."
+},
+"f072322": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "What exactly was she talking about?"
+},
+"f072327": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she was kind of regretful about the fact that she needed to behave properly when going to the photo"
+},
+"f072331": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "in reality, she was as upset as it bright"
+},
+"f072333": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072335": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She figured out that the children needed a teacher."
+},
+"f072341": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "realize that hatred was a weakness if not a hindrance"
+},
+"f072345": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "feel that she was really loved by him"
+},
+"f072354": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She knows that she shouldn't have thrown him out. She knows that they should have stayed together."
+},
+"f072357": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she begins to love him because she was faithful and devoted"
+},
+"f072359": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I began to realize that her gestalt was quite different from mine"
+},
+"f072384": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "although her comrade had changed the goal post, she thought the game still had goals"
+},
+"f072390": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "But my wife hates me"
+},
+"f072393": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072422": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "She missed these tapes every day for several hundred days, wondering if where did these tapes get to."
+},
+"f072424": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "despair"
+},
+"f072439": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "she wasn't sure if she was running into a staunch anti-war man, or a greedy scheming war hothead"
+},
+"f072492": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "The girl understood without touching the spring doors."
+},
+"f072523": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072548": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he gained courage and confidence on the field"
+},
+"f072561": {
+"degree": 0,
+"drift": "UNMOORED",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072564": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "a lonely, silent human who is staring into the sky"
+},
+"f072565": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Fear convinced him he was crushed and lost and ignored."
+},
+"f072567": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He decided to close his eyes and focus into one snake's skin."
+},
+"f072573": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Its powerful firelight frightened him so much that he began to breathe faster"
+},
+"f072576": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "It was surprising to see how my hands scattered during Chloe’s presentation and learn that I had lost to her."
+},
+"f072592": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I'm so happy to have him at my side."
+},
+"f072594": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072597": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "They enjoyed the relief afterward."
+},
+"f072603": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "it is better not to make her aware that he loves her"
+},
+"f072625": {
+"degree": 1,
+"drift": "UNMOORED",
+"mode": "TOLD",
+"narrative": false,
+"span": "he liked the process and found out the power of repetition"
+},
+"f072628": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072644": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The hunter was angry with the mountains, the old man and the sheep."
+},
+"f072659": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "Linh was elated by her first classes as a teacher"
+},
+"f072676": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "he passed from this world with feelings of grace, purity and peace"
+},
+"f072684": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072700": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I thought perhaps it would help, but it did not."
+},
+"f072701": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "forget what had happened to her left side"
+},
+"f072704": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "Somehow it felt as though I had run into someone I knew."
+},
+"f072713": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she hated the feeling as she could feel it all over her limbs"
+},
+"f072730": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "I loved seeing her in my arms."
+},
+"f072733": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The pleasure from her thirst caused her enthusiasm and wanted to labor hard for more pleasure."
+},
+"f072734": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "In truth, she felt positively charming."
+},
+"f072735": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "thought, 'I should not regret it.'"
+},
+"f072765": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He was appreciative of her determination."
+},
+"f072766": {
+"degree": 3,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": true,
+"span": "She knew in her raw experience that she may be dead, and she was right and lost her mind very badly."
+},
+"f072775": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "As she realised that this apparent breakthrough saw no imminent solution to her tormenting question."
+},
+"f072776": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "She needs an end to this gnawing sadness and emotional confusion."
+},
+"f072779": {
+"degree": 2,
+"drift": "SHIFTS",
+"mode": "SHOWN",
+"narrative": false,
+"span": "no one had ever dusted off my mind to see if I was truly anything more than a battered, ragged orphan"
+},
+"f072782": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "she becomes increasingly romantically involved with him, especially because he is quiet and kept to himself"
+},
+"f072800": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072804": {
+"degree": 0,
+"drift": "HOLDS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072827": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "He loved his heritage and didn’t lose sight of Romans."
+},
+"f072836": {
+"degree": 1,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The soldier was fervent and constantly spoke about his patriotism"
+},
+"f072846": {
+"degree": 2,
+"drift": "HOLDS",
+"mode": "TOLD",
+"narrative": false,
+"span": "the soldier very seldom felt like riding his bike, he nonetheless struggled to bring himself to continue riding"
+},
+"f072854": {
+"degree": 0,
+"drift": "SHIFTS",
+"mode": "NONE",
+"narrative": false,
+"span": ""
+},
+"f072858": {
+"degree": 1,
+"drift": "SHIFTS",
+"mode": "TOLD",
+"narrative": false,
+"span": "The soldier respected the customer's right to food and sat down and waited until the food came."
+}
+},
+"B": {},
+"_coders": 1,
+"_files": [
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b00.json",
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b01.json",
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b02.json",
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b03.json",
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b04.json",
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b05.json",
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b06.json",
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b07.json",
+"/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b08.json"
+],
+"_missing": [],
+"_pair": "Qwen/Qwen2.5-0.5B",
+"_requested": 400,
+"_shard": 106,
+"_stray": []
+}

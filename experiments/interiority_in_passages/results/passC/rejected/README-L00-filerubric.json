@@ -1,0 +1,10 @@
+{
+ "why": "Coded with the rubric READ FROM A FILE rather than inline, a change made only to fit the workflow approval dialog. Measured against 200 passages Opus had already coded inline: narrative kappa 0.485 (baseline 0.867) and drift 0.534 (baseline 0.785). mode survived at 0.863 and degree at 0.765, but narrative defines the population, so the shard is not usable. Re-run L00 with the rubric inline.",
+ "runs": [
+  "wf_f5a3cd0f-ff6",
+  "wf_82f32183-827"
+ ],
+ "pair": "BSC-LT/salamandra-7b",
+ "n": 400,
+ "measured_by": "results/passC/rubriccal/"
+}

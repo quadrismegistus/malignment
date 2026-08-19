@@ -1,259 +1,519 @@
 {
  "0": {
-  "batches": 9,
   "cells": [
    "BSC-LT/salamandra-7b",
    "BSC-LT/salamandra-7b-instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L00-b08.json"
   ],
   "n": 400,
   "pair": "BSC-LT/salamandra-7b",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L00-salamandra-7b.js"
  },
  "1": {
-  "batches": 9,
   "cells": [
    "ContextualAI/archangel_sft-dpo_pythia2-8b",
    "EleutherAI/pythia-2.8b"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L01-b08.json"
   ],
   "n": 400,
   "pair": "EleutherAI/pythia-2.8b",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L01-pythia-2_8b.js"
  },
  "2": {
-  "batches": 9,
   "cells": [
    "EleutherAI/pythia-6.9b",
    "lomahony/eleuther-pythia6.9b-hh-dpo"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L02-b08.json"
   ],
   "n": 400,
   "pair": "EleutherAI/pythia-6.9b",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L02-pythia-6_9b.js"
  },
  "3": {
-  "batches": 9,
   "cells": [
    "HuggingFaceTB/SmolLM3-3B",
    "HuggingFaceTB/SmolLM3-3B-Base"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L03-b08.json"
   ],
   "n": 400,
   "pair": "HuggingFaceTB/SmolLM3-3B-Base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L03-SmolLM3-3B-Base.js"
  },
  "4": {
-  "batches": 9,
   "cells": [
    "LLM360/Amber",
    "LLM360/AmberSafe"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L04-b08.json"
   ],
   "n": 400,
   "pair": "LLM360/Amber",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L04-Amber.js"
  },
  "5": {
-  "batches": 9,
   "cells": [
    "OpenLLM-France/Lucie-7B",
    "OpenLLM-France/Lucie-7B-Instruct-v1.1"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L05-b08.json"
   ],
   "n": 400,
   "pair": "OpenLLM-France/Lucie-7B",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L05-Lucie-7B.js"
  },
  "6": {
-  "batches": 9,
   "cells": [
    "Qwen/Qwen2.5-0.5B",
    "Qwen/Qwen2.5-0.5B-Instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L06-b08.json"
   ],
   "n": 400,
   "pair": "Qwen/Qwen2.5-0.5B",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L06-Qwen2_5-0_5B.js"
  },
  "7": {
-  "batches": 9,
   "cells": [
    "Qwen/Qwen2.5-7B",
    "Qwen/Qwen2.5-7B-Instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L07-b08.json"
   ],
   "n": 400,
   "pair": "Qwen/Qwen2.5-7B",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L07-Qwen2_5-7B.js"
  },
  "8": {
-  "batches": 9,
   "cells": [
    "Qwen/Qwen3-8B",
    "Qwen/Qwen3-8B-Base"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L08-b08.json"
   ],
   "n": 400,
   "pair": "Qwen/Qwen3-8B-Base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L08-Qwen3-8B-Base.js"
  },
  "9": {
-  "batches": 9,
   "cells": [
    "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L09-b08.json"
   ],
   "n": 400,
   "pair": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L09-TinyLlama-1_1B-intermedi.js"
  },
  "10": {
-  "batches": 9,
   "cells": [
    "allenai/OLMo-2-0425-1B",
    "allenai/OLMo-2-0425-1B-DPO"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L10-b08.json"
   ],
   "n": 400,
   "pair": "allenai/OLMo-2-0425-1B",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L10-OLMo-2-0425-1B.js"
  },
  "11": {
-  "batches": 9,
   "cells": [
    "allenai/OLMoE-1B-7B-0125",
    "allenai/OLMoE-1B-7B-0125-DPO"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L11-b08.json"
   ],
   "n": 400,
   "pair": "allenai/OLMoE-1B-7B-0125",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L11-OLMoE-1B-7B-0125.js"
  },
  "12": {
-  "batches": 9,
   "cells": [
    "allenai/Olmo-3-1025-7B",
    "allenai/Olmo-3-7B-Instruct-DPO"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L12-b08.json"
   ],
   "n": 400,
   "pair": "allenai/Olmo-3-1025-7B",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L12-Olmo-3-1025-7B.js"
  },
  "13": {
-  "batches": 9,
   "cells": [
    "bigscience/bloom-7b1",
    "bigscience/bloomz-7b1"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L13-b08.json"
   ],
   "n": 400,
   "pair": "bigscience/bloom-7b1",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L13-bloom-7b1.js"
  },
  "14": {
-  "batches": 9,
   "cells": [
    "PKU-Alignment/beaver-7b-v1.0",
    "huggyllama/llama-7b"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L14-b08.json"
   ],
   "n": 400,
   "pair": "huggyllama/llama-7b",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L14-llama-7b.js"
  },
  "15": {
-  "batches": 9,
   "cells": [
    "ibm-granite/granite-3.0-8b-base",
    "ibm-granite/granite-3.0-8b-instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L15-b08.json"
   ],
   "n": 400,
   "pair": "ibm-granite/granite-3.0-8b-base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L15-granite-3_0-8b-base.js"
  },
  "16": {
-  "batches": 9,
   "cells": [
    "m-a-p/CT-LLM-Base",
    "m-a-p/CT-LLM-SFT-DPO"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L16-b08.json"
   ],
   "n": 400,
   "pair": "m-a-p/CT-LLM-Base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L16-CT-LLM-Base.js"
  },
  "17": {
-  "batches": 9,
   "cells": [
    "meta-llama/Llama-3.1-8B",
    "meta-llama/Llama-3.1-8B-Instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L17-b08.json"
   ],
   "n": 400,
   "pair": "meta-llama/Llama-3.1-8B",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L17-Llama-3_1-8B.js"
  },
  "18": {
-  "batches": 9,
   "cells": [
    "HuggingFaceH4/zephyr-7b-beta",
    "mistralai/Mistral-7B-v0.1"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L18-b08.json"
   ],
   "n": 400,
   "pair": "mistralai/Mistral-7B-v0.1",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L18-Mistral-7B-v0_1.js"
  },
  "19": {
-  "batches": 9,
   "cells": [
    "openbmb/MiniCPM5-1B",
    "openbmb/MiniCPM5-1B-Base"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L19-b08.json"
   ],
   "n": 400,
   "pair": "openbmb/MiniCPM5-1B-Base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L19-MiniCPM5-1B-Base.js"
  },
  "20": {
-  "batches": 9,
   "cells": [
    "tiiuae/Falcon3-10B-Base",
    "tiiuae/Falcon3-10B-Instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L20-b08.json"
   ],
   "n": 400,
   "pair": "tiiuae/Falcon3-10B-Base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L20-Falcon3-10B-Base.js"
  },
  "21": {
-  "batches": 9,
   "cells": [
    "tiiuae/Falcon3-1B-Base",
    "tiiuae/Falcon3-1B-Instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L21-b08.json"
   ],
   "n": 400,
   "pair": "tiiuae/Falcon3-1B-Base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L21-Falcon3-1B-Base.js"
  },
  "22": {
-  "batches": 9,
   "cells": [
    "tiiuae/Falcon3-3B-Base",
    "tiiuae/Falcon3-3B-Instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L22-b08.json"
   ],
   "n": 400,
   "pair": "tiiuae/Falcon3-3B-Base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L22-Falcon3-3B-Base.js"
  },
  "23": {
-  "batches": 9,
   "cells": [
    "tiiuae/Falcon3-7B-Base",
    "tiiuae/Falcon3-7B-Instruct"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L23-b08.json"
   ],
   "n": 400,
   "pair": "tiiuae/Falcon3-7B-Base",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L23-Falcon3-7B-Base.js"
  },
  "24": {
-  "batches": 9,
   "cells": [
    "togethercomputer/RedPajama-INCITE-7B-Chat",
    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L24-b08.json"
   ],
   "n": 400,
   "pair": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/L24-RedPajama-INCITE-Base-7B.js"
  },
  "25": {
-  "batches": 9,
   "cells": [
    "zai-org/glm-4-9b-chat-hf",
    "zai-org/glm-4-9b-hf"
+  ],
+  "files": [
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b00.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b01.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b02.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b03.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b04.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b05.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b06.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b07.json",
+   "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/lineage/batches/L25-b08.json"
   ],
   "n": 400,
   "pair": "zai-org/glm-4-9b-hf",
