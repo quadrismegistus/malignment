@@ -10,14 +10,28 @@ The fleet planner carried `SEC_PER_CELL = 0.8`, then `0.19`, and BOTH were singl
 measurements on single models quoted as properties of the work:
 
     0.8    MPS, measured here, used to plan a CUDA fleet        4x too slow
-    0.19   CUDA, measured on ONE model (kanana, 8B)             ~3x too fast
-           for bloom-7b1, whose vocabulary is 250,880
+    0.19   CUDA, measured on ONE model (kanana, 8B), then
+           applied to 144 models spanning 0.155 to 6.04 s/cell
 
 Correcting the first to the second fixed the DEVICE and left the sampling error
 untouched, which is how the same class of error survived its own correction. A
 rate is not a property of twp. It is a property of (model x device x tranche),
 and the only honest fix is to stop asserting one number and start recording what
 we observe.
+
+**CORRECTED 2026-08-19, same session.** This paragraph first explained the 0.19
+vs 0.855 gap by bloom-7b1's 250,880-token vocabulary. Both halves were wrong:
+0.19 is CUDA and 0.855 is MPS, so it was a CROSS-DEVICE comparison explained by a
+model property -- and the vocabulary claim is refuted on our own data. Measured
+over 107 MPS observations with a local config:
+
+    r(log params, log sec/cell)  =  +0.541
+    r(log vocab,  log sec/cell)  =  -0.050
+
+Size is the driver; vocabulary carries nothing. Qwen2.5-0.5B has a 151,936-token
+vocabulary and runs at 0.233, Mistral-7B has 32,000 and runs at 2.757. The claim
+had been asserted in three places before anyone tested it, including in the
+docstring of the function built to stop exactly this.
 
 RH: *"why don't we store model-specific twp rates?"*
 
@@ -36,10 +50,12 @@ source. Load is paid once per arm; compute is paid per cell. A fleet plans on
 compute and budgets load as a constant, and a single blended number cannot answer
 either question.
 
-**`vocab_size`.** The plausible driver, and the only field here that lets us
-PREDICT for a model we have never run -- which is most of them. twp expands a
-beam over the token tree, so vocabulary is the mechanism, not a correlate. Stored
-so the guess can later be checked rather than assumed.
+**`vocab_size`.** Stored as a CANDIDATE predictor so the guess could be checked
+rather than assumed -- and it was checked, and it failed (r = -0.05 in log-log
+over 107 models). Kept because a refuted predictor is worth keeping refuted, and
+because the field costs nothing. **Parameter count is the one that carries signal
+(r = +0.54), and it is not stored here yet** -- it comes from the config, which
+this module does not read. That is the honest state, not a plan.
 
 **`device` and `gpu`.** MPS and CUDA differ ~4x, and cards differ among
 themselves.
@@ -73,11 +89,16 @@ MIN_CELLS = 25
 #: must carry where it came from. Caught by running the planner, which printed
 #: `0 of 144 models have a RECORDED rate`.
 #:
-#: What they actually are: cuda is roughly midway between the only two CUDA
-#: numbers anyone has seen (0.19 on kanana-8B, ~0.6 on bloom-7b1 with its 250,880
-#: vocabulary), and mps is the long-standing 0.8-1.9 range from this Mac. They
-#: exist so a plan can be priced at all, and every caller that uses one is told.
-#: Re-derive from real data with `summary()` once the store fills.
+#: What they actually are: `cuda` sits between the only two CUDA numbers anyone
+#: has seen (0.199 on kanana-8B; ~0.6 inferred from the bloom-7b1 box's poll
+#: deltas, which is coarse), and `mps` is the median of the 115 stash-derived MPS
+#: observations. They exist so a plan can be priced at all, and every caller that
+#: uses one is told. Re-derive with `summary()` as the store fills.
+#:
+#: A third version of this comment explained the CUDA spread by bloom's
+#: vocabulary. Refuted -- see the module docstring. **Two files were corrected
+#: before anyone re-read this line**, which is why a withdrawal has to be a grep
+#: for the claim's EFFECTS and not only for the sentence that stated it.
 FALLBACK = {"cuda": 0.35, "mps": 1.2}
 
 

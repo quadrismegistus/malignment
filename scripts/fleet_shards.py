@@ -53,14 +53,16 @@ matters.
 `SEC_PER_CELL` was a constant here, and it was wrong twice for different reasons:
 
     0.8    the MPS rate, while every box in this plan is CUDA          4x slow
-    0.19   CUDA, but measured on ONE model (kanana, 8B)                ~3x fast
-           for bloom-7b1 -- 250,880-token vocabulary against 128k
+    0.19   CUDA, measured on ONE model (kanana, 8B), applied to 144
+           models whose measured rates span 0.155 to 6.04 s/cell
 
 **Correcting the first to the second fixed the DEVICE and left the sampling error
 untouched**, which is how one class of error survived its own correction: both
-numbers were a single measurement standing in for 144 models. twp expands a beam
-over the token tree, so vocabulary size is the mechanism and not a correlate, and
-no single number can carry it.
+numbers were a single measurement standing in for 144 models.
+
+An earlier version of this block blamed the spread on vocabulary size. **That is
+refuted on our own data** -- over 107 MPS observations, r(log vocab, log s/cell)
+= -0.05 while r(log params, log s/cell) = +0.54. Model size is the driver.
 
 So the constant is gone. `malignment.rates` stores an observation per run --
 model, device, card, vocab size, n_cells, load and compute SEPARATELY -- and
@@ -127,10 +129,10 @@ def seconds(remaining, device="cuda", only=None):
 
     **A rate is a property of (model x device), not of twp.** `SEC_PER_CELL` was a
     single number twice, and both times it was one model's measurement standing in
-    for 144: 0.8 was MPS while the fleet was CUDA, and 0.19 was kanana while
-    bloom-7b1 -- 250,880-token vocabulary against 128k -- runs about 3x slower on
-    the same card. twp expands a beam over the token tree, so vocabulary is the
-    mechanism rather than a correlate, and one number cannot carry it.
+    for 144 models whose measured rates span 0.155 to 6.04 s/cell -- a 39x range
+    that no scalar can carry. Model size predicts it (r = +0.54 in log-log over
+    107 observations); vocabulary, which an earlier version of this docstring
+    named as the mechanism, does not (r = -0.05).
 
     Models never measured fall back, and **the fallback list comes back with the
     answer** so a caller cannot quote the total without also being handed how much

@@ -551,9 +551,9 @@ class TWPRunner:
         #: COMPUTED s/cell for its heartbeat and then thrown it away, so every
         #: planning number in this repo came from a human reading a log line and
         #: retyping it -- which is how `SEC_PER_CELL` was 0.8 (MPS) while planning
-        #: a CUDA fleet, and then 0.19 (ONE model, 8B) while bloom-7b1 with its
-        #: 250,880-token vocabulary runs several times slower. Divided by `n_ok`,
-        #: what was WRITTEN, never by `len(todo)`, what was attempted.
+        #: a CUDA fleet, and then 0.19 (ONE model, 8B) while the measured rates
+        #: across this roster span 0.155 to 6.04 s/cell, a 39x range. Divided by
+        #: `n_ok`, what was WRITTEN, never by `len(todo)`, what was attempted.
         _elapsed = time.time() - t0
         _marks.append(time.time())
         _d = sorted(_marks[i + 1] - _marks[i] for i in range(len(_marks) - 1))
