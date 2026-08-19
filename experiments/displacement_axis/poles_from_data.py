@@ -35,14 +35,21 @@ Two evaluations, because they answer different questions:
                This is RH's question -- whether the vector captures more of the
                ENTIRE vocabulary's probability shift, not just its ranking.
 
-**THE MASS COLUMN HAS NO NULL AND MUST NOT BE QUOTED AS IT STANDS.** A direction
-that places nearly every word on one side of its origin scores well automatically
-whenever most mass moves that way, and nothing here distinguishes that from a
-direction that has actually sorted the vocabulary. `rho` has a meaningful zero
-and does not have this problem, so every claim below rests on `rho`. The mass
-figures are printed because the question was asked and the shape is suggestive,
-and they need a permutation baseline -- the same discipline rated.py applies to
-its own scales -- before they mean anything.
+**THE MASS COLUMN NEEDS A NULL AND NOW HAS TWO.** A direction that places nearly
+every word on one side of its origin scores well automatically whenever most mass
+moves that way, so the raw share is uninterpretable on its own:
+
+    mass_trivial   the best CONSTANT predictor: put every word on one side and
+                   take whichever side holds more of sum|dP|. This is the floor
+                   any direction must clear, and it is high -- most frames move
+                   most of their mass one way.
+    mass_perm      permute s across the frame's words, preserving the marginal
+                   distribution of scores exactly and destroying only the
+                   word-to-score link. rated.py's null, applied to this metric.
+
+`lift` is the raw share minus the trivial floor. A direction that has genuinely
+sorted the vocabulary beats the constant predictor; one that has only discovered
+which way the frame moves does not.
 """
 
 import collections, glob, json, os, sys
@@ -110,6 +117,8 @@ def main():
     prompt_of = {c["item_id"]: c["prompt"]
                  for c in (json.loads(l) for l in open(os.path.join(RES, "cells.jsonl")))}
 
+    import random
+    rngp = random.Random(20260820)
     rows = []
     for item, lins in cells.items():
         p = prompt_of.get(item)
@@ -150,7 +159,11 @@ def main():
         y = [nb[w] for w in words]
         r = dict(item_id=item, prompt=p, n_words=len(words),
                  n_lin_a=len(A), n_lin_b=len(B))
-        absmass = sum(abs(sum(lins[l].get(w, 0.0) for l in B)) for w in words) or 1.0
+        dpB = {w: sum(lins[l].get(w, 0.0) for l in B) for w in words}
+        absmass = sum(abs(v) for v in dpB.values()) or 1.0
+        #: the constant-predictor floor, computed once per frame
+        up = sum(abs(v) for v in dpB.values() if v > 0)
+        r["mass_trivial"] = max(up, absmass - up) / absmass
         for space in ("bge", "ctx", "k"):
             vec = spaces[space]
             for src, (h, ll) in (("data", (hi, lo)), ("author", poles[p])):
@@ -164,13 +177,24 @@ def main():
                                      [nb[w] for w in common]).statistic
                 #: MASS CAPTURED: share of half B's |dP| on words the direction
                 #: puts on the side its own sign predicts.
-                cap = 0.0
-                for w in common:
-                    dp = sum(lins[l].get(w, 0.0) for l in B)
-                    if (s[w] > 0) == (dp > 0):
-                        cap += abs(dp)
+                def captured(sc):
+                    c = 0.0
+                    for w in common:
+                        if (sc[w] > 0) == (dpB[w] > 0):
+                            c += abs(dpB[w])
+                    return c / absmass
+                cap = captured(s)
+                #: permutation null: same score marginal, no word-to-score link
+                vals = [s[w] for w in common]
+                perms = []
+                for _ in range(24):
+                    pm = list(vals)
+                    rngp.shuffle(pm)
+                    perms.append(captured(dict(zip(common, pm))))
                 r["rho_%s_%s" % (space, src)] = rr
-                r["mass_%s_%s" % (space, src)] = cap / absmass
+                r["mass_%s_%s" % (space, src)] = cap
+                r["massperm_%s_%s" % (space, src)] = float(np.mean(perms))
+                r["masslift_%s_%s" % (space, src)] = cap - r["mass_trivial"]
         rows.append(r)
     #: RESTRICT TO THE COMMON FRAME SET. An earlier version printed bge over 302
     #: frames beside contextual over 165 -- the contextual space needs every one
@@ -184,8 +208,13 @@ def main():
     print("frames scored in ALL THREE spaces by BOTH pole rules: %d" % len(rows))
     print("(the contextual space needs all 12 scales present per word, which is "
           "what bounds it)\n")
-    print("%-30s %9s %9s %9s"
-          % ("direction", "median rho", "mean rho", "mass captured"))
+    triv = [r["mass_trivial"] for r in rows if "mass_trivial" in r]
+    print("THE FLOOR: the best CONSTANT predictor captures a median %.3f of "
+          "half B's |dP|" % float(np.median(triv)))
+    print("(most frames move most of their mass one way, which is why the raw")
+    print(" mass share cannot be read on its own)\n")
+    print("%-30s %9s %9s %9s %9s %9s"
+          % ("direction", "median rho", "mean rho", "mass", "vs perm", "LIFT"))
     for space, lab in (("bge", "bge (the s already computed)"),
                        ("ctx", "contextual %d-dim" % len(CSC)),
                        ("k", "k_ratings 7-dim")):
@@ -195,9 +224,17 @@ def main():
             m = [r[mk] for r in rows if mk in r]
             if len(v) < 30:
                 continue
-            print("%-30s %9.3f %9.3f %9.3f"
+            pm = [r["massperm_%s_%s" % (space, src)] for r in rows
+                  if "massperm_%s_%s" % (space, src) in r]
+            lf = [r["masslift_%s_%s" % (space, src)] for r in rows
+                  if "masslift_%s_%s" % (space, src) in r]
+            w = stats.wilcoxon(lf) if len(lf) > 8 else None
+            print("%-30s %9.3f %9.3f %9.3f %9.3f %+9.3f%s"
                   % ("%s, %s poles" % (lab, src), float(np.median(v)),
-                     float(np.mean(v)), float(np.median(m))))
+                     float(np.mean(v)), float(np.median(m)),
+                     float(np.median(pm)) if pm else float("nan"),
+                     float(np.median(lf)) if lf else float("nan"),
+                     " *" if w and w.pvalue < .05 else "  "))
     print("\nPAIRED, data-chosen poles minus author-declared, same frames")
     for space in ("bge", "ctx", "k"):
         a, b = "rho_%s_data" % space, "rho_%s_author" % space
