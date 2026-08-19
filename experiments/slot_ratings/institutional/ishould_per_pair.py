@@ -114,8 +114,10 @@ def main():
             gb, gd = gaps([c], s)
             tb, td = sg(gb), sg(gd)
             if tb:
+                #: per-lineage vectors, so a plot reads points not summaries
                 saved["per_pair"].append(dict(
                     pair=c, corpus=CD[c][0], domain=CD[c][1], scale=s,
+                    base_values=gb, delta_values=gd,
                     base_mean=tb[3], base_pos=tb[0], base_n=tb[1], base_p=tb[2],
                     delta_mean=td[3] if td else None, delta_pos=td[0] if td else None,
                     delta_p=td[2] if td else None))
@@ -145,7 +147,9 @@ def main():
                         td[3], td[0], td[1], td[2], "*" if td[2] < .05 else "")
                 print(row)
                 saved["per_domain" if label == "PER DOMAIN" else "pooled"].append(dict(
-                    group=g, n_pairs=len(cs), scale=s, base_mean=tb[3], base_pos=tb[0],
+                    group=g, n_pairs=len(cs), scale=s,
+                    base_values=gb, delta_values=gd,
+                    base_mean=tb[3], base_pos=tb[0],
                     base_n=tb[1], base_p=tb[2], delta_mean=td[3] if td else None,
                     delta_pos=td[0] if td else None, delta_p=td[2] if td else None))
     json.dump(dict(_what="'I should' matched pairs, sign test by lineage, per pair, "

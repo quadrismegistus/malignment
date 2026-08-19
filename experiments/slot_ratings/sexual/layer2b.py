@@ -73,7 +73,13 @@ def main():
                 row += " | %+20.3f %3d/%-2d %9.2g%s" % (
                     st.mean(gd), pd_, nd, sd, "*" if sd == sd and sd < .05 else "")
             print(row)
-            saved.append(dict(pair=pr, scale=s, base_gap=st.mean(gb),
+            #: PER-LINEAGE VECTORS, not just the summary. A DiD is a
+            #: distribution and its mean says little without the spread; a plot
+            #: that has to recompute the points usually ends up plotting the
+            #: summary instead.
+            saved.append(dict(pair=pr, scale=s, lineages=lins,
+                              base_values=gb, delta_values=gd,
+                              base_gap=st.mean(gb),
                               base_pos=pb, base_n=nb, base_p=sb,
                               delta_gap=st.mean(gd) if gd else None,
                               delta_pos=(sgn(gd)[0] if len(gd) >= 8 else None),

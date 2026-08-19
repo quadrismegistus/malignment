@@ -73,7 +73,9 @@ def cell(lv, prompts, meta, DIRECTION, sets, a, b, label):
             row += (" | %+10.3f %4d/%-3d %10.2g%s %10.2g"
                     % (td[0], td[1], td[2], td[3], "*" if td[3] < .05 else " ", td[4]))
         print(row)
-        out.append(dict(scale=s, base_gap=tb[0], base_pos=tb[1], base_n=tb[2],
+        #: per-lineage vectors, see layer2b
+        out.append(dict(scale=s, base_values=B, delta_values=D,
+                        base_gap=tb[0], base_pos=tb[1], base_n=tb[2],
                         base_sign_p=tb[3], base_wilcox_p=tb[4],
                         delta_gap=td[0] if td else None,
                         delta_pos=td[1] if td else None,
