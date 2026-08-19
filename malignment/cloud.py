@@ -152,7 +152,23 @@ def query(b):
         if b.get(key) is not None:
             q.append("%s>=%s" % (field, b[key]))
     if b.get("cuda_max_good") is not None:
-        q.append("cuda_max_good<=%s" % b["cuda_max_good"])
+        #: **A FLOOR, NOT A CEILING, AND IT USED TO BE THE WRONG WAY ROUND.**
+        #: `cuda_max_good` is the HOST DRIVER's maximum supported CUDA, so
+        #: `<=12.4` selected the OLDEST drivers on the market. Measured
+        #: 2026-08-19: it took a satisfiable query from 28 offers to ZERO, on all
+        #: eleven declared boxes, and the only symptom was "no offers matched
+        #: profile 'dense'" -- a filter still correct as written while the world
+        #: moved past it. Every qualifying host today reports 12.8 to 13.3; none
+        #: reports <= 12.4.
+        #:
+        #: Nothing documented the ceiling: the profile's only `pin_reasons` entry
+        #: is `torch>=2.6`, which is the torch.load CVE policy and says nothing
+        #: about CUDA. An undocumented constraint that silently empties every
+        #: query is worse than none.
+        #:
+        #: A genuine CEILING -- an old image that a new driver breaks -- would
+        #: need its own key, because this one cannot express both.
+        q.append("cuda_max_good>=%s" % b["cuda_max_good"])
     q.append("rentable=true")
     return " ".join(q)
 
