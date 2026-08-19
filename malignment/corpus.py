@@ -339,6 +339,97 @@ def retable(sql, rule_version):
     return sql.replace("twp_words", w).replace("twp_cells", c)
 
 
+def _stash_words(model, prompts=None, rules=None):
+    """{prompt: set(words)} this ONE model has, from its stash, INCLUDING topup.
+
+    Asymmetric to the union on purpose and for the same reason as the ClickHouse
+    path: a word measured anywhere must never be rescored, so `have` counts
+    topup rows while the union does not.
+    """
+    import os
+    import glob
+    import json as _json
+    from .checkpoint import Checkpoint
+    base = Checkpoint(model).dir
+    want = set(prompts) if prompts else None
+    out = {}
+    for path in glob.glob(os.path.join(base, "*", "jsonl.hashstash.raw", "data.jsonl")):
+        with open(path, encoding="utf-8") as fh:
+            for line in fh:
+                if '"rules"' not in line:
+                    continue
+                try:
+                    d = _json.loads(line)
+                except ValueError:
+                    continue
+                k = d.get("__key__") or {}
+                if rules and k.get("rules") != rules:
+                    continue
+                p = k.get("prompt")
+                if p is None or (want is not None and p not in want):
+                    continue
+                out.setdefault(p, set()).update(
+                    r.get("word") for r in (d.get("rows") or ()))
+    return out
+
+
+def stash_union(root, prompts=None, ops=None, producer=None, rules=None):
+    """{prompt: set(words)} for a lineage, read from the LOCAL STASH.
+
+        corpus.stash_union("kakaocorp/kanana-1.5-8b-base")
+
+    **A FLEET BOX HAS NO CLICKHOUSE, AND `lineage_union` ASKS CLICKHOUSE.**
+    `pass1_todo`'s docstring has warned about this shape since it was written --
+    "a fresh rental has none, so a box asked to run what is missing re-measures
+    everything" -- and sharding by lineage was adopted precisely so a box could
+    compute its own union. But the code still queried the corpus, so the first
+    real rental died on `FileNotFoundError: /opt/homebrew/bin/clickhouse`, a
+    macOS path, on a Linux box, during pass 2. The design was right and the
+    implementation never followed it.
+
+    Reads every member's stash directly, across ALL producer directories: cells
+    shipped from another machine sit under that machine's producer name, and they
+    are exactly the ones a box needs to build the union it did not measure
+    itself.
+
+    Pass-1 rows only (`topup` false), same rule as `lineage_union`: pass 2 must
+    not chase its own output.
+    """
+    import os
+    import glob
+    import json as _json
+    from . import roster
+    from .checkpoint import Checkpoint
+    members = roster.lineages(ops=ops or roster.ALIGNING).get(root)
+    if not members:
+        raise KeyError("%s is not a lineage root -- see roster.lineages()" % root)
+    want = set(prompts) if prompts else None
+    out = {}
+    for m in sorted(members):
+        base = Checkpoint(m).dir
+        for path in glob.glob(os.path.join(base, "*", "jsonl.hashstash.raw",
+                                           "data.jsonl")):
+            with open(path, encoding="utf-8") as fh:
+                for line in fh:
+                    if '"rules"' not in line:
+                        continue
+                    try:
+                        d = _json.loads(line)
+                    except ValueError:
+                        continue
+                    k = d.get("__key__") or {}
+                    if rules and k.get("rules") != rules:
+                        continue
+                    if k.get("topup"):
+                        continue
+                    p = k.get("prompt")
+                    if p is None or (want is not None and p not in want):
+                        continue
+                    out.setdefault(p, set()).update(
+                        r.get("word") for r in (d.get("rows") or ()))
+    return out
+
+
 def lineage_union(root, prompts=None, ops=None, rule_version=4):
     """{prompt: set(words)} -- every word ANY member of this lineage cleared.
 
@@ -390,7 +481,8 @@ def lineage_union(root, prompts=None, ops=None, rule_version=4):
     return out
 
 
-def topup_todo(model, root=None, ops=None, rule_version=4, prompts=None):
+def topup_todo(model, root=None, ops=None, rule_version=4, prompts=None,
+               from_stash=False):
     """{prompt: [words this model lacks that its LINEAGE has]} -- the pass-2 worklist.
 
     Exactly what `twp_v4.score_words4` should be handed. A word already present
@@ -419,6 +511,19 @@ def topup_todo(model, root=None, ops=None, rule_version=4, prompts=None):
     #: prompts the caller is not asking about -- and the `have` query is left
     #: unscoped on purpose, because a word already measured anywhere must never
     #: be rescored regardless of which prompt subset is in view.
+    #: `from_stash` is what a FLEET BOX uses: no ClickHouse, union and `have`
+    #: both read from the local stash. Same arithmetic, different source.
+    if from_stash:
+        from . import twp_v4 as _V4
+        lbl = _V4.ADOPTED.label()
+        union = stash_union(root, prompts=prompts, ops=ops, rules=lbl)
+        mine = _stash_words(model, prompts=prompts, rules=lbl)
+        todo = {}
+        for p_, words in union.items():
+            missing = sorted(words - mine.get(p_, set()))
+            if missing:
+                todo[p_] = missing
+        return todo
     union = lineage_union(root, ops=ops, rule_version=rule_version, prompts=prompts)
     have = {}
     #: `have` DOES include topup rows, where the union does not: a word already

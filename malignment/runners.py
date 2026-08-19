@@ -527,7 +527,7 @@ class TWPRunner:
 
 
     def topup(self, rules, root=None, limit=None, dict_path=None, verbose=True,
-              prompts=None):
+              prompts=None, from_stash=False):
         """PASS 2: score the words this model's LINEAGE cleared and it did not.
 
             Runner(ck).topup(rules=V4.ADOPTED)
@@ -567,17 +567,36 @@ class TWPRunner:
         ck = self.ck
         os.makedirs(ck.dir, exist_ok=True)
         say = (lambda m: print(m, flush=True)) if verbose else (lambda m: None)
-        todo_words = corpus.topup_todo(ck.model_id, root=root, prompts=prompts)
+        todo_words = corpus.topup_todo(ck.model_id, root=root, prompts=prompts,
+                                       from_stash=from_stash)
         say("  INSTRUMENT: rule_version %d | %s | prompt_cache %s | topup"
             % (V4.RULE_VERSION, rules.label(), bool(T.USE_PROMPT_CACHE))
             + ("" if prompts is None else "  scope=%d prompts" % len(prompts)))
         base_key = lambda p: dict(ck.key(p, rules), topup=True)          # noqa: E731
         st = ck.stash(PRODUCER)
-        have1 = {k["prompt"]: v for k, v in st.items()
+        #: **ACROSS EVERY PRODUCER, NOT ONLY THIS MACHINE'S.** This read
+        #: `ck.stash(PRODUCER).items()`, so pass 2 could only top up cells THIS
+        #: box had measured itself -- and a cell SHIPPED from another machine
+        #: sits under that machine's producer name, invisible.
+        #:
+        #: Found by the first real rental, 2026-08-19. The base arm arrived with
+        #: 277 shipped cells, pass 1 correctly skipped it (`Checkpoint.done()`
+        #: reads across producers), and then pass 2 wrote ZERO for it while
+        #: 4,261 words were missing from its union. The sibling measured on the
+        #: box wrote 277 fine. Two reads of the same stash disagreeing about
+        #: which producers count, and only the quiet one was wrong.
+        #:
+        #: This is the whole premise of shipping a lineage: a box closes a
+        #: lineage using arms it did NOT measure. `done()` already knew that;
+        #: `topup` did not.
+        have1 = {k["prompt"]: v for _p, _st in ck.stashes() for k, v in _st.items()
                  if k.get("rule_version") == V4.RULE_VERSION
                  and not k.get("topup")
                  and k.get("rules") == rules.label()}
-        todo = [p for p in sorted(todo_words) if p in have1 and base_key(p) not in st]
+        _done2 = {k["prompt"] for _p, _st in ck.stashes() for k in _st.keys()
+                  if isinstance(k, dict) and k.get("topup")
+                  and k.get("rules") == rules.label()}
+        todo = [p for p in sorted(todo_words) if p in have1 and p not in _done2]
         if limit:
             todo = todo[:limit]
         say("  %s\n  topup: %d prompts with missing words | %d have a pass-1 cell"

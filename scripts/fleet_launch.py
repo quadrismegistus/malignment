@@ -66,6 +66,15 @@ sys.path.insert(0, HERE)
 
 DEFAULT_IMAGE = "pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel"
 
+#: **DERIVED FROM THE CHECKOUT, NOT TYPED.** I typed `rj416/malignment` from
+#: memory; the remote is `quadrismegistus/malignment`, and the clone would have
+#: failed ON THE BOX with the rental already running. Asking git costs nothing
+#: and cannot be out of date.
+REPO_URL = (subprocess.run(["git", "remote", "get-url", "origin"], cwd=ROOT,
+                           capture_output=True, text=True).stdout.strip()
+            .replace("git@github.com:", "https://github.com/")
+            or "https://github.com/quadrismegistus/malignment.git")
+
 
 def preflight(models):
     """Refuse to spend on a shard with a BLOCKER. Returns (ok, summary)."""
@@ -251,7 +260,18 @@ def execute(b, models, roots, venv, a):
         return 0
 
     # ---- provision ---------------------------------------------------------
-    print("  provision   repo + venv %s" % venv)
+    print("  ship        working tree -> /root/malignment (exact parity, no clone)")
+    cloud.ssh_run(st, "mkdir -p /root/malignment")
+    cloud.rsync(st, ROOT, "/root/malignment",
+                #: **`data/` HOLDS AN ASSET, NOT ONLY DATA.** Excluding it whole
+                #: shipped a box that died on
+                #: `data/dict/jieba_dict_big.txt` -- the prefix trie twp needs
+                #: for the CJK boundary rule. Exclude the measured outputs, keep
+                #: the assets: a directory name is not a category.
+                exclude=(".git", ".venv*", "__pycache__", "*.pyc",
+                         "data/raw", "data/*.json", "data/*.csv", "data/*.parquet",
+                         "experiments", "*.egg-info"))
+    print("  provision   venv %s" % venv)
     r = cloud.ssh_run(st, PROVISION % {"venv": venv})
     if r.returncode:
         #: **A FAILURE AFTER `create` LEAVES A BOX BILLING.** Raising here without
@@ -334,16 +354,30 @@ def execute(b, models, roots, venv, a):
     return 0
 
 
+#: **THE TREE IS SHIPPED, NOT CLONED.** The first attempt cloned from GitHub and
+#: it could not have worked: this checkout is on branch `rule-v4`, which has
+#: NEVER been pushed, while `origin` carries only `main` at 334 commits behind.
+#: A box would have cloned code predating every fix today -- no --only tranches,
+#: no prompts= scoping in pass 2, no per-record ingest gate, no corpus.retable --
+#: and produced cells that looked fine while using the wrong pass-2 scope.
+#:
+#: rsync of the working tree removes the whole class: the box runs EXACTLY what
+#: was tested here, with no "did we push" question, no branch to get wrong, and
+#: nothing of other seats' work published to a public repo to make a rental work.
+#: RH caught this by asking "are we pushed? will it get the latest?"
 PROVISION = """set -e
 export DEBIAN_FRONTEND=noninteractive
-command -v git >/dev/null || (apt-get update -qq && apt-get install -y -qq git rsync)
-[ -d /root/malignment ] || git clone --depth 1 %(repo)s /root/malignment 2>/dev/null || true
+command -v rsync >/dev/null || (apt-get update -qq && apt-get install -y -qq rsync)
 cd /root/malignment
-python -m pip -q install uv 2>/dev/null || true
-[ -d %(venv)s ] || python -m venv %(venv)s
+python3 -m venv %(venv)s 2>/dev/null || true
+./%(venv)s/bin/pip -q install --upgrade pip
 ./%(venv)s/bin/pip -q install -r requirements.txt
-./%(venv)s/bin/python -c "import torch,transformers;print('torch',torch.__version__,'transformers',transformers.__version__)"
-""".replace("%(repo)s", "https://github.com/rj416/malignment.git")
+# **AND THE PACKAGE ITSELF.** requirements.txt lists DEPENDENCIES; without
+# `pip install -e .` every script dies on `ModuleNotFoundError: malignment` --
+# after the venv built, after the payload shipped, with the rental running.
+./%(venv)s/bin/pip -q install -e .
+./%(venv)s/bin/python -c "import torch,transformers;print('torch',torch.__version__,'transformers',transformers.__version__,'cuda',torch.cuda.is_available())"
+"""
 
 
 def _billing(cloud, iid, why):

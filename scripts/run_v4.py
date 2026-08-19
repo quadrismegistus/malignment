@@ -58,6 +58,15 @@ def main():
                          "topup_lineage.py ran everything in one interpreter and "
                          "died on OLMo-2's tie_word_embeddings at 27 of 72.")
     ap.add_argument("--root", default=None, help="lineage root for --topup")
+    ap.add_argument("--from-stash", action="store_true",
+                    help="pass 2 builds its union from the local stash, for a box "
+                         "with no ClickHouse")
+    ap.add_argument("--prompts-file", default=None,
+                    help="explicit prompt list, one per line, EXACT text. Takes "
+                         "precedence over --only. Added for dario's frame-level "
+                         "ask: topup coverage is per-PROMPT, so a consumer whose "
+                         "frames sit late in a sweep's order waits for the whole "
+                         "sweep to reach them even though their cells cost minutes.")
     ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None,
                     help="measure one TRANCHE of the population instead of all "
                          "of it. See the note below on why the tranches differ "
@@ -107,7 +116,18 @@ def main():
     #: Kept as a flag rather than a reordering because "which prompts did this
     #: run cover" must stay answerable, and a silent priority sort makes a
     #: partial run indistinguishable from a complete one.
-    if a.neighbours:
+    if a.prompts_file:
+        want = [l.rstrip("\n") for l in open(a.prompts_file, encoding="utf-8") if l.strip()]
+        allp = {p.text for p in Prompts.all()}
+        prompts = [t for t in want if t in allp]
+        missing = [t for t in want if t not in allp]
+        if missing:
+            #: REFUSE rather than silently measure a subset. A prompt list that
+            #: half-resolves is a request the caller did not make, and the caller
+            #: is downstream where a missing cell reads as a measured zero.
+            raise SystemExit("%d of %d prompts are not in the population: %s"
+                             % (len(missing), len(want), missing[:3]))
+    elif a.neighbours:
         prompts = ck.neighbour_prompts()
     else:
         allp = {p.text: p for p in Prompts.all()}
@@ -131,7 +151,8 @@ def main():
         if a.topup:
             from malignment.runners import TWPRunner
             return TWPRunner(ck).topup(rules=V4.ADOPTED, root=a.root,
-                                       limit=a.limit, prompts=prompts)
+                                       limit=a.limit, prompts=prompts,
+                                       from_stash=a.from_stash)
         return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit)
     finally:
         sys.stdout = tee.stream

@@ -41,6 +41,12 @@ def main():
     ap.add_argument("--all-endpoints", action="store_true",
                     help="every lineage containing a declared endpoint base -- "
                          "the 50 that roster.endpoints() resolves")
+    ap.add_argument("--from-stash", action="store_true",
+                    help="build the lineage union from the LOCAL STASH instead "
+                         "of ClickHouse. What a fleet box uses: a fresh rental "
+                         "has no corpus, and the first real launch died on "
+                         "`FileNotFoundError: /opt/homebrew/bin/clickhouse` -- a "
+                         "macOS path, on a Linux box, in pass 2.")
     ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None,
                     help="scope pass 2 to a prompt tranche. The UNION is computed "
                          "over that tranche only; `have` stays unscoped, because a "
@@ -83,9 +89,15 @@ def main():
     #: member with none is skipped rather than run -- it would load 14 GB to
     #: discover it has nothing to merge onto. Checked from the corpus, which is
     #: also what the union is built from.
-    from malignment import ch
-    measured = {r["model"] for r in ch.query(
-        "SELECT DISTINCT model FROM {db}.twp_cells_v4 WHERE topup=0")}
+    from malignment import ch, corpus
+    if a.from_stash:
+        from malignment import twp_v4 as _V4
+        measured = {m for m in members
+                    if corpus._stash_words(m, prompts=prompts,
+                                           rules=_V4.ADOPTED.label())}
+    else:
+        measured = {r["model"] for r in ch.query(
+            "SELECT DISTINCT model FROM {db}.twp_cells_v4 WHERE topup=0")}
     skipped = [m for m in members if m not in measured]
     members = [m for m in members if m in measured]
     logdir = os.path.join(Checkpoint(roots[0]).dir, PRODUCER)
@@ -117,6 +129,8 @@ def main():
             py = os.path.join(venv_for(m), "bin", "python")
             cmd = [py, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
                    "--model", m, "--cache", "--topup", "--root", root_of[m]]
+            if a.from_stash:
+                cmd += ["--from-stash"]
             if a.only:
                 cmd += ["--only", a.only]
             r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
@@ -130,6 +144,21 @@ def main():
                             "error": (err or ["?"])[-1][:200], "minutes": mins})
                 continue
             print("  exit=0  %.1f min  %s" % (mins, (tail or ["?"])[-1][:110]), flush=True)
+            #: **INGEST PER ARM, RH's call.** The alternative is one ingest at the
+            #: end, and it leaves the corpus behind the whole time a long sweep
+            #: runs -- measured mid-run: 10 models and 1,630 cells written to disk
+            #: and invisible to every consumer, including `topup_todo`, which then
+            #: re-lists words that are already measured. Scoped by --source so it
+            #: costs seconds, and --replace keeps it idempotent.
+            d = os.path.join("malignment-data", "twp", m.replace("/", "__"), PRODUCER)
+            ing = subprocess.run(
+                [os.path.join(ROOT, ".venv", "bin", "malign"), "ingest",
+                 "--rule-version", "4", "--run", "--replace", "--source", d],
+                cwd=ROOT, capture_output=True, text=True)
+            pl = [l for l in (ing.stdout or "").splitlines() if "planned" in l]
+            print("  ingest: %s" % (pl[-1].strip() if pl else
+                                    "FAILED rc=%d %s" % (ing.returncode,
+                                    (ing.stderr or "")[-90:])), flush=True)
             out.append({"model": m, "venv": os.path.basename(venv_for(m)),
                         "minutes": mins, "tail": (tail or [""])[-1][:200]})
     finally:
