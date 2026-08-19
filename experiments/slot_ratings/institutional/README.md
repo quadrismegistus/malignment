@@ -497,6 +497,54 @@ first-order here (changing `I should ___` to `...and I ___` moves `procedural`
 Each corpus uses the source its own producer used. slotpov's 12 slot prompts have
 **zero** rows in `movement` (checked), so they come from `twp_words_v4_best`.
 
+### TWO UNITS ARE NEEDED, AND MOST OF THE RESULT SURVIVES ONLY ONE
+
+Producer: `unit_check.py`. Table: `results/base_side/unit_check.json`.
+
+The significance unit is the lineage: prompts are averaged within a lineage,
+then Wilcoxon over 50 (F21, M03) or 32 (slotpov) lineages. That is not pooling.
+But every lineage sees the SAME prompts, so prompt-level variance is invisible to
+that test, and a gap carried by one prompt can be unanimous across all 50
+lineages because all 50 see that prompt. p=1.8e-15 is the n=50 floor, which is a
+statement about unanimity across models and about nothing else.
+
+So the orthogonal test: average over LINEAGES first, then make the prompt (F21),
+the stratum (M03) or the matched set (slotpov) the unit. Neither test dominates;
+an effect present on both generalises to models AND to prompts.
+
+**Survives both units:**
+
+```
+F21       makes_better, specificity, arousal                    3 of 25
+M03       arousal, mediation, specificity, assertiveness,
+          termination                                           5 of 13
+slotpov   arousal, assertiveness, deliberation, interiority,
+          procedural                                            5 of 25
+```
+
+`arousal` is the only scale that survives both units in all three corpora.
+`specificity` survives both in two, `assertiveness` in two. **All three are in
+the collinear [A] cluster** (agency/specificity/assertiveness/arousal, pairwise
+0.62-0.83), so what survives is one axis, found on both units in every corpus.
+
+**What does not survive is most of the table.** F21's `collective` has a lineage
+gap of −0.831 at p=1.8e-15 and a prompt-unit gap of **+0.007** at p=0.79: the
+sign reverses. Its `procedural` (+0.232, p=8e-10) is p=0.19 on the prompt unit
+and its `deference` (+0.193, p=4.2e-08) is p=0.21. **The two scales F21's finding
+is named for do not survive the prompt unit on F21's own corpus.** They do
+survive on slotpov, where `procedural` is +1.358 at the floor p=0.031.
+
+**The power ceiling on the second unit is real and cuts the other way.** M03 has
+7 strata and slotpov 6 matched sets, so the smallest attainable p is 0.016 and
+0.031: those tests can only report unanimity, and a scale failing them is not
+thereby refuted. F21's 12-against-12 is the only prompt-unit test with room to
+resolve anything finer.
+
+**Restated.** The level claim -- that the base already carries the position gap
+-- holds across models on nearly every scale, and across prompts on the agency
+cluster. Where it holds on models only, it is a fact about which prompts were
+written, not about the positions.
+
 ### The level claim replicates in all three, and is the strongest result here
 
 The base gap is significant on 13 of 13 scales in F21, 13 of 13 in M03 and 10 of

@@ -87,12 +87,33 @@ def merge(paths):
     return R
 
 
+#: v6 (12 general scales) and v3 (13 institutional) rate the SAME (prompt, word)
+#: pairs, so both are merged into one rating dict per corpus. v6 originally
+#: covered only the 303 pilot3 slot frames, which is 100% of slotpov and 0% of
+#: F21 and M03; `rate_v6_positions.py` fills those two in.
+def v6_for(prompts_wanted):
+    R = collections.defaultdict(dict)
+    want = set(prompts_wanted)
+    paths = (glob.glob(os.path.join(HERE, "results", "v6", "rated_*_v6.json"))
+             + glob.glob(os.path.join(SLOT, "results", "v6", "rated_v6_*.json")))
+    for f in paths:
+        d = json.load(open(f))
+        for x in (d.get("prompts") if isinstance(d, dict) else d):
+            if x.get("ratable") and x["prompt"] in want:
+                R[(x["prompt"], x["word"])].update(
+                    {k: v for k, v in x.items() if isinstance(v, int)
+                     and k not in ("n_eligible", "n_present", "rise", "fall", "net")})
+    return R
+
+
 def corpus_f21():
     from run_f21 import prompts
     R = merge(sorted(glob.glob(os.path.join(
         HERE, "results", "m03", "rated_f21_slot_institutional_en_v3_arm*.json"))))
     items = [dict(prompt=p["prompt"], position=p["position"], stratum="all")
              for p in prompts()]
+    for k, v in v6_for({i["prompt"] for i in items}).items():
+        R[k].update(v)
     return items, R
 
 
@@ -111,6 +132,8 @@ def corpus_m03():
             #: ever taken between cells that share a grammatical site.
             items.append(dict(prompt=txt, position=parts[0],
                               stratum="_".join(parts[1:]), scenario=sc["scenario_id"]))
+    for k, v in v6_for({i["prompt"] for i in items}).items():
+        R[k].update(v)
     return items, R
 
 
@@ -122,6 +145,8 @@ def corpus_slotpov():
     for ms, v in povpairs():
         for i in v:
             items.append(dict(prompt=i["prompt"], position=i["position"], stratum=ms))
+    for k, v in v6_for({i["prompt"] for i in items}).items():
+        R[k].update(v)
     return items, R
 
 
@@ -139,7 +164,10 @@ def levels(items, R, source="movement"):
     from malignment import roster, vectors as V
     ep = sorted(roster.endpoints()[0].items())
     texts = sorted({i["prompt"] for i in items})
-    scales = sorted({k for v in R.values() for k in v})
+    #: `ratable` is the instrument's own yes/no flag, not a scale. It is constant
+    #: over the rated set by construction, so it produced a 0.000 row with nan
+    #: p-values in every table.
+    scales = sorted({k for v in R.values() for k in v} - {"ratable"})
     if source == "movement":
         rows = V.rows("SELECT prompt, base, aligned, word, p_base, p_aligned "
                       "FROM movement WHERE prompt IN {ps:Array(String)} "
@@ -195,6 +223,14 @@ def levels(items, R, source="movement"):
     return out, scales
 
 
+#: agency, specificity, assertiveness and arousal are pairwise 0.62-0.83 over
+#: 14,196 rated rows (README 6f). They are ONE axis. Marked in the table so a
+#: 25-row output is not read as 25 findings; the same applies to target and
+#: vocalisation at +0.657.
+CLUSTER = {"agency": "[A]", "specificity": "[A]", "assertiveness": "[A]",
+           "arousal": "[A]", "target": "[t]", "vocalisation": "[t]"}
+
+
 def gaps(rows, scales, min_per_side=1):
     #: min_per_side=1 because slotpov's stratum is a matched PAIR: exactly one
     #: prompt per side by construction. Requiring 2 emptied that corpus and
@@ -229,10 +265,21 @@ def gaps(rows, scales, min_per_side=1):
         if len(bg) < 6:
             continue
         dg = [a - b for a, b in zip(ag, bg)]
+        #: p_aligned is NOT a third piece of evidence: aligned = base + delta
+        #: identically, so a significant base with a null delta forces a
+        #: significant aligned. It is reported as a consistency value.
+        #: MDE: the smallest per-lineage gap this n could detect at 80% power,
+        #: paired-t approximation 2.8 * sd / sqrt(n). Needed because the central
+        #: claim ("alignment adds nothing to the gap") is the acceptance of a
+        #: null, and a null without an MDE is just a small sample.
+        import math
+        mde = 2.8 * st.pstdev(dg) / math.sqrt(len(dg)) if len(dg) > 1 else float("nan")
         res.append(dict(
             scale=s, n=len(bg), base_gap=st.median(bg), aligned_gap=st.median(ag),
             delta_gap=st.median(dg), p_base=stats.wilcoxon(bg).pvalue,
-            p_delta=stats.wilcoxon(dg).pvalue,
+            p_aligned=stats.wilcoxon(ag).pvalue,
+            p_delta=stats.wilcoxon(dg).pvalue, mde_delta=mde,
+            delta_over_mde=abs(st.median(dg)) / mde if mde == mde and mde > 0 else None,
             base_pos=sum(1 for x in bg if x > 0),
             d_indiv=st.median(di), d_inst=st.median(dn),
             p_movediff=stats.wilcoxon(di, dn).pvalue,
@@ -261,12 +308,19 @@ def main(argv=None):
                   "(IQR %.3f-%.3f)"
                   % (st.median(cov), *[sorted(cov)[int(len(cov) * q)] for q in (.25, .75)]))
         res = gaps(rows, scales)
-        print("\n   %-14s %3s %9s %9s %9s %9s %9s %9s"
-              % ("scale", "n", "base gap", "algn gap", "delta", "p base", "p delta", "inherit"))
+        print("\n   EVIDENCE is (base, delta). `algn` and its p are the SUM of those two")
+        print("   and cannot disagree with them; shown for reading, not as a third test.")
+        print("   MDE = smallest delta this n could detect at 80%. A null delta below")
+        print("   its MDE is an underpowered test, not an absent effect.\n")
+        print("   %-14s%-4s%3s %8s %8s %8s | %8s %8s %8s | %7s %6s %7s"
+              % ("scale", "", "n", "base", "algn", "delta", "p base", "p algn", "p delta",
+                 "MDE", "d/MDE", "inherit"))
         for r in sorted(res, key=lambda r: r["p_base"]):
-            print("   %-14s %3d %+9.3f %+9.3f %+9.3f %9.2g %9.2g %9s"
-                  % (r["scale"], r["n"], r["base_gap"], r["aligned_gap"], r["delta_gap"],
-                     r["p_base"], r["p_delta"],
+            dm = r["delta_over_mde"]
+            print("   %-14s%-4s%3d %+8.3f %+8.3f %+8.3f | %8.1e %8.1e %8.2g | %7.3f %6s %7s"
+                  % (r["scale"], CLUSTER.get(r["scale"], ""), r["n"], r["base_gap"], r["aligned_gap"], r["delta_gap"],
+                     r["p_base"], r["p_aligned"], r["p_delta"], r["mde_delta"],
+                     ("%.2f" % dm) if dm is not None else "-",
                      ("%.0f%%" % (100 * r["inherited"])) if r["inherited"] else "-"))
         print("\n   DOES ALIGNMENT MOVE THE INDIVIDUAL MORE?")
         print("   %-14s %10s %10s %9s" % ("scale", "d indiv", "d inst", "p"))
