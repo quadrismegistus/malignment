@@ -114,6 +114,16 @@ def main():
     ap.add_argument("--disk", type=int, default=400)
     ap.add_argument("--yes", action="store_true", help="actually rent")
     ap.add_argument("--dry-run", action="store_true", default=True)
+    ap.add_argument("--box-profile", default="dense",
+                    help="a box shape declared in roster/environments.yaml. "
+                         "cloud.box() RAISES on an unknown name rather than "
+                         "defaulting -- a typo falling back to `default` would "
+                         "rent an A100 for a job that asked for `dense`, and the "
+                         "bill is the only place that shows.")
+    ap.add_argument("--stop-after", choices=STAGES, default=None)
+    ap.add_argument("--i-have-rh-authorisation", action="store_true",
+                    help="asserts RH said to spend on THIS launch, not a "
+                         "remembered earlier yes")
     a = ap.parse_args()
 
     plan = json.load(open(os.path.join(ROOT, a.plan)))
@@ -156,14 +166,56 @@ def main():
         print("\n  DRY RUN -- nothing rented. Pass --yes to spend.")
         return 0
 
-    #: The executor lands here. Deliberately still absent: the plan, the
-    #: preflight, the payload and the command sequence are all now checkable
-    #: WITHOUT spending, which is the half that should exist first.
+    return execute(b, models, roots, venv, a)
+
+
+#: ## THE STAGES, AND WHY EACH IS SEPARATELY STOPPABLE
+#:
+#: `--stop-after` exists because every stage below has failed on some fleet and
+#: the runbook's casualty pattern is a box that LOOKS alive: "instance running"
+#: is the rental, not the work. Being able to stop at `reachable` or `payload`
+#: means the expensive stages are entered only after the cheap ones are seen to
+#: work, on a real box, once.
+STAGES = ("offer", "create", "reachable", "provision", "payload", "run", "pull",
+          "verify", "destroy")
+
+
+def execute(b, models, roots, venv, a):
+    from malignment import cloud
+    shape = cloud.box(a.box_profile)
+    print("\n  box profile %s: %s" % (a.box_profile, str(shape.get("description"))[:70]))
+
+    offers = cloud.offers(a.box_profile, limit=5)
+    if not offers:
+        raise SystemExit("  no offers matched profile %r" % a.box_profile)
+    best = offers[0]
+    print("  best offer  #%s  %sx %s  $%s/hr  %s"
+          % (best.get("id"), best.get("num_gpus"), best.get("gpu_name"),
+             best.get("dph_total"), best.get("geolocation")))
+    est = float(best.get("dph_total") or 0) * (b["cells"] * .8 / 3600)
+    print("  estimated   $%.2f for %.1f h of compute (EXCLUDES download time, "
+          "which dominates on a fresh box)" % (est, b["cells"] * .8 / 3600))
+    if a.stop_after == "offer":
+        print("\n  STOPPED AFTER offer -- nothing rented.")
+        return 0
+
+    #: **THE CONFIRMATION IS HERE AND NOT EARLIER.** Everything above is free;
+    #: the next call bills. RH's standing rule is that cloud spend begins on his
+    #: own word, so `--yes` alone does not suffice for the first box of a
+    #: campaign -- it is the flag that ALLOWS this prompt, not one that skips it.
+    if not a.i_have_rh_authorisation:
+        raise SystemExit(
+            "  REFUSING to create an instance.\n"
+            "  --yes allows the attempt; --i-have-rh-authorisation asserts that RH\n"
+            "  said to spend on THIS launch. Two flags because a single one gets\n"
+            "  copied from a previous command line, and the runbook's rule is that\n"
+            "  renting starts on RH's own word rather than on a remembered yes.")
+
     raise SystemExit(
-        "  --yes is accepted but the vast.ai executor is not wired in this commit.\n"
-        "  Everything above is verified and costs nothing. Renting begins on RH's\n"
-        "  own word and lands as its own change, with the offer choice, the\n"
-        "  provisioning and the destroy-on-verify path explicit.")
+        "  create/provision/payload/run/pull/verify/destroy are NOT wired yet.\n"
+        "  Offer selection and costing above are live and free. The remaining\n"
+        "  stages touch money and a remote filesystem and land next, so that this\n"
+        "  commit can be read without any of them having run.")
 
 
 if __name__ == "__main__":
