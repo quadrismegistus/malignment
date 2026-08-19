@@ -105,6 +105,88 @@ def record(model, device, n_cells, compute_s, load_s=None, gpu=None,
     return obs
 
 
+def from_stash(root=None, path=PATH, write=True, min_cells=MIN_CELLS):
+    """Derive observations from `__written_at__`, for every model ever measured.
+
+    **RH: "is the box writing to the jsonl stash? each key a __created_at__?"** It
+    is -- `__written_at__`, a float epoch on every record, all distinct. Which
+    means this was never a going-forward problem: the timing for all 106 measured
+    models has been on disk the whole time.
+
+    I checked ClickHouse, found `mtime` was per-FILE, concluded "the corpus cannot
+    answer this" and built a forward-only recorder. The stash is the PRODUCER'S OWN
+    OUTPUT and I did not open it -- the exact rung this campaign's own rule names,
+    applied to the wrong store one step earlier in the pipeline.
+
+    ## THE MEDIAN OF CONSECUTIVE DELTAS, NOT (last - first) / n
+
+    Deltas between consecutive writes measure per-cell cost DIRECTLY, and the
+    median of them is immune to the two things that wreck a span average:
+
+        the cold load          sits before the first record, so it is not in any
+                               delta at all -- the OLMoE defect cannot occur here
+        pauses and requeues    a run resumed hours later contributes ONE huge
+                               delta, which a median ignores and a mean does not
+
+    So this is a better instrument than the one `run()` records live, and it needs
+    no cooperation from the producer. `p90` is kept beside it because a model whose
+    p90 is far above its median is one whose cost depends on the PROMPT, and a
+    single number will mislead whoever plans with it.
+    """
+    import glob
+    root = root or os.path.expanduser(
+        os.environ.get("MALIGNMENT_DATA", "~/malignment-data") + "/twp")
+    out = []
+    for f in sorted(glob.glob(os.path.join(root, "*", "*", "jsonl.hashstash.raw",
+                                           "data.jsonl"))):
+        by = {}
+        for line in open(f, encoding="utf-8"):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                d = json.loads(line)
+            except ValueError:
+                continue
+            t = d.get("__written_at__")
+            if not isinstance(t, (int, float)):
+                continue
+            k = d.get("__key__") or {}
+            by.setdefault((d.get("model") or k.get("model"),
+                           d.get("device"),
+                           k.get("rules") or d.get("rules"),
+                           bool(k.get("topup"))), []).append(t)
+        for (model, device, rules, topup), ts in by.items():
+            if not model or len(ts) < min_cells:
+                continue
+            ts.sort()
+            dl = sorted(ts[i + 1] - ts[i] for i in range(len(ts) - 1))
+            if not dl:
+                continue
+            med = dl[len(dl) // 2]
+            obs = {"model": model, "device": device, "gpu": None,
+                   "vocab_size": None, "rules": rules, "only": None,
+                   "topup": topup, "n_cells": len(ts), "load_s": None,
+                   "compute_s": round(med * len(ts), 1),
+                   "sec_per_cell": round(med, 4),
+                   "p90_sec_per_cell": round(dl[int(len(dl) * 0.9)], 4),
+                   "source": "stash:__written_at__",
+                   "observed": time.strftime("%Y-%m-%dT%H:%M:%S",
+                                             time.localtime(ts[-1]))}
+            out.append(obs)
+    if write and out:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        #: **REWRITTEN, not appended.** Every row here is DERIVED from the stash,
+        #: so re-running must not multiply them -- unlike `record()`, whose rows
+        #: are live observations that legitimately accumulate. Live rows are
+        #: preserved: only stash-derived ones are replaced.
+        keep = [o for o in load(path) if o.get("source") != "stash:__written_at__"]
+        with open(path, "w", encoding="utf-8") as fh:
+            for o in keep + out:
+                fh.write(json.dumps(o) + "\n")
+    return out
+
+
 def load(path=PATH):
     if not os.path.exists(path):
         return []
