@@ -1,0 +1,341 @@
+{
+ "_what": "LAYER 2: paired within matched set, blocked on lineage, crossed (lineage x set) bootstrap. Two contrasts, two vocabularies.",
+ "results": {
+  "FULL VOCABULARY": {
+   "directional": [
+    {
+     "scale": "orality",
+     "base_gap": -0.044372506730612986,
+     "base_p": 0.67,
+     "aligned_gap": -0.0523897692481686,
+     "aligned_p": 0.634,
+     "delta_gap": -0.008017262517555615,
+     "delta_p": 0.598
+    },
+    {
+     "scale": "tactility",
+     "base_gap": -0.18509442457302866,
+     "base_p": 0.365,
+     "aligned_gap": -0.1942894263286523,
+     "aligned_p": 0.281,
+     "delta_gap": -0.009195001755623636,
+     "delta_p": 0.771
+    },
+    {
+     "scale": "genitality",
+     "base_gap": -1.1625600202960318,
+     "base_p": 0.0,
+     "aligned_gap": -1.0057381719065355,
+     "aligned_p": 0.0,
+     "delta_gap": 0.15682184838949648,
+     "delta_p": 0.197
+    },
+    {
+     "scale": "incorporation",
+     "base_gap": -0.2992625683169769,
+     "base_p": 0.142,
+     "aligned_gap": -0.25602089772016123,
+     "aligned_p": 0.143,
+     "delta_gap": 0.04324167059681566,
+     "delta_p": 0.631
+    },
+    {
+     "scale": "body_distance",
+     "base_gap": 0.34699092653891134,
+     "base_p": 0.175,
+     "aligned_gap": 0.385975174626067,
+     "aligned_p": 0.127,
+     "delta_gap": 0.038984248087155664,
+     "delta_p": 0.558
+    },
+    {
+     "scale": "exposure",
+     "base_gap": 0.19510167932454336,
+     "base_p": 0.634,
+     "aligned_gap": 0.15299502856462283,
+     "aligned_p": 0.633,
+     "delta_gap": -0.042106650759920525,
+     "delta_p": 0.287
+    },
+    {
+     "scale": "charge",
+     "base_gap": -0.06420179381036296,
+     "base_p": 0.737,
+     "aligned_gap": -0.08264579988285284,
+     "aligned_p": 0.63,
+     "delta_gap": -0.018444006072489864,
+     "delta_p": 0.766
+    },
+    {
+     "scale": "euphemism",
+     "base_gap": -0.08739447058768639,
+     "base_p": 0.423,
+     "aligned_gap": -0.13271345859282843,
+     "aligned_p": 0.135,
+     "delta_gap": -0.04531898800514203,
+     "delta_p": 0.406
+    },
+    {
+     "scale": "explicitness",
+     "base_gap": -0.2927481832037803,
+     "base_p": 0.191,
+     "aligned_gap": -0.338417120914864,
+     "aligned_p": 0.111,
+     "delta_gap": -0.045668937711083636,
+     "delta_p": 0.658
+    }
+   ],
+   "nondirectional": [
+    {
+     "scale": "orality",
+     "base_gap": -0.022269708162551968,
+     "base_p": 0.387,
+     "aligned_gap": -0.0516232976078235,
+     "aligned_p": 0.35,
+     "delta_gap": -0.02935358944527153,
+     "delta_p": 0.507
+    },
+    {
+     "scale": "tactility",
+     "base_gap": -0.21499684164441366,
+     "base_p": 0.063,
+     "aligned_gap": -0.22648489702764021,
+     "aligned_p": 0.063,
+     "delta_gap": -0.011488055383226553,
+     "delta_p": 0.884
+    },
+    {
+     "scale": "genitality",
+     "base_gap": -0.8136763630167833,
+     "base_p": 0.047,
+     "aligned_gap": -0.7783995475017855,
+     "aligned_p": 0.066,
+     "delta_gap": 0.03527681551499764,
+     "delta_p": 0.567
+    },
+    {
+     "scale": "incorporation",
+     "base_gap": -0.11675161807235225,
+     "base_p": 0.168,
+     "aligned_gap": -0.10391986657231311,
+     "aligned_p": 0.242,
+     "delta_gap": 0.01283175150003913,
+     "delta_p": 0.435
+    },
+    {
+     "scale": "body_distance",
+     "base_gap": 0.6452271978542962,
+     "base_p": 0.05911823647294589,
+     "aligned_gap": 0.7284164511112585,
+     "aligned_p": 0.05911823647294589,
+     "delta_gap": 0.10139312088793395,
+     "delta_p": 0.31462925851703405
+    },
+    {
+     "scale": "exposure",
+     "base_gap": 0.11773637736353124,
+     "base_p": 0.063,
+     "aligned_gap": 0.12937339424164765,
+     "aligned_p": 0.063,
+     "delta_gap": 0.01163701687811642,
+     "delta_p": 0.952
+    },
+    {
+     "scale": "charge",
+     "base_gap": -0.41282275724037504,
+     "base_p": 0.0,
+     "aligned_gap": -0.3775090146438484,
+     "aligned_p": 0.0,
+     "delta_gap": 0.03531374259652663,
+     "delta_p": 0.552
+    },
+    {
+     "scale": "euphemism",
+     "base_gap": 0.18423367228225748,
+     "base_p": 0.0,
+     "aligned_gap": 0.1339981453115787,
+     "aligned_p": 0.0,
+     "delta_gap": -0.050235526970678804,
+     "delta_p": 0.008
+    },
+    {
+     "scale": "explicitness",
+     "base_gap": -0.8165500428456098,
+     "base_p": 0.0,
+     "aligned_gap": -0.8361493807912097,
+     "aligned_p": 0.0,
+     "delta_gap": -0.019599337945599874,
+     "delta_p": 0.795
+    }
+   ]
+  },
+  "SHARED VOCABULARY ONLY": {
+   "directional": [
+    {
+     "scale": "orality",
+     "base_gap": -0.03448655900086002,
+     "base_p": 0.72,
+     "aligned_gap": -0.047712005800268284,
+     "aligned_p": 0.613,
+     "delta_gap": -0.012802298836207524,
+     "delta_p": 0.444
+    },
+    {
+     "scale": "tactility",
+     "base_gap": -0.15645494326227558,
+     "base_p": 0.431,
+     "aligned_gap": -0.14937955053371502,
+     "aligned_p": 0.397,
+     "delta_gap": 0.003490727282875427,
+     "delta_p": 1.0
+    },
+    {
+     "scale": "genitality",
+     "base_gap": -0.8182393008611321,
+     "base_p": 0.0,
+     "aligned_gap": -0.7373425478216729,
+     "aligned_p": 0.0,
+     "delta_gap": 0.0557118524051127,
+     "delta_p": 0.526
+    },
+    {
+     "scale": "incorporation",
+     "base_gap": -0.3149724656995897,
+     "base_p": 0.0,
+     "aligned_gap": -0.27057428025317404,
+     "aligned_p": 0.0,
+     "delta_gap": 0.048185526033037857,
+     "delta_p": 0.728
+    },
+    {
+     "scale": "body_distance",
+     "base_gap": 0.16552862497976847,
+     "base_p": 0.602,
+     "aligned_gap": 0.2578701451711581,
+     "aligned_p": 0.351,
+     "delta_gap": 0.10145583335547086,
+     "delta_p": 0.084
+    },
+    {
+     "scale": "exposure",
+     "base_gap": 0.21415968821763776,
+     "base_p": 0.628,
+     "aligned_gap": 0.16609471784221067,
+     "aligned_p": 0.592,
+     "delta_gap": -0.05047831593240894,
+     "delta_p": 0.146
+    },
+    {
+     "scale": "charge",
+     "base_gap": 0.12308836092200762,
+     "base_p": 0.578,
+     "aligned_gap": 0.057875136831098614,
+     "aligned_p": 0.702,
+     "delta_gap": -0.07407467830691758,
+     "delta_p": 0.262
+    },
+    {
+     "scale": "euphemism",
+     "base_gap": -0.15599620492403343,
+     "base_p": 0.174,
+     "aligned_gap": -0.1372307240959586,
+     "aligned_p": 0.146,
+     "delta_gap": 0.016522931000429782,
+     "delta_p": 0.677
+    },
+    {
+     "scale": "explicitness",
+     "base_gap": -0.07795840170368339,
+     "base_p": 0.728,
+     "aligned_gap": -0.19222464790565472,
+     "aligned_p": 0.356,
+     "delta_gap": -0.1202239148909251,
+     "delta_p": 0.119
+    }
+   ],
+   "nondirectional": [
+    {
+     "scale": "orality",
+     "base_gap": -0.03880396094046852,
+     "base_p": 0.333,
+     "aligned_gap": -0.06240229621449868,
+     "aligned_p": 0.401,
+     "delta_gap": -0.02359833527403016,
+     "delta_p": 0.505
+    },
+    {
+     "scale": "tactility",
+     "base_gap": -0.2578465085777382,
+     "base_p": 0.063,
+     "aligned_gap": -0.2713684348107152,
+     "aligned_p": 0.063,
+     "delta_gap": -0.013521926232976992,
+     "delta_p": 0.865
+    },
+    {
+     "scale": "genitality",
+     "base_gap": -0.7575930229462183,
+     "base_p": 0.064,
+     "aligned_gap": -0.7432504890783976,
+     "aligned_p": 0.077,
+     "delta_gap": 0.01434253386782077,
+     "delta_p": 0.766
+    },
+    {
+     "scale": "incorporation",
+     "base_gap": -0.11287243627871413,
+     "base_p": 0.3,
+     "aligned_gap": -0.09959884221817715,
+     "aligned_p": 0.394,
+     "delta_gap": 0.013273594060536981,
+     "delta_p": 0.5
+    },
+    {
+     "scale": "body_distance",
+     "base_gap": 0.6087033721962003,
+     "base_p": 0.04442200908632004,
+     "aligned_gap": 0.7478758347168044,
+     "aligned_p": 0.04442200908632004,
+     "delta_gap": 0.163195122522822,
+     "delta_p": 0.13831398283695104
+    },
+    {
+     "scale": "exposure",
+     "base_gap": 0.14120459605994426,
+     "base_p": 0.063,
+     "aligned_gap": 0.14911667700231065,
+     "aligned_p": 0.063,
+     "delta_gap": 0.007912080942366404,
+     "delta_p": 1.0
+    },
+    {
+     "scale": "charge",
+     "base_gap": -0.29354151069986434,
+     "base_p": 0.078,
+     "aligned_gap": -0.2821956726251127,
+     "aligned_p": 0.135,
+     "delta_gap": 0.011345838074751657,
+     "delta_p": 0.834
+    },
+    {
+     "scale": "euphemism",
+     "base_gap": 0.1831627425014421,
+     "base_p": 0.0,
+     "aligned_gap": 0.1328429461884997,
+     "aligned_p": 0.0,
+     "delta_gap": -0.0503197963129424,
+     "delta_p": 0.008
+    },
+    {
+     "scale": "explicitness",
+     "base_gap": -0.7175210634627187,
+     "base_p": 0.001,
+     "aligned_gap": -0.7734999272874142,
+     "aligned_p": 0.0,
+     "delta_gap": -0.055978863824695524,
+     "delta_p": 0.489
+    }
+   ]
+  }
+ }
+}

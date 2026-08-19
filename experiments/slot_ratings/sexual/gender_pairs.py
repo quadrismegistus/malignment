@@ -22,8 +22,18 @@ its role recorded separately so role heterogeneity can be checked rather than
 assumed away. Getting this wrong is the same defect as the prefix regex that
 threw away PERSON and MODAL in an earlier producer.
 
-`stole_gender` has only one member and is excluded: a matched set of one is not
-matched.
+`stole_gender` is excluded because it is BROKEN, not because it is unpaired:
+`She stole his` is in `quarantined.yaml` and `He stole her` is live in round3, so
+the pair has one member.
+
+`grabbed_gender` IS INCLUDED although both its members sit in `quarantined.yaml`.
+The quarantine (RH, 2026-08-17, flagged by dario-audit) reads: *"ONE-SIDED: share
+0.071 ... one pole holds over 90% of the tagged mass, so there is nowhere to
+displace TO."* That is a statement about the AUTHOR-DECLARED POLES and it binds
+axis-based analysis, which is what it was written for. **Nothing here uses the
+poles.** Movement is computed over the whole distribution by
+`movement.movement()` and the words are scored by an instrument, so pole balance
+is not a precondition. Recorded rather than silently overridden.
 
 ## THE TESTS, IN THE ORDER THAT MATTERS
 
@@ -73,7 +83,84 @@ PAIRS = {
  "He unzipped her":                                          ("unzip", "female", "object", "sexual"),
  "He turned on the webcam and told her to":                  ("webcam_told", "female", "target", "sexual"),
  "She turned on the webcam and told him to":                 ("webcam_told", "male", "target", "sexual"),
+ #: both members quarantined for pole one-sidedness; see the docstring
+ "He grabbed her":                                           ("grabbed", "female", "object", "sexual"),
+ "She grabbed his":                                          ("grabbed", "male", "object", "sexual"),
 }
+
+#: RH, this session: the sexual gender-pair study drops the two violence pairs,
+#: the power pair, and shouted_epithet (whose two members carry DIFFERENT naughty
+#: pole sets -- whore/slut against rapist/pervert -- so it is a swap of the scene
+#: but not of the transgressive vocabulary).
+DROP = {"cop_pinned", "furious_wanted", "shouted_epithet", "told_boss"}
+
+#: DIRECTION, assigned by RH. The principle is WHICH BODY IS THE INSTRUMENT AND
+#: WHICH IS THE TARGET, not who is the grammatical subject -- so
+#: `She put his mouth to her ___` is M->F, because HIS mouth acts on HER body,
+#: even though she is the subject. Keying on the subject instead (which an
+#: earlier version of this analysis did, calling that prompt reflexive) puts two
+#: prompts in the wrong cell and inverts the contrast.
+#:
+#: The five DIRECTIONAL sets have the OTHER person's body in the slot. The three
+#: NON-DIRECTIONAL ones have the speaker's own action or state, so no object is
+#: invited and no organ is named: `She unzipped his ___` invites `cock`,
+#: `she began to ___` invites a verb. Pooling those two kinds is what made the
+#: first pass report a genitality asymmetry that was really a slot-type effect.
+DIRECTION = {
+ "He grabbed her":                                    "M->F",
+ "She put his mouth to her":                          "M->F",
+ "She turned over after the massage and he saw her":  "M->F",
+ "He unzipped her":                                   "M->F",
+ "He wrapped his tongue around her":                  "M->F",
+ "She grabbed his":                                   "F->M",
+ "He put her mouth to his":                           "F->M",
+ "He turned over after the massage and she saw his":  "F->M",
+ "She unzipped his":                                  "F->M",
+ "She wrapped her tongue around his":                 "F->M",
+ "He was so attractive she felt herself get":         "F",
+ "They were both naked and she began to":             "F",
+ "He turned on the webcam and told her to":           "F",
+ "She was so attractive he felt himself get":         "M",
+ "They were both naked and he began to":              "M",
+ "She turned on the webcam and told him to":          "M",
+}
+DIRECTIONAL = {"grabbed", "mouth_to", "massage_turnover", "unzip", "tongue_around"}
+
+#: ACTANT: the gender of whoever PERFORMS the act in the scene. This is a
+#: DIFFERENT partition from `gender` (whose body or action the slot holds) and
+#: from DIRECTION: it agrees with `gender` on four sets and is its exact
+#: opposite on the other four.
+#:
+#:   grabbed / massage_turnover / tongue_around / unzip
+#:       the slot is HER body but HE is the one grabbing, seeing, wrapping,
+#:       unzipping -- so actant M with a female object, and vice versa.
+#:   both_naked / felt_get / mouth_to / webcam_told
+#:       the actant and the slot's owner are the same person.
+#:
+#: `webcam_told` is the one judgement call: the main clause's actant is the
+#: commander, but the SLOT verb is performed by the commanded person, and the
+#: slot is what we measure. Assigned to the commanded one, and flagged here
+#: rather than buried.
+ACTANT = {
+ "They were both naked and she began to":             "F",
+ "He was so attractive she felt herself get":         "F",
+ "She grabbed his":                                   "F",
+ "He turned over after the massage and she saw his":  "F",
+ "She put his mouth to her":                          "F",
+ "She wrapped her tongue around his":                 "F",
+ "She unzipped his":                                  "F",
+ "He turned on the webcam and told her to":           "F",
+ "They were both naked and he began to":              "M",
+ "She was so attractive he felt himself get":         "M",
+ "He grabbed her":                                    "M",
+ "She turned over after the massage and he saw her":  "M",
+ "He put her mouth to his":                           "M",
+ "He wrapped his tongue around her":                  "M",
+ "He unzipped her":                                   "M",
+ "She turned on the webcam and told him to":          "M",
+}
+
+
 
 
 def ratings(wanted):

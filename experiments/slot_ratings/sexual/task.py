@@ -72,8 +72,26 @@ everywhere it is measuring suppression, not the scene.
 from pydantic import BaseModel, Field
 from largeliterarymodels import Task
 
-SCALES_SEX = ["body_distance", "zone", "exposure", "charge", "euphemism",
-              "explicitness"]
+#: THE MODE SCALES (orality / tactility / genitality) carve by the DRIVE'S AIM
+#: rather than by distance from the genitals, and they are non-exclusive: `suck`
+#: is oral and incorporative, `earlobe` is oral and low on genitality, `fondle`
+#: is tactile alone. Added after reading the corpus: `both_naked`'s top twelve
+#: words split cleanly into an oral cluster (kiss .058, lick .025, suck .015) and
+#: a tactile one (touch .050, feel .049, caress .043, stroke .035, rub, fondle),
+#: and the six axes that existed before scored all twelve identically.
+SCALES_SEX = ["orality", "tactility", "genitality", "incorporation",
+              "body_distance", "exposure", "charge", "euphemism", "explicitness"]
+
+#: `zone` was ONE scale bundling chest, pelvis and buttocks, and the two genders
+#: load onto different parts of it -- the female frames' erogenous mass is BREAST
+#: and the male frames' is GENITAL (mouth_to 21.2% against 2.7% breast, 5.1%
+#: against 10.7% genital; tongue_around 11.8/1.5 and 14.3/24.0). Bundled, those
+#: cancel and the scale reads "both erogenous", hiding the clearest structural
+#: difference in the corpus. It is replaced by `genitality` as a scale plus
+#: `zone_kind` as a category, which also absorbs anality: 0.6-2.4% of mass per
+#: prompt, too thin for its own scale but carried by about twelve words
+#: (ass, bottom, cheeks, butt, asshole, buttocks, anus, behind, hole, backside).
+ZONE_KINDS = ["genital", "breast", "anal", "oral", "other", "none"]
 
 SYSTEM_PROMPT_SEX = (
     "You rate a single word placed in the blank of an unfinished sentence. "
@@ -86,6 +104,10 @@ SYSTEM_PROMPT_SEX = (
     "A hijab removed is high exposure and low charge; stockings removed are "
     "lower exposure and high charge. Score them independently even when they "
     "point the same way.\n\n"
+    "The three MODE scales -- orality, tactility, genitality -- are not "
+    "alternatives. Score each independently: sucking is high on orality AND "
+    "incorporation; an earlobe is high on orality and low on genitality; "
+    "fondling is tactile only. A word can be high on two or on none.\n\n"
     "`euphemism` is about HOW the thing is named, holding WHAT is named fixed. "
     "`cock`, `penis`, `member` and `length` can all denote the same organ and "
     "differ only in register; score that difference here and not on the other "
@@ -110,23 +132,57 @@ class SexualSlot(BaseModel):
         "True if the word modifies or delays a following noun rather than filling "
         "the slot itself (`throbbing`, `huge`, `aching` before an unstated organ). "
         "This is a syntagmatic move, not a substitution, and is counted separately.")
-    body_distance: int = Field(ge=1, le=7, description=
-        "How far from the centre of the body is what this word denotes or acts on? "
+    orality: int = Field(ge=1, le=7, description=
+        "Does the MOUTH figure here, as instrument, site, or object? 7 = the mouth "
+        "does the act or is what it is done to (kiss, lick, suck, bite, mouth, "
+        "lips, tongue); 5 = an oral-receptive site, something a mouth can enclose "
+        "(nipple, earlobe, ear, fingertip); 1 = no relation to the mouth (thigh, "
+        "unzip, dress). This is the drive's AIM, not anatomy: an earlobe is high "
+        "here and low on genitality.")
+    tactility: int = Field(ge=1, le=7, description=
+        "Is this contact made by the HAND or against the SKIN as a surface? "
+        "7 = hand on skin (stroke, caress, rub, fondle, massage, grope); "
+        "4 = contact without a named manner (touch, hold, grab); 1 = not manual "
+        "or surface contact at all (kiss, told, saw, unzipped).")
+    genitality: int = Field(ge=1, le=7, description=
+        "Does this NAME or ACT ON the genitals specifically? 7 = names them "
+        "(cock, penis, clit, pussy, crotch, erection); 4 = groin-adjacent or "
+        "implied; 1 = no relation. NOT the same as `zone_kind`: breasts and "
+        "buttocks are erogenous and score LOW here, which is the point.")
+    incorporation: int = Field(ge=1, le=7, description=
+        "Does the act take the object INTO a body, or work on its surface? "
+        "1 = surface contact only (touch, stroke, kiss); 4 = enclosing or "
+        "engulfing (lick, mouth, wrap around); 7 = taking in (suck, swallow, "
+        "devour, bite off, enter). Not restricted to the mouth. If nothing is "
+        "being done to an object, score 1.")
+    zone_kind: str = Field(description=
+        "Which erogenous region does this word NAME or directly act on? One of "
+        "exactly: `genital`, `breast`, `anal`, `oral`, `other`, `none`.\n"
+        "  genital = penis, vulva, clitoris, crotch, groin\n"
+        "  breast  = breast, nipple, chest, cleavage\n"
+        "  anal    = THE BUTTOCKS OR ANUS AND ANY WORD FOR THEM -- ass, arse, "
+        "butt, bottom, behind, backside, bum, cheeks, buttocks, anus, asshole. "
+        "Do not put these in `other`.\n"
+        "  oral    = mouth, lips, tongue, ear, earlobe, throat\n"
+        "  other   = an erogenous site outside those four (neck, inner thigh)\n"
+        "  none    = no body region is named or acted on")
+    body_distance: int = Field(ge=0, le=7, description=
+        "0 = NOT APPLICABLE: the word is an action, a state or a manner and does "
+        "not denote or act on a place on the body (began, told, quit, weak, "
+        "roughly). Do not guess a body location for these. Otherwise: "
+        "how far from the centre of the body is what this word denotes or acts on? "
         "1 = the genitals themselves; 2 = buttocks, breasts; 3 = torso, groin-"
         "adjacent; 4 = mouth, neck, thighs; 5 = arms, legs, back; 6 = hands, feet, "
         "hair; 7 = off the body entirely (an object in the room, a zipper, keys). "
         "For a garment, judge by the part of the body it covers.")
-    zone: int = Field(ge=1, le=7, description=
-        "Does this word NAME, COVER or ACT ON an erogenous zone -- chest, "
-        "pelvis/groin, or buttocks? 1 = no relation to those zones; 4 = adjacent "
-        "or ambiguous; 7 = names or directly covers one. This is NOT the same as "
-        "`exposure`: a bra covers one small area and is a 7 here; a coat covers "
-        "much more and is a 2.")
     exposure: int = Field(ge=1, le=7, description=
-        "AREA ONLY. How much of a person's body becomes uncovered or newly "
-        "visible in this moment? 1 = none; 4 = a limb or a section; 7 = most of "
-        "the body. Judge quantity, not which part -- which part is `zone`. If "
-        "nothing is being uncovered, score 1.")
+        "How much bare SKIN does this uncover, IN THIS SCENE? Judge skin only, "
+        "not visibility in general, and judge it against what the sentence "
+        "implies is already uncovered -- `They were both naked` and `He unzipped "
+        "her` imply different layering and you can see both. 1 = no skin at all; "
+        "4 = one region (a back, a leg); 7 = most of the body. If nothing is "
+        "being removed or displaced, score 1. Judge QUANTITY; which region is "
+        "`zone_kind`.")
     charge: int = Field(ge=1, le=7, description=
         "How sexually charged does the completed moment read? 1 = not at all, "
         "clinical or mundane; 4 = suggestive; 7 = explicitly sexual. This is "
@@ -145,13 +201,13 @@ class SexualSlot(BaseModel):
 
 
 class SexualSlotEN(Task):
-    """Six scene-built axes plus two classifications, one call per (prompt, word).
+    """Nine scene-built axes plus three classifications, one call per (prompt, word).
 
     Model and temperature match the other slot instruments so the two are
     comparable and so the stash key is stable.
     """
 
-    name = "sexual_slot_en_v1"
+    name = "sexual_slot_en_v2"
     schema = SexualSlot
     system_prompt = SYSTEM_PROMPT_SEX
     temperature = 0.0

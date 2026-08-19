@@ -1,0 +1,806 @@
+{
+ "_what": "8 sexual gender matched pairs: rho (selection) and level (mass shift), which are different quantities",
+ "n_words": 1730,
+ "rho": [
+  {
+   "scale": "orality",
+   "female": -0.03336031757815758,
+   "male": -0.04339742659311991,
+   "diff": 0.010037109014962332,
+   "p": 1.0,
+   "n_pairs": 6
+  },
+  {
+   "scale": "tactility",
+   "female": -0.15314113292710085,
+   "male": -0.1826998292399745,
+   "diff": 0.02955869631287364,
+   "p": 0.375,
+   "n_pairs": 7
+  },
+  {
+   "scale": "genitality",
+   "female": -0.12750778032958743,
+   "male": -0.15882904678524756,
+   "diff": 0.031321266455660135,
+   "p": 0.7421875,
+   "n_pairs": 8
+  },
+  {
+   "scale": "incorporation",
+   "female": 0.011199466176283833,
+   "male": -0.05415353574685813,
+   "diff": 0.06535300192314196,
+   "p": 0.375,
+   "n_pairs": 4
+  },
+  {
+   "scale": "body_distance",
+   "female": 0.2599841557032653,
+   "male": 0.2864282638698121,
+   "diff": -0.026444108166546854,
+   "p": 1.0,
+   "n_pairs": 6
+  },
+  {
+   "scale": "exposure",
+   "female": -0.22321243435516183,
+   "male": -0.2168713503764216,
+   "diff": -0.006341083978740225,
+   "p": 1.0,
+   "n_pairs": 4
+  },
+  {
+   "scale": "charge",
+   "female": -0.26728930451803484,
+   "male": -0.2578125709332327,
+   "diff": -0.009476733584802166,
+   "p": 0.84375,
+   "n_pairs": 8
+  },
+  {
+   "scale": "euphemism",
+   "female": 0.18625207924384782,
+   "male": 0.12856657240406957,
+   "diff": 0.057685506839778244,
+   "p": 0.1484375,
+   "n_pairs": 8
+  },
+  {
+   "scale": "explicitness",
+   "female": -0.21409602723462817,
+   "male": -0.19510324478181507,
+   "diff": -0.018992782452813106,
+   "p": 0.546875,
+   "n_pairs": 8
+  }
+ ],
+ "level": [
+  {
+   "scale": "orality",
+   "female_delta": -0.02631747012297583,
+   "female_p": 0.274,
+   "male_delta": -0.010353858623230313,
+   "male_p": 0.543,
+   "diff": -0.01596361149974552,
+   "diff_lo": -0.060893004405100995,
+   "diff_hi": 0.01467488698975325,
+   "diff_p": 0.365
+  },
+  {
+   "scale": "tactility",
+   "female_delta": -0.03999023589159079,
+   "female_p": 0.498,
+   "male_delta": -0.029966170430356792,
+   "male_p": 0.576,
+   "diff": -0.010024065461233998,
+   "diff_lo": -0.0835012258621705,
+   "diff_hi": 0.058949804001321014,
+   "diff_p": 0.804
+  },
+  {
+   "scale": "genitality",
+   "female_delta": -0.193541108604539,
+   "female_p": 0.002,
+   "male_delta": -0.30507630041389155,
+   "male_p": 0.002,
+   "diff": 0.11153519180935258,
+   "diff_lo": -0.07404173966173769,
+   "diff_hi": 0.29164128708046894,
+   "diff_p": 0.22
+  },
+  {
+   "scale": "incorporation",
+   "female_delta": 0.00806457177406265,
+   "female_p": 0.919,
+   "male_delta": -0.023729470526152062,
+   "male_p": 0.198,
+   "diff": 0.031794042300214716,
+   "diff_lo": -0.00993405661909866,
+   "diff_hi": 0.11708650877220142,
+   "diff_p": 0.292
+  },
+  {
+   "scale": "body_distance",
+   "female_delta": 0.28687236761503077,
+   "female_p": 0.0,
+   "male_delta": 0.20913361159372434,
+   "male_p": 0.008,
+   "diff": 0.04007385354816216,
+   "diff_lo": -0.08776194834540102,
+   "diff_hi": 0.16932470495790664,
+   "diff_p": 0.506
+  },
+  {
+   "scale": "exposure",
+   "female_delta": -0.07126848846291224,
+   "female_p": 0.078,
+   "male_delta": -0.049201989260129766,
+   "male_p": 0.025,
+   "diff": -0.022066499202782478,
+   "diff_lo": -0.11121475159891994,
+   "diff_hi": 0.041884468381548016,
+   "diff_p": 0.525
+  },
+  {
+   "scale": "charge",
+   "female_delta": -0.23372079309393928,
+   "female_p": 0.0,
+   "male_delta": -0.23561008328324476,
+   "male_p": 0.002,
+   "diff": 0.001889290189305465,
+   "diff_lo": -0.11295011087825794,
+   "diff_hi": 0.10842847338627605,
+   "diff_p": 0.95
+  },
+  {
+   "scale": "euphemism",
+   "female_delta": 0.09396320956399422,
+   "female_p": 0.001,
+   "male_delta": 0.14114704954294796,
+   "male_p": 0.0,
+   "diff": -0.04718383997895376,
+   "diff_lo": -0.12755237041344591,
+   "diff_hi": 0.018471841928625745,
+   "diff_p": 0.154
+  },
+  {
+   "scale": "explicitness",
+   "female_delta": -0.3277925513770577,
+   "female_p": 0.0,
+   "male_delta": -0.2921704700663741,
+   "male_p": 0.0,
+   "diff": -0.03562208131068363,
+   "diff_lo": -0.1977522852402761,
+   "diff_hi": 0.10048567998274872,
+   "diff_p": 0.63
+  }
+ ],
+ "rho_by_prompt": {
+  "orality|He grabbed her": [
+   -0.11983782134722831,
+   0.3659632116801965,
+   59
+  ],
+  "orality|He put her mouth to his": [
+   0.025525010115972097,
+   0.8350829130468467,
+   69
+  ],
+  "orality|He turned on the webcam and told her to": [
+   0.028335081425497195,
+   0.7730968828617023,
+   106
+  ],
+  "orality|He turned over after the massage and she saw his": [
+   -0.1036756273094813,
+   0.23862616522647673,
+   131
+  ],
+  "orality|He unzipped her": [
+   -0.10561885021835925,
+   0.2743758251478437,
+   109
+  ],
+  "orality|He was so attractive she felt herself get": [
+   0.1504757675364425,
+   0.10689302463027786,
+   116
+  ],
+  "orality|She grabbed his": [
+   -0.17667706630181565,
+   0.10162962204440144,
+   87
+  ],
+  "orality|She put his mouth to her": [
+   0.017660667014722072,
+   0.8651128814298957,
+   95
+  ],
+  "orality|She turned on the webcam and told him to": [
+   -0.15763677668418832,
+   0.13342650658784755,
+   92
+  ],
+  "orality|She turned over after the massage and he saw her": [
+   -0.1633779252965018,
+   0.0377703745584198,
+   162
+  ],
+  "orality|She was so attractive he felt himself get": [
+   0.1011634194084647,
+   0.3216060287128965,
+   98
+  ],
+  "orality|They were both naked and he began to": [
+   0.05091648121232901,
+   0.49485260199440695,
+   182
+  ],
+  "orality|They were both naked and she began to": [
+   -0.11341767480187713,
+   0.16135390975206812,
+   154
+  ],
+  "tactility|He grabbed her": [
+   -0.6108624320214971,
+   2.7774537090315454e-07,
+   59
+  ],
+  "tactility|He put her mouth to his": [
+   -0.10648724241005206,
+   0.3838253657207389,
+   69
+  ],
+  "tactility|He turned on the webcam and told her to": [
+   -0.12018658540725952,
+   0.21975541595235742,
+   106
+  ],
+  "tactility|He turned over after the massage and she saw his": [
+   -0.018947364464587245,
+   0.8299206502468012,
+   131
+  ],
+  "tactility|He unzipped her": [
+   -0.3080497412424902,
+   0.0011193160949435818,
+   109
+  ],
+  "tactility|He was so attractive she felt herself get": [
+   0.018881640024054715,
+   0.8405601149720404,
+   116
+  ],
+  "tactility|He wrapped his tongue around her": [
+   -0.13572978194046542,
+   0.19454860802470314,
+   93
+  ],
+  "tactility|She grabbed his": [
+   -0.5026493876429902,
+   7.00804338361938e-07,
+   87
+  ],
+  "tactility|She put his mouth to her": [
+   0.0013808554966116137,
+   0.9894038091055687,
+   95
+  ],
+  "tactility|She turned on the webcam and told him to": [
+   -0.19880005780130192,
+   0.05746455268459609,
+   92
+  ],
+  "tactility|She turned over after the massage and he saw her": [
+   0.037027498009819124,
+   0.6399317947102025,
+   162
+  ],
+  "tactility|She unzipped his": [
+   -0.3564966561029976,
+   0.0011713516895992938,
+   80
+  ],
+  "tactility|She wrapped her tongue around his": [
+   -0.09466535105767257,
+   0.35635518714978687,
+   97
+  ],
+  "tactility|They were both naked and he began to": [
+   -0.0008527452002199988,
+   0.9908844464841384,
+   182
+  ],
+  "tactility|They were both naked and she began to": [
+   0.0644322566155756,
+   0.4272570403323261,
+   154
+  ],
+  "genitality|He grabbed her": [
+   0.01550910542525324,
+   0.9071882967285978,
+   59
+  ],
+  "genitality|He put her mouth to his": [
+   0.059588219571891844,
+   0.6267071083828265,
+   69
+  ],
+  "genitality|He turned on the webcam and told her to": [
+   -0.19545903221198496,
+   0.04465129808376892,
+   106
+  ],
+  "genitality|He turned over after the massage and she saw his": [
+   -0.02306910994071761,
+   0.793674361879831,
+   131
+  ],
+  "genitality|He unzipped her": [
+   -0.23219218739882735,
+   0.015119181872733362,
+   109
+  ],
+  "genitality|He was so attractive she felt herself get": [
+   -0.2632010173354711,
+   0.004309457617030101,
+   116
+  ],
+  "genitality|He wrapped his tongue around her": [
+   -0.22074694339980167,
+   0.03347660261099391,
+   93
+  ],
+  "genitality|She grabbed his": [
+   -0.19243083317161447,
+   0.07415700884292489,
+   87
+  ],
+  "genitality|She put his mouth to her": [
+   0.031704501906783096,
+   0.7603637916884,
+   95
+  ],
+  "genitality|She turned on the webcam and told him to": [
+   -0.1382234048454282,
+   0.1888521516047726,
+   92
+  ],
+  "genitality|She turned over after the massage and he saw her": [
+   -0.087095989242652,
+   0.270434503996499,
+   162
+  ],
+  "genitality|She unzipped his": [
+   -0.20773682329300858,
+   0.06445225367426646,
+   80
+  ],
+  "genitality|She was so attractive he felt himself get": [
+   -0.4915190677547604,
+   2.7576522063022545e-07,
+   98
+  ],
+  "genitality|She wrapped her tongue around his": [
+   -0.21476771301515463,
+   0.03464245411701446,
+   97
+  ],
+  "genitality|They were both naked and he began to": [
+   -0.06247364183318848,
+   0.4021276705458569,
+   182
+  ],
+  "genitality|They were both naked and she began to": [
+   -0.06858068037999879,
+   0.39804074730953753,
+   154
+  ],
+  "incorporation|He grabbed her": [
+   0.11631829068939929,
+   0.3803104035311525,
+   59
+  ],
+  "incorporation|He put her mouth to his": [
+   -0.042208309133677784,
+   0.7305779338228975,
+   69
+  ],
+  "incorporation|He turned on the webcam and told her to": [
+   -0.14688229919446263,
+   0.13297397254891136,
+   106
+  ],
+  "incorporation|He was so attractive she felt herself get": [
+   0.13249230635234033,
+   0.1562518805555834,
+   116
+  ],
+  "incorporation|She put his mouth to her": [
+   0.13579523917229594,
+   0.18947502253857934,
+   95
+  ],
+  "incorporation|She turned on the webcam and told him to": [
+   -0.24664359646686349,
+   0.01778246452885641,
+   92
+  ],
+  "incorporation|She was so attractive he felt himself get": [
+   0.16081992491145886,
+   0.11366678212131706,
+   98
+  ],
+  "incorporation|She wrapped her tongue around his": [
+   0.022665725779484967,
+   0.8255861920468093,
+   97
+  ],
+  "incorporation|They were both naked and he began to": [
+   -0.0885821622983501,
+   0.23438295441714893,
+   182
+  ],
+  "incorporation|They were both naked and she began to": [
+   -0.0766073816250383,
+   0.3450083368463136,
+   154
+  ],
+  "body_distance|He grabbed her": [
+   0.6229346434064932,
+   4.899712516736378e-07,
+   54
+  ],
+  "body_distance|He put her mouth to his": [
+   0.09718032733322458,
+   0.4304739621640213,
+   68
+  ],
+  "body_distance|He turned over after the massage and she saw his": [
+   -0.0805274423488025,
+   0.4008126139700411,
+   111
+  ],
+  "body_distance|He unzipped her": [
+   0.4266032831710698,
+   4.148711383243265e-06,
+   108
+  ],
+  "body_distance|He wrapped his tongue around her": [
+   0.42724119554683954,
+   2.404167227050494e-05,
+   91
+  ],
+  "body_distance|She grabbed his": [
+   0.5678178247408899,
+   2.647388904927243e-08,
+   82
+  ],
+  "body_distance|She put his mouth to her": [
+   0.014511149767116788,
+   0.8889980514298121,
+   95
+  ],
+  "body_distance|She turned on the webcam and told him to": [
+   -0.14355177034378863,
+   0.5576754388135947,
+   19
+  ],
+  "body_distance|She turned over after the massage and he saw her": [
+   0.10468266532340544,
+   0.34035735138641643,
+   85
+  ],
+  "body_distance|She unzipped his": [
+   0.46324332699572973,
+   1.7153634629106312e-05,
+   79
+  ],
+  "body_distance|She was so attractive he felt himself get": [
+   0.20838575703609055,
+   0.3520422313230557,
+   22
+  ],
+  "body_distance|She wrapped her tongue around his": [
+   0.3552255297996155,
+   0.0003831031374713033,
+   96
+  ],
+  "body_distance|They were both naked and he began to": [
+   0.3156300166982154,
+   0.17522395903799382,
+   20
+  ],
+  "body_distance|They were both naked and she began to": [
+   -0.03606800299533296,
+   0.8834553195599594,
+   19
+  ],
+  "exposure|He turned on the webcam and told her to": [
+   -0.08421448803369709,
+   0.3907341075695446,
+   106
+  ],
+  "exposure|He turned over after the massage and she saw his": [
+   -0.20053584112750727,
+   0.02164040123355708,
+   131
+  ],
+  "exposure|He unzipped her": [
+   -0.39264367173606435,
+   2.4112956864959624e-05,
+   109
+  ],
+  "exposure|She turned on the webcam and told him to": [
+   -0.18776344839512857,
+   0.07308221097222471,
+   92
+  ],
+  "exposure|She turned over after the massage and he saw her": [
+   -0.3683757388505694,
+   1.4137558737570802e-06,
+   162
+  ],
+  "exposure|She unzipped his": [
+   -0.38094914152760695,
+   0.0004900820906724956,
+   80
+  ],
+  "exposure|She was so attractive he felt himself get": [
+   0.0646976709413915,
+   0.5267857463242813,
+   98
+  ],
+  "exposure|They were both naked and he began to": [
+   -0.09823697045544368,
+   0.18705159655958584,
+   182
+  ],
+  "exposure|They were both naked and she began to": [
+   -0.04761583880031647,
+   0.5575963023953117,
+   154
+  ],
+  "charge|He grabbed her": [
+   -0.5912994722068763,
+   8.17499185400466e-07,
+   59
+  ],
+  "charge|He put her mouth to his": [
+   -0.03541501297090156,
+   0.772661344750405,
+   69
+  ],
+  "charge|He turned on the webcam and told her to": [
+   -0.18070650888958992,
+   0.0637792700614749,
+   106
+  ],
+  "charge|He turned over after the massage and she saw his": [
+   -0.056900034819374286,
+   0.5185823079544981,
+   131
+  ],
+  "charge|He unzipped her": [
+   -0.4854732163325737,
+   8.771455069062654e-08,
+   109
+  ],
+  "charge|He was so attractive she felt herself get": [
+   -0.1970135729169887,
+   0.0340276704695422,
+   116
+  ],
+  "charge|He wrapped his tongue around her": [
+   -0.32902729985243884,
+   0.0012806910585911387,
+   93
+  ],
+  "charge|She grabbed his": [
+   -0.5101744701931213,
+   4.471411815127999e-07,
+   87
+  ],
+  "charge|She put his mouth to her": [
+   -0.022198639754354398,
+   0.830915484788635,
+   95
+  ],
+  "charge|She turned on the webcam and told him to": [
+   -0.2752388545958668,
+   0.007921455993235904,
+   92
+  ],
+  "charge|She turned over after the massage and he saw her": [
+   -0.23936899910153595,
+   0.002156385635378431,
+   162
+  ],
+  "charge|She unzipped his": [
+   -0.42949469511132154,
+   7.020839351011909e-05,
+   80
+  ],
+  "charge|She was so attractive he felt himself get": [
+   -0.3706870866970983,
+   0.00017174850665388039,
+   98
+  ],
+  "charge|She wrapped her tongue around his": [
+   -0.3658894944845511,
+   0.0002282219438341392,
+   97
+  ],
+  "charge|They were both naked and he began to": [
+   -0.01870091859362642,
+   0.8021443792069483,
+   182
+  ],
+  "charge|They were both naked and she began to": [
+   -0.09322672708992116,
+   0.2501463902658716,
+   154
+  ],
+  "euphemism|He grabbed her": [
+   0.2775624908476494,
+   0.033304206980733685,
+   59
+  ],
+  "euphemism|He put her mouth to his": [
+   0.34815866318406186,
+   0.0033732885338439676,
+   69
+  ],
+  "euphemism|He turned on the webcam and told her to": [
+   0.1877442771126595,
+   0.05395460839869199,
+   106
+  ],
+  "euphemism|He turned over after the massage and she saw his": [
+   0.29821476999509877,
+   0.0005410287344550478,
+   131
+  ],
+  "euphemism|He unzipped her": [
+   0.09101598440396567,
+   0.3465843998092519,
+   109
+  ],
+  "euphemism|He was so attractive she felt herself get": [
+   -0.07144104607362949,
+   0.446009107526233,
+   116
+  ],
+  "euphemism|He wrapped his tongue around her": [
+   0.37175323934674487,
+   0.00024351845004526358,
+   93
+  ],
+  "euphemism|She grabbed his": [
+   0.2379525400256927,
+   0.026462678964514808,
+   87
+  ],
+  "euphemism|She put his mouth to her": [
+   0.2906832970104644,
+   0.004267180038901386,
+   95
+  ],
+  "euphemism|She turned on the webcam and told him to": [
+   0.24266973578470286,
+   0.019767288451536157,
+   92
+  ],
+  "euphemism|She turned over after the massage and he saw her": [
+   0.31623754662762593,
+   4.138815079483904e-05,
+   162
+  ],
+  "euphemism|She unzipped his": [
+   -0.1076441869022882,
+   0.3419034051492951,
+   80
+  ],
+  "euphemism|She was so attractive he felt himself get": [
+   -0.1543509926606044,
+   0.12914013509679856,
+   98
+  ],
+  "euphemism|She wrapped her tongue around his": [
+   0.19682982365232551,
+   0.053314280268332674,
+   97
+  ],
+  "euphemism|They were both naked and he began to": [
+   -0.03329777384643239,
+   0.6554236967377481,
+   182
+  ],
+  "euphemism|They were both naked and she began to": [
+   0.026460844675302245,
+   0.744611886413588,
+   154
+  ],
+  "explicitness|He grabbed her": [
+   -0.2760306505583036,
+   0.03433034301246979,
+   59
+  ],
+  "explicitness|He put her mouth to his": [
+   0.013847021722186412,
+   0.910089174963701,
+   69
+  ],
+  "explicitness|He turned on the webcam and told her to": [
+   -0.1520840932214579,
+   0.11963589081376723,
+   106
+  ],
+  "explicitness|He turned over after the massage and she saw his": [
+   -0.09746497074554278,
+   0.2680842104294462,
+   131
+  ],
+  "explicitness|He unzipped her": [
+   -0.34569332983108436,
+   0.00023166687926781627,
+   109
+  ],
+  "explicitness|He was so attractive she felt herself get": [
+   -0.20348327895115623,
+   0.028464630743526197,
+   116
+  ],
+  "explicitness|He wrapped his tongue around her": [
+   -0.3298930389030389,
+   0.0012411440450166872,
+   93
+  ],
+  "explicitness|She grabbed his": [
+   -0.22910832295089276,
+   0.032797672850016966,
+   87
+  ],
+  "explicitness|She put his mouth to her": [
+   -0.08069289779786284,
+   0.4369499044074656,
+   95
+  ],
+  "explicitness|She turned on the webcam and told him to": [
+   -0.26825061818925244,
+   0.009727763444071398,
+   92
+  ],
+  "explicitness|She turned over after the massage and he saw her": [
+   -0.27875304614542074,
+   0.00032822873351637244,
+   162
+  ],
+  "explicitness|She unzipped his": [
+   -0.223583421994235,
+   0.046192251084874424,
+   80
+  ],
+  "explicitness|She was so attractive he felt himself get": [
+   -0.47131379911160165,
+   9.668741493668336e-07,
+   98
+  ],
+  "explicitness|She wrapped her tongue around his": [
+   -0.29669667784448595,
+   0.0031675283074520545,
+   97
+  ],
+  "explicitness|They were both naked and he began to": [
+   0.011744830859303725,
+   0.8749610008818092,
+   182
+  ],
+  "explicitness|They were both naked and she began to": [
+   -0.046137882468700826,
+   0.5699032738692819,
+   154
+  ]
+ }
+}
