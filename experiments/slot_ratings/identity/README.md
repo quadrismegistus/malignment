@@ -295,3 +295,106 @@ so this is a statement about movement, not about the aligned model's absolute
 rate. And the base side is unmeasured throughout (see section 7), so nothing here
 distinguishes a stereotype alignment introduces from one it inherits and
 amplifies.
+
+## 11. The base side
+
+Producers: `base_side.py` (queries the store) and `base_checks.py` (reads its
+output). Tables: `results/base_side.json`, `results/base_checks.json`.
+
+Everything above measures movement, and movement cannot distinguish a stereotype
+alignment introduces from one it inherits, because a word that is already the top
+continuation has nowhere to rise to. This section measures the level.
+
+The statistic changes accordingly. Instead of gating words at `p_base >= 0.003`
+and correlating a rating against a rise/fall verdict, it is a mass-weighted
+conditional mean, computed separately on each arm:
+
+```
+E[scale | rated] = sum_w p(w) * rating(w) / sum_w p(w)
+```
+
+No gate, no verdict, no arm A / arm B split. This also dissolves the vocabulary
+problem of section 4 outright: a word contributes in proportion to the mass it
+holds, so the number of eligible words stops being a free parameter.
+
+Coverage is reported rather than assumed. On `interiority` the rated words carry
+0.585 to 0.704 of base mass and 0.646 to 0.767 of aligned mass. **Coverage is
+systematically higher on the aligned arm**, by about 0.06 for every group, so
+base-to-aligned deltas are computed over slightly different fractions of the
+distribution. It is uniform across groups, so between-group comparisons are not
+affected; single-group deltas should carry the caveat.
+
+### The base already carries the whole ordering
+
+Friedman blocked on lineage, on the base arm alone, is significant for all 24
+scales at p between 1e-30 and 1e-44. That is orders of magnitude stronger than
+anything alignment does. Whatever differentiates these groups, pretraining did
+most of it.
+
+`pray`, in raw probability:
+
+| group | p_base | p_aligned | ratio |
+| --- | --- | --- | --- |
+| Christians | 0.18003 | 0.21752 | 1.2x |
+| Muslims | 0.14903 | 0.26126 | 1.8x |
+| Jews | 0.05287 | 0.05737 | 1.1x |
+| Nigerians | 0.01623 | 0.01497 | 0.9x |
+| ... | | | |
+| Italians | 0.00377 | 0.00151 | 0.4x |
+| students | 0.00217 | 0.00056 | 0.3x |
+
+Spearman between the base and aligned orderings is +0.970. **The aligned model's
+ordering is the base model's ordering.**
+
+### On identity-typed content alignment amplifies
+
+Correlating each group's base level against its log ratio gives +0.811
+(p=1.5e-06). The three groups with `p_base > 0.05` -- Christians, Jews, Muslims
+-- go up by 1.32x on average; the other 21 go down by 0.69x (Mann-Whitney
+p=0.0069). Between-group SD grows from 0.0441 to 0.0650, a ratio of **1.47**.
+
+So the section 10 formulation was wrong in an important way. It is not that
+alignment installs a group-appropriate substitute. **The base already assigns
+prayer to Muslims, Christians and Jews; alignment multiplies it further for
+exactly those groups and suppresses it everywhere else.** The stereotype is
+inherited. What alignment contributes is sharpening.
+
+### On harm alignment compresses, but most of that reading was an artifact
+
+Correlating base level against delta gives negatives on ten scales, which reads
+as alignment pulling groups together. That correlation is also what regression to
+the mean produces on its own, since the base term sits on both axes with opposite
+signs. Under a split-half -- base level from the odd lineages, delta from the
+even ones, so the two noise terms are independent -- only three survive:
+
+| scale | full rho | split-half rho | verdict |
+| --- | --- | --- | --- |
+| harm | −0.898 | −0.503 (p=0.012) | survives |
+| hedged | −0.479 | −0.556 (p=0.005) | survives |
+| directedness | −0.667 | −0.430 (p=0.036) | survives |
+| deference | −0.752 | −0.228 (p=0.28) | artifact |
+| procedural | −0.743 | −0.219 (p=0.30) | artifact |
+| arousal | −0.699 | −0.272 (p=0.20) | artifact |
+| makes_worse | −0.803 | −0.350 (p=0.094) | artifact |
+| aggression, mundanity, makes_better, agency, assertiveness | | all n.s. | artifact |
+
+Measuring dispersion directly, with no change score and no shared term, agrees:
+between-group SD falls from base to aligned by a ratio of 0.73 on `harm`, 0.84 on
+`directedness`, 0.81 on `makes_worse`, and only 0.91 on `aggression`.
+
+### The dissociation
+
+Put the two together and they point opposite ways on the same 24 groups, in the
+same frame, on the same lineages:
+
+```
+harm            between-group SD  0.300 -> 0.218    ratio 0.73    COMPRESSES
+pray            between-group SD  0.044 -> 0.065    ratio 1.47    EXPANDS
+```
+
+**Alignment equalises the groups on how harmful their slot distribution is, and
+sharpens them on identity-typed content.** The two effects are not in tension;
+they are what a procedure optimised against harm and indifferent to
+characterisation would produce. The thing it was pointed at converges. The thing
+it was not pointed at diverges, and the base's own stereotype supplies the
+direction.
