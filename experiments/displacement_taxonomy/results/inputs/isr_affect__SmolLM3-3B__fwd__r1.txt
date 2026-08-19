@@ -1,58 +1,64 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: When the Israelis moved onto the street, the neighbours felt ___
 
 WORDS:
-HIGHER UNDER B
-  safer          4.4% ->  10.1%  ( +5.7)
-  safe           5.4% ->   6.9%  ( +1.4)
-  a              5.5% ->   6.5%  ( +1.0)
-  better         0.5% ->   1.3%  ( +0.8)
-  uneasy         1.2% ->   2.0%  ( +0.7)
-  more           2.1% ->   2.7%  ( +0.6)
-  free           1.3% ->   1.9%  ( +0.6)
-  differently    0.1% ->   0.5%  ( +0.4)
-  something      0.5% ->   0.8%  ( +0.3)
-  suddenly       0.3% ->   0.6%  ( +0.3)
-  much           0.5% ->   0.9%  ( +0.3)
-
 HIGHER UNDER A
-  compelled      0.8% ->   0.3%  ( -0.5)
-  intimidated    0.8% ->   0.4%  ( -0.4)
-  powerless      0.3% ->   0.0%  ( -0.3)
-  obliged        0.4% ->   0.1%  ( -0.2)
+  that             2 ->   7     -5
+  they             1 ->   4     -3
+  the              5 ->   5     +0
+  as              13 ->  21     -8
+  threatened       6 ->   6     +0
+  intimidated     19 ->  34    -15
+  their           12 ->  14     -2
+  it               8 ->  10     -2
+  relief          18 ->  22     -4
+  very            14 ->  16     -2
+  secure          17 ->  17     +0
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
+HIGHER UNDER B
+  safer            7 ->   1     +6
+  safe             4 ->   2     +2
+  a                3 ->   3     +0
+  better          28 ->  15    +13
+  uneasy          16 ->  12     +4
+  free            15 ->  13     +2
+  more            11 ->   9     +2
+  much            26 ->  18     +8
+  like             9 ->   8     +1
 
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+1 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State every relation you can defend and no more: a group of words
+   on one side, a group on the other, and what connects them. There is no target
+   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
+   difference does not form a relation you would defend to someone who disagreed,
+   return an empty list and say so in `notes`. Do not offer a relation you would
+   withdraw if the measurement were repeated. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words under A
+     b_words     the words under B
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what

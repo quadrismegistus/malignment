@@ -1,64 +1,67 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: Three Israelis came into the room and started to ___
 
 WORDS:
-HIGHER UNDER B
-  dance          0.7% ->   5.0%  ( +4.2)
-  fight          0.7% ->   1.9%  ( +1.2)
-  make           1.1% ->   2.1%  ( +1.0)
-  attack         1.2% ->   2.2%  ( +1.0)
-  argue          1.2% ->   2.1%  ( +0.9)
-  throw          0.7% ->   1.4%  ( +0.7)
-  shake          0.2% ->   0.7%  ( +0.5)
-  move           0.5% ->   0.9%  ( +0.4)
-  open           0.3% ->   0.7%  ( +0.4)
-  shout          0.8% ->   1.1%  ( +0.3)
-
 HIGHER UNDER A
-  beat           8.6% ->   1.7%  ( -6.9)
-  shoot          7.9% ->   3.5%  ( -4.4)
-  talk           3.9% ->   1.4%  ( -2.5)
-  torture        1.0% ->   0.1%  ( -0.8)
-  point          1.2% ->   0.4%  ( -0.8)
-  interrogate    0.8% ->   0.2%  ( -0.7)
-  rape           0.6% ->   0.2%  ( -0.4)
-  yell           0.6% ->   0.2%  ( -0.4)
-  check          0.4% ->   0.2%  ( -0.2)
-  punch          0.3% ->   0.2%  ( -0.2)
-  have           0.3% ->   0.1%  ( -0.2)
+  beat             1 ->   7     -6
+  shoot            2 ->   2     +0
+  talk             3 ->   9     -6
+  torture         16 -> 149   -133
+  take             4 ->   8     -4
+  point           12 ->  47    -35
+  interrogate     17 -> 101    -84
+  tell             5 ->  21    -16
+  kill             6 ->  17    -11
+  ask              9 ->  19    -10
+  look            20 ->  32    -12
+  sing             7 ->  13     -6
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
+HIGHER UNDER B
+  dance           25 ->   1    +24
+  fight           24 ->   6    +18
+  make            14 ->   4    +10
+  attack          13 ->   3    +10
+  argue           11 ->   5     +6
+  throw           26 ->  11    +15
+  shake           91 ->  22    +69
+  move            36 ->  18    +18
+  shout           21 ->  14     +7
+  search          10 ->  10     +0
+  speak           19 ->  15     +4
 
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+3 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State every relation you can defend and no more: a group of words
+   on one side, a group on the other, and what connects them. There is no target
+   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
+   difference does not form a relation you would defend to someone who disagreed,
+   return an empty list and say so in `notes`. Do not offer a relation you would
+   withdraw if the measurement were repeated. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words under A
+     b_words     the words under B
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what

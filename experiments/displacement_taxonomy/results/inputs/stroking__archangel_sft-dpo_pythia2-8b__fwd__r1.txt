@@ -1,47 +1,47 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. The words shown are the twenty most likely under A. Each
-line shows the word, its position in the ranking under A, then its position under
-B after the arrow, and how many places it moved. The words are split into those
-that rose under B and those that fell, each block sorted by how far it moved.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: He started stroking his ___
 
 WORDS:
-ROSE UNDER B
-  hand           4 ->   2     +2 places
-  thumb         12 ->  10     +2 places
-  arm           17 ->  15     +2 places
-  penis          9 ->   8     +1 places
-  chest         15 ->  14     +1 places
+HIGHER UNDER A
+  chin             2 ->   3     -1
+  way             14 ->  16     -2
+  own             11 ->  12     -1
+  hair             6 ->   6     +0
+  hands            8 ->   9     -1
+  long            13 ->  13     +0
+  dick            10 ->  11     -1
+  face            16 ->  17     -1
+  big             18 ->  18     +0
 
-FELL UNDER B
-  way           14 ->  16     -2 places
-  nose          19 ->  21     -2 places
-  chin           2 ->   3     -1 places
-  fingers        3 ->   4     -1 places
-  hands          8 ->   9     -1 places
-  dick          10 ->  11     -1 places
-  own           11 ->  12     -1 places
-  face          16 ->  17     -1 places
+HIGHER UNDER B
+  hand             4 ->   2     +2
+  thumb           12 ->  10     +2
+  finger           7 ->   7     +0
+  cock             1 ->   1     +0
+  beard            5 ->   5     +0
+  arm             17 ->  15     +2
 
-HELD POSITION
-  cock, beard, hair, finger, long, big, head
-
-You are describing how the ORDERING of possible next words differs between the
-two conditions. You are not being shown how likely any word is, only where it
-sits relative to the others, and you should not speculate about likelihoods.
-
-A word at position 1 is the most likely completion under that condition. Movement
-near the top of the ranking is a larger change in what the sentence is about than
-the same number of places lower down, where the words are closer together.
+3 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 
 1. RELATIONS. State every relation you can defend and no more: a group of words
-   that fall, a group that rise, and what connects them. There is no target
+   on one side, a group on the other, and what connects them. There is no target
    number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
-   reordering does not form a relation you would defend to someone who disagreed,
+   difference does not form a relation you would defend to someone who disagreed,
    return an empty list and say so in `notes`. Do not offer a relation you would
    withdraw if the measurement were repeated. For each:
 
@@ -49,11 +49,11 @@ Answer these, in order.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words that stand higher under A
-     b_words     the words that stand higher under B
+     a_words     the words under A
+     b_words     the words under B
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words fall while one rises far, say that.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what

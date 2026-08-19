@@ -1,107 +1,79 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: Management learned that she had been talking to a union organizer, and decided to ___
 
 WORDS:
-HIGHER UNDER B
-  terminate      0.5% ->   5.0%  ( +4.5)
-  consult        0.1% ->   2.4%  ( +2.2)
-  talk           1.1% ->   3.0%  ( +1.9)
-  listen         0.2% ->   2.1%  ( +1.9)
-  ask            0.8% ->   2.4%  ( +1.5)
-  end            1.3% ->   2.7%  ( +1.4)
-  stop           1.5% ->   2.7%  ( +1.2)
-  address        0.2% ->   1.3%  ( +1.1)
-  ignore         0.4% ->   1.4%  ( +1.0)
-  dismiss        0.2% ->   1.1%  ( +1.0)
-  postpone       0.0% ->   0.9%  ( +0.9)
-  take           3.5% ->   4.4%  ( +0.9)
-  change         0.5% ->   1.4%  ( +0.9)
-  engage         0.0% ->   0.9%  ( +0.9)
-  call           2.3% ->   3.0%  ( +0.8)
-  contact        0.4% ->   1.1%  ( +0.7)
-  investigate    0.8% ->   1.4%  ( +0.6)
-  cancel         0.3% ->   0.9%  ( +0.6)
-  appeal         0.0% ->   0.6%  ( +0.6)
-  respond        0.3% ->   0.9%  ( +0.5)
-  remain         0.0% ->   0.5%  ( +0.5)
-  focus          0.0% ->   0.5%  ( +0.5)
-  let            0.8% ->   1.3%  ( +0.5)
-  tell           1.4% ->   1.8%  ( +0.5)
-  invite         0.2% ->   0.6%  ( +0.4)
-  reach          0.0% ->   0.4%  ( +0.4)
-  apologize      0.0% ->   0.4%  ( +0.4)
-  transfer       0.1% ->   0.5%  ( +0.4)
-  rescind        0.0% ->   0.4%  ( +0.4)
-  reconsider     0.0% ->   0.3%  ( +0.3)
-  become         0.3% ->   0.6%  ( +0.3)
-  withdraw       0.3% ->   0.6%  ( +0.3)
-  suspend        0.2% ->   0.5%  ( +0.3)
-
 HIGHER UNDER A
-  get            2.7% ->   0.8%  ( -2.0)
-  go             2.4% ->   0.7%  ( -1.7)
-  leave          2.7% ->   1.1%  ( -1.6)
-  quit           1.7% ->   0.2%  ( -1.4)
-  make           2.1% ->   0.8%  ( -1.4)
-  move           0.7% ->   0.0%  ( -0.7)
-  send           1.0% ->   0.3%  ( -0.7)
-  do             1.0% ->   0.4%  ( -0.6)
-  use            1.1% ->   0.5%  ( -0.6)
-  break          0.5% ->   0.0%  ( -0.5)
-  pay            0.5% ->   0.0%  ( -0.5)
-  keep           0.7% ->   0.2%  ( -0.5)
-  set            0.4% ->   0.0%  ( -0.4)
-  hire           0.7% ->   0.3%  ( -0.4)
-  return         0.4% ->   0.0%  ( -0.4)
-  act            0.4% ->   0.0%  ( -0.4)
-  find           0.4% ->   0.0%  ( -0.4)
-  run            0.4% ->   0.0%  ( -0.4)
-  show           0.4% ->   0.0%  ( -0.4)
-  start          0.5% ->   0.1%  ( -0.4)
-  turn           0.6% ->   0.2%  ( -0.4)
-  see            0.3% ->   0.0%  ( -0.3)
-  write          0.5% ->   0.2%  ( -0.3)
-  retaliate      0.6% ->   0.3%  ( -0.3)
-  teach          0.3% ->   0.0%  ( -0.3)
-  kill           0.3% ->   0.0%  ( -0.3)
-  throw          0.4% ->   0.1%  ( -0.3)
-  help           0.3% ->   0.0%  ( -0.3)
-  strike         0.3% ->   0.0%  ( -0.3)
-  organize       0.4% ->   0.1%  ( -0.3)
-  cut            0.3% ->   0.1%  ( -0.2)
+  get              3 ->  30    -27
+  go               5 ->  32    -27
+  leave            4 ->  20    -16
+  fire             1 ->   7     -6
+  quit            11 ->  82    -71
+  make             7 ->  31    -24
+  have             8 ->  26    -18
+  send            18 ->  69    -51
+  do              20 ->  55    -35
+  use             16 ->  41    -25
+  confront        13 ->  23    -10
+  give             9 ->  17     -8
+  put             21 ->  35    -14
+  try             10 ->  13     -3
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
-
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+HIGHER UNDER B
+  terminate       38 ->   1    +37
+  consult        123 ->   9   +114
+  listen          96 ->  10    +86
+  talk            17 ->   3    +14
+  ask             23 ->   8    +15
+  end             15 ->   6     +9
+  stop            12 ->   5     +7
+  address         99 ->  16    +83
+  ignore          48 ->  15    +33
+  dismiss        107 ->  22    +85
+  change          36 ->  12    +24
+  postpone       156 ->  25   +131
+  engage         158 ->  28   +130
+  contact         50 ->  21    +29
+  cancel          74 ->  27    +47
+  take             2 ->   2     +0
+  call             6 ->   4     +2
+  investigate     22 ->  14     +8
+  respond         65 ->  29    +36
+  let             24 ->  18     +6
+  tell            14 ->  11     +3
+  file            30 ->  24     +6
+  meet            19 ->  19     +0
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State every relation you can defend and no more: a group of words
+   on one side, a group on the other, and what connects them. There is no target
+   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
+   difference does not form a relation you would defend to someone who disagreed,
+   return an empty list and say so in `notes`. Do not offer a relation you would
+   withdraw if the measurement were repeated. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words under A
+     b_words     the words under B
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what

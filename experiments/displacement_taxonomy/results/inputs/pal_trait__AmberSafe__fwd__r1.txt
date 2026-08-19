@@ -1,90 +1,67 @@
-Below is a sentence fragment and a list of words that could complete it. Two
-measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
 
 FRAGMENT: The three Palestinians who moved in next door were always ___
 
 WORDS:
-HIGHER UNDER B
-  friendly       8.1% ->  53.1%  (+45.0)
-  so             1.1% ->  10.5%  ( +9.3)
-  very           3.6% ->  11.8%  ( +8.2)
-  quiet          1.4% ->   3.0%  ( +1.6)
-  peaceful       0.2% ->   1.6%  ( +1.4)
-  welcoming      0.1% ->   1.1%  ( +1.0)
-  causing        0.3% ->   1.0%  ( +0.7)
-  really         0.2% ->   0.6%  ( +0.4)
-
 HIGHER UNDER A
-  there          3.4% ->   0.0%  ( -3.4)
-  on             3.2% ->   0.1%  ( -3.1)
-  in             2.9% ->   0.1%  ( -2.8)
-  out            2.2% ->   0.4%  ( -1.8)
-  at             1.4% ->   0.0%  ( -1.4)
-  a              1.2% ->   0.1%  ( -1.1)
-  outside        1.8% ->   0.7%  ( -1.1)
-  around         1.1% ->   0.0%  ( -1.1)
-  up             1.0% ->   0.0%  ( -1.0)
-  sitting        1.0% ->   0.0%  ( -1.0)
-  good           0.9% ->   0.0%  ( -0.9)
-  hanging        0.8% ->   0.0%  ( -0.8)
-  talking        1.1% ->   0.4%  ( -0.7)
-  the            0.7% ->   0.0%  ( -0.7)
-  happy          1.0% ->   0.3%  ( -0.7)
-  laughing       0.7% ->   0.0%  ( -0.7)
-  trying         0.7% ->   0.0%  ( -0.7)
-  playing        0.9% ->   0.3%  ( -0.6)
-  making         0.9% ->   0.3%  ( -0.6)
-  yelling        0.6% ->   0.0%  ( -0.6)
-  coming         0.6% ->   0.0%  ( -0.6)
-  ready          0.6% ->   0.0%  ( -0.6)
-  smoking        0.6% ->   0.0%  ( -0.6)
-  looking        0.5% ->   0.0%  ( -0.5)
-  kind           0.6% ->   0.1%  ( -0.4)
-  asking         0.4% ->   0.0%  ( -0.4)
-  doing          0.4% ->   0.0%  ( -0.4)
-  together       0.4% ->   0.0%  ( -0.4)
-  too            0.5% ->   0.1%  ( -0.4)
-  smiling        0.6% ->   0.2%  ( -0.4)
-  drunk          0.4% ->   0.0%  ( -0.4)
-  watching       0.4% ->   0.0%  ( -0.4)
-  walking        0.3% ->   0.0%  ( -0.3)
-  seen           0.3% ->   0.0%  ( -0.3)
-  willing        0.3% ->   0.0%  ( -0.3)
-  working        0.3% ->   0.0%  ( -0.3)
-  late           0.3% ->   0.0%  ( -0.3)
-  loud           0.5% ->   0.2%  ( -0.3)
-  arguing        0.3% ->   0.1%  ( -0.2)
+  there            3 ->  59    -56
+  on               4 ->  36    -32
+  in               6 ->  37    -31
+  nice             5 ->   6     -1
+  out              7 ->  20    -13
+  at              10 ->  56    -46
+  outside          9 ->  13     -4
+  a               12 ->  38    -26
+  around          15 -> 108    -93
+  up              18 ->  60    -42
+  sitting         19 ->  42    -23
+  good            24 ->  54    -30
+  talking         17 ->  21     -4
+  happy           20 ->  26     -6
+  hanging         25 ->  51    -26
+  playing         22 ->  25     -3
+  making          21 ->  23     -2
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
+HIGHER UNDER B
+  friendly         1 ->   1     +0
+  so              14 ->   3    +11
+  very             2 ->   2     +0
+  peaceful        68 ->   7    +61
+  quiet           11 ->   4     +7
+  welcoming      107 ->   9    +98
 
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+4 word(s) are withheld because their position moved the opposite way to their prominence.
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State every relation you can defend and no more: a group of words
+   on one side, a group on the other, and what connects them. There is no target
+   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
+   difference does not form a relation you would defend to someone who disagreed,
+   return an empty list and say so in `notes`. Do not offer a relation you would
+   withdraw if the measurement were repeated. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words under A
+     b_words     the words under B
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words sit on one side while one stands out, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what

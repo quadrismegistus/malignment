@@ -660,7 +660,19 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                     tbl = _table(_Flip, fal, ris)
                 else:
                     tbl = _table(m, ris, fal)
-                if ver_now.startswith("r"):
+                if ver_now.startswith("r4"):
+                    if TOPUP != 1:
+                        raise SystemExit("r4 is a topped-up instrument: a word "
+                                         "above the floor in one arm may have no "
+                                         "position in the other simply because it "
+                                         "was never measured there. Pass --topup.")
+                    nb = {w: p / sum(W[b].values()) for w, p in W[b].items()}
+                    na = {w: p / sum(W[a].values()) for w, p in W[a].items()}
+                    tbl = _table_r4(nb, na)
+                    n_shared = len(set(nb) & set(na))
+                    n_shown = sum(1 for ln in tbl.splitlines()
+                                  if ln.startswith("  ") and "->" in ln)
+                elif ver_now.startswith("r"):
                     #: Ranks are over the arms' own fields, not over the movement
                     #: rule's survivors, so the r1 table is built from W directly.
                     nb = {w: p / sum(W[b].values()) for w, p in W[b].items()}
