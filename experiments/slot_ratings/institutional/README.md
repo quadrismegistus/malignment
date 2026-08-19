@@ -678,3 +678,95 @@ so equal p-values do not mean equal evidence. And `inherited` is a ratio: it is
 suppressed wherever the aligned gap is under 0.05, because near zero it is
 unstable rather than informative.
 
+
+## 12. What the stratification IS: the individual petitions, the institution acts
+
+The statistics above say the base is stratified by position and that alignment
+adds little. That is not a characterisation. This section is the characterisation.
+
+Read the scales in their own direction: `mediation` runs 1 = wholly direct,
+spoken or done to them face to face, to 7 = wholly routed through a channel.
+`arousal` runs 1 = calm, flat, procedural to 7 = charged, agitated, urgent.
+`deference` runs 1 = actively challenges the institution's right to decide to
+7 = fully accepts its judgement. `procedural` runs 1 = wholly challenges the
+system to 7 = wholly works within it.
+
+### The base
+
+Absolute levels on the 1-7 scale, mean over 50 lineages:
+
+| scale | F21 indiv | F21 inst | M03 indiv | M03 inst | slotpov indiv | slotpov inst |
+| --- | --- | --- | --- | --- | --- | --- |
+| mediation | 2.87 | **1.96** | 2.56 | **1.92** | 2.54 | 2.60 |
+| arousal | **3.07** | 2.45 | **2.46** | 2.17 | **3.42** | 2.76 |
+| deference | 3.83 | **4.05** | 4.26 | 4.23 | 3.26 | **4.46** |
+| procedural | 4.03 | **4.25** | 4.54 | 4.51 | 3.63 | **5.30** |
+
+And the vocabulary that carries it, top words by base mass with their mediation
+rating in brackets:
+
+```
+INDIVIDUAL    sue(7)  file(7)  report(7)  call(5)  complain(3)  protest(2)  fight(2)  quit(1)
+INSTITUTION   note(4) tell(1)  fire(2)    mention(4) say(1)     ask(1)      cut(1)    explain(1)
+```
+
+**The individual's repertoire is grievance procedure. The institution's is
+unilateral action.** The individual sues, files, reports, complains. The
+institution tells, fires, cuts. It does not petition anyone, because it is the
+body one petitions. Alongside that the individual is agitated and the institution
+calm, which is the only contrast replicating across all three corpora, and the
+institution scores higher on deference and procedural: it accepts and works
+within the system that it is.
+
+This is in the base. Pretraining wrote it.
+
+### The aligned model is not less stratified. On mediation it is more.
+
+| | base | aligned | moved |
+| --- | --- | --- | --- |
+| individual | 2.87 | 3.14 | **+0.27** |
+| institution | 1.96 | 2.02 | +0.06 |
+
+The gap widens from −0.91 to −1.12. The delta is −0.194 at p=0.017 and survives
+the crossed (lineage, pair) test. **Alignment pushes the individual roughly four
+times further into mediated channels than it pushes the institution.**
+
+### Exit falls, mediated remedy rises
+
+Mass summed over F21's prompts, averaged over 50 lineages. The word-level detail
+is illustrative of an aggregate the crossed test validated, not separately tested.
+
+```
+RISES   report    0.102 -> 0.200  2.0x        organize   0.043 -> 0.146  3.4x
+        file      0.143 -> 0.213  1.5x        unionize   0.033 -> 0.070  2.2x
+FALLS   quit      0.067 -> 0.042  0.62x       sue        0.207 -> 0.176  0.85x
+        stop      0.112 -> 0.077  0.69x       fire       0.180 -> 0.132  0.73x
+```
+
+`quit` and `stop` are unilateral exit and they fall by about a third. `sue` is
+the external adversarial channel and it falls. What rises is internal
+administrative remedy, `file` and `report`, and collective organisation,
+`organize` and `unionize`. **Organising is itself a mediated form**: it routes the
+grievance through a body rather than through the person, which is why it belongs
+with `file` and `report` rather than against them.
+
+`organize` is not a labour artifact: 13 prompts across govt, housing, labor and
+political, and its largest single rise is on a govt prompt (+0.051).
+
+On the institution's side `fire` falls 27% and what replaces it is `consider`,
+`prioritize`, `advise`, `draft`, `address`.
+
+### The claim
+
+**Alignment does not flatten the asymmetry between how institutions and
+individuals are written; it deepens the part of it that concerns access.** The
+institution keeps its directness. The individual is moved out of exit and
+litigation into procedure and collective organisation. Both parties are made more
+deliberative, and only one of them was ever able to act directly in the first
+place.
+
+The caveat that bounds this: rated mass is 0.24 (F21) and 0.28 (M03) of the
+distribution, so this characterises the rated portion. And `mediation` does not
+separate the positions on slotpov (2.54 against 2.60), where the two sides end at
+an identical site; the asymmetry may need the role asymmetry in the frame to
+appear at all, which is itself worth knowing.
