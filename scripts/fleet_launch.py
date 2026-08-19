@@ -179,7 +179,7 @@ def main():
         "python scripts/queue_v4.py --models %s%s"
         % (" ".join(models[:3]) + (" ..." if len(models) > 3 else ""),
            " --only %s" % a.only if a.only else ""),
-    ] + ["python scripts/topup_lineage.py --root %s%s"
+    ] + ["python scripts/topup_lineage.py --root %s --from-stash%s"
          % (r, " --only %s" % a.only if a.only else "") for r in roots[:2]]
     print("  will run:")
     for c in cmds:
@@ -327,7 +327,13 @@ def execute(b, models, roots, venv, a):
     only = (" --only %s" % a.only) if a.only else ""
     cmds = ["./%s/bin/python scripts/queue_v4.py --models %s%s"
             % (venv, " ".join(models), only)]
-    cmds += ["./%s/bin/python scripts/topup_lineage.py --root %s%s"
+    #: **`--from-stash` IS NOT OPTIONAL ON A RENTED BOX.** Without it,
+    #: `topup_lineage` builds the lineage union by querying ClickHouse -- which
+    #: does not exist on a rental, and the 2026-08-19 pilot died on
+    #: `FileNotFoundError: /opt/homebrew/bin/clickhouse` having written 3,090
+    #: pass-1 cells and ZERO pass-2 ones. This module's own docstring claims to
+    #: have removed that dependency; the flag that does so was never passed.
+    cmds += ["./%s/bin/python scripts/topup_lineage.py --root %s --from-stash%s"
              % (venv, r_, only) for r_ in roots]
     script = ["cd /root/malignment", "rm -f /root/DONE /root/FAILED"]
     for i, c in enumerate(cmds):
@@ -372,6 +378,26 @@ def execute(b, models, roots, venv, a):
     #: destroying a box, and the runbook's rule that "instance running" is the
     #: rental and not the work. A remote line count that does not match the local
     #: one after the pull means the transfer is incomplete, whatever rsync said.
+    #:
+    #: **BUT A TRANSFER CHECK IS NOT A WORK CHECK, AND THIS PASSED A BOX THAT DID
+    #: HALF THE JOB.** The 2026-08-19 pilot ran pass 1 to completion, died in pass
+    #: 2 on a missing ClickHouse, wrote /root/FAILED, and was VERIFIED and
+    #: DESTROYED -- because remote and local line counts agreed exactly, which
+    #: they do whether the box wrote everything or nothing. Every byte it produced
+    #: came home; half of what it was asked to produce never existed.
+    #:
+    #: So the sentinel is now load-bearing. `FAILED` refuses the destroy on its
+    #: own, before any counting: a command exited non-zero, and the box is the
+    #: only place the evidence for WHY still exists.
+    #: Re-read from the BOX rather than carrying a flag out of `_await`: the
+    #: sentinel is the box's own statement about itself, and a copy of it in a
+    #: local variable is one more thing that can drift from what is true there.
+    if cloud.ssh_run(st, "ls /root/FAILED 2>/dev/null").returncode == 0:
+        _billing(cloud, iid, "a command exited non-zero (/root/FAILED)")
+        print("  NOT DESTROYING -- the run reported a failure. Logs are already "
+              "pulled to %s, but the box is kept so the failure can be inspected "
+              "live. Destroy by hand once you know what happened." % logdir)
+        return 1
     ok = True
     for m in models:
         d = m.replace("/", "__")

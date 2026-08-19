@@ -171,14 +171,24 @@ def lineage_work(pop=None):
     return out
 
 
-def pack(work, nboxes):
-    """Longest-processing-time-first, never mixing venvs on one box."""
-    bins = [{"cells": 0, "lineages": [], "models": [], "venv": None, "per": {}}
-            for _ in range(nboxes)]
-    for root, ms, venv, cells, per in sorted(work, key=lambda x: -x[3]):
+def pack(work, nboxes, device="cuda"):
+    """Longest-processing-time-first on SECONDS, never mixing venvs on one box.
+
+    **Cells are not the cost.** This packed by cell count while the measured rates
+    span 0.155 to 6.04 s/cell, so it balanced the wrong quantity: with per-model
+    rates in hand, the cell-balanced plan ran 5.2 h on its slowest box against
+    1.2 h on its fastest, for a total that would have fitted in ~3.1 h. A lineage
+    of four small models and a lineage of four 7B models are the same number of
+    cells and nothing like the same job.
+    """
+    bins = [{"cells": 0, "secs": 0.0, "lineages": [], "models": [], "venv": None,
+             "per": {}} for _ in range(nboxes)]
+    scored = [(w, seconds(w[4], device)[0]) for w in work]
+    for (root, ms, venv, cells, per), sec in sorted(scored, key=lambda x: -x[1]):
         cand = [b for b in bins if b["venv"] in (None, venv)] or bins
-        b = min(cand, key=lambda b: b["cells"])
+        b = min(cand, key=lambda b: b["secs"])
         b["cells"] += cells
+        b["secs"] += sec
         b["lineages"].append(root)
         b["models"] += ms
         b["per"].update(per)
@@ -195,7 +205,7 @@ def main():
     a = ap.parse_args()
     work = lineage_work()
     tot = sum(w[3] for w in work)
-    bins = [b for b in pack(work, a.boxes) if b["lineages"]]
+    bins = [b for b in pack(work, a.boxes, a.device) if b["lineages"]]
 
     tot_s, guessed = seconds({m: c for w in work for m, c in w[4].items()}, a.device)
     crit = max(work, key=lambda w: seconds(w[4], a.device)[0])
@@ -206,10 +216,16 @@ def main():
     #: **THE GUESSED COUNT IS PRINTED WITH THE TOTAL, NOT UNDER IT.** An estimate
     #: whose provenance sits three lines down gets quoted without it -- which is
     #: how a single model's rate became the fleet's rate, twice.
-    print("             %d of %d models have a RECORDED rate; %d fall back to %s"
-          % (sum(len(w[1]) for w in work) - len(guessed),
-             sum(len(w[1]) for w in work), len(guessed),
-             rates.FALLBACK.get(a.device)))
+    nm = sum(len(w[1]) for w in work)
+    est_all, _g = rates.estimate(sorted({m for w in work for m in w[1]}), a.device)
+    kinds = {"measured": 0, "transferred": 0, "fallback": 0}
+    for _m, (_s, why) in est_all.items():
+        kinds["fallback" if why.startswith("FALLBACK") else
+              "transferred" if why.startswith("TRANSFERRED") else "measured"] += 1
+    rr, rwhy = rates.device_ratio(a.device)
+    print("             of %d models: %d measured on %s, %d transferred, %d guessed"
+          % (nm, kinds["measured"], a.device, kinds["transferred"], kinds["fallback"]))
+    print("             transfer basis: %s" % rwhy)
     print("critical path: %s, %d models, %s cells, %.1f h -- a lineage is NOT splittable"
           % (crit[0], len(crit[1]), format(crit[3], ","), crit_s / 3600))
     print("\n%-4s %-13s %-9s %-7s %s" % ("box", "venv", "cells", "hours", "lineages"))

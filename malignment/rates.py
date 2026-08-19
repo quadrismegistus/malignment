@@ -248,9 +248,14 @@ def rate_for(model, device, only=None, min_cells=MIN_CELLS, obs=None):
         seen = [o for o in obs if o.get("model") == model]
         if seen:
             return None, ("no qualifying observation for %s on %s (have %d on %s, "
-                          "largest n=%d)" % (model, device, len(seen),
-                                             sorted({o.get("device") for o in seen}),
-                                             max(o.get("n_cells", 0) for o in seen)))
+                          "largest n=%d)"
+                          #: `or "?"` because some stash records carry no
+                          #: `device` at all -- sorting None against str raises,
+                          #: and a diagnostic that crashes is worse than the
+                          #: absence it was describing.
+                          % (model, device, len(seen),
+                             sorted({o.get("device") or "?" for o in seen}),
+                             max(o.get("n_cells", 0) for o in seen)))
         return None, "never measured: %s" % model
     #: **A `mean_span` ROW IS DROPPED IF ANY DELTA-BASED ROW EXISTS.** They are not
     #: two measurements of one quantity: across this corpus the span mean runs
@@ -268,6 +273,43 @@ def rate_for(model, device, only=None, min_cells=MIN_CELLS, obs=None):
                     "; %d mean_span row(s) dropped" % dropped if dropped else ""))
 
 
+def device_ratio(to_device, from_device="mps", obs=None):
+    """(ratio, provenance) derived from models measured on BOTH devices.
+
+    115 of our 118 observations are MPS and the fleet is CUDA, so without this the
+    planner throws away every rate it has and falls back to a flat guess for 143
+    of 144 models. With it, an MPS rate transfers.
+
+    **Derived from paired observations, never typed.** A ratio someone types is a
+    ratio nobody can check; this one reports the pairs it used and their spread,
+    so a caller can see when it rests on too little -- which right now it does:
+
+        bloom-7b1    mps 0.855 -> cuda 0.440    0.52
+        bloomz-7b1   mps 0.816 -> cuda 0.392    0.48
+
+    Two pairs, tight agreement, and **they are the two arms of ONE lineage** --
+    the same architecture measured twice, not two independent points. Treat n as
+    1 until a second lineage lands on a box. The earlier assumption, taken from
+    0.8 (MPS, one model) against 0.19 (CUDA, another model), implied ~4x; the
+    measured figure is ~2x, and the difference is a whole fleet's worth of
+    planning.
+    """
+    obs = load() if obs is None else obs
+    by = {}
+    for o in obs:
+        if o.get("topup") or (o.get("n_cells") or 0) < MIN_CELLS:
+            continue
+        by.setdefault(o["model"], {})[o["device"]] = o["sec_per_cell"]
+    pairs = [(m, d[from_device], d[to_device]) for m, d in by.items()
+             if from_device in d and to_device in d and d[from_device]]
+    if not pairs:
+        return None, "no model measured on both %s and %s" % (from_device, to_device)
+    r = sorted(b / a for _m, a, b in pairs)
+    med = r[len(r) // 2]
+    return med, ("%d paired model(s), %s->%s ratio %.2f..%.2f"
+                 % (len(pairs), from_device, to_device, r[0], r[-1]))
+
+
 def estimate(models, device, only=None, fallback=True):
     """{model: (sec, provenance)} plus the list of models that had to be guessed.
 
@@ -276,8 +318,18 @@ def estimate(models, device, only=None, fallback=True):
     """
     obs = load()
     out, guessed = {}, []
+    #: **A TRANSFERRED RATE BEATS A FLAT GUESS, AND IS STILL NOT A MEASUREMENT.**
+    #: Tried before the fallback and counted separately, so "we measured this
+    #: model on the other device and scaled" never reads as "we measured this".
+    ratio, rwhy = device_ratio(device, obs=obs)
     for m in models:
         sec, why = rate_for(m, device, only=only, obs=obs)
+        if sec is None and ratio:
+            other = "mps" if device != "mps" else "cuda"
+            src, swhy = rate_for(m, other, only=only, obs=obs)
+            if src is not None:
+                sec, why = src * ratio, "TRANSFERRED from %s (%s; %s)" % (
+                    other, swhy, rwhy)
         if sec is None:
             if not fallback:
                 out[m] = (None, why)

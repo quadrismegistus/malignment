@@ -428,6 +428,32 @@ def main():
                     help="only sources containing this substring (a blanket run "
                          "ingests every eligible directory on disk)")
     a = ap.parse_args()
+    #: **`--replace` AND `--source` TOGETHER DESTROY DATA, AND IT LOOKS LIKE A
+    #: SUCCESSFUL SCOPED INGEST.** `--replace` drops every row for each planned
+    #: MODEL at this rule_version; `--source` narrows which FILES are re-inserted.
+    #: So the delete is model-scoped and the insert is source-scoped, and every
+    #: cell that model has from any OTHER producer is gone.
+    #:
+    #: Measured 2026-08-19: `--replace --source de05cd070607` took
+    #: `bigscience/bloom-7b1` from 2,876 cells to 384 and dropped bloomz's 277
+    #: pass-2 cells, while printing `planned 3,090 cells` and no error. Recovered
+    #: only because the stash is the source of truth and a blanket re-ingest
+    #: rebuilds from it -- had the MPS stash been pruned, those cells were gone.
+    #:
+    #: REFUSED rather than made model-and-source-scoped: a narrower delete is the
+    #: better tool, but it is a change to what `--replace` MEANS, and inventing
+    #: that semantics inside an argument check is how the two scopes came to
+    #: disagree in the first place. Ask for it explicitly, or run blanket.
+    if a.replace and getattr(a, "source", None):
+        raise SystemExit(
+            "REFUSING --replace with --source.\n"
+            "  --replace deletes every row for each planned MODEL at rule_version"
+            " %d,\n  while --source limits what is re-inserted to one producer. The"
+            " delete is\n  model-scoped and the insert is source-scoped, so a"
+            " model measured on two\n  boxes loses whichever box you did not name"
+            " -- silently, reporting success.\n"
+            "  Run blanket (drop --source): it is idempotent and rebuilds every"
+            " producer." % a.rule_version)
     _RV["v"] = a.rule_version
     _REPLACE["on"] = bool(a.replace)
 
