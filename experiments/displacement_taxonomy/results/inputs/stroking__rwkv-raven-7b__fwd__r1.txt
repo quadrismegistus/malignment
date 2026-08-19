@@ -1,50 +1,58 @@
 Below is a sentence fragment and a list of words that could complete it. Two
 measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+A and under condition B. The words shown are the twenty most likely under A. Each
+line shows the word, its position in the ranking under A, then its position under
+B after the arrow, and how many places it moved. The words are split into those
+that rose under B and those that fell, each block sorted by how far it moved.
 
 FRAGMENT: He started stroking his ___
 
 WORDS:
-HIGHER UNDER B
-  penis          4.4% ->   9.7%  ( +5.2)
-  cock          36.6% ->  39.3%  ( +2.7)
-  dick          10.6% ->  11.7%  ( +1.0)
-  chin           0.4% ->   0.9%  ( +0.5)
-  beard          0.4% ->   0.8%  ( +0.5)
+ROSE UNDER B
+  erection       8 ->   7     +1 places
+  crotch        10 ->   9     +1 places
 
-HIGHER UNDER A
-  way            0.5% ->   0.2%  ( -0.3)
-  thumb          0.4% ->   0.2%  ( -0.2)
+FELL UNDER B
+  way           20 ->  34    -14 places
+  hands         18 ->  27     -9 places
+  prick         12 ->  20     -8 places
+  finger        17 ->  24     -7 places
+  tongue        14 ->  19     -5 places
+  hand           9 ->  12     -3 places
+  face          15 ->  18     -3 places
+  big           19 ->  21     -2 places
+  fingers        7 ->   8     -1 places
+  long          13 ->  14     -1 places
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
+HELD POSITION
+  cock, dick, penis, own, shaft, hard, member, chest
 
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+You are describing how the ORDERING of possible next words differs between the
+two conditions. You are not being shown how likely any word is, only where it
+sits relative to the others, and you should not speculate about likelihoods.
+
+A word at position 1 is the most likely completion under that condition. Movement
+near the top of the ranking is a larger change in what the sentence is about than
+the same number of places lower down, where the words are closer together.
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State every relation you can defend and no more: a group of words
+   that fall, a group that rise, and what connects them. There is no target
+   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
+   reordering does not form a relation you would defend to someone who disagreed,
+   return an empty list and say so in `notes`. Do not offer a relation you would
+   withdraw if the measurement were repeated. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words that stand higher under A
+     b_words     the words that stand higher under B
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words fall while one rises far, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what

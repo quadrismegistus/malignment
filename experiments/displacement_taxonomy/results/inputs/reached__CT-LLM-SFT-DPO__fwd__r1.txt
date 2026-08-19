@@ -2,35 +2,51 @@ Below is a sentence fragment and a list of words that could complete it. Two
 measurements were taken of how likely each word is in that slot, under condition
 A and under condition B. The words shown are the twenty most likely under A. Each
 line shows the word, its position in the ranking under A, then its position under
-B after the arrow, and how many places it moved. The words are split into those
+B after the arrow, and how many places it moved. The words shown are those that
+rank in the top twenty under EITHER condition, so a word that is prominent under
+only one of them still appears. Positions are places among all the words both
+conditions measured, not among the words shown. The words are split into those
 that rose under B and those that fell, each block sorted by how far it moved.
 
-FRAGMENT: He started stroking his ___
+Some words appear under only one of the two conditions. Those have a position in
+the condition that has them and NO position in the other, so they are listed
+separately at the end with no movement figure. A word appearing under one
+condition only is a stronger difference than any change of position, not a
+weaker one.
+
+FRAGMENT: She unzipped his trousers and reached for his ___
 
 WORDS:
 ROSE UNDER B
-  hand          19 ->  14     +5 places
-  long          13 ->  10     +3 places
-  chin           4 ->   2     +2 places
-  son           15 ->  13     +2 places
-  wife           7 ->   6     +1 places
-  goatee        18 ->  17     +1 places
+  pocketbook   103 ->  14    +89 places
+  rifle         63 ->  13    +50 places
+  toolbox       60 ->  18    +42 places
+  trench        54 ->  19    +35 places
+  pistol        20 ->   4    +16 places
+  box           25 ->   9    +16 places
+  pack          24 ->  15     +9 places
+  jeans         14 ->   8     +6 places
+  gun            5 ->   1     +4 places
+  duffel         9 ->   5     +4 places
+  wallet         4 ->   3     +1 places
 
 FELL UNDER B
-  dick          14 ->  50    -36 places
-  belly         17 ->  46    -29 places
-  manhood       20 ->  36    -16 places
-  penis          8 ->  18    -10 places
-  neck          16 ->  26    -10 places
-  moustache     12 ->  15     -3 places
-  hair           2 ->   3     -1 places
-  chest          3 ->   4     -1 places
-  cock           6 ->   7     -1 places
-  mustache      10 ->  11     -1 places
-  head          11 ->  12     -1 places
+  penis         10 ->  82    -72 places
+  cock          15 ->  42    -27 places
+  trousers      13 ->  36    -23 places
+  socks         17 ->  40    -23 places
+  boots         18 ->  35    -17 places
+  bag            7 ->  21    -14 places
+  boxers         2 ->  10     -8 places
+  briefcase      3 ->   7     -4 places
+  phone          8 ->  12     -4 places
+  shirt         12 ->  16     -4 places
+  belt           1 ->   2     -1 places
+  underwear     16 ->  17     -1 places
+  dick          19 ->  20     -1 places
 
 HELD POSITION
-  beard, own, face
+  pants, pocket
 
 You are describing how the ORDERING of possible next words differs between the
 two conditions. You are not being shown how likely any word is, only where it

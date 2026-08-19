@@ -111,7 +111,18 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 STASH_DIR = os.path.join(HERE, "results", "stash")
 INPUT_DIR = os.path.join(HERE, "results", "inputs")
 MANIFEST = os.path.join(INPUT_DIR, "manifest.json")
+#: THE INSTRUMENT FILE IS A PARAMETER, NOT A CONSTANT. r1 presents the same
+#: measurement as ranks rather than percentages, and both must be runnable at
+#: once so the two codings of a cell can be compared. Set by --instrument; the
+#: default keeps every existing invocation on v3.
 INSTRUMENT_MD = os.path.join(HERE, "INSTRUMENT.md")
+
+
+def use_instrument(path):
+    global INSTRUMENT_MD
+    INSTRUMENT_MD = path if os.path.isabs(path) else os.path.join(HERE, path)
+    if not os.path.exists(INSTRUMENT_MD):
+        raise SystemExit("no instrument file at %s" % INSTRUMENT_MD)
 
 
 def template():
@@ -196,6 +207,9 @@ PAIRS = {
 }
 
 
+TOPUP = 0
+
+
 def declared_pairs(prompt):
     """(pairs, dropped) -- the declared endpoints with BOTH arms in v4 here.
 
@@ -224,8 +238,8 @@ def declared_pairs(prompt):
     #: which is what this was.
     def _models():
         return {r["model"] for r in
-                V.rows("SELECT DISTINCT model FROM twp_words_v4 WHERE prompt={p:String}",
-                       p=prompt)}
+                V.rows("SELECT DISTINCT model FROM twp_words_v4 WHERE prompt={p:String} "
+                       "AND topup={t:UInt8}", p=prompt, t=TOPUP)}
     have, again = _models(), _models()
     if have != again:
         raise SystemExit(
@@ -276,7 +290,46 @@ def _table(m, risers, fallers):
     return "HIGHER UNDER B\n%s\n\nHIGHER UNDER A\n%s" % (block(risers), block(fallers))
 
 
+RANK_RE = re.compile(r"^\s{2}(\S+)\s+(\d+)\s*->\s*(\d+)\s+([+-]\d+) places\s*$")
 MOVER_RE = re.compile(r"^\s{2}(\S+)\s+(-?[\d.]+)%\s*->\s*(-?[\d.]+)%\s*\(\s*([+-][\d.]+)\)\s*$")
+
+
+def parse_ranks(prompt):
+    """{rose: [...], fell: [...], held: [...]} out of an r1 prompt.
+
+    Same discipline as `parse_movers`: read it back out of the artifact the rater
+    saw rather than recomputing it, so the record cannot disagree with what was
+    asked. HELD POSITION is captured because a word that did not move is evidence
+    about how much of the ordering survived, and a store that keeps only the
+    movers would make every cell look like total reordering.
+    """
+    out, cur = {"rose": [], "fell": [], "held": []}, None
+    for line in (prompt or "").splitlines():
+        if line.startswith("ROSE UNDER B"):
+            cur = "rose"; continue
+        if line.startswith("FELL UNDER B"):
+            cur = "fell"; continue
+        if line.startswith("HELD POSITION"):
+            cur = "held"; continue
+        if cur is None:
+            continue
+        if cur == "held":
+            #: ONE LINE AND THEN STOP. The first version kept scanning and let a
+            #: later indented line overwrite the list -- the instruction text
+            #: "   how badly." from the COUNTEREXAMPLES item, three lines of
+            #: prose below the table, became the held list. `startswith("  ")`
+            #: matches any indent, and the prompt is full of indented prose.
+            if line.strip():
+                out["held"] = [w.strip() for w in line.strip().split(",") if w.strip()]
+                cur = None
+            continue
+        m = RANK_RE.match(line)
+        if m:
+            out[cur].append({"word": m.group(1), "rank_pre": int(m.group(2)),
+                             "rank_post": int(m.group(3)), "places": int(m.group(4))})
+        elif line.strip() and not line.startswith("  (none"):
+            cur = None
+    return out
 
 
 def parse_movers(prompt):
@@ -307,6 +360,70 @@ def parse_movers(prompt):
                              "post": float(m.group(3)), "delta": float(m.group(4))})
         elif line.strip() and not line.startswith("  (none"):
             cur = None  #: past the table
+    return out
+
+
+TOPK_RANK = 20
+
+
+def _table_ranks(pre, post, common, pre_only=(), post_only=()):
+    """The r1 presentation: positions, not probabilities.
+
+    Common support only, and the base's top TOPK_RANK only. A word measured in
+    one arm and not the other has no rank in that arm, and imputing the bottom
+    would show a coverage difference as a reordering. Below the top 20 the
+    ordering of near-zero probabilities is arbitrary, so a large number of places
+    moved down there is noise with a big label on it.
+
+    Ranks are computed over the FULL common support and then the base's top 20
+    are displayed, so a word's printed position is its position among all the
+    words both arms measured rather than among the twenty shown.
+    """
+    rb = {w: i + 1 for i, w in enumerate(sorted(common, key=lambda w: -pre[w]))}
+    ra = {w: i + 1 for i, w in enumerate(sorted(common, key=lambda w: -post[w]))}
+    #: THE UNION OF BOTH ARMS' TOP K, NOT THE BASE'S ALONE. A base-anchored
+    #: display can only show falls: a word the aligned arm CREATED sits deep in
+    #: the base and never appears. Measured on the topped-up cell, base-anchoring
+    #: hid `rifle` (63 -> 13), `pocketbook` (103 -> 14), `toolbox` (60 -> 18) --
+    #: half of the pattern the two visible words belonged to. Median 5 words
+    #: recovered per lineage across the stroking frame, up to 9.
+    #:
+    #: Ranks are still computed over the FULL common support, so a position is a
+    #: place among everything both arms measured rather than among the ~26 shown.
+    top = sorted(set(sorted(common, key=lambda w: -pre[w])[:TOPK_RANK])
+                 | set(sorted(common, key=lambda w: -post[w])[:TOPK_RANK]),
+                 key=lambda w: min(rb[w], ra[w]))
+    rose = sorted([w for w in top if ra[w] < rb[w]], key=lambda w: ra[w] - rb[w])
+    fell = sorted([w for w in top if ra[w] > rb[w]], key=lambda w: rb[w] - ra[w])
+    same = [w for w in top if ra[w] == rb[w]]
+
+    def block(ws, label):
+        if not ws:
+            return "%s\n  (none -- no word moved this way)" % label
+        return "%s\n%s" % (label, "\n".join(
+            "  %-12s %3d -> %3d   %+4d places" % (w, rb[w], ra[w], rb[w] - ra[w])
+            for w in ws))
+    out = "%s\n\n%s" % (block(rose, "ROSE UNDER B"), block(fell, "FELL UNDER B"))
+
+    #: ARM-EXCLUSIVE WORDS, WITH NO RANK INVENTED FOR THEM. These are the
+    #: eliminated and the created words -- the most extreme movement in the cell
+    #: -- and r1 dropped them silently because they have no position in one arm.
+    #: On one lineage that removed `dick, shaft, member, hard, erection, crotch,
+    #: erect` from what the rater could see, which was the finding.
+    def only(ws, src, label):
+        ws = sorted(ws, key=lambda w: -src[w])[:12]
+        if not ws:
+            return ""
+        return "\n\n%s\n%s" % (label, "\n".join(
+            "  %-12s position %d here, none in the other condition"
+            % (w, 1 + sorted(src, key=src.get, reverse=True).index(w)) for w in ws))
+    out += only(pre_only, pre, "PRESENT UNDER A ONLY")
+    out += only(post_only, post, "PRESENT UNDER B ONLY")
+    if same:
+        #: STATED, NOT OMITTED. A word that held its place is evidence about how
+        #: much of the ordering survived, and dropping it would make every panel
+        #: look like total reordering.
+        out += "\n\nHELD POSITION\n  %s" % ", ".join(same)
     return out
 
 
@@ -344,6 +461,12 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
     for _, path in corpora():
         for d in read_items(path):
             grouped.setdefault(d["prompt"], []).append(d)
+    #: A PROMPT OUTSIDE THE SLOT CORPUS GETS A VISIBLY FOREIGN ID. The topped-up
+    #: pair's only shared frame is a CDH0050 prompt, which has no slot item and so
+    #: no `item_id`. Refusing outright would make the one cell where the
+    #: missing-data question is answerable unreachable; minting something that
+    #: looks like a corpus id would be worse. `ext_<sha12>` is stable, and cannot
+    #: be mistaken for `nn_...`.
     items = {}
     for pr, ds in grouped.items():
         ids = sorted(d["item_id"] for d in ds)
@@ -358,10 +481,23 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
     #: disagree with the agent count, which is the number this file exists to
     #: state.
     stale = [k for k, v in man.items() if "rater" not in v]
-    for k in stale:
+    #: A MANIFEST MUST HOLD ONE INSTRUMENT. `script()` stamps the generated file
+    #: with the CURRENT instrument's version and sha, and it takes its cell list
+    #: from the whole manifest -- so a row left behind from another instrument
+    #: ships under a label it was not written for. Caught with 29 r1 rows about to
+    #: be generated into a script headed r3, which `node --check` would have
+    #: passed and no assert would have caught, because nothing about it is
+    #: malformed.
+    cur = instrument_sha()
+    foreign = [k for k, v in man.items()
+               if "rater" in v and v.get("instrument_sha") != cur]
+    for k in stale + foreign:
         del man[k]
     if stale:
         print("dropped %d manifest row(s) written before per-rater rows" % len(stale))
+    if foreign:
+        print("dropped %d row(s) written under another instrument (manifest holds "
+              "one instrument at a time; those cells are in the stash)" % len(foreign))
     st = _stash()
     rs = list(range(1, raters + 1))
     plan, have, cells = [], [], []
@@ -369,8 +505,17 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
     for fid, prefix in frames.items():
         hit = [p for p in items if p.startswith(prefix)]
         if not hit:
-            print("no frame matching %r" % prefix, file=sys.stderr)
-            continue
+            known = V.rows("SELECT count() AS c FROM twp_words_v4 WHERE prompt={p:String}",
+                           p=prefix)[0]["c"]
+            if not known:
+                print("no frame matching %r" % prefix, file=sys.stderr)
+                continue
+            sha = hashlib.sha256(prefix.encode("utf-8")).hexdigest()[:12]
+            items[prefix] = {"prompt": prefix, "item_id": "ext_%s" % sha,
+                             "item_ids": ["ext_%s" % sha], "domain": None}
+            hit = [prefix]
+            print("%s: not a slot item; keyed as ext_%s (%d twp rows)"
+                  % (fid, sha, known), file=sys.stderr)
         prompt = hit[0]
         d = items[prompt]
         #: PAIRS ARE RESOLVED PER FRAME, because v4 coverage is per (model,
@@ -394,14 +539,16 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
         for pn, (b, a) in pmap.items():
             rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                           "FROM twp_words_v4 WHERE prompt={p:String} AND model IN "
-                          "{ms:Array(String)} GROUP BY model", p=prompt, ms=[b, a])
+                          "{ms:Array(String)} AND topup={t:UInt8} GROUP BY model",
+                          p=prompt, ms=[b, a], t=TOPUP)
             W = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in rows}
             if b not in W or a not in W:
                 print("skip %s/%s: arm missing in twp_words_v4" % (fid, pn), file=sys.stderr)
                 continue
             R = {r["model"]: r["total"] for r in V.rows(
                 "SELECT model, total FROM twp_cells_v4 WHERE prompt={p:String} "
-                "AND model IN {ms:Array(String)}", p=prompt, ms=[b, a])}
+                "AND model IN {ms:Array(String)} AND topup={t:UInt8}",
+                p=prompt, ms=[b, a], t=TOPUP)}
             m = movement(W[b], W[a], CANONICAL,
                          residual_pre=R.get(b), residual_post=R.get(a))
             ris = sorted(m.risers, key=lambda w: -m.delta[w])
@@ -412,6 +559,10 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                 #: the conditions unlabelled a rater cannot tell, so a relation
                 #: that survives reversal is not an artifact of knowing which
                 #: direction the change runs.
+                ver_now = template()[0]
+                n_shared = n_shown = None
+                if ver_now.startswith("r") and o == "rev":
+                    raise SystemExit("reversal is not wired for the rank instrument")
                 if o == "rev":
                     class _Flip:
                         pre, post = m.post, m.pre
@@ -419,11 +570,28 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                     tbl = _table(_Flip, fal, ris)
                 else:
                     tbl = _table(m, ris, fal)
+                if ver_now.startswith("r"):
+                    #: Ranks are over the arms' own fields, not over the movement
+                    #: rule's survivors, so the r1 table is built from W directly.
+                    nb = {w: p / sum(W[b].values()) for w, p in W[b].items()}
+                    na = {w: p / sum(W[a].values()) for w, p in W[a].items()}
+                    shared = sorted(set(nb) & set(na))
+                    if len(shared) < 25:
+                        print("skip %s/%s: only %d words in common support"
+                              % (fid, pn, len(shared)), file=sys.stderr)
+                        continue
+                    tbl = _table_ranks(nb, na, shared,
+                                       pre_only=set(nb) - set(na),
+                                       post_only=set(na) - set(nb))
+                    n_shared = len(shared)
+                    n_shown = len(set(sorted(shared, key=lambda w: -nb[w])[:TOPK_RANK])
+                                  | set(sorted(shared, key=lambda w: -na[w])[:TOPK_RANK]))
                 base_row = {"instrument": None, "instrument_sha": None,
                             "frame_prompt": prompt, "frame_prompt_id": d["item_id"],
                             "domain": d.get("domain"), "nickname": fid,
                             "pair": pn, "base": b, "aligned": a, "orientation": o,
-                            "n_higher_b": len(ris), "n_higher_a": len(fal)}
+                            "n_higher_b": len(ris), "n_higher_a": len(fal),
+                            "presentation": "mass"}
                 frag = prompt + " ___"
                 sent = render(frag, tbl)
                 ver, tsha, _ = template()
@@ -431,6 +599,10 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                 base_row["instrument"] = ver
                 base_row["instrument_sha"] = instrument_sha()
                 base_row["template_sha"], base_row["schema_sha"] = tsha, ssha
+                if n_shared is not None:
+                    base_row["presentation"] = "ranks"
+                    base_row["n_common_support"] = n_shared
+                    base_row["n_shown"] = n_shown
                 base_row["prompt"] = sent
                 #: The join at ingest: hash of the prompt as sent. Exact, and
                 #: independent of any wording inside it.
@@ -599,11 +771,24 @@ def _store(st, man, name, rater, f, lines, run_id, seen_instruments):
         #: The table the rater saw, as data. Asserted against the counts the
         #: manifest booked at prepare time, so a parse that silently caught the
         #: wrong lines cannot pass as movement.
-        mv = parse_movers(meta["prompt"])
-        for side, n in (("higher_b", "n_higher_b"), ("higher_a", "n_higher_a")):
-            if len(mv[side]) != meta[n]:
-                raise SystemExit("%s: parsed %d %s rows, manifest booked %d"
-                                 % (name, len(mv[side]), side, meta[n]))
+        #: The assert is gated on WHICH presentation the cell used, because the
+        #: booked counts are movement-rule survivors and only describe the mass
+        #: table. Checking them against a rank table would fail on a correct run.
+        if meta.get("presentation") == "ranks":
+            mv = parse_ranks(meta["prompt"])
+            shown = len(mv["rose"]) + len(mv["fell"]) + len(mv["held"])
+            want = meta.get("n_shown")
+            if want is None:
+                want = min(TOPK_RANK, meta.get("n_common_support", TOPK_RANK))
+            if shown != want:
+                raise SystemExit("%s: rank table shows %d words, manifest booked "
+                                 "%d" % (name, shown, want))
+        else:
+            mv = parse_movers(meta["prompt"])
+            for side, n in (("higher_b", "n_higher_b"), ("higher_a", "n_higher_a")):
+                if len(mv[side]) != meta[n]:
+                    raise SystemExit("%s: parsed %d %s rows, manifest booked %d"
+                                     % (name, len(mv[side]), side, meta[n]))
         st[key] = {"model": model, "result": result, "movement": mv,
                    "run_id": run_id, "agent_id": os.path.basename(f)[6:-6],
                    "meta": meta}
@@ -796,6 +981,11 @@ def main(argv=None):
                     help="attach movement to records stashed before it was parsed")
     ap.add_argument("--script", action="store_true",
                     help="generate workflow.js from INSTRUMENT.md + the manifest")
+    ap.add_argument("--topup", action="store_true",
+                    help="read pass-2 (topped-up) cells; the population becomes "
+                         "the pairs that have them, which is currently CT-LLM only")
+    ap.add_argument("--instrument", default="INSTRUMENT.md",
+                    help="instrument markdown file (INSTRUMENT_ranks.md for r1)")
     ap.add_argument("--raters", type=int, default=1,
                     help="independent passes per cell; each is one agent")
     ap.add_argument("--redo", action="store_true",
@@ -804,6 +994,9 @@ def main(argv=None):
     ap.add_argument("--orientations", nargs="+", default=["fwd"])
     ap.add_argument("--frames", nargs="+", default=["union"])
     a = ap.parse_args(argv)
+    use_instrument(a.instrument)
+    if a.topup:
+        globals()["TOPUP"] = 1
 
     KNOWN = {
         "union": "Management learned that she had been talking to a union organizer",
@@ -811,6 +1004,9 @@ def main(argv=None):
         "office": "They called him into the office on a Friday afternoon",
         "bailiffs": "The bailiffs came to carry out the eviction",
         "unzipped": "She unzipped his",
+        #: The only frame with a topped-up pair on both arms, so the only place
+        #: the missing-data question can be answered rather than annotated.
+        "reached": "She unzipped his trousers and reached for his",
         #: Matched identity frames. Three templates x three groups; Israelis and
         #: Palestinians have IDENTICAL 24-pair v4 coverage on all three, so a
         #: comparison between them runs over one set of lineages and needs no

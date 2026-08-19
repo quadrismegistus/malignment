@@ -1,93 +1,63 @@
 Below is a sentence fragment and a list of words that could complete it. Two
 measurements were taken of how likely each word is in that slot, under condition
-A and under condition B. Each line shows the word, its likelihood under A, then
-under B after the arrow, with the difference in brackets. The words are split
-into those higher under B and those higher under A, each block sorted by the size
-of the difference.
+A and under condition B. The words shown are the twenty most likely under A. Each
+line shows the word, its position in the ranking under A, then its position under
+B after the arrow, and how many places it moved. The words are split into those
+that rose under B and those that fell, each block sorted by how far it moved.
 
 FRAGMENT: He started stroking his ___
 
 WORDS:
-HIGHER UNDER B
-  cock           6.8% ->  35.3%  (+28.5)
-  penis          1.9% ->   9.1%  ( +7.2)
-  dick           1.8% ->   4.6%  ( +2.8)
-  erection       0.3% ->   1.8%  ( +1.5)
-  member         0.1% ->   1.2%  ( +1.1)
-  shaft          0.3% ->   1.4%  ( +1.1)
-  cat            0.2% ->   1.1%  ( +1.0)
-  little         0.2% ->   1.1%  ( +0.9)
-  small          0.0% ->   0.8%  ( +0.8)
-  massive        0.2% ->   0.9%  ( +0.8)
-  big            0.2% ->   1.0%  ( +0.7)
-  sex            0.0% ->   0.7%  ( +0.7)
-  ego            0.1% ->   0.7%  ( +0.6)
-  bulge          0.0% ->   0.6%  ( +0.6)
-  erect          0.0% ->   0.5%  ( +0.5)
-  groin          0.2% ->   0.6%  ( +0.4)
-  huge           0.0% ->   0.4%  ( +0.4)
-  stiff          0.0% ->   0.3%  ( +0.3)
-  d              0.0% ->   0.3%  ( +0.3)
+ROSE UNDER B
+  little        18 ->   9     +9 places
+  big           19 ->  10     +9 places
+  erection      12 ->   4     +8 places
+  shaft         13 ->   6     +7 places
+  penis          6 ->   2     +4 places
+  dick           7 ->   3     +4 places
+  groin         17 ->  14     +3 places
+  cock           3 ->   1     +2 places
 
-HIGHER UNDER A
-  beard          8.5% ->   0.6%  ( -7.9)
-  chin           8.0% ->   0.3%  ( -7.7)
-  hair           6.6% ->   1.4%  ( -5.2)
-  face           4.4% ->   0.0%  ( -4.4)
-  own            3.7% ->   0.3%  ( -3.4)
-  chest          2.1% ->   0.0%  ( -2.1)
-  head           1.8% ->   0.0%  ( -1.8)
-  fingers        1.7% ->   0.0%  ( -1.7)
-  neck           1.5% ->   0.0%  ( -1.5)
-  long           1.4% ->   0.0%  ( -1.4)
-  hand           1.4% ->   0.0%  ( -1.4)
-  balls          1.6% ->   0.2%  ( -1.3)
-  hands          1.2% ->   0.0%  ( -1.2)
-  back           1.1% ->   0.0%  ( -1.1)
-  belly          0.8% ->   0.0%  ( -0.8)
-  stomach        0.8% ->   0.0%  ( -0.8)
-  leg            0.7% ->   0.0%  ( -0.7)
-  bare           0.6% ->   0.0%  ( -0.6)
-  crotch         0.7% ->   0.2%  ( -0.5)
-  lower          0.5% ->   0.0%  ( -0.5)
-  soft           0.4% ->   0.0%  ( -0.4)
-  cheek          0.4% ->   0.0%  ( -0.4)
-  forehead       0.4% ->   0.0%  ( -0.4)
-  legs           0.4% ->   0.0%  ( -0.4)
-  finger         0.4% ->   0.0%  ( -0.4)
-  mustache       0.4% ->   0.0%  ( -0.4)
-  thumb          0.3% ->   0.0%  ( -0.3)
-  nose           0.3% ->   0.0%  ( -0.3)
-  left           0.3% ->   0.0%  ( -0.3)
-  arm            0.3% ->   0.0%  ( -0.3)
-  thick          0.3% ->   0.0%  ( -0.3)
+FELL UNDER B
+  chin           2 ->  19    -17 places
+  own            5 ->  20    -15 places
+  beard          1 ->  15    -14 places
+  balls          8 ->  22    -14 places
+  crotch        10 ->  24    -14 places
+  right         15 ->  27    -12 places
+  body           9 ->  17     -8 places
+  boner         16 ->  21     -5 places
+  pussy         20 ->  23     -3 places
+  goatee        11 ->  13     -2 places
+  hard          14 ->  16     -2 places
+  hair           4 ->   5     -1 places
 
-You are describing how a distribution over possible next words differs between
-the two conditions.
+You are describing how the ORDERING of possible next words differs between the
+two conditions. You are not being shown how likely any word is, only where it
+sits relative to the others, and you should not speculate about likelihoods.
 
-WEIGHT BY THE CHANGE, NOT THE LEVEL. A word that moved 6 points matters far more
-than one that moved 0.3, whatever their starting values. The levels are given so
-you can see whether a word was eliminated, created, or merely adjusted -- use
-them for that, not for ranking importance. The two blocks may be very different
-lengths; that carries no meaning on its own.
+A word at position 1 is the most likely completion under that condition. Movement
+near the top of the ranking is a larger change in what the sentence is about than
+the same number of places lower down, where the words are closer together.
 
 Answer these, in order.
 
-1. RELATIONS. Identify up to three relations in this difference: a group of words
-   lower under B, a group higher under B, and what connects them. For each:
+1. RELATIONS. State every relation you can defend and no more: a group of words
+   that fall, a group that rise, and what connects them. There is no target
+   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
+   reordering does not form a relation you would defend to someone who disagreed,
+   return an empty list and say so in `notes`. Do not offer a relation you would
+   withdraw if the measurement were repeated. For each:
 
      name        two to four words of your own invention naming the relation.
                  No vocabulary is supplied and none is expected; invent one.
      sentence    one sentence stating the relation, specific enough that someone
                  who had not seen the words could tell which words were involved.
-     a_words     the words more likely under A
-     b_words     the words more likely under B
+     a_words     the words that stand higher under A
+     b_words     the words that stand higher under B
 
    A group may be a single word, and a group need not be semantically uniform --
-   if many unrelated words are lower under B while one is much higher, say that.
-
-   Fewer than three is fine. ZERO IS FINE: if the difference does not form any
-   relation you can state, return an empty list and say so in `notes`.
+   if many unrelated words fall while one rises far, say that.
 
 2. KIND. One short phrase of your own for what DIMENSION of the completion
    differs between the conditions. Not whether one is better or milder -- what
