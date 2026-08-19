@@ -205,7 +205,13 @@ def main():
     a = ap.parse_args()
     work = lineage_work()
     tot = sum(w[3] for w in work)
-    bins = [b for b in pack(work, a.boxes, a.device) if b["lineages"]]
+    #: **ONE ORDER, USED BY BOTH THE TABLE AND THE FILE.** These were sorted
+    #: independently: the printed table by hours, the JSON in packer order. So
+    #: `--box 1` launched a DIFFERENT shard from the one the table calls 1, and
+    #: the only way to notice was to dry-run and read the lineage names back.
+    #: An index that means two things is worse than no index.
+    bins = sorted([b for b in pack(work, a.boxes, a.device) if b["lineages"]],
+                  key=lambda b: -seconds(b["per"], a.device)[0])
 
     tot_s, guessed = seconds({m: c for w in work for m, c in w[4].items()}, a.device)
     crit = max(work, key=lambda w: seconds(w[4], a.device)[0])
@@ -229,7 +235,7 @@ def main():
     print("critical path: %s, %d models, %s cells, %.1f h -- a lineage is NOT splittable"
           % (crit[0], len(crit[1]), format(crit[3], ","), crit_s / 3600))
     print("\n%-4s %-13s %-9s %-7s %s" % ("box", "venv", "cells", "hours", "lineages"))
-    for i, b in enumerate(sorted(bins, key=lambda b: -seconds(b["per"], a.device)[0]), 1):
+    for i, b in enumerate(bins, 1):
         print("%-4d %-13s %-9s %-7.1f %d: %s"
               % (i, b["venv"], format(b["cells"], ","),
                  seconds(b["per"], a.device)[0] / 3600,
