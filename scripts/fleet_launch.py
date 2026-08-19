@@ -139,6 +139,11 @@ def main():
                          "the box is called stalled. Must exceed the slowest cold "
                          "model load in the shard, or a normal load reads as a "
                          "stall -- the one number here that is a judgement.")
+    ap.add_argument("--pull-every", type=int, default=5,
+                    help="pull the cells home every N polls (0 disables). At the "
+                         "default poll of 180s that is every 15 min, so a box "
+                         "lost mid-run costs at most that much work rather than "
+                         "the whole shard.")
     ap.add_argument("--max-hours", type=float, default=6.0)
     ap.add_argument("--i-have-rh-authorisation", action="store_true",
                     help="asserts RH said to spend on THIS launch, not a "
@@ -708,6 +713,24 @@ def _await(cloud, st, models, iid, a):
         alive = cloud.ssh_run(st, "tmux has-session -t fleet 2>/dev/null").returncode == 0
         if n != last_n:
             last_n, last_change = n, time.time()
+        #: **PULL WHILE IT RUNS, NOT ONLY AT THE END.** There was exactly one
+        #: rsync of the cells and it came AFTER the run finished, so a box lost at
+        #: 2h50m of a 3h shard lost everything it had written. RH: *"we don't have
+        #: an rsync auto-looping do we? when do you rsync?"* -- we did not.
+        #:
+        #: rsync is delta-based, so repeating it costs the new cells and a
+        #: directory walk. A failed intermediate pull is NOT fatal: the box still
+        #: holds the data and the final pull is authoritative, so this warns and
+        #: continues rather than tearing down a healthy run over a network blip.
+        if a.pull_every and ticks % a.pull_every == 0:
+            try:
+                pr = cloud.rsync(st, "/root/malignment-data/twp",
+                                 os.path.expanduser("~/malignment-data/twp"),
+                                 from_remote=True)
+                print("     incremental pull rc=%d" % pr.returncode, flush=True)
+            except Exception as e:                              # noqa: BLE001
+                print("     incremental pull FAILED (not fatal): %s"
+                      % str(e)[:80], flush=True)
         idle = (time.time() - last_change) / 60.0
         print("  poll %-3d    %s cells written | tmux %s | %.0f min elapsed%s"
               % (ticks, format(max(n, 0), ","), "up" if alive else "GONE",
