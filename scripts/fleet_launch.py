@@ -312,16 +312,45 @@ def execute(b, models, roots, venv, a):
             print("  token       wrote %s from the environment" % tok_path)
     if os.path.exists(tok_path):
         cloud.ssh_run(st, "mkdir -p /root/.cache/huggingface")
-        cloud.rsync(st, tok_path, "/root/.cache/huggingface/token")
+        #: is_file=True, and the RETURN CODE IS CHECKED. The first version did
+        #: neither: rsync failed, the destination became a directory, and this
+        #: line printed "shipped" anyway -- an operation reporting success while
+        #: doing the opposite of its name.
+        rr = cloud.rsync(st, tok_path, "/root/.cache/huggingface/token",
+                         is_file=True)
+        chk = cloud.ssh_run(st, "test -f /root/.cache/huggingface/token && "
+                                "wc -c < /root/.cache/huggingface/token")
+        if rr.returncode or chk.returncode:
+            _billing(cloud, iid, "token copy failed rc=%d/%d"
+                     % (rr.returncode, chk.returncode))
+            raise SystemExit("  token did NOT ship. Box kept for inspection.")
         cloud.ssh_run(st, "chmod 600 /root/.cache/huggingface/token")
-        print("  token       shipped to /root/.cache/huggingface/token")
+        print("  token       shipped, %s bytes on the box"
+              % (chk.stdout or "?").strip())
     else:
         from preflight_env import gated as _gated
         print("  token       NO ~/.cache/huggingface/token and none in env -- "
               "%d gated model(s) in this shard WILL fail" % len(_gated(models)))
 
     print("  provision   venv %s" % venv)
-    r = cloud.ssh_run(st, PROVISION % {"venv": venv})
+    #: What THIS checkout's venv of the same name actually has -- asked of the
+    #: interpreter, not read from a requirements file, because the file is what
+    #: was wrong.
+    want = ""
+    try:
+        want = subprocess.run(
+            [os.path.join(ROOT, venv, "bin", "python"), "-c",
+             "import transformers;print(transformers.__version__)"],
+            capture_output=True, text=True).stdout.strip()
+    except Exception:                                           # noqa: BLE001
+        pass
+    print("  provision   %s must carry transformers %s" % (venv, want or "(unknown)"))
+    r = cloud.ssh_run(st, PROVISION % {"venv": venv, "want": want})
+    if r.returncode == 4:
+        #: The venv carries the wrong transformers. OURS, not the host's -- never
+        #: blocklist for it.
+        _billing(cloud, iid, "venv pin mismatch (rc=4)")
+        raise SystemExit("  VENV MISMATCH:\n%s" % (r.stdout or "")[-400:])
     if r.returncode == 3:
         #: **rc=3 IS THE HF REACHABILITY ASSERT, AND IT IS A MACHINE DEFECT.**
         #: Box 48145433 carried an HF proxy at http://117.175.104.83 and 404'd 10
@@ -329,6 +358,20 @@ def execute(b, models, roots, venv, a):
         #: runbook's rule applies: blocklist the machine and take another offer,
         #: never retry the same one. Destroying here is safe because the assert
         #: runs BEFORE any model is fetched -- there is nothing on the box to lose.
+        #: **BLAME THE HOST ONLY FOR THE HOST'S FAULTS.** Machine 61353 was
+        #: blocklisted on 2026-08-19 for an `IsADirectoryError` -- our own token
+        #: file shipped as a directory -- because this branch treated every rc=3
+        #: as a network verdict. A blocklist that accumulates our bugs shrinks the
+        #: offer pool for reasons nobody can audit afterwards, and the machine was
+        #: never shown to be bad. Local causes name local objects; check first.
+        out = (r.stdout or "") + (r.stderr or "")
+        ours = [w for w in ("IsADirectoryError", "PermissionError", "token",
+                            "No such file or directory") if w in out]
+        if ours:
+            _billing(cloud, iid, "HF assert failed on OUR defect: %s" % ours[0])
+            raise SystemExit("  the HF assert failed for a LOCAL reason (%s), so "
+                             "the machine is NOT blocklisted. Box kept.\n%s"
+                             % (ours[0], out[-400:]))
         cloud.blocklist(best.get("machine_id"), "HF unreachable from this host")
         print("  HF UNREACHABLE from this machine -- blocklisted.\n%s"
               % (r.stdout or "")[-300:])
@@ -508,14 +551,34 @@ PROVISION = """set -e
 export DEBIAN_FRONTEND=noninteractive
 command -v rsync >/dev/null || (apt-get update -qq && apt-get install -y -qq rsync)
 cd /root/malignment
-python3 -m venv %(venv)s 2>/dev/null || true
+# **THE VENV IS BUILT FROM THE ROSTER, NOT FROM requirements.txt.** This ran
+# `pip install -r requirements.txt` into a venv NAMED .venv-tf457 and got
+# transformers 5.15.0 -- because the 5.4.0 cap in requirements.txt is
+# darwin-only, and the 4.57.1 pin lives in roster/models/models.yaml where only
+# scripts/venvs.py reads it. So on every rented box the `env: profile` mechanism
+# was inert and the venv name was a label with nothing behind it. venvs.py's own
+# docstring names this exact number: ">=4.57 resolving to 5.15.0 is the whole
+# reason the split exists".
+command -v uv >/dev/null || pip -q install uv
+python3 scripts/venvs.py build --python 3.11
 ./%(venv)s/bin/pip -q install --upgrade pip
-./%(venv)s/bin/pip -q install -r requirements.txt
 # **AND THE PACKAGE ITSELF.** requirements.txt lists DEPENDENCIES; without
 # `pip install -e .` every script dies on `ModuleNotFoundError: malignment` --
 # after the venv built, after the payload shipped, with the rental running.
 ./%(venv)s/bin/pip -q install -e .
-./%(venv)s/bin/python -c "import torch,transformers;print('torch',torch.__version__,'transformers',transformers.__version__,'cuda',torch.cuda.is_available())"
+# **AND THE PIN IS ASSERTED, NOT ANNOUNCED.** A build that prints a version
+# nobody compares is how 5.15.0 ran for an hour under a name meaning 4.57.1.
+# The expected value is this checkout's OWN venv, so the box matches the machine
+# the code was tested on -- the same principle as shipping the tree.
+./%(venv)s/bin/python - <<'VEOF'
+import sys, torch, transformers
+want, got = "%(want)s", transformers.__version__
+print("torch", torch.__version__, "transformers", got, "cuda", torch.cuda.is_available())
+if want and got != want:
+    print("VENV MISMATCH: %(venv)s has transformers", got, "but this roster declares", want)
+    sys.exit(4)
+print("VENV OK: transformers", got, "matches the roster pin")
+VEOF
 # **THE BOX'S OWN NETWORK CONFIG IS NOT TRUSTED.** Fleet box 48145433 shipped with
 # an HF proxy at http://117.175.104.83 and 10 of its 11 models died on 404 -- a
 # machine property we paid to provision, ship to, and run a whole shard against

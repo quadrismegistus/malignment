@@ -262,13 +262,29 @@ def ssh_run(st, command, capture=True):
     return subprocess.run(cmd, capture_output=capture, text=True)
 
 
-def rsync(st, src, dst, from_remote=False, exclude=()):
+def rsync(st, src, dst, from_remote=False, exclude=(), is_file=False):
+    """Copy a DIRECTORY by default; pass is_file=True for a single file.
+
+    **The trailing slashes are not cosmetic and this had no file mode.** Handed a
+    file path, the directory form makes rsync try to chdir into it -- it errors
+    with `change_dir ... Not a directory` AND creates the destination as a
+    DIRECTORY. On 2026-08-19 that turned `/root/.cache/huggingface/token` into a
+    folder, so `huggingface_hub` raised `IsADirectoryError`, the HF assert read
+    that as an unreachable host, and a perfectly good machine was blocklisted for
+    a local defect.
+    """
     ssh = ("ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "
            "-o LogLevel=ERROR -p %s" % st["ssh_port"])
     cmd = ["rsync", "-az", "--partial", "-e", ssh]
     for pat in exclude:
         cmd += ["--exclude", pat]
-    if from_remote:
+    if is_file:
+        #: No trailing slash on either side: file -> file.
+        if from_remote:
+            cmd += ["root@%s:%s" % (st["ssh_host"], src), dst]
+        else:
+            cmd += [src, "root@%s:%s" % (st["ssh_host"], dst)]
+    elif from_remote:
         os.makedirs(dst, exist_ok=True)
         cmd += ["root@%s:%s/" % (st["ssh_host"], src), dst + "/"]
     else:
