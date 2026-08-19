@@ -104,7 +104,7 @@ FALLBACK = {"cuda": 0.35, "mps": 1.2}
 
 def record(model, device, n_cells, compute_s, load_s=None, gpu=None,
            vocab_size=None, rules=None, only=None, topup=False,
-           median_delta=None, path=PATH):
+           median_delta=None, note=None, path=PATH):
     """Append one observation. Never overwrites: rates drift with code and card.
 
     Append-only because a rate is an OBSERVATION, and the campaign's rule is that
@@ -122,6 +122,12 @@ def record(model, device, n_cells, compute_s, load_s=None, gpu=None,
     """
     if not n_cells or n_cells <= 0 or compute_s is None:
         return None
+    #: **A RATE MEASURED UNDER KNOWN-BAD CONDITIONS MUST SAY SO.** Screening runs
+    #: share the GPU with whatever else is on it, so they read HIGH -- safe for
+    #: catching a 500x outlier, wrong as a planning number. The environment
+    #: carries it so the producer needs no new argument: `runners.run` records
+    #: itself and never knew why it was invoked.
+    note = note or os.environ.get("MALIGNMENT_RATE_NOTE") or None
     spc = median_delta if median_delta else compute_s / float(n_cells)
     obs = {"model": model, "device": device, "gpu": gpu, "vocab_size": vocab_size,
            "rules": rules, "only": only, "topup": bool(topup),
@@ -129,6 +135,7 @@ def record(model, device, n_cells, compute_s, load_s=None, gpu=None,
            "compute_s": round(compute_s, 1),
            "sec_per_cell": round(spc, 4),
            "estimator": "median_delta" if median_delta else "mean_span",
+           "note": note,
            "observed": time.strftime("%Y-%m-%dT%H:%M:%S")}
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "a", encoding="utf-8") as fh:
@@ -264,13 +271,24 @@ def rate_for(model, device, only=None, min_cells=MIN_CELLS, obs=None):
     #: rather than removing it.
     good = [o for o in cand if o.get("estimator") != "mean_span"]
     cand, dropped = (good, len(cand) - len(good)) if good else (cand, 0)
+    #: A clean observation beats a noted one; a noted one beats nothing. Same
+    #: shape as the mean_span rule above, and for the same reason: averaging a
+    #: known-inflated number with a clean one imports the inflation at half
+    #: strength rather than removing it.
+    clean = [o for o in cand if not o.get("note")]
+    noted = len(cand) - len(clean)
+    if clean:
+        cand = clean
     vals = sorted(o["sec_per_cell"] for o in cand)
     med = vals[len(vals) // 2] if len(vals) % 2 else (vals[len(vals) // 2 - 1]
                                                      + vals[len(vals) // 2]) / 2.0
     return med, ("median of %d obs, n_cells %d..%d%s"
                  % (len(cand), min(o["n_cells"] for o in cand),
                     max(o["n_cells"] for o in cand),
-                    "; %d mean_span row(s) dropped" % dropped if dropped else ""))
+                    ("; %d mean_span dropped" % dropped if dropped else "")
+                    + ("; %d noted row(s) dropped" % noted if noted and clean else "")
+                    + ("; ALL rows noted: %s" % cand[0].get("note")
+                       if cand and cand[0].get("note") else "")))
 
 
 def device_ratio(to_device, from_device="mps", obs=None):
