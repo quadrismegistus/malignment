@@ -319,6 +319,51 @@ def execute(b, models, roots, venv, a):
     if a.stop_after == "provision":
         return 0
 
+    # ---- token -------------------------------------------------------------
+    #: Asked UNAUTHENTICATED, which is the BOX's condition rather than ours --
+    #: this Mac holds a token in its shell profile, so every gated repo resolves
+    #: here and nowhere else, which is why two pilots never surfaced it.
+    from preflight_env import gated as _gated
+    gated_here = _gated(models)
+    #: **12 OF 144 MODELS ARE GATED AND A TOKENLESS BOX CANNOT FETCH THEM.**
+    #: Measured unauthenticated by `preflight_env.gated()` -- including
+    #: `meta-llama/Llama-3.1-8B`, a whole lineage root. RH, 2026-08-19: *"I have
+    #: HF_TOKEN here just rsync it over."*
+    #:
+    #: **The value never touches an argv, a log, or a commit.** It is written to a
+    #: 0600 temp file and rsynced to the location huggingface_hub reads by itself,
+    #: because `ssh_run(st, "echo $TOK > ...")` would put a live credential in the
+    #: local process table and in this script's own output. `hfenv.sh` then exports
+    #: it by READING that file, so the script text never contains it either.
+    tok = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    if tok:
+        import stat
+        import tempfile
+        td = tempfile.mkdtemp()
+        tp = os.path.join(td, "token")
+        with open(tp, "w") as fh:
+            fh.write(tok.strip())
+        os.chmod(tp, stat.S_IRUSR | stat.S_IWUSR)
+        cloud.ssh_run(st, "mkdir -p /root/.cache/huggingface")
+        cloud.rsync(st, tp, "/root/.cache/huggingface/token")
+        cloud.ssh_run(st, "chmod 600 /root/.cache/huggingface/token")
+        os.remove(tp)
+        os.rmdir(td)
+        #: Confirmed by asking the BOX who it is, not by trusting the copy.
+        who = cloud.ssh_run(st, "cd /root/malignment && . /root/hfenv.sh && "
+                                "./%s/bin/python -c \"from huggingface_hub import "
+                                "whoami; print('HF AUTH OK as', whoami()['name'])\""
+                            % venv)
+        line = (who.stdout or "").strip().splitlines()[-1:] or ["(no answer)"]
+        print("  token       %s" % line[0][:70])
+        if "HF AUTH OK" not in (who.stdout or ""):
+            _billing(cloud, iid, "HF token did not authenticate on the box")
+            raise SystemExit("  the token did not authenticate -- 12 gated models "
+                             "would fail. Box kept for inspection.")
+    else:
+        print("  token       NONE in env -- %d gated model(s) in this shard WILL "
+              "fail" % len(gated_here))
+
     # ---- payload -----------------------------------------------------------
     #: The cells for the WHOLE lineage, so the box can build its own union.
     src = os.path.expanduser("~/malignment-data/twp")
@@ -476,6 +521,7 @@ python3 -m venv %(venv)s 2>/dev/null || true
 cat > /root/hfenv.sh <<'HFEOF'
 export HF_ENDPOINT=https://huggingface.co
 unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy ALL_PROXY all_proxy
+[ -f /root/.cache/huggingface/token ] && export HF_TOKEN=$(cat /root/.cache/huggingface/token)
 HFEOF
 . /root/hfenv.sh
 # A REACHABILITY ASSERT, NOT A PING. It fetches the same way the runner does --
