@@ -46,6 +46,12 @@ def main():
     meta = {p: (R[(p, w)]["pair"], R[(p, w)]["gender"], R[(p, w)]["role"])
             for p, w in R}
     M = masses(prompts)
+    #: THE ATOMIC TABLE. Every later layer -- the pairing, the DiDs, the sign
+    #: tests -- recomputes these levels from `masses()` and saves only its own
+    #: summary, so until this was added the sexual study's per-(prompt, lineage,
+    #: arm, scale) levels existed nowhere on disk. They are the only thing a
+    #: reader needs to reproduce or dispute any of it.
+    cells = []
     rows = []
     for p in prompts:
         lins = sorted(l for (t, l) in M if t == p)
@@ -62,7 +68,12 @@ def main():
                     m = sum(dist[w] for w in ws)
                     if m <= 0 or len(ws) < 10:
                         per[s][arm].append(None); continue
-                    per[s][arm].append(sum(dist[w] * R[(p, w)][s] for w in ws) / m)
+                    val = sum(dist[w] * R[(p, w)][s] for w in ws) / m
+                    per[s][arm].append(val)
+                    cells.append(dict(prompt=p, pair=meta[p][0], gender=meta[p][1],
+                                      role=meta[p][2], lineage=l, arm=arm, scale=s,
+                                      value=val, cov=m / tot if tot else None,
+                                      n_words=len(ws)))
                     if s == "charge" and arm == "base" and tot > 0:
                         cov.append(m / tot)
         pr, g, role = meta[p]
@@ -100,6 +111,11 @@ def main():
                              base=st.mean(b), aligned=st.mean(a), delta=st.mean(d),
                              p=pv, n_lineages=len(d),
                              up=sum(1 for x in d if x > 0)))
+    json.dump(dict(_what="the atomic table: mass-weighted level per (prompt, "
+                         "lineage, arm, scale) for the 8 sexual gender pairs, "
+                         "instrument sexual_slot_en_v2",
+                   rows=cells), open(os.path.join(OUT, "levels_cells.json"), "w"))
+    print("  atomic cells saved: %d -> results/levels_cells.json" % len(cells))
     json.dump(dict(_what="LAYER 1: per prompt, mass-weighted level per arm and the "
                          "base->aligned delta, Wilcoxon over that prompt's lineages. "
                          "No pooling, no pairing, gender unused.",
