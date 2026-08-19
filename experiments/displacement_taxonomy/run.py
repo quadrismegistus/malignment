@@ -398,14 +398,44 @@ def _table_r4(pre, post):
     A word can climb while losing ground when its neighbours lose more; that is
     the measurement, and the instrument says so rather than hiding it.
     """
-    sh = set(pre) & set(post)
-    rb = {w: i + 1 for i, w in enumerate(sorted(sh, key=lambda w: -pre[w]))}
-    ra = {w: i + 1 for i, w in enumerate(sorted(sh, key=lambda w: -post[w]))}
+    #: EACH ARM RANKED IN ITS OWN FIELD, not in the intersection. Ranking over
+    #: shared words only meant a base-only word had no base rank either -- `dick`
+    #: is 3rd in Llama's base field and printed as `- -> -`, which said "absent
+    #: from both" when it was absent from one. It also made `cock 1` mean "first
+    #: of 66 shared" rather than "first of 116".
+    rb = {w: i + 1 for i, w in enumerate(sorted(pre, key=lambda w: -pre[w]))}
+    ra = {w: i + 1 for i, w in enumerate(sorted(post, key=lambda w: -post[w]))}
     dp = {w: post.get(w, 0.0) - pre.get(w, 0.0) for w in set(pre) | set(post)}
-    colA = sorted([w for w in pre if pre[w] >= MASS_FLOOR and dp[w] < 0],
-                  key=lambda w: dp[w])
-    colB = sorted([w for w in post if post[w] >= MASS_FLOOR and dp[w] > 0],
-                  key=lambda w: -dp[w])
+
+    #: SIGN-FLIPPED WORDS ARE WITHHELD AND COUNTED, NEVER DROPPED SILENTLY.
+    #: Membership is mass and the printed number is rank, so a word can sit under
+    #: HIGHER UNDER A carrying a positive rank move. Two mechanisms, both real:
+    #: a SURVIVOR BY ATTRITION (flat mass, rank climbs because its neighbours
+    #: collapsed) and an OVERTAKEN LEADER (mass rises, rank slips because
+    #: something rose past it). They are withheld because a row contradicting its
+    #: own heading teaches the rater to distrust the layout, and counted on the
+    #: panel because they are findings.
+    def pick(field, want_fall):
+        keep, flipped = [], []
+        for w in field:
+            if field[w] < MASS_FLOOR:
+                continue
+            if (dp[w] < 0) != want_fall:
+                continue
+            if w in rb and w in ra:
+                #: STRICT CONTRADICTION ONLY. An unmoved rank is a tie, not a
+                #: disagreement. Testing `rose == want_fall` made "did not rise"
+                #: count as contradicting column B, so `pants 6 -> 6` was withheld
+                #: while its mirror `pocket 11 -> 11` was kept in column A -- the
+                #: same situation handled two ways depending on the column.
+                contradicts = (ra[w] < rb[w]) if want_fall else (ra[w] > rb[w])
+                if contradicts:
+                    flipped.append(w)
+                    continue
+            keep.append(w)
+        return sorted(keep, key=lambda w: dp[w] if want_fall else -dp[w]), flipped
+    colA, flipA = pick(pre, True)
+    colB, flipB = pick(post, False)
 
     def block(ws, label):
         if not ws:
@@ -417,7 +447,13 @@ def _table_r4(pre, post):
             d = ("%+5d" % (rb[w] - ra[w])) if (w in rb and w in ra) else "    -"
             out.append("  %-14s %s -> %s  %s" % (w, a, b, d))
         return "\n".join(out)
-    return "%s\n\n%s" % (block(colA, "HIGHER UNDER A"), block(colB, "HIGHER UNDER B"))
+
+    tail = ""
+    if flipA or flipB:
+        tail = ("\n\n%d word(s) are withheld because their position moved the "
+                "opposite way to their prominence." % (len(flipA) + len(flipB)))
+    return "%s\n\n%s%s" % (block(colA, "HIGHER UNDER A"),
+                            block(colB, "HIGHER UNDER B"), tail)
 
 
 def _table_ranks(pre, post, common, pre_only=(), post_only=()):
