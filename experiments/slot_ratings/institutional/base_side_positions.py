@@ -273,8 +273,14 @@ def main(argv=None):
         for r in sorted(res, key=lambda r: r["p_movediff"])[:6]:
             print("   %-14s %+10.4f %+10.4f %9.2g %s"
                   % (r["scale"], r["d_indiv"], r["d_inst"], r["p_movediff"],
-                     "INDIV MOVES MORE" if abs(r["d_indiv"]) > abs(r["d_inst"])
-                     and r["p_movediff"] < .05 else ""))
+                     #: SIGNED, not abs(). An earlier version compared magnitudes,
+                     #: which labelled "the individual falls further" identically
+                     #: to "the individual rises further" and so reported agency as
+                     #: replicating on all three corpora when M03's sign is
+                     #: opposite to the other two.
+                     "INDIV PUSHED FURTHER" if r["d_indiv"] - r["d_inst"] > 0
+                     and r["p_movediff"] < .05 else
+                     "INST PUSHED FURTHER" if r["p_movediff"] < .05 else ""))
         allres[name] = dict(n_lineages=len(L), n_cells=len(rows), results=res)
         json.dump(dict(_what="mass-weighted E[scale] per (prompt, lineage, arm) "
                              "from the `movement` table; gap taken within stratum",

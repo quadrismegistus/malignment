@@ -541,23 +541,53 @@ that its institutional arm drifted off F21's contrast. What can be said is that
 the position gap is real and large in two corpora, absent in the third, and that
 the third is not the one with the best site control.
 
-### F21's second claim does not replicate; a weaker version does
+### F21's second claim: F21 and slotpov agree, M03 is REVERSED
 
 "Alignment proceduralises the individual and not the institution" is a claim
-about deltas:
+about deltas. The quantity is `d_indiv - d_inst`, signed: positive means the
+individual was pushed further in that scale's direction.
 
-| scale | F21 | M03 | slotpov | replicates |
+| scale | F21 | M03 | slotpov | |
 | --- | --- | --- | --- | --- |
-| agency | IND p=0.00038 | IND p=0.012 | IND p=0.0018 | **all three** |
-| specificity | IND p=1.6e-05 | IND p=0.001 | p=0.0013 | 2 of 3 |
-| mediation | IND p=3.6e-06 | p=0.42 | IND p=0.041 | 2 of 3 |
-| **procedural** | **IND p=0.0078** | **p=0.98** | **p=0.17** | **1 of 3** |
+| agency | +0.1005 * | **−0.0387 *** | +0.0838 * | conflicting signs |
+| specificity | +0.1447 * | **−0.0430 *** | +0.1182 * | conflicting signs |
+| assertiveness | +0.1443 * | −0.0125 | +0.1285 * | 2 of 3 |
+| mediation | +0.2466 * | +0.0074 | +0.0863 * | 2 of 3 |
+| procedural | +0.1218 * | −0.0039 | +0.0738 | 1 of 3 |
+| arousal | +0.0068 | −0.0228 | +0.0833 * | 1 of 3 |
 
-On `procedural` specifically, F21's own prompts show it and neither other corpus
-does. What replicates on all three is `agency`: the individual position's agency
-moves more under alignment than the institution's. That is a weaker and
-different claim than proceduralisation, and it is the one the three corpora
-support jointly.
+**CORRECTION.** An earlier version of this section reported `agency` as
+replicating on all three corpora. It does not. The label tested
+`abs(d_indiv) > abs(d_inst)`, which cannot distinguish the individual being
+pushed further UP from the individual being pushed further DOWN. On M03 agency
+falls in both positions and falls more for the individual (−0.0528 against
+−0.0141), which is the opposite of F21 (+0.0822 against −0.0184) and slotpov
+(+0.0621 against −0.0217). All three are significant and two directions are
+represented.
+
+**And these are not four results.** `agency`, `specificity`, `assertiveness` and
+`arousal` are pairwise 0.62-0.83 over 14,196 rated rows -- the collinear cluster
+section 6f already identifies. Counting them separately here repeats the error
+that section exists to name. **One axis, measured three times.**
+
+Restated: **that one axis moves toward the individual in F21 and slotpov, and
+toward the institution in M03.** This is the same corpus split as the base-gap
+sign disagreement above, where F21 and slotpov are positive on `procedural` and
+`deference` and M03 is negative. M03 dissents on the level and on the delta, in
+the same direction, which is one fact about M03 rather than two about alignment.
+
+`procedural` itself, the scale F21's claim names, is significant only on F21.
+
+### This does not contradict the movement results in sections 4 to 6g
+
+Those measured what alignment DOES, and found the POV asymmetry on F21 and the
+slot pairs and absent on M03. The delta column here is the same quantity and
+agrees: F21 and slotpov positive, M03 not. The level measure adds `base_gap`,
+which is a quantity nobody had measured, and it is significant everywhere. There
+is no conflict between "alignment's contribution to the position gap is small"
+and "the position gap is large": the second is a fact about pretraining. The one
+change is that M03 is not merely null on the POV axis, it is reversed, which the
+gated movement statistic could not show.
 
 ### Caveats
 
