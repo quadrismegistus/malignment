@@ -82,7 +82,8 @@ FALLBACK = {"cuda": 0.35, "mps": 1.2}
 
 
 def record(model, device, n_cells, compute_s, load_s=None, gpu=None,
-           vocab_size=None, rules=None, only=None, topup=False, path=PATH):
+           vocab_size=None, rules=None, only=None, topup=False,
+           median_delta=None, path=PATH):
     """Append one observation. Never overwrites: rates drift with code and card.
 
     Append-only because a rate is an OBSERVATION, and the campaign's rule is that
@@ -90,14 +91,23 @@ def record(model, device, n_cells, compute_s, load_s=None, gpu=None,
     "we measured this twice and got different answers" unrepresentable, which is
     exactly the state that tells you the rate depends on something you are not
     recording.
+
+    **`median_delta` WINS OVER `compute_s / n_cells` WHEN PRESENT**, and the
+    fallback is kept only for callers that cannot supply it. `compute_s / n_cells`
+    telescopes to the MEAN of the inter-cell deltas, and across this corpus the
+    mean is not a throughput at all: 86 of 108 stash files carry a gap over 60 s
+    and the largest is 79 hours, so on SmolLM2-360M the mean reads 317 s/cell
+    against a true 0.131. A cancelled-and-resumed run is the normal case here.
     """
     if not n_cells or n_cells <= 0 or compute_s is None:
         return None
+    spc = median_delta if median_delta else compute_s / float(n_cells)
     obs = {"model": model, "device": device, "gpu": gpu, "vocab_size": vocab_size,
            "rules": rules, "only": only, "topup": bool(topup),
            "n_cells": int(n_cells), "load_s": None if load_s is None else round(load_s, 1),
            "compute_s": round(compute_s, 1),
-           "sec_per_cell": round(compute_s / float(n_cells), 4),
+           "sec_per_cell": round(spc, 4),
+           "estimator": "median_delta" if median_delta else "mean_span",
            "observed": time.strftime("%Y-%m-%dT%H:%M:%S")}
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "a", encoding="utf-8") as fh:
@@ -221,12 +231,20 @@ def rate_for(model, device, only=None, min_cells=MIN_CELLS, obs=None):
                                              sorted({o.get("device") for o in seen}),
                                              max(o.get("n_cells", 0) for o in seen)))
         return None, "never measured: %s" % model
+    #: **A `mean_span` ROW IS DROPPED IF ANY DELTA-BASED ROW EXISTS.** They are not
+    #: two measurements of one quantity: across this corpus the span mean runs
+    #: thousands of times the true rate whenever a run was resumed, so averaging
+    #: the two estimators together would import that error at reduced strength
+    #: rather than removing it.
+    good = [o for o in cand if o.get("estimator") != "mean_span"]
+    cand, dropped = (good, len(cand) - len(good)) if good else (cand, 0)
     vals = sorted(o["sec_per_cell"] for o in cand)
     med = vals[len(vals) // 2] if len(vals) % 2 else (vals[len(vals) // 2 - 1]
                                                      + vals[len(vals) // 2]) / 2.0
-    return med, ("median of %d obs, n_cells %d..%d"
+    return med, ("median of %d obs, n_cells %d..%d%s"
                  % (len(cand), min(o["n_cells"] for o in cand),
-                    max(o["n_cells"] for o in cand)))
+                    max(o["n_cells"] for o in cand),
+                    "; %d mean_span row(s) dropped" % dropped if dropped else ""))
 
 
 def estimate(models, device, only=None, fallback=True):

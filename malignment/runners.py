@@ -477,7 +477,17 @@ class TWPRunner:
         #: Kept beside the stash so the refusal and its reason are still
         #: recorded, just not as an answer.
         skip_path = os.path.join(os.path.dirname(st.path), "skipped.jsonl")
+        #: **PER-CELL MARKS, BECAUSE ELAPSED/N IS THE MEAN AND THE MEAN IS WRONG.**
+        #: This recorded `elapsed / n_ok`, which telescopes to the mean of the
+        #: inter-cell deltas -- and measured across the whole stash, 86 of 108
+        #: files contain at least one gap over 60 s, the largest 79 HOURS. On
+        #: SmolLM2-360M the mean is 317 s/cell against a median of 0.131: a
+        #: factor of 2,400. A run that is cancelled and resumed later is the
+        #: normal case here, not the exception, so the estimator has to survive
+        #: it. RH asked whether this was handled; for the live path it was not.
+        _marks = []
         for i, p in enumerate(bar, 1):
+            _marks.append(time.time())
             rec = dict(stamp, model=ck.model_id, prompt=p)
 
             def _skip(reason):
@@ -545,11 +555,14 @@ class TWPRunner:
         #: 250,880-token vocabulary runs several times slower. Divided by `n_ok`,
         #: what was WRITTEN, never by `len(todo)`, what was attempted.
         _elapsed = time.time() - t0
+        _marks.append(time.time())
+        _d = sorted(_marks[i + 1] - _marks[i] for i in range(len(_marks) - 1))
+        _med = _d[len(_d) // 2] if _d else None
         try:
             from malignment import rates
             rates.record(model=ck.model_id, device=dev, gpu=_gpu_name(),
                          vocab_size=ld.vocab_size, load_s=ld.load_s,
-                         n_cells=n_ok, compute_s=_elapsed,
+                         n_cells=n_ok, compute_s=_elapsed, median_delta=_med,
                          rules=rules.label() if rules is not None else None,
                          topup=False)
         except Exception as e:                                  # noqa: BLE001
