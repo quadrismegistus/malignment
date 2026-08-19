@@ -428,32 +428,12 @@ def main():
                     help="only sources containing this substring (a blanket run "
                          "ingests every eligible directory on disk)")
     a = ap.parse_args()
-    #: **`--replace` AND `--source` TOGETHER DESTROY DATA, AND IT LOOKS LIKE A
-    #: SUCCESSFUL SCOPED INGEST.** `--replace` drops every row for each planned
-    #: MODEL at this rule_version; `--source` narrows which FILES are re-inserted.
-    #: So the delete is model-scoped and the insert is source-scoped, and every
-    #: cell that model has from any OTHER producer is gone.
-    #:
-    #: Measured 2026-08-19: `--replace --source de05cd070607` took
-    #: `bigscience/bloom-7b1` from 2,876 cells to 384 and dropped bloomz's 277
-    #: pass-2 cells, while printing `planned 3,090 cells` and no error. Recovered
-    #: only because the stash is the source of truth and a blanket re-ingest
-    #: rebuilds from it -- had the MPS stash been pruned, those cells were gone.
-    #:
-    #: REFUSED rather than made model-and-source-scoped: a narrower delete is the
-    #: better tool, but it is a change to what `--replace` MEANS, and inventing
-    #: that semantics inside an argument check is how the two scopes came to
-    #: disagree in the first place. Ask for it explicitly, or run blanket.
-    if a.replace and getattr(a, "source", None):
-        raise SystemExit(
-            "REFUSING --replace with --source.\n"
-            "  --replace deletes every row for each planned MODEL at rule_version"
-            " %d,\n  while --source limits what is re-inserted to one producer. The"
-            " delete is\n  model-scoped and the insert is source-scoped, so a"
-            " model measured on two\n  boxes loses whichever box you did not name"
-            " -- silently, reporting success.\n"
-            "  Run blanket (drop --source): it is idempotent and rebuilds every"
-            " producer." % a.rule_version)
+    #: **`--replace` WITH `--source` IS SOURCE-SCOPED, NOT REFUSED.** The first
+    #: fix here was a refusal, and it was the wrong instrument: the per-arm ingest
+    #: in `scripts/topup_lineage.py` legitimately runs `--replace --source <arm>`
+    #: on RH's own instruction, and refusing it would have silently stopped the
+    #: corpus tracking a sweep already 53 arms deep. What was broken was the SCOPE
+    #: of the delete, not the combination. See the delete site below.
     _RV["v"] = a.rule_version
     _REPLACE["on"] = bool(a.replace)
 
@@ -511,14 +491,40 @@ def main():
     #: Opt-in rather than automatic: a delete is not recoverable from the table,
     #: and a source holding one producer's files for a model that another
     #: producer also measured would lose the other producer's rows.
+    #: **AND THE HAZARD THE PARAGRAPH ABOVE NAMES IS NOW GUARDED, NOT ONLY
+    #: DESCRIBED.** It said, correctly and in advance, that "a source holding one
+    #: producer's files for a model that another producer also measured would lose
+    #: the other producer's rows" -- and on 2026-08-19 that is exactly what
+    #: happened: `--replace --source de05cd070607` took bloom-7b1 from 2,876 cells
+    #: to 384 and dropped bloomz's 277 pass-2 cells, printing `planned 3,090
+    #: cells` and no error. A comment that describes a defect does not prevent it.
+    #:
+    #: With `--source`, the delete is scoped to the (model, source) pairs actually
+    #: being re-inserted -- which is what "re-ingest this producer's rows" means,
+    #: and `source` is a stored column so the scoping is exact rather than
+    #: inferred. Without it the blanket model-wide drop is kept, because a blanket
+    #: run plans every producer on disk and the wider delete is what purges rows
+    #: whose file no longer exists.
     if _REPLACE["on"] and win:
-        models = sorted({k[0] for k in win})
-        print("  --replace: dropping %d model(s) at rule_version %d first"
-              % (len(models), _RV["v"]))
-        for m in models:
-            for t in TABLES[_RV["v"]]:
-                ch.execute("ALTER TABLE {db}.%s DELETE WHERE model='%s'"
-                           % (t, m.replace("'", "\\'")))
+        if getattr(a, "source", None):
+            pairs = sorted({(k[0], r.get("source")) for k, r in win.items()
+                            if r.get("source")})
+            print("  --replace: dropping %d (model, source) pair(s) at "
+                  "rule_version %d first -- SOURCE-SCOPED because --source was "
+                  "given" % (len(pairs), _RV["v"]))
+            for m, s in pairs:
+                for t in TABLES[_RV["v"]]:
+                    ch.execute("ALTER TABLE {db}.%s DELETE WHERE model='%s' "
+                               "AND source='%s'"
+                               % (t, m.replace("'", "\\'"), s.replace("'", "\\'")))
+        else:
+            models = sorted({k[0] for k in win})
+            print("  --replace: dropping %d model(s) at rule_version %d first"
+                  % (len(models), _RV["v"]))
+            for m in models:
+                for t in TABLES[_RV["v"]]:
+                    ch.execute("ALTER TABLE {db}.%s DELETE WHERE model='%s'"
+                               % (t, m.replace("'", "\\'")))
         _wait_for_mutations(ch)
     for f in files:
         seen, dups = _cells(f["path"])
