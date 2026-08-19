@@ -231,28 +231,70 @@ def prepare(build_only=False):
 
 
 def ingest(run_id):
+    """Join journal results to their arm and batch through the agent transcripts.
+
+    THE JOURNAL DOES NOT CARRY THE CALLER'S METADATA. Its `result` lines hold the
+    agent's own return value and nothing else: `label` is None on every line, and
+    `key` is an opaque `v2:<sha>`. The script's `.then((res) => ({...j, ...}))`
+    wrapper runs in the workflow, not in the agent, so none of `arm`, `batch` or
+    `rater` reaches the journal even though the script attached all three.
+
+    What survives is `agentId`, and each agent's transcript contains the prompt
+    it was given, which names its input file. So the arm and batch are recovered
+    from the FILE PATH in `agent-<id>.jsonl`. Rater number is assigned by sorted
+    agentId within a cell, which is arbitrary and legitimate because raters are
+    exchangeable -- nothing distinguishes them but the draw.
+
+    Any future ingest that needs to know which condition an agent was in has to
+    go this way, or the workflow has to carry the condition back in its RETURN
+    value. Do not expect a label.
+    """
     import glob
     state = json.load(open(os.path.join(HERE, "results", "disc_state.json")))
     tids = {t["tid"] for t in state["triads"]}
+    per_batch = {b: {t["tid"] for t in state["triads"][b::BATCHES]} for b in range(BATCHES)}
     base = os.path.expanduser("~/.claude/projects")
     hits = glob.glob(os.path.join(base, "*", "*", "subagents", "workflows", run_id))
     if not hits:
         raise SystemExit("no transcript dir for %r" % run_id)
-    st, n = _stash(), 0
-    for line in open(os.path.join(hits[0], "journal.jsonl")):
+    d0 = hits[0]
+    cells = {}
+    for line in open(os.path.join(d0, "journal.jsonl")):
         d = json.loads(line)
         if d.get("type") != "result" or not isinstance(d.get("result"), dict):
             continue
-        r = d["result"]
-        if "arm" not in r:
-            continue
-        bad = [a["triad"] for a in r["answers"] if a["triad"] not in tids]
+        aid = d["agentId"]
+        tp = os.path.join(d0, "agent-%s.jsonl" % aid)
+        if not os.path.exists(tp):
+            raise SystemExit("no transcript for agent %s; cannot place it in a cell" % aid)
+        m = re.search(r"disc_(\w+?)_b(\d)\.txt", open(tp).read(8000))
+        if not m:
+            raise SystemExit("agent %s transcript names no input file" % aid)
+        arm, batch = m.group(1), int(m.group(2))
+        if arm not in ARMS:
+            raise SystemExit("agent %s read an unknown arm %r" % (aid, arm))
+        bad = [a["triad"] for a in d["result"]["answers"] if a["triad"] not in tids]
         if bad:
             raise SystemExit("answers name %d triad(s) never issued: %s" % (len(bad), bad[:3]))
-        st[{"stage": "discriminate", "version": "d1", "seed": state["seed"],
-            "arm": r["arm"], "batch": r["batch"], "rater": r["rater"]}] = r
-        n += 1
+        #: The batch read off the path must match the triads actually answered,
+        #: or a rater has been filed against a shard it never saw.
+        got = {a["triad"] for a in d["result"]["answers"]}
+        if not got <= per_batch[batch]:
+            raise SystemExit("agent %s answered %d triad(s) outside batch %d"
+                             % (aid, len(got - per_batch[batch]), batch))
+        cells.setdefault((arm, batch), []).append((aid, d["result"]))
+    st, n = _stash(), 0
+    for (arm, batch), v in sorted(cells.items()):
+        for i, (aid, res) in enumerate(sorted(v), 1):
+            st[{"stage": "discriminate", "version": "d1", "seed": state["seed"],
+                "arm": arm, "batch": batch, "rater": i}] = dict(res, agent_id=aid,
+                                                                run_id=run_id)
+            n += 1
     print("stored %d rater-batches for %s" % (n, run_id))
+    print("  cells: %s" % {("%s/b%d" % k): len(v) for k, v in sorted(cells.items())})
+    miss = [k for k in [(a, b) for a in ARMS for b in range(BATCHES)] if k not in cells]
+    if miss:
+        print("  MISSING cells: %s" % miss, file=sys.stderr)
 
 
 def report():
@@ -291,7 +333,46 @@ def report():
         #: demonstrated failure mode of this apparatus and not a generic caution.
         print("%-9s answers by position: %s\n"
               % ("", dict(Counter(r["said"] for r in R))))
-    print("hardest negative pairs (lowest hit rate across raters and arms):")
+    #: A negative triad on which EVERY rater in BOTH arms says `none` is not a
+    #: miss. It is the panel unanimously overturning a stage-2 boundary, and it
+    #: is the property that makes this instrument worth having: one that only
+    #: ever confirmed the harmonisers would be redundant with them. Reported
+    #: separately, and the headline hit rate is given with and without, because
+    #: scoring a rater wrong for a verdict the whole panel reached is not a
+    #: measurement of the rater.
+    per_t = {}
+    for r in rows:
+        if r["kind"] == "neg":
+            per_t.setdefault(r["tid"], []).append(r)
+    overturned = [t for t, v in per_t.items()
+                  if len(v) >= 4 and all(x["said"] == "none" for x in v)]
+    if overturned:
+        print("OVERTURNED: every rater in both arms saw no boundary")
+        for t in overturned:
+            v = per_t[t][0]
+            print("   %s  %r vs %r  (%d raters, unanimous)"
+                  % (t, v["a"], v["b"], len(per_t[t])))
+        for arm in ARMS:
+            neg = [r for r in rows if r["arm"] == arm and r["kind"] == "neg"
+                   and r["tid"] not in overturned]
+            if neg:
+                h = sum(1 for r in neg if r["said"] == str(r["odd_pos"]))
+                print("   %-9s hit excluding overturned: %d of %d = %.2f"
+                      % (arm, h, len(neg), h / len(neg)))
+        print()
+    #: Whether confidence is a usable gate matters more than the raw rate: the
+    #: cross-prompt version has no ground truth to score against, so a
+    #: self-reported filter is the only quality control available there.
+    conf = {}
+    for r in rows:
+        if r["kind"] == "neg":
+            conf.setdefault(r["conf"], []).append(r["said"] == str(r["odd_pos"]))
+    print("negatives by self-reported confidence:")
+    for c in ("high", "medium", "low"):
+        v = conf.get(c)
+        if v:
+            print("   %-6s %3d answers, %.2f correct" % (c, len(v), sum(v) / len(v)))
+    print("\nhardest negative pairs (lowest hit rate across raters and arms):")
     per = {}
     for r in rows:
         if r["kind"] == "neg":
