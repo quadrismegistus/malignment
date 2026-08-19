@@ -96,3 +96,76 @@ pretraining lays down the field, alignment operates on it.
   (`mediation`, `procedural`, `deference`) are not measured on these frames.
 - The 50 sexual-domain frames themselves are not yet analysed; only the 8 sexual
   frames belonging to a gender pair are touched here.
+
+## An in-context instrument, and what it is validated against
+
+`task.py` -- `sexual_slot_en_v1`. Six scene-built scales plus two
+classifications, replacing v6's global taxonomy for these frames.
+
+**Why v6 is wrong here.** Its twelve scales are rendered in context but not built
+from it, and on the gender pairs above it found `mundanity` and little else,
+because nothing it measures is what moves at `He unzipped her ___`.
+`malign-logits/meta/M01_displacement/findings/X_metonymy.md` section 3a settles
+the point by running the same task with and without the scene:
+
+```
+A   name the dimension yourself, NO scene    opus vs sonnet  +0.028
+D   name the dimension yourself, scene shown opus vs sonnet  +0.888
+```
+
+Without the scene two models improvised two different dimensions and agreed on
+nothing. **The scene is what makes raters converge.**
+
+### The five constraints taken from X rather than rediscovered
+
+1. `exposure` and `charge` are two scales, not one. They correlate 0.78 and split
+   where they should: `hijab` 58 exposure / 28 charge, `stockings` 45 / 80.
+2. The zone is not the amount. Both survive controlling for the other in X
+   (LOCATION -0.225 p=0.046, AMOUNT -0.296 p=0.008), so both are asked.
+3. Four operations share the space: substitution across referents, euphemism at a
+   CONSTANT referent, modifier insertion (syntagmatic, not substitution), and
+   lateral. `euphemism`, `referent_kind` and `is_modifier` keep them apart.
+4. An exposure score silently becomes a zone measure if worded loosely: X's coder,
+   asked about quantity, gave `bra` 86 (one region) and `blouse` 56 (4.5 regions).
+5. Base probability is a PROMPT-DEPENDENT nuisance, -0.09 to -0.42 at violence
+   prompts and absent at the undressing frames. Measured, never assumed.
+
+### Validation against a known answer
+
+`validate_vs_X.py`, on X's own two undressing scenes, 147 words rated of 183
+moving in >= 2 of 50 endpoint pairs.
+
+| scale | `took off her` | `took off his` |
+| --- | --- | --- |
+| zone | **−0.410** (3e-04) | **−0.545** (2e-05) |
+| charge | −0.452 (6e-05) | −0.450 (6e-04) |
+| body_distance | +0.445 (8e-05) | +0.435 (9e-04) |
+| exposure | −0.381 (9e-04) | −0.331 (0.014) |
+| explicitness | −0.285 (0.015) | −0.172 (0.21) |
+| **`p_base` nuisance** | **−0.012 (0.92)** | **+0.193 (0.16)** |
+
+`body_distance` runs opposite to X's intimacy scale by construction, so its
+positive sign is the agreeing one.
+
+**The nuisance row is the load-bearing one.** X reports base probability at
+-0.131 and +0.179, both null, at exactly these two frames, against -0.09 to -0.42
+at every violence prompt. Reproducing those two nulls is independent evidence the
+instrument is on the same material and the same axis, and it is what stops a rho
+of -0.45 from being an artifact of the operation.
+
+`zone` beating `exposure` in both frames reproduces X 3c: the zone is doing work
+the skin is not.
+
+**Magnitudes are lower than X's best.** X's D-opus reaches -0.630; these sit at
+0.33 to 0.55, which is where X's weaker coders sat (B sonnet -0.481, C charge
+sonnet -0.437). Two reasons, neither corrected for: one rater model
+(deepseek-v4-flash) against X's opus and sonnet, and a different movement
+population (50 endpoint pairs against X's 33- and 41-pair rosters).
+
+### The test this instrument still owes
+
+X 3f is the answer to the tautology objection: the same protocol on the violence
+battery predicts at four scenes of nine, reverses at one, and pools to -0.100.
+**This instrument must be run on the violence frames and must not work there.**
+If it predicts everywhere it is measuring suppression rather than the scene, and
+nothing above survives.
