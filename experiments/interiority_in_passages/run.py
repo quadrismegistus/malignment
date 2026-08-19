@@ -785,7 +785,44 @@ def combined_report():
 
 PASSC = os.path.join(RESULTS, "passC")
 PASSC_SAMPLE = os.path.join(PASSC, "sample.parquet")
+PASSC_TRIAGE = os.path.join(PASSC, "triage.parquet")
+#: The five fields a Pass C coding must carry. A record with fewer came from a
+#: different instrument (the Haiku triage returned {id, narrative} alone).
+FIELDS_C = frozenset(("narrative", "mode", "drift", "degree", "span"))
 RUBRIC_MD = os.path.join(HERE, "plans", "passC_rubric.md")
+
+
+def passc_key():
+    """Every passage Pass C may have coded, from BOTH draws, keyed by id.
+
+    Two draws exist and they use different id spaces:
+
+        sample.parquet   p######   the original random draw, 714/cell.
+                                   Shards 00-11 code 535/cell of it.
+        triage.parquet   f######   the classifier-ranked draw that superseded
+                                   it. L00-L25 code the top-200/cell.
+
+    Reading `sample.parquet` alone is right for the shard-0* codings and wrong
+    for the lineage ones, and the worst case is SILENT: `passc_recover()`
+    filters journal codings against this set, so an f-id would be dropped as
+    "not in the sample" -- discarding recovered work rather than failing.
+
+    They are ALTERNATIVE populations, not addends: one is random within a frozen
+    sample, the other is classifier-ranked. This function unions them so nothing
+    is lost; it does NOT license pooling them in an analysis.
+    """
+    import pyarrow.parquet as pq
+    out = {}
+    for path in (PASSC_SAMPLE, PASSC_TRIAGE):
+        if not os.path.exists(path):
+            continue
+        t = pq.read_table(path).to_pydict()
+        for j in range(len(t["id"])):
+            out[t["id"][j]] = dict(model=t["model"][j], arm=t["arm"][j],
+                                   pair=t["pair"][j], prompt=t["prompt"][j],
+                                   text=t["text"][j],
+                                   draw=("sample" if path == PASSC_SAMPLE else "triage"))
+    return out
 
 
 def rubric_text():
@@ -1057,15 +1094,23 @@ return { _shard: %(shard)d, _requested: IDS.length, _stray: stray,
 def _passc_coded():
     """Ids coded by BOTH coders, across every saved shard."""
     import collections
-    d = os.path.join(PASSC, "codings")
     got = collections.defaultdict(set)
-    if os.path.isdir(d):
+    #: `rejected/` counts as HANDLED, not as missing. Codings are parked there
+    #: deliberately (L00's Sonnet run: kappa 0.628 on mode, cannot be pooled with
+    #: Opus-coded pairs). Without this, `--passc-recover --write` rebuilds them
+    #: from the journal straight back into codings/ and silently undoes the
+    #: exclusion -- a recovery tool reversing a decision.
+    for sub in ("codings", "rejected"):
+        d = os.path.join(PASSC, sub)
+        if not os.path.isdir(d):
+            continue
         for f in sorted(os.listdir(d)):
-            if f.endswith(".json"):
+            if f.endswith(".json") and f != "README.json":
                 r = json.load(open(os.path.join(d, f), encoding="utf-8"))
                 for c in ("A", "B"):
                     got[c].update(r.get(c, {}))
-    return (got["A"] & got["B"]) if got else set()
+    #: ANY coder, not both: lineage shards are single-coded by design.
+    return (got["A"] | got["B"]) if got else set()
 
 
 def passc_shards(nshards=6, per_cell=535, batch=45):
@@ -1208,10 +1253,10 @@ def passc_report():
     import collections, math, csv, glob, statistics as st
     import pyarrow.parquet as pq
     from scipy import stats
-    t = pq.read_table(PASSC_SAMPLE).to_pydict()
-    K = {i: dict(model=m, arm=a, pair=p, prompt=q, text=x)
-         for i, m, a, p, q, x in zip(t["id"], t["model"], t["arm"], t["pair"],
-                                     t["prompt"], t["text"])}
+    #: BOTH draws, so lineage-shard codings (f######) resolve as well as the
+    #: sample-draw ones (p######). Reports which draw the passages came from,
+    #: because the two are alternative populations and pooling needs saying.
+    K = passc_key()
     A, B = {}, {}
     for f in sorted(glob.glob(os.path.join(PASSC, "codings", "*.json"))):
         r = json.load(open(f, encoding="utf-8"))
@@ -1490,8 +1535,9 @@ def passc_recover(write=False):
     for this project, not only the current one.
     """
     import glob, collections
-    import pyarrow.parquet as pq
-    want = set(pq.read_table(PASSC_SAMPLE).to_pydict()["id"])
+    #: BOTH draws. Filtering against sample.parquet alone would silently drop
+    #: every lineage-shard coding recovered from a journal.
+    want = set(passc_key())
     root = os.path.expanduser("~/.claude/projects")
     proj = sorted(glob.glob(os.path.join(root, "*TheoryMachines*lacan*")))
     if not proj:
@@ -1501,6 +1547,7 @@ def passc_recover(write=False):
     js = sorted(glob.glob(pat))
     have = _passc_coded()
     found = collections.defaultdict(lambda: collections.defaultdict(list))
+    partial = collections.Counter()
     for j in js:
         run = os.path.basename(os.path.dirname(j))
         for line in open(j, encoding="utf-8"):
@@ -1518,38 +1565,53 @@ def passc_recover(write=False):
                     continue
             if not isinstance(res, dict):
                 continue
+            #: Journals from OTHER runs live in the same directories -- the Haiku
+            #: triage returned {id, narrative} only, and earlier passes had three
+            #: or four fields. Take only codings carrying the full Pass C set;
+            #: a partial one is a different instrument, not a damaged record.
             for c in (res.get("codings") or []):
                 if not isinstance(c, dict):
                     continue
-                if c.get("id") in want:
-                    found[run][c["id"]].append(
-                        {k: c[k] for k in ("narrative", "mode", "drift", "degree", "span")})
+                if c.get("id") not in want:
+                    continue
+                if not FIELDS_C.issubset(c):
+                    partial[run] += 1
+                    continue
+                found[run][c["id"]].append({k: c[k] for k in FIELDS_C})
     print("scanned %d journal(s) under %s" % (len(js), os.path.basename(proj[0])))
+    for run, n in sorted(partial.items()):
+        print("  %-20s %d codings skipped: missing %s"
+              % (run, n, ", ".join(sorted(FIELDS_C))))
     if not found:
         print("  no Pass C codings in any journal")
         return
     os.makedirs(os.path.join(PASSC, "codings"), exist_ok=True)
     for run in sorted(found):
         by = found[run]
-        pairs = {i: v for i, v in by.items() if len(v) == 2}
-        odd = {i: len(v) for i, v in by.items() if len(v) != 2}
-        new = sorted(set(pairs) - have)
-        print("  %-20s %5d ids | %5d with exactly 2 codings | %5d not already saved"
-              % (run, len(by), len(pairs), len(new)))
-        if odd:
-            print("      %d ids with != 2 codings (a partial agent, or an id issued "
-                  "twice): %s" % (len(odd), dict(list(odd.items())[:4])))
-        if not new:
-            continue
-        if not write:
+        #: ONE coding is complete for a single-coded run (every lineage shard),
+        #: TWO for a double-coded one (shards 00-11). Three means an id was
+        #: issued twice and is a defect. An earlier version demanded exactly
+        #: two, which would have refused to recover any lineage shard -- the
+        #: precise case recovery exists for.
+        ok = {i: v for i, v in by.items() if len(v) in (1, 2)}
+        bad = {i: len(v) for i, v in by.items() if len(v) > 2}
+        single = sum(1 for v in ok.values() if len(v) == 1)
+        new = sorted(set(ok) - have)
+        print("  %-20s %5d ids | %5d single %5d double | %5d not already saved"
+              % (run, len(by), single, len(ok) - single, len(new)))
+        if bad:
+            print("      *** %d ids with MORE THAN 2 codings -- issued twice: %s"
+                  % (len(bad), dict(list(bad.items())[:4])))
+        if not new or not write:
             continue
         p = os.path.join(PASSC, "codings", "recovered-%s.json" % run)
         if os.path.exists(p):
             print("      %s exists; skipping" % os.path.basename(p))
             continue
         json.dump({"_shard": -1, "_recovered_from": run, "_requested": len(new),
-                   "A": {i: pairs[i][0] for i in new},
-                   "B": {i: pairs[i][1] for i in new}},
+                   "_coders": 1 if single == len(new) else 2,
+                   "A": {i: ok[i][0] for i in new},
+                   "B": {i: ok[i][1] for i in new if len(ok[i]) == 2}},
                   open(p, "w", encoding="utf-8"), indent=0, sort_keys=True,
                   ensure_ascii=False)
         print("      -> %s" % os.path.basename(p))
@@ -1558,11 +1620,16 @@ def passc_recover(write=False):
 
 
 def passc_todo():
-    """What is coded, what is not. The resume check."""
+    """What is coded, what is not, PER DRAW. The resume check.
+
+    The two draws are ALTERNATIVES, not addends -- one random within a frozen
+    sample, one classifier-ranked -- so a single union denominator would imply
+    we mean to code all 145,412, which we do not. The live plan is the 26
+    lineage shards at top-200 per cell.
+    """
     import collections
-    import pyarrow.parquet as pq
-    t = pq.read_table(PASSC_SAMPLE).to_pydict()
-    want = set(t["id"])
+    K = passc_key()
+    want = set(K)
     got = collections.defaultdict(set)
     d = os.path.join(PASSC, "codings")
     if os.path.isdir(d):
@@ -1575,24 +1642,42 @@ def passc_todo():
                     continue
                 got[coder].update(m)
             print("  %-34s %s" % (f, " ".join("%s:%d" % (c, len(m)) for c, m in sorted(r.items()) if not c.startswith("_"))))
-    print("\nsample %s passages" % format(len(want), ","))
-    for coder in sorted(got):
-        have = got[coder] & want
-        stray = got[coder] - want
-        print("  coder %-3s coded %6s of %s  (%.1f%%)%s"
-              % (coder, format(len(have), ","), format(len(want), ","),
-                 100 * len(have) / len(want),
-                 "   STRAY IDS NOT IN SAMPLE: %d" % len(stray) if stray else ""))
-    if got:
-        done = set.intersection(*[got[c] for c in got]) & want
-        print("  coded by ALL coders: %s (%.1f%%)"
-              % (format(len(done), ","), 100 * len(done) / len(want)))
-        left = sorted(want - done)
-        print("  REMAINING: %s" % format(len(left), ","))
-        if left:
-            print("  next shard would start at %s" % left[0])
-    else:
-        print("  nothing coded yet")
+    #: ANY coder saw it vs BOTH did. Not `intersection` over all coders: shards
+    #: 00-11 are double-coded and L00-L25 single, so an intersection would
+    #: report the single-coded ones as uncoded.
+    coded = set().union(*got.values()) if got else set()
+    double = (got.get("A", set()) & got.get("B", set()))
+    stray = coded - want
+    if stray:
+        print("\n  *** %d CODED IDS ARE IN NEITHER DRAW *** %s"
+              % (len(stray), sorted(stray)[:3]))
+
+    lp = os.path.join(PASSC, "lineage", "plan.json")
+    if os.path.exists(lp):
+        print("\nLINEAGE PLAN -- the live one, 26 shards at top-200 per cell:")
+        plan = json.load(open(lp, encoding="utf-8"))
+        allids = set()
+        for k in sorted(plan, key=int):
+            src = open(plan[k]["script"], encoding="utf-8").read()
+            m = _re.search(r"^const BATCHES = (\[.*\])$", src, _re.M)
+            ids = [i for b in json.loads(m.group(1)) for i in b["ids"]] if m else []
+            allids.update(ids)
+            n = len(set(ids) & coded)
+            print("  L%-3s %-32s %4d/%-4d %s"
+                  % (k, plan[k]["pair"].split("/")[-1][:32], n, len(ids),
+                     "DONE" if ids and n == len(ids) else ""))
+        left = sorted(allids - coded)
+        print("  --> %s of %s coded. REMAINING %s%s"
+              % (format(len(allids & coded), ","), format(len(allids), ","),
+                 format(len(left), ","),
+                 ("   next id %s" % left[0]) if left else ""))
+
+    ps = {i for i in coded if K.get(i, {}).get("draw") == "sample"}
+    print("\nEARLIER DRAW (sample.parquet, random within the frozen sample):")
+    print("  %s passages coded, %s of them double-coded" % (format(len(ps), ","),
+          format(len({i for i in double if K.get(i, {}).get('draw') == 'sample'}), ",")))
+    print("  A DIFFERENT POPULATION from the lineage shards. Do not pool without")
+    print("  saying so: one is random within a frozen sample, one is classifier-ranked.")
 
 
 def roles():

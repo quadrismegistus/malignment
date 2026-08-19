@@ -1,93 +1,90 @@
 {
  "0": {
-  "n": 3120,
+  "n": 3210,
   "pairs": [
-   "01-ai/Yi-1.5-9B",
-   "HuggingFaceTB/SmolLM2-360M",
-   "m-a-p/neo_7b"
+   "EleutherAI/pythia-2.8b",
+   "tiiuae/Falcon3-3B-Base",
+   "zai-org/glm-4-9b-hf"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-00.js"
  },
  "1": {
   "n": 2140,
   "pairs": [
-   "HuggingFaceTB/SmolLM3-3B-Base",
-   "m-a-p/CT-LLM-Base"
+   "EleutherAI/pythia-6.9b",
+   "tiiuae/Falcon3-1B-Base"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-01.js"
  },
  "2": {
   "n": 2140,
   "pairs": [
-   "LLM360/Amber",
-   "ibm-granite/granite-3.0-8b-base"
+   "mistralai/Mistral-7B-v0.1",
+   "tiiuae/Falcon3-10B-Base"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-02.js"
  },
  "3": {
   "n": 2140,
   "pairs": [
-   "OpenLLM-France/Lucie-7B",
-   "bigscience/bloom-7b1"
+   "HuggingFaceTB/SmolLM3-3B-Base",
+   "openbmb/MiniCPM5-1B-Base"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-03.js"
  },
  "4": {
   "n": 2140,
   "pairs": [
-   "allenai/Olmo-3-1025-7B",
-   "huggyllama/llama-7b"
+   "LLM360/Amber",
+   "meta-llama/Llama-3.1-8B"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-04.js"
  },
  "5": {
   "n": 2140,
   "pairs": [
-   "Qwen/Qwen2.5-0.5B",
-   "allenai/OLMoE-1B-7B-0125"
+   "OpenLLM-France/Lucie-7B",
+   "m-a-p/CT-LLM-Base"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-05.js"
  },
  "6": {
   "n": 2140,
   "pairs": [
-   "Qwen/Qwen2.5-7B",
-   "allenai/OLMo-2-0425-1B"
+   "huggyllama/llama-7b",
+   "ibm-granite/granite-3.0-8b-base"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-06.js"
  },
  "7": {
   "n": 2140,
   "pairs": [
-   "Qwen/Qwen3-8B-Base",
-   "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T"
+   "Qwen/Qwen2.5-0.5B",
+   "bigscience/bloom-7b1"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-07.js"
  },
  "8": {
-  "n": 3210,
+  "n": 2140,
   "pairs": [
-   "meta-llama/Llama-3.1-8B",
-   "mistralai/Mistral-7B-v0.1",
-   "zai-org/glm-4-9b-hf"
+   "Qwen/Qwen2.5-7B",
+   "allenai/Olmo-3-1025-7B"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-08.js"
  },
  "9": {
-  "n": 3210,
+  "n": 2140,
   "pairs": [
-   "EleutherAI/pythia-6.9b",
-   "openbmb/MiniCPM5-1B-Base",
-   "togethercomputer/RedPajama-INCITE-Base-7B-v0.1"
+   "Qwen/Qwen3-8B-Base",
+   "allenai/OLMoE-1B-7B-0125"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-09.js"
  },
  "10": {
-  "n": 3210,
+  "n": 2140,
   "pairs": [
-   "EleutherAI/pythia-2.8b",
-   "tiiuae/Falcon3-10B-Base",
-   "tiiuae/Falcon3-7B-Base"
+   "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "allenai/OLMo-2-0425-1B"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-10.js"
  },
@@ -95,8 +92,8 @@
   "n": 3210,
   "pairs": [
    "BSC-LT/salamandra-7b",
-   "tiiuae/Falcon3-1B-Base",
-   "tiiuae/Falcon3-3B-Base"
+   "tiiuae/Falcon3-7B-Base",
+   "togethercomputer/RedPajama-INCITE-Base-7B-v0.1"
   ],
   "script": "/Users/rj416/github/malignment/experiments/interiority_in_passages/results/passC/scripts/shard-11.js"
  }
