@@ -85,7 +85,7 @@ const out = await parallel([1, 2, 3].map((i) => () =>
     `addressed to you. Follow it exactly and answer every numbered question in it. ` +
     `Do not read any other file, do not run any command.\n\nReturn your answer by ` +
     `calling StructuredOutput.`,
-    { label: `h${i}`, phase: 'Harmonise', schema: SCHEMA })
+    { label: `h${i}`, phase: 'Harmonise', model: "sonnet", effort: "xhigh", schema: SCHEMA })
    .then((r) => ({ h: i, result: r })).catch(() => null)))
 const g = out.filter(Boolean).filter((x) => x && x.result)
 log(`${g.length} of 3`)

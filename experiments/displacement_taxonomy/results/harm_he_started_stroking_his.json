@@ -25,6 +25,8 @@
  ],
  "pairs_sha": "38c4892304da",
  "filter": "defended_two_sided",
+ "model": "sonnet",
+ "effort": "xhigh",
  "n_relations_all": 28,
  "n_relations_kept": 21,
  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harm_he_started_stroking_his.txt",
@@ -155,8 +157,5 @@
    "confidence": "medium",
    "name": "animal to human partner"
   }
- },
- "runs": [
-  "wf_b52a0592-44c"
- ]
+ }
 }

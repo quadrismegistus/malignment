@@ -25,6 +25,8 @@
  ],
  "pairs_sha": "38c4892304da",
  "filter": "defended_two_sided",
+ "model": "sonnet",
+ "effort": "xhigh",
  "n_relations_all": 24,
  "n_relations_kept": 14,
  "path": "/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/inputs/harm_he_was_written_up_for_the_third_time_thi.txt",
@@ -113,8 +115,5 @@
    "confidence": "medium",
    "name": "drastic actions lose the most ground"
   }
- },
- "runs": [
-  "wf_6f71301e-c7e"
- ]
+ }
 }
