@@ -720,16 +720,50 @@ within the system that it is.
 
 This is in the base. Pretraining wrote it.
 
-### The aligned model is not less stratified. On mediation it is more.
+### The aligned model is not less stratified. Whether it is MORE is F21 only.
 
 | | base | aligned | moved |
 | --- | --- | --- | --- |
 | individual | 2.87 | 3.14 | **+0.27** |
 | institution | 1.96 | 2.02 | +0.06 |
 
-The gap widens from −0.91 to −1.12. The delta is −0.194 at p=0.017 and survives
-the crossed (lineage, pair) test. **Alignment pushes the individual roughly four
-times further into mediated channels than it pushes the institution.**
+On F21 the gap widens from −0.91 to −1.12, delta −0.194 at p=0.017, surviving the
+crossed (lineage, pair) test. On F21 alignment pushes the individual roughly four
+times further into mediated channels than the institution.
+
+**This does NOT replicate, and an earlier version of this section stated it as
+though it did.**
+
+```
+mediation DELTA    F21   -0.194 [-0.35, -0.03]  p=0.017
+                   M03   +0.013 [-0.04, +0.06]  p=0.600    opposite sign, null
+                   slot  -0.109 [-0.34, +0.13]  p=0.363
+```
+
+M03's interval is tight around zero, so it is not an underpowered null: on 126
+matched pairs, alignment does not deepen the mediation gap. slotpov has no
+significant delta on any scale at all.
+
+The inconsistency is worth naming because it was not a computational error. A
+replication bar was applied to F21's `procedural` claim in section 11 and then
+dropped for an F21-only result in section 12, in the direction of promoting it.
+
+**What replicates is the BASE stratification**, F21 −0.911 (p=0.016) and M03
+−0.631 (p<0.001) on 126 pairs. "The individual petitions, the institution acts"
+stands on two corpora. "Alignment deepens it" stands on one.
+
+### Every delta that survives the crossed test
+
+```
+F21       abstraction +0.140 p=0.010   mediation -0.194 p=0.017   makes_better +0.077 p=0.044
+M03       abstraction +0.053 p<0.001   interiority -0.055 p=0.006  specificity +0.043 p=0.019
+                                       vocalisation -0.053 p=0.020
+slotpov   none
+```
+
+`abstraction` is the only one significant in more than one corpus, and it is the
+scale with the lowest inherited fraction. It remains the single defensible
+statement about what alignment adds to the position gap.
 
 ### Exit falls, mediated remedy rises
 
@@ -759,7 +793,8 @@ On the institution's side `fire` falls 27% and what replaces it is `consider`,
 ### The claim
 
 **Alignment does not flatten the asymmetry between how institutions and
-individuals are written; it deepens the part of it that concerns access.** The
+individuals are written.** On F21, and only there, it deepens the part concerning
+access. The
 institution keeps its directness. The individual is moved out of exit and
 litigation into procedure and collective organisation. Both parties are made more
 deliberative, and only one of them was ever able to act directly in the first
