@@ -1,0 +1,101 @@
+{
+ "_what": "contextual slot_ratings run through displacement_axis's own statistic, for comparison with bge (dN_position) and k_ratings (rated.jsonl)",
+ "summary": [
+  {
+   "scale": "aggression",
+   "cells": 400,
+   "down_frac": 0.2525,
+   "median_dN": 0.0,
+   "beats_null": 0.23958333333333331,
+   "spearman_vs_bge": 0.03210855197451535
+  },
+  {
+   "scale": "deliberation",
+   "cells": 400,
+   "down_frac": 0.3975,
+   "median_dN": 0.0,
+   "beats_null": 0.3379166666666667,
+   "spearman_vs_bge": 0.03295985596668556
+  },
+  {
+   "scale": "directedness",
+   "cells": 400,
+   "down_frac": 0.5375,
+   "median_dN": -0.006412862046304979,
+   "beats_null": 0.4816666666666667,
+   "spearman_vs_bge": 0.48381346101852934
+  },
+  {
+   "scale": "fit",
+   "cells": 400,
+   "down_frac": 0.2975,
+   "median_dN": 0.007923893850051211,
+   "beats_null": 0.3375,
+   "spearman_vs_bge": 0.026541903859570334
+  },
+  {
+   "scale": "harm",
+   "cells": 400,
+   "down_frac": 0.385,
+   "median_dN": 0.0,
+   "beats_null": 0.2854166666666667,
+   "spearman_vs_bge": 0.29245167930349913
+  },
+  {
+   "scale": "hedged",
+   "cells": 400,
+   "down_frac": 0.1925,
+   "median_dN": 0.0,
+   "beats_null": 0.12291666666666666,
+   "spearman_vs_bge": -0.0836856019720304
+  },
+  {
+   "scale": "interiority",
+   "cells": 400,
+   "down_frac": 0.3775,
+   "median_dN": 0.003895852277795764,
+   "beats_null": 0.5008333333333332,
+   "spearman_vs_bge": -0.24435683662697735
+  },
+  {
+   "scale": "makes_better",
+   "cells": 400,
+   "down_frac": 0.4925,
+   "median_dN": 0.0010462211694042267,
+   "beats_null": 0.51875,
+   "spearman_vs_bge": 0.08724654529090806
+  },
+  {
+   "scale": "makes_worse",
+   "cells": 400,
+   "down_frac": 0.5275,
+   "median_dN": -0.0031168782314702215,
+   "beats_null": 0.39291666666666664,
+   "spearman_vs_bge": 0.2629631129147638
+  },
+  {
+   "scale": "mundanity",
+   "cells": 400,
+   "down_frac": 0.3125,
+   "median_dN": 0.10433632541741877,
+   "beats_null": 0.6058333333333333,
+   "spearman_vs_bge": -0.7386286164288526
+  },
+  {
+   "scale": "superego",
+   "cells": 400,
+   "down_frac": 0.3225,
+   "median_dN": 0.0,
+   "beats_null": 0.2545833333333334,
+   "spearman_vs_bge": -0.126034679255348
+  },
+  {
+   "scale": "vocalisation",
+   "cells": 400,
+   "down_frac": 0.22,
+   "median_dN": 0.0,
+   "beats_null": 0.28875000000000006,
+   "spearman_vs_bge": -0.27765301954359617
+  }
+ ]
+}
