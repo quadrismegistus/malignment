@@ -859,7 +859,40 @@ Paired within scenario, 24 clusters holding both positions (F21 6, M03 18):
 
 Two asymmetries survive and they are on different axes. **The individual is
 routed roughly twice as far; the institution is abstracted roughly twice as
-far.** `procedural` is 1.48x in the individual's direction but does not clear
+far.**
+
+**AND THIS RESOLVES THE F21-vs-M03 "DISAGREEMENT" OF SECTION 11.** They do not
+disagree. Restricted to the same site, both point the same way and neither has
+the clusters to resolve it alone:
+
+```
+F21 all prompts        +0.194 [+0.035,+0.355] p=0.017 *   12 clusters
+F21 "I should" only    +0.168 [-0.042,+0.381] p=0.111      6
+M03 "I should" only    +0.081 [-0.022,+0.212] p=0.132     18
+BUNDLE "I should"      +0.102 [+0.010,+0.208] p=0.025 *   24
+M03 ALL prompts        -0.013 [-0.061,+0.038] p=0.600    126
+```
+
+M03's overall zero is a CANCELLATION ACROSS SITES, not an absence. By modal
+stratum:
+
+```
+I_absent       -0.084 p=0.027    "...rebuild. I ___"          finite verb
+I_final        +0.081 p=0.132    "...rebuild. I should ___"   bare infinitive
+I_final_ought  +0.050 p=0.457      we_final   -0.032 p=0.622
+I_medial       -0.011 p=0.797      we_medial  -0.046 p=0.314
+                                   we_absent  -0.049 p=0.350
+```
+
+The finite-verb stratum runs one way and the bare-infinitive stratum the other,
+so pooling them returns zero. (One significant stratum of seven tested: treat
+its p as suggestive; the cancellation is visible without it.) Section 11 compared
+F21 at one site against M03 pooled over seven and called it a disagreement
+between corpora. It is a difference between SITES, and M03 contains both.
+
+**The bounded claim: at the deliberative "I should" site, alignment routes the
+individual roughly twice as far as the institution.** Not established as
+site-general. `procedural` is 1.48x in the individual's direction but does not clear
 (p=0.061, interval touching zero) and should not be quoted as established.
 `deference` moves at 1.04x: dead even.
 
