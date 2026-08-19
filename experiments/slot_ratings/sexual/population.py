@@ -65,6 +65,24 @@ def main():
         und[r["prompt"]].add(r["base"] + " -> " + r["aligned"])
     und_lin = sorted(set.intersection(*und.values())) if und else []
 
+    #: STORE FINGERPRINT. The population being stable is not enough:
+    #: `twp_words_v4_best` is a view doing argMax(p, topup) over `twp_words_v4`,
+    #: so a TOPUP INGEST for a model already in the study silently changes the p
+    #: it returns without adding or removing a single lineage. That happened
+    #: during the session these results were produced -- 7,917 rows landed for
+    #: these 16 prompts on 2026-08-20 -- and moved two published figures in the
+    #: fourth decimal. Trivial in magnitude, invisible without this.
+    fp = V.rows("SELECT count() c, uniqExact(model) m, countIf(topup > 0) tu, "
+                "min(mtime) lo, max(mtime) hi FROM twp_words_v4 "
+                "WHERE prompt IN {ts:Array(String)} AND model IN {ms:Array(String)}",
+                ts=sorted(keep), ms=ms)[0]
+    print("\nSTORE FINGERPRINT for these prompts x these models, twp_words_v4:")
+    print("  %s rows | %d models | %s topup rows" % (f"{fp['c']:,}", fp["m"],
+                                                     f"{fp['tu']:,}"))
+    print("  mtime %s .. %s" % (fp["lo"], fp["hi"]))
+    print("  -> if a rerun gives different numbers with the same lineage set,")
+    print("     compare these first. The view can change under a stable roster.")
+
     common = sorted(slot_lin & set(und_lin))
     print("\nSLOT GENDER PAIRS   %d prompts, %d lineages (identical at every prompt: %s)"
           % (len(keep), len(slot_lin),
@@ -117,6 +135,12 @@ def main():
                         directional_sets=sorted(DIRECTIONAL)),
         undressing=dict(prompts=[FEM, MAL], lineages=sorted(und_lin),
                         n_lineages=len(und_lin), source="movement table"),
+        store_fingerprint=dict(
+            table="twp_words_v4", rows=fp["c"], models=fp["m"], topup_rows=fp["tu"],
+            mtime_min=str(fp["lo"]), mtime_max=str(fp["hi"]),
+            note="twp_words_v4_best is argMax(p, topup) over this table, so a "
+                 "topup ingest changes returned probabilities without changing "
+                 "the lineage set"),
         intersection=dict(n=len(common), lineages=common,
                           slot_not_in_undressing=sorted(slot_lin - set(und_lin))),
     ), open(os.path.join(OUT, "population.json"), "w"), indent=1)
