@@ -86,7 +86,24 @@ def state(new=None):
 
 
 def vastai(*args, capture=True):
-    r = subprocess.run(["vastai"] + list(args), capture_output=capture, text=True)
+    """Run the vast.ai CLI. RAISES a readable message when it is absent.
+
+    Without this the first call is a bare `FileNotFoundError: 'vastai'`
+    traceback from deep inside subprocess, which reads like a code defect and is
+    a missing PREREQUISITE. Found 2026-08-19 wiring the launcher: the CLI is not
+    installed on this machine and there is no ~/.vast_api_key, so the whole
+    executor path was untestable and nothing said so until it was called.
+    """
+    try:
+        r = subprocess.run(["vastai"] + list(args), capture_output=capture, text=True)
+    except FileNotFoundError:
+        raise SystemExit(
+            "the `vastai` CLI is not on PATH.\n"
+            "  install:  uv tool install vastai   (or pip install vastai)\n"
+            "  auth:     vastai set api-key <key>  -> writes ~/.vast_api_key\n"
+            "Nothing in this repo can rent, query offers or destroy a box without "
+            "it, and every cloud path fails at its first call rather than at "
+            "startup.")
     if capture and r.returncode != 0:
         raise SystemExit("vastai %s failed: %s" % (args[0], (r.stderr or "").strip()[:200]))
     return (r.stdout or "").strip() if capture else ""

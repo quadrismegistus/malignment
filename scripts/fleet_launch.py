@@ -211,11 +211,153 @@ def execute(b, models, roots, venv, a):
             "  copied from a previous command line, and the runbook's rule is that\n"
             "  renting starts on RH's own word rather than on a remembered yes.")
 
-    raise SystemExit(
-        "  create/provision/payload/run/pull/verify/destroy are NOT wired yet.\n"
-        "  Offer selection and costing above are live and free. The remaining\n"
-        "  stages touch money and a remote filesystem and land next, so that this\n"
-        "  commit can be read without any of them having run.")
+    # ---- create -----------------------------------------------------------
+    raw = cloud.vastai("create", "instance", str(best["id"]),
+                       "--image", shape.get("image", a.image),
+                       "--disk", str(shape.get("disk_gb", a.disk)),
+                       "--ssh", "--direct")
+    iid = _contract_id(raw)
+    if not iid:
+        raise SystemExit("  could not parse an instance id from vast.ai:\n%s" % raw[:400])
+    st = cloud.state({"instance_id": iid, "shard": a.box, "profile": a.box_profile,
+                      "machine_id": best.get("machine_id"), "models": models,
+                      "lineages": roots, "venv": venv})
+    print("  created     instance %s  (state written -- a rental this process "
+          "forgets is one nobody destroys)" % iid)
+    if a.stop_after == "create":
+        return 0
+
+    # ---- reachable ---------------------------------------------------------
+    host, port = _wait_ssh(cloud, iid)
+    st.update({"ssh_host": host, "ssh_port": port}); cloud.state(st)
+    if not cloud.verify_reachable(host, port):
+        #: **A BOX THAT NEVER ANSWERS IS A STATE, NOT A RACE.** The runbook's
+        #: rule, and the L2 fleet lost 3 of 14 to retrying one. Blocklist the
+        #: MACHINE so the next offer query cannot hand it back, then stop.
+        cloud.blocklist(best.get("machine_id"), "ssh never came up after create")
+        cloud.vastai("destroy", "instance", str(iid), capture=False)
+        cloud.state({})
+        raise SystemExit("  UNREACHABLE -- machine blocklisted, instance destroyed. "
+                         "Re-run for another offer.")
+    print("  reachable   %s:%s" % (host, port))
+    if a.stop_after == "reachable":
+        return 0
+
+    # ---- provision ---------------------------------------------------------
+    print("  provision   repo + venv %s" % venv)
+    r = cloud.ssh_run(st, PROVISION % {"venv": venv})
+    if r.returncode:
+        raise SystemExit("  provision FAILED rc=%d\n%s" % (r.returncode, (r.stderr or "")[-600:]))
+    if a.stop_after == "provision":
+        return 0
+
+    # ---- payload -----------------------------------------------------------
+    #: The cells for the WHOLE lineage, so the box can build its own union.
+    src = os.path.expanduser("~/malignment-data/twp")
+    cloud.ssh_run(st, "mkdir -p /root/malignment-data/twp")
+    for m in models:
+        d = os.path.join(src, m.replace("/", "__"))
+        if os.path.isdir(d):
+            cloud.rsync(st, d, "/root/malignment-data/twp/" + m.replace("/", "__"))
+    got = cloud.ssh_run(st, "find /root/malignment-data/twp -name '*.jsonl' | wc -l")
+    print("  payload     %s stash files on the box" % (got.stdout or "?").strip())
+    if a.stop_after == "payload":
+        return 0
+
+    # ---- run ---------------------------------------------------------------
+    only = (" --only %s" % a.only) if a.only else ""
+    cmds = ["cd /root/malignment && ./%s/bin/python scripts/queue_v4.py --models %s%s"
+            % (venv, " ".join(models), only)]
+    cmds += ["cd /root/malignment && ./%s/bin/python scripts/topup_lineage.py "
+             "--root %s%s" % (venv, r_, only) for r_ in roots]
+    for c in cmds:
+        print("  run         %s" % c[:96])
+        rr = cloud.ssh_run(st, "nohup bash -lc %s > /root/stage.log 2>&1" % json.dumps(c))
+        if rr.returncode:
+            print("     rc=%d %s" % (rr.returncode, (rr.stderr or "")[-300:]))
+    if a.stop_after == "run":
+        return 0
+
+    # ---- pull --------------------------------------------------------------
+    dst = os.path.expanduser("~/malignment-data/twp")
+    cloud.rsync(st, "/root/malignment-data/twp", dst, from_remote=True)
+    print("  pulled      into %s" % dst)
+    if a.stop_after == "pull":
+        return 0
+
+    # ---- verify ------------------------------------------------------------
+    #: **BYTE-LEVEL, AND COUNTED FROM WHAT WAS WRITTEN.** RH's standing gate for
+    #: destroying a box, and the runbook's rule that "instance running" is the
+    #: rental and not the work. A remote line count that does not match the local
+    #: one after the pull means the transfer is incomplete, whatever rsync said.
+    ok = True
+    for m in models:
+        d = m.replace("/", "__")
+        rem = cloud.ssh_run(st, "cat /root/malignment-data/twp/%s/*/jsonl.hashstash.raw/"
+                                "data.jsonl 2>/dev/null | wc -l" % d)
+        n_rem = int((rem.stdout or "0").strip() or 0)
+        n_loc = 0
+        for dp, _dd, ff in os.walk(os.path.join(dst, d)):
+            for f in ff:
+                if f == "data.jsonl":
+                    n_loc += sum(1 for _ in open(os.path.join(dp, f), encoding="utf-8"))
+        same = n_rem and n_loc >= n_rem
+        ok &= bool(same)
+        print("     %-46s remote %6d  local %6d  %s"
+              % (m[:46], n_rem, n_loc, "OK" if same else "MISMATCH"))
+    if a.stop_after == "verify" or not ok:
+        if not ok:
+            print("\n  NOT DESTROYING -- verification failed. The box is still "
+                  "billing; inspect it, then destroy by hand.")
+        return 0 if ok else 1
+
+    # ---- destroy -----------------------------------------------------------
+    cloud.vastai("destroy", "instance", str(iid), capture=False)
+    cloud.state({})
+    print("  destroyed   %s  (verified byte counts first)" % iid)
+    return 0
+
+
+PROVISION = """set -e
+export DEBIAN_FRONTEND=noninteractive
+command -v git >/dev/null || (apt-get update -qq && apt-get install -y -qq git rsync)
+[ -d /root/malignment ] || git clone --depth 1 %(repo)s /root/malignment 2>/dev/null || true
+cd /root/malignment
+python -m pip -q install uv 2>/dev/null || true
+[ -d %(venv)s ] || python -m venv %(venv)s
+./%(venv)s/bin/pip -q install -r requirements.txt
+./%(venv)s/bin/python -c "import torch,transformers;print('torch',torch.__version__,'transformers',transformers.__version__)"
+""".replace("%(repo)s", "https://github.com/rj416/malignment.git")
+
+
+def _contract_id(raw):
+    """vast.ai emits Python dict-repr, not JSON. Three parsers, as the archive found."""
+    import ast
+    import re
+    for line in (raw or "").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        for loads in (json.loads, ast.literal_eval):
+            try:
+                d = loads(line)
+                if isinstance(d, dict) and d.get("new_contract"):
+                    return str(d["new_contract"])
+            except Exception:                                   # noqa: BLE001
+                pass
+    m = re.search(r"'new_contract':\s*(\d+)", raw or "")
+    return m.group(1) if m else None
+
+
+def _wait_ssh(cloud, iid, tries=30, wait=10):
+    """Poll until vast.ai publishes an ssh host/port for the instance."""
+    import time
+    for _ in range(tries):
+        for i in json.loads(cloud.vastai("show", "instances", "--raw") or "[]"):
+            if str(i.get("id")) == str(iid) and i.get("ssh_host"):
+                return i["ssh_host"], i.get("ssh_port")
+        time.sleep(wait)
+    raise SystemExit("  vast.ai never published an ssh endpoint for %s" % iid)
 
 
 if __name__ == "__main__":
