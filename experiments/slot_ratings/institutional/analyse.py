@@ -23,7 +23,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 OUT = os.path.join(HERE, "results", "tables")
 import run_m03, run_f21, run_slotpov
-from task import SCALES_INST
+import os as _os
+INSTR = _os.environ.get("INSTR", "slot_institutional_en_v2")
+from task import SCALES_INST, SCALES_INST_V3
+if INSTR.endswith("v3"): SCALES_INST = SCALES_INST_V3
 from scipy import stats
 
 
@@ -36,7 +39,7 @@ def _save(name, what, rows, **meta):
 
 def rows_m03(arm):
     for f in sorted(glob.glob(os.path.join(
-            HERE, "results/m03/rated_slot_institutional_en_v2_m03_*_arm%s.json" % arm))):
+            HERE, "results/m03/rated_%s_m03_*_arm%s.json" % (INSTR, arm)))):
         d = json.load(open(f))
         for c in d["cells"]:
             if c["ratings"] and not c["cell"].endswith("absent"):
@@ -46,14 +49,14 @@ def rows_m03(arm):
 
 
 def rows_f21(arm):
-    d = json.load(open(os.path.join(HERE, "results/m03/rated_f21_arm%s.json" % arm)))
+    d = json.load(open(os.path.join(HERE, "results/m03/rated_f21_%s_arm%s.json" % (INSTR, arm))))
     for r in d["prompts"]:
         if r["ratings"]:
             yield r["prompt"], r["ratings"], r["position"], r.get("subdomain")
 
 
 def rows_slot(arm):
-    d = json.load(open(os.path.join(HERE, "results/slotpov/rated_arm%s.json" % arm)))
+    d = json.load(open(os.path.join(HERE, "results/slotpov/rated_%s_arm%s.json" % (INSTR, arm))))
     for ms, v in d["pairs"]:
         for i in v:
             if i["ratings"]:

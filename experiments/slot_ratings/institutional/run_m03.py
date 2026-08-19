@@ -203,8 +203,12 @@ def main(argv=None):
     if a.v6:
         from task import SlotRatingENv6 as T, SCALES_V6 as SCALES, render as R
     else:
-        from task import (InstitutionalSupplementEN as T,
-                                        SCALES_INST as SCALES, render as R)
+        if os.environ.get("INST_V3"):
+            from task import (InstitutionalSupplementENv3 as T,
+                              SCALES_INST_V3 as SCALES, render as R)
+        else:
+            from task import (InstitutionalSupplementEN as T,
+                              SCALES_INST as SCALES, render as R)
     task = T()
     os.makedirs(RESULTS, exist_ok=True)
     for arm in ("A", "B"):

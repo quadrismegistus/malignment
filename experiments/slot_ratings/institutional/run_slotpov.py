@@ -128,7 +128,13 @@ def population(prompts, arm="A", min_pairs=3):
 
 
 def main():
-    from task import InstitutionalSupplementEN, SCALES_INST, render
+    import os as _os
+    _V3 = _os.environ.get("INST_V3")
+    if _V3:
+        from task import (InstitutionalSupplementENv3 as InstitutionalSupplementEN,
+                          SCALES_INST_V3 as SCALES_INST, render)
+    else:
+        from task import InstitutionalSupplementEN, SCALES_INST, render
     from scipy import stats
     ps = pairs()
     print("institutional perspective pairs: %d" % len(ps))
@@ -152,7 +158,7 @@ def main():
         os.makedirs(RESULTS, exist_ok=True)
         json.dump({"arm": arm, "pairs": [(ms, [dict(i, ratings=rat.get(i["prompt"], {}))
                                                for i in v]) for ms, v in ps]},
-                  open(os.path.join(RESULTS, "rated_arm%s.json" % arm), "w"), indent=1)
+                  open(os.path.join(RESULTS, "rated_%s_arm%s.json" % (task.name, arm)), "w"), indent=1)
         per = collections.defaultdict(lambda: collections.defaultdict(list))
         for ms, v in ps:
             for i in v:

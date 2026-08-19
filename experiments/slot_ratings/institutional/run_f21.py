@@ -87,7 +87,13 @@ def population(ps, arm="A", min_pairs=3):
 
 
 def main():
-    from task import InstitutionalSupplementEN, SCALES_INST, render
+    import os as _os
+    _V3 = _os.environ.get("INST_V3")
+    if _V3:
+        from task import (InstitutionalSupplementENv3 as InstitutionalSupplementEN,
+                          SCALES_INST_V3 as SCALES_INST, render)
+    else:
+        from task import InstitutionalSupplementEN, SCALES_INST, render
     from scipy import stats
     rows = prompts()
     ps = [r["prompt"] for r in rows]
@@ -113,7 +119,7 @@ def main():
         print("\narm %s: %d words rated, errors %d" % (arm, len(jobs), len(errs)))
         json.dump({"arm": arm, "instrument": task.name,
                    "prompts": [dict(r, ratings=rat.get(r["prompt"], {})) for r in rows]},
-                  open(os.path.join(RESULTS, "rated_f21_arm%s.json" % arm), "w"), indent=1)
+                  open(os.path.join(RESULTS, "rated_f21_%s_arm%s.json" % (task.name, arm)), "w"), indent=1)
 
         # per PAIR: mean rho over indiv prompts minus mean over inst prompts
         per = collections.defaultdict(lambda: collections.defaultdict(list))

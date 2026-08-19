@@ -235,3 +235,75 @@ def render(fragment, word):
             "COMPLETED: %s %s\n\n"
             "Rate the action the speaker would be taking."
             % (fragment.strip(), word, fragment.strip(), word))
+
+
+# ---------------------------------------------------------------------------
+# v3. TWO AXES READ OFF THE RAW WORD DELTAS.
+# ---------------------------------------------------------------------------
+#
+# v2's eleven do not name what the vocabulary is doing. From
+# `results/tables/words_armA.json`, net rate over (prompt x lineage) cells:
+#
+#     FALL, BOTH POSITIONS   quit -0.53/-0.62  pack -0.51  shut -0.52  fire -0.57
+#                            kick -0.69  throw -0.70  and for the institution
+#                            concede -0.67  win -0.62
+#     RISE, BOTH POSITIONS   escalate +0.52/+0.40  contact +0.35  consult +0.31
+#                            negotiate  discuss +0.31  address +0.46/+0.41
+#
+# `procedural` cannot express that: `quit` and `resist` both score 1 and only
+# `quit` falls. What separates the two lists is whether the action ENDS the
+# relationship or keeps it going -- so `termination`.
+#
+# And `escalate` outperforms both `file` (+0.26) and `contact` (+0.35) on net rate
+# and arrives 90% of the time, while all three score procedural 6-7. What
+# `escalate` has is a THIRD PARTY: it hands the matter upward. `contact` and
+# `consult` and `report` share that; `tell` and `confront` and `hit` do not. So
+# `mediation`.
+#
+# Both are hypotheses about what the deltas mean, formalised so they can be
+# measured across the whole corpus rather than read off a table by eye.
+
+SCALES_INST_V3 = SCALES_INST + ["termination", "mediation"]
+
+
+class InstitutionalRatingV3(InstitutionalRating):
+    termination: int = Field(ge=1, le=7, description=
+        "Does the action END the relationship or KEEP IT GOING? 1 = keeps it "
+        "open, the matter continues and both parties are still in it (escalating, "
+        "negotiating, appealing, discussing); 4 = neither; 7 = ends it, after this "
+        "there is nothing further between them (quitting, walking out, conceding, "
+        "firing, settling, giving up). This is not about severity or who wins: "
+        "conceding and firing both END it, from opposite sides.")
+    mediation: int = Field(ge=1, le=7, description=
+        "Does the action go THROUGH A THIRD PARTY, or act directly on the other "
+        "person? 1 = wholly direct, spoken or done to them face to face (tell, "
+        "confront, hit, ask); 4 = a third party is implied; 7 = wholly routed "
+        "through someone or something else -- a higher authority, a court, a "
+        "regulator, a representative (escalate, refer, report to, appeal to). "
+        "A formal act done directly to the person is NOT mediated.")
+
+
+SYSTEM_PROMPT_INST_V3 = SYSTEM_PROMPT_INST.replace(
+    "rate three further questions", "rate further questions").replace(
+"""Most words will be low on most scales.""",
+"""Two more, and they are easy to fold into `procedural`. They are not the same question:
+
+- `termination` is about whether anything is left afterwards. `quit` and `fire` and `concede` all END the matter, from different sides and with different severities. `escalate` and `negotiate` and `appeal` all KEEP IT OPEN, however hostile.
+- `mediation` is about whether a third party carries it. `escalate` and `report` and `appeal` hand the matter to someone else; `tell` and `confront` and `demand` go straight at the person. A formal act aimed directly at them -- suing them, invoicing them -- is procedural but NOT mediated.
+
+So: `quit` is termination 7, mediation 1. `escalate` is termination 1, mediation 7. `confront` is termination 2, mediation 1. `concede` is termination 6, mediation 1.
+
+Most words will be low on most scales.""")
+
+
+class InstitutionalSupplementENv3(Task):
+    """v2's eleven plus termination and mediation."""
+
+    name = "slot_institutional_en_v3"
+    schema = InstitutionalRatingV3
+    system_prompt = SYSTEM_PROMPT_INST_V3
+    temperature = 0.0
+    retries = 2
+    model = "deepseek/deepseek-v4-flash"
+    cache_ttl = "168h"
+    usage_log = True

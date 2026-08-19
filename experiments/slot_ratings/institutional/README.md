@@ -295,6 +295,53 @@ Arm B, most reliable arrivals (cleared the null / seen, 25+ cells):
    The word that names the procedure without naming an act does best -- which is
    what `abstraction` is reaching for and measures only partly.
 
+# 6f. v3: TWO AXES READ OFF THE RAW DELTAS, AND ONE COLLINEARITY THAT CHANGES A CLAIM
+
+`termination` (does the action END the matter or keep it open) and `mediation`
+(does it go through a THIRD PARTY) were written after reading section 6e's
+vocabulary, and measured across all three corpora.
+
+    MAIN EFFECT, unit = lineage      M03 armA    M03 armB    F21 armA    F21 armB    SLOT armA
+    termination                      -0.096       -0.185      -0.092      -0.107      -0.049
+                                      5/50        6/49       11/50       13/47        3/12
+                                      p=9e-12     p=1e-08     p=5e-06     p=0.008     p=0.20
+    mediation                        +0.041      +0.223      +0.067      +0.142      +0.101
+                                     38/50       41/49       40/50       26/47       10/12
+                                      p=2e-04     p=3e-06     p=3e-06     p=0.24      p=0.012
+
+**`termination` at 5 of 50 lineages, p=9e-12, is the most consistent single
+result here.** Actions that end the matter lose probability; alignment keeps the
+matter OPEN. That is what `procedural` could not express: `quit` and `resist`
+both score procedural 1, only `quit` ends it, and only `quit` falls.
+
+`mediation` and `abstraction` are NOT one axis (rho +0.229). The words separate:
+`escalate` is mediation 7 / abstraction 4, `assess` is mediation 2.5 /
+abstraction 7, `report` is 6.9 / 3.7.
+
+## BUT FOUR OF THE ELEVEN ARE ONE SCALE, AND THEY ARE THE POV RESULT
+
+Over 14,196 rated (prompt, word) rows:
+
+    agency ~ specificity    +0.834      assertiveness ~ arousal    +0.732
+    agency ~ assertiveness  +0.829      assertiveness ~ specificity +0.642
+    agency ~ arousal        +0.623      target ~ vocalisation      +0.657
+
+`agency`, `specificity`, `assertiveness` and `arousal` are pairwise 0.62-0.83:
+**one cluster.** And that cluster is exactly what section 4 reports as the POV
+asymmetry -- individual gains agency +0.069, assertiveness +0.091, specificity
++0.105, arousal +0.106 on F21; +0.133/+0.156/+0.100/+0.138 on the slot pairs.
+
+**That is one finding counted four times, not four findings.** The same error
+`displacement_axis` records for its own 303 declared axes: *"agreement between
+independently constructed instruments is evidence, a headcount is not."*
+
+**Restated honestly: ONE axis moves toward the individual and `deference` moves
+toward the institution. Two claims, not seven.** `target`/`vocalisation` at
++0.657 is a second, smaller duplication.
+
+Independent, and carrying their own weight: `termination`, `mediation`,
+`abstraction`, `procedural`, `deference`, `delay`, `collective`.
+
 # 7. THE ABSTRACTION / AGENCY TRADE-OFF
 
 Across (prompt x lineage) cells, whichever side gains abstract process loses concrete agency:
