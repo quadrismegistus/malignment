@@ -21,20 +21,32 @@ And the filter I claimed would catch over-reads does not: judges' weakest-named
 relation was rater-marked `low` in only 10 of 16 cases. **38% of over-reads carry
 medium or high and pass straight through.**
 
-Sonnet/xhigh specifically, not sonnet/medium or opus/medium: it is the only
-batched setting producing NO one-sided relations (0 of 13, against 13 of 22 for
-opus/medium, which inflates its apparent relation count by splitting one
-substitution into two half-relations).
+Sonnet/xhigh specifically, not sonnet/medium or opus/medium, because it produced
+far fewer ONE-SIDED relations -- a relation with an empty side is a list, and
+splitting one substitution into two halves is what inflated opus/medium's apparent
+count to 2.75 per cell (13 of its 22 relations, 59%).
+
+**CORRECTED MID-RUN.** I first wrote that sonnet/xhigh produced NONE, from 0 of 13
+in the eight-cell sweep. Over the first 30 batches of this corpus the rate is
+14.3% (62 of 435), and P(0 in 13 | rate = 14.3%) = 0.13 -- so the sweep was
+entirely consistent with what is now observed and I read a null from a sample too
+small to discriminate, then used it to choose between settings. The comparison
+against opus/medium's 59% survives; "the only setting with none" never held.
 
 ## THE BATCH CONSTRAINT THAT IS NOT NEGOTIABLE
 
-No batch may contain two cells sharing a PROMPT or a PAIR.
+No batch may contain two cells sharing a PROMPT, a PAIR, or a TEMPLATE.
 
 Anchoring is real -- the first batched run repeated a relation name across two
 cells despite an explicit instruction not to. Sharing a prompt within a batch
 would anchor the lineage comparison; sharing a pair would anchor the cross-prompt
 comparison. Those are the two comparisons this corpus exists to support, so the
 one place anchoring must not happen is inside them.
+
+TEMPLATE was added after prompt-uniqueness alone admitted a batch of `Three Arabs
+/ Russians / Asians / Latinos / Jews / men came into the room` -- six different
+prompt strings, one sentence. It is the only one of the three that may be relaxed,
+is relaxed on about 10% of cells, and is counted when it is.
 """
 import argparse
 import collections
@@ -310,7 +322,7 @@ def ingest(run_id):
     hits = glob.glob(os.path.join(base, "*", "*", "subagents", "workflows", run_id))
     if not hits:
         raise SystemExit("no transcript dir for %r" % run_id)
-    n = bad = unknown = 0
+    n = bad = unknown = n_one = n_rel = 0
     seen = set()
     for f in sorted(glob.glob(os.path.join(hits[0], "agent-*.jsonl"))):
         lines = [json.loads(l) for l in open(f)]
@@ -350,6 +362,25 @@ def ingest(run_id):
                    "model_setting": "%s/%s" % (state["model"], state["effort"]),
                    "prompt": "=== CELL %s ===\nFRAGMENT: %s ___\n\nWORDS:\n%s"
                              % (cid, meta["prompt"], meta["table"])}
+            #: ONE-SIDED RELATIONS ARE FLAGGED, NEVER EDITED OUT. A relation with
+            #: an empty side is a list, not a relation -- it is what inflated
+            #: opus/medium's apparent count to 2.75 by splitting one substitution
+            #: into two halves. But stripping them here would mutate what a rater
+            #: returned, and the stash has to hold the answer as given or it stops
+            #: being a record. So the count rides on the row and downstream
+            #: filters on it.
+            #:
+            #: The rate is why this is not left to the confidence field: at 14.3%
+            #: over the first 30 batches, one-sided relations carry `low` only 52%
+            #: of the time and `high` 11% of the time, so a confidence filter
+            #: leaks them. And the 0-of-13 that helped choose this setting was a
+            #: sample too small to see a 14% rate -- P(0 in 13) = 0.13.
+            one_sided = [i for i, x in enumerate(c["relations"])
+                         if not x.get("a_words") or not x.get("b_words")]
+            row["n_one_sided"] = len(one_sided)
+            row["n_relations"] = len(c["relations"])
+            n_one += len(one_sided)
+            n_rel += len(c["relations"])
             key = run.make_key(row, 1)
             mv = run.parse_r4(row["prompt"])
             shown = len(mv["col_a"]) + len(mv["col_b"])
@@ -361,6 +392,8 @@ def ingest(run_id):
             n += 1
     print("ingested %d codings (%d cells issued, %d not returned)"
           % (n, len(cells), len(cells) - len(seen)))
+    print("  %d relations, %d one-sided (%.1f%%) -- flagged on the row as "
+          "`n_one_sided`, not removed" % (n_rel, n_one, 100 * n_one / n_rel if n_rel else 0))
     if bad or unknown:
         print("  %d malformed, %d unknown cell_id -- left unstashed" % (bad, unknown))
 
