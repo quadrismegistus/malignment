@@ -1,0 +1,178 @@
+{
+ "vocab": [
+  {
+   "prompt": "He started stroking his",
+   "name": "Same-referent register swap",
+   "ids": [
+    "r4e43116",
+    "rbde40e6"
+   ],
+   "letter": "A"
+  },
+  {
+   "prompt": "He started stroking his",
+   "name": "Possessive frame shift",
+   "ids": [
+    "r3a5a609"
+   ],
+   "letter": "B"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "name": "Blunt word, formal counterpart",
+   "ids": [
+    "r31bfd4e",
+    "r3f968a7"
+   ],
+   "letter": "C"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "name": "Non-naming stand-in",
+   "ids": [
+    "ra9d21c2"
+   ],
+   "letter": "D"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "name": "Withdrawal to redress",
+   "ids": [
+    "r22d0464"
+   ],
+   "letter": "E"
+  },
+  {
+   "prompt": "He started stroking his",
+   "name": "Transgressive to permitted",
+   "ids": [
+    "r096d02f",
+    "r19adf27",
+    "r257f2ac",
+    "r3f48db3",
+    "r7a8495d",
+    "r7bd919f",
+    "r7e14d30",
+    "rb789759",
+    "rd6b0e81",
+    "rf69eb30"
+   ],
+   "letter": "F"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "name": "Generic verb to situated verb",
+   "ids": [
+    "r41083a9",
+    "r5dcda9f",
+    "r7edaf2e",
+    "r7ff5dfe",
+    "rd4ca354"
+   ],
+   "letter": "G"
+  },
+  {
+   "prompt": "He started stroking his",
+   "name": "Subtype to superordinate",
+   "ids": [
+    "r61d8d3d"
+   ],
+   "letter": "H"
+  },
+  {
+   "prompt": "He started stroking his",
+   "name": "Modifier entrainment",
+   "ids": [
+    "r2a2661b"
+   ],
+   "letter": "I"
+  }
+ ],
+ "items": [
+  {
+   "iid": "i49fb52",
+   "rid": "r7ff5dfe",
+   "home": "Generic verb to situated verb",
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "answer": "G"
+  },
+  {
+   "iid": "ifcf84d",
+   "rid": "rc203b05",
+   "home": "Range narrowing",
+   "prompt": "He started stroking his",
+   "answer": "new"
+  },
+  {
+   "iid": "i4cccd5",
+   "rid": "r3f968a7",
+   "home": "Blunt word, formal counterpart",
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "answer": "C"
+  },
+  {
+   "iid": "i9e1d1a",
+   "rid": "rbde40e6",
+   "home": "Same-referent register swap",
+   "prompt": "He started stroking his",
+   "answer": "A"
+  },
+  {
+   "iid": "i806d12",
+   "rid": "r7edaf2e",
+   "home": "Generic verb to situated verb",
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "answer": "G"
+  },
+  {
+   "iid": "i4016e7",
+   "rid": "r19adf27",
+   "home": "Transgressive to permitted",
+   "prompt": "He started stroking his",
+   "answer": "F"
+  },
+  {
+   "iid": "i036745",
+   "rid": "r17d1e06",
+   "home": "Recipient-class shift",
+   "prompt": "He started stroking his",
+   "answer": "new"
+  },
+  {
+   "iid": "i923998",
+   "rid": "r096d02f",
+   "home": "Transgressive to permitted",
+   "prompt": "He started stroking his",
+   "answer": "F"
+  },
+  {
+   "iid": "ic38d82",
+   "rid": "r7e14d30",
+   "home": "Transgressive to permitted",
+   "prompt": "He started stroking his",
+   "answer": "F"
+  }
+ ],
+ "key": {
+  "ifcf84d": "new",
+  "i036745": "new",
+  "i9e1d1a": "A",
+  "i923998": "F",
+  "i4016e7": "F",
+  "ic38d82": "F",
+  "i4cccd5": "C",
+  "i806d12": "G",
+  "i49fb52": "G"
+ },
+ "seed": "assign-a1",
+ "arms": [
+  [
+   "sonnet",
+   "xhigh"
+  ],
+  [
+   "opus",
+   null
+  ]
+ ]
+}

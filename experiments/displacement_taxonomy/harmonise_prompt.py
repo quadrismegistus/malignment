@@ -49,6 +49,14 @@ N_HARMONISERS = 3
 #: the same prompt and the same pairs is a separate record rather than a
 #: replacement. Change the rule, change this string.
 FILTER = "defended_two_sided"
+#: THE MODEL IS PART OF THE KEY, for the same reason `pairs_sha` is: it
+#: determines the answer. The first two prompts were harmonised on claude-opus-5
+#: by inheritance, because no model was named and a workflow agent takes the
+#: session's -- which is exactly the kind of fact that is invisible until
+#: somebody asks. Naming it makes a Sonnet re-harmonisation a SEPARATE record
+#: rather than a replacement, so the two are comparable instead of one being
+#: lost.
+MODEL, EFFORT = "opus", None
 
 
 def _stash():
@@ -99,7 +107,7 @@ def shard(prompt_prefix):
     return prompt, items, mapping, pairs, n_all
 
 
-def prepare(prefix):
+def prepare(prefix, model=MODEL, effort=EFFORT):
     prompt, items, mapping, pairs, n_all = shard(prefix)
     n_cells = len(pairs)
     src = open(INSTRUMENT).read()
@@ -117,15 +125,17 @@ def prepare(prefix):
     open(path, "w").write(text)
     state = {"prompt": prompt, "slug": slug, "version": ver, "n_cells": n_cells,
              "pairs": pairs, "pairs_sha": hashlib.sha256("\n".join(pairs).encode()).hexdigest()[:12],
-             "filter": FILTER, "n_relations_all": n_all, "n_relations_kept": len(items),
+             "filter": FILTER, "model": model, "effort": effort, "n_relations_all": n_all, "n_relations_kept": len(items),
              "path": path, "mapping": mapping}
     json.dump(state, open(os.path.join(HERE, "results", "harm_%s.json" % slug), "w"), indent=1)
     js = SCRIPT % {"n": N_HARMONISERS, "slug": slug, "path": json.dumps(os.path.abspath(path)),
+                   "opts": ("model: %s, " % json.dumps(model) if model else "")
+                           + ("effort: %s, " % json.dumps(effort) if effort else ""),
                    "schema": json.dumps(schema, indent=2, sort_keys=True),
                    "prompt": json.dumps(prompt[:60])}
     out = os.path.join(HERE, "workflow_harm_%s.js" % slug)
     open(out, "w").write(js)
-    for probe in (os.path.abspath(path), '"constructs"'):
+    for probe in [os.path.abspath(path), '"constructs"'] + ([json.dumps(model)] if model else []):
         if probe not in js:
             raise SystemExit("generated script missing %r" % probe)
     print("%r\n  %d lineages, %d relations, %d defended two-sided (%d dropped)"
@@ -156,7 +166,8 @@ def ingest(run_id, slug):
                              % (i, len(bad), bad[:3]))
         key = {"stage": "harmonise", "version": state["version"],
                "frame_prompt": state["prompt"], "pairs_sha": state["pairs_sha"],
-               "filter": state["filter"], "harmoniser": i}
+               "filter": state["filter"], "model": state["model"],
+               "effort": state["effort"], "harmoniser": i}
         #: `pairs` rides in the value so the sha in the key is resolvable without
         #: a join against a state file that may have been re-prepared since.
         st[key] = {"result": r, "run_id": run_id, "pairs": state["pairs"],
@@ -169,6 +180,23 @@ def ingest(run_id, slug):
     for i, r in enumerate(res, 1):
         print("  h%d: %d constructs, %d unassigned, %s"
               % (i, len(r["constructs"]), len(r["unassigned"]["ids"]), r["confidence"]))
+
+
+def migrate():
+    """Stamp the model onto records written before the key carried one.
+
+    All pre-existing harmonisations ran on claude-opus-5, verified from the agent
+    transcripts of wf_6f71301e-c7e and wf_b52a0592-44c (14 turns each, one model
+    string). They are re-keyed rather than re-run: the fact is recoverable, so
+    reconstructing it is cheaper and more honest than a fresh run that would
+    silently replace evidence with a different draw.
+    """
+    st = _stash()
+    old = [(k, st[k]) for k in st.keys() if "model" not in k]
+    for k, v in old:
+        st[dict(k, model="opus", effort=None)] = v
+        del st[k]
+    print("re-keyed %d record(s) as model=opus" % len(old))
 
 
 def report(prefix):
@@ -186,6 +214,10 @@ def report(prefix):
             recs.append((k, st[k]))
     if not recs:
         raise SystemExit("nothing harmonised for a prompt starting %r" % prefix)
+    mods = {(k.get("model"), k.get("effort")) for k, _ in recs}
+    if len(mods) > 1:
+        raise SystemExit("%d models for this prompt: %s -- name one with --model"
+                         % (len(mods), sorted(str(m) for m in mods)))
     shas = {k["pairs_sha"] for k, _ in recs}
     if len(shas) > 1:
         #: Two populations under one prompt is exactly what the key exists to keep
@@ -194,9 +226,10 @@ def report(prefix):
                          "--pairs-sha" % (len(shas), sorted(shas)))
     recs.sort(key=lambda t: t[0]["harmoniser"])
     v = recs[0][1]
-    print("%r\n  %d lineages, %d of %d relations admitted (%s), pairs %s\n"
+    print("%r\n  %d lineages, %d of %d relations admitted (%s), pairs %s, model %s/%s\n"
           % (recs[0][0]["frame_prompt"], v["n_cells"], v["n_relations"],
-             v["n_relations_all"], recs[0][0]["filter"], recs[0][0]["pairs_sha"]))
+             v["n_relations_all"], recs[0][0]["filter"], recs[0][0]["pairs_sha"],
+             recs[0][0].get("model"), recs[0][0].get("effort")))
     sets = []
     for k, val in recs:
         cs = [(c["name"], frozenset(c["members"])) for c in val["result"]["constructs"]]
@@ -229,7 +262,7 @@ const out = await parallel([1, 2, 3].map((i) => () =>
     `addressed to you. Follow it exactly and answer every numbered question in it. ` +
     `Do not read any other file, do not run any command.\\n\\nReturn your answer by ` +
     `calling StructuredOutput.`,
-    { label: `h${i}`, phase: 'Harmonise', schema: SCHEMA })
+    { label: `h${i}`, phase: 'Harmonise', %(opts)sschema: SCHEMA })
    .then((r) => ({ h: i, result: r })).catch(() => null)))
 const g = out.filter(Boolean).filter((x) => x && x.result)
 log(`${g.length} of %(n)d`)
@@ -243,15 +276,21 @@ if __name__ == "__main__":
     ap.add_argument("--prepare", metavar="PROMPT_PREFIX")
     ap.add_argument("--ingest", metavar="RUN_ID")
     ap.add_argument("--report", metavar="PROMPT_PREFIX")
+    ap.add_argument("--migrate", action="store_true",
+                    help="stamp pre-existing records with the model they actually ran on")
     ap.add_argument("--slug")
+    ap.add_argument("--model", default=MODEL)
+    ap.add_argument("--effort", default=EFFORT)
     a = ap.parse_args()
     if a.prepare:
-        prepare(a.prepare)
+        prepare(a.prepare, a.model, a.effort)
     elif a.ingest:
         if not a.slug:
             raise SystemExit("--ingest needs --slug")
         ingest(a.ingest, a.slug)
     elif a.report:
         report(a.report)
+    elif a.migrate:
+        migrate()
     else:
         ap.print_help()
