@@ -1,0 +1,171 @@
+Below are 10 sets of three descriptions, numbered.
+
+Every description was written by someone who was shown two lists of words, A and
+B, and asked what relation connected them. All of the descriptions in this task
+concern completions of ONE sentence, so the words will overlap heavily between
+them. Each writer worked alone and invented their own wording.
+
+For each set, decide whether one of the three describes a DIFFERENT KIND OF
+CHANGE from the other two.
+
+The question is about the kind of change from A to B. It is not about what the
+words refer to. Because every set concerns the same sentence, sorting by subject
+matter will not work and will give you the wrong answer: two descriptions can be
+about the same body part and describe different kinds of change, and two can be
+about quite different things and describe the same kind of change.
+
+If all three describe the same kind of change, answer `none`. Some of these sets
+contain no odd one out, and `none` is expected to be the right answer a fair
+part of the time. Do not hunt for a difference that is not there.
+
+For each set give:
+
+  triad       the set's id, copied exactly
+  odd         1, 2, 3, or none
+  basis       one sentence saying what the distinction rests on, or if you
+              answered none, what the three have in common. Be specific enough
+              that a reader could tell which descriptions you meant.
+  confidence  high / medium / low
+
+Answer every set. Do not skip one because it is hard; answer it and mark the
+confidence low.
+
+SET tf19883
+  1.
+     A: hair, beard, face, chest, head, chin, hand, fingers
+     B: cock, penis, hard
+     Where A's mass is spread across many ordinary and a few sexual body parts, B's is concentrated on just three explicitly sexual words.
+  2.
+     A: dick, member, shaft
+     B: cock, meat, rod, prick, penis
+     Both conditions overwhelmingly select vulgar or slang synonyms for the same body part, but they favor different words from that synonym set: A prefers 'dick', 'member', 'shaft'; B prefers 'cock', 'meat', 'rod', 'prick', and the clinical 'penis'.
+  3.
+     A: hair, hand, hands, fingers, lips, chest, face, head, cheek
+     B: chin, jaw, goatee, mustache, beard
+     A names body parts broadly across the body (hair, hand, hands, fingers, lips, chest, face, head, cheek), while B narrows entirely to the chin/jaw area and its facial hair (chin, jaw, goatee, mustache, beard).
+
+SET tb5af78
+  1.
+     A: cock, penis, dick
+     B: beard, chin
+     The three explicit sexual/genital slang terms all favor A, with penis and dick showing large drops under B, while B's favored body-part words are non-sexual facial features.
+  2.
+     A: cock, dick, shaft, penis, balls
+     B: beard, hair, chin, hand, chest
+     Explicit genital nouns (cock, dick, shaft, penis, balls) dominate A, while ordinary grooming and body-part nouns (beard, hair, chin, hand, chest) dominate B.
+  3.
+     A: beard, chin, hair, face, chest, head, fingers, neck, hand, back, stomach, belly, body
+     B: cock, penis, dick, erection, member, shaft, big, massive, small, little
+     Non-sexual body parts (beard, chin, hair, face, chest, head, fingers, neck, hand, back, stomach, belly, body) rank far higher under A, while genital anatomy and adjectives describing its size (cock, penis, dick, erection, member, shaft, big, massive, small, little) rank far higher under B.
+
+SET t957127
+  1.
+     A: horse, horse's, pony, dog
+     B: wife, wife's
+     The object being stroked shifts from an animal under A (horse, horse's, pony, dog) to a human intimate partner under B (wife, wife's), recasting the scene from tending an animal to touching a person.
+  2.
+     A: daughter, wife
+     B: girlfriend, girlfriend's, friend
+     A favors family-member objects (daughter, wife) while B strongly favors romantic-partner objects (girlfriend, girlfriend's, friend), with the girlfriend terms showing the largest rank jumps of any words in this batch (+30 and +91).
+  3.
+     A: big, hard, huge, thick
+     B: long
+     The intensifying modifiers big, hard, huge, and thick, describing size or firmness, sit under A alongside the genital nouns they would modify, while long, a comparable modifier for hair or a beard, sits under B.
+
+SET t1e79f8
+  1.
+     A: horse, dog, dogs
+     B: pet, animal, cat, toy
+     A favors specific named animals (horse, dog, dogs) while B favors generic category words for the same domain (pet, animal, cat, toy).
+  2.
+     A: hair, beard, face, chest, head, chin, hand, fingers
+     B: cock, penis, hard
+     Where A's mass is spread across many ordinary and a few sexual body parts, B's is concentrated on just three explicitly sexual words.
+  3.
+     A: hair, hand, hands, fingers, lips, chest, face, head, cheek
+     B: chin, jaw, goatee, mustache, beard
+     A names body parts broadly across the body (hair, hand, hands, fingers, lips, chest, face, head, cheek), while B narrows entirely to the chin/jaw area and its facial hair (chin, jaw, goatee, mustache, beard).
+
+SET t154762
+  1.
+     A: dick
+     B: cock, penis
+     Where sexual content is named, A prefers the informal dick while B prefers the more explicit/clinical cock and penis.
+  2.
+     A: big, hard, huge, thick
+     B: long
+     The intensifying modifiers big, hard, huge, and thick, describing size or firmness, sit under A alongside the genital nouns they would modify, while long, a comparable modifier for hair or a beard, sits under B.
+  3.
+     A: dick, member, shaft
+     B: cock, meat, rod, prick, penis
+     Both conditions overwhelmingly select vulgar or slang synonyms for the same body part, but they favor different words from that synonym set: A prefers 'dick', 'member', 'shaft'; B prefers 'cock', 'meat', 'rod', 'prick', and the clinical 'penis'.
+
+SET t9e54e5
+  1.
+     A: chin, cheek, face, hand, neck, fingers, forehead, chest, stomach
+     B: cock, penis, wife, wife's
+     Explicit sexual-anatomy words cock and penis and the intimate-partner words wife and wife's rise sharply under B while A stays confined to non-genital body parts like chin, cheek, face, hand, neck, and forehead, so the divergence is chiefly about whether the stroking is sexualized.
+  2.
+     A: cock, dick, balls, penis, hard, big
+     B: hair, face, chest, chin, head, stomach, nose, body
+     Side A clusters explicit male genital anatomy (cock, dick, balls, penis) with intensity modifiers (hard, big), while side B is otherwise entirely non-genital, everyday body parts (hair, face, chest, chin, head, stomach, nose, body).
+  3.
+     A: cock, penis, dick, shaft, member, erection, erect, crotch, hard
+     B: beard, chin, mustache, goatee, hair, fur, cat, dog
+     A is composed of genital or sexually explicit words (cock, penis, dick, shaft, member, erection, erect, crotch, hard), while B is composed of facial-hair and pet/animal words (beard, chin, mustache, goatee, hair, fur, cat, dog), replacing an explicit sexual scene with a mundane grooming or pet-stroking one.
+
+SET t33d065
+  1.
+     A: cock, penis, dick
+     B: beard, chin
+     The three explicit sexual/genital slang terms all favor A, with penis and dick showing large drops under B, while B's favored body-part words are non-sexual facial features.
+  2.
+     A: wife's
+     B: wife, partner
+     A favors the possessive construction 'wife's', which sets up a further body-part noun, while B favors the bare relation terms 'wife' and, more strongly, the degendered 'partner'.
+  3.
+     A: chin, cheek, face, hand, neck, fingers, forehead, chest, stomach
+     B: cock, penis, wife, wife's
+     Explicit sexual-anatomy words cock and penis and the intimate-partner words wife and wife's rise sharply under B while A stays confined to non-genital body parts like chin, cheek, face, hand, neck, and forehead, so the divergence is chiefly about whether the stroking is sexualized.
+
+SET t022b5f
+  1.
+     A: quit, leave, pack, run, give, stop, skip, go
+     B: resign, speak, talk, plead, take, turn
+     A favors blunt, informal exit words -- quit, leave, pack, run, give, stop, skip, go -- describing an impulsive walkout, while B favors more formal or procedural responses -- resign, speak, talk, plead, take, turn -- with resign standing as the formal counterpart to A's quit.
+  2.
+     A: quit, leave, skip, stop, go
+     B: resign, seek, change, start
+     A favors blunt, informal words for leaving or avoiding the job (quit, leave, skip, stop, go), while B favors the more formal, deliberate professional-register counterparts for addressing the situation (resign, seek, change, start).
+  3.
+     A: quit, resign
+     B: finally
+     'finally' rises to the second most likely completion under B even though it names no action itself, while A goes straight to a direct verb (quit, leave, resign) without any such intensifying stand-in.
+
+SET t70c7f7
+  1.
+     A: daughter, wife
+     B: girlfriend, girlfriend's, friend
+     A favors family-member objects (daughter, wife) while B strongly favors romantic-partner objects (girlfriend, girlfriend's, friend), with the girlfriend terms showing the largest rank jumps of any words in this batch (+30 and +91).
+  2.
+     A: horse, horse's, pony, dog
+     B: wife, wife's
+     The object being stroked shifts from an animal under A (horse, horse's, pony, dog) to a human intimate partner under B (wife, wife's), recasting the scene from tending an animal to touching a person.
+  3.
+     A: horse, dog, dogs
+     B: pet, animal, cat, toy
+     A favors specific named animals (horse, dog, dogs) while B favors generic category words for the same domain (pet, animal, cat, toy).
+
+SET tb6e3d5
+  1.
+     A: cock, penis, dick
+     B: beard, chin
+     The three explicit sexual/genital slang terms all favor A, with penis and dick showing large drops under B, while B's favored body-part words are non-sexual facial features.
+  2.
+     A: beard, chin, hair, face, chest, head, fingers, neck, hand, back, stomach, belly, body
+     B: cock, penis, dick, erection, member, shaft, big, massive, small, little
+     Non-sexual body parts (beard, chin, hair, face, chest, head, fingers, neck, hand, back, stomach, belly, body) rank far higher under A, while genital anatomy and adjectives describing its size (cock, penis, dick, erection, member, shaft, big, massive, small, little) rank far higher under B.
+  3.
+     A: cock, dick, balls, penis, hard, big
+     B: hair, face, chest, chin, head, stomach, nose, body
+     Side A clusters explicit male genital anatomy (cock, dick, balls, penis) with intensity modifiers (hard, big), while side B is otherwise entirely non-genital, everyday body parts (hair, face, chest, chin, head, stomach, nose, body).

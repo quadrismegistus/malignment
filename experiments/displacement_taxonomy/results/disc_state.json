@@ -1,0 +1,402 @@
+{
+ "triads": [
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Range narrowing",
+   "b": "Same-referent register swap",
+   "ids": [
+    "r97dba1f",
+    "rc203b05",
+    "r4e43116"
+   ],
+   "odd": "r4e43116",
+   "items": [
+    "r97dba1f",
+    "r4e43116",
+    "rc203b05"
+   ],
+   "odd_pos": 2,
+   "tid": "tf19883"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "kind": "neg",
+   "a": "Blunt word, formal counterpart",
+   "b": "Withdrawal to redress",
+   "ids": [
+    "r31bfd4e",
+    "r3f968a7",
+    "r22d0464"
+   ],
+   "odd": "r22d0464",
+   "items": [
+    "r31bfd4e",
+    "r3f968a7",
+    "r22d0464"
+   ],
+   "odd_pos": 3,
+   "tid": "ta943de"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "pos",
+   "a": "Transgressive to permitted",
+   "b": null,
+   "ids": [
+    "r7a8495d",
+    "r7e14d30",
+    "rb789759"
+   ],
+   "odd": null,
+   "items": [
+    "rb789759",
+    "r7a8495d",
+    "r7e14d30"
+   ],
+   "odd_pos": null,
+   "tid": "tb5af78"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Same-referent register swap",
+   "b": "Recipient-class shift",
+   "ids": [
+    "r4e43116",
+    "rbde40e6",
+    "r7f2699e"
+   ],
+   "odd": "r7f2699e",
+   "items": [
+    "r7f2699e",
+    "rbde40e6",
+    "r4e43116"
+   ],
+   "odd_pos": 1,
+   "tid": "td1ce62"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Recipient-class shift",
+   "b": "Modifier entrainment",
+   "ids": [
+    "r17d1e06",
+    "r7f2699e",
+    "r2a2661b"
+   ],
+   "odd": "r2a2661b",
+   "items": [
+    "r17d1e06",
+    "r7f2699e",
+    "r2a2661b"
+   ],
+   "odd_pos": 3,
+   "tid": "t957127"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "pos",
+   "a": "Transgressive to permitted",
+   "b": null,
+   "ids": [
+    "r096d02f",
+    "r19adf27",
+    "r3f48db3"
+   ],
+   "odd": null,
+   "items": [
+    "r3f48db3",
+    "r19adf27",
+    "r096d02f"
+   ],
+   "odd_pos": null,
+   "tid": "tce035d"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Range narrowing",
+   "b": "Subtype to superordinate",
+   "ids": [
+    "r97dba1f",
+    "rc203b05",
+    "r61d8d3d"
+   ],
+   "odd": "r61d8d3d",
+   "items": [
+    "r61d8d3d",
+    "r97dba1f",
+    "rc203b05"
+   ],
+   "odd_pos": 1,
+   "tid": "t1e79f8"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "kind": "pos",
+   "a": "Generic verb to situated verb",
+   "b": null,
+   "ids": [
+    "r41083a9",
+    "r5dcda9f",
+    "r7ff5dfe"
+   ],
+   "odd": null,
+   "items": [
+    "r7ff5dfe",
+    "r5dcda9f",
+    "r41083a9"
+   ],
+   "odd_pos": null,
+   "tid": "t667a6b"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Same-referent register swap",
+   "b": "Modifier entrainment",
+   "ids": [
+    "r4e43116",
+    "rbde40e6",
+    "r2a2661b"
+   ],
+   "odd": "r2a2661b",
+   "items": [
+    "rbde40e6",
+    "r2a2661b",
+    "r4e43116"
+   ],
+   "odd_pos": 2,
+   "tid": "t154762"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "pos",
+   "a": "Transgressive to permitted",
+   "b": null,
+   "ids": [
+    "r19adf27",
+    "rd6b0e81",
+    "rf69eb30"
+   ],
+   "odd": null,
+   "items": [
+    "r19adf27",
+    "rf69eb30",
+    "rd6b0e81"
+   ],
+   "odd_pos": null,
+   "tid": "t8f4093"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "pos",
+   "a": "Transgressive to permitted",
+   "b": null,
+   "ids": [
+    "r7bd919f",
+    "rd6b0e81",
+    "rf69eb30"
+   ],
+   "odd": null,
+   "items": [
+    "rd6b0e81",
+    "r7bd919f",
+    "rf69eb30"
+   ],
+   "odd_pos": null,
+   "tid": "t9e54e5"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Transgressive to permitted",
+   "b": "Subtype to superordinate",
+   "ids": [
+    "r096d02f",
+    "r7e14d30",
+    "r61d8d3d"
+   ],
+   "odd": "r61d8d3d",
+   "items": [
+    "r61d8d3d",
+    "r096d02f",
+    "r7e14d30"
+   ],
+   "odd_pos": 1,
+   "tid": "t034e29"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Transgressive to permitted",
+   "b": "Possessive frame shift",
+   "ids": [
+    "rb789759",
+    "rd6b0e81",
+    "r3a5a609"
+   ],
+   "odd": "r3a5a609",
+   "items": [
+    "rb789759",
+    "r3a5a609",
+    "rd6b0e81"
+   ],
+   "odd_pos": 2,
+   "tid": "t33d065"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Recipient-class shift",
+   "b": "Possessive frame shift",
+   "ids": [
+    "r17d1e06",
+    "r7f2699e",
+    "r3a5a609"
+   ],
+   "odd": "r3a5a609",
+   "items": [
+    "r17d1e06",
+    "r3a5a609",
+    "r7f2699e"
+   ],
+   "odd_pos": 2,
+   "tid": "t351d4c"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "kind": "neg",
+   "a": "Blunt word, formal counterpart",
+   "b": "Non-naming stand-in",
+   "ids": [
+    "r31bfd4e",
+    "r3f968a7",
+    "ra9d21c2"
+   ],
+   "odd": "ra9d21c2",
+   "items": [
+    "r31bfd4e",
+    "r3f968a7",
+    "ra9d21c2"
+   ],
+   "odd_pos": 3,
+   "tid": "t022b5f"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "kind": "pos",
+   "a": "Generic verb to situated verb",
+   "b": null,
+   "ids": [
+    "r41083a9",
+    "r7edaf2e",
+    "rd4ca354"
+   ],
+   "odd": null,
+   "items": [
+    "r41083a9",
+    "r7edaf2e",
+    "rd4ca354"
+   ],
+   "odd_pos": null,
+   "tid": "tadde52"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Recipient-class shift",
+   "b": "Subtype to superordinate",
+   "ids": [
+    "r17d1e06",
+    "r7f2699e",
+    "r61d8d3d"
+   ],
+   "odd": "r61d8d3d",
+   "items": [
+    "r7f2699e",
+    "r17d1e06",
+    "r61d8d3d"
+   ],
+   "odd_pos": 3,
+   "tid": "t70c7f7"
+  },
+  {
+   "prompt": "He was written up for the third time this month, so he decided to",
+   "kind": "pos",
+   "a": "Generic verb to situated verb",
+   "b": null,
+   "ids": [
+    "r41083a9",
+    "r5dcda9f",
+    "r7edaf2e"
+   ],
+   "odd": null,
+   "items": [
+    "r5dcda9f",
+    "r41083a9",
+    "r7edaf2e"
+   ],
+   "odd_pos": null,
+   "tid": "t5a87a5"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "pos",
+   "a": "Transgressive to permitted",
+   "b": null,
+   "ids": [
+    "r7bd919f",
+    "r7e14d30",
+    "rb789759"
+   ],
+   "odd": null,
+   "items": [
+    "rb789759",
+    "r7e14d30",
+    "r7bd919f"
+   ],
+   "odd_pos": null,
+   "tid": "tb6e3d5"
+  },
+  {
+   "prompt": "He started stroking his",
+   "kind": "neg",
+   "a": "Recipient-class shift",
+   "b": "Same-referent register swap",
+   "ids": [
+    "r17d1e06",
+    "r7f2699e",
+    "rbde40e6"
+   ],
+   "odd": "rbde40e6",
+   "items": [
+    "rbde40e6",
+    "r17d1e06",
+    "r7f2699e"
+   ],
+   "odd_pos": 1,
+   "tid": "td064a3"
+  }
+ ],
+ "seed": "discriminate-d1",
+ "cores": {
+  "He started stroking his": {
+   "Transgressive to permitted": 10,
+   "Range narrowing": 2,
+   "Subtype to superordinate": 1,
+   "Same-referent register swap": 2,
+   "Recipient-class shift": 2,
+   "Modifier entrainment": 1,
+   "Possessive frame shift": 1
+  },
+  "He was written up for the third time this month, so he decided to": {
+   "Generic verb to situated verb": 5,
+   "Blunt word, formal counterpart": 2,
+   "Withdrawal to redress": 1,
+   "Non-naming stand-in": 1
+  }
+ }
+}

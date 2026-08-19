@@ -1,0 +1,201 @@
+Below are 10 sets of three descriptions, numbered.
+
+Every description was written by someone who was shown two lists of words, A and
+B, and asked what relation connected them. All of the descriptions in this task
+concern completions of ONE sentence, so the words will overlap heavily between
+them. Each writer worked alone and invented their own wording.
+
+For each set, decide whether one of the three describes a DIFFERENT KIND OF
+CHANGE from the other two.
+
+The question is about the kind of change from A to B. It is not about what the
+words refer to. Because every set concerns the same sentence, sorting by subject
+matter will not work and will give you the wrong answer: two descriptions can be
+about the same body part and describe different kinds of change, and two can be
+about quite different things and describe the same kind of change.
+
+If all three describe the same kind of change, answer `none`. Some of these sets
+contain no odd one out, and `none` is expected to be the right answer a fair
+part of the time. Do not hunt for a difference that is not there.
+
+For each set give:
+
+  triad       the set's id, copied exactly
+  odd         1, 2, 3, or none
+  basis       one sentence saying what the distinction rests on, or if you
+              answered none, what the three have in common. Be specific enough
+              that a reader could tell which descriptions you meant.
+  confidence  high / medium / low
+
+Answer every set. Do not skip one because it is hard; answer it and mark the
+confidence low.
+
+SET ta943de
+  1.
+     name: quit vs resign register
+     A: quit, leave, pack, run, give, stop, skip, go
+     B: resign, speak, talk, plead, take, turn
+     A favors blunt, informal exit words -- quit, leave, pack, run, give, stop, skip, go -- describing an impulsive walkout, while B favors more formal or procedural responses -- resign, speak, talk, plead, take, turn -- with resign standing as the formal counterpart to A's quit.
+  2.
+     name: informal quit vs formal resign
+     A: quit, leave, skip, stop, go
+     B: resign, seek, change, start
+     A favors blunt, informal words for leaving or avoiding the job (quit, leave, skip, stop, go), while B favors the more formal, deliberate professional-register counterparts for addressing the situation (resign, seek, change, start).
+  3.
+     name: resignation/confession vs formal grievance
+     A: quit, fess, stop, give, hand
+     B: file, write, take, put, change
+     A favors words of quitting or confessing (quit, fess, stop, give, hand) while B favors words of taking formal, written, procedural action (file, write, take, put, change).
+
+SET td1ce62
+  1.
+     name: family member vs adult partner
+     A: daughter, wife
+     B: girlfriend, girlfriend's, friend
+     A favors family-member objects (daughter, wife) while B strongly favors romantic-partner objects (girlfriend, girlfriend's, friend), with the girlfriend terms showing the largest rank jumps of any words in this batch (+30 and +91).
+  2.
+     name: informal vs clinical sexual register
+     A: dick
+     B: cock, penis
+     Where sexual content is named, A prefers the informal dick while B prefers the more explicit/clinical cock and penis.
+  3.
+     name: vulgar-synonym pool selection for the same referent
+     A: dick, member, shaft
+     B: cock, meat, rod, prick, penis
+     Both conditions overwhelmingly select vulgar or slang synonyms for the same body part, but they favor different words from that synonym set: A prefers 'dick', 'member', 'shaft'; B prefers 'cock', 'meat', 'rod', 'prick', and the clinical 'penis'.
+
+SET tce035d
+  1.
+     name: genital vocabulary to innocuous body part
+     A: cock, dick, penis, shaft, member, erection, hard, thick, big, length
+     B: chin, fingers, thumb, hand, finger, hands, cat
+     A is explicit sexual/genital vocabulary describing an erect penis (cock, dick, penis, shaft, member, erection, hard, thick, big, length), while B is innocuous, non-sexual body parts and one pet (chin, fingers, thumb, hand, finger, hands, cat).
+  2.
+     name: genital to relational other
+     A: penis, dick, cock, pussy, ass
+     B: daughter, sister, wife, girlfriend
+     A's top words are explicit sexual genital terms for his own body (penis, dick, cock, pussy, ass), while B's words include relational nouns naming another person (daughter, sister, wife, girlfriend) whom he might be stroking non-sexually, as in stroking his daughter's hair.
+  3.
+     name: genital vs facial-hair displacement
+     A: cock, penis, dick, crotch, erection
+     B: beard, chin, goatee, mustache, hair
+     A favors explicit sexual anatomy (cock, penis, dick, crotch, erection) while B favors facial-hair and grooming nouns naming a non-sexual object of the same verb (beard, chin, goatee, mustache, hair).
+
+SET t667a6b
+  1.
+     name: generic verb vs named job-transition
+     A: get, come, put, do, have, try, call
+     B: leave, resign, return, visit, move, change
+     The words that move most strongly toward B are ones naming a specific job-departure action (resign +8, return +12, visit +14, leave +6, move +4), while the generic light verbs common to both lists (get, come, put, do, have / take, make, give, write, start) show comparatively little movement.
+  2.
+     name: generic light verb vs idiomatic response
+     A: do, take, give, put, be, have, make, keep, run, try
+     B: clean, turn, step, lay, avoid, change, plead, call
+     Side A is dominated by generic light verbs that carry no scenario-specific content on their own (do, take, give, put, be, have, make, keep, run, try), while side B favors verbs that resolve into idiomatic, situation-specific coping responses (clean, turn, step, lay, avoid, change, plead, call).
+  3.
+     name: generic verb vs consequence-specific verb
+     A: go, take, get, make, do, give, call, try, write, come, move, leave, stay, start, stop, be, put
+     B: turn, quit, resign, hide, surrender, enlist, run, apply, seek, skip
+     A favors semantically light, general-purpose verbs that could complete almost any decision sentence regardless of context (go, take, get, make, do, give, call, try, write, come, move, leave, stay, start, stop, be, put), while B favors verbs specifically meaningful given that he's just been written up for the third time -- leaving the job (quit, resign), evading consequences (hide, run, skip, surrender), or seeking an alternative (enlist, apply, seek).
+
+SET t8f4093
+  1.
+     name: genital to relational other
+     A: penis, dick, cock, pussy, ass
+     B: daughter, sister, wife, girlfriend
+     A's top words are explicit sexual genital terms for his own body (penis, dick, cock, pussy, ass), while B's words include relational nouns naming another person (daughter, sister, wife, girlfriend) whom he might be stroking non-sexually, as in stroking his daughter's hair.
+  2.
+     name: explicit sexual vocabulary vs facial-hair/pet vocabulary
+     A: cock, penis, dick, shaft, member, erection, erect, crotch, hard
+     B: beard, chin, mustache, goatee, hair, fur, cat, dog
+     A is composed of genital or sexually explicit words (cock, penis, dick, shaft, member, erection, erect, crotch, hard), while B is composed of facial-hair and pet/animal words (beard, chin, mustache, goatee, hair, fur, cat, dog), replacing an explicit sexual scene with a mundane grooming or pet-stroking one.
+  3.
+     name: sexualized vs innocuous touch
+     A: chin, cheek, face, hand, neck, fingers, forehead, chest, stomach
+     B: cock, penis, wife, wife's
+     Explicit sexual-anatomy words cock and penis and the intimate-partner words wife and wife's rise sharply under B while A stays confined to non-genital body parts like chin, cheek, face, hand, neck, and forehead, so the divergence is chiefly about whether the stroking is sexualized.
+
+SET t034e29
+  1.
+     name: named animal vs generic animal category
+     A: horse, dog, dogs
+     B: pet, animal, cat, toy
+     A favors specific named animals (horse, dog, dogs) while B favors generic category words for the same domain (pet, animal, cat, toy).
+  2.
+     name: genital vs facial-hair displacement
+     A: cock, penis, dick, crotch, erection
+     B: beard, chin, goatee, mustache, hair
+     A favors explicit sexual anatomy (cock, penis, dick, crotch, erection) while B favors facial-hair and grooming nouns naming a non-sexual object of the same verb (beard, chin, goatee, mustache, hair).
+  3.
+     name: anatomy to genitals
+     A: beard, chin, hair, face, chest, head, fingers, neck, hand, back, stomach, belly, body
+     B: cock, penis, dick, erection, member, shaft, big, massive, small, little
+     Non-sexual body parts (beard, chin, hair, face, chest, head, fingers, neck, hand, back, stomach, belly, body) rank far higher under A, while genital anatomy and adjectives describing its size (cock, penis, dick, erection, member, shaft, big, massive, small, little) rank far higher under B.
+
+SET t351d4c
+  1.
+     name: animal to human partner
+     A: horse, horse's, pony, dog
+     B: wife, wife's
+     The object being stroked shifts from an animal under A (horse, horse's, pony, dog) to a human intimate partner under B (wife, wife's), recasting the scene from tending an animal to touching a person.
+  2.
+     name: possessive to direct relation term
+     A: wife's
+     B: wife, partner
+     A favors the possessive construction 'wife's', which sets up a further body-part noun, while B favors the bare relation terms 'wife' and, more strongly, the degendered 'partner'.
+  3.
+     name: family member vs adult partner
+     A: daughter, wife
+     B: girlfriend, girlfriend's, friend
+     A favors family-member objects (daughter, wife) while B strongly favors romantic-partner objects (girlfriend, girlfriend's, friend), with the girlfriend terms showing the largest rank jumps of any words in this batch (+30 and +91).
+
+SET tadde52
+  1.
+     name: generic verb vs consequence-specific verb
+     A: go, take, get, make, do, give, call, try, write, come, move, leave, stay, start, stop, be, put
+     B: turn, quit, resign, hide, surrender, enlist, run, apply, seek, skip
+     A favors semantically light, general-purpose verbs that could complete almost any decision sentence regardless of context (go, take, get, make, do, give, call, try, write, come, move, leave, stay, start, stop, be, put), while B favors verbs specifically meaningful given that he's just been written up for the third time -- leaving the job (quit, resign), evading consequences (hide, run, skip, surrender), or seeking an alternative (enlist, apply, seek).
+  2.
+     name: context-generic vs context-responsive verb
+     A: see, visit, play, buy, come
+     B: focus, skip, stop, change, sit
+     A's strongest movers (see, visit, play, buy, come) are ordinary everyday verbs unconnected to the disciplinary setup, while B's strongest movers (focus, skip, stop, change, sit) read as direct behavioral responses to having been written up: focusing, stopping the behavior, changing his ways, or serving a consequence.
+  3.
+     name: context-relevant vs generic completion
+     A: write, go, do, try, make, take, look, read, visit, ask, see, put
+     B: leave, quit, resign, pack, skip, stop, give, get, seek, move, turn
+     B supplies words tightly tied to the specific narrative of being disciplined at work and deciding whether to quit (leave, quit, resign, pack, skip, seek) while A supplies generic verbs with no particular connection to that scenario (write, go, do, try, make, take, look, read).
+
+SET t5a87a5
+  1.
+     name: generic light verb vs idiomatic response
+     A: do, take, give, put, be, have, make, keep, run, try
+     B: clean, turn, step, lay, avoid, change, plead, call
+     Side A is dominated by generic light verbs that carry no scenario-specific content on their own (do, take, give, put, be, have, make, keep, run, try), while side B favors verbs that resolve into idiomatic, situation-specific coping responses (clean, turn, step, lay, avoid, change, plead, call).
+  2.
+     name: generic verb vs consequence-specific verb
+     A: go, take, get, make, do, give, call, try, write, come, move, leave, stay, start, stop, be, put
+     B: turn, quit, resign, hide, surrender, enlist, run, apply, seek, skip
+     A favors semantically light, general-purpose verbs that could complete almost any decision sentence regardless of context (go, take, get, make, do, give, call, try, write, come, move, leave, stay, start, stop, be, put), while B favors verbs specifically meaningful given that he's just been written up for the third time -- leaving the job (quit, resign), evading consequences (hide, run, skip, surrender), or seeking an alternative (enlist, apply, seek).
+  3.
+     name: context-generic vs context-responsive verb
+     A: see, visit, play, buy, come
+     B: focus, skip, stop, change, sit
+     A's strongest movers (see, visit, play, buy, come) are ordinary everyday verbs unconnected to the disciplinary setup, while B's strongest movers (focus, skip, stop, change, sit) read as direct behavioral responses to having been written up: focusing, stopping the behavior, changing his ways, or serving a consequence.
+
+SET td064a3
+  1.
+     name: informal vs clinical sexual register
+     A: dick
+     B: cock, penis
+     Where sexual content is named, A prefers the informal dick while B prefers the more explicit/clinical cock and penis.
+  2.
+     name: animal to human partner
+     A: horse, horse's, pony, dog
+     B: wife, wife's
+     The object being stroked shifts from an animal under A (horse, horse's, pony, dog) to a human intimate partner under B (wife, wife's), recasting the scene from tending an animal to touching a person.
+  3.
+     name: family member vs adult partner
+     A: daughter, wife
+     B: girlfriend, girlfriend's, friend
+     A favors family-member objects (daughter, wife) while B strongly favors romantic-partner objects (girlfriend, girlfriend's, friend), with the girlfriend terms showing the largest rank jumps of any words in this batch (+30 and +91).
