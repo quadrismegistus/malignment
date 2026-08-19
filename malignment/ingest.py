@@ -307,10 +307,23 @@ def _cells(path):
                   bool(d.get("prompt_cache")), bool(d.get("topup"))))
             if k[0] is None or k[1] is None:
                 continue
-            _key_body_agree(d, path)
             if k in seen:
                 dups += 1
             seen[k] = d
+    #: **VALIDATE THE SURVIVORS, NOT EVERY LINE.** The guard ran per line and
+    #: before dedup, so a SUPERSEDED record could refuse the whole corpus --
+    #: which is what happened: 546 RWKV topup records with a bad prompt_cache
+    #: stamp were deleted from the stash, and the stash being APPEND-ONLY the
+    #: lines stayed, so the ingest went on refusing on dead data that would never
+    #: have been filed.
+    #:
+    #: This is a narrowing of the guard and worth being explicit about. What it
+    #: still catches is unchanged: a contradictory record that WINS its key --
+    #: the only kind that can reach ClickHouse. What it stops doing is blocking
+    #: on records it was going to discard anyway. `path` is kept in the message
+    #: so the producer is still named.
+    for _k, _d in seen.items():
+        _key_body_agree(_d, path)
     return seen, dups
 
 

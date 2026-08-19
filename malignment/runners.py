@@ -588,6 +588,36 @@ class TWPRunner:
         ld = load_for_twp(ck, dict_path=dict_path, purge=False, say=say)
         model, tok, dev = ld.model, ld.tok, ld.dev
         bmask, cjk, pol = ld.bmask, ld.cjk, ld.bos_policy
+
+        #: **PROBE AFTER THE LOAD, THEN RE-KEY.** `topup` never probed, so on an
+        #: architecture that cannot hold a prompt cache it keyed the REQUESTED
+        #: True while the body -- inherited from pass 1, which DID probe --
+        #: carried False. 546 RWKV records were written that way and
+        #: `ingest._key_body_agree` refused the entire corpus rather than file a
+        #: cell whose provenance is two different claims. Correct behaviour from
+        #: the guard; the producer was wrong.
+        #:
+        #: It must come after `load_for_twp` and NOT before: my first attempt put
+        #: it above, where `model` is unbound, so it caught a NameError and
+        #: disabled the cache for every model -- the identical mistake this file
+        #: already documents 200 lines up for the pass-1 probe, made again in the
+        #: other pass on the same day. `todo` is recomputed because `base_key`
+        #: reads the flag, so a flip changes which cells count as already done.
+        if rules is not None and T.USE_PROMPT_CACHE:
+            try:
+                T.prompt_cache(model, T._prompt_ids(tok, todo[0], pol)[0], dev)
+            except Exception as e:                              # noqa: BLE001
+                T.USE_PROMPT_CACHE = False
+                say("  prompt-cache UNAVAILABLE (%s) -- cells keyed "
+                    "prompt_cache=False" % str(e)[:44])
+                todo = [p for p in sorted(todo_words)
+                        if p in have1 and base_key(p) not in st]
+                if limit:
+                    todo = todo[:limit]
+                say("  todo RECOMPUTED at prompt_cache=False: %d to run" % len(todo))
+                if not todo:
+                    return dict(model=ck.model_id, written=0, refused=0, skipped=0)
+
         n_ok = n_ref = n_skip = 0
         #: ## THE CURRENCY SLOT IS A CLOSED QUESTION. DO NOT RE-OPEN IT.
         #:
@@ -674,9 +704,28 @@ class TWPRunner:
                     fh.write(json.dumps({"model": ck.model_id, "prompt": p,
                                          "conservation": cons}, ensure_ascii=False) + "\n")
                 continue
-            st[base_key(p)] = dict(rec1, rows=rows, residual=res, conservation=cons,
-                                   topup=True, topup_words=len(got),
-                                   topup_mass=total, topup_refused=len(refused))
+            #: **THE BODY IS STAMPED FROM THE KEY, NOT INHERITED FROM `rec1`.**
+            #: `dict(rec1, ...)` carries pass 1's OWN instrument fields forward,
+            #: and pass 1 may have run under a different one: on RWKV the cache
+            #: probe in `run()` flipped prompt_cache to False, so pass 1's body
+            #: says False -- while `topup` never probes at all and keys the
+            #: REQUESTED True. 546 records were written with key and body
+            #: disagreeing, and `ingest._key_body_agree` refused the whole
+            #: corpus rather than file a cell whose provenance is two claims.
+            #:
+            #: It is the same defect as the pass-1 `todo` computed before the
+            #: probe, in the other pass, found the same day. The key is the
+            #: instrument; anything describing the instrument comes FROM it.
+            _k = base_key(p)
+            #: `topup` is NOT passed explicitly: it is in `_k`, and passing both
+            #: is `dict() got multiple values for keyword argument 'topup'`.
+            #: The key is the single source for every instrument field, which is
+            #: the whole point of stamping from it.
+            st[_k] = dict(rec1, rows=rows, residual=res, conservation=cons,
+                          topup_words=len(got), topup_mass=total,
+                          topup_refused=len(refused),
+                          **{f: v for f, v in _k.items()
+                             if f not in ("model", "prompt")})
             n_ok += 1
             if verbose and i % 200 == 0:
                 say("    %d/%d  ok=%d refused=%d" % (i, len(todo), n_ok, n_ref))

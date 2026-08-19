@@ -51,6 +51,13 @@ def main():
     ap.add_argument("--cache", action="store_true",
                     help="prompt KV cache: ~4.5x, NOT bit-identical, part of the key")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--topup", action="store_true",
+                    help="PASS 2 instead of pass 1: score_words4 over the lineage "
+                         "union. Lives here because this is the per-model entry "
+                         "point the queue spawns with the model's OWN venv -- "
+                         "topup_lineage.py ran everything in one interpreter and "
+                         "died on OLMo-2's tie_word_embeddings at 27 of 72.")
+    ap.add_argument("--root", default=None, help="lineage root for --topup")
     ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None,
                     help="measure one TRANCHE of the population instead of all "
                          "of it. See the note below on why the tranches differ "
@@ -121,6 +128,10 @@ def main():
           % (a.model, V4.ADOPTED.label(), bool(a.cache), a.only or "ALL", len(prompts),
              sum(1 for p in prompts if T.is_cjk(p))), flush=True)
     try:
+        if a.topup:
+            from malignment.runners import TWPRunner
+            return TWPRunner(ck).topup(rules=V4.ADOPTED, root=a.root,
+                                       limit=a.limit, prompts=prompts)
         return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit)
     finally:
         sys.stdout = tee.stream

@@ -20,8 +20,13 @@ flight and nothing else. Do NOT add a `--limit` and treat the remainder as done.
 """
 import argparse
 import os
+import subprocess
 import sys
 import time
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from venvs import venv_for  # noqa: E402
 
 from malignment import roster, twp as T
 from malignment.prompts import Prompts
@@ -97,13 +102,36 @@ def main():
         for i, m in enumerate(members, 1):
             t0 = time.time()
             print("\n[%d/%d] %s" % (i, len(members), m), flush=True)
-            ck = Checkpoint(m)
-            os.makedirs(os.path.dirname(ck.stash(PRODUCER).path), exist_ok=True)
-            r = TWPRunner(ck).topup(rules=V4.ADOPTED, root=root_of[m],
-                                    prompts=prompts)
-            r["minutes"] = round((time.time() - t0) / 60.0, 1)
-            out.append(r)
-            print("  %s" % r, flush=True)
+            #: **ONE MODEL MUST NOT END THE SWEEP, AND EACH NEEDS ITS OWN VENV.**
+            #: This loop used to call TWPRunner in-process, so every model ran
+            #: under whichever interpreter launched the script. OLMo-2-0425-1B
+            #: declares tf457, got .venv, raised `Validation error for field
+            #: 'tie_word_embeddings'` -- and took the whole run down at 27 of 72,
+            #: losing the 45 after it for a reason that had nothing to do with
+            #: them.
+            #:
+            #: `queue_v4.py` solved both years ago and this file did not reuse it:
+            #: spawn the per-model entry point with `venvs.venv_for(m)`, record a
+            #: failure, move on. Third time this week a driver ignored the roster's
+            #: per-model env and the fourth place the same lesson has had to land.
+            py = os.path.join(venv_for(m), "bin", "python")
+            cmd = [py, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
+                   "--model", m, "--cache", "--topup", "--root", root_of[m]]
+            if a.only:
+                cmd += ["--only", a.only]
+            r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+            mins = round((time.time() - t0) / 60.0, 1)
+            tail = [l for l in (r.stdout or "").splitlines() if l.strip()][-2:]
+            if r.returncode:
+                err = [l for l in (r.stderr or "").splitlines() if l.strip()][-1:]
+                print("  exit=%d  %.1f min  FAILED: %s"
+                      % (r.returncode, mins, (err or tail or ["?"])[-1][:110]), flush=True)
+                out.append({"model": m, "venv": os.path.basename(venv_for(m)),
+                            "error": (err or ["?"])[-1][:200], "minutes": mins})
+                continue
+            print("  exit=0  %.1f min  %s" % (mins, (tail or ["?"])[-1][:110]), flush=True)
+            out.append({"model": m, "venv": os.path.basename(venv_for(m)),
+                        "minutes": mins, "tail": (tail or [""])[-1][:200]})
     finally:
         sys.stdout = tee.stream
         tee.close()
