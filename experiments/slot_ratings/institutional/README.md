@@ -464,3 +464,95 @@ min_prob eligibility, none of them in these prompts.
 **Coming:** the v4 topup will give non-zero twp for the union of endpoints' lineages, at which
 point every word has base mass and the arm A / arm B split dissolves. The ratings key on
 (prompt, word) and survive that transition untouched; only the population rule changes.
+
+## 11. Was the base already proceduralised? F21's claim as a level
+
+Producer: `base_side_f21.py`. Table: `results/base_side/f21.json`.
+
+Everything above this section measures movement, and F21's "deference already
+present in pretraining, no emancipatory outside" is a claim about a LEVEL. A
+movement statistic cannot test it: a word already dominant in the base has
+nowhere to rise, so an inherited disposition reads as no effect. The measure is
+the mass-weighted conditional mean used in `slot_ratings/identity/base_side.py`,
+`E[scale|rated] = sum p(w)r(w) / sum p(w)`, computed per arm with no eligibility
+gate, which also lets the arm A and arm B ratings merge.
+
+Position labels are the prompts table's own `subdomain`, 12 individual against
+12 institutional. **Eight lineages**, which is the binding constraint on
+everything below.
+
+### The decomposition: aligned_gap = base_gap + delta_gap
+
+Gap is institution minus individual, per lineage, median over 8.
+
+| scale | base gap | aligned gap | delta gap | p base | p delta | inherited |
+| --- | --- | --- | --- | --- | --- | --- |
+| collective | −0.974 | −1.035 | −0.147 | 0.0078 | 0.15 | 94% |
+| mediation | −0.974 | −1.173 | −0.271 | 0.0078 | 0.20 | 83% |
+| arousal | −0.688 | −0.932 | −0.165 | 0.0078 | 0.38 | 74% |
+| deference | **+0.343** | **+0.483** | **+0.031** | **0.016** | **0.64** | **71%** |
+| specificity | −0.576 | −0.822 | −0.185 | 0.0078 | 0.15 | 70% |
+| agency | −0.384 | −0.653 | −0.177 | 0.0078 | 0.25 | 59% |
+| procedural | +0.140 | +0.274 | −0.024 | 0.078 | 0.38 | 51% |
+| abstraction | +0.029 | +0.302 | +0.103 | 0.31 | 0.0078 | 10% |
+
+**F21's level claim is supported.** The base already separates the institutional
+from the individual position, unanimously across all 8 lineages on collective,
+mediation, arousal, specificity and agency, and on 7 of 8 for deference. On
+deference specifically, the aligned gap is +0.483 and alignment's own
+contribution to it is +0.031, which is not significant (p=0.64, 3 of 8
+lineages). Roughly seven-tenths of the deference gap the aligned model shows was
+already in the base.
+
+`abstraction` is the one scale that inverts this: 10% inherited, and the only
+delta that reaches significance. Whatever else alignment does to these prompts,
+raising the institution's abstraction is its own contribution.
+
+**Do not quote the inherited fraction where the aligned gap is near zero.**
+`delay` reads 586% and `vocalisation` 248% because they are ratios with a
+denominator close to zero, not because alignment reversed something dramatic.
+They are omitted from the table for that reason.
+
+### The differential-movement claim is underpowered here, not refuted
+
+F21 also reports that alignment proceduralises the individual and not the
+institution. That is a claim about deltas, and on these 8 lineages:
+
+| scale | delta indiv | delta inst | difference | p |
+| --- | --- | --- | --- | --- |
+| procedural | +0.2953 | +0.1372 | +0.1113 | 0.055 (6/8) |
+| mediation | +0.4290 | +0.1157 | +0.3256 | 0.11 |
+| assertiveness | +0.0956 | −0.0925 | +0.2623 | 0.11 |
+| abstraction | +0.2435 | +0.3365 | −0.1168 | 0.016 |
+
+`procedural` is in F21's direction and does not reach significance. **With 8
+lineages a two-sided Wilcoxon cannot return anything below 0.0078, and 7 of 8
+gives 0.055, so this table can only detect near-unanimous effects.** Reading the
+non-significant rows as absence would be reading the power ceiling as a result.
+The honest statement is that the level claim is tested and supported here and the
+differential-movement claim is not tested with adequate power.
+
+### Coverage, and why it is not what produces the gap
+
+Rated mass is much thinner than in the identity sweeps (0.585 to 0.767 there):
+
+```
+             base    aligned
+individual   0.153   0.228
+institution  0.256   0.358
+```
+
+Institutional prompts carry about 1.7x the rated mass, so the two positions'
+conditional means are taken over different fractions of the distribution. Two
+checks say this is not what produces the gap:
+
+- Coverage does not predict the level. rho(coverage, E_base) is −0.028 for
+  deference, −0.134 procedural, +0.105 agency, +0.089 collective, none
+  significant over 165 cells.
+- Clipping both positions to their shared coverage band strengthens rather than
+  weakens every gap: deference +0.343 to +0.492, procedural +0.140 to +0.407
+  (p=0.016), agency −0.384 to −0.526.
+
+The clip does not fully equalise the medians (0.186 against 0.252), so the first
+check is the load-bearing one. The remaining exposure is that the unrated 65 to
+85% of the mass could behave differently, which this design cannot see.
