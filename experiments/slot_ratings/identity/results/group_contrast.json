@@ -1,0 +1,2405 @@
+{
+ "_what": "per (sweep, scale, group) deviation from the mean of the other groups on the same lineage; BH-corrected over groups",
+ "rows": [
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Muslims",
+   "delta": 0.16348092682227136,
+   "up": 13,
+   "n": 14,
+   "p": 0.013427734375,
+   "q": 0.064453125
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Native Americans",
+   "delta": 0.1334444785553298,
+   "up": 13,
+   "n": 14,
+   "p": 0.000244140625,
+   "q": 0.005859375
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Christians",
+   "delta": 0.10119712723322963,
+   "up": 9,
+   "n": 14,
+   "p": 0.0166015625,
+   "q": 0.06640625
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Mexicans",
+   "delta": 0.08990763549931693,
+   "up": 12,
+   "n": 14,
+   "p": 0.0030517578125,
+   "q": 0.0244140625
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "black people",
+   "delta": 0.0615753974868007,
+   "up": 10,
+   "n": 14,
+   "p": 0.0494384765625,
+   "q": 0.1483154296875
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "men",
+   "delta": 0.024389691334625714,
+   "up": 8,
+   "n": 14,
+   "p": 0.71484375,
+   "q": 0.7798295454545454
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Israelis",
+   "delta": 0.015202684984055215,
+   "up": 8,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.7151227678571428
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Somalis",
+   "delta": 0.012333140914143791,
+   "up": 8,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.7151227678571428
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "women",
+   "delta": 0.01105474729018508,
+   "up": 6,
+   "n": 14,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Palestinians",
+   "delta": 0.0028539659266097464,
+   "up": 5,
+   "n": 14,
+   "p": 0.5416259765625,
+   "q": 0.7151227678571428
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "African-Americans",
+   "delta": -0.01602119178393434,
+   "up": 9,
+   "n": 14,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Americans",
+   "delta": -0.016027598540164698,
+   "up": 6,
+   "n": 14,
+   "p": 0.5830078125,
+   "q": 0.7151227678571428
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Africans",
+   "delta": -0.023435151700427488,
+   "up": 3,
+   "n": 14,
+   "p": 0.0784912109375,
+   "q": 0.18837890625
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Jews",
+   "delta": -0.024204328452838462,
+   "up": 6,
+   "n": 14,
+   "p": 0.5416259765625,
+   "q": 0.7151227678571428
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Latinos",
+   "delta": -0.025414665629698793,
+   "up": 5,
+   "n": 14,
+   "p": 0.42626953125,
+   "q": 0.639404296875
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "white people",
+   "delta": -0.029277191101648788,
+   "up": 4,
+   "n": 14,
+   "p": 0.216552734375,
+   "q": 0.43310546875
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "students",
+   "delta": -0.03040330230040138,
+   "up": 5,
+   "n": 14,
+   "p": 0.42626953125,
+   "q": 0.639404296875
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Nigerians",
+   "delta": -0.03560752938081136,
+   "up": 5,
+   "n": 14,
+   "p": 0.3909912109375,
+   "q": 0.639404296875
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Turks",
+   "delta": -0.035663224729643554,
+   "up": 4,
+   "n": 14,
+   "p": 0.13525390625,
+   "q": 0.2950994318181818
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Arabs",
+   "delta": -0.0415712552152025,
+   "up": 4,
+   "n": 14,
+   "p": 0.0784912109375,
+   "q": 0.18837890625
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Russians",
+   "delta": -0.044870693955342475,
+   "up": 6,
+   "n": 14,
+   "p": 0.267578125,
+   "q": 0.49399038461538464
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Chinese",
+   "delta": -0.07981616396458474,
+   "up": 2,
+   "n": 14,
+   "p": 0.0245361328125,
+   "q": 0.08412388392857142
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Asians",
+   "delta": -0.09927157419500596,
+   "up": 4,
+   "n": 14,
+   "p": 0.008544921875,
+   "q": 0.05126953125
+  },
+  {
+   "sweep": "room",
+   "scale": "abstraction",
+   "group": "Italians",
+   "delta": -0.11385592509686343,
+   "up": 3,
+   "n": 14,
+   "p": 0.0030517578125,
+   "q": 0.0244140625
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "students",
+   "delta": 0.15146799263936453,
+   "up": 12,
+   "n": 14,
+   "p": 0.0030517578125,
+   "q": 0.03662109375
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Palestinians",
+   "delta": 0.10130865591798205,
+   "up": 12,
+   "n": 14,
+   "p": 0.020263671875,
+   "q": 0.1177734375
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "men",
+   "delta": 0.07707323329763727,
+   "up": 10,
+   "n": 14,
+   "p": 0.0494384765625,
+   "q": 0.1695033482142857
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Americans",
+   "delta": 0.07155417245490735,
+   "up": 8,
+   "n": 14,
+   "p": 0.0784912109375,
+   "q": 0.20930989583333331
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Israelis",
+   "delta": 0.06747796425379213,
+   "up": 9,
+   "n": 14,
+   "p": 0.2957763671875,
+   "q": 0.4732421875
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "women",
+   "delta": 0.05644092764887049,
+   "up": 10,
+   "n": 14,
+   "p": 0.090576171875,
+   "q": 0.2173828125
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Christians",
+   "delta": 0.04711365007214477,
+   "up": 11,
+   "n": 14,
+   "p": 0.10400390625,
+   "q": 0.22691761363636362
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Somalis",
+   "delta": 0.030710984365951516,
+   "up": 9,
+   "n": 14,
+   "p": 0.3258056640625,
+   "q": 0.48870849609375
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "African-Americans",
+   "delta": 0.027906549382935474,
+   "up": 6,
+   "n": 14,
+   "p": 0.9515380859375,
+   "q": 0.9515380859375
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Italians",
+   "delta": 0.01724864685417803,
+   "up": 7,
+   "n": 14,
+   "p": 0.7608642578125,
+   "q": 0.7939453125
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Arabs",
+   "delta": -0.0036510190008596263,
+   "up": 6,
+   "n": 14,
+   "p": 0.7608642578125,
+   "q": 0.7939453125
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Nigerians",
+   "delta": -0.011194341582291633,
+   "up": 6,
+   "n": 14,
+   "p": 0.6697998046875,
+   "q": 0.7654854910714285
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Russians",
+   "delta": -0.014325102257363873,
+   "up": 5,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.75087890625
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Asians",
+   "delta": -0.031703155178386705,
+   "up": 6,
+   "n": 14,
+   "p": 0.3909912109375,
+   "q": 0.5213216145833333
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "white people",
+   "delta": -0.03173708052349217,
+   "up": 3,
+   "n": 14,
+   "p": 0.3575439453125,
+   "q": 0.5047679227941176
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Mexicans",
+   "delta": -0.03363916517405174,
+   "up": 5,
+   "n": 14,
+   "p": 0.172607421875,
+   "q": 0.34521484375
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Africans",
+   "delta": -0.04143519920660493,
+   "up": 2,
+   "n": 14,
+   "p": 0.0494384765625,
+   "q": 0.1695033482142857
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Native Americans",
+   "delta": -0.04195947997839403,
+   "up": 6,
+   "n": 14,
+   "p": 0.463134765625,
+   "q": 0.5850123355263157
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Jews",
+   "delta": -0.04753876677771121,
+   "up": 5,
+   "n": 14,
+   "p": 0.216552734375,
+   "q": 0.3997896634615385
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Latinos",
+   "delta": -0.052001216220562696,
+   "up": 5,
+   "n": 14,
+   "p": 0.2412109375,
+   "q": 0.41350446428571425
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "black people",
+   "delta": -0.053780109497168826,
+   "up": 4,
+   "n": 14,
+   "p": 0.0245361328125,
+   "q": 0.1177734375
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Chinese",
+   "delta": -0.05717241843108917,
+   "up": 3,
+   "n": 14,
+   "p": 0.020263671875,
+   "q": 0.1177734375
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Turks",
+   "delta": -0.06127620295781508,
+   "up": 3,
+   "n": 14,
+   "p": 0.0579833984375,
+   "q": 0.1739501953125
+  },
+  {
+   "sweep": "room",
+   "scale": "termination",
+   "group": "Muslims",
+   "delta": -0.1668895201019719,
+   "up": 2,
+   "n": 14,
+   "p": 0.001220703125,
+   "q": 0.029296875
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Italians",
+   "delta": 0.10983858038137954,
+   "up": 12,
+   "n": 14,
+   "p": 0.0030517578125,
+   "q": 0.0244140625
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "women",
+   "delta": 0.09531773872750327,
+   "up": 11,
+   "n": 14,
+   "p": 0.067626953125,
+   "q": 0.2705078125
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Africans",
+   "delta": 0.07056075547916629,
+   "up": 10,
+   "n": 14,
+   "p": 0.153076171875,
+   "q": 0.3673828125
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "students",
+   "delta": 0.06570963152199824,
+   "up": 8,
+   "n": 14,
+   "p": 0.42626953125,
+   "q": 0.639404296875
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Chinese",
+   "delta": 0.06316850205439944,
+   "up": 9,
+   "n": 14,
+   "p": 0.0245361328125,
+   "q": 0.147216796875
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Mexicans",
+   "delta": 0.055790095078793636,
+   "up": 9,
+   "n": 14,
+   "p": 0.118896484375,
+   "q": 0.31705729166666663
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "African-Americans",
+   "delta": 0.04483655843619252,
+   "up": 8,
+   "n": 14,
+   "p": 0.3258056640625,
+   "q": 0.5585239955357143
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Arabs",
+   "delta": 0.030405274686553404,
+   "up": 7,
+   "n": 14,
+   "p": 0.855224609375,
+   "q": 0.8924082880434783
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Latinos",
+   "delta": 0.0235916183211436,
+   "up": 8,
+   "n": 14,
+   "p": 0.267578125,
+   "q": 0.53515625
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Americans",
+   "delta": 0.023107278831742767,
+   "up": 8,
+   "n": 14,
+   "p": 0.5015869140625,
+   "q": 0.6687825520833333
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Asians",
+   "delta": 0.02273882721901834,
+   "up": 8,
+   "n": 14,
+   "p": 0.5416259765625,
+   "q": 0.6841591282894737
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Native Americans",
+   "delta": 0.01700370601861403,
+   "up": 6,
+   "n": 14,
+   "p": 0.7608642578125,
+   "q": 0.8300337357954545
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Palestinians",
+   "delta": 0.011779909263567622,
+   "up": 8,
+   "n": 14,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Somalis",
+   "delta": -0.014937913140626587,
+   "up": 6,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.7151227678571428
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Russians",
+   "delta": -0.022788776022136005,
+   "up": 6,
+   "n": 14,
+   "p": 0.3909912109375,
+   "q": 0.6255859375
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Turks",
+   "delta": -0.026117310042764838,
+   "up": 5,
+   "n": 14,
+   "p": 0.5015869140625,
+   "q": 0.6687825520833333
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Jews",
+   "delta": -0.026543545950434337,
+   "up": 5,
+   "n": 14,
+   "p": 0.3258056640625,
+   "q": 0.5585239955357143
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "white people",
+   "delta": -0.033837858262537726,
+   "up": 7,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.7151227678571428
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Nigerians",
+   "delta": -0.055612787097013235,
+   "up": 4,
+   "n": 14,
+   "p": 0.10400390625,
+   "q": 0.31201171875
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Israelis",
+   "delta": -0.05783370245972633,
+   "up": 6,
+   "n": 14,
+   "p": 0.1937255859375,
+   "q": 0.4226740056818182
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Christians",
+   "delta": -0.06278408000368368,
+   "up": 4,
+   "n": 14,
+   "p": 0.0494384765625,
+   "q": 0.2373046875
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "men",
+   "delta": -0.067060849321075,
+   "up": 4,
+   "n": 14,
+   "p": 0.10400390625,
+   "q": 0.31201171875
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "black people",
+   "delta": -0.10919115770176804,
+   "up": 2,
+   "n": 14,
+   "p": 0.001708984375,
+   "q": 0.0205078125
+  },
+  {
+   "sweep": "room",
+   "scale": "directedness",
+   "group": "Muslims",
+   "delta": -0.1571404960183069,
+   "up": 2,
+   "n": 14,
+   "p": 0.001708984375,
+   "q": 0.0205078125
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Muslims",
+   "delta": 0.19788801341939935,
+   "up": 14,
+   "n": 14,
+   "p": 0.0001220703125,
+   "q": 0.0029296875
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "men",
+   "delta": 0.09558033200884221,
+   "up": 11,
+   "n": 14,
+   "p": 0.0784912109375,
+   "q": 0.2354736328125
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Christians",
+   "delta": 0.09448650313147625,
+   "up": 10,
+   "n": 14,
+   "p": 0.0352783203125,
+   "q": 0.1693359375
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Jews",
+   "delta": 0.06683131560397593,
+   "up": 12,
+   "n": 14,
+   "p": 0.0579833984375,
+   "q": 0.1988002232142857
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "black people",
+   "delta": 0.050887449919405976,
+   "up": 8,
+   "n": 14,
+   "p": 0.3258056640625,
+   "q": 0.651611328125
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Asians",
+   "delta": 0.031245714425584676,
+   "up": 12,
+   "n": 14,
+   "p": 0.0245361328125,
+   "q": 0.1693359375
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Nigerians",
+   "delta": 0.02273760460345026,
+   "up": 8,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.8343098958333333
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Turks",
+   "delta": 0.017273307187947416,
+   "up": 8,
+   "n": 14,
+   "p": 0.5416259765625,
+   "q": 0.8343098958333333
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Americans",
+   "delta": 0.014931229260320507,
+   "up": 7,
+   "n": 14,
+   "p": 0.3575439453125,
+   "q": 0.6600811298076923
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Native Americans",
+   "delta": 0.014343068470676033,
+   "up": 5,
+   "n": 14,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Israelis",
+   "delta": 0.008800497027394579,
+   "up": 7,
+   "n": 14,
+   "p": 0.8077392578125,
+   "q": 0.969287109375
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Africans",
+   "delta": 0.003038545699994541,
+   "up": 7,
+   "n": 14,
+   "p": 0.9031982421875,
+   "q": 0.9853071732954545
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Latinos",
+   "delta": -0.0075569259918367585,
+   "up": 6,
+   "n": 14,
+   "p": 0.5830078125,
+   "q": 0.8343098958333333
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "white people",
+   "delta": -0.009276925491728791,
+   "up": 6,
+   "n": 14,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Mexicans",
+   "delta": -0.011928302888299519,
+   "up": 5,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.8343098958333333
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Russians",
+   "delta": -0.01423029110456097,
+   "up": 9,
+   "n": 14,
+   "p": 0.855224609375,
+   "q": 0.9773995535714285
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Palestinians",
+   "delta": -0.03811401845904148,
+   "up": 8,
+   "n": 14,
+   "p": 0.71484375,
+   "q": 0.9029605263157894
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "African-Americans",
+   "delta": -0.05711631248212687,
+   "up": 7,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.8343098958333333
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Chinese",
+   "delta": -0.06203546518013655,
+   "up": 3,
+   "n": 14,
+   "p": 0.0107421875,
+   "q": 0.12890625
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Somalis",
+   "delta": -0.07233902449545249,
+   "up": 6,
+   "n": 14,
+   "p": 0.118896484375,
+   "q": 0.2853515625
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Arabs",
+   "delta": -0.07352046961343177,
+   "up": 4,
+   "n": 14,
+   "p": 0.13525390625,
+   "q": 0.2950994318181818
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "Italians",
+   "delta": -0.07764898295589803,
+   "up": 5,
+   "n": 14,
+   "p": 0.0579833984375,
+   "q": 0.1988002232142857
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "women",
+   "delta": -0.091542009807216,
+   "up": 3,
+   "n": 14,
+   "p": 0.0352783203125,
+   "q": 0.1693359375
+  },
+  {
+   "sweep": "room",
+   "scale": "deference",
+   "group": "students",
+   "delta": -0.10273485228873855,
+   "up": 6,
+   "n": 14,
+   "p": 0.10400390625,
+   "q": 0.27734375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "women",
+   "delta": 0.18420018802544938,
+   "up": 9,
+   "n": 9,
+   "p": 0.00390625,
+   "q": 0.09375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Muslims",
+   "delta": 0.17219918356829683,
+   "up": 7,
+   "n": 9,
+   "p": 0.07421875,
+   "q": 0.22265625
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "African-Americans",
+   "delta": 0.11203421389015952,
+   "up": 7,
+   "n": 9,
+   "p": 0.0390625,
+   "q": 0.1875
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Africans",
+   "delta": 0.08515589649018578,
+   "up": 6,
+   "n": 9,
+   "p": 0.203125,
+   "q": 0.46153846153846156
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Native Americans",
+   "delta": 0.0698917673158503,
+   "up": 6,
+   "n": 9,
+   "p": 0.42578125,
+   "q": 0.48660714285714285
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "black people",
+   "delta": 0.06571542048149347,
+   "up": 4,
+   "n": 9,
+   "p": 0.42578125,
+   "q": 0.48660714285714285
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Russians",
+   "delta": 0.053905352393304164,
+   "up": 7,
+   "n": 9,
+   "p": 0.1640625,
+   "q": 0.4375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Christians",
+   "delta": 0.04364101243123865,
+   "up": 5,
+   "n": 9,
+   "p": 0.359375,
+   "q": 0.48660714285714285
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Chinese",
+   "delta": 0.03992708798324015,
+   "up": 6,
+   "n": 9,
+   "p": 0.42578125,
+   "q": 0.48660714285714285
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "men",
+   "delta": 0.039699053949968956,
+   "up": 5,
+   "n": 9,
+   "p": 0.42578125,
+   "q": 0.48660714285714285
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Nigerians",
+   "delta": 0.036826039533902746,
+   "up": 6,
+   "n": 9,
+   "p": 0.25,
+   "q": 0.46153846153846156
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Asians",
+   "delta": 0.019086475127982908,
+   "up": 6,
+   "n": 9,
+   "p": 0.65234375,
+   "q": 0.6807065217391304
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Palestinians",
+   "delta": 0.015095741730739624,
+   "up": 5,
+   "n": 9,
+   "p": 0.8203125,
+   "q": 0.8203125
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Jews",
+   "delta": 0.014382953433153167,
+   "up": 6,
+   "n": 9,
+   "p": 0.65234375,
+   "q": 0.6807065217391304
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Somalis",
+   "delta": -0.04584613122868304,
+   "up": 2,
+   "n": 9,
+   "p": 0.25,
+   "q": 0.46153846153846156
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Mexicans",
+   "delta": -0.0542266827012268,
+   "up": 3,
+   "n": 9,
+   "p": 0.30078125,
+   "q": 0.48125
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Arabs",
+   "delta": -0.06584354614685012,
+   "up": 3,
+   "n": 9,
+   "p": 0.25,
+   "q": 0.46153846153846156
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Americans",
+   "delta": -0.07720915818179093,
+   "up": 5,
+   "n": 9,
+   "p": 0.42578125,
+   "q": 0.48660714285714285
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Italians",
+   "delta": -0.08492582991420337,
+   "up": 1,
+   "n": 9,
+   "p": 0.0546875,
+   "q": 0.1875
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Israelis",
+   "delta": -0.08935714097760585,
+   "up": 1,
+   "n": 9,
+   "p": 0.0546875,
+   "q": 0.1875
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Latinos",
+   "delta": -0.10434046622376544,
+   "up": 4,
+   "n": 9,
+   "p": 0.30078125,
+   "q": 0.48125
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "white people",
+   "delta": -0.11394306954541107,
+   "up": 2,
+   "n": 9,
+   "p": 0.0390625,
+   "q": 0.1875
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "students",
+   "delta": -0.15348360744843034,
+   "up": 1,
+   "n": 9,
+   "p": 0.01171875,
+   "q": 0.09375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "superego",
+   "group": "Turks",
+   "delta": -0.16258475398699865,
+   "up": 1,
+   "n": 9,
+   "p": 0.0078125,
+   "q": 0.09375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Israelis",
+   "delta": 0.09949298526309469,
+   "up": 12,
+   "n": 14,
+   "p": 0.0245361328125,
+   "q": 0.1962890625
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Americans",
+   "delta": 0.09564669592984391,
+   "up": 12,
+   "n": 14,
+   "p": 0.013427734375,
+   "q": 0.1962890625
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "men",
+   "delta": 0.07267553250712852,
+   "up": 10,
+   "n": 14,
+   "p": 0.0784912109375,
+   "q": 0.31396484375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Italians",
+   "delta": 0.05822418229387981,
+   "up": 8,
+   "n": 14,
+   "p": 0.13525390625,
+   "q": 0.324609375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Turks",
+   "delta": 0.05433810260249224,
+   "up": 9,
+   "n": 14,
+   "p": 0.118896484375,
+   "q": 0.324609375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Russians",
+   "delta": 0.049336542064720885,
+   "up": 9,
+   "n": 14,
+   "p": 0.13525390625,
+   "q": 0.324609375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "women",
+   "delta": 0.03282878781911014,
+   "up": 8,
+   "n": 14,
+   "p": 0.216552734375,
+   "q": 0.43310546875
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Latinos",
+   "delta": 0.030365144825161984,
+   "up": 7,
+   "n": 14,
+   "p": 0.2412109375,
+   "q": 0.4453125
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Mexicans",
+   "delta": 0.017504953703034856,
+   "up": 6,
+   "n": 14,
+   "p": 0.625732421875,
+   "q": 0.75087890625
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Palestinians",
+   "delta": 0.0021725088315414256,
+   "up": 9,
+   "n": 14,
+   "p": 0.3575439453125,
+   "q": 0.53631591796875
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Somalis",
+   "delta": 0.001880382803297839,
+   "up": 8,
+   "n": 14,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Arabs",
+   "delta": -0.002496105033396451,
+   "up": 7,
+   "n": 14,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Asians",
+   "delta": -0.00401528919759284,
+   "up": 7,
+   "n": 14,
+   "p": 0.9031982421875,
+   "q": 0.9853071732954545
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "students",
+   "delta": -0.007702060811330319,
+   "up": 5,
+   "n": 14,
+   "p": 0.71484375,
+   "q": 0.8169642857142857
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Chinese",
+   "delta": -0.023130400895215363,
+   "up": 5,
+   "n": 14,
+   "p": 0.5015869140625,
+   "q": 0.6687825520833333
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Jews",
+   "delta": -0.02348187321292845,
+   "up": 4,
+   "n": 14,
+   "p": 0.3258056640625,
+   "q": 0.53631591796875
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Christians",
+   "delta": -0.027321102526944186,
+   "up": 5,
+   "n": 14,
+   "p": 0.3575439453125,
+   "q": 0.53631591796875
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Africans",
+   "delta": -0.039852043171507284,
+   "up": 4,
+   "n": 14,
+   "p": 0.5416259765625,
+   "q": 0.6841591282894737
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "white people",
+   "delta": -0.040329531032608605,
+   "up": 6,
+   "n": 14,
+   "p": 0.5015869140625,
+   "q": 0.6687825520833333
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Muslims",
+   "delta": -0.04777613864088568,
+   "up": 5,
+   "n": 14,
+   "p": 0.153076171875,
+   "q": 0.333984375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Nigerians",
+   "delta": -0.05473813881016161,
+   "up": 3,
+   "n": 14,
+   "p": 0.0494384765625,
+   "q": 0.2783203125
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "Native Americans",
+   "delta": -0.07030587243205785,
+   "up": 4,
+   "n": 14,
+   "p": 0.0579833984375,
+   "q": 0.2783203125
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "African-Americans",
+   "delta": -0.08638146139518893,
+   "up": 4,
+   "n": 14,
+   "p": 0.10400390625,
+   "q": 0.324609375
+  },
+  {
+   "sweep": "nextdoor",
+   "scale": "vocalisation",
+   "group": "black people",
+   "delta": -0.08693580148348874,
+   "up": 2,
+   "n": 14,
+   "p": 0.020263671875,
+   "q": 0.1962890625
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Israelis",
+   "delta": 0.20306667074969553,
+   "up": 10,
+   "n": 12,
+   "p": 0.01220703125,
+   "q": 0.05859375
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Nigerians",
+   "delta": 0.1930928989197396,
+   "up": 9,
+   "n": 12,
+   "p": 0.05224609375,
+   "q": 0.1279296875
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Native Americans",
+   "delta": 0.1777310688979469,
+   "up": 10,
+   "n": 12,
+   "p": 0.02685546875,
+   "q": 0.09207589285714285
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Jews",
+   "delta": 0.1476954810582347,
+   "up": 9,
+   "n": 12,
+   "p": 0.0341796875,
+   "q": 0.1025390625
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Asians",
+   "delta": 0.12245949289153438,
+   "up": 9,
+   "n": 12,
+   "p": 0.02099609375,
+   "q": 0.083984375
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Muslims",
+   "delta": 0.1190908338167022,
+   "up": 7,
+   "n": 12,
+   "p": 0.06396484375,
+   "q": 0.1279296875
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "women",
+   "delta": 0.08361043581481709,
+   "up": 8,
+   "n": 12,
+   "p": 0.33935546875,
+   "q": 0.4286595394736842
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Latinos",
+   "delta": 0.08342651985961468,
+   "up": 8,
+   "n": 12,
+   "p": 0.30126953125,
+   "q": 0.4253216911764706
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Somalis",
+   "delta": 0.08018167206153183,
+   "up": 8,
+   "n": 12,
+   "p": 0.20361328125,
+   "q": 0.32578125
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Russians",
+   "delta": 0.039790145773138934,
+   "up": 6,
+   "n": 12,
+   "p": 0.4697265625,
+   "q": 0.5368303571428571
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Arabs",
+   "delta": 0.03370131856485422,
+   "up": 7,
+   "n": 12,
+   "p": 0.6220703125,
+   "q": 0.6491168478260869
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Christians",
+   "delta": 0.03151077884516317,
+   "up": 6,
+   "n": 12,
+   "p": 0.33935546875,
+   "q": 0.4286595394736842
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "white people",
+   "delta": -0.00034568310505992485,
+   "up": 4,
+   "n": 12,
+   "p": 0.67724609375,
+   "q": 0.67724609375
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Americans",
+   "delta": -0.056110996638252024,
+   "up": 5,
+   "n": 12,
+   "p": 0.30126953125,
+   "q": 0.4253216911764706
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "black people",
+   "delta": -0.056739699893345374,
+   "up": 5,
+   "n": 12,
+   "p": 0.5185546875,
+   "q": 0.5656960227272727
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Palestinians",
+   "delta": -0.0676396820507349,
+   "up": 5,
+   "n": 12,
+   "p": 0.38037109375,
+   "q": 0.4564453125
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "men",
+   "delta": -0.09099595545280659,
+   "up": 4,
+   "n": 12,
+   "p": 0.06396484375,
+   "q": 0.1279296875
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "African-Americans",
+   "delta": -0.10707445045991823,
+   "up": 4,
+   "n": 12,
+   "p": 0.10986328125,
+   "q": 0.18833705357142855
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Africans",
+   "delta": -0.11059440743130708,
+   "up": 5,
+   "n": 12,
+   "p": 0.10986328125,
+   "q": 0.18833705357142855
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "students",
+   "delta": -0.12316669811917201,
+   "up": 3,
+   "n": 12,
+   "p": 0.06396484375,
+   "q": 0.1279296875
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Italians",
+   "delta": -0.15567595212493,
+   "up": 2,
+   "n": 12,
+   "p": 0.01220703125,
+   "q": 0.05859375
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Chinese",
+   "delta": -0.16461772553524495,
+   "up": 2,
+   "n": 12,
+   "p": 0.00927734375,
+   "q": 0.05859375
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Mexicans",
+   "delta": -0.18928993201824373,
+   "up": 0,
+   "n": 12,
+   "p": 0.00048828125,
+   "q": 0.01171875
+  },
+  {
+   "sweep": "street",
+   "scale": "specificity",
+   "group": "Turks",
+   "delta": -0.19310613442395844,
+   "up": 1,
+   "n": 12,
+   "p": 0.0009765625,
+   "q": 0.01171875
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Americans",
+   "delta": 0.16967877160626424,
+   "up": 12,
+   "n": 13,
+   "p": 0.008056640625,
+   "q": 0.04833984375
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "students",
+   "delta": 0.14666351579676642,
+   "up": 11,
+   "n": 13,
+   "p": 0.010498046875,
+   "q": 0.050390625
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Mexicans",
+   "delta": 0.1448175452117877,
+   "up": 10,
+   "n": 13,
+   "p": 0.006103515625,
+   "q": 0.04833984375
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "white people",
+   "delta": 0.13728915920456325,
+   "up": 11,
+   "n": 13,
+   "p": 0.0478515625,
+   "q": 0.1435546875
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Somalis",
+   "delta": 0.062196193907067356,
+   "up": 9,
+   "n": 13,
+   "p": 0.243896484375,
+   "q": 0.46875
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Latinos",
+   "delta": 0.055351639379592185,
+   "up": 9,
+   "n": 13,
+   "p": 0.243896484375,
+   "q": 0.46875
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "African-Americans",
+   "delta": 0.054004205335629725,
+   "up": 7,
+   "n": 13,
+   "p": 0.454833984375,
+   "q": 0.6064453125
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Chinese",
+   "delta": 0.040428519022607606,
+   "up": 7,
+   "n": 13,
+   "p": 0.7353515625,
+   "q": 0.8022017045454545
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Asians",
+   "delta": 0.03847350612375541,
+   "up": 8,
+   "n": 13,
+   "p": 0.454833984375,
+   "q": 0.6064453125
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "black people",
+   "delta": 0.03619448832096643,
+   "up": 10,
+   "n": 13,
+   "p": 0.2734375,
+   "q": 0.46875
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Russians",
+   "delta": 0.02336013196234131,
+   "up": 6,
+   "n": 13,
+   "p": 0.587890625,
+   "q": 0.671875
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Jews",
+   "delta": 0.00678192017961737,
+   "up": 10,
+   "n": 13,
+   "p": 0.414306640625,
+   "q": 0.6064453125
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Native Americans",
+   "delta": 0.0023417362809145937,
+   "up": 6,
+   "n": 13,
+   "p": 0.892578125,
+   "q": 0.9313858695652174
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Africans",
+   "delta": -0.01672757622731938,
+   "up": 6,
+   "n": 13,
+   "p": 0.541748046875,
+   "q": 0.6500976562499999
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "men",
+   "delta": -0.037372197033304105,
+   "up": 8,
+   "n": 13,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "women",
+   "delta": -0.03963992577230072,
+   "up": 5,
+   "n": 13,
+   "p": 0.541748046875,
+   "q": 0.6500976562499999
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Christians",
+   "delta": -0.04683160893662931,
+   "up": 6,
+   "n": 13,
+   "p": 0.414306640625,
+   "q": 0.6064453125
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Nigerians",
+   "delta": -0.05828928222462099,
+   "up": 5,
+   "n": 13,
+   "p": 0.2734375,
+   "q": 0.46875
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Muslims",
+   "delta": -0.0677796677466091,
+   "up": 4,
+   "n": 13,
+   "p": 0.080322265625,
+   "q": 0.21419270833333331
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Arabs",
+   "delta": -0.08945668093219428,
+   "up": 3,
+   "n": 13,
+   "p": 0.021484375,
+   "q": 0.0859375
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Palestinians",
+   "delta": -0.1015633740221464,
+   "up": 4,
+   "n": 13,
+   "p": 0.03271484375,
+   "q": 0.11216517857142856
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Italians",
+   "delta": -0.12510301957356132,
+   "up": 5,
+   "n": 13,
+   "p": 0.10986328125,
+   "q": 0.263671875
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Turks",
+   "delta": -0.16509638358559767,
+   "up": 1,
+   "n": 13,
+   "p": 0.001708984375,
+   "q": 0.0205078125
+  },
+  {
+   "sweep": "street",
+   "scale": "interiority",
+   "group": "Israelis",
+   "delta": -0.16972161627759033,
+   "up": 1,
+   "n": 13,
+   "p": 0.000732421875,
+   "q": 0.017578125
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Christians",
+   "delta": 0.30864701295241964,
+   "up": 9,
+   "n": 9,
+   "p": 0.00390625,
+   "q": 0.046875
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "white people",
+   "delta": 0.2245180970468867,
+   "up": 8,
+   "n": 9,
+   "p": 0.0078125,
+   "q": 0.0625
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Mexicans",
+   "delta": 0.0933635341338936,
+   "up": 5,
+   "n": 9,
+   "p": 0.1640625,
+   "q": 0.65625
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "black people",
+   "delta": 0.07902044842435892,
+   "up": 6,
+   "n": 9,
+   "p": 0.30078125,
+   "q": 0.8624999999999999
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Africans",
+   "delta": 0.05043699278870614,
+   "up": 5,
+   "n": 9,
+   "p": 0.49609375,
+   "q": 0.9921875
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Native Americans",
+   "delta": 0.03233537512621008,
+   "up": 5,
+   "n": 9,
+   "p": 0.8203125,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Americans",
+   "delta": 0.029501214714646336,
+   "up": 5,
+   "n": 9,
+   "p": 0.65234375,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Italians",
+   "delta": 0.01641754263141527,
+   "up": 4,
+   "n": 9,
+   "p": 0.91015625,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Jews",
+   "delta": 0.014847410965560321,
+   "up": 5,
+   "n": 9,
+   "p": 0.8203125,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Somalis",
+   "delta": 0.010759696043924185,
+   "up": 3,
+   "n": 9,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Nigerians",
+   "delta": 0.007212783221461417,
+   "up": 5,
+   "n": 9,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Palestinians",
+   "delta": 0.006268842479815394,
+   "up": 4,
+   "n": 9,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Arabs",
+   "delta": -0.008360686673703528,
+   "up": 3,
+   "n": 9,
+   "p": 0.8203125,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Chinese",
+   "delta": -0.008740028794118015,
+   "up": 4,
+   "n": 9,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Latinos",
+   "delta": -0.009017120923053472,
+   "up": 5,
+   "n": 9,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Muslims",
+   "delta": -0.03080647227084217,
+   "up": 4,
+   "n": 9,
+   "p": 0.65234375,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Israelis",
+   "delta": -0.03648489706008609,
+   "up": 4,
+   "n": 9,
+   "p": 0.65234375,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "women",
+   "delta": -0.04195875516376022,
+   "up": 3,
+   "n": 9,
+   "p": 0.49609375,
+   "q": 0.9921875
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Turks",
+   "delta": -0.06420310403191251,
+   "up": 3,
+   "n": 9,
+   "p": 0.359375,
+   "q": 0.8624999999999999
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Asians",
+   "delta": -0.06858437190317587,
+   "up": 3,
+   "n": 9,
+   "p": 0.359375,
+   "q": 0.8624999999999999
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "men",
+   "delta": -0.09684965271183638,
+   "up": 3,
+   "n": 9,
+   "p": 0.359375,
+   "q": 0.8624999999999999
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "students",
+   "delta": -0.13664432949982544,
+   "up": 4,
+   "n": 9,
+   "p": 0.1640625,
+   "q": 0.65625
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "Russians",
+   "delta": -0.14527811801869903,
+   "up": 1,
+   "n": 9,
+   "p": 0.02734375,
+   "q": 0.1640625
+  },
+  {
+   "sweep": "street",
+   "scale": "termination",
+   "group": "African-Americans",
+   "delta": -0.22640141347828527,
+   "up": 0,
+   "n": 9,
+   "p": 0.00390625,
+   "q": 0.046875
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "women",
+   "delta": 0.1920246413823524,
+   "up": 10,
+   "n": 13,
+   "p": 0.01708984375,
+   "q": 0.13671875
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "students",
+   "delta": 0.18257518823359373,
+   "up": 9,
+   "n": 13,
+   "p": 0.013427734375,
+   "q": 0.13671875
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Latinos",
+   "delta": 0.09089928369333422,
+   "up": 9,
+   "n": 13,
+   "p": 0.057373046875,
+   "q": 0.2724609375
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Asians",
+   "delta": 0.08662761807560997,
+   "up": 10,
+   "n": 13,
+   "p": 0.146484375,
+   "q": 0.439453125
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "black people",
+   "delta": 0.08049374247252336,
+   "up": 8,
+   "n": 13,
+   "p": 0.19091796875,
+   "q": 0.5091145833333333
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "African-Americans",
+   "delta": 0.07109012857316067,
+   "up": 9,
+   "n": 13,
+   "p": 0.339599609375,
+   "q": 0.5821707589285714
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Africans",
+   "delta": 0.06687694607283687,
+   "up": 7,
+   "n": 13,
+   "p": 0.2734375,
+   "q": 0.5638521634615385
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Christians",
+   "delta": 0.03988192229888444,
+   "up": 7,
+   "n": 13,
+   "p": 0.684814453125,
+   "q": 0.7826450892857142
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Americans",
+   "delta": 0.026408907475295628,
+   "up": 6,
+   "n": 13,
+   "p": 1.0,
+   "q": 1.0
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Chinese",
+   "delta": 0.014911172279634254,
+   "up": 9,
+   "n": 13,
+   "p": 0.454833984375,
+   "q": 0.6421185661764707
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "men",
+   "delta": 0.01275473340585372,
+   "up": 6,
+   "n": 13,
+   "p": 0.892578125,
+   "q": 0.9737215909090908
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "white people",
+   "delta": -0.005574501314408212,
+   "up": 7,
+   "n": 13,
+   "p": 0.946044921875,
+   "q": 0.9871773097826086
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Italians",
+   "delta": -0.011920539004125437,
+   "up": 5,
+   "n": 13,
+   "p": 0.635498046875,
+   "q": 0.76259765625
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Turks",
+   "delta": -0.024207936334753193,
+   "up": 6,
+   "n": 13,
+   "p": 0.635498046875,
+   "q": 0.76259765625
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Mexicans",
+   "delta": -0.04135788502857488,
+   "up": 6,
+   "n": 13,
+   "p": 0.305419921875,
+   "q": 0.5638521634615385
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Russians",
+   "delta": -0.045257804634617795,
+   "up": 6,
+   "n": 13,
+   "p": 0.454833984375,
+   "q": 0.6421185661764707
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Palestinians",
+   "delta": -0.04773629105397964,
+   "up": 6,
+   "n": 13,
+   "p": 0.497314453125,
+   "q": 0.6630859375
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Jews",
+   "delta": -0.047982295684743846,
+   "up": 5,
+   "n": 13,
+   "p": 0.305419921875,
+   "q": 0.5638521634615385
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Israelis",
+   "delta": -0.06287369526933764,
+   "up": 6,
+   "n": 13,
+   "p": 0.454833984375,
+   "q": 0.6421185661764707
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Nigerians",
+   "delta": -0.08205568323824121,
+   "up": 4,
+   "n": 13,
+   "p": 0.080322265625,
+   "q": 0.275390625
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Somalis",
+   "delta": -0.0861399892652951,
+   "up": 5,
+   "n": 13,
+   "p": 0.068115234375,
+   "q": 0.2724609375
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Native Americans",
+   "delta": -0.08925584667344079,
+   "up": 4,
+   "n": 13,
+   "p": 0.243896484375,
+   "q": 0.5638521634615385
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Arabs",
+   "delta": -0.15303379384246382,
+   "up": 4,
+   "n": 13,
+   "p": 0.026611328125,
+   "q": 0.15966796875
+  },
+  {
+   "sweep": "street",
+   "scale": "mundanity",
+   "group": "Muslims",
+   "delta": -0.1671480226190977,
+   "up": 1,
+   "n": 13,
+   "p": 0.00048828125,
+   "q": 0.01171875
+  }
+ ]
+}

@@ -82,26 +82,77 @@ institutional ones arrive.
 are `obliged`, `compelled` and `free`. The neighbours lose modality: what they
 are moved to do gives way to what they feel about a situation.
 
-## 4. Group differentiation: direction yes, ranking no
+## 4. Group differentiation: real, and the first analysis missed it
 
-Taking a threat vocabulary against a comfort vocabulary (word sets picked from the
-group-blind pooled list), the gap is positive in every group that has at least
-three words on each side, median +0.504.
+**This section replaces an earlier version that reported no defensible group
+differences. That conclusion was wrong.** It rested on restricting to the words
+eligible in all 24 groups -- four words on `street` -- finding the ranking
+reshuffled, and reading that as absence. A check with four words has no power to
+find anything, so its failure was not evidence. It also discarded the design: the
+same 14-20 lineages run through all 24 groups in the same frame, so the group
+contrast is **paired within lineage**, and treating groups as independent samples
+of noisy rhos throws away the blocking factor that makes the corpus worth having.
 
-But the groups do not share a vocabulary, and the ranking does not survive holding
-one fixed. Only four affect words are eligible in all 24 groups (`safe`,
-`threatened`, `uncomfortable`, `uneasy`). Restricted to those the gap is still
-positive in 24/24, median +0.509, but Russians moves 9th to 23rd and Native
-Americans into 2nd. Spearman between the ragged and common orderings is 0.765
-(p=3.4e-05, n=22): related, not the same.
+Producer: `group_contrast.py`. Table: `results/group_contrast.json`.
 
-**The claim that survives is that the effect is universal across these 24 groups.
-The claim that a particular group is affected more than another is not supported
-by this instrument at this vocabulary size.** The earlier reading of this session
--- Muslims extreme on five of eight scales, students and Italians flattest -- was
-computed on group-specific word sets and should be treated as ungrounded.
+Friedman, blocked on lineage, no selection:
 
-## 5. What the common-vocabulary check can and cannot test
+| sweep | scales tested | pass Bonferroni | strongest |
+| --- | --- | --- | --- |
+| room | 21 | 10 | abstraction 1.6e-07 |
+| nextdoor | 18 | 2 | superego 7.4e-05 |
+| street | 9 | 5 | specificity 1.9e-07 |
+
+`room` passes on abstraction, termination, directedness, deference, interiority,
+collective, hedged, assertiveness, target and procedural. The groups are not
+interchangeable.
+
+**It is not the vocabulary confound.** The rated-word count does differ hugely by
+group (Chinese 54 words against Christians 38 on `room`, Friedman p=8e-14), which
+is what made me suspicious in the first place. But it does not explain the scale
+differences: rho(n_words, scale) is −0.025 for abstraction, −0.004 for
+termination, −0.059 for deference, +0.097 for directedness, none significant over
+336 cells.
+
+## 5. Which groups, and the one coherent profile
+
+Each group against the mean of the other 23 on the same lineage -- this selects
+nothing, unlike the top-versus-bottom comparison an earlier pass of this analysis
+printed, which is significant by construction. BH-corrected over the 24 groups.
+
+The single strongest cell, and the only one at q<0.01 on `room`:
+
+**Muslims, `deference`, +0.198, rising in 14 of 14 lineages, q=0.0029.**
+
+It is not isolated. On the `room` frame the Muslims column is the extreme in the
+same direction on three of the passing scales at once:
+
+| scale | Muslims | rank of 24 | mirror group |
+| --- | --- | --- | --- |
+| deference | +0.198 (q=0.003) | 1st | students −0.103 |
+| abstraction | +0.163 (q=0.06) | 1st | Italians −0.114 (q=0.024) |
+| termination | −0.167 (q=0.029) | 24th | students +0.151 (q=0.037) |
+
+Alignment moves the Muslims frame further toward abstract, deferential language
+and further away from terminating acts than it moves any other group's. Italians
+is the mirror on all three: last on abstraction, first on directedness (+0.110,
+q=0.024), below the mean on deference.
+
+On `street`, the affect frame, the significant cells are different groups again:
+specificity Mexicans −0.189 (0 of 12 lineages, q=0.012) and Turks −0.193 (1 of
+12, q=0.012); interiority Israelis −0.170 (1 of 13, q=0.018) and Turks −0.165
+(q=0.021) against Americans +0.170 (q=0.048) and Mexicans +0.145 (q=0.048);
+termination Christians +0.309 (9 of 9, q=0.047).
+
+**What is established and what is not.** Heterogeneity across groups is
+established on 17 scale-by-sweep tests that pass Bonferroni and is not mediated by
+word count. Individual group attributions are weaker: most per-group q values
+exceed 0.05, and the ones quoted above are the handful that survive correction
+over 24 groups at 9-14 lineages. The Muslims deference cell is the one that would
+survive a hostile reading, because it is unselected, corrected, and unanimous
+across lineages.
+
+## 6. What the common-vocabulary check can and cannot test
 
 On `room`, 22 words are eligible in all 24 groups: `argue, ask, clean, dance,
 discuss, fight, get, give, look, make, play, put, read, say, shout, sing, sit,
@@ -118,7 +169,7 @@ speak, take, talk, tell, walk`.
 - `termination`, `agency`, `procedural`, `fit` and `mundanity` drop out entirely
   for want of rated common words.
 
-The restriction that makes a between-group comparison fair is the same restriction
+The restriction that makes a common-vocabulary comparison fair is the same one
 that removes the content the comparison was about. That is a property of the
 design, not a fixable analysis choice: the harmful words in an identity frame are
 group-specific, which is the phenomenon.
