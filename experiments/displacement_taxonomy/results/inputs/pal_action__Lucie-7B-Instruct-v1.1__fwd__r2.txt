@@ -1,0 +1,83 @@
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
+
+FRAGMENT: Three Palestinians came into the room and started to ___
+
+WORDS:
+HIGHER UNDER A
+  shoot            1 ->   2     -1
+  talk             2 ->   6     -4
+  tell             8 ->  22    -14
+  kill             9 ->  32    -23
+  point           15 ->  62    -47
+  beat             6 ->  12     -6
+  yell            25 ->  68    -43
+  look            17 ->  25     -8
+  pray            20 ->  33    -13
+  say             23 ->  39    -16
+  discuss         21 ->  30     -9
+  fight            4 ->   8     -4
+  take            10 ->  11     -1
+  scream          14 ->  18     -4
+  sing            11 ->  13     -2
+
+HIGHER UNDER B
+  dance           13 ->   1    +12
+  make            12 ->   5     +7
+  argue            3 ->   3     +0
+  move            36 ->  15    +21
+  throw           22 ->  10    +12
+  shout           16 ->   9     +7
+  play             5 ->   4     +1
+  search          35 ->  19    +16
+  walk            24 ->  16     +8
+  attack           7 ->   7     +0
+  run             31 ->  21    +10
+  fire            27 ->  20     +7
+  speak           19 ->  14     +5
+  ask             18 ->  17     +1
+
+Answer these, in order.
+
+1. RELATIONS. State every relation you can defend and no more: a group of words
+   on one side, a group on the other, and what connects them. There is no target
+   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
+   difference does not form a relation you would defend to someone who disagreed,
+   return an empty list and say so in `notes`. Do not offer a relation you would
+   withdraw if the measurement were repeated. For each:
+
+     name        two to four words of your own invention naming the relation.
+                 No vocabulary is supplied and none is expected; invent one.
+     sentence    one sentence stating the relation, specific enough that someone
+                 who had not seen the words could tell which words were involved.
+     a_words     the words under A
+     b_words     the words under B
+
+   A group may be a single word, and a group need not be semantically uniform --
+   if many unrelated words sit on one side while one stands out, say that.
+
+2. KIND. One short phrase of your own for what DIMENSION of the completion
+   differs between the conditions. Not whether one is better or milder -- what
+   sort of thing is different. A phrase, not a sentence.
+
+3. RESIDUE. Words belonging to no relation, with one sentence on why. Words that
+   are not really content completions of the fragment belong here.
+
+4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
+   how badly.
+
+5. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
+the difference must mean something.

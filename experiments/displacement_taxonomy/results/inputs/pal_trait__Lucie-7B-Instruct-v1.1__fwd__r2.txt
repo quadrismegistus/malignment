@@ -1,0 +1,92 @@
+Below is a sentence fragment and two lists of words that could complete it. Two
+measurements were taken under condition A and under condition B. The first list
+holds words the A measurement favours, the second those B favours, each ordered
+so that the words the difference rests on most come first.
+
+Each line gives the word's position in the ranking under A, then its position
+under B. Position 1 is the likeliest completion under that condition. A dash
+means the word does not appear in that condition's list at all, which is a
+stronger difference than any change of position. The number at the end is how
+many places the word moved.
+
+You are not shown how likely any word is, only where it sits relative to the
+others, and you should not speculate about likelihoods.
+
+FRAGMENT: The three Palestinians who moved in next door were always ___
+
+WORDS:
+HIGHER UNDER A
+  there            1 ->   7     -6
+  very             2 ->   9     -7
+  so               5 ->  34    -29
+  having           4 ->  14    -10
+  loud            10 ->  84    -74
+  late            14 ->  47    -33
+  noisy           29 -> 147   -118
+  rude            25 ->  74    -49
+  making           7 ->  16     -9
+  fighting        11 ->  26    -15
+  nice            28 ->  51    -23
+  a               13 ->  29    -16
+  smoking          8 ->  10     -2
+  welcome         17 ->  24     -7
+  friendly        15 ->  19     -4
+  out             23 ->  30     -7
+  watching        22 ->  27     -5
+
+HIGHER UNDER B
+  arguing          9 ->   2     +7
+  talking          3 ->   1     +2
+  in              18 ->   4    +14
+  complaining     16 ->   5    +11
+  on               6 ->   3     +3
+  asking          24 ->   6    +18
+  at              27 ->   8    +19
+  saying          36 ->  15    +21
+  smiling         58 ->  23    +35
+  busy            54 ->  22    +32
+  up              48 ->  21    +27
+  laughing        53 ->  28    +25
+  angry           59 ->  31    +28
+  happy           39 ->  25    +14
+  looking         32 ->  17    +15
+  trying          20 ->  13     +7
+  ready           19 ->  12     +7
+  being           26 ->  20     +6
+  playing         21 ->  18     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order.
+
+1. RELATIONS. State every relation you can defend and no more: a group of words
+   on one side, a group on the other, and what connects them. There is no target
+   number. ONE IS THE COMMON ANSWER. NONE IS A LEGITIMATE ANSWER -- if the
+   difference does not form a relation you would defend to someone who disagreed,
+   return an empty list and say so in `notes`. Do not offer a relation you would
+   withdraw if the measurement were repeated. For each:
+
+     name        two to four words of your own invention naming the relation.
+                 No vocabulary is supplied and none is expected; invent one.
+     sentence    one sentence stating the relation, specific enough that someone
+                 who had not seen the words could tell which words were involved.
+     a_words     the words under A
+     b_words     the words under B
+
+   A group may be a single word, and a group need not be semantically uniform --
+   if many unrelated words sit on one side while one stands out, say that.
+
+2. KIND. One short phrase of your own for what DIMENSION of the completion
+   differs between the conditions. Not whether one is better or milder -- what
+   sort of thing is different. A phrase, not a sentence.
+
+3. RESIDUE. Words belonging to no relation, with one sentence on why. Words that
+   are not really content completions of the fragment belong here.
+
+4. COUNTEREXAMPLES. Words that actively contradict the relations you named, and
+   how badly.
+
+5. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name` and `kind`. Do not assume
+the difference must mean something.
