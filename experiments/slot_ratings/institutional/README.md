@@ -497,53 +497,85 @@ first-order here (changing `I should ___` to `...and I ___` moves `procedural`
 Each corpus uses the source its own producer used. slotpov's 12 slot prompts have
 **zero** rows in `movement` (checked), so they come from `twp_words_v4_best`.
 
-### TWO UNITS ARE NEEDED, AND MOST OF THE RESULT SURVIVES ONLY ONE
+### THE UNIT IS THE (LINEAGE, PAIR) CELL, AND ALL THREE CORPORA ARE PAIRED
 
-Producer: `unit_check.py`. Table: `results/base_side/unit_check.json`.
+Producers: `crossed.py` (primary), `unit_check.py` (the marginal prompt-side
+test, superseded but kept).
 
-The significance unit is the lineage: prompts are averaged within a lineage,
-then Wilcoxon over 50 (F21, M03) or 32 (slotpov) lineages. That is not pooling.
-But every lineage sees the SAME prompts, so prompt-level variance is invisible to
-that test, and a gap carried by one prompt can be unanimous across all 50
-lineages because all 50 see that prompt. p=1.8e-15 is the n=50 floor, which is a
-statement about unanimity across models and about nothing else.
+The lineage-only test averages prompts away; a prompt-side test averages
+lineages away. Each is blind to the variance the other tests, and this corpus has
+both crossed: every lineage sees every prompt. So the unit is the
+**(lineage, pair) cell**, tested by a two-way cluster bootstrap that resamples
+lineages AND pairs together, 2,000 reps.
 
-So the orthogonal test: average over LINEAGES first, then make the prompt (F21),
-the stratum (M03) or the matched set (slotpov) the unit. Neither test dominates;
-an effect present on both generalises to models AND to prompts.
+**This is a mean-against-noise test, not a consistency test.** It does not ask
+prompts to agree. On M03, `collective` passes at p=0.015 with **49% of pairs
+going the other way**, `agency` at 37%, `termination` at 55%. A general pattern
+with heavy prompt heterogeneity clears it; that is what it is for.
 
-**Survives both units:**
+All three corpora are paired, and the pairing had to be recovered for two of
+them:
+
+| corpus | pairs | how the pair is defined |
+| --- | --- | --- |
+| M03 | 126 | scenario x (person, modal) stratum: same scene, same site, two positions |
+| F21 | 12 | `prompt_id` encodes it: `institutional_govt_agency_1` with `institutional_govt_citizen_1` |
+| slotpov | 6 | `matched_set`, both sides ending at the identical site |
+
+**F21's `pair_id` column is empty**, and an earlier version of this analysis
+therefore treated its 24 prompts as unpaired and reported its contrasts as
+unresolvable. They are paired, 12 of 12 resolving cleanly, and the pairing
+tightens every interval: `procedural` from [−0.380, +0.779] to [−0.218, +0.636],
+and `vocalisation` from p=0.371 to p=0.005.
+
+### What survives
 
 ```
-F21       makes_better, specificity, arousal                    3 of 25
-M03       arousal, mediation, specificity, assertiveness,
-          termination                                           5 of 13
-slotpov   arousal, assertiveness, deliberation, interiority,
-          procedural                                            5 of 25
+F21      12 pairs    8 of 24   arousal, collective, makes_better, makes_worse,
+                               mediation, specificity, superego, vocalisation
+M03     126 pairs    9 of 13   abstraction, agency, arousal, assertiveness,
+                               collective, mediation, specificity, target, termination
+slotpov   6 pairs   11 of 24   abstraction, arousal, assertiveness, deference,
+                               deliberation, directedness, interiority,
+                               makes_better, makes_worse, procedural, target
 ```
 
-`arousal` is the only scale that survives both units in all three corpora.
-`specificity` survives both in two, `assertiveness` in two. **All three are in
-the collinear [A] cluster** (agency/specificity/assertiveness/arousal, pairwise
-0.62-0.83), so what survives is one axis, found on both units in every corpus.
+**`arousal` is the only scale that survives in all three with a consistent sign**
+(−0.620 / −0.289 / −0.657): the institutional position sits lower on arousal than
+the individual one, already in the base, on three independently written corpora.
+It is in the collinear [A] cluster, and `specificity` and `assertiveness` each
+survive in two, so what replicates is that one axis.
 
-**What does not survive is most of the table.** F21's `collective` has a lineage
-gap of −0.831 at p=1.8e-15 and a prompt-unit gap of **+0.007** at p=0.79: the
-sign reverses. Its `procedural` (+0.232, p=8e-10) is p=0.19 on the prompt unit
-and its `deference` (+0.193, p=4.2e-08) is p=0.21. **The two scales F21's finding
-is named for do not survive the prompt unit on F21's own corpus.** They do
-survive on slotpov, where `procedural` is +1.358 at the floor p=0.031.
+### `procedural` is a real disagreement between corpora, not noise
 
-**The power ceiling on the second unit is real and cuts the other way.** M03 has
-7 strata and slotpov 6 matched sets, so the smallest attainable p is 0.016 and
-0.031: those tests can only report unanimity, and a scale failing them is not
-thereby refuted. F21's 12-against-12 is the only prompt-unit test with room to
-resolve anything finer.
+| corpus | gap | 95% CI | reading |
+| --- | --- | --- | --- |
+| M03 | −0.037 | [−0.129, +0.054] | resolved at approximately zero |
+| slotpov | +1.676 | [+1.052, +2.473] | resolved, large |
+| F21 | +0.219 | [−0.218, +0.636] | cannot distinguish |
 
-**Restated.** The level claim -- that the base already carries the position gap
--- holds across models on nearly every scale, and across prompts on the agency
-cluster. Where it holds on models only, it is a fact about which prompts were
-written, not about the positions.
+The M03 and slotpov intervals do not overlap and are nowhere near overlapping.
+This is not a power difference and not an analysis artifact: two corpora, both
+paired, both holding the grammatical site fixed, disagree about whether the
+institutional position is more procedural than the individual one. `deference`
+behaves identically (M03 −0.029 [−0.107, +0.055], slotpov +1.202 [+0.249,
++2.362]).
+
+**F21's own headline scales are resolved by neither of F21's own corpora**, and
+the corpus that does resolve them is the slot perspective pairs.
+
+### Alignment's own contribution
+
+Almost nothing survives, which is the point. Significant deltas:
+
+```
+abstraction   F21 +0.139 p=0.006   M03 +0.053 p<0.001     the only one in two corpora
+mediation     F21 -0.194 p=0.017
+specificity   M03 +0.043 p=0.019
+```
+
+`abstraction` is also the scale with the lowest inherited fraction (7% on F21).
+**It is the one thing alignment demonstrably adds to the position gap.**
 
 ### The level claim replicates in all three, and is the strongest result here
 

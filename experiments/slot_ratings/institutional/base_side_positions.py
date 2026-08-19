@@ -107,14 +107,34 @@ def v6_for(prompts_wanted):
 
 
 def corpus_f21():
-    from run_f21 import prompts
+    from run_f21 import prompts, INDIV, INST
     R = merge(sorted(glob.glob(os.path.join(
         HERE, "results", "m03", "rated_f21_slot_institutional_en_v3_arm*.json"))))
-    items = [dict(prompt=p["prompt"], position=p["position"], stratum="all")
-             for p in prompts()]
+    #: F21 IS PAIRED: 24 prompts are 12 symmetric pairs, as run_f21's own
+    #: docstring says. `pair_id` is empty in the prompts table, but prompt_id
+    #: encodes it -- institutional_govt_agency_1 pairs with
+    #: institutional_govt_citizen_1: same scenario, same index, opposite role.
+    #: An earlier version set cluster=prompt, discarding the pairing and
+    #: destroying the precision of every F21 contrast. All 12 pairs resolve.
+    import re
+    rx = re.compile(r"^institutional_(.*)_(%s)_(\d+)$" % "|".join(INDIV + INST))
+    items = []
+    for p in prompts():
+        m = rx.match(p["prompt_id"])
+        if not m:
+            raise SystemExit("F21 prompt_id does not parse: %s" % p["prompt_id"])
+        items.append(dict(prompt=p["prompt"], position=p["position"], stratum="all",
+                          cluster="%s_%s" % (m.group(1), m.group(3))))
+    n = collections.Counter(i["cluster"] for i in items)
+    bad = [c for c, k in n.items() if k != 2]
+    if len(n) != 12 or bad:
+        raise SystemExit("expected 12 pairs of 2, got %d clusters, bad: %s" % (len(n), bad))
     for k, v in v6_for({i["prompt"] for i in items}).items():
         R[k].update(v)
     return items, R
+
+
+
 
 
 def corpus_m03():
@@ -130,8 +150,11 @@ def corpus_m03():
                 continue
             #: PERSON and MODAL become the stratum, so the position gap is only
             #: ever taken between cells that share a grammatical site.
+            #: CLUSTER is the matched unit: the same scene, same person, same
+            #: modal, the two positions. 18 scenarios x 7 strata = 126 of them.
             items.append(dict(prompt=txt, position=parts[0],
-                              stratum="_".join(parts[1:]), scenario=sc["scenario_id"]))
+                              stratum="_".join(parts[1:]), scenario=sc["scenario_id"],
+                              cluster=sc["scenario_id"] + "|" + "_".join(parts[1:])))
     for k, v in v6_for({i["prompt"] for i in items}).items():
         R[k].update(v)
     return items, R
@@ -144,7 +167,8 @@ def corpus_slotpov():
     items = []
     for ms, v in povpairs():
         for i in v:
-            items.append(dict(prompt=i["prompt"], position=i["position"], stratum=ms))
+            items.append(dict(prompt=i["prompt"], position=i["position"],
+                              stratum=ms, cluster=ms))
     for k, v in v6_for({i["prompt"] for i in items}).items():
         R[k].update(v)
     return items, R
@@ -210,7 +234,7 @@ def levels(items, R, source="movement"):
     out = []
     for (p, lin), d in acc.items():
         rec = dict(prompt=p, lineage=lin, position=meta[p]["position"],
-                   stratum=meta[p]["stratum"],
+                   stratum=meta[p]["stratum"], cluster=meta[p].get("cluster", p),
                    mass_base=d["_mass_base"], mass_aligned=d["_mass_aligned"])
         for s in scales:
             if d.get("bm_" + s, 0) > 0:
