@@ -390,7 +390,7 @@ def lineage_union(root, prompts=None, ops=None, rule_version=4):
     return out
 
 
-def topup_todo(model, root=None, ops=None, rule_version=4):
+def topup_todo(model, root=None, ops=None, rule_version=4, prompts=None):
     """{prompt: [words this model lacks that its LINEAGE has]} -- the pass-2 worklist.
 
     Exactly what `twp_v4.score_words4` should be handed. A word already present
@@ -414,7 +414,12 @@ def topup_todo(model, root=None, ops=None, rule_version=4):
         if root is None:
             raise KeyError("%s is in no lineage" % model)
     wt, _ct = _tables(rule_version)
-    union = lineage_union(root, ops=ops, rule_version=rule_version)
+    #: `prompts` scopes pass 2 to a SUBSET, e.g. the slot axis. The union is
+    #: computed over those prompts only, so a model is not asked for words on
+    #: prompts the caller is not asking about -- and the `have` query is left
+    #: unscoped on purpose, because a word already measured anywhere must never
+    #: be rescored regardless of which prompt subset is in view.
+    union = lineage_union(root, ops=ops, rule_version=rule_version, prompts=prompts)
     have = {}
     #: `have` DOES include topup rows, where the union does not: a word already
     #: topped up is present and must never be scored twice. The two asymmetric

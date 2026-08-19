@@ -526,7 +526,8 @@ class TWPRunner:
                 "minutes": (time.time() - t0) / 60}
 
 
-    def topup(self, rules, root=None, limit=None, dict_path=None, verbose=True):
+    def topup(self, rules, root=None, limit=None, dict_path=None, verbose=True,
+              prompts=None):
         """PASS 2: score the words this model's LINEAGE cleared and it did not.
 
             Runner(ck).topup(rules=V4.ADOPTED)
@@ -566,9 +567,10 @@ class TWPRunner:
         ck = self.ck
         os.makedirs(ck.dir, exist_ok=True)
         say = (lambda m: print(m, flush=True)) if verbose else (lambda m: None)
-        todo_words = corpus.topup_todo(ck.model_id, root=root)
+        todo_words = corpus.topup_todo(ck.model_id, root=root, prompts=prompts)
         say("  INSTRUMENT: rule_version %d | %s | prompt_cache %s | topup"
-            % (V4.RULE_VERSION, rules.label(), bool(T.USE_PROMPT_CACHE)))
+            % (V4.RULE_VERSION, rules.label(), bool(T.USE_PROMPT_CACHE))
+            + ("" if prompts is None else "  scope=%d prompts" % len(prompts)))
         base_key = lambda p: dict(ck.key(p, rules), topup=True)          # noqa: E731
         st = ck.stash(PRODUCER)
         have1 = {k["prompt"]: v for k, v in st.items()
