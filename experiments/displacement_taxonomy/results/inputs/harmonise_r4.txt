@@ -1,0 +1,707 @@
+Below are 221 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r0d513  Seizure made specific
+      A's only acquisitive verb is the bare, unspecified one for taking, while B supplies the two verbs that turn the entry into a raid on the room and its contents, one for ransacking or frisking and one for outright theft.
+
+r1baf8  Clause versus noun phrase
+      A's highest-ranked completions open a clause in which the neighbours felt that something was the case (they, that, it), while B's promote determiners that open a noun phrase naming a thing that was felt (the, a, their, an).
+
+r0c734  Trait versus whereabouts
+      A completes the fragment with predicates about what kind of people the neighbors are (adjectives of manner and character), while B completes it with predicates about where they are situated relative to the speaker.
+
+r05262  Questioning versus conversing
+      Every speech verb A promotes is one in which one party imposes on or extracts from another, asking, interrogating and shouting, while the speech verbs B promotes are ones that take two parties in symmetrical exchange, talking, speaking and arguing.
+
+r0c105  Simile to that-clause
+      A favours the two words that open a comparison, the simile marker and the indefinite article that would introduce whatever the neighbours are being likened to, while B favours the complementizer introducing a stated proposition together with the possessive pronoun pointing back to the neighbours themselves.
+
+r09f37  Character Into Whereabouts
+      The words A favours most describe a disposition the neighbors possess (nice, friendly, polite, kind), while the words B favours most describe a place or physical situation they were in (outside, there, home, around, at), so the completion moves from what they were like to where they were.
+
+r00041  Bare skin to bristle
+      Of the head and face, A favours the bare-skin surfaces, with cheek falling nearly a hundred places and chin, face and forehead all sitting higher under A, while B favours the hairy or hairless scalp and jaw (mustache, bald), so the texture the hand meets shifts from skin to hair.
+
+r0ea52  Ending without saying fired
+      Under B the act is named with the ordinary verbs for dismissal, while under A the same outcome is reached by verbs that describe it without naming it or substitute a lesser punishment for it: ending something, transferring her, getting or doing something unspecified.
+
+r12d68  Underlayer against overcoat
+      A promotes the layer worn under or against the body and the generic word for the whole of it (shirt, jeans, pants, clothes), while B promotes the outermost layer put on over everything else and the luggage-like things that go with it (jacket, coat, overcoat, robe, suit, suitcase).
+
+r0dd7c  Bodies without objects
+      B promotes verbs of whole-body movement that need no patient at all (dance from 25 to 1, shake from 91 to 22, move from 36 to 18, throw from 26 to 11), and A has almost nothing of this kind, its single comparable verb being sing at rank 7 falling to 13.
+
+r1cf34  Desertion versus encroachment
+      The feeling-words A favours describe a bond broken or a protector gone (betrayed, abandoned, and the release-word free), while those B favours describe an agent present and closing in on the one who feels (threatened, violated, helpless, trapped, uneasy).
+
+r133cb  being there against doing something
+      A's leading words place the neighbors somewhere or say merely that they were present (there, around, sitting, out, in), whereas both of B's contentful words say what they were engaged in (busy, complaining).
+
+r07170  Prayer stands alone
+      The single largest displacement in the whole set belongs to the one completion that makes the three men worshippers rather than agents acting on anybody, rising seven places under B while the words for striking, stabbing and questioning a person all fall.
+
+r1280e  Alarm made graded
+      Under A the alarm in the completion is carried by a single strong word at the very top and its weaker cousins sit far down the ranking, whereas under B those weaker cousins (uneasy at 9, unsafe at 11) are pulled up beside the strong word, which itself stays near the top, so B holds a graded range of apprehension where A holds one sharp term.
+
+r11e22  Strangeness enters late
+      The two words that describe the neighbors as unfamiliar or deviant rather than as pleasing appear only among B's risers, and they are B's two largest movers, whereas every character word that A favours is a term of conventional approval.
+
+r0199b  Household kin to chosen intimate
+      The two words naming women of the man's own household, wife and daughter, fall under B (-2 and -6) while the words naming an elective, non-marital tie rise sharply (girlfriend +30, girlfriend's +91, friend +19), so the human being implied by the completion shifts from someone he is related to toward someone he has chosen.
+
+r110f7  Person-facing versus procedural
+      The contentful A-side verbs describe the manager acting on the employee directly and evaluatively (punish, confront), whereas the B-side verbs that actually moved describe dispositions an employment system can execute on paper without any encounter (suspend, transfer, assign, the last rising fourteen places).
+
+r1b1d6  Clothes replaced by body
+      Every word A raises names a garment or a worn or carried article that can be opened or taken off him (shirt, jacket, jeans, pants, belt, coat, wallet, suit, fly, trousers, sweater, collar, shorts), while the words B raises in their place name parts of his body that cannot be unzipped or removed (head, hands, hand, arms, arm, eyes, ears, leg, feet, foot, back, mouth, chest).
+
+r114e0  Interrogation versus conversation
+      Under A the speech verbs are the ones that name a formal, one-sided questioning of a detainee (the verb for professional questioning, plus the plainer 'question' and 'ask'), while under B the speech verbs are the unmarked, reciprocal ones for simply speaking with someone.
+
+r1ef9f  Explicit menace asymmetry
+      The only two words that name the neighbours as the object of a hostile act, threatened and intimidated, appear among A's favoured completions and have no counterpart on B, whose single negative word, uneasy, names a diffuse mood with no agent in it.
+
+r15583  Traits climb from below
+      The difference is carried by adjectives ascending from far down the A ranking (pleasant 34 to 26, polite 32 to 24, loud 21 to 15, nice 10 to 5, all gains of five to eight places) rather than by activity words being pushed down, since no A-side word falls more than four places (going 16 to 20, on 9 to 12), which means B promotes a trait vocabulary more than it demotes an activity one.
+
+r0df87  Choral against spoken
+      Every verb of individual utterance or outcry sits higher under A (talk, speak, ask, shout, scream, yell), while the verbs B raises in that same vocal territory are ones a group performs in unison or as shared noise (chant, sing, laugh), so the vocal completions divide by whether one person addresses or cries out and whether several make a common sound.
+
+r12a31  Safety inverted to threat
+      Under A the neighbours' feeling is named by the adjective for security itself, while under B that same slot is taken by the exact morphological negation of that adjective together with a participle for having been made afraid, so the A side's leading affective word and the B side's leading affective word are antonyms of one another.
+
+r16cc8  Watched As A Trio
+      The two largest upward moves in the set, seen (70 to 16) and together (61 to 19), both frame the three as something observed from outside and as a single group, whereas A's leading words attribute a quality to them one by one.
+
+r050b7  Big falls are the coarse ones
+      The size of the fall tracks how coarse the word is, with the crude anatomical terms dropping twenty to forty-three places (pussy -43, dick and fingers -27, ass -23) while the bland body parts on the same side barely move (neck 0, belly -2, face -2, beard -1), so A's advantage is concentrated in the explicit vocabulary rather than spread across body words generally.
+
+r16770  Sacking word swapped, not sacking
+      The plain, physical, colloquial words for ending someone's employment all lose ground under B to two ways of saying the same thing without the plain word for it: one clinical Latinate verb and one two-part idiom whose force sits in a particle rather than the verb.
+
+r38559  Torso outranks waist
+      The only two completions that gain ground both name garments worn over the chest and shoulders, while every completion naming a lower-body garment loses ground or holds still, so the object being opened migrates upward on the body.
+
+r191d2  Named event versus bare doing
+      The words moving furthest toward A are the most scenario-specific (remove -23, question -21, shout -13, ask -12), whereas the largest movers toward B include verbs with almost no event content of their own (act +33, move +16, and beside them walk), so the difference is partly one of how much a completion commits to a particular happening.
+
+r20964  Deontic polarity collapses together
+      A holds high both the words for being made to act and the word for being at liberty to act, which are opposites in meaning, and B demotes all three at comparable magnitude, so what B removes is not one pole of obligation but the whole question of the neighbours' scope of action, in favour of words reporting only their comfort.
+
+r1da4c  Courtesy over friction
+      The manners-and-warmth vocabulary a neighbor would use in praise sits on A and falls furthest there (smiling drops 17 places, pleasant 14), while the only two words naming trouble between people, complaining and fighting, are among B's largest gains, so friction rises exactly where courtesy falls.
+
+r12442  noise against utterance
+      The two vocal verbs that stay on A's side name unaddressed sound coming out of a single body (scream, sing), while B's vocal verbs name utterance that either follows a script or requires a second party (recite, chant, discuss, chat).
+
+r13180  Deferred against named
+      A's non-content words are subordinators and comparatives that postpone the feeling to a clause not yet written, so that no affect is committed to at this position, while every substantial word B favours is an adjective that names the affect outright at the blank.
+
+r1b89d  Doing versus being
+      A favours completions that keep the sentence going into an action or a location, chiefly the -ing participles and the prepositions and locatives, while B favours completions that end the sentence in an adjective naming what the neighbors were like.
+
+r0b1d8  Part becomes person
+      Everything favoured under A is a piece of a body, whereas under B four words naming whole people related to the subject climb into the top fifteen, so what is being stroked shifts from an anatomical part to another human being.
+
+r22a5c  Personal handling versus institutional procedure
+      A's three largest movers name responses that stay outside formal employment machinery, that is hiring someone, keeping her, or facing her directly (hire -37, confront -26, keep -24), while B's largest movers are all graded sanctions administered through that machinery (transfer +42, discipline +24, suspend +23, punish +10, cut +8).
+
+r3cd64  garment versus opening
+      Every A-side word names a complete article of clothing worn on the body, while the one B-side word names instead the zippered slit in the front of such an article, so the sides differ over whether the thing unzipped is the garment itself or the part of it that actually opens.
+
+r1de95  Noise against weapons
+      Both conditions supply aggression, but A's is vocal and unarmed (shout, scream, yell, fight, each of which can be aimed at nobody in particular) while B's is instrumented and potentially lethal (shoot, fire, beat, attack), so what separates the two violent vocabularies is the presence of a weapon rather than the presence of violence.
+
+r2a061  Comparative displaces absolute
+      B's favoured affect and degree words are graded by comparison with an unstated prior state (safer, better, more, much, with safer moving from seventh to first), while A favours the absolute intensifier very and the ungraded states secure and relief.
+
+r2a159  Intensifier then adjective
+      Both degree intensifiers in the whole set sit on A, where they can only be followed by an adjective, while B contains no intensifier at all and instead leads with a verb.
+
+r20dc5  striking traded for talking
+      Every verb that would have the three men damage a person or discharge a weapon on entry (beat, shoot, kill, attack, hit, fire, throw, pull) is ranked higher under A, while the verbs that would have them open their mouths at or with someone (speak, talk, chat, discuss, argue, recite, chant, pray) are ranked higher under B.
+
+r2493c  Named fear against deferred predicate
+      Under B nearly every favoured word is an adjective that names an emotion of fear or vulnerability outright, while under A the favoured words are overwhelmingly determiners, pronouns, complementizers and degree words that continue the sentence without committing to any feeling term.
+
+r21ef8  Generic warmth, named virtue
+      Both conditions supply positive descriptions of the people, but A's are unspecific terms of approval that could be said of anyone, while B's name particular social qualities having to do with noise, harmlessness, and hospitality, and the two of those that climb farthest into B's list are the two most specific of them rather than the two mildest.
+
+r0dd72  Genitals to surfaces
+      Every explicitly genital or crude anatomical noun in the set falls sharply under B, and the high positions they vacate are taken by neutral, publicly touchable surfaces of the head and torso.
+
+r3848e  Talking to her appears
+      B's gainers include two verbs whose completion is an encounter with the employee herself, speaking to her or meeting with her, and A's list contains no verb of addressing her at all, its nearest candidate being a call that in this frame reads as a call to someone else.
+
+r43054  The fastening, not the garment
+      All three words that name the zip apparatus rather than the item it closes sit on B's side, while A's side names only whole garments, so under B the completion is allowed to stop at the mechanism instead of the thing worn.
+
+r232d1  Fists versus firearms
+      A's violence is delivered by the body or by hurling something (striking, hitting, throwing), whereas B's violence is delivered by a weapon and can end in death (firing, shooting, killing).
+
+r2ac69  One axis, both directions
+      B's content words include a matched positive and negative pair on a single safety scale (safe and safer against unsafe, with relieved on the positive side and intimidated on the negative), whereas A's content words are all on one side of their own scale and have no positive counterpart anywhere in the A list.
+
+r37ac7  Doing against being
+      In the ranks below the shared top of the list, A favours progressive verbs and the particles that launch them, naming what the neighbors are visibly doing (talking, smiling, looking, trying, getting, going, making, out, up), while B fills those same ranks with bare adjectives ascribing a settled character or condition (strange, quiet, loud, late, pleasant).
+
+r290ad  Outcome recedes, act does not
+      The single verb that names the death of a victim rather than the assault itself, kill, falls 23 places, while the verbs that name only the attack hold or improve, attack unchanged at 7, fire up 7, throw up 12, and shoot still second, so what has gone quiet is the naming of a result and not the presence of violence.
+
+r43c71  Obligation against endangerment
+      The few genuine feeling words on the A side describe a social or moral pull directed at the arriving people (sympathy in "sorry", duty in "obliged" and "compelled"), whereas the B side's feeling words describe the neighbours' own safety as being under threat.
+
+r2789e  Conflict changes mode
+      The hostile material is present on both sides but attributed differently: A raises words that make trouble a property of the people (noisy, loud, rude, fighting), whereas B raises words that make the same trouble an episode of dispute (arguing, complaining, angry), so the difference is not that B carries less conflict.
+
+r1b847  The hand that strokes
+      Only A promotes the parts that perform stroking rather than receive it, so that hand, hands and fingers appear as completions of a verb whose instrument they would ordinarily be, whereas every word B favours is a surface that can only be touched.
+
+r3cb6d  Verb hands off content
+      The verbs that name the whole act in one word hold their positions under A, whereas B's side is thick with semantically near-empty verbs that settle nothing themselves and defer the act to whatever noun or particle follows.
+
+r5b5ed  Waist down, chest up
+      The words A favours are garments worn below the waist, while the words B promotes are garments worn over the torso as an outer layer, so the same act of unzipping is relocated upward on the body.
+
+r27546  Damage versus jostle
+      Physical verbs survive on both sides, but the A physical verbs injure or dispossess someone while the B physical verbs are contact and posture that leave the person intact.
+
+r5e4d5  Coercion word swapped
+      The single sense of being made to do something appears on both sides under different words, obliged under A and compelled under B, so this meaning is not confined to either condition and only its wording changes.
+
+r3b75d  Unflattering becomes available
+      Every word A raises that passes judgement on the neighbors approves of them (polite, kind, good, happy, smiling), whereas the words B raises include the only ones in either list that would count against them (strange, loud, complaining, late), with strange moving ninety-three places from rank 99 to rank 6.
+
+r46e07  Chorus against voice
+      The one vocal verb A favours is the choral, scripted, political one, chanting in unison, while every vocal verb B favours is something a single person does to another person, from asking and speaking to screaming and crying.
+
+r55240  Done-to versus feeling
+      Under A the affect words are past participles that imply a second party acting on the neighbours (threatened, betrayed, obliged, compelled), whereas under B they are adjectives naming a state the neighbours are simply in, with no actor implied (unsafe, uneasy, afraid, safe).
+
+r28e10  Degree words for place words
+      The non-content words differ in what they set up: B favours the degree adverbs that must be followed by an adjective, while A favours prepositions and locatives that must be followed by a place or an activity phrase.
+
+r1bafa  The idiom that resurfaces
+      The single large movement in the table belongs to the one completion that reads the fragment as an ordinary non-sexual gesture, the chin one strokes while thinking, which rises fifteen places under B, whereas the other non-genital body parts on the A side, the hand and its fingers, drift slightly downward.
+
+r3f399  Causative deferral drops
+      Every light causative verb in the set, which cannot name the act on its own but only frame it in a complement (let her go, have her fired, make an example, get her removed, give her a warning), sits on the A side and falls by one to five places under B, whereas B's mass sits on verbs that name the act outright plus a single formal periphrasis, take, as in take action.
+
+r5e28b  Same garment, rival name
+      The word the A difference rests on most and the word the B difference rests on most are two dialect names for one and the same garment, British "trousers" against American "pants", so the largest single component of the difference is a choice between labels rather than between things.
+
+r340ac  Interrogation versus outcry
+      Among verbs of speaking, A prefers those that demand something of an addressee or are aimed at someone (ask, question, shout, talk) and B prefers those that are emitted rather than directed (scream, cry, pray, sing) or that presuppose an equal interlocutor (speak, argue), with the near-synonym pairs shout/scream and talk/speak split across the sides in exactly that direction.
+
+r6ab28  Grievance versus security
+      Under A the neighbours' feeling is named in the vocabulary of wrong done to them and freedom taken from them (betrayed, trapped, obliged), while under B it is named as a judgment about danger and its absence (safe, safer, unsafe, relieved, intimidated), so both lists carry unpleasant feelings but only A's are about being wronged and only B's are about being at risk.
+
+r41a6d  Judged from next door
+      A's adjectives rate the neighbours by how they impinge on the person telling the story, whether badly (loud, late) or well (nice, friendly), whereas B's adjectives describe a condition the neighbours are in on their own terms (busy at 49 to 15, happy at 40 to 25, ready, trying, being), so the shift is in whose vantage the description is taken from rather than in how favourable it is.
+
+r52a8e  Reach of the blow
+      Every completion that requires the agent to touch the victim's body with a hand or a held blade sits on the A side, while the completions that kill or injure from a distance or name only the outcome sit on the B side, so the difference between the lists is the distance between the two bodies rather than the amount of harm.
+
+r5973c  Impelled action, not feeling
+      A alone favours completions in which felt is followed by a participle of compulsion, so the sentence reports what the neighbours were pushed to do rather than what they underwent, while the words rising under B are all state-naming emotions and none of them takes that frame.
+
+r2df66  Courtesy yields to quarrel
+      The words of good neighbourliness fall furthest under B (pleasant, kind and polite lose eighteen, thirteen and twelve places) and the words that rise furthest are the vocabulary of audible dispute (arguing, fighting, yelling, shouting, complaining), so the completion moves from describing the neighbours as agreeable to describing them as making a disturbance.
+
+r25231  Genital nouns sink
+      Every word in either list that names a penis sits on A's side, and two of the three fall steeply under B (dick from 15th to 52nd, penis from 8th to 18th) alongside the possessive naming a spouse's unstated body part, which drops 34 places, while B's list contains no anatomical term below the chin at all.
+
+r49da5  Doer changes sides
+      Under A the likeliest completions are acts an employer performs on an employee (fire, terminate, suspend, punish, transfer, and retaliate named as such), whereas under B they are acts of union participation and organizing (join, become, attend, organize, support, contact, meet), so that the implied subject of the decision shifts from management to the woman who had been talking to the organizer.
+
+r78144  Worn versus carried
+      Every word A favours is something on a person's body, whereas B promotes two zippered objects that are not clothing at all and can be opened with nobody wearing them.
+
+r389b2  Telling versus asking
+      Both conditions supply speech verbs, and the split runs along the direction of address: A favours the ones in which the speaker delivers content (say, explain, tell, discuss, read) and B favours the ones in which speech is put to somebody to extract or contest something (question, ask, argue).
+
+r7374b  made to act, made afraid
+      Under A the completions say what the neighbours were moved or licensed to do, with compelled and obliged pushing them into an action and emboldened and empowered giving them the standing to take one, whereas under B the rising words name a fear of being harmed by somebody else, threatened and intimidated.
+
+r5419d  At home against abroad
+      A favors the words that place the neighbors present and stationary at the address (in, on, there, around) while B favors the words of being elsewhere or in transit (out, going, coming), so under A they are fixtures next door and under B they are moving through.
+
+r56fb8  Room-handling script
+      The A side gathers verbs that presuppose a room already stocked with objects and occupants being worked through one at a time, so that the completion implies a raid or inspection with things to open, take, tear, tie, remove and search and people to question or beat, while the B side gathers verbs describing the three men's own bearing as a group, which need nothing in the room to act upon.
+
+r65ce4  Phrase against clause
+      The function words A favours all open a noun phrase or a comparison after felt (a, an, their, like, as), while those B favours all open a subordinate clause reporting a thought about the newcomers (that, they, it, what, some), so the conditions differ in the grammatical shape of the continuation and not only in its vocabulary.
+
+r3df76  Reserve versus commotion
+      Where the completion is unflattering, A supplies quiet dispositional words about wariness or restraint (suspicious, careful, quiet) while B supplies audible, public disturbances, and those disturbances are the largest movers anywhere in the set (fighting rises 105 places, smoking 56, arguing 54, against falls of 89 for careful and 11 for suspicious).
+
+r35e16  Periphrasis against plain naming
+      The A side prefers oblique names for the male genitals, the shaft-and-member sort of word that names the organ by a part or by a euphemistic generality, while the B side prefers the three ordinary blunt names for the same organ, so the two sides differ in register while pointing at the same referent.
+
+r4df88  Third party gets involved
+      A collects the verbs that bring an outside instrument into the dispute, suing, filing, and bringing something (charges, a complaint, a lawyer), whereas B's words all keep the response inside the employer's own authority, something management simply does.
+
+r802b2  Specific modifier, generic filler
+      Both conditions rank some words that could not themselves be the thing unzipped, but A's are attributive words that still commit the phrase to a particular garment (blue, left, as in a blue jacket or a left sleeve), whereas B's are the generic fillers of the bare possessive idiom (own, first, way, as in his own, his first, his way), which commit the phrase to no object at all.
+
+r4135f  Search-party repertoire
+      The words A promotes most sharply describe an armed or official party acting on the people already in the room -- shooting, beating, searching, interrogating, inspecting, questioning -- and each of these falls under B, where nothing of that kind rises in their place.
+
+r761d1  Absolute yields to comparative
+      The degree-marking words that A favours are absolute intensifiers taking a bare adjective (so, very), whereas those B favours are comparatives (more, safer), so that on the B side even the surviving safety word appears in graded rather than flat form.
+
+r54f73  Nuisance versus courtesy
+      The activity words A favours are drawn from the vocabulary of audible or intrusive neighbourly friction (complaining, arguing, asking, talking, watching, hanging), whereas the traits B favours are drawn from the vocabulary of good manners and easy relations (friendly, nice, polite, pleasant, good), so the two sides differ in how the neighbours are socially placed and not only in grammatical form.
+
+r5e2a1  Address-to-locomotion shift
+      Under A the high-ranked completions are things done toward other people in the room, saying, telling, discussing, praying, yelling, screaming, looking and pointing, and every one of these falls under B, while the words that rise into B's top twenty are things done with the whole body in the space of the room, moving, walking, running, searching, throwing and dancing, none of which requires anyone to be addressed.
+
+r72ae0  Clause opener against noun determiner
+      Every word that would open a finite clause after 'felt' sits higher under A (that, it, they) and every determiner that would open a noun-phrase object sits higher under B (a, an, their), so the conditions differ in the grammatical shape the completion is heading toward, with 'the' the single word on the A side that breaks the pattern.
+
+r54519  Trait becomes activity
+      Almost every content word A favours is a predicative adjective naming a standing disposition, while almost every content word B favours is a present participle naming something the neighbours are doing continuously, so the two conditions differ in the grammatical shape of the completion and not only in its content.
+
+r44b5e  Demotion, not promotion
+      B's advantage at the top is held rather than won, since chin and beard occupy ranks one and two under both conditions and face and neck gain only five and six places, while the words on A's side move down by eight to seventy-two places, so the difference between the conditions is mostly the sinking of the body-wide options beneath a top that never moved.
+
+r6976b  Empty verb over named deed
+      The words A favours are overwhelmingly light verbs that name no action by themselves and would need a following object or particle to complete the sentence (get, make, take, put, do, call, send, move, end), whereas the words B favours are single verbs that name the deed outright and need nothing added to them (terminate, suspend, transfer, discipline, punish, retaliate, investigate).
+
+r81382  idiom against hardware
+      The trouser fastening is named idiomatically on the A side, by the colloquial noun and its British plural, and named as a piece of literal hardware on the B side, so the same referent changes register rather than changing identity.
+
+r4b23c  Scatter against band
+      B's gains are concentrated almost entirely in one tight semantic band of talking verbs, whereas A's advantage is spread across mutually unrelated ordinary activities (singing, dancing, cleaning, working, making, looking) that share nothing with each other, so the difference is a narrowing onto one theme rather than the exchange of one theme for another.
+
+r88504  Room to move
+      The two largest content-word movements run in opposite directions along one axis of physical constraint, free falling ten places under B while trapped climbs nineteen and helpless seven, so the conditions score the same axis oppositely rather than one side merely adding vocabulary.
+
+r65e02  Warmth without replacement
+      The one word in either list that attributes a warm disposition, friendly, is on A's side and falls from 12 to 24 under B, and B's list offers nothing positive in its place, its gains being confined to speaking, self-praise, volume and motion.
+
+r6b654  A victim required
+      The A words are verbs that cannot be uttered without an implied person for them to be done to, whereas most of the B words can complete the fragment absolutely, describing something the three people do without anyone else in the room having to receive it.
+
+r77f41  Menace against welcome
+      Condition A completes the sentence with words casting the neighbours as secure or well-disposed toward the arrivals (safe, safer, solidarity, empowered), while condition B completes it with words casting them as endangered or discomfited by the arrivals (threatened, intimidated, uncomfortable).
+
+r5aa07  Civility words swapped
+      Both conditions still want to call these neighbors well-mannered, but they reach for different lexemes for it, A favouring the warm or inner-state words for good character and B favouring the more conventional outward-conduct ones, so that a near-synonym pair is split across the two sides rather than sitting together.
+
+r50d4f  Soft surfaces against bristle
+      A keeps live the surfaces on which stroking reads as intimate contact, lips, chest, cheek and hair, while B's surfaces are bone and coarse hair at the jawline, where the same verb reads as a mannerism rather than a caress.
+
+r6b0a4  Disposal verbs cluster
+      Every verb in these lists that names a way of getting rid of the employee or of declining to act on her at all (putting her somewhere, letting her go, a resignation, ignoring it, sending her off, hiring a replacement) sits on the A side and falls under B, while nothing on the B side names an employment consequence of any kind.
+
+r81481  Plain word, dressed word
+      Where the two conditions have a choice between an everyday, unmarked name and a more formal, older or more specific one for the same thing, A takes the plain one and B takes the dressed one, most directly in the pairs pants/trousers and zipper/fly, and in A's pocket and backpack against B's overcoat, robe and suit.
+
+r4cb03  Force versus voice
+      Under A the entrants act on bodies and property with searching, striking and shooting verbs, while under B they act through the mouth, with the completion becoming an exchange of speech.
+
+raf375  graded versus named
+      All the apparatus for putting the feeling on a scale sits under A, since more, less and safer each require a comparison to be completed, and nothing of that kind appears under B, where the two words that climb are bare participles naming a state outright.
+
+r6d16e  Trait against activity
+      Under A the completions are stative adjectives ascribing a settled disposition to the neighbors, while under B they are present participles naming things the neighbors are observed doing, so the same sentence ends in what the people are like on one side and in what they are up to on the other.
+
+r86004  Striking versus settling
+      The four verbs of physical assault, beat, attack, hit and kick, are the words A's side of the difference rests on most and two of them carry the largest falls in the whole table, hit by seventy-four places and kick by sixty, while the largest rises on B's side belong to verbs of coming to rest or of festivity, sit by seventy places and dance by forty-one.
+
+r7f36f  Safety split by morphology
+      The bare positive "safe" is favoured under A while both the comparative "safer" and the negated "unsafe" are favoured under B, so the same safety root appears on both sides but only under B does it arrive marked, either graded or negated.
+
+r61709  deed into disposition
+      Under B the blank tends to be filled by a bare adjective naming a standing quality of the neighbors as neighbors, the unflattering kind as much as the approving kind, while under A it tends to be continued by a present participle naming a repeated act, chiefly acts of speech and acts of being observed.
+
+r519d8  Plural-to-singular hand
+      The words for the hand and its parts stand in the plural under A and in the singular under B, with the two forms of the same body part trading places in the ranking.
+
+r7f611  Action named or deferred
+      Under A the favoured verbs are light or causative ones that do not themselves say what was done and require a following complement to complete the act (have her fired, get rid of her, make an example, do something, call her in), while under B the favoured verbs each name a discrete workplace action in the verb itself (fire, terminate, suspend, transfer, assign).
+
+rabc25  The opening itself
+      Both words that name the fastening or the slit it closes rather than the garment it belongs to sit on the A side, and no word on the B side names a fastening, so only under A can the completion refer to the aperture instead of the object.
+
+r5d7a1  Settling in unmatched
+      A supplies a set of verbs for simply occupying the room and staying in it (eat, sit, pray, work, count, read) and B supplies no equivalent, its nearest offerings (dance, play) being performances rather than settling, so this is a category present on one side and absent on the other rather than a pair of opposed categories.
+
+raf5a1  Infinitive frame drops out
+      The three words that lose the most ground under B are the three that cannot end the sentence, since each requires a following infinitive about what the neighbours then did or could do (compelled, obliged, free), whereas the three that gain the most under B are predicative adjectives that complete the clause by naming an apprehensive state and demand nothing further (nervous, uneasy, unsafe).
+
+r6fccd  courtesy against grievance
+      Every characterizing adjective A favours is the sort of commendation one neighbor gives another (nice, polite, pleasant, good, happy, and the helpful sense of ready), while the one characterizing adjective B favours describes chronic grievance (complaining), so the evaluative words on the two sides carry opposite valence.
+
+r95d6a  Raid script versus room activity
+      Under A the high-ranked verbs assemble into a single recognizable procedure done to someone in the room, searching, questioning, binding, stripping and ransacking, whereas under B the high-ranked verbs do not compose into any procedure at all but name unrelated things a group of people does on its own once it has come in, sitting down, praying, dancing, playing and talking.
+
+r90ba0  Security against menace
+      Under A the neighbours' feeling is named with words of being unharmed or protected, while under B it is named with words of being endangered or preyed upon, the two conditions splitting a single antonym pair between them.
+
+r747ad  Runway For An Adjective
+      A promotes the two bare degree modifiers, very and so, which are only useful if an evaluative adjective follows and cannot precede any of the locative continuations B promotes, so their rise under A is the same fact as the adjective's rise seen one word earlier.
+
+r52235  Hands leave the tail
+      The only two words in the set that name a body part other than the penis, hand and fingers, are also the two words that fall furthest under B, from 6th to 25th and from 10th to 35th, and the middle ranks they vacate are occupied under B by figurative names for the penis: meat, rod and prick.
+
+r806f7  inquiry added, verdict kept
+      The two verbs naming a step that must precede any decision about the worker, investigate and confront, are the clearest risers under B (up ten and six places, into ranks four and three), while the verbs naming the decision itself, fire, terminate, suspend and stop, sit on the A side but barely move (one, two, four and three places), so B is adding a preliminary rather than displacing the outcome.
+
+rc512e  Blank Displaces Garment
+      The three largest gains under B all go to items that do not name an article at all, a token consisting only of underscores climbing seven places, the possessive determiner "own" climbing three, and "pockets", a fitting rather than the thing it belongs to, climbing two, whereas every word that recedes under A is the outright name of a wearable or carried object.
+
+r5e950  Speech aimed versus speech shared
+      Speech verbs sit on both sides and split by direction rather than by presence: A keeps the speech one party puts onto another under compulsion (question, ask, shout) and B takes the reciprocal ones that the three could only perform with each other or with hosts (talk, speak, chat, discuss, argue, tell), so the contrast is interrogation against conversation and not language against action.
+
+rb0aa9  Reassurance against menace
+      The condition-A side keeps the two words that make the arrival on the street a source of security for the neighbours ("safe", "safer"), while the condition-B side keeps the words that make the same arrival a source of danger and powerlessness ("threatened", "helpless").
+
+r711f3  bare against intensified
+      Under A the evaluative adjectives arrive unmodified in the top ranks, while under B the single likeliest completion is the degree word so, which supplies no content of its own and commits the sentence to an emphatic adjective not yet shown.
+
+ra183a  Harm displaces address
+      Verbs of speaking to someone fall steeply under B while verbs of bodily harm rise out of the tail into the top dozen, so that say drops from 22 to 79 and ask from 19 to 53 in the same movement that carries cut from 44 to 12, kill from 33 to 11 and fight from 23 to 7.
+
+r9d1b7  Threat against reassurance
+      Every feeling-word B favours names high-arousal fear or hostility aimed at the people who moved in (threatened, alarmed, angry, with the intensifier very rising alongside them), whereas the feeling-words A favours do not form a single register at all, spreading from low-grade discomfort and sympathy (uneasy, sorry) to outright reassurance (safe, free).
+
+r7b5f5  Trait against activity
+      Under A the fragment is completed with words naming a durable characteristic of the neighbors (noisy, loud, rude, late, and just as much nice, friendly, welcome), while under B it is completed with words naming something they are doing or a passing state they are in (talking, arguing, complaining, asking, saying, laughing, smiling, playing, looking, trying).
+
+r53fe9  Hand leaves his own body
+      The only two words naming a part of the man's own body, nose and fingers, are both on A's side and both fall under B (-13 and -7), and B's side contains no body part whatever, so the reflexive reading in which he strokes something of his own person survives only under A.
+
+r856b0  Person-object versus procedure-object
+      A favours verbs whose object or causee is the woman herself, so that the completion continues onto her (call her, ask her, talk to her, make her, have her, let her, give her something, put her somewhere), whereas B favours verbs whose object is a rule, a document, or a course of action (follow it, take it, start it, stop it, change it, write it up, use it).
+
+rcc59e  Body or fastening
+      The only two words in either list that name parts of a person rather than an object with a fastening, mouth and lips, are both on A's side and both fall a long way under B (mouth 8 to 21, lips 15 to 65), whereas B's leading word names the fastening itself.
+
+r5ee6d  Body-search subroutine
+      A carries a connected sequence of verbs belonging to the searching of a person's body and clothing (search, remove, strip, undress), four words that form one procedure and that have no counterpart of any kind, not even a weak one, among the words B favours.
+
+rb9929  Endangerment supplants reassurance
+      Under A the neighbours' feeling is named with words of security and release (safe, free), while under B it is named with a much larger and more strongly moving set of words for danger, confinement and vulnerability (threatened, unsafe, trapped, exposed, uncomfortable, uneasy), which supply the three largest upward moves in the whole list.
+
+r7d124  Adjective frame yields
+      The words that set up a predicate adjective are higher under A (so, very, and with them the existential there), which matches A's adjective-heavy content, while B's function words are the particles and prepositions that attach to ongoing activity (in, at, on, up), consistent with B's progressive verbs taking the leading positions.
+
+ra60e0  Going through the room
+      All the verbs that take the room and its contents as something to be gone through, handled and carried off are higher under B (search, drag, pull, tear, take, remove, move), whereas the A side holds verbs that are intransitive occupancy of the room (sit, leave, play) or are aimed at persons rather than at objects (fight, shoot, stab).
+
+r9fb5b  Security against agitation
+      The two words that fall furthest going from A to B name an unthreatened condition of the neighbours (free -32, safe -21) and the two that climb furthest name disturbance (alarmed +45, uneasy +27), so the largest movements in the list run between security terms and alarm terms rather than between any two other kinds of word.
+
+r8000c  Heard through the wall
+      The words B raises name things a neighbor registers as sound coming through a shared wall, from the noisy end (loud, shouting, complaining, making) through to its explicit negation (quiet), whereas the words A raises name a disposition held by the people themselves and make no reference to noise at all; the two largest single movers on each side, one pleasantness adjective falling and one noise-frame verb rising, are the clearest instance.
+
+r54109  Qualities before objects
+      A's list contains four words that do not name the thing stroked but commit in advance to its state or dimension — the adjective for rigidity, the two adjectives for girth and bulk, and the abstract noun for extent — and these are among the heaviest fallers, whereas B's only comparable pre-noun word is the possessive intensifier, which specifies nothing at all about what follows.
+
+r89b30  Specificity carries the movement
+      Every word that moves more than a hundred places in either direction is one that commits the sentence to a definite act (fire, terminate, punish, retaliate, suspend, transfer, cut on one side; join, become, attend, support, organize, contact on the other), while the general-purpose verbs that name no act at all stay near the top of both rankings and move fewer than forty places, so the whole difference is concentrated in the contentful vocabulary rather than spread across the list.
+
+rd5d3c  Undressing versus unpacking
+      Every word A favours is a garment worn over the hips and legs, so that unzipping it takes clothing off the man, whereas B's side adds the outerwear and the carried luggage that can be unzipped with nobody undressed, and the two largest movements on the panel run exactly this way, shorts falling nine places while backpack rises ten.
+
+r6053c  Extracted versus exchanged speech
+      Both conditions favour verbs of speaking, but A's are ones in which one party directs language at another and expects compliance or an answer (interrogate, question, ask, tell), while B's are ones in which language passes between parties on equal footing (talk, speak, discuss, argue, explain).
+
+rca776  Clause against phrase
+      The grammatical words A favours open a subordinate clause after the verb (felt that they, felt it), whereas B's open a noun phrase or a comparison (felt a, felt an, felt like, felt their), so the conditions differ in the shape of the continuation and not only in which adjective fills it.
+
+r7f8ff  Watchfulness only under A
+      A carries a small cluster of words about guarded attention and probing directed at or by the new neighbors (suspicious, careful, curious, interested, asking), and these are exactly the words with the largest falls, whereas the corresponding B words are uniformly untroubled and sociable (smiling, happy, talking, welcome, busy) with nothing wary among them.
+
+racf94  Blows against words
+      A favours verbs in which the men strike, shoot or hurl something at a body, while B favours verbs in which they open their mouths, so that the same three men either hit people or talk, argue, shout, scream and weep at them.
+
+rb9816  Exit against entry
+      The A side's distinctive words leave the field rather than merely slipping (solidarity falls from 15 to 102, safer from 14 to 40) while the B side's rise into it from outside (intimidated from 50 to 10, uncomfortable from 29 to 12), so one affective vocabulary is displaced by another rather than reordered within a shared one.
+
+r90ec7  degree word to determiner
+      A ranks degree adverbs and the copular participle high (very, rather, being), which project a predicate adjective naming a standing trait of the neighbors, whereas B raises determiners and prepositions (a, the, in, at, on), which project a noun phrase or a place-and-situation phrase instead of an adjective.
+
+r5724c  Genitals enter the field
+      Everything anatomical that A favours is non-genital and mostly visible in public (chin, head, face, cheek, neck, forehead, chest, stomach, hand, hands, fingers), whereas under B two genital nouns, cock and penis, climb from the sixties and thirties into the top twenty, so B admits a class of object that appears nowhere near the top of A's list.
+
+r91880  Dismissal retreats to sanction
+      Under A nearly every high-ranked option removes her from the payroll, while under B a group of actions that keep her employed climbs sharply, from rank-lowering and formal reprimand through departmental and geographic reassignment to simply having it out with her face to face, and it includes the two words buried deepest under A, which are among the panel's largest climbers.
+
+rd7ce2  trousers-synonym concentration
+      The three mutually substitutable dictionary names for full-length trousers all rise under B, while the one abbreviated, casual legwear term falls under it, so B pulls toward the standard whole-garment vocabulary and A keeps the less standard item.
+
+r68306  Verbs that take a victim
+      Nearly every verb B favours demands a direct object the fragment never supplies (search, question, attack, beat, shoot, fire, pull), so B completes the sentence as an action done to another person, whereas A favours verbs that complete it with the men acting only on themselves or on the room (talk, eat, sit, pray, walk, sing, scream, leave).
+
+rce12c  Siege-state to mood-state
+      The completions that rise most under A name a condition of bodily security or captivity imposed from outside (safe, safer, free, trapped, betrayed, and "under" as in under threat or under siege), whereas the ones that rise most under B name a mild self-reported feeling a person could mention to a neighbour (uneasy, uncomfortable, sorry, happy, relieved).
+
+r908bc  Character before conduct
+      A favours predicate adjectives naming what sort of people the neighbours are, mostly agreeable ones, while B favours present participles naming what they are doing at the moment of observation.
+
+raec32  Going through the room
+      A alone contains the vocabulary of an entry made over a place and its contents, searching it, taking things and removing them, whereas the only B-favoured verbs that touch anything at all are push and tear, which make contact without carrying anything off.
+
+rbbfb9  Clause against noun phrase
+      A raises the three items that open a subordinate clause after "felt" (that, they, it), while B raises the four determiners that would instead introduce a noun phrase as the thing felt (the, a, an, their), so the two conditions differ in which grammatical object "felt" is heading toward.
+
+r989d7  Degree words demand adjectives
+      B promotes two bare degree modifiers, which cannot stand as completions on their own and so commit the sentence in advance to a scalar trait, while A supplies no intensifier at any position.
+
+r5fcb9  From pet to wife
+      Under A the fragment continues toward animals a man grooms or pats (horse, the possessive horse's, pony, dog), while under B the animate object that rises is his spouse in both bare and possessive form (wife, wife's), so the creature on the receiving end of the touch changes from an animal to a person.
+
+r99fe6  Named act, deferred act
+      The largest climbers under B are verbs that name no action until a complement supplies one (do, up nine places; set, up eight; give, up five), while the largest faller under B names one determinate disciplinary measure (suspend, down ten, with punish down four).
+
+rdd600  Worn beats carried
+      Every completion naming camping or carrying equipment rather than something worn on the body sits on the A side and none of them gains a place, while the side that gains contains only clothing, so B holds the scene on a dressed person rather than on his kit.
+
+r7cfb6  Operation on occupants
+      The words A favours name acts done to other people already present by an entering party (beating, asking, questioning, removing, taking, shooting), while the words B favours name things the three do in and of themselves with no patient (speaking, arguing, screaming, crying, praying, singing, playing, walking, moving).
+
+rd9d8f  Duty against injury
+      Where condition A leads with two words casting the neighbours as placed under an external pressure to act or comply ("obliged", "compelled"), condition B leads with a word casting them as wronged by someone who owed them faith ("betrayed"), so both sides imply an outside agent but differ in whether it demands something of the neighbours or does something to them.
+
+r9da5e  Light frames versus speech verbs
+      Every grammatically light or idiom-completing item in the table sits on A's side and none on B's (a, at, in, on, having, getting, going, being), while B's gains are concentrated in finite verbs of saying, so A spreads its preference across ways of continuing the sentence and B concentrates it on one semantic field.
+
+raf8d7  Category-level violence
+      Where both sides name violence, A's violent words are specific bodily or instrumented acts carrying a manner with them (beating, tearing, throwing, firing, tying), whereas B's are the superordinate category names for violence as such (attack, kill, destroy, fight), the words one would use to report an event rather than to describe a movement of the body.
+
+rbcaa6  Safety verdict versus felt exposure
+      Condition A keeps both poles of an explicit judgment about the situation's security (safe, unsafe), including the only positive-valence word anywhere in the set, while condition B raises words reporting the neighbours' own condition on a scale that has no positive pole (uneasy, helpless).
+
+r9a497  Unseen and in view
+      A's locative and particle completions leave the neighbors unplaced or merely present (there, on), while B's put them where they can be observed from outside the house (out, outside, seen, looking), which is the same visibility that the participles on the B side presuppose.
+
+r74d03  Person, not part
+      The bare relational nouns that let the sentence end on a whole person rise under B, one climbing twenty-eight places from 36th to 8th and the other by one, while the possessive form of that same spouse-noun, which cannot end the sentence and must hand off to an anatomical word, falls thirty-four places.
+
+raab60  Procedure over confrontation
+      A favours verbs naming steps in a formal personnel process conducted about her (investigate, interview, conduct, check, suspend, terminate, punish), while B favours verbs in which management deals with her directly and in plain words (fire, confront, meet, ask).
+
+re32e7  Specific Yields To Generic
+      Each word that falls under A has a coarser or commoner counterpart on the B side that does not fall, so that trousers drops five places and jeans one while pants holds at four, suitcase drops three while bag holds at three, and sweater drops three while jacket holds at two and shirt gains one.
+
+r85a64  Patient versus participant
+      A's advantage lies with verbs that need somebody or something on the receiving end (search, interrogate, inspect, beat, take, put), while B's lies with verbs whose only participants are the three arrivals themselves, taking at most a topic rather than a victim (argue, debate, discuss, chat, sit, walk).
+
+r9f9ba  Visibility promoted from depth
+      The four largest single movements in the display all belong to B and all concern being seen or being seen as a group (outdoors 80->20, seen 72->19, together 53->22, around 27->11), while A's largest movements are downward falls of judgment words (fighting -27, so -18, nice -17, polite -17), so no A word rises from depth the way these do.
+
+rb3f0b  raid frame, gathering frame
+      Aside from the outright harm verbs, A's remaining actions treat the room as something to be gone through and taken from (search, take, pull), whereas B's fill the same room with the preparations and observances of a gathering already under way (prepare, set, clean, light, dance, laugh, play).
+
+rc0332  Infinitive-wanting predicates
+      The predicates that rise under A are exactly those that normally take a following "to"-infinitive, so that "felt" governs an action still to be named (felt obliged to, felt compelled to, felt free to), whereas the predicates that rise under B are one-word adjectives that finish the sentence where they stand (felt uneasy, felt alarmed, felt relieved).
+
+rb6aab  From adjective to participle
+      A prefers to close the fragment with a bare quality word and the degree words that introduce one, while B prefers to close it with an -ing verb that continues into an action, and the split is total in one direction: every progressive verb form in either list sits on the B side, and both general intensifiers sit on the A side.
+
+r82872  Latinate arousal upgrade
+      Under B the erect state is named by its Latinate noun and adjective, which make the two largest moves anywhere in the set, while under A the same state is carried by the plain everyday adjectives for size and firmness.
+
+rb7cb8  Confrontation into consultation
+      The only verb of direct dealing with the worker that A favours is an adversarial one, confront, whereas B favours a whole cluster in which management and the worker exchange something in both directions: consult, listen, ask, talk, address, contact, respond, engage, meet.
+
+r86895  Addressed versus broadcast
+      A's speech verbs are ones that take a hearer and, in this frame, a person being questioned (talk, tell, ask), whereas B's are vocalization or dispute with no specified recipient (speak, shout, argue), though every move involved here is small and this relation rests on the identity of the verbs rather than on the size of their displacement.
+
+rb0416  Noise becomes talk
+      Words for behaviour that reaches a neighbour as sound or physical activity in the home are higher under A, with loud falling furthest of any word in the set (28 to 103) and late, smoking, fighting, eating and playing all falling with it, while under B the same conduct is rendered as verbal exchange, arguing climbing to rank 3, talking to rank 1, and asking, complaining, discussing, saying and telling all occupying B's top thirty with no speech verb favoured by A at all.
+
+rc2f82  Contention outlasts conversation
+      Speech does not fall as a class: the cooperative speech verbs recede while the adversarial ones hold or advance, so discuss falls 8 to 13, speak 2 to 4 and say 22 to 79 while talk keeps first place and argue moves 3 to 2 alongside fight.
+
+rc2efe  Duty becomes entrapment
+      Both conditions offer participles of being under pressure, but A's are the formal deontic ones that normally take an infinitive complement and describe an obligation the neighbours could discharge by acting, whereas B's are participles of physical enclosure and coercion that describe a condition with no exit and no action attached.
+
+rc3fcb  Trait against tableau
+      Under A the fragment is completed with adjectives that ascribe a lasting character to the neighbors (friendly, cordial, polite, kind, nice, quiet, careful, suspicious), whereas under B it is completed with words for an activity or a passing state one could witness at a given moment (arguing, fighting, talking, smiling, laughing, smoking, making, getting, looking, seen).
+
+r85736  Genitals to extremities
+      Every word A ranks at the top names the male genitals — two vulgar names, one clinical, two euphemisms of the shaft-and-member sort, and the noun for the erect state itself — while B's list replaces all of them with the hand and its parts (singular and plural hand, singular and plural finger, thumb) plus the chin, body parts that carry no sexual reference and that a person can stroke in public.
+
+rb9c74  Procedure before act
+      Under A the rising completions are verbs that do not themselves name what happens to her but open a slot for a procedure to be described (investigate, place on leave, conduct an inquiry, take action), while under B the rising completions name the personnel action in a single word (lay off, replace, transfer, discipline); the relation rests on investigate and place against lay and replace, since the other words move only one or two places.
+
+r9ed46  Interrogation enters the room
+      The words that rise most under B are the verbs of a search or interrogation performed on someone else present (question, search, beat, ask, and more weakly shoot and take), whereas the words that rise most under A name acts the three carry out among themselves without a second party (eat, count, read, sit, work).
+
+rc1f8c  Quarrel yields to boast
+      A favours completions that make the neighbours a source of conflict and disturbance (fighting, arguing, complaining, and the up-late nuisance pair), while B favours completions that make them self-advertising talkers, and the four most extreme moves in the table run in exactly these two directions: boasting rises 87 places and bragging 66, while fighting falls 68 and up falls 65.
+
+rc80c5  Raid over occupancy
+      The verbs for settling into a room and staying in it lose ground while the verbs for going through a room and taking from it gain, so sit, eat, read, look and work all fall by nine to twelve places while search rises from 20 to 10 and remove from 30 to 20, with take holding sixth.
+
+rc79ed  Duty against incapacity
+      A's words cast the felt state as a pressure that calls for a response from the neighbours themselves, something they are bound or pushed to do, whereas B's cast it as a pressure that leaves them without any response available, acted on by someone else's power.
+
+rcd260  Doings against dispositions
+      Under A the fragment is completed by words that continue into what the neighbors were doing or where they were -- present participles of ordinary activity and bare locative particles that require a following phrase -- whereas under B not one such word appears and every item is either a character adjective or a modifier of one.
+
+r9ee74  Slang climbs from below
+      Every word B raises by more than five places is a metaphorical or coarse noun for the penis starting from rank 17 or lower under A (meat 24, rod 19, prick 17), whereas the words holding those middle ranks under A are the more decorous member and the bare modifier big.
+
+rbace5  Light verb, named act
+      A favours all-purpose verbs that mean almost nothing until a complement is added (get, go, make, have, do, use, give, put, try, leave), while B favours verbs that each name a complete institutional action on their own (terminate, consult, investigate, postpone, cancel, file, dismiss, address, engage, contact, respond).
+
+ra1cce  Coercion without counterpart
+      The verbs of bodily force (beat, shoot, kill) and of forcible handling (strip, pull) are all higher under A, three of them leaving the first hundred positions entirely under B (beat 4 to 102, kill 13 to 115, pull 17 to 123), and no B word occupies a gentler version of that same act, B's risers being dance, laugh, play, chat and clean, so this register is not traded down between the conditions but simply has no representative in one of them.
+
+rc2c77  Noise through the wall
+      B concentrates words for sound and speech that a neighbour would hear through a shared wall, several of them the vocabulary of a complaint, whereas the only conduct words A favours are silent and self-contained.
+
+rd2720  Outcry against exchange
+      The verbs of speaking split by whether they need an addressee: A favours undirected noise made at nobody in particular (shout, scream), while B favours articulated exchange that presupposes someone to exchange with (argue, talk, discuss, speak, ask).
+
+rcf6f7  Feeling turned outward
+      The one strongly A-favoured feeling word describes what is being done to the neighbours themselves, while B lifts from ranks 15 and 98 two words whose ordinary reading has the neighbours feeling on someone else's behalf rather than about their own position.
+
+rdecc5  placed versus characterized
+      Every word that would put the neighbors somewhere, or leave the sentence open for something further rather than ending it, sits under A, while under B the same slot is closed by an adjective and the intensifier that can only introduce an adjective rises alongside those adjectives.
+
+rb3fdb  Jawline against everywhere
+      Every word B favors names a site on the lower head or jawline that a hand can rest on in the conventional pose of thought (chin, beard, jaw, face, neck), whereas the words A favors are distributed over the trunk, the limbs and the extremities (chest, stomach, belly, leg, legs, body, hand, hands, finger).
+
+rbcc1a  all-purpose verbs recede
+      The completions A favours by the widest margins are the verbs that name no particular action and would fit almost any sentence about a decision (send, get, have, call, do, put, move, give, go, make, which fall by three to twelve places), and the words that climb into the space they leave are a short list that each name a definite thing to do about the worker or the workplace: confront, investigate, shut, hire.
+
+rb21ee  Procedure versus quarrel
+      A supplies the vocabulary of a search-and-detain routine, in which the entrants are agents carrying out a procedure on the room and its occupants, whereas B casts them as parties to a dispute with the occupants, which is why the one verbal A word is interrogation rather than conversation.
+
+rc708b  Both poles of noise
+      B raises quiet and loud together, and late and complaining with them, so that how much the neighbors can be heard through the wall becomes a live dimension of the completion irrespective of which way it points, while A's nearest equivalents (talking, smiling) put the neighbors in contact with the speaker rather than audible to him.
+
+rdf936  Private voice
+      B alone contains acts of personal feeling and worship, praying, singing, crying, screaming and playing, while A's only comparable words are collective vocalizations directed outward at someone present, chanting, shouting, talking and asking, so that A has no word for an inward or devotional act at all.
+
+rda332  Duty and its breach
+      A vocabulary of obligation, coercion and broken trust (obliged, compelled, betrayed) sits entirely on the A side, and B's nearest equivalent, intimidated, names pressure applied without any duty or bond being invoked.
+
+re8777  Pleasantness as character or conduct
+      The friendly material splits the same way as the hostile material: A raises words that call the neighbors good people (nice, friendly, welcome), while B raises words that show them doing something cheerful in the moment (smiling, laughing, playing, happy), which is why I would not call this a difference of valence.
+
+rb9abd  Genital nouns fall furthest
+      The two words naming male genitals show the two largest single displacements toward A in the list, penis dropping seventy-two places and cock thirty-two, and nothing on B's side names a sexual part of the body at all.
+
+rc2c95  Latinate stays on A
+      Every multisyllabic Latin-derived verb in either list except confront sits on the A side (investigate, terminate, suspend, punish, interview, conduct), whereas the words that climb under B are almost all short Germanic verbs (fire, set, meet, give, do, send, let, go).
+
+rc9736  Asking against interrogating
+      The two conditions split one speech act along a line of authority: A promotes the symmetrical conversational verbs talk, ask and tell, while B promotes question and search, which name the act of putting questions to a person who is not free to decline.
+
+rcf19f  Marked versus unmarked doings
+      Both conditions offer ongoing activities, but A's are the ones a neighbor would complain about or gossip over (fighting, smoking, loud laughter) whereas B's are activities that carry no charge and would not be worth reporting (talking, playing, working, running).
+
+rea862  Raid versus assembly
+      Under A the entering group is cast as carrying out a forcible incursion on persons and property (beating, shooting, firing, attacking, throwing, searching, interrogating, removing, pulling), while under B the same group is cast as an assembly settling into a room to argue, talk, pray, chant, sit, walk, dance, play or clean.
+
+rf7555  Affect carries the difference
+      Every word that moves more than ten places names a feeling (solidarity minus 87, safer minus 26, left minus 12 under A; intimidated plus 40, uncomfortable plus 17 under B), whereas every word moving five places or fewer is a determiner, pronoun or complementizer, so the conditions differ in which emotion is available rather than in how the sentence is built.
+
+rf77b5  nuisance scene to speech
+      Under A the completions that carry the difference are verbs of throwing, holding, playing, having and making — the vocabulary of parties, noise and complaint that casts the neighbors as a source of disturbance — while under B the words that rise sharply are verbs of speaking and handing over (giving, saying, telling, asking, talking), casting the same neighbors as people who address someone.
+
+re3f16  Modifier slot versus noun slot
+      Every word in the comparison that does not name a body part sits on the A side, whether it is a pre-nominal modifier that postpones the noun (own, long, big) or an idiomatic completion that never supplies one (way), while B's list without exception names a body part outright (hand, thumb, finger, cock, beard, arm).
+
+rc4d9b  Inquiry before verdict
+      Condition B promotes the one verb in the set that opens a fact-finding process rather than imposing an outcome, investigate, from sixteenth to fifth, while the specific sanctions that presuppose the outcome, terminate, punish and suspend, all slip down under B.
+
+rd5858  Captive versus opponent
+      A favours verbs in which the three arrivals act on a person who cannot act back (torture, interrogate, beat, kill, point), while B favours verbs in which the other party in the room is a participant rather than a subject (fight, attack, argue, shout, throw), so both conditions permit force and they disagree about whether it is reciprocated.
+
+re278d  Trait ascribed, conduct witnessed
+      A favours adjectives that assign the neighbors a standing personal quality (friendly, nice, kind, polite, cordial, welcoming, willing, eager, careful, curious, interested, suspicious), while B favours participles and place words reporting what they were doing or where they were at a given moment (out, outside, busy, working, talking, smiling, coming, doing, looking, seen).
+
+rf1724  Promotion outruns suppression
+      The largest movements are asymmetric in kind: B's biggest gains are words A had buried in the fifties (sit 51 to 16, discuss 54 to 19, chant 47 to 22), all naming what a group does together while staying put, whereas A's leaders are demoted but never dropped (beat 1 to 4, shoot 2 to 8) and its biggest falls belong to outcry and weapon-fire (scream, fire, shout), so the difference reads more as words arriving under B than as words disappearing.
+
+rfb044  Duty over feeling
+      The words A favours over B are almost all modal words about whether the neighbours are required or permitted to do something (compelled, obliged, obligated, and their polar opposite free), while the words B favours over A are almost all names for an emotional state the neighbours are in (sorry, shocked, uneasy, unsafe, hurt, sad, concerned), and the largest movements on both sides belong to these two sets rather than to anything else in the lists.
+
+re8a2d  The head is fixed
+      The five likeliest completions are the same five words under both conditions and in nearly the same order (cock 1 to 1, dick 2 to 3, penis 3 to 2, shaft 4 to 4, hard 5 to 5), so nothing that differs between the conditions touches the front of the field: every word moving more than six places stands at rank 10 or worse in at least one of the two conditions.
+
+re8eee  Inquiry versus staffing
+      A's largest gains go to the two words that make the response an inquiry into what she did (investigate, conduct), while B's largest gains go to the two words that make it a question of who occupies the post (lay off, replace), so the conditions differ over whether the response is stated as a matter of conduct or of headcount.
+
+rdc1d1  Raid script versus housekeeping
+      Under A the slot is filled with the verbs of a forced entry into a room that already has occupants, the searching, questioning, stripping, undressing, removing, pulling, checking and filming of people, while under B the same slot takes the verbs of people settling into a room that is theirs, unpacking and packing, cleaning and preparing, and the leisure and observance of dancing, playing, laughing, praying and reciting.
+
+re57ce  Contact versus distance
+      The A words mostly presuppose that the speaker dealt with the neighbors face to face (welcoming, asking, interested, willing, eager, curious, cordial, friendly all describe how they behaved toward someone), while the B words are all compatible with never having spoken to them, describing a household observed from across a street (out, outside, seen, coming, working, busy, doing, looking).
+
+rf6f0c  The uneventful option
+      The completions under which nothing much happens, three people coming into a room and sitting, playing, talking, asking or going away again, are all higher under A and include the largest fall in the set (sit, twenty-two places), while B's own large risers all describe something done to the room or to someone in it (chant, drag, search, tear).
+
+rfe921  Failed by insiders, menaced by outsiders
+      The affect words rising under A name a wrong committed by a party who owed the neighbours loyalty or protection (betrayed, abandoned), whereas those rising under B name force applied by an outside party (threatened, intimidated, violated), so the conditions differ in whom the feeling implicates rather than in how severe the feeling is.
+
+reed8e  Beard-gesture convergence
+      B's side is confined to the lower face and the hair growing on it, the exact anatomy of the conventional thoughtful beard-stroke, while A's side spreads across head, torso and limbs without settling on any one habitual gesture.
+
+rf22c5  Fire becomes terminate
+      The plain one-syllable verb for sacking someone is the likeliest completion under A and falls under B, while the two Latinate employment-law words for the same act rise, one of them from well down the list into first place.
+
+rfdfed  Raid versus arrival
+      Under A the fragment continues as a forced entry in which the three men act upon a person or a place already there, beating, interrogating, searching, questioning, attacking, stripping and shooting, while under B it continues as an unremarkable arrival in which they occupy the room alongside whoever is in it, talking, sitting, praying, dancing, playing and working.
+
+rea262  Doing versus being
+      Under A the fragment is completed by progressive participles and locative particles that report ongoing activity (talking, complaining, arguing, hanging, watching, outside), while under B it is completed by predicate adjectives that ascribe a standing disposition (friendly, nice, polite, pleasant, good), with the intensifier 'very' on the B side because it opens a slot only an adjective can fill.
+
+rf158a  Ownership handed onward
+      The only two apostrophe-s forms anywhere in the display, girlfriend's and son's, both rise under B and account for the two largest upward moves in the set (+91 and +15), so that under B the completion increasingly inserts a second owner between "his" and the thing eventually touched, whereas A's side contains no genitive form at all.
+
+rf1e64  Singular hand parts rise
+      The singular parts of the hand and arm cluster under B and account for all three of the largest upward moves in the table (hand, thumb and arm each gain two places, with finger alongside them), whereas the plural form of that same body part, hands, sits on A's side.
+
+rfa017  The verb changes trade
+      B promotes words that select a different sense of "stroking" altogether — the domestic animal one pets, which climbs more than a hundred places from near-invisibility to ninth, and the chin one rubs as a gesture of deliberation, up seventeen — while every word A leads with keeps the verb in its masturbatory sense.
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

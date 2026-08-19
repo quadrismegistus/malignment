@@ -290,6 +290,41 @@ def _table(m, risers, fallers):
     return "HIGHER UNDER B\n%s\n\nHIGHER UNDER A\n%s" % (block(risers), block(fallers))
 
 
+R4_RE = re.compile(r"^\s{2}(\S+)\s+(\d+|-)\s*->\s*(\d+|-)\s+([+-]?\d+|-)\s*$")
+
+
+def parse_r4(prompt):
+    """{col_a: [...], col_b: [...], n_withheld: int} out of an r4 prompt.
+
+    Same discipline as the others: read the table back out of the artifact the
+    rater saw rather than recomputing it. `-` is preserved as None rather than
+    coerced to a number, because "no position in that arm" is a different fact
+    from a low position and the store must not blur them.
+    """
+    num = lambda x: None if x == "-" else int(x)
+    out, cur = {"col_a": [], "col_b": [], "n_withheld": 0}, None
+    for line in (prompt or "").splitlines():
+        if line.startswith("HIGHER UNDER A"):
+            cur = "col_a"; continue
+        if line.startswith("HIGHER UNDER B"):
+            cur = "col_b"; continue
+        if "withheld because their position" in line:
+            m = re.match(r"^(\d+) word", line.strip())
+            if m:
+                out["n_withheld"] = int(m.group(1))
+            cur = None
+            continue
+        if cur is None:
+            continue
+        m = R4_RE.match(line)
+        if m:
+            out[cur].append({"word": m.group(1), "rank_pre": num(m.group(2)),
+                             "rank_post": num(m.group(3)), "places": num(m.group(4))})
+        elif line.strip() and not line.startswith("  (none"):
+            cur = None
+    return out
+
+
 RANK_RE = re.compile(r"^\s{2}(\S+)\s+(\d+)\s*->\s*(\d+)\s+([+-]\d+) places\s*$")
 MOVER_RE = re.compile(r"^\s{2}(\S+)\s+(-?[\d.]+)%\s*->\s*(-?[\d.]+)%\s*\(\s*([+-][\d.]+)\)\s*$")
 
@@ -876,7 +911,13 @@ def _store(st, man, name, rater, f, lines, run_id, seen_instruments):
         #: The assert is gated on WHICH presentation the cell used, because the
         #: booked counts are movement-rule survivors and only describe the mass
         #: table. Checking them against a rank table would fail on a correct run.
-        if meta.get("presentation") == "ranks":
+        if meta.get("instrument", "").startswith("r4"):
+            mv = parse_r4(meta["prompt"])
+            shown = len(mv["col_a"]) + len(mv["col_b"])
+            if shown != meta.get("n_shown"):
+                raise SystemExit("%s: r4 table shows %d words, manifest booked %d"
+                                 % (name, shown, meta.get("n_shown")))
+        elif meta.get("presentation") == "ranks":
             mv = parse_ranks(meta["prompt"])
             shown = len(mv["rose"]) + len(mv["fell"]) + len(mv["held"])
             want = meta.get("n_shown")
