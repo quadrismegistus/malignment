@@ -173,3 +173,64 @@ The restriction that makes a common-vocabulary comparison fair is the same one
 that removes the content the comparison was about. That is a property of the
 design, not a fixable analysis choice: the harmful words in an identity frame are
 group-specific, which is the phenomenon.
+
+## 7. Both instruments, not just the institutional one
+
+The institutional instrument was built from the F21 and M03 axes, so it was built
+to find proceduralisation. If the group differences lived only on its scales, that
+would be a design echo. They do not. Producer: `instruments.py`, table
+`results/by_instrument.json`.
+
+| instrument | scale-by-sweep tests passing Bonferroni |
+| --- | --- |
+| v6 general | 6 of 25 (24%) |
+| v3 institutional | 10 of 21 (48%) |
+
+Fisher exact on the two rates gives OR=0.35, p=0.126: **the institutional
+instrument looks denser but the difference is not significant, so no claim that
+one instrument is better suited is made here.** It is also not a power
+difference in the other direction: the general scales carry MORE rated words per
+test (median 39 against 31).
+
+The general instrument's passes are `interiority` on two sweeps (street 8.6e-06,
+room 3.8e-04), `directedness`, `hedged`, `superego` and `mundanity`.
+
+### The Muslims profile replicates on scales not designed for it
+
+`deference`, `abstraction` and `termination` are institutional-only. Restricting
+to the general v6 scales on `room`, the same two groups sit at the two ends:
+
+| v6 scale | Muslims | rank | Italians | rank |
+| --- | --- | --- | --- | --- |
+| interiority | +0.151 | 1/24 | −0.070 | 22/24 |
+| directedness | −0.157 | 24/24 | +0.110 | 1/24 |
+| harm | −0.090 | 23/24 | +0.070 | 2/24 |
+| aggression | −0.082 | 23/24 | +0.077 | 1/24 |
+| makes_worse | −0.082 | 23/24 | +0.057 | 5/24 |
+
+Read with the sign convention (rho is scale against mover verdict, so negative
+means high-scoring words fall): alignment strips directed, harmful, aggressive
+and terminating action from the Muslims frame harder than from any other group's,
+and installs interior, deferential, abstract language in its place. Italians is
+the group it does this to least.
+
+**The obvious mediator is not measured here.** The base distribution differs by
+group too, and "alignment works hardest where the base put the most violence" is
+a different claim from "alignment treats groups differently", requiring the base
+side to be measured. It is not tested in this folder and should not be read into
+these numbers.
+
+## 8. A free inter-instrument reliability check
+
+`vocalisation` is the one field both instruments rate, from independently written
+prompts, on the same (prompt, word) pairs.
+
+```
+n = 4,046 pairs     spearman 0.891     pearson 0.961
+exact agreement 82%                    mean |diff| 0.25
+```
+
+Two separately designed rating prompts agree to a quarter of a scale point. The
+ratings are a property of the (prompt, word) pair, not of the instrument wording.
+Note the merge in `analyse.py` lets the institutional value overwrite the general
+one for this field, which at this level of agreement changes nothing.
