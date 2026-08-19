@@ -35,6 +35,19 @@ from malignment.checkpoint import Checkpoint
 from malignment.runners import PRODUCER, TWPRunner, _Tee
 
 
+def _can_ingest():
+    """Is there a ClickHouse to ingest INTO? False on every rented box.
+
+    `malignment.ch` names the binary; asking it rather than re-deriving a path
+    keeps this from becoming a second opinion about where ClickHouse lives.
+    """
+    try:
+        from malignment.ch import CH
+        return bool(CH) and os.path.exists(CH)
+    except Exception:                                           # noqa: BLE001
+        return False
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", help="one lineage root")
@@ -150,15 +163,36 @@ def main():
             #: and invisible to every consumer, including `topup_todo`, which then
             #: re-lists words that are already measured. Scoped by --source so it
             #: costs seconds, and --replace keeps it idempotent.
-            d = os.path.join("malignment-data", "twp", m.replace("/", "__"), PRODUCER)
-            ing = subprocess.run(
-                [os.path.join(ROOT, ".venv", "bin", "malign"), "ingest",
-                 "--rule-version", "4", "--run", "--replace", "--source", d],
-                cwd=ROOT, capture_output=True, text=True)
-            pl = [l for l in (ing.stdout or "").splitlines() if "planned" in l]
-            print("  ingest: %s" % (pl[-1].strip() if pl else
-                                    "FAILED rc=%d %s" % (ing.returncode,
-                                    (ing.stderr or "")[-90:])), flush=True)
+            #: **AND IT IS SKIPPED WHERE THERE IS NOTHING TO INGEST INTO.** On a
+            #: rented box there is no ClickHouse, so the per-arm ingest is not
+            #: merely useless, it is fatal: this line hardcoded `.venv/bin/malign`
+            #: and a `.venv-tf457` shard died on `FileNotFoundError` after its
+            #: FIRST arm, taking the rest of the lineage with it (fleet box
+            #: 48145433, 2026-08-19). The cells are ingested when they are pulled
+            #: home, so skipping loses nothing.
+            #:
+            #: Keyed on the ClickHouse binary rather than on a --cloud flag,
+            #: because the binary IS the precondition: a flag can be forgotten by
+            #: a caller, and this one would have to be remembered by every future
+            #: launcher.
+            if not _can_ingest():
+                print("  ingest: SKIPPED -- no clickhouse here (cells ingest on "
+                      "pull)", flush=True)
+            else:
+                d = os.path.join("malignment-data", "twp",
+                                 m.replace("/", "__"), PRODUCER)
+                #: Derived from the RUNNING interpreter, so the venv the sweep was
+                #: launched with is the venv its ingest uses. Hardcoding `.venv`
+                #: is what broke the tf457 shard.
+                ing = subprocess.run(
+                    [os.path.join(os.path.dirname(sys.executable), "malign"),
+                     "ingest", "--rule-version", "4", "--run", "--replace",
+                     "--source", d],
+                    cwd=ROOT, capture_output=True, text=True)
+                pl = [l for l in (ing.stdout or "").splitlines() if "planned" in l]
+                print("  ingest: %s" % (pl[-1].strip() if pl else
+                                        "FAILED rc=%d %s" % (ing.returncode,
+                                        (ing.stderr or "")[-90:])), flush=True)
             out.append({"model": m, "venv": os.path.basename(venv_for(m)),
                         "minutes": mins, "tail": (tail or [""])[-1][:200]})
     finally:
