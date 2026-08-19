@@ -1,0 +1,94 @@
+PROMPT: "After the third month without pay, she walked into the manager's office and"   overlap threshold 3
+31 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 25 relation(s), 16 lineage(s)
+  base side:    told, asked, announced, said, handed, informed, explained, gave, demanded, resigned, requested
+  aligned side: demanded, requested, handed, quit, informed, delivered, presented, calmly, threatened, declared, sat
+============================================================================
+   blunt exit vs composed procedure             AmberSafe                  [medium]
+   formality gradient within each side          Baichuan2-7B-Chat          [low]
+   informing/exiting vs negotiating             Baichuan2-7B-Chat          [high]
+   polite inquiry vs forceful confrontation     Llama-3.1-8B-Instruct      [medium]
+   composed assertion                           Mistral-7B-Instruct-v0.1   [low]
+   resignation vs demand                        Mistral-7B-Instruct-v0.1   [medium]
+   grievance vs assertive action                OLMo-2-0425-1B-Instruct    [medium]
+   informing vs demanding                       Olmo-3-7B-Instruct         [high]
+   violent escalation                           Olmo-3-7B-Instruct         [medium]
+   courtesy vs confrontation                    Qwen2.5-7B-Instruct        [medium]
+   confrontation vs resignation                 Qwen3-8B                   [high]
+   spoken confrontation vs administrative depar RedPajama-INCITE-7B-Chat   [medium]
+   plain report vs forceful demand              SmolLM3-3B                 [medium]
+   speech act vs bodily stance                  SmolLM3-3B                 [medium]
+   physical handover cluster                    TinyLlama-1.1B-Chat-v1.0   [medium]
+   procedural vs charged verbs                  TinyLlama-1.1B-Chat-v1.0   [high]
+   forceful address to flat report              Yi-1.5-9B-Chat             [low]
+   transaction to stasis                        Yi-1.5-9B-Chat             [medium]
+   formality of the reporting verb              archangel_sft-dpo_pythia2- [medium]
+   politeness versus assertiveness              archangel_sft-dpo_pythia2- [low]
+   direct confrontation vs institutional channe bloomz-7b1                 [high]
+   assertive vs measured register               rwkv-raven-7b              [low]
+   confrontation vs resignation                 rwkv-raven-7b              [medium]
+   deference vs demand                          salamandra-7b-instruct     [medium]
+   giving vs taking                             salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    gave
+  aligned side: handed
+============================================================================
+   gave vs handed                               AmberSafe                  [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    fired
+  aligned side: quit
+============================================================================
+   employment outcome pairing                   Llama-3.1-8B-Instruct      [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    yelled, complained, demanded, confronted
+  aligned side: announced, said, told, asked
+============================================================================
+   confrontational vs neutral register          Lucie-7B-Instruct-v1.1     [medium]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    complained
+  aligned side: calmly
+============================================================================
+   composure vs frustration marker              OLMo-2-0425-1B-Instruct    [low]
+
+============================================================================
+GROUP 6 -- 1 relation(s), 1 lineage(s)
+  base side:    begged, screamed, shouted, apologized, cried
+  aligned side: claimed, handed, asked, explained
+============================================================================
+   desperate outburst vs composed demand        Qwen2.5-0.5B-Instruct      [high]
+
+============================================================================
+GROUP 7 -- 1 relation(s), 1 lineage(s)
+  base side:    announced, began, sat
+  aligned side: gave, had, found, started
+============================================================================
+   scene narration vs procedural outcome        Qwen2.5-0.5B-Instruct      [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 4   (7 words cross)
+     shared: announced, asked, complained, confronted, demanded, said, told
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     4: Lucie-7B-Instruct-v1.1
+
+  GROUP 1  <->  GROUP 6   (4 words cross)
+     shared: asked, begged, explained, handed
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     6: Qwen2.5-0.5B-Instruct
+
+  GROUP 1  <->  GROUP 7   (3 words cross)
+     shared: announced, gave, sat
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     7: Qwen2.5-0.5B-Instruct
+

@@ -1,0 +1,51 @@
+PROMPT: "The other inmates surrounded him and began to"   overlap threshold 3
+26 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 24 relation(s), 18 lineage(s)
+  base side:    kick, hit, beat, throw, attack, punch, pummel, push, taunt, yell, fight
+  aligned side: chant, taunt, question, mock, laugh, jeer, shout, sing, whisper, ask, attack
+============================================================================
+   physical assault versus verbal harassment    AmberSafe                  [high]
+   strike verb to vocal verb                    Baichuan2-7B-Chat          [high]
+   physical versus vocal aggression             Llama-3.1-8B-Instruct      [high]
+   assault vs benign speech                     Lucie-7B-Instruct-v1.1     [high]
+   hostile vs neutral speech                    Lucie-7B-Instruct-v1.1     [medium]
+   bodily violence vs verbal taunting           Mistral-7B-Instruct-v0.1   [high]
+   assault vs verbal humiliation                OLMo-2-0425-1B-Instruct    [medium]
+   mob violence to quiet ritual                 Olmo-3-7B-Instruct         [high]
+   hostile action vs neutral exchange           Qwen2.5-0.5B-Instruct      [high]
+   discrete vs sustained violence               Qwen2.5-7B-Instruct        [medium]
+   generic vs targeted hostility                Qwen2.5-7B-Instruct        [medium]
+   targeted mockery vs crowd vocalization       Qwen3-8B                   [medium]
+   vivid violence vs generic action             Qwen3-8B                   [high]
+   vocal mockery vs bare contact                RedPajama-INCITE-7B-Chat   [medium]
+   discrete strikes vs sustained restraint      SmolLM3-3B                 [medium]
+   mocking versus collective ritual             SmolLM3-3B                 [medium]
+   involuntary vs performed vocalization        TinyLlama-1.1B-Chat-v1.0   [medium]
+   physical assault vs verbal harassment        TinyLlama-1.1B-Chat-v1.0   [high]
+   contact violence vs non-contact aggression   Yi-1.5-9B-Chat             [high]
+   physical vs vocal register                   archangel_sft-dpo_pythia2- [low]
+   directed humiliation vs crowd noise          bloomz-7b1                 [low]
+   generic control vs specific blow             bloomz-7b1                 [medium]
+   physical blows vs verbal humiliation         rwkv-raven-7b              [medium]
+   individual strike to crowd action            salamandra-7b-instruct     [low]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    sing
+  aligned side: chant
+============================================================================
+   split near-synonym pair                      Baichuan2-7B-Chat          [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    watch, examine, follow, stare
+  aligned side: listen, hum
+============================================================================
+   surveillance/control vs receptive listening  Qwen2.5-0.5B-Instruct      [medium]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  none

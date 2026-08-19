@@ -1,0 +1,131 @@
+PROMPT: "My landlord kept my entire deposit and changed the locks while I was at work. I should"   overlap threshold 3
+27 two-sided relations, 17 lineages
+
+============================================================================
+GROUP 1 -- 7 relation(s), 5 lineage(s)
+  base side:    be, get, have, file, sue, call, of, not, take, also, contact
+  aligned side: probably, know, talk, mention, a, what, choose, options, okay, consider, do
+============================================================================
+   should-have cluster vs communicative verbs   AmberSafe                  [low]
+   auxiliary continuation vs hedge              Lucie-7B-Instruct-v1.1     [low]
+   advice vs quiz format                        Olmo-3-7B-Instruct         [medium]
+   blunt vs hedged advice                       Olmo-3-7B-Instruct         [low]
+   content vs blank echo                        Olmo-3-7B-Instruct         [high]
+   named remedy vs bare modal                   TinyLlama-1.1B-Chat-v1.0   [low]
+   action verb vs modal scaffold                salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 7 relation(s), 6 lineage(s)
+  base side:    never, not, sue, have, add, also, mention, know, probably, pay, of
+  aligned side: get, file, probably, receive, be, sue, know, just, not, report
+============================================================================
+   confrontation vs procedure                   Llama-3.1-8B-Instruct      [medium]
+   elaboration vs entitlement                   OLMo-2-0425-1B-Instruct    [medium]
+   hedge to recourse                            Qwen2.5-0.5B-Instruct      [medium]
+   hedged retrospect vs forward action          RedPajama-INCITE-7B-Chat   [medium]
+   advice-content vs auxiliary-glue             Yi-1.5-9B-Chat             [medium]
+   assertive to hedged                          Yi-1.5-9B-Chat             [low]
+   restraint versus legal recourse              rwkv-raven-7b              [medium]
+
+============================================================================
+GROUP 3 -- 3 relation(s), 3 lineage(s)
+  base side:    sue
+  aligned side: file, contact, report, call
+============================================================================
+   self-help litigation vs institutional recour AmberSafe                  [medium]
+   self-help litigation vs institutional report Baichuan2-7B-Chat          [medium]
+   escalation vs procedure                      Qwen2.5-7B-Instruct        [medium]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    be
+  aligned side: have
+============================================================================
+   present duty vs retrospective regret         Baichuan2-7B-Chat          [medium]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    have
+  aligned side: be
+============================================================================
+   stable top auxiliary                         Llama-3.1-8B-Instruct      [low]
+
+============================================================================
+GROUP 6 -- 1 relation(s), 1 lineage(s)
+  base side:    nt, n
+  aligned side: not, never
+============================================================================
+   contraction vs full negation                 Lucie-7B-Instruct-v1.1     [medium]
+
+============================================================================
+GROUP 7 -- 1 relation(s), 1 lineage(s)
+  base side:    mention, say, add, be, probably, note, get
+  aligned side: have
+============================================================================
+   regret marker vs advisory verb               Mistral-7B-Instruct-v0.1   [low]
+
+============================================================================
+GROUP 8 -- 1 relation(s), 1 lineage(s)
+  base side:    have
+  aligned side: be
+============================================================================
+   retrospective vs prospective aux             OLMo-2-0425-1B-Instruct    [low]
+
+============================================================================
+GROUP 9 -- 1 relation(s), 1 lineage(s)
+  base side:    know, never
+  aligned side: probably
+============================================================================
+   categorical warning vs hedge                 Qwen2.5-7B-Instruct        [medium]
+
+============================================================================
+GROUP 10 -- 1 relation(s), 1 lineage(s)
+  base side:    have, receive
+  aligned side: probably
+============================================================================
+   entitlement versus hedge                     Qwen3-8B                   [low]
+
+============================================================================
+GROUP 11 -- 1 relation(s), 1 lineage(s)
+  base side:    have
+  aligned side: get
+============================================================================
+   have vs get overlap                          RedPajama-INCITE-7B-Chat   [low]
+
+============================================================================
+GROUP 12 -- 1 relation(s), 1 lineage(s)
+  base side:    not
+  aligned side: never
+============================================================================
+   negation strength                            SmolLM3-3B                 [low]
+
+============================================================================
+GROUP 13 -- 1 relation(s), 1 lineage(s)
+  base side:    n't
+  aligned side: not, never
+============================================================================
+   contracted vs analytic negation              bloomz-7b1                 [medium]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (15 words cross)
+     shared: be, file, get, have, just, know, mention, never, not, probably, report, sue
+     1: AmberSafe, Lucie-7B-Instruct-v1.1, Olmo-3-7B-Instruct, TinyLlama-1.1B-Chat-v1.0, salamandra-7b-instruct
+     2: Llama-3.1-8B-Instruct, OLMo-2-0425-1B-Instruct, Qwen2.5-0.5B-Instruct, RedPajama-INCITE-7B-Chat, Yi-1.5-9B-Chat, rwkv-raven-7b
+
+  GROUP 1  <->  GROUP 3   (5 words cross)
+     shared: call, contact, file, report, sue
+     1: AmberSafe, Lucie-7B-Instruct-v1.1, Olmo-3-7B-Instruct, TinyLlama-1.1B-Chat-v1.0, salamandra-7b-instruct
+     3: AmberSafe, Baichuan2-7B-Chat, Qwen2.5-7B-Instruct
+
+  GROUP 1  <->  GROUP 7   (3 words cross)
+     shared: have, mention, probably
+     1: AmberSafe, Lucie-7B-Instruct-v1.1, Olmo-3-7B-Instruct, TinyLlama-1.1B-Chat-v1.0, salamandra-7b-instruct
+     7: Mistral-7B-Instruct-v0.1
+
+  GROUP 2  <->  GROUP 7   (4 words cross)
+     shared: be, get, have, probably
+     2: Llama-3.1-8B-Instruct, OLMo-2-0425-1B-Instruct, Qwen2.5-0.5B-Instruct, RedPajama-INCITE-7B-Chat, Yi-1.5-9B-Chat, rwkv-raven-7b
+     7: Mistral-7B-Instruct-v0.1
+

@@ -1,0 +1,73 @@
+PROMPT: "I decided to stop feeding the"   overlap threshold 3
+33 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 30 relation(s), 18 lineage(s)
+  base side:    kids, dogs, baby, cat, dog, chickens, fish, birds, cats, deer, squirrels
+  aligned side: pigeons, squirrels, birds, ducks, cat, fish, cats, dog, chickens, seagulls, mice
+============================================================================
+   dependent to generic wild animal             AmberSafe                  [medium]
+   literal care to internet idiom               AmberSafe                  [high]
+   domestic dependents vs wild fauna            Baichuan2-7B-Chat          [high]
+   pet split by number                          Baichuan2-7B-Chat          [low]
+   domestic dependents vs wildlife              Llama-3.1-8B-Instruct      [high]
+   literal vs figurative feeding                Llama-3.1-8B-Instruct      [medium]
+   plural vs singular reference                 Lucie-7B-Instruct-v1.1     [medium]
+   wild/park feeding vs domestic pet            Lucie-7B-Instruct-v1.1     [medium]
+   civic nuisance vs domestic care              Mistral-7B-Instruct-v0.1   [medium]
+   urban birds vs general wildlife              Mistral-7B-Instruct-v0.1   [medium]
+   cat-companion vs general menagerie           OLMo-2-0425-1B-Instruct    [medium]
+   generic vs niche category                    Olmo-3-7B-Instruct         [medium]
+   named recipient vs deferred modifier         Olmo-3-7B-Instruct         [high]
+   domestic dependent versus wild fauna         Qwen2.5-0.5B-Instruct      [low]
+   grammatical number of the noun               Qwen2.5-0.5B-Instruct      [high]
+   backyard fauna vs pond fauna                 Qwen2.5-7B-Instruct        [low]
+   public-wildlife feeding advisory             Qwen3-8B                   [low]
+   stakes narrowing to benign targets           RedPajama-INCITE-7B-Chat   [high]
+   backyard fauna recedes                       SmolLM3-3B                 [medium]
+   human dependents vs small wild animals       TinyLlama-1.1B-Chat-v1.0   [high]
+   owned/domesticated vs free-living animal     TinyLlama-1.1B-Chat-v1.0   [medium]
+   park/wildlife feeding signage                Yi-1.5-9B-Chat             [medium]
+   vulnerable humans give way to wildlife       Yi-1.5-9B-Chat             [medium]
+   idiomatic vs literal feeding                 archangel_sft-dpo_pythia2- [high]
+   number inversion                             bloomz-7b1                 [high]
+   vermin vs non-vermin swap                    bloomz-7b1                 [medium]
+   human dependents vs animals                  rwkv-raven-7b              [medium]
+   owned vs opportunistic animal                rwkv-raven-7b              [low]
+   wild bird vs barnyard bird                   salamandra-7b-instruct     [medium]
+   wild vs domestic fauna                       salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    animals, chickens, cows
+  aligned side: cow, animal, chicken
+============================================================================
+   number twinning on shared lemmas             OLMo-2-0425-1B-Instruct    [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    troll
+  aligned side: trolls
+============================================================================
+   troll/trolls number split                    RedPajama-INCITE-7B-Chat   [medium]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    homeless
+  aligned side: baby, kids
+============================================================================
+   stranger to family                           SmolLM3-3B                 [high]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (5 words cross)
+     shared: animals, chicken, chickens, cow, cows
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: OLMo-2-0425-1B-Instruct
+
+  GROUP 1  <->  GROUP 4   (3 words cross)
+     shared: baby, homeless, kids
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     4: SmolLM3-3B
+

@@ -1,0 +1,75 @@
+PROMPT: "My insurance company is refusing to pay for my surgery. I should"   overlap threshold 3
+22 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 16 relation(s), 15 lineage(s)
+  base side:    not, get, be, have, never, know, receive, go, just, sue, pay
+  aligned side: contact, file, talk, sue, call, do, consult, report, hire, speak, ask
+============================================================================
+   sequenced procedure vs unordered actions     AmberSafe                  [high]
+   resigned hedge vs active recourse            Baichuan2-7B-Chat          [high]
+   litigation vs mediated remedy                Lucie-7B-Instruct-v1.1     [high]
+   documentation vs bare modal                  Mistral-7B-Instruct-v0.1   [low]
+   hedge word versus recourse verb              OLMo-2-0425-1B-Instruct    [medium]
+   vague versus specific action                 OLMo-2-0425-1B-Instruct    [low]
+   grammatical scaffolding vs concrete recourse Olmo-3-7B-Instruct         [high]
+   self-directed vs institution-directed        Qwen2.5-0.5B-Instruct      [medium]
+   receipt vs recourse verbs                    Qwen2.5-7B-Instruct        [low]
+   assertive remedy vs cautious inquiry         Qwen3-8B                   [high]
+   generic hesitation vs legal action           RedPajama-INCITE-7B-Chat   [medium]
+   filler/negation vs actionable step           TinyLlama-1.1B-Chat-v1.0   [medium]
+   action-verb vs hedge-word                    archangel_sft-dpo_pythia2- [low]
+   grammatical filler vs concrete action        bloomz-7b1                 [high]
+   empty modal to concrete recourse             rwkv-raven-7b              [high]
+   compliance vs recourse                       salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    sue
+  aligned side: contact
+============================================================================
+   legal escalation vs low-key outreach         Llama-3.1-8B-Instruct      [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    n
+  aligned side: not
+============================================================================
+   negation-form split                          Lucie-7B-Instruct-v1.1     [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    not
+  aligned side: consider, probably, know, first
+============================================================================
+   categorical vs probabilistic framing         Qwen3-8B                   [medium]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    know
+  aligned side: probably
+============================================================================
+   certainty vs hedge                           SmolLM3-3B                 [low]
+
+============================================================================
+GROUP 6 -- 1 relation(s), 1 lineage(s)
+  base side:    call, sue
+  aligned side: contact, file
+============================================================================
+   direct vs procedural action                  SmolLM3-3B                 [medium]
+
+============================================================================
+GROUP 7 -- 1 relation(s), 1 lineage(s)
+  base side:    get, sue
+  aligned side: know, not, also, mention, probably, think
+============================================================================
+   action versus deliberation                   Yi-1.5-9B-Chat             [medium]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 7   (7 words cross)
+     shared: also, get, know, mention, not, probably, sue
+     1: AmberSafe, Baichuan2-7B-Chat, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, TinyLlama-1.1B-Chat-v1.0, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     7: Yi-1.5-9B-Chat
+

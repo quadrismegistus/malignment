@@ -1,0 +1,60 @@
+PROMPT: "The rent was three weeks late, so the landlord decided to"   overlap threshold 3
+26 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 24 relation(s), 17 lineage(s)
+  base side:    kick, throw, evict, sue, sell, lock, cut, take, send, break, change
+  aligned side: increase, charge, terminate, raise, repossess, serve, send, evict, change, sue, deduct
+============================================================================
+   forceful ouster vs legal-procedural step     AmberSafe                  [medium]
+   informal removal vs formal legal procedure   Baichuan2-7B-Chat          [medium]
+   target: person vs property                   Baichuan2-7B-Chat          [medium]
+   generic gesture to legal-financial step      Llama-3.1-8B-Instruct      [high]
+   generic filler to procedural verb            Lucie-7B-Instruct-v1.1     [low]
+   plain verb to formal synonym                 Lucie-7B-Instruct-v1.1     [medium]
+   physical confrontation vs legal procedure    Mistral-7B-Instruct-v0.1   [medium]
+   eviction-track vs debt-recovery-track        OLMo-2-0425-1B-Instruct    [low]
+   summary punitive action vs formal procedure  OLMo-2-0425-1B-Instruct    [high]
+   generic light verb vs named remedy           Olmo-3-7B-Instruct         [medium]
+   financial verbs unique to B                  Qwen2.5-7B-Instruct        [medium]
+   informal action vs formal legal-financial ac Qwen2.5-7B-Instruct        [high]
+   financial adjustment vs termination          Qwen3-8B                   [high]
+   procedural step vs final act                 Qwen3-8B                   [low]
+   eviction action versus admin action          RedPajama-INCITE-7B-Chat   [high]
+   outcome verb vs procedural first-step verb   SmolLM3-3B                 [medium]
+   informal action vs legal procedure           TinyLlama-1.1B-Chat-v1.0   [medium]
+   direct expulsion vs financial leverage       Yi-1.5-9B-Chat             [high]
+   formal notice vs direct action               archangel_sft-dpo_pythia2- [low]
+   physical-phrasal vs legal-administrative evi bloomz-7b1                 [medium]
+   eviction verbs to procedural verbs           rwkv-raven-7b              [medium]
+   notice-and-negotiate escalation              rwkv-raven-7b              [low]
+   formal remedy vs physical ejection           salamandra-7b-instruct     [medium]
+   money extraction cluster                     salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    raise, charge
+  aligned side: withhold, increase
+============================================================================
+   rent-action near-synonym split               AmberSafe                  [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    raise, take, charge, make, pay, waive
+  aligned side: double, return, adjust, keep
+============================================================================
+   specific fee-action vs procedural adjustment Qwen2.5-0.5B-Instruct      [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (3 words cross)
+     shared: charge, increase, raise
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: AmberSafe
+
+  GROUP 1  <->  GROUP 3   (4 words cross)
+     shared: charge, keep, raise, take
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     3: Qwen2.5-0.5B-Instruct
+

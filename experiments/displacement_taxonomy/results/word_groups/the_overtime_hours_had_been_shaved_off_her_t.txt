@@ -1,0 +1,64 @@
+PROMPT: "The overtime hours had been shaved off her timesheet again, and she wanted to"   overlap threshold 3
+24 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 21 relation(s), 17 lineage(s)
+  base side:    complain, ask, see, tell, talk, go, get, know, find, call, protest
+  aligned side: protest, confront, complain, speak, report, fight, scream, understand, appeal, ensure, take
+============================================================================
+   formal contestation vs generic light verb    AmberSafe                  [high]
+   mild vs formal grievance verb                AmberSafe                  [low]
+   institutional vs verbal-outburst response    Baichuan2-7B-Chat          [low]
+   emotional outburst vs procedural response    Llama-3.1-8B-Instruct      [high]
+   affective venting vs composed talk           Mistral-7B-Instruct-v0.1   [high]
+   confronting the wrongdoer vs exiting indepen Mistral-7B-Instruct-v0.1   [medium]
+   generic intention vs direct confrontation    OLMo-2-0425-1B-Instruct    [high]
+   word length and formality                    OLMo-2-0425-1B-Instruct    [medium]
+   vocal complaint vs generic light verb        Olmo-3-7B-Instruct         [high]
+   transactional action vs protective cognition Qwen2.5-0.5B-Instruct      [medium]
+   calm cognition to violent release            Qwen2.5-7B-Instruct        [high]
+   emotional venting vs active confrontation    Qwen3-8B                   [high]
+   measured grievance vs emotional outburst     RedPajama-INCITE-7B-Chat   [medium]
+   assertive grievance softened to procedure    SmolLM3-3B                 [medium]
+   generic desire vs formal grievance action    TinyLlama-1.1B-Chat-v1.0   [high]
+   vague intention to targeted action           Yi-1.5-9B-Chat             [medium]
+   physical outburst vs verbal grievance        archangel_sft-dpo_pythia2- [medium]
+   communicative inquiry to confrontational act bloomz-7b1                 [high]
+   unspecified interlocutor to institutional ta bloomz-7b1                 [low]
+   escalation to violence                       rwkv-raven-7b              [high]
+   informal talk to formal confrontation        salamandra-7b-instruct     [high]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    get, go
+  aligned side: do, be, take
+============================================================================
+   generic light verbs                          Baichuan2-7B-Chat          [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    quit, complain, file
+  aligned side: take, understand, work, do, keep
+============================================================================
+   grievance action to quiet accommodation      Lucie-7B-Instruct-v1.1     [medium]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    complain
+  aligned side: file
+============================================================================
+   complaint renamed as filing                  salamandra-7b-instruct     [medium]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (3 words cross)
+     shared: be, do, take
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: Baichuan2-7B-Chat
+
+  GROUP 1  <->  GROUP 3   (8 words cross)
+     shared: complain, do, file, keep, quit, take, understand, work
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     3: Lucie-7B-Instruct-v1.1
+

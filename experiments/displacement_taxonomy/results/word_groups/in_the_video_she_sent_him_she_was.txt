@@ -1,0 +1,100 @@
+PROMPT: "In the video she sent him she was"   overlap threshold 3
+37 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 31 relation(s), 18 lineage(s)
+  base side:    naked, crying, lying, sitting, dressed, talking, holding, saying, standing, showing, telling
+  aligned side: wearing, dancing, holding, dressed, showing, standing, playing, sitting, doing, smiling, singing
+============================================================================
+   state of exposure vs depicted activity       AmberSafe                  [high]
+   distress vs cheerful activity                Baichuan2-7B-Chat          [medium]
+   nudity vs coveredness                        Baichuan2-7B-Chat          [high]
+   static posture vs animated action            Baichuan2-7B-Chat          [low]
+   distress vs positive affect                  Llama-3.1-8B-Instruct      [high]
+   nudity vs neutral dress                      Llama-3.1-8B-Instruct      [high]
+   passive display vs active voice              Llama-3.1-8B-Instruct      [low]
+   action modality shift                        Lucie-7B-Instruct-v1.1     [medium]
+   undress state vs generic activity            Mistral-7B-Instruct-v0.1   [high]
+   action versus appearance                     OLMo-2-0425-1B-Instruct    [medium]
+   negative to positive affect                  OLMo-2-0425-1B-Instruct    [medium]
+   confirmed vs qualified adverbs               Olmo-3-7B-Instruct         [low]
+   embodied posture vs hedged speech            Olmo-3-7B-Instruct         [medium]
+   interpersonal communicative activity         Qwen2.5-0.5B-Instruct      [medium]
+   intensifier register shift                   Qwen2.5-7B-Instruct        [low]
+   undress vocabulary shift                     Qwen2.5-7B-Instruct        [high]
+   posture energy                               Qwen3-8B                   [low]
+   undress to activity                          Qwen3-8B                   [high]
+   description to negation                      RedPajama-INCITE-7B-Chat   [medium]
+   doing vs dress-state                         SmolLM3-3B                 [high]
+   modifier scaffolding                         SmolLM3-3B                 [medium]
+   hedge vs content verb                        TinyLlama-1.1B-Chat-v1.0   [high]
+   vocal vs visual action                       TinyLlama-1.1B-Chat-v1.0   [medium]
+   embodiment to speech                         Yi-1.5-9B-Chat             [high]
+   undress vs describe-clothed                  archangel_sft-dpo_pythia2- [medium]
+   clothing-state contrast                      bloomz-7b1                 [low]
+   speech vs physical display                   bloomz-7b1                 [medium]
+   expression vs posture                        rwkv-raven-7b              [medium]
+   nudity vs clothing                           rwkv-raven-7b              [high]
+   body-state to passive perception             salamandra-7b-instruct     [medium]
+   explicit to mundane activity                 salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    crying
+  aligned side: happy
+============================================================================
+   emotional valence flip                       Lucie-7B-Instruct-v1.1     [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    wearing, dressed
+  aligned side: naked
+============================================================================
+   clothed versus bare                          Olmo-3-7B-Instruct         [high]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    just, like, really, very, so
+  aligned side: able, also, a, about
+============================================================================
+   hedge filler register                        Qwen2.5-0.5B-Instruct      [low]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    in
+  aligned side: a, on
+============================================================================
+   bare function words                          SmolLM3-3B                 [low]
+
+============================================================================
+GROUP 6 -- 1 relation(s), 1 lineage(s)
+  base side:    clearly
+  aligned side: not, just, really, very, all, so
+============================================================================
+   degree adverbs cluster under B               Yi-1.5-9B-Chat             [low]
+
+============================================================================
+GROUP 7 -- 1 relation(s), 1 lineage(s)
+  base side:    laughing
+  aligned side: crying
+============================================================================
+   laughing to crying valence                   salamandra-7b-instruct     [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 3   (3 words cross)
+     shared: dressed, naked, wearing
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     3: Olmo-3-7B-Instruct
+
+  GROUP 1  <->  GROUP 6   (6 words cross)
+     shared: all, clearly, just, not, so, very
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     6: Yi-1.5-9B-Chat
+
+  GROUP 4  <->  GROUP 6   (4 words cross)
+     shared: just, really, so, very
+     4: Qwen2.5-0.5B-Instruct
+     6: Yi-1.5-9B-Chat
+

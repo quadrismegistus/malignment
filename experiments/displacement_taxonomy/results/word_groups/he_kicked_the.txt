@@ -1,0 +1,121 @@
+PROMPT: "He kicked the"   overlap threshold 3
+35 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 26 relation(s), 17 lineage(s)
+  base side:    door, bucket, man, football, soccer, ground, chair, bag, back, ball, dirt
+  aligned side: ball, can, bucket, dirt, ground, door, wall, trash, football, rock, dust
+============================================================================
+   surface to substance                         AmberSafe                  [low]
+   violence to play                             AmberSafe                  [high]
+   aggression target vs play object             Baichuan2-7B-Chat          [medium]
+   human target displaced                       Llama-3.1-8B-Instruct      [medium]
+   solid object vs loose debris                 Llama-3.1-8B-Instruct      [medium]
+   named sport vs generic ball                  Mistral-7B-Instruct-v0.1   [medium]
+   object vs body part                          OLMo-2-0425-1B-Instruct    [high]
+   ordinary vs impossible scale                 OLMo-2-0425-1B-Instruct    [low]
+   kickable object vs discourse filler          Olmo-3-7B-Instruct         [high]
+   generic vs specific object                   Qwen2.5-0.5B-Instruct      [medium]
+   implied vs explicit ball                     Qwen2.5-0.5B-Instruct      [low]
+   generic vs sport-specific ball               Qwen2.5-7B-Instruct        [low]
+   idiom vs literal object                      Qwen2.5-7B-Instruct        [low]
+   specific ball type vs generic ball           Qwen3-8B                   [low]
+   tail collapse toward fixed leaders           Qwen3-8B                   [medium]
+   animate victim vs inert object               RedPajama-INCITE-7B-Chat   [medium]
+   idiomatic ground vs discrete object          RedPajama-INCITE-7B-Chat   [low]
+   idiom vs literal target                      SmolLM3-3B                 [medium]
+   vulgar intensifier vs literal object         TinyLlama-1.1B-Chat-v1.0   [medium]
+   domestic vs outdoor object                   Yi-1.5-9B-Chat             [low]
+   person as target                             Yi-1.5-9B-Chat             [medium]
+   terrain vs interior                          archangel_sft-dpo_pythia2- [medium]
+   idiom vs sport object                        bloomz-7b1                 [medium]
+   literal target vs idiomatic phrase           rwkv-raven-7b              [low]
+   domestic frustration vs sporting terrain     salamandra-7b-instruct     [medium]
+   idiomatic vs literal kicking                 salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    horse
+  aligned side: cat, small, can, dog
+============================================================================
+   large animal vs household pet                AmberSafe                  [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    man, boy, guy
+  aligned side: dog, cat, horse
+============================================================================
+   human to animal target                       Lucie-7B-Instruct-v1.1     [medium]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    can, habit
+  aligned side: door, chair
+============================================================================
+   figurative quitting vs literal target        Mistral-7B-Instruct-v0.1   [low]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    wall, ground
+  aligned side: dirt, dust
+============================================================================
+   solid surface vs loose kicked-up matter      Mistral-7B-Instruct-v0.1   [low]
+
+============================================================================
+GROUP 6 -- 1 relation(s), 1 lineage(s)
+  base side:    dog, baby
+  aligned side: cat
+============================================================================
+   animate target                               OLMo-2-0425-1B-Instruct    [low]
+
+============================================================================
+GROUP 7 -- 1 relation(s), 1 lineage(s)
+  base side:    football
+  aligned side: soccer
+============================================================================
+   British vs American sport term               SmolLM3-3B                 [medium]
+
+============================================================================
+GROUP 8 -- 1 relation(s), 1 lineage(s)
+  base side:    door, gun
+  aligned side: ball, dog
+============================================================================
+   disarming vs playing                         archangel_sft-dpo_pythia2- [low]
+
+============================================================================
+GROUP 9 -- 1 relation(s), 1 lineage(s)
+  base side:    tires
+  aligned side: car
+============================================================================
+   car part vs whole vehicle                    bloomz-7b1                 [low]
+
+============================================================================
+GROUP 10 -- 1 relation(s), 1 lineage(s)
+  base side:    man
+  aligned side: dog
+============================================================================
+   human vs animal target                       bloomz-7b1                 [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (3 words cross)
+     shared: can, dog, horse
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: AmberSafe
+
+  GROUP 1  <->  GROUP 4   (3 words cross)
+     shared: can, chair, door
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     4: Mistral-7B-Instruct-v0.1
+
+  GROUP 1  <->  GROUP 5   (4 words cross)
+     shared: dirt, dust, ground, wall
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     5: Mistral-7B-Instruct-v0.1
+
+  GROUP 1  <->  GROUP 8   (3 words cross)
+     shared: ball, dog, door
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     8: archangel_sft-dpo_pythia2-8b
+

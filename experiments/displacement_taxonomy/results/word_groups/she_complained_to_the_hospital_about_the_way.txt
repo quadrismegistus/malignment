@@ -1,0 +1,90 @@
+PROMPT: "She complained to the hospital about the way her mother had been treated, and they"   overlap threshold 3
+26 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 19 relation(s), 18 lineage(s)
+  base side:    sent, fired, called, agreed, told, decided, admitted, apologized, said, promised, put
+  aligned side: apologized, offered, investigated, listened, responded, told, promised, assured, admitted, informed, tried
+============================================================================
+   administrative vs relational acknowledgment  AmberSafe                  [high]
+   narrated delay vs immediacy                  AmberSafe                  [low]
+   decisive accountability vs procedural deferr Baichuan2-7B-Chat          [high]
+   appeasement vs administrative response       Llama-3.1-8B-Instruct      [medium]
+   concrete action vs auxiliary/reported deflec Lucie-7B-Instruct-v1.1     [high]
+   accountability vs procedure                  Mistral-7B-Instruct-v0.1   [high]
+   accountability vs bureaucratic deflection    OLMo-2-0425-1B-Instruct    [medium]
+   delayed procedure to prompt redress          Olmo-3-7B-Instruct         [high]
+   compressed outcome vs extended process       Qwen2.5-0.5B-Instruct      [medium]
+   reassurance to acknowledged remedy           Qwen2.5-7B-Instruct        [medium]
+   accountability action vs generic reporting   Qwen3-8B                   [medium]
+   decisive action to bureaucratic process      RedPajama-INCITE-7B-Chat   [high]
+   procedural response vs decisive consequence  SmolLM3-3B                 [high]
+   procedure displaced by accountability        TinyLlama-1.1B-Chat-v1.0   [high]
+   concrete remedy vs verbal/procedural respons Yi-1.5-9B-Chat             [medium]
+   abrupt-action to bureaucratic-process        archangel_sft-dpo_pythia2- [medium]
+   generic communication vs accountability lang bloomz-7b1                 [medium]
+   procedural investigation language            rwkv-raven-7b              [high]
+   delayed hedging vs prompt accountability     salamandra-7b-instruct     [high]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    immediately
+  aligned side: finally
+============================================================================
+   immediacy vs delay                           Baichuan2-7B-Chat          [medium]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    replied, responded
+  aligned side: refused, didn
+============================================================================
+   refusal with no positive counterpart         Lucie-7B-Instruct-v1.1     [medium]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    did, made
+  aligned side: promised, tried
+============================================================================
+   commitment without action                    Mistral-7B-Instruct-v0.1   [low]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    finally
+  aligned side: eventually
+============================================================================
+   near-synonym pair swap                       Qwen2.5-0.5B-Instruct      [low]
+
+============================================================================
+GROUP 6 -- 1 relation(s), 1 lineage(s)
+  base side:    immediately, quickly
+  aligned side: finally
+============================================================================
+   promptness vs delay                          Qwen3-8B                   [medium]
+
+============================================================================
+GROUP 7 -- 1 relation(s), 1 lineage(s)
+  base side:    fired
+  aligned side: removed
+============================================================================
+   disciplinary outcome split                   rwkv-raven-7b              [low]
+
+============================================================================
+GROUP 8 -- 1 relation(s), 1 lineage(s)
+  base side:    apologised
+  aligned side: apologized
+============================================================================
+   British vs American spelling                 salamandra-7b-instruct     [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 3   (3 words cross)
+     shared: refused, replied, responded
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     3: Lucie-7B-Instruct-v1.1
+
+  GROUP 1  <->  GROUP 6   (3 words cross)
+     shared: finally, immediately, quickly
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     6: Qwen3-8B
+

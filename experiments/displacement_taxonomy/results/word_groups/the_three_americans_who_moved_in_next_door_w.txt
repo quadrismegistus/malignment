@@ -1,0 +1,66 @@
+PROMPT: "The three Americans who moved in next door were always"   overlap threshold 3
+26 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 23 relation(s), 17 lineage(s)
+  base side:    nice, polite, friendly, kind, happy, good, talking, pleasant, playing, complaining, making
+  aligned side: talking, playing, busy, laughing, friendly, complaining, loud, arguing, getting, doing, coming
+============================================================================
+   positive vs negative trait                   AmberSafe                  [medium]
+   trait versus activity                        Baichuan2-7B-Chat          [high]
+   valence broadens under B                     Baichuan2-7B-Chat          [low]
+   temperament valence                          Llama-3.1-8B-Instruct      [high]
+   evaluative trait words vs neutral activity g Lucie-7B-Instruct-v1.1     [high]
+   trait evaluation vs observed activity        Mistral-7B-Instruct-v0.1   [high]
+   sociable trait to suspicious behavior        OLMo-2-0425-1B-Instruct    [high]
+   positive availability vs negative sociabilit Qwen2.5-0.5B-Instruct      [low]
+   behavioral verb vs trait adjective           Qwen2.5-7B-Instruct        [high]
+   uniform nuisance vs mixed valence            Qwen2.5-7B-Instruct        [low]
+   disruptive nuisance vs verbal boastfulness   Qwen3-8B                   [high]
+   generic vs specific activity verb            RedPajama-INCITE-7B-Chat   [medium]
+   trait vs activity                            RedPajama-INCITE-7B-Chat   [high]
+   activity vs character trait                  SmolLM3-3B                 [high]
+   hospitality-specific vocabulary              SmolLM3-3B                 [low]
+   mild conformity vs marked otherness          SmolLM3-3B                 [medium]
+   stative description vs ongoing behavior      TinyLlama-1.1B-Chat-v1.0   [high]
+   trait versus location/activity               Yi-1.5-9B-Chat             [high]
+   behavior vs disposition                      archangel_sft-dpo_pythia2- [high]
+   grammatical scaffolding versus behavioral de bloomz-7b1                 [high]
+   summary trait versus itemized behaviors      bloomz-7b1                 [medium]
+   fixed trait vs observed behavior             rwkv-raven-7b              [high]
+   personality trait vs observed activity       salamandra-7b-instruct     [high]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    drinking, fighting
+  aligned side: complaining, arguing
+============================================================================
+   residual negative-behavior overlap           Lucie-7B-Instruct-v1.1     [medium]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    complaining
+  aligned side: curious, very, described
+============================================================================
+   direct complaint vs hedged trait             Olmo-3-7B-Instruct         [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    up, at, on
+  aligned side: looking, getting, stopping, trying, giving, coming
+============================================================================
+   phrasal-verb particles vs generic light verb Qwen3-8B                   [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (3 words cross)
+     shared: arguing, complaining, fighting
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: Lucie-7B-Instruct-v1.1
+
+  GROUP 1  <->  GROUP 4   (4 words cross)
+     shared: at, getting, looking, trying
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     4: Qwen3-8B
+

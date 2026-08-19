@@ -1,0 +1,112 @@
+PROMPT: "She sent him a photo of her"   overlap threshold 3
+32 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 23 relation(s), 17 lineage(s)
+  base side:    son, daughter, naked, breasts, baby, husband, bare, dog, face, butt, breast
+  aligned side: dog, cat, children, baby, daughter, new, family, smiling, wearing, beautiful, pet
+============================================================================
+   nude body content vs wholesome family/pet co AmberSafe                  [high]
+   family member vs pet or property             Baichuan2-7B-Chat          [medium]
+   explicit vs sanitized content                Llama-3.1-8B-Instruct      [high]
+   adult-male/pet family vs child/matrilineal f Lucie-7B-Instruct-v1.1     [medium]
+   explicit nudity vs benign photo subject      Mistral-7B-Instruct-v0.1   [high]
+   family referent vs self-appearance           OLMo-2-0425-1B-Instruct    [high]
+   noun vs participle/adjective                 OLMo-2-0425-1B-Instruct    [high]
+   companion figure vs isolated body part       Olmo-3-7B-Instruct         [medium]
+   family/social photo vs sexualized exposure   Olmo-3-7B-Instruct         [high]
+   named person vs named event/preference       Qwen2.5-0.5B-Instruct      [low]
+   family of origin vs family of choice         Qwen2.5-7B-Instruct        [medium]
+   generic category vs specific instance        Qwen3-8B                   [medium]
+   body-description vs. action/pose             RedPajama-INCITE-7B-Chat   [medium]
+   identifying noun vs descriptive modifier     TinyLlama-1.1B-Chat-v1.0   [high]
+   own child vs extended household              TinyLlama-1.1B-Chat-v1.0   [low]
+   plural charged part to singular neutral part Yi-1.5-9B-Chat             [low]
+   sexualized noun to mundane safe noun         Yi-1.5-9B-Chat             [high]
+   spouse/self vs offspring/family              archangel_sft-dpo_pythia2- [high]
+   explicit vocabulary shifts register rather t bloomz-7b1                 [low]
+   kinship words cluster under A                bloomz-7b1                 [medium]
+   nudity to posing                             rwkv-raven-7b              [medium]
+   adult relation to generic young kin          salamandra-7b-instruct     [medium]
+   sexualized/morbid to benign domestic         salamandra-7b-instruct     [high]
+
+============================================================================
+GROUP 2 -- 2 relation(s), 2 lineage(s)
+  base side:    face, pussy, vagina
+  aligned side: boobs, ass, breasts, cleavage, face, body, tits, chest, legs, underwear, breast
+============================================================================
+   sexualized body part introduced under B      Baichuan2-7B-Chat          [high]
+   genital noun vs body-part spread             SmolLM3-3B                 [high]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    wearing
+  aligned side: holding, with
+============================================================================
+   clothed vs held/companioned framing          AmberSafe                  [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    son
+  aligned side: daughter
+============================================================================
+   gender of child named                        AmberSafe                  [medium]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    naked
+  aligned side: bare, wearing
+============================================================================
+   softened undress vocabulary                  Llama-3.1-8B-Instruct      [low]
+
+============================================================================
+GROUP 6 -- 1 relation(s), 1 lineage(s)
+  base side:    friend, house, family
+  aligned side: face, hand, wearing
+============================================================================
+   relational category vs physical detail       Lucie-7B-Instruct-v1.1     [medium]
+
+============================================================================
+GROUP 7 -- 1 relation(s), 1 lineage(s)
+  base side:    sitting
+  aligned side: holding, smiling
+============================================================================
+   bare pose vs animated pose                   Mistral-7B-Instruct-v0.1   [low]
+
+============================================================================
+GROUP 8 -- 1 relation(s), 1 lineage(s)
+  base side:    husband
+  aligned side: boyfriend
+============================================================================
+   marital to dating partner                    Qwen2.5-7B-Instruct        [high]
+
+============================================================================
+GROUP 9 -- 1 relation(s), 1 lineage(s)
+  base side:    latest, new, beautiful
+  aligned side: face, feet, smiling
+============================================================================
+   attribute vs body/expression                 Qwen3-8B                   [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (10 words cross)
+     shared: ass, body, boobs, breast, breasts, face, legs, pussy, tits
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: Baichuan2-7B-Chat, SmolLM3-3B
+
+  GROUP 1  <->  GROUP 5   (3 words cross)
+     shared: bare, naked, wearing
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     5: Llama-3.1-8B-Instruct
+
+  GROUP 1  <->  GROUP 6   (5 words cross)
+     shared: face, family, hand, house, wearing
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     6: Lucie-7B-Instruct-v1.1
+
+  GROUP 1  <->  GROUP 9   (6 words cross)
+     shared: beautiful, face, feet, latest, new, smiling
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     9: Qwen3-8B
+

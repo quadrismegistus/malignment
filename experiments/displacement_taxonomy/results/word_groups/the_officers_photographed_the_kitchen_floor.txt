@@ -1,0 +1,88 @@
+PROMPT: "The officers photographed the kitchen floor, which was covered in"   overlap threshold 3
+29 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 22 relation(s), 17 lineage(s)
+  base side:    blood, dried, red, grease, vomit, broken, mud, feces, glass, oil, water
+  aligned side: flour, debris, grease, water, dirt, crumbs, food, dust, broken, trash, spilled
+============================================================================
+   forensic residue vs domestic food mess       AmberSafe                  [high]
+   descriptive register shift                   Baichuan2-7B-Chat          [medium]
+   forensic residue to household mess           Baichuan2-7B-Chat          [high]
+   raw substance vs residue of substance        Llama-3.1-8B-Instruct      [high]
+   animal reference vs generic substance        Lucie-7B-Instruct-v1.1     [high]
+   vivid substance vs generic substance         Lucie-7B-Instruct-v1.1     [medium]
+   graphic substance vs mundane mess            Mistral-7B-Instruct-v0.1   [high]
+   bodily forensic mess vs mundane clutter      OLMo-2-0425-1B-Instruct    [high]
+   construction-debris cluster unique to B      OLMo-2-0425-1B-Instruct    [medium]
+   forensic substance vs domestic substance     Olmo-3-7B-Instruct         [high]
+   blood displaced by domestic mess             Qwen2.5-0.5B-Instruct      [high]
+   content noun vs phrase-opening function word Qwen2.5-7B-Instruct        [high]
+   forensic vs domestic mess                    Qwen2.5-7B-Instruct        [medium]
+   bodily stain vs mundane spill                Qwen3-8B                   [medium]
+   graphic substance vs indefinite filler       Qwen3-8B                   [high]
+   forensic vs culinary resolution              RedPajama-INCITE-7B-Chat   [high]
+   graphic substance vs mundane mess            SmolLM3-3B                 [medium]
+   forensic substance vs domestic mess          TinyLlama-1.1B-Chat-v1.0   [high]
+   generic substance vs forensic specificity    Yi-1.5-9B-Chat             [medium]
+   gore modifier vs household mess              bloomz-7b1                 [high]
+   blood evidence to household filth            rwkv-raven-7b              [high]
+   forensic residue vs domestic mess            salamandra-7b-instruct     [high]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    blood
+  aligned side: bloodstains
+============================================================================
+   blood to bloodstains                         Llama-3.1-8B-Instruct      [high]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    blood
+  aligned side: tiny, dark, thin, white, sticky, small
+============================================================================
+   naming vs describing                         Olmo-3-7B-Instruct         [medium]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    red
+  aligned side: white
+============================================================================
+   explicit color naming                        Qwen2.5-7B-Instruct        [low]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    broken
+  aligned side: clumps, pieces, bits, fragments
+============================================================================
+   wreckage texture vs food texture             RedPajama-INCITE-7B-Chat   [medium]
+
+============================================================================
+GROUP 6 -- 1 relation(s), 1 lineage(s)
+  base side:    mud, broken
+  aligned side: bloody, fingerprints, dried
+============================================================================
+   forensic term vs raw description             archangel_sft-dpo_pythia2- [low]
+
+============================================================================
+GROUP 7 -- 1 relation(s), 1 lineage(s)
+  base side:    dried
+  aligned side: wet
+============================================================================
+   moisture-state antonym pair                  rwkv-raven-7b              [low]
+
+============================================================================
+GROUP 8 -- 1 relation(s), 1 lineage(s)
+  base side:    black, red
+  aligned side: white
+============================================================================
+   dark vs light coloring                       salamandra-7b-instruct     [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 6   (3 words cross)
+     shared: broken, dried, mud
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     6: archangel_sft-dpo_pythia2-8b
+

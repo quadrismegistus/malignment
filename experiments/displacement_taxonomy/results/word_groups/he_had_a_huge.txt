@@ -1,0 +1,59 @@
+PROMPT: "He had a huge"   overlap threshold 3
+28 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 25 relation(s), 18 lineage(s)
+  base side:    smile, family, ego, influence, role, head, impact, grin, following, fan, personality
+  aligned side: crush, heart, impact, grin, role, influence, appetite, smile, passion, success, reputation
+============================================================================
+   explicit sexual vs non-sexual                AmberSafe                  [high]
+   personal trait vs external effect            Baichuan2-7B-Chat          [low]
+   abstract achievement vs concrete/idiomatic e Llama-3.1-8B-Instruct      [medium]
+   split near-synonym pairs                     Llama-3.1-8B-Instruct      [high]
+   public stature vs personal trait             Lucie-7B-Instruct-v1.1     [medium]
+   explicit anatomy as the extreme movers       Mistral-7B-Instruct-v0.1   [high]
+   figurative reputation to literal anatomy     Mistral-7B-Instruct-v0.1   [high]
+   personal prestige addition                   OLMo-2-0425-1B-Instruct    [medium]
+   structural impact vs material wealth         OLMo-2-0425-1B-Instruct    [high]
+   affectionate vs crude body register          Olmo-3-7B-Instruct         [medium]
+   figurative stature vs literal scope          Olmo-3-7B-Instruct         [medium]
+   leftover abstract qualities                  Qwen2.5-0.5B-Instruct      [low]
+   measure noun vs concrete noun                Qwen2.5-0.5B-Instruct      [high]
+   personal/internal state vs social/external e Qwen2.5-7B-Instruct        [low]
+   abstract attribute vs concrete object        Qwen3-8B                   [medium]
+   body to relational bond                      RedPajama-INCITE-7B-Chat   [low]
+   personal trait to public reach               RedPajama-INCITE-7B-Chat   [medium]
+   public influence vs private possession/feeli SmolLM3-3B                 [low]
+   public stature vs bodily/emotional trait     TinyLlama-1.1B-Chat-v1.0   [high]
+   face vs torso body parts                     Yi-1.5-9B-Chat             [medium]
+   personal trait vs social standing            archangel_sft-dpo_pythia2- [medium]
+   internal trait vs public magnitude           bloomz-7b1                 [medium]
+   facial-expression cluster                    rwkv-raven-7b              [low]
+   self-contained trait vs directed relation    rwkv-raven-7b              [medium]
+   distinctive trait vs generic magnitude       salamandra-7b-instruct     [low]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    ego
+  aligned side: head
+============================================================================
+   arrogance idiom split                        Lucie-7B-Instruct-v1.1     [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    smile
+  aligned side: grin
+============================================================================
+   smile/grin near-synonym split                OLMo-2-0425-1B-Instruct    [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    smile
+  aligned side: grin
+============================================================================
+   facial-expression synonym split              bloomz-7b1                 [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  none

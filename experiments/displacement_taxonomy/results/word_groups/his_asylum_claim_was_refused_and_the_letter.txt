@@ -1,0 +1,65 @@
+PROMPT: "His asylum claim was refused and the letter ordered him to leave the country, so he"   overlap threshold 3
+30 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 27 relation(s), 18 lineage(s)
+  base side:    returned, went, moved, left, stayed, fled, took, appealed, flew, came, applied
+  aligned side: fled, sought, applied, decided, had, could, appealed, has, is, started, must
+============================================================================
+   physical departure vs legal contestation     AmberSafe                  [high]
+   committed action versus deferred modal       Baichuan2-7B-Chat          [medium]
+   compliance versus defiance of the order      Baichuan2-7B-Chat          [low]
+   engagement vs outcome                        Llama-3.1-8B-Instruct      [medium]
+   legal-recourse verb vs auxiliary scaffold    Llama-3.1-8B-Instruct      [high]
+   complete action verb vs auxiliary scaffoldin Lucie-7B-Instruct-v1.1     [high]
+   physical relocation vs internal/provisional  Lucie-7B-Instruct-v1.1     [medium]
+   orderly departure vs desperate flight        Mistral-7B-Instruct-v0.1   [high]
+   petition vs lawbreaking                      Mistral-7B-Instruct-v0.1   [medium]
+   lone defiance amid departure                 OLMo-2-0425-1B-Instruct    [low]
+   plain departure vs journey mechanics         OLMo-2-0425-1B-Instruct    [medium]
+   legal recourse vs passive compliance         Olmo-3-7B-Instruct         [high]
+   urgent flight vs neutral movement            Olmo-3-7B-Instruct         [low]
+   physical compliance vs legal recourse        Qwen2.5-0.5B-Instruct      [high]
+   completed departure vs modal deferral        Qwen2.5-7B-Instruct        [high]
+   obligation vs enacted flight                 Qwen2.5-7B-Instruct        [medium]
+   completed departure verb vs auxiliary scaffo Qwen3-8B                   [high]
+   neutral departure vs urgent flight           Qwen3-8B                   [low]
+   overt departure vs covert concealment        RedPajama-INCITE-7B-Chat   [high]
+   compliance vs scattered outcomes             SmolLM3-3B                 [medium]
+   outcome vs deliberation                      TinyLlama-1.1B-Chat-v1.0   [medium]
+   contest the order vs comply and leave        Yi-1.5-9B-Chat             [medium]
+   compliant departure vs resistance            archangel_sft-dpo_pythia2- [low]
+   decisive action vs modal hedging             bloomz-7b1                 [medium]
+   formal appeal vs desperate departure         rwkv-raven-7b              [low]
+   completed vs inchoative aspect               salamandra-7b-instruct     [high]
+   danger-coded flight                          salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    appealed
+  aligned side: sought, applied
+============================================================================
+   asylum vocabulary splits the axis            Mistral-7B-Instruct-v0.1   [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    travelled
+  aligned side: traveled
+============================================================================
+   British vs American spelling split           OLMo-2-0425-1B-Instruct    [medium]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    packed, walked
+  aligned side: burned
+============================================================================
+   extreme outlier action                       SmolLM3-3B                 [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (3 words cross)
+     shared: appealed, applied, sought
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: Mistral-7B-Instruct-v0.1
+

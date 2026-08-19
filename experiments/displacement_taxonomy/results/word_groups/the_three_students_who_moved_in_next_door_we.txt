@@ -1,0 +1,71 @@
+PROMPT: "The three students who moved in next door were always"   overlap threshold 3
+36 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 33 relation(s), 18 lineage(s)
+  base side:    on, there, fighting, friendly, at, nice, together, trying, out, in, up
+  aligned side: loud, arguing, playing, friendly, making, laughing, talking, busy, complaining, noisy, together
+============================================================================
+   location versus trait framing                AmberSafe                  [high]
+   nuisance behavior gerunds                    AmberSafe                  [low]
+   sociable to disruptive                       Baichuan2-7B-Chat          [medium]
+   state vs activity                            Baichuan2-7B-Chat          [low]
+   outdoor play vs disruptive conflict          Llama-3.1-8B-Instruct      [medium]
+   trait valence antonyms                       Llama-3.1-8B-Instruct      [medium]
+   blunt trait to social activity               Lucie-7B-Instruct-v1.1     [medium]
+   isolated state to reciprocal action          Lucie-7B-Instruct-v1.1     [low]
+   character trait vs observed behavior         Mistral-7B-Instruct-v0.1   [high]
+   warm judgment vs wary scrutiny               Mistral-7B-Instruct-v0.1   [medium]
+   behavior vs relationship-state               OLMo-2-0425-1B-Instruct    [high]
+   specific descriptor vs bare intensifier      Olmo-3-7B-Instruct         [high]
+   capacity trait to affect trait               Qwen2.5-0.5B-Instruct      [low]
+   locative filler to trait adjective           Qwen2.5-0.5B-Instruct      [medium]
+   trouble-clause openers vs trait adjectives   Qwen2.5-7B-Instruct        [medium]
+   noise/conflict vs neutral activity           Qwen3-8B                   [medium]
+   trait word vs light verb                     Qwen3-8B                   [high]
+   noise/trouble vs sociability                 RedPajama-INCITE-7B-Chat   [medium]
+   trait adjective vs specific activity         RedPajama-INCITE-7B-Chat   [high]
+   disruptive behavior vs sociable trait        SmolLM3-3B                 [medium]
+   verb continuation vs adjective description   SmolLM3-3B                 [high]
+   generic activity vs particular social behavi TinyLlama-1.1B-Chat-v1.0   [medium]
+   trait adjectives of manner                   TinyLlama-1.1B-Chat-v1.0   [medium]
+   aggression vs benign play                    Yi-1.5-9B-Chat             [low]
+   function-word to noise-cluster               Yi-1.5-9B-Chat             [medium]
+   full social judgment vs bare process         archangel_sft-dpo_pythia2- [medium]
+   togetherness vs named conflict               archangel_sft-dpo_pythia2- [low]
+   trait attribution vs syntactic scaffolding   archangel_sft-dpo_pythia2- [high]
+   trait vs activity                            bloomz-7b1                 [high]
+   positive traits vs disruptive traits         rwkv-raven-7b              [high]
+   static presence vs social activity           rwkv-raven-7b              [medium]
+   particle residue vs full predicate           salamandra-7b-instruct     [low]
+   trait versus behavior                        salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    out
+  aligned side: outside
+============================================================================
+   near-synonym location swap                   AmberSafe                  [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    happy, laughing, nice, kind
+  aligned side: good, friendly
+============================================================================
+   conflict vs amity valence                    OLMo-2-0425-1B-Instruct    [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    very, so
+  aligned side: super
+============================================================================
+   intensifier register shift                   RedPajama-INCITE-7B-Chat   [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 3   (6 words cross)
+     shared: friendly, good, happy, kind, laughing, nice
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     3: OLMo-2-0425-1B-Instruct
+

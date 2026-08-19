@@ -1,0 +1,70 @@
+PROMPT: "During the search, the guard found on him a"   overlap threshold 3
+33 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 29 relation(s), 18 lineage(s)
+  base side:    gun, pistol, knife, revolver, loaded, wallet, package, bag, weapon, bottle, large
+  aligned side: notebook, piece, note, wallet, letter, document, small, bag, list, pair, gold
+============================================================================
+   firearm to blade substitution                AmberSafe                  [high]
+   specific contraband vs generic possessions   Baichuan2-7B-Chat          [medium]
+   weapon-to-personal-item displacement         Llama-3.1-8B-Instruct      [high]
+   large/whole quantity vs small/partial quanti Lucie-7B-Instruct-v1.1     [high]
+   named weapon vs generic weapon term          Lucie-7B-Instruct-v1.1     [low]
+   danger descriptor vs neutral descriptor      Mistral-7B-Instruct-v0.1   [medium]
+   weapon vs innocuous item                     Mistral-7B-Instruct-v0.1   [high]
+   bare noun vs descriptive modifier            OLMo-2-0425-1B-Instruct    [medium]
+   everyday term vs formal term                 OLMo-2-0425-1B-Instruct    [medium]
+   weapon/contraband to mundane possession      Olmo-3-7B-Instruct         [high]
+   specific contraband vs generic or incongruou Qwen2.5-0.5B-Instruct      [medium]
+   weapon vs benign personal effect             Qwen2.5-7B-Instruct        [high]
+   firearm to blade                             Qwen3-8B                   [medium]
+   mundane carried items on both sides          Qwen3-8B                   [low]
+   named weapon vs bare quantity                Qwen3-8B                   [high]
+   generic vs specific weapon term              RedPajama-INCITE-7B-Chat   [low]
+   named item vs vague quantity or location     RedPajama-INCITE-7B-Chat   [medium]
+   blanks vs named objects                      SmolLM3-3B                 [high]
+   weapon vs mixed objects                      SmolLM3-3B                 [medium]
+   weapon vs document                           TinyLlama-1.1B-Chat-v1.0   [high]
+   committed noun vs hedging adjective          Yi-1.5-9B-Chat             [medium]
+   modern contraband vs adventure-narrative obj Yi-1.5-9B-Chat             [medium]
+   loose item vs container/evidence             archangel_sft-dpo_pythia2- [low]
+   mundane object vs weapon                     bloomz-7b1                 [high]
+   personal effect vs incriminating document    bloomz-7b1                 [low]
+   amount nouns concentrated in B               rwkv-raven-7b              [medium]
+   contraband-weapon connotation vs benign effe rwkv-raven-7b              [high]
+   administrative item vs contraband item       salamandra-7b-instruct     [medium]
+   generic vs specific weapon naming            salamandra-7b-instruct     [high]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    gold, silver
+  aligned side: metal
+============================================================================
+   named metal vs generic metal                 AmberSafe                  [low]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    large
+  aligned side: small
+============================================================================
+   size descriptor flip                         AmberSafe                  [medium]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    cell, cellphone, cellular
+  aligned side: mobile
+============================================================================
+   phone naming variant                         Baichuan2-7B-Chat          [low]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    small, large
+  aligned side: torn, rectangular, folded
+============================================================================
+   size vs shape/condition adjective            Qwen2.5-7B-Instruct        [medium]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  none

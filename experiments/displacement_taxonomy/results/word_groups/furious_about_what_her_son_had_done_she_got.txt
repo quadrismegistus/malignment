@@ -1,0 +1,64 @@
+PROMPT: "Furious about what her son had done, she got him on the phone and started to"   overlap threshold 3
+24 two-sided relations, 17 lineages
+
+============================================================================
+GROUP 1 -- 21 relation(s), 17 lineage(s)
+  base side:    yell, shout, threaten, lecture, scream, tell, berate, ask, question, rant, talk
+  aligned side: scold, berate, yell, shout, scream, explain, talk, lecture, reprimand, ask, question
+============================================================================
+   hostile outburst vs calm reasoned communicat AmberSafe                  [high]
+   one-way address vs two-way exchange          AmberSafe                  [medium]
+   threat/aggression vs pure verbal reprimand   Baichuan2-7B-Chat          [low]
+   idiomatic phrasal fragments vs formal reprim Llama-3.1-8B-Instruct      [medium]
+   loud aggression vs controlled interrogation  Lucie-7B-Instruct-v1.1     [high]
+   measured reprimand vs explosive outburst     Mistral-7B-Instruct-v0.1   [medium]
+   narrowing to one verbal-scolding register    OLMo-2-0425-1B-Instruct    [high]
+   physical-contact verbs suppressed hardest    OLMo-2-0425-1B-Instruct    [medium]
+   literal anger speech vs violent-idiom intens Olmo-3-7B-Instruct         [high]
+   acute aggression vs grinding complaint       Qwen2.5-0.5B-Instruct      [medium]
+   vocal reprimand vs mixed actions             Qwen2.5-7B-Instruct        [high]
+   real words vs masked tokens                  Qwen3-8B                   [high]
+   vivid rage to mild reprimand                 Qwen3-8B                   [medium]
+   sustained confrontation vs brief reaction    RedPajama-INCITE-7B-Chat   [low]
+   authority register vs domestic outburst      SmolLM3-3B                 [medium]
+   loud emotional outburst vs directed rhetoric TinyLlama-1.1B-Chat-v1.0   [medium]
+   raw venting vs idiomatic scolding            Yi-1.5-9B-Chat             [medium]
+   loud/unrestrained vs controlled communicatio bloomz-7b1                 [medium]
+   uncontrolled vs controlled reprimand         rwkv-raven-7b              [high]
+   plain talk versus off-register additions     salamandra-7b-instruct     [low]
+   reprimand intensity escalation               salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    interrogate, reprimand
+  aligned side: lay, grill
+============================================================================
+   clinical term vs informal idiomatic synonym  Mistral-7B-Instruct-v0.1   [medium]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    question
+  aligned side: interrogate
+============================================================================
+   question vs interrogate minimal pair         Olmo-3-7B-Instruct         [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    scold
+  aligned side: berate, lecture
+============================================================================
+   split near-synonym reprimand verbs           bloomz-7b1                 [medium]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (3 words cross)
+     shared: interrogate, lay, reprimand
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: Mistral-7B-Instruct-v0.1
+
+  GROUP 1  <->  GROUP 4   (3 words cross)
+     shared: berate, lecture, scold
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     4: bloomz-7b1
+

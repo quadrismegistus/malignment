@@ -1,0 +1,40 @@
+PROMPT: "The council officer told her the mould was her own fault, so she"   overlap threshold 3
+27 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 27 relation(s), 18 lineage(s)
+  base side:    asked, paid, went, would, took, has, was, called, sued, left, refused
+  aligned side: decided, could, needed, didn't, started, should, asked, must, couldn't, would, went
+============================================================================
+   acceptance vs refusal                        AmberSafe                  [medium]
+   compliance vs resistance                     AmberSafe                  [high]
+   escalation to formal channels                AmberSafe                  [medium]
+   reactive complaint vs procedural initiative  Baichuan2-7B-Chat          [low]
+   self-repair action vs stated incapacity      Llama-3.1-8B-Instruct      [high]
+   completed compliance vs modal hedging        Lucie-7B-Instruct-v1.1     [medium]
+   negated vs bare modal                        Mistral-7B-Instruct-v0.1   [medium]
+   refusal vs pursued remedy                    Mistral-7B-Instruct-v0.1   [low]
+   modal scaffolding vs concrete action         OLMo-2-0425-1B-Instruct    [high]
+   narrated past action vs deontic modal        Olmo-3-7B-Instruct         [high]
+   withdrawal/modal vs cognitive-verbal engagem Qwen2.5-0.5B-Instruct      [medium]
+   modal filler vs completed action             Qwen2.5-7B-Instruct        [high]
+   assertive action to negated capacity         Qwen3-8B                   [medium]
+   modal hypothetical to narrated past          Qwen3-8B                   [high]
+   conventional complaint vs escalated response RedPajama-INCITE-7B-Chat   [medium]
+   authority-directed vs self-directed remedy   SmolLM3-3B                 [low]
+   formal escalation vs informal complaint      SmolLM3-3B                 [medium]
+   narrated-action vs modal-deliberation        TinyLlama-1.1B-Chat-v1.0   [medium]
+   negation-morpheme split across conditions    TinyLlama-1.1B-Chat-v1.0   [high]
+   finite redress verb vs modal scaffolding     Yi-1.5-9B-Chat             [high]
+   completed act vs modal/inchoative framing    archangel_sft-dpo_pythia2- [medium]
+   assertive recourse to acquiescence           bloomz-7b1                 [medium]
+   modal hedge to named action                  bloomz-7b1                 [high]
+   confrontation/exit vs financial compliance   rwkv-raven-7b              [medium]
+   volitional vs factual modal                  rwkv-raven-7b              [low]
+   modal versus remedial action                 salamandra-7b-instruct     [medium]
+   obligation modal versus contracted negated m salamandra-7b-instruct     [high]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  none

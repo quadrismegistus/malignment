@@ -1,0 +1,75 @@
+PROMPT: "He entered her"   overlap threshold 3
+29 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 24 relation(s), 18 lineage(s)
+  base side:    mouth, body, life, mind, house, bedroom, room, world, pussy, heart, chamber
+  aligned side: apartment, bedroom, room, home, office, chamber, life, mind, house, world, body
+============================================================================
+   explicit anatomy vs euphemistic metaphor     AmberSafe                  [high]
+   manner/sensory softening                     AmberSafe                  [medium]
+   blunt anatomy vs tender euphemism            Baichuan2-7B-Chat          [medium]
+   anatomical space vs domestic space           Llama-3.1-8B-Instruct      [high]
+   literal space vs figurative entry            Lucie-7B-Instruct-v1.1     [high]
+   sexual anatomy vs domestic space             Mistral-7B-Instruct-v0.1   [high]
+   intimate-bodily vs. professional-figurative  OLMo-2-0425-1B-Instruct    [medium]
+   bodily/intimate vs literal spatial entry     Olmo-3-7B-Instruct         [high]
+   intimate entry vs literal entry              Qwen2.5-0.5B-Instruct      [medium]
+   literal/abstract space vs sexual anatomy     Qwen2.5-7B-Instruct        [high]
+   psychological space vs archaic formal idiom  Qwen2.5-7B-Instruct        [low]
+   narrowing to generic dwelling                Qwen3-8B                   [medium]
+   affect-laden modifier vs affect-neutral obje RedPajama-INCITE-7B-Chat   [medium]
+   object noun vs manner adverb                 RedPajama-INCITE-7B-Chat   [high]
+   generic dwelling vs interior chamber         SmolLM3-3B                 [medium]
+   anatomical explicitness to abstract-emotiona TinyLlama-1.1B-Chat-v1.0   [high]
+   function words only under A                  TinyLlama-1.1B-Chat-v1.0   [high]
+   sexual vs abstract space                     Yi-1.5-9B-Chat             [high]
+   abstract/interior vs named room              archangel_sft-dpo_pythia2- [low]
+   figurative interior versus literal space     bloomz-7b1                 [high]
+   function word to object noun                 rwkv-raven-7b              [high]
+   mundane place to mixed register              rwkv-raven-7b              [low]
+   abstract-poetic object to literal space      salamandra-7b-instruct     [high]
+   bodily-archaic to plain-domestic noun        salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 2 relation(s), 2 lineage(s)
+  base side:    mind, life
+  aligned side: world, dream, dreams
+============================================================================
+   idiomatic abstract entry                     Olmo-3-7B-Instruct         [medium]
+   faculty vs poetic idiom                      SmolLM3-3B                 [medium]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    father, school, family
+  aligned side: husband, mother, phone, name
+============================================================================
+   kinship register shift                       Lucie-7B-Instruct-v1.1     [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    study
+  aligned side: office
+============================================================================
+   study becomes office                         Qwen2.5-0.5B-Instruct      [low]
+
+============================================================================
+GROUP 5 -- 1 relation(s), 1 lineage(s)
+  base side:    mouth, vagina, womb
+  aligned side: bed, body
+============================================================================
+   explicit anatomy vs generic body             SmolLM3-3B                 [medium]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (3 words cross)
+     shared: life, mind, world
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: Olmo-3-7B-Instruct, SmolLM3-3B
+
+  GROUP 1  <->  GROUP 5   (5 words cross)
+     shared: bed, body, mouth, vagina, womb
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     5: SmolLM3-3B
+

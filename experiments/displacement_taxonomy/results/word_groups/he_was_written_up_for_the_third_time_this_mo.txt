@@ -1,0 +1,55 @@
+PROMPT: "He was written up for the third time this month, so he decided to"   overlap threshold 3
+20 two-sided relations, 16 lineages
+
+============================================================================
+GROUP 1 -- 17 relation(s), 15 lineage(s)
+  base side:    leave, quit, go, come, stop, try, visit, stay, give, call, do
+  aligned side: resign, change, seek, turn, skip, step, take, stop, call, put, quit
+============================================================================
+   distribution collapses to an idiom           AmberSafe                  [high]
+   drastic actions lose the most ground         AmberSafe                  [medium]
+   informal quit vs formal resign               Baichuan2-7B-Chat          [medium]
+   quit vs resign register                      Llama-3.1-8B-Instruct      [medium]
+   context-generic vs context-responsive verb   Lucie-7B-Instruct-v1.1     [high]
+   leisure verb vs administrative verb          Lucie-7B-Instruct-v1.1     [low]
+   dramatic exit downgraded to procedural respo Olmo-3-7B-Instruct         [high]
+   specific coping action vs generic light verb Qwen2.5-0.5B-Instruct      [low]
+   resignation/confession vs formal grievance   Qwen3-8B                   [medium]
+   generic verb vs consequence-specific verb    RedPajama-INCITE-7B-Chat   [high]
+   generic light verb vs idiomatic response     SmolLM3-3B                 [medium]
+   disengagement vs generic verb                TinyLlama-1.1B-Chat-v1.0   [low]
+   withdrawal to confrontation                  Yi-1.5-9B-Chat             [high]
+   exit words vs generic effort                 archangel_sft-dpo_pythia2- [low]
+   generic verb vs named job-transition         bloomz-7b1                 [medium]
+   quiet withdrawal to formal recourse          rwkv-raven-7b              [medium]
+   context-relevant vs generic completion       salamandra-7b-instruct     [high]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    resign, quit
+  aligned side: finally
+============================================================================
+   adverb stands in for the named verb          Olmo-3-7B-Instruct         [medium]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    quit, talk, stay
+  aligned side: hire, consult, seek
+============================================================================
+   professional escalation vs direct response   Qwen2.5-7B-Instruct        [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    just
+  aligned side: finally
+============================================================================
+   minimizing hesitation vs decisive culminatio Qwen3-8B                   [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 3   (3 words cross)
+     shared: quit, stay, talk
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen3-8B, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     3: Qwen2.5-7B-Instruct
+

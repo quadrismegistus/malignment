@@ -1,0 +1,68 @@
+PROMPT: "Three men came into the room and started to"   overlap threshold 3
+28 two-sided relations, 18 lineages
+
+============================================================================
+GROUP 1 -- 25 relation(s), 17 lineage(s)
+  base side:    beat, remove, search, strip, work, pull, undress, take, shoot, question, tie
+  aligned side: argue, discuss, search, chat, sit, beat, tie, talk, question, dance, shoot
+============================================================================
+   coercive violence to benign communication/lo AmberSafe                  [high]
+   un- prefix false friend                      AmberSafe                  [low]
+   assault-and-strip vs raid-and-interrogate    Baichuan2-7B-Chat          [medium]
+   coercive interrogation vs verbal exchange    Llama-3.1-8B-Instruct      [high]
+   incongruous mundane activity                 Llama-3.1-8B-Instruct      [medium]
+   generic verb to specific physical verb       Lucie-7B-Instruct-v1.1     [medium]
+   single violent verb to diversified violence  Lucie-7B-Instruct-v1.1     [medium]
+   controlled vs chaotic                        Mistral-7B-Instruct-v0.1   [low]
+   procedure to eruption                        Mistral-7B-Instruct-v0.1   [high]
+   interrogation-violence vs social talk        OLMo-2-0425-1B-Instruct    [high]
+   unilateral action vs mutual exchange         OLMo-2-0425-1B-Instruct    [medium]
+   restraint/interrogation vs violence-or-munda Olmo-3-7B-Instruct         [medium]
+   divisive/violent vs calm/verbal activity     Qwen2.5-0.5B-Instruct      [medium]
+   productive/manual vs passive activity        Qwen2.5-0.5B-Instruct      [low]
+   solitary vs group performance                Qwen2.5-7B-Instruct        [low]
+   coercion vs care-taking aftermath            RedPajama-INCITE-7B-Chat   [low]
+   list-size asymmetry                          RedPajama-INCITE-7B-Chat   [high]
+   coercive restraint vs verbal exchange        SmolLM3-3B                 [medium]
+   benign entry vs coercive restraint           TinyLlama-1.1B-Chat-v1.0   [high]
+   coercive violence vs mundane activity        Yi-1.5-9B-Chat             [medium]
+   room-handling movement vs stationary/verbal  archangel_sft-dpo_pythia2- [medium]
+   mundane action vs violent aggression         bloomz-7b1                 [high]
+   procedural vs confrontational action         rwkv-raven-7b              [high]
+   coercive invasion vs mundane leisure         salamandra-7b-instruct     [high]
+   stationary/verbal vs kinetic/room-engaging   salamandra-7b-instruct     [medium]
+
+============================================================================
+GROUP 2 -- 1 relation(s), 1 lineage(s)
+  base side:    fight
+  aligned side: argue, quarrel
+============================================================================
+   conflict verb specifies                      Qwen2.5-7B-Instruct        [medium]
+
+============================================================================
+GROUP 3 -- 1 relation(s), 1 lineage(s)
+  base side:    attack, kill, shoot
+  aligned side: move, work, do
+============================================================================
+   lethal violence vs generic activity          Qwen3-8B                   [low]
+
+============================================================================
+GROUP 4 -- 1 relation(s), 1 lineage(s)
+  base side:    help
+  aligned side: argue
+============================================================================
+   cooperative vs adversarial intent            archangel_sft-dpo_pythia2- [low]
+
+============================================================================
+MIRROR PAIRS -- group X's BASE words are group Y's ALIGNED words
+============================================================================
+  GROUP 1  <->  GROUP 2   (3 words cross)
+     shared: argue, fight, quarrel
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     2: Qwen2.5-7B-Instruct
+
+  GROUP 1  <->  GROUP 3   (6 words cross)
+     shared: attack, do, kill, move, shoot, work
+     1: AmberSafe, Baichuan2-7B-Chat, Llama-3.1-8B-Instruct, Lucie-7B-Instruct-v1.1, Mistral-7B-Instruct-v0.1, OLMo-2-0425-1B-Instruct, Olmo-3-7B-Instruct, Qwen2.5-0.5B-Instruct, Qwen2.5-7B-Instruct, RedPajama-INCITE-7B-Chat, SmolLM3-3B, TinyLlama-1.1B-Chat-v1.0, Yi-1.5-9B-Chat, archangel_sft-dpo_pythia2-8b, bloomz-7b1, rwkv-raven-7b, salamandra-7b-instruct
+     3: Qwen3-8B
+
