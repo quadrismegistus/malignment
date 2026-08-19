@@ -43,7 +43,8 @@ happens, and the instrument says so outright and asks for a self-audit.
 
 ```
 Below are {{n_relations}} descriptions, each written by a different person who was
-shown two lists of words and asked what relation connected them. None of them saw
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
 each other's answers, none was given any vocabulary, and each invented a name.
 
 They were looking at many different sentences on many different subjects. You are

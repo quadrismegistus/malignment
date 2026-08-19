@@ -81,7 +81,8 @@ def corpus(instrument):
             #: guarantees it, since a wider id only makes collisions rarer.
             rid = "r" + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:7]
             byframe[meta.get("nickname")].append(
-                (rid, rel["name"], rel["sentence"],
+                (rid, rel["name"], rel["sentence"], rel.get("a_words") or [],
+                 rel.get("b_words") or [],
                  {"frame": meta.get("nickname"), "pair": meta.get("pair"),
                   "aligned": k.get("aligned"), "rater": k.get("rater"), "index": i}))
     ors = {k.get("orientation") for k in st.keys()
@@ -123,16 +124,28 @@ def prepare(instrument):
     ver = re.search(r"^# INSTRUMENT: \S+ (\S+)", src, re.M).group(1)
     tmpl = re.search(r"## PROMPT TEMPLATE\s*\n+```\n(.*?)\n```", src, re.S).group(1)
     schema = json.loads(re.search(r"## SCHEMA JSON\s*\n+```json\n(.*?)\n```", src, re.S).group(1))
-    body = "\n\n".join("%s  %s\n      %s" % (r[0], r[1], r[2]) for r in rows)
+    #: THE WORDS GO IN, THE PROMPT DOES NOT. RH, 2026-08-19: the sentences are
+    #: sometimes ambiguous without examples of words. They are -- and raters
+    #: already quote them into the sentences much of the time, so printing
+    #: a_words/b_words costs about 78 chars per relation and almost nothing in
+    #: leakage. The PROMPT is a different matter: the words are the evidence the
+    #: relation is about, the prompt is the topic, and handing over the topic
+    #: makes cluster-by-frame trivially available, which is the documented
+    #: failure mode. A harmoniser can tell genitals-to-grooming from
+    #: obligation-to-threat from the words alone.
+    body = "\n\n".join(
+        "%s  %s\n      %s\n      A: %s\n      B: %s"
+        % (r[0], r[1], r[2], ", ".join(r[3]) or "(none)", ", ".join(r[4]) or "(none)")
+        for r in rows)
     prompt = (tmpl.replace("{{n_relations}}", str(len(rows)))
                   .replace("{{relations}}", body))
 
     inp = os.path.join(HERE, "results", "harmonise_input_%s.json" % instrument)
     json.dump({"instrument": instrument, "harmoniser_version": ver,
                "n_relations": len(rows),
-               "n_cells": len({(r[3]["frame"], r[3]["pair"]) for r in rows}),
+               "n_cells": len({(r[5]["frame"], r[5]["pair"]) for r in rows}),
                "prompt": prompt,
-               "mapping": {r[0]: r[3] for r in rows}}, open(inp, "w"), indent=1)
+               "mapping": {r[0]: r[5] for r in rows}}, open(inp, "w"), indent=1)
 
     txt = os.path.join(HERE, "results", "inputs", "harmonise_%s.txt" % instrument)
     os.makedirs(os.path.dirname(txt), exist_ok=True)
@@ -149,8 +162,8 @@ def prepare(instrument):
         if probe not in gen:
             raise SystemExit("generated script is missing %r" % probe)
     print("corpus     %d relations from %d cells, instrument %s"
-          % (len(rows), len({(r[3]["frame"], r[3]["pair"]) for r in rows}), instrument))
-    print("frames     %s" % ", ".join(sorted({r[3]["frame"] for r in rows})))
+          % (len(rows), len({(r[5]["frame"], r[5]["pair"]) for r in rows}), instrument))
+    print("frames     %s" % ", ".join(sorted({r[5]["frame"] for r in rows})))
     print("prompt     %d chars  -> %s" % (len(prompt), txt))
     print("mapping    %s   (the harmoniser never sees this)" % inp)
     print("workflow   %s   %d independent harmonisers" % (js, N_HARMONISERS))
