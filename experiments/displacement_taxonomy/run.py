@@ -364,6 +364,60 @@ def parse_movers(prompt):
 
 
 TOPK_RANK = 20
+MASS_FLOOR = 0.01
+
+
+def _table_r4(pre, post):
+    """Two arms, membership and order by mass, positions shown instead of mass.
+
+    Settled with RH over a long iteration, and every clause here is something an
+    earlier version got wrong:
+
+    **Membership and order are BOTH mass.** Filtering on one quantity and sorting
+    on another makes a column whose own ordering contradicts its heading. Mass
+    rather than rank because rank membership put `belt` under A on the strength of
+    `gun` overtaking it -- a fact about `gun`, not about `belt`.
+
+    **Ordered by mass difference, not by own-arm rank.** Own-arm rank reads well
+    and is a trap: a word absent from the other arm has no rank there, so it sorts
+    to the end, and on the Llama cell that pushed `dick, shaft, member, hard,
+    erection, crotch, erect` and `mustache, goatee, fur` past the cut -- the whole
+    finding, hidden, silently, and only on cells without topup.
+
+    **A 1% floor within the favouring arm.** Below it the columns run to 90 words
+    whose tail differs by ~0.001pp and reads with the same weight as the head,
+    which is how a relation gets built on nothing. 1% gives a median 20 words per
+    cell over the stroking frame; 5% leaves two.
+
+    **Positions, no probabilities.** Showing percentages produced 155 uses of the
+    mass vocabulary over 29 cells against 2 under ranks. `-` where an arm has no
+    rank for a word, which says `not in that arm's field at all` and is a stronger
+    statement than any number.
+
+    **The 5% of words whose rank contradicts their column is kept, not fixed.**
+    A word can climb while losing ground when its neighbours lose more; that is
+    the measurement, and the instrument says so rather than hiding it.
+    """
+    sh = set(pre) & set(post)
+    rb = {w: i + 1 for i, w in enumerate(sorted(sh, key=lambda w: -pre[w]))}
+    ra = {w: i + 1 for i, w in enumerate(sorted(sh, key=lambda w: -post[w]))}
+    dp = {w: post.get(w, 0.0) - pre.get(w, 0.0) for w in set(pre) | set(post)}
+    colA = sorted([w for w in pre if pre[w] >= MASS_FLOOR and dp[w] < 0],
+                  key=lambda w: dp[w])
+    colB = sorted([w for w in post if post[w] >= MASS_FLOOR and dp[w] > 0],
+                  key=lambda w: -dp[w])
+
+    def block(ws, label):
+        if not ws:
+            return "%s\n  (none -- no word on this side clears the floor)" % label
+        out = [label]
+        for w in ws:
+            a = "%3d" % rb[w] if w in rb else "  -"
+            b = "%3d" % ra[w] if w in ra else "  -"
+            d = ("%+5d" % (rb[w] - ra[w])) if (w in rb and w in ra) else "    -"
+            out.append("  %-14s %s -> %s  %s" % (w, a, b, d))
+        return "\n".join(out)
+    return "%s\n\n%s" % (block(colA, "HIGHER UNDER A"), block(colB, "HIGHER UNDER B"))
 
 
 def _table_ranks(pre, post, common, pre_only=(), post_only=()):
