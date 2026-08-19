@@ -345,7 +345,23 @@ def execute(b, models, roots, venv, a):
     except Exception:                                           # noqa: BLE001
         pass
     print("  provision   %s must carry transformers %s" % (venv, want or "(unknown)"))
-    r = cloud.ssh_run(st, PROVISION % {"venv": venv, "want": want})
+    #: Derived from the roster, per model in THIS shard.
+    from malignment import roster as _ros
+    _nodes = _ros.load()["nodes"]
+    _ssm = [m for m in models
+            if (_nodes.get(m, {}).get("env") or {}).get("profile") == "ssm"]
+    if _ssm:
+        print("  provision   %d model(s) declare profile ssm -> installing mamba "
+              "kernels: %s" % (len(_ssm), ", ".join(x.split("/")[-1] for x in _ssm)))
+    r = cloud.ssh_run(st, PROVISION % {
+        "venv": venv, "want": want,
+        "ssm": (SSM_KERNELS % {"venv": venv}) if _ssm else ""})
+    if r.returncode == 5:
+        #: Kernels absent. OURS, not the host's -- never blocklist for it.
+        _billing(cloud, iid, "SSM kernels failed to install (rc=5)")
+        raise SystemExit("  mamba kernels missing -- this shard would run ~200x "
+                         "slow and look healthy doing it. Box kept.\n%s"
+                         % (r.stdout or "")[-400:])
     if r.returncode == 4:
         #: The venv carries the wrong transformers. OURS, not the host's -- never
         #: blocklist for it.
@@ -590,6 +606,7 @@ if want and mm(got) != mm(want):
     sys.exit(4)
 print("VENV OK: transformers", got, "on the", mm(want) or "?", "line")
 VEOF
+%(ssm)s
 # **THE BOX'S OWN NETWORK CONFIG IS NOT TRUSTED.** Fleet box 48145433 shipped with
 # an HF proxy at http://117.175.104.83 and 10 of its 11 models died on 404 -- a
 # machine property we paid to provision, ship to, and run a whole shard against
@@ -692,6 +709,36 @@ def _await(cloud, st, models, iid, a):
             print("  last log:")
             print((cloud.ssh_run(st, "tail -n 25 /root/stage*.log").stdout or "")[-1500:])
             return False
+
+
+#: **KERNELS ARE INSTALLED ONLY FOR SHARDS THAT DECLARE THEY NEED THEM**, and
+#: the declaration comes from the roster (`env: profile: ssm`, 10 nodes), never
+#: from a name. `Zyphra/Zamba2-7B` ran at **183 s/cell** on a box without them --
+#: 152 hours for one model -- while the archive's `twpssm` fleet did the same
+#: architecture at **<=0.905 s/cell**, a 200x gap that is entirely environment.
+#:
+#: Not installed everywhere because `mamba-ssm` COMPILES, slowly, and a shard
+#: with no SSM member should not pay for it. Note the roster does NOT class rwkv,
+#: recurrentgemma or Olmo-Hybrid as `ssm` -- they are recurrent but need nothing
+#: special, and their measured rates (2.4-6.0 s/cell) confirm it. My own guess by
+#: name said 15 models; the roster says 10, and the roster is right.
+SSM_KERNELS = """
+echo "SSM shard: installing mamba kernels (this COMPILES and is slow)"
+uv pip install -q --python ./%(venv)s/bin/python --no-build-isolation \
+    causal-conv1d mamba-ssm || echo "kernel install returned non-zero"
+./%(venv)s/bin/python - <<'KEOF'
+import importlib.util, sys
+missing = [m for m in ("mamba_ssm", "causal_conv1d")
+           if importlib.util.find_spec(m) is None]
+if missing:
+    # **FAIL RATHER THAN RUN SLOWLY.** Without these the models still LOAD and
+    # still produce correct cells -- at 183 s/cell, which reads as a healthy box
+    # doing nothing for six days. A wrong answer would be caught; this would not.
+    print("SSM KERNELS MISSING:", missing)
+    sys.exit(5)
+print("SSM KERNELS OK")
+KEOF
+"""
 
 
 def _billing(cloud, iid, why):
