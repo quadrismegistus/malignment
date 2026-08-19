@@ -193,10 +193,28 @@ result** and is why H2 is reported.
   rises with the underlying narrative rate but is a compressed, biased estimate
   of it. "Alignment produces more narrative" needs a fresh uniform random sample
   per cell coded on `narrative` alone. Cheap, one field, not yet run.
-- **The coder is one instrument with a prior.** Blinding hides the label, not the
-  prose. If Opus can recognise aligned register it could nudge the rating, and
-  two Opus coders agreeing does not test this. The check -- give a coder passages
-  and ask it to guess the arm -- has not been run.
+- **The coder is one instrument, and its judgements have not been validated
+  against a different one.** Blinding hides the arm label, not the prose, so a
+  register effect on the rating cannot be ruled out from inside. Two Opus coders
+  agreeing at 0.866 does not test it: shared bias produces agreement.
+
+  Note what does NOT test it either. Asking a coder to guess the arm from the
+  text is uninformative: if alignment really does raise interiority, interiority
+  is itself a cue to the arm, so a correct guess is predicted equally by the
+  effect being real and by the coder being biased. That check can only fire in
+  the direction that distinguishes nothing.
+
+  The confound stated precisely is: does register move the rating WITH INTERIORITY
+  HELD FIXED? Testing it needs interiority fixed by something other than the
+  instrument under suspicion, which means **a differently-constituted coder on the
+  same passages** -- a human on a few hundred, or a non-Anthropic model.
+  Reproducing the per-pair directions would rule out Opus-specific register bias;
+  failing to would show the finding is instrument-dependent. Powered in both
+  directions, and not run.
+
+  The existing Sonnet comparison does not settle it: different estimand, three
+  pairs, and Sonnet's reliability was low enough (mode 0.628 against Opus's
+  0.850) that its disagreement is explained by noise before bias.
 - **Nothing about mechanism.** Why alignment does this is untested. Falcon3 is
   the one lead.
 - **English only.** Chinese is a separate replication on the 8 `cjk_tier` FLUENT
