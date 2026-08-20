@@ -354,18 +354,36 @@ def execute(b, models, roots, venv, a):
     shape = cloud.box(a.box_profile)
     print("\n  box profile %s: %s" % (a.box_profile, str(shape.get("description"))[:70]))
 
-    offers = cloud.offers(a.box_profile, limit=5)
+    hrs = seconds(b.get("per") or {m: b["cells"] // max(1, len(models))
+                                   for m in models}, "cuda")[0] / 3600
+    #: **EVERY MODEL IS FETCHED ONCE**, because the run script wipes the hub
+    #: between lineages. So the shard's download is its model count x the same
+    #: per-checkpoint figure `--disk` is sized from -- not a guess, the number
+    #: already trusted enough to buy disk with.
+    dl_gb = a.gb_per_model * len(models)
+    offers = cloud.offers(a.box_profile, limit=5, gb=dl_gb, hours=hrs)
     if not offers:
         raise SystemExit("  no offers matched profile %r" % a.box_profile)
     best = offers[0]
     print("  best offer  #%s  %sx %s  $%s/hr  %s"
           % (best.get("id"), best.get("num_gpus"), best.get("gpu_name"),
              best.get("dph_total"), best.get("geolocation")))
-    hrs = seconds(b.get("per") or {m: b["cells"] // max(1, len(models))
-                                   for m in models}, "cuda")[0] / 3600
+    egress = float(best.get("inet_down_cost") or 0) * dl_gb
     est = float(best.get("dph_total") or 0) * hrs
-    print("  estimated   $%.2f for %.1f h of compute (EXCLUDES download time, "
-          "which dominates on a fresh box)" % (est, hrs))
+    print("  estimated   $%.2f = $%.2f compute (%.1f h) + $%.2f egress "
+          "(%d models x %g GB @ $%.5f/GB)"
+          % (est + egress, est, hrs, egress, len(models), a.gb_per_model,
+             float(best.get("inet_down_cost") or 0)))
+    #: Ranked on the SUM, so say what was rejected and why -- an offer $0.10/hr
+    #: cheaper that loses $8 on egress must not look like the one we passed up.
+    _dph = sorted(offers, key=lambda o: float(o.get("dph_total") or 0))[0]
+    if _dph.get("id") != best.get("id"):
+        print("  NOT the cheapest $/hr: #%s at $%s/hr would cost $%.2f total "
+              "($%.5f/GB egress)"
+              % (_dph.get("id"), _dph.get("dph_total"),
+                 float(_dph.get("dph_total") or 0) * hrs
+                 + float(_dph.get("inet_down_cost") or 0) * dl_gb,
+                 float(_dph.get("inet_down_cost") or 0)))
     #: **REFUSE BEFORE CREATE, NOT AFTER A 9.6-MINUTE DOWNLOAD.**
     #: Reported here, DROPPED at the run-script stage below. Refusing the whole
     #: shard would have thrown away the four viable lineages that shared box 12

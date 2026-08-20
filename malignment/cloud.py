@@ -244,8 +244,29 @@ def query(b):
     return " ".join(q)
 
 
-def offers(name, limit=8):
-    """Ranked offers for a box, cheapest first, blocklisted machines removed."""
+def offers(name, limit=8, gb=0.0, hours=0.0):
+    """Ranked offers for a box, CHEAPEST IN TOTAL, blocklisted machines removed.
+
+    **`dph_total` is not what a fleet box costs; egress is often most of it.**
+    Ranking on $/hr alone rented two boxes at $0.03906/GB out of a pool where
+    others charged $0.00072 -- 54x -- and a shard downloads ~15 GB per
+    checkpoint, because the per-lineage wipe fetches every model once. On a
+    15-model shard that is ~225 GB: **$8.11 of bandwidth against $2.40 of
+    compute**, on the offer the old ranking called cheapest. Both boxes were
+    destroyed at 394 cells to re-rent, 2026-08-20.
+
+    So rank by what the box will actually cost:
+
+        dph_total x hours   +   inet_down_cost x gb
+
+    `gb` and `hours` default to 0, which reproduces the old $/hr order exactly,
+    so a caller that does not know its download size loses nothing. A caller
+    that does know passes it and gets the ordering that matters.
+
+    Egress is NOT filtered. A host with dear bandwidth is still right for a
+    small shard, and a threshold would have to guess where the line falls; the
+    sum puts each offer where its own numbers put it.
+    """
     b = box(name)
     raw = vastai("search", "offers", query(b), "-o", "dph", "--raw")
     try:
@@ -254,6 +275,9 @@ def offers(name, limit=8):
         return []
     bad = _blocked()
     out = [o for o in got if str(o.get("machine_id")) not in bad]
+    if gb > 0 or hours > 0:
+        out = sorted(out, key=lambda o: (float(o.get("dph_total") or 0) * hours
+                                         + float(o.get("inet_down_cost") or 0) * gb))
     return out[:limit]
 
 
