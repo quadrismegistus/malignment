@@ -133,6 +133,11 @@ def metrics(sv):
                 ordering=round(float(step.mean()) - mp, 6))
 
 
+def arm_of_check(role, arm):
+    """The derived arm must equal ClickHouse's role wherever CH has one."""
+    return role == arm
+
+
 def ch_rows():
     """gen_sequences for our corpora: the AUTHORITATIVE text plus every CH key."""
     import subprocess
@@ -272,8 +277,28 @@ def main(argv=None):
 
     t = pq.read_table(OUT, columns=["corpus", "script", "model", "n_sents",
                                     "bits_per_byte", "mean_drift", "n_bytes",
-                                    "arm", "arm_src", "lineage"])
+                                    "arm", "arm_src", "lineage", "role"])
     d = {c: t.column(c).to_pylist() for c in t.schema.names}
+
+    #: THE DERIVED ARM IS CHECKED AGAINST CLICKHOUSE ON EVERY BUILD, not once.
+    #: `arm` is a LOOKUP in roster.lineages(), not an inference from the passages
+    #: -- inferring it from behaviour would be circular for any arm contrast -- but
+    #: a lookup can still be wrong if the registry and the corpus disagree, and
+    #: 239,945 rows carry BOTH answers. Silence here is the check passing; a
+    #: mismatch is a registry/corpus conflict and must stop the build.
+    agree = dis = 0
+    for role, arm in zip(d["role"], d["arm"]):
+        if not role:
+            continue
+        if arm_of_check(role, arm):
+            agree += 1
+        else:
+            dis += 1
+    print("  arm check vs ClickHouse role: %d agree, %d differ" % (agree, dis))
+    if dis:
+        raise SystemExit("REFUSING: the roster-derived arm disagrees with "
+                         "ClickHouse's role on %d rows. Registry and corpus "
+                         "conflict; resolve before trusting this file." % dis)
     man = dict(_what="one row per passage: BLT surprisal axis, bge drift axis, the "
                      "text, and keys down to ClickHouse / the BLT .f32 / the bge stash",
                out=OUT, rows=t.num_rows, columns=pq.read_schema(OUT).names,
@@ -285,6 +310,7 @@ def main(argv=None):
                by_script=dict(collections.Counter(d["script"])),
                models=len(set(d["model"])),
                by_arm=dict(collections.Counter(d["arm"])),
+               arm_checked_against_clickhouse=agree, arm_disagreements=dis,
                arm_source=dict(collections.Counter(d["arm_src"])),
                lineages=len({x for x in d["lineage"] if x}),
                bytes=os.path.getsize(OUT))
