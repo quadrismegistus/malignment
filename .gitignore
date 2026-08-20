@@ -241,15 +241,35 @@ __marimo__/
 # than degrade. An ignored file is invisible; a silently smaller answer is worse.
 lexicons/external/
 
-# Measured data NEVER enters this PUBLIC repo. A twp jsonl carries the prompts
-# verbatim -- including the transgressive battery -- plus full word
-# distributions. Runs write to $MALIGNMENT_CORPUS/twp_malignment/ instead.
-data/
-# ...except the CJK dictionary, which IS the instrument: dict_sha b16011275c42955c
-# is computed from it, and a checkpoint measured against a different dict is a
-# different measurement. It is tracked on purpose.
-!data/dict/
-!data/dict/**
+# MEASURED DATA IS NOW COMMITTABLE (RH, 2026-08-20). The rule that stood here
+# excluded all of `data/` from this PUBLIC repo on the grounds that a twp jsonl
+# carries the prompts verbatim, transgressive battery included. RH's ruling:
+# "we dont care if prompts are committed". So `data/` is tracked.
+#
+# THE ONE THING THAT STILL CANNOT BE COMMITTED IS LICENSED, NOT SENSITIVE:
+# `lexicons/external/worddb.byu.txt` (BNC/COCA/COHA/SOAP, purchased access,
+# redistribution prohibited). Its rule is above and it stays. The distinction
+# now governing this file is REDISTRIBUTION RIGHTS, not disclosure.
+#
+# The CJK dictionary under `data/dict/` was already tracked by exception and
+# still is, for the reason it always was: dict_sha b16011275c42955c is computed
+# from it, and a checkpoint measured against a different dict is a different
+# measurement.
+#
+# Note for whoever adds the first big tree: `data/` is ~30 MB here, ~22 MB of it
+# `data/pos_context/`. Large runs still write to $MALIGNMENT_CORPUS/twp_malignment/
+# and belong there rather than in git -- committable is not the same as commit it.
+
+# A CACHE IS NOT DATA, and this exclusion is not the one that was just removed.
+# `data/pos_context/` is a hashstash of spaCy POS tags keyed on
+# (tagger, prompt, word) -- 22.8 MB here, 190 MB in the archive per
+# malignment/pos.py -- with a `__written_at__` on every row, so it rewrites on
+# every run and would churn the history. It is regenerable by re-tagging, which
+# is the whole test: nothing is lost by not having it. It DOES contain prompts,
+# and under the old rule that was the reason to exclude it; now the reason is
+# only that it is a cache.
+data/pos_context/
+*.lock
 
 # Scratch work does not live in the repo — see experiments/README.md
 sandbox/
