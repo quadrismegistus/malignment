@@ -52,7 +52,13 @@ dev = ["pytest", "packaging"]
 # venv could serve `/plots` and fail on `/plot/render` with
 # ModuleNotFoundError: matplotlib. The dependency is real and invisible to the
 # generator, so it is declared by hand here.
-plots = ["plotnine"]
+# altair/vl-convert join it for the SAME reason and by the same edge. The web
+# figure path loads an experiment's `plot.py` and calls `spec()`, which returns a
+# Vega-Lite dict; `serve.py` hands that to the app, and `vl_convert` renders the
+# identical spec to 300 dpi PNG/PDF for print. Neither is imported by
+# `malignment/*.py` and neither ever will be, so the AST walk correctly cannot
+# see them.
+plots = ["plotnine", "altair", "vl-convert-python"]
 
 # A FOURTH SOURCE, and it is NOT the plotnine case. `plots` exists because the
 # PACKAGE depends on plotnine through a dynamic import in `serve.py`, an edge no

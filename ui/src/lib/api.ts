@@ -171,6 +171,11 @@ export interface Question {
 	has: Record<string, boolean>;
 	results: ResultFile[];
 	figures: string[];
+	//: WHICH OF `figures` ARE VEGA-LITE SPECS. Declared by the server, which
+	//: read the directory, rather than inferred here from a filename. Optional
+	//: because a client may be talking to a server that predates the field, and
+	//: an absent list must degrade to "no specs" rather than to a crash.
+	specs?: string[];
 }
 
 export interface Subject {

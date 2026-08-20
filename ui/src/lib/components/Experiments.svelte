@@ -34,6 +34,7 @@
 	} from '$lib/api';
 	import Markdown from './Markdown.svelte';
 	import DataTable from './DataTable.svelte';
+	import VegaChart from './VegaChart.svelte';
 
 	let index: ExperimentIndex | null = $state(null);
 	let selected: string | null = $state(null);
@@ -451,15 +452,36 @@
 				  panel shows it scaled and "open" hands over the original rather
 				  than re-rendering anything.
 				-->
-				<figure class="fig">
-					<img src={api.figureUrl(selected, pane.slice(4))} alt={pane.slice(4)} />
-					<figcaption>
-						<code>{pane.slice(4)}</code>
+				<!--
+				  THREE KINDS OF FILE LIVE IN `figures/` AND ONLY ONE IS AN IMAGE.
+				  The server lists every file in the folder, so before this branch
+				  existed a Vega-Lite spec and this repo's `figures/README.md` were
+				  both handed to an <img>, which renders a broken-image icon and
+				  reads as a missing figure rather than as the wrong element.
+
+				  A SPEC IS IDENTIFIED BY THE SERVER'S `specs` LIST, not by its
+				  extension here. The manifest is where the directory was read.
+				-->
+				{#if detail.specs?.includes(pane.slice(4))}
+					<VegaChart url={api.figureUrl(selected, pane.slice(4))} name={pane.slice(4)} />
+				{:else if /\.(png|svg|jpe?g|webp)$/i.test(pane.slice(4))}
+					<figure class="fig">
+						<img src={api.figureUrl(selected, pane.slice(4))} alt={pane.slice(4)} />
+						<figcaption>
+							<code>{pane.slice(4)}</code>
+							<a href={api.figureUrl(selected, pane.slice(4))} target="_blank" rel="noreferrer"
+								>open full size</a
+							>
+						</figcaption>
+					</figure>
+				{:else}
+					<p class="muted">
+						<code>{pane.slice(4)}</code> is not an image or a spec —
 						<a href={api.figureUrl(selected, pane.slice(4))} target="_blank" rel="noreferrer"
-							>open full size</a
+							>open it</a
 						>
-					</figcaption>
-				</figure>
+					</p>
+				{/if}
 			{:else if loading}
 				<p class="muted">reading…</p>
 			{:else if pane === 'readme'}

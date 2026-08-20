@@ -13,7 +13,10 @@
 		"test:e2e:update": "playwright test --update-snapshots"
 	},
 	"dependencies": {
-		"marked": "^18.0.9"
+		"marked": "^18.0.9",
+		"vega": "^6.4.0",
+		"vega-embed": "^7.1.0",
+		"vega-lite": "^6.4.3"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.61.1",

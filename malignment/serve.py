@@ -429,6 +429,14 @@ def _walk_experiments():
                      "population.json", "plot.py")},
             "results": results,
             "figures": figs,
+            #: WHICH FIGURES ARE VEGA-LITE SPECS, DECLARED BY THE SERVER rather
+            #: than sniffed from the filename by the client. The `figures` walk
+            #: lists every file in the folder, so a client branching on how to
+            #: render one was choosing between an <img> and a chart library off a
+            #: string it had guessed at. It is still a naming convention -- a
+            #: `.vl.json` written by `_save_spec` -- but the convention is applied
+            #: once, here, where the directory is being read anyway.
+            "specs": [f for f in figs if f.endswith(".vl.json")],
             "_dir": dirpath,
         }
     #: Carried on the mapping itself so the walk stays single-pass and callers
@@ -1804,9 +1812,17 @@ class Handler(BaseHTTPRequestHandler):
                     "%r has no figure %r. It has: %s"
                     % (eid, name, ", ".join(entry["figures"]) or "none"))
             target = os.path.join(entry["_dir"], "figures", name)
+            #: `.json` IS NOT AN AFTERTHOUGHT HERE. A Vega-Lite spec lives in
+            #: `figures/` beside the PNG it renders to, and served as
+            #: octet-stream a browser downloads it instead of parsing it, which
+            #: reads as a broken figure rather than as a missing content type.
+            #: `.md` and `.txt` are listed for the same reason: the walk lists
+            #: every file in the folder, including this repo's `figures/README.md`.
             ctype = {".png": "image/png", ".svg": "image/svg+xml",
                      ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
-                     ".pdf": "application/pdf",
+                     ".pdf": "application/pdf", ".json": "application/json",
+                     ".md": "text/markdown; charset=utf-8",
+                     ".txt": "text/plain; charset=utf-8",
                      ".webp": "image/webp"}.get(
                          os.path.splitext(name)[1].lower(),
                          "application/octet-stream")
