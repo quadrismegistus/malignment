@@ -272,6 +272,16 @@ def execute(b, models, roots, venv, a):
     est = float(best.get("dph_total") or 0) * hrs
     print("  estimated   $%.2f for %.1f h of compute (EXCLUDES download time, "
           "which dominates on a fresh box)" % (est, hrs))
+    #: **REFUSE BEFORE CREATE, NOT AFTER A 9.6-MINUTE DOWNLOAD.**
+    _big = too_big_for(best, models)
+    if _big:
+        print("  VRAM      REFUSING: %d model(s) exceed this offer's %s x %.0f GB"
+              % (len(_big), best.get("num_gpus"),
+                 float(best.get("gpu_ram") or 0) / 1024.0))
+        for _m, (_need, _av) in sorted(_big.items()):
+            print("     %-46s needs ~%.0f GB, usable ~%.0f GB" % (_m[:46], _need, _av))
+        raise SystemExit("  nothing rented. Use a bigger --box-profile (`default` "
+                         "is an A100 80GB) or move these models to their own shard.")
     if a.stop_after == "offer":
         print("\n  STOPPED AFTER offer -- nothing rented.")
         return 0
@@ -922,6 +932,48 @@ if missing:
 print("SSM KERNELS OK")
 KEOF
 """
+
+
+def too_big_for(offer, models, dtype_bytes=2, headroom=0.90):
+    """{model: (gb_needed, gb_available)} for models that cannot fit this offer.
+
+    **THE PLANNER PACKS BY SECONDS AND DISK AND NEVER LOOKED AT VRAM.** Shard 12
+    put the four 32B Olmo arms on a `dense` box and the first one died with `CUDA
+    out of memory ... GPU 0 has a total capacity of 47.37 GiB` after a 9.6-minute
+    download. 32B at fp16 is ~64 GB; the card is a 4090.
+
+    Checked against the OFFER's real `gpu_ram`, not the profile's prose. `dense`
+    describes itself as "48GB-class" in a `description` string and declares no
+    VRAM field at all, so a profile-based check would have been reading marketing
+    copy. The offer knows.
+
+    Param counts come from the HF API unauthenticated, the same route
+    `preflight_env.gated` uses. A model whose size cannot be determined is NOT
+    flagged -- silence here means unknown, and refusing on unknown would ground
+    the fleet for every repo that does not publish safetensors metadata.
+    """
+    import json as _j
+    import urllib.request
+    per = float(offer.get("gpu_ram") or 0) / 1024.0          # MB -> GB, per GPU
+    n = int(offer.get("num_gpus") or 1)
+    avail = per * n * headroom
+    if avail <= 0:
+        return {}
+    out = {}
+    for m in sorted(set(models)):
+        try:
+            with urllib.request.urlopen(
+                    "https://huggingface.co/api/models/%s" % m, timeout=8) as fh:
+                d = _j.loads(fh.read().decode("utf-8"))
+            tot = (d.get("safetensors") or {}).get("total")
+            if not tot:
+                continue
+            need = tot * dtype_bytes / 1e9
+            if need > avail:
+                out[m] = (round(need, 1), round(avail, 1))
+        except Exception:                                    # noqa: BLE001
+            continue
+    return out
 
 
 def _billing(cloud, iid, why):
