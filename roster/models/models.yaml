@@ -1251,6 +1251,26 @@ nodes:
     - falcon-h1-1.5b
     env:
       profile: ssm
+      transformers: '>=4.57,<5'
+      transformers_why: "A HOLE, NOT A FLOOR OR A CEILING -- and all three points
+        are measured. 4.57.1: config loads, `use_cache=True` accepted (checked in
+        the built .venv-tf457 on this Mac, 2026-08-20, all four arms). 5.4.0:
+        StrictDataclassFieldValidationError, \"Field 'use_cache' with value True
+        doesn't match any type in (int, NoneType)\" -- the same bool/int shape as
+        OLMoE's tie_word_embeddings rejection on 5.x, and it killed both 1.5B arms
+        on box 48216568 at 0.2 min each after the box had already paid to compile
+        mamba kernels for them. 5.14.1: all four arms load AND use the kernels
+        (observations.json, environment vast_a100_ssm_kernels, whose note records
+        that these four emit NO 'fast path is not available' warning).
+        So 5.4.0 is a POCKET of breakage with working versions on both sides. The
+        pin is stated as the window we can actually build -- `.venv-tf457` exists
+        and is verified -- rather than `>=5.14`, which is equally true and which
+        no current venv provides. This CLOSES the open question recorded as
+        'fix: UNKNOWN, and the version window is the open question' in
+        observations.json for Falcon-H1-1.5B-Base.
+        The kernels were never the problem: mamba-ssm and causal-conv1d imported
+        fine on the box where these failed, and the failure is at CONFIG parse,
+        before any kernel is reached."
       why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon-H1-1.5B-Instruct:
     nickname: falcon-h1-1.5b-instruct
@@ -1258,6 +1278,26 @@ nodes:
     - falcon-h1-1.5b
     env:
       profile: ssm
+      transformers: '>=4.57,<5'
+      transformers_why: "A HOLE, NOT A FLOOR OR A CEILING -- and all three points
+        are measured. 4.57.1: config loads, `use_cache=True` accepted (checked in
+        the built .venv-tf457 on this Mac, 2026-08-20, all four arms). 5.4.0:
+        StrictDataclassFieldValidationError, \"Field 'use_cache' with value True
+        doesn't match any type in (int, NoneType)\" -- the same bool/int shape as
+        OLMoE's tie_word_embeddings rejection on 5.x, and it killed both 1.5B arms
+        on box 48216568 at 0.2 min each after the box had already paid to compile
+        mamba kernels for them. 5.14.1: all four arms load AND use the kernels
+        (observations.json, environment vast_a100_ssm_kernels, whose note records
+        that these four emit NO 'fast path is not available' warning).
+        So 5.4.0 is a POCKET of breakage with working versions on both sides. The
+        pin is stated as the window we can actually build -- `.venv-tf457` exists
+        and is verified -- rather than `>=5.14`, which is equally true and which
+        no current venv provides. This CLOSES the open question recorded as
+        'fix: UNKNOWN, and the version window is the open question' in
+        observations.json for Falcon-H1-1.5B-Base.
+        The kernels were never the problem: mamba-ssm and causal-conv1d imported
+        fine on the box where these failed, and the failure is at CONFIG parse,
+        before any kernel is reached."
       why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon-H1-7B-Base:
     nickname: falcon-h1-7b
@@ -1265,6 +1305,26 @@ nodes:
     - falcon-h1-7b
     env:
       profile: ssm
+      transformers: '>=4.57,<5'
+      transformers_why: "A HOLE, NOT A FLOOR OR A CEILING -- and all three points
+        are measured. 4.57.1: config loads, `use_cache=True` accepted (checked in
+        the built .venv-tf457 on this Mac, 2026-08-20, all four arms). 5.4.0:
+        StrictDataclassFieldValidationError, \"Field 'use_cache' with value True
+        doesn't match any type in (int, NoneType)\" -- the same bool/int shape as
+        OLMoE's tie_word_embeddings rejection on 5.x, and it killed both 1.5B arms
+        on box 48216568 at 0.2 min each after the box had already paid to compile
+        mamba kernels for them. 5.14.1: all four arms load AND use the kernels
+        (observations.json, environment vast_a100_ssm_kernels, whose note records
+        that these four emit NO 'fast path is not available' warning).
+        So 5.4.0 is a POCKET of breakage with working versions on both sides. The
+        pin is stated as the window we can actually build -- `.venv-tf457` exists
+        and is verified -- rather than `>=5.14`, which is equally true and which
+        no current venv provides. This CLOSES the open question recorded as
+        'fix: UNKNOWN, and the version window is the open question' in
+        observations.json for Falcon-H1-1.5B-Base.
+        The kernels were never the problem: mamba-ssm and causal-conv1d imported
+        fine on the box where these failed, and the failure is at CONFIG parse,
+        before any kernel is reached."
       why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon-H1-7B-Instruct:
     nickname: falcon-h1-7b-instruct
@@ -1272,6 +1332,26 @@ nodes:
     - falcon-h1-7b
     env:
       profile: ssm
+      transformers: '>=4.57,<5'
+      transformers_why: "A HOLE, NOT A FLOOR OR A CEILING -- and all three points
+        are measured. 4.57.1: config loads, `use_cache=True` accepted (checked in
+        the built .venv-tf457 on this Mac, 2026-08-20, all four arms). 5.4.0:
+        StrictDataclassFieldValidationError, \"Field 'use_cache' with value True
+        doesn't match any type in (int, NoneType)\" -- the same bool/int shape as
+        OLMoE's tie_word_embeddings rejection on 5.x, and it killed both 1.5B arms
+        on box 48216568 at 0.2 min each after the box had already paid to compile
+        mamba kernels for them. 5.14.1: all four arms load AND use the kernels
+        (observations.json, environment vast_a100_ssm_kernels, whose note records
+        that these four emit NO 'fast path is not available' warning).
+        So 5.4.0 is a POCKET of breakage with working versions on both sides. The
+        pin is stated as the window we can actually build -- `.venv-tf457` exists
+        and is verified -- rather than `>=5.14`, which is equally true and which
+        no current venv provides. This CLOSES the open question recorded as
+        'fix: UNKNOWN, and the version window is the open question' in
+        observations.json for Falcon-H1-1.5B-Base.
+        The kernels were never the problem: mamba-ssm and causal-conv1d imported
+        fine on the box where these failed, and the failure is at CONFIG parse,
+        before any kernel is reached."
       why: 'mamba-ssm + causal-conv1d. NOT optional for hybrids: 19.3x measured on Falcon-H1-7B (0.0670 -> 1.2933 cells/s, A100 bf16). The pure-SSM null does not generalise to hybrids.'
   tiiuae/Falcon3-10B-Base:
     nickname: falcon3-10b
