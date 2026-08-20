@@ -188,6 +188,13 @@ def main():
                     for r_ in roots] or [len(models)])
     need_gb = int(_biggest * a.gb_per_model + 40)
     disk_gb = a.disk or need_gb
+    #: **CARRIED ON THE ARGS, BECAUSE `execute()` IS A DIFFERENT SCOPE.** Computed
+    #: here and referenced there, it raised `NameError: disk_gb is not defined` at
+    #: the moment of building the create call -- after the offer was taken and
+    #: printed, which reads like a launch about to happen. The DRY RUN cannot catch
+    #: it: dry run returns before `execute()` is ever entered, so this whole
+    #: function is untested by the check that is supposed to make launching safe.
+    a.disk_gb = disk_gb
     print("  disk      %d GB for the largest lineage (%d models x %.0f GB + 40)%s"
           % (disk_gb, _biggest, a.gb_per_model,
              "" if not a.disk else "  [OVERRIDDEN to %d]" % a.disk))
@@ -287,7 +294,8 @@ def execute(b, models, roots, venv, a):
                        #: The SHARD's need wins over the profile's default: a
                        #: profile is a box shape, and how many checkpoints land on
                        #: it is not something the profile can know.
-                       "--disk", str(max(int(shape.get("disk_gb", 0) or 0), disk_gb)),
+                       "--disk", str(max(int(shape.get("disk_gb", 0) or 0),
+                                         getattr(a, "disk_gb", 0) or 400)),
                        "--ssh", "--direct")
     iid = _contract_id(raw)
     if not iid:
