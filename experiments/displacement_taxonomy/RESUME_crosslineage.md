@@ -1,14 +1,16 @@
 # Resume: cross-lineage sweep
 
-State at 2026-08-20 ~06:45. Everything below is committed in `~/github/malignment/experiments/displacement_taxonomy` unless marked otherwise.
+State at 2026-08-20, coverage section refreshed ~07:45 after the fleet's overnight run. Everything below is committed in `~/github/malignment/experiments/displacement_taxonomy` unless marked otherwise.
 
 ## Where to pick up
 
 Two things were waiting on a download to finish, and one question was outstanding for malign.
 
-1. **Ingest `~/malignment-data/twp` into ClickHouse.** 113 model dirs, 1.7G, still growing when we stopped. Confirmed to cover 277 of the 279 slot prompts. Once ingested, pairs-per-prompt goes ~32 to ~35.
-2. **Ask malign two things**: are the 15 roster pairs still missing an arm queued, and when do the downloaded dirs land in CH. Missing arms include AquilaChat2, Olmo-3.1-32B-Instruct, deepseek-llm-7b-chat, recurrentgemma-9b-it, jais-6p7b-chat, internlm2-chat-7b.
-3. **Then decide** the open question below.
+~~1. Ingest `~/malignment-data/twp`.~~ **DONE by the fleet overnight.** Pass 2 more than doubled (36,181 to 85,424 topped cells, 114 models, malign [6467]) and it reached these prompts.
+
+~~2. Ask malign about the missing arms.~~ **Partly answered by [6467]**: the four 32B Olmo arms need box profile `big80` and the two Llama-70B arms need `twogpu` (141 GB at fp16 fits neither a 4090 nor a single A100), so those are queued behind hardware rather than behind a decision. Shard 8 is refused by preflight on a deepseek record from transformers 5.14.1.
+
+1. **Decide whether to re-run the sweep at the larger roster** -- see below. This is now the only thing waiting on RH.
 
 ## The open decision
 
@@ -16,9 +18,25 @@ Run the remaining ~177 prompts now, or wait for a bigger roster.
 
 The case for waiting is RH's and it is good: the 18-vs-29 test showed roster growth **replaces** operations rather than adding members. **Zero of the 7 operations found at 29 lineages existed in the 3-operation legend from 18.** So a 177-prompt run at 32 could be invalidated by a later run at 50.
 
-The case against waiting is that **50 is not currently reachable**. Only 35 of 50 roster pairs have both arms measured anywhere, in CH or in the download. Waiting for pass 2 alone buys ~3 pairs per prompt, a 10% increase, against the 61% increase that did the reshaping.
+The case against waiting has STRENGTHENED, because pass 2 has now nearly caught up with pass 1:
 
-**The cheap thing that settles it, and is not wasted either way:** re-read one prompt at 32 and compare to its 29 reading. One agent. If a 10% roster increase leaves operations intact while a 61% increase replaced them, the instability is threshold-like and running now is safe. If 32 reshapes again, the instability is continuous, no roster is a safe stopping point, and the result has to be reported as roster-dependent whenever it is run.
+    over the 279 slot prompts        was (08-20 06:45)   now (07:45)
+      topped pairs per prompt         31.8 / median 33    34.7 / median 36
+      measured (pass 1+) per prompt   34.8 / median 35    35.9 / median 36
+      prompts with 35+ topped                        0            215 of 279
+
+**Only ~1.2 pairs of headroom remain from topup.** Everything past 36 needs pass 1
+on models never measured on these prompts, which is exactly the 32B and 70B arms
+waiting on box profiles. So "wait for 50" is not a short wait and may not be a
+reachable one.
+
+But 36 is a real increase over the 26-29 the sweep actually ran at -- 24 to 38%
+-- and 18 to 29 REPLACED the operations rather than adding members. So a re-run
+at 36 is a genuine question rather than a refresh, and the same argument that says
+do not wait for 50 also says today's 40-prompt result was taken at a roster that
+has since moved.
+
+**The cheap thing that settles it, and is not wasted either way:** re-read one prompt at 36 and compare to its 29 reading. One agent. If a 10% roster increase leaves operations intact while a 61% increase replaced them, the instability is threshold-like and running now is safe. If 32 reshapes again, the instability is continuous, no roster is a safe stopping point, and the result has to be reported as roster-dependent whenever it is run.
 
 ## Worth more than more prompts
 
