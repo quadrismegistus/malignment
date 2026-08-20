@@ -288,15 +288,17 @@ def execute(b, models, roots, venv, a):
     print("  estimated   $%.2f for %.1f h of compute (EXCLUDES download time, "
           "which dominates on a fresh box)" % (est, hrs))
     #: **REFUSE BEFORE CREATE, NOT AFTER A 9.6-MINUTE DOWNLOAD.**
+    #: Reported here, DROPPED at the run-script stage below. Refusing the whole
+    #: shard would have thrown away the four viable lineages that shared box 12
+    #: with the 32B quartet.
     _big = too_big_for(best, models)
     if _big:
-        print("  VRAM      REFUSING: %d model(s) exceed this offer's %s x %.0f GB"
+        print("  VRAM      %d model(s) exceed this offer's %s x %.0f GB and will "
+              "be OMITTED from the run:"
               % (len(_big), best.get("num_gpus"),
                  float(best.get("gpu_ram") or 0) / 1024.0))
         for _m, (_need, _av) in sorted(_big.items()):
             print("     %-46s needs ~%.0f GB, usable ~%.0f GB" % (_m[:46], _need, _av))
-        raise SystemExit("  nothing rented. Use a bigger --box-profile (`default` "
-                         "is an A100 80GB) or move these models to their own shard.")
     if a.stop_after == "offer":
         print("\n  STOPPED AFTER offer -- nothing rented.")
         return 0
@@ -553,8 +555,26 @@ def execute(b, models, roots, venv, a):
     from malignment import roster as _r2
     _lin2 = _r2.lineages(ops=_r2.ALIGNING)
     cmds = []
+    #: **OMIT A LINEAGE THE CARD CANNOT HOLD, DO NOT REFUSE THE SHARD.**
+    #: `too_big_for` refuses at LAUNCH, which does nothing about a run.sh already
+    #: written with an impossible lineage inside it -- so every restart of box
+    #: 48182910 went straight back to `Olmo-3-1125-32B` (64 GB on a 47 GB card),
+    #: burned ten minutes downloading, filled the disk to 69%, and I killed it by
+    #: hand. Twice. A guard that only fires before the first launch is not
+    #: protecting the thing that repeats.
+    #:
+    #: Dropping the lineage rather than the shard keeps the other four viable
+    #: ones, which is what actually happened by hand both times. The dropped
+    #: lineage is NAMED in the output, because a silently shorter run reads as a
+    #: complete one.
+    _too_big = too_big_for(best, models)
+    if _too_big:
+        print("  VRAM      omitting %d model(s) this card cannot hold; they need "
+              "their own shard on a bigger profile:" % len(_too_big))
+        for _m, (_need, _av) in sorted(_too_big.items()):
+            print("     %-44s needs ~%.0f GB, usable ~%.0f GB" % (_m[:44], _need, _av))
     for r_ in roots:
-        mem = [m for m in _lin2.get(r_, []) if m in models]
+        mem = [m for m in _lin2.get(r_, []) if m in models and m not in _too_big]
         if not mem:
             continue
         cmds.append("./%s/bin/python scripts/queue_v4.py --models %s%s"
