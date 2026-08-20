@@ -214,11 +214,9 @@ def main():
     #: thresholds are the cards the roster already declares, so this is a lookup
     #: rather than a judgement.
     if not a.box_profile:
-        _need = _shard_vram_gb(models)
-        a.box_profile = ("twogpu" if _need > 75 else
-                         "big80" if _need > 43 else "dense")
-        print("  profile   %s (biggest model needs ~%.0f GB at fp16)"
-              % (a.box_profile, _need))
+        a.box_profile, _vram, _gpus, _pb = shard_profile(models)
+        print("  profile   %s  (biggest model %.1fB -> the roster's sizing rule "
+              "says %d GB x %d GPU)" % (a.box_profile, _pb, _vram, _gpus))
     ok, n = preflight(models)
     print("  preflight %s" % " ".join("%s=%d" % (k, v) for k, v in sorted(n.items())))
     if not ok:
@@ -951,22 +949,66 @@ KEOF
 """
 
 
-def _shard_vram_gb(models, dtype_bytes=2):
-    """GB the LARGEST model in this shard needs at fp16. 0.0 if nothing is known."""
+def _params_b():
+    """{model: params_b} from roster/models/measurements.json. MEASURED, 164 rows.
+
+    **THE REPO ALREADY KNEW THIS AND I ASKED THE INTERNET INSTEAD.** I sized
+    shards by hitting the HF API for `safetensors.total`, which returns nothing
+    for 21 of our models -- every pre-safetensors repo, so RWKV, Baichuan2,
+    deepseek, RedPajama, mpt. `measurements.json` has all 164 with no network and
+    no blind spots.
+    """
     import json as _j
-    import urllib.request
-    biggest = 0.0
-    for m in sorted(set(models)):
-        try:
-            with urllib.request.urlopen(
-                    "https://huggingface.co/api/models/%s" % m, timeout=8) as fh:
-                d = _j.loads(fh.read().decode("utf-8"))
-            tot = (d.get("safetensors") or {}).get("total")
-            if tot:
-                biggest = max(biggest, tot * dtype_bytes / 1e9)
-        except Exception:                                    # noqa: BLE001
-            continue
-    return biggest
+    out = {}
+
+    def walk(o, path=()):
+        if isinstance(o, dict):
+            if "params_b" in o:
+                #: The file keys models by their FULL id in ONE segment
+                #: ("allenai/Olmo-3-1125-32B"), so the last path element IS the
+                #: model id. Joining the last two prepended "models/" and every
+                #: lookup silently missed -- every shard then reported 0.0B and
+                #: resolved to the smallest profile, which is the dangerous
+                #: direction: a 32B arm sent to a 24 GB card.
+                out[path[-1]] = o["params_b"]
+            else:
+                for k, v in o.items():
+                    walk(v, path + (str(k),))
+        elif isinstance(o, list):
+            for v in o:
+                walk(v, path)
+    walk(_j.load(open(os.path.join(ROOT, "roster/models/measurements.json"))))
+    return out
+
+
+def _sizing_steps():
+    """The DECLARED step function: params_b -> (vram_gb, gpus).
+
+    `roster/environments.yaml` carries it with its own justification: *"a STEP
+    FUNCTION of measured params_b, verified with no overlaps across 159 archive
+    rows. Declared as a rule so 160 checkpoints do not each carry a derived number
+    with no producer."* I then derived one anyway, with invented thresholds.
+    """
+    import yaml
+    d = yaml.safe_load(open(os.path.join(ROOT, "roster/environments.yaml")))
+    return (d.get("sizing") or {}).get("steps") or []
+
+
+def shard_profile(models):
+    """(profile, vram_gb, gpus, biggest_params_b) for this shard, from the roster."""
+    pb = _params_b()
+    biggest = max([pb.get(m.split("/")[-1], 0) or pb.get(m, 0) or 0
+                   for m in models] or [0])
+    vram, gpus = 24, 1
+    for step in _sizing_steps():
+        cap = step.get("max_params_b")
+        if cap is None or biggest <= cap:
+            vram, gpus = step.get("vram_gb", 80), step.get("gpus", 1)
+            break
+    prof = ("twogpu" if gpus > 1 else
+            "big80" if vram >= 80 else
+            "dense")
+    return prof, vram, gpus, biggest
 
 
 def too_big_for(offer, models, dtype_bytes=2, headroom=0.90):
