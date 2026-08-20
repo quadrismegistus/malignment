@@ -58,6 +58,12 @@ Nowhere near quotable. Exactly the shape a site-conditional page-grain effect wo
                                 nats/word drop, against +0.025 for level. Selection,
                                 not combination -- Jakobson's axes as an arithmetic
                                 partition that sums exactly.
+    drift_geometry/             PORTED, new analysis not yet run. What the
+                                geometric drift metrics can mean (total_drift is
+                                order-INVARIANT and 92% noise per passage;
+                                directedness IS sentence count, rho -0.923), and
+                                whether mean_drift tracks what a reader calls
+                                staying in the scene.
     predicting_aligned_text/    OPEN, and NOT blocked by the fleet. Can the arm be
                                 predicted from a page, and can NAMED scales do it?
                                 Its corpus is gen_sequences, not twp, so it does
@@ -79,6 +85,22 @@ made to meet. That is a question, not a bookkeeping problem.
 
 Note also that I6's six domains are `animal betrayal property sexual taboo
 violence` -- so `sexual` IS in it, which makes the meeting cheaper than it looks.
+
+## TWO THINGS HERE ARE CALLED "DRIFT" AND THEY ARE DIFFERENT OBJECTS
+
+    interiority_in_passages/   CODED    HOLDS / SHIFTS / UNMOORED, blind Opus
+                                        readers, raw 95.0%, kappa 0.904
+    drift_geometry/            GEOMETRIC  computed from sentence embeddings:
+                                        mean_drift, total_drift, directedness
+
+Neither supersedes the other and the audit in `drift_geometry/` does NOT reach
+interiority's H3 -- a coder reading in order is not noise-limited, has no
+directedness and no truncation, and is already aggregated to the lineage pair.
+
+**They may converge, which is the interesting part.** Interiority finds alignment
+raises `drift = HOLDS` (+4.726pp, 14/17 pairs); the audit notes in passing that
+drift FALLS under alignment. Less dispersion and more holding are the same claim
+from two instruments. Testing that is what `drift_geometry/` is for.
 
 ## One shape showing up at both grains
 
