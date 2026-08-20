@@ -52,6 +52,12 @@ Nowhere near quotable. Exactly the shape a site-conditional page-grain effect wo
                                 contradiction AS a contradiction? 3.37x the odds
                                 [1.88, 6.30], p=9.6e-06, control at 1.00 -- and
                                 only for contradiction, not transgression.
+    selection_and_combination/  COMPLETE, migrated. Does alignment change WHICH
+                                words appear or what they COST in context? It is
+                                composition, near-entirely: -1.310 of a -1.285
+                                nats/word drop, against +0.025 for level. Selection,
+                                not combination -- Jakobson's axes as an arithmetic
+                                partition that sums exactly.
     predicting_aligned_text/    OPEN, and NOT blocked by the fleet. Can the arm be
                                 predicted from a page, and can NAMED scales do it?
                                 Its corpus is gen_sequences, not twp, so it does
@@ -73,3 +79,14 @@ made to meet. That is a question, not a bookkeeping problem.
 
 Note also that I6's six domains are `animal betrayal property sexual taboo
 violence` -- so `sexual` IS in it, which makes the meeting cheaper than it looks.
+
+## One shape showing up at both grains
+
+`selection_and_combination/` reports, from the page: direction predicts composition
+(`net_fall` 36/36) and volatility does not (`pct_moved` 18/36, exact chance).
+`experiments/displacement_axis/` reports, from the distribution and by a different
+estimator: direction is nameable (`harm` 44/47 frames, p=2.5e-10) and magnitude is
+not (every named scale negative alone). Neither knew about the other.
+
+That is the asymmetry to carry into the writing, and it is stronger for having been
+found twice: **alignment has a direction you can name and a magnitude you cannot.**
