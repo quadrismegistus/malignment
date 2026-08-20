@@ -688,6 +688,23 @@ cd /root/malignment
 # reason the split exists".
 command -v uv >/dev/null || pip -q install uv
 python3 scripts/venvs.py build --python 3.11
+# **THE IMAGE INJECTS AN HF MIRROR INTO SITE-PACKAGES, AND IT BEATS THE SHELL.**
+# Found on box 48180548 after the shell said HF_ENDPOINT=https://huggingface.co
+# and Python said otherwise:
+#
+#   .venv/lib/python3.11/site-packages/hf_config.pth
+#   import os; os.environ["HF_ENDPOINT"] = "http://117.175.104.83:8081"; ...
+#
+# Python EXECUTES .pth files at interpreter startup, so this overwrites the
+# environment INSIDE the process, after every export we make. That is why the
+# reachability assert passed -- a tiny public file the mirror happens to hold --
+# while multi-GB shards 404'd.
+#
+# **ONE CAUSE, THREE SIGNATURES**, each of which I had been treating as its own
+# bug across three boxes: 404 Not Found from an http:// host; `IncompleteRead(1.5
+# of 4.8 GB)` truncated downloads, a mirror serving partial files; and `Invalid
+# rev id: <35 chars>`, mangled metadata. The same IP appears in all of them.
+find /root/malignment -name "hf_config.pth" -print -delete 2>/dev/null || true
 # **PIN transformers TO WHAT THIS MACHINE HAS, NOT TO WHAT LINUX RESOLVES.** The
 # roster's spec for the default profile is loose (`>=5`), so it resolved to 5.4.0
 # here -- capped on darwin because 5.15 hangs on MPS -- and to 5.15.1 on the box.
@@ -750,10 +767,16 @@ HFEOF
 # curl that succeeds proves nothing about a library reading a different env.
 ./%(venv)s/bin/python - <<'PYEOF'
 import sys
+import huggingface_hub.constants as _C
 from huggingface_hub import hf_hub_download
+#: **ASSERT THE ENDPOINT, NOT ONLY THE FETCH.** A mirror answers small files
+#: happily, so "a download worked" proved nothing about where from.
+if "huggingface.co" not in (_C.ENDPOINT or ""):
+    print("HF ENDPOINT HIJACKED:", _C.ENDPOINT)
+    sys.exit(3)
 try:
     p = hf_hub_download("hf-internal-testing/tiny-random-gpt2", "config.json")
-    print("HF REACHABLE:", p)
+    print("HF REACHABLE via", _C.ENDPOINT, "->", p)
 except Exception as e:
     print("HF UNREACHABLE:", type(e).__name__, str(e)[:200])
     sys.exit(3)
