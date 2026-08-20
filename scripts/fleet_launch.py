@@ -704,7 +704,11 @@ python3 scripts/venvs.py build --python 3.11
 # bug across three boxes: 404 Not Found from an http:// host; `IncompleteRead(1.5
 # of 4.8 GB)` truncated downloads, a mirror serving partial files; and `Invalid
 # rev id: <35 chars>`, mangled metadata. The same IP appears in all of them.
-find /root/malignment -name "hf_config.pth" -print -delete 2>/dev/null || true
+# Purge it at SOURCE first -- uv copies this archive into every venv it builds,
+# so deleting only from the venv is undone by the next `uv pip install`.
+rm -f /opt/uv/cache/archive-v0/*/hf_config.pth 2>/dev/null || true
+find /opt/uv /usr/local/lib /usr/lib -name "hf_config.pth" -delete 2>/dev/null || true
+find /root/malignment -name "hf_config.pth" -delete 2>/dev/null || true
 # **PIN transformers TO WHAT THIS MACHINE HAS, NOT TO WHAT LINUX RESOLVES.** The
 # roster's spec for the default profile is loose (`>=5`), so it resolved to 5.4.0
 # here -- capped on darwin because 5.15 hangs on MPS -- and to 5.15.1 on the box.
@@ -732,6 +736,10 @@ uv pip install -q --python ./%(venv)s/bin/python -e .
 # nobody compares is how 5.15.0 ran for an hour under a name meaning 4.57.1.
 # The expected value is this checkout's OWN venv, so the box matches the machine
 # the code was tested on -- the same principle as shipping the tree.
+# **AND AGAIN AFTER THE INSTALLS.** The purge above runs before them; every
+# `uv pip install` since is another chance for the cached archive to put it back.
+# Deleting once and asserting later would test a state two commands ago.
+find /root/malignment /opt/uv -name "hf_config.pth" -delete 2>/dev/null || true
 ./%(venv)s/bin/python - <<'VEOF'
 import sys, torch, transformers
 want, got = "%(want)s", transformers.__version__
