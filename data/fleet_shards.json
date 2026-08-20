@@ -1,0 +1,462 @@
+{
+ "boxes": [
+  {
+   "venv": ".venv-tf457",
+   "cells": 30874,
+   "per": {
+    "allenai/Olmo-3-1025-7B": 2706,
+    "allenai/Olmo-3-7B-Instruct": 2706,
+    "allenai/Olmo-3-7B-Instruct-DPO": 2706,
+    "allenai/Olmo-3-7B-Instruct-SFT": 2706,
+    "allenai/Olmo-3-7B-Think": 2706,
+    "allenai/Olmo-3-7B-Think-DPO": 2706,
+    "allenai/Olmo-3-7B-Think-SFT": 2706,
+    "Zyphra/Zamba2-7B": 2983,
+    "Zyphra/Zamba2-7B-Instruct": 2983,
+    "tiiuae/falcon-7b": 2983,
+    "tiiuae/falcon-7b-instruct": 2983
+   },
+   "lineages": [
+    "allenai/Olmo-3-1025-7B",
+    "Zyphra/Zamba2-7B",
+    "tiiuae/falcon-7b"
+   ],
+   "models": [
+    "allenai/Olmo-3-1025-7B",
+    "allenai/Olmo-3-7B-Instruct",
+    "allenai/Olmo-3-7B-Instruct-DPO",
+    "allenai/Olmo-3-7B-Instruct-SFT",
+    "allenai/Olmo-3-7B-Think",
+    "allenai/Olmo-3-7B-Think-DPO",
+    "allenai/Olmo-3-7B-Think-SFT",
+    "Zyphra/Zamba2-7B",
+    "Zyphra/Zamba2-7B-Instruct",
+    "tiiuae/falcon-7b",
+    "tiiuae/falcon-7b-instruct"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 16790,
+   "per": {
+    "allenai/Olmo-Hybrid-7B": 2706,
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B": 2983,
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": 2983,
+    "openbmb/MiniCPM5-1B": 2706,
+    "openbmb/MiniCPM5-1B-Base": 2706,
+    "openbmb/MiniCPM5-1B-SFT": 2706
+   },
+   "lineages": [
+    "allenai/Olmo-Hybrid-7B",
+    "openbmb/MiniCPM5-1B-Base"
+   ],
+   "models": [
+    "allenai/Olmo-Hybrid-7B",
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+    "openbmb/MiniCPM5-1B",
+    "openbmb/MiniCPM5-1B-Base",
+    "openbmb/MiniCPM5-1B-SFT"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 30320,
+   "per": {
+    "HuggingFaceH4/mistral-7b-sft-beta": 2706,
+    "HuggingFaceH4/zephyr-7b-beta": 2706,
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": 2706,
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": 2706,
+    "mistralai/Mistral-7B-Instruct-v0.1": 0,
+    "mistralai/Mistral-7B-v0.1": 2706,
+    "openchat/openchat-3.5-0106": 2706,
+    "teknium/OpenHermes-2.5-Mistral-7B": 2706,
+    "tiiuae/falcon-mamba-7b": 2983,
+    "tiiuae/falcon-mamba-7b-instruct": 2983,
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": 2706,
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": 2706
+   },
+   "lineages": [
+    "mistralai/Mistral-7B-v0.1",
+    "tiiuae/falcon-mamba-7b",
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T"
+   ],
+   "models": [
+    "HuggingFaceH4/mistral-7b-sft-beta",
+    "HuggingFaceH4/zephyr-7b-beta",
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo",
+    "mistralai/Mistral-7B-Instruct-v0.1",
+    "mistralai/Mistral-7B-v0.1",
+    "openchat/openchat-3.5-0106",
+    "teknium/OpenHermes-2.5-Mistral-7B",
+    "tiiuae/falcon-mamba-7b",
+    "tiiuae/falcon-mamba-7b-instruct",
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T"
+   ]
+  },
+  {
+   "venv": ".venv-tf457",
+   "cells": 10818,
+   "per": {
+    "allenai/OLMoE-1B-7B-0125": 2703,
+    "allenai/OLMoE-1B-7B-0125-DPO": 2703,
+    "allenai/OLMoE-1B-7B-0125-Instruct": 2706,
+    "allenai/OLMoE-1B-7B-0125-SFT": 2706
+   },
+   "lineages": [
+    "allenai/OLMoE-1B-7B-0125"
+   ],
+   "models": [
+    "allenai/OLMoE-1B-7B-0125",
+    "allenai/OLMoE-1B-7B-0125-DPO",
+    "allenai/OLMoE-1B-7B-0125-Instruct",
+    "allenai/OLMoE-1B-7B-0125-SFT"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 30043,
+   "per": {
+    "NousResearch/Hermes-3-Llama-3.1-8B": 2706,
+    "allenai/Llama-3.1-Tulu-3-8B-DPO": 2706,
+    "allenai/Llama-3.1-Tulu-3-8B-SFT": 2706,
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": 2706,
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": 2706,
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": 2706,
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": 2706,
+    "allenai/Llama-3.1-Tulu-3.1-8B": 2706,
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B": 2983,
+    "meta-llama/Llama-3.1-8B": 2706,
+    "meta-llama/Llama-3.1-8B-Instruct": 2706
+   },
+   "lineages": [
+    "meta-llama/Llama-3.1-8B"
+   ],
+   "models": [
+    "NousResearch/Hermes-3-Llama-3.1-8B",
+    "allenai/Llama-3.1-Tulu-3-8B-DPO",
+    "allenai/Llama-3.1-Tulu-3-8B-SFT",
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data",
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data",
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data",
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data",
+    "allenai/Llama-3.1-Tulu-3.1-8B",
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B",
+    "meta-llama/Llama-3.1-8B",
+    "meta-llama/Llama-3.1-8B-Instruct"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 41693,
+   "per": {
+    "LLM360/Amber": 2706,
+    "LLM360/AmberChat": 2706,
+    "LLM360/AmberSafe": 2706,
+    "PKU-Alignment/alpaca-7b-reproduced": 2706,
+    "PKU-Alignment/beaver-7b-v1.0": 2706,
+    "huggyllama/llama-7b": 2706,
+    "google/recurrentgemma-9b": 2983,
+    "google/recurrentgemma-9b-it": 2983,
+    "tiiuae/Falcon-H1-1.5B-Base": 2983,
+    "tiiuae/Falcon-H1-1.5B-Instruct": 2983,
+    "stabilityai/stablelm-2-1_6b": 2706,
+    "stabilityai/stablelm-2-1_6b-chat": 2706,
+    "stabilityai/stablelm-2-zephyr-1_6b": 2706,
+    "HuggingFaceTB/SmolLM2-360M": 2701,
+    "HuggingFaceTB/SmolLM2-360M-Instruct": 2706
+   },
+   "lineages": [
+    "LLM360/Amber",
+    "huggyllama/llama-7b",
+    "google/recurrentgemma-9b",
+    "tiiuae/Falcon-H1-1.5B-Base",
+    "stabilityai/stablelm-2-1_6b",
+    "HuggingFaceTB/SmolLM2-360M"
+   ],
+   "models": [
+    "LLM360/Amber",
+    "LLM360/AmberChat",
+    "LLM360/AmberSafe",
+    "PKU-Alignment/alpaca-7b-reproduced",
+    "PKU-Alignment/beaver-7b-v1.0",
+    "huggyllama/llama-7b",
+    "google/recurrentgemma-9b",
+    "google/recurrentgemma-9b-it",
+    "tiiuae/Falcon-H1-1.5B-Base",
+    "tiiuae/Falcon-H1-1.5B-Instruct",
+    "stabilityai/stablelm-2-1_6b",
+    "stabilityai/stablelm-2-1_6b-chat",
+    "stabilityai/stablelm-2-zephyr-1_6b",
+    "HuggingFaceTB/SmolLM2-360M",
+    "HuggingFaceTB/SmolLM2-360M-Instruct"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 31428,
+   "per": {
+    "HuggingFaceTB/SmolLM3-3B": 2706,
+    "HuggingFaceTB/SmolLM3-3B-Base": 2706,
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": 2706,
+    "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO": 2983,
+    "BSC-LT/salamandra-7b": 2706,
+    "BSC-LT/salamandra-7b-instruct": 2706,
+    "inceptionai/jais-family-6p7b": 2983,
+    "inceptionai/jais-family-6p7b-chat": 2983,
+    "tiiuae/Falcon-H1-7B-Base": 2983,
+    "tiiuae/Falcon-H1-7B-Instruct": 2983,
+    "llm-jp/llm-jp-3-7.2b": 0,
+    "llm-jp/llm-jp-3-7.2b-instruct2": 2983,
+    "llm-jp/llm-jp-3-7.2b-instruct3": 0
+   },
+   "lineages": [
+    "HuggingFaceTB/SmolLM3-3B-Base",
+    "BSC-LT/salamandra-7b",
+    "inceptionai/jais-family-6p7b",
+    "tiiuae/Falcon-H1-7B-Base",
+    "llm-jp/llm-jp-3-7.2b"
+   ],
+   "models": [
+    "HuggingFaceTB/SmolLM3-3B",
+    "HuggingFaceTB/SmolLM3-3B-Base",
+    "HuggingFaceTB/SmolLM3-3B-checkpoints",
+    "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO",
+    "BSC-LT/salamandra-7b",
+    "BSC-LT/salamandra-7b-instruct",
+    "inceptionai/jais-family-6p7b",
+    "inceptionai/jais-family-6p7b-chat",
+    "tiiuae/Falcon-H1-7B-Base",
+    "tiiuae/Falcon-H1-7B-Instruct",
+    "llm-jp/llm-jp-3-7.2b",
+    "llm-jp/llm-jp-3-7.2b-instruct2",
+    "llm-jp/llm-jp-3-7.2b-instruct3"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 41698,
+   "per": {
+    "ContextualAI/archangel_sft-dpo_pythia2-8b": 2706,
+    "ContextualAI/archangel_sft-kto_pythia2-8b": 2706,
+    "ContextualAI/archangel_sft-ppo_pythia2-8b": 2706,
+    "ContextualAI/archangel_sft-slic_pythia2-8b": 2706,
+    "ContextualAI/archangel_sft_pythia2-8b": 2706,
+    "EleutherAI/pythia-2.8b": 2706,
+    "EleutherAI/pythia-6.9b": 2706,
+    "lomahony/eleuther-pythia6.9b-hh-dpo": 2706,
+    "lomahony/eleuther-pythia6.9b-hh-sft": 2706,
+    "deepseek-ai/deepseek-llm-7b-base": 2983,
+    "deepseek-ai/deepseek-llm-7b-chat": 2983,
+    "openGPT-X/Teuken-7B-base-v0.6": 2983,
+    "openGPT-X/Teuken-7B-instruct-v0.6": 2983,
+    "kakaocorp/kanana-1.5-8b-base": 2706,
+    "kakaocorp/kanana-1.5-8b-instruct-2505": 2706
+   },
+   "lineages": [
+    "EleutherAI/pythia-2.8b",
+    "EleutherAI/pythia-6.9b",
+    "deepseek-ai/deepseek-llm-7b-base",
+    "openGPT-X/Teuken-7B-base-v0.6",
+    "kakaocorp/kanana-1.5-8b-base"
+   ],
+   "models": [
+    "ContextualAI/archangel_sft-dpo_pythia2-8b",
+    "ContextualAI/archangel_sft-kto_pythia2-8b",
+    "ContextualAI/archangel_sft-ppo_pythia2-8b",
+    "ContextualAI/archangel_sft-slic_pythia2-8b",
+    "ContextualAI/archangel_sft_pythia2-8b",
+    "EleutherAI/pythia-2.8b",
+    "EleutherAI/pythia-6.9b",
+    "lomahony/eleuther-pythia6.9b-hh-dpo",
+    "lomahony/eleuther-pythia6.9b-hh-sft",
+    "deepseek-ai/deepseek-llm-7b-base",
+    "deepseek-ai/deepseek-llm-7b-chat",
+    "openGPT-X/Teuken-7B-base-v0.6",
+    "openGPT-X/Teuken-7B-instruct-v0.6",
+    "kakaocorp/kanana-1.5-8b-base",
+    "kakaocorp/kanana-1.5-8b-instruct-2505"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 24908,
+   "per": {
+    "Alchan/mpt-7b-chat": 2706,
+    "gl198976/mpt-7b": 2706,
+    "gl198976/mpt-7b-instruct": 2706,
+    "zai-org/glm-4-9b-chat-hf": 2706,
+    "zai-org/glm-4-9b-hf": 2706,
+    "meta-llama/Llama-3.1-70B": 2983,
+    "meta-llama/Llama-3.1-70B-Instruct": 2983,
+    "tiiuae/Falcon3-7B-Base": 2706,
+    "tiiuae/Falcon3-7B-Instruct": 2706
+   },
+   "lineages": [
+    "gl198976/mpt-7b",
+    "zai-org/glm-4-9b-hf",
+    "meta-llama/Llama-3.1-70B",
+    "tiiuae/Falcon3-7B-Base"
+   ],
+   "models": [
+    "Alchan/mpt-7b-chat",
+    "gl198976/mpt-7b",
+    "gl198976/mpt-7b-instruct",
+    "zai-org/glm-4-9b-chat-hf",
+    "zai-org/glm-4-9b-hf",
+    "meta-llama/Llama-3.1-70B",
+    "meta-llama/Llama-3.1-70B-Instruct",
+    "tiiuae/Falcon3-7B-Base",
+    "tiiuae/Falcon3-7B-Instruct"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 30597,
+   "per": {
+    "ibm-granite/granite-3.0-8b-base": 2706,
+    "ibm-granite/granite-3.0-8b-instruct": 2706,
+    "togethercomputer/RedPajama-INCITE-7B-Chat": 2706,
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": 2706,
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": 2706,
+    "01-ai/Yi-1.5-9B": 2706,
+    "01-ai/Yi-1.5-9B-Chat": 2706,
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": 2983,
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0": 2983,
+    "croissantllm/CroissantLLMBase": 2983,
+    "croissantllm/CroissantLLMChat-v0.1": 2706
+   },
+   "lineages": [
+    "ibm-granite/granite-3.0-8b-base",
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+    "01-ai/Yi-1.5-9B",
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+    "croissantllm/CroissantLLMBase"
+   ],
+   "models": [
+    "ibm-granite/granite-3.0-8b-base",
+    "ibm-granite/granite-3.0-8b-instruct",
+    "togethercomputer/RedPajama-INCITE-7B-Chat",
+    "togethercomputer/RedPajama-INCITE-7B-Instruct",
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+    "01-ai/Yi-1.5-9B",
+    "01-ai/Yi-1.5-9B-Chat",
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+    "croissantllm/CroissantLLMBase",
+    "croissantllm/CroissantLLMChat-v0.1"
+   ]
+  },
+  {
+   "venv": ".venv",
+   "cells": 16790,
+   "per": {
+    "RWKV/rwkv-4-7b-pile": 2706,
+    "RWKV/rwkv-raven-7b": 2706,
+    "kakaocorp/kanana-2-3b-base": 2983,
+    "kakaocorp/kanana-2-3b-instruct": 2983,
+    "OpenLLM-France/Lucie-7B": 2706,
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1": 2706,
+    "Qwen/Qwen2.5-0.5B": 0,
+    "Qwen/Qwen2.5-0.5B-Instruct": 0,
+    "Qwen/Qwen2.5-7B": 0,
+    "Qwen/Qwen2.5-7B-Instruct": 0,
+    "Qwen/Qwen3-8B": 0,
+    "Qwen/Qwen3-8B-Base": 0,
+    "bigscience/bloom-7b1": 0,
+    "bigscience/bloomz-7b1": 0,
+    "google/gemma-2-9b": 0,
+    "google/gemma-2-9b-it": 0,
+    "m-a-p/CT-LLM-Base": 0,
+    "m-a-p/CT-LLM-SFT": 0,
+    "m-a-p/CT-LLM-SFT-DPO": 0,
+    "m-a-p/neo_7b": 0,
+    "m-a-p/neo_7b_instruct_v0.1": 0,
+    "m-a-p/neo_7b_sft_v0.1": 0
+   },
+   "lineages": [
+    "RWKV/rwkv-4-7b-pile",
+    "kakaocorp/kanana-2-3b-base",
+    "OpenLLM-France/Lucie-7B",
+    "Qwen/Qwen2.5-0.5B",
+    "Qwen/Qwen2.5-7B",
+    "Qwen/Qwen3-8B-Base",
+    "bigscience/bloom-7b1",
+    "google/gemma-2-9b",
+    "m-a-p/CT-LLM-Base",
+    "m-a-p/neo_7b"
+   ],
+   "models": [
+    "RWKV/rwkv-4-7b-pile",
+    "RWKV/rwkv-raven-7b",
+    "kakaocorp/kanana-2-3b-base",
+    "kakaocorp/kanana-2-3b-instruct",
+    "OpenLLM-France/Lucie-7B",
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+    "Qwen/Qwen2.5-0.5B",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "Qwen/Qwen2.5-7B",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen3-8B",
+    "Qwen/Qwen3-8B-Base",
+    "bigscience/bloom-7b1",
+    "bigscience/bloomz-7b1",
+    "google/gemma-2-9b",
+    "google/gemma-2-9b-it",
+    "m-a-p/CT-LLM-Base",
+    "m-a-p/CT-LLM-SFT",
+    "m-a-p/CT-LLM-SFT-DPO",
+    "m-a-p/neo_7b",
+    "m-a-p/neo_7b_instruct_v0.1",
+    "m-a-p/neo_7b_sft_v0.1"
+   ]
+  },
+  {
+   "venv": ".venv-tf457",
+   "cells": 34688,
+   "per": {
+    "allenai/Olmo-3-1125-32B": 2983,
+    "allenai/Olmo-3.1-32B-Instruct": 2983,
+    "allenai/Olmo-3.1-32B-Instruct-DPO": 2983,
+    "allenai/Olmo-3.1-32B-Instruct-SFT": 2983,
+    "allenai/OLMo-2-0425-1B": 2706,
+    "allenai/OLMo-2-0425-1B-DPO": 2706,
+    "allenai/OLMo-2-0425-1B-Instruct": 2706,
+    "allenai/OLMo-2-0425-1B-SFT": 2706,
+    "BAAI/Aquila2-7B": 2983,
+    "BAAI/AquilaChat2-7B": 2983,
+    "internlm/internlm2-base-7b": 0,
+    "internlm/internlm2-chat-7b": 2983,
+    "internlm/internlm2-chat-7b-sft": 2983,
+    "baichuan-inc/Baichuan2-7B-Base": 0,
+    "baichuan-inc/Baichuan2-7B-Chat": 0
+   },
+   "lineages": [
+    "allenai/Olmo-3-1125-32B",
+    "allenai/OLMo-2-0425-1B",
+    "BAAI/Aquila2-7B",
+    "internlm/internlm2-base-7b",
+    "baichuan-inc/Baichuan2-7B-Base"
+   ],
+   "models": [
+    "allenai/Olmo-3-1125-32B",
+    "allenai/Olmo-3.1-32B-Instruct",
+    "allenai/Olmo-3.1-32B-Instruct-DPO",
+    "allenai/Olmo-3.1-32B-Instruct-SFT",
+    "allenai/OLMo-2-0425-1B",
+    "allenai/OLMo-2-0425-1B-DPO",
+    "allenai/OLMo-2-0425-1B-Instruct",
+    "allenai/OLMo-2-0425-1B-SFT",
+    "BAAI/Aquila2-7B",
+    "BAAI/AquilaChat2-7B",
+    "internlm/internlm2-base-7b",
+    "internlm/internlm2-chat-7b",
+    "internlm/internlm2-chat-7b-sft",
+    "baichuan-inc/Baichuan2-7B-Base",
+    "baichuan-inc/Baichuan2-7B-Chat"
+   ]
+  }
+ ]
+}

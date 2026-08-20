@@ -1,0 +1,9 @@
+{
+ "machines": {
+  "137584": {
+   "seen": "2026-08-19",
+   "failures": 1,
+   "symptom": "ssh never came up after create"
+  }
+ }
+}
