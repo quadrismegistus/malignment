@@ -3,6 +3,10 @@ subject: predicting_aligned_text
 question: Can the arm be predicted from a page, and can named scales do it?
 status: not started
 blocked_on: nothing. The corpus is reachable (ClickHouse malign_logits.gen_sequences).
+inherited: |
+  The archive's producers, inputs and results are copied in verbatim at
+  malign-logits 5c4b5ce6, sha256-verified 20 of 20. See PROVENANCE.md.
+  scripts/ does NOT run from here -- its paths are the archive's, on purpose.
 ---
 
 # predicting_aligned_text
@@ -37,3 +41,31 @@ That matters for the argument and not only for the method. If the domain-specifi
 `p_on_passages`'s I2 was **wrong in its first two versions** and the cause is the failure mode this whole area is prone to: the flip assignment iterated an unsorted set, so one seed gave 0.52-0.63 and the next 0.40-0.49, and both were quoted as findings. Neither an elevation nor a depression existed. **A one-flip null at 41 lineages wobbles +-0.15 and nobody had characterised it.**
 
 The same defect, independently, cost `experiments/displacement_axis/` a full day on 2026-08-20: a "ceiling" computed by a rule no model could use, against which every model was reported as explaining nothing. Characterise the null before reading the number, and prefer a reference a model is allowed to reach.
+
+## What is copied in, and what it is for
+
+`PROVENANCE.md` has the full table with sha256 for every file. In short:
+
+    scripts/          the four producers, verbatim, plus z_second_order.py
+                      which the ascent branch imports. THEY DO NOT RUN FROM
+                      HERE: their paths are the archive's. Reference
+                      implementation, not a runnable thing.
+    results/inputs/   what those producers READ -- the GloVe matrix, P's axis,
+                      the passage screen flags, the forced-arm corpus, the
+                      per-word AUC tables
+    results/archive/  what the archive's run PRODUCED. This is the REPRODUCE
+                      TARGET, not our output. Anything we generate goes
+                      somewhere else, so the two can never be confused.
+    plan_p_on_passages.md   the pre-registration, which was committed before
+                      the run and amended pre-run for I5 and I7
+
+The corpus itself is not copied and does not need to be: `malign_logits.gen_sequences`
+`corpus='passage'` is live at 1,142,944 rows over 84 models and 198 prompts.
+
+## Do this first
+
+Rerun `marked` and check it returns `results/archive/p_on_passages_marked.json`:
+I6a aligned +0.00256 (1443/1006, p=1e-18), base +0.00265 (1430/951, p=8e-23),
+I6b DiD -0.00015 (1187/1194, p=0.90), and the six-domain table. A port that has
+not reproduced the archived numbers is a port that might be measuring anything,
+and the archived JSON is sitting right there to check against.
