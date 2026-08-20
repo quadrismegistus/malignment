@@ -645,6 +645,15 @@ So `dN_position` conflates movement along the axis with the two arms having diff
                                              rho, and that scale's one-column R2
     results/<run>/long/protocol_ceiling.csv  the two scoring rules, per frame
     results/<run>/long/protocol_growth.csv   held-out R2 against fitting-half size
+    results/<run>/mass_direction.json         mass-weighted dN per (cell, scale) with
+                                             its permutation null, plus the frame-level
+                                             collapse. `_params` records the gate and
+                                             draw count; a NON-DEFAULT run writes a
+                                             suffixed file and cannot clobber this one
+    results/<run>/long/mass_cells.csv        one row per cell: dN, beats and rating sd
+                                             for every scale, with coverage_mass
+    results/<run>/long/mass_frames.csv       the frame-level collapse, with the gated n
+                                             per scale (ngate_<scale>)
     results/<run>/loo.json                   leave-one-out, v6 only
     results/<run>/loo_all.json               leave-one-out, three instruments
     results/<run>/rho_domains.json           per-frame rho and one-column R2, all scales
