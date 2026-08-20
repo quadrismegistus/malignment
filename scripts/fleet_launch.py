@@ -859,7 +859,19 @@ def _await(cloud, st, models, iid, a):
         time.sleep(a.poll)
         ticks += 1
         n = _written(cloud, st)
-        done = cloud.ssh_run(st, "ls /root/DONE 2>/dev/null").returncode == 0
+        #: **A SECOND WATCHER MUST NOT CONSUME THIS SIGNAL.** On 2026-08-20 I
+        #: queued a recovery session that waited for /root/DONE, DELETED it, and
+        #: re-ran the work. So when box 48180548 finished its shard, the recovery
+        #: removed the sentinel this loop was waiting on -- the launcher saw tmux
+        #: gone and no DONE, called it a failure, and skipped pull, verify and
+        #: destroy on a box that had just written 36,220 cells correctly.
+        #:
+        #: The sentinel is a LEVEL, not an event: it must stay true once true. A
+        #: recovery that wants to re-run should write its own marker and leave
+        #: DONE alone, which is why the counterpart file is RECOVER_DONE and not
+        #: a second use of this one.
+        done = cloud.ssh_run(st, "ls /root/DONE /root/RECOVER_DONE 2>/dev/null"
+                             ).returncode == 0
         failed = cloud.ssh_run(st, "ls /root/FAILED 2>/dev/null").returncode == 0
         alive = cloud.ssh_run(st, "tmux has-session -t fleet 2>/dev/null").returncode == 0
         if n != last_n:
