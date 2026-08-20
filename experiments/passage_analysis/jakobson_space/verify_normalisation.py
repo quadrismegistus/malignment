@@ -51,6 +51,9 @@ SIM_MIN = 0.93
 LEN_TOL = 0.10
 
 
+HYPHEN_SPLIT = re.compile(r"-\s+")
+
+
 def canon(t):
     """Comparison form: lowercase alphabetic words only.
 
@@ -58,8 +61,15 @@ def canon(t):
     quote style, digits -- so the ratio responds to substitution and reordering
     and not to the normalisation itself. Deliberately does NOT correct spelling,
     so a spelling fix still registers as a small, real difference.
+
+    DE-HYPHENATES BOTH SIDES, because otherwise the gate punishes the repair it
+    exists to permit. A philosophy passage whose only changes were `sin- gle` ->
+    `single`, `im- pression` -> `impression` and five more scored 0.9227 and was
+    flagged REWRITTEN: every rejoin merges two tokens into one, so a correctly
+    normalised scan looks maximally edited. Applying the same join to both sides
+    makes those repairs invisible to the ratio and leaves real substitutions.
     """
-    return WORD.findall(t.lower())
+    return WORD.findall(HYPHEN_SPLIT.sub("", t.lower()))
 
 
 #: A COMPOUND NUMBER -- one with an internal decimal point or thousands separator.
@@ -101,14 +111,27 @@ def check(r):
     raw, clean = r.get("text_raw") or "", r.get("text") or ""
     a, b = canon(raw), canon(clean)
     sim = difflib.SequenceMatcher(None, a, b).ratio() if a and b else 0.0
-    dl = (len(clean.split()) - len(raw.split())) / max(len(raw.split()), 1)
+    #: CHARACTERS, NOT WHITESPACE TOKENS. Counting words made a correct repair
+    #: look like inflation: `water….The` -> `water... The` is one token becoming
+    #: two, and a dream whose ellipses were all spaced scored +12.7% and was
+    #: flagged five times over. The character count moves by the single space
+    #: that was actually added.
+    dl = (len(clean) - len(raw)) / max(len(raw), 1)
     completed = (raw.rstrip()[-1:] not in ".!?\"'" and clean.rstrip()[-1:] in ".!?")
     flags = []
     lost = numbers_lost(raw, clean)
     if lost:
         flags.append("NUMBERS:" + ",".join(lost[:4]))
+    #: LATEX-HEAVY PASSAGES CANNOT BE JUDGED BY SIMILARITY, and are reported
+    #: instead of flagged. Rendering `\osv` as `O VI` and
+    #: `$R_{\rm imp}\sim300$--$730$~kpc` as `R_imp ~ 300 - 730 kpc` is the job,
+    #: and it legitimately rewrites most tokens in the passage -- one such
+    #: abstract scored 0.8993 with every single diff correct. A ratio cannot
+    #: separate that from paraphrase, so it is not asked to; these are listed
+    #: for reading, which is the only thing that settles them.
+    latex_raw = len(LATEX.findall(raw))
     if sim < SIM_MIN:
-        flags.append("REWRITTEN")
+        flags.append("LATEX_HEAVY" if latex_raw >= 3 else "REWRITTEN")
     if abs(dl) > LEN_TOL:
         flags.append("LENGTH")
     if completed:

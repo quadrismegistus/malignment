@@ -60,6 +60,7 @@ Repairing genuine scan damage in a foreign word IS correct even though it adds n
 - **Word choice.** Do not replace a word with a better one. Not `got` -> `received`, not `thing` -> `object`.
 - **Syntax and grammar.** `she don't`, `me and him went`, a comma splice, a run-on, a sentence fragment, a dangling modifier: all stay exactly as written. These are how the writer builds sentences and they are the object of study.
 - **Dialect, idiom, register, profanity, and content.** Do not soften, formalise, censor or summarise. Dream reports may be incoherent, violent or sexual; leave every bit of that intact.
+- **Written speech, which is a choice and not a slip.** `sayin`, `talkin'`, `goin`, `gonna`, `wanna`, `gotta`, `kinda`, `ain't`, `y'all`, `cos` stay exactly as written. G-dropping is how a writer puts a voice on the page; it is not a typing error, and normalising it removes register rather than noise. Contrast `didnt` and `thats`, which are the same word as `didn't` and `that's` with a key missed - those you fix.
 - **Sentence order, paragraph structure, or length.** Do not merge, split, reorder, add or delete sentences.
 - **Repetition.** If the writer repeated themselves, keep the repetition.
 

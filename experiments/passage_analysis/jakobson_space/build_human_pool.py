@@ -208,24 +208,49 @@ def fiction(rng, per):
     return out, len(long_enough)
 
 
+#: LATEX-BEARING ABSTRACTS ARE EXCLUDED, not cleaned. RH, 2026-08-20.
+#:
+#: Rendering `$R_{\rm imp}\sim300$--$730$~kpc` as `R_imp ~ 300 - 730 kpc` is the
+#: single transformation in this whole pass that rewrites most of a passage's
+#: tokens, and it is unverifiable by any automatic check: similarity cannot tell
+#: a correct rendering from a paraphrase when both differ from the source
+#: everywhere. Dropping those abstracts removes the one place the pass cannot be
+#: audited, at a cost this corpus can afford.
+#:
+#: Measured on 954 abstracts at >=193 words: 56.8% are LaTeX-free. The survivors
+#: skew hard by field -- cs.CL 86.2% and stat.ME 80.1% clean against math.AG
+#: 11.5% and hep-th 21.7% -- because LaTeX density IS a property of the
+#: discipline, so no filter yields a LaTeX-free physics abstract. RH's ruling on
+#: that skew: "arxiv is already sciences as a whole which are all the same to
+#: me." The corpus is therefore quantitative-science abstracts, and the fetch
+#: was topped up from LaTeX-light categories to give the 500 target a buffer.
+LATEX_RX = [re.compile(r"\$[^$\n]{1,120}\$"), re.compile(r"\\[a-zA-Z]{2,}"),
+            re.compile(r"[_^]\{|\{\\"), re.compile(r"~\$|\$~")]
+
+
+def has_latex(t):
+    return any(rx.search(t) for rx in LATEX_RX)
+
+
 def abstracts(rng, per):
-    """arXiv, preferring the fresh multi-category fetch over the archived slice."""
-    cand = []
+    """arXiv, LaTeX-free only. -> (rows, n_candidates)"""
+    cand, n_latex = [], 0
     if os.path.exists(ARXIV_RAW):
         for line in open(ARXIV_RAW):
             d = json.loads(line)
             a = (d.get("abstract") or "").strip()
-            if len(a.split()) >= MIN_SRC:
-                cand.append(dict(text=a, category=d.get("category"),
-                                 arxiv_id=d.get("arxiv_id"), year=(d.get("published") or "")[:4]))
+            if len(a.split()) < MIN_SRC:
+                continue
+            if has_latex(a):
+                n_latex += 1
+                continue
+            cand.append(dict(text=a, category=d.get("category"),
+                             arxiv_id=d.get("arxiv_id"), year=(d.get("published") or "")[:4]))
     n_fresh = len(cand)
-    if len(cand) < per:
-        #: fall back to the archived 500 only to top up, and say so
-        p = os.path.join(ARCHIVE, "arxiv_abstracts_500.csv")
-        if os.path.exists(p):
-            for r in csv.DictReader(open(p, encoding="utf-8", errors="replace")):
-                if len((r.get("text") or "").split()) >= MIN_SRC:
-                    cand.append(dict(text=r["text"], category="ARCHIVED"))
+    print("      (arxiv: %d LaTeX-free, %d dropped for LaTeX)" % (n_fresh, n_latex))
+    #: the archived arxiv_abstracts_500.csv is NOT used as a top-up any more:
+    #: its provenance is unknown and it is a 2026 cs.CL slice, so it would enter
+    #: a differently-sampled corpus under the same label.
     rng.shuffle(cand)
     out = []
     for r in cand[:per]:

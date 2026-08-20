@@ -94,13 +94,23 @@ def main(argv=None):
     ap.add_argument("--per-category", type=int, default=400,
                     help="raw abstracts to pull per category before any filter")
     ap.add_argument("--delay", type=float, default=DELAY)
+    ap.add_argument("--categories", help="comma-separated, overrides CATEGORIES")
+    ap.add_argument("--append", action="store_true",
+                    help="add to an existing file, skipping ids already in it")
     a = ap.parse_args(argv)
+    cats = [c.strip() for c in a.categories.split(",")] if a.categories else CATEGORIES
     if a.delay < DELAY:
         sys.exit("refusing: arXiv asks for %.1fs between requests" % DELAY)
 
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     rows, seen = [], set()
-    for cat in CATEGORIES:
+    if a.append and os.path.exists(a.out):
+        for line in open(a.out):
+            d = json.loads(line)
+            rows.append(d)
+            seen.add(d["arxiv_id"])
+        print("appending to %d existing abstracts" % len(rows))
+    for cat in cats:
         got = fetch(cat, a.per_category, a.delay)
         for r in got:
             #: cross-listed papers appear under several categories; first wins,
@@ -123,7 +133,7 @@ def main(argv=None):
             n159[r["category"]] += 1
     print("\n%d abstracts written -> %s" % (len(rows), a.out))
     print("at >=159 words: %d" % sum(n159.values()))
-    for c in CATEGORIES:
+    for c in cats:
         print("  %-20s %4d" % (c, n159[c]))
 
 
