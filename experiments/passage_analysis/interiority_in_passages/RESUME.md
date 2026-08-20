@@ -1,10 +1,18 @@
+> **SUPERSEDED 2026-08-20. THE RUN IS COMPLETE AND THIS DOCUMENT DESCRIBES A PAUSE THAT NO LONGER EXISTS.**
+> It says how to pick Pass C up in a cold session; the run finished at commit `6d48566` with **26 lineage pairs, 10,355
+> passages, 17 independent observations** (Falcon3's four members are one recipe at four
+> scales, not four pairs) and all three hypotheses holding: H1 +0.224 16/17 p=0.00015,
+> H2 +8.501 14/17 p=0.03511, H3 +4.726 14/17 p=0.00385. See `README.md`.
+>
+> Kept, not deleted, because the shard mechanics and the id-space discipline it documents apply to any rerun.
+
 # RESUME: picking Pass C up in a new session
 
 For a context that knows nothing. Everything needed is in this repo or in
 `$MALIGNMENT_DATA`; nothing needed is in a Claude session directory.
 
     cd ~/github/malignment && source .venv/bin/activate
-    cd experiments/interiority_in_passages
+    cd experiments/passage_analysis/interiority_in_passages
     python run.py --passc-todo
 
 That one command tells you where the run stands. Everything below explains it.
