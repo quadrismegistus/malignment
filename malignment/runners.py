@@ -210,6 +210,19 @@ def _gpu_name():
     return ""
 
 
+def _excerpt(msg, head=400, tail=200):
+    """Keep both ends of a long error. The middle is the least informative part.
+
+    A single `msg[:N]` drops exactly the specifics an error was written to
+    deliver -- see the caller for the case that cost an hour.
+    """
+    msg = str(msg)
+    if len(msg) <= head + tail + 20:
+        return msg
+    return "%s ... [%d chars omitted] ... %s" % (
+        msg[:head], len(msg) - head - tail, msg[-tail:])
+
+
 def _is_rate_limit(msg):
     """Status code and phrase, never the symptom. See the module docstring."""
     return ("429" in msg or "Too Many Requests" in msg
@@ -335,8 +348,24 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
             #: returns {"written": 0} is indistinguishable from a checkpoint
             #: with nothing left to do -- the ambiguity that printed ALL
             #: MODELS COMPLETE over a dead fleet.
+            #: **A TRUNCATION THAT CUTS OFF THE ANSWER.** This was `msg[:160]`,
+            #: and on 2026-08-20 internlm2 failed with:
+            #:
+            #:   "This modeling file requires the following packages that were
+            #:    not found in your environment: "
+            #:
+            #: -- the list cut EXACTLY where it began. The message names the fix
+            #: and the truncation removed the name, so three boxes' worth of
+            #: diagnosis went: install protobuf (right, different failure),
+            #: reproduce the load by hand (tokenizer now fine, so the failure had
+            #: MOVED), then parse the modeling file's imports to learn it wanted
+            #: `einops` and `flash_attn`. All of that was printed and thrown away.
+            #:
+            #: Head AND tail, because the two ends carry different things: the
+            #: head says what kind of failure it is, and the tail is where a
+            #: package list, a URL or a rev id ends up.
             raise RuntimeError("LOAD FAILED for %s: %s%s" % (
-                ck.model_id, msg[:160],
+                ck.model_id, _excerpt(msg),
                 "  <- THIS WAS A RATE LIMIT, not a model defect"
                 if _is_rate_limit(msg) else
                 "  <- THIS WAS A TRANSIENT NETWORK FAILURE, not a model defect"
