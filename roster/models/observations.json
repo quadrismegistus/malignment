@@ -78,6 +78,31 @@
    ],
    "packages_absent": [],
    "note": "vllm/vllm-openai:latest as of 12 Aug 2026, run with --eager. The passage-corpus fleet. ENGINE, not just environment: this key exists because (architecture x engine) is a fact class the campaign otherwise does not record."
+  },
+  "vast_rtx4090_cuda130_tf457": {
+   "torch": "2.13.0+cu130",
+   "transformers": "4.57.6",
+   "device": "RTX 4090 48GB (CUDA)",
+   "packages_present": [
+    "einops",
+    "bitsandbytes",
+    "protobuf",
+    "sentencepiece==0.2.1",
+    "mamba-ssm",
+    "causal-conv1d"
+   ],
+   "note": "vast.ai `dense` profile, .venv-tf457, 20 Aug. THE IMAGE SHIPS AN HF MIRROR: site-packages carries an `hf_config.pth` that sets HF_ENDPOINT=http://117.175.104.83:8081 at interpreter startup, overriding any shell export, and /etc/pip.conf points at repo.huaweicloud.com. It is re-injected by uv on every venv build AND restored by any container stop/start. Symptoms are 404s, IncompleteRead truncation, and mangled rev ids -- three signatures, one cause. Purge before every work start, not once at provision."
+  },
+  "vast_rtx4090_cuda130_tf540": {
+   "torch": "2.13.0+cu130",
+   "transformers": "5.4.0",
+   "device": "RTX 4090 48GB (CUDA)",
+   "packages_present": [
+    "einops",
+    "protobuf",
+    "sentencepiece"
+   ],
+   "note": "Same image and same hf_config.pth hijack; .venv rather than .venv-tf457. Left to itself uv resolves transformers to 5.15.1 here while this Mac has 5.4.0, so the fleet PINS the local version for corpus comparability."
   }
  },
  "observations": [
@@ -509,6 +534,62 @@
    "fix": "VERIFIED ON MPS 2026-08-16 for the slot DIAGNOSTIC PAIR role. fp16, ~15s load from local cache (19 GB each), vocab 131072, logits finite, sane top-5, forward 0.05-0.44s. Round-trip: ordinary EXACT, CJK EXACT, but the SPACE-BEFORE-A-PERIOD case FAILS -- 'took the .357' does not survive, the same narrow defect recorded for Alchan/mpt-7b-chat and gl198976/mpt-7b*. Cost is the same two declared prompts (literary_039, literary_047); every ordinary prompt is exact, so this is a 2-of-2,706 refusal and not a tokenizer that mangles generally. Its env row reads profile=default/box=dense, which is a CLOUD box and says nothing about this Mac; this row is the MPS observation that was missing.",
    "source": "malign seat, live load test on CDH0050",
    "model_id": "tiiuae/Falcon3-10B-Instruct"
+  },
+  {
+   "model_id": "baichuan-inc/Baichuan2-7B-Base",
+   "environment": "vast_rtx4090_cuda130_tf457",
+   "outcome": "load_failed",
+   "cause": "bundled modelling code imports bitsandbytes; transformers refuses before loading a weight",
+   "fix": "uv pip install bitsandbytes, then LOADS on the same box. INVISIBLE FROM THE MAC: no CUDA there, so bitsandbytes cannot be installed at all and this cannot be reproduced locally. Now declared in models.yaml env.packages. Recovered 2,539 topup cells."
+  },
+  {
+   "model_id": "baichuan-inc/Baichuan2-7B-Chat",
+   "environment": "vast_rtx4090_cuda130_tf457",
+   "outcome": "load_failed",
+   "cause": "as Baichuan2-7B-Base: bitsandbytes",
+   "fix": "same; recovered 2,688 topup cells after install."
+  },
+  {
+   "model_id": "internlm/internlm2-base-7b",
+   "environment": "vast_rtx4090_cuda130_tf457",
+   "outcome": "load_failed",
+   "cause": "modelling_internlm2.py imports einops through trust_remote_code; check_imports refuses",
+   "fix": "uv pip install einops. protobuf was installed FIRST and fixed only the TOKENIZER -- the failure MOVED rather than cleared, which read as the same error. flash_attn is imported by the same file and is NOT required: this Mac has einops without flash_attn and loads it fine. Declared in models.yaml env.packages."
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b",
+   "environment": "vast_rtx4090_cuda130_tf457",
+   "outcome": "load_failed",
+   "cause": "as internlm2-base-7b: einops",
+   "fix": "same. Before the fix the lineage topup reported '1 member with a pass-1 cell, 2 skipped' -- a union missing two thirds of its members, which would have produced a confident partial answer."
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b-sft",
+   "environment": "vast_rtx4090_cuda130_tf457",
+   "outcome": "load_failed",
+   "cause": "as internlm2-base-7b: einops",
+   "fix": "same."
+  },
+  {
+   "model_id": "Zyphra/Zamba2-7B",
+   "environment": "vast_rtx4090_cuda130_tf457",
+   "outcome": "loads",
+   "cause": "runs WITHOUT mamba kernels, at 183.4 s/cell -- 152 hours for 2,983 cells",
+   "fix": "install mamba-ssm + causal-conv1d: 1.03 s/cell, 2,983 cells in 51 min. A 178x environment effect on a model that never errors. uv needs --system-certs on this image; without it the install dies on `invalid peer certificate: UnknownIssuer`."
+  },
+  {
+   "model_id": "allenai/Olmo-3-1125-32B",
+   "environment": "vast_rtx4090_cuda130_tf457",
+   "outcome": "load_failed",
+   "cause": "CUDA out of memory: 64.5 GB at fp16 against 47.37 GiB usable",
+   "fix": "none on this card. Needs box profile `big80` (A100 80GB). The 70B pair needs `twogpu`; 141 GB fits neither a 4090 nor a single A100."
+  },
+  {
+   "model_id": "croissantllm/CroissantLLMBase",
+   "environment": "vast_rtx4090_cuda130_tf540",
+   "outcome": "loads",
+   "cause": "completes 2,575 of 2,983 prompts; the shortfall is the declared CJK tokenizer defect, not a failure",
+   "fix": "none needed. Recorded so a partial count is not read as an incomplete run."
   }
  ],
  "engine_support": {
