@@ -12,7 +12,36 @@ Two things were waiting on a download to finish, and one question was outstandin
 
 1. **Decide whether to re-run the sweep at the larger roster** -- see below. This is now the only thing waiting on RH.
 
-## The open decision
+## THE DECISION: WAIT FOR THE FLEET (RH, 2026-08-20)
+
+Do not re-run the cross-lineage sweep at the current roster. The existing 40-prompt
+result stands as taken, at 26-29 lineages, and is reported with that roster size.
+
+`coverage.py` is how the wait ends. It appends every reading to
+`results/coverage_log.jsonl` and prints the delta, so "has the fleet stopped" is
+read off a file rather than recalled -- this seat has twice compared two numbers
+taken hours apart from memory.
+
+    python experiments/displacement_taxonomy/coverage.py
+    python experiments/displacement_taxonomy/coverage.py --full   # names what is missing
+
+Reading at 2026-08-20 07:50, the baseline for every later delta:
+
+    topped per prompt      34.72  median 36
+    measured per prompt    35.93  median 36
+    pass-2 lag              1.21
+    prompts at 35+ topped     215 of 279
+    prompts at 40+ topped       0
+    roster models never measured here: 24
+
+**Done is not 50.** Twenty-four of the fifty roster models have never been measured
+on these prompts, and the four 32B Olmo arms need box profile `big80` while the two
+Llama-70B arms need `twogpu` -- 141 GB at fp16 fits neither a 4090 nor a single A100
+([6467]). Done is `measured` flat across a few checks with `topped` closed on it.
+
+The argument the wait is against, kept because it did not become wrong:
+
+## The open decision (SUPERSEDED by the decision above; kept for the reasoning)
 
 Run the remaining ~177 prompts now, or wait for a bigger roster.
 
