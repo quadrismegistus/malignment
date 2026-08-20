@@ -56,13 +56,6 @@ def cached(m):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None)
-    ap.add_argument("--models", nargs="*",
-                    help="only these. **Needed because the sweep runs in ONE "
-                         "interpreter**: 5 of the 102 declare profile tf457 and "
-                         "error on every prompt under .venv, so they need a "
-                         "second pass under .venv-tf457 -- and without this flag "
-                         "that second pass redoes all 102, three hours to "
-                         "measure five.")
     ap.add_argument("--out", default="/tmp/v4_identity_sweep.json")
     a = ap.parse_args()
 
@@ -82,12 +75,6 @@ def main():
     zh = sorted(t for t in allp if T.is_cjk(t))[:N_CJK]
 
     todo = [m for m in sorted(roster.load()["nodes"]) if cached(m) and m in vocab]
-    if a.models:
-        todo = [m for m in todo if m in set(a.models)]
-        missing = sorted(set(a.models) - set(todo))
-        if missing:
-            print("  NOT SWEEPABLE (uncached, or absent from the vocab "
-                  "measurement): %s" % ", ".join(missing), flush=True)
     if a.limit:
         todo = todo[:a.limit]
     print("sweep: %d cached models | %d latin + %d cjk prompts | cache OFF\n"
