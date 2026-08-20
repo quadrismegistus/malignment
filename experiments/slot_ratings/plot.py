@@ -18,6 +18,8 @@ points, one per lineage, with zero marked, and let the reader see whether a
 significant mean is a consistent shift or two outliers.
 
 Written into `<study>/figures/`, 300 dpi.
+
+Institutional figures live in `institutional/plot.py`, not here.
 """
 
 import argparse, json, os, sys
@@ -181,44 +183,6 @@ def fig_amplification():
 
 
 # ------------------------------------------------------ per-scenario sign counts
-def fig_per_scenario():
-    """Why M03's `procedural` pooled to zero: the scenarios disagree."""
-    import pandas as pd
-    from plotnine import (ggplot, aes, geom_col, geom_hline, facet_wrap, labs,
-                          scale_fill_manual, coord_flip)
-    d = json.load(open(os.path.join(
-        HERE, "institutional/results/base_side/per_scenario.json")))["results"]
-    recs = []
-    for corpus, res in d.items():
-        for r in res:
-            recs.append(dict(corpus=corpus.upper(), scale=r["scale"],
-                             direction="institution higher", n=r["base_pos"]))
-            recs.append(dict(corpus=corpus.upper(), scale=r["scale"],
-                             direction="individual higher", n=-r["base_neg"]))
-    x = pd.DataFrame(recs)
-    order = ["arousal", "mediation", "collective", "specificity", "agency",
-             "assertiveness", "target", "termination", "abstraction",
-             "deference", "procedural"]
-    x = x[x.scale.isin(order)]
-    x["scale"] = pd.Categorical(x.scale, categories=order)
-    p = (ggplot(x, aes("scale", "n", fill="direction"))
-         + geom_hline(yintercept=0, color="#888888", size=0.4)
-         + geom_col(width=0.7)
-         + coord_flip()
-         + facet_wrap("~corpus", scales="free_x")
-         + scale_fill_manual({"institution higher": "#2980b9",
-                              "individual higher": "#e67e22"}, name="")
-         + labs(title="Institutional: scenarios that disagree produce a pooled zero",
-                subtitle="Each matched scenario tested alone against its own "
-                         "lineages. Bars count scenarios reaching sign-test p<0.05.",
-                x="", y="scenarios significant, by direction",
-                caption="institutional/results/base_side/per_scenario.json. M03's "
-                        "`procedural` is 51 positive against 61 negative -- 112 of "
-                        "126 scenarios significant, pooling to -0.031.")
-         + theme())
-    save(p, os.path.join(HERE, "institutional/figures/per_scenario_signs.png"), 11, 5)
-
-
 # --------------------------------------------------------- layer 1, sexual
 def fig_sexual_layer1():
     """Every prompt moves the same way. 16 prompts, 9 scales."""
@@ -251,9 +215,11 @@ def fig_sexual_layer1():
     save(p, os.path.join(HERE, "sexual/figures/layer1_all_prompts.png"), 11, 8)
 
 
+#: `fig_per_scenario` MOVED to institutional/plot.py on 2026-08-20 (RH), so the
+#: institutional figures are produced inside the institutional folder. Its output
+#: was byte-identical across the move. This file now draws identity and sexual.
 FIGS = {"did": [fig_did_identity, fig_did_sexual],
         "amplification": [fig_amplification],
-        "scenario": [fig_per_scenario],
         "layer1": [fig_sexual_layer1]}
 
 

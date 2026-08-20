@@ -1,0 +1,1260 @@
+{
+ "config": {
+  "view": {
+   "continuousWidth": 300,
+   "continuousHeight": 300,
+   "stroke": null
+  },
+  "axis": {
+   "domainColor": "#cccccc"
+  }
+ },
+ "hconcat": [
+  {
+   "layer": [
+    {
+     "data": {
+      "name": "data-ec984d218672496d7c49cceae0722ecf"
+     },
+     "mark": {
+      "type": "rule",
+      "color": "#888888",
+      "strokeWidth": 0.8
+     },
+     "encoding": {
+      "x": {
+       "field": "z",
+       "type": "quantitative"
+      }
+     }
+    },
+    {
+     "data": {
+      "name": "data-76da47c0b8b518818f36180b9d0d49c1"
+     },
+     "mark": {
+      "type": "rule",
+      "opacity": 0.75,
+      "strokeWidth": 1.4
+     },
+     "encoding": {
+      "color": {
+       "field": "who",
+       "legend": {
+        "orient": "bottom",
+        "title": null
+       },
+       "scale": {
+        "domain": [
+         "individual",
+         "institution"
+        ],
+        "range": [
+         "#e67e22",
+         "#2980b9"
+        ]
+       },
+       "type": "nominal"
+      },
+      "x": {
+       "axis": {
+        "grid": true,
+        "labelFontSize": 9,
+        "title": "change in mass-weighted level (scale points, 1-7)",
+        "titleFontSize": 9
+       },
+       "field": "lo",
+       "scale": {
+        "domain": [
+         -0.4190687047712422,
+         0.4190687047712422
+        ],
+        "nice": false
+       },
+       "type": "quantitative"
+      },
+      "x2": {
+       "field": "hi"
+      },
+      "y": {
+       "axis": {
+        "labelFontSize": 9
+       },
+       "field": "scale",
+       "sort": [
+        "directedness",
+        "abstraction",
+        "mediation",
+        "procedural",
+        "vocalisation",
+        "termination",
+        "fit",
+        "makes_better",
+        "specificity",
+        "agency",
+        "hedged",
+        "deference",
+        "interiority",
+        "target",
+        "delay",
+        "assertiveness",
+        "makes_worse",
+        "superego",
+        "arousal",
+        "deliberation",
+        "mundanity",
+        "aggression",
+        "collective",
+        "harm"
+       ],
+       "title": null,
+       "type": "nominal"
+      },
+      "yOffset": {
+       "field": "who",
+       "sort": null,
+       "type": "nominal"
+      }
+     }
+    },
+    {
+     "data": {
+      "name": "data-76da47c0b8b518818f36180b9d0d49c1"
+     },
+     "mark": {
+      "type": "point",
+      "filled": true,
+      "size": 34
+     },
+     "encoding": {
+      "color": {
+       "field": "who",
+       "legend": {
+        "orient": "bottom",
+        "title": null
+       },
+       "scale": {
+        "domain": [
+         "individual",
+         "institution"
+        ],
+        "range": [
+         "#e67e22",
+         "#2980b9"
+        ]
+       },
+       "type": "nominal"
+      },
+      "shape": {
+       "field": "sig",
+       "legend": {
+        "orient": "bottom",
+        "title": [
+         "95% interval",
+         "excludes zero"
+        ]
+       },
+       "scale": {
+        "range": [
+         "circle",
+         "triangle-down"
+        ]
+       },
+       "sort": [
+        "clears",
+        "does not clear"
+       ],
+       "type": "nominal"
+      },
+      "tooltip": [
+       {
+        "field": "scale",
+        "type": "nominal"
+       },
+       {
+        "field": "who",
+        "type": "nominal"
+       },
+       {
+        "field": "v",
+        "format": "+.3f",
+        "type": "quantitative"
+       },
+       {
+        "field": "lo",
+        "format": "+.3f",
+        "type": "quantitative"
+       },
+       {
+        "field": "hi",
+        "format": "+.3f",
+        "type": "quantitative"
+       },
+       {
+        "field": "p",
+        "format": ".3f",
+        "type": "quantitative"
+       },
+       {
+        "field": "sig",
+        "type": "nominal"
+       }
+      ],
+      "x": {
+       "axis": {
+        "grid": true,
+        "labelFontSize": 9,
+        "title": "change in mass-weighted level (scale points, 1-7)",
+        "titleFontSize": 9
+       },
+       "field": "v",
+       "scale": {
+        "domain": [
+         -0.4190687047712422,
+         0.4190687047712422
+        ],
+        "nice": false
+       },
+       "type": "quantitative"
+      },
+      "y": {
+       "axis": {
+        "labelFontSize": 9
+       },
+       "field": "scale",
+       "sort": [
+        "directedness",
+        "abstraction",
+        "mediation",
+        "procedural",
+        "vocalisation",
+        "termination",
+        "fit",
+        "makes_better",
+        "specificity",
+        "agency",
+        "hedged",
+        "deference",
+        "interiority",
+        "target",
+        "delay",
+        "assertiveness",
+        "makes_worse",
+        "superego",
+        "arousal",
+        "deliberation",
+        "mundanity",
+        "aggression",
+        "collective",
+        "harm"
+       ],
+       "title": null,
+       "type": "nominal"
+      },
+      "yOffset": {
+       "field": "who",
+       "sort": null,
+       "type": "nominal"
+      }
+     }
+    }
+   ],
+   "height": 430,
+   "title": {
+    "text": "what alignment does to each position",
+    "anchor": "start",
+    "color": "#333333",
+    "fontSize": 10
+   },
+   "width": 300
+  },
+  {
+   "layer": [
+    {
+     "data": {
+      "name": "data-ec984d218672496d7c49cceae0722ecf"
+     },
+     "mark": {
+      "type": "rule",
+      "color": "#888888",
+      "strokeWidth": 0.8
+     },
+     "encoding": {
+      "x": {
+       "field": "z",
+       "type": "quantitative"
+      }
+     }
+    },
+    {
+     "data": {
+      "name": "data-578cfdd896381b0bd04d6fefbd05af9f"
+     },
+     "mark": {
+      "type": "rule",
+      "opacity": 0.75,
+      "strokeWidth": 1.4
+     },
+     "encoding": {
+      "color": {
+       "value": "#444444"
+      },
+      "x": {
+       "axis": {
+        "grid": true,
+        "labelFontSize": 9,
+        "title": "change in mass-weighted level (scale points, 1-7)",
+        "titleFontSize": 9
+       },
+       "field": "lo",
+       "scale": {
+        "domain": [
+         -0.4190687047712422,
+         0.4190687047712422
+        ],
+        "nice": false
+       },
+       "type": "quantitative"
+      },
+      "x2": {
+       "field": "hi"
+      },
+      "y": {
+       "axis": {
+        "labelFontSize": 9
+       },
+       "field": "scale",
+       "sort": [
+        "directedness",
+        "abstraction",
+        "mediation",
+        "procedural",
+        "vocalisation",
+        "termination",
+        "fit",
+        "makes_better",
+        "specificity",
+        "agency",
+        "hedged",
+        "deference",
+        "interiority",
+        "target",
+        "delay",
+        "assertiveness",
+        "makes_worse",
+        "superego",
+        "arousal",
+        "deliberation",
+        "mundanity",
+        "aggression",
+        "collective",
+        "harm"
+       ],
+       "title": null,
+       "type": "nominal"
+      },
+      "yOffset": {
+       "field": "who",
+       "sort": null,
+       "type": "nominal"
+      }
+     }
+    },
+    {
+     "data": {
+      "name": "data-578cfdd896381b0bd04d6fefbd05af9f"
+     },
+     "mark": {
+      "type": "point",
+      "filled": true,
+      "size": 34
+     },
+     "encoding": {
+      "color": {
+       "value": "#444444"
+      },
+      "shape": {
+       "field": "sig",
+       "legend": {
+        "orient": "bottom",
+        "title": [
+         "95% interval",
+         "excludes zero"
+        ]
+       },
+       "scale": {
+        "range": [
+         "circle",
+         "triangle-down"
+        ]
+       },
+       "sort": [
+        "clears",
+        "does not clear"
+       ],
+       "type": "nominal"
+      },
+      "tooltip": [
+       {
+        "field": "scale",
+        "type": "nominal"
+       },
+       {
+        "field": "who",
+        "type": "nominal"
+       },
+       {
+        "field": "v",
+        "format": "+.3f",
+        "type": "quantitative"
+       },
+       {
+        "field": "lo",
+        "format": "+.3f",
+        "type": "quantitative"
+       },
+       {
+        "field": "hi",
+        "format": "+.3f",
+        "type": "quantitative"
+       },
+       {
+        "field": "p",
+        "format": ".3f",
+        "type": "quantitative"
+       },
+       {
+        "field": "sig",
+        "type": "nominal"
+       }
+      ],
+      "x": {
+       "axis": {
+        "grid": true,
+        "labelFontSize": 9,
+        "title": "change in mass-weighted level (scale points, 1-7)",
+        "titleFontSize": 9
+       },
+       "field": "v",
+       "scale": {
+        "domain": [
+         -0.4190687047712422,
+         0.4190687047712422
+        ],
+        "nice": false
+       },
+       "type": "quantitative"
+      },
+      "y": {
+       "axis": {
+        "labelFontSize": 9
+       },
+       "field": "scale",
+       "sort": [
+        "directedness",
+        "abstraction",
+        "mediation",
+        "procedural",
+        "vocalisation",
+        "termination",
+        "fit",
+        "makes_better",
+        "specificity",
+        "agency",
+        "hedged",
+        "deference",
+        "interiority",
+        "target",
+        "delay",
+        "assertiveness",
+        "makes_worse",
+        "superego",
+        "arousal",
+        "deliberation",
+        "mundanity",
+        "aggression",
+        "collective",
+        "harm"
+       ],
+       "title": null,
+       "type": "nominal"
+      },
+      "yOffset": {
+       "field": "who",
+       "sort": null,
+       "type": "nominal"
+      }
+     }
+    }
+   ],
+   "height": 430,
+   "title": {
+    "text": "what the difference between them retains",
+    "anchor": "start",
+    "color": "#333333",
+    "fontSize": 10
+   },
+   "width": 250
+  }
+ ],
+ "spacing": 34,
+ "title": {
+  "text": [
+   "A difference between the two positions cancels what alignment does to both"
+  ],
+  "anchor": "start",
+  "color": "#111111",
+  "fontSize": 13,
+  "offset": 8,
+  "subtitle": [
+   "Prompts ending \"I should\", F21 and M03 pooled, so every cell sits at the same bare-infinitive",
+   "slot: 52 prompts, 50 lineages, 2,600 cells. Left, the base-to-aligned change in each position on",
+   "its own. Right, the same change differenced, paired inside the 24 scenarios that hold both",
+   "positions. Crossed (lineage, prompt) bootstrap, 2,000 reps, 95% intervals. Almost everything",
+   "alignment does survives on the left and cancels on the right; abstraction is the exception, and",
+   "it is the one this study can defend.",
+   "",
+   "FENCES. Ratings cover 0.242 of base mass and 0.296 of aligned mass, so the two arms are averaged",
+   "over different fractions of the distribution; the gap is uniform across scales and positions.",
+   "agency, specificity, assertiveness and arousal are pairwise 0.62-0.83 over 14,196 rated rows and",
+   "are ONE axis drawn four times. mediation sits on the boundary: its interval touches zero and its",
+   "p resamples between 0.03 and 0.05, so abstraction is the only difference here that is not",
+   "fragile."
+  ],
+  "subtitleColor": "#555555",
+  "subtitleFontSize": 10
+ },
+ "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json",
+ "datasets": {
+  "data-ec984d218672496d7c49cceae0722ecf": [
+   {
+    "z": 0
+   }
+  ],
+  "data-76da47c0b8b518818f36180b9d0d49c1": [
+   {
+    "scale": "abstraction",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.10892125416797649,
+    "lo": 0.05036067168608224,
+    "hi": 0.1623456695984824,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "abstraction",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.23685758875813034,
+    "lo": 0.16887059306774274,
+    "hi": 0.30855884279251095,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "agency",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.0976940971582354,
+    "lo": 0.01699103705659885,
+    "hi": 0.18290420873299615,
+    "p": 0.017,
+    "sig": "clears"
+   },
+   {
+    "scale": "agency",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.04863592255126781,
+    "lo": -0.02049589073469873,
+    "hi": 0.10876952447738722,
+    "p": 0.159,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "aggression",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.008127282389293056,
+    "lo": -0.004995367091128299,
+    "hi": 0.02553838794009192,
+    "p": 0.305,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "aggression",
+    "panel": "within each position",
+    "who": "institution",
+    "v": -0.001598789676243051,
+    "lo": -0.01328415094679306,
+    "hi": 0.008579715828926087,
+    "p": 0.738,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "arousal",
+    "panel": "within each position",
+    "who": "individual",
+    "v": -0.015540925065248512,
+    "lo": -0.07156381000261537,
+    "hi": 0.037550087606046646,
+    "p": 0.549,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "arousal",
+    "panel": "within each position",
+    "who": "institution",
+    "v": -0.024091249804173653,
+    "lo": -0.06837492837092321,
+    "hi": 0.017865609544792892,
+    "p": 0.233,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "assertiveness",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.0575002642554443,
+    "lo": -0.01374859295835301,
+    "hi": 0.12893221801757157,
+    "p": 0.12,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "assertiveness",
+    "panel": "within each position",
+    "who": "institution",
+    "v": -0.0041780984361126094,
+    "lo": -0.06807343394391523,
+    "hi": 0.05070487623336172,
+    "p": 0.855,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "collective",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.001535734890766527,
+    "lo": -0.00040892080281143263,
+    "hi": 0.00431204087026917,
+    "p": 0.164,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "collective",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.0005454616226867604,
+    "lo": -0.012452671734772302,
+    "hi": 0.009753442470756248,
+    "p": 0.817,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "deference",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.08329020336808224,
+    "lo": 0.01835653321743947,
+    "hi": 0.15313349725099146,
+    "p": 0.017,
+    "sig": "clears"
+   },
+   {
+    "scale": "deference",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.07997120987247897,
+    "lo": 0.04251097381168997,
+    "hi": 0.11947401505155228,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "delay",
+    "panel": "within each position",
+    "who": "individual",
+    "v": -0.010480140620404477,
+    "lo": -0.08221948652002971,
+    "hi": 0.04943505266358161,
+    "p": 0.659,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "delay",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.06057247308617297,
+    "lo": -0.008894571472202194,
+    "hi": 0.1307354689574904,
+    "p": 0.084,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "deliberation",
+    "panel": "within each position",
+    "who": "individual",
+    "v": -0.008848411932256273,
+    "lo": -0.06081514276548562,
+    "hi": 0.0396141851057358,
+    "p": 0.701,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "deliberation",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.016304994137908757,
+    "lo": -0.037255958918509045,
+    "hi": 0.07161963504002464,
+    "p": 0.505,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "directedness",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.26738788891704957,
+    "lo": 0.13942413554896296,
+    "hi": 0.39534783468985113,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "directedness",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.2115886058883616,
+    "lo": 0.12134928726514907,
+    "hi": 0.3100439684141541,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "fit",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.14399208348535808,
+    "lo": 0.08923594506078135,
+    "hi": 0.20320359297452706,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "fit",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.15342760612247996,
+    "lo": 0.10833817300776322,
+    "hi": 0.20608526809597585,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "harm",
+    "panel": "within each position",
+    "who": "individual",
+    "v": -0.0011664914006639382,
+    "lo": -0.003381528147742268,
+    "hi": 0.0,
+    "p": 0.047,
+    "sig": "clears"
+   },
+   {
+    "scale": "harm",
+    "panel": "within each position",
+    "who": "institution",
+    "v": -0.0013794326111959965,
+    "lo": -0.0035163706671137293,
+    "hi": -1.3917547301750737e-06,
+    "p": 0.047,
+    "sig": "clears"
+   },
+   {
+    "scale": "hedged",
+    "panel": "within each position",
+    "who": "individual",
+    "v": -0.07715646897393746,
+    "lo": -0.1400930131901673,
+    "hi": -0.015828699783453793,
+    "p": 0.013,
+    "sig": "clears"
+   },
+   {
+    "scale": "hedged",
+    "panel": "within each position",
+    "who": "institution",
+    "v": -0.09264369530481087,
+    "lo": -0.17628270324844322,
+    "hi": -0.013474136469113614,
+    "p": 0.027,
+    "sig": "clears"
+   },
+   {
+    "scale": "interiority",
+    "panel": "within each position",
+    "who": "individual",
+    "v": -0.041645891547009484,
+    "lo": -0.10781782409166528,
+    "hi": 0.030889451955873427,
+    "p": 0.247,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "interiority",
+    "panel": "within each position",
+    "who": "institution",
+    "v": -0.0764143586515682,
+    "lo": -0.15694768992179492,
+    "hi": 0.004798156433557957,
+    "p": 0.067,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "makes_better",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.1116459336827278,
+    "lo": 0.06516575795093145,
+    "hi": 0.1635388111162237,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "makes_better",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.12333339935062249,
+    "lo": 0.08115103481024694,
+    "hi": 0.1678723052592558,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "makes_worse",
+    "panel": "within each position",
+    "who": "individual",
+    "v": -0.017790325378605587,
+    "lo": -0.04685993814594194,
+    "hi": 0.011869531780375923,
+    "p": 0.247,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "makes_worse",
+    "panel": "within each position",
+    "who": "institution",
+    "v": -0.04143113641125251,
+    "lo": -0.08558588975022646,
+    "hi": 0.00054649755983457,
+    "p": 0.053,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "mediation",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.2364223850874061,
+    "lo": 0.13418116587282988,
+    "hi": 0.3536971652569139,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "mediation",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.12519449584651832,
+    "lo": 0.055145019274355875,
+    "hi": 0.19582250627052122,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "mundanity",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.004096358228051322,
+    "lo": -0.02362865074104022,
+    "hi": 0.02917474063032625,
+    "p": 0.774,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "mundanity",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.010349349013677234,
+    "lo": -0.013363571759997184,
+    "hi": 0.03752028838818797,
+    "p": 0.426,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "procedural",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.2149057362486504,
+    "lo": 0.1351635581927976,
+    "hi": 0.29875297620461716,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "procedural",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.14591649089674785,
+    "lo": 0.10082941648776088,
+    "hi": 0.20006455087518166,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "specificity",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.10290955459019013,
+    "lo": 0.03199597452205081,
+    "hi": 0.18425540324841486,
+    "p": 0.004,
+    "sig": "clears"
+   },
+   {
+    "scale": "specificity",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.05941776958433964,
+    "lo": -0.005686175196547407,
+    "hi": 0.11443710099227832,
+    "p": 0.066,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "superego",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.02362364142635487,
+    "lo": -0.01561237313645676,
+    "hi": 0.06148376765759399,
+    "p": 0.196,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "superego",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.032718956337098426,
+    "lo": -0.016380984620427638,
+    "hi": 0.08341266214621432,
+    "p": 0.151,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "target",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.06922766452450979,
+    "lo": -0.004703213896398417,
+    "hi": 0.14231665336938448,
+    "p": 0.071,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "target",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.04511320188570922,
+    "lo": -0.03271394771823534,
+    "hi": 0.13144497626854745,
+    "p": 0.258,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "termination",
+    "panel": "within each position",
+    "who": "individual",
+    "v": -0.15896183091036198,
+    "lo": -0.2663615908180308,
+    "hi": -0.05682412081083072,
+    "p": 0.001,
+    "sig": "clears"
+   },
+   {
+    "scale": "termination",
+    "panel": "within each position",
+    "who": "institution",
+    "v": -0.110827328246065,
+    "lo": -0.2164169015994556,
+    "hi": -0.020680116826813498,
+    "p": 0.021,
+    "sig": "clears"
+   },
+   {
+    "scale": "vocalisation",
+    "panel": "within each position",
+    "who": "individual",
+    "v": 0.1683742348049848,
+    "lo": 0.04791853695362336,
+    "hi": 0.29727049643778825,
+    "p": 0.004,
+    "sig": "clears"
+   },
+   {
+    "scale": "vocalisation",
+    "panel": "within each position",
+    "who": "institution",
+    "v": 0.08992445764907675,
+    "lo": -0.0044264219131930705,
+    "hi": 0.19444073099212802,
+    "p": 0.064,
+    "sig": "does not clear"
+   }
+  ],
+  "data-578cfdd896381b0bd04d6fefbd05af9f": [
+   {
+    "scale": "abstraction",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": -0.11039612785686229,
+    "lo": -0.18099204546415898,
+    "hi": -0.0514731618581632,
+    "p": 0.0,
+    "sig": "clears"
+   },
+   {
+    "scale": "agency",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.03848929302464089,
+    "lo": -0.04089551629135555,
+    "hi": 0.12273506140700258,
+    "p": 0.355,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "aggression",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.012248944091052183,
+    "lo": -0.004509139379836586,
+    "hi": 0.03515004251596704,
+    "p": 0.182,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "arousal",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.007323742550696593,
+    "lo": -0.04250366008847314,
+    "hi": 0.05808811260311268,
+    "p": 0.817,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "assertiveness",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.05138440357281662,
+    "lo": -0.02214757869983488,
+    "hi": 0.1232907239502375,
+    "p": 0.162,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "collective",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.0023609027957230628,
+    "lo": -0.00768557154739314,
+    "hi": 0.017564877876629872,
+    "p": 0.845,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "deference",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.005981412036803826,
+    "lo": -0.05694652667162502,
+    "hi": 0.06610294098838067,
+    "p": 0.84,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "delay",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": -0.06109059239756258,
+    "lo": -0.16379461310552582,
+    "hi": 0.039539031956766814,
+    "p": 0.221,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "deliberation",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": -0.004820847246012616,
+    "lo": -0.06536058425336738,
+    "hi": 0.05912841467570932,
+    "p": 0.879,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "directedness",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.04242835170409334,
+    "lo": -0.08172189129191271,
+    "hi": 0.16106507560843422,
+    "p": 0.506,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "fit",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.007427529721486527,
+    "lo": -0.05441516229931741,
+    "hi": 0.06771794790246351,
+    "p": 0.85,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "harm",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.00020341650554639602,
+    "lo": -0.0023784924987825242,
+    "hi": 0.0028012510099580134,
+    "p": 0.883,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "hedged",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.04164194615830902,
+    "lo": -0.038317048057271375,
+    "hi": 0.1296532536265835,
+    "p": 0.32,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "interiority",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.05130687797119445,
+    "lo": -0.028314323749092218,
+    "hi": 0.12991987496465546,
+    "p": 0.179,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "makes_better",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": -0.006954273933334135,
+    "lo": -0.06735588670154272,
+    "hi": 0.04979615016081995,
+    "p": 0.836,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "makes_worse",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.02822872037543967,
+    "lo": -0.014341385521677292,
+    "hi": 0.07439787632621304,
+    "p": 0.219,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "mediation",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.10199724606590732,
+    "lo": 0.00031319538627068796,
+    "hi": 0.20903601047990403,
+    "p": 0.05,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "mundanity",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": -0.010301033395444028,
+    "lo": -0.042291561603293795,
+    "hi": 0.01887350009568149,
+    "p": 0.535,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "procedural",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.07192556844622121,
+    "lo": -0.004876381394272314,
+    "hi": 0.14873856152352963,
+    "p": 0.067,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "specificity",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.03144089109613401,
+    "lo": -0.040427680279126854,
+    "hi": 0.10998591245634921,
+    "p": 0.41,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "superego",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": -0.0020083903513637975,
+    "lo": -0.058644504614712926,
+    "hi": 0.061012223559363324,
+    "p": 0.918,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "target",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.011122244596162421,
+    "lo": -0.08908012555753976,
+    "hi": 0.11490728759465366,
+    "p": 0.873,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "termination",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": -0.06835939573699944,
+    "lo": -0.1719762914464132,
+    "hi": 0.033026630235365756,
+    "p": 0.191,
+    "sig": "does not clear"
+   },
+   {
+    "scale": "vocalisation",
+    "panel": "differenced",
+    "who": "individual - institution",
+    "v": 0.08828065969192805,
+    "lo": -0.0450952755409208,
+    "hi": 0.21825855262127358,
+    "p": 0.185,
+    "sig": "does not clear"
+   }
+  ]
+ },
+ "params": []
+}

@@ -322,3 +322,10 @@ malignment/ui_dist/
 ui/test-results/
 ui/playwright-report/
 ui/blob-report/
+
+# Pre-digested position cells: `f21.json` + `m03.json` (60 MB of JSON) as one
+# 11.5 MB parquet, rebuilt in about a second by `institutional/digest.py`.
+# Derived and rebuildable, so it follows the rule above -- and deliberately NOT a
+# witness: every producer keeps reading the JSON, which is what lets `verify()`
+# check the digest against a booked artifact rather than against itself.
+experiments/slot_ratings/institutional/results/base_side/position_cells.parquet
