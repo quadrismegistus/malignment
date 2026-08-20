@@ -273,7 +273,7 @@ def execute(b, models, roots, venv, a):
         #: MACHINE so the next offer query cannot hand it back, then stop.
         cloud.blocklist(best.get("machine_id"), "ssh silent for 6 min after create")
         if cloud.destroy_verified(iid):
-            cloud.state({})
+            cloud.state(forget=iid)
             raise SystemExit("  UNREACHABLE after 6 min -- machine blocklisted, "
                              "instance destroyed and CONFIRMED gone.")
         _billing(cloud, iid, "unreachable AND destroy did not take")
@@ -397,7 +397,7 @@ def execute(b, models, roots, venv, a):
         print("  HF UNREACHABLE from this machine -- blocklisted.\n%s"
               % (r.stdout or "")[-300:])
         if cloud.destroy_verified(iid):
-            cloud.state({})
+            cloud.state(forget=iid)
             raise SystemExit("  destroyed and CONFIRMED gone. Re-run to take a "
                              "different offer.")
         _billing(cloud, iid, "HF unreachable AND destroy did not take")
@@ -577,7 +577,7 @@ def execute(b, models, roots, venv, a):
     if not cloud.destroy_verified(iid):
         _billing(cloud, iid, "verification PASSED but destroy did not take")
         return 1
-    cloud.state({})
+    cloud.state(forget=iid)
     print("  destroyed   %s  (byte counts verified first, destroy CONFIRMED)" % iid)
     return 0
 

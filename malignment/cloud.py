@@ -73,16 +73,64 @@ def box(name):
     return b
 
 
-def state(new=None):
-    if new is not None:
+def _raw_state():
+    if not os.path.exists(STATE):
+        return {}
+    with open(STATE, encoding="utf-8") as fh:
+        try:
+            return json.load(fh)
+        except ValueError:
+            return {}
+
+
+def states():
+    """{instance_id: box_state} for EVERY tracked box.
+
+    **THIS FILE HELD EXACTLY ONE BOX, AND THE FLEET IS TWELVE.** `state(new)` wrote
+    a single dict over the whole file, so launching a second box ERASED the first
+    -- which then billed with nothing tracking it, and `destroy_verified` reads
+    its host and port from here. The 12-box plan could not have survived its own
+    second launch, and the failure is silent: the first box just stops being
+    mentioned.
+
+    Old flat files (one box at top level) are read as a single entry rather than
+    migrated, so the box running while this was written stays tracked.
+    """
+    d = _raw_state()
+    if not d:
+        return {}
+    if "instance_id" in d:                     # legacy flat shape
+        return {str(d["instance_id"]): d}
+    return {str(k): v for k, v in d.items()}
+
+
+def state(new=None, forget=None):
+    """Read the most recent box, or record/forget one BY INSTANCE ID.
+
+    `state()` still returns a single box so existing callers keep working; use
+    `states()` when you mean all of them.
+    """
+    cur = states()
+    if forget is not None:
+        cur.pop(str(forget), None)
         os.makedirs(os.path.dirname(STATE), exist_ok=True)
         with open(STATE, "w", encoding="utf-8") as fh:
-            json.dump(new, fh, indent=1)
+            json.dump(cur, fh, indent=1)
+        return cur
+    if new is not None:
+        if not new:                            # state({}) -- clear everything
+            cur = {}
+        else:
+            iid = str(new.get("instance_id") or "unknown")
+            cur[iid] = new
+        os.makedirs(os.path.dirname(STATE), exist_ok=True)
+        with open(STATE, "w", encoding="utf-8") as fh:
+            json.dump(cur, fh, indent=1)
         return new
-    if os.path.exists(STATE):
-        with open(STATE, encoding="utf-8") as fh:
-            return json.load(fh)
-    return {}
+    if not cur:
+        return {}
+    #: Most recently recorded, which is what a single-box caller means.
+    return list(cur.values())[-1]
 
 
 def vastai(*args, capture=True):
