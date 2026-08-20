@@ -17,3 +17,9 @@
 # `manifest.json` enumerates the pairs, so together they pin a population that
 # a later run cannot be compared to by name alone.
 words.jsonl
+# AND ITS FLIP-TIES TWIN, which a bare `words.jsonl` does not match. Caught
+# 2026-08-20 while checking a working tree before a cross-seat push: 240.7 MB
+# sitting untracked-and-not-ignored, one `git add` from a public repo. The
+# tie-break robustness run writes the same five files with a `_flipties` suffix,
+# so every rule here needed the twin and only this one was missing it.
+words_flipties.jsonl

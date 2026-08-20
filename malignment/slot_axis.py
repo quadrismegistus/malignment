@@ -477,7 +477,26 @@ class Axis:
         n_post = (sum(post.get(w, 0.0) * S.get(w, 0.0) for w in vocab) / tp
                   if tp else 0.0)
         dN_renorm = n_post - n_base
+        #: **THE WORDS THAT CARRIED IT** (RH, 2026-08-18, for
+        #: `experiments/displacement_axis`). `c[w] = dP[w] * S[w]` is computed
+        #: above and was thrown away, so a cell's `dN` could not be traced to the
+        #: words that produced it -- and a dN resting on ONE word was
+        #: indistinguishable from one carried by fifty.
+        #:
+        #: Only words whose mass actually moved are returned; `dP == 0` carries no
+        #: contribution by construction and would triple the payload with zeros.
+        #: The remainder sums to `dN` exactly, which is the property that makes it
+        #: auditable rather than illustrative.
+        #:
+        #: NOTE the axis payload's separate `scores` field is TAGGED WORDS ONLY.
+        #: This is the whole vocabulary, which is the difference between checking
+        #: displacement and checking it among the words already assumed to matter.
+        contributions = sorted(
+            ({"word": w, "dP": dP[w], "s": S.get(w, 0.0), "c": c[w]}
+             for w in vocab if dP[w] != 0.0),
+            key=lambda r: -abs(r["c"]))
         return {"dN": dN, "suppression": supp, "substitution": subs,
+                "contributions": contributions,
                 "dN_renorm": dN_renorm,
                 "base_scored_mass": float(tb), "post_scored_mass": float(tp),
                 #: **A REFUSAL, NOT A CAVEAT.** Where the conventions disagree in
