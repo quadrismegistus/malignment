@@ -241,35 +241,45 @@ __marimo__/
 # than degrade. An ignored file is invisible; a silently smaller answer is worse.
 lexicons/external/
 
-# MEASURED DATA IS NOW COMMITTABLE (RH, 2026-08-20). The rule that stood here
-# excluded all of `data/` from this PUBLIC repo on the grounds that a twp jsonl
-# carries the prompts verbatim, transgressive battery included. RH's ruling:
-# "we dont care if prompts are committed". So `data/` is tracked.
+# `data/` IS IGNORED AGAIN, WITH NAMED EXCEPTIONS (RH, 2026-08-20, second ruling).
 #
-# THE ONE THING THAT STILL CANNOT BE COMMITTED IS LICENSED, NOT SENSITIVE:
-# `lexicons/external/worddb.byu.txt` (BNC/COCA/COHA/SOAP, purchased access,
-# redistribution prohibited). Its rule is above and it stays. The distinction
-# now governing this file is REDISTRIBUTION RIGHTS, not disclosure.
+# The first ruling today removed `data/` wholesale -- "we dont care if prompts are
+# committed" -- and that was about the transgressive battery. But `data/` mostly
+# does not hold prompts; it holds FLEET STATE, and un-ignoring it exposed run
+# plans and live cloud bookkeeping that nobody meant to track. `cloud_state.json`
+# in particular mutates on every fleet run, so committing it snapshots a moving
+# object and churns the history.
 #
-# The CJK dictionary under `data/dict/` was already tracked by exception and
-# still is, for the reason it always was: dict_sha b16011275c42955c is computed
-# from it, and a checkpoint measured against a different dict is a different
-# measurement.
+# So: ignore the directory's CONTENTS and name what is wanted.
 #
-# Note for whoever adds the first big tree: `data/` is ~30 MB here, ~22 MB of it
-# `data/pos_context/`. Large runs still write to $MALIGNMENT_CORPUS/twp_malignment/
-# and belong there rather than in git -- committable is not the same as commit it.
-
-# A CACHE IS NOT DATA, and this exclusion is not the one that was just removed.
-# `data/pos_context/` is a hashstash of spaCy POS tags keyed on
-# (tagger, prompt, word) -- 22.8 MB here, 190 MB in the archive per
-# malignment/pos.py -- with a `__written_at__` on every row, so it rewrites on
-# every run and would churn the history. It is regenerable by re-tagging, which
-# is the whole test: nothing is lost by not having it. It DOES contain prompts,
-# and under the old rule that was the reason to exclude it; now the reason is
-# only that it is a cache.
-data/pos_context/
+# **THE TRAILING SLASH MATTERS AND IS WHY THIS IS `data/*`.** `data/` excludes the
+# DIRECTORY, git never descends into it, and a `!data/thing.json` below it is
+# silently inert -- it does not error, it just never matches. `data/*` excludes
+# the contents instead, which is the only form under which the negations work.
+# Verified with `git check-ignore -v` on every path below, not assumed.
+data/*
+# the CJK dictionary IS the instrument: dict_sha b16011275c42955c is computed from
+# it, and a checkpoint measured against a different dict is a different measurement
+!data/dict/
+!data/dict/**
+# fleet artifacts another seat committed at 41075e8 under the first ruling, kept
+# tracked deliberately: rates are a measurement, the blocklist and the shard plan
+# are the record of what a run was pointed at
+!data/fleet_shards.json
+!data/cloud_bad_machines.json
+!data/model_twp_rates.jsonl
+#
+# NOT un-ignored, and each for its own reason rather than by omission:
+#   data/cloud_state.json   live, rewritten every fleet run
+#   data/pilot_shard.json   superseded by fleet_shards.json
+#   data/pilot2_plan.json   a plan for a run already made
+#   data/pos_context/       a hashstash CACHE of spaCy POS tags keyed on
+#                           (tagger, prompt, word), 22.8 MB here and 190 MB in the
+#                           archive per malignment/pos.py, with a `__written_at__`
+#                           on every row. Regenerable by re-tagging, which is the
+#                           test that makes it a cache and not data.
 *.lock
+
 
 # Scratch work does not live in the repo — see experiments/README.md
 sandbox/
