@@ -423,6 +423,79 @@ Not a softer word for denial. **The model changes what happened to her.** The ot
 
 **Six of the fifteen most consistent displacing frames are institutional, yet institutional has the WEAKEST aggregate sign consistency of any domain** (53%, z=+1.7, the only domain that is not significant). So institutional is bimodal rather than uniformly weak: the strongest individual displacers and the least consistent field. Since institutional carries the F21 political-economy argument, this is probably worth more than the aggregate is.
 
+## Can the movement be NAMED? Direction yes, magnitude partly, and one day lost to a broken benchmark
+
+The question behind `rated.py` and the slot_ratings instruments: the axis says mass moves, but can rating scales built by hand say WHERE it goes, and do they beat a general-purpose embedding at it? Two quantities have to be kept apart, because they answer differently and conflating them cost a full day.
+
+**DIRECTION is named, decisively.** Per-lineage rho between a scale and the mover verdict (+1 riser / -1 faller / 0), median per frame, sign test across frames (`rho_domains.py`, 222 frames after dedupe):
+
+    IDENTITY (59)          INSTITUTIONAL (55)        VIOLENCE (47)          SEXUAL (42)
+    vocalisation +0.101    fit          +0.109       harm         -0.113    mundanity    +0.108
+    fit          +0.096    makes_better +0.093       makes_worse  -0.091    harm         -0.088
+    harm         -0.092    harm         -0.078       makes_better +0.088    aggression   -0.084
+    interiority  +0.087    directedness +0.046       mundanity    +0.072    directedness -0.074
+
+`harm` in identity agrees in sign on **47 of 47 frames** (p=1.4e-14); `fit` on 55 of 59. Scales significant at Bonferroni 0.05/12: identity 10, sexual 6, violence 5, institutional 3.
+
+**And the domains genuinely differ** -- Kruskal over per-frame values rejects a common direction on **10 of the 12 scales**. There is no single alignment direction being applied everywhere. Three invariants hold across all four (`harm` falls, `makes_better` rises, `fit` rises) and everything thicker is scene-specific: `vocalisation` is identity's signature and is absent in sexual (+0.101 vs -0.019, p=1.2e-05); `directedness` is the only scale that changes sign between institutional (+0.046, alignment makes words MORE targeted) and sexual (-0.074).
+
+The sexual instrument reproduces X_metonymy on twelve frames it never saw: `genitality` -0.107 on **12 of 12** (p=0.0005), `explicitness` -0.101, `euphemism` **+0.093**, `charge` -0.068. Down the explicitness ladder, off the genitals, into euphemism -- and the destination scales are `interiority` (+0.101) and `mundanity` (+0.082), which are v6's, not the sexual instrument's. The slide does not land in a softer sexual vocabulary; it lands in an inward and ordinary one.
+
+### The benchmark was scored by a rule no model could use
+
+`variance_decomp.py` and `variance_repeated.py` fit models on half A and scored them on half B, while computing the "ceiling" as `np.polyfit(ya, yb, 1)` -- a slope fitted USING the target. Two quantities under one label: for two noisy halves with correlation rho the first gives `1-2(1-rho)` and the second `rho^2`. `protocol_check.py` measures it on 255 frames:
+
+    ceiling AS REPORTED (slope fitted on the target) : +0.260
+    a PERFECT predictor, scored by the models' rule  : -0.020
+    median corr(half A net, half B net)              : +0.508
+
+**A perfect predictor of half A earns -0.020 under the rule every model was scored by.** With the eight fitting lineages a half-split actually had, perfection earns -0.084. So the band every model occupied, -0.09 to +0.08, was at or above flawless, and was reported as explaining nothing. Four conclusions came out of that and all four reverse: "sexual is unexplained", "every model explains something in identity and nothing anywhere else", "the axes predict direction but not magnitude", and a purpose-built sexual instrument tying the wrong one at p=0.97.
+
+The defect survived checking because **it failed everywhere equally** -- 12 named scales, a 1024-dim embedding, a 9-scale custom instrument and a single column all landed in the same small-negative band, and uniform failure across unrelated predictors reads as a fact about the world. I even invented a degrees-of-freedom mechanism for it, which the one-column test then refuted without prompting me to re-examine the benchmark.
+
+R2 also rises steeply with the fitting half, which is what argues for leave-one-out rather than merely a larger split:
+
+    lineages to fit    1       2       4       8      12      16
+    median R2      -2.626  -1.175  -0.445  -0.084  +0.035  +0.094
+
+### Leave-one-out, with a benchmark models are allowed to reach
+
+`loo.py` / `loo_all.py`. Train on the MEAN net movement over n-1 lineages, test on the held-out one: scale matches by construction, and **`emp_mean` -- the n-1 mean scored by the identical rule -- is the reachable benchmark**. A model beating it has denoised the data itself. Compare to it, never to 1.0 and never to a ceiling.
+
+Three instruments, identical words within each comparison (`loo_all.py`, 173 frames carrying both v6 and inst v3):
+
+    emp_mean      0.0243   100%              bge_pc10      0.0152    62%
+    v6            0.0101    41%              bge_pc25      0.0226    93%   p=0.76
+    inst          0.0130    54%              named+bge     0.0243   100%   p=0.15
+    v6+inst       0.0191    79%              bge_pc25+p    0.0272   112%   p=3.1e-06
+    v6+inst+p     0.0226    93%   p=0.93     named+bge+p   0.0261   108%   p=0.00081
+
+**Magnitude is named too, at the level of the data itself.** 25 named scales plus base probability reach 93% of the benchmark and are statistically indistinguishable from it (p=0.93). At matched parameters the named set and the embedding are **exactly level, 0.0226 apiece**. Only base-probability-augmented bge is ahead.
+
+Three structural facts fall out:
+
+- **No single name predicts magnitude.** All twelve v6 scales are negative alone (best: `makes_better` -0.0059). Direction is carried by single axes; magnitude exists only in their combination. These are different objects.
+- **Base probability alone is nothing** (-0.0045 v6-set, -0.083 under the old protocol), and the names add on top of it (p=0.00034). Where a word started is not what the axes were competing with.
+- **The domains split, and the split is legible.**
+
+        domain          n   emp_mean   bge_pc25   v6+inst
+        identity       71     0.0272     0.0351    0.0278     embedding wins
+        institutional  53     0.0232     0.0155    0.0173     names win
+        violence       49     0.0211     0.0192    0.0197     names win
+
+Deliberately constructed normative dimensions match a distributional representation in institutional and violence frames and lose to it by 25% in identity. In identity, `named+bge` (0.0343) is WORSE than bge alone (0.0351), the signature of named columns adding noise rather than supplying missing signal.
+
+**One reading this suggests and does not establish.** Alignment's institutional operation runs along dimensions somebody wrote down -- deference, procedural, harm are in the actual specifications -- while what happens to identity words is corpus residue that was never legislated. The legislated part is articulable in the vocabulary of the legislation; the unlegislated part is only describable distributionally. **The confound runs in exactly the direction of the finding**: institutional frames get a purpose-built 13-scale instrument and identity frames get a general one, so "our identity scales are bad" predicts the identical pattern. Separating them needs an identity-specific instrument built the way the institutional one was, and that has not been run.
+
+### Fences on this section
+
+- **bge is not a neutral yardstick.** It is a language model trained on the same kind of corpus, so the comparison measures how much of the operation is corpus-distributional, not whether hand-built scales are any good. It is a ceiling on naming, not a contest.
+- **The horse race is fragile.** It moved from bge-ahead-by-0.0035 to a dead tie when 48 duplicate rows were removed. A number that flips under bookkeeping should not carry argumentative weight. The direction results moved by nothing comparable.
+- **Magnitude was never what the theory asked for.** Metonymic displacement is a claim about which way mass moves. The R2 work is downstream of the argument and should not lead it.
+- **The sexual comparison is 13 frames** and every paired p-value against v6 is 0.64 to 1.0. Direction-consistent, underpowered, not established. Its `sex+p 144% of benchmark` is a 13-frame median against a benchmark of 0.0076.
+- **`variance_repeated.json` and `sexual_scales.json` were produced under the broken scoring** and are NOT comparable to the loo numbers. They are emitted in the long CSVs tagged `analysis='half_split_SUPERSEDED'` so a join cannot mix them silently, and their `% ceiling` column is deleted rather than caveated.
+- **24 prompts carry three item_ids each**, differing only in declared pole set, with byte-identical movement (`dedupe.check` verifies: 48 copy-pairs, 0 differ). All 72 sit in identity. Every analysis here calls `dedupe.keep()` FIRST. The pre-dedupe identity profile had `mundanity` at +0.097 and `makes_worse` at -0.071; both flip sign once the triplicates stop being counted three times.
+
 ## Fences
 
 - **Corpus-level only.** No single frame supports a displacement claim; 13 of 287 items clear a 95% bar against the per-item null.
@@ -451,5 +524,18 @@ So `dN_position` conflates movement along the axis with the two arms having diff
     results/<run>/mechanism.jsonl            reorder / sharpen / interaction, rank statistics
     results/<run>/mechanism_flipties.jsonl   the tie-break robustness run
     results/<run>/axis_share.jsonl           |D|, cos_theta, r2, and the null draws
+
+    results/<run>/long/predict_frames.csv     one row per (analysis, comparison, frame,
+                                             model) with its held-out R2. `emp_mean` is
+                                             the REACHABLE BENCHMARK, not a model.
+    results/<run>/long/scale_rho.csv         one row per (frame, scale): per-frame median
+                                             rho, and that scale's one-column R2
+    results/<run>/long/protocol_ceiling.csv  the two scoring rules, per frame
+    results/<run>/long/protocol_growth.csv   held-out R2 against fitting-half size
+    results/<run>/loo.json                   leave-one-out, v6 only
+    results/<run>/loo_all.json               leave-one-out, three instruments
+    results/<run>/rho_domains.json           per-frame rho and one-column R2, all scales
+    results/<run>/base_prob_share.json       SUPERSEDED protocol; kept for the record
+    results/<run>/sexual_scales.json         SUPERSEDED protocol; kept for the record
 
 **`words.jsonl` is gitignored and "just regenerate it" is only true while the store holds still.** The population is discovered, so once an ingest lands the same command writes a different population. pilot1's and pilot2's word-level rows exist in the working tree and nowhere else, and that is a real exposure rather than a tidy exclusion.

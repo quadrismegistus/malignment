@@ -1,4 +1,26 @@
-"""The same decomposition over MANY random lineage splits, not one.
+"""SUPERSEDED 2026-08-20. Use `loo.py` / `loo_all.py`. Kept for the record.
+
+WHY IT IS WRONG, not merely improved on. Models here are fit on half A and scored
+on half B, while the "ceiling" is `np.polyfit(ya, yb, 1)` -- a slope fitted USING
+yb, the target. Two different rules under one label. `protocol_check.py`
+regenerates the consequence: a PERFECT predictor of half A, scored by the models'
+own rule, earns -0.018, not the +0.264 printed here as the ceiling. With the
+eight fitting lineages every split actually had, perfection earns -0.071.
+
+So the band every model occupied, -0.09 to +0.08, was at or above flawless, and
+the conclusions drawn from it -- "sexual is unexplained", "every model explains
+something in identity and nothing anywhere else", a purpose-built sexual
+instrument tying the wrong one at p=0.97 -- were artifacts of the benchmark. Under
+leave-one-out all of them reverse.
+
+The `% ceiling` column is REMOVED rather than caveated: it divided by a number no
+model could reach, and a caveated ratio still gets read as a ratio. Frames here
+are also NOT deduplicated -- 24 prompts carry three item_ids each -- so its counts
+and p-values over-state n in `identity` by about 1.8x. See `dedupe.py`.
+
+The original docstring follows.
+
+The same decomposition over MANY random lineage splits, not one.
 
     python experiments/displacement_axis/variance_repeated.py --splits 20
 
@@ -144,19 +166,22 @@ def main(argv=None):
           % (len(rows), a.splits, int(np.median([r["n_lineages"] for r in rows])),
              int(np.median([r["n_words"] for r in rows]))))
     ceil = float(np.median([r["mean_ceiling"] for r in rows if "mean_ceiling" in r]))
-    print("ceiling (half A predicting half B), averaged over splits: %.3f" % ceil)
+    print("NOT-A-CEILING (slope fitted on the target; unreachable by any model "
+          "here): %.3f" % ceil)
     print("  its SPREAD across splits of one frame: median sd %.3f\n"
           % float(np.median([r["sd_ceiling"] for r in rows if "sd_ceiling" in r])))
-    print("  %-22s %9s %9s %9s %11s"
-          % ("model", "mean R2", "sd/split", "% ceiling", "one-split R2"))
+    print("  %-22s %9s %9s %11s"
+          % ("model", "mean R2", "sd/split", "one-split R2"))
     ONE = {"bge_axis": -0.009, "bge_pcs": 0.023, "best_single": 0.049,
            "named_all": 0.034, "named_plus_axis": 0.051, "named_plus_pcs": 0.101}
     for m in MODELS[:-1]:
         v = [r["mean_" + m] for r in rows if "mean_" + m in r]
         sd = [r["sd_" + m] for r in rows if "sd_" + m in r]
-        print("  %-22s %9.3f %9.3f %8.0f%% %11.3f"
+        #: the "% of ceiling" column that stood here is gone: it divided by a
+        #: quantity scored under a different rule. See this file's header.
+        print("  %-22s %9.3f %9.3f %11.3f"
               % (m, float(np.median(v)), float(np.median(sd)),
-                 100 * float(np.median(v)) / ceil, ONE.get(m, float("nan"))))
+                 ONE.get(m, float("nan"))))
     print("\nIS THE GAP BIGGER THAN THE SPLIT NOISE?")
     for x, y in (("best_single", "named_all"), ("named_plus_pcs", "named_all"),
                  ("named_plus_pcs", "bge_pcs"), ("bge_pcs", "bge_axis")):
