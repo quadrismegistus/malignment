@@ -49,6 +49,34 @@ says the two runs were "keyed the same way, so the two join on (prompt, text_sha
 with no re-derivation" -- the stash keys on (embedder, prompt, text), the BLT
 shards on (prompt, text_sha), and text is what connects them.
 
+## ONE ROW PER PASSAGE, WITH POINTERS DOWN TO THE OTHER TWO GRAINS
+
+There are three grains and this file is the middle one:
+
+    passage    THIS TABLE. Both axes are defined here and it is the analysis unit.
+    sentence   the bge stash holds n_sents vectors of 1024 floats per passage. The
+               drift family COLLAPSES them -- mean_drift is the mean step between
+               consecutive sentences, total_drift the diameter of the whole set --
+               so the sentences do not survive into these columns.
+    byte       BLT's `.f32` holds per-byte surprisal; `bits_per_byte` is its mean.
+
+**A row therefore carries the KEY to each lower grain rather than the data.**
+`bge_embedder` + `prompt` + `text` is exactly the stash key, so the sentence
+vectors are one `st.get()` away. `blt_box` + `blt_shard` + `blt_row` + `blt_n`
+locate the per-byte block in the fleet's flat float32. Nothing is duplicated and
+nothing is unreachable.
+
+A per-sentence table is deliberately NOT built: 4.4M sentences at 1024 float32
+each is ~18 GB, and the step distances that drift is made of are recomputable from
+the stash in seconds.
+
+## Enough to join back to ClickHouse
+
+`model`, `sample_idx`, `role`, `pair`, `prompt_id`, `temp`, `seed`,
+`gen_n_tokens`, `finish_reason` come from `gen_sequences`, which is also where the
+TEXT is taken from -- so the text in this file is the authoritative one and not a
+re-derivation. `(corpus, model, prompt, sample_idx)` is the gen_sequences key.
+
 ## Splitter rides on every row
 
 `splitter` is a column, not a footnote. The ingest that wrote these vectors says
@@ -73,6 +101,8 @@ DATA = os.path.join(os.environ.get("MALIGNMENT_DATA",
                     "jakobson_space")
 OUT = os.path.join(DATA, "passages.parquet")
 MANIFEST = os.path.join(HERE, "results", "population_manifest.json")
+SIDECAR = os.path.join(DATA, "passages_manifest.json")   # beside the data
+CORPORA = ("passage", "f11_l2", "y")
 NS = {"en": "BAAI/bge-m3|nltk-en|refuse-untrunc-2026-08-14",
       "zh": "BAAI/bge-m3|stanza-zh|refuse-untrunc-2026-08-14"}
 
@@ -103,72 +133,131 @@ def metrics(sv):
                 ordering=round(float(step.mean()) - mp, 6))
 
 
+def ch_rows():
+    """gen_sequences for our corpora: the AUTHORITATIVE text plus every CH key."""
+    import subprocess
+    cols = ("corpus", "model", "prompt", "sample_idx", "role", "pair", "prompt_id",
+            "temp", "seed", "n_tokens", "finish_reason", "text")
+    sql = ("SELECT %s FROM malign_logits.gen_sequences WHERE corpus IN (%s) "
+           "AND forced_word='' FORMAT JSONEachRow"
+           % (", ".join(cols), ",".join("'%s'" % c for c in CORPORA)))
+    pr = subprocess.Popen(["clickhouse", "client", "-q", sql],
+                          stdout=subprocess.PIPE, text=True, bufsize=1 << 20)
+    #: CLOSE THE CHILD DOWN ON EARLY EXIT. A `--limit` run breaks out of this
+    #: generator while clickhouse is still streaming, which leaves it writing to a
+    #: closed pipe (errno 32) and, worse, leaves the process alive. try/finally
+    #: makes the smoke run and the real run behave the same way.
+    try:
+        for line in pr.stdout:
+            line = line.strip()
+            if line:
+                yield json.loads(line)
+    finally:
+        try:
+            pr.stdout.close()
+        except Exception:
+            pass
+        if pr.poll() is None:
+            pr.terminate()
+        pr.wait()
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int)
-    ap.add_argument("--flush", type=int, default=25000)
+    ap.add_argument("--flush", type=int, default=20000)
     a = ap.parse_args(argv)
     import numpy as np, pyarrow as pa, pyarrow.parquet as pq
     from hashstash import HashStash
 
-    #: BLT metadata: the surprisal axis, already per passage.
+    #: BLT metadata, carrying WHICH SHARD AND ROW so the per-byte block stays
+    #: reachable. `row`/`n` index into the sibling .f32; without the box and shard
+    #: they point at nothing.
     blt = {}
     for f in sorted(glob.glob(SHARDS)):
         if ".skipped." in f:
             continue
+        box = os.path.basename(os.path.dirname(f))
+        shard = os.path.basename(f)
         for line in open(f):
             d = json.loads(line)
+            d["_box"], d["_shard"] = box, shard
             blt[(d["prompt"], d["text_sha"])] = d
-    print("BLT metadata rows: %d" % len(blt))
+    print("BLT metadata rows: %d over %d shard files"
+          % (len(blt), len(set((d["_box"], d["_shard"]) for d in blt.values()))))
 
-    #: texts, so the stash (keyed on text) can meet BLT (keyed on text_sha)
-    text_of = {}
-    with gzip.open(PASSAGES, "rt") as fh:
-        for line in fh:
-            d = json.loads(line)
-            t = d.get("text") or ""
-            text_of[(d.get("prompt"), hashlib.sha256(t.encode()).hexdigest()[:16])] = (
-                t, d.get("corpora") or [], d.get("script"))
-    print("BLT passage texts: %d" % len(text_of))
+    #: ARM AND LINEAGE, because ClickHouse does not have them for f11_l2.
+    #: gen_sequences carries `role` and `pair` for `passage` and `y` and leaves
+    #: BOTH EMPTY on all 192,119 f11_l2 rows -- which would make the arm
+    #: unrecoverable on the one corpus the drift axis was validated against.
+    #: roster.lineages() is {base: [base, aligned, ...]}, so membership gives the
+    #: arm and the key gives the lineage. Used to FILL, never to overwrite: where
+    #: CH has a role it wins, and `arm_src` records which answered.
+    from malignment import roster as _roster
+    _lin = _roster.lineages()
+    arm_of, lineage_of = {}, {}
+    for base, members in _lin.items():
+        for m in members:
+            lineage_of[m] = base
+            arm_of[m] = "base" if m == base else "aligned"
 
     st = HashStash(STASH, engine="lmdb", serializer="hashstash",
                    compress="lz4", b64=True, flat=True)
     os.makedirs(DATA, exist_ok=True)
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
-    for f in glob.glob(os.path.join(DATA, "passages.parquet")):
-        os.remove(f)
+    if os.path.exists(OUT):
+        os.remove(OUT)
 
-    buf, rows, part, miss_vec, miss_blt = [], 0, 0, 0, 0
-    seen = set()
-    writer = None
-    for (prompt, sha), meta in blt.items():
+    buf, rows, writer = [], 0, None
+    seen, no_blt, no_vec = set(), 0, 0
+    for r in ch_rows():
         if a.limit and rows >= a.limit:
             break
-        got = text_of.get((prompt, sha))
-        if got is None:
-            miss_blt += 1
+        text = r.get("text") or ""
+        sha = hashlib.sha256(text.encode()).hexdigest()[:16]
+        key = (r["prompt"], sha)
+        if key in seen:
             continue
-        text, corpora, script = got
+        meta = blt.get(key)
+        if meta is None:
+            no_blt += 1
+            continue
+        script = meta.get("script")
         ns = NS.get("zh" if script == "zh" else "en")
         try:
-            sv = st.get({"embedder": ns, "prompt": prompt, "text": text})
+            sv = st.get({"embedder": ns, "prompt": r["prompt"], "text": text})
         except Exception:
             sv = None
         if sv is None:
-            miss_vec += 1
+            no_vec += 1
             continue
-        if (prompt, sha) in seen:
-            continue
-        seen.add((prompt, sha))
-        m = metrics(np.asarray(sv, dtype=np.float32))
-        r = dict(text_sha=sha, prompt=prompt, script=script,
-                 corpora=",".join(sorted(corpora)),
-                 splitter=ns.split("|", 1)[1],
-                 bits_per_byte=meta.get("bits_per_byte"),
-                 blt_ref=meta.get("ref"), n_bytes=meta.get("n_bytes"),
-                 n_chars=meta.get("n_chars"), blt_n_tokens=meta.get("n_tokens"))
-        r.update(m)
-        buf.append(r); rows += 1
+        seen.add(key)
+        row = dict(
+            #: identity, and the text itself -- from gen_sequences, so it is the
+            #: authoritative copy rather than a re-derivation
+            text_sha=sha, prompt=r["prompt"], text=text,
+            corpus=r["corpus"], corpora=",".join(sorted(meta.get("corpora") or [])),
+            script=script,
+            #: ClickHouse: (corpus, model, prompt, sample_idx) is the gen_sequences key
+            model=r.get("model"), sample_idx=r.get("sample_idx"),
+            role=r.get("role"), pair=r.get("pair"), prompt_id=r.get("prompt_id"),
+            arm=(r.get("role") or arm_of.get(r.get("model")) or ""),
+            arm_src=("clickhouse" if r.get("role")
+                     else ("roster" if arm_of.get(r.get("model")) else "")),
+            lineage=(r.get("pair") or lineage_of.get(r.get("model")) or ""),
+            temp=r.get("temp"), seed=r.get("seed"),
+            gen_n_tokens=r.get("n_tokens"), finish_reason=r.get("finish_reason"),
+            #: BLT: the axis, and where its per-byte block lives
+            bits_per_byte=meta.get("bits_per_byte"), blt_ref=meta.get("ref"),
+            blt_box=meta["_box"], blt_shard=meta["_shard"],
+            blt_row=meta.get("row"), blt_n=meta.get("n"),
+            n_bytes=meta.get("n_bytes"), n_chars=meta.get("n_chars"),
+            blt_n_tokens=meta.get("n_tokens"),
+            #: bge: `bge_embedder` + prompt + text IS the stash key
+            bge_embedder=ns, splitter=ns.split("|", 1)[1],
+        )
+        row.update(metrics(np.asarray(sv, dtype=np.float32)))
+        buf.append(row); rows += 1
         if len(buf) >= a.flush:
             t = pa.Table.from_pylist(buf)
             writer = writer or pq.ParquetWriter(OUT, t.schema, compression="zstd")
@@ -181,28 +270,36 @@ def main(argv=None):
     if writer:
         writer.close()
 
-    t = pq.read_table(OUT)
-    d = {c: t.column(c).to_pylist() for c in ("corpora", "script", "n_sents",
-                                              "bits_per_byte", "mean_drift")}
-    cc = collections.Counter(d["corpora"]); sc = collections.Counter(d["script"])
-    man = dict(_what="one row per passage: BLT bits_per_byte and bge drift, both axes",
-               out=OUT, rows=t.num_rows, columns=t.schema.names,
-               namespaces=NS, blt_ref="itazap/blt-1b-hf",
-               blt_metadata_rows=len(blt), blt_texts=len(text_of),
-               dropped_no_vector=miss_vec, dropped_no_text=miss_blt,
-               by_corpora=dict(cc), by_script=dict(sc),
+    t = pq.read_table(OUT, columns=["corpus", "script", "model", "n_sents",
+                                    "bits_per_byte", "mean_drift", "n_bytes",
+                                    "arm", "arm_src", "lineage"])
+    d = {c: t.column(c).to_pylist() for c in t.schema.names}
+    man = dict(_what="one row per passage: BLT surprisal axis, bge drift axis, the "
+                     "text, and keys down to ClickHouse / the BLT .f32 / the bge stash",
+               out=OUT, rows=t.num_rows, columns=pq.read_schema(OUT).names,
+               grain="passage; bge_embedder+prompt+text reaches the sentence "
+                     "vectors, blt_box+blt_shard+blt_row+blt_n reaches the per-byte block",
+               namespaces=NS, blt_ref="itazap/blt-1b-hf", corpora=list(CORPORA),
+               dropped_no_blt=no_blt, dropped_no_vector=no_vec,
+               by_corpus=dict(collections.Counter(d["corpus"])),
+               by_script=dict(collections.Counter(d["script"])),
+               models=len(set(d["model"])),
+               by_arm=dict(collections.Counter(d["arm"])),
+               arm_source=dict(collections.Counter(d["arm_src"])),
+               lineages=len({x for x in d["lineage"] if x}),
                bytes=os.path.getsize(OUT))
     json.dump(man, open(MANIFEST, "w"), indent=1)
-    print("\n  rows %d | %.1f MB" % (t.num_rows, os.path.getsize(OUT) / 1048576))
-    print("  dropped: no sentence vector %d | no text %d" % (miss_vec, miss_blt))
-    print("  by corpus:", dict(cc.most_common()))
-    print("  by script:", dict(sc))
-    print("\n  %-16s %9s %9s" % ("", "median", "mean"))
-    for k in ("bits_per_byte", "mean_drift", "n_sents"):
-        v = np.array([x for x in d[k] if x is not None], float)
-        print("  %-16s %9.4f %9.4f" % (k, np.median(v), v.mean()))
+    json.dump(man, open(SIDECAR, "w"), indent=1)
+    print("\n  rows %d | %.1f MB | %d models"
+          % (t.num_rows, os.path.getsize(OUT) / 1048576, len(set(d["model"]))))
+    print("  dropped: no BLT %d | no sentence vector %d" % (no_blt, no_vec))
+    print("  by corpus:", dict(collections.Counter(d["corpus"]).most_common()))
+    print("  by script:", dict(collections.Counter(d["script"])))
+    print("  by arm   :", dict(collections.Counter(d["arm"]).most_common()),
+          "| source:", dict(collections.Counter(d["arm_src"]).most_common()))
+    print("  lineages :", len({x for x in d["lineage"] if x}))
     print("\n-> %s" % OUT)
-    print("-> results/population_manifest.json")
+    print("-> %s  (sidecar, beside the data)" % SIDECAR)
 
 
 if __name__ == "__main__":

@@ -97,9 +97,55 @@ between-cell variance differs by prompt diversity as well as by length. Both are
 consistent with the audit's own corrected claim that reliability belongs to the
 (corpus, embedder, truncation) triple and must be measured per instrument.
 
+## THE POPULATION FILE
+
+    $MALIGNMENT_DATA/jakobson_space/passages.parquet
+    432,064 rows | 38 columns | 228 MB | 94 models | 76 lineages
+
+Both axes for the whole generated corpus, with the text and every key needed to
+reach anything else. Built by `build_population.py`; a manifest sits beside it.
+
+    corpus    passage 223,053 | f11_l2 192,119 | y 16,892
+    script    en 357,236 | zh 74,828
+    arm       base 217,667 | aligned 214,397
+
+    identity    text_sha  prompt  TEXT  corpus  corpora  script
+    ClickHouse  model  sample_idx  role  pair  prompt_id  temp  seed
+                gen_n_tokens  finish_reason
+    arms        arm  arm_src  lineage
+    BLT         bits_per_byte  blt_ref  blt_box  blt_shard  blt_row  blt_n
+                n_bytes  n_chars  blt_n_tokens
+    bge         bge_embedder  splitter  n_sents
+    drift       mean_drift  max_drift  std_drift  total_drift  path_length
+                directedness  mean_pairwise  ordering
+
+**One row per passage, with pointers down to the finer grains rather than copies.**
+`bge_embedder + prompt + text` IS the sentence-vector stash key;
+`blt_box + blt_shard + blt_row + blt_n` locates the per-byte float32 block. A
+per-sentence table is not built: 4.4M sentences at 1024 float32 is ~18 GB and the
+step distances are recomputable in seconds.
+
+**`arm` had to be derived for f11_l2 and the file says so.** ClickHouse carries
+`role` and `pair` for `passage` and `y` and leaves BOTH EMPTY on all 192,119
+f11_l2 rows -- which would have made base-vs-aligned unrecoverable on the one
+corpus the drift axis was validated against. `roster.lineages()` fills it;
+`arm_src` records whether ClickHouse or the roster answered, so a disagreement
+stays visible and anyone who distrusts the derivation can restrict to
+`arm_src == 'clickhouse'`.
+
+### Two fences on this file
+
+**50,896 passages dropped (10.5%) for having no sentence vector** -- the `mixed`
+script stratum that `--mixed-policy refuse` declined to embed. **Not missing at
+random**: these are the code-switched passages, and f11_l2 loses 16% of itself
+that way. A cross-lingual question asked of this file is asked of the non-mixed
+corpus.
+
+**24,648 rows carry null drift** (n_sents < 2). Present rather than dropped, so
+absence reads as absence, but any mean over a drift column must exclude them.
+
 ## Outputs
 
-    results/jakobson_by_passage.csv   13,557 rows x 26 columns. Every drift column
-                                      from ../drift_geometry/ plus the four
-                                      surprisal columns and two contrasts, keyed on
-                                      pid / model / arm / pair / prompt / sample_idx.
+    results/jakobson_by_passage.csv   13,557 rows x 26 columns, the f11_l2 sample
+                                      with self/cross surprisal from gen_scores
+    results/population_manifest.json  what build_population.py wrote, and its drops
