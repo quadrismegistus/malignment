@@ -65,6 +65,34 @@ from malignment import roster                               # noqa: E402
 
 RECORD = os.path.expanduser(
     "~/github/malign-logits/data/model_load_environments.json")
+#: **AND THIS REPO'S OWN OBSERVATIONS, WHICH WERE INERT HERE UNTIL 2026-08-20.**
+#: `RECORD` points at the ARCHIVE. Every observation filed in
+#: `roster/models/observations.json` -- 70 of them, including today's Falcon-H1
+#: version window and the Olmo-Hybrid fla finding -- was invisible to this
+#: checker, so the planner kept blocking on stale archive verdicts while the
+#: current repo held the correction. The archive is read-only, so "just write it
+#: where preflight looks" was not available: the fix has to be here.
+#: Read BOTH, with the roster LAST so its entries append after the archive's and
+#: `bad[-1]`/`good[-1]` see the newer record. Nothing from the archive is
+#: dropped -- it still holds facts the roster has not ingested.
+ROSTER_RECORD = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "roster", "models", "observations.json")
+
+
+def _observations():
+    """Archive first, then this repo. Both, never one."""
+    out = []
+    for path in (RECORD, ROSTER_RECORD):
+        try:
+            with open(path) as fh:
+                out.extend(json.load(fh).get("observations", []))
+        except (OSError, ValueError):
+            #: A missing archive is survivable; a missing roster is not, and
+            #: will surface as every model reading UNVERIFIED rather than silently
+            #: passing.
+            continue
+    return out
 
 #: Which recorded environments speak to which target. An observation is only
 #: evidence for a run that resembles it -- this map is the "resembles".
@@ -95,7 +123,15 @@ CLOUD_VLLM = ("vast_l2_cuda_vllm", "vast_vllm_0.27.1_passage_fleet")
 #: transformers-based CUDA runs -- the only ones that speak to a twp fleet
 CLOUD = ("grid_v3_box_initial", "grid_v3_box_repaired", "vast_a100_ssm_kernels",
          "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
-         "cloud_cuda_transformers_5.14.1")
+         "cloud_cuda_transformers_5.14.1",
+         #: Added 2026-08-20. Every fleet box today runs 5.15.x, so without this
+         #: the list trusts only versions we no longer rent and a repair verified
+         #: on a live box cannot reach the planner. The deepseek arms are the
+         #: case: BLOCKER on a 5.14.1 AutoTokenizer failure that is REAL and
+         #: still reproduces, while the LOADER_OVERRIDE this producer actually
+         #: calls round-trips the same prompt on the same card. A guard that
+         #: cannot see the fix costs exactly what a missing fix costs.
+         "cloud_cuda_transformers_5.15.1_override")
 #: **AND THE TRANSFORMERS VERSION IS PART OF THE ENVIRONMENT.** `cloud_cuda_
 #: transformers_5.14.1` failed both Aquila arms on a `rope_scaling['type']`
 #: KeyError in the model's OWN bundled code. Both arms declare profile `tf457`,
@@ -167,9 +203,8 @@ def main():
                     help="exit 1 if any BLOCKER survives")
     a = ap.parse_args()
 
-    rec = json.load(open(RECORD))
     obs = {}
-    for o in rec["observations"]:
+    for o in _observations():
         obs.setdefault(o["model_id"], []).append(o)
 
     r = roster.load()

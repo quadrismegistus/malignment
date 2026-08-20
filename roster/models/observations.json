@@ -103,6 +103,21 @@
     "sentencepiece"
    ],
    "note": "Same image and same hf_config.pth hijack; .venv rather than .venv-tf457. Left to itself uv resolves transformers to 5.15.1 here while this Mac has 5.4.0, so the fleet PINS the local version for corpus comparability."
+  },
+  "local_mps_tf540_override": {
+   "torch": "2.13.0",
+   "transformers": "5.4.0",
+   "tokenizers": "0.22.2",
+   "device": "MPS (Apple M2 Max)",
+   "note": "This Mac, .venv. Recorded to separate 'AutoTokenizer mangles' from 'this model cannot be measured' -- the LOADER_OVERRIDE in malignment/twp.py is part of the environment, and an observation taken without it is an observation of a loader we do not use."
+  },
+  "cloud_cuda_transformers_5.15.1_override": {
+   "torch": "2.13.0+cu130",
+   "transformers": "5.15.1",
+   "tokenizers": "0.22.2",
+   "device": "RTX 6000Ada (CUDA)",
+   "engine": "transformers/twp",
+   "note": "Probed on live box 48229157, 2026-08-20, CPU-only tokenizer test that cost nothing and disturbed no GPU work. The LOADER_OVERRIDE is PART OF THIS ENVIRONMENT: an observation of bare AutoTokenizer is an observation of a loader this producer never calls."
   }
  },
  "observations": [
@@ -604,6 +619,38 @@
    "outcome": "load_failed",
    "cause": "as Falcon-H1-1.5B-Base: use_cache validation on transformers 5.4.0",
    "fix": "as Falcon-H1-1.5B-Base. Both arms fail identically, so the pair is recoverable together once the version is known."
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-base",
+   "environment": "local_mps_tf540_override",
+   "outcome": "ok",
+   "cause": "Round-trip VERIFIED with the loader the producer actually uses. AutoTokenizer still mangles at 5.4.0 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', every space deleted, reproducing the 2026-08-08 and 2026-08-10 observations exactly. But LOADER_OVERRIDE -> PreTrainedTokenizerFast round-trips the same prompt EXACTLY, and twp._override_applies() returns True here, so the override is REACHED and not merely present. Separately checked at transformers 4.57.1, where AutoTokenizer round-trips unaided and the override is unnecessary.",
+   "fix": "NONE NEEDED -- already installed. The standing run_failed entries for these arms are observations of AutoTokenizer, not of this producer, and preflight reads them as a BLOCKER that gates the largest remaining shard (29 models, 55,244 cells). A repair that exists but is invisible to the planner costs exactly as much as no repair. Established locally in ~30 s with no GPU and no rental: a tokenizer round-trip is a CPU test, and renting a box to learn it would have been the expensive way to read a table already in the repo.",
+   "source": "malign seat, 2026-08-20, before renting a box for it"
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-chat",
+   "environment": "local_mps_tf540_override",
+   "outcome": "ok",
+   "cause": "Round-trip VERIFIED with the loader the producer actually uses. AutoTokenizer still mangles at 5.4.0 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', every space deleted, reproducing the 2026-08-08 and 2026-08-10 observations exactly. But LOADER_OVERRIDE -> PreTrainedTokenizerFast round-trips the same prompt EXACTLY, and twp._override_applies() returns True here, so the override is REACHED and not merely present. Separately checked at transformers 4.57.1, where AutoTokenizer round-trips unaided and the override is unnecessary.",
+   "fix": "NONE NEEDED -- already installed. The standing run_failed entries for these arms are observations of AutoTokenizer, not of this producer, and preflight reads them as a BLOCKER that gates the largest remaining shard (29 models, 55,244 cells). A repair that exists but is invisible to the planner costs exactly as much as no repair. Established locally in ~30 s with no GPU and no rental: a tokenizer round-trip is a CPU test, and renting a box to learn it would have been the expensive way to read a table already in the repo.",
+   "source": "malign seat, 2026-08-20, before renting a box for it"
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-base",
+   "environment": "cloud_cuda_transformers_5.15.1_override",
+   "outcome": "ok",
+   "cause": "AutoTokenizer STILL mangles on CUDA at 5.15.1 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', reproducing the 5.14.1 entry exactly, so that observation is confirmed rather than overturned. But LOADER_OVERRIDE -> PreTrainedTokenizerFast round-trips the prompt EXACTLY on the same box, and twp._override_applies() returns True there, so the repair is REACHED and not merely declared.",
+   "fix": "NONE NEEDED -- installed at malignment/twp.py:659 and declared in the roster as tokenizer_loader: PreTrainedTokenizerFast. The standing run_failed entries describe AutoTokenizer, which this producer does not use for these two models; read as a BLOCKER they gate 29 models and 55,244 cells. Verified on a CLOUD box on purpose: the same repo records that a LOCAL verdict declared internlm2 fine and was wrong about every box, so local evidence was not treated as transferable.",
+   "source": "malign seat, 2026-08-20, probe on running box 48229157"
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-chat",
+   "environment": "cloud_cuda_transformers_5.15.1_override",
+   "outcome": "ok",
+   "cause": "AutoTokenizer STILL mangles on CUDA at 5.15.1 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', reproducing the 5.14.1 entry exactly, so that observation is confirmed rather than overturned. But LOADER_OVERRIDE -> PreTrainedTokenizerFast round-trips the prompt EXACTLY on the same box, and twp._override_applies() returns True there, so the repair is REACHED and not merely declared.",
+   "fix": "NONE NEEDED -- installed at malignment/twp.py:659 and declared in the roster as tokenizer_loader: PreTrainedTokenizerFast. The standing run_failed entries describe AutoTokenizer, which this producer does not use for these two models; read as a BLOCKER they gate 29 models and 55,244 cells. Verified on a CLOUD box on purpose: the same repo records that a LOCAL verdict declared internlm2 fine and was wrong about every box, so local evidence was not treated as transferable.",
+   "source": "malign seat, 2026-08-20, probe on running box 48229157"
   }
  ],
  "engine_support": {
