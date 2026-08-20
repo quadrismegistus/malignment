@@ -9,6 +9,15 @@ Exit 0 when every staged blob is under the cap, 1 when any is over, so it chains
 
     git add <paths> && python scripts/check_staged_size.py && git commit -F msg -- <paths>
 
+## The default is 50, and the githook stops you at 75
+
+Not a mistake and not stale. malign raised the hook to 75 MiB at `e0c4f4d` because
+50 was GitHub's WARNING threshold rather than a rule, and 75 keeps margin under
+the 100 MiB hard block. **The under-50 norm still stands as the thing to aim at**
+(malign, [6467]): 75 is where the hook refuses, not where the convention starts.
+So this defaults to the convention and `--cap 75` asks the other question, "would
+the hook take it".
+
 ## Why it measures the BLOB and not the file on disk
 
 The first version of this ran `du -k` over the working copy, which is the wrong
