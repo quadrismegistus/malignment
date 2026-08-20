@@ -688,6 +688,20 @@ cd /root/malignment
 # reason the split exists".
 command -v uv >/dev/null || pip -q install uv
 python3 scripts/venvs.py build --python 3.11
+# **PIN transformers TO WHAT THIS MACHINE HAS, NOT TO WHAT LINUX RESOLVES.** The
+# roster's spec for the default profile is loose (`>=5`), so it resolved to 5.4.0
+# here -- capped on darwin because 5.15 hangs on MPS -- and to 5.15.1 on the box.
+# Two different minors producing cells for one corpus, silently, until the venv
+# assert caught it. 100k+ cells in the corpus were measured under this Mac's
+# versions, so PARITY is the defensible direction: the same principle as shipping
+# the tree instead of cloning, applied to dependencies.
+#
+# Empty `want` means the local venv of that name does not exist, and then there is
+# nothing to match and the roster's own resolution stands.
+if [ -n "%(want)s" ]; then
+  uv pip install -q --system-certs --python ./%(venv)s/bin/python \
+      "transformers==%(want)s" || echo "could not pin transformers==%(want)s"
+fi
 # **AND THE PACKAGE ITSELF.** requirements.txt lists DEPENDENCIES; without
 # `pip install -e .` every script dies on `ModuleNotFoundError: malignment` --
 # after the venv built, after the payload shipped, with the rental running.
