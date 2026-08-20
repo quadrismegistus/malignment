@@ -334,17 +334,65 @@ def _walk_experiments():
         #: left the folder holding the figure producer alone. A walk keyed on
         #: `run.py` assumes every folder computes its own data, which stopped
         #: being true the moment a producer was shared.
-        if not ({"run.py", "registration.md", "plot.py"} & fs):
+        #: **A FOLDER THAT HAS PRODUCED SOMETHING IS A QUESTION**, whatever its
+        #: producer is called (2026-08-20). The filename keys above are the same
+        #: defect this docstring already warns about, one step along: a detector
+        #: keyed on `run.py` cannot see work that names its producer
+        #: `analyze.py`. `displacement_axis` has 20 modules and 45 result files
+        #: and was invisible; so were `slot_ratings/institutional` (101 results),
+        #: `/identity` and `/sexual`.
+        #:
+        #: RESULTS RATHER THAN `*.py` as the added key, because a folder of
+        #: shared helpers is not a question -- `displacement_taxonomy/tasks` has
+        #: four modules, no results, and correctly stays out. Having produced an
+        #: artifact is the claim; owning code is not.
+        rdir = os.path.join(dirpath, "results")
+        produced = os.path.isdir(rdir) and any(
+            not n.startswith(".")
+            for _r, _d, _f in os.walk(rdir) for n in _f)
+        if not ({"run.py", "registration.md", "plot.py"} & fs) and not produced:
             continue
         results = []
-        rdir = os.path.join(dirpath, "results")
         if os.path.isdir(rdir):
             for name in sorted(os.listdir(rdir)):
                 p = os.path.join(rdir, name)
                 if not os.path.isfile(p):
                     continue
+                #: DOTFILES ARE NOT RESULTS. `.DS_Store` and `.gitignore` were
+                #: listed beside the findings, and `.DS_Store` at 6 KB reads as a
+                #: substantial artifact to anyone scanning byte counts. Neither
+                #: is readable by the result endpoint either, so every one was a
+                #: chip that could only error. Directories were already skipped
+                #: by the isfile test above; these were the extensionless entries.
+                if name.startswith("."):
+                    continue
                 results.append({"grain": name, "bytes": os.path.getsize(p),
                                 "kind": os.path.splitext(name)[1].lstrip(".")})
+            #: ONE LEVEL DEEP, because a producer that writes per-prompt output
+            #: writes a DIRECTORY and the panel showed nothing at all for it:
+            #: `word_groups/` holds 40 per-prompt documents, `batches/` 91,
+            #: `inputs/` 404, and every one was invisible. Grains carry the
+            #: subdirectory (`word_groups/he_entered_her.txt`), which is safe
+            #: here for the reason the repo already relies on -- the result
+            #: endpoint validates by MEMBERSHIP in this derived set, never by
+            #: pattern, so a grain containing a slash cannot traverse anywhere
+            #: this walk did not itself go.
+            #:
+            #: NOT RECURSED FURTHER and NOT CAPPED. Deeper is where the stashes
+            #: keep their internals (`jsonl.hashstash.raw/data.jsonl`), which is
+            #: storage rather than result; and a silent cap would render "404
+            #: files" as however many happened to fit.
+            for sub in sorted(os.listdir(rdir)):
+                sd = os.path.join(rdir, sub)
+                if sub.startswith(".") or not os.path.isdir(sd):
+                    continue
+                for name in sorted(os.listdir(sd)):
+                    q = os.path.join(sd, name)
+                    if name.startswith(".") or not os.path.isfile(q):
+                        continue
+                    results.append({"grain": "%s/%s" % (sub, name),
+                                    "bytes": os.path.getsize(q),
+                                    "kind": os.path.splitext(name)[1].lstrip(".")})
         figs = []
         fdir = os.path.join(dirpath, "figures")
         if os.path.isdir(fdir):

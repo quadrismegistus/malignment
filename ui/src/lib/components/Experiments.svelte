@@ -121,18 +121,34 @@
 		const i = g.lastIndexOf('.');
 		return i < 0 ? '' : g.slice(i);
 	}
+	//: A REAL DIRECTORY IS ITS OWN GROUP AND OUTRANKS A NAME PREFIX. The backend
+	//: now walks one level into results/, so a grain may be `word_groups/x.txt`.
+	//: Grouping that by its leading token would scatter 40 documents that the
+	//: producer deliberately put in one place, and mix them with unrelated files
+	//: sharing four letters.
 	function prefix(g: string) {
+		const slash = g.indexOf('/');
+		if (slash > 0) return g.slice(0, slash) + '/';
 		const stem = g.slice(0, g.length - ext(g).length);
 		const m = stem.match(/^[A-Za-z0-9]+/);
 		return m ? m[0] : stem;
 	}
 	let resultTree = $derived.by(() => {
 		const rs = detail?.results ?? [];
-		const docs = rs.filter((r) => DOC_EXT.includes(ext(r.grain)));
-		const tabs = rs.filter((r) => TAB_EXT.includes(ext(r.grain)));
-		const rest = rs.filter(
-			(r) => !DOC_EXT.includes(ext(r.grain)) && !TAB_EXT.includes(ext(r.grain))
-		);
+		//: THE TOP TIERS ARE TOP-LEVEL ONLY. `word_groups/` holds 40 .txt files
+		//: and `batches/` 91; promoting them to `documents` would bury the three
+		//: findings the tier exists to surface under 131 machine-written inputs.
+		//: A directory stays a directory.
+		const top = rs.filter((r) => !r.grain.includes('/'));
+		const nested = rs.filter((r) => r.grain.includes('/'));
+		const docs = top.filter((r) => DOC_EXT.includes(ext(r.grain)));
+		const tabs = top.filter((r) => TAB_EXT.includes(ext(r.grain)));
+		const rest = [
+			...top.filter(
+				(r) => !DOC_EXT.includes(ext(r.grain)) && !TAB_EXT.includes(ext(r.grain))
+			),
+			...nested
+		];
 		const by = new Map<string, typeof rest>();
 		for (const r of rest) {
 			const k = prefix(r.grain);
@@ -357,7 +373,9 @@
 							{#each g.items as r (r.grain)}
 								<button class="ghost grain" class:on={pane === r.grain}
 									onclick={() => openGrain(r.grain)}
-									>{r.grain.slice(g.key.length).replace(/^[_-]/, '')}<span class="bytes"
+									>{g.key.endsWith('/')
+											? r.grain.slice(g.key.length)
+											: r.grain.slice(g.key.length).replace(/^[_-]/, '')}<span class="bytes"
 										>{bytes(r.bytes)}</span
 									></button>
 							{/each}
