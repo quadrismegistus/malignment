@@ -1,7 +1,7 @@
 ---
 subject: drift_geometry
 question: What can the geometric drift metrics mean, and do they track what a reader calls staying in the scene?
-status: ported 2026-08-20; new analysis NOT yet run
+status: ported and RUN 2026-08-20
 grain: page
 requires: |
   stanza (>=1.14) plus its `en` tokenize model, and sentence-transformers for
@@ -32,11 +32,25 @@ Nothing in the audit below reaches interiority's H3, and the reason is worth sta
 `drift_metric_audit.md`, migrated verbatim. Four defects, each measured rather than argued:
 
 - **`total_drift` is ORDER-INVARIANT.** It is `1 − min(pairwise cosine)`, the DIAMETER of the passage's sentence set — identical to four decimals after shuffling, every time, while `mean_drift` changes every time. It measures semantic SPREAD, not trajectory, so **an order-invariant axis cannot distinguish a metonymic chain from an undirected scatter of the same diameter.**
-- **It is 92% noise at the passage level.** ICC 0.082, against `mean_surprisal`'s 0.371 and `mean_drift`'s 0.141. A minimum over ~10 pairwise similarities among ~5 sentences is the noisiest thing constructible from few units. Reliability by unit: **0.082 per passage, 0.211 per 3-sample cell, 0.988 per pair. Classify pairs, not passages.**
+- **It is 92% noise at the passage level** — ICC 0.082, against `mean_surprisal`'s 0.371. Reliability by unit: 0.082 per passage, 0.211 per 3-sample cell, **0.988 per pair. Classify pairs, not passages.** *But read the correction immediately below before quoting the 0.082.*
 - **`directedness` IS sentence count.** Spearman −0.923, R² 0.795 against 1.681/n. The entire apparent ordering — abstracts most "directed", diary entries most "wandering" — is that abstracts have 3.7 sentences after truncation and diary entries 6.1.
 - **The 75-word truncation analyses 46% of each generation** while RETAINING FEWER passages (86.1%) than no truncation (95.1%).
 
 Its ruling: use `mean_drift` over `total_drift`, and for shape use the within-passage **ordering** contrast, which is n-controlled by construction.
+
+### The audit corrected its own headline a day later, and that correction is about US
+
+`drift_metric_audit.md` carries an addendum dated 2026-08-14: **"defect 2 was SCOPED TOO WIDELY — '92% noise' is the instrument, not the metric."** The 0.082 was measured with `paraphrase-multilingual-MiniLM-L12-v2` on the F15 passage population. The same decomposition with **`BAAI/bge-m3` on `f11_l2`**:
+
+    lang regime  metric        ICC
+    zh   trunc   mean_drift   0.567
+    en   full    mean_drift   0.521
+    en   trunc   total_drift  0.454
+    zh   trunc   total_drift  0.449
+
+**Four to six times the reliability.** Its corrected claim: reliability is a property of the *(corpus, embedder, truncation)* triple and must be measured per instrument, never inherited.
+
+**That configuration — bge-m3 on f11_l2 — is exactly the one this folder uses.** So the headline number does not apply to anything measured here, and an earlier version of this README quoted it twice while mentioning the correction zero times. The addendum was in the ported file all along; the summary dropped it, which is how a withdrawn claim outlives its withdrawal.
 
 ## The open question this folder exists for
 
@@ -53,7 +67,26 @@ So: **does `mean_drift` track what a reader calls staying in the scene, and does
 - **test within arm**, because interiority finds aligned passages HOLD more and the audit notes drift falls under alignment — pooling lets the arm manufacture the association.
 - **use coder agreement as a purity filter** on the 3,610 double-coded passages.
 
-Nothing above has been run. `PROVENANCE.md` carries the metric definitions verbatim so a new number stays comparable to the audit's.
+## RUN 2026-08-20: the metrics track the coded judgment
+
+`drift_metrics.py` → `results/drift_by_passage.csv`, `drift_vs_coding.py` → `results/drift_vs_coding.json`. HOLDS vs SHIFTS, within narrative, 5,808 passages over 27 lineage pairs:
+
+    metric          diff     boot 95% CI      per-pair   sign p
+    mean_drift   +0.0208  [+0.014,+0.028]      24/27    4.9e-05
+    total_drift  +0.0315  [+0.025,+0.040]      27/27     1.5e-08
+    ordering     -0.0101  [-0.013,-0.007]      25/27     5.7e-06
+    directedness -0.0187  [-0.027,-0.012]      24/27     4.9e-05
+    n_sents      +0.9851  [+0.50,+1.49]        22/27     0.0015
+
+**The length confound is present and is not the explanation.** Narrative SHIFTS passages carry ~1 more sentence, so part of `total_drift` is mechanical — but non-narrative shows NO length difference (CI spans zero, p=0.061) and the effect is as strong there: `total_drift` +0.0296 at **29/29 pairs**. Holds in both arms.
+
+**What this establishes is VALIDITY, which is not what the audit or its addendum measured.** The audit measured metric properties; the addendum measured reliability. Neither had an external criterion. This one does: a blind reader at kappa 0.904, and the geometry agrees with them across every lineage pair.
+
+**So the four defects stand and the construct is vindicated, and those are compatible.** Order-invariance is still true — reproduced here 500/500. `directedness` is still sentence count. What was wrong was the register: a per-instrument reliability figure written as a property of the metric family, in a document whose framing ("the entire apparent ordering is void") reads as over-braking after finding an error. The idea was sound; the v1 instrument was weak. Swap MiniLM for bge-m3 and the same construct measures well.
+
+**The one ruling now unsupported is the preference for `mean_drift` over `total_drift`.** Against the only external criterion available, `total_drift` separates the classes most consistently — 27/27 and 29/29 pairs — despite being the metric the audit criticised hardest. Its per-passage noisiness and its order-invariance are both still real; they simply do not stop a group mean from separating.
+
+`PROVENANCE.md` carries the metric definitions verbatim so a new number stays comparable to the audit's.
 
 ## Where the code comes from, and where it does not
 
