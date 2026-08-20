@@ -14,14 +14,20 @@
 # it refused for the wrong reason -- a guard that blocks by crashing blocks
 # everything, including what it should allow.
 #
-# CAP IS 50 MB HERE, NOT THE ARCHIVE'S 100 (RH, 2026-08-20). GitHub's hard block
-# is 100 MiB and its warning is 50; this repo blocks at the warning line instead,
-# because nothing here legitimately needs a 50 MB blob in git and the things that
-# came close were all derived: words.jsonl is 240 MB and ignored, the p_on_passages
-# copy's largest single file is 9 MB.
+# CAP IS 75 MB (RH, 2026-08-20, RAISED FROM 50 THE SAME DAY). The 50 line was
+# GitHub's warning threshold, chosen because "nothing here legitimately needs a
+# 50 MB blob". One thing does: `experiments/slot_ratings/institutional/results/
+# base_side/m03.json` is 57.5 MB and is a RESULT, not a derived convenience --
+# RH: "results should be transparent and public unless gigantic, we'll try to
+# hold to a <50MB rule but that one file is fine."
+#
+# 75 keeps a real margin under GitHub's 100 MiB HARD block, which is the limit
+# that cannot be negotiated. The <50 MB norm still stands as the thing to aim
+# at; this is the point where the hook stops you, not the point where the
+# convention starts.
 #
 # Deliberate exception:  ALLOW_BIG=1 git commit ...
-BLOCK=52428800       # 50 MiB
+BLOCK=78643200       # 75 MiB
 WARN=20971520        # 20 MiB, an early signal well under the block
 [ -n "$ALLOW_BIG" ] && exit 0
 
@@ -45,9 +51,9 @@ done < <(git diff --cached --name-only --diff-filter=ACM -z)
 if [ "$fail" -ne 0 ]; then
     cat <<'MSG'
 
-REFUSING: a file above 50 MiB. GitHub hard-blocks at 100 MiB and warns at
-50; this repo stops at the warning line. Once committed, a large blob can
-only be removed by rewriting history.
+REFUSING: a file above 75 MiB. GitHub hard-blocks at 100 MiB; this repo
+stops short of it. Aim under 50 MB -- that is still the norm. Once
+committed, a large blob can only be removed by rewriting history.
 
   - DERIVED artifact: keep it out of git, cite it by content hash, store
     it where the models and generations already live
