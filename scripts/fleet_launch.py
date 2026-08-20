@@ -132,7 +132,15 @@ def main():
                          "the 7B arms on box 48153389 were 13.9-14.0 GB each.")
     ap.add_argument("--yes", action="store_true", help="actually rent")
     ap.add_argument("--dry-run", action="store_true", default=True)
-    ap.add_argument("--box-profile", default="dense",
+    ap.add_argument("--box-profile", default=None,
+                    help="omit to DERIVE it from the shard's biggest model. "
+                         "roster/environments.yaml already declares `big80` (one "
+                         "80GB card, 'for the 32B pair') and `twogpu` (2x80GB, "
+                         "'for the 70B pair ~140GB bf16 each') -- written for "
+                         "exactly this and never used, because this flag defaulted "
+                         "to `dense` for all twelve shards and a 32B arm died with "
+                         "CUDA OOM on a 4090 after a 9.6-minute download.")
+    ap.add_argument("--box-profile-legacy-default", default="dense",
                     help="a box shape declared in roster/environments.yaml. "
                          "cloud.box() RAISES on an unknown name rather than "
                          "defaulting -- a typo falling back to `default` would "
@@ -202,6 +210,15 @@ def main():
           % (format(b["cells"], ","), est_s / 3600,
              len(models) - len(guessed), len(models)))
 
+    #: **DERIVED FROM THE SHARD, NOT DEFAULTED.** fp16 bytes = params x 2, and the
+    #: thresholds are the cards the roster already declares, so this is a lookup
+    #: rather than a judgement.
+    if not a.box_profile:
+        _need = _shard_vram_gb(models)
+        a.box_profile = ("twogpu" if _need > 75 else
+                         "big80" if _need > 43 else "dense")
+        print("  profile   %s (biggest model needs ~%.0f GB at fp16)"
+              % (a.box_profile, _need))
     ok, n = preflight(models)
     print("  preflight %s" % " ".join("%s=%d" % (k, v) for k, v in sorted(n.items())))
     if not ok:
@@ -932,6 +949,24 @@ if missing:
 print("SSM KERNELS OK")
 KEOF
 """
+
+
+def _shard_vram_gb(models, dtype_bytes=2):
+    """GB the LARGEST model in this shard needs at fp16. 0.0 if nothing is known."""
+    import json as _j
+    import urllib.request
+    biggest = 0.0
+    for m in sorted(set(models)):
+        try:
+            with urllib.request.urlopen(
+                    "https://huggingface.co/api/models/%s" % m, timeout=8) as fh:
+                d = _j.loads(fh.read().decode("utf-8"))
+            tot = (d.get("safetensors") or {}).get("total")
+            if tot:
+                biggest = max(biggest, tot * dtype_bytes / 1e9)
+        except Exception:                                    # noqa: BLE001
+            continue
+    return biggest
 
 
 def too_big_for(offer, models, dtype_bytes=2, headroom=0.90):
