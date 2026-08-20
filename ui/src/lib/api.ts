@@ -173,9 +173,16 @@ export interface Question {
 	figures: string[];
 }
 
+export interface Subject {
+	id: string;
+	readme_md: string;
+}
+
 export interface Experiments {
 	register_md: string | null;
 	questions: Question[];
+	/** subject folders that carry their own README, keyed by subject id */
+	subjects: Record<string, Subject>;
 }
 
 export interface QuestionDetail extends Question {

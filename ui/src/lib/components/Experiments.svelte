@@ -71,6 +71,10 @@
 		//: exist, and a link naming one that has since been renamed should land on
 		//: the register rather than on an error.
 		const q = page.url.searchParams.get('q');
+		if (q?.startsWith('subject:')) {
+			openSubject(q.slice(8));
+			return;
+		}
 		if (!q || !index?.questions.some((x) => x.id === q)) return;
 		const p = page.url.searchParams.get('p');
 		open(q).then(() => {
@@ -79,6 +83,26 @@
 			else if (detail?.results.some((r) => r.grain === p)) openGrain(p);
 		});
 	});
+
+	//: A SUBJECT OPENS ITS README AND NOTHING ELSE. It is held in `detail` with a
+	//: `subject:` prefix so the existing selection highlight and URL sync work
+	//: unchanged, and with empty results/figures so the tiers below render as
+	//: the honest empty -- a subject HAS no results, and showing borrowed ones
+	//: from its children would be the second-status defect the register avoids.
+	function openSubject(name: string) {
+		const s = index?.subjects?.[name];
+		if (!s) return;
+		selected = 'subject:' + name;
+		detail = {
+			id: name, name, subject: null, has: {}, results: [], figures: [],
+			readme_md: s.readme_md, registration_md: null, population: null
+		} as unknown as QuestionDetail;
+		pane = 'readme';
+		rows = blob = null;
+		doc = null;
+		error = '';
+		syncUrl();
+	}
 
 	async function open(id: string) {
 		selected = id;
@@ -273,7 +297,20 @@
 		{/each}
 
 		{#each grouped.subs as [subject, qs] (subject)}
-			<div class="subject">{subject}</div>
+			<!--
+			  THE HEADING IS A BUTTON WHEN THE SUBJECT HAS A README (RH). A subject
+			  folder is not an experiment and is deliberately not listed among its
+			  own children -- `division_of_labour/README.md` says so in as many
+			  words -- but it does carry the subject's QUESTION, and rendering it
+			  as inert text made that unreadable from the panel. Subjects without
+			  a README stay inert, because there is nothing to open.
+			-->
+			{#if index?.subjects?.[subject]}
+				<button class="subject link" class:on={selected === 'subject:' + subject}
+					onclick={() => openSubject(subject)}>{subject}<span class="tag n">readme</span></button>
+			{:else}
+				<div class="subject">{subject}</div>
+			{/if}
 			{#each qs as q (q.id)}
 				<button class="q indent" class:on={selected === q.id} onclick={() => open(q.id)}>
 					{q.name}
@@ -503,6 +540,21 @@
 		font-family: var(--mono);
 		font-size: 10px;
 		color: var(--text-3);
+	}
+	.subject.link {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		width: 100%;
+		background: none;
+		border: 0;
+		cursor: pointer;
+		text-align: left;
+		font: inherit;
+	}
+	.subject.link:hover,
+	.subject.link.on {
+		color: var(--fg, #e6e6e6);
 	}
 	.subject {
 		font-size: 10px;

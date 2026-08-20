@@ -316,7 +316,7 @@ def _walk_experiments():
     detector keyed on the artifact of completion cannot see incomplete work**,
     which is the state most worth showing.
     """
-    out = {}
+    out, subjects = {}, {}
     if not os.path.isdir(EXPERIMENTS):
         return out
     for dirpath, dirnames, filenames in os.walk(EXPERIMENTS):
@@ -398,6 +398,24 @@ def _walk_experiments():
         if os.path.isdir(fdir):
             figs = sorted(f for f in os.listdir(fdir)
                           if os.path.isfile(os.path.join(fdir, f)))
+        #: A SUBJECT WITH A README IS REACHABLE (RH, 2026-08-20). A folder holding
+        #: questions rendered as an unclickable heading in the sidebar, so
+        #: `division_of_labour/README.md` -- which states the subject's QUESTION,
+        #: "which alignment stage carries the displacement" -- could not be read
+        #: from the panel at all. Three subjects were in that state.
+        #:
+        #: Collected here rather than admitted as questions: these folders
+        #: declare themselves NOT experiments ("A SUBJECT, not an experiment. It
+        #: holds questions; it holds no code, no data and no claims of its own"),
+        #: and listing one beside its own children would contradict the document
+        #: being listed.
+        parent = os.path.dirname(rel).replace(os.sep, "/")
+        if parent:
+            pdir = os.path.join(EXPERIMENTS, os.path.dirname(rel))
+            pr = os.path.join(pdir, "README.md")
+            if parent not in subjects and os.path.isfile(pr):
+                with open(pr, encoding="utf-8", errors="replace") as fh:
+                    subjects[parent] = {"id": parent, "readme_md": fh.read()}
         out[rel.replace(os.sep, "/")] = {
             "id": rel.replace(os.sep, "/"),
             "name": os.path.basename(dirpath),
@@ -413,6 +431,9 @@ def _walk_experiments():
             "figures": figs,
             "_dir": dirpath,
         }
+    #: Carried on the mapping itself so the walk stays single-pass and callers
+    #: that only want questions are unaffected.
+    out["_subjects"] = subjects
     return out
 
 
@@ -1562,7 +1583,14 @@ class Handler(BaseHTTPRequestHandler):
                 #: would be a second status, and it would be the one on screen.
                 "register_md": _read_text(os.path.join(EXPERIMENTS, "README.md")),
                 "questions": [{k: v for k, v in d.items() if k != "_dir"}
-                              for d in sorted(man.values(), key=lambda d: d["id"])],
+                              for d in sorted((v for k, v in man.items()
+                                               if not k.startswith("_")),
+                                              key=lambda d: d["id"])],
+                #: SUBJECT READMEs, keyed by subject id. The sidebar renders a
+                #: subject as a heading over its children, and a heading is not
+                #: clickable, so `division_of_labour/README.md` -- which states
+                #: the subject's question -- was unreachable from the panel.
+                "subjects": man.get("_subjects", {}),
             }
         if path == "/experiment":
             d = _question(one("id"))
@@ -2000,9 +2028,13 @@ class Handler(BaseHTTPRequestHandler):
 
 def _question(qid):
     man = _manifest()
-    if qid not in man:
+    #: `_subjects` rides on the manifest and is NOT a question. Excluded here so
+    #: a client asking for it gets the same error as any other unknown id,
+    #: rather than a dict missing every field the caller then indexes.
+    if qid.startswith("_") or qid not in man:
         raise KeyError("no experiment %r; have: %s"
-                       % (qid, ", ".join(sorted(man)) or "(none)"))
+                       % (qid, ", ".join(k for k in sorted(man)
+                                          if not k.startswith("_")) or "(none)"))
     return man[qid]
 
 
