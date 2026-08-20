@@ -471,11 +471,27 @@ class TWPRunner:
 
         n_ok = n_skip = 0
         t0 = time.time()
+        #: **THE LIBRARY VERSIONS, WHICH THE TABLE HAS COLUMNS FOR AND NOBODY
+        #: WROTE.** `twp_cells_v4` declares `transformers_version` and
+        #: `torch_version`; measured 2026-08-20, all 171,843 v4 cells carry '' in
+        #: both, local and rented alike. So the corpus cannot answer "which
+        #: library produced this cell" -- and that question stopped being
+        #: hypothetical the same night: a box built `.venv-tf457` with
+        #: transformers 5.15.1 where this Mac has 5.4.0, another resolved 4.57.6
+        #: against a local 4.57.1, and the fleet now PINS a version explicitly.
+        #: A pin nothing records is a pin nobody can audit.
+        _vers = {}
+        for _mod, _key in (("transformers", "transformers_version"),
+                           ("torch", "torch_version")):
+            try:
+                _vers[_key] = __import__(_mod).__version__
+            except Exception:                                   # noqa: BLE001
+                _vers[_key] = ""
         stamp = {"theta": T.THETA, "rule_version": T.RULE_VERSION,
                  "dict_sha": T.dict_sha(), "bos_policy": pol,
                  "loader": loader_id, "device": dev,
                  "revision": ck.revision or "", "compute_dtype": "float16",
-                 "producer": PRODUCER}
+                 "producer": PRODUCER, **_vers}
         #: **THE BODY MUST CARRY WHAT THE KEY CARRIES.** `ck.key(p, rules)` puts
         #: `rule_version`, `rules` and `prompt_cache` on the KEY; the ingest reads
         #: the BODY. A v4 cell stamped with `T.RULE_VERSION` (always 3) and no
