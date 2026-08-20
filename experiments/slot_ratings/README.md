@@ -9,6 +9,34 @@ why: |
   "Can the movement be NAMED?"). Treat magnitude claims from this layer as provisional
   until the panel grows; treat direction claims as standing.
 blocked_on: more base->aligned lineages in twp_words_v4 / movement
+todo:
+  - name: no identity-specific or violence-specific instrument
+    what: |
+      Two per-domain instruments exist -- sexual/task.py (sexual_slot_en_v2, 9
+      scales) and institutional/task.py (slot_institutional_en_v3, 13). There is
+      no identity/ and no violence/. Those two domains are read with v6, the
+      general instrument.
+    why_it_matters: |
+      It is a confound sitting exactly on top of a finding. In the mass results
+      the named scales match or beat the declared pole axis in institutional and
+      violence and lose to a matched embedding in identity, and the reading on
+      offer is that alignment's institutional operation runs along dimensions
+      somebody wrote down while its identity operation is unlegislated corpus
+      residue. "Our identity scales are bad" predicts the same pattern, and the
+      instrument coverage runs in the direction of the finding: institutional and
+      sexual get bespoke instruments, identity gets a general one.
+      NOT SYMMETRIC BETWEEN THE TWO MISSING ONES. v6's harm / aggression /
+      directedness descend from SCALES_V3 and SCALES_V4, which were developed on
+      violence frames (the "She was so furious she wanted to" grid), so violence
+      has partial ancestry in the general instrument. Identity has none. Identity
+      is the only domain with no instrument tuned to it at any point, and it is
+      the domain where the named scales lose.
+    what_would_settle_it: |
+      Build an identity instrument the way institutional/task.py was built, rerun
+      loo_all.py and mass_direction.py on the same frames. If named still loses to
+      bge in identity with a purpose-built set, the asymmetry is about alignment.
+      If it closes, it was about our scales. Violence second, and cheaper, since
+      it is already half-covered.
 ---
 
 # slot_ratings
