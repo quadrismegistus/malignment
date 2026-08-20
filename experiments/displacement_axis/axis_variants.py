@@ -51,9 +51,13 @@ DROP = {"n_eligible", "n_present", "rise", "fall", "net", "ratable"}
 K_POLE = 3
 
 
-def ratings():
+def ratings(wide=False):
+    """`wide=True` reads results/v6_wide (n_eligible>=1, median 122 words/frame)
+    instead of results/v6 (n_eligible>=3, median 74). Kept as two sets rather
+    than one because every earlier figure used the narrow one."""
     v6 = collections.defaultdict(dict)
-    for f in glob.glob(os.path.join(SLOT, "results", "v6", "rated_v6_*.json")):
+    sub, pat = ("v6_wide", "rated_v6w_*.json") if wide else ("v6", "rated_v6_*.json")
+    for f in glob.glob(os.path.join(SLOT, "results", sub, pat)):
         for x in json.load(open(f)):
             if x.get("ratable"):
                 v6[x["prompt"]][x["word"]] = {
