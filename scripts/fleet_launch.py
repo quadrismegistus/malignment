@@ -122,7 +122,14 @@ def main():
     ap.add_argument("--box", type=int, required=True, help="1-based index into the plan")
     ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None)
     ap.add_argument("--image", default=DEFAULT_IMAGE)
-    ap.add_argument("--disk", type=int, default=400)
+    ap.add_argument("--disk", type=int, default=0,
+                    help="GB of disk to rent. 0 = SIZED FROM THE SHARD: ~15 GB per "
+                         "7B checkpoint plus headroom, because nothing purges "
+                         "weights between models and a 150 GB box died at model "
+                         "11 of 11 with `No space left on device`.")
+    ap.add_argument("--gb-per-model", type=float, default=15.0,
+                    help="disk each checkpoint's weights occupy. 15 is measured: "
+                         "the 7B arms on box 48153389 were 13.9-14.0 GB each.")
     ap.add_argument("--yes", action="store_true", help="actually rent")
     ap.add_argument("--dry-run", action="store_true", default=True)
     ap.add_argument("--box-profile", default="dense",
@@ -165,6 +172,18 @@ def main():
     #: line as the estimate -- see fleet_shards.seconds.
     b_per = b.get("per") or {m: b["cells"] // max(1, len(models)) for m in models}
     est_s, guessed = seconds(b_per, "cuda")
+    #: **DISK IS A RESOURCE THE PLANNER NEVER LOOKED AT.** `fleet_shards` packs by
+    #: SECONDS; bytes are invisible to it. Box 48153389 held 11 checkpoints on the
+    #: `dense` profile's 150 GB, filled at ~133 GB of hub cache, and then: model 11
+    #: could not download, pass 2 crashed OPENING ITS LOG FILE, the run ended
+    #: without its DONE sentinel, and the recovery session waited forever on a
+    #: sentinel that would never come. A deadlock caused by a full disk two stages
+    #: upstream. Shards in this plan carry up to 22 models.
+    need_gb = int(len(models) * a.gb_per_model + 40)
+    disk_gb = a.disk or need_gb
+    print("  disk      %d GB for %d models (%.0f GB each + 40 headroom)%s"
+          % (disk_gb, len(models), a.gb_per_model,
+             "" if not a.disk else "  [OVERRIDDEN to %d]" % a.disk))
     print("  cells     %s  (~%.1f h; %d of %d models have a recorded rate)"
           % (format(b["cells"], ","), est_s / 3600,
              len(models) - len(guessed), len(models)))
@@ -246,7 +265,11 @@ def execute(b, models, roots, venv, a):
     # ---- create -----------------------------------------------------------
     raw = cloud.vastai("create", "instance", str(best["id"]),
                        "--image", shape.get("image", a.image),
-                       "--disk", str(shape.get("disk_gb", a.disk)),
+                       #: The SHARD's need wins over the profile's default: a
+                       #: profile is a box shape, and how many checkpoints land on
+                       #: it is not something the profile can know.
+                       "--disk", str(max(int(shape.get("disk_gb", 0) or 0),
+                                         a.disk or int(len(models) * a.gb_per_model + 40))),
                        "--ssh", "--direct")
     iid = _contract_id(raw)
     if not iid:
