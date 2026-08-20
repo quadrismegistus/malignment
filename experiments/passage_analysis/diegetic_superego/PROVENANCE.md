@@ -33,3 +33,13 @@ against.
 | `results/y_pilot_coded.jsonl` | `meta/M01_displacement/results/y_pilot_coded.jsonl` | 1422087 | `59ed0693c7dc46dc` | pilot codings |
 | `results/y_pilot_coded_v2.jsonl` | `meta/M01_displacement/results/y_pilot_coded_v2.jsonl` | 2026788 | `5d3bbe7ac7ee234f` |  |
 | `results/y_pilot_coded_v3.jsonl` | `meta/M01_displacement/results/y_pilot_coded_v3.jsonl` | 1127554 | `830db8d24391a09e` |  |
+
+## Held outside the repo, at `$MALIGNMENT_DATA/y_diegetic/`
+
+Reachable as `data/` here, a relative symlink git tracks as a 41-byte mode-120000 blob.
+sha256 pinned so a reader can verify the file they have is the archive's.
+
+| file | archive path | bytes | sha256 (16) |
+| --- | --- | ---: | --- |
+| `data/y_confirmatory_coded.jsonl` | `meta/M01_displacement/results/y_confirmatory_coded.jsonl` | 143913692 | `6b25cfa60dc9b3b3` |
+| `data/y_annotation_manifest.jsonl` | `meta/M01_displacement/registrations/y_annotation_manifest.jsonl` | 17412169 | `23201f512fdb7351` |
