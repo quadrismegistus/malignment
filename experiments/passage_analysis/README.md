@@ -40,9 +40,36 @@ Nowhere near quotable. Exactly the shape a site-conditional page-grain effect wo
 ## Questions here
 
     interiority_in_passages/    COMPLETE. Does alignment shift passages toward
-                                interior state? Human-coded, 26 lineage pairs,
-                                10,355 passages, blind coders.
-    predicting_aligned_text/    OPEN. Can the arm be predicted from a page, and
-                                can NAMED scales do it -- the page-grain version
-                                of the distribution-grain question answered in
-                                experiments/displacement_axis/.
+                                interior state? It does not change HOW inner life
+                                is represented, it changes HOW MUCH there is.
+                                H1 +0.224, 16/17 pairs, p=0.00015.
+    diegetic_superego/          COMPLETE, migrated. When alignment moralises, does
+                                it leave the scene or stay inside it? It stays: the
+                                extra-diegetic response is FLAT while the
+                                intra-diegetic one moves ~4x, and it survives a
+                                forced-word control (+5.0 pts, p=7.2e-08).
+    second_order_naming/        COMPLETE, migrated. Does alignment name the
+                                contradiction AS a contradiction? 3.37x the odds
+                                [1.88, 6.30], p=9.6e-06, control at 1.00 -- and
+                                only for contradiction, not transgression.
+    predicting_aligned_text/    OPEN, and NOT blocked by the fleet. Can the arm be
+                                predicted from a page, and can NAMED scales do it?
+                                Its corpus is gen_sequences, not twp, so it does
+                                not wait on lineage coverage the way the
+                                distribution-grain work does.
+
+## The tension worth keeping visible
+
+`predicting_aligned_text/` inherits I6's conclusion that the page-grain signature
+is TONIC -- transgressive sites drag BOTH arms equally, DiD p=0.90, so alignment
+neither amplifies nor defends there. `diegetic_superego/` finds a site-conditional
+moral response on sexual scenes that survives a forced-word control.
+
+Both can be true: guilt-attachment is not the axis I6 measures, and they run on
+different corpora with different instruments. But **nobody has put them on the
+same passages**, and until someone does, "the signature is tonic" and "alignment
+moralises inside the scene" are two claims about the page that have never been
+made to meet. That is a question, not a bookkeeping problem.
+
+Note also that I6's six domains are `animal betrayal property sexual taboo
+violence` -- so `sexual` IS in it, which makes the meeting cheaper than it looks.
