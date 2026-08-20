@@ -669,6 +669,35 @@ nodes:
     env:
       profile: default
       transformers: '>=5'
+      packages:
+        flash-linear-attention: ''
+      packages_why: "OLMo-Hybrid is a GATED DELTA NET (linear attention), NOT a
+        Mamba hybrid, so its kernels come from `fla` and NOT from mamba-ssm /
+        causal-conv1d. Without it `is_flash_linear_attention_available()` is
+        False and transformers SILENTLY substitutes torch_chunk_gated_delta_rule
+        / torch_recurrent_gated_delta_rule -- pure-PyTorch recurrences -- with no
+        warning in any log. Measured on that fallback 2026-08-20: 19.0 s/cell on
+        an A100 (GPU 6% busy, process at 2545% CPU) and 19.10 s/cell on MPS.
+        IDENTICAL on both devices, which is the signature of a path that never
+        properly reaches either accelerator, and it cost ~2 h of A100 time plus
+        most of a day of MPS before the cause was found.
+        **THE `ssm` PROFILE DOES NOT COVER THIS.** It installs mamba-ssm +
+        causal-conv1d and its description says 'SSM and hybrid', but `hybrid`
+        there means Falcon-H1 (Mamba2 + attention) whose measured 19.3x says
+        nothing about this architecture. Both mamba kernels imported cleanly on
+        the box where this ran slow -- which is exactly why checking them came
+        back fine and sent the search elsewhere. Assert the boolean instead:
+        `transformers.models.olmo_hybrid.modeling_olmo_hybrid.is_fast_path_available`.
+        CUDA-ONLY, and declared anyway: every fla backend extra requires triton
+        and there is no Metal build, so this cannot accelerate the model on the
+        Mac at any version -- Olmo-Hybrid is a CLOUD-ONLY lineage for speed.
+        Installing it here is harmless because that availability check gates on
+        `is_torch_cuda_available()` first, so it stays False on MPS rather than
+        promising a fast path that is not there.
+        The archive knew this from the other side: data/cloud_profiles.json in
+        ~/github/malign-logits carries a `vllm_nightly` profile noted 'For
+        allenai/Olmo-Hybrid ONLY', because vLLM 0.27.1 raised TypeError at
+        olmo_gdn_linear_attn.py:517 -- the same architecture, named in the path."
       why: 'A FLOOR THE PROFILE GOT WRONG, corrected 2026-08-17. `default` declares
         `>=4.57`, and `model_type: olmo_hybrid` is ABSENT from 4.57.1''s
         CONFIG_MAPPING_NAMES -- checked in the built .venv-tf457, not inferred. A
@@ -685,6 +714,12 @@ nodes:
     env:
       profile: default
       transformers: '>=5'
+      packages:
+        flash-linear-attention: ''
+      packages_why: gated delta net kernels; same architecture as the base arm,
+        see allenai/Olmo-Hybrid-7B for the measurement and why the `ssm` profile
+        does not supply them. Without fla this arm runs the pure-PyTorch
+        fallback at ~19 s/cell on every device.
       why: same architecture as the base arm; see allenai/Olmo-Hybrid-7B. This
         checkpoint's config declares transformers_version 5.0.0.dev0 rather than
         the base arm's 5.8.1, which is why the floor is stated as >=5 and not
@@ -697,6 +732,12 @@ nodes:
     env:
       profile: default
       transformers: '>=5'
+      packages:
+        flash-linear-attention: ''
+      packages_why: gated delta net kernels; same architecture as the base arm,
+        see allenai/Olmo-Hybrid-7B for the measurement and why the `ssm` profile
+        does not supply them. Without fla this arm runs the pure-PyTorch
+        fallback at ~19 s/cell on every device.
       why: same architecture as the base arm; see allenai/Olmo-Hybrid-7B.
   baichuan-inc/Baichuan2-7B-Base:
     nickname: baichuan
