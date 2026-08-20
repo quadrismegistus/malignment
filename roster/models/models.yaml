@@ -970,12 +970,30 @@ nodes:
     family:
     - jais
     env:
-      profile: default
+      profile: tf457
+      transformers_why: "jais's BUNDLED modelling code (trust_remote_code) imports
+        `find_pruneable_heads_and_indices` from transformers.pytorch_utils, which
+        5.x REMOVED. Measured 2026-08-20: absent at 5.4.0, present at 4.57.1 --
+        checked by importing it in both built venvs, not inferred. Both arms died
+        identically on box 48209300 at 0.3 min each, after the shard had already
+        paid to download them. The error names a transformers symbol, so it reads
+        as a library problem; it is a VERSION-BOUNDARY problem in code the model
+        ships, and no card, kernel or profile changes it. Same class as
+        Falcon-H1's use_cache rejection, third instance today."
   inceptionai/jais-family-6p7b-chat:
     family:
     - jais
     env:
-      profile: default
+      profile: tf457
+      transformers_why: "jais's BUNDLED modelling code (trust_remote_code) imports
+        `find_pruneable_heads_and_indices` from transformers.pytorch_utils, which
+        5.x REMOVED. Measured 2026-08-20: absent at 5.4.0, present at 4.57.1 --
+        checked by importing it in both built venvs, not inferred. Both arms died
+        identically on box 48209300 at 0.3 min each, after the shard had already
+        paid to download them. The error names a transformers symbol, so it reads
+        as a library problem; it is a VERSION-BOUNDARY problem in code the model
+        ships, and no card, kernel or profile changes it. Same class as
+        Falcon-H1's use_cache rejection, third instance today."
   internlm/internlm2-base-7b:
     revision_ladder: 2
     nickname: internlm2
