@@ -51,8 +51,9 @@ def main(argv=None):
     for line in open(os.path.join(RES, "words.jsonl")):
         d = json.loads(line)
         cells[d["item_id"]][d["base"] + " -> " + d["endpoint"]][d["word"]] = d["dP"]
-    prompt_of = {c["item_id"]: c["prompt"]
-                 for c in (json.loads(l) for l in open(os.path.join(RES, "cells.jsonl")))}
+    _cl = [json.loads(l) for l in open(os.path.join(RES, "cells.jsonl"))]
+    prompt_of = {c["item_id"]: c["prompt"] for c in _cl}
+    domain_of = {c["item_id"]: c.get("domain") for c in _cl}
 
     def r2(X, ya, yb):
         Xd = np.c_[np.ones(len(X)), X]
@@ -114,14 +115,24 @@ def main(argv=None):
             per["named_all"].append(r2(R, ya, yb))
             per["named_plus_axis"].append(r2(np.c_[R, ax], ya, yb))
             per["named_plus_pcs"].append(r2(np.c_[R, PC], ya, yb))
-            per["best_single"].append(max(r2(R[:, [i]], ya, yb) for i in range(R.shape[1])))
+            singles = [r2(R[:, [i]], ya, yb) for i in range(R.shape[1])]
+            bi = int(np.nanargmax(singles))
+            per["best_single"].append(singles[bi])
+            #: WHICH name won, per split. Recorded so the winner can be reported
+            #: per frame and per domain, and so a name that wins on one split and
+            #: not the next is visible as unstable rather than quoted as the name.
+            per.setdefault("_names", []).append(S6[bi])
             b = np.polyfit(ya, yb, 1)
             pr = np.polyval(b, ya)
             per["ceiling"].append(1 - ((yb - pr) ** 2).sum() / ((yb - yb.mean()) ** 2).sum())
         if len(per["ceiling"]) < a.splits // 2:
             continue
-        r = dict(item=item, prompt=p, n_words=len(ok), n_lineages=len(L),
-                 n_splits=len(per["ceiling"]))
+        names = collections.Counter(per.get("_names", []))
+        r = dict(item=item, prompt=p, domain=domain_of.get(item),
+                 n_words=len(ok), n_lineages=len(L), n_splits=len(per["ceiling"]),
+                 best_name=(names.most_common(1)[0][0] if names else None),
+                 best_name_share=(names.most_common(1)[0][1] / sum(names.values())
+                                  if names else None))
         for m in MODELS:
             v = [x for x in per[m] if x == x]
             if v:
