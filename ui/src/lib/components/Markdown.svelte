@@ -65,6 +65,77 @@
 
 	let parsed = $derived(src ? splitFront(src) : { meta: [], body: '' });
 	let html = $derived(parsed.body ? (marked.parse(parsed.body) as string) : '');
+
+	//: THE TOC IS READ OFF THE RENDERED DOM, not off the markdown source. The
+	//: same rule the register jump already follows: a heading the renderer did
+	//: not produce is one the contents must not offer, and headings inside a
+	//: fenced code block are exactly that -- this repo's documents are full of
+	//: `# comment` lines inside shell and python blocks.
+	let body: HTMLElement | null = $state(null);
+	let toc: { id: string; text: string; level: number }[] = $state([]);
+	let active = $state('');
+	let observer: IntersectionObserver | null = null;
+
+	function slug(t: string, used: Set<string>) {
+		const base =
+			t
+				.toLowerCase()
+				.replace(/[^\w\s-]/g, '')
+				.trim()
+				.replace(/\s+/g, '-')
+				.slice(0, 60) || 'section';
+		let id = base;
+		//: Headings repeat in these documents -- several findings have more than
+		//: one "## Provenance" -- and a duplicate id makes every link after the
+		//: first jump to the wrong one.
+		for (let i = 2; used.has(id); i++) id = base + '-' + i;
+		used.add(id);
+		return id;
+	}
+
+	//: Rebuilt whenever the rendered html changes, which is what makes this work
+	//: for a result document opened after a README without a remount.
+	$effect(() => {
+		void html;
+		observer?.disconnect();
+		observer = null;
+		if (!body) {
+			toc = [];
+			return;
+		}
+		const used = new Set<string>();
+		const hs = [...body.querySelectorAll('h1, h2, h3')] as HTMLElement[];
+		for (const h of hs) if (!h.id) h.id = slug(h.textContent ?? '', used);
+		toc = hs.map((h) => ({
+			id: h.id,
+			text: h.textContent ?? '',
+			level: Number(h.tagName[1])
+		}));
+		if (!hs.length) return;
+		//: THE SCROLL ROOT IS THE PANEL, NOT THE VIEWPORT. The document is inside
+		//: a section with `overflow-y: auto`, so a viewport-rooted observer never
+		//: fires and the highlight would sit on the first heading forever.
+		let root: HTMLElement | null = body.parentElement;
+		while (root && getComputedStyle(root).overflowY !== 'auto' && root !== document.body)
+			root = root.parentElement;
+		observer = new IntersectionObserver(
+			(entries) => {
+				const vis = entries.filter((e) => e.isIntersecting);
+				if (vis.length) active = (vis[0].target as HTMLElement).id;
+			},
+			{ root: root ?? null, rootMargin: '0px 0px -70% 0px', threshold: 0 }
+		);
+		for (const h of hs) observer.observe(h);
+		return () => observer?.disconnect();
+	});
+
+	function jump(id: string) {
+		body?.querySelector('#' + CSS.escape(id))?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+		active = id;
+	}
 </script>
 
 {#if src}
@@ -76,12 +147,93 @@
 			{/each}
 		</dl>
 	{/if}
-	<div class="md" class:compact>{@html html}</div>
+	<div class="withtoc" class:hastoc={toc.length >= 3 && !compact}>
+		<div class="md" class:compact bind:this={body}>{@html html}</div>
+		{#if toc.length >= 3 && !compact}
+			<!--
+			  SHOWN ONLY FROM THREE HEADINGS. A contents list of one or two entries
+			  is furniture: it costs a column and tells the reader what they can
+			  already see without scrolling.
+			-->
+			<aside class="toc" aria-label="contents">
+				<div class="tochead">contents</div>
+				<nav>
+					{#each toc as t (t.id)}
+						<button
+							class="tocitem lvl{t.level}"
+							class:on={active === t.id}
+							onclick={() => jump(t.id)}>{t.text}</button>
+					{/each}
+				</nav>
+			</aside>
+		{/if}
+	</div>
 {:else}
 	<p class="muted">no file</p>
 {/if}
 
 <style>
+	.withtoc.hastoc {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 208px;
+		gap: 26px;
+		align-items: start;
+	}
+	.toc {
+		position: sticky;
+		top: 0;
+		max-height: calc(100vh - 180px);
+		overflow-y: auto;
+		padding-left: 14px;
+		border-left: 1px solid var(--rule);
+		font-size: 0.78rem;
+	}
+	.tochead {
+		color: var(--muted, #8a8f98);
+		font-family: var(--mono, ui-monospace, monospace);
+		text-transform: lowercase;
+		letter-spacing: 0.04em;
+		margin-bottom: 8px;
+	}
+	.toc nav {
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+	}
+	.tocitem {
+		background: none;
+		border: 0;
+		border-left: 2px solid transparent;
+		color: var(--muted, #8a8f98);
+		cursor: pointer;
+		font: inherit;
+		line-height: 1.35;
+		padding: 3px 0 3px 8px;
+		text-align: left;
+	}
+	.tocitem:hover {
+		color: var(--fg, #e6e6e6);
+	}
+	.tocitem.on {
+		color: var(--fg, #e6e6e6);
+		border-left-color: currentColor;
+	}
+	.tocitem.lvl2 {
+		padding-left: 16px;
+	}
+	.tocitem.lvl3 {
+		padding-left: 26px;
+		font-size: 0.74rem;
+	}
+	@media (max-width: 1100px) {
+		.withtoc.hastoc {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.toc {
+			display: none;
+		}
+	}
+
 	/*
 	  The fields read as a card, not as a table: they are declarations about the
 	  document, and a border makes clear where the document itself starts.
