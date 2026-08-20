@@ -179,10 +179,17 @@ def main():
     #: without its DONE sentinel, and the recovery session waited forever on a
     #: sentinel that would never come. A deadlock caused by a full disk two stages
     #: upstream. Shards in this plan carry up to 22 models.
-    need_gb = int(len(models) * a.gb_per_model + 40)
+    #: Sized by the LARGEST LINEAGE, not by every model, because pass 1 and pass 2
+    #: now run per lineage with a cache wipe between -- so only one lineage's
+    #: weights are ever live. Box 11: 370 GB -> 85 GB.
+    from malignment import roster as _r1
+    _l1 = _r1.lineages(ops=_r1.ALIGNING)
+    _biggest = max([len([m for m in _l1.get(r_, []) if m in models])
+                    for r_ in roots] or [len(models)])
+    need_gb = int(_biggest * a.gb_per_model + 40)
     disk_gb = a.disk or need_gb
-    print("  disk      %d GB for %d models (%.0f GB each + 40 headroom)%s"
-          % (disk_gb, len(models), a.gb_per_model,
+    print("  disk      %d GB for the largest lineage (%d models x %.0f GB + 40)%s"
+          % (disk_gb, _biggest, a.gb_per_model,
              "" if not a.disk else "  [OVERRIDDEN to %d]" % a.disk))
     print("  cells     %s  (~%.1f h; %d of %d models have a recorded rate)"
           % (format(b["cells"], ","), est_s / 3600,
@@ -199,17 +206,29 @@ def main():
     print("  payload   %d stash files, %.1f MB  (the WHOLE lineage -- pass 2 needs "
           "siblings' words, not their prompt list)" % (len(paths), nbytes / 1e6))
 
-    cmds = [
-        "python scripts/queue_v4.py --models %s%s"
-        % (" ".join(models[:3]) + (" ..." if len(models) > 3 else ""),
-           " --only %s" % a.only if a.only else ""),
-    ] + ["python scripts/topup_lineage.py --root %s --from-stash%s"
-         % (r, " --only %s" % a.only if a.only else "") for r in roots[:2]]
-    print("  will run:")
-    for c in cmds:
-        print("      %s" % c)
-    if len(roots) > 2:
-        print("      ... and %d more topup roots" % (len(roots) - 2))
+    #: **THE PREVIEW IS BUILT THE SAME WAY THE REAL COMMANDS ARE.** It used to be
+    #: composed independently, so after the run order changed to per-lineage the
+    #: dry run still advertised the old shape -- an operator reading it would have
+    #: been told something the box would not do. Exactly the defect that made
+    #: `--box N` mean two different shards, and the same fix: derive both from one
+    #: place rather than describing one in terms of the other.
+    only_s = " --only %s" % a.only if a.only else ""
+    print("  will run, PER LINEAGE (pass 1 then pass 2, then wipe the weights):")
+    shown = 0
+    for r in roots:
+        mem = [m for m in _l1.get(r, []) if m in models]
+        if not mem:
+            continue
+        shown += 1
+        if shown > 2:
+            continue
+        print("      queue_v4.py --models %s%s   [%d model(s)]"
+              % (" ".join(x.split("/")[-1] for x in mem[:3])
+                 + (" ..." if len(mem) > 3 else ""), only_s, len(mem)))
+        print("      topup_lineage.py --root %s --from-stash%s" % (r, only_s))
+        print("      rm -rf ~/.cache/huggingface/hub/models--*")
+    if shown > 2:
+        print("      ... and %d more lineage(s), same three steps each" % (shown - 2))
 
     if not a.yes:
         print("\n  DRY RUN -- nothing rented. Pass --yes to spend.")
@@ -268,8 +287,7 @@ def execute(b, models, roots, venv, a):
                        #: The SHARD's need wins over the profile's default: a
                        #: profile is a box shape, and how many checkpoints land on
                        #: it is not something the profile can know.
-                       "--disk", str(max(int(shape.get("disk_gb", 0) or 0),
-                                         a.disk or int(len(models) * a.gb_per_model + 40))),
+                       "--disk", str(max(int(shape.get("disk_gb", 0) or 0), disk_gb)),
                        "--ssh", "--direct")
     iid = _contract_id(raw)
     if not iid:
@@ -476,16 +494,48 @@ def execute(b, models, roots, venv, a):
     #: what cannot be left alone. Under tmux the BOX owns the work and ssh is only
     #: how we ask about it, so a dropped poll costs one poll.
     only = (" --only %s" % a.only) if a.only else ""
-    cmds = ["./%s/bin/python scripts/queue_v4.py --models %s%s"
-            % (venv, " ".join(models), only)]
+    #: **PASS 1 THEN PASS 2, PER LINEAGE -- NOT ALL OF PASS 1 THEN ALL OF PASS 2.**
+    #: RH asked which it was. It was the latter, and the latter is worse in three
+    #: ways, two of which bit tonight:
+    #:
+    #:   DISK. Measuring every model first means every model's weights coexist.
+    #:   Box 48153389 filled 150 GB at model 11 of 11 and deadlocked. Per lineage
+    #:   only ONE lineage's weights are live at a time -- box 11 needs 85 GB rather
+    #:   than 370 GB, because its 22 models sit 3 to a lineage.
+    #:
+    #:   PARTIAL FAILURE. A box lost halfway used to leave 22 half-measured models
+    #:   and ZERO closed lineages. Per lineage it leaves N CLOSED lineages and one
+    #:   unstarted, and the closed lineage is the unit every consumer reads.
+    #:
+    #:   And it matches why we shard by lineage at all: the union is lineage-scoped
+    #:   (`topup_lineage --root R`), so pass 2 needs nothing from any other lineage.
+    #:   The old order invented a dependency that does not exist.
+    #:
     #: **`--from-stash` IS NOT OPTIONAL ON A RENTED BOX.** Without it,
-    #: `topup_lineage` builds the lineage union by querying ClickHouse -- which
-    #: does not exist on a rental, and the 2026-08-19 pilot died on
-    #: `FileNotFoundError: /opt/homebrew/bin/clickhouse` having written 3,090
-    #: pass-1 cells and ZERO pass-2 ones. This module's own docstring claims to
-    #: have removed that dependency; the flag that does so was never passed.
-    cmds += ["./%s/bin/python scripts/topup_lineage.py --root %s --from-stash%s"
-             % (venv, r_, only) for r_ in roots]
+    #: `topup_lineage` builds the union by querying ClickHouse -- which does not
+    #: exist on a rental, and the 2026-08-19 pilot died on `FileNotFoundError:
+    #: /opt/homebrew/bin/clickhouse` having written 3,090 pass-1 cells and ZERO
+    #: pass-2 ones. This module's own docstring claimed the dependency was gone;
+    #: the flag that removes it was never passed.
+    from malignment import roster as _r2
+    _lin2 = _r2.lineages(ops=_r2.ALIGNING)
+    cmds = []
+    for r_ in roots:
+        mem = [m for m in _lin2.get(r_, []) if m in models]
+        if not mem:
+            continue
+        cmds.append("./%s/bin/python scripts/queue_v4.py --models %s%s"
+                    % (venv, " ".join(mem), only))
+        cmds.append("./%s/bin/python scripts/topup_lineage.py --root %s "
+                    "--from-stash%s" % (venv, r_, only))
+        #: The wipe is what makes the disk saving real. Weights are
+        #: re-downloadable; the cells they produced are already written and pulled.
+        cmds.append("rm -rf /root/.cache/huggingface/hub/models--*")
+    #: Anything in the shard no lineage claimed is still measured, at the end.
+    orphan = [m for m in models if not any(m in _lin2.get(r_, []) for r_ in roots)]
+    if orphan:
+        cmds.append("./%s/bin/python scripts/queue_v4.py --models %s%s"
+                    % (venv, " ".join(orphan), only))
     script = ["cd /root/malignment", ". /root/hfenv.sh",
               "rm -f /root/DONE /root/FAILED"]
     for i, c in enumerate(cmds):
