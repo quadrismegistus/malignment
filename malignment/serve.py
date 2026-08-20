@@ -1759,8 +1759,17 @@ class Handler(BaseHTTPRequestHandler):
             p = os.path.join(d["_dir"], "results", grain)
             if grain.endswith(".json"):
                 return {"id": d["id"], "grain": grain, "json": _read_json(p)}
+            #: MARKDOWN RESULTS ARE READ, NOT PARSED. A campaign writes findings
+            #: into `results/` as .md beside its tables -- the seven categories,
+            #: the 72 constructs -- and rejecting them made the panel error on
+            #: the most readable artifact an experiment has. Served as text so
+            #: the client renders it the way it renders a README.
+            if grain.endswith((".md", ".txt")):
+                with open(p, encoding="utf-8", errors="replace") as fh:
+                    return {"id": d["id"], "grain": grain, "markdown": fh.read()}
             if not grain.endswith(".csv"):
-                raise ValueError("grain %r is neither .csv nor .json" % grain)
+                raise ValueError("grain %r is not a readable result type "
+                                 "(.csv, .json, .md, .txt)" % grain)
             return {"id": d["id"], "grain": grain, **_read_csv(p, cap),
                     "cap": cap}
         if path == "/slot/saved":

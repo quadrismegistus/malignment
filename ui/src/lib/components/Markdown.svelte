@@ -25,16 +25,95 @@
 
 	marked.setOptions({ gfm: true, breaks: false });
 
-	let html = $derived(src ? (marked.parse(src) as string) : '');
+	//: FRONTMATTER IS SPLIT OFF AND RENDERED AS FIELDS, NOT FED TO `marked`.
+	//: GFM reads the opening `---` as a horizontal rule and the closing one as a
+	//: setext heading, so a README's declared status, subject and blocked_on came
+	//: out as a rule, an <h2> of whatever the last key happened to be, and one
+	//: run-on paragraph. The keys carry the experiment's DECLARATIONS -- status,
+	//: blocked_on, why -- which is the part a reader scanning the register most
+	//: needs and the part that was least legible.
+	//:
+	//: A hand parser rather than a yaml dependency: across every experiment .md
+	//: the frontmatter is flat `key: value` with two `|` block scalars and no
+	//: nesting, lists or anchors. If that stops being true this must be replaced
+	//: rather than extended -- a parser that silently mangles a construct it does
+	//: not know is worse than no parser, so an unparseable line is KEPT VERBATIM
+	//: as its own row rather than dropped.
+	function splitFront(t: string): { meta: [string, string][]; body: string } {
+		const m = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(t);
+		if (!m) return { meta: [], body: t };
+		const meta: [string, string][] = [];
+		const lines = m[1].split(/\r?\n/);
+		for (let i = 0; i < lines.length; i++) {
+			const kv = /^([A-Za-z_][\w-]*):\s*(.*)$/.exec(lines[i]);
+			if (!kv) {
+				if (lines[i].trim()) meta.push(['', lines[i]]);
+				continue;
+			}
+			let [, k, v] = kv;
+			if (v.trim() === '|' || v.trim() === '>') {
+				const buf: string[] = [];
+				while (i + 1 < lines.length && (lines[i + 1].startsWith('  ') || !lines[i + 1].trim())) {
+					buf.push(lines[++i].replace(/^ {2}/, ''));
+				}
+				v = buf.join(v.trim() === '>' ? ' ' : '\n').trim();
+			}
+			meta.push([k, v.replace(/^["']|["']$/g, '')]);
+		}
+		return { meta, body: t.slice(m[0].length) };
+	}
+
+	let parsed = $derived(src ? splitFront(src) : { meta: [], body: '' });
+	let html = $derived(parsed.body ? (marked.parse(parsed.body) as string) : '');
 </script>
 
 {#if src}
+	{#if parsed.meta.length}
+		<dl class="front" class:compact>
+			{#each parsed.meta as [k, v], i (k + i)}
+				<dt>{k || '\u00a0'}</dt>
+				<dd class:multiline={v.includes('\n')}>{v}</dd>
+			{/each}
+		</dl>
+	{/if}
 	<div class="md" class:compact>{@html html}</div>
 {:else}
 	<p class="muted">no file</p>
 {/if}
 
 <style>
+	/*
+	  The fields read as a card, not as a table: they are declarations about the
+	  document, and a border makes clear where the document itself starts.
+	*/
+	.front {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 2px 14px;
+		margin: 0 0 18px;
+		padding: 12px 14px;
+		border: 1px solid var(--rule);
+		border-radius: 6px;
+		background: color-mix(in srgb, var(--rule) 14%, transparent);
+		font-size: 0.86rem;
+	}
+	.front dt {
+		color: var(--muted, #8a8f98);
+		font-family: var(--mono, ui-monospace, monospace);
+		white-space: nowrap;
+	}
+	.front dd {
+		margin: 0;
+	}
+	.front dd.multiline {
+		white-space: pre-wrap;
+		max-width: 66ch;
+	}
+	.front.compact {
+		font-size: 0.8rem;
+		padding: 8px 10px;
+	}
+
 	/*
 	  THE MEASURE IS ON THE TEXT BLOCKS, NOT ON THE CONTAINER.
 

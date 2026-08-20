@@ -16,19 +16,48 @@
   summary be re-derived. That is exactly these three panels, in that sequence.
 -->
 <script lang="ts">
+	import { page } from '$app/state';
+	import { replaceState } from '$app/navigation';
 	import { api } from '$lib/api';
-	import type { Experiments, QuestionDetail, ResultRows, ResultJson } from '$lib/api';
+	//: ALIASED BECAUSE THE COMPONENT IS ALSO CALLED `Experiments`. Inside its own
+	//: module the file's implicit component name shadows the imported type, and
+	//: `index: Experiments | null` then narrowed to `never` -- so every field
+	//: access on it was a type error, including the `register_md` test that
+	//: decides whether the register link renders. The behaviour was correct at
+	//: runtime; the checker was right that the annotation was not.
+	import type {
+		Experiments as ExperimentIndex,
+		Question,
+		QuestionDetail,
+		ResultRows,
+		ResultJson
+	} from '$lib/api';
 	import Markdown from './Markdown.svelte';
 	import DataTable from './DataTable.svelte';
 
-	let index: Experiments | null = $state(null);
+	let index: ExperimentIndex | null = $state(null);
 	let selected: string | null = $state(null);
 	let detail: QuestionDetail | null = $state(null);
 	let pane: string = $state('readme');
 	let rows: ResultRows | null = $state(null);
 	let blob: ResultJson | null = $state(null);
+	let doc: string | null = $state(null);
+	let openGroups: Record<string, boolean> = $state({});
 	let error = $state('');
 	let loading = $state(false);
+
+	//: URL-BACKED SELECTION (RH: "i can't send you a link"). `q` is the question
+	//: and `p` the open pane, written on every click and read once on mount, so
+	//: a link reopens the same document rather than the panel's default.
+	function syncUrl() {
+		const u = new URL(page.url);
+		u.searchParams.set('s', 'experiments');
+		if (selected) u.searchParams.set('q', selected);
+		else u.searchParams.delete('q');
+		if (selected && pane) u.searchParams.set('p', pane);
+		else u.searchParams.delete('p');
+		replaceState(u, {});
+	}
 
 	async function loadIndex() {
 		try {
@@ -37,7 +66,19 @@
 			error = e instanceof Error ? e.message : String(e);
 		}
 	}
-	loadIndex();
+	loadIndex().then(() => {
+		//: RESTORE AFTER THE INDEX, not on mount: `open()` needs the question to
+		//: exist, and a link naming one that has since been renamed should land on
+		//: the register rather than on an error.
+		const q = page.url.searchParams.get('q');
+		if (!q || !index?.questions.some((x) => x.id === q)) return;
+		const p = page.url.searchParams.get('p');
+		open(q).then(() => {
+			if (!p) return;
+			if (p.startsWith('fig:') || ['readme', 'registration', 'population'].includes(p)) pane = p;
+			else if (detail?.results.some((r) => r.grain === p)) openGrain(p);
+		});
+	});
 
 	async function open(id: string) {
 		selected = id;
@@ -55,6 +96,7 @@
 			//: experiment has nothing", which is the opposite of "frozen, awaiting a
 			//: producer".
 			if (!detail.readme_md && detail.registration_md) pane = 'registration';
+			syncUrl();
 		} catch (e) {
 			error = e instanceof Error ? e.message : String(e);
 		} finally {
@@ -62,15 +104,65 @@
 		}
 	}
 
+	//: GROUPED, NOT LISTED. `displacement_taxonomy` has 82 results and the flat
+	//: strip rendered 82 chips, which is a directory listing pretending to be
+	//: navigation: the three documents that say what the experiment FOUND sat
+	//: between `xling_he_kicked_the.json` and `xling_he_pinched_her.json`.
+	//:
+	//: Three tiers, and the order is the argument. DOCUMENTS first because a
+	//: finding written in prose is what a reader wants and is the rarest thing
+	//: in the folder; TABLES second because they are queryable; everything else
+	//: folded into collapsed groups by filename prefix, since a family of 40
+	//: per-prompt state files is ONE thing to the reader and forty to the
+	//: filesystem.
+	const DOC_EXT = ['.md', '.txt'];
+	const TAB_EXT = ['.csv'];
+	function ext(g: string) {
+		const i = g.lastIndexOf('.');
+		return i < 0 ? '' : g.slice(i);
+	}
+	function prefix(g: string) {
+		const stem = g.slice(0, g.length - ext(g).length);
+		const m = stem.match(/^[A-Za-z0-9]+/);
+		return m ? m[0] : stem;
+	}
+	let resultTree = $derived.by(() => {
+		const rs = detail?.results ?? [];
+		const docs = rs.filter((r) => DOC_EXT.includes(ext(r.grain)));
+		const tabs = rs.filter((r) => TAB_EXT.includes(ext(r.grain)));
+		const rest = rs.filter(
+			(r) => !DOC_EXT.includes(ext(r.grain)) && !TAB_EXT.includes(ext(r.grain))
+		);
+		const by = new Map<string, typeof rest>();
+		for (const r of rest) {
+			const k = prefix(r.grain);
+			if (!by.has(k)) by.set(k, []);
+			by.get(k)!.push(r);
+		}
+		//: A prefix shared by ONE file is not a group, it is a file with a long
+		//: name. Those go to `loose` rather than each becoming a collapsed
+		//: heading the reader has to open to find a single item.
+		const groups: { key: string; items: typeof rest }[] = [];
+		const loose: typeof rest = [];
+		for (const [k, items] of [...by].sort((a, b) => b[1].length - a[1].length)) {
+			if (items.length > 1) groups.push({ key: k, items });
+			else loose.push(items[0]);
+		}
+		return { docs, tabs, groups, loose };
+	});
+
 	async function openGrain(grain: string) {
 		if (!selected) return;
 		pane = grain;
 		rows = blob = null;
+		doc = null;
 		error = '';
 		loading = true;
 		try {
+			syncUrl();
 			const r = await api.result(selected, grain);
-			if ('json' in r) blob = r as ResultJson;
+			if ('markdown' in r) doc = (r as { markdown: string }).markdown;
+			else if ('json' in r) blob = r as ResultJson;
 			else rows = r as ResultRows;
 		} catch (e) {
 			error = e instanceof Error ? e.message : String(e);
@@ -81,16 +173,27 @@
 
 	function backToRegister() {
 		selected = null;
+		pane = 'readme';
 		detail = null;
 		rows = blob = null;
+		doc = null;
 		error = '';
+		syncUrl();
 	}
 
 	//: FOUND BY READING THE RENDERED HEADINGS, not by matching a line in the
 	//: markdown source. The rendered DOM is what the reader is looking at, so a
 	//: heading the renderer did not produce is one the jump must not offer.
 	let registerEl: HTMLElement | null = $state(null);
-	let hasRegister = $derived(!!index?.register_md && /^#+\s.*HYPOTHESIS REGISTER/im.test(index.register_md));
+	//: BOUND ONCE, THEN TESTED. Written as `!!index?.register_md && test(index.register_md)`
+	//: the second access re-reads a value the checker has narrowed to `never`
+	//: inside `$derived`, and both accesses errored. Reading it into a local is
+	//: the same logic with one access, and it is also the honest shape: the test
+	//: is about the STRING, not about `index`.
+	let hasRegister = $derived.by(() => {
+		const md = index?.register_md;
+		return !!md && /^#+\s.*HYPOTHESIS REGISTER/im.test(md);
+	});
 
 	function scrollToRegister() {
 		const root = registerEl?.parentElement;
@@ -106,8 +209,8 @@
 	//: arrives, so a subject with children is a fact about the work rather than a
 	//: filing choice. Flat questions are listed first and unheaded.
 	let grouped = $derived.by(() => {
-		const flat: typeof index.questions = [];
-		const subs = new Map<string, typeof index.questions>();
+		const flat: Question[] = [];
+		const subs = new Map<string, Question[]>();
 		for (const q of index?.questions ?? []) {
 			if (q.subject) {
 				if (!subs.has(q.subject)) subs.set(q.subject, []);
@@ -203,17 +306,65 @@
 
 			<div class="panes">
 				<button class="ghost" class:on={pane === 'readme'} disabled={!detail.readme_md}
-					onclick={() => (pane = 'readme')}>README</button>
+					onclick={() => { pane = 'readme'; syncUrl(); }}>README</button>
 				<button class="ghost" class:on={pane === 'registration'} disabled={!detail.registration_md}
-					onclick={() => (pane = 'registration')}>registration</button>
+					onclick={() => { pane = 'registration'; syncUrl(); }}>registration</button>
 				<button class="ghost" class:on={pane === 'population'} disabled={!detail.population}
-					onclick={() => (pane = 'population')}>population</button>
-				{#each detail.results as r (r.grain)}
-					<button class="ghost grain" class:on={pane === r.grain} onclick={() => openGrain(r.grain)}>
-						{r.grain}<span class="bytes">{bytes(r.bytes)}</span>
-					</button>
-				{/each}
+					onclick={() => { pane = 'population'; syncUrl(); }}>population</button>
 			</div>
+
+			{#if resultTree.docs.length}
+				<div class="paneswitch figrow">
+					<span class="rowlbl">documents</span>
+					{#each resultTree.docs as r (r.grain)}
+						<button class="ghost grain doc" class:on={pane === r.grain}
+							onclick={() => openGrain(r.grain)}
+							>{r.grain}<span class="bytes">{bytes(r.bytes)}</span></button>
+					{/each}
+				</div>
+			{/if}
+
+			{#if resultTree.tabs.length}
+				<div class="paneswitch figrow">
+					<span class="rowlbl">tables</span>
+					{#each resultTree.tabs as r (r.grain)}
+						<button class="ghost grain" class:on={pane === r.grain}
+							onclick={() => openGrain(r.grain)}
+							>{r.grain}<span class="bytes">{bytes(r.bytes)}</span></button>
+					{/each}
+				</div>
+			{/if}
+
+			{#if resultTree.groups.length || resultTree.loose.length}
+				<div class="paneswitch figrow">
+					<span class="rowlbl">data</span>
+					{#each resultTree.groups as g (g.key)}
+						<button class="ghost folder" class:open={openGroups[g.key]}
+							onclick={() => (openGroups = { ...openGroups, [g.key]: !openGroups[g.key] })}
+							>{openGroups[g.key] ? '▾' : '▸'} {g.key}<span class="tag n">{g.items.length}</span
+							></button>
+					{/each}
+					{#each resultTree.loose as r (r.grain)}
+						<button class="ghost grain" class:on={pane === r.grain}
+							onclick={() => openGrain(r.grain)}
+							>{r.grain}<span class="bytes">{bytes(r.bytes)}</span></button>
+					{/each}
+				</div>
+				{#each resultTree.groups as g (g.key)}
+					{#if openGroups[g.key]}
+						<div class="paneswitch figrow nested">
+							<span class="rowlbl">{g.key}</span>
+							{#each g.items as r (r.grain)}
+								<button class="ghost grain" class:on={pane === r.grain}
+									onclick={() => openGrain(r.grain)}
+									>{r.grain.slice(g.key.length).replace(/^[_-]/, '')}<span class="bytes"
+										>{bytes(r.bytes)}</span
+									></button>
+							{/each}
+						</div>
+					{/if}
+				{/each}
+			{/if}
 
 			<!--
 			  FIGURES GET THEIR OWN ROW (RH, 2026-08-17), because a figure is not a
@@ -231,7 +382,7 @@
 				{#if detail.figures.length}
 					{#each detail.figures as f (f)}
 						<button class="ghost grain" class:on={pane === 'fig:' + f}
-							onclick={() => (pane = 'fig:' + f)}>{f}</button>
+							onclick={() => { pane = 'fig:' + f; syncUrl(); }}>{f}</button>
 					{/each}
 				{:else}
 					<span class="muted none">none — this experiment has produced no figure</span>
@@ -276,6 +427,8 @@
 				<pre class="json">{JSON.stringify(detail.population, null, 2)}</pre>
 			{:else if rows}
 				<DataTable data={rows} />
+			{:else if doc !== null}
+				<Markdown src={doc} />
 			{:else if blob}
 				<pre class="json">{JSON.stringify(blob.json, null, 2)}</pre>
 			{/if}
@@ -408,6 +561,19 @@
 	.fig figcaption {
 		display: flex; gap: 12px; align-items: center;
 		margin-top: 6px; font-size: 11px; color: var(--text-2);
+	}
+	.folder {
+		font-weight: 600;
+	}
+	.folder.open {
+		border-color: var(--accent, #8ab4f8);
+	}
+	.nested {
+		padding-left: 14px;
+		border-left: 2px solid var(--rule);
+	}
+	.doc {
+		font-weight: 600;
 	}
 	.grain {
 		font-family: var(--mono);

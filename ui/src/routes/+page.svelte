@@ -22,6 +22,8 @@
   anything.
 -->
 <script lang="ts">
+	import { page } from '$app/state';
+	import { replaceState } from '$app/navigation';
 	import { api } from '$lib/api';
 	import type { Health } from '$lib/api';
 	import Experiments from '$lib/components/Experiments.svelte';
@@ -38,7 +40,32 @@
 		{ id: 'plots', label: 'Plots', sub: 'registered figures, run on demand' }
 	] as const;
 
-	let section: string = $state('experiments');
+	//: THE URL IS THE STATE, so a panel can be sent to someone (RH). Everything
+	//: that decides what is on screen lives in the query string and the
+	//: components read it back on load, which is what makes a link mean the same
+	//: thing in another browser:
+	//:
+	//:     ?s=experiments&q=displacement_taxonomy&p=displacement-categories-7.md
+	//:
+	//: `replaceState` rather than `goto`: a click that opens a pane is not a
+	//: navigation, and pushing history for each would make Back walk through
+	//: every chip the reader touched instead of leaving the app.
+	function readSection() {
+		const s = page.url.searchParams.get('s');
+		return SECTIONS.some((x) => x.id === s) ? (s as string) : 'experiments';
+	}
+	let section: string = $state(readSection());
+
+	function setSection(id: string) {
+		section = id;
+		const u = new URL(page.url);
+		u.searchParams.set('s', id);
+		//: A section change invalidates the deeper keys; leaving them would make
+		//: the link say Roster while carrying an Experiments question.
+		u.searchParams.delete('q');
+		u.searchParams.delete('p');
+		replaceState(u, {});
+	}
 	let health: Health | null = $state(null);
 	let down = $state('');
 
@@ -125,7 +152,7 @@
 
 	<nav>
 		{#each SECTIONS as s (s.id)}
-			<button class:on={section === s.id} onclick={() => (section = s.id)}>
+			<button class:on={section === s.id} onclick={() => setSection(s.id)}>
 				{s.label}<span class="sub">{s.sub}</span>
 			</button>
 		{/each}
