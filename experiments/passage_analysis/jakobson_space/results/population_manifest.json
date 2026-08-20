@@ -1,0 +1,45 @@
+{
+ "_what": "one row per passage: BLT bits_per_byte and bge drift, both axes",
+ "out": "/Users/rj416/malignment-data/jakobson_space/passages.parquet",
+ "rows": 4000,
+ "columns": [
+  "text_sha",
+  "prompt",
+  "script",
+  "corpora",
+  "splitter",
+  "bits_per_byte",
+  "blt_ref",
+  "n_bytes",
+  "n_chars",
+  "blt_n_tokens",
+  "n_sents",
+  "mean_drift",
+  "max_drift",
+  "std_drift",
+  "total_drift",
+  "path_length",
+  "directedness",
+  "mean_pairwise",
+  "ordering"
+ ],
+ "namespaces": {
+  "en": "BAAI/bge-m3|nltk-en|refuse-untrunc-2026-08-14",
+  "zh": "BAAI/bge-m3|stanza-zh|refuse-untrunc-2026-08-14"
+ },
+ "blt_ref": "itazap/blt-1b-hf",
+ "blt_metadata_rows": 482958,
+ "blt_texts": 483085,
+ "dropped_no_vector": 435,
+ "dropped_no_text": 0,
+ "by_corpora": {
+  "passage": 2112,
+  "f11_l2": 1746,
+  "y": 142
+ },
+ "by_script": {
+  "en": 3325,
+  "zh": 675
+ },
+ "bytes": 391162
+}
