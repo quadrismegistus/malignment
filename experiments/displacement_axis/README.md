@@ -1,3 +1,20 @@
+---
+subject: displacement_axis
+status: awaiting more lineages
+why: |
+  Every MAGNITUDE number here is bounded by lineage count, not by the instrument.
+  Held-out R2 rises monotonically with the fitting half and is still climbing where
+  the data runs out (protocol_check.py, fixed 4-lineage test block):
+    lineages to fit   1       2       4       8      12      16
+    median R2     -2.626  -1.175  -0.445  -0.084  +0.035  +0.094
+  At the 20 lineages pilot3 holds, leave-one-out reaches a benchmark of 0.0243 and
+  the best named model 0.0226. Both move up together as lineages arrive, so the
+  named-vs-embedding comparison in particular should be re-run before it is quoted:
+  it already flipped once, from bge-ahead to a dead tie, on a bookkeeping fix.
+  The DIRECTION results (rho, sign tests across frames) are not waiting on this.
+blocked_on: more base->aligned lineages in twp_words_v4 / movement
+---
+
 # displacement_axis
 
 Where a model's probability mass sits on a frame's own naughty/nice axis before and after alignment, per (lineage, item), with the words that carried the movement.
