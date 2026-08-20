@@ -1,7 +1,7 @@
 {
  "_what": "one row per passage: BLT bits_per_byte and bge drift, both axes",
  "out": "/Users/rj416/malignment-data/jakobson_space/passages.parquet",
- "rows": 4000,
+ "rows": 432064,
  "columns": [
   "text_sha",
   "prompt",
@@ -30,16 +30,16 @@
  "blt_ref": "itazap/blt-1b-hf",
  "blt_metadata_rows": 482958,
  "blt_texts": 483085,
- "dropped_no_vector": 435,
+ "dropped_no_vector": 50894,
  "dropped_no_text": 0,
  "by_corpora": {
-  "passage": 2112,
-  "f11_l2": 1746,
-  "y": 142
+  "passage": 223053,
+  "f11_l2": 192119,
+  "y": 16892
  },
  "by_script": {
-  "en": 3325,
-  "zh": 675
+  "en": 357236,
+  "zh": 74828
  },
- "bytes": 391162
+ "bytes": 40002333
 }
