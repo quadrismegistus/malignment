@@ -28,8 +28,21 @@ while read -r _local_ref local_sha _remote_ref remote_sha; do
     else
         range="$remote_sha..$local_sha"
     fi
+    # MATCH WHAT IS FORBIDDEN, NOT WHAT DESCRIBES IT. The first pattern was
+    # 'claude\.ai/code/session|Claude-Session:' anywhere in a message, which
+    # matched the commit that ADDED THIS HOOK -- d9146b0, whose message quotes
+    # the pattern it searches for. The guard blocked the push on its own
+    # documentation, and nothing was leaking.
+    #
+    # What actually leaks is a live URL or a real trailer, so:
+    #   - a session URL must carry the scheme and the session id, not the bare
+    #     phrase: claude.ai/code/session_<id>
+    #   - a trailer is a trailer only at the START of a line, which is what git
+    #     interprets; 'Claude-Session:' mid-sentence is prose.
+    # Both still catch every real case: the harness emits the URL with its id
+    # and the trailer at line start. Neither catches a sentence about them.
     hits=$(git log --format='%H%n%s%n%b' "$range" 2>/dev/null \
-           | grep -icE 'claude\.ai/code/session|Claude-Session:')
+           | grep -cE 'claude\.ai/code/session_[A-Za-z0-9]|^[[:space:]]*Claude-Session:[[:space:]]*http')
     if [ "${hits:-0}" -gt 0 ]; then
         echo "PUSH BLOCKED: $hits session-link reference(s) in commits being pushed."
         echo "Strip the Claude-Session trailers before pushing."
