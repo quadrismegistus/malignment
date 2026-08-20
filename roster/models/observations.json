@@ -590,6 +590,20 @@
    "outcome": "loads",
    "cause": "completes 2,575 of 2,983 prompts; the shortfall is the declared CJK tokenizer defect, not a failure",
    "fix": "none needed. Recorded so a partial count is not read as an incomplete run."
+  },
+  {
+   "model_id": "tiiuae/Falcon-H1-1.5B-Base",
+   "environment": "vast_rtx4090_cuda130_tf540",
+   "outcome": "load_failed",
+   "cause": "transformers 5.4.0 config validation: \"Field 'use_cache' with value True doesn't match any type in (int, NoneType)\" -- the same shape as OLMoE's tie_word_embeddings bool/int rejection on 5.x",
+   "fix": "UNKNOWN, and the version window is the open question rather than the kernels. The node's own `why` cites 1.2933 cells/s measured on an A100 with mamba kernels, and that environment (vast_a100_ssm_kernels) runs transformers 5.14.1 -- so it has WORKED on a 5.x NEWER than this one. Do not pin '<5' on the strength of this error. Resolve across the version space LOCALLY first: a config validation failure needs no GPU, which is how internlm2's sentencepiece window was settled before anything was rented."
+  },
+  {
+   "model_id": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "environment": "vast_rtx4090_cuda130_tf540",
+   "outcome": "load_failed",
+   "cause": "as Falcon-H1-1.5B-Base: use_cache validation on transformers 5.4.0",
+   "fix": "as Falcon-H1-1.5B-Base. Both arms fail identically, so the pair is recoverable together once the version is known."
   }
  ],
  "engine_support": {
