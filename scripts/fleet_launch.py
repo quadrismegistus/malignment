@@ -116,10 +116,85 @@ def payload(models, out_dir):
     return paths, total
 
 
+def resume(iid):
+    """Bring a STOPPED-then-STARTED box back to work. Idempotent.
+
+    **A vast.ai stop/start reverts the container, and three things break every
+    time.** Observed on all three boxes on 2026-08-20, in the same order:
+
+      1. `hf_config.pth` is BACK in both venvs, so downloads silently go to
+         http://117.175.104.83:8081 again. The purge in PROVISION runs once; a
+         restart undoes it. Three for three -- a property of the restart, not
+         bad luck.
+      2. `tmux` does not survive, so the box comes back RUNNING and IDLE,
+         billing while doing nothing, with no session and no error.
+      3. The ssh host and port can CHANGE, so the stored state points at a
+         closed door and every check reads as unreachable.
+
+    I fixed each of those by hand, per box, three times. The purge belonged
+    wherever work STARTS rather than only where a box is first provisioned --
+    the same error as putting the VRAM guard at launch when the thing that
+    repeats is run.sh.
+    """
+    import json as _j
+    from malignment import cloud
+    st = cloud.states().get(str(iid))
+    if not st:
+        raise SystemExit("  %s is not tracked" % iid)
+    api = {str(i.get("id")): i for i in
+           _j.loads(cloud.vastai("show", "instances", "--raw") or "[]")}.get(str(iid), {})
+    if api.get("actual_status") != "running":
+        print("  %s is %s -- asking it to start" % (iid, api.get("actual_status")))
+        print("  ", (cloud.vastai("start", "instance", str(iid)) or "").strip()[:70])
+        return 1
+    if api.get("ssh_host") and (api["ssh_host"] != st.get("ssh_host")
+                                or api.get("ssh_port") != st.get("ssh_port")):
+        st["ssh_host"], st["ssh_port"] = api["ssh_host"], api["ssh_port"]
+        cloud.state(st)
+        print("  ssh refreshed -> %s:%s" % (st["ssh_host"], st["ssh_port"]))
+    venv = st["venv"]
+    r = cloud.ssh_run(st, "find /root/malignment /opt/uv /usr/local/lib /usr/lib "
+                          "-name hf_config.pth -delete 2>/dev/null; "
+                          "rm -f /opt/uv/cache/archive-v0/*/hf_config.pth 2>/dev/null; "
+                          "cd /root/malignment && ./%s/bin/python -c "
+                          "'import huggingface_hub.constants as C; print(C.ENDPOINT)'"
+                      % venv)
+    ep = (r.stdout or "").strip().splitlines()[-1:] or ["?"]
+    print("  endpoint  %s" % ep[0])
+    if "huggingface.co" not in ep[0]:
+        raise SystemExit("  endpoint still hijacked -- not restarting work")
+    #: **ASK WHETHER WORK IS RUNNING, NOT WHETHER A SESSION IS NAMED `fleet`.**
+    #: The first version tested `tmux has-session -t fleet`, and on box 48182910
+    #: the work was running under a session named `baichuan` -- so resume() read
+    #: "idle" and started a SECOND queue against the same stash. This function's
+    #: own docstring warns that two queues on one stash is the thing to avoid; the
+    #: check I wrote could not see it.
+    #:
+    #: A producer process is the condition. `pgrep -f` on the script names catches
+    #: the work whatever the session is called, and `-c` counts rather than
+    #: matching, so the checker's own ssh command line cannot be the hit.
+    n = cloud.ssh_run(st, "pgrep -fc 'scripts/(run_v4|queue_v4|topup_lineage)\\.py'"
+                          " 2>/dev/null || true")
+    busy = int((n.stdout or "0").strip() or 0) > 0
+    if busy:
+        print("  already working -- left alone")
+        return 0
+    cloud.ssh_run(st, "rm -f /root/DONE /root/RECOVER_DONE; "
+                      "tmux new-session -d -s fleet 'bash /root/run.sh'")
+    out = cloud.ssh_run(st, "sleep 2; tmux ls").stdout or ""
+    print("  restarted %s" % out.strip()[:70])
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--plan", default="data/fleet_shards.json")
-    ap.add_argument("--box", type=int, required=True, help="1-based index into the plan")
+    ap.add_argument("--box", type=int, help="1-based index into the plan")
+    ap.add_argument("--resume", metavar="INSTANCE_ID",
+                    help="bring a stopped-then-started box back to work: purge "
+                         "the re-injected HF mirror, refresh ssh host/port, and "
+                         "restart run.sh if nothing is running. A vast.ai restart "
+                         "breaks all three, every time.")
     ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None)
     ap.add_argument("--image", default=DEFAULT_IMAGE)
     ap.add_argument("--disk", type=int, default=0,
@@ -164,6 +239,10 @@ def main():
                     help="asserts RH said to spend on THIS launch, not a "
                          "remembered earlier yes")
     a = ap.parse_args()
+    if a.resume:
+        return resume(a.resume)
+    if not a.box:
+        raise SystemExit("--box is required unless --resume is given")
 
     plan = json.load(open(os.path.join(ROOT, a.plan)))
     boxes = plan["boxes"]
