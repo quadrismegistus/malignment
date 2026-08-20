@@ -3,6 +3,17 @@ subject: drift_geometry
 question: What can the geometric drift metrics mean, and do they track what a reader calls staying in the scene?
 status: ported 2026-08-20; new analysis NOT yet run
 grain: page
+requires: |
+  stanza (>=1.14) plus its `en` tokenize model, and sentence-transformers for
+  BAAI/bge-m3 via malignment.slot_axis. NEITHER IS IN requirements.txt, and that
+  is not an oversight to fix here: that file declares itself DERIVED from the
+  imports of `malignment/*.py` by AST walk, so an experiment's dependency is out
+  of its scope by construction. About eleven third-party packages are undeclared
+  across experiments/ on the same grounds -- scipy, plotnine, pyarrow, pydantic,
+  sklearn, matplotlib, wordfreq, datasets, nltk, stanza, sentence-transformers.
+  A clone can import the package and run no experiment. Recorded here rather than
+  patched, because hand-editing requirements.txt would be undone by the next
+  regeneration and would hide the real gap.
 ---
 
 # drift_geometry

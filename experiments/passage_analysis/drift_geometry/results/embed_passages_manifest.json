@@ -1,0 +1,16 @@
+{
+ "_what": "sentence vectors for the coded interiority passages",
+ "out": "/Users/rj416/malignment-data/drift_geometry/sentence_vecs",
+ "parts": 55,
+ "embedder": "BAAI/bge-m3",
+ "device": "cpu",
+ "normalized": true,
+ "dim": 1024,
+ "splitter": "stanza en tokenize",
+ "stanza": "1.14.0",
+ "n_passages_coded": 13565,
+ "n_passages_embedded": 13557,
+ "n_sentences": 181665,
+ "median_sents": 16,
+ "bytes": 726914584
+}
