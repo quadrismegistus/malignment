@@ -709,6 +709,15 @@ nodes:
     scale: 7B
     env:
       profile: tf457
+      packages:
+        bitsandbytes: ''
+      packages_why: "Baichuan2's bundled modelling code imports bitsandbytes and
+        transformers refuses the load without it. INVISIBLE FROM THIS MACHINE: the
+        Mac has no CUDA, so bitsandbytes cannot be installed here at all and the
+        model is simply unmeasurable locally -- the dependency exists only where
+        the work happens. Found 2026-08-20 when both arms died on a rented box
+        after their lineage had otherwise finished; installing it recovered 5,227
+        pass-2 cells."
       why: transformers 5.x CANNOT RUN this; pin 4.57.1.
       prompt_cache: false
       prompt_cache_why: "twp_v4's prompt KV cache raises 'tuple' object has
@@ -727,6 +736,15 @@ nodes:
     org_type: corporate
     env:
       profile: tf457
+      packages:
+        bitsandbytes: ''
+      packages_why: "Baichuan2's bundled modelling code imports bitsandbytes and
+        transformers refuses the load without it. INVISIBLE FROM THIS MACHINE: the
+        Mac has no CUDA, so bitsandbytes cannot be installed here at all and the
+        model is simply unmeasurable locally -- the dependency exists only where
+        the work happens. Found 2026-08-20 when both arms died on a rented box
+        after their lineage had otherwise finished; installing it recovered 5,227
+        pass-2 cells."
       why: transformers 5.x CANNOT RUN this; pin 4.57.1.
       prompt_cache: false
       prompt_cache_why: "twp_v4's prompt KV cache raises 'tuple' object has
@@ -926,6 +944,15 @@ nodes:
       profile: tf457
       packages:
         sentencepiece: ==0.2.1
+        einops: ''
+      packages_why: "einops: internlm2's BUNDLED modelling_internlm2.py imports it
+        through trust_remote_code, so transformers' check_imports refuses the load
+        before a weight is read. Cost three boxes' worth of diagnosis on 2026-08-20
+        because the runner truncated the message at exactly the package list. The
+        modelling file ALSO imports flash_attn, and that one is NOT required: this
+        Mac has einops without flash_attn and loads internlm2 fine, so the import
+        is guarded. Declaring flash_attn here would buy a 25-minute compile per box
+        for nothing."
       why: "sentencepiece: 0.2.2 fails internlm2's SentencePiece->fast conversion outright; 0.2.0/0.2.1 convert fine and protobuf has no effect. Resolved locally across the whole version space before renting anything -- tokenizers need no GPU. same boundary shift as the chat arm, verified on the box. Both arms fail identically, so the pair is recoverable rather than lost."
   internlm/internlm2-chat-7b:
     revision_ladder: 3
@@ -936,6 +963,15 @@ nodes:
       profile: tf457
       packages:
         sentencepiece: ==0.2.1
+        einops: ''
+      packages_why: "einops: internlm2's BUNDLED modelling_internlm2.py imports it
+        through trust_remote_code, so transformers' check_imports refuses the load
+        before a weight is read. Cost three boxes' worth of diagnosis on 2026-08-20
+        because the runner truncated the message at exactly the package list. The
+        modelling file ALSO imports flash_attn, and that one is NOT required: this
+        Mac has einops without flash_attn and loads internlm2 fine, so the import
+        is guarded. Declaring flash_attn here would buy a 25-minute compile per box
+        for nothing."
       why: "sentencepiece: 0.2.2 fails internlm2's SentencePiece->fast conversion outright; 0.2.0/0.2.1 convert fine and protobuf has no effect. Resolved locally across the whole version space before renting anything -- tokenizers need no GPU. AutoTokenizer fetches the repo's bundled InternLM2TokenizerFast under trust_remote_code and it SHIFTS WORD BOUNDARIES. PreTrainedTokenizerFast scores 2/2 where AutoTokenizer scores 0/2."
   internlm/internlm2-chat-7b-sft:
     revision_ladder: 2
@@ -946,6 +982,15 @@ nodes:
       profile: tf457
       packages:
         sentencepiece: ==0.2.1
+        einops: ''
+      packages_why: "einops: internlm2's BUNDLED modelling_internlm2.py imports it
+        through trust_remote_code, so transformers' check_imports refuses the load
+        before a weight is read. Cost three boxes' worth of diagnosis on 2026-08-20
+        because the runner truncated the message at exactly the package list. The
+        modelling file ALSO imports flash_attn, and that one is NOT required: this
+        Mac has einops without flash_attn and loads internlm2 fine, so the import
+        is guarded. Declaring flash_attn here would buy a 25-minute compile per box
+        for nothing."
       why: "sentencepiece: 0.2.2 fails internlm2's SentencePiece->fast conversion outright; 0.2.0/0.2.1 convert fine and protobuf has no effect. Resolved locally across the whole version space before renting anything -- tokenizers need no GPU."
   kakaocorp/kanana-1.5-8b-base:
     family:
