@@ -1,0 +1,927 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: He was written up for the third time this month, so he decided to ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  go               2 ->  15    -13
+  leave            3 ->  44    -41
+  get              5 ->  11     -6
+  do               6 ->  21    -15
+  try              7 ->  23    -16
+  give             8 ->  16     -8
+  come            11 ->  53    -42
+  write            9 ->  14     -5
+  have            12 ->  27    -15
+  use             15 ->  47    -32
+  move            16 ->  42    -26
+  stop            13 ->  18     -5
+  put             14 ->  17     -3
+  stay            17 ->  25     -8
+  head            18 ->  87    -69
+  check           19 ->  38    -19
+  visit           23 ->  48    -25
+  just            24 ->  69    -45
+  change          21 ->  26     -5
+  quit            20 ->  20     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  step            53 ->   2    +51
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  skip             7 ->  27    -20
+  leave            4 ->   9     -5
+  go               2 ->   2     +0
+  get              3 ->   6     -3
+  give             6 ->  10     -4
+  just            12 ->  31    -19
+  tell            17 ->  50    -33
+  quit            10 ->  12     -2
+  stop            15 ->  19     -4
+  move            13 ->  18     -5
+  stay            16 ->  20     -4
+  come            14 ->  17     -3
+  try             11 ->  11     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  write           19 ->   7    +12
+  call             8 ->   4     +4
+  start           20 ->   8    +12
+  do               5 ->   3     +2
+  seek            55 ->  15    +40
+  make             9 ->   5     +4
+  change          28 ->  14    +14
+  have            18 ->  13     +5
+  resign          26 ->  16    +10
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  write            6 ->  15     -9
+  get              5 ->   6     -1
+  try              3 ->   4     -1
+  make             7 ->   8     -1
+  show            19 ->  38    -19
+  post            22 ->  47    -25
+  play            17 ->  32    -15
+  come            14 ->  26    -12
+  spend           21 ->  23     -2
+
+HIGHER UNDER B
+  go               2 ->   2     +0
+  take             1 ->   1     +0
+  celebrate       30 ->  10    +20
+  treat           28 ->  11    +17
+  have            10 ->   5     +5
+  visit           12 ->  12     +0
+  head            13 ->  13     +0
+  do               4 ->   3     +1
+  join            34 ->  20    +14
+  wear            32 ->  21    +11
+  share           33 ->  22    +11
+  call            16 ->  16     +0
+  use             20 ->  18     +2
+  put              9 ->   9     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  quit             2 ->   2     +0
+  go               3 ->   3     +0
+  leave            4 ->   6     -2
+  run             15 ->  28    -13
+  fight           12 ->  15     -3
+  get              5 ->   8     -3
+  stop            18 ->  46    -28
+  give             9 ->  13     -4
+  pack            20 ->  37    -17
+  call             7 ->   9     -2
+  write           14 ->  14     +0
+  skip            16 ->  18     -2
+  do               6 ->   7     -1
+  put             19 ->  27     -8
+  come            17 ->  19     -2
+  be              21 ->  21     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  speak           46 ->  12    +34
+  turn            11 ->   4     +7
+  make             8 ->   5     +3
+  talk            39 ->  17    +22
+  have            27 ->  16    +11
+  plead           30 ->  20    +10
+  just            13 ->  11     +2
+  resign          10 ->  10     +0
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  go               1 ->   2     -1
+  get              3 ->   7     -4
+  have             7 ->  14     -7
+  try              8 ->  12     -4
+  visit           16 ->  51    -35
+  do               5 ->   5     +0
+  see             22 ->  63    -41
+  play            20 ->  53    -33
+  buy             10 ->  29    -19
+  come            14 ->  33    -19
+  ask             13 ->  26    -13
+  read            12 ->  22    -10
+  be              11 ->  17     -6
+  spend           19 ->  25     -6
+  start           17 ->  21     -4
+  stay            21 ->  28     -7
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  make             6 ->   4     +2
+  give             9 ->   6     +3
+  skip            40 ->  10    +30
+  call            18 ->   8    +10
+  put             23 ->   9    +14
+  focus          101 ->  20    +81
+  stop            29 ->  13    +16
+  just            38 ->  15    +23
+  write            4 ->   3     +1
+  sit             35 ->  19    +16
+  change          33 ->  18    +15
+  use             15 ->  11     +4
+  check           26 ->  16    +10
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  stop             4 ->   9     -5
+  do              11 ->  15     -4
+  turn            15 ->  36    -21
+  write           13 ->  26    -13
+  get              9 ->  10     -1
+  move            17 ->  39    -22
+  give             8 ->   8     +0
+  retire          10 ->  11     -1
+  go               3 ->   4     -1
+  come            19 ->  37    -18
+  make            12 ->  13     -1
+  fight           16 ->  16     +0
+  try             18 ->  24     -6
+  change          20 ->  27     -7
+
+HIGHER UNDER B
+  quit             2 ->   1     +1
+  pack            31 ->   7    +24
+  leave            6 ->   3     +3
+  resign           5 ->   5     +0
+  call             7 ->   6     +1
+  ask             37 ->  19    +18
+  let             27 ->  18     +9
+  walk            22 ->  14     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  go               2 ->   5     -3
+  stay             9 ->  48    -39
+  leave           11 ->  46    -35
+  be              13 ->  71    -58
+  move            16 ->  90    -74
+  try              5 ->   8     -3
+  just            21 -> 157   -136
+  do               6 ->   6     +0
+  come            23 ->  38    -15
+  ask             20 ->  31    -11
+  make             7 ->   7     +0
+  run             22 ->  32    -10
+  change          15 ->  21     -6
+  use             19 ->  20     -1
+  have            10 ->  10     +0
+  call            14 ->  14     +0
+  stop            18 ->  18     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  quit            17 ->   9     +8
+  give             8 ->   4     +4
+  visit           36 ->  12    +24
+  seek            75 ->  16    +59
+  join            56 ->  17    +39
+  retire          29 ->  13    +16
+  see             24 ->  15     +9
+  get              4 ->   3     +1
+  put             12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  quit             3 ->   6     -3
+  get              6 ->  14     -8
+  leave            5 ->   9     -4
+  call            10 ->  21    -11
+  give            12 ->  36    -24
+  do               7 ->  10     -3
+  try             13 ->  43    -30
+  make             9 ->  11     -2
+  change          17 ->  54    -37
+  move            22 ->  56    -34
+  turn            14 ->  26    -12
+  write            4 ->   4     +0
+  come            15 ->  17     -2
+  put             18 ->  19     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  speak           38 ->   8    +30
+  talk            28 ->   7    +21
+  retire          11 ->   3     +8
+  face            88 ->  20    +68
+  fight           20 ->  12     +8
+  appeal          31 ->  18    +13
+  skip            19 ->  13     +6
+  go               2 ->   2     +0
+  check           21 ->  16     +5
+  ask             16 ->  15     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  quit             1 ->  10     -9
+  leave            4 ->  23    -19
+  go               3 ->   3     +0
+  resign           7 ->  95    -88
+  get              5 ->  14     -9
+  file            12 ->  51    -39
+  start           14 ->  40    -26
+  make            11 ->  31    -20
+  put             16 ->  39    -23
+  do              10 ->  19     -9
+  write           18 ->  26     -8
+  try             13 ->  17     -4
+  look            17 ->  21     -4
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  finally         42 ->   2    +40
+  buy             56 ->   8    +48
+  ask             23 ->   7    +16
+  just            15 ->   5    +10
+  give             9 ->   6     +3
+  have            24 ->  12    +12
+  retire          19 ->  11     +8
+  use             27 ->  13    +14
+  call             6 ->   4     +2
+  appeal          38 ->  16    +22
+  play            57 ->  22    +35
+  talk            37 ->  18    +19
+  stay            21 ->  15     +6
+  seek            28 ->  20     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  get              3 ->   7     -4
+  have             5 ->   8     -3
+  leave           12 ->  45    -33
+  make             8 ->  12     -4
+  give             4 ->   6     -2
+  put             11 ->  19     -8
+  stay             9 ->  14     -5
+  try             10 ->  15     -5
+  come            20 ->  56    -36
+  play            17 ->  50    -33
+  return          16 ->  39    -23
+  run             18 ->  38    -20
+  call            19 ->  44    -25
+  spend           13 ->  18     -5
+  ask             22 ->  22     +0
+
+HIGHER UNDER B
+  ______          87 ->   5    +82
+  ____           113 ->  10   +103
+  ________       138 ->  13   +125
+  _____          147 ->  16   +131
+  start           23 ->   9    +14
+  take             1 ->   1     +0
+  write            6 ->   3     +3
+  _______        146 ->  21   +125
+  do               7 ->   4     +3
+  stop            14 ->  11     +3
+  go               2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  ______          11 ->  28    -17
+  give             3 ->  10     -7
+  ask              4 ->   8     -4
+  ____            17 ->  29    -12
+  ________        18 ->  31    -13
+  do              10 ->  16     -6
+  quit             9 ->  15     -6
+  have            22 ->  43    -21
+  make            14 ->  22     -8
+  see              7 ->  12     -5
+  stay            24 ->  36    -12
+  talk             8 ->   9     -1
+  change          13 ->  13     +0
+
+HIGHER UNDER B
+  join            12 ->   3     +9
+  finally         52 ->   6    +46
+  stop             6 ->   4     +2
+  start           30 ->   7    +23
+  take             2 ->   2     +0
+  get              5 ->   5     +0
+  go               1 ->   1     +0
+  try             16 ->  11     +5
+  consult         26 ->  19     +7
+  hire            49 ->  24    +25
+  spend           23 ->  20     +3
+  cut             34 ->  23    +11
+  buy             21 ->  17     +4
+  use             38 ->  26    +12
+  find            15 ->  14     +1
+  seek            19 ->  18     +1
+  work            25 ->  25     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  turn             2 ->  33    -31
+  hand             9 ->  68    -59
+  give             6 ->  14     -8
+  fess            10 ->  93    -83
+  quit             5 ->  10     -5
+  just            12 ->  38    -26
+  have            11 ->  20     -9
+  do               3 ->   3     +0
+  stop            14 ->  25    -11
+  seek            17 ->  54    -37
+  _____           15 ->  24     -9
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  write           58 ->   6    +52
+  file            29 ->   7    +22
+  finally          8 ->   4     +4
+  get              7 ->   5     +2
+  go               4 ->   2     +2
+  ______          19 ->   9    +10
+  ___             79 ->  15    +64
+  make            38 ->  13    +25
+  put             13 ->   8     +5
+  _______         35 ->  16    +19
+  leave           18 ->  12     +6
+  change          16 ->  11     +5
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  go               1 ->  69    -68
+  take             2 ->  23    -21
+  get              4 ->  29    -25
+  make             5 ->  57    -52
+  do               8 ->  84    -76
+  give             7 ->  35    -28
+  call            10 ->  93    -83
+  try             11 ->  49    -38
+  write            9 ->  16     -7
+  come            13 ->  45    -32
+  move            14 ->  30    -16
+  leave            3 ->   4     -1
+  just            12 ->  19     -7
+  stay            16 ->  52    -36
+  start           17 ->  50    -33
+  stop            15 ->  17     -2
+  be              20 -> 110    -90
+  put             18 ->  43    -25
+
+HIGHER UNDER B
+  turn            29 ->   1    +28
+  quit             6 ->   2     +4
+  resign          38 ->   3    +35
+  hide            85 ->   5    +80
+  surrender      114 ->   7   +107
+  enlist         104 ->   9    +95
+  see             22 ->   6    +16
+  ask             21 ->   8    +13
+  run             27 ->  10    +17
+  apply           64 ->  12    +52
+  seek            53 ->  13    +40
+  skip            19 ->  11     +8
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  write            1 ->   2     -1
+  have             9 ->  12     -3
+  put             11 ->  18     -7
+  make             6 ->   7     -1
+  get              8 ->  10     -2
+  try              5 ->   5     +0
+  see             12 ->  19     -7
+  go               2 ->   3     -1
+  be              14 ->  15     -1
+  come            10 ->  11     -1
+
+HIGHER UNDER B
+  take             3 ->   1     +2
+  run             15 ->   8     +7
+  keep            13 ->   9     +4
+  give             7 ->   6     +1
+  do               4 ->   4     +0
+  stay            20 ->  14     +6
+  play            17 ->  13     +4
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  write            4 ->  28    -24
+  do               3 ->  16    -13
+  take             1 ->   1     +0
+  go               2 ->   4     -2
+  give             9 ->  25    -16
+  put             15 ->  65    -50
+  stay            14 ->  39    -25
+  be              13 ->  35    -22
+  have            18 ->  67    -49
+  make             6 ->   9     -3
+  keep            20 ->  43    -23
+  run             22 ->  48    -26
+  try              5 ->   7     -2
+  stop            12 ->  17     -5
+  quit            19 ->  24     -5
+
+HIGHER UNDER B
+  call            17 ->   2    +15
+  plead          143 ->   8   +135
+  change           8 ->   3     +5
+  just            21 ->   6    +15
+  not             50 ->  12    +38
+  clean           64 ->  15    +49
+  talk            58 ->  14    +44
+  turn            32 ->  13    +19
+  really          79 ->  18    +61
+  avoid           99 ->  20    +79
+  lay             84 ->  21    +63
+  steal          111 ->  23    +88
+  step            86 ->  27    +59
+  cut             52 ->  26    +26
+  get              7 ->   5     +2
+  start           10 ->  10     +0
+  leave           11 ->  11     +0
+  skip            23 ->  22     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  go               2 ->   2     +0
+  get              3 ->   4     -1
+  write            7 ->  10     -3
+  come            10 ->  19     -9
+  do               6 ->   6     +0
+  be              16 ->  33    -17
+  have            11 ->  13     -2
+  stop            14 ->  14     +0
+  give             5 ->   5     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  skip            35 ->  18    +17
+  use             18 ->  15     +3
+  try              8 ->   7     +1
+  keep            24 ->  20     +4
+  start           19 ->  17     +2
+  leave            9 ->   8     +1
+  call            17 ->  16     +1
+  check           22 ->  21     +1
+  put             15 ->  12     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  quit             1 ->   8     -7
+  leave            2 ->  14    -12
+  just             5 ->  25    -20
+  resign           7 ->  60    -53
+  call             6 ->   9     -3
+  retire          11 ->  71    -60
+  move            10 ->  43    -33
+  put             14 ->  34    -20
+  stop            15 ->  24     -9
+
+HIGHER UNDER B
+  write           18 ->   4    +14
+  take             3 ->   1     +2
+  start           17 ->   7    +10
+  make            12 ->   5     +7
+  be              28 ->  11    +17
+  skip            36 ->  16    +20
+  confront        92 ->  20    +72
+  tell            20 ->  12     +8
+  talk            32 ->  15    +17
+  show            34 ->  18    +16
+  use             25 ->  13    +12
+  keep            56 ->  21    +35
+  fight           71 ->  23    +48
+  give             8 ->   3     +5
+  try             26 ->  19     +7
+  do              13 ->  10     +3
+  bring           40 ->  22    +18
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  go               2 ->   2     +0
+  leave            9 ->  14     -5
+  call             8 ->  11     -3
+  come            12 ->  15     -3
+  quit            18 ->  20     -2
+  be              21 ->  21     +0
+  give             7 ->   7     +0
+  see             16 ->  17     -1
+  get              5 ->   6     -1
+
+HIGHER UNDER B
+  write            6 ->   5     +1
+  make             4 ->   4     +0
+  do               3 ->   3     +0
+  show            19 ->  18     +1
+  start           17 ->  16     +1
+  put             13 ->  10     +3
+  try             10 ->   8     +2
+  check           20 ->  19     +1
+  take             1 ->   1     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  go               4 ->   5     -1
+  get              5 ->  10     -5
+  call             6 ->  16    -10
+  retire          14 ->  40    -26
+  do               9 ->  15     -6
+  write           17 ->  60    -43
+  give             7 ->   9     -2
+  resign          15 ->  20     -5
+  turn            20 ->  24     -4
+  try             11 ->  13     -2
+  move            10 ->  11     -1
+
+HIGHER UNDER B
+  take             2 ->   2     +0
+  quit             1 ->   1     +0
+  leave            3 ->   3     +0
+  come            13 ->   4     +9
+  skip            16 ->   8     +8
+  drop            12 ->   6     +6
+  find            33 ->  12    +21
+  transfer        18 ->  14     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  get              3 ->   7     -4
+  come             7 ->  15     -8
+  put             10 ->  16     -6
+  do               6 ->   9     -3
+  have            14 ->  21     -7
+  just            21 ->  41    -20
+  stop            12 ->  13     -1
+  try             13 ->  17     -4
+  call            17 ->  23     -6
+  stay            20 ->  22     -2
+  quit             4 ->   5     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  leave            9 ->   3     +6
+  return          23 ->  11    +12
+  make             5 ->   4     +1
+  resign          18 ->  10     +8
+  go               2 ->   2     +0
+  visit           34 ->  20    +14
+  give             8 ->   6     +2
+  start           22 ->  18     +4
+  write           11 ->   8     +3
+  change          19 ->  19     +0
+  move            16 ->  12     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  go               2 ->   2     +0
+  do               6 ->   8     -2
+  get              4 ->   6     -2
+  head            17 ->  36    -19
+  have            13 ->  17     -4
+  come            11 ->  14     -3
+  stay            20 ->  25     -5
+  check           19 ->  19     +0
+  call             3 ->   3     +0
+  try             10 ->  10     +0
+
+HIGHER UNDER B
+  resign          18 ->  12     +6
+  quit             8 ->   7     +1
+  speak           14 ->  13     +1
+  take             1 ->   1     +0
+  make             7 ->   5     +2
+  give             9 ->   9     +0
+  write           12 ->  11     +1
+  appeal          37 ->  18    +19
+  leave            5 ->   4     +1
+  stop            16 ->  15     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  take             2 ->   2     +0
+  go               3 ->   5     -2
+  leave            4 ->   4     +0
+  get              6 ->  21    -15
+  resign           8 ->  19    -11
+  do               5 ->   6     -1
+  write           11 ->  27    -16
+  call             7 ->   9     -2
+  make             9 ->  12     -3
+  fight           12 ->  33    -21
+  stop            13 ->  25    -12
+  give            10 ->  10     +0
+  come            17 ->  36    -19
+  put             16 ->  28    -12
+
+HIGHER UNDER B
+  quit             1 ->   1     +0
+  finally         47 ->   3    +44
+  look            48 ->  11    +37
+  pack            25 ->   8    +17
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  get              5 ->   8     -3
+  come             8 ->  13     -5
+  pack            19 ->  35    -16
+  write           13 ->  17     -4
+  move            17 ->  21     -4
+  just             9 ->   9     +0
+  make            11 ->  14     -3
+  stop            12 ->  15     -3
+  go               3 ->   3     +0
+  do               6 ->   7     -1
+  give            10 ->  12     -2
+
+HIGHER UNDER B
+  quit             1 ->   1     +0
+  take             2 ->   2     +0
+  resign          16 ->   5    +11
+  leave            4 ->   4     +0
+  call             7 ->   6     +1
+  skip            22 ->  19     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  go               2 ->   6     -4
+  leave            4 ->  37    -33
+  quit             3 ->   8     -5
+  get              5 ->  16    -11
+  call             6 ->  11     -5
+  just             8 ->  20    -12
+  stop             9 ->  39    -30
+  give            11 ->  33    -22
+  move            16 ->  76    -60
+  resign          19 ->  77    -58
+  write           13 ->  15     -2
+  stay            15 ->  19     -4
+  come            17 ->  18     -1
+  do               7 ->   7     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  talk            32 ->   2    +30
+  speak           74 ->   4    +70
+  meet            88 ->   5    +83
+  make            10 ->   3     +7
+  ask             30 ->  10    +20
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  leave            5 ->  43    -38
+  retire          12 -> 125   -113
+  go               2 ->   3     -1
+  quit             3 ->  10     -7
+  come            14 ->  51    -37
+  write           10 ->  20    -10
+  make             7 ->  11     -4
+  just            21 -> 130   -109
+  sue             22 -> 142   -120
+  resign          17 ->  53    -36
+  stop            11 ->  18     -7
+  finally         19 ->  38    -19
+  put             23 ->  40    -17
+  fight           18 ->  33    -15
+  do               6 ->   6     +0
+  get              4 ->   4     +0
+  give            13 ->  16     -3
+  play            20 ->  23     -3
+  call             8 ->   8     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  try              9 ->   2     +7
+  seek            54 ->   9    +45
+  change          24 ->   5    +19
+  teach          116 ->  17    +99
+  turn            35 ->  13    +22
+  see             34 ->  14    +20
+  talk            25 ->  12    +13
+  have            15 ->   7     +8
+  visit           96 ->  22    +74
+  step            28 ->  19     +9
+  ask             33 ->  21    +12
+  start           16 ->  15     +1
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  take             1 ->   3     -2
+  go               3 ->   4     -1
+  stay            12 ->  39    -27
+  call             7 ->  11     -4
+  write           16 ->  28    -12
+  walk            17 ->  27    -10
+  resign          10 ->  20    -10
+  make             9 ->  15     -6
+  stop            18 ->  19     -1
+  move            11 ->  14     -3
+  leave            4 ->   7     -3
+
+HIGHER UNDER B
+  quit             2 ->   1     +1
+  look            15 ->   2    +13
+  find            20 ->  10    +10
+  start           14 ->   8     +6
+  get              5 ->   5     +0
+  clean           30 ->  13    +17
+  give             6 ->   6     +0
+  try             13 ->  12     +1
+  change          23 ->  16     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  go               2 ->   2     +0
+  call             5 ->  15    -10
+  get              3 ->   7     -4
+  see              9 ->  18     -9
+  pay             21 ->  61    -40
+  stop            18 ->  36    -18
+  buy             22 ->  32    -10
+  try             11 ->  12     -1
+  tell            16 ->  20     -4
+  skip            17 ->  21     -4
+  have            12 ->  13     -1
+  do               7 ->  10     -3
+  start           26 ->  29     -3
+  look            25 ->  25     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  stay            15 ->   3    +12
+  ask             13 ->   5     +8
+  leave            8 ->   8     +0
+  join            24 ->  14    +10
+  sit             45 ->  22    +23
+  put             14 ->  11     +3
+  make            10 ->   9     +1
+  retire          42 ->  23    +19
+  check           20 ->  16     +4
+  write            6 ->   6     +0
+  run             23 ->  19     +4
+  quit            19 ->  17     +2
+  give             4 ->   4     +0
+  seek            27 ->  24     +3
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  take             1 ->   2     -1
+  move            14 ->  22     -8
+  leave            3 ->   4     -1
+  do               6 ->   7     -1
+  stop             9 ->  12     -3
+  make             8 ->  10     -2
+  skip            17 ->  20     -3
+  run             21 ->  26     -5
+  get              4 ->   5     -1
+  check           22 ->  25     -3
+  stay            16 ->  16     +0
+  try             13 ->  15     -2
+
+HIGHER UNDER B
+  quit             5 ->   3     +2
+  just            10 ->   6     +4
+  fight           18 ->  13     +5
+  file            40 ->  19    +21
+  give            11 ->   9     +2
+  write           12 ->  11     +1
+  start           15 ->  14     +1
+  go               2 ->   1     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  write            3 ->  10     -7
+  go               2 ->   9     -7
+  do               4 ->  11     -7
+  try              7 ->  22    -15
+  make             6 ->  20    -14
+  take             1 ->   2     -1
+  look            13 ->  37    -24
+  read            19 -> 106    -87
+  visit           20 ->  46    -26
+  ask             16 ->  25     -9
+  see             15 ->  23     -8
+  put             12 ->  16     -4
+
+HIGHER UNDER B
+  leave           17 ->   3    +14
+  change          11 ->   5     +6
+  quit             5 ->   1     +4
+  skip            40 ->   8    +32
+  stop             9 ->   6     +3
+  give            10 ->   7     +3
+  get              8 ->   4     +4
+  resign          70 ->  14    +56
+  pack            63 ->  17    +46
+  stay            25 ->  12    +13
+  turn            35 ->  15    +20
+  move            43 ->  19    +24
+  seek            71 ->  24    +47
+  call            18 ->  13     +5
+  talk            31 ->  21    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -1,0 +1,903 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: She turned over after the massage and he saw her ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  pussy            1 -> 129   -128
+  breasts          2 ->  16    -14
+  nipples          4 ->  20    -16
+  tits             6 ->  85    -79
+  ass              8 -> 152   -144
+  panties         10 ->  92    -82
+  cunt            17 -> 219   -202
+  legs            13 ->  81    -68
+  wet             12 ->  59    -47
+  big             14 ->  57    -43
+  black           18 ->  63    -45
+  body            15 ->  42    -27
+  beautiful        7 ->   8     -1
+  bare             9 ->  12     -3
+
+HIGHER UNDER B
+  face             5 ->   1     +4
+  with            16 ->   2    +14
+  wearing         76 ->   3    +73
+  asleep          85 ->   7    +78
+  fully           48 ->   5    +43
+  eyes            33 ->   6    +27
+  smile          140 ->  10   +130
+  peaceful       204 ->  13   +191
+  looking         65 ->  11    +54
+  sleeping       142 ->  18   +124
+  smiling        153 ->  19   +134
+  expression     170 ->  21   +149
+  red             50 ->  17    +33
+  completely      21 ->  14     +7
+  back            19 ->  15     +4
+  in              11 ->   9     +2
+  as              28 ->  22     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  lying            6 ->  52    -46
+  sleeping         7 ->  47    -40
+  naked            3 ->   5     -2
+  in              12 ->  46    -34
+  bare             8 ->   8     +0
+  face             1 ->   1     +0
+  for             16 -> 134   -118
+  sleep           18 -> 124   -106
+  looking         13 ->  26    -13
+  nipples         17 ->  24     -7
+  chest            9 ->  10     -1
+
+HIGHER UNDER B
+  beautiful        5 ->   2     +3
+  breasts          4 ->   3     +1
+  body            10 ->   6     +4
+  perfect        107 ->   9    +98
+  back            11 ->   7     +4
+  long            14 ->  11     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  sitting          2 ->  12    -10
+  lying            1 ->   3     -2
+  naked            6 ->  11     -5
+  on               8 ->   8     +0
+  standing        17 ->  83    -66
+  again           11 ->  13     -2
+  staring         15 ->  33    -18
+  and             14 ->  29    -15
+  laying           7 ->   7     +0
+  sleeping        12 ->  18     -6
+  head            19 ->  48    -29
+  looking         13 ->  17     -4
+  as              18 ->  31    -13
+
+HIGHER UNDER B
+  face             4 ->   1     +3
+  eyes            10 ->   4     +6
+  puffy          179 ->  10   +169
+  pant           133 ->  20   +113
+  pale            42 ->  16    +26
+  still            9 ->   6     +3
+  skin            55 ->  19    +36
+  legs            16 ->   9     +7
+  breasts         23 ->  15     +8
+  open            22 ->  14     +8
+  with             5 ->   5     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  naked            3 ->  11     -8
+  breasts          2 ->   4     -2
+  body             9 ->  19    -10
+  back             8 ->  10     -2
+  belly           10 ->  34    -24
+  long            15 ->  41    -26
+  legs            13 ->  36    -23
+  tattoo          11 ->  31    -20
+  stomach         14 ->  32    -18
+  bare             7 ->   8     -1
+  again           16 ->  21     -5
+  full            12 ->  16     -4
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  smile           20 ->   6    +14
+  profile         80 ->   9    +71
+  eyes             4 ->   2     +2
+  for             25 ->   7    +18
+  in               6 ->   3     +3
+  beauty          97 ->  15    +82
+  smiling         53 ->  12    +41
+  hair            34 ->  13    +21
+  lying           51 ->  18    +33
+  lovely          35 ->  17    +18
+  looking         27 ->  14    +13
+  beautiful        5 ->   5     +0
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  breasts          1 -> 133   -132
+  naked            2 ->  15    -13
+  breast           6 -> 136   -130
+  bare             8 -> 135   -127
+  bottom          10 -> 177   -167
+  vagina          12 -> 170   -158
+  underwear       14 -> 172   -158
+  body             7 ->  27    -20
+  legs             9 ->  44    -35
+  belly           16 -> 134   -118
+  chest           17 -> 142   -125
+  genitals        19 -> 198   -179
+  nipples         20 -> 206   -186
+  feet            13 ->  38    -25
+  nude            18 -> 130   -112
+  from            15 ->  42    -27
+  eyes             5 ->   9     -4
+
+HIGHER UNDER B
+  again           11 ->   1    +10
+  lying           47 ->   2    +45
+  standing        48 ->   5    +43
+  in               4 ->   3     +1
+  with            35 ->   6    +29
+  sitting         71 ->   7    +64
+  looking         58 ->   8    +50
+  smiling         99 ->  10    +89
+  smile           51 ->  12    +39
+  on              33 ->  11    +22
+  walking        169 ->  13   +156
+  off            200 ->  16   +184
+  as              23 ->  14     +9
+  back            26 ->  17     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  ass              6 ->  49    -43
+  naked            1 ->   4     -3
+  beautiful        5 ->  20    -15
+  from            11 ->  31    -20
+  for              8 ->  17     -9
+  in              10 ->  18     -8
+  back            13 ->  24    -11
+  perfect         18 ->  68    -50
+  big             16 ->  38    -22
+  pussy           14 ->  19     -5
+  bare             9 ->  11     -2
+  lying           15 ->  28    -13
+  full            20 ->  33    -13
+
+HIGHER UNDER B
+  eyes            12 ->   3     +9
+  face             2 ->   1     +1
+  breasts          3 ->   2     +1
+  body             7 ->   5     +2
+  smile           19 ->   7    +12
+  skin            71 ->  10    +61
+  chest           28 ->   8    +20
+  legs            27 ->   9    +18
+  looking         34 ->  12    +22
+  stomach         55 ->  15    +40
+  lips            58 ->  16    +42
+  smiling         24 ->  14    +10
+  tits            17 ->  13     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  breasts          1 ->  48    -47
+  naked            3 ->  24    -21
+  lying            6 -> 123   -117
+  chest            5 ->  46    -41
+  breast           9 -> 137   -128
+  nipples         12 -> 148   -136
+  pussy           15 -> 200   -185
+  panties         14 -> 121   -107
+  with            13 ->  59    -46
+  eyes             4 ->   4     +0
+  legs             7 ->   9     -2
+  body            16 ->  25     -9
+  in               8 ->  10     -2
+  bare            11 ->  14     -3
+
+HIGHER UNDER B
+  bruised         80 ->   2    +78
+  relaxed        148 ->   5   +143
+  beautiful       10 ->   3     +7
+  flushed        161 ->   8   +153
+  sleeping        34 ->   6    +28
+  breathing       52 ->  11    +41
+  soft           147 ->  13   +134
+  swollen         18 ->   7    +11
+  delicate       198 ->  18   +180
+  scars          200 ->  19   +181
+  sweaty         168 ->  20   +148
+  pale            58 ->  12    +46
+  exhausted      188 ->  22   +166
+  still           56 ->  15    +41
+  completely      69 ->  17    +52
+  hair            59 ->  23    +36
+  feet            42 ->  16    +26
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  breasts          2 ->  22    -20
+  back             4 ->  10     -6
+  naked            6 ->  14     -8
+  ass              7 ->  94    -87
+  pussy            9 -> 125   -116
+  breast          10 ->  84    -74
+  nipples          8 ->  54    -46
+  open            11 ->  20     -9
+  bare            14 ->  50    -36
+  legs            12 ->  19     -7
+  body            13 ->  27    -14
+  panties         16 -> 131   -115
+  lying           15 ->  99    -84
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  smile           19 ->   2    +17
+  expression      44 ->   3    +41
+  peaceful       148 ->   6   +142
+  smiling         36 ->   7    +29
+  facial         126 ->   8   +118
+  beautiful        5 ->   5     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  naked            2 ->  15    -13
+  eyes             3 ->  16    -13
+  breasts          4 ->   7     -3
+  nipples         10 ->  49    -39
+  body             6 ->  17    -11
+  bare            12 ->  33    -21
+  panties         15 ->  42    -27
+  whole           14 ->  29    -15
+  sleeping        13 ->  28    -15
+  skin            17 ->  26     -9
+
+HIGHER UNDER B
+  back             9 ->   1     +8
+  butt            28 ->   6    +22
+  feet           108 ->  13    +95
+  expression     113 ->  14    +99
+  underwear       89 ->  12    +77
+  bottom          51 ->  11    +40
+  pink            29 ->   9    +20
+  in               8 ->   4     +4
+  looking         63 ->  19    +44
+  smile           16 ->   8     +8
+  neck            27 ->  20     +7
+  beautiful        7 ->   5     +2
+  chest            5 ->   3     +2
+  legs            20 ->  18     +2
+  stomach         11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  eyes             2 ->   2     +0
+  smile            3 ->   3     +0
+  face             1 ->   1     +0
+  look             8 ->  25    -17
+  head            10 ->  28    -18
+  lips            11 ->  32    -21
+  red             12 ->  31    -19
+  looking          6 ->  10     -4
+
+HIGHER UNDER B
+  ____            51 ->   5    +46
+  clearly         20 ->   6    +14
+  ______         102 ->   9    +93
+  in               7 ->   4     +3
+  ________       143 ->  15   +128
+  _____          139 ->  16   +123
+  _______        149 ->  17   +132
+  legs            16 ->  11     +5
+  feet            13 ->  13     +0
+  hands           14 ->  14     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  naked            1 ->   1     +0
+  beautiful        6 ->  19    -13
+  nipples         12 ->  28    -16
+  eyes            15 ->  31    -16
+  big             16 ->  33    -17
+  _____           18 ->  29    -11
+  pink            21 ->  35    -14
+  nipple          20 ->  26     -6
+  face             9 ->   9     +0
+  ass             13 ->  13     +0
+  body            19 ->  20     -1
+
+HIGHER UNDER B
+  in               7 ->   4     +3
+  breast           3 ->   3     +0
+  ________         8 ->   6     +2
+  soft            31 ->  14    +17
+  panties         35 ->  17    +18
+  __________      39 ->  18    +21
+  pubic           25 ->  16     +9
+  perfect         22 ->  15     +7
+  lying           17 ->  11     +6
+  back            10 ->   8     +2
+  bottom          30 ->  21     +9
+  breasts          2 ->   2     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  face             1 ->   2     -1
+  breasts          2 ->  21    -19
+  eyes             5 ->  26    -21
+  body             6 ->  55    -49
+  belly            7 ->  40    -33
+  naked            4 ->   5     -1
+  chest           11 ->  62    -51
+  ____            10 ->  39    -29
+  stomach         12 ->  16     -4
+  beautiful        9 ->  11     -2
+  buttocks        16 ->  77    -61
+  tattoo          14 ->  33    -19
+  breast          17 ->  34    -17
+  big             22 ->  51    -29
+  ass             20 ->  29     -9
+  ______          19 ->  27     -8
+
+HIGHER UNDER B
+  back             3 ->   1     +2
+  neck            18 ->   3    +15
+  feet            38 ->   7    +31
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  face             2 ->  12    -10
+  breasts          3 ->  13    -10
+  naked            4 ->   5     -1
+  lying            5 ->  32    -27
+  bare             9 -> 110   -101
+  looking          8 ->  20    -12
+  smile           10 ->  44    -34
+  in              11 ->  61    -50
+  nipples         12 ->  96    -84
+  chest           13 ->  45    -32
+  expression      14 ->  18     -4
+  back            17 ->  89    -72
+  breast          16 ->  48    -32
+  smiling         15 ->  21     -6
+  hair            18 ->  58    -40
+
+HIGHER UNDER B
+  eyes             1 ->   1     +0
+  beautiful        6 ->   2     +4
+  dark            30 ->   3    +27
+  sleeping         7 ->   4     +3
+  graceful       115 ->   6   +109
+  good           113 ->   7   +106
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  eyes             3 ->  14    -11
+  in               2 ->   6     -4
+  pale            10 ->  49    -39
+  legs            15 ->  41    -26
+  head            14 ->  32    -18
+  body            17 ->  36    -19
+  naked           19 ->  87    -68
+  hair            20 ->  86    -66
+  arms            21 ->  51    -30
+  as              18 ->  35    -17
+  hands           11 ->  16     -5
+  with             5 ->   8     -3
+
+HIGHER UNDER B
+  sitting          7 ->   2     +5
+  lying            4 ->   3     +1
+  standing        13 ->   5     +8
+  smiling          6 ->   4     +2
+  again           16 ->   9     +7
+  looking          8 ->   7     +1
+  laying          28 ->  12    +16
+  sleeping        30 ->  13    +17
+  laughing        36 ->  17    +19
+  still           12 ->  11     +1
+  now             33 ->  19    +14
+  on              25 ->  15    +10
+  there           29 ->  18    +11
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  naked            4 ->   6     -2
+  eyes             3 ->   3     +0
+  body            10 ->  32    -22
+  breasts          2 ->   2     +0
+  pussy           17 ->  38    -21
+  face             1 ->   1     +0
+  lying           11 ->  19     -8
+  breast          16 ->  22     -6
+  smile           18 ->  24     -6
+  nipples          9 ->  13     -4
+  bare            14 ->  18     -4
+  chest            6 ->  12     -6
+
+HIGHER UNDER B
+  sleeping         8 ->   4     +4
+  beautiful        5 ->   5     +0
+  full            19 ->   8    +11
+  hair            20 ->  11     +9
+  looking         15 ->  10     +5
+  ass             12 ->   9     +3
+  breathing       35 ->  16    +19
+  with            24 ->  15     +9
+  in               7 ->   7     +0
+  long            31 ->  17    +14
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  in               4 ->   6     -2
+  looking          5 ->   9     -4
+  lying            7 ->  16     -9
+  legs             8 ->  14     -6
+  red             16 ->  24     -8
+  lips            14 ->  20     -6
+  bare            12 ->  18     -6
+  panties         18 ->  23     -5
+  hair            13 ->  17     -4
+  staring         11 ->  13     -2
+  face             2 ->   2     +0
+
+HIGHER UNDER B
+  naked            1 ->   1     +0
+  soft            30 ->   7    +23
+  beautiful        9 ->   4     +5
+  breasts          3 ->   3     +0
+  skin            17 ->  10     +7
+  smooth          53 ->  15    +38
+  pale            25 ->  12    +13
+  body            10 ->   8     +2
+  long            32 ->  19    +13
+  nude            15 ->  11     +4
+  eyes             6 ->   5     +1
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  breasts          2 ->  13    -11
+  bare             7 ->  12     -5
+  back             4 ->   7     -3
+  body             5 ->  11     -6
+  legs            11 ->  24    -13
+  naked            1 ->   1     +0
+  butt            14 ->  38    -24
+  ass              9 ->  14     -5
+  scars           12 ->  21     -9
+  whole           21 ->  42    -21
+  breast          20 ->  32    -12
+  right           13 ->  20     -7
+  left            16 ->  27    -11
+
+HIGHER UNDER B
+  completely      57 ->   5    +52
+  pubic           45 ->   6    +39
+  wearing         23 ->   8    +15
+  fully           73 ->  16    +57
+  nipples         18 ->  10     +8
+  erect           96 ->  25    +71
+  full            35 ->  18    +17
+  from            62 ->  26    +36
+  panties         22 ->  15     +7
+  nice            52 ->  29    +23
+  tattoos         33 ->  22    +11
+  red             44 ->  30    +14
+  big             28 ->  28     +0
+  pussy            8 ->   3     +5
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  bare             6 ->   9     -3
+  in              10 ->  11     -1
+  again           18 ->  24     -6
+  eyes             5 ->   5     +0
+  naked            4 ->   4     +0
+  legs            11 ->  12     -1
+  nipples         15 ->  17     -2
+
+HIGHER UNDER B
+  breasts          2 ->   2     +0
+  beautiful        3 ->   3     +0
+  back             7 ->   6     +1
+  chest            8 ->   7     +1
+  ass             12 ->  10     +2
+  smile           17 ->  14     +3
+  breast           9 ->   8     +1
+  pussy           21 ->  18     +3
+  lovely          16 ->  16     +0
+  body            13 ->  13     +0
+  sleeping        19 ->  19     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  breasts          2 ->  10     -8
+  nipples          5 ->  50    -45
+  back             8 ->  21    -13
+  smile           10 ->  25    -15
+  tits            11 ->  72    -61
+  pussy           17 -> 113    -96
+  legs            13 ->  45    -32
+  breast          16 ->  37    -21
+  body             7 ->   9     -2
+  chest           15 ->  16     -1
+  right           20 ->  54    -34
+  hand            21 ->  48    -27
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  eyes             3 ->   2     +1
+  beautiful        6 ->   3     +3
+  profile         19 ->   5    +14
+  naked            4 ->   4     +0
+  perfect         14 ->   7     +7
+  sleeping        12 ->   8     +4
+  bare             9 ->   6     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  naked            2 ->   2     +0
+  breasts          6 ->  26    -20
+  ass              8 ->  22    -14
+  legs             3 ->   7     -4
+  bare            17 ->  35    -18
+  back            20 ->  41    -21
+  wet             14 ->  21     -7
+  spread          18 ->  25     -7
+  beautiful       11 ->  12     -1
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  pussy            4 ->   3     +1
+  stomach         47 ->  13    +34
+  in              10 ->   5     +5
+  red             30 ->  16    +14
+  eyes             7 ->   6     +1
+  hair            13 ->   9     +4
+  lips            15 ->  10     +5
+  with            19 ->  14     +5
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  ass              4 ->   5     -1
+  pussy           11 ->  20     -9
+  bare             5 ->   6     -1
+  tits             7 ->   7     +0
+  nipples         15 ->  18     -3
+  breast          14 ->  15     -1
+  again           17 ->  21     -4
+  back             8 ->   9     -1
+  buttocks        20 ->  27     -7
+  in               9 ->  10     -1
+  breasts          1 ->   2     -1
+
+HIGHER UNDER B
+  face             2 ->   1     +1
+  beautiful        6 ->   4     +2
+  naked            3 ->   3     +0
+  lovely          10 ->   8     +2
+  pretty          13 ->  11     +2
+  smiling         27 ->  17    +10
+  big             16 ->  12     +4
+  long            19 ->  14     +5
+  profile         22 ->  19     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  naked            2 ->   9     -7
+  breasts          4 ->  33    -29
+  body             6 ->  31    -25
+  in               7 ->  13     -6
+  with            14 ->  49    -35
+  belly           13 ->  37    -24
+  beautiful       12 ->  22    -10
+  lying           16 -> 115    -99
+  stomach         15 ->  25    -10
+  hair            20 ->  32    -12
+  looking         19 ->  28     -9
+  sleeping         5 ->   6     -1
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  back             8 ->   3     +5
+  smile           11 ->   5     +6
+  eyes             3 ->   2     +1
+  bare             9 ->   4     +5
+  shoulder        89 ->  10    +79
+  skin            18 ->   7    +11
+  ribs           127 ->  12   +115
+  scars           17 ->  11     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  ass              2 ->  15    -13
+  pussy            4 ->  10     -6
+  nipples         10 ->  62    -52
+  butt            14 ->  55    -41
+  perfect         12 ->  20     -8
+  gorgeous        16 ->  41    -25
+  large           18 ->  51    -33
+  tits            11 ->  13     -2
+  lovely          17 ->  38    -21
+  beautiful        6 ->   6     +0
+  panties         15 ->  18     -3
+
+HIGHER UNDER B
+  face             9 ->   3     +6
+  bare             7 ->   2     +5
+  back             5 ->   5     +0
+  lying           53 ->   9    +44
+  in              24 ->   8    +16
+  belly           40 ->  12    +28
+  eyes           105 ->  17    +88
+  smooth          59 ->  14    +45
+  stomach         65 ->  16    +49
+  full            13 ->  11     +2
+  breasts          1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  naked            1 ->   5     -4
+  breasts          3 ->   6     -3
+  ass              5 ->  19    -14
+  panties          7 ->  71    -64
+  nipples         10 ->  87    -77
+  butt             8 ->  21    -13
+  nude            14 ->  78    -64
+  again           13 ->  28    -15
+  legs            15 ->  27    -12
+  nipple          19 ->  45    -26
+  eyes            17 ->  29    -12
+  lying           16 ->  20     -4
+  body             9 ->   9     +0
+
+HIGHER UNDER B
+  face             2 ->   1     +1
+  in               4 ->   2     +2
+  back            12 ->   4     +8
+  beautiful        6 ->   3     +3
+  perfect         27 ->   7    +20
+  side            67 ->  12    +55
+  full            32 ->  10    +22
+  for             21 ->  11    +10
+  smile           36 ->  15    +21
+  completely      24 ->  14    +10
+  as              20 ->  13     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  naked            3 ->   5     -2
+  breasts          2 ->   2     +0
+  bare             8 ->  23    -15
+  legs             9 ->  22    -13
+  breast          11 ->  24    -13
+  chest            6 ->  11     -5
+  nipples         10 ->  18     -8
+  boobs           13 ->  16     -3
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  in               7 ->   3     +4
+  as              14 ->   7     +7
+  body             4 ->   4     +0
+  smile           70 ->  12    +58
+  smiling         64 ->  13    +51
+  again           30 ->  10    +20
+  for             16 ->   8     +8
+  pale            34 ->  14    +20
+  perfect         31 ->  15    +16
+  eyes            12 ->   9     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  face             1 ->   4     -3
+  breasts          3 ->   6     -3
+  eyes             6 ->  26    -20
+  lying            9 ->  38    -29
+  beautiful        5 ->  14     -9
+  for             11 ->  32    -21
+  again           13 ->  54    -41
+  in               4 ->   9     -5
+  sleeping        14 ->  52    -38
+
+HIGHER UNDER B
+  naked            2 ->   1     +1
+  back             8 ->   2     +6
+  tattoo          53 ->   5    +48
+  bare             7 ->   3     +4
+  stomach         29 ->   7    +22
+  tattoos         76 ->  12    +64
+  belly           24 ->  10    +14
+  perfect         17 ->  11     +6
+  body            10 ->   8     +2
+  backside        62 ->  18    +44
+  nipples         32 ->  16    +16
+  feet            15 ->  15     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  eyes             2 ->   2     +0
+  naked            3 ->   5     -2
+  mouth            7 ->  35    -28
+  beautiful        6 ->  12     -6
+  legs            10 ->  23    -13
+  nipples         13 ->  29    -16
+  lips             5 ->   7     -2
+  sleeping         9 ->  13     -4
+
+HIGHER UNDER B
+  blushing       216 ->   9   +207
+  waking          57 ->   8    +49
+  skin            35 ->  10    +25
+  cheeks         118 ->  16   +102
+  smile           11 ->   4     +7
+  breathing        8 ->   6     +2
+  eyelids         52 ->  17    +35
+  chest           22 ->  14     +8
+  in              14 ->  11     +3
+  navel           85 ->  24    +61
+  thighs          54 ->  22    +32
+  moving          56 ->  27    +29
+  move            29 ->  19    +10
+  profile         28 ->  21     +7
+  hair            32 ->  25     +7
+  tongue          27 ->  26     +1
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  breasts          2 ->   4     -2
+  naked            3 ->   5     -2
+  eyes            14 ->  42    -28
+  beautiful       16 ->  27    -11
+  nipples          6 ->  12     -6
+  again           17 ->  34    -17
+
+HIGHER UNDER B
+  pussy            4 ->   2     +2
+  vagina           9 ->   3     +6
+  butt            13 ->   7     +6
+  right           11 ->   8     +3
+  bruises         54 ->  17    +37
+  nude            20 ->  13     +7
+  breast          15 ->  11     +4
+  stomach         18 ->  16     +2
+  left            19 ->  18     +1
+  ass             21 ->  19     +2
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  nipples          4 ->  81    -77
+  tits             5 ->  37    -32
+  pussy            7 ->  49    -42
+  big              9 ->  55    -46
+  wet             11 ->  43    -32
+  panties         14 ->  82    -68
+  hard            16 ->  54    -38
+  ass              6 ->  12     -6
+  legs            12 ->  25    -13
+  breast          17 ->  39    -22
+  little          18 ->  32    -14
+  beautiful        8 ->  10     -2
+
+HIGHER UNDER B
+  sleeping        39 ->   4    +35
+  naked            1 ->   1     +0
+  bare             2 ->   2     +0
+  back            38 ->   5    +33
+  sleep          141 ->   8   +133
+  face            15 ->   6     +9
+  in              10 ->   7     +3
+  profile        146 ->  14   +132
+  full            24 ->  11    +13
+  backside       109 ->  15    +94
+  body            13 ->   9     +4
+  breasts          3 ->   3     +0
+  nude            20 ->  13     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

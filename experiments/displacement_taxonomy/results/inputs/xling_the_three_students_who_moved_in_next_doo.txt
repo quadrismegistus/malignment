@@ -1,0 +1,1107 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: The three students who moved in next door were always ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  in               1 ->  40    -39
+  there            5 ->  67    -62
+  on               9 ->  59    -50
+  at              10 ->  60    -50
+  fighting         2 ->  13    -11
+  up              12 ->  35    -23
+  together        11 ->  21    -10
+  out              6 ->  15     -9
+  sitting         15 ->  29    -14
+  a               20 ->  45    -25
+  coming          16 ->  24     -8
+  late            24 ->  94    -70
+  nice            25 ->  73    -48
+  around          28 -> 109    -81
+  trying          26 ->  42    -16
+  laughing        14 ->  18     -4
+  hanging         13 ->  16     -3
+  talking          3 ->  10     -7
+
+HIGHER UNDER B
+  so              18 ->   1    +17
+  outside         27 ->   3    +24
+  causing         31 ->   4    +27
+  getting         23 ->   5    +18
+  busy            21 ->   6    +15
+  very             4 ->   2     +2
+  friendly        19 ->   7    +12
+  complaining     29 ->  11    +18
+  playing          8 ->   8     +0
+  having          17 ->  12     +5
+  quiet           33 ->  14    +19
+  seen            51 ->  17    +34
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  there            3 ->  27    -24
+  out              4 ->  14    -10
+  at               8 ->  21    -13
+  coming           9 ->  33    -24
+  very            10 ->  26    -16
+  on              16 ->  49    -33
+  friendly        22 ->  98    -76
+  late            12 ->  31    -19
+  together        27 ->  70    -43
+  so              21 ->  56    -35
+  a               23 ->  51    -28
+  around          25 ->  46    -21
+  fighting        24 ->  29     -5
+  watching        28 ->  34     -6
+  trying          17 ->  23     -6
+  hanging          5 ->   5     +0
+  asking          18 ->  20     -2
+  having          13 ->  15     -2
+
+HIGHER UNDER B
+  playing          2 ->   1     +1
+  up               6 ->   2     +4
+  doing           19 ->   6    +13
+  arguing         29 ->   8    +21
+  talking          7 ->   4     +3
+  messing         42 ->  12    +30
+  studying        46 ->  13    +33
+  making          11 ->   7     +4
+  getting         15 ->   9     +6
+  busy            20 ->  11     +9
+  laughing        14 ->  10     +4
+  noisy           49 ->  16    +33
+  chatting        57 ->  19    +38
+  loud            36 ->  17    +19
+  complaining     44 ->  18    +26
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  there            1 ->  17    -16
+  around           8 ->  28    -20
+  on               4 ->  10     -6
+  talking          9 ->  22    -13
+  with            17 -> 108    -91
+  out             20 -> 147   -127
+  at               7 ->  16     -9
+  smiling         18 ->  34    -16
+  waiting         23 ->  41    -18
+  looking         15 ->  19     -4
+  a                6 ->  11     -5
+  seen            21 ->  26     -5
+
+HIGHER UNDER B
+  trying          25 ->   3    +22
+  getting         43 ->   9    +34
+  having          32 ->  12    +20
+  together        24 ->  13    +11
+  ready           16 ->   8     +8
+  laughing        12 ->   5     +7
+  arguing        159 ->  25   +134
+  happy            5 ->   4     +1
+  good            38 ->  23    +15
+  the             11 ->   6     +5
+  so              28 ->  20     +8
+  friendly        10 ->   7     +3
+  complaining     29 ->  24     +5
+  very             3 ->   2     +1
+  late            14 ->  14     +0
+  nice            19 ->  18     +1
+  going           22 ->  21     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  out              5 ->  40    -35
+  outside         10 ->  57    -47
+  playing          3 ->  14    -11
+  laughing         8 ->  19    -11
+  quiet            1 ->   2     -1
+  nice            22 ->  39    -17
+  in               4 ->  12     -8
+  partying        19 ->  28     -9
+  fighting        20 ->  25     -5
+  hanging         30 ->  41    -11
+  doing           28 ->  38    -10
+  up               2 ->   6     -4
+  friendly        18 ->  20     -2
+  complaining     29 ->  35     -6
+  polite          27 ->  32     -5
+  having           7 ->  10     -3
+  very             6 ->   9     -3
+  noisy           12 ->  13     -1
+  on              15 ->  15     +0
+
+HIGHER UNDER B
+  arguing         13 ->   1    +12
+  a               17 ->   3    +14
+  talking         14 ->   4    +10
+  so              11 ->   5     +6
+  making          16 ->   7     +9
+  getting         23 ->  11    +12
+  dressed         42 ->  16    +26
+  rowdy           39 ->  21    +18
+  seen            33 ->  23    +10
+  loud             9 ->   8     +1
+  at              24 ->  17     +7
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  late             1 ->  18    -17
+  there            2 ->   6     -4
+  fighting         8 ->  17     -9
+  making           6 ->  13     -7
+  playing          3 ->   3     +0
+  running         14 ->  39    -25
+  rude            18 ->  80    -62
+  messy           22 ->  95    -73
+  getting          4 ->   5     -1
+  a               16 ->  31    -15
+  the             15 ->  24     -9
+  having           5 ->   8     -3
+  eating          24 ->  46    -22
+  so              19 ->  33    -14
+  very            11 ->  15     -4
+  doing           10 ->  14     -4
+  being           13 ->  16     -3
+  trying          20 ->  21     -1
+
+HIGHER UNDER B
+  talking          7 ->   1     +6
+  arguing          9 ->   2     +7
+  in              12 ->   4     +8
+  on              17 ->   7    +10
+  complaining     32 ->   9    +23
+  laughing        37 ->  11    +26
+  joking         123 ->  27    +96
+  at              23 ->  10    +13
+  together        80 ->  22    +58
+  up              57 ->  20    +37
+  saying          68 ->  26    +42
+  asking          21 ->  12     +9
+  happy           55 ->  23    +32
+  out             41 ->  19    +22
+  seen            42 ->  25    +17
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  polite           4 ->  53    -49
+  nice             8 ->  56    -48
+  friendly         9 ->  45    -36
+  on              10 ->  30    -20
+  having          21 ->  88    -67
+  late            12 ->  24    -12
+  good            24 -> 117    -93
+  kind            27 ->  92    -65
+  so               6 ->  11     -5
+  the             18 ->  25     -7
+  getting         20 ->  28     -8
+  doing           13 ->  15     -2
+  looking         22 ->  32    -10
+  busy            17 ->  20     -3
+  playing         16 ->  19     -3
+  together        14 ->  14     +0
+
+HIGHER UNDER B
+  seen            51 ->   1    +50
+  quiet            3 ->   3     +0
+  loud            15 ->   5    +10
+  talking         32 ->   9    +23
+  out             11 ->   8     +3
+  moving          62 ->  16    +46
+  noisy           19 ->  10     +9
+  coming          26 ->  12    +14
+  making          25 ->  13    +12
+  in               7 ->   7     +0
+  going           28 ->  18    +10
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  very             2 ->  16    -14
+  arguing          1 ->  11    -10
+  playing          4 ->  43    -39
+  happy            3 ->  21    -18
+  so               8 -> 131   -123
+  in               6 ->  19    -13
+  making           9 ->  44    -35
+  fighting        10 ->  90    -80
+  throwing        15 -> 122   -107
+  asking          23 -> 136   -113
+  nice            21 ->  84    -63
+  late            22 ->  88    -66
+  kind            25 -> 104    -79
+  at              20 ->  66    -46
+  laughing        19 ->  56    -37
+  complaining     16 ->  38    -22
+  ready           24 ->  63    -39
+  trying          18 ->  34    -16
+  having          12 ->  12     +0
+
+HIGHER UNDER B
+  chatting        50 ->   1    +49
+  together        32 ->   2    +30
+  friends        128 ->   4   +124
+  known          127 ->   8   +119
+  getting         17 ->   7    +10
+  up              13 ->   6     +7
+  curious         85 ->  14    +71
+  inseparable    176 ->  18   +158
+  seen            46 ->  13    +33
+  discussing     109 ->  17    +92
+  friendly         5 ->   3     +2
+  fascinated     114 ->  20    +94
+  close          164 ->  23   +141
+  talking          7 ->   5     +2
+  good            53 ->  15    +38
+  planning        77 ->  25    +52
+  quick           60 ->  24    +36
+  a               14 ->  10     +4
+  busy            48 ->  22    +26
+  the             11 ->   9     +2
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  doing            2 ->  14    -12
+  home             5 ->  51    -46
+  in               7 ->  62    -55
+  out              8 ->  60    -52
+  having           9 ->  28    -19
+  up               6 ->  16    -10
+  coming          10 ->  19     -9
+  getting         14 ->  63    -49
+  hanging         15 ->  49    -34
+  outside         17 ->  57    -40
+  at              20 ->  93    -73
+  on              23 ->  94    -71
+  asking          19 ->  34    -15
+  so              16 ->  22     -6
+  throwing        27 ->  53    -26
+  busy            13 ->  17     -4
+  complaining     26 ->  39    -13
+  playing          1 ->   2     -1
+  friendly        25 ->  29     -4
+  fighting        18 ->  20     -2
+  laughing        22 ->  23     -1
+
+HIGHER UNDER B
+  seen            30 ->   1    +29
+  noisy           31 ->   5    +26
+  making           4 ->   3     +1
+  arguing         21 ->   6    +15
+  causing         24 ->   7    +17
+  chatting        90 ->  10    +80
+  curious         54 ->  11    +43
+  engaged        107 ->  13    +94
+  creating        80 ->  15    +65
+  studying        28 ->  12    +16
+  talking         11 ->   8     +3
+  working         12 ->   9     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  A                1 ->   2     -1
+  ___              2 ->  16    -14
+  described        3 ->  11     -8
+  engaged          4 ->  29    -25
+  seen             6 ->  53    -47
+  engaging         7 ->  34    -27
+  in               9 ->  58    -49
+  playing          5 ->   6     -1
+  ____            10 ->  67    -57
+  trying          11 ->  51    -40
+  involved        12 ->  66    -54
+
+HIGHER UNDER B
+  very             8 ->   1     +7
+  a               33 ->   3    +30
+  quite           88 ->   4    +84
+  so              79 ->   5    +74
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  ready            4 ->  13     -9
+  there            9 ->  16     -7
+  together         8 ->  14     -6
+  on               5 ->   9     -4
+  at              16 ->  32    -16
+  the              3 ->   4     -1
+  making          23 ->  31     -8
+  asking          18 ->  27     -9
+  in               1 ->   3     -2
+  telling         15 ->  17     -2
+  so              19 ->  20     -1
+  getting         21 ->  24     -3
+  looking         12 ->  12     +0
+  able            24 ->  26     -2
+  eager           22 ->  23     -1
+  late            14 ->  15     -1
+
+HIGHER UNDER B
+  complaining      2 ->   1     +1
+  happy            6 ->   2     +4
+  very            17 ->   8     +9
+  excited         25 ->  11    +14
+  talking         10 ->   5     +5
+  curious         45 ->  25    +20
+  busy            11 ->   7     +4
+  discussing      29 ->  19    +10
+  arguing          7 ->   6     +1
+  having          28 ->  22     +6
+  friendly        27 ->  21     +6
+  trying          13 ->  10     +3
+  saying          20 ->  18     +2
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  getting          9 ->  23    -14
+  causing          7 ->  19    -12
+  doing           12 ->  29    -17
+  trying          19 ->  44    -25
+  ____            22 ->  50    -28
+  making           2 ->   3     -1
+  up              23 ->  46    -23
+  looking         28 ->  56    -28
+  fighting        15 ->  25    -10
+  the             11 ->  17     -6
+  having           6 ->   8     -2
+  throwing        16 ->  16     +0
+  talking         13 ->  14     -1
+
+HIGHER UNDER B
+  playing          3 ->   1     +2
+  noisy            8 ->   6     +2
+  so               5 ->   4     +1
+  out             20 ->   9    +11
+  together        29 ->  13    +16
+  rowdy           53 ->  26    +27
+  wearing         24 ->  12    +12
+  loud            10 ->   7     +3
+  dressed         40 ->  27    +13
+  late            27 ->  18     +9
+  quiet           31 ->  21    +10
+  on              18 ->  15     +3
+  friendly        17 ->  10     +7
+  busy            21 ->  20     +1
+  laughing        25 ->  22     +3
+  being           26 ->  24     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  loud             3 ->   5     -2
+  having           4 ->   7     -3
+  very             5 ->   8     -3
+  noisy           10 ->  39    -29
+  up               8 ->  17     -9
+  practicing       9 ->  21    -12
+  studying        13 ->  93    -80
+  throwing         7 ->  12     -5
+  fighting        14 ->  42    -28
+  talking          6 ->   6     +0
+  so              12 ->  22    -10
+  partying        18 ->  70    -52
+  complaining     19 ->  23     -4
+  yelling         20 ->  45    -25
+  listening       22 ->  51    -29
+  late            16 ->  16     +0
+  running         21 ->  29     -8
+
+HIGHER UNDER B
+  making           1 ->   1     +0
+  causing         11 ->   3     +8
+  playing          2 ->   2     +0
+  getting         17 ->   4    +13
+  asking          54 ->  11    +43
+  trying          47 ->  14    +33
+  creating        46 ->  15    +31
+  in              23 ->  10    +13
+  coming          25 ->  13    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  in               1 ->  77    -76
+  a                2 -> 118   -116
+  very             3 ->  87    -84
+  so               5 ->  59    -54
+  friendly         6 -> 131   -125
+  up               7 ->  40    -33
+  nice             8 ->  53    -45
+  there           10 ->  46    -36
+  trying           9 ->  17     -8
+  talking         11 ->  33    -22
+  at              13 ->  99    -86
+  making          15 ->  60    -45
+  the             16 -> 120   -104
+  outside         17 ->  48    -31
+  on              19 ->  62    -43
+  out             20 ->  55    -35
+  asking          21 ->  70    -49
+  having          14 ->  14     +0
+  coming          22 ->  78    -56
+  kind            23 ->  65    -42
+  together        25 ->  75    -50
+  good            26 ->  91    -65
+  doing           27 ->  56    -29
+  being           28 ->  37     -9
+  polite          29 ->  94    -65
+  complaining     30 ->  72    -42
+
+HIGHER UNDER B
+  getting         12 ->   1    +11
+  loud            18 ->   2    +16
+  experimenting  131 ->   4   +127
+  causing         37 ->   5    +32
+  super           64 ->   6    +58
+  cooking        115 ->   7   +108
+  playing          4 ->   3     +1
+  entertaining   123 ->   8   +115
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  in               2 ->   7     -5
+  there            5 ->  27    -22
+  on               7 ->  20    -13
+  a                8 ->  14     -6
+  quiet            3 ->   5     -2
+  talking         11 ->  25    -14
+  trying          17 ->  47    -30
+  getting         16 ->  43    -27
+  together        10 ->  15     -5
+  at               6 ->   9     -3
+  up              15 ->  29    -14
+  having          21 -> 102    -81
+  looking         20 ->  66    -46
+  complaining     14 ->  19     -5
+  busy            13 ->  16     -3
+  excited         19 ->  22     -3
+
+HIGHER UNDER B
+  late             4 ->   1     +3
+  friendly        25 ->   3    +22
+  polite          41 ->   6    +35
+  loud            12 ->   4     +8
+  early          120 ->  12   +108
+  good            24 ->  11    +13
+  happy           18 ->  10     +8
+  known           22 ->  13     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  fighting         6 ->  54    -48
+  trying           4 ->  14    -10
+  in               3 ->  11     -8
+  looking         10 ->  47    -37
+  playing          2 ->   7     -5
+  there           15 ->  37    -22
+  up               9 ->  15     -6
+  arguing         11 ->  16     -5
+  on              17 ->  34    -17
+  together        23 ->  60    -37
+  doing           14 ->  29    -15
+  making           8 ->  10     -2
+  causing         19 ->  30    -11
+  curious         18 ->  27     -9
+  the              7 ->   8     -1
+  asking          16 ->  24     -8
+  annoying        24 ->  36    -12
+  at              20 ->  23     -3
+
+HIGHER UNDER B
+  so              22 ->   1    +21
+  very            13 ->   3    +10
+  loud            21 ->   4    +17
+  nice            35 ->   9    +26
+  friendly        52 ->  13    +39
+  giggling       102 ->  22    +80
+  quiet           61 ->  20    +41
+  really         148 ->  25   +123
+  known           31 ->  12    +19
+  late            44 ->  18    +26
+  whispering      41 ->  17    +24
+  talking         12 ->   6     +6
+  kind            46 ->  21    +25
+  laughing        38 ->  19    +19
+  getting          5 ->   5     +0
+  noisy           33 ->  26     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  very             3 ->  27    -24
+  in               2 ->   7     -5
+  there            6 ->  35    -29
+  on               9 ->  19    -10
+  so              13 ->  28    -15
+  the             11 ->  18     -7
+  together        14 ->  26    -12
+  at               7 ->  13     -6
+  asking          24 ->  48    -24
+  a               18 ->  23     -5
+  trying          17 ->  22     -5
+  having          16 ->  20     -4
+  coming          23 ->  33    -10
+  playing          1 ->   4     -3
+  busy            25 ->  31     -6
+  fighting        10 ->  10     +0
+
+HIGHER UNDER B
+  arguing          8 ->   1     +7
+  making           5 ->   2     +3
+  laughing        12 ->   5     +7
+  loud            15 ->   6     +9
+  bickering      129 ->  12   +117
+  talking          4 ->   3     +1
+  chattering      58 ->  14    +44
+  whispering     119 ->  16   +103
+  hanging         21 ->   9    +12
+  chatting        64 ->  15    +49
+  getting         20 ->   8    +12
+  teasing         62 ->  25    +37
+  joking          48 ->  24    +24
+  quiet           27 ->  17    +10
+  friendly        19 ->  11     +8
+  up              22 ->  21     +1
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  there            5 ->  20    -15
+  in               1 ->   4     -3
+  the              9 ->  19    -10
+  at              13 ->  23    -10
+  trying          23 ->  39    -16
+  together        24 ->  33     -9
+  hanging         21 ->  30     -9
+  a               18 ->  24     -6
+  doing           22 ->  28     -6
+  fighting        16 ->  18     -2
+  looking         28 ->  41    -13
+  laughing        19 ->  21     -2
+  getting          6 ->  13     -7
+  late            11 ->  14     -3
+  on              12 ->  16     -4
+  out              3 ->   9     -6
+
+HIGHER UNDER B
+  playing          2 ->   1     +1
+  noisy           26 ->   2    +24
+  loud             8 ->   3     +5
+  very             7 ->   5     +2
+  causing         42 ->  12    +30
+  running         17 ->   7    +10
+  making          14 ->   8     +6
+  outside         15 ->  10     +5
+  talking         25 ->  17     +8
+  having          20 ->  15     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  in               1 ->   1     +0
+  at              10 ->  15     -5
+  there            6 ->  13     -7
+  on              18 ->  22     -4
+  the             22 ->  25     -3
+  asking          17 ->  19     -2
+  out              7 ->   8     -1
+  going           29 ->  31     -2
+  having           8 ->   9     -1
+  talking          4 ->   5     -1
+  good            28 ->  29     -1
+  trying          26 ->  28     -2
+  coming          21 ->  21     +0
+  together        13 ->  14     -1
+
+HIGHER UNDER B
+  friendly         3 ->   2     +1
+  nice            12 ->   4     +8
+  loud            15 ->   7     +8
+  hanging         14 ->  12     +2
+  outside         23 ->  20     +3
+  up              11 ->  11     +0
+  kind            30 ->  27     +3
+  around          31 ->  30     +1
+  making          16 ->  16     +0
+  arguing         25 ->  24     +1
+  fighting        27 ->  26     +1
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  there            4 ->  36    -32
+  a                2 ->   8     -6
+  in               5 ->  12     -7
+  on              11 ->  24    -13
+  very            10 ->  21    -11
+  nice            13 ->  28    -15
+  the             15 ->  30    -15
+  at              20 ->  44    -24
+  around          19 ->  31    -12
+  having           8 ->  13     -5
+  together        21 ->  49    -28
+  friendly        14 ->  16     -2
+  doing           16 ->  17     -1
+  getting          7 ->  11     -4
+  hanging         23 ->  39    -16
+  so              22 ->  27     -5
+  quiet           28 ->  57    -29
+
+HIGHER UNDER B
+  up               1 ->   1     +0
+  playing          3 ->   2     +1
+  making           9 ->   3     +6
+  causing         33 ->   5    +28
+  out              6 ->   4     +2
+  outside         17 ->   6    +11
+  noisy           26 ->   9    +17
+  running         25 ->  10    +15
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  there            1 ->  16    -15
+  so               3 ->  20    -17
+  in               2 ->   7     -5
+  the              5 ->  15    -10
+  at               7 ->  13     -6
+  a                8 ->  11     -3
+  on              13 ->  26    -13
+  out             15 ->  31    -16
+  up              19 ->  38    -19
+  very             4 ->   8     -4
+  nice            24 ->  37    -13
+  hanging         20 ->  28     -8
+  friendly        18 ->  22     -4
+  going           25 ->  30     -5
+  noisy           22 ->  24     -2
+
+HIGHER UNDER B
+  talking         10 ->   2     +8
+  arguing         14 ->   3    +11
+  late             6 ->   1     +5
+  smiling         45 ->  10    +35
+  laughing        48 ->  12    +36
+  having          12 ->   4     +8
+  joking          52 ->  14    +38
+  together        11 ->   6     +5
+  making          16 ->   9     +7
+  happy           41 ->  23    +18
+  playing          9 ->   5     +4
+  looking         27 ->  19     +8
+  complaining     21 ->  17     +4
+  fighting        28 ->  21     +7
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  in               1 ->   3     -2
+  talking          6 ->   7     -1
+  together         7 ->  16     -9
+  hanging          8 ->  23    -15
+  up               5 ->   5     +0
+  out             11 ->  18     -7
+  trying           9 ->  15     -6
+  at              17 ->  27    -10
+  arguing         26 ->  40    -14
+  playing         10 ->  14     -4
+  outside         21 ->  30     -9
+  fighting        32 ->  45    -13
+  getting         23 ->  28     -5
+  looking         29 ->  37     -8
+  around          15 ->  24     -9
+  laughing        27 ->  35     -8
+  on              16 ->  19     -3
+  doing           25 ->  31     -6
+  making          30 ->  32     -2
+  having          18 ->  20     -2
+  complaining     12 ->  12     +0
+  there            4 ->   4     +0
+
+HIGHER UNDER B
+  friendly         3 ->   1     +2
+  very             2 ->   2     +0
+  kind            24 ->   6    +18
+  polite          31 ->  10    +21
+  nice            20 ->   9    +11
+  a               13 ->   8     +5
+  happy           34 ->  22    +12
+  good            19 ->  11     +8
+  welcome         39 ->  26    +13
+  loud            28 ->  21     +7
+  so              33 ->  25     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  nice             5 ->  37    -32
+  very             8 ->  27    -19
+  in               4 ->  13     -9
+  fighting        16 ->  85    -69
+  late            17 ->  75    -58
+  there           13 ->  29    -16
+  quiet           11 ->  17     -6
+  the             12 ->  20     -8
+  talking          9 ->  16     -7
+  on              14 ->  22     -8
+  at              19 ->  32    -13
+  polite          21 ->  39    -18
+  noisy           20 ->  25     -5
+  kind            22 ->  35    -13
+  a                1 ->   3     -2
+  arguing         25 ->  30     -5
+  friendly         7 ->  10     -3
+  going           28 ->  44    -16
+  out             15 ->  15     +0
+  so               3 ->   5     -2
+
+HIGHER UNDER B
+  up               2 ->   1     +1
+  loud             6 ->   2     +4
+  playing         10 ->   4     +6
+  making          24 ->   6    +18
+  getting         23 ->   7    +16
+  causing         49 ->  11    +38
+  outside         31 ->   9    +22
+  laughing        26 ->   8    +18
+  blasting        96 ->  18    +78
+  doing           30 ->  14    +16
+  having          18 ->  12     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  out              2 ->  20    -18
+  partying        11 ->  37    -26
+  talking         10 ->  26    -16
+  loud             3 ->   8     -5
+  playing          7 ->  18    -11
+  hanging         19 ->  35    -16
+  up               1 ->   7     -6
+  having           6 ->  11     -5
+  outside         24 ->  36    -12
+  noisy           12 ->  13     -1
+  doing           25 ->  27     -2
+  going           20 ->  23     -3
+
+HIGHER UNDER B
+  making           9 ->   1     +8
+  so              18 ->   3    +15
+  friendly        14 ->   6     +8
+  a                8 ->   5     +3
+  fighting        21 ->   9    +12
+  arguing         44 ->  21    +23
+  getting         26 ->  14    +12
+  quiet           16 ->  10     +6
+  in               5 ->   2     +3
+  busy            28 ->  19     +9
+  there           22 ->  17     +5
+  trying          42 ->  25    +17
+  looking         47 ->  28    +19
+  kind            34 ->  24    +10
+  together        23 ->  22     +1
+  on              17 ->  15     +2
+  very             4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  out              2 ->  48    -46
+  in               5 ->  30    -25
+  fighting         8 ->  51    -43
+  hanging         11 ->  32    -21
+  at              14 ->  42    -28
+  running         12 ->  28    -16
+  outside          7 ->  16     -9
+  complaining     17 ->  49    -32
+  on              19 ->  54    -35
+  laughing        16 ->  24     -8
+  going           15 ->  19     -4
+  coming          20 ->  43    -23
+  up              13 ->  15     -2
+  busy            28 ->  80    -52
+  there           26 ->  64    -38
+  home            22 ->  40    -18
+  getting         18 ->  23     -5
+  yelling         27 ->  33     -6
+  arguing          6 ->   7     -1
+  trying          24 ->  25     -1
+  talking          3 ->   5     -2
+
+HIGHER UNDER B
+  very            10 ->   2     +8
+  playing          1 ->   1     +0
+  making           4 ->   3     +1
+  loud            32 ->   4    +28
+  friendly        54 ->   8    +46
+  chatting        65 ->  10    +55
+  really          55 ->  11    +44
+  a               23 ->   9    +14
+  noisy           29 ->  12    +17
+  extremely       77 ->  17    +60
+  having           9 ->   6     +3
+  quite           78 ->  20    +58
+  listening       36 ->  14    +22
+  so              21 ->  13     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  fighting        13 ->  71    -58
+  very             5 ->   9     -4
+  talking          8 ->  13     -5
+  getting         10 ->  19     -9
+  out             12 ->  24    -12
+  doing           21 ->  64    -43
+  in               6 ->  10     -4
+  the             15 ->  26    -11
+  nice            24 ->  63    -39
+  going           22 ->  56    -34
+  together        25 ->  61    -36
+  at              23 ->  43    -20
+  late            18 ->  23     -5
+  looking         20 ->  25     -5
+  having          14 ->  18     -4
+  hanging         26 ->  38    -12
+  there           11 ->  15     -4
+  complaining     28 ->  39    -11
+  a                2 ->   5     -3
+
+HIGHER UNDER B
+  up               4 ->   1     +3
+  causing         19 ->   2    +17
+  excited         43 ->   8    +35
+  playing          9 ->   7     +2
+  making           7 ->   6     +1
+  curious         56 ->  11    +45
+  full            88 ->  14    +74
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  in               3 ->  12     -9
+  out              8 ->  19    -11
+  at              11 ->  28    -17
+  there            2 ->   6     -4
+  on              12 ->  29    -17
+  talking         10 ->  15     -5
+  the             14 ->  25    -11
+  outside         13 ->  22     -9
+  nice            21 ->  31    -10
+  polite          22 ->  36    -14
+  friendly        26 ->  42    -16
+  around          27 ->  41    -14
+  looking         24 ->  38    -14
+  a                1 ->   3     -2
+
+HIGHER UNDER B
+  up               4 ->   1     +3
+  playing          6 ->   2     +4
+  very             7 ->   4     +3
+  doing           19 ->   9    +10
+  making          16 ->   8     +8
+  loud            17 ->  10     +7
+  watching        23 ->  11    +12
+  quiet            5 ->   5     +0
+  so               9 ->   7     +2
+  running         30 ->  16    +14
+  coming          18 ->  13     +5
+  over            43 ->  23    +20
+  having          39 ->  24    +15
+  home            32 ->  21    +11
+  getting         25 ->  18     +7
+  noisy           28 ->  20     +8
+  late            15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  loud             9 ->  25    -16
+  very             4 ->  11     -7
+  so              14 ->  67    -53
+  busy            12 ->  34    -22
+  fighting        17 -> 112    -95
+  talking          8 ->  12     -4
+  late            26 ->  76    -50
+  the             21 ->  46    -25
+  going           24 ->  54    -30
+  making          16 ->  21     -5
+  up               6 ->   9     -3
+  laughing        20 ->  42    -22
+  out             22 ->  43    -21
+  hanging         10 ->  14     -4
+  at              15 ->  16     -1
+  on              13 ->  15     -2
+  playing          1 ->   2     -1
+  a               25 ->  26     -1
+
+HIGHER UNDER B
+  trying           3 ->   1     +2
+  seen            45 ->   4    +41
+  ready           37 ->   7    +30
+  happy           19 ->   8    +11
+  joking          50 ->  18    +32
+  willing         63 ->  22    +41
+  looking         27 ->  13    +14
+  friendly        28 ->  20     +8
+  together         5 ->   5     +0
+  having           7 ->   6     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  in               1 ->   9     -8
+  around          20 ->  45    -25
+  nice            13 ->  28    -15
+  polite          22 ->  40    -18
+  there           12 ->  25    -13
+  out              5 ->  17    -12
+  at              16 ->  24     -8
+  good            30 ->  38     -8
+  asking          29 ->  37     -8
+  on              15 ->  20     -5
+  up              19 ->  26     -7
+  a                7 ->  13     -6
+  the             26 ->  27     -1
+  late            33 ->  35     -2
+  coming          18 ->  21     -3
+  friendly        14 ->  15     -1
+
+HIGHER UNDER B
+  playing          2 ->   1     +1
+  fighting        17 ->   4    +13
+  arguing         41 ->  11    +30
+  very             4 ->   2     +2
+  complaining     10 ->   5     +5
+  so              32 ->  14    +18
+  making          25 ->  12    +13
+  laughing         6 ->   6     +0
+  having           9 ->   7     +2
+  talking          8 ->   8     +0
+  quiet           11 ->  10     +1
+  rowdy           49 ->  31    +18
+  loud            24 ->  16     +8
+  trying          23 ->  18     +5
+  outside         28 ->  22     +6
+  busy            34 ->  30     +4
+  getting         21 ->  19     +2
+  together         3 ->   3     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  friendly         1 ->  29    -28
+  nice             8 ->  34    -26
+  on               4 ->  20    -16
+  asking           9 ->  33    -24
+  trying          11 ->  43    -32
+  outside         16 ->  42    -26
+  there           20 ->  51    -31
+  so              14 ->  28    -14
+  welcome         24 ->  50    -26
+  around          29 -> 117    -88
+  looking         13 ->  23    -10
+  a               15 ->  26    -11
+  the             23 ->  37    -14
+  kind            31 ->  74    -43
+  hanging         30 ->  40    -10
+  in               5 ->  10     -5
+  up              12 ->  15     -3
+  at              21 ->  22     -1
+
+HIGHER UNDER B
+  arguing         58 ->   3    +55
+  fighting        53 ->   4    +49
+  getting         28 ->   7    +21
+  playing         25 ->   8    +17
+  late            46 ->  13    +33
+  making          26 ->  11    +15
+  out              2 ->   1     +1
+  having          19 ->  12     +7
+  loud            41 ->  16    +25
+  talking          3 ->   2     +1
+  studying        45 ->  19    +26
+  busy            10 ->   6     +4
+  laughing        37 ->  18    +19
+  very             7 ->   5     +2
+  throwing        75 ->  27    +48
+  together        42 ->  24    +18
+  working         17 ->  14     +3
+  quiet           18 ->  17     +1
+  happy           22 ->  21     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

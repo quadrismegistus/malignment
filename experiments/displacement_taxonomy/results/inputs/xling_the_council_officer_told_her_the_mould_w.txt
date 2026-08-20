@@ -1,0 +1,1006 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: The council officer told her the mould was her own fault, so she ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  had              1 ->  11    -10
+  said             6 ->  44    -38
+  must            12 ->  48    -36
+  went             4 ->  10     -6
+  got             10 ->  30    -20
+  left            16 ->  95    -79
+  would           13 ->  39    -26
+  did             11 ->  23    -12
+  paid            19 ->  57    -38
+  told            21 ->  90    -69
+  agreed          22 ->  84    -62
+  has             15 ->  22     -7
+  started         23 ->  35    -12
+
+HIGHER UNDER B
+  asked            9 ->   2     +7
+  sued            18 ->   5    +13
+  decided          8 ->   4     +4
+  contacted       64 ->   9    +55
+  is              17 ->   7    +10
+  should           2 ->   1     +1
+  argued          96 ->  14    +82
+  took             7 ->   6     +1
+  felt            58 ->  15    +43
+  demanded        69 ->  16    +53
+  couldn          53 ->  18    +35
+  didn't          50 ->  19    +31
+  complained      39 ->  17    +22
+  didn            20 ->  12     +8
+  was              3 ->   3     +0
+  made            14 ->  13     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  was              3 ->   7     -4
+  asked            4 ->   8     -4
+  could            5 ->  14     -9
+  complained       8 ->  28    -20
+  would           12 ->  25    -13
+  went             7 ->   9     -2
+  contacted       10 ->  12     -2
+  told            20 ->  35    -15
+  got             13 ->  13     +0
+  has             22 ->  24     -2
+  tried           17 ->  18     -1
+  bought          16 ->  17     -1
+
+HIGHER UNDER B
+  had              2 ->   1     +1
+  took             6 ->   3     +3
+  started         15 ->   5    +10
+  decided          9 ->   4     +5
+  did             14 ->   6     +8
+  sought          60 ->  22    +38
+  needed          18 ->  11     +7
+  wrote           28 ->  21     +7
+  made            26 ->  19     +7
+  must            19 ->  15     +4
+  put             21 ->  16     +5
+  moved           23 ->  20     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  could            1 ->   4     -3
+  should           4 ->   5     -1
+  would            5 ->   7     -2
+  needed           8 ->  25    -17
+  must             6 ->  11     -5
+  can             13 ->  29    -16
+  was              2 ->   2     +0
+  has             11 ->  16     -5
+  paid            14 ->  18     -4
+
+HIGHER UNDER B
+  decided          9 ->   3     +6
+  took             7 ->   6     +1
+  had              3 ->   1     +2
+  immediately     50 ->  14    +36
+  couldn          19 ->  10     +9
+  gave            15 ->   8     +7
+  bought          17 ->  12     +5
+  asked           18 ->  15     +3
+  didn            25 ->  20     +5
+  put             23 ->  19     +4
+  went            10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  decided          4 ->  11     -7
+  should           2 ->   5     -3
+  could            5 ->  10     -5
+  would            9 ->  22    -13
+  took             7 ->  13     -6
+  moved            6 ->   9     -3
+  bought          13 ->  90    -77
+  did             10 ->  18     -8
+  fixed           15 ->  66    -51
+  went            11 ->  28    -17
+  got             14 ->  42    -28
+  set             18 ->  62    -44
+  painted         17 ->  58    -41
+  cleaned         23 ->  77    -54
+  started         24 ->  59    -35
+  put             25 ->  37    -12
+  spent           21 ->  27     -6
+  called          12 ->  15     -3
+  paid            20 ->  20     +0
+  contacted       16 ->  16     +0
+
+HIGHER UNDER B
+  had              1 ->   1     +0
+  was              3 ->   2     +1
+  is              19 ->   3    +16
+  couldn't        22 ->   6    +16
+  can't           43 ->   7    +36
+  felt            59 ->  14    +45
+  must            27 ->   8    +19
+  has              8 ->   4     +4
+  didn't          26 ->  12    +14
+  wasn't          47 ->  17    +30
+  asked           29 ->  19    +10
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  was              1 ->   1     +0
+  said             6 ->   8     -2
+  paid            16 ->  52    -36
+  gave            15 ->  28    -13
+  took             7 ->  10     -3
+  agreed          20 ->  43    -23
+  wasn            19 ->  35    -16
+  got              9 ->  14     -5
+  asked           12 ->  18     -6
+  didn             3 ->   4     -1
+  did             11 ->  12     -1
+
+HIGHER UNDER B
+  had              4 ->   2     +2
+  told            18 ->   9     +9
+  must            33 ->  17    +16
+  couldn          21 ->  13     +8
+  could           10 ->   6     +4
+  felt            13 ->  11     +2
+  knew            32 ->  19    +13
+  started         27 ->  20     +7
+  decided          5 ->   5     +0
+  would           17 ->  16     +1
+  tried           28 ->  22     +6
+  put             24 ->  21     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  cleaned          5 ->  34    -29
+  stopped          7 ->  24    -17
+  started         11 ->  23    -12
+  did              8 ->  13     -5
+  got             16 ->  33    -17
+  refused         19 ->  31    -12
+  has             17 ->  26     -9
+  decided          2 ->   4     -2
+  didn't           9 ->  11     -2
+  moved           25 ->  46    -21
+  asked           14 ->  18     -4
+  shouldn't       23 ->  39    -16
+  couldn't        22 ->  25     -3
+
+HIGHER UNDER B
+  should           1 ->   1     +0
+  had              3 ->   2     +1
+  didn            20 ->   7    +13
+  was              4 ->   3     +1
+  tried           10 ->   5     +5
+  couldn          38 ->  14    +24
+  would           26 ->  12    +14
+  went            15 ->   9     +6
+  turned          40 ->  20    +20
+  left            32 ->  19    +13
+  needed          31 ->  21    +10
+  contacted       29 ->  22     +7
+  made            24 ->  17     +7
+  must            13 ->  10     +3
+  took             6 ->   6     +0
+  could           12 ->   8     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  should           1 ->  12    -11
+  was              2 ->   7     -5
+  had              3 ->   5     -2
+  could            4 ->  13     -9
+  shouldn't        5 ->  72    -67
+  would            6 ->  60    -54
+  has             12 ->  87    -75
+  wasn't           9 ->  24    -15
+  couldn't        10 ->  21    -11
+  got             15 ->  34    -19
+
+HIGHER UNDER B
+  decided         14 ->   1    +13
+  went            13 ->   2    +11
+  took            11 ->   3     +8
+  felt            62 ->   6    +56
+  left            16 ->   8     +8
+  refused         26 ->  10    +16
+  asked           24 ->  11    +13
+  didn't           8 ->   4     +4
+  withdrew       110 ->  15    +95
+  sued            28 ->  14    +14
+  accepted       113 ->  17    +96
+  demanded       106 ->  19    +87
+  knew            55 ->  16    +39
+  thought         77 ->  20    +57
+  complained      40 ->  18    +22
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  went             9 ->  24    -15
+  decided          2 ->   5     -3
+  took             1 ->   1     +0
+  called          11 ->  38    -27
+  had              5 ->   8     -3
+  could            8 ->  13     -5
+  has             10 ->  22    -12
+  complained      15 ->  34    -19
+  wrote           16 ->  30    -14
+  contacted       13 ->  28    -15
+  is              12 ->  17     -5
+  paid            23 ->  31     -8
+  would           20 ->  27     -7
+  got             14 ->  18     -4
+  left            21 ->  26     -5
+  put             22 ->  25     -3
+  said            19 ->  23     -4
+  sued             4 ->   4     +0
+  told            18 ->  20     -2
+  was              3 ->   3     +0
+
+HIGHER UNDER B
+  should           6 ->   2     +4
+  must            26 ->   7    +19
+  demanded        40 ->   9    +31
+  replied         41 ->  10    +31
+  challenged      43 ->  12    +31
+  argued          71 ->  14    +57
+  cleaned         50 ->  16    +34
+  refused         17 ->  11     +6
+  asked            7 ->   6     +1
+  shouldn't       24 ->  15     +9
+  removed         32 ->  21    +11
+  didn't          25 ->  19     +6
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  took             4 ->  18    -14
+  decided          6 ->  27    -21
+  went             8 ->  38    -30
+  asked           10 ->  23    -13
+  paid             9 ->  17     -8
+  called          12 -> 104    -92
+  moved           14 ->  53    -39
+  left            17 ->  91    -74
+  said            13 ->  30    -17
+  told            15 ->  26    -11
+  contacted       19 -> 110    -91
+  got             16 ->  25     -9
+  refused         21 ->  45    -24
+  ignored         23 ->  74    -51
+  would            5 ->   6     -1
+  was              3 ->   4     -1
+
+HIGHER UNDER B
+  should           2 ->   1     +1
+  must            32 ->   3    +29
+  needs           59 ->   7    +52
+  needed          20 ->   9    +11
+  could            7 ->   5     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  had              1 ->   3     -2
+  could            4 ->   9     -5
+  would            3 ->   8     -5
+  was              2 ->   2     +0
+  left            13 ->  33    -20
+  did             11 ->  14     -3
+  should           8 ->  12     -4
+  didn't           9 ->  11     -2
+  refused         16 ->  27    -11
+  went             7 ->  10     -3
+  took            15 ->  18     -3
+  wouldn't        18 ->  19     -1
+
+HIGHER UNDER B
+  decided          5 ->   1     +4
+  felt            26 ->   7    +19
+  said            10 ->   4     +6
+  told            12 ->   5     +7
+  tried           19 ->  16     +3
+  asked            6 ->   6     +0
+  got             20 ->  17     +3
+  thought         17 ->  15     +2
+  needed          30 ->  20    +10
+  wanted          28 ->  21     +7
+  couldn't        14 ->  13     +1
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  had              3 ->   6     -3
+  would            6 ->  12     -6
+  should           2 ->   2     +0
+  was              1 ->   1     +0
+  could            5 ->   8     -3
+  has              4 ->   7     -3
+  must            13 ->  27    -14
+  wasn't          17 ->  41    -24
+  wouldn't        10 ->  17     -7
+  couldn't        22 ->  51    -29
+  did             15 ->  23     -8
+  will            19 ->  34    -15
+  didn't          16 ->  24     -8
+  needed          21 ->  26     -5
+  shouldn't       12 ->  13     -1
+
+HIGHER UNDER B
+  decided          9 ->   4     +5
+  took             7 ->   3     +4
+  asked           11 ->   9     +2
+  is               8 ->   5     +3
+  went            20 ->  11     +9
+  sued            14 ->  10     +4
+  filed           28 ->  15    +13
+  called          27 ->  14    +13
+  started         38 ->  19    +19
+  got             25 ->  18     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  has              5 ->  24    -19
+  is               6 ->  34    -28
+  should           3 ->   9     -6
+  will            12 -> 104    -92
+  refused         18 ->  70    -52
+  would           13 ->  33    -20
+  complained      17 ->  45    -28
+  sued            14 ->  25    -11
+  took             7 ->   7     +0
+  did             19 ->  22     -3
+  could           11 ->  11     +0
+
+HIGHER UNDER B
+  decided          4 ->   3     +1
+  was              1 ->   1     +0
+  had              2 ->   2     +0
+  didn't          16 ->   5    +11
+  said             8 ->   4     +4
+  asked           10 ->   6     +4
+  wasn't          40 ->  10    +30
+  needed          30 ->  13    +17
+  left            31 ->  14    +17
+  started         32 ->  17    +15
+  felt            37 ->  19    +18
+  couldn't        29 ->  20     +9
+  wrote           26 ->  18     +8
+  wanted          28 ->  21     +7
+  got             15 ->  12     +3
+  told            21 ->  16     +5
+  called          20 ->  15     +5
+  went             9 ->   8     +1
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  was              2 ->  74    -72
+  took             3 ->  23    -20
+  called           4 ->  48    -44
+  went             5 -> 100    -95
+  asked            6 ->  41    -35
+  had              1 ->   3     -2
+  decided          9 ->  53    -44
+  said            10 ->  68    -58
+  should          11 ->  58    -47
+  paid             8 ->  29    -21
+  complained      15 ->  37    -22
+  moved           18 ->  70    -52
+  told            19 ->  56    -37
+  would            7 ->  13     -6
+  has             21 ->  64    -43
+  rang            20 ->  54    -34
+  left            16 ->  27    -11
+  made            24 ->  35    -11
+  contacted       14 ->  15     -1
+  didn't          17 ->  20     -3
+  could           12 ->  12     +0
+
+HIGHER UNDER B
+  cut             41 ->   1    +40
+  inflated       125 ->   2   +123
+  abandoned      121 ->   5   +116
+  enlisted       118 ->   6   +112
+  submitted       92 ->   7    +85
+  got             13 ->   4     +9
+  dumped         115 ->   9   +106
+  wouldn't        31 ->   8    +23
+  threw           59 ->  10    +49
+  ignored         26 ->  11    +15
+  put             32 ->  14    +18
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  took             6 ->  16    -10
+  went             4 ->   8     -4
+  got             10 ->  19     -9
+  threw           21 ->  49    -28
+  told             8 ->  11     -3
+  put             19 ->  34    -15
+  did              9 ->  12     -3
+  had              1 ->   3     -2
+  gave            17 ->  23     -6
+  must            15 ->  21     -6
+  left            14 ->  20     -6
+  made            20 ->  27     -7
+  asked           18 ->  18     +0
+
+HIGHER UNDER B
+  was              3 ->   1     +2
+  didn't          11 ->   5     +6
+  should           2 ->   2     +0
+  felt            28 ->  10    +18
+  blamed          38 ->  17    +21
+  just            29 ->  13    +16
+  couldn't        31 ->  15    +16
+  decided         13 ->   7     +6
+  thought         52 ->  24    +28
+  said            12 ->   9     +3
+  could            5 ->   4     +1
+  wouldn't        46 ->  25    +21
+  refused         33 ->  22    +11
+  would            7 ->   6     +1
+  agreed          16 ->  14     +2
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  sued             1 ->   1     +0
+  called           6 ->  11     -5
+  took             2 ->   2     +0
+  filed           14 ->  37    -23
+  killed          20 ->  49    -29
+  went             3 ->   4     -1
+  moved           21 ->  38    -17
+  got             16 ->  25     -9
+  started         22 ->  33    -11
+  tried           19 ->  31    -12
+  reported        18 ->  26     -8
+  asked           11 ->  13     -2
+  was             12 ->  15     -3
+  did              4 ->   5     -1
+  had              8 ->  10     -2
+
+HIGHER UNDER B
+  decided          5 ->   3     +2
+  wrote            7 ->   6     +1
+  complained       9 ->   7     +2
+  blamed          79 ->  17    +62
+  posted          48 ->  16    +32
+  painted         27 ->  18     +9
+  turned          15 ->   8     +7
+  put             17 ->  14     +3
+  sprayed         45 ->  21    +24
+  threw           28 ->  20     +8
+  sent            23 ->  19     +4
+  set             13 ->  12     +1
+  is              25 ->  22     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  didn't           6 ->  16    -10
+  shouldn't        8 ->  27    -19
+  couldn't        15 ->  32    -17
+  went            11 ->  17     -6
+  said            16 ->  39    -23
+  wasn't          20 ->  41    -21
+  asked           21 ->  26     -5
+  has             17 ->  21     -4
+  did              9 ->  11     -2
+  got             23 ->  25     -2
+  was              2 ->   3     -1
+  took            10 ->  12     -2
+
+HIGHER UNDER B
+  should           1 ->   1     +0
+  could            4 ->   4     +0
+  had              3 ->   2     +1
+  shouldn          7 ->   5     +2
+  would           12 ->   7     +5
+  needed          18 ->   8    +10
+  couldn          14 ->   9     +5
+  wouldn          30 ->  14    +16
+  decided         13 ->  10     +3
+  must            24 ->  15     +9
+  wasn            19 ->  13     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  took             5 ->  13     -8
+  appealed        14 ->  75    -61
+  called           6 ->  12     -6
+  went             7 ->  14     -7
+  got             10 ->  15     -5
+  contacted       12 ->  21     -9
+  complained      17 ->  28    -11
+  sued            23 ->  77    -54
+  sent            19 ->  41    -22
+  wrote           18 ->  27     -9
+  moved           11 ->  19     -8
+  paid            20 ->  33    -13
+  tried           15 ->  20     -5
+  told            26 ->  38    -12
+
+HIGHER UNDER B
+  had              1 ->   1     +0
+  said            25 ->   7    +18
+  asked            3 ->   3     +0
+  needed          24 ->   8    +16
+  was              2 ->   2     +0
+  should           4 ->   4     +0
+  decided          9 ->   5     +4
+  has              8 ->   6     +2
+  needs           47 ->  16    +31
+  would           21 ->  10    +11
+  couldn          30 ->  18    +12
+  stopped         37 ->  23    +14
+  left            35 ->  24    +11
+  refused         34 ->  25     +9
+  couldn't        32 ->  22    +10
+  started         22 ->  17     +5
+  is              16 ->  11     +5
+  could           13 ->   9     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  went             5 ->   7     -2
+  had              1 ->   2     -1
+  left            11 ->  15     -4
+  did             13 ->  16     -3
+  would           10 ->  12     -2
+  put             19 ->  24     -5
+  said             9 ->  10     -1
+  took             6 ->   6     +0
+  threw           26 ->  30     -4
+  gave            23 ->  25     -2
+  didn't           8 ->   8     +0
+  made            20 ->  22     -2
+  got             18 ->  18     +0
+  just            17 ->  17     +0
+
+HIGHER UNDER B
+  should           2 ->   1     +1
+  shouldn't       14 ->   9     +5
+  could            4 ->   4     +0
+  couldn't        12 ->  11     +1
+  stopped         25 ->  21     +4
+  was              3 ->   3     +0
+  tried           24 ->  23     +1
+  decided          7 ->   5     +2
+  started         22 ->  19     +3
+  asked           15 ->  13     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  went             4 ->  30    -26
+  should           5 ->  18    -13
+  was              6 ->  11     -5
+  could           12 ->  36    -24
+  called           8 ->  10     -2
+  did             16 ->  57    -41
+  took             2 ->   5     -3
+  told            14 ->  41    -27
+  left            19 ->  49    -30
+  had              7 ->   8     -1
+  said            21 ->  27     -6
+  complained      20 ->  23     -3
+  put             22 ->  22     +0
+  sent            13 ->  15     -2
+
+HIGHER UNDER B
+  decided          1 ->   1     +0
+  asked            3 ->   2     +1
+  set             17 ->   3    +14
+  contacted       10 ->   4     +6
+  sued            11 ->   6     +5
+  started         18 ->   9     +9
+  hired           25 ->  13    +12
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  went             8 ->  28    -20
+  asked            5 ->  18    -13
+  filed           15 ->  72    -57
+  told             9 ->  17     -8
+  called          13 ->  20     -7
+  sued            22 ->  59    -37
+  got             20 ->  44    -24
+  took             4 ->   8     -4
+  left            18 ->  36    -18
+  said            17 ->  32    -15
+  gave            21 ->  41    -20
+  has             16 ->  27    -11
+  paid             3 ->   7     -4
+
+HIGHER UNDER B
+  could            7 ->   3     +4
+  would           11 ->   4     +7
+  should          10 ->   5     +5
+  did             19 ->   6    +13
+  was              2 ->   1     +1
+  blamed          40 ->  12    +28
+  agreed          26 ->  11    +15
+  apologised      69 ->  16    +53
+  needed          45 ->  15    +30
+  can             44 ->  19    +25
+  returned        24 ->  14    +10
+  didn't          12 ->  10     +2
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  went             4 ->   4     +0
+  would            5 ->   7     -2
+  didn't          10 ->  11     -1
+  left            15 ->  18     -3
+  got             11 ->  15     -4
+  did             16 ->  24     -8
+  gave            17 ->  23     -6
+  took             8 ->   9     -1
+  told            12 ->  14     -2
+  made            20 ->  26     -6
+  couldn't        19 ->  25     -6
+
+HIGHER UNDER B
+  was              3 ->   2     +1
+  should           1 ->   1     +0
+  said             7 ->   6     +1
+  agreed          18 ->  13     +5
+  asked            9 ->   8     +1
+  needed          29 ->  16    +13
+  called          21 ->  17     +4
+  shouldn't       14 ->  10     +4
+  might           27 ->  19     +8
+  could            6 ->   5     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  took             1 ->   7     -6
+  decided          3 ->   8     -5
+  went             7 ->  24    -17
+  got             12 ->  36    -24
+  paid            15 ->  47    -32
+  hired           16 ->  57    -41
+  called           8 ->  10     -2
+  bought          23 ->  59    -36
+  has              9 ->  13     -4
+  had              2 ->   3     -1
+  did             18 ->  29    -11
+  sent            25 ->  39    -14
+  would           21 ->  30     -9
+  cleaned         17 ->  26     -9
+  could           19 ->  25     -6
+  turned          20 ->  23     -3
+  began           26 ->  32     -6
+  sought          27 ->  27     +0
+
+HIGHER UNDER B
+  contacted        4 ->   1     +3
+  was              5 ->   2     +3
+  challenged      58 ->  12    +46
+  felt            78 ->  15    +63
+  complained      11 ->   5     +6
+  shouldn         81 ->  18    +63
+  wasn           101 ->  20    +81
+  couldn          65 ->  19    +46
+  appealed        40 ->  14    +26
+  should          10 ->   6     +4
+  refused         44 ->  22    +22
+  started         14 ->   9     +5
+  needed          35 ->  21    +14
+  asked            6 ->   4     +2
+  tried           24 ->  16     +8
+  wrote           22 ->  17     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  called           6 ->  18    -12
+  went             5 ->  13     -8
+  got             10 ->  23    -13
+  contacted       13 ->  32    -19
+  asked            7 ->  14     -7
+  wrote           19 ->  41    -22
+  said            16 ->  33    -17
+  put             11 ->  16     -5
+  complained      25 ->  47    -22
+  told            21 ->  31    -10
+  did             15 ->  24     -9
+  set             27 ->  46    -19
+  took             4 ->   6     -2
+  sent            23 ->  29     -6
+  left            22 ->  25     -3
+
+HIGHER UNDER B
+  should          12 ->   2    +10
+  moved            1 ->   1     +0
+  didn't          26 ->   7    +19
+  couldn't        42 ->   9    +33
+  was              8 ->   5     +3
+  stopped         18 ->  11     +7
+  started         14 ->  10     +4
+  tried           17 ->  12     +5
+  refused         20 ->  15     +5
+  began           35 ->  17    +18
+  has              9 ->   8     +1
+  and             29 ->  20     +9
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  took             1 ->   3     -2
+  went             3 ->   9     -6
+  called           4 ->   6     -2
+  complained       8 ->  19    -11
+  contacted       10 ->  28    -18
+  sued            11 ->  30    -19
+  rang            16 ->  48    -32
+  wrote            9 ->  14     -5
+  filed           29 ->  58    -29
+  put             17 ->  33    -16
+  moved           27 ->  46    -19
+  sent            26 ->  41    -15
+  brought         23 ->  39    -16
+  reported        19 ->  29    -10
+  would           28 ->  34     -6
+  got             13 ->  17     -4
+  left            12 ->  13     -1
+
+HIGHER UNDER B
+  asked            7 ->   1     +6
+  decided          5 ->   2     +3
+  was              6 ->   5     +1
+  is              34 ->   8    +26
+  has             15 ->   7     +8
+  can't           87 ->  21    +66
+  needs           99 ->  24    +75
+  said            30 ->  11    +19
+  must            52 ->  27    +25
+  should          24 ->  12    +12
+  didn't          21 ->  10    +11
+  paid            38 ->  23    +15
+  did             31 ->  22     +9
+  told            32 ->  26     +6
+  tried           25 ->  25     +0
+  started         22 ->  20     +2
+  could           18 ->  16     +2
+  refused         20 ->  18     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  had              2 ->   2     +0
+  should           1 ->   1     +0
+  would            5 ->  24    -19
+  needed           6 ->  27    -21
+  was              3 ->   8     -5
+  shouldn't       14 -> 116   -102
+  must            11 ->  46    -35
+  cleaned         17 ->  72    -55
+  could            4 ->   6     -2
+  tried           15 ->  37    -22
+  just            21 ->  49    -28
+  bought          19 ->  41    -22
+  has             13 ->  22     -9
+  paid            10 ->  13     -3
+  started         20 ->  26     -6
+  went             9 ->  12     -3
+  threw           18 ->  19     -1
+
+HIGHER UNDER B
+  couldn          25 ->   4    +21
+  took             7 ->   3     +4
+  felt            45 ->   9    +36
+  didn            34 ->  10    +24
+  shouldn         12 ->   7     +5
+  ignored         31 ->  11    +20
+  sued            95 ->  16    +79
+  sought         119 ->  17   +102
+  decided          8 ->   5     +3
+  stopped         57 ->  18    +39
+  contacted       73 ->  20    +53
+  wasn            67 ->  21    +46
+  moved           28 ->  15    +13
+  asked           16 ->  14     +2
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  had              1 ->   5     -4
+  was              3 ->   6     -3
+  could            8 ->  15     -7
+  cleaned         23 ->  63    -40
+  stopped         27 ->  60    -33
+  contacted       14 ->  21     -7
+  has             10 ->  11     -1
+  couldn't        26 ->  42    -16
+  left            25 ->  39    -14
+  tried           21 ->  33    -12
+  paid            31 ->  48    -17
+  moved           16 ->  20     -4
+  complained      13 ->  13     +0
+  got             12 ->  12     +0
+  bought          18 ->  24     -6
+  did             20 ->  25     -5
+  went             5 ->   8     -3
+
+HIGHER UNDER B
+  sued             6 ->   1     +5
+  took             2 ->   2     +0
+  is              15 ->  10     +5
+  posted          59 ->  26    +33
+  should           4 ->   3     +1
+  called           7 ->   4     +3
+  asked           11 ->   9     +2
+  can't           22 ->  14     +8
+  decided          9 ->   7     +2
+  sent            32 ->  23     +9
+  shouldn't       30 ->  22     +8
+  made            24 ->  18     +6
+  refused         28 ->  19     +9
+  started         19 ->  17     +2
+  didn't          17 ->  16     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  had              1 ->   1     +0
+  was              2 ->   2     +0
+  should           3 ->   4     -1
+  would            5 ->  51    -46
+  could            4 ->   6     -2
+  must             6 ->  33    -27
+  paid            10 ->  93    -83
+  shouldn         12 ->  49    -37
+  couldn          11 ->  24    -13
+  wasn            20 ->  94    -74
+  refused         14 ->  31    -17
+  needed          21 ->  68    -47
+  did              8 ->  17     -9
+  didn             7 ->  14     -7
+
+HIGHER UNDER B
+  blamed          40 ->   3    +37
+  asked           18 ->   5    +13
+  felt            50 ->  10    +40
+  argued          56 ->  12    +44
+  decided         15 ->   7     +8
+  went            17 ->   8     +9
+  said            16 ->   9     +7
+  pointed        128 ->  21   +107
+  is              32 ->  16    +16
+  tried           22 ->  13     +9
+  told            27 ->  18     +9
+  called          36 ->  19    +17
+  started         25 ->  23     +2
+  left            23 ->  22     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  would            5 ->   5     +0
+  told            14 ->  20     -6
+  took             8 ->  10     -2
+  called          15 ->  23     -8
+  said             7 ->   8     -1
+  asked           13 ->  14     -1
+  wouldn't        17 ->  19     -2
+  went             6 ->   6     +0
+  left            12 ->  12     +0
+  decided         10 ->  11     -1
+  refused         21 ->  21     +0
+
+HIGHER UNDER B
+  was              3 ->   2     +1
+  had              1 ->   1     +0
+  didn't           9 ->   7     +2
+  paid            11 ->   9     +2
+  spent           31 ->  22     +9
+  did             22 ->  15     +7
+  couldn't        16 ->  13     +3
+  could            4 ->   4     +0
+  wrote           20 ->  18     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  had              1 ->   2     -1
+  was              3 ->   4     -1
+  needed           4 ->  23    -19
+  would            7 ->  11     -4
+  must             6 ->   8     -2
+  has              9 ->  10     -1
+
+HIGHER UNDER B
+  should           2 ->   1     +1
+  shouldn         16 ->   5    +11
+  could            5 ->   3     +2
+  didn            36 ->   6    +30
+  couldn          38 ->  14    +24
+  didn't          17 ->  15     +2
+  started         32 ->  17    +15
+  cleaned         18 ->  16     +2
+  took             8 ->   7     +1
+  went            20 ->  18     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

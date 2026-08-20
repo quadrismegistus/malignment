@@ -1,0 +1,888 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: Two weeks after she filed the harassment complaint against her supervisor, human resources decided to ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  fire             2 ->  13    -11
+  suspend          3 ->   6     -3
+  let              8 ->  12     -4
+  transfer         9 ->  10     -1
+  send            11 ->  45    -34
+  move             6 ->   9     -3
+  put             10 ->  18     -8
+  give            15 ->  37    -22
+  remove          14 ->  23     -9
+  reassign        16 ->  21     -5
+  end             17 ->  20     -3
+  have            20 ->  56    -36
+  discipline      19 ->  44    -25
+
+HIGHER UNDER B
+  terminate        1 ->   1     +0
+  launch          24 ->   3    +21
+  take             7 ->   2     +5
+  investigate      4 ->   4     +0
+  open            31 ->   7    +24
+  place            5 ->   5     +0
+  conduct         12 ->   8     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  terminate        6 ->  14     -8
+  move             4 ->   9     -5
+  let              8 ->  21    -13
+  transfer         9 ->  19    -10
+  give            14 ->  24    -10
+  send            16 ->  26    -10
+  close           20 ->  30    -10
+  remove          18 ->  22     -4
+  go              19 ->  20     -1
+  end             17 ->  17     +0
+  do              13 ->  13     +0
+
+HIGHER UNDER B
+  investigate      2 ->   2     +0
+  fire             1 ->   1     +0
+  conduct          7 ->   4     +3
+  launch          10 ->   6     +4
+  initiate        27 ->  10    +17
+  place           11 ->   7     +4
+  start           24 ->  12    +12
+  put             12 ->   8     +4
+  take             3 ->   3     +0
+  dismiss         15 ->  11     +4
+  suspend          5 ->   5     +0
+  discipline      21 ->  15     +6
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  fire             2 ->   8     -6
+  hire             3 ->   6     -3
+  suspend          4 ->  31    -27
+  dismiss         13 ->  43    -30
+  let              8 ->  19    -11
+  pay             16 ->  71    -55
+  move            12 ->  26    -14
+  give             9 ->  10     -1
+  place           14 ->  20     -6
+  make            11 ->  12     -1
+
+HIGHER UNDER B
+  investigate      7 ->   2     +5
+  conduct         17 ->   5    +12
+  terminate        1 ->   1     +0
+  remove           5 ->   3     +2
+  take             6 ->   4     +2
+  step            35 ->  14    +21
+  hold            32 ->  13    +19
+  review          43 ->  16    +27
+  meet            24 ->  11    +13
+  provide         47 ->  23    +24
+  re              44 ->  22    +22
+  intervene       46 ->  25    +21
+  reassign        23 ->  15     +8
+  send            15 ->   9     +6
+  issue           36 ->  24    +12
+  offer           10 ->   7     +3
+  cancel          22 ->  18     +4
+  transfer        28 ->  21     +7
+  revoke          20 ->  17     +3
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  fire             3 ->   6     -3
+  transfer         6 ->  18    -12
+  move             4 ->   7     -3
+  terminate        2 ->   3     -1
+  investigate      1 ->   2     -1
+  promote          7 ->  20    -13
+  demote          16 ->  46    -30
+  give            15 ->  31    -16
+  remove          13 ->  22     -9
+  change          19 ->  39    -20
+  hire            21 ->  41    -20
+  do               9 ->  13     -4
+  put             10 ->  16     -6
+  place           12 ->  17     -5
+  reassign        11 ->  15     -4
+  suspend         24 ->  28     -4
+
+HIGHER UNDER B
+  conduct          8 ->   1     +7
+  close           20 ->   5    +15
+  interview       32 ->  10    +22
+  hold            22 ->   8    +14
+  call            35 ->  11    +24
+  send            17 ->   9     +8
+  drop            38 ->  19    +19
+  schedule        74 ->  24    +50
+  dismiss         18 ->  12     +6
+  settle          43 ->  29    +14
+  bring           26 ->  21     +5
+  launch          27 ->  23     +4
+  open            29 ->  25     +4
+  let             14 ->  14     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  fire             1 ->   6     -5
+  terminate        2 ->   5     -3
+  let              6 ->  11     -5
+  suspend          5 ->   9     -4
+  reassign         9 ->  30    -21
+  give            10 ->  21    -11
+  drop            11 ->  23    -12
+  protect         15 ->  41    -26
+  transfer        12 ->  22    -10
+  move            14 ->  17     -3
+
+HIGHER UNDER B
+  take             3 ->   1     +2
+  investigate      4 ->   2     +2
+  conduct         13 ->   3    +10
+  do               7 ->   4     +3
+  launch          24 ->   8    +16
+  make            54 ->  13    +41
+  intervene       78 ->  16    +62
+  close           17 ->  10     +7
+  interview       18 ->  12     +6
+  file            19 ->  15     +4
+  look            16 ->  14     +2
+  dismiss          8 ->   7     +1
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  interview        4 ->  29    -25
+  move             2 ->  12    -10
+  transfer         6 ->  22    -16
+  place            9 ->  24    -15
+  put             11 ->  21    -10
+  conduct         10 ->  13     -3
+  send            12 ->  23    -11
+  fire             3 ->   5     -2
+  do              13 ->  18     -5
+  meet            19 ->  98    -79
+  have            20 ->  71    -51
+
+HIGHER UNDER B
+  terminate        7 ->   1     +6
+  take             5 ->   2     +3
+  let             14 ->   4    +10
+  close           17 ->   6    +11
+  dismiss         32 ->   9    +23
+  not             36 ->  14    +22
+  remove          18 ->  10     +8
+  launch          15 ->   8     +7
+  give            16 ->  11     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  fire             1 ->  94    -93
+  terminate        2 ->  15    -13
+  transfer         3 ->  14    -11
+  discipline       5 ->  62    -57
+  reassign         6 ->   9     -3
+  give             7 ->  19    -12
+  let              9 ->  33    -24
+  remove          12 ->  46    -34
+  suspend         10 ->  18     -8
+  place           14 ->  45    -31
+  dismiss         16 ->  81    -65
+  put             15 ->  23     -8
+  change          18 ->  80    -62
+  move            13 ->  13     +0
+  have            17 ->  59    -42
+  do              19 ->  29    -10
+
+HIGHER UNDER B
+  investigate      4 ->   1     +3
+  take             8 ->   2     +6
+  conduct         11 ->   3     +8
+  review          50 ->   4    +46
+  address         49 ->   5    +44
+  send            24 ->   6    +18
+  assign          48 ->   8    +40
+  interview       22 ->   7    +15
+  reinstate       63 ->  11    +52
+  hold            45 ->  10    +35
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  fire             3 ->  42    -39
+  terminate        1 ->   4     -3
+  give             8 ->  16     -8
+  transfer         6 ->   9     -3
+  let             10 ->  18     -8
+  suspend         13 ->  26    -13
+  place            9 ->  14     -5
+  promote         19 ->  75    -56
+  put             14 ->  20     -6
+  discipline      16 ->  29    -13
+  do              17 ->  24     -7
+  send            11 ->  15     -4
+  open            21 ->  25     -4
+
+HIGHER UNDER B
+  investigate      2 ->   1     +1
+  conduct          5 ->   2     +3
+  take             4 ->   3     +1
+  interview       27 ->   6    +21
+  hold            31 ->   8    +23
+  bring           29 ->  11    +18
+  close           15 ->   7     +8
+  initiate        37 ->  12    +25
+  address         56 ->  13    +43
+  move             7 ->   5     +2
+  launch          12 ->  10     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  fire             1 ->   2     -1
+  terminate        2 ->  16    -14
+  suspend          4 ->  22    -18
+  take             5 ->  17    -12
+  remove           7 ->  25    -18
+  let              9 ->  29    -20
+  end             17 ->  90    -73
+  put             11 ->  49    -38
+  place           19 ->  81    -62
+  dismiss         18 ->  52    -34
+  reprimand       20 ->  55    -35
+  transfer         8 ->  19    -11
+  change          23 ->  59    -36
+  offer           15 ->  21     -6
+
+HIGHER UNDER B
+  schedule        55 ->   3    +52
+  do              16 ->   4    +12
+  investigate      3 ->   1     +2
+  meet            22 ->   7    +15
+  discipline      14 ->   6     +8
+  interview       43 ->   9    +34
+  contact         41 ->  11    +30
+  talk            42 ->  13    +29
+  call            21 ->  10    +11
+  send            28 ->  14    +14
+  reassign        12 ->   8     +4
+  hold            33 ->  18    +15
+  give            13 ->  12     +1
+  ask             48 ->  20    +28
+  get             63 ->  23    +40
+  have            39 ->  27    +12
+  move             6 ->   5     +1
+  promote         30 ->  24     +6
+  pull            27 ->  26     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  drop             7 ->  15     -8
+  fire             4 ->  10     -6
+  end              9 ->  22    -13
+  let             16 ->  44    -28
+  move             5 ->   8     -3
+  pull            17 ->  43    -26
+  withdraw        19 ->  36    -17
+  dismiss          3 ->   3     +0
+  change          18 ->  24     -6
+  give            14 ->  16     -2
+  stop            20 ->  26     -6
+  close           22 ->  32    -10
+  make            11 ->  14     -3
+  remove           6 ->   7     -1
+  suspend         10 ->  13     -3
+  terminate        2 ->   2     +0
+
+HIGHER UNDER B
+  investigate     15 ->   4    +11
+  issue           12 ->   6     +6
+  pursue          21 ->  11    +10
+  initiate        45 ->  12    +33
+  file            13 ->   9     +4
+  take             1 ->   1     +0
+  send             8 ->   5     +3
+  begin           31 ->  17    +14
+  review          34 ->  18    +16
+  deny            28 ->  19     +9
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  transfer         5 ->  12     -7
+  fire             2 ->   5     -3
+  terminate        6 ->   8     -2
+  move            10 ->  17     -7
+  promote         16 ->  28    -12
+  give             9 ->  10     -1
+  remove          14 ->  20     -6
+  settle          18 ->  24     -6
+  suspend         17 ->  21     -4
+
+HIGHER UNDER B
+  meet             8 ->   3     +5
+  take             3 ->   1     +2
+  interview       11 ->   6     +5
+  hold            13 ->  11     +2
+  speak           20 ->  14     +6
+  schedule        23 ->  15     +8
+  have            12 ->   9     +3
+  conduct          4 ->   4     +0
+  act             28 ->  16    +12
+  do               7 ->   7     +0
+  call            15 ->  13     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  fire             3 ->  35    -32
+  move             4 ->   9     -5
+  terminate        6 ->  12     -6
+  place            8 ->  24    -16
+  transfer         5 ->   5     +0
+  let             11 ->  23    -12
+  put             12 ->  27    -15
+  send            13 ->  31    -18
+  hire            25 ->  81    -56
+  promote         22 ->  54    -32
+  interview        9 ->  11     -2
+  discipline      23 ->  42    -19
+  assign          14 ->  16     -2
+  hold            26 ->  32     -6
+  reassign        15 ->  15     +0
+  drop            19 ->  19     +0
+  do              20 ->  20     +0
+  dismiss         17 ->  17     +0
+
+HIGHER UNDER B
+  investigate      1 ->   1     +0
+  take             2 ->   2     +0
+  issue           28 ->   6    +22
+  not             37 ->  10    +27
+  offer           21 ->   7    +14
+  meet            18 ->   8    +10
+  conduct          7 ->   3     +4
+  call            29 ->  18    +11
+  give            10 ->   4     +6
+  file            35 ->  21    +14
+  make            24 ->  13    +11
+  mediate         40 ->  22    +18
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  fire             1 ->  20    -19
+  move             3 ->  15    -12
+  take             5 ->  18    -13
+  suspend          8 ->  29    -21
+  do              10 ->  78    -68
+  let             12 ->  88    -76
+  conduct          7 ->  14     -7
+  dismiss         11 ->  42    -31
+  put             14 ->  55    -41
+  send            16 ->  77    -61
+  give            13 ->  26    -13
+  place            9 ->  13     -4
+  remove          18 ->  47    -29
+  call            21 ->  36    -15
+  allow           23 ->  40    -17
+  have            19 ->  19     +0
+
+HIGHER UNDER B
+  investigate      2 ->   1     +1
+  discipline      15 ->   2    +13
+  meet            22 ->   4    +18
+  reinstate       20 ->   5    +15
+  reassign        29 ->   7    +22
+  relocate        81 ->  10    +71
+  demote          41 ->   9    +32
+  terminate        4 ->   3     +1
+  speak           63 ->  11    +52
+  launch          17 ->   8     +9
+  accommodate     88 ->  12    +76
+  formally        99 ->  16    +83
+  offer           31 ->  17    +14
+  transfer         6 ->   6     +0
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  fire             3 ->  10     -7
+  suspend          4 ->   5     -1
+  send             8 ->  13     -5
+  let              7 ->   8     -1
+  discipline      15 ->  62    -47
+  hire            11 ->  26    -15
+  remove          12 ->  27    -15
+  file            13 ->  18     -5
+  make            16 ->  29    -13
+  end              9 ->   9     +0
+
+HIGHER UNDER B
+  investigate      1 ->   1     +0
+  take             5 ->   3     +2
+  terminate        2 ->   2     +0
+  conduct         10 ->   6     +4
+  bring           19 ->   7    +12
+  dismiss          6 ->   4     +2
+  pay             20 ->  12     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  investigate      6 ->  21    -15
+  take             8 ->  10     -2
+  keep            11 ->  27    -16
+  do              14 ->  34    -20
+  conduct          9 ->  12     -3
+  suspend         12 ->  16     -4
+  discipline      18 ->  28    -10
+  fire             1 ->   1     +0
+  remove          19 ->  22     -3
+  have            17 ->  17     +0
+
+HIGHER UNDER B
+  promote         24 ->   2    +22
+  demote          45 ->   9    +36
+  reassign        10 ->   8     +2
+  transfer         7 ->   5     +2
+  hire            22 ->  14     +8
+
+8 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  fire             2 ->   2     +0
+  give             5 ->   7     -2
+  let             11 ->  16     -5
+  move             9 ->  13     -4
+  transfer         8 ->  11     -3
+  dismiss          7 ->   9     -2
+  send            12 ->  14     -2
+  have            17 ->  29    -12
+  go              18 ->  25     -7
+  place           16 ->  21     -5
+  suspend          6 ->   6     +0
+  put             15 ->  20     -5
+
+HIGHER UNDER B
+  terminate        1 ->   1     +0
+  investigate      4 ->   3     +1
+  meet            14 ->   5     +9
+  conduct         19 ->  10     +9
+  address         32 ->  15    +17
+  discipline      13 ->  12     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  fire             3 ->   8     -5
+  terminate        1 ->   1     +0
+  let              5 ->   6     -1
+  suspend          7 ->   9     -2
+  send            10 ->  23    -13
+  dismiss         12 ->  17     -5
+  put             11 ->  15     -4
+  make            17 ->  22     -5
+  place           14 ->  20     -6
+  end             18 ->  21     -3
+  have            15 ->  16     -1
+
+HIGHER UNDER B
+  investigate      6 ->   3     +3
+  transfer         2 ->   2     +0
+  move             4 ->   4     +0
+  mediate         47 ->  10    +37
+  interview       34 ->  14    +20
+  offer           29 ->  12    +17
+  give             8 ->   5     +3
+  conduct         16 ->  13     +3
+  demote          13 ->  11     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  remove           7 ->   8     -1
+  transfer         3 ->   3     +0
+  suspend          6 ->   6     +0
+  move             9 ->   9     +0
+  have            12 ->  12     +0
+  place           14 ->  15     -1
+  send            18 ->  18     +0
+
+HIGHER UNDER B
+  fire             2 ->   2     +0
+  terminate        1 ->   1     +0
+  investigate      5 ->   4     +1
+  offer           17 ->  17     +0
+  let             10 ->  10     +0
+  demote          19 ->  19     +0
+  hold            16 ->  16     +0
+  conduct         15 ->  14     +1
+  put             11 ->  11     +0
+  dismiss         13 ->  13     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  fire             4 ->  28    -24
+  transfer         6 ->  14     -8
+  give             9 ->  26    -17
+  conduct          5 ->  11     -6
+  let             12 ->  31    -19
+  send            13 ->  29    -16
+  place           11 ->  16     -5
+  reassign        17 ->  27    -10
+  do              14 ->  17     -3
+  put             19 ->  34    -15
+  interview       20 ->  32    -12
+  discipline      18 ->  19     -1
+
+HIGHER UNDER B
+  terminate        1 ->   1     +0
+  close           15 ->   3    +12
+  investigate      2 ->   2     +0
+  open            29 ->   5    +24
+  launch          21 ->   9    +12
+  end             28 ->  10    +18
+  move            10 ->   6     +4
+  pursue          52 ->  13    +39
+  drop            32 ->  12    +20
+  dismiss          8 ->   8     +0
+  suspend          7 ->   7     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  terminate        2 ->   2     +0
+  end              6 ->  12     -6
+  move            10 ->  19     -9
+  take             4 ->   8     -4
+  suspend          3 ->   5     -2
+  close           11 ->  16     -5
+  offer           14 ->  15     -1
+  hire            13 ->  14     -1
+
+HIGHER UNDER B
+  fire             1 ->   1     +0
+  dismiss          9 ->   3     +6
+  discipline      29 ->  10    +19
+  drop            15 ->   9     +6
+  remove           5 ->   4     +1
+  not             17 ->  13     +4
+  give            12 ->  11     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  look            18 ->  27     -9
+  send            15 ->  23     -8
+  transfer         5 ->   5     +0
+  have            16 ->  19     -3
+  suspend          6 ->   6     +0
+  interview       10 ->  11     -1
+  hire            24 ->  29     -5
+  assign          23 ->  28     -5
+  move            12 ->  12     +0
+  close           17 ->  17     +0
+  fire             2 ->   4     -2
+  open            14 ->  16     -2
+  let             22 ->  22     +0
+  place            9 ->  10     -1
+  put             13 ->  13     +0
+
+HIGHER UNDER B
+  investigate      1 ->   1     +0
+  conduct          4 ->   2     +2
+  terminate        3 ->   3     +0
+  launch          11 ->   9     +2
+  dismiss          8 ->   7     +1
+  issue           25 ->  18     +7
+  remove          20 ->  14     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  transfer         1 ->  31    -30
+  fire             3 ->  11     -8
+  terminate        6 ->  21    -15
+  move             5 ->   8     -3
+  suspend          9 ->  32    -23
+  give             8 ->  25    -17
+  send            13 ->  27    -14
+  let             12 ->  22    -10
+  do              10 ->  13     -3
+  hire            18 ->  78    -60
+  put             11 ->  12     -1
+  reassign        16 ->  41    -25
+  remove          19 ->  47    -28
+  change          24 ->  66    -42
+  demote          26 ->  61    -35
+  make            23 ->  40    -17
+  place           15 ->  16     -1
+
+HIGHER UNDER B
+  investigate      2 ->   1     +1
+  interview       21 ->   2    +19
+  meet            17 ->   3    +14
+  launch          14 ->   4    +10
+  call            20 ->   7    +13
+  conduct          7 ->   6     +1
+  speak           61 ->  10    +51
+  hold            25 ->   9    +16
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  give             8 ->  20    -12
+  put              9 ->  14     -5
+  terminate        1 ->   1     +0
+  have            12 ->  22    -10
+  hold            17 ->  29    -12
+  fire             2 ->   2     +0
+  send            14 ->  24    -10
+  let              7 ->  10     -3
+  do              18 ->  19     -1
+  open            20 ->  21     -1
+
+HIGHER UNDER B
+  investigate      3 ->   3     +0
+  suspend         16 ->   9     +7
+  move             5 ->   4     +1
+  take            11 ->   5     +6
+  conduct         10 ->   8     +2
+  dismiss         29 ->  13    +16
+  reassign        13 ->  11     +2
+  interview       28 ->  16    +12
+  hire            24 ->  15     +9
+  place            6 ->   6     +0
+  remove          15 ->  12     +3
+  lay             21 ->  17     +4
+  demote          19 ->  18     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  fire             2 ->  50    -48
+  terminate        3 ->   9     -6
+  transfer         4 ->  16    -12
+  move             5 ->  10     -5
+  suspend          6 ->  20    -14
+  put              8 ->  49    -41
+  remove           9 ->  29    -20
+  let             11 ->  21    -10
+  promote         12 ->  44    -32
+  give            13 ->  41    -28
+  send            15 ->  43    -28
+  place           16 ->  54    -38
+  discipline      17 ->  32    -15
+  dismiss         18 ->  19     -1
+
+HIGHER UNDER B
+  investigate      1 ->   1     +0
+  conduct         10 ->   2     +8
+  take             7 ->   3     +4
+  speak           77 ->   4    +73
+  interview       24 ->   5    +19
+  launch          28 ->   7    +21
+  open            43 ->   8    +35
+  settle          14 ->   6     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  fire             1 ->  35    -34
+  let              7 ->  24    -17
+  move             4 ->   8     -4
+  suspend         10 ->  40    -30
+  give             9 ->  21    -12
+  take             5 ->   9     -4
+  put              8 ->  12     -4
+  demote          16 ->  60    -44
+  do              15 ->  44    -29
+  send            14 ->  16     -2
+  make            19 ->  61    -42
+  remove          18 ->  28    -10
+  transfer         3 ->   5     -2
+
+HIGHER UNDER B
+  conduct         13 ->   1    +12
+  investigate      2 ->   2     +0
+  hold            17 ->   4    +13
+  interview       24 ->   6    +18
+  terminate        6 ->   3     +3
+  have            11 ->   7     +4
+  implement      102 ->  11    +91
+  review          43 ->  13    +30
+  place           12 ->  10     +2
+  meet            21 ->  14     +7
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  suspend          4 ->   5     -1
+  terminate        3 ->   4     -1
+  close            8 ->  12     -4
+  let             11 ->  14     -3
+  fire             5 ->   6     -1
+  move             9 ->  13     -4
+  give            13 ->  15     -2
+  remove          14 ->  18     -4
+  keep            19 ->  39    -20
+  place           21 ->  41    -20
+  drop            20 ->  33    -13
+  dismiss         10 ->  10     +0
+  transfer        16 ->  17     -1
+
+HIGHER UNDER B
+  investigate      1 ->   1     +0
+  conduct          6 ->   3     +3
+  take             2 ->   2     +0
+  launch          18 ->   8    +10
+  do               7 ->   7     +0
+  not             15 ->  11     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  fire             2 ->   4     -2
+  investigate      3 ->   7     -4
+  move             5 ->  10     -5
+  take             6 ->   9     -3
+  go              13 ->  48    -35
+  hire            15 ->  69    -54
+  file            11 ->  25    -14
+  suspend         16 ->  32    -16
+  change          17 ->  39    -22
+  do              24 ->  59    -35
+  close           23 ->  28     -5
+  review          19 ->  24     -5
+  let              8 ->  13     -5
+  dismiss         10 ->  14     -4
+  transfer         9 ->  11     -2
+
+HIGHER UNDER B
+  conduct          4 ->   2     +2
+  reassign         7 ->   3     +4
+  terminate        1 ->   1     +0
+  offer           18 ->   5    +13
+  place           12 ->   6     +6
+  give            14 ->   8     +6
+  promote         36 ->  12    +24
+  reinstate       49 ->  15    +34
+  discipline      21 ->  16     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  terminate        3 ->   4     -1
+  suspend          8 ->  12     -4
+  move             7 ->  10     -3
+  take             5 ->   6     -1
+  dismiss         12 ->  14     -2
+  let             10 ->  11     -1
+  send            15 ->  17     -2
+  reprimand       16 ->  16     +0
+  keep            17 ->  19     -2
+
+HIGHER UNDER B
+  conduct          4 ->   3     +1
+  investigate      1 ->   1     +0
+  transfer         6 ->   5     +1
+  fire             2 ->   2     +0
+  launch          25 ->  18     +7
+  reassign        18 ->  15     +3
+  discipline      13 ->   9     +4
+  remove          11 ->   7     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  fire             1 ->   3     -2
+  transfer         4 ->  10     -6
+  give             7 ->  11     -4
+  suspend          6 ->   7     -1
+  take             3 ->   4     -1
+  send            13 ->  24    -11
+  put             10 ->  17     -7
+  move             8 ->   9     -1
+  hire            16 ->  26    -10
+  place           15 ->  22     -7
+  promote         17 ->  19     -2
+  dismiss         14 ->  14     +0
+  do              18 ->  18     +0
+
+HIGHER UNDER B
+  terminate        2 ->   1     +1
+  let              5 ->   2     +3
+  reassign        11 ->   6     +5
+  investigate      9 ->   5     +4
+  relocate        22 ->  12    +10
+  demote          31 ->  13    +18
+  discipline      12 ->   8     +4
+  interview       25 ->  15    +10
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -1,0 +1,1035 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: Three men came into the room and started to ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  strip            2 ->   9     -7
+  undress          3 ->  10     -7
+  beat            10 -> 109    -99
+  search           7 ->  30    -23
+  pull            13 ->  48    -35
+  get             15 ->  43    -28
+  make             5 ->  12     -7
+  remove           6 ->  14     -8
+  look             8 ->  18    -10
+  work             9 ->  19    -10
+  move            20 ->  45    -25
+  put             14 ->  22     -8
+  play            11 ->  13     -2
+  ask             17 ->  27    -10
+  shoot           22 ->  25     -3
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  chat            16 ->   2    +14
+  argue           18 ->   4    +14
+  set             26 ->   5    +21
+  speak           12 ->   3     +9
+  unpack          23 ->   7    +16
+  discuss         19 ->   8    +11
+  build          118 ->  15   +103
+  open            28 ->  11    +17
+  clear           86 ->  16    +70
+  fill            67 ->  17    +50
+  pick            35 ->  20    +15
+  tell            30 ->  21     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  pull             7 ->  35    -28
+  undress          9 ->  34    -25
+  unload          16 ->  78    -62
+  strip           14 ->  45    -31
+  drag            23 ->  83    -60
+  beat             5 ->  10     -5
+  remove           6 ->  14     -8
+  walk            19 ->  33    -14
+  laugh           22 ->  31     -9
+  set             20 ->  24     -4
+  put             12 ->  19     -7
+  tear            24 ->  28     -4
+  clean           25 ->  29     -4
+  help            10 ->  13     -3
+  speak           15 ->  17     -2
+  make            13 ->  15     -2
+
+HIGHER UNDER B
+  search           2 ->   1     +1
+  take             3 ->   3     +0
+  attack          48 ->   7    +41
+  work             8 ->   4     +4
+  discuss         59 ->  11    +48
+  examine         11 ->   6     +5
+  argue           21 ->   8    +13
+  move            17 ->   9     +8
+  ask             30 ->  16    +14
+  play            18 ->  12     +6
+  question        36 ->  18    +18
+  shoot           31 ->  20    +11
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  look             4 ->  16    -12
+  search           8 ->  41    -33
+  speak            3 ->  10     -7
+  get             10 ->  48    -38
+  take             2 ->   5     -3
+  work             9 ->  17     -8
+  walk            15 ->  77    -62
+  sing            16 ->  31    -15
+  fight           12 ->  19     -7
+  move            17 ->  21     -4
+  go              21 ->  24     -3
+  push            18 ->  18     +0
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  discuss         13 ->   2    +11
+  argue           20 ->   3    +17
+  tell            11 ->   7     +4
+  bang            54 ->  11    +43
+  attack          14 ->   9     +5
+  make             6 ->   6     +0
+  beat             5 ->   4     +1
+  kick            27 ->  12    +15
+  smoke           36 ->  13    +23
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  beat             2 ->  12    -10
+  talk             1 ->   1     +0
+  undress          7 ->  26    -19
+  ask              9 ->  34    -25
+  interrogate     12 ->  31    -19
+  look             4 ->   9     -5
+  question        11 ->  20     -9
+  play             5 ->  11     -6
+  put             16 ->  32    -16
+  tie             23 ->  47    -24
+  strip           15 ->  23     -8
+  walk            22 ->  29     -7
+  remove          14 ->  18     -4
+  move            20 ->  22     -2
+
+HIGHER UNDER B
+  argue           21 ->   3    +18
+  search           8 ->   4     +4
+  discuss         19 ->   6    +13
+  chat            36 ->  10    +26
+  set              6 ->   5     +1
+  speak           10 ->   7     +3
+  make            13 ->   8     +5
+  fight           50 ->  15    +35
+  get             29 ->  14    +15
+  clean           18 ->  13     +5
+  stare           61 ->  21    +40
+  sing            46 ->  19    +27
+  dance           27 ->  17    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  talk             1 ->   4     -3
+  play             2 ->   2     +0
+  look             7 ->  27    -20
+  work             5 ->   9     -4
+  do               9 ->  25    -16
+  put             12 ->  21     -9
+  clean           11 ->  18     -7
+  have            15 ->  64    -49
+  discuss         10 ->  13     -3
+  get             17 ->  48    -31
+  read            16 ->  32    -16
+  fight            3 ->   6     -3
+
+HIGHER UNDER B
+  dance            6 ->   1     +5
+  make             8 ->   5     +3
+  argue            4 ->   3     +1
+  shoot           26 ->   8    +18
+  throw           38 ->  12    +26
+  walk            14 ->   7     +7
+  search          40 ->  14    +26
+  beat            91 ->  19    +72
+  move            18 ->  10     +8
+  shout           50 ->  20    +30
+  speak           27 ->  17    +10
+  sing            21 ->  15     +6
+  build           19 ->  16     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  work             6 ->  48    -42
+  talk             2 ->   5     -3
+  pray            12 ->  62    -50
+  tie             13 ->  49    -36
+  set              4 ->  20    -16
+  strip           11 ->  34    -23
+  move            18 ->  58    -40
+  get             21 ->  66    -45
+  prepare         26 ->  78    -52
+  look            10 ->  22    -12
+  take             3 ->   7     -4
+  undress          5 ->  14     -9
+  clean           22 ->  43    -21
+  speak           20 ->  35    -15
+  torture         19 ->  31    -12
+  make            16 ->  28    -12
+  put             25 ->  38    -13
+  remove          15 ->  26    -11
+  pull            23 ->  32     -9
+  attack           9 ->  11     -2
+  search          14 ->  16     -2
+
+HIGHER UNDER B
+  fight           17 ->   2    +15
+  beat             1 ->   1     +0
+  play             8 ->   3     +5
+  argue            7 ->   4     +3
+  smoke           74 ->   6    +68
+  bicker         162 ->   8   +154
+  drink          120 ->   9   +111
+  kill            52 ->  10    +42
+  throw           50 ->  13    +37
+  brawl          166 ->  23   +143
+  cut             42 ->  12    +30
+  eat            100 ->  21    +79
+  rape            48 ->  15    +33
+  rob             53 ->  24    +29
+  shout           46 ->  19    +27
+  change          45 ->  25    +20
+  shoot           30 ->  17    +13
+  hit             24 ->  18     +6
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  take             5 ->  16    -11
+  play             6 ->  17    -11
+  talk             1 ->   3     -2
+  look             4 ->   7     -3
+  search           7 ->  20    -13
+  question         9 ->  50    -41
+  beat             3 ->   5     -2
+  make             8 ->  14     -6
+  shoot           10 ->  18     -8
+  work            19 ->  75    -56
+  clean           20 ->  68    -48
+  yell            23 ->  89    -66
+  ask             18 ->  40    -22
+  shout           15 ->  29    -14
+  interrogate     16 ->  32    -16
+  speak           11 ->  15     -4
+  remove          24 ->  38    -14
+
+HIGHER UNDER B
+  argue            2 ->   1     +1
+  fight           12 ->   2    +10
+  discuss         17 ->   4    +13
+  chat            94 ->   8    +86
+  converse       102 ->   9    +93
+  whisper        118 ->  13   +105
+  drink           14 ->   6     +8
+  examine         22 ->  10    +12
+  pull            21 ->  12     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  talk             1 ->   3     -2
+  take             3 ->  10     -7
+  work            10 ->  37    -27
+  look             5 ->   8     -3
+  move            14 ->  32    -18
+  make             7 ->  13     -6
+  undress         15 ->  31    -16
+  remove          13 ->  18     -5
+  put             12 ->  16     -4
+  pull            16 ->  26    -10
+  attack          19 ->  27     -8
+  play             9 ->  11     -2
+
+HIGHER UNDER B
+  argue            6 ->   2     +4
+  beat             2 ->   1     +1
+  discuss         27 ->   5    +22
+  interrogate     61 ->  12    +49
+  set             18 ->   9     +9
+  shout           11 ->   7     +4
+  ask             28 ->  15    +13
+  search           4 ->   4     +0
+  speak            8 ->   6     +2
+  fight           21 ->  17     +4
+  eat             17 ->  14     +3
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  search           3 ->  20    -17
+  beat             2 ->  14    -12
+  shoot            9 ->  49    -40
+  remove          15 ->  51    -36
+  argue           12 ->  30    -18
+  look             6 ->  11     -5
+  play             5 ->   9     -4
+  attack          17 ->  56    -39
+  make            11 ->  25    -14
+  work            19 ->  95    -76
+  eat             20 ->  91    -71
+  speak            8 ->  17     -9
+  walk            21 ->  79    -58
+  get             23 ->  41    -18
+  move            22 ->  36    -14
+  pray            18 ->  27     -9
+  talk             1 ->   2     -1
+
+HIGHER UNDER B
+  tie             14 ->   1    +13
+  undress          7 ->   3     +4
+  put             16 ->   4    +12
+  set             13 ->   6     +7
+  bind            71 ->  10    +61
+  examine         24 ->   8    +16
+  discuss         10 ->   7     +3
+  prepare         84 ->  15    +69
+  question        28 ->  12    +16
+  lock           130 ->  18   +112
+  do              30 ->  13    +17
+  sort           129 ->  19   +110
+  dance           25 ->  16     +9
+  close           32 ->  21    +11
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  divide           6 ->  12     -6
+  work             4 ->   6     -2
+  take            10 ->  15     -5
+  beat            14 ->  33    -19
+  cut             17 ->  55    -38
+  fight            2 ->   4     -2
+  paint           18 ->  41    -23
+  eat              7 ->   7     +0
+  make             8 ->  11     -3
+  quarrel         11 ->  13     -2
+  do              16 ->  18     -2
+
+HIGHER UNDER B
+  play             1 ->   1     +0
+  argue            5 ->   3     +2
+  chat            15 ->   8     +7
+  discuss          9 ->   5     +4
+  talk             3 ->   2     +1
+  sit             13 ->  10     +3
+  have            12 ->   9     +3
+  laugh           24 ->  14    +10
+  look            21 ->  16     +5
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  talk             1 ->   2     -1
+  look             4 ->   8     -4
+  watch           17 ->  37    -20
+  eat             18 ->  35    -17
+  work            12 ->  21     -9
+  make            11 ->  17     -6
+  do              15 ->  20     -5
+  have             9 ->  14     -5
+  laugh           14 ->  18     -4
+  fight           10 ->  12     -2
+
+HIGHER UNDER B
+  play             2 ->   1     +1
+  argue            5 ->   4     +1
+  discuss          3 ->   3     +0
+  shake           33 ->  10    +23
+  tell            13 ->   7     +6
+  count           16 ->  11     +5
+  quarrel          6 ->   5     +1
+  take            21 ->  15     +6
+  speak           19 ->  13     +6
+  dance           23 ->  16     +7
+  sing             7 ->   6     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  talk             3 ->   4     -1
+  sit              8 ->  22    -14
+  eat              7 ->  14     -7
+  look             6 ->   8     -2
+  drink           10 ->  19     -9
+  shoot            9 ->   9     +0
+  kill            21 ->  41    -20
+  have            17 ->  25     -8
+  sing            16 ->  21     -5
+  take             5 ->   5     +0
+  attack          22 ->  26     -4
+  dance           15 ->  17     -2
+  quarrel         19 ->  20     -1
+
+HIGHER UNDER B
+  play             2 ->   1     +1
+  argue            4 ->   2     +2
+  move            41 ->  15    +26
+  work            26 ->  12    +14
+  walk            12 ->   6     +6
+  speak           11 ->   7     +4
+  do              30 ->  18    +12
+  search          20 ->  16     +4
+  make            18 ->  13     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  talk             1 ->  56    -55
+  look             2 ->  16    -14
+  take             3 ->   9     -6
+  remove           4 ->  12     -8
+  make             5 ->  26    -21
+  speak            7 ->  48    -41
+  walk             8 ->  67    -59
+  search          10 ->  64    -54
+  help            11 ->  20     -9
+  move            13 ->  43    -30
+  argue           14 ->  24    -10
+  clean           15 ->  40    -25
+  work            17 ->  68    -51
+  get             19 ->  95    -76
+  close           18 ->  31    -13
+  play            20 ->  29     -9
+  laugh           21 ->  73    -52
+  beat            23 ->  85    -62
+  pull            22 ->  22     +0
+  ask             26 -> 117    -91
+  strip           28 ->  55    -27
+  question        27 ->  52    -25
+
+HIGHER UNDER B
+  sit              6 ->   1     +5
+  untie           29 ->   2    +27
+  set             24 ->   3    +21
+  feel            89 ->   5    +84
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  make             3 ->  11     -8
+  ask              9 ->  26    -17
+  beat            17 -> 108    -91
+  knock           21 ->  96    -75
+  kiss            25 -> 109    -84
+  sing            14 ->  30    -16
+  shake           26 ->  47    -21
+  question        10 ->  18     -8
+  read            22 ->  28     -6
+  say             23 ->  27     -4
+  look             8 ->  13     -5
+  walk            24 ->  24     +0
+  argue            4 ->   5     -1
+  get             19 ->  20     -1
+  dance           13 ->  15     -2
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  speak            2 ->   2     +0
+  discuss         12 ->   3     +9
+  chat            45 ->  10    +35
+  drink           36 ->  14    +22
+  whisper         20 ->   9    +11
+  laugh            6 ->   4     +2
+  play            11 ->   8     +3
+  sit             15 ->  12     +3
+  leave           29 ->  19    +10
+  examine         16 ->  16     +0
+  take             7 ->   7     +0
+  search          18 ->  17     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  beat             5 ->  26    -21
+  search           9 ->  36    -27
+  make             7 ->  19    -12
+  shoot           10 ->  22    -12
+  tie             17 ->  43    -26
+  work            18 ->  46    -28
+  put             14 ->  31    -17
+  interrogate     22 -> 101    -79
+  sing            20 ->  54    -34
+  pull            16 ->  17     -1
+  dance           21 ->  29     -8
+  set              8 ->   9     -1
+  tell            19 ->  20     -1
+  ask             13 ->  13     +0
+  fight           11 ->  11     +0
+  take             4 ->   4     +0
+
+HIGHER UNDER B
+  argue            3 ->   1     +2
+  discuss         15 ->   5    +10
+  debate          67 ->  10    +57
+  undress         28 ->   8    +20
+  sit             45 ->  12    +33
+  strip           12 ->   7     +5
+  chat            47 ->  15    +32
+  get             24 ->  14    +10
+  look             6 ->   6     +0
+  remove          23 ->  16     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  talk             1 ->   5     -4
+  chat            12 ->  28    -16
+  get             20 ->  48    -28
+  sit             23 ->  65    -42
+  shout           15 ->  25    -10
+  help            21 ->  45    -24
+  speak            4 ->  10     -6
+  walk            18 ->  24     -6
+  sing            24 ->  30     -6
+  pull            13 ->  16     -3
+  ask             17 ->  23     -6
+  put             26 ->  31     -5
+  argue           16 ->  21     -5
+  move            11 ->  13     -2
+  discuss         25 ->  27     -2
+  laugh           14 ->  17     -3
+  make             8 ->  12     -4
+
+HIGHER UNDER B
+  search           3 ->   1     +2
+  examine         10 ->   2     +8
+  question         5 ->   3     +2
+  work            19 ->   9    +10
+  unpack          57 ->  18    +39
+  strip           22 ->  11    +11
+  tie             36 ->  15    +21
+  beat            29 ->  14    +15
+  inspect         37 ->  22    +15
+  pick            31 ->  19    +12
+  undress          9 ->   7     +2
+  drag            30 ->  20    +10
+  look             6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  beat             1 ->  23    -22
+  undress          4 ->  14    -10
+  attack           7 ->  42    -35
+  remove           5 ->  17    -12
+  search           9 ->  29    -20
+  tie             10 ->  24    -14
+  take             2 ->   4     -2
+  unload          15 ->  22     -7
+  tear            22 ->  49    -27
+  move            14 ->  19     -5
+  pull            12 ->  12     +0
+  put             16 ->  20     -4
+
+HIGHER UNDER B
+  play             8 ->   2     +6
+  look             6 ->   3     +3
+  dance           37 ->   8    +29
+  sit             68 ->  10    +58
+  set             21 ->   5    +16
+  argue           23 ->   7    +16
+  talk             3 ->   1     +2
+  drink           47 ->  16    +31
+  make            20 ->  11     +9
+  eat             62 ->  21    +41
+  strip           11 ->   6     +5
+  laugh           43 ->  25    +18
+  speak           19 ->  15     +4
+  walk            18 ->  13     +5
+  work            13 ->   9     +4
+  shoot           33 ->  26     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  take             5 ->   5     +0
+  remove           6 ->   6     +0
+  go              17 ->  22     -5
+  get              7 ->   9     -2
+  move             8 ->  11     -3
+  leave           25 ->  33     -8
+  search          20 ->  23     -3
+  put             15 ->  19     -4
+  help            24 ->  25     -1
+  walk            13 ->  15     -2
+
+HIGHER UNDER B
+  talk             4 ->   3     +1
+  look             1 ->   1     +0
+  sit              3 ->   2     +1
+  argue           18 ->  13     +5
+  stand           11 ->   8     +3
+  set             33 ->  24     +9
+  pull            12 ->  12     +0
+  unbutton        21 ->  17     +4
+  lay             14 ->  14     +0
+  make             9 ->   7     +2
+  work            10 ->  10     +0
+  close           16 ->  16     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  beat             1 ->  17    -16
+  play             6 ->  25    -19
+  pray            10 ->  48    -38
+  hit             15 ->  57    -42
+  attack          14 ->  42    -28
+  take             3 ->   6     -3
+  work            19 ->  56    -37
+  throw           23 ->  82    -59
+  shoot           20 ->  41    -21
+  put             18 ->  38    -20
+  strip            8 ->  11     -3
+  make            13 ->  18     -5
+  remove          24 ->  32     -8
+  discuss         17 ->  19     -2
+
+HIGHER UNDER B
+  search           4 ->   2     +2
+  talk             2 ->   1     +1
+  move            16 ->   3    +13
+  look             7 ->   5     +2
+  speak            5 ->   4     +1
+  inspect         12 ->   7     +5
+  circle          54 ->  12    +42
+  undress         25 ->   9    +16
+  laugh           46 ->  16    +30
+  tie             26 ->  13    +13
+  interrogate     22 ->  14     +8
+  argue           21 ->  15     +6
+  question         9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  take             1 ->   2     -1
+  move             2 ->  12    -10
+  remove           5 ->  27    -22
+  put              4 ->  13     -9
+  turn            12 -> 102    -90
+  speak            7 ->  21    -14
+  pull             6 ->  14     -8
+  walk             8 ->  22    -14
+  drag            13 ->  62    -49
+  carry           19 ->  79    -60
+  help            17 ->  65    -48
+  set             21 ->  68    -47
+  open            16 ->  56    -40
+  tie             10 ->  24    -14
+  examine         23 ->  50    -27
+  sit             18 ->  36    -18
+  go              25 ->  49    -24
+  leave           20 ->  31    -11
+  shake           22 ->  29     -7
+  climb           27 ->  55    -28
+  read            28 ->  58    -30
+  stand           24 ->  38    -14
+  look            15 ->  15     +0
+
+HIGHER UNDER B
+  talk             3 ->   1     +2
+  fight           78 ->   3    +75
+  beat           103 ->   4    +99
+  attack         163 ->  10   +153
+  shoot          143 ->  20   +123
+  yell           120 ->  17   +103
+  grab            71 ->  16    +55
+  argue           29 ->   7    +22
+  sing            58 ->  19    +39
+  make            11 ->   5     +6
+  strip           30 ->  11    +19
+  get             26 ->   9    +17
+  push            32 ->  18    +14
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  beat             4 ->   6     -2
+  search           2 ->   3     -1
+  undress         14 ->  18     -4
+  move            11 ->  14     -3
+  shoot           22 ->  30     -8
+  look             7 ->  11     -4
+  hit             20 ->  26     -6
+  take             6 ->  10     -4
+  go              17 ->  19     -2
+  pull            19 ->  24     -5
+  remove          12 ->  13     -1
+  strip           18 ->  21     -3
+  play            23 ->  23     +0
+
+HIGHER UNDER B
+  argue            1 ->   1     +0
+  talk             3 ->   2     +1
+  question         9 ->   4     +5
+  ask             13 ->   8     +5
+  speak            8 ->   5     +3
+  interrogate     31 ->  17    +14
+  make            10 ->   9     +1
+  yell            25 ->  16     +9
+  laugh           15 ->  12     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  take             3 ->   8     -5
+  look             8 ->  36    -28
+  shoot           11 ->  51    -40
+  ask             16 -> 104    -88
+  search           6 ->  19    -13
+  hit             15 ->  48    -33
+  attack           9 ->  20    -11
+  drag            23 ->  81    -58
+  do              24 ->  72    -48
+  put             20 ->  46    -26
+  question        17 ->  41    -24
+  beat             1 ->   3     -2
+  interrogate     13 ->  24    -11
+  get             30 ->  89    -59
+  walk            18 ->  34    -16
+  fight           10 ->  12     -2
+  remove          27 ->  37    -10
+  clean           28 ->  32     -4
+  pull            21 ->  22     -1
+  work             7 ->  10     -3
+
+HIGHER UNDER B
+  argue           12 ->   1    +11
+  play             4 ->   4     +0
+  talk             2 ->   2     +0
+  sing            26 ->   6    +20
+  speak            5 ->   5     +0
+  set             22 ->   9    +13
+  unload          87 ->  14    +73
+  build          112 ->  18    +94
+  laugh           14 ->   7     +7
+  unpack          79 ->  17    +62
+  discuss         29 ->  11    +18
+  pack            42 ->  16    +26
+  shout           31 ->  15    +16
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  take             1 ->   2     -1
+  tie              6 ->  30    -24
+  beat             2 ->   3     -1
+  undress          4 ->   9     -5
+  pull            11 ->  40    -29
+  drag            16 ->  87    -71
+  remove           8 ->  26    -18
+  strip            5 ->  12     -7
+  push            22 ->  49    -27
+  put             14 ->  25    -11
+  rape            24 ->  38    -14
+  examine         20 ->  27     -7
+  question        10 ->  15     -5
+  walk            23 ->  28     -5
+  work            17 ->  19     -2
+  move            19 ->  22     -3
+  look             7 ->   8     -1
+
+HIGHER UNDER B
+  talk             3 ->   1     +2
+  argue           27 ->   5    +22
+  speak           13 ->   4     +9
+  make            15 ->   7     +8
+  sing            36 ->  10    +26
+  play             9 ->   6     +3
+  dance           39 ->  11    +28
+  shoot           26 ->  14    +12
+  discuss         61 ->  18    +43
+  do              38 ->  17    +21
+  fight           54 ->  21    +33
+  shout           43 ->  23    +20
+  set             25 ->  20     +5
+  attack          18 ->  16     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  take             3 ->  25    -22
+  put              7 ->  28    -21
+  move             8 ->  22    -14
+  do              18 ->  43    -25
+  look             6 ->  10     -4
+  pull            25 ->  40    -15
+  speak           13 ->  24    -11
+  remove          11 ->  16     -5
+  clean           15 ->  26    -11
+  strip           23 ->  31     -8
+  undress         20 ->  27     -7
+  dance           22 ->  29     -7
+
+HIGHER UNDER B
+  play             2 ->   1     +1
+  argue           10 ->   2     +8
+  make             9 ->   3     +6
+  discuss         16 ->   7     +9
+  eat             24 ->   8    +16
+  introduce       75 ->  12    +63
+  chat            30 ->   9    +21
+  build           41 ->  15    +26
+  prepare         12 ->  11     +1
+  examine         29 ->  19    +10
+  get             17 ->  14     +3
+  search          14 ->  13     +1
+  walk            19 ->  17     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  talk             1 ->  11    -10
+  take             2 ->   4     -2
+  remove           3 ->   9     -6
+  get             12 ->  55    -43
+  look             4 ->  12     -8
+  search          14 ->  38    -24
+  help            17 ->  43    -26
+  make            15 ->  29    -14
+  clean            8 ->  18    -10
+  pull            13 ->  27    -14
+  go              26 ->  53    -27
+  walk            24 ->  47    -23
+  pray            18 ->  32    -14
+  put             20 ->  35    -15
+  carry           27 ->  46    -19
+  beat             9 ->  15     -6
+  strip            6 ->   8     -2
+  speak            5 ->   6     -1
+
+HIGHER UNDER B
+  play            19 ->   2    +17
+  dance           47 ->   3    +44
+  work             7 ->   1     +6
+  perform         84 ->  14    +70
+  examine         16 ->   5    +11
+  fight           46 ->  13    +33
+  dismantle       55 ->  17    +38
+  argue           11 ->   7     +4
+  measure         74 ->  24    +50
+  ying            72 ->  30    +42
+  place           58 ->  28    +30
+  undress         10 ->  10     +0
+  do              25 ->  16     +9
+  sing            31 ->  20    +11
+  lay             41 ->  25    +16
+  inspect         35 ->  26     +9
+  move            23 ->  21     +2
+  discuss         28 ->  23     +5
+  laugh           21 ->  19     +2
+  tie             22 ->  22     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  look             3 ->   5     -2
+  laugh            7 ->  17    -10
+  play             5 ->   9     -4
+  make            11 ->  23    -12
+  sing            17 ->  28    -11
+  work            23 ->  39    -16
+  ask             10 ->  11     -1
+  talk             1 ->   1     +0
+  clean           20 ->  26     -6
+  shoot           13 ->  18     -5
+  hit             16 ->  21     -5
+  discuss         18 ->  22     -4
+  speak            8 ->   8     +0
+
+HIGHER UNDER B
+  beat             2 ->   2     +0
+  take             6 ->   3     +3
+  attack          14 ->   7     +7
+  argue            4 ->   4     +0
+  kick            31 ->  15    +16
+  tie             32 ->  16    +16
+  pull            22 ->  12    +10
+  remove          30 ->  20    +10
+  throw           19 ->  14     +5
+  question        15 ->  13     +2
+  dance           21 ->  19     +2
+  fight            9 ->   6     +3
+  interrogate     25 ->  24     +1
+  search          12 ->  10     +2
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  beat             2 ->  17    -15
+  search           3 ->   8     -5
+  take             5 ->  15    -10
+  talk             1 ->   3     -2
+  pull             7 ->  12     -5
+  look             4 ->   7     -3
+  put             10 ->  29    -19
+  shoot           14 ->  36    -22
+  clean           12 ->  27    -15
+  torture         18 ->  84    -66
+  carry           13 ->  22     -9
+  get             11 ->  18     -7
+  attack          20 ->  32    -12
+  question        23 ->  35    -12
+  tell            17 ->  21     -4
+  cut             21 ->  23     -2
+  fight           16 ->  16     +0
+
+HIGHER UNDER B
+  argue            8 ->   1     +7
+  play            15 ->   2    +13
+  discuss         30 ->   4    +26
+  sing            56 ->  13    +43
+  have            37 ->  11    +26
+  remove          22 ->   9    +13
+  speak           24 ->  10    +14
+  make             9 ->   6     +3
+  ask              6 ->   5     +1
+  examine         19 ->  14     +5
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  remove           6 ->  17    -11
+  strip            9 ->  34    -25
+  take             3 ->   7     -4
+  look             5 ->  11     -6
+  pull            12 ->  21     -9
+  move            14 ->  26    -12
+  unload          22 ->  40    -18
+  walk            15 ->  22     -7
+  go              19 ->  30    -11
+  put             25 ->  33     -8
+  work            24 ->  31     -7
+  question         7 ->   9     -2
+
+HIGHER UNDER B
+  search           1 ->   1     +0
+  beat             2 ->   2     +0
+  attack          11 ->   4     +7
+  tie             10 ->   5     +5
+  rob             38 ->  13    +25
+  hit             17 ->   8     +9
+  shoot            8 ->   6     +2
+  interrogate     13 ->  10     +3
+  torture         47 ->  19    +28
+  talk             4 ->   3     +1
+  ask             20 ->  12     +8
+  speak           21 ->  14     +7
+  argue           18 ->  16     +2
+  ransack         23 ->  18     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  play             2 ->   2     +0
+  discuss          4 ->   9     -5
+  eat              5 ->  33    -28
+  argue            3 ->   3     +0
+  drink           13 ->  65    -52
+  smoke           16 ->  63    -47
+  sit             14 ->  38    -24
+  work             7 ->  10     -3
+  tell            12 ->  21     -9
+  shoot           11 ->  16     -5
+  count           18 ->  34    -16
+  talk             1 ->   1     +0
+  read            17 ->  32    -15
+  pull            20 ->  39    -19
+
+HIGHER UNDER B
+  search          47 ->   5    +42
+  take             9 ->   4     +5
+  tie             72 ->  15    +57
+  beat            33 ->  11    +22
+  remove          41 ->  13    +28
+  rummage        105 ->  25    +80
+  question       131 ->  26   +105
+  laugh           42 ->  17    +25
+  move            45 ->  20    +25
+  cut             26 ->  14    +12
+  walk            32 ->  19    +13
+  put             29 ->  22     +7
+  fight            8 ->   7     +1
+  make            15 ->  12     +3
+  draw            21 ->  18     +3
+  dance           25 ->  24     +1
+  look             6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

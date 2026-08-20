@@ -1,0 +1,813 @@
+Below are 28 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: The other inmates surrounded him and began to ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  beat             1 ->  10     -9
+  kick             4 ->  22    -18
+  scream           6 ->  15     -9
+  hit              8 ->  37    -29
+  attack          10 ->  44    -34
+  punch           15 ->  75    -60
+  threaten         9 ->  25    -16
+  yell             7 ->  12     -5
+  throw           14 ->  20     -6
+  tear            17 ->  49    -32
+  tease           16 ->  35    -19
+  fight           19 ->  78    -59
+
+HIGHER UNDER B
+  taunt            5 ->   1     +4
+  chant           13 ->   3    +10
+  jeer            11 ->   4     +7
+  laugh            2 ->   2     +0
+  surround        81 ->   6    +75
+  whisper         57 ->   8    +49
+  harass          32 ->  11    +21
+  pelt            26 ->   9    +17
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  kick             6 ->  25    -19
+  pummel           8 ->  23    -15
+  drag            18 ->  72    -54
+  scream          12 ->  30    -18
+  throw           13 ->  27    -14
+  punch           16 ->  31    -15
+  sing            17 ->  17     +0
+  pound            9 ->  10     -1
+  strike          15 ->  15     +0
+
+HIGHER UNDER B
+  hit              5 ->   2     +3
+  chant            4 ->   3     +1
+  attack          14 ->   7     +7
+  ask             33 ->   8    +25
+  shout            7 ->   6     +1
+  jeer            11 ->   9     +2
+  question        37 ->  14    +23
+  cheer           25 ->  13    +12
+  yell            21 ->  12     +9
+  threaten        38 ->  18    +20
+  push            19 ->  16     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  scream           3 ->  28    -25
+  cry              1 ->   2     -1
+  talk             6 ->  10     -4
+  sing             9 ->  19    -10
+  shout            5 ->   6     -1
+  whisper         14 ->  35    -21
+  beat             7 ->   9     -2
+  speak           10 ->  11     -1
+
+HIGHER UNDER B
+  chant            2 ->   1     +1
+  cheer           12 ->   5     +7
+  murmur          25 ->   7    +18
+  shake            8 ->   4     +4
+  pull            35 ->  14    +21
+  applaud         13 ->   8     +5
+  form            83 ->  17    +66
+  push            16 ->  13     +3
+  chew            49 ->  18    +31
+  move            20 ->  16     +4
+  take            15 ->  15     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  beat             1 ->   3     -2
+  kick             3 ->  16    -13
+  hit              5 ->  20    -15
+  punch            9 ->  24    -15
+  attack           6 ->  11     -5
+  laugh            8 ->   8     +0
+  pummel           7 ->   7     +0
+  throw           13 ->  21     -8
+  push            10 ->  13     -3
+  fight           14 ->  22     -8
+  scream          18 ->  25     -7
+  stone           16 ->  18     -2
+
+HIGHER UNDER B
+  chant            4 ->   1     +3
+  taunt            2 ->   2     +0
+  whisper         55 ->   6    +49
+  mock            17 ->   5    +12
+  shout           11 ->   4     +7
+  question        25 ->  12    +13
+  take            19 ->  10     +9
+  jeer            39 ->  15    +24
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  beat             1 ->   6     -5
+  hit              4 ->  37    -33
+  mock             5 ->  28    -23
+  push             7 ->  34    -27
+  punch           20 -> 140   -120
+  taunt            9 ->  35    -26
+  yell            15 ->  39    -24
+  stare           17 ->  40    -23
+  pull            12 ->  32    -20
+  help            14 ->  31    -17
+  take            11 ->  21    -10
+  attack           3 ->  11     -8
+  scream          16 ->  20     -4
+
+HIGHER UNDER B
+  whisper         38 ->   2    +36
+  dance           58 ->   3    +55
+  speak           26 ->   5    +21
+  sing            10 ->   4     +6
+  shout           18 ->   8    +10
+  ask             13 ->  10     +3
+  discuss         60 ->  15    +45
+  make            21 ->  12     +9
+  laugh            2 ->   1     +1
+  argue           99 ->  18    +81
+  examine         35 ->  14    +21
+  cry             68 ->  22    +46
+  stab            31 ->  16    +15
+  shake           30 ->  17    +13
+  call            34 ->  19    +15
+  chant           19 ->  13     +6
+  move            29 ->  23     +6
+  insult          25 ->  24     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  beat             1 ->   5     -4
+  hit              4 -> 104   -100
+  punch           10 ->  38    -28
+  kick            14 ->  54    -40
+  pummel          12 ->  26    -14
+  pound           17 ->  87    -70
+  sing            15 ->  30    -15
+  strike          20 ->  63    -43
+  throw           19 ->  23     -4
+  attack           9 ->  12     -3
+
+HIGHER UNDER B
+  chant            2 ->   1     +1
+  taunt            3 ->   2     +1
+  whisper         27 ->   4    +23
+  jeer            11 ->   3     +8
+  question        26 ->  11    +15
+  mock             7 ->   6     +1
+  close           84 ->  15    +69
+  pelt            13 ->  10     +3
+  strip           42 ->  16    +26
+  ask             16 ->  13     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  kick             7 ->  70    -63
+  hit              8 ->  59    -51
+  attack           5 ->  18    -13
+  stone           10 ->  38    -28
+  talk            12 ->  46    -34
+  throw            6 ->  12     -6
+  fight           15 ->  37    -22
+  push            14 ->  25    -11
+  yell            11 ->  14     -3
+  scream          16 ->  22     -6
+  shout            4 ->   7     -3
+
+HIGHER UNDER B
+  taunt            2 ->   2     +0
+  mock            13 ->   3    +10
+  tear            20 ->   6    +14
+  chant            9 ->   5     +4
+  strip           60 ->  11    +49
+  ridicule        46 ->  10    +36
+  jeer            22 ->   8    +14
+  question        40 ->  13    +27
+  pull            17 ->   9     +8
+  hurl            27 ->  15    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  kick             2 ->   9     -7
+  beat             1 ->   1     +0
+  hit              3 ->   7     -4
+  stab            10 ->  19     -9
+  spit            12 ->  15     -3
+  tear            15 ->  27    -12
+  laugh           13 ->  17     -4
+  scream          11 ->  14     -3
+  punch            6 ->   6     +0
+  shout            7 ->  10     -3
+  attack           9 ->  12     -3
+
+HIGHER UNDER B
+  pelt            39 ->   3    +36
+  taunt            4 ->   2     +2
+  pummel           8 ->   4     +4
+  mock            21 ->   8    +13
+  hurl            27 ->  13    +14
+  chant            5 ->   5     +0
+  throw           14 ->  11     +3
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  taunt            4 ->  22    -18
+  attack           7 ->  17    -10
+  laugh            5 ->  10     -5
+  yell             8 ->  53    -45
+  shout            6 ->   7     -1
+  cheer            9 ->  16     -7
+  push            11 ->  51    -40
+  talk            10 ->  18     -8
+  pull            15 ->  75    -60
+  throw           14 ->  26    -12
+  scream          16 ->  52    -36
+  fight           19 ->  91    -72
+  argue           17 ->  28    -11
+  speak           21 ->  31    -10
+  make            20 ->  29     -9
+
+HIGHER UNDER B
+  chant            2 ->   1     +1
+  sing             3 ->   3     +0
+  pray            58 ->   4    +54
+  whisper         39 ->   6    +33
+  question        12 ->   5     +7
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  stare            1 ->   3     -2
+  shout            7 ->  28    -21
+  attack          11 ->  35    -24
+  interrogate      6 ->  17    -11
+  look             4 ->   5     -1
+  taunt           19 ->  31    -12
+  mock            16 ->  21     -5
+  examine         13 ->  18     -5
+  watch            5 ->   6     -1
+  follow           8 ->  10     -2
+  cry             10 ->  16     -6
+
+HIGHER UNDER B
+  discuss         17 ->   4    +13
+  talk             2 ->   1     +1
+  whisper          3 ->   2     +1
+  debate          34 ->  13    +21
+  chant           27 ->  12    +15
+  help            58 ->  22    +36
+  laugh           12 ->   7     +5
+  listen          30 ->  19    +11
+  hum             32 ->  20    +12
+  argue           20 ->  15     +5
+  make            18 ->  11     +7
+  speak           14 ->   9     +5
+  move            23 ->  23     +0
+  beg             24 ->  24     +0
+  ask             15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  ____             3 ->   7     -4
+  laugh            6 ->   8     -2
+  shout           10 ->  20    -10
+  kick            14 ->  26    -12
+  yell            12 ->  18     -6
+  make            17 ->  25     -8
+  chant           15 ->  17     -2
+  ask             18 ->  28    -10
+  hit             23 ->  36    -13
+  ___             13 ->  13     +0
+  throw           20 ->  24     -4
+  ________         9 ->  10     -1
+
+HIGHER UNDER B
+  taunt            2 ->   2     +0
+  beat             1 ->   1     +0
+  mock             4 ->   3     +1
+  fight            7 ->   5     +2
+  berate          28 ->  14    +14
+  question        21 ->  11    +10
+  ______           8 ->   6     +2
+  attack           5 ->   4     +1
+  _______         16 ->  12     +4
+  __________      19 ->  15     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  taunt            2 ->  15    -13
+  beat             1 ->   1     +0
+  jeer            10 ->  20    -10
+  laugh            6 ->   9     -3
+  mock             8 ->  10     -2
+  pull            15 ->  30    -15
+  pummel          11 ->  13     -2
+  pelt            17 ->  31    -14
+  kick             4 ->   6     -2
+
+HIGHER UNDER B
+  chant           13 ->   2    +11
+  hit              5 ->   3     +2
+  move            60 ->  14    +46
+  press           40 ->  11    +29
+  push            12 ->   7     +5
+  throw            7 ->   5     +2
+  speak           39 ->  16    +23
+  scream          30 ->  17    +13
+  talk            33 ->  21    +12
+  make            21 ->  18     +3
+  attack           9 ->   8     +1
+  take            14 ->  12     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  beat             1 ->   2     -1
+  laugh            7 ->  40    -33
+  chant            8 ->  23    -15
+  shout            9 ->  28    -19
+  yell            10 ->  73    -63
+  punch            5 ->   7     -2
+  throw           11 ->  35    -24
+  taunt           12 ->  76    -64
+
+HIGHER UNDER B
+  hit              4 ->   1     +3
+  kick             3 ->   3     +0
+  attack           6 ->   4     +2
+  strike          16 ->   6    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  beat             1 ->   9     -8
+  attack           2 ->  16    -14
+  push             6 ->  17    -11
+  abuse           11 ->  71    -60
+  kick            14 ->  75    -61
+  threaten        15 ->  37    -22
+  drag             7 ->  12     -5
+  choke           18 ->  26     -8
+  press           17 ->  23     -6
+  pull            12 ->  15     -3
+  scream          20 ->  24     -4
+  curse           21 ->  25     -4
+  mock            19 ->  19     +0
+
+HIGHER UNDER B
+  chant            5 ->   1     +4
+  whisper         36 ->   3    +33
+  speak           16 ->   5    +11
+  shout            3 ->   2     +1
+  move            26 ->   6    +20
+  take            25 ->   8    +17
+  pace            91 ->  14    +77
+  yell             4 ->   4     +0
+  question        13 ->   7     +6
+  talk            24 ->  18     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  hit              4 ->  16    -12
+  attack          14 ->  37    -23
+  kick             5 ->   8     -3
+  throw           10 ->  25    -15
+  punch           19 ->  27     -8
+  scream           9 ->  12     -3
+  taunt           17 ->  26     -9
+  laugh            2 ->   4     -2
+  push            16 ->  20     -4
+  pull            13 ->  13     +0
+
+HIGHER UNDER B
+  chant            7 ->   2     +5
+  shout            3 ->   3     +0
+  choke           28 ->   7    +21
+  pummel           6 ->   5     +1
+  sing             8 ->   6     +2
+  pray            52 ->  21    +31
+  cheer           31 ->  18    +13
+  strangle        25 ->  17     +8
+  surround        30 ->  22     +8
+  stomp           22 ->  19     +3
+  drag            20 ->  15     +5
+  pound           11 ->   9     +2
+  strip           18 ->  14     +4
+  tear            12 ->  10     +2
+  yell            15 ->  11     +4
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  fight            4 ->  10     -6
+  throw           14 ->  37    -23
+  hit              6 ->  15     -9
+  kick             9 ->  18     -9
+  pull             7 ->  13     -6
+  tear             8 ->  14     -6
+  scream          17 ->  32    -15
+  push             3 ->   6     -3
+  yell            20 ->  22     -2
+  take            18 ->  20     -2
+
+HIGHER UNDER B
+  surround         5 ->   2     +3
+  taunt           23 ->   3    +20
+  chant           11 ->   5     +6
+  laugh           10 ->   7     +3
+  question        46 ->  17    +29
+  circle          49 ->  21    +28
+  mock            15 ->   8     +7
+  drag            12 ->   9     +3
+  make            21 ->  19     +2
+  shout           16 ->  11     +5
+  sing            19 ->  16     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  punch            3 ->   9     -6
+  hit              4 ->  14    -10
+  kick             5 ->  16    -11
+  assault         11 ->  23    -12
+  pummel           8 ->  15     -7
+  yell            13 ->  21     -8
+  push            14 ->  19     -5
+
+HIGHER UNDER B
+  taunt            2 ->   2     +0
+  jeer            37 ->   8    +29
+  shout           10 ->   6     +4
+  throw            9 ->   5     +4
+  question        16 ->   7     +9
+  pelt            73 ->  17    +56
+  threaten        28 ->  12    +16
+  chant           18 ->  13     +5
+  mock            15 ->  11     +4
+  argue           34 ->  18    +16
+  attack           7 ->   3     +4
+  fight           12 ->  10     +2
+  choke           21 ->  20     +1
+  laugh            6 ->   4     +2
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  kick             2 ->   2     +0
+  strike          17 ->  18     -1
+  tear            15 ->  16     -1
+  attack           5 ->   7     -2
+  pull            14 ->  15     -1
+  drag            18 ->  20     -2
+  chant            7 ->   8     -1
+  pummel          13 ->  13     +0
+  push            10 ->  10     +0
+
+HIGHER UNDER B
+  taunt            6 ->   5     +1
+  beat             1 ->   1     +0
+  yell             4 ->   4     +0
+  punch            8 ->   6     +2
+  hit              3 ->   3     +0
+  laugh           11 ->  11     +0
+  shout            9 ->   9     +0
+  assault         19 ->  17     +2
+  throw           12 ->  12     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  hit              6 ->  10     -4
+  attack           7 ->  11     -4
+  throw            9 ->  47    -38
+  tear            10 ->  31    -21
+  stab            11 ->  24    -13
+  chant            4 ->   5     -1
+  kick             2 ->   3     -1
+  shout           12 ->  16     -4
+
+HIGHER UNDER B
+  beat             1 ->   1     +0
+  pummel           3 ->   2     +1
+  punch            8 ->   6     +2
+  taunt            5 ->   4     +1
+  curse           20 ->   7    +13
+  pound           13 ->   8     +5
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  laugh            6 ->  11     -5
+  pull            14 ->  32    -18
+  drag             9 ->  24    -15
+  lay             22 ->  54    -32
+  tear            21 ->  39    -18
+  pick             8 ->  15     -7
+  question        20 ->  25     -5
+  throw           11 ->  13     -2
+  hit             19 ->  23     -4
+  mock            17 ->  18     -1
+
+HIGHER UNDER B
+  fight           15 ->   3    +12
+  attack          12 ->   4     +8
+  scream          18 ->   9     +9
+  chant           10 ->   8     +2
+  punch           30 ->  14    +16
+  kick             2 ->   2     +0
+  force           35 ->  22    +13
+  choke           27 ->  20     +7
+  pummel          24 ->  16     +8
+  make            26 ->  21     +5
+  talk            23 ->  19     +4
+  taunt           13 ->  12     +1
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  kick             7 ->  11     -4
+  hit             10 ->  15     -5
+  throw            8 ->   8     +0
+  tear            12 ->  18     -6
+  pummel           9 ->   9     +0
+  fight           14 ->  20     -6
+  pound           15 ->  21     -6
+  pull            20 ->  34    -14
+  punch           19 ->  28     -9
+  push            16 ->  19     -3
+  sing            11 ->  12     -1
+
+HIGHER UNDER B
+  taunt            2 ->   2     +0
+  jeer            17 ->   7    +10
+  laugh            4 ->   3     +1
+  shout            5 ->   5     +0
+  berate          22 ->  13     +9
+  mock            21 ->  14     +7
+  question        34 ->  22    +12
+  attack           6 ->   6     +0
+  talk            23 ->  16     +7
+  yell            13 ->  10     +3
+  scream          18 ->  17     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  beat             1 ->   2     -1
+  punch            2 ->  26    -24
+  hit              3 ->  33    -30
+  kick             4 ->  28    -24
+  attack           5 ->  23    -18
+  pummel           6 ->  19    -13
+  stab             8 ->  98    -90
+  assault          9 ->  21    -12
+  fight           14 ->  78    -64
+  strike          16 ->  70    -54
+  throw           12 ->  14     -2
+
+HIGHER UNDER B
+  chant           10 ->   1     +9
+  jeer            53 ->   3    +50
+  taunt            7 ->   4     +3
+  laugh           11 ->   5     +6
+  sing            18 ->   7    +11
+  cheer           35 ->   9    +26
+  mock            15 ->   6     +9
+  shout           13 ->   8     +5
+  push            26 ->  10    +16
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  punch            2 ->   7     -5
+  kick             3 ->   6     -3
+  attack           6 ->  10     -4
+  hit              8 ->  18    -10
+  yell            11 ->  28    -17
+  pummel           9 ->  13     -4
+  throw           16 ->  26    -10
+
+HIGHER UNDER B
+  taunt            4 ->   2     +2
+  mock            13 ->   4     +9
+  jeer            43 ->  12    +31
+  tease           41 ->  15    +26
+  push            15 ->   9     +6
+  clap            79 ->  19    +60
+  chant            7 ->   3     +4
+  cheer           31 ->  17    +14
+  talk            22 ->  14     +8
+  laugh           10 ->   8     +2
+  harass          27 ->  20     +7
+  make            26 ->  21     +5
+  sing            24 ->  22     +2
+  shout            5 ->   5     +0
+  question        12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  beat             1 ->   7     -6
+  hit              7 ->  31    -24
+  talk            14 -> 104    -90
+  laugh            2 ->   3     -1
+  kick            12 ->  24    -12
+  shout            6 ->  12     -6
+  push             8 ->  13     -5
+  insult          16 ->  23     -7
+  fight           22 ->  92    -70
+  sing            11 ->  14     -3
+  punch           21 ->  36    -15
+  make            18 ->  21     -3
+  pull            20 ->  27     -7
+  yell            19 ->  20     -1
+  attack          10 ->  10     +0
+
+HIGHER UNDER B
+  taunt            3 ->   1     +2
+  mock             4 ->   2     +2
+  chant            5 ->   4     +1
+  jeer             9 ->   5     +4
+  humiliate       72 ->   9    +63
+  tease           15 ->   6     +9
+  harass          40 ->  11    +29
+  throw           13 ->   8     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  laugh            2 ->   8     -6
+  sing            11 ->  21    -10
+  shout            6 ->  12     -6
+  jeer            15 ->  30    -15
+  mock             5 ->   9     -4
+  hit             10 ->  10     +0
+  scream          13 ->  15     -2
+  yell            14 ->  14     +0
+  tear            17 ->  17     +0
+  taunt            4 ->   6     -2
+
+HIGHER UNDER B
+  beat             1 ->   1     +0
+  kick             9 ->   3     +6
+  pummel           3 ->   2     +1
+  pelt            12 ->   5     +7
+  attack           7 ->   4     +3
+  chant            8 ->   7     +1
+  punch           26 ->  13    +13
+  throw           16 ->  11     +5
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  beat             1 ->   2     -1
+  laugh            5 ->  14     -9
+  taunt            2 ->   6     -4
+  question        12 ->  40    -28
+  pull            10 ->  29    -19
+  torture         19 ->  53    -34
+  hit             20 ->  42    -22
+  tear            17 ->  33    -16
+  chant           15 ->  27    -12
+  kick            14 ->  20     -6
+  mock             8 ->  13     -5
+  punch           11 ->  12     -1
+  push             7 ->   7     +0
+
+HIGHER UNDER B
+  attack           4 ->   1     +3
+  threaten        16 ->   5    +11
+  fight            3 ->   3     +0
+  throw            6 ->   4     +2
+  pummel          27 ->   9    +18
+  stone           31 ->  10    +21
+  cut             13 ->   8     +5
+  torment         60 ->  18    +42
+  hurl            26 ->  15    +11
+  drag            22 ->  16     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  yell             8 ->  14     -6
+  scream          10 ->  13     -3
+  hit              3 ->   4     -1
+  shout            5 ->   7     -2
+  kick             6 ->   9     -3
+  chant           11 ->  11     +0
+  throw           15 ->  16     -1
+  pummel          14 ->  15     -1
+  strike          16 ->  18     -2
+  pull            17 ->  25     -8
+  pound           18 ->  23     -5
+  sing            19 ->  20     -1
+
+HIGHER UNDER B
+  taunt            4 ->   2     +2
+  mock            28 ->  12    +16
+  laugh            9 ->   5     +4
+  fight           13 ->   8     +5
+  berate          23 ->  19     +4
+  assault         22 ->  17     +5
+  punch            7 ->   6     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  attack           4 ->   9     -5
+  hit              2 ->   3     -1
+  push            12 ->  14     -2
+  punch            9 ->  10     -1
+  kick            10 ->  11     -1
+  mock             6 ->   7     -1
+
+HIGHER UNDER B
+  laugh            3 ->   2     +1
+  beat             1 ->   1     +0
+  pummel           7 ->   4     +3
+  sing             8 ->   5     +3
+  chant           11 ->   8     +3
+  stone           23 ->  12    +11
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 28 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

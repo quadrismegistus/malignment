@@ -1,0 +1,155 @@
+Below are 22 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r0875ca9  procedural handling vs violent coercion
+      A favors neutral, professional handling verbs describing what staff routinely do (took, carried, removed, moved, brought, put, gave, told, called, said), while B favors verbs of physical force and coercion (kicked, beat, threatened, pushed, forced, threw), several of them introduced by an aspectual verb marking the onset of the violent act (began, started, tried, became).
+      A: took, carried, removed, moved, brought, put, gave, told, called, said
+      B: kicked, beat, threatened, pushed, forced, threw, began, started, tried, became
+
+r1451785  graphic restraint vs generic filler
+      B favors specific, procedural, forceful restraint verbs describing physically subduing the patient (restrained, forcibly, dragged, subdued, strapped, grabbed, pinned, took, lifted, put), while A is dominated by grammatical connectives and lighter, less specific verbs (would, at, in, and, were, came, called, brought, gave, used).
+      A: would, at, in, and, were, came, called, brought, gave, used
+      B: restrained, forcibly, dragged, subdued, strapped, grabbed, pinned, took, lifted, put
+
+r1f221bd  named restraint technique vs generic verb
+      A's completions name specific physical restraint or medical techniques (tied, strapped, held, restrained, dragged, bound, injected), while B's completions are generic light verbs that specify no method at all (had, put, took, were, came).
+      A: tied, strapped, held, restrained, dragged, bound, injected
+      B: had, put, took, were, came
+
+r3a78dfb  forceful action vs modal hedging
+      A favors verbs that report a completed, often forceful physical act, while B favors modal auxiliaries and attempt/process verbs that soften or defer the description of what was done.
+      A: threw, dragged, threatened, rushed, gave, brought, sent
+      B: tried, began, could, would, will, found
+
+r3bd55e1  affirmative vs negated polarity
+      A favors the affirmative auxiliary forms 'were' and 'did', while B favors their negated counterparts 'weren't' and 'didn't' -- a minimal-pair polarity shift running alongside, and independent of, the violence-content shift.
+      A: were, did
+      B: weren't, didn't
+
+r41c256a  physical restraint vs verbal/hedged action
+      A is dominated by verbs of direct physical force and restraint (strapped, tied, injected, forcibly, forced, restrained, dragged, pinned, grabbed, held), while B favors auxiliary/modal verbs (had, took, tried, were, would) and verbal rather than physical actions (told, called, threatened, said).
+      A: strapped, tied, injected, forcibly, forced, restrained, dragged, pinned, grabbed, held
+      B: had, took, tried, were, would, told, called, threatened, said
+
+r481f63e  agency inversion via passive voice
+      A favors active-voice institutional-restraint verbs where the orderlies are the grammatical agent acting directly on him (restrained, tied, bound, locked, forced, placed, put, threw), while B is topped by the copula 'were' followed by several words that read naturally as passive participles in which the orderlies are acted upon rather than acting (called, reported, threatened, dragged, beat, carried, left), suggesting a partial inversion of who has agency in the scene.
+      A: restrained, tied, bound, locked, forced, placed, put, threw
+      B: were, called, reported, threatened, dragged, beat, carried, left
+
+r574cbbf  graphic method vs institutional vocabulary
+      Specific, graphic restraint verbs beat, dragged, grabbed, drugged, strapped, forcibly, and injected recede under B while more generic institutional-restraint words restrained, held, overpowered, forced, pushed, and used take over, softening the depiction of coercion without removing the coercion itself.
+      A: beat, dragged, grabbed, drugged, strapped, forcibly, injected
+      B: restrained, held, overpowered, forced, pushed, used
+
+r6109f39  routine care vs physical restraint
+      Ordinary procedural caregiving verbs (took, put, injected, gave, brought, called, tried) sit under A, while verbs of physical restraint and coercion (restrained, tied, held, locked, forced, carried, beat, threatened) sit under B.
+      A: took, put, injected, gave, brought, called, tried
+      B: restrained, tied, held, locked, forced, carried, beat, threatened
+
+r6402827  speech response absent from B
+      A's remaining content verbs describe a verbal or bringing-in response (came, called, told, brought, said, removed), whereas B has no comparable speech verb at all, only physical-control or bureaucratic-adjacent verbs (took, put, began, became).
+      A: came, called, told, brought, said, removed
+      B: took, put, began, became
+
+r66b51e5  coercive/verbal-force verbs vs procedural/administrative verbs
+      Where both sides do supply main verbs, A's skew toward coercion and direct address (threatened, beat, told, asked, called) while B's skew toward neutral institutional procedure (gave, took, went, found, brought, sent, made, decided).
+      A: threatened, beat, told, asked, called
+      B: gave, took, went, found, brought, sent, made, decided
+
+r66d088d  clinical euphemism for restraint
+      restrained, a clinical/institutional term, is favored under B in place of the more graphic tied, dragged, and forced favored under A, describing the same act in softer vocabulary.
+      A: tied, dragged, forced
+      B: restrained
+
+r8dcadc4  named techniques collapse to one abstract term
+      The several distinct named restraint techniques on the A side are answered on the B side by a single general word for compulsion, forced, rather than by any named method.
+      A: tied, strapped, restrained, bound
+      B: forced
+
+r9278f64  sanctioned restraint vs unsanctioned assault
+      A's verbs describe institutional restraint procedure -- strapped, restrained, tied, locked, stripped, forced -- while B's name outright physical abuse that exceeds restraint -- threw, dragged, beat, kicked, assaulted, threatened.
+      A: strapped, restrained, tied, locked, stripped, forced
+      B: threw, dragged, beat, kicked, assaulted, threatened
+
+ra1d0ebe  physical violence vs verbal procedure
+      A contains direct physical-violence verbs with no counterpart in B (threw, beat, dragged, kicked, threatened), while B contains verbal or procedural response verbs with no violent counterpart (called, informed, argued, told, tried).
+      A: threw, beat, dragged, kicked, threatened
+      B: called, informed, argued, told, tried
+
+radbd27e  clinical restraint versus blunt coercion
+      B is dominated by a tight cluster of formal restraint vocabulary -- 'subdued', 'restrained', 'physically', 'grabbed', 'carried', 'picked' -- while A's most graphic verbs -- 'beat', 'forced', 'tied', 'strapped', 'threw', 'removed' -- describe similar physical coercion in blunter, less procedural language, sitting amid A's much larger set of generic narrative words.
+      A: beat, forced, tied, strapped, threw, removed
+      B: subdued, restrained, physically, grabbed, carried, picked
+
+rb81d7e4  named assault vs institutional restraint
+      A contains the two most overtly violent verbs (threw, beat) with no counterpart in B, while B clusters around institutional-control verbs that imply force without naming assault directly (forced, dragged, restrained, locked).
+      A: threw, beat
+      B: forced, dragged, restrained, locked
+
+rc492781  procedural control to urgent response
+      A favors verbs of directive or procedural control by staff (ordered, put, made, kept, began, turned), while B favors verbs of rapid, hands-on emergency response (rushed, immediately, came, found, gave, asked).
+      A: ordered, put, made, kept, began, turned
+      B: rushed, immediately, came, found, gave, asked
+
+rd4987f4  clinical restraint vs abuse
+      A completes the fragment with procedural, clinical-sounding restraint and medication actions (strapped, drugged, placed, put, gave, used), while B completes it with verbs of overt physical violence and threat (threatened, dragged, roughed, forced, slapped, beat, threw).
+      A: strapped, drugged, placed, put, gave, used
+      B: threatened, dragged, roughed, forced, slapped, beat, threw
+
+re1273ff  affirmative action vs hedged/negated action
+      B additionally carries contracted negative and modal forms suggesting hedged or negated continuations (could, wouldn't, didn't), a polarity marker largely absent from A's mostly affirmative verbs.
+      A: would
+      B: could, wouldn, didn
+
+rea96421  auxiliary/modal frame vs main-verb content
+      B is weighted toward auxiliary and modal verbs that require a further verb to complete the clause (were, had, have, are, will, would), whereas A supplies complete main verbs that stand as the orderlies' action on their own (threatened, said, told, beat, asked, called).
+      A: threatened, said, told, put, beat, asked, called, started, got, left, tried
+      B: were, had, have, are, will, would
+
+rff48c56  graphic restraint vs auxiliary filler
+      A supplies specific, graphic verbs of physical coercion (forced, threatened, tied, dragged, held, locked, forcibly, threw) while B is dominated by grammatical auxiliaries and modals (would, had, tried, used, said, just, were) that do not themselves name an action.
+      A: forced, threatened, tied, dragged, held, locked, forcibly, threw
+      B: would, had, tried, used, said, just, were
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

@@ -1,0 +1,844 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: The officers photographed the kitchen floor, which was covered in ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  blood            2 ->  18    -16
+  dust             9 ->  29    -20
+  water            7 ->  14     -7
+  the             11 ->  66    -55
+  black           10 ->  35    -25
+  dog             14 ->  71    -57
+  mud             13 ->  48    -35
+  red             18 ->  45    -27
+  broken          12 ->  21     -9
+  filth           21 ->  73    -52
+  white           24 ->  31     -7
+  dried            6 ->   7     -1
+  oil             16 ->  16     +0
+  a                1 ->   2     -1
+
+HIGHER UNDER B
+  food             3 ->   1     +2
+  an               8 ->   4     +4
+  grease           4 ->   3     +1
+  dirt             5 ->   5     +0
+  flour           20 ->   6    +14
+  sticky          32 ->   9    +23
+  various         56 ->  13    +43
+  crumbs          49 ->  12    +37
+  greasy          15 ->   8     +7
+  debris          22 ->  11    +11
+  dirty           19 ->  10     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  blood            2 ->   9     -7
+  what             4 ->  10     -6
+  grease           3 ->   6     -3
+  dried            8 ->  25    -17
+  black           11 ->  32    -21
+  the             13 ->  39    -26
+  cigarette       15 ->  51    -36
+  an              12 ->  22    -10
+  a                1 ->   2     -1
+  stains          16 ->  27    -11
+  crumbs          17 ->  17     +0
+
+HIGHER UNDER B
+  food             5 ->   1     +4
+  broken           6 ->   3     +3
+  trash           19 ->   4    +15
+  dishes          56 ->   8    +48
+  dirty           10 ->   5     +5
+  various         38 ->  14    +24
+  garbage         26 ->  13    +13
+  coffee          27 ->  16    +11
+  spilled         14 ->  11     +3
+  water            7 ->   7     +0
+  dirt            18 ->  15     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  dirt             4 ->  11     -7
+  food             5 ->   9     -4
+  a                1 ->   1     +0
+  the              6 ->   8     -2
+  trash           19 ->  89    -70
+  black            7 ->  12     -5
+  cooking         18 ->  52    -34
+  blood            2 ->   4     -2
+  oil              8 ->  25    -17
+  garbage         16 ->  30    -14
+  sawdust         20 ->  32    -12
+  plastic          9 ->  16     -7
+  water           15 ->  23     -8
+  white           12 ->  19     -7
+  an              11 ->  15     -4
+  red             14 ->  17     -3
+
+HIGHER UNDER B
+  spilled         10 ->   2     +8
+  fingerprints    26 ->   5    +21
+  crumbs          17 ->   6    +11
+  dirty           21 ->   7    +14
+  sticky          37 ->  13    +24
+  condensation   100 ->  20    +80
+  scattered       71 ->  21    +50
+  dried           13 ->  10     +3
+  green           57 ->  22    +35
+  dog             22 ->  14     +8
+  dishes          30 ->  18    +12
+  grease           3 ->   3     +0
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  blood            1 ->   2     -1
+  vomit            3 ->  33    -30
+  feces            7 ->  46    -39
+  what             5 ->  10     -5
+  urine           11 ->  56    -45
+  black           12 ->  30    -18
+  dried           14 ->  34    -20
+  mud             13 ->  32    -19
+  dirt            15 ->  20     -5
+  an              16 ->  16     +0
+  the              9 ->  13     -4
+  food            10 ->  14     -4
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  debris           6 ->   4     +2
+  dust            38 ->   6    +32
+  broken           8 ->   5     +3
+  water            4 ->   3     +1
+  trash           20 ->   7    +13
+  grease          18 ->   8    +10
+  oil             36 ->   9    +27
+  bloodstains     46 ->  11    +35
+  shattered       40 ->  12    +28
+  thick           29 ->  15    +14
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  grease           2 ->   6     -4
+  sawdust         12 ->  39    -27
+  black            8 ->  19    -11
+  flour           14 ->  40    -26
+  oil              9 ->  15     -6
+  what            15 ->  60    -45
+  white           10 ->  13     -3
+  dog             18 -> 129   -111
+  cat             19 -> 139   -120
+  blood            3 ->   4     -1
+  chocolate       20 ->  43    -23
+  food             6 ->   9     -3
+  spilled         16 ->  26    -10
+  dried           21 ->  32    -11
+  brown           22 ->  28     -6
+  mud              4 ->   8     -4
+  dirt             5 ->   7     -2
+
+HIGHER UNDER B
+  a                1 ->   1     +0
+  dust            13 ->   2    +11
+  the              7 ->   3     +4
+  stains          39 ->  10    +29
+  thick           70 ->  14    +56
+  dirty           24 ->  12    +12
+  an              17 ->  11     +6
+  water           11 ->   5     +6
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  blood            1 ->   2     -1
+  broken           3 ->   6     -3
+  glass            6 ->  50    -44
+  feces            9 -> 137   -128
+  vomit            5 ->  18    -13
+  what             7 ->  24    -17
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  various        101 ->   8    +93
+  several         26 ->   7    +19
+  debris          12 ->   4     +8
+  crumbs          59 ->  13    +46
+  small           30 ->   9    +21
+  food            13 ->   5     +8
+  fresh           58 ->  21    +37
+  black           25 ->  15    +10
+  dirty           46 ->  22    +24
+  garbage         23 ->  20     +3
+  mud             22 ->  19     +3
+  pieces          29 ->  23     +6
+  water            4 ->   3     +1
+  bloody          18 ->  17     +1
+  plastic         15 ->  14     +1
+  dried           14 ->  12     +2
+  the             10 ->  10     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  blood            1 ->  29    -28
+  broken           3 ->  33    -30
+  the              5 ->  80    -75
+  vomit            7 -> 165   -158
+  plastic          6 ->  22    -16
+  trash            9 ->  92    -83
+  human           10 -> 117   -107
+  feces           14 -> 121   -107
+  dog             13 ->  69    -56
+  dishes           8 ->  24    -16
+  garbage         16 ->  53    -37
+  what            12 ->  34    -22
+  red             19 ->  83    -64
+  dried           11 ->  27    -16
+
+HIGHER UNDER B
+  grease          35 ->   3    +32
+  spilled         17 ->   2    +15
+  flour           15 ->   4    +11
+  crumbs          29 ->   5    +24
+  a                2 ->   1     +1
+  sawdust         68 ->   7    +61
+  dust            41 ->   8    +33
+  soot           150 ->   9   +141
+  clutter        154 ->  11   +143
+  wet             72 ->  12    +60
+  grime          135 ->  14   +121
+  various         91 ->  17    +74
+  an              46 ->  13    +33
+  fresh           74 ->  16    +58
+  dirt            25 ->  10    +15
+  old             67 ->  18    +49
+  scattered      136 ->  20   +116
+  debris          18 ->  15     +3
+  coffee          21 ->  19     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  blood            1 ->  63    -62
+  the              4 ->  58    -54
+  broken           5 ->  19    -14
+  mud              8 ->  17     -9
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  spilled         42 ->   2    +40
+  crumbs         102 ->   4    +98
+  grease          10 ->   3     +7
+  various         54 ->   5    +49
+  food             9 ->   7     +2
+  flour           19 ->   9    +10
+  dirty           72 ->  12    +60
+  an              21 ->  10    +11
+  stains          37 ->  14    +23
+  water           11 ->  11     +0
+  dog             35 ->  16    +19
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  ___              1 ->  44    -43
+  A                2 ->   3     -1
+  blood            3 ->  45    -42
+  ____             5 ->  81    -76
+  food             8 ->  23    -15
+
+HIGHER UNDER B
+  a                4 ->   1     +3
+  dark            18 ->   4    +14
+  small           14 ->   5     +9
+  what             6 ->   2     +4
+  white           10 ->   6     +4
+  mud             24 ->   7    +17
+  tire           101 ->  10    +91
+  flour           35 ->   9    +26
+  sticky          69 ->  11    +58
+  thin            81 ->  13    +68
+  grease          29 ->  12    +17
+  footprints      53 ->  14    +39
+  tiny            65 ->  16    +49
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  the              2 ->  10     -8
+  fresh            5 ->  15    -10
+  blood           11 ->  79    -68
+  red             14 ->  36    -22
+  dried           15 ->  38    -23
+  thick           12 ->  18     -6
+  food            10 ->  12     -2
+  white            7 ->   9     -2
+  dirty           13 ->  17     -4
+  dirt            17 ->  27    -10
+  several         18 ->  21     -3
+  grease          16 ->  16     +0
+
+HIGHER UNDER B
+  a                1 ->   1     +0
+  what             6 ->   2     +4
+  crumbs          25 ->   6    +19
+  ____           119 ->  11   +108
+  _____          134 ->  13   +121
+  dust             4 ->   3     +1
+  flour            8 ->   5     +3
+  clutter         62 ->  14    +48
+  sticky          20 ->   8    +12
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  blood            1 ->   2     -1
+  water            5 ->   8     -3
+  dried           10 ->  22    -12
+  paint           12 ->  18     -6
+  food             7 ->   7     +0
+  debris           9 ->  13     -4
+  glass           11 ->  12     -1
+  red             15 ->  16     -1
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  broken           4 ->   4     +0
+  flour            6 ->   5     +1
+  what             8 ->   6     +2
+  an              16 ->  10     +6
+  the              3 ->   3     +0
+  hundreds        14 ->   9     +5
+  white           13 ->  11     +2
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  blood            1 ->   5     -4
+  food             3 ->   7     -4
+  grease           6 ->  30    -24
+  broken           4 ->   6     -2
+  dog             12 -> 117   -105
+  dirt            10 ->  40    -30
+  dirty           13 ->  57    -44
+  debris          15 ->  70    -55
+  vomit           16 ->  62    -46
+  plates          19 ->  84    -65
+  crumbs          20 ->  35    -15
+  dried           18 ->  19     -1
+  the              8 ->  10     -2
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  what             5 ->   2     +3
+  water            9 ->   3     +6
+  spilled         11 ->   4     +7
+  an              23 ->   9    +14
+  something      114 ->  11   +103
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  blood            1 ->   5     -4
+  a                2 ->  34    -32
+  dried            7 ->  64    -57
+  water            6 ->  26    -20
+  the              9 -> 114   -105
+  dog             10 ->  31    -21
+  broken           4 ->  11     -7
+  what            13 ->  62    -49
+  dust            16 ->  65    -49
+  animal          15 ->  28    -13
+  human           12 ->  14     -2
+
+HIGHER UNDER B
+  grease           5 ->   1     +4
+  spilled         14 ->   2    +12
+  flour           11 ->   4     +7
+  food             3 ->   3     +0
+  oil             23 ->   6    +17
+  pieces          39 ->   7    +32
+  spaghetti       34 ->   8    +26
+  bits            45 ->   9    +36
+  fragments      121 ->  12   +109
+  clumps          40 ->  13    +27
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  blood            2 ->   3     -1
+  human           18 ->  76    -58
+  white           11 ->  24    -13
+  soil            21 ->  68    -47
+  garbage          8 ->  17     -9
+  the              4 ->   6     -2
+  flour           17 ->  23     -6
+  crumbs          12 ->  18     -6
+  black           20 ->  21     -1
+  mud             16 ->  19     -3
+  dirty           13 ->  13     +0
+  grease           6 ->   8     -2
+
+HIGHER UNDER B
+  a                1 ->   1     +0
+  food             3 ->   2     +1
+  dog             24 ->   5    +19
+  dust             5 ->   4     +1
+  dirt             7 ->   7     +0
+  coffee          37 ->  16    +21
+  stains          34 ->  15    +19
+  an              14 ->  11     +3
+  what             9 ->   9     +0
+  trash           10 ->  10     +0
+  debris          19 ->  14     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  blood            2 ->  14    -12
+  ___              3 ->  66    -63
+  ______           8 -> 129   -121
+  grease           5 ->   9     -4
+  _                9 ->  53    -44
+  _____           11 -> 114   -103
+  ____            16 -> 150   -134
+  chicken         12 ->  38    -26
+  a                1 ->   1     +0
+  red             17 ->  29    -12
+  animal          20 ->  44    -24
+  the             24 ->  54    -30
+
+HIGHER UNDER B
+  what             6 ->   3     +3
+  various         28 ->   7    +21
+  debris          10 ->   4     +6
+  food             4 ->   2     +2
+  dishes          30 ->  10    +20
+  dirt            13 ->   6     +7
+  water            7 ->   5     +2
+  dirty           32 ->  11    +21
+  crumbs          14 ->   8     +6
+  sand            51 ->  17    +34
+  white           25 ->  12    +13
+  trash           38 ->  19    +19
+  dust            27 ->  16    +11
+  grime           34 ->  21    +13
+  flour           18 ->  13     +5
+  an              21 ->  20     +1
+  oil             15 ->  15     +0
+  broken          22 ->  22     +0
+  mud             23 ->  23     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  blood            2 ->  29    -27
+  the              3 ->  14    -11
+  what             7 ->  16     -9
+  mud             12 ->  26    -14
+  water           11 ->  20     -9
+  food             5 ->   7     -2
+  white           18 ->  31    -13
+  dust             4 ->   4     +0
+  coffee          16 ->  17     -1
+
+HIGHER UNDER B
+  crumbs           6 ->   2     +4
+  a                1 ->   1     +0
+  dirt             9 ->   3     +6
+  grease          24 ->   8    +16
+  flour           17 ->   9     +8
+  cobwebs         50 ->  15    +35
+  dishes          10 ->   5     +5
+  spilled         33 ->  13    +20
+  stains          14 ->  10     +4
+  an              13 ->  11     +2
+  dirty           15 ->  12     +3
+  dried            8 ->   6     +2
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  blood            1 ->   2     -1
+  grease           7 ->  10     -3
+  broken           9 ->  16     -7
+  the             13 ->  28    -15
+  dog             12 ->  19     -7
+  black           15 ->  27    -12
+  dirt            14 ->  23     -9
+  dried            6 ->   7     -1
+  glass            8 ->   9     -1
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  water            4 ->   3     +1
+  red             11 ->   6     +5
+  vomit           10 ->   8     +2
+  feces           20 ->  11     +9
+  what             5 ->   5     +0
+  human           22 ->  13     +9
+  bloodstains     19 ->  12     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  glass            4 ->   4     +0
+  the              3 ->   3     +0
+  broken           6 ->   9     -3
+  mud             13 ->  18     -5
+  a                2 ->   2     +0
+  debris          12 ->  12     +0
+  red             10 ->  11     -1
+  vomit           15 ->  15     +0
+  human           14 ->  14     +0
+
+HIGHER UNDER B
+  blood            1 ->   1     +0
+  bloody           9 ->   6     +3
+  food             8 ->   7     +1
+  fingerprints    16 ->  13     +3
+  what             5 ->   5     +0
+  dried           11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  blood            1 ->   2     -1
+  a                2 ->   4     -2
+  black            8 ->  23    -15
+  the             14 -> 103    -89
+  white           11 ->  20     -9
+  an              10 ->  16     -6
+  water            7 ->   9     -2
+
+HIGHER UNDER B
+  grease           3 ->   1     +2
+  food             4 ->   3     +1
+  debris          12 ->   7     +5
+  what             5 ->   5     +0
+  dirt             6 ->   6     +0
+  dirty            9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  blood            1 ->   1     +0
+  a                2 ->   2     +0
+  the              4 ->   9     -5
+  what             6 ->  34    -28
+  spilled          8 ->  38    -30
+  pieces           9 ->  15     -6
+  dried           10 ->  21    -11
+  soiled          12 ->  24    -12
+
+HIGHER UNDER B
+  trash           14 ->   4    +10
+  garbage         44 ->   8    +36
+  debris          11 ->   6     +5
+  broken           5 ->   5     +0
+  human           38 ->  13    +25
+  dog             43 ->  14    +29
+  food             3 ->   3     +0
+  white           27 ->  12    +15
+  grease          22 ->  11    +11
+  dishes          19 ->  10     +9
+  glass            7 ->   7     +0
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  blood            1 ->   2     -1
+  what             3 ->   5     -2
+  red             17 ->  27    -10
+  white           15 ->  22     -7
+  water            8 ->  11     -3
+  black           16 ->  16     +0
+  an              13 ->  15     -2
+
+HIGHER UNDER B
+  grease           5 ->   3     +2
+  a                2 ->   1     +1
+  flour           11 ->   8     +3
+  spilled         18 ->  14     +4
+  large           14 ->  12     +2
+  food             4 ->   4     +0
+  broken           7 ->   7     +0
+  dried           10 ->  10     +0
+  debris           6 ->   6     +0
+  dirt             9 ->   9     +0
+  trash           22 ->  17     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  blood            1 ->   2     -1
+  food             3 ->  15    -12
+  dog              5 ->  17    -12
+  vomit            7 ->  23    -16
+  rubbish         15 -> 117   -102
+  the             12 ->  31    -19
+  water            8 ->  16     -8
+  dirt            13 ->  25    -12
+  black           17 ->  32    -15
+  human           19 ->  48    -29
+  debris           9 ->  11     -2
+  dried           11 ->  13     -2
+  glass           18 ->  22     -4
+  white           10 ->  10     +0
+  animal          20 ->  21     -1
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  what             6 ->   3     +3
+  broken           4 ->   4     +0
+  shattered       33 ->   5    +28
+  shards          21 ->   6    +15
+  flour           16 ->   7     +9
+  bloodstains     24 ->   8    +16
+  small           25 ->  12    +13
+  an              29 ->  14    +15
+  red             14 ->   9     +5
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  blood            1 ->   1     +0
+  dried            5 ->  20    -15
+  water            6 ->   9     -3
+  glass           10 ->  15     -5
+  red              9 ->  11     -2
+
+HIGHER UNDER B
+  a                2 ->   2     +0
+  food             7 ->   4     +3
+  broken           4 ->   3     +1
+  spilled         15 ->   7     +8
+  vomit           16 ->   8     +8
+  flour           25 ->  10    +15
+  debris           8 ->   6     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  dried            4 ->  31    -27
+  blood            1 ->   2     -1
+  dirt             9 ->  24    -15
+  water            7 ->  10     -3
+  the             10 ->  18     -8
+  black           13 ->  33    -20
+  dust            14 ->  32    -18
+  vomit           18 ->  84    -66
+  white           21 ->  63    -42
+  mud             11 ->  14     -3
+  bloodstains     17 ->  29    -12
+  red             20 ->  46    -26
+  shards          15 ->  20     -5
+  what             6 ->   8     -2
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  broken           5 ->   3     +2
+  shattered       39 ->   5    +34
+  flour           12 ->   4     +8
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  blood            2 ->  17    -15
+  what             7 ->  27    -20
+  flour           14 ->  49    -35
+  white           16 ->  30    -14
+  the             19 ->  90    -71
+  broken           6 ->   8     -2
+  plastic         15 ->  20     -5
+  dried           10 ->  14     -4
+  dirty           12 ->  13     -1
+  dishes          18 ->  22     -4
+  trash           11 ->  11     +0
+
+HIGHER UNDER B
+  debris           5 ->   1     +4
+  dust             9 ->   5     +4
+  water            4 ->   4     +0
+  dog             20 ->   7    +13
+  layers          54 ->  12    +42
+  dirt            17 ->   9     +8
+  various         37 ->  15    +22
+  food             3 ->   3     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  blood            1 ->   1     +0
+  grease           3 ->   5     -2
+  a                2 ->   2     +0
+  black            7 ->  14     -7
+  what             6 ->   7     -1
+  debris          10 ->  16     -6
+  brown           14 ->  28    -14
+  white           17 ->  20     -3
+  dirt            12 ->  17     -5
+  an              16 ->  19     -3
+  dried            8 ->  11     -3
+
+HIGHER UNDER B
+  food             4 ->   3     +1
+  flour           30 ->   6    +24
+  spilled         15 ->   8     +7
+  water            5 ->   4     +1
+  chicken         13 ->  10     +3
+  cigarette       19 ->  12     +7
+  the              9 ->   9     +0
+  large           18 ->  15     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  blood            1 ->   1     +0
+  broken          10 ->  25    -15
+  dust             9 ->  20    -11
+  shattered       14 ->  53    -39
+  vomit           13 ->  27    -14
+  the              6 ->   9     -3
+  crumbs          19 ->  68    -49
+  a                2 ->   2     +0
+  greasy          17 ->  54    -37
+  dirt            12 ->  18     -6
+  beer            18 ->  37    -19
+  what             8 ->   8     +0
+
+HIGHER UNDER B
+  grease           5 ->   4     +1
+  thick           58 ->  14    +44
+  dirty           11 ->   6     +5
+  oil             28 ->  13    +15
+  bloodstains     82 ->  19    +63
+  rubbish         15 ->  10     +5
+  piles           20 ->  12     +8
+  ash             32 ->  16    +16
+  black           16 ->  11     +5
+  puddles         27 ->  17    +10
+  water           24 ->  15     +9
+  food             3 ->   3     +0
+  flour            7 ->   7     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  blood            1 ->   1     +0
+  what             7 ->  15     -8
+  dried           12 ->  21     -9
+  red             15 ->  25    -10
+
+HIGHER UNDER B
+  food             3 ->   3     +0
+  debris           4 ->   4     +0
+  a                2 ->   2     +0
+  trash           19 ->   8    +11
+  dirt             8 ->   6     +2
+  broken           5 ->   5     +0
+  grease          13 ->  10     +3
+  sawdust         14 ->  11     +3
+  garbage         23 ->  14     +9
+  vomit           22 ->  18     +4
+  black           18 ->  17     +1
+  water            9 ->   9     +0
+  mud             21 ->  19     +2
+  cigarette       16 ->  16     +0
+  wet             20 ->  20     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  blood            1 ->   3     -2
+  the              4 ->  49    -45
+  dried            6 ->  26    -20
+  animal          13 ->  96    -83
+  ash             12 ->  64    -52
+  human           16 ->  97    -81
+  oil             11 ->  33    -22
+  feces           21 ->  43    -22
+  chicken         18 ->  27     -9
+  red             17 ->  22     -5
+  soot            20 ->  23     -3
+  mud              7 ->   9     -2
+  what            14 ->  14     +0
+  black            8 ->  12     -4
+  grease           5 ->   6     -1
+
+HIGHER UNDER B
+  a                2 ->   1     +1
+  broken          23 ->   2    +21
+  glass           26 ->   5    +21
+  crumbs          88 ->  15    +73
+  white           22 ->  10    +12
+  dirt            15 ->   7     +8
+  spilled         19 ->  13     +6
+  water           10 ->   8     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

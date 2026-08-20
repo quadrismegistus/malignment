@@ -1,0 +1,911 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: He had a huge ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  cock             8 ->  89    -81
+  amount           3 ->   6     -3
+  following        7 ->  13     -6
+  penis            9 ->  60    -51
+  influence       10 ->  17     -7
+  collection       5 ->   7     -2
+  dick            13 -> 138   -125
+  erection        12 ->  32    -20
+  number          15 ->  53    -38
+  house           16 ->  19     -3
+  and             19 ->  47    -28
+  black           21 ->  83    -62
+  role            17 ->  18     -1
+
+HIGHER UNDER B
+  crush            1 ->   1     +0
+  grin            14 ->   2    +12
+  heart            6 ->   4     +2
+  ego             18 ->   8    +10
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  smile            3 ->   3     +0
+  appetite         6 ->  11     -5
+  following       11 ->  15     -4
+  personality      9 ->  13     -4
+  family          14 ->  25    -11
+  ego             10 ->  12     -2
+  influence        4 ->   4     +0
+  grin             8 ->   9     -1
+  range           20 ->  26     -6
+  presence        19 ->  23     -4
+  crush            7 ->   8     -1
+  collection      16 ->  20     -4
+  talent          17 ->  21     -4
+  fan             21 ->  22     -1
+  amount           5 ->   6     -1
+
+HIGHER UNDER B
+  impact           2 ->   1     +1
+  role            13 ->   5     +8
+  hand            15 ->  10     +5
+  passion         12 ->   7     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  head             7 ->  34    -27
+  heart            2 ->   4     -2
+  nose            12 ->  41    -29
+  problem         15 ->  40    -25
+  role            17 ->  54    -37
+  mouth           18 ->  51    -33
+  crush            5 ->  11     -6
+  hand            22 ->  45    -23
+  ego             10 ->  16     -6
+  number          21 ->  39    -18
+  family          19 ->  33    -14
+  fan             11 ->  18     -7
+  advantage       14 ->  19     -5
+  list            16 ->  17     -1
+
+HIGHER UNDER B
+  appetite         8 ->   5     +3
+  grin             9 ->   6     +3
+  interest        29 ->   9    +20
+  passion         27 ->   8    +19
+  impact           4 ->   2     +2
+  respect         83 ->  12    +71
+  amount           3 ->   3     +0
+  reputation      20 ->  10    +10
+  smile            1 ->   1     +0
+  sense           25 ->  14    +11
+  following       26 ->  15    +11
+  personality     13 ->  13     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  heart            1 ->   6     -5
+  head             9 ->  27    -18
+  smile            2 ->   2     +0
+  family          14 ->  18     -4
+  amount           6 ->   9     -3
+  effect          15 ->  28    -13
+  fan             17 ->  21     -4
+
+HIGHER UNDER B
+  following        7 ->   3     +4
+  impact           3 ->   1     +2
+  crush            4 ->   4     +0
+  influence        5 ->   5     +0
+  grin            10 ->   7     +3
+  role            12 ->  10     +2
+  dream           45 ->  14    +31
+  collection      11 ->  11     +0
+  advantage       27 ->  13    +14
+  success         35 ->  17    +18
+  appetite         8 ->   8     +0
+  personality     16 ->  15     +1
+  passion         21 ->  16     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  following        3 ->  18    -15
+  influence        2 ->   5     -3
+  collection       4 ->  12     -8
+  reputation       7 ->  19    -12
+  fan             13 ->  46    -33
+  ego              9 ->  22    -13
+  role            12 ->  16     -4
+  library         18 ->  71    -53
+  impact           1 ->   1     +0
+
+HIGHER UNDER B
+  heart            6 ->   2     +4
+  appetite         5 ->   3     +2
+  smile           10 ->   4     +6
+  headache        82 ->   9    +73
+  capacity        44 ->  11    +33
+  head            11 ->   6     +5
+  range           42 ->  17    +25
+  success         15 ->   8     +7
+  sense           29 ->  15    +14
+  problem         27 ->  21     +6
+  number          22 ->  20     +2
+  family          17 ->  14     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  impact           1 ->   7     -6
+  influence        6 ->  21    -15
+  following        5 ->  13     -8
+  role             8 ->  44    -36
+  hit              7 ->  22    -15
+  hand             9 ->  35    -26
+  day             10 ->  93    -83
+  year            15 -> 136   -121
+  part            14 ->  78    -64
+  fan             11 ->  43    -32
+  career          21 ->  97    -76
+  success         20 ->  68    -48
+  presence        12 ->  27    -15
+  personality     19 ->  24     -5
+  appetite        22 ->  23     -1
+
+HIGHER UNDER B
+  heart            2 ->   1     +1
+  cock            29 ->   4    +25
+  crush            3 ->   2     +1
+  collection      24 ->   5    +19
+  head            16 ->   6    +10
+  dick            90 ->   9    +81
+  smile            4 ->   3     +1
+  erection       108 ->  10    +98
+  ego             18 ->   8    +10
+  mouth           73 ->  14    +59
+  boner          116 ->  17    +99
+  nose            43 ->  16    +27
+  grin            13 ->  11     +2
+  beard           36 ->  19    +17
+  problem         27 ->  15    +12
+  family          30 ->  18    +12
+  amount          17 ->  12     +5
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  influence        2 ->   6     -4
+  impact           1 ->   2     -1
+  heart            3 ->  19    -16
+  role             9 ->  51    -42
+  house            6 ->  14     -8
+  effect          16 ->  47    -31
+  amount           5 ->   8     -3
+  nose            21 ->  94    -73
+  fan             18 ->  32    -14
+  and             20 ->  37    -17
+  family          12 ->  17     -5
+  head            11 ->  16     -5
+  sense           17 ->  26     -9
+  smile            8 ->  12     -4
+
+HIGHER UNDER B
+  collection       7 ->   1     +6
+  garden          44 ->   3    +41
+  reputation      31 ->   4    +27
+  library         34 ->  10    +24
+  mansion         69 ->  13    +56
+  problem         15 ->   7     +8
+  appetite        13 ->   9     +4
+  grin            41 ->  21    +20
+  beard           38 ->  20    +18
+  talent          33 ->  22    +11
+  audience        37 ->  23    +14
+  advantage       19 ->  18     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  number           4 ->   9     -5
+  amount           5 ->   8     -3
+  role             8 ->  19    -11
+  nose            15 ->  48    -33
+  and             16 ->  31    -15
+  range           20 ->  61    -41
+  family          14 ->  28    -14
+  effect          10 ->  11     -1
+  fan             13 ->  16     -3
+  head            17 ->  22     -5
+  ego             12 ->  12     +0
+  heart            7 ->   7     +0
+
+HIGHER UNDER B
+  following        2 ->   1     +1
+  influence        3 ->   3     +0
+  appetite         9 ->   5     +4
+  smile           11 ->   6     +5
+  reputation      30 ->  13    +17
+  responsibility  45 ->  18    +27
+  collection       6 ->   4     +2
+  grin            39 ->  17    +22
+  problem         18 ->  10     +8
+  personality     24 ->  14    +10
+  library         19 ->  15     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  impact           2 -> 130   -128
+  influence        7 -> 134   -127
+  following        8 -> 135   -127
+  smile            1 ->   7     -6
+  amount          10 ->  85    -75
+  grin            11 ->  73    -62
+  head            12 ->  59    -47
+  problem          9 ->  22    -13
+  role            15 ->  58    -43
+  heart            3 ->   3     +0
+  appetite        14 ->  34    -20
+  advantage       20 ->  86    -66
+  house           17 ->  36    -19
+  crush            6 ->  12     -6
+  ego              5 ->  11     -6
+  interest        19 ->  30    -11
+  family          13 ->  19     -6
+
+HIGHER UNDER B
+  temper          89 ->   1    +88
+  collection       4 ->   2     +2
+  bladder        146 ->   6   +140
+  passion         21 ->   4    +17
+  body            31 ->   5    +26
+  network         37 ->   8    +29
+  range           39 ->   9    +30
+  capacity       136 ->  13   +123
+  wedgie         168 ->  16   +152
+  wedding        150 ->  17   +133
+  nose            16 ->  10     +6
+  and             25 ->  14    +11
+  empire          90 ->  20    +70
+  ass             88 ->  21    +67
+  fear            41 ->  18    +23
+  imagination    103 ->  25    +78
+  cast            75 ->  23    +52
+  array           68 ->  24    +44
+  sense           18 ->  15     +3
+  personality     32 ->  26     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  smile            6 ->  10     -4
+  family           8 ->  11     -3
+  influence       12 ->  21     -9
+  headache         5 ->   8     -3
+  ____             4 ->   7     -3
+  advantage       13 ->  23    -10
+  ___             23 ->  44    -21
+  dream           21 ->  28     -7
+  house            9 ->   9     +0
+  ______          15 ->  17     -2
+  stomach         20 ->  26     -6
+  mouth           18 ->  19     -1
+  __________      22 ->  24     -2
+  sense           14 ->  14     +0
+
+HIGHER UNDER B
+  amount           2 ->   1     +1
+  appetite        11 ->   3     +8
+  pile            26 ->  13    +13
+  crush           10 ->   6     +4
+  number          17 ->  12     +5
+  reputation       7 ->   5     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  appetite         3 ->   5     -2
+  collection       5 ->   6     -1
+  smile           12 ->  32    -20
+  ______          10 ->  20    -10
+  ________        17 ->  46    -29
+  grin            20 ->  66    -46
+  _____           19 ->  54    -35
+  amount           2 ->   2     +0
+  problem          6 ->   7     -1
+  headache         7 ->   9     -2
+  reputation       8 ->  13     -5
+  ego             11 ->  16     -5
+  debt            15 ->  18     -3
+
+HIGHER UNDER B
+  crush            1 ->   1     +0
+  respect         27 ->  11    +16
+  workload        40 ->  15    +25
+  gash             9 ->   4     +5
+  talent          14 ->  10     +4
+  impact          13 ->   8     +5
+  success         16 ->  12     +4
+  garden          18 ->  14     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  crush            1 ->  11    -10
+  vocabulary       6 ->  75    -69
+
+HIGHER UNDER B
+  smile            2 ->   1     +1
+  amount           9 ->   3     +6
+  collection       4 ->   2     +2
+  house           58 ->   4    +54
+  grin             7 ->   5     +2
+  number          18 ->   8    +10
+  heart           13 ->   9     +4
+  nose            47 ->  10    +37
+  ____            60 ->  13    +47
+  and             80 ->  15    +65
+  hit             25 ->  12    +13
+  dinner          14 ->  14     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  smile            1 ->   6     -5
+  hand             6 ->  23    -17
+  role             7 ->  17    -10
+  amount           8 ->  12     -4
+  presence        14 ->  56    -42
+  part            15 ->  62    -47
+  following        9 ->   9     +0
+  passion         16 ->  37    -21
+  collection      19 ->  41    -22
+  head            22 ->  54    -32
+  personality     11 ->  18     -7
+  ego             13 ->  20     -7
+  sense           12 ->  19     -7
+  fan             21 ->  21     +0
+  impact           2 ->   3     -1
+
+HIGHER UNDER B
+  influence        4 ->   1     +3
+  heart            3 ->   2     +1
+  family          17 ->   5    +12
+  grin             5 ->   4     +1
+  social          50 ->   7    +43
+  Instagram       99 ->  13    +86
+  appetite        28 ->  11    +17
+  hit             20 ->  10    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  ego              3 ->  11     -8
+  problem          6 ->  15     -9
+  fan             13 ->  44    -31
+  family          12 ->  26    -14
+  advantage        7 ->   9     -2
+  reputation      18 ->  58    -40
+  collection      11 ->  16     -5
+  head            14 ->  17     -3
+  interest        20 ->  39    -19
+  and             19 ->  25     -6
+  effect          17 ->  21     -4
+  appetite        10 ->  12     -2
+  role            16 ->  18     -2
+  heart            5 ->   5     +0
+
+HIGHER UNDER B
+  impact           1 ->   1     +0
+  influence        4 ->   2     +2
+  smile            9 ->   3     +6
+  following       15 ->   7     +8
+  scar            30 ->   8    +22
+  presence        32 ->  10    +22
+  grudge          42 ->  13    +29
+  crush            8 ->   6     +2
+  house           21 ->  14     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  impact           1 ->   1     +0
+  influence        2 ->   8     -6
+  role             5 ->  11     -6
+  nose             9 ->  25    -16
+  part            14 ->  64    -50
+  following        4 ->   5     -1
+  ego             10 ->  27    -17
+  head             7 ->  10     -3
+  hand            19 ->  39    -20
+  effect          20 ->  46    -26
+  beard           17 ->  29    -12
+  amount          16 ->  22     -6
+  number          18 ->  19     -1
+
+HIGHER UNDER B
+  collection       8 ->   2     +6
+  crush           11 ->   4     +7
+  house           29 ->   9    +20
+  heart            3 ->   3     +0
+  success         15 ->   7     +8
+  library         30 ->  12    +18
+  mansion         73 ->  21    +52
+  advantage       34 ->  17    +17
+  reputation      25 ->  15    +10
+  fan             21 ->  16     +5
+  family          27 ->  18     +9
+  problem         32 ->  20    +12
+  smile            6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  impact           1 ->   4     -3
+  influence        2 ->   6     -4
+  role             5 ->  17    -12
+  problem          6 ->  12     -6
+  hit             11 ->  44    -33
+  effect          12 ->  42    -30
+  hand             9 ->  19    -10
+  amount           7 ->   9     -2
+  part            13 ->  49    -36
+  fan             15 ->  29    -14
+  following       17 ->  37    -20
+  success         20 ->  41    -21
+  ego              8 ->   8     +0
+
+HIGHER UNDER B
+  heart            3 ->   1     +2
+  smile            4 ->   2     +2
+  crush           10 ->   3     +7
+  appetite        14 ->   5     +9
+  grin            41 ->   7    +34
+  passion         16 ->  10     +6
+  mouth           19 ->  11     +8
+  personality     28 ->  14    +14
+  sense           26 ->  15    +11
+  head            18 ->  13     +5
+  reputation      24 ->  16     +8
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  smile            1 ->   2     -1
+  impact           3 ->   5     -2
+  fan             13 ->  27    -14
+  head             6 ->   9     -3
+  mouth           14 ->  26    -12
+  following        8 ->  11     -3
+  role            18 ->  43    -25
+  influence       12 ->  16     -4
+  ego              9 ->  13     -4
+  personality     19 ->  30    -11
+  grin             5 ->   7     -2
+  talent          20 ->  24     -4
+  problem         15 ->  17     -2
+
+HIGHER UNDER B
+  heart            2 ->   1     +1
+  collection      11 ->   4     +7
+  crush            4 ->   3     +1
+  scar            17 ->  12     +5
+  advantage       22 ->  14     +8
+  amount           7 ->   6     +1
+  chest           41 ->  19    +22
+  family          16 ->  10     +6
+  interest        21 ->  15     +6
+  number          36 ->  20    +16
+  list            24 ->  18     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  amount           9 ->  11     -2
+  problem         20 ->  27     -7
+  hand            16 ->  20     -4
+  smile            3 ->   3     +0
+  grin             6 ->   8     -2
+  collection       5 ->   5     +0
+  head            11 ->  12     -1
+  black           21 ->  22     -1
+  advantage       17 ->  18     -1
+  appetite         7 ->   7     +0
+
+HIGHER UNDER B
+  impact           2 ->   1     +1
+  beard            8 ->   6     +2
+  family          12 ->  10     +2
+  reputation      15 ->  15     +0
+  following       13 ->  13     +0
+  influence       14 ->  14     +0
+  heart            4 ->   4     +0
+  effect          18 ->  16     +2
+  ego             10 ->   9     +1
+  role            19 ->  17     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  smile            1 ->   4     -3
+  following        4 ->   7     -3
+  amount          11 ->  20     -9
+  head            14 ->  25    -11
+  hit             10 ->  12     -2
+  day             17 ->  23     -6
+  career          15 ->  19     -4
+  grin             9 ->  10     -1
+
+HIGHER UNDER B
+  heart            3 ->   1     +2
+  influence        6 ->   3     +3
+  crush            5 ->   5     +0
+  fan             12 ->   6     +6
+  impact           2 ->   2     +0
+  ego             19 ->  13     +6
+  collection      13 ->  11     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  heart            2 ->   6     -4
+  head            13 ->  81    -68
+  advantage        8 ->  17     -9
+  personality     17 ->  33    -16
+  ego             12 ->  24    -12
+  problem         11 ->  23    -12
+  impact           1 ->   1     +0
+  collection       9 ->  12     -3
+  house           15 ->  25    -10
+  mouth           14 ->  20     -6
+  family          18 ->  21     -3
+  fight           23 ->  26     -3
+  part            25 ->  29     -4
+  hand            16 ->  16     +0
+  smile            3 ->   4     -1
+
+HIGHER UNDER B
+  crush            7 ->   3     +4
+  following        6 ->   2     +4
+  success         28 ->   8    +20
+  fan             19 ->   9    +10
+  effect          22 ->  11    +11
+  number          37 ->  18    +19
+  appetite        24 ->  13    +11
+  hit             31 ->  19    +12
+  amount           5 ->   5     +0
+  role            10 ->  10     +0
+  grin            29 ->  22     +7
+  reputation      21 ->  14     +7
+  nose            20 ->  15     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  head            10 ->  16     -6
+  nose            13 ->  24    -11
+  crush            5 ->   6     -1
+  grin             4 ->   4     +0
+  collection       6 ->   8     -2
+  number          15 ->  21     -6
+  ego             19 ->  22     -3
+  amount           7 ->   9     -2
+  problem         16 ->  19     -3
+
+HIGHER UNDER B
+  impact           3 ->   1     +2
+  influence        9 ->   5     +4
+  effect          21 ->  12     +9
+  appetite         8 ->   7     +1
+  following       11 ->  10     +1
+  presence        20 ->  14     +6
+  sense           22 ->  17     +5
+  role            14 ->  13     +1
+  and             23 ->  20     +3
+  career          17 ->  15     +2
+  reputation      18 ->  18     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  role             6 ->  14     -8
+  smile            1 ->   2     -1
+  career          11 ->  34    -23
+  hit              7 ->  13     -6
+  part            17 ->  61    -44
+  following        4 ->   4     +0
+  fan             18 ->  33    -15
+  presence        16 ->  21     -5
+  hand            14 ->  16     -2
+  advantage       19 ->  26     -7
+  family          21 ->  24     -3
+  reputation      22 ->  25     -3
+  number          23 ->  29     -6
+  influence        5 ->   5     +0
+  grin             9 ->  11     -2
+
+HIGHER UNDER B
+  impact           2 ->   1     +1
+  appetite        20 ->   7    +13
+  amount          10 ->   8     +2
+  collection      15 ->  10     +5
+  passion         12 ->   9     +3
+  dream           44 ->  18    +26
+  crush            8 ->   6     +2
+  ego             30 ->  17    +13
+  heart            3 ->   3     +0
+  personality     24 ->  15     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  heart            3 ->   3     +0
+  grin             4 ->   8     -4
+  smile            1 ->   2     -1
+  head             9 ->  15     -6
+  personality     18 ->  30    -12
+  hand            15 ->  24     -9
+  ly              21 ->  33    -12
+  reputation      24 ->  35    -11
+  crush           10 ->  10     +0
+  role            13 ->  18     -5
+  influence        5 ->   6     -1
+  appetite        12 ->  14     -2
+  hit             19 ->  21     -2
+  problem         17 ->  19     -2
+
+HIGHER UNDER B
+  impact           2 ->   1     +1
+  following        6 ->   4     +2
+  collection       7 ->   5     +2
+  ego             11 ->   7     +4
+  house           22 ->  11    +11
+  effect          16 ->  12     +4
+  beard           23 ->  17     +6
+  family          20 ->  16     +4
+  cock            14 ->  13     +1
+  advantage       32 ->  20    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  heart            4 ->  46    -42
+  family          12 ->  24    -12
+  ego             15 ->  23     -8
+  reputation      13 ->  19     -6
+  part            17 ->  25     -8
+  beard           20 ->  44    -24
+  role             7 ->  10     -3
+  following        3 ->   6     -3
+  presence        21 ->  29     -8
+  number          19 ->  22     -3
+  talent          22 ->  26     -4
+  head            11 ->  11     +0
+
+HIGHER UNDER B
+  advantage       10 ->   3     +7
+  impact           1 ->   1     +0
+  collection       8 ->   5     +3
+  amount           5 ->   4     +1
+  appetite        14 ->   8     +6
+  lead            47 ->  14    +33
+  smile            2 ->   2     +0
+  success         29 ->  16    +13
+  crush            9 ->   9     +0
+  grin            23 ->  15     +8
+  problem         25 ->  18     +7
+  sense           24 ->  17     +7
+  passion         18 ->  13     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  part            13 ->  45    -32
+  career          15 ->  83    -68
+  fan              9 ->  18     -9
+  hit             10 ->  16     -6
+  amount           8 ->  10     -2
+  chip            16 ->  29    -13
+  personality     20 ->  91    -71
+  ly              17 ->  51    -34
+  ego             12 ->  15     -3
+  problem         11 ->  13     -2
+  contract        18 ->  43    -25
+  role             6 ->   7     -1
+  hand            14 ->  14     +0
+  fight           22 ->  35    -13
+  lead            21 ->  32    -11
+  fanbase         23 ->  28     -5
+  following        4 ->   5     -1
+
+HIGHER UNDER B
+  heart            2 ->   1     +1
+  smile            3 ->   2     +1
+  crush            5 ->   4     +1
+  appetite        93 ->  11    +82
+  house           44 ->  12    +32
+  grin            31 ->   9    +22
+  influence        7 ->   6     +1
+  collection      19 ->   8    +11
+  dream           43 ->  17    +26
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  crush            5 ->   6     -1
+  amount           9 ->  17     -8
+  appetite        16 ->  24     -8
+  ego             12 ->  16     -4
+  passion         20 ->  23     -3
+  head            19 ->  20     -1
+  and             21 ->  22     -1
+
+HIGHER UNDER B
+  smile            1 ->   1     +0
+  hand            15 ->   9     +6
+  lead            41 ->  18    +23
+  presence        17 ->  13     +4
+  hit              8 ->   7     +1
+  heart            3 ->   3     +0
+  grin            10 ->  10     +0
+  fan             13 ->  12     +1
+  advantage       26 ->  19     +7
+  following        4 ->   4     +0
+  role            11 ->  11     +0
+  impact           2 ->   2     +0
+  collection       6 ->   5     +1
+  nose            18 ->  15     +3
+  personality     14 ->  14     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  impact           2 ->   2     +0
+  heart            4 ->  10     -6
+  following        6 ->  12     -6
+  nose            10 ->  13     -3
+  ego             11 ->  32    -21
+  influence        5 ->   7     -2
+  head             3 ->   3     +0
+  reputation      14 ->  31    -17
+  crush            8 ->   9     -1
+  family          18 ->  39    -21
+  black           16 ->  25     -9
+  fan             20 ->  56    -36
+  mouth           15 ->  15     +0
+  beard           21 ->  21     +0
+
+HIGHER UNDER B
+  smile            1 ->   1     +0
+  grin            12 ->   4     +8
+  collection      17 ->   6    +11
+  scar            30 ->  14    +16
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  amount           5 ->   7     -2
+  grin             7 ->   9     -2
+  problem         14 ->  26    -12
+  head            10 ->  20    -10
+  appetite         9 ->  11     -2
+  advantage       17 ->  25     -8
+  ego             12 ->  17     -5
+  laugh           22 ->  23     -1
+  number          18 ->  21     -3
+  hole            20 ->  22     -2
+  smile            1 ->   2     -1
+
+HIGHER UNDER B
+  impact           2 ->   1     +1
+  influence        4 ->   3     +1
+  following        6 ->   5     +1
+  role            11 ->   8     +3
+  crush            8 ->   6     +2
+  effect          16 ->  10     +6
+  beard           27 ->  16    +11
+  collection      21 ->  13     +8
+  fan             23 ->  15     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  impact           1 ->   1     +0
+  following        8 ->  19    -11
+  influence        2 ->   3     -1
+  role            10 ->  34    -24
+  head             3 ->   4     -1
+  collection       4 ->   7     -3
+  brain           14 ->  38    -24
+  army            21 ->  80    -59
+  family          13 ->  28    -15
+  nose             7 ->   8     -1
+  reputation      17 ->  35    -18
+  part            18 ->  31    -13
+  library         15 ->  23     -8
+  heart            6 ->   6     +0
+  and             20 ->  26     -6
+  personality     11 ->  11     +0
+
+HIGHER UNDER B
+  appetite         5 ->   2     +3
+  amount          12 ->   5     +7
+  advantage       26 ->   9    +17
+  smile           47 ->  14    +33
+  success         44 ->  17    +27
+  range           28 ->  13    +15
+  passion         31 ->  16    +15
+  number          19 ->  12     +7
+  body            24 ->  18     +6
+  effect          16 ->  15     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

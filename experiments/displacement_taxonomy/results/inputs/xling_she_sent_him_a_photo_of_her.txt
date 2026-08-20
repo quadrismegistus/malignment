@@ -1,0 +1,916 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: She sent him a photo of her ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  naked            2 ->  59    -57
+  in               1 ->   7     -6
+  breasts          5 ->  85    -80
+  ass              8 -> 160   -152
+  bare             7 ->  55    -48
+  tits            11 -> 187   -176
+  breast          13 -> 144   -131
+  boobs           10 ->  65    -55
+  butt            19 -> 152   -133
+  on              18 ->  62    -44
+  wearing          6 ->   8     -2
+  face            12 ->  22    -10
+  son             14 ->  27    -13
+
+HIGHER UNDER B
+  with             4 ->   1     +3
+  smiling         35 ->   2    +33
+  holding         15 ->   4    +11
+  cat            137 ->   5   +132
+  family          78 ->   9    +69
+  and              3 ->   3     +0
+  new              9 ->   6     +3
+  children        99 ->  12    +87
+  playing         87 ->  11    +76
+  latest          61 ->  10    +51
+  cute            89 ->  16    +73
+  pet             98 ->  18    +80
+  beautiful       65 ->  17    +48
+  dog             32 ->  15    +17
+  daughter        17 ->  13     +4
+  own             16 ->  14     +2
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  and              2 ->   5     -3
+  with             4 ->  10     -6
+  face             6 ->  11     -5
+  daughter         7 ->  36    -29
+  son             10 -> 108    -98
+  on               8 ->  24    -16
+  holding         13 ->  72    -59
+  own             17 ->  44    -27
+  naked            5 ->   7     -2
+  baby            16 ->  33    -17
+  wearing         15 ->  28    -13
+
+HIGHER UNDER B
+  new              1 ->   1     +0
+  dog             12 ->   3     +9
+  cat             11 ->   4     +7
+  boobs           98 ->   8    +90
+  ass             86 ->  13    +73
+  breasts          9 ->   6     +3
+  legs            28 ->  14    +14
+  house           24 ->  12    +12
+  in               3 ->   2     +1
+  sister          35 ->  15    +20
+  feet            14 ->   9     +5
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  and              1 ->   4     -3
+  with             2 ->   5     -3
+  in               8 ->  28    -20
+  naked           11 ->  54    -43
+  son              4 ->   8     -4
+  mother          10 ->  17     -7
+  from            16 ->  69    -53
+  husband         12 ->  21     -9
+  on              14 ->  47    -33
+  wedding          9 ->  15     -6
+  father          19 ->  63    -44
+  face             7 ->  10     -3
+  baby            15 ->  27    -12
+  home            18 ->  30    -12
+  sister          22 ->  25     -3
+  hand            13 ->  14     -1
+
+HIGHER UNDER B
+  new              6 ->   1     +5
+  family           5 ->   2     +3
+  pet             37 ->   6    +31
+  dog             20 ->   7    +13
+  latest          29 ->   9    +20
+  cat             46 ->  11    +35
+  favorite        34 ->  13    +21
+  beautiful       24 ->  12    +12
+  handwriting     54 ->  18    +36
+  daughter         3 ->   3     +0
+  own             17 ->  16     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  in               1 ->   2     -1
+  naked            3 ->  26    -23
+  breasts          2 ->   5     -3
+  vagina          10 ->  34    -24
+  butt            15 ->  25    -10
+  feet             6 ->   9     -3
+  and              7 ->  10     -3
+  with             9 ->  11     -2
+  breast          12 ->  19     -7
+  holding         13 ->  20     -7
+  on              21 ->  31    -10
+  legs            17 ->  21     -4
+  baby            16 ->  17     -1
+
+HIGHER UNDER B
+  new              8 ->   1     +7
+  cat             24 ->   6    +18
+  hand            19 ->   7    +12
+  hands           31 ->  12    +19
+  face             4 ->   3     +1
+  smiling         27 ->  13    +14
+  beautiful       29 ->  18    +11
+  dog             20 ->  15     +5
+  wearing          5 ->   4     +1
+  daughter        18 ->  16     +2
+  bare            11 ->   8     +3
+  son             14 ->  14     +0
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  new              3 ->   7     -4
+  family           8 ->  18    -10
+  cat              9 ->  16     -7
+  friend          11 ->  29    -18
+  doing           15 ->  27    -12
+  with             2 ->   2     +0
+  husband         12 ->  15     -3
+  in               4 ->   4     +0
+  dog              7 ->  10     -3
+  brother         19 ->  26     -7
+  on              10 ->  11     -1
+  at              20 ->  25     -5
+  house           17 ->  19     -2
+
+HIGHER UNDER B
+  and              1 ->   1     +0
+  own             18 ->   6    +12
+  son              5 ->   3     +2
+  baby            13 ->   8     +5
+  hand            36 ->  12    +24
+  face            14 ->   9     +5
+  little          44 ->  17    +27
+  mom             25 ->  14    +11
+  daughter         6 ->   5     +1
+  wearing         24 ->  20     +4
+  sister          16 ->  13     +3
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  breasts          2 ->  18    -16
+  vagina           5 -> 108   -103
+  boobs           11 ->  61    -50
+  and              9 ->  13     -4
+  bare             8 ->  12     -4
+  ass             13 ->  38    -25
+  naked            7 ->  10     -3
+  body            15 ->  65    -50
+  butt            16 ->  66    -50
+  breast          19 ->  71    -52
+  daughter        20 ->  60    -40
+  son             24 ->  42    -18
+  tits            22 ->  34    -12
+  in               1 ->   2     -1
+  sitting         21 ->  21     +0
+
+HIGHER UNDER B
+  new              3 ->   1     +2
+  feet             6 ->   4     +2
+  face             4 ->   3     +1
+  legs            14 ->   5     +9
+  latest          28 ->   8    +20
+  hand            17 ->   7    +10
+  holding         18 ->   9     +9
+  smiling         43 ->  14    +29
+  hair            45 ->  16    +29
+  bikini          49 ->  19    +30
+  lips            46 ->  17    +29
+  with            10 ->   6     +4
+  baby            23 ->  15     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  daughter         2 ->  85    -83
+  son              5 -> 160   -155
+  new              3 ->  10     -7
+  baby             8 -> 155   -147
+  and              1 ->   3     -2
+  dog              9 ->  24    -15
+  husband         11 -> 163   -152
+  with             4 ->   4     +0
+  wedding         13 ->  83    -70
+  own             12 ->  52    -40
+  car             18 -> 130   -112
+  engagement      17 ->  79    -62
+  home            19 -> 115    -96
+  family          16 ->  55    -39
+  face             7 ->   8     -1
+  hand            15 ->  33    -18
+  cat             10 ->  11     -1
+
+HIGHER UNDER B
+  wearing         60 ->   1    +59
+  smiling         67 ->   2    +65
+  holding         63 ->   6    +57
+  naked           49 ->   7    +42
+  dressed        147 ->  13   +134
+  outfit          58 ->  12    +46
+  feet            38 ->   9    +29
+  sexy           174 ->  17   +157
+  standing       113 ->  15    +98
+  butt           160 ->  18   +142
+  looking        143 ->  19   +124
+  bikini-clad    175 ->  21   +154
+  lips            91 ->  20    +71
+  favorite        35 ->  14    +21
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  and              1 ->   3     -2
+  daughter         7 ->  38    -31
+  son              6 ->  21    -15
+  naked            5 ->   8     -3
+  breasts         10 ->  31    -21
+  mother          14 -> 129   -115
+  husband         17 -> 132   -115
+  face             8 ->  13     -5
+  as              13 ->  26    -13
+  on              20 ->  50    -30
+  house           18 ->  40    -22
+  friend          12 ->  24    -12
+  legs            11 ->  18     -7
+  dog             15 ->  19     -4
+
+HIGHER UNDER B
+  new              2 ->   1     +1
+  holding         24 ->   6    +18
+  breakfast      149 ->  12   +137
+  bruised         47 ->  10    +37
+  wearing          9 ->   5     +4
+  lunch          144 ->  15   +129
+  in               4 ->   2     +2
+  dinner         146 ->  16   +130
+  feet            19 ->   7    +12
+  food           151 ->  20   +131
+  current         81 ->  17    +64
+  cat             23 ->  11    +12
+  latest          35 ->  14    +21
+  sitting         16 ->   9     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  with             4 ->  88    -84
+  and              3 ->  16    -13
+  face             5 ->  31    -26
+  hand             9 ->  82    -73
+  son             13 -> 111    -98
+  friend          19 -> 158   -139
+  daughter        11 ->  35    -24
+  on               7 ->  25    -18
+  dog             18 ->  75    -57
+  breasts         14 ->  32    -18
+  latest          16 ->  33    -17
+
+HIGHER UNDER B
+  underwear       50 ->   1    +49
+  butt            20 ->   4    +16
+  naked            8 ->   5     +3
+  topless         82 ->   8    +74
+  wearing         10 ->   6     +4
+  bikini         168 ->  12   +156
+  lips            26 ->   9    +17
+  leg             36 ->  13    +23
+  half-naked     126 ->  17   +109
+  legs            17 ->  10     +7
+  bare            15 ->  11     +4
+  chest           28 ->  15    +13
+  sitting         30 ->  18    +12
+  standing        52 ->  20    +32
+  cat             22 ->  19     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  new              4 ->   7     -3
+  with             2 ->   4     -2
+  daughter         5 ->  11     -6
+  when             7 ->  12     -5
+  baby            16 ->  25     -9
+  at               8 ->  10     -2
+  sister          20 ->  39    -19
+  son             15 ->  17     -2
+  husband         14 ->  14     +0
+  beautiful       18 ->  24     -6
+  from            12 ->  13     -1
+  ____            17 ->  18     -1
+
+HIGHER UNDER B
+  and              1 ->   1     +0
+  wedding          9 ->   5     +4
+  to               6 ->   3     +3
+  in               3 ->   2     +1
+  on              13 ->   8     +5
+  favorite        28 ->  16    +12
+  that            11 ->   9     +2
+  as              10 ->   6     +4
+  before          19 ->  15     +4
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  mother           2 ->   5     -3
+  family           4 ->   4     +0
+  daughter         6 ->  13     -7
+  and              3 ->   3     +0
+  sister          13 ->  22     -9
+  son             10 ->  19     -9
+  dog              5 ->   6     -1
+  father          12 ->  18     -6
+  ____             9 ->  15     -6
+  parents         11 ->  11     +0
+  mother．         19 ->  57    -38
+  husband         16 ->  23     -7
+  last            20 ->  43    -23
+
+HIGHER UNDER B
+  new              1 ->   1     +0
+  cat              7 ->   2     +5
+  boyfriend       23 ->   8    +15
+  on              22 ->  10    +12
+  pet             14 ->   9     +5
+  with            15 ->  12     +3
+  at              17 ->  14     +3
+  ______          18 ->  16     +2
+  children        21 ->  17     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  and              2 ->   8     -6
+  in               3 ->   9     -6
+  latest          10 ->  16     -6
+  new              1 ->   3     -2
+  kids            13 ->  22     -9
+  beautiful       17 ->  26     -9
+  hand            15 ->  18     -3
+  with             7 ->  10     -3
+  pet             19 ->  19     +0
+  holding         11 ->  11     +0
+  son              5 ->   6     -1
+
+HIGHER UNDER B
+  daughter         6 ->   1     +5
+  cat              4 ->   2     +2
+  face             8 ->   4     +4
+  baby             9 ->   5     +4
+  dog             12 ->   7     +5
+  feet            20 ->  12     +8
+  children        14 ->  13     +1
+  smiling         22 ->  15     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  in               1 ->   3     -2
+  with             3 ->  13    -10
+  new              5 ->  29    -24
+  naked            6 ->  73    -67
+  face             7 ->  21    -14
+  bare             9 ->  54    -45
+  son             10 ->  42    -32
+  breasts         11 -> 111   -100
+  daughter        12 ->  66    -54
+  smiling         13 ->  50    -37
+  feet            14 ->  37    -23
+  own             16 ->  38    -22
+  baby            17 ->  55    -38
+  on              18 ->  34    -16
+  legs            20 ->  70    -50
+  butt            21 ->  85    -64
+  hand            19 ->  19     +0
+
+HIGHER UNDER B
+  holding          4 ->   1     +3
+  and              2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  and              1 ->   1     +0
+  to               8 ->  19    -11
+  as              11 ->  29    -18
+  face            13 ->  41    -28
+  that            16 ->  62    -46
+  holding         10 ->  18     -8
+  in               5 ->   7     -2
+  mother          18 ->  24     -6
+  at              14 ->  17     -3
+  child           17 ->  22     -5
+  daughter         2 ->   3     -1
+  family           9 ->  10     -1
+  son              6 ->   6     +0
+
+HIGHER UNDER B
+  husband          4 ->   2     +2
+  smiling         12 ->   8     +4
+  favorite        36 ->   9    +27
+  on               7 ->   5     +2
+  beautiful       37 ->  11    +26
+  cat             48 ->  13    +35
+  ex              50 ->  15    +35
+  new             19 ->  12     +7
+  sister          21 ->  16     +5
+  baby            15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  vagina           8 ->  35    -27
+  and              6 ->  16    -10
+  with            10 ->  17     -7
+  feet            12 ->  18     -6
+  pussy           16 ->  23     -7
+  butt             5 ->   7     -2
+  in               7 ->   9     -2
+
+HIGHER UNDER B
+  breasts          2 ->   1     +1
+  boobs           14 ->   5     +9
+  underwear       22 ->  11    +11
+  cleavage        20 ->  12     +8
+  tits            11 ->   6     +5
+  new              3 ->   3     +0
+  ass              9 ->   8     +1
+  body            15 ->  10     +5
+  breast          18 ->  15     +3
+  legs            17 ->  13     +4
+  face             4 ->   4     +0
+  chest           19 ->  19     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  son              4 ->   8     -4
+  daughter         2 ->   5     -3
+  baby             8 ->  21    -13
+  to              12 ->  63    -51
+  face             7 ->   9     -2
+  as              11 ->  23    -12
+  hand            16 ->  24     -8
+  on              10 ->  19     -9
+  own             14 ->  22     -8
+
+HIGHER UNDER B
+  new              3 ->   2     +1
+  family          15 ->   7     +8
+  wearing          9 ->   6     +3
+  beautiful       21 ->  11    +10
+  favorite        46 ->  14    +32
+  holding         24 ->  12    +12
+  standing        51 ->  16    +35
+  latest          13 ->  10     +3
+  with             6 ->   3     +3
+  and              1 ->   1     +0
+  painting        48 ->  18    +30
+  smiling         40 ->  17    +23
+  at              18 ->  13     +5
+  dog             22 ->  15     +7
+  in               5 ->   4     +1
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  breasts          8 ->  49    -41
+  in               3 ->   4     -1
+  face             5 ->   6     -1
+  feet             7 ->  16     -9
+  boobs           17 -> 128   -111
+  wearing          9 ->  15     -6
+  naked           12 ->  28    -16
+  daughter        10 ->  13     -3
+  holding          6 ->   7     -1
+  legs            18 ->  32    -14
+  tattoo          15 ->  24     -9
+  son             11 ->  11     +0
+  with             2 ->   3     -1
+
+HIGHER UNDER B
+  new              1 ->   1     +0
+  and              4 ->   2     +2
+  dog             14 ->   5     +9
+  cat             23 ->   9    +14
+  own             19 ->  10     +9
+  hand            13 ->   8     +5
+  foot            16 ->  12     +4
+  baby            20 ->  14     +6
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  own              7 ->   8     -1
+  in               4 ->   4     +0
+  as              11 ->  15     -4
+  face             8 ->   9     -1
+  naked           13 ->  18     -5
+  with             5 ->   5     +0
+  husband          9 ->  10     -1
+  new              6 ->   6     +0
+  dead            19 ->  23     -4
+  on              12 ->  13     -1
+
+HIGHER UNDER B
+  daughter         2 ->   2     +0
+  and              1 ->   1     +0
+  kids            20 ->  16     +4
+  dog             24 ->  20     +4
+  family          17 ->  17     +0
+  two             16 ->  12     +4
+  children        14 ->  11     +3
+  wearing         15 ->  14     +1
+  son              3 ->   3     +0
+  baby            10 ->   7     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  breasts          2 ->  20    -18
+  naked            3 ->  16    -13
+  legs            11 ->  34    -23
+  feet            10 ->  32    -22
+  ass             14 -> 125   -111
+  boobs           15 ->  79    -64
+  face             7 ->   9     -2
+  vagina          19 -> 115    -96
+  dog             12 ->  19     -7
+  cleavage        18 ->  43    -25
+  son             17 ->  35    -18
+  daughter        13 ->  22     -9
+  breast          22 ->  97    -75
+  new              8 ->   8     +0
+  bare            21 ->  29     -8
+
+HIGHER UNDER B
+  in               1 ->   1     +0
+  wearing          5 ->   2     +3
+  standing        16 ->   3    +13
+  holding          9 ->   4     +5
+  with             6 ->   5     +1
+  smiling         46 ->   7    +39
+  passport        40 ->  10    +30
+  taken          117 ->  13   +104
+  sitting         26 ->  11    +15
+  at              20 ->  12     +8
+  lying           36 ->  14    +22
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  and              1 ->   1     +0
+  husband          4 ->  11     -7
+  breasts          9 ->  28    -19
+  new              2 ->   5     -3
+  ass             15 ->  42    -27
+  daughter         3 ->   7     -4
+  naked           10 ->  18     -8
+  little          12 ->  19     -7
+  wedding         14 ->  22     -8
+  vagina          20 ->  31    -11
+  friend          23 ->  39    -16
+  foot            24 ->  40    -16
+  family          13 ->  14     -1
+  son              6 ->   6     +0
+  dead            22 ->  27     -5
+  on              16 ->  16     +0
+
+HIGHER UNDER B
+  face             8 ->   2     +6
+  dog             19 ->   8    +11
+  breast          67 ->  15    +52
+  hand            21 ->   9    +12
+  topless         29 ->  12    +17
+  tattoo          39 ->  21    +18
+  pregnant        43 ->  24    +19
+  pussy           33 ->  23    +10
+  with             5 ->   3     +2
+  mother          25 ->  20     +5
+  in               7 ->   4     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  breasts         11 ->  18     -7
+  naked           10 ->  14     -4
+  bare            17 ->  21     -4
+  in               2 ->   2     +0
+  at              18 ->  20     -2
+  wearing          7 ->   8     -1
+
+HIGHER UNDER B
+  smiling          9 ->   6     +3
+  and              1 ->   1     +0
+  with             3 ->   3     +0
+  new              5 ->   5     +0
+  face             4 ->   4     +0
+  beautiful       27 ->  16    +11
+  dog             20 ->  17     +3
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  in               1 ->   5     -4
+  and              3 ->  10     -7
+  baby            11 ->  74    -63
+  with             5 ->   9     -4
+  daughter         6 ->  21    -15
+  son             10 ->  46    -36
+  breasts         15 -> 116   -101
+  on              14 ->  29    -15
+  body            19 -> 128   -109
+  face             7 ->  14     -7
+  sitting         18 ->  25     -7
+  legs            17 ->  24     -7
+
+HIGHER UNDER B
+  new              2 ->   1     +1
+  smiling         31 ->   3    +28
+  feet             8 ->   2     +6
+  outfit          12 ->   6     +6
+  cat             33 ->   8    +25
+  holding          9 ->   7     +2
+  lunch          132 ->  13   +119
+  favorite        58 ->  15    +43
+  wearing          4 ->   4     +0
+  latest          20 ->  11     +9
+  bruised         43 ->  18    +25
+  hand            23 ->  17     +6
+  at              16 ->  16     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  self             1 ->   1     +0
+
+HIGHER UNDER B
+  and              4 ->   3     +1
+  in               2 ->   2     +0
+  vagina          15 ->  10     +5
+  naked            7 ->   6     +1
+  breasts          9 ->   7     +2
+  son              8 ->   8     +0
+  hand            12 ->  11     +1
+  passport        25 ->  13    +12
+  with             5 ->   5     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  in               3 ->   3     +0
+  naked           11 ->  24    -13
+  son              8 ->  18    -10
+  on              20 ->  39    -19
+  hand             7 ->  11     -4
+  wearing         16 ->  25     -9
+  butt            13 ->  23    -10
+  holding          9 ->  15     -6
+  breasts         17 ->  22     -5
+  hands           18 ->  19     -1
+  legs            14 ->  14     +0
+
+HIGHER UNDER B
+  new              1 ->   1     +0
+  cat             22 ->   4    +18
+  and              2 ->   2     +0
+  dog             15 ->   7     +8
+  face             5 ->   5     +0
+  favorite        30 ->  12    +18
+  latest          21 ->  13     +8
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  in               1 ->  22    -21
+  and              4 ->  44    -40
+  breasts          5 ->  20    -15
+  with             2 ->   3     -1
+  boobs            6 ->  43    -37
+  body            10 ->  75    -65
+  naked           12 -> 157   -145
+  tits            18 -> 167   -149
+  wearing         22 -> 173   -151
+  topless         23 ->  98    -75
+  bare            15 ->  36    -21
+  daughter         8 ->   9     -1
+  son             11 ->  19     -8
+  tattoo          16 ->  26    -10
+  baby            13 ->  18     -5
+  friend          17 ->  17     +0
+
+HIGHER UNDER B
+  new              3 ->   1     +2
+  feet             7 ->   2     +5
+  cat             20 ->   5    +15
+  passport       163 ->  15   +148
+  engagement      35 ->   6    +29
+  newborn         38 ->   8    +30
+  face             9 ->   4     +5
+  wrist           79 ->  16    +63
+  ring            39 ->  11    +28
+  car             32 ->  14    +18
+  wedding         14 ->   7     +7
+  ex              24 ->  13    +11
+  hand            21 ->  12     +9
+  dog             19 ->  10     +9
+  latest          37 ->  21    +16
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  and              2 ->  10     -8
+  new              1 ->   5     -4
+  son             10 ->  29    -19
+  wedding         13 ->  31    -18
+  daughter        11 ->  22    -11
+  face             4 ->   6     -2
+  smiling         16 ->  46    -30
+  holding         17 ->  45    -28
+  with             7 ->   7     +0
+  baby            24 ->  68    -44
+  hand             9 ->  12     -3
+  own             14 ->  26    -12
+  cleavage        18 ->  23     -5
+  family          23 ->  24     -1
+
+HIGHER UNDER B
+  naked            3 ->   1     +2
+  legs            12 ->   4     +8
+  underwear       25 ->   9    +16
+  crotch          53 ->  18    +35
+  leg             39 ->  19    +20
+  body            26 ->  14    +12
+  dog             19 ->  11     +8
+  breast          35 ->  21    +14
+  foot            29 ->  17    +12
+  passport        22 ->  15     +7
+  wearing         21 ->  16     +5
+  breasts          6 ->   2     +4
+  tattoo          15 ->  13     +2
+  in               8 ->   8     +0
+  cat             20 ->  20     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  in               4 ->  10     -6
+  daughter         5 ->   7     -2
+  with             3 ->   4     -1
+  face            11 ->  62    -51
+  on              10 ->  40    -30
+  smiling         12 ->  33    -21
+  from            18 ->  63    -45
+  beautiful       16 ->  38    -22
+  holding         14 ->  22     -8
+  that            17 ->  27    -10
+  and              2 ->   2     +0
+  son              7 ->  11     -4
+  family          13 ->  15     -2
+  to              15 ->  16     -1
+
+HIGHER UNDER B
+  newborn         25 ->   3    +22
+  latest           9 ->   5     +4
+  cat             28 ->   9    +19
+  new              1 ->   1     +0
+  friend          22 ->  12    +10
+  dog             24 ->  13    +11
+  car             40 ->  14    +26
+  niece           69 ->  21    +48
+  as               8 ->   6     +2
+  recent          58 ->  20    +38
+  child           50 ->  18    +32
+  newest          43 ->  17    +26
+  brother         31 ->  19    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  face             4 ->   6     -2
+  son              8 ->  17     -9
+  and              1 ->   2     -1
+  naked           12 ->  19     -7
+  daughter        19 ->  29    -10
+  on               9 ->  11     -2
+  from            18 ->  25     -7
+  breasts         17 ->  21     -4
+  with             3 ->   3     +0
+  bare            13 ->  13     +0
+
+HIGHER UNDER B
+  wearing          6 ->   5     +1
+  new              5 ->   4     +1
+  in               2 ->   1     +1
+  feet             7 ->   7     +0
+  dress           44 ->  23    +21
+  standing        14 ->   8     +6
+  legs            24 ->  14    +10
+  butt            26 ->  16    +10
+  looking         21 ->  18     +3
+  posing          28 ->  20     +8
+  cleavage        15 ->  12     +3
+  at              16 ->  15     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  in               4 ->  29    -25
+  and              1 ->   4     -3
+  son              2 ->   6     -4
+  naked            8 ->  25    -17
+  with             7 ->  14     -7
+  dead            10 ->  84    -74
+  husband         11 ->  36    -25
+  breasts          9 ->  24    -15
+  body            13 ->  26    -13
+  breast          18 ->  56    -38
+  face             5 ->   7     -2
+  daughter         6 ->   8     -2
+  mother          16 ->  31    -15
+  bare            19 ->  19     +0
+
+HIGHER UNDER B
+  new              3 ->   1     +2
+  cat             21 ->   2    +19
+  baby            14 ->   3    +11
+  dog             15 ->   5    +10
+  children        24 ->  12    +12
+  latest          54 ->  13    +41
+  house           20 ->  10    +10
+  pet             65 ->  16    +49
+  wedding         53 ->  18    +35
+  family          17 ->   9     +8
+  child           40 ->  17    +23
+  newborn         27 ->  15    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

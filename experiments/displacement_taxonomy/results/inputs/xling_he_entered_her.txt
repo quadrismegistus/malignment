@@ -1,0 +1,867 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: He entered her ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  and              1 ->   8     -7
+  pussy            3 ->  78    -75
+  mouth            4 ->  29    -25
+  cunt             5 ->  50    -45
+  from             7 ->  25    -18
+  as               6 ->  21    -15
+  with             8 ->  22    -14
+  ass             12 -> 111    -99
+  vagina          14 ->  70    -56
+  body             9 ->  18     -9
+  anus            20 ->  87    -67
+  again           17 ->  35    -18
+  life            18 ->  30    -12
+  house           10 ->  13     -3
+  in              11 ->  17     -6
+  apartment       21 ->  24     -3
+
+HIGHER UNDER B
+  room             2 ->   1     +1
+  slowly          41 ->   2    +39
+  world           22 ->   3    +19
+  space           94 ->   6    +88
+  hot             16 ->   4    +12
+  bedroom         19 ->   5    +14
+  mind            15 ->   7     +8
+  like            25 ->   9    +16
+  warm            40 ->  11    +29
+  dark            44 ->  15    +29
+  chamber         49 ->  16    +33
+  tight           26 ->  12    +14
+  garden          72 ->  20    +52
+  home            24 ->  14    +10
+  small           34 ->  19    +15
+  womb            13 ->  10     +3
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  mouth            3 ->   8     -5
+  and              1 ->   3     -2
+  office          10 ->  33    -23
+  room            11 ->  16     -5
+  bedroom         14 ->  24    -10
+  again            9 ->  12     -3
+  at              15 ->  20     -5
+  in               4 ->   7     -3
+  arms            20 ->  26     -6
+  through         18 ->  18     +0
+  as              13 ->  15     -2
+
+HIGHER UNDER B
+  body             5 ->   2     +3
+  gently          19 ->   6    +13
+  from             7 ->   4     +3
+  with             2 ->   1     +1
+  mind             6 ->   5     +1
+  slowly          12 ->  10     +2
+  eyes            24 ->  14    +10
+  carefully       36 ->  17    +19
+  life            17 ->  11     +6
+  heart           16 ->  13     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  mind             4 ->   7     -3
+  arms             5 ->   9     -4
+  side            10 ->  82    -72
+  and              9 ->  44    -35
+  house            8 ->   8     +0
+  home             6 ->   6     +0
+  in              13 ->  58    -45
+  head            16 ->  80    -64
+  body            14 ->  32    -18
+  into            15 ->  35    -20
+  heart           11 ->  15     -4
+  at              20 ->  77    -57
+  as              21 ->  74    -53
+  with            23 ->  69    -46
+  eyes            17 ->  34    -17
+  hand            19 ->  30    -11
+  life            18 ->  26     -8
+  thoughts        22 ->  22     +0
+
+HIGHER UNDER B
+  office           2 ->   1     +1
+  car             47 ->   5    +42
+  bedroom          3 ->   3     +0
+  own             35 ->  10    +25
+  apartment        7 ->   4     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  from             2 ->  11     -9
+  and              5 ->  12     -7
+  body             3 ->   4     -1
+  as              12 ->  16     -4
+  like            17 ->  25     -8
+  house            6 ->   8     -2
+  womb            23 ->  43    -20
+  with            14 ->  15     -1
+  in               4 ->   6     -2
+  mouth           20 ->  27     -7
+  into            19 ->  22     -3
+  without         22 ->  23     -1
+  on              21 ->  21     +0
+
+HIGHER UNDER B
+  room             1 ->   1     +0
+  apartment       11 ->   2     +9
+  home             9 ->   5     +4
+  through         13 ->  10     +3
+  name            16 ->  13     +3
+  life             7 ->   3     +4
+  bedroom         10 ->   9     +1
+  world           15 ->  14     +1
+  gently          25 ->  19     +6
+  heart           24 ->  18     +6
+  chamber         27 ->  20     +7
+  at              18 ->  17     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  life             1 ->  44    -43
+  as               5 ->  25    -20
+  body             7 ->  78    -71
+  in               4 ->  12     -8
+  house            2 ->   4     -2
+  world           15 -> 103    -88
+  at              13 ->  53    -40
+  heart           18 ->  67    -49
+  mind            20 ->  56    -36
+  mouth           17 ->  37    -20
+  first           10 ->  16     -6
+  school          21 ->  38    -17
+  family          24 ->  46    -22
+  with            22 ->  30     -8
+  father           8 ->  13     -5
+  and             23 ->  26     -3
+
+HIGHER UNDER B
+  room             6 ->   1     +5
+  name            12 ->   2    +10
+  apartment        9 ->   5     +4
+  home             3 ->   3     +0
+  own             56 ->   9    +47
+  office          11 ->   6     +5
+  bedroom         14 ->   7     +7
+  husband         36 ->  10    +26
+  into            16 ->   8     +8
+  phone           50 ->  14    +36
+  car             68 ->  15    +53
+  mother          19 ->  11     +8
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  world            2 ->   7     -5
+  mouth            4 ->  45    -41
+  pussy            7 ->  27    -20
+  and              8 ->  31    -23
+  from            10 ->  61    -51
+  in               6 ->  16    -10
+  with             9 ->  18     -9
+  through         12 ->  32    -20
+  body             5 ->   8     -3
+  without         18 ->  60    -42
+  like            19 ->  48    -29
+  as              20 ->  55    -35
+  office          17 ->  23     -6
+  vagina          21 ->  63    -42
+
+HIGHER UNDER B
+  room             3 ->   1     +2
+  bedroom         14 ->   3    +11
+  apartment       16 ->   4    +12
+  home            13 ->   5     +8
+  house           15 ->   6     +9
+  small           37 ->  10    +27
+  chamber         87 ->  11    +76
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  and              4 -> 107   -103
+  with             5 ->  35    -30
+  bedroom          3 ->   8     -5
+  in               8 ->  50    -42
+  as               9 ->  46    -37
+  house            2 ->   5     -3
+  again           12 ->  87    -75
+  father's        11 ->  23    -12
+  by              14 -> 125   -111
+  through         15 -> 106    -91
+  bed             16 ->  80    -64
+  body            17 ->  76    -59
+  for             19 -> 110    -91
+  cell            18 ->  48    -30
+  like            22 -> 120    -98
+  at              21 ->  60    -39
+  life            10 ->  10     +0
+  room             1 ->   2     -1
+
+HIGHER UNDER B
+  office           6 ->   1     +5
+  home            13 ->   4     +9
+  apartment        7 ->   3     +4
+  name            51 ->   7    +44
+  world           24 ->   6    +18
+  arms            42 ->   9    +33
+  womb            38 ->  11    +27
+  garden          37 ->  12    +25
+  chamber         20 ->  13     +7
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  in               4 ->  15    -11
+  mouth            5 ->  16    -11
+  house            3 ->   7     -4
+  and              9 ->  45    -36
+  as              10 ->  22    -12
+  bedroom          6 ->   8     -2
+  again           16 ->  43    -27
+  with            13 ->  19     -6
+  bed             17 ->  56    -39
+  at              18 ->  63    -45
+  into            12 ->  13     -1
+  for             22 ->  84    -62
+  from            21 ->  40    -19
+  class           20 ->  24     -4
+  life             2 ->   3     -1
+
+HIGHER UNDER B
+  room             1 ->   1     +0
+  apartment        7 ->   2     +5
+  name            15 ->   4    +11
+  chamber          8 ->   5     +3
+  studio          25 ->  10    +15
+  chambers        19 ->   9    +10
+  office          11 ->   6     +5
+  quarters        40 ->  12    +28
+  mitage          51 ->  14    +37
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  body             3 ->  10     -7
+  mouth            6 ->  55    -49
+  and              5 ->  11     -6
+  in               9 ->  25    -16
+  from            13 ->  58    -45
+  with            14 ->  51    -37
+  heart           12 ->  12     +0
+  eyes            16 ->  32    -16
+  slowly          20 -> 100    -80
+  as              18 ->  43    -25
+  again           21 -> 108    -87
+  bed             19 ->  33    -14
+  mind             7 ->   8     -1
+  life             1 ->   2     -1
+
+HIGHER UNDER B
+  room             2 ->   1     +1
+  house            4 ->   3     +1
+  home            10 ->   4     +6
+  office          17 ->   6    +11
+  apartment       15 ->   7     +8
+  world            8 ->   5     +3
+  bedroom         11 ->   9     +2
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  room             1 ->   1     +0
+  study            7 ->   8     -1
+  arms            10 ->  20    -10
+  life             9 ->  10     -1
+  company         12 ->  15     -3
+
+HIGHER UNDER B
+  office           4 ->   3     +1
+  home             5 ->   4     +1
+  house            2 ->   2     +0
+  apartment        6 ->   6     +0
+  garden           8 ->   7     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  room             1 ->   1     +0
+  office           3 ->   9     -6
+  mind             5 ->  14     -9
+  bedroom         10 ->  25    -15
+  life             6 ->  12     -6
+  tent            17 ->  24     -7
+  apartment       12 ->  15     -3
+  world           18 ->  21     -3
+
+HIGHER UNDER B
+  body             4 ->   2     +2
+  with             8 ->   4     +4
+  in              13 ->   7     +6
+  and             11 ->   5     +6
+  mouth            9 ->   6     +3
+  from            19 ->  10     +9
+  vagina          31 ->  16    +15
+  without         29 ->  19    +10
+  into            15 ->  11     +4
+  service         23 ->  18     +5
+  name            14 ->  13     +1
+  kingdom         21 ->  20     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  bedroom          3 ->  11     -8
+  room             1 ->   2     -1
+  office           4 ->   4     +0
+  home             5 ->   6     -1
+  mouth            7 ->  54    -47
+  as               9 ->  13     -4
+  and             11 ->  20     -9
+  mind            12 ->  34    -22
+  life            13 ->  15     -2
+
+HIGHER UNDER B
+  apartment        2 ->   1     +1
+  house            6 ->   3     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  mouth            1 ->  37    -36
+  in               4 ->  10     -6
+  body             5 ->  19    -14
+  life             6 -> 108   -102
+  bedroom          7 ->  80    -73
+  room             8 ->  98    -90
+  again            9 ->  27    -18
+  world           10 ->  83    -73
+  home            11 -> 103    -92
+  from            13 ->  34    -21
+  mind            14 ->  79    -65
+  as              12 ->  14     -2
+  pussy           15 ->  31    -16
+  chamber         16 ->  38    -22
+  house           18 -> 111    -93
+  through         19 ->  73    -54
+  on              20 ->  45    -25
+  eyes            23 ->  74    -51
+
+HIGHER UNDER B
+  gently          36 ->   1    +35
+  wet             52 ->   3    +49
+  and              3 ->   2     +1
+  easily          82 ->   5    +77
+  fully           54 ->   6    +48
+  softly          85 ->   7    +78
+  hungrily       113 ->   8   +105
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  office           5 ->   8     -3
+  room             1 ->   1     +0
+  father's         8 ->  28    -20
+  mouth           11 -> 102    -91
+  into             7 ->  15     -8
+  own             12 ->  47    -35
+  arms            10 ->  24    -14
+  in               6 ->  10     -4
+  mother's        15 ->  53    -38
+  bed             13 ->  32    -19
+  bedroom          2 ->   3     -1
+  and             16 ->  20     -4
+  body            14 ->  18     -4
+
+HIGHER UNDER B
+  home             3 ->   2     +1
+  life            17 ->   5    +12
+  apartment        9 ->   6     +3
+  kitchen         18 ->   7    +11
+  house            4 ->   4     +0
+  world           27 ->   9    +18
+  thoughts        70 ->  11    +59
+  bedchamber      21 ->  12     +9
+  car             24 ->  14    +10
+  at              20 ->  13     +7
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  from             7 ->  42    -35
+  with             6 ->  14     -8
+  mind             3 ->   4     -1
+  vagina          14 ->  33    -19
+  again            9 ->  13     -4
+  in               5 ->   8     -3
+  through          8 ->   9     -1
+  womb            18 ->  27     -9
+  and              4 ->   6     -2
+  as              11 ->  15     -4
+  by              21 ->  38    -17
+  life            20 ->  34    -14
+  like            19 ->  23     -4
+  mouth           16 ->  19     -3
+  home            12 ->  12     +0
+  house           17 ->  17     +0
+
+HIGHER UNDER B
+  room             1 ->   1     +0
+  bedroom         10 ->   3     +7
+  dreams          22 ->   7    +15
+  world           13 ->   5     +8
+  apartment       30 ->  11    +19
+  chambers        57 ->  18    +39
+  body             2 ->   2     +0
+  bed             42 ->  20    +22
+  chamber         46 ->  21    +25
+  dream           26 ->  16    +10
+  at              15 ->  10     +5
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  and              1 ->   7     -6
+  mouth            3 ->   9     -6
+  in               6 ->  13     -7
+  home             5 ->  10     -5
+  at               8 ->  16     -8
+  again           11 ->  27    -16
+  into            12 ->  25    -13
+  as              10 ->  17     -7
+  to              19 ->  53    -34
+  lips            13 ->  18     -5
+  on              22 ->  48    -26
+  bed             24 ->  65    -41
+  private         21 ->  38    -17
+  vagina          15 ->  22     -7
+  from            16 ->  20     -4
+  without         18 ->  21     -3
+  with             4 ->   5     -1
+  room             9 ->  11     -2
+
+HIGHER UNDER B
+  body             2 ->   1     +1
+  mind             7 ->   2     +5
+  world           20 ->   3    +17
+  life            31 ->   6    +25
+  heart           14 ->   4    +10
+  soul            27 ->   8    +19
+  dreams          71 ->  12    +59
+  bedroom         23 ->  14     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  and              2 ->   8     -6
+  mouth            4 ->  13     -9
+  from             5 ->  17    -12
+  house            3 ->   5     -2
+  body             6 ->  12     -6
+  pussy           17 ->  94    -77
+  again           14 ->  25    -11
+  with            13 ->  15     -2
+  without         18 ->  19     -1
+  in              10 ->  11     -1
+  womb            20 ->  26     -6
+  home             8 ->   9     -1
+
+HIGHER UNDER B
+  room             1 ->   1     +0
+  life            15 ->   3    +12
+  office           7 ->   2     +5
+  mind            12 ->   4     +8
+  bedroom          9 ->   6     +3
+  through         11 ->   7     +4
+  apartment       16 ->  10     +6
+  world           22 ->  14     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  and              4 ->   5     -1
+  in               9 ->  12     -3
+  as              11 ->  11     +0
+  house           15 ->  16     -1
+  mind            13 ->  13     +0
+  body             3 ->   3     +0
+
+HIGHER UNDER B
+  room             1 ->   1     +0
+  apartment        6 ->   6     +0
+  life            10 ->   8     +2
+  mouth            5 ->   4     +1
+  office          16 ->  15     +1
+  with             2 ->   2     +0
+  bedroom          7 ->   7     +0
+  from            12 ->  10     +2
+  slowly          14 ->  14     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  body             2 ->  14    -12
+  from             4 ->  13     -9
+  through          8 ->  21    -13
+  in               9 ->  20    -11
+  and              7 ->  15     -8
+  with             6 ->  12     -6
+  mouth            5 ->   9     -4
+  like            17 ->  29    -12
+  as              20 ->  48    -28
+  again           18 ->  23     -5
+  without         19 ->  26     -7
+
+HIGHER UNDER B
+  room             1 ->   1     +0
+  apartment        3 ->   2     +1
+  bedroom         14 ->   3    +11
+  home            12 ->   4     +8
+  bedchamber      38 ->   7    +31
+  office          16 ->   5    +11
+  house           15 ->   6     +9
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  life             2 ->   7     -5
+  with             7 ->  10     -3
+  heart            8 ->  15     -7
+  mind            11 ->  37    -26
+  chamber         16 ->  54    -38
+  door            14 ->  39    -25
+  as              13 ->  17     -4
+  and             12 ->  14     -2
+  body            15 ->  18     -3
+
+HIGHER UNDER B
+  house            3 ->   2     +1
+  room             1 ->   1     +0
+  home             6 ->   5     +1
+  office           5 ->   4     +1
+  bedroom          4 ->   3     +1
+  apartment        9 ->   6     +3
+  name            19 ->   9    +10
+  dorm            73 ->  13    +60
+  into            31 ->  11    +20
+  cell            25 ->  12    +13
+  in              10 ->   8     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  mouth            1 ->   1     +0
+  like            13 ->  18     -5
+  from             7 ->   7     +0
+  pussy            4 ->   5     -1
+  again            8 ->   8     +0
+  as              14 ->  14     +0
+  in              12 ->  12     +0
+  without         15 ->  17     -2
+  and              2 ->   3     -1
+
+HIGHER UNDER B
+  room             5 ->   4     +1
+  with             3 ->   2     +1
+  bedroom         17 ->  13     +4
+  vagina          11 ->  11     +0
+  body             6 ->   6     +0
+  office          16 ->  15     +1
+  apartment       19 ->  16     +3
+  mind             9 ->   9     +0
+  life            20 ->  20     +0
+  house           10 ->  10     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  room             2 ->   3     -1
+  house            3 ->  12     -9
+  bedroom          4 ->   7     -3
+  body             8 ->  58    -50
+  home             7 ->  10     -3
+  womb            13 ->  33    -20
+  into            14 ->  45    -31
+  in              15 ->  71    -56
+  heart           11 ->  13     -2
+  name            12 ->  14     -2
+
+HIGHER UNDER B
+  life             1 ->   1     +0
+  world            5 ->   2     +3
+  office           6 ->   4     +2
+  dreams          20 ->   8    +12
+  mind            10 ->   5     +5
+  shop            25 ->  11    +14
+  dream           16 ->   9     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  mouth            7 ->  15     -8
+  and              2 ->   4     -2
+  ass             15 ->  32    -17
+  slowly           5 ->   9     -4
+  like            13 ->  22     -9
+  fully           22 ->  48    -26
+  pussy           12 ->  18     -6
+  quickly         24 ->  38    -14
+  at              18 ->  20     -2
+  again            6 ->   8     -2
+  office          14 ->  16     -2
+  gently          19 ->  19     +0
+  body             4 ->   5     -1
+  so              23 ->  23     +0
+  in               8 ->  10     -2
+  bedroom         10 ->  13     -3
+
+HIGHER UNDER B
+  room             3 ->   1     +2
+  from             9 ->   3     +6
+  home            20 ->   6    +14
+  house           16 ->   7     +9
+  apartment       21 ->  12     +9
+  world           41 ->  17    +24
+  without         17 ->  14     +3
+  as              11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  and              2 ->  28    -26
+  mouth            3 -> 118   -115
+  womb             4 ->  96    -92
+  with             5 ->  63    -58
+  body             6 ->  43    -37
+  again           13 -> 153   -140
+  bedroom         10 ->  13     -3
+  in              11 ->  25    -14
+  like            17 -> 154   -137
+  mind            14 ->  36    -22
+  from            19 -> 128   -109
+  vagina          21 -> 147   -126
+  as              18 ->  72    -54
+  world           15 ->  32    -17
+  at              16 ->  38    -22
+  life            20 ->  35    -15
+
+HIGHER UNDER B
+  room             1 ->   1     +0
+  first           90 ->   6    +84
+  house            7 ->   2     +5
+  name           118 ->   7   +111
+  apartment       12 ->   3     +9
+  own            112 ->   8   +104
+  father's       124 ->   9   +115
+  junior         168 ->  12   +156
+  kitchen         72 ->  10    +62
+  mother's        67 ->  14    +53
+  studio         120 ->  15   +105
+  20ss           187 ->  16   +171
+  20s            179 ->  17   +162
+  new            134 ->  18   +116
+  office           9 ->   4     +5
+  dream           29 ->  11    +18
+  field          108 ->  19    +89
+  home             8 ->   5     +3
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  room             1 ->   2     -1
+  bedroom          3 ->   7     -4
+  house            6 ->  11     -5
+  body            10 ->  49    -39
+  mouth            9 ->  22    -13
+  bed             12 ->  64    -52
+  life             2 ->   3     -1
+  in              15 ->  74    -59
+  arms            14 ->  32    -18
+  with            11 ->  20     -9
+  apartment        5 ->   5     +0
+
+HIGHER UNDER B
+  world            4 ->   1     +3
+  home             7 ->   4     +3
+  dreams          23 ->  10    +13
+  heart           16 ->   9     +7
+  mind            13 ->   8     +5
+  chambers        22 ->  12    +10
+  office           8 ->   6     +2
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  in               8 ->  14     -6
+  and             11 ->  24    -13
+  with            12 ->  27    -15
+  office           7 ->   8     -1
+  into            14 ->  32    -18
+  at              17 ->  37    -20
+  body            16 ->  22     -6
+  apartment        6 ->   6     +0
+  mind            13 ->  16     -3
+  bedroom          2 ->   4     -2
+
+HIGHER UNDER B
+  life             3 ->   2     +1
+  house            4 ->   3     +1
+  room             1 ->   1     +0
+  home             5 ->   5     +0
+  hotel            9 ->   7     +2
+  car             18 ->  10     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  room             1 ->   2     -1
+  bedroom          3 ->  27    -24
+  office           4 ->   8     -4
+  apartment        8 ->  10     -2
+  body            13 ->  99    -86
+  studio          12 ->  25    -13
+  mind            14 ->  41    -27
+  home             7 ->   7     +0
+  first           11 ->  20     -9
+  and             10 ->  15     -5
+  cell            16 ->  40    -24
+  father          19 ->  36    -17
+  life            20 ->  22     -2
+  house            6 ->   6     +0
+
+HIGHER UNDER B
+  name             2 ->   1     +1
+  in               9 ->   3     +6
+  into             5 ->   4     +1
+  school          15 ->   5    +10
+  phone           87 ->   9    +78
+  address        115 ->  14   +101
+  a               48 ->  11    +37
+  dorm            41 ->  16    +25
+  through         21 ->  12     +9
+  car             17 ->  13     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  again            5 ->   9     -4
+  from             7 ->  14     -7
+  slowly           9 ->  12     -3
+  as              17 ->  20     -3
+  in              11 ->  13     -2
+  at              18 ->  22     -4
+  office          14 ->  17     -3
+  with             2 ->   3     -1
+  so              22 ->  26     -4
+  and              4 ->   4     +0
+  house            6 ->   7     -1
+  without         19 ->  21     -2
+
+HIGHER UNDER B
+  room             1 ->   1     +0
+  mind            10 ->   5     +5
+  heart           21 ->  16     +5
+  body            12 ->   8     +4
+  pussy           27 ->  19     +8
+  chamber         32 ->  23     +9
+  mouth            3 ->   2     +1
+  apartment        8 ->   6     +2
+  home            15 ->  11     +4
+  vagina          20 ->  18     +2
+  life            13 ->  10     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  life             2 ->  13    -11
+  bal              6 ->  23    -17
+  body             4 ->   7     -3
+  world            9 ->  47    -38
+  chamber         12 ->  36    -24
+  mind            11 ->  16     -5
+  as              13 ->  32    -19
+  in               7 ->   9     -2
+  service         10 ->  12     -2
+  garden          16 ->  30    -14
+  heart           14 ->  20     -6
+  family          18 ->  28    -10
+  at              17 ->  17     +0
+  mouth           20 ->  21     -1
+
+HIGHER UNDER B
+  house            3 ->   2     +1
+  room             1 ->   1     +0
+  office          23 ->   4    +19
+  home             5 ->   3     +2
+  bedroom          8 ->   5     +3
+  and             21 ->   8    +13
+  apartment       19 ->   6    +13
+  into            22 ->  11    +11
+  with            15 ->  10     +5
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

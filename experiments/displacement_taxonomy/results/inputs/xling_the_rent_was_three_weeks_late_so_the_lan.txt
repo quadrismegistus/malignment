@@ -1,0 +1,960 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: The rent was three weeks late, so the landlord decided to ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  throw            3 ->  40    -37
+  evict            1 ->   1     +0
+  sell             7 ->  49    -42
+  kick             9 ->  54    -45
+  come             5 ->  21    -16
+  put              4 ->  12     -8
+  auction          8 ->  20    -12
+  break           14 ->  57    -43
+  call            15 ->  34    -19
+  get             24 ->  69    -45
+  raise           18 ->  31    -13
+  let             16 ->  28    -12
+  sue             22 ->  39    -17
+  have            11 ->  13     -2
+  charge          20 ->  25     -5
+
+HIGHER UNDER B
+  send             6 ->   2     +4
+  withhold        51 ->   4    +47
+  terminate       37 ->   7    +30
+  serve           19 ->   6    +13
+  give            10 ->   5     +5
+  issue           48 ->  10    +38
+  file            46 ->  11    +35
+  turn            13 ->   9     +4
+  enter           42 ->  14    +28
+  go              12 ->   8     +4
+  do              30 ->  18    +12
+  cut             25 ->  19     +6
+  start           23 ->  17     +6
+  increase        21 ->  16     +5
+  use             17 ->  15     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  evict            1 ->   2     -1
+  throw            4 ->  21    -17
+  cut              6 ->  42    -36
+  lock             8 ->  28    -20
+  break           11 ->  31    -20
+  kick            18 ->  33    -15
+  call            19 ->  30    -11
+  do              20 ->  29     -9
+  let             17 ->  25     -8
+  raise           25 ->  34     -9
+  move            14 ->  19     -5
+  go              15 ->  18     -3
+  foreclose       10 ->  13     -3
+  send            13 ->  14     -1
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  serve           16 ->   3    +13
+  start           22 ->   6    +16
+  give             5 ->   5     +0
+  change           7 ->   7     +0
+  seize           43 ->  10    +33
+  have            21 ->   8    +13
+  forfeit         73 ->  20    +53
+  bring           35 ->  15    +20
+  repossess       23 ->  12    +11
+  issue           34 ->  17    +17
+  make            28 ->  22     +6
+  sue             24 ->  16     +8
+  sell             9 ->   9     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  charge           2 ->   4     -2
+  take             5 ->  20    -15
+  move             9 ->  18     -9
+  send             6 ->  12     -6
+  call            15 ->  36    -21
+  put             10 ->  21    -11
+  cancel          16 ->  32    -16
+  deduct          21 ->  47    -26
+  cut             23 ->  40    -17
+  ask             20 ->  33    -13
+  go              19 ->  30    -11
+  rent            14 ->  16     -2
+  do              22 ->  23     -1
+  add             12 ->  13     -1
+  increase         7 ->   8     -1
+
+HIGHER UNDER B
+  give             1 ->   1     +0
+  extend           4 ->   3     +1
+  pay              3 ->   2     +1
+  refund          13 ->   5     +8
+  compensate      59 ->   7    +52
+  waive           55 ->  11    +44
+  offer           32 ->  14    +18
+  fix             18 ->  10     +8
+  double          28 ->  17    +11
+  make             8 ->   6     +2
+  let             11 ->   9     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  evict            1 ->   1     +0
+  go               5 ->  25    -20
+  kick             7 ->  39    -32
+  do               6 ->  21    -15
+  come            16 ->  47    -31
+  check           19 ->  57    -38
+  visit            3 ->  10     -7
+  change          11 ->  23    -12
+  stop            15 ->  33    -18
+  break           18 ->  28    -10
+  pay              8 ->  16     -8
+  show            17 ->  24     -7
+  get             20 ->  32    -12
+  call             4 ->   8     -4
+  throw           26 ->  43    -17
+  have            24 ->  31     -7
+  give             9 ->  12     -3
+
+HIGHER UNDER B
+  raise           25 ->   4    +21
+  send            10 ->   3     +7
+  sue             13 ->   5     +8
+  deduct          63 ->   7    +56
+  take             2 ->   2     +0
+  charge          45 ->   9    +36
+  withhold        14 ->   6     +8
+  add             40 ->  14    +26
+  increase        36 ->  13    +23
+  cut             12 ->  11     +1
+  terminate       30 ->  19    +11
+  start           33 ->  20    +13
+  serve           21 ->  15     +6
+  put             23 ->  18     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  raise            2 ->   2     +0
+  do               5 ->  21    -16
+  give             3 ->   3     +0
+  what            10 -> 106    -96
+  fine             9 ->  34    -25
+  cut              4 ->   6     -2
+  cancel           8 ->  12     -4
+  get             16 ->  28    -12
+  go              19 ->  23     -4
+  keep            17 ->  18     -1
+  not             11 ->  11     +0
+  add             13 ->  14     -1
+
+HIGHER UNDER B
+  charge           1 ->   1     +0
+  increase         7 ->   4     +3
+  reduce          18 ->   7    +11
+  let             23 ->  10    +13
+  take             6 ->   5     +1
+  send            14 ->   9     +5
+  make            12 ->   8     +4
+  deduct          21 ->  15     +6
+  double          15 ->  13     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  evict            1 ->   3     -2
+  kick             5 ->  21    -16
+  change           3 ->  10     -7
+  lock             6 ->  15     -9
+  get             14 ->  39    -25
+  call             8 ->  19    -11
+  pay             18 ->  51    -33
+  stop            12 ->  24    -12
+  make            20 ->  43    -23
+  visit           13 ->  20     -7
+  serve           16 ->  26    -10
+  do              17 ->  31    -14
+  come             9 ->  16     -7
+  show            24 ->  33     -9
+  go               7 ->  14     -7
+  sell            26 ->  28     -2
+  enter           21 ->  23     -2
+  send             4 ->   7     -3
+  throw           29 ->  30     -1
+  file            10 ->  12     -2
+
+HIGHER UNDER B
+  terminate       25 ->   2    +23
+  take             2 ->   1     +1
+  end             22 ->   4    +18
+  raise           39 ->   8    +31
+  cut             19 ->   5    +14
+  put             15 ->   6     +9
+  repossess       34 ->  13    +21
+  increase        60 ->  17    +43
+  sue             23 ->  11    +12
+  give            11 ->   9     +2
+  break           28 ->  18    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  raise            2 ->   9     -7
+  evict            1 ->   4     -3
+  increase         5 ->  18    -13
+  throw            7 -> 107   -100
+  sell             9 ->  95    -86
+  cut             12 ->  54    -42
+  file            15 ->  92    -77
+  give             8 ->  10     -2
+  put             10 ->  12     -2
+  kick            13 ->  41    -28
+  make            16 ->  63    -47
+  keep            20 ->  91    -71
+  have            19 ->  62    -43
+  go              14 ->  25    -11
+  deduct          11 ->  14     -3
+  sue             18 ->  29    -11
+
+HIGHER UNDER B
+  take             4 ->   1     +3
+  charge           3 ->   2     +1
+  issue           96 ->   6    +90
+  apply           68 ->   5    +63
+  write           38 ->   7    +31
+  repossess       26 ->   8    +18
+  collect         21 ->  11    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  evict            2 ->  32    -30
+  sell             3 ->  22    -19
+  cut              1 ->   3     -2
+  kick             6 ->  35    -29
+  take             5 ->  14     -9
+  get             11 ->  51    -40
+  throw           12 ->  96    -84
+  punish          17 ->  66    -49
+  put             16 ->  55    -39
+  give            18 ->  45    -27
+  do              20 ->  52    -32
+  show            22 ->  49    -27
+  change          24 ->  34    -10
+  pay             19 ->  26     -7
+  go              13 ->  15     -2
+
+HIGHER UNDER B
+  charge          10 ->   2     +8
+  raise            4 ->   1     +3
+  check           25 ->   5    +20
+  calculate      103 ->  10    +93
+  impose          96 ->  13    +83
+  double          26 ->   8    +18
+  deduct          23 ->   9    +14
+  increase         8 ->   4     +4
+  fine            58 ->  17    +41
+  cancel          35 ->  16    +19
+  send            15 ->  11     +4
+  come             7 ->   6     +1
+  collect         14 ->  12     +2
+  enter           39 ->  19    +20
+  keep            34 ->  18    +16
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  A                1 ->  84    -83
+  ___              2 ->  54    -52
+  take             6 ->  20    -14
+  kick             7 ->  73    -66
+  do               9 ->  74    -65
+  send             8 ->  28    -20
+  put             10 ->  53    -43
+  cut             13 ->  91    -78
+  start           14 ->  56    -42
+  ____            15 ->  66    -51
+  turn            16 ->  27    -11
+
+HIGHER UNDER B
+  raise            5 ->   1     +4
+  impose          35 ->   2    +33
+  increase        12 ->   4     +8
+  evict            3 ->   3     +0
+  penalize        85 ->   9    +76
+  make            17 ->   6    +11
+  change          19 ->   7    +12
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  ____             8 ->  88    -80
+  charge           2 ->   2     +0
+  pay              3 ->   9     -6
+  ______          14 -> 101    -87
+  make            10 ->  15     -5
+  waive           19 ->  30    -11
+  raise           15 ->  19     -4
+  take            16 ->  18     -2
+
+HIGHER UNDER B
+  give             1 ->   1     +0
+  reduce          12 ->   6     +6
+  offer            7 ->   5     +2
+  deduct           9 ->   7     +2
+  increase         5 ->   3     +2
+  extend           4 ->   4     +0
+  adjust          55 ->  16    +39
+  double          18 ->  11     +7
+  keep            22 ->  14     +8
+  return          17 ->  13     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  ________         1 ->  13    -12
+  ______           2 ->  10     -8
+  ____             3 ->  15    -12
+  _____            7 ->  17    -10
+  change           5 ->   9     -4
+  do               9 ->  41    -32
+  _______         10 ->  31    -21
+  __________      11 ->  24    -13
+  ___              8 ->  19    -11
+  lock            12 ->  27    -15
+  _________       13 ->  40    -27
+  kick            18 ->  42    -24
+  give            16 ->  21     -5
+  take             6 ->   6     +0
+  throw           22 ->  66    -44
+  move            20 ->  59    -39
+  what            23 ->  75    -52
+  remove          19 ->  26     -7
+  sell            17 ->  18     -1
+
+HIGHER UNDER B
+  increase        34 ->   1    +33
+  charge          39 ->   2    +37
+  add             36 ->   4    +32
+  impose          72 ->   5    +67
+  evict            4 ->   3     +1
+  send            15 ->   7     +8
+  deduct          71 ->  12    +59
+  apply           52 ->  11    +41
+  raise           41 ->  14    +27
+  put             14 ->   8     +6
+  terminate       21 ->  16     +5
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  increase         2 ->   7     -5
+  charge           1 ->   1     +0
+  add              4 ->  17    -13
+  impose           7 ->  70    -63
+  raise            3 ->   6     -3
+  ____            11 ->  41    -30
+  deduct           9 ->  16     -7
+  hike            17 ->  39    -22
+  make            14 ->  24    -10
+  reduce          12 ->  20     -8
+  send            10 ->  10     +0
+  take            13 ->  14     -1
+  start           18 ->  22     -4
+  issue           16 ->  21     -5
+
+HIGHER UNDER B
+  give             5 ->   2     +3
+  evict           23 ->   3    +20
+  cut              8 ->   4     +4
+  break           89 ->   9    +80
+  kick            48 ->  11    +37
+  terminate       80 ->  13    +67
+  put              6 ->   5     +1
+  do              15 ->   8     +7
+  serve           52 ->  18    +34
+  end             59 ->  19    +40
+  call            27 ->  15    +12
+  sell            19 ->  12     +7
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  evict            1 ->  58    -57
+  take             4 ->  47    -43
+  put              6 ->  93    -87
+  move             7 ->  55    -48
+  kick             3 ->  12     -9
+  throw            5 ->  15    -10
+  go              10 ->  46    -36
+  sell             2 ->   7     -5
+  call            12 ->  99    -87
+  give             8 ->  13     -5
+  serve           14 ->  49    -35
+  send             9 ->  17     -8
+  come            17 ->  48    -31
+  raise           15 ->  26    -11
+  sue             20 ->  82    -62
+  lock            21 ->  86    -65
+  have            13 ->  19     -6
+  file            25 ->  91    -66
+  use             24 ->  37    -13
+  get             22 ->  27     -5
+  do              11 ->  11     +0
+
+HIGHER UNDER B
+  increase        23 ->   1    +22
+  change          18 ->   2    +16
+  drop            61 ->   3    +58
+  check           49 ->   4    +45
+  some           125 ->   6   +119
+  replace         76 ->   8    +68
+  enter           39 ->   9    +30
+  break           16 ->   5    +11
+  perform        113 ->  16    +97
+  visit           50 ->  14    +36
+  start           19 ->  10     +9
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  pay              8 ->  30    -22
+  sell             7 ->  17    -10
+  make             6 ->  13     -7
+  get             15 ->  28    -13
+  do              19 ->  35    -16
+  collect         11 ->  20     -9
+  foreclose       29 ->  55    -26
+  call            22 ->  37    -15
+  go              10 ->  12     -2
+  raise           24 ->  38    -14
+  cut             20 ->  29     -9
+  ask             21 ->  25     -4
+  charge          12 ->  15     -3
+  move             5 ->   9     -4
+  take             1 ->   2     -1
+
+HIGHER UNDER B
+  send             4 ->   1     +3
+  throw           14 ->   4    +10
+  cancel          18 ->   5    +13
+  evict           13 ->   7     +6
+  renegotiate    108 ->  16    +92
+  repossess       49 ->  14    +35
+  put              9 ->   8     +1
+  offer           16 ->  10     +6
+  have            17 ->  11     +6
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  evict            1 ->  75    -74
+  take             2 ->   7     -5
+  move             5 ->  61    -56
+  go              10 ->  53    -43
+  have             8 ->  21    -13
+  send            12 ->  66    -54
+  make             6 ->  16    -10
+  get              7 ->  17    -10
+  call            14 ->  25    -11
+  show            19 ->  67    -48
+  sell            18 ->  62    -44
+  break           16 ->  33    -17
+  come            15 ->  26    -11
+  use             17 ->  20     -3
+  kick             9 ->   9     +0
+
+HIGHER UNDER B
+  put             11 ->   1    +10
+  start           22 ->   2    +20
+  place           72 ->   3    +69
+  advertise       84 ->   6    +78
+  slash           99 ->   8    +91
+  file            41 ->  11    +30
+  lock            39 ->  13    +26
+  enter           23 ->  12    +11
+  cut             13 ->  10     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  sell             5 ->  12     -7
+  take             4 ->   4     +0
+  charge           3 ->   3     +0
+  kick             6 ->   9     -3
+  rent             9 ->  16     -7
+  call            18 ->  33    -15
+  have            19 ->  31    -12
+  make            13 ->  26    -13
+  go              17 ->  28    -11
+  throw           12 ->  23    -11
+  move            21 ->  25     -4
+  repossess       14 ->  21     -7
+  sue             11 ->  15     -4
+  put              8 ->   8     +0
+
+HIGHER UNDER B
+  evict            1 ->   1     +0
+  give             2 ->   2     +0
+  terminate       22 ->   7    +15
+  increase        29 ->  10    +19
+  cut             10 ->   6     +4
+  levy            32 ->  14    +18
+  serve           48 ->  20    +28
+  raise           15 ->  11     +4
+  start           16 ->  13     +3
+  hold            24 ->  18     +6
+  cancel          26 ->  19     +7
+  send             7 ->   5     +2
+  foreclose       20 ->  17     +3
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  evict            1 ->   2     -1
+  cut              2 ->   9     -7
+  throw            5 ->  21    -16
+  give             3 ->  10     -7
+  kick            10 ->  55    -45
+  come            13 ->  27    -14
+  turn            11 ->  20     -9
+  show            19 ->  44    -25
+  make            20 ->  32    -12
+  shut            14 ->  17     -3
+  have            12 ->  16     -4
+  go              21 ->  26     -5
+  sue             22 ->  25     -3
+  send             9 ->  13     -4
+
+HIGHER UNDER B
+  take             4 ->   1     +3
+  put              7 ->   3     +4
+  increase        16 ->   5    +11
+  change           6 ->   4     +2
+  start           23 ->   8    +15
+  keep            40 ->  11    +29
+  withhold        18 ->   6    +12
+  place           68 ->  18    +50
+  sell            24 ->  15     +9
+  raise           17 ->  12     +5
+  charge          15 ->  14     +1
+  foreclose       33 ->  19    +14
+  enter           41 ->  22    +19
+  lock             8 ->   7     +1
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  sell             4 ->   5     -1
+  take             6 ->   6     +0
+  move             7 ->   9     -2
+  have            15 ->  15     +0
+  go              17 ->  17     +0
+  throw           10 ->  11     -1
+  call             2 ->   2     +0
+  get             14 ->  14     +0
+  do              16 ->  16     +0
+  make             8 ->   8     +0
+  sue             18 ->  18     +0
+  let             19 ->  19     +0
+
+HIGHER UNDER B
+  evict            1 ->   1     +0
+  kick            12 ->  12     +0
+  send             9 ->   7     +2
+  cut             13 ->  13     +0
+  charge          11 ->  10     +1
+  give             3 ->   3     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  call             9 ->  23    -14
+  show             5 ->  11     -6
+  get             14 ->  24    -10
+  change          15 ->  22     -7
+  go              10 ->  14     -4
+  enter           16 ->  20     -4
+  break           22 ->  37    -15
+  check           13 ->  15     -2
+  throw           25 ->  96    -71
+  cut             23 ->  38    -15
+  kick             7 ->   9     -2
+  sell            17 ->  17     +0
+  inspect         24 ->  27     -3
+  move            11 ->  12     -1
+
+HIGHER UNDER B
+  evict            1 ->   1     +0
+  take             2 ->   2     +0
+  send             6 ->   4     +2
+  do               3 ->   3     +0
+  pay             21 ->   7    +14
+  put             19 ->   8    +11
+  start           29 ->  13    +16
+  visit            8 ->   6     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  put              4 ->   7     -3
+  sell             8 ->  19    -11
+  come            12 ->  26    -14
+  call             9 ->  14     -5
+  kick             5 ->   5     +0
+  send             7 ->   9     -2
+  move             3 ->   3     +0
+  turn            13 ->  22     -9
+  take             2 ->   2     +0
+  collect         20 ->  31    -11
+  throw           19 ->  27     -8
+  cut             15 ->  21     -6
+  let             16 ->  18     -2
+
+HIGHER UNDER B
+  evict            1 ->   1     +0
+  cancel          23 ->  10    +13
+  leave           27 ->  11    +16
+  break           21 ->  12     +9
+  rent            22 ->  15     +7
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  sell             3 ->   3     +0
+  have            12 ->  15     -3
+  get              6 ->  10     -4
+  make            11 ->  13     -2
+  throw            4 ->   5     -1
+  let             16 ->  19     -3
+  break           22 ->  30     -8
+  put              7 ->   9     -2
+  come            17 ->  20     -3
+  go              18 ->  24     -6
+  do              20 ->  23     -3
+  call            10 ->  11     -1
+  keep            23 ->  31     -8
+  give             8 ->   8     +0
+
+HIGHER UNDER B
+  evict            1 ->   1     +0
+  charge          13 ->   6     +7
+  terminate       37 ->  21    +16
+  kick             5 ->   4     +1
+  take             2 ->   2     +0
+  foreclose       30 ->  18    +12
+  repossess       31 ->  22     +9
+  send             9 ->   7     +2
+  cut             21 ->  16     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  evict            1 ->   2     -1
+  kick             3 ->  15    -12
+  throw           11 ->  43    -32
+  move            12 ->  48    -36
+  go               7 ->  24    -17
+  sell            13 ->  45    -32
+  come             6 ->  23    -17
+  get             10 ->  28    -18
+  have            17 ->  42    -25
+  check           20 ->  36    -16
+  put             15 ->  25    -10
+  break           24 ->  50    -26
+  do              14 ->  17     -3
+  make            22 ->  29     -7
+  raise           26 ->  35     -9
+  enter           27 ->  34     -7
+  call             9 ->  12     -3
+  send             8 ->  11     -3
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  finally         55 ->   4    +51
+  give             4 ->   3     +1
+  shut            31 ->   5    +26
+  start           30 ->   8    +22
+  lock            18 ->   6    +12
+  issue           65 ->  16    +49
+  file            34 ->  13    +21
+  pay             23 ->  10    +13
+  cut             16 ->   9     +7
+  serve           25 ->  19     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  evict            1 ->   7     -6
+  kick             3 ->  84    -81
+  take             5 ->  11     -6
+  lock             7 ->  33    -26
+  go               8 ->  14     -6
+  get              9 ->  31    -22
+  put             10 ->  28    -18
+  call            12 ->  34    -22
+  make            11 ->  21    -10
+  throw           13 ->  29    -16
+  not             14 ->  19     -5
+
+HIGHER UNDER B
+  add             21 ->   1    +20
+  shut            33 ->   4    +29
+  raise            2 ->   2     +0
+  increase         4 ->   3     +1
+  give             6 ->   5     +1
+  install         51 ->   6    +45
+  buy             61 ->   8    +53
+  charge          30 ->   9    +21
+  use             22 ->  10    +12
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  evict            1 ->   6     -5
+  come             4 ->  62    -58
+  put              3 ->  12     -9
+  throw            6 ->  87    -81
+  go               7 ->  48    -41
+  lock             8 ->  21    -13
+  call            12 ->  90    -78
+  do              11 ->  38    -27
+  change          10 ->  35    -25
+  foreclose       13 ->  61    -48
+  break           15 ->  75    -60
+  move            16 ->  73    -57
+  kick            17 ->  76    -59
+  let             18 ->  51    -33
+  get             19 ->  72    -53
+  enter           22 ->  50    -28
+  cut             21 ->  36    -15
+  repossess       14 ->  20     -6
+  sell            26 ->  66    -40
+  make            25 ->  64    -39
+  have            28 ->  65    -37
+  turn             5 ->   8     -3
+
+HIGHER UNDER B
+  charge          33 ->   1    +32
+  increase        47 ->   3    +44
+  send             9 ->   2     +7
+  add             65 ->   5    +60
+  impose          96 ->   7    +89
+  issue           61 ->  10    +51
+  fine            93 ->  11    +82
+  raise           23 ->   9    +14
+  apply           58 ->  13    +45
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  change           7 ->  20    -13
+  go              10 ->  46    -36
+  call             3 ->   6     -3
+  kick             5 ->   7     -2
+  sell             6 ->  13     -7
+  cut             14 ->  65    -51
+  have             9 ->  14     -5
+  give             8 ->  12     -4
+  get             17 ->  45    -28
+  put             16 ->  26    -10
+  lock            15 ->  18     -3
+  do              21 ->  38    -17
+  move            20 ->  36    -16
+  remove          22 ->  32    -10
+  turn            23 ->  34    -11
+
+HIGHER UNDER B
+  terminate       11 ->   2     +9
+  evict            1 ->   1     +0
+  serve           18 ->   5    +13
+  visit           30 ->   9    +21
+  hold            29 ->  10    +19
+  throw            4 ->   4     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  sell             6 ->  12     -6
+  get              9 ->  14     -5
+  do              11 ->  15     -4
+  make            13 ->  29    -16
+  give             7 ->   8     -1
+  kick             4 ->   5     -1
+  collect         16 ->  19     -3
+  go              15 ->  16     -1
+  throw            3 ->   3     +0
+
+HIGHER UNDER B
+  evict            1 ->   1     +0
+  send             5 ->   4     +1
+  change          17 ->  10     +7
+  sue             20 ->  13     +7
+  take             2 ->   2     +0
+  start           14 ->  11     +3
+  put             10 ->   7     +3
+  call            12 ->   9     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  sue              2 ->  19    -17
+  send             5 ->  17    -12
+  call             7 ->  14     -7
+  rent            18 ->  83    -65
+  take             3 ->   7     -4
+  go               8 ->  13     -5
+  kick            17 ->  34    -17
+  charge          22 ->  60    -38
+  put             21 ->  38    -17
+  do              26 ->  54    -28
+  skip            25 ->  31     -6
+  have             9 ->  10     -1
+  collect         19 ->  25     -6
+  break           13 ->  18     -5
+  move            27 ->  28     -1
+
+HIGHER UNDER B
+  foreclose       10 ->   1     +9
+  raise           11 ->   3     +8
+  double          14 ->   6     +8
+  track           57 ->  11    +46
+  turn            16 ->   8     +8
+  repossess        4 ->   4     +0
+  sell            12 ->   9     +3
+  not             35 ->  15    +20
+  throw            6 ->   5     +1
+  come            15 ->  12     +3
+  enter           20 ->  16     +4
+  contact         29 ->  20     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  evict            1 ->  11    -10
+  throw            3 ->  14    -11
+  kick             4 ->   9     -5
+  put             12 ->  56    -44
+  move            15 ->  40    -25
+  go              14 ->  28    -14
+  sell             9 ->  12     -3
+  call            13 ->  18     -5
+  give            16 ->  26    -10
+  make            18 ->  35    -17
+  have            11 ->  13     -2
+  foreclose       23 ->  47    -24
+  do              17 ->  19     -2
+  get              7 ->   8     -1
+  cut             21 ->  30     -9
+  start           22 ->  24     -2
+
+HIGHER UNDER B
+  send             6 ->   1     +5
+  just            28 ->   4    +24
+  change          10 ->   3     +7
+  charge          20 ->   7    +13
+  take             2 ->   2     +0
+  break            8 ->   6     +2
+  come             5 ->   5     +0
+  increase        47 ->  17    +30
+  show            26 ->  15    +11
+  turn            19 ->  10     +9
+  lock            24 ->  16     +8
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  evict            1 ->   1     +0
+  throw            3 ->  10     -7
+  cut              4 ->  13     -9
+  sue              9 ->  21    -12
+  fire            12 ->  26    -14
+  go              14 ->  40    -26
+  kick             7 ->  11     -4
+  use             18 ->  35    -17
+  sell            19 ->  27     -8
+  put             10 ->  12     -2
+  do              17 ->  19     -2
+
+HIGHER UNDER B
+  take             2 ->   2     +0
+  charge           6 ->   3     +3
+  increase         8 ->   4     +4
+  raise            5 ->   5     +0
+  break           30 ->   9    +21
+  foreclose       16 ->   6    +10
+  terminate       34 ->  15    +19
+  cancel          46 ->  17    +29
+  send            13 ->   7     +6
+  repossess       33 ->  16    +17
+  add             39 ->  20    +19
+  withhold        24 ->  18     +6
+  give            11 ->   8     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

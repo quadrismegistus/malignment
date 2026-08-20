@@ -1,0 +1,155 @@
+Below are 22 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r2778ad6  confrontation vs resignation
+      A-favored verbs keep her in the office speaking assertively (demanded, confronted, announced, told, asked, explained), while B-favored verbs move toward her leaving the job outright (quit, resigned) or performing a quieter procedural act (handed, sat, offered, requested, informed).
+      A: demanded, confronted, announced, told, asked, explained
+      B: quit, resigned, handed, sat, offered, requested, informed
+
+r2858982  deference vs demand
+      Under A she asks, says, hands over, or gives something, while under B she demands, threatens, takes, or throws something, a shift from polite request to forceful assertion.
+      A: asked, said, handed, gave
+      B: demanded, threatened, took, threw
+
+r29c29ee  formality of the reporting verb
+      A favors more formal, Latinate reporting verbs (informed, announced, requested, reported, asked) while B favors plainer, more common speech verbs (told, said, demanded).
+      A: informed, announced, requested, reported, asked
+      B: told, said, demanded
+
+r2b518ce  violent escalation
+      Under B, 'slapped' jumps from a distant 52nd place to a top-ten 9th, introducing a physically violent completion with no comparable-magnitude counterpart anywhere on the A side, all of whose verbs stay purely verbal or administrative.
+      A: told, explained, informed, announced, was, handed
+      B: slapped
+
+r3f2d60c  speech act vs bodily stance
+      A confines itself entirely to verbs of speaking or handing something over, while B introduces verbs of physical positioning that precede or replace speech (sat, stood, waited) along with the manner adverb 'calmly'.
+      A: told, said, asked, informed, announced, explained, handed, gave
+      B: sat, stood, waited, calmly
+
+r4b91d3b  desperate outburst vs composed demand
+      A's top words describe an emotional, often tearful outburst (cried, begged, shouted, screamed, apologized), while B's top words describe a composed, transactional request or claim (asked, explained, claimed, handed).
+      A: cried, begged, shouted, screamed, apologized
+      B: asked, explained, claimed, handed
+
+r4ed367f  resignation vs demand
+      A favors the specific vocabulary of formally quitting -- resigned, tendered, handed -- while B favors the vocabulary of confronting the manager over pay or terms -- demanded, fired -- with 'tendered' collapsing from 10th to 75th under B and 'demanded' rising from 5th to 1st.
+      A: resigned, tendered, handed
+      B: demanded, fired
+
+r5653d01  informing/exiting vs negotiating
+      The A-favoured words describe her making a statement or leaving (told, said, announced, informed, handed [in her notice], resigned) while the B-favoured words describe her seeking something from the manager instead (asked, requested, demanded), a clean split between declarative/exit acts and negotiation acts.
+      A: told, said, announced, informed, handed, resigned
+      B: asked, requested, demanded
+
+r5eff518  transaction to stasis
+      The transactional exchange verbs 'gave' and 'handed' fall sharply while the stative body-position verbs 'sat,' 'was,' and 'laid,' which describe where the body simply is rather than what it does to someone, rise sharply.
+      A: gave, handed
+      B: sat, was, laid
+
+r690e274  procedural vs charged verbs
+      A's verbs are flat, procedural reporting terms for the encounter (said, told, asked, announced, filed, reported, accused), while B's verbs are emotionally charged, spanning both confrontational assertion (demanded, confronted) and desperate supplication (begged, pleaded).
+      A: said, told, asked, announced, filed, reported, accused
+      B: demanded, confronted, begged, pleaded
+
+r8a50476  confrontational vs neutral register
+      A's most prominent verbs describe assertive or emotionally charged confrontation (demanded, confronted, yelled, complained) while B's are calmer, more procedural communication verbs (said, asked, told, announced).
+      A: demanded, confronted, yelled, complained
+      B: said, asked, told, announced
+
+r8ba934d  polite inquiry vs forceful confrontation
+      A favors calm, deferential speech verbs (asked, inquired) while B favors escalated, forceful confrontation or decisive action verbs (demanded, threatened, slammed, threw, declared, quit).
+      A: asked, inquired
+      B: demanded, threatened, slammed, threw, declared, quit
+
+r8dba94f  confrontation vs resignation
+      Under A she voices a demand or grievance while remaining in the job (asked, requested, announced), while under B she ends the employment relationship outright (resigned, quit, handed in her notice, gave notice).
+      A: asked, requested, announced, laid
+      B: resigned, quit, handed, gave
+
+r97f5b29  informing vs demanding
+      A favors verbs where she communicates or reports her situation (told, explained, informed, announced), while B favors verbs where she makes a request or demand of the manager (asked, requested, demanded, stated).
+      A: told, explained, informed, announced
+      B: asked, requested, demanded, stated
+
+r99facdf  blunt exit vs composed procedure
+      A favors blunt, often terminal speech or grievance acts (told, said, announced, complained, quit, gave) while B favors calmer, more procedural communicative acts (presented, requested, addressed, delivered, handed) including the adverb 'calmly'.
+      A: told, said, announced, complained, quit, gave
+      B: presented, requested, addressed, delivered, handed, calmly
+
+r9e07667  grievance vs assertive action
+      A resolves the walk-in as a verb of speech-report or complaint (said, told, asked, explained, complained), while B resolves it as a more assertive, formal, or decisive act (demanded, declared, announced, delivered, presented, requested, informed, fired, laid, handed).
+      A: asked, said, told, explained, complained
+      B: demanded, declared, announced, delivered, presented, requested, informed, fired, laid, handed
+
+ra44a835  courtesy vs confrontation
+      asked, told, handed, and offered -- calm, procedural speech or transfer acts -- sit under A, while demanded and threatened -- assertive or coercive acts -- sit under B.
+      A: asked, told, handed, offered
+      B: demanded, threatened
+
+ra69fc50  plain report vs forceful demand
+      Under A the scene resolves into a neutral report of what was said (told, said, asked, informed, announced, explained), while under B the same moment sharpens into a forceful assertion (demanded, declared).
+      A: told, said, asked, informed, announced, explained
+      B: demanded, declared
+
+radd2b4a  direct confrontation vs institutional channel
+      A-favored verbs (told, said, demanded, yelled) describe direct, in-the-moment, often forceful speech aimed at the manager, while B-favored verbs (complained, reported, informed, accused, pleaded) describe more formal or procedural speech acts, several of which (reported, informed) suggest going through an official channel rather than confronting the manager directly.
+      A: told, said, demanded, yelled
+      B: complained, reported, informed, accused, pleaded
+
+rc5878a6  physical handover cluster
+      B foregrounds handing something over (presented, handed, delivered) far more heavily than A, which has only 'gave' in that register.
+      A: gave
+      B: presented, handed, delivered
+
+rcec55ba  giving vs taking
+      Where A ends the scene with her handing or giving something over, B ends it with her taking something, the same transaction read in the opposite direction.
+      A: handed, gave
+      B: took
+
+rcfe51b7  spoken confrontation vs administrative departure
+      A favours verbs of direct speech during the confrontation (said, told, asked, demanded, begged, explained), while B favours verbs naming the formal act of leaving the job (quit, tendered, announced) rather than what was said in the moment.
+      A: said, told, asked, demanded, begged, explained
+      B: quit, tendered, announced
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

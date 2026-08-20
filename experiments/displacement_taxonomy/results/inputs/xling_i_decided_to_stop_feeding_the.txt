@@ -1,0 +1,871 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: I decided to stop feeding the ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  baby             1 ->   9     -8
+  dog              5 ->  30    -25
+  fish             6 ->  12     -6
+  dogs             7 -> 112   -105
+  kids            10 ->  71    -61
+  little          12 -> 124   -112
+  cats             3 ->   5     -2
+  other           11 ->  52    -41
+  babies          17 -> 122   -105
+  ducks           16 ->  75    -59
+  pigeons         14 ->  48    -34
+  animals          8 ->  13     -5
+  poor            15 ->  26    -11
+
+HIGHER UNDER B
+  cat              4 ->   1     +3
+  troll           30 ->   3    +27
+  bird             9 ->   4     +5
+  parrot         113 ->   6   +107
+  birds            2 ->   2     +0
+  trolls          19 ->   7    +12
+  hungry          13 ->   8     +5
+  monkeys         61 ->  15    +46
+  cows            18 ->  10     +8
+  deer            46 ->  14    +32
+  kitten          20 ->  11     +9
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  baby             1 ->  15    -14
+  kids             4 ->  20    -16
+  children         7 ->  19    -12
+  beast           13 -> 112    -99
+  fire            14 ->  82    -68
+  animals          3 ->   7     -4
+  family          20 -> 105    -85
+  pigs            17 ->  57    -40
+  horses          23 ->  81    -58
+  rats            15 ->  17     -2
+  chickens        11 ->  13     -2
+  trolls          16 ->  18     -2
+  dogs            12 ->  12     +0
+
+HIGHER UNDER B
+  squirrels       19 ->   2    +17
+  birds            2 ->   1     +1
+  ducks            9 ->   3     +6
+  dog              5 ->   4     +1
+  bird            21 ->   8    +13
+  pigeons         22 ->  10    +12
+  cat              6 ->   5     +1
+  sparrows       155 ->  16   +139
+  deer            42 ->  14    +28
+  mice            18 ->  11     +7
+  fish             8 ->   6     +2
+  cats            10 ->   9     +1
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  fish             2 ->   6     -4
+  birds            4 ->   7     -3
+  rats             8 ->  13     -5
+  cats             9 ->  12     -3
+  baby             3 ->   4     -1
+  poor            18 ->  29    -11
+  other           20 ->  40    -20
+  animals          7 ->   8     -1
+  food            17 ->  21     -4
+  little          15 ->  20     -5
+  bird            12 ->  19     -7
+  tree            10 ->  15     -5
+  chickens        14 ->  17     -3
+
+HIGHER UNDER B
+  dog              1 ->   1     +0
+  horse           11 ->   2     +9
+  ducks           13 ->   9     +4
+  carrot          16 ->  10     +6
+  elephant        24 ->  11    +13
+  bread           31 ->  18    +13
+  cow             21 ->  14     +7
+  horses          19 ->  16     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  fish             4 ->  11     -7
+  cats             6 ->  12     -6
+  cat              7 ->  24    -17
+  trolls           9 ->  52    -43
+  animals         10 ->  16     -6
+  kids            13 ->  26    -13
+  chickens        11 ->  20     -9
+  baby            17 ->  54    -37
+  little          18 ->  38    -20
+  deer            16 ->  21     -5
+
+HIGHER UNDER B
+  squirrels        2 ->   1     +1
+  pigeons          3 ->   3     +0
+  seagulls        19 ->   5    +14
+  ducks            5 ->   4     +1
+  raccoons        12 ->   6     +6
+  wildlife        26 ->   8    +18
+  geese           15 ->   9     +6
+  squirrel        20 ->  10    +10
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  ducks            8 ->  43    -35
+  squirrels        9 ->  45    -36
+  cats             1 ->   4     -3
+  birds            2 ->   6     -4
+  fish             7 ->   9     -2
+  rabbits         14 ->  20     -6
+  pigeons         16 ->  23     -7
+  kids            15 ->  18     -3
+  little          17 ->  19     -2
+
+HIGHER UNDER B
+  animals         13 ->   5     +8
+  dog              5 ->   2     +3
+  baby             4 ->   3     +1
+  cat              3 ->   1     +2
+  chickens        10 ->   8     +2
+  animal         108 ->  12    +96
+  pet             68 ->  17    +51
+  horse           39 ->  15    +24
+  rabbit          20 ->  13     +7
+  kitten          23 ->  16     +7
+  horses          18 ->  14     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  squirrels        2 ->   3     -1
+  trolls           5 -> 134   -129
+  horses          13 ->  31    -18
+  dogs             9 ->  14     -5
+  kids            10 ->  15     -5
+  cat              7 ->   9     -2
+  deer            14 ->  22     -8
+  family          16 ->  80    -64
+  dog             12 ->  19     -7
+  blog            21 ->  83    -62
+  animals         15 ->  33    -18
+  crows           20 ->  39    -19
+  wild            18 ->  30    -12
+  cats             6 ->   7     -1
+  geese           19 ->  23     -4
+
+HIGHER UNDER B
+  birds            1 ->   1     +0
+  pigeons         17 ->   4    +13
+  seagulls        53 ->  10    +43
+  rabbits         44 ->  11    +33
+  stray           29 ->  12    +17
+  feral           32 ->  16    +16
+  homeless        24 ->  13    +11
+  baby             8 ->   6     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  fish             1 ->  13    -12
+  dogs             3 ->  15    -12
+  birds            4 ->  20    -16
+  dog              2 ->   4     -2
+  chickens         8 ->  21    -13
+  ducks           11 -> 154   -143
+  animals          6 ->   9     -3
+  rats            14 -> 129   -115
+  cows            13 ->  93    -80
+  kids            16 ->  70    -54
+  milk            15 ->  45    -30
+  mice            19 ->  46    -27
+  babies          17 ->  31    -14
+  bird            18 ->  23     -5
+
+HIGHER UNDER B
+  cat              5 ->   1     +4
+  cats             7 ->   2     +5
+  chicken         12 ->   3     +9
+  animal          23 ->   5    +18
+  cold           144 ->   8   +136
+  cow             31 ->  10    +21
+  my             131 ->  12   +119
+  pet             58 ->  11    +47
+  seeds           52 ->  14    +38
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  cats             3 ->   4     -1
+  dogs             5 ->  10     -5
+  mice            11 ->  35    -24
+  birds            1 ->   2     -1
+  worms            9 ->  19    -10
+  rabbits         13 ->  24    -11
+  kittens         14 ->  26    -12
+  kids             8 ->  11     -3
+  dog              6 ->   7     -1
+
+HIGHER UNDER B
+  cat              2 ->   1     +1
+  baby            15 ->   6     +9
+  fish             4 ->   3     +1
+  chickens         7 ->   5     +2
+  trolls         136 ->  15   +121
+  pigs            45 ->  20    +25
+  children        27 ->  14    +13
+  animals         12 ->   8     +4
+  family          24 ->  12    +12
+  ducks           10 ->   9     +1
+  goldfish        22 ->  18     +4
+  plants          20 ->  16     +4
+  bird            16 ->  13     +3
+  ants            17 ->  17     +0
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  fish             1 ->   9     -8
+  birds            2 -> 104   -102
+  dogs             4 -> 167   -163
+  animals          3 ->  48    -45
+  cats             5 -> 166   -161
+  dog              6 -> 144   -138
+  kids             7 -> 130   -123
+  cat              8 -> 147   -139
+  chickens         9 -> 192   -183
+  cows            11 -> 142   -131
+  baby            12 -> 124   -112
+  children        14 -> 185   -171
+  milk            13 ->  98    -85
+  horses          15 -> 174   -159
+  rabbits         16 -> 172   -156
+  horse           17 -> 116    -99
+  food            10 ->  10     +0
+
+HIGHER UNDER B
+  big             57 ->   1    +56
+  my             139 ->   2   +137
+  6              132 ->   3   +129
+  the            147 ->   4   +143
+  here           197 ->   6   +191
+  heifer         165 ->   8   +157
+  people          27 ->   5    +22
+  street          39 ->   7    +32
+  characters     131 ->  11   +120
+  while          155 ->  12   +143
+  every          174 ->  16   +158
+  part           143 ->  17   +126
+  sea            100 ->  13    +87
+  new            120 ->  15   +105
+  exotics        162 ->  18   +144
+  city            89 ->  19    +70
+  him            194 ->  22   +172
+  time           156 ->  23   +133
+  last           113 ->  20    +93
+  2               76 ->  21    +55
+  garbage         18 ->  14     +4
+  trash           31 ->  24     +7
+  animal          29 ->  25     +4
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  cat              1 ->   5     -4
+  dog              2 ->   2     +0
+  chicken         10 ->  13     -3
+  kids            17 ->  51    -34
+  kitten          15 ->  37    -22
+  cow             16 ->  38    -22
+  baby             4 ->   6     -2
+  cats             5 ->   8     -3
+  mice            14 ->  19     -5
+  bird            13 ->  15     -2
+
+HIGHER UNDER B
+  birds            3 ->   1     +2
+  ducks            9 ->   3     +6
+  fish             8 ->   4     +4
+  dogs             7 ->   7     +0
+  pigeons         25 ->  12    +13
+  caterpillars    32 ->  14    +18
+  bees            27 ->  17    +10
+  cows            12 ->  11     +1
+  pigs            11 ->  10     +1
+  animals         21 ->  16     +5
+  little          19 ->  18     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  pigeons          3 ->   6     -3
+  birds            1 ->   2     -1
+  squirrels        5 ->  11     -6
+  cat              9 ->  14     -5
+  dogs            13 ->  22     -9
+  deer            14 ->  21     -7
+  animals         12 ->  17     -5
+  seagulls        10 ->  13     -3
+  chickens         7 ->   7     +0
+
+HIGHER UNDER B
+  ducks            2 ->   1     +1
+  fish             4 ->   3     +1
+  local           18 ->  10     +8
+  goldfish        15 ->   9     +6
+  raccoons        11 ->   8     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  squirrels        2 ->   3     -1
+  deer             3 ->  10     -7
+  ducks            4 ->   8     -4
+  bees            10 ->  30    -20
+  wild             8 ->  16     -8
+  geese            9 ->  15     -6
+
+HIGHER UNDER B
+  birds            1 ->   1     +0
+  fish             5 ->   2     +3
+  hummingbirds     6 ->   4     +2
+  chickens        13 ->   6     +7
+  cat             23 ->   7    +16
+  raccoons        28 ->   9    +19
+  pigeons          7 ->   5     +2
+  cats            19 ->  11     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  dog              4 ->  43    -39
+  birds            1 ->   5     -4
+  cats             5 ->   6     -1
+  animals          6 ->  27    -21
+  beast            7 ->  73    -66
+  dogs             8 ->  49    -41
+  kids             9 ->  41    -32
+  cat              2 ->   4     -2
+  troll           10 ->  11     -1
+  baby            12 ->  17     -5
+  bird            15 ->  34    -19
+  ducks           11 ->  12     -1
+  horse           17 ->  36    -19
+  monster         19 ->  59    -40
+  chickens        20 ->  52    -32
+  horses          18 ->  20     -2
+  fire            22 ->  45    -23
+  little          21 ->  29     -8
+  children        23 ->  47    -24
+  bear            26 ->  50    -24
+  mice            25 ->  32     -7
+
+HIGHER UNDER B
+  fish             3 ->   1     +2
+  plants          27 ->   2    +25
+  trolls          13 ->   3    +10
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  dogs             2 ->  10     -8
+  cats             5 ->  16    -11
+  pigs            10 ->  40    -30
+  baby             4 ->   7     -3
+  rats            11 ->  28    -17
+  cat              3 ->   4     -1
+  animals          9 ->  13     -4
+  goats           14 ->  66    -52
+  dog              1 ->   1     +0
+  babies          20 -> 112    -92
+  kids            15 ->  36    -21
+  mice            19 ->  37    -18
+  monkeys         18 ->  30    -12
+  rabbits         12 ->  12     +0
+
+HIGHER UNDER B
+  rabbit          17 ->   2    +15
+  wolf            53 ->  11    +42
+  bird            13 ->   6     +7
+  puppy           16 ->   9     +7
+  fish             7 ->   3     +4
+  kitten          51 ->  14    +37
+  parrot          60 ->  18    +42
+  elephant        67 ->  19    +48
+  deer            34 ->  20    +14
+  chicken         22 ->  15     +7
+  animal          24 ->  17     +7
+  snake           43 ->  21    +22
+  chickens         8 ->   8     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  squirrels        3 ->   6     -3
+  wild             7 ->  22    -15
+  chickens         9 ->  25    -16
+  deer            10 ->  23    -13
+  homeless        16 ->  57    -41
+  dogs            11 ->  20     -9
+  chipmunks       18 ->  31    -13
+  animals         13 ->  14     -1
+  fish             8 ->   9     -1
+
+HIGHER UNDER B
+  pigeons          2 ->   2     +0
+  cats             4 ->   3     +1
+  cat              6 ->   4     +2
+  seagulls        14 ->   7     +7
+  kids            24 ->  11    +13
+  birds            1 ->   1     +0
+  baby            19 ->  12     +7
+  bears           23 ->  13    +10
+  ducks            5 ->   5     +0
+  bird            20 ->  15     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  kids             4 ->  23    -19
+  trolls           7 ->  31    -24
+  machine         11 ->  30    -19
+  children        15 ->  50    -35
+  cats             1 ->   3     -2
+  little          12 ->  25    -13
+  baby            13 ->  35    -22
+  poor            21 ->  76    -55
+  world           19 ->  58    -39
+  bears           18 ->  29    -11
+  dogs             5 ->   9     -4
+  old             17 ->  22     -5
+  dog              3 ->   6     -3
+  pigs            10 ->  12     -2
+  troll           23 ->  24     -1
+
+HIGHER UNDER B
+  pigeons         20 ->   4    +16
+  birds            6 ->   2     +4
+  chickens         8 ->   5     +3
+  ducks           14 ->   8     +6
+  cat              2 ->   1     +1
+  fish             9 ->   7     +2
+  stray           48 ->  13    +35
+  squirrel        38 ->  14    +24
+  squirrels       31 ->  15    +16
+  bird            43 ->  18    +25
+  homeless        24 ->  11    +13
+  monster         25 ->  17     +8
+  mice            22 ->  16     +6
+  animals         16 ->  10     +6
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  fish             1 ->   1     +0
+  little           7 ->  16     -9
+  babies          11 ->  29    -18
+  kids            13 ->  41    -28
+  girls           17 ->  53    -36
+  worms           10 ->  18     -8
+  rats            15 ->  26    -11
+  mice            14 ->  19     -5
+  dog              6 ->   7     -1
+  dogs             8 ->  10     -2
+  cat              4 ->   6     -2
+
+HIGHER UNDER B
+  ducks            9 ->   4     +5
+  pigeons         25 ->   9    +16
+  fire            43 ->  15    +28
+  animals         12 ->   8     +4
+  birds            2 ->   2     +0
+  ants            22 ->  11    +11
+  squirrels       23 ->  13    +10
+  kittens         20 ->  12     +8
+  baby             3 ->   3     +0
+  cats             5 ->   5     +0
+  chickens        16 ->  14     +2
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  beast            4 ->   8     -4
+  fire            11 ->  14     -3
+  monster         19 ->  27     -8
+  trolls          17 ->  23     -6
+  little          12 ->  16     -4
+  children        21 ->  25     -4
+  poor            20 ->  22     -2
+
+HIGHER UNDER B
+  fish             1 ->   1     +0
+  baby             7 ->   5     +2
+  cats            10 ->  10     +0
+  cat              8 ->   7     +1
+  rats             9 ->   9     +0
+  dog              5 ->   4     +1
+  animals          2 ->   2     +0
+  plants          15 ->  13     +2
+  mice            14 ->  11     +3
+  birds            6 ->   6     +0
+  ducks           16 ->  15     +1
+  squirrels       23 ->  18     +5
+  dogs             3 ->   3     +0
+  kids            13 ->  12     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  squirrels        3 ->   4     -1
+  birds            2 ->   3     -1
+  cats             5 ->  15    -10
+  ducks            7 ->  13     -6
+  pigeons          6 ->  10     -4
+  cat             10 ->  22    -12
+  dogs            13 ->  53    -40
+  animals          8 ->   9     -1
+  chickens        15 ->  29    -14
+  turtles         16 ->  24     -8
+  wild            14 ->  16     -2
+  dog             19 ->  36    -17
+
+HIGHER UNDER B
+  trolls           1 ->   1     +0
+  troll            4 ->   2     +2
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  cat              3 ->   4     -1
+  poor            10 ->  30    -20
+  rats             7 ->  16     -9
+  little          12 ->  31    -19
+  beast           15 ->  48    -33
+  chickens        13 ->  18     -5
+  animals          8 ->  13     -5
+  snake           16 ->  29    -13
+  birds            6 ->   7     -1
+  dogs             5 ->   6     -1
+  mice            14 ->  15     -1
+  pigeons         17 ->  19     -2
+  horse           19 ->  21     -2
+  kids             9 ->   9     +0
+
+HIGHER UNDER B
+  baby             4 ->   2     +2
+  dog              1 ->   1     +0
+  cats            11 ->   5     +6
+  chicken         46 ->   8    +38
+  chick          133 ->  12   +121
+  plants          58 ->  14    +44
+  rabbit          23 ->  11    +12
+  bird            18 ->  10     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  fire             9 ->  10     -1
+  snake           18 ->  27     -9
+  rats            14 ->  14     +0
+  ducks           19 ->  26     -7
+  fish             4 ->   5     -1
+  birds           12 ->  12     +0
+  baby            13 ->  13     +0
+  mice            15 ->  16     -1
+  beast            1 ->   2     -1
+  squirrels       20 ->  20     +0
+  bear            10 ->  11     -1
+  cat              8 ->   8     +0
+
+HIGHER UNDER B
+  trolls           5 ->   3     +2
+  dog              2 ->   1     +1
+  monster          7 ->   6     +1
+  dogs            11 ->   9     +2
+  ego             29 ->  18    +11
+  horses          24 ->  19     +5
+  cats            17 ->  17     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  chickens         4 ->  19    -15
+  cats             5 ->  20    -15
+  fish             7 ->  27    -20
+  baby            10 ->  52    -42
+  dogs            11 ->  43    -32
+  kids            12 ->  70    -58
+  horses          14 ->  60    -46
+  cat             13 ->  24    -11
+  little          16 ->  38    -22
+  dog             19 ->  39    -20
+  wild             8 ->   8     +0
+  goats           22 ->  75    -53
+  ducks            2 ->   4     -2
+  rats            18 ->  23     -5
+  animals         21 ->  28     -7
+
+HIGHER UNDER B
+  squirrels        3 ->   1     +2
+  pigeons          6 ->   3     +3
+  stray           20 ->   5    +15
+  raccoons        29 ->   6    +23
+  feral           17 ->  10     +7
+  geese           15 ->   9     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  cat              4 ->  17    -13
+  cats             7 ->  20    -13
+  troll            3 ->   3     +0
+  fish            14 ->  26    -12
+  kids            15 ->  38    -23
+  dogs            13 ->  14     -1
+  dog             12 ->  13     -1
+  baby            19 ->  55    -36
+  chickens        17 ->  40    -23
+  machine         18 ->  31    -13
+  ducks            6 ->   7     -1
+  little          20 ->  22     -2
+
+HIGHER UNDER B
+  trolls           2 ->   1     +1
+  pigeons          9 ->   4     +5
+  beast            5 ->   5     +0
+  negative        53 ->  10    +43
+  raccoons        29 ->  11    +18
+  stray           24 ->  12    +12
+  animals         11 ->   8     +3
+  squirrels        8 ->   6     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  kids             7 ->  35    -28
+  baby             2 ->   6     -4
+  dogs            10 ->  20    -10
+  cows            11 ->  31    -20
+  chickens         6 ->  13     -7
+  dog             13 ->  22     -9
+  cats             5 ->   7     -2
+  cat              8 ->  10     -2
+  babies          19 ->  50    -31
+  little          18 ->  42    -24
+  children        22 ->  87    -65
+  horses          17 ->  30    -13
+  rats            16 ->  25     -9
+  goats           23 ->  37    -14
+
+HIGHER UNDER B
+  birds            1 ->   1     +0
+  squirrels        4 ->   2     +2
+  ducks           12 ->   3     +9
+  pigeons         15 ->   5    +10
+  hummingbirds    49 ->  12    +37
+  raccoons        64 ->  16    +48
+  deer            24 ->  11    +13
+  wild            32 ->  17    +15
+  rabbits         21 ->  15     +6
+  geese           20 ->  14     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  cats             1 ->  11    -10
+  cat              2 ->   6     -4
+  dog              5 ->  19    -14
+  baby             7 -> 232   -225
+  dogs             6 ->  73    -67
+  kids             8 -> 226   -218
+  little          11 -> 188   -177
+  rats            15 -> 195   -180
+  pigs            12 ->  88    -76
+  fish             9 ->  18     -9
+  chickens        14 ->  60    -46
+  other           20 -> 201   -181
+  animals         13 ->  43    -30
+  monster         19 ->  66    -47
+  goats           18 ->  42    -24
+  family          10 ->  15     -5
+
+HIGHER UNDER B
+  squirrels       16 ->   1    +15
+  pigeons         39 ->   3    +36
+  stray           21 ->   4    +17
+  birds            3 ->   2     +1
+  goldfish        75 ->   7    +68
+  sparrows       246 ->  12   +234
+  fire            37 ->  10    +27
+  bears           26 ->   8    +18
+  wild            45 ->  14    +31
+  bear            17 ->   9     +8
+  bird            22 ->  13     +9
+  trolls          23 ->  16     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  rats             8 ->  20    -12
+  racoons         19 ->  73    -54
+  cat              5 ->   7     -2
+  wild            14 ->  19     -5
+  fish             6 ->   8     -2
+  deer            11 ->  15     -4
+  chickens         9 ->  12     -3
+  dog             10 ->  14     -4
+  animals         17 ->  21     -4
+  squirrels        2 ->   4     -2
+
+HIGHER UNDER B
+  birds            1 ->   1     +0
+  ducks            4 ->   2     +2
+  trolls          29 ->  10    +19
+  bears           16 ->   6    +10
+  geese           18 ->  11     +7
+  seagulls        28 ->  17    +11
+  raccoons         7 ->   5     +2
+  stray           12 ->   9     +3
+  kids            20 ->  18     +2
+  cats             3 ->   3     +0
+  dogs            13 ->  13     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  baby             3 ->   6     -3
+  dog              2 ->   2     +0
+  bird             6 ->  10     -4
+  snake            8 ->  12     -4
+  dogs             9 ->  27    -18
+  ants            10 ->  20    -10
+  worms           11 ->  31    -20
+  cats             7 ->   8     -1
+  kids            13 ->  41    -28
+  rats            14 ->  33    -19
+  squirrels       12 ->  24    -12
+  animals         15 ->  22     -7
+
+HIGHER UNDER B
+  cat              1 ->   1     +0
+  horse           16 ->   5    +11
+  chickens        27 ->   7    +20
+  seed            83 ->  11    +72
+  mice            18 ->   9     +9
+  moldy           60 ->  18    +42
+  duck            25 ->  13    +12
+  ducks           24 ->  14    +10
+  plant           26 ->  16    +10
+  plants          19 ->  15     +4
+  pup             21 ->  17     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  kids             1 ->   8     -7
+  boys            14 ->  19     -5
+  girls           15 ->  25    -10
+  chickens        12 ->  14     -2
+  fish             3 ->   5     -2
+  family          16 ->  17     -1
+  animals          9 ->  11     -2
+  baby             5 ->   6     -1
+
+HIGHER UNDER B
+  cat              4 ->   1     +3
+  cats             2 ->   2     +0
+  stray           33 ->  15    +18
+  squirrels       19 ->  13     +6
+  birds            7 ->   4     +3
+  dog              6 ->   3     +3
+  troll           11 ->   9     +2
+  pigeons         28 ->  18    +10
+  trolls          10 ->  10     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  birds            1 ->   1     +0
+  wild             3 ->  11     -8
+  deer             5 ->  13     -8
+  hummingbirds     9 ->  42    -33
+  ducks            4 ->   6     -2
+  feral           12 ->  46    -34
+  pigeons          6 ->   7     -1
+
+HIGHER UNDER B
+  fish            10 ->   3     +7
+  cat             28 ->   5    +23
+  animals         16 ->   9     +7
+  chickens         7 ->   4     +3
+  bees            11 ->   8     +3
+  chicks          86 ->  15    +71
+  squirrels        2 ->   2     +0
+  baby            36 ->  14    +22
+  rabbits         19 ->  12     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

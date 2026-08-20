@@ -1,0 +1,886 @@
+Below are 28 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: He pinched her ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  ass              1 ->  27    -26
+  nipples          2 ->  41    -39
+  nose             4 ->  15    -11
+  butt             8 ->  22    -14
+  nipple           9 ->  20    -11
+  hips            12 ->  48    -36
+  buttocks        13 ->  74    -61
+  left            14 ->  50    -36
+  and             16 ->  29    -13
+  with            17 ->  35    -18
+  thighs          18 -> 103    -85
+  lips            21 ->  85    -64
+  breasts         23 -> 113    -90
+  shoulders       22 ->  37    -15
+  breast          25 ->  90    -65
+
+HIGHER UNDER B
+  cheek            6 ->   1     +5
+  arm              3 ->   2     +1
+  cheeks           7 ->   3     +4
+  lightly         43 ->   5    +38
+  again           24 ->   6    +18
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  arm              3 ->   6     -3
+  chin             2 ->   4     -2
+  nipple           6 ->  12     -6
+  nipples         11 ->  63    -52
+  shoulder         7 ->  11     -4
+  between         10 ->  26    -16
+  ass             14 ->  30    -16
+  hard            19 ->  87    -68
+  again           20 ->  85    -65
+  lips             9 ->  13     -4
+  on              12 ->  15     -3
+  and             16 ->  22     -6
+  butt            15 ->  16     -1
+  hand            17 ->  18     -1
+
+HIGHER UNDER B
+  cheek            1 ->   1     +0
+  bottom           5 ->   2     +3
+  cheeks           8 ->   5     +3
+  waist           18 ->   7    +11
+  side            30 ->   8    +22
+  elbow           24 ->  10    +14
+  neck            13 ->   9     +4
+  nose             4 ->   3     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  nipples          1 ->   3     -2
+  neck             3 ->   5     -2
+  eyes             8 ->  23    -15
+  chin             4 ->   8     -4
+  shoulder        11 ->  27    -16
+  head            15 ->  67    -52
+  shoulders        5 ->   7     -2
+  hair            22 ->  78    -56
+  ear             24 ->  91    -67
+  face            12 ->  22    -10
+  breasts         23 ->  45    -22
+  lower            9 ->  14     -5
+  throat          26 ->  46    -20
+  right           25 ->  39    -14
+  bottom          18 ->  26     -8
+  cheeks          19 ->  25     -6
+  and             27 ->  31     -4
+  chest           14 ->  19     -5
+  nipple           7 ->  10     -3
+  mouth           13 ->  17     -4
+
+HIGHER UNDER B
+  arm             10 ->   1     +9
+  nose             2 ->   2     +0
+  finger          30 ->   6    +24
+  lips             6 ->   4     +2
+  brows           35 ->  11    +24
+  eyebrows        45 ->  13    +32
+  index           84 ->  18    +66
+  upper           16 ->   9     +7
+  fat             50 ->  20    +30
+  breath          38 ->  21    +17
+  hand            17 ->  12     +5
+  in              21 ->  16     +5
+  forehead        20 ->  15     +5
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  cheek            1 ->   6     -5
+  cheeks           5 ->  10     -5
+  ass              8 ->  24    -16
+  butt             9 ->  18     -9
+  bottom           4 ->   7     -3
+  nipple          10 ->  15     -5
+  bum             12 ->  31    -19
+  nipples         21 ->  75    -54
+  thigh           11 ->  17     -6
+  in              17 ->  28    -11
+  and              7 ->   8     -1
+  chin            19 ->  27     -8
+  face            14 ->  16     -2
+  hard            18 ->  21     -3
+  nose             3 ->   5     -2
+
+HIGHER UNDER B
+  gently          23 ->   2    +21
+  hand            13 ->   4     +9
+  on               6 ->   3     +3
+  arm              2 ->   1     +1
+  ear             24 ->   9    +15
+  shoulder        20 ->  11     +9
+  lightly         32 ->  14    +18
+  skin            25 ->  20     +5
+  behind          15 ->  12     +3
+  again           22 ->  19     +3
+  leg             16 ->  13     +3
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  shoulder         1 ->  44    -43
+  cheek            2 ->   9     -7
+  and              3 ->   8     -5
+  again            5 ->  94    -89
+  on               7 ->  35    -28
+  in               6 ->  21    -15
+  back            16 ->  74    -58
+  with             9 ->  32    -23
+  skin            18 ->  71    -53
+  ear             12 ->  33    -21
+  arm              4 ->   7     -3
+  chin            22 ->  78    -56
+  under           24 ->  38    -14
+  as              13 ->  23    -10
+  right           20 ->  31    -11
+  at              21 ->  25     -4
+  to              25 ->  28     -3
+  when            10 ->  13     -3
+
+HIGHER UNDER B
+  nose            23 ->   1    +22
+  hand             8 ->   2     +6
+  lip             32 ->   3    +29
+  lips            36 ->   5    +31
+  eyes            15 ->   4    +11
+  face            19 ->   6    +13
+  mouth           94 ->  11    +83
+  smile          120 ->  14   +106
+  pants          121 ->  17   +104
+  glance         125 ->  22   +103
+  cheeks          11 ->  10     +1
+  eye             48 ->  16    +32
+  jaw             61 ->  20    +41
+  eyebrows        47 ->  19    +28
+  fingers         14 ->  12     +2
+  while           34 ->  18    +16
+  lower           17 ->  15     +2
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  on               6 ->  28    -22
+  bottom           2 ->   6     -4
+  butt             4 ->  13     -9
+  ass              7 ->  18    -11
+  thigh            5 ->  11     -6
+  waist            8 ->  10     -2
+  and             12 ->  36    -24
+  face            14 ->  19     -5
+  chin            15 ->  21     -6
+  hard            16 ->  16     +0
+  breast          18 ->  30    -12
+  in              19 ->  34    -15
+  bum             20 ->  49    -29
+  leg             22 ->  53    -31
+  so              24 ->  43    -19
+  right           25 ->  46    -21
+  left            26 ->  51    -25
+  hip             21 ->  26     -5
+  behind          28 ->  38    -10
+  backside        23 ->  23     +0
+
+HIGHER UNDER B
+  nose            13 ->   1    +12
+  nipple          10 ->   4     +6
+  arm              3 ->   3     +0
+  cheeks           9 ->   5     +4
+  shoulder        32 ->   7    +25
+  skin            53 ->   9    +44
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  ear              2 ->  32    -30
+  nose             1 ->   4     -3
+  cheek            3 ->  11     -8
+  and              5 ->  54    -49
+  with             7 ->  89    -82
+  by              10 ->  80    -70
+  fingers         12 ->  44    -32
+  hard            14 ->  58    -44
+  in              13 ->  43    -30
+  face             9 ->  14     -5
+  on              17 ->  31    -14
+  skin            18 ->  65    -47
+  nipple          15 ->  25    -10
+  ass             20 ->  40    -20
+  jaw             19 ->  27     -8
+
+HIGHER UNDER B
+  arm              4 ->   1     +3
+  shoulder         6 ->   2     +4
+  hand             8 ->   3     +5
+  earlobe         58 ->   7    +51
+  wrist           43 ->   6    +37
+  neck            11 ->   5     +6
+  hair            60 ->   9    +51
+  chin            26 ->   8    +18
+  cheeks          16 ->  10     +6
+  elbow           84 ->  17    +67
+  ears            23 ->  12    +11
+  arms            52 ->  18    +34
+  gently          39 ->  16    +23
+  shoulders       37 ->  15    +22
+  throat          21 ->  13     +8
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  and              4 ->  10     -6
+  hand             8 ->  44    -36
+  face             9 ->  28    -19
+  nipple           7 ->  12     -5
+  on              13 ->  54    -41
+  nose             2 ->   3     -1
+  chin            12 ->  21     -9
+  with            11 ->  20     -9
+  nipples         18 ->  34    -16
+  neck            16 ->  18     -2
+  to              14 ->  14     +0
+
+HIGHER UNDER B
+  arm              1 ->   1     +0
+  cheek            3 ->   2     +1
+  side            41 ->   6    +35
+  ear              5 ->   4     +1
+  thigh           31 ->   8    +23
+  waist           15 ->   7     +8
+  back            20 ->  13     +7
+  again           17 ->  11     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  cheek            1 ->   4     -3
+  ass              4 ->  76    -72
+  butt             5 ->  41    -36
+  waist            3 ->   6     -3
+  face             7 ->  20    -13
+  bottom          10 ->  52    -42
+  cheeks           8 ->  10     -2
+  on              11 ->  39    -28
+  chin            12 ->  42    -30
+  nipple          13 ->  60    -47
+  behind          14 ->  82    -68
+  neck            15 ->  57    -42
+  hard            16 ->  27    -11
+  nipples         20 ->  91    -71
+  ear             17 ->  22     -5
+  buttocks        24 ->  79    -55
+  hip             18 ->  19     -1
+  side            22 ->  29     -7
+
+HIGHER UNDER B
+  arm              2 ->   1     +1
+  leg             34 ->   3    +31
+  thigh           21 ->   7    +14
+  knee            44 ->   8    +36
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  cheek            8 ->  43    -35
+  nose             7 ->  28    -21
+  face            13 ->  42    -29
+  with             2 ->   6     -4
+  cheeks          15 ->  41    -26
+  ear             22 ->  47    -25
+  hair            21 ->  37    -16
+  finger          10 ->  14     -4
+  again            6 ->   8     -2
+  for             16 ->  18     -2
+  thumb           23 ->  30     -7
+  when            25 ->  31     -6
+  arm              4 ->   5     -1
+  as              27 ->  32     -5
+  in              11 ->  11     +0
+  neck            14 ->  15     -1
+  fingers         12 ->  12     +0
+
+HIGHER UNDER B
+  back            19 ->   4    +15
+  and              5 ->   1     +4
+  leg             24 ->  10    +14
+  wrist           17 ->   9     +8
+  at              36 ->  17    +19
+  hand             3 ->   3     +0
+  knee            60 ->  21    +39
+  wrists          26 ->  16    +10
+  to               9 ->   7     +2
+  so              34 ->  20    +14
+  by              39 ->  22    +17
+  ____            18 ->  13     +5
+  a               30 ->  23     +7
+  right           28 ->  24     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  butt            15 ->  29    -14
+  hard            10 ->  15     -5
+  hand            12 ->  18     -6
+  upper           19 ->  41    -22
+  breast          20 ->  37    -17
+  nose             8 ->  13     -5
+  thigh           16 ->  16     +0
+  on               2 ->   3     -1
+  ear             21 ->  25     -4
+  chin            18 ->  19     -1
+  bottom           5 ->   7     -2
+  ass              9 ->  10     -1
+
+HIGHER UNDER B
+  and              6 ->   2     +4
+  cheek            1 ->   1     +0
+  to              17 ->   8     +9
+  behind           7 ->   6     +1
+  buttocks        11 ->   9     +2
+  so              22 ->  14     +8
+  face            14 ->  11     +3
+  in              13 ->  12     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  arm              3 ->   6     -3
+  ass             14 ->  77    -63
+  chin             8 ->  12     -4
+  bottom           6 ->  10     -4
+  hand             5 ->   8     -3
+  and              9 ->  11     -2
+  butt            16 ->  30    -14
+  lips            19 ->  28     -9
+  shoulder        12 ->  14     -2
+  face            13 ->  13     +0
+  side            15 ->  16     -1
+  in              17 ->  17     +0
+
+HIGHER UNDER B
+  cheeks           4 ->   3     +1
+  cheek            2 ->   2     +0
+  nose             1 ->   1     +0
+  ear             10 ->   5     +5
+  neck            18 ->   7    +11
+  waist            7 ->   4     +3
+  back            29 ->  15    +14
+  behind          11 ->   9     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  cheek            3 ->   7     -4
+  nipples          4 ->  11     -7
+  cheeks           6 ->  26    -20
+  arm              7 ->   9     -2
+  chin            10 ->  12     -2
+  lips            11 ->  33    -22
+  nose             5 ->   6     -1
+  nipple           8 ->   8     +0
+  again           13 ->  20     -7
+  bottom           1 ->   3     -2
+  and             14 ->  17     -3
+  between         15 ->  50    -35
+  face            17 ->  69    -52
+  lower           18 ->  66    -48
+  ass              2 ->   2     +0
+
+HIGHER UNDER B
+  on              12 ->   1    +11
+  hard            16 ->   5    +11
+  butt             9 ->   4     +5
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  cheek            1 ->   3     -2
+  and              4 ->  18    -14
+  arm              8 ->  34    -26
+  finger           9 ->  24    -15
+  cheeks           5 ->  13     -8
+  head            18 ->  45    -27
+  in              11 ->  22    -11
+  face            12 ->  19     -7
+  nipple          23 ->  46    -23
+  chin            25 ->  50    -25
+  earlobe         24 ->  43    -19
+  on              10 ->  11     -1
+  wrist           20 ->  20     +0
+  with            14 ->  15     -1
+
+HIGHER UNDER B
+  ear              3 ->   1     +2
+  nose             2 ->   2     +0
+  hair            17 ->   6    +11
+  ears            15 ->   5    +10
+  shoulder        16 ->   7     +9
+  skin            29 ->  12    +17
+  lips             7 ->   4     +3
+  hands           30 ->  17    +13
+  between         33 ->  21    +12
+  neck            19 ->   9    +10
+  hard            22 ->  16     +6
+  back            21 ->  14     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  nipple           2 ->  23    -21
+  nipples          6 ->  34    -28
+  butt             3 ->   5     -2
+  cheeks           9 ->  39    -30
+  buttocks        17 ->  93    -76
+  hand            11 ->  22    -11
+  breast          24 ->  81    -57
+  nose             7 ->   8     -1
+  and             10 ->  13     -3
+  neck            12 ->  16     -4
+  bum             16 ->  25     -9
+  ass              1 ->   2     -1
+  arse            18 ->  24     -6
+  on              13 ->  14     -1
+
+HIGHER UNDER B
+  arm              5 ->   1     +4
+  cheek            8 ->   4     +4
+  again           22 ->   7    +15
+  elbow           36 ->   9    +27
+  ear             19 ->   6    +13
+  hair            34 ->  10    +24
+  bottom           4 ->   3     +1
+  face            28 ->  15    +13
+  waist           15 ->  11     +4
+  chin            38 ->  21    +17
+  shoulder        14 ->  12     +2
+  leg             30 ->  20    +10
+  left            23 ->  18     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  ass              2 ->  24    -22
+  breasts          3 ->  20    -17
+  behind           5 ->  19    -14
+  breast           6 ->  23    -17
+  and             11 ->  27    -16
+  buttocks         4 ->   9     -5
+  bottom          13 ->  32    -19
+  face            16 ->  34    -18
+  butt            12 ->  12     +0
+  right           25 ->  53    -28
+  ear             17 ->  21     -4
+  nipple          15 ->  16     -1
+  in              18 ->  22     -4
+  bare            24 ->  31     -7
+  on              21 ->  26     -5
+  neck            22 ->  25     -3
+
+HIGHER UNDER B
+  cheeks           1 ->   1     +0
+  arm              7 ->   2     +5
+  shoulder         9 ->   3     +6
+  nose            23 ->   5    +18
+  fingers         28 ->   7    +21
+  elbow           34 ->  10    +24
+  shoulders       26 ->  11    +15
+  thigh            8 ->   4     +4
+  arms            46 ->  18    +28
+  wrist           44 ->  17    +27
+  nipples         19 ->   8    +11
+  thighs          27 ->  14    +13
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  butt             4 ->  18    -14
+  ass              1 ->   6     -5
+  nipples          8 ->  15     -7
+  on              10 ->  21    -11
+  and              7 ->   7     +0
+  nipple          11 ->  12     -1
+  lips            15 ->  22     -7
+  in              22 ->  50    -28
+  again           18 ->  25     -7
+  between         14 ->  17     -3
+  ear             23 ->  29     -6
+  thigh           12 ->  13     -1
+  face            17 ->  19     -2
+  neck            25 ->  26     -1
+  waist           20 ->  20     +0
+
+HIGHER UNDER B
+  cheeks           6 ->   1     +5
+  arm              5 ->   2     +3
+  chin             9 ->   4     +5
+  lip             21 ->   9    +12
+  hand            24 ->  10    +14
+  wrist           27 ->  16    +11
+  bottom          13 ->   8     +5
+  shoulder        16 ->  11     +5
+  hard            19 ->  14     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  between         16 ->  22     -6
+  cheeks          10 ->  10     +0
+  bottom           7 ->   9     -2
+  nose             3 ->   3     +0
+  again           11 ->  13     -2
+  face            17 ->  17     +0
+  lips             5 ->   6     -1
+  fingers         13 ->  14     -1
+  hard            12 ->  12     +0
+  ass             15 ->  15     +0
+
+HIGHER UNDER B
+  arm              2 ->   2     +0
+  chin             4 ->   4     +0
+  shoulder         6 ->   5     +1
+  thigh           14 ->  11     +3
+  ear              9 ->   7     +2
+  cheek            1 ->   1     +0
+  on               8 ->   8     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  cheek            1 ->   1     +0
+  wrist            6 ->  12     -6
+  throat          15 ->  50    -35
+  nipples          9 ->  15     -6
+  thigh           11 ->  20     -9
+  in              19 ->  35    -16
+  nose             3 ->   3     +0
+  and             12 ->  23    -11
+  breasts         18 ->  30    -12
+  ear              4 ->   5     -1
+  ass             20 ->  28     -8
+  hand             7 ->   9     -2
+
+HIGHER UNDER B
+  arm              2 ->   2     +0
+  shoulders       41 ->  11    +30
+  breast          13 ->   7     +6
+  shoulder         5 ->   4     +1
+  lips            37 ->  14    +23
+  neck            10 ->   6     +4
+  stomach         33 ->  17    +16
+  face            16 ->  10     +6
+  wrists          30 ->  18    +12
+  chin            46 ->  24    +22
+  hair            45 ->  25    +20
+  fingers         17 ->  13     +4
+  lip             25 ->  19     +6
+  butt            29 ->  22     +7
+  cheeks          21 ->  21     +0
+  nipple           8 ->   8     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  ass              5 ->   8     -3
+  butt             4 ->   4     +0
+  nose             9 ->  10     -1
+  nipples         13 ->  16     -3
+  on              15 ->  18     -3
+  bottom           6 ->   7     -1
+  left            21 ->  24     -3
+  and             18 ->  19     -1
+  face            22 ->  22     +0
+  earlobe         17 ->  17     +0
+  neck            20 ->  20     +0
+  hard            12 ->  14     -2
+
+HIGHER UNDER B
+  arm              1 ->   1     +0
+  chin             8 ->   5     +3
+  leg             14 ->  12     +2
+  thigh            7 ->   6     +1
+  buttocks        16 ->  13     +3
+  cheeks          19 ->  15     +4
+  hand            23 ->  21     +2
+  shoulder        11 ->  11     +0
+  cheek            3 ->   3     +0
+  breast          10 ->   9     +1
+  nipple           2 ->   2     +0
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  face             4 ->  13     -9
+  chin             5 ->   8     -3
+  cheeks           2 ->   3     -1
+  nose             3 ->   5     -2
+  waist            7 ->  10     -3
+  neck             9 ->  36    -27
+  and             10 ->  46    -36
+  ass             13 ->  39    -26
+  butt            12 ->  22    -10
+  lips            15 ->  63    -48
+  in              19 ->  44    -25
+  hard            16 ->  20     -4
+  on              18 ->  19     -1
+  ear             21 ->  21     +0
+
+HIGHER UNDER B
+  arm              6 ->   2     +4
+  cheek            1 ->   1     +0
+  gently          41 ->   7    +34
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  nose             2 ->   4     -2
+  nipple           3 ->   5     -2
+  nipples          6 ->  12     -6
+  ear              8 ->  19    -11
+  neck            16 ->  33    -17
+  lips            18 ->  28    -10
+  and             11 ->  14     -3
+  thigh           15 ->  16     -1
+
+HIGHER UNDER B
+  arm              5 ->   2     +3
+  cheek            1 ->   1     +0
+  bottom           9 ->   6     +3
+  butt            17 ->  11     +6
+  on              19 ->  15     +4
+  buttocks        33 ->  18    +15
+  hard            13 ->  10     +3
+  again           12 ->   9     +3
+  cheeks           4 ->   3     +1
+  face            26 ->  17     +9
+  chin            10 ->   8     +2
+  ass              7 ->   7     +0
+  waist           14 ->  13     +1
+  skin            43 ->  20    +23
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  bottom           4 ->   8     -4
+  ass              7 ->  59    -52
+  waist            6 ->  28    -22
+  butt             9 ->  33    -24
+  shoulder        12 ->  46    -34
+  on              10 ->  19     -9
+  nipples         11 ->  24    -13
+  nipple           5 ->   7     -2
+  buttocks        14 ->  54    -40
+  behind          15 ->  76    -61
+  arm              1 ->   3     -2
+  left            18 ->  51    -33
+  chin            21 ->  71    -50
+  breast          22 ->  80    -58
+  breasts         24 ->  90    -66
+  again           23 ->  55    -32
+  ear             19 ->  23     -4
+
+HIGHER UNDER B
+  nose             3 ->   1     +2
+  lips            40 ->   5    +35
+  and              8 ->   4     +4
+  fingers         44 ->  10    +34
+  cheek            2 ->   2     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  cheek            1 ->   3     -2
+  cheeks           3 ->   8     -5
+  lips             4 ->   9     -5
+  and              9 ->  56    -47
+  nipple           8 ->  12     -4
+  nipples         12 ->  59    -47
+  arm             11 ->  11     +0
+  on              14 ->  63    -49
+  fingers         13 ->  33    -20
+  neck            15 ->  22     -7
+
+HIGHER UNDER B
+  chin             5 ->   2     +3
+  nose             2 ->   1     +1
+  temple          40 ->   7    +33
+  shoulder         7 ->   4     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  cheek            3 ->   5     -2
+  cheeks           5 ->   7     -2
+  hand            14 ->  30    -16
+  fingers         18 ->  32    -14
+  neck            10 ->  13     -3
+  arm              1 ->   2     -1
+  ear             17 ->  23     -6
+  bottom           7 ->  12     -5
+  between         15 ->  18     -3
+  lightly         24 ->  35    -11
+  on               2 ->   3     -1
+  gently          23 ->  29     -6
+
+HIGHER UNDER B
+  and              4 ->   1     +3
+  so              16 ->   8     +8
+  hard             9 ->   6     +3
+  with            12 ->   9     +3
+  nose             6 ->   4     +2
+  to              11 ->  11     +0
+  leg             28 ->  17    +11
+  in              19 ->  15     +4
+  a               22 ->  16     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  arm              2 ->   5     -3
+  shoulder         6 ->  29    -23
+  hand             7 ->  36    -29
+  face            12 ->  55    -43
+  neck            11 ->  34    -23
+  wrist            9 ->  21    -12
+  nipple          16 ->  40    -24
+  ribs            21 ->  41    -20
+  with            19 ->  25     -6
+  nipples         18 ->  19     -1
+  fingers         13 ->  16     -3
+
+HIGHER UNDER B
+  cheeks          14 ->   4    +10
+  ear              3 ->   2     +1
+  nose             1 ->   1     +0
+  cheek            4 ->   3     +1
+  in              10 ->   7     +3
+  between         24 ->  10    +14
+  ears            17 ->   8     +9
+  to              15 ->  11     +4
+  eyebrows        36 ->  12    +24
+  nostrils        54 ->  14    +40
+  eyebrow         53 ->  15    +38
+  right           20 ->  13     +7
+  forehead        29 ->  17    +12
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  nipple           3 ->   5     -2
+  ass              6 ->  14     -8
+  bottom           5 ->   8     -3
+  breast          14 ->  18     -4
+  again           17 ->  23     -6
+  butt            11 ->  13     -2
+  thigh            9 ->  11     -2
+  face            15 ->  16     -1
+
+HIGHER UNDER B
+  cheek            1 ->   1     +0
+  chin             7 ->   4     +3
+  nose             2 ->   2     +0
+  ear              8 ->   6     +2
+  cheeks          10 ->   7     +3
+  on              13 ->   9     +4
+  shoulder        19 ->  12     +7
+  lips            12 ->  10     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  cheek            3 ->   4     -1
+  ear              4 ->  28    -24
+  cheeks           2 ->   3     -1
+  bottom           7 ->  35    -28
+  face             5 ->  10     -5
+  on               9 ->  16     -7
+  behind          11 ->  48    -37
+  nipples         17 ->  99    -82
+  hard            10 ->  13     -3
+  buttocks        18 ->  66    -48
+  right           14 ->  37    -23
+  butt            21 ->  79    -58
+  ears            20 ->  53    -33
+  in              15 ->  25    -10
+  shoulder        13 ->  18     -5
+  with            19 ->  22     -3
+
+HIGHER UNDER B
+  nose             1 ->   1     +0
+  arm              8 ->   2     +6
+  gently          38 ->   6    +32
+  wrist           30 ->   7    +23
+  chin            42 ->   8    +34
+  skin            72 ->  11    +61
+  earlobe         29 ->  12    +17
+  hand            12 ->   9     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 28 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

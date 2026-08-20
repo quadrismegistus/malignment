@@ -1,0 +1,961 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: She told the nurse that the marks on her arm were from a ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  tattoo           1 ->  11    -10
+  needle           2 ->  10     -8
+  broken           5 ->  54    -49
+  dog              7 ->  65    -58
+  car             10 ->  47    -37
+  bullet          14 -> 101    -87
+  previous         9 ->  23    -14
+  bite            12 ->  32    -20
+  gunshot         18 -> 118   -100
+  shot            11 ->  25    -14
+  fight           17 ->  56    -39
+  cat             16 ->  42    -26
+  bee             21 ->  98    -77
+  spider          13 ->  24    -11
+  bad             15 ->  30    -15
+  snake           22 ->  52    -30
+  rash            23 ->  49    -26
+  knife           26 -> 122    -96
+  bruise          24 ->  33     -9
+
+HIGHER UNDER B
+  cast             8 ->   1     +7
+  recent           4 ->   2     +2
+  burn             3 ->   3     +0
+  blood           27 ->   4    +23
+  bandage         56 ->   5    +51
+  bandaid        135 ->   9   +126
+  vaccination     45 ->   8    +37
+  band            73 ->  13    +60
+  sling          127 ->  15   +112
+  fall             6 ->   6     +0
+  mosquito        19 ->   7    +12
+  paper           25 ->  12    +13
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  bee              1 ->   7     -6
+  spider           3 ->   8     -5
+  mosquito         5 ->  13     -8
+  car              8 ->  20    -12
+  needle           7 ->  14     -7
+  knife           14 ->  51    -37
+  cut             15 ->  57    -42
+  fight           18 -> 111    -93
+  bite            13 ->  22     -9
+  fall            17 ->  28    -11
+
+HIGHER UNDER B
+  dog              2 ->   1     +1
+  snake            6 ->   2     +4
+  snakebite       57 ->   6    +51
+  cat             11 ->   4     +7
+  recent           9 ->   5     +4
+  pet             37 ->  12    +25
+  medical         20 ->   9    +11
+  home            29 ->  16    +13
+  botched         56 ->  18    +38
+  prick           49 ->  19    +30
+  vaccination     33 ->  21    +12
+  tattoo           4 ->   3     +1
+  previous        10 ->  10     +0
+  bad             12 ->  11     +1
+  blood           19 ->  17     +2
+  self            16 ->  15     +1
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  gun              4 ->  46    -42
+  knife            7 ->  26    -19
+  fall             3 ->   7     -4
+  bullet           6 ->  12     -6
+  cut              9 ->  19    -10
+  bruise          13 ->  60    -47
+  scratch         15 ->  48    -33
+  car             11 ->  14     -3
+  previous         5 ->   5     +0
+
+HIGHER UNDER B
+  broken           2 ->   2     +0
+  needle           8 ->   3     +5
+  gunshot          1 ->   1     +0
+  recent          10 ->   4     +6
+  sharp           29 ->   6    +23
+  laceration      46 ->  11    +35
+  punch           22 ->   8    +14
+  golf            55 ->  13    +42
+  tattoo          14 ->  10     +4
+  razor           12 ->   9     +3
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  fall             2 ->   8     -6
+  blood            8 ->  22    -14
+  dog              6 ->  10     -4
+  drug            12 ->  41    -29
+  car              7 ->  13     -6
+  friend          16 ->  65    -49
+  cat              4 ->   7     -3
+  seizure         20 ->  37    -17
+  bad             15 ->  16     -1
+  recent           9 ->   9     +0
+
+HIGHER UNDER B
+  bee              3 ->   2     +1
+  mosquito        11 ->   4     +7
+  spider           1 ->   1     +0
+  tattoo           5 ->   3     +2
+  bug             17 ->   6    +11
+  snake           10 ->   5     +5
+  burn            28 ->  15    +13
+  fight           14 ->  11     +3
+  vaccination     18 ->  14     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  dog              1 ->   9     -8
+  fall             3 ->  11     -8
+  beating          6 ->  26    -20
+  cat              4 ->  23    -19
+  burn             7 ->  19    -12
+  cigarette       19 ->  81    -62
+  belt            21 ->  93    -72
+  knife            9 ->  24    -15
+  car             13 ->  33    -20
+  tattoo          12 ->  29    -17
+  spider          18 ->  44    -26
+  child           20 ->  42    -22
+  fight           16 ->  34    -18
+  scratch          8 ->  13     -5
+  horse           22 ->  25     -3
+  blow            17 ->  21     -4
+  bruise          14 ->  16     -2
+
+HIGHER UNDER B
+  tick            74 ->   6    +68
+  mosquito        11 ->   2     +9
+  previous        27 ->   4    +23
+  small           37 ->   8    +29
+  boil           171 ->  17   +154
+  needle           2 ->   1     +1
+  gunshot         23 ->   7    +16
+  bite            10 ->   3     +7
+  shotgun         62 ->  20    +42
+  blood           24 ->  10    +14
+  “               50 ->  22    +28
+  doctor          30 ->  14    +16
+  recent          26 ->  15    +11
+  cut             15 ->  12     +3
+  bee              5 ->   5     +0
+  vaccination     25 ->  18     +7
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  dog              2 ->  10     -8
+  cat              3 ->   8     -5
+  car              1 ->   2     -1
+  fall             5 ->  17    -12
+  spider           4 ->  11     -7
+  cyst            13 ->  42    -29
+  snake           14 ->  24    -10
+  pen             21 ->  66    -45
+  knife           18 ->  46    -28
+  bracelet        20 ->  45    -25
+  new             16 ->  26    -10
+  burn            17 ->  32    -15
+  mosquito        22 ->  41    -19
+  cut             19 ->  19     +0
+
+HIGHER UNDER B
+  tattoo           8 ->   1     +7
+  suicide          9 ->   3     +6
+  needle          12 ->   4     +8
+  man            106 ->   7    +99
+  self             7 ->   5     +2
+  blood           11 ->   9     +2
+  fight           27 ->  13    +14
+  recent           6 ->   6     +0
+  long            38 ->  15    +23
+  drug            32 ->  16    +16
+  skin            26 ->  18     +8
+  scratch         15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  needle           2 ->  34    -32
+  fight            4 ->  54    -50
+  knife            6 -> 120   -114
+  dog              3 ->  32    -29
+  car             10 -> 144   -134
+  cat              9 ->  47    -38
+  snake           12 -> 121   -109
+  broken          14 -> 128   -114
+  paper           16 -> 155   -139
+  fall            15 -> 109    -94
+  gun             18 -> 142   -124
+  mosquito         5 ->   9     -4
+  recent           7 ->  13     -6
+  friend          17 ->  75    -58
+  spider           1 ->   5     -4
+  razor           21 -> 159   -138
+  piece           20 -> 116    -96
+  man             24 -> 165   -141
+  black           22 -> 126   -104
+  small           23 ->  99    -76
+  bee              8 ->   8     +0
+  bite            19 ->  19     +0
+
+HIGHER UNDER B
+  tattoo          13 ->   1    +12
+  new             26 ->   2    +24
+  medical        125 ->   4   +121
+  previous        11 ->   3     +8
+  rash           115 ->   6   +109
+  self-inflicted 105 ->  10    +95
+  temporary      207 ->  12   +195
+  test           132 ->  11   +121
+  bug             42 ->   7    +35
+  mole           175 ->  15   +160
+  chemical       110 ->  16    +94
+  butterfly       54 ->  14    +40
+  piercing       180 ->  20   +160
+  past            86 ->  21    +65
+  bruise          36 ->  17    +19
+  bad             30 ->  18    +12
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  drug             3 ->  10     -7
+  needle           2 ->   5     -3
+  fight            5 ->   9     -4
+  tattoo           6 ->   7     -1
+  dog              8 ->   8     +0
+  blood           11 ->  21    -10
+  bee              9 ->  12     -3
+  new             10 ->  11     -1
+  fall            12 ->  15     -3
+  recent          15 ->  17     -2
+  bad             18 ->  38    -20
+  broken          19 ->  54    -35
+  snake           16 ->  16     +0
+  self            17 ->  19     -2
+
+HIGHER UNDER B
+  spider           1 ->   1     +0
+  mosquito         7 ->   2     +5
+  bite            35 ->   6    +29
+  bug             13 ->   4     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  ___              1 ->  28    -27
+  needle           5 ->  43    -38
+  cat              3 ->  12     -9
+  bite             7 -> 126   -119
+  snake            8 ->  88    -80
+  ____             9 ->  82    -73
+  bee             13 ->  45    -32
+  fall            19 -> 151   -132
+  dog              2 ->   3     -1
+  spider          18 ->  98    -80
+  previous        17 ->  72    -55
+  pen             16 ->  37    -21
+  fight           15 ->  27    -12
+  bad             20 ->  39    -19
+  A                6 ->   6     +0
+  scratch         14 ->  16     -2
+  tattoo           4 ->   4     +0
+  recent          11 ->  13     -2
+
+HIGHER UNDER B
+  rope            12 ->   1    +11
+  knife           10 ->   2     +8
+  boyfriend       34 ->   5    +29
+  wristwatch     137 ->   8   +129
+  new             28 ->   7    +21
+  necklace       124 ->  10   +114
+  boy             25 ->   9    +16
+  belt            50 ->  11    +39
+  friend's       115 ->  15   +100
+  nail            71 ->  17    +54
+  razor           21 ->  14     +7
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  knife            3 ->  11     -8
+  mosquito         1 ->   4     -3
+  snake            5 ->   8     -3
+  cut              4 ->   5     -1
+  bullet          10 ->  29    -19
+  wound            9 ->  19    -10
+  small           13 ->  23    -10
+  broken          16 ->  28    -12
+  chemical        18 ->  24     -6
+  needle          24 ->  31     -7
+  gunshot         23 ->  30     -7
+  ______          15 ->  20     -5
+
+HIGHER UNDER B
+  recent           7 ->   2     +5
+  tick            17 ->   9     +8
+  bee              2 ->   1     +1
+  medical         52 ->  21    +31
+  _____           11 ->   6     +5
+  blood           27 ->  14    +13
+  previous        22 ->  13     +9
+  dog             25 ->  17     +8
+  tattoo          19 ->  12     +7
+  virus           12 ->  10     +2
+  car             21 ->  16     +5
+  disease         20 ->  18     +2
+  drug             6 ->   3     +3
+  ____            26 ->  22     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  snake            1 ->   2     -1
+  ____             3 ->  10     -7
+  snakebite       16 -> 107    -91
+  bee             12 ->  41    -29
+  mosquito        11 ->  20     -9
+  drug            23 ->  45    -22
+  car             15 ->  19     -4
+  fall            25 ->  38    -13
+  spider           6 ->   9     -3
+  _____           21 ->  29     -8
+  knife           19 ->  26     -7
+  fight            9 ->  13     -4
+  medical         14 ->  16     -2
+  dog              4 ->   5     -1
+
+HIGHER UNDER B
+  belt            20 ->   4    +16
+  recent           2 ->   1     +1
+  new             17 ->   6    +11
+  tattoo          13 ->   7     +6
+  cat             10 ->   8     +2
+  beating         37 ->  17    +20
+  _______         18 ->  14     +4
+  __________      27 ->  18     +9
+  ______           5 ->   3     +2
+  bite            22 ->  15     +7
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  needle           5 ->  36    -31
+  fall             7 ->  39    -32
+  tattoo           3 ->   6     -3
+  poisonous        4 ->  10     -6
+  bug             16 -> 101    -85
+  bad             13 ->  34    -21
+  rash            11 ->  28    -17
+  poison          12 ->  30    -18
+  snake           17 ->  50    -33
+  bee             10 ->  20    -10
+  belt            19 ->  55    -36
+  bite            20 ->  52    -32
+  childhood       14 ->  17     -3
+  cat              8 ->  11     -3
+
+HIGHER UNDER B
+  recent           1 ->   1     +0
+  new              2 ->   2     +0
+  wild            29 ->   5    +24
+  smallpox        61 ->   7    +54
+  ______          34 ->   9    +25
+  _______         56 ->  12    +44
+  religious       72 ->  14    +58
+  rattlesnake     28 ->  13    +15
+  __________      40 ->  15    +25
+  bracelet        15 ->   8     +7
+  |              145 ->  24   +121
+  medical         35 ->  16    +19
+  jellyfish       55 ->  21    +34
+  plant           58 ->  22    +36
+  trip            36 ->  19    +17
+  venomous        65 ->  26    +39
+  spider           9 ->   4     +5
+  wasp            21 ->  18     +3
+  mosquito         6 ->   3     +3
+  ____            25 ->  25     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  burn             3 ->  45    -42
+  spider           2 ->   9     -7
+  needle           6 ->  58    -52
+  bee              5 ->  25    -20
+  knife            8 ->  57    -49
+  snake           12 -> 100    -88
+  bite            11 ->  27    -16
+  previous        13 ->  86    -73
+  razor            9 ->  23    -14
+  fall            16 -> 169   -153
+  bad             10 ->  14     -4
+  fire            18 ->  62    -44
+  car             20 -> 155   -135
+  self            22 ->  99    -77
+  mosquito        19 ->  21     -2
+
+HIGHER UNDER B
+  dog              1 ->   1     +0
+  new             30 ->   2    +28
+  Band           133 ->   6   +127
+  shark           36 ->   7    +29
+  rash            15 ->   5    +10
+  stray          149 ->  10   +139
+  hospital        21 ->   8    +13
+  recently       139 ->  13   +126
+  doctor          34 ->  12    +22
+  cat             14 ->  11     +3
+  tattoo           4 ->   3     +1
+  recent           7 ->   4     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  gunshot          1 ->   3     -2
+  previous         3 ->   8     -5
+  needle           7 ->  26    -19
+  bite             5 ->  17    -12
+  broken          11 ->  22    -11
+  wound           14 ->  34    -20
+  bullet           4 ->   4     +0
+  past            13 ->  20     -7
+  gun             21 ->  35    -14
+  dog             20 ->  27     -7
+  tattoo          18 ->  18     +0
+  recent           6 ->  11     -5
+
+HIGHER UNDER B
+  fall            12 ->   1    +11
+  severe          25 ->   9    +16
+  sword           35 ->  13    +22
+  cut             16 ->   7     +9
+  sharp           52 ->  15    +37
+  small            9 ->   5     +4
+  near            66 ->  21    +45
+  stab             8 ->   6     +2
+  fight           17 ->  10     +7
+  snake           29 ->  19    +10
+  knife            2 ->   2     +0
+  blow            19 ->  16     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  tattoo           1 ->   8     -7
+  mosquito         4 ->   7     -3
+  needle          15 ->  68    -53
+  razor           16 ->  53    -37
+  scratch         17 ->  35    -18
+  fall            13 ->  15     -2
+  burn            14 ->  16     -2
+  broken          21 ->  46    -25
+  bite            11 ->  13     -2
+  knife            9 ->  11     -2
+  car             18 ->  21     -3
+  fight           20 ->  24     -4
+  paper           19 ->  22     -3
+
+HIGHER UNDER B
+  recent           5 ->   3     +2
+  snake           10 ->   4     +6
+  new             12 ->   5     +7
+  dog              6 ->   6     +0
+  snakebite       36 ->  12    +24
+  severe          32 ->  18    +14
+  previous        22 ->  14     +8
+  bad             23 ->  17     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  needle           2 ->   3     -1
+  burn            12 ->  32    -20
+  tattoo          11 ->  29    -18
+  mosquito         6 ->  12     -6
+  cut              7 ->  11     -4
+  previous         9 ->  13     -4
+  dog             10 ->  16     -6
+  drug            22 ->  45    -23
+  wound           17 ->  25     -8
+  gunshot         21 ->  34    -13
+  scratch         23 ->  35    -12
+  blood           18 ->  22     -4
+  snake            1 ->   1     +0
+
+HIGHER UNDER B
+  car             14 ->   5     +9
+  recent          13 ->   7     +6
+  botched         16 ->   8     +8
+  broken           3 ->   2     +1
+  knife           20 ->  10    +10
+  stray           31 ->  15    +16
+  sharp           48 ->  21    +27
+  bite             4 ->   4     +0
+  tick            43 ->  23    +20
+  fight           33 ->  20    +13
+  severe          29 ->  18    +11
+  small           24 ->  19     +5
+  fall            15 ->  14     +1
+  childhood       19 ->  17     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  razor            4 ->  31    -27
+  tattoo           2 ->   9     -7
+  belt             9 ->  26    -17
+  bracelet        14 -> 117   -103
+  needle           5 ->  13     -8
+  dog              3 ->   7     -4
+  boyfriend       15 ->  75    -60
+  friend          12 ->  23    -11
+  blood           16 ->  41    -25
+  fight           19 ->  35    -16
+  pin             18 ->  27     -9
+  previous        20 ->  34    -14
+  hot             22 ->  37    -15
+  fall            17 ->  20     -3
+
+HIGHER UNDER B
+  cat              1 ->   1     +0
+  spider           7 ->   2     +5
+  mosquito        11 ->   3     +8
+  tick             6 ->   4     +2
+  recent           8 ->   5     +3
+  scratch         23 ->   6    +17
+  paper           69 ->  17    +52
+  rash            13 ->   8     +5
+  bee             27 ->  12    +15
+  new             21 ->  11    +10
+  bad             26 ->  14    +12
+  self            39 ->  16    +23
+  burn            29 ->  15    +14
+  bug             10 ->  10     +0
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  needle           1 ->   1     +0
+  broken          21 ->  27     -6
+  previous         9 ->  12     -3
+  rope            16 ->  19     -3
+  chicken         17 ->  18     -1
+  fall            10 ->  11     -1
+  razor           15 ->  16     -1
+  knife           11 ->  14     -3
+  ring            20 ->  20     +0
+  butterfly       22 ->  22     +0
+
+HIGHER UNDER B
+  tattoo           2 ->   2     +0
+  bee             12 ->   9     +3
+  bite            18 ->  15     +3
+  spider           5 ->   5     +0
+  bad             14 ->  13     +1
+  rash            13 ->  10     +3
+  chain            6 ->   6     +0
+  cat              4 ->   4     +0
+  dog              3 ->   3     +0
+  burn             7 ->   7     +0
+  mosquito         8 ->   8     +0
+  scratch         23 ->  21     +2
+  vaccination     19 ->  17     +2
+  fight           25 ->  24     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  cat              5 ->  11     -6
+  dog              2 ->   5     -3
+  fall            10 ->  36    -26
+  new              8 ->  15     -7
+  rash            14 ->  73    -59
+  man             17 ->  93    -76
+  snake           20 -> 125   -105
+  bite            16 ->  60    -44
+  childhood        9 ->  14     -5
+  spider           7 ->  10     -3
+  boyfriend       21 ->  44    -23
+  scratch         15 ->  23     -8
+  bad             22 ->  24     -2
+  needle          11 ->  13     -2
+
+HIGHER UNDER B
+  mosquito         6 ->   2     +4
+  blood            4 ->   3     +1
+  tattoo           1 ->   1     +0
+  home            64 ->   6    +58
+  self            19 ->   7    +12
+  vaccination     13 ->   8     +5
+  previous        18 ->  12     +6
+  bee             12 ->   9     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  knife            2 ->  11     -9
+  fight            1 ->   4     -3
+  man              4 ->  15    -11
+  fall             7 ->  18    -11
+  gunshot          8 ->  26    -18
+  baseball        19 ->  75    -56
+  child            9 ->  20    -11
+  fire            18 ->  45    -27
+  razor           21 ->  39    -18
+  baby            14 ->  23     -9
+  bee             11 ->  16     -5
+
+HIGHER UNDER B
+  dog              5 ->   1     +4
+  scratch         15 ->   3    +12
+  car              3 ->   2     +1
+  bite            25 ->   6    +19
+  recent          20 ->   9    +11
+  blood          139 ->  19   +120
+  tattoo          12 ->   7     +5
+  cut             16 ->  10     +6
+  broken           6 ->   5     +1
+  medical         62 ->  22    +40
+  previous        24 ->  13    +11
+  mosquito        10 ->   8     +2
+  new             43 ->  21    +22
+  cat             34 ->  17    +17
+  bad             17 ->  12     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  knife            5 ->   9     -4
+  dog              2 ->   4     -2
+  cigarette       22 ->  43    -21
+  cat              3 ->   5     -2
+  broken          18 ->  26     -8
+  bee             14 ->  17     -3
+  black           21 ->  33    -12
+  spider          11 ->  16     -5
+  razor           17 ->  18     -1
+  fight           20 ->  21     -1
+  mosquito         6 ->   8     -2
+  car             24 ->  24     +0
+  birthmark       23 ->  23     +0
+
+HIGHER UNDER B
+  recent           4 ->   2     +2
+  previous         9 ->   3     +6
+  tattoo           8 ->   6     +2
+  rash            16 ->  12     +4
+  needle           1 ->   1     +0
+  burn            19 ->  14     +5
+  fall            10 ->  10     +0
+  bruise          32 ->  19    +13
+  cut             13 ->  11     +2
+  bite             7 ->   7     +0
+  scratch         15 ->  15     +0
+  blood           30 ->  20    +10
+  childhood       29 ->  22     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  mosquito         5 ->  40    -35
+  needle           7 ->  38    -31
+  tattoo           8 ->   9     -1
+  spider           3 ->   6     -3
+  vaccination     10 ->  58    -48
+  previous        11 ->  44    -33
+  blood           12 ->  84    -72
+  bee             13 ->  28    -15
+  vaccine         17 ->  75    -58
+  self            19 ->  59    -40
+  dog              4 ->   4     +0
+  medical         18 ->  25     -7
+  snake           14 ->  20     -6
+  drug            22 ->  83    -61
+
+HIGHER UNDER B
+  fall             1 ->   1     +0
+  cat              6 ->   2     +4
+  bad             15 ->   5    +10
+  “bad            40 ->   8    +32
+  rope            51 ->  11    +40
+  hug             53 ->  14    +39
+  fight           23 ->  13    +10
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  spider           4 ->  16    -12
+  recent           6 ->  13     -7
+  broken          13 ->  22     -9
+  scratch         12 ->  19     -7
+  bite            21 ->  50    -29
+  bracelet        16 ->  29    -13
+  rash            17 ->  26     -9
+  bad             14 ->  23     -9
+  new             15 ->  17     -2
+  kitten          18 ->  24     -6
+
+HIGHER UNDER B
+  fall             2 ->   1     +1
+  razor            9 ->   4     +5
+  dog              3 ->   3     +0
+  needle          24 ->  10    +14
+  suicide          5 ->   5     +0
+  previous         7 ->   6     +1
+  blood           19 ->  11     +8
+  fight           11 ->   7     +4
+  tattoo          10 ->   8     +2
+  medical         37 ->  15    +22
+  pet             23 ->  12    +11
+  vaccination     45 ->  20    +25
+  failed          44 ->  21    +23
+  friend          20 ->  14     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  needle           8 ->  28    -20
+  mosquito         5 ->  16    -11
+  dog              4 ->   8     -4
+  previous         9 ->  19    -10
+  new             11 ->  44    -33
+  blood            2 ->   5     -3
+  broken          12 ->  33    -21
+  bite            17 ->  97    -80
+  recent           7 ->  11     -4
+  fight           19 ->  75    -56
+  rash            18 ->  65    -47
+  spider           3 ->   6     -3
+  bug             21 ->  23     -2
+  bee             16 ->  22     -6
+
+HIGHER UNDER B
+  vaccination     15 ->   2    +13
+  fall             1 ->   1     +0
+  tattoo          10 ->   3     +7
+  cat              6 ->   4     +2
+  vaccine         39 ->   7    +32
+  bike           103 ->   9    +94
+  motorcycle      98 ->  15    +83
+  bicycle        119 ->  21    +98
+  minor           65 ->  18    +47
+  medical         13 ->  10     +3
+  shot            32 ->  14    +18
+  bad             20 ->  13     +7
+  car             14 ->  12     +2
+  scratch         26 ->  20     +6
+  snake           22 ->  17     +5
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  needle           6 ->  32    -26
+  fight            8 ->  58    -50
+  suicide          5 ->   9     -4
+  bad              7 ->  10     -3
+  dog             11 ->  31    -20
+  burn            13 ->  33    -20
+  fall            14 ->  24    -10
+  bruise          16 ->  41    -25
+  broken          15 ->  30    -15
+  self             4 ->   4     +0
+  friend          19 ->  22     -3
+  mosquito        12 ->  12     +0
+
+HIGHER UNDER B
+  tattoo           1 ->   1     +0
+  previous         3 ->   3     +0
+  recent           2 ->   2     +0
+  cupuncture      18 ->   6    +12
+  hobby          183 ->  11   +172
+  bee             20 ->   8    +12
+  new             10 ->   5     +5
+  cat              9 ->   7     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  cat              3 ->   5     -2
+  tick            12 ->  26    -14
+  mosquito         9 ->  10     -1
+  recent           4 ->   6     -2
+  fall            15 ->  31    -16
+  scratch         17 ->  60    -43
+  bad             13 ->  18     -5
+  bite             8 ->   8     +0
+  tiger           18 ->  21     -3
+  bee              7 ->   7     +0
+  dog              2 ->   4     -2
+
+HIGHER UNDER B
+  tattoo           5 ->   2     +3
+  snake            6 ->   3     +3
+  spider           1 ->   1     +0
+  car             16 ->   9     +7
+  surgery         32 ->  15    +17
+  botched         30 ->  16    +14
+  previous        14 ->  12     +2
+  burn            19 ->  14     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  paper            8 ->  39    -31
+  tattoo           7 ->  20    -13
+  fight            5 ->   9     -4
+  needle           6 ->  11     -5
+  dog              9 ->  16     -7
+  rash            12 ->  31    -19
+  car             10 ->  19     -9
+  bad             15 ->  26    -11
+  sunburn         19 ->  27     -8
+  burn            18 ->  21     -3
+
+HIGHER UNDER B
+  bee              1 ->   1     +0
+  mosquito         3 ->   2     +1
+  spider           4 ->   3     +1
+  tick            59 ->   6    +53
+  cut             11 ->   5     +6
+  splinter        32 ->  12    +20
+  small           30 ->  15    +15
+  scrape          23 ->  10    +13
+  recent          13 ->   7     +6
+  scratch         14 ->   8     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  dog              1 ->   1     +0
+  cat              2 ->   9     -7
+  spider           5 ->   8     -3
+  bee              4 ->   7     -3
+  razor           14 ->  21     -7
+  scratch         17 ->  23     -6
+  snake           11 ->  14     -3
+  bug             18 ->  20     -2
+
+HIGHER UNDER B
+  fight            6 ->   3     +3
+  fall             3 ->   2     +1
+  recent          10 ->   6     +4
+  previous        15 ->  11     +4
+  burn            12 ->  12     +0
+  car             13 ->  13     +0
+  mosquito         8 ->   5     +3
+  tattoo           7 ->   4     +3
+  childhood       23 ->  17     +6
+  bad             22 ->  18     +4
+  bicycle         20 ->  19     +1
+  cut             19 ->  16     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  burn             1 ->  13    -12
+  fall             2 ->  10     -8
+  car              3 ->  27    -24
+  broken          15 ->  29    -14
+  belt            19 ->  95    -76
+  family          14 ->  22     -8
+  chemical        20 ->  69    -49
+  childhood       18 ->  31    -13
+  new              7 ->  12     -5
+  blood           17 ->  20     -3
+  friend          10 ->  15     -5
+
+HIGHER UNDER B
+  bee              8 ->   2     +6
+  spider           9 ->   3     +6
+  recent           5 ->   1     +4
+  bite            26 ->   5    +21
+  cat             11 ->   7     +4
+  dog              6 ->   6     +0
+  vaccination     33 ->  11    +22
+  snakebite      151 ->  14   +137
+  mosquito        13 ->   8     +5
+  snake          141 ->  17   +124
+  bad              4 ->   4     +0
+  wasp            62 ->  18    +44
+  rash            12 ->   9     +3
+  vaccine         45 ->  19    +26
+  previous        16 ->  16     +0
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

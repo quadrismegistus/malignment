@@ -1,0 +1,764 @@
+Below are 28 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: She wrapped her tongue around his ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  dick             3 ->   5     -2
+  and              4 ->   4     +0
+  head             6 ->  19    -13
+  penis            7 ->  25    -18
+  hard             9 ->  43    -34
+  prick           13 ->  38    -25
+  nipple          14 ->  31    -17
+  member          10 ->  13     -3
+  as              12 ->  23    -11
+  tip             15 ->  28    -13
+  balls           11 ->  12     -1
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  shaft            2 ->   2     +0
+  sensitive       31 ->   6    +25
+  forefinger      73 ->   9    +64
+  length           5 ->   3     +2
+  fingers         17 ->   8     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  and              3 ->   7     -4
+  shaft            2 ->   4     -2
+  length           4 ->   6     -2
+  hard             5 ->   9     -4
+  tip              9 ->  22    -13
+  thick           10 ->  17     -7
+  swollen         11 ->  24    -13
+  as              12 ->  42    -30
+  flesh           14 ->  27    -13
+  dick             8 ->  10     -2
+
+HIGHER UNDER B
+  name            73 ->   1    +72
+  erection         6 ->   3     +3
+  nipple          25 ->   5    +20
+  finger          16 ->  11     +5
+  penis           13 ->  12     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  cock             1 ->   3     -2
+  hard             9 ->  37    -28
+  clit            15 ->  49    -34
+  dick             4 ->   4     +0
+  clitoris        14 ->  26    -12
+  thick            8 ->  17     -9
+  tongue           6 ->  11     -5
+  head            11 ->  18     -7
+  ear             12 ->  16     -4
+  erection        19 ->  41    -22
+  mouth            5 ->   7     -2
+  swollen         18 ->  23     -5
+
+HIGHER UNDER B
+  throat           2 ->   1     +1
+  neck             3 ->   2     +1
+  finger          13 ->   5     +8
+  nectar          62 ->  10    +52
+  hand            35 ->   8    +27
+  thumb           30 ->  12    +18
+  fingers         27 ->  13    +14
+  lips             7 ->   6     +1
+  nipple          10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  cock             1 ->   3     -2
+  dick             6 ->  31    -25
+  shaft            5 ->  10     -5
+  hard            13 ->  44    -31
+  penis            9 ->  13     -4
+  nipple          10 ->  11     -1
+  tongue          17 ->  29    -12
+  thumb           12 ->  14     -2
+  in              14 ->  20     -6
+  head            16 ->  16     +0
+
+HIGHER UNDER B
+  finger           3 ->   1     +2
+  ear              4 ->   2     +2
+  neck            11 ->   7     +4
+  earlobe          8 ->   5     +3
+  wrist           27 ->   9    +18
+  fingers          7 ->   6     +1
+  lips            15 ->   8     +7
+  face            35 ->  12    +23
+  arm             50 ->  15    +35
+  words           47 ->  17    +30
+  hand            33 ->  19    +14
+  mouth           20 ->  18     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  throat           1 ->   2     -1
+  finger           3 ->   6     -3
+  fingers          4 ->  12     -8
+  thumb            6 ->  32    -26
+  wrist            8 ->  25    -17
+  chin            11 ->  20     -9
+  hands           12 ->  17     -5
+  own             13 ->  13     +0
+
+HIGHER UNDER B
+  neck             2 ->   1     +1
+  hand            10 ->   4     +6
+  mouth            5 ->   3     +2
+  ear             21 ->   8    +13
+  teeth           24 ->  11    +13
+  head            18 ->  10     +8
+  arm             16 ->   9     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  name             3 ->  52    -49
+  dick             2 ->   7     -5
+  penis            5 ->  18    -13
+  ear              7 ->  25    -18
+  shaft            4 ->   9     -5
+  balls           12 ->  27    -15
+  swollen         18 ->  60    -42
+  length          17 ->  24     -7
+  tongue           9 ->  11     -2
+  member          13 ->  15     -2
+
+HIGHER UNDER B
+  thumb           25 ->   2    +23
+  thick            8 ->   3     +5
+  erection        10 ->   4     +6
+  lips            27 ->   8    +19
+  big             28 ->  10    +18
+  and             11 ->   6     +5
+  mouth           42 ->  14    +28
+  head            14 ->  12     +2
+  hard             6 ->   5     +1
+  erect           15 ->  13     +2
+  nipple          16 ->  16     +0
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  and              1 ->   7     -6
+  shaft            3 ->   6     -3
+  dick             5 ->  31    -26
+  as               8 ->  56    -48
+  head             6 ->  12     -6
+  sheath          12 -> 120   -108
+  rod              9 ->  29    -20
+  prick           11 ->  35    -24
+  with            16 ->  75    -59
+  neck             7 ->  11     -4
+  thick           14 ->  28    -14
+
+HIGHER UNDER B
+  finger          23 ->   2    +21
+  tongue          15 ->   3    +12
+  length          31 ->   5    +26
+  earlobe        106 ->   9    +97
+  name           112 ->  10   +102
+  hard            10 ->   8     +2
+  throbbing       69 ->  14    +55
+  erection        71 ->  16    +55
+  tip             38 ->  13    +25
+  firm           120 ->  24    +96
+  stiff           60 ->  18    +42
+  phallus         68 ->  21    +47
+  bone            94 ->  23    +71
+  taste          105 ->  25    +80
+  meaty           47 ->  19    +28
+  erect           30 ->  22     +8
+  penis            4 ->   4     +0
+  mouth           18 ->  17     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  cock             1 ->   7     -6
+  head             3 ->  11     -8
+  penis            4 ->   9     -5
+  and              5 ->  10     -5
+  dick            14 ->  89    -75
+  hard            15 ->  42    -27
+  tongue          11 ->  17     -6
+  prick           18 ->  73    -55
+  balls           16 ->  24     -8
+  as              17 ->  29    -12
+  neck             6 ->   6     +0
+  nipple          13 ->  16     -3
+  manhood         21 ->  21     +0
+
+HIGHER UNDER B
+  earlobe          7 ->   1     +6
+  finger          10 ->   3     +7
+  shaft            2 ->   2     +0
+  member           8 ->   4     +4
+  fingers          9 ->   5     +4
+  glans           23 ->   8    +15
+  tip             34 ->  12    +22
+  thumb           20 ->  14     +6
+  erection        19 ->  15     +4
+  body            25 ->  18     +7
+  flesh           24 ->  19     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  cock             1 ->   8     -7
+  dick             4 ->  42    -38
+  nipple           7 ->  37    -30
+  hard            10 ->  48    -38
+  balls           11 ->  64    -53
+  thick           13 ->  62    -49
+  tip             14 ->  61    -47
+  manhood         15 ->  35    -20
+  as               9 ->   9     +0
+  penis            5 ->   5     +0
+
+HIGHER UNDER B
+  length           8 ->   1     +7
+  shaft            3 ->   2     +1
+  member          12 ->   4     +8
+  in              24 ->   7    +17
+  sex             76 ->  10    +66
+  it              84 ->  11    +73
+  with            50 ->  12    +38
+  but             64 ->  13    +51
+  erection         6 ->   6     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  mouth            3 ->   7     -4
+  fingers          1 ->   2     -1
+  teeth           14 ->  22     -8
+  face            16 ->  29    -13
+  throat           9 ->  10     -1
+  hands           13 ->  16     -3
+  arm             15 ->  17     -2
+
+HIGHER UNDER B
+  hand             2 ->   1     +1
+  wrist           10 ->   9     +1
+  nipple          22 ->  13     +9
+  and              8 ->   8     +0
+  tongue           7 ->   6     +1
+  finger           5 ->   4     +1
+  neck             6 ->   5     +1
+  in              21 ->  14     +7
+  thumb           12 ->  12     +0
+  to              17 ->  15     +2
+  nose            11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  length           9 ->  26    -17
+  hard            10 ->  25    -15
+  dick            12 ->  27    -15
+  erection        13 ->  34    -21
+  penis            7 ->  11     -4
+  shaft            4 ->   6     -2
+  manhood          6 ->   8     -2
+
+HIGHER UNDER B
+  thick            2 ->   2     +0
+  words           42 ->   5    +37
+  and              5 ->   4     +1
+  tongue           8 ->   7     +1
+  name            58 ->  10    +48
+  member           3 ->   3     +0
+  as              16 ->   9     +7
+  word            82 ->  19    +63
+  neck            20 ->  12     +8
+  like            31 ->  20    +11
+  fingers         14 ->  13     +1
+  head            15 ->  15     +0
+  lips            22 ->  17     +5
+  long            19 ->  16     +3
+  in              26 ->  21     +5
+  ____            18 ->  18     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  dick             3 ->  58    -55
+  penis            2 ->  12    -10
+  tongue           5 ->   9     -4
+  member           7 ->  18    -11
+  prick            8 ->  17     -9
+  length          11 ->  28    -17
+  as               9 ->  16     -7
+
+HIGHER UNDER B
+  shaft            6 ->   3     +3
+  and              4 ->   2     +2
+  neck            24 ->   4    +20
+  fingers         21 ->   5    +16
+  in              10 ->   6     +4
+  finger          25 ->   7    +18
+  ear             34 ->   8    +26
+  erect           16 ->  11     +5
+  for             15 ->  10     +5
+  ears            62 ->  14    +48
+  wrist           66 ->  15    +51
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  cock             1 ->  22    -21
+  shaft            2 ->  31    -29
+  dick             3 ->  21    -18
+  head             4 ->  32    -28
+  penis            6 ->   9     -3
+  and              8 ->  28    -20
+  nipple           9 ->  53    -44
+  neck            11 ->  35    -24
+  tongue          14 ->  48    -34
+  balls           15 ->  62    -47
+  fingers         18 ->  46    -28
+
+HIGHER UNDER B
+  length           5 ->   1     +4
+  thick           10 ->   2     +8
+  flesh           16 ->   4    +12
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  cock             2 ->   3     -1
+  and              3 ->  11     -8
+  lips             4 ->   9     -5
+  mouth            5 ->   7     -2
+  again            7 ->  17    -10
+  as              12 ->  40    -28
+  finger          11 ->  29    -18
+  shaft           14 ->  28    -14
+  dick            15 ->  54    -39
+  thick           16 ->  36    -20
+  penis           22 ->  67    -45
+  bottom          20 ->  52    -32
+  nipple          21 ->  42    -21
+  face            18 ->  24     -6
+  hard            19 ->  26     -7
+  nose            10 ->  10     +0
+  in              24 ->  27     -3
+
+HIGHER UNDER B
+  neck             1 ->   1     +0
+  throat           6 ->   2     +4
+  ear              8 ->   4     +4
+  wrist           17 ->   6    +11
+  head             9 ->   5     +4
+  leg             29 ->  12    +17
+  cheek           13 ->   8     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  name             3 ->  56    -53
+  words            8 ->  47    -39
+  shaft            5 ->   9     -4
+  dick             4 ->   7     -3
+  penis            6 ->  10     -4
+  member          11 ->  15     -4
+  fingers         17 ->  54    -37
+  length          16 ->  40    -24
+  thick           14 ->  23     -9
+  head            13 ->  21     -8
+  hard            12 ->  13     -1
+  erection        18 ->  19     -1
+
+HIGHER UNDER B
+  and              2 ->   1     +1
+  again           35 ->   3    +32
+  in               9 ->   4     +5
+  as              10 ->   5     +5
+  once            73 ->   8    +65
+  balls            7 ->   6     +1
+  like            21 ->  11    +10
+  prick           28 ->  14    +14
+  while           40 ->  16    +24
+  tip             15 ->  12     +3
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  penis            3 ->   4     -1
+  ear             10 ->  14     -4
+  dick             6 ->   9     -3
+  balls           14 ->  20     -6
+  shaft            5 ->   6     -1
+  hard            13 ->  13     +0
+  nipple           8 ->   8     +0
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  and              2 ->   2     +0
+  member           4 ->   3     +1
+  neck             7 ->   5     +2
+  as              15 ->  12     +3
+  erection         9 ->   7     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  dick             3 ->   6     -3
+  head             5 ->  10     -5
+  tip              6 ->  11     -5
+  length           7 ->   8     -1
+  fingers         11 ->  26    -15
+  hard             9 ->  12     -3
+  penis           12 ->  28    -16
+  finger          10 ->  13     -3
+  balls           13 ->  15     -2
+  cock             1 ->   1     +0
+
+HIGHER UNDER B
+  erection        19 ->   4    +15
+  shaft            2 ->   2     +0
+  nipple          16 ->   5    +11
+  and              4 ->   3     +1
+  thick           14 ->   9     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  and              7 ->   8     -1
+  hard            10 ->  11     -1
+  head            11 ->  12     -1
+  shaft            2 ->   2     +0
+  length          13 ->  14     -1
+  thick            6 ->   6     +0
+  member           5 ->   5     +0
+  tip              8 ->   9     -1
+  clit            15 ->  15     +0
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  dick             3 ->   3     +0
+  nipple           4 ->   4     +0
+  big             12 ->  10     +2
+  penis            9 ->   7     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  and              2 ->   4     -2
+  head             4 ->  11     -7
+  as              10 ->  17     -7
+  hard             8 ->  13     -5
+  clit             5 ->   9     -4
+  throat          12 ->  16     -4
+
+HIGHER UNDER B
+  penis           16 ->   5    +11
+  neck             6 ->   3     +3
+  shaft            3 ->   2     +1
+  dick             7 ->   6     +1
+  <              106 ->  10    +96
+  face            21 ->  12     +9
+  ear             23 ->  14     +9
+  mouth           11 ->   7     +4
+  balls            9 ->   8     +1
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  and              3 ->   9     -6
+  dick             5 ->  11     -6
+  length           4 ->  10     -6
+  head            12 ->  15     -3
+  name            13 ->  16     -3
+  ear             19 ->  20     -1
+  tip             15 ->  18     -3
+  earlobe         17 ->  17     +0
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  nipple           7 ->   3     +4
+  hard             8 ->   4     +4
+  thick            6 ->   5     +1
+  penis           10 ->   6     +4
+  shaft            2 ->   2     +0
+  tongue          18 ->  13     +5
+  finger          11 ->   7     +4
+  fingers          9 ->   8     +1
+  neck            16 ->  14     +2
+  member          14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  cock             1 ->  10     -9
+  and              2 ->   9     -7
+  penis            4 ->  28    -24
+  dick             6 ->  53    -47
+  manhood          8 ->  44    -36
+  tongue          11 ->  45    -34
+  lips             5 ->   6     -1
+  as              14 ->  52    -38
+  shaft           12 ->  36    -24
+  mouth           16 ->  31    -15
+  member          18 ->  81    -63
+  head            19 ->  47    -28
+  for             20 ->  30    -10
+
+HIGHER UNDER B
+  name             3 ->   1     +2
+  earlobe         17 ->   2    +15
+  nipple           7 ->   3     +4
+  ear             10 ->   4     +6
+  cheek           46 ->   7    +39
+  finger          15 ->   5    +10
+  teeth           21 ->  11    +10
+  thumb           25 ->  13    +12
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  head             3 ->   4     -1
+  shaft            2 ->   2     +0
+  balls            5 ->  14     -9
+  tip              7 ->  13     -6
+  cockhead         6 ->   9     -3
+  knob            18 ->  23     -5
+  thick           16 ->  19     -3
+  hard             8 ->  11     -3
+  swollen         20 ->  26     -6
+  prick           19 ->  22     -3
+  glans           12 ->  17     -5
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  and             22 ->   5    +17
+  manhood         17 ->   7    +10
+  member           9 ->   6     +3
+  penis           14 ->   8     +6
+  dick             4 ->   3     +1
+  length          10 ->  10     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  and              1 ->   6     -5
+  tongue           7 ->  21    -14
+  tip              8 ->  10     -2
+  dick             9 ->  39    -30
+  penis           14 ->  24    -10
+  as              12 ->  16     -4
+  finger          15 ->  19     -4
+  head            13 ->  13     +0
+
+HIGHER UNDER B
+  ear              4 ->   1     +3
+  earlobe          5 ->   4     +1
+  cock             2 ->   2     +0
+  shaft            3 ->   3     +0
+  neck             6 ->   5     +1
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  lower            2 ->   6     -4
+  bottom           6 ->  11     -5
+  neck             3 ->   3     +0
+  ear              4 ->   4     +0
+  earlobe          7 ->  24    -17
+  and             10 ->  39    -29
+  mouth            9 ->  10     -1
+  tongue          11 ->  28    -17
+  nipple          12 ->  43    -31
+  last            13 ->  18     -5
+  upper           16 ->  44    -28
+  head            15 ->  15     +0
+
+HIGHER UNDER B
+  name             1 ->   1     +0
+  cock             5 ->   2     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  earlobe         11 ->  27    -16
+  fingers         12 ->  26    -14
+  lips             5 ->   8     -3
+  neck             6 ->  13     -7
+  erection        14 ->  23     -9
+  bottom          10 ->  15     -5
+  as               4 ->   5     -1
+  finger           8 ->  11     -3
+  own             21 ->  34    -13
+  in              17 ->  21     -4
+  hard            19 ->  24     -5
+  before          18 ->  19     -1
+  ear              9 ->   9     +0
+
+HIGHER UNDER B
+  and              1 ->   1     +0
+  shaft            2 ->   2     +0
+  dick            13 ->   4     +9
+  cock             3 ->   3     +0
+  like            36 ->  10    +26
+  with            24 ->  16     +8
+  until           20 ->  14     +6
+  mouth           15 ->   7     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  lips             5 ->  14     -9
+  shaft            2 ->   5     -3
+  dick             6 ->  16    -10
+  cock             1 ->   1     +0
+  penis            7 ->  12     -5
+  balls           13 ->  52    -39
+  knob            16 -> 136   -120
+  neck             8 ->  13     -5
+  nipple          14 ->  26    -12
+  shoulder        17 ->  25     -8
+  bottom          11 ->  15     -4
+
+HIGHER UNDER B
+  hard             4 ->   2     +2
+  fingers          9 ->   4     +5
+  swollen         21 ->   7    +14
+  big             15 ->   8     +7
+  thick           10 ->   6     +4
+  and             20 ->   9    +11
+  manhood         19 ->  10     +9
+  slowly         102 ->  18    +84
+  mouth            3 ->   3     +0
+  lower           25 ->  17     +8
+  finger          12 ->  11     +1
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  shaft            1 ->   2     -1
+  nipple           6 ->  12     -6
+  head             4 ->   4     +0
+  cockhead        15 ->  30    -15
+  prick           14 ->  19     -5
+  swollen         10 ->  13     -3
+  finger          11 ->  15     -4
+
+HIGHER UNDER B
+  dick             3 ->   3     +0
+  tip              7 ->   5     +2
+  thick           21 ->   8    +13
+  length           8 ->   7     +1
+  penis           16 ->   9     +7
+  fingers         17 ->  14     +3
+  hard            12 ->  11     +1
+  crown           18 ->  16     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  words            2 -> 107   -105
+  name             3 ->  95    -92
+  mouth            5 ->  65    -60
+  penis            4 ->  17    -13
+  lips             7 ->  37    -30
+  ear              8 ->  13     -5
+  throat           9 ->  16     -7
+  dick            10 ->  11     -1
+  nipples         18 ->  73    -55
+  earlobe         15 ->  25    -10
+
+HIGHER UNDER B
+  neck             6 ->   2     +4
+  shaft           16 ->   3    +13
+  cock             1 ->   1     +0
+  member          29 ->   5    +24
+  head            12 ->   4     +8
+  fat             90 ->  10    +80
+  big             27 ->   9    +18
+  and             13 ->   7     +6
+  thick           14 ->   8     +6
+  firm            48 ->  12    +36
+  as              28 ->  15    +13
+  hard            11 ->   6     +5
+  tongue          17 ->  14     +3
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 28 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

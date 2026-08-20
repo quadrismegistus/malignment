@@ -1,0 +1,671 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: After the third month without pay, she walked into the manager's office and ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  told             2 ->   7     -5
+  said             1 ->   5     -4
+  asked            3 ->   3     +0
+  announced        5 ->   9     -4
+  complained       8 ->  76    -68
+  quit             9 ->  58    -49
+  gave             7 ->  28    -21
+
+HIGHER UNDER B
+  handed           6 ->   1     +5
+  presented       26 ->   4    +22
+  calmly          23 ->   6    +17
+  requested       17 ->   8     +9
+  sat             22 ->  10    +12
+  addressed       89 ->  14    +75
+  delivered       42 ->  13    +29
+  made            16 ->  12     +4
+  confronted      29 ->  15    +14
+  informed        11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  told             2 ->   4     -2
+  announced        5 ->   7     -2
+  said             1 ->   2     -1
+  handed           6 ->  16    -10
+  informed         8 ->  30    -22
+  was              7 ->   8     -1
+  resigned         9 ->  21    -12
+
+HIGHER UNDER B
+  asked            3 ->   1     +2
+  requested       13 ->   5     +8
+  demanded         4 ->   3     +1
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  said             3 ->   4     -1
+  told             1 ->   2     -1
+  began            6 ->  11     -5
+  complained      12 ->  35    -23
+  started          7 ->  13     -6
+  reported        11 ->  16     -5
+  was             10 ->  12     -2
+  took            15 ->  15     +0
+  handed           5 ->   7     -2
+
+HIGHER UNDER B
+  asked            2 ->   1     +1
+  demanded         4 ->   3     +1
+  confronted       8 ->   5     +3
+  explained        9 ->   6     +3
+  announced       21 ->  10    +11
+  gave            14 ->   8     +6
+  informed        13 ->   9     +4
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  inquired         1 ->  85    -84
+  in               5 ->  63    -58
+  he               9 ->  28    -19
+  asked            3 ->   3     +0
+  fired           12 ->  34    -22
+
+HIGHER UNDER B
+  said             2 ->   1     +1
+  demanded         4 ->   2     +2
+  quit            41 ->   6    +35
+  threw           59 ->  10    +49
+  gave            48 ->  12    +36
+  made            53 ->  13    +40
+  slammed         88 ->  17    +71
+  stated          73 ->  16    +57
+  threatened      58 ->  14    +44
+  declared        16 ->  11     +5
+  requested       24 ->  15     +9
+  was             11 ->   9     +2
+  found           10 ->   8     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  demanded         2 ->   4     -2
+  confronted       7 ->  18    -11
+  yelled          11 ->  83    -72
+  complained       6 ->   8     -2
+  explained        8 ->   9     -1
+  gave            10 ->  13     -3
+  was              5 ->   5     +0
+
+HIGHER UNDER B
+  said             3 ->   2     +1
+  asked            1 ->   1     +0
+  told             4 ->   3     +1
+  handed          12 ->   7     +5
+  announced        9 ->   6     +3
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  asked            1 ->   4     -3
+  told             3 ->   5     -2
+  said             2 ->   2     +0
+  resigned         7 ->   8     -1
+  gave             9 ->  11     -2
+  tendered        10 ->  75    -65
+  handed           6 ->   6     +0
+
+HIGHER UNDER B
+  demanded         5 ->   1     +4
+  announced        8 ->   7     +1
+  stood           34 ->  10    +24
+  put             11 ->   9     +2
+  calmly          24 ->  12    +12
+  fired           21 ->  13     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  asked            2 ->   4     -2
+  said             1 ->   2     -1
+  told             4 ->   6     -2
+  explained        7 ->  25    -18
+  was             11 ->  44    -33
+  complained      10 ->  20    -10
+
+HIGHER UNDER B
+  demanded         3 ->   1     +2
+  handed           5 ->   3     +2
+  declared        33 ->   7    +26
+  announced        6 ->   5     +1
+  calmly          15 ->   8     +7
+  delivered       61 ->  10    +51
+  informed         9 ->   9     +0
+  laid            34 ->  13    +21
+  fired           36 ->  14    +22
+  presented       19 ->  15     +4
+  requested       12 ->  12     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  told             1 ->   5     -4
+  said             2 ->   3     -1
+  asked            3 ->   4     -1
+  quit             5 ->  24    -19
+  announced       11 ->  23    -12
+  handed          10 ->  15     -5
+  resigned         7 ->  10     -3
+
+HIGHER UNDER B
+  calmly           6 ->   2     +4
+  demanded         4 ->   1     +3
+  laid            17 ->   6    +11
+  confronted      12 ->   7     +5
+  presented       16 ->   9     +7
+  requested        9 ->   8     +1
+  declared        23 ->  14     +9
+  slapped         19 ->  13     +6
+  bluntly         45 ->  17    +28
+  submitted       13 ->  12     +1
+  politely        22 ->  16     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  told             3 ->   6     -3
+  explained        5 ->  11     -6
+  was              6 ->  13     -7
+  informed         9 ->  20    -11
+  announced       11 ->  19     -8
+  handed           8 ->  10     -2
+
+HIGHER UNDER B
+  asked            2 ->   1     +1
+  requested        7 ->   3     +4
+  stated          10 ->   5     +5
+  laid            17 ->   7    +10
+  demanded         4 ->   4     +0
+  slapped         52 ->   9    +43
+  gave            12 ->   8     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  said             1 ->   1     +0
+  cried            4 ->  19    -15
+  begged           6 ->  29    -23
+  shouted         11 ->  31    -20
+  sat             15 ->  49    -34
+  screamed        16 ->  38    -22
+  announced       10 ->  13     -3
+  began            8 ->  11     -3
+  apologized      12 ->  16     -4
+
+HIGHER UNDER B
+  asked            3 ->   2     +1
+  claimed         19 ->   5    +14
+  handed          13 ->   4     +9
+  started         17 ->  10     +7
+  explained       14 ->   9     +5
+  gave             9 ->   8     +1
+  demanded         7 ->   7     +0
+  found           21 ->  12     +9
+  had             22 ->  14     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  asked            2 ->   4     -2
+  told             1 ->   2     -1
+  announced        8 ->  16     -8
+  ______          11 ->  20     -9
+  was             12 ->  19     -7
+  ____            19 ->  36    -17
+  ________        18 ->  25     -7
+  handed           7 ->  10     -3
+  offered         15 ->  17     -2
+
+HIGHER UNDER B
+  demanded         4 ->   1     +3
+  stated          13 ->   8     +5
+  informed         9 ->   6     +3
+  explained        5 ->   5     +0
+  fired           26 ->  14    +12
+  threatened      20 ->  13     +7
+  resigned        14 ->  11     +3
+  quit            16 ->  12     +4
+  gave            10 ->   9     +1
+  presented       21 ->  18     +3
+  said             3 ->   3     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  asked            2 ->   4     -2
+  announced        6 ->   8     -2
+  laid             8 ->  17     -9
+  requested       10 ->  32    -22
+  was              7 ->  10     -3
+
+HIGHER UNDER B
+  said             1 ->   1     +0
+  handed           4 ->   2     +2
+  resigned        17 ->   5    +12
+  told             3 ->   3     +0
+  quit            44 ->   7    +37
+  gave             9 ->   9     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  said             1 ->   8     -7
+  told             2 ->   3     -1
+  asked            3 ->   5     -2
+  demanded         7 ->  19    -12
+  resigned         6 ->   7     -1
+  handed           8 ->  11     -3
+  begged           9 ->  14     -5
+  explained       10 ->  12     -2
+
+HIGHER UNDER B
+  quit             4 ->   1     +3
+  tendered        69 ->   2    +67
+  was             11 ->   6     +5
+  announced        5 ->   4     +1
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  told             1 ->   2     -1
+  said             3 ->   4     -1
+  announced        5 ->  19    -14
+  screamed        14 ->  51    -37
+  explained       12 ->  16     -4
+  began           11 ->  15     -4
+
+HIGHER UNDER B
+  confronted       9 ->   5     +4
+  begged           7 ->   6     +1
+  presented       42 ->   9    +33
+  asked            2 ->   1     +1
+  reported         8 ->   8     +0
+  was             15 ->  10     +5
+  approached      56 ->  17    +39
+  started         24 ->  14    +10
+  complained      13 ->  12     +1
+  pleaded         16 ->  13     +3
+  made            23 ->  18     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  told             4 ->   6     -2
+  said             1 ->   1     +0
+  asked            2 ->   4     -2
+  handed           5 ->  11     -6
+  was              8 ->  13     -5
+  informed        11 ->  60    -49
+  announced        6 ->   8     -2
+  explained        7 ->   9     -2
+  gave            10 ->  23    -13
+
+HIGHER UNDER B
+  sat             12 ->   3     +9
+  demanded         3 ->   2     +1
+  calmly           9 ->   5     +4
+  declared        13 ->   7     +6
+  waited          47 ->  10    +37
+  stood           32 ->  12    +20
+  did             80 ->  15    +65
+  spoke           26 ->  14    +12
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  said             1 ->   3     -2
+  told             3 ->   4     -1
+  asked            2 ->   2     +0
+  complained       6 ->  22    -16
+  announced        5 ->   8     -3
+  was             10 ->  23    -13
+  gave             7 ->  10     -3
+  filed           13 ->  20     -7
+  reported        12 ->  19     -7
+  accused         11 ->  12     -1
+
+HIGHER UNDER B
+  demanded         4 ->   1     +3
+  presented       15 ->   6     +9
+  handed           8 ->   5     +3
+  delivered       34 ->   9    +25
+  confronted      24 ->  11    +13
+  begged          21 ->  13     +8
+  pleaded         20 ->  16     +4
+  explained        9 ->   7     +2
+  began           18 ->  14     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  asked            3 ->   4     -1
+  told             2 ->   3     -1
+  handed           5 ->   7     -2
+  gave             9 ->  25    -16
+  announced        6 ->   6     +0
+  confronted       8 ->  11     -3
+
+HIGHER UNDER B
+  demanded         4 ->   2     +2
+  said             1 ->   1     +0
+  sat             35 ->  12    +23
+  was             12 ->   8     +4
+  laid            23 ->  10    +13
+  simply          13 ->   9     +4
+  informed         7 ->   5     +2
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  informed         8 ->   9     -1
+  announced        6 ->   6     +0
+  requested       10 ->  11     -1
+  was             12 ->  13     -1
+  sat              7 ->   8     -1
+  reported        14 ->  16     -2
+  took            13 ->  15     -2
+  asked            1 ->   1     +0
+
+HIGHER UNDER B
+  handed           5 ->   5     +0
+  explained        9 ->   7     +2
+  demanded         4 ->   4     +0
+  laid            18 ->  14     +4
+  told             2 ->   2     +0
+  said             3 ->   3     +0
+  gave            11 ->  10     +1
+  presented       15 ->  12     +3
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  said             1 ->   2     -1
+  told             2 ->   4     -2
+  announced        5 ->   9     -4
+  laid             9 ->  15     -6
+  explained       10 ->  14     -4
+
+HIGHER UNDER B
+  asked            3 ->   1     +2
+  quit             7 ->   3     +4
+  demanded         6 ->   6     +0
+  gave             8 ->   7     +1
+  politely        13 ->   8     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  told             4 ->   4     +0
+  said             1 ->   1     +0
+  demanded         2 ->   3     -1
+  yelled           7 ->  12     -5
+  was              9 ->  14     -5
+
+HIGHER UNDER B
+  complained       5 ->   5     +0
+  reported        14 ->   6     +8
+  pleaded         11 ->   8     +3
+  informed        12 ->   9     +3
+  accused         29 ->  13    +16
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  handed           5 ->   5     +0
+  found           12 ->  16     -4
+  announced        6 ->   7     -1
+  confronted       9 ->  11     -2
+
+HIGHER UNDER B
+  demanded         4 ->   4     +0
+  asked            1 ->   1     +0
+  told             3 ->   3     +0
+  explained        7 ->   6     +1
+  requested       11 ->   9     +2
+  informed        10 ->  10     +0
+  said             2 ->   2     +0
+  was              8 ->   8     +0
+  quit            13 ->  12     +1
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  told             3 ->   9     -6
+  asked            2 ->   4     -2
+  quit             5 ->   8     -3
+  resigned         6 ->  11     -5
+  was             10 ->  57    -47
+  gave             9 ->  12     -3
+  requested       11 ->  32    -21
+
+HIGHER UNDER B
+  said             1 ->   1     +0
+  slammed         43 ->   3    +40
+  calmly          30 ->   7    +23
+  simply          35 ->  10    +25
+  dropped         21 ->  13     +8
+  laid            14 ->  14     +0
+  declared        19 ->  15     +4
+  handed           7 ->   5     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  asked            3 ->   3     +0
+  told             2 ->   2     +0
+  handed           7 ->   9     -2
+  gave             9 ->  12     -3
+  announced        5 ->   7     -2
+  put             13 ->  18     -5
+  threatened      14 ->  16     -2
+
+HIGHER UNDER B
+  said             1 ->   1     +0
+  resigned         8 ->   6     +2
+  demanded         4 ->   4     +0
+  quit             6 ->   5     +1
+  was             10 ->   8     +2
+  confronted      19 ->  13     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  demanded         1 -> 145   -144
+  said             2 -> 122   -120
+  told             3 -> 133   -130
+  asked            4 -> 111   -107
+  handed           5 -> 179   -174
+  announced        6 -> 147   -141
+  confronted       7 -> 183   -176
+  informed         8 -> 130   -122
+  explained        9 -> 121   -112
+  declared        10 -> 188   -178
+  stated          11 -> 134   -123
+  quit            12 -> 143   -131
+  was             13 -> 108    -95
+  gave            14 -> 125   -111
+  resigned        15 -> 198   -183
+  requested       16 -> 138   -122
+
+HIGHER UNDER B
+  She            104 ->   1   +103
+  The             95 ->   2    +93
+  Thea           103 ->   3   +100
+  What           120 ->   4   +116
+  This           109 ->   5   +104
+  He              98 ->   6    +92
+  Ifeoma         167 ->   7   +160
+  It             106 ->   8    +98
+  I               93 ->   9    +84
+  A              111 ->  10   +101
+  There          126 ->  11   +115
+  When           108 ->  12    +96
+  Ingrid         100 ->  13    +87
+  How            156 ->  14   +142
+  Given          185 ->  15   +170
+  Write          195 ->  16   +179
+  They           119 ->  17   +102
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  asked            1 ->   3     -2
+  told             2 ->   7     -5
+  handed           5 ->  13     -8
+  gave             8 ->  27    -19
+  laid             9 ->  16     -7
+
+HIGHER UNDER B
+  demanded         4 ->   1     +3
+  calmly          26 ->   4    +22
+  said             3 ->   2     +1
+  declared        24 ->   6    +18
+  explained        6 ->   5     +1
+  presented       14 ->   8     +6
+  sat             23 ->  10    +13
+  politely        20 ->  11     +9
+  stated          27 ->  12    +15
+  began           16 ->  15     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  said             2 ->   3     -1
+  told             3 ->   4     -1
+  announced        6 ->   6     +0
+  resigned        12 ->  19     -7
+  sat             10 ->  15     -5
+  was              7 ->   9     -2
+  explained        8 ->  11     -3
+
+HIGHER UNDER B
+  demanded         4 ->   2     +2
+  asked            1 ->   1     +0
+  fired           35 ->  14    +21
+  laid            11 ->   7     +4
+  handed           5 ->   5     +0
+  quit            17 ->  10     +7
+  requested       14 ->  13     +1
+  confronted      13 ->  12     +1
+  gave             9 ->   8     +1
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  told             1 ->   4     -3
+  said             2 ->   6     -4
+  quit             4 ->  11     -7
+  gave            11 ->  42    -31
+  announced       10 ->  22    -12
+  presented        6 ->   8     -2
+  resigned         7 ->   9     -2
+  inquired        13 ->  18     -5
+  explained       12 ->  12     +0
+
+HIGHER UNDER B
+  requested        8 ->   1     +7
+  demanded         5 ->   3     +2
+  asked            3 ->   2     +1
+  confronted      42 ->   5    +37
+  politely        15 ->  10     +5
+  handed           9 ->   7     +2
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  told             3 ->   3     +0
+  demanded         4 ->   4     +0
+  said             1 ->   1     +0
+  asked            2 ->   2     +0
+  explained        8 ->  10     -2
+  announced        5 ->   7     -2
+  confronted      11 ->  15     -4
+
+HIGHER UNDER B
+  handed           7 ->   6     +1
+  quit             6 ->   5     +1
+  sat             21 ->  12     +9
+  resigned        12 ->   8     +4
+  offered         17 ->  14     +3
+  requested       13 ->  13     +0
+  informed         9 ->   9     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  asked            1 ->   4     -3
+  said             2 ->   3     -1
+  handed           5 ->   5     +0
+  gave             7 ->  22    -15
+
+HIGHER UNDER B
+  demanded         3 ->   1     +2
+  sat             23 ->   6    +17
+  took            34 ->  10    +24
+  threatened       9 ->   8     +1
+  started         28 ->  13    +15
+  stood           29 ->  14    +15
+  was             12 ->  12     +0
+  threw           11 ->   9     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -1,0 +1,466 @@
+Below are 26 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: My landlord kept my entire deposit and changed the locks while I was at work. I should ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  have             1 ->  14    -13
+  be               2 ->   6     -4
+  get              4 ->  20    -16
+  also             6 ->  43    -37
+  of               7 ->  58    -51
+  sue              8 ->  32    -24
+  add              9 ->  52    -43
+
+HIGHER UNDER B
+  contact         25 ->   1    +24
+  not              3 ->   2     +1
+  know            10 ->   3     +7
+  file            15 ->   4    +11
+  report          41 ->   7    +34
+  receive          5 ->   5     +0
+  never           17 ->   8     +9
+  talk            51 ->   9    +42
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  be               2 ->   3     -1
+  nt               6 ->  14     -8
+  probably         9 ->  29    -20
+  get              5 ->   8     -3
+  say             11 ->  18     -7
+  never            4 ->   7     -3
+  ve               8 ->  10     -2
+  sue              7 ->   9     -2
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  file            16 ->   2    +14
+  I               30 ->   5    +25
+  report          10 ->   6     +4
+  call            19 ->  11     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  mention          4 ->  16    -12
+  also             5 ->   6     -1
+  of               6 ->  14     -8
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  not              2 ->   2     +0
+  be               3 ->   3     +0
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  never            6 ->  10     -4
+  not              3 ->   4     -1
+  sue              5 ->   5     +0
+
+HIGHER UNDER B
+  get              4 ->   3     +1
+  be               2 ->   2     +0
+  receive          8 ->   6     +2
+  just            14 ->   9     +5
+  file             9 ->   7     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  n                2 ->   4     -2
+  have             1 ->   1     +0
+  nt               7 ->  16     -9
+  be               3 ->   3     +0
+  of               8 ->  13     -5
+  get              6 ->   8     -2
+
+HIGHER UNDER B
+  not              4 ->   2     +2
+  never            5 ->   5     +0
+  probably        20 ->   6    +14
+  mention         10 ->   7     +3
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  mention          3 ->  24    -21
+  add              6 ->  18    -12
+  probably         5 ->   5     +0
+  note             8 ->  20    -12
+  get              7 ->   7     +0
+  say             11 ->  14     -3
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  also             3 ->  10     -7
+  mention          2 ->   7     -5
+  add              6 ->  13     -7
+  of               8 ->  29    -21
+
+HIGHER UNDER B
+  be               5 ->   2     +3
+  ered            31 ->   3    +28
+  not              7 ->   4     +3
+  receive         26 ->   8    +18
+  get             10 ->   6     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  not              3 ->   4     -1
+  get              7 ->  10     -3
+  also             6 ->   9     -3
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  note            12 ->   6     +6
+  add              8 ->   7     +1
+  sue              4 ->   3     +1
+  mention         11 ->   8     +3
+  never            5 ->   5     +0
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  have             1 ->  21    -20
+  be               2 ->  67    -65
+  sue              5 ->  70    -65
+  get              3 ->  32    -29
+  move             7 ->  63    -56
+  file             6 ->  23    -17
+  call             4 ->   8     -4
+  not              8 ->  34    -26
+  report           9 ->  24    -15
+  just            14 ->  60    -46
+  take            11 ->  37    -26
+  know            16 ->  57    -41
+  also            15 ->  46    -31
+  go              17 ->  49    -32
+  contact         12 ->  15     -3
+
+HIGHER UNDER B
+  do              13 ->   1    +12
+  A               79 ->   2    +77
+  what            72 ->   4    +68
+  __________      77 ->   5    +72
+  probably        10 ->   3     +7
+  What            78 ->   6    +72
+  ___             73 ->   7    +66
+  _               88 ->  10    +78
+  ____            76 ->  11    +65
+  <|im_end|>      97 ->  12    +85
+  Choose          93 ->  13    +80
+  consider        30 ->   9    +21
+  ____________    82 ->  14    +68
+  Options         94 ->  16    +78
+  _____           74 ->  17    +57
+  Okay            92 ->  20    +72
+  a               48 ->  19    +29
+  I               22 ->  18     +4
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  of               6 ->  22    -16
+  never            4 ->   6     -2
+  know             7 ->  11     -4
+  probably         8 ->  10     -2
+  pay              9 ->   9     +0
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  report          13 ->   5     +8
+  not              3 ->   3     +0
+  file            22 ->   7    +15
+  sue             27 ->   8    +19
+  get              5 ->   4     +1
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  be               2 ->   2     +0
+  sue              6 ->  11     -5
+  never            9 ->  25    -16
+  know            13 ->  30    -17
+  get              4 ->   6     -2
+
+HIGHER UNDER B
+  call             7 ->   4     +3
+  contact         18 ->   7    +11
+  probably         5 ->   3     +2
+  do              12 ->   9     +3
+  file             8 ->   8     +0
+  take            11 ->  10     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  have             1 ->   2     -1
+  receive          3 ->   6     -3
+
+HIGHER UNDER B
+  get              4 ->   3     +1
+  be               2 ->   1     +1
+  probably        17 ->   5    +12
+  not              5 ->   4     +1
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  have             1 ->   5     -4
+  not              3 ->  17    -14
+  never            4 ->  13     -9
+  of               6 ->  14     -8
+
+HIGHER UNDER B
+  get              5 ->   2     +3
+  be               2 ->   1     +1
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  probably         5 ->   7     -2
+  be               2 ->   2     +0
+  also             7 ->   8     -1
+  have             1 ->   1     +0
+
+HIGHER UNDER B
+  not              3 ->   3     +0
+  know             8 ->   5     +3
+  never            4 ->   4     +0
+  get              6 ->   6     +0
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  get              4 ->   5     -1
+  not              3 ->   3     +0
+  sue              5 ->   6     -1
+  just             7 ->  10     -3
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  never            6 ->   4     +2
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  not              3 ->   3     +0
+  of               7 ->   9     -2
+  get              4 ->   4     +0
+  also             8 ->   8     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  sue              6 ->   6     +0
+  never            5 ->   5     +0
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  add              6 ->  21    -15
+  sue              5 ->   8     -3
+  also             4 ->   6     -2
+  mention          7 ->  15     -8
+  never            9 ->  14     -5
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  know            11 ->   4     +7
+  not              3 ->   3     +0
+  get              8 ->   5     +3
+  probably        10 ->   7     +3
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  not              3 ->   3     +0
+  be               2 ->   2     +0
+  never            4 ->   4     +0
+  of               6 ->   6     +0
+  get              7 ->   7     +0
+  probably         5 ->   5     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  not              4 ->   7     -3
+  be               2 ->   2     +0
+  get              3 ->   3     +0
+  sue              5 ->  12     -7
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  n't              2 ->   8     -6
+  be               4 ->   4     +0
+
+HIGHER UNDER B
+  not              3 ->   2     +1
+  never            5 ->   3     +2
+  of               6 ->   5     +1
+  have             1 ->   1     +0
+  a                8 ->   6     +2
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  mention          5 ->   8     -3
+  probably         4 ->   5     -1
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  not              3 ->   3     +0
+  sue              9 ->   7     +2
+  never            7 ->   6     +1
+  also             6 ->   4     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  of               9 ->  36    -27
+  not              3 ->   5     -2
+  also             7 ->  12     -5
+  add              5 ->   8     -3
+  get              6 ->  10     -4
+  probably        11 ->  13     -2
+  be               2 ->   2     +0
+
+HIGHER UNDER B
+  mention          4 ->   3     +1
+  clarify         18 ->   9     +9
+  never           12 ->   6     +6
+  know            14 ->   7     +7
+  note             8 ->   4     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  probably         4 ->  17    -13
+  of               6 ->  28    -22
+  sue              7 ->   8     -1
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  not              3 ->   3     +0
+  get              5 ->   4     +1
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              3 ->   8     -5
+  be               2 ->   2     +0
+  also             5 ->  17    -12
+  add              7 ->  16     -9
+  mention          9 ->  22    -13
+  of              11 ->  30    -19
+  get              4 ->   7     -3
+  know             8 ->  10     -2
+
+HIGHER UNDER B
+  file            12 ->   3     +9
+  sue              6 ->   4     +2
+  report          56 ->   9    +47
+  probably        10 ->   5     +5
+  just            13 ->   6     +7
+  call            21 ->  12     +9
+  do              24 ->  13    +11
+  move            14 ->  11     +3
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  have             1 ->   1     +0
+  not              3 ->   6     -3
+  also             8 ->  16     -8
+  never            7 ->  10     -3
+
+HIGHER UNDER B
+  probably         4 ->   3     +1
+  file            13 ->   7     +6
+  get              5 ->   4     +1
+  sue              6 ->   5     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  be               2 ->   3     -1
+  sue              3 ->   6     -3
+  get              5 ->   5     +0
+  do               6 ->  14     -8
+  I                8 ->  27    -19
+  call             7 ->   8     -1
+  file             9 ->  13     -4
+  just            12 ->  18     -6
+  take            14 ->  26    -12
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  never           13 ->   4     +9
+  not              4 ->   2     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 26 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

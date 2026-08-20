@@ -1,0 +1,150 @@
+Below are 21 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r08b3ba8  genital-to-nongenital displacement
+      B substitutes a non-sexual body part for explicit genital nouns, forefinger and fingers rising sharply (forefinger +64, fingers +9) against A's blunt genital vocabulary (dick, penis, prick, member, balls, nipple, tip, head).
+      A: dick, penis, prick, member, balls, nipple, tip, head
+      B: forefinger, fingers
+
+r0fcbe50  crude to clinical genital term
+      The A words for genitalia are crude slang concentrated at the very top of the list (cock, clit), while the B words for genitalia are more varied and include a clinical term (penis, shaft, dick, balls).
+      A: cock, clit
+      B: penis, shaft, dick, balls
+
+r17c7867  coarse slang vs clinical register
+      A favors coarse slang for an erect penis (cock, dick, shaft, thick, swollen, tip, flesh, hard) while B favors the same referent named in a more clinical register (penis, erection).
+      A: cock, dick, shaft, thick, swollen, tip, flesh, hard
+      B: penis, erection
+
+r3c84a86  head noun vs descriptive modifier
+      Nearly every A word (penis, dick, mouth, lips, ear, throat, nipples, earlobe) is itself the noun completing the sentence, while several of B's largest movers ('fat', 'big', 'thick', 'hard', 'firm', 'and', 'as') are adjectives or a conjunction that would modify a noun rather than complete the sentence on their own.
+      A: penis, dick, mouth, lips, ear, throat, nipples, earlobe
+      B: fat, big, thick, hard, firm, and, as
+
+r482e2a9  genital vs peripheral anatomy
+      A keeps the completion anchored to explicit genital/sexual anatomy -- cock, dick, shaft, penis, nipple, hard -- while B displaces the same act onto non-genital, peripheral body parts -- finger(s), ear, neck, earlobe, wrist, hand, arm, lips, face, mouth.
+      A: cock, dick, shaft, hard, penis, nipple
+      B: finger, fingers, ear, neck, earlobe, wrist, hand, arm, lips, face, mouth
+
+r4a678ec  plural to singular body-part forms
+      Plural body-part forms favored under A (fingers, hands) correspond to their singular counterparts favored under B (finger, hand), suggesting a shift in grammatical number rather than in which body region is named.
+      A: fingers, hands
+      B: finger, hand
+
+r6ecc424  hand region vs head region
+      A favors words naming the hand and its digits (finger, fingers, thumb, wrist, hands), while B favors words naming the head, face, and neck (neck, mouth, ear, teeth, head), a shift in which body region is named.
+      A: finger, fingers, thumb, wrist, hands
+      B: neck, mouth, ear, teeth, head
+
+r71e1be1  compound slang vs common or clinical term
+      A favors less common, more graphically specific slang or compound terms for the penis (shaft, cockhead, prick) while B favors the single most common slang term or the clinical term (dick, penis) along with generic size/texture descriptors (tip, length, thick, hard, crown) that could describe many things, not only this body part.
+      A: shaft, cockhead, prick
+      B: dick, penis, tip, length, thick, hard, crown
+
+r72e5394  vulgar naming vs clinical/adjectival register
+      A elevates blunt, vulgar nouns that name the organ directly (dick, prick, rod, shaft, sheath, head), while B elevates more clinical or literary synonyms (phallus, penis, length, tip, bone) and adjectives describing its state (hard, throbbing, firm, stiff, erect, meaty) rather than blunt naming.
+      A: dick, prick, rod, shaft, sheath, head, thick
+      B: phallus, penis, length, tip, bone, hard, throbbing, firm, stiff, erect, meaty
+
+r743773c  vulgar vs euphemistic anatomy
+      A-favored nouns are blunt, colloquial sexual vocabulary for the same body part (cock, dick, penis, manhood, balls), while B-favored nouns are more clinical or euphemistic synonyms for it (length, shaft, member, erection).
+      A: cock, dick, penis, manhood, balls
+      B: length, shaft, member, erection
+
+r7ea46dd  literal organ term vs idiom/displacement
+      A favors direct anatomical synonyms for the penis (cock, dick, penis, erection, shaft, manhood, length, hard) while B favors words that either shift the fragment into its idiomatic sense of struggling to pronounce something (words, name, word) or displace onto non-genital body parts and a softer noun (member, neck, fingers, lips, tongue, head).
+      A: cock, dick, penis, erection, shaft, manhood, length, hard
+      B: words, name, word, member, neck, fingers, lips, tongue, head
+
+r8ccbff0  euphemistic to blunt anatomy terms
+      A's words are euphemistic, descriptive terms for male anatomy typical of softer erotica prose (shaft, length, member, tip, head, thick, hard), while B's words are blunt, direct anatomical nouns (cock, dick, penis) plus a shift to a different body part (nipple).
+      A: shaft, length, member, tip, head, thick, hard
+      B: cock, dick, penis, nipple, big
+
+r91dcaf1  crude slang softened to sensory language
+      Among words that remain genital, A favors blunt slang (dick, prick, member, tip, balls) while B favors more clinical or sensory-descriptive terms (sensitive, length, shaft).
+      A: dick, prick, member, tip, balls
+      B: sensitive, length, shaft
+
+ra2920ea  named anatomy vs generic descriptor
+      A names the body part explicitly and by type (cock, shaft, dick, head, penis, nipple, balls), while B describes it through generic, non-naming attributes that could apply to the same referent without saying it (length, thick, flesh).
+      A: cock, shaft, dick, head, penis, nipple, balls
+      B: length, thick, flesh
+
+rb31e87d  single-noun completion vs continuing clause
+      A concentrates on anatomical nouns that complete the sentence outright (penis, dick, balls, shaft, nipple, ear), while B pairs its anatomical terms with conjunction and comparison words (and, as) that suggest the completion continues into a further clause rather than stopping at the body part.
+      A: penis, dick, balls, shaft, nipple, ear
+      B: and, as
+
+rb384cd1  explicit anatomy vs elliptical continuation
+      A favors words that name the specific body part explicitly (cock, dick, penis, shaft, member, head, erection, fingers) along with modifiers of it (thick, hard), while B favors function words that continue the sentence without specifying any body part at all (and, in, as, again, once, while, like), leaving the object of 'wrapped her tongue around' unstated.
+      A: cock, dick, penis, shaft, member, head, erection, fingers, thick, hard
+      B: and, in, as, again, once, while, like
+
+rc66e601  explicit noun vs displaced part
+      A-favored words are direct anatomical nouns for the penis (cock, dick, penis, shaft, balls, member), while several B-favored words name a different body part entirely (thumb, lips, mouth, nipple), displacing the object of the sentence away from the penis.
+      A: cock, dick, penis, shaft, balls, member
+      B: thumb, lips, mouth, nipple
+
+rceee945  clinical vs purple-prose synonym
+      Where A supplies the plain or blunt genital nouns 'penis' and 'dick', B supplies the more florid erotica vocabulary 'cock', 'shaft', and 'member' for the same body part.
+      A: penis, dick
+      B: cock, shaft, member
+
+reced5b4  redirection away from genital target
+      B alone elevates words that move the tongue's target away from the genitals entirely -- finger, earlobe, mouth, tongue, and even the non-anatomical 'name' -- an escape from the genital frame that A shows no trace of.
+      A: neck
+      B: finger, earlobe, mouth, tongue, name
+
+rf1532e2  explicit genital vocabulary vs non-genital anatomy
+      A is dominated by direct or coarse synonyms for the penis (dick, penis, member, prick), while B's body-part words name non-genital anatomy instead (neck, fingers, finger, ear, ears, wrist).
+      A: dick, penis, member, prick
+      B: neck, fingers, finger, ear, ears, wrist
+
+rf655124  near-synonym vocabulary shuffle
+      Both sides favor near-synonymous terms for the same organ (A: penis, dick, shaft; B: cock, member, erection), so much of the apparent difference is a reshuffling among interchangeable words rather than a change in explicitness.
+      A: penis, dick, shaft
+      B: cock, member, erection
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

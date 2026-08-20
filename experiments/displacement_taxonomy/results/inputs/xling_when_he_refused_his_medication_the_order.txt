@@ -1,0 +1,992 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: When he refused his medication the orderlies ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  came             5 ->  21    -16
+  threw            6 ->  63    -57
+  beat            16 -> 135   -119
+  dragged         17 ->  76    -59
+  kept            21 ->  80    -59
+  began           18 ->  65    -47
+  put             11 ->  20     -9
+  started         19 ->  64    -45
+  kicked          25 ->  98    -73
+  gave            23 ->  31     -8
+  would            1 ->   4     -3
+  made            22 ->  23     -1
+  said            14 ->  17     -3
+  and              9 ->  13     -4
+  threatened       7 ->  11     -4
+  had             10 ->  12     -2
+
+HIGHER UNDER B
+  refused         24 ->   2    +22
+  ignored         51 ->   6    +45
+  at               3 ->   1     +2
+  called          12 ->   7     +5
+  informed       118 ->  16   +102
+  could           55 ->  15    +40
+  argued         135 ->  19   +116
+  told            13 ->   9     +4
+  brought         15 ->  10     +5
+  wouldn          45 ->  18    +27
+  didn            74 ->  22    +52
+  tried            8 ->   8     +0
+  became          20 ->  14     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  threw           11 ->  23    -12
+  beat             7 ->  14     -7
+  were             3 ->   7     -4
+  simply          25 ->  43    -18
+  came            18 ->  25     -7
+  called          26 ->  46    -20
+  at              19 ->  24     -5
+  told             8 ->  13     -5
+  brought         23 ->  28     -5
+  refused         12 ->  17     -5
+  said            15 ->  16     -1
+  removed         17 ->  18     -1
+
+HIGHER UNDER B
+  took             2 ->   1     +1
+  tried            5 ->   3     +2
+  forced          14 ->   6     +8
+  and              9 ->   4     +5
+  dragged         16 ->   8     +8
+  became          22 ->  11    +11
+  put             13 ->  12     +1
+  restrained      49 ->  21    +28
+  locked          24 ->  15     +9
+  began           10 ->  10     +0
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  told             1 ->   7     -6
+  would            7 ->  12     -5
+  began           14 ->  33    -19
+  started         16 ->  28    -12
+  went            11 ->  17     -6
+  and             17 ->  22     -5
+  put              9 ->  10     -1
+  called          10 ->  11     -1
+  sent            20 ->  42    -22
+  tried           12 ->  14     -2
+  asked           13 ->  13     +0
+  said             4 ->   5     -1
+
+HIGHER UNDER B
+  took             2 ->   1     +1
+  gave             8 ->   4     +4
+  came             6 ->   3     +3
+  had              3 ->   2     +1
+  brought         15 ->   8     +7
+  placed          26 ->  18     +8
+  left            19 ->   9    +10
+  did             23 ->  16     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  put              4 ->  11     -7
+  held             8 ->  22    -14
+  strapped        13 ->  91    -78
+  tied            12 ->  29    -17
+  came             5 ->   8     -3
+  at               2 ->   5     -3
+  injected        24 -> 122    -98
+  forcibly        23 ->  75    -52
+  forced          15 ->  21     -6
+  restrained       7 ->   7     +0
+  dragged         22 ->  38    -16
+  pinned          27 ->  43    -16
+  in              21 ->  30     -9
+  grabbed         20 ->  23     -3
+
+HIGHER UNDER B
+  had              1 ->   1     +0
+  took             6 ->   2     +4
+  tried           10 ->   4     +6
+  were             3 ->   3     +0
+  would            9 ->   6     +3
+  thought         66 ->  20    +46
+  just            37 ->  14    +23
+  got             34 ->  18    +16
+  told            25 ->  16     +9
+  and             16 ->  12     +4
+  used            14 ->   9     +5
+  called          18 ->  15     +3
+  threatened      26 ->  19     +7
+  said            17 ->  13     +4
+  threw           19 ->  17     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  threatened       1 ->  81    -80
+  said             3 ->   6     -3
+  told             5 ->  10     -5
+  put              7 ->  11     -4
+  beat            17 -> 137   -120
+  asked           11 ->  22    -11
+  and             12 ->  25    -13
+  called           9 ->   9     +0
+  started         18 ->  31    -13
+  got             16 ->  19     -3
+  left            19 ->  27     -8
+  tried           13 ->  13     +0
+  at              20 ->  30    -10
+
+HIGHER UNDER B
+  were             4 ->   2     +2
+  had              2 ->   1     +1
+  gave             6 ->   3     +3
+  have            86 ->  12    +74
+  are            128 ->  14   +114
+  will           131 ->  21   +110
+  took             8 ->   4     +4
+  went            43 ->  16    +27
+  found           72 ->  23    +49
+  brought         30 ->  17    +13
+  did             26 ->  15    +11
+  refused         15 ->   7     +8
+  came            14 ->   8     +6
+  decided         34 ->  24    +10
+  would           10 ->   5     +5
+  sent            23 ->  20     +3
+  made            21 ->  18     +3
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  would            2 ->  11     -9
+  at               3 ->  14    -11
+  held             4 ->  13     -9
+  in               8 ->  21    -13
+  came             6 ->   9     -3
+  tied             7 ->  10     -3
+  and             14 ->  78    -64
+  were             9 ->  16     -7
+  called          18 ->  30    -12
+  brought         15 ->  26    -11
+  used            22 ->  32    -10
+  gave            19 ->  19     +0
+  forced          20 ->  20     +0
+
+HIGHER UNDER B
+  restrained      10 ->   1     +9
+  tried           16 ->   3    +13
+  took            13 ->   5     +8
+  forcibly        24 ->   8    +16
+  dragged         11 ->   6     +5
+  lifted          84 ->  17    +67
+  subdued         32 ->  12    +20
+  strapped         5 ->   4     +1
+  put             12 ->   7     +5
+  grabbed         21 ->  18     +3
+  pinned          17 ->  15     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  took             1 ->  18    -17
+  were             4 ->  13     -9
+  placed          10 ->  42    -32
+  put              7 ->  16     -9
+  brought          8 ->  17     -9
+  forced           2 ->   8     -6
+  strapped        12 ->  48    -36
+  had              3 ->   6     -3
+  tried           18 ->  68    -50
+  removed         13 ->  29    -16
+  restrained      15 ->  31    -16
+  tied             5 ->   7     -2
+  called          22 ->  47    -25
+  at              25 ->  57    -32
+  stripped        21 ->  35    -14
+  locked          27 ->  51    -24
+  came            26 ->  45    -19
+  and             17 ->  19     -2
+  gave            20 ->  26     -6
+
+HIGHER UNDER B
+  threw           16 ->   2    +14
+  dragged          9 ->   1     +8
+  beat             6 ->   3     +3
+  would           49 ->   4    +45
+  threatened      19 ->   5    +14
+  kicked          47 ->  10    +37
+  became          60 ->  11    +49
+  assaulted      127 ->  15   +112
+  used            23 ->  14     +9
+  physically      35 ->  20    +15
+  began           14 ->  12     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  had              1 ->   4     -3
+  tried            7 ->  21    -14
+  beat            10 ->  23    -13
+  put              9 ->  19    -10
+  called          11 ->  20     -9
+  sedated         19 ->  58    -39
+  tied            15 ->  30    -15
+  gave            18 ->  39    -21
+  and             12 ->  17     -5
+  came             5 ->   9     -4
+  overpowered     21 ->  47    -26
+  held             8 ->  11     -3
+  would           20 ->  29     -9
+  said            23 ->  35    -12
+
+HIGHER UNDER B
+  forcibly         3 ->   1     +2
+  dragged         17 ->   6    +11
+  took             4 ->   3     +1
+  grabbed         24 ->   8    +16
+  carried         22 ->  10    +12
+  subdued         14 ->   7     +7
+  removed         38 ->  13    +25
+  restrained       6 ->   5     +1
+  insisted        61 ->  16    +45
+  physically      28 ->  14    +14
+  left            53 ->  22    +31
+  brought         41 ->  18    +23
+  forced          13 ->  12     +1
+  were             2 ->   2     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  put              1 ->  11    -10
+  strapped         7 ->  49    -42
+  at               8 ->  70    -62
+  would           11 ->  68    -57
+  had              3 ->   8     -5
+  drugged         10 ->  21    -11
+  tried            9 ->  19    -10
+  gave             6 ->  12     -6
+  in              14 ->  28    -14
+  and             17 ->  37    -20
+  placed          15 ->  27    -12
+  used            19 ->  48    -29
+  decided         12 ->  22    -10
+  told            21 ->  52    -31
+  were             4 ->   6     -2
+  called          23 ->  64    -41
+  did             25 ->  66    -41
+  said            20 ->  24     -4
+
+HIGHER UNDER B
+  threatened       5 ->   1     +4
+  dragged         34 ->   3    +31
+  roughed        108 ->   4   +104
+  weren't        126 ->  13   +113
+  made            26 ->   7    +19
+  forced          13 ->   5     +8
+  slapped         67 ->  14    +53
+  beat            22 ->  10    +12
+  didn't          57 ->  18    +39
+  probably       130 ->  25   +105
+  came            16 ->   9     +7
+  became          32 ->  17    +15
+  took             2 ->   2     +0
+  brought         28 ->  20     +8
+  removed         30 ->  23     +7
+  locked          24 ->  16     +8
+  threw           18 ->  15     +3
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  ordered         12 ->  33    -21
+  called           9 ->  12     -3
+  turned          25 ->  37    -12
+  refused         20 ->  28     -8
+  put             18 ->  25     -7
+  would           16 ->  23     -7
+  made            22 ->  27     -5
+  on              27 ->  29     -2
+  began           14 ->  20     -6
+  who             13 ->  17     -4
+  kept            21 ->  22     -1
+  in               6 ->   9     -3
+
+HIGHER UNDER B
+  were             1 ->   1     +0
+  came            11 ->   6     +5
+  immediately     43 ->  19    +24
+  took             3 ->   2     +1
+  did             23 ->  11    +12
+  rushed          36 ->  21    +15
+  found           28 ->  15    +13
+  said             8 ->   7     +1
+  asked           19 ->  13     +6
+  had              5 ->   3     +2
+  gave            24 ->  16     +8
+  brought         10 ->  10     +0
+  and             15 ->  14     +1
+  looked          29 ->  26     +3
+  went            26 ->  24     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  ____             7 ->  18    -11
+  ______           5 ->   5     +0
+  tried            6 ->   9     -3
+  ________        10 ->  13     -3
+  held             8 ->  10     -2
+  were             2 ->   3     -1
+  _______         13 ->  17     -4
+  did             18 ->  21     -3
+  put             14 ->  15     -1
+  placed          11 ->  11     +0
+
+HIGHER UNDER B
+  had              1 ->   1     +0
+  restrained       4 ->   2     +2
+  at              15 ->   6     +9
+  forcibly        12 ->   7     +5
+  used             9 ->   8     +1
+  would           17 ->  14     +3
+  became          16 ->  12     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  tied             2 ->   8     -6
+  strapped         6 ->  37    -31
+  held             4 ->  10     -6
+  restrained       3 ->   6     -3
+  used            12 ->  31    -19
+  dragged         13 ->  42    -29
+  tried           14 ->  46    -32
+  bound           17 ->  53    -36
+  injected        15 ->  18     -3
+  got             20 ->  26     -6
+
+HIGHER UNDER B
+  had              1 ->   1     +0
+  put              9 ->   2     +7
+  took             8 ->   4     +4
+  were             5 ->   3     +2
+  forced          10 ->   5     +5
+  came             7 ->   7     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  took             1 ->  56    -55
+  would            3 ->  73    -70
+  told             4 -> 116   -112
+  were             2 ->  10     -8
+  had              6 ->  27    -21
+  began            7 ->  48    -41
+  beat             9 ->  53    -44
+  gave            10 ->  62    -52
+  put              8 ->  12     -4
+  started         12 ->  63    -51
+  came            11 ->  29    -18
+  said            14 ->  65    -51
+  brought         15 ->  74    -59
+  and             17 ->  72    -55
+  made            19 ->  46    -27
+  forced          13 ->  25    -12
+  tied            16 ->  21     -5
+  strapped        21 ->  40    -19
+  threw           18 ->  18     +0
+  at              24 -> 106    -82
+  removed         28 ->  90    -62
+
+HIGHER UNDER B
+  picked          40 ->   1    +39
+  grabbed         23 ->   2    +21
+  subdued        117 ->   6   +111
+  restrained      26 ->   5    +21
+  carried         22 ->   3    +19
+  physically      57 ->   7    +50
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  took             2 ->   2     +0
+  came             5 ->   6     -1
+  brought         13 ->  19     -6
+  put             14 ->  20     -6
+  left            16 ->  22     -6
+  gave            17 ->  21     -4
+  tried           15 ->  17     -2
+  and              6 ->   7     -1
+  threw           21 ->  25     -4
+  started          7 ->   8     -1
+  went            18 ->  18     +0
+  began            4 ->   5     -1
+  got             22 ->  23     -1
+
+HIGHER UNDER B
+  were             1 ->   1     +0
+  said            12 ->   4     +8
+  moved           23 ->  14     +9
+  did             24 ->  16     +8
+  called           9 ->   9     +0
+  at              11 ->  11     +0
+  had              3 ->   3     +0
+  told            10 ->  10     +0
+  in              19 ->  13     +6
+  found           20 ->  15     +5
+  who             28 ->  24     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  took             2 ->   6     -4
+  injected        11 ->  29    -18
+  would            3 ->   7     -4
+  tied             1 ->   5     -4
+  tried           10 ->  19     -9
+  called          17 ->  37    -20
+  beat             8 ->  10     -2
+  grabbed         16 ->  27    -11
+  came            12 ->  18     -6
+  put              7 ->   9     -2
+  and             26 ->  44    -18
+  dragged         13 ->  13     +0
+  drugged         27 ->  40    -13
+  carried         25 ->  31     -6
+  forcibly        28 ->  33     -5
+  got             23 ->  25     -2
+  in              22 ->  22     +0
+  strapped        19 ->  20     -1
+
+HIGHER UNDER B
+  forced          14 ->   3    +11
+  at               6 ->   1     +5
+  were             5 ->   2     +3
+  overpowered     53 ->  17    +36
+  had              4 ->   4     +0
+  pushed          35 ->  14    +21
+  gave             9 ->   8     +1
+  used            20 ->  15     +5
+  threw           21 ->  16     +5
+  held            18 ->  12     +6
+  restrained      15 ->  11     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  took             1 ->   2     -1
+  carried         10 ->  28    -18
+  removed          5 ->  16    -11
+  moved           12 ->  26    -14
+  brought         18 ->  31    -13
+  said            21 ->  33    -12
+  put              8 ->  17     -9
+  were             3 ->   9     -6
+  and             16 ->  24     -8
+  called          22 ->  22     +0
+  gave             9 ->  10     -1
+  told            11 ->  11     +0
+
+HIGHER UNDER B
+  kicked           6 ->   1     +5
+  began           17 ->   5    +12
+  beat            14 ->   6     +8
+  tried           13 ->   8     +5
+  started         26 ->  12    +14
+  became          48 ->  19    +29
+  left             7 ->   7     +0
+  threw            4 ->   4     +0
+  threatened      32 ->  20    +12
+  made            23 ->  13    +10
+  pushed          30 ->  21     +9
+  forced          20 ->  15     +5
+  would           15 ->  14     +1
+  came            25 ->  25     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  took             2 ->   7     -5
+  put              7 ->  14     -7
+  brought         13 ->  33    -20
+  forced          10 ->  13     -3
+  threatened      12 ->  15     -3
+  tied             9 ->   9     +0
+  dragged         11 ->  12     -1
+  held            16 ->  25     -9
+  came             3 ->   5     -2
+  and             14 ->  17     -3
+  locked          19 ->  20     -1
+  forcibly        17 ->  18     -1
+  threw           22 ->  24     -2
+
+HIGHER UNDER B
+  would            1 ->   1     +0
+  had              5 ->   2     +3
+  tried            4 ->   3     +1
+  restrained       8 ->   4     +4
+  used            20 ->   8    +12
+  said            21 ->  10    +11
+  just            34 ->  19    +15
+  were             6 ->   6     +0
+  beat            15 ->  11     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  took             2 ->   3     -1
+  had              1 ->   1     +0
+  removed         12 ->  13     -1
+  threw           18 ->  18     +0
+  came            11 ->  11     +0
+  placed          19 ->  20     -1
+  brought          9 ->  10     -1
+  and             20 ->  21     -1
+  left            15 ->  16     -1
+  called          14 ->  14     +0
+  told             4 ->   7     -3
+
+HIGHER UNDER B
+  gave             8 ->   6     +2
+  threatened       7 ->   5     +2
+  became          24 ->  22     +2
+  began           21 ->  19     +2
+  tried           13 ->  12     +1
+  said             5 ->   4     +1
+  forced          17 ->  17     +0
+  refused         16 ->  15     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  would            1 ->  11    -10
+  came             4 ->   9     -5
+  told            10 ->  19     -9
+  in              14 ->  40    -26
+  took             5 ->   8     -3
+  threw           18 ->  41    -23
+  were             6 ->   7     -1
+  called          17 ->  27    -10
+  and             19 ->  50    -31
+  beat            15 ->  24     -9
+  gave            13 ->  16     -3
+  put              7 ->  10     -3
+  went            20 ->  45    -25
+  got             22 ->  43    -21
+  began           24 ->  37    -13
+  brought         25 ->  31     -6
+  said            11 ->  13     -2
+
+HIGHER UNDER B
+  had              2 ->   1     +1
+  strapped        30 ->   3    +27
+  tried            8 ->   2     +6
+  locked          12 ->   5     +7
+  tied             9 ->   6     +3
+  restrained      23 ->  12    +11
+  held            27 ->  14    +13
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  came             4 ->  10     -6
+  threw            7 ->  36    -29
+  had              3 ->   4     -1
+  told             8 ->  16     -8
+  brought          6 ->   7     -1
+  called          18 ->  52    -34
+  went            21 ->  45    -24
+  and             14 ->  17     -3
+  gave            17 ->  27    -10
+  dragged         13 ->  13     +0
+  threatened      15 ->  18     -3
+  sent            19 ->  26     -7
+  rushed          22 ->  28     -6
+  in              20 ->  25     -5
+
+HIGHER UNDER B
+  were             2 ->   2     +0
+  tried           12 ->   5     +7
+  took             1 ->   1     +0
+  began           11 ->   6     +5
+  at              40 ->  12    +28
+  will            87 ->  22    +65
+  found           25 ->  11    +14
+  forced          31 ->  14    +17
+  could           49 ->  23    +26
+  who             38 ->  19    +19
+  would            5 ->   3     +2
+  refused         29 ->  24     +5
+  carried         23 ->  20     +3
+  thought         24 ->  21     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  would            5 ->   5     +0
+  put              6 ->   7     -1
+  gave             7 ->   8     -1
+  left            22 ->  29     -7
+  strapped        19 ->  23     -4
+  moved           20 ->  22     -2
+  said             9 ->  10     -1
+  administered    24 ->  24     +0
+  called          11 ->  14     -3
+  carried         14 ->  19     -5
+  told            12 ->  13     -1
+
+HIGHER UNDER B
+  were             1 ->   1     +0
+  took             2 ->   2     +0
+  tried            8 ->   6     +2
+  became          15 ->  11     +4
+  threatened      21 ->  15     +6
+  restrained      18 ->  16     +2
+  forced          26 ->  21     +5
+  removed         13 ->  12     +1
+  brought         10 ->   9     +1
+  and             17 ->  17     +0
+  placed          23 ->  20     +3
+  came             4 ->   4     +0
+  had              3 ->   3     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  tied             2 ->  16    -14
+  put              4 ->  20    -16
+  at               6 ->  12     -6
+  held             9 ->  23    -14
+  and             17 ->  45    -28
+  tried           10 ->  17     -7
+  beat            18 ->  41    -23
+  used            19 ->  26     -7
+  were             8 ->  10     -2
+  in              22 ->  57    -35
+  gave            23 ->  61    -38
+  decided         21 ->  37    -16
+  bound           25 ->  44    -19
+  threw           20 ->  21     -1
+
+HIGHER UNDER B
+  came            16 ->   2    +14
+  would            1 ->   1     +0
+  dragged         12 ->   3     +9
+  restrained      11 ->   6     +5
+  wrestled        51 ->  14    +37
+  had              5 ->   5     +0
+  subdued         50 ->  19    +31
+  brought         24 ->   9    +15
+  physically      28 ->  15    +13
+  carried         27 ->  18     +9
+  forced          13 ->   8     +5
+  took             7 ->   7     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  would            2 ->   6     -4
+  and              7 ->  17    -10
+  tied            12 ->  21     -9
+  held             9 ->  15     -6
+  strapped        10 ->  14     -4
+  beat            19 ->  34    -15
+  pinned          17 ->  24     -7
+  put             14 ->  19     -5
+  forced          16 ->  16     +0
+  came             1 ->   1     +0
+
+HIGHER UNDER B
+  were             4 ->   2     +2
+  had              3 ->   3     +0
+  decided         43 ->  12    +31
+  took             5 ->   4     +1
+  used            23 ->   9    +14
+  called          37 ->  18    +19
+  became          18 ->  11     +7
+  dragged          6 ->   5     +1
+  carried         25 ->  20     +5
+  grabbed         13 ->  10     +3
+  brought         11 ->   8     +3
+  tried           15 ->  13     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  strapped         6 ->  15     -9
+  put              3 ->   5     -2
+  were             4 ->   6     -2
+  tied            16 ->  51    -35
+  locked          14 ->  28    -14
+  dragged         17 ->  26     -9
+  began           24 ->  35    -11
+  in              20 ->  20     +0
+  placed          21 ->  21     +0
+  sedated         10 ->  11     -1
+  forcibly        22 ->  22     +0
+  forced          13 ->  14     -1
+  at               9 ->   9     +0
+
+HIGHER UNDER B
+  would            1 ->   1     +0
+  had              7 ->   2     +5
+  restrained       8 ->   7     +1
+  became          23 ->  12    +11
+  tried           11 ->   8     +3
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  had              1 ->   3     -2
+  would            5 ->  18    -13
+  gave             8 ->  17     -9
+  took             4 ->   6     -2
+  were             3 ->   4     -1
+  told            10 ->  55    -45
+  put              6 ->   9     -3
+  at               2 ->   2     +0
+  locked          14 ->  58    -44
+  and             13 ->  41    -28
+  in              15 ->  47    -32
+  threw           24 -> 106    -82
+  refused         21 ->  54    -33
+  said             9 ->  15     -6
+  brought         18 ->  38    -20
+  placed          20 ->  33    -13
+  tied            17 ->  29    -12
+  removed         28 ->  50    -22
+  forced          16 ->  21     -5
+  made            26 ->  35     -9
+  began           23 ->  23     +0
+
+HIGHER UNDER B
+  became          30 ->   1    +29
+  grew           173 ->   7   +166
+  knew            62 ->  13    +49
+  panicked       167 ->  19   +148
+  tried           12 ->   8     +4
+  thought         34 ->  12    +22
+  responded       84 ->  22    +62
+  could           27 ->  14    +13
+  left            46 ->  24    +22
+  came            19 ->  11     +8
+  decided         25 ->  16     +9
+  called           7 ->   5     +2
+  threatened      11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  beat             6 ->   8     -2
+  would            5 ->   6     -1
+  tied            26 ->  51    -25
+  attacked        28 ->  46    -18
+  threw            9 ->  13     -4
+  threatened      14 ->  21     -7
+  told            20 ->  28     -8
+  dragged         21 ->  30     -9
+  took             2 ->   4     -2
+  became          12 ->  15     -3
+  started         15 ->  18     -3
+  used            22 ->  24     -2
+  gave            13 ->  16     -3
+  forced          19 ->  20     -1
+  came             8 ->   9     -1
+  and             11 ->  11     +0
+
+HIGHER UNDER B
+  had              1 ->   1     +0
+  were             3 ->   2     +1
+  tried            7 ->   5     +2
+  called          18 ->  10     +8
+  put             10 ->   7     +3
+  at               4 ->   3     +1
+  forcibly        33 ->  22    +11
+  could           42 ->  25    +17
+  in              17 ->  12     +5
+  decided         25 ->  19     +6
+  brought         23 ->  17     +6
+  got             16 ->  14     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  force            6 ->  34    -28
+  beat             5 ->  23    -18
+  began            2 ->  13    -11
+  placed           9 ->  26    -17
+  started         12 ->  30    -18
+  tied            18 ->  65    -47
+  at              17 ->  39    -22
+  restrained      20 ->  40    -20
+  pushed          25 ->  54    -29
+  gave            13 ->  21     -8
+  threw           24 ->  38    -14
+  put              3 ->   6     -3
+  kicked          15 ->  24     -9
+  made            21 ->  33    -12
+  left            29 ->  32     -3
+  did             22 ->  27     -5
+  and             27 ->  28     -1
+
+HIGHER UNDER B
+  had             10 ->   1     +9
+  were             8 ->   2     +6
+  became           7 ->   4     +3
+  insisted        64 ->  16    +48
+  called          33 ->   9    +24
+  said            34 ->  11    +23
+  told            39 ->  15    +24
+  tried           16 ->   8     +8
+  carried         52 ->  19    +33
+  found           71 ->  20    +51
+  resorted        26 ->  14    +12
+  attacked        19 ->  10     +9
+  used            11 ->   7     +4
+  dragged         23 ->  17     +6
+  decided         30 ->  18    +12
+  threatened      14 ->  12     +2
+  attempted       31 ->  22     +9
+  removed         28 ->  25     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  took             3 ->   5     -2
+  strapped        10 ->  16     -6
+  decided         15 ->  20     -5
+  called          12 ->  13     -1
+  put              6 ->   6     +0
+  injected        18 ->  29    -11
+  moved           22 ->  35    -13
+  and             11 ->  11     +0
+  told            23 ->  34    -11
+  began           21 ->  32    -11
+  came             2 ->   3     -1
+  gave             7 ->   9     -2
+  at              17 ->  18     -1
+  tried            8 ->   8     +0
+  brought         14 ->  15     -1
+  got             20 ->  23     -3
+
+HIGHER UNDER B
+  restrained       9 ->   7     +2
+  became          19 ->  10     +9
+  threatened      33 ->  19    +14
+  tied            25 ->  17     +8
+  held            16 ->  14     +2
+  beat            31 ->  22     +9
+  were             4 ->   2     +2
+  had              1 ->   1     +0
+  locked          30 ->  25     +5
+  forced          13 ->  12     +1
+  carried         24 ->  21     +3
+  said            26 ->  24     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  in               7 ->  31    -24
+  placed           9 ->  27    -18
+  threw           20 -> 146   -126
+  at              13 ->  28    -15
+  put              2 ->   5     -3
+  restrained       6 ->  10     -4
+  locked          18 ->  34    -16
+  tied             5 ->   9     -4
+  would           21 ->  39    -18
+  forced          12 ->  16     -4
+  bound           22 ->  56    -34
+
+HIGHER UNDER B
+  were             3 ->   1     +2
+  carried         10 ->   4     +6
+  called          16 ->   6    +10
+  threpped       211 ->  11   +200
+  took             4 ->   3     +1
+  left            85 ->  20    +65
+  went            42 ->  17    +25
+  dragged         11 ->   8     +3
+  became          58 ->  22    +36
+  reported        49 ->  23    +26
+  tried            8 ->   7     +1
+  beat            32 ->  18    +14
+  began           29 ->  21     +8
+  threatened      23 ->  19     +4
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

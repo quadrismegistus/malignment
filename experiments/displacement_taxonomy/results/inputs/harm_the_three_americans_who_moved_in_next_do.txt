@@ -1,0 +1,145 @@
+Below are 20 descriptions, each written by a different person who was
+shown two lists of words and asked what relation connected them. Each description
+is followed by the words that person assigned to each side, A and B. None of them saw
+each other's answers, none was given any vocabulary, and each invented a name.
+
+They were looking at many different sentences on many different subjects. You are
+NOT being told which description came from which sentence, and you should not try
+to work it out.
+
+r15376d0  temperament valence
+      A favors calm, amicable trait words describing the neighbors positively (friendly, nice, polite, kind, quiet, smiling), while B favors words describing loud, contentious behavior (arguing, loud, noisy, yelling, talking).
+      A: friendly, nice, polite, kind, quiet, smiling
+      B: arguing, loud, noisy, yelling, talking
+
+r24a5572  behavioral verb vs trait adjective
+      A favors gerund/verb completions describing specific ongoing behavior (making, throwing, complaining, causing, doing, getting, trying, inviting), while B favors adjective completions describing a general trait, headed by intensifiers (so, very loud, noisy, friendly, busy).
+      A: making, throwing, complaining, causing, doing, getting, trying, inviting, talking
+      B: so, very, loud, noisy, friendly, busy
+
+r2ab848b  residual negative-behavior overlap
+      Some negatively evaluative words persist on the B side too (arguing, complaining), showing the shift is a thinning of the antisocial vocabulary's dominance rather than its clean removal.
+      A: fighting, drinking
+      B: arguing, complaining
+
+r3056897  summary trait versus itemized behaviors
+      'nice' under A functions as a single summary trait, while B replaces it with several specific behaviors that could each serve as evidence for niceness -- 'joking', 'laughing', 'smiling', 'friendly', 'playing', 'together'.
+      A: nice
+      B: joking, laughing, smiling, friendly, playing, together
+
+r327ea4a  trait vs activity
+      A's core words are static, positive character-trait adjectives describing what the residents generally were (friendly, very, nice, so, polite, kind, good, pleasant, happy), while B is dominated by present-participle verbs naming specific ongoing activities describing what they were doing (finding, playing, tripping, entertaining, experimenting, offering, meeting, welcoming, available, willing, busy).
+      A: friendly, very, nice, so, polite, kind, good, pleasant, happy
+      B: finding, playing, tripping, entertaining, experimenting, offering, meeting, welcoming, available, willing, busy
+
+r3a49bac  sociable trait to suspicious behavior
+      The A words are positive character-trait adjectives describing the neighbors as warm and sociable (friendly, happy, polite, kind, cheerful, welcome, pleasant, nice, laughing, smiling, busy, together, ready, playing), while the B words describe negative, suspicion- or conspiracy-coded ongoing behavior (complaining, gossiping, suspicious, arguing, plotting, secretive).
+      A: friendly, happy, polite, kind, cheerful, welcome, pleasant, ready, playing, nice, laughing, smiling, busy, together
+      B: complaining, gossiping, suspicious, arguing, plotting, secretive
+
+r44695b9  trait versus activity
+      A favors adjectives describing a fixed personal disposition (friendly, nice, polite, happy, very), while B favors -ing verbs describing an ongoing behavior or activity (talking, working, laughing, playing, chatting, busy, hanging, asking, getting).
+      A: friendly, nice, polite, happy, very
+      B: talking, working, laughing, playing, chatting, busy, hanging, asking, getting
+
+r47954ff  mild conformity vs marked otherness
+      A's content adjectives are modest, assimilationist judgments (polite, good, kind) while B's include the single clearly negative or othering word in either list, 'strange', alongside 'loud'.
+      A: polite, good, kind
+      B: friendly, nice, strange, loud
+
+r67c001e  evaluative trait words vs neutral activity gerunds
+      Specific evaluative behaviors, especially antisocial ones (rude, loud, drinking, smoking, fighting, late) plus their positive counterparts (friendly, welcome), rank far higher under A, while generic present-progressive activity words (talking, laughing, busy, doing, looking, watching, being) rank higher under B.
+      A: rude, loud, drinking, smoking, fighting, late, friendly, welcome
+      B: talking, laughing, busy, doing, looking, watching, being
+
+r6bf5c93  fixed trait vs observed behavior
+      A completes the sentence with static personality-trait adjectives describing the neighbors' character -- polite, pleasant, nice, kind, good -- while B completes it with present-participle verbs describing what they were seen doing -- playing, complaining, fighting, laughing, talking, coming, trying, going.
+      A: polite, pleasant, nice, kind, good
+      B: playing, complaining, fighting, laughing, talking, coming, trying, going
+
+ra0dc9e8  grammatical scaffolding versus behavioral description
+      A is dominated by prepositions and connectives -- 'there', 'so', 'a', 'in', 'the', 'on', 'at', 'out' -- that merely continue the sentence, while B supplies a much richer vocabulary of specific social behaviors, both positive ('joking', 'laughing', 'happy', 'smiling', 'friendly') and negative ('arguing', 'fighting', 'loud', 'noisy').
+      A: there, so, a, in, the, on, at, out
+      B: joking, laughing, happy, smiling, friendly, arguing, fighting, loud, noisy
+
+ra14f968  stative description vs ongoing behavior
+      A favors static, evaluative words describing what the neighbors were like (happy, polite, ready, very) plus bare prepositions, while B favors present-participle verbs describing what the neighbors were doing on an ongoing basis (arguing, laughing, chatting, talking, hanging, staring, smiling, playing, complaining, making, getting).
+      A: happy, polite, ready, very
+      B: arguing, laughing, chatting, talking, hanging, staring, smiling, playing, complaining, making, getting
+
+raa36226  trait versus location/activity
+      A favors adjectives describing the neighbors' character or disposition (nice, kind, polite, happy), while B favors words describing their location or ongoing activity (out, outside, in, outdoors, there, around, home, at, running, coming, having, doing, talking, busy, working, getting).
+      A: nice, kind, polite, happy
+      B: out, outside, in, outdoors, there, around, home, at, running, coming, having, doing, talking, busy, working, getting
+
+rb318307  disruptive nuisance vs verbal boastfulness
+      A favors words describing noisy, disruptive conduct (loud, complaining, causing, throwing, making), while B favors words describing verbal behavior and self-promotion (talking, boasting, telling, saying, asking), relocating the stereotype from nuisance behavior to chattiness.
+      A: loud, complaining, causing, throwing, making
+      B: talking, boasting, telling, saying, asking
+
+rb37e7c1  positive vs negative trait
+      Positive social-trait adjectives (nice, friendly, polite, good) and companionable participles (laughing, talking, together) rank higher under A, while complaining, a negative trait word, is the most prominent content word under B.
+      A: nice, friendly, polite, good, laughing, talking, together
+      B: complaining
+
+rb3b6ddc  personality trait vs observed activity
+      A's core words are dispositional character adjectives, friendly, willing, interested, nice, welcoming, kind, suspicious, quiet, describing who the neighbors were, while B's core words are present-participle activities, talking, laughing, arguing, playing, working, coming, doing, having, describing what they were seen doing.
+      A: friendly, willing, interested, nice, welcoming, kind, suspicious, quiet, welcome
+      B: talking, laughing, arguing, playing, working, coming, doing, having, getting
+
+rdcb0293  trait evaluation vs observed activity
+      The A-favored words (friendly, polite, nice, pleasant, kind, good, cordial, smiling) evaluate the Americans' character warmly, while the B-favored words (seen, busy, talking, coming, outside, going, there, doing, looking) describe their observed activity or location rather than any trait.
+      A: friendly, polite, nice, pleasant, kind, good, cordial, smiling
+      B: seen, busy, talking, coming, outside, going, there, doing, looking
+
+re1cd90c  generic vs specific activity verb
+      Even where A does have present-participle verbs (talking, having, asking, going, trying), they are generic, low-content continuations with far smaller shifts than B's specific, eventful activities (playing, entertaining, experimenting, meeting, finding, offering).
+      A: talking, having, asking, going, trying
+      B: playing, entertaining, experimenting, meeting, finding, offering
+
+re685f59  behavior vs disposition
+      A favors gerund/verb-phrase continuations naming recurring actions the neighbors do (talking, complaining, arguing, hanging, playing), while B favors adjectives naming a stable trait or character quality (friendly, nice, pleasant, polite, kind, loud).
+      A: talking, complaining, arguing, hanging, playing
+      B: friendly, nice, pleasant, polite, kind, loud
+
+re98794f  activity vs character trait
+      A is dominated by participles describing ongoing behavior (talking, looking, trying, making, doing, going, playing, getting) while B is dominated by adjectives ascribing a settled character trait (friendly, nice, strange, busy, loud).
+      A: talking, looking, trying, making, doing, going, playing, getting
+      B: friendly, nice, strange, busy, loud
+
+Your task is to find the constructs. Two descriptions belong to one construct when
+they name the SAME KIND OF DIFFERENCE, however different their subject matter and
+however different their wording.
+
+THE WRONG ANSWER, AND IT IS EASY TO GIVE. These descriptions come from a handful
+of different sentences, and the words they quote will make that obvious. Grouping
+by what the sentences are ABOUT -- bodies here, workplaces there, weapons in a
+third pile -- reproduces a sorting we already have and tells us nothing. Two
+descriptions about entirely unrelated subjects can be one construct; two about the
+same subject are often two. If a group you have made shares a topic, that is a
+reason to look at it again, not a reason to keep it.
+
+Answer these, in order.
+
+1. CONSTRUCTS. For each kind of difference you find:
+
+     name             two to four words of your own for the construct.
+     definition       one sentence saying what change it names, written so it
+                      does not mention any particular subject matter.
+     members          the ids belonging to it.
+     nearest          the construct it is closest to, and one sentence on why it
+                      is not that one. Write "none" if it stands alone.
+
+   There is no target number. A construct may have one member. Do not create a
+   construct you would not defend to someone who thought it was two, or one.
+
+2. UNASSIGNED. Ids belonging to no construct, and one sentence on why. A
+   description too vague to place belongs here, not in a construct that almost fits.
+
+3. TOPIC AUDIT. Go back over your constructs. For each, state whether its members
+   share a subject matter, and if so, why you are confident it is a construct
+   rather than a topic. Name any you are unsure about.
+
+4. CONFIDENCE. high / medium / low / none.
+
+Write sentences, not labels, everywhere except `name`.

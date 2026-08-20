@@ -1,0 +1,667 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: He kicked the ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  door             1 ->   3     -2
+  chair            2 ->  10     -8
+  ground           5 ->  15    -10
+  table           12 ->  83    -71
+  boy             11 ->  65    -54
+  floor           20 -> 127   -107
+  woman           19 -> 110    -91
+  bed             16 -> 100    -84
+  man              4 ->   7     -3
+  back            18 ->  31    -13
+  water            9 ->  19    -10
+  dust            10 ->  18     -8
+  dirt            15 ->  22     -7
+  horse           17 ->  24     -7
+  wall             8 ->  13     -5
+
+HIGHER UNDER B
+  ball             3 ->   1     +2
+  soccer          71 ->   2    +69
+  can             13 ->   4     +9
+  cat             22 ->   5    +17
+  pebble         144 ->   8   +136
+  football        92 ->  11    +81
+  snow            35 ->  12    +23
+  trash           49 ->  14    +35
+  small           33 ->  16    +17
+  dog              6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  horse            4 ->  16    -12
+  front            8 ->  19    -11
+  back             9 ->  36    -27
+  man              7 ->  14     -7
+  chair            6 ->   9     -3
+
+HIGHER UNDER B
+  ball             2 ->   2     +0
+  dog              3 ->   3     +0
+  bucket           5 ->   4     +1
+  football        49 ->   5    +44
+  table           10 ->   6     +4
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  other            3 ->   4     -1
+  table            7 ->  12     -5
+  wall             8 ->  15     -7
+  man              4 ->   7     -3
+  floor           14 ->  43    -29
+  back            10 ->  24    -14
+  guy              6 ->   8     -2
+  chair           19 ->  28     -9
+  crap            22 ->  32    -10
+  shit            15 ->  18     -3
+  first           13 ->  14     -1
+  ground           9 ->   9     +0
+  car             17 ->  17     +0
+
+HIGHER UNDER B
+  ball             2 ->   1     +1
+  air             11 ->   5     +6
+  dog             12 ->   6     +6
+  bucket           5 ->   3     +2
+  ass             18 ->  10     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  ball             1 ->   1     +0
+  door             2 ->   2     +0
+  guy             12 ->  25    -13
+  man             11 ->  18     -7
+  bucket           3 ->   4     -1
+  chair            5 ->   9     -4
+  habit           13 ->  15     -2
+  tires            8 ->  12     -4
+  football        10 ->  13     -3
+
+HIGHER UNDER B
+  dirt            18 ->   6    +12
+  wall             7 ->   5     +2
+  can              4 ->   3     +1
+  ground          24 ->   7    +17
+  trash           25 ->  11    +14
+  dust            38 ->  16    +22
+  rock            40 ->  17    +23
+  old             21 ->  14     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  ball             1 ->   1     +0
+  bucket           3 ->  51    -48
+  football         4 -> 102    -98
+  soccer           5 ->  86    -81
+  man              2 ->   4     -2
+  can              8 ->  81    -73
+  goal             7 ->  42    -35
+  puck            12 -> 141   -129
+  guy             10 ->  26    -16
+  boy             11 ->  16     -5
+
+HIGHER UNDER B
+  dog              6 ->   2     +4
+  cat             29 ->   3    +26
+  following      122 ->   7   +115
+  world           97 ->   9    +88
+  girl            13 ->   5     +8
+  question       106 ->  10    +96
+  horse           22 ->   8    +14
+  e              136 ->  13   +123
+  person          71 ->  11    +60
+  answer         126 ->  14   +112
+  first           19 ->  12     +7
+  door             9 ->   6     +3
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  can              3 ->  10     -7
+  habit            9 ->  95    -86
+  first            7 ->  18    -11
+  soccer           6 ->  13     -7
+  dog             10 ->  32    -22
+  football         5 ->   5     +0
+  tires           13 ->  20     -7
+  wall             8 ->   9     -1
+  ground          14 ->  17     -3
+
+HIGHER UNDER B
+  door             2 ->   2     +0
+  ball             1 ->   1     +0
+  bucket           4 ->   3     +1
+  dust            20 ->   6    +14
+  chair           11 ->   4     +7
+  dirt            12 ->   7     +5
+  rock            16 ->   8     +8
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  ball             1 ->   1     +0
+  door             2 ->   2     +0
+  wall             4 -> 119   -115
+  water            6 -> 137   -131
+  ground           9 -> 163   -154
+  bucket           3 ->  33    -30
+  baby            11 ->  85    -74
+  box             10 ->  43    -33
+  dog              7 ->  16     -9
+  bag              5 ->   8     -3
+
+HIGHER UNDER B
+  boulder        172 ->   3   +169
+  cat             25 ->   4    +21
+  legs           109 ->   7   +102
+  little          84 ->   6    +78
+  moon           130 ->   9   +121
+  shins          140 ->  10   +130
+  glass          115 ->  11   +104
+  body           122 ->  12   +110
+  right           60 ->  13    +47
+  feet            86 ->  15    +71
+  puck            32 ->  14    +18
+  back             8 ->   5     +3
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  ball             1 ->   1     +0
+  ground           6 ->  11     -5
+  football         4 ->   8     -4
+
+HIGHER UNDER B
+  door             2 ->   2     +0
+  goal             3 ->   3     +0
+  can             10 ->   4     +6
+  soccer          12 ->   6     +6
+  bucket           5 ->   5     +0
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  ball             1 ->  14    -13
+  door             2 ->  54    -52
+  bucket           3 ->  67    -64
+  ground           4 -> 145   -141
+  dog              5 -> 128   -123
+  shit             7 -> 183   -176
+  football         8 ->  58    -50
+  tires            9 -> 148   -139
+  man              6 ->  33    -27
+  tire            11 -> 129   -118
+  bag             10 -> 103    -93
+  gun             14 -> 127   -113
+  chair           13 ->  99    -86
+
+HIGHER UNDER B
+  the            147 ->   1   +146
+  question       113 ->   2   +111
+  while          165 ->   3   +162
+  you            190 ->   4   +186
+  thing          102 ->   6    +96
+  two             50 ->   5    +45
+  what           162 ->   7   +155
+  another        185 ->   8   +177
+  heifer         152 ->  10   +142
+  object          73 ->   9    +64
+  wrong          101 ->  11    +90
+  answer         163 ->  13   +150
+  his            155 ->  15   +140
+  You            187 ->  17   +170
+  my             173 ->  18   +155
+  back            32 ->  12    +20
+  title          120 ->  19   +101
+  remaining      107 ->  20    +87
+  rest           106 ->  21    +85
+  then           143 ->  25   +118
+  toy            122 ->  24    +98
+  big            100 ->  22    +78
+  very           108 ->  23    +85
+  and            153 ->  27   +126
+  problem        116 ->  29    +87
+  book            52 ->  26    +26
+  can             68 ->  28    +40
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  bucket           4 ->   5     -1
+  bag              8 ->  19    -11
+  soccer           2 ->   3     -1
+  door             7 ->  14     -7
+  tennis           9 ->  11     -2
+  basketball       6 ->   6     +0
+
+HIGHER UNDER B
+  ball             1 ->   1     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  football         2 ->   3     -1
+  door             4 ->   5     -1
+  ball____         9 ->   9     +0
+  stone            7 ->   8     -1
+  soccer           6 ->   7     -1
+
+HIGHER UNDER B
+  ball             1 ->   1     +0
+  bucket           3 ->   2     +1
+  can              5 ->   4     +1
+  goal             8 ->   6     +2
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  football         3 ->   3     +0
+  soccer           4 ->   4     +0
+  dog              5 ->   8     -3
+  rock             8 ->  37    -29
+  bucket           6 ->   7     -1
+  can              9 ->  16     -7
+  stone           10 ->  36    -26
+
+HIGHER UNDER B
+  ball             1 ->   1     +0
+  door             2 ->   2     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  car              3 ->  75    -72
+  dirt             6 ->  16    -10
+  ground           8 ->  96    -88
+  front            7 ->  14     -7
+  back            11 ->  72    -61
+  dog             12 ->  49    -37
+  man              5 ->   6     -1
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  ball             2 ->   2     +0
+  can             10 ->   4     +6
+  chair            4 ->   3     +1
+  canoe          109 ->   7   +102
+  bucket           9 ->   5     +4
+  tree            53 ->   9    +44
+  wall            22 ->   8    +14
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  door             1 ->   2     -1
+  man              4 ->   7     -3
+  other            9 ->  27    -18
+  table           12 ->  29    -17
+  back            16 ->  56    -40
+  boy             11 ->  19     -8
+  rock             8 ->   9     -1
+  cat              5 ->   6     -1
+  chair           13 ->  16     -3
+  first           17 ->  21     -4
+  guy             15 ->  15     +0
+
+HIGHER UNDER B
+  ball             2 ->   1     +1
+  dog              3 ->   3     +0
+  bucket           7 ->   4     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  bucket           3 ->   5     -2
+  can              4 ->   4     +0
+  football         5 ->   6     -1
+  goal             6 ->   8     -2
+  shit             8 ->  13     -5
+
+HIGHER UNDER B
+  ball             1 ->   1     +0
+  door             2 ->   2     +0
+  soccer           7 ->   3     +4
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  ball             3 ->   3     +0
+  shit             4 ->   6     -2
+  crap             6 ->  14     -8
+  first            9 ->  30    -21
+  back            10 ->  19     -9
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  dust            14 ->   5     +9
+  ground           5 ->   4     +1
+  bucket           2 ->   2     +0
+  sand            32 ->   9    +23
+  chair            7 ->   7     +0
+  wall             8 ->   8     +0
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  door             2 ->   2     +0
+  shit             8 ->  27    -19
+  ground           7 ->  16     -9
+  chair            3 ->   7     -4
+  water           11 ->  21    -10
+  man              6 ->  10     -4
+  guy             10 ->  11     -1
+
+HIGHER UNDER B
+  ball             1 ->   1     +0
+  bucket           4 ->   3     +1
+  can             13 ->   4     +9
+  rock            36 ->  12    +24
+  tire            16 ->   9     +7
+  horse           30 ->  13    +17
+  dirt            12 ->   6     +6
+  back             5 ->   5     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  side             8 ->  11     -3
+  ground           6 ->   7     -1
+  door             1 ->   1     +0
+  sand            20 ->  22     -2
+  gun             17 ->  19     -2
+  back             5 ->   5     +0
+  bucket          14 ->  15     -1
+  dirt             9 ->   9     +0
+  air             15 ->  16     -1
+
+HIGHER UNDER B
+  ball             2 ->   2     +0
+  wall             4 ->   3     +1
+  table            7 ->   6     +1
+  floor           16 ->  14     +2
+  car             10 ->   8     +2
+  bag             13 ->  13     +0
+  dog             12 ->  12     +0
+  front           21 ->  20     +1
+  bed             18 ->  17     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  can              4 ->   4     +0
+  habit           10 ->  17     -7
+  man             11 ->  19     -8
+  box             12 ->  22    -10
+  table            9 ->  15     -6
+  chair            5 ->   5     +0
+  car              6 ->   9     -3
+  bucket           3 ->   3     +0
+  ground           8 ->   8     +0
+  ball             2 ->   2     +0
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  door             1 ->   2     -1
+  bucket           3 ->   3     +0
+  shit             4 ->  72    -68
+  tires            6 ->  33    -27
+  man              5 ->   7     -2
+  first           11 ->  32    -21
+  back             8 ->  15     -7
+  chair           10 ->  10     +0
+
+HIGHER UNDER B
+  ball             2 ->   1     +1
+  football        23 ->   4    +19
+  bottle          13 ->   6     +7
+  table            7 ->   5     +2
+  car             15 ->   9     +6
+  dog              9 ->   8     +1
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  car              5 ->   7     -2
+  man              9 ->  12     -3
+  door             1 ->   1     +0
+  side            12 ->  14     -2
+  water           16 ->  19     -3
+  dog             14 ->  16     -2
+  back             7 ->   8     -1
+
+HIGHER UNDER B
+  chair            2 ->   2     +0
+  ground           8 ->   5     +3
+  table            6 ->   6     +0
+  wall             4 ->   4     +0
+  bed             10 ->   9     +1
+  bucket          11 ->  10     +1
+  air             13 ->  11     +2
+  dirt            18 ->  15     +3
+  stone           15 ->  13     +2
+  ball             3 ->   3     +0
+  rock            17 ->  17     +0
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  ball             1 ->   2     -1
+  goal             5 ->  42    -37
+  dog              7 ->  33    -26
+  first           12 ->  71    -59
+  man             11 ->  65    -54
+  car             10 ->  35    -25
+  shit            14 ->  86    -72
+  habit            6 ->  17    -11
+  football         8 ->  14     -6
+  wall            13 ->  16     -3
+
+HIGHER UNDER B
+  can              4 ->   3     +1
+  dirt            28 ->   4    +24
+  rock            44 ->   7    +37
+  stone           38 ->   9    +29
+  dust            20 ->   8    +12
+  tires            9 ->   5     +4
+  empty           92 ->  10    +82
+  tire            69 ->  11    +58
+  pebble         105 ->  12    +93
+  soccer          24 ->  13    +11
+  trash           74 ->  15    +59
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  door             1 ->   2     -1
+  dirt             3 ->   5     -2
+  boy             11 ->  40    -29
+  air             15 ->  53    -38
+  ground           4 ->   4     +0
+  man              5 ->   6     -1
+  side            10 ->  21    -11
+  wall             6 ->   7     -1
+  snow            12 ->  19     -7
+  back            13 ->  17     -4
+  table           14 ->  18     -4
+  rock            16 ->  20     -4
+  dog              7 ->  10     -3
+  can              9 ->  12     -3
+  chair            8 ->   9     -1
+
+HIGHER UNDER B
+  ball             2 ->   1     +1
+  bucket          19 ->   3    +16
+  car             17 ->   8     +9
+  soccer          40 ->  14    +26
+  football        18 ->  11     +7
+  front           25 ->  13    +12
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  door             2 ->   4     -2
+  wall             8 ->  11     -3
+  back            10 ->  28    -18
+  dirt             7 ->   9     -2
+  ground          12 ->  45    -33
+  air             11 ->  22    -11
+
+HIGHER UNDER B
+  ball             1 ->   1     +0
+  bucket           3 ->   2     +1
+  can              5 ->   3     +2
+  soccer           6 ->   5     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  bucket           2 ->   3     -1
+  can              4 ->   4     +0
+  tires            5 ->   7     -2
+  dog              6 ->  15     -9
+  guy              8 ->  60    -52
+  football         7 ->  11     -4
+  whole           10 ->  65    -55
+  doors            9 ->  13     -4
+  first           11 ->  54    -43
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  ball             1 ->   1     +0
+  football        13 ->  22     -9
+  soccer           9 ->  15     -6
+  back             8 ->  14     -6
+  wall             5 ->   5     +0
+
+HIGHER UNDER B
+  door             2 ->   2     +0
+  bucket           3 ->   3     +0
+  dog              7 ->   7     +0
+  tires            6 ->   6     +0
+  car             16 ->   9     +7
+  man             10 ->   8     +2
+  chair           15 ->  12     +3
+  habit           12 ->  10     +2
+  cat             19 ->  13     +6
+  can              4 ->   4     +0
+  front           11 ->  11     +0
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  ball             1 ->   1     +0
+  bag              7 ->  22    -15
+  man             10 ->  25    -15
+  soccer           8 ->  16     -8
+  dog              3 ->  12     -9
+
+HIGHER UNDER B
+  bucket           9 ->   2     +7
+  tree            19 ->   8    +11
+  chair           12 ->   6     +6
+  back            15 ->  10     +5
+  ground           6 ->   4     +2
+  can              5 ->   5     +0
+  stone           13 ->   9     +4
+  table           11 ->  11     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  car              9 ->  15     -6
+  man              6 ->   9     -3
+  back             4 ->   5     -1
+  box             14 ->  17     -3
+  other           13 ->  16     -3
+  bag             10 ->  14     -4
+
+HIGHER UNDER B
+  ball             2 ->   2     +0
+  chair            3 ->   3     +0
+  can             12 ->   8     +4
+  ground           8 ->   7     +1
+  table           11 ->  10     +1
+  dirt            16 ->  11     +5
+  tire            17 ->  12     +5
+  wall             7 ->   6     +1
+  bucket          15 ->  13     +2
+  side             5 ->   4     +1
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  bucket           1 ->   2     -1
+  habit            4 ->  36    -32
+  door             3 ->   6     -3
+  can              6 ->   7     -1
+  chair            7 ->  11     -4
+
+HIGHER UNDER B
+  ball             2 ->   1     +1
+  ground          24 ->   3    +21
+  dirt             9 ->   4     +5
+  dog             14 ->   8     +6
+  football         5 ->   5     +0
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

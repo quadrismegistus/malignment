@@ -1,0 +1,926 @@
+Below are 29 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: In the video she sent him she was ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  dressed          3 ->   8     -5
+  naked            4 ->   4     +0
+  a                6 ->  20    -14
+  with             9 ->  32    -23
+  showing          8 ->  26    -18
+  also            14 ->  62    -48
+  on               7 ->  18    -11
+  very            11 ->  41    -30
+  just            15 ->  34    -19
+  not             12 ->  23    -11
+  saying          17 ->  30    -13
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  in               2 ->   2     +0
+  talking          5 ->   3     +2
+  sitting         10 ->   5     +5
+  playing         18 ->   6    +12
+  seen            32 ->   7    +25
+  shown           59 ->  10    +49
+  dancing         19 ->   9    +10
+  standing        26 ->  12    +14
+  holding         13 ->  11     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  naked            3 ->  27    -24
+  crying           6 ->  18    -12
+  in               2 ->   4     -2
+  lying            9 ->  17     -8
+  on              11 ->  24    -13
+  still           18 ->  38    -20
+  talking         13 ->  13     +0
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  dancing          8 ->   3     +5
+  dressed          4 ->   2     +2
+  laughing        23 ->   7    +16
+  seen            10 ->   8     +2
+  doing           20 ->  10    +10
+  sitting          5 ->   5     +0
+  smiling         15 ->  11     +4
+  playing         14 ->  12     +2
+  holding         12 ->   9     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  saying           1 ->   2     -1
+  in               5 ->  15    -10
+  just            10 ->  24    -14
+  asking           4 ->   5     -1
+  on              18 ->  32    -14
+  the             15 ->  27    -12
+  also            22 ->  35    -13
+  going           16 ->  22     -6
+  being           23 ->  31     -8
+  a                7 ->  10     -3
+  telling         11 ->  19     -8
+  crying          17 ->  21     -4
+  making           9 ->  13     -4
+
+HIGHER UNDER B
+  wearing          2 ->   1     +1
+  trying           8 ->   4     +4
+  speaking        34 ->   7    +27
+  clearly         27 ->  12    +15
+  looking         14 ->   8     +6
+  not             13 ->   9     +4
+  dressed         29 ->  16    +13
+  referring       19 ->  11     +8
+  using           24 ->  17     +7
+  very             6 ->   6     +0
+  talking          3 ->   3     +0
+  doing           20 ->  18     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  in               2 ->   8     -6
+  naked            4 ->  20    -16
+  crying           3 ->   5     -2
+  dressed          5 ->  11     -6
+  saying          13 ->  21     -8
+  topless         19 ->  37    -18
+  on              15 ->  24     -9
+  lying           12 ->  14     -2
+  clearly         18 ->  26     -8
+  talking          9 ->  13     -4
+  telling         21 ->  22     -1
+  looking         22 ->  23     -1
+
+HIGHER UNDER B
+  smiling         14 ->   2    +12
+  shown           20 ->   7    +13
+  laughing        16 ->   6    +10
+  wearing          1 ->   1     +0
+  seen             8 ->   4     +4
+  sitting          7 ->   3     +4
+  playing         29 ->  15    +14
+  walking         31 ->  19    +12
+  making          26 ->  16    +10
+  a               24 ->  17     +7
+  dancing         10 ->  10     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  wearing          1 ->   2     -1
+  trying           5 ->  14     -9
+  holding         13 ->  26    -13
+  very             3 ->   5     -2
+  also            18 ->  37    -19
+  a                7 ->  11     -4
+  dressed         11 ->  17     -6
+  playing          6 ->  10     -4
+  showing         20 ->  38    -18
+  crying          14 ->  22     -8
+  just            16 ->  25     -9
+  doing           15 ->  20     -5
+  asking          10 ->  12     -2
+  really          24 ->  39    -15
+  in               4 ->   7     -3
+  sitting         21 ->  28     -7
+  watching        23 ->  29     -6
+
+HIGHER UNDER B
+  talking          2 ->   1     +1
+  not             17 ->   3    +14
+  going           30 ->   8    +22
+  speaking        52 ->  15    +37
+  telling          8 ->   4     +4
+  able            53 ->  21    +32
+  saying           9 ->   6     +3
+  seen            25 ->  13    +12
+  so              31 ->  16    +15
+  happy           37 ->  27    +10
+  using           22 ->  19     +3
+  on              19 ->  18     +1
+  singing         36 ->  30     +6
+  the             28 ->  23     +5
+  standing        29 ->  24     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  wearing          1 ->   1     +0
+  dressed          3 ->   8     -5
+  topless          4 ->  32    -28
+  crying           8 ->  19    -11
+  completely       9 ->  16     -7
+  sucking         16 ->  45    -29
+  in               5 ->   5     +0
+  just            19 ->  31    -12
+  nude            14 ->  22     -8
+  smiling         13 ->  20     -7
+  clearly         17 ->  23     -6
+
+HIGHER UNDER B
+  dancing         12 ->   3     +9
+  sitting          6 ->   4     +2
+  so              31 ->   9    +22
+  standing        10 ->   6     +4
+  singing         42 ->  11    +31
+  showing         57 ->  17    +40
+  making          39 ->  18    +21
+  playing         24 ->  14    +10
+  lying            7 ->   7     +0
+  a               21 ->  13     +8
+  doing           18 ->  12     +6
+  naked            2 ->   2     +0
+  having          15 ->  15     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  holding          6 ->  22    -16
+  dancing          7 ->  23    -16
+  crying          13 ->  63    -50
+  talking          5 ->  11     -6
+  singing          9 ->  15     -6
+  sitting          4 ->  10     -6
+  on              12 ->  26    -14
+  standing        14 ->  30    -16
+  doing           16 ->  51    -35
+  very             8 ->  13     -5
+  telling         27 ->  89    -62
+  actually        25 ->  66    -41
+  playing         20 ->  25     -5
+  clearly         19 ->  20     -1
+  saying          17 ->  17     +0
+  also            24 ->  41    -17
+  lying           26 ->  37    -11
+
+HIGHER UNDER B
+  dressed          3 ->   2     +1
+  wearing          1 ->   1     +0
+  laughing        33 ->   4    +29
+  showing         23 ->   5    +18
+  smiling         10 ->   6     +4
+  naked           15 ->   7     +8
+  looking         37 ->  12    +25
+  a               18 ->   8    +10
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  seen             2 ->   8     -6
+  crying           7 ->  20    -13
+  clearly          6 ->   9     -3
+  in               3 ->   3     +0
+  singing         13 ->  26    -13
+  saying          15 ->  36    -21
+  very            12 ->  21     -9
+  asking          17 ->  33    -16
+  not             14 ->  19     -5
+  sitting          5 ->   5     +0
+  standing         9 ->  13     -4
+  looking         19 ->  22     -3
+  lying           18 ->  18     +0
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  dressed          4 ->   2     +2
+  smiling         11 ->   4     +7
+  showing         34 ->  11    +23
+  laughing        30 ->  12    +18
+  dancing         28 ->  10    +18
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  wearing          1 ->   6     -5
+  dressed          5 ->  34    -29
+  trying          19 ->  53    -34
+  just            10 ->  31    -21
+  not              9 ->  20    -11
+  making          21 ->  46    -25
+  asking          16 ->  33    -17
+  very            17 ->  30    -13
+  looking         23 ->  51    -28
+  a               22 ->  44    -22
+  dancing         18 ->  25     -7
+  saying           6 ->   8     -2
+  holding          8 ->   9     -1
+  showing         11 ->  13     -2
+  clearly         14 ->  14     +0
+  in               2 ->   3     -1
+
+HIGHER UNDER B
+  sitting          4 ->   1     +3
+  crying          15 ->   2    +13
+  naked            7 ->   5     +2
+  on              12 ->   7     +5
+  already         39 ->  11    +28
+  lying           37 ->  12    +25
+  walking         40 ->  16    +24
+  actually        32 ->  17    +15
+  playing         30 ->  18    +12
+  doing           13 ->  10     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  saying           2 ->  13    -11
+  like             8 ->  50    -42
+  just             5 ->  17    -12
+  very             3 ->   5     -2
+  telling          6 ->  11     -5
+  really          15 ->  35    -20
+  asking           7 ->  10     -3
+  talking          1 ->   1     +0
+  the             14 ->  20     -6
+  giving          13 ->  19     -6
+  in               9 ->   9     +0
+  so              21 ->  27     -6
+  doing           12 ->  16     -4
+  on              19 ->  25     -6
+
+HIGHER UNDER B
+  going           11 ->   2     +9
+  asked           18 ->   4    +14
+  told            20 ->   8    +12
+  able            17 ->   7    +10
+  using           24 ->  14    +10
+  writing         52 ->  23    +29
+  looking         16 ->  12     +4
+  a                4 ->   3     +1
+  trying          10 ->   6     +4
+  working         33 ->  24     +9
+  about           25 ->  18     +7
+  also            26 ->  21     +5
+  showing         22 ->  15     +7
+  playing         30 ->  26     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  crying           4 ->  22    -18
+  holding         10 ->  51    -41
+  smiling          8 ->  39    -31
+  drunk            7 ->  28    -21
+  smoking         11 ->  24    -13
+  with            16 ->  40    -24
+  all             14 ->  26    -12
+  laughing        23 ->  63    -40
+  looking         22 ->  58    -36
+  shirtless       21 ->  46    -25
+  sitting         25 ->  53    -28
+  very             5 ->   7     -2
+  so               9 ->  10     -1
+  standing        24 ->  25     -1
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  naked            2 ->   2     +0
+  completely      15 ->   4    +11
+  in               3 ->   3     +0
+  not             17 ->   6    +11
+  dressed          6 ->   5     +1
+  totally         44 ->  12    +32
+  fully           59 ->  14    +45
+  a               19 ->   8    +11
+  topless         30 ->  13    +17
+  only            34 ->  15    +19
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  naked            9 ->  51    -42
+  dressed          5 ->  23    -18
+  just            14 ->  48    -34
+  sitting          7 ->  11     -4
+  all             19 ->  41    -22
+  in               2 ->   2     +0
+  saying          10 ->  17     -7
+  not             11 ->  18     -7
+  crying           6 ->   9     -3
+  talking          8 ->  10     -2
+  lying           22 ->  25     -3
+  looking         16 ->  21     -5
+  clearly         24 ->  24     +0
+  smiling          4 ->   6     -2
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  dancing         17 ->   4    +13
+  doing           23 ->   5    +18
+  very            12 ->   7     +5
+  showing          3 ->   3     +0
+  speaking        42 ->  13    +29
+  trying          13 ->   8     +5
+  asking          34 ->  15    +19
+  standing        18 ->  14     +4
+  laughing        25 ->  20     +5
+  holding         15 ->  12     +3
+  making          20 ->  16     +4
+  on              21 ->  19     +2
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  in               2 ->   4     -2
+  dressed          3 ->  26    -23
+  crying           4 ->   8     -4
+  very             5 ->  16    -11
+  naked            6 ->  51    -45
+  smiling          7 ->  28    -21
+  holding          8 ->  61    -53
+  talking          9 ->  57    -48
+  saying          12 ->  85    -73
+  sitting         14 ->  55    -41
+
+HIGHER UNDER B
+  no              66 ->   1    +65
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  talking          2 ->   7     -5
+  in               4 ->   6     -2
+  not              5 ->  13     -8
+  telling          6 ->  15     -9
+  just            10 ->  16     -6
+  asking          13 ->  18     -5
+  asked           21 ->  42    -21
+  standing        18 ->  34    -16
+  holding         22 ->  36    -14
+  able            11 ->  14     -3
+  the             26 ->  28     -2
+  also            23 ->  27     -4
+  looking         24 ->  26     -2
+  wearing          7 ->   9     -2
+  using           17 ->  24     -7
+
+HIGHER UNDER B
+  clearly         19 ->   4    +15
+  explaining      16 ->   8     +8
+  very             1 ->   1     +0
+  crying          14 ->  10     +4
+  worried         62 ->  19    +43
+  really          20 ->  12     +8
+  trying           8 ->   3     +5
+  supposed        72 ->  21    +51
+  a                9 ->   5     +4
+  so              12 ->  11     +1
+  describing      35 ->  23    +12
+  laughing        31 ->  20    +11
+  actually        25 ->  22     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  in               2 ->   4     -2
+  crying           5 ->  16    -11
+  telling         10 ->  25    -15
+  smiling          8 ->  18    -10
+  holding          6 ->  14     -8
+  lying           18 ->  29    -11
+  very            12 ->  19     -7
+  talking         16 ->  20     -4
+  standing        11 ->  12     -1
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  dressed          4 ->   2     +2
+  showing         14 ->   5     +9
+  completely      13 ->   6     +7
+  topless         20 ->  10    +10
+  a               17 ->   9     +8
+  only            21 ->  13     +8
+  naked            3 ->   3     +0
+  sitting          7 ->   7     +0
+  just            15 ->  11     +4
+  on              22 ->  17     +5
+  clearly         19 ->  15     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  in               2 ->   6     -4
+  not             12 ->  40    -28
+  crying           3 ->   5     -2
+  also            17 ->  31    -14
+  on              10 ->  20    -10
+  just            23 ->  35    -12
+  very            13 ->  21     -8
+  a               21 ->  29     -8
+  seen             9 ->  15     -6
+  like            20 ->  23     -3
+  asking           6 ->  10     -4
+  standing        16 ->  19     -3
+  trying           7 ->   8     -1
+  telling         15 ->  18     -3
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  holding          8 ->   4     +4
+  showing         14 ->   7     +7
+  dancing         29 ->  14    +15
+  talking          4 ->   2     +2
+  looking         22 ->  11    +11
+  using           25 ->  13    +12
+  singing         24 ->  12    +12
+  dressed         11 ->   9     +2
+  doing           30 ->  22     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  wearing          1 ->   1     +0
+  in               2 ->   5     -3
+  naked            9 ->  59    -50
+  on               7 ->  25    -18
+  sitting          3 ->   8     -5
+  holding          5 ->  16    -11
+  dressed         10 ->  26    -16
+  lying           24 ->  60    -36
+  standing         4 ->  10     -6
+  clearly          6 ->  12     -6
+  making          22 ->  39    -17
+  dancing         17 ->  28    -11
+  doing           19 ->  24     -5
+  smiling         12 ->  14     -2
+
+HIGHER UNDER B
+  very            15 ->   2    +13
+  saying          14 ->   3    +11
+  talking          8 ->   4     +4
+  crying          18 ->   6    +12
+  not             11 ->   7     +4
+  explaining     103 ->  22    +81
+  just            21 ->  11    +10
+  speaking        54 ->  20    +34
+  looking         13 ->   9     +4
+  a               23 ->  15     +8
+  using           34 ->  19    +15
+  telling         27 ->  17    +10
+  really          52 ->  29    +23
+  trying          36 ->  21    +15
+  so              39 ->  23    +16
+  all             35 ->  27     +8
+  laughing        20 ->  18     +2
+  showing         16 ->  13     +3
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  not              8 ->  15     -7
+  saying           9 ->  12     -3
+  also            16 ->  22     -6
+  naked            6 ->   7     -1
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  standing         7 ->   6     +1
+  talking          5 ->   5     +0
+  sitting          4 ->   4     +0
+  dressed          3 ->   3     +0
+  in               2 ->   2     +0
+  trying          10 ->   8     +2
+  holding         11 ->   9     +2
+  on              13 ->  10     +3
+  just            18 ->  17     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL beaver-7b-v1.0 ===
+HIGHER UNDER A
+  in               2 ->  10     -8
+  naked            4 ->  11     -7
+  sitting          5 ->   5     +0
+  clearly          9 ->  20    -11
+  dressed          3 ->   4     -1
+  crying           7 ->   8     -1
+  holding         11 ->  18     -7
+  lying            8 ->   9     -1
+  very            12 ->  54    -42
+  not             13 ->  52    -39
+  a               15 ->  36    -21
+  saying          16 ->  39    -23
+  talking         14 ->  14     +0
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  standing        10 ->   2     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  talking          5 ->  19    -14
+  saying           7 ->  31    -24
+  trying          10 ->  35    -25
+  n't             22 -> 128   -106
+  standing         9 ->  28    -19
+  so              19 ->  39    -20
+  a               11 ->  17     -6
+  asking          12 ->  16     -4
+  seen            16 ->  23     -7
+  also            20 ->  32    -12
+  telling         21 ->  27     -6
+  looking         23 ->  26     -3
+  on              18 ->  18     +0
+  naked            8 ->  10     -2
+  dressed          3 ->   5     -2
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  crying           6 ->   3     +3
+  smiling         42 ->   8    +34
+  holding         17 ->   6    +11
+  dancing         30 ->   9    +21
+  playing         33 ->  14    +19
+  singing         26 ->  12    +14
+  not             28 ->  15    +13
+  very            13 ->   7     +6
+  showing          4 ->   4     +0
+  all             15 ->  11     +4
+  in               2 ->   2     +0
+  sitting         24 ->  20     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  wearing          1 ->   1     +0
+  dressed          3 ->   3     +0
+  naked            5 ->   6     -1
+  on               7 ->  13     -6
+  holding          8 ->  17     -9
+  dancing         16 ->  23     -7
+  standing         6 ->   7     -1
+  sitting          4 ->   4     +0
+  looking         22 ->  24     -2
+
+HIGHER UNDER B
+  talking         12 ->   5     +7
+  clearly         14 ->   8     +6
+  very            18 ->  12     +6
+  laughing        19 ->  16     +3
+  also            15 ->  11     +4
+  asking          25 ->  21     +4
+  crying          13 ->  10     +3
+  trying          10 ->   9     +1
+  seen            20 ->  18     +2
+  smiling         21 ->  19     +2
+  in               2 ->   2     +0
+  being           24 ->  22     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  crying           3 ->   6     -3
+  seen             9 ->  80    -71
+  lying            6 ->  11     -5
+  naked           11 ->  44    -33
+  smiling          8 ->  10     -2
+  saying          16 ->  51    -35
+  dressed          5 ->   7     -2
+  singing         13 ->  15     -2
+  holding         12 ->  12     +0
+  talking         18 ->  26     -8
+  not             19 ->  30    -11
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  dancing          7 ->   3     +4
+  laughing        15 ->   5    +10
+  sitting          4 ->   4     +0
+  in               2 ->   2     +0
+  doing           30 ->  14    +16
+  standing        10 ->   8     +2
+  on              14 ->   9     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  wearing          1 ->   1     +0
+  smiling          9 ->  19    -10
+  looking         16 ->  29    -13
+  on               8 ->  11     -3
+  talking         13 ->  26    -13
+  clearly         17 ->  25     -8
+
+HIGHER UNDER B
+  standing         7 ->   6     +1
+  dancing         11 ->   8     +3
+  sitting          4 ->   4     +0
+  dressed          5 ->   5     +0
+  seen            27 ->  13    +14
+  naked            3 ->   3     +0
+  in               2 ->   2     +0
+  walking         36 ->  21    +15
+  crying          12 ->  10     +2
+  fully           37 ->  22    +15
+  laying          14 ->  12     +2
+  laughing        26 ->  17     +9
+  completely      18 ->  14     +4
+  doing           24 ->  20     +4
+  a               20 ->  15     +5
+  just            19 ->  18     +1
+  holding         10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  wearing          1 ->   1     +0
+  naked            3 ->  12     -9
+  dressed          6 ->  20    -14
+  lying            7 ->  22    -15
+  in               2 ->   4     -2
+  on               9 ->  23    -14
+  laying          16 ->  42    -26
+  still           17 ->  35    -18
+  doing           15 ->  18     -3
+  just            14 ->  17     -3
+
+HIGHER UNDER B
+  topless          8 ->   2     +6
+  showing         10 ->   5     +5
+  sitting          4 ->   3     +1
+  completely      13 ->   7     +6
+  dancing         11 ->   8     +3
+  very            21 ->  10    +11
+  fully           18 ->   9     +9
+  talking         30 ->  16    +14
+  making          28 ->  13    +15
+  playing         29 ->  14    +15
+  walking         24 ->  15     +9
+  shown           35 ->  24    +11
+  not             27 ->  21     +6
+  only            20 ->  19     +1
+  holding         12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  crying           2 ->  39    -37
+  saying           4 ->  37    -33
+  clearly          3 ->   9     -6
+  very             6 ->  23    -17
+  not              8 ->  20    -12
+  talking          7 ->  15     -8
+  telling         10 ->  43    -33
+  asking          14 ->  72    -58
+  literally       19 -> 138   -119
+  obviously       24 -> 104    -80
+  trying          13 ->  31    -18
+  in               5 ->   5     +0
+  also            21 ->  59    -38
+  being           20 ->  49    -29
+  just            15 ->  28    -13
+  making          17 ->  26     -9
+  laughing        12 ->  18     -6
+  showing         23 ->  32     -9
+  acting          22 ->  22     +0
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  looking         16 ->   2    +14
+  seen            91 ->   7    +84
+  standing        33 ->   4    +29
+  smiling         11 ->   3     +8
+  so              45 ->  10    +35
+  sitting         18 ->   8    +10
+  dancing         29 ->  11    +18
+  shown          140 ->  17   +123
+  holding          9 ->   6     +3
+  dressed         26 ->  12    +14
+  playing         60 ->  13    +47
+  a               35 ->  14    +21
+  doing           34 ->  16    +18
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  wearing          1 ->   1     +0
+  dressed          5 ->   7     -2
+  naked            8 ->  12     -4
+  on              11 ->  16     -5
+  showing         17 ->  17     +0
+  holding          7 ->   9     -2
+
+HIGHER UNDER B
+  sitting          3 ->   3     +0
+  dancing          9 ->   6     +3
+  seen            15 ->   8     +7
+  crying           6 ->   4     +2
+  smiling         16 ->  11     +5
+  at              13 ->  13     +0
+  lying           10 ->  10     +0
+  in               2 ->   2     +0
+  walking         18 ->  18     +0
+  looking         19 ->  19     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  wearing          1 ->   1     +0
+  dressed          2 ->   3     -1
+  dancing          7 ->  14     -7
+  crying           8 ->  15     -7
+  talking          4 ->   8     -4
+  smoking         20 ->  35    -15
+  with            23 ->  37    -14
+  singing         10 ->  13     -3
+  a               15 ->  17     -2
+  telling         19 ->  24     -5
+  playing         21 ->  27     -6
+  on              17 ->  21     -4
+  saying          16 ->  18     -2
+
+HIGHER UNDER B
+  in               3 ->   2     +1
+  seen            13 ->   5     +8
+  standing        14 ->   6     +8
+  holding          5 ->   4     +1
+  doing           11 ->   9     +2
+  clearly         34 ->  19    +15
+  also            24 ->  16     +8
+  showing         18 ->  12     +6
+  lying           22 ->  20     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  naked            7 ->  23    -16
+  seen             4 ->   6     -2
+  smiling         15 ->  30    -15
+  asking          22 ->  39    -17
+  in               2 ->   3     -1
+  also             8 ->   9     -1
+  saying          14 ->  22     -8
+  talking         11 ->  14     -3
+  crying           5 ->   5     +0
+  lying           17 ->  17     +0
+  on              19 ->  19     +0
+
+HIGHER UNDER B
+  wearing          1 ->   1     +0
+  dressed          3 ->   2     +1
+  standing        18 ->  12     +6
+  just            16 ->  11     +5
+  doing           33 ->  25     +8
+  clearly          6 ->   4     +2
+  very            12 ->  10     +2
+  a               13 ->  13     +0
+  showing         24 ->  15     +9
+  all             27 ->  21     +6
+  shown           25 ->  24     +1
+  sitting         10 ->   8     +2
+  trying          21 ->  16     +5
+  screaming       23 ->  20     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  wearing          1 ->   2     -1
+  standing         4 ->  14    -10
+  sitting          3 ->   6     -3
+  naked            9 ->  18     -9
+  showing         10 ->  21    -11
+  saying          19 ->  38    -19
+  trying          16 ->  34    -18
+  using           22 ->  41    -19
+  not             11 ->  20     -9
+  singing         13 ->  26    -13
+  playing         15 ->  25    -10
+  telling         25 ->  37    -12
+  also            21 ->  28     -7
+  laughing        12 ->  16     -4
+  talking          8 ->   9     -1
+  lying           14 ->  19     -5
+  on              20 ->  24     -4
+  a               26 ->  27     -1
+
+HIGHER UNDER B
+  seen             6 ->   1     +5
+  with            32 ->   8    +24
+  dancing         18 ->   7    +11
+  crying          31 ->  11    +20
+  looking         24 ->  10    +14
+  dressed          7 ->   5     +2
+  very            27 ->  12    +15
+  eating          41 ->  23    +18
+  walking         30 ->  15    +15
+  holding          5 ->   4     +1
+  clearly         29 ->  22     +7
+  doing           17 ->  13     +4
+  shown           23 ->  17     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 29 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

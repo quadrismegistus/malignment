@@ -1,0 +1,789 @@
+Below are 28 independent measurements of how one sentence gets
+completed.
+
+Each measurement compares two versions of the same language model. Column A is
+the model before instruction tuning; column B is the same model after it. The
+words are those whose position differs most between the two versions, ordered by
+how much of the difference rests on them. Position 1 is the likeliest completion
+under that condition; a dash means the word does not appear in that condition's
+list at all.
+
+The models are unrelated to each other and were trained by different groups. You
+are seeing the same sentence measured across all of them.
+
+FRAGMENT: The overtime hours had been shaved off her timesheet again, and she wanted to ___
+
+=== MODEL AmberSafe ===
+HIGHER UNDER A
+  make             2 ->   2     +0
+  get              3 ->  33    -30
+  see              4 ->  21    -17
+  find             5 ->  25    -20
+  be               6 ->  15     -9
+  talk             7 ->  26    -19
+  go               8 ->  50    -42
+  take             9 ->  16     -7
+  tell            11 ->  45    -34
+  ask             10 ->  14     -4
+  do              19 ->  51    -32
+  put             17 ->  49    -32
+  have            16 ->  47    -31
+  call            18 ->  40    -22
+  complain        14 ->  22     -8
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  ensure          39 ->   3    +36
+  appeal          61 ->   4    +57
+  understand      42 ->   6    +36
+  protest         12 ->   5     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Baichuan2-7B-Chat ===
+HIGHER UNDER A
+  see              5 ->  23    -18
+  get              4 ->   5     -1
+  ask              8 ->  16     -8
+  talk             6 ->   7     -1
+  go              11 ->  24    -13
+  find             7 ->   9     -2
+  fight           12 ->  17     -5
+  keep            16 ->  20     -4
+  protest         15 ->  18     -3
+
+HIGHER UNDER B
+  scream           3 ->   2     +1
+  know             1 ->   1     +0
+  complain        10 ->   4     +6
+  speak           23 ->  10    +13
+  take            13 ->   8     +5
+  say             25 ->  13    +12
+  be               9 ->   6     +3
+  do              14 ->  11     +3
+  call            17 ->  12     +5
+  kill            18 ->  14     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CT-LLM-SFT-DPO ===
+HIGHER UNDER A
+  know             1 ->   1     +0
+  be               2 ->   7     -5
+  get              4 ->   6     -2
+  pay             16 ->  65    -49
+  work            11 ->  19     -8
+  see              5 ->   5     +0
+  tell            17 ->  39    -22
+  add             15 ->  21     -6
+  give            18 ->  22     -4
+  have             8 ->  12     -4
+  ask             12 ->  15     -3
+  go               6 ->  11     -5
+
+HIGHER UNDER B
+  make             3 ->   2     +1
+  do               7 ->   3     +4
+  find            13 ->   4     +9
+  ensure          32 ->   8    +24
+  avoid           22 ->  10    +12
+  use             14 ->  14     +0
+  complain        23 ->  16     +7
+  take             9 ->   9     +0
+  talk            19 ->  17     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-8B-Instruct ===
+HIGHER UNDER A
+  scream           3 ->  70    -67
+  complain         5 ->  17    -12
+  ask              8 ->  20    -12
+  be               6 ->  13     -7
+  protest         13 ->  24    -11
+  tell            14 ->  39    -25
+  say             15 ->  44    -29
+  cry             21 ->  82    -61
+  yell            22 ->  81    -59
+  go              18 ->  25     -7
+  give            23 ->  31     -8
+  have            20 ->  22     -2
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  speak            7 ->   2     +5
+  report          72 ->  12    +60
+  discuss         17 ->   7    +10
+  bring           26 ->  11    +15
+  make             4 ->   4     +0
+  take            19 ->  10     +9
+  confront        11 ->   6     +5
+  see             10 ->   5     +5
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Lucie-7B-Instruct-v1.1 ===
+HIGHER UNDER A
+  know             1 ->   1     +0
+  complain        10 ->  39    -29
+  see              6 ->   8     -2
+  talk             7 ->  10     -3
+  get              3 ->   6     -3
+  file            16 ->  73    -57
+  figure           8 ->  11     -3
+  quit            13 ->  19     -6
+  ask             15 ->  16     -1
+  be               4 ->   5     -1
+
+HIGHER UNDER B
+  take             9 ->   4     +5
+  find             5 ->   3     +2
+  do              12 ->   7     +5
+  make             2 ->   2     +0
+  work            34 ->  17    +17
+  keep            22 ->  14     +8
+  understand      18 ->  13     +5
+  go              11 ->   9     +2
+  use             14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Mistral-7B-Instruct-v0.1 ===
+HIGHER UNDER A
+  cry              3 ->  24    -21
+  scream           2 ->   6     -4
+  ask              4 ->   9     -5
+  complain         6 ->  10     -4
+  kill            14 ->  53    -39
+  tell            12 ->  22    -10
+  say              8 ->  12     -4
+  shout           20 ->  47    -27
+  confront         7 ->   7     +0
+  punch           21 ->  40    -19
+  call            16 ->  23     -7
+  be              11 ->  11     +0
+  go              13 ->  15     -2
+  protest         18 ->  18     +0
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  talk             5 ->   2     +3
+  make             9 ->   3     +6
+  see             22 ->   5    +17
+  let             27 ->  13    +14
+  speak           15 ->   4    +11
+  quit            19 ->  14     +5
+  take            23 ->  17     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMo-2-0425-1B-Instruct ===
+HIGHER UNDER A
+  know             1 ->   1     +0
+  be               4 ->  26    -22
+  find             3 ->  15    -12
+  make             2 ->   2     +0
+  get              5 ->  22    -17
+  see              7 ->  32    -25
+  go               9 ->  88    -79
+
+HIGHER UNDER B
+  address         72 ->   3    +69
+  understand      40 ->   4    +36
+  ensure          28 ->   5    +23
+  challenge       32 ->   6    +26
+  confront        43 ->   7    +36
+  remind          78 ->  10    +68
+  protest         34 ->  12    +22
+  do              33 ->  13    +20
+  express         75 ->  16    +59
+  report           8 ->   8     +0
+  discuss         48 ->  17    +31
+  question        66 ->  18    +48
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL OLMoE-1B-7B-0125-Instruct ===
+HIGHER UNDER A
+  know             1 ->   1     +0
+  go               4 ->  22    -18
+  be               3 ->  16    -13
+  ask              6 ->  23    -17
+  file             8 ->  17     -9
+  see             10 ->  18     -8
+  keep            16 ->  33    -17
+  take            15 ->  32    -17
+  quit            18 ->  62    -44
+  get              7 ->  13     -6
+  tell            20 ->  52    -32
+  kill            24 ->  92    -68
+  fight           25 ->  56    -31
+  appeal          23 ->  36    -13
+  complain        21 ->  25     -4
+  make             2 ->   5     -3
+
+HIGHER UNDER B
+  confront        12 ->   2    +10
+  put             13 ->   4     +9
+  talk             5 ->   3     +2
+  address         74 ->   6    +68
+  discuss         32 ->   9    +23
+  scream          11 ->   8     +3
+  protest          9 ->   7     +2
+  speak           26 ->  10    +16
+  have            19 ->  11     +8
+  ensure          55 ->  15    +40
+  cry             14 ->  12     +2
+  find            17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-3-7B-Instruct ===
+HIGHER UNDER A
+  know             1 ->   2     -1
+  get              4 ->  27    -23
+  make             3 ->  18    -15
+  find            10 ->  32    -22
+  take            13 ->  37    -24
+  do              11 ->  21    -10
+  see              7 ->  16     -9
+  be               5 ->  12     -7
+  give            23 ->  85    -62
+  have            19 ->  53    -34
+  go               6 ->  11     -5
+  throw           21 ->  61    -40
+  bring           24 ->  33     -9
+  yell            22 ->  23     -1
+  leave           18 ->  19     -1
+  call            14 ->  14     +0
+
+HIGHER UNDER B
+  scream           2 ->   1     +1
+  cry              8 ->   3     +5
+  report          33 ->   6    +27
+  speak           17 ->   5    +12
+  ask             12 ->   4     +8
+  say             15 ->   7     +8
+  protest         26 ->   9    +17
+  shout           32 ->  10    +22
+  add             67 ->  17    +50
+  talk             9 ->   8     +1
+  complain        16 ->  13     +3
+  tell            20 ->  15     +5
+
+=== MODEL Qwen2.5-0.5B-Instruct ===
+HIGHER UNDER A
+  get              2 ->   3     -1
+  be               3 ->   4     -1
+  take             5 ->   5     +0
+  pay             11 ->  15     -4
+  leave           19 ->  54    -35
+  go               7 ->   9     -2
+  have            10 ->  13     -3
+  put             16 ->  23     -7
+  give            15 ->  18     -3
+  work            12 ->  14     -2
+  see              6 ->   7     -1
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  make             4 ->   2     +2
+  do               8 ->   6     +2
+  start           17 ->  12     +5
+  avoid           13 ->  10     +3
+  keep             9 ->   8     +1
+  find            14 ->  11     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen2.5-7B-Instruct ===
+HIGHER UNDER A
+  know             1 ->   1     +0
+  find             5 ->  21    -16
+  get              7 ->  49    -42
+  make             6 ->  24    -18
+  be               8 ->  34    -26
+  see             13 ->  52    -39
+  talk             9 ->  16     -7
+  kick            11 ->  11     +0
+
+HIGHER UNDER B
+  cry             12 ->   4     +8
+  strangle         3 ->   3     +0
+  scream           2 ->   2     +0
+  ______          15 ->   6     +9
+  ____            18 ->   7    +11
+  ________        27 ->  10    +17
+  yell            14 ->   8     +6
+  do              10 ->   9     +1
+  _______         58 ->  14    +44
+  __________      31 ->  12    +19
+  confront        35 ->  15    +20
+  speak           20 ->  13     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Qwen3-8B ===
+HIGHER UNDER A
+  make             2 ->   4     -2
+  complain         6 ->  34    -28
+  scream           9 ->  45    -36
+  be               7 ->  13     -6
+  talk             3 ->   6     -3
+  have            10 ->  15     -5
+  ask             11 ->  16     -5
+  cry             16 ->  44    -28
+  go              14 ->  25    -11
+  speak           12 ->  14     -2
+  protest         15 ->  28    -13
+  tell            21 ->  53    -32
+  do               8 ->   9     -1
+  see             18 ->  27     -9
+  give            17 ->  23     -6
+  get              5 ->   7     -2
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  confront        20 ->   2    +18
+  figure          22 ->   5    +17
+  fight           24 ->   8    +16
+  find             4 ->   3     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL RedPajama-INCITE-7B-Chat ===
+HIGHER UNDER A
+  know             1 ->   2     -1
+  get              3 ->  10     -7
+  make             2 ->   4     -2
+  be               4 ->  26    -22
+  see              6 ->  53    -47
+  go               7 ->  13     -6
+  ask              8 ->  11     -3
+  talk             9 ->  23    -14
+  complain        10 ->  18     -8
+  do              12 ->  28    -16
+  keep            15 ->  48    -33
+  protest         14 ->  24    -10
+  find            16 ->  44    -28
+  yell            17 ->  31    -14
+  call            18 ->  42    -24
+
+HIGHER UNDER B
+  scream           5 ->   1     +4
+  lash            80 ->   3    +77
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL SmolLM2-360M-Instruct ===
+HIGHER UNDER A
+  complain        10 ->  74    -64
+  be               3 ->   4     -1
+  say             11 ->  31    -20
+  tell            13 ->  46    -33
+  go               6 ->   7     -1
+  do               9 ->  15     -6
+  get              4 ->   5     -1
+  call            18 ->  44    -26
+  show            14 ->  19     -5
+  find            17 ->  23     -6
+  talk            16 ->  21     -5
+  thank            7 ->   8     -1
+  give            12 ->  14     -2
+
+HIGHER UNDER B
+  make             2 ->   2     +0
+  see              5 ->   3     +2
+  stay            36 ->  12    +24
+  prove           23 ->  10    +13
+  catch           21 ->  11    +10
+  keep            15 ->   9     +6
+  take             8 ->   6     +2
+  feel            19 ->  13     +6
+  know             1 ->   1     +0
+  leave           20 ->  16     +4
+
+=== MODEL SmolLM3-3B ===
+HIGHER UNDER A
+  be               5 ->  16    -11
+  get              4 ->   7     -3
+  complain         6 ->  27    -21
+  do              16 ->  48    -32
+  fight           11 ->  24    -13
+  take             9 ->  13     -4
+  tell            14 ->  26    -12
+  file            10 ->  11     -1
+  call            13 ->  15     -2
+  talk             3 ->   3     +0
+  go              15 ->  18     -3
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  make             2 ->   2     +0
+  speak           12 ->   4     +8
+  put             23 ->   8    +15
+  report          17 ->   9     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL TinyLlama-1.1B-Chat-v1.0 ===
+HIGHER UNDER A
+  get              3 ->   4     -1
+  be               4 ->   6     -2
+  go               5 ->  13     -8
+  know             1 ->   1     +0
+  see              6 ->   7     -1
+  talk             7 ->  11     -4
+  tell             9 ->  20    -11
+  keep            15 ->  28    -13
+  call            10 ->  19     -9
+  take            13 ->  17     -4
+  ask             11 ->  12     -1
+
+HIGHER UNDER B
+  make             2 ->   2     +0
+  speak           14 ->   3    +11
+  challenge       30 ->   9    +21
+  protest         24 ->   8    +16
+  ensure          49 ->  18    +31
+  appeal          27 ->  15    +12
+  fight           23 ->  16     +7
+  discuss         19 ->  14     +5
+  find             8 ->   5     +3
+  file            12 ->  10     +2
+
+=== MODEL Yi-1.5-9B-Chat ===
+HIGHER UNDER A
+  be               3 ->   5     -2
+  see              5 ->   8     -3
+  check            7 ->  15     -8
+  go               9 ->  21    -12
+  talk             8 ->   9     -1
+  do              15 ->  24     -9
+  complain        10 ->  13     -3
+  take            14 ->  18     -4
+  speak           13 ->  16     -3
+
+HIGHER UNDER B
+  confront        22 ->   6    +16
+  ensure          24 ->   7    +17
+  find             6 ->   4     +2
+  make             2 ->   2     +0
+  understand      47 ->  14    +33
+  report          20 ->  12     +8
+  know             1 ->   1     +0
+  keep            12 ->  10     +2
+  get              4 ->   3     +1
+  discuss         11 ->  11     +0
+
+=== MODEL archangel_sft-dpo_pythia2-8b ===
+HIGHER UNDER A
+  scream           2 ->   2     +0
+  kill            17 ->  25     -8
+  cry             11 ->  15     -4
+  go               8 ->   9     -1
+  see              6 ->   7     -1
+  kick            19 ->  21     -2
+  find            13 ->  13     +0
+  punch           16 ->  16     +0
+  give            21 ->  22     -1
+
+HIGHER UNDER B
+  protest          9 ->   8     +1
+  talk            12 ->  11     +1
+  make             4 ->   4     +0
+  be               3 ->   3     +0
+  know             1 ->   1     +0
+  tell            10 ->  10     +0
+  complain        23 ->  18     +5
+  get              7 ->   6     +1
+  keep            22 ->  20     +2
+  argue           20 ->  19     +1
+  ask              5 ->   5     +0
+  yell            18 ->  17     +1
+  take            14 ->  12     +2
+  call            15 ->  14     +1
+
+=== MODEL bloomz-7b1 ===
+HIGHER UNDER A
+  know             1 ->   1     +0
+  call            11 ->  37    -26
+  tell            13 ->  40    -27
+  ask             12 ->  15     -3
+  talk             9 ->  10     -1
+
+HIGHER UNDER B
+  take            10 ->   6     +4
+  complain         7 ->   4     +3
+  make             2 ->   2     +0
+  fight           21 ->  11    +10
+  leave           24 ->  14    +10
+  do              17 ->  13     +4
+  protest         14 ->  12     +2
+  get              3 ->   3     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL eleuther-pythia6.9b-hh-dpo ===
+HIGHER UNDER A
+  scream           2 ->   5     -3
+  cry             10 ->  14     -4
+  kill            17 ->  31    -14
+  yell            14 ->  19     -5
+  go               9 ->  12     -3
+  punch           20 ->  26     -6
+  say             15 ->  17     -2
+  see             16 ->  18     -2
+  find            22 ->  23     -1
+  be               8 ->  10     -2
+  get              4 ->   7     -3
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  complain         3 ->   2     +1
+  protest          6 ->   4     +2
+  quit             5 ->   3     +2
+  make             7 ->   6     +1
+  file            23 ->  13    +10
+  sue             13 ->   9     +4
+  fight           34 ->  21    +13
+  speak           33 ->  22    +11
+  talk            11 ->   8     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL gemma-2-9b-it ===
+HIGHER UNDER A
+  know             1 ->   2     -1
+  make             2 ->   7     -5
+  talk             3 ->  26    -23
+  be               5 ->  25    -20
+  get              7 ->  51    -44
+  find             8 ->  17     -9
+  see              9 ->  20    -11
+  ask             10 ->  22    -12
+  complain        12 ->  45    -33
+  tell            13 ->  43    -30
+  go              15 ->  28    -13
+  speak           11 ->  12     -1
+  do              14 ->  15     -1
+
+HIGHER UNDER B
+  scream           4 ->   1     +3
+  explode         60 ->   4    +56
+  cry              6 ->   3     +3
+
+=== MODEL granite-3.0-8b-instruct ===
+HIGHER UNDER A
+  scream           2 ->   7     -5
+  cry              3 ->  15    -12
+  go               4 ->  12     -8
+  kill            12 ->  63    -51
+  be               7 ->  11     -4
+  see              6 ->   8     -2
+  get              8 ->  10     -2
+  ask             11 ->  30    -19
+  throw           14 ->  55    -41
+  take            13 ->  17     -4
+  find             5 ->   5     +0
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  confront        26 ->   3    +23
+  talk            10 ->   2     +8
+  make             9 ->   4     +5
+  speak           22 ->   6    +16
+  complain        15 ->   9     +6
+
+=== MODEL kanana-1.5-8b-instruct-2505 ===
+HIGHER UNDER A
+  be               6 ->  20    -14
+  see              7 ->  18    -11
+  scream           2 ->   7     -5
+  kill            10 ->  27    -17
+  go              12 ->  32    -20
+  cry             11 ->  17     -6
+  find             3 ->   6     -3
+  do              13 ->  25    -12
+  tell            14 ->  55    -41
+  strangle        17 ->  35    -18
+  talk             8 ->  10     -2
+  punch           16 ->  21     -5
+  take            15 ->  15     +0
+
+HIGHER UNDER B
+  make             4 ->   2     +2
+  know             1 ->   1     +0
+  address         51 ->   5    +46
+  get              5 ->   3     +2
+  confront         9 ->   4     +5
+  catch           39 ->   8    +31
+  put             19 ->   9    +10
+
+=== MODEL llm-jp-3-7.2b-instruct3 ===
+HIGHER UNDER A
+  cry              2 ->   5     -3
+  complain         4 ->  28    -24
+  be               5 ->  27    -22
+  punch            6 ->  16    -10
+  tell             8 ->  48    -40
+  get             12 ->  47    -35
+  go              13 ->  89    -76
+  kill            14 ->  40    -26
+  ask             11 ->  25    -14
+  make             9 ->   9     +0
+  yell            10 ->  11     -1
+  see             17 ->  74    -57
+  kick            16 ->  17     -1
+  quit            18 ->  24     -6
+
+HIGHER UNDER B
+  scream           1 ->   1     +0
+  throttle        22 ->   3    +19
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL mpt-7b-instruct ===
+HIGHER UNDER A
+  know             1 ->   2     -1
+  talk             9 ->  20    -11
+  complain         5 ->  10     -5
+  file            14 ->  52    -38
+  ask             17 ->  43    -26
+  protest         16 ->  33    -17
+  cry             15 ->  29    -14
+  get              3 ->   5     -2
+  see             10 ->  14     -4
+  scream           8 ->  12     -4
+
+HIGHER UNDER B
+  celebrate       36 ->   4    +32
+  make             2 ->   1     +1
+  go               4 ->   3     +1
+  call            18 ->   7    +11
+  let             26 ->  13    +13
+  take            12 ->  11     +1
+  spend           45 ->  17    +28
+  check           23 ->  16     +7
+  punch           11 ->   9     +2
+  tell            25 ->  18     +7
+  be               6 ->   6     +0
+  use             31 ->  19    +12
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL neo_7b_instruct_v0.1 ===
+HIGHER UNDER A
+  get              3 ->   6     -3
+  be               2 ->   3     -1
+  go               6 ->  11     -5
+  keep             8 ->  20    -12
+  tell            12 ->  44    -32
+  spend           16 ->  36    -20
+  show            15 ->  28    -13
+  take             7 ->   9     -2
+  have            17 ->  25     -8
+  give            18 ->  27     -9
+
+HIGHER UNDER B
+  make             4 ->   1     +3
+  find            13 ->   5     +8
+  talk            10 ->   7     +3
+  discuss         42 ->  12    +30
+  ensure          38 ->  13    +25
+  put             11 ->  10     +1
+  confront        86 ->  15    +71
+  scream          44 ->  18    +26
+  complain        32 ->  17    +15
+  do               9 ->   8     +1
+  try             25 ->  16     +9
+  work            14 ->  14     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL rwkv-raven-7b ===
+HIGHER UNDER A
+  know             1 ->   1     +0
+  cry              4 ->   9     -5
+  ask             14 ->  17     -3
+  see              6 ->  13     -7
+  yell            17 ->  28    -11
+  say             15 ->  19     -4
+  take            18 ->  22     -4
+  tell            10 ->  12     -2
+
+HIGHER UNDER B
+  quit            23 ->  14     +9
+  punch           11 ->   7     +4
+  scream           2 ->   2     +0
+  talk             8 ->   4     +4
+  be               3 ->   3     +0
+  speak           25 ->  16     +9
+  find            13 ->   8     +5
+  fight           27 ->  20     +7
+  make             7 ->   6     +1
+  call            12 ->  11     +1
+  kick            19 ->  18     +1
+  do              22 ->  21     +1
+  go               5 ->   5     +0
+  kill            16 ->  15     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL salamandra-7b-instruct ===
+HIGHER UNDER A
+  get              3 ->   9     -6
+  understand       8 ->  17     -9
+  be               9 ->  16     -7
+  complain         4 ->   7     -3
+  talk             6 ->  10     -4
+  tell            16 ->  31    -15
+  see             11 ->  13     -2
+  discuss         19 ->  33    -14
+  ask             17 ->  22     -5
+  go              15 ->  18     -3
+
+HIGHER UNDER B
+  know             1 ->   1     +0
+  confront        40 ->  12    +28
+  find             7 ->   3     +4
+  protest         13 ->   5     +8
+  take            12 ->   6     +6
+  file            23 ->  15     +8
+  make             2 ->   2     +0
+  fight           14 ->  11     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 28 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.
