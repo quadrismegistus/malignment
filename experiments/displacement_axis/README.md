@@ -440,9 +440,42 @@ Not a softer word for denial. **The model changes what happened to her.** The ot
 
 **Six of the fifteen most consistent displacing frames are institutional, yet institutional has the WEAKEST aggregate sign consistency of any domain** (53%, z=+1.7, the only domain that is not significant). So institutional is bimodal rather than uniformly weak: the strongest individual displacers and the least consistent field. Since institutional carries the F21 political-economy argument, this is probably worth more than the aggregate is.
 
-## Can the movement be NAMED? Direction yes, magnitude partly, and one day lost to a broken benchmark
+## Can the movement be NAMED? Direction yes, magnitude only in some domains
 
-The question behind `rated.py` and the slot_ratings instruments: the axis says mass moves, but can rating scales built by hand say WHERE it goes, and do they beat a general-purpose embedding at it? Two quantities have to be kept apart, because they answer differently and conflating them cost a full day.
+The question behind `rated.py` and the slot_ratings instruments: the axis says mass moves, but can rating scales built by hand say WHERE it goes, and do they beat a general-purpose embedding at it?
+
+### FIRST, WHICH QUANTITY. Two of them, and they are not interchangeable
+
+    UNWEIGHTED PER-WORD   did word w rise or fall? A word at p=0.0001 counts the
+                          same as one at p=0.18. `loo.py`, `loo_all.py`,
+                          `rho_domains.py`, `base_prob_share.py`.
+    MASS                  N = sum p(w) r(w) / sum p(w) per arm, dN = N_aligned -
+                          N_base. Where the centre of what the model will say
+                          moves. Identical to `dN_position` except in what r(w)
+                          is. `mass_direction.py`, `rated_contextual.py`.
+
+`compare_scorers.py` has said this in its own header since it was written -- "a scale can order which words move without shifting the centroid, and vice versa. Both are reported because the campaign has confused them before" -- and the campaign then confused them again for a day, on 2026-08-20. **The mass quantity is the one the displacement argument needs**, because metonymic displacement is a claim about what the model would actually say, not about which entries in a 4,000-word tail flipped sign. Read the mass section before the per-word one; both are kept because they disagree in an informative way.
+
+### AND THE PER-WORD FRAME IS NOT NEW. It is Findings P's
+
+`malign-logits meta/M01_displacement/findings/P_unnamed_axis.md` (2026-08-12) ran the per-word study first and is the campaign's settled position on it: held out by WORD over 100,958 English lexical-verb cells, oracle ceiling +0.1207 of headroom over `log p_base`, and
+
+    18 rated norms, trees      +0.0083     7% of the headroom
+    GloVe 300d, k=50           +0.0229   ~19%      ("do not quote 21%")
+    bge-m3 1024d               +0.0208    17%
+
+**"THERE IS A WORD-LEVEL DIRECTION ALIGNMENT SORTS ON, IT IS NOT IN OUR DESCRIPTIVE VOCABULARY, AND THE UNNAMED RESIDUAL OUTPREDICTS EVERY NAME WE HAVE TRIED."** P also built the reachable-benchmark design -- split a word's own cells in half, use one half to predict the other -- which the section below reinvents as `emp_mean` because P was not read first.
+
+What is here is the SUCCESSOR P asks for, not a repeat, and the difference is the one P names as its own weakest point: ICC 0.131, so **82-87% of the fall/rise variance is WITHIN a word across the sites it appears at.** "Movement is a property of the word AT A SITE. A perfect word-level theory tops out near AUC 0.70." This layer rates each (prompt, word) in context, which is that unit. The designs also generalise over different things and neither can answer the other's question:
+
+    P       generalises over WORDS (GroupKFold on word), features constant
+            within a word, one model pooled across all sites
+    here    generalises over LINEAGES (leave-one-model-out), features vary by
+            site, one model refitted PER FRAME
+
+So P's 7%-vs-19% and this section's parity are not comparable numbers. That contextualising the ratings appears to close a 2.5x gap is suggestive and is not measured.
+
+### Per-word: direction, and a day lost to a broken benchmark
 
 **DIRECTION is named, decisively.** Per-lineage rho between a scale and the mover verdict (+1 riser / -1 faller / 0), median per frame, sign test across frames (`rho_domains.py`, 222 frames after dedupe):
 
@@ -504,8 +537,71 @@ Deliberately constructed normative dimensions match a distributional representat
 
 **One reading this suggests and does not establish.** Alignment's institutional operation runs along dimensions somebody wrote down -- deference, procedural, harm are in the actual specifications -- while what happens to identity words is corpus residue that was never legislated. The legislated part is articulable in the vocabulary of the legislation; the unlegislated part is only describable distributionally. **The confound runs in exactly the direction of the finding**: institutional frames get a purpose-built 13-scale instrument and identity frames get a general one, so "our identity scales are bad" predicts the identical pattern. Separating them needs an identity-specific instrument built the way the institutional one was, and that has not been run.
 
+### MASS: direction of travel and magnitude of travel, separately
+
+`mass_direction.py`, over `words.jsonl` so the cells are exactly the ones `dN_position` is computed over. 4,402 cells, 253 frames, 21 lineages; median coverage of base mass by rated words 0.779. The frame is the unit -- a frame's lineages collapse to their median before any test across frames -- because 20 lineages of one prompt are not 20 observations of a domain.
+
+**DIRECTION is nameable in every domain, and every signature predicted from the per-word work survives mass weighting.** Sign test over frames, `*` at Bonferroni 0.05/12:
+
+    IDENTITY (72)       vocalisation +0.1501   40/48   p=3.3e-06  *
+                        harm         -0.1211   23/23   p=2.4e-07  *
+                        fit          +0.0723   69/71   p=2.2e-18  *
+                        superego     -0.0702   42/48   p=1e-07    *
+                        hedged       -0.0544   54/59   p=1.9e-11  *
+    INSTITUTIONAL (60)  fit          +0.0594   47/55   p=8.1e-08  *
+                        harm         -0.0296   20/20   p=1.9e-06  *
+    VIOLENCE (52)       harm         -0.1833   44/47   p=2.5e-10  *
+                        makes_worse  -0.1123   40/52   p=0.00013  *
+                        mundanity    +0.0700   41/51   p=1.5e-05  *
+    SEXUAL (50)         mundanity    +0.0865   45/49   p=8.2e-10  *
+                        makes_worse  -0.0304   27/34   p=0.00082  *
+
+**MAGNITUDE dissociates from direction, and the dissociation is by domain.** `|dN|` against the permutation that shuffles the word-to-rating link within the frame's own vocabulary, marginals preserved exactly:
+
+    ratio = median |dN| / median |dN| shuffled, both absolute; beats = share of draws exceeded
+
+                  identity        institutional      violence          sexual
+    harm         2.10x 0.80        0.81x 0.39      1.61x 0.75      0.80x 0.48
+    makes_worse  1.77x 0.74        1.25x 0.57      1.36x 0.68      0.99x 0.52
+    makes_better 1.68x 0.79        0.96x 0.52      1.31x 0.67      1.25x 0.59
+    mundanity    1.51x 0.70        1.21x 0.62      1.26x 0.62      1.18x 0.65
+    fit          1.29x 0.60        0.93x 0.51      0.90x 0.51      0.66x 0.34
+
+Identity beats its own shuffle on every scale (1.17x to 2.10x, beats 0.56-0.80) and violence on the harm cluster. **Institutional and sexual do not.** `institutional fit` moves the centroid the same way in 47 of 55 frames at p=8.1e-08 while travelling 0.93x as far as a reshuffle of its own values would, beats 0.51. So in those two domains the DIRECTION of travel is semantic and the DISTANCE is not: alignment reliably pushes the centre of what the model will say the same way, and how far it pushes is not a function of the named dimension.
+
+**AND THE NAMED SCALES SEE WHAT THE GEOMETRY CANNOT.** On these same cells:
+
+    dN_position [the declared pole axis]
+      identity        -0.0035   40/72   p=0.41      not significant
+      institutional   -0.0014   33/60   p=0.52      not significant
+      violence        -0.0120   41/52   p=3.6e-05
+      sexual          -0.0092   45/50   p=4.2e-09
+
+The institutional null reproduces this README's own "institutional does not replicate in aggregate (53%, z=+1.7, the only domain that is not significant)" by a different computation, which is a check that the file measures what it claims. The new part is that `fit` on those same cells is p=8.1e-08 and `harm` is 20/20. **The movement is there, it is nameable, and the declared pole axis cannot see it -- in the domain carrying the F21 political-economy argument.** This is also the reverse of the per-word result, where the embedding beat the named scales in identity; note those are two different bge constructs (pole axis here, principal components there), so it is not a rematch.
+
+#### The degeneracy gate, which was needed and which moves a headline
+
+Where a scale is near-constant over a frame's vocabulary, `dN` and every permutation of it are both ~0: the ratio pins at 1.00x and `beats` collapses to 0, reading as a confident result pointing the wrong way. `harm` is constant on **76%** of sexual frames. Measured: spearman(median beats, median rating sd) = **+0.487, p=0.00045** over 48 (domain, scale) cells. `rho` never had this problem because a constant predictor has no rank variance and the frame is skipped; `dN` has no such reflex, so the gate is explicit and applies to BOTH tables. It drops 15,909 of 52,824 (cell, scale) pairs at sd >= 0.5.
+
+**It changes `identity vocalisation` from 40/72 p=0.41 to 40/48 p=3.3e-06.** The gate did not create that result -- it was being diluted by 24 frames with no speech verbs in play -- but a threshold that can do that has to show its own robustness. Swept:
+
+                            sd>=0.25              sd>=0.50              sd>=1.00
+    identity vocalisation  +0.1501 40/48 3.3e-06   (identical)           (identical)
+    identity harm          -0.0698 42/42 4.5e-13  -0.1211 23/23 2.4e-07 -0.1432 22/22 4.8e-07
+    identity fit           +0.0717 70/72 1.1e-18  +0.0723 69/71 2.2e-18 +0.0917 18/18 7.6e-06
+    institutional fit      +0.0536 48/56 4.7e-08  +0.0594 47/55 8.1e-08 +0.0879 35/42 1.5e-05
+    institutional harm     -0.0200 28/29 1.1e-07  -0.0296 20/20 1.9e-06 -0.0538  9/9  0.0039
+    violence harm          -0.1672 47/50 3.7e-11  -0.1833 44/47 2.5e-10 -0.1912 41/44 1.6e-09
+    sexual mundanity       +0.0865 45/49 8.2e-10   (identical)          +0.2025 24/27 4.9e-05
+
+Nothing is knife-edge and effect sizes rise monotonically as the gate tightens, which is what a real effect diluted by degenerate frames looks like. Quote `40/48`, never `40/72`.
+
 ### Fences on this section
 
+- **The two quantities are not interchangeable and only one is the argument's.** Per-word results say which words move; `dN` says where the centre of what the model will say goes. A finding in one does not transfer to the other, and `identity vocalisation` is the worked example: top of the per-word rho table, and NOT significant on `dN` until the degenerate frames are gated out.
+- **`identity vocalisation` needs its gate quoted with it.** 40/48 at sd>=0.5; 40/72 p=0.41 ungated. It is a near-binary speech-verb scale and it will do this again on any frame set where speech verbs are absent.
+- **Findings P is the prior art in the per-word frame** and is not superseded by anything here. Its 7%-vs-19% and this section's parity are different metrics over different held-out units; "contextualising the ratings closed the gap" is an inference across incomparable designs, not a measurement.
+- **A scale is tested only where it varies**, so different scales in the same domain are tested on different frame sub-populations (identity `harm` on 23 frames, `fit` on 71). The n is printed with every row for that reason; do not read down a column as though it were one population.
 - **bge is not a neutral yardstick.** It is a language model trained on the same kind of corpus, so the comparison measures how much of the operation is corpus-distributional, not whether hand-built scales are any good. It is a ceiling on naming, not a contest.
 - **The horse race is fragile.** It moved from bge-ahead-by-0.0035 to a dead tie when 48 duplicate rows were removed. A number that flips under bookkeeping should not carry argumentative weight. The direction results moved by nothing comparable.
 - **Magnitude was never what the theory asked for.** Metonymic displacement is a claim about which way mass moves. The R2 work is downstream of the argument and should not lead it.
