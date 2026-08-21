@@ -431,8 +431,9 @@ class Checkpoint:
         return [self.gen_stash(p) for p in sorted(os.listdir(d))
                 if os.path.isdir(os.path.join(d, p))]
 
-    def generate(self, prompt, n=1, frame="raw", system=None, seed=None,
-                 decoder=None, loaded=None, cache=True, **kw):
+    def generate(self, text, n=1, system=None, user=None, prefill=False,
+                 user_msg="Hi.", template=None, seed=None, decoder=None,
+                 loaded=None, cache=True, **kw):
         """Sample `n` continuations. -> [generate.Passage], length `n`.
 
         The third verb on the one loader, beside `run_twp` (measure and write)
@@ -461,9 +462,22 @@ class Checkpoint:
         fresh draw and does not want it stored.
         """
         from . import generate as G
+        if system is None:
+            #: `None` from a caller means "leave the template alone", which is
+            #: G.DEFAULT. `system=""` stays an explicit empty one -- the two are
+            #: 2,500x apart on a measured stem and must not collapse here.
+            system = G.DEFAULT
         dec = dict(G.DECODER)
         dec.update(decoder or {})
-        keys = [G.gen_key(self.model_id, prompt, frame, system, dec, seed, i)
+        frame = G.frame_label(system, user, prefill, template)
+        #: the KEY carries every slot, not just the label: two combinations can
+        #: share a label and differ in the strings, and a cache that ignored
+        #: that would hand back the wrong condition.
+        sysk = "" if system is G.DEFAULT else system
+        keys = [dict(G.gen_key(self.model_id, text, frame, sysk, dec, seed, i),
+                     user=user, prefill=bool(prefill),
+                     user_msg=(user_msg if prefill else None),
+                     template=template)
                 for i in range(n)]
 
         out = [None] * n
@@ -491,7 +505,9 @@ class Checkpoint:
                 #: whether it was made now or in a previous run -- otherwise a
                 #: shortfall fill would draw a different distribution from the
                 #: cached siblings it joins.
-                p = G.generate(ld, prompt, n=1, frame=frame, system=system,
+                p = G.generate(ld, text, n=1, system=system, user=user,
+                               prefill=prefill, user_msg=user_msg,
+                               template=template,
                                seed=None if seed is None else seed + i,
                                decoder=dec)[0]
                 out[i] = p
@@ -504,8 +520,8 @@ class Checkpoint:
                 T.free()
         return out
 
-    def next_token(self, prompt, k=10, frame="raw", system=None, loaded=None,
-                   **kw):
+    def next_token(self, text, k=10, system=None, user=None, prefill=False,
+                   user_msg="Hi.", loaded=None, **kw):
         """Top-`k` next-TOKEN distribution. -> ([(token, prob)], vocab_size)
 
         Tokens, not words -- see `next_word`, which is the instrument for any
@@ -516,7 +532,10 @@ class Checkpoint:
         own = loaded is None
         ld = loaded if loaded is not None else self.load(**kw)
         try:
-            return G.next_token(ld, prompt, k=k, frame=frame, system=system)
+            if system is None:
+                system = G.DEFAULT
+            return G.next_token(ld, text, k=k, system=system, user=user,
+                                prefill=prefill, user_msg=user_msg)
         finally:
             if own:
                 from . import twp as T

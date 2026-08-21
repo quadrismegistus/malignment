@@ -138,70 +138,148 @@ def gen_key(model_id, prompt, frame, system, decoder, seed, sample_idx):
             "seed": seed, "sample_idx": sample_idx}
 
 Passage = collections.namedtuple(
-    "Passage", "text prompt model frame seed decoder n_new_tokens finish")
+    "Passage",
+    "text prompt model frame seed decoder n_new_tokens finish sys_supported")
 
 
 class FrameRefused(Exception):
     """The model cannot take the frame asked for. Never a silent fallback."""
 
 
-def render(loaded, prompt, frame="raw", system=None):
-    """Apply `frame` to `prompt`. -> the string the model actually sees.
+#: PASS NO SYSTEM MESSAGE AT ALL, so the template's own default fires. Distinct
+#: from `system=""`, which asserts an empty one and OVERRIDES that default --
+#: `conditions.py` measured a 2,500x swing on one stem between those two.
+DEFAULT = object()
 
-    Raises `FrameRefused` when the template is missing or drops the system
-    block. The DISCARD case is checked by rendering with and without the block
-    and comparing bytes, because it throws no exception of its own.
+
+def render(loaded, text, system=DEFAULT, user=None, prefill=False,
+           user_msg="Hi.", template=None):
+    """Compose the three free slots into the string the model sees.
+
+    ## THREE FREE PARAMETERS, NOT ONE
+
+    `conditions.py` established this and it is not a stylistic point. On
+    Olmo-3-7B-Instruct-DPO with one stem, the measured probability of the target
+    word moved **2,500x** across combinations the caller never typed: default
+    system .246, empty system .106, a persona .0001. Naming only the prefill
+    lets the other two default to whatever the tokenizer ships, and a reversal
+    booked as a frame effect turned out to be an instruction nobody declared.
+
+        system   DEFAULT -> pass none, the template's own persona fires
+                 ""      -> assert an empty one, OVERRIDING that persona
+                 "..."   -> ours
+        user     the user turn. None means `text` goes here (chat mode).
+        prefill  True -> `text` goes in a prefilled ASSISTANT turn instead, and
+                 the user turn takes `user_msg`. The model resumes a sentence it
+                 is already writing, which is the only chat-mode position with a
+                 word slot in it.
+        user_msg what occupies the user turn under prefill. Default `"Hi."` is
+                 the PRESENCE CONTROL: semantically empty on purpose, so that
+                 instruction-minus-presence is the instruction's content rather
+                 than the user turn merely being non-empty. An empty turn leaves
+                 13.9% of mass on fill punctuation and ANY contentful turn
+                 collapses it -- `Hi.` as much as an instruction.
+
+    -> (rendered_text, sys_supported). `sys_supported` is False when the template
+    REFUSED a system role and this fell back to user-only: a dropped system
+    prompt is a different condition wearing the same name, so it is reported
+    rather than absorbed.
     """
-    if frame not in FRAMES:
-        raise ValueError("frame must be one of %s, got %r" % (FRAMES, frame))
-    if frame == "raw":
-        return prompt
     tok = loaded.tok
+    #: `template=None` is AUTO: raw when no slot was set, templated otherwise.
+    #: Explicit True/False overrides, because "chat with the template's own
+    #: defaults" and "raw, no template" set the SAME slots -- both leave system
+    #: at DEFAULT, user at None and prefill off -- and auto alone cannot tell
+    #: them apart. Asking for the naive chat call must be possible.
+    if template is None:
+        template = prefill or user is not None or system is not DEFAULT
+    if not template:
+        if prefill:
+            raise ValueError("prefill needs a chat template; template=False "
+                             "asks for none")
+        return text, None                       #: raw: no template at all
     if not getattr(tok, "chat_template", None):
-        raise FrameRefused("%s ships no chat template, so frame %r is impossible"
-                           % (getattr(tok, "name_or_path", "?"), frame))
-    if frame == "chat":
-        msgs = [{"role": "user", "content": prompt}]
-    elif frame == "continue":
-        msgs = [{"role": "user", "content": "Continue this text: " + prompt}]
-    else:
-        if not system:
-            raise ValueError("frame='system' needs a system= message")
-        msgs = [{"role": "system", "content": system},
-                {"role": "user", "content": prompt}]
+        raise FrameRefused("%s ships no chat template"
+                           % getattr(tok, "name_or_path", "?"))
+    turn = user_msg if prefill else (text if user is None else user)
+    msgs = []
+    if system is not DEFAULT:
+        msgs.append({"role": "system", "content": system})
+    msgs.append({"role": "user", "content": turn})
+    sys_ok = True
     try:
-        out = tok.apply_chat_template(msgs, tokenize=False,
-                                      add_generation_prompt=True)
+        out = tok.apply_chat_template(msgs, add_generation_prompt=True,
+                                      tokenize=False)
     except Exception as e:
-        raise FrameRefused("template refused frame %r: %s: %s"
-                           % (frame, type(e).__name__, e))
-    if frame == "system":
-        bare = tok.apply_chat_template([{"role": "user", "content": prompt}],
-                                       tokenize=False, add_generation_prompt=True)
-        #: THE BYTE TEST. An equal render, or one missing the text, means the
-        #: block was dropped -- and nothing raised.
+        if system is DEFAULT:
+            raise FrameRefused("template refused: %s: %s" % (type(e).__name__, e))
+        try:
+            out = tok.apply_chat_template([{"role": "user", "content": turn}],
+                                          add_generation_prompt=True,
+                                          tokenize=False)
+            sys_ok = False
+        except Exception as e2:
+            raise FrameRefused("template refused: %s: %s" % (type(e2).__name__, e2))
+    if sys_ok and system is not DEFAULT and system:
+        bare = tok.apply_chat_template([{"role": "user", "content": turn}],
+                                       add_generation_prompt=True, tokenize=False)
+        #: THE BYTE TEST for the DISCARD case, which throws nothing of its own.
         if out == bare or system[:24] not in out:
-            raise FrameRefused(
-                "template ACCEPTS a system role and DISCARDS it -- the rendered "
-                "string is unchanged, so this arm would never receive the "
-                "manipulation. Refused rather than run.")
-    return out
+            sys_ok = False
+    if prefill:
+        #: the stem inside the assistant turn, appended AFTER the generation
+        #: prompt so the model continues it rather than answering about it.
+        out = out + text
+    return out, sys_ok
 
 
-def generate(loaded, prompt, n=1, frame="raw", system=None, seed=None,
-             decoder=None, keep_prompt=False):
+def encode(loaded, text_in, templated):
+    """Tokenise with EXACTLY ONE leading BOS, whatever the model does.
+
+    **NEITHER A BLANKET True NOR A BLANKET False IS CORRECT**, measured:
+
+        Llama-3.1-Tulu-3-8B-DPO   template emits no BOS text; the tokenizer adds
+                                  one -> add_special_tokens=False DROPS it
+        SmolLM2-360M-Instruct     the template's own `<|im_start|>` IS the bos
+                                  token; the tokenizer adds nothing -> either
+                                  setting gives the same ids
+
+    `conditions.py:134` takes `add_special_tokens=False` for every templated
+    condition on the reasoning that a template carries its own BOS. That holds
+    for SmolLM2 and not for Tulu, and getting it wrong shifts every position by
+    one -- silently, since the ids still decode to plausible text.
+
+    So this DETECTS instead: encode without specials, and prepend the BOS only
+    if the model uses one, the string does not already start with it, and the
+    tokenizer's own default would have added it.
+    """
+    ids = loaded.tok(text_in, add_special_tokens=False)["input_ids"]
+    b = getattr(loaded.tok, "bos_token_id", None)
+    if b is not None and (not ids or ids[0] != b):
+        default = loaded.tok(text_in)["input_ids"]
+        if default and default[0] == b:
+            ids = [b] + list(ids)
+    import torch
+    t = torch.tensor([ids], device=loaded.dev)
+    return {"input_ids": t, "attention_mask": torch.ones_like(t)}
+
+
+def generate(loaded, text, n=1, system=DEFAULT, user=None, prefill=False,
+             user_msg="Hi.", template=None, seed=None, decoder=None,
+             keep_prompt=False):
     """Sample `n` continuations. -> [Passage]
 
     `seed` is per SAMPLE, derived as `seed + i`, so `n` samples are `n`
-    observations rather than one repeated -- and so a rerun with the same seed
-    reproduces. Omit it and the sampler is left alone, which is right for
-    exploration and wrong for anything that gets counted.
+    observations rather than one repeated, and a rerun reproduces.
     """
     import torch
     dec = dict(DECODER)
     dec.update(decoder or {})
-    text_in = render(loaded, prompt, frame=frame, system=system)
-    enc = loaded.tok(text_in, return_tensors="pt").to(loaded.dev)
+    text_in, sys_ok = render(loaded, text, system=system, user=user,
+                             prefill=prefill, user_msg=user_msg,
+                             template=template)
+    templated = text_in != text
+    enc = encode(loaded, text_in, templated)
     plen = int(enc["input_ids"].shape[1])
     out = []
     for i in range(n):
@@ -212,21 +290,36 @@ def generate(loaded, prompt, n=1, frame="raw", system=None, seed=None,
                                       pad_token_id=loaded.tok.eos_token_id)
         new = g[0][plen:]
         #: DECODE ONLY THE NEW TOKENS. Slicing the decoded STRING by the prompt's
-        #: character length is the version that breaks: a tokenizer that
-        #: normalises whitespace makes the prompt render at a different length
-        #: than it was given, and the passage silently loses or keeps a fragment.
+        #: character length breaks whenever a tokenizer normalises whitespace.
         txt = loaded.tok.decode(new, skip_special_tokens=True)
         out.append(Passage(
             text=(text_in + txt) if keep_prompt else txt,
-            prompt=prompt, model=getattr(loaded.tok, "name_or_path", None),
-            frame=frame, seed=None if seed is None else seed + i,
+            prompt=text, model=getattr(loaded.tok, "name_or_path", None),
+            frame=frame_label(system, user, prefill, templated),
+            seed=None if seed is None else seed + i,
             decoder=dict(dec), n_new_tokens=int(new.shape[0]),
             finish=("length" if int(new.shape[0]) >= dec["max_new_tokens"]
-                    else "eos")))
+                    else "eos"),
+            sys_supported=sys_ok))
     return out
 
 
-def next_token(loaded, prompt, k=10, frame="raw", system=None):
+def frame_label(system, user, prefill, templated=None):
+    """A short name for the slot combination, for the record and the key."""
+    if templated is False:
+        return "raw"
+    if templated is None and not prefill and user is None and system is DEFAULT:
+        return "raw"
+    parts = ["prefill" if prefill else "chat"]
+    parts.append("sysdefault" if system is DEFAULT else
+                 "sysempty" if system == "" else "sys")
+    if user is not None:
+        parts.append("user")
+    return "_".join(parts)
+
+
+def next_token(loaded, text, k=10, system=DEFAULT, user=None, prefill=False,
+               user_msg="Hi.", template=None):
     """The next-TOKEN distribution. -> ([(token_string, prob)], full_vocab_size)
 
     Tokens, not words. `next_word` is the word-level instrument and they answer
@@ -237,8 +330,9 @@ def next_token(loaded, prompt, k=10, frame="raw", system=None):
     No sampling, no seed: this is the distribution itself, not a draw from it.
     """
     import torch
-    text_in = render(loaded, prompt, frame=frame, system=system)
-    enc = loaded.tok(text_in, return_tensors="pt").to(loaded.dev)
+    text_in, _ = render(loaded, text, system=system, user=user,
+                        prefill=prefill, user_msg=user_msg, template=template)
+    enc = encode(loaded, text_in, text_in != text)
     with torch.no_grad():
         logits = loaded.model(**enc).logits[0, -1]
     p = torch.softmax(logits.float(), dim=-1)
