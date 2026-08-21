@@ -28,7 +28,7 @@ I6's conclusion, and the sentence this subject exists to test rather than inheri
 
 ## The gap, and it is the reason to have a folder rather than a citation
 
-**I6 tested six domains and neither of ours is among them.** Its decomposition runs `animal / betrayal / property / sexual / taboo / violence` on the M01 twin pairs. `identity` and `institutional` were never in it -- and those are the two domains where the mass-weighted results in `experiments/displacement_axis/` are strongest (`fit` 47/55 p=8.1e-08; `harm` 20/20) and the two where the declared pole axis is null.
+**I6 tested six domains and neither of ours is among them.** Its decomposition runs `animal / betrayal / property / sexual / taboo / violence` on the M01 twin pairs. `identity` and `institutional` were never in it -- and those are the two domains where the mass-weighted results in `experiments/displacement/displacement_axis/` are strongest (`fit` 47/55 p=8.1e-08; `harm` 20/20) and the two where the declared pole axis is null.
 
 So the tonic reading is established where it was measured and **untested where our current results live**. Two further cautions before anyone treats it as settled:
 
@@ -106,7 +106,7 @@ from two instruments. Testing that is what `drift_geometry/` is for.
 
 `selection_and_combination/` reports, from the page: direction predicts composition
 (`net_fall` 36/36) and volatility does not (`pct_moved` 18/36, exact chance).
-`experiments/displacement_axis/` reports, from the distribution and by a different
+`experiments/displacement/displacement_axis/` reports, from the distribution and by a different
 estimator: direction is nameable (`harm` 44/47 frames, p=2.5e-10) and magnitude is
 not (every named scale negative alone). Neither knew about the other.
 

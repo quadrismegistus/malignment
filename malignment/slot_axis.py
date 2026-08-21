@@ -478,7 +478,7 @@ class Axis:
                   if tp else 0.0)
         dN_renorm = n_post - n_base
         #: **THE WORDS THAT CARRIED IT** (RH, 2026-08-18, for
-        #: `experiments/displacement_axis`). `c[w] = dP[w] * S[w]` is computed
+        #: `experiments/displacement/displacement_axis`). `c[w] = dP[w] * S[w]` is computed
         #: above and was thrown away, so a cell's `dN` could not be traced to the
         #: words that produced it -- and a dN resting on ONE word was
         #: indistinguishable from one carried by fifty.

@@ -5,7 +5,7 @@ why: |
   The instruments are built and validated; what is thin is the panel they are read
   against. Per-lineage rho and its sign tests across frames are stable at the
   current n, but anything phrased as prediction or variance explained is bounded by
-  lineage count rather than by the scales (see experiments/displacement_axis/README.md,
+  lineage count rather than by the scales (see experiments/displacement/displacement_axis/README.md,
   "Can the movement be NAMED?"). Treat magnitude claims from this layer as provisional
   until the panel grows; treat direction claims as standing.
 blocked_on: more base->aligned lineages in twp_words_v4 / movement

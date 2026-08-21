@@ -19,10 +19,10 @@ blocked_on: more base->aligned lineages in twp_words_v4 / movement
 
 Where a model's probability mass sits on a frame's own naughty/nice axis before and after alignment, per (lineage, item), with the words that carried the movement.
 
-    python experiments/displacement_axis/analyze.py --out experiments/displacement_axis/results/<name>
-    python experiments/displacement_axis/analyze.py --out .../<name> --flip-ties --force
-    python experiments/displacement_axis/report.py  --run <name> [--only sign,dose] [--words]
-    python experiments/displacement_axis/movers.py  --run <name>
+    python experiments/displacement/displacement_axis/analyze.py --out experiments/displacement/displacement_axis/results/<name>
+    python experiments/displacement/displacement_axis/analyze.py --out .../<name> --flip-ties --force
+    python experiments/displacement/displacement_axis/report.py  --run <name> [--only sign,dose] [--words]
+    python experiments/displacement/displacement_axis/movers.py  --run <name>
 
 `analyze.py` supersedes the former `run.py`, `mechanism.py` and `axis_share.py`, which
 each rebuilt the per-item Axis independently. `report.py` supersedes both

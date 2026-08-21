@@ -19,7 +19,7 @@ Blind LLM raters characterise what alignment does to a next-word distribution. F
 
 ## The loop, end to end
 
-    cd ~/github/malignment/experiments/displacement_taxonomy
+    cd ~/github/malignment/experiments/displacement/displacement_taxonomy
     ../../.venv/bin/python run.py --prepare --pairs all --frames <nickname> [--raters N] [--orientations fwd rev]
     ../../.venv/bin/python -c "import run; run.script(run.os.path.join(run.HERE,'workflow_<name>.js'))"
     # then, from the agent session: Workflow({scriptPath: ".../workflow_<name>.js"})

@@ -210,7 +210,7 @@ Everything quoted above is produced by this script, run with `/Users/rj416/githu
 import pandas as pd
 from collections import Counter
 
-CSV='/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/word_groups.csv'
+CSV='/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/word_groups.csv'
 df = pd.read_csv(CSV)
 
 # --- dominant group per prompt -------------------------------------------
@@ -300,4 +300,4 @@ print(f"   mirror references: {tot}; resolving to a >=2-annotation group: {inn};
 print("   groups retained in the csv:", df.groupby(['prompt','group']).ngroups)
 ```
 
-Per-word deltas quoted in the tables come from the same `deltas()` helper, printed as the twelve largest falls and twelve largest rises per dominant group. The mirroring-lineage spread in the `reverse_group` section is the one number not from the CSV: it is a regex parse of the `MIRROR PAIRS` blocks in `/Users/rj416/github/malignment/experiments/displacement_taxonomy/results/word_groups/*.txt`, taking the pair member that lists three or fewer lineages as the minority side (80 appearances over 35 prompts, all 18 lineages represented, top count 9).
+Per-word deltas quoted in the tables come from the same `deltas()` helper, printed as the twelve largest falls and twelve largest rises per dominant group. The mirroring-lineage spread in the `reverse_group` section is the one number not from the CSV: it is a regex parse of the `MIRROR PAIRS` blocks in `/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/word_groups/*.txt`, taking the pair member that lists three or fewer lineages as the minority side (80 appearances over 35 prompts, all 18 lineages represented, top count 9).

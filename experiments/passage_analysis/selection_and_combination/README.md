@@ -13,7 +13,7 @@ Migrated from `malign-logits meta/M06_generation/findings/composition_not_level.
 
 ## Why the folder is not called `mediation`
 
-Every producer here is `m06_mediation*.py` and the plan is `plan_mediation.md` — that is the archive's internal name for this work. It is not used because **`mediation` is already an institutional v3 scale in this repo** (`SCALES_INST_V3`, and it appears by that name throughout `experiments/displacement_axis/`). Nor is the finding's own name used for the folder: `composition_not_level` is named after the term the finding itself found broken — "level" meant two different quantities and an earlier draft conflated them. The file keeps that name; the folder does not.
+Every producer here is `m06_mediation*.py` and the plan is `plan_mediation.md` — that is the archive's internal name for this work. It is not used because **`mediation` is already an institutional v3 scale in this repo** (`SCALES_INST_V3`, and it appears by that name throughout `experiments/displacement/displacement_axis/`). Nor is the finding's own name used for the folder: `composition_not_level` is named after the term the finding itself found broken — "level" meant two different quantities and an earlier draft conflated them. The file keeps that name; the folder does not.
 
 ## The decomposition, which is the reason to have this
 
@@ -61,7 +61,7 @@ The repair is to compare fallers to RISERS on a fixed text, where the generic sh
 
 **At matched aligned probability, a word alignment pushed DOWN costs ~0.35–0.44 nats more in context than one it pushed UP to the same place.**
 
-**That defect is the same shape as the one that cost this repo a day on 2026-08-20.** `experiments/displacement_axis/` compared every model against a "ceiling" computed by a rule no model could use, and read the resulting wall of small negatives as absence. Here a real measurement was read against an implicit zero when the right reference was what an average token costs. Both times the number was fine and **the baseline was doing the work**; both times the fix was a reference the comparison is entitled to.
+**That defect is the same shape as the one that cost this repo a day on 2026-08-20.** `experiments/displacement/displacement_axis/` compared every model against a "ceiling" computed by a rule no model could use, and read the resulting wall of small negatives as absence. Here a real measurement was read against an implicit zero when the right reference was what an average token costs. Both times the number was fine and **the baseline was doing the work**; both times the fix was a reference the comparison is entitled to.
 
 ## Disagreement, not injury
 
@@ -72,7 +72,7 @@ Surprisal is two models' opinions about ONE fixed sequence. Nothing about the te
 ## What this connects to here
 
 - **`../predicting_aligned_text/`** inherits `p_on_passages`'s I6: the page-grain signature is TONIC, *"site-specificity lives only at the distribution grain."* That is the same claim from the other side — alignment reaches selection and not combination, so what survives sampling is a constant disposition rather than a site-conditional response.
-- **`experiments/displacement_axis/`** found, on 2026-08-20 and at the distribution grain, that **direction is nameable and magnitude is not** — `harm` at 44/47 frames, every named scale negative alone. This finding reports the same asymmetry from the page: `net_fall` 36/36, `pct_moved` 18/36 at exact chance. Two instruments, two grains, one shape.
+- **`experiments/displacement/displacement_axis/`** found, on 2026-08-20 and at the distribution grain, that **direction is nameable and magnitude is not** — `harm` at 44/47 frames, every named scale negative alone. This finding reports the same asymmetry from the page: `net_fall` 36/36, `pct_moved` 18/36 at exact chance. Two instruments, two grains, one shape.
 - **`../diegetic_superego/`** and this folder's one untested speculation point at each other. Y finds alignment moralising INSIDE the scene it keeps writing; this finding, having measured and REFUTED the obvious mechanism (promotion turns out to be the MORE consistent operation, 0.580 vs 0.533), speculates that **the scope of a demotion may be the SCENE rather than the site or the lexicon**. Read together they suggest a prohibition that is situational rather than lexical — not that `kill` is forbidden, but that it is forbidden HERE, for as long as one stays in the scene that raised it. **Neither of these is a tested claim and the speculation is flagged as speculation in its own document.**
 - **`experiments/slot_ratings/`** asks which NAMED dimension orders the words that move. Composition asks which words appear at all. Same object, different question, and the named-scale work is the one that could say what the composition change is made of.
 

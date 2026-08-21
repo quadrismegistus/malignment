@@ -15,7 +15,7 @@ inherited: |
 
 ## The question, and why it is the page-grain twin of a question already answered
 
-`experiments/displacement_axis/` asked whether hand-built rating scales can say where probability mass goes, and answered it: **direction yes, in every domain and domain-specifically; magnitude only in identity and violence.** All of that is at the distribution grain, one slot, no sampling.
+`experiments/displacement/displacement_axis/` asked whether hand-built rating scales can say where probability mass goes, and answered it: **direction yes, in every domain and domain-specifically; magnitude only in identity and violence.** All of that is at the distribution grain, one slot, no sampling.
 
 The same question at the page grain is: **give a coder a passage with no arm label -- can named scales recover which arm wrote it, and do they beat a distributional feature set at it?**
 
@@ -40,7 +40,7 @@ That matters for the argument and not only for the method. If the domain-specifi
 
 `p_on_passages`'s I2 was **wrong in its first two versions** and the cause is the failure mode this whole area is prone to: the flip assignment iterated an unsorted set, so one seed gave 0.52-0.63 and the next 0.40-0.49, and both were quoted as findings. Neither an elevation nor a depression existed. **A one-flip null at 41 lineages wobbles +-0.15 and nobody had characterised it.**
 
-The same defect, independently, cost `experiments/displacement_axis/` a full day on 2026-08-20: a "ceiling" computed by a rule no model could use, against which every model was reported as explaining nothing. Characterise the null before reading the number, and prefer a reference a model is allowed to reach.
+The same defect, independently, cost `experiments/displacement/displacement_axis/` a full day on 2026-08-20: a "ceiling" computed by a rule no model could use, against which every model was reported as explaining nothing. Characterise the null before reading the number, and prefer a reference a model is allowed to reach.
 
 ## What is copied in, and what it is for
 

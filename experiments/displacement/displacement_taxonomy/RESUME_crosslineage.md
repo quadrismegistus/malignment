@@ -1,6 +1,6 @@
 # Resume: cross-lineage sweep
 
-State at 2026-08-20, coverage section refreshed ~07:45 after the fleet's overnight run. Everything below is committed in `~/github/malignment/experiments/displacement_taxonomy` unless marked otherwise.
+State at 2026-08-20, coverage section refreshed ~07:45 after the fleet's overnight run. Everything below is committed in `~/github/malignment/experiments/displacement/displacement_taxonomy` unless marked otherwise.
 
 ## Where to pick up
 
@@ -22,8 +22,8 @@ result stands as taken, at 26-29 lineages, and is reported with that roster size
 read off a file rather than recalled -- this seat has twice compared two numbers
 taken hours apart from memory.
 
-    python experiments/displacement_taxonomy/coverage.py
-    python experiments/displacement_taxonomy/coverage.py --full   # names what is missing
+    python experiments/displacement/displacement_taxonomy/coverage.py
+    python experiments/displacement/displacement_taxonomy/coverage.py --full   # names what is missing
 
 Reading at 2026-08-20 07:50, the baseline for every later delta:
 
