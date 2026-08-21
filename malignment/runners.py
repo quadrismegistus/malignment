@@ -905,6 +905,25 @@ class TWPRunner:
                                         ensure_ascii=False) + "\n")
                 continue
             res["tail"] = res["tail"] - total
+            #: **AND `total` WITH IT, WHICH IT DID NOT DO UNTIL 2026-08-21.**
+            #: `total` is the four-way residual's sum -- twp.py builds it as
+            #: tail+drop+open+mojibake at expansion. Decrementing `tail` here
+            #: without rebuilding it left every merged cell carrying the PASS-1
+            #: residual while its components described the merged one.
+            #:
+            #: Measured across the v4 corpus before the fix: total ==
+            #: tail+drop+open+mojibake on 434,391 of 434,391 pass-1 cells and on
+            #: all 984,857 v3 cells, and on only 35,402 of 385,855 topup cells --
+            #: mean 0.0148 too high, max 0.115.
+            #:
+            #: Nothing caught it because the conservation gate below is computed
+            #: from the COMPONENTS, not from `total`, so the cell closed its books
+            #: at 1.0 while the summary column disagreed with the parts it
+            #: summarises. A consumer reading `total` as the residual -- which is
+            #: what it is for -- got a number no gate here ever checked.
+            #: `produce_movement` did, and its ledger failed on 75% of v4 cells.
+            res["total"] = (res["tail"] + res["drop"] + res["open"]
+                            + res["mojibake"])
             #: `n_paths = 1` BY CONSTRUCTION -- a scored row is a single-path
             #: lower bound, an expand row is beam-accumulated. Marked so nothing
             #: reads them as the same measurement.

@@ -582,7 +582,34 @@ def main():
                           "drop": float(res.get("drop") or 0),
                           "open": float(res.get("open") or 0),
                           "mojibake": float(res.get("mojibake") or 0),
-                          "total": float(res.get("total") or 0),
+                          #: **DERIVED, NOT COPIED, AND THAT IS DELIBERATE.**
+                          #: `res["total"]` is the producer's summary of the
+                          #: four-way residual, and on a merged cell written
+                          #: before 2026-08-21 it is STALE: the topup path
+                          #: decremented `tail` for the mass it scored and never
+                          #: rebuilt `total`, so the column holds the PASS-1
+                          #: residual -- wrong on 350,453 of 385,855 topup cells,
+                          #: mean 0.0148 high, max 0.115.
+                          #:
+                          #: `runners.py` now rebuilds it, but that only fixes
+                          #: records written from here on. The stash already
+                          #: holds the stale ones, and re-measuring 385,855 cells
+                          #: to repair a summable column would be absurd. The
+                          #: COMPONENTS in those records are correct -- the
+                          #: producer's own conservation gate is computed from
+                          #: them, not from `total` -- so summing them here
+                          #: recovers the right value from data already on disk.
+                          #:
+                          #: Not a divergence from the source: wherever the
+                          #: producer's `total` is trustworthy it is BY
+                          #: CONSTRUCTION this same sum (twp.py builds it that
+                          #: way), verified equal on 434,391 of 434,391 pass-1
+                          #: cells and 984,857 of 984,857 v3 cells. Where they
+                          #: differ, the sum is right and the summary is stale.
+                          "total": (float(res.get("tail") or 0)
+                                    + float(res.get("drop") or 0)
+                                    + float(res.get("open") or 0)
+                                    + float(res.get("mojibake") or 0)),
                           "theta": float(d.get("theta") or 0),
                           "rule_version": int(d.get("rule_version") or 0),
                           "dict_sha": d.get("dict_sha") or "",
