@@ -125,7 +125,10 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
-REPO = os.path.dirname(os.path.dirname(HERE)) if os.path.basename(HERE) else HERE
+#: The root, found by walking up from `malignment` itself, so this file does
+#: not encode how deep under `experiments/` it sits. A wrong root makes the
+#: globs below return [] instead of raising; `repo_root` refuses instead.
+from malignment.paths import REPO
 NORMS = os.path.join(os.path.dirname(os.path.dirname(HERE)), "lexicons", "norms")
 TABLE = "twp_words_v4"
 

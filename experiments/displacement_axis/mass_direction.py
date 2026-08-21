@@ -57,7 +57,10 @@ not quotable on a cell where the ratings cover a small share of the mass.
 import argparse, collections, csv, glob, json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(os.path.dirname(HERE))
+#: The root, found by walking up from `malignment` itself, so this file does
+#: not encode how deep under `experiments/` it sits. A wrong root makes the
+#: globs below return [] instead of raising; `repo_root` refuses instead.
+from malignment.paths import REPO
 sys.path.insert(0, REPO); sys.path.insert(0, HERE)
 RES = os.path.join(HERE, "results", "pilot3")
 LONG = os.path.join(RES, "long")

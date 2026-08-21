@@ -44,7 +44,10 @@ import pandas as pd
 from scipy import stats
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(os.path.dirname(HERE))
+#: The root, found by walking up from `malignment` itself, so this file does
+#: not encode how deep under `experiments/` it sits. A wrong root makes the
+#: globs below return [] instead of raising; `repo_root` refuses instead.
+from malignment.paths import REPO
 CSV = os.path.join(HERE, "results", "crosslineage_rows.csv")
 OUT = os.path.join(HERE, "results", "reversal_structure.json")
 

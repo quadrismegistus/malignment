@@ -107,7 +107,10 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(os.path.dirname(HERE))
+#: The root, found by walking up from `malignment` itself, so this file does
+#: not encode how deep under `experiments/` it sits. A wrong root makes the
+#: globs below return [] instead of raising; `repo_root` refuses instead.
+from malignment.paths import REPO
 STASH_DIR = os.path.join(HERE, "results", "stash")
 INPUT_DIR = os.path.join(HERE, "results", "inputs")
 MANIFEST = os.path.join(INPUT_DIR, "manifest.json")
