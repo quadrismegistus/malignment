@@ -172,6 +172,57 @@ MPT_FLOAT = ("resid_pdrop", "emb_pdrop")
 MPT_ATTN_DROP = ("attn_impl", "prefix_lm", "attn_uses_sequence_id")
 
 
+def compute_dtype(model_id, default=None):
+    """The dtype this model must COMPUTE in, from the roster. Never a guess.
+
+    **THE REQUIREMENT EXISTED IN PROSE AND WAS HONOURED NOWHERE.** Every cell in
+    this corpus -- 433,694 of them, no exceptions -- was produced at float16,
+    because this loader hardcoded it, while `models.yaml` said 14 times in `why:`
+    strings that Falcon-H1 needs bfloat16 and `environments.yaml` gave every
+    profile `dtype: None` INCLUDING the one named `bf16`. A requirement in a
+    prose field audits as satisfied and constrains nothing.
+
+    What it cost, and it is written up in the archive
+    (~/github/malign-logits/docs/local_capability.md:85, 2026-08-09):
+
+        fp16 returned all-NaN logits on 2,583/2,583 prompts -- 5,166 empty cells
+        that passed every structural gate. fp16 finite 1/12, bf16 finite 12/12,
+        overflow accumulating through the SSM scan.
+
+    Then it cost it again: Falcon-H1-7B x2 wrote 5,962 empty cells on 2026-08-20,
+    the same failure re-derived over six hours by three seats. **NaN is why every
+    guard passed** -- every comparison against NaN is False, so `P0 >= theta`
+    selects nothing, `tail` is 1 - 0 = 1.0, and conservation is EXACTLY 1.0 on a
+    cell that measured nothing.
+
+    Accumulation is why the 1.5B survives fp16 and the 7B does not: overflow
+    builds through the scan, so this is length- and depth-dependent rather than a
+    property of the architecture alone. Do not infer from a sibling.
+
+    Declared PER NODE, not per profile: a dtype is not a venv-partitioning
+    constraint, and putting one on a profile would either bind models that do not
+    need it or split a venv group the way a `transformers:` pin does.
+    """
+    import torch
+    if default is None:
+        default = torch.float16
+    try:
+        from . import roster
+        env = (roster.load()["nodes"].get(model_id, {}).get("env") or {})
+    except Exception:                                           # noqa: BLE001
+        return default, "platform default (roster unreadable)"
+    name = env.get("dtype")
+    if not name:
+        return default, "platform default"
+    dt = getattr(torch, str(name), None)
+    if not isinstance(dt, torch.dtype):
+        #: REFUSE rather than fall back. A misspelled dtype that silently became
+        #: float16 is exactly the failure this function exists to end.
+        raise ValueError("%s declares env.dtype=%r which is not a torch dtype"
+                         % (model_id, name))
+    return dt, "roster env.dtype=%s" % name
+
+
 def _mpt_config(repo, revision):
     """Native MptConfig from a repo whose config.json predates strict typing."""
     import json
@@ -308,13 +359,18 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
             tok, loader_id = T.load_tokenizer(
                 ck.repo, revision=ck.revision,
                 trust_remote_code=(mtype != "mpt"))
-            kw = {"dtype": torch.float16, "trust_remote_code": bool(has_remote)}
+            _dt, _why = compute_dtype(ck.repo)
+            if _dt is not torch.float16:
+                say("  COMPUTE DTYPE %s (%s) -- not the float16 default" % (_dt, _why))
+            kw = {"dtype": _dt, "trust_remote_code": bool(has_remote)}
             if has_remote:
                 say("  config declares auto_map -> remote code ALLOWED")
             #: MPT is the exception to the exception: it DECLARES auto_map,
             #: and that code is dead on transformers 5.x. Native impl instead.
             if mtype == "mpt":
-                kw = {"dtype": torch.float16, "trust_remote_code": False,
+                #: `_dt` and not float16: this branch REPLACES kw wholesale, so a
+                #: hardcoded dtype here would silently discard a declared one.
+                kw = {"dtype": _dt, "trust_remote_code": False,
                       "config": _mpt_config(ck.repo, ck.revision)}
                 say("  LOADER OVERRIDE mpt: native impl, remote code REFUSED"
                     " (its `_expand_mask` import is dead on transformers 5.x)")
