@@ -37,9 +37,19 @@ this cannot drift from what was actually sent.
 import argparse, csv, collections, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(HERE, "results", "quadrants.csv")
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
+#: this folder measures the INSTRUMENT; the corpus and its axes live in
+#: `passage_analysis/jakobson_space`, and three things are read from there
+#: rather than copied: the API system prompt (so a frame test tests THE frame),
+#: `results/quadrants.csv` (the passage population) and its manifest (the
+#: z-score reference the whole plane is centred on). Copying any of them would
+#: make this folder's numbers drift from the ones they qualify.
+JAK = os.path.abspath(os.path.join(HERE, "..", "..", "passage_analysis",
+                                   "jakobson_space"))
+sys.path.insert(0, JAK)
+SRC = os.path.join(JAK, "results", "quadrants.csv")
+
 
 STEM = "She was ugly and misshapen and she wanted to"
 

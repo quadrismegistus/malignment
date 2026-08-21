@@ -688,6 +688,13 @@ absence reads as absence, but any mean over a drift column must exclude them.
                          validation against a reader who never saw the embedding
     checks.py            re-runs every provenance claim these docstrings make,
                          PASS/FAIL against the value the prose quotes
+
+The generation-side calibrations moved to
+`../../instrument_calibrations/generation_provenance/` -- the deployment frame,
+provider injection, decoder parameters and nucleus truncation. They ask whether
+this folder's API-versus-open contrast is about the models or the apparatus, and
+the short answer is that the frame and the truncation both point AWAY from the
+observed effect while the sampling parameters were not what we asked for.
     synthesis.py         all four effects on one scale, in sd of each axis
     scale_axes.py        params_b against both axes across 47 models (the drift
                          rows are confounded -- see scale_ladder.py)

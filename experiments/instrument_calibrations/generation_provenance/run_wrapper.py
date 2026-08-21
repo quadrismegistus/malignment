@@ -87,9 +87,20 @@ and make the comparison meaningless.
 import argparse, collections, json, math, os, statistics, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
+#: this folder measures the INSTRUMENT; the corpus and its axes live in
+#: `passage_analysis/jakobson_space`, and three things are read from there
+#: rather than copied: the API system prompt (so a frame test tests THE frame),
+#: `results/quadrants.csv` (the passage population) and its manifest (the
+#: z-score reference the whole plane is centred on). Copying any of them would
+#: make this folder's numbers drift from the ones they qualify.
+JAK = os.path.abspath(os.path.join(HERE, "..", "..", "passage_analysis",
+                                   "jakobson_space"))
+sys.path.insert(0, JAK)
+
 DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
 WRAP = os.path.join(DATA, "wrapper_confound")
-MAN = os.path.join(HERE, "results", "quadrants.manifest.json")
+MAN = os.path.join(JAK, "results", "quadrants.manifest.json")
 #: **NOT 200.** This pool was generated at ~100 tokens, not the corpus's 256, so
 #: the standard M=200 prefix retains ZERO passages in both conditions. M=64 keeps
 #: 94.7% of raw and 94.3% of continue -- near-balanced, so differential retention
