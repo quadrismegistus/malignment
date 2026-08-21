@@ -176,6 +176,10 @@ export interface Question {
 	//: statement about the folder.
 	undocumented?: { dir: string; files: number }[];
 	figures: string[];
+	//: Long-form caption per figure, keyed by the stem before the first dot, so
+	//: `x.png` and `x.vl.json` share one. The figure's own subtitle keeps only
+	//: what makes it non-misleading standing alone; this carries the reasoning.
+	captions?: Record<string, string>;
 	//: WHICH OF `figures` ARE VEGA-LITE SPECS. Declared by the server, which
 	//: read the directory, rather than inferred here from a filename. Optional
 	//: because a client may be talking to a server that predates the field, and

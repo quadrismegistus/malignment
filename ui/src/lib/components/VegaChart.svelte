@@ -44,11 +44,18 @@
 				if (dead) return;
 				const res = await embed(el, spec, {
 					actions: { export: false, source: true, compiled: false, editor: false },
-					renderer: 'canvas',
-					//: The spec sets its own widths. Letting the container override
-					//: them would rescale the two panels of a two-panel figure
-					//: independently, and at least one figure here exists precisely
-					//: because both panels share one x domain.
+					//: SVG, NOT CANVAS, SO THE FIGURE CAN BE SCALED TO FIT.
+					//: Vega-Lite's responsive `width: "container"` does not apply to
+					//: FACETED specs, and these are faceted, so the spec keeps its
+					//: own size and the CSS below fits it to the panel. A canvas
+					//: scales to mush; an SVG scales losslessly and keeps its text
+					//: selectable, which also makes the caption searchable.
+					renderer: 'svg',
+					//: The spec sets its own widths and the container must not
+					//: override them: at least one figure here exists precisely
+					//: because two panels share one x domain, and independent
+					//: rescaling would destroy it. Scaling the whole rendered SVG
+					//: uniformly, as the stylesheet does, preserves every ratio.
 					width: undefined,
 					height: undefined
 				});
@@ -87,8 +94,19 @@
 	.vega {
 		margin: 0;
 	}
+	/*
+	  FIT THE RENDERED SVG TO THE PANEL, PRESERVING ASPECT. The slopegraph is
+	  2,754 x 3,254 at 300 dpi and renders around 1,100 CSS px wide, against a
+	  panel of roughly 770 -- so it overflowed on the right and ran far past the
+	  fold. Scaling the whole SVG uniformly keeps every panel's y-units-per-pixel
+	  identical to every other's, which is the property the figure is built on.
+	*/
 	.host {
 		overflow-x: auto;
+	}
+	.host :global(svg) {
+		max-width: 100%;
+		height: auto;
 	}
 	figcaption {
 		display: flex;

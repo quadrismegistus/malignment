@@ -352,7 +352,7 @@ def _walk_experiments():
             for _r, _d, _f in os.walk(rdir) for n in _f)
         if not ({"run.py", "registration.md", "plot.py"} & fs) and not produced:
             continue
-        results, undocumented = [], []
+        results, undocumented, captions = [], [], {}
         if os.path.isdir(rdir):
             for name in sorted(os.listdir(rdir)):
                 p = os.path.join(rdir, name)
@@ -429,7 +429,22 @@ def _walk_experiments():
             #: behaviour was to explain why it should not have been there.
             figs = sorted(f for f in os.listdir(fdir)
                           if os.path.isfile(os.path.join(fdir, f))
-                          and not f.lower().startswith("readme"))
+                          and not f.lower().startswith("readme")
+                          and not f.endswith(".caption.md"))
+            #: SIDECAR CAPTIONS (RH, 2026-08-21). `<name>.caption.md` beside
+            #: `<name>.png` carries the long-form reasoning, so the figure's own
+            #: subtitle can keep only what makes it non-misleading STANDING
+            #: ALONE. `slopes_by_position` had 294 words baked into the image --
+            #: right for print, unreadable on screen.
+            #:
+            #: Keyed by the stem before the first dot, so `<name>.png` and
+            #: `<name>.vl.json` share one caption rather than each needing a copy.
+            for f in sorted(os.listdir(fdir)):
+                if not f.endswith(".caption.md"):
+                    continue
+                with open(os.path.join(fdir, f), encoding="utf-8",
+                          errors="replace") as fh:
+                    captions[f[:-len(".caption.md")]] = fh.read()
         #: A SUBJECT WITH A README IS REACHABLE (RH, 2026-08-20). A folder holding
         #: questions rendered as an unclickable heading in the sidebar, so
         #: `division_of_labour/README.md` -- which states the subject's QUESTION,
@@ -464,6 +479,8 @@ def _walk_experiments():
             #: README. The panel states them; see the walk above.
             "undocumented": undocumented,
             "figures": figs,
+            #: {figure stem: markdown}. See the walk above.
+            "captions": captions,
             #: WHICH FIGURES ARE VEGA-LITE SPECS, DECLARED BY THE SERVER rather
             #: than sniffed from the filename by the client. The `figures` walk
             #: lists every file in the folder, so a client branching on how to

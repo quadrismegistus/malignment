@@ -81,8 +81,32 @@ def _save_gg(p, name, w=9, h=6):
     print("   %-38s %6.0f KB" % (name + ".png", os.path.getsize(path) / 1024))
 
 
-def _save_spec(spec, name, ppi=300):
-    """The spec for the app, the PNG for print, from one dict.
+def _save_spec(spec, name, ppi=300, caption=None):
+    """The spec for the app, the PNG for print, from one dict, and a sidecar.
+
+    ## WHERE PROSE GOES (RH, 2026-08-21)
+
+    `slopes_by_position` shipped with 294 words baked into the image. Correct for
+    print, where a caption someone strips is a fence that vanishes -- and
+    unreadable on screen, where the reader wants the panel and gets an essay.
+
+    So the split is by FUNCTION, not by length:
+
+        ON THE FIGURE   whatever makes it non-misleading STANDING ALONE. The
+                        population, what the marks mean, and any axis convention
+                        without which the panel is actively misread. This is the
+                        part that must survive being pasted into a document with
+                        no caption at all.
+
+        SIDECAR .md     the reasoning. Why the rejected alternatives were
+                        rejected, how a threshold was derived, where this
+                        producer's numbers disagree with the study's own.
+
+    The test for the boundary: if removing a sentence would let a careful reader
+    draw a WRONG conclusion from the panel, it stays on the figure. If removing
+    it only leaves them less informed about how the figure was made, it goes to
+    the sidecar.
+    
 
     The right-edge scan is the verdict on what shipped. It is cheap and it is the
     only check that sees a line the renderer cut, because nothing upstream of the
@@ -95,6 +119,9 @@ def _save_spec(spec, name, ppi=300):
     png = vlc.vegalite_to_png(js, ppi=ppi)
     path = os.path.join(FIGDIR, name + ".png")
     open(path, "wb").write(png)
+    if caption:
+        open(os.path.join(FIGDIR, name + ".caption.md"), "w").write(caption.strip() + "\n")
+        print("   %-38s %6.0f KB" % (name + ".caption.md", len(caption) / 1024))
     edge = _right_edge_ink(png)
     print("   %-38s %6.0f KB  %s" % (name + ".png", len(png) / 1024,
                                      "EDGE INK -- SOMETHING IS CUT" if edge else "edge clear"))
@@ -375,36 +402,76 @@ def fig_slopes():
         title=alt.TitleParams(
             _wrap("Both positions move together, and where they do not the lines fan"),
             subtitle=_wrap(
-                "Prompts ending \"I should\", F21 and M03 pooled: 52 prompts, 50 lineages, "
+                'Prompts ending "I should", F21 and M03 pooled: 52 prompts, 50 lineages, '
                 "2,600 cells. Each panel is one scale; the two lines are the two positions "
                 "going base to aligned. PARALLEL LINES ARE A NULL -- the asymmetry is the "
-                "fanning, and the number beside each scale name is individual minus "
-                "institution, paired inside the 24 scenarios holding both. Panels are "
-                "ordered by that number. * marks a 95% interval clear of zero; ~ marks one "
-                "whose nearer endpoint sits within 5% of the interval's own width of it, "
-                "either side."),
+                "fanning. The number beside each scale is individual minus institution, "
+                "paired inside the 24 scenarios holding both; * marks a 95% interval clear "
+                "of zero and ~ one that sits on the line. EACH PANEL'S Y AXIS IS CENTRED ON "
+                "ITS OWN MIDPOINT, on one shared +-0.5 domain, so a steeper line is a bigger "
+                "movement in every panel; the grey number is that scale's absolute range, "
+                "which a centred axis cannot carry."),
             fontSize=13, subtitleFontSize=10, anchor="start", color="#111111",
             subtitleColor="#555555", offset=8)
     ).configure_view(stroke=None).configure_axis(domainColor="#cccccc").to_dict()
 
-    spec["title"]["subtitle"] = spec["title"]["subtitle"] + [""] + _wrap(
-        "READING THE Y AXIS. Levels run 1.00 to 5.86 across scales, so a shared axis would "
-        "flatten every slope and a free axis per panel would make harm's 0.003 draw as "
-        "steep as directedness's 0.267. Each panel is therefore centred on its OWN midpoint "
-        "on one shared +-0.5 domain: y-units-per-pixel is constant, so a steeper line really "
-        "is a bigger movement. The grey number at each panel's top left is that scale's "
-        "absolute range across all four points, which the centred axis cannot carry -- "
-        "harm reads 1.00-1.00, is pinned at the floor and has nowhere to go, which is why "
-        "its two lines sit on top of each other. "
-        "Ratings cover 0.242 of base mass and 0.296 of aligned mass. agency, specificity, "
-        "assertiveness and arousal are pairwise 0.62-0.83 and are one axis drawn four times. "
-        "WHY ~ EXISTS. mediation's interval excludes zero by 0.0003 and procedural's includes "
-        "it by 0.005: equally unstable, and any threshold puts them on opposite sides. This "
-        "study's README books mediation at p=0.025 and this producer's own bootstrap draw "
-        "gives 0.050. Both are honest draws of the same quantity, so the mark says boundary "
-        "rather than picking one. abstraction is the only difference here that is not fragile.")
+    CAPTION = """
+# Both positions move together, and where they do not the lines fan
 
-    _save_spec(spec, "slopes_by_position")
+`slot_ratings/institutional`, section 13. Produced by `plot.py slopes_by_position`
+from `results/base_side/ishould.json`.
+
+## Why the y axis is centred rather than shared or free
+
+Levels run 1.00 (`harm`) to 5.86 (`fit`). A shared axis flattens every slope to
+nothing. A free axis per panel is worse: it rescales each panel to its own range,
+so `harm` moving 0.003 draws as steep as `directedness` moving 0.267, and the
+reader compares slopes that are not comparable.
+
+Centring each panel on its own midpoint over one shared +-0.5 domain keeps
+y-units-per-pixel constant across all 24, so a steeper line really is a bigger
+movement. The window was chosen from the data rather than picked: 23 of 24 scales
+span under 0.60 and `mediation` needs 0.945, so +-0.5 clips nothing. An assert
+refuses any scale that would exceed it, so a re-run on different numbers fails
+rather than silently cropping a line.
+
+The grey number at each panel's top left is the absolute range across all four
+points. `harm` reads 1.00-1.00: it is pinned at the floor and has nowhere to go,
+which is why its two lines sit on top of each other.
+
+## Why `~` exists, and why it is not a p-value threshold
+
+`mediation`'s interval excludes zero by 0.0003 and `procedural`'s includes it by
+0.005. They are equally unstable and any threshold puts them on opposite sides.
+
+This study's README books `mediation` at p=0.025; this producer's own bootstrap
+draw gives 0.050. Both are honest draws of the same quantity -- the point
+estimates are identical -- so the mark says BOUNDARY rather than picking one.
+
+The cut is `near / width`, how close the nearer endpoint sits to zero relative to
+how uncertain the estimate is, and 0.05 falls in a measured gap rather than being
+chosen: `mediation` 0.0015, `procedural` 0.0317, then nothing until `vocalisation`
+at 0.1523, with every decisive null above 0.30. An earlier version used an
+absolute distance and marked `harm`, `aggression` and `collective` -- intervals a
+hair wide around zero, so every endpoint is near it. Those are decisive nulls,
+the opposite of a boundary.
+
+**`abstraction` is the only difference here that is not fragile.**
+
+## Fences
+
+- Ratings cover 0.242 of base mass and 0.296 of aligned mass, so the two arms are
+  averaged over different fractions of the distribution. The gap is uniform
+  across scales and positions.
+- `agency`, `specificity`, `assertiveness` and `arousal` are pairwise 0.62-0.83
+  over 14,196 rated rows and are ONE axis drawn four times. Four panels moving
+  together is one finding, not four.
+- Panels are ordered by individual minus institution, so the fanning ones come
+  first. After `abstraction` the reader scans 23 near-parallel panels, which is
+  the finding rather than a gap in it.
+"""
+
+    _save_spec(spec, "slopes_by_position", caption=CAPTION)
 
 
 # ------------------------------------------------- per-scenario, section 15

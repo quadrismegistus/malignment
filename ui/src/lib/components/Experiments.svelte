@@ -498,6 +498,24 @@
 				{/if}
 			</div>
 
+			<!--
+			  COLLAPSED BY DEFAULT AND PRESENT WHEN THERE IS ONE. The figure's own
+			  subtitle carries what makes it non-misleading standing alone; this is
+			  the reasoning behind it, and a reader who wants the panel does not
+			  want 294 words first. `<details>` rather than a toggle in state: it
+			  is the browser's own disclosure, it prints open, and it survives the
+			  component being re-rendered under it.
+			-->
+			{#snippet caption(fig: string)}
+				{@const md = detail?.captions?.[fig.split('.')[0]]}
+				{#if md}
+					<details class="figcap">
+						<summary>caption</summary>
+						<Markdown src={md} compact />
+					</details>
+				{/if}
+			{/snippet}
+
 			{#if pane.startsWith('fig:')}
 				<!--
 				  Full width, natural aspect, and a link to the file itself. These
@@ -517,6 +535,7 @@
 				-->
 				{#if detail.specs?.includes(pane.slice(4))}
 					<VegaChart url={api.figureUrl(selected, pane.slice(4))} name={pane.slice(4)} />
+					{@render caption(pane.slice(4))}
 				{:else if /\.(png|svg|jpe?g|webp)$/i.test(pane.slice(4))}
 					<figure class="fig">
 						<img src={api.figureUrl(selected, pane.slice(4))} alt={pane.slice(4)} />
@@ -527,6 +546,7 @@
 							>
 						</figcaption>
 					</figure>
+					{@render caption(pane.slice(4))}
 				{:else}
 					<p class="muted">
 						<code>{pane.slice(4)}</code> is not an image or a spec —
@@ -674,6 +694,20 @@
 	.tag.n {
 		background: rgba(78, 121, 167, 0.2);
 		color: var(--blue-light);
+	}
+	.figcap {
+		margin: 0.75rem 0 0;
+		border-top: 1px solid var(--panel-2);
+		padding-top: 0.5rem;
+	}
+	.figcap summary {
+		cursor: pointer;
+		font-size: 0.8rem;
+		color: var(--text-3);
+		user-select: none;
+	}
+	.figcap[open] summary {
+		margin-bottom: 0.5rem;
 	}
 	.hidden-dirs {
 		margin: 6px 0 0 9px;
