@@ -71,9 +71,12 @@ Everything else is the stem or the model's own template.
 
 ## FINDINGS
 
-**1. `raw` is forced corpus-wide by DEFINABILITY, not by neutrality.** 44 of 53
-base-position models ship no chat template, so no templated frame exists for
-them. This is the same fact lm-evaluation-harness encodes: for base models
+**1. `raw` is forced corpus-wide by DEFINABILITY, not by neutrality.** **41 of
+the 50** models in `roster.population('bases')` ship no chat template, so no
+templated frame exists for them. (Earlier drafts said 44 of 54 and then 9 of 53,
+both derived by filtering `malign_logits.models` on `position='base'` -- the
+archive at 159 rows, which also mislabels Pharia. `roster.population('bases')` is
+the predicate; use it.) This is the same fact lm-evaluation-harness encodes: for base models
 `--apply_chat_template` is not discouraged, it is unavailable
 (`docs/model_guide.md`; and issue #1098, "designed around evaluation of base
 language models", chat templating retrofitted later).
