@@ -12,10 +12,11 @@ instead is a frame policy, below, and the evidence for it.
 
 ## THE DECISION, FIRST
 
-    corpus-wide      raw                              FORCED: 44 of 53 base-position
-                                                      models ship no chat template
+    corpus-wide      raw                              FORCED: 41 of the 50 in
+                                                      roster.population('bases')
+                                                      ship no chat template
     the check        sys "", user "Hi.", stem
-                     prefilled into the assistant     the 9 lineages that can
+                     prefilled into the assistant     the 9 roots that can
     the product      each model's own default         DESCRIPTIVE ONLY, never a
                                                       two-arm contrast
 
