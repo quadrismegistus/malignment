@@ -328,9 +328,21 @@ def rate_for(model, device, only=None, min_cells=MIN_CELLS, obs=None):
     throws away every earlier measurement for no reason but recency.
     """
     obs = load() if obs is None else obs
+    #: **`retracted` ROWS ARE NOT CANDIDATES.** A rate can be a perfectly good
+    #: measurement of a run that measured nothing. `Falcon-H1-7B-Base` recorded
+    #: 0.0677 s/cell -- the fastest in this store, previous floor 0.155, and 4x
+    #: faster than its own 1.5B sibling -- because every one of its 2,981 cells
+    #: had `residual.tail == 1.0` and expanded no beam at all. The timing is
+    #: real; what it timed is not work. Rows are RETRACTED IN PLACE rather than
+    #: deleted, so the next reader finds out why the fastest number here is not a
+    #: number, instead of re-measuring it and trusting it again. Marking the row
+    #: was not enough on its own: this filter is what makes the mark bite, and
+    #: without it `rate_for` went on returning 0.0677 from a file that already
+    #: said the row was retracted.
     cand = [o for o in obs
             if o.get("model") == model and o.get("device") == device
-            and not o.get("topup") and (o.get("n_cells") or 0) >= min_cells
+            and not o.get("topup") and not o.get("retracted")
+            and (o.get("n_cells") or 0) >= min_cells
             and (only is None or o.get("only") == only)]
     if not cand:
         seen = [o for o in obs if o.get("model") == model]
