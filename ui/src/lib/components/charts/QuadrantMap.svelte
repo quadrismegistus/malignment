@@ -199,6 +199,24 @@
 	};
 
 	const fmt = (v: number, d = 2) => (v == null ? '—' : v.toFixed(d));
+
+	//: THE GAP IS THE STEP, ON THE ARTIFACT'S DOMAIN AND THIS COMPONENT'S PIXELS.
+	//: Which quantity it is and what its range means are the producer's (`step`
+	//: runs 0.000 to 0.794 over 181,935 sentences, nothing clamped); how many
+	//: pixels that becomes is a drawing decision and stays here.
+	//:
+	//: The floor is 12px rather than 0 so that consecutive sentences at step 0 --
+	//: a model repeating itself, which is exactly the tail RH had me window off
+	//: the plane -- still read as two sentences rather than as one run-on. So the
+	//: gap is proportional ABOVE a floor, and the number is printed beside it
+	//: because that is the part a reader can check.
+	const GAP_MIN = 12;
+	const GAP_MAX = 78;
+	const gapPx = (step: number | null) => {
+		if (step == null) return GAP_MIN;
+		const t = Math.max(0, Math.min(1, (step - stepDom[0]) / (stepDom[1] - stepDom[0])));
+		return Math.round(GAP_MIN + t * (GAP_MAX - GAP_MIN));
+	};
 	const clearFilters = () => {
 		hideCat = [];
 		model = '';
@@ -450,29 +468,45 @@
 							word/sentence join is off by {reading.leftover}: the passage below is incomplete
 						</p>
 					{/if}
+					<!--
+					  ONE SENTENCE PER LINE, SEPARATED BY ITS OWN STEP. The gap between
+					  two sentences IS the distance between them in bge space, on the
+					  domain the artifact declares, so the passage reads as the drift
+					  statistic rather than merely carrying it in a caption. A tight
+					  passage is visibly tight.
+
+					  The measure is a DISTANCE FROM THE PREVIOUS sentence, so it belongs
+					  between them and the first has none -- `step` is null for sentence
+					  0 in all 14,414 passages, which is why the gap is rendered by the
+					  sentence AFTER it and never by the sentence itself.
+					-->
 					<div class="passage">
 						{#each reading.lead as w (w.word_index)}<span
 								class="w partial"
 								title="leading fragment, belongs to no sentence">{w.word}</span
 							>{/each}
-						{#each reading.sents as s (s.sent_index)}
-							<span class="sent" class:furthest={s.is_furthest}>
-								<span
-									class="stepbar"
-									title="step from the previous sentence: {fmt(s.step, 3)}{s.is_furthest
-										? ' · furthest from the opening'
-										: ''}"
-									style:--f={s.step == null
-										? 0
-										: Math.max(0, Math.min(1, (s.step - stepDom[0]) / (stepDom[1] - stepDom[0])))}
-								></span>
+						{#each reading.sents as s, i (s.sent_index)}
+							{#if i > 0}
+								<div
+									class="gap"
+									style:height="{gapPx(s.step)}px"
+									title="step from the previous sentence: {fmt(s.step, 3)}"
+								>
+									<span class="rule"></span>
+									<span class="num">{s.step == null ? '—' : s.step.toFixed(3)}</span>
+								</div>
+							{/if}
+							<p class="sent" class:furthest={s.is_furthest}>
 								{#each s.words as w (w.word_index)}<span
 										class="w"
 										style:background={heat(w.bits)}
 										title="{w.word} · {fmt(w.bits)} bits">{w.word}</span
 									>{' '}{/each}
+								{#if s.is_furthest}<span class="far" title="furthest from the opening sentence"
+										>furthest</span
+									>{/if}
 								{#if s.short}<span class="err">[sentence short of its declared n_words]</span>{/if}
-							</span>
+							</p>
 						{/each}
 					</div>
 					<p class="scalenote">
@@ -802,25 +836,45 @@
 		line-height: 1.9;
 	}
 	.sent {
-		position: relative;
+		margin: 0;
+	}
+	.gap {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding-left: 3px;
 	}
 	/*
-	  The step bar sits at the sentence's start, so the reader meets "how far this
-	  sentence moved" before reading it. Height is the step on the artifact's
-	  declared domain; nothing is clamped, because 0.794 is the observed maximum.
+	  `align-self: stretch`, not `height: 100%`. The gap is a flex row with
+	  `align-items: center` so the number sits mid-gap, and centring makes every
+	  item size to its CONTENT -- a 1px empty span then has no height at all and
+	  the rule was invisible. Measured, not eyeballed: it rendered 0px tall.
+
+	  It then measured 1x51 and STILL did not read on the panel -- a 1px line at
+	  55% opacity against this background is under the threshold at 1x. Measuring
+	  that the element exists is not the same as measuring that it is visible, and
+	  only the second one is what the reader gets.
 	*/
-	.stepbar {
-		display: inline-block;
-		width: 3px;
-		height: calc(0.35rem + 0.85rem * var(--f));
-		margin-right: 0.28rem;
-		vertical-align: baseline;
-		background: var(--text-2);
-		opacity: 0.55;
+	.rule {
+		width: 2px;
+		align-self: stretch;
+		background: var(--text-3);
+		opacity: 0.8;
+		flex: none;
+		border-radius: 1px;
 	}
-	.sent.furthest .stepbar {
-		background: #4dabf7;
-		opacity: 0.95;
+	.num {
+		font-size: 0.62rem;
+		font-variant-numeric: tabular-nums;
+		color: var(--text-3);
+		opacity: 0.8;
+	}
+	.far {
+		font-size: 0.62rem;
+		font-style: italic;
+		color: #4dabf7;
+		margin-left: 0.35rem;
+		white-space: nowrap;
 	}
 	.w {
 		border-radius: 2px;
