@@ -12,7 +12,11 @@ Two things were waiting on a download to finish, and one question was outstandin
 
 1. **Decide whether to re-run the sweep at the larger roster** -- see below. This is now the only thing waiting on RH.
 
-## THE DECISION: WAIT FOR THE FLEET (RH, 2026-08-20)
+## THE DECISION: WAIT FOR THE FLEET (RH, 2026-08-20) -- DISCHARGED 2026-08-21
+
+**The fleet landed and the run happened.** 50 of 50 roster pairs on `He started
+stroking his`, two raters, 2026-08-21. See THE 50-LINEAGE RUN below for what it
+found; the reasoning kept here is why we waited, not what to do next.
 
 Do not re-run the cross-lineage sweep at the current roster. The existing 40-prompt
 result stands as taken, at 26-29 lineages, and is reported with that roster size.
@@ -129,6 +133,75 @@ this instrument. `--raters N` is wired.
   one N and assigned at another is uncomparable by construction. That is why 18
   lineages yielded only 10 comparable models, and it is a floor on this method
   rather than a defect in it.
+
+## THE 50-LINEAGE RUN, 2 RATERS (2026-08-21, wf_674390e4-366)
+
+The run the wait-for-the-fleet decision was waiting for. `He started stroking
+his` at 50 of 50 roster pairs, blind, two raters, sonnet/xhigh. It answers both
+questions it was posed and the second answer contradicts what 18-vs-29 predicted.
+
+### Rater agreement, the first measurement on this instrument
+
+    32 of 50 models assigned by BOTH raters (r1 assigned 40, r2 33)
+    per-model Jaccard   FROM median 1.00    TO median 0.71
+    exact agreement     FROM 19/32          TO 10/32
+
+**The FROM side is essentially rater-independent** -- the median model gets an
+IDENTICAL A-word list from two blind agents. Llama returns `cock crotch dick
+erect erection hard member penis shaft` character for character, twice. The TO
+side is looser because it is a longer, more open list, and nearly all the
+disagreement is one rater citing a subset of the other's.
+
+This matters for every earlier reading: 18, 26, 28 and 29 were all ONE rater, and
+their differences were never separable from this. Now they partly are.
+
+### The trajectory is NOT monotone, which retires the fragmentation story
+
+    18     3 operations | largest  7 members | assigned 11 | reversed 3 | unassigned  4
+    29     7 operations | largest  8 members | assigned 25 | reversed 2 | unassigned  2
+    50 r1  3 operations | largest 26 members | assigned 40 | reversed 2 | unassigned  8
+    50 r2  2 operations | largest 27 members | assigned 33 | reversed 5 | unassigned 12
+
+At 29 the reading fragmented into seven operations, none covering more than 8.
+At 50 it CONSOLIDATED, and both raters independently named the same dominant
+relation -- *explicit-to-decorous* / *explicit-to-neutral displacement*, 26 and 27
+members -- plus a six-member register churn in both. **50 is the first roster
+where a majority of lineages share one named operation.**
+
+So "roster growth REPLACES operations" described one step, not a trend. 3 -> 7 ->
+3 is a reading finding its level.
+
+**The honest cost: consolidation came partly from leaving more models out.**
+Unassigned went 2/29 (6.9%) to 8/50 (16%) and 12/50 (24%). The dominant operation
+covers 52-54% of the roster against 28% at 29, but the denominator of *placed*
+models did not grow as fast as the roster did.
+
+### Contraction reversed, which settles the question 18-vs-29 could not
+
+18 -> 29 dropped 47% of cited words with ZERO novel ones, and this file recorded
+that sharpening and table-budget pressure predicted differently at 50. They did:
+
+    words cited over shared models   r1  180 at 29 -> 281 at 50  (+56%)
+                                     r2  139 at 29 -> 167 at 50  (+20%)
+    novel words at 50 absent at 29   r1  FROM 11/20 models, TO 17/20
+    per-model Jaccard 29 -> 50       FROM median 0.76 | TO median 0.50-0.60
+
+Not budget pressure, and not monotone sharpening either. **The 29 reading was the
+narrow one**, and 50 re-admits material 18 had cited and 29 had dropped -- `arm`,
+`belly`, `cat`, `dog`, `face`, `fur`, `chest`. FROM-side Jaccard is HIGHER at
+29->50 (0.76) than at 18->29 (0.51), so the A side converges as the roster grows.
+
+### What survives every roster size and both raters
+
+`cock -> beard` for Llama-3.1-8B-Instruct, at 18, at 29, and at 50 twice.
+Baichuan2-7B-Chat gives the same beard cluster independently at every N.
+
+### What this does not license
+
+One prompt. The other 39 in the sweep ran at 26-29 and one rater, and nothing
+here says their legends would consolidate the same way -- `He started stroking
+his` is the frame with the most extreme lexical contrast in the set. Two raters
+is also two: the FROM-side agreement is a median over 32 models, not a bound.
 
 ## Worth more than more prompts
 
