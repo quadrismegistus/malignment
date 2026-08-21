@@ -256,6 +256,125 @@ def fig_did_blindness():
     _save_spec(spec, "did_blindness")
 
 
+# ----------------------------------------------- the slopegraph, section 13
+def fig_slopes():
+    """Base to aligned, two lines per scale, coloured by position (RH).
+
+    The DiD is a DIFFERENCE OF SLOPES, and `did_blindness` draws it as a
+    difference of positions -- which is what makes it hard to see. Here the
+    quantity is the geometry: two lines that stay parallel are a null, and two
+    that fan or converge are the asymmetry.
+
+    ## Y IS CENTRED PER SCALE, AND THAT IS THE WHOLE DESIGN
+
+    Levels run 1.00 (`harm`) to 5.86 (`fit`), so a shared axis flattens every
+    slope to nothing. The obvious fix, a free y per facet, is worse: it rescales
+    each panel to its own range, so `harm` moving 0.003 draws as steep as
+    `directedness` moving 0.267 and the reader compares slopes that are not
+    comparable.
+
+    So each facet plots `level - midpoint(that scale)` on ONE shared domain of
+    +-0.5. Constant y-units-per-pixel across all 24 panels, so a steeper line IS
+    a bigger movement, and each panel still sits at its own level. The window
+    was chosen from the data: 23 of 24 scales span under 0.60 and `mediation`
+    needs 0.945, so +-0.5 fits every scale without clipping any.
+
+    The absolute levels leave the axis and are printed in each facet, because a
+    centred axis cannot carry them and dropping them would hide that `harm` is
+    pinned at 1.00 and has nowhere to go.
+    """
+    import altair as alt
+    import pandas as pd
+
+    d = _ishould()
+    R = {r["scale"]: r for r in d["rows"]}
+    assert d["n_prompts"] == 52 and R["procedural"]["n_lineages"] == 50
+    assert len(R) == 24, "booked 24 scales, artifact has %d" % len(R)
+
+    recs, meta = [], {}
+    for s, r in R.items():
+        four = [r["base_indiv"], r["base_inst"], r["aligned_indiv"], r["aligned_inst"]]
+        mid = (min(four) + max(four)) / 2
+        span = max(four) - min(four)
+        assert span <= 1.0, "%s spans %.3f, past the +-0.5 window" % (s, span)
+        meta[s] = dict(mid=mid, did=r["paired_diff"], p=r["paired_p"],
+                       lo=min(four), hi=max(four))
+        for who, b, a in (("individual", r["base_indiv"], r["aligned_indiv"]),
+                          ("institution", r["base_inst"], r["aligned_inst"])):
+            for arm, v in (("base", b), ("aligned", a)):
+                recs.append(dict(scale=s, who=who, arm=arm, level=v, centred=v - mid,
+                                 did=r["paired_diff"], p=r["paired_p"],
+                                 #: The absolute span, carried on every row so the
+                                 #: text layer shares the facet's data source --
+                                 #: a second DataFrame cannot be faceted with the
+                                 #: first. Drawn for ONE row per facet, filtered
+                                 #: below, or it renders four times over itself.
+                                 span_txt="%.2f-%.2f" % (min(four), max(four))))
+    x = pd.DataFrame(recs)
+
+    #: Ordered by the size of the asymmetry, so the non-parallel panels are read
+    #: first -- which is the thing the figure exists to show.
+    order = sorted(R, key=lambda s: -abs(R[s]["paired_diff"]))
+    x["lab"] = x.scale.map(lambda s: "%s   %+.3f%s" % (
+        s, meta[s]["did"], " *" if meta[s]["p"] < 0.05 else ""))
+    labs = [("%s   %+.3f%s" % (s, meta[s]["did"], " *" if meta[s]["p"] < 0.05 else ""))
+            for s in order]
+
+    base = alt.Chart(x)
+    line = base.mark_line(strokeWidth=2).encode(
+        x=alt.X("arm:N", sort=["base", "aligned"], title=None,
+                axis=alt.Axis(labelAngle=0, labelFontSize=9)),
+        y=alt.Y("centred:Q", scale=alt.Scale(domain=[-0.5, 0.5], nice=False),
+                title=None, axis=alt.Axis(labelFontSize=8)),
+        color=alt.Color("who:N", scale=alt.Scale(domain=["individual", "institution"],
+                                                 range=[INDIV, INST]),
+                        legend=alt.Legend(title=None, orient="bottom")),
+        tooltip=["scale:N", "who:N", "arm:N", alt.Tooltip("level:Q", format=".3f"),
+                 alt.Tooltip("did:Q", format="+.3f"), alt.Tooltip("p:Q", format=".3f")])
+    pt = base.mark_point(size=26, filled=True).encode(
+        x=alt.X("arm:N", sort=["base", "aligned"], title=None),
+        y=alt.Y("centred:Q", scale=alt.Scale(domain=[-0.5, 0.5], nice=False)),
+        color=alt.Color("who:N", scale=alt.Scale(domain=["individual", "institution"],
+                                                 range=[INDIV, INST]), legend=None))
+    txt = base.transform_filter(
+        (alt.datum.arm == "base") & (alt.datum.who == "individual")
+    ).mark_text(align="left", baseline="top", fontSize=7, color="#999999").encode(
+        text="span_txt:N", x=alt.value(1), y=alt.value(1))
+
+    spec = alt.layer(line, pt, txt).properties(width=88, height=104).facet(
+        facet=alt.Facet("lab:N", sort=labs, title=None,
+                        header=alt.Header(labelFontSize=8, labelFontWeight="bold",
+                                          labelColor="#333333")),
+        columns=6,
+    ).properties(
+        title=alt.TitleParams(
+            _wrap("Both positions move together, and where they do not the lines fan"),
+            subtitle=_wrap(
+                "Prompts ending \"I should\", F21 and M03 pooled: 52 prompts, 50 lineages, "
+                "2,600 cells. Each panel is one scale; the two lines are the two positions "
+                "going base to aligned. PARALLEL LINES ARE A NULL -- the asymmetry is the "
+                "fanning, and the number beside each scale name is individual minus "
+                "institution, paired inside the 24 scenarios holding both, with * at "
+                "bootstrap p<0.05. Panels are ordered by that number."),
+            fontSize=13, subtitleFontSize=10, anchor="start", color="#111111",
+            subtitleColor="#555555", offset=8)
+    ).configure_view(stroke=None).configure_axis(domainColor="#cccccc").to_dict()
+
+    spec["title"]["subtitle"] = spec["title"]["subtitle"] + [""] + _wrap(
+        "READING THE Y AXIS. Levels run 1.00 to 5.86 across scales, so a shared axis would "
+        "flatten every slope and a free axis per panel would make harm's 0.003 draw as "
+        "steep as directedness's 0.267. Each panel is therefore centred on its OWN midpoint "
+        "on one shared +-0.5 domain: y-units-per-pixel is constant, so a steeper line really "
+        "is a bigger movement. The grey number at each panel's top left is that scale's "
+        "absolute range across all four points, which the centred axis cannot carry -- "
+        "harm reads 1.00-1.00, is pinned at the floor and has nowhere to go, which is why "
+        "its two lines sit on top of each other. "
+        "Ratings cover 0.242 of base mass and 0.296 of aligned mass. agency, specificity, "
+        "assertiveness and arousal are pairwise 0.62-0.83 and are one axis drawn four times.")
+
+    _save_spec(spec, "slopes_by_position")
+
+
 # ------------------------------------------------- per-scenario, section 15
 def fig_per_scenario():
     """Why M03's `procedural` pooled to zero: the scenarios disagree.
@@ -299,6 +418,7 @@ def fig_per_scenario():
 
 
 FIGURES = {"did_blindness": fig_did_blindness,
+           "slopes_by_position": fig_slopes,
            "per_scenario": fig_per_scenario}
 
 

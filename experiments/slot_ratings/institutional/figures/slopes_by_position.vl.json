@@ -1,0 +1,1300 @@
+{
+ "config": {
+  "view": {
+   "continuousWidth": 300,
+   "continuousHeight": 300,
+   "stroke": null
+  },
+  "axis": {
+   "domainColor": "#cccccc"
+  }
+ },
+ "data": {
+  "name": "data-d5ae611306779d855a3a389d5f14a9d2"
+ },
+ "facet": {
+  "field": "lab",
+  "header": {
+   "labelColor": "#333333",
+   "labelFontSize": 8,
+   "labelFontWeight": "bold"
+  },
+  "sort": [
+   "abstraction   -0.110 *",
+   "mediation   +0.102",
+   "vocalisation   +0.088",
+   "procedural   +0.072",
+   "termination   -0.068",
+   "delay   -0.061",
+   "assertiveness   +0.051",
+   "interiority   +0.051",
+   "directedness   +0.042",
+   "hedged   +0.042",
+   "agency   +0.038",
+   "specificity   +0.031",
+   "makes_worse   +0.028",
+   "aggression   +0.012",
+   "target   +0.011",
+   "mundanity   -0.010",
+   "fit   +0.007",
+   "arousal   +0.007",
+   "makes_better   -0.007",
+   "deference   +0.006",
+   "deliberation   -0.005",
+   "collective   +0.002",
+   "superego   -0.002",
+   "harm   +0.000"
+  ],
+  "title": null,
+  "type": "nominal"
+ },
+ "spec": {
+  "layer": [
+   {
+    "mark": {
+     "type": "line",
+     "strokeWidth": 2
+    },
+    "encoding": {
+     "color": {
+      "field": "who",
+      "legend": {
+       "orient": "bottom",
+       "title": null
+      },
+      "scale": {
+       "domain": [
+        "individual",
+        "institution"
+       ],
+       "range": [
+        "#e67e22",
+        "#2980b9"
+       ]
+      },
+      "type": "nominal"
+     },
+     "tooltip": [
+      {
+       "field": "scale",
+       "type": "nominal"
+      },
+      {
+       "field": "who",
+       "type": "nominal"
+      },
+      {
+       "field": "arm",
+       "type": "nominal"
+      },
+      {
+       "field": "level",
+       "format": ".3f",
+       "type": "quantitative"
+      },
+      {
+       "field": "did",
+       "format": "+.3f",
+       "type": "quantitative"
+      },
+      {
+       "field": "p",
+       "format": ".3f",
+       "type": "quantitative"
+      }
+     ],
+     "x": {
+      "axis": {
+       "labelAngle": 0,
+       "labelFontSize": 9
+      },
+      "field": "arm",
+      "sort": [
+       "base",
+       "aligned"
+      ],
+      "title": null,
+      "type": "nominal"
+     },
+     "y": {
+      "axis": {
+       "labelFontSize": 8
+      },
+      "field": "centred",
+      "scale": {
+       "domain": [
+        -0.5,
+        0.5
+       ],
+       "nice": false
+      },
+      "title": null,
+      "type": "quantitative"
+     }
+    }
+   },
+   {
+    "mark": {
+     "type": "point",
+     "filled": true,
+     "size": 26
+    },
+    "encoding": {
+     "color": {
+      "field": "who",
+      "legend": null,
+      "scale": {
+       "domain": [
+        "individual",
+        "institution"
+       ],
+       "range": [
+        "#e67e22",
+        "#2980b9"
+       ]
+      },
+      "type": "nominal"
+     },
+     "x": {
+      "field": "arm",
+      "sort": [
+       "base",
+       "aligned"
+      ],
+      "title": null,
+      "type": "nominal"
+     },
+     "y": {
+      "field": "centred",
+      "scale": {
+       "domain": [
+        -0.5,
+        0.5
+       ],
+       "nice": false
+      },
+      "type": "quantitative"
+     }
+    }
+   },
+   {
+    "mark": {
+     "type": "text",
+     "align": "left",
+     "baseline": "top",
+     "color": "#999999",
+     "fontSize": 7
+    },
+    "encoding": {
+     "text": {
+      "field": "span_txt",
+      "type": "nominal"
+     },
+     "x": {
+      "value": 1
+     },
+     "y": {
+      "value": 1
+     }
+    },
+    "transform": [
+     {
+      "filter": "((datum.arm === 'base') && (datum.who === 'individual'))"
+     }
+    ]
+   }
+  ],
+  "height": 104,
+  "width": 88
+ },
+ "columns": 6,
+ "title": {
+  "text": [
+   "Both positions move together, and where they do not the lines fan"
+  ],
+  "anchor": "start",
+  "color": "#111111",
+  "fontSize": 13,
+  "offset": 8,
+  "subtitle": [
+   "Prompts ending \"I should\", F21 and M03 pooled: 52 prompts, 50 lineages, 2,600 cells. Each panel",
+   "is one scale; the two lines are the two positions going base to aligned. PARALLEL LINES ARE A",
+   "NULL -- the asymmetry is the fanning, and the number beside each scale name is individual minus",
+   "institution, paired inside the 24 scenarios holding both, with * at bootstrap p<0.05. Panels are",
+   "ordered by that number.",
+   "",
+   "READING THE Y AXIS. Levels run 1.00 to 5.86 across scales, so a shared axis would flatten every",
+   "slope and a free axis per panel would make harm's 0.003 draw as steep as directedness's 0.267.",
+   "Each panel is therefore centred on its OWN midpoint on one shared +-0.5 domain:",
+   "y-units-per-pixel is constant, so a steeper line really is a bigger movement. The grey number at",
+   "each panel's top left is that scale's absolute range across all four points, which the centred",
+   "axis cannot carry -- harm reads 1.00-1.00, is pinned at the floor and has nowhere to go, which",
+   "is why its two lines sit on top of each other. Ratings cover 0.242 of base mass and 0.296 of",
+   "aligned mass. agency, specificity, assertiveness and arousal are pairwise 0.62-0.83 and are one",
+   "axis drawn four times."
+  ],
+  "subtitleColor": "#555555",
+  "subtitleFontSize": 10
+ },
+ "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json",
+ "datasets": {
+  "data-d5ae611306779d855a3a389d5f14a9d2": [
+   {
+    "scale": "abstraction",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.572275695871299,
+    "centred": -0.08487509330063636,
+    "did": -0.11039612785686229,
+    "p": 0.0,
+    "span_txt": "3.54-3.78",
+    "lab": "abstraction   -0.110 *"
+   },
+   {
+    "scale": "abstraction",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.6811969500392756,
+    "centred": 0.024046160867340127,
+    "did": -0.11039612785686229,
+    "p": 0.0,
+    "span_txt": "3.54-3.78",
+    "lab": "abstraction   -0.110 *"
+   },
+   {
+    "scale": "abstraction",
+    "who": "institution",
+    "arm": "base",
+    "level": 3.5387219947928705,
+    "centred": -0.11842879437906495,
+    "did": -0.11039612785686229,
+    "p": 0.0,
+    "span_txt": "3.54-3.78",
+    "lab": "abstraction   -0.110 *"
+   },
+   {
+    "scale": "abstraction",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 3.775579583551001,
+    "centred": 0.1184287943790654,
+    "did": -0.11039612785686229,
+    "p": 0.0,
+    "span_txt": "3.54-3.78",
+    "lab": "abstraction   -0.110 *"
+   },
+   {
+    "scale": "agency",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.6784693641195476,
+    "centred": -0.048847048579117924,
+    "did": 0.03848929302464089,
+    "p": 0.355,
+    "span_txt": "3.68-3.78",
+    "lab": "agency   +0.038"
+   },
+   {
+    "scale": "agency",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.776163461277783,
+    "centred": 0.04884704857911748,
+    "did": 0.03848929302464089,
+    "p": 0.355,
+    "span_txt": "3.68-3.78",
+    "lab": "agency   +0.038"
+   },
+   {
+    "scale": "agency",
+    "who": "institution",
+    "arm": "base",
+    "level": 3.706961680906978,
+    "centred": -0.020354731791687453,
+    "did": 0.03848929302464089,
+    "p": 0.355,
+    "span_txt": "3.68-3.78",
+    "lab": "agency   +0.038"
+   },
+   {
+    "scale": "agency",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 3.755597603458246,
+    "centred": 0.028281190759580355,
+    "did": 0.03848929302464089,
+    "p": 0.355,
+    "span_txt": "3.68-3.78",
+    "lab": "agency   +0.038"
+   },
+   {
+    "scale": "aggression",
+    "who": "individual",
+    "arm": "base",
+    "level": 1.0610603546749513,
+    "centred": -0.0014913546427410829,
+    "did": 0.012248944091052183,
+    "p": 0.182,
+    "span_txt": "1.06-1.07",
+    "lab": "aggression   +0.012"
+   },
+   {
+    "scale": "aggression",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 1.0691876370642444,
+    "centred": 0.006635927746551973,
+    "did": 0.012248944091052183,
+    "p": 0.182,
+    "span_txt": "1.06-1.07",
+    "lab": "aggression   +0.012"
+   },
+   {
+    "scale": "aggression",
+    "who": "institution",
+    "arm": "base",
+    "level": 1.0575145712473835,
+    "centred": -0.005037138070308922,
+    "did": 0.012248944091052183,
+    "p": 0.182,
+    "span_txt": "1.06-1.07",
+    "lab": "aggression   +0.012"
+   },
+   {
+    "scale": "aggression",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 1.0559157815711404,
+    "centred": -0.006635927746551973,
+    "did": 0.012248944091052183,
+    "p": 0.182,
+    "span_txt": "1.06-1.07",
+    "lab": "aggression   +0.012"
+   },
+   {
+    "scale": "arousal",
+    "who": "individual",
+    "arm": "base",
+    "level": 2.522965507950427,
+    "centred": 0.12666596600900926,
+    "did": 0.007323742550696593,
+    "p": 0.817,
+    "span_txt": "2.27-2.52",
+    "lab": "arousal   +0.007"
+   },
+   {
+    "scale": "arousal",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 2.5074245828851787,
+    "centred": 0.11112504094376074,
+    "did": 0.007323742550696593,
+    "p": 0.817,
+    "span_txt": "2.27-2.52",
+    "lab": "arousal   +0.007"
+   },
+   {
+    "scale": "arousal",
+    "who": "institution",
+    "arm": "base",
+    "level": 2.293724825736582,
+    "centred": -0.10257471620483605,
+    "did": 0.007323742550696593,
+    "p": 0.817,
+    "span_txt": "2.27-2.52",
+    "lab": "arousal   +0.007"
+   },
+   {
+    "scale": "arousal",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.269633575932408,
+    "centred": -0.1266659660090097,
+    "did": 0.007323742550696593,
+    "p": 0.817,
+    "span_txt": "2.27-2.52",
+    "lab": "arousal   +0.007"
+   },
+   {
+    "scale": "assertiveness",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.1319129651613236,
+    "centred": -0.02875013212772215,
+    "did": 0.05138440357281662,
+    "p": 0.162,
+    "span_txt": "3.13-3.19",
+    "lab": "assertiveness   +0.051"
+   },
+   {
+    "scale": "assertiveness",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.189413229416768,
+    "centred": 0.02875013212772215,
+    "did": 0.05138440357281662,
+    "p": 0.162,
+    "span_txt": "3.13-3.19",
+    "lab": "assertiveness   +0.051"
+   },
+   {
+    "scale": "assertiveness",
+    "who": "institution",
+    "arm": "base",
+    "level": 3.176574279008467,
+    "centred": 0.015911181719421297,
+    "did": 0.05138440357281662,
+    "p": 0.162,
+    "span_txt": "3.13-3.19",
+    "lab": "assertiveness   +0.051"
+   },
+   {
+    "scale": "assertiveness",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 3.1723961805723544,
+    "centred": 0.011733083283308687,
+    "did": 0.05138440357281662,
+    "p": 0.162,
+    "span_txt": "3.13-3.19",
+    "lab": "assertiveness   +0.051"
+   },
+   {
+    "scale": "collective",
+    "who": "individual",
+    "arm": "base",
+    "level": 1.0055501262195223,
+    "centred": -0.017521519337576397,
+    "did": 0.0023609027957230628,
+    "p": 0.845,
+    "span_txt": "1.01-1.04",
+    "lab": "collective   +0.002"
+   },
+   {
+    "scale": "collective",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 1.0070858611102889,
+    "centred": -0.01598578444680987,
+    "did": 0.0023609027957230628,
+    "p": 0.845,
+    "span_txt": "1.01-1.04",
+    "lab": "collective   +0.002"
+   },
+   {
+    "scale": "collective",
+    "who": "institution",
+    "arm": "base",
+    "level": 1.0400477032719884,
+    "centred": 0.016976057714889636,
+    "did": 0.0023609027957230628,
+    "p": 0.845,
+    "span_txt": "1.01-1.04",
+    "lab": "collective   +0.002"
+   },
+   {
+    "scale": "collective",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 1.0405931648946751,
+    "centred": 0.017521519337576397,
+    "did": 0.0023609027957230628,
+    "p": 0.845,
+    "span_txt": "1.01-1.04",
+    "lab": "collective   +0.002"
+   },
+   {
+    "scale": "deference",
+    "who": "individual",
+    "arm": "base",
+    "level": 4.25526827984571,
+    "centred": 0.010721016992437882,
+    "did": 0.005981412036803826,
+    "p": 0.84,
+    "span_txt": "4.15-4.34",
+    "lab": "deference   +0.006"
+   },
+   {
+    "scale": "deference",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 4.3385584832137924,
+    "centred": 0.09401122036052012,
+    "did": 0.005981412036803826,
+    "p": 0.84,
+    "span_txt": "4.15-4.34",
+    "lab": "deference   +0.006"
+   },
+   {
+    "scale": "deference",
+    "who": "institution",
+    "arm": "base",
+    "level": 4.150536042492751,
+    "centred": -0.09401122036052101,
+    "did": 0.005981412036803826,
+    "p": 0.84,
+    "span_txt": "4.15-4.34",
+    "lab": "deference   +0.006"
+   },
+   {
+    "scale": "deference",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 4.23050725236523,
+    "centred": -0.014040010488042043,
+    "did": 0.005981412036803826,
+    "p": 0.84,
+    "span_txt": "4.15-4.34",
+    "lab": "deference   +0.006"
+   },
+   {
+    "scale": "delay",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.1437177442962048,
+    "centred": 0.1625073577892211,
+    "did": -0.06109059239756258,
+    "p": 0.221,
+    "span_txt": "2.82-3.14",
+    "lab": "delay   -0.061"
+   },
+   {
+    "scale": "delay",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.1332376036758003,
+    "centred": 0.15202721716881662,
+    "did": -0.06109059239756258,
+    "p": 0.221,
+    "span_txt": "2.82-3.14",
+    "lab": "delay   -0.061"
+   },
+   {
+    "scale": "delay",
+    "who": "institution",
+    "arm": "base",
+    "level": 2.8187030287177626,
+    "centred": -0.1625073577892211,
+    "did": -0.06109059239756258,
+    "p": 0.221,
+    "span_txt": "2.82-3.14",
+    "lab": "delay   -0.061"
+   },
+   {
+    "scale": "delay",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.8792755018039355,
+    "centred": -0.10193488470304812,
+    "did": -0.06109059239756258,
+    "p": 0.221,
+    "span_txt": "2.82-3.14",
+    "lab": "delay   -0.061"
+   },
+   {
+    "scale": "deliberation",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.5595301955951792,
+    "centred": 0.016571379321866253,
+    "did": -0.004820847246012616,
+    "p": 0.879,
+    "span_txt": "3.53-3.56",
+    "lab": "deliberation   -0.005"
+   },
+   {
+    "scale": "deliberation",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.550681783662923,
+    "centred": 0.00772296738960998,
+    "did": -0.004820847246012616,
+    "p": 0.879,
+    "span_txt": "3.53-3.56",
+    "lab": "deliberation   -0.005"
+   },
+   {
+    "scale": "deliberation",
+    "who": "institution",
+    "arm": "base",
+    "level": 3.5263874369514467,
+    "centred": -0.016571379321866253,
+    "did": -0.004820847246012616,
+    "p": 0.879,
+    "span_txt": "3.53-3.56",
+    "lab": "deliberation   -0.005"
+   },
+   {
+    "scale": "deliberation",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 3.5426924310893555,
+    "centred": -0.000266385183957496,
+    "did": -0.004820847246012616,
+    "p": 0.879,
+    "span_txt": "3.53-3.56",
+    "lab": "deliberation   -0.005"
+   },
+   {
+    "scale": "directedness",
+    "who": "individual",
+    "arm": "base",
+    "level": 2.349483946797675,
+    "centred": -0.23466584771909105,
+    "did": 0.04242835170409334,
+    "p": 0.506,
+    "span_txt": "2.35-2.82",
+    "lab": "directedness   +0.042"
+   },
+   {
+    "scale": "directedness",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 2.6168718357147247,
+    "centred": 0.03272204119795852,
+    "did": 0.04242835170409334,
+    "p": 0.506,
+    "span_txt": "2.35-2.82",
+    "lab": "directedness   +0.042"
+   },
+   {
+    "scale": "directedness",
+    "who": "institution",
+    "arm": "base",
+    "level": 2.607227036347496,
+    "centred": 0.0230772418307299,
+    "did": 0.04242835170409334,
+    "p": 0.506,
+    "span_txt": "2.35-2.82",
+    "lab": "directedness   +0.042"
+   },
+   {
+    "scale": "directedness",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.8188156422358577,
+    "centred": 0.2346658477190915,
+    "did": 0.04242835170409334,
+    "p": 0.506,
+    "span_txt": "2.35-2.82",
+    "lab": "directedness   +0.042"
+   },
+   {
+    "scale": "fit",
+    "who": "individual",
+    "arm": "base",
+    "level": 5.7128965863289105,
+    "centred": -0.04261861122714361,
+    "did": 0.007427529721486527,
+    "p": 0.85,
+    "span_txt": "5.65-5.86",
+    "lab": "fit   +0.007"
+   },
+   {
+    "scale": "fit",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 5.856888669814269,
+    "centred": 0.10137347225821447,
+    "did": 0.007427529721486527,
+    "p": 0.85,
+    "span_txt": "5.65-5.86",
+    "lab": "fit   +0.007"
+   },
+   {
+    "scale": "fit",
+    "who": "institution",
+    "arm": "base",
+    "level": 5.6541417252978405,
+    "centred": -0.10137347225821358,
+    "did": 0.007427529721486527,
+    "p": 0.85,
+    "span_txt": "5.65-5.86",
+    "lab": "fit   +0.007"
+   },
+   {
+    "scale": "fit",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 5.8075693314203205,
+    "centred": 0.05205413386426638,
+    "did": 0.007427529721486527,
+    "p": 0.85,
+    "span_txt": "5.65-5.86",
+    "lab": "fit   +0.007"
+   },
+   {
+    "scale": "harm",
+    "who": "individual",
+    "arm": "base",
+    "level": 1.0018174083850713,
+    "centred": -0.00018067607734062463,
+    "did": 0.00020341650554639602,
+    "p": 0.883,
+    "span_txt": "1.00-1.00",
+    "lab": "harm   +0.000"
+   },
+   {
+    "scale": "harm",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 1.0006509169844073,
+    "centred": -0.0013471674780045628,
+    "did": 0.00020341650554639602,
+    "p": 0.883,
+    "span_txt": "1.00-1.00",
+    "lab": "harm   +0.000"
+   },
+   {
+    "scale": "harm",
+    "who": "institution",
+    "arm": "base",
+    "level": 1.0033452519404165,
+    "centred": 0.0013471674780045628,
+    "did": 0.00020341650554639602,
+    "p": 0.883,
+    "span_txt": "1.00-1.00",
+    "lab": "harm   +0.000"
+   },
+   {
+    "scale": "harm",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 1.0019658193292205,
+    "centred": -3.226513319143365e-05,
+    "did": 0.00020341650554639602,
+    "p": 0.883,
+    "span_txt": "1.00-1.00",
+    "lab": "harm   +0.000"
+   },
+   {
+    "scale": "hedged",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.8145843324943893,
+    "centred": 0.1119984125078739,
+    "did": 0.04164194615830902,
+    "p": 0.32,
+    "span_txt": "3.59-3.81",
+    "lab": "hedged   +0.042"
+   },
+   {
+    "scale": "hedged",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.737427863520452,
+    "centred": 0.03484194353393644,
+    "did": 0.04164194615830902,
+    "p": 0.32,
+    "span_txt": "3.59-3.81",
+    "lab": "hedged   +0.042"
+   },
+   {
+    "scale": "hedged",
+    "who": "institution",
+    "arm": "base",
+    "level": 3.683231202783452,
+    "centred": -0.019354717203063476,
+    "did": 0.04164194615830902,
+    "p": 0.32,
+    "span_txt": "3.59-3.81",
+    "lab": "hedged   +0.042"
+   },
+   {
+    "scale": "hedged",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 3.590587507478641,
+    "centred": -0.11199841250787435,
+    "did": 0.04164194615830902,
+    "p": 0.32,
+    "span_txt": "3.59-3.81",
+    "lab": "hedged   +0.042"
+   },
+   {
+    "scale": "interiority",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.1232068298667603,
+    "centred": 0.07178199891906134,
+    "did": 0.05130687797119445,
+    "p": 0.179,
+    "span_txt": "2.98-3.12",
+    "lab": "interiority   +0.051"
+   },
+   {
+    "scale": "interiority",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.081560938319751,
+    "centred": 0.030136107372051857,
+    "did": 0.05130687797119445,
+    "p": 0.179,
+    "span_txt": "2.98-3.12",
+    "lab": "interiority   +0.051"
+   },
+   {
+    "scale": "interiority",
+    "who": "institution",
+    "arm": "base",
+    "level": 3.0560571906802063,
+    "centred": 0.004632359732507307,
+    "did": 0.05130687797119445,
+    "p": 0.179,
+    "span_txt": "2.98-3.12",
+    "lab": "interiority   +0.051"
+   },
+   {
+    "scale": "interiority",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.979642832028638,
+    "centred": -0.0717819989190609,
+    "did": 0.05130687797119445,
+    "p": 0.179,
+    "span_txt": "2.98-3.12",
+    "lab": "interiority   +0.051"
+   },
+   {
+    "scale": "makes_better",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.303852581731204,
+    "centred": 0.08933078335119093,
+    "did": -0.006954273933334135,
+    "p": 0.836,
+    "span_txt": "3.01-3.42",
+    "lab": "makes_better   -0.007"
+   },
+   {
+    "scale": "makes_better",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.415498515413932,
+    "centred": 0.20097671703391873,
+    "did": -0.006954273933334135,
+    "p": 0.836,
+    "span_txt": "3.01-3.42",
+    "lab": "makes_better   -0.007"
+   },
+   {
+    "scale": "makes_better",
+    "who": "institution",
+    "arm": "base",
+    "level": 3.0135450813460944,
+    "centred": -0.20097671703391873,
+    "did": -0.006954273933334135,
+    "p": 0.836,
+    "span_txt": "3.01-3.42",
+    "lab": "makes_better   -0.007"
+   },
+   {
+    "scale": "makes_better",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 3.136878480696717,
+    "centred": -0.07764331768329624,
+    "did": -0.006954273933334135,
+    "p": 0.836,
+    "span_txt": "3.01-3.42",
+    "lab": "makes_better   -0.007"
+   },
+   {
+    "scale": "makes_worse",
+    "who": "individual",
+    "arm": "base",
+    "level": 1.459510189411629,
+    "centred": -0.08887462703577342,
+    "did": 0.02822872037543967,
+    "p": 0.219,
+    "span_txt": "1.44-1.66",
+    "lab": "makes_worse   +0.028"
+   },
+   {
+    "scale": "makes_worse",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 1.4417198640330233,
+    "centred": -0.10666495241437901,
+    "did": 0.02822872037543967,
+    "p": 0.219,
+    "span_txt": "1.44-1.66",
+    "lab": "makes_worse   +0.028"
+   },
+   {
+    "scale": "makes_worse",
+    "who": "institution",
+    "arm": "base",
+    "level": 1.6550497688617813,
+    "centred": 0.10666495241437901,
+    "did": 0.02822872037543967,
+    "p": 0.219,
+    "span_txt": "1.44-1.66",
+    "lab": "makes_worse   +0.028"
+   },
+   {
+    "scale": "makes_worse",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 1.6136186324505288,
+    "centred": 0.0652338160031265,
+    "did": 0.02822872037543967,
+    "p": 0.219,
+    "span_txt": "1.44-1.66",
+    "lab": "makes_worse   +0.028"
+   },
+   {
+    "scale": "mediation",
+    "who": "individual",
+    "arm": "base",
+    "level": 2.6968633343580874,
+    "centred": 0.2361825858986899,
+    "did": 0.10199724606590732,
+    "p": 0.05,
+    "span_txt": "1.99-2.93",
+    "lab": "mediation   +0.102"
+   },
+   {
+    "scale": "mediation",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 2.9332857194454935,
+    "centred": 0.472604970986096,
+    "did": 0.10199724606590732,
+    "p": 0.05,
+    "span_txt": "1.99-2.93",
+    "lab": "mediation   +0.102"
+   },
+   {
+    "scale": "mediation",
+    "who": "institution",
+    "arm": "base",
+    "level": 1.9880757774733018,
+    "centred": -0.4726049709860958,
+    "did": 0.10199724606590732,
+    "p": 0.05,
+    "span_txt": "1.99-2.93",
+    "lab": "mediation   +0.102"
+   },
+   {
+    "scale": "mediation",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.11327027331982,
+    "centred": -0.34741047513957746,
+    "did": 0.10199724606590732,
+    "p": 0.05,
+    "span_txt": "1.99-2.93",
+    "lab": "mediation   +0.102"
+   },
+   {
+    "scale": "mundanity",
+    "who": "individual",
+    "arm": "base",
+    "level": 4.858197934161477,
+    "centred": -0.049899268004632624,
+    "did": -0.010301033395444028,
+    "p": 0.535,
+    "span_txt": "4.86-4.96",
+    "lab": "mundanity   -0.010"
+   },
+   {
+    "scale": "mundanity",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 4.862294292389528,
+    "centred": -0.0458029097765813,
+    "did": -0.010301033395444028,
+    "p": 0.535,
+    "span_txt": "4.86-4.96",
+    "lab": "mundanity   -0.010"
+   },
+   {
+    "scale": "mundanity",
+    "who": "institution",
+    "arm": "base",
+    "level": 4.947647121157066,
+    "centred": 0.03954991899095628,
+    "did": -0.010301033395444028,
+    "p": 0.535,
+    "span_txt": "4.86-4.96",
+    "lab": "mundanity   -0.010"
+   },
+   {
+    "scale": "mundanity",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 4.957996470170743,
+    "centred": 0.04989926800463351,
+    "did": -0.010301033395444028,
+    "p": 0.535,
+    "span_txt": "4.86-4.96",
+    "lab": "mundanity   -0.010"
+   },
+   {
+    "scale": "procedural",
+    "who": "individual",
+    "arm": "base",
+    "level": 4.520609803450999,
+    "centred": -0.08801649814642953,
+    "did": 0.07192556844622121,
+    "p": 0.067,
+    "span_txt": "4.48-4.74",
+    "lab": "procedural   +0.072"
+   },
+   {
+    "scale": "procedural",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 4.73551553969965,
+    "centred": 0.12688923810222086,
+    "did": 0.07192556844622121,
+    "p": 0.067,
+    "span_txt": "4.48-4.74",
+    "lab": "procedural   +0.072"
+   },
+   {
+    "scale": "procedural",
+    "who": "institution",
+    "arm": "base",
+    "level": 4.481737063495208,
+    "centred": -0.12688923810222086,
+    "did": 0.07192556844622121,
+    "p": 0.067,
+    "span_txt": "4.48-4.74",
+    "lab": "procedural   +0.072"
+   },
+   {
+    "scale": "procedural",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 4.627653554391956,
+    "centred": 0.019027252794526994,
+    "did": 0.07192556844622121,
+    "p": 0.067,
+    "span_txt": "4.48-4.74",
+    "lab": "procedural   +0.072"
+   },
+   {
+    "scale": "specificity",
+    "who": "individual",
+    "arm": "base",
+    "level": 2.911272828449667,
+    "centred": 0.009416934460173554,
+    "did": 0.03144089109613401,
+    "p": 0.41,
+    "span_txt": "2.79-3.01",
+    "lab": "specificity   +0.031"
+   },
+   {
+    "scale": "specificity",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.014182383039857,
+    "centred": 0.11232648905036369,
+    "did": 0.03144089109613401,
+    "p": 0.41,
+    "span_txt": "2.79-3.01",
+    "lab": "specificity   +0.031"
+   },
+   {
+    "scale": "specificity",
+    "who": "institution",
+    "arm": "base",
+    "level": 2.7895294049391293,
+    "centred": -0.11232648905036413,
+    "did": 0.03144089109613401,
+    "p": 0.41,
+    "span_txt": "2.79-3.01",
+    "lab": "specificity   +0.031"
+   },
+   {
+    "scale": "specificity",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.848947174523469,
+    "centred": -0.05290871946602449,
+    "did": 0.03144089109613401,
+    "p": 0.41,
+    "span_txt": "2.79-3.01",
+    "lab": "specificity   +0.031"
+   },
+   {
+    "scale": "superego",
+    "who": "individual",
+    "arm": "base",
+    "level": 2.357126215722069,
+    "centred": -0.277594118946364,
+    "did": -0.0020083903513637975,
+    "p": 0.918,
+    "span_txt": "2.36-2.91",
+    "lab": "superego   -0.002"
+   },
+   {
+    "scale": "superego",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 2.380749857148424,
+    "centred": -0.2539704775200091,
+    "did": -0.0020083903513637975,
+    "p": 0.918,
+    "span_txt": "2.36-2.91",
+    "lab": "superego   -0.002"
+   },
+   {
+    "scale": "superego",
+    "who": "institution",
+    "arm": "base",
+    "level": 2.8795954972776983,
+    "centred": 0.24487516260926512,
+    "did": -0.0020083903513637975,
+    "p": 0.918,
+    "span_txt": "2.36-2.91",
+    "lab": "superego   -0.002"
+   },
+   {
+    "scale": "superego",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.9123144536147967,
+    "centred": 0.27759411894636354,
+    "did": -0.0020083903513637975,
+    "p": 0.918,
+    "span_txt": "2.36-2.91",
+    "lab": "superego   -0.002"
+   },
+   {
+    "scale": "target",
+    "who": "individual",
+    "arm": "base",
+    "level": 3.207396672601459,
+    "centred": -0.24988185129075902,
+    "did": 0.011122244596162421,
+    "p": 0.873,
+    "span_txt": "3.21-3.71",
+    "lab": "target   +0.011"
+   },
+   {
+    "scale": "target",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 3.276624337125969,
+    "centred": -0.18065418676624923,
+    "did": 0.011122244596162421,
+    "p": 0.873,
+    "span_txt": "3.21-3.71",
+    "lab": "target   +0.011"
+   },
+   {
+    "scale": "target",
+    "who": "institution",
+    "arm": "base",
+    "level": 3.662047173297268,
+    "centred": 0.2047686494050498,
+    "did": 0.011122244596162421,
+    "p": 0.873,
+    "span_txt": "3.21-3.71",
+    "lab": "target   +0.011"
+   },
+   {
+    "scale": "target",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 3.707160375182977,
+    "centred": 0.24988185129075902,
+    "did": 0.011122244596162421,
+    "p": 0.873,
+    "span_txt": "3.21-3.71",
+    "lab": "target   +0.011"
+   },
+   {
+    "scale": "termination",
+    "who": "individual",
+    "arm": "base",
+    "level": 2.2107199692224544,
+    "centred": 0.01666247974542845,
+    "did": -0.06835939573699944,
+    "p": 0.191,
+    "span_txt": "2.05-2.34",
+    "lab": "termination   -0.068"
+   },
+   {
+    "scale": "termination",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 2.0517581383120924,
+    "centred": -0.14229935116493353,
+    "did": -0.06835939573699944,
+    "p": 0.191,
+    "span_txt": "2.05-2.34",
+    "lab": "termination   -0.068"
+   },
+   {
+    "scale": "termination",
+    "who": "institution",
+    "arm": "base",
+    "level": 2.33635684064196,
+    "centred": 0.14229935116493397,
+    "did": -0.06835939573699944,
+    "p": 0.191,
+    "span_txt": "2.05-2.34",
+    "lab": "termination   -0.068"
+   },
+   {
+    "scale": "termination",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.225529512395895,
+    "centred": 0.03147202291886897,
+    "did": -0.06835939573699944,
+    "p": 0.191,
+    "span_txt": "2.05-2.34",
+    "lab": "termination   -0.068"
+   },
+   {
+    "scale": "vocalisation",
+    "who": "individual",
+    "arm": "base",
+    "level": 2.2648349854063707,
+    "centred": -0.21109724886822345,
+    "did": 0.08828065969192805,
+    "p": 0.185,
+    "span_txt": "2.26-2.69",
+    "lab": "vocalisation   +0.088"
+   },
+   {
+    "scale": "vocalisation",
+    "who": "individual",
+    "arm": "aligned",
+    "level": 2.4332092202113556,
+    "centred": -0.04272301406323864,
+    "did": 0.08828065969192805,
+    "p": 0.185,
+    "span_txt": "2.26-2.69",
+    "lab": "vocalisation   +0.088"
+   },
+   {
+    "scale": "vocalisation",
+    "who": "institution",
+    "arm": "base",
+    "level": 2.597105025493741,
+    "centred": 0.1211727912191467,
+    "did": 0.08828065969192805,
+    "p": 0.185,
+    "span_txt": "2.26-2.69",
+    "lab": "vocalisation   +0.088"
+   },
+   {
+    "scale": "vocalisation",
+    "who": "institution",
+    "arm": "aligned",
+    "level": 2.6870294831428176,
+    "centred": 0.21109724886822345,
+    "did": 0.08828065969192805,
+    "p": 0.185,
+    "span_txt": "2.26-2.69",
+    "lab": "vocalisation   +0.088"
+   }
+  ]
+ }
+}
