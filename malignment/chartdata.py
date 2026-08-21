@@ -87,11 +87,92 @@ def slopes(*, title, panels, rows, series, x_order, y_domain, subtitle=None,
 def write(art, figdir, name):
     """Write `<name>.data.json` into a folder's `figures/`, and say what it holds."""
     os.makedirs(figdir, exist_ok=True)
+    #: Indented while it stays small enough to read in a diff, compact once it
+    #: does not. At 1,730 lines x 9 values `indent=1` spends more bytes on
+    #: newlines and spaces than on numbers, and this file is fetched by a browser.
     js = json.dumps(art, indent=1)
+    if len(js) > 200_000:
+        js = json.dumps(art, separators=(",", ":"))
     path = os.path.join(figdir, name + ".data.json")
     with open(path, "w") as fh:
         fh.write(js)
-    print("   %-38s %6.0f KB  %s, %d panels, %d rows"
-          % (name + ".data.json", len(js) / 1024, art["chart"],
-             len(art["panels"]), len(art["rows"])))
+    #: Counted from whatever collections the chart type declares, rather than
+    #: from `panels`/`rows`. This printed the slopes shape by name and broke the
+    #: first chart type that did not have one -- a writer that only writes the
+    #: figure it was written for, which is the leak this module exists to close.
+    shape = ", ".join("%d %s" % (len(v), k) for k, v in sorted(art.items())
+                      if isinstance(v, list) and k != "x_order")
+    print("   %-38s %6.0f KB  %s: %s"
+          % (name + ".data.json", len(js) / 1024, art["chart"], shape))
     return path
+
+
+MARKS = ("", "up", "down", "flat")
+
+
+def parcoords(*, title, axes, groups, lines, subtitle=None,
+              value_label="value", mark_label="", mark_legend=None, meta_order=None):
+    """Parallel coordinates: one line per case, one axis per measured dimension.
+
+        axes    [{key, label, domain: [lo, hi], note}]   left-to-right order
+        groups  [{key, label, colour}]                   what the colour means
+        lines   [{key, label, group, values, marks?, missing?, meta?}]
+
+    `values` is an array PARALLEL TO `axes`, not a list of {axis, y} records. At
+    1,730 lines x 9 axes the record form spends about four fifths of the file
+    repeating nine axis names, and the parallel array cannot disagree with the
+    axis order because it has no opinion about it.
+
+    ## THE MARK EXISTS BECAUSE SOME EFFECTS CANNOT BE GEOMETRY
+
+    An axis holds ONE number per line, so a before/after comparison needs two
+    lines -- and that only works if the change is large relative to the axis.
+    Where it is not, drawing it is worse than useless: the lines coincide, the
+    panel reads as "nothing happened", and a reader cannot tell that from an axis
+    too coarse to resolve the move. `marks` is an optional parallel array for a
+    change the axis cannot show, and `mark_label` names what it means.
+
+    ## A GAP IS DECLARED, NEVER INFERRED
+
+    A `null` in `values` REQUIRES an entry in the line's `missing` map saying
+    why. A dimension that does not apply to a case is a real thing to draw, and
+    a line that simply stops cannot be told from a producer that dropped a row.
+    """
+    akeys = [a["key"] for a in axes]
+    gkeys = {g["key"] for g in groups}
+    lkeys = [l["key"] for l in lines]
+    assert len(akeys) == len(set(akeys)), "duplicate axis keys"
+    assert len(lkeys) == len(set(lkeys)), "duplicate line keys"
+    assert len(gkeys) == len(groups), "duplicate group keys"
+    for a in axes:
+        assert len(a["domain"]) == 2 and a["domain"][0] < a["domain"][1], \
+            "axis %r domain must be [lo, hi]" % a["key"]
+
+    for l in lines:
+        assert l["group"] in gkeys, "line %r has undeclared group %r" % (l["key"], l["group"])
+        v = l["values"]
+        #: EVERY AXIS, EXACTLY ONCE. A short array draws as a shorter line and
+        #: reads as a line, which is the failure this refuses.
+        assert len(v) == len(axes), \
+            "line %r has %d values for %d axes" % (l["key"], len(v), len(axes))
+        m = l.get("marks")
+        assert m is None or len(m) == len(axes), \
+            "line %r has %d marks for %d axes" % (l["key"], len(m or []), len(axes))
+        for j, y in enumerate(v):
+            if m is not None:
+                assert m[j] in MARKS, "line %r axis %r: mark %r not in %s" % (
+                    l["key"], akeys[j], m[j], MARKS)
+            if y is None:
+                assert (l.get("missing") or {}).get(akeys[j]), \
+                    "line %r has no value on axis %r and no `missing` reason" % (
+                        l["key"], akeys[j])
+                continue
+            lo, hi = axes[j]["domain"]
+            assert lo <= y <= hi, \
+                "line %r axis %r: %r outside domain %s (the renderer would CLIP it)" % (
+                    l["key"], akeys[j], y, [lo, hi])
+
+    return {"chart": "parcoords", "title": title, "subtitle": subtitle,
+            "value_label": value_label, "mark_label": mark_label,
+            "mark_legend": mark_legend or {}, "meta_order": list(meta_order or []),
+            "axes": axes, "groups": groups, "lines": lines}

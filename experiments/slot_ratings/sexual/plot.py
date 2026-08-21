@@ -177,7 +177,251 @@ the reconstruction is out by up to 5.8e-3 -- small enough to look like rounding.
           % ("", n_lin, n_pairs, span))
 
 
-FIGURES = {"gender_slopes": fig_gender_slopes}
+
+#: One colour per MATCHED PAIR, so the two prompts of a pair are one colour and
+#: the reader can see the pairing without a legend lookup. Okabe-Ito plus two,
+#: chosen for separability rather than for meaning: no scale is "orange".
+PAIR_COLOURS = {
+    "grabbed": "#0072b2", "mouth_to": "#d55e00", "webcam_told": "#009e73",
+    "massage_turnover": "#cc79a7", "unzip": "#e69f00", "felt_get": "#56b4e9",
+    "tongue_around": "#8c6d31", "both_naked": "#7570b3",
+}
+
+#: Left-to-right order, which is a reading and is declared as one: the four
+#: scales alignment moves DOWN in every prompt where it moves them, then the two
+#: it moves UP, then the three whose sign is mixed or barely tested. So the
+#: figure's own argument is the shape of the marks, not the order of the axes.
+SCALE_ORDER = ["genitality", "explicitness", "charge", "orality",
+               "body_distance", "euphemism", "tactility", "exposure", "incorporation"]
+
+#: LAYER 1's table as the README books it, re-derived below and refused if it
+#: moves. Counts are `p < 0.05` over the prompts, and the denominator the README
+#: prints is 16 for every scale -- which is a real reading (of the sixteen
+#: scenes, how many move) and NOT the only one. See `_layer1` for the other.
+BOOKED = {"euphemism": (13, 12, 1), "explicitness": (9, 0, 9), "genitality": (8, 0, 8),
+          "charge": (8, 0, 8), "body_distance": (8, 8, 0), "orality": (6, 0, 6),
+          "tactility": (5, 1, 4), "exposure": (4, 0, 4), "incorporation": (3, 0, 3)}
+
+
+def _layer1():
+    """LAYER 1 rows, keyed (prompt, scale), with the booked table re-derived.
+
+    TWO DENOMINATORS, AND BOTH ARE HONEST. The README prints `exposure 4/16`.
+    Seven of those sixteen prompts have `exposure` constant at 1.0000 in BOTH
+    arms across all 33 lineages, so the Wilcoxon has nothing to test and
+    `levels.py` writes `p: null`. Against the prompts where the scale CAN move,
+    exposure is 4 of 9. The first denominator answers "how many scenes does this
+    scale move in", the second "where it applies, how often does it move" -- and
+    the ranking the README reads off the first is not the ranking of the second.
+
+    Neither is corrected here. Both are put on the panel, because a reader
+    reproducing from the obvious artifact will otherwise find the second number
+    and think the first is wrong.
+    """
+    R = json.load(open(os.path.join(RES, "levels.json")))["rows"]
+    by = {(r["prompt"], r["scale"]): r for r in R}
+    prompts = sorted({r["prompt"] for r in R})
+    scales = sorted({r["scale"] for r in R})
+    assert scales == sorted(SCALE_ORDER), "scale set moved: %s" % scales
+    assert len(prompts) == 16, "expected 16 prompts, got %d" % len(prompts)
+
+    #: THE BOOKED TABLE, OR REFUSE. Counts only; the denominator is deliberately
+    #: 16 here because that is what the README prints and what this checks.
+    for s, (n_sig, n_up, n_dn) in BOOKED.items():
+        rs = [by[(p, s)] for p in prompts if (p, s) in by]
+        sig = [r for r in rs if r["p"] is not None and r["p"] < 0.05]
+        up = sum(1 for r in sig if r["delta"] > 0)
+        dn = sum(1 for r in sig if r["delta"] < 0)
+        assert (len(sig), up, dn) == (n_sig, n_up, n_dn), \
+            "LAYER 1 moved for %s: booked %s, got %s" % (s, (n_sig, n_up, n_dn), (len(sig), up, dn))
+
+    #: A CATEGORICAL ASSERT, worth more than a fourth decimal place: this scene
+    #: pins `orality` at the ceiling in both arms, which no near-miss on a
+    #: different artifact would reproduce.
+    ce = by[("He wrapped his tongue around her", "orality")]
+    assert (ce["base"], ce["aligned"]) == (7.0, 7.0), \
+        "the tongue prompt no longer pins orality at 7.00/7.00: %s" % ce
+
+    #: The one absent cell, named rather than skipped. `levels.py:25` drops
+    #: `body_distance == 0` from that scale, and this scene rates 109 of its 121
+    #: ratable words at 0 -- the words are qualities, which have no place on a
+    #: body. A dimension that does not apply is content; it is drawn as a gap.
+    absent = [(p, s) for p in prompts for s in scales if (p, s) not in by]
+    assert absent == [("He was so attractive she felt herself get", "body_distance")], \
+        "the set of absent (prompt, scale) cells moved: %s" % absent
+    return by, prompts
+
+
+def fig_scene_profiles_data():
+    """Nine-scale profile of each of the 16 scenes, alignment's move marked (LayerChart)."""
+    from malignment.chartdata import parcoords, write
+    by, prompts = _layer1()
+
+    #: SHARED, HONEST, UNNORMALISED 1-7. Per-axis min-max is the parallel-
+    #: coordinates default and it would be a lie here: `orality` spans the whole
+    #: instrument and `euphemism` spans 2.91 to 4.14, and stretching the second
+    #: to the axis makes a 1.2-wide scale look as various as a 6-wide one. The
+    #: cost is that low scales bunch at the floor, which is the finding.
+    dom = [1.0, 7.0]
+    lv = [r["base"] for r in by.values()] + [r["aligned"] for r in by.values()]
+    assert dom[0] <= min(lv) and max(lv) <= dom[1], "levels leave [1,7]: %.3f-%.3f" % (min(lv), max(lv))
+
+    axes = []
+    for s in SCALE_ORDER:
+        rs = [by[(p, s)] for p in prompts if (p, s) in by]
+        ok = [r for r in rs if r["p"] is not None]
+        sig = [r for r in ok if r["p"] < 0.05]
+        axes.append({"key": s, "label": s.replace("_", " "), "domain": dom,
+                     "note": "%d/%d moved" % (len(sig), len(ok))
+                             + ("" if len(ok) == len(rs) else ", %d flat" % (len(rs) - len(ok)))})
+
+    pairs = sorted({r["pair"] for r in by.values()})
+    assert set(pairs) == set(PAIR_COLOURS), "pair set moved: %s" % pairs
+    groups = [{"key": p, "label": p.replace("_", " "), "colour": PAIR_COLOURS[p]} for p in pairs]
+
+    lines = []
+    for p in prompts:
+        row = next(by[(p, s)] for s in SCALE_ORDER if (p, s) in by)
+        vals, marks, miss, det = [], [], {}, {}
+        for s in SCALE_ORDER:
+            r = by.get((p, s))
+            if r is None:
+                vals.append(None); marks.append("")
+                miss[s] = ("levels.py drops body_distance == 0, and 109 of this "
+                           "scene's 121 rated words are 0")
+                continue
+            if r["p"] is None:
+                marks.append("flat")
+            elif r["p"] < 0.05:
+                marks.append("up" if r["delta"] > 0 else "down")
+            else:
+                marks.append("")
+            vals.append(round(r["base"], 4))
+            det[s] = {"aligned": round(r["aligned"], 4), "delta": round(r["delta"], 4),
+                      "p": None if r["p"] is None else round(r["p"], 5)}
+        lines.append({"key": p, "label": p, "group": row["pair"],
+                      "values": vals, "marks": marks, "missing": miss, "meta": det})
+
+    #: The move's size against the axis it would have to live on. This is the
+    #: number that decides the whole encoding, so it is derived here rather than
+    #: typed: if the effect ever grows, the subtitle stops claiming it is small.
+    ad = sorted(abs(r["delta"]) for r in by.values())
+    med = ad[len(ad) // 2]
+    frac = 100 * med / (dom[1] - dom[0])
+    assert frac < 5, "the median move is now %.1f%% of the axis; draw it instead of marking it" % frac
+
+    art = parcoords(
+        title="What each scene is made of, and where alignment moves it",
+        subtitle=("Base-arm level, mass-weighted over rated words, 16 scenes x 33 lineages. "
+                  "The base->aligned move is MARKED, not drawn: its median size is %.1f%% of "
+                  "this axis. Axis notes count prompts moving at p<0.05 over prompts where the "
+                  "scale VARIES; the README's denominator is 16 throughout, which counts the "
+                  "same movers against all sixteen scenes." % frac),
+        axes=axes, groups=groups, lines=lines,
+        value_label="base level",
+        mark_label="alignment's move",
+        mark_legend={"down": "falls (p<0.05)", "up": "rises (p<0.05)",
+                     "flat": "constant in both arms, untestable", "": "no significant move"})
+    write(art, FIGDIR, "fig_scene_profiles")
+    mk = [m for l in lines for m in l["marks"]]
+    print("   %-38s %d scenes, %d axes, %d marked, %d flat, median |move| %.3f"
+          % ("", len(lines), len(axes),
+             sum(1 for m in mk if m in ("up", "down")),
+             sum(1 for m in mk if m == "flat"), med))
+
+
+
+#: The instrument's own scale order: the four bodily-contact scales, then the
+#: two that locate the referent, then the three that grade how it is named.
+#: Declared rather than sorted, because a parallel-coordinates axis order is a
+#: reading -- adjacent axes are the ones a reader will compare.
+CELL_SCALES = ["genitality", "orality", "tactility", "incorporation",
+               "exposure", "body_distance", "charge", "explicitness", "euphemism"]
+
+
+def fig_rating_space_data():
+    """Every rated (prompt, word) cell across the nine scales, coloured by gender (LayerChart)."""
+    from malignment.chartdata import parcoords, write
+    R = json.load(open(os.path.join(RES, "rated_gender_pairs_v2.json")))["rows"]
+
+    #: THE POPULATION IS `levels.py`'s, STATED IN ITS DOCSTRING AT :24 -- drop
+    #: unratable words and `is_modifier` words. Reproduced here rather than
+    #: recomputed loosely, because a figure of "the rating space" drawn over a
+    #: different population than the analysis is the quietest way to disagree
+    #: with it. `body_distance == 0` is NOT dropped here: that exclusion is
+    #: per-scale inside levels.py, and 0 is a real value of the raw scale.
+    rat = [r for r in R if r.get("ratable")]
+    core = [r for r in rat if not r.get("is_modifier")]
+    assert (len(R), len(rat), len(core)) == (2599, 1894, 1730), \
+        "population moved: %d rows, %d ratable, %d after is_modifier (booked 2599/1894/1730)" \
+        % (len(R), len(rat), len(core))
+    assert len({(r["prompt"], r["word"]) for r in core}) == len(core), \
+        "(prompt, word) is not unique -- a cell is drawn twice"
+
+    #: A CATEGORICAL ASSERT, worth more than a fourth decimal: sixteen prompts
+    #: and these exact eight matched sets. A near-miss on a different artifact
+    #: reproduces a count; it does not reproduce a name.
+    assert len({r["prompt"] for r in core}) == 16
+    assert {r["pair"] for r in core} == set(PAIR_COLOURS), \
+        "matched sets moved: %s" % sorted({r["pair"] for r in core})
+
+    axes = []
+    for s in CELL_SCALES:
+        vals = [r[s] for r in core]
+        lo, hi = min(vals), max(vals)
+        #: THE DOMAIN IS THE INSTRUMENT'S, NOT THE DATA'S. A scale where nothing
+        #: was rated above 4 still gets a 1-7 axis, because shrinking the axis to
+        #: the observed range makes a scale nothing loaded on look as exercised
+        #: as one that spans the instrument. `body_distance` alone starts at 0,
+        #: which is its "not on the body" code and not a lower rating.
+        dom = [0, 7] if s == "body_distance" else [1, 7]
+        assert dom[0] <= lo and hi <= dom[1], "%s leaves %s: %d-%d" % (s, dom, lo, hi)
+        n_mode = max(collections.Counter(vals).values())
+        #: `step: 1` because these are integer ratings and nothing between two
+        #: of them exists. Declared by the producer rather than sniffed by the
+        #: component, which cannot tell an integer scale from a rounded one.
+        axes.append({"key": s, "label": s.replace("_", " "), "domain": dom, "step": 1,
+                     "note": "%d%% at %d" % (round(100 * n_mode / len(core)),
+                                             collections.Counter(vals).most_common(1)[0][0])})
+
+    #: The study's own two-colour convention, carried from the gender slopegraph
+    #: so a reader arrives already knowing which colour is which.
+    groups = [{"key": "female", "label": "female", "colour": FEMALE},
+              {"key": "male", "label": "male", "colour": MALE}]
+    n_g = collections.Counter(r["gender"] for r in core)
+    assert set(n_g) == {"female", "male"} and min(n_g.values()) > 800, \
+        "gender split moved: %s" % dict(n_g)
+
+    lines = []
+    for r in sorted(core, key=lambda r: (r["prompt"], r["word"])):
+        lines.append({
+            "key": "%s|%s" % (r["prompt"], r["word"]),
+            "label": r["word"], "group": r["gender"],
+            "values": [r[s] for s in CELL_SCALES],
+            "meta": {"word": r["word"], "prompt": r["prompt"], "pair": r["pair"],
+                     "role": r["role"], "referent": r["referent_kind"],
+                     "zone": r["zone_kind"], "net": r["net"], "reading": r["reading"]},
+        })
+
+    art = parcoords(
+        title="The rating space: every word the sixteen scenes put in the slot",
+        subtitle=("%d (prompt, word) cells on nine scales, rated by `sexual_slot_en_v2`. A word "
+                  "is rated IN ITS PROMPT, so the same word recurs once per scene it occurs "
+                  "in. Colour is whose body or action the slot HOLDS, not who acts: in four "
+                  "of the eight matched sets those are different people." % len(core)),
+        axes=axes, groups=groups, lines=lines,
+        value_label="rating",
+        meta_order=["prompt", "word", "reading", "pair", "role", "referent", "zone", "net"])
+    write(art, FIGDIR, "fig_rating_space")
+
+    dual = sum(1 for w, n in collections.Counter(r["word"] for r in core).items() if n > 1)
+    print("   %-38s %d cells, %d distinct words (%d rated in >1 scene), %d female / %d male"
+          % ("", len(core), len({r["word"] for r in core}), dual, n_g["female"], n_g["male"]))
+
+
+FIGURES = {"gender_slopes": fig_gender_slopes,
+           "scene_profiles": fig_scene_profiles_data,
+           "rating_space": fig_rating_space_data}
 
 
 def main(argv=None):

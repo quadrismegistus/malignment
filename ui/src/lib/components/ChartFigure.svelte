@@ -14,6 +14,18 @@
 
 	let { url, name }: { url: string; name: string } = $props();
 
+	//: COUNTED FROM WHATEVER THE CHART TYPE DECLARES. This read `art.rows.length`,
+	//: which is the `slopes` shape, and the first artifact without a `rows` array
+	//: reported "0 rows" underneath a full panel -- a provenance line that is
+	//: wrong without being broken, which is the expensive direction. Axis specs
+	//: are excluded by name because they are two-element ranges, not collections.
+	const SPEC_KEYS = new Set(['x_order', 'y_domain', 'meta_order']);
+	const shape = (a: any) =>
+		Object.entries(a)
+			.filter(([k, v]) => Array.isArray(v) && !SPEC_KEYS.has(k))
+			.map(([k, v]) => `${(v as any[]).length.toLocaleString()} ${k}`)
+			.join(', ') || 'no collections declared';
+
 	let art = $state<any>(null);
 	let error = $state<string | null>(null);
 
@@ -52,7 +64,7 @@
 	{/if}
 	<p class="prov">
 		<code>{name}</code>
-		<span class="muted">drawn live from the producer's data, {art.rows?.length ?? 0} rows</span>
+		<span class="muted">drawn live from the producer's data, {shape(art)}</span>
 		<a href={url} target="_blank" rel="noreferrer">open the data</a>
 	</p>
 {:else}

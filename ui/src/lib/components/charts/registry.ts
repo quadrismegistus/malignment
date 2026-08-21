@@ -1,5 +1,6 @@
 import type { Component } from 'svelte';
 import SlopeGrid from './SlopeGrid.svelte';
+import ParCoords from './ParCoords.svelte';
 
 /**
  * chart type -> component, keyed by the `chart` field a producer writes into its
@@ -12,5 +13,6 @@ import SlopeGrid from './SlopeGrid.svelte';
  * cost should be visible in one place.
  */
 export const CHARTS: Record<string, Component<any>> = {
-	slopes: SlopeGrid
+	slopes: SlopeGrid,
+	parcoords: ParCoords
 };
