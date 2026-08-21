@@ -185,6 +185,159 @@ independent than +0.749.
 Reproduce: `two_axes.py --csv results/two_axes.csv`, then z-score the per-entity
 medians. `api_placement.py` carries the CIs.
 
+**This verdict is about the ENTITY grain and the next section qualifies it.** At
+the passage grain the same measurements give `r = +0.348` and four occupied
+quadrants; nothing above is withdrawn, but "the quadrants do not survive" is true
+of medians-of-models and false of passages.
+
+### THE GRAIN WAS THE PROBLEM. AT PASSAGE LEVEL THE QUADRANTS ARE OCCUPIED
+
+Everything above stands as written. At the ENTITY grain -- one median per model
+or corpus -- `r(surprisal, drift)` is `+0.749` and the off-diagonal holds 16% of
+70 entities, and that remains the right description of the entity plane. What it
+could not see is that most of the correlation was made by the averaging.
+
+    grain      n         r(surprisal, drift)   surprisal explains
+    entity     70        +0.749                56% of drift variance
+    passage    14,414    +0.348                12%
+
+Collapsing a model's passages to one point removes the within-model scatter, and
+the within-model scatter is where the two axes are close to independent. The
+entity plane is a diagonal; the passage plane is not; both are true of the same
+measurements. **A quadrant claim therefore has to name its grain**, and the
+earlier verdict was a verdict on the entity grain only.
+
+At the passage grain all four cells are substantively occupied. The reference is
+all 14,414 passages pooled, which the manifest beside `quadrants.csv` records:
+
+    all passages         23.0%  (+s+d)   23.4%  (+s-d)   28.1%  (-s+d)   25.4%  (-s-d)
+
+    category         n   (+surp +drift)  (+surp -drift)  (-surp +drift)  (-surp -drift)
+    base          2,195      43.2%           44.0%            7.8%            5.0%
+    aligned       2,736      15.6%           23.4%           27.6%           33.5%
+    API           6,508      13.6%           14.2%           41.1%           31.1%
+    literary_crit   499      66.7%           23.0%            8.8%            1.4%
+    c20_fiction     500      62.2%           22.2%           11.2%            4.4%
+    philosophy      500      33.6%           37.0%           14.0%           15.4%
+    arxiv_abstr     500      28.0%           45.0%           12.0%           15.0%
+    dreams          476      18.9%           37.4%           15.3%           28.4%
+    waking_narr     500       3.0%            7.6%           28.2%           61.2%
+
+**The three AI categories are ordered along the diagonal and the human corpora
+are not.** Base models put 87.2% of their passages in the high-surprisal half;
+aligned models spread across all four; API models put 72.2% in the low-surprisal
+half. The human corpora meanwhile occupy the plane's corners -- literary
+criticism 66.7% in `(+s+d)`, waking narrative 61.2% in `(-s-d)` -- so the axes
+are not measuring "human vs machine" in either direction. They separate kinds of
+writing, and the arms move through them.
+
+#### The off-diagonal cells are F15's metaphoric and metonymic quadrants
+
+Enrichment against the pooled rate, `1.00x` meaning "the same share as all
+passages":
+
+                        (+surp -drift)      (-surp +drift)
+                         METAPHORIC          METONYMIC
+    base                    1.88x              0.28x
+    aligned                 1.00x              0.98x
+    API                     0.60x              1.46x
+
+    arxiv_abstracts         1.92x              0.43x
+    dreams                  1.59x              0.55x
+    philosophy              1.58x              0.50x
+    literary_criticism      0.98x              0.31x
+    c20_fiction             0.95x              0.40x
+    waking_narrative        0.32x              1.00x
+    all human               1.22x              0.53x
+
+**Monotone across the three arms, in opposite directions.** Metaphoric
+1.88 -> 1.00 -> 0.60; metonymic 0.28 -> 0.98 -> 1.46. Alignment sits at
+almost exactly the pooled rate on both, which is the least interesting position
+on the axis and the easiest to state: the aligned arm is the crossing point.
+
+Both off-diagonal cells are more AI than human in absolute share, and they are
+so for different reasons. The metaphoric cell is enriched in base models AND in
+`arxiv_abstracts`, `dreams` and `philosophy` -- three human corpora with little
+else in common except that none of them narrate a sequence of events. The
+metonymic cell has exactly one human corpus at parity, `waking_narrative`, and
+that is the corpus made of people recounting what happened next.
+
+So the human occupancy is not noise around an AI effect. It is the register
+distinction the quadrant names were always about, and the API models sit at the
+`waking_narrative` end of it while base models sit at the `arxiv_abstracts` end.
+
+#### Read on two passages that continue almost the same stem
+
+The corpus supplies a near-controlled pair: `granite-3.0-8b-base` continuing
+"He was ugly and misshapen and she wanted to", and `gemini-3.5-flash` continuing
+"He was ugly and she wanted to". Same scene, opposite quadrants, opposite arms.
+Both are drawn at the 85th percentile of distance from the origin rather than
+from the tips, because the tip of a two-axis plane is usually a malformed
+passage and quoting it would be an illustration sampled on its own effect size.
+
+`read_passage.py --id mode-b708426d81badd` -- METAPHORIC, `+2.45` surprisal:
+
+    most surprising   Jacint, 29.1   bodin 26.8   red-head's 21.3   rivulets 20.2
+    concentration     4% of 172 words cost under 0.5 bits
+
+    +0.509 | 0.589 |  8.87  Two.
+    +0.375 | 0.547 |  6.54  Did they wear shoes?
+    +0.410 | 0.572 |  2.63  One did, the other did not.
+    +0.528 | 0.651 |  8.12  <-- Yes, before the Count, the Countess and their tall,
+                                shy friend, Mad Jacint, ...
+
+The expensive words are names and substitutions -- `Jacint`, `bodin`,
+`rivulets` -- arriving in place of words that would have cost nothing. The
+passage circles one scene; it does not go anywhere.
+
+`read_passage.py --id google_gemini_3_5_flash-v5-031-0` -- METONYMIC, `-1.25`:
+
+    most surprising   outward 21.2   draft. 16.1   "Don't 13.9   harsh, 13.4
+    concentration     20% of 229 words cost under 0.5 bits
+
+    +0.444 | 0.444 |  4.20  She stared at his crooked nose, the uneven spacing of
+                            his eyes, and the harsh ...
+    +0.478 | 0.398 |  3.22  She wanted to look away, to find comfort in the familiar
+                            shadows of the alley ...
+    +0.413 | 0.593 |  4.47  In his palm rested a small, glowing glass vial, pulsing
+                            with a soft violet ...
+
+Nose to eyes to jaw to voice to alley to streetlamp to vial: contiguity, each
+detail handing off to the one beside it. **Five times as many words cost under
+half a bit** -- 20% against 4% -- on a passage that travels further.
+
+#### Does the surprisal sit in the sentences that move? Weakly yes, and never at the furthest one
+
+Joining the two grains on the sentence row makes this a query rather than an
+inference. Per passage, the correlation between a sentence's mean bits and its
+step from the previous sentence; then a median per model; then per arm.
+`within_passage.py`, 14,249 passages with at least 5 usable sentences:
+
+                    n   r(bits, step)   r(n_words, step)   partial r   furthest hi-bits
+    base           26      +0.216           +0.022          +0.212          56.4%
+    aligned        27      +0.214           -0.051          +0.210          50.7%
+    API            11      +0.130           -0.020          +0.137          47.7%
+
+**The relation is positive everywhere and it is not length.** The partial
+correlation holding `n_words` out is within 0.01 of the raw one in every arm, so
+this is not short sentences taking big steps. It is small -- `+0.13` to `+0.22`
+explains 2-5% of the variance in a step -- but it is consistent across 64 models
+and across all four quadrants (`+0.123` to `+0.215`).
+
+**The furthest sentence is NOT the surprising one.** Whether a passage's
+furthest-from-opening sentence also sits above that passage's median sentence
+bits is at chance in every arm: 56.4% for base (sign test over 26 models,
+p=0.076), 50.7% aligned, 47.7% API. Only API clears p<0.05 (1 of 11 models above
+half, p=0.012) and eleven commodity endpoints from three vendors are not a
+sample of anything, so that is an observation and not a result -- and it was not
+registered in advance.
+
+So the two axes touch each other locally and not cumulatively. Surprisal travels
+with the STEP, the move from one sentence to the next, and carries no
+information about total displacement. That is the shape you would want if
+selection and combination were separable, and it is the first thing in this
+folder measured WITHIN a passage rather than across a population.
+
 ## Why the quadrants are not simply ported
 
 `../drift_geometry/` measured the reliability F15's quadrants rest on, on F15's own
@@ -261,6 +414,55 @@ absence reads as absence, but any mean over a drift column must exclude them.
     ref_anchor.py    the anchor on the deepseek axis, with --sweep for stability
     ref_surprisal.py scores any text with deepseek; roundtrip-guarded
     build_human_pool.py / normalise_task.py / finalise_human.py   the anchor
+
+    results/quadrants.csv             14,414 passages: both axes, the residual,
+                                      three z-scores, the quadrant, and the TEXT
+    $MALIGNMENT_DATA/jakobson_space/exploded/
+      words.parquet                   3,040,970 rows, one per word, with the bits
+                                      deepseek spent on it
+      sentences.parquet                 196,349 rows, one per sentence, with its
+                                      step, its displacement, and mean_bits
+
+    quadrants.py       builds results/quadrants.csv and the occupancy tables
+    explode.py         builds the two parquets above from the existing sidecars
+    read_passage.py    renders one passage with both decompositions marked on it
+    within_passage.py  the within-passage bits-vs-step correlation, length-controlled
+    ingest_exploded.py loads all three grains into ClickHouse
+
+### The three grains are queryable in ClickHouse
+
+`malignment.passage_axes` (14,414), `passage_words` (3,040,970) and
+`passage_sentences` (196,349), loaded by `ingest_exploded.py --replace`. The
+database is `malignment`, ours; RH's other project lives in `abstraction`, `lltk`
+and `llmtasks` and no statement here is unqualified.
+
+`category`, `model` and `quadrant` are denormalised onto every word and sentence
+row. That is redundant on purpose: the use for these tables is colouring a plot
+by arm or by quadrant, and a reader who must remember to join 3M rows back to 14k
+to get `category` will eventually join on the wrong key -- and a wrong join here
+produces a plot that looks right.
+
+    -- the words alignment finds cheap that base models do not
+    SELECT word, count() n, round(avg(bits),2) b
+    FROM malignment.passage_words WHERE category='aligned' AND partial=0
+    GROUP BY word HAVING n > 200 ORDER BY b ASC LIMIT 40
+
+    -- does surprisal ride the step, per arm
+    SELECT category, round(corr(mean_bits, step),3) FROM malignment.passage_sentences
+    WHERE step IS NOT NULL AND mean_bits IS NOT NULL GROUP BY category
+
+That second query POOLS sentences and so answers a different question from
+`within_passage.py`, which takes one correlation per passage and then a median
+per model. Pooled it gives aligned `+0.270` against base `+0.218`; per model it
+gives `+0.214` against `+0.216`, a tie. The pooled version lets a model with more
+passages, and a passage with more sentences, count more -- so it is the right
+query for "how do these two columns covary in this table" and the wrong one for
+any claim about an arm. Both are correct about what they measure.
+
+**Every sentence row carries `reproduces`**: whether `mean(step)` reproduces that
+passage's own `drift` to 1e-6. It is true for 14,414 of 14,414 passages, which is
+worth nothing until it isn't -- it is the one defect a re-grained table can have,
+and it is a stored column rather than a claim in a README.
 
 ### Where the anchor came from
 
