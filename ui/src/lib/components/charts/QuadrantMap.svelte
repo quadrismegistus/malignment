@@ -30,7 +30,10 @@
 		points: { ids: string[]; x: number[]; y: number[]; cat: number[]; model: number[] };
 		cells: { key: string; label: string; pooled: number }[];
 		table: { cat: string; n: number; pct: Record<string, number>; enrich: Record<string, number> }[];
-		detail?: { url?: string; scales?: Record<string, { domain: [number, number]; note: string }> };
+		detail?: {
+			url?: string;
+			scales?: Record<string, { domain: [number, number]; mid?: number; note: string }>;
+		};
 		notes?: string[];
 	};
 	let { art }: { art: Art } = $props();
@@ -85,11 +88,30 @@
 	//: A plain `let` on purpose: the click handler needs the VALUE, not a
 	//: dependency, and making it reactive would re-render the chart on every
 	//: pointer move to update something nothing renders.
-	let hovered: any = null;
+	let ptr = $state<{ x: number; y: number; w: number } | null>(null);
+	let hovered: any = $state(null);
 
-	/** Record what the pointer is over, and hand it back so the tooltip can draw it. */
+	/** Record what the pointer is over, and hand it back so the tooltip can draw it.
+	 *
+	 * DEFERRED BY A MICROTASK, and it has to be. `hovered` is read during render
+	 * (it draws the tip) so it must be `$state`; it is WRITTEN from inside a
+	 * `{@const}` in the tooltip snippet, which is also render. Svelte 5 refuses
+	 * that outright -- `state_unsafe_mutation` -- and the whole figure failed to
+	 * mount rather than degrading, which is the good kind of failure.
+	 *
+	 * A microtask lands after the current render and before paint, so the tip is
+	 * never a frame behind the point it names. The alternative, capturing in the
+	 * pointermove handler instead, cannot guarantee that: it would race
+	 * LayerChart's own hit test and could label a point the pointer had left. */
 	function capture(d: any) {
-		hovered = d ?? null;
+		const next = d ?? null;
+		//: COMPARED BY id, NOT BY IDENTITY. An identity guard looks equivalent and
+		//: is not: if the chart hands back a fresh object for the same datum, every
+		//: assignment re-renders, every render re-captures, and the microtask queue
+		//: never drains -- the page mounts and then freezes on first hover, which
+		//: is a worse failure than the mount error it replaced because it looks
+		//: like a slow chart.
+		if (next?.id !== hovered?.id) queueMicrotask(() => (hovered = next));
 		return d;
 	}
 
@@ -154,12 +176,24 @@
 
 	const bitsDom = $derived(art.detail?.scales?.bits?.domain ?? [0, 16]);
 	const stepDom = $derived(art.detail?.scales?.step?.domain ?? [0, 0.8]);
+	//: DIVERGING ABOUT A MIDPOINT THE PRODUCER DECLARES, blue below and red above.
+	//: The two sides are normalised SEPARATELY, because the domain is not
+	//: symmetric about the median -- 0 to 3.44 against 3.44 to 16 -- and one ramp
+	//: would hand the cheap half of the distribution a fifth of the colour range.
+	//:
+	//: Saturation carries the magnitude and hue carries the side, so a word AT the
+	//: midpoint is nearly untinted and reads as ordinary prose, which is what it
+	//: is. An absent `mid` falls back to the one-sided ramp rather than guessing a
+	//: centre: where a scale diverges is a claim about what counts as ordinary.
+	const bitsMid = $derived(art.detail?.scales?.bits?.mid ?? null);
 	const heat = (b: number) => {
-		const t = Math.max(0, Math.min(1, (b - bitsDom[0]) / (bitsDom[1] - bitsDom[0])));
-		//: Alpha only, over the page's own background, so the word stays readable
-		//: at every value. A hue ramp here would compete with the category
-		//: colours the plane above is already using for a different variable.
-		return `rgba(232, 89, 12, ${(0.06 + 0.62 * t).toFixed(3)})`;
+		const [lo, hi] = bitsDom;
+		const v = Math.max(lo, Math.min(hi, b));
+		if (bitsMid == null)
+			return `rgba(232, 89, 12, ${(0.06 + 0.62 * ((v - lo) / (hi - lo))).toFixed(3)})`;
+		if (v <= bitsMid)
+			return `rgba(77, 171, 247, ${(0.04 + 0.5 * ((bitsMid - v) / (bitsMid - lo))).toFixed(3)})`;
+		return `rgba(250, 82, 82, ${(0.04 + 0.62 * ((v - bitsMid) / (hi - bitsMid))).toFixed(3)})`;
 	};
 
 	const fmt = (v: number, d = 2) => (v == null ? '—' : v.toFixed(d));
@@ -216,20 +250,37 @@
 	  its coordinates: a reader hovering a cloud wants to know what is under the
 	  pointer, and both numbers are already on the axes.
 	-->
+	<!--
+	  THE SNIPPET ONLY CAPTURES; THE TIP IS DRAWN BELOW. LayerChart puts
+	  `.lc-tooltip-root` at `position: fixed` on `body` and hands it CHART-relative
+	  coordinates, so anything rendered through it landed exactly the figure's own
+	  left offset away from the pointer -- 276px on this page, naming a point
+	  nowhere near the cursor, which is worse than no tooltip because it reads as
+	  a label for whatever it happens to cover. Verified by walking the parent
+	  chain rather than guessed: div.tip < lc-tooltip-content < lc-tooltip-container
+	  < lc-tooltip-root [fixed] < BODY.
+	-->
 	{#snippet tip({ context }: { context: any })}
 		{@const d = capture(context?.tooltip?.data)}
-		{#if d}
-			<div class="tip">
-				<i style:background={art.cats.find((c) => c.key === d.cat)?.colour}></i>
-				<strong>{d.model}</strong>
-				<span>{d.cat}</span>
-				<em>click to read</em>
-			</div>
-		{/if}
+		{#if d}{/if}
 	{/snippet}
 
+	<div class="stage">
 	<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
-	<div class="plot" onclick={openHovered}>
+	<div
+		class="plot"
+		onclick={openHovered}
+		onpointermove={(e) => {
+			const b = e.currentTarget.getBoundingClientRect();
+			//: WIDTH CARRIED WITH THE POINT. The flip-near-the-edge test was
+			//: `ptr.x > 0.66 * 660`, and 660 was the width the panel happened to
+			//: have while I was looking at it -- the plot is square and responsive,
+			//: so that constant is wrong at every other viewport, in the direction
+			//: that pushes the tooltip off the panel.
+			ptr = { x: e.clientX - b.left, y: e.clientY - b.top, w: b.width };
+		}}
+		onpointerleave={() => (ptr = null)}
+	>
 		<ScatterChart
 			tooltip={tip}
 			x="x"
@@ -238,7 +289,12 @@
 			yDomain={art.y.domain}
 			{series}
 			padding={{ left: 52, bottom: 44, top: 12, right: 14 }}
-			points={{ r: 1.4 }}
+			//: `stroke: 'none'` FOR THE SAME REASON THE TICK TEXT NEEDED IT. Canvas
+			//: Points draw a stroke as well as a fill, and against this background the
+			//: default put a light ring on every dot -- at r=1.4 the ring was most of
+			//: the mark, so 14,414 points read as 14,414 little doughnuts. Smaller and
+			//: translucent now, so the dense middle shows as density, not as a mass.
+			points={{ r: 1.1, stroke: 'none', opacity: 0.55 }}
 			brush
 			props={{
 				//: NO `label` ON EITHER AXIS. LayerChart's axis label lands in the
@@ -266,16 +322,34 @@
 		-->
 		<span class="cell tl">{art.cells.find((c) => c.key === '(-surp +drift)')?.label}</span>
 		<span class="cell br">{art.cells.find((c) => c.key === '(+surp -drift)')?.label}</span>
+		{#if hovered && ptr}
+			<!--
+			  CLAMPED, NOT FLIPPED. Flipping past a fraction of the width works only
+			  while the panel is wider than two tooltips: at a 1050px viewport the
+			  square plot is 402px and a 240px tip overflowed by 64px on EITHER
+			  side, so there is no side to flip to. Clamping into the panel is
+			  correct at every width, and `--tw` is the same number the CSS caps
+			  the tip at, so the two cannot drift apart.
+			-->
+			<div
+				class="tip"
+				style:left="clamp(4px, {ptr.x + 14}px, {ptr.w}px - var(--tw) - 4px)"
+				style:top="clamp(4px, {ptr.y + 14}px, 100% - 2.2rem)"
+			>
+				<i style:background={art.cats.find((c) => c.key === hovered.cat)?.colour}></i>
+				<strong>{hovered.model}</strong>
+				<span>{hovered.cat}</span>
+				<em>click to read</em>
+			</div>
+		{/if}
 		<span class="ylab">{art.y.label} &rarr;</span>
 		<span class="xlab">{art.x.label} &rarr;</span>
 	</div>
-	<p class="axnote">
-		<b>x</b>
-		{art.x.note} · <b>y</b>
-		{art.y.note} · click a point to read its passage
-	</p>
-
-	{#if openId}
+	<aside class="side">
+	{#if !openId}
+		<p class="muted hint">Click a point to read its passage: every word tinted by the bits
+			spent on it, every sentence opening with a bar for its step from the one before.</p>
+	{:else}
 		<section class="reader">
 			{#if detailErr}
 				<p class="err">could not read <code>{openId}</code>: {detailErr}</p>
@@ -351,6 +425,14 @@
 			{/if}
 		</section>
 	{/if}
+	</aside>
+	</div>
+
+	<p class="axnote">
+		<b>x</b>
+		{art.x.note} · <b>y</b>
+		{art.y.note}
+	</p>
 
 	<div class="tablewrap">
 		<p class="tcap">
@@ -472,10 +554,43 @@
 		opacity: 0.65;
 		margin-left: 0.2rem;
 	}
+	/*
+	  SQUARE PLOT, READER BESIDE IT. Both axes are z-scores, so a square panel is
+	  the only aspect ratio on which a unit of surprisal and a unit of drift are
+	  the same distance. On the wide panel this replaces, the cloud read as much
+	  flatter than it is -- which is a claim about the very correlation the figure
+	  exists to argue over.
+	*/
+	.stage {
+		display: grid;
+		grid-template-columns: minmax(320px, 1fr) 320px;
+		gap: 1rem;
+		align-items: start;
+	}
 	.plot {
 		position: relative;
-		height: 440px;
+		aspect-ratio: 1;
+		max-height: min(72vh, 660px);
 		cursor: pointer;
+	}
+	.side {
+		max-height: min(72vh, 660px);
+		overflow-y: auto;
+		font-size: 0.8rem;
+	}
+	.hint {
+		margin: 0;
+		font-size: 0.78rem;
+		color: var(--text-3);
+		font-style: italic;
+	}
+	@media (max-width: 900px) {
+		.stage {
+			grid-template-columns: 1fr;
+		}
+		.side {
+			max-height: none;
+		}
 	}
 	/* the quadrant crosshair is LayerChart's own `rule`, at x=0 and y=0 */
 	.plot :global(.qrule) {
@@ -484,6 +599,15 @@
 		stroke-dasharray: 3 3;
 	}
 	.tip {
+		--tw: 240px;
+		max-width: var(--tw);
+		position: absolute;
+		z-index: 2;
+		pointer-events: none;
+		background: color-mix(in srgb, var(--bg-1, #12131a) 92%, transparent);
+		border: 1px solid color-mix(in srgb, var(--text-3) 35%, transparent);
+		border-radius: 3px;
+		padding: 0.15rem 0.4rem;
 		display: flex;
 		align-items: center;
 		gap: 0.4rem;
@@ -498,6 +622,11 @@
 	.tip em {
 		font-style: italic;
 		opacity: 0.6;
+	}
+	.tip strong,
+	.tip span {
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.cell {
 		position: absolute;
@@ -524,11 +653,17 @@
 		color: var(--text-2);
 		pointer-events: none;
 	}
+	/*
+	  `writing-mode` rather than a rotate: rotating about the left edge put the
+	  glyphs in a strip the figure then clipped, and the fix for that is guessing
+	  an offset that depends on the string's length. Vertical text occupies the
+	  box it is given.
+	*/
 	.ylab {
-		left: 2px;
+		left: 0;
 		top: 50%;
-		transform: translateY(-50%) rotate(-90deg);
-		transform-origin: left center;
+		transform: translateY(-50%) rotate(180deg);
+		writing-mode: vertical-rl;
 		white-space: nowrap;
 	}
 	.xlab {
@@ -548,8 +683,8 @@
 		margin-top: 0.55rem;
 	}
 	.reader {
-		margin: 0.8rem 0;
-		padding: 0.6rem 0.7rem;
+		margin: 0;
+		padding: 0.5rem 0.6rem;
 		border: 1px solid color-mix(in srgb, var(--text-3) 30%, transparent);
 		border-radius: 4px;
 	}
@@ -557,8 +692,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.5rem;
-		font-size: 0.8rem;
+		gap: 0.35rem 0.5rem;
+		font-size: 0.75rem;
 		margin-bottom: 0.4rem;
 	}
 	.tag {
@@ -590,10 +725,8 @@
 		color: var(--text-3);
 	}
 	.passage {
-		font-size: 0.86rem;
-		line-height: 1.85;
-		max-height: 26rem;
-		overflow-y: auto;
+		font-size: 0.82rem;
+		line-height: 1.9;
 	}
 	.sent {
 		position: relative;

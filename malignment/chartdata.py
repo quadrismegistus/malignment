@@ -244,6 +244,12 @@ def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
     for k, sc in (detail or {}).get("scales", {}).items():
         assert len(sc["domain"]) == 2 and sc["domain"][0] < sc["domain"][1], \
             "detail scale %r domain must be [lo, hi], got %s" % (k, sc["domain"])
+        #: A DIVERGING SCALE'S MIDPOINT MUST BE INSIDE ITS DOMAIN. Outside it,
+        #: every value falls on one side of the divergence and the scale paints a
+        #: single ramp while still calling itself diverging.
+        if "mid" in sc:
+            assert sc["domain"][0] < sc["mid"] < sc["domain"][1], \
+                "detail scale %r has mid %r outside domain %s" % (k, sc["mid"], sc["domain"])
         assert sc.get("note"), \
             "detail scale %r has no note; a clamped scale that does not say so " \
             "understates its own tail silently" % k

@@ -146,9 +146,21 @@ def fig_passage_map_data():
         #: paints every ordinary word the same pale colour and hands the whole
         #: range to a handful of tokens. 16 bits is just under the p99.
         detail={"url": "/passage",
-                "scales": {"bits": {"domain": [0, 16],
-                                    "note": "bits per word, clamped at 16; median is 3.57, "
-                                            "p99 18.43, max 158.36 over 3,040,970 words"},
+                #: DIVERGING, CENTRED ON THE MEDIAN. `mid` is the median over the
+                #: 3,031,498 non-partial words, so the tint reads "more or less
+                #: surprising than a typical word HERE" and passages stay
+                #: comparable with each other.
+                #:
+                #: One bit was the other candidate and it is not the floor: the
+                #: minimum is 0.00, 0.14% of words are exactly 0 and 19.5% fall
+                #: below one bit, which sits near the 21st percentile. Centring
+                #: there would put four words in five on the high side and paint
+                #: most of every passage one colour.
+                "scales": {"bits": {"domain": [0, 16], "mid": 3.44,
+                                    "note": "bits per word, diverging about the median 3.44 "
+                                            "and clamped at 16. Over 3,031,498 non-partial "
+                                            "words: min 0.00, p25 1.38, p75 6.60, p99 17.90, "
+                                            "max 158.36"},
                            #: NOT clamped: 0.794 is the observed maximum and 0
                            #: the minimum, so the domain contains every step.
                            #: The first version of this note said "155 sit above
