@@ -191,7 +191,7 @@ def parcoords(*, title, axes, groups, lines, subtitle=None,
 
 
 def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
-              detail=None, notes=None):
+              detail=None, notes=None, n_total=None):
     """A four-quadrant scatter whose points are addressable, plus its occupancy table.
 
         x, y     {key, label, note, domain: [lo, hi]}
@@ -217,6 +217,12 @@ def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
     it -- the same reason `stat_label` lives in the slopes artifact.
     """
     n = len(points["ids"])
+    #: WHAT WAS DRAWN AND WHAT WAS COUNTED ARE DIFFERENT NUMBERS when a producer
+    #: samples, and the panel has to be able to say both. A figure that prints
+    #: only the drawn count while its table is over everything is a windowed
+    #: picture beside an unwindowed statistic -- no error anywhere in it.
+    assert n_total is None or n_total >= n, \
+        "n_total %r is smaller than the %d points drawn" % (n_total, n)
     for k in ("x", "y", "cat", "model"):
         assert len(points[k]) == n, \
             "points.%s has %d entries against %d ids" % (k, len(points[k]), n)
@@ -271,4 +277,5 @@ def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
     return {"chart": "quadrants", "title": title, "subtitle": subtitle,
             "x": x, "y": y, "cats": cats, "models": models, "points": points,
             "cells": cells, "table": table, "detail": detail or {},
+            "n_total": n_total if n_total is not None else n,
             "notes": notes or []}

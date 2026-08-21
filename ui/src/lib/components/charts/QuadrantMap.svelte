@@ -28,13 +28,14 @@
 		cats: { key: string; label: string; colour: string; kind: string; n: number }[];
 		models: string[];
 		points: { ids: string[]; x: number[]; y: number[]; cat: number[]; model: number[] };
-		cells: { key: string; label: string; pooled: number }[];
+		cells: { key: string; label: string; pooled: number; surp: number; drift: number }[];
 		table: { cat: string; n: number; pct: Record<string, number>; enrich: Record<string, number> }[];
 		detail?: {
 			url?: string;
 			scales?: Record<string, { domain: [number, number]; mid?: number; note: string }>;
 		};
 		notes?: string[];
+		n_total?: number;
 	};
 	let { art }: { art: Art } = $props();
 
@@ -59,19 +60,14 @@
 		rows.filter((r) => !hideCat.includes(r.cat) && (!model || r.model === model))
 	);
 
-	//: One series per category, which is how ScatterChart colours points and how
-	//: its tooltip knows what it is over. Empty series are dropped rather than
-	//: passed: a series with no data still claims a legend slot downstream.
-	const series = $derived(
-		art.cats
-			.map((c) => ({
-				key: c.key,
-				label: c.label,
-				color: c.colour,
-				data: visible.filter((r) => r.cat === c.key)
-			}))
-			.filter((s) => s.data.length)
-	);
+	//: ONE SERIES, COLOURED PER POINT. A series per category is the obvious shape
+	//: and it silently re-blocks the draw order: the producer interleaves the
+	//: categories precisely so no colour paints over another, and grouping them
+	//: back into nine arrays throws that away and paints them in blocks again. So
+	//: the categories become a colour SCALE over one array, and the array stays in
+	//: the order the producer emitted.
+	const cDomain = $derived(art.cats.map((c) => c.key));
+	const cRange = $derived(art.cats.map((c) => c.colour));
 
 	const nByCat = $derived.by(() => {
 		const m = new Map<string, number>();
@@ -212,9 +208,23 @@
 	</figcaption>
 
 	<div class="controls">
-		<span class="count"
-			><strong>{visible.length.toLocaleString()}</strong> of {rows.length.toLocaleString()} passages</span
-		>
+		<!--
+		  THREE NUMBERS, BECAUSE THERE ARE THREE POPULATIONS: what the filters
+		  leave, what the producer drew, and what the table counts. Printing only
+		  the first two would let a reader take the count of ink for the count of
+		  passages, which is exactly the mismatch nothing in the figure would flag.
+		-->
+		<span class="count">
+			<strong>{visible.length.toLocaleString()}</strong>
+			{#if visible.length !== rows.length}of {rows.length.toLocaleString()} drawn{/if}
+			{#if (art.n_total ?? 0) > rows.length}
+				<span class="muted"
+					>· {rows.length.toLocaleString()} drawn of {(art.n_total ?? 0).toLocaleString()} passages</span
+				>
+			{:else}
+				passages
+			{/if}
+		</span>
 		<label>
 			model
 			<select bind:value={model}>
@@ -287,14 +297,16 @@
 			y="y"
 			xDomain={art.x.domain}
 			yDomain={art.y.domain}
-			{series}
+			data={visible}
+			c="cat"
+			{cDomain}
+			{cRange}
 			padding={{ left: 52, bottom: 44, top: 12, right: 14 }}
 			//: `stroke: 'none'` FOR THE SAME REASON THE TICK TEXT NEEDED IT. Canvas
 			//: Points draw a stroke as well as a fill, and against this background the
 			//: default put a light ring on every dot -- at r=1.4 the ring was most of
 			//: the mark, so 14,414 points read as 14,414 little doughnuts. Smaller and
 			//: translucent now, so the dense middle shows as density, not as a mass.
-			points={{ r: 1.1, stroke: 'none', opacity: 0.55 }}
 			brush
 			props={{
 				//: NO `label` ON EITHER AXIS. LayerChart's axis label lands in the
@@ -310,6 +322,11 @@
 				//: styling default. `stroke: none` is the half that matters.
 				xAxis: { grid: false, tickLabelProps: { fill: '#8b94a3', stroke: 'none' } },
 				yAxis: { grid: false, tickLabelProps: { fill: '#8b94a3', stroke: 'none' } },
+				//: NESTED, NOT THE TOP-LEVEL `points` PROP. That one is the series
+				//: path's: switching to `data` plus a colour scale silently dropped it
+				//: and every dot came back full size and opaque, with nothing in the
+				//: code or console to say the prop was no longer being read.
+				points: { r: 0.9, stroke: 'none', opacity: 0.38 },
 				grid: { x: false, y: false },
 				rule: { x: 0, y: 0, class: 'qrule' }
 			}}
@@ -320,8 +337,24 @@
 		  ones, and inventing names for the other two would put two readings on the
 		  panel that nothing in the repo supports.
 		-->
-		<span class="cell tl">{art.cells.find((c) => c.key === '(-surp +drift)')?.label}</span>
-		<span class="cell br">{art.cells.find((c) => c.key === '(+surp -drift)')?.label}</span>
+		<!--
+		  PLACED FROM EACH CELL'S OWN SIGNS. The axes were swapped once already --
+		  surprisal used to be x -- and a corner written as "top left" survives
+		  that swap silently, putting one reading where the other belongs while
+		  every number on the panel stays right. The producer declares `surp` and
+		  `drift` per cell; which axis carries which decides the corner here.
+		-->
+		{#each art.cells.filter((c) => c.label) as c (c.key)}
+			{@const sx = art.x.key.includes('drift') ? c.drift : c.surp}
+			{@const sy = art.y.key.includes('drift') ? c.drift : c.surp}
+			<span
+				class="cell"
+				style:left={sx < 0 ? '54px' : 'auto'}
+				style:right={sx > 0 ? '20px' : 'auto'}
+				style:top={sy > 0 ? '14px' : 'auto'}
+				style:bottom={sy < 0 ? '52px' : 'auto'}>{c.label}</span
+			>
+		{/each}
 		{#if hovered && ptr}
 			<!--
 			  CLAMPED, NOT FLIPPED. Flipping past a fraction of the width works only
@@ -561,22 +594,33 @@
 	  flatter than it is -- which is a claim about the very correlation the figure
 	  exists to argue over.
 	*/
+	/*
+	  THE SQUARE IS SIZED BY THE WINDOW AND THE SIDEBAR TAKES THE REST. `auto 1fr`
+	  rather than a fixed sidebar width: the plot column is sized by its own
+	  content, which `aspect-ratio: 1` ties to the height, so on a tall window the
+	  panel grows and the reader keeps whatever is left instead of being pinned at
+	  320px while the plot stays small.
+
+	  `min(78vh, 58vw)` is the height, and the `58vw` half is what stops a short
+	  wide window from producing a square wider than the space beside it.
+	*/
 	.stage {
 		display: grid;
-		grid-template-columns: minmax(320px, 1fr) 320px;
+		grid-template-columns: auto minmax(280px, 1fr);
 		gap: 1rem;
-		align-items: start;
+		align-items: stretch;
 	}
 	.plot {
 		position: relative;
+		height: min(78vh, 58vw);
 		aspect-ratio: 1;
-		max-height: min(72vh, 660px);
 		cursor: pointer;
 	}
 	.side {
-		max-height: min(72vh, 660px);
+		max-height: min(78vh, 58vw);
 		overflow-y: auto;
 		font-size: 0.8rem;
+		min-width: 0;
 	}
 	.hint {
 		margin: 0;
@@ -636,14 +680,6 @@
 		color: var(--text-3);
 		opacity: 0.75;
 		pointer-events: none;
-	}
-	.tl {
-		top: 14px;
-		left: 54px;
-	}
-	.br {
-		bottom: 52px;
-		right: 20px;
 	}
 	/* axis titles in HTML: see the note on `props.xAxis` for why not LayerChart's */
 	.ylab,

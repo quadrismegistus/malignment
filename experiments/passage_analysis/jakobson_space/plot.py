@@ -105,39 +105,110 @@ def fig_passage_map_data():
 
     #: ── THE DOMAIN IS THE DATA, ROUNDED OUT ─────────────────────────────────
     #: `z_drift` reaches -8.38 against a top of +4.26, so a symmetric axis would
-    #: spend half its height on an empty lower tail. Asymmetric and declared.
-    xs = [r["z_surprisal"] for r in rows]
-    ys = [r["z_drift"] for r in rows]
+    #: spend half its extent on an empty tail. Asymmetric and declared.
     import math
     dom = lambda v: [math.floor(min(v) * 2) / 2, math.ceil(max(v) * 2) / 2]
+    xs = [r["z_drift"] for r in rows]
+    ys = [r["z_surprisal"] for r in rows]
 
     cat_keys = sorted(CATS, key=lambda c: (CATS[c][1] != "ai", -n_by[c]))
     models = sorted({r["model"] for r in rows})
     ci = {c: i for i, c in enumerate(cat_keys)}
     mi = {m: i for i, m in enumerate(models)}
 
+    #: ── WHAT IS DRAWN IS A CAPPED SAMPLE; WHAT IS COUNTED IS EVERYTHING ──────
+    #:
+    #: The 14,414 are not evenly spread over the 71 models. Eleven API endpoints
+    #: carry 514 to 600 passages each and the six human corpora 476 to 500, while
+    #: the 54 open checkpoints average 91 and go as low as 2 -- so at full
+    #: population the plane is three fifths API and human, and the arms the
+    #: figure is about are the thin ones.
+    #:
+    #: A per-model cap of 150 is where that stops costing anything. It draws
+    #: 7,403 of 14,414 and **loses 78 open-model passages of 4,931**: API falls
+    #: 6,508 to 1,650 and human 2,975 to 900, while base keeps 2,184 of 2,195 and
+    #: aligned 2,669 of 2,736. A smaller cap starts eating the open models (452
+    #: lost at 120, 934 at 100) and a larger one leaves the imbalance.
+    #:
+    #: **THE TABLE BELOW IS OVER ALL 14,414 AND SAYS SO.** Windowing the view is
+    #: a drawing decision; windowing the statistic would be a different study.
+    #: The two populations are named on the panel so a reader cannot take the
+    #: count of ink for the count of passages.
+    CAP = 150
+    SEED = 20260821
+    from random import Random
+    #: KEYED BY (category, model), NOT BY MODEL. All six human corpora share one
+    #: `model` value, so a cap on `model` alone capped the six of them TOGETHER at
+    #: 150 rather than at 150 each -- 750 passages, and the panel would have shown
+    #: one twentieth of the human anchor while the legend counted all of it. The
+    #: booked total is what caught it; nothing about 6,653 looks wrong.
+    by_model = {}
+    for r in rows:
+        by_model.setdefault((r["category"], r["model"]), []).append(r)
+    drawn = []
+    for m in sorted(by_model):
+        sub = sorted(by_model[m], key=lambda r: r["id"])
+        #: Seeded and taken from an ID-SORTED list, so the sample is a function of
+        #: the data and not of the order ClickHouse happened to return. A store
+        #: read without ORDER BY is not stable between runs.
+        drawn.extend(sub if len(sub) <= CAP else Random(SEED).sample(sub, CAP))
+    #: ── DRAW ORDER IS ROUND-ROBIN OVER THE CATEGORIES ───────────────────────
+    #:
+    #: Sorted by id, the categories arrive in blocks and the last one painted
+    #: sits on top of the others everywhere they overlap -- which on a 7,403-point
+    #: cloud is most of it. Capping made this worse rather than better: `base`
+    #: went from 15% of 14,414 to 29% of what is drawn, so the brightest colour
+    #: is now also one of the most numerous, and the human corpora underneath it
+    #: were invisible.
+    #:
+    #: Round-robin rather than a shuffle, because the order must be identical on
+    #: every run: the artifact is committed and a re-render has to be comparable
+    #: with the one before it.
+    by_cat = {}
+    for r in sorted(drawn, key=lambda r: r["id"]):
+        by_cat.setdefault(r["category"], []).append(r)
+    queues = [by_cat[c] for c in cat_keys if c in by_cat]
+    drawn = []
+    for k in range(max(len(q) for q in queues)):
+        for q in queues:
+            if k < len(q):
+                drawn.append(q[k])
+    assert len(drawn) == 7403, "the cap-150 sample moved: expected 7,403, got %d" % len(drawn)
+    lost_open = sum(len(v) - CAP for (cat, _), v in by_model.items()
+                    if len(v) > CAP and cat in ("base", "aligned"))
+    assert lost_open == 78, "open-model passages dropped by the cap moved: %d" % lost_open
+
     art = quadrants(
         title="Every passage on the surprisal and drift plane",
-        subtitle=("14,414 passages, one point each, z-scored on both axes. The quadrant "
+        subtitle=("14,414 passages, z-scored on both axes. The quadrant "
                   "verdict was a verdict on ONE GRAIN: over 70 entity medians the two axes "
                   "correlate at +0.749 and the plane is a diagonal; over these passages it "
                   "is +%.3f and all four cells are occupied. Collapsing a model's passages "
                   "to one point removes the within-model scatter, and that scatter is where "
-                  "the axes are close to independent. Click a point to read its passage."
-                  % r_pooled),
-        x={"key": "z_surprisal", "label": "surprisal (z)", "domain": dom(xs),
-           "note": "deepseek bits per token, at a fixed token prefix"},
-        y={"key": "z_drift", "label": "drift (z)", "domain": dom(ys),
+                  "the axes are close to independent. DRAWN: %s of them, capped at %d per "
+                  "model so eleven API endpoints at ~600 passages each do not bury 54 open "
+                  "checkpoints averaging 91. The table below counts all 14,414."
+                  % (r_pooled, format(len(drawn), ","), CAP)),
+        x={"key": "z_drift", "label": "drift (z)", "domain": dom(xs),
            "note": "mean sentence-to-sentence step in bge space"},
+        y={"key": "z_surprisal", "label": "surprisal (z)", "domain": dom(ys),
+           "note": "deepseek bits per token, at a fixed token prefix"},
         cats=[{"key": c, "label": c.replace("_", " "), "colour": CATS[c][0],
                "kind": CATS[c][1], "n": n_by[c]} for c in cat_keys],
         models=models,
-        points={"ids": [r["id"] for r in rows],
-                "x": [round(r["z_surprisal"], 3) for r in rows],
-                "y": [round(r["z_drift"], 3) for r in rows],
-                "cat": [ci[r["category"]] for r in rows],
-                "model": [mi[r["model"]] for r in rows]},
-        cells=[{"key": q, "label": READING.get(q, ""), "pooled": round(pooled[q], 4)}
+        points={"ids": [r["id"] for r in drawn],
+                "x": [round(r["z_drift"], 3) for r in drawn],
+                "y": [round(r["z_surprisal"], 3) for r in drawn],
+                "cat": [ci[r["category"]] for r in drawn],
+                "model": [mi[r["model"]] for r in drawn]},
+        #: THE CORNER EACH CELL OCCUPIES IS DERIVED FROM ITS OWN NAME, not from
+        #: which axis is which. The axes were swapped once already -- surprisal
+        #: was x -- and a corner assignment written as "top left" would have
+        #: survived that swap silently, putting `metaphoric` where `metonymic`
+        #: belongs while every number on the panel stayed right.
+        cells=[{"key": q, "label": READING.get(q, ""), "pooled": round(pooled[q], 4),
+                "surp": 1 if "+surp" in q else -1,
+                "drift": 1 if "+drift" in q else -1}
                for q in CELLS],
         table=[{"cat": c, "n": n_by[c], "pct": pct[c], "enrich": enrich[c]} for c in cat_keys],
         #: THE DETAIL SCALES ARE THE PRODUCER'S, NOT THE COMPONENT'S. Both are
@@ -145,6 +216,7 @@ def fig_passage_map_data():
         #: p99 of 18.43 against a MAX OF 158.36, so a scale reaching the maximum
         #: paints every ordinary word the same pale colour and hands the whole
         #: range to a handful of tokens. 16 bits is just under the p99.
+        n_total=len(rows),
         detail={"url": "/passage",
                 #: DIVERGING, CENTRED ON THE MEDIAN. `mid` is the median over the
                 #: 3,031,498 non-partial words, so the tint reads "more or less
