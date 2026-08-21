@@ -347,6 +347,11 @@ def fig_slopes_data():
     art = slopes(
         title="Both positions move together, and where they do not the lines fan",
         subtitle="Parallel lines are a null; the asymmetry is the fanning.",
+        #: What `did` and `note` MEAN. The component draws ANY slopes
+        #: artifact, so it cannot know -- and a label it guessed would sit
+        #: over the next producer's field and be wrong without being broken.
+        stat_label="indiv − inst",
+        note_label="absolute range across all four points",
         x_order=["base", "aligned"],
         series=[{"key": "individual", "colour": INDIV},
                 {"key": "institution", "colour": INST}],

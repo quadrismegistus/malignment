@@ -2,10 +2,11 @@
   Small multiples of two-point slopegraphs, drawn from a producer's data file.
 
   RH, 2026-08-21: python produces the minimal data LayerChart needs, LayerChart
-  draws. So this component owns NO arithmetic. Every number it renders -- the
-  centred y, the panel order, the label, the boundary mark -- was computed and
-  asserted in `institutional/plot.py:_slopes_frame` and read off
-  `<figure>.data.json`. If a value looks wrong the producer is where it is wrong.
+  draws. So this component owns NO arithmetic and knows NOTHING about any
+  particular figure. Every number and every label it renders -- the centred y,
+  the panel order, the series names and colours, the statistic and what it is
+  called -- arrives in the `slopes` artifact. It draws any such artifact from any
+  experiment; if a value looks wrong, its producer is where it is wrong.
 
   ## WHY A CSS GRID RATHER THAN A FACET COMPONENT
 
@@ -32,6 +33,10 @@
 	type Art = {
 		title: string;
 		subtitle?: string;
+		//: What `panels[].did` and `panels[].note` MEAN. Supplied by the producer
+		//: because this component draws any `slopes` artifact and cannot know.
+		stat_label?: string;
+		note_label?: string;
 		x_order: string[];
 		y_domain: [number, number];
 		series: { key: string; colour: string }[];
@@ -88,7 +93,7 @@
 			<div class="panel">
 				<div class="head">
 					<span class="name">{p.label}</span>
-					<span class="note" title="absolute range across all four points">{p.note}</span>
+					<span class="note" title={art.note_label ?? ''}>{p.note}</span>
 				</div>
 				<div class="chart">
 					<!--
@@ -111,14 +116,14 @@
 								{/each}
 								<Tooltip.Separator />
 								<!--
-								  The panel's own asymmetry, which is the number the grid is
-								  ordered by and the one a reader is actually hunting for. It
-								  is not derivable from the two levels on screen: it is
-								  individual minus institution of the CHANGES, paired inside
-								  24 scenarios.
+								  The panel's own statistic -- the number the grid is ordered
+								  by, and typically NOT derivable from the levels on screen.
+								  The producer names it via `stat_label`, because this
+								  component draws any slopes artifact and cannot know what
+								  the field means.
 								-->
 								<Tooltip.Item
-									label="indiv − inst"
+									label={art.stat_label ?? 'diff'}
 									value={`${p.did >= 0 ? '+' : ''}${p.did.toFixed(3)} ${p.mark}`}
 								/>
 							</Tooltip.List>

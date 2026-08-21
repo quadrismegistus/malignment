@@ -30,7 +30,8 @@ import json
 import os
 
 
-def slopes(*, title, panels, rows, series, x_order, y_domain, subtitle=None):
+def slopes(*, title, panels, rows, series, x_order, y_domain, subtitle=None,
+           stat_label="diff", note_label=""):
     """A grid of two-point slopegraphs, one panel per key.
 
         panels    [{key, label, note, did, mark}]   order is drawing order
@@ -43,6 +44,12 @@ def slopes(*, title, panels, rows, series, x_order, y_domain, subtitle=None):
     is centred on its own midpoint, so `y` is centred and `level` is the value on
     the original scale -- what a tooltip must show, because a centred number read
     as a level is simply wrong.
+
+    `stat_label` names what `panels[].did` MEANS and `note_label` names what
+    `panels[].note` means. They are here rather than in the component because the
+    component draws any `slopes` artifact from any experiment: a hardcoded
+    "indiv - inst" would sit over whatever the next producer put in that field
+    and be WRONG WITHOUT BEING BROKEN, which is the expensive direction.
     """
     keys = [p["key"] for p in panels]
     assert len(keys) == len(set(keys)), "duplicate panel keys"
@@ -72,6 +79,7 @@ def slopes(*, title, panels, rows, series, x_order, y_domain, subtitle=None):
         len(out), y_domain, out[:2])
 
     return {"chart": "slopes", "title": title, "subtitle": subtitle,
+            "stat_label": stat_label, "note_label": note_label,
             "x_order": list(x_order), "y_domain": list(y_domain),
             "series": series, "panels": panels, "rows": rows}
 
