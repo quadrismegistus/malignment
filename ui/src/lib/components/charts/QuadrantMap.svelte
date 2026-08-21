@@ -41,6 +41,12 @@
 
 	const BASE = import.meta.env.DEV ? '/api' : '';
 
+	//: ONE PADDING CONSTANT, read by the chart and by the hover marker below.
+	//: The marker projects a data point to pixels itself, so if these were two
+	//: literals the ring would sit off its own point the moment either moved --
+	//: and it would still look like a ring on a point, just the wrong one.
+	const PAD = { left: 52, bottom: 44, top: 12, right: 14 };
+
 	//: Expanded ONCE. The artifact ships columns because field names repeated
 	//: 14,414 times are four fifths of the file; LayerChart wants records.
 	const rows = $derived.by(() => {
@@ -297,11 +303,19 @@
 			y="y"
 			xDomain={art.x.domain}
 			yDomain={art.y.domain}
+			//: NEAREST POINT IN TWO DIMENSIONS. The default mode bisects on x alone,
+			//: so hovering lit up every point sharing the pointer's x -- a vertical
+			//: line of highlights under a tooltip naming ONE of them, with no way to
+			//: tell which would open on click. On a scatter that is not a cosmetic
+			//: default: the click opens whatever the tooltip resolved to, which could
+			//: be a passage the pointer was nowhere near in y.
+			tooltipContext={{ mode: 'quadtree' }}
+			highlight={false}
 			data={visible}
 			c="cat"
 			{cDomain}
 			{cRange}
-			padding={{ left: 52, bottom: 44, top: 12, right: 14 }}
+			padding={PAD}
 			//: `stroke: 'none'` FOR THE SAME REASON THE TICK TEXT NEEDED IT. Canvas
 			//: Points draw a stroke as well as a fill, and against this background the
 			//: default put a light ring on every dot -- at r=1.4 the ring was most of
@@ -326,7 +340,14 @@
 				//: path's: switching to `data` plus a colour scale silently dropped it
 				//: and every dot came back full size and opaque, with nothing in the
 				//: code or console to say the prop was no longer being read.
-				points: { r: 0.9, stroke: 'none', opacity: 0.38 },
+				points: { r: 1.2, stroke: 'none', opacity: 0.45 },
+				//: OFF. It lit four points in a near-vertical line under a tooltip
+				//: naming one of them, and constraining it to `points` with `axis:
+				//: 'none'` did not reduce that. The CLICK was never wrong -- five hovers
+				//: at one x and five different y resolve five distinct passages, so
+				//: quadtree mode is doing its job -- but an affordance pointing at four
+				//: things when one is selectable is its own defect. Replaced by a single
+				//: ring drawn below, on the point the click will actually open.
 				grid: { x: false, y: false },
 				rule: { x: 0, y: 0, class: 'qrule' }
 			}}
@@ -355,6 +376,11 @@
 				style:bottom={sy < 0 ? '52px' : 'auto'}>{c.label}</span
 			>
 		{/each}
+		{#if hovered && ptr}
+			{@const px = PAD.left + ((hovered.x - art.x.domain[0]) / (art.x.domain[1] - art.x.domain[0])) * (ptr.w - PAD.left - PAD.right)}
+			{@const py = PAD.top + (1 - (hovered.y - art.y.domain[0]) / (art.y.domain[1] - art.y.domain[0])) * (ptr.w - PAD.top - PAD.bottom)}
+			<span class="ring" style:left="{px}px" style:top="{py}px"></span>
+		{/if}
 		{#if hovered && ptr}
 			<!--
 			  CLAMPED, NOT FLIPPED. Flipping past a fraction of the width works only
@@ -641,6 +667,17 @@
 		stroke: var(--text-3);
 		stroke-opacity: 0.55;
 		stroke-dasharray: 3 3;
+	}
+	/* the hover marker: one ring, on the point the click opens */
+	.ring {
+		position: absolute;
+		width: 11px;
+		height: 11px;
+		margin: -5.5px 0 0 -5.5px;
+		border: 1.5px solid var(--text-1, #fff);
+		border-radius: 50%;
+		pointer-events: none;
+		z-index: 1;
 	}
 	.tip {
 		--tw: 240px;

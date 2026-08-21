@@ -106,10 +106,25 @@ def fig_passage_map_data():
     #: ── THE DOMAIN IS THE DATA, ROUNDED OUT ─────────────────────────────────
     #: `z_drift` reaches -8.38 against a top of +4.26, so a symmetric axis would
     #: spend half its extent on an empty tail. Asymmetric and declared.
-    import math
-    dom = lambda v: [math.floor(min(v) * 2) / 2, math.ceil(max(v) * 2) / 2]
-    xs = [r["z_drift"] for r in rows]
-    ys = [r["z_surprisal"] for r in rows]
+    #: ── THE PLANE IS WINDOWED AT +-4.5 AND THE COST IS COUNTED ──────────────
+    #:
+    #: `z_drift` reaches -8.38 against a top of +4.26, and RH read the far tail:
+    #: those are models repeating themselves, so the axis was spending a third of
+    #: its extent on degenerate output. **13 passages of 14,414 fall outside
+    #: +-4.5 -- 11 below on drift, 2 above on surprisal -- and every one of the 11
+    #: is an `aligned` checkpoint** (Qwen3-8B, granite-3.0-instruct, beaver,
+    #: CT-LLM-SFT-DPO, RedPajama-Chat).
+    #:
+    #: The window is applied to what is DRAWN. The occupancy table below is
+    #: unchanged and still counts all 14,414, so the panel carries a windowed
+    #: picture beside an unwindowed statistic -- which is only honest because it
+    #: is said out loud, here and on the panel.
+    WINDOW = 4.5
+    inside = [r for r in rows
+              if abs(r["z_drift"]) <= WINDOW and abs(r["z_surprisal"]) <= WINDOW]
+    n_outside = len(rows) - len(inside)
+    assert n_outside == 13, "the +-4.5 window now excludes %d passages, not 13" % n_outside
+    dom = [-WINDOW, WINDOW]
 
     cat_keys = sorted(CATS, key=lambda c: (CATS[c][1] != "ai", -n_by[c]))
     models = sorted({r["model"] for r in rows})
@@ -143,7 +158,7 @@ def fig_passage_map_data():
     #: one twentieth of the human anchor while the legend counted all of it. The
     #: booked total is what caught it; nothing about 6,653 looks wrong.
     by_model = {}
-    for r in rows:
+    for r in inside:
         by_model.setdefault((r["category"], r["model"]), []).append(r)
     drawn = []
     for m in sorted(by_model):
@@ -173,10 +188,14 @@ def fig_passage_map_data():
         for q in queues:
             if k < len(q):
                 drawn.append(q[k])
-    assert len(drawn) == 7403, "the cap-150 sample moved: expected 7,403, got %d" % len(drawn)
+    assert len(drawn) == 7396, "the cap-150 sample moved: expected 7,396, got %d" % len(drawn)
     lost_open = sum(len(v) - CAP for (cat, _), v in by_model.items()
                     if len(v) > CAP and cat in ("base", "aligned"))
-    assert lost_open == 78, "open-model passages dropped by the cap moved: %d" % lost_open
+    #: 74, not the 78 measured before the window: four of the passages a capped
+    #: open model would have lost were among the 13 the window already removed.
+    #: Two windows compose, and the cost of the second is not independent of the
+    #: first -- which is why this is a booked number and not a subtraction.
+    assert lost_open == 74, "open-model passages dropped by the cap moved: %d" % lost_open
 
     art = quadrants(
         title="Every passage on the surprisal and drift plane",
@@ -189,9 +208,9 @@ def fig_passage_map_data():
                   "model so eleven API endpoints at ~600 passages each do not bury 54 open "
                   "checkpoints averaging 91. The table below counts all 14,414."
                   % (r_pooled, format(len(drawn), ","), CAP)),
-        x={"key": "z_drift", "label": "drift (z)", "domain": dom(xs),
+        x={"key": "z_drift", "label": "drift (z)", "domain": dom,
            "note": "mean sentence-to-sentence step in bge space"},
-        y={"key": "z_surprisal", "label": "surprisal (z)", "domain": dom(ys),
+        y={"key": "z_surprisal", "label": "surprisal (z)", "domain": dom,
            "note": "deepseek bits per token, at a fixed token prefix"},
         cats=[{"key": c, "label": c.replace("_", " "), "colour": CATS[c][0],
                "kind": CATS[c][1], "n": n_by[c]} for c in cat_keys],
