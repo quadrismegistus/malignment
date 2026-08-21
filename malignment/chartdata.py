@@ -111,7 +111,8 @@ MARKS = ("", "up", "down", "flat")
 
 
 def parcoords(*, title, axes, groups, lines, subtitle=None,
-              value_label="value", mark_label="", mark_legend=None, meta_order=None):
+              value_label="value", mark_label="", mark_legend=None, meta_order=None,
+              table_meta=None):
     """Parallel coordinates: one line per case, one axis per measured dimension.
 
         axes    [{key, label, domain: [lo, hi], note}]   left-to-right order
@@ -172,7 +173,18 @@ def parcoords(*, title, axes, groups, lines, subtitle=None,
                 "line %r axis %r: %r outside domain %s (the renderer would CLIP it)" % (
                     l["key"], akeys[j], y, [lo, hi])
 
+    #: EVERY DECLARED COLUMN MUST EXIST ON EVERY LINE. A key that is absent or
+    #: misspelled renders as a column of blanks -- a header naming a field the
+    #: table does not have, which reads as "these cells have no value" rather
+    #: than as a typo. Checked against all lines, not the first: a field present
+    #: on some rows and not others is the same defect wearing a disguise.
+    for k in table_meta or []:
+        bad = [l["key"] for l in lines if k not in (l.get("meta") or {})]
+        assert not bad, "table_meta %r missing from %d line(s), first: %s" % (
+            k, len(bad), bad[:3])
+
     return {"chart": "parcoords", "title": title, "subtitle": subtitle,
             "value_label": value_label, "mark_label": mark_label,
             "mark_legend": mark_legend or {}, "meta_order": list(meta_order or []),
+            "table_meta": list(table_meta or []),
             "axes": axes, "groups": groups, "lines": lines}

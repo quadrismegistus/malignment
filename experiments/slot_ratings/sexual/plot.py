@@ -411,7 +411,14 @@ def fig_rating_space_data():
                   "of the eight matched sets those are different people." % len(core)),
         axes=axes, groups=groups, lines=lines,
         value_label="rating",
-        meta_order=["prompt", "word", "reading", "pair", "role", "referent", "zone", "net"])
+        meta_order=["prompt", "word", "reading", "pair", "role", "referent", "zone", "net"],
+        #: TABLE COLUMNS, and `reading` is deliberately not one: it is a sentence,
+        #: so it rides the word cell's title attribute instead of widening every
+        #: row. `net` is the word's movement count over the 33 lineages, which is
+        #: NOT what this figure draws -- it is here so a reader who has brushed a
+        #: region of the rating space can sort it and see whether that region
+        #: moves, without the panel asserting that it does.
+        table_meta=["prompt", "word", "role", "referent", "net"])
     write(art, FIGDIR, "fig_rating_space")
 
     dual = sum(1 for w, n in collections.Counter(r["word"] for r in core).items() if n > 1)

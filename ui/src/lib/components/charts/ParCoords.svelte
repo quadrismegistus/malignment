@@ -57,6 +57,9 @@
 		mark_label?: string;
 		mark_legend?: Record<string, string>;
 		meta_order?: string[];
+		//: Which meta keys become table columns. The producer names them because
+		//: it is the only side that knows which are short enough to be one.
+		table_meta?: string[];
 		axes: Axis[];
 		groups: Group[];
 		lines: Line[];
@@ -275,12 +278,60 @@
 
 	const fmt = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(1));
 
-	//: The selected cells, for the readout. Capped, and the cap is PRINTED --
-	//: a truncated list that does not say it is truncated reads as the whole
-	//: selection, which is the same defect as a windowed picture beside an
-	//: unwindowed count.
-	const LIST = 120;
-	const listed = $derived(art.lines.filter((_, i) => hit[i]).slice(0, LIST));
+	//: ── THE TABLE ───────────────────────────────────────────────────────────
+	//:
+	//: Columns are DERIVED FROM THE ARTIFACT: one per axis, plus whichever meta
+	//: fields the producer names in `table_meta`. Nothing about any particular
+	//: figure is hardcoded, so a second `parcoords` artifact gets its own columns
+	//: without touching this file. The producer chooses because it is the only
+	//: one that knows which of its meta fields are short enough to be a column --
+	//: `reading` is a sentence and belongs in a title attribute, not a cell.
+	type Col = { key: string; label: string; num: boolean; axis: number };
+	const cols = $derived<Col[]>([
+		...(art.table_meta ?? []).map((k) => ({ key: k, label: k, num: false, axis: -1 })),
+		...art.axes.map((a, i) => ({ key: a.key, label: a.label, num: true, axis: i }))
+	]);
+
+	let sortKey = $state<string>('');
+	let sortDesc = $state(false);
+	function sortBy(k: string) {
+		if (sortKey === k) sortDesc = !sortDesc;
+		else {
+			sortKey = k;
+			//: Numeric columns open DESCENDING. The question a reader brings to a
+			//: rating column is "which are the high ones", and opening ascending
+			//: puts 1,300 cells scoring 1 in front of them.
+			sortDesc = cols.find((c) => c.key === k)?.num ?? false;
+		}
+	}
+
+	const cellOf = (l: Line, c: Col) => (c.axis >= 0 ? l.values[c.axis] : (l.meta?.[c.key] ?? ''));
+
+	//: SORTED BEFORE IT IS CAPPED, so the cap keeps the top of the CURRENT sort
+	//: rather than the top of the producer's order. That makes the cap legible --
+	//: "the 300 highest on genitality" is a reading; "300 arbitrary rows of a
+	//: sorted view" is not -- and the row count printed above says which.
+	const CAP = 300;
+	const selected = $derived.by(() => {
+		const rows = art.lines.filter((_, i) => hit[i]);
+		if (!sortKey) return rows;
+		const c = cols.find((x) => x.key === sortKey);
+		if (!c) return rows;
+		const dir = sortDesc ? -1 : 1;
+		return [...rows].sort((a, b) => {
+			const x = cellOf(a, c);
+			const y = cellOf(b, c);
+			if (x === y) return a.key < b.key ? -1 : 1;
+			//: A null sorts to the END in either direction. It is not a low value,
+			//: and letting it ride the comparator would put "does not apply" at the
+			//: bottom of an ascending sort and at the top of a descending one --
+			//: two different claims about the same absence.
+			if (x === null || x === '') return 1;
+			if (y === null || y === '') return -1;
+			return (x < y ? -1 : 1) * dir;
+		});
+	});
+	const shown = $derived(selected.slice(0, CAP));
 
 	const clearAll = () => (brush = {});
 </script>
@@ -429,17 +480,62 @@
 	{/if}
 
 	{#if anyBrush && nSel > 0}
-		<div class="listing">
-			{#each listed as l (l.key)}
-				<span
-					class="chip"
-					style:border-color={colour.get(l.group)}
-					title={l.meta?.prompt ?? ''}>{l.label}</span
-				>
-			{/each}
-			{#if nSel > LIST}
-				<span class="more">+{(nSel - LIST).toLocaleString()} more not listed</span>
-			{/if}
+		<div class="tablewrap">
+			<p class="tcap">
+				{#if nSel > CAP}
+					showing <strong>{CAP}</strong> of {nSel.toLocaleString()} selected cells{sortKey
+						? `, by ${sortKey}${sortDesc ? ' descending' : ' ascending'}`
+						: ', in the producer\'s order'} — <em>sort a column to change which {CAP}</em>
+				{:else}
+					all <strong>{nSel.toLocaleString()}</strong> selected cells
+				{/if}
+			</p>
+			<div class="scroll">
+				<table>
+					<thead>
+						<tr>
+							{#each cols as c (c.key)}
+								<th
+									class:num={c.num}
+									class:on={sortKey === c.key}
+									aria-sort={sortKey === c.key
+										? sortDesc
+											? 'descending'
+											: 'ascending'
+										: 'none'}
+								>
+									<button onclick={() => sortBy(c.key)}>
+										{c.label}{#if sortKey === c.key}<span class="dir"
+												>{sortDesc ? '▾' : '▴'}</span
+											>{/if}
+									</button>
+								</th>
+							{/each}
+						</tr>
+					</thead>
+					<tbody>
+						{#each shown as l (l.key)}
+							<tr
+								onpointerenter={() => (hover = art.lines.indexOf(l))}
+								onpointerleave={() => (hover = null)}
+							>
+								{#each cols as c (c.key)}
+									{@const v = cellOf(l, c)}
+									<td class:num={c.num} title={c.key === 'word' ? (l.meta?.reading ?? '') : ''}>
+										{#if c.key === 'word'}
+											<i class="sw" style:background={colour.get(l.group)}></i>
+										{/if}<!--
+										  A `null` prints as an em dash and NOT as a blank. A blank
+										  cell in a numeric column reads as zero at a glance, and
+										  these nulls mean the dimension does not apply.
+										-->{v === null ? '—' : v}
+									</td>
+								{/each}
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	{/if}
 </figure>
@@ -529,6 +625,20 @@
 		fill: transparent;
 		cursor: ns-resize;
 	}
+	/*
+	  `tabindex` makes the axis keyboard-reachable, and the browser's default ring
+	  then fires on POINTER focus too -- so every click on an axis left a heavy
+	  blue capsule around it that read as a selection state the figure does not
+	  have. `:focus-visible` is the distinction: keyboard focus keeps an
+	  indicator, a click does not paint one.
+	*/
+	.grab:focus {
+		outline: none;
+	}
+	.grab:focus-visible {
+		outline: 1px solid var(--text-2);
+		outline-offset: 1px;
+	}
 	.bar {
 		display: flex;
 		flex-wrap: wrap;
@@ -583,24 +693,79 @@
 		color: var(--text-3);
 		font-weight: 500;
 	}
-	.listing {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem;
-		margin-top: 0.55rem;
-		max-height: 8.5rem;
-		overflow-y: auto;
+	.tablewrap {
+		margin-top: 0.6rem;
 	}
-	.chip {
-		font-size: 0.72rem;
-		padding: 0 0.3rem;
-		border: 1px solid;
-		border-radius: 3px;
-		color: var(--text-2);
-	}
-	.more {
-		font-size: 0.72rem;
+	.tcap {
+		margin: 0 0 0.3rem;
+		font-size: 0.75rem;
 		color: var(--text-3);
-		font-style: italic;
+	}
+	.tcap strong {
+		color: var(--text-1);
+	}
+	.scroll {
+		max-height: 20rem;
+		overflow: auto;
+	}
+	table {
+		border-collapse: collapse;
+		font-size: 0.75rem;
+		width: 100%;
+	}
+	thead th {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		background: var(--bg-1, #12131a);
+		text-align: left;
+		font-weight: 500;
+		color: var(--text-3);
+		border-bottom: 1px solid var(--text-3);
+		padding: 0;
+		white-space: nowrap;
+	}
+	thead th.on {
+		color: var(--text-1);
+	}
+	thead th button {
+		font: inherit;
+		color: inherit;
+		background: none;
+		border: 0;
+		padding: 0.25rem 0.45rem;
+		cursor: pointer;
+		width: 100%;
+		text-align: inherit;
+	}
+	th.num button {
+		text-align: right;
+	}
+	.dir {
+		margin-left: 0.15rem;
+	}
+	tbody td {
+		padding: 0.12rem 0.45rem;
+		color: var(--text-2);
+		border-bottom: 1px solid color-mix(in srgb, var(--text-3) 18%, transparent);
+		white-space: nowrap;
+		max-width: 22rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	td.num {
+		text-align: right;
+		font-variant-numeric: tabular-nums;
+	}
+	tbody tr:hover td {
+		background: color-mix(in srgb, var(--text-3) 12%, transparent);
+	}
+	.sw {
+		display: inline-block;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		margin-right: 0.35rem;
+		vertical-align: baseline;
 	}
 </style>
