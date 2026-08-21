@@ -360,8 +360,18 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
                 ck.repo, revision=ck.revision,
                 trust_remote_code=(mtype != "mpt"))
             _dt, _why = compute_dtype(ck.repo)
-            if _dt is not torch.float16:
-                say("  COMPUTE DTYPE %s (%s) -- not the float16 default" % (_dt, _why))
+            #: **ALWAYS SAY IT, INCLUDING THE DEFAULT.** This printed only when the
+            #: dtype was NOT float16, so a mechanism that silently degraded to
+            #: float16 -- which is exactly what it exists to prevent -- left no
+            #: trace at all. On 2026-08-21 that made a Falcon-H1-7B bf16
+            #: re-measurement unreadable: no line in the log, and the cell stamp
+            #: was a hardcoded literal, so nothing recorded which condition ran.
+            #: A guard whose failure mode is indistinguishable from its success
+            #: mode is not a guard.
+            say("  compute dtype %s (%s)" % (str(_dt).replace("torch.", ""), _why))
+            if "unreadable" in _why:
+                say("  WARNING: roster unreadable -- any declared dtype was NOT "
+                    "applied and this run is at the platform default")
             kw = {"dtype": _dt, "trust_remote_code": bool(has_remote)}
             if has_remote:
                 say("  config declares auto_map -> remote code ALLOWED")
@@ -572,10 +582,20 @@ class TWPRunner:
                 _vers[_key] = __import__(_mod).__version__
             except Exception:                                   # noqa: BLE001
                 _vers[_key] = ""
+        #: **`compute_dtype` WAS THE LITERAL STRING "float16", NOT A MEASUREMENT.**
+        #: Every cell in this corpus therefore says float16 whether or not it is
+        #: -- which made it impossible to tell, from a running Falcon-H1-7B
+        #: re-measurement on 2026-08-21, whether the bf16 declaration had taken
+        #: effect. An experiment whose CONDITION cannot be read off its own output
+        #: is not an experiment. Read it from the loaded parameters instead.
+        try:
+            _real_dt = str(next(ld.model.parameters()).dtype).replace("torch.", "")
+        except Exception:                                       # noqa: BLE001
+            _real_dt = ""
         stamp = {"theta": T.THETA, "rule_version": T.RULE_VERSION,
                  "dict_sha": T.dict_sha(), "bos_policy": pol,
                  "loader": loader_id, "device": dev,
-                 "revision": ck.revision or "", "compute_dtype": "float16",
+                 "revision": ck.revision or "", "compute_dtype": _real_dt,
                  "producer": PRODUCER, **_vers}
         #: **THE BODY MUST CARRY WHAT THE KEY CARRIES.** `ck.key(p, rules)` puts
         #: `rule_version`, `rules` and `prompt_cache` on the KEY; the ingest reads

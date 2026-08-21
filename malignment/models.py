@@ -95,6 +95,31 @@ def load_model(model_name, revision=None, cache_dir=None):
         (model, tokenizer)
     """
     kwargs = _platform_kwargs()
+    #: **THE ROSTER DECIDES THE DTYPE HERE TOO.** `_platform_kwargs` returns
+    #: float16 unconditionally on both mps and cuda and NO MODEL ID REACHES THAT
+    #: DECISION, so a model the roster marks bfloat16 got float16 through this
+    #: door. Falcon-H1-7B at float16 writes cells that pass every structural gate
+    #: and contain nothing -- 2,981 of 2,981 with residual.tail == 1.0 and zero
+    #: word rows, against 11 of 11 healthy at bfloat16 on the same box
+    #: (docket [6479]-[6513], 2026-08-21).
+    #:
+    #: The fleet loader `runners.load_for_twp` was repaired first and @dario
+    #: [6514] found this second route still open, with THREE producers entering
+    #: by it: `scripts/v4_identity_sweep.py` and the path_aggregation and
+    #: numeric_boundary calibrations. **A fix protects only the invocations that
+    #: remember it**, so both loaders now consult ONE mechanism rather than
+    #: agreeing by coincidence.
+    try:
+        from .runners import compute_dtype
+        _dt, _why = compute_dtype(model_name, default=kwargs["dtype"])
+        if _dt is not kwargs["dtype"]:
+            print("  compute dtype %s (%s)" % (str(_dt).replace("torch.", ""), _why))
+        kwargs = dict(kwargs, dtype=_dt)
+    except ImportError:
+        #: NOT silent. A dtype that quietly reverts to the platform default is
+        #: the failure this exists to end.
+        print("  WARNING: roster dtype unavailable -- platform default %s"
+              % kwargs["dtype"])
     tokenizer = _load_tokenizer(model_name, revision=revision, cache_dir=cache_dir)
     label = f"{model_name}@{revision}" if revision else model_name
     print(f"Loading {label}...")
