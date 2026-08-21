@@ -73,7 +73,7 @@ Three other contrasts are positive and none is substantial: `phi-4-reasoning` +0
 
 ## Fences
 
-- **NO HUMAN ANCHOR.** This is a claim about model output relative to other model output. "Aligned prose is smoother than base prose" is established; "smoother than human writing" is not askable here, which is what F16 was for and what has not been rebuilt.
+- **NO HUMAN ANCHOR IN THIS DOCUMENT, AND THE FENCE IS NOW DISCHARGED ELSEWHERE.** This is a claim about model output relative to other model output. "Aligned prose is smoother than base prose" is established; "smoother than human writing" is not askable *here*. The anchor was built 2026-08-21 and placed -- 3,000 passages, six corpora, on a per-TOKEN deepseek axis -- see `README.md`. **That answer does not transfer to the numbers in this file**: different scorer (deepseek tokens, not BLT bytes), different population (narrative-coded only), English only. Every BLT level below remains model-relative.
 - **Degeneracy filtering cannot reach incoherence.** The rules catch repetition, near-empty output and script mixing. They do not catch single-script non-repetitive incoherence, which the judges called broken in 71% of Chinese continuations that the rules clear at 99.5%.
 - **10.5% of the corpus has no sentence vector** -- the `mixed` script stratum that `--mixed-policy refuse` declined. Not missing at random: these are the breakdown passages, and f11_l2 loses 16% of itself.
 - **The within-fluency-grade p-values pool passages across models.**
