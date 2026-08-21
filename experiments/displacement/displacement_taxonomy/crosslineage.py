@@ -79,9 +79,27 @@ def tables(prompt_prefix):
     if prompt is None:
         raise SystemExit("no batched codings for a prompt starting %r" % prompt_prefix)
     ep, _ = roster.endpoints()
+    #: `merged=1` IS A PROVENANCE FILTER, NOT A QUALITY ONE -- the view's own
+    #: COMMENT says so. A cell has merged=1 where a topup exists and 0 where it
+    #: does not, so this silently drops any model never topped up on this prompt.
+    #: On 'He started stroking his' that is exactly one model,
+    #: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B (2,965 pass-1 cells, 0 topup), and
+    #: 145 -> 144 is that and nothing else (malign, 2026-08-21).
+    #:
+    #: It happens to land on the 50-endpoint population, but BY ACCIDENT of one
+    #: model never being topped up rather than by declaring anything. So the
+    #: exclusion is named in the output: otherwise the next reader takes 144 to
+    #: mean the roster and it means the roster minus whatever pass 2 missed.
+    all_models = {r["model"] for r in V.rows(
+        "SELECT DISTINCT model FROM twp_cells_v4_best "
+        "WHERE prompt={p:String}", p=prompt)}
     have = {r["model"] for r in V.rows(
         "SELECT DISTINCT model FROM twp_cells_v4_best "
         "WHERE prompt={p:String} AND merged=1", p=prompt)}
+    dropped = sorted(all_models - have)
+    if dropped:
+        print("merged=1 excludes %d of %d model(s) never topped up on this prompt: %s"
+              % (len(dropped), len(all_models), ", ".join(dropped)), file=sys.stderr)
     pairs = sorted((a.split("/")[-1], b, a) for b, a in ep.items()
                    if b in have and a in have)
     if not pairs:

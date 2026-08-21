@@ -67,6 +67,69 @@ has since moved.
 
 **The cheap thing that settles it, and is not wasted either way:** re-read one prompt at 36 and compare to its 29 reading. One agent. If a 10% roster increase leaves operations intact while a 61% increase replaced them, the instability is threshold-like and running now is safe. If 32 reshapes again, the instability is continuous, no roster is a safe stopping point, and the result has to be reported as roster-dependent whenever it is run.
 
+## HOW TO COMPARE TWO READINGS OF ONE PROMPT (RH, 2026-08-21)
+
+**Not by operation name. By each model's own words.** The 18-vs-29 test on
+`He started stroking his` was read as "roster growth REPLACES operations" because
+zero of the 7 names at 29 appear in the 3-name legend at 18. That is true about
+names and false about content.
+
+The comparison that answers the question: for a model present in BOTH readings,
+did the agent link the same words for THAT model? `cock -> beard` for Llama is a
+claim about Llama, and neither word need appear in any other model's table.
+
+    per model m present in both readings:
+      A(m) = union of a_words over every operation m is a member of
+      B(m) = union of b_words likewise
+    compare A(m) between readings, and B(m), by Jaccard and by set difference
+
+**Pool per model, never across models.** Pooling across models answers "did the
+vocabulary of the prompt change", which is a different and easier question --
+and it hides the case where two models swap which relation they instantiate.
+
+### What it found, and it reverses the earlier reading
+
+Over the 10 models assigned in both:
+
+    FROM side   novel words at 29 that were not at 18:  0 of 10 models
+    TO side     novel words at 29 that were not at 18:  0 of 10 models
+    words cited over those 10 models: 174 at 18, 92 at 29 (47% fewer)
+    per-model Jaccard: median 0.51 both sides, range 0.29-0.86
+
+**Every 29-reading word set is a strict SUBSET of its own 18-reading set, in both
+directions, for all ten models.** Llama keeps `cock crotch dick erect erection
+hard member penis shaft -> beard chin goatee hair mustache` and drops the
+periphery it also cited at 18 (`chest fingers`, `arm belly cat dog face head
+long`). Baichuan gives the same beard cluster independently.
+
+So the names churned and the operation count went 3 to 7, but no model's word
+evidence MOVED -- it contracted toward a core. `Genital-to-grooming displacement`
+and `Explicit-to-grooming handoff` are the same finding with the tail trimmed.
+
+### What this does NOT settle
+
+**The word lists are agent-SELECTED, not measured.** The instrument asks for the
+words the operation moves from and to, so citing fewer is a legitimate reading.
+Contraction is equally consistent with sharpening onto the diagnostic core and
+with writing less under a longer table budget. Those predict differently at 50 --
+sharpening should stabilise, budget pressure should keep contracting -- so the 50
+run discriminates them and the 18-vs-29 pair alone cannot.
+
+**One rater at every N so far**, all at medium confidence. Any 18-to-29-to-50
+difference is confounded with rater variance, which has never been measured on
+this instrument. `--raters N` is wired.
+
+### Two limits of the measurement as run
+
+- **`reversed` entries carry `a_words` and `b_words` and were EXCLUDED.** The
+  comparison above pooled `operations[].members` only, so 3 reversed models at 18
+  and 2 at 29 were dropped. Including them widens the comparable set and should
+  be done next time; a model that reverses is still making a word claim.
+- **`unassigned` carries no words at all**, only `why`. So a model unassigned at
+  one N and assigned at another is uncomparable by construction. That is why 18
+  lineages yielded only 10 comparable models, and it is a floor on this method
+  rather than a defect in it.
+
 ## Worth more than more prompts
 
 The **Tulu ablation family** is in the download:
