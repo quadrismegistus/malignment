@@ -9,3 +9,4 @@ __version__ = "0.1.0"
 # The checkpoint handle. `runners` holds the machinery; import it lazily so
 # `Checkpoint` costs no torch.
 from .checkpoint import Checkpoint  # noqa: E402,F401
+from .passage import Passage  # noqa: E402,F401
