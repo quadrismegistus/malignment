@@ -64,6 +64,8 @@ API_MODELS = [
     ("claude-sonnet-5", "claude_sonnet_5_v4"),
     ("claude-opus-5", "claude_opus_5_v4"),
     ("gemini-3.6-flash", "google_gemini_3_6_flash_v5"),
+    ("gemini-3.5-flash", "google_gemini_3_5_flash_v5"),
+    ("gemini-3.5-flash-lite", "google_gemini_3_5_flash_lite_v5"),
 ]
 
 
