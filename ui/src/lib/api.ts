@@ -170,6 +170,11 @@ export interface Question {
 	subject: string | null;
 	has: Record<string, boolean>;
 	results: ResultFile[];
+	//: Results SUBDIRECTORIES the server did not list, because they carry no
+	//: README. Stated in the panel rather than dropped: a grain count that
+	//: described what was listed and not what is on disk would be a false
+	//: statement about the folder.
+	undocumented?: { dir: string; files: number }[];
 	figures: string[];
 	//: WHICH OF `figures` ARE VEGA-LITE SPECS. Declared by the server, which
 	//: read the directory, rather than inferred here from a filename. Optional

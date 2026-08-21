@@ -352,7 +352,7 @@ def _walk_experiments():
             for _r, _d, _f in os.walk(rdir) for n in _f)
         if not ({"run.py", "registration.md", "plot.py"} & fs) and not produced:
             continue
-        results = []
+        results, undocumented = [], []
         if os.path.isdir(rdir):
             for name in sorted(os.listdir(rdir)):
                 p = os.path.join(rdir, name)
@@ -382,11 +382,35 @@ def _walk_experiments():
             #: keep their internals (`jsonl.hashstash.raw/data.jsonl`), which is
             #: storage rather than result; and a silent cap would render "404
             #: files" as however many happened to fit.
+            #: A RESULTS SUBDIRECTORY IS LISTED ONLY IF IT DOCUMENTS ITSELF
+            #: (RH, 2026-08-21). `slot_ratings/results/` holds `v6/` at 607
+            #: files, `v6_wide/` and `v6full/` at 303 each -- 1,213 per-prompt
+            #: JSONs that filled the panel and buried the eleven artifacts a
+            #: reader wants. `long/` holds four files AND a README, and is
+            #: exactly the case worth keeping.
+            #:
+            #: A README is the cheapest possible declaration that a directory is
+            #: a result rather than a spill, and the rule is one the author can
+            #: reverse in one command -- which is the only kind of hiding that is
+            #: not a loss.
+            #:
+            #: HIDDEN DIRECTORIES ARE COUNTED AND REPORTED, never silently
+            #: dropped. A panel that showed 53 grains where 1,266 exist would be
+            #: making a false statement about the folder, and the repo has
+            #: already paid for a count that described what was drawn rather than
+            #: what was there.
             for sub in sorted(os.listdir(rdir)):
                 sd = os.path.join(rdir, sub)
                 if sub.startswith(".") or not os.path.isdir(sd):
                     continue
-                for name in sorted(os.listdir(sd)):
+                inner = sorted(os.listdir(sd))
+                if not any(f.lower().startswith("readme") for f in inner):
+                    n = sum(1 for f in inner
+                            if not f.startswith(".") and os.path.isfile(os.path.join(sd, f)))
+                    if n:
+                        undocumented.append({"dir": sub, "files": n})
+                    continue
+                for name in inner:
                     q = os.path.join(sd, name)
                     if name.startswith(".") or not os.path.isfile(q):
                         continue
@@ -428,6 +452,9 @@ def _walk_experiments():
                     ("README.md", "registration.md", "run.py", "analyse.py",
                      "population.json", "plot.py")},
             "results": results,
+            #: `[{dir, files}]` for results subdirectories skipped for want of a
+            #: README. The panel states them; see the walk above.
+            "undocumented": undocumented,
             "figures": figs,
             #: WHICH FIGURES ARE VEGA-LITE SPECS, DECLARED BY THE SERVER rather
             #: than sniffed from the filename by the client. The `figures` walk

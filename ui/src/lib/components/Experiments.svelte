@@ -458,6 +458,24 @@
 			{/if}
 
 			<!--
+			  WHAT WAS NOT LISTED, AND WHY. A results subdirectory with no README
+			  is skipped by the server (RH, 2026-08-21) -- `slot_ratings/results`
+			  alone holds 1,213 per-prompt JSONs across three such directories,
+			  which buried the eleven artifacts a reader wants. Skipping them
+			  silently would make the grain count a claim about what was drawn
+			  rather than about the folder, so the panel says what is missing and
+			  how to get it back. One README, one command.
+			-->
+			{#if detail.undocumented?.length}
+				<p class="hidden-dirs">
+					not listed, no README:
+					{#each detail.undocumented as u, i (u.dir)}<code>{u.dir}/</code>
+						<span class="n">{u.files}</span>{i < detail.undocumented.length - 1 ? ', ' : ''}{/each}
+					<span class="how">— add a <code>README.md</code> to list one</span>
+				</p>
+			{/if}
+
+			<!--
 			  FIGURES GET THEIR OWN ROW (RH, 2026-08-17), because a figure is not a
 			  grain: a result is read as rows and a figure is looked at, and mixing
 			  them in one strip makes the click ambiguous.
@@ -656,6 +674,21 @@
 	.tag.n {
 		background: rgba(78, 121, 167, 0.2);
 		color: var(--blue-light);
+	}
+	.hidden-dirs {
+		margin: 6px 0 0 9px;
+		font-size: 11px;
+		color: var(--text-3);
+	}
+	.hidden-dirs code {
+		font-size: 11px;
+		color: var(--text-2);
+	}
+	.hidden-dirs .n {
+		color: var(--blue-light);
+	}
+	.hidden-dirs .how {
+		opacity: 0.7;
 	}
 	/*
 	  THE `no run.py` BADGE IS GONE (RH, 2026-08-21). It was added so a question
