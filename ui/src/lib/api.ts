@@ -185,6 +185,9 @@ export interface Question {
 	//: because a client may be talking to a server that predates the field, and
 	//: an absent list must degrade to "no specs" rather than to a crash.
 	specs?: string[];
+	//: `<name>.data.json` figures: a producer's data, drawn live by a chart
+	//: component. Never rendered to an image.
+	charts?: string[];
 }
 
 export interface Subject {

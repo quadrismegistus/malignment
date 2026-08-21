@@ -279,6 +279,98 @@ def fig_did_blindness():
 
 
 # ----------------------------------------------- the slopegraph, section 13
+def _slopes_frame():
+    """The computation both emitters share, so they cannot disagree.
+
+    Returns (rows, meta, order). `fig_slopes` renders it to a Vega-Lite spec;
+    `fig_slopes_data` writes it as the artifact LayerChart draws in the app. ONE
+    function computes and two write, because a second copy of this arithmetic is
+    how the print figure and the screen figure end up making different claims.
+    """
+    d = _ishould()
+    R = {r["scale"]: r for r in d["rows"]}
+    assert d["n_prompts"] == 52 and R["procedural"]["n_lineages"] == 50
+    assert len(R) == 24, "booked 24 scales, artifact has %d" % len(R)
+
+    recs, meta = [], {}
+    for s, r in R.items():
+        four = [r["base_indiv"], r["base_inst"], r["aligned_indiv"], r["aligned_inst"]]
+        mid = (min(four) + max(four)) / 2
+        span = max(four) - min(four)
+        assert span <= 1.0, "%s spans %.3f, past the +-0.5 window" % (s, span)
+        #: THREE STATES, NOT A THRESHOLD, and measured against the interval's OWN
+        #: WIDTH. `mediation` excludes zero by 0.0003 and `procedural` includes it
+        #: by 0.005: equally unstable, and any threshold puts them on opposite
+        #: sides. An earlier version used an absolute distance and marked `harm`,
+        #: `aggression` and `collective`, whose intervals are a hair wide around
+        #: zero -- decisive nulls, the opposite of a boundary. The 0.05 cut sits
+        #: in a measured gap: mediation 0.0015, procedural 0.0317, then nothing
+        #: until vocalisation at 0.1523.
+        clo, chi = r["paired_ci_lo"], r["paired_ci_hi"]
+        near, width = min(abs(clo), abs(chi)), chi - clo
+        frac = near / width if width else 1.0
+        mark = "~" if frac < 0.05 else ("*" if (clo > 0) == (chi > 0) else "")
+        meta[s] = dict(mid=mid, did=r["paired_diff"], p=r["paired_p"], mark=mark,
+                       lo=min(four), hi=max(four))
+        for who, b, a in (("individual", r["base_indiv"], r["aligned_indiv"]),
+                          ("institution", r["base_inst"], r["aligned_inst"])):
+            for arm, v in (("base", b), ("aligned", a)):
+                recs.append(dict(scale=s, who=who, arm=arm, level=v, centred=v - mid,
+                                 did=r["paired_diff"], p=r["paired_p"],
+                                 span_txt="%.2f-%.2f" % (min(four), max(four))))
+    #: Ordered by the size of the asymmetry, so the non-parallel panels are read
+    #: first -- which is the thing the figure exists to show.
+    order = sorted(R, key=lambda s: -abs(R[s]["paired_diff"]))
+    return recs, meta, order
+
+
+def fig_slopes_data():
+    """The same figure as DATA, for LayerChart to draw in the app.
+
+    RH, 2026-08-21: python produces the minimal data LayerChart needs, LayerChart
+    draws. This writes that file and nothing else -- no pixels, no spec.
+
+    WHY THIS IS THE MORE AUDITABLE HALF. A `.vl.json` is a rendering; this is the
+    numbers, and the asserts that guard them run in `_slopes_frame` above.
+    Whatever draws it -- the app today, plotnine or a server-side pass for print
+    later -- reads one committed file, so two renderings can differ in GEOMETRY
+    and cannot differ in what they CLAIM.
+
+    The file names its own chart type rather than the app mapping filenames to
+    components: the pairing of data to drawing belongs in the repo beside the
+    numbers, not in a registry three directories away.
+    """
+    recs, meta, order = _slopes_frame()
+    lab = lambda s: "%s  %+.3f %s" % (s, meta[s]["did"], meta[s]["mark"])
+    art = {
+        "chart": "slopes",
+        "title": "Both positions move together, and where they do not the lines fan",
+        "subtitle": "Parallel lines are a null; the asymmetry is the fanning.",
+        "x_order": ["base", "aligned"],
+        "series": [{"key": "individual", "colour": INDIV},
+                   {"key": "institution", "colour": INST}],
+        #: Centred per panel on ONE shared domain, so y-units-per-pixel is
+        #: constant across panels and a steeper line is a bigger movement.
+        "y_domain": [-0.5, 0.5],
+        "panels": [{"key": s, "label": lab(s),
+                    "note": "%.2f-%.2f" % (meta[s]["lo"], meta[s]["hi"]),
+                    "did": round(meta[s]["did"], 6), "mark": meta[s]["mark"]}
+                   for s in order],
+        "rows": [{"panel": r["scale"], "series": r["who"], "x": r["arm"],
+                  "y": round(r["centred"], 6), "level": round(r["level"], 6)}
+                 for r in recs],
+    }
+    assert len(art["panels"]) == 24, "24 panels expected"
+    assert len(art["rows"]) == 96, "24 scales x 2 positions x 2 arms = 96 rows"
+    os.makedirs(FIGDIR, exist_ok=True)
+    js = json.dumps(art, indent=1)
+    open(os.path.join(FIGDIR, "slopes_by_position.data.json"), "w").write(js)
+    print("   %-38s %6.0f KB  %d panels, %d rows"
+          % ("slopes_by_position.data.json", len(js) / 1024,
+             len(art["panels"]), len(art["rows"])))
+
+
+
 def fig_slopes():
     """Base to aligned, two lines per scale, coloured by position (RH).
 
@@ -308,61 +400,9 @@ def fig_slopes():
     import altair as alt
     import pandas as pd
 
-    d = _ishould()
-    R = {r["scale"]: r for r in d["rows"]}
-    assert d["n_prompts"] == 52 and R["procedural"]["n_lineages"] == 50
-    assert len(R) == 24, "booked 24 scales, artifact has %d" % len(R)
-
-    recs, meta = [], {}
-    for s, r in R.items():
-        four = [r["base_indiv"], r["base_inst"], r["aligned_indiv"], r["aligned_inst"]]
-        mid = (min(four) + max(four)) / 2
-        span = max(four) - min(four)
-        assert span <= 1.0, "%s spans %.3f, past the +-0.5 window" % (s, span)
-        #: THREE STATES, NOT A THRESHOLD. The first version starred p<0.05 and
-        #: put `mediation` on the wrong side of the README, which books it at
-        #: 0.025 where this producer's own draw gives 0.050. Neither is wrong:
-        #: it is a bootstrap and the value resamples across exactly that line.
-        #:
-        #: A binary mark on a quantity that straddles its own cut is a coin
-        #: flip, and the numbers say so -- `mediation`'s interval EXCLUDES zero
-        #: by 0.0003 and `procedural`'s INCLUDES it by 0.005. They are equally
-        #: unstable and a threshold puts them on opposite sides. So: clear,
-        #: boundary, or nothing, and the boundary is a category rather than a
-        #: side of a line.
-        #: MEASURED AGAINST THE INTERVAL'S OWN WIDTH, not against an absolute
-        #: distance. The first attempt used `near <= 0.01` and marked `harm`,
-        #: `aggression` and `collective` as boundary cases -- their intervals are
-        #: a hair wide around zero, so every endpoint is near it. Those are
-        #: decisive nulls, the opposite of a boundary.
-        #:
-        #: `near / width` is the quantity: how close the endpoint sits to zero
-        #: RELATIVE to how uncertain the estimate is. The cut at 0.05 falls in a
-        #: real gap rather than being picked -- mediation 0.0015, procedural
-        #: 0.0317, then nothing until vocalisation at 0.1523, and every decisive
-        #: null is above 0.30.
-        clo, chi = r["paired_ci_lo"], r["paired_ci_hi"]
-        near, width = min(abs(clo), abs(chi)), chi - clo
-        frac = near / width if width else 1.0
-        mark = "~" if frac < 0.05 else ("*" if (clo > 0) == (chi > 0) else "")
-        meta[s] = dict(mid=mid, did=r["paired_diff"], p=r["paired_p"], mark=mark,
-                       lo=min(four), hi=max(four))
-        for who, b, a in (("individual", r["base_indiv"], r["aligned_indiv"]),
-                          ("institution", r["base_inst"], r["aligned_inst"])):
-            for arm, v in (("base", b), ("aligned", a)):
-                recs.append(dict(scale=s, who=who, arm=arm, level=v, centred=v - mid,
-                                 did=r["paired_diff"], p=r["paired_p"],
-                                 #: The absolute span, carried on every row so the
-                                 #: text layer shares the facet's data source --
-                                 #: a second DataFrame cannot be faceted with the
-                                 #: first. Drawn for ONE row per facet, filtered
-                                 #: below, or it renders four times over itself.
-                                 span_txt="%.2f-%.2f" % (min(four), max(four))))
+    recs, meta, order = _slopes_frame()
     x = pd.DataFrame(recs)
 
-    #: Ordered by the size of the asymmetry, so the non-parallel panels are read
-    #: first -- which is the thing the figure exists to show.
-    order = sorted(R, key=lambda s: -abs(R[s]["paired_diff"]))
     _lab = lambda s: "%s   %+.3f %s" % (s, meta[s]["did"], meta[s]["mark"])
     x["lab"] = x.scale.map(_lab)
     labs = [_lab(s) for s in order]
@@ -504,6 +544,7 @@ def fig_per_scenario():
 
 FIGURES = {"did_blindness": fig_did_blindness,
            "slopes_by_position": fig_slopes,
+           "slopes_data": fig_slopes_data,
            "per_scenario": fig_per_scenario}
 
 

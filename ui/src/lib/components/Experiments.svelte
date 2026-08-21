@@ -35,6 +35,7 @@
 	import Markdown from './Markdown.svelte';
 	import DataTable from './DataTable.svelte';
 	import VegaChart from './VegaChart.svelte';
+	import ChartFigure from './ChartFigure.svelte';
 
 	let index: ExperimentIndex | null = $state(null);
 	let selected: string | null = $state(null);
@@ -533,7 +534,10 @@
 				  A SPEC IS IDENTIFIED BY THE SERVER'S `specs` LIST, not by its
 				  extension here. The manifest is where the directory was read.
 				-->
-				{#if detail.specs?.includes(pane.slice(4))}
+				{#if detail.charts?.includes(pane.slice(4))}
+					<ChartFigure url={api.figureUrl(selected, pane.slice(4))} name={pane.slice(4)} />
+					{@render caption(pane.slice(4))}
+				{:else if detail.specs?.includes(pane.slice(4))}
 					<VegaChart url={api.figureUrl(selected, pane.slice(4))} name={pane.slice(4)} />
 					{@render caption(pane.slice(4))}
 				{:else if /\.(png|svg|jpe?g|webp)$/i.test(pane.slice(4))}

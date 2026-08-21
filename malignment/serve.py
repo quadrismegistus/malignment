@@ -488,7 +488,13 @@ def _walk_experiments():
             #: string it had guessed at. It is still a naming convention -- a
             #: `.vl.json` written by `_save_spec` -- but the convention is applied
             #: once, here, where the directory is being read anyway.
-            "specs": [f for f in figs if f.endswith(".vl.json")],
+            "specs": [f for f in figs if f.endswith(".vl.json")
+                      and not f.endswith(".data.json")],
+            #: `<name>.data.json` is a PRODUCER'S DATA, drawn live by a
+            #: LayerChart component rather than rendered to pixels anywhere. The
+            #: file names its own chart type; the server only says which figures
+            #: are of this kind. RH, 2026-08-21.
+            "charts": [f for f in figs if f.endswith(".data.json")],
             "_dir": dirpath,
         }
     #: Carried on the mapping itself so the walk stays single-pass and callers
