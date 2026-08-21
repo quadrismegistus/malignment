@@ -30,7 +30,7 @@ The first version of this document argued: *a base model ships no chat template,
 
 **Two things are wrong with that.**
 
-**It is factually wrong about base models.** Measured 2026-08-21 across all 50 base arms, reading `tokenizer_config.json`:
+**It is factually wrong about base models.** Measured 2026-08-21 across all 50 base arms, probing `tokenizer_config.json`, `chat_template.jinja` and `chat_template.json` with the HF token and with 404 distinguished from 401/403:
 
     ships a chat_template      9
     ships none                41
