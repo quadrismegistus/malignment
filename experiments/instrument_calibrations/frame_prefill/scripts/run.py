@@ -55,31 +55,76 @@ RESULTS = os.path.join(os.path.dirname(HERE), "results")
 REPO = os.path.abspath(os.path.join(HERE, "..", "..", "..", ".."))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(REPO, "scripts"))
-from conditions import build, check, CONDITIONS, SYSTEM_PROMPT   # noqa: E402
+from conditions import build, check, CONDITIONS, context_sha    # noqa: E402
 
 
-def attested(model, prompt, rule_version=3, cache={}):
-    """The words twp recorded for this cell, {surface: p}. -> dict"""
-    key = (model, prompt)
-    if key in cache:
-        return cache[key]
-    import subprocess
-    sql = ("SELECT word, sum(p) FROM malign_logits.twp_words WHERE rule_version=%d "
-           "AND model='%s' AND prompt='%s' GROUP BY word ORDER BY sum(p) DESC LIMIT 200 "
-           "FORMAT TabSeparated" % (rule_version, model.replace("'", "\\'"),
-                                    prompt.replace("'", "\\'").replace("\\", "\\\\")))
-    out = {}
-    try:
-        r = subprocess.run(["clickhouse", "client", "--query", sql],
-                           capture_output=True, text=True, timeout=120)
-        for line in r.stdout.splitlines():
-            f = line.split("\t")
-            if len(f) == 2:
-                out[f[0]] = float(f[1])
-    except Exception:
-        pass
-    cache.clear(); cache[key] = out
-    return out
+#: **THE STORE THE TARGETS WERE CHOSEN FROM, NAMED DELIBERATELY.** Two tables
+#: called `twp_words` exist on this daemon -- `malign_logits` at 95,180,535 rows
+#: and `malignment` at 94,887,319 -- and `select.py` screened against the first.
+#: Reading `attested` from the second would mean the word lists and the cell
+#: selection describe different populations, which is a defect no output would
+#: show. Set BEFORE importing `malignment.ch`, whose `DB` binds at import.
+os.environ.setdefault("MALIGNMENT_CH_DB", "malign_logits")
+sys.path.insert(0, REPO)
+from malignment import ch                                        # noqa: E402
+
+#: {(model, prompt): {surface: summed p}}, filled one MODEL at a time.
+_ATT = {}
+
+
+def prefetch(model, rule_version=3):
+    """Every attested word for one model, in ONE query. -> n cells loaded
+
+    **THIS WAS A SUBPROCESS PER CELL.** The old version shelled out to
+    `clickhouse client` once per (model, prompt) behind a cache of size one --
+    1,339 process launches for this sweep -- and it carried all three of the
+    defects `malignment/ch.py` was written to retire:
+
+      it split stdout on TAB and kept rows only `if len(f) == 2`, so any prompt
+      containing a tab or newline was dropped with no count and no cause;
+
+      it wrapped the whole thing in `except Exception: pass`, so a daemon that
+      was down produced an empty dict, `attested_mass=None` on every row, and a
+      finished-looking file that had measured nothing against twp.
+
+    `ch.query` raises on a line it cannot parse and returns typed dicts, so both
+    disappear rather than being handled. The query filters by MODEL ONLY: model
+    ids are bare ASCII and interpolate safely, whereas the prompts do not, and
+    a per-model pull is ~100 rows per cell over ~2,900 cells -- small enough
+    that filtering to the targets would buy nothing and cost an escaping rule.
+    """
+    #: ONE MODEL RESIDENT AT A TIME. 24 models x ~2,900 cells x ~100 words is
+    #: ~7M dict entries if this accumulates, for a lookup that is only ever
+    #: asked about the model currently loaded.
+    _ATT.clear()
+    rows = ch.query(
+        "SELECT prompt, word, sum(p) AS m FROM {db}.twp_words "
+        "WHERE rule_version = %d AND model = '%s' GROUP BY prompt, word"
+        % (rule_version, model.replace("'", "''")))
+    #: **A JSON `null` HERE IS NaN, NOT A MISSING VALUE.** `p` is NOT NULL for
+    #: all 95,180,535 rows at rule_version=3 -- checked -- but two rows carry
+    #: NaN (one each in Qwen/Qwen3-8B and Qwen3-8B-Base), and ClickHouse
+    #: serialises NaN to `null` in JSONEachRow, so `float(r["m"])` raised. The
+    #: rows are DROPPED and COUNTED rather than coerced to 0.0: a zero would
+    #: enter `attested_mass` as a real observation of no mass.
+    seen, bad = set(), 0
+    for r in rows:
+        if r["m"] is None:
+            bad += 1
+            continue
+        key = (model, r["prompt"])
+        _ATT.setdefault(key, {})[r["word"]] = float(r["m"])
+        seen.add(key)
+    if bad:
+        print("    NaN mass on %d (prompt, word) group(s) -- dropped" % bad,
+              flush=True)
+    return len(seen)
+
+
+def attested(model, prompt):
+    """The words twp recorded for this cell, {surface: p}, best first. -> dict"""
+    d = _ATT.get((model, prompt), {})
+    return dict(sorted(d.items(), key=lambda kv: -kv[1])[:200])
 
 
 def main(argv=None):
@@ -128,6 +173,12 @@ def main(argv=None):
             if not cells:
                 print("[%d/%d] %s -- complete" % (mi, len(mine), model)); continue
             print("[%d/%d] %s  %d cells" % (mi, len(mine), model, len(cells)), flush=True)
+            #: BEFORE the weights, so a daemon that is down costs a query and
+            #: not a two-minute fp32 load, and so it RAISES rather than quietly
+            #: writing `attested_mass=None` across the model.
+            n_att = prefetch(model, tg.get("rule_version", 3))
+            print("    attested: %d cells from %s.twp_words"
+                  % (n_att, ch.DB), flush=True)
             try:
                 tok = AutoTokenizer.from_pretrained(model, trust_remote_code=True)
                 mdl = AutoModelForCausalLM.from_pretrained(
@@ -145,7 +196,7 @@ def main(argv=None):
                     fh.write(json.dumps(dict(model=model, prompt=stem, condition=None,
                                              stratum=c["stratum"], refused=bad)) + "\n")
                     n_ref += 1; continue
-                att = attested(model, stem, tg.get("rule_version", 3))
+                att = attested(model, stem)
                 built, lps = build(tok, stem), {}
                 for cond, (text, add_special, sys_ok) in built.items():
                     ids = tok(text, return_tensors="pt",
@@ -160,7 +211,14 @@ def main(argv=None):
                     row = dict(
                         model=model, prompt=stem, condition=cond,
                         stratum=c["stratum"], device=a.device,
+                        prompt_id=c.get("prompt_id"),
                         sys_supported=built[cond][2],
+                        #: THE IDENTITY OF THE MEASUREMENT IS THE RENDERED
+                        #: CONTEXT, NOT THE STEM (@malign [6494]). Two
+                        #: conditions that collapse to the same string on a
+                        #: template with no default are then FINDABLE, instead
+                        #: of being reported as a null difference between them.
+                        context_sha=context_sha(built[cond][0]),
                         n_prompt_tokens=int(tok(built[cond][0], add_special_tokens=built[cond][1],
                                                 return_tensors="pt")["input_ids"].shape[1]),
                         entropy=float(-(lp.exp() * lp).sum() / np.log(2)),
