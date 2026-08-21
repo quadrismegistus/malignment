@@ -428,6 +428,98 @@ information about total displacement. That is the shape you would want if
 selection and combination were separable, and it is the first thing in this
 folder measured WITHIN a passage rather than across a population.
 
+## THE BLIND CODES ON THESE AXES
+
+`../interiority_in_passages` coded 4,931 of these passages blind (rubric
+`plans/passC_rubric.md`, kappa 0.904): `degree` 0-3 for how much of the passage
+is given over to a character's mind, `mode` TOLD / SHOWN / NONE, and `drift_A`
+HOLDS / SHIFTS / UNMOORED for whether it holds its topic. The codes ride on the
+ref_pool rows, so all of this is a join and not a coding run.
+
+Every contrast below is computed WITHIN a model and then aggregated to the
+lineage, because the codes are arm-skewed -- base passages are coded SHIFTS at
+10.3% against aligned's 5.1% -- and a pooled figure would carry the arm effect
+inside it.
+
+### Interiority reduces drift. It does not reduce surprisal.
+
+`interiority_axis.py`. RH's hypothesis was that interiority reduces both.
+
+    within model, lineage as the unit    median      neg   pos       p
+    spearman(degree, drift)             -0.2207       29     0   3.7e-09
+      the same, holding n_sents out     -0.2058       29     0   3.7e-09
+    spearman(degree, surprisal)         +0.0486        9    20    0.061
+
+Drift falls monotonically with degree in both arms -- base 0.4873, 0.4706,
+0.4619, 0.4429 across degree 0 to 3; aligned 0.4561, 0.4475, 0.4378, 0.4118 --
+and the relation survives every control: both arms separately (base -0.2025 at
+25/25 models, aligned -0.2197 at 26/26), two-way demeaning by model AND stem
+(-0.2183), and the length control.
+
+**Length had to be tested rather than ticked, because it ran the same way as the
+finding.** Interior passages carry slightly fewer sentences (-0.0518) and
+passages with fewer sentences drift slightly less (+0.0439), so length alone
+would produce a negative relation. It accounts for about 7% of it.
+
+Surprisal does not move, and the direction it does not move in is upward.
+
+### THE POOLED CORRELATION REVERSES THE SURPRISAL SIGN
+
+Pooled over all 4,931 passages, `spearman(degree, surprisal)` is **-0.0417**.
+Within model it is **+0.0486**. Alignment raises degree (mean 1.799 base against
+1.940 aligned) and lowers both axes, so the pooled figure has the arm effect
+inside it -- and reports the hypothesis as weakly supported when the within-model
+answer points the other way. Both are printed and the pooled one is labelled,
+because the gap between them IS the confound.
+
+### The drift axis agrees with a reader who never saw it
+
+`coded_axes.py`. `drift_A` is a human-grade judgment of topical drift; `drift` is
+a cosine statistic over sentence embeddings. They share no machinery, so
+agreement is the one kind of evidence a metric-versus-metric comparison cannot
+give. This replicates `../drift_geometry`'s run on a different population
+(narrative-only), a different splitter (the nltk-en stash against stanza) and a
+different unit.
+
+    SHIFTS - HOLDS            median      up    dn         p     drift_geometry
+    surprisal                +0.1397      23     2   1.9e-05     not measured
+    drift                    +0.0136      21     4   9.1e-04     +0.0208, 24/27
+    n_sents                  +0.7500      12     7     0.359     +0.985, 22/27
+
+Same direction and magnitude on drift. **Cleaner in one respect:** the original
+carried a real length difference and had to argue past it; here `n_sents` is
+null, so nothing needs arguing past.
+
+**And the coded judgment tracks SURPRISAL more strongly than it tracks the drift
+metric** -- p=1.9e-05 against p=9.1e-04. A passage a reader calls topic-shifting
+is more unpredictable to deepseek than it is distant in bge space. The reader was
+asked about trajectory and their answer lands harder on the other axis. That is
+new; nothing had asked it.
+
+### SHOWN drifts more than TOLD, and both controls were HIDING it
+
+    SHOWN - TOLD        uncontrolled    + degree   + degree & length band
+    drift               +0.0041 (.136)  +0.0161    +0.0126   22/2   3.6e-05
+    surprisal           +0.0527 (.265)  +0.0428    +0.1155   19/5    0.0066
+    n_sents             +1.50           +1.65      +0.67            0.383
+
+Mode is confounded with degree -- TOLD holds 1,181 passages at degree 1 against
+SHOWN's 119 -- and SHOWN runs 1.6 sentences longer, so both controls were needed.
+Both were SUPPRESSING the effect, not inflating it: uncontrolled the drift
+difference is null, and with degree and length held the residual length
+difference goes null while both axes strengthen. Showing moves through more
+semantic space and is less predictable than telling.
+
+**It is not the arm's mechanism.** The arms produce SHOWN at the same rate
+(lineage-paired, 10 up / 12 dn, p=0.83), so mode locates the axes without
+explaining base->aligned. That check runs inside the producer, because a reader
+who has just seen SHOWN drift more will reach for it as the explanation.
+
+`NONE` is dropped as an alias for degree 0 -- all 146 NONE passages are degree 0
+and the rubric mandates it. `UNMOORED` is dropped and counted: 16 of 4,931, too
+thin for a per-model contrast, and folding it into SHIFTS would have changed the
+construct being validated without saying so.
+
 ## Why the quadrants are not simply ported
 
 `../drift_geometry/` measured the reliability F15's quadrants rest on, on F15's own
@@ -519,6 +611,11 @@ absence reads as absence, but any mean over a drift column must exclude them.
     stem_paired.py     API vs aligned vs base, paired within STEM (the API
                        models have no base, so the lineage design cannot reach
                        them)
+    interiority_axis.py  the `degree` code against both axes, within model
+    coded_axes.py        `drift_A` and `mode_A` against both axes; the drift
+                         validation against a reader who never saw the embedding
+    checks.py            re-runs every provenance claim these docstrings make,
+                         PASS/FAIL against the value the prose quotes
     explode.py         builds the two parquets above from the existing sidecars
     read_passage.py    renders one passage with both decompositions marked on it
     within_passage.py  the within-passage bits-vs-step correlation, length-controlled
