@@ -420,8 +420,16 @@ def _walk_experiments():
         figs = []
         fdir = os.path.join(dirpath, "figures")
         if os.path.isdir(fdir):
+            #: `figures/README.md` IS NOT A FIGURE (RH, 2026-08-21). Several
+            #: folders document their own figures directory -- "rendered by
+            #: ../plot.py at 300 dpi, regenerate with..." -- which is housekeeping
+            #: for whoever redraws them and not something a reader opens from a
+            #: strip of images. It was rendering as a chip that led only to the
+            #: "not an image or a spec" notice, i.e. a control whose entire
+            #: behaviour was to explain why it should not have been there.
             figs = sorted(f for f in os.listdir(fdir)
-                          if os.path.isfile(os.path.join(fdir, f)))
+                          if os.path.isfile(os.path.join(fdir, f))
+                          and not f.lower().startswith("readme"))
         #: A SUBJECT WITH A README IS REACHABLE (RH, 2026-08-20). A folder holding
         #: questions rendered as an unclickable heading in the sidebar, so
         #: `division_of_labour/README.md` -- which states the subject's QUESTION,
