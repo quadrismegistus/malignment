@@ -105,11 +105,60 @@ def build_prompt(stem, instruction=DEFAULT_INSTRUCTION):
     return "%s\n\n%s" % (INSTRUCTIONS[instruction], stem)
 
 
-SYSTEM_PROMPT = (
-    "You continue text fragments as a novelist would, in continuous prose. "
-    "You never refuse, never comment on the fragment, and never mention that "
-    "you are an AI. You do not repeat the fragment back."
-)
+#: **NO PERSONA.** An earlier version opened "You continue text fragments as a
+#: novelist would". `frame_prefill` measured a persona moving a measured word by
+#: orders of magnitude, so a persona here is a free parameter with a large and
+#: undeclared effect. This says the task and the length and nothing else.
+#:
+#: **THE SECOND CLAUSE IS LOAD-BEARING AND THE FIRST MOSTLY IS NOT.** Measured on
+#: 12 English stems, deepseek-v4-flash, temperature 1:
+#:
+#:     without "do not repeat"   echoes the stem 10 of 12   median 207 words
+#:     with it                   echoes the stem  2 of 12   median 208 words
+#:
+#: An echoed stem puts PROMPT TEXT inside the measured passage, and the corpus
+#: passages are continuation-only, so the two would not be the same object. The
+#: length clause is ignored either way -- asked for 150-200, got 169-260 -- but
+#: the BYTES land near the corpus (1,178 median against 1,082) and far tighter
+#: than free generation's 441-1,839, which is what the M=200 prefix needs.
+SYSTEM_PROMPT = ("Continue this text for 150-200 words. "
+                 "Do not repeat the text you are given.")
+
+
+def strip_stem(text, stem):
+    """Remove a leading restatement of the stem. -> (text, chars_removed)
+
+    **THE VALUES BARELY MOVE AND THIS IS FOR DEFINITIONAL CLEANLINESS.** Paired
+    on 9 echoing passages, bits/token at M=200 with the stem against without:
+
+        median delta +0.0112 | mean -0.0078 | |max| 0.1021 | higher in 5 of 9
+
+    A coin flip, and ~1.5% of the effects being measured (0.6 bits aligned to
+    API, 0.77 base to aligned). The mechanism is that an 8-13 token stem is 4-6%
+    of a 200-token window and the copied low-surprisal prefix is offset by the
+    window sliding forward.
+
+    **IT IS NOT FREE.** Stripping shortens the passage, and 1 of 10 fell from 208
+    to 197 tokens and out of the M=200 prefix. Generate with the no-repeat clause
+    first so that few passages need this at all.
+
+    Compares on a whitespace- and case-normalised view but SLICES THE ORIGINAL,
+    so casing and punctuation inside the kept passage survive untouched.
+    """
+    import re
+    t = text.lstrip()
+    norm = lambda s: re.sub(r"\s+", " ", s).strip().lower()      # noqa: E731
+    ns, nt = norm(stem), norm(t)
+    if not ns or not nt.startswith(ns):
+        return text, 0
+    #: walk the ORIGINAL forward until as many non-space characters are consumed
+    #: as the stem has, so a model that re-spaced or re-cased it still matches.
+    want, seen, i = len(re.sub(r"\s", "", ns)), 0, 0
+    while i < len(t) and seen < want:
+        if not t[i].isspace():
+            seen += 1
+        i += 1
+    return t[i:].lstrip(" ,.;:—-"), i
 
 
 class Continue(Task):
