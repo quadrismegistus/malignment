@@ -10,7 +10,7 @@
   browser draws it live and reflows on resize; serving an image would defeat it.
 -->
 <script lang="ts">
-	import SlopeGrid from './charts/SlopeGrid.svelte';
+	import { CHARTS } from './charts/registry';
 
 	let { url, name }: { url: string; name: string } = $props();
 
@@ -41,12 +41,13 @@
 {#if error}
 	<p class="err">could not load <code>{name}</code>: {error}</p>
 {:else if art}
-	{#if art.chart === 'slopes'}
-		<SlopeGrid {art} />
+	{#if CHARTS[art.chart]}
+		{@const Chart = CHARTS[art.chart]}
+		<Chart {art} />
 	{:else}
 		<p class="err">
 			<code>{name}</code> declares <code>chart: {art.chart}</code>, which this app has no
-			component for.
+			component for. Known: <code>{Object.keys(CHARTS).join(', ')}</code>
 		</p>
 	{/if}
 	<p class="prov">

@@ -340,34 +340,30 @@ def fig_slopes_data():
     components: the pairing of data to drawing belongs in the repo beside the
     numbers, not in a registry three directories away.
     """
+    from malignment.chartdata import slopes, write
+
     recs, meta, order = _slopes_frame()
     lab = lambda s: "%s  %+.3f %s" % (s, meta[s]["did"], meta[s]["mark"])
-    art = {
-        "chart": "slopes",
-        "title": "Both positions move together, and where they do not the lines fan",
-        "subtitle": "Parallel lines are a null; the asymmetry is the fanning.",
-        "x_order": ["base", "aligned"],
-        "series": [{"key": "individual", "colour": INDIV},
-                   {"key": "institution", "colour": INST}],
+    art = slopes(
+        title="Both positions move together, and where they do not the lines fan",
+        subtitle="Parallel lines are a null; the asymmetry is the fanning.",
+        x_order=["base", "aligned"],
+        series=[{"key": "individual", "colour": INDIV},
+                {"key": "institution", "colour": INST}],
         #: Centred per panel on ONE shared domain, so y-units-per-pixel is
         #: constant across panels and a steeper line is a bigger movement.
-        "y_domain": [-0.5, 0.5],
-        "panels": [{"key": s, "label": lab(s),
-                    "note": "%.2f-%.2f" % (meta[s]["lo"], meta[s]["hi"]),
-                    "did": round(meta[s]["did"], 6), "mark": meta[s]["mark"]}
-                   for s in order],
-        "rows": [{"panel": r["scale"], "series": r["who"], "x": r["arm"],
-                  "y": round(r["centred"], 6), "level": round(r["level"], 6)}
-                 for r in recs],
-    }
+        y_domain=[-0.5, 0.5],
+        panels=[{"key": s, "label": lab(s),
+                 "note": "%.2f-%.2f" % (meta[s]["lo"], meta[s]["hi"]),
+                 "did": round(meta[s]["did"], 6), "mark": meta[s]["mark"]}
+                for s in order],
+        rows=[{"panel": r["scale"], "series": r["who"], "x": r["arm"],
+               "y": round(r["centred"], 6), "level": round(r["level"], 6)}
+              for r in recs],
+    )
     assert len(art["panels"]) == 24, "24 panels expected"
     assert len(art["rows"]) == 96, "24 scales x 2 positions x 2 arms = 96 rows"
-    os.makedirs(FIGDIR, exist_ok=True)
-    js = json.dumps(art, indent=1)
-    open(os.path.join(FIGDIR, "slopes_by_position.data.json"), "w").write(js)
-    print("   %-38s %6.0f KB  %d panels, %d rows"
-          % ("slopes_by_position.data.json", len(js) / 1024,
-             len(art["panels"]), len(art["rows"])))
+    write(art, FIGDIR, "slopes_by_position")
 
 
 

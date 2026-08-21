@@ -214,43 +214,6 @@
 		font-size: 9px;
 		fill: var(--text-3);
 	}
-	/*
-	  THE TOOLTIP IS THE LIBRARY'S AND IS STYLED FOR A LIGHT THEME. Its container
-	  sets a near-white background and inherits `color` from us, which in a dark
-	  app is near-white text: invisible on invisible, which is exactly how RH saw
-	  it. Nothing in the component tree reports this -- the tooltip is present,
-	  positioned and populated, and reads as empty.
-
-	  UNSCOPED ON PURPOSE. LayerChart portals the tooltip to
-	  `body > .lc-tooltip-root`, OUTSIDE this component, so a
-	  `.slopegrid :global(...)` descendant selector never matches. My first
-	  attempt was scoped and silently did nothing. A bare `:global` is the only
-	  selector that reaches it, and it is a library theme override rather than an
-	  app rule, so it belongs with the component that pulls the library in.
-	*/
-	:global(.lc-tooltip-container) {
-		background: var(--panel-2, #1b1f27);
-		color: var(--text-1, #e6e6e6);
-		border: 1px solid rgba(255, 255, 255, 0.14);
-		border-radius: 4px;
-		box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-		font-size: 0.72rem;
-	}
-	:global(.lc-tooltip-container .lc-tooltip-header) {
-		color: var(--text-2, #cfd3da);
-		font-weight: 600;
-	}
-	/*
-	  NO `total`-HIDING RULE ANY MORE. There was one: LayerChart's DefaultTooltip
-	  sums the series and `canHaveTotal` is hardcoded at its call site, so the only
-	  way to drop "total 0" was CSS on the separator and its following siblings.
-
-	  Passing our own `tooltip` snippet retires that whole problem -- DefaultTooltip
-	  never renders -- and the rule then became actively harmful, because it matched
-	  OUR separator and hid the asymmetry row underneath it. Removed rather than
-	  narrowed: a workaround kept past the thing it worked around is how a fix
-	  starts breaking the feature that replaced it.
-	*/
 	.legend {
 		display: flex;
 		gap: 1rem;
