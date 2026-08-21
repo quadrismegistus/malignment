@@ -500,6 +500,112 @@ to be prompted to continue" is proposing a mechanism that runs backwards.
 Whether the `do not repeat` clause specifically produces it is untested, and
 testing it needs that clause run against a bare condition rather than this pool.
 
+## ALIGNMENT IS NOT SIMPLIFICATION. IT IS THE REVERSE OF IT.
+
+Every direction measured above is one of this campaign's own construction:
+base-to-aligned, small-to-large, unframed-to-framed. **Ogden Basic English is a
+direction someone else defined**, for reasons that had nothing to do with us --
+a deliberate restriction to an 850-word vocabulary, carried out by editors in
+the 1930s on stories they did not write. It is the only external, named
+simplification available to put on these axes, and the comparison is the first
+thing here that tests a direction of ours against a direction of somebody
+else's.
+
+`ogden_align.py`, `ogden_axes.py`. Source:
+`malign-logits/data/texts/{basic,original}` -- Mansfield, Hemingway and
+Andersen paired, plus Joyce in `original` ALONE, because *Finnegans Wake* has no
+Basic rendering and that absence is the point it was collected to make.
+
+### The pairing is computed, not assumed
+
+Paragraph counts do not match (46/49, 185/179, 7/11), so pairing by index would
+have worked for two texts and silently mispaired the third, whose Basic version
+merges paragraphs so heavily that its second paragraph already describes a
+different moment. Instead: **monotone alignment, Needleman-Wunsch over
+paragraphs**, with merge and split as first-class moves. Both texts tell one
+story in one order, so crossing pairings are not penalised but unreachable, and
+the search is a shortest path.
+
+Similarity is a bag-of-words Jaccard, deliberately crude. **A tf-idf scheme
+would have been worse, not better:** a Basic rendering replaces exactly the rare
+words, which are the ones such a scheme weights hardest, so it would score true
+pairs LOWER the more Basic-ish they were. Function words and surviving nouns
+carry the alignment; the substitutions this exists to find are the tokens the
+metric ignores.
+
+    text        matched   merges   jaccard median
+    hemingway        46        3        0.82
+    mansfield       177       10        0.65
+    andersen          7        4        0.28
+
+Andersen's 0.28 is rewriting, not mispairing -- its final pair is *"In the early
+morning, there on the earth, was the poor little one"* against *"But in the
+corner, leaning against the wall, sat the little girl"*: one moment, almost no
+shared vocabulary. Consecutive pairs are then pooled until BOTH sides reach 120
+words, giving **47 paired passages** whose correspondence survives pooling
+because a group is a contiguous run of already-aligned pairs.
+
+### BASIC ENGLISH IS LESS PREDICTABLE, ON EVERY PAIR
+
+    basic - original       median      n    95% CI            negative
+    surprisal (M=100)     +0.7804     47   [+0.632, +0.899]      0%
+    surprisal (whole)     +0.6979     47   [+0.563, +0.756]      0%
+    drift                 +0.0037     47   [-0.003, +0.011]     45%
+    n_sents               +0.0000     47   [ 0, 0 ]              9%
+
+    per text     andersen +1.0543    hemingway +0.4505    mansfield +0.8091
+
+**Unanimous: 47 of 47 pairs positive, and all three texts agree.** Restricting
+an author to 850 words makes the prose MARKEDLY LESS predictable. The
+substitutions show why -- the constraint does not permit a plain synonym, it
+forces circumlocution, and a circumlocution is common words in an arrangement
+English does not use:
+
+    "passed on the stairs"   ->  "went through on the flight of steps"
+    "that kitty"             ->  "that young cat"
+    "the padrone asked me"   ->  "the padrone requested me"
+
+`young cat` is two frequent words in a bigram almost nothing uses. `requested`
+is RARER than the `asked` it replaces -- Basic English going UP the frequency
+scale, not down. The vocabulary gets simpler and the sentences do not.
+
+### The comparison
+
+                                    surprisal      drift
+    alignment (aligned - base)        -0.8435     -0.0254
+    simplification (basic - original) +0.7804     +0.0037
+
+**Nearly equal and opposite on surprisal.** Alignment and deliberate
+simplification move prose in opposite directions on predictability, at
+comparable magnitude. Whatever alignment is doing when it makes text more
+probable, it is not what an editor does when restricting vocabulary -- it is the
+reverse. A model made more predictable and a story made simpler are not the same
+operation and do not even point the same way.
+
+### The drift null, and a mechanism refuted by its own control
+
+Both predictions were registered before the scoring finished
+(`results/ogden_prediction.md`): RH said lower drift and higher surprise, and
+this seat agreed on both with the reasoning written down. Surprisal was right.
+**Drift was wrong -- predicted lower, measured null** -- and the column that
+refutes the stated mechanism is in the table.
+
+The argument had been that Basic takes more words over the same ground, so more
+sentences carry an unchanged path and the per-step mean falls. `n_sents` is
+**identical pair for pair**: zero median difference, zero interval, in 47 pairs
+where Basic runs 18% longer in words. The circumlocution happens INSIDE
+sentences and never adds one. So the trajectory is untouched by construction and
+a null is what a fixed trajectory gives. The prediction failed for a reason the
+data names rather than for an unknown one.
+
+### The fence
+
+Three stories by three authors. **The effective n is nearer 3 than 47**, and the
+per-text column is reported for that reason; no claim here rests on the pooled
+interval alone. The surprisal result is a SIGN claim -- 47 of 47, three texts of
+three -- and the magnitudes are not offered as an estimate of anything beyond
+these texts. The drift result is a null, not a small effect.
+
 ## THE BLIND CODES ON THESE AXES
 
 `../interiority_in_passages` coded 4,931 of these passages blind (rubric
@@ -696,6 +802,9 @@ this folder's API-versus-open contrast is about the models or the apparatus, and
 the short answer is that the frame and the truncation both point AWAY from the
 observed effect while the sampling parameters were not what we asked for.
     synthesis.py         all four effects on one scale, in sd of each axis
+    ogden_align.py       monotone paragraph alignment of Basic English against
+                         its original; --group-words pools aligned pairs
+    ogden_axes.py        the simplification direction on both axes, paired
     scale_axes.py        params_b against both axes across 47 models (the drift
                          rows are confounded -- see scale_ladder.py)
     scale_ladder.py      the Falcon3 ladder: one lab, one recipe, four sizes
