@@ -125,6 +125,50 @@ SYSTEM_PROMPT = ("Continue this text for 150-200 words. "
                  "Do not repeat the text you are given.")
 
 
+def strip_markdown(text):
+    """Remove emphasis MARKERS, keep the words. -> (text, n_stars_removed)
+
+    Chat models reach for markdown mid-prose -- `**feel something again**`,
+    `chose to *stay*` -- which is document structure, not the sentence being
+    continued. `frame_prefill` found the same reflex at the word slot: with an
+    empty user turn Olmo-3-DPO put 0.269 on `**`.
+
+    ## IT IS IN THE LOCAL CORPUS TOO, AND THERE IT IS ARM-DIFFERENTIAL
+
+    f11_l2, 131,930 passages: any `*` in 4% of base and **9% of aligned**;
+    `**bold**` 2% against 7%. So this is not an API artefact to be cleaned away
+    -- aligned models emit twice the markdown of their bases, and stripping it
+    from one population and not the other would treat 6% of the corpus
+    asymmetrically on a dimension that varies by arm.
+
+    ## BUT NOT IN THE POPULATION WE ACTUALLY COMPARE
+
+    The narrative-coded subset is 48 of 5,687 = **0.8%**, and BALANCED: base
+    1.0%, aligned 0.7%. The coding had already removed most markdown-bearing
+    passages, because they tend to be the non-narrative ones. So within
+    `two_axes.csv` stripping is nearly a no-op and carries no arm bias.
+
+    Measured, those 48 rescored against their originals at M=200:
+
+        median delta +0.0000 | mean +0.0117 | |max| 0.2120
+        higher in 21 of 46, i.e. a coin flip; 2 fell under the prefix
+
+    Noise around zero, not a shift. Applied for cleanliness, and safe to apply
+    to BOTH sides -- but if it is ever applied to the API passages alone, that
+    0.8% asymmetry is the thing to state.
+    """
+    import re
+    n = text.count("*")
+    if not n:
+        return text, 0
+    s = re.sub(r"\*\*\*([^*\n]+)\*\*\*", r"\1", text)
+    s = re.sub(r"\*\*([^*\n]+)\*\*", r"\1", s)
+    s = re.sub(r"(?<!\*)\*([^*\n]+)\*(?!\*)", r"\1", s)
+    s = re.sub(r"(?m)^\s*\*\s+", "", s)          #: bullet markers
+    s = s.replace("*", "")                        #: any unpaired survivor
+    return s, n
+
+
 def lower_first(text):
     """Force a mid-sentence opening. -> (text, changed)
 
@@ -228,3 +272,27 @@ class Continue(Task):
     model = "deepseek/deepseek-v4-flash"
     cache_ttl = "1h"
     usage_log = True
+
+
+def clean(text, stem):
+    """The full post-pass, in the ONE order that works. -> (text, dict of what fired)
+
+    **THE ORDER IS LOAD-BEARING AND THE FAILURE IS SILENT.** `lower_first` on
+    `**Feel something again**` does nothing, because `*` is not alphabetic and
+    the function returns early -- so running it before `strip_markdown` leaves a
+    capitalised sentence opening that the whole point was to remove. Encapsulated
+    here so a caller cannot get the order wrong, which is the same reason
+    `conditions.py` holds the frame transforms in one place.
+
+        1  strip_stem       the model restating the fragment before continuing
+        2  strip_markdown   emphasis markers, keeping the words
+        3  lower_first      force a mid-sentence opening
+
+    Each step's effect on the measurement is recorded in its own docstring and
+    each is small; what is NOT small is skipping step 1, since an echoed stem
+    puts prompt text inside the M=200 window.
+    """
+    t, n_stem = strip_stem(text, stem)
+    t, n_star = strip_markdown(t)
+    t, recased = lower_first(t)
+    return t, {"stem_chars": n_stem, "stars": n_star, "recased": recased}
