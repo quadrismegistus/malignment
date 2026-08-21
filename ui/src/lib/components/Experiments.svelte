@@ -159,6 +159,35 @@
 		const m = stem.match(/^[A-Za-z0-9]+/);
 		return m ? m[0] : stem;
 	}
+	//: FIGURES, CHART ARTIFACTS FIRST (RH, 2026-08-21). A `.data.json` is drawn
+	//: live in the page and reflows; a PNG is a picture of a figure someone drew
+	//: once. They are not peers, and ordering by filename buried the live ones
+	//: behind whatever sorted earlier.
+	//:
+	//: THE PRETTY NAME IS ONLY FOR CHARTS, and the raw filename stays in the
+	//: button's title. A PNG's name IS how you find the file, so title-casing it
+	//: would cost identification to gain tidiness; a chart artifact is addressed
+	//: by the app rather than by a human, so its filename is scaffolding.
+	//:
+	//: `charts` is optional in the API type -- a server predating the field must
+	//: degrade to "no charts", which here means the old alphabetical order rather
+	//: than a crash or a mislabel.
+	let figs = $derived.by(() => {
+		const chart = new Set(detail?.charts ?? []);
+		const pretty = (f: string) =>
+			f
+				.replace(/^fig_/, '')
+				.replace(/\.data\.json$/, '')
+				.replace(/[_-]+/g, ' ')
+				.trim()
+				.replace(/\b\w/g, (c) => c.toUpperCase());
+		return [...(detail?.figures ?? [])]
+			.map((f) => ({ f, chart: chart.has(f), label: chart.has(f) ? pretty(f) : f }))
+			.sort((a, b) =>
+				a.chart === b.chart ? a.label.localeCompare(b.label) : a.chart ? -1 : 1
+			);
+	});
+
 	let resultTree = $derived.by(() => {
 		const rs = detail?.results ?? [];
 		//: THE TOP TIERS ARE TOP-LEVEL ONLY. `word_groups/` holds 40 .txt files
@@ -489,10 +518,11 @@
 			-->
 			<div class="paneswitch figrow">
 				<span class="rowlbl">figures</span>
-				{#if detail.figures.length}
-					{#each detail.figures as f (f)}
-						<button class="ghost grain" class:on={pane === 'fig:' + f}
-							onclick={() => { pane = 'fig:' + f; syncUrl(); }}>{f}</button>
+				{#if figs.length}
+					{#each figs as g (g.f)}
+						<button class="ghost grain" class:chart={g.chart} class:on={pane === 'fig:' + g.f}
+							title={g.chart ? g.f + ' — drawn live in the page' : g.f}
+							onclick={() => { pane = 'fig:' + g.f; syncUrl(); }}>{g.label}</button>
 					{/each}
 				{:else}
 					<span class="muted none">none — this experiment has produced no figure</span>
@@ -794,6 +824,17 @@
 	.grain {
 		font-family: var(--mono);
 		font-size: 10.5px;
+	}
+	/*
+	  A chart artifact is prose-named, so it gets the prose face. The monospace
+	  is doing real work on the others -- those labels ARE filenames and a reader
+	  matches them against `ls` -- and setting a live figure in the same face
+	  makes "Rating Space" read as something to find on disk under that name.
+	*/
+	.grain.chart {
+		font-family: inherit;
+		font-size: 11.5px;
+		font-weight: 600;
 	}
 	.bytes {
 		color: var(--text-3);
