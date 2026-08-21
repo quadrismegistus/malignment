@@ -195,6 +195,71 @@ SELECT base, aligned, relation, depth, rule,
 FROM {db}.movement_cells
 GROUP BY base, aligned, relation, depth, rule
 """,
+
+    #: **THESE TWO EXISTED ONLY IN THE LIVE DATABASE UNTIL 2026-08-21.** Four
+    #: consumers read them -- displacement_taxonomy/{run,crosslineage,coverage}.py
+    #: and scripts/cell_screen.py -- and nothing in the repository created them,
+    #: so a rebuilt ClickHouse would have come back without them and every one of
+    #: those producers would have failed on a missing table. Added here, which is
+    #: where every other view already lived.
+    #:
+    #: ## THE TIE THE OLD DEFINITION COULD NOT BREAK
+    #:
+    #: The previous form was `argMax(total, topup)` grouped by (model, prompt).
+    #: That is a total order ONLY when at most one row exists per (key, topup).
+    #: It does not hold: 3,790 cell keys and 495,624 word keys carry two rows at
+    #: the SAME topup, differing on `prompt_cache`. For those, `argMax` broke the
+    #: tie arbitrarily -- stable in practice, guaranteed by nothing, and across a
+    #: merge it can change. lacan found the symptom on 2026-08-19 (canonical
+    #: min_prob flipped on 14 word keys) and it was recorded in the view's own
+    #: COMMENT as "a correctness bug, not a results bug" without the cause being
+    #: named. The cause is that the ordering expression is not a total order.
+    #:
+    #: ## WHY prompt_cache=1 WINS, AND WHY NOT device
+    #:
+    #: `prompt_cache=1` is 657,523 cells across 120 models (80.2%); `=0` is
+    #: 162,723 across 40. For four cells in five there is no choice at all, so
+    #: preferring the cached arm makes the canonical column HOMOGENEOUS with the
+    #: unreplicated majority instead of mixing two paths inside one column.
+    #: RH's call, 2026-08-21.
+    #:
+    #: `device` was considered as a tiebreak (prefer cuda, put mps last) and
+    #: REJECTED: it distinguishes only 529 of the 3,790 cell pairs, and it does
+    #: not exist as a column on `twp_words_v4` at all. Using it for cells alone
+    #: would let the two views select DIFFERENT underlying runs for one cell.
+    #: `mtime` is shared by both tables and comes from the file that produced
+    #: both rows, so the two views stay in step.
+    #:
+    #: (topup, prompt_cache, mtime) leaves 0 tied keys in either table -- checked,
+    #: not assumed.
+    #:
+    #: The replicates are NOT deleted. They agree to 3.2e-05 median on `total`
+    #: (p90 8.1e-04, max 8.8e-03), conservation matches to <1e-6 on all 3,790,
+    #: and n_words differs on 565 -- 283 down, 282 up, i.e. unbiased theta-boundary
+    #: jitter. That is an accidental replicate experiment and it is the only
+    #: measurement of this instrument's noise floor we have.
+    "twp_cells_v4_best": """
+CREATE OR REPLACE VIEW {db}.twp_cells_v4_best AS
+SELECT model, prompt,
+       argMax(total,        (topup, prompt_cache, mtime)) AS total,
+       argMax(tail,         (topup, prompt_cache, mtime)) AS tail,
+       argMax(conservation, (topup, prompt_cache, mtime)) AS conservation,
+       max(topup)                                         AS merged
+FROM {db}.twp_cells_v4
+GROUP BY model, prompt
+COMMENT 'BOTH source rows are legitimate and neither is a repair of the other. A pass-1 cell and its topup cell are TWO MEASUREMENTS OF ONE SURFACE -- beam-accumulated (expand4) and single-path lower bound (score_words4, n_paths=1) -- and they must not be merged. This view takes the merged value where a topup cell exists and the pass-1 value where it does not, one row per key. The merged COLUMN is PROVENANCE, not a quality mark. ORDERING FIXED 2026-08-21: was argMax(.., topup), which is not a total order -- 3,790 cell keys carry two rows at the same topup differing on prompt_cache, and the tie was broken arbitrarily (this is the cause of the canonical min_prob flip lacan found 2026-08-19). Now (topup, prompt_cache, mtime), which leaves 0 tied keys. prompt_cache=1 wins because it is 80.2 percent of the corpus and 4 cells in 5 have no replicate at all. Replicates are retained, not deleted: they agree to 3.2e-05 median on total and give the instrument its only noise floor.'
+""",
+
+    "twp_words_v4_best": """
+CREATE OR REPLACE VIEW {db}.twp_words_v4_best AS
+SELECT model, prompt, word,
+       argMax(p,        (topup, prompt_cache, mtime)) AS p,
+       argMax(n_paths,  (topup, prompt_cache, mtime)) AS n_paths,
+       max(topup)                                     AS merged
+FROM {db}.twp_words_v4
+GROUP BY model, prompt, word
+COMMENT 'BOTH source rows are legitimate and neither is a repair of the other. A pass-1 cell and its topup cell are TWO MEASUREMENTS OF ONE SURFACE -- beam-accumulated (expand4) and single-path lower bound (score_words4, n_paths=1) -- and they must not be merged. A topup cell carries pass 1 rows byte-identically PLUS words scored below theta, which is why the same (model,prompt,word) appears twice in twp_words_v4. This view takes the merged value where a topup cell exists and the pass-1 value where it does not, one row per key. The merged COLUMN is PROVENANCE, not a quality mark. ORDERING FIXED 2026-08-21: was argMax(.., topup), which is not a total order -- 495,624 word keys carry two rows at the same topup differing on prompt_cache, and the tie was broken arbitrarily. That is the cause of the canonical min_prob flip on 14 keys of 9,993,876 found by lacan 2026-08-19, recorded then as a correctness bug without its cause named. Now (topup, prompt_cache, mtime), which leaves 0 tied keys. device was rejected as a tiebreak: it is not a column on this table, so cells and words could have selected different runs for one cell.'
+""",
 }
 
 
