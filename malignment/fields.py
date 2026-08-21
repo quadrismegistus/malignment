@@ -235,10 +235,36 @@ def _wordnet():
         return json.load(fh)
 
 
-def wordnet(word):
-    d = _wordnet()
-    v = d.get(word.lower())
-    return set(v if isinstance(v, (list, set, tuple)) else ([v] if v else []))
+def wordnet(word, sense="all"):
+    """WordNet verb supersenses for this word. -> set
+
+    **THIS LOOKUP WAS DEAD AND RETURNED set() FOR ALL 11,529 LEMMAS.** The file
+    is `{"meta": ..., "words": {...}}` and the accessor indexed the TOP level, so
+    every lookup missed -- and it raised only when a passage contained the
+    literal word `words`, which is how it was finally found: by `count()` being
+    the first caller to run it over real prose rather than over a probe.
+
+    A lookup that returns empty for everything is indistinguishable from a word
+    genuinely absent from the lexicon, which is why nothing caught it. The
+    `--check` output said the SOURCE was present, and it was; only the accessor
+    was wrong.
+
+    `sense="all"` is the default on the file's own instruction: its meta records
+    that FIRST_SENSE_IS_UNRELIABLE -- `found` resolves to `social` (from "set up
+    or found", not the past of find) and `felt` to `contact` (from "mat together,
+    make felt-like"), and `found` is this corpus's single most frequent riser.
+
+    The same meta records TOO_COARSE_FOR_SPEECH: `whispered`, `shouted`, `said`
+    and `told` share the `communication` supersense while the first two rise and
+    the last two fall in M01. That distinction is invisible here and this source
+    cannot carry it.
+    """
+    v = _wordnet().get("words", {}).get(word.lower())
+    if not v:
+        return set()
+    if sense == "first":
+        return {v["first"]} if v.get("first") else set()
+    return set(v.get("all") or [])
 
 
 @functools.lru_cache(maxsize=1)

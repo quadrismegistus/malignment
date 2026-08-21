@@ -23,8 +23,39 @@ evidence.
           concreteness_brysbaert_mean over content words
           inherited from K (z -17.1 / -18.8) and the M05 de-concretization arc
 
+    H5    alignment increases SECONDARY-PROCESS thinking (RH, 2026-08-22)
+          rid_conceptual_secondary UP, rid_primordial_primary DOWN
+          NOT inherited -- the first RID measurement on any passage of this
+          corpus, and the one closest to the project's Freudian frame
+
+RH's H2 and H3 are separate claims and are registered separately: a valence MEAN
+can rise while its SPREAD narrows, or either can move alone. H3 is the plan's
+inherited C.H1 in spread form; H2 is new.
+
 Secondary, NO DIRECTION: arousal, dominance. Dominance is the campaign's
 twice-dead scale and rides as the negative control it has become.
+
+## COVERAGE, MEASURED ON 60 REAL PASSAGES BEFORE ANY CONTRAST
+
+Coverage decides which sources can carry a passage MEAN and which are rates
+only, so it was measured first rather than discovered in the results:
+
+    usas        98.9%     brysbaert  98.9%     k         97.4%
+    gi          89.4%     warriner   67.3%     wordnet   63.4%
+    rid         50.2%     brooke     11.9%   <- SPARSE, rate only
+
+**Brooke is the sparse one and H4 rests on it.** 11.9% of content words at the
+median, but every one of the 60 passages has at least one hit, so a per-passage
+formality RATE exists throughout. It is a mean of +1/-1 over a 1,029-word seed
+list, not a scale, and must be read as a rate with its denominator attached.
+`k_register_level` is the alternative and is descriptor-only by standing rider,
+so H4 has one instrument and it is a sparse one.
+
+**Warriner at 67.3% is the one to watch for the arm comparison.** A third of
+content words are absent from it, and absence is not random -- proper nouns are
+not in the norms and NNP runs about 7 per 1000 words lower in the aligned arm.
+So the coverage differential is expected, travels as description, and is never
+corrected for.
 
 ## WHY IT IS A BRIDGE AND NOT A REPETITION
 
