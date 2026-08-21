@@ -121,16 +121,33 @@ def tables(prompt_prefix):
     return prompt, out
 
 
-def prepare(prefix, model=MODEL, effort=EFFORT, raters=1):
+def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False):
     prompt, tbl = tables(prefix)
     src = open(INSTRUMENT).read()
-    tmpl = re.search(r"## PROMPT TEMPLATE\s*\n+```\n(.*?)\n```", src, re.S).group(1)
+    #: ── BLIND: NEUTRAL FRAMING *AND* NEUTRAL LABELS ─────────────────────────
+    #: Swapping the framing paragraph alone is not a blind. The headings carry
+    #: `-Instruct`, `-Chat`, `-DPO`, `_sft-dpo_`, `AmberSafe`, `beaver-7b`: a
+    #: reader told only "A and B" still knows which process is under study, and
+    #: `AmberSafe` says what to expect of that row. Both go, or neither does.
+    #: Seeded on the PROMPT so a re-prepare is reproducible and no label carries
+    #: meaning across prompts.
+    label = {}
+    if blind:
+        import random
+        order = sorted(n for n, _ in tbl)
+        random.Random(prompt).shuffle(order)
+        label = {n: "M%02d" % (i + 1) for i, n in enumerate(order)}
+        tbl = [(label[n], t) for n, t in tbl]
+    key = "## PROMPT TEMPLATE BLIND" if blind else "## PROMPT TEMPLATE"
+    tmpl = re.search(re.escape(key) + r"\s*\n+```\n(.*?)\n```", src, re.S).group(1)
     schema = json.loads(re.search(r"## SCHEMA JSON\b.*?\n```json\n(.*?)\n```", src, re.S).group(1))
     body = "\n\n".join("=== MODEL %s ===\n%s" % (n, t) for n, t in tbl)
     text = (tmpl.replace("{{n_models}}", str(len(tbl)))
                 .replace("{{fragment}}", prompt + " ___")
                 .replace("{{tables}}", body))
     slug = re.sub(r"[^a-z0-9]+", "_", prompt.lower())[:40].strip("_")
+    if blind:
+        slug += "_blind"
     path = os.path.join(HERE, "results", "inputs", "xling_%s.txt" % slug)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w").write(text)
@@ -140,10 +157,18 @@ def prepare(prefix, model=MODEL, effort=EFFORT, raters=1):
     #: The roster is a moving target -- topped-up pairs went 21 to 25 within an
     #: hour as pass 2 ingested -- so the list is pinned in the state file and the
     #: ingest checks against THAT, not against a fresh query.
+    ver = re.search(r"^# INSTRUMENT: \S+ (\S+)", src, re.M).group(1)
+    #: `models` is what the RATER SEES -- the ingest assert must run over the
+    #: names actually used. `unlabel` restores the real ones before anything
+    #: reaches the stash, and `real_models` is what `lineages_sha` is taken over,
+    #: so a blind and a sighted reading of the same roster share a sha and stay
+    #: comparable. Hashing the labels would have made them different populations.
     state = {"prompt": prompt, "slug": slug, "models": [n for n, _ in tbl],
-             "n_lineages": len(tbl),
+             "real_models": sorted(label) if label else [n for n, _ in tbl],
+             "n_lineages": len(tbl), "blind": bool(blind),
+             "unlabel": {v: k for k, v in label.items()},
              "model": model, "effort": effort, "path": path,
-             "version": re.search(r"^# INSTRUMENT: \S+ (\S+)", src, re.M).group(1)}
+             "version": ver + ("b" if blind else "")}
     json.dump(state, open(os.path.join(HERE, "results", "xling_%s.json" % slug), "w"), indent=1)
     js = SCRIPT % {"raters": raters,
                    "path": json.dumps(os.path.abspath(path)),
@@ -156,7 +181,8 @@ def prepare(prefix, model=MODEL, effort=EFFORT, raters=1):
         if probe not in js:
             raise SystemExit("generated script missing %r" % probe)
     print("%r\n  %d lineages, %d chars of tables (~%d tokens), %d rater(s)"
-          % (prompt, len(tbl), len(body), len(body) // 4, raters))
+          % (prompt, len(tbl), len(body), len(body) // 4, raters)
+          + ("  BLIND: A/B framing, labels M01..M%02d" % len(tbl) if blind else ""))
     print("  task     %s" % path)
     print("  workflow %s\n\nNOT RUN." % out)
 
@@ -165,6 +191,8 @@ def ingest(run_id, slug):
     import glob
     state = json.load(open(os.path.join(HERE, "results", "xling_%s.json" % slug)))
     shown = set(state["models"])
+    unlabel = state.get("unlabel") or {}
+    real = state.get("real_models") or state["models"]
     base = os.path.expanduser("~/.claude/projects")
     hits = glob.glob(os.path.join(base, "*", "*", "subagents", "workflows", run_id))
     if not hits:
@@ -201,12 +229,23 @@ def ingest(run_id, slug):
         #: at 18 and at 29 lineages gave 3 operations and 7. Without this in the
         #: key the second run OVERWROTE the first and the comparison was lost --
         #: which is exactly what happened before this line existed.
-        lsha = hashlib.sha256("\n".join(sorted(state["models"])).encode()).hexdigest()[:12]
+        #: OVER THE REAL NAMES, always. Under `--blind` `state["models"]` holds
+        #: M01..M50, and hashing those would give the same 50 lineages a
+        #: different sha depending on how they were labelled -- two populations
+        #: where there is one, and the comparison this key exists to protect
+        #: would have been lost exactly as it was before the key existed.
+        lsha = hashlib.sha256("\n".join(sorted(real)).encode()).hexdigest()[:12]
+        if unlabel:
+            for op in r["operations"]:
+                for m in op["members"]:
+                    m["model"] = unlabel.get(m["model"], m["model"])
+            for x in r["reversed"] + r["unassigned"]:
+                x["model"] = unlabel.get(x["model"], x["model"])
         st[{"stage": "crosslineage", "version": state["version"],
             "frame_prompt": state["prompt"], "model": state["model"],
             "effort": state["effort"], "lineages_sha": lsha,
-            "n_lineages": len(state["models"]), "rater": i}] = dict(
-                r, run_id=run_id, models=state["models"])
+            "n_lineages": len(real), "rater": i}] = dict(
+                r, run_id=run_id, blind=bool(unlabel), models=real)
     print("stored %d reading(s) for %r" % (len(res), state["prompt"][:52]))
     for i, r in enumerate(res, 1):
         print("  r%d: %d operations, %d reversed, %d unassigned, %s"
@@ -279,9 +318,11 @@ if __name__ == "__main__":
     #: every result carrying `operations` as rater 1..N, so the only thing that
     #: was missing was a way to ask for more than one.
     ap.add_argument("--raters", type=int, default=1)
+    ap.add_argument("--blind", action="store_true",
+                    help="neutral A/B framing AND anonymised model labels")
     a = ap.parse_args()
     if a.prepare:
-        prepare(a.prepare, raters=a.raters)
+        prepare(a.prepare, raters=a.raters, blind=a.blind)
     elif a.ingest:
         if not a.slug:
             raise SystemExit("--ingest needs --slug")

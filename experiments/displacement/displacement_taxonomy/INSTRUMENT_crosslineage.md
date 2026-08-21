@@ -111,6 +111,65 @@ unassigned and say so.
 
 ---
 
+## PROMPT TEMPLATE BLIND
+
+```
+Below are {{n_models}} independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: {{fragment}}
+
+{{tables}}
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all {{n_models}} tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.
+```
+
 ## SCHEMA JSON
 
 ```json
