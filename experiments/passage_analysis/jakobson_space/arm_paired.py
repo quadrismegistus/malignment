@@ -2,6 +2,7 @@
 
     python .../arm_paired.py
     python .../arm_paired.py --min-passages 20
+    python .../arm_paired.py --human        # and the toward/away test per corpus
 
 Everything else in this folder reports the quadrant plane DESCRIPTIVELY: shares,
 enrichments, medians of per-model medians. None of it is a test, and a table of
@@ -37,6 +38,21 @@ least one arm present and **22 have BOTH** at 10+ passages, which is what a
 paired test can use. The loss is not a filter applied here -- it is which models
 reached the narrative pool upstream -- but it is the population every p-value
 below is about, and a reader should not infer the roster.
+
+## THE HUMAN TEST IS PER CORPUS, NOT AGAINST "HUMAN"
+
+`--human` asks whether alignment moves a lineage TOWARD or AWAY from human
+writing, lineage-paired: euclidean distance on the (z_surprisal, z_drift) plane
+from each arm's median to a corpus median, differenced aligned-minus-base, sign
+test over the same lineages.
+
+**It is run against each of the six corpora separately and never against their
+centroid.** The corpora occupy opposite corners of this plane -- literary
+criticism is 66.7% `(+surp +drift)` and waking narrative 61.2% `(-surp -drift)`
+-- so their pooled centroid sits in the middle of a region none of them occupies,
+and "distance from human" computed against it would be a distance from nowhere.
+Six answers is the honest shape of the question, and they are not expected to
+agree in sign.
 
 ## WHAT IS TESTED
 
@@ -82,14 +98,24 @@ def main(argv=None):
     ap.add_argument("--src", default=SRC)
     ap.add_argument("--min-passages", type=int, default=10,
                     help="a model median needs enough passages to be one")
+    ap.add_argument("--human", action="store_true",
+                    help="also run the toward/away test against each corpus")
     a = ap.parse_args(argv)
     from malignment import roster
 
     csv.field_size_limit(10 ** 7)
     per = collections.defaultdict(list)
+    corp = collections.defaultdict(list)
     for r in csv.DictReader(open(a.src, newline="")):
         if r["category"] in ("base", "aligned"):
             per[r["model"]].append(r)
+        elif r["human_or_ai"] == "human":
+            corp[r["category"]].append(r)
+
+    def zmed(rows):
+        """(median z_surprisal, median z_drift) -- the plane the quadrants cut."""
+        return (statistics.median(float(x["z_surprisal"]) for x in rows),
+                statistics.median(float(x["z_drift"]) for x in rows))
 
     def stats_for(m):
         v = per[m]
@@ -113,8 +139,10 @@ def main(argv=None):
             continue
         bs, bd, bq, bn = stats_for(base)
         ks = [stats_for(k) for k in kids]
+        bz = zmed(per[base])
+        kz = [zmed(per[k]) for k in kids]
         rows.append(dict(
-            base=base, n_kids=len(kids), n_base=bn,
+            base=base, n_kids=len(kids), n_base=bn, base_z=bz, kid_z=kz,
             d_surp=statistics.mean(x[0] for x in ks) - bs,
             d_drift=statistics.mean(x[1] for x in ks) - bd,
             d_quad={q: statistics.mean(x[2][q] for x in ks) - bq[q] for q in QS}))
@@ -146,6 +174,25 @@ def main(argv=None):
     #: SAY THE DENOMINATOR AND THE INDEPENDENCE UNIT ON THE WAY OUT. A p-value
     #: whose n is a checkpoint count and not a lineage count is the defect this
     #: file was written to avoid, and the reader cannot see the difference.
+    if a.human:
+        print("\n\nTOWARD OR AWAY FROM EACH HUMAN CORPUS, lineage-paired")
+        print("distance on the (z_surprisal, z_drift) plane; NEGATIVE = alignment")
+        print("moves the lineage TOWARD that corpus\n")
+        print("%-24s %10s %5s %5s %11s %s"
+              % ("corpus", "median", "twd", "awy", "p", "direction"))
+        for c in sorted(corp):
+            cz = zmed(corp[c])
+            d = []
+            for r in rows:
+                db = math.dist(r["base_z"], cz)
+                dk = statistics.mean(math.dist(z, cz) for z in r["kid_z"])
+                d.append(dk - db)
+            n, up, dn, med, mean, p = sign_test(d)
+            #: `up` is AWAY (distance grew); name the columns for the reader
+            #: rather than leaving them to infer the sign convention.
+            print("%-24s %+10.4f %5d %5d %11.3g %s"
+                  % (c, med, dn, up, p, "TOWARD" if med < 0 else "away"))
+
     print("\nn is LINEAGES (%d), not checkpoints (%d). A lineage with several"
           % (len(rows), sum(r["n_kids"] for r in rows) + len(rows)))
     print("aligned children contributes one difference, its children averaged first.")
