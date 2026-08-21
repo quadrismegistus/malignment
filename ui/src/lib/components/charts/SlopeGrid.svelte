@@ -74,6 +74,24 @@
 	const rowAt = (panel: string, series: string, x: string) =>
 		byPanel.get(panel)?.get(series)?.find((r) => r.x === x);
 
+	//: DERIVED FROM THE DOMAIN, not hardcoded. These were `[-0.5, 0, 0.5]`, which
+	//: is the institutional figure's window; the sexual one is +-0.25 and drew
+	//: ticks OUTSIDE its own domain, labelling the axis with numbers no point on
+	//: it could reach. It did not error and the lines were right -- only the
+	//: scale lied, which is the leak this component keeps having: a value true of
+	//: the figure it was written for, left where a second figure inherits it.
+	const yTicks = $derived([art.y_domain[0], 0, art.y_domain[1]]);
+
+	//: ENOUGH DECIMALS FOR THE TICK TO BE ITSELF. The default format rounds to
+	//: one decimal, so a +-0.25 window labelled its ends "0.3" -- an axis naming
+	//: a value no tick on it holds. Precision is derived from the domain rather
+	//: than fixed, so a +-0.5 window still reads "0.5" and not "0.50".
+	const yFmt = $derived.by(() => {
+		const hi = Math.abs(art.y_domain[1]);
+		const dp = hi >= 1 ? 1 : Math.abs(hi * 10 - Math.round(hi * 10)) < 1e-9 ? 1 : 2;
+		return (d: number) => d.toFixed(dp);
+	});
+
 	const seriesFor = (panel: string) =>
 		art.series.map((s) => ({
 			key: s.key,
@@ -141,7 +159,7 @@
 						props={{
 							spline: { strokeWidth: 1.8 },
 							xAxis: { grid: false, rule: false, tickLength: 0 },
-							yAxis: { grid: false, ticks: [-0.5, 0, 0.5] },
+							yAxis: { grid: false, ticks: yTicks, format: yFmt },
 							grid: { x: false, y: false }
 						}}
 					/>

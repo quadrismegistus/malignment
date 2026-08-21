@@ -1,0 +1,449 @@
+{
+ "chart": "slopes",
+ "title": "Alignment moves both genders the same way, and the gap it found stays put",
+ "subtitle": "Parallel lines are a null; the asymmetry is the fanning.",
+ "stat_label": "change in gap (male \u2212 female)",
+ "note_label": "absolute range across all four points",
+ "x_order": [
+  "base",
+  "aligned"
+ ],
+ "y_domain": [
+  -0.25,
+  0.25
+ ],
+ "series": [
+  {
+   "key": "male slot",
+   "colour": "#e67e22"
+  },
+  {
+   "key": "female slot",
+   "colour": "#2980b9"
+  }
+ ],
+ "panels": [
+  {
+   "key": "makes_better",
+   "label": "makes_better  +0.035  p 0.108",
+   "note": "2.81-2.88",
+   "did": 0.03513,
+   "mark": ""
+  },
+  {
+   "key": "harm",
+   "label": "harm  -0.023  p 0.409",
+   "note": "1.45-1.53",
+   "did": -0.022758,
+   "mark": ""
+  },
+  {
+   "key": "mundanity",
+   "label": "mundanity  -0.017  p 0.533",
+   "note": "3.73-3.96",
+   "did": -0.016735,
+   "mark": ""
+  },
+  {
+   "key": "interiority",
+   "label": "interiority  +0.015  p 0.302",
+   "note": "1.71-1.85",
+   "did": 0.014872,
+   "mark": ""
+  },
+  {
+   "key": "deliberation",
+   "label": "deliberation  +0.014  p 0.066",
+   "note": "1.21-1.23",
+   "did": 0.013983,
+   "mark": ""
+  },
+  {
+   "key": "vocalisation",
+   "label": "vocalisation  -0.011  p 0.781",
+   "note": "2.23-2.35",
+   "did": -0.010804,
+   "mark": ""
+  },
+  {
+   "key": "hedged",
+   "label": "hedged  +0.010  p 0.032",
+   "note": "1.10-1.15",
+   "did": 0.01019,
+   "mark": ""
+  },
+  {
+   "key": "fit",
+   "label": "fit  +0.008  p 0.612",
+   "note": "6.62-6.65",
+   "did": 0.007591,
+   "mark": ""
+  },
+  {
+   "key": "makes_worse",
+   "label": "makes_worse  -0.006  p 0.872",
+   "note": "2.02-2.25",
+   "did": -0.006121,
+   "mark": ""
+  },
+  {
+   "key": "directedness",
+   "label": "directedness  +0.004  p 0.931",
+   "note": "4.00-4.36",
+   "did": 0.004127,
+   "mark": ""
+  },
+  {
+   "key": "aggression",
+   "label": "aggression  -0.003  p 0.796",
+   "note": "1.79-1.90",
+   "did": -0.003331,
+   "mark": ""
+  },
+  {
+   "key": "superego",
+   "label": "superego  +0.001  p 0.855",
+   "note": "1.08-1.12",
+   "did": 0.001419,
+   "mark": ""
+  }
+ ],
+ "rows": [
+  {
+   "panel": "makes_better",
+   "series": "male slot",
+   "x": "base",
+   "y": -0.033105,
+   "level": 2.813267
+  },
+  {
+   "panel": "makes_better",
+   "series": "male slot",
+   "x": "aligned",
+   "y": 0.002555,
+   "level": 2.848927
+  },
+  {
+   "panel": "makes_better",
+   "series": "female slot",
+   "x": "base",
+   "y": 0.032979,
+   "level": 2.879352
+  },
+  {
+   "panel": "makes_better",
+   "series": "female slot",
+   "x": "aligned",
+   "y": 0.033105,
+   "level": 2.879477
+  },
+  {
+   "panel": "harm",
+   "series": "male slot",
+   "x": "base",
+   "y": 0.036977,
+   "level": 1.525621
+  },
+  {
+   "panel": "harm",
+   "series": "male slot",
+   "x": "aligned",
+   "y": -0.038561,
+   "level": 1.450084
+  },
+  {
+   "panel": "harm",
+   "series": "female slot",
+   "x": "base",
+   "y": 0.038561,
+   "level": 1.527205
+  },
+  {
+   "panel": "harm",
+   "series": "female slot",
+   "x": "aligned",
+   "y": -0.014123,
+   "level": 1.474521
+  },
+  {
+   "panel": "mundanity",
+   "series": "male slot",
+   "x": "base",
+   "y": -0.011555,
+   "level": 3.836262
+  },
+  {
+   "panel": "mundanity",
+   "series": "male slot",
+   "x": "aligned",
+   "y": 0.113801,
+   "level": 3.961618
+  },
+  {
+   "panel": "mundanity",
+   "series": "female slot",
+   "x": "base",
+   "y": -0.113801,
+   "level": 3.734016
+  },
+  {
+   "panel": "mundanity",
+   "series": "female slot",
+   "x": "aligned",
+   "y": 0.020814,
+   "level": 3.868631
+  },
+  {
+   "panel": "interiority",
+   "series": "male slot",
+   "x": "base",
+   "y": -0.068296,
+   "level": 1.713146
+  },
+  {
+   "panel": "interiority",
+   "series": "male slot",
+   "x": "aligned",
+   "y": -0.013309,
+   "level": 1.768133
+  },
+  {
+   "panel": "interiority",
+   "series": "female slot",
+   "x": "base",
+   "y": 0.027614,
+   "level": 1.809056
+  },
+  {
+   "panel": "interiority",
+   "series": "female slot",
+   "x": "aligned",
+   "y": 0.068296,
+   "level": 1.849737
+  },
+  {
+   "panel": "deliberation",
+   "series": "male slot",
+   "x": "base",
+   "y": -0.000381,
+   "level": 1.221016
+  },
+  {
+   "panel": "deliberation",
+   "series": "male slot",
+   "x": "aligned",
+   "y": 0.011238,
+   "level": 1.232634
+  },
+  {
+   "panel": "deliberation",
+   "series": "female slot",
+   "x": "base",
+   "y": -0.008845,
+   "level": 1.212551
+  },
+  {
+   "panel": "deliberation",
+   "series": "female slot",
+   "x": "aligned",
+   "y": -0.011238,
+   "level": 1.210158
+  },
+  {
+   "panel": "vocalisation",
+   "series": "male slot",
+   "x": "base",
+   "y": -0.058114,
+   "level": 2.230096
+  },
+  {
+   "panel": "vocalisation",
+   "series": "male slot",
+   "x": "aligned",
+   "y": -0.018452,
+   "level": 2.269759
+  },
+  {
+   "panel": "vocalisation",
+   "series": "female slot",
+   "x": "base",
+   "y": 0.00683,
+   "level": 2.295041
+  },
+  {
+   "panel": "vocalisation",
+   "series": "female slot",
+   "x": "aligned",
+   "y": 0.058114,
+   "level": 2.346325
+  },
+  {
+   "panel": "hedged",
+   "series": "male slot",
+   "x": "base",
+   "y": 0.020174,
+   "level": 1.145155
+  },
+  {
+   "panel": "hedged",
+   "series": "male slot",
+   "x": "aligned",
+   "y": 0.017531,
+   "level": 1.142512
+  },
+  {
+   "panel": "hedged",
+   "series": "female slot",
+   "x": "base",
+   "y": -0.006863,
+   "level": 1.118118
+  },
+  {
+   "panel": "hedged",
+   "series": "female slot",
+   "x": "aligned",
+   "y": -0.020174,
+   "level": 1.104808
+  },
+  {
+   "panel": "fit",
+   "series": "male slot",
+   "x": "base",
+   "y": 0.001937,
+   "level": 6.641009
+  },
+  {
+   "panel": "fit",
+   "series": "male slot",
+   "x": "aligned",
+   "y": 0.014976,
+   "level": 6.654047
+  },
+  {
+   "panel": "fit",
+   "series": "female slot",
+   "x": "base",
+   "y": -0.014976,
+   "level": 6.624096
+  },
+  {
+   "panel": "fit",
+   "series": "female slot",
+   "x": "aligned",
+   "y": -0.009448,
+   "level": 6.629624
+  },
+  {
+   "panel": "makes_worse",
+   "series": "male slot",
+   "x": "base",
+   "y": -0.043244,
+   "level": 2.094599
+  },
+  {
+   "panel": "makes_worse",
+   "series": "male slot",
+   "x": "aligned",
+   "y": -0.114804,
+   "level": 2.023039
+  },
+  {
+   "panel": "makes_worse",
+   "series": "female slot",
+   "x": "base",
+   "y": 0.114804,
+   "level": 2.252648
+  },
+  {
+   "panel": "makes_worse",
+   "series": "female slot",
+   "x": "aligned",
+   "y": 0.049295,
+   "level": 2.187138
+  },
+  {
+   "panel": "directedness",
+   "series": "male slot",
+   "x": "base",
+   "y": 0.179696,
+   "level": 4.362044
+  },
+  {
+   "panel": "directedness",
+   "series": "male slot",
+   "x": "aligned",
+   "y": 0.043072,
+   "level": 4.22542
+  },
+  {
+   "panel": "directedness",
+   "series": "female slot",
+   "x": "base",
+   "y": -0.051479,
+   "level": 4.130869
+  },
+  {
+   "panel": "directedness",
+   "series": "female slot",
+   "x": "aligned",
+   "y": -0.179696,
+   "level": 4.002653
+  },
+  {
+   "panel": "aggression",
+   "series": "male slot",
+   "x": "base",
+   "y": -0.031725,
+   "level": 1.814543
+  },
+  {
+   "panel": "aggression",
+   "series": "male slot",
+   "x": "aligned",
+   "y": -0.052727,
+   "level": 1.793541
+  },
+  {
+   "panel": "aggression",
+   "series": "female slot",
+   "x": "base",
+   "y": 0.052727,
+   "level": 1.898995
+  },
+  {
+   "panel": "aggression",
+   "series": "female slot",
+   "x": "aligned",
+   "y": 0.035102,
+   "level": 1.88137
+  },
+  {
+   "panel": "superego",
+   "series": "male slot",
+   "x": "base",
+   "y": 0.013115,
+   "level": 1.11341
+  },
+  {
+   "panel": "superego",
+   "series": "male slot",
+   "x": "aligned",
+   "y": 0.0199,
+   "level": 1.120195
+  },
+  {
+   "panel": "superego",
+   "series": "female slot",
+   "x": "base",
+   "y": -0.0199,
+   "level": 1.080395
+  },
+  {
+   "panel": "superego",
+   "series": "female slot",
+   "x": "aligned",
+   "y": -0.015,
+   "level": 1.085295
+  }
+ ]
+}
