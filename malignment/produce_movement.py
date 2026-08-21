@@ -208,12 +208,26 @@ def _arm(model):
         wq = "SELECT prompt, word, p FROM {db}.twp_words WHERE model='%s'" % esc
         cq = "SELECT prompt, total FROM {db}.twp_cells WHERE model='%s'" % esc
     else:
-        #: argMax over `topup` picks the merged cell where one exists and the
+        #: argMax over the tuple picks the merged cell where one exists and the
         #: pass-1 cell where it does not -- one row per prompt either way.
-        wq = ("SELECT prompt, word, argMax(p, topup) AS p FROM {db}.twp_words_v4 "
-              "WHERE model='%s' GROUP BY prompt, word" % esc)
-        cq = ("SELECT prompt, argMax(total, topup) AS total FROM {db}.twp_cells_v4 "
-              "WHERE model='%s' GROUP BY prompt" % esc)
+        #:
+        #: **THE ORDERING MUST MATCH `twp_*_v4_best` EXACTLY, AND `topup` ALONE
+        #: DOES NOT.** 3,790 cell keys and 495,624 word keys carry two rows at the
+        #: SAME topup, differing on `prompt_cache`, so `argMax(p, topup)` hits a
+        #: tie and breaks it arbitrarily. Two consequences, and the second is
+        #: worse than the first: the choice is not reproducible across a merge,
+        #: and `movement_v4` could select a DIFFERENT row than the `_best` views
+        #: hand every other consumer -- two canonical answers for one cell, with
+        #: nothing in either table saying they disagree.
+        #:
+        #: (topup, prompt_cache, mtime) leaves 0 tied keys in either table.
+        #: prompt_cache=1 wins because it is 80.2% of the corpus and four cells
+        #: in five have no replicate at all. Same tuple, same order, same reason
+        #: as `views.py` -- if one of these changes the other has to.
+        wq = ("SELECT prompt, word, argMax(p, (topup, prompt_cache, mtime)) AS p "
+              "FROM {db}.twp_words_v4 WHERE model='%s' GROUP BY prompt, word" % esc)
+        cq = ("SELECT prompt, argMax(total, (topup, prompt_cache, mtime)) AS total "
+              "FROM {db}.twp_cells_v4 WHERE model='%s' GROUP BY prompt" % esc)
     words = collections.defaultdict(dict)
     for r in ch.query(wq):
         words[r["prompt"]][r["word"]] = r["p"]
