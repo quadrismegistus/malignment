@@ -411,10 +411,10 @@ def fig_rating_space_data():
 
     art = parcoords(
         title="The rating space: every word the sixteen scenes put in the slot",
-        subtitle=("%d (prompt, word) cells on nine scales, rated by `sexual_slot_en_v2`. A word "
-                  "is rated IN ITS PROMPT, so the same word recurs once per scene it occurs "
-                  "in. Colour is whose body or action the slot HOLDS, not who acts: in four "
-                  "of the eight matched sets those are different people." % len(core)),
+        subtitle=("%d (prompt, word) cells rated by `sexual_slot_en_v2`. A word is rated IN ITS "
+                  "PROMPT, so the same word recurs once per scene. Colour is whose body or "
+                  "action the slot HOLDS, not who acts: in four of the eight matched sets "
+                  "those are different people." % len(core)),
         axes=axes, groups=groups, lines=lines,
         value_label="rating",
         meta_order=["prompt", "word", "reading", "pair", "role", "referent", "zone", "net"],
@@ -531,12 +531,14 @@ def fig_lineage_moves_data():
 
     art = parcoords(
         title="Where each model takes each scene, against where it started",
-        subtitle=("528 (lineage, prompt) pairs, both arms. Each pair is centred on its own "
-                  "two-arm mean, because raw levels show nothing here: the arm difference is "
-                  "1-24% of the spread between lineages. The two arms are therefore MIRROR "
-                  "IMAGES by construction -- their separation is the move, the symmetry is "
-                  "arithmetic. Axis notes: share of pairs that move at all going the way "
-                  "LAYER 1 books."),
+        #: TWO CLAUSES, AND BOTH ARE LOAD-BEARING: what the y axis is, and the
+        #: warning that the symmetry is arithmetic. The sentence explaining the
+        #: axis notes was cut because the notes read as themselves ("69% of 500
+        #: down"), and a fence nobody finishes reading is not a fence.
+        subtitle=("528 (lineage, prompt) pairs, both arms, each centred on its own two-arm "
+                  "mean: raw levels show nothing here, the arm gap being 1-24% of the spread "
+                  "between lineages. The arms are therefore MIRROR IMAGES by construction -- "
+                  "their separation is the move, the symmetry is arithmetic."),
         axes=axes,
         groups=[{"key": "base", "label": "base", "colour": BASE},
                 {"key": "aligned", "label": "aligned", "colour": ALIGNED}],

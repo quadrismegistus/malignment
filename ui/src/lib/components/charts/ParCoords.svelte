@@ -570,11 +570,20 @@
 		margin: 0 0 0.15rem;
 		font-size: 1rem;
 	}
+	/*
+	  A MEASURE, NOT THE PANEL WIDTH. Unconstrained the subtitle runs ~190
+	  characters per line on a wide panel, which is far past where a line is
+	  readable. 70ch was too tight the other way and turned a long subtitle into a
+	  four-line wall above the chart. 120ch is past the usual 45-95 prose band,
+	  which is a deliberate trade: a subtitle is read ONCE, next to the thing it
+	  describes, and the ragged narrow column above a full-width panel cost more
+	  than the long measure does. The cap still bites on an ultrawide display.
+	*/
 	.sub {
 		margin: 0 0 0.7rem;
 		font-size: 0.85rem;
 		color: var(--text-3);
-		max-width: 70ch;
+		max-width: 120ch;
 	}
 	.plot {
 		width: 100%;
