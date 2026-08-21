@@ -190,6 +190,36 @@ def main():
 # aggregated raw -- which words rise, which fall, in how many lineages -- with no
 # scale involved. RH, 2026-08-19.
 
+def _scale_summary(per_scale):
+    """Every context a word was rated in, summarised. -> flat dict for a row
+
+    **MEAN AND SPREAD, NOT MEAN ALONE.** dario's [6515] point and it is right:
+    `escalate` is mediation 7-7 over 114 contexts and `move` is deference 1-5
+    over 276. Those are different KINDS of word -- one whose rating is a property
+    of the word, one whose rating is a property of the sentence it is in -- and
+    the mean alone erases the distinction this whole instrument exists to make.
+
+    Emits `<scale>` (mean), `<scale>_sd`, and one `n_contexts`, so an annotation
+    can say which kind it is quoting. A single number here is an undeclared
+    choice; two numbers and a count is a described one.
+    """
+    out = {}
+    n = 0
+    for sc in SCALES_INST:
+        v = per_scale.get(sc) or []
+        n = max(n, len(v))
+        if not v:
+            out[sc], out[sc + "_sd"] = None, None
+            continue
+        m = sum(v) / len(v)
+        out[sc] = round(m, 3)
+        #: population SD: this is every context the word was rated in, not a
+        #: sample from a larger set of contexts.
+        out[sc + "_sd"] = round((sum((x - m) ** 2 for x in v) / len(v)) ** 0.5, 3)
+    out["n_contexts"] = n
+    return out
+
+
 def word_tables():
     out = []
     for corpus, (getter, popper) in CORPORA.items():
@@ -198,7 +228,17 @@ def word_tables():
             continue
         pop = popper([p for p, _, _, _ in rows], arm="A")
         agg = collections.defaultdict(lambda: collections.Counter())
-        rate = {}
+        #: **ACCUMULATE, DO NOT ASSIGN.** `rate[w] = rat[w]` inside this loop kept
+        #: whichever PROMPT was processed last, so a word's scale columns were one
+        #: arbitrary context's rating while `_save` called them "mean ratings"
+        #: (dario, [6515]). That inverts the instrument's own point: README
+        #: section 1 exists to say F21 and M03-A could attribute nothing to a word
+        #: because their values were TYPE-LEVEL, and that this study rates
+        #: (prompt, word) IN CONTEXT. Collapsing back to one value per word undid
+        #: it by accident. Measured across 72 rating files and 806 words, the
+        #: per-word SD across contexts runs 0.47 (agency) to 0.75 (target) on a
+        #: 1-7 scale, so this is not a rounding difference.
+        rate = collections.defaultdict(lambda: collections.defaultdict(list))
         for pr, rat, pos, grp in rows:
             for pk, vd in pop[pr]["verdicts"].items():
                 for w, v in vd.items():
@@ -207,16 +247,17 @@ def word_tables():
                     a = agg[(w, pos)]
                     a["seen"] += 1
                     a["rise" if v == 1 else "fall" if v == -1 else "still"] += 1
-                    rate[w] = rat[w]
+                    for _sc in SCALES_INST:
+                        rate[w][_sc].append(rat[w][_sc])
         for (w, pos), c in agg.items():
             if c["seen"] < 20:
                 continue
             out.append(dict(corpus=corpus, word=w, position=pos, seen=c["seen"],
                             rise=c["rise"], fall=c["fall"],
                             net=(c["rise"] - c["fall"]) / c["seen"],
-                            **{k: rate[w][k] for k in SCALES_INST}))
+                            **_scale_summary(rate[w])))
     _save("words_armA", "per (corpus, word, position): rise/fall counts over "
-          "(prompt x lineage) cells, with the word's mean ratings. NO scale is used "
+          "(prompt x lineage) cells, with the word's MEAN rating per scale plus its SD and context count. NO scale is used "
           "to build this -- it is the raw vocabulary", out, min_seen=20)
     # arm B: what arrives
     outB = []
@@ -228,20 +269,22 @@ def word_tables():
         if not rows:
             continue
         pop = popper([p for p, _, _, _ in rows], arm="B")
-        agg = collections.defaultdict(lambda: collections.Counter()); rate = {}
+        agg = collections.defaultdict(lambda: collections.Counter())
+        rate = collections.defaultdict(lambda: collections.defaultdict(list))
         for pr, rat, pos, grp in rows:
             for pk, vd in pop[pr]["verdicts"].items():
                 for w, v in vd.items():
                     if w not in rat:
                         continue
                     a = agg[(w, pos)]; a["seen"] += 1; a["arrive"] += (v == 1)
-                    rate[w] = rat[w]
+                    for _sc in SCALES_INST:
+                        rate[w][_sc].append(rat[w][_sc])
         for (w, pos), c in agg.items():
             if c["seen"] < 10:
                 continue
             outB.append(dict(corpus=corpus, word=w, position=pos, seen=c["seen"],
                              arrive=c["arrive"], rate=c["arrive"] / c["seen"],
-                             **{k: rate[w][k] for k in SCALES_INST}))
+                             **_scale_summary(rate[w])))
     _save("words_armB", "per (corpus, word, position): how often a word ARRIVING from "
           "below min_prob cleared the renormalisation null", outB, min_seen=10)
     return out, outB
