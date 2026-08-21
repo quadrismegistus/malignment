@@ -280,9 +280,16 @@ def main():
     #: that changes the ARITHMETIC (a new --rule, a movement.py fix) needs it and
     #: nothing else does.
     if not a.all:
+        #: **THE DESTINATION TABLE, NOT `movement`.** This read was hardcoded to
+        #: `{db}.movement` while the INSERTS below correctly used
+        #: MOVEMENT_TABLE[_RV["v"]]. So `--rule-version 4` found all 132 pairs
+        #: "already present" in the V3 table, computed nothing, and left
+        #: `movement_v4` created and EMPTY -- while printing a plausible
+        #: incremental summary. The campaign's own rule-version trap, in the
+        #: producer that names it in its module docstring.
         have = {(r["base"], r["aligned"]) for r in ch.query(
-            "SELECT DISTINCT base, aligned FROM {db}.movement WHERE rule='%s'"
-            % rule.name)}
+            "SELECT DISTINCT base, aligned FROM {db}.%s WHERE rule='%s'"
+            % (MOVEMENT_TABLE[_RV["v"]], rule.name))}
         skip = [e for e in edges if (e["base"], e["aligned"]) in have]
         edges = [e for e in edges if (e["base"], e["aligned"]) not in have]
         print("  incremental: %d pairs already present, %d to compute"
@@ -338,15 +345,20 @@ def main():
         if len(rows) > 500_000:
             ch.insert(MOVEMENT_TABLE[_RV["v"]], rows); rows = []
             print("     ... %s rows" % format(
-                ch.scalar("SELECT count() FROM {db}.movement"), ","))
+                ch.scalar("SELECT count() FROM {db}.%s" % MOVEMENT_TABLE[_RV["v"]]), ","))
     if rows:
         ch.insert(MOVEMENT_TABLE[_RV["v"]], rows)
+    #: Every read here was hardcoded to `{db}.movement` while the inserts above
+    #: went to MOVEMENT_TABLE. A v4 run therefore wrote v4 rows and then reported
+    #: the v3 table's counts as its result -- the writes were right and every
+    #: number printed was about another table.
+    _tbl = MOVEMENT_TABLE[_RV["v"]]
     print("\n  cells computed: %s | refused (no residual): %s"
           % (format(n_cells, ","), format(n_refused, ",")))
-    print("  %s.movement: %s rows"
-          % (ch.DB, format(ch.scalar("SELECT count() FROM {db}.movement"), ",")))
-    for r in ch.query("""SELECT cls, count() c FROM {db}.movement
-                         GROUP BY cls ORDER BY c DESC"""):
+    print("  %s.%s: %s rows"
+          % (ch.DB, _tbl, format(ch.scalar("SELECT count() FROM {db}.%s" % _tbl), ",")))
+    for r in ch.query("""SELECT cls, count() c FROM {db}.%s
+                         GROUP BY cls ORDER BY c DESC""" % _tbl):
         print("     %-8s %s" % (r["cls"], format(r["c"], ",")))
     return 0
 
