@@ -33,6 +33,19 @@ API model's distance from the aligned MEDIAN made five models look like a
 distinctive low band when all five sit inside the aligned range between the 30th
 and 70th percentile. A single summary standing in for a distribution, which is
 the defect this file exists to not repeat.
+
+## AND THE MODEL MEDIAN IS ITSELF A SINGLE SUMMARY
+
+The same caution applies one level up, to this file's own output. A per-model
+median is one point standing for that model's passages, and the passage
+distribution behind it is not narrow: at the passage grain the two axes correlate
+`+0.348` against `+0.749` between entities, and all four quadrants are occupied
+where the entity plane is a diagonal.
+
+So "which quadrant is this model in" and "where do this model's passages fall"
+are different questions with different answers, and this file only answers the
+first. `results/quadrants.csv` carries the second, one row per passage with the
+text; `read_passage.py` renders a single one with its words and sentences marked.
 """
 
 import argparse, collections, json, os, random, statistics, sys

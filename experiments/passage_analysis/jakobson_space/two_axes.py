@@ -38,6 +38,25 @@ prose density -- the same confound relocated.
 Passages within a model are not independent and models within a lineage share a
 base. Model rows are medians of per-model medians. Human rows are over passages,
 because a corpus has no such nesting.
+
+## THIS FILE IS THE ENTITY GRAIN. THE PASSAGE GRAIN IS A DIFFERENT PLANE.
+
+Every summary here collapses a model or a corpus to one point, and that is the
+right unit for an arm claim. But it is not the only plane the same measurements
+describe, and the two disagree about how related the axes are:
+
+    grain     n         r(surprisal, drift)   surprisal explains
+    entity    70        +0.749                56% of drift variance
+    passage   14,414    +0.348                12%
+
+Averaging away the within-model scatter is what produces the entity-level
+correlation; the scatter is where the axes are close to independent. So a
+statement like "the axes are correlated, the quadrants are a diagonal" is true
+of THIS file's output and false of `quadrants.py`'s, and neither supersedes the
+other. See the README section "THE GRAIN WAS THE PROBLEM".
+
+`quadrants.py --csv results/quadrants.csv` builds the passage plane from this
+file's CSV; `explode.py` takes it down to words and sentences.
 """
 
 import argparse, collections, csv, json, os, statistics, sys
