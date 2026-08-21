@@ -39,6 +39,8 @@
 		};
 		notes?: string[];
 		n_total?: number;
+		arrows?: { label: string; n_kids: number; from: { x: number; y: number }; to: { x: number; y: number } }[];
+		anchors?: { label: string; colour: string; x: number; y: number }[];
 	};
 	let { art }: { art: Art } = $props();
 
@@ -93,6 +95,35 @@
 	//: A plain `let` on purpose: the click handler needs the VALUE, not a
 	//: dependency, and making it reactive would re-render the chart on every
 	//: pointer move to update something nothing renders.
+	//: THE PANEL'S OWN WIDTH, bound rather than taken from the last pointer event.
+	//: The ring used `ptr.w`, which only exists once the pointer has moved -- fine
+	//: for a hover mark and useless for an overlay that must be right on first
+	//: paint. Both project through `px`/`py` now, so they cannot disagree.
+	let plotW = $state(0);
+	const px = (v: number) =>
+		PAD.left + ((v - art.x.domain[0]) / (art.x.domain[1] - art.x.domain[0])) * (plotW - PAD.left - PAD.right);
+	const py = (v: number) =>
+		PAD.top + (1 - (v - art.y.domain[0]) / (art.y.domain[1] - art.y.domain[0])) * (plotW - PAD.top - PAD.bottom);
+
+	//: A ONE-DIMENSIONAL LABEL DECLUTTER: sort by y, then push each label down
+	//: until it clears the one above by `LGAP`. Six anchors, so a greedy pass is
+	//: exact enough and, unlike a force layout, gives the same answer every time.
+	const LGAP = 13;
+	const decluttered = $derived.by(() => {
+		if (!plotW) return [];
+		const out = (art.anchors ?? [])
+			.map((a) => ({ ...a, dx: px(a.x), dy: py(a.y), ly: py(a.y) }))
+			.sort((m, n) => m.dy - n.dy);
+		for (let i = 1; i < out.length; i++)
+			if (out[i].ly - out[i - 1].ly < LGAP) out[i].ly = out[i - 1].ly + LGAP;
+		return out;
+	});
+
+	//: OFF BY DEFAULT. The arrows are a different CLAIM from the cloud -- paired,
+	//: causal, 22 lineages -- and stacking them on by default would let a reader
+	//: take the descriptive panel for the tested one.
+	let showMoves = $state(false);
+
 	let ptr = $state<{ x: number; y: number; w: number } | null>(null);
 	let hovered: any = $state(null);
 
@@ -284,6 +315,16 @@
 				{#each art.models as m (m)}<option value={m}>{m}</option>{/each}
 			</select>
 		</label>
+		{#if (art.arrows ?? []).length}
+			<label class="tog">
+				<input type="checkbox" bind:checked={showMoves} />
+				base → aligned
+				<span class="hint"
+					>{(art.arrows ?? []).length} lineages, each base median to the mean of its aligned
+					children; the cloud dims because it is a different claim</span
+				>
+			</label>
+		{/if}
 		{#if hideCat.length || model}
 			<button onclick={clearFilters}>clear filters</button>
 		{/if}
@@ -331,6 +372,8 @@
 	<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 	<div
 		class="plot"
+		class:moving={showMoves}
+		bind:clientWidth={plotW}
 		onclick={openHovered}
 		onpointermove={(e) => {
 			const b = e.currentTarget.getBoundingClientRect();
@@ -422,10 +465,49 @@
 				style:bottom={sy < 0 ? '52px' : 'auto'}>{c.label}</span
 			>
 		{/each}
+		{#if showMoves && plotW > 0}
+			<!--
+			  ONE VECTOR PER LINEAGE, base median to the mean of its aligned
+			  children's medians. Drawn over the cloud rather than beside it,
+			  because the question the arrows answer is WHERE the move lands
+			  relative to the human corpora -- which only the shared plane shows.
+			-->
+			<svg class="moves" width={plotW} height={plotW}>
+				<defs>
+					<marker id="qm-head" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5"
+						markerHeight="5" orient="auto-start-reverse">
+						<path d="M0,0 L8,4 L0,8 z" fill="#ffd43b" />
+					</marker>
+				</defs>
+				{#each art.arrows ?? [] as a (a.label)}
+					<line
+						x1={px(a.from.x)}
+						y1={py(a.from.y)}
+						x2={px(a.to.x)}
+						y2={py(a.to.y)}
+						marker-end="url(#qm-head)"
+					><title>{a.label} → {a.n_kids} aligned child{a.n_kids > 1 ? 'ren' : ''}</title></line>
+				{/each}
+
+				<!--
+				  THE DOT STAYS PUT AND ONLY THE LABEL MOVES, with a leader drawn to
+				  it. `arxiv_abstracts` and `philosophy` have genuinely close medians
+				  and their labels overlapped into an unreadable smear -- but nudging
+				  the MARK to fix that would move a measured position to make room
+				  for text, which is the one thing a declutter must never do.
+				-->
+				{#each decluttered as a (a.label)}
+					<g class="anchor">
+						{#if a.ly !== a.dy}<line class="leader" x1={a.dx + 5} y1={a.dy} x2={a.dx + 9} y2={a.ly} />{/if}
+						<circle cx={a.dx} cy={a.dy} r="4" fill={a.colour} />
+						<text x={a.dx + 11} y={a.ly + 3}>{a.label}</text>
+					</g>
+				{/each}
+			</svg>
+		{/if}
+
 		{#if hovered && ptr}
-			{@const px = PAD.left + ((hovered.x - art.x.domain[0]) / (art.x.domain[1] - art.x.domain[0])) * (ptr.w - PAD.left - PAD.right)}
-			{@const py = PAD.top + (1 - (hovered.y - art.y.domain[0]) / (art.y.domain[1] - art.y.domain[0])) * (ptr.w - PAD.top - PAD.bottom)}
-			<span class="ring" style:left="{px}px" style:top="{py}px"></span>
+			<span class="ring" style:left="{px(hovered.x)}px" style:top="{py(hovered.y)}px"></span>
 		{/if}
 		{#if hovered && ptr}
 			<!--
@@ -736,6 +818,47 @@
 		stroke: var(--text-3);
 		stroke-opacity: 0.55;
 		stroke-dasharray: 3 3;
+	}
+	.moves {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 1;
+	}
+	.moves line {
+		stroke: #ffd43b;
+		stroke-width: 1.6;
+		stroke-opacity: 0.85;
+		pointer-events: stroke;
+	}
+	.moves .anchor text {
+		font-size: 9.5px;
+		fill: var(--text-2);
+		paint-order: stroke;
+		stroke: var(--bg-1, #12131a);
+		stroke-width: 3px;
+	}
+	.moves .leader {
+		stroke: var(--text-3);
+		stroke-width: 1;
+		stroke-opacity: 0.5;
+	}
+	.moves .anchor circle {
+		stroke: var(--bg-1, #12131a);
+		stroke-width: 1.5;
+	}
+	/* the cloud steps back while the vectors are up: two claims, one plane */
+	.plot.moving :global(canvas) {
+		opacity: 0.3;
+	}
+	.tog {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		cursor: pointer;
+	}
+	.tog input {
+		margin: 0;
 	}
 	/* the hover marker: one ring, on the point the click opens */
 	.ring {

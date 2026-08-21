@@ -205,7 +205,75 @@ def fig_passage_map_data():
     #: first -- which is why this is a booked number and not a subtraction.
     assert lost_open == 74, "open-model passages dropped by the cap moved: %d" % lost_open
 
+    #: ── THE PAIRED MOVE, AS 22 VECTORS ─────────────────────────────────────
+    #:
+    #: The occupancy table is DESCRIPTIVE: it says these populations differ, not
+    #: that alignment moves anything -- the arms hold different models and the
+    #: between-lineage variance dominates the arm effect (lacan, [6522]). These
+    #: arrows are the paired claim, one per lineage, base median to the mean of
+    #: its aligned children's medians.
+    #:
+    #: **THE UNIT IS THE LINEAGE, NOT THE CHECKPOINT.** There are 66 models on
+    #: this plane and 22 arrows: a lineage contributes ONE vector however many
+    #: aligned children it ships, and needs both arms at 10+ passages. An n that
+    #: counted checkpoints would be counting a family with four instruct variants
+    #: four times.
+    #:
+    #: The construction is lacan's `arm_paired.py`, whose analysis half prints
+    #: rather than returns and whose helpers are nested in `main()`, so it cannot
+    #: be imported. Reimplemented and PINNED to its published numbers instead --
+    #: a reimplementation silently re-chooses a threshold, and the assert is what
+    #: stops that being invisible.
+    import collections as _c, statistics as _st
+    from malignment import roster as _roster
+    ai = V.rows("SELECT model, surprisal, drift, z_surprisal, z_drift "
+                "FROM malignment.passage_axes WHERE human_or_ai = 'ai'")
+    per = _c.defaultdict(list)
+    for r in ai:
+        per[r["model"]].append(r)
+    MIN_PASSAGES = 10
+    zmed = lambda v: (_st.median(float(x["z_surprisal"]) for x in v),
+                      _st.median(float(x["z_drift"]) for x in v))
+    arrows, d_surp, d_drift = [], [], []
+    for base, members in sorted(_roster.lineages().items()):
+        kids = [m for m in members if m != base and m in per and len(per[m]) >= MIN_PASSAGES]
+        if base not in per or len(per[base]) < MIN_PASSAGES or not kids:
+            continue
+        bz = zmed(per[base])
+        kz = [zmed(per[k]) for k in kids]
+        arrows.append({"label": base, "n_kids": len(kids),
+                       "from": {"x": round(bz[1], 3), "y": round(bz[0], 3)},
+                       "to": {"x": round(_st.mean(z[1] for z in kz), 3),
+                              "y": round(_st.mean(z[0] for z in kz), 3)}})
+        d_surp.append(_st.mean(_st.median(float(x["surprisal"]) for x in per[k]) for k in kids)
+                      - _st.median(float(x["surprisal"]) for x in per[base]))
+        d_drift.append(_st.mean(_st.median(float(x["drift"]) for x in per[k]) for k in kids)
+                       - _st.median(float(x["drift"]) for x in per[base]))
+    assert len(arrows) == 22, "lineages with both arms at 10+ passages moved: %d" % len(arrows)
+    assert abs(_st.median(d_surp) - (-0.8435)) < 5e-5, \
+        "median d_surprisal moved: %.4f, lacan books -0.8435" % _st.median(d_surp)
+    assert abs(_st.median(d_drift) - (-0.0254)) < 5e-5, \
+        "median d_drift moved: %.4f, lacan books -0.0254" % _st.median(d_drift)
+    n_dn_s = sum(1 for a in arrows if a["to"]["y"] < a["from"]["y"])
+    n_dn_d = sum(1 for a in arrows if a["to"]["x"] < a["from"]["x"])
+    assert (n_dn_s, n_dn_d) == (22, 21), \
+        "arrow directions moved: %d/22 down in surprisal, %d/22 left in drift" % (n_dn_s, n_dn_d)
+
+    #: Where the arrows are HEADING, per corpus. Never a pooled human centroid:
+    #: the six sit in opposite corners, the six answers disagree in sign, and
+    #: their centre falls in a region none of them occupies -- a distance from
+    #: nowhere (lacan, [6522]).
+    anchors = []
+    for c in cat_keys:
+        if CATS[c][1] != "human":
+            continue
+        v = [r for r in rows if r["category"] == c]
+        anchors.append({"label": c.replace("_", " "), "colour": CATS[c][0],
+                        "x": round(_st.median(r["z_drift"] for r in v), 3),
+                        "y": round(_st.median(r["z_surprisal"] for r in v), 3)})
+
     art = quadrants(
+        arrows=arrows, anchors=anchors,
         title="Every passage on the surprisal and drift plane",
         subtitle=("14,414 passages, z-scored on both axes. The quadrant "
                   "verdict was a verdict on ONE GRAIN: over 70 entity medians the two axes "

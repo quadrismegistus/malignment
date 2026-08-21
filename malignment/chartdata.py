@@ -191,7 +191,7 @@ def parcoords(*, title, axes, groups, lines, subtitle=None,
 
 
 def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
-              detail=None, notes=None, n_total=None):
+              detail=None, notes=None, n_total=None, arrows=None, anchors=None):
     """A four-quadrant scatter whose points are addressable, plus its occupancy table.
 
         x, y     {key, label, note, domain: [lo, hi]}
@@ -260,6 +260,25 @@ def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
             "detail scale %r has no note; a clamped scale that does not say so " \
             "understates its own tail silently" % k
 
+    #: ARROWS AND ANCHORS SHARE THE POINTS' AXES, so they are checked against the
+    #: same domains. A vector whose head is off the panel draws as a shorter
+    #: vector -- it does not vanish, it UNDERSTATES, which is the direction that
+    #: reads as a real result.
+    for a in arrows or []:
+        for end in ("from", "to"):
+            for k, ax in (("x", x), ("y", y)):
+                v = a[end][k]
+                lo, hi = ax["domain"]
+                assert lo <= v <= hi, \
+                    "arrow %r %s.%s = %r outside %s domain %s" % (
+                        a.get("label"), end, k, v, ax["key"], [lo, hi])
+    for an in anchors or []:
+        for k, ax in (("x", x), ("y", y)):
+            lo, hi = ax["domain"]
+            assert lo <= an[k] <= hi, \
+                "anchor %r %s = %r outside %s domain %s" % (
+                    an.get("label"), k, an[k], ax["key"], [lo, hi])
+
     cell_keys = [c["key"] for c in cells]
     assert len(cell_keys) == len(set(cell_keys)), "duplicate cell keys"
     for r in table:
@@ -278,4 +297,5 @@ def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
             "x": x, "y": y, "cats": cats, "models": models, "points": points,
             "cells": cells, "table": table, "detail": detail or {},
             "n_total": n_total if n_total is not None else n,
+            "arrows": arrows or [], "anchors": anchors or [],
             "notes": notes or []}
