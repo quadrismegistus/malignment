@@ -88,6 +88,10 @@ SOURCES = {
     "k_zh":      os.path.join(NORMS, "k_ratings_zh.json"),
     "warriner":  os.path.join(NORMS, "BRM-emot-submit.csv"),
     "brysbaert": os.path.join(NORMS, "Concreteness_ratings_Brysbaert_et_al_BRM.txt"),
+    #: Brooke et al.'s formality SEEDS, not a scored lexicon -- see `_brooke`.
+    "brooke_formal":   os.path.join(NORMS, "brooke_formality", "formal_seeds_100.txt"),
+    "brooke_informal": os.path.join(NORMS, "brooke_formality", "informal_seeds_100.txt"),
+    "brooke_pairs":    os.path.join(NORMS, "brooke_formality", "CTRWpairsfull.txt"),
 }
 
 TOKEN = re.compile(r"[A-Za-z][A-Za-z'-]*")
@@ -159,30 +163,51 @@ def is_content_word(word, context=None, lang="en"):
 
 @functools.lru_cache(maxsize=1)
 def _rid():
-    """[(compiled_regex, category, subcategory)]. RID is REGEXES, not words.
+    """[(regex, thinking, process, category, subcategory)]. RID is REGEXES.
 
     Martindale's dictionary is written as stems (`\\babsinth`, `\\bale\\b`), so a
     set-membership test against word surfaces would silently miss most of it.
+
+    **`thinking` AND `process` ARE KEPT, AND WERE NOT.** An earlier version
+    loaded only category and subcategory, which discarded the two columns
+    Martindale's actual claim is about: primordial vs conceptual thinking, and
+    primary vs secondary process. Those are the top of the hierarchy -- 1,828
+    patterns primordial/primary, 714 conceptual/secondary, 609
+    conceptual/emotions -- and no roll-up to them was possible through the API,
+    so `count(fine=False)` had been truncating category NAMES at an underscore
+    instead (`expressive_behavior` -> `expressive`), which is a string operation
+    wearing a hierarchy's clothes.
     """
     out = []
     with open(_need("rid"), encoding="utf-8") as fh:
         for r in csv.DictReader(fh):
             try:
-                out.append((re.compile(r["regex"], re.I), r["category"],
+                out.append((re.compile(r["regex"], re.I), r.get("thinking", ""),
+                            r.get("process", ""), r["category"],
                             r["subcategory"] or ""))
             except re.error:
                 continue
     return out
 
 
-def rid(word, with_sub=False):
+def rid(word, with_sub=False, level=None):
     """RID categories matching this word. `need/sex` and `emotions/aggression`
     are the two this project most often wants, and they come from ONE dictionary
     with one construction procedure — so a sex-vs-aggression contrast is not
-    confounded by the axes having different provenance."""
+    confounded by the axes having different provenance.
+
+    `level="process"` returns Martindale's TOP classes instead --
+    `primordial/primary`, `conceptual/secondary`, `conceptual/emotions` -- which
+    is the split his primary-versus-secondary-process claim turns on and the
+    one this project's Freudian reading actually needs.
+    """
     out = set()
-    for rx, cat, sub in _rid():
-        if rx.search(word):
+    for rx, think, proc, cat, sub in _rid():
+        if not rx.search(word):
+            continue
+        if level == "process":
+            out.add("%s/%s" % (think, proc) if think else cat)
+        else:
             out.add("%s/%s" % (cat, sub) if with_sub and sub else cat)
     return out
 
@@ -347,7 +372,51 @@ def _norms():
     return dict(out)
 
 
-def norms(word):
+@functools.lru_cache(maxsize=1)
+def _brooke():
+    """{word: +1 formal, -1 informal}. A SPARSE BINARY INDICATOR, not a score.
+
+    **Brooke et al. ship SEEDS, not a lexicon.** 104 formal seeds
+    (`admittedly`, `consequently`), 137 informal (`fuck`, `shit`), and 398
+    informal/formal PAIRS (`digest/imbibe`, `sot/alcoholic`). Their method
+    propagates a continuous score from these; the propagated lexicon is not in
+    the source set, so what is loadable is roughly a thousand words carrying a
+    SIGN and no magnitude.
+
+    That makes formality here the same kind of object as `k_vulgarity`: a rate,
+    not a level. Coverage will be low -- a percent or two of content words -- and
+    a passage with no hits has NO MEASUREMENT rather than a formality of zero.
+    Any caller that averages the sign over covered words must report the
+    denominator, because floors are not nulls.
+
+    Both sides of each CTRW pair are used: the pair file is `informal/formal`,
+    so it contributes one word to each side rather than one relation.
+    """
+    out = {}
+    for w in open(_need("brooke_formal"), encoding="utf-8", errors="replace"):
+        w = w.strip().lower()
+        if w:
+            out[w] = 1
+    for w in open(_need("brooke_informal"), encoding="utf-8", errors="replace"):
+        w = w.strip().lower()
+        if w:
+            out[w] = -1
+    for line in open(_need("brooke_pairs"), encoding="utf-8", errors="replace"):
+        parts = line.strip().lower().split("/")
+        if len(parts) == 2 and all(parts):
+            #: `informal/formal`, in that order, per the file's own layout
+            out.setdefault(parts[0], -1)
+            out.setdefault(parts[1], 1)
+    return out
+
+
+def brooke(word):
+    """+1 formal, -1 informal, None if the word is not a seed. Sparse."""
+    return _brooke().get(word.lower())
+
+
+def word_norms(word):
+    """Continuous norms for ONE word. None if absent from both sources."""
     return dict(_norms().get(word.lower(), {})) or None
 
 
@@ -604,3 +673,183 @@ def as_word_map(source, scale=None, vocab=None):
                 out[w] = good[0]
         return out, "categorical"
     raise ValueError("unknown source %r; declared: %s" % (source, sorted(SOURCES)))
+
+
+# ---------------------------------------------------------------------------
+# TWO ENTRY POINTS: one per KIND of source
+# ---------------------------------------------------------------------------
+#
+# `norms(text)`  scalar sources -> MEANS      warriner, brysbaert, brooke, k
+# `count(text)`  set sources    -> RATES      rid, gi, usas, wordnet
+#
+# They tokenise and lemmatise identically and differ only in what the sources
+# ARE. A norm gives a word a NUMBER, so the summary is a mean over the words
+# that have one. A field gives a word a MEMBERSHIP, so the summary is the share
+# of words that have it. Putting both in one dict works and hides that: it
+# invites averaging a rate or rating a count, and the key prefix is the only
+# thing standing in the way. Two functions make the distinction structural.
+
+#: which lookups take a LEMMA fallback -- all of them. Every source keys on base
+#: forms, so `screamed`, `wanted` and `bodies` miss on the surface and hit on the
+#: lemma. Without it a passage's coverage is roughly its share of uninflected
+#: words, which is a fact about English morphology rather than about the
+#: passage -- and it would differ BY ARM, since the arms differ in tense and
+#: number usage. The miss is silent either way: a lookup returns None.
+_LEMMA_FALLBACK = ("norms", "brooke", "k", "rid", "gi", "usas", "wordnet")
+
+_SCALAR = ("norms", "brooke", "k")
+_SET = ("rid", "gi", "usas", "wordnet")
+
+
+def _lookup(kind, word, lem):
+    """One source, surface first then lemma. -> value, or None/empty."""
+    f = {"norms": word_norms, "brooke": brooke, "k": k, "rid": rid,
+         "gi": gi, "usas": usas, "wordnet": wordnet}[kind]
+    v = f(word)
+    if not v and lem and lem != word:
+        v = f(lem)
+    return v
+
+
+def content_words(text, lang="en"):
+    """[(surface, lemma)] for content words only. The shared front end.
+
+    **Content words only** -- NOUN, VERB, ADJ, ADV by UPOS -- which is the rule
+    M06's Plan C fixes. Function words carry no valence and belong to no
+    semantic field, so including them would dilute every mean and every rate in
+    proportion to syntactic complexity rather than to content.
+    """
+    doc = _nlp(lang)(text)
+    return [(t.text.lower(), (t.lemma_ or "").lower())
+            for t in doc if t.is_alpha
+            and t.pos_ in ("NOUN", "VERB", "ADJ", "ADV")], \
+           sum(1 for t in doc if t.is_alpha)
+
+
+def norms(text, lang="en"):
+    """SCALAR sources, averaged. -> flat dict
+
+        fields.norms("this is a good good good bad donkey")
+        {'n_content': 5, 'warriner_valence': 6.64, 'warriner_coverage': 1.0, ...}
+
+    Warriner (valence, arousal, dominance), Brysbaert (concreteness), Brooke
+    (formality, +1/-1) and the seven K coder scales.
+
+    ## EACH SOURCE AVERAGES OVER ITS OWN COVERED WORDS
+
+    A word absent from Warriner contributes nothing to `warriner_valence` and is
+    NOT counted as neutral. Treating a miss as a mid-scale value is how a
+    coverage difference becomes a fake effect, so the denominators differ
+    between sources on purpose and every source carries its own `*_coverage`.
+
+    **Coverage is reported, never corrected.** It is expected to differ by arm --
+    proper nouns are absent from the norms and NNP runs about 7 per 1000 words
+    lower in the aligned arm -- and that is a property of the text.
+
+    ## TWO SPARSE ONES, MARKED
+
+    `brooke_formality` is a mean of +1/-1 over a 1,029-word seed list (Brooke
+    ships SEEDS, not a scored lexicon) and `k_vulgarity` has variance on 463 of
+    27,242 rated words. Both routinely cover a percent or two of a passage. A
+    passage with no hits gets NO KEY rather than a 0.0: floors are not nulls.
+
+    ## `valence_extremity` IS COMPUTED HERE, NOT LEFT TO THE CALLER
+
+    It is mean|v - 5|, not |mean(v) - 5|, and the two differ whenever a passage
+    mixes positive and negative words -- which is the case the plan's C.H1 is
+    about. Computing it here removes the chance of a caller taking the second.
+    `warriner_valence_sd` is the spread, which is a different claim again.
+    """
+    import statistics as _st
+    words, n_tok = content_words(text, lang)
+    out = {"n_tokens": n_tok, "n_content": len(words)}
+    if not words:
+        return out
+    acc, cov = collections.defaultdict(list), collections.Counter()
+    for w, lem in words:
+        n = _lookup("norms", w, lem)
+        if n:
+            if "valence" in n:
+                cov["warriner"] += 1
+            if "concreteness" in n:
+                cov["brysbaert"] += 1
+            for dim, v in n.items():
+                acc["brysbaert_concreteness" if dim == "concreteness"
+                    else "warriner_" + dim].append(v)
+        b = _lookup("brooke", w, lem)
+        if b is not None:
+            acc["brooke_formality"].append(float(b)); cov["brooke"] += 1
+        kk = _lookup("k", w, lem)
+        if kk:
+            cov["k"] += 1
+            for dim, v in kk.items():
+                acc["k_" + dim].append(float(v))
+    for key, vals in acc.items():
+        out[key] = round(_st.mean(vals), 4)
+    v = acc.get("warriner_valence")
+    if v:
+        out["warriner_valence_extremity"] = round(
+            _st.mean(abs(x - 5.0) for x in v), 4)
+        if len(v) > 1:
+            out["warriner_valence_sd"] = round(_st.stdev(v), 4)
+    for src, c in cov.items():
+        out[src + "_coverage"] = round(c / len(words), 4)
+    return out
+
+
+def count(text, lang="en", fine=True):
+    """SET sources, as rates. -> flat dict
+
+        fields.count("she screamed and tore the bodies apart")
+        {'n_content': 5, 'rid_aggression': 0.2, 'gi_hostile': 0.4, ...}
+
+    RID (Martindale), General Inquirer, USAS and WordNet verb supersenses.
+
+    ## RATES, AND WHAT THEY ARE OVER
+
+    Each key is the SHARE OF CONTENT WORDS matching that category, so a rate of
+    0.2 means one content word in five. **A word in several categories counts in
+    all of them and the shares do not sum to 1** -- these are overlapping
+    memberships, not a partition, and treating them as one would make every
+    total meaningless.
+
+    The denominator is content words, and `n_tokens` is returned beside it so a
+    caller wanting a per-1000-words rate can renormalise without guessing what
+    was divided by.
+
+    ## `fine` AND RID's HIERARCHY
+
+    RID is four levels deep -- thinking / process / category / subcategory, e.g.
+    `primordial / primary / need / orality`. `fine=True` emits the finest label
+    available; `fine=False` rolls up to the three top classes (primordial-primary,
+    conceptual-secondary, conceptual-emotions), which is the split Martindale's
+    primary-versus-secondary-process claim actually turns on.
+
+    `*_coverage` is the share of content words found in that source AT ALL, which
+    is the denominator any rate from it should be read against.
+    """
+    words, n_tok = content_words(text, lang)
+    out = {"n_tokens": n_tok, "n_content": len(words)}
+    if not words:
+        return out
+    cat, cov = collections.Counter(), collections.Counter()
+    for w, lem in words:
+        for kind in _SET:
+            got = _lookup(kind, w, lem)
+            if not got:
+                continue
+            cov[kind] += 1
+            if kind == "rid" and not fine:
+                #: the REAL roll-up, from the dictionary's own columns -- not a
+                #: truncation of the category name, which is what this was.
+                got = rid(w, level="process") or rid(lem, level="process")
+            items = got if isinstance(got, (set, list, tuple)) else [got]
+            for c in items:
+                cat["%s_%s" % (kind, str(c).replace(" ", "_").replace("/", "_")
+                               .lower())] += 1
+    n = len(words)
+    for src, c in cov.items():
+        out[src + "_coverage"] = round(c / n, 4)
+    for key, c in cat.items():
+        out[key] = round(c / n, 4)
+    return out
