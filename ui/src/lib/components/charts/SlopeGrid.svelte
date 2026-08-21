@@ -24,7 +24,7 @@
   the figure is that a steeper line IS a bigger movement.
 -->
 <script lang="ts">
-	import { LineChart } from 'layerchart';
+	import { LineChart, Tooltip } from 'layerchart';
 	import { scalePoint } from 'd3-scale';
 
 	type Row = { panel: string; series: string; x: string; y: number; level: number };
@@ -61,6 +61,14 @@
 		return m;
 	});
 
+	//: The row behind a hovered point, so the tooltip can show the LEVEL rather
+	//: than the plotted value. What is plotted is centred on each panel's own
+	//: midpoint -- that is what makes the panels comparable -- but "0.47" read as
+	//: a level is simply wrong, and the producer already carries `level` per row
+	//: for exactly this.
+	const rowAt = (panel: string, series: string, x: string) =>
+		byPanel.get(panel)?.get(series)?.find((r) => r.x === x);
+
 	const seriesFor = (panel: string) =>
 		art.series.map((s) => ({
 			key: s.key,
@@ -83,7 +91,41 @@
 					<span class="note" title="absolute range across all four points">{p.note}</span>
 				</div>
 				<div class="chart">
+					<!--
+					  DECLARED INSIDE THE LOOP so it closes over `p`. LayerChart calls
+					  the tooltip snippet with one argument, `{ context }`, so the
+					  panel cannot be passed in -- the closure is how it gets there.
+					-->
+					{#snippet tip({ context }: { context: any })}
+						{@const x = context?.tooltip?.data?.x}
+						<Tooltip.Root {context}>
+							<Tooltip.Header>{p.key} · {x ?? ''}</Tooltip.Header>
+							<Tooltip.List>
+								{#each art.series as s (s.key)}
+									{@const row = x ? rowAt(p.key, s.key, x) : undefined}
+									<Tooltip.Item
+										label={s.key}
+										color={s.colour}
+										value={row ? row.level.toFixed(2) : '—'}
+									/>
+								{/each}
+								<Tooltip.Separator />
+								<!--
+								  The panel's own asymmetry, which is the number the grid is
+								  ordered by and the one a reader is actually hunting for. It
+								  is not derivable from the two levels on screen: it is
+								  individual minus institution of the CHANGES, paired inside
+								  24 scenarios.
+								-->
+								<Tooltip.Item
+									label="indiv − inst"
+									value={`${p.did >= 0 ? '+' : ''}${p.did.toFixed(3)} ${p.mark}`}
+								/>
+							</Tooltip.List>
+						</Tooltip.Root>
+					{/snippet}
 					<LineChart
+						tooltip={tip}
 						x="x"
 						y="y"
 						xScale={scalePoint().padding(0.5)}
@@ -199,20 +241,16 @@
 		font-weight: 600;
 	}
 	/*
-	  THE `total` ROW IS MEANINGLESS HERE AND CANNOT BE TURNED OFF BY A PROP.
-	  `canHaveTotal` is hardcoded at LayerChart's own call site
-	  (ChartChildren.base.svelte:220) and `props.tooltip` only reaches
-	  `tooltipProps`. Individual PLUS institution is not a quantity -- these are
-	  two positions on one scale, not parts of a sum -- and on centred values the
-	  two nearly cancel, so it was printing "total 0" under every hover.
+	  NO `total`-HIDING RULE ANY MORE. There was one: LayerChart's DefaultTooltip
+	  sums the series and `canHaveTotal` is hardcoded at its call site, so the only
+	  way to drop "total 0" was CSS on the separator and its following siblings.
 
-	  Hidden rather than left visible: a number a reader can add up is one they
-	  will try to interpret.
+	  Passing our own `tooltip` snippet retires that whole problem -- DefaultTooltip
+	  never renders -- and the rule then became actively harmful, because it matched
+	  OUR separator and hid the asymmetry row underneath it. Removed rather than
+	  narrowed: a workaround kept past the thing it worked around is how a fix
+	  starts breaking the feature that replaced it.
 	*/
-	:global(.lc-tooltip-container .lc-tooltip-separator),
-	:global(.lc-tooltip-container .lc-tooltip-separator ~ .lc-tooltip-item-root) {
-		display: none;
-	}
 	.legend {
 		display: flex;
 		gap: 1rem;
