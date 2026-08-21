@@ -442,15 +442,29 @@ def fig_rating_space_data():
 #: an arm, so it reads on inspection. Getting that the wrong way round would make
 #: the figure's main claim the one you have to squint for.
 #:
-#: Base stays NEUTRAL and aligned MARKED: one arm is where the model started and
-#: the other is what was done to it. Note these lines are drawn at 0.14 stroke
-#: opacity, so a colour that is merely different on a swatch can be invisible on
-#: the panel -- all four are checked against the rendered image, not the hex.
+#: WARM BASE, COOL ALIGNED (RH, 2026-08-21). Measured against the pale-base
+#: version it was replacing, as CIE76 in Lab on the colours COMPOSITED AT THE
+#: 0.14 STROKE OPACITY these lines are drawn at -- which is what a reader sees,
+#: not the hex:
+#:
+#:                        min WITHIN arm   min ACROSS arm   ratio
+#:     pale base / warm        6.39            11.92         1.87
+#:     warm base / cool        7.12            14.35         2.02
+#:
+#: Both keep the hierarchy (no cross-arm pair closer than a within-arm pair) and
+#: this one strengthens it: two full hue FAMILIES separate harder than pale
+#: against warm, and the gender split inside each family is unchanged.
+#:
+#: ONE HAZARD, NAMED SO IT IS NOT ACCIDENTAL. Cool-for-aligned happens to agree
+#: with the finding -- alignment moves these scenes less charged and less
+#: explicit -- and a reader could take the palette FOR the result. It is a
+#: mnemonic and not an encoding: the colour maps to the arm, never to the value,
+#: and the numbers are in the axis notes.
 ARMGENDER = {
-    ("base", "male"): "#cbd2dc",      # off-white
-    ("base", "female"): "#ded29a",    # off-yellow
-    ("aligned", "male"): "#fa5252",   # red
-    ("aligned", "female"): "#e8590c", # orange
+    ("base", "male"): "#fa5252",       # red
+    ("base", "female"): "#e8590c",     # orange
+    ("aligned", "male"): "#4dabf7",    # blue
+    ("aligned", "female"): "#b197fc",  # purple
 }
 
 
