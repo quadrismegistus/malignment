@@ -417,6 +417,20 @@ def fig_rating_space_data():
                   "those are different people." % len(core)),
         axes=axes, groups=groups, lines=lines,
         value_label="rating",
+        #: A FENCE THAT DOES NOT FIT IN A TWO-LINE SUBTITLE. `net` is the one
+        #: column here that a probability enters, and malign's [6526] measured the
+        #: replicate jitter it sits in.
+        notes=["The nine axes are LLM ratings on a 1-7 scale; no probability enters them. "
+               "`net` is different: it counts lineages under CANONICAL's thresholds "
+               "(min_prob 0.003, delta 0.003), so it inherits the store's run-to-run "
+               "jitter. Word-level replicate disagreement is 5.8e-08 at the median but "
+               "reaches 1.46e-02, and 67% of these cells have |net| <= 2 -- so read `net` "
+               "as a tally under a threshold, and do not rest a claim on one cell's value.",
+               "The population inherits it too: 608 of these 1,730 cells were admitted on a "
+               "single lineage's classification, and 154 of those sit within +-0.0015 of the "
+               "0.003 floor. Dropping all 154 moves no axis note above by more than 0.9 "
+               "percentage points and changes no modal value, so what the panel SHOWS is not "
+               "resting on them."],
         meta_order=["prompt", "word", "reading", "pair", "role", "referent", "zone", "net"],
         #: TABLE COLUMNS, and `reading` is deliberately not one: it is a sentence,
         #: so it rides the word cell's title attribute instead of widening every

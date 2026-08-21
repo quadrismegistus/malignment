@@ -60,6 +60,7 @@
 		//: Which meta keys become table columns. The producer names them because
 		//: it is the only side that knows which are short enough to be one.
 		table_meta?: string[];
+		notes?: string[];
 		axes: Axis[];
 		groups: Group[];
 		lines: Line[];
@@ -588,6 +589,7 @@
 			</div>
 		</div>
 	{/if}
+	{#each art.notes ?? [] as n}<p class="note">{n}</p>{/each}
 </figure>
 
 <style>
@@ -773,6 +775,12 @@
 	}
 	.tablewrap {
 		margin-top: 0.6rem;
+	}
+	.note {
+		margin: 0.55rem 0 0;
+		font-size: 0.75rem;
+		color: var(--text-3);
+		max-width: 95ch;
 	}
 	.tcap {
 		margin: 0 0 0.3rem;

@@ -112,7 +112,7 @@ MARKS = ("", "up", "down", "flat")
 
 def parcoords(*, title, axes, groups, lines, subtitle=None,
               value_label="value", mark_label="", mark_legend=None, meta_order=None,
-              table_meta=None):
+              table_meta=None, notes=None):
     """Parallel coordinates: one line per case, one axis per measured dimension.
 
         axes    [{key, label, domain: [lo, hi], note}]   left-to-right order
@@ -186,7 +186,7 @@ def parcoords(*, title, axes, groups, lines, subtitle=None,
     return {"chart": "parcoords", "title": title, "subtitle": subtitle,
             "value_label": value_label, "mark_label": mark_label,
             "mark_legend": mark_legend or {}, "meta_order": list(meta_order or []),
-            "table_meta": list(table_meta or []),
+            "table_meta": list(table_meta or []), "notes": notes or [],
             "axes": axes, "groups": groups, "lines": lines}
 
 
