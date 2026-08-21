@@ -474,7 +474,8 @@ class Checkpoint:
         #: share a label and differ in the strings, and a cache that ignored
         #: that would hand back the wrong condition.
         sysk = "" if system is G.DEFAULT else system
-        keys = [dict(G.gen_key(self.model_id, text, frame, sysk, dec, seed, i),
+        keys = [dict(G.gen_key(self.model_id, text, frame, sysk, dec, seed, i,
+                               system_set=(system is not G.DEFAULT)),
                      user=user, prefill=bool(prefill),
                      user_msg=(user_msg if prefill else None),
                      template=template)

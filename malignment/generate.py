@@ -102,7 +102,8 @@ DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data")
 GEN_OUT = os.environ.get("MALIGNMENT_GEN_OUT", os.path.join(DATA, "generations"))
 
 
-def gen_key(model_id, prompt, frame, system, decoder, seed, sample_idx):
+def gen_key(model_id, prompt, frame, system, decoder, seed, sample_idx,
+            system_set=None):
     """The identity of ONE generated passage. Every field that changes it.
 
     ## SHAPE FROM THE STORE, EXTENDED WHERE THIS STASH IS FREER
@@ -123,6 +124,17 @@ def gen_key(model_id, prompt, frame, system, decoder, seed, sample_idx):
     `metadata` to get distinct samples out of a HashStash. It is the single most
     important field here and the easiest to leave out.
 
+    ## `system_set` IS SEPARATE FROM `system_sha` AND MUST BE
+
+    "No system message at all" and "an explicitly empty one" both hash to `""`,
+    and they are the two conditions `conditions.py` measured 2,500x apart -- the
+    template's own persona firing versus being overridden. For a while they were
+    distinguished only by the derived `frame` label, so renaming a label would
+    have silently collided them and served the wrong condition from cache.
+
+    A key should carry the fact, not a name for it. `system_set` is the boolean
+    itself: False for DEFAULT, True for any supplied string including empty.
+
     ## `system` IS HASHED, NOT STORED WHOLE
 
     A system prompt can be long, and the key is written into a jsonl filename.
@@ -130,6 +142,8 @@ def gen_key(model_id, prompt, frame, system, decoder, seed, sample_idx):
     two different prompts can never share a cell and the key stays short.
     """
     return {"model": model_id, "prompt": prompt, "frame": frame,
+            #: the boolean, not a label that happens to encode it
+            "system_set": (bool(system) if system_set is None else bool(system_set)),
             "system_sha": (hashlib.sha256(system.encode()).hexdigest()[:16]
                            if system else ""),
             #: sorted so dict order can never make two identical decoders
