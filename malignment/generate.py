@@ -89,6 +89,23 @@ import os
 #: passages stop being comparable with the store, so it is a module constant
 #: with a citation rather than a call-site default.
 DECODER = {"do_sample": True, "temperature": 1.0, "top_p": 1.0,
+           #: **top_k=0 DISABLES IT, AND OMITTING IT DOES NOT.** transformers
+           #: 5.4.0 applies an effective top_k=50 when the field is absent,
+           #: while `GenerationConfig().top_k`, the checkpoint's own
+           #: generation_config, and the merged `model.generation_config.top_k`
+           #: ALL report None. Measured on SmolLM2-360M-Instruct, 2026-08-21:
+           #: with top_p=1.0 alone, 200 draws never exceed rank 47; with
+           #: top_p=1.0 AND top_k=0 they reach rank 7090, and the same
+           #: distribution sampled by torch.multinomial reaches 1772 in 300.
+           #:
+           #: The consequence is not small. The nucleus at top_p 0.95/0.9/0.7
+           #: is 436/223/53 tokens, so an unasked-for top_k=50 collapses ALL of
+           #: them to one top-50 set -- a sweep over those values varies
+           #: nothing at all. It also means the f11_l2 corpus, generated under
+           #: vLLM (which REPLACES generation_config rather than merging and
+           #: defaults top_k to disabled), was NOT truncated this way, so a
+           #: local run without this line does not reproduce it.
+           "top_k": 0,
            "max_new_tokens": 256}
 
 FRAMES = ("raw", "chat", "continue", "system")
