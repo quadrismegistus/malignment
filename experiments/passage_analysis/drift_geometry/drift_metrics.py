@@ -61,7 +61,31 @@ DATA = os.path.join(os.environ.get("MALIGNMENT_DATA",
                     "drift_geometry")
 VECS = os.path.join(DATA, "sentence_vecs")
 OUT = os.path.join(HERE, "results", "drift_by_passage.csv")
-MIN_SENTS = 3
+#: **THE FLOOR IS PER-COLUMN, NOT PER-ROW, AND IT USED TO BE PER-ROW.**
+#: `MIN_SENTS = 3` blanked the WHOLE metric row below 3 sentences, which
+#: discarded 252 passages where the two metrics anyone actually uses are
+#: perfectly well defined. At n_sents == 2 there is exactly one drift step, so:
+#:
+#:     mean_drift     = that step         DEFINED
+#:     mean_pairwise  = that step         DEFINED
+#:     std_drift      = 0                 degenerate
+#:     max_drift      = mean_drift        degenerate
+#:     path_length    = mean_drift        degenerate
+#:     directedness   = 1 by construction degenerate
+#:
+#: A row-level floor applied to a column-level problem. And the loss was
+#: ARM-DIFFERENTIAL -- aligned 462/6,800 = 6.8% against base 270/6,757 = 4.0%,
+#: because aligned models emit twice as many single-sentence passages -- so
+#: every drift result was computed on a population selected on a correlate of
+#: the arm. `bloomz-7b1` was 189 of 196 blank, 96%, invisible in any aggregate.
+#:
+#: `mean_drift` and `mean_pairwise` are also the LENGTH-FREE pair (r with
+#: n_sents -0.126 and -0.030 against +0.941 for path_length), i.e. exactly the
+#: columns a length-sensitive floor should not have been deciding.
+MIN_SENTS = 2                 #: rows below this have NO metrics at all
+DEGENERATE_BELOW = 3          #: these columns stay blank below it
+DEGENERATE = ("max_drift", "std_drift", "total_drift", "path_length",
+              "directedness", "ordering")
 
 KEYS = ["pid", "model", "arm", "pair", "prompt", "sample_idx",
         "narrative_A", "drift_A", "drift_B", "degree_A", "mode_A"]
@@ -161,14 +185,24 @@ def main(argv=None):
         print("  ordering    moved             : %4d/%d" % (moved_ord, n))
         return
 
-    out, skipped = [], collections.Counter()
+    out, skipped, partial = [], collections.Counter(), collections.Counter()
     for keys, sv in passages():
         m = metrics(sv)
-        if m.get("n_sents", 0) < MIN_SENTS:
-            skipped[m.get("n_sents", 0)] += 1
-            m = dict(n_sents=m.get("n_sents", 0))
+        n = m.get("n_sents", 0)
+        if n < MIN_SENTS:
+            skipped[n] += 1
+            m = dict(n_sents=n)
+        elif n < DEGENERATE_BELOW:
+            #: KEEP the defined columns, BLANK the degenerate ones. Writing 0.0
+            #: for `std_drift` here would be a threshold reported as a
+            #: measurement -- the value is not small, it does not exist.
+            partial[n] += 1
+            m = {k: v for k, v in m.items() if k not in DEGENERATE}
         keys.update(m)
         out.append(keys)
+    if partial:
+        print("  partial rows (defined columns only): %s"
+              % dict(sorted(partial.items())))
 
     cols = KEYS + ["n_sents", "mean_drift", "max_drift", "std_drift",
                    "total_drift", "path_length", "directedness",
@@ -187,13 +221,22 @@ def main(argv=None):
     print("  EMITTED WITH NULL METRICS, not dropped -- absence must read as absence\n")
     md = np.median([r["n_sents"] for r in out])
     print("  median sentences per passage: %d" % md)
-    print("\n  %-14s %9s %9s %9s" % ("metric", "median", "mean", "sd"))
-    for k in ("mean_drift", "total_drift", "directedness", "ordering"):
-        v = np.array([r[k] for r in scored], float)
-        print("  %-14s %9.4f %9.4f %9.4f" % (k, np.median(v), v.mean(), v.std()))
+    #: **EACH COLUMN OVER ITS OWN POPULATION.** Rows below `DEGENERATE_BELOW`
+    #: carry `mean_drift` and not `total_drift`, so a single `scored` list is
+    #: no longer one population -- summarising them together is the pooling
+    #: defect this whole change exists to remove. `n` is printed per row for
+    #: that reason: two columns with different denominators must say so.
+    print("\n  %-14s %9s %9s %9s %8s" % ("metric", "median", "mean", "sd", "n"))
+    for k in ("mean_drift", "mean_pairwise", "total_drift", "directedness", "ordering"):
+        v = np.array([r[k] for r in out if r.get(k) is not None], float)
+        if not v.size:
+            print("  %-14s -- no rows --" % k); continue
+        print("  %-14s %9.4f %9.4f %9.4f %8d"
+              % (k, np.median(v), v.mean(), v.std(), v.size))
     print("\n  identity check, path_length == (n-1) * mean_drift:")
-    d = [abs(r["path_length"] - (r["n_sents"] - 1) * r["mean_drift"]) for r in scored]
-    print("    max deviation %.2e" % max(d))
+    d = [abs(r["path_length"] - (r["n_sents"] - 1) * r["mean_drift"])
+         for r in out if r.get("path_length") is not None]
+    print("    max deviation %.2e over %d rows" % (max(d), len(d)))
     print("\n-> results/drift_by_passage.csv  (%d rows, %d columns)" % (len(out), len(cols)))
 
 
