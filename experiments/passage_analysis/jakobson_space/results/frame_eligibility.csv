@@ -1,0 +1,26 @@
+model,n_raw,verdict,detail
+01-ai/Yi-1.5-9B-Chat,152,OK,+75 chars
+BSC-LT/salamandra-7b-instruct,83,OK,-1333 chars -- REPLACES a default system block
+ContextualAI/archangel_sft-dpo_pythia2-8b,136,NO TEMPLATE,ships none
+HuggingFaceH4/zephyr-7b-beta,168,OK,+91 chars
+HuggingFaceTB/SmolLM2-360M-Instruct,29,OK,+7 chars
+HuggingFaceTB/SmolLM3-3B,127,OK,-1087 chars -- REPLACES a default system block
+LLM360/AmberSafe,117,NO TEMPLATE,ships none
+OpenLLM-France/Lucie-7B-Instruct-v1.1,46,OK,+129 chars
+PKU-Alignment/beaver-7b-v1.0,122,NO TEMPLATE,ships none
+Qwen/Qwen2.5-7B-Instruct,37,OK,+7 chars
+Qwen/Qwen3-8B,108,OK,+105 chars
+TinyLlama/TinyLlama-1.1B-Chat-v1.0,96,OK,+91 chars
+allenai/OLMo-2-0425-1B-DPO,136,NO TOKENIZER,StrictDataclassFieldValidationError
+allenai/OLMoE-1B-7B-0125-DPO,150,NO TOKENIZER,StrictDataclassFieldValidationError
+allenai/Olmo-3-7B-Instruct-DPO,30,NO TOKENIZER,StrictDataclassFieldValidationError
+ibm-granite/granite-3.0-8b-instruct,162,OK,+129 chars
+lomahony/eleuther-pythia6.9b-hh-dpo,145,NO TEMPLATE,ships none
+m-a-p/CT-LLM-SFT-DPO,136,NO TOKENIZER,ValueError
+m-a-p/neo_7b_instruct_v0.1,122,NO TOKENIZER,ValueError
+meta-llama/Llama-3.1-8B-Instruct,61,OK,+75 chars
+tiiuae/Falcon3-10B-Instruct,161,OK,+87 chars
+tiiuae/Falcon3-1B-Instruct,40,OK,+87 chars
+tiiuae/Falcon3-3B-Instruct,45,OK,+87 chars
+tiiuae/Falcon3-7B-Instruct,127,OK,+87 chars
+togethercomputer/RedPajama-INCITE-7B-Chat,174,NO TEMPLATE,ships none
