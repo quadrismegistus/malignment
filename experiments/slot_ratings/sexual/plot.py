@@ -436,11 +436,22 @@ def fig_rating_space_data():
 #: base against aligned. Distinct from the study's male/female pair on purpose:
 #: a reader looking at two figures from one folder must not have to remember
 #: which contrast a colour meant.
-#: Base is NEUTRAL and aligned is MARKED, which is the reading the figure wants
-#: -- one arm is where the model started and the other is what was done to it.
-#: A mid-grey base disappeared into the dense band at zero against the orange;
-#: this pair separates at 0.14 stroke opacity, which is where these lines live.
-BASE, ALIGNED = "#cbd2dc", "#e8590c"
+#: ARM x GENDER, four colours, and the HIERARCHY is the point (RH, 2026-08-21).
+#: Arm is the primary contrast and carries in the pale/warm split, so it reads
+#: across the whole panel at a glance; gender is secondary and separates within
+#: an arm, so it reads on inspection. Getting that the wrong way round would make
+#: the figure's main claim the one you have to squint for.
+#:
+#: Base stays NEUTRAL and aligned MARKED: one arm is where the model started and
+#: the other is what was done to it. Note these lines are drawn at 0.14 stroke
+#: opacity, so a colour that is merely different on a swatch can be invisible on
+#: the panel -- all four are checked against the rendered image, not the hex.
+ARMGENDER = {
+    ("base", "male"): "#cbd2dc",      # off-white
+    ("base", "female"): "#ded29a",    # off-yellow
+    ("aligned", "male"): "#fa5252",   # red
+    ("aligned", "female"): "#e8590c", # orange
+}
 
 
 def fig_lineage_moves_data():
@@ -484,7 +495,7 @@ def fig_lineage_moves_data():
     lines, out_of_domain = [], 0
     for p, l in keys:
         m = meta[(p, l)]
-        for arm, grp in (("base", "base"), ("aligned", "aligned")):
+        for arm in ("base", "aligned"):
             vals, miss = [], {}
             for s in SCALE_ORDER:
                 b, a = v.get((p, l, "base", s)), v.get((p, l, "aligned", s))
@@ -496,7 +507,8 @@ def fig_lineage_moves_data():
                 mid = (a + b) / 2
                 vals.append(round((b if arm == "base" else a) - mid, 4))
             lines.append({
-                "key": "%s|%s|%s" % (p, l, arm), "label": arm, "group": grp,
+                "key": "%s|%s|%s" % (p, l, arm), "label": arm,
+                "group": "%s %s" % (arm, m["gender"]),
                 "values": vals, "missing": miss,
                 "meta": {"arm": arm, "prompt": p, "lineage": l,
                          #: The base half of the lineage with its org prefix cut, for
@@ -540,16 +552,22 @@ def fig_lineage_moves_data():
                   "between lineages. The arms are therefore MIRROR IMAGES by construction -- "
                   "their separation is the move, the symmetry is arithmetic."),
         axes=axes,
-        groups=[{"key": "base", "label": "base", "colour": BASE},
-                {"key": "aligned", "label": "aligned", "colour": ALIGNED}],
+        #: Base first so the legend reads in the order the arms happen in.
+        groups=[{"key": "%s %s" % (a, g), "label": "%s %s" % (a, g),
+                 "colour": ARMGENDER[(a, g)]}
+                for a in ("base", "aligned") for g in ("male", "female")],
         lines=lines,
         value_label="deviation from the pair's two-arm mean",
         meta_order=["arm", "prompt", "model", "lineage", "pair", "gender", "role"],
         table_meta=["arm", "model", "prompt", "gender", "role"])
     write(art, FIGDIR, "fig_lineage_moves")
     n_null = sum(1 for l in lines for x in l["values"] if x is None)
-    print("   %-38s %d lines (%d pairs x 2 arms), domain +-%.2f, %d declared gaps"
-          % ("", len(lines), len(keys), dom[1], n_null))
+    import collections as _c
+    g = _c.Counter(l["group"] for l in lines)
+    assert len(g) == 4 and min(g.values()) == max(g.values()), \
+        "the four arm x gender cells must be balanced by construction: %s" % dict(g)
+    print("   %-38s %d lines (%d pairs x 2 arms), domain +-%.2f, %d declared gaps, %d per cell"
+          % ("", len(lines), len(keys), dom[1], n_null, min(g.values())))
 
 
 FIGURES = {"gender_slopes": fig_gender_slopes,

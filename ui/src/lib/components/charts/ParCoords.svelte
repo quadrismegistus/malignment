@@ -179,8 +179,24 @@
 	const active = $derived(art.axes.map((a) => brush[a.key]));
 	const anyBrush = $derived(Object.keys(brush).length > 0);
 
+	//: ── LEGEND AS A FILTER ──────────────────────────────────────────────────
+	//:
+	//: With four groups the panel is dense enough that a reader wants to see one
+	//: at a time, and the legend is where they are already looking. Empty means
+	//: all, so the default costs nothing.
+	//:
+	//: IT FEEDS `hit`, NOT JUST THE STYLING. A group hidden only in the paint
+	//: would leave the count, the per-group tally and the table reporting a
+	//: population the panel is not showing -- a windowed view beside an
+	//: unwindowed statistic, which is the mismatch no reader would suspect
+	//: because nothing in it is wrong.
+	let only = $state<string[]>([]);
+	const toggle = (k: string) =>
+		(only = only.includes(k) ? only.filter((x) => x !== k) : [...only, k]);
+
 	const hit = $derived(
 		art.lines.map((l) =>
+			(only.length === 0 || only.includes(l.group)) &&
 			art.axes.every((a, i) => {
 				const b = brush[a.key];
 				if (!b) return true;
@@ -231,7 +247,7 @@
 	//: paths is on top, which is a lie about what the reader is pointing at.
 	const HOVERABLE = 60;
 	let hover = $state<number | null>(null);
-	const hoverable = $derived(anyBrush && nSel <= HOVERABLE);
+	const hoverable = $derived((anyBrush || only.length > 0) && nSel <= HOVERABLE);
 
 	//: Drag state for the axis brushes, in pixels; converted to data units on the
 	//: axis's own scale so the stored range means the same thing the tooltip does.
@@ -335,7 +351,10 @@
 	});
 	const shown = $derived(selected.slice(0, CAP));
 
-	const clearAll = () => (brush = {});
+	const clearAll = () => {
+		brush = {};
+		only = [];
+	};
 </script>
 
 <figure class="pc">
@@ -352,8 +371,8 @@
 						<path
 							d={paths[i]}
 							class="line"
-							class:dim={anyBrush && !hit[i]}
-							class:lit={anyBrush && hit[i]}
+							class:dim={(anyBrush || only.length > 0) && !hit[i]}
+							class:lit={(anyBrush || only.length > 0) && hit[i]}
 							class:hov={hover === i}
 							stroke={colour.get(art.lines[i].group) ?? '#888'}
 							onpointerenter={hoverable ? () => (hover = i) : undefined}
@@ -450,7 +469,16 @@
 			<strong>{nSel.toLocaleString()}</strong> of {art.lines.length.toLocaleString()} cells
 		</span>
 		{#each art.groups as g (g.key)}
-			<span class="key"><i style:background={g.colour}></i>{g.label} {byGroup.get(g.key)}</span>
+			<button
+				class="key"
+				class:off={only.length > 0 && !only.includes(g.key)}
+				aria-pressed={only.length === 0 || only.includes(g.key)}
+				title="show only {g.label}"
+				onclick={() => toggle(g.key)}
+			>
+				<i style:background={g.colour}></i>{g.label}
+				{byGroup.get(g.key)}
+			</button>
 		{/each}
 		{#if jitterable}
 			<label class="tog">
@@ -463,8 +491,8 @@
 				>
 			</label>
 		{/if}
-		{#if anyBrush}
-			<button onclick={clearAll}>clear brush</button>
+		{#if anyBrush || only.length}
+			<button onclick={clearAll}>{anyBrush && only.length ? 'clear both' : anyBrush ? 'clear brush' : 'show all'}</button>
 		{:else}
 			<span class="hint">drag on an axis to brush; drag two axes to intersect them</span>
 		{/if}
@@ -504,12 +532,12 @@
 			<p class="tcap">
 				{#if nSel > CAP}
 					showing <strong>{CAP}</strong> of {nSel.toLocaleString()}
-					{anyBrush ? 'selected cells' : 'cells'}{sortKey
+					{anyBrush || only.length ? 'selected cells' : 'cells'}{sortKey
 						? `, by ${sortKey}${sortDesc ? ' descending' : ' ascending'}`
 						: ', in the producer\'s order'} — <em>sort a column to change which {CAP}</em>
 				{:else}
 					all <strong>{nSel.toLocaleString()}</strong>
-					{anyBrush ? 'selected cells' : 'cells'}
+					{anyBrush || only.length ? 'selected cells' : 'cells'}
 				{/if}
 			</p>
 			<div class="scroll">
@@ -681,6 +709,17 @@
 	}
 	.count strong {
 		color: var(--text-1);
+	}
+	button.key {
+		font: inherit;
+		color: inherit;
+		background: none;
+		border: 0;
+		padding: 0;
+		cursor: pointer;
+	}
+	button.key.off {
+		opacity: 0.35;
 	}
 	.key i {
 		display: inline-block;
