@@ -1,6 +1,7 @@
 import type { Component } from 'svelte';
 import SlopeGrid from './SlopeGrid.svelte';
 import ParCoords from './ParCoords.svelte';
+import QuadrantMap from './QuadrantMap.svelte';
 
 /**
  * chart type -> component, keyed by the `chart` field a producer writes into its
@@ -14,5 +15,6 @@ import ParCoords from './ParCoords.svelte';
  */
 export const CHARTS: Record<string, Component<any>> = {
 	slopes: SlopeGrid,
-	parcoords: ParCoords
+	parcoords: ParCoords,
+	quadrants: QuadrantMap
 };

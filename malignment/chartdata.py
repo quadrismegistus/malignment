@@ -188,3 +188,81 @@ def parcoords(*, title, axes, groups, lines, subtitle=None,
             "mark_legend": mark_legend or {}, "meta_order": list(meta_order or []),
             "table_meta": list(table_meta or []),
             "axes": axes, "groups": groups, "lines": lines}
+
+
+def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
+              detail=None, notes=None):
+    """A four-quadrant scatter whose points are addressable, plus its occupancy table.
+
+        x, y     {key, label, note, domain: [lo, hi]}
+        cats     [{key, label, colour, kind}]          kind groups the legend
+        models   [str]                                 indexed by points.model
+        points   {ids: [], x: [], y: [], cat: [], model: []}   PARALLEL ARRAYS
+        cells    [{key, label, pooled}]                the quadrants and pooled rates
+        table    [{cat, n, pct: {cell: %}, enrich: {cell: x}}]
+        detail   {url, scales: {name: {domain, note}}}   how to open one point
+
+    ## WHY PARALLEL ARRAYS AND NOT A LIST OF RECORDS
+
+    14,414 points. As records the field names are repeated 14,414 times and are
+    four fifths of the file; as columns they appear once. The cost is that
+    nothing structurally prevents the columns from being different lengths, so
+    that is the first thing checked.
+
+    ## WHY THE POINTS ARE ADDRESSABLE
+
+    The word and sentence grains behind these points are 3,040,970 and 196,349
+    rows and cannot ship. `ids` exists so a component can fetch ONE point's
+    detail, and `detail_url` names the route rather than the component knowing
+    it -- the same reason `stat_label` lives in the slopes artifact.
+    """
+    n = len(points["ids"])
+    for k in ("x", "y", "cat", "model"):
+        assert len(points[k]) == n, \
+            "points.%s has %d entries against %d ids" % (k, len(points[k]), n)
+    assert len(set(points["ids"])) == n, "duplicate point ids"
+
+    ckeys = [c["key"] for c in cats]
+    assert len(ckeys) == len(set(ckeys)), "duplicate cat keys"
+    bad = [i for i in points["cat"] if not 0 <= i < len(cats)]
+    assert not bad, "cat index out of range: %s" % bad[:3]
+    bad = [i for i in points["model"] if not 0 <= i < len(models)]
+    assert not bad, "model index out of range: %s" % bad[:3]
+
+    #: A POINT OUTSIDE THE DECLARED DOMAIN IS CLIPPED SILENTLY, and on a scatter
+    #: that reads as a smaller cloud rather than as an error.
+    for ax, vals in ((x, points["x"]), (y, points["y"])):
+        lo, hi = ax["domain"]
+        assert lo < hi, "axis %r domain must be [lo, hi]" % ax["key"]
+        out = [v for v in vals if not lo <= v <= hi]
+        assert not out, "%d point(s) outside %s domain %s, first: %s" % (
+            len(out), ax["key"], ax["domain"], out[:3])
+
+    #: A DETAIL SCALE MUST BE A RANGE, for the same reason an axis must: the
+    #: component clamps to it, and a reversed or degenerate domain clamps every
+    #: value to one end and paints a uniform field that reads as "nothing varies".
+    for k, sc in (detail or {}).get("scales", {}).items():
+        assert len(sc["domain"]) == 2 and sc["domain"][0] < sc["domain"][1], \
+            "detail scale %r domain must be [lo, hi], got %s" % (k, sc["domain"])
+        assert sc.get("note"), \
+            "detail scale %r has no note; a clamped scale that does not say so " \
+            "understates its own tail silently" % k
+
+    cell_keys = [c["key"] for c in cells]
+    assert len(cell_keys) == len(set(cell_keys)), "duplicate cell keys"
+    for r in table:
+        assert r["cat"] in ckeys, "table row for undeclared cat %r" % r["cat"]
+        assert sorted(r["pct"]) == sorted(cell_keys), \
+            "table row %r covers %s, expected %s" % (r["cat"], sorted(r["pct"]), sorted(cell_keys))
+        #: THE ROW MUST BE A PARTITION. These are percentages of a category over
+        #: four mutually exclusive quadrants, so anything but 100 means a point
+        #: was counted twice or dropped -- and a table that nearly sums is the
+        #: version nobody checks.
+        tot = sum(r["pct"].values())
+        assert abs(tot - 100) < 0.35, \
+            "table row %r sums to %.2f%%, not 100 (rounding allows 0.35)" % (r["cat"], tot)
+
+    return {"chart": "quadrants", "title": title, "subtitle": subtitle,
+            "x": x, "y": y, "cats": cats, "models": models, "points": points,
+            "cells": cells, "table": table, "detail": detail or {},
+            "notes": notes or []}

@@ -1846,6 +1846,26 @@ class Handler(BaseHTTPRequestHandler):
                     "url_server_relative": "/experiment/figure?id=%s&name=%s"
                                            % (spec["experiment"], os.path.basename(out)),
                     "info": info}
+        if path == "/passage":
+            #: ONE PASSAGE, ALL THREE GRAINS. The scatter ships 14,414 points as
+            #: a static artifact; the word and sentence rows behind them are
+            #: 3,040,970 and 196,349 and cannot, so the reader fetches one
+            #: passage at a time.
+            #:
+            #: **THE ID IS VALIDATED BY MEMBERSHIP, NOT BY PATTERN**, per the
+            #: doctrine at the top of this file. `_passage_ids()` is a set this
+            #: process derived from the store itself, so an id that reaches the
+            #: query is by construction one of 14,414 strings we wrote -- which
+            #: is what makes `'; DROP` uninteresting here rather than a regex
+            #: somebody has to get right.
+            pid = one("id")
+            if not pid:
+                raise ValueError("/passage needs an id")
+            if pid not in _passage_ids():
+                raise KeyError("no passage %r" % pid[:80])
+            return _passage(pid)
+
+
         if path == "/experiment/figure":
             #: **VALIDATED BY MEMBERSHIP IN THE MANIFEST THIS PROCESS WALKED,
             #: never by path.** The name has to be in the `figures` list the
@@ -2110,6 +2130,57 @@ def _question(qid):
                        % (qid, ", ".join(k for k in sorted(man)
                                           if not k.startswith("_")) or "(none)"))
     return man[qid]
+
+
+_PASSAGE_IDS = None
+
+
+def _passage_ids():
+    """The 14,414 passage ids, as a set, derived from the store by this process.
+
+    Lazy rather than loaded at boot: the passage reader is one figure, and a
+    server started to look at the roster should not pay a 14k-row query for it.
+    Cached forever on purpose -- `passage_axes` is written by `ingest_exploded.py
+    --replace` and does not grow under a running server; if it is replaced, the
+    server is stale in the sense `/health` already reports.
+    """
+    global _PASSAGE_IDS
+    if _PASSAGE_IDS is None:
+        from . import vectors as _V
+        _PASSAGE_IDS = frozenset(
+            r["id"] for r in _V.rows("SELECT id FROM malignment.passage_axes"))
+    return _PASSAGE_IDS
+
+
+def _passage(pid):
+    """One passage with its word and sentence decompositions.
+
+    `word_index` and `sent_index` are ORDERED IN SQL rather than sorted here.
+    ClickHouse returns rows in whatever order the parts give, and a passage
+    reassembled in storage order is a passage whose text is wrong while every
+    number in it is right -- the failure that reads as a model producing
+    scrambled prose.
+    """
+    from . import vectors as _V
+    q = _V.rows("SELECT * FROM malignment.passage_axes WHERE id = '%s'" % pid)
+    if not q:
+        raise KeyError("no passage %r" % pid[:80])
+    row = q[0]
+    words = _V.rows("SELECT word_index, word, bits, partial FROM malignment.passage_words "
+                    "WHERE id = '%s' ORDER BY word_index" % pid)
+    sents = _V.rows("SELECT sent_index, sentence, step, dist_from_first, is_furthest, "
+                    "reproduces, mean_bits, n_words FROM malignment.passage_sentences "
+                    "WHERE id = '%s' ORDER BY sent_index" % pid)
+    #: `reproduces` is stored per row and is true for 14,414 of 14,414 passages,
+    #: which is worth nothing until it isn't. Served rather than assumed, so a
+    #: reader looking at a passage can see whether its own sentence steps
+    #: reproduce its own drift.
+    return {"passage": {k: row[k] for k in
+                        ("id", "human_or_ai", "category", "model", "prompt", "text",
+                         "surprisal", "drift", "drift_residual",
+                         "z_surprisal", "z_drift", "z_drift_residual", "quadrant")},
+            "words": words, "sentences": sents,
+            "reproduces": all(s["reproduces"] for s in sents) if sents else None}
 
 
 def _read_json(path):
