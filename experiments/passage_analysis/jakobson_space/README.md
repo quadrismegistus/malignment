@@ -266,6 +266,96 @@ So the human occupancy is not noise around an AI effect. It is the register
 distinction the quadrant names were always about, and the API models sit at the
 `waking_narrative` end of it while base models sit at the `arxiv_abstracts` end.
 
+#### Everything above is descriptive. Here it is tested, three ways.
+
+Shares and enrichments say two populations differ. They cannot say alignment
+MOVES anything -- the arms hold different models, and between-lineage variance
+dominates the arm effect. Three paired designs, three units, each answering a
+question the others cannot.
+
+**`arm_paired.py` -- the lineage.** Each aligned checkpoint against its own base,
+children averaged first so a family with four instruct variants gets one vote.
+22 lineages of 59 (54 models are in `quadrants.csv`; 22 lineages have both arms
+at 10+ passages). Sign test, exact two-sided:
+
+    ALIGNED - BASE            median      up    dn        p
+    surprisal                -0.8435       0    22   4.8e-07
+    drift                    -0.0254       1    21   1.1e-05
+    (+surp +drift) breakdown -0.2911       1    21   1.1e-05
+    (+surp -drift) metaphoric -0.1581      3    19   8.6e-04
+    (-surp +drift) metonymic +0.2134      20     1   2.1e-05
+    (-surp -drift) unmarked  +0.2173      21     0   9.5e-07
+
+**`stem_paired.py` -- the stem.** The API models ship no base, so the lineage
+design cannot reach them; what they share with the open models is the prompt. 97
+of ~100 narrative stems carry all three categories, so the scene is pinned and
+only the generator varies. Within a stem a category is the median over all its
+models' passages, so models are POOLED inside the cell -- right for "does
+category A differ from B on this scene", wrong for "does alignment move a model",
+and where the two disagree the lineage design governs.
+
+    API - ALIGNED, 89 stems   median      up    dn        p
+    metonymic                +0.1569      72    16   1.2e-09
+    metaphoric               -0.0923      20    68   2.8e-07
+    drift                    +0.0085      64    25   4.3e-05
+    surprisal                -0.0852      33    56   0.019
+    unmarked                 -0.0084      42    47   0.67   NULL
+
+**The API step is not a continuation of the alignment step.** base->aligned
+drains breakdown and metaphoric into metonymic AND unmarked (+0.2619, 79/1,
+p=1.3e-22). aligned->API drains them into metonymic ONLY, and unmarked is flat.
+Same direction on one axis, different on the other, and the null is the
+informative half.
+
+The `aligned - base` row of the stem design lands at -0.8444 surprisal and
+-0.0243 drift against the lineage design's -0.8435 and -0.0254. Two different
+units agreeing to three decimals is a consistency check on the pipeline, not a
+second result, and it is not quoted as one.
+
+**`arm_paired.py --human` -- toward or away from each human corpus.** Euclidean
+distance on the (z_surprisal, z_drift) plane from each arm's median to a corpus
+median, differenced aligned-minus-base, same 22 lineages.
+
+    corpus                   median     twd   awy        p
+    waking_narrative        -0.9004      22     0   4.8e-07   TOWARD
+    dreams                  -0.5077      15     7   0.134
+    philosophy              -0.0110      11    11   1.0
+    arxiv_abstracts         +0.1691       9    13   0.523
+    c20_fiction             +0.8377       1    21   1.1e-05   away
+    literary_criticism      +0.9150       1    21   1.1e-05   away
+
+**Alignment moves every one of 22 lineages toward people recounting what happened
+next, and away from literary fiction and criticism.** That is the same fact as
+the metonymic enrichment, seen from the human side: waking narrative is the one
+human corpus at parity in the metonymic cell, and it is the one every lineage
+approaches.
+
+This is run per corpus and NEVER against a pooled human centroid. The six corpora
+occupy opposite corners of this plane, the six answers disagree in sign, and
+their centre sits in a region none of them occupies -- a distance from nowhere.
+
+#### The four directions were predicted, on a different corpus, before that data
+
+`~/github/malign-logits/meta/M06_generation/plans/plan_f15_on_passages.md`
+declared all four before its run and its producer confirmed all four on the M06
+passage corpus: 38 matched pairs, GPT-2 reference, forced-continuation rung on
+the M01 sites, under TWO embedders.
+
+    aligned - base       M06 MiniLM       M06 bge-m3        HERE (22 lineages)
+    surprisal            -0.53  35/38     -0.62  33/38      -0.84   22/22 dn
+    drift                -0.023 34/38     -0.030 34/38      -0.025  21/22 dn
+    Q2 breakdown         -0.211 35/38     -0.335 36/38      -0.291  21/22 dn
+    Q3 metaphoric        -0.157 34/38     -0.123 32/38      -0.158  19/22 dn
+    Q1 metonymic         +0.137 34/38     +0.114 31/38      +0.213  20/22 up
+    Q4 unmarked          +0.224 35/38     +0.299 35/38      +0.217  21/22 up
+
+Their Q1 is our `(-surp +drift)` and their Q3 our `(+surp -drift)`; the
+definitions match. **Four for four, across a different corpus, a different rung,
+a different reference model and a different embedder.** M06's numbers are the
+prediction and these are the test, because theirs were written down first.
+
+The API arm has no counterpart there and is new here.
+
 #### Read on two passages that continue almost the same stem
 
 The corpus supplies a near-controlled pair: `granite-3.0-8b-base` continuing
@@ -424,6 +514,11 @@ absence reads as absence, but any mean over a drift column must exclude them.
                                       step, its displacement, and mean_bits
 
     quadrants.py       builds results/quadrants.csv and the occupancy tables
+    arm_paired.py      base->aligned, paired within LINEAGE; --human for the
+                       toward/away test against each corpus
+    stem_paired.py     API vs aligned vs base, paired within STEM (the API
+                       models have no base, so the lineage design cannot reach
+                       them)
     explode.py         builds the two parquets above from the existing sidecars
     read_passage.py    renders one passage with both decompositions marked on it
     within_passage.py  the within-passage bits-vs-step correlation, length-controlled
