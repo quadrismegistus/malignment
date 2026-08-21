@@ -35,7 +35,19 @@ this file records the reference it used in the manifest beside the CSV.
 
 ## COLUMNS
 
-    id                  the passage key, joinable back to two_axes.csv
+    id                  the passage key. HETEROGENEOUS BY POOL, which is why the
+                        text is carried here rather than left to a join:
+                          huma-*            ref_pool.jsonl
+                          mode-*            ref_pool.jsonl, and text_sha ->
+                                            passages_std.parquet
+                          <slug>-v4-NNN-S   api_passages/<slug>.jsonl
+                        Three files, three key shapes. A reader wanting the
+                        passage should not have to know which.
+    text                the passage itself, AFTER clean() for API rows
+    prompt              the stem it continues; empty for human passages, which
+                        continue nothing
+    text_sha            joins model passages to passages_std.parquet; empty for
+                        human and API rows, which are not in it
     human_or_ai         human | ai
     category            base | aligned | API  for models; the corpus name for humans
     model               the model id, empty for human passages
@@ -72,7 +84,33 @@ def main(argv=None):
     from malignment import roster
     al, ba = roster.population("aligned"), roster.population("bases")
 
-    rows = []
+    #: ---- text lookups, built once. The id shape differs by pool (see the
+    #: docstring), so each pool gets its own map rather than one parse rule.
+    DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
+    txt = {}
+    for line in open(os.path.join(DATA, "ref_pool", "ref_pool.jsonl")):
+        j = json.loads(line)
+        txt[j["id"]] = (j.get("text", ""), j.get("prompt", ""))
+    api_dir = os.path.join(DATA, "api_passages")
+    if os.path.isdir(api_dir):
+        for fn in os.listdir(api_dir):
+            if not fn.endswith(".jsonl") or "_forscore" in fn:
+                continue
+            for line in open(os.path.join(api_dir, fn)):
+                try:
+                    j = json.loads(line)
+                except ValueError:
+                    continue
+                if "stem" in j and "text" in j:
+                    txt[j["id"]] = (j["text"], j["stem"])
+    #: text_sha only exists for the open-model rows, and only they join to the
+    #: parquet -- recorded rather than synthesised for the other two pools.
+    sha = {}
+    for line in open(os.path.join(DATA, "ref_pool", "deepseek", "ref_shard00.jsonl")):
+        j = json.loads(line)
+        sha[j["id"]] = j.get("text_sha", "")
+
+    rows, no_text = [], 0
     for r in csv.DictReader(open(a.src)):
         if r["pool"] == "api":
             hoa, cat, model = "ai", "API", r["group"]
@@ -87,7 +125,12 @@ def main(argv=None):
             if not cat:
                 continue
             hoa, model = "ai", m
+        t, pr = txt.get(r["id"], ("", ""))
+        if not t:
+            no_text += 1
         rows.append(dict(id=r["id"], human_or_ai=hoa, category=cat, model=model,
+                         text=t, prompt=pr if hoa == "ai" else "",
+                         text_sha=sha.get(r["id"], ""),
                          surprisal=float(r["bits_per_token"]),
                          drift=float(r["mean_drift"])))
 
@@ -111,6 +154,11 @@ def main(argv=None):
     r_raw = (sum((s - mS) * (d - mD) for s, d in zip(S, D))
              / ((sum((s - mS) ** 2 for s in S) * sum((d - mD) ** 2 for d in D)) ** 0.5))
     print("%d passages | OLS drift = %.6f + %.6f * surprisal" % (len(rows), aa, b))
+    #: SAY IT if any passage lost its text. A silent empty column is the defect
+    #: this file exists to avoid making the reader chase.
+    print("  text resolved for %d of %d rows%s"
+          % (len(rows) - no_text, len(rows),
+             "" if not no_text else "  <-- %d MISSING" % no_text))
     print("  r(surprisal, drift) = %+.3f | surprisal explains %.0f%% of drift variance"
           % (r_raw, 100 * (1 - (sR / sD) ** 2)))
 
@@ -128,7 +176,8 @@ def main(argv=None):
                 "%-15s" % ("%5.1f%%" % (100 * by[c][q] / t)) for q in QS)))
 
     if a.csv:
-        cols = ["id", "human_or_ai", "category", "model", "surprisal", "drift",
+        cols = ["id", "human_or_ai", "category", "model", "prompt", "text",
+                "text_sha", "surprisal", "drift",
                 "drift_residual", "z_surprisal", "z_drift", "z_drift_residual",
                 "quadrant", "quadrant_raw"]
         with open(a.csv, "w", newline="") as fh:
