@@ -84,28 +84,23 @@ def _save_gg(p, name, w=9, h=6):
 def _save_spec(spec, name, ppi=300, caption=None):
     """The spec for the app, the PNG for print, from one dict, and a sidecar.
 
-    ## WHERE PROSE GOES (RH, 2026-08-21)
+    ## WHERE PROSE GOES (RH, 2026-08-21, correcting me)
 
-    `slopes_by_position` shipped with 294 words baked into the image. Correct for
-    print, where a caption someone strips is a fence that vanishes -- and
-    unreadable on screen, where the reader wants the panel and gets an essay.
+    `slopes_by_position` shipped with 294 words baked into the image. I then cut
+    it to 113 and argued the rest had to stay because a stripped fence reads as
+    no fence. **RH: it is an ugly caption I would never show anyone; at most one
+    line.** Right, and my rule was imported from the wrong context.
 
-    So the split is by FUNCTION, not by length:
+    "The fence must survive stripping" comes from plotnine figures shipped
+    STANDALONE into talks, where nothing travels with the image. It does not
+    apply here: the caption sits directly under the chart in the app and directly
+    under the figure in a paper. A figure with a headline and a caption beneath
+    it is how every published figure works, and my version was a slide.
 
-        ON THE FIGURE   whatever makes it non-misleading STANDING ALONE. The
-                        population, what the marks mean, and any axis convention
-                        without which the panel is actively misread. This is the
-                        part that must survive being pasted into a document with
-                        no caption at all.
-
-        SIDECAR .md     the reasoning. Why the rejected alternatives were
-                        rejected, how a threshold was derived, where this
-                        producer's numbers disagree with the study's own.
-
-    The test for the boundary: if removing a sentence would let a careful reader
-    draw a WRONG conclusion from the panel, it stays on the figure. If removing
-    it only leaves them less informed about how the figure was made, it goes to
-    the sidecar.
+    So: TITLE IS ONE LINE, everything else is the sidecar, rendered open beneath
+    the chart. The invariant that matters is that the caption TRAVELS -- which is
+    what `<name>.caption.md` beside `<name>.png` is for -- not that it is baked
+    into the pixels.
     
 
     The right-edge scan is the verdict on what shipped. It is cheap and it is the
@@ -401,23 +396,14 @@ def fig_slopes():
     ).properties(
         title=alt.TitleParams(
             _wrap("Both positions move together, and where they do not the lines fan"),
-            subtitle=_wrap(
-                'Prompts ending "I should", F21 and M03 pooled: 52 prompts, 50 lineages, '
-                "2,600 cells. Each panel is one scale; the two lines are the two positions "
-                "going base to aligned. PARALLEL LINES ARE A NULL -- the asymmetry is the "
-                "fanning. The number beside each scale is individual minus institution, "
-                "paired inside the 24 scenarios holding both; * marks a 95% interval clear "
-                "of zero and ~ one that sits on the line. EACH PANEL'S Y AXIS IS CENTRED ON "
-                "ITS OWN MIDPOINT, on one shared +-0.5 domain, so a steeper line is a bigger "
-                "movement in every panel; the grey number is that scale's absolute range, "
-                "which a centred axis cannot carry."),
+            subtitle="Parallel lines are a null; the asymmetry is the fanning.",
             fontSize=13, subtitleFontSize=10, anchor="start", color="#111111",
             subtitleColor="#555555", offset=8)
     ).configure_view(stroke=None).configure_axis(domainColor="#cccccc").to_dict()
 
+    #: NO LEADING H1: the figure above already carries the title, and repeating
+    #: it puts the same sentence on screen twice.
     CAPTION = """
-# Both positions move together, and where they do not the lines fan
-
 `slot_ratings/institutional`, section 13. Produced by `plot.py slopes_by_position`
 from `results/base_side/ishould.json`.
 

@@ -216,15 +216,7 @@
   "color": "#111111",
   "fontSize": 13,
   "offset": 8,
-  "subtitle": [
-   "Prompts ending \"I should\", F21 and M03 pooled: 52 prompts, 50 lineages, 2,600 cells. Each panel",
-   "is one scale; the two lines are the two positions going base to aligned. PARALLEL LINES ARE A",
-   "NULL -- the asymmetry is the fanning. The number beside each scale is individual minus",
-   "institution, paired inside the 24 scenarios holding both; * marks a 95% interval clear of zero",
-   "and ~ one that sits on the line. EACH PANEL'S Y AXIS IS CENTRED ON ITS OWN MIDPOINT, on one",
-   "shared +-0.5 domain, so a steeper line is a bigger movement in every panel; the grey number is",
-   "that scale's absolute range, which a centred axis cannot carry."
-  ],
+  "subtitle": "Parallel lines are a null; the asymmetry is the fanning.",
   "subtitleColor": "#555555",
   "subtitleFontSize": 10
  },

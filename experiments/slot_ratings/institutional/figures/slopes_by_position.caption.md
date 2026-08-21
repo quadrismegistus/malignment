@@ -1,5 +1,3 @@
-# Both positions move together, and where they do not the lines fan
-
 `slot_ratings/institutional`, section 13. Produced by `plot.py slopes_by_position`
 from `results/base_side/ishould.json`.
 

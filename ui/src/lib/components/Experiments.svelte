@@ -509,7 +509,7 @@
 			{#snippet caption(fig: string)}
 				{@const md = detail?.captions?.[fig.split('.')[0]]}
 				{#if md}
-					<details class="figcap">
+					<details class="figcap" open>
 						<summary>caption</summary>
 						<Markdown src={md} compact />
 					</details>
