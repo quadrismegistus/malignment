@@ -32,18 +32,21 @@ The first version of this document argued: *a base model ships no chat template,
 
 **It is factually wrong about base models.** Measured 2026-08-21 across all 50 base arms, reading `tokenizer_config.json`:
 
-    ships a chat_template      8
-    ships none                36
-    unreadable (gated repo)    6     meta-llama x2, gemma x2, jais, Zamba2
+    ships a chat_template      9
+    ships none                41
+    unknown                    0
 
-    Qwen/Qwen3-8B-Base                            4116 chars
-    Qwen/Qwen2.5-7B, Qwen2.5-0.5B                 2427
-    huggyllama/llama-7b                           1549
-    m-a-p/neo_7b                                  1027
-    team-hatakeyama-phase2/Tanuki-8B-base-v1.0     532
-    BAAI/Aquila2-7B, kakaocorp/kanana-1.5-8b-base  348
+    Qwen/Qwen3-8B-Base, Qwen/Qwen2.5-7B, Qwen/Qwen2.5-0.5B
+    huggyllama/llama-7b        m-a-p/neo_7b
+    BAAI/Aquila2-7B            kakaocorp/kanana-1.5-8b-base
+    team-hatakeyama-phase2/Tanuki-8B-base-v1.0
+    openbmb/MiniCPM5-1B-Base   <- template in chat_template.jinja, NOT the config
 
-Eight at least, and the six gated repos are unread rather than absent, so the count is a floor. A base checkpoint shipping chat scaffolding is itself worth noticing — it says something about how base-like that release is.
+A base checkpoint shipping chat scaffolding is itself worth noticing — it says something about how base-like that release is.
+
+**THIS NUMBER TOOK THREE ATTEMPTS AND THE FIRST TWO WERE WRONG.** Reading `tokenizer_config.json` alone missed MiniCPM5-1B-Base, whose template is a separate `chat_template.jinja` — transformers resolves either location and a config-only probe does not. The second attempt added those files but mapped every HTTP 4xx to "absent", which would have recorded six GATED repos (meta-llama x2, gemma x2, jais, Zamba2) as shipping no template: an unreadable state reported as a negative. With 401/403 separated from 404 and the HF token applied, all 50 resolve and those six turn out to ship none anyway — but they were being counted, not measured.
+
+**AND 9 IS AN UPPER BOUND, NOT A COUNT.** This tests PRESENCE. `frame_eligibility.py` tests USABILITY, by applying the template and byte-comparing, because "a template that discards a system message raises nothing and produces a treatment arm that never received the treatment". A repo can ship a `chat_template` that `apply_chat_template` refuses or that drops the system block. The authoritative check is loading each tokenizer and calling `render(..., prefill=True)`; that is what the census below should do, and it is not what produced this table.
 
 **And it answers a question the design does not ask.** Even where a base has no template, pair C is available as A-then-B. The missing cell was never load-bearing.
 
