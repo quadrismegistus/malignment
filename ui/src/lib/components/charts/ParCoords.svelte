@@ -96,6 +96,50 @@
 			: (i: number) => (i * innerW) / (art.axes.length - 1)
 	);
 
+	//: ── JITTER ──────────────────────────────────────────────────────────────
+	//:
+	//: On a discrete axis every line lands on one of a handful of lattice points,
+	//: so 1,348 coincident lines and 200 draw the same ink. Offsetting each
+	//: vertex within its own cell restores density as something the eye can read.
+	//:
+	//: **IT IS DETERMINISTIC, AND NOT BY SEEDING AN RNG.** The offset is a hash
+	//: of (line key, axis index), so it is a pure function of the artifact: a
+	//: re-render is byte-identical, and -- the reason that matters more here -- a
+	//: word does not JUMP to a new position when the brush changes. A seeded
+	//: generator gives the first property and loses the second the moment the
+	//: draw order changes, which it does whenever the brush does.
+	//:
+	//: **IT IS A DRAWING DECISION AND STAYS OUT OF THE ARTIFACT.** The data file
+	//: holds ratings. Brushing, counting and the readout all use the TRUE values,
+	//: so the offset never reaches a number the reader is given.
+	//:
+	//: Only axes that DECLARE a `step` are jittered, because only those are known
+	//: discrete. Amplitude is a fraction of one step and stays well under a half,
+	//: so the lattice remains visible and 4 does not blur into 5.
+	const JIT = 0.19;
+	const jitterable = $derived(art.axes.some((a) => a.step));
+	let jitter = $state(true);
+
+	//: FNV-1a, 32-bit. Any stable string hash does; this one is short and has no
+	//: dependency. Returned in [-0.5, 0.5).
+	function off(key: string, i: number) {
+		let h = 0x811c9dc5;
+		const t = key + '\u0000' + i;
+		for (let k = 0; k < t.length; k++) {
+			h ^= t.charCodeAt(k);
+			h = Math.imul(h, 0x01000193);
+		}
+		return ((h >>> 0) % 4096) / 4096 - 0.5;
+	}
+
+	/** Offset in data units: two-sided in the interior, one-sided at either end. */
+	function spread(o: number, v: number, a: Axis, st: number) {
+		const span = st * JIT * 2;
+		if (v <= a.domain[0]) return (o + 0.5) * span;
+		if (v >= a.domain[1]) return -(o + 0.5) * span;
+		return o * span;
+	}
+
 	//: GEOMETRY ONLY, and deliberately not a function of the brush. A `null` ends
 	//: the current subpath and starts a new one after the gap, so a declared
 	//: missing value draws as a break rather than as a straight line across the
@@ -109,7 +153,18 @@
 					pen = false;
 					return;
 				}
-				d += `${pen ? 'L' : 'M'}${xOf(i).toFixed(1)},${yOf[i](v).toFixed(1)}`;
+				const a = art.axes[i];
+				const st = a.step ?? 0;
+				//: ONE-SIDED AT THE ENDS OF THE SCALE, and this is not a detail
+				//: here: 78-85% of cells sit AT the domain minimum on six of the
+				//: nine axes, so the edge is the dominant case. Clamping a
+				//: two-sided offset piles every below-floor excursion onto the
+				//: floor line itself -- a hard bright edge carrying half the
+				//: population, which is the overplotting the jitter exists to
+				//: undo. Spread over the same total width, inward only, so band
+				//: thickness stays comparable with an interior axis.
+				const y = jitter && st ? v + spread(off(l.key, i), v, a, st) : v;
+				d += `${pen ? 'L' : 'M'}${xOf(i).toFixed(1)},${yOf[i](y).toFixed(1)}`;
 				pen = true;
 			});
 			return d;
@@ -266,12 +321,26 @@
 
 							{#if active[i]}
 								{@const b = active[i]}
+								{@const j = jitter && a.step ? a.step * JIT : 0}
+								{@const padLo = b[0] <= a.domain[0] ? 0 : j}
+								{@const padHi = b[1] >= a.domain[1] ? 0 : j}
+								<!--
+								  GROWN BY THE JITTER AMPLITUDE, because the rectangle marks
+								  where the SELECTED INK IS and jittered ink for rating 4 sits
+								  a fraction below 4. Drawn at the exact bounds it would show
+								  lit lines poking out below it, which reads as a selection
+								  bug. The label above still prints the true bounds.
+								-->
 								<rect
 									class="sel"
 									x="-7"
 									width="14"
-									y={yOf[i](b[1])}
-									height={Math.max(1, yOf[i](b[0]) - yOf[i](b[1]))}
+									y={yOf[i](Math.min(a.domain[1], b[1] + padHi))}
+									height={Math.max(
+										1,
+										yOf[i](Math.max(a.domain[0], b[0] - padLo)) -
+											yOf[i](Math.min(a.domain[1], b[1] + padHi))
+									)}
 								/>
 							{/if}
 							{#if drag && drag.axis === i}
@@ -330,6 +399,17 @@
 		{#each art.groups as g (g.key)}
 			<span class="key"><i style:background={g.colour}></i>{g.label} {byGroup.get(g.key)}</span>
 		{/each}
+		{#if jitterable}
+			<label class="tog">
+				<input type="checkbox" bind:checked={jitter} />
+				jitter
+				<span class="hint"
+					>{jitter
+						? `ink is offset within ±${JIT} of a step, inward only at the ends of a scale; every number here is the unjittered rating`
+						: 'ink is exact, so coincident cells are indistinguishable'}</span
+				>
+			</label>
+		{/if}
 		{#if anyBrush}
 			<button onclick={clearAll}>clear brush</button>
 		{:else}
@@ -471,6 +551,15 @@
 	.hint {
 		opacity: 0.7;
 		font-style: italic;
+	}
+	.tog {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		cursor: pointer;
+	}
+	.tog input {
+		margin: 0;
 	}
 	.bar button {
 		font: inherit;
