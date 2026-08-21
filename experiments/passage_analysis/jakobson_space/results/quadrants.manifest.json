@@ -1,0 +1,21 @@
+{
+ "n": 14414,
+ "source": "two_axes.csv",
+ "reference": "all passages pooled",
+ "ols": {
+  "intercept": 0.3648212474243663,
+  "slope": 0.021712159363954642
+ },
+ "r_surprisal_drift": 0.3475513246991454,
+ "variance_explained": 0.12079192330013033,
+ "mean": {
+  "surprisal": 3.787786720133204,
+  "drift": 0.44706227632856943,
+  "drift_residual": -1.7199445081087656e-17
+ },
+ "sd": {
+  "surprisal": 0.6948217121981002,
+  "drift": 0.04340676807329131,
+  "drift_residual": 0.04070083184042572
+ }
+}

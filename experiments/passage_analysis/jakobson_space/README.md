@@ -143,8 +143,47 @@ another on a PASSAGE. On the older self-surprisal axis:
 The quadrant scheme treats drift and surprisal as two dimensions to cross. They are
 not independent here, and the dependence is TWICE AS STRONG in the aligned arm --
 so a median split produces quadrants whose populations differ by arm for reasons
-that have nothing to do with the quadrant names. Not yet analysed; recorded because
-any quadrant claim has to deal with it first.
+that have nothing to do with the quadrant names.
+
+### ANALYSED NOW, AND THE QUADRANTS DO NOT SURVIVE IT
+
+70 entities on the plane -- 53 open models, 6 human corpora, 11 API models, each
+a median of its own passages. **r(surprisal, drift) = +0.749.** Z-scoring both
+axes and crossing them at zero:
+
+    reference              HH    Hl    lH    ll    off-diagonal
+    six human corpora      24    16     2    28    18 of 70 = 26%
+    53 open models         32     3    11    24    14 of 70 = 20%
+    all 70 entities        36     4     7    23    11 of 70 = 16%
+
+**Under independence the off-diagonal cells would hold 50%. They hold 16-26%.**
+So this is not four populations, it is a diagonal with scatter, and the two
+off-diagonal quadrants -- the ones whose NAMES carry the Jakobsonian content --
+hold 11 of 70 entities at best.
+
+**AND THE REFERENCE CHOICES DISAGREE ABOUT WHO IS WHERE.** `salamandra-7b` is
+HIGH/low against the human corpora and HIGH/HIGH against the open models;
+`arxiv_abstracts` moves the same way. Off-diagonal membership swings from 18 to
+11 depending on which population defines zero, so "which quadrant is X in" has no
+answer until the reference is declared -- and the six-corpus reference is the
+weakest of the three, an sd estimated from six points.
+
+**What the plane does separate is the arm, and almost perfectly:**
+
+    kind        HH    Hl    lH    ll
+    base        25     1     0     0
+    aligned      6     3     3    15
+    api          1     0     4     6
+    human        4     0     0     2
+
+25 of 26 base models sit in HIGH/HIGH. Aligned models are mostly `ll` but occupy
+all four cells; API models are 10 of 11 in the low-surprisal half. So the
+contrast this corpus supports is ONE DIAGONAL, and the quadrant names do no work
+beyond it. A four-quadrant reading needs a corpus where the axes are closer to
+independent than +0.749.
+
+Reproduce: `two_axes.py --csv results/two_axes.csv`, then z-score the per-entity
+medians. `api_placement.py` carries the CIs.
 
 ## Why the quadrants are not simply ported
 
