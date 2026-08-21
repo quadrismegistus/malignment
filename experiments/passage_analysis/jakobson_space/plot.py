@@ -69,6 +69,14 @@ def fig_passage_map_data():
     assert cats_seen == set(CATS), "category set moved: %s" % sorted(cats_seen ^ set(CATS))
     assert {r["quadrant"] for r in rows} == set(CELLS), "quadrant labels moved"
 
+    #: The step z parameters the reader is shown, re-derived and refused if they
+    #: move. A z printed against a stale mean is wrong in a way nothing on the
+    #: panel can reveal.
+    st = V.rows("SELECT avg(step) mu, stddevPop(step) sd FROM malignment.passage_sentences "
+                "WHERE step IS NOT NULL")[0]
+    assert abs(round(st["mu"], 4) - 0.4468) < 1e-9 and abs(round(st["sd"], 4) - 0.0921) < 1e-9, \
+        "the sentence-step distribution moved: mean %.4f sd %.4f" % (st["mu"], st["sd"])
+
     r_pooled = V.rows("SELECT corr(z_surprisal, z_drift) c FROM malignment.passage_axes")[0]["c"]
     assert abs(round(r_pooled, 3) - BOOKED_R) < 1e-9, \
         "passage-grain r moved: booked %.3f, got %.4f" % (BOOKED_R, r_pooled)
@@ -258,10 +266,26 @@ def fig_passage_map_data():
                            #: 0.8" -- a number I had not measured, in a note whose
                            #: whole job is to say what a scale hides. It hides
                            #: nothing, and that is worth saying too.
-                           "step": {"domain": [0, 0.8],
-                                    "note": "sentence-to-sentence step over 181,935 "
-                                            "sentences: median 0.449, min 0.000, max 0.794. "
-                                            "Nothing is clamped"}}},
+                           #: `mean` and `sd` so the reader can be shown a z rather
+                           #: than a raw cosine step, which is uninterpretable on
+                           #: its own. The distribution supports it: skew -0.322
+                           #: and kurtosis 3.889 over 181,935 sentences.
+                           #:
+                           #: **THESE ARE NOT THE PASSAGE'S z_drift PARAMETERS AND
+                           #: THE NOTE SAYS SO.** A passage's drift is the MEAN of
+                           #: its steps, and averaging shrinks the spread: the
+                           #: sentence sd is 0.0921 against the passage sd of
+                           #: 0.0434, so the same z means a different thing on each.
+                           #: The panel shows both -- `z 1.02` in the header is a
+                           #: passage among passages -- and two numbers spelled the
+                           #: same way on one screen is exactly the mismatch a
+                           #: reader has no way to suspect.
+                           "step": {"domain": [0, 0.8], "mean": 0.4468, "sd": 0.0921,
+                                    "note": "sentence-to-sentence step, shown as a z over the "
+                                            "181,935 SENTENCE steps (mean 0.4468, sd 0.0921); "
+                                            "raw on hover. NOT the same scale as the passage "
+                                            "z_drift above, whose sd is 0.0434 because a "
+                                            "passage's drift is the mean of its steps"}}},
         notes=[
             "Enrichment is against the pooled rate over all 14,414 passages, printed under "
             "each quadrant. The two off-diagonal cells are enriched monotonically in "

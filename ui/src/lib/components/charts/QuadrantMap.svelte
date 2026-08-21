@@ -32,7 +32,10 @@
 		table: { cat: string; n: number; pct: Record<string, number>; enrich: Record<string, number> }[];
 		detail?: {
 			url?: string;
-			scales?: Record<string, { domain: [number, number]; mid?: number; note: string }>;
+			scales?: Record<
+			string,
+			{ domain: [number, number]; mid?: number; mean?: number; sd?: number; note: string }
+		>;
 		};
 		notes?: string[];
 		n_total?: number;
@@ -178,6 +181,23 @@
 
 	const bitsDom = $derived(art.detail?.scales?.bits?.domain ?? [0, 16]);
 	const stepDom = $derived(art.detail?.scales?.step?.domain ?? [0, 0.8]);
+
+	//: A RAW COSINE STEP IS UNINTERPRETABLE (RH). 0.472 says nothing on its own;
+	//: +0.3σ says it is a slightly-longer-than-usual move. Parameters come from
+	//: the producer, which asserts them against the store, because a z printed
+	//: against a stale mean is wrong in a way nothing on the panel can reveal.
+	//:
+	//: **WRITTEN AS σ, NOT AS "z", ON PURPOSE.** The header already shows the
+	//: PASSAGE's `z_drift`, and the two are not the same scale: a passage's drift
+	//: is the mean of its steps, and averaging shrinks the spread, so the sentence
+	//: sd is 0.0921 against the passage sd of 0.0434. Two numbers spelled the same
+	//: way on one screen, differing by a factor of two, is a mismatch a reader has
+	//: no way to suspect. The raw value stays on hover.
+	const stepZ = $derived.by(() => {
+		const sc = art.detail?.scales?.step;
+		if (!sc?.sd) return null;
+		return (v: number) => (v - (sc.mean ?? 0)) / sc.sd!;
+	});
 	//: DIVERGING ABOUT A MIDPOINT THE PRODUCER DECLARES, blue below and red above.
 	//: The two sides are normalised SEPARATELY, because the domain is not
 	//: symmetric about the median -- 0 to 3.44 against 3.44 to 16 -- and one ramp
@@ -210,6 +230,14 @@
 	//: the plane -- still read as two sentences rather than as one run-on. So the
 	//: gap is proportional ABOVE a floor, and the number is printed beside it
 	//: because that is the part a reader can check.
+	//: `(-0.04).toFixed(1)` is "-0.0", which prints a signed zero -- a value that
+	//: reads as "slightly below" when what it means is "at the mean". Rounded
+	//: first, so the sign is decided on the number actually shown.
+	const sig = (z: number) => {
+		const r = Math.round(z * 10) / 10;
+		return `${r > 0 ? '+' : r < 0 ? '\u2212' : ''}${Math.abs(r).toFixed(1)}\u03c3`;
+	};
+
 	const GAP_MIN = 12;
 	const GAP_MAX = 78;
 	const gapPx = (step: number | null) => {
@@ -490,10 +518,17 @@
 								<div
 									class="gap"
 									style:height="{gapPx(s.step)}px"
-									title="step from the previous sentence: {fmt(s.step, 3)}"
+									title="step from the previous sentence: {fmt(s.step, 3)} raw{s.step != null &&
+									stepZ
+										? ` · ${stepZ(s.step) >= 0 ? '+' : ''}${stepZ(s.step).toFixed(2)} sd from the mean sentence step`
+										: ''}"
 								>
 									<span class="rule"></span>
-									<span class="num">{s.step == null ? '—' : s.step.toFixed(3)}</span>
+									<span class="num">
+										{#if s.step == null}—{:else if stepZ}{sig(stepZ(s.step))}{:else}{s.step.toFixed(
+												3
+											)}{/if}
+									</span>
 								</div>
 							{/if}
 							<p class="sent" class:furthest={s.is_furthest}>
