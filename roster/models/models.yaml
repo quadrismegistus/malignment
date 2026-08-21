@@ -67,7 +67,11 @@ nodes:
     pretrained: false   # ALREADY ALIGNED: `-control` is the instruction-tuned release
                         # (attested method sft). Its edge to `-control-aligned` is
                         # therefore SFT->DPO, not base->aligned; the raw Pharia-1-LLM-7B
-                        # is not in this roster.
+                        # was NEVER RELEASED -- not merely absent from this roster.
+                        # Aleph Alpha's card: "We optimized Pharia-1-LLM-7B-control
+                        # for instruction-following, using a full model fine-tuning
+                        # approach", and the HF API lists 7 Pharia repos of which
+                        # EVERY LLM one carries `-control`. There is nothing to add.
     revision_ladder: 5
     family:
     - pharia
