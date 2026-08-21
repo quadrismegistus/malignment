@@ -431,8 +431,19 @@ TOPK_RANK = 20
 MASS_FLOOR = 0.01
 
 
-def _table_r4(pre, post):
+def _table_two_column(pre, post, rows=False):
     """Two arms, membership and order by mass, positions shown instead of mass.
+
+    Renders the `two_column` table, which is what INSTRUMENT r4, r5 AND
+    crosslineage all declare. The `_r4` in the name is where it was introduced,
+    not who uses it -- and that has already misled once: `run.py` dispatched on
+    `ver_now.startswith("r4")`, which is False for "r5", so 145 cells were coded
+    against one table under a description of another. A version prefix is not a
+    type; `renderer_of()` reads the instrument's own `renderer:` line.
+
+    With `rows=True` returns `(text, data)` where `data["rows"]` carries every
+    printed word with its side, both ranks, both probabilities and its delta --
+    the numbers this function computes anyway.
 
     Settled with RH over a long iteration, and every clause here is something an
     earlier version got wrong:
@@ -516,8 +527,30 @@ def _table_r4(pre, post):
     if flipA or flipB:
         tail = ("\n\n%d word(s) are withheld because their position moved the "
                 "opposite way to their prominence." % (len(flipA) + len(flipB)))
-    return "%s\n\n%s%s" % (block(colA, "HIGHER UNDER A"),
+    text = "%s\n\n%s%s" % (block(colA, "HIGHER UNDER A"),
                             block(colB, "HIGHER UNDER B"), tail)
+    if not rows:
+        return text
+    #: THE NUMBERS THIS FUNCTION ALREADY HAS. Returning only the string meant
+    #: anything wanting a rank or a side had to RE-PARSE the rendering with a
+    #: regex -- and re-parsing your own output is a second implementation of the
+    #: selection rules that can disagree with the first. It did: a loose
+    #: `\s+(\S+)\s` swallowed the withheld-count line, and the recovered sides
+    #: were then used to judge a rater. Emit the data instead.
+    #:
+    #: `side` is the block a word was PRINTED in, so a consumer never has to
+    #: re-derive membership from `delta`, which is where the sign-flip rule
+    #: (kept, not fixed, by design) would trip it.
+    data = []
+    for ws, sd in ((colA, "A"), (colB, "B")):
+        for w in ws:
+            data.append({"word": w, "side": sd,
+                         "rank_a": rb.get(w), "rank_b": ra.get(w),
+                         "p_a": pre.get(w, 0.0), "p_b": post.get(w, 0.0),
+                         "delta": dp[w]})
+    return text, {"rows": data,
+                  "withheld": sorted(flipA) + sorted(flipB),
+                  "n_a": len(colA), "n_b": len(colB)}
 
 
 def _table_ranks(pre, post, common, pre_only=(), post_only=()):
@@ -754,7 +787,7 @@ def prepare(frames, pair_names, orientations, raters=1, redo=False):
                                          "measured there. Pass --topup.")
                     nb = {w: p / sum(W[b].values()) for w, p in W[b].items()}
                     na = {w: p / sum(W[a].values()) for w, p in W[a].items()}
-                    tbl = _table_r4(nb, na)
+                    tbl = _table_two_column(nb, na)
                     n_shared = len(set(nb) & set(na))
                     n_shown = sum(1 for ln in tbl.splitlines()
                                   if ln.startswith("  ") and "->" in ln)

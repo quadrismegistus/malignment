@@ -50,7 +50,7 @@ def _stash():
     return HashStash(root_dir=STASH, engine="jsonl", flat=True)
 
 
-def tables(prompt_prefix):
+def tables(prompt_prefix, want_rows=False):
     """Rebuild every lineage's two-column table for one prompt, from twp.
 
     Rebuilt rather than recovered from the stage-1 job files: those were written
@@ -110,19 +110,26 @@ def tables(prompt_prefix):
                   "AND model IN {ms:Array(String)} AND merged=1 GROUP BY model",
                   p=prompt, ms=models)
     W = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in rows}
-    out = []
+    out, rowdata = [], {}
     for nick, b, a in pairs:
         if b not in W or a not in W:
             print("skip %s: an arm is missing from twp" % nick, file=sys.stderr)
             continue
         nb = {w: p / sum(W[b].values()) for w, p in W[b].items()}
         na = {w: p / sum(W[a].values()) for w, p in W[a].items()}
-        out.append((nick, R._table_r4(nb, na)))
-    return prompt, out
+        txt, data = R._table_two_column(nb, na, rows=True)
+        out.append((nick, txt))
+        #: THE TABLE'S OWN NUMBERS, KEPT. Rendering and discarding them meant any
+        #: later check of a rater against the table had to re-parse the string,
+        #: which is a second implementation of the selection rules and disagreed
+        #: with the first twice in one evening. `tables()` is where the data
+        #: exists, so it is where it gets carried out.
+        rowdata[nick] = data
+    return (prompt, out, rowdata) if want_rows else (prompt, out)
 
 
 def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False):
-    prompt, tbl = tables(prefix)
+    prompt, tbl, rowdata = tables(prefix, want_rows=True)
     src = open(INSTRUMENT).read()
     #: ── BLIND: NEUTRAL FRAMING *AND* NEUTRAL LABELS ─────────────────────────
     #: Swapping the framing paragraph alone is not a blind. The headings carry
@@ -170,6 +177,11 @@ def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False):
              "model": model, "effort": effort, "path": path,
              "version": ver + ("b" if blind else "")}
     json.dump(state, open(os.path.join(HERE, "results", "xling_%s.json" % slug), "w"), indent=1)
+    #: Written beside the task under the REAL model names, whatever labels the
+    #: rater saw, so a consumer never has to know whether a run was blind.
+    tpath = os.path.join(HERE, "results", "xling_%s.tables.json" % slug)
+    json.dump({"prompt": prompt, "blind": bool(blind), "tables": rowdata},
+              open(tpath, "w"), indent=1)
     js = SCRIPT % {"raters": raters,
                    "path": json.dumps(os.path.abspath(path)),
                    "schema": json.dumps(schema, indent=2, sort_keys=True),
@@ -184,6 +196,7 @@ def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False):
           % (prompt, len(tbl), len(body), len(body) // 4, raters)
           + ("  BLIND: A/B framing, labels M01..M%02d" % len(tbl) if blind else ""))
     print("  task     %s" % path)
+    print("  tables   %s" % tpath)
     print("  workflow %s\n\nNOT RUN." % out)
 
 

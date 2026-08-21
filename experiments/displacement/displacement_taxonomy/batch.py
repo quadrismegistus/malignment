@@ -214,7 +214,7 @@ def render(prompts):
                     continue
                 nb = {w: p / sum(W[b].values()) for w, p in W[b].items()}
                 na = {w: p / sum(W[a].values()) for w, p in W[a].items()}
-                tbl = run._table_r4(nb, na)
+                tbl = run._table_two_column(nb, na)
                 shown = sum(1 for ln in tbl.splitlines()
                             if ln.startswith("  ") and "->" in ln)
                 if shown < 4:
