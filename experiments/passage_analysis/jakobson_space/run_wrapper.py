@@ -19,6 +19,41 @@ where both conditions exist, and six of them do -- 59 shared prompts, raw and
 `continue`, the same checkpoint in both. This file estimates it and states it in
 the same units as the contrast it threatens.
 
+## THIS IS NOT THE SAME FRAME AS THE API MODELS' AND CANNOT BE PORTED 1:1
+
+Checked in the producers rather than assumed:
+
+    wrapper pool   `core.py:231` -- ONE USER TURN, no system message:
+                   [{"role": "user", "content": "Continue this text: " + stem}]
+    the API models `generate_task.py:135,280` -- a SYSTEM message, stem as a
+                   separate user turn: "Continue this text for 200-250 words.
+                   Do not repeat the text you are given."
+
+Three differences, not one: the instruction sits in a different role, the stem
+sits in a different turn, and the API instruction carries two constraints this
+one has no equivalent of -- a length target, and **"Do not repeat the text you
+are given"**.
+
+**That last one plausibly pushes drift in the OPPOSITE direction to what is
+measured here.** An instruction not to repeat the given text is an instruction to
+move away from it, and moving away from the opening is what the drift axis
+measures. So this pool does not bound our frame's effect on drift even in sign.
+
+What it therefore does and does not license:
+
+    DOES    a magnitude statement -- frame effects on these axes are large,
+            surprisal moving ~6x the entire API-aligned gap
+    DOES    the general claim that an unestimated frame difference is a serious
+            confound on any API-versus-open contrast, not a footnote
+    DOES NOT any per-row verdict on `stem_paired.py`'s results, in either
+            direction. "The API drift result survives because the wrapper pushes
+            the other way" is NOT supported: it assumes a portability that the
+            three differences above defeat.
+
+Estimating OUR frame needs our frame run against a bare condition on models where
+both are possible, which is what `../../instrument_calibrations/frame_prefill/`
+is for and is not what this pool is.
+
 ## THE UNIT IS THE MODEL, AND THERE ARE SIX
 
 Paired within (model, prompt), then one number per model, then a sign test over
@@ -162,9 +197,9 @@ def main(argv=None):
         print("%-28s %+10.4f %5d %5d %10.3g" % (nm, med, up, dn, p))
     print("  the sign-test floor at n=6 is p=0.03125; only a 6-0 split reaches it.")
 
-    #: THE COMPARISON THAT MATTERS. Put the wrapper effect beside the contrast it
-    #: threatens, in the same units, so a reader can size one against the other
-    #: instead of being told it is or is not a problem.
+    #: Put the wrapper effect beside the contrast it threatens, in the same
+    #: units. THIS IS A MAGNITUDE COMPARISON ONLY -- see the docstring: the two
+    #: frames are not the same frame, so no per-row verdict is drawn from it.
     API = {"surprisal": -0.0852, "drift": +0.0085, "(-surp +drift)": +0.1569,
            "(+surp -drift)": -0.0923}
     if not out:
@@ -180,10 +215,13 @@ def main(argv=None):
         nm = lab if lab in ("surprisal", "drift") else "%s %s" % (lab, NAME[lab])
         print("%-28s %+12.4f %+12.4f %9.0f%%"
               % (nm, w, v, 100 * abs(w / v) if v else float("nan")))
-    print("\nSame sign means the wrapper could be producing part of the API")
-    print("result; opposite sign means the API result survives it and is if")
-    print("anything understated. Six models is an estimate, not a correction --")
-    print("nothing here is subtracted from anything.")
+    print("\nDO NOT READ THE SIGNS AS A VERDICT ON THE API ROWS. The two frames")
+    print("differ in placement and in content (see the docstring), and one of the")
+    print("differences plausibly acts on drift in the OPPOSITE direction to what")
+    print("is measured here. What this table licenses is a magnitude statement:")
+    print("frame effects on these axes are LARGE -- surprisal moves ~6x the whole")
+    print("API-aligned gap -- so an unestimated frame difference is a serious")
+    print("confound and not a footnote. It does not license a correction.")
 
 
 if __name__ == "__main__":
