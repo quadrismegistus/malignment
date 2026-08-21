@@ -215,6 +215,8 @@
 		return out.concat(rest);
 	});
 
+	const indexOf = $derived(new Map(art.lines.map((l, i) => [l.key, i])));
+
 	const nSel = $derived(hit.filter(Boolean).length);
 	const byGroup = $derived.by(() => {
 		const m = new Map<string, number>(art.groups.map((g) => [g.key, 0]));
@@ -468,26 +470,46 @@
 		{/if}
 	</div>
 
-	{#if hover !== null && art.lines[hover]}
-		{@const l = art.lines[hover]}
-		<div class="meta">
+	<!--
+	  ALWAYS RENDERED. Conditionally mounting this strip made the whole table jump
+	  by its height on every row hover -- and the jump moves the row you are
+	  pointing at, so hovering row N can slide row N+1 under the cursor. The box
+	  keeps its height and shows a hint when nothing is hovered, so the reserved
+	  space is doing something rather than sitting blank.
+
+	  Fixed height with `overflow-y: auto` rather than `overflow: hidden`: a long
+	  `reading` on a narrow panel would otherwise be cut with nothing to say it
+	  was, which is the failure mode this project keeps paying for.
+	-->
+	<div class="meta" class:idle={hover === null || !art.lines[hover]}>
+		{#if hover !== null && art.lines[hover]}
+			{@const l = art.lines[hover]}
 			{#each art.meta_order ?? [] as k}
 				{#if l.meta?.[k] !== undefined && l.meta[k] !== ''}
 					<span><b>{k}</b> {l.meta[k]}</span>
 				{/if}
 			{/each}
-		</div>
-	{/if}
+		{:else}
+			<span class="hint">hover a row for its full record</span>
+		{/if}
+	</div>
 
-	{#if anyBrush && nSel > 0}
+	{#if nSel > 0}
 		<div class="tablewrap">
+			<!--
+			  "selected" ONLY WHEN SOMETHING IS SELECTED. Unbrushed, every cell is in
+			  the table and calling them selected would name a filter that is not
+			  applied -- a caption describing a state the figure is not in.
+			-->
 			<p class="tcap">
 				{#if nSel > CAP}
-					showing <strong>{CAP}</strong> of {nSel.toLocaleString()} selected cells{sortKey
+					showing <strong>{CAP}</strong> of {nSel.toLocaleString()}
+					{anyBrush ? 'selected cells' : 'cells'}{sortKey
 						? `, by ${sortKey}${sortDesc ? ' descending' : ' ascending'}`
 						: ', in the producer\'s order'} — <em>sort a column to change which {CAP}</em>
 				{:else}
-					all <strong>{nSel.toLocaleString()}</strong> selected cells
+					all <strong>{nSel.toLocaleString()}</strong>
+					{anyBrush ? 'selected cells' : 'cells'}
 				{/if}
 			</p>
 			<div class="scroll">
@@ -516,7 +538,7 @@
 					<tbody>
 						{#each shown as l (l.key)}
 							<tr
-								onpointerenter={() => (hover = art.lines.indexOf(l))}
+								onpointerenter={() => (hover = indexOf.get(l.key) ?? null)}
 								onpointerleave={() => (hover = null)}
 							>
 								{#each cols as c (c.key)}
@@ -684,10 +706,18 @@
 	.meta {
 		display: flex;
 		flex-wrap: wrap;
+		align-content: flex-start;
 		gap: 0.25rem 0.9rem;
 		margin-top: 0.4rem;
 		font-size: 0.78rem;
+		line-height: 1.35;
 		color: var(--text-2);
+		/* two lines of the strip, reserved whether or not anything is hovered */
+		height: 2.7em;
+		overflow-y: auto;
+	}
+	.meta.idle {
+		color: var(--text-3);
 	}
 	.meta b {
 		color: var(--text-3);
