@@ -427,17 +427,16 @@ def fig_rating_space_data():
                "and do not rest a claim on one cell.",
                "How exposed, measured rather than asserted: 608 of these 1,730 cells were "
                "admitted on a single lineage's classification and 154 of those sit within "
-               "+-0.0015 of the 0.003 floor. Two runs of the same code land on opposite "
-               "sides of that floor for 0.191% of near-floor keys, so about 0.3 of the 154 "
-               "would actually flip. Dropping all 154 moves no axis note by more than 0.9 "
-               "percentage points and changes no modal value: what the panel SHOWS is not "
-               "resting on them.",
-               "One asymmetry that pushes the other way. 0.191% is the rate for the "
-               "min_prob FLOOR; the riser test compares a DIFFERENCE of two probabilities "
-               "against delta, so it carries both cells' jitter and its rate is higher and "
-               "unmeasured. 36% of all classifications here are risers, but 57% of the 608 "
-               "fragile cells are -- the fragile subset is enriched 1.6x on the side whose "
-               "rate is the one nobody has."],
+               "+-0.0015 of the 0.003 floor. Two runs of the same code disagree about which "
+               "side of that floor a near-floor word falls on for 0.191% of keys (n=148,937) "
+               "and about which side of `delta` a riser falls on for 2.47% (n=162, one "
+               "lineage pair, Wilson CI 0.96-6.18%). 57% of the 154 were admitted as risers, "
+               "so the expected number that would actually flip is roughly 1 to 10 of them, "
+               "not a fraction of one.",
+               "What bounds the panel is not that rate but the empirical check: dropping all "
+               "154 moves no axis note above by more than 0.9 percentage points and changes "
+               "no modal value. 10 is well inside 154, so what the panel SHOWS survives the "
+               "worst case regardless of where in that interval the truth sits."],
         meta_order=["prompt", "word", "reading", "pair", "role", "referent", "zone", "net"],
         #: TABLE COLUMNS, and `reading` is deliberately not one: it is a sentence,
         #: so it rides the word cell's title attribute instead of widening every
