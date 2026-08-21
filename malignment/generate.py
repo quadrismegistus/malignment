@@ -83,7 +83,6 @@ counted as framed.
 """
 
 import collections
-import hashlib
 import os
 
 #: The f11_l2 corpus decoder, field for field. Change this and generated
@@ -135,25 +134,40 @@ def gen_key(model_id, prompt, frame, system, decoder, seed, sample_idx,
     A key should carry the fact, not a name for it. `system_set` is the boolean
     itself: False for DEFAULT, True for any supplied string including empty.
 
-    ## `system` IS HASHED, NOT STORED WHOLE
+    ## THE SYSTEM PROMPT IS STORED WHOLE, NOT HASHED
 
-    A system prompt can be long, and the key is written into a jsonl filename.
-    The text itself rides on the RECORD; the key carries `sha256[:16]` of it, so
-    two different prompts can never share a cell and the key stays short.
+    An earlier version carried `sha256[:16]` on the reasoning that a key must
+    stay short because it becomes a filename. **It does not.** The stash is
+    `flat=True`: the key is written as a JSON object into `__key__` inside
+    `data.jsonl`, so there is no length constraint and the hash bought nothing
+    while making the stored key unreadable -- a row whose condition you can
+    distinguish but cannot state.
+
+    The full text is here. Reading `data.jsonl` now tells you what was asked,
+    not merely that two things differed.
     """
     return {"model": model_id, "prompt": prompt, "frame": frame,
-            #: the boolean, not a label that happens to encode it
+            #: the boolean, not a label that happens to encode it. Kept beside
+            #: the text because "" and "no system message" both render as an
+            #: empty string and are the two conditions measured 2,500x apart.
             "system_set": (bool(system) if system_set is None else bool(system_set)),
-            "system_sha": (hashlib.sha256(system.encode()).hexdigest()[:16]
-                           if system else ""),
+            "system": system or "",
             #: sorted so dict order can never make two identical decoders
             #: look like two different keys
             "decoder": {k: decoder[k] for k in sorted(decoder)},
             "seed": seed, "sample_idx": sample_idx}
 
-Passage = collections.namedtuple(
-    "Passage",
-    "text prompt model frame seed decoder n_new_tokens finish sys_supported")
+def _passage(**kw):
+    """-> passage.Passage. ONE class, not a namedtuple that resembles it.
+
+    This module used to define its own `Passage` namedtuple whose fields
+    happened to match `passage.Passage`'s, so a generated passage and a corpus
+    passage interoperated by coincidence of naming. They are the same object
+    now: anything that scores one scores the other, and adding a field in one
+    place cannot silently diverge them.
+    """
+    from .passage import Passage
+    return Passage(**kw)
 
 
 class FrameRefused(Exception):
@@ -306,7 +320,7 @@ def generate(loaded, text, n=1, system=DEFAULT, user=None, prefill=False,
         #: DECODE ONLY THE NEW TOKENS. Slicing the decoded STRING by the prompt's
         #: character length breaks whenever a tokenizer normalises whitespace.
         txt = loaded.tok.decode(new, skip_special_tokens=True)
-        out.append(Passage(
+        out.append(_passage(
             text=(text_in + txt) if keep_prompt else txt,
             prompt=text, model=getattr(loaded.tok, "name_or_path", None),
             frame=frame_label(system, user, prefill, templated),
@@ -314,7 +328,16 @@ def generate(loaded, text, n=1, system=DEFAULT, user=None, prefill=False,
             decoder=dict(dec), n_new_tokens=int(new.shape[0]),
             finish=("length" if int(new.shape[0]) >= dec["max_new_tokens"]
                     else "eos"),
-            sys_supported=sys_ok))
+            sys_supported=sys_ok,
+            #: THE CONDITION, IN FULL, ON THE RECORD. The key carries
+            #: `system_sha` because a key must stay short; the record carries
+            #: the TEXT, because a stored generation whose system prompt is only
+            #: a hash cannot be read later -- you can tell two conditions apart
+            #: and cannot say what either one said.
+            system=(None if system is DEFAULT else system),
+            system_default=(system is DEFAULT),
+            user=user, prefill=bool(prefill),
+            user_msg=(user_msg if prefill else None), template=templated))
     return out
 
 

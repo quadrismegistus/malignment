@@ -54,7 +54,11 @@ class Passage:
     #: the fields `generate.generate` fills in. Absent on a corpus passage,
     #: and named here so `_asdict()` round-trips through the generations stash.
     GEN_FIELDS = ("prompt", "model", "frame", "seed", "decoder",
-                  "n_new_tokens", "finish", "sys_supported")
+                  "n_new_tokens", "finish", "sys_supported",
+                  #: the full condition, so a stored passage is self-describing
+                  #: and does not need its key to be interpretable
+                  "system", "system_default", "user", "prefill", "user_msg",
+                  "template")
 
     def __init__(self, text, id=None, corpus=None, **gen):
         self.text = text

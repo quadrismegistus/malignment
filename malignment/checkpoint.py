@@ -521,6 +521,53 @@ class Checkpoint:
                 T.free()
         return out
 
+    def generations(self, prompt=None, frame=None, system=None, **match):
+        """Every generation cached for this checkpoint. -> iterator of Passage
+
+        The stash IS the record. Nothing needs to keep a second copy in a JSON
+        beside it, and a run that wrote one had two stores to keep in step --
+        which is the shape of a divergence nobody notices until they disagree.
+
+        Reads span EVERY producer, so a passage generated on the other machine
+        is visible here. Order is by producer then by write time within a
+        producer; it is not a meaningful order and nothing should depend on it.
+
+        Filters are exact matches against the stored KEY, so they name the
+        condition rather than guessing at it:
+
+            ck.generations()                          everything
+            ck.generations(frame="raw")               one arm
+            ck.generations(prompt=stem, seed=7)       one cell's samples
+            ck.generations(sample_idx=0)              first draw of each
+
+        `system=` matches the STORED TEXT, not its hash, so a caller can ask
+        for the condition it ran without recomputing a digest.
+
+        Each yielded Passage carries its key under `extra["__key__"]`, so the
+        condition survives into anything built from the iterator.
+        """
+        from .passage import Passage
+        want = dict(match)
+        if prompt is not None:
+            want["prompt"] = prompt
+        if frame is not None:
+            want["frame"] = frame
+        for st in self.gen_stashes():
+            for k, v in st.items():
+                if not isinstance(v, dict) or "text" not in v:
+                    continue
+                #: match against the KEY first, then the record, because some
+                #: fields live in one and some in the other (`system` is text
+                #: on the record and a sha in the key).
+                merged = dict(k if isinstance(k, dict) else {}, **v)
+                if system is not None and merged.get("system") not in (system,):
+                    continue
+                if any(merged.get(f) != val for f, val in want.items()):
+                    continue
+                p = Passage.from_row(v)
+                p.extra["__key__"] = k
+                yield p
+
     def next_token(self, text, k=10, system=None, user=None, prefill=False,
                    user_msg="Hi.", loaded=None, **kw):
         """Top-`k` next-TOKEN distribution. -> ([(token, prob)], vocab_size)
