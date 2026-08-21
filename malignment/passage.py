@@ -144,6 +144,35 @@ class Passage:
         from . import score
         return score.drift([self.text])[0]
 
+    def drift_at(self, k):
+        """`mean_drift` over the FIRST `k` sentences. None if shorter.
+
+        The drift axis's prefix control, and the exact counterpart of
+        `surprisal_at`: a manipulation that changes passage LENGTH changes how
+        many steps drift averages over, and comparing a 6-sentence passage with
+        an 11-sentence one is partly comparing lengths.
+
+        `mean_drift` is nominally length-free -- it is a per-step mean, and its
+        correlation with sentence count is -0.126 against +0.941 for
+        `path_length` -- but "nominally length-free" is a claim about a corpus,
+        not a guarantee about a contrast that halves the passage. Truncating both
+        arms to a common `k` removes the difference by construction instead of
+        arguing it away.
+
+        Returns None rather than a shorter-window value, so a passage that
+        cannot reach `k` leaves the comparison instead of biasing it -- and the
+        caller must count the drops, exactly as with the token prefix.
+        """
+        import sys as _s, os as _o
+        _s.path.insert(0, _o.path.join(
+            _o.path.dirname(_o.path.dirname(_o.path.abspath(__file__))),
+            "experiments", "passage_analysis", "drift_geometry"))
+        from drift_metrics import metrics
+        V = self.sentence_vecs
+        if len(V) < k:
+            return None
+        return metrics(V[:k]).get("mean_drift")
+
     @property
     def drift(self):
         """`mean_drift`: the mean cosine step between consecutive sentences.

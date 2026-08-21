@@ -69,6 +69,7 @@ def main(argv=None):
     ap.add_argument("--model")
     ap.add_argument("--m", type=int, default=200, help="surprisal prefix, tokens")
     ap.add_argument("--stem", default="She was ugly and misshapen and she wanted to")
+    ap.add_argument("--k", type=int, default=5, help="drift prefix, sentences")
     a = ap.parse_args(argv)
     from malignment import Passage, score, score_all
 
@@ -122,23 +123,29 @@ def main(argv=None):
                 "surprisal": [x for x in (p.surprisal_at(a.m) for p in ps)
                               if x is not None],
                 "drift": [x for x in (p.drift for p in ps) if x is not None],
+                #: the SAME control on the other axis: drift over a common
+                #: number of sentences, so a frame that halves the passage is
+                #: not compared against itself at two lengths.
+                "drift_k": [x for x in (p.drift_at(a.k) for p in ps)
+                            if x is not None],
             }
-        print("  %-12s %8s %10s %10s %12s %12s"
-              % ("arm", "n", "med tok", "med sents", "surp(M=%d)" % a.m, "drift"))
+        print("  %-12s %8s %8s %9s %12s %12s %12s"
+              % ("arm", "n", "med tok", "med sents", "surp(M=%d)" % a.m,
+                 "drift", "drift(k=%d)" % a.k))
         for arm in ("raw", "api"):
             r = rows.get(arm)
             if not r:
                 continue
-            print("  %-12s %8d %10.0f %10.1f %6.4f (%3d) %6.4f (%3d)"
+            med = lambda c: (statistics.median(r[c]) if r[c] else float("nan"))
+            print("  %-12s %8d %8.0f %9.1f %6.4f (%3d) %6.4f (%3d) %6.4f (%3d)"
                   % (arm, r["n"], statistics.median(r["new_tokens"]),
                      statistics.median(r["n_sents"]),
-                     statistics.median(r["surprisal"]) if r["surprisal"] else float("nan"),
-                     len(r["surprisal"]),
-                     statistics.median(r["drift"]) if r["drift"] else float("nan"),
-                     len(r["drift"])))
+                     med("surprisal"), len(r["surprisal"]),
+                     med("drift"), len(r["drift"]),
+                     med("drift_k"), len(r["drift_k"])))
         if "raw" in rows and "api" in rows:
             print("  %-12s" % "api - raw", end="")
-            for k in ("surprisal", "drift"):
+            for k in ("surprisal", "drift", "drift_k"):
                 A, B = rows["api"][k], rows["raw"][k]
                 if not A or not B:
                     print("  %s: no overlap" % k, end=""); continue
@@ -146,14 +153,21 @@ def main(argv=None):
                 lo, hi = boot(A, B)
                 print("   %s %+0.4f [%+0.4f, %+0.4f]" % (k, dd, lo, hi), end="")
             print()
-            #: SAY IT when the prefix drops one arm much harder than the other.
-            ra, rr = len(rows["api"]["surprisal"]), len(rows["raw"]["surprisal"])
-            if min(ra, rr) < 0.8 * max(ra, rr):
-                print("  ** the M=%d prefix retains %d of %d api and %d of %d raw."
-                      % (a.m, ra, rows["api"]["n"], rr, rows["raw"]["n"]))
-                print("     The surviving passages are LENGTH-SELECTED and the "
-                      "surprisal row is\n     a comparison between two "
-                      "differently-selected populations.")
+            #: SAY IT when a prefix drops one arm much harder than the other --
+            #: for EVERY prefixed column, not just the token one. The first
+            #: version watched surprisal alone and would have passed a
+            #: `drift(k)` row retaining 67 of one arm against 84 of the other in
+            #: silence. A guard that covers one of two prefixes is a guard whose
+            #: absence of warning means nothing.
+            for col, lab in (("surprisal", "M=%d" % a.m), ("drift_k", "k=%d" % a.k)):
+                ra, rr = len(rows["api"][col]), len(rows["raw"][col])
+                if not ra or not rr:
+                    continue
+                if min(ra, rr) < 0.8 * max(ra, rr):
+                    print("  ** the %s prefix retains %d of %d api and %d of %d "
+                          "raw -- the survivors are LENGTH-SELECTED, so this row"
+                          % (lab, ra, rows["api"]["n"], rr, rows["raw"]["n"]))
+                    print("     compares two differently-selected populations.")
 
 
 if __name__ == "__main__":
