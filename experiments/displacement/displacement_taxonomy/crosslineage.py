@@ -219,6 +219,7 @@ def ingest(run_id, slug):
     if not res:
         raise SystemExit("no result carrying `operations` in the journal")
     st = _stash()
+    refused, stored = [], []
     for i, r in enumerate(res, 1):
         seen = collections.Counter()
         for op in r["operations"]:
@@ -232,8 +233,19 @@ def ingest(run_id, slug):
         extra = sorted(set(seen) - shown)
         dupes = sorted(m for m, n in seen.items() if n > 1)
         if missing or extra:
-            raise SystemExit("rater %d: %d model(s) never placed %s ; %d not shown %s"
-                             % (i, len(missing), missing[:4], len(extra), extra[:4]))
+            #: REFUSED PER RATER, NOT PER RUN. The completeness check is right and
+            #: stays -- a dropped lineage looks exactly like a dissenting one --
+            #: but the stash key carries `rater`, so raters are independent
+            #: records and one bad reading should not discard a good one. It did:
+            #: on wf_aaae2bd5-0a1 rater 1 dropped CT-LLM-SFT-DPO, rater 2 placed
+            #: all 50, and NOTHING was stored.
+            #:
+            #: Still loud, and still non-zero at exit: a refusal that only prints
+            #: is a refusal somebody misses.
+            print("REFUSED rater %d: %d model(s) never placed %s ; %d not shown %s"
+                  % (i, len(missing), missing[:4], len(extra), extra[:4]), file=sys.stderr)
+            refused.append(i)
+            continue
         if dupes:
             print("  rater %d: %d model(s) placed more than once: %s"
                   % (i, len(dupes), dupes[:4]), file=sys.stderr)
@@ -259,11 +271,18 @@ def ingest(run_id, slug):
             "effort": state["effort"], "lineages_sha": lsha,
             "n_lineages": len(real), "rater": i}] = dict(
                 r, run_id=run_id, blind=bool(unlabel), models=real)
-    print("stored %d reading(s) for %r" % (len(res), state["prompt"][:52]))
-    for i, r in enumerate(res, 1):
+        stored.append(i)
+    print("stored %d of %d reading(s) for %r"
+          % (len(stored), len(res), state["prompt"][:52]))
+    for i in stored:
+        r = res[i - 1]
         print("  r%d: %d operations, %d reversed, %d unassigned, %s"
               % (i, len(r["operations"]), len(r["reversed"]),
                  len(r["unassigned"]), r["confidence"]))
+    if refused:
+        print("  REFUSED rater(s): %s -- rerun them, the stored ones stand"
+              % ", ".join(str(i) for i in refused), file=sys.stderr)
+        raise SystemExit(1)
 
 
 def report():
