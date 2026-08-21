@@ -282,9 +282,9 @@ Arm B, most reliable arrivals (cleared the null / seen, 25+ cells):
    -0.62 inst), `pack`, `shut`, `fire`, `kick`, `throw`, and for the institution
    `concede` (-0.67) and `win` (-0.62). What rises keeps the relationship open:
    `escalate`, `contact`, `consult`, `negotiate`, `discuss`. This is NOT
-   `procedural` -- `quit` scores procedural 1 and so does `resist`, which does not
-   fall. A termination/continuation axis would be a better scale than several of
-   the eleven.
+   `procedural` -- `quit` scores procedural 1.00 and `resist` 2.00, both at the
+   floor, and only `quit` falls. A termination/continuation axis would be a
+   better scale than several of the eleven.
 2. **`concede` and `apologise` FALL for the institution.** So its rising deference
    is not softening: it defers procedurally and concedes less. Any prose reading
    deference as capitulation is contradicted by the vocabulary.

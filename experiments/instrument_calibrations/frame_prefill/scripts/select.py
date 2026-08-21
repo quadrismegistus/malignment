@@ -34,9 +34,14 @@ import collections, csv, json, os, random, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(os.path.dirname(HERE), "results", "targets.json")
-REPO = os.path.abspath(os.path.join(HERE, "..", "..", "..", ".."))
-REVERSERS = os.path.join(REPO, "experiments", "displacement_taxonomy", "results",
-                         "crosslineage_rows.csv")
+#: `malignment.paths.REPO` rather than four `..` -- the walk was correct for this
+#: file's depth and would break the moment anything moved, which is exactly what
+#: happened to the path below.
+from malignment.paths import REPO
+
+#: `displacement_taxonomy` moved under `experiments/displacement/` on 2026-08-21.
+REVERSERS = os.path.join(REPO, "experiments", "displacement", "displacement_taxonomy",
+                         "results", "crosslineage_rows.csv")
 PREFILLABLE = os.path.expanduser("~/malignment-data/prefillable_roster.json")
 
 FILL = r"^[_\\-–—=.·•*~^]+$"

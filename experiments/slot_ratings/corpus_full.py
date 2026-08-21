@@ -57,11 +57,16 @@ POS is still tagged, as metadata.
 import argparse, collections, json, os, sys, time
 import statistics as st
 
+from malignment.paths import REPO
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.dirname(os.path.dirname(HERE)))
 OUT = os.path.join(HERE, "results", "v6full")
-CELLS = os.path.join(os.path.dirname(HERE), "displacement_axis",
+#: Built from the repo root, not from a sibling of this folder: the
+#: `displacement_axis` tree moved under `experiments/displacement/` and a
+#: relative-parent path silently followed the move nowhere.
+CELLS = os.path.join(REPO, "experiments", "displacement", "displacement_axis",
                      "results", "pilot3", "cells.jsonl")
 TARGET = 0.99
 
