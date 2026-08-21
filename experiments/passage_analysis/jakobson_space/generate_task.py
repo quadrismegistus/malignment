@@ -121,7 +121,18 @@ def build_prompt(stem, instruction=DEFAULT_INSTRUCTION):
 #: length clause is ignored either way -- asked for 150-200, got 169-260 -- but
 #: the BYTES land near the corpus (1,178 median against 1,082) and far tighter
 #: than free generation's 441-1,839, which is what the M=200 prefix needs.
-SYSTEM_PROMPT = ("Continue this text for 150-200 words. "
+#: **200-250, NOT 150-200, AND THE FIRST VERSION WAS A MEASUREMENT ERROR.**
+#: Every passage is truncated to the first M=200 TOKENS, and deepseek runs
+#: 1.253 tokens per word (p10 1.203, p90 1.321, over 600 scored passages). So
+#: 200 tokens needs ~159 words and a band of 150-200 puts its FLOOR at 187
+#: tokens -- under the prefix. deepseek-v4-flash cleared it only by ignoring the
+#: instruction (median 206 words); deepseek-v4-pro OBEYED it, landed at 154, and
+#: 286 of 600 fell under the prefix. The better-behaved model was the one the
+#: band broke.
+#:
+#: Generating longer than needed costs nothing analytically, since everything is
+#: truncated at M anyway -- only API tokens. So the band is set with headroom.
+SYSTEM_PROMPT = ("Continue this text for 200-250 words. "
                  "Do not repeat the text you are given.")
 
 
