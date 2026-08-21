@@ -163,6 +163,43 @@ def main(argv=None):
           % (r_raw, 100 * (1 - (sR / sD) ** 2)))
 
     QS = ["(+surp +drift)", "(+surp -drift)", "(-surp +drift)", "(-surp -drift)"]
+    #: ENRICHMENT against the pooled rate. A share alone cannot say whether a
+    #: category is over- or under-represented in a cell, because the four cells
+    #: are not equal-sized -- the pooled rates run 23.0% to 28.1%, so a flat 25%
+    #: is enrichment in one cell and depletion in another. Reading shares as
+    #: enrichment is the error this block exists to prevent.
+    overall = collections.Counter(r["quadrant"] for r in rows)
+    N = len(rows)
+    order_all = CATEGORIES + sorted({r["category"] for r in rows} - set(CATEGORIES))
+    byc = collections.defaultdict(collections.Counter)
+    for r in rows:
+        byc[r["category"]][r["quadrant"]] += 1
+    print("\nENRICHMENT vs the pooled rate (1.00x = the same share as all %d "
+          "passages)" % N)
+    print("pooled: %s" % "  ".join("%s %.1f%%" % (q, 100 * overall[q] / N) for q in QS))
+    print("%-22s %7s   %s" % ("", "n", " ".join("%-15s" % q for q in QS)))
+    for c in order_all:
+        t = sum(byc[c].values())
+        print("%-22s %7d   %s" % (c, t, " ".join(
+            "%-15s" % ("%5.2fx" % ((byc[c][q] / t) / (overall[q] / N))) for q in QS)))
+    #: the two off-diagonal cells carry the Jakobsonian names, so the gradient
+    #: across the three AI categories is printed on its own rather than left to
+    #: be read off a nine-row table.
+    print("\nthe two off-diagonal cells, across the arms")
+    print("%-22s %16s %16s" % ("", "(+surp -drift)", "(-surp +drift)"))
+    print("%-22s %16s %16s" % ("", "METAPHORIC", "METONYMIC"))
+    for c in order_all:
+        t = sum(byc[c].values())
+        print("%-22s %15.2fx %15.2fx"
+              % (c, (byc[c]["(+surp -drift)"] / t) / (overall["(+surp -drift)"] / N),
+                 (byc[c]["(-surp +drift)"] / t) / (overall["(-surp +drift)"] / N)))
+    hum = [r for r in rows if r["human_or_ai"] == "human"]
+    if hum:
+        hc = collections.Counter(r["quadrant"] for r in hum)
+        print("%-22s %15.2fx %15.2fx"
+              % ("ALL HUMAN", (hc["(+surp -drift)"] / len(hum)) / (overall["(+surp -drift)"] / N),
+                 (hc["(-surp +drift)"] / len(hum)) / (overall["(-surp +drift)"] / N)))
+
     for axis, key in (("RESIDUALISED drift", "quadrant"), ("RAW drift", "quadrant_raw")):
         by = collections.defaultdict(collections.Counter)
         for r in rows:

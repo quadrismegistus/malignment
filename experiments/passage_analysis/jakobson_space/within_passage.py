@@ -57,6 +57,17 @@ def pearson(x, y):
     return sum((a - mx) * (b - my) for a, b in zip(x, y)) / (sx * sy)
 
 
+def sign_test(v):
+    """Exact two-sided binomial against 0.5. -> (n, up, dn, p)"""
+    v = [x for x in v if x != 0]
+    n, up = len(v), sum(1 for x in v if x > 0)
+    if not n:
+        return 0, 0, 0, float("nan")
+    k = max(up, n - up)
+    return n, up, n - up, min(1.0, 2 * sum(math.comb(n, i)
+                                           for i in range(k, n + 1)) / 2 ** n)
+
+
 def partial(x, y, z):
     """r(x,y) with z held out. None if any component is undefined."""
     rxy, rxz, ryz = pearson(x, y), pearson(x, z), pearson(y, z)
@@ -78,7 +89,20 @@ def main(argv=None):
     t = pq.read_table(os.path.join(EXPLODED, "sentences.parquet"))
     d = {c: t.column(c).to_pylist() for c in t.column_names}
     by = collections.defaultdict(list)
+    #: `allb` is EVERY scored sentence, INCLUDING index 0. `by` cannot serve as
+    #: the passage's bits distribution because it drops index 0 (no step), and
+    #: first sentences are short continuation fragments that score high -- so a
+    #: median taken over `by` sits BELOW the passage's true median and inflates
+    #: any "above the median" statistic. Measured: doing that moved the aligned
+    #: proportion 0.507 -> 0.537 and the API proportion 0.477 -> 0.508, and
+    #: turned one p-value from 0.44 into 0.006.
+    allb = collections.defaultdict(list)
+    far_bits = {}
     for i, pid in enumerate(d["id"]):
+        if d["mean_bits"][i] is not None:
+            allb[pid].append(d["mean_bits"][i])
+            if d["is_furthest"][i]:
+                far_bits[pid] = d["mean_bits"][i]
         if d["step"][i] is None or d["mean_bits"][i] is None:
             continue
         by[pid].append((d["mean_bits"][i], d["step"][i], float(d["n_words"][i]),
@@ -98,11 +122,14 @@ def main(argv=None):
         r1, r2, rp = pearson(b, s), pearson(n, s), partial(b, s, n)
         if r1 is None:
             continue
-        med = statistics.median(b)
-        far = [x[0] for x in v if x[3]]
+        #: median over ALL the passage's scored sentences, and the furthest
+        #: sentence's own bits looked up from the same full set.
+        med = statistics.median(allb[pid]) if allb.get(pid) else None
+        fb = far_bits.get(pid)
         rows.append(dict(id=pid, cat=m["category"], model=m["model"] or m["category"],
                          quad=m["quadrant"], r=r1, rn=r2, rp=rp,
-                         far_hi=(far[0] > med) if far else None))
+                         far_hi=(fb > med) if (fb is not None and med is not None)
+                         else None))
 
     def block(title, groups):
         print("\n%s" % title)
@@ -162,6 +189,51 @@ def main(argv=None):
     #: top row looks meaningful whatever it says.
     print("\n`furthest hi-bits` = the sentence furthest from the opening also "
           "sits above\nthat passage's median sentence bits. Chance is 50%.")
+
+    #: AND TEST IT, rather than leaving a reader to eyeball 56% against 50%.
+    #: The unit is the MODEL: each model's proportion is one observation and the
+    #: sign test asks how many sit above half.
+    print("\nis `furthest hi-bits` above chance? sign test, MODEL as the unit")
+    print("%-12s %7s %10s %6s %6s %11s"
+          % ("", "models", "median", "above", "below", "p"))
+    for c in CATS:
+        per = collections.defaultdict(list)
+        for x in rows:
+            if x["cat"] == c and x["far_hi"] is not None:
+                per[x["model"]].append(x["far_hi"])
+        props = [sum(1 for y in v if y) / len(v) for v in per.values() if len(v) >= 3]
+        if not props:
+            continue
+        n, up, dn, p = sign_test([x - 0.5 for x in props])
+        print("%-12s %7d %10.3f %6d %6d %11.3g"
+              % (c, len(props), statistics.median(props), up, dn, p))
+    print("Eleven API endpoints from three vendors are not a sample of anything,")
+    print("and no direction was registered in advance -- an API row reaching")
+    print("p<0.05 here is an observation, not a result.")
+
+    #: `mean_bits` is a mean over `n_words` and short sentences score high on it.
+    #: The dependence is REPORTED rather than corrected, and reported HERE
+    #: because this file is where the column gets used.
+    allb = [(x, y) for r in rows for x, y in []]     # placeholder, filled below
+    import pyarrow.parquet as pq2
+    t2 = pq2.read_table(os.path.join(EXPLODED, "sentences.parquet"),
+                        columns=["mean_bits", "n_words"]).to_pydict()
+    X = [float(n) for b, n in zip(t2["mean_bits"], t2["n_words"])
+         if b is not None and n > 0]
+    Y = [b for b, n in zip(t2["mean_bits"], t2["n_words"]) if b is not None and n > 0]
+    print("\n`mean_bits` IS LENGTH-DEPENDENT: pooled r(n_words, mean_bits) = "
+          "%+.3f over %s sentences" % (pearson(X, Y), "{:,}".format(len(X))))
+    band = collections.defaultdict(list)
+    for n, b in zip(X, Y):
+        band[1 if n <= 3 else 2 if n <= 6 else 3 if n <= 12 else 4 if n <= 25
+             else 5].append(b)
+    lab = {1: "1-3 words", 2: "4-6", 3: "7-12", 4: "13-25", 5: "26+"}
+    for k in sorted(band):
+        print("   %-10s n=%9s  median mean_bits %5.2f"
+              % (lab[k], "{:,}".format(len(band[k])), statistics.median(band[k])))
+    print("   A short sentence opens on an unpredictable word with nothing to")
+    print("   dilute it. Nothing here corrects for this; the r(bits,step) result")
+    print("   above holds n_words out explicitly and is unchanged by it.")
 
 
 if __name__ == "__main__":
