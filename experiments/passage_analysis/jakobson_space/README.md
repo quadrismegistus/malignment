@@ -428,6 +428,78 @@ information about total displacement. That is the shape you would want if
 selection and combination were separable, and it is the first thing in this
 folder measured WITHIN a passage rather than across a population.
 
+## FOUR THINGS MOVE A MODEL ON THESE AXES, AND THIS IS HOW FAR EACH MOVES IT
+
+`synthesis.py`. Raw units cannot be compared -- 0.02 of drift and 0.8 bits of
+surprisal are not commensurable, so "alignment reduces both" says nothing about
+which it reduces more. Each effect is divided by the PASSAGE-LEVEL sd of its own
+axis (surprisal 0.6948, drift 0.0434, the same sd `quadrants.py` z-scored with),
+which puts both in units of how spread out passages actually are.
+
+                                  surprisal        drift    which moves more
+    alignment (aligned - base)    -1.214 sd    -0.585 sd    surprisal 2.1x
+    size (1.7B -> 10.3B)          -1.105 sd    -0.161 sd    surprisal 6.9x
+    chat wrapper (cont - raw)     -0.734 sd    -0.864 sd    about equal
+    API - aligned                 -0.123 sd    +0.196 sd    drift 1.6x
+
+    alignment    arm_paired.py    22 lineages, paired within lineage, both p<1e-4
+    size         scale_ladder.py  Falcon3 aligned arm, one lab, one recipe, 6x
+    wrapper      run_wrapper.py   6 models, paired within (model, prompt), M=64
+    API          stem_paired.py   89 stems, paired within stem
+
+**These are not four steps of one process.** A model does not go base to aligned
+to bigger to wrapped. They are four separate manipulations on overlapping
+populations, and the table ranks their sizes.
+
+### What the ordering says
+
+**Alignment is primarily a predictability effect.** It moves surprisal about
+twice as far as drift. Real trajectory effect, smaller.
+
+**Size is the most lopsided of the four.** A six-fold parameter range moves
+surprisal nearly as far as alignment does and barely touches drift -- 6.9x
+apart. Measured on the controlled Falcon3 ladder, not the 47-model regression,
+whose drift correlation is confounded with lab, recipe, data and release date.
+
+**The wrapper is the only manipulation that is not lopsided**, and its ranking
+differs by axis. On SURPRISAL it is the smallest of the three manipulations
+(0.73 against alignment's 1.21 and size's 1.11). On DRIFT it is **the largest
+single effect in the table** -- 0.86, against alignment's 0.59 and size's 0.16.
+Asking a model to continue a text does less to its predictability than either
+aligning it or growing it, and more to its trajectory than either.
+
+### THE WRAPPER CANNOT EXPLAIN THE API MODELS' DRIFT, BECAUSE IT POINTS THE OTHER WAY
+
+The API models drift MORE than open aligned models (+0.196 sd; +0.0085 raw,
+64/25 stems, p=4.3e-05) and they were generated behind a continuation frame the
+open models did not have. That looks like a confound until the frame is
+measured: the measured wrapper effect on drift is **-0.864 sd**, the largest
+downward drift force in this table.
+
+So if the API models' frame behaved like the measured wrapper, they would drift
+substantially LESS than open aligned models. They drift more. **The observed
+direction is opposite to the mechanism proposed to explain it**, and the gap is
+not marginal -- the frame effect is four times the size of the difference it
+would have to produce, in the wrong direction.
+
+The same reasoning does NOT rescue the surprisal row, where the wrapper (-0.734)
+and the API difference (-0.123) share a sign, and where size shares it too.
+
+**One thing this does not close.** The two frames are not identical: the measured
+wrapper is a single user turn, `"Continue this text: " + stem`
+(`malign-logits/malign_logits/core.py:231`), while the API models got a SYSTEM
+message, `"Continue this text for 200-250 words. Do not repeat the text you are
+given."` (`generate_task.py:135,280`), with the stem as a separate turn. That
+last clause is an instruction to move away from the given text, and distance
+from the opening is what the drift axis measures -- so OUR frame could raise
+drift by a route the measured wrapper has no equivalent of.
+
+What the table establishes is therefore precise: **a continuation wrapper as such
+does not produce this**, and anyone attributing the API drift result to "they had
+to be prompted to continue" is proposing a mechanism that runs backwards.
+Whether the `do not repeat` clause specifically produces it is untested, and
+testing it needs that clause run against a bare condition rather than this pool.
+
 ## THE BLIND CODES ON THESE AXES
 
 `../interiority_in_passages` coded 4,931 of these passages blind (rubric
@@ -616,6 +688,12 @@ absence reads as absence, but any mean over a drift column must exclude them.
                          validation against a reader who never saw the embedding
     checks.py            re-runs every provenance claim these docstrings make,
                          PASS/FAIL against the value the prose quotes
+    synthesis.py         all four effects on one scale, in sd of each axis
+    scale_axes.py        params_b against both axes across 47 models (the drift
+                         rows are confounded -- see scale_ladder.py)
+    scale_ladder.py      the Falcon3 ladder: one lab, one recipe, four sizes
+    extrapolate.py       where the size trend predicts the API models should sit
+    run_wrapper.py       the "Continue this text:" frame effect on both axes
     explode.py         builds the two parquets above from the existing sidecars
     read_passage.py    renders one passage with both decompositions marked on it
     within_passage.py  the within-passage bits-vs-step correlation, length-controlled
