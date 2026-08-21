@@ -205,7 +205,9 @@ def rid(word, with_sub=False, level=None):
     for rx, think, proc, cat, sub in _rid():
         if not rx.search(word):
             continue
-        if level == "process":
+        if level == "full":
+            out.add("/".join(x for x in (think, proc, cat, sub) if x))
+        elif level == "process":
             out.add("%s/%s" % (think, proc) if think else cat)
         else:
             out.add("%s/%s" % (cat, sub) if with_sub and sub else cat)
@@ -704,7 +706,9 @@ _SET = ("rid", "gi", "usas", "wordnet")
 def _lookup(kind, word, lem):
     """One source, surface first then lemma. -> value, or None/empty."""
     f = {"norms": word_norms, "brooke": brooke, "k": k, "rid": rid,
-         "gi": gi, "usas": usas, "wordnet": wordnet}[kind]
+         "gi": gi, "usas": usas, "wordnet": wordnet,
+         #: CODES, not names -- the dotted code is what carries the hierarchy
+         "usas_codes": lambda x: usas(x, names=False)}[kind]
     v = f(word)
     if not v and lem and lem != word:
         v = f(lem)
@@ -797,7 +801,34 @@ def norms(text, lang="en"):
     return out
 
 
-def count(text, lang="en", fine=True):
+def _nest(kind, label):
+    """Every level of a hierarchical label, outermost first. -> [str]
+
+    RID is `thinking/process/category/subcategory` and USAS is a dotted code
+    (`Q2.2` under `Q2` under `Q`), so both carry a hierarchy that a single
+    chosen level throws away. Emitting all of them lets a caller pick by key
+    prefix instead of by re-running with a different flag.
+    """
+    if kind == "rid":
+        parts = [p for p in label.split("/") if p]
+    elif kind == "usas":
+        #: `Q2.2` -> Q, Q2, Q2.2. The letter is the top domain; each dot adds a
+        #: level. Non-conforming codes fall through as a single level.
+        m = re.match(r"^([A-Z])([0-9.]*)", label.upper())
+        if not m:
+            return [label]
+        head, rest = m.group(1), m.group(2)
+        parts, cur = [head], head
+        for bit in [b for b in rest.split(".") if b]:
+            cur = cur + ("." if cur != head else "") + bit
+            parts.append(cur)
+        return [p.replace(".", "_").lower() for p in parts]
+    else:
+        return [label]
+    return ["_".join(parts[:i + 1]) for i in range(len(parts))]
+
+
+def count(text, lang="en"):
     """SET sources, as rates. -> flat dict
 
         fields.count("she screamed and tore the bodies apart")
@@ -817,13 +848,28 @@ def count(text, lang="en", fine=True):
     caller wanting a per-1000-words rate can renormalise without guessing what
     was divided by.
 
-    ## `fine` AND RID's HIERARCHY
+    ## EVERY LEVEL OF EVERY HIERARCHY, BY DEFAULT
 
-    RID is four levels deep -- thinking / process / category / subcategory, e.g.
-    `primordial / primary / need / orality`. `fine=True` emits the finest label
-    available; `fine=False` rolls up to the three top classes (primordial-primary,
-    conceptual-secondary, conceptual-emotions), which is the split Martindale's
-    primary-versus-secondary-process claim actually turns on.
+    RID is four deep (`primordial / primary / need / orality`) and USAS is a
+    dotted code (`Q2.2` under `Q2` under `Q`). Both are emitted at ALL levels,
+    with the underscore showing the nesting:
+
+        rid_primordial
+        rid_primordial_primary
+        rid_primordial_primary_need
+        rid_primordial_primary_need_orality
+        usas_q  usas_q2  usas_q2_2
+
+    A caller selects a grain by key prefix rather than by re-running with a
+    different flag, and the level Martindale's primary-versus-secondary-process
+    claim turns on (`rid_primordial_primary` against `rid_conceptual_secondary`)
+    is present without anyone having to know to ask for it.
+
+    **THE LEVELS NEST, SO THEY MUST NEVER BE SUMMED ACROSS.** `rid_primordial`
+    is the total of its own children, so adding it to `rid_primordial_primary`
+    double-counts every word. Within one level the shares still do not sum to 1
+    either, because memberships overlap. These are rates to be read, not parts
+    of a partition.
 
     `*_coverage` is the share of content words found in that source AT ALL, which
     is the denominator any rate from it should be read against.
@@ -839,14 +885,17 @@ def count(text, lang="en", fine=True):
             if not got:
                 continue
             cov[kind] += 1
-            if kind == "rid" and not fine:
-                #: the REAL roll-up, from the dictionary's own columns -- not a
-                #: truncation of the category name, which is what this was.
-                got = rid(w, level="process") or rid(lem, level="process")
+            if kind == "rid":
+                #: the full path from the dictionary's own columns, so every
+                #: level is available -- not a truncation of a category name.
+                got = (rid(w, level="full") or rid(lem, level="full")) or got
+            if kind == "usas":
+                got = _lookup("usas_codes", w, lem) or got
             items = got if isinstance(got, (set, list, tuple)) else [got]
             for c in items:
-                cat["%s_%s" % (kind, str(c).replace(" ", "_").replace("/", "_")
-                               .lower())] += 1
+                lab = str(c).replace(" ", "_").lower()
+                for lvl in _nest(kind, lab if kind != "rid" else str(c)):
+                    cat["%s_%s" % (kind, lvl)] += 1
     n = len(words)
     for src, c in cov.items():
         out[src + "_coverage"] = round(c / n, 4)
