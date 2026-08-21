@@ -68,18 +68,25 @@ Omitting it would understate divergence exactly where the tail moved most, which
 is the cross-language case — a Chinese cell carries more of its mass below theta.
 
 
-## THESE VIEWS ARE BUILT OVER v3 AND ONLY v3
+## BOTH VERSIONS ARE SERVED, SIDE BY SIDE, AND NEITHER IS A FLAG
 
-Every `{db}.twp_cells` below is the v3 table. A view is a NAMED OBJECT other code
-selects from, so this file is deliberately NOT switchable the way
-`similarity.RULE_VERSION` is: flipping a module constant would silently redefine
-what `movement_cells` means for every existing caller, which is a worse failure
-than the one it fixes.
+Done 2026-08-21. This file previously said "built over v3 and ONLY v3" and that
+serving v4 needed `_v4`-suffixed views built alongside, deliberately NOT a module
+switch: flipping a constant would silently redefine what `movement_cells` means
+for every existing caller, which is a worse failure than the one it fixes. That
+reasoning stands and is what was implemented.
 
-Serving v4 needs `_v4`-suffixed views built alongside these, so both corpora are
-addressable at once and a query names which it wants. Not done here because it is
-a change to shared objects rather than to a caller's own read -- flagged
-2026-08-18 when `corpus.retable` made the other read surfaces version-aware.
+    movement_cells      movement_edges      prompt_movement      prompt_coverage
+    movement_cells_v4   movement_edges_v4   prompt_movement_v4   prompt_coverage_v4
+
+A query names the corpus it wants. `_movement_views()` emits one set per rule
+version so the arithmetic exists once; the v3 definitions were verified
+byte-identical to their hand-written originals after the refactor.
+
+**The two are not comparable and there is no path between them**, for the reason
+`produce_movement._arm` gives: v4 movement is computed over MERGED cells, so
+`departed` and `arrived` run over a larger support than v3's. Different
+populations, not different renderings of one.
 """
 import argparse
 import sys
@@ -93,15 +100,56 @@ from . import ch
 _JSTERM = ("0.5 * (if({p} > 0, {p} * log2(2 * {p} / ({p} + {q})), 0)"
            "     + if({q} > 0, {q} * log2(2 * {q} / ({p} + {q})), 0))")
 
-VIEWS = {
+#: **ONE BUILDER, CALLED ONCE PER RULE VERSION.** These four views differ between
+#: v3 and v4 in exactly three tokens -- the name suffix, the movement table, and
+#: where the residual comes from -- and in nothing else. Writing a v4 twin by
+#: copying forty lines of JS arithmetic beside the original is the duplicate
+#: constant this repository keeps paying for: `produce_movement`'s DERIVING tuple
+#: drifted from the roster by five ops that way, and the module docstring above
+#: is about a rollup stored beside its source and left to drift. So the arithmetic
+#: exists once and the version is an argument.
+#:
+#: **THE RESIDUAL SOURCE IS NOT SYMMETRIC BETWEEN THE VERSIONS.** v3 reads
+#: `twp_cells.total` directly, one row per (model, prompt). v4 cannot: a cell may
+#: have BOTH a pass-1 and a topup row, so the residual must be collapsed with the
+#: same `argMax(.., (topup, prompt_cache, mtime))` tuple `_arm` and the `_best`
+#: views use -- joining raw `twp_cells_v4` would double every row.
+#:
+#: **AND IT MUST NOT BE THE `total` COLUMN.** An earlier revision of this comment
+#: said to read `twp_cells_v4_best.total`, which is faithful to the source and
+#: still wrong: `total` is stale on a merged cell, holding the pass-1 residual
+#: while `tail` was decremented. So the residual is derived from the components,
+#: `tail + drop + open + mojibake`, which `conservation` pins to exactly
+#: 1 - sum(words). See `_movement_views` for the measurements.
+def _movement_views(sfx, mv, cells):
+    """The four movement rollups for one rule version.
+
+    sfx    "" or "_v4"          -- appended to every view name
+    mv     movement table       -- `movement` or `movement_v4`
+    cells  residual SUBQUERY    -- must yield (model, prompt, total)
+
+    ## `cells` IS A SUBQUERY AND NOT A TABLE NAME, BECAUSE v4 CANNOT USE `total`
+
+    v3 reads `twp_cells.total` directly. At v4 that column is STALE on a merged
+    cell: the topup writer decrements `tail` when it adds sub-theta words and
+    leaves `total` holding the pass-1 residual. Measured 2026-08-21 -- exact on
+    434,391 of 434,391 pass-1 cells and on all 984,857 v3 cells, wrong on
+    350,453 of 385,855 topup cells, mean 0.0148 high and max 0.115.
+
+    Using it made the ledger fail on 294,854 of 392,285 v4 cells: the words came
+    from the merged cell and the residual from the pass-1 one. `conservation` is
+    1.0 on both passes with 0 violations in 820,246 cells, so tail+drop+open+
+    mojibake is the residual and deriving it is exact, not a repair.
+    """
+    return {
     #: `relation` and `depth` JOIN from `{db}.pairs` rather than being read off
     #: `movement`. They describe the EDGE, not the measurement, and storing them
     #: beside 52.9M measurement rows meant every models.yaml relabel cost a
     #: 25-minute recompute to change a string -- and could not even be done by
     #: re-running, because `relation` sat in the ORDER BY, so a ReplacingMergeTree
     #: appended the new label beside the old one instead of replacing it.
-    "movement_cells": """
-CREATE OR REPLACE VIEW {db}.movement_cells AS
+    "movement_cells" + sfx: ("""
+CREATE OR REPLACE VIEW {db}.movement_cells""" + sfx + """ AS
 SELECT m.base AS base, m.aligned AS aligned, pr.relation AS relation,
        pr.depth AS depth, m.rule AS rule, m.prompt AS prompt,
        countIf(m.cls = 'faller')                        AS n_fall,
@@ -118,16 +166,16 @@ SELECT m.base AS base, m.aligned AS aligned, pr.relation AS relation,
        sumIf(%(t)s, m.cls = 'still')                    AS js_still,
        %(r)s                                            AS js_tail,
        sum(%(t)s) + %(r)s                               AS js_total
-FROM {db}.movement m
+FROM {db}.""" + mv + """ m
 INNER JOIN {db}.pairs pr
         ON pr.base = m.base AND pr.aligned = m.aligned
-INNER JOIN (SELECT model, prompt, total FROM {db}.twp_cells) rp
+INNER JOIN (""" + cells + """) rp
         ON rp.model = m.base    AND rp.prompt = m.prompt
-INNER JOIN (SELECT model, prompt, total FROM {db}.twp_cells) rq
+INNER JOIN (""" + cells + """) rq
         ON rq.model = m.aligned AND rq.prompt = m.prompt
 GROUP BY base, aligned, relation, depth, rule, prompt
-""" % {"t": _JSTERM.format(p="m.p_base", q="m.p_aligned"),
-       "r": _JSTERM.format(p="any(rp.total)", q="any(rq.total)")},
+""") % {"t": _JSTERM.format(p="m.p_base", q="m.p_aligned"),
+        "r": _JSTERM.format(p="any(rp.total)", q="any(rq.total)")},
 
     #: ── PER PROMPT, ACROSS THE DECLARED ENDPOINTS (RH, 2026-08-17).
     #:
@@ -145,8 +193,8 @@ GROUP BY base, aligned, relation, depth, rule, prompt
     #: heavy-tailed across families and a mean can be one family's obsession.
     #: `n_pairs` travels beside every median so a prompt measured on 9 lineages
     #: cannot be read as one measured on 50.
-    "prompt_movement": """
-CREATE OR REPLACE VIEW {db}.prompt_movement AS
+    "prompt_movement" + sfx: """
+CREATE OR REPLACE VIEW {db}.prompt_movement""" + sfx + """ AS
 SELECT mc.prompt                       AS prompt,
        mc.rule                         AS rule,
        count()                         AS n_pairs,
@@ -158,7 +206,7 @@ SELECT mc.prompt                       AS prompt,
        median(mc.n_rise)               AS n_rise_median,
        median(mc.resid_base)           AS resid_base_median,
        median(mc.resid_aligned)        AS resid_aligned_median
-FROM {db}.movement_cells mc
+FROM {db}.movement_cells""" + sfx + """ mc
 INNER JOIN {db}.endpoints e
         ON e.base = mc.base AND e.endpoint = mc.aligned
 GROUP BY prompt, rule
@@ -168,17 +216,17 @@ GROUP BY prompt, rule
     #: `n_pairs` above**: a cell is one arm, a pair needs both, so a prompt can
     #: be widely measured and thinly paired. Both are shown because the gap is
     #: the interesting case.
-    "prompt_coverage": """
-CREATE OR REPLACE VIEW {db}.prompt_coverage AS
+    "prompt_coverage" + sfx: """
+CREATE OR REPLACE VIEW {db}.prompt_coverage""" + sfx + """ AS
 SELECT prompt,
        uniqExact(model) AS n_models,
        median(total)    AS resid_median
-FROM {db}.twp_cells
+FROM (""" + cells + """)
 GROUP BY prompt
 """,
 
-    "movement_edges": """
-CREATE OR REPLACE VIEW {db}.movement_edges AS
+    "movement_edges" + sfx: """
+CREATE OR REPLACE VIEW {db}.movement_edges""" + sfx + """ AS
 SELECT base, aligned, relation, depth, rule,
        count()                       AS n_prompts,
        avg(js_total)                 AS js_mean,
@@ -192,9 +240,26 @@ SELECT base, aligned, relation, depth, rule,
        avg(departed)                 AS departed_mean,
        avg(arrived)                  AS arrived_mean,
        avg(resid_delta)              AS resid_delta_mean
-FROM {db}.movement_cells
+FROM {db}.movement_cells""" + sfx + """
 GROUP BY base, aligned, relation, depth, rule
 """,
+    }
+
+
+VIEWS = {}
+#: v3 first, then v4, so a `python -m malignment.views` run creates them in an
+#: order where nothing references a view that does not exist yet.
+VIEWS.update(_movement_views(
+    "", "movement",
+    "SELECT model, prompt, total FROM {db}.twp_cells"))
+#: v4 derives the residual from the components rather than reading `total`,
+#: which is stale on a merged cell. Same argMax tuple as `_arm` and `_best`.
+VIEWS.update(_movement_views(
+    "_v4", "movement_v4",
+    "SELECT model, prompt, "
+    "argMax(tail + drop + open + mojibake, (topup, prompt_cache, mtime)) AS total "
+    "FROM {db}.twp_cells_v4 GROUP BY model, prompt"))
+VIEWS.update({
 
     #: **THESE TWO EXISTED ONLY IN THE LIVE DATABASE UNTIL 2026-08-21.** Four
     #: consumers read them -- displacement_taxonomy/{run,crosslineage,coverage}.py
@@ -260,7 +325,7 @@ FROM {db}.twp_words_v4
 GROUP BY model, prompt, word
 COMMENT 'BOTH source rows are legitimate and neither is a repair of the other. A pass-1 cell and its topup cell are TWO MEASUREMENTS OF ONE SURFACE -- beam-accumulated (expand4) and single-path lower bound (score_words4, n_paths=1) -- and they must not be merged. A topup cell carries pass 1 rows byte-identically PLUS words scored below theta, which is why the same (model,prompt,word) appears twice in twp_words_v4. This view takes the merged value where a topup cell exists and the pass-1 value where it does not, one row per key. The merged COLUMN is PROVENANCE, not a quality mark. ORDERING FIXED 2026-08-21: was argMax(.., topup), which is not a total order -- 495,624 word keys carry two rows at the same topup differing on prompt_cache, and the tie was broken arbitrarily. That is the cause of the canonical min_prob flip on 14 keys of 9,993,876 found by lacan 2026-08-19, recorded then as a correctness bug without its cause named. Now (topup, prompt_cache, mtime), which leaves 0 tied keys. device was rejected as a tiebreak: it is not a column on this table, so cells and words could have selected different runs for one cell.'
 """,
-}
+})
 
 
 def main():

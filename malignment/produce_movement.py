@@ -261,7 +261,25 @@ def _arm(model):
         #: as `views.py` -- if one of these changes the other has to.
         wq = ("SELECT prompt, word, argMax(p, (topup, prompt_cache, mtime)) AS p "
               "FROM {db}.twp_words_v4 WHERE model='%s' GROUP BY prompt, word" % esc)
-        cq = ("SELECT prompt, argMax(total, (topup, prompt_cache, mtime)) AS total "
+        #: **NOT `total`. `total` IS STALE ON A TOPUP CELL.** Measured corpus-wide
+        #: 2026-08-21: `total` == tail+drop+open+mojibake on 434,391 of 434,391
+        #: pass-1 cells and on 984,857 of 984,857 v3 cells -- and on only 35,402
+        #: of 385,855 topup cells. The topup writer decrements `tail` when it adds
+        #: sub-theta words and does not recompute `total`, so a merged cell's
+        #: `total` is the PASS-1 residual: mean 0.0148 too high, max 0.115.
+        #:
+        #: Passing it as the residual is what broke the ledger --
+        #: `arrived - departed + mass_still + resid_delta` failed on 294,854 of
+        #: 392,285 v4 cells (75%) while v3 was 0 of 400,267. The words came from
+        #: the merged cell and the residual from the pass-1 one, so the two arms
+        #: of the same identity were measured over different supports.
+        #:
+        #: `conservation` (words+tail+drop+open+mojibake) is 1.0 on BOTH passes,
+        #: 0 violations in 820,246 cells, so the components are trustworthy and
+        #: only their `total` summary is not. Deriving the residual from them is
+        #: therefore exact rather than a repair.
+        cq = ("SELECT prompt, argMax(tail + drop + open + mojibake, "
+              "(topup, prompt_cache, mtime)) AS total "
               "FROM {db}.twp_cells_v4 WHERE model='%s' GROUP BY prompt" % esc)
     words = collections.defaultdict(dict)
     for r in ch.query(wq):
