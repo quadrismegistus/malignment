@@ -249,6 +249,18 @@
 	//: meaningful: a subject appears only by PROMOTION when a second question
 	//: arrives, so a subject with children is a fact about the work rather than a
 	//: filing choice. Flat questions are listed first and unheaded.
+	//: A FOLDER CAN BE BOTH, AND slot_ratings IS. It carries `run.py`, `plot.py`
+	//: and 1,266 result grains of its own AND holds three questions, so it
+	//: qualified as a question (landing in `flat`) and as a subject (heading its
+	//: children) and rendered TWICE, once at the top of the list and again as the
+	//: heading below. Both entries opened the same `slot_ratings/README.md`.
+	//:
+	//: Resolved toward ONE row rather than by dropping either role: the heading
+	//: becomes the question, so clicking `SLOT_RATINGS` gives the README, the
+	//: figures and the 1,266 grains instead of the stripped subject view. Nothing
+	//: is lost and the hierarchy stops claiming a folder is in two places.
+	//: `division_of_labour` is unaffected -- it holds no code and no results, so
+	//: it is a subject only, exactly as its own README declares.
 	let grouped = $derived.by(() => {
 		const flat: Question[] = [];
 		const subs = new Map<string, Question[]>();
@@ -258,7 +270,16 @@
 				subs.get(q.subject)!.push(q);
 			} else flat.push(q);
 		}
-		return { flat, subs: [...subs.entries()].sort() };
+		//: Built AFTER the loop: a parent can be walked before or after its own
+		//: children depending on the server's ordering, so deciding inside the
+		//: loop would depend on which arrived first.
+		const asSubject = new Map<string, Question>();
+		for (const q of flat) if (subs.has(q.id)) asSubject.set(q.id, q);
+		return {
+			flat: flat.filter((q) => !asSubject.has(q.id)),
+			subs: [...subs.entries()].sort(),
+			asSubject
+		};
 	});
 
 	//: **DIVIDE ONCE PER UNIT.** The first version was
@@ -271,6 +292,12 @@
 	//: plausible; the KB branch is even correct. It was caught by rendering the
 	//: panel and reading it, which is the check that finds what a review of the
 	//: code does not, because the reviewer already believes the formula.
+	//: DISPLAY ONLY. The subject key is a path and a single underscored token, so
+	//: it has no break opportunity and CSS split it mid-word. Spaces give the
+	//: wrapper somewhere to break. The id is never transformed -- `open()` and
+	//: `openSubject()` still receive `subject`.
+	const head = (subject: string) => subject.split('/').pop()!.replace(/_/g, ' ');
+
 	const bytes = (n: number) => {
 		if (n < 1024) return `${n} B`;
 		if (n < 1048576) return `${Math.round(n / 1024)} KB`;
@@ -290,7 +317,6 @@
 			<button class="q" class:on={selected === q.id} onclick={() => open(q.id)}>
 				{q.name}
 				<span class="tags">
-					{#if !q.has['run.py']}<span class="tag noprod" title="registered, no producer yet">no run.py</span>{/if}
 					{#if q.has['registration.md']}<span class="tag" title="a frozen registration exists">reg</span>{/if}
 					{#if q.results.length}<span class="tag n">{q.results.length}</span>{/if}
 				</span>
@@ -306,17 +332,26 @@
 			  as inert text made that unreadable from the panel. Subjects without
 			  a README stay inert, because there is nothing to open.
 			-->
-			{#if index?.subjects?.[subject]}
+			{#if grouped.asSubject.get(subject)}
+				<!-- The subject folder is itself a question: open the question. -->
+				<button class="subject link" class:on={selected === subject}
+					onclick={() => open(subject)}
+					>{head(subject)}<span class="tag n"
+						>{grouped.asSubject.get(subject)!.results.length}</span
+					></button
+				>
+			{:else if index?.subjects?.[subject]}
 				<button class="subject link" class:on={selected === 'subject:' + subject}
-					onclick={() => openSubject(subject)}>{subject}<span class="tag n">readme</span></button>
+					onclick={() => openSubject(subject)}
+					>{head(subject)}<span class="tag n">readme</span></button
+				>
 			{:else}
-				<div class="subject">{subject}</div>
+				<div class="subject">{head(subject)}</div>
 			{/if}
 			{#each qs as q (q.id)}
 				<button class="q indent" class:on={selected === q.id} onclick={() => open(q.id)}>
 					{q.name}
 					<span class="tags">
-						{#if !q.has['run.py']}<span class="tag noprod">no run.py</span>{/if}
 						{#if q.has['registration.md']}<span class="tag">reg</span>{/if}
 						{#if q.results.length}<span class="tag n">{q.results.length}</span>{/if}
 					</span>
@@ -578,12 +613,29 @@
 	.subject.link.on {
 		color: var(--fg, #e6e6e6);
 	}
+	/*
+	  THE HEADING WRAPS RATHER THAN CLIPPING. `INSTRUMENT_CALIBRATIONS` and
+	  `POSTTRAINING_CORPUS_ANALYSIS` ran off the right edge of the panel and the
+	  `readme` badge on `DIVISION_OF_LABOUR` went with them -- uppercase plus
+	  0.07em tracking makes these the widest strings in the sidebar, and nothing
+	  was set to contain them. Caught by screenshotting the panel; the markup and
+	  the strings are both correct, so only the render shows it.
+	*/
 	.subject {
 		font-size: 10px;
 		text-transform: uppercase;
 		letter-spacing: 0.07em;
 		color: var(--text-3);
 		margin: 14px 0 4px 9px;
+		padding-right: 9px;
+		max-width: 100%;
+		line-height: 1.35;
+		text-align: left;
+	}
+	/* The count must not be dragged onto its own line by a wrapping heading. */
+	.subject .tag {
+		white-space: nowrap;
+		flex: 0 0 auto;
 	}
 	.q.indent {
 		padding-left: 18px;
@@ -606,15 +658,16 @@
 		color: var(--blue-light);
 	}
 	/*
-	  A QUESTION WITH NO PRODUCER IS MARKED, NOT HIDDEN. `register_shift` holds
-	  four frozen hypotheses and no run.py; that is the state most worth seeing in
-	  a list, and a list that showed only runnable questions would report this
-	  repo as having three experiments when it has four.
+	  THE `no run.py` BADGE IS GONE (RH, 2026-08-21). It was added so a question
+	  with no producer was marked rather than hidden, and it did that -- but the
+	  repo's naming convention outgrew it: `analyse.py`, `run_f21.py`,
+	  `run_m03.py`, `base_side_positions.py` are all producers, and a folder full
+	  of them was flagged as having none. A red badge that is wrong most of the
+	  time trains a reader to ignore the one time it is right.
+
+	  The `has` map still carries `run.py` from the server, so a future check can
+	  use it -- what was removed is the CLAIM, not the fact.
 	*/
-	.tag.noprod {
-		background: rgba(225, 87, 89, 0.16);
-		color: var(--red-light);
-	}
 
 	header {
 		display: flex;

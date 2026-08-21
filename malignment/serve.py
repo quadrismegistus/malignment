@@ -322,7 +322,7 @@ def _walk_experiments():
     for dirpath, dirnames, filenames in os.walk(EXPERIMENTS):
         dirnames[:] = [d for d in dirnames
                        if d not in ("__pycache__", "results", "figures",
-                                    "workflows", "sandbox")]
+                                    "workflows", "sandbox", "scripts")]
         rel = os.path.relpath(dirpath, EXPERIMENTS)
         if rel == ".":
             continue
@@ -577,7 +577,7 @@ def _plot_specs():
     for dirpath, dirnames, filenames in os.walk(EXPERIMENTS):
         dirnames[:] = [d for d in dirnames
                        if d not in ("__pycache__", "results", "figures",
-                                    "workflows", "sandbox")]
+                                    "workflows", "sandbox", "scripts")]
         if "plot.py" not in filenames:
             continue
         path = os.path.join(dirpath, "plot.py")
