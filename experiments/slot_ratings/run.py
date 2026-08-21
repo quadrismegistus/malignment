@@ -79,11 +79,21 @@ def population(prompt=None, item_id=None):
     #: `_best`, NOT `twp_words_v4`. The raw table carries pass-1 and merged rows
     #: for the same (model, prompt, word) -- 12,300,833 rows over 9,993,876 keys --
     #: and a dict(zip(ws, ps)) keeps whichever came last, arbitrarily. The view does
-    #: argMax(p, topup) internally: merged where a topup cell exists, pass 1 where
-    #: it does not, one row per key. Impact measured before switching: mean
+    #: argMax(p, (topup, prompt_cache, mtime)) internally: merged where a topup
+    #: cell exists, pass 1 where it does not, one row per key. Impact measured
+    #: before switching: mean
     #: |pmax-pmin| 1.02e-07 and FOURTEEN keys in the whole table where the choice
     #: flips CANONICAL min_prob -- none of them in these 303 frames. Correctness
     #: fix, not a results fix. (malign, send-peer, 2026-08-19.)
+    #:
+    #: **THE ORDERING WAS argMax(p, topup) UNTIL 2026-08-21, AND THAT IS NOT A
+    #: TOTAL ORDER.** 495,624 word keys carry two rows at the SAME topup,
+    #: differing on `prompt_cache`, so argMax hit a tie and broke it
+    #: arbitrarily -- stable in practice, guaranteed by nothing, free to change
+    #: across a merge. That is the CAUSE of the fourteen keys above, which were
+    #: recorded as a correctness bug without one. Now (topup, prompt_cache,
+    #: mtime), which leaves 0 tied keys. Nothing here needs changing; the
+    #: fourteen are simply no longer free to move. (malign, 4e49c22.)
     rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                   "FROM twp_words_v4_best WHERE prompt={p:String} "
                   "AND model IN {ms:Array(String)} GROUP BY model",
@@ -157,11 +167,21 @@ def per_pair(prompt, cells, rated):
     #: `_best`, NOT `twp_words_v4`. The raw table carries pass-1 and merged rows
     #: for the same (model, prompt, word) -- 12,300,833 rows over 9,993,876 keys --
     #: and a dict(zip(ws, ps)) keeps whichever came last, arbitrarily. The view does
-    #: argMax(p, topup) internally: merged where a topup cell exists, pass 1 where
-    #: it does not, one row per key. Impact measured before switching: mean
+    #: argMax(p, (topup, prompt_cache, mtime)) internally: merged where a topup
+    #: cell exists, pass 1 where it does not, one row per key. Impact measured
+    #: before switching: mean
     #: |pmax-pmin| 1.02e-07 and FOURTEEN keys in the whole table where the choice
     #: flips CANONICAL min_prob -- none of them in these 303 frames. Correctness
     #: fix, not a results fix. (malign, send-peer, 2026-08-19.)
+    #:
+    #: **THE ORDERING WAS argMax(p, topup) UNTIL 2026-08-21, AND THAT IS NOT A
+    #: TOTAL ORDER.** 495,624 word keys carry two rows at the SAME topup,
+    #: differing on `prompt_cache`, so argMax hit a tie and broke it
+    #: arbitrarily -- stable in practice, guaranteed by nothing, free to change
+    #: across a merge. That is the CAUSE of the fourteen keys above, which were
+    #: recorded as a correctness bug without one. Now (topup, prompt_cache,
+    #: mtime), which leaves 0 tied keys. Nothing here needs changing; the
+    #: fourteen are simply no longer free to move. (malign, 4e49c22.)
     rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                   "FROM twp_words_v4_best WHERE prompt={p:String} "
                   "AND model IN {ms:Array(String)} GROUP BY model",

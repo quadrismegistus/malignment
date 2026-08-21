@@ -66,7 +66,11 @@ def main():
     und_lin = sorted(set.intersection(*und.values())) if und else []
 
     #: STORE FINGERPRINT. The population being stable is not enough:
-    #: `twp_words_v4_best` is a view doing argMax(p, topup) over `twp_words_v4`,
+    #: `twp_words_v4_best` is a view doing argMax(p, (topup, prompt_cache, mtime))
+    #: over `twp_words_v4` -- it was argMax(p, topup) until 2026-08-21, which is
+    #: not a total order: 495,624 keys carry two rows at the same topup and the
+    #: tie was broken arbitrarily (malign, 4e49c22). The fingerprint below is
+    #: still the right guard and for the same reason --
     #: so a TOPUP INGEST for a model already in the study silently changes the p
     #: it returns without adding or removing a single lineage. That happened
     #: during the session these results were produced -- 7,917 rows landed for
@@ -138,9 +142,12 @@ def main():
         store_fingerprint=dict(
             table="twp_words_v4", rows=fp["c"], models=fp["m"], topup_rows=fp["tu"],
             mtime_min=str(fp["lo"]), mtime_max=str(fp["hi"]),
-            note="twp_words_v4_best is argMax(p, topup) over this table, so a "
-                 "topup ingest changes returned probabilities without changing "
-                 "the lineage set"),
+            note="twp_words_v4_best is argMax(p, (topup, prompt_cache, mtime)) "
+                 "over this table, so a topup ingest changes returned "
+                 "probabilities without changing the lineage set. Was "
+                 "argMax(p, topup) until 2026-08-21, which is not a total order "
+                 "-- 495,624 keys tie at the same topup and were resolved "
+                 "arbitrarily (malign, 4e49c22)."),
         intersection=dict(n=len(common), lineages=common,
                           slot_not_in_undressing=sorted(slot_lin - set(und_lin))),
     ), open(os.path.join(OUT, "population.json"), "w"), indent=1)

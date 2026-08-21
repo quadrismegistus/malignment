@@ -193,10 +193,18 @@ def render(prompts):
             #: cell contains pass 1's rows plus the scored ones, so the raw table
             #: holds every shared word twice, once at topup=0 and once at topup=1
             #: -- 2,306,957 duplicated keys, and 14 where the duplicate flips
-            #: CANONICAL's min_prob. `_best` does argMax(..., topup) internally and
-            #: carries a `merged` flag, so one row per key and no consumer has to
-            #: know. Verified identical to `WHERE topup=1` on all 80 arms of a
+            #: CANONICAL's min_prob. `_best` does
+            #: argMax(..., (topup, prompt_cache, mtime)) internally and carries a
+            #: `merged` flag, so one row per key and no consumer has to know.
+            #: Verified identical to `WHERE topup=1` on all 80 arms of a
             #: 40-cell sample, so this changes nothing here and removes the class.
+            #:
+            #: **THOSE 14 KEYS HAVE A CAUSE, FOUND 2026-08-21.** The view ordered
+            #: on `topup` ALONE until 4e49c22, and that is not a total order:
+            #: 495,624 word keys carry two rows at the same topup, differing on
+            #: `prompt_cache`, so argMax broke the tie arbitrarily. The 14 were
+            #: recorded as "a correctness bug, not a results bug" without a cause;
+            #: this was it, and they can no longer move.
             r = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                        "FROM twp_words_v4_best WHERE prompt={p:String} AND merged=1 "
                        "GROUP BY model", p=prompt)
