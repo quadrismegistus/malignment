@@ -425,19 +425,20 @@ def fig_rating_space_data():
                "(min_prob 0.003, delta 0.003), so it inherits the store's run-to-run jitter, "
                "and 67% of these cells have |net| <= 2. Read it as a tally under a threshold "
                "and do not rest a claim on one cell.",
-               "How exposed, measured rather than asserted: 608 of these 1,730 cells were "
-               "admitted on a single lineage's classification and 154 of those sit within "
-               "+-0.0015 of the 0.003 floor. Two runs of the same code disagree about which "
-               "side of that floor a near-floor word falls on for 0.191% of keys (n=148,937) "
-               "and about a two-sided +-0.003 delta rule for 2.47% (n=162, one lineage "
-               "pair, Wilson CI 0.96-6.18%). BOTH of CANONICAL's classes compare two "
-               "probabilities -- the riser test through `delta`, the faller test through "
-               "`Q < 0.5 * P` -- so all 154 carry the higher rate, not the riser-admitted "
-               "share of them. Expect roughly 1.5 to 9.5 to flip, not a fraction of one.",
-               "What bounds the panel is not that rate but the empirical check: dropping all "
-               "154 moves no axis note above by more than 0.9 percentage points and changes "
-               "no modal value. 10 is well inside 154, so what the panel SHOWS survives the "
-               "worst case regardless of where in that interval the truth sits."],
+               "How exposed: 608 of these 1,730 cells were admitted on a single lineage's "
+               "classification, and 154 of those sit within +-0.0015 of the 0.003 floor. "
+               "**No measured rate applies to CANONICAL's actual rules.** Run-to-run "
+               "disagreement is 0.191% for a one-sided floor (n=148,937) and 2.47% for a "
+               "two-sided +-0.003 difference (n=162, CI 0.96-6.18%), but CANONICAL's faller "
+               "is a RATIO (`Q < 0.5 * P`) and its riser carries a fourth condition, "
+               "`Q > null`, where the null depends on which OTHER words fell -- so a word's "
+               "riser status can change without its own probability changing at all. What "
+               "those rates establish is a direction, not a number for this column: "
+               "two-probability tests are materially more exposed than the floor.",
+               "So the fence is the empirical bound, which needs no rate at all: dropping "
+               "every one of the 154 moves no axis note above by more than 0.9 percentage "
+               "points and changes no modal value. That holds whatever the flip rate turns "
+               "out to be, which is why it and not a rate is what the panel rests on."],
         meta_order=["prompt", "word", "reading", "pair", "role", "referent", "zone", "net"],
         #: TABLE COLUMNS, and `reading` is deliberately not one: it is a sentence,
         #: so it rides the word cell's title attribute instead of widening every
