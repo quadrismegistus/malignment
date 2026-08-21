@@ -180,6 +180,41 @@ def buildable():
     return out
 
 
+def graph():
+    """Every declared ancestor -> descendant pair, WITHOUT the measured filter.
+
+    **`pairs` IS THE EDGE GRAPH AND MUST NOT BE RULE-VERSION SCOPED.** It was
+    populated from `buildable()`, which keeps only pairs whose both arms have
+    cells AT THE CURRENT RULE VERSION -- and `pairs` is a single shared table
+    that every run rewrites with CREATE OR REPLACE.
+
+    So the first `--rule-version 4` run cut it from 151 rows to 132, and because
+    `movement_cells` INNER JOINs it, the V3 rollup silently dropped from 400,267
+    cells to 350,431. The 19 lost pairs are exactly the models not yet measured
+    at v4 -- the Falcon3 ladder, DeepSeek-R1-Distill-Llama-8B, phi-4, Pharia --
+    so building one version quietly narrowed the other version's published view,
+    with nothing in either table recording it.
+
+    The graph is a property of the ROSTER, not of the corpus. A pair belongs in
+    it whether or not anyone has measured its arms; what is measured is decided
+    by which rows exist in `movement`/`movement_v4`, and the JOIN then yields
+    exactly the intersection without either side needing to know the other's
+    population. Same shape as the module docstring's rule: derive from the
+    declaration, never from whatever the store happens to hold today.
+    """
+    par, op = {}, {}
+    for r in ch.query("SELECT parent, child, op FROM {db}.edges"):
+        if r["op"] in DERIVING:
+            par[r["child"]], op[r["child"]] = r["parent"], r["op"]
+    out = []
+    for m in par:
+        x, d = m, 0
+        while x in par:
+            x, d = par[x], d + 1
+            out.append({"base": x, "aligned": m, "relation": op[m], "depth": d})
+    return out
+
+
 def _arm(model):
     """{prompt: ({word: p}, residual_total)} for one model, in ONE query.
 
@@ -267,11 +302,17 @@ def main():
     #: THE GRAPH, REWRITTEN EVERY RUN AND FREE. CREATE OR REPLACE, so it cannot
     #: hold a pair the roster no longer declares.
     ch.execute(PAIRS_DDL)
+    #: **THE FULL GRAPH, NOT `edges`.** `edges` is this run's buildable subset and
+    #: is rule-version scoped; `pairs` is shared by the v3 and v4 views, so
+    #: writing the subset here makes one version's build narrow the other
+    #: version's rollup. See graph().
+    _g = graph()
     ch.insert("pairs", [{"base": e["base"], "aligned": e["aligned"],
                          "relation": e["relation"], "depth": e["depth"]}
-                        for e in edges])
-    print("  %s.pairs: %d rows (relation + depth live HERE, not in movement)"
-          % (ch.DB, len(edges)))
+                        for e in _g])
+    print("  %s.pairs: %d rows, the whole declared graph "
+          "(relation + depth live HERE, not in movement); %d buildable at v%d"
+          % (ch.DB, len(_g), len(edges), _RV["v"]))
     if a.limit:
         edges = edges[:a.limit]
 
