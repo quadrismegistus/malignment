@@ -38,7 +38,7 @@ would read False in every condition rather than yielding a null.
 
 ### FINDINGS
 
-**1. `raw` is forced corpus-wide, by DEFINABILITY not by neutrality.** 44 of 54
+**1. `raw` is forced corpus-wide, by DEFINABILITY not by neutrality.** 44 of 53
 base-position models ship no chat template, so no templated frame exists for
 them. This is the same fact lm-evaluation-harness encodes: for base models
 `--apply_chat_template` is not discouraged, it is unavailable (`docs/model_guide.md`).
@@ -52,9 +52,21 @@ arm also ships a template, `raw` minus `presence`, entropy:
     Qwen2.5-0.5B       -0.493      +1.742
     Qwen3-8B           -0.255      +1.121
     neo_7b             -0.019      +1.169
-    Pharia-7B          +1.210      +1.122
     MiniCPM5-1B        +0.499      +0.199
-    mean               +0.186      +1.253
+    mean               -0.019      +1.279
+
+**PHARIA WAS REMOVED FROM THIS TABLE AND THE REMOVAL IMPROVES BOTH RESULTS**, so
+it is stated with its evidence. `Aleph-Alpha/Pharia-1-LLM-7B-control-hf` is NOT a
+base model: `roster/models/models.yaml:67` declares `pretrained: false` -- *"the
+`-control` is the instruction-tuned release (attested method sft)"* -- and
+`malignment.checkpoints` carries `pretrained: 0`, and the edge to
+`-control-aligned` is declared `dpo` with the note that the parent is already
+tuned. Three statements, none of them mine. The one artifact that calls it
+`position: base` is `malign_logits.models`, THE ARCHIVE TABLE AT 159 ROWS AGAINST
+THE CURRENT 160 -- a stale read on my part, and the pair is SFT->DPO, not
+base->aligned. Its base-side +1.210 was the largest in the table and was dragging
+the base mean up; only 3 of 160 checkpoints are `pretrained: 0` and Pharia is the
+only one the archive mislabels, so nothing else here moves.
 
 **An earlier version of this line said "+2.19 and +1.26 bits, consistently
 signed". That was TWO QWEN PAIRS and it does not generalise** -- across 12
@@ -65,9 +77,8 @@ is on-distribution for the base and off-distribution for the aligned arm.
 
 **That is the mechanism for [9].** The arm effect grows in the templated frame in
 every lineage (-0.791 -> -2.782, -0.020 -> -2.255, -1.856 -> -3.232, -0.807 ->
--1.996, +0.839 -> +1.139) and keeps its sign in 5 of 6; the exception, Pharia,
-has essentially no arm effect in either frame (-0.038 against +0.050), so it is a
-null and not a reversal. So the quotable form is not "raw is offset by X" but
+-1.996, +0.839 -> +1.139) and keeps its sign in **5 of 5**. The lineage that
+previously broke it was Pharia, which is not a base->aligned pair at all. So the quotable form is not "raw is offset by X" but
 **raw UNDERSTATES the arm contrast, ~1.1 bits on the aligned side and ~0.2 on the
 base side.**
 
