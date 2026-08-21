@@ -1,7 +1,7 @@
 ---
 subject: jakobson_space
 question: What do F15 and F16's axes look like when rebuilt on OUR corpus?
-status: surprisal axis BUILT; drift axis inherited; external axis NOT YET (needs BLT)
+status: all three axes BUILT; external axis twice (BLT bytes, then deepseek tokens); human anchor placed
 grain: page
 ---
 
@@ -14,7 +14,9 @@ F15 and F16 place passages in a space of **surprisal x drift** and read Jakobson
                  passages                                      cpu; ICC 0.32 on
                                                                mean_drift, 3.3x F15's)
     surprisal    malign_logits.gen_scores, self and cross      BUILT, no new compute
-    external     one reference model scoring everything        NOT YET -- needs BLT
+    external     BLT (itazap/blt-1b-hf), per BYTE              BUILT
+    external     deepseek-llm-7b-base, per TOKEN               BUILT -- the one to use
+    anchor       3,000 human passages, 6 corpora, 193 words    BUILT and PLACED
 
 ## The surprisal axis needed no compute at all
 
@@ -50,7 +52,13 @@ nothing until it is split. `composition_not_level.md` saw only the first of thes
 because its instrument scored base-generated text; the symmetry is what says the
 effect is off-policy distance and not something alignment does.
 
-## SELF-SURPRISAL IS NOT A COMMON YARDSTICK, and this file does not pretend it is
+## SELF-SURPRISAL IS NOT A COMMON YARDSTICK -- SUPERSEDED, THERE IS ONE NOW
+
+**The section below described the state before an external reference existed.
+There are now two, and `deepseek-llm-7b-base` is the one to use.** It is kept
+because every self/cross number above it still rests on the moving yardstick it
+describes, and a reader needs to know which claims are which. Anything wanting a
+common scale should use the deepseek axis and the anchor, both below.
 
 A passage's self-score is its own generator's opinion, so base and aligned passages
 are measured by DIFFERENT models. F15 avoided this with an external reference
@@ -69,7 +77,64 @@ texts. Every row carries four numbers:
 `s_by_aligned - s_by_base` is `composition_not_level.md`'s CROSS-SCORER level and
 is the only within-corpus yardstick available before BLT.
 
+## THE EXTERNAL AXIS AND THE HUMAN ANCHOR -- the finding this folder now carries
+
+**Alignment moves a model down a human range it already sat inside.** Both axes
+on one row for 8,145 passages, `results/two_axes.csv`, built by `two_axes.py`.
+Surprisal at M=200 tokens under `deepseek-llm-7b-base`; drift uncontrolled
+because `mean_drift` is length-free. Model rows are medians of per-model medians
+over 26 base and 27 aligned checkpoints, human rows over passages.
+
+    group                       bits/token   mean_drift        n
+    MODEL base                      4.4958       0.4617       26 models
+    human literary_criticism        4.4543       0.4963      499 passages
+    human c20_fiction               4.3558       0.4833      500 passages
+    human arxiv_abstracts           4.1581       0.4496      500 passages
+    human philosophy                4.0397       0.4521      500 passages
+    human dreams                    3.8457       0.4369      476 passages
+    MODEL aligned                   3.7298       0.4394       27 models
+    human waking_narrative          3.2884       0.4211      500 passages
+
+**The arm effect is on BOTH axes, lineage-paired with the model as the unit:**
+
+    surprisal   aligned lower in 24 of 24 lineages   sign p = 1.19e-07
+    drift       aligned lower in 23 of 24            sign p = 2.98e-06
+
+**The two arms of one technology span nearly the whole human spread** on
+surprisal -- 4.4958 to 3.7298 against a human 4.4543 to 3.2884 -- so alignment
+moves a model 65% of the distance from literary criticism to a diary.
+
+**And where the axes DISAGREE is the point of the joint table.** Base is FIRST in
+surprisal and THIRD in drift: locally unpredictable, globally static. Literary
+criticism and fiction invert it -- more predictable word to word, further
+travelled across the passage. A single entropy number hides that.
+
+Not claimable: base against the two literary corpora, +0.0414 and +0.1400, which
+flip below M=175 and M=150 (`ref_anchor.py --sweep`). Everything else is stable
+at every prefix from 60 to 200 tokens.
+
+**Reading the surprisal axis in BYTES gets it wrong.** arXiv abstracts run 5.53
+bytes/token against dreams' 4.28, so a per-byte reading credits them for packing
+more characters into each decision and puts them second-most-predictable; per
+token they are mid-range. **M=200 is not an eyeball either**: it is the largest
+prefix at which every human corpus retains 100%, and at 220 waking narrative is
+already 54% and length-selected. An earlier per-byte version quoted K=1000, where
+dreams was 27% of its sample; that number is withdrawn.
+
+**The model population is narrative-coded.** All 5,687 are `narrative_A == True`
+from `../interiority_in_passages/results/passC/codings/`, 28 shards, verified
+cell by cell -- a filter that removes 54% of the coded corpus (6,174 against
+7,383). This is a claim about NARRATIVE continuations, not model output at large.
+(`ANNOTATIONS.md` there claims to list every annotation run and has no passC
+entry, though passC's `narrative` field defines this population.)
+
 ## The two axes are correlated, and that bears on the quadrants
+
+    r(deepseek surprisal, mean_drift)   +0.869 over the 8 GROUPS
+                                        +0.414 over the 8,145 PASSAGES
+
+So they rank a CORPUS almost interchangeably and cannot substitute for one
+another on a PASSAGE. On the older self-surprisal axis:
 
     spearman(self-surprisal, mean_drift)   +0.392 overall
                               base arm     +0.207
@@ -148,4 +213,25 @@ absence reads as absence, but any mean over a drift column must exclude them.
 
     results/jakobson_by_passage.csv   13,557 rows x 26 columns, the f11_l2 sample
                                       with self/cross surprisal from gen_scores
+    results/two_axes.csv              8,145 rows, deepseek surprisal x bge drift,
+                                      models AND the human anchor on one scale
     results/population_manifest.json  what build_population.py wrote, and its drops
+    alignment_smooths.md              the BLT-axis finding, 42/46 lineages
+
+    two_axes.py      builds results/two_axes.csv and the summary above
+    ref_anchor.py    the anchor on the deepseek axis, with --sweep for stability
+    ref_surprisal.py scores any text with deepseek; roundtrip-guarded
+    build_human_pool.py / normalise_task.py / finalise_human.py   the anchor
+
+### Where the anchor came from
+
+3,000 passages, 500 each from six corpora, **all cut to exactly 193 words** and
+orthographically normalised by an LLM pass so the measurement is of syntax and
+semantics rather than of how fast somebody typed. `normalise_spec.md` is the
+task text and is read from disk by `normalise_task.py` with an assert that the
+curly characters survive -- because transcribing the rule into a Python string
+turned it into an ASCII-to-ASCII no-op once already.
+
+Byte lengths still differ by corpus at fixed words (abstracts 1,406 median
+against dreams' 970), which is why the surprisal axis is taken at a fixed TOKEN
+prefix and not at fixed words or bytes.
