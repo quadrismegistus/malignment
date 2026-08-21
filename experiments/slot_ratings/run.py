@@ -54,7 +54,7 @@ import statistics as st
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 RESULTS = os.path.join(HERE, "results")
-CELLS = os.path.join(REPO, "experiments", "displacement_axis",
+CELLS = os.path.join(REPO, "experiments", "displacement", "displacement_axis",
                      "results", "pilot3", "cells.jsonl")
 CONTENT_POS = ("NOUN", "VERB", "ADJ", "ADV")
 

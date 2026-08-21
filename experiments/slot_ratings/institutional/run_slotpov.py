@@ -43,7 +43,7 @@ SLOT = os.path.dirname(HERE)
 REPO = os.path.dirname(os.path.dirname(SLOT))
 sys.path.insert(0, HERE); sys.path.insert(0, REPO)
 RESULTS = os.path.join(HERE, "results", "slotpov")
-CELLS = os.path.join(REPO, "experiments", "displacement_axis",
+CELLS = os.path.join(REPO, "experiments", "displacement", "displacement_axis",
                      "results", "pilot3", "cells.jsonl")
 MIN_PROB = 0.003
 CONTENT_POS = ("NOUN", "VERB", "ADJ", "ADV")

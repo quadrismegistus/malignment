@@ -55,7 +55,7 @@ SLOT = os.path.dirname(HERE)
 REPO = os.path.dirname(os.path.dirname(SLOT))
 sys.path.insert(0, REPO)
 OUT = os.path.join(HERE, "results")
-CELLS = os.path.join(REPO, "experiments", "displacement_axis",
+CELLS = os.path.join(REPO, "experiments", "displacement", "displacement_axis",
                      "results", "pilot3", "cells.jsonl")
 REPS = 2000
 

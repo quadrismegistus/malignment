@@ -36,7 +36,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SLOT = os.path.dirname(HERE)
 REPO = os.path.dirname(os.path.dirname(SLOT))
 sys.path.insert(0, REPO); sys.path.insert(0, os.path.join(SLOT, "institutional"))
-CELLS = os.path.join(REPO, "experiments", "displacement_axis",
+CELLS = os.path.join(REPO, "experiments", "displacement", "displacement_axis",
                      "results", "pilot3", "cells.jsonl")
 OUT = os.path.join(HERE, "results")
 MIN_PROB = 0.003

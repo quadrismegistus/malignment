@@ -15,7 +15,7 @@ import statistics as st
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, REPO)
-CELLS = os.path.join(REPO, "experiments", "displacement_axis",
+CELLS = os.path.join(REPO, "experiments", "displacement", "displacement_axis",
                      "results", "pilot3", "cells.jsonl")
 MIN_PROB = 0.003
 
