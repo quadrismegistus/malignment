@@ -795,6 +795,11 @@ absence reads as absence, but any mean over a drift column must exclude them.
     checks.py            re-runs every provenance claim these docstrings make,
                          PASS/FAIL against the value the prose quotes
 
+The observer-side work moved to `../surprisal_matrix/` -- the same text scored
+by its own generator, its lineage partner and an external reference, which is
+where the self-versus-external entropy question lives and where F18's "private
+language" finding was retried.
+
 The generation-side calibrations moved to
 `../../instrument_calibrations/generation_provenance/` -- the deployment frame,
 provider injection, decoder parameters and nucleus truncation. They ask whether
