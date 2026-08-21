@@ -76,13 +76,22 @@ def main():
         prev = rows[-1] if rows else None
     d = lambda k: ("" if not prev else "  (%+.2f)" % (now[k] - prev[k])
                    if isinstance(now[k], float) else "  (%+d)" % (now[k] - prev[k]))
-    print("%d slot prompts, roster of %d declared pairs\n" % (now["prompts"], now["roster"]))
+    #: THE TABLE IS NAMED IN THE OUTPUT, not just in the query. On 2026-08-21
+    #: three seats in one day reached for the wrong store and two of them had a
+    #: correction half written before noticing: Falcon-H1-7B has 2,981 prompts of
+    #: cells and ZERO words, so it is absent here and present in
+    #: `twp_cells_v4_best`, and its GENERATIONS are healthy in a third table
+    #: ([6479], [6480], [6482]). Every count below is word-level and none of them
+    #: is a statement about whether a model ran.
+    print("%d slot prompts, roster of %d declared pairs   [read from twp_words_v4_best]\n"
+          % (now["prompts"], now["roster"]))
     print("  topped per prompt      %6.2f  median %2d%s" % (now["topped_mean"], now["topped_median"], d("topped_mean")))
     print("  measured per prompt    %6.2f  median %2d%s" % (now["measured_mean"], now["measured_median"], d("measured_mean")))
     print("  pass-2 lag             %6.2f          (topped behind measured)" % (now["measured_mean"] - now["topped_mean"]))
     print("  prompts at 35+ topped  %6d%s" % (now["at35"], d("at35")))
     print("  prompts at 40+ topped  %6d%s" % (now["at40"], d("at40")))
-    print("  roster models never measured here: %d%s" % (now["models_never_here"], d("models_never_here")))
+    print("  roster models with no WORDS on these prompts: %d%s"
+          % (now["models_never_here"], d("models_never_here")))
     if a.full and now["missing"]:
         for x in now["missing"]:
             print("      %s" % x)
