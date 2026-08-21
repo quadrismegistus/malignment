@@ -43,9 +43,41 @@ base-position models ship no chat template, so no templated frame exists for
 them. This is the same fact lm-evaluation-harness encodes: for base models
 `--apply_chat_template` is not discouraged, it is unavailable (`docs/model_guide.md`).
 
-**2. `raw` is a different REGIME, not a noisy frame.** It falls outside the range
-of the templated family on 21/22 and 22/22 prompts, offset +2.19 and +1.26 bits,
-consistently signed. Never pool it with templated frames.
+**2. `raw` is a different REGIME, not a noisy frame, and the offset is
+ARM-ASYMMETRIC rather than constant.** Measured on the six lineages whose base
+arm also ships a template, `raw` minus `presence`, entropy:
+
+                     base arm   aligned arm
+    Qwen2.5-7B         +0.173      +2.164
+    Qwen2.5-0.5B       -0.493      +1.742
+    Qwen3-8B           -0.255      +1.121
+    neo_7b             -0.019      +1.169
+    Pharia-7B          +1.210      +1.122
+    MiniCPM5-1B        +0.499      +0.199
+    mean               +0.186      +1.253
+
+**An earlier version of this line said "+2.19 and +1.26 bits, consistently
+signed". That was TWO QWEN PAIRS and it does not generalise** -- across 12
+model-arms the offset runs -0.493 to +2.164, sd 0.825, and four arms are
+negative. What does generalise is the asymmetry: the frame barely moves a base
+model and moves an aligned one by over a bit, which is what you predict if `raw`
+is on-distribution for the base and off-distribution for the aligned arm.
+
+**That is the mechanism for [9].** The arm effect grows in the templated frame in
+every lineage (-0.791 -> -2.782, -0.020 -> -2.255, -1.856 -> -3.232, -0.807 ->
+-1.996, +0.839 -> +1.139) and keeps its sign in 5 of 6; the exception, Pharia,
+has essentially no arm effect in either frame (-0.038 against +0.050), so it is a
+null and not a reversal. So the quotable form is not "raw is offset by X" but
+**raw UNDERSTATES the arm contrast, ~1.1 bits on the aligned side and ~0.2 on the
+base side.**
+
+Two lineage facts worth keeping: **MiniCPM5-1B runs the opposite direction** --
+its aligned arm has HIGHER entropy than its base, consistently in both frames, so
+that is the lineage and not the instrument. And **neo_7b behaves like the others
+although its template DISCARDS the system message**, which puts the offset in the
+turn structure rather than the system block.
+
+Never pool `raw` with templated frames.
 
 **3. An empty user turn is degenerate.** The model formats instead of continuing:
 Olmo-3-DPO `prefill_bare` puts 0.530 of its mass on form punctuation with
