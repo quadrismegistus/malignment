@@ -10,7 +10,7 @@
   }
  },
  "data": {
-  "name": "data-d5ae611306779d855a3a389d5f14a9d2"
+  "name": "data-22e44f7c406c6eeeef61e5a8bf85b6b8"
  },
  "facet": {
   "field": "lab",
@@ -21,29 +21,29 @@
   },
   "sort": [
    "abstraction   -0.110 *",
-   "mediation   +0.102",
-   "vocalisation   +0.088",
-   "procedural   +0.072",
-   "termination   -0.068",
-   "delay   -0.061",
-   "assertiveness   +0.051",
-   "interiority   +0.051",
-   "directedness   +0.042",
-   "hedged   +0.042",
-   "agency   +0.038",
-   "specificity   +0.031",
-   "makes_worse   +0.028",
-   "aggression   +0.012",
-   "target   +0.011",
-   "mundanity   -0.010",
-   "fit   +0.007",
-   "arousal   +0.007",
-   "makes_better   -0.007",
-   "deference   +0.006",
-   "deliberation   -0.005",
-   "collective   +0.002",
-   "superego   -0.002",
-   "harm   +0.000"
+   "mediation   +0.102 ~",
+   "vocalisation   +0.088 ",
+   "procedural   +0.072 ~",
+   "termination   -0.068 ",
+   "delay   -0.061 ",
+   "assertiveness   +0.051 ",
+   "interiority   +0.051 ",
+   "directedness   +0.042 ",
+   "hedged   +0.042 ",
+   "agency   +0.038 ",
+   "specificity   +0.031 ",
+   "makes_worse   +0.028 ",
+   "aggression   +0.012 ",
+   "target   +0.011 ",
+   "mundanity   -0.010 ",
+   "fit   +0.007 ",
+   "arousal   +0.007 ",
+   "makes_better   -0.007 ",
+   "deference   +0.006 ",
+   "deliberation   -0.005 ",
+   "collective   +0.002 ",
+   "superego   -0.002 ",
+   "harm   +0.000 "
   ],
   "title": null,
   "type": "nominal"
@@ -220,8 +220,9 @@
    "Prompts ending \"I should\", F21 and M03 pooled: 52 prompts, 50 lineages, 2,600 cells. Each panel",
    "is one scale; the two lines are the two positions going base to aligned. PARALLEL LINES ARE A",
    "NULL -- the asymmetry is the fanning, and the number beside each scale name is individual minus",
-   "institution, paired inside the 24 scenarios holding both, with * at bootstrap p<0.05. Panels are",
-   "ordered by that number.",
+   "institution, paired inside the 24 scenarios holding both. Panels are ordered by that number. *",
+   "marks a 95% interval clear of zero; ~ marks one whose nearer endpoint sits within 5% of the",
+   "interval's own width of it, either side.",
    "",
    "READING THE Y AXIS. Levels run 1.00 to 5.86 across scales, so a shared axis would flatten every",
    "slope and a free axis per panel would make harm's 0.003 draw as steep as directedness's 0.267.",
@@ -231,14 +232,18 @@
    "axis cannot carry -- harm reads 1.00-1.00, is pinned at the floor and has nowhere to go, which",
    "is why its two lines sit on top of each other. Ratings cover 0.242 of base mass and 0.296 of",
    "aligned mass. agency, specificity, assertiveness and arousal are pairwise 0.62-0.83 and are one",
-   "axis drawn four times."
+   "axis drawn four times. WHY ~ EXISTS. mediation's interval excludes zero by 0.0003 and",
+   "procedural's includes it by 0.005: equally unstable, and any threshold puts them on opposite",
+   "sides. This study's README books mediation at p=0.025 and this producer's own bootstrap draw",
+   "gives 0.050. Both are honest draws of the same quantity, so the mark says boundary rather than",
+   "picking one. abstraction is the only difference here that is not fragile."
   ],
   "subtitleColor": "#555555",
   "subtitleFontSize": 10
  },
  "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json",
  "datasets": {
-  "data-d5ae611306779d855a3a389d5f14a9d2": [
+  "data-22e44f7c406c6eeeef61e5a8bf85b6b8": [
    {
     "scale": "abstraction",
     "who": "individual",
@@ -292,7 +297,7 @@
     "did": 0.03848929302464089,
     "p": 0.355,
     "span_txt": "3.68-3.78",
-    "lab": "agency   +0.038"
+    "lab": "agency   +0.038 "
    },
    {
     "scale": "agency",
@@ -303,7 +308,7 @@
     "did": 0.03848929302464089,
     "p": 0.355,
     "span_txt": "3.68-3.78",
-    "lab": "agency   +0.038"
+    "lab": "agency   +0.038 "
    },
    {
     "scale": "agency",
@@ -314,7 +319,7 @@
     "did": 0.03848929302464089,
     "p": 0.355,
     "span_txt": "3.68-3.78",
-    "lab": "agency   +0.038"
+    "lab": "agency   +0.038 "
    },
    {
     "scale": "agency",
@@ -325,7 +330,7 @@
     "did": 0.03848929302464089,
     "p": 0.355,
     "span_txt": "3.68-3.78",
-    "lab": "agency   +0.038"
+    "lab": "agency   +0.038 "
    },
    {
     "scale": "aggression",
@@ -336,7 +341,7 @@
     "did": 0.012248944091052183,
     "p": 0.182,
     "span_txt": "1.06-1.07",
-    "lab": "aggression   +0.012"
+    "lab": "aggression   +0.012 "
    },
    {
     "scale": "aggression",
@@ -347,7 +352,7 @@
     "did": 0.012248944091052183,
     "p": 0.182,
     "span_txt": "1.06-1.07",
-    "lab": "aggression   +0.012"
+    "lab": "aggression   +0.012 "
    },
    {
     "scale": "aggression",
@@ -358,7 +363,7 @@
     "did": 0.012248944091052183,
     "p": 0.182,
     "span_txt": "1.06-1.07",
-    "lab": "aggression   +0.012"
+    "lab": "aggression   +0.012 "
    },
    {
     "scale": "aggression",
@@ -369,7 +374,7 @@
     "did": 0.012248944091052183,
     "p": 0.182,
     "span_txt": "1.06-1.07",
-    "lab": "aggression   +0.012"
+    "lab": "aggression   +0.012 "
    },
    {
     "scale": "arousal",
@@ -380,7 +385,7 @@
     "did": 0.007323742550696593,
     "p": 0.817,
     "span_txt": "2.27-2.52",
-    "lab": "arousal   +0.007"
+    "lab": "arousal   +0.007 "
    },
    {
     "scale": "arousal",
@@ -391,7 +396,7 @@
     "did": 0.007323742550696593,
     "p": 0.817,
     "span_txt": "2.27-2.52",
-    "lab": "arousal   +0.007"
+    "lab": "arousal   +0.007 "
    },
    {
     "scale": "arousal",
@@ -402,7 +407,7 @@
     "did": 0.007323742550696593,
     "p": 0.817,
     "span_txt": "2.27-2.52",
-    "lab": "arousal   +0.007"
+    "lab": "arousal   +0.007 "
    },
    {
     "scale": "arousal",
@@ -413,7 +418,7 @@
     "did": 0.007323742550696593,
     "p": 0.817,
     "span_txt": "2.27-2.52",
-    "lab": "arousal   +0.007"
+    "lab": "arousal   +0.007 "
    },
    {
     "scale": "assertiveness",
@@ -424,7 +429,7 @@
     "did": 0.05138440357281662,
     "p": 0.162,
     "span_txt": "3.13-3.19",
-    "lab": "assertiveness   +0.051"
+    "lab": "assertiveness   +0.051 "
    },
    {
     "scale": "assertiveness",
@@ -435,7 +440,7 @@
     "did": 0.05138440357281662,
     "p": 0.162,
     "span_txt": "3.13-3.19",
-    "lab": "assertiveness   +0.051"
+    "lab": "assertiveness   +0.051 "
    },
    {
     "scale": "assertiveness",
@@ -446,7 +451,7 @@
     "did": 0.05138440357281662,
     "p": 0.162,
     "span_txt": "3.13-3.19",
-    "lab": "assertiveness   +0.051"
+    "lab": "assertiveness   +0.051 "
    },
    {
     "scale": "assertiveness",
@@ -457,7 +462,7 @@
     "did": 0.05138440357281662,
     "p": 0.162,
     "span_txt": "3.13-3.19",
-    "lab": "assertiveness   +0.051"
+    "lab": "assertiveness   +0.051 "
    },
    {
     "scale": "collective",
@@ -468,7 +473,7 @@
     "did": 0.0023609027957230628,
     "p": 0.845,
     "span_txt": "1.01-1.04",
-    "lab": "collective   +0.002"
+    "lab": "collective   +0.002 "
    },
    {
     "scale": "collective",
@@ -479,7 +484,7 @@
     "did": 0.0023609027957230628,
     "p": 0.845,
     "span_txt": "1.01-1.04",
-    "lab": "collective   +0.002"
+    "lab": "collective   +0.002 "
    },
    {
     "scale": "collective",
@@ -490,7 +495,7 @@
     "did": 0.0023609027957230628,
     "p": 0.845,
     "span_txt": "1.01-1.04",
-    "lab": "collective   +0.002"
+    "lab": "collective   +0.002 "
    },
    {
     "scale": "collective",
@@ -501,7 +506,7 @@
     "did": 0.0023609027957230628,
     "p": 0.845,
     "span_txt": "1.01-1.04",
-    "lab": "collective   +0.002"
+    "lab": "collective   +0.002 "
    },
    {
     "scale": "deference",
@@ -512,7 +517,7 @@
     "did": 0.005981412036803826,
     "p": 0.84,
     "span_txt": "4.15-4.34",
-    "lab": "deference   +0.006"
+    "lab": "deference   +0.006 "
    },
    {
     "scale": "deference",
@@ -523,7 +528,7 @@
     "did": 0.005981412036803826,
     "p": 0.84,
     "span_txt": "4.15-4.34",
-    "lab": "deference   +0.006"
+    "lab": "deference   +0.006 "
    },
    {
     "scale": "deference",
@@ -534,7 +539,7 @@
     "did": 0.005981412036803826,
     "p": 0.84,
     "span_txt": "4.15-4.34",
-    "lab": "deference   +0.006"
+    "lab": "deference   +0.006 "
    },
    {
     "scale": "deference",
@@ -545,7 +550,7 @@
     "did": 0.005981412036803826,
     "p": 0.84,
     "span_txt": "4.15-4.34",
-    "lab": "deference   +0.006"
+    "lab": "deference   +0.006 "
    },
    {
     "scale": "delay",
@@ -556,7 +561,7 @@
     "did": -0.06109059239756258,
     "p": 0.221,
     "span_txt": "2.82-3.14",
-    "lab": "delay   -0.061"
+    "lab": "delay   -0.061 "
    },
    {
     "scale": "delay",
@@ -567,7 +572,7 @@
     "did": -0.06109059239756258,
     "p": 0.221,
     "span_txt": "2.82-3.14",
-    "lab": "delay   -0.061"
+    "lab": "delay   -0.061 "
    },
    {
     "scale": "delay",
@@ -578,7 +583,7 @@
     "did": -0.06109059239756258,
     "p": 0.221,
     "span_txt": "2.82-3.14",
-    "lab": "delay   -0.061"
+    "lab": "delay   -0.061 "
    },
    {
     "scale": "delay",
@@ -589,7 +594,7 @@
     "did": -0.06109059239756258,
     "p": 0.221,
     "span_txt": "2.82-3.14",
-    "lab": "delay   -0.061"
+    "lab": "delay   -0.061 "
    },
    {
     "scale": "deliberation",
@@ -600,7 +605,7 @@
     "did": -0.004820847246012616,
     "p": 0.879,
     "span_txt": "3.53-3.56",
-    "lab": "deliberation   -0.005"
+    "lab": "deliberation   -0.005 "
    },
    {
     "scale": "deliberation",
@@ -611,7 +616,7 @@
     "did": -0.004820847246012616,
     "p": 0.879,
     "span_txt": "3.53-3.56",
-    "lab": "deliberation   -0.005"
+    "lab": "deliberation   -0.005 "
    },
    {
     "scale": "deliberation",
@@ -622,7 +627,7 @@
     "did": -0.004820847246012616,
     "p": 0.879,
     "span_txt": "3.53-3.56",
-    "lab": "deliberation   -0.005"
+    "lab": "deliberation   -0.005 "
    },
    {
     "scale": "deliberation",
@@ -633,7 +638,7 @@
     "did": -0.004820847246012616,
     "p": 0.879,
     "span_txt": "3.53-3.56",
-    "lab": "deliberation   -0.005"
+    "lab": "deliberation   -0.005 "
    },
    {
     "scale": "directedness",
@@ -644,7 +649,7 @@
     "did": 0.04242835170409334,
     "p": 0.506,
     "span_txt": "2.35-2.82",
-    "lab": "directedness   +0.042"
+    "lab": "directedness   +0.042 "
    },
    {
     "scale": "directedness",
@@ -655,7 +660,7 @@
     "did": 0.04242835170409334,
     "p": 0.506,
     "span_txt": "2.35-2.82",
-    "lab": "directedness   +0.042"
+    "lab": "directedness   +0.042 "
    },
    {
     "scale": "directedness",
@@ -666,7 +671,7 @@
     "did": 0.04242835170409334,
     "p": 0.506,
     "span_txt": "2.35-2.82",
-    "lab": "directedness   +0.042"
+    "lab": "directedness   +0.042 "
    },
    {
     "scale": "directedness",
@@ -677,7 +682,7 @@
     "did": 0.04242835170409334,
     "p": 0.506,
     "span_txt": "2.35-2.82",
-    "lab": "directedness   +0.042"
+    "lab": "directedness   +0.042 "
    },
    {
     "scale": "fit",
@@ -688,7 +693,7 @@
     "did": 0.007427529721486527,
     "p": 0.85,
     "span_txt": "5.65-5.86",
-    "lab": "fit   +0.007"
+    "lab": "fit   +0.007 "
    },
    {
     "scale": "fit",
@@ -699,7 +704,7 @@
     "did": 0.007427529721486527,
     "p": 0.85,
     "span_txt": "5.65-5.86",
-    "lab": "fit   +0.007"
+    "lab": "fit   +0.007 "
    },
    {
     "scale": "fit",
@@ -710,7 +715,7 @@
     "did": 0.007427529721486527,
     "p": 0.85,
     "span_txt": "5.65-5.86",
-    "lab": "fit   +0.007"
+    "lab": "fit   +0.007 "
    },
    {
     "scale": "fit",
@@ -721,7 +726,7 @@
     "did": 0.007427529721486527,
     "p": 0.85,
     "span_txt": "5.65-5.86",
-    "lab": "fit   +0.007"
+    "lab": "fit   +0.007 "
    },
    {
     "scale": "harm",
@@ -732,7 +737,7 @@
     "did": 0.00020341650554639602,
     "p": 0.883,
     "span_txt": "1.00-1.00",
-    "lab": "harm   +0.000"
+    "lab": "harm   +0.000 "
    },
    {
     "scale": "harm",
@@ -743,7 +748,7 @@
     "did": 0.00020341650554639602,
     "p": 0.883,
     "span_txt": "1.00-1.00",
-    "lab": "harm   +0.000"
+    "lab": "harm   +0.000 "
    },
    {
     "scale": "harm",
@@ -754,7 +759,7 @@
     "did": 0.00020341650554639602,
     "p": 0.883,
     "span_txt": "1.00-1.00",
-    "lab": "harm   +0.000"
+    "lab": "harm   +0.000 "
    },
    {
     "scale": "harm",
@@ -765,7 +770,7 @@
     "did": 0.00020341650554639602,
     "p": 0.883,
     "span_txt": "1.00-1.00",
-    "lab": "harm   +0.000"
+    "lab": "harm   +0.000 "
    },
    {
     "scale": "hedged",
@@ -776,7 +781,7 @@
     "did": 0.04164194615830902,
     "p": 0.32,
     "span_txt": "3.59-3.81",
-    "lab": "hedged   +0.042"
+    "lab": "hedged   +0.042 "
    },
    {
     "scale": "hedged",
@@ -787,7 +792,7 @@
     "did": 0.04164194615830902,
     "p": 0.32,
     "span_txt": "3.59-3.81",
-    "lab": "hedged   +0.042"
+    "lab": "hedged   +0.042 "
    },
    {
     "scale": "hedged",
@@ -798,7 +803,7 @@
     "did": 0.04164194615830902,
     "p": 0.32,
     "span_txt": "3.59-3.81",
-    "lab": "hedged   +0.042"
+    "lab": "hedged   +0.042 "
    },
    {
     "scale": "hedged",
@@ -809,7 +814,7 @@
     "did": 0.04164194615830902,
     "p": 0.32,
     "span_txt": "3.59-3.81",
-    "lab": "hedged   +0.042"
+    "lab": "hedged   +0.042 "
    },
    {
     "scale": "interiority",
@@ -820,7 +825,7 @@
     "did": 0.05130687797119445,
     "p": 0.179,
     "span_txt": "2.98-3.12",
-    "lab": "interiority   +0.051"
+    "lab": "interiority   +0.051 "
    },
    {
     "scale": "interiority",
@@ -831,7 +836,7 @@
     "did": 0.05130687797119445,
     "p": 0.179,
     "span_txt": "2.98-3.12",
-    "lab": "interiority   +0.051"
+    "lab": "interiority   +0.051 "
    },
    {
     "scale": "interiority",
@@ -842,7 +847,7 @@
     "did": 0.05130687797119445,
     "p": 0.179,
     "span_txt": "2.98-3.12",
-    "lab": "interiority   +0.051"
+    "lab": "interiority   +0.051 "
    },
    {
     "scale": "interiority",
@@ -853,7 +858,7 @@
     "did": 0.05130687797119445,
     "p": 0.179,
     "span_txt": "2.98-3.12",
-    "lab": "interiority   +0.051"
+    "lab": "interiority   +0.051 "
    },
    {
     "scale": "makes_better",
@@ -864,7 +869,7 @@
     "did": -0.006954273933334135,
     "p": 0.836,
     "span_txt": "3.01-3.42",
-    "lab": "makes_better   -0.007"
+    "lab": "makes_better   -0.007 "
    },
    {
     "scale": "makes_better",
@@ -875,7 +880,7 @@
     "did": -0.006954273933334135,
     "p": 0.836,
     "span_txt": "3.01-3.42",
-    "lab": "makes_better   -0.007"
+    "lab": "makes_better   -0.007 "
    },
    {
     "scale": "makes_better",
@@ -886,7 +891,7 @@
     "did": -0.006954273933334135,
     "p": 0.836,
     "span_txt": "3.01-3.42",
-    "lab": "makes_better   -0.007"
+    "lab": "makes_better   -0.007 "
    },
    {
     "scale": "makes_better",
@@ -897,7 +902,7 @@
     "did": -0.006954273933334135,
     "p": 0.836,
     "span_txt": "3.01-3.42",
-    "lab": "makes_better   -0.007"
+    "lab": "makes_better   -0.007 "
    },
    {
     "scale": "makes_worse",
@@ -908,7 +913,7 @@
     "did": 0.02822872037543967,
     "p": 0.219,
     "span_txt": "1.44-1.66",
-    "lab": "makes_worse   +0.028"
+    "lab": "makes_worse   +0.028 "
    },
    {
     "scale": "makes_worse",
@@ -919,7 +924,7 @@
     "did": 0.02822872037543967,
     "p": 0.219,
     "span_txt": "1.44-1.66",
-    "lab": "makes_worse   +0.028"
+    "lab": "makes_worse   +0.028 "
    },
    {
     "scale": "makes_worse",
@@ -930,7 +935,7 @@
     "did": 0.02822872037543967,
     "p": 0.219,
     "span_txt": "1.44-1.66",
-    "lab": "makes_worse   +0.028"
+    "lab": "makes_worse   +0.028 "
    },
    {
     "scale": "makes_worse",
@@ -941,7 +946,7 @@
     "did": 0.02822872037543967,
     "p": 0.219,
     "span_txt": "1.44-1.66",
-    "lab": "makes_worse   +0.028"
+    "lab": "makes_worse   +0.028 "
    },
    {
     "scale": "mediation",
@@ -952,7 +957,7 @@
     "did": 0.10199724606590732,
     "p": 0.05,
     "span_txt": "1.99-2.93",
-    "lab": "mediation   +0.102"
+    "lab": "mediation   +0.102 ~"
    },
    {
     "scale": "mediation",
@@ -963,7 +968,7 @@
     "did": 0.10199724606590732,
     "p": 0.05,
     "span_txt": "1.99-2.93",
-    "lab": "mediation   +0.102"
+    "lab": "mediation   +0.102 ~"
    },
    {
     "scale": "mediation",
@@ -974,7 +979,7 @@
     "did": 0.10199724606590732,
     "p": 0.05,
     "span_txt": "1.99-2.93",
-    "lab": "mediation   +0.102"
+    "lab": "mediation   +0.102 ~"
    },
    {
     "scale": "mediation",
@@ -985,7 +990,7 @@
     "did": 0.10199724606590732,
     "p": 0.05,
     "span_txt": "1.99-2.93",
-    "lab": "mediation   +0.102"
+    "lab": "mediation   +0.102 ~"
    },
    {
     "scale": "mundanity",
@@ -996,7 +1001,7 @@
     "did": -0.010301033395444028,
     "p": 0.535,
     "span_txt": "4.86-4.96",
-    "lab": "mundanity   -0.010"
+    "lab": "mundanity   -0.010 "
    },
    {
     "scale": "mundanity",
@@ -1007,7 +1012,7 @@
     "did": -0.010301033395444028,
     "p": 0.535,
     "span_txt": "4.86-4.96",
-    "lab": "mundanity   -0.010"
+    "lab": "mundanity   -0.010 "
    },
    {
     "scale": "mundanity",
@@ -1018,7 +1023,7 @@
     "did": -0.010301033395444028,
     "p": 0.535,
     "span_txt": "4.86-4.96",
-    "lab": "mundanity   -0.010"
+    "lab": "mundanity   -0.010 "
    },
    {
     "scale": "mundanity",
@@ -1029,7 +1034,7 @@
     "did": -0.010301033395444028,
     "p": 0.535,
     "span_txt": "4.86-4.96",
-    "lab": "mundanity   -0.010"
+    "lab": "mundanity   -0.010 "
    },
    {
     "scale": "procedural",
@@ -1040,7 +1045,7 @@
     "did": 0.07192556844622121,
     "p": 0.067,
     "span_txt": "4.48-4.74",
-    "lab": "procedural   +0.072"
+    "lab": "procedural   +0.072 ~"
    },
    {
     "scale": "procedural",
@@ -1051,7 +1056,7 @@
     "did": 0.07192556844622121,
     "p": 0.067,
     "span_txt": "4.48-4.74",
-    "lab": "procedural   +0.072"
+    "lab": "procedural   +0.072 ~"
    },
    {
     "scale": "procedural",
@@ -1062,7 +1067,7 @@
     "did": 0.07192556844622121,
     "p": 0.067,
     "span_txt": "4.48-4.74",
-    "lab": "procedural   +0.072"
+    "lab": "procedural   +0.072 ~"
    },
    {
     "scale": "procedural",
@@ -1073,7 +1078,7 @@
     "did": 0.07192556844622121,
     "p": 0.067,
     "span_txt": "4.48-4.74",
-    "lab": "procedural   +0.072"
+    "lab": "procedural   +0.072 ~"
    },
    {
     "scale": "specificity",
@@ -1084,7 +1089,7 @@
     "did": 0.03144089109613401,
     "p": 0.41,
     "span_txt": "2.79-3.01",
-    "lab": "specificity   +0.031"
+    "lab": "specificity   +0.031 "
    },
    {
     "scale": "specificity",
@@ -1095,7 +1100,7 @@
     "did": 0.03144089109613401,
     "p": 0.41,
     "span_txt": "2.79-3.01",
-    "lab": "specificity   +0.031"
+    "lab": "specificity   +0.031 "
    },
    {
     "scale": "specificity",
@@ -1106,7 +1111,7 @@
     "did": 0.03144089109613401,
     "p": 0.41,
     "span_txt": "2.79-3.01",
-    "lab": "specificity   +0.031"
+    "lab": "specificity   +0.031 "
    },
    {
     "scale": "specificity",
@@ -1117,7 +1122,7 @@
     "did": 0.03144089109613401,
     "p": 0.41,
     "span_txt": "2.79-3.01",
-    "lab": "specificity   +0.031"
+    "lab": "specificity   +0.031 "
    },
    {
     "scale": "superego",
@@ -1128,7 +1133,7 @@
     "did": -0.0020083903513637975,
     "p": 0.918,
     "span_txt": "2.36-2.91",
-    "lab": "superego   -0.002"
+    "lab": "superego   -0.002 "
    },
    {
     "scale": "superego",
@@ -1139,7 +1144,7 @@
     "did": -0.0020083903513637975,
     "p": 0.918,
     "span_txt": "2.36-2.91",
-    "lab": "superego   -0.002"
+    "lab": "superego   -0.002 "
    },
    {
     "scale": "superego",
@@ -1150,7 +1155,7 @@
     "did": -0.0020083903513637975,
     "p": 0.918,
     "span_txt": "2.36-2.91",
-    "lab": "superego   -0.002"
+    "lab": "superego   -0.002 "
    },
    {
     "scale": "superego",
@@ -1161,7 +1166,7 @@
     "did": -0.0020083903513637975,
     "p": 0.918,
     "span_txt": "2.36-2.91",
-    "lab": "superego   -0.002"
+    "lab": "superego   -0.002 "
    },
    {
     "scale": "target",
@@ -1172,7 +1177,7 @@
     "did": 0.011122244596162421,
     "p": 0.873,
     "span_txt": "3.21-3.71",
-    "lab": "target   +0.011"
+    "lab": "target   +0.011 "
    },
    {
     "scale": "target",
@@ -1183,7 +1188,7 @@
     "did": 0.011122244596162421,
     "p": 0.873,
     "span_txt": "3.21-3.71",
-    "lab": "target   +0.011"
+    "lab": "target   +0.011 "
    },
    {
     "scale": "target",
@@ -1194,7 +1199,7 @@
     "did": 0.011122244596162421,
     "p": 0.873,
     "span_txt": "3.21-3.71",
-    "lab": "target   +0.011"
+    "lab": "target   +0.011 "
    },
    {
     "scale": "target",
@@ -1205,7 +1210,7 @@
     "did": 0.011122244596162421,
     "p": 0.873,
     "span_txt": "3.21-3.71",
-    "lab": "target   +0.011"
+    "lab": "target   +0.011 "
    },
    {
     "scale": "termination",
@@ -1216,7 +1221,7 @@
     "did": -0.06835939573699944,
     "p": 0.191,
     "span_txt": "2.05-2.34",
-    "lab": "termination   -0.068"
+    "lab": "termination   -0.068 "
    },
    {
     "scale": "termination",
@@ -1227,7 +1232,7 @@
     "did": -0.06835939573699944,
     "p": 0.191,
     "span_txt": "2.05-2.34",
-    "lab": "termination   -0.068"
+    "lab": "termination   -0.068 "
    },
    {
     "scale": "termination",
@@ -1238,7 +1243,7 @@
     "did": -0.06835939573699944,
     "p": 0.191,
     "span_txt": "2.05-2.34",
-    "lab": "termination   -0.068"
+    "lab": "termination   -0.068 "
    },
    {
     "scale": "termination",
@@ -1249,7 +1254,7 @@
     "did": -0.06835939573699944,
     "p": 0.191,
     "span_txt": "2.05-2.34",
-    "lab": "termination   -0.068"
+    "lab": "termination   -0.068 "
    },
    {
     "scale": "vocalisation",
@@ -1260,7 +1265,7 @@
     "did": 0.08828065969192805,
     "p": 0.185,
     "span_txt": "2.26-2.69",
-    "lab": "vocalisation   +0.088"
+    "lab": "vocalisation   +0.088 "
    },
    {
     "scale": "vocalisation",
@@ -1271,7 +1276,7 @@
     "did": 0.08828065969192805,
     "p": 0.185,
     "span_txt": "2.26-2.69",
-    "lab": "vocalisation   +0.088"
+    "lab": "vocalisation   +0.088 "
    },
    {
     "scale": "vocalisation",
@@ -1282,7 +1287,7 @@
     "did": 0.08828065969192805,
     "p": 0.185,
     "span_txt": "2.26-2.69",
-    "lab": "vocalisation   +0.088"
+    "lab": "vocalisation   +0.088 "
    },
    {
     "scale": "vocalisation",
@@ -1293,7 +1298,7 @@
     "did": 0.08828065969192805,
     "p": 0.185,
     "span_txt": "2.26-2.69",
-    "lab": "vocalisation   +0.088"
+    "lab": "vocalisation   +0.088 "
    }
   ]
  }

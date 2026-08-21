@@ -297,7 +297,33 @@ def fig_slopes():
         mid = (min(four) + max(four)) / 2
         span = max(four) - min(four)
         assert span <= 1.0, "%s spans %.3f, past the +-0.5 window" % (s, span)
-        meta[s] = dict(mid=mid, did=r["paired_diff"], p=r["paired_p"],
+        #: THREE STATES, NOT A THRESHOLD. The first version starred p<0.05 and
+        #: put `mediation` on the wrong side of the README, which books it at
+        #: 0.025 where this producer's own draw gives 0.050. Neither is wrong:
+        #: it is a bootstrap and the value resamples across exactly that line.
+        #:
+        #: A binary mark on a quantity that straddles its own cut is a coin
+        #: flip, and the numbers say so -- `mediation`'s interval EXCLUDES zero
+        #: by 0.0003 and `procedural`'s INCLUDES it by 0.005. They are equally
+        #: unstable and a threshold puts them on opposite sides. So: clear,
+        #: boundary, or nothing, and the boundary is a category rather than a
+        #: side of a line.
+        #: MEASURED AGAINST THE INTERVAL'S OWN WIDTH, not against an absolute
+        #: distance. The first attempt used `near <= 0.01` and marked `harm`,
+        #: `aggression` and `collective` as boundary cases -- their intervals are
+        #: a hair wide around zero, so every endpoint is near it. Those are
+        #: decisive nulls, the opposite of a boundary.
+        #:
+        #: `near / width` is the quantity: how close the endpoint sits to zero
+        #: RELATIVE to how uncertain the estimate is. The cut at 0.05 falls in a
+        #: real gap rather than being picked -- mediation 0.0015, procedural
+        #: 0.0317, then nothing until vocalisation at 0.1523, and every decisive
+        #: null is above 0.30.
+        clo, chi = r["paired_ci_lo"], r["paired_ci_hi"]
+        near, width = min(abs(clo), abs(chi)), chi - clo
+        frac = near / width if width else 1.0
+        mark = "~" if frac < 0.05 else ("*" if (clo > 0) == (chi > 0) else "")
+        meta[s] = dict(mid=mid, did=r["paired_diff"], p=r["paired_p"], mark=mark,
                        lo=min(four), hi=max(four))
         for who, b, a in (("individual", r["base_indiv"], r["aligned_indiv"]),
                           ("institution", r["base_inst"], r["aligned_inst"])):
@@ -315,10 +341,9 @@ def fig_slopes():
     #: Ordered by the size of the asymmetry, so the non-parallel panels are read
     #: first -- which is the thing the figure exists to show.
     order = sorted(R, key=lambda s: -abs(R[s]["paired_diff"]))
-    x["lab"] = x.scale.map(lambda s: "%s   %+.3f%s" % (
-        s, meta[s]["did"], " *" if meta[s]["p"] < 0.05 else ""))
-    labs = [("%s   %+.3f%s" % (s, meta[s]["did"], " *" if meta[s]["p"] < 0.05 else ""))
-            for s in order]
+    _lab = lambda s: "%s   %+.3f %s" % (s, meta[s]["did"], meta[s]["mark"])
+    x["lab"] = x.scale.map(_lab)
+    labs = [_lab(s) for s in order]
 
     base = alt.Chart(x)
     line = base.mark_line(strokeWidth=2).encode(
@@ -354,8 +379,10 @@ def fig_slopes():
                 "2,600 cells. Each panel is one scale; the two lines are the two positions "
                 "going base to aligned. PARALLEL LINES ARE A NULL -- the asymmetry is the "
                 "fanning, and the number beside each scale name is individual minus "
-                "institution, paired inside the 24 scenarios holding both, with * at "
-                "bootstrap p<0.05. Panels are ordered by that number."),
+                "institution, paired inside the 24 scenarios holding both. Panels are "
+                "ordered by that number. * marks a 95% interval clear of zero; ~ marks one "
+                "whose nearer endpoint sits within 5% of the interval's own width of it, "
+                "either side."),
             fontSize=13, subtitleFontSize=10, anchor="start", color="#111111",
             subtitleColor="#555555", offset=8)
     ).configure_view(stroke=None).configure_axis(domainColor="#cccccc").to_dict()
@@ -370,7 +397,12 @@ def fig_slopes():
         "harm reads 1.00-1.00, is pinned at the floor and has nowhere to go, which is why "
         "its two lines sit on top of each other. "
         "Ratings cover 0.242 of base mass and 0.296 of aligned mass. agency, specificity, "
-        "assertiveness and arousal are pairwise 0.62-0.83 and are one axis drawn four times.")
+        "assertiveness and arousal are pairwise 0.62-0.83 and are one axis drawn four times. "
+        "WHY ~ EXISTS. mediation's interval excludes zero by 0.0003 and procedural's includes "
+        "it by 0.005: equally unstable, and any threshold puts them on opposite sides. This "
+        "study's README books mediation at p=0.025 and this producer's own bootstrap draw "
+        "gives 0.050. Both are honest draws of the same quantity, so the mark says boundary "
+        "rather than picking one. abstraction is the only difference here that is not fragile.")
 
     _save_spec(spec, "slopes_by_position")
 
