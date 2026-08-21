@@ -400,6 +400,138 @@ class Checkpoint:
             out[surface] = out.get(surface, 0.0) + float(mass)
         return out, res
 
+    def gen_dir(self):
+        """`<GEN_OUT>/<model>/` -- the generations twin of `dir`."""
+        from .generate import GEN_OUT
+        safe = self.model_id.replace("/", "__").replace("@", "__at__")
+        return os.path.join(GEN_OUT, safe)
+
+    def gen_stash(self, producer=None):
+        """This checkpoint's generation stash, for ONE producer.
+
+        Same engine and layout as `stash()`: jsonl, flat, ABSOLUTE root_dir --
+        a bare name resolves to `~/.cache/hashstash/`, which is the trap
+        `stash()`'s docstring records walking into.
+        """
+        from hashstash import HashStash
+        from .runners import PRODUCER
+        return HashStash(root_dir=os.path.join(self.gen_dir(), producer or PRODUCER),
+                         engine="jsonl", flat=True)
+
+    def gen_stashes(self):
+        """Every producer's generation stash. READS must see all of them.
+
+        Writes go to ours; reads span the lot, for the reason `stashes()` gives:
+        a cache written on the other machine is not a cache miss, and treating
+        it as one regenerates work that already exists and costs money or GPU.
+        """
+        d = self.gen_dir()
+        if not os.path.isdir(d):
+            return []
+        return [self.gen_stash(p) for p in sorted(os.listdir(d))
+                if os.path.isdir(os.path.join(d, p))]
+
+    def generate(self, prompt, n=1, frame="raw", system=None, seed=None,
+                 decoder=None, loaded=None, cache=True, **kw):
+        """Sample `n` continuations. -> [generate.Passage], length `n`.
+
+        The third verb on the one loader, beside `run_twp` (measure and write)
+        and `probs` (measure and return). Machinery is in `generate.py`; this is
+        the handle, exactly as `run_twp` is the handle to `TWPRunner`.
+
+        ## THE CACHE FILLS THE SHORTFALL AND LOADS NOTHING IT DOES NOT NEED
+
+        `n=10` with 9 already stored returns the 9 and generates ONE. `n=10`
+        with 10 stored **never touches a GPU** -- the load is lazy and happens
+        only if something is missing. That is the point of keying on
+        `sample_idx`: samples are addressable individually, so a shortfall is a
+        shortfall and not a rerun.
+
+        Reads span every producer's stash; writes go to ours. A passage
+        generated on the other machine is not a cache miss.
+
+        ## WHAT MAKES TWO DRAWS THE SAME DRAW
+
+        See `generate.gen_key`. Model, prompt, frame, system hash, the RESOLVED
+        decoder, seed and sample_idx. Change the temperature and you are asking
+        a different question, so you get a different cell rather than a stale
+        hit.
+
+        `cache=False` bypasses both read and write, for a caller who wants a
+        fresh draw and does not want it stored.
+        """
+        from . import generate as G
+        dec = dict(G.DECODER)
+        dec.update(decoder or {})
+        keys = [G.gen_key(self.model_id, prompt, frame, system, dec, seed, i)
+                for i in range(n)]
+
+        out = [None] * n
+        if cache:
+            for st in self.gen_stashes():
+                for i, k in enumerate(keys):
+                    if out[i] is not None:
+                        continue
+                    try:
+                        rec = st.get(k)
+                    except Exception:
+                        rec = None
+                    if rec:
+                        out[i] = G.Passage(**rec)
+        missing = [i for i, v in enumerate(out) if v is None]
+        if not missing:
+            return out
+
+        own = loaded is None
+        ld = loaded if loaded is not None else self.load(**kw)
+        try:
+            wst = self.gen_stash() if cache else None
+            for i in missing:
+                #: seeded PER SAMPLE INDEX, not per call, so sample 7 is sample 7
+                #: whether it was made now or in a previous run -- otherwise a
+                #: shortfall fill would draw a different distribution from the
+                #: cached siblings it joins.
+                p = G.generate(ld, prompt, n=1, frame=frame, system=system,
+                               seed=None if seed is None else seed + i,
+                               decoder=dec)[0]
+                out[i] = p
+                if wst is not None:
+                    wst[keys[i]] = p._asdict()
+        finally:
+            if own:
+                from . import twp as T
+                ld = None
+                T.free()
+        return out
+
+    def next_token(self, prompt, k=10, frame="raw", system=None, loaded=None,
+                   **kw):
+        """Top-`k` next-TOKEN distribution. -> ([(token, prob)], vocab_size)
+
+        Tokens, not words -- see `next_word`, which is the instrument for any
+        question about vocabulary. This one shows the tokenizer's units, so a
+        word split across two tokens appears as its first piece.
+        """
+        from . import generate as G
+        own = loaded is None
+        ld = loaded if loaded is not None else self.load(**kw)
+        try:
+            return G.next_token(ld, prompt, k=k, frame=frame, system=system)
+        finally:
+            if own:
+                from . import twp as T
+                ld = None
+                T.free()
+
+    def next_word(self, prompt, loaded=None, **kw):
+        """The twp WORD distribution at `prompt`. -> ({surface: prob}, residual)
+
+        A name for what `probs` already does, because `probs` does not say which
+        grain it is on and this file now has a `next_token` beside it. Same
+        method, same guards; `probs` is kept so existing callers do not break.
+        """
+        return self.probs(prompt, loaded=loaded, **kw)
+
     def status(self):
         """Everything cheap, in one dict. For a human deciding what to run."""
         return {"model": self.model_id, "revision": self.revision,
