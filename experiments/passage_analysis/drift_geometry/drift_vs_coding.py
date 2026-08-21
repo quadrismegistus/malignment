@@ -62,15 +62,34 @@ METRICS = ["mean_drift", "total_drift", "directedness", "ordering", "n_sents"]
 
 
 def load():
-    rows = []
+    """Rows carrying EVERY metric this file uses.
+
+    **IT GATED ON `mean_drift` AND THEN READ FIVE COLUMNS.** That was safe only
+    while the producer's floor was per-ROW; once `drift_metrics.py` began
+    emitting `mean_drift` at n_sents==2 while leaving `total_drift` and
+    `directedness` blank -- which it must, they are degenerate there -- 252 rows
+    passed the gate and died on `float("")`.
+
+    A consumer must state its OWN requirement rather than inherit a floor from
+    the producer, which is the same rule the producer change was making: gate on
+    what you read, not on a proxy for it.
+    """
+    rows, partial = [], 0
     for r in csv.DictReader(open(SRC)):
-        if not r["mean_drift"]:
+        if any(not r[m] for m in METRICS):
+            partial += not not r["mean_drift"]
             continue
         d = {k: r[k] for k in ("pid", "model", "arm", "pair", "prompt",
                                "narrative_A", "drift_A", "drift_B")}
         for m in METRICS:
             d[m] = float(r[m])
         rows.append(d)
+    if partial:
+        #: SAY IT. These rows HAVE mean_drift and are excluded anyway because
+        #: this file needs the degenerate columns too -- an exclusion nobody
+        #: would see from the row count alone.
+        print("  %d row(s) have mean_drift but not every metric this file uses"
+              " -- excluded here, still present in the CSV" % partial)
     return rows
 
 
