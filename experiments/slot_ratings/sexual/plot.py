@@ -422,15 +422,22 @@ def fig_rating_space_data():
         #: replicate jitter it sits in.
         notes=["The nine axes are LLM ratings on a 1-7 scale; no probability enters them. "
                "`net` is different: it counts lineages under CANONICAL's thresholds "
-               "(min_prob 0.003, delta 0.003), so it inherits the store's run-to-run "
-               "jitter. Word-level replicate disagreement is 5.8e-08 at the median but "
-               "reaches 1.46e-02, and 67% of these cells have |net| <= 2 -- so read `net` "
-               "as a tally under a threshold, and do not rest a claim on one cell's value.",
-               "The population inherits it too: 608 of these 1,730 cells were admitted on a "
-               "single lineage's classification, and 154 of those sit within +-0.0015 of the "
-               "0.003 floor. Dropping all 154 moves no axis note above by more than 0.9 "
-               "percentage points and changes no modal value, so what the panel SHOWS is not "
-               "resting on them."],
+               "(min_prob 0.003, delta 0.003), so it inherits the store's run-to-run jitter, "
+               "and 67% of these cells have |net| <= 2. Read it as a tally under a threshold "
+               "and do not rest a claim on one cell.",
+               "How exposed, measured rather than asserted: 608 of these 1,730 cells were "
+               "admitted on a single lineage's classification and 154 of those sit within "
+               "+-0.0015 of the 0.003 floor. Two runs of the same code land on opposite "
+               "sides of that floor for 0.191% of near-floor keys, so about 0.3 of the 154 "
+               "would actually flip. Dropping all 154 moves no axis note by more than 0.9 "
+               "percentage points and changes no modal value: what the panel SHOWS is not "
+               "resting on them.",
+               "One asymmetry that pushes the other way. 0.191% is the rate for the "
+               "min_prob FLOOR; the riser test compares a DIFFERENCE of two probabilities "
+               "against delta, so it carries both cells' jitter and its rate is higher and "
+               "unmeasured. 36% of all classifications here are risers, but 57% of the 608 "
+               "fragile cells are -- the fragile subset is enriched 1.6x on the side whose "
+               "rate is the one nobody has."],
         meta_order=["prompt", "word", "reading", "pair", "role", "referent", "zone", "net"],
         #: TABLE COLUMNS, and `reading` is deliberately not one: it is a sentence,
         #: so it rides the word cell's title attribute instead of widening every
