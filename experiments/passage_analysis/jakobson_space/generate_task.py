@@ -125,6 +125,53 @@ SYSTEM_PROMPT = ("Continue this text for 150-200 words. "
                  "Do not repeat the text you are given.")
 
 
+def lower_first(text):
+    """Force a mid-sentence opening. -> (text, changed)
+
+    **EVERY STEM IS MID-SENTENCE** -- they end `wanted to`, `began to`,
+    `chose to`, `started` -- so a continuation opening with a capital is the
+    model starting a new sentence rather than continuing the one it was given.
+    The corpus passages continue; these must too, or the first token is a
+    different linguistic event and it sits inside the M=200 window.
+
+    **THREE EXEMPTIONS, because recasing them would be an error not a fix:**
+
+        I / I'm / I'll ...   the pronoun is capital in mid-sentence English
+        ALL-CAPS            an acronym, and lowercasing it changes the word
+        proper nouns        heuristically: the same token appears capitalised
+                            again later in the passage, which a sentence-initial
+                            ordinary word generally does not
+
+    The third is a HEURISTIC and will occasionally be wrong in both directions --
+    a proper noun used exactly once at the start is lowercased, and an ordinary
+    word that happens to recur capitalised is left alone. `changed` is returned
+    so a run can report how often it fired rather than leaving it silent.
+    """
+    import re
+    t = text.lstrip()
+    if not t or not t[0].isalpha() or not t[0].isupper():
+        return text, False
+    m = re.match(r"[A-Za-z']+", t)
+    w = m.group(0)
+    if w == "I" or w.startswith("I'"):
+        return text, False
+    if w.isupper() and len(w) > 1:
+        return text, False
+    #: proper-noun heuristic: does this exact capitalised token recur later?
+    #: ANY later occurrence protects it, with no position condition. A first
+    #: version required the recurrence to be non-sentence-initial, reasoning that
+    #: a sentence-initial repeat is uninformative -- which is true, and it also
+    #: made `Marie stepped forward. Marie always did.` recase to `marie`, because
+    #: the only recurrence was sentence-initial. The docstring said "appears
+    #: capitalised again later" with no such condition, so the code was enforcing
+    #: a rule the prose did not state. Erring toward NOT recasing is the cheap
+    #: direction: a missed lowercase leaves one capital in one passage, a wrong
+    #: lowercase corrupts a name.
+    if re.search(r"\b%s\b" % re.escape(w), t[m.end():]):
+        return text, False
+    return t[0].lower() + t[1:], True
+
+
 def strip_stem(text, stem):
     """Remove a leading restatement of the stem. -> (text, chars_removed)
 
