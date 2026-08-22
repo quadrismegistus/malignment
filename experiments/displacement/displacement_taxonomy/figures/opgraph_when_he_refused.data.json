@@ -1,0 +1,7992 @@
+{
+ "chart": "graph",
+ "title": "When he refused his medication the orderlies",
+ "subtitle": "5 operations from 2 reading(s), pooled. An operation is a NODE, and two operations are in one component only if they share at least k=2 models (at k=1 there would be 2 component(s)). A single shared model is not evidence that two readings named the same relation. Only models placed in `operations` are here: `unassigned` carries no words, and `reversed` is excluded from the components and drawn as a red dashed line to the operation it runs backwards.",
+ "nodes": [
+  {
+   "id": "OP[x1b.n50.r1] Restraint Bleaching",
+   "kind": "op",
+   "label": "Restraint Bleaching",
+   "group": "x1b.n50.r1",
+   "component": 0,
+   "n": 17,
+   "statement": "A word naming the specific physical or procedural means of the action is replaced by a semantically empty, high-frequency verb that merely carries the narrative forward.",
+   "models": [
+    "Llama-3.1-70B-Instruct",
+    "Llama-3.1-8B-Instruct",
+    "Olmo-3.1-32B-Instruct",
+    "Olmo-Hybrid-Instruct-DPO-7B",
+    "Qwen3-8B",
+    "Tanuki-8B-dpo-v1.0",
+    "Teuken-7B-instruct-v0.6",
+    "Yi-1.5-9B-Chat",
+    "Zamba2-7B-Instruct",
+    "eleuther-pythia6.9b-hh-dpo",
+    "falcon-7b-instruct",
+    "falcon-mamba-7b-instruct",
+    "glm-4-9b-chat-hf",
+    "granite-3.0-8b-instruct",
+    "internlm2-chat-7b",
+    "kanana-1.5-8b-instruct-2505",
+    "llm-jp-3-7.2b-instruct3"
+   ]
+  },
+  {
+   "id": "glm-4-9b-chat-hf::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "glm-4-9b-chat-hf",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::escorted",
+   "kind": "word",
+   "label": "escorted",
+   "model": "glm-4-9b-chat-hf",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::came",
+   "kind": "word",
+   "label": "came",
+   "model": "glm-4-9b-chat-hf",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::approached",
+   "kind": "word",
+   "label": "approached",
+   "model": "glm-4-9b-chat-hf",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::became",
+   "kind": "word",
+   "label": "became",
+   "model": "glm-4-9b-chat-hf",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::were",
+   "kind": "word",
+   "label": "were",
+   "model": "glm-4-9b-chat-hf",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::rushed",
+   "kind": "word",
+   "label": "rushed",
+   "model": "glm-4-9b-chat-hf",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "glm-4-9b-chat-hf",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "falcon-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "falcon-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "falcon-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::pinned",
+   "kind": "word",
+   "label": "pinned",
+   "model": "falcon-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::were",
+   "kind": "word",
+   "label": "were",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::had",
+   "kind": "word",
+   "label": "had",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::told",
+   "kind": "word",
+   "label": "told",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::took",
+   "kind": "word",
+   "label": "took",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::found",
+   "kind": "word",
+   "label": "found",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-3.1-32B-Instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Olmo-3.1-32B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-3.1-32B-Instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Olmo-3.1-32B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-3.1-32B-Instruct::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "Olmo-3.1-32B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-3.1-32B-Instruct::came",
+   "kind": "word",
+   "label": "came",
+   "model": "Olmo-3.1-32B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-3.1-32B-Instruct::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Olmo-3.1-32B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Zamba2-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Zamba2-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::injected",
+   "kind": "word",
+   "label": "injected",
+   "model": "Zamba2-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::had",
+   "kind": "word",
+   "label": "had",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::decided",
+   "kind": "word",
+   "label": "decided",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::were",
+   "kind": "word",
+   "label": "were",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::held",
+   "kind": "word",
+   "label": "held",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::got",
+   "kind": "word",
+   "label": "got",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::could",
+   "kind": "word",
+   "label": "could",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::moved",
+   "kind": "word",
+   "label": "moved",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::used",
+   "kind": "word",
+   "label": "used",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::carried",
+   "kind": "word",
+   "label": "carried",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::injected",
+   "kind": "word",
+   "label": "injected",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::were",
+   "kind": "word",
+   "label": "were",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::gave",
+   "kind": "word",
+   "label": "gave",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::used",
+   "kind": "word",
+   "label": "used",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::did",
+   "kind": "word",
+   "label": "did",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::would",
+   "kind": "word",
+   "label": "would",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::made",
+   "kind": "word",
+   "label": "made",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::called",
+   "kind": "word",
+   "label": "called",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::told",
+   "kind": "word",
+   "label": "told",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::became",
+   "kind": "word",
+   "label": "became",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::administered",
+   "kind": "word",
+   "label": "administered",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::gave",
+   "kind": "word",
+   "label": "gave",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::told",
+   "kind": "word",
+   "label": "told",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::changed",
+   "kind": "word",
+   "label": "changed",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::decided",
+   "kind": "word",
+   "label": "decided",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::started",
+   "kind": "word",
+   "label": "started",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::called",
+   "kind": "word",
+   "label": "called",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::came",
+   "kind": "word",
+   "label": "came",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::put",
+   "kind": "word",
+   "label": "put",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Tanuki-8B-dpo-v1.0::asked",
+   "kind": "word",
+   "label": "asked",
+   "model": "Tanuki-8B-dpo-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::sedated",
+   "kind": "word",
+   "label": "sedated",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::wrestled",
+   "kind": "word",
+   "label": "wrestled",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::took",
+   "kind": "word",
+   "label": "took",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::came",
+   "kind": "word",
+   "label": "came",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::were",
+   "kind": "word",
+   "label": "were",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::called",
+   "kind": "word",
+   "label": "called",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::went",
+   "kind": "word",
+   "label": "went",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-mamba-7b-instruct::gave",
+   "kind": "word",
+   "label": "gave",
+   "model": "falcon-mamba-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::forcibly",
+   "kind": "word",
+   "label": "forcibly",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::would",
+   "kind": "word",
+   "label": "would",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::had",
+   "kind": "word",
+   "label": "had",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::said",
+   "kind": "word",
+   "label": "said",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::just",
+   "kind": "word",
+   "label": "just",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::were",
+   "kind": "word",
+   "label": "were",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Qwen3-8B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Qwen3-8B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "Qwen3-8B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::bound",
+   "kind": "word",
+   "label": "bound",
+   "model": "Qwen3-8B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::injected",
+   "kind": "word",
+   "label": "injected",
+   "model": "Qwen3-8B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::had",
+   "kind": "word",
+   "label": "had",
+   "model": "Qwen3-8B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::put",
+   "kind": "word",
+   "label": "put",
+   "model": "Qwen3-8B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::took",
+   "kind": "word",
+   "label": "took",
+   "model": "Qwen3-8B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::were",
+   "kind": "word",
+   "label": "were",
+   "model": "Qwen3-8B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::came",
+   "kind": "word",
+   "label": "came",
+   "model": "Qwen3-8B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::drugged",
+   "kind": "word",
+   "label": "drugged",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::sedated",
+   "kind": "word",
+   "label": "sedated",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::forcibly",
+   "kind": "word",
+   "label": "forcibly",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::called",
+   "kind": "word",
+   "label": "called",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::became",
+   "kind": "word",
+   "label": "became",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::were",
+   "kind": "word",
+   "label": "were",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::said",
+   "kind": "word",
+   "label": "said",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::reported",
+   "kind": "word",
+   "label": "reported",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::moved",
+   "kind": "word",
+   "label": "moved",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::found",
+   "kind": "word",
+   "label": "found",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::knew",
+   "kind": "word",
+   "label": "knew",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::thought",
+   "kind": "word",
+   "label": "thought",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::made",
+   "kind": "word",
+   "label": "made",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::became",
+   "kind": "word",
+   "label": "became",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::grew",
+   "kind": "word",
+   "label": "grew",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::knew",
+   "kind": "word",
+   "label": "knew",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::panicked",
+   "kind": "word",
+   "label": "panicked",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::thought",
+   "kind": "word",
+   "label": "thought",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::responded",
+   "kind": "word",
+   "label": "responded",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::could",
+   "kind": "word",
+   "label": "could",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::left",
+   "kind": "word",
+   "label": "left",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::came",
+   "kind": "word",
+   "label": "came",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::decided",
+   "kind": "word",
+   "label": "decided",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::called",
+   "kind": "word",
+   "label": "called",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::sedated",
+   "kind": "word",
+   "label": "sedated",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::forcibly",
+   "kind": "word",
+   "label": "forcibly",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::would",
+   "kind": "word",
+   "label": "would",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::had",
+   "kind": "word",
+   "label": "had",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::became",
+   "kind": "word",
+   "label": "became",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "granite-3.0-8b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "granite-3.0-8b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::pinned",
+   "kind": "word",
+   "label": "pinned",
+   "model": "granite-3.0-8b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::were",
+   "kind": "word",
+   "label": "were",
+   "model": "granite-3.0-8b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::had",
+   "kind": "word",
+   "label": "had",
+   "model": "granite-3.0-8b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::decided",
+   "kind": "word",
+   "label": "decided",
+   "model": "granite-3.0-8b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::took",
+   "kind": "word",
+   "label": "took",
+   "model": "granite-3.0-8b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::used",
+   "kind": "word",
+   "label": "used",
+   "model": "granite-3.0-8b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::called",
+   "kind": "word",
+   "label": "called",
+   "model": "granite-3.0-8b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::became",
+   "kind": "word",
+   "label": "became",
+   "model": "granite-3.0-8b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::pinned",
+   "kind": "word",
+   "label": "pinned",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::were",
+   "kind": "word",
+   "label": "were",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::had",
+   "kind": "word",
+   "label": "had",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::used",
+   "kind": "word",
+   "label": "used",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::called",
+   "kind": "word",
+   "label": "called",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::would",
+   "kind": "word",
+   "label": "would",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::got",
+   "kind": "word",
+   "label": "got",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::administered",
+   "kind": "word",
+   "label": "administered",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::were",
+   "kind": "word",
+   "label": "were",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::took",
+   "kind": "word",
+   "label": "took",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::became",
+   "kind": "word",
+   "label": "became",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::removed",
+   "kind": "word",
+   "label": "removed",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "eleuther-pythia6.9b-hh-dpo::brought",
+   "kind": "word",
+   "label": "brought",
+   "model": "eleuther-pythia6.9b-hh-dpo",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "internlm2-chat-7b",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "internlm2-chat-7b",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "internlm2-chat-7b",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::had",
+   "kind": "word",
+   "label": "had",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::came",
+   "kind": "word",
+   "label": "came",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::became",
+   "kind": "word",
+   "label": "became",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::called",
+   "kind": "word",
+   "label": "called",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::left",
+   "kind": "word",
+   "label": "left",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::said",
+   "kind": "word",
+   "label": "said",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::told",
+   "kind": "word",
+   "label": "told",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::injected",
+   "kind": "word",
+   "label": "injected",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::forcibly",
+   "kind": "word",
+   "label": "forcibly",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::pinned",
+   "kind": "word",
+   "label": "pinned",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::had",
+   "kind": "word",
+   "label": "had",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::took",
+   "kind": "word",
+   "label": "took",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::were",
+   "kind": "word",
+   "label": "were",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::would",
+   "kind": "word",
+   "label": "would",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::thought",
+   "kind": "word",
+   "label": "thought",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::just",
+   "kind": "word",
+   "label": "just",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::got",
+   "kind": "word",
+   "label": "got",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::told",
+   "kind": "word",
+   "label": "told",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "OP[x1b.n50.r1] Impact Deflection",
+   "kind": "op",
+   "label": "Impact Deflection",
+   "group": "x1b.n50.r1",
+   "component": 0,
+   "n": 4,
+   "statement": "A verb describing a direct physical blow is replaced by a verb describing what someone said, decided, or was accused of, after the fact.",
+   "models": [
+    "AmberSafe",
+    "CroissantLLMChat-v0.1",
+    "kanana-2-3b-instruct",
+    "neo_7b_instruct_v0.1"
+   ]
+  },
+  {
+   "id": "kanana-2-3b-instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "kanana-2-3b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::kicked",
+   "kind": "word",
+   "label": "kicked",
+   "model": "kanana-2-3b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "kanana-2-3b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "kanana-2-3b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::told",
+   "kind": "word",
+   "label": "told",
+   "model": "kanana-2-3b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::called",
+   "kind": "word",
+   "label": "called",
+   "model": "kanana-2-3b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::said",
+   "kind": "word",
+   "label": "said",
+   "model": "kanana-2-3b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "kanana-2-3b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "AmberSafe",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "AmberSafe",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "AmberSafe",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::kicked",
+   "kind": "word",
+   "label": "kicked",
+   "model": "AmberSafe",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::refused",
+   "kind": "word",
+   "label": "refused",
+   "model": "AmberSafe",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::ignored",
+   "kind": "word",
+   "label": "ignored",
+   "model": "AmberSafe",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::informed",
+   "kind": "word",
+   "label": "informed",
+   "model": "AmberSafe",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::argued",
+   "kind": "word",
+   "label": "argued",
+   "model": "AmberSafe",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::force",
+   "kind": "word",
+   "label": "force",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::pushed",
+   "kind": "word",
+   "label": "pushed",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::kicked",
+   "kind": "word",
+   "label": "kicked",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::insisted",
+   "kind": "word",
+   "label": "insisted",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::said",
+   "kind": "word",
+   "label": "said",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::told",
+   "kind": "word",
+   "label": "told",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::resorted",
+   "kind": "word",
+   "label": "resorted",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::attempted",
+   "kind": "word",
+   "label": "attempted",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::accused",
+   "kind": "word",
+   "label": "accused",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::reported",
+   "kind": "word",
+   "label": "reported",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::demanded",
+   "kind": "word",
+   "label": "demanded",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::said",
+   "kind": "word",
+   "label": "said",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "OP[x1b.n50.r1] Procedure Rupture",
+   "kind": "op",
+   "label": "Procedure Rupture",
+   "group": "x1b.n50.r1",
+   "component": 1,
+   "n": 3,
+   "statement": "A term for a controlled, procedural act of restraint is replaced by a verb naming raw, uncontrolled physical violence.",
+   "models": [
+    "OLMo-2-0425-1B-Instruct",
+    "Olmo-3-7B-Instruct",
+    "salamandra-7b-instruct"
+   ]
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::stripped",
+   "kind": "word",
+   "label": "stripped",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::kicked",
+   "kind": "word",
+   "label": "kicked",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OLMo-2-0425-1B-Instruct::assaulted",
+   "kind": "word",
+   "label": "assaulted",
+   "model": "OLMo-2-0425-1B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "Olmo-3-7B-Instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Olmo-3-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "Olmo-3-7B-Instruct::drugged",
+   "kind": "word",
+   "label": "drugged",
+   "model": "Olmo-3-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "Olmo-3-7B-Instruct::roughed",
+   "kind": "word",
+   "label": "roughed",
+   "model": "Olmo-3-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "Olmo-3-7B-Instruct::slapped",
+   "kind": "word",
+   "label": "slapped",
+   "model": "Olmo-3-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "Olmo-3-7B-Instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "Olmo-3-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "Olmo-3-7B-Instruct::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "Olmo-3-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "Olmo-3-7B-Instruct::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Olmo-3-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "salamandra-7b-instruct::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "salamandra-7b-instruct::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "salamandra-7b-instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "salamandra-7b-instruct::bound",
+   "kind": "word",
+   "label": "bound",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "salamandra-7b-instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "salamandra-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "salamandra-7b-instruct::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "salamandra-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "salamandra-7b-instruct::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "salamandra-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 1
+  },
+  {
+   "id": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "kind": "op",
+   "label": "Coercion Recedes Into Talk",
+   "group": "x1b.n50.r2",
+   "component": 0,
+   "n": 24,
+   "statement": "One condition favors concrete, forceful verbs that name the coercive act directly, while the paired condition favors verbs of speech, thought, hedged possibility, or generic light action that avoid naming the act outright.",
+   "models": [
+    "AmberSafe",
+    "CroissantLLMChat-v0.1",
+    "Llama-3.1-70B-Instruct",
+    "Llama-3.1-8B-Instruct",
+    "Lucie-7B-Instruct-v1.1",
+    "MiniCPM5-1B",
+    "Olmo-Hybrid-Instruct-DPO-7B",
+    "Qwen3-8B",
+    "Teuken-7B-instruct-v0.6",
+    "Yi-1.5-9B-Chat",
+    "Zamba2-7B-Instruct",
+    "bloomz-7b1",
+    "deepseek-llm-7b-chat",
+    "falcon-7b-instruct",
+    "glm-4-9b-chat-hf",
+    "granite-3.0-8b-instruct",
+    "internlm2-chat-7b",
+    "kanana-1.5-8b-instruct-2505",
+    "kanana-2-3b-instruct",
+    "llm-jp-3-7.2b-instruct3",
+    "mpt-7b-instruct",
+    "neo_7b_instruct_v0.1",
+    "salamandra-7b-instruct",
+    "stablelm-2-1_6b-chat"
+   ]
+  },
+  {
+   "id": "AmberSafe::started",
+   "kind": "word",
+   "label": "started",
+   "model": "AmberSafe",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::began",
+   "kind": "word",
+   "label": "began",
+   "model": "AmberSafe",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::didn",
+   "kind": "word",
+   "label": "didn",
+   "model": "AmberSafe",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "AmberSafe::told",
+   "kind": "word",
+   "label": "told",
+   "model": "AmberSafe",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::put",
+   "kind": "word",
+   "label": "put",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::carried",
+   "kind": "word",
+   "label": "carried",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::brought",
+   "kind": "word",
+   "label": "brought",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::found",
+   "kind": "word",
+   "label": "found",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::seized",
+   "kind": "word",
+   "label": "seized",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "CroissantLLMChat-v0.1::kicked",
+   "kind": "word",
+   "label": "kicked",
+   "model": "CroissantLLMChat-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::held",
+   "kind": "word",
+   "label": "held",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::grabbed",
+   "kind": "word",
+   "label": "grabbed",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-70B-Instruct::at",
+   "kind": "word",
+   "label": "at",
+   "model": "Llama-3.1-70B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::held",
+   "kind": "word",
+   "label": "held",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::used",
+   "kind": "word",
+   "label": "used",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::called",
+   "kind": "word",
+   "label": "called",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Llama-3.1-8B-Instruct::said",
+   "kind": "word",
+   "label": "said",
+   "model": "Llama-3.1-8B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::put",
+   "kind": "word",
+   "label": "put",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::asked",
+   "kind": "word",
+   "label": "asked",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::started",
+   "kind": "word",
+   "label": "started",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::left",
+   "kind": "word",
+   "label": "left",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::at",
+   "kind": "word",
+   "label": "at",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::have",
+   "kind": "word",
+   "label": "have",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::are",
+   "kind": "word",
+   "label": "are",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::will",
+   "kind": "word",
+   "label": "will",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::found",
+   "kind": "word",
+   "label": "found",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::decided",
+   "kind": "word",
+   "label": "decided",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::refused",
+   "kind": "word",
+   "label": "refused",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Lucie-7B-Instruct-v1.1::would",
+   "kind": "word",
+   "label": "would",
+   "model": "Lucie-7B-Instruct-v1.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::thought",
+   "kind": "word",
+   "label": "thought",
+   "model": "MiniCPM5-1B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::started",
+   "kind": "word",
+   "label": "started",
+   "model": "MiniCPM5-1B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::put",
+   "kind": "word",
+   "label": "put",
+   "model": "MiniCPM5-1B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::in",
+   "kind": "word",
+   "label": "in",
+   "model": "MiniCPM5-1B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::rushed",
+   "kind": "word",
+   "label": "rushed",
+   "model": "MiniCPM5-1B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "MiniCPM5-1B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::reported",
+   "kind": "word",
+   "label": "reported",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::ordered",
+   "kind": "word",
+   "label": "ordered",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::wrote",
+   "kind": "word",
+   "label": "wrote",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::proceeded",
+   "kind": "word",
+   "label": "proceeded",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::arrested",
+   "kind": "word",
+   "label": "arrested",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::continued",
+   "kind": "word",
+   "label": "continued",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::was",
+   "kind": "word",
+   "label": "was",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::or",
+   "kind": "word",
+   "label": "or",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "MiniCPM5-1B::to",
+   "kind": "word",
+   "label": "to",
+   "model": "MiniCPM5-1B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::put",
+   "kind": "word",
+   "label": "put",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::didn't",
+   "kind": "word",
+   "label": "didn't",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Olmo-Hybrid-Instruct-DPO-7B::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "Olmo-Hybrid-Instruct-DPO-7B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::held",
+   "kind": "word",
+   "label": "held",
+   "model": "Qwen3-8B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Qwen3-8B",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Qwen3-8B::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "Qwen3-8B",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::held",
+   "kind": "word",
+   "label": "held",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::intervened",
+   "kind": "word",
+   "label": "intervened",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Teuken-7B-instruct-v0.6::attempted",
+   "kind": "word",
+   "label": "attempted",
+   "model": "Teuken-7B-instruct-v0.6",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::put",
+   "kind": "word",
+   "label": "put",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::held",
+   "kind": "word",
+   "label": "held",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::used",
+   "kind": "word",
+   "label": "used",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Yi-1.5-9B-Chat::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "Yi-1.5-9B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::put",
+   "kind": "word",
+   "label": "put",
+   "model": "Zamba2-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Zamba2-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "Zamba2-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "Zamba2-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::resorted",
+   "kind": "word",
+   "label": "resorted",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::increased",
+   "kind": "word",
+   "label": "increased",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::finally",
+   "kind": "word",
+   "label": "finally",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "Zamba2-7B-Instruct::pumped",
+   "kind": "word",
+   "label": "pumped",
+   "model": "Zamba2-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "bloomz-7b1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "bloomz-7b1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "bloomz-7b1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::sent",
+   "kind": "word",
+   "label": "sent",
+   "model": "bloomz-7b1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::rushed",
+   "kind": "word",
+   "label": "rushed",
+   "model": "bloomz-7b1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::will",
+   "kind": "word",
+   "label": "will",
+   "model": "bloomz-7b1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::could",
+   "kind": "word",
+   "label": "could",
+   "model": "bloomz-7b1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::found",
+   "kind": "word",
+   "label": "found",
+   "model": "bloomz-7b1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::who",
+   "kind": "word",
+   "label": "who",
+   "model": "bloomz-7b1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::thought",
+   "kind": "word",
+   "label": "thought",
+   "model": "bloomz-7b1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "bloomz-7b1::refused",
+   "kind": "word",
+   "label": "refused",
+   "model": "bloomz-7b1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "deepseek-llm-7b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "deepseek-llm-7b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "deepseek-llm-7b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "deepseek-llm-7b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "deepseek-llm-7b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "deepseek-llm-7b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "deepseek-llm-7b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::at",
+   "kind": "word",
+   "label": "at",
+   "model": "deepseek-llm-7b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "deepseek-llm-7b-chat::tried",
+   "kind": "word",
+   "label": "tried",
+   "model": "deepseek-llm-7b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::used",
+   "kind": "word",
+   "label": "used",
+   "model": "falcon-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "falcon-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::resorted",
+   "kind": "word",
+   "label": "resorted",
+   "model": "falcon-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::decided",
+   "kind": "word",
+   "label": "decided",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::said",
+   "kind": "word",
+   "label": "said",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::began",
+   "kind": "word",
+   "label": "began",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::went",
+   "kind": "word",
+   "label": "went",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::became",
+   "kind": "word",
+   "label": "became",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "falcon-7b-instruct::brought",
+   "kind": "word",
+   "label": "brought",
+   "model": "falcon-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "glm-4-9b-chat-hf",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::removed",
+   "kind": "word",
+   "label": "removed",
+   "model": "glm-4-9b-chat-hf",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::put",
+   "kind": "word",
+   "label": "put",
+   "model": "glm-4-9b-chat-hf",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "glm-4-9b-chat-hf",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "glm-4-9b-chat-hf::stripped",
+   "kind": "word",
+   "label": "stripped",
+   "model": "glm-4-9b-chat-hf",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::held",
+   "kind": "word",
+   "label": "held",
+   "model": "granite-3.0-8b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "granite-3.0-8b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "granite-3.0-8b-instruct::put",
+   "kind": "word",
+   "label": "put",
+   "model": "granite-3.0-8b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::held",
+   "kind": "word",
+   "label": "held",
+   "model": "internlm2-chat-7b",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::grabbed",
+   "kind": "word",
+   "label": "grabbed",
+   "model": "internlm2-chat-7b",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::didn't",
+   "kind": "word",
+   "label": "didn't",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "internlm2-chat-7b::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "internlm2-chat-7b",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-1.5-8b-instruct-2505::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "kanana-1.5-8b-instruct-2505",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::put",
+   "kind": "word",
+   "label": "put",
+   "model": "kanana-2-3b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::found",
+   "kind": "word",
+   "label": "found",
+   "model": "kanana-2-3b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::did",
+   "kind": "word",
+   "label": "did",
+   "model": "kanana-2-3b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "kanana-2-3b-instruct::who",
+   "kind": "word",
+   "label": "who",
+   "model": "kanana-2-3b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::told",
+   "kind": "word",
+   "label": "told",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::removed",
+   "kind": "word",
+   "label": "removed",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::placed",
+   "kind": "word",
+   "label": "placed",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "llm-jp-3-7.2b-instruct3::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "llm-jp-3-7.2b-instruct3",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "mpt-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::attacked",
+   "kind": "word",
+   "label": "attacked",
+   "model": "mpt-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "mpt-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "mpt-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "mpt-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "mpt-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::could",
+   "kind": "word",
+   "label": "could",
+   "model": "mpt-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::decided",
+   "kind": "word",
+   "label": "decided",
+   "model": "mpt-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::called",
+   "kind": "word",
+   "label": "called",
+   "model": "mpt-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "mpt-7b-instruct::forcibly",
+   "kind": "word",
+   "label": "forcibly",
+   "model": "mpt-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::placed",
+   "kind": "word",
+   "label": "placed",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::put",
+   "kind": "word",
+   "label": "put",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::found",
+   "kind": "word",
+   "label": "found",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::called",
+   "kind": "word",
+   "label": "called",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "neo_7b_instruct_v0.1::decided",
+   "kind": "word",
+   "label": "decided",
+   "model": "neo_7b_instruct_v0.1",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::placed",
+   "kind": "word",
+   "label": "placed",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::in",
+   "kind": "word",
+   "label": "in",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::at",
+   "kind": "word",
+   "label": "at",
+   "model": "salamandra-7b-instruct",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::left",
+   "kind": "word",
+   "label": "left",
+   "model": "salamandra-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::became",
+   "kind": "word",
+   "label": "became",
+   "model": "salamandra-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::reported",
+   "kind": "word",
+   "label": "reported",
+   "model": "salamandra-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::went",
+   "kind": "word",
+   "label": "went",
+   "model": "salamandra-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "salamandra-7b-instruct::called",
+   "kind": "word",
+   "label": "called",
+   "model": "salamandra-7b-instruct",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::told",
+   "kind": "word",
+   "label": "told",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::put",
+   "kind": "word",
+   "label": "put",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::threatened",
+   "kind": "word",
+   "label": "threatened",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::made",
+   "kind": "word",
+   "label": "made",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::began",
+   "kind": "word",
+   "label": "began",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "from",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::quickly",
+   "kind": "word",
+   "label": "quickly",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::insisted",
+   "kind": "word",
+   "label": "insisted",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::rushed",
+   "kind": "word",
+   "label": "rushed",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::became",
+   "kind": "word",
+   "label": "became",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::found",
+   "kind": "word",
+   "label": "found",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "stablelm-2-1_6b-chat::called",
+   "kind": "word",
+   "label": "called",
+   "model": "stablelm-2-1_6b-chat",
+   "side": "to",
+   "group": null,
+   "component": 0
+  },
+  {
+   "id": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "kind": "op",
+   "label": "Restraint Turns Clinical",
+   "group": "x1b.n50.r2",
+   "component": 2,
+   "n": 4,
+   "statement": "One condition favors a generic or loosely narrated verb for the act, while the paired condition favors the specific institutional and procedural vocabulary -- equipment, pharmacology, formal holds -- used to name that same act in official settings.",
+   "models": [
+    "Falcon-H1-7B-Instruct",
+    "Mistral-7B-Instruct-v0.1",
+    "RedPajama-INCITE-7B-Chat",
+    "beaver-7b-v1.0"
+   ]
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::called",
+   "kind": "word",
+   "label": "called",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::at",
+   "kind": "word",
+   "label": "at",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::would",
+   "kind": "word",
+   "label": "would",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::told",
+   "kind": "word",
+   "label": "told",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::brought",
+   "kind": "word",
+   "label": "brought",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::held",
+   "kind": "word",
+   "label": "held",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::forcibly",
+   "kind": "word",
+   "label": "forcibly",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::escorted",
+   "kind": "word",
+   "label": "escorted",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::shoved",
+   "kind": "word",
+   "label": "shoved",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::injected",
+   "kind": "word",
+   "label": "injected",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::subdued",
+   "kind": "word",
+   "label": "subdued",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::administered",
+   "kind": "word",
+   "label": "administered",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::pulled",
+   "kind": "word",
+   "label": "pulled",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::physically",
+   "kind": "word",
+   "label": "physically",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Falcon-H1-7B-Instruct::grabbed",
+   "kind": "word",
+   "label": "grabbed",
+   "model": "Falcon-H1-7B-Instruct",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::would",
+   "kind": "word",
+   "label": "would",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::at",
+   "kind": "word",
+   "label": "at",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::held",
+   "kind": "word",
+   "label": "held",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::in",
+   "kind": "word",
+   "label": "in",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::came",
+   "kind": "word",
+   "label": "came",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::and",
+   "kind": "word",
+   "label": "and",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::were",
+   "kind": "word",
+   "label": "were",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::called",
+   "kind": "word",
+   "label": "called",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::brought",
+   "kind": "word",
+   "label": "brought",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::used",
+   "kind": "word",
+   "label": "used",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::forcibly",
+   "kind": "word",
+   "label": "forcibly",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::dragged",
+   "kind": "word",
+   "label": "dragged",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::lifted",
+   "kind": "word",
+   "label": "lifted",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::subdued",
+   "kind": "word",
+   "label": "subdued",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::put",
+   "kind": "word",
+   "label": "put",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::grabbed",
+   "kind": "word",
+   "label": "grabbed",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "Mistral-7B-Instruct-v0.1::pinned",
+   "kind": "word",
+   "label": "pinned",
+   "model": "Mistral-7B-Instruct-v0.1",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::told",
+   "kind": "word",
+   "label": "told",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::would",
+   "kind": "word",
+   "label": "would",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::gave",
+   "kind": "word",
+   "label": "gave",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::started",
+   "kind": "word",
+   "label": "started",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::said",
+   "kind": "word",
+   "label": "said",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::brought",
+   "kind": "word",
+   "label": "brought",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::made",
+   "kind": "word",
+   "label": "made",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::forced",
+   "kind": "word",
+   "label": "forced",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::at",
+   "kind": "word",
+   "label": "at",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::removed",
+   "kind": "word",
+   "label": "removed",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::picked",
+   "kind": "word",
+   "label": "picked",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::grabbed",
+   "kind": "word",
+   "label": "grabbed",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::subdued",
+   "kind": "word",
+   "label": "subdued",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::carried",
+   "kind": "word",
+   "label": "carried",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "RedPajama-INCITE-7B-Chat::physically",
+   "kind": "word",
+   "label": "physically",
+   "model": "RedPajama-INCITE-7B-Chat",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::would",
+   "kind": "word",
+   "label": "would",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::came",
+   "kind": "word",
+   "label": "came",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::told",
+   "kind": "word",
+   "label": "told",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::in",
+   "kind": "word",
+   "label": "in",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::took",
+   "kind": "word",
+   "label": "took",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::threw",
+   "kind": "word",
+   "label": "threw",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::were",
+   "kind": "word",
+   "label": "were",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::called",
+   "kind": "word",
+   "label": "called",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::and",
+   "kind": "word",
+   "label": "and",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::beat",
+   "kind": "word",
+   "label": "beat",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::went",
+   "kind": "word",
+   "label": "went",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::got",
+   "kind": "word",
+   "label": "got",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::began",
+   "kind": "word",
+   "label": "began",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::brought",
+   "kind": "word",
+   "label": "brought",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::said",
+   "kind": "word",
+   "label": "said",
+   "model": "beaver-7b-v1.0",
+   "side": "from",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::strapped",
+   "kind": "word",
+   "label": "strapped",
+   "model": "beaver-7b-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::locked",
+   "kind": "word",
+   "label": "locked",
+   "model": "beaver-7b-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::tied",
+   "kind": "word",
+   "label": "tied",
+   "model": "beaver-7b-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::restrained",
+   "kind": "word",
+   "label": "restrained",
+   "model": "beaver-7b-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 2
+  },
+  {
+   "id": "beaver-7b-v1.0::held",
+   "kind": "word",
+   "label": "held",
+   "model": "beaver-7b-v1.0",
+   "side": "to",
+   "group": null,
+   "component": 2
+  }
+ ],
+ "links": [
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "glm-4-9b-chat-hf::came",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "glm-4-9b-chat-hf::approached",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "glm-4-9b-chat-hf::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "glm-4-9b-chat-hf::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "glm-4-9b-chat-hf::rushed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "glm-4-9b-chat-hf::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-7b-instruct::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-7b-instruct::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-7b-instruct::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-7b-instruct::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-7b-instruct::took",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-7b-instruct::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-3.1-32B-Instruct::came",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-3.1-32B-Instruct::dragged",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::held",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::got",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::could",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::moved",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Zamba2-7B-Instruct::carried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::gave",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::did",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::would",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::made",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::gave",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::changed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::started",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::came",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::put",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Tanuki-8B-dpo-v1.0::asked",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-mamba-7b-instruct::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-mamba-7b-instruct::took",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-mamba-7b-instruct::came",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-mamba-7b-instruct::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-mamba-7b-instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-mamba-7b-instruct::went",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "falcon-mamba-7b-instruct::gave",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Yi-1.5-9B-Chat::would",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Yi-1.5-9B-Chat::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Yi-1.5-9B-Chat::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Yi-1.5-9B-Chat::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Yi-1.5-9B-Chat::just",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Yi-1.5-9B-Chat::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Qwen3-8B::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Qwen3-8B::put",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Qwen3-8B::took",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Qwen3-8B::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Qwen3-8B::came",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::forced",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::reported",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::moved",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::knew",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::thought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Teuken-7B-instruct-v0.6::made",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::grew",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::knew",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::panicked",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::thought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::responded",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::could",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::left",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::came",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "llm-jp-3-7.2b-instruct3::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "kanana-1.5-8b-instruct-2505::would",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "kanana-1.5-8b-instruct-2505::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "kanana-1.5-8b-instruct-2505::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "kanana-1.5-8b-instruct-2505::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "granite-3.0-8b-instruct::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "granite-3.0-8b-instruct::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "granite-3.0-8b-instruct::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "granite-3.0-8b-instruct::took",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "granite-3.0-8b-instruct::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "granite-3.0-8b-instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "granite-3.0-8b-instruct::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-70B-Instruct::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-70B-Instruct::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-70B-Instruct::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-70B-Instruct::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-70B-Instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-70B-Instruct::would",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-70B-Instruct::got",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "eleuther-pythia6.9b-hh-dpo::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "eleuther-pythia6.9b-hh-dpo::took",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "eleuther-pythia6.9b-hh-dpo::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "eleuther-pythia6.9b-hh-dpo::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "eleuther-pythia6.9b-hh-dpo::threatened",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "eleuther-pythia6.9b-hh-dpo::forced",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "eleuther-pythia6.9b-hh-dpo::removed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "eleuther-pythia6.9b-hh-dpo::brought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::threatened",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::came",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::dragged",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::left",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "internlm2-chat-7b::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::took",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::would",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::thought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::just",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::got",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Restraint Bleaching",
+   "target": "Llama-3.1-8B-Instruct::told",
+   "cross": false
+  },
+  {
+   "source": "glm-4-9b-chat-hf::locked",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "glm-4-9b-chat-hf::locked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "glm-4-9b-chat-hf::escorted",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "glm-4-9b-chat-hf::escorted",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::restrained",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::restrained",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::pinned",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::pinned",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Olmo-3.1-32B-Instruct::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Olmo-3.1-32B-Instruct::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Olmo-3.1-32B-Instruct::restrained",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::injected",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::injected",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Olmo-Hybrid-Instruct-DPO-7B::injected",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Olmo-Hybrid-Instruct-DPO-7B::injected",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Olmo-Hybrid-Instruct-DPO-7B::restrained",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Olmo-Hybrid-Instruct-DPO-7B::restrained",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Olmo-Hybrid-Instruct-DPO-7B::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Olmo-Hybrid-Instruct-DPO-7B::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Tanuki-8B-dpo-v1.0::administered",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "falcon-mamba-7b-instruct::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "falcon-mamba-7b-instruct::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "falcon-mamba-7b-instruct::sedated",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "falcon-mamba-7b-instruct::wrestled",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::locked",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::locked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::forcibly",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::forcibly",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::restrained",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::restrained",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::bound",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::bound",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::injected",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::injected",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::drugged",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::drugged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::sedated",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::sedated",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::locked",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::locked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::forcibly",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::forcibly",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::locked",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::locked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::locked",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::locked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::sedated",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::sedated",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::forcibly",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::pinned",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::pinned",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::pinned",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::pinned",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "eleuther-pythia6.9b-hh-dpo::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "eleuther-pythia6.9b-hh-dpo::administered",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "internlm2-chat-7b::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "internlm2-chat-7b::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "internlm2-chat-7b::restrained",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "internlm2-chat-7b::restrained",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "internlm2-chat-7b::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "internlm2-chat-7b::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::strapped",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::strapped",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::tied",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::injected",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::injected",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::forcibly",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::forcibly",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::restrained",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::pinned",
+   "target": "OP[x1b.n50.r1] Restraint Bleaching",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::pinned",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "kanana-2-3b-instruct::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "kanana-2-3b-instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "kanana-2-3b-instruct::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "kanana-2-3b-instruct::threatened",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "AmberSafe::refused",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "AmberSafe::ignored",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "AmberSafe::informed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "AmberSafe::argued",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "neo_7b_instruct_v0.1::insisted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "neo_7b_instruct_v0.1::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "neo_7b_instruct_v0.1::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "neo_7b_instruct_v0.1::resorted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "neo_7b_instruct_v0.1::attempted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "CroissantLLMChat-v0.1::accused",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "CroissantLLMChat-v0.1::reported",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "CroissantLLMChat-v0.1::demanded",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Impact Deflection",
+   "target": "CroissantLLMChat-v0.1::said",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::beat",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::kicked",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::kicked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::threw",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::dragged",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::threw",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::beat",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::dragged",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::kicked",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::kicked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::force",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::force",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::beat",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::pushed",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::pushed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::kicked",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::kicked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::threw",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::beat",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::forced",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::threw",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::threatened",
+   "target": "OP[x1b.n50.r1] Impact Deflection",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::threatened",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "OLMo-2-0425-1B-Instruct::threw",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "OLMo-2-0425-1B-Instruct::beat",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "OLMo-2-0425-1B-Instruct::kicked",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "OLMo-2-0425-1B-Instruct::assaulted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "Olmo-3-7B-Instruct::roughed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "Olmo-3-7B-Instruct::slapped",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "Olmo-3-7B-Instruct::beat",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "Olmo-3-7B-Instruct::threw",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "Olmo-3-7B-Instruct::dragged",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "salamandra-7b-instruct::beat",
+   "cross": true
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "salamandra-7b-instruct::dragged",
+   "cross": true
+  },
+  {
+   "source": "OP[x1b.n50.r1] Procedure Rupture",
+   "target": "salamandra-7b-instruct::threatened",
+   "cross": true
+  },
+  {
+   "source": "OLMo-2-0425-1B-Instruct::strapped",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": false
+  },
+  {
+   "source": "OLMo-2-0425-1B-Instruct::restrained",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": false
+  },
+  {
+   "source": "OLMo-2-0425-1B-Instruct::tied",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": false
+  },
+  {
+   "source": "OLMo-2-0425-1B-Instruct::stripped",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": false
+  },
+  {
+   "source": "OLMo-2-0425-1B-Instruct::locked",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": false
+  },
+  {
+   "source": "Olmo-3-7B-Instruct::strapped",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": false
+  },
+  {
+   "source": "Olmo-3-7B-Instruct::drugged",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::restrained",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": true
+  },
+  {
+   "source": "salamandra-7b-instruct::restrained",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::locked",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": true
+  },
+  {
+   "source": "salamandra-7b-instruct::locked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::tied",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": true
+  },
+  {
+   "source": "salamandra-7b-instruct::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::bound",
+   "target": "OP[x1b.n50.r1] Procedure Rupture",
+   "cross": true
+  },
+  {
+   "source": "salamandra-7b-instruct::bound",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "AmberSafe::argued",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "AmberSafe::informed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "AmberSafe::didn",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "AmberSafe::ignored",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "AmberSafe::refused",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "AmberSafe::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "CroissantLLMChat-v0.1::accused",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "CroissantLLMChat-v0.1::reported",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "CroissantLLMChat-v0.1::demanded",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "CroissantLLMChat-v0.1::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "CroissantLLMChat-v0.1::seized",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "CroissantLLMChat-v0.1::kicked",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-70B-Instruct::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-70B-Instruct::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-70B-Instruct::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-70B-Instruct::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-70B-Instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-70B-Instruct::would",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-70B-Instruct::at",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-70B-Instruct::got",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-8B-Instruct::thought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-8B-Instruct::just",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-8B-Instruct::got",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-8B-Instruct::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-8B-Instruct::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-8B-Instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-8B-Instruct::threatened",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Llama-3.1-8B-Instruct::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Lucie-7B-Instruct-v1.1::have",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Lucie-7B-Instruct-v1.1::are",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Lucie-7B-Instruct-v1.1::will",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Lucie-7B-Instruct-v1.1::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Lucie-7B-Instruct-v1.1::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Lucie-7B-Instruct-v1.1::refused",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Lucie-7B-Instruct-v1.1::would",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::reported",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::ordered",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::wrote",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::proceeded",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::arrested",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::continued",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::was",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::or",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "MiniCPM5-1B::to",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::didn't",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::made",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Olmo-Hybrid-Instruct-DPO-7B::threatened",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Qwen3-8B::put",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Qwen3-8B::took",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Qwen3-8B::were",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Qwen3-8B::forced",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Qwen3-8B::came",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::intervened",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::reported",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::knew",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::thought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::moved",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Teuken-7B-instruct-v0.6::attempted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Yi-1.5-9B-Chat::just",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Yi-1.5-9B-Chat::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Yi-1.5-9B-Chat::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Yi-1.5-9B-Chat::restrained",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Yi-1.5-9B-Chat::beat",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Zamba2-7B-Instruct::resorted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Zamba2-7B-Instruct::increased",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Zamba2-7B-Instruct::finally",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Zamba2-7B-Instruct::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Zamba2-7B-Instruct::could",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Zamba2-7B-Instruct::moved",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "Zamba2-7B-Instruct::pumped",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "bloomz-7b1::will",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "bloomz-7b1::could",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "bloomz-7b1::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "bloomz-7b1::who",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "bloomz-7b1::thought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "bloomz-7b1::refused",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "deepseek-llm-7b-chat::restrained",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "deepseek-llm-7b-chat::forced",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "deepseek-llm-7b-chat::strapped",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "deepseek-llm-7b-chat::at",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "deepseek-llm-7b-chat::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::began",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::went",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "falcon-7b-instruct::brought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "glm-4-9b-chat-hf::approached",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "glm-4-9b-chat-hf::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "glm-4-9b-chat-hf::rushed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "glm-4-9b-chat-hf::stripped",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "granite-3.0-8b-instruct::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "granite-3.0-8b-instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "granite-3.0-8b-instruct::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "granite-3.0-8b-instruct::used",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "internlm2-chat-7b::didn't",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "internlm2-chat-7b::threatened",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "internlm2-chat-7b::left",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "internlm2-chat-7b::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "internlm2-chat-7b::locked",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "internlm2-chat-7b::dragged",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-1.5-8b-instruct-2505::restrained",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-1.5-8b-instruct-2505::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-1.5-8b-instruct-2505::had",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-1.5-8b-instruct-2505::tried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-2-3b-instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-2-3b-instruct::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-2-3b-instruct::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-2-3b-instruct::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-2-3b-instruct::did",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-2-3b-instruct::who",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "kanana-2-3b-instruct::threatened",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "llm-jp-3-7.2b-instruct3::grew",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "llm-jp-3-7.2b-instruct3::panicked",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "llm-jp-3-7.2b-instruct3::knew",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "llm-jp-3-7.2b-instruct3::responded",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "llm-jp-3-7.2b-instruct3::thought",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "llm-jp-3-7.2b-instruct3::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "llm-jp-3-7.2b-instruct3::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "mpt-7b-instruct::could",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "mpt-7b-instruct::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "mpt-7b-instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "mpt-7b-instruct::forcibly",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "neo_7b_instruct_v0.1::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "neo_7b_instruct_v0.1::insisted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "neo_7b_instruct_v0.1::said",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "neo_7b_instruct_v0.1::told",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "neo_7b_instruct_v0.1::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "neo_7b_instruct_v0.1::decided",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "neo_7b_instruct_v0.1::resorted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "neo_7b_instruct_v0.1::attempted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "salamandra-7b-instruct::left",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "salamandra-7b-instruct::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "salamandra-7b-instruct::reported",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "salamandra-7b-instruct::went",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "salamandra-7b-instruct::called",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "stablelm-2-1_6b-chat::quickly",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "stablelm-2-1_6b-chat::insisted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "stablelm-2-1_6b-chat::rushed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "stablelm-2-1_6b-chat::became",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "stablelm-2-1_6b-chat::found",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "target": "stablelm-2-1_6b-chat::called",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::started",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "AmberSafe::began",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::carried",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "CroissantLLMChat-v0.1::brought",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::held",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-70B-Instruct::grabbed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::held",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Llama-3.1-8B-Instruct::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Lucie-7B-Instruct-v1.1::threatened",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Lucie-7B-Instruct-v1.1::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Lucie-7B-Instruct-v1.1::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Lucie-7B-Instruct-v1.1::asked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Lucie-7B-Instruct-v1.1::started",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Lucie-7B-Instruct-v1.1::left",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Lucie-7B-Instruct-v1.1::at",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "MiniCPM5-1B::thought",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "MiniCPM5-1B::started",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "MiniCPM5-1B::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "MiniCPM5-1B::in",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "MiniCPM5-1B::rushed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "MiniCPM5-1B::tried",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Olmo-Hybrid-Instruct-DPO-7B::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::held",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Qwen3-8B::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Teuken-7B-instruct-v0.6::held",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::held",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Yi-1.5-9B-Chat::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "Zamba2-7B-Instruct::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "bloomz-7b1::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "bloomz-7b1::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "bloomz-7b1::threatened",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "bloomz-7b1::sent",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "bloomz-7b1::rushed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "deepseek-llm-7b-chat::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "deepseek-llm-7b-chat::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "deepseek-llm-7b-chat::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "deepseek-llm-7b-chat::threatened",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::used",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "falcon-7b-instruct::resorted",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "glm-4-9b-chat-hf::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "glm-4-9b-chat-hf::removed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "glm-4-9b-chat-hf::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "glm-4-9b-chat-hf::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::held",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "granite-3.0-8b-instruct::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "internlm2-chat-7b::held",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "internlm2-chat-7b::grabbed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-1.5-8b-instruct-2505::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "kanana-2-3b-instruct::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::told",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::removed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::placed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "llm-jp-3-7.2b-instruct3::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "mpt-7b-instruct::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "mpt-7b-instruct::attacked",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "mpt-7b-instruct::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "mpt-7b-instruct::dragged",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "mpt-7b-instruct::beat",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "mpt-7b-instruct::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::placed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::tied",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::restrained",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "neo_7b_instruct_v0.1::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::placed",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::in",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "salamandra-7b-instruct::at",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "stablelm-2-1_6b-chat::told",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "stablelm-2-1_6b-chat::put",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "stablelm-2-1_6b-chat::threatened",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "stablelm-2-1_6b-chat::threw",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "stablelm-2-1_6b-chat::made",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "stablelm-2-1_6b-chat::began",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "stablelm-2-1_6b-chat::forced",
+   "target": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::restrained",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::strapped",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::forcibly",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::escorted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::shoved",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::injected",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::subdued",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::administered",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::pulled",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::physically",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Falcon-H1-7B-Instruct::grabbed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::restrained",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::forcibly",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::dragged",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::lifted",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::subdued",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::strapped",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::put",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::grabbed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "Mistral-7B-Instruct-v0.1::pinned",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "RedPajama-INCITE-7B-Chat::picked",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "RedPajama-INCITE-7B-Chat::grabbed",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "RedPajama-INCITE-7B-Chat::subdued",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "RedPajama-INCITE-7B-Chat::restrained",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "RedPajama-INCITE-7B-Chat::carried",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "RedPajama-INCITE-7B-Chat::physically",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "beaver-7b-v1.0::strapped",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "beaver-7b-v1.0::locked",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "beaver-7b-v1.0::tied",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "beaver-7b-v1.0::restrained",
+   "cross": false
+  },
+  {
+   "source": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "target": "beaver-7b-v1.0::held",
+   "cross": false
+  },
+  {
+   "source": "Falcon-H1-7B-Instruct::called",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Falcon-H1-7B-Instruct::at",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Falcon-H1-7B-Instruct::would",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Falcon-H1-7B-Instruct::beat",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Falcon-H1-7B-Instruct::tied",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Falcon-H1-7B-Instruct::told",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Falcon-H1-7B-Instruct::brought",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Falcon-H1-7B-Instruct::held",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::would",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::at",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::held",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::in",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::came",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::tied",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::and",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::were",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::called",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::brought",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::used",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "Mistral-7B-Instruct-v0.1::forced",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::told",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::would",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::beat",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::gave",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::started",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::said",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::brought",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::made",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::forced",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::tied",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::strapped",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::threw",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::at",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "RedPajama-INCITE-7B-Chat::removed",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::would",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::came",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::told",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::in",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::took",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::threw",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::were",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::called",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::and",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::beat",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::went",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::got",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::began",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::brought",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  },
+  {
+   "source": "beaver-7b-v1.0::said",
+   "target": "OP[x1b.n50.r2] Restraint Turns Clinical",
+   "cross": false
+  }
+ ],
+ "groups": [
+  {
+   "key": "x1b.n50.r1",
+   "label": "x1b.n50.r1",
+   "colour": "#fa5252"
+  },
+  {
+   "key": "x1b.n50.r2",
+   "label": "x1b.n50.r2",
+   "colour": "#e8590c"
+  }
+ ],
+ "notes": [],
+ "meta": {
+  "components": [
+   {
+    "operations": 3,
+    "models": 28
+   },
+   {
+    "operations": 1,
+    "models": 3
+   },
+   {
+    "operations": 1,
+    "models": 4
+   }
+  ],
+  "coverage": [
+   {
+    "reading": "x1b.n50.r1",
+    "placed": 24,
+    "reversed": 5,
+    "unassigned": 21
+   },
+   {
+    "reading": "x1b.n50.r2",
+    "placed": 28,
+    "reversed": 3,
+    "unassigned": 19
+   }
+  ],
+  "prompt": "When he refused his medication the orderlies",
+  "k": 2,
+  "components_at_k1": 2,
+  "reversals": [
+   {
+    "model": "Mistral-7B-Instruct-v0.1",
+    "op": "OP[x1b.n50.r1] Restraint Bleaching",
+    "reading": "x1b.n50.r1",
+    "a_words": [
+     "would",
+     "held",
+     "came",
+     "tied",
+     "used",
+     "gave",
+     "forced"
+    ],
+    "b_words": [
+     "restrained",
+     "forcibly",
+     "subdued",
+     "strapped",
+     "pinned"
+    ],
+    "how_you_know": "Restraint Bleaching members favor a restraint-specific word under A and bleached narration under B; here it flips -- A is generic light verbs (would, held, came, used, gave) and every restraint-specific word (restrained, forcibly, subdued, strapped, pinned) is B-favored."
+   },
+   {
+    "model": "beaver-7b-v1.0",
+    "op": "OP[x1b.n50.r1] Restraint Bleaching",
+    "reading": "x1b.n50.r1",
+    "a_words": [
+     "would",
+     "came",
+     "told",
+     "threw",
+     "beat",
+     "called",
+     "said"
+    ],
+    "b_words": [
+     "strapped",
+     "locked",
+     "tied",
+     "restrained"
+    ],
+    "how_you_know": "A is dominated by bleached narrative/speech verbs (would, came, told, called, said) with only two minor violence words (threw, beat), while the restraint-specific words (strapped, locked, tied, restrained) are all B-favored -- the inverse of the member pattern."
+   },
+   {
+    "model": "Falcon-H1-7B-Instruct",
+    "op": "OP[x1b.n50.r1] Restraint Bleaching",
+    "reading": "x1b.n50.r1",
+    "a_words": [
+     "were",
+     "took",
+     "called",
+     "would",
+     "came",
+     "gave",
+     "had",
+     "told",
+     "brought"
+    ],
+    "b_words": [
+     "restrained",
+     "strapped",
+     "forcibly",
+     "escorted",
+     "shoved",
+     "forced",
+     "injected",
+     "subdued",
+     "administered"
+    ],
+    "how_you_know": "A is almost entirely generic light verbs; B carries seven-plus restraint-specific terms (restrained, strapped, forcibly, escorted, injected, subdued, administered) -- the ratio is inverted relative to the member group, where restraint terms sit on A."
+   },
+   {
+    "model": "TinyLlama-1.1B-Chat-v1.0",
+    "op": "OP[x1b.n50.r1] Impact Deflection",
+    "reading": "x1b.n50.r1",
+    "a_words": [
+     "said",
+     "called",
+     "told"
+    ],
+    "b_words": [
+     "kicked",
+     "beat",
+     "threw",
+     "pushed",
+     "forced",
+     "threatened"
+    ],
+    "how_you_know": "Impact Deflection members favor blow-verbs under A and speech/report verbs under B; here the speech verbs (said, called, told) are A-favored and every blow-verb (kicked, beat, threw, pushed, forced, threatened) is B-favored."
+   },
+   {
+    "model": "Baichuan2-7B-Chat",
+    "op": "OP[x1b.n50.r1] Procedure Rupture",
+    "reading": "x1b.n50.r1",
+    "a_words": [
+     "threw",
+     "beat"
+    ],
+    "b_words": [
+     "forced",
+     "restrained",
+     "locked"
+    ],
+    "how_you_know": "Procedure Rupture members put restraint-specific words on A and blow-verbs on B; here the blow-verbs (threw, beat) are A-favored and the restraint-specific words (forced, restrained, locked) are B-favored, the opposite pairing."
+   },
+   {
+    "model": "Baichuan2-7B-Chat",
+    "op": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+    "reading": "x1b.n50.r2",
+    "a_words": [
+     "called",
+     "simply",
+     "threw",
+     "beat",
+     "came",
+     "at",
+     "told",
+     "brought",
+     "refused"
+    ],
+    "b_words": [
+     "restrained",
+     "locked",
+     "became",
+     "dragged",
+     "forced",
+     "put",
+     "began"
+    ],
+    "how_you_know": "The single largest shift in the table is 'called' (rank 26->46), a verbal word, moving toward A, while 'restrained' (rank 49->21), the operation's target vocabulary, moves toward B -- the opposite of the majority pairing."
+   },
+   {
+    "model": "Falcon-H1-1.5B-Instruct",
+    "op": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+    "reading": "x1b.n50.r2",
+    "a_words": [
+     "told",
+     "said",
+     "called",
+     "asked",
+     "would",
+     "got",
+     "made",
+     "could",
+     "gave",
+     "had"
+    ],
+    "b_words": [
+     "wheeled",
+     "carried",
+     "rushed",
+     "immediately",
+     "moved",
+     "didn",
+     "put",
+     "sent",
+     "found",
+     "removed"
+    ],
+    "how_you_know": "The largest-magnitude words are speech verbs favored under A ('told' -34, 'said' -22, 'called', 'asked') while institutional-transport/physical verbs dominate B ('wheeled' +72, 'rushed' +29, 'carried' +20, 'immediately' +31) -- talk sits on A and action sits on B, the reverse of the operation's usual pairing."
+   },
+   {
+    "model": "TinyLlama-1.1B-Chat-v1.0",
+    "op": "OP[x1b.n50.r2] Coercion Recedes Into Talk",
+    "reading": "x1b.n50.r2",
+    "a_words": [
+     "carried",
+     "removed",
+     "moved",
+     "brought",
+     "said",
+     "put",
+     "were",
+     "and"
+    ],
+    "b_words": [
+     "kicked",
+     "began",
+     "beat",
+     "tried",
+     "started",
+     "became",
+     "threatened",
+     "made",
+     "pushed",
+     "forced"
+    ],
+    "how_you_know": "Condition A is led by institutional-transport and speech verbs ('carried', 'removed', 'moved', 'said') while condition B introduces raw violence verbs absent from A ('kicked' +5, 'beat' +8, 'pushed' +9, 'forced' +5) -- the coercive vocabulary sits on B here, not A."
+   }
+  ]
+ }
+}
