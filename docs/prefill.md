@@ -1,6 +1,11 @@
 # twp under a chat template: the template as a rung
 
-Status: **not started.** Written 2026-08-21, rewritten the same evening after RH corrected its central framing. Nothing here has been run except the two censuses reported below.
+Status: **the instrument is wired and the population is known; no sweep has been run.** Written 2026-08-21, rewritten after RH corrected its central framing, and updated 2026-08-22 as the census and the code landed.
+
+    census        DONE   all 144, tokenizers only        prefill_census.py
+    key identity  DONE   frame/system/user_msg, no orphan  85038fb
+    twp wiring    DONE   next_word(frame=...) -> render -> expand4   76bdb42
+    the sweep     NOT STARTED
 
 ## The conception: templating is scaffolding on top of weight-level alignment
 
@@ -73,7 +78,7 @@ Under `prefill` the stem is appended **after** the generation prompt, inside a s
 
 > prefill True -> `text` goes in a prefilled ASSISTANT turn instead, and the user turn takes `user_msg`. The model resumes a sentence it is already writing, **which is the only chat-mode position with a word slot in it.**
 
-## What exists, and the one gap
+## What exists — and the gap, now closed
 
 | | |
 |---|---|
@@ -82,7 +87,19 @@ Under `prefill` the stem is appended **after** the generation prompt, inside a s
 | `generate.next_token(..., prefill=...)` | token grain, **already frame-aware** |
 | `Checkpoint.next_token(..., prefill=...)` | passes through |
 
-**`Checkpoint.next_word()` delegates to `probs(prompt, loaded=None, **kw)`, which hands the raw string straight to `twp.expand`.** The frame machinery stops at the token grain and never reaches the word instrument. That is the whole code gap: `probs()` would take the frame slots, call `render()`, and pass the rendered string on. `encode()`'s one-BOS rule already handles the tokenisation trap.
+~~`Checkpoint.next_word()` delegates to `probs(prompt, loaded=None, **kw)`, which hands the raw string straight to `twp.expand`. The frame machinery stops at the token grain and never reaches the word instrument.~~
+
+**CLOSED 2026-08-22 (`76bdb42`).** `next_word` and `probs` now take `rules`, `frame`, `system` and `user_msg`, so the word instrument takes the same arguments as `next_token` for the same things.
+
+    ck.next_word(P)                                   raw, v3     unchanged
+    ck.next_word(P, rules=ADOPTED)                    raw, v4
+    ck.next_word(P, rules=ADOPTED, frame="prefill")   templated
+
+Three things the wiring had to get right, none of which were visible from the outside:
+
+- **the survival assert runs on the STEM, not the render.** `_prompt_ids` refuses a prompt the tokenizer mangles by round-tripping it; control tokens never decode back to what produced them, so run against a rendered template it would report a tokenizer defect on models that have none — the same alarm for a different fact.
+- **the BOS is detected, not assumed.** A template usually emits its own. `generate.encode` measured this both ways (Tulu's template emits none and its tokenizer adds one; SmolLM2's `<|im_start|>` IS the BOS), so the framed path tokenises there and passes ids to `expand4` through a new `pids=` parameter. `pids=None` is every cell ever measured.
+- **a dropped system prompt is refused, not absorbed** — otherwise it is a framed cell that never received the treatment.
 
 ## Design notes
 
