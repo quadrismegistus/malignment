@@ -148,6 +148,41 @@ def load_rh():
     return out, [_norm_col(c) for c in cols]
 
 
+#: DOUBLE quotes only. Including the curly SINGLE quotes makes every
+#: apostrophe in `don't` toggle the in-quote state, which is how the first
+#: version of this reported 13.3% of base tokens as dialogue against a true
+#: 1.9% median.
+_DQ = set('"\u201c\u201d\u00ab\u00bb')
+
+
+def _dialogue(txt):
+    """Share of whitespace-delimited tokens sitting inside a quoted span.
+
+    Carried as a COVARIATE, not a filter. Dialogue is where the deixis, proper
+    names and concrete objects live, so it pulls on the concreteness axis
+    directly -- and the populations differ sharply on it: base 11.5% mean,
+    aligned 10.0%, the c20_fiction anchor 7.4%, but API only 0.81% with 87% of
+    passages carrying none at all. Unfiltered historical fiction is heavier
+    still than any of them, so placing model passages against a raw corpus
+    distribution compares populations that differ on this before they differ on
+    anything else.
+
+    In non-fiction the quoted spans are CITATIONS rather than speech
+    (literary_criticism 8.2%, philosophy 6.8%), so the number does not mean the
+    same thing across genres and should not be read across them.
+    """
+    toks = txt.split()
+    if not toks:
+        return None
+    inside, on = 0, False
+    for ch in txt:
+        if ch in _DQ:
+            on = not on
+        elif on and ch == " ":
+            inside += 1
+    return inside / len(toks)
+
+
 class Scorer:
     """Both token streams, one object. Lemma cache is type-level and shared."""
 
@@ -214,7 +249,8 @@ class Scorer:
         mod = [self._modernise(w) for w in raw]
         self._tag(set(mod))
         out = {"n_tokens": len(raw),
-               "variant_rate": sum(1 for a, b in zip(raw, mod) if a != b) / len(raw)}
+               "variant_rate": sum(1 for a, b in zip(raw, mod) if a != b) / len(raw),
+               "dialogue_share": _dialogue(txt)}
 
         #: ---- STREAM A: RAW surface, RH norms only. No modernisation, no
         #: lemma fallback, no POS filter -- the lexicon holds no function words
