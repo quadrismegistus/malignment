@@ -4801,6 +4801,751 @@
     "tiiuae/Falcon-H1-7B-Base": "Validation error for field 'use_cache':\n    TypeError: Field 'use_cache' with value True doesn't match any type in (<cla",
     "tiiuae/Falcon-H1-7B-Instruct": "Validation error for field 'use_cache':\n    TypeError: Field 'use_cache' with value True doesn't match any type in (<cla"
    }
+  },
+  "chat_template": {
+   "measured_by": "experiments/instrument_calibrations/generation_provenance/prefill_census.py: twp.load_tokenizer + generate.render(prefill=True). TOKENIZERS ONLY, no weights.",
+   "measured_at": "2026-08-22T08:37:27",
+   "n": 144,
+   "stem": "He started stroking his",
+   "verdicts": "OK = prefill renders and the stem lands last | NO_TEMPLATE = tokenizer loads, ships none | REFUSED = apply_chat_template raises | STEM_LOST = renders but the stem is not last | NO_TOKENIZER = tokenizer will not load | GATED = no access. GATED is kept distinct from NO_TEMPLATE deliberately.",
+   "models": {
+    "01-ai/Yi-1.5-9B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "01-ai/Yi-1.5-9B-Chat": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 53
+    },
+    "Alchan/mpt-7b-chat": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "BAAI/Aquila2-7B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 119
+    },
+    "BAAI/AquilaChat2-7B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "BSC-LT/salamandra-7b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "BSC-LT/salamandra-7b-instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 1491
+    },
+    "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "ContextualAI/archangel_sft-kto_pythia2-8b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "ContextualAI/archangel_sft-slic_pythia2-8b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "ContextualAI/archangel_sft_pythia2-8b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "EleutherAI/pythia-2.8b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "EleutherAI/pythia-6.9b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "HuggingFaceH4/mistral-7b-sft-beta": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 31
+    },
+    "HuggingFaceH4/zephyr-7b-beta": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 31
+    },
+    "HuggingFaceTB/SmolLM2-360M": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "HuggingFaceTB/SmolLM2-360M-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 151
+    },
+    "HuggingFaceTB/SmolLM3-3B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 1357
+    },
+    "HuggingFaceTB/SmolLM3-3B-Base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": {
+     "verdict": "NO_TOKENIZER",
+     "template": 0
+    },
+    "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 1357
+    },
+    "LLM360/Amber": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "LLM360/AmberChat": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "LLM360/AmberSafe": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 128
+    },
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 56
+    },
+    "OpenLLM-France/Lucie-7B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 105
+    },
+    "PKU-Alignment/alpaca-7b-reproduced": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "PKU-Alignment/beaver-7b-v1.0": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "Qwen/Qwen2.5-0.5B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 111
+    },
+    "Qwen/Qwen2.5-0.5B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 151
+    },
+    "Qwen/Qwen2.5-7B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 111
+    },
+    "Qwen/Qwen2.5-7B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 151
+    },
+    "Qwen/Qwen3-8B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 53
+    },
+    "Qwen/Qwen3-8B-Base": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 53
+    },
+    "RWKV/rwkv-4-7b-pile": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "RWKV/rwkv-raven-7b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 31
+    },
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "Zyphra/Zamba2-7B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "Zyphra/Zamba2-7B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 53
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 27
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 27
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 27
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 27
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 27
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 27
+    },
+    "allenai/Llama-3.1-Tulu-3.1-8B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 27
+    },
+    "allenai/OLMo-2-0425-1B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "allenai/OLMo-2-0425-1B-DPO": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 40
+    },
+    "allenai/OLMo-2-0425-1B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 40
+    },
+    "allenai/OLMo-2-0425-1B-SFT": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 40
+    },
+    "allenai/OLMoE-1B-7B-0125": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "allenai/OLMoE-1B-7B-0125-DPO": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 43
+    },
+    "allenai/OLMoE-1B-7B-0125-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 43
+    },
+    "allenai/OLMoE-1B-7B-0125-SFT": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 43
+    },
+    "allenai/Olmo-3-1025-7B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "allenai/Olmo-3-1125-32B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "allenai/Olmo-3-7B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 206
+    },
+    "allenai/Olmo-3-7B-Instruct-DPO": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 206
+    },
+    "allenai/Olmo-3-7B-Instruct-SFT": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 206
+    },
+    "allenai/Olmo-3-7B-Think": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 339
+    },
+    "allenai/Olmo-3-7B-Think-DPO": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 339
+    },
+    "allenai/Olmo-3-7B-Think-SFT": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 247
+    },
+    "allenai/Olmo-3.1-32B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 315
+    },
+    "allenai/Olmo-3.1-32B-Instruct-DPO": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 206
+    },
+    "allenai/Olmo-3.1-32B-Instruct-SFT": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 206
+    },
+    "allenai/Olmo-Hybrid-7B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 206
+    },
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 206
+    },
+    "baichuan-inc/Baichuan2-7B-Base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "baichuan-inc/Baichuan2-7B-Chat": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "bigscience/bloom-7b1": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "bigscience/bloomz-7b1": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 53
+    },
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "croissantllm/CroissantLLMBase": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "croissantllm/CroissantLLMChat-v0.1": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 53
+    },
+    "deepseek-ai/deepseek-llm-7b-base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "deepseek-ai/deepseek-llm-7b-chat": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 42
+    },
+    "gl198976/mpt-7b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "gl198976/mpt-7b-instruct": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "google/gemma-2-9b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "google/gemma-2-9b-it": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 0,
+     "added_chars": 63
+    },
+    "google/recurrentgemma-9b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "google/recurrentgemma-9b-it": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 0,
+     "added_chars": 63
+    },
+    "huggyllama/llama-7b": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 21
+    },
+    "ibm-granite/granite-3.0-8b-base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "ibm-granite/granite-3.0-8b-instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 96
+    },
+    "inceptionai/jais-family-6p7b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "inceptionai/jais-family-6p7b-chat": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 363
+    },
+    "internlm/internlm2-base-7b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "internlm/internlm2-chat-7b": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 56
+    },
+    "internlm/internlm2-chat-7b-sft": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 56
+    },
+    "kakaocorp/kanana-1.5-8b-base": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 119
+    },
+    "kakaocorp/kanana-1.5-8b-instruct-2505": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 174
+    },
+    "kakaocorp/kanana-2-3b-base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "kakaocorp/kanana-2-3b-instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 72
+    },
+    "llm-jp/llm-jp-3-7.2b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct2": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 0,
+     "added_chars": 26
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct3": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 0,
+     "added_chars": 26
+    },
+    "lomahony/eleuther-pythia6.9b-hh-dpo": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "lomahony/eleuther-pythia6.9b-hh-sft": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "m-a-p/CT-LLM-Base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "m-a-p/CT-LLM-SFT": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "m-a-p/CT-LLM-SFT-DPO": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "m-a-p/neo_7b": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 0,
+     "added_chars": 547
+    },
+    "m-a-p/neo_7b_instruct_v0.1": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 0,
+     "added_chars": 547
+    },
+    "m-a-p/neo_7b_sft_v0.1": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 0,
+     "added_chars": 547
+    },
+    "meta-llama/Llama-3.1-70B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "meta-llama/Llama-3.1-70B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 236
+    },
+    "meta-llama/Llama-3.1-8B": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 236
+    },
+    "mistralai/Mistral-7B-Instruct-v0.1": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 22
+    },
+    "mistralai/Mistral-7B-v0.1": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "openGPT-X/Teuken-7B-base-v0.6": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "openGPT-X/Teuken-7B-instruct-v0.6": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 0,
+     "added_chars": 166
+    },
+    "openbmb/MiniCPM5-1B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 56
+    },
+    "openbmb/MiniCPM5-1B-Base": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 56
+    },
+    "openbmb/MiniCPM5-1B-SFT": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 56
+    },
+    "openchat/openchat-3.5-0106": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 63
+    },
+    "stabilityai/stablelm-2-1_6b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "stabilityai/stablelm-2-1_6b-chat": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 111
+    },
+    "stabilityai/stablelm-2-zephyr-1_6b": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 40
+    },
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 61
+    },
+    "teknium/OpenHermes-2.5-Mistral-7B": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 53
+    },
+    "tiiuae/Falcon-H1-1.5B-Base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "tiiuae/Falcon-H1-1.5B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 70
+    },
+    "tiiuae/Falcon-H1-7B-Base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "tiiuae/Falcon-H1-7B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 70
+    },
+    "tiiuae/Falcon3-7B-Base": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "tiiuae/Falcon3-7B-Instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 27
+    },
+    "tiiuae/falcon-7b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "tiiuae/falcon-7b-instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 23
+    },
+    "tiiuae/falcon-mamba-7b": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "tiiuae/falcon-mamba-7b-instruct": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 70
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Chat": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    },
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 61
+    },
+    "zai-org/glm-4-9b-chat-hf": {
+     "verdict": "OK",
+     "template": 1,
+     "sys_ok": 1,
+     "added_chars": 37
+    },
+    "zai-org/glm-4-9b-hf": {
+     "verdict": "NO_TEMPLATE",
+     "template": 0
+    }
+   }
   }
  }
 }

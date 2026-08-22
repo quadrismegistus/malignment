@@ -148,12 +148,68 @@ def probe(model_id):
     return rec
 
 
+#: `roster/models/measurements.json`, the FOUND side of the roster. Its own
+#: `_why_one_file` is the reason this is a SECTION and not a new file: the archive
+#: kept these in six artifacts, each independently defining "the set of models",
+#: and they drifted -- 32 sources declared against 51 on disk. A new
+#: `chat_templates.json` beside it would be the seventh.
+#:
+#: `_stamp_rule`: every section carries `measured_at` and `n`, because "a
+#: measurement of a checkpoint is only true of that checkpoint AS IT STOOD; an
+#: unstamped observation cannot be told from a stale one."
+MEASUREMENTS = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(HERE))),
+    "roster", "models", "measurements.json")
+SECTION = "chat_template"
+
+
+def write_measurements(rows, path=MEASUREMENTS):
+    """Replace the `chat_template` section in place, stamped. Never appends.
+
+    Read-modify-write of the whole file rather than a patch: the file is one
+    object and a section that half-updated is the drift it exists to prevent.
+    """
+    import datetime
+    with open(path, encoding="utf-8") as fh:
+        doc = json.load(fh)
+    doc.setdefault("sections", {})[SECTION] = {
+        "measured_by": ("experiments/instrument_calibrations/generation_provenance/"
+                        "prefill_census.py: twp.load_tokenizer + generate.render("
+                        "prefill=True). TOKENIZERS ONLY, no weights."),
+        "measured_at": datetime.datetime.now().replace(microsecond=0).isoformat(),
+        "n": len(rows),
+        "stem": STEM,
+        "verdicts": ("OK = prefill renders and the stem lands last | NO_TEMPLATE = "
+                     "tokenizer loads, ships none | REFUSED = apply_chat_template "
+                     "raises | STEM_LOST = renders but the stem is not last | "
+                     "NO_TOKENIZER = tokenizer will not load | GATED = no access. "
+                     "GATED is kept distinct from NO_TEMPLATE deliberately."),
+        "models": {r["model"]: {k: r[k] for k in
+                                ("verdict", "template", "sys_ok", "added_chars")
+                                if r.get(k) != ""}
+                   for r in sorted(rows, key=lambda r: r["model"])},
+    }
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(doc, fh, indent=1, ensure_ascii=False)
+        fh.write("\n")
+    return path
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--write-measurements", action="store_true",
+                    help="also write the `chat_template` section of "
+                         "roster/models/measurements.json. Refused with --limit: "
+                         "a stamped section reporting n=5 for a 144-model "
+                         "population is worse than no section.")
     a = ap.parse_args()
+    if a.write_measurements and a.limit:
+        print("  REFUSING --write-measurements with --limit: the section's `n` "
+              "would describe a sample and read as the population.")
+        return 2
     pop, role = population()
     if a.limit:
         pop = pop[:a.limit]
@@ -197,6 +253,9 @@ def main():
     pairs = [(b, e) for b, e in eps.items() if b in ok and e in ok]
     print("\n  base->endpoint pairs with BOTH arms prefill-able: %d of %d"
           % (len(pairs), len(eps)))
+    if a.write_measurements:
+        p = write_measurements(rows)
+        print("  wrote section %r to %s" % (SECTION, p))
     return 0
 
 
