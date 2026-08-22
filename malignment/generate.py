@@ -265,11 +265,30 @@ def render(loaded, text, system=DEFAULT, user=None, prefill=False,
             sys_ok = False
         except Exception as e2:
             raise FrameRefused("template refused: %s: %s" % (type(e2).__name__, e2))
-    if sys_ok and system is not DEFAULT and system:
+    #: **THE BYTE TEST MUST RUN FOR AN EMPTY SYSTEM TOO, AND IT DID NOT.**
+    #: The guard read `... and system`, which is FALSY for `""` -- so the one
+    #: value most likely to be silently ignored was the one value never checked.
+    #:
+    #: Measured 2026-08-22 across the 80 prefill-able checkpoints: **10 templates
+    #: ignore a supplied system message entirely**, rendering byte-identical
+    #: output for DEFAULT, `""` and `" "`. They include BOTH Llama-3.1-Instruct
+    #: arms, SmolLM3-3B (which injects its own dated metadata block), Yi-1.5-Chat,
+    #: gemma-2-9b-it, falcon-7b-instruct and glm-4-9b-chat-hf.
+    #:
+    #: Under the old guard every one of those returned `sys_ok=True` for
+    #: `system=""`, so a cell would be STAMPED as an empty-system condition while
+    #: actually carrying the vendor persona -- the stamp-declares-not-applies
+    #: failure, in the field whose whole job is to say which condition ran.
+    #:
+    #: `out == bare` is the discriminating clause and it works for any value: if
+    #: supplying a system message renders the same as supplying none, it had no
+    #: effect. The content clause stays guarded, because `""[:24] not in out` is
+    #: vacuously False and would never fire.
+    if sys_ok and system is not DEFAULT:
         bare = tok.apply_chat_template([{"role": "user", "content": turn}],
                                        add_generation_prompt=True, tokenize=False)
         #: THE BYTE TEST for the DISCARD case, which throws nothing of its own.
-        if out == bare or system[:24] not in out:
+        if out == bare or (system and system[:24] not in out):
             sys_ok = False
     if prefill:
         #: the stem inside the assistant turn, appended AFTER the generation
