@@ -238,6 +238,13 @@ def main():
     ap.add_argument("--i-have-rh-authorisation", action="store_true",
                     help="asserts RH said to spend on THIS launch, not a "
                          "remembered earlier yes")
+    ap.add_argument("--no-ssm-kernels", action="store_true",
+                    help="do NOT install mamba-ssm/causal-conv1d even where the "
+                         "roster declares profile ssm. A DELIBERATE CONTROL, not "
+                         "a fix: the hypothesis it was built for (that kernels "
+                         "caused Falcon-H1-7B's empty cells) was tested and is "
+                         "FALSE -- the cause was fp16. Kernels are 26x on that "
+                         "model. Do not pass this to make a model work.")
     a = ap.parse_args()
     if a.resume:
         return resume(a.resume)
@@ -528,7 +535,35 @@ def execute(b, models, roots, venv, a):
     _nodes = _ros.load()["nodes"]
     _ssm = [m for m in models
             if (_nodes.get(m, {}).get("env") or {}).get("profile") == "ssm"]
-    if _ssm:
+    #: **`--no-ssm-kernels` WAS BUILT ON A HYPOTHESIS THAT IS FALSE. IT IS KEPT
+    #: AS A CONTROL AND MUST NOT BE USED AS A FIX.**
+    #:
+    #: The observation was real: `Falcon-H1-7B` wrote 2,981 cells containing NO
+    #: WORDS -- residual.tail == 1.0 on every cell, zero word rows -- on a box
+    #: where the kernels were active, while its 1.5B sibling on the SAME box in
+    #: the SAME run was healthy. Docket [6486] [6487] [6488], 2026-08-21.
+    #:
+    #: The inference from it was wrong. Kernels were not the variable; **dtype
+    #: was**. The two boxes differed in fp16 vs bf16 as well as in kernels, and
+    #: the arm that finally succeeded ran WITH kernels under bf16:
+    #: 2,981 cells, 355,005 word rows, 0 dead, tail max 0.7506 -- identical to
+    #: the 2026-08-03 v3 run. `tail == 1.0` means `sel` was empty, and NaN logits
+    #: produce exactly that because every comparison against NaN is False.
+    #:
+    #: And the flag then cost what it was meant to save. Carried forward after
+    #: its hypothesis had already died, it ran an A100 arm at **21.2 s/cell**
+    #: where kernels give **0.8** -- 26x, on the model the flag was invented for.
+    #:
+    #: Kept because a deliberate kernel-free run is a legitimate control and the
+    #: original finding should be reproducible rather than inferred. Not kept as
+    #: a remedy: a model writing empty cells is a DTYPE question, and
+    #: `runners.compute_dtype` reads the roster's `env.dtype` for it.
+    if a.no_ssm_kernels and _ssm:
+        print("  provision   --no-ssm-kernels: NOT installing mamba kernels for "
+              "%d model(s) that declare profile ssm: %s"
+              % (len(_ssm), ", ".join(x.split("/")[-1] for x in _ssm)))
+        _ssm = []
+    elif _ssm:
         print("  provision   %d model(s) declare profile ssm -> installing mamba "
               "kernels: %s" % (len(_ssm), ", ".join(x.split("/")[-1] for x in _ssm)))
     r = cloud.ssh_run(st, PROVISION % {
