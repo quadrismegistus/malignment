@@ -303,6 +303,19 @@ VIEWS.update({
     #: and n_words differs on 565 -- 283 down, 282 up, i.e. unbiased theta-boundary
     #: jitter. That is an accidental replicate experiment and it is the only
     #: measurement of this instrument's noise floor we have.
+    #: **`WHERE frame = \'\'` IS LOAD-BEARING, NOT TIDY.** `frame` joined the
+    #: sorting key on 2026-08-22 so a framed cell and its raw twin can COEXIST --
+    #: before that, ReplacingMergeTree kept one of them by mtime. But these views
+    #: GROUP BY (model, prompt), so coexisting rows would land in ONE GROUP and
+    #: `argMax` would pick between two measurements that are not comparable:
+    #: p(I)=0.0059 raw against p(I)=0.7759 framed on the same model and prompt.
+    #: The store separating them is necessary and not sufficient; the consumer
+    #: has to say which frame it means, and the DEFAULT has to be the historical
+    #: one or every existing reading silently changes meaning.
+    #:
+    #: A framed `_best` view is a separate view when there is something to put in
+    #: it. Filtering here rather than there is deliberate: an unfiltered consumer
+    #: gets RAW, which is what it has always got, instead of a mixture.
     "twp_cells_v4_best": """
 CREATE OR REPLACE VIEW {db}.twp_cells_v4_best AS
 SELECT model, prompt,
@@ -311,8 +324,9 @@ SELECT model, prompt,
        argMax(conservation, (topup, prompt_cache, mtime)) AS conservation,
        max(topup)                                         AS merged
 FROM {db}.twp_cells_v4
+WHERE frame = ''
 GROUP BY model, prompt
-COMMENT 'BOTH source rows are legitimate and neither is a repair of the other. A pass-1 cell and its topup cell are TWO MEASUREMENTS OF ONE SURFACE -- beam-accumulated (expand4) and single-path lower bound (score_words4, n_paths=1) -- and they must not be merged. This view takes the merged value where a topup cell exists and the pass-1 value where it does not, one row per key. The merged COLUMN is PROVENANCE, not a quality mark. ORDERING FIXED 2026-08-21: was argMax(.., topup), which is not a total order -- 3,790 cell keys carry two rows at the same topup differing on prompt_cache, and the tie was broken arbitrarily (this is the cause of the canonical min_prob flip lacan found 2026-08-19). Now (topup, prompt_cache, mtime), which leaves 0 tied keys. prompt_cache=1 wins because it is 80.2 percent of the corpus and 4 cells in 5 have no replicate at all. Replicates are retained, not deleted: they agree to 3.2e-05 median on total and give the instrument its only noise floor.'
+COMMENT 'RAW FRAME ONLY. BOTH source rows are legitimate and neither is a repair of the other. A pass-1 cell and its topup cell are TWO MEASUREMENTS OF ONE SURFACE -- beam-accumulated (expand4) and single-path lower bound (score_words4, n_paths=1) -- and they must not be merged. This view takes the merged value where a topup cell exists and the pass-1 value where it does not, one row per key. The merged COLUMN is PROVENANCE, not a quality mark. ORDERING FIXED 2026-08-21: was argMax(.., topup), which is not a total order -- 3,790 cell keys carry two rows at the same topup differing on prompt_cache, and the tie was broken arbitrarily (this is the cause of the canonical min_prob flip lacan found 2026-08-19). Now (topup, prompt_cache, mtime), which leaves 0 tied keys. prompt_cache=1 wins because it is 80.2 percent of the corpus and 4 cells in 5 have no replicate at all. Replicates are retained, not deleted: they agree to 3.2e-05 median on total and give the instrument its only noise floor.'
 """,
 
     "twp_words_v4_best": """
@@ -322,8 +336,9 @@ SELECT model, prompt, word,
        argMax(n_paths,  (topup, prompt_cache, mtime)) AS n_paths,
        max(topup)                                     AS merged
 FROM {db}.twp_words_v4
+WHERE frame = ''
 GROUP BY model, prompt, word
-COMMENT 'BOTH source rows are legitimate and neither is a repair of the other. A pass-1 cell and its topup cell are TWO MEASUREMENTS OF ONE SURFACE -- beam-accumulated (expand4) and single-path lower bound (score_words4, n_paths=1) -- and they must not be merged. A topup cell carries pass 1 rows byte-identically PLUS words scored below theta, which is why the same (model,prompt,word) appears twice in twp_words_v4. This view takes the merged value where a topup cell exists and the pass-1 value where it does not, one row per key. The merged COLUMN is PROVENANCE, not a quality mark. ORDERING FIXED 2026-08-21: was argMax(.., topup), which is not a total order -- 495,624 word keys carry two rows at the same topup differing on prompt_cache, and the tie was broken arbitrarily. That is the cause of the canonical min_prob flip on 14 keys of 9,993,876 found by lacan 2026-08-19, recorded then as a correctness bug without its cause named. Now (topup, prompt_cache, mtime), which leaves 0 tied keys. device was rejected as a tiebreak: it is not a column on this table, so cells and words could have selected different runs for one cell.'
+COMMENT 'RAW FRAME ONLY. BOTH source rows are legitimate and neither is a repair of the other. A pass-1 cell and its topup cell are TWO MEASUREMENTS OF ONE SURFACE -- beam-accumulated (expand4) and single-path lower bound (score_words4, n_paths=1) -- and they must not be merged. A topup cell carries pass 1 rows byte-identically PLUS words scored below theta, which is why the same (model,prompt,word) appears twice in twp_words_v4. This view takes the merged value where a topup cell exists and the pass-1 value where it does not, one row per key. The merged COLUMN is PROVENANCE, not a quality mark. ORDERING FIXED 2026-08-21: was argMax(.., topup), which is not a total order -- 495,624 word keys carry two rows at the same topup differing on prompt_cache, and the tie was broken arbitrarily. That is the cause of the canonical min_prob flip on 14 keys of 9,993,876 found by lacan 2026-08-19, recorded then as a correctness bug without its cause named. Now (topup, prompt_cache, mtime), which leaves 0 tied keys. device was rejected as a tiebreak: it is not a column on this table, so cells and words could have selected different runs for one cell.'
 """,
 })
 

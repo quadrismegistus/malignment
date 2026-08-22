@@ -400,6 +400,30 @@ def _cells(path):
 INSTRUMENT_FIELDS = ("rule_version", "dict_sha", "rules", "prompt_cache")
 
 
+def _frame(d):
+    """The frame this cell was measured under. '' means RAW, and most are.
+
+    **READ FROM THE `__key__` FIRST, BECAUSE THAT IS WHERE IT LIVES.**
+    `Checkpoint.key()` adds `frame`/`system`/`system_set`/`user_msg` for a framed
+    cell and omits them entirely for an unframed one, so the key is the
+    authoritative statement. The BODY may not carry it at all until every
+    producer stamps it, and a record keyed `frame='prefill'` whose frame nobody
+    read would land as `''` -- INDISTINGUISHABLE FROM RAW, and now colliding in
+    the sorting key.
+
+    That is not a hypothetical: it is the defect `_key_body_agree` was written
+    for, one field over. `rules` reached the key and not the body, and 2,706
+    CT-LLM cells were one ingest away from filing under an empty string. A framed
+    cell filing as raw is the same error with a worse consequence, because the
+    two are DIFFERENT MEASUREMENTS OF THE SAME SURFACE -- p(I)=0.0059 against
+    p(I)=0.7759 on the same model and prompt.
+    """
+    k = d.get("__key__")
+    if isinstance(k, dict) and k.get("frame"):
+        return str(k["frame"])
+    return str(d.get("frame") or "")
+
+
 def _key_body_agree(d, path):
     """REFUSE a record whose body disagrees with its own `__key__`.
 
@@ -624,7 +648,8 @@ def main():
                     "topup": int(bool(d.get("topup"))),
                     "rule_version": int(d.get("rule_version") or 0),
                     "rules": d.get("rules") or "",
-                    "prompt_cache": int(bool(d.get("prompt_cache")))}
+                    "prompt_cache": int(bool(d.get("prompt_cache"))),
+                    "frame": _frame(d)}
                 words.append(dict({"model": m, "prompt": pr, "word": wd,
                                    "p": pp, "n_paths": np_,
                                    "source": f["source"], "mtime": mt}, **w4))
@@ -675,6 +700,7 @@ def main():
                           **({} if _RV["v"] == 3 else {
                               "rules": d.get("rules") or "",
                               "prompt_cache": int(bool(d.get("prompt_cache"))),
+                              "frame": _frame(d),
                               "topup": int(bool(d.get("topup"))),
                               "topup_words": int(d.get("topup_words") or 0),
                               "topup_mass": float(d.get("topup_mass") or 0.0),
