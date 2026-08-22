@@ -35,6 +35,49 @@ inherited C.H1 in spread form; H2 is new.
 Secondary, NO DIRECTION: arousal, dominance. Dominance is the campaign's
 twice-dead scale and rides as the negative control it has become.
 
+## THE TWO CORPORA, AND WHAT COUNTS AS A PASSAGE IN EACH
+
+Every key is measured on both, and the pair is the correction the exploratory
+block leans on: `contrast.py --twin`.
+
+**Corpus A, `quadrants`** -- 14,414 passages from `jakobson_space/results/quadrants.csv`.
+Narrative-filtered, carries the human anchor and the API models, ~22 lineage
+pairs with both arms.
+
+**Corpus B, `ch`** -- 490,882 passages from `malign_logits.gen_sequences` over
+`passage`, `f11_l2`, `y`, `passage_run2`. No narrative filter, ~47 lineage pairs,
+written one parquet shard per model under `results/norms_ch/`.
+
+**Corpus B IS FREE GENERATION ONLY, and this is the load-bearing filter.**
+`gen_sequences` mixes free continuations with FORCED-WORD generations, in which
+a chosen word is inserted into the continuation:
+
+    free      490,882
+    forced  1,032,133     904,345 passage + 104,300 y + 23,488 run2
+                          1,458 distinct forced words in `passage` alone
+
+79% of the store is stimulus-constrained. Lexical content is exactly what
+`fields.norms()` and `fields.count()` measure, so a forced row measures the
+forced word rather than the arm.
+
+**The first run of corpus B did not filter them, and every number it produced is
+withdrawn.** The unit key `(corpus, model, prompt, sample_idx)` does not separate
+a free row from the forced rows sharing its prompt: 1,523,015 rows collapse to
+490,890 groups, and the dedup kept whichever row an unordered scan returned
+first. That is an arbitrary and non-reproducible choice between a free and a
+forced continuation on 68% of the store. Under `forced_word = ''` the same key
+is EXACTLY unique -- 490,882 rows, 490,882 keys -- so the filter is what makes
+the unit well defined and the dedup a no-op, which `measure.py` now asserts by
+raising if it ever fires.
+
+**What hid it was that the total looked right.** 490,890 groups against 490,882
+free rows, off by eight, because there is roughly one free row per group by
+construction -- so the count had to land near the right place whatever the
+surviving row was. A total matching expectation is not evidence the unit is
+right. The cheap general test is `uniqExact(key)` against
+`uniqExact(key + payload)`: if adding the payload multiplies the count, the key
+is not the unit.
+
 ## COVERAGE, MEASURED ON 60 REAL PASSAGES BEFORE ANY CONTRAST
 
 Coverage decides which sources can carry a passage MEAN and which are rates
