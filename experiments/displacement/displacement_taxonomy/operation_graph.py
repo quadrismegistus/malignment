@@ -309,9 +309,13 @@ def audit(G, cc, OPS, pairs, prompt, width=68):
         ok = [(rows[w][rk], rows[w][pk], rows[w].get("rank_b" if side == "A" else "rank_a"), w)
               for w in ws if w in rows and rows[w].get(rk) is not None]
         miss = sorted(w for w in ws if w not in rows)
-        out = ["%s %d->%s %.1f%%" % (w, r, ("%d" % o) if o is not None else "-", 100 * p)
+        #: RANK ONLY. Rank and per-cent together put four numbers on every word and
+        #: the line stopped reading as language. Rank carries prominence on its
+        #: own; the mass is in the sidecar and in the artifact for anything that
+        #: needs magnitude rather than order.
+        out = ["%s (%d->%s)" % (w, r, ("%d" % o) if o is not None else "-")
                for r, p, o, w in sorted(ok)]
-        return out + ["%s ?" % w for w in miss]
+        return out + ["%s (?)" % w for w in miss]
 
     #: ── THE DENOMINATOR, PRINTED ONCE AT THE TOP ────────────────────────────
     #:
@@ -364,7 +368,7 @@ def audit(G, cc, OPS, pairs, prompt, width=68):
             #: same indent on both put "FROM" at the head of the wrapped line too,
             #: so a long list read as two separate FROM entries on a skim.
             def lab(tag, ws):
-                return textwrap.fill("  ".join(ws) or "(none)", width + 26,
+                return textwrap.fill("; ".join(ws) or "(none)", width + 26,
                                      initial_indent="        %-6s" % tag,
                                      subsequent_indent="              ")
             print("    %s" % m)

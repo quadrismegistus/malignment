@@ -286,15 +286,15 @@
 				.sort((x, y) => (x.r ?? 1e9) - (y.r ?? 1e9) || x.w.localeCompare(y.w));
 		return { from: pack(f, 'a'), to: pack(t, 'b') };
 	}
+	//: RANK ONLY, AND THE MASS STAYS IN THE ARTIFACT. Printing rank and per-cent
+	//: together put four numbers on every word and the line stopped being
+	//: readable as language, which defeats the point of showing the words at all.
+	//: Rank already carries prominence -- 4 against 60 says what 7.6% against
+	//: 0.02% says -- so the second number was redundant at display size. `pa`/`pb`
+	//: are still on the nodes for anything that needs magnitude.
 	const fmt = (xs: RW[]) =>
 		xs.length
-			? xs
-					.map((x) =>
-						x.r == null
-							? x.w
-							: `${x.w} ${x.r}\u2192${x.o ?? '-'} ${((x.p ?? 0) * 100).toFixed(1)}%`
-					)
-					.join('   ')
+			? xs.map((x) => (x.r == null ? `${x.w} (?)` : `${x.w} (${x.r}\u2192${x.o ?? '-'})`)).join('; ')
 			: DASH;
 	const placedBy = (m: string) =>
 		art.nodes.filter((x) => x.kind === 'op' && x.models?.includes(m));
