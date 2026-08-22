@@ -761,14 +761,18 @@ def content_words(text, lang="en"):
     semantic field, so including them would dilute every mean and every rate in
     proportion to syntactic complexity rather than to content.
     """
-    doc = _nlp(lang)(text)
+    #: `text` may be a spaCy Doc already parsed by `all_batch()`. Tagging is
+    #: ~75% of the cost of a passage, so the batch path parses ONCE and hands
+    #: the Doc down rather than re-parsing per source.
+    doc = text if hasattr(text, "is_parsed") or type(text).__name__ == "Doc" \
+        else _nlp(lang)(text)
     return [(t.text.lower(), (t.lemma_ or "").lower())
             for t in doc if t.is_alpha
             and t.pos_ in ("NOUN", "VERB", "ADJ", "ADV")], \
            sum(1 for t in doc if t.is_alpha)
 
 
-def norms(text, lang="en"):
+def norms(text, lang="en", cw=None):
     """SCALAR sources, averaged. -> flat dict
 
         fields.norms("this is a good good good bad donkey")
@@ -803,7 +807,7 @@ def norms(text, lang="en"):
     `warriner_valence_sd` is the spread, which is a different claim again.
     """
     import statistics as _st
-    words, n_tok = content_words(text, lang)
+    words, n_tok = cw if cw is not None else content_words(text, lang)
     out = {"n_tokens": n_tok, "n_content": len(words)}
     if not words:
         return out
@@ -839,6 +843,42 @@ def norms(text, lang="en"):
     return out
 
 
+def all_fields(text, lang="en", cw=None):
+    """`norms()` and `count()` merged, over ONE parse. -> flat dict
+
+    The two functions each called `content_words()`, so a caller wanting both
+    paid for tagging twice. Measured on 833-char passages: 17.9 ms per parse
+    against 12.5 ms for every lookup in both families combined, so the second
+    parse was the single largest line item in the whole measurement.
+    """
+    cw = cw if cw is not None else content_words(text, lang)
+    out = norms(text, lang, cw=cw)
+    out.update(count(text, lang, cw=cw))
+    return out
+
+
+def all_batch(texts, lang="en", batch_size=256):
+    """`all_fields()` over many texts, parsing through `nlp.pipe`. -> iterator
+
+    Batching amortises the tagger's matrix multiplies across documents. Measured
+    on 300 corpus passages, one core:
+
+        per-doc `nlp(text)`      0.0179 s   ->  56/s
+        `nlp.pipe(batch_size=256)` 0.0116 s   ->  86/s
+        `norms()` + `count()`    0.0483 s   ->  21/s   (two parses + lookups)
+
+    So batch + shared parse is ~4x, and it is EXACT -- the same tagger on the
+    same text, only grouped. A type-level lemma/POS table would be ~100x and is
+    NOT used: on held-out corpus text it reproduces spaCy's content-word flag on
+    only 91.2% of tokens (97.3% excluding the 6.3% out-of-vocabulary), and a
+    misclassification rate that size could differ by arm, which would put an
+    instrument artefact directly into the contrast this folder exists to make.
+    """
+    texts = list(texts)
+    for t, doc in zip(texts, _nlp(lang).pipe(texts, batch_size=batch_size)):
+        yield all_fields(doc, lang)
+
+
 def _nest(kind, label):
     """Every level of a hierarchical label, outermost first. -> [str]
 
@@ -866,7 +906,7 @@ def _nest(kind, label):
     return ["_".join(parts[:i + 1]) for i in range(len(parts))]
 
 
-def count(text, lang="en"):
+def count(text, lang="en", cw=None):
     """SET sources, as rates. -> flat dict
 
         fields.count("she screamed and tore the bodies apart")
@@ -912,7 +952,7 @@ def count(text, lang="en"):
     `*_coverage` is the share of content words found in that source AT ALL, which
     is the denominator any rate from it should be read against.
     """
-    words, n_tok = content_words(text, lang)
+    words, n_tok = cw if cw is not None else content_words(text, lang)
     out = {"n_tokens": n_tok, "n_content": len(words)}
     if not words:
         return out

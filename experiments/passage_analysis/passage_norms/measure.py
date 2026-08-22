@@ -63,18 +63,44 @@ CH_CORPORA = ("passage", "f11_l2", "y", "passage_run2")
 os.environ.setdefault("MALIGNMENT_CH_DB", "malign_logits")
 
 
+def _chunk(jobs):
+    """[(id, corpus, model, arm, prompt, text)] -> [flat row]. Runs in a worker.
+
+    A CHUNK rather than one job, because the cost here is spaCy's tagger and
+    `nlp.pipe` amortises it across documents. Per core this is ~86 passages/s
+    against ~21 for the per-passage path that called `norms()` and `count()`
+    separately -- two parses each, and the parse is 75% of the work.
+    """
+    from malignment import fields
+    rows = []
+    texts = [j[5] for j in jobs]
+    #: the batch is generated lazily and a raising passage would abandon the
+    #: rest of the chunk, so each is guarded and MARKED -- never silently
+    #: absent, which would shrink a denominator nobody is watching.
+    it = fields.all_batch(texts)
+    for j in jobs:
+        pid, corpus, model, arm, prompt, _ = j
+        row = {"id": pid, "corpus": corpus, "model": model, "arm": arm,
+               "prompt": prompt}
+        try:
+            row.update(next(it))
+        except StopIteration:
+            row["error"] = "batch ended early"
+        except Exception as e:
+            row["error"] = "%s: %s" % (type(e).__name__, str(e)[:80])
+        rows.append(row)
+    return rows
+
+
 def _one(job):
-    """(id, corpus, model, arm, prompt, text) -> flat row. Runs in a worker."""
+    """One job, unbatched. Kept for callers that want a single passage."""
     from malignment import fields
     pid, corpus, model, arm, prompt, text = job
     row = {"id": pid, "corpus": corpus, "model": model, "arm": arm,
            "prompt": prompt}
     try:
-        row.update(fields.norms(text))
-        row.update(fields.count(text))
+        row.update(fields.all_fields(text))
     except Exception as e:
-        #: a passage that cannot be scored is MARKED, never silently absent --
-        #: an absent row would shrink a denominator nobody is watching.
         row["error"] = "%s: %s" % (type(e).__name__, str(e)[:80])
     return row
 
@@ -157,8 +183,10 @@ def _run_ch(a, t0, pa, pq):
             done_n += n_rows
             continue
         jobs = jobs_ch_model(model, arm.get(model, ""), a.limit)
-        rows = (list(pool.imap_unordered(_one, jobs, chunksize=100)) if pool
-                else [_one(j) for j in jobs])
+        CH_SZ = 200
+        chunks = [jobs[i:i + CH_SZ] for i in range(0, len(jobs), CH_SZ)]
+        rows = ([r for part in pool.imap_unordered(_chunk, chunks) for r in part]
+                if pool else [r for c in chunks for r in _chunk(c)])
         keys = sorted({k for r in rows for k in r})
         pq.write_table(pa.table({k: [r.get(k) for r in rows] for k in keys}),
                        fp, compression="zstd")
