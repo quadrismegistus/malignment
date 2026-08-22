@@ -37,10 +37,18 @@ is a hint that something might. Read the NEW list; spot-check the covered one.
 
 ## KINDS WITH NO STRUCTURED HOME ARE REPORTED AS SUCH, NOT AS COVERED
 
-`engine`, `perf`, `ruling` and `other` have no field in any roster file, so they
-can be neither confirmed nor denied. Calling them covered would hide them
-forever; calling them new would resurface all of them every run. They get their
-own bucket, which is also the list of schema gaps still worth closing.
+`ruling` and `other` have no field in any roster file, so they can be neither
+confirmed nor denied. Calling them covered would hide them forever; calling them
+new would resurface all of them every run. They get their own bucket, which is
+also the list of schema gaps still worth closing.
+
+**AND THE FIRST VERSION PUT `engine` AND `perf` IN THAT BUCKET TOO, WRONGLY.**
+Both have homes -- `observations.json::engine_support` keyed by ARCHITECTURE
+(8 entries, each with a status, the last vLLM version that hosted it, and a
+recovery path) and `data/model_twp_rates.jsonl` keyed by (model x device), 595
+observations. Sending 25 checkable findings into a bucket labelled "no field
+exists" is worse than calling them NEW: it asserts the record COULD NOT hold
+them, so nobody goes looking for where it already does.
 """
 import argparse
 import json
@@ -59,7 +67,19 @@ OUTCOME_KINDS = {"load_ok": ("load_ok", "loads", "ok"),
                  "run_ok": ("load_ok", "loads", "ok", "runs"),
                  "load_failed": ("load_failed",),
                  "run_failed": ("run_failed",)}
-NO_SCHEMA = {"engine", "perf", "ruling", "other", "package"}
+#: **`engine` IS NOT SCHEMA-LESS AND THE FIRST VERSION SAID IT WAS.**
+#: `observations.json` carries `engine_support`, keyed by ARCHITECTURE, with
+#: eight entries each naming a status, the last vLLM version that hosted it, the
+#: models it covers and a recovery path -- exactly the shape those findings have.
+#: Listing `engine` here sent 10 real, checkable findings into a bucket labelled
+#: "no field exists", which is worse than calling them NEW: it says the record
+#: COULD NOT hold them, so nobody goes looking for where it already does.
+#: `perf` likewise has a home: `data/model_twp_rates.jsonl`, 595 observations
+#: keyed by (model x device), which `rates.rate_for` reads and `box_guard`
+#: prices a whole fleet against. Two of the four kinds I called schema-less
+#: had schemas; only `ruling` and `other` genuinely do not, and `package`
+#: sits half-covered by the environments' packages_present/absent lists.
+NO_SCHEMA = {"ruling", "other", "package"}
 
 
 def load_record():
@@ -70,7 +90,25 @@ def load_record():
     by_model = {}
     for o in obs["observations"]:
         by_model.setdefault(o["model_id"], []).append(o)
-    return {"obs": by_model, "req": req, "vw": vw,
+    #: engine support is keyed by ARCHITECTURE; each entry also lists the
+    #: models it covers, so membership answers it without an arch lookup.
+    es = obs.get("engine_support") or {}
+    eng_models, eng_arch = set(), set(es)
+    for v in es.values():
+        for mm in ((v or {}).get("models") or []):
+            eng_models.add(mm)
+    arch = {k: (v or {}).get("architectures")
+            for k, v in ((meas.get("config_dtype") or {}).get("models") or {}).items()}
+    try:
+        from malignment import rates as _rates
+        _r = {}
+        for o in _rates.load():
+            if o.get("sec_per_cell"):
+                _r.setdefault(o["model"], []).append(o["sec_per_cell"])
+    except Exception:                                            # noqa: BLE001
+        _r = {}
+    return {"obs": by_model, "req": req, "vw": vw, "rates": _r,
+            "eng_models": eng_models, "eng_arch": eng_arch, "arch": arch,
             "repos": (meas.get("repos") or {}).get("models") or {},
             "tok": (meas.get("tokenizers") or {}).get("models") or {},
             "chat": (meas.get("chat_template") or {}).get("models") or {}}
@@ -135,6 +173,20 @@ def covered(f, rec, model=None):
         return (("covered", "%d observation(s) with outcome in %s"
                  % (len(hits), "/".join(want))) if hits
                 else ("NEW", "no observation with outcome in %s" % "/".join(want)))
+    if kind == "perf":
+        r = rec["rates"].get(m) or []
+        if r:
+            return "covered", ("%d rate observation(s), median %.3f s/cell"
+                               % (len(r), sorted(r)[len(r) // 2]))
+        return "NEW", "no recorded rate for this model in model_twp_rates.jsonl"
+    if kind == "engine":
+        if m in rec["eng_models"]:
+            return "covered", "named in observations.json engine_support"
+        a = rec["arch"].get(m)
+        if a and a in rec["eng_arch"]:
+            return "covered", "architecture %s has an engine_support ruling" % a
+        return "NEW", ("no engine_support entry for %s (architecture %s)"
+                       % (m.split("/")[-1], a or "unknown"))
     if kind == "blocked":
         st = (rec["repos"].get(m) or {}).get("state")
         return (("covered", "repos state=%s" % st) if st and st != "public"
