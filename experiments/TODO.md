@@ -386,6 +386,48 @@ is a MARGINALISATION: `25` at 0.0326 IS P(salary begins 25).** Coarse and
 correct. Any cluster here that reads numerals should treat a truncated surface as
 a marginal over a band, not as damage.
 
+## BLOCKED FOR WANT OF DATA — THE LADDER HAS NO PASSAGES (2026-08-22)
+
+`novel_arc` established that alignment moves fiction along RH's abstraction axis
+by ~56 years (base ~1973 -> aligned ~1917) and pushes interiority past any period
+the novel reached. RH's *Generative Formalism* runs the same contrast in verse
+(`llama3.1:text` vs `llama3.1:instruct`, same pretrained weights, ~50pp more
+rhyme after instruction-tuning) and refutes the training-data explanation
+directly: poems present in the training data are NOT disproportionately rhyming.
+
+So the mechanism is post-training. **The question that decides WHICH post-training
+step is whether the shift happens at SFT or at DPO** -- instruction-following
+against preference-optimisation. Findings U established that SFT does the cutting
+for displacement; if abstraction also moves at SFT the two are one mechanism.
+
+**IT CANNOT BE RUN. There are no passages for any isolated SFT rung.** Measured
+against `gen_sequences` free-generation passages:
+
+    allenai/OLMo-2-0425-1B          7,214    OLMo-2-0425-1B-DPO       7,214
+    allenai/OLMoE-1B-7B-0125        7,229    OLMoE-1B-7B-0125-DPO     7,230
+    allenai/Olmo-3-1025-7B          7,214    Olmo-3-7B-Instruct-DPO   7,214
+    ContextualAI/archangel_sft-dpo_pythia2-8b   COMBINED, not separable
+    m-a-p/CT-LLM-SFT-DPO                        COMBINED, not separable
+
+Every base has its DPO partner and no base has its SFT partner. The two
+checkpoints carrying `sft` in the name are sft-THEN-dpo artifacts, so they cannot
+isolate the step either.
+
+**WHAT IT WOULD TAKE:** generate free passages for the SFT checkpoints of the
+lineages that already have base and DPO -- at minimum `OLMo-2-0425-1B-SFT`,
+`OLMoE-1B-7B-0125-SFT`, and the Olmo-3 SFT rung -- on the same prompts and
+decoder as the existing passage corpus, then re-run `novel_arc/place_models.py`.
+The Olmo 32B ladder (base/SFT/DPO/RLVR, 23,803 twp cells per malign [6537]) is
+the fuller version if its checkpoints are still reachable.
+
+**WHY IT IS WORTH THE GENERATION:** every other finding here is a two-point
+contrast, base against aligned, which can say THAT post-training moves prose but
+not WHICH step does it. The ladder is the only design that separates them, and
+the answer changes the theoretical claim -- instruction-tuning as an aesthetic
+side effect of helpfulness (RH's framing, and it would generalise to every
+instruct model) versus preference optimisation encoding rater taste (which would
+localise it to RLHF-style pipelines specifically).
+
 ## WHAT SHOULD NOT COME
 
 `opening_matched` (withdrawn at construction). The two M02 ratio cautions as
