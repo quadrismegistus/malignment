@@ -34,6 +34,17 @@ chance per site at `[-1]`.
 import json
 import os
 
+#: **THE SENTINEL IS IMPORTED, NOT REDEFINED.** `generate.DEFAULT` separates
+#: "pass no system message, let the template's own persona fire" from "assert an
+#: empty one, overriding it" -- the two conditions `conditions.py` measured
+#: 2,500x apart. A second `object()` here would be a DIFFERENT sentinel, so
+#: `ck.key(..., system=generate.DEFAULT)` would compare unequal to this module's
+#: and silently record `system_set=True` for a caller who set nothing.
+#:
+#: Safe at module level: `generate.py` imports only `collections` and `os`, so
+#: this does not drag in torch and the file's "no torch import" promise holds.
+from .generate import DEFAULT
+
 #: **NO MODULE-LEVEL `from . import twp`.** This file's docstring promises "no
 #: torch import", README.md promises "three lines suffice to ANALYSE", and both
 #: were FALSE: `__init__.py:11` imports `Checkpoint` eagerly, this line imported
@@ -231,7 +242,8 @@ class Checkpoint:
         """Every producer's stash. Resume must see ALL of them, not just ours."""
         return [(p, self.stash(p)) for p in self.producers()]
 
-    def key(self, prompt, rules=None):
+    def key(self, prompt, rules=None, frame=None, system=DEFAULT,
+            user_msg="Hi.", prompt_cache=None):
         """**THE INSTRUMENT IS PART OF THE KEY.**
 
         `done()` used to gate on "has rows and is not skipped" while the INGEST
@@ -250,26 +262,74 @@ class Checkpoint:
         field unconditionally -- even one set to `None` -- would change every
         v3 key and orphan 984,857 stored cells. So the v4 fields appear ONLY
         when a rule set is passed.
+
+        **AND `frame=None` IS THE RAW STEM, WHICH IS EVERY CELL EVER MEASURED.**
+        The same argument one level further on. 820,246 v4 cells and 984,857 v3
+        cells were measured on the bare prompt, so the frame fields appear ONLY
+        when a frame is asked for. `key(prompt, rules)` is byte-identical to what
+        it returned before this parameter existed -- asserted in
+        `tests/test_key_frames.py`, not merely intended.
+
+        ## THE FRAME FIELDS ARE ARGUMENTS, NOT MODULE STATE, AND THAT IS THE POINT
+
+        `prompt_cache` is read from `T.USE_PROMPT_CACHE`, a module global, and it
+        is in the key. So `done()` answers about whichever population the ambient
+        setting happens to name: measured on 2026-08-22, `Olmo-3-7B-Instruct`
+        reports **0 prompts done with the cache off and 2,983 with it on**, for a
+        checkpoint that is fully measured either way. The producer is explicit --
+        `run_v4.py --cache` sets it before any key is built -- so the fleet is
+        correct; it is every OTHER caller that has to know a global exists.
+
+        A frame read the same way would repeat that at three times the surface:
+        measure under one default, query under another, and the corpus silently
+        looks unmeasured. So `frame`, `system` and `user_msg` are parameters. You
+        cannot fail to say which frame you meant, because there is nowhere else
+        for the answer to come from.
+
+        `prompt_cache=` is now accepted for the same reason and defaults to the
+        global, so nothing that exists today changes and a caller CAN be explicit.
+
+        `system_set` is separate from `system` and derived from the SENTINEL, not
+        from truthiness: `DEFAULT` (pass none, the template's own persona fires)
+        and `""` (assert an empty one, overriding that persona) both render as an
+        empty string and are the two conditions `conditions.py` measured 2,500x
+        apart. `gen_key` carries the same pair for the same reason.
+
+        The system prompt is stored WHOLE. The stash is `flat=True`, so the key
+        is a JSON object in `data.jsonl` with no length constraint, and a hash
+        would buy nothing while leaving "a row whose condition you can
+        distinguish but cannot state".
         """
         from . import twp as T
         from .ingest import RULE_VERSION
-        if rules is None:
+        if rules is None and frame is None:
             return {"model": self.model_id, "prompt": prompt,
                     "rule_version": RULE_VERSION, "dict_sha": T.dict_sha()}
         from .twp_v4 import RULE_VERSION as V4_RULE_VERSION
-        return {"model": self.model_id, "prompt": prompt,
-                "rule_version": V4_RULE_VERSION, "dict_sha": T.dict_sha(),
-                "rules": rules.label(),
-                #: the prompt cache is not bit-identical, so a cached and an
-                #: uncached cell are different measurements of one prompt.
-                "prompt_cache": bool(T.USE_PROMPT_CACHE)}
+        pc = T.USE_PROMPT_CACHE if prompt_cache is None else prompt_cache
+        k = {"model": self.model_id, "prompt": prompt,
+             "rule_version": V4_RULE_VERSION, "dict_sha": T.dict_sha(),
+             "rules": rules.label() if rules is not None else None,
+             #: the prompt cache is not bit-identical, so a cached and an
+             #: uncached cell are different measurements of one prompt.
+             "prompt_cache": bool(pc)}
+        if frame is not None:
+            k.update({"frame": frame,
+                      #: from the SENTINEL. `bool(system)` would call an
+                      #: explicitly empty system prompt "not set", collapsing the
+                      #: two conditions this field exists to separate.
+                      "system_set": system is not DEFAULT,
+                      "system": "" if system is DEFAULT else system,
+                      "user_msg": user_msg})
+        return k
 
     @property
     def paths(self):
         """Every `data.jsonl` for this checkpoint, one per producer."""
         return [st.path for _, st in self.stashes()]
 
-    def done(self, rules=None):
+    def done(self, rules=None, frame=None, system=DEFAULT, user_msg="Hi.",
+             prompt_cache=None):
         """Prompts measured BY THIS INSTRUMENT, across every producer.
 
         A skip is an attempt, not a result: `runners` records refusals in a
@@ -279,9 +339,22 @@ class Checkpoint:
         **AND `rules` IS PART OF "DONE", or a v4 run sees v3's cells and
         concludes it has nothing to do.** The same argument the docstring above
         makes for `rule_version`, one level in: a rule set is an instrument.
+
+        **THE FRAME IS PART OF IT TOO, AND FOR A SHARPER REASON.** A prefilled
+        cell and a raw one are different measurements of one prompt, so a prefill
+        run must see the raw corpus as NOT done -- otherwise it measures nothing
+        and reports success. Because the probe is built by `key()`, that follows
+        from the key rather than needing its own check: pass `frame` and every
+        prompt is re-offered, pass nothing and the answer is exactly what it was.
+
+        `prompt_cache=` is threaded through for the reason `key()` gives: this
+        method's answer already depends on `T.USE_PROMPT_CACHE`, and a caller who
+        does not know that gets a confidently wrong number -- 0 instead of 2,983.
+        The default preserves that behaviour; the parameter makes it sayable.
         """
         from . import twp as T
-        probe = self.key("", rules)
+        probe = self.key("", rules, frame=frame, system=system,
+                         user_msg=user_msg, prompt_cache=prompt_cache)
         want = {k: v for k, v in probe.items() if k != "prompt"}
         out = set()
         for _, st in self.stashes():
