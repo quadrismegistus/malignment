@@ -29,6 +29,12 @@ is not on a common scale with it and the two are never differenced.
 import argparse, collections, os, statistics as st
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+#: RESULTS GO TO $MALIGNMENT_DATA, NOT THE REPO. The chadwyck table is 128 MB
+#: and chicago is ~760 MB; `results/` here is untracked but was not ignored, so
+#: a single careless `git add` on the folder would have swept them in.
+DATA = os.path.join(os.environ.get("MALIGNMENT_DATA",
+                                   os.path.expanduser("~/malignment-data")),
+                    "novel_arc")
 
 COVERAGE = ["rh_absconc_median_cov", "brysbaert_concreteness_cov",
             "warriner_valence_cov", "k_register_level_cov", "variant_rate"]
@@ -89,7 +95,7 @@ def show(title, txt, cols, width, min_texts, note=""):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--src", default=os.path.join(HERE, "results",
+    ap.add_argument("--src", default=os.path.join(DATA,
                                                   "chadwyck_n200.parquet"))
     ap.add_argument("--bin", type=int, default=25)
     ap.add_argument("--min-texts", type=int, default=5)

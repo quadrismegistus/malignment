@@ -1,13 +1,25 @@
-"""Score chadwyck passages on three instruments, at the LLM work's grain.
+"""Score an lltk corpus's passages on three instruments, at the LLM grain.
 
-    python .../measure_chadwyck.py --limit 20        # pilot
-    python .../measure_chadwyck.py --workers 8       # all 1,338 texts
+    python .../measure_lltk.py --corpus chadwyck --workers 8
+    python .../measure_lltk.py --corpus chicago  --workers 8
 
 Runs in the LLTK venv (`~/github/lltk/.venv/bin/python`), which is the only one
 holding lltk, spacy and pyarrow at once; `malignment` is added to sys.path and
 RH's norms are read from a parquet export, so no cross-process plumbing.
 
-## WHY chadwyck AND NOTHING ELSE
+## WHICH CORPORA, AND WHY EACH
+
+`chadwyck` (1,333 dated texts, 1593-1954) is the spine: it is the only corpus in
+`lltk.passages` spanning the whole arc. It thins badly after 1875 -- 66 texts in
+1875-99, then 2, 78, 100, 87 per quarter-century -- so it cannot carry the C20.
+
+`chicago` (9,089 texts, ALL Fiction, ALL English, 1880-2000) covers exactly that
+gap, and densely: 113/190/372/423/472/656/679/487/493/834/1554/2465/351 texts by
+decade from the 1880s. It has NO rows in `lltk.passages`, so it is chunked from
+`txt` on the fly like everything else here -- the passage table is a convenience,
+not the source.
+
+## WHY chadwyck IS THE SPINE
 
 `lltk.passages` covers 1450-2011, but corpus identity is COLLINEAR with period:
 litlab, ecco and earlyprint all stop at 1800, chadwyck carries 1825-75 almost
@@ -87,6 +99,12 @@ trends, part of any curve is an orthography curve.
 import argparse, collections, os, re, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+#: RESULTS GO TO $MALIGNMENT_DATA, NOT THE REPO. The chadwyck table is 128 MB
+#: and chicago is ~760 MB; `results/` here is untracked but was not ignored, so
+#: a single careless `git add` on the folder would have swept them in.
+DATA = os.path.join(os.environ.get("MALIGNMENT_DATA",
+                                   os.path.expanduser("~/malignment-data")),
+                    "novel_arc")
 MALIGNMENT = "/Users/rj416/github/malignment"
 if MALIGNMENT not in sys.path:
     sys.path.insert(0, MALIGNMENT)
@@ -255,10 +273,10 @@ class Scorer:
         return out
 
 
-def texts_with_years():
-    """[(text_id, year)] for chadwyck, dated only, stable order."""
+def texts_with_years(corpus):
+    """[(text_id, year)] for one corpus, dated only, stable order."""
     import lltk
-    C = lltk.Corpus("chadwyck")
+    C = lltk.Corpus(corpus)
     out = []
     for t in C.texts():
         y = t.year
@@ -272,15 +290,15 @@ def texts_with_years():
 
 
 def one_text(job):
-    """(text_id, year, n) -> [row]. One worker, one text, its own Scorer."""
+    """(text_id, year, n, corpus) -> [row]. One worker, one text, own Scorer."""
     global _S
-    tid, year, n = job
+    tid, year, n, corpus = job
     try:
         S = _S
     except NameError:
         S = _S = Scorer()
     import lltk
-    C = lltk.Corpus("chadwyck")
+    C = lltk.Corpus(corpus)
     rows = []
     try:
         tx = C.text(tid)
@@ -289,31 +307,34 @@ def one_text(job):
             if r is None:
                 continue
             m = PID.match(p.id or "")
-            r.update(text_id=tid, year=year, seq=seq,
+            r.update(text_id=tid, year=year, seq=seq, corpus=corpus,
                      w_start=int(m.group(1)) if m else None,
                      w_end=int(m.group(2)) if m else None)
             rows.append(r)
     except Exception as e:
         rows.append({"text_id": tid, "year": year, "seq": -1,
+                     "corpus": corpus,
                      "error": "%s: %s" % (type(e).__name__, str(e)[:120])})
     return rows
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--corpus", default="chadwyck")
     ap.add_argument("-n", type=int, default=200, help="passage length in words")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--workers", type=int, default=1)
-    ap.add_argument("--out", default=os.path.join(HERE, "results"))
+    ap.add_argument("--out", default=DATA)
     a = ap.parse_args(argv)
     import pyarrow as pa, pyarrow.parquet as pq
 
     t0 = time.time()
-    jobs = [(tid, y, a.n) for tid, y in texts_with_years()]
+    jobs = [(tid, y, a.n, a.corpus) for tid, y in texts_with_years(a.corpus)]
     if a.limit:
         jobs = jobs[:a.limit]
     os.makedirs(a.out, exist_ok=True)
-    print("%d dated chadwyck texts, n=%d words/passage" % (len(jobs), a.n), flush=True)
+    print("%d dated %s texts, n=%d words/passage"
+          % (len(jobs), a.corpus, a.n), flush=True)
 
     if a.workers > 1:
         import multiprocessing as mp
@@ -347,7 +368,7 @@ def main(argv=None):
     bad = [r for r in rows if r.get("seq") == -1]
     rows = [r for r in rows if r.get("seq") != -1]
     keys = sorted({k for r in rows for k in r})
-    fp = os.path.join(a.out, "chadwyck_n%d.parquet" % a.n)
+    fp = os.path.join(a.out, "%s_n%d.parquet" % (a.corpus, a.n))
     pq.write_table(pa.table({k: [r.get(k) for r in rows] for k in keys}),
                    fp, compression="zstd")
     print("-> %s  (%s passages, %d texts, %.1f min)"
