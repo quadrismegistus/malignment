@@ -280,6 +280,68 @@ def every_model_resolves(v):
     return bad, "every roster node resolves to a profile and a venv"
 
 
+@check
+def revision_required_is_pinned(v):
+    """A repo whose `main` carries no model must declare a revision.
+
+    INCIDENT: `HuggingFaceTB/SmolLM3-3B-checkpoints` holds 133 branches and its
+    `main` contains exactly `.gitattributes` and `README.md`. Resolving the bare
+    id gets NO MODEL -- not the wrong one, none. Both nodes do pin a revision
+    today, so this passes; it exists because the next 133-branch container will
+    be added by someone who does not know that, and the failure is a 404 halfway
+    into a rented run rather than at declaration time.
+
+    Measured by `scripts/probe_repos.py` into measurements.json `repos`, so this
+    reads a fact rather than a list of names.
+    """
+    import yaml
+    meas = json.load(open(os.path.join(ROOT, "roster", "models",
+                                       "measurements.json")))
+    repos = ((meas.get("sections") or {}).get("repos") or {}).get("models") or {}
+    if not repos:
+        return (["measurements.json has no `repos` section -- run "
+                 "scripts/probe_repos.py --write"], "revision traps are pinned")
+    nodes = yaml.safe_load(open(os.path.join(ROOT, "roster", "models",
+                                             "models.yaml")))["nodes"]
+    bad = []
+    for m, r in sorted(repos.items()):
+        if r.get("state") != "revision_required":
+            continue
+        node = nodes.get(m) or {}
+        if not node.get("revision") and "@" not in m:
+            bad.append("%s: main carries no model and no revision is declared"
+                       % m)
+    return bad, "every revision-trap repo declares a revision"
+
+
+@check
+def gated_repos_are_known(v):
+    """Gated repos must be recorded, because a tokenless box fails on them.
+
+    INCIDENT: `Zyphra/Zamba2-7B` 401'd on a box that shipped no token, and it
+    was first mis-attributed to that box's separate HF-proxy 404 -- two failures
+    with one appearance. 11 of 160 repos need the token, including all four
+    meta-llama arms. This asserts the measurement EXISTS; the launcher ships a
+    token unconditionally, so the risk is a silent change on either side.
+    """
+    meas = json.load(open(os.path.join(ROOT, "roster", "models",
+                                       "measurements.json")))
+    repos = ((meas.get("sections") or {}).get("repos") or {}).get("models") or {}
+    if not repos:
+        return (["no `repos` section -- run scripts/probe_repos.py --write"],
+                "gated repos are measured")
+    unknown = [m for m, r in sorted(repos.items())
+               if r.get("state") in ("gated_unknown", "unknown")]
+    gated = [m for m, r in repos.items() if r.get("state") == "gated_held"]
+    if v:
+        print("        %d gated repos need the token: %s"
+              % (len(gated), ", ".join(sorted(x.split("/")[-1] for x in gated))))
+    return unknown, ("gated repos measured (%d need the token, %d refused)"
+                     % (len(gated),
+                        sum(1 for r in repos.values()
+                            if r.get("state") == "gated_refused")))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", default=None, help="run one check by name")

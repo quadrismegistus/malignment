@@ -5706,6 +5706,1453 @@
      "template": 0
     }
    }
+  },
+  "repos": {
+   "_why": "Repo reachability is a property of the REPO, true on every box forever, so it is not an (model x environment) observation. Anonymous AND tokened, because the pair distinguishes gated-and-held from gated-and-refused, and only the second is permanent.",
+   "measured_by": "scripts/probe_repos.py",
+   "n": 160,
+   "models": {
+    "01-ai/Yi-1.5-9B": {
+     "repo": "01-ai/Yi-1.5-9B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "01-ai/Yi-1.5-9B-Chat": {
+     "repo": "01-ai/Yi-1.5-9B-Chat",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Alchan/mpt-7b-chat": {
+     "repo": "Alchan/mpt-7b-chat",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf": {
+     "repo": "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-hf": {
+     "repo": "Aleph-Alpha/Pharia-1-LLM-7B-control-hf",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "BAAI/Aquila2-7B": {
+     "repo": "BAAI/Aquila2-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "BAAI/AquilaChat2-7B": {
+     "repo": "BAAI/AquilaChat2-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "BSC-LT/salamandra-7b": {
+     "repo": "BSC-LT/salamandra-7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "BSC-LT/salamandra-7b-instruct": {
+     "repo": "BSC-LT/salamandra-7b-instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+     "repo": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "ContextualAI/archangel_sft-kto_pythia2-8b": {
+     "repo": "ContextualAI/archangel_sft-kto_pythia2-8b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+     "repo": "ContextualAI/archangel_sft-ppo_pythia2-8b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "ContextualAI/archangel_sft-slic_pythia2-8b": {
+     "repo": "ContextualAI/archangel_sft-slic_pythia2-8b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "ContextualAI/archangel_sft_pythia2-8b": {
+     "repo": "ContextualAI/archangel_sft_pythia2-8b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "EleutherAI/pythia-2.8b": {
+     "repo": "EleutherAI/pythia-2.8b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "EleutherAI/pythia-6.9b": {
+     "repo": "EleutherAI/pythia-6.9b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "HuggingFaceH4/mistral-7b-sft-beta": {
+     "repo": "HuggingFaceH4/mistral-7b-sft-beta",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "HuggingFaceH4/zephyr-7b-beta": {
+     "repo": "HuggingFaceH4/zephyr-7b-beta",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "HuggingFaceTB/SmolLM2-360M": {
+     "repo": "HuggingFaceTB/SmolLM2-360M",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "HuggingFaceTB/SmolLM2-360M-Instruct": {
+     "repo": "HuggingFaceTB/SmolLM2-360M-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "HuggingFaceTB/SmolLM3-3B": {
+     "repo": "HuggingFaceTB/SmolLM3-3B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "HuggingFaceTB/SmolLM3-3B-Base": {
+     "repo": "HuggingFaceTB/SmolLM3-3B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": {
+     "repo": "HuggingFaceTB/SmolLM3-3B-checkpoints",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 404,
+     "file_token": 404,
+     "state": "revision_required",
+     "note": "repo is alive but main/config.json 404s -- main carries no model. PIN A REVISION; resolving this id bare gets nothing."
+    },
+    "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO": {
+     "repo": "HuggingFaceTB/SmolLM3-3B-checkpoints",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 404,
+     "file_token": 404,
+     "state": "revision_required",
+     "note": "repo is alive but main/config.json 404s -- main carries no model. PIN A REVISION; resolving this id bare gets nothing."
+    },
+    "LLM360/Amber": {
+     "repo": "LLM360/Amber",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "LLM360/AmberChat": {
+     "repo": "LLM360/AmberChat",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "LLM360/AmberSafe": {
+     "repo": "LLM360/AmberSafe",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+     "repo": "NousResearch/Hermes-3-Llama-3.1-8B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+     "repo": "NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "OpenLLM-France/Lucie-7B": {
+     "repo": "OpenLLM-France/Lucie-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+     "repo": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "PKU-Alignment/alpaca-7b-reproduced": {
+     "repo": "PKU-Alignment/alpaca-7b-reproduced",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "PKU-Alignment/beaver-7b-v1.0": {
+     "repo": "PKU-Alignment/beaver-7b-v1.0",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Qwen/Qwen2.5-0.5B": {
+     "repo": "Qwen/Qwen2.5-0.5B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Qwen/Qwen2.5-0.5B-Instruct": {
+     "repo": "Qwen/Qwen2.5-0.5B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Qwen/Qwen2.5-7B": {
+     "repo": "Qwen/Qwen2.5-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Qwen/Qwen2.5-7B-Instruct": {
+     "repo": "Qwen/Qwen2.5-7B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Qwen/Qwen3-8B": {
+     "repo": "Qwen/Qwen3-8B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Qwen/Qwen3-8B-Base": {
+     "repo": "Qwen/Qwen3-8B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "RWKV/rwkv-4-7b-pile": {
+     "repo": "RWKV/rwkv-4-7b-pile",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "RWKV/rwkv-raven-7b": {
+     "repo": "RWKV/rwkv-raven-7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+     "repo": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+     "repo": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "Zyphra/Zamba2-7B": {
+     "repo": "Zyphra/Zamba2-7B",
+     "gated": "auto",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=auto; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "Zyphra/Zamba2-7B-Instruct": {
+     "repo": "Zyphra/Zamba2-7B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+     "repo": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+     "repo": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+     "repo": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+     "repo": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+     "repo": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+     "repo": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Llama-3.1-Tulu-3.1-8B": {
+     "repo": "allenai/Llama-3.1-Tulu-3.1-8B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/OLMo-2-0425-1B": {
+     "repo": "allenai/OLMo-2-0425-1B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/OLMo-2-0425-1B-DPO": {
+     "repo": "allenai/OLMo-2-0425-1B-DPO",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/OLMo-2-0425-1B-Instruct": {
+     "repo": "allenai/OLMo-2-0425-1B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/OLMo-2-0425-1B-SFT": {
+     "repo": "allenai/OLMo-2-0425-1B-SFT",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/OLMoE-1B-7B-0125": {
+     "repo": "allenai/OLMoE-1B-7B-0125",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/OLMoE-1B-7B-0125-DPO": {
+     "repo": "allenai/OLMoE-1B-7B-0125-DPO",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/OLMoE-1B-7B-0125-Instruct": {
+     "repo": "allenai/OLMoE-1B-7B-0125-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/OLMoE-1B-7B-0125-SFT": {
+     "repo": "allenai/OLMoE-1B-7B-0125-SFT",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3-1025-7B": {
+     "repo": "allenai/Olmo-3-1025-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3-1125-32B": {
+     "repo": "allenai/Olmo-3-1125-32B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3-7B-Instruct": {
+     "repo": "allenai/Olmo-3-7B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3-7B-Instruct-DPO": {
+     "repo": "allenai/Olmo-3-7B-Instruct-DPO",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3-7B-Instruct-SFT": {
+     "repo": "allenai/Olmo-3-7B-Instruct-SFT",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3-7B-Think": {
+     "repo": "allenai/Olmo-3-7B-Think",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3-7B-Think-DPO": {
+     "repo": "allenai/Olmo-3-7B-Think-DPO",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3-7B-Think-SFT": {
+     "repo": "allenai/Olmo-3-7B-Think-SFT",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3.1-32B-Instruct": {
+     "repo": "allenai/Olmo-3.1-32B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3.1-32B-Instruct-DPO": {
+     "repo": "allenai/Olmo-3.1-32B-Instruct-DPO",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-3.1-32B-Instruct-SFT": {
+     "repo": "allenai/Olmo-3.1-32B-Instruct-SFT",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-Hybrid-7B": {
+     "repo": "allenai/Olmo-Hybrid-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+     "repo": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+     "repo": "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "baichuan-inc/Baichuan2-7B-Base": {
+     "repo": "baichuan-inc/Baichuan2-7B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "baichuan-inc/Baichuan2-7B-Chat": {
+     "repo": "baichuan-inc/Baichuan2-7B-Chat",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "bigscience/bloom-7b1": {
+     "repo": "bigscience/bloom-7b1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "bigscience/bloomz-7b1": {
+     "repo": "bigscience/bloomz-7b1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+     "repo": "cognitivecomputations/Dolphin3.0-Llama3.1-8B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+     "repo": "cognitivecomputations/dolphin-2.6-mistral-7b-dpo",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "croissantllm/CroissantLLMBase": {
+     "repo": "croissantllm/CroissantLLMBase",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "croissantllm/CroissantLLMChat-v0.1": {
+     "repo": "croissantllm/CroissantLLMChat-v0.1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Llama-8B": {
+     "repo": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B": {
+     "repo": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "deepseek-ai/deepseek-llm-7b-base": {
+     "repo": "deepseek-ai/deepseek-llm-7b-base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "deepseek-ai/deepseek-llm-7b-chat": {
+     "repo": "deepseek-ai/deepseek-llm-7b-chat",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "gl198976/mpt-7b": {
+     "repo": "gl198976/mpt-7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "gl198976/mpt-7b-instruct": {
+     "repo": "gl198976/mpt-7b-instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "google/gemma-2-9b": {
+     "repo": "google/gemma-2-9b",
+     "gated": "manual",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=manual; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "google/gemma-2-9b-it": {
+     "repo": "google/gemma-2-9b-it",
+     "gated": "manual",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=manual; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "google/recurrentgemma-9b": {
+     "repo": "google/recurrentgemma-9b",
+     "gated": "manual",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=manual; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "google/recurrentgemma-9b-it": {
+     "repo": "google/recurrentgemma-9b-it",
+     "gated": "manual",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=manual; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "huggyllama/llama-7b": {
+     "repo": "huggyllama/llama-7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "ibm-granite/granite-3.0-8b-base": {
+     "repo": "ibm-granite/granite-3.0-8b-base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "ibm-granite/granite-3.0-8b-instruct": {
+     "repo": "ibm-granite/granite-3.0-8b-instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "inceptionai/jais-family-6p7b": {
+     "repo": "inceptionai/jais-family-6p7b",
+     "gated": "auto",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=auto; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "inceptionai/jais-family-6p7b-chat": {
+     "repo": "inceptionai/jais-family-6p7b-chat",
+     "gated": "auto",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=auto; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "internlm/internlm2-base-7b": {
+     "repo": "internlm/internlm2-base-7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "internlm/internlm2-chat-7b": {
+     "repo": "internlm/internlm2-chat-7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "internlm/internlm2-chat-7b-sft": {
+     "repo": "internlm/internlm2-chat-7b-sft",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "kakaocorp/kanana-1.5-8b-base": {
+     "repo": "kakaocorp/kanana-1.5-8b-base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "kakaocorp/kanana-1.5-8b-instruct-2505": {
+     "repo": "kakaocorp/kanana-1.5-8b-instruct-2505",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "kakaocorp/kanana-2-3b-base": {
+     "repo": "kakaocorp/kanana-2-3b-base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "kakaocorp/kanana-2-3b-instruct": {
+     "repo": "kakaocorp/kanana-2-3b-instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "llm-jp/llm-jp-3-7.2b": {
+     "repo": "llm-jp/llm-jp-3-7.2b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct2": {
+     "repo": "llm-jp/llm-jp-3-7.2b-instruct2",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct3": {
+     "repo": "llm-jp/llm-jp-3-7.2b-instruct3",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "lomahony/eleuther-pythia6.9b-hh-dpo": {
+     "repo": "lomahony/eleuther-pythia6.9b-hh-dpo",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "lomahony/eleuther-pythia6.9b-hh-sft": {
+     "repo": "lomahony/eleuther-pythia6.9b-hh-sft",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "m-a-p/CT-LLM-Base": {
+     "repo": "m-a-p/CT-LLM-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "m-a-p/CT-LLM-SFT": {
+     "repo": "m-a-p/CT-LLM-SFT",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "m-a-p/CT-LLM-SFT-DPO": {
+     "repo": "m-a-p/CT-LLM-SFT-DPO",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "m-a-p/neo_7b": {
+     "repo": "m-a-p/neo_7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "m-a-p/neo_7b_instruct_v0.1": {
+     "repo": "m-a-p/neo_7b_instruct_v0.1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "m-a-p/neo_7b_sft_v0.1": {
+     "repo": "m-a-p/neo_7b_sft_v0.1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "meta-llama/Llama-3.1-70B": {
+     "repo": "meta-llama/Llama-3.1-70B",
+     "gated": "manual",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=manual; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "meta-llama/Llama-3.1-70B-Instruct": {
+     "repo": "meta-llama/Llama-3.1-70B-Instruct",
+     "gated": "manual",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=manual; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "meta-llama/Llama-3.1-8B": {
+     "repo": "meta-llama/Llama-3.1-8B",
+     "gated": "manual",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=manual; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+     "repo": "meta-llama/Llama-3.1-8B-Instruct",
+     "gated": "manual",
+     "api_token": 200,
+     "file_anon": 401,
+     "file_token": 200,
+     "state": "gated_held",
+     "note": "gated=manual; anonymous 401, 200 with our token -- THE BOX MUST CARRY IT"
+    },
+    "microsoft/Phi-4-reasoning-plus": {
+     "repo": "microsoft/Phi-4-reasoning-plus",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "microsoft/phi-4": {
+     "repo": "microsoft/phi-4",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "microsoft/phi-4-reasoning": {
+     "repo": "microsoft/phi-4-reasoning",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "mistralai/Mistral-7B-Instruct-v0.1": {
+     "repo": "mistralai/Mistral-7B-Instruct-v0.1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "mistralai/Mistral-7B-v0.1": {
+     "repo": "mistralai/Mistral-7B-v0.1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "openGPT-X/Teuken-7B-base-v0.6": {
+     "repo": "openGPT-X/Teuken-7B-base-v0.6",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "openGPT-X/Teuken-7B-instruct-commercial-v0.4": {
+     "repo": "openGPT-X/Teuken-7B-instruct-commercial-v0.4",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "openGPT-X/Teuken-7B-instruct-v0.6": {
+     "repo": "openGPT-X/Teuken-7B-instruct-v0.6",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "openbmb/MiniCPM5-1B": {
+     "repo": "openbmb/MiniCPM5-1B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "openbmb/MiniCPM5-1B-Base": {
+     "repo": "openbmb/MiniCPM5-1B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "openbmb/MiniCPM5-1B-SFT": {
+     "repo": "openbmb/MiniCPM5-1B-SFT",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "openchat/openchat-3.5-0106": {
+     "repo": "openchat/openchat-3.5-0106",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "stabilityai/stablelm-2-1_6b": {
+     "repo": "stabilityai/stablelm-2-1_6b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "stabilityai/stablelm-2-1_6b-chat": {
+     "repo": "stabilityai/stablelm-2-1_6b-chat",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "stabilityai/stablelm-2-zephyr-1_6b": {
+     "repo": "stabilityai/stablelm-2-zephyr-1_6b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+     "repo": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "teknium/OpenHermes-2.5-Mistral-7B": {
+     "repo": "teknium/OpenHermes-2.5-Mistral-7B",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon-H1-1.5B-Base": {
+     "repo": "tiiuae/Falcon-H1-1.5B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon-H1-1.5B-Instruct": {
+     "repo": "tiiuae/Falcon-H1-1.5B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon-H1-7B-Base": {
+     "repo": "tiiuae/Falcon-H1-7B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon-H1-7B-Instruct": {
+     "repo": "tiiuae/Falcon-H1-7B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-10B-Base": {
+     "repo": "tiiuae/Falcon3-10B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-10B-Instruct": {
+     "repo": "tiiuae/Falcon3-10B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-1B-Base": {
+     "repo": "tiiuae/Falcon3-1B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-1B-Instruct": {
+     "repo": "tiiuae/Falcon3-1B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-3B-Base": {
+     "repo": "tiiuae/Falcon3-3B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-3B-Instruct": {
+     "repo": "tiiuae/Falcon3-3B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-7B-Base": {
+     "repo": "tiiuae/Falcon3-7B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-7B-Instruct": {
+     "repo": "tiiuae/Falcon3-7B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-Mamba-7B-Base": {
+     "repo": "tiiuae/Falcon3-Mamba-7B-Base",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/Falcon3-Mamba-7B-Instruct": {
+     "repo": "tiiuae/Falcon3-Mamba-7B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/falcon-7b": {
+     "repo": "tiiuae/falcon-7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/falcon-7b-instruct": {
+     "repo": "tiiuae/falcon-7b-instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/falcon-mamba-7b": {
+     "repo": "tiiuae/falcon-mamba-7b",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "tiiuae/falcon-mamba-7b-instruct": {
+     "repo": "tiiuae/falcon-mamba-7b-instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Chat": {
+     "repo": "togethercomputer/RedPajama-INCITE-7B-Chat",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": {
+     "repo": "togethercomputer/RedPajama-INCITE-7B-Instruct",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": {
+     "repo": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+     "repo": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "zai-org/glm-4-9b-chat-hf": {
+     "repo": "zai-org/glm-4-9b-chat-hf",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    },
+    "zai-org/glm-4-9b-hf": {
+     "repo": "zai-org/glm-4-9b-hf",
+     "gated": false,
+     "api_token": 200,
+     "file_anon": 200,
+     "file_token": 200,
+     "state": "public",
+     "note": "gated=False"
+    }
+   }
   }
  }
 }
