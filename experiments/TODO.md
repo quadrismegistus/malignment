@@ -420,6 +420,36 @@ decoder as the existing passage corpus, then re-run `novel_arc/place_models.py`.
 The Olmo 32B ladder (base/SFT/DPO/RLVR, 23,803 twp cells per malign [6537]) is
 the fuller version if its checkpoints are still reachable.
 
+**AND GENERATION ALONE IS NOT ENOUGH -- THE CODER PASS IS PART OF THE COST.**
+The passages the placement uses are `ref_pool`'s `model_narrative` pool, and
+those rows carry CODER annotations, not just text:
+
+    mode_A     TOLD 3,512 / SHOWN 1,947 / NONE 228
+    degree_A   interiority 0-3   (0:228  1:1,584  2:2,769  3:1,106)
+    drift_A    HOLDS 5,283 / SHIFTS 387 / UNMOORED 17
+
+`NONE` is the narrative filter, so a new checkpoint's passages are not
+comparable until they have been through the same coder in
+`interiority_in_passages`. That is a METERED run, and it is the larger half of
+the cost: 26 base and 29 aligned models are represented at a median of **107
+passages per model**, so three SFT rungs at matched volume is a few hundred
+coder calls, but matching the full generation volume (~7,200 free passages per
+model in `gen_sequences`) is not.
+
+**A CHECK THE EXISTING CODER DATA ALREADY SUPPORTS, and one it does not.**
+Lineage-paired over the 25 pairs with >=20 passages on both arms:
+
+    degree_A   +0.1077   20/25 up   p=0.0041   CONFIRMS the interiority finding
+    TOLD share +0.0045   13/25 up   p=1        NULL
+
+The pooled figures (TOLD 59.5% -> 63.9%) look like corroboration of the
+abstraction result and do not survive lineage pairing -- models contribute
+unequal passage counts. Not a refutation of the abstraction finding either:
+`mode_A` is narrative MODE, and telling-versus-showing is not the same construct
+as lexical abstraction. It means the coder speaks to interiority and is silent
+on abstraction, so **the ladder run would test only one of the two effects
+against the strong instrument** unless a new coder field is added for it.
+
 **WHY IT IS WORTH THE GENERATION:** every other finding here is a two-point
 contrast, base against aligned, which can say THAT post-training moves prose but
 not WHICH step does it. The ladder is the only design that separates them, and
