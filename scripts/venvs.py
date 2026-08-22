@@ -63,6 +63,7 @@ disagree about a package neither profile mentions in its `why`.
 """
 import argparse
 import collections
+import functools
 import os
 import subprocess
 import sys
@@ -154,8 +155,21 @@ def _name_for(profiles):
     return ".venv-%s" % sorted(named.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
 
 
+@functools.lru_cache(maxsize=1)
 def spec():
-    """-> {venv_name: {specs, packages, profiles, models}} derived from the roster."""
+    """-> {venv_name: {specs, packages, profiles, models}} derived from the roster.
+
+    **CACHED, BECAUSE `venv_for` CALLS IT ONCE PER MODEL.** It re-parsed
+    `models.yaml` and `environments.yaml` on every call at 0.085s each, so a
+    160-model sweep spent ~13.6s re-reading two static files -- 15.35s of the
+    gate's 18s, and the same cost inside `fleet_shards`, `preflight_env` and
+    `record_successes`, none of which looked slow enough to investigate on their
+    own.
+
+    The cache is process-lifetime. Every caller here is a short-lived CLI, so a
+    yaml edited mid-process is not a case that arises; if one ever does, call
+    `spec.cache_clear()` rather than removing the cache.
+    """
     doc = yaml.safe_load(open(MODELS_YAML))
     envs = yaml.safe_load(open(ENVS_YAML))
     profiles = envs.get("profiles") or {}
