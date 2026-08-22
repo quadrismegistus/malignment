@@ -478,9 +478,17 @@ those rows carry CODER annotations, not just text:
     degree_A   interiority 0-3   (0:228  1:1,584  2:2,769  3:1,106)
     drift_A    HOLDS 5,283 / SHIFTS 387 / UNMOORED 17
 
-`NONE` is the narrative filter, so a new checkpoint's passages are not
-comparable until they have been through the same coder in
-`interiority_in_passages`. That is a METERED run, and it is the larger half of
+**CORRECTION: `NONE` IS NOT A NARRATIVE FILTER.** An earlier version of this
+entry said it was. It is not: `run.py:530` defines `mode != "NONE"` as *any
+interiority*, and all 228 `NONE` rows carry `degree_A == 0`. Reading them
+confirms it -- they are coherent stories with no inner life ("She returned to
+the monster, her mother laying dead on the ground. She leaped over the corpse").
+So the annotation set contains NO narrative/non-narrative label, and a filter
+built on it would detect absence of interiority, which is one of the two things
+being measured. Filtering with it would delete the low end of the dependent
+variable.
+
+New checkpoints still need the coder pass to be comparable on interiority. That is a METERED run, and it is the larger half of
 the cost: 26 base and 29 aligned models are represented at a median of **107
 passages per model**, so three SFT rungs at matched volume is a few hundred
 coder calls, but matching the full generation volume (~7,200 free passages per
