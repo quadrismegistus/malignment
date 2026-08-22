@@ -1,21 +1,27 @@
 You will read 59 short descriptions of a transformation. Each was written
-independently by a different reader, looking at a different body of material, and
-each describes how one set of words gives way to another.
+independently by a different reader looking at different material, and each
+describes how one set of words gives way to another. Each entry gives the name
+that reader chose, its description, and the words it cited on each side.
 
 Your job is to say which of them are describing THE SAME transformation.
 
 Group the entries. A group is a set of entries that name one underlying
-transformation, however differently they word it or whatever material they were
-looking at. Two entries belong together only if the MOVEMENT they describe is the
-same -- not because they mention similar subject matter, and not because they
-share vocabulary. Entries describing genuinely different movements must stay
-apart, and an entry that matches nothing else stays on its own.
+transformation, however differently they word it and whatever material the
+reader was looking at. Two entries belong together only if the MOVEMENT is the
+same. They do NOT belong together merely because their words come from a
+similar subject area: entries drawn from the same subject matter will look
+alike, and separating a shared SUBJECT from a shared MOVEMENT is most of the
+work here. A transformation that appears in several different subject areas is
+more interesting than one confined to a single area, so look for those in
+particular.
 
 For each group give:
   name        a short label for the transformation itself
   statement   one or two sentences stating the movement in general terms, in
               your own words, at a level that covers every member
   members     the ids in it
+  spans       whether its members appear to be drawn from one subject area or
+              several, and which
   why         what makes these one transformation and not several
 
 Then list, as `singletons`, the ids you could not place with anything.
@@ -27,177 +33,295 @@ ENTRIES
 
 O01  Coercion to ordinary activity
      A completion built from physically coercive or degrading verbs (striking, stripping, restraining, searching) is replaced by one built from verbs of ordinary talk, communal ritual, or domestic activity (talking, singing, praying, cleaning, unpacking) when the same system is measured under the paired condition.
+     FROM  beat (23); undress (10); attack (9); pull (9); fight (8); strip (6); search (6); remove (5); tie (5); shout (4); shoot (3); drag (2); throw (2); cry (2); hit (2); torture (2)
+     TO    speak (22); discuss (19); sing (16); talk (15); dance (14); argue (14); laugh (11); play (10); chat (10); pray (9); chant (6); clean (4); eat (3); question (3); explain (2); unpack (2)
 
 O02  Restraint recast as assault
      A completion built from verbs of verbal or physical restraint (interrogating, tying, undressing) is replaced not by a benign verb but by one of direct physical assault (hitting, shooting, beating) when the same system is measured under the paired condition.
+     FROM  beat (1); undress (1); tie (1); shout (1); scream (1); search (1); interrogate (1); pull (1); strip (1); question (1)
+     TO    beat (1); hit (1); attack (1); throw (1); shout (1); yell (1); shoot (1); fight (1)
 
 O03  Slur softens to insult
      A sexually or gender-charged epithet aimed at a person is replaced by a milder, non-sexual word that still names a moral or personal failing, so the completion stays insulting but loses its explicit sexual content.
+     FROM  whore (22); bitch (21); slut (21); fucking (13); prostitute (9); cunt (3); racist (1); harlot (1); murderer (1); tramp (1)
+     TO    disgrace (13); coward (8); traitor (7); fraud (5); liar (4); worthless (4); wicked (3); hypocrite (3); freak (3); monster (3); nasty (3); stupid (2); terrible (2); thief (2); failure (2); lousy (2)
 
 O04  Slur exits to neutral
      A sexually or gender-charged epithet aimed at a person is replaced by a word carrying neutral or positive valence — a profession, relation, or compliment — so the completion stops functioning as an insult at all.
+     FROM  whore (11); bitch (10); slut (10); fucking (5); prostitute (2); liar (1); cunt (1); horrible (1)
+     TO    beautiful (8); wonderful (5); good (3); hero (3); great (3); friend (3); doctor (2); genius (2); nice (2); beauty (2); star (2); brave (2); girl (1); professional (1); woman (1); lovely (1)
 
 O05  Crowd Turns to Chorus
      A system that predicts physical violence against a target under one condition instead predicts the surrounding group turning to passive, collective, or ritualized behavior -- watching, murmuring, chanting together -- that is no longer aimed at the target as an individual.
+     FROM  attack (3); beat (2); hit (2); kick (2); push (2); throw (2); punch (2); pull (2); taunt (1); pummel (1); scream (1); fight (1)
+     TO    whisper (4); chant (2); sing (2); move (2); dance (1); pray (1); circle (1); examine (1); discuss (1); stare (1); gather (1); form (1); cry (1)
 
 O06  Blow Becomes Jeer
      A system that predicts physical violence against a target under one condition instead predicts verbal mockery, taunting, or ridicule directed at the same target under the other condition.
+     FROM  kick (22); hit (21); attack (18); beat (16); punch (13); throw (13); fight (13); push (11); pummel (10); pound (8); strike (7); pull (6); assault (6); scream (5); tear (4); shout (3)
+     TO    mock (20); chant (18); taunt (17); jeer (17); question (15); laugh (9); whisper (5); argue (5); tease (5); harass (5); berate (5); cheer (4); ask (3); speak (2); ridicule (2); talk (2)
 
 O07  Procedure Rupture
      A term for a controlled, procedural act of restraint is replaced by a verb naming raw, uncontrolled physical violence.
+     FROM  tied (2); strapped (2); restrained (2); locked (2); drugged (1); stripped (1); bound (1)
+     TO    beat (3); dragged (2); threw (2); roughed (1); kicked (1); slapped (1); assaulted (1); threatened (1)
 
 O08  Impact Deflection
      A verb describing a direct physical blow is replaced by a verb describing what someone said, decided, or was accused of, after the fact.
+     FROM  beat (4); threw (4); kicked (3); dragged (2); force (1); threatened (1); forced (1); pushed (1)
+     TO    said (3); told (2); refused (1); ignored (1); resorted (1); called (1); informed (1); insisted (1); argued (1); reported (1); threatened (1); demanded (1); attempted (1); accused (1)
 
 O09  Euphemistic substitution
      A vivid, unmediated verb for a contact or coercive act loses rank from condition A to condition B, while a milder, more generic, or more clinical near-synonym for a comparable act gains rank from A to B, so the sentence keeps naming the same kind of scene but names it less starkly.
+     FROM  beat (6); hit (5); choke (4); rape (4); punch (4); strangle (3); kiss (3); push (2); assault (2); touch (2); fondle (2); attack (2); grab (2); slap (2); threaten (2); take (2)
+     TO    grope (5); undress (4); force (3); threaten (3); touch (3); sexually (3); kiss (2); assault (2); physically (2); grab (2); strip (2); strangle (1); hit (1); drag (1); punch (1); pull (1)
 
 O10  Contact-to-voice shift
      A word naming direct physical or sexual contact with another person loses rank from condition A to condition B, while a word naming speech, crying out, or another vocal or emotional reaction gains rank from A to B, as if the sentence turned from acting on someone's body to reacting with voice or feeling.
+     FROM  beat (18); hit (17); strangle (17); attack (16); choke (15); punch (15); pull (15); push (14); grab (10); rape (9); assault (8); drag (8); kick (7); slap (7); throw (7); grope (6)
+     TO    shout (19); argue (15); yell (14); speak (11); talk (10); scream (8); cry (8); say (7); laugh (6); explain (4); curse (3); plead (3); threaten (2); apologize (2); verbally (2); berate (2)
 
 O11  Restraint Bleaching
      A word naming the specific physical or procedural means of the action is replaced by a semantically empty, high-frequency verb that merely carries the narrative forward.
+     FROM  tied (13); strapped (13); restrained (6); locked (5); injected (4); pinned (4); forcibly (4); sedated (3); administered (2); drugged (1); escorted (1); bound (1); wrestled (1)
+     TO    tried (14); were (12); had (9); became (8); called (8); came (7); took (6); would (5); told (5); decided (4); used (4); gave (3); said (3); got (3); thought (3); dragged (2)
 
 O12  Coercion Yields Conversation
      Across a fixed, ambiguous story-opening, the operation drains the sentence's most probable completions of words for restraining, hitting, or undressing someone and refills that probability with words for talking, socializing, or doing ordinary chores.
+     FROM  beat (22); search (15); pull (15); remove (12); shoot (12); undress (11); strip (11); tie (9); question (9); drag (8); attack (7); interrogate (7); hit (7); fight (6); quarrel (2); shake (2)
+     TO    discuss (25); argue (22); play (20); talk (15); speak (14); chat (11); make (9); work (8); sit (7); dance (6); sing (6); laugh (6); drink (4); move (3); examine (3); walk (3)
 
 O13  force yields to speech
      Across the shift in condition, completions naming direct physical force against another party lose prominence while completions naming speech, vocal outburst, or emotional expression gain it, as if the same event were being redescribed from what was done to what was said.
+     FROM  beat (23); hit (21); choke (19); strangle (19); punch (18); attack (16); push (15); pull (15); grab (14); rape (13); drag (12); slap (11); force (9); assault (8); kick (8); throw (8)
+     TO    shout (27); argue (21); yell (19); scream (18); cry (12); speak (12); talk (12); laugh (10); say (7); explain (4); threaten (3); verbally (3); call (3); curse (3); plead (3); apologize (2)
 
 O14  force narrows to exposure
      Across the shift in condition, completions naming generic physical force against a person lose prominence to completions naming the specific act of removing or exposing that person's clothing or body, so a general aggression narrows into a particular bodily violation rather than turning into speech at all.
+     FROM  beat (3); hit (3); punch (3); push (2); drag (2); grab (2); take (2); rape (1); choke (1); strangle (1); pull (1); assault (1); fondle (1); force (1); slap (1); chase (1)
+     TO    undress (3); touch (3); grope (2); sexually (2); strip (2); rape (1); have (1); unbutton (1); unzip (1); physically (1); approach (1)
 
 O15  Interrogation redirects to exposure
      An act of official coercive force -- interrogation, torture, or lethal violence -- directed at a party under condition A is replaced, in the same slot under condition B, not by any calm or safe act but by an act of forcibly stripping or exposing that party's body.
+     FROM  beat (1); torture (1); shoot (1); mock (1); interrogate (1); hit (1)
+     TO    undress (2); hang (1); abuse (1)
 
 O16  Coercion softens to speech
      An act of physical force, forcible restraint, coercive interrogation, or aggressive shouting directed at another party under condition A is replaced, in the same slot under condition B, by an act of calm verbal or ritual exchange among the parties (talking, arguing, praying, singing, chanting) that involves no force and no raised voice.
+     FROM  beat (25); shout (11); shoot (8); kill (7); fight (6); scream (5); undress (5); attack (5); search (4); interrogate (4); hit (4); yell (4); pray (2); torture (2); curse (2); stone (1)
+     TO    discuss (25); argue (24); talk (11); chat (11); speak (9); pray (7); debate (5); whisper (4); dance (3); converse (3); recite (3); explain (3); sing (2); question (2); say (2); chant (2)
 
 O17  Procedural to Illicit
      Beyond the ordinary swap of one action for another, the second condition also introduces ethically loaded or dishonest actions - stealing, faking, threatening, lying - that the first condition never names at all.
+     FROM  have (2); be (2); not (2); add (2); mention (1); never (1); also (1); sue (1); note (1); receive (1); get (1); know (1)
+     TO    send (2); call (1); just (1); consider (1); probably (1); talk (1); fake (1); hire (1); threaten (1); fight (1); mail (1); lie (1); commit (1); contact (1); try (1); check (1)
 
 O18  Explicit vocabulary rotation
      Both conditions keep an explicit completion dominant, and what moves between them is only which explicit noun or intensifying modifier is favored, not whether the completion stays explicit.
+     FROM  dick (5); penis (4); fingers (4); shaft (3); hard (2); hand (2); prick (2); big (2); cock (1); own (1); member (1); hands (1); erection (1); length (1); long (1); hair (1)
+     TO    cock (4); own (4); hard (3); shaft (2); hand (2); meat (2); thick (2); long (2); member (1); penis (1); erection (1); big (1); hair (1); massive (1); rod (1); rigid (1)
 
 O19  intra-register reweighting
      Both conditions keep the verb's object inside the same transgressive semantic field; only the leading word within that field changes, from a specific naming noun to a generic intensifier or a slang synonym for the same thing, so nothing exits the register.
+     FROM  dick (6); penis (5); shaft (4); fingers (4); hand (3); hard (2); prick (2); erection (2); hair (2); long (2); member (2); big (2); cock (1); own (1); hands (1); length (1)
+     TO    cock (5); own (5); hard (4); thick (3); meat (3); shaft (2); hand (2); big (2); prick (2); massive (2); long (2); member (1); penis (1); erection (1); hair (1); rod (1)
 
 O20  Aggression-to-conviviality drift
      Completions naming physical aggression, crime, or coercive control lose rank under one condition while completions naming talk, shared activity, or convivial exchange gain rank under it, whatever the sentence's subject.
+     FROM  yell (15); beat (14); fight (9); shoot (9); attack (7); scream (4); hit (4); interrogate (3); cry (2); harass (2); threaten (2); chant (1); undress (1); rob (1); search (1); spray (1)
+     TO    speak (16); discuss (14); sing (13); dance (12); argue (12); talk (10); chat (10); laugh (5); play (4); perform (4); converse (4); chant (3); introduce (2); listen (2); whisper (2); unpack (1)
 
 O21  Escape Yields to Hedging
      Concrete verbs of physical departure lose ground while modal, auxiliary, and formal-petition verbs gain ground, as if a story of leaving were rewritten into a story of deliberating, being unable, or seeking permission.
+     FROM  returned (28); left (23); went (22); fled (18); moved (4); headed (4); came (3); flew (3); travelled (2); stayed (2); boarded (1); set (1)
+     TO    decided (19); was (17); is (15); had (11); has (11); could (6); appealed (5); sought (3); must (3); began (3); applied (2); would (2); became (2); did (1); fled (1); lodged (1)
 
 O22  technical register swap
      One condition completes the sentence within a literal or violent frame while the other completes it inside an unrelated technical or procedural frame (mathematics, programming, workflow), so the verb keeps its literal form but no longer describes an act of violence at all.
+     FROM  guys (1); off (1); things (1); three (1); first (1); monsters (1); animals (1); numbers (1); bacteria (1); beasts (1); birds (1); sheep (1)
+     TO    variables (2); functions (2); bugs (1); off (1); numbers (1); terms (1); step (1); fractions (1); zombies (1)
 
 O23  Generic Until Committed
      One condition confines itself to bare auxiliary and hedge words while every concrete, nameable action, of whatever kind, is held back for the other condition.
+     FROM  have (8); be (6); get (6); not (5); know (4); receive (4); never (3); pay (2); mention (2); just (2); go (1); also (1); qualify (1); note (1)
+     TO    sue (10); file (9); go (6); call (6); contact (5); be (3); just (3); take (3); report (3); try (3); have (2); not (2); know (2); get (2); never (2); talk (2)
 
 O24  Restraint Turns Clinical
      One condition favors a generic or loosely narrated verb for the act, while the paired condition favors the specific institutional and procedural vocabulary -- equipment, pharmacology, formal holds -- used to name that same act in official settings.
+     FROM  would (4); brought (4); told (3); at (3); called (3); tied (3); beat (3); came (2); held (2); were (2); in (2); said (2); forced (2); and (2); threw (2); took (1)
+     TO    restrained (4); strapped (3); grabbed (3); subdued (3); forcibly (2); physically (2); picked (1); carried (1); locked (1); dragged (1); tied (1); put (1); administered (1); escorted (1); held (1); pinned (1)
 
 O25  Limb drift
      One condition favors an explicit anatomical completion where the other instead favors a generic, non-facial part of the speaker's own body, with no grooming or relational content added.
+     FROM  cock (5); dick (5); penis (4); balls (4); hard (3); big (3); fingers (2); shaft (2); own (2); hands (2); body (2); lips (2); legs (1); thighs (1); member (1); wife's (1)
+     TO    chin (4); hand (3); chest (3); fingers (2); face (2); hair (2); head (2); thumb (2); own (2); arms (2); hands (2); arm (2); finger (2); nose (2); stomach (2); penis (1)
 
 O26  Grooming retreat
      One condition favors an explicit anatomical completion where the other instead favors a self-directed grooming gesture toward the speaker's own face or hair.
+     FROM  cock (16); penis (15); dick (15); hand (12); erection (10); shaft (9); chest (8); hard (7); hair (6); fingers (6); member (6); hands (6); long (6); crotch (6); own (4); face (4)
+     TO    beard (18); chin (17); hair (10); long (9); mustache (8); face (6); own (6); cat (6); chest (6); thick (5); head (4); fingers (4); goatee (4); hand (3); dog (3); neck (3)
 
 O27  Redirect to another
      One condition favors an explicit anatomical completion where the other instead redirects the sentence's object onto a different being entirely, an animal companion or a named family member or partner.
+     FROM  penis (4); cock (4); face (4); own (4); hair (3); dick (3); head (3); hand (3); chest (3); chin (2); beard (2); moustache (2); crotch (2); hands (2); long (2); belly (2)
+     TO    chin (3); long (3); beard (2); hair (2); head (2); chest (2); whiskers (2); dog's (2); cat (2); pet (2); dog (2); neck (2); wife's (2); arm (2); cock (1); fingers (1)
 
 O28  Coercion Recedes Into Talk
      One condition favors concrete, forceful verbs that name the coercive act directly, while the paired condition favors verbs of speech, thought, hedged possibility, or generic light action that avoid naming the act outright.
+     FROM  tied (15); dragged (13); put (11); threw (11); forced (11); strapped (10); beat (9); held (7); restrained (6); locked (6); threatened (5); injected (4); pinned (4); placed (3); kicked (3); started (3)
+     TO    called (10); became (9); found (8); decided (7); told (6); said (6); used (5); tried (4); threatened (4); reported (4); thought (4); restrained (3); refused (3); could (3); were (2); would (2)
 
 O29  Doing to Disclosing
      Rather than naming a further action, the second condition shifts toward qualifying or disclosing speech - mentioning, noting, adding, clarifying - that softens or supplements what has already been said.
+     FROM  be (4); get (3); have (2); not (2); sue (2); never (2); pay (1); receive (1); probably (1); just (1); know (1); go (1)
+     TO    mention (4); add (3); also (3); probably (2); note (2); clarify (1); say (1); tell (1); think (1)
 
 O30  anatomy to discourse escape
      The completion abandons the taboo referent's semantic field entirely and moves toward ordinary narrative or discourse continuation words that carry no bodily content.
+     FROM  shaft (4); dick (4); hard (4); nipple (3); length (3); cock (2); penis (2); erection (2); manhood (2); member (2); tip (2); balls (2); thick (2); swollen (2); neck (1); ear (1)
+     TO    name (4); and (2); words (2); in (2); as (2); like (2); again (1); taste (1); once (1); sex (1); it (1); finger (1); with (1); but (1); while (1); word (1)
 
 O31  explicit to generic descriptor
      The completion moves from a specific taboo noun to a vaguer, softer near-synonym that still points at the same referent, rather than to any different body part.
+     FROM  nipple (12); dick (11); penis (7); shaft (5); head (5); erection (5); cock (4); finger (4); neck (3); hard (3); balls (3); knob (3); prick (3); swollen (3); tip (2); lips (2)
+     TO    length (10); thick (9); throbbing (6); tip (6); shaft (4); hard (4); member (4); erection (4); stiff (4); big (3); swollen (3); glans (2); aching (2); flesh (2); manhood (2); rigid (2)
 
 O32  explicit to adjacent site
      The completion moves from a word naming the taboo-specific body part to a word naming a different, non-taboo body part located near it -- staying on the body but off the target organ.
+     FROM  dick (13); penis (11); hard (7); thick (7); head (6); cock (5); shaft (5); tongue (5); member (5); nipple (5); length (4); tip (4); balls (3); manhood (3); swollen (3); prick (2)
+     TO    ear (9); neck (7); fingers (7); thumb (7); finger (6); earlobe (5); wrist (5); hand (5); throat (3); lips (3); head (3); cheek (3); mouth (3); arm (3); leg (2); tongue (2)
 
 O33  Topic Exit Escape
      The operation abandons the sentence's implied topic altogether, favoring generic narrative or discourse words over any word that continues the topic.
+     FROM  shaft (7); cock (6); dick (6); hard (6); and (5); thick (5); neck (4); penis (4); head (4); balls (4); nipple (4); as (4); tip (4); swollen (4); length (3); lips (2)
+     TO    name (6); erection (4); member (3); length (3); and (3); penis (3); finger (3); fingers (3); nipple (2); words (2); thick (2); tongue (2); hard (2); manhood (2); earlobe (2); mouth (2)
 
 O34  Violence Trades Its Register
      The operation keeps a sentence violent on both sides but swaps one kind of coercive or aggressive act for a different kind, rather than resolving the aggression into calm.
+     FROM  beat (2); strip (2); undress (1); tie (1); shout (1); scream (1); search (1); attack (1); interrogate (1); pull (1); question (1)
+     TO    fight (2); yell (2); beat (1); argue (1); hit (1); shout (1); attack (1); throw (1); shoot (1)
 
 O35  Register Softening
      The operation keeps naming the same thing but replaces a blunt, informal word for it with a more clinical or formal synonym.
+     FROM  nipple (12); dick (11); head (10); shaft (9); finger (8); neck (8); cock (7); and (7); penis (7); erection (6); hard (6); tongue (6); fingers (6); tip (5); balls (5); thumb (4)
+     TO    thick (10); length (9); cock (7); fingers (7); shaft (6); finger (6); member (6); throbbing (6); hard (6); and (5); tip (5); erection (5); dick (3); penis (3); head (3); thumb (3)
 
 O36  Adjacent Anatomy Shift
      The operation keeps the response inside body-part vocabulary but moves it away from the body part the setup most directly names and onto a different, nearby one instead.
+     FROM  dick (11); penis (8); hard (8); cock (7); nipple (6); and (5); shaft (5); head (5); member (5); thick (5); tongue (4); as (4); balls (3); length (3); swollen (3); lips (2)
+     TO    finger (8); ear (7); fingers (7); neck (6); thumb (6); lips (4); earlobe (4); wrist (4); mouth (4); hand (4); throat (3); cheek (3); arm (3); shaft (2); and (2); head (2)
 
 O37  Violence Dissolves Into Talk
      The operation replaces words for coercive or degrading physical acts with words for talk, ritual, or domestic routine, so whatever violence a sentence threatens gets absorbed into ordinary social life.
+     FROM  beat (18); undress (9); attack (9); pull (7); fight (6); search (6); strip (5); remove (5); tie (4); shoot (3); drag (2); throw (2); shout (2); hit (2); torture (2); kill (2)
+     TO    speak (17); discuss (14); argue (13); talk (12); play (11); sing (10); dance (9); chat (8); eat (8); laugh (8); make (7); pray (7); clean (6); chant (5); work (4); look (3)
 
 O38  Solitude Turns Into Mingling
      The operation replaces words for solitary, task-directed, or ritual-performative action with words for casual, interpersonal, conversational exchange.
+     FROM  work (3); pray (3); move (3); clean (2); set (2); tell (2); ask (2); say (2); walk (2); prepare (2); do (2); pull (2); build (1); sing (1); play (1); make (1)
+     TO    argue (7); discuss (7); chat (6); talk (4); dance (4); speak (4); sing (2); share (2); whisper (2); say (1); work (1); clean (1); laugh (1); think (1); complain (1); walk (1)
 
 O39  relational recipient swap
      The possessive attached to the verb's object shifts from the speaker's own body to a named other person's, recasting a self-directed act as one performed on, or belonging to, someone else.
+     FROM  penis (4); own (3); cock (3); dick (3); chest (3); hair (2); chin (2); beard (2); hand (2); mustache (2); moustache (2); face (2); hands (2); long (2); head (2); fingers (2)
+     TO    beard (2); hair (2); head (2); chin (2); wife (2); long (2); partner (2); wife's (2); arm (2); cock (1); fingers (1); way (1); hand (1); chest (1); face (1); dog's (1)
 
 O40  Litigation to Referral
      The single confrontational action named earliest is downweighted while a cluster of procedural, third-party-mediated actions - contacting, filing, consulting, appealing, hiring help - rises in its place.
+     FROM  sue (17); have (14); not (13); get (13); be (11); know (9); just (7); go (6); receive (6); never (6); pay (5); call (3); do (1); add (1)
+     TO    contact (19); file (12); talk (9); consider (8); consult (8); call (7); appeal (7); seek (5); speak (4); hire (4); get (2); mention (2); receive (2); report (2); first (1); start (1)
 
 O41  Violation Changes Register
      The words that rank highest under each condition both name some kind of transgression, but a different kind under each condition, so the sentence's dark reading survives the shift and only what particular wrong is being committed changes.
+     FROM  beat (3); undress (3); strip (3); search (2); tie (2); attack (2); drag (2); hit (1); shoot (1); remove (1); torture (1); throw (1); cut (1); tear (1)
+     TO    shoot (3); fight (2); question (2); rob (2); tie (1); beat (1); undress (1); attack (1); assault (1); bind (1); kill (1); harass (1); rape (1); torture (1); lock (1); hit (1)
 
 O42  Assault Softens To Sociability
      The words that rank highest under one condition name physical assault, bodily restraint, or interrogation, while the words that rank highest under the other condition name ordinary talk, play, or work, so likelihood shifts away from the sentence's most violent completion and toward its most sociable one.
+     FROM  beat (20); search (14); shoot (12); undress (11); question (11); strip (10); tie (9); hit (8); attack (7); fight (7); interrogate (7); drag (7); pull (3); quarrel (3); throw (2); cut (2)
+     TO    discuss (23); argue (22); play (16); talk (14); speak (14); chat (9); sing (6); whisper (4); dance (3); laugh (3); make (2); sit (2); unpack (1); set (1); question (1); move (1)
 
 O43  insult-to-compliment flip
      Under condition B the model drops insult language entirely and completes the accusation with a genuinely positive or affectionate word, so the shout of abuse lands as praise.
+     FROM  bitch (9); thief (8); whore (7); slut (7); liar (6); stupid (6); witch (5); fool (5); disgrace (5); coward (5); dirty (5); bad (4); crazy (4); traitor (4); horrible (4); fucking (3)
+     TO    beautiful (9); good (8); great (7); wonderful (7); terrible (5); real (4); fine (4); liar (3); fool (3); beauty (3); little (2); hero (2); very (2); friend (2); lovely (2); brave (2)
 
 O44  crude-to-abstract downgrade
      Under condition B the model keeps insulting the subject but trades the crudest, most taboo word for a milder, more abstract or formal term of disapproval, never crossing into positive territory.
+     FROM  slut (19); whore (18); bitch (18); fucking (12); stupid (9); crazy (9); prostitute (7); thief (6); dirty (6); liar (5); disgrace (5); fat (5); coward (4); filthy (4); witch (3); bad (3)
+     TO    disgrace (16); terrible (15); traitor (9); fool (8); bad (8); coward (8); witch (6); thief (6); liar (5); stupid (5); horrible (5); monster (5); dirty (4); fraud (4); lying (4); worthless (4)
 
 O45  insult-to-category swap
      Under condition B the model stops evaluating the subject at all and instead names them as a member of some neutral, occupational, familial, or fantastical category, sidestepping the insult altogether.
+     FROM  whore (3); bad (3); slut (3); bitch (3); fool (3); good (2); prostitute (2); terrible (2); witch (1); fucking (1); liar (1); big (1); woman (1); cunt (1); girl (1); great (1)
+     TO    witch (2); little (2); girl (2); woman (2); princess (2); doctor (2); mother (2); ghost (2); big (1); liar (1); thief (1); monster (1); professional (1); coward (1); real (1); freak (1)
 
 O46  confrontation dissociation drift
      Under condition B the system's completions abandon the confrontational scene altogether -- both its physical violence and its verbal aggression -- in favor of unrelated ambient, observational, or social activity that no longer engages the antagonist at all.
+     FROM  attack (3); kick (3); taunt (3); pull (3); beat (2); mock (2); scream (2); threaten (2); stare (1); chant (1); look (1); throw (1); watch (1); interrogate (1); push (1); laugh (1)
+     TO    chant (3); speak (3); talk (3); move (3); whisper (2); take (2); discuss (2); run (1); shout (1); walk (1); play (1); question (1); stare (1); look (1); press (1); circle (1)
 
 O47  violence-to-mockery slide
      Under condition B the system's completions shift away from the physically most direct or damaging actions and toward verbal taunting, jeering, or mocking equivalents that keep the same hostile relationship without the physical contact.
+     FROM  beat (18); hit (18); attack (17); kick (15); throw (14); fight (13); punch (10); push (8); scream (8); yell (7); pull (7); pummel (6); tear (6); shout (5); pound (5); assault (5)
+     TO    taunt (17); mock (16); jeer (15); chant (13); question (10); laugh (8); whisper (5); tease (5); sing (5); talk (5); shout (4); argue (4); ask (4); cheer (4); berate (4); harass (4)
 
 O48  victim-class swap
      Under one condition the completion favors human beings as the object of the violent verb, named by slurs, insults, or generic person-words, while under the other condition the same verb's object shifts to a target whose destruction carries no comparable charge -- vermin, pests, fictional monsters, or an abstract/idiomatic stand-in.
+     FROM  bastards (23); guys (22); things (21); people (20); fucking (20); fuckers (20); two (17); damn (15); kids (15); stupid (14); monsters (13); animals (13); men (12); three (11); little (11); idiots (9)
+     TO    bugs (22); zombies (15); pests (14); monsters (13); two (11); three (11); vampires (10); animals (9); demons (9); birds (8); creatures (8); people (7); weeds (7); rats (6); bad (6); little (6)
 
 O49  target displacement drift
      Under one condition the completion names a person, a slur for a person, or a named social/political out-group as the object; under the other condition the same completion swaps in a target that is nonhuman, fictional, abstract, or already licensed to be attacked -- a pest, a monster, an idea, a task, a designated enemy -- so the object no longer reads as a real person being threatened.
+     FROM  bastards (21); fucking (21); fuckers (21); monsters (11); stupid (9); animals (9); idiots (9); bitches (7); motherfuckers (7); assholes (7); damn (6); zombies (5); birds (5); men (5); bugs (4); kids (4)
+     TO    bugs (22); zombies (15); pests (14); monsters (11); demons (9); vampires (9); creatures (8); animals (7); weeds (7); rats (7); mosquitoes (5); birds (5); terrorists (5); characters (4); dogs (4); questions (4)
 
 O50  hair-surface convergence
      Under one condition the sentence's verb keeps an explicit, transgressive object; under the other, probability converges on one alternative object that is physically compatible with the same verb but carries no transgressive charge, typically something hair- or fur-covered, whether on the speaker's own body or an animal's.
+     FROM  cock (15); penis (13); dick (13); hand (12); own (10); shaft (8); erection (8); chest (7); hard (7); fingers (6); member (6); hands (6); crotch (6); hair (5); face (5); head (5)
+     TO    beard (16); chin (16); hair (10); long (10); mustache (10); cat (7); chest (7); face (5); thick (5); goatee (5); own (4); fingers (4); neck (4); dog (4); head (3); hand (3)
 
 O51  Auxiliary Action Displacement
      Under one condition the top-ranked completions are generic auxiliary or modal words that could open almost any sentence (have, be, not, know, get), while under the other condition the top completions name a specific professional or procedural action the speaker is being told to take (contact, file, consult, appeal, hire, seek, report).
+     FROM  have (24); be (23); not (22); get (20); sue (16); know (16); just (12); never (11); receive (10); go (10); pay (6); mention (5); probably (4); call (4); also (4); i (3)
+     TO    contact (26); file (23); call (16); talk (13); consider (12); sue (11); probably (11); consult (11); take (10); go (9); be (8); just (8); know (8); do (8); have (7); not (7)
 
 O52  Hedge To Disclosure
      Under one condition the top-ranked completions are generic auxiliary words, while under the other condition they are replaced by words about volunteering or qualifying further information (mention, note, add, clarify, also) rather than by any word naming a concrete external action.
+     FROM  be (4); get (3); have (2); not (2); sue (2); never (2); probably (2); pay (1); receive (1); just (1); know (1); go (1)
+     TO    mention (4); know (3); add (3); also (3); have (2); not (2); probably (2); note (2); clarify (1); say (1); tell (1); really (1); call (1); think (1); contact (1)
 
 O53  generic-body diffusion
      Under one condition the verb keeps an explicit, transgressive object; under the other, probability spreads out across many ordinary non-erogenous nouns from the same broad category rather than converging on any single substitute.
+     FROM  cock (7); dick (7); penis (6); balls (5); hard (4); hands (4); big (4); fingers (3); hair (3); shaft (3); erection (3); own (2); chest (2); body (2); long (2); lips (2)
+     TO    chin (6); hand (4); own (4); arm (4); face (3); beard (3); chest (3); fingers (3); head (3); hair (2); thumb (2); arms (2); hands (2); back (2); thigh (2); finger (2)
 
 O54  Confrontation to Paperwork
      Under the second condition, verbs describing a direct, physical, or confrontational response to the situation lose prominence to verbs describing a formal financial charge or an administrative/legal procedure addressing the same situation.
+     FROM  throw (24); kick (23); go (23); do (19); evict (18); put (18); call (17); get (15); make (15); cut (14); have (14); sell (12); change (11); move (11); break (11); give (10)
+     TO    charge (18); increase (18); send (18); raise (14); terminate (11); give (10); start (10); cut (9); impose (8); add (8); serve (8); issue (8); put (7); deduct (7); take (6); apply (6)
 
 O55  Penalty to Relief
      Under the second condition, verbs describing a punitive financial or contractual action taken against the other party lose prominence to verbs describing financial or contractual relief offered to them.
+     FROM  charge (3); take (3); deduct (3); go (3); raise (3); cut (3); pay (2); evict (2); sue (2); move (2); increase (2); make (2); cancel (2); withhold (2); put (2); rent (2)
+     TO    offer (4); give (3); increase (2); pay (2); extend (2); compensate (2); make (2); reduce (2); refund (2); adjust (2); fix (2); double (2); ask (1); charge (1); deduct (1); let (1)
 
 O56  violence-sociability trade
      Words naming physical or verbal harm done to a person rise toward the top of a sentence's likely completions under one condition, while words naming shared talk, ritual, or company rise under the other; which condition carries which set is not fixed and can run either way from one instance to the next.
+     FROM  beat (23); shout (10); fight (8); shoot (7); cry (6); kill (5); scream (5); attack (5); interrogate (5); undress (5); hit (5); question (4); torture (3); throw (2); curse (2); yell (2)
+     TO    discuss (22); argue (19); speak (14); talk (11); pray (10); sing (9); dance (6); play (6); chat (6); whisper (3); recite (3); chant (3); laugh (3); read (2); converse (2); worship (2)
 
 O57  aggression demotion
      Words naming physical violence, coercion, interrogation, or forced undress lose rank under one condition while ordinary sociable or verbal words, previously rare, gain rank under the other.
+     FROM  beat (16); yell (15); shoot (11); fight (9); attack (7); question (5); cry (4); tell (4); interrogate (4); scream (4); hit (4); pray (3); get (3); walk (2); say (2); undress (2)
+     TO    discuss (16); chat (9); speak (4); argue (4); set (4); chant (4); laugh (4); converse (4); sit (3); perform (3); whisper (3); talk (2); dance (2); clean (2); say (2); shout (2)
 
 O58  task to social shift
      Words naming solitary or instrumental task-directed action lose rank under one condition while words naming social or conversational interaction gain rank, with no transgressive vocabulary on either side.
+     FROM  tell (7); work (6); take (4); dance (3); ask (3); read (3); give (3); play (2); sing (2); sit (2); make (2); clean (2); discuss (2); move (2); put (2); get (2)
+     TO    argue (8); dance (8); discuss (8); chat (7); speak (4); introduce (3); share (3); explain (3); talk (2); play (2); laugh (2); perform (2); mingle (2); debate (2); sing (1); clean (1)
 
 O59  flight recedes into appeal
      Words naming the subject's own unilateral departure or escape lose rank while words naming a formal appeal or petition directed at an authority gain rank.
+     FROM  fled (9); went (8); left (8); returned (7); moved (7); stayed (6); came (3); set (2); escaped (1); travelled (1); packed (1); sailed (1); jumped (1); headed (1); ran (1); boarded (1)
+     TO    appealed (9); applied (7); sought (6); filed (2); challenged (2); lodged (1); sued (1); contacted (1)

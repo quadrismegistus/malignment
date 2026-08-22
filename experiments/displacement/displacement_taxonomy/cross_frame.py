@@ -86,7 +86,8 @@ def ops(min_n=2):
                 continue
             out.append(dict(prompt=r["prompt"], domain=r["domain"], reading=r["tag"],
                             name=o["name"], statement=o.get("statement") or "",
-                            members=sorted(mem), reversers=sorted(rev.get(o["name"], set()))))
+                            members=sorted(mem), _members=o.get("members") or [],
+                            reversers=sorted(rev.get(o["name"], set()))))
     #: SORTED BY STATEMENT so the id order carries no frame information. Sorting
     #: by prompt would put every sexual entry first and hand the rater the
     #: grouping it is being asked to discover.
@@ -97,23 +98,29 @@ def ops(min_n=2):
 
 
 TASK = """You will read %d short descriptions of a transformation. Each was written
-independently by a different reader, looking at a different body of material, and
-each describes how one set of words gives way to another.
+independently by a different reader looking at different material, and each
+describes how one set of words gives way to another. Each entry gives the name
+that reader chose, its description, and the words it cited on each side.
 
 Your job is to say which of them are describing THE SAME transformation.
 
 Group the entries. A group is a set of entries that name one underlying
-transformation, however differently they word it or whatever material they were
-looking at. Two entries belong together only if the MOVEMENT they describe is the
-same -- not because they mention similar subject matter, and not because they
-share vocabulary. Entries describing genuinely different movements must stay
-apart, and an entry that matches nothing else stays on its own.
+transformation, however differently they word it and whatever material the
+reader was looking at. Two entries belong together only if the MOVEMENT is the
+same. They do NOT belong together merely because their words come from a
+similar subject area: entries drawn from the same subject matter will look
+alike, and separating a shared SUBJECT from a shared MOVEMENT is most of the
+work here. A transformation that appears in several different subject areas is
+more interesting than one confined to a single area, so look for those in
+particular.
 
 For each group give:
   name        a short label for the transformation itself
   statement   one or two sentences stating the movement in general terms, in
               your own words, at a level that covers every member
   members     the ids in it
+  spans       whether its members appear to be drawn from one subject area or
+              several, and which
   why         what makes these one transformation and not several
 
 Then list, as `singletons`, the ids you could not place with anything.
@@ -127,80 +134,53 @@ ENTRIES
 """
 
 
-def document(min_n=2):
-    xs = ops(min_n)
-    body = "\n\n".join("%s  %s\n     %s" % (o["id"], o["name"], o["statement"]) for o in xs)
-    return xs, TASK % (len(xs), body)
+def pooled_words(o_members, side, sc, cap=16):
+    """Words cited on one side of an operation, pooled over its models.
 
-
-AX = ("concreteness", "valence", "arousal", "dominance")
-
-
-def feature_shift(min_members=8, min_cov=5):
-    """Per operation, the mean shift from FROM words to TO words on four norms.
-
-    ## THE POINT: THIS STITCHES WHERE WORDS AND ROSTERS BOTH FAIL
-
-    Frames share no vocabulary (`beat`/`strapped` against `cock`/`dick` against
-    `sue`/`file`), so lexical overlap across frames is zero by construction, and
-    the ARI above rules out the roster. What DOES cross is the PROPERTIES of the
-    words: two operations can be the same relation while sharing no word, if both
-    move from concrete to abstract, or from high to low arousal.
-
-    Computable from cited public norms (Warriner valence/arousal/dominance,
-    Brysbaert concreteness), so unlike a statement grouping it is not a language
-    model describing language models, and it can CHECK a semantic grouping rather
-    than echo it.
-
-    ## TWO LIMITS THAT ARE NOT SMALL
-
-    Unweighted over word TYPES, not mass. The rater's citations carry ranks and a
-    rank-1 word counts the same here as a rank-60 one.
-
-    And these are the words the RATER CHOSE TO CITE, so this measures the shift in
-    the cited set rather than in the distribution. The stronger version computes
-    the same four axes over the full twp table per (model, prompt) and asks
-    whether the rater's named operation predicts it; that needs no annotation at
-    all and is the honest form of this measurement.
+    Ordered by HOW MANY MODELS CITED THEM, then by mean rank. A word four models
+    put on that side is more characteristic of the relation than one model's
+    idiosyncratic pick, and that is what pooling should surface. Capped so a
+    30-member operation does not bury the reader in its own tail.
     """
-    import statistics as st
-    sys.path.insert(0, "/Users/rj416/github/malignment")
-    from malignment import fields as F
-    N = F._norms()
+    cnt, rk = collections.Counter(), collections.defaultdict(list)
+    key = "rank_a" if side == "a" else "rank_b"
+    for m in o_members:
+        for w in {x.lower() for x in (m.get(side + "_words") or [])}:
+            cnt[w] += 1
+            r = (sc.get(m["model"]) or {}).get(w) or (sc.get(m["model"]) or {}).get(w.capitalize())
+            if r and r.get(key) is not None:
+                rk[w].append(r[key])
+    xs = sorted(cnt, key=lambda w: (-cnt[w], sum(rk[w]) / len(rk[w]) if rk[w] else 999))
+    return [(w, cnt[w]) for w in xs[:cap]]
 
-    def lem(w):
-        if w in N:
-            return w
-        try:
-            l = F.lemma(w)
-        except Exception:
-            return w
-        return l if l in N else w
 
-    out = []
-    dom = RT.domains()
-    for r in blind_readings():
-        for o in r["v"].get("operations") or []:
-            if len(o.get("members") or []) < min_members:
-                continue
-            a, b = collections.Counter(), collections.Counter()
-            for m in o.get("members") or []:
-                for w in m.get("a_words") or []:
-                    a[lem(w.lower())] += 1
-                for w in m.get("b_words") or []:
-                    b[lem(w.lower())] += 1
-            d, cov = {}, {}
-            for ax in AX:
-                xa = [N[w][ax] for w in a if ax in N.get(w, {})]
-                xb = [N[w][ax] for w in b if ax in N.get(w, {})]
-                if len(xa) >= min_cov and len(xb) >= min_cov:
-                    d[ax] = st.mean(xb) - st.mean(xa)
-                    cov[ax] = (len(xa), len(a), len(xb), len(b))
-            if len(d) == len(AX):
-                out.append(dict(prompt=r["prompt"], domain=dom.get(r["prompt"]),
-                                reading=r["tag"], name=o["name"], d=d, cov=cov,
-                                n=len(o.get("members") or [])))
-    return out
+def document(min_n=2):
+    """One entry per operation: id, name, statement, and the pooled FROM/TO words.
+
+    ## WORDS ARE IN, AND THE COST IS STATED
+
+    An earlier version carried statements alone, to stop a rater sorting by
+    subject matter instead of by movement. RH's call, and it matches what worked
+    before: the words are the evidence, and a rater asked to judge a relation
+    without them is guessing at prose. The cost is real -- `cock -> beard` names
+    its own subject area -- so the task asks explicitly for the distinction and
+    for which areas each group spans, which turns the leak into something the
+    rater has to answer for rather than something it can quietly use.
+
+    Frame, domain, model identity and the word `alignment` are still absent.
+    """
+    xs = ops(min_n)
+    sc = {}
+    for prompt in {o["prompt"] for o in xs}:
+        sc[prompt] = OG.sidecar(prompt) or {}
+    blocks = []
+    for o in xs:
+        fr = pooled_words(o["_members"], "a", sc[o["prompt"]])
+        to = pooled_words(o["_members"], "b", sc[o["prompt"]])
+        f = lambda ps: "; ".join("%s (%d)" % (w, c) for w, c in ps) or "-"
+        blocks.append("%s  %s\n     %s\n     FROM  %s\n     TO    %s"
+                      % (o["id"], o["name"], o["statement"], f(fr), f(to)))
+    return xs, TASK % (len(xs), "\n\n".join(blocks))
 
 
 def main():
@@ -241,7 +221,15 @@ def main():
     xs, txt = document(a.min_n)
     p = os.path.join(HERE, "results", "inputs", "crossframe_ops.txt")
     open(p, "w").write(txt)
-    json.dump(xs, open(os.path.join(HERE, "results", "crossframe_ops.json"), "w"), indent=1)
+    json.dump([{k: v for k, v in o.items() if k != "_members"} for o in xs],
+              open(os.path.join(HERE, "results", "crossframe_ops.json"), "w"), indent=1)
+    #: A COPY WHERE RH READS. The repo is the record; this is the reading copy.
+    dbx = "/Users/rj416/Dropbox/Prof/Articles/TheoryMachines/agents/dario/crossframe_ops.md"
+    open(dbx, "w").write("# Cross-frame operations, for grouping\n\n"
+                         "%d operations from %d frames x 2 blind raters. Frame, domain, model\n"
+                         "identity and the word alignment are absent; the cited words are not.\n\n"
+                         "```\n%s\n```\n" % (len(xs), len({o["prompt"] for o in xs}), txt))
+    print("  reading copy %s" % dbx)
     dom = collections.Counter(o["domain"] for o in xs)
     print("%d operations from %d frames x 2 raters" % (len(xs), len({o["prompt"] for o in xs})))
     print("  by domain (NOT shown to the rater): %s" % dict(dom))
