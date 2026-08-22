@@ -120,9 +120,40 @@ Pass 2 is scoped to the **lineage union**. Under prefill the eligible set is dif
 
 For the 8+ base arms that do ship a template, `raw base -> prefill base` is available: the frame effect on an **unaligned** model. That is the control for whether the template's effect is itself a product of alignment, or something any model does when wrapped. Worth having on those lineages precisely because it is not available on the rest.
 
-## Run this first
+## THE CENSUS IS DONE — 2026-08-22
 
-**Finish the template census on the ~95 aligned arms.** The base side is done (above); `frame_eligibility.csv` covers only 25 of the aligned arms. Tokenizer-config read, no GPU, about an hour. It answers:
+`experiments/instrument_calibrations/generation_provenance/prefill_census.py`, tokenizers only, no weights, no GPU. All 144, results in `results/prefill_census.csv`.
+
+    role        OK    NO_TEMPLATE   NO_TOKENIZER
+    base         9        41             0        of 50
+    endpoint    39        11             0        of 50
+    member      32        11             1        of 44
+                80        63             1
+
+Zero `STEM_LOST`, zero `REFUSED`, zero `GATED`. **Where a template exists at all, the stem always lands last** — the word slot is where the design assumes.
+
+**The 9 bases independently reproduce the HTTP probe's 9.** Two instruments, different failure modes, same answer.
+
+### What this licenses
+
+**Rung B needs only the ALIGNED arm, and 71 of them have it** — 39 endpoints plus 32 members. That is the sweep, and it is much larger than the "~30 of 50" this document estimated from a 15-of-25 sample, which was skewed toward older checkpoints. The earlier estimate is withdrawn.
+
+    rung B  (raw aligned -> prefill aligned)     71 arms
+    pair C  (decomposes through A and B)         all 71
+    templated-base control (raw -> prefill base)  9 lineages
+    fully paired prefill (both arms templated)    7 of 50 lineages
+
+**7 of 50 is the only scarce number**, and it constrains only the fully-paired variant, which the rung design does not need.
+
+### Two facts for the design, not the population
+
+**The wrapper is not a constant.** Characters prepended before the stem: min 21 (`huggyllama/llama-7b`), median 63, **max 1,491** (`BSC-LT/salamandra-7b-instruct`; SmolLM3 1,357). A 1,491-character prior ahead of a 22-character stem is not the same treatment as a 21-character one, and "prefill" names both. Any cross-model comparison of the frame effect has to carry this, or it will read template VERBOSITY as frame STRENGTH.
+
+**8 of the 80 do not support a system role**: gemma-2-9b-it, recurrentgemma-9b-it, llm-jp-3-7.2b-instruct2/3, the three neo_7b arms, Teuken-7B-instruct-v0.6. For those, the `system` slot silently does nothing, so a system-vs-no-system contrast on them is an arm that never received the treatment — the exact failure `frame_eligibility.py` exists to catch.
+
+## Superseded: run this first
+
+**Finish the template census on the ~95 aligned arms.** DONE, above. The base side is done (above); `frame_eligibility.csv` covers only 25 of the aligned arms. Tokenizer-config read, no GPU, about an hour. It answers:
 
 1. how many endpoints can take rung B at all, and which drop out;
 2. how many lineages retain both arms — i.e. how much of the roster the frame rung reaches;
