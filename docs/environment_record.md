@@ -39,7 +39,7 @@ Established 2026-08-22 by measurement, after a proposal to derive the failure lo
 - `record_successes.py` repointed to `roster/models/observations.json`.
 - **Local and cloud separated.** The environment is now derived from the cells (`device`, `transformers_version`, `torch_version`), not from `venv_for(model)`. The old two-entry venv map stamped every success `local_mps`, including 38 cuda-only models; for `Llama-3.1-70B-Instruct` it would have written `local_mps | load_ok` directly beside `local_mps | load_failed | CAPACITY: ~140GB bf16 against 96GB unified memory`. Now 368 observations over 157 models and 20 environments — local 207/124, cloud 161/131.
 
-## P1 — THE GATE. Highest value, do this first.
+## P1 — THE GATE. DONE. `scripts/check_record.py`, 8/8.
 
 `scripts/check_record.py`, one command, **exits non-zero**. Nothing else on this list matters until something fails.
 
@@ -50,7 +50,55 @@ Established 2026-08-22 by measurement, after a proposal to derive the failure lo
 5. **Every profile's `launch:` box satisfies the `sizing:` rule.** Would have caught the three `Olmo-3.1-32B` arms declaring `launch: dense` (48 GB) against a rule demanding 80 — an OOM *after* paying for a 129 GB fp32 download.
 6. **Every roster model resolves to an environment and a venv.**
 
-## P2 — SCHEMA: store OBSERVED POINTS, derive the bound.
+6. **Revision traps are pinned** and **gated repos are measured** (below).
+
+## P1b — RUNTIME GUARDS. DONE. `scripts/box_guard.py`, wired into `fleet_launch`.
+
+The record and the gate both assume we already know the failure. These two do
+not, and that is the point — they are **ignorant of mechanism**, so they catch
+what nobody has written down yet.
+
+    throughput_verdict   observed s/cell against the 595 recorded rates.
+                         Zamba2 with idle kernels reads 191.8x and fires. Wired
+                         into `_await`, where every other signal -- done,
+                         failed, tmux, idle -- reads green because the box IS
+                         producing. Also catches the wrong card, thermal and
+                         contention, none of which it knows about.
+    emptiness_verdict    fraction of stored cells holding no words. Falcon-H1 at
+                         fp16 wrote 5,166 EMPTY cells satisfying conservation
+                         EXACTLY (`sum([]) + 1.0 == 1.0`). Wired into the
+                         DESTROY gate, because counting lines verifies TRANSFER
+                         and not CONTENT.
+
+`--selftest` watches both FIRE on those incidents and stay QUIET on a healthy
+run, a 3-cell sample, and a 5x-slow shard inside the mix band.
+
+**Why the kernels kept being rediscovered specifically:** the launcher already
+refused to proceed if the kernels failed to INSTALL (rc=5). `environments.yaml`
+said in bold that install is not use. Grepping the repo for that verification
+returned nothing across four fleets — and the obvious implementation does not
+work, because `is_mamba_ssm_available()` returned True throughout the failure
+and the fast-path warning lies on a failed load. The rate answers what the
+library cannot.
+
+## P2 — SCHEMA: store OBSERVED POINTS, derive the bound. PARTLY DONE.
+
+**Repo status: DONE.** `scripts/probe_repos.py` -> measurements.json `repos`.
+160 models: 147 public, **11 gated_held** (all four meta-llama arms, both gemma
+pairs, both jais, Zamba2 — a tokenless box fails on every one), 2
+`revision_required`, 0 dead. The status code on `/api/models` is NOT the gate --
+it returns 200 for gated repos, and the first draft therefore called 159/160
+public. Gating bites on FILE access, so the probe reads `body["gated"]` for the
+declared policy AND a HEAD on `resolve/main/config.json` anonymously and tokened
+for what a box actually gets.
+
+`SmolLM3-3B-checkpoints` is now a measured `revision_required`: its `main` holds
+exactly `.gitattributes` and `README.md`, so the bare id resolves to **no model
+at all** — the chatlogs called it "resolves to the wrong model", which
+understates it, and calling it `dead` (the first classifier did) is wrong in the
+other direction, since dead and revision-required want opposite responses.
+
+**Still to do — version windows and edges:**
 
 The version-hole problem dissolves if we stop storing ranges. A range is a claim; a point is an observation.
 
@@ -65,17 +113,17 @@ The version-hole problem dissolves if we stop storing ranges. A range is a claim
                            cross_score false + vocab 32000 vs 32001. Six roster
                            pairs need this and none has anywhere to live.
 
-    repos                  (model, gated, exists, trust_remote_code, revision_trap)
-                           jais/gemma x4/Zamba2 gated; mpt-7b 404; SmolLM3-3B-
-                           checkpoints `main` resolves to the WRONG weights;
-                           remote code refused unless config declares auto_map
-                           (19 of our models declare it, 138 do not).
+Tokenizer defect **scope** becomes a field rather than prose: Croissant and Teuken are CJK-class defects that are Latin-exact, and excluding them from Latin work threw away measurable cells. `trust_remote_code` likewise — remote code is refused unless the config declares `auto_map`, and 19 of our models declare it against 138 that do not.
 
-Tokenizer defect **scope** becomes a field rather than prose: Croissant and Teuken are CJK-class defects that are Latin-exact, and excluding them from Latin work threw away measurable cells.
+## P3 — RE-DERIVE requirements from live sources. DONE.
 
-## P3 — RE-DERIVE requirements from live sources
+`scripts/build_requirements.py` -> `roster/models/requirements.json`. 160 checkpoints, `params_b` for **all** of them, derived from models.yaml + environments.yaml + measurements.json + observations.json.
 
-`model_requirements.json` has five `_sources` and every one is in the archive. Rebuild it against the live roster plus P2's new blocks, land it in `roster/`, and let P1.2 keep it honest. Until then it will keep reporting `none-local` for 50 checkpoints that have thousands of cells on disk.
+**No model name appears in the producer.** The archive builder decided kernels with `KERNELS = ("mamba", "zamba", "falcon-h1")` — a substring match on the id, which is the error class that keeps costing us: RWKV matches none of those and pattern-matches the SSM class on every other axis while needing no kernels. A model needing kernels now gets them by declaring `profile: ssm`.
+
+`blocked` is 0, and that is verified rather than assumed: the archive's five blocked models all left the roster and were replaced with live mirrors (`gl198976/mpt-7b`).
+
+**The staleness gate now points at a file we are permitted to fix.** Checking the archive copy could only ever report a failure nobody could clear, and a gate that cannot be satisfied is a gate people learn to ignore.
 
 ## P4 — BACKFILL the 132 mined findings
 
