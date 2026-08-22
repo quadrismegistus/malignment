@@ -574,7 +574,7 @@ class Checkpoint:
     def generate(self, text, n=1, system=None, user=None, prefill=False,
                  user_msg="Hi.", template=None, seed=None, decoder=None,
                  loaded=None, cache=True, **kw):
-        """Sample `n` continuations. -> [generate.Passage], length `n`.
+        """Sample `n` continuations. -> [passage.Passage], length `n`.
 
         The third verb on the one loader, beside `run_twp` (measure and write)
         and `probs` (measure and return). Machinery is in `generate.py`; this is
@@ -632,7 +632,14 @@ class Checkpoint:
                     except Exception:
                         rec = None
                     if rec:
-                        out[i] = G.Passage(**rec)
+                        #: `_passage`, not `Passage`. `generate.Passage` was a
+                        #: namedtuple and became a factory returning the real
+                        #: `passage.Passage`; this call site was missed, so the
+                        #: CACHE-READ branch raised AttributeError while fresh
+                        #: generation was fine. The advertised "a rerun resumes
+                        #: rather than repeats" therefore failed on the second
+                        #: run of any (model, stem, condition), and only there.
+                        out[i] = G._passage(**rec)
         missing = [i for i, v in enumerate(out) if v is None]
         if not missing:
             return out
