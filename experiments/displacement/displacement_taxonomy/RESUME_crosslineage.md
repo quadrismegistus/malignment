@@ -203,6 +203,91 @@ here says their legends would consolidate the same way -- `He started stroking
 his` is the frame with the most extreme lexical contrast in the set. Two raters
 is also two: the FROM-side agreement is a median over 32 models, not a bound.
 
+## THREE PROMPTS WITH MATCHED RATER PAIRS (2026-08-21/22)
+
+Every reading before this was ONE rater, so no difference between readings could
+be separated from what a second sample would have done. Three prompts now have
+two sighted raters at the full roster, and two of them also have two BLIND raters.
+
+### Rater agreement tracks CONSENSUS, not domain
+
+Per-model word sets, median Jaccard between two sighted raters on identical tables:
+
+    prompt      sighted reading at 28-29   models  FROM    TO   reversed r1/r2
+    stroking    2 reversed,  2 unassigned      32  1.00  0.71    2 / 5
+    insurance   0 reversed,  3 unassigned      25  0.78  0.50    1 / 0
+    asylum     12 reversed,  8 unassigned      26  0.14  0.33   13 / 5
+
+Insurance is institutional like asylum and sits with stroking. **So it is not
+that the sexual frame has cleanly opposed vocabularies and institutional ones do
+not** -- asylum is the outlier, and what predicts agreement is how consensual the
+original reading was, across domains. Stroking and asylum alone could not
+separate those two accounts; the third prompt does.
+
+**FROM is consistently higher than TO.** The A side -- what the model moves away
+from -- is the more reproducible half on all three.
+
+### The reversal count is stable exactly where reversal is rare
+
+13 against 5 on asylum, sharing three models. The README books this prompt as the
+high-reversal case, *"7 lineages run FLIGHT to RECOURSE and 12 run RECOURSE to
+FLIGHT"*. **That 12 is one rater's reading and a second rater at the same roster
+gives 5.** So "direction is not a property of the model" is best supported on the
+prompts where least reversal happens and least supported on its headline example.
+
+Durable across all four asylum readings: Llama-3.1-8B-Instruct,
+OLMo-2-0425-1B-Instruct and Yi-1.5-9B-Chat. AquilaChat2-7B on stroking likewise.
+
+### Components need the Jaccard beside them or they cannot be read
+
+`operation_graph.py` pools a prompt's readings into `M##_word -> [operation] ->
+M##_word` and counts components. Within ONE reading the count is trivially the
+operation count (the completeness assert puts every model in exactly one
+operation); pooled, it says which operations are one relation renamed.
+
+    stroking   13 operations, 4 readings -> 2 components  (9 ops/36 models, 4/6)
+    insurance   6 operations, 2 readings -> 2 components  (5 ops/44 models, 1/2)
+    asylum      9 operations, 4 readings -> 1 component   (47 models)
+
+I predicted insurance would give ONE component through unanimity. It gave two: a
+2-model `Transgressive Uplift` cluster sharing no model-words with the main blob
+-- models moving TOWARD transgressive completions on an insurance-claim frame.
+Same shape as stroking's 6-model in-register cluster, isolated by the graph
+rather than by anyone's judgement.
+
+**So the count alone does not distinguish agreement from disorder**: asylum's one
+component and insurance's two come with Jaccards of 0.14 and 0.78. Report the
+pair or neither.
+
+### Blinding: what it changed and what it did not
+
+`--blind` gives neutral A/B framing AND anonymised M01..M50 labels; either alone
+leaks, because the headings carry `-Instruct`, `-DPO`, `AmberSafe`.
+
+    stroking   sighted FROM 1.00 TO 0.71  ->  blind FROM 1.00 TO 1.00
+    asylum     sighted FROM 0.14 TO 0.33  ->  blind FROM 0.50 TO 0.25
+
+**Blinding did not cost agreement and on both prompts improved a side of it.**
+The frame was adding variance rather than removing it.
+
+It DID change granularity. On stroking the sighted majority operation (26-27 of
+50, "an innocuous word from a different field entirely") split four ways under
+blinding, by DESTINATION field: hair-surface, generic-body, relational recipient,
+limb drift. That category is defined by the MOTIVE, not the words -- once you
+know it is alignment, grooming and kinship and animals are all just not-taboo.
+The pooled graph puts all of them in ONE component, so this is a change in how
+finely one connected structure was described, not a different partition.
+
+And the reverser set survives anonymisation: blind rater 1 on stroking named
+exactly the five models sighted rater 2 named, with no model identity on the page.
+
+### What none of this licenses
+
+Three prompts of forty. Two raters is two. The blind/sighted 2x2 exists only for
+stroking and asylum; insurance is sighted-only. And the other 37 prompts still
+sit at 26-29 lineages with a single rater, so nothing here transfers to the
+`Results in hand` table above without re-running them.
+
 ## Worth more than more prompts
 
 The **Tulu ablation family** is in the download:
@@ -226,7 +311,13 @@ Same base, same recipe, one training component removed at a time. Every directio
 
 `sweep_xling.py --prepare --all` targets every prompt in the slot corpora rather than the 40.
 
-## Results in hand
+## Results in hand (40 prompts, 26-29 lineages, ONE rater -- see the caveat below)
+
+**Read this beside THREE PROMPTS WITH MATCHED RATER PAIRS above.** Every number
+here is a single rater at 26-29 lineages. Where a second rater has since been
+run, the counts move a lot: the asylum prompt's reversal count is 13 for one
+rater and 5 for another on the same 50 tables. The 13% pooled reversal rate
+below has no rater-variance estimate under it.
 
     40 prompts x 26-29 lineages, 1,151 model-readings
       150 reversed (13%)   263 unassigned (23%)
