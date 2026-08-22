@@ -66,11 +66,53 @@ def sign_test(diffs):
     return n, up, st.median(v), p
 
 
+def wilcoxon(d):
+    """Signed-rank statistic and an exact two-sided p. -> (n, W, p)
+
+    **A sign test throws away the magnitudes and this design cannot afford
+    that.** Only nine complete lineages exist here, and a sign test needs 8 of 9
+    to reach p<.05 -- so at 6 of 8 the best remaining outcome is 7 of 9, p=0.18,
+    and the question is unanswerable by counting alone no matter what the last
+    lineage does. Signed-rank uses how MUCH |sft| exceeds |post-sft| in each
+    lineage, not merely whether it does, and is materially more powerful on
+    exactly the same numbers.
+
+    Exact enumeration, because n is small enough that a normal approximation
+    would be the wrong instrument at the only sizes this will ever see.
+    """
+    import itertools
+    v = [x for x in d if x != 0]
+    n = len(v)
+    if n == 0:
+        return 0, 0.0, 1.0
+    order = sorted(range(n), key=lambda i: abs(v[i]))
+    rank = [0.0] * n
+    for r, i in enumerate(order, 1):
+        rank[i] = r
+    W = sum(rank[i] for i in range(n) if v[i] > 0)
+    #: exact null: every sign assignment equally likely
+    tot = 0
+    hits = 0
+    mean = sum(rank) / 2.0
+    for signs in itertools.product((0, 1), repeat=n):
+        w = sum(rank[i] for i in range(n) if signs[i])
+        tot += 1
+        if abs(w - mean) >= abs(W - mean) - 1e-9:
+            hits += 1
+    return n, W, hits / tot
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--stem", default=STEM)
     ap.add_argument("--min-n", type=int, default=25)
     ap.add_argument("--min-words", type=int, default=60)
+    ap.add_argument("--no-screen", dest="screen", action="store_false",
+                    default=True,
+                    help="skip the ascii screen. THE SCREEN IS CONFOUNDED WITH "
+                         "THE ARM: base rungs are screened harder than aligned "
+                         "ones in every lineage measured (spreads to 29pp), so "
+                         "the conclusion must be checked both ways.")
     ap.add_argument("--cols", nargs="*",
                     default=["rh_absconc_median", "usas_x"])
     a = ap.parse_args(argv)
@@ -90,8 +132,9 @@ def main(argv=None):
         for m, role in nodes:
             ts = [getattr(p, "text", "") or ""
                   for p in Checkpoint(m).generations(prompt=a.stem, frame="raw")]
-            ts = [t for t in ts if len(t.split()) >= a.min_words
-                  and ascii_share(t) >= 0.995]
+            long_ = [t for t in ts if len(t.split()) >= a.min_words]
+            ts = [t for t in long_ if not a.screen or ascii_share(t) >= 0.995]
+            rej = (len(long_) - len(ts)) / max(len(long_), 1)
             if len(ts) < a.min_n:
                 continue
             vals = collections.defaultdict(list)
@@ -103,7 +146,7 @@ def main(argv=None):
                     for c in a.cols:
                         if r.get(c) is not None:
                             vals[c].append(r[c])
-            got[role] = dict(n=len(ts), think=think / len(ts), model=m,
+            got[role] = dict(n=len(ts), think=think / len(ts), rej=rej, model=m,
                              **{c: st.median(v) for c, v in vals.items() if v})
         #: a lineage needs base, an sft rung and a LATER rung to decompose.
         #: Named when it does not, because a quietly shorter population is the
@@ -120,27 +163,58 @@ def main(argv=None):
 
     for col in a.cols:
         print("\n=== %s ===" % col)
-        print("  %-26s %-9s %9s %9s   %s"
-              % ("lineage", "pref op", "sft step", "pref step", "carried by"))
-        diffs = []
+        print("  %-26s %-16s %9s %9s   %s"
+              % ("lineage", "post-sft ops", "sft step", "post-sft", "carried by"))
+        diffs, sft_signed, end_signed = [], [], []
         byop = collections.defaultdict(list)
         for b, (got, later) in sorted(scored.items()):
-            op = sorted(later, key=lambda r: ("rlvr" in r, r))[-1]
+            #: the endpoint, and the FULL chain of ops after sft. Naming only
+            #: the last one makes a two-stage lineage (sft->apo->instruct) look
+            #: like a one-stage one (sft->dpo) under the same label, when the
+            #: measured step spans everything after sft in both cases.
+            op = sorted(later, key=lambda r: ("rlvr" in r or "instruct" in r, r))[-1]
+            chain = "+".join(sorted(later, key=lambda r: ("rlvr" in r or "instruct" in r, r)))
             if col not in got["base"] or col not in got["sft"] or col not in got[op]:
                 continue
             sftd = got["sft"][col] - got["base"][col]
             prefd = got[op][col] - got["sft"][col]
             who = "SFT" if abs(sftd) > abs(prefd) else "pref"
             diffs.append(abs(sftd) - abs(prefd))
-            byop[op].append(abs(sftd) - abs(prefd))
-            print("  %-26s %-9s %+9.4f %+9.4f   %s"
-                  % (b.split("/")[-1][:26], op, sftd, prefd, who))
+            sft_signed.append(sftd)
+            end_signed.append(got[op][col] - got["base"][col])
+            byop[chain].append(abs(sftd) - abs(prefd))
+            #: REJECTION SPREAD ACROSS RUNGS, flagged. A lineage whose rungs
+            #: are screened at very different rates is comparing differently
+            #: selected populations, and the sign can be selection rather than
+            #: alignment. CT-LLM runs 31%/15%/2% -- a Chinese base given an
+            #: English stem, where alignment stops the language switching -- so
+            #: its base survivors are the 69% that happened to come out in
+            #: English while its DPO survivors are nearly everything.
+            spread = max(got[r]["rej"] for r in ("base", "sft", op)) - \
+                min(got[r]["rej"] for r in ("base", "sft", op))
+            print("  %-26s %-16s %+9.4f %+9.4f   %-4s %s"
+                  % (b.split("/")[-1][:26], chain[:16], sftd, prefd, who,
+                     ("REJ SPREAD %.0f%%" % (100 * spread)) if spread > 0.15 else ""))
         if diffs:
             n, up, med, p = sign_test(diffs)
-            print("  SIGN TEST |sft| > |pref| : %d of %d lineages, p=%.4g" % (up, n, p))
+            nw, W, pw = wilcoxon(diffs)
+            print("  MAGNITUDE  |sft| > |post-sft| : %d of %d lineages, "
+                  "sign p=%.4g | signed-rank p=%.4g" % (up, n, p, pw))
             for op, d in sorted(byop.items()):
                 nn, uu, _, _ = sign_test(d)
-                print("      %-12s %d of %d" % (op, uu, nn))
+                print("      %-14s %d of %d" % (op, uu, nn))
+            #: MAGNITUDE IS NOT DIRECTION, and reporting only the first invites
+            #: reading it as the second. smol3's SFT step on `usas_x` is -0.0427
+            #: while the other lineages' are positive, yet it counts as
+            #: "SFT-carried" because its magnitude beats its post-SFT step. The
+            #: claim the argument needs -- "alignment RAISES interiority" -- is
+            #: the signed one, and it is a different test on the same numbers.
+            ns, us, _, ps = sign_test(sft_signed)
+            ne, ue, _, pe = sign_test(end_signed)
+            print("  DIRECTION  sft step > 0        : %d of %d, p=%.4g"
+                  % (us, ns, ps))
+            print("  DIRECTION  base->endpoint > 0  : %d of %d, p=%.4g"
+                  % (ue, ne, pe))
 
 
 if __name__ == "__main__":
