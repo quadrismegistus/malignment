@@ -97,6 +97,9 @@ def main(argv=None):
     ap.add_argument("--top", type=int, default=25)
     ap.add_argument("--min-passages", type=int, default=15)
     ap.add_argument("--min-lineages", type=int, default=8)
+    ap.add_argument("--exclude", nargs="*", default=["f11_l2"],
+                    help="drop these source corpora from the `ch` side "
+                         "(default f11_l2, which corpus A is drawn from)")
     ap.add_argument("--twin", action="store_true",
                     help="run BOTH corpora and report what replicates")
     a = ap.parse_args(argv)
@@ -106,33 +109,45 @@ def main(argv=None):
     if a.twin:
         both = {}
         for c in ("quadrants", "ch"):
-            r = analyse(c, a, pq, roster)
+            r = analyse(c, a, pq, roster,
+                        excl=() if c == "quadrants" else tuple(a.exclude))
             if r is None:
                 print("%s: unavailable, cannot twin" % c); return
             both[c] = r
         twin_report(both, a)
         return
-    r = analyse(a.corpus, a, pq, roster)
+    r = analyse(a.corpus, a, pq, roster, excl=tuple(a.exclude))
     if r is None:
         return
     report(r, a)
 
 
-def analyse(corpus, a, pq, roster):
-    """One corpus -> dict(res, q, n, pairs, corpus), or None if untestable."""
+def analyse(corpus, a, pq, roster, excl=()):
+    """One corpus -> dict(res, q, n, pairs, corpus), or None if untestable.
+
+    `excl` drops rows whose `corpus` COLUMN is listed. This is how corpus B is
+    made DISJOINT from corpus A -- see `twin_report` for why that is necessary
+    and not merely tidy.
+    """
     SKIP = ("id", "corpus", "model", "arm", "prompt", "error")
+    dropped = [0]
 
     def medians(tbl, per):
         d = {c: tbl.column(c).to_pylist() for c in tbl.column_names}
         ks = [c for c in d if c not in SKIP]
+        drop = 0
         for i in range(tbl.num_rows):
             m = d["model"][i]
             if not m:
+                continue
+            if excl and d.get("corpus") and d["corpus"][i] in excl:
+                drop += 1
                 continue
             for k in ks:
                 v = d[k][i]
                 if v is not None:
                     per[m][k].append(float(v))
+        dropped[0] += drop
         return set(ks)
 
     fp = os.path.join(HERE, "results", "norms_%s.parquet" % corpus)
@@ -178,8 +193,8 @@ def analyse(corpus, a, pq, roster):
         nn, up, m, pv = sign_test(diffs)
         res[k] = (m, nn, up, pv)
     return dict(res=res, q=bh([(k, v[3]) for k, v in res.items()]),
-                n=n, pairs=len(pairs), shards=nsh, corpus=corpus,
-                cols=len(keyset))
+                n=n - dropped[0], pairs=len(pairs), shards=nsh, corpus=corpus,
+                cols=len(keyset), dropped=dropped[0], excluded=tuple(excl))
 
 
 def report(r, a):
@@ -224,6 +239,25 @@ def report(r, a):
 def twin_report(both, a):
     """The comparison the exploratory table exists to be disciplined by.
 
+    ## THE TWO CORPORA MUST BE DISJOINT, AND THEY WERE NOT
+
+    Corpus A's arm contrast rests on **4,931 passages, every one of them from
+    `f11_l2`** (2,736 aligned + 2,195 base; the other 9,483 rows are API models
+    and the human anchor, neither of which enters a lineage pair). Corpus B as
+    first built included all 228,474 free `f11_l2` rows -- so corpus A was a 2%
+    SUBSET of corpus B, and the closing claim that the twin varies "filtering,
+    roster, prompts and n" was false about the prompts: they are the same
+    generation run.
+
+    A nested twin still varies n and roster, so it is not worthless, but it
+    cannot do the job the twin exists for. The whole point is that a key
+    surviving both has survived a change to the prompts that elicited the text,
+    and passages drawn from one run cannot test that.
+
+    `--exclude f11_l2` (the default) makes the `ch` side `passage` + `y` +
+    `passage_run2`: 262,408 free passages, still all 94 models, DISJOINT from
+    corpus A. Pass `--exclude` with no values to put it back.
+
     ## WHY THE TWIN IS THE CORRECTION AND BH IS NOT
 
     BH controls the false-discovery rate WITHIN one family of tests on one
@@ -255,7 +289,7 @@ def twin_report(both, a):
     shared = [k for k in A["res"] if k in B["res"]]
     print("  %d keys tested on both\n" % len(shared))
 
-    rows = []
+    rows, cov_rows = [], []
     for k in shared:
         ma, _, _, _ = A["res"][k]
         mb, _, _, _ = B["res"][k]
@@ -273,7 +307,11 @@ def twin_report(both, a):
                "REPLICATED" if sa and sb else
                "SIGN FLIP" if (sa or sb) and not same else
                "CONSISTENT" if (sa or sb) else "neither")
-        rows.append((cat, k, ma, mb, qa, qb))
+        #: COVERAGE keys are held out of the four blocks. This folder's rule
+        #: is that coverage is reported and never ranked as an effect, and a
+        #: `*_coverage` row sitting inside REPLICATED reads as one.
+        (cov_rows if k.endswith("_coverage") else rows).append(
+            (cat, k, ma, mb, qa, qb))
 
     def block(cat, note):
         sel = [r for r in rows if r[0] == cat]
@@ -304,6 +342,15 @@ def twin_report(both, a):
     block("REPLICATED", "  significant on both at q<.05, same sign")
     block("CONSISTENT", "  significant on one, SAME sign on the other -- power, "
                         "not corpus-specificity")
+
+    if cov_rows:
+        print("COVERAGE -- held out of the blocks above, never an effect")
+        print("  %-34s %10s %10s %9s %9s" % ("", "A", "B", "qA", "qB"))
+        for cat, k, ma, mb, qa, qb in sorted(cov_rows,
+                                             key=lambda r: -abs(r[3])):
+            print("  %-34s %+10.4f %+10.4f %9.4f %9.4f  %s"
+                  % (k, ma, mb, qa, qb, cat))
+        print()
 
     print("REGISTERED HYPOTHESES, both corpora")
     print("  %-34s %10s %10s %9s %9s" % ("", "A", "B", "pA", "pB"))
