@@ -36,83 +36,41 @@ the chicago curve:
 a further fourteen.** RH predicted 1880-1920 before the chicago numbers existed
 (`PREDICTION.md`), and both aligned and API land inside it.
 
-### Interiority -- alignment leaves the historical range altogether
-
-`usas_x`, the USAS "PSYCHOLOGICAL ACTIONS, STATES AND PROCESSES" field. Higher =
-more psychological-state language.
-
-    1575-1700   0.106-0.114   flat
-    1725        0.1263
-    1775        0.1358        <- historical peak
-    1825        0.1176        <- dip
-    1875        0.1282 / 0.1250   (chadwyck / chicago)
-    1925-2000   0.1264-0.1268     FLAT for 125 years
-
-Interiority is **not** what the novel lost after 1800 -- it plateaued. And every
-model arm sits above every period from 1575 to 2000:
-
-    aligned    +0.1667    23% above the 1775 peak
-    API        +0.1491
-    base       +0.1461
-      historical maximum +0.1358 (1775)
-
-Against the human anchors, aligned sits at **philosophy** (+0.1648), above
-dreams (+0.1529) and waking narrative (+0.1364), and far above actual C20
-fiction (+0.1138).
-
-**So the two axes rewind differently.** Atavistic in direction on abstraction,
-beyond-precedent in degree on interiority -- the same structure RH found
-independently in LLM poetry, where rhyme and strict meter exceed any historical
-period.
-
-## WHAT THE NUMBERS LOOK LIKE AS PROSE
-
-Each passage below is the one closest to its population's median, so these are
-typical rather than extreme.
-
-### Abstraction
-
-    C18 peak abstraction   Eighteenth-Century_Fiction/fieldinz. (1754)
-    rh_absconc_median = -0.6808  (population median -0.6808)
-    | In reading the writings of those ancient sages, I had look'd up to
-    | them as seated in the clouds, and at a vast distance; but in those
-    | local accounts, where they walk'd, where they held their discourses,
-    | and did as other mortals do, I in a manner confined them within
-    | limited bounds, and familiarized them into my acquaintance. Nicanor
-    | was so agreeable, furnish'd me with so many new ideas, and was so
-    | substantial a contrast to the wearisome nothingness I had f
-
-    late C20 fiction       00024067 (1994)
-    rh_absconc_median = +0.1195  (population median +0.1195)
-    | Enough, perhaps, to make even what he was seeing now seem faint and
-    | faded. And if there was more, how could he possibly bear it without
-    | going mad? Not even putting his eyes out would help; he understood
-    | somehow that his sense of "seeing" things came mostly from his
-    | lifelong acceptance of sight as his primary sense. But there was, in
-    | fact, a lot more than seeing going on here. In order to prove this to
-    | himself he closed his eyes . . . and went right on seei
-
-    base model             huggyllama/llama-7b
-    rh_absconc_median = +0.0833  (population median +0.0834)
-    | squirm a little in his grip. His hands moved over her, laid especial
-    | attention on her hands as though to make sure she understood exactly
-    | what he intended. "You can choose your own diaphragm with Kaitlyn," he
-    | said in a deep mellow voice. As his hand moved down, Jadeen realized
-    | dawn would come soon, but she wasn't yet ready to leave Laythan. Love
-    | came over her then and heart and body sang a duet. Her hands were
-    | bruised where he had held them and she half ex
-
-    aligned model          meta-llama/Llama-3.1-8B-Instruct
-    rh_absconc_median = -0.0569  (population median -0.0569)
-    | curse the day she met him. Almost a year and a half had passed since
-    | that night when her world turned upside down. At the time she thought
-    | she was over him, but now he was back, breathing down her neck and
-    | putting a sour taste in her mouth. It wasn’t the first time she saw
-    | him that day, though it was the first time she had seen him with fury
-    | so apparent in his eyes. He was Adam, her ex-boyfriend and the worst
-    | person she had ever met. Their breakup was mess
-
 ### Interiority
+
+In chronological order, so the arc is visible: low and flat through the C17,
+peaking 1775, dipping in the early C19, flat for the whole C20 -- and then the
+aligned model above all of it.
+
+    C17 low interiority    Early_English_Prose_Fiction/ee01010. (1662)
+    usas_x = +0.1140  (population median +0.1140)
+    | For a while therefore she gave law to her former open Licentiousness,
+    | and seemingly betook her self to a civiller life; that is, to a closer
+    | and cunninger way of living, not being so much in the eye of all
+    | people, by whom she was already defamed beyond remedy. But there is
+    | nothing so bad which thinks not by showes and pretences to impose upon
+    | and deceive the Vulgar. This her sudden reclaimednesse was more
+    | admired then credited by her Neighbours, who mused
+
+    C18 interiority peak   Early_American_Fiction/brackenr.01 (1793)
+    usas_x = +0.1358  (population median +0.1358)
+    | And being once taken for such, what prodigy was there in his being in
+    | request with the females, and all the first families of the city, who
+    | might be ambitious, and vie with each other, in having him married to
+    | a niece or a daughter, that so being raised above plebians by the
+    | connection, they might be considered as of a pratrician degree? Let
+    | the principle be what it would, whether taste, or ambition, the fact
+    | was, that the bog-trotter was courted and carre
+
+    C19 dip                Early_American_Fiction/bacondel.01 (1839)
+    usas_x = +0.1176  (population median +0.1176)
+    | -- Delicious! Hear that flute. It comes from among those trees by the
+    | river side. It is the shower that has freshened every thing, and made
+    | the birds so musical. You should stand in the door below, as I did
+    | just now, to see the fort and the moistened woods stands out from that
+    | black sky, with all this brightness blazing on them. 'Tis lovely --
+    | all. There goes the last golden rim over the blackening woods; already
+    | even a shade of tender mourning steals over
 
     late C20 fiction       00021234 (1975)
     usas_x = +0.1264  (population median +0.1264)
