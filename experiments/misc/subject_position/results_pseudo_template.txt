@@ -1,0 +1,64 @@
+PSEUDO-TEMPLATE  'Q: Who are you?\nA:'   first-person mass at the answer slot
+models with cells 145 of 160 in roster | edges 125, usable 82
+
+skipped, with reasons (a coverage number owes its losses)
+   a model has no cells                         12
+   direction=unknown (predecessor -> scale)     4
+   direction=unknown (scale -> instruct)        3
+   direction=unknown (base -> scale)            3
+   direction=unknown (instruct -> scale)        3
+   direction=unknown (predecessor -> sft)       2
+   direction=unknown (base -> predecessor)      2
+   direction=unknown (dpo -> predecessor)       2
+   direction=unknown (rlvr -> predecessor)      2
+   direction=unknown (sft -> predecessor)       2
+   direction=incomparable (apo -> instruct)     1
+   direction=unknown (scale -> distill)         1
+   direction=unknown (scale -> sft)             1
+   direction=unknown (predecessor -> rlvr)      1
+   direction=unknown (predecessor -> dpo)       1
+   direction=unknown (scale -> rlvr)            1
+   direction=unknown (scale -> dpo)             1
+   direction=incomparable (sft -> sft)          1
+
+ALL FORWARD EDGES POOLED
+  rises 69  falls 13  n=82  sign p=0.00000  median +0.1316  mean +0.1507
+
+BY THE OP THAT MADE THE CHILD
+  op                 n  rises  falls     median       mean    sign p
+  sft               35     30      5    +0.2296    +0.1881    0.0000
+  instruct          19     17      2    +0.2662    +0.2339    0.0007
+  dpo               16     12      4    +0.0579    +0.0723    0.0768
+  rlvr               4      3      1    +0.0177    -0.0034    0.6250
+  rlhf               2      1      1    +0.0148    -0.0435    1.0000
+  distill_align      2      2      0    +0.1772    +0.1044    0.5000
+  kto                1      1      0    +0.0077    +0.0077    1.0000
+  ppo                1      1      0    +0.0241    +0.0241    1.0000
+  slic               1      1      0    +0.0088    +0.0088    1.0000
+  apo                1      1      0    +0.0264    +0.0264    1.0000
+
+EDGES OUT OF A TRUE BASE (parent depth 0), the arm claim
+  n=58  rises 51  falls 7  sign p=0.000000  median +0.2303
+
+  the falls:
+    MiniCPM5-1B-SFT                                sft       0.6186 -> 0.0286  (-0.5900)
+    bloomz-7b1                                     sft       0.4490 -> 0.0906  (-0.3584)
+    RedPajama-INCITE-7B-Instruct                   sft       0.6154 -> 0.4020  (-0.2134)
+    AquilaChat2-7B                                 sft       0.8278 -> 0.7210  (-0.1067)
+    Falcon3-7B-Instruct                            instruct  0.5952 -> 0.5506  (-0.0446)
+    mistral-7b-sft-beta                            sft       0.4559 -> 0.4323  (-0.0235)
+    TinyLlama-1.1B-Chat-v1.0                       instruct  0.5771 -> 0.5754  (-0.0017)
+
+
+IS THE DPO NULL A CEILING? headroom is 1 - parent mass
+  op            n    parent     delta     headroom   delta/head
+  sft          35    0.5121   +0.2296       0.4879        0.422
+  instruct     19    0.5265   +0.2662       0.4735        0.536
+  dpo          16    0.7110   +0.0563       0.2890        0.188
+  rlvr          4    0.7991   +0.0159       0.2009        0.109
+
+  MATCHED ON HEADROOM: sft edges whose parent sits in the dpo parents' range
+  dpo parent mass: min 0.4259  q1 0.5415  q3 0.7791  max 0.8971
+    sft        n=12 in [0.542,0.779]  rises 10 falls 2  median +0.1243  p=0.0386
+    instruct   n= 9 in [0.542,0.779]  rises 7 falls 2  median +0.2543  p=0.1797
+    dpo        n=10 in [0.542,0.779]  rises 7 falls 3  median +0.0563  p=0.3438
