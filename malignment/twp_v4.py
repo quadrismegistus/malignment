@@ -320,7 +320,7 @@ def numeric_intra_ids(tok):
 
 @torch.no_grad()
 def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
-            bos_policy="inherited", rules=None):
+            bos_policy="inherited", rules=None, pids=None):
     """`twp.expand`'s beam with the v4 switches. Returns (words, residual, meta).
 
     Mirrors v3's loop deliberately rather than calling it, because the changes
@@ -339,7 +339,22 @@ def expand4(model, tok, prompt, dev, bmask, cjk=None, theta=T.THETA,
         if len(extra):
             bmask = bmask.copy()
             bmask[extra] = True
-    pids, _rs, _rid = T._prompt_ids(tok, prompt, bos_policy)
+    #: **`pids` IS SUPPLIED ONLY FOR A TEMPLATED PROMPT.** `_prompt_ids` does two
+    #: things a chat-rendered string breaks. Its survival assert round-trips the
+    #: text through the tokenizer, and control tokens (`<|im_start|>`, `[INST]`)
+    #: do not decode back to what produced them -- so it would fail on models
+    #: whose tokenizer is FINE, wearing the same alarm as the deepseek/croissant/
+    #: Teuken mangling it exists to catch. And a template usually emits its own
+    #: BOS, which `encode_prompt` can then double.
+    #:
+    #: A framed caller therefore tokenises with `generate.encode` (which DETECTS
+    #: the BOS rather than assuming: Tulu's template emits none and its tokenizer
+    #: adds one, SmolLM2's own `<|im_start|>` IS the BOS), asserts survival
+    #: against the STEM rather than the rendered string, and passes ids here.
+    #:
+    #: `pids=None` is every cell ever measured and takes the original path.
+    if pids is None:
+        pids, _rs, _rid = T._prompt_ids(tok, prompt, bos_policy)
     lg = model(torch.tensor([pids], device=dev)).logits[0, -1, :].float()
     P0 = torch.softmax(lg, -1).cpu().numpy()
     del lg

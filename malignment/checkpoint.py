@@ -427,8 +427,38 @@ class Checkpoint:
         from .runners import load_for_twp
         return load_for_twp(self, **kw)
 
-    def probs(self, prompt, loaded=None, **kw):
+    def probs(self, prompt, loaded=None, rules=None, frame=None, system=DEFAULT,
+              user_msg="Hi.", **kw):
         """The twp word distribution at this prompt. `{surface: probability}`.
+
+        ## `frame=` MEASURES THE PROMPT AS A DEPLOYED MODEL WOULD SEE IT
+
+        Default `None` is the bare stem, which is every cell in the corpus and
+        the only frame a base model can take. `frame="prefill"` renders the stem
+        into a started ASSISTANT turn -- the only chat-mode position with a word
+        slot in it, since under `chat` the stem is the USER turn and the next
+        word begins the model's ANSWER rather than continuing the sentence.
+
+        Requires `rules`: framing is a v4 feature and `twp.expand` (v3) has no
+        path for a pre-tokenised prompt. Refused rather than silently defaulted,
+        because a v3 word distribution stamped as framed would be neither.
+
+        ## THE SURVIVAL ASSERT RUNS ON THE STEM, NOT THE RENDERED STRING
+
+        `_prompt_ids` refuses a prompt the tokenizer mangles -- deepseek,
+        croissant and Teuken all fail it. Run against a rendered template it
+        would fail on models whose tokenizer is FINE, because control tokens do
+        not decode back to the text that produced them. Same alarm, different
+        fact. So the stem is asserted, the rendered string is tokenised by
+        `generate.encode` (which DETECTS the BOS rather than assuming), and the
+        ids go to `expand4`.
+
+        ## A DROPPED SYSTEM PROMPT IS REFUSED, NOT ABSORBED
+
+        `render` returns `sys_supported`. A template that discards a system block
+        raises nothing and yields "a treatment arm that never received the
+        treatment". If you asked for one and it was dropped, this raises rather
+        than returning a distribution that will later be counted as framed.
 
         **WANTED BY RH VIA `MANIFEST.md`, AND THE GAP HAD ALREADY COST ME.**
         `malignment.serve._slot` composed `load()` + `twp.expand` by hand, which
@@ -456,10 +486,47 @@ class Checkpoint:
         """
         from . import twp as T
         own = loaded is None
+        if frame is not None and rules is None:
+            raise ValueError(
+                "frame=%r needs a rule set: framing is a v4 feature and "
+                "twp.expand (v3) has no pre-tokenised path. Pass "
+                "rules=twp_v4.ADOPTED." % frame)
         ld = loaded if loaded is not None else self.load(**kw)
         try:
-            w, res, _calls = T.expand(ld.model, ld.tok, prompt, ld.dev, ld.bmask,
-                                      cjk=ld.cjk, bos_policy=ld.bos_policy)
+            if frame is None and rules is None:
+                w, res, _calls = T.expand(ld.model, ld.tok, prompt, ld.dev,
+                                          ld.bmask, cjk=ld.cjk,
+                                          bos_policy=ld.bos_policy)
+            elif frame is None:
+                from . import twp_v4 as V4
+                w, res, _meta = V4.expand4(ld.model, ld.tok, prompt, ld.dev,
+                                           ld.bmask, cjk=ld.cjk,
+                                           bos_policy=ld.bos_policy, rules=rules)
+            else:
+                from . import generate as G
+                from . import twp_v4 as V4
+                #: **THE STEM IS ASSERTED, THE RENDER IS NOT.** This raises
+                #: SkipPrompt for a prompt this tokenizer mangles, which is a
+                #: fact about the PROMPT and must still be caught under a frame.
+                #: Running the same assert on the rendered string would fire on
+                #: control tokens that never round-trip, which is a different
+                #: fact wearing the same alarm.
+                T._prompt_ids(ld.tok, prompt, ld.bos_policy)
+                rendered, sys_ok = G.render(
+                    ld, prompt, system=system, user_msg=user_msg,
+                    prefill=(frame == "prefill"))
+                if system is not DEFAULT and sys_ok is False:
+                    raise ValueError(
+                        "%s: the chat template DISCARDED the system message, so "
+                        "this would be a framed cell that never received the "
+                        "treatment. Refusing." % self.model_id)
+                #: DETECTS the BOS rather than assuming one way or the other --
+                #: measured both ways, see `generate.encode`.
+                pids = G.encode(ld, rendered, True)["input_ids"][0].tolist()
+                w, res, _meta = V4.expand4(ld.model, ld.tok, rendered, ld.dev,
+                                           ld.bmask, cjk=ld.cjk,
+                                           bos_policy=ld.bos_policy,
+                                           rules=rules, pids=pids)
         finally:
             if own:
                 #: Drop OUR references, then free. `T.free` takes arguments and
@@ -663,14 +730,22 @@ class Checkpoint:
                 ld = None
                 T.free()
 
-    def next_word(self, prompt, loaded=None, **kw):
+    def next_word(self, prompt, loaded=None, rules=None, frame=None,
+                  system=DEFAULT, user_msg="Hi.", **kw):
         """The twp WORD distribution at `prompt`. -> ({surface: prob}, residual)
 
         A name for what `probs` already does, because `probs` does not say which
         grain it is on and this file now has a `next_token` beside it. Same
         method, same guards; `probs` is kept so existing callers do not break.
+
+        The framing parameters are named here rather than swept into `**kw`, so
+        that `next_word` and `next_token` take the same arguments for the same
+        things. They did not before: `next_token` has had `prefill` since it was
+        written and the WORD instrument had no frame at all, which is the gap
+        `docs/prefill.md` was written about.
         """
-        return self.probs(prompt, loaded=loaded, **kw)
+        return self.probs(prompt, loaded=loaded, rules=rules, frame=frame,
+                          system=system, user_msg=user_msg, **kw)
 
     def status(self):
         """Everything cheap, in one dict. For a human deciding what to run."""

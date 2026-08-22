@@ -114,6 +114,15 @@ A prefill cell measures a **different surface**. Put `frame`, `system`, `user_ms
 
 Templated distributions should be **sharper** — an instruct model is confident inside its own frame — so at fixed `THETA = 0.001` a prefill cell should admit **fewer words** and carry **more tail** than its raw twin. If so, `n_words` and `tail` move together across the sweep and any raw-vs-prefill mass comparison must account for it rather than reading it as displacement. If not, that is worth more than the sweep.
 
+**FIRST DATA POINT, AND IT IS HALF WRONG.** `SmolLM2-360M-Instruct`, one prompt (`He started stroking his`), v4 rules:
+
+    raw       n=101   tail 0.1393   chin 0.2742  beard 0.1179  chest 0.0714
+    prefill   n= 85   tail 0.1840   hair 0.1333  beard 0.1158  whiskers 0.0913
+
+Fewer words and more tail, as predicted. But **the peak halved**, 0.274 -> 0.133, which is FLATTER and not sharper. "Sharper" was doing two jobs in that sentence — fewer admitted words, and more mass on the leader — and they came apart on the first cell measured. Whatever the frame does here, it is not concentrating the distribution.
+
+n=1 model, n=1 prompt. Not a finding; a reason to stop calling the expectation "sharper" before the sweep makes it a hypothesis nobody re-reads.
+
 ### Topup does not obviously transfer
 
 Pass 2 is scoped to the **lineage union**. Under prefill the eligible set is different and smaller, so the union is differently shaped. Whether pass 2 means anything here is open, not a port.
