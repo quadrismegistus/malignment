@@ -305,11 +305,65 @@ def feature_shift(min_members=8, min_cov=5):
     return out
 
 
+def reversal_stability(min_readings=8, iters=2000, seed=20260822):
+    """Is reversal a property of the MODEL, across frames? Permutation test.
+
+    ## WHY THIS IS THE ONE SIGNAL HELD BACK FROM THE GROUPING
+
+    Cross-frame membership is noise: adjusted Rand +0.000, so which relation a
+    model performs is a property of the FRAME. Reversal is not. Some models run
+    alignment backwards nearly everywhere and some never do, far beyond what the
+    per-reading reversal counts would produce by chance.
+
+    That makes it the only model-level quantity that survives a change of
+    material, which is exactly what an independent check on a cross-frame
+    grouping needs. So it stays OUT of the grouping document: if two components
+    are proposed as one relation, their reverser sets are a PREDICTION, and a
+    prediction cannot be tested against evidence that was fed to the predictor.
+    Same circularity RH caught in grouping by word properties.
+
+    ## THE NULL HAS TO PRESERVE THE PER-READING COUNT
+
+    A reading that called 13 models reversed contributes 13 whatever is true, so
+    the null reassigns that same 13 at random among the models THAT READING
+    judged. What is being tested is whether the reversals concentrate on
+    particular models, not whether there are many of them.
+
+    A consequence for the check itself: because a few models reverse everywhere,
+    ANY two components will share reversers at above-chance raw rates. The check
+    must therefore compare against this same null, not against zero.
+    """
+    import random, statistics as st
+    R = blind_readings()
+    judged = {r["tag"] + "|" + r["prompt"]: set(r["part"]) | set(r["rev"]) for r in R}
+    rev = {r["tag"] + "|" + r["prompt"]: set(r["rev"]) for r in R}
+    obs, opp = collections.Counter(), collections.Counter()
+    for k in judged:
+        for m in judged[k]:
+            opp[m] += 1
+            if m in rev[k]:
+                obs[m] += 1
+    elig = [m for m in opp if opp[m] >= min_readings]
+    var_obs = st.pvariance([obs[m] / opp[m] for m in elig])
+    rng = random.Random(seed)
+    null = []
+    for _ in range(iters):
+        c = collections.Counter()
+        for k in judged:
+            for m in rng.sample(sorted(judged[k]), len(rev[k])):
+                c[m] += 1
+        null.append(st.pvariance([c[m] / opp[m] for m in elig]))
+    p = (sum(1 for x in null if x >= var_obs) + 1.0) / (iters + 1.0)
+    rates = sorted(((obs[m] / opp[m], obs[m], opp[m], m) for m in elig), reverse=True)
+    return dict(rates=rates, var_obs=var_obs, null=null, p=p, n=len(elig))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--doc", action="store_true")
     ap.add_argument("--ari", action="store_true")
     ap.add_argument("--features", action="store_true")
+    ap.add_argument("--reversal", action="store_true")
     ap.add_argument("--min-n", type=int, default=2)
     a = ap.parse_args()
     if a.ari:
@@ -325,6 +379,19 @@ def main():
               % (len(same), med(same), max(same)))
         print("  different frame %3d pairs  median ARI %+.3f  max %+.3f"
               % (len(cross), med(cross), max(cross)))
+        return
+    if a.reversal:
+        import statistics as st
+        r = reversal_stability()
+        print("  %d models judged on >=8 readings\n" % r["n"])
+        for lab, xs in (("most reversed", r["rates"][:6]), ("never reversed", r["rates"][-6:])):
+            print("  %s" % lab)
+            for rate, o, n, m in xs:
+                print("    %-34s %2d of %2d  (%.0f%%)" % (m, o, n, 100 * rate))
+        print("\n  variance of per-model rate: observed %.4f" % r["var_obs"])
+        print("  null preserving each reading's count: median %.4f, 95th %.4f"
+              % (st.median(r["null"]), sorted(r["null"])[int(.95 * len(r["null"]))]))
+        print("  p = %.4f" % r["p"])
         return
     if a.features:
         import statistics as st
