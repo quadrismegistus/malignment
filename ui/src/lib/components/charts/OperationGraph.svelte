@@ -68,7 +68,12 @@
 		b?: RW[];
 		how_you_know: string;
 	};
-	type RW = { w: string; r: number | null; o: number | null; p: number | null };
+	//: `ra`/`rb` are the BASE and ALIGNED ranks, always in that order. `r` is the
+	//: SORT key only -- the rank on whichever side the word was cited on -- and
+	//: must never be printed as the left half of the arrow. Doing that made a TO
+	//: word render aligned->base while a FROM word rendered base->aligned, with
+	//: the same glyph, so a word that rose to rank 4 read as a collapse to 128.
+	type RW = { w: string; r: number | null; ra: number | null; rb: number | null };
 	let { art }: { art: Art } = $props();
 
 	const DASH = '—';
@@ -276,8 +281,8 @@
 					return {
 						w: id.split('::')[1],
 						r: (side === 'a' ? n?.ra : n?.rb) ?? null,
-						o: (side === 'a' ? n?.rb : n?.ra) ?? null,
-						p: (side === 'a' ? n?.pa : n?.pb) ?? null
+						ra: n?.ra ?? null,
+						rb: n?.rb ?? null
 					};
 				})
 				//: A word with no rank sorts last rather than first, so an
@@ -292,9 +297,14 @@
 	//: Rank already carries prominence -- 4 against 60 says what 7.6% against
 	//: 0.02% says -- so the second number was redundant at display size. `pa`/`pb`
 	//: are still on the nodes for anything that needs magnitude.
+	//: ALWAYS base -> aligned. The arrow means time, on both lists.
 	const fmt = (xs: RW[]) =>
 		xs.length
-			? xs.map((x) => (x.r == null ? `${x.w} (?)` : `${x.w} (${x.r}\u2192${x.o ?? '-'})`)).join('; ')
+			? xs
+					.map((x) =>
+						x.r == null ? `${x.w} (?)` : `${x.w} (${x.ra ?? '-'}\u2192${x.rb ?? '-'})`
+					)
+					.join('; ')
 			: DASH;
 	const placedBy = (m: string) =>
 		art.nodes.filter((x) => x.kind === 'op' && x.models?.includes(m));

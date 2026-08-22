@@ -305,16 +305,22 @@ def audit(G, cc, OPS, pairs, prompt, width=68):
         """
         rows = (SC or {}).get(model) or {}
         ws = [w if w in rows else w.lower() for w in ws]
-        rk, pk = ("rank_a", "p_a") if side == "A" else ("rank_b", "p_b")
-        ok = [(rows[w][rk], rows[w][pk], rows[w].get("rank_b" if side == "A" else "rank_a"), w)
+        rk = "rank_a" if side == "A" else "rank_b"
+        #: SORTED BY THE OWN SIDE, PRINTED BASE -> ALIGNED. Those are different
+        #: axes and conflating them inverted every TO line: printing own-then-
+        #: other means a FROM word reads base->aligned and a TO word reads
+        #: aligned->base, with the same arrow on both, so a word that ROSE to
+        #: rank 4 rendered as `(4->128)` and read as a collapse. The arrow has to
+        #: mean one thing, and the only defensible thing for it to mean is time.
+        ok = [(rows[w][rk], rows[w].get("rank_a"), rows[w].get("rank_b"), w)
               for w in ws if w in rows and rows[w].get(rk) is not None]
         miss = sorted(w for w in ws if w not in rows)
         #: RANK ONLY. Rank and per-cent together put four numbers on every word and
         #: the line stopped reading as language. Rank carries prominence on its
         #: own; the mass is in the sidecar and in the artifact for anything that
         #: needs magnitude rather than order.
-        out = ["%s (%d->%s)" % (w, r, ("%d" % o) if o is not None else "-")
-               for r, p, o, w in sorted(ok)]
+        out = ["%s (%s->%s)" % (w, "-" if ra is None else ra, "-" if rb is None else rb)
+               for _, ra, rb, w in sorted(ok)]
         return out + ["%s (?)" % w for w in miss]
 
     #: ── THE DENOMINATOR, PRINTED ONCE AT THE TOP ────────────────────────────
@@ -555,13 +561,17 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
             #: meaningful. A word with no table row keeps its place at the end
             #: rather than vanishing.
             def ranked(ws, side):
+                #: `ra`/`rb` are the BASE and ALIGNED ranks, always in that order,
+                #: whatever side the word was cited on. Only the SORT depends on
+                #: the side. Emitting own-then-other made the consumer's arrow
+                #: point backwards in time on every TO list.
                 out = []
                 for w in [x.lower() for x in ws or []]:
                     d = rk(r["model"], w) or {}
-                    out.append({"w": w, "r": d.get("ra" if side == "a" else "rb"),
-                                "o": d.get("rb" if side == "a" else "ra"),
+                    out.append({"w": w, "ra": d.get("ra"), "rb": d.get("rb"),
                                 "p": d.get("pa" if side == "a" else "pb")})
-                return sorted(out, key=lambda x: (x["r"] is None, x["r"] or 0))
+                key = "ra" if side == "a" else "rb"
+                return sorted(out, key=lambda x: (x[key] is None, x[key] or 0))
             ra_, rb_ = ranked(r.get("a_words"), "a"), ranked(r.get("b_words"), "b")
             revs.append({"model": r["model"], "op": "OP[%s] %s" % (tag, r["operation"]),
                          "reading": tag, "a": ra_, "b": rb_,
