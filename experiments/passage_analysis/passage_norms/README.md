@@ -44,12 +44,24 @@ only, so it was measured first rather than discovered in the results:
     gi          89.4%     warriner   67.3%     wordnet   63.4%
     rid         50.2%     brooke     11.9%   <- SPARSE, rate only
 
-**Brooke is the sparse one and H4 rests on it.** 11.9% of content words at the
-median, but every one of the 60 passages has at least one hit, so a per-passage
-formality RATE exists throughout. It is a mean of +1/-1 over a 1,029-word seed
-list, not a scale, and must be read as a rate with its denominator attached.
-`k_register_level` is the alternative and is descriptor-only by standing rider,
-so H4 has one instrument and it is a sparse one.
+**H4 has TWO instruments and Brooke is the weaker one.** Brooke reaches 11.9%
+of content words at the median against `k_register_level`'s 93.5%, and it is a
+mean of +1/-1 over a 1,029-word seed list, not a scale -- so it must be read as
+a rate with its denominator attached, and a null on it is a statement about
+power rather than about register. `k_register_level` is primary here.
+
+**The `NOT ESTABLISHED` rider on `k_register_level` does NOT bar it, and an
+earlier version of this file said it did.** The rider records IAA 0.597 against
+Claude Haiku 4.5, which is agreement between two coders of the same kind.
+`experiments/displacement/register_shift/registration.md` (section on the two
+instruments) supplies the external corroboration that agreement lacks: `k_` and
+the displacement lexicon's independently-built register labels agree at
+**Spearman rho = 0.645 (n=480, p=1e-57)**, with vulgar-vs-clinical separating at
+**AUC 0.976** and clinical-vs-plain at 0.715, the two having been built months
+apart by different procedures with neither seeing the other. That is the same
+standard being applied to every other instrument in this folder. The rider
+still bars quoting a k_register LEVEL as a formality measurement; it does not
+bar a paired arm contrast on ranks, which is what H4 is.
 
 **Warriner at 67.3% is the one to watch for the arm comparison.** A third of
 content words are absent from it, and absence is not random -- proper nouns are
@@ -85,7 +97,11 @@ From `fields.py` and the plan's Amendment 1, and none of them is optional:
   * The K scales are ONE MODEL's judgments at ONE frozen instrument. The `k_`
     prefix is load-bearing and they are never presented beside the human norms
     as the same kind of object.
-  * `k_register_level` is NOT ESTABLISHED -- descriptor only, never evidence.
+  * `k_register_level` carries IAA 0.597, which bars quoting an absolute
+    formality level. It is NOT barred from paired arm contrasts: it is
+    externally corroborated at rho 0.645 / AUC 0.976 against the
+    displacement lexicon (see H4 above). Do not restate the older,
+    stricter rider without reading that corroboration.
   * `k_vulgarity` is a sparse indicator (variance on 463 of 27,242 words).
     Floors are not nulls.
   * RANKS NOT LEVELS: levels shift between instrument versions at stable order,

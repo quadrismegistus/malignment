@@ -188,7 +188,17 @@ def query(sql, **kw):
     sql = _with_format(sql, "JSONEachRow")
     out = _run(sql, **kw)
     rows = []
-    for i, line in enumerate(out.splitlines(), 1):
+    #: `split("\n")`, NOT `splitlines()`. JSONEachRow puts one row per LF, but
+    #: `splitlines()` also breaks on U+0085, U+2028, U+2029, \v and \f -- and
+    #: JSON requires escaping none of them, since all sit at or above 0x20 in
+    #: the ones that matter here. ClickHouse escapes U+2028 and U+2029 (the
+    #: JS-compat convention) and leaves **U+0085 (NEL) raw**, so a row carrying
+    #: a NEL was cut in half and the leading fragment raised as an unterminated
+    #: string. MEASURED on malign_logits gen_sequences (the passage corpora,
+    #: 1,523,015 rows): 100 rows carry U+0085, and only those broke -- the 290
+    #: U+2028 and 45 U+2029 rows parse either way, which is why testing on
+    #: U+2028 alone clears this fix falsely.
+    for i, line in enumerate(out.split("\n"), 1):
         if not line.strip():
             continue
         try:
