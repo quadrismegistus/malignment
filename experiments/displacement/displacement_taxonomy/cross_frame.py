@@ -171,7 +171,13 @@ def components(k=2):
         info = {"OP[%s] %s" % (t, o["name"]): (t, o)
                 for t, v in pairs for o in v.get("operations") or []}
         for oc in ocs:
-            ent = [info[x] for x in sorted(oc, key=lambda x: -G.nodes[x]["n"]) if x in info]
+            #: TIE BROKEN ON THE NODE ID. `oc` is a SET, so sorting on size alone
+            #: leaves equal-sized operations in set-iteration order, which differs
+            #: between processes. The components and their members were stable;
+            #: only the ORDER names printed inside them moved, which was enough to
+            #: make the document not byte-reproducible and therefore unable to
+            #: prove that a later rater read what an earlier one read.
+            ent = [info[x] for x in sorted(oc, key=lambda x: (-G.nodes[x]["n"], x)) if x in info]
             if not ent:
                 continue
             mem = [m for _, o in ent for m in o.get("members") or []]
@@ -397,23 +403,51 @@ return { raters: rs.length, per_rater: rs.map((x) => ({
 """
 
 
-def workflow(raters=2, model="sonnet", effort="xhigh"):
-    cs, txt = document()
+def workflow(raters=2, model="sonnet", effort="xhigh", regenerate=False):
+    """Write a runner for an EXISTING document. Does not rewrite the document.
+
+    ## WHY THIS NO LONGER GENERATES
+
+    It used to call document() and write the file every time, so producing a
+    runner for a third rater silently rewrote the input the first two had read.
+    A later rating is only comparable if it reads the same bytes, and the thing
+    that guarantees that is not determinism, which this generator does not have,
+    but refusing to touch the artifact at all.
+
+    The document is now written once by --doc and is the record. This hashes it
+    and prints the hash so a run can be tied to the exact text it was given.
+    """
+    import hashlib
     path = os.path.join(HERE, "results", "inputs", "crossframe_ops.txt")
-    open(path, "w").write(txt)
+    if regenerate or not os.path.exists(path):
+        cs, txt = document()
+        open(path, "w").write(txt)
+    txt = open(path).read()
+    cs = components()
+    digest = hashlib.md5(txt.encode()).hexdigest()
+    n_in_doc = sum(1 for l in txt.splitlines() if l.startswith("C") and "sentence:" in l)
+    #: THE DOCUMENT ON DISK IS THE AUTHORITY, not what components() returns now.
+    #: If they disagree the ids in a returned grouping cannot be resolved, which
+    #: is a silent misalignment rather than an error.
+    assert n_in_doc == len(cs), \
+        "document holds %d components, components() now returns %d" % (n_in_doc, len(cs))
     js = SCRIPT % {"raters": raters, "n": len(cs),
                    "path": json.dumps(os.path.abspath(path)),
                    "schema": json.dumps(SCHEMA, indent=2, sort_keys=True),
                    "model": json.dumps(model), "effort": json.dumps(effort)}
-    out = os.path.join(HERE, "workflow_crossframe.js")
+    #: NAMED BY RATER MODEL. Overwriting the file would destroy the script that
+    #: produced the readings already on disk, and a third rating is only
+    #: comparable if the earlier one can still be shown to have run this document.
+    out = os.path.join(HERE, "workflow_crossframe_%s.js" % model)
     open(out, "w").write(js)
     #: The generated script has to CONTAIN what it claims to run, checked rather
     #: than assumed -- a template that silently loses its file path produces a
     #: workflow that reads nothing and returns a confident empty grouping.
     for probe in (os.path.abspath(path), '"singletons"', model, effort):
         assert probe in js, "generated script missing %r" % probe
-    print("%d components, %d chars (~%d tokens), %d rater(s)"
-          % (len(cs), len(txt), len(txt) // 4, raters))
+    print("%d components, %d chars (~%d tokens), %d rater(s), model %s effort %s"
+          % (len(cs), len(txt), len(txt) // 4, raters, model, effort))
+    print("  document md5 %s  (NOT regenerated)" % digest)
     print("  task     %s\n  workflow %s\n\nNOT RUN." % (path, out))
     return out
 
@@ -425,6 +459,10 @@ def main():
     ap.add_argument("--features", action="store_true")
     ap.add_argument("--reversal", action="store_true")
     ap.add_argument("--workflow", type=int, metavar="RATERS")
+    ap.add_argument("--model", default="sonnet")
+    ap.add_argument("--effort", default="xhigh")
+    ap.add_argument("--regenerate", action="store_true",
+                    help="rewrite the document; breaks comparability with earlier raters")
     ap.add_argument("--min-n", type=int, default=2)
     a = ap.parse_args()
     if a.ari:
@@ -442,7 +480,7 @@ def main():
               % (len(cross), med(cross), max(cross)))
         return
     if a.workflow:
-        workflow(a.workflow)
+        workflow(a.workflow, a.model, a.effort, a.regenerate)
         return
     if a.reversal:
         import statistics as st
