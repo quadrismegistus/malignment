@@ -88,6 +88,45 @@ def readings(prefix, n_lineages=None):
             for k in ks], (ks[0]["frame_prompt"] if ks else None)
 
 
+def op_components(G, OPS, k=2):
+    """Components over OPERATIONS, joined only where they share >= k models.
+
+    ## WHY CONNECTIVITY OVER WORD NODES WAS THE WRONG CRITERION (RH, 2026-08-22)
+
+    The word graph joins two operations if they share ONE model, and RH spotted
+    the consequence in the render: `explicit-to-decorous displacement` and
+    `neutral-field reordering` hang together on `deepseek-llm-7b-chat` alone.
+    Remove that one model and stroking's component 1 splits.
+
+    Worse, it explains a result I had already misread. Insurance's transgressive
+    cluster "merges when you add readings" -- but it is attached to the main blob
+    by exactly two single-model bridges, `Olmo-3.1-32B-Instruct` and
+    `Olmo-3-7B-Instruct`, which are THE MODELS THE CLUSTER IS ABOUT. A rater who
+    also places them in `Auxiliary Action Displacement` lists their ordinary
+    from-words there, and the finding ends up joined to everything else by its own
+    subjects.
+
+    So a shared model is not evidence that two operations are one relation. k=2
+    is the default because it is the smallest threshold that means anything: two
+    readings assert the same relation only if they agree about at least two
+    models. k=1 reproduces the old behaviour and is what nobody chose.
+    """
+    import itertools, networkx as nx
+    mods = {o: {n.split("::")[0] for n in G.to_undirected().neighbors(o)} for o in OPS}
+    Q = nx.Graph()
+    Q.add_nodes_from(OPS)
+    for a, b in itertools.combinations(sorted(OPS), 2):
+        sh = mods[a] & mods[b]
+        if len(sh) >= k:
+            Q.add_edge(a, b, shared=len(sh))
+    comps = sorted(nx.connected_components(Q), key=len, reverse=True)
+    #: the pairs k EXCLUDED, so the threshold's cost is visible rather than
+    #: implied -- these are the joins that would have existed at k=1.
+    cut = [(a, b, len(mods[a] & mods[b])) for a, b in itertools.combinations(sorted(OPS), 2)
+           if 0 < len(mods[a] & mods[b]) < k]
+    return comps, cut, mods
+
+
 def build(pairs):
     import networkx as nx
     G = nx.DiGraph()
@@ -104,7 +143,7 @@ def build(pairs):
     return G
 
 
-def analyse(prefix, n_lineages=None, png=False, report=False, data=False):
+def analyse(prefix, n_lineages=None, png=False, report=False, data=False, k=2):
     import networkx as nx
     pairs, prompt = readings(prefix, n_lineages)
     if not pairs:
@@ -118,15 +157,36 @@ def analyse(prefix, n_lineages=None, png=False, report=False, data=False):
         g = build([(tag, v)])
         c = list(nx.connected_components(g.to_undirected()))
         nops = len(v.get("operations") or [])
+        #: A k=1 PROPERTY, so it is checked at k=1 whatever k the caller asked
+        #: for: the completeness assert guarantees each model sits in exactly
+        #: one operation, so a single reading cannot bridge two hubs by sharing
+        #: a model. At k>=2 a single reading has no operation edges at all and
+        #: this would be vacuous.
         assert len(c) == nops, \
             "%s: %d components for %d operations -- a model bridged two hubs" % (tag, len(c), nops)
 
     G = build(pairs)
     OPS = {n for n in G if G.nodes[n].get("kind") == "op"}
-    cc = sorted(nx.connected_components(G.to_undirected()), key=len, reverse=True)
-    print("  pooled: %d nodes (%d operations, %d word-nodes), %d edges -> COMPONENTS %d\n"
-          % (G.number_of_nodes(), len(OPS), G.number_of_nodes() - len(OPS),
-             G.number_of_edges(), len(cc)))
+    ocs, cut, mods = op_components(G, OPS, k)
+    at1, _, _ = op_components(G, OPS, 1)
+    #: components are over OPERATIONS; word nodes are carried along by whichever
+    #: operations placed them, and a model in two components appears in both --
+    #: which is a fact about the readings, not a bug to resolve away.
+    cc = []
+    for oc in ocs:
+        c = set(oc)
+        for o in oc:
+            c |= set(G.to_undirected().neighbors(o))
+        cc.append(c)
+    print("  pooled: %d nodes (%d operations, %d word-nodes), %d edges"
+          % (G.number_of_nodes(), len(OPS), G.number_of_nodes() - len(OPS), G.number_of_edges()))
+    print("  COMPONENTS at k=%d: %d      (at k=1 it would be %d)\n" % (k, len(cc), len(at1)))
+    if cut:
+        print("  operation pairs k=%d EXCLUDES (they share fewer than %d models):" % (k, k))
+        for a, b, n in sorted(cut, key=lambda x: -x[2])[:8]:
+            print("     %-32s + %-32s  %d shared"
+                  % (G.nodes[a]["label"][:32], G.nodes[b]["label"][:32], n))
+        print()
     for i, c in enumerate(cc, 1):
         ops = sorted((n for n in c if n in OPS), key=lambda n: -G.nodes[n]["n"])
         mods = {n.split("::")[0] for n in c if "::" in n}
@@ -140,7 +200,7 @@ def analyse(prefix, n_lineages=None, png=False, report=False, data=False):
     if report:
         audit(G, cc, OPS, pairs, prompt)
     if data:
-        emit(G, cc, OPS, pairs, prompt, prefix)
+        emit(G, cc, OPS, pairs, prompt, prefix, k, len(at1))
     if png:
         render(G, cc, OPS, prompt, prefix)
     return G, cc
@@ -293,7 +353,7 @@ def render(G, cc, OPS, prompt, prefix):
     print("  wrote %s" % out)
 
 
-def emit(G, cc, OPS, pairs, prompt, prefix):
+def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None):
     """Write the pooled graph as a `graph` artifact for the web app.
 
     Word nodes carry their `model`, so the UI can collapse to model grain
@@ -335,18 +395,25 @@ def emit(G, cc, OPS, pairs, prompt, prefix):
                     "unassigned": len(v.get("unassigned") or [])})
     art = graph(
         title=prompt,
-        subtitle=("%d operations from %d reading(s), pooled. An operation is a NODE: two "
-                  "readings touch only where they put the SAME model's words on a relation. "
-                  "Only models placed in `operations` are here -- `unassigned` carries no "
-                  "words and `reversed` is excluded, so between 18%% and 98%% of what was "
-                  "sent reaches this graph depending on the rater."
-                  % (len(OPS), len(pairs))),
+        #: THE THRESHOLD IS DECLARED. Components here are over OPERATIONS, joined
+        #: only where they share >= k models. At k=1 -- sharing a SINGLE model --
+        #: every prompt collapses further, and on insurance the transgressive
+        #: pair is swallowed by the main blob through the very two models it is
+        #: about. A reader who does not know k cannot read the component count.
+        subtitle=("%d operations from %d reading(s), pooled. An operation is a NODE, and two "
+                  "operations are in one component only if they share at least k=%d models "
+                  "(at k=1 there would be %s). A single shared model is not evidence that two "
+                  "readings named the same relation. Only models placed in `operations` are "
+                  "here: `unassigned` carries no words and `reversed` is excluded, so between "
+                  "18%% and 98%% of what was sent reaches this graph depending on the rater."
+                  % (len(OPS), len(pairs), k,
+                     "%d component(s)" % n_at1 if n_at1 is not None else "fewer")),
         nodes=nodes, links=links,
         groups=[{"key": t, "label": t, "colour": PAL[i % len(PAL)]} for i, t in enumerate(tags)],
         meta={"components": [{"operations": sum(1 for x in c if x in OPS),
                               "models": len({x.split("::")[0] for x in c if "::" in x})}
                              for c in cc],
-              "coverage": cov, "prompt": prompt})
+              "coverage": cov, "prompt": prompt, "k": k, "components_at_k1": n_at1})
     slug = re.sub(r"[^a-z0-9]+", "_", prefix.lower())[:34].strip("_")
     return write(art, os.path.join(HERE, "figures"), "opgraph_%s" % slug)
 
@@ -356,6 +423,9 @@ def main(argv=None):
     ap.add_argument("prefix", nargs="?")
     ap.add_argument("--n-lineages", type=int, default=None)
     ap.add_argument("--png", action="store_true")
+    ap.add_argument("-k", type=int, default=2,
+                    help="models two operations must share to be joined (default 2; "
+                         "1 reproduces the old shared-a-single-model behaviour)")
     ap.add_argument("--data", action="store_true",
                     help="write a `graph` artifact for the web app")
     ap.add_argument("--report", action="store_true",
@@ -367,11 +437,11 @@ def main(argv=None):
         seen = sorted({k["frame_prompt"] for k in X._stash()
                        if isinstance(k, dict) and k.get("stage") == "crosslineage"})
         for p in seen:
-            analyse(p, a.n_lineages, a.png, a.report, a.data); print("-" * 78)
+            analyse(p, a.n_lineages, a.png, a.report, a.data, a.k); print("-" * 78)
         return
     if not a.prefix:
         raise SystemExit("give a prompt prefix, or --all")
-    analyse(a.prefix, a.n_lineages, a.png, a.report, a.data)
+    analyse(a.prefix, a.n_lineages, a.png, a.report, a.data, a.k)
 
 
 if __name__ == "__main__":

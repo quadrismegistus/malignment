@@ -715,7 +715,7 @@
 		margin-bottom: 0.4rem;
 	}
 	.count strong {
-		color: var(--text-1);
+		color: var(--text);
 	}
 	.controls select {
 		font: inherit;
@@ -835,7 +835,7 @@
 		font-size: 9.5px;
 		fill: var(--text-2);
 		paint-order: stroke;
-		stroke: var(--bg-1, #12131a);
+		stroke: var(--ground);
 		stroke-width: 3px;
 	}
 	.moves .leader {
@@ -844,7 +844,7 @@
 		stroke-opacity: 0.5;
 	}
 	.moves .anchor circle {
-		stroke: var(--bg-1, #12131a);
+		stroke: var(--ground);
 		stroke-width: 1.5;
 	}
 	/* the cloud steps back while the vectors are up: two claims, one plane */
@@ -866,7 +866,7 @@
 		width: 11px;
 		height: 11px;
 		margin: -5.5px 0 0 -5.5px;
-		border: 1.5px solid var(--text-1, #fff);
+		border: 1.5px solid var(--text);
 		border-radius: 50%;
 		pointer-events: none;
 		z-index: 1;
@@ -877,7 +877,7 @@
 		position: absolute;
 		z-index: 2;
 		pointer-events: none;
-		background: color-mix(in srgb, var(--bg-1, #12131a) 92%, transparent);
+		background: color-mix(in srgb, var(--ground) 92%, transparent);
 		border: 1px solid color-mix(in srgb, var(--text-3) 35%, transparent);
 		border-radius: 3px;
 		padding: 0.15rem 0.4rem;
@@ -1075,7 +1075,7 @@
 		font-size: 0.7rem;
 	}
 	th.named {
-		color: var(--text-1);
+		color: var(--text);
 	}
 	th em,
 	.pooled {

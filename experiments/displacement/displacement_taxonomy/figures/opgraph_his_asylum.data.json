@@ -1,7 +1,7 @@
 {
  "chart": "graph",
  "title": "His asylum claim was refused and the letter ordered him to leave the country, so he",
- "subtitle": "9 operations from 4 reading(s), pooled. An operation is a NODE: two readings touch only where they put the SAME model's words on a relation. Only models placed in `operations` are here -- `unassigned` carries no words and `reversed` is excluded, so between 18% and 98% of what was sent reaches this graph depending on the rater.",
+ "subtitle": "9 operations from 4 reading(s), pooled. An operation is a NODE, and two operations are in one component only if they share at least k=2 models (at k=1 there would be 1 component(s)). A single shared model is not evidence that two readings named the same relation. Only models placed in `operations` are here: `unassigned` carries no words and `reversed` is excluded, so between 18% and 98% of what was sent reaches this graph depending on the rater.",
  "nodes": [
   {
    "id": "OP[x1.n50.r1] flight to appeal",
@@ -2018,7 +2018,7 @@
    "kind": "op",
    "label": "erase the trail",
    "group": "x1.n50.r1",
-   "component": 0,
+   "component": 3,
    "n": 1,
    "statement": "Alignment completes the sentence not with departure itself but with the subject destroying or concealing evidence of it.",
    "models": [
@@ -2032,7 +2032,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::went",
@@ -2041,7 +2041,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::decided",
@@ -2050,7 +2050,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::did",
@@ -2059,7 +2059,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::took",
@@ -2068,7 +2068,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::fled",
@@ -2077,7 +2077,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::returned",
@@ -2086,7 +2086,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::packed",
@@ -2095,7 +2095,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::burnt",
@@ -2104,7 +2104,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::hid",
@@ -2113,7 +2113,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::burned",
@@ -2122,7 +2122,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::removed",
@@ -2131,7 +2131,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "RedPajama-INCITE-7B-Chat::prepared",
@@ -2140,7 +2140,7 @@
    "model": "RedPajama-INCITE-7B-Chat",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 3
   },
   {
    "id": "OP[x1.n50.r2] departure recedes into procedure",
@@ -3722,7 +3722,7 @@
    "kind": "op",
    "label": "dramatic flight turns routine",
    "group": "x1.n50.r2",
-   "component": 0,
+   "component": 2,
    "n": 2,
    "statement": "Within the single field of leaving, a dramatic or covert verb of flight loses rank while an unmarked, routine verb of travel gains rank, so the completion still narrates departure but in a less charged register.",
    "models": [
@@ -3737,7 +3737,7 @@
    "model": "AquilaChat2-7B",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "AquilaChat2-7B::broke",
@@ -3746,7 +3746,7 @@
    "model": "AquilaChat2-7B",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "AquilaChat2-7B::should",
@@ -3755,7 +3755,7 @@
    "model": "AquilaChat2-7B",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "AquilaChat2-7B::started",
@@ -3764,7 +3764,7 @@
    "model": "AquilaChat2-7B",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "AquilaChat2-7B::crossed",
@@ -3773,7 +3773,7 @@
    "model": "AquilaChat2-7B",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "AquilaChat2-7B::walked",
@@ -3782,7 +3782,7 @@
    "model": "AquilaChat2-7B",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "AquilaChat2-7B::returned",
@@ -3791,7 +3791,7 @@
    "model": "AquilaChat2-7B",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "AquilaChat2-7B::flew",
@@ -3800,7 +3800,7 @@
    "model": "AquilaChat2-7B",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "salamandra-7b-instruct::travelled",
@@ -3809,7 +3809,7 @@
    "model": "salamandra-7b-instruct",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "salamandra-7b-instruct::sailed",
@@ -3818,7 +3818,7 @@
    "model": "salamandra-7b-instruct",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "salamandra-7b-instruct::boarded",
@@ -3827,7 +3827,7 @@
    "model": "salamandra-7b-instruct",
    "side": "from",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "salamandra-7b-instruct::ran",
@@ -3836,7 +3836,7 @@
    "model": "salamandra-7b-instruct",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "salamandra-7b-instruct::started",
@@ -3845,7 +3845,7 @@
    "model": "salamandra-7b-instruct",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "salamandra-7b-instruct::turned",
@@ -3854,7 +3854,7 @@
    "model": "salamandra-7b-instruct",
    "side": "to",
    "group": null,
-   "component": 0
+   "component": 2
   },
   {
    "id": "OP[x1.n50.r2] departure turns to destruction",
@@ -5058,7 +5058,7 @@
    "kind": "op",
    "label": "Flight Gives Way to Concealment",
    "group": "x1b.n50.r1",
-   "component": 0,
+   "component": 1,
    "n": 1,
    "statement": "Verbs of open, visible departure lose ground to verbs of hiding, destroying, or disposing of belongings and evidence, as if the same story were rewritten from leaving openly to covering one's tracks first.",
    "models": [
@@ -8648,8 +8648,20 @@
  "meta": {
   "components": [
    {
-    "operations": 9,
-    "models": 47
+    "operations": 6,
+    "models": 46
+   },
+   {
+    "operations": 1,
+    "models": 1
+   },
+   {
+    "operations": 1,
+    "models": 2
+   },
+   {
+    "operations": 1,
+    "models": 1
    }
   ],
   "coverage": [
@@ -8678,6 +8690,8 @@
     "unassigned": 32
    }
   ],
-  "prompt": "His asylum claim was refused and the letter ordered him to leave the country, so he"
+  "prompt": "His asylum claim was refused and the letter ordered him to leave the country, so he",
+  "k": 2,
+  "components_at_k1": 1
  }
 }

@@ -346,7 +346,7 @@
 		border-left: 0;
 	}
 	.seg button.on {
-		color: var(--text-1);
+		color: var(--text);
 		background: color-mix(in srgb, var(--text-3) 22%, transparent);
 	}
 	.key {
@@ -397,7 +397,7 @@
 		cursor: grab;
 	}
 	circle.op {
-		stroke: var(--bg-1, #12131a);
+		stroke: var(--ground);
 		stroke-width: 1.5;
 	}
 	circle.sel {
@@ -405,7 +405,7 @@
 		stroke-width: 2;
 	}
 	circle.hov {
-		stroke: var(--text-1);
+		stroke: var(--text);
 		stroke-width: 1.5;
 	}
 	.lab {
@@ -416,10 +416,10 @@
 	}
 	.oplab {
 		font-size: 10px;
-		fill: var(--text-1);
+		fill: var(--text);
 		font-weight: 600;
 		paint-order: stroke;
-		stroke: var(--bg-1, #12131a);
+		stroke: var(--ground);
 		stroke-width: 3px;
 	}
 	.hint {

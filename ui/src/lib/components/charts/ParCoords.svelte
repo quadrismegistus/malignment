@@ -710,7 +710,7 @@
 		color: var(--text-3);
 	}
 	.count strong {
-		color: var(--text-1);
+		color: var(--text);
 	}
 	button.key {
 		font: inherit;
@@ -788,7 +788,7 @@
 		color: var(--text-3);
 	}
 	.tcap strong {
-		color: var(--text-1);
+		color: var(--text);
 	}
 	.scroll {
 		max-height: 20rem;
@@ -803,7 +803,7 @@
 		position: sticky;
 		top: 0;
 		z-index: 1;
-		background: var(--bg-1, #12131a);
+		background: var(--ground);
 		text-align: left;
 		font-weight: 500;
 		color: var(--text-3);
@@ -812,7 +812,7 @@
 		white-space: nowrap;
 	}
 	thead th.on {
-		color: var(--text-1);
+		color: var(--text);
 	}
 	thead th button {
 		font: inherit;
