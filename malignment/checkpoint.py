@@ -512,9 +512,24 @@ class Checkpoint:
                 #: control tokens that never round-trip, which is a different
                 #: fact wearing the same alarm.
                 T._prompt_ids(ld.tok, prompt, ld.bos_policy)
+                #: `template=True`, NOT the AUTO default. `render` resolves AUTO
+                #: to RAW when no slot is set, and `frame="chat"` sets none --
+                #: only `prefill` does, and only because it is its own slot. So
+                #: asking for a chat frame returned the UNFRAMED distribution,
+                #: byte-identical, with no error: p(I) 0.0059 either way on
+                #: neo_7b_instruct, against 0.7349 once the template actually
+                #: renders. A treatment parameter that silently does nothing
+                #: yields a null that is not one, which is the failure this
+                #: method already refuses for a dropped system message.
+                if frame not in ("chat", "prefill"):
+                    raise ValueError(
+                        "frame=%r is not a frame this method renders. Use "
+                        "'chat' (stem as the USER turn, next word begins the "
+                        "ANSWER) or 'prefill' (stem as a started ASSISTANT "
+                        "turn)." % frame)
                 rendered, sys_ok = G.render(
                     ld, prompt, system=system, user_msg=user_msg,
-                    prefill=(frame == "prefill"))
+                    prefill=(frame == "prefill"), template=True)
                 if system is not DEFAULT and sys_ok is False:
                     raise ValueError(
                         "%s: the chat template DISCARDED the system message, so "
