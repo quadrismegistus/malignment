@@ -63,8 +63,9 @@ from venvs import venv_for                                  # noqa: E402
 
 from malignment import roster                               # noqa: E402
 
-RECORD = os.path.expanduser(
-    "~/github/malign-logits/data/model_load_environments.json")
+#: RETIRED 2026-08-22. Kept only as the name of what used to be read here; see
+#: `_observations`. The launch path no longer touches the read-only archive.
+RECORD = None
 #: **AND THIS REPO'S OWN OBSERVATIONS, WHICH WERE INERT HERE UNTIL 2026-08-20.**
 #: `RECORD` points at the ARCHIVE. Every observation filed in
 #: `roster/models/observations.json` -- 70 of them, including today's Falcon-H1
@@ -81,18 +82,29 @@ ROSTER_RECORD = os.path.join(
 
 
 def _observations():
-    """Archive first, then this repo. Both, never one."""
-    out = []
-    for path in (RECORD, ROSTER_RECORD):
-        try:
-            with open(path) as fh:
-                out.extend(json.load(fh).get("observations", []))
-        except (OSError, ValueError):
-            #: A missing archive is survivable; a missing roster is not, and
-            #: will surface as every model reading UNVERIFIED rather than silently
-            #: passing.
-            continue
-    return out
+    """The LIVE roster only. The archive read was RETIRED 2026-08-22.
+
+    **RETIRED BECAUSE IT BECAME REDUNDANT, NOT BECAUSE IT WAS WRONG.** Reading
+    both -- archive first, roster last so the newer record wins -- was the right
+    fix on 2026-08-20, when 70 roster observations were invisible here and the
+    planner kept blocking on stale archive verdicts. Then
+    `merge_environment_record.py` brought every archive observation across:
+    checked 2026-08-22, **0 of the archive's 128 (model x environment x outcome)
+    keys and 0 of its environments are absent from the roster's 369.** The
+    second read now contributes nothing and only keeps a READ-ONLY repo alive as
+    a dependency of the launch path.
+
+    If the archive ever gains something again, run the merge -- do not re-open a
+    second source here. Two live sources for one fact is how it forked the first
+    time: 131 observations there against 72 here, diverging in both directions.
+    """
+    try:
+        with open(ROSTER_RECORD) as fh:
+            return json.load(fh).get("observations", [])
+    except (OSError, ValueError):
+        #: A missing roster surfaces as every model reading UNVERIFIED rather
+        #: than silently passing, which is the safe direction for a planner.
+        return []
 
 #: Which recorded environments speak to which target. An observation is only
 #: evidence for a run that resembles it -- this map is the "resembles".
@@ -144,6 +156,88 @@ PROFILE_CLOUD_ENV = {
     "ssm": ("vast_a100_ssm_kernels",),
 }
 GOOD = ("load_ok", "loads", "ok", "loads_degraded")
+
+
+def device_of(name, e):
+    """'mps' | 'cuda' | None, from a `device` field written six different ways.
+
+    **THE FIELD IS PROSE AND THE FIRST DERIVATION COMPARED IT LITERALLY.**
+    Across 21 environments `device` reads `mps`, `MPS (M2 Max)`,
+    `MPS (Apple M2 Max)`, `cuda`, `A100-SXM4-80GB`, `RTX 4090 48GB (CUDA)`,
+    `CUDA, sm_80+ (A100 / L40S / RTX 5880Ada)` -- and is absent on two. Matching
+    `== "mps"` therefore excluded every HAND-AUTHORED environment while keeping
+    the generated ones, which is the precise opposite of the bug it was written
+    to fix, and it presented as four models quietly moving OK -> UNTESTED.
+
+    Same shape as `Q RTX 8000` against `Quadro RTX 8000` in the card table: two
+    feeds, one fact, different spellings, and a literal comparison that looks
+    like it works.
+    """
+    s = str(e.get("device") or "").lower()
+    if "mps" in s:
+        return "mps"
+    if any(t in s for t in ("cuda", "a100", "rtx", "l40s", "sm_", "gpu")):
+        return "cuda"
+    if s:
+        return None
+    #: No `device` at all on two entries, both named `cloud_cuda_*`. The NAME is
+    #: weaker evidence than the field and is used only where the field is empty.
+    n = name.lower()
+    if n.startswith("local"):
+        return "mps"
+    if n.startswith(("cloud", "vast", "grid")):
+        return "cuda"
+    return None
+
+
+def envs_for(profile, target, environments, profiles):
+    """Environment names that are EVIDENCE for running `profile` on `target`.
+
+    **DERIVED, BECAUSE THE HARDCODED LISTS WENT STALE THE DAY THEY WERE WRITTEN.**
+    `LOCAL`, `CLOUD` and `PROFILE_*_ENV` name environments literally, so every
+    new one must be hand-added -- and on 2026-08-22, after the environment
+    vocabulary grew from 10 to 21, **234 of 369 observations (63%) were invisible
+    to this checker.** Not wrong answers: no answer, silently, on two thirds of
+    the record. Same defect class as deciding kernels by substring-matching a
+    model id.
+
+    Three tests, all against fields the environment declares:
+
+        device      mps -> local, cuda -> cloud. The `device` field, not the name.
+        engine      a vLLM environment is NEVER evidence for a twp run --
+                    different package, different code path. Teuken was blocked
+                    on a cross-scoring failure twp never performs.
+        transformers  must satisfy the profile's specifier, so a 5.x observation
+                    cannot vouch for a `<5` profile.
+
+    **AN ENVIRONMENT THAT RECORDS NO VERSION CANNOT CONFIRM A PIN**, so it counts
+    on device alone and is returned separately: it is evidence that the model
+    ran there, not that it ran under the library this profile selects.
+    """
+    from packaging.specifiers import SpecifierSet
+    from packaging.version import Version
+    want_dev = "mps" if target == "local" else "cuda"
+    spec = (profiles.get(profile) or {}).get("transformers")
+    strict, loose = [], []
+    for name, e in (environments or {}).items():
+        if not isinstance(e, dict):
+            continue
+        if device_of(name, e) != want_dev:
+            continue
+        if (e.get("engine") or "") == "vllm":
+            continue
+        tf = e.get("transformers")
+        if not tf:
+            loose.append(name)
+            continue
+        try:
+            if spec and Version(str(tf)) not in SpecifierSet(spec):
+                continue
+        except Exception:                                    # noqa: BLE001
+            loose.append(name)
+            continue
+        strict.append(name)
+    return tuple(strict), tuple(loose)
 
 
 def _cells(model):
@@ -209,7 +303,15 @@ def main():
 
     r = roster.load()
     models = a.models or sorted(r["nodes"])
-    default_envs = LOCAL if a.target == "local" else CLOUD
+    _ENVS = json.load(open(ROSTER_RECORD)).get("environments", {})
+    import yaml as _yaml
+    _PROFILES = _yaml.safe_load(open(os.path.join(
+        ROOT, "roster", "environments.yaml")))["profiles"]
+    #: CAPACITY still uses the device-wide set: a disk limit is a property of
+    #: the BOX and is not scoped by which transformers a profile pins.
+    _want = "mps" if a.target == "local" else "cuda"
+    default_envs = tuple(n for n, e in _ENVS.items()
+                         if isinstance(e, dict) and device_of(n, e) == _want)
 
     #: CAPACITY is separated from BLOCKER because it is a property of the BOX and
     #: not of the (model x environment) pair: 32B and 70B fail here for disk and
@@ -220,8 +322,10 @@ def main():
         prof = (r["nodes"].get(m, {}).get("env") or {}).get("profile", "default")
         venv = os.path.basename(venv_for(m))
         mine = obs.get(m, [])
-        envs = (PROFILE_ENV.get(prof, default_envs) if a.target == "local"
-                else PROFILE_CLOUD_ENV.get(prof, default_envs))
+        #: DERIVED from the environments' own fields; see `envs_for`. The old
+        #: hardcoded lists could not see 234 of 369 observations.
+        _strict, _loose = envs_for(prof, a.target, _ENVS, _PROFILES)
+        envs = tuple(_strict) + tuple(_loose)
         here = [o for o in mine if o["environment"] in envs]
         #: **CAPACITY IS NOT PROFILE-SCOPED.** Disk and unified memory are
         #: properties of the BOX; changing a model's transformers pin does not
