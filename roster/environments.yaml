@@ -20,6 +20,19 @@ profiles:
   # them finds nothing -- the pin is applied after setup. `torch26`
   # collapses onto a normal box because every box already pins torch>=2.6,
   # which is why it exists as a LABEL and not as a provisioning difference.
+
+  # `launch:` IS ADVISORY AND MIS-KEYED. DO NOT PLAN A FLEET FROM IT.
+  # Nothing reads it. `fleet_launch.shard_profile()` derives the box from
+  # `sizing:` on the shard's BIGGEST model, and that is correct: a box is a
+  # function of SIZE, while a profile groups by LIBRARY PIN, and the two are
+  # orthogonal. `tf457` holds 13 checkpoints of which only 4 are 32B, so NO
+  # single `launch:` value can be right for it -- it reads `dense` (48 GB)
+  # for models the sizing rule puts on 80.
+  # It disagrees with what the launcher actually rents for 16 of 160 nodes.
+  # On 2026-08-22 a costed fleet plan was built on this field before anyone
+  # checked what the launcher does; `scripts/check_record.py` now tests the
+  # real path and reports the mismatches so the next reader is warned here
+  # rather than after renting.
   bf16:
     why: 'compute in bfloat16, NOT float16: fp16 overflows the SSM scan and yields all-NaN logits on prompts >=13 tokens (1/12 finite at fp16, 12/12 at bf16). Storage stays f16.'
     compute_dtype: bfloat16

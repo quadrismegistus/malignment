@@ -64,6 +64,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
 
+import box_guard                               # noqa: E402
 from fleet_shards import seconds               # noqa: E402
 
 DEFAULT_IMAGE = "pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel"
@@ -825,6 +826,19 @@ def execute(b, models, roots, venv, a):
         ok &= bool(same)
         print("     %-46s remote %6d  local %6d  %s"
               % (m[:46], n_rem, n_loc, "OK" if same else "MISMATCH"))
+    #: **COUNTING LINES VERIFIES TRANSFER, NOT CONTENT.** The loop above proves
+    #: every cell the box wrote arrived here. It cannot tell whether those cells
+    #: hold anything: Falcon-H1-7B at fp16 returned all-NaN logits and wrote
+    #: 5,166 cells that were EMPTY, and they satisfied conservation EXACTLY,
+    #: because `sum([]) + 1.0 == 1.0`. Remote count, local count and ledger all
+    #: agreed; the run was worthless. Destroying on a byte match would have
+    #: thrown away the only machine that could re-run it.
+    for m in models:
+        v, why = box_guard.emptiness_verdict(
+            os.path.join(dst, m.replace("/", "__")))
+        if v == "EMPTY":
+            ok = False
+            print("     %-46s EMPTY  %s" % (m[:46], why))
     if a.stop_after == "verify" or not ok:
         if not ok:
             print("\n  NOT DESTROYING -- verification failed. The box is still "
@@ -1004,6 +1018,7 @@ def _await(cloud, st, models, iid, a):
     import time
     t0 = time.time()
     last_n, last_change, ticks = -1, time.time(), 0
+    slow_at = None
     while True:
         if time.time() - t0 > a.max_hours * 3600:
             _billing(cloud, iid, "exceeded --max-hours %.1f" % a.max_hours)
@@ -1047,10 +1062,30 @@ def _await(cloud, st, models, iid, a):
                 print("     incremental pull FAILED (not fatal): %s"
                       % str(e)[:80], flush=True)
         idle = (time.time() - last_change) / 60.0
-        print("  poll %-3d    %s cells written | tmux %s | %.0f min elapsed%s"
+        #: **CELLS MOVING IS NOT CELLS MOVING FAST ENOUGH.** Every other signal
+        #: here -- done, failed, tmux, idle -- reads green while a box runs 178x
+        #: slow, because it IS producing. `Zamba2-7B` without the mamba kernels
+        #: loads and runs without erroring at 183.4 s/cell against 1.03 with
+        #: them: 152 hours for one model, and the only symptom is the clock.
+        #: `environments.yaml` says verify the kernels are IN USE and not merely
+        #: installed -- and asking the library cannot answer it, since
+        #: `is_mamba_ssm_available()` returned True throughout that failure. The
+        #: rate does answer it, and being ignorant of mechanism it also catches
+        #: the wrong card, thermal throttling and contention.
+        if slow_at is None and n >= box_guard.MIN_CELLS:
+            v, why = box_guard.throughput_verdict(models, n, time.time() - t0)
+            if v == "SLOW":
+                slow_at = ticks
+                print("  ** SLOW     %s" % why)
+                print("  **          NOT destroying: that would destroy the "
+                      "evidence. Check the kernels on a load that SUCCEEDED -- "
+                      "a fast-path warning during a FAILED load says nothing "
+                      "about the kernels.")
+        print("  poll %-3d    %s cells written | tmux %s | %.0f min elapsed%s%s"
               % (ticks, format(max(n, 0), ","), "up" if alive else "GONE",
                  (time.time() - t0) / 60.0,
-                 " | IDLE %.0f min" % idle if idle > 2 else ""))
+                 " | IDLE %.0f min" % idle if idle > 2 else "",
+                 " | SLOW since poll %d" % slow_at if slow_at else ""))
         if done:
             print("  complete    DONE after %.0f min, %s cells written"
                   % ((time.time() - t0) / 60.0, format(max(n, 0), ",")))

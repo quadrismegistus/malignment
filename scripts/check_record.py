@@ -184,13 +184,22 @@ def no_contradictions(v):
 # --------------------------------------------------------------------------
 @check
 def launch_box_satisfies_sizing(v):
-    """Each model's declared launch box must provide what the sizing rule demands.
+    """The box a shard would actually rent must satisfy the sizing rule.
 
-    INCIDENT: the three `allenai/Olmo-3.1-32B-Instruct` arms declare
-    `profile: tf457`, whose `launch:` is `dense` -- a 48 GB box -- against a
-    `sizing:` rule that puts anything <=35B on 80 GB. `profile` carries the
-    transformers pin and `launch` carries the box, and NOTHING crosses them, so
-    the fleet would OOM after paying for a 129 GB fp32 download.
+    INCIDENT: reading `profiles.<p>.launch` to plan a fleet gave `dense` (48 GB)
+    for the four 32B arms, which need 80. I built a costed plan on that field on
+    2026-08-22 before checking what the launcher does.
+
+    **`launch:` IS NOT WHAT THE LAUNCHER USES, AND THE FIELD IS MIS-KEYED.**
+    `fleet_launch.shard_profile()` derives the box from `sizing:` on the
+    shard's BIGGEST model and never reads `launch:` at all. It is right to:
+    a box is a function of SIZE, while a profile groups by LIBRARY PIN, and
+    those are orthogonal -- `tf457` holds 13 models of which only 4 are 32B, so
+    no single `launch:` value can be correct for it.
+
+    So this checks the REAL path, per model, as a one-model shard. A failure
+    here is money. The `launch:` disagreement is reported separately as a
+    documentation hazard, because it misleads readers without costing anything.
     """
     import yaml
     nodes = yaml.safe_load(open(os.path.join(ROOT, "roster", "models",
@@ -210,20 +219,35 @@ def launch_box_satisfies_sizing(v):
                 return s["vram_gb"], s["gpus"]
         return None, None
 
-    bad = []
+    from fleet_launch import shard_profile
+    bad, misleading = [], []
     for m, node in sorted(nodes.items()):
         pb = params.get(m)
         if not pb:
             continue
         need_v, need_g = demand(pb)
-        p = ((node or {}).get("env") or {}).get("profile") or "default"
-        lb = (prof.get(p) or {}).get("launch", "dense")
-        b = boxes.get(lb) or {}
-        got_v, got_g = b.get("provides_vram_gb", 0), b.get("num_gpus", 1)
+        #: What the launcher WOULD rent for a shard holding just this model.
+        real, _rv, _rg, _pb = shard_profile([m])
+        rb = boxes.get(real) or {}
+        got_v, got_g = rb.get("provides_vram_gb", 0), rb.get("num_gpus", 1)
         if got_v < need_v or got_g < need_g:
-            bad.append("%s (%.1fB) profile=%s launch=%s provides %sGB x%s, needs %sGB x%s"
-                       % (m, pb, p, lb, got_v, got_g, need_v, need_g))
-    return bad, "every launch box satisfies the sizing rule"
+            bad.append("%s (%.1fB) would rent %s -> %sGB x%s, needs %sGB x%s"
+                       % (m, pb, real, got_v, got_g, need_v, need_g))
+        p = ((node or {}).get("env") or {}).get("profile") or "default"
+        declared = (prof.get(p) or {}).get("launch")
+        if declared and declared != real:
+            misleading.append("%s: profile %s declares launch=%s, launcher "
+                              "rents %s" % (m, p, declared, real))
+    if misleading:
+        print("        NOTE %d model(s) whose profile `launch:` disagrees with "
+              "what the launcher rents." % len(misleading))
+        print("             `launch:` is advisory and MIS-KEYED (box is a "
+              "function of size; a profile groups by library pin). Do not plan "
+              "a fleet from it -- read `sizing:`.")
+        for line in misleading[:4] if v else []:
+            print("             %s" % line)
+    return bad, ("every shard rents a box satisfying the sizing rule"
+                 " (%d advisory `launch:` mismatches noted)" % len(misleading))
 
 
 # --------------------------------------------------------------------------
