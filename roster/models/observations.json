@@ -2,7 +2,7 @@
  "_about": "OBSERVED. What HAPPENED, keyed the way the fact is actually shaped. Neither block is per-checkpoint and neither can be folded into models.yaml without destroying its meaning.",
  "_why_not_in_models_yaml": "WHETHER A MODEL LOADS IS NOT A PROPERTY OF THE MODEL. Seven models here carry BOTH a load_failed and a loads: AmberSafe failed and then succeeded ON THE SAME BOX after two packages were installed. Authoring 'AmberSafe: load_failed' would state as a model fact something that was true of a box for twenty minutes.",
  "_absence": "Absence of an observation means UNTESTED, never 'works'.",
- "_source": "malign-logits/data/model_load_environments.json and data/vllm_engine_support.json, ingested 2026-08-16.",
+ "_source": "roster/models/observations.json is the LIVE record. Merged from malign-logits/data/model_load_environments.json by scripts/merge_environment_record.py; re-runnable and additive. The archive is read-only and must stop being a write target.",
  "environments": {
   "grid_v3_box_initial": {
    "torch": "2.5.1+cu124",
@@ -118,6 +118,45 @@
    "device": "RTX 6000Ada (CUDA)",
    "engine": "transformers/twp",
    "note": "Probed on live box 48229157, 2026-08-20, CPU-only tokenizer test that cost nothing and disturbed no GPU work. The LOADER_OVERRIDE is PART OF THIS ENVIRONMENT: an observation of bare AutoTokenizer is an observation of a loader this producer never calls."
+  },
+  "local_mps_tf457": {
+   "torch": "2.11.0",
+   "transformers": "4.57.1",
+   "device": "MPS (M2 Max)",
+   "venv": "~/github/malignment/.venv-tf457",
+   "packages_present": [
+    "sentencepiece",
+    "protobuf"
+   ],
+   "note": "The SAME MACHINE as local_mps, one package different. Added 2026-08-18 because OLMoE separates the two: it is the transformers major, not the device, that decides. Do not fold this into local_mps."
+  },
+  "cloud_cuda_unversioned": {
+   "description": "rented CUDA box, library versions NOT RECORDED -- these cells predate the version stamp on twp cells. Device is measured; toolchain is not.",
+   "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "local_mps_unversioned": {
+   "description": "MPS (this Mac), library versions NOT RECORDED -- these cells predate the version stamp on twp cells. Device is measured; toolchain is not.",
+   "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "cloud_cuda130_tf540": {
+   "description": "rented CUDA box, transformers 5.4.0, torch 2.13.0+cu130. Derived from the cells that ran in it.",
+   "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "cloud_cuda130_tf4571": {
+   "description": "rented CUDA box, transformers 4.57.1, torch 2.13.0+cu130. Derived from the cells that ran in it.",
+   "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "local_mps_tf540": {
+   "description": "MPS (this Mac), transformers 5.4.0, torch 2.13.0. Derived from the cells that ran in it.",
+   "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "cloud_cuda130_tf4576": {
+   "description": "rented CUDA box, transformers 4.57.6, torch 2.13.0+cu130. Derived from the cells that ran in it.",
+   "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "cloud_cuda130_tf5151": {
+   "description": "rented CUDA box, transformers 5.15.1, torch 2.13.0+cu130. Derived from the cells that ran in it.",
+   "source": "derived by record_successes.py from twp_cells_v4"
   }
  },
  "observations": [
@@ -329,16 +368,16 @@
   {
    "model_id": "croissantllm/CroissantLLMBase",
    "outcome": "run_failed",
-   "cause": "Loads; DELETES CJK CHARACTERS. 他既是美丽的又是恶心的，她想要 -> 他是美的是心的想要, dropping 既 丽 又 恶 ， 她 -- including BOTH halves of the 既...又 both-and construction. English is exact.",
-   "fix": "Usable for Latin-script prompts only. Caught by round-trip.",
+   "cause": "Loads; DELETES CJK CHARACTERS. 他既是美丽的又是恶心的，她想要 -> 他是美的是心的想要, dropping 既 丽 又 恶 ， 她 -- including BOTH halves of the 既...又 both-and construction. English is exact. || CJK deletion CONFIRMED still present 2026-08-19; Latin round-trips EXACTLY.",
+   "fix": "Usable for Latin-script prompts only. Caught by round-trip. || Scope correction rather than a new failure: this is a CJK-CLASS defect, not a dead model. Excluding it from Latin work threw away measurable cells.",
    "environment": "local_mps",
    "source": "F11 L1 sweep, 2026-08-08"
   },
   {
    "model_id": "openGPT-X/Teuken-7B-base-v0.6",
    "outcome": "run_failed",
-   "cause": "Loads; normalises the FULLWIDTH COMMA to ASCII. Drops only ，. Milder than Croissant and a different kind of loss.",
-   "fix": "Latin-script prompts exact; CJK prompts altered. Round-trip catches it.",
+   "cause": "Loads; normalises the FULLWIDTH COMMA to ASCII. Drops only ，. Milder than Croissant and a different kind of loss. || Normalises the FULLWIDTH COMMA to ASCII and nothing else: loses 1 char of 15. Latin round-trips EXACTLY.",
+   "fix": "Latin-script prompts exact; CJK prompts altered. Round-trip catches it. || Milder than croissant and the same shape: CJK-class, not dead. Keep for Latin.",
    "environment": "local_mps",
    "source": "F11 L1 sweep, 2026-08-08"
   },
@@ -651,6 +690,2078 @@
    "cause": "AutoTokenizer STILL mangles on CUDA at 5.15.1 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', reproducing the 5.14.1 entry exactly, so that observation is confirmed rather than overturned. But LOADER_OVERRIDE -> PreTrainedTokenizerFast round-trips the prompt EXACTLY on the same box, and twp._override_applies() returns True there, so the repair is REACHED and not merely declared.",
    "fix": "NONE NEEDED -- installed at malignment/twp.py:659 and declared in the roster as tokenizer_loader: PreTrainedTokenizerFast. The standing run_failed entries describe AutoTokenizer, which this producer does not use for these two models; read as a BLOCKER they gate 29 models and 55,244 cells. Verified on a CLOUD box on purpose: the same repo records that a LOCAL verdict declared internlm2 fine and was wrong about every box, so local evidence was not treated as transferable.",
    "source": "malign seat, 2026-08-20, probe on running box 48229157"
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "**THE RECORDED local_mps run_failed DOES NOT REPRODUCE HERE.** That entry says NotImplementedError 'histogram_mps' and CLAUDE.md generalised it to \"OLMoE's histc really is MPS-only\". It is not: same machine, same device, transformers 4.57.1 instead of 5.4.0, and 3/3 cells ran at 15.55 s/cell. The failure is (MPS x transformers 5), which is this file's whole thesis applied to an entry already in it. SPEED IS THE REAL CONSTRAINT: 15.55 s/cell against ~0.8 for a dense 7B, so a full 2,983-prompt pass is ~12.8 h for this arm alone. || **RATE CORRECTION, supersedes the 15.55 s/cell in the earlier entry.** Over a 277-cell slot pass: 1.97 s/cell, 9.1 min. The DPO arm 1.95, the Instruct arm 1.89, the SFT arm likewise -- all four in ~36 min total. The 15.55 figure came from a THREE-CELL sample where the model load dominates and is amortised into the per-cell number. It was cited as '~12 h per arm' and used to defer all four arms to CUDA; nothing about the architecture required that. A rate from 3 cells measures loading, not throughput."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-DPO",
+   "environment": "local_mps",
+   "outcome": "load_failed",
+   "cause": "TypeError: Field 'tie_word_embeddings' expected int, got bool (value: False) -- transformers 5.4.0 rejects the OLMoE config. NOT the histc failure recorded for the base arm; a different defect at a different stage.",
+   "fix": "Use transformers 4.57.1 (.venv-tf457). The roster declares profile 'default' for this arm, which resolves to .venv and fails; it should be tf457."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-DPO",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "3/3 cells at 10.00 s/cell. The prior 'loads' observation for this arm was LOADING only -- the base arm's failure was in the FORWARD, so 'loads' never licensed 'runs'. This entry is the run."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "environment": "local_mps",
+   "outcome": "load_failed",
+   "cause": "Same tie_word_embeddings TypeError as the DPO arm.",
+   "fix": "transformers 4.57.1. Untested at tf457 as of this entry -- the DPO arm is, and absence of an observation is not evidence of success."
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "environment": "local_mps",
+   "outcome": "load_failed",
+   "cause": "TypeError: Field 'tie_word_embeddings' expected int, got bool -- transformers 5.4.0 rejects the OLMo config, identical to the OLMoE arms.",
+   "fix": "transformers 4.57.1 (.venv-tf457): 3/3 cells at 2.85 s/cell. **This is the project's PRIMARY family** and it was declared profile `default`, so the whole OLMo 3 pipeline was unrunnable here until 2026-08-18."
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "3/3 cells, 2.85 s/cell."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "2/2 cells."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B",
+   "environment": "local_mps",
+   "outcome": "load_failed",
+   "cause": "Same tie_word_embeddings TypeError.",
+   "fix": "4.57.1 runs it: 2/2 cells."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "2/2 cells."
+  },
+  {
+   "model_id": "allenai/Olmo-Hybrid-7B",
+   "environment": "local_mps_tf457",
+   "outcome": "load_failed",
+   "cause": "model type `olmo_hybrid` not recognised by transformers 4.57.1.",
+   "fix": "**OPPOSITE DIRECTION TO ITS SIBLINGS.** Needs the NEWER transformers, not the older: runs on 5.4.0 (.venv) at 4.20 s/cell. The OLMo family therefore splits ACROSS the version boundary -- OLMo-2/Olmo-3/Olmo-3-Think/OLMoE need 4.57.1, Olmo-Hybrid needs 5.4.0. One family, two environments, and a per-family rule would have been wrong whichever way it was written."
+  },
+  {
+   "model_id": "allenai/Olmo-Hybrid-7B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "2/2 cells at 4.20 s/cell."
+  },
+  {
+   "model_id": "01-ai/Yi-1.5-9B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "01-ai/Yi-1.5-9B-Chat",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "BSC-LT/salamandra-7b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "BSC-LT/salamandra-7b-instruct",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "EleutherAI/pythia-2.8b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "EleutherAI/pythia-6.9b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B-Base",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/Amber",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/AmberSafe",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "OpenLLM-France/Lucie-7B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "PKU-Alignment/beaver-7b-v1.0",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-0.5B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,949 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,952 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-7B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,956 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-7B-Instruct",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,961 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen3-8B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,970 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen3-8B-Base",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,970 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-Instruct",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `tf457` -> .venv-tf457. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `tf457` -> .venv-tf457. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "baichuan-inc/Baichuan2-7B-Base",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,918 cells in twp_cells_v4 under profile `tf457` -> .venv-tf457. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "baichuan-inc/Baichuan2-7B-Chat",
+   "environment": "local_mps_tf457",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,914 cells in twp_cells_v4 under profile `tf457` -> .venv-tf457. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "bigscience/bloom-7b1",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,599 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "bigscience/bloomz-7b1",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "croissantllm/CroissantLLMChat-v0.1",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,965 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "google/gemma-2-9b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,913 cells in twp_cells_v4 under profile `bf16` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "google/gemma-2-9b-it",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,922 cells in twp_cells_v4 under profile `bf16` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "huggyllama/llama-7b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "kakaocorp/kanana-1.5-8b-base",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "llm-jp/llm-jp-3-7.2b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,914 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,912 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `torch26` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/CT-LLM-Base",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,547 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/CT-LLM-SFT",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,605 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/CT-LLM-SFT-DPO",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,604 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,971 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b_instruct_v0.1",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,971 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b_sft_v0.1",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,984 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-8B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "mistralai/Mistral-7B-v0.1",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openbmb/MiniCPM5-1B",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openbmb/MiniCPM5-1B-Base",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-1_6b",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-1_6b-chat",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon3-7B-Base",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon3-7B-Instruct",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `torch26` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "zai-org/glm-4-9b-chat-hf",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "zai-org/glm-4-9b-hf",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 277 cells in twp_cells_v4 under profile `default` -> .venv. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "gl198976/mpt-7b",
+   "environment": "local_mps",
+   "outcome": "load_failed",
+   "cause": "cannot import name '_expand_mask' from transformers.models -- mpt's BUNDLED modelling code imports a symbol transformers 5 removed.",
+   "fix": "**IT RAN FINE THE SAME DAY** under the queue, which resolves a venv per model. This is the sweep running everything in one interpreter, so it is an environment mismatch and NOT a property of the checkpoint. Recorded because `_expand_mask` will bite any transformers-5 box, and mpt has no env: profile declaring that today."
+  },
+  {
+   "model_id": "gl198976/mpt-7b-instruct",
+   "environment": "local_mps",
+   "outcome": "load_failed",
+   "cause": "Same _expand_mask import as the base arm.",
+   "fix": "See the base arm. Ran under the queue's per-model venv the same day."
+  },
+  {
+   "model_id": "Alchan/mpt-7b-chat",
+   "environment": "local_mps",
+   "outcome": "load_failed",
+   "cause": "[Errno 2] No such file or directory -- cached weights present but the snapshot is incomplete.",
+   "fix": "Distinct from the gl198976 mirrors, which fail on _expand_mask instead. This one has 2,704 v3 cells from when it worked, so the repo or the cache changed under it. `cached()` checks for weights only and therefore OVERSTATES usability."
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-base",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "**SUPERSEDES the run_failed above.** That entry recorded encode('a b') == encode('ab') -- every space deleted -- and it was FIXED by the `tokenizer_loader` override in models.yaml. Re-tested 2026-08-19: loader=override:#45488/#47017, encode('a b') != encode('ab'), and BOTH Latin and CJK round-trip exactly. Its 2,663 v3 cells track Mistral and Llama to two decimals (fired 0.284 / 0.251 / 0.243 on 'She aimed at his chest and'), which a space-deleted prompt cannot produce. The corpus outranked the record and nobody had asked it: this model was excluded from a fleet plan, from a 105-model MPS count and from a queue on the strength of a verdict whose cause no longer held."
+  },
+  {
+   "model_id": "deepseek-ai/deepseek-llm-7b-chat",
+   "environment": "local_mps",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "As the base arm: the loader override fixes it, Latin and CJK both exact."
+  },
+  {
+   "model_id": "croissantllm/CroissantLLMChat-v0.1",
+   "environment": "local_mps",
+   "outcome": "run_failed",
+   "cause": "Deletes CJK characters, IDENTICALLY to the Base arm: '他既是美丽的又是恶心的，她想要' -> '他是美的是心的想要', losing 6 of 15. Latin round-trips EXACTLY.",
+   "fix": "**NEWLY FOUND. Only the Base arm was ever recorded, and nobody had tested this one** -- so it sat inside every population as a usable model. Absence of an observation was doing the work of a passing one. Exclude from CJK prompts; keep for Latin."
+  },
+  {
+   "model_id": "01-ai/Yi-1.5-9B",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,349 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "01-ai/Yi-1.5-9B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 549 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "01-ai/Yi-1.5-9B-Chat",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,408 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "01-ai/Yi-1.5-9B-Chat",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Alchan/mpt-7b-chat",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,404 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Alchan/mpt-7b-chat",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "BAAI/Aquila2-7B",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,945 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "BAAI/AquilaChat2-7B",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,866 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "BSC-LT/salamandra-7b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,001 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "BSC-LT/salamandra-7b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 548 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "BSC-LT/salamandra-7b-instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,172 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "BSC-LT/salamandra-7b-instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,382 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-kto_pythia2-8b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,382 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-kto_pythia2-8b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-ppo_pythia2-8b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,392 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-ppo_pythia2-8b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-slic_pythia2-8b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,380 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft-slic_pythia2-8b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft_pythia2-8b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,380 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ContextualAI/archangel_sft_pythia2-8b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "EleutherAI/pythia-2.8b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,258 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "EleutherAI/pythia-2.8b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 532 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "EleutherAI/pythia-6.9b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,198 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "EleutherAI/pythia-6.9b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 536 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceH4/mistral-7b-sft-beta",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,412 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceH4/mistral-7b-sft-beta",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,380 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 561 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,408 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,407 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B-Base",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,394 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B-Base",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B-checkpoints",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,403 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B-checkpoints",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,958 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/Amber",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,357 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/Amber",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 553 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/AmberChat",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,409 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/AmberChat",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/AmberSafe",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,398 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/AmberSafe",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 553 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "NousResearch/Hermes-3-Llama-3.1-8B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,396 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "NousResearch/Hermes-3-Llama-3.1-8B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,399 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "OpenLLM-France/Lucie-7B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,045 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "OpenLLM-France/Lucie-7B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,176 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "PKU-Alignment/alpaca-7b-reproduced",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,406 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "PKU-Alignment/alpaca-7b-reproduced",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "PKU-Alignment/beaver-7b-v1.0",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,399 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "PKU-Alignment/beaver-7b-v1.0",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-0.5B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,261 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,261 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-7B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,244 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-7B-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,261 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen3-8B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,259 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen3-8B-Base",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,238 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "RWKV/rwkv-4-7b-pile",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,316 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "RWKV/rwkv-4-7b-pile",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 547 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "RWKV/rwkv-raven-7b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,385 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "RWKV/rwkv-raven-7b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 553 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,401 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,335 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 548 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Zyphra/Zamba2-7B",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,864 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Zyphra/Zamba2-7B-Instruct",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,895 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,402 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,406 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,403 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,405 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,406 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,405 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3.1-8B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,401 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Llama-3.1-Tulu-3.1-8B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,405 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 556 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-DPO",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,410 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-DPO",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-Instruct",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,410 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-SFT",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,409 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-SFT",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-DPO",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,398 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-DPO",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 560 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,402 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-SFT",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,400 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-SFT",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 556 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,406 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 674 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-1125-32B",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,938 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,403 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct-DPO",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,405 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct-DPO",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct-SFT",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,407 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct-SFT",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,410 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-DPO",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,410 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-DPO",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,410 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3.1-32B-Instruct",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,953 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3.1-32B-Instruct-DPO",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,952 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3.1-32B-Instruct-SFT",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,960 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-Hybrid-7B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,383 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-Hybrid-7B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 553 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,962 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,959 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "baichuan-inc/Baichuan2-7B-Base",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,792 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "baichuan-inc/Baichuan2-7B-Chat",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,950 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "bigscience/bloom-7b1",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 384 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "bigscience/bloom-7b1",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,876 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "bigscience/bloomz-7b1",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,706 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "bigscience/bloomz-7b1",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "cognitivecomputations/Dolphin3.0-Llama3.1-8B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,959 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "cognitivecomputations/dolphin-2.6-mistral-7b-dpo",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,412 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "cognitivecomputations/dolphin-2.6-mistral-7b-dpo",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 2,965 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "gl198976/mpt-7b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,313 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "gl198976/mpt-7b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 545 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "gl198976/mpt-7b-instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,407 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "gl198976/mpt-7b-instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "google/gemma-2-9b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,253 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `bf16`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "google/gemma-2-9b-it",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,261 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `bf16`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "google/recurrentgemma-9b",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,740 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "google/recurrentgemma-9b-it",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,942 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "huggyllama/llama-7b",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,000 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "huggyllama/llama-7b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 493 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ibm-granite/granite-3.0-8b-base",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,265 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ibm-granite/granite-3.0-8b-base",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 538 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ibm-granite/granite-3.0-8b-base",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 74 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ibm-granite/granite-3.0-8b-instruct",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,401 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ibm-granite/granite-3.0-8b-instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "inceptionai/jais-family-6p7b",
+   "environment": "cloud_cuda130_tf4576",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,855 cells in twp_cells_v4 on device `cuda`, transformers 4.57.6 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "inceptionai/jais-family-6p7b-chat",
+   "environment": "cloud_cuda130_tf4576",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,956 cells in twp_cells_v4 on device `cuda`, transformers 4.57.6 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b-sft",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,954 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "kakaocorp/kanana-1.5-8b-base",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,181 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "kakaocorp/kanana-1.5-8b-base",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 536 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,406 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "kakaocorp/kanana-2-3b-base",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,902 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "kakaocorp/kanana-2-3b-instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,956 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "llm-jp/llm-jp-3-7.2b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,888 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "llm-jp/llm-jp-3-7.2b-instruct2",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,964 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,967 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,406 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 552 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "lomahony/eleuther-pythia6.9b-hh-sft",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,403 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "lomahony/eleuther-pythia6.9b-hh-sft",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/CT-LLM-Base",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,891 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/CT-LLM-SFT",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,953 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/CT-LLM-SFT-DPO",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,952 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,255 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b_instruct_v0.1",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,261 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b_sft_v0.1",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 3,261 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-70B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,909 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `twogpu`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-70B-Instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,953 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `twogpu`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-8B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,396 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-8B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 553 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,405 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "mistralai/Mistral-7B-Instruct-v0.1",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 6,451 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "mistralai/Mistral-7B-v0.1",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,401 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "mistralai/Mistral-7B-v0.1",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openGPT-X/Teuken-7B-instruct-v0.6",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,289 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openbmb/MiniCPM5-1B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,410 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openbmb/MiniCPM5-1B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openbmb/MiniCPM5-1B-Base",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,408 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openbmb/MiniCPM5-1B-Base",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openbmb/MiniCPM5-1B-SFT",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,410 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openbmb/MiniCPM5-1B-SFT",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openchat/openchat-3.5-0106",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,412 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openchat/openchat-3.5-0106",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-1_6b",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,379 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-1_6b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 551 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-1_6b",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 167 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-1_6b-chat",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,393 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-1_6b-chat",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-zephyr-1_6b",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,405 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-zephyr-1_6b",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,506 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "teknium/OpenHermes-2.5-Mistral-7B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,400 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "teknium/OpenHermes-2.5-Mistral-7B",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon-H1-1.5B-Base",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,865 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,948 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon-H1-7B-Base",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,789 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `ssm`, compute_dtype bfloat16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon-H1-7B-Instruct",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,940 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `ssm`, compute_dtype bfloat16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon3-7B-Base",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,252 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon3-7B-Base",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 540 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon3-7B-Instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,393 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/Falcon3-7B-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/falcon-7b",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,955 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/falcon-7b-instruct",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,949 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/falcon-mamba-7b",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,840 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/falcon-mamba-7b-instruct",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,919 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,399 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-7B-Instruct",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,386 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-7B-Instruct",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,383 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 553 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "environment": "cloud_cuda_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 7,896 cells in twp_cells_v4 on device `cuda` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "zai-org/glm-4-9b-chat-hf",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,405 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "zai-org/glm-4-9b-chat-hf",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 554 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "zai-org/glm-4-9b-hf",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 5,391 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "zai-org/glm-4-9b-hf",
+   "environment": "local_mps_unversioned",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 551 cells in twp_cells_v4 on device `mps` (library versions not recorded), profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
   }
  ],
  "engine_support": {
@@ -804,5 +2915,35 @@
   }
  },
  "_error_shape": "REMOVED architectures fail as a pydantic ValidationError at ModelConfig, before weights load, and the message names the last working version. Read it: it is a specification, not a complaint.",
- "_engine_support_about": "(ARCHITECTURE x ENGINE) support, the fact class the campaign did not key. Every row was paid for with a lost pair."
+ "_engine_support_about": "(ARCHITECTURE x ENGINE) support, the fact class the campaign did not key. Every row was paid for with a lost pair.",
+ "predicted_untested": {
+  "note": "From data/weights_audit.csv, not from observation. bin-only checkpoints that the run had not yet reached. Listed so absence of an observation is never read as success.",
+  "environment": "grid_v3_box_repaired",
+  "expected_outcome": "load_failed",
+  "cause": "bin-only; torch >= 2.6",
+  "model_ids": [
+   "deepseek-ai/deepseek-llm-7b-base",
+   "deepseek-ai/deepseek-llm-7b-chat",
+   "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "lomahony/eleuther-pythia6.9b-hh-sft",
+   "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "togethercomputer/RedPajama-INCITE-7B-Instruct",
+   "togethercomputer/RedPajama-INCITE-Base-7B-v0.1"
+  ]
+ },
+ "provisioning_lessons": [
+  "INSTALL requirements.txt ON THE BOX. sentencepiece and protobuf were declared in the repo and absent from the instance; that alone cost one model and an hour.",
+  "PIN torch >= 2.6, or thirteen checkpoints in the 103-model spec are unloadable and the cause reads like a transformers policy.",
+  "DO NOT install tiktoken to silence a SentencePiece conversion error. It lets the wrong converter succeed on a SentencePiece file, turning a loud failure into a quiet one.",
+  "Library versions are an INSTRUMENT dimension. Local vs box on one shared model: identical surface set, per-word probabilities differing by <=1.5e-3. Small, not zero -- cells now stamp torch_version and transformers_version.",
+  "The box ran 5.14.1 while every precondition was established locally on 5.4.0. An encode guarantee established on a different library version than the run uses is not a guarantee.",
+  "RUN ARCHIVES DO NOT BELONG IN meta/. meta/ is one folder per meta-finding, with clause tables and scope sentences; a run log is not a claim. Putting the grid_v3 archive there routed around `logs/` being gitignored -- and that gitignore rule was the thing that would have stopped a live HF_TOKEN from entering a commit. GitHub push protection caught it instead. The archive now lives at logs/cloud_runs/grid_v3_46301965/, local and untracked; the facts worth keeping were already in THIS file.",
+  "PROVISIONING WRITES CREDENTIALS INTO SCRIPTS, AND ARCHIVING THOSE SCRIPTS PUBLISHES THEM. launch.sh/repair.sh/repair2.sh each carried an inline HF_TOKEN because the gated Llama checkpoints need it and the box had no profile to source. Scan the whole tree before committing a pulled run directory, not just the files a scanner happens to name.",
+  {
+   "date": "2026-08-09",
+   "context": "L2 fleet",
+   "lesson": "AN ENVIRONMENT TAG IS NOT A CAUSE. A failure recorded under local_mps may be device-specific (OLMoE's histc) or device-INDEPENDENT (mpt's dead repo; deepseek/croissant/Teuken's tokenizer fidelity). Filtering a roster on the environment field alone excludes working models and admits broken ones. Read the CAUSE, not the tag.",
+   "cost": "1 checkpoint run against a blocking record; 9 wrongly excluded from a hand-rolled list built from memory instead of this file."
+  }
+ ]
 }
