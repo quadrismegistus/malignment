@@ -237,6 +237,12 @@ def main():
                          "lost mid-run costs at most that much work rather than "
                          "the whole shard.")
     ap.add_argument("--max-hours", type=float, default=6.0)
+    ap.add_argument("--i-know-the-record-is-broken", action="store_true",
+                    help="rent even though check_record.py fails. For an "
+                         "emergency, not for bookkeeping you mean to do later: "
+                         "the shard is PLANNED from the record this flag is "
+                         "ignoring. Exists because a gate with no override gets "
+                         "commented out instead of overridden.")
     ap.add_argument("--i-have-rh-authorisation", action="store_true",
                     help="asserts RH said to spend on THIS launch, not a "
                          "remembered earlier yes")
@@ -326,6 +332,36 @@ def main():
         a.box_profile, _vram, _gpus, _pb = shard_profile(models)
         print("  profile   %s  (biggest model %.1fB -> the roster's sizing rule "
               "says %d GB x %d GPU)" % (a.box_profile, _pb, _vram, _gpus))
+    #: **THE RECORD GATE RUNS HERE, BECAUSE A GATE NOBODY RUNS IS NOT A GATE.**
+    #: `check_record.py` has nine assertions and exits non-zero, and until now
+    #: the only thing making it run was a human remembering to -- which is the
+    #: exact failure mode the whole record exists to fix. It fails on a derived
+    #: file older than its source, a card the fleet rents but has not declared,
+    #: a measured (model x environment) with no observation, and five more.
+    #: Every one of those makes THIS decision worse: the shard is planned from
+    #: `requirements.json`, and a stale requirements file plans the wrong boxes.
+    #:
+    #: `--i-know-the-record-is-broken` exists because a legitimate emergency
+    #: should not be blocked by bookkeeping, and because a gate with no override
+    #: gets commented out rather than overridden.
+    _rc = subprocess.run([sys.executable, os.path.join(HERE, "check_record.py")],
+                         capture_output=True, text=True)
+    if _rc.returncode:
+        _bad = [ln for ln in (_rc.stdout or "").splitlines()
+                if ln.startswith(("FAIL", "ERROR"))]
+        print("  record    %d check(s) FAILING:" % len(_bad))
+        for ln in _bad:
+            print("     %s" % ln)
+        if not a.i_know_the_record_is_broken:
+            raise SystemExit(
+                "  REFUSING: the environment record does not pass its own "
+                "checks, and this shard is planned FROM that record. Run\n"
+                "    python scripts/check_record.py\n"
+                "  and clear it -- a stale derived file names the producer that "
+                "fixes it. Override with --i-know-the-record-is-broken.")
+        print("  record    OVERRIDDEN by --i-know-the-record-is-broken")
+    else:
+        print("  record    check_record.py passes")
     ok, n = preflight(models)
     print("  preflight %s" % " ".join("%s=%d" % (k, v) for k, v in sorted(n.items())))
     if not ok:

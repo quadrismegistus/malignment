@@ -95,6 +95,40 @@ New attestations go through `attest.merge_claims()`, not `ingest()`: `ingest()`
 replaces a whole checkpoint entry and would drop seven fields from a targeted
 pass.
 
+**Two files are AUTHORED and everything else about a checkpoint is DERIVED from
+them.** Edit `roster/models/models.yaml` or `roster/environments.yaml` and three
+artifacts go stale; `scripts/check_record.py` fails and names the producer that
+clears it. Never hand-edit `requirements.json`, `version_windows.json` or
+`edge_facts.json` — each names its own `_producer` and `_sources`.
+
+## Before you rent anything: `docs/environment_record.md`
+
+**Read it before a fleet, and read it before you conclude that a model
+requirement is unrecorded.** It is the map of what we know about each checkpoint,
+how to build a fleet, and which producer regenerates what.
+
+    scripts/check_record.py     THE GATE. Nine assertions, exits non-zero.
+                                `fleet_launch` runs it and REFUSES to rent when
+                                it fails, because a gate nobody runs is not a
+                                gate. Override: --i-know-the-record-is-broken.
+    scripts/box_guard.py        Runtime guards, IGNORANT OF MECHANISM, so they
+                                catch failures nobody has written down yet: a
+                                box running 178x slow with the kernels idle, and
+                                cells that arrive intact holding nothing.
+
+**Four facts were lost this month because each was filed under the wrong key** —
+`launch:` keyed on library pin when a box is a function of SIZE; repo status
+keyed on (model × environment) when a 404 is global; `cross_score` keyed on model
+when it belongs to a PAIR; `compute_dtype` keyed on model when bf16 is a property
+of (model × CARD GENERATION). None was forgotten in the ordinary sense. Each was
+written somewhere that could not hold it, and so could not be found or checked.
+
+**If a fact seems to have no home, check `docs/environment_record.md` before
+concluding there is none.** Two of the four kinds I called schema-less had
+schemas — `engine` in `observations.json::engine_support`, `perf` in
+`data/model_twp_rates.jsonl` — and saying "the record cannot hold this" stops
+anyone looking for where it already does.
+
 ## Sign your commits with your seat
 
 Put a `Seat:` trailer on every commit you make here:
