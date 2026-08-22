@@ -209,7 +209,59 @@ CREATE TABLE IF NOT EXISTS {db}.twp_cells (
     torch_version LowCardinality(String), transformers_version LowCardinality(String),
     source LowCardinality(String), mtime DateTime
 ) ENGINE = ReplacingMergeTree(mtime) ORDER BY (model, prompt)
+""", """
+CREATE TABLE IF NOT EXISTS {db}.twp_words_v4 (
+    model String, prompt String, word String,
+    p Float32, n_paths UInt8, topup UInt8,
+    rule_version UInt16, rules LowCardinality(String), prompt_cache UInt8,
+    frame LowCardinality(String),
+    source LowCardinality(String), mtime DateTime
+) ENGINE = ReplacingMergeTree(mtime)
+PRIMARY KEY (model, prompt, word, rule_version, rules, prompt_cache, topup)
+ORDER BY (model, prompt, word, rule_version, rules, prompt_cache, topup, frame)
+""", """
+CREATE TABLE IF NOT EXISTS {db}.twp_cells_v4 (
+    model String, prompt String,
+    n_words UInt32, conservation Float64,
+    tail Float32, drop Float32, open Float32, mojibake Float32, total Float32,
+    theta Float32, rule_version UInt16, rules LowCardinality(String),
+    prompt_cache UInt8, topup UInt8, topup_words UInt32, topup_mass Float32,
+    topup_refused UInt32 DEFAULT 0,
+    dict_sha LowCardinality(String), revision LowCardinality(String),
+    bos_policy LowCardinality(String),
+    device LowCardinality(String), compute_dtype LowCardinality(String),
+    torch_version LowCardinality(String), transformers_version LowCardinality(String),
+    frame LowCardinality(String),
+    source LowCardinality(String), mtime DateTime
+) ENGINE = ReplacingMergeTree(mtime)
+PRIMARY KEY (model, prompt, rule_version, rules, prompt_cache, topup)
+ORDER BY (model, prompt, rule_version, rules, prompt_cache, topup, frame)
 """]
+
+#: **THE v4 SCHEMA WAS DECLARED NOWHERE AND EXISTED ONLY IN THE LIVE DATABASE.**
+#: `--create` built `twp_words` and `twp_cells` and stopped. The v4 pair was
+#: created out of band, so the shape of the tables holding 820,246 cells and
+#: 108,301,814 words was not in this repo at all -- unrebuildable, and nobody
+#: could read what it promised. Recovered from `SHOW CREATE TABLE` 2026-08-22.
+#:
+#: **`frame` IS IN THE SORTING KEY, WHICH IS THE DEDUP KEY, AND THAT IS THE
+#: WHOLE POINT.** These are ReplacingMergeTree: a framed cell and its raw twin
+#: agree on every other key column, so with `frame` merely PRESENT as a column
+#: the merge keeps one of them by mtime -- not pooled, SILENTLY REPLACED, with
+#: the store looking complete. Verified before and after: a `frame='prefill'`
+#: twin of a real raw cell survives OPTIMIZE FINAL alongside it.
+#:
+#: It sits LAST so the PRIMARY KEY stays the historical prefix and existing
+#: parts remain valid, and it carries NO DEFAULT because ClickHouse refuses a
+#: defaulted column in a sorting key ("Newly added column frame has a default
+#: expression, so adding expressions that use it to the sorting key is
+#: forbidden"). Adding the column first and modifying the key second is refused
+#: too -- by then it is no longer newly added -- so it is ONE alter or nothing.
+#:
+#: Existing rows take the type's zero value, which is the true statement about
+#: them: everything measured before 2026-08-22 IS the raw frame. An INSERT that
+#: omits `frame` -- which every current producer does -- lands as `''`, so a
+#: frame-unaware ingest stays correct rather than merely not crashing.
 
 
 def scan():
