@@ -7153,6 +7153,1555 @@
      "note": "gated=False"
     }
    }
+  },
+  "config_dtype": {
+   "_why": "STORAGE dtype, from safetensors `parameters` where present and config.json only as a fallback. NOT a compute requirement: 130 of 160 are bfloat16 while only 12 must RUN in it, and the corpus holds 55,680 cells at float16 for models in that 130. Read it for DOWNLOAD SIZE (fp32 is twice the bytes) and for same-lineage asymmetries -- granite-3.0-8b base is F32 and its instruct sibling BF16.",
+   "_instrument": "config.json is the WEAKER source and a config-only probe returned None for 9 models, including granite-3.0-8b-base, whose config carries no torch_dtype at all while its safetensors index says F32 without ambiguity.",
+   "_not_a_loader_verdict": "transformers picks this up only under torch_dtype='auto'. Our loader hardcodes float16 (runners.compute_dtype), so a card that cannot do bf16 is irrelevant here even when the config says bfloat16.",
+   "measured_by": "scripts/probe_config_dtype.py",
+   "n": 160,
+   "models": {
+    "01-ai/Yi-1.5-9B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8829407232
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "01-ai/Yi-1.5-9B-Chat": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8829407232
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "Alchan/mpt-7b-chat": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6649286656
+     },
+     "architectures": "MPTForCausalLM"
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7041544704
+     },
+     "architectures": "PhariaForCausalLM"
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-hf": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7041544704
+     },
+     "architectures": "PhariaForCausalLM"
+    },
+    "BAAI/Aquila2-7B": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 7655698432
+     },
+     "architectures": "AquilaForCausalLM"
+    },
+    "BAAI/AquilaChat2-7B": {
+     "storage_dtype": "float16",
+     "source": "config.json",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "architectures": "AquilaForCausalLM"
+    },
+    "BSC-LT/salamandra-7b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7768117248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "BSC-LT/salamandra-7b-instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7768117248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 2775208960
+     },
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "ContextualAI/archangel_sft-kto_pythia2-8b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 2775208960
+     },
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 2775208960
+     },
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "ContextualAI/archangel_sft-slic_pythia2-8b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 2775208960
+     },
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "ContextualAI/archangel_sft_pythia2-8b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 2775208960
+     },
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "EleutherAI/pythia-2.8b": {
+     "storage_dtype": "float16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "dtype_bytes": {
+      "F16": 2775209280,
+      "U8": 134217728
+     },
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "EleutherAI/pythia-6.9b": {
+     "storage_dtype": "float16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "dtype_bytes": {
+      "F16": 6857302528,
+      "U8": 134217728
+     },
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "HuggingFaceH4/mistral-7b-sft-beta": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "MistralForCausalLM"
+    },
+    "HuggingFaceH4/zephyr-7b-beta": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7241732096
+     },
+     "architectures": "MistralForCausalLM"
+    },
+    "HuggingFaceTB/SmolLM2-360M": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 361821120
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "HuggingFaceTB/SmolLM2-360M-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 361821120
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "HuggingFaceTB/SmolLM3-3B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 3075098624
+     },
+     "architectures": "SmolLM3ForCausalLM"
+    },
+    "HuggingFaceTB/SmolLM3-3B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 3075098624
+     },
+     "architectures": "SmolLM3ForCausalLM"
+    },
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": {
+     "storage_dtype": null,
+     "source": null,
+     "torch_dtype_config": null,
+     "error": null
+    },
+    "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO": {
+     "storage_dtype": null,
+     "source": null,
+     "torch_dtype_config": null,
+     "error": null
+    },
+    "LLM360/Amber": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6738415616
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "LLM360/AmberChat": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6738415616
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "LLM360/AmberSafe": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6738415616
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030261248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7241748480
+     },
+     "architectures": "MistralForCausalLM"
+    },
+    "OpenLLM-France/Lucie-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 2048,
+      "BF16": 6706958336
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 2048,
+      "BF16": 6706958336
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "PKU-Alignment/alpaca-7b-reproduced": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6738423808
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "PKU-Alignment/beaver-7b-v1.0": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6738423808
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "Qwen/Qwen2.5-0.5B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 494032768
+     },
+     "architectures": "Qwen2ForCausalLM"
+    },
+    "Qwen/Qwen2.5-0.5B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 494032768
+     },
+     "architectures": "Qwen2ForCausalLM"
+    },
+    "Qwen/Qwen2.5-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7615616512
+     },
+     "architectures": "Qwen2ForCausalLM"
+    },
+    "Qwen/Qwen2.5-7B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7615616512
+     },
+     "architectures": "Qwen2ForCausalLM"
+    },
+    "Qwen/Qwen3-8B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8190735360
+     },
+     "architectures": "Qwen3ForCausalLM"
+    },
+    "Qwen/Qwen3-8B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8190735360
+     },
+     "architectures": "Qwen3ForCausalLM"
+    },
+    "RWKV/rwkv-4-7b-pile": {
+     "storage_dtype": "float32",
+     "source": "config.json",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "architectures": "RwkvForCausalLM"
+    },
+    "RWKV/rwkv-raven-7b": {
+     "storage_dtype": "float32",
+     "source": "config.json",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "architectures": "RwkvForCausalLM"
+    },
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1100048384
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 1100048384
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "Zyphra/Zamba2-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": null,
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7356749648
+     },
+     "architectures": "Zamba2ForCausalLM"
+    },
+    "Zyphra/Zamba2-7B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": null,
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7356749648
+     },
+     "architectures": "Zamba2ForCausalLM"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030326784
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030326784
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030326784
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030326784
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030326784
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030326784
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "allenai/Llama-3.1-Tulu-3.1-8B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030326784
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "allenai/OLMo-2-0425-1B": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 1484916736
+     },
+     "architectures": "Olmo2ForCausalLM"
+    },
+    "allenai/OLMo-2-0425-1B-DPO": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "Olmo2ForCausalLM"
+    },
+    "allenai/OLMo-2-0425-1B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1484916736
+     },
+     "architectures": "Olmo2ForCausalLM"
+    },
+    "allenai/OLMo-2-0425-1B-SFT": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "Olmo2ForCausalLM"
+    },
+    "allenai/OLMoE-1B-7B-0125": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 6919161856
+     },
+     "architectures": "OlmoeForCausalLM"
+    },
+    "allenai/OLMoE-1B-7B-0125-DPO": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6919161856
+     },
+     "architectures": "OlmoeForCausalLM"
+    },
+    "allenai/OLMoE-1B-7B-0125-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6919161856
+     },
+     "architectures": "OlmoeForCausalLM"
+    },
+    "allenai/OLMoE-1B-7B-0125-SFT": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "OlmoeForCausalLM"
+    },
+    "allenai/Olmo-3-1025-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7298011136
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3-1125-32B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 32233522176
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3-7B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7298011136
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3-7B-Instruct-DPO": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7298011136
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3-7B-Instruct-SFT": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7298011136
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3-7B-Think": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7298011136
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3-7B-Think-DPO": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7298011136
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3-7B-Think-SFT": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7298011136
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3.1-32B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 32233522176
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3.1-32B-Instruct-DPO": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 32233522176
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-3.1-32B-Instruct-SFT": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 32233522176
+     },
+     "architectures": "Olmo3ForCausalLM"
+    },
+    "allenai/Olmo-Hybrid-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": null,
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7430870688
+     },
+     "architectures": "OlmoHybridForCausalLM"
+    },
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7430870688
+     },
+     "architectures": "OlmoHybridForCausalLM"
+    },
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": null,
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7430870688
+     },
+     "architectures": "OlmoHybridForCausalLM"
+    },
+    "baichuan-inc/Baichuan2-7B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "BaichuanForCausalLM"
+    },
+    "baichuan-inc/Baichuan2-7B-Chat": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "BaichuanForCausalLM"
+    },
+    "bigscience/bloom-7b1": {
+     "storage_dtype": "float16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "dtype_bytes": {
+      "F16": 7069016064
+     },
+     "architectures": "BloomForCausalLM"
+    },
+    "bigscience/bloomz-7b1": {
+     "storage_dtype": "float16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": null,
+     "error": null,
+     "dtype_bytes": {
+      "F16": 7069016064
+     },
+     "architectures": "BloomForCausalLM"
+    },
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030277632
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7241740288
+     },
+     "architectures": "MistralForCausalLM"
+    },
+    "croissantllm/CroissantLLMBase": {
+     "storage_dtype": "float32",
+     "source": "config.json",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "architectures": "LlamaForCausalLM"
+    },
+    "croissantllm/CroissantLLMChat-v0.1": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 1345431552
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Llama-8B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030261248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7615616512
+     },
+     "architectures": "Qwen2ForCausalLM"
+    },
+    "deepseek-ai/deepseek-llm-7b-base": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "LlamaForCausalLM"
+    },
+    "deepseek-ai/deepseek-llm-7b-chat": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "LlamaForCausalLM"
+    },
+    "gl198976/mpt-7b": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "MPTForCausalLM"
+    },
+    "gl198976/mpt-7b-instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 6649286656
+     },
+     "architectures": "MPTForCausalLM"
+    },
+    "google/gemma-2-9b": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 9241705984
+     },
+     "architectures": "Gemma2ForCausalLM"
+    },
+    "google/gemma-2-9b-it": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 9241705984
+     },
+     "architectures": "Gemma2ForCausalLM"
+    },
+    "google/recurrentgemma-9b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 9628553216
+     },
+     "architectures": "RecurrentGemmaForCausalLM"
+    },
+    "google/recurrentgemma-9b-it": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 9628553216
+     },
+     "architectures": "RecurrentGemmaForCausalLM"
+    },
+    "huggyllama/llama-7b": {
+     "storage_dtype": "float16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "dtype_bytes": {
+      "F16": 6738415616,
+      "F32": 2048
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "ibm-granite/granite-3.0-8b-base": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": null,
+     "error": null,
+     "dtype_bytes": {
+      "F32": 8170835968
+     },
+     "architectures": "GraniteForCausalLM"
+    },
+    "ibm-granite/granite-3.0-8b-instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8170848256
+     },
+     "architectures": "GraniteForCausalLM"
+    },
+    "inceptionai/jais-family-6p7b": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 7142689824
+     },
+     "architectures": "JAISLMHeadModel"
+    },
+    "inceptionai/jais-family-6p7b-chat": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 7142689824
+     },
+     "architectures": "JAISLMHeadModel"
+    },
+    "internlm/internlm2-base-7b": {
+     "storage_dtype": "bfloat16",
+     "source": "config.json",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "architectures": "InternLM2ForCausalLM"
+    },
+    "internlm/internlm2-chat-7b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7737708544
+     },
+     "architectures": "InternLM2ForCausalLM"
+    },
+    "internlm/internlm2-chat-7b-sft": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7737708544
+     },
+     "architectures": "InternLM2ForCausalLM"
+    },
+    "kakaocorp/kanana-1.5-8b-base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030261248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "kakaocorp/kanana-1.5-8b-instruct-2505": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030285824
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "kakaocorp/kanana-2-3b-base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 3180636672
+     },
+     "architectures": "Qwen3ForCausalLM"
+    },
+    "kakaocorp/kanana-2-3b-instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 3508972032
+     },
+     "architectures": "Qwen3ForCausalLM"
+    },
+    "llm-jp/llm-jp-3-7.2b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7292063744
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct2": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7292063744
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct3": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7292063744
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "lomahony/eleuther-pythia6.9b-hh-dpo": {
+     "storage_dtype": "float16",
+     "source": "config.json",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "lomahony/eleuther-pythia6.9b-hh-sft": {
+     "storage_dtype": "float16",
+     "source": "config.json",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "m-a-p/CT-LLM-Base": {
+     "storage_dtype": "float16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "dtype_bytes": {
+      "F16": 2134509568
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "m-a-p/CT-LLM-SFT": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 2134509568
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "m-a-p/CT-LLM-SFT-DPO": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 2134509568
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "m-a-p/neo_7b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7793716224
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "m-a-p/neo_7b_instruct_v0.1": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7793716224
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "m-a-p/neo_7b_sft_v0.1": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7793716224
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "meta-llama/Llama-3.1-70B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 70553706496
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "meta-llama/Llama-3.1-70B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 70553706496
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "meta-llama/Llama-3.1-8B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030261248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 8030261248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "microsoft/Phi-4-reasoning-plus": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 14659507200
+     },
+     "architectures": "Phi3ForCausalLM"
+    },
+    "microsoft/phi-4": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 14659507200
+     },
+     "architectures": "Phi3ForCausalLM"
+    },
+    "microsoft/phi-4-reasoning": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 14659507200
+     },
+     "architectures": "Phi3ForCausalLM"
+    },
+    "mistralai/Mistral-7B-Instruct-v0.1": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7241732096
+     },
+     "architectures": "MistralForCausalLM"
+    },
+    "mistralai/Mistral-7B-v0.1": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7241732096
+     },
+     "architectures": "MistralForCausalLM"
+    },
+    "openGPT-X/Teuken-7B-base-v0.6": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": null,
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7453544448
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "openGPT-X/Teuken-7B-instruct-commercial-v0.4": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7452725248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "openGPT-X/Teuken-7B-instruct-v0.6": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7452725248
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "openbmb/MiniCPM5-1B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1080632832
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "openbmb/MiniCPM5-1B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1080632832
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "openbmb/MiniCPM5-1B-SFT": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1080632832
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "openchat/openchat-3.5-0106": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7241748480
+     },
+     "architectures": "MistralForCausalLM"
+    },
+    "stabilityai/stablelm-2-1_6b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1644515328
+     },
+     "architectures": "StableLmForCausalLM"
+    },
+    "stabilityai/stablelm-2-1_6b-chat": {
+     "storage_dtype": "float32",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float32",
+     "error": null,
+     "dtype_bytes": {
+      "F32": 1644515328
+     },
+     "architectures": "StableLmForCausalLM"
+    },
+    "stabilityai/stablelm-2-zephyr-1_6b": {
+     "storage_dtype": "float16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "dtype_bytes": {
+      "F16": 1644515328
+     },
+     "architectures": "StableLmForCausalLM"
+    },
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7512264704
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "teknium/OpenHermes-2.5-Mistral-7B": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7241748480
+     },
+     "architectures": "MistralForCausalLM"
+    },
+    "tiiuae/Falcon-H1-1.5B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1554859392
+     },
+     "architectures": "FalconH1ForCausalLM"
+    },
+    "tiiuae/Falcon-H1-1.5B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1554863488
+     },
+     "architectures": "FalconH1ForCausalLM"
+    },
+    "tiiuae/Falcon-H1-7B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7585648736
+     },
+     "architectures": "FalconH1ForCausalLM"
+    },
+    "tiiuae/Falcon-H1-7B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7585654880
+     },
+     "architectures": "FalconH1ForCausalLM"
+    },
+    "tiiuae/Falcon3-10B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 10305653760
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "tiiuae/Falcon3-10B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 10305653760
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "tiiuae/Falcon3-1B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1669408768
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "tiiuae/Falcon3-1B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 1669408768
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "tiiuae/Falcon3-3B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 3227655168
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "tiiuae/Falcon3-3B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 3227655168
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "tiiuae/Falcon3-7B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7455550464
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "tiiuae/Falcon3-7B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7455550464
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "tiiuae/Falcon3-Mamba-7B-Base": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7272665088
+     },
+     "architectures": "FalconMambaForCausalLM"
+    },
+    "tiiuae/Falcon3-Mamba-7B-Instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7272665088
+     },
+     "architectures": "FalconMambaForCausalLM"
+    },
+    "tiiuae/falcon-7b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7217189760
+     },
+     "architectures": "FalconForCausalLM"
+    },
+    "tiiuae/falcon-7b-instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7217189760
+     },
+     "architectures": "FalconForCausalLM"
+    },
+    "tiiuae/falcon-mamba-7b": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7272665088
+     },
+     "architectures": "FalconMambaForCausalLM"
+    },
+    "tiiuae/falcon-mamba-7b-instruct": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7272665088
+     },
+     "architectures": "FalconMambaForCausalLM"
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Chat": {
+     "storage_dtype": "float16",
+     "source": "config.json",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": {
+     "storage_dtype": "float16",
+     "source": "config.json",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": {
+     "storage_dtype": "float16",
+     "source": "config.json",
+     "torch_dtype_config": "float16",
+     "error": null,
+     "architectures": "GPTNeoXForCausalLM"
+    },
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 7512264704
+     },
+     "architectures": "LlamaForCausalLM"
+    },
+    "zai-org/glm-4-9b-chat-hf": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 9399951360
+     },
+     "architectures": "GlmForCausalLM"
+    },
+    "zai-org/glm-4-9b-hf": {
+     "storage_dtype": "bfloat16",
+     "source": "safetensors.parameters",
+     "torch_dtype_config": "bfloat16",
+     "error": null,
+     "dtype_bytes": {
+      "BF16": 9399951360
+     },
+     "architectures": "GlmForCausalLM"
+    }
+   }
   }
  }
 }

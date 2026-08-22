@@ -282,7 +282,28 @@ def main():
     _l1 = _r1.lineages(ops=_r1.ALIGNING)
     _biggest = max([len([m for m in _l1.get(r_, []) if m in models])
                     for r_ in roots] or [len(models)])
-    need_gb = int(_biggest * a.gb_per_model + 40)
+    #: **MEASURED BYTES BEAT A UNIFORM GUESS, AND fp32 IS THE REASON.**
+    #: `--gb-per-model` is a flat 15 GB. Fifteen roster checkpoints ship fp32 --
+    #: TWICE the bytes per parameter -- and two of them are the 32B arms at
+    #: **129 GB each**. Sizing a lineage of those at 15 GB apiece under-provisions
+    #: the disk by an order of magnitude, and the failure lands mid-download with
+    #: the box already rented. `requirements.json` carries `params_b` and
+    #: `storage_dtype` for all 160, so the real figure costs nothing.
+    _W = {"float32": 4, "bfloat16": 2, "float16": 2}
+
+    def _gb(m):
+        r = _reqs().get(m) or {}
+        pb, dt = r.get("params_b"), r.get("storage_dtype")
+        return pb * _W.get(dt, 2) if pb else a.gb_per_model
+
+    _lin_gb = max([sum(_gb(m) for m in _l1.get(r_, []) if m in models)
+                   for r_ in roots] or [sum(_gb(m) for m in models)])
+    need_gb = int(_lin_gb + 40)
+    _flat = int(_biggest * a.gb_per_model + 40)
+    if need_gb > _flat:
+        print("  disk NOTE   measured weights need %d GB where the flat "
+              "%.0f GB/model guess says %d -- fp32 on this shard"
+              % (need_gb, a.gb_per_model, _flat))
     disk_gb = a.disk or need_gb
     #: **CARRIED ON THE ARGS, BECAUSE `execute()` IS A DIFFERENT SCOPE.** Computed
     #: here and referenced there, it raised `NameError: disk_gb is not defined` at

@@ -124,6 +124,14 @@ def build():
             ("params_source", "weights" if w.get("params_b") else
              ("weights_from_files" if wf.get("params_b") else None)),
             ("weights_format", w.get("weights_format") or wf.get("weights_format")),
+            #: STORAGE dtype, and it is NOT `compute_dtype`. 125 configs say
+            #: bfloat16 while 12 models must RUN in it; the corpus holds 55,680
+            #: fp16 cells for models in that 125. Kept because fp32 is twice the
+            #: download -- Olmo-3.1-32B SFT/DPO ship F32 at 128.9 GB against
+            #: their base's 64.5 -- and assuming uniform size once nearly ran a
+            #: 300 GB disk out mid-DPO.
+            ("storage_dtype", (sec.get("config_dtype", {}).get(m) or {})
+             .get("storage_dtype")),
             ("architecture", wf.get("architecture")),
             ("vocab_len", (vocab.get(m) or {}).get("vocab_len")),
             ("byte_notation", (vocab.get(m) or {}).get("byte_notation")),
