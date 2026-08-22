@@ -245,30 +245,61 @@ M##_word` and counts components. Within ONE reading the count is trivially the
 operation count (the completeness assert puts every model in exactly one
 operation); pooled, it says which operations are one relation renamed.
 
-    stroking   13 operations, 4 readings -> 2 components  (9 ops/36 models, 4/6)
-    insurance  13 operations, 4 readings -> 1 component   (46 models)
-    asylum      9 operations, 4 readings -> 1 component   (47 models)
+**`-k` is the threshold and it has to be declared with the count.** Two operations
+are joined only where they share at least `k` models. At `k=1`, sharing a single
+model, everything collapses; `k=2` is the default and the number below.
 
-**So the count alone does not distinguish agreement from disorder**: asylum's one
-component and insurance's one come with sighted Jaccards of 0.14 and 0.78. Report
-the pair or neither.
+    stroking   13 operations, 4 readings -> 3 components at k=2 (2 at k=1)   8op/29m, 4op/6m, 1op/8m
+    insurance  13 operations, 4 readings -> 3 components at k=2 (1 at k=1)   10op/45m, 2op/2m, 1op/1m
+    asylum      9 operations, 4 readings -> 4 components at k=2 (1 at k=1)   6op/46m, 1op/1m, 1op/2m, 1op/1m
 
-### CORRECTION: ADDING READINGS DESTROYS REAL COMPONENTS TOO
+**The count alone does not distinguish agreement from disorder**: asylum and
+insurance both came out at one component under `k=1`, with sighted Jaccards of
+0.14 and 0.78. Report the pair or neither.
 
-An earlier version of this section reported insurance at **2 components** with a
-2-model `Transgressive Uplift` cluster "sharing no model-words with the main
-blob", and I drew a rule from it: *if a partition is real, pooling preserves it;
-if it is rater-specific, pooling dissolves it.*
+### CORRECTION TO THE CORRECTION: THE RULE WAS RIGHT AND THE THRESHOLD WAS WRONG
 
-**That rule is false and the blind insurance pair disproved it.** At 2 readings
-the transgressive cluster is its own component. At 4 it merges -- because those
-models also share ordinary FROM words (`have`, `be`, `not`) with everything else,
-and enough readings supply enough bridges. Pooling dissolves ANY component whose
-members share vocabulary with the rest, real or not.
+An earlier version reported insurance at 2 components with a 2-model
+`Transgressive Uplift` cluster, and drew a rule from it: *if a partition is real,
+pooling preserves it; if it is rater-specific, pooling dissolves it.* I then
+withdrew the rule as false, because at 4 readings the cluster merged into the
+blob.
 
-And the cluster IS real -- see the Olmo result below. So the component count is a
-weaker instrument than the table above suggests: it can bury a finding that three
-independent readings agree on. **Use `--report`, not the count.**
+**Both of those were measured at `k=1`, where one shared model joins two
+operations, and that is what merged it.** At `k=2` the cluster is its own
+component again at all four readings: `Transgressive Uplift` (sighted) and
+`Procedural to Illicit` (blind) sit alone together on `Olmo-3-7B-Instruct` and
+`Olmo-3.1-32B-Instruct`. The two operations that dragged it into the blob are
+those same two Olmos sharing ordinary FROM words (`have`, `be`, `not`) with
+everything else, one model at a time.
+
+So the original rule stands, with the threshold named: **pooling preserves a real
+partition provided two operations are not joined on the strength of one shared
+model.** A single shared model is not evidence that two readings named the same
+relation, and at 45+ lineages almost every pair of operations shares one.
+
+### THE STRUCTURAL BLIND SPOT: `k` CANNOT PLACE AN OPERATION WITH FEWER THAN `k` MEMBERS
+
+An operation naming a relation on ONE model shares at most one model with
+anything, so at `k>=2` it is a permanent singleton no matter how strongly it
+agrees with another reading. This is not a tuning question; it is arithmetic, and
+it bites exactly where a relation is rare enough to be worth noticing.
+
+Two instances, both across the blinding boundary:
+
+- **insurance.** `Hedge To Transgression` (blind, `x1b.n47.r1`) names the same
+  transgressive move as the component-2 pair, on `Olmo-3.1-32B-Instruct`, which is
+  one of the two models in that component. It is a singleton because it has one
+  member. So THREE readings name transgression on the Olmos and the count shows a
+  component of two.
+- **asylum.** `erase the trail` (sighted, `x1.n50.r1`) and `Flight Gives Way to
+  Concealment` (blind, `x1b.n50.r1`) are the same relation on the SAME single
+  model, `RedPajama-INCITE-7B-Chat`. They are two separate singleton components.
+
+**Use `--report`, not the count**, and check the singletons before reading a
+component count as disagreement. `--data` marks every link that crosses a
+component boundary and the web view draws those dashed, with no pull in the force
+layout, so the bridges are visible without being structural.
 
 ### THE STRONGEST REPLICATION SO FAR, AND THE COUNT HID IT
 
