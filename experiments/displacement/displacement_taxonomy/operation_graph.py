@@ -209,6 +209,42 @@ def analyse(prefix, n_lineages=None, png=False, report=False, data=False, k=2):
     return G, cc
 
 
+def sidecar(prompt):
+    """`{model: {word: row}}` from the `.tables.json` the rater actually read.
+
+    ## WHY THIS EXISTS (RH, 2026-08-22)
+
+    `audit` printed each model's words with `sorted()`, which is alphabetical, so
+    `bastards` at rank 3 carrying 7.2% and `birds` at rank 60 carrying 0.02% were
+    adjacent and indistinguishable. Every trace of magnitude and prominence was
+    destroyed by the display, and a reader could not tell a headline term from a
+    tail one. The ranks were never lost -- `tables()` writes them to the sidecar
+    for exactly this reason -- they were simply thrown away at print time.
+
+    ## MATCHED ON CONTENT, NOT ON NAME
+
+    The file is found by reading each candidate's `prompt` field rather than by
+    reconstructing a slug, because the slug is a truncation of the prompt to 34
+    characters and two prompts can share one. Globbing then matching on content
+    is the safe form of a glob: the name is a hint and the field is the check.
+    Exactly one file must match, and it is an error if none or several do.
+    """
+    import glob, json
+    hits = []
+    for f in sorted(glob.glob(os.path.join(HERE, "results", "xling_*.tables.json"))):
+        try:
+            d = json.load(open(f))
+        except Exception:
+            continue
+        if d.get("prompt") == prompt:
+            hits.append((f, d))
+    if len(hits) != 1:
+        return None
+    _, d = hits[0]
+    return {m: {r["word"]: r for r in (t.get("rows") or [])}
+            for m, t in (d.get("tables") or {}).items()}
+
+
 def audit(G, cc, OPS, pairs, prompt, width=68):
     """Everything a component rests on, in one place: operations, statements,
     and each model's own FROM and TO words with which operations placed them.
@@ -230,6 +266,27 @@ def audit(G, cc, OPS, pairs, prompt, width=68):
                 per[m["model"]][op] = ([w.lower() for w in m.get("a_words") or []],
                                        [w.lower() for w in m.get("b_words") or []])
     W = lambda t, i: textwrap.fill(t, width, initial_indent=i, subsequent_indent=i)
+    SC = sidecar(prompt)
+    if SC is None:
+        print("  (no .tables.json matched this prompt; words print unranked)\n")
+
+    def ranked(model, ws, side):
+        """Cited words newest-first by PROMINENCE ON THEIR OWN SIDE, with rank and mass.
+
+        A word the rater cited but the table does not contain is printed as `?`
+        rather than dropped. That is a rater citing something it was not shown,
+        which is a data-integrity event and has to be visible; silently omitting
+        it would make the exhibit agree with the reading by deleting the
+        disagreement.
+        """
+        rows = (SC or {}).get(model) or {}
+        rk, pk = ("rank_a", "p_a") if side == "A" else ("rank_b", "p_b")
+        ok = [(rows[w][rk], rows[w][pk], rows[w].get("rank_b" if side == "A" else "rank_a"), w)
+              for w in ws if w in rows and rows[w].get(rk) is not None]
+        miss = sorted(w for w in ws if w not in rows)
+        out = ["%s %d->%s %.1f%%" % (w, r, ("%d" % o) if o is not None else "-", 100 * p)
+               for r, p, o, w in sorted(ok)]
+        return out + ["%s ?" % w for w in miss]
 
     #: ── THE DENOMINATOR, PRINTED ONCE AT THE TOP ────────────────────────────
     #:
@@ -282,12 +339,12 @@ def audit(G, cc, OPS, pairs, prompt, width=68):
             #: same indent on both put "FROM" at the head of the wrapped line too,
             #: so a long list read as two separate FROM entries on a skim.
             def lab(tag, ws):
-                return textwrap.fill(" ".join(ws) or "(none)", width,
+                return textwrap.fill("  ".join(ws) or "(none)", width + 26,
                                      initial_indent="        %-6s" % tag,
                                      subsequent_indent="              ")
             print("    %s" % m)
-            print(lab("FROM", f))
-            print(lab("TO", t))
+            print(lab("FROM", ranked(m, f, "A") if SC else sorted(f)))
+            print(lab("TO", ranked(m, t, "B") if SC else sorted(t)))
             print("        in    %s" % "; ".join(
                 "%s [%s]" % (G.nodes[op]["label"], G.nodes[op]["reading"]) for op in sorted(here)))
         print()
