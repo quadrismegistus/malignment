@@ -59,6 +59,39 @@ def blind_readings():
     return out
 
 
+def as_read(path=None):
+    """`{id: component}` AS THE RATERS SAW IT, joined on content not on position.
+
+    ## WHY A LIVE REBUILD IS NOT THE KEY
+
+    `components()` is deterministic now, but the document the raters answered was
+    built before it was, and 11 of 94 ids resolve differently under the fixed
+    order. A rater's answer is a list of ids; looking those ids up in a fresh
+    rebuild silently returns the WRONG COMPONENT and nothing in the lookup can
+    detect it. So the saved document is the authority, and the live rebuild is
+    joined onto it by (sentence, operation names), which are content.
+
+    Refuses rather than guessing if the join is not one-to-one.
+    """
+    saved = json.load(open(path or os.path.join(HERE, "results", "crossframe_ops.json")))
+    live = components()
+    key = lambda c: (c["prompt"], tuple(sorted(n[1] for n in c["names"])))
+    byk = collections.defaultdict(list)
+    for c in live:
+        byk[key(c)].append(c)
+    dup = [k for k, v in byk.items() if len(v) > 1]
+    assert not dup, "join is not unique; %d sentence/name pairs repeat: %s" % (len(dup), dup[:2])
+    out, miss = {}, []
+    for s in saved:
+        v = byk.get(key(s))
+        if not v:
+            miss.append(s["id"])
+            continue
+        out[s["id"]] = dict(v[0], id=s["id"], domain=s.get("domain"))
+    assert not miss, "%d saved components have no live match: %s" % (len(miss), miss[:4])
+    return out
+
+
 def ari(a, b):
     ks = sorted(set(a) & set(b))
     if len(ks) < 4:
@@ -185,7 +218,23 @@ def components(k=2):
                             names=[(t, o["name"], o.get("statement") or "",
                                     len(o.get("members") or [])) for t, o in ent],
                             n_models=len({m["model"] for m in mem}), _members=mem))
-    out.sort(key=lambda c: (c["prompt"], -c["n_models"]))
+    #: THE ID IS A NAME AND IT HAS TO MEAN ONE THING. Sorting on (prompt,
+    #: n_models) alone left 19 of 94 slots in TIE GROUPS -- same sentence, same
+    #: model count -- broken by the iteration order of the SET that
+    #: `op_components` returns, which differs between processes. C15 was "Blank
+    #: Redaction" in the document the raters read and "no displacement" the next
+    #: time components() ran, and C16/C17 had swapped with it.
+    #:
+    #: That is worse than the earlier name-ordering instability, which only made
+    #: the document non-reproducible. This makes a rater's answer resolve to the
+    #: WRONG COMPONENT: the ids in a returned grouping are looked up later, and
+    #: nothing in the lookup can tell that the mapping moved underneath it. Any
+    #: analysis that reads names from the saved document and words from a live
+    #: rebuild silently mixes two populations.
+    #:
+    #: Tie broken on the operation names, which are content and are stable.
+    out.sort(key=lambda c: (c["prompt"], -c["n_models"],
+                            tuple(sorted(n[1] for n in c["names"]))))
     for i, c in enumerate(out, 1):
         c["id"] = "C%02d" % i
     return out
