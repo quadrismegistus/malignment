@@ -167,6 +167,51 @@ producer stores a lossless 7-cell count vector per K scale and 16-bin histograms
 for the continuous norms, and the mean is one read of several rather than the
 record.
 
+## WHAT REPLICATES ACROSS THE DISJOINT TWIN
+
+`contrast.py --twin`, corpus A (4,931 f11_l2 model passages, 25 lineage pairs)
+against corpus B (262,408 free passages from `passage`/`y`/`passage_run2`, 47
+pairs). Sign agreement among the 110 keys significant on either side is
+**94/110 (85%)** against 50% chance, and **no key is CONTRADICTED** -- none is
+significant on both with opposite signs. The 16 sign flips all sit on a corpus-A
+effect of |0.0028| or less, so they are sign noise around zero rather than
+disagreement.
+
+**Ten keys replicate at q<.05 on both corpora with the same sign:**
+
+                          A         B
+    usas_x           +0.0237   +0.0141   psychological actions, states, processes
+    gi_passive       +0.0215   +0.0135   passivity, submission
+    gi_enltot        +0.0165   +0.0101   knowing, judging, teaching
+    gi_positiv       +0.0129   +0.0165
+    gi_pstv          +0.0127   +0.0149
+    gi_emot          +0.0123   +0.0059
+    gi_enloth        +0.0093   +0.0081   knowledge, analysis, theory
+    gi_role          -0.0036   -0.0045   people named by social role
+    usas_n5          -0.0026   -0.0032   quantities
+    k_bodily_harm    -0.0184   -0.0200
+
+Aligned prose carries more inner states, emotion, positive framing, passivity
+and abstraction-and-analysis vocabulary; fewer people named by role, fewer
+quantities, less bodily harm. Read beside H1 (concreteness down on both) it is
+one movement: **inward and away from the body, the named person and the number.**
+
+**THE GI CODES WERE GLOSSED FROM THEIR MEMBERS, NOT FROM A CODEBOOK.** The JSON
+carries no category descriptions, so `EnlTot`, `EnlOth`, `Role` and `SV` were
+read off a RANDOM sample of members -- the first attempt sampled the first 14
+alphabetically, which for a dict-order listing means every word begins with `a`
+and the inferred meaning is an artefact of the sort. Random members:
+
+    EnlTot  mistake, unwise, evaluation, examine, orient, decide, teach, vigilance
+    EnlOth  conscious, perception, research, lab, explanation, intelligence, theory
+    Role    minister, runner, payer, friend, joker, businessmen, doctor, granny
+    SV      despair, ache, think, crave, feel, am, despise, hate, worry, should
+    Passive follower, victim, droop, barren, disconcerted, conformity, surrender
+
+`SV` is stative and mental verbs PLUS modals and auxiliaries (`might`, `should`,
+`am`, `has`), which is not what its size (88 words) or its name suggests, and is
+worth knowing before anyone reads it as a "strong verb" category.
+
 ## STATUS
 
 Folder opened. Producer not yet written, nothing run, no numbers.
