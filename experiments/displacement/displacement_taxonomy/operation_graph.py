@@ -104,7 +104,7 @@ def build(pairs):
     return G
 
 
-def analyse(prefix, n_lineages=None, png=False, report=False):
+def analyse(prefix, n_lineages=None, png=False, report=False, data=False):
     import networkx as nx
     pairs, prompt = readings(prefix, n_lineages)
     if not pairs:
@@ -139,6 +139,8 @@ def analyse(prefix, n_lineages=None, png=False, report=False):
         print()
     if report:
         audit(G, cc, OPS, pairs, prompt)
+    if data:
+        emit(G, cc, OPS, pairs, prompt, prefix)
     if png:
         render(G, cc, OPS, prompt, prefix)
     return G, cc
@@ -291,11 +293,71 @@ def render(G, cc, OPS, prompt, prefix):
     print("  wrote %s" % out)
 
 
+def emit(G, cc, OPS, pairs, prompt, prefix):
+    """Write the pooled graph as a `graph` artifact for the web app.
+
+    Word nodes carry their `model`, so the UI can collapse to model grain
+    without a second artifact -- 800 word nodes is a lot for a browser force
+    simulation and ~50 model nodes is what a reader can actually judge, but the
+    words are what makes a component checkable, so both have to be reachable.
+    """
+    import json, re, collections
+    from malignment.chartdata import graph, write
+    comp = {n: i for i, c in enumerate(cc) for n in c}
+    stmt, members = {}, collections.defaultdict(dict)
+    for tag, v in pairs:
+        for o in v.get("operations") or []:
+            op = "OP[%s] %s" % (tag, o["name"])
+            stmt[op] = o.get("statement", "")
+            for m in o.get("members") or []:
+                members[op][m["model"]] = ([w.lower() for w in m.get("a_words") or []],
+                                           [w.lower() for w in m.get("b_words") or []])
+    tags = sorted({G.nodes[n]["reading"] for n in OPS})
+    PAL = ["#fa5252", "#e8590c", "#4dabf7", "#b197fc", "#ffd43b", "#51cf66"]
+    nodes = []
+    for n in G:
+        if n in OPS:
+            nodes.append({"id": n, "kind": "op", "label": G.nodes[n]["label"],
+                          "group": G.nodes[n]["reading"], "component": comp[n],
+                          "n": G.nodes[n]["n"], "statement": stmt.get(n, ""),
+                          "models": sorted(members.get(n, {}))})
+        else:
+            model, word = n.split("::", 1)
+            side = "from" if any(True for _ in G.successors(n)) else "to"
+            nodes.append({"id": n, "kind": "word", "label": word, "model": model,
+                          "side": side, "group": None, "component": comp[n]})
+    links = [{"source": a, "target": b} for a, b in G.edges()]
+    cov = []
+    for tag, v in pairs:
+        inops = {m["model"] for o in v.get("operations") or [] for m in o.get("members") or []}
+        cov.append({"reading": tag, "placed": len(inops),
+                    "reversed": len(v.get("reversed") or []),
+                    "unassigned": len(v.get("unassigned") or [])})
+    art = graph(
+        title=prompt,
+        subtitle=("%d operations from %d reading(s), pooled. An operation is a NODE: two "
+                  "readings touch only where they put the SAME model's words on a relation. "
+                  "Only models placed in `operations` are here -- `unassigned` carries no "
+                  "words and `reversed` is excluded, so between 18%% and 98%% of what was "
+                  "sent reaches this graph depending on the rater."
+                  % (len(OPS), len(pairs))),
+        nodes=nodes, links=links,
+        groups=[{"key": t, "label": t, "colour": PAL[i % len(PAL)]} for i, t in enumerate(tags)],
+        meta={"components": [{"operations": sum(1 for x in c if x in OPS),
+                              "models": len({x.split("::")[0] for x in c if "::" in x})}
+                             for c in cc],
+              "coverage": cov, "prompt": prompt})
+    slug = re.sub(r"[^a-z0-9]+", "_", prefix.lower())[:34].strip("_")
+    return write(art, os.path.join(HERE, "figures"), "opgraph_%s" % slug)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("prefix", nargs="?")
     ap.add_argument("--n-lineages", type=int, default=None)
     ap.add_argument("--png", action="store_true")
+    ap.add_argument("--data", action="store_true",
+                    help="write a `graph` artifact for the web app")
     ap.add_argument("--report", action="store_true",
                     help="print each component's operations, statements and per-model words")
     ap.add_argument("--all", action="store_true")
@@ -305,11 +367,11 @@ def main(argv=None):
         seen = sorted({k["frame_prompt"] for k in X._stash()
                        if isinstance(k, dict) and k.get("stage") == "crosslineage"})
         for p in seen:
-            analyse(p, a.n_lineages, a.png, a.report); print("-" * 78)
+            analyse(p, a.n_lineages, a.png, a.report, a.data); print("-" * 78)
         return
     if not a.prefix:
         raise SystemExit("give a prompt prefix, or --all")
-    analyse(a.prefix, a.n_lineages, a.png, a.report)
+    analyse(a.prefix, a.n_lineages, a.png, a.report, a.data)
 
 
 if __name__ == "__main__":

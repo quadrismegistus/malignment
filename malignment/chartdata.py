@@ -299,3 +299,39 @@ def quadrants(*, title, x, y, cats, models, points, cells, table, subtitle=None,
             "n_total": n_total if n_total is not None else n,
             "arrows": arrows or [], "anchors": anchors or [],
             "notes": notes or []}
+
+
+def graph(*, title, nodes, links, groups, subtitle=None, notes=None, meta=None):
+    """A force-directed graph: nodes with a group, links between node ids.
+
+        nodes   [{id, kind, label, group, ...}]   `kind` drives how it is drawn
+        links   [{source, target}]                ids, not indices
+        groups  [{key, label, colour}]
+
+    ## IDS, NOT INDICES
+
+    d3-force MUTATES the objects it is given, replacing `source`/`target` with
+    node references. A producer emitting indices would be writing something the
+    consumer has to keep in sync with array order; ids survive filtering in the
+    UI, which is the whole point of shipping a graph rather than a picture.
+
+    ## WHAT IS CHECKED
+
+    Every link endpoint must resolve to a node. A dangling endpoint does not
+    raise in d3 -- it silently drops the link, so the graph draws with fewer
+    edges than it has and nothing says so.
+    """
+    ids = {n["id"] for n in nodes}
+    assert len(ids) == len(nodes), "duplicate node ids"
+    gk = {g["key"] for g in groups}
+    assert len(gk) == len(groups), "duplicate group keys"
+    bad = [n["id"] for n in nodes if n.get("group") is not None and n["group"] not in gk]
+    assert not bad, "node(s) with an undeclared group: %s" % bad[:3]
+    dangling = [(l["source"], l["target"]) for l in links
+                if l["source"] not in ids or l["target"] not in ids]
+    assert not dangling, \
+        "%d link(s) with an endpoint that is not a node, first: %s -- d3-force DROPS " \
+        "these silently" % (len(dangling), dangling[:3])
+    return {"chart": "graph", "title": title, "subtitle": subtitle,
+            "nodes": nodes, "links": links, "groups": groups,
+            "notes": notes or [], "meta": meta or {}}
