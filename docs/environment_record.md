@@ -98,7 +98,13 @@ at all** — the chatlogs called it "resolves to the wrong model", which
 understates it, and calling it `dead` (the first classifier did) is wrong in the
 other direction, since dead and revision-required want opposite responses.
 
-**Still to do — version windows and edges:**
+**Version windows: DONE.** `scripts/build_version_windows.py` -> `roster/models/version_windows.json`. 385 observed points over 141 models. **One hole, found by the producer rather than by anyone remembering it:** `Olmo-3-1125-32B` — transformers 4.57.1 works, **4.57.6 fails, 5.4.0 fails**, 5.14.1 works. Falcon-H1's hole deliberately does NOT appear: the record holds 4.57.1=works and 5.4.0=fails, and the third point (5.14.1) exists only in a chatlog. Absence is not a point, so no hole is asserted — the schema now has somewhere to put it and the fact is genuinely missing.
+
+A `mixed` point (one version both working and failing) is not a hole: AmberSafe loaded after two packages went in on the same box, and reading a repair-in-place as a version bound would invent a constraint out of a packaging fix.
+
+**Edge facts: DONE.** `scripts/build_edge_facts.py` -> `roster/models/edge_facts.json`. 156 pairs, **21 vocab mismatches where six were remembered**, including `Aquila2-7B -sft-> AquilaChat2-7B` at **143973 vs 100008** — 43,965 tokens apart, so any base→aligned comparison there spans two vocabularies. Root→member pairs are generated as well as direct edges, because the motivating case is not a direct edge: `beaver-7b` was cross-scored against its lineage ROOT two hops up, and an edge-only derivation called the parent pair clean.
+
+**These were the schema shapes:**
 
 The version-hole problem dissolves if we stop storing ranges. A range is a claim; a point is an observation.
 
