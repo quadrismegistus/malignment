@@ -131,15 +131,30 @@ Tokenizer defect **scope** becomes a field rather than prose: Croissant and Teuk
 
 **The staleness gate now points at a file we are permitted to fix.** Checking the archive copy could only ever report a failure nobody could clear, and a gate that cannot be satisfied is a gate people learn to ignore.
 
-## P4 — BACKFILL the 132 mined findings
+## P5 — THE DIFF. DONE. `scripts/mine_diff.py`.
+
+Mining alone yields 147 findings, most already known — 147 things to re-read every run. Diffed against the record it yields only what is new, and **it gets quieter as the record gets better**, the only part of this system with that property.
+
+    180 checks (a finding about a PAIR is two checks)
+    covered 94 | no-schema 45 | NEW 40 | unresolved 1
+
+**The agents' own `already_recorded` was wrong in both directions** — 47 said "not recorded" that are, 16 said "recorded" that are not. An agent that has just read a long argument about a fact is the worst-placed judge of whether it was ever written down.
+
+**A parse defect looked exactly like 50 missing facts.** 30 of 50 unresolved findings crammed a group into the `model` field (`"Baichuan2-7B-Base / -Chat"`, `"jais-family-6p7b (and -chat)"`), and reading that as one literal id reported the whole group as off-roster. An unresolved model is indistinguishable from an un-recorded fact. Resolver now returns a list: 50 → 1.
+
+`no-schema` (45 of 180) is not a failure state — it is the standing list of gaps still worth closing, kept visible instead of being called covered (hides forever) or new (resurfaces every run).
+
+## P4 — BACKFILL the mined findings. IN PROGRESS: the list is now mechanical.
 
 Triage by the `already_recorded` field the agents returned. Take the ones marked `no` that carry a verbatim quote and a date; re-verify the three the agents themselves flagged (`falcon-7b` RoPE/YaRN — doesn't say which checkpoint; `neo_7b` sentencepiece ImportError — no version; `Tanuki-8B` 404 — undated). Re-run the three zero-hit models (`Olmo-3.1-32B-Instruct-DPO/SFT`, `Olmo-Hybrid-Instruct-SFT-7B`) with better aliases — they were discussed at length the same day the sweep ran, so zero hits is a search gap, not silence.
 
 **Do not bulk-insert.** These are chatlog claims, not verified facts, and the sweep ran over logs that include the session that produced half of them.
 
-## P5 — MAKE THE MINING STANDING, NOT A ONE-OFF
+**Known limit, and it is in the mining prompt rather than the diff:** the agents stretched the `kind` enum. Six findings tagged `blocked` are not blocks — they are "has cells but no observation" and "a roster note is stale" — so they read NEW against a repo that is public. Tighten the enum before the next sweep.
 
-The sweep found 132 facts in 26 minutes for 6.4M tokens. Run it on a schedule over a trailing window, **diff against the record, and surface only what is new**. That is the net that catches whatever P2's schema still cannot express — and it is the only item here that improves on its own as the record improves, because a better record makes the diff smaller.
+**Real gaps it surfaced, worth recording once verified:** `Baichuan2` fails to load at bf16 on a **Turing** card (cc 7.5 — bf16 is unsupported below Ampere), which is a `(model × CARD)` requirement and has no home in any current schema; `granite-3.0-8b` base ships fp32 on disk while its instruct sibling ships fp16; `Olmo-3.1-32B` SFT and DPO are released fp32 unlike their base.
+
+That first one is the next schema gap: `compute_dtype` is currently a property of the model, and Baichuan2 shows it is a property of `(model × card generation)`.
 
 ---
 
