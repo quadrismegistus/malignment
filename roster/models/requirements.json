@@ -3716,7 +3716,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "tiiuae/Falcon-H1-1.5B-Instruct",

@@ -6207,6 +6207,19 @@
    "torch": {
     "points": [
      {
+      "version": "2.13.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf5141",
+         "outcome": "ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
       "version": "2.13.0+cu130",
       "verdicts": {
        "fails": [
@@ -6256,9 +6269,22 @@
        ]
       },
       "verdict": "fails"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf5141",
+         "outcome": "ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
-    "hole": false
+    "hole": true
    }
   },
   "tiiuae/Falcon-H1-1.5B-Instruct": {
