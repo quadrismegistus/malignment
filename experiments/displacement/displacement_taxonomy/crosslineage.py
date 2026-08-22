@@ -50,6 +50,70 @@ def _stash():
     return HashStash(root_dir=STASH, engine="jsonl", flat=True)
 
 
+SLOTS = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(HERE))),
+                     "roster", "prompts", "slots")
+
+
+def slot_items():
+    """`[(domain, prompt)]` for the whole slot corpus.
+
+    ## WHY THIS REPLACED A SCAN OF THE STAGE-1 CODINGS
+
+    `tables()` used to resolve a prefix by searching `run._stash()` for BATCHED
+    CODINGS and exiting with "no batched codings for a prompt starting X" when it
+    found none. That confined this instrument to the ~40 prompts the older
+    per-cell experiment happened to annotate, out of 302 that have full ~50-pair
+    coverage in twp right now.
+
+    It was never a real dependency. This function's own docstring says pairs come
+    from the roster and topup coverage, NOT from stage-1 codings; the stash was
+    used for exactly one thing, turning a prefix into a prompt string. So the
+    prompt now comes from the corpus that defines prompts, and 262 frames stop
+    being unreachable for a reason that had nothing to do with them.
+    """
+    import glob, yaml
+    out = []
+    for f in sorted(glob.glob(os.path.join(SLOTS, "*.yaml"))):
+        if os.path.basename(f).startswith("quarantined"):
+            continue
+        d = yaml.safe_load(open(f))
+        xs = d if isinstance(d, list) else (d.get("items") or d.get("slots") or [])
+        for x in xs or []:
+            if isinstance(x, dict) and x.get("prompt"):
+                out.append((x.get("domain") or "?", x["prompt"]))
+    return out
+
+
+def resolve(prefix):
+    """The one prompt a prefix names, or a refusal listing what it matched.
+
+    ## AMBIGUITY IS A REFUSAL, NOT A CHOICE
+
+    At 40 prompts a prefix was almost always unique and the old code took the
+    first hit from a dict scan. At 302 it frequently is not: `Three ` alone
+    matches seven identity frames. Taking the first would silently pick a
+    population, which is the same defect as letting glob order choose a file --
+    and it fails invisibly, because the run succeeds and reads the wrong prompt.
+    """
+    cands = sorted({p for _, p in slot_items()
+                    if p.lower().startswith(prefix.lower())})
+    if not cands:
+        #: A handful of stage-1 frames predate the slot corpus, so it is still
+        #: consulted -- second, and only when the corpus has nothing.
+        st = R._stash()
+        cands = sorted({(st[k].get("meta") or {}).get("frame_prompt") for k in st.keys()
+                        if (st[k].get("meta") or {}).get("batch")
+                        and str((st[k].get("meta") or {}).get("frame_prompt", ""))
+                        .lower().startswith(prefix.lower())} - {None})
+    if not cands:
+        raise SystemExit("no prompt in the slot corpus or the stage-1 codings "
+                         "starts with %r" % prefix)
+    if len(cands) > 1:
+        raise SystemExit("%r matches %d prompts; give more of it:\n  %s"
+                         % (prefix, len(cands), "\n  ".join(repr(c) for c in cands[:8])))
+    return cands[0]
+
+
 def tables(prompt_prefix, want_rows=False):
     """Rebuild every lineage's two-column table for one prompt, from twp.
 
@@ -69,15 +133,7 @@ def tables(prompt_prefix, want_rows=False):
     #: 1 happened to use, while 25 were available, and the gap is growing as pass
     #: 2 ingests per arm. The seven extra include gemma-2-9b-it and a DPO pythia,
     #: which is exactly the kind of variation the direction question needs.
-    st = R._stash()
-    prompt = None
-    for k in st.keys():
-        m = (st[k].get("meta") or {})
-        if m.get("batch") and m["frame_prompt"].startswith(prompt_prefix):
-            prompt = m["frame_prompt"]
-            break
-    if prompt is None:
-        raise SystemExit("no batched codings for a prompt starting %r" % prompt_prefix)
+    prompt = resolve(prompt_prefix)
     ep, _ = roster.endpoints()
     #: `merged=1` IS A PROVENANCE FILTER, NOT A QUALITY ONE -- the view's own
     #: COMMENT says so. A cell has merged=1 where a topup exists and 0 where it

@@ -31,13 +31,25 @@ import operation_graph as OG
 
 
 def domains():
+    """`{prompt: domain}` from the SLOT CORPUS first, stage-1 codings second.
+
+    Read the corpus that defines prompts, not the stash of an older experiment.
+    Taking domains only from stage-1 returned None for every frame outside the
+    ~40 it happened to annotate, which would have quietly labelled 262 of 302
+    prompts as domain `None` the moment the instrument was unblocked.
+    """
+    import crosslineage as X
     import run as R
-    st = R._stash()
     out = {}
+    st = R._stash()
     for k in st.keys():
         m = (st[k].get("meta") or {})
         if m.get("batch") and m.get("frame_prompt"):
             out[m["frame_prompt"]] = m.get("domain")
+    #: The corpus WINS on conflict: it is current, and a stage-1 label is
+    #: whatever that item's domain was when the older run went out.
+    for d, p in X.slot_items():
+        out[p] = d
     return out
 
 
