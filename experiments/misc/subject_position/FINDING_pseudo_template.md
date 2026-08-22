@@ -104,3 +104,49 @@ Averaged per model across arms, greetings looked like alignment's largest single
 The removed voice is the institutional one -- "We are a company that", "Our mission is" -- the register in which an organisation speaks about itself. Alignment installs a respondent that is not merely first-person but **singular**: an individual answering for itself, not a body answering for an institution.
 
 That is the same asymmetry F21 found from the other direction, where alignment proceduralised the individual and left the institution alone. Here the institution is not proceduralised; it is **evacuated from the speaking position entirely**. Recorded as a connection worth testing, not as a joint result: F21's instrument and this one share nothing but the roster.
+
+---
+
+# The base is DISPERSED, not partially installed. And the entropy has a null.
+
+RH's objection: `Q: Who are you?\nA:` near-obligates `I` as the first word, so a base at 0.54 is **low capacity to hold a basic sociolinguistic frame**, not evidence of an `I` already installed; alignment closing that gap IS installation. The reading above -- "the base takes the slot, alignment only removes competitors" -- treated 0.54 as occupancy. That inference was unwarranted, and the data support RH.
+
+## It is not that the base repeats the question
+
+Interrogative openings (`Who What Where Why How Are Is Do Can`) at the answer slot are only **0.0109** of the base's 0.397 non-first-person mass. The base is not failing by continuing the question. Paired, interrogatives do fall (68 of 82 edges, p < 1e-6), but from a base so small it cannot be where the missing mass lives.
+
+## It is dispersion
+
+                 top1     top5   entropy   effective choices
+    base        0.387    0.814    3.09 bits        8.5
+    aligned     0.561    0.915    2.08 bits        4.2
+
+    paired: 73 of 82 forward edges fall, median -0.752 bits, p < 1e-6
+
+The base spreads across about eight ways to begin an answer; the aligned model about four. That is "low capacity to hold the frame" measured directly, and it reframes the singular/plural result: **the plural is not a rival voice being suppressed so much as one item in a diffuse distribution.**
+
+Conservative in the right direction: the stored distributions are truncated at a median of 0.86 of the mass (minimum 0.38), and truncation bites hardest on the most dispersed models, so the base's entropy is understated and the true gap is likely larger.
+
+## THE NULL, WHICH THE ENTROPY CLAIM NEEDED
+
+Alignment lowers entropy nearly everywhere, so -0.752 bits means nothing until it is placed. Computed over **all 2,985 prompts in the store**, 88 forward edges, entropy aggregated in ClickHouse rather than pulled (the first attempt asked for 8.7 GB of rows):
+
+    all prompts        median -0.146   p25 -0.219   p75 -0.083   range -0.951 .. +0.420
+    Q: Who are you?    -0.752   ->  rank 7 of 2,983   (0.2% of prompts drop more)
+
+About five times the typical drop. And all four of the store's `Q:/A:` identity prompts sit in the top 1.5%:
+
+    rank   3   -0.841   Q: What is your name?
+    rank   7   -0.752   Q: Who are you?
+    rank  23   -0.637   Q: What is your mother's name?
+    rank  43   -0.543   Q: Who made you?
+
+## BUT THE CONFOUND IS TOTAL, AND THE TAIL SAYS SOMETHING ELSE
+
+**All four `Q:/A:` prompts in the store are identity questions.** Format and content are perfectly confounded: nothing here can separate "alignment collapses the distribution at identity questions" from "alignment collapses the distribution in the `Q:/A:` format". A non-identity `Q:/A:` prompt would separate them and does not exist in the store.
+
+The top 20 is also not an identity list. It is dominated by intimate narrative (9 of 20: *"She bit her lip as she leaned closer and"*), salary stems (4 of 20: *"The doctor earned an annual salary of $"*), and Chinese workplace advice (3 of 20: 我应该). Identity questions are 2 of the top 20.
+
+What those populations share is not a subject. It is that **alignment has a canonical answer for the slot**: a refusal for the intimate stems, a conventional figure for the salary stems, a self-description for the identity ones. The entropy result therefore establishes that alignment installs a SCRIPT at this slot, and it is among the strongest such slots in the corpus -- but the entropy alone does not establish that the script is a subject position.
+
+**What makes it a subject position is the other measurement**: the script begins in the singular first person, 69 of 82 edges, +0.1305. Entropy says there is a script; the first-person mass says what the script says. Neither carries the claim alone, and the entropy half is the one with the confound.
