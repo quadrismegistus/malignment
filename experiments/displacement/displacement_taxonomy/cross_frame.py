@@ -543,7 +543,15 @@ def main():
     #: would hand the grouping pass the very partition it is being asked to test.
     for o in xs:
         assert o["prompt"] in txt, "component %s lost its sentence" % o["id"]
-    for d in ("domain", "identity frame", "institutional frame"):
+    #: ASSERT ON THE EMITTED FIELD, NOT ON THE WORD. The first version refused
+    #: whenever the bare string `domain` appeared anywhere, which at 94
+    #: components matched two RATER STATEMENTS -- "the same general domain",
+    #: "the domain of clothing". That is the rater's own prose, and refusing on
+    #: it would have meant editing evidence to satisfy a guard. What must not
+    #: appear is the label in a METADATA POSITION, which only this function can
+    #: emit, so the check is on the field syntax rather than on vocabulary.
+    for d in ("domain:", "domain =", "[sexual]", "[violence]", "[identity]",
+              "[institutional]"):
         assert d not in txt, "domain metadata leaked: %r" % d
     assert "align" not in txt.lower(), "the word alignment leaked into the task"
 
