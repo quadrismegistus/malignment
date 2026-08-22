@@ -48,3 +48,37 @@ The distribution cannot say whose "I" it is. A base first person is routinely a 
 **Predicted: among raw-frame generations that do begin in the first person, base rungs produce a named character or an invented dialogue more often than aligned rungs, which produce an assistant self-description.**
 
 If that holds, then a raw-frame first person is not evidence of a respondent position, and any raw-frame rise found under P2 has to be read through it before it counts against the interaction.
+
+---
+
+# CORRECTION, recorded before any result was read
+
+Added the same day, with 9 records on disk covering 3 of 43 nodes, all of them SmolLM3. No value from any other node had been read. Two facts about the roster came to light in checking the run, both of which change what is measurable, and neither of which needed the results to establish.
+
+## P3 IS UNMEASURABLE AS WRITTEN. WITHDRAWN.
+
+P3 predicted a chat-frame base-to-SFT rise "in at least 10 of the 14 lineages". **Only 3 of the 14 bases ship a chat template**: `huggyllama/llama-7b`, `m-a-p/neo_7b`, `openbmb/MiniCPM5-1B-Base`. The other 11 refuse the chat frame outright, as `SmolLM3-3B-Base` already did in record 2: *"ships no chat template"*.
+
+So there is no chat-frame base value to subtract for 11 of 14 lineages, and a prediction quantified over 14 of them was never satisfiable. Withdrawn rather than restated at n=3, because 3 lineages is not a sign test and pretending otherwise is the error the withdrawal exists to avoid.
+
+**The scope of the withdrawal is P3 only.** P1, P2, P4 and P5 are all raw-frame or within-condition and are untouched.
+
+## AND THIS IS THE PHENOMENON, NOT AN OBSTACLE
+
+That 11 of 14 bases refuse to be addressed at all is the strongest form of RH's original observation. The templateless base does not answer "Who are you?" badly; **it has no mechanism for being asked.** The refusal is the finding, and it is categorical where the probability measure is continuous.
+
+It also relocates where the evidence lives:
+
+- **The raw frame carries the ladder.** All 43 nodes, every rung, fully paired. That is the within-lineage measure.
+- **The chat frame is a condition, not a rung.** Available wherever a template exists, which is 32 of 43 nodes.
+- **The frame-by-rung interaction is measurable within a lineage in exactly 3 cases.** n=3, reported as three named lineages, never as a test.
+
+## A SECOND FACT: 8 ALIGNED NODES ALSO SHIP NO TEMPLATE
+
+`archangel_sft_pythia2-8b`, `archangel_sft-dpo_pythia2-8b`, `AmberChat`, `AmberSafe`, `alpaca-7b-reproduced`, `beaver-7b-v1.0`, `CT-LLM-SFT`, `CT-LLM-SFT-DPO`.
+
+These are SFT and DPO rungs with no chat template at all, so "aligned" and "templated" are **not** the same partition of this roster. Any chat-frame statement about the aligned arm is about 24 of the 32 aligned nodes, and a chat-frame comparison that treats arm and frame as interchangeable is comparing two different splits.
+
+## A CAVEAT ON THE 3, WHICH MAY REDUCE THEM FURTHER
+
+A `chat_template` key present in `tokenizer_config.json` is not proof of a shipped conversational format -- it can be an inherited default. `huggyllama/llama-7b` is a 2023 base model and its having one at all is more likely inheritance than design. The three are therefore an **upper bound** on the lineages where the interaction is measurable, and each needs its template read before it is counted. Not done yet.
