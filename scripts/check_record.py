@@ -93,24 +93,37 @@ def writes_to_archive(v):
 def derived_not_stale(v):
     """A derived artifact must not be older than any source it declares.
 
-    INCIDENT: `data/model_requirements.json` is dated 15 Aug and derives from
-    five files, one of which (`model_load_environments.json`) was rewritten on
-    19 Aug. It ships a `--check` flag for exactly this and nobody ran it, so it
-    reported `none-local` for 50 checkpoints holding thousands of cells.
+    INCIDENT: `malign-logits/data/model_requirements.json` was dated 15 Aug and
+    derives from five files, one of which was rewritten on the 19th. It ships a
+    `--check` flag for exactly this and nobody ran it, so it reported
+    `none-local` for 50 checkpoints holding thousands of cells.
+
+    **THE ARCHIVE COPY IS NO LONGER CHECKED, BECAUSE IT IS NO LONGER OURS TO
+    FIX.** All five of its sources are in a read-only repo, so the check could
+    only ever report a failure nobody was permitted to clear -- and a gate that
+    cannot be satisfied is a gate people learn to ignore. It is superseded by
+    `roster/models/requirements.json`, which derives from live sources; that one
+    IS checked, and can be cleared by running its producer.
     """
     bad = []
-    req = os.path.join(ARCHIVE, "data", "model_requirements.json")
-    if os.path.exists(req):
+    for rel in ("roster/models/requirements.json",):
+        p = os.path.join(ROOT, rel)
+        if not os.path.exists(p):
+            bad.append("%s missing -- run scripts/build_requirements.py --write"
+                       % rel)
+            continue
         try:
-            doc = json.load(open(req))
+            doc = json.load(open(p))
         except Exception as e:                                   # noqa: BLE001
-            return ["model_requirements.json unreadable: %s" % e], "derived files current"
-        mt = os.path.getmtime(req)
+            bad.append("%s unreadable: %s" % (rel, e))
+            continue
+        mt = os.path.getmtime(p)
         for s in doc.get("_sources") or []:
-            sp = os.path.join(ARCHIVE, s)
+            sp = os.path.join(ROOT, s)
             if os.path.exists(sp) and os.path.getmtime(sp) > mt:
-                bad.append("model_requirements.json older than its source %s" % s)
-    return bad, "derived files current"
+                bad.append("%s is older than its source %s -- rerun %s"
+                           % (rel, s, doc.get("_producer") or "its producer"))
+    return bad, "derived files are current with their live sources"
 
 
 # --------------------------------------------------------------------------
