@@ -119,11 +119,16 @@ def main(argv=None):
         near = min(pm, key=lambda k: abs(pm[k] - m))
         #: a model can fall OUTSIDE the historical range entirely, in which case
         #: "nearest period" is an endpoint and says nothing -- flag it.
+        #: the flag says ONLY that the value falls outside every period median.
+        #: It was previously worded "MORE ABSTRACT"/"MORE CONCRETE", which is
+        #: hardcoded to the abstraction column and reads as a flat error on any
+        #: other -- on `usas_x` a value above every period is MORE INTERIOR,
+        #: and the old label called it more concrete.
         out = ""
         if m < min(pm.values()):
-            out = "  <-- MORE ABSTRACT THAN ANY PERIOD"
+            out = "  <-- BELOW EVERY PERIOD MEDIAN"
         elif m > max(pm.values()):
-            out = "  <-- MORE CONCRETE THAN ANY PERIOD"
+            out = "  <-- ABOVE EVERY PERIOD MEDIAN"
         print("  %-22s %7s %+10.4f %8.1f%%  %d%s"
               % (c, "{:,}".format(len(v)), m, pctile(m, allc), near, out))
 
