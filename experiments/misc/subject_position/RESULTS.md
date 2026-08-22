@@ -73,3 +73,28 @@ The roster's `reasoning` flag marks **1** of these 5. Detecting them from `p_thi
 ## WHAT IS STILL OPEN
 
 P5 -- whose "I" it is -- needs the generations, which are not in this file. The distribution cannot distinguish a model saying "I am an assistant" from one continuing "...I am Tamas and I am from Hungary". Until that is measured, every number above is about the RATE of the first person and none of them is about its referent.
+
+## THE DATA FILE, AND ONE MODEL IN IT WORTH LOOKING AT
+
+`build_table.py` writes `results/p_first.csv`: long format, one row per (model, condition), 231 rows over 146 models. Conditions are `pseudo` (145 models, from the store), `bare_raw` (43) and `bare_chat` (24 rendered, 19 usable after the reasoning exclusions). Roster columns -- `lineage`, `op`, `stage_rank`, `depth` -- come from `roster.rows()` so the rungs are typed rather than inferred from names.
+
+`p_I` is carried beside `p_first` only so the gap between them stays visible. **`p_first` is the measure**; `p_I` alone undercounts Qwen2.5-7B-Instruct by 13x.
+
+`ok=0` marks a row that must not be averaged with a zero: 19 refusals (no chat template) and 5 reasoning slots. A refusal is an absence, not a low value.
+
+### AmberSafe: safety training that installed the first person WITHOUT a template
+
+    Amber       (base)  raw 0.0853     top: What .072  I .069
+    AmberChat   (sft)   raw 0.0840     top: <    .079  I .068
+    AmberSafe   (dpo)   raw 0.9563     top: I   .907  I'm .041   tail 0.013
+
+With no template at all, AmberSafe puts 0.907 on `I`. `Sorry` and `As` sit in its tail, so the likely content is a refusal frame -- "I cannot", "I'm sorry" -- fired unprompted at any continuation. It is the one model in the roster where the first person is not conditional on being addressed.
+
+It is also the reverse of the Tulu ablation direction, where removing SAFETY data raised first-person mass most. Two safety interventions, opposite signs, which is further reason to treat the P4 ordering as unresolved rather than as a mechanism.
+
+**It does not carry the raw-ladder result**, which was checked rather than assumed:
+
+    all              n=29  rises 21  falls 8  median +0.0125  mean +0.0544  p=0.024
+    minus AmberSafe  n=28  rises 20  falls 8  median +0.0125  mean +0.0252  p=0.036
+
+The median and the sign test are unmoved; only the mean halves. That is the case for having reported the median and a sign test rather than a mean, and the outlier is the thing that shows it.
