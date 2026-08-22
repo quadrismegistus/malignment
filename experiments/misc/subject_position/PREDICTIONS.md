@@ -120,3 +120,37 @@ neo_7b is a base model from M-A-P and was never trained against this template; i
 That makes the pilot number stronger, not weaker. Handed a full assistant persona and asked "Who are you?", the base put **0.008** on the first person and its top word was `Who`: it repeated the question. The frame did everything it could to elicit an assistant and the base still did not answer. A prediction of a low base value survives being given the most favourable possible prompt.
 
 `run.py`'s docstring describes these three numbers without saying the frame is inherited Llama-2 boilerplate. That description is incomplete rather than wrong, and it is corrected here rather than by editing a file the run is currently executing.
+
+---
+
+# CORRECTION to the correction: it is 2 lineages, not 1
+
+The section above concluded that MiniCPM was confounded because its base template's sha256 differed from its SFT's. **That was the wrong object to hash.** The model never sees the jinja source; it sees the render. MiniCPM's base template carries tool-calling boilerplate that does not fire when no tools are passed, so the two sources differ and the renders do not.
+
+Rendered with each model's own tokenizer, `apply_chat_template([{user: "Who are you?"}], add_generation_prompt=True)` -- this run's actual frame, not the census's prefill shape:
+
+    MiniCPM5-1B-Base       015b1775919e   65 chars
+    MiniCPM5-1B-SFT        015b1775919e   65 chars     IDENTICAL
+    MiniCPM5-1B            015b1775919e   65 chars     IDENTICAL
+
+    neo_7b                 48257d9943b9  556 chars
+    neo_7b_sft_v0.1        48257d9943b9  556 chars     IDENTICAL
+    neo_7b_instruct_v0.1   48257d9943b9  556 chars     IDENTICAL
+
+**Two lineages support the within-lineage interaction: neo and MiniCPM.** llama-7b remains out, because its aligned rungs ship no template at all and no amount of rendering fixes an absence.
+
+This is the "pin the content, not the envelope" defect, committed at `132bfa4` and corrected here. The check that caught it was `measurements.json` section `chat_template`, which malign pointed at in docket [6546] and which had been measured earlier the same day -- the wrapper strings were recorded there and I derived them by hand from the HF cache instead of reading them.
+
+## What the census adds that the hand check could not
+
+    23 of the 43 nodes render a template.  19 are NO_TEMPLATE.  1 NO_TOKENIZER.
+
+Every base except llama-7b, neo_7b and MiniCPM5-1B-Base is NO_TEMPLATE, which confirms the P3 withdrawal by a second route.
+
+**neo has `sys_ok=0`**: a caller-supplied system message is DISCARDED by its template. The Llama-2 persona in neo's wrapper is the template's own hardcoded default, not something passed in. So the claim above -- that neo's base is handed a full assistant persona -- is confirmed by the wrapper text and is not affected by `sys_ok`. But it is worth flagging against malign's guard in [6546]: a template that discards the system message refuses to write a framed cell. Under `system=DEFAULT` nothing is supplied, so the guard should not fire; that is a prediction about their code, not a reading of it, and it needs checking before neo's cells are expected in the store.
+
+`MiniCPM` has `sys_ok=1` and `sys_empty_ok=1` throughout, so it carries no such question.
+
+## A census key that does not resolve
+
+`HuggingFaceTB/SmolLM3-3B-checkpoints@it-SFT` is absent from the census; the lookup falls back to the bare repo, which is `NO_TOKENIZER`. But this run rendered a chat frame for that exact revision and got `<think>` at 0.9998, so the fallback verdict is wrong for the revision. `@it-soup-APO` IS present as its own key. Revisioned entries are therefore partial, and a fallback to the bare repo silently substitutes a different object's verdict.
