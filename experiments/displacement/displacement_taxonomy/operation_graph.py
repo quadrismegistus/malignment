@@ -165,11 +165,37 @@ def audit(G, cc, OPS, pairs, prompt, width=68):
                 per[m["model"]][op] = ([w.lower() for w in m.get("a_words") or []],
                                        [w.lower() for w in m.get("b_words") or []])
     W = lambda t, i: textwrap.fill(t, width, initial_indent=i, subsequent_indent=i)
+
+    #: ── THE DENOMINATOR, PRINTED ONCE AT THE TOP ────────────────────────────
+    #:
+    #: A component's model count is unreadable without it. Only models placed in
+    #: `operations` reach the graph at all: `unassigned` carries no words, and
+    #: `reversed` is excluded by construction. Measured across the three prompts,
+    #: what reaches the graph runs from 18% to 98% of what was SENT, and it is
+    #: the RATER that swings it -- insurance sighted r1 placed 46 of 47 and
+    #: abstained on none, r2 placed 25 and abstained on 22, on identical tables.
+    #:
+    #: So "4 models" means one thing against 47 and another against 25, and
+    #: nothing else on this page says which.
+    print("COVERAGE -- what reached the graph, per reading\n")
+    shown = None
+    for tag, v in pairs:
+        inops = {m["model"] for o in v.get("operations") or [] for m in o.get("members") or []}
+        rev, un = len(v.get("reversed") or []), len(v.get("unassigned") or [])
+        tot = len(inops) + rev + un
+        shown = tot if shown is None else shown
+        print("  %-14s placed %3d   reversed %2d   unassigned %2d   of %d shown  (%.0f%% in graph)"
+              % (tag, len(inops), rev, un, tot, 100.0 * len(inops) / tot))
+    allmods = {n.split("::")[0] for n in G if "::" in n}
+    print("  %-14s union over readings: %d of %d (%.0f%%)\n"
+          % ("", len(allmods), shown or 0, 100.0 * len(allmods) / (shown or 1)))
+
     for i, c in enumerate(cc, 1):
         ops = sorted((n for n in c if n in OPS), key=lambda n: -G.nodes[n]["n"])
         mods = sorted({n.split("::")[0] for n in c if "::" in n})
         print("=" * 78)
-        print("COMPONENT %d   %d operation(s), %d model(s)" % (i, len(ops), len(mods)))
+        print("COMPONENT %d   %d operation(s), %d of the %d models that reached the graph"
+              % (i, len(ops), len(mods), len(allmods)))
         print("=" * 78)
         for n in ops:
             print("\n  [%s]  %s  (%d members)"
