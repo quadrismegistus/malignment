@@ -189,10 +189,13 @@ def analyse(prefix, n_lineages=None, png=False, report=False, data=False, k=2):
         print()
     for i, c in enumerate(cc, 1):
         ops = sorted((n for n in c if n in OPS), key=lambda n: -G.nodes[n]["n"])
-        mods = {n.split("::")[0] for n in c if "::" in n}
+        #: NOT `mods` -- that name holds op -> models for the whole graph and is
+        #: passed to emit() below. Shadowing it here handed emit a set of model
+        #: names from the last component and every cross-link came out False.
+        cmods = {n.split("::")[0] for n in c if "::" in n}
         by = collections.Counter(G.nodes[n]["reading"] for n in ops)
         print("  component %d: %d operations over %d reading(s), %d models, %d word-nodes"
-              % (i, len(ops), len(by), len(mods), len(c) - len(ops)))
+              % (i, len(ops), len(by), len(cmods), len(c) - len(ops)))
         for n in ops:
             print("       %-13s %-40s %d members" % (G.nodes[n]["reading"], G.nodes[n]["label"],
                                                       G.nodes[n]["n"]))
@@ -200,7 +203,7 @@ def analyse(prefix, n_lineages=None, png=False, report=False, data=False, k=2):
     if report:
         audit(G, cc, OPS, pairs, prompt)
     if data:
-        emit(G, cc, OPS, pairs, prompt, prefix, k, len(at1))
+        emit(G, cc, OPS, pairs, prompt, prefix, k, len(at1), ocs, mods)
     if png:
         render(G, cc, OPS, prompt, prefix)
     return G, cc
@@ -353,7 +356,7 @@ def render(G, cc, OPS, prompt, prefix):
     print("  wrote %s" % out)
 
 
-def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None):
+def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None):
     """Write the pooled graph as a `graph` artifact for the web app.
 
     Word nodes carry their `model`, so the UI can collapse to model grain
@@ -363,6 +366,13 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None):
     """
     import json, re, collections
     from malignment.chartdata import graph, write
+    #: `mods` maps operation -> models and `ocs` is op_components' component list.
+    #: Both were shadowed in analyse()'s report loop once, which turned every
+    #: cross flag False and reported it as a clean run. Cheap to state, and it is
+    #: the only thing standing between a wrong picture and a plausible one.
+    assert isinstance(ocs, list) and isinstance(mods, dict) and all(
+        isinstance(v, set) for v in mods.values()), \
+        "emit() needs op_components' (ocs, mods); got %s / %s" % (type(ocs), type(mods))
     comp = {n: i for i, c in enumerate(cc) for n in c}
     stmt, members = {}, collections.defaultdict(dict)
     for tag, v in pairs:
@@ -386,7 +396,40 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None):
             side = "from" if any(True for _ in G.successors(n)) else "to"
             nodes.append({"id": n, "kind": "word", "label": word, "model": model,
                           "side": side, "group": None, "component": comp[n]})
-    links = [{"source": a, "target": b} for a, b in G.edges()]
+    #: A LINK THAT CROSSES A COMPONENT BOUNDARY IS MARKED, NOT DROPPED. These are
+    #: exactly the single-model bridges k=2 refuses to count -- the whole reason
+    #: for the threshold -- so hiding them would make the picture agree with the
+    #: number by concealing the thing the number is about. Marked instead: the UI
+    #: keeps them out of the LINK FORCE, so components separate, and still draws
+    #: them faintly, so a reader can see where two clusters touch and by how
+    #: little. Without this the count said 4 and the image said 1.
+    ocomp = {}
+    for i, oc in enumerate(ocs):
+        for o in oc:
+            ocomp[o] = i
+    #: A word node has no component of its own; it takes the one of the operation
+    #: at the other end. So a link is CROSSING only when the model that word
+    #: belongs to touches operations in more than one component -- it is that
+    #: model that is the bridge. The lowest-numbered component it touches is
+    #: treated as its home, and every link it has into any other one is marked.
+    home = {}
+    for o in OPS:
+        for m in mods[o]:
+            home[m] = min(home.get(m, ocomp[o]), ocomp[o])
+    links = []
+    for a, b in G.edges():
+        op = a if a in OPS else b
+        model = (b if a in OPS else a).split("::")[0]
+        links.append({"source": a, "target": b,
+                      "cross": ocomp[op] != home.get(model, ocomp[op])})
+    #: THE INVARIANT THAT FAILED. If k split a component that k=1 held together,
+    #: some model bridges two components by construction, so there is at least
+    #: one crossing link. Zero crossings with fewer components at k=1 is not a
+    #: quiet graph, it is a broken flag.
+    n_cross = sum(1 for l in links if l["cross"])
+    assert n_at1 is None or len(ocs) == n_at1 or n_cross > 0, \
+        "k=%d gives %d components against %d at k=1, yet no link crosses a boundary" \
+        % (k, len(ocs), n_at1)
     cov = []
     for tag, v in pairs:
         inops = {m["model"] for o in v.get("operations") or [] for m in o.get("members") or []}

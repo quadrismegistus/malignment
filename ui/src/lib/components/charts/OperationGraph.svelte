@@ -36,7 +36,7 @@
 		title: string;
 		subtitle?: string;
 		nodes: Node[];
-		links: { source: string; target: string }[];
+		links: { source: string; target: string; cross?: boolean }[];
 		groups: { key: string; label: string; colour: string }[];
 		meta?: {
 			components?: { operations: number; models: number }[];
@@ -90,26 +90,39 @@
 				});
 			}
 		}
-		const seen = new Set<string>();
+		const seen = new Map<string, number>();
 		const ls: any[] = [];
 		for (const l of art.links) {
 			if (!liveIds.has(l.source) || !liveIds.has(l.target)) continue;
 			const s = l.source.startsWith('OP[') ? l.source : 'M::' + l.source.split('::')[0];
 			const t = l.target.startsWith('OP[') ? l.target : 'M::' + l.target.split('::')[0];
 			const k = s + ' ' + t;
-			if (!seen.has(k) && keep.has(s) && keep.has(t)) {
-				seen.add(k);
-				ls.push({ source: s, target: t });
+			if (!keep.has(s) || !keep.has(t)) continue;
+			//: A COLLAPSED LINK IS CROSSING ONLY IF EVERY WORD LINK UNDER IT IS. One
+			//: non-crossing word link means this model really is inside that
+			//: component, so the pair must pull like any other.
+			const prev = seen.get(k);
+			if (prev === undefined) {
+				seen.set(k, ls.length);
+				ls.push({ source: s, target: t, cross: !!l.cross });
+			} else if (!l.cross) {
+				ls[prev].cross = false;
 			}
 		}
 		return { nodes: [...keep.values()], links: ls };
 	});
 
+	//: CROSSING LINKS ARE DRAWN BUT EXERT NO FORCE. They stay in `data.links` --
+	//: LayerChart reads `link.source.x`, so a link forceLink never resolved would
+	//: draw from the origin -- and are neutralised with a per-link strength of 0
+	//: instead. That is the whole point of k=2: a single model bridging two
+	//: operations is not evidence they are one relation, so it must not drag them
+	//: into one blob, and it must still be visible where two clusters touch.
 	const forces = $derived({
 		link: forceLink(view.links)
 			.id((d: any) => d.id)
 			.distance(grain === 'word' ? 26 : 60)
-			.strength(0.35),
+			.strength((l: any) => (l.cross ? 0 : 0.35)),
 		charge: forceManyBody().strength(grain === 'word' ? -22 : -180),
 		collide: forceCollide().radius((d: any) => (d.kind === 'op' ? 22 : 9)),
 		center: forceCenter(w / 2, H / 2),
@@ -139,15 +152,32 @@
 		(hidden = hidden.includes(k) ? hidden.filter((x) => x !== k) : [...hidden, k]);
 
 	let drag = $state<any>(null);
+	//: PAN, because the weak centring force cannot hold three components inside one
+	//: panel without also squashing them together, and the small ones are the ones
+	//: k=2 exists to separate. Panning moves the VIEW; the simulation is untouched,
+	//: so nothing about the layout depends on where the reader has scrolled to.
+	let pan = $state({ x: 0, y: 0 });
+	let grab: { x: number; y: number } | null = $state(null);
+
 	function down(e: PointerEvent, n: any, sim: any) {
 		drag = n;
 		sim.alphaTarget(0.25).restart();
 	}
+	function panDown(e: PointerEvent) {
+		grab = { x: e.clientX - pan.x, y: e.clientY - pan.y };
+	}
 	function move(e: PointerEvent, sim: any) {
+		if (grab) {
+			pan = { x: e.clientX - grab.x, y: e.clientY - grab.y };
+			return;
+		}
 		const box = panel?.getBoundingClientRect();
 		if (!drag || !box) return;
-		drag.fx = e.clientX - box.left;
-		drag.fy = e.clientY - box.top;
+		//: THE PAN COMES OFF THE POINTER BEFORE THE NODE IS PINNED. `fx`/`fy` are
+		//: simulation coordinates and the pointer is in screen ones, so without this
+		//: a node jumps by the pan offset the moment it is grabbed.
+		drag.fx = e.clientX - box.left - pan.x;
+		drag.fy = e.clientY - box.top - pan.y;
 		sim.alpha(Math.max(sim.alpha(), 0.2)).restart();
 	}
 	function up(sim: any) {
@@ -156,6 +186,7 @@
 			drag.fy = null;
 		}
 		drag = null;
+		grab = null;
 		sim?.alphaTarget(0);
 	}
 </script>
@@ -196,9 +227,28 @@
 								onpointermove={(e) => move(e, simulation)}
 								onpointerup={() => up(simulation)}
 								onpointerleave={() => up(simulation)}
+								class:grabbing={grab}
 							>
+								<rect
+									x="0"
+									y="0"
+									width={w}
+									height={H}
+									fill="transparent"
+									class="bg"
+									onpointerdown={panDown}
+									ondblclick={() => (pan = { x: 0, y: 0 })}
+								/>
+								<g transform="translate({pan.x},{pan.y})">
 								{#each linkPositions as l, i (i)}
-									<line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} class="edge" />
+									<line
+										x1={l.x1}
+										y1={l.y1}
+										x2={l.x2}
+										y2={l.y2}
+										class="edge"
+										class:cross={view.links[i]?.cross}
+									/>
 								{/each}
 								{#each nodes as n (n.id)}
 									{@const op = n.kind === 'op'}
@@ -231,6 +281,7 @@
 										>
 									{/if}
 								{/each}
+								</g>
 							</svg>
 						{/snippet}
 					</ForceSimulation>
@@ -392,6 +443,23 @@
 		stroke: #5c6472;
 		stroke-opacity: 0.3;
 		stroke-width: 0.7;
+	}
+	/* A BRIDGE THAT WAS NOT COUNTED, DRAWN AS ONE. Dashed and yellow so it reads
+	   as an annotation on the gap rather than as structure spanning it. Hiding
+	   these would make the picture agree with the component count by concealing
+	   exactly the thing the count is a judgement about. */
+	.edge.cross {
+		stroke: #ffd43b;
+		stroke-opacity: 0.55;
+		stroke-width: 1;
+		stroke-dasharray: 3 3;
+	}
+	svg {
+		cursor: grab;
+		touch-action: none;
+	}
+	svg.grabbing {
+		cursor: grabbing;
 	}
 	circle {
 		cursor: grab;
