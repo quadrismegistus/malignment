@@ -117,12 +117,36 @@ def jobs_quadrants(limit=None):
     return out
 
 
+#: ## FORCED_WORD: THE CORPUS IS FREE GENERATION ONLY, AND THE FIRST RUN WAS NOT
+#:
+#: `gen_sequences` mixes free continuations with FORCED-WORD generations, where
+#: a chosen word is inserted into the continuation. Over the four passage
+#: corpora that is 904,345 + 104,300 + 23,488 forced rows against 490,882 free
+#: ones -- 79% of the store -- with 1,458 distinct forced words in `passage`
+#: alone. Those texts have had their lexical content manipulated by design, and
+#: lexical content is exactly what `fields.norms()` and `fields.count()`
+#: measure, so including them measures the stimulus rather than the arm.
+#:
+#: The first run did not filter them, and its dedup key
+#: `(corpus, model, prompt, sample_idx)` does not separate a free row from the
+#: forced rows sharing its prompt: 1,523,015 rows collapse to 490,890 groups,
+#: and `if k in seen: continue` kept whichever row the unordered scan returned
+#: first. That is an arbitrary and non-reproducible choice between a free
+#: continuation and a forced one, made silently, on 68% of the store.
+#:
+#: Under `forced_word = ''` the same key is EXACTLY unique -- 490,882 rows,
+#: 490,882 keys -- so the filter is what makes the unit well defined and the
+#: dedup a no-op. `prompt` here is the 60-char truncated column; `prompt_full`
+#: exists beside it and is emptier, which is why the truncated one is the
+#: better key and why neither is unique without the filter.
+
+
 def ch_models():
     """[(model, n_rows)] over the passage corpora, biggest first."""
     from malignment import ch
     return [(r["model"], r["n"]) for r in ch.query("""
         SELECT model, count() AS n FROM {db}.gen_sequences
-        WHERE corpus IN (%s) AND length(text) > 0
+        WHERE corpus IN (%s) AND length(text) > 0 AND forced_word = ''
         GROUP BY model ORDER BY n DESC
     """ % ", ".join("'%s'" % c for c in CH_CORPORA))]
 
@@ -143,19 +167,26 @@ def jobs_ch_model(model, arm, limit=None):
     rows = ch.query("""
         SELECT corpus, prompt, toString(sample_idx) AS si, text
         FROM {db}.gen_sequences
-        WHERE corpus IN (%s) AND length(text) > 0 AND model = '%s'
+        WHERE corpus IN (%s) AND length(text) > 0 AND forced_word = ''
+          AND model = '%s'
         %s
     """ % (", ".join("'%s'" % c for c in CH_CORPORA), model, lim))
-    seen, out = set(), []
+    seen, out, dup = set(), [], 0
     for r in rows:
-        #: passage_run2 holds every key twice; dedup on identity, not on text,
-        #: because two samples of one cell are two observations.
         k = (r["corpus"], model, r["prompt"], r["si"])
         if k in seen:
+            dup += 1
             continue
         seen.add(k)
         out.append(("%s|%s|%s|%s" % k, r["corpus"], model, arm,
                     r["prompt"], r["text"]))
+    #: the key is UNIQUE under the free-generation filter, so this must never
+    #: fire. It is kept as an assertion rather than removed because the earlier
+    #: version relied on it silently -- see the note above `FORCED_WORD`.
+    if dup:
+        raise ValueError("%s: key collided %d times under forced_word='' -- "
+                         "the identity key is wrong, do not dedup past it"
+                         % (model, dup))
     return out
 
 
