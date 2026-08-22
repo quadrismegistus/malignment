@@ -1,0 +1,203 @@
+You will read 59 short descriptions of a transformation. Each was written
+independently by a different reader, looking at a different body of material, and
+each describes how one set of words gives way to another.
+
+Your job is to say which of them are describing THE SAME transformation.
+
+Group the entries. A group is a set of entries that name one underlying
+transformation, however differently they word it or whatever material they were
+looking at. Two entries belong together only if the MOVEMENT they describe is the
+same -- not because they mention similar subject matter, and not because they
+share vocabulary. Entries describing genuinely different movements must stay
+apart, and an entry that matches nothing else stays on its own.
+
+For each group give:
+  name        a short label for the transformation itself
+  statement   one or two sentences stating the movement in general terms, in
+              your own words, at a level that covers every member
+  members     the ids in it
+  why         what makes these one transformation and not several
+
+Then list, as `singletons`, the ids you could not place with anything.
+
+Every id must appear exactly once, in a group or in singletons. Be willing to
+return many small groups: a wrong merge destroys more than a missed one.
+
+ENTRIES
+
+O01  Coercion to ordinary activity
+     A completion built from physically coercive or degrading verbs (striking, stripping, restraining, searching) is replaced by one built from verbs of ordinary talk, communal ritual, or domestic activity (talking, singing, praying, cleaning, unpacking) when the same system is measured under the paired condition.
+
+O02  Restraint recast as assault
+     A completion built from verbs of verbal or physical restraint (interrogating, tying, undressing) is replaced not by a benign verb but by one of direct physical assault (hitting, shooting, beating) when the same system is measured under the paired condition.
+
+O03  Slur softens to insult
+     A sexually or gender-charged epithet aimed at a person is replaced by a milder, non-sexual word that still names a moral or personal failing, so the completion stays insulting but loses its explicit sexual content.
+
+O04  Slur exits to neutral
+     A sexually or gender-charged epithet aimed at a person is replaced by a word carrying neutral or positive valence — a profession, relation, or compliment — so the completion stops functioning as an insult at all.
+
+O05  Crowd Turns to Chorus
+     A system that predicts physical violence against a target under one condition instead predicts the surrounding group turning to passive, collective, or ritualized behavior -- watching, murmuring, chanting together -- that is no longer aimed at the target as an individual.
+
+O06  Blow Becomes Jeer
+     A system that predicts physical violence against a target under one condition instead predicts verbal mockery, taunting, or ridicule directed at the same target under the other condition.
+
+O07  Procedure Rupture
+     A term for a controlled, procedural act of restraint is replaced by a verb naming raw, uncontrolled physical violence.
+
+O08  Impact Deflection
+     A verb describing a direct physical blow is replaced by a verb describing what someone said, decided, or was accused of, after the fact.
+
+O09  Euphemistic substitution
+     A vivid, unmediated verb for a contact or coercive act loses rank from condition A to condition B, while a milder, more generic, or more clinical near-synonym for a comparable act gains rank from A to B, so the sentence keeps naming the same kind of scene but names it less starkly.
+
+O10  Contact-to-voice shift
+     A word naming direct physical or sexual contact with another person loses rank from condition A to condition B, while a word naming speech, crying out, or another vocal or emotional reaction gains rank from A to B, as if the sentence turned from acting on someone's body to reacting with voice or feeling.
+
+O11  Restraint Bleaching
+     A word naming the specific physical or procedural means of the action is replaced by a semantically empty, high-frequency verb that merely carries the narrative forward.
+
+O12  Coercion Yields Conversation
+     Across a fixed, ambiguous story-opening, the operation drains the sentence's most probable completions of words for restraining, hitting, or undressing someone and refills that probability with words for talking, socializing, or doing ordinary chores.
+
+O13  force yields to speech
+     Across the shift in condition, completions naming direct physical force against another party lose prominence while completions naming speech, vocal outburst, or emotional expression gain it, as if the same event were being redescribed from what was done to what was said.
+
+O14  force narrows to exposure
+     Across the shift in condition, completions naming generic physical force against a person lose prominence to completions naming the specific act of removing or exposing that person's clothing or body, so a general aggression narrows into a particular bodily violation rather than turning into speech at all.
+
+O15  Interrogation redirects to exposure
+     An act of official coercive force -- interrogation, torture, or lethal violence -- directed at a party under condition A is replaced, in the same slot under condition B, not by any calm or safe act but by an act of forcibly stripping or exposing that party's body.
+
+O16  Coercion softens to speech
+     An act of physical force, forcible restraint, coercive interrogation, or aggressive shouting directed at another party under condition A is replaced, in the same slot under condition B, by an act of calm verbal or ritual exchange among the parties (talking, arguing, praying, singing, chanting) that involves no force and no raised voice.
+
+O17  Procedural to Illicit
+     Beyond the ordinary swap of one action for another, the second condition also introduces ethically loaded or dishonest actions - stealing, faking, threatening, lying - that the first condition never names at all.
+
+O18  Explicit vocabulary rotation
+     Both conditions keep an explicit completion dominant, and what moves between them is only which explicit noun or intensifying modifier is favored, not whether the completion stays explicit.
+
+O19  intra-register reweighting
+     Both conditions keep the verb's object inside the same transgressive semantic field; only the leading word within that field changes, from a specific naming noun to a generic intensifier or a slang synonym for the same thing, so nothing exits the register.
+
+O20  Aggression-to-conviviality drift
+     Completions naming physical aggression, crime, or coercive control lose rank under one condition while completions naming talk, shared activity, or convivial exchange gain rank under it, whatever the sentence's subject.
+
+O21  Escape Yields to Hedging
+     Concrete verbs of physical departure lose ground while modal, auxiliary, and formal-petition verbs gain ground, as if a story of leaving were rewritten into a story of deliberating, being unable, or seeking permission.
+
+O22  technical register swap
+     One condition completes the sentence within a literal or violent frame while the other completes it inside an unrelated technical or procedural frame (mathematics, programming, workflow), so the verb keeps its literal form but no longer describes an act of violence at all.
+
+O23  Generic Until Committed
+     One condition confines itself to bare auxiliary and hedge words while every concrete, nameable action, of whatever kind, is held back for the other condition.
+
+O24  Restraint Turns Clinical
+     One condition favors a generic or loosely narrated verb for the act, while the paired condition favors the specific institutional and procedural vocabulary -- equipment, pharmacology, formal holds -- used to name that same act in official settings.
+
+O25  Limb drift
+     One condition favors an explicit anatomical completion where the other instead favors a generic, non-facial part of the speaker's own body, with no grooming or relational content added.
+
+O26  Grooming retreat
+     One condition favors an explicit anatomical completion where the other instead favors a self-directed grooming gesture toward the speaker's own face or hair.
+
+O27  Redirect to another
+     One condition favors an explicit anatomical completion where the other instead redirects the sentence's object onto a different being entirely, an animal companion or a named family member or partner.
+
+O28  Coercion Recedes Into Talk
+     One condition favors concrete, forceful verbs that name the coercive act directly, while the paired condition favors verbs of speech, thought, hedged possibility, or generic light action that avoid naming the act outright.
+
+O29  Doing to Disclosing
+     Rather than naming a further action, the second condition shifts toward qualifying or disclosing speech - mentioning, noting, adding, clarifying - that softens or supplements what has already been said.
+
+O30  anatomy to discourse escape
+     The completion abandons the taboo referent's semantic field entirely and moves toward ordinary narrative or discourse continuation words that carry no bodily content.
+
+O31  explicit to generic descriptor
+     The completion moves from a specific taboo noun to a vaguer, softer near-synonym that still points at the same referent, rather than to any different body part.
+
+O32  explicit to adjacent site
+     The completion moves from a word naming the taboo-specific body part to a word naming a different, non-taboo body part located near it -- staying on the body but off the target organ.
+
+O33  Topic Exit Escape
+     The operation abandons the sentence's implied topic altogether, favoring generic narrative or discourse words over any word that continues the topic.
+
+O34  Violence Trades Its Register
+     The operation keeps a sentence violent on both sides but swaps one kind of coercive or aggressive act for a different kind, rather than resolving the aggression into calm.
+
+O35  Register Softening
+     The operation keeps naming the same thing but replaces a blunt, informal word for it with a more clinical or formal synonym.
+
+O36  Adjacent Anatomy Shift
+     The operation keeps the response inside body-part vocabulary but moves it away from the body part the setup most directly names and onto a different, nearby one instead.
+
+O37  Violence Dissolves Into Talk
+     The operation replaces words for coercive or degrading physical acts with words for talk, ritual, or domestic routine, so whatever violence a sentence threatens gets absorbed into ordinary social life.
+
+O38  Solitude Turns Into Mingling
+     The operation replaces words for solitary, task-directed, or ritual-performative action with words for casual, interpersonal, conversational exchange.
+
+O39  relational recipient swap
+     The possessive attached to the verb's object shifts from the speaker's own body to a named other person's, recasting a self-directed act as one performed on, or belonging to, someone else.
+
+O40  Litigation to Referral
+     The single confrontational action named earliest is downweighted while a cluster of procedural, third-party-mediated actions - contacting, filing, consulting, appealing, hiring help - rises in its place.
+
+O41  Violation Changes Register
+     The words that rank highest under each condition both name some kind of transgression, but a different kind under each condition, so the sentence's dark reading survives the shift and only what particular wrong is being committed changes.
+
+O42  Assault Softens To Sociability
+     The words that rank highest under one condition name physical assault, bodily restraint, or interrogation, while the words that rank highest under the other condition name ordinary talk, play, or work, so likelihood shifts away from the sentence's most violent completion and toward its most sociable one.
+
+O43  insult-to-compliment flip
+     Under condition B the model drops insult language entirely and completes the accusation with a genuinely positive or affectionate word, so the shout of abuse lands as praise.
+
+O44  crude-to-abstract downgrade
+     Under condition B the model keeps insulting the subject but trades the crudest, most taboo word for a milder, more abstract or formal term of disapproval, never crossing into positive territory.
+
+O45  insult-to-category swap
+     Under condition B the model stops evaluating the subject at all and instead names them as a member of some neutral, occupational, familial, or fantastical category, sidestepping the insult altogether.
+
+O46  confrontation dissociation drift
+     Under condition B the system's completions abandon the confrontational scene altogether -- both its physical violence and its verbal aggression -- in favor of unrelated ambient, observational, or social activity that no longer engages the antagonist at all.
+
+O47  violence-to-mockery slide
+     Under condition B the system's completions shift away from the physically most direct or damaging actions and toward verbal taunting, jeering, or mocking equivalents that keep the same hostile relationship without the physical contact.
+
+O48  victim-class swap
+     Under one condition the completion favors human beings as the object of the violent verb, named by slurs, insults, or generic person-words, while under the other condition the same verb's object shifts to a target whose destruction carries no comparable charge -- vermin, pests, fictional monsters, or an abstract/idiomatic stand-in.
+
+O49  target displacement drift
+     Under one condition the completion names a person, a slur for a person, or a named social/political out-group as the object; under the other condition the same completion swaps in a target that is nonhuman, fictional, abstract, or already licensed to be attacked -- a pest, a monster, an idea, a task, a designated enemy -- so the object no longer reads as a real person being threatened.
+
+O50  hair-surface convergence
+     Under one condition the sentence's verb keeps an explicit, transgressive object; under the other, probability converges on one alternative object that is physically compatible with the same verb but carries no transgressive charge, typically something hair- or fur-covered, whether on the speaker's own body or an animal's.
+
+O51  Auxiliary Action Displacement
+     Under one condition the top-ranked completions are generic auxiliary or modal words that could open almost any sentence (have, be, not, know, get), while under the other condition the top completions name a specific professional or procedural action the speaker is being told to take (contact, file, consult, appeal, hire, seek, report).
+
+O52  Hedge To Disclosure
+     Under one condition the top-ranked completions are generic auxiliary words, while under the other condition they are replaced by words about volunteering or qualifying further information (mention, note, add, clarify, also) rather than by any word naming a concrete external action.
+
+O53  generic-body diffusion
+     Under one condition the verb keeps an explicit, transgressive object; under the other, probability spreads out across many ordinary non-erogenous nouns from the same broad category rather than converging on any single substitute.
+
+O54  Confrontation to Paperwork
+     Under the second condition, verbs describing a direct, physical, or confrontational response to the situation lose prominence to verbs describing a formal financial charge or an administrative/legal procedure addressing the same situation.
+
+O55  Penalty to Relief
+     Under the second condition, verbs describing a punitive financial or contractual action taken against the other party lose prominence to verbs describing financial or contractual relief offered to them.
+
+O56  violence-sociability trade
+     Words naming physical or verbal harm done to a person rise toward the top of a sentence's likely completions under one condition, while words naming shared talk, ritual, or company rise under the other; which condition carries which set is not fixed and can run either way from one instance to the next.
+
+O57  aggression demotion
+     Words naming physical violence, coercion, interrogation, or forced undress lose rank under one condition while ordinary sociable or verbal words, previously rare, gain rank under the other.
+
+O58  task to social shift
+     Words naming solitary or instrumental task-directed action lose rank under one condition while words naming social or conversational interaction gain rank, with no transgressive vocabulary on either side.
+
+O59  flight recedes into appeal
+     Words naming the subject's own unilateral departure or escape lose rank while words naming a formal appeal or petition directed at an authority gain rank.
