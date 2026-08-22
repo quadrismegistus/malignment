@@ -79,6 +79,36 @@ LADDERS = {
 }
 #: an f11_l2 stem with 134 passages already in the corpus, so the scene is one
 #: the store has seen many models continue.
+#: THE FRAME IS NOT FREE, AND `raw` IS NOT NEUTRAL FOR EVERY RUNG.
+#:
+#: `raw` (template=False) is the corpus's own condition and the right one for a
+#: base model. It is OUT OF DISTRIBUTION for a reasoning-SFT rung, which was
+#: trained on chat-templated traces: measured here, `Olmo-3-7B-Think-SFT` under
+#: `raw` fails a bare ASCII-share screen on **40% of passages against base's
+#: 5%**, and produces `"the Decompiler... cookie monster gone vikings"` among
+#: the survivors. A -0.54 abstraction shift measured under those conditions is
+#: not an abstraction finding.
+#:
+#: `prefill` puts the stem in a prefilled ASSISTANT turn, which `generate.render`
+#: documents as "the only chat-mode position with a word slot in it". Its two
+#: companions are deliberate, not defaults:
+#:   system=""      ASSERTS an empty system, OVERRIDING the template's persona.
+#:                  Distinct from passing none -- conditions.py measured a
+#:                  2,500x swing on one stem across default/empty/persona.
+#:   user_msg="Hi." the PRESENCE CONTROL. Semantically empty on purpose, so the
+#:                  comparison isolates instruction CONTENT rather than the user
+#:                  turn merely being non-empty; an empty turn leaves 13.9% of
+#:                  mass on fill punctuation and any contentful turn collapses it.
+#:
+#: A base model has no chat template and will REFUSE this frame. That refusal is
+#: the point and is printed, not swallowed: there is no single frame that is
+#: in-distribution for both a base model and a reasoning rung, so the ladder
+#: cannot be measured end to end under one condition.
+FRAMES = {
+    "raw": dict(template=False),
+    "prefill": dict(prefill=True, system="", user_msg="Hi."),
+}
+
 STEM = "He was beautiful and disgusting and she wanted to"
 
 
@@ -89,12 +119,17 @@ def main(argv=None):
     ap.add_argument("--n", type=int, default=150)
     ap.add_argument("--stem", default=STEM)
     ap.add_argument("--seed", type=int, default=20260822)
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"))
     a = ap.parse_args(argv)
     from malignment import Checkpoint
 
     models = a.models or LADDERS[a.ladder]
-    print("ladder %s | %d rungs | stem %r | n=%d each"
-          % (a.ladder, len(models), a.stem[:44], a.n), flush=True)
+    #: print the RESOLVED list, not `--ladder`. With `--models` given, the
+    #: ladder name is stale and the banner said "ladder olmo-tiny" over a run
+    #: of smol3 checkpoints -- a log that misidentifies its own population.
+    print("%d rungs | frame %s | stem %r | n=%d each\n  %s"
+          % (len(models), a.frame, a.stem[:44], a.n,
+             "\n  ".join(m for m in models)), flush=True)
     t0 = time.time()
     for i, m in enumerate(models, 1):
         t = time.time()
@@ -108,7 +143,16 @@ def main(argv=None):
             print("  [%d/%d] %-42s LOAD FAILED: %s"
                   % (i, len(models), m.split("/")[-1], str(e)[:120]), flush=True)
             continue
-        ps = ck.generate(a.stem, n=a.n, seed=a.seed, loaded=ld, template=False)
+        try:
+            ps = ck.generate(a.stem, n=a.n, seed=a.seed, loaded=ld, **FRAMES[a.frame])
+        except Exception as e:
+            #: a template REFUSAL is a property of the rung, not a crash. A base
+            #: model has no chat template, so the prefill frame is unavailable
+            #: to it -- which is the asymmetry this frame exists to expose, and
+            #: it belongs in the output rather than in a traceback.
+            print("  [%d/%d] %-42s FRAME REFUSED: %s"
+                  % (i, len(models), m.split("/")[-1], str(e)[:110]), flush=True)
+            continue
         print("  [%d/%d] %-42s %3d passages  %5.1fs  median %d new tokens"
               % (i, len(models), m.split("/")[-1], len(ps), time.time() - t,
                  statistics.median(p.n_new_tokens for p in ps)), flush=True)
