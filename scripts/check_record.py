@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-"""THE GATE. Six assertions about the environment record. Exits non-zero.
+"""THE GATE. Assertions about the environment record. Exits non-zero.
+
+The count is deliberately not written here. It said "Six" while eight were
+registered, two commits after the sixth -- a stale number in the first line of
+the file whose entire job is catching stale derived state. `--help` and the
+final tally both count `CHECKS`, which cannot drift.
 
     python scripts/check_record.py
     python scripts/check_record.py --only writes_to_archive
@@ -107,7 +112,8 @@ def derived_not_stale(v):
     """
     bad = []
     for rel in ("roster/models/requirements.json",
-                "roster/models/version_windows.json"):
+                "roster/models/version_windows.json",
+                "roster/models/edge_facts.json"):
         p = os.path.join(ROOT, rel)
         if not os.path.exists(p):
             bad.append("%s missing -- run scripts/build_requirements.py --write"

@@ -1,0 +1,1595 @@
+{
+ "_about": "Facts belonging to an EDGE rather than to either model. A vocab mismatch is invisible to every per-model check: beaver-7b and llama-7b both load, and cross-scoring them dies on 32000 vs 32001.",
+ "_producer": "scripts/build_edge_facts.py",
+ "_sources": [
+  "roster/models/models.yaml",
+  "roster/models/measurements.json"
+ ],
+ "_ruling": "A mismatch is a HAZARD, not a verdict. Safe over a shared support, unsafe for index-aligned comparison. The consumer rules; this file reports the delta.",
+ "n": 156,
+ "edges": [
+  {
+   "parent": "01-ai/Yi-1.5-9B",
+   "op": "instruct",
+   "child": "01-ai/Yi-1.5-9B-Chat",
+   "kind": "edge",
+   "vocab_parent": 63992,
+   "vocab_child": 63992,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "Aleph-Alpha/Pharia-1-LLM-7B-control-hf",
+   "op": "dpo",
+   "child": "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf",
+   "kind": "edge",
+   "vocab_parent": 128000,
+   "vocab_child": 128000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "BAAI/Aquila2-7B",
+   "op": "sft",
+   "child": "BAAI/AquilaChat2-7B",
+   "kind": "edge",
+   "vocab_parent": 143973,
+   "vocab_child": 100008,
+   "vocab_delta": -43965,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by -43965 (143973 vs 100008). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "BSC-LT/salamandra-7b",
+   "op": "sft",
+   "child": "BSC-LT/salamandra-7b-instruct",
+   "kind": "edge",
+   "vocab_parent": 256000,
+   "vocab_child": 256000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "ContextualAI/archangel_sft_pythia2-8b",
+   "op": "dpo",
+   "child": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "ContextualAI/archangel_sft_pythia2-8b",
+   "op": "kto",
+   "child": "ContextualAI/archangel_sft-kto_pythia2-8b",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "ContextualAI/archangel_sft_pythia2-8b",
+   "op": "ppo",
+   "child": "ContextualAI/archangel_sft-ppo_pythia2-8b",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "ContextualAI/archangel_sft_pythia2-8b",
+   "op": "slic",
+   "child": "ContextualAI/archangel_sft-slic_pythia2-8b",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "EleutherAI/pythia-2.8b",
+   "op": "sft",
+   "child": "ContextualAI/archangel_sft_pythia2-8b",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "EleutherAI/pythia-6.9b",
+   "op": "sft",
+   "child": "lomahony/eleuther-pythia6.9b-hh-sft",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "HuggingFaceH4/mistral-7b-sft-beta",
+   "op": "dpo",
+   "child": "HuggingFaceH4/zephyr-7b-beta",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "HuggingFaceTB/SmolLM2-360M",
+   "op": "instruct",
+   "child": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "kind": "edge",
+   "vocab_parent": 49152,
+   "vocab_child": 49152,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "HuggingFaceTB/SmolLM3-3B-Base",
+   "op": "sft",
+   "child": "HuggingFaceTB/SmolLM3-3B-checkpoints",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "HuggingFaceTB/SmolLM3-3B-checkpoints",
+   "op": "apo",
+   "child": "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": 128256,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO",
+   "op": "instruct",
+   "child": "HuggingFaceTB/SmolLM3-3B",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "LLM360/Amber",
+   "op": "sft",
+   "child": "LLM360/AmberChat",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "LLM360/AmberChat",
+   "op": "dpo",
+   "child": "LLM360/AmberSafe",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "OpenLLM-France/Lucie-7B",
+   "op": "sft",
+   "child": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "kind": "edge",
+   "vocab_parent": 65024,
+   "vocab_child": 65024,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "PKU-Alignment/alpaca-7b-reproduced",
+   "op": "rlhf",
+   "child": "PKU-Alignment/beaver-7b-v1.0",
+   "kind": "edge",
+   "vocab_parent": 32001,
+   "vocab_child": 32001,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "Qwen/Qwen2.5-0.5B",
+   "op": "instruct",
+   "child": "Qwen/Qwen2.5-0.5B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 151665,
+   "vocab_child": 151665,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "Qwen/Qwen2.5-7B",
+   "op": "distill",
+   "child": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+   "kind": "edge",
+   "vocab_parent": 151665,
+   "vocab_child": 151665,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "Qwen/Qwen2.5-7B",
+   "op": "instruct",
+   "child": "Qwen/Qwen2.5-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 151665,
+   "vocab_child": 151665,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "Qwen/Qwen3-8B-Base",
+   "op": "distill_align",
+   "child": "Qwen/Qwen3-8B",
+   "kind": "edge",
+   "vocab_parent": 151669,
+   "vocab_child": 151669,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "RWKV/rwkv-4-7b-pile",
+   "op": "sft",
+   "child": "RWKV/rwkv-raven-7b",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "op": "instruct",
+   "child": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "Zyphra/Zamba2-7B",
+   "op": "instruct",
+   "child": "Zyphra/Zamba2-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 32001,
+   "vocab_child": 32000,
+   "vocab_delta": -1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by -1 (32001 vs 32000). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+   "op": "rlvr",
+   "child": "allenai/Llama-3.1-Tulu-3.1-8B",
+   "kind": "edge",
+   "vocab_parent": 128257,
+   "vocab_child": 128257,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+   "op": "dpo",
+   "child": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+   "kind": "edge",
+   "vocab_parent": 128257,
+   "vocab_child": 128257,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B",
+   "op": "sft",
+   "child": "allenai/OLMo-2-0425-1B-SFT",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B-DPO",
+   "op": "rlvr",
+   "child": "allenai/OLMo-2-0425-1B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B-SFT",
+   "op": "dpo",
+   "child": "allenai/OLMo-2-0425-1B-DPO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMoE-1B-7B-0125",
+   "op": "sft",
+   "child": "allenai/OLMoE-1B-7B-0125-SFT",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMoE-1B-7B-0125-DPO",
+   "op": "rlvr",
+   "child": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMoE-1B-7B-0125-SFT",
+   "op": "dpo",
+   "child": "allenai/OLMoE-1B-7B-0125-DPO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1025-7B",
+   "op": "sft",
+   "child": "allenai/Olmo-3-7B-Instruct-SFT",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1025-7B",
+   "op": "sft",
+   "child": "allenai/Olmo-3-7B-Think-SFT",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1125-32B",
+   "op": "sft",
+   "child": "allenai/Olmo-3.1-32B-Instruct-SFT",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-7B-Instruct-DPO",
+   "op": "rlvr",
+   "child": "allenai/Olmo-3-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-7B-Instruct-SFT",
+   "op": "dpo",
+   "child": "allenai/Olmo-3-7B-Instruct-DPO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-7B-Think-DPO",
+   "op": "rlvr",
+   "child": "allenai/Olmo-3-7B-Think",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-7B-Think-SFT",
+   "op": "dpo",
+   "child": "allenai/Olmo-3-7B-Think-DPO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3.1-32B-Instruct-DPO",
+   "op": "rlvr",
+   "child": "allenai/Olmo-3.1-32B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3.1-32B-Instruct-SFT",
+   "op": "dpo",
+   "child": "allenai/Olmo-3.1-32B-Instruct-DPO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-Hybrid-7B",
+   "op": "sft",
+   "child": "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+   "kind": "edge",
+   "vocab_parent": 100278,
+   "vocab_child": 100278,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+   "op": "dpo",
+   "child": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "kind": "edge",
+   "vocab_parent": 100278,
+   "vocab_child": 100278,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "baichuan-inc/Baichuan2-7B-Base",
+   "op": "instruct",
+   "child": "baichuan-inc/Baichuan2-7B-Chat",
+   "kind": "edge",
+   "vocab_parent": 125696,
+   "vocab_child": 125696,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "bigscience/bloom-7b1",
+   "op": "sft",
+   "child": "bigscience/bloomz-7b1",
+   "kind": "edge",
+   "vocab_parent": 250680,
+   "vocab_child": 250680,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "croissantllm/CroissantLLMBase",
+   "op": "sft",
+   "child": "croissantllm/CroissantLLMChat-v0.1",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32002,
+   "vocab_delta": 2,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 2 (32000 vs 32002). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "deepseek-ai/deepseek-llm-7b-base",
+   "op": "sft",
+   "child": "deepseek-ai/deepseek-llm-7b-chat",
+   "kind": "edge",
+   "vocab_parent": 100015,
+   "vocab_child": 100015,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "gl198976/mpt-7b",
+   "op": "sft",
+   "child": "gl198976/mpt-7b-instruct",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "gl198976/mpt-7b",
+   "op": "sft",
+   "child": "Alchan/mpt-7b-chat",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50279,
+   "vocab_delta": 2,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 2 (50277 vs 50279). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "google/gemma-2-9b",
+   "op": "instruct",
+   "child": "google/gemma-2-9b-it",
+   "kind": "edge",
+   "vocab_parent": 256000,
+   "vocab_child": 256000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "google/recurrentgemma-9b",
+   "op": "instruct",
+   "child": "google/recurrentgemma-9b-it",
+   "kind": "edge",
+   "vocab_parent": 256000,
+   "vocab_child": 256000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "huggyllama/llama-7b",
+   "op": "sft",
+   "child": "PKU-Alignment/alpaca-7b-reproduced",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32001,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (32000 vs 32001). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "ibm-granite/granite-3.0-8b-base",
+   "op": "instruct",
+   "child": "ibm-granite/granite-3.0-8b-instruct",
+   "kind": "edge",
+   "vocab_parent": 49152,
+   "vocab_child": 49155,
+   "vocab_delta": 3,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 3 (49152 vs 49155). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "inceptionai/jais-family-6p7b",
+   "op": "sft",
+   "child": "inceptionai/jais-family-6p7b-chat",
+   "kind": "edge",
+   "vocab_parent": 84992,
+   "vocab_child": 84992,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "internlm/internlm2-base-7b",
+   "op": "sft",
+   "child": "internlm/internlm2-chat-7b-sft",
+   "kind": "edge",
+   "vocab_parent": 92544,
+   "vocab_child": 92544,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "internlm/internlm2-chat-7b-sft",
+   "op": "rlhf",
+   "child": "internlm/internlm2-chat-7b",
+   "kind": "edge",
+   "vocab_parent": 92544,
+   "vocab_child": 92544,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "kakaocorp/kanana-1.5-8b-base",
+   "op": "instruct",
+   "child": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128259,
+   "vocab_delta": 3,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 3 (128256 vs 128259). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "kakaocorp/kanana-2-3b-base",
+   "op": "instruct",
+   "child": "kakaocorp/kanana-2-3b-instruct",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "llm-jp/llm-jp-3-7.2b",
+   "op": "sft",
+   "child": "llm-jp/llm-jp-3-7.2b-instruct2",
+   "kind": "edge",
+   "vocab_parent": 99574,
+   "vocab_child": 99574,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "llm-jp/llm-jp-3-7.2b-instruct2",
+   "op": "dpo",
+   "child": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "kind": "edge",
+   "vocab_parent": 99574,
+   "vocab_child": 99574,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "lomahony/eleuther-pythia6.9b-hh-sft",
+   "op": "dpo",
+   "child": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "m-a-p/CT-LLM-Base",
+   "op": "sft",
+   "child": "m-a-p/CT-LLM-SFT",
+   "kind": "edge",
+   "vocab_parent": 125699,
+   "vocab_child": 125699,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "m-a-p/CT-LLM-SFT",
+   "op": "dpo",
+   "child": "m-a-p/CT-LLM-SFT-DPO",
+   "kind": "edge",
+   "vocab_parent": 125699,
+   "vocab_child": 125699,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "m-a-p/neo_7b",
+   "op": "sft",
+   "child": "m-a-p/neo_7b_sft_v0.1",
+   "kind": "edge",
+   "vocab_parent": 64005,
+   "vocab_child": 64005,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "m-a-p/neo_7b_sft_v0.1",
+   "op": "dpo",
+   "child": "m-a-p/neo_7b_instruct_v0.1",
+   "kind": "edge",
+   "vocab_parent": 64005,
+   "vocab_child": 64005,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-70B",
+   "op": "instruct",
+   "child": "meta-llama/Llama-3.1-70B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "distill",
+   "child": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned",
+   "byte_notation": "bytelevel -> sentencepiece",
+   "byte_notation_hazard": "the arms disagree on tokenizer notation, and v4's decoded_boundary rule bites on byte-level surfaces only -- so the INSTRUMENT differs between the two things being compared."
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "instruct",
+   "child": "meta-llama/Llama-3.1-8B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "sft",
+   "child": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128257,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (128256 vs 128257). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "sft",
+   "child": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128257,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (128256 vs 128257). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "sft",
+   "child": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128257,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (128256 vs 128257). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "sft",
+   "child": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128257,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (128256 vs 128257). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "sft",
+   "child": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128257,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (128256 vs 128257). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "microsoft/phi-4",
+   "op": "sft",
+   "child": "microsoft/phi-4-reasoning",
+   "kind": "edge",
+   "vocab_parent": 100352,
+   "vocab_child": 100352,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "microsoft/phi-4-reasoning",
+   "op": "rlvr",
+   "child": "microsoft/Phi-4-reasoning-plus",
+   "kind": "edge",
+   "vocab_parent": 100352,
+   "vocab_child": 100352,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "mistralai/Mistral-7B-v0.1",
+   "op": "instruct",
+   "child": "mistralai/Mistral-7B-Instruct-v0.1",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "mistralai/Mistral-7B-v0.1",
+   "op": "sft",
+   "child": "HuggingFaceH4/mistral-7b-sft-beta",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "openGPT-X/Teuken-7B-base-v0.6",
+   "op": "sft",
+   "child": "openGPT-X/Teuken-7B-instruct-v0.6",
+   "kind": "edge",
+   "vocab_parent": 250680,
+   "vocab_child": 250680,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "openbmb/MiniCPM5-1B-Base",
+   "op": "sft",
+   "child": "openbmb/MiniCPM5-1B-SFT",
+   "kind": "edge",
+   "vocab_parent": 130560,
+   "vocab_child": 130560,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "openbmb/MiniCPM5-1B-SFT",
+   "op": "distill_align",
+   "child": "openbmb/MiniCPM5-1B",
+   "kind": "edge",
+   "vocab_parent": 130560,
+   "vocab_child": 130560,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "stabilityai/stablelm-2-1_6b",
+   "op": "dpo",
+   "child": "stabilityai/stablelm-2-1_6b-chat",
+   "kind": "edge",
+   "vocab_parent": 100289,
+   "vocab_child": 100289,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "stabilityai/stablelm-2-1_6b",
+   "op": "dpo",
+   "child": "stabilityai/stablelm-2-zephyr-1_6b",
+   "kind": "edge",
+   "vocab_parent": 100289,
+   "vocab_child": 100289,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "op": "instruct",
+   "child": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "kind": "edge",
+   "vocab_parent": 65024,
+   "vocab_child": 65001,
+   "vocab_delta": -23,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by -23 (65024 vs 65001). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "tiiuae/Falcon-H1-1.5B-Base",
+   "op": "instruct",
+   "child": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "tiiuae/Falcon-H1-7B-Base",
+   "op": "instruct",
+   "child": "tiiuae/Falcon-H1-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "tiiuae/Falcon3-10B-Base",
+   "op": "instruct",
+   "child": "tiiuae/Falcon3-10B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 131072,
+   "vocab_child": 131072,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/Falcon3-1B-Base",
+   "op": "instruct",
+   "child": "tiiuae/Falcon3-1B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 131072,
+   "vocab_child": 131072,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/Falcon3-3B-Base",
+   "op": "instruct",
+   "child": "tiiuae/Falcon3-3B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 131072,
+   "vocab_child": 131072,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/Falcon3-7B-Base",
+   "op": "instruct",
+   "child": "tiiuae/Falcon3-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 131072,
+   "vocab_child": 131072,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/Falcon3-Mamba-7B-Base",
+   "op": "instruct",
+   "child": "tiiuae/Falcon3-Mamba-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 65024,
+   "vocab_child": 65024,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/falcon-mamba-7b",
+   "op": "sft",
+   "child": "tiiuae/falcon-mamba-7b-instruct",
+   "kind": "edge",
+   "vocab_parent": 65024,
+   "vocab_child": 65024,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/falcon-mamba-7b",
+   "op": "continual",
+   "child": "tiiuae/Falcon3-Mamba-7B-Base",
+   "kind": "edge",
+   "vocab_parent": 65024,
+   "vocab_child": 65024,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "togethercomputer/RedPajama-INCITE-7B-Instruct",
+   "op": "sft",
+   "child": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "op": "sft",
+   "child": "togethercomputer/RedPajama-INCITE-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "zai-org/glm-4-9b-hf",
+   "op": "instruct",
+   "child": "zai-org/glm-4-9b-chat-hf",
+   "kind": "edge",
+   "vocab_parent": 151343,
+   "vocab_child": 151343,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "Qwen/Qwen2.5-0.5B",
+   "op": "scale",
+   "child": "Qwen/Qwen2.5-7B",
+   "kind": "edge",
+   "vocab_parent": 151665,
+   "vocab_child": 151665,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "Qwen/Qwen2.5-0.5B-Instruct",
+   "op": "scale",
+   "child": "Qwen/Qwen2.5-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 151665,
+   "vocab_child": 151665,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B",
+   "op": "predecessor",
+   "child": "allenai/Olmo-3-1025-7B",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B",
+   "op": "predecessor",
+   "child": "allenai/Olmo-3-1125-32B",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B-DPO",
+   "op": "predecessor",
+   "child": "allenai/Olmo-3-7B-Instruct-DPO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B-DPO",
+   "op": "predecessor",
+   "child": "allenai/Olmo-3.1-32B-Instruct-DPO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B-Instruct",
+   "op": "predecessor",
+   "child": "allenai/Olmo-3-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B-Instruct",
+   "op": "predecessor",
+   "child": "allenai/Olmo-3.1-32B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B-SFT",
+   "op": "predecessor",
+   "child": "allenai/Olmo-3-7B-Instruct-SFT",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B-SFT",
+   "op": "predecessor",
+   "child": "allenai/Olmo-3.1-32B-Instruct-SFT",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1025-7B",
+   "op": "scale",
+   "child": "allenai/Olmo-3-1125-32B",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-7B-Instruct",
+   "op": "scale",
+   "child": "allenai/Olmo-3.1-32B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-7B-Instruct-DPO",
+   "op": "scale",
+   "child": "allenai/Olmo-3.1-32B-Instruct-DPO",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-7B-Instruct-SFT",
+   "op": "scale",
+   "child": "allenai/Olmo-3.1-32B-Instruct-SFT",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "scale",
+   "child": "meta-llama/Llama-3.1-70B",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B-Instruct",
+   "op": "scale",
+   "child": "meta-llama/Llama-3.1-70B-Instruct",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/Falcon-H1-1.5B-Base",
+   "op": "scale",
+   "child": "tiiuae/Falcon-H1-7B-Base",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "op": "scale",
+   "child": "tiiuae/Falcon-H1-7B-Instruct",
+   "kind": "edge",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "tiiuae/falcon-7b",
+   "op": "sft",
+   "child": "tiiuae/falcon-7b-instruct",
+   "kind": "edge",
+   "vocab_parent": 65024,
+   "vocab_child": 65024,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "mistralai/Mistral-7B-v0.1",
+   "op": "sft",
+   "child": "teknium/OpenHermes-2.5-Mistral-7B",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32002,
+   "vocab_delta": 2,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 2 (32000 vs 32002). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "teknium/OpenHermes-2.5-Mistral-7B",
+   "op": "dpo",
+   "child": "NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+   "kind": "edge",
+   "vocab_parent": 32002,
+   "vocab_child": 32002,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "mistralai/Mistral-7B-v0.1",
+   "op": "instruct",
+   "child": "openchat/openchat-3.5-0106",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32002,
+   "vocab_delta": 2,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 2 (32000 vs 32002). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "mistralai/Mistral-7B-v0.1",
+   "op": "dpo",
+   "child": "cognitivecomputations/dolphin-2.6-mistral-7b-dpo",
+   "kind": "edge",
+   "vocab_parent": 32000,
+   "vocab_child": 32001,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (32000 vs 32001). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "instruct",
+   "child": "NousResearch/Hermes-3-Llama-3.1-8B",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "sft",
+   "child": "cognitivecomputations/Dolphin3.0-Llama3.1-8B",
+   "kind": "edge",
+   "vocab_parent": 128256,
+   "vocab_child": 128258,
+   "vocab_delta": 2,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 2 (128256 vs 128258). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "tiiuae/Falcon3-7B-Base",
+   "op": "upscale",
+   "child": "tiiuae/Falcon3-10B-Base",
+   "kind": "edge",
+   "vocab_parent": 131072,
+   "vocab_child": 131072,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/Falcon3-7B-Base",
+   "op": "prune",
+   "child": "tiiuae/Falcon3-3B-Base",
+   "kind": "edge",
+   "vocab_parent": 131072,
+   "vocab_child": 131072,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "tiiuae/Falcon3-3B-Base",
+   "op": "prune",
+   "child": "tiiuae/Falcon3-1B-Base",
+   "kind": "edge",
+   "vocab_parent": 131072,
+   "vocab_child": 131072,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "EleutherAI/pythia-2.8b",
+   "op": "lineage",
+   "child": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "kind": "root",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "EleutherAI/pythia-2.8b",
+   "op": "lineage",
+   "child": "ContextualAI/archangel_sft-kto_pythia2-8b",
+   "kind": "root",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "EleutherAI/pythia-2.8b",
+   "op": "lineage",
+   "child": "ContextualAI/archangel_sft-ppo_pythia2-8b",
+   "kind": "root",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "EleutherAI/pythia-2.8b",
+   "op": "lineage",
+   "child": "ContextualAI/archangel_sft-slic_pythia2-8b",
+   "kind": "root",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "EleutherAI/pythia-6.9b",
+   "op": "lineage",
+   "child": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "kind": "root",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "HuggingFaceTB/SmolLM3-3B-Base",
+   "op": "lineage",
+   "child": "HuggingFaceTB/SmolLM3-3B",
+   "kind": "root",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "HuggingFaceTB/SmolLM3-3B-Base",
+   "op": "lineage",
+   "child": "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO",
+   "kind": "root",
+   "vocab_parent": 128256,
+   "vocab_child": 128256,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "LLM360/Amber",
+   "op": "lineage",
+   "child": "LLM360/AmberSafe",
+   "kind": "root",
+   "vocab_parent": 32000,
+   "vocab_child": 32000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B",
+   "op": "lineage",
+   "child": "allenai/OLMo-2-0425-1B-DPO",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMo-2-0425-1B",
+   "op": "lineage",
+   "child": "allenai/OLMo-2-0425-1B-Instruct",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMoE-1B-7B-0125",
+   "op": "lineage",
+   "child": "allenai/OLMoE-1B-7B-0125-DPO",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/OLMoE-1B-7B-0125",
+   "op": "lineage",
+   "child": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1025-7B",
+   "op": "lineage",
+   "child": "allenai/Olmo-3-7B-Instruct",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1025-7B",
+   "op": "lineage",
+   "child": "allenai/Olmo-3-7B-Instruct-DPO",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1025-7B",
+   "op": "lineage",
+   "child": "allenai/Olmo-3-7B-Think",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1025-7B",
+   "op": "lineage",
+   "child": "allenai/Olmo-3-7B-Think-DPO",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1125-32B",
+   "op": "lineage",
+   "child": "allenai/Olmo-3.1-32B-Instruct",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-3-1125-32B",
+   "op": "lineage",
+   "child": "allenai/Olmo-3.1-32B-Instruct-DPO",
+   "kind": "root",
+   "vocab_parent": null,
+   "vocab_child": null,
+   "vocab_delta": null,
+   "vocab_status": "unmeasured"
+  },
+  {
+   "parent": "allenai/Olmo-Hybrid-7B",
+   "op": "lineage",
+   "child": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "kind": "root",
+   "vocab_parent": 100278,
+   "vocab_child": 100278,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "huggyllama/llama-7b",
+   "op": "lineage",
+   "child": "PKU-Alignment/beaver-7b-v1.0",
+   "kind": "root",
+   "vocab_parent": 32000,
+   "vocab_child": 32001,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (32000 vs 32001). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "internlm/internlm2-base-7b",
+   "op": "lineage",
+   "child": "internlm/internlm2-chat-7b",
+   "kind": "root",
+   "vocab_parent": 92544,
+   "vocab_child": 92544,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "llm-jp/llm-jp-3-7.2b",
+   "op": "lineage",
+   "child": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "kind": "root",
+   "vocab_parent": 99574,
+   "vocab_child": 99574,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "m-a-p/CT-LLM-Base",
+   "op": "lineage",
+   "child": "m-a-p/CT-LLM-SFT-DPO",
+   "kind": "root",
+   "vocab_parent": 125699,
+   "vocab_child": 125699,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "m-a-p/neo_7b",
+   "op": "lineage",
+   "child": "m-a-p/neo_7b_instruct_v0.1",
+   "kind": "root",
+   "vocab_parent": 64005,
+   "vocab_child": 64005,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "lineage",
+   "child": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+   "kind": "root",
+   "vocab_parent": 128256,
+   "vocab_child": 128257,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (128256 vs 128257). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "meta-llama/Llama-3.1-8B",
+   "op": "lineage",
+   "child": "allenai/Llama-3.1-Tulu-3.1-8B",
+   "kind": "root",
+   "vocab_parent": 128256,
+   "vocab_child": 128257,
+   "vocab_delta": 1,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 1 (128256 vs 128257). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "microsoft/phi-4",
+   "op": "lineage",
+   "child": "microsoft/Phi-4-reasoning-plus",
+   "kind": "root",
+   "vocab_parent": 100352,
+   "vocab_child": 100352,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "mistralai/Mistral-7B-v0.1",
+   "op": "lineage",
+   "child": "HuggingFaceH4/zephyr-7b-beta",
+   "kind": "root",
+   "vocab_parent": 32000,
+   "vocab_child": 32000,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "mistralai/Mistral-7B-v0.1",
+   "op": "lineage",
+   "child": "NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+   "kind": "root",
+   "vocab_parent": 32000,
+   "vocab_child": 32002,
+   "vocab_delta": 2,
+   "vocab_status": "MISMATCH",
+   "hazard": "vocabularies differ by 2 (32000 vs 32002). Safe for anything over a shared support; UNSAFE for index-aligned tensor comparison -- beaver-7b vs llama-7b is a CUDA device-side assert after 85 sites on a delta of 1."
+  },
+  {
+   "parent": "openbmb/MiniCPM5-1B-Base",
+   "op": "lineage",
+   "child": "openbmb/MiniCPM5-1B",
+   "kind": "root",
+   "vocab_parent": 130560,
+   "vocab_child": 130560,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  },
+  {
+   "parent": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "op": "lineage",
+   "child": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "kind": "root",
+   "vocab_parent": 50277,
+   "vocab_child": 50277,
+   "vocab_delta": 0,
+   "vocab_status": "aligned"
+  }
+ ]
+}
