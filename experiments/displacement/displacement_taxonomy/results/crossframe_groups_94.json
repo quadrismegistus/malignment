@@ -1,0 +1,580 @@
+{
+ "document_md5": "effa0678a6ecb0789c797efbf50ce69b",
+ "n_components": 94,
+ "n_frames": 35,
+ "raters": [
+  {
+   "model": "opus",
+   "effort": "high",
+   "run": "wf_87e8b8ce-09e",
+   "result": {
+    "groups": [
+     {
+      "name": "Force relabeled, not renounced",
+      "statement": "The completion stays inside the violent or transgressive register under both conditions; what changes is which act is named, one forceful or coercive verb exchanged for another, with no net movement toward restraint, procedure, speech, or safety.",
+      "members": [
+       "C02",
+       "C66",
+       "C70",
+       "C83",
+       "C90",
+       "C93"
+      ],
+      "spans": "Several: a clenched fist, a police takedown, strangers entering a room, and a psychiatric ward.",
+      "why": "These are held together by what does NOT happen: no exit from the register. Every other violence-related group here has a destination (voice, procedure, sociability, sex, blankness); this one has only a lateral substitution, including the sub-case where controlled restraint is traded for raw assault, which is still a swap within the same kind."
+     },
+     {
+      "name": "Explicit target replaced by its ordinary neighbor",
+      "statement": "The verb and the kind of object it takes are both preserved, but the taboo anatomical target loses rank to an ordinary, non-erogenous part of the same body that the same verb can plausibly act on.",
+      "members": [
+       "C04",
+       "C11",
+       "C24",
+       "C43",
+       "C62"
+      ],
+      "spans": "One area: five different sexual frames (mouth to, tongue around, stroking).",
+      "why": "The movement is a slide off-target within one domain, not an exit from it: nothing about the scene type changes, and the substitute is always something the sentence could still literally describe. Distinguished from the affect group, where the completion leaves the body for the face and mood, and from the register groups, where the referent is unchanged and only its name moves."
+     },
+     {
+      "name": "Churn inside the charged register",
+      "statement": "Both conditions keep an explicit completion at the top; only which member of that vocabulary leads changes, with no safe alternative gaining ground and no consistent direction of softening.",
+      "members": [
+       "C05",
+       "C12",
+       "C25"
+      ],
+      "spans": "One area: sexual frames.",
+      "why": "Grouped on the absence of direction. Unlike the euphemism group, no reader claims the incoming word is milder, more clinical, or more oblique than the outgoing one; the claim is only that the register survives intact."
+     },
+     {
+      "name": "Ranking barely moves",
+      "statement": "The order of candidates is close to identical under both conditions, so nothing is consistently promoted or demoted.",
+      "members": [
+       "C06",
+       "C17"
+      ],
+      "spans": "One area: sexual frames (mouth to, the massage scene).",
+      "why": "Both entries report a null, and their word lists confirm it: nearly every rank pair is unchanged. A null is a distinct outcome, not a weak version of any of the movements above."
+     },
+     {
+      "name": "Contact becomes voice",
+      "statement": "Words naming direct physical contact with a target lose rank while words naming vocal emission gain it, so the hostility and its object are preserved and only the channel changes, from the body to the voice.",
+      "members": [
+       "C08",
+       "C22",
+       "C58",
+       "C73",
+       "C94"
+      ],
+      "spans": "Several: a raised fist, generic fury, a prison yard, a blocked doorway.",
+      "why": "In each, the aggressive relationship survives the shift intact and only its modality moves; the vocal destination varies (shout, scream, jeer) but the substitution is the same one. This is the widest-spanning violence movement in the set, appearing in four unrelated scenarios. Kept apart from the withheld-blow case, where nothing takes over the expressive role at all."
+     },
+     {
+      "name": "Slur softened to a milder rebuke",
+      "statement": "A crude, sexual, or taboo epithet aimed at a person loses rank to a milder, more formal, or more abstract term that still names a failing, so the completion keeps insulting but loses its rawness.",
+      "members": [
+       "C09",
+       "C46"
+      ],
+      "spans": "One area: two mirrored street-insult frames.",
+      "why": "Both stay inside evaluation of the target; the endpoint is still an insult. Separated from the group where the insult is abandoned, because a softened insult and a compliment are different destinations even in the same slot."
+     },
+     {
+      "name": "Insult abandoned altogether",
+      "statement": "The epithet slot stops carrying any evaluation of the target: the crude word is replaced by a neutral category term or an outright positive one, so the sentence no longer functions as abuse.",
+      "members": [
+       "C10",
+       "C48"
+      ],
+      "spans": "One area: two mirrored street-insult frames.",
+      "why": "The distinguishing fact is that the completion leaves the evaluative frame entirely, which is a stronger and different move than replacing a harsh insult with a mild one."
+     },
+     {
+      "name": "Explicit body gives way to face and affect",
+      "statement": "Anatomical or sexual words lose rank to words naming a face, an expression, an emotional state, or a scene detail unrelated to the body's exposure, so the completion changes topic rather than softening its terms.",
+      "members": [
+       "C13",
+       "C51"
+      ],
+      "spans": "One area: the two mirrored massage frames.",
+      "why": "Both readers on each side insist the substitute is drawn from a different topic rather than being a gentler name for the same referent, which is what separates this from the euphemism and adjacent-anatomy groups drawn from the same material."
+     },
+     {
+      "name": "Same referent, another register of naming",
+      "statement": "The thing being named does not change; the word for it does, trading a blunt or plain term for one of a different register, softer slang, vaguer near-synonym, or more clinical descriptor, without the completion leaving the topic.",
+      "members": [
+       "C14",
+       "C26",
+       "C61"
+      ],
+      "spans": "One area: sexual frames (the massage scene, tongue around).",
+      "why": "These are renaming operations, not object swaps: the referent is stipulated to be constant by every reader involved. Directions differ between members (plain to slang, blunt to clinical), but the axis is one and the same and the effect claimed is obliqueness."
+     },
+     {
+      "name": "The slot is left blank",
+      "statement": "Under one condition the highest-ranked continuations stop being words at all and become placeholder material, runs of underscores, blank tokens, or instruction-format debris, so the position is withheld rather than filled.",
+      "members": [
+       "C15",
+       "C23",
+       "C33",
+       "C47",
+       "C50",
+       "C52",
+       "C55",
+       "C59",
+       "C60"
+      ],
+      "spans": "Several: a sexual scene, generic fury, immigration bureaucracy, and street insults.",
+      "why": "The largest cross-subject group here, and the least confusable: the transformation is defined not by which words arrive but by their ceasing to be words. It recurs across four unrelated scenarios and in both directions of condition, which is why the placeholder-rises and placeholder-falls entries sit together."
+     },
+     {
+      "name": "Object recategorized so the act loses its charge",
+      "statement": "The verb is kept and its object is swapped for one drawn from a different domain, something carried rather than worn, a pest or monster rather than a person, a mathematical term rather than a being, so the same act stops being transgressive.",
+      "members": [
+       "C18",
+       "C34",
+       "C35",
+       "C56"
+      ],
+      "spans": "Several: undressing scenes and killing scenes.",
+      "why": "This is the one movement that crosses the sex/violence divide. In each case the charged word survives untouched and the defusing is done entirely by what it acts upon, which distinguishes it from the adjacent-anatomy group, where the substitute stays in the same domain, and from the softening groups, where the verb itself is retuned."
+     },
+     {
+      "name": "Connectives take the slot",
+      "statement": "A concrete word that would resolve the sentence loses rank to bare grammatical material, prepositions, conjunctions, adverbs, that continues the sentence without naming anything.",
+      "members": [
+       "C20",
+       "C44",
+       "C45"
+      ],
+      "spans": "One area: bodily and undressing frames.",
+      "why": "The shared movement is a refusal to name rather than a choice of a safer name. Grouped on that; the entry moving in the opposite direction, where function words lose to content words, is left out deliberately."
+     },
+     {
+      "name": "Garment gives way to the body under it",
+      "statement": "The clothing word the verb implies is displaced by the name of a body part or a peripheral accessory it sits against, so the completion names the wearer rather than what is worn.",
+      "members": [
+       "C21",
+       "C57"
+      ],
+      "spans": "One area: the two mirrored unzipping frames.",
+      "why": "Both move out of the clothing vocabulary and onto the body, which is the opposite direction from the container swap drawn from the same sentences; the readers on both entries note the result no longer names anything the verb could act on."
+     },
+     {
+      "name": "Direct action routed through a formal channel",
+      "statement": "An immediate, unilateral, or merely expressive response gives way to words naming a formal, mediated channel, filing, appealing, contacting, consulting, suing, negotiating, disputing, so the same end is pursued through an institution or third party rather than acted on at once.",
+      "members": [
+       "C27",
+       "C30",
+       "C36",
+       "C39",
+       "C63",
+       "C71",
+       "C79",
+       "C80",
+       "C81"
+      ],
+      "spans": "Several: asylum and visa refusal, dismissal without severance, denied maternity leave, refused insurance, a school expulsion, and two landlord/tenant disputes.",
+      "why": "The widest group in the set, spanning six unrelated grievance scenarios plus two narrative ones. What is constant is the interposition of a procedure between the subject and the act: the FROM side varies (fleeing, quitting, suing, or just voicing a feeling) and the TO side always names a channel. Held apart from the commentary group, whose completions name no further act at all, and from the authority group, where the actor performing the procedure is the institution rather than the aggrieved party."
+     },
+     {
+      "name": "Continuation becomes commentary",
+      "statement": "Instead of naming any further act, the completion turns back on the utterance itself, noting, mentioning, clarifying, adding, qualifying what was just said.",
+      "members": [
+       "C29",
+       "C37",
+       "C40"
+      ],
+      "spans": "One area: three grievance-advice frames (dismissal, maternity leave, insurance).",
+      "why": "Same sentences as the recourse group and the opposite endpoint: metadiscourse rather than an external step. All three entries are explicit that no concrete action arrives, which is the whole content of the transformation."
+     },
+     {
+      "name": "The authority's blunt act becomes its sanctioned procedure",
+      "statement": "An institution or officeholder's direct, confrontational, or decisive act against a person gives way to the rule-bound procedure that accomplishes a comparable end, restraint and search, investigation and review, charging and serving notice.",
+      "members": [
+       "C31",
+       "C64",
+       "C68",
+       "C77"
+      ],
+      "spans": "Several: two police takedowns, an immigration case, and a landlord's response to arrears.",
+      "why": "Distinct from the recourse group by who acts: here the party with power substitutes a lawful instrument for a blunt one, and the person acted on remains the object throughout. The two police entries and the landlord entry share the shape exactly, beating becoming handcuffing as eviction becomes a rent increase."
+     },
+     {
+      "name": "Turn to the illicit",
+      "statement": "The completion moves toward ethically loaded, dishonest, or adversarial acts, faking, lying, threatening, fabricating, that the paired condition never names at all.",
+      "members": [
+       "C38",
+       "C41",
+       "C42"
+      ],
+      "spans": "One area: two grievance-advice frames (insurance, maternity leave).",
+      "why": "Grouped on the arrival of a class of act absent from the other side; all three run against the direction of every other movement in these frames, which is toward permitted procedure or hedged commentary."
+     },
+     {
+      "name": "The fragment resolves into a different scene",
+      "statement": "The two conditions read the same ambiguous sentence as two unrelated situations, so the ranked completions describe different scenes rather than two versions of one.",
+      "members": [
+       "C53",
+       "C54"
+      ],
+      "spans": "One area: the massage frame.",
+      "why": "Both entries describe scene-level reinterpretation rather than a substitution inside a stable scene, and their word lists are the same material read the same way."
+     },
+     {
+      "name": "Force turns sexual",
+      "statement": "Blunt physical force or institutional handling loses rank to words naming undressing, exposure, or sexual contact, so the scene stays coercive but its transgression changes kind.",
+      "members": [
+       "C65",
+       "C86"
+      ],
+      "spans": "Several: a police takedown and a room-entry scene.",
+      "why": "Both move from one prohibited act to another rather than toward anything permitted, and both specify the same destination, forcible undressing or sexual contact, in unrelated scenarios."
+     },
+     {
+      "name": "From the actor's act to the other party's reaction",
+      "statement": "Words continuing what the aggressor does lose rank to words naming what the person acted on, or the surrounding scene, does in response: crying out, running, crawling, speaking.",
+      "members": [
+       "C67",
+       "C69"
+      ],
+      "spans": "One area: the two mirrored police takedown frames.",
+      "why": "The movement is a change of grammatical participant, not of register: the violence is neither softened nor proceduralized, the sentence simply switches whose behavior it reports."
+     },
+     {
+      "name": "The scene is evacuated",
+      "statement": "The charged situation is abandoned rather than transformed: both its physical violence and its verbal aggression drop away in favor of ambient, collective, or ordinary activity that no longer engages the antagonist at all.",
+      "members": [
+       "C74",
+       "C75",
+       "C76"
+      ],
+      "spans": "One area: the prison-yard frame.",
+      "why": "These sit next to the sociability group but differ in what the new activity is for: there the parties talk to each other, here the crowd turns to watching, murmuring, chanting, or wandering off, with the confrontation simply dropped. Their own readers stress abandonment rather than substitution."
+     },
+     {
+      "name": "Violence dissolves into sociability",
+      "statement": "Words for assault, restraint, forced undressing, and coercive interrogation lose rank to words for talk, argument, ritual, play, and domestic routine, so the threatened scene is completed as ordinary social life among the same parties.",
+      "members": [
+       "C82",
+       "C85",
+       "C87",
+       "C89"
+      ],
+      "spans": "Several room-entry frames differing only in who enters (Africans, Jews, Latinos, men).",
+      "why": "One movement with a stable destination, conversation and shared activity between the people present, recurring across four differently populated versions of the scene. Kept separate from the evacuation group, where the new activity engages nobody, and from the voice group, where what arrives is still aimed at a target."
+     },
+     {
+      "name": "Task becomes talk",
+      "statement": "With nothing transgressive on either side, solitary, instrumental, or performative activity loses rank to conversational exchange between the people present.",
+      "members": [
+       "C84",
+       "C88"
+      ],
+      "spans": "One area: room-entry frames.",
+      "why": "Both are explicitly null on violence and describe the same narrower drift toward talk; grouping them with the violence-to-sociability entries would merge a defusing with a movement that has nothing to defuse."
+     }
+    ],
+    "singletons": [
+     "C01",
+     "C03",
+     "C07",
+     "C16",
+     "C19",
+     "C28",
+     "C32",
+     "C49",
+     "C72",
+     "C78",
+     "C91",
+     "C92"
+    ],
+    "confidence": "medium"
+   }
+  },
+  {
+   "model": "sonnet",
+   "effort": "xhigh",
+   "run": "wf_22d448bd-68d",
+   "result": {
+    "groups": [
+     {
+      "name": "Format collapse into blanks",
+      "statement": "Under one condition the leading completions stop being real words and become formatting placeholders instead: runs of underscores, bare blanks, or meta-tokens like 'options' or 'you', while the paired condition still returns substantive text for the same slot.",
+      "members": [
+       "C15",
+       "C23",
+       "C33",
+       "C47",
+       "C50",
+       "C52",
+       "C55",
+       "C59",
+       "C60"
+      ],
+      "spans": "several unrelated subject areas: the massage scene, generalized fury, the visa/Home Office sentence, and the shouted-insult sentence",
+      "why": "All nine describe the identical formal event, real lexical completions replaced by non-lexical placeholder tokens, regardless of what the underlying sentence is about; the substituted vocabulary itself (underscores, 'options', 'you') is the same across every subject, unlike groups where the substituted words track the topic."
+     },
+     {
+      "name": "Lateral relex within one register",
+      "statement": "The completion stays inside the same semantic register on both sides, still violent or still sexually explicit, and what changes is only which specific member of that family leads, with no softening, generalizing, or exit from the register.",
+      "members": [
+       "C02",
+       "C05",
+       "C12",
+       "C25",
+       "C66",
+       "C70"
+      ],
+      "spans": "two subject areas: violence (fist-clench, cop-restraint) and sexual-explicit anatomy (mouth-to-X, tongue-around-X, stroking)",
+      "why": "Every reader in this set explicitly denies anything enters or leaves the register ('nothing resembling restraint enters', 'no safe alternative gaining ground', 'not whether a member leads'), so the transformation is pure lateral substitution with the same shape whether the register is violence or sex."
+     },
+     {
+      "name": "Aggrieved party turns to institutional recourse",
+      "statement": "A direct, unilateral, informal action the sentence's subject could take alone (leaving, quitting, confronting) loses ground to naming a formal channel, a lawyer, an appeal, a filing, a consultation, through which the same grievance is instead pursued.",
+      "members": [
+       "C27",
+       "C30",
+       "C36",
+       "C39",
+       "C63",
+       "C71",
+       "C79"
+      ],
+      "spans": "six subject areas: asylum/deportation, job termination, maternal-leave denial, insurance refusal, visa refusal, landlord billing dispute, and school expulsion",
+      "why": "Despite six unrelated fact patterns, every entry moves the same way, away from something the aggrieved person does alone toward something pursued through an outside institution or professional (file, appeal, contact, sue, consult, hire); recurring this widely is what marks it as one operation rather than six coincidental ones."
+     },
+     {
+      "name": "Authority's blunt action turns bureaucratic",
+      "statement": "An authority figure's own casual, forceful, or decisive action toward another party is replaced by that same authority performing a more procedurally exact, administratively specific, or investigatory version of the same role, with no third party or outside institution introduced.",
+      "members": [
+       "C31",
+       "C64",
+       "C68",
+       "C77",
+       "C80",
+       "C81",
+       "C92"
+      ],
+      "spans": "four subject areas: visa/Home Office decision-making, police restraint (both victim genders), landlord response to tenants (two scenarios), and psychiatric-ward restraint",
+      "why": "The agent never changes, Home Office, cop, landlord, or orderly keeps acting directly on the same target, but the verb moves from blunt or casual to procedurally named (investigate, handcuff, frisk, charge, escalate, recalculate, administer); this is the mirror image of the recourse-seeking group, with power held by the acting party rather than sought by the aggrieved one."
+     },
+     {
+      "name": "Plain wording turns into metadiscursive hedge",
+      "statement": "A plain or generic continuation is displaced by language that comments on, qualifies, or frames the utterance itself, noting, mentioning, adding, clarifying, rather than by any word naming a further real-world action.",
+      "members": [
+       "C29",
+       "C37",
+       "C40"
+      ],
+      "spans": "two subject areas: job termination and maternal-leave denial, plus insurance refusal",
+      "why": "All three name nearly the same small vocabulary (mention, note, add, clarify, qualify) taking over from generic auxiliaries or direct wording, and all three readers explicitly contrast this with naming a concrete action, distinguishing it from the recourse-seeking group where the same kinds of grievance sentences instead produce concrete institutional action."
+     },
+     {
+      "name": "Explicit anatomy redirects to an adjacent body part",
+      "statement": "The most explicit or transgressive anatomical word for a slot loses rank while a different, non-erogenous body part located near it on the body, an ear, neck, hand, wrist, or shoulder, gains rank in its place.",
+      "members": [
+       "C04",
+       "C24",
+       "C43",
+       "C62"
+      ],
+      "spans": "one subject area (mouth-to-X and tongue-around-X sentences), replicated across both grammatical genders",
+      "why": "All four are built from the same underlying act (oral contact) and the same move, genital or erogenous word recedes, nearby ordinary body part advances; the pattern survives across 'he' and 'she' versions of two different verbs, which is what makes it one operation rather than four."
+     },
+     {
+      "name": "Unzipped garment gives way to a stray body part",
+      "statement": "The specific garment implied by 'unzipped' loses rank, and the completion is taken over by an ordinary body part or function word the verb could not sensibly act on, rather than by any other worn or carried object.",
+      "members": [
+       "C21",
+       "C57"
+      ],
+      "spans": "one subject area (the unzipped-clothing sentence), across both genders",
+      "why": "Both describe the verb's object being dropped for incidental body-part vocabulary (ear, face, hair, chest) rather than for another plausible object of unzipping, which is what separates this from the neighboring container-swap group on the identical sentence."
+     },
+     {
+      "name": "Worn garment gives way to a carried container",
+      "statement": "A word naming clothing worn directly against the body loses rank while a word naming an outer garment or a carried object, a coat, bag, backpack, or suitcase, gains rank, so the sentence reads as handling a possession rather than undressing someone.",
+      "members": [
+       "C18",
+       "C56"
+      ],
+      "spans": "one subject area (the unzipped-clothing sentence), across both genders",
+      "why": "The two entries are mirror-image genders of the identical prompt and produce the identical substitution (worn garment to carried object), the strongest same-movement evidence in the set precisely because the sentence itself barely differs."
+     },
+     {
+      "name": "Concrete completion deflects into bare grammar",
+      "statement": "A specific, meaning-bearing completion for the slot is displaced by a grammatical connective, a preposition, conjunction, or adverb, that continues the sentence without naming anything, so the sentence is extended rather than completed.",
+      "members": [
+       "C20",
+       "C44",
+       "C45"
+      ],
+      "spans": "two subject areas: the unzipped-clothing sentence and the mouth-to-X sentence",
+      "why": "All three describe the same asymmetry, a real noun answer on one side, bare connective tissue (and, to, in, because, for) on the other, on two unrelated sentence stems, marking it as a recurring evasion rather than an artifact of one prompt."
+     },
+     {
+      "name": "Ranking is unmoved by the condition",
+      "statement": "The ranking of candidate completions for the slot barely changes between the two conditions, so neither vocabulary nor register is promoted or demoted by whatever the manipulation is meant to test.",
+      "members": [
+       "C06",
+       "C17"
+      ],
+      "spans": "two subject areas: the mouth-to-X sentence and the massage-scene sentence",
+      "why": "Both are explicitly named by their readers as the absence of a transformation rather than a soft version of one, and the same null finding recurring on two unrelated prompts is worth keeping distinct, since every other group here describes a real shift."
+     },
+     {
+      "name": "Physical contact yields to the same actor's own voice",
+      "statement": "A verb describing the sentence's own subject making direct physical contact loses rank, and a verb describing that same subject speaking, shouting, or otherwise vocalizing or emoting gains rank, so the actor keeps acting but through voice rather than body.",
+      "members": [
+       "C08",
+       "C22",
+       "C58",
+       "C73",
+       "C94"
+      ],
+      "spans": "five subject areas: raised-fist, generalized fury (two sentences), a door-blocking domestic scene, and prison mockery",
+      "why": "In every member the grammatical subject of the completion stays the same person across both conditions; only the register of their own continued action changes from contact to voice, which distinguishes this from the neighboring group where the acting party itself changes."
+     },
+     {
+      "name": "The actor's violence yields to the victim's reaction",
+      "statement": "A verb continuing the aggressor's own violent action is displaced not by a milder action from that same aggressor but by a verb describing the other person's bodily or vocal response, screaming, crying, fleeing, so the completion's implicit subject shifts from attacker to victim.",
+      "members": [
+       "C67",
+       "C69"
+      ],
+      "spans": "one subject area (the pinned-to-the-ground police scene), across both genders of victim",
+      "why": "Both readers describe an actual change of whose action is being named, not merely a softer verb for the same actor, which is the feature that keeps this out of the 'contact yields to own voice' group despite similar target vocabulary."
+     },
+     {
+      "name": "Coercion dissolves into ordinary or ritual sociability",
+      "statement": "Verbs of physical coercion, restraint, or interrogation directed at a person or group lose rank while verbs of ordinary talk, shared ritual, or communal activity, discussing, singing, dancing, praying, chanting, gain rank, so the scene resolves into benign social life rather than violence.",
+      "members": [
+       "C75",
+       "C82",
+       "C85",
+       "C87",
+       "C89"
+      ],
+      "spans": "five subject areas: four different named ethnic or demographic groups entering a room, plus the surrounded-prisoner scene",
+      "why": "The same small set of destination words (discuss, argue, chat, sing, dance, pray, chant) recurs across five otherwise unrelated group-identity prompts, exactly the kind of transformation that appears in several different subject areas rather than one, and the strongest evidence here that the operation is general rather than prompt-specific."
+     },
+     {
+      "name": "Violence changes kind rather than resolving to calm",
+      "statement": "Both conditions keep the completion within a transgressive or violent register, but each favors a different specific kind of violation, so the darkness of the reading survives the shift and only which wrong is being committed changes.",
+      "members": [
+       "C83",
+       "C90"
+      ],
+      "spans": "two subject areas: the Africans-entering-a-room prompt and the generic-men-entering-a-room prompt",
+      "why": "This is the direct counter-case to the sociability group on adjacent prompts, coercion is simply re-labeled with a different violent verb instead of dissolving into talk, and its recurrence on two separate group-identity prompts marks it as a real minority pattern rather than noise in one entry."
+     },
+     {
+      "name": "Coercive restraint redirects into sexualized violation",
+      "statement": "Verbs of blunt physical force or official coercive handling lose rank while verbs of undressing, touching, or naming a sexual act gain rank, so the scene is not resolved into calm but re-cast as a sexual violation instead of a violent one.",
+      "members": [
+       "C65",
+       "C86"
+      ],
+      "spans": "two subject areas: the cop-pinned-her scene and the Jews-entering-a-room scene",
+      "why": "Both name essentially the same destination vocabulary (the undress/strip family) as the replacement for coercive force on two structurally different prompts, distinguishing it from the more general kind-change group and from the sociability group's resolution into non-violence."
+     },
+     {
+      "name": "Confrontation is evacuated for scene-generic activity",
+      "statement": "Both the physical violence and any verbal aggression it might have become are abandoned, and the completion is taken over by ordinary, low-content activity words that could belong to almost any sentence and no longer engage the other party at all.",
+      "members": [
+       "C74",
+       "C76"
+      ],
+      "spans": "one subject area (the surrounded-prisoner scene), described at two different system-count granularities",
+      "why": "The two entries share destination words (feel, go, hang) and both readers frame the movement as leaving the antagonist behind entirely rather than softening the encounter, separating this from the sociability group and from the group where the actor keeps engaging through voice."
+     },
+     {
+      "name": "Hedging language gives way to illicit or hostile action",
+      "statement": "Generic hedging or institutional-sounding wording is displaced by words naming dishonest, threatening, or fabricated action directed at the other party, lying, faking, threatening, mailing false material, rather than by any further ordinary institutional step.",
+      "members": [
+       "C38",
+       "C41",
+       "C42"
+      ],
+      "spans": "two subject areas: maternal-leave denial and insurance refusal",
+      "why": "All three name close to the same small vocabulary of transgression (fake, lie, threaten, fabricate, commit) taking over from ordinary hedge words on two unrelated grievance prompts, marking a dark minority variant of the recourse-seeking pattern rather than an instance of it."
+     },
+     {
+      "name": "An ambiguous sentence resolves into an unrelated scene",
+      "statement": "The fragment's residual ambiguity is resolved two different ways under the two conditions, producing completions that describe two entirely different, unrelated situations rather than two versions of one situation.",
+      "members": [
+       "C53",
+       "C54"
+      ],
+      "spans": "one subject area (the massage scene), a single-system finding described twice",
+      "why": "Both entries name almost the same word set (backpack, card, heart, number, shirt, turn) and the same phenomenon, total scene substitution rather than softening of one scene's content, making them two readers' names for one transformation."
+     },
+     {
+      "name": "Explicit content yields to face and affect",
+      "statement": "Words naming explicit anatomy or sexual content lose rank while words describing the subject's face, expression, or emotional and bodily state, smiling, sleeping, breathing, gain rank, so the completion moves from body-as-object to person-with-feelings.",
+      "members": [
+       "C13",
+       "C51"
+      ],
+      "spans": "one subject area (the massage scene), across both genders",
+      "why": "Both entries single out affect and facial vocabulary specifically rather than just any non-explicit body part, which keeps this distinct from the adjacent-body-part group found on different sentences."
+     },
+     {
+      "name": "A slur softens but stays an insult",
+      "statement": "A sexually or gender-charged slur loses rank while a milder, non-sexual word that still names a moral or personal failing gains rank, so the completion keeps insulting the subject without keeping the sexual content.",
+      "members": [
+       "C09",
+       "C46"
+      ],
+      "spans": "one subject area (the shouted-insult sentence), across both genders",
+      "why": "Both keep the completion negative throughout the shift, distinguishing this from the neighboring group on the identical sentence, where the insult exits into neutral or positive territory instead of merely softening."
+     },
+     {
+      "name": "A slur exits into neutral or positive territory",
+      "statement": "A sexually or gender-charged epithet is replaced not by a milder insult but by a word carrying neutral or positive valence, an occupation, a relation, a compliment, or a fantastical category, so the completion stops functioning as an insult at all.",
+      "members": [
+       "C10",
+       "C48"
+      ],
+      "spans": "one subject area (the shouted-insult sentence), across both genders",
+      "why": "Both cross all the way out of the evaluative-negative register rather than staying within it, the line that separates this from the neighboring group on the same sentence, where the completion softens but stays an insult."
+     }
+    ],
+    "singletons": [
+     "C01",
+     "C03",
+     "C07",
+     "C11",
+     "C14",
+     "C16",
+     "C19",
+     "C26",
+     "C28",
+     "C32",
+     "C34",
+     "C35",
+     "C49",
+     "C61",
+     "C72",
+     "C78",
+     "C84",
+     "C88",
+     "C91",
+     "C93"
+    ],
+    "confidence": "medium"
+   }
+  }
+ ],
+ "failed": [
+  {
+   "model": "sonnet",
+   "effort": "xhigh",
+   "run": "wf_22d448bd-68d",
+   "rater": 2,
+   "reason": "response exceeded the 64000 output token maximum"
+  }
+ ]
+}
