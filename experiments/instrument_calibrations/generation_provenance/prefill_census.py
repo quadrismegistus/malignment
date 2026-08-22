@@ -100,7 +100,8 @@ def probe(model_id):
     from malignment import runners as R, twp as T
     from malignment import generate as G
     rec = {"model": model_id, "verdict": "", "detail": "",
-           "template": 0, "sys_ok": "", "added_chars": ""}
+           "template": 0, "sys_ok": "", "sys_empty_ok": "",
+           "added_chars": "", "wrapper": ""}
     repo = model_id.split("@")[0]
     rev = model_id.split("@")[1] if "@" in model_id else None
     try:
@@ -139,12 +140,41 @@ def probe(model_id):
         return rec
     rec["verdict"] = "OK"
     rec["added_chars"] = len(out) - len(STEM)
+    #: **WHAT `DEFAULT` ACTUALLY PUTS IN FRONT OF THE STEM.** `system=DEFAULT`
+    #: supplies no system message, so whatever the template does on its own is
+    #: what the model sees -- and that is not the same intervention twice:
+    #:
+    #:   Olmo-3-7B-Instruct  "You are a helpful function-calling AI assistant..."
+    #:   SmolLM2-360M        "You are a helpful AI assistant named SmolLM..."
+    #:   OLMo-2-1B-Instruct  no system block at all
+    #:
+    #: A between-model frame effect therefore carries a comparison of vendor
+    #: persona policies inside it. That is a real property of deployment, not a
+    #: defect -- but unrecorded it reads as a property of the weights. Stored so
+    #: the treatment each checkpoint received can be READ rather than assumed.
+    rec["wrapper"] = out[:-len(STEM)] if out.endswith(STEM) else ""
+
     try:
         _, sys_ok = G.render(shim, STEM, prefill=True, system=SYSTEM_PROBE)
         rec["sys_ok"] = int(bool(sys_ok))
     except Exception as e:
         rec["sys_ok"] = 0
         rec["detail"] = "system: %s" % type(e).__name__
+    #: **DOES AN EMPTY SYSTEM ACTUALLY DO ANYTHING?** A separate question from
+    #: `sys_ok`, which probes a PERSONA. Templates branch on
+    #: `{% if system_message %}`, and `""` is falsy -- so a model can honour a
+    #: persona and silently ignore an empty one, which is exactly what
+    #: SmolLM3-3B and both Llama-3.1-Instruct arms do.
+    #:
+    #: That matters because `system=""` was the candidate frame for the sweep on
+    #: the grounds that it is UNIFORM. Where it is ignored it is not uniform, it
+    #: is the vendor persona wearing an empty label -- so this column decides
+    #: whether that frame is available per model rather than assumed for all.
+    try:
+        _, e_ok = G.render(shim, STEM, prefill=True, system="")
+        rec["sys_empty_ok"] = int(bool(e_ok))
+    except Exception:
+        rec["sys_empty_ok"] = 0
     return rec
 
 
@@ -185,7 +215,8 @@ def write_measurements(rows, path=MEASUREMENTS):
                      "NO_TOKENIZER = tokenizer will not load | GATED = no access. "
                      "GATED is kept distinct from NO_TEMPLATE deliberately."),
         "models": {r["model"]: {k: r[k] for k in
-                                ("verdict", "template", "sys_ok", "added_chars")
+                                ("verdict", "template", "sys_ok", "sys_empty_ok",
+                                 "added_chars", "wrapper")
                                 if r.get(k) != ""}
                    for r in sorted(rows, key=lambda r: r["model"])},
     }
@@ -195,17 +226,75 @@ def write_measurements(rows, path=MEASUREMENTS):
     return path
 
 
+#: **EACH MODEL IS PROBED IN THE VENV THE ROSTER DECLARES FOR IT.**
+#:
+#: The verdict depends on the transformers version, which is process-global, so a
+#: single-venv census is simply wrong for part of the roster. Measured: running
+#: all 144 under 4.57.1 instead of 5.4.0 flips SIX -- m-a-p/CT-LLM-{Base,SFT,
+#: SFT-DPO} and m-a-p/neo_7b{,_instruct_v0.1,_sft_v0.1} -- from NO_TEMPLATE/OK to
+#: NO_TOKENIZER, because their tokenizers do not load under 4.57.1. All six
+#: declare `.venv`, so the 5.4.0 answer is theirs and the 4.57.1 answer was an
+#: artefact of the interpreter I happened to launch.
+#:
+#: The population splits 108 `.venv` / 36 `.venv-tf457`, so EITHER single-venv
+#: run is wrong for one group. CLAUDE.md's rule -- "Hardcoding one venv for a
+#: queue is what broke Baichuan2 for an hour" -- applies to a census as much as
+#: to a fleet, and this instrument had the defect it was measuring around.
+#:
+#: transformers cannot be swapped inside a live process, so the parent re-enters
+#: itself as `--worker` through the declared interpreter. ~1s of process startup
+#: per checkpoint, against a wrong answer for 6 of 144.
+def probe_in_declared_venv(model_id):
+    import subprocess
+    import sys as _sys
+    sys.path.insert(0, os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(HERE))), "scripts"))
+    import venvs
+    venv = venvs.venv_for(model_id)
+    py = os.path.join(venv, "bin", "python")
+    #: **COMPARE THE VENV PREFIX, NOT THE RESOLVED EXECUTABLE.** Both venvs'
+    #: `bin/python` symlink to the SAME uv-managed base interpreter, so
+    #: `realpath(py) == realpath(sys.executable)` is True for two DIFFERENT
+    #: venvs -- `realpath` resolves straight past the thing being compared. That
+    #: made this conclude "already the right one" and skip the subprocess, which
+    #: is precisely the bug it exists to prevent: from a tf457 parent it returned
+    #: NO_TOKENIZER for m-a-p/neo_7b while the declared `.venv` worker returns OK.
+    #: `sys.prefix` IS the venv; the executable is not.
+    if not os.path.exists(py) or \
+            os.path.realpath(venv) == os.path.realpath(_sys.prefix):
+        return probe(model_id)                      # already the right one
+    r = subprocess.run([py, os.path.abspath(__file__), "--worker", model_id],
+                       capture_output=True, text=True, timeout=600)
+    for line in reversed((r.stdout or "").splitlines()):
+        line = line.strip()
+        if line.startswith("{"):
+            try:
+                return json.loads(line)
+            except Exception:                                    # noqa: BLE001
+                break
+    return {"model": model_id, "verdict": "WORKER_FAILED", "template": 0,
+            "sys_ok": "", "sys_empty_ok": "", "added_chars": "", "wrapper": "",
+            "detail": (r.stderr or "")[-90:].replace("\n", " ")}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--worker", metavar="MODEL_ID",
+                    help="probe ONE model and print its record as JSON. Used by "
+                         "the parent, which re-enters through the venv the roster "
+                         "declares for that checkpoint.")
     ap.add_argument("--write-measurements", action="store_true",
                     help="also write the `chat_template` section of "
                          "roster/models/measurements.json. Refused with --limit: "
                          "a stamped section reporting n=5 for a 144-model "
                          "population is worse than no section.")
     a = ap.parse_args()
+    if a.worker:
+        print(json.dumps(probe(a.worker)))
+        return 0
     if a.write_measurements and a.limit:
         print("  REFUSING --write-measurements with --limit: the section's `n` "
               "would describe a sample and read as the population.")
@@ -224,7 +313,7 @@ def main():
         return 0
     rows = []
     for i, m in enumerate(pop, 1):
-        r = probe(m)
+        r = probe_in_declared_venv(m)
         r["role"] = role[m]
         rows.append(r)
         print("  [%3d/%d] %-12s %-46s %s"
@@ -232,7 +321,8 @@ def main():
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=["model", "role", "verdict", "template",
-                                           "sys_ok", "added_chars", "detail"])
+                                           "sys_ok", "sys_empty_ok", "added_chars",
+                                           "detail", "wrapper"])
         w.writeheader()
         for r in rows:
             w.writerow({k: r.get(k, "") for k in w.fieldnames})
