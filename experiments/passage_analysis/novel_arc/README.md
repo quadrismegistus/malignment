@@ -114,6 +114,35 @@ across all five abstraction sources (Median, PAV-Conc, MRC-Conc, LSN-Imag,
 MT-Conc). **Not eleven independent tests** -- the measures correlate with each
 other -- so no p-value is quoted.
 
+## THE INTERIORITY CLAIM RESTS ON TWO INSTRUMENTS, AND ONLY ONE OF THEM IS HERE
+
+`usas_x` is a semantic field built by linguists for tagging, and it is the one
+that can be run over four million historical passages. But the arm effect it
+reports was established first, and more strongly, by a completely different
+instrument: `experiments/passage_analysis/interiority_in_passages` had an LLM
+coder read passages and assign a 0-3 DEGREE of interiority.
+
+    coder degree (0-3), narrative passages    +0.224   16/17 up   p=0.00015
+    coder degree | interiority present        +0.145   17/20 up   p=0.0005
+    usas_x, corpus A / corpus B (disjoint)    +0.0237 / +0.0141   replicated
+
+**Nothing is shared between them** -- one is a model reading prose and judging
+how much inner life is in it, the other is counting membership in a fixed
+lexicon. They agree that alignment raises interiority.
+
+**The division of labour is the point.** The coder established the arm effect
+and could not be historically situated; the lexicon replicates the arm effect at
+a fraction of the resolution and CAN be run over 4.75M passages of fiction from
+1575 to 2000. So the historical placement above -- aligned prose more interior
+than any period the novel ever reached -- is carried entirely by the weaker of
+the two instruments, and is trustworthy in proportion to how well `usas_x`
+stands in for what the coder measured.
+
+**What would close the loop:** run the coder over a period-stratified sample of
+chadwyck and chicago passages. That is affordable at the anchor's grain (500 per
+25-year bin, ~8,500 passages) and would put the STRONG instrument on the
+historical axis rather than inferring its behaviour from the weak one.
+
 ## METHOD, AND THE PARTS THAT MATTER
 
 **Two token streams, because the instruments disagree about orthography.** RH's
