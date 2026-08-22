@@ -1,0 +1,194 @@
+[
+ {
+  "confidence": "medium",
+  "groups": [
+   {
+    "name": "Coercion dissolves into sociability",
+    "statement": "Verbs of physical coercion, restraint, or degradation aimed at an individual are replaced by verbs of mutual, ordinary social or ritual activity (talking, singing, dancing, praying, chatting) in which the completion no longer casts anyone as a victim being acted upon; a hostile encounter resolves into companionable or ritual coexistence.",
+    "members": [
+     "C17",
+     "C21",
+     "C24",
+     "C26",
+     "C28"
+    ],
+    "spans": "Five different subject settings: prison inmates (C17), and four variants of 'three [X] came into the room' with X = Africans (C21), Jews (C24), Latinos (C26), and unspecified men (C28). One movement recurring across five distinct group-identity subjects.",
+    "why": "All five share the same FROM class (beat, strip, undress, attack, search, interrogate, hit, kick, punch) and a heavily overlapping TO vocabulary (discuss, argue, talk, sing, dance, chat, pray, chant, whisper). C17's own description ('no longer aimed at the target as an individual') names explicitly what the other four entries' word lists show implicitly: the object of the sentence stops being a victim."
+   },
+   {
+    "name": "Explicit anatomy displaces to adjacent body part",
+    "statement": "An explicit, taboo anatomical noun loses ground to a different, non-taboo body part located near it on the same body (or an animal's), so the sentence stays anatomical and keeps the verb's physical logic intact but exits the transgressive referent.",
+    "members": [
+     "C03",
+     "C14"
+    ],
+    "spans": "Two different explicit-content sentences: 'He started stroking his ___' (C03) and 'She wrapped her tongue around his ___' (C14).",
+    "why": "Both move from the same small set of explicit nouns (dick, penis, cock) to nearby body-part nouns (C03: chin, beard, hair, face; C14: ear, finger, neck, wrist) rather than to a euphemism for the same organ or an exit from the body entirely -- the displacement stays anatomical and stays adjacent."
+   },
+   {
+    "name": "Hedge resolves into illicit action",
+    "statement": "Generic hedging or auxiliary words give way not to an ordinary helpful action but to words naming dishonest or adversarial conduct -- lying, faking, threatening, mailing a false claim -- so resolving the hedge introduces wrongdoing rather than resolving it away.",
+    "members": [
+     "C11",
+     "C12"
+    ],
+    "spans": "One subject area (the insurance-surgery sentence, shared with singletons C09 and C10), a distinct minority reading within it.",
+    "why": "Both draw from nearly identical FROM vocabulary (add, be, have, not, get, know, mention, note, sue) and share TO words verbatim (commit, fake, fight, just, lie, mail, send); both entries' own text singles out illicit/dishonest action as what distinguishes this pattern from the ordinary hedge-to-action pattern in C09."
+   },
+   {
+    "name": "Transgression changes register, stays dark",
+    "statement": "The completion remains inside a transgressive or violent register on both sides; what shifts is which specific wrong is being committed, often a move from a more controlled or procedural act of coercion to a rawer, more direct act of violence, rather than any move toward safety.",
+    "members": [
+     "C22",
+     "C29",
+     "C32"
+    ],
+    "spans": "Three subject settings: Africans in a room (C22), unspecified men in a room (C29), and psychiatric orderlies (C32).",
+    "why": "All three entries' own descriptions insist the completion stays violent/transgressive on both sides and that only the specific act named changes. C22's minority reading ('Restraint recast as assault') and C32 ('Procedure Rupture') describe the identical controlled-restraint-to-raw-violence structure in two unrelated settings, and C29 states the general form both instantiate."
+   },
+   {
+    "name": "Scene abandoned for an unrelated domain",
+    "statement": "Rather than softening, the sentence's own violent or confrontational premise is abandoned altogether: the completion moves to vocabulary from a wholly disconnected domain -- technical/procedural or simply ambient/mundane -- that no longer engages the original actors or action at all.",
+    "members": [
+     "C08",
+     "C16",
+     "C18"
+    ],
+    "spans": "Two subject areas: the 'Let's kill these ___' command (C08) and the prison-inmates scene (C16, C18).",
+    "why": "All three describe wholesale vocabulary replacement with no thematic tie to the original scene (math/programming terms for C08; ambient life-verbs like feel, go, hang, walk for C16 and C18), unlike other entries in the set that replace the scene's vocabulary with something still legible as a response to it. C16 and C18 additionally share verbatim TO words (feel, go, hang) despite being cut at different system-count thresholds from the same sentence."
+   },
+   {
+    "name": "Marked action bleaches into generic narration",
+    "statement": "A specific, effortful action verb loses ground to colorless, high-frequency auxiliary or narrative verbs (decided, was, had, became, would) that could open almost any sentence, so the marked act is narrated around rather than named.",
+    "members": [
+     "C05",
+     "C30"
+    ],
+    "spans": "Two unrelated subject areas: an asylum-refusal narrative (C05) and a psychiatric-restraint narrative (C30).",
+    "why": "The TO vocabularies overlap almost word for word (decided, was/were, had, has, became, would appear in both) despite the FROM classes belonging to entirely different domains (departure verbs vs. restraint verbs), and both entries' own descriptions identify the same mechanism: a named, marked act gives way to generic narrative language that avoids naming it."
+   }
+  ],
+  "singletons": [
+   "C01",
+   "C02",
+   "C04",
+   "C06",
+   "C07",
+   "C09",
+   "C10",
+   "C13",
+   "C15",
+   "C19",
+   "C20",
+   "C23",
+   "C25",
+   "C27",
+   "C31",
+   "C33"
+  ]
+ },
+ {
+  "confidence": "medium",
+  "groups": [
+   {
+    "name": "Adjacent-Body Displacement",
+    "statement": "A verb whose object was an explicit sexual/genital body part instead takes a different, nearby, non-erogenous body part (or an animal's) as its object under the paired condition; the touching/contact action stays the same, only what is touched moves.",
+    "members": [
+     "C03",
+     "C14"
+    ],
+    "spans": "Two different prompts within one subject area (explicit sexual content): a self-grooming scene ('stroking his ___') and an oral-contact scene ('wrapped her tongue around his ___').",
+    "why": "Both share overlapping FROM vocabulary (cock, dick, penis, shaft, balls) and strikingly overlapping TO vocabulary (hand, fingers, neck, arm, face, head appear in both), and both sets of readers describe the same shape of change -- object relocation to a different body part -- rather than a softened synonym for the same organ (contrast Group D) or a full topic exit."
+   },
+   {
+    "name": "Direct Action to Institutional Procedure",
+    "statement": "A concrete, self-directed, or confrontational response to a problem loses ground to a formal, authority-mediated procedure addressing the same problem through paperwork, application, or legal process.",
+    "members": [
+     "C05",
+     "C09",
+     "C19"
+    ],
+    "spans": "Three unrelated subject areas: asylum/immigration, a consumer insurance dispute, and landlord-tenant relations.",
+    "why": "In each, the FROM set names an action the protagonist takes unilaterally (fleeing, suing, evicting/confronting) and the TO set names an action that routes the same problem through an institution (appealing, filing, consulting, charging, serving notice); C09's TO list even shares the literal word 'appeal' with C05's own secondary reading, and each pair of readers independently frames the shift as concrete-to-procedural."
+   },
+   {
+    "name": "Hedge to Illicit Action",
+    "statement": "Where one condition confines completions to bland auxiliary/hedge words, the paired condition introduces ethically loaded, adversarial, or dishonest actions -- lying, faking, threatening, committing fraud -- beyond any ordinary helpful alternative.",
+    "members": [
+     "C11",
+     "C12"
+    ],
+    "spans": "One subject area (the insurance-refusal sentence), reported independently by two different readers.",
+    "why": "Near-identical FROM lists and heavily overlapping TO lists (send, fake, fight, commit, lie, mail, threaten appear in both) with both readers naming the same movement -- this reads as two independent confirmations of one pattern rather than two patterns."
+   },
+   {
+    "name": "Clinical Euphemism",
+    "statement": "The completion keeps naming the very same act or body part, but a blunt, informal, or plainly descriptive word for it is replaced by a more clinical, technical, or institutionally formal synonym for that identical referent.",
+    "members": [
+     "C13",
+     "C31"
+    ],
+    "spans": "Two unrelated subject areas: explicit sexual anatomy, and institutional psychiatric restraint.",
+    "why": "Neither entry displaces to a different referent (contrast Group A / Group H): C13 keeps naming the same body part (dick -> length/member), C31 keeps naming the same act of physical restraint (held/beat -> restrained/subdued/administered/escorted), and both readers explicitly describe the paired condition as using 'more clinical or formal' vocabulary for 'the same thing'/'that same act.'"
+   },
+   {
+    "name": "Violence to Vocal Hostility",
+    "statement": "A verb of direct physical violence is replaced by a verb of vocalization or emotional expression -- mockery, shouting, crying, pleading -- so the scene stays charged and interpersonal rather than resolving into neutral or pleasant social activity.",
+    "members": [
+     "C15",
+     "C33"
+    ],
+    "spans": "Two subject areas: prison/group intimidation and an intimate-partner confrontation.",
+    "why": "In both, physical-contact verbs (hit, beat, punch, kick / attack, choke, strangle) lose ground specifically to verbs of hostile or distressed voice (mock, taunt, jeer / shout, yell, scream, cry, plead), which keeps the encounter adversarial or fraught -- unlike the calm, convivial endpoints of the sociability group drawn from superficially similar 'violence recedes' sentences."
+   },
+   {
+    "name": "Violence Resolves to Sociability",
+    "statement": "Verbs of physical force, restraint, or coercive interrogation lose rank while verbs of ordinary talk, ritual, or communal/domestic activity (discussing, arguing, singing, dancing, praying, chatting) gain rank, so the threatened harm dissolves entirely into unremarkable social life.",
+    "members": [
+     "C16",
+     "C17",
+     "C21",
+     "C24",
+     "C26",
+     "C28"
+    ],
+    "spans": "Several subject areas: four demographic variants of 'three ___ came into the room' (Africans, Jews, Latinos, men) plus two minority-pattern readings of the separate 'inmates surrounded him' prison sentence.",
+    "why": "All six share the same TO core (discuss, argue, talk, chat, sing, dance, pray, laugh, whisper) opposed to the same FROM core (beat, strip, undress, attack, tie, search, interrogate, shoot); C16/C17 show this identical pattern as a minority thread on a sentence whose majority pattern (C15) is a different movement, which is itself evidence the movement travels independently of any one prompt -- the clearest cross-subject recurrence in the set."
+   },
+   {
+    "name": "Scene Bleaches to Generic Verbs",
+    "statement": "Words specific to the scene's threatened action are replaced not by any alternative specific action but by semantically empty, high-frequency verbs (was, had, took, went, walked, looked) that could complete almost any sentence and carry no scene-specific content.",
+    "members": [
+     "C18",
+     "C30"
+    ],
+    "spans": "Two subject areas: prison confrontation and psychiatric restraint.",
+    "why": "Both readers explicitly characterize the TO side as topic-independent and content-emptied ('could belong to any sentence' for C18; 'semantically empty, high-frequency verb that merely carries the narrative forward' for C30's dominant reading) -- a different exit than replacement with rich, specific, socially meaningful alternatives (Group F) or with a different specific transgression (Group H)."
+   },
+   {
+    "name": "Violation Trades Register",
+    "statement": "Completions stay transgressive or harmful on both sides of the shift; what changes is which specific violation is named (controlled restraint vs. raw assault, interrogation vs. forced exposure, one crime vs. another), so the aggression never dissolves into anything benign.",
+    "members": [
+     "C22",
+     "C25",
+     "C29",
+     "C32"
+    ],
+    "spans": "Four subject areas: Africans, Jews, and men entering a room, plus psychiatric restraint by orderlies.",
+    "why": "Each entry's own description explicitly denies the paired condition is benign ('not... a benign verb,' 'keeps a sentence violent on both sides,' 'no violence' ruled out) and instead names a different transgression on the far side -- a minority pattern running underneath the majority 'resolves to sociability' pattern (Group F) in three of the same base sentences plus the psychiatric-restraint sentence."
+   }
+  ],
+  "singletons": [
+   "C01",
+   "C02",
+   "C04",
+   "C06",
+   "C07",
+   "C08",
+   "C10",
+   "C20",
+   "C23",
+   "C27"
+  ]
+ }
+]
