@@ -53,3 +53,54 @@ The condition that would separate the two is bare `Who are you?` with no format,
 ## Where it agrees with something else
 
 The interiority ladder put the move at SFT too, on a different measure and a different corpus: 6 of 8 lineages, signed-rank p = 0.039. Two measures, two instruments, same rung. That is corroboration, not replication — the two share the roster, the arms, and this seat's choices about what to compare.
+
+---
+
+# What the identical address shows: the SINGULAR displaces the PLURAL
+
+The framing above treated `Q:/A:` as the compromised condition. That was the wrong way round for the arm comparison. **It is the only condition in which base and aligned receive an identical address** -- the chat frame cannot compare arms at all, because 11 of 14 bases ship no template. So this is the fair experiment, and the template condition is the one with a coverage problem.
+
+## Both arms answer. They differ at the top of the range.
+
+    rung                n    median      p25      p75
+    base (pretrain)    45     0.542    0.464    0.615
+    SFT tier           38     0.725    0.667    0.848
+    preference tier    44     0.767    0.670    0.908
+    RLVR                4     0.776    0.673    0.925
+
+    share of models above       base   aligned
+      p_first > 0.25             93%       97%
+      p_first > 0.50             67%       87%
+      p_first > 0.75              4%       49%
+      p_first > 0.90              0%       21%
+
+Given the slot, **the base takes it**: 93% of bases put more than a quarter of the answer slot on the first person, two thirds put more than half. The arms are nearly indistinguishable at the bottom of the range and separate entirely at the top -- no base reaches 0.90, and a fifth of aligned models do.
+
+So alignment is not creating the first person here. It is removing what competes with it.
+
+## And what competes with it is mostly the PLURAL first person
+
+Paired over the 82 forward edges, two measures of the same slot moving in opposite directions:
+
+    measure              n   rises  falls   median d    sign p
+    singular  I/I'm/my  82      69     13    +0.1305   < 1e-9
+    plural  we/our/us   82      15     67    -0.0090   < 1e-9
+    greetings Hello/Hi  82      48     34    +0.0012      0.15
+
+    plural's SHARE of all first-person mass
+      parents median 0.036  ->  children median 0.007
+      paired: 68 of 80 fall, median -0.0194, p < 1e-6
+
+**The collective first person's share of the first person collapses about fivefold.** The base, when it speaks in the first person, speaks as a "we" roughly one time in twenty-eight; the aligned model roughly one in a hundred and forty.
+
+The absolute plural change is small (-0.009) because the plural was never large. The share is the meaningful statistic and it is the one to quote, with its base rate beside it.
+
+## A pooled mean that did not survive pairing
+
+Averaged per model across arms, greetings looked like alignment's largest single addition: `Hello` 0.0063 -> 0.0161, `Hi` 0.0104 -> 0.0197. **Paired within lineage it is 48 rises to 34 falls, p = 0.15.** Not a finding. The pooled means also showed `We` as the largest removal, and that one did survive pairing at p < 1e-9 -- so the pooled view got one of its two headline claims right, which is the worst possible outcome for trusting it.
+
+## Why the plural is the interesting half
+
+The removed voice is the institutional one -- "We are a company that", "Our mission is" -- the register in which an organisation speaks about itself. Alignment installs a respondent that is not merely first-person but **singular**: an individual answering for itself, not a body answering for an institution.
+
+That is the same asymmetry F21 found from the other direction, where alignment proceduralised the individual and left the institution alone. Here the institution is not proceduralised; it is **evacuated from the speaking position entirely**. Recorded as a connection worth testing, not as a joint result: F21's instrument and this one share nothing but the roster.
