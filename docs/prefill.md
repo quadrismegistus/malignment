@@ -57,7 +57,9 @@ A base checkpoint shipping chat scaffolding is itself worth noticing — it says
                           eleuther-pythia6.9b-hh-dpo, RedPajama-INCITE-7B-Chat
     NO TOKENIZER    5
 
-So roughly a fifth of endpoints ship no chat template at all and **cannot be measured under prefill in any frame**. Those lineages drop out of the frame analysis entirely — not because of the base, because of the aligned arm. If 15-of-25 holds, the sweep reaches perhaps 30 of 50 endpoints.
+So roughly a fifth of endpoints ship no chat template at all and **cannot be measured under prefill in any frame**. Those lineages drop out of the frame analysis entirely — not because of the base, because of the aligned arm. ~~If 15-of-25 holds, the sweep reaches perhaps 30 of 50 endpoints.~~
+
+**SUPERSEDED BY THE CENSUS BELOW: it is 39 of 50, not ~30.** The 25-model sample was skewed toward older checkpoints. The shape of the constraint survives — a fifth of endpoints really are excluded, and by their own packaging — but the projected magnitude was too pessimistic and should not be quoted.
 
 That population is selected by **whether a vendor shipped a template**, which correlates with vintage and organisation rather than with anything under study. It has to be declared and reported as a population, not discovered at analysis time. That is the part of the objection worth keeping.
 
