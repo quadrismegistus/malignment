@@ -397,7 +397,14 @@ def _cells(path):
 #: Fields that identify the INSTRUMENT and must appear identically in the
 #: record's `__key__` and in its body. `rule_version` and `dict_sha` were always
 #: in both; `rules` and `prompt_cache` arrived with v4 and only reached the key.
-INSTRUMENT_FIELDS = ("rule_version", "dict_sha", "rules", "prompt_cache")
+#: `frame` joined on 2026-08-22, when `Runner.run` became able to write a framed
+#: cell. The guard only fires on a field present in BOTH the key and the body and
+#: DISAGREEING, so an unframed record -- which carries no `frame` in its key at
+#: all -- is untouched, and the 820,246 existing cells are unaffected. What it
+#: catches is a future producer that keys a cell framed and stamps its body raw:
+#: precisely the CT-LLM shape one field over, and worse here, because the two are
+#: different measurements of one surface rather than one measurement mislabelled.
+INSTRUMENT_FIELDS = ("rule_version", "dict_sha", "rules", "prompt_cache", "frame")
 
 
 def _frame(d):

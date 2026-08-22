@@ -85,6 +85,7 @@ import sys
 import time
 
 from . import twp as T
+from .generate import DEFAULT
 from .ingest import DATA
 
 #: BESIDE THE CORPUS THE INGEST READS, NOT INSIDE THIS PUBLIC REPO. See above.
@@ -467,8 +468,24 @@ class TWPRunner:
         self.ck = checkpoint
 
     def run(self, prompts, purge=False, limit=None, dict_path=None, verbose=True,
-            rules=None):
+            rules=None, frame=None, system=DEFAULT, user_msg="Hi."):
         """`rules=None` is v3 and dispatches to `twp.expand` ITSELF.
+
+        **`frame` MAKES THIS THE ONLY PATH THAT WRITES A FRAMED CELL**, and that
+        is deliberate rather than convenient. `Checkpoint.probs` could frame but
+        wrote nothing, so lacan's subject-position run recomputed 86
+        distributions on every rerun; the obvious fix -- `cache=True` on `probs`,
+        writing a memo under `ck.key()` -- is the one thing that must not be
+        built. `done()` probes EVERY producer's stash, so a memo whose key
+        matches makes a later framed run skip those prompts as DONE, while
+        `ingest` skips the memo for having no `rows`: the run reports success and
+        measures nothing. A separate producer does not dodge it, because
+        `stashes()` is deliberately all producers.
+
+        So one record type serves cache, resume, ingest and corpus. The only
+        thing that made a memo not-a-cell was that `probs` aggregates `w` from
+        (surface, t1) down to surface and loses `rows`; here `expand4`'s output
+        is still un-aggregated, so the full cell costs nothing extra.
 
         **Not to `expand4(Rules())`, which produces the same numbers.** If v3's
         path ran through v4 code, v3's correctness would depend on v4 being
@@ -480,8 +497,18 @@ class TWPRunner:
         from transformers import AutoModelForCausalLM
 
         ck = self.ck
+        #: **v3 HAS NO FRAME AND MUST SAY SO.** `T.expand` takes no rendered
+        #: text and no `pids`, so a framed v3 call would key the cell as framed
+        #: and measure the raw surface. Refusing beats the alternative this
+        #: project keeps paying for: a treatment parameter that silently does
+        #: nothing returns a null that is not one.
+        if frame is not None and rules is None:
+            raise ValueError(
+                "frame=%r requires v4 rules: the v3 path (twp.expand) cannot "
+                "render a template, so a framed v3 cell would carry the frame "
+                "in its key and the RAW surface in its rows." % frame)
         os.makedirs(ck.dir, exist_ok=True)
-        have = ck.done(rules)
+        have = ck.done(rules, frame=frame, system=system, user_msg=user_msg)
         todo = [p for p in prompts if p not in have]
         if limit:
             todo = todo[:limit]
@@ -546,7 +573,8 @@ class TWPRunner:
                 #: The probe cannot come earlier -- it needs the loaded model --
                 #: so the todo has to come later. Recomputed here against the
                 #: setting the cells will actually carry.
-                have = ck.done(rules)
+                have = ck.done(rules, frame=frame, system=system,
+                               user_msg=user_msg)
                 todo = [p for p in prompts if p not in have]
                 if limit:
                     todo = todo[:limit]
@@ -607,8 +635,9 @@ class TWPRunner:
         #: `ingest._key_body_agree` now refuses that shape. This is the producer
         #: half: derived FROM the key so the two cannot drift.
         if rules is not None:
-            stamp.update({f: v for f, v in ck.key("", rules).items()
-                          if f not in ("model", "prompt")})
+            stamp.update({f: v for f, v in ck.key(
+                "", rules, frame=frame, system=system, user_msg=user_msg).items()
+                if f not in ("model", "prompt")})
         st = ck.stash()
         try:
             from tqdm import tqdm
@@ -648,9 +677,31 @@ class TWPRunner:
                                               cjk=cjk, bos_policy=pol)
                 else:
                     from . import twp_v4 as V4
-                    w, res, _meta = V4.expand4(model, tok, p, dev, bmask,
+                    #: **THE RENDER IS THE FRAME, AND expand4 MUST SEE THE
+                    #: RENDERED TEXT.** Passing the bare stem with a frame set
+                    #: would key the cell as framed and measure the raw surface
+                    #: -- the same silent no-op that made `frame="chat"` return
+                    #: byte-identical numbers in `probs` until 3e5352b, one layer
+                    #: down and writing to the corpus this time.
+                    _text, _pids = p, None
+                    if frame is not None:
+                        from . import generate as G
+                        _text, _sys_ok = G.render(
+                            ld, p, system=system, user_msg=user_msg,
+                            prefill=(frame == "prefill"), template=True)
+                        #: A tokenizer that DISCARDS the system message would
+                        #: give a cell keyed with a treatment it never received.
+                        #: `probs` refuses this; so must the writer.
+                        if system is not DEFAULT and _sys_ok is False:
+                            raise ValueError(
+                                "%s: the chat template DISCARDED the system "
+                                "message -- refusing to write a framed cell "
+                                "that never received the treatment."
+                                % ck.model_id)
+                        _pids = G.encode(ld, _text, True)["input_ids"][0].tolist()
+                    w, res, _meta = V4.expand4(model, tok, _text, dev, bmask,
                                                cjk=cjk, bos_policy=pol,
-                                               rules=rules)
+                                               rules=rules, pids=_pids)
                     res = dict(res, total=(res['tail'] + res['drop']
                                            + res['open'] + res['mojibake']
                                            + res.get('term_floored', 0.0)))
@@ -673,7 +724,8 @@ class TWPRunner:
             #: One append per cell, healed and flushed by the engine. The key
             #: carries the instrument, so a rule bump writes a NEW key rather
             #: than overwriting a measurement made by a different instrument.
-            st[ck.key(p, rules)] = rec
+            st[ck.key(p, rules, frame=frame, system=system,
+                      user_msg=user_msg)] = rec
             n_ok += 1
             if hasattr(bar, "set_postfix"):
                 bar.set_postfix(ok=n_ok, skip=n_skip, refresh=False)
