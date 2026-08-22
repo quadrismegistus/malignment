@@ -104,7 +104,7 @@ def build(pairs):
     return G
 
 
-def analyse(prefix, n_lineages=None, png=False):
+def analyse(prefix, n_lineages=None, png=False, report=False):
     import networkx as nx
     pairs, prompt = readings(prefix, n_lineages)
     if not pairs:
@@ -137,9 +137,69 @@ def analyse(prefix, n_lineages=None, png=False):
             print("       %-13s %-40s %d members" % (G.nodes[n]["reading"], G.nodes[n]["label"],
                                                       G.nodes[n]["n"]))
         print()
+    if report:
+        audit(G, cc, OPS, pairs, prompt)
     if png:
         render(G, cc, OPS, prompt, prefix)
     return G, cc
+
+
+def audit(G, cc, OPS, pairs, prompt, width=68):
+    """Everything a component rests on, in one place: operations, statements,
+    and each model's own FROM and TO words with which operations placed them.
+
+    A component is an assertion that several differently-named operations are one
+    relation. That is not checkable from a count, so this prints the evidence:
+    if two operations share a component, the models and words that join them are
+    on the page and a reader can disagree.
+    """
+    import collections, textwrap
+    #: model -> {op node -> (from words, to words)}, straight off the members.
+    per = collections.defaultdict(dict)
+    stmt = {}
+    for tag, v in pairs:
+        for o in v.get("operations") or []:
+            op = "OP[%s] %s" % (tag, o["name"])
+            stmt[op] = o.get("statement", "")
+            for m in o.get("members") or []:
+                per[m["model"]][op] = ([w.lower() for w in m.get("a_words") or []],
+                                       [w.lower() for w in m.get("b_words") or []])
+    W = lambda t, i: textwrap.fill(t, width, initial_indent=i, subsequent_indent=i)
+    for i, c in enumerate(cc, 1):
+        ops = sorted((n for n in c if n in OPS), key=lambda n: -G.nodes[n]["n"])
+        mods = sorted({n.split("::")[0] for n in c if "::" in n})
+        print("=" * 78)
+        print("COMPONENT %d   %d operation(s), %d model(s)" % (i, len(ops), len(mods)))
+        print("=" * 78)
+        for n in ops:
+            print("\n  [%s]  %s  (%d members)"
+                  % (G.nodes[n]["reading"], G.nodes[n]["label"], G.nodes[n]["n"]))
+            if stmt.get(n):
+                print(W(stmt[n], "      "))
+        #: THE POOLED VOCABULARY, so a reader sees at a glance what the component
+        #: is made of before reading fifty rows of it.
+        fw = sorted({w for m in mods for op in per[m] if op in c for w in per[m][op][0]})
+        tw = sorted({w for m in mods for op in per[m] if op in c for w in per[m][op][1]})
+        print("\n  pooled FROM (%d): %s" % (len(fw), ", ".join(fw)))
+        print("  pooled TO   (%d): %s" % (len(tw), ", ".join(tw)))
+        print("\n  per model -- FROM -> TO, and which operation(s) placed it\n")
+        for m in mods:
+            here = {op: v for op, v in per[m].items() if op in c}
+            f = sorted({w for v in here.values() for w in v[0]})
+            t = sorted({w for v in here.values() for w in v[1]})
+            #: CONTINUATION LINES ARE INDENTED PAST THE LABEL. `textwrap` with the
+            #: same indent on both put "FROM" at the head of the wrapped line too,
+            #: so a long list read as two separate FROM entries on a skim.
+            def lab(tag, ws):
+                return textwrap.fill(" ".join(ws) or "(none)", width,
+                                     initial_indent="        %-6s" % tag,
+                                     subsequent_indent="              ")
+            print("    %s" % m)
+            print(lab("FROM", f))
+            print(lab("TO", t))
+            print("        in    %s" % "; ".join(
+                "%s [%s]" % (G.nodes[op]["label"], G.nodes[op]["reading"]) for op in sorted(here)))
+        print()
 
 
 def render(G, cc, OPS, prompt, prefix):
@@ -210,6 +270,8 @@ def main(argv=None):
     ap.add_argument("prefix", nargs="?")
     ap.add_argument("--n-lineages", type=int, default=None)
     ap.add_argument("--png", action="store_true")
+    ap.add_argument("--report", action="store_true",
+                    help="print each component's operations, statements and per-model words")
     ap.add_argument("--all", action="store_true")
     a = ap.parse_args(argv)
     if a.all:
@@ -217,11 +279,11 @@ def main(argv=None):
         seen = sorted({k["frame_prompt"] for k in X._stash()
                        if isinstance(k, dict) and k.get("stage") == "crosslineage"})
         for p in seen:
-            analyse(p, a.n_lineages, a.png); print("-" * 78)
+            analyse(p, a.n_lineages, a.png, a.report); print("-" * 78)
         return
     if not a.prefix:
         raise SystemExit("give a prompt prefix, or --all")
-    analyse(a.prefix, a.n_lineages, a.png)
+    analyse(a.prefix, a.n_lineages, a.png, a.report)
 
 
 if __name__ == "__main__":
