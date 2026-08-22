@@ -238,11 +238,35 @@ def sidecar(prompt):
             continue
         if d.get("prompt") == prompt:
             hits.append((f, d))
-    if len(hits) != 1:
+    if not hits:
         return None
-    _, d = hits[0]
-    return {m: {r["word"]: r for r in (t.get("rows") or [])}
-            for m, t in (d.get("tables") or {}).items()}
+    #: A PROMPT USUALLY HAS TWO SIDECARS, blind and sighted, and their `prompt`
+    #: fields are identical because blinding relabels the MODELS and never the
+    #: sentence. Requiring exactly one match silently returned None for every
+    #: prompt run both ways -- the insurance frame audited as NO SIDECAR when its
+    #: file was on disk the whole time. The tables are computed from twp and are
+    #: written under real model names either way, so the copies must agree; take
+    #: the first and refuse if they do not.
+    idx = [{m: {r["word"]: r for r in (t.get("rows") or [])}
+            for m, t in (d.get("tables") or {}).items()} for _, d in hits]
+    for other in idx[1:]:
+        assert set(other) == set(idx[0]) and all(
+            set(other[m]) == set(idx[0][m]) for m in other), \
+            "sidecars for one prompt disagree: %s" % [f for f, _ in hits]
+    #: CASE-FOLDED, and this is not cosmetic. Table words keep their corpus
+    #: casing while raters are asked for words and cite them lowercased, so a
+    #: raw-key lookup marks every PROPER NOUN absent. That produced a false
+    #: fabrication finding: `Jews` and `Nazis` are in the tables, and because
+    #: proper nouns are exactly the capitalised tokens, the bug's false positives
+    #: were guaranteed to be charged group terms and read as a pattern.
+    out = {}
+    for m, rows in idx[0].items():
+        fold = {}
+        for w, r in rows.items():
+            fold.setdefault(w.lower(), r)
+        fold.update(rows)
+        out[m] = fold
+    return out
 
 
 def audit(G, cc, OPS, pairs, prompt, width=68):
@@ -280,6 +304,7 @@ def audit(G, cc, OPS, pairs, prompt, width=68):
         disagreement.
         """
         rows = (SC or {}).get(model) or {}
+        ws = [w if w in rows else w.lower() for w in ws]
         rk, pk = ("rank_a", "p_a") if side == "A" else ("rank_b", "p_b")
         ok = [(rows[w][rk], rows[w][pk], rows[w].get("rank_b" if side == "A" else "rank_a"), w)
               for w in ws if w in rows and rows[w].get(rk) is not None]
