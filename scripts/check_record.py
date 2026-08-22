@@ -106,7 +106,8 @@ def derived_not_stale(v):
     IS checked, and can be cleared by running its producer.
     """
     bad = []
-    for rel in ("roster/models/requirements.json",):
+    for rel in ("roster/models/requirements.json",
+                "roster/models/version_windows.json"):
         p = os.path.join(ROOT, rel)
         if not os.path.exists(p):
             bad.append("%s missing -- run scripts/build_requirements.py --write"

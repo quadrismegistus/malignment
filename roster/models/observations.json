@@ -131,31 +131,52 @@
    "note": "The SAME MACHINE as local_mps, one package different. Added 2026-08-18 because OLMoE separates the two: it is the transformers major, not the device, that decides. Do not fold this into local_mps."
   },
   "cloud_cuda_unversioned": {
-   "description": "rented CUDA box, library versions NOT RECORDED -- these cells predate the version stamp on twp cells. Device is measured; toolchain is not.",
+   "device": "cuda",
+   "torch": null,
+   "transformers": null,
+   "note": "rented CUDA box. Library versions NOT RECORDED -- these cells predate the version stamp on twp cells. Device is measured; the toolchain is not, and null here means UNKNOWN, never 'same as the versioned sibling'.",
    "source": "derived by record_successes.py from twp_cells_v4"
   },
   "local_mps_unversioned": {
-   "description": "MPS (this Mac), library versions NOT RECORDED -- these cells predate the version stamp on twp cells. Device is measured; toolchain is not.",
+   "device": "mps",
+   "torch": null,
+   "transformers": null,
+   "note": "MPS (this Mac). Library versions NOT RECORDED -- these cells predate the version stamp on twp cells. Device is measured; the toolchain is not, and null here means UNKNOWN, never 'same as the versioned sibling'.",
    "source": "derived by record_successes.py from twp_cells_v4"
   },
   "cloud_cuda130_tf540": {
-   "description": "rented CUDA box, transformers 5.4.0, torch 2.13.0+cu130. Derived from the cells that ran in it.",
+   "device": "cuda",
+   "torch": "2.13.0+cu130",
+   "transformers": "5.4.0",
+   "note": "rented CUDA box. Derived from the cells that actually ran in it.",
    "source": "derived by record_successes.py from twp_cells_v4"
   },
   "cloud_cuda130_tf4571": {
-   "description": "rented CUDA box, transformers 4.57.1, torch 2.13.0+cu130. Derived from the cells that ran in it.",
+   "device": "cuda",
+   "torch": "2.13.0+cu130",
+   "transformers": "4.57.1",
+   "note": "rented CUDA box. Derived from the cells that actually ran in it.",
    "source": "derived by record_successes.py from twp_cells_v4"
   },
   "local_mps_tf540": {
-   "description": "MPS (this Mac), transformers 5.4.0, torch 2.13.0. Derived from the cells that ran in it.",
+   "device": "mps",
+   "torch": "2.13.0",
+   "transformers": "5.4.0",
+   "note": "MPS (this Mac). Derived from the cells that actually ran in it.",
    "source": "derived by record_successes.py from twp_cells_v4"
   },
   "cloud_cuda130_tf4576": {
-   "description": "rented CUDA box, transformers 4.57.6, torch 2.13.0+cu130. Derived from the cells that ran in it.",
+   "device": "cuda",
+   "torch": "2.13.0+cu130",
+   "transformers": "4.57.6",
+   "note": "rented CUDA box. Derived from the cells that actually ran in it.",
    "source": "derived by record_successes.py from twp_cells_v4"
   },
   "cloud_cuda130_tf5151": {
-   "description": "rented CUDA box, transformers 5.15.1, torch 2.13.0+cu130. Derived from the cells that ran in it.",
+   "device": "cuda",
+   "torch": "2.13.0+cu130",
+   "transformers": "5.15.1",
+   "note": "rented CUDA box. Derived from the cells that actually ran in it.",
    "source": "derived by record_successes.py from twp_cells_v4"
   }
  },

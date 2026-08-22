@@ -1,0 +1,7055 @@
+{
+ "_about": "Library versions a checkpoint is KNOWN to work or fail under, as OBSERVED POINTS. A range cannot express a HOLE (Falcon-H1: 4.57.1 ok, 5.4.0 fails, 5.14.1 ok), so the points are stored and any bound is derived from them.",
+ "_producer": "scripts/build_version_windows.py",
+ "_sources": [
+  "roster/models/observations.json"
+ ],
+ "_absence": "A version with no row was never tried. Not a pass, not a failure, and the gap between two tested points is exactly as unknown as it looks.",
+ "n": 141,
+ "models": {
+  "01-ai/Yi-1.5-9B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "01-ai/Yi-1.5-9B-Chat": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "AI-Sweden-Models/gpt-sw3-6.7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Alchan/mpt-7b-chat": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "[Errno 2] No such file or directory -- cached weights present but the snapshot is incomplete."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "[Errno 2] No such file or directory -- cached weights present but the snapshot is incomplete."
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Aleph-Alpha/Pharia-1-LLM-7B-control-hf": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": "Round-trip LOOKS broken and is not: decode returns a leading space from SentencePiece's leading marker. encode(p) != encode(' '+p), so the encode is faithful and the space never re"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": "Round-trip LOOKS broken and is not: decode returns a leading space from SentencePiece's leading marker. encode(p) != encode(' '+p), so the encode is faithful and the space never re"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "BAAI/Aquila2-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.9.x (image default)",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_vllm_0.27.1_passage_fleet",
+         "outcome": "load_failed",
+         "cause": "AquilaForCausalLM removed from vLLM after v0.24.0"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": ">=2.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "load_failed",
+         "cause": "Same rope_scaling['type'] KeyError as the chat arm; both share the bundled modeling_aquila.py."
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "load_failed",
+         "cause": "Same rope_scaling['type'] KeyError as the chat arm; both share the bundled modeling_aquila.py."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.x (image default)",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_vllm_0.27.1_passage_fleet",
+         "outcome": "load_failed",
+         "cause": "AquilaForCausalLM removed from vLLM after v0.24.0"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "BAAI/AquilaChat2-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": ">=2.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "load_failed",
+         "cause": "KeyError: 'type' in the model's OWN bundled modeling_aquila.py:281 -- `scaling_type = self.config.rope_scaling['type']`. The code was written for transformers ~4.31. On 5.x transfo"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "load_failed",
+         "cause": "KeyError: 'type' in the model's OWN bundled modeling_aquila.py:281 -- `scaling_type = self.config.rope_scaling['type']`. The code was written for transformers ~4.31. On 5.x transfo"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "BSC-LT/salamandra-7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "BSC-LT/salamandra-7b-instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "ContextualAI/archangel_sft-kto_pythia2-8b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "ContextualAI/archangel_sft-slic_pythia2-8b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "ContextualAI/archangel_sft_pythia2-8b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "EleutherAI/pythia-2.8b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "EleutherAI/pythia-6.9b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "HuggingFaceH4/mistral-7b-sft-beta": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "torch.load refusal; safetensors shards PRESENT but model.safetensors.index.json ABSENT, so transformers falls back to the .bin index"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "torch.load refusal; safetensors shards PRESENT but model.safetensors.index.json ABSENT, so transformers falls back to the .bin index"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "HuggingFaceH4/zephyr-7b-beta": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "run_failed",
+         "cause": "MY BUG, not the environment: assert_prompt_survives decoded without skip_special_tokens, so the guard failed the prompt against the BOS its own policy had added. Mistral/Llama-fami"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "run_failed",
+         "cause": "MY BUG, not the environment: assert_prompt_survives decoded without skip_special_tokens, so the guard failed the prompt against the BOS its own policy had added. Mistral/Llama-fami"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "HuggingFaceTB/SmolLM2-360M": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "HuggingFaceTB/SmolLM2-360M-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "HuggingFaceTB/SmolLM3-3B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "HuggingFaceTB/SmolLM3-3B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "HuggingFaceTB/SmolLM3-3B-checkpoints": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "LLM360/Amber": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "LLM360/AmberSafe": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_initial",
+         "outcome": "load_failed",
+         "cause": "SentencePieceExtractor requires the protobuf library -> falls back to TikToken extractor -> `tiktoken` is required"
+        }
+       ],
+       "works": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_initial",
+         "outcome": "load_failed",
+         "cause": "SentencePieceExtractor requires the protobuf library -> falls back to TikToken extractor -> `tiktoken` is required"
+        }
+       ],
+       "works": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "NousResearch/Hermes-3-Llama-3.1-8B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "OpenLLM-France/Lucie-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "PKU-Alignment/beaver-7b-v1.0": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Qwen/Qwen2.5-0.5B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Qwen/Qwen2.5-0.5B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Qwen/Qwen2.5-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Qwen/Qwen2.5-7B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Qwen/Qwen3-8B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Qwen/Qwen3-8B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "RWKV/rwkv-4-7b-pile": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "RWKV/rwkv-raven-7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "THUDM/glm-4-9b-hf": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": "Round-trip LOOKS broken and is not: prepends [gMASK]<sop> and bos_token_id is None, so a BOS-only strip cannot see them. skip_special_tokens recovers the prompt exactly."
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": "Round-trip LOOKS broken and is not: prepends [gMASK]<sop> and bos_token_id is None, so a BOS-only strip cannot see them. skip_special_tokens recovers the prompt exactly."
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Zyphra/Zamba2-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError. The -Instruct sibling loads, so it is the repo's tokenizer files, not the architecture."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "loads",
+         "cause": "runs WITHOUT mamba kernels, at 183.4 s/cell -- 152 hours for 2,983 cells"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "loads",
+         "cause": "runs WITHOUT mamba kernels, at 183.4 s/cell -- 152 hours for 2,983 cells"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError. The -Instruct sibling loads, so it is the repo's tokenizer files, not the architecture."
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "Zyphra/Zamba2-7B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Llama-3.1-Tulu-3.1-8B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/OLMo-2-0425-1B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "Same tie_word_embeddings TypeError."
+        }
+       ],
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "Same tie_word_embeddings TypeError."
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/OLMo-2-0425-1B-DPO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; check_torch_load_is_safe requires torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; check_torch_load_is_safe requires torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/OLMo-2-0425-1B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/OLMo-2-0425-1B-SFT": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/OLMoE-1B-7B-0125": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "LOADS FINE, dies in the FORWARD: NotImplementedError 'histogram_mps' not implemented for 'Int' -- transformers/integrations/moe.py:383 grouped_mm_experts_forward calls torch.histc "
+        }
+       ],
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "LOADS FINE, dies in the FORWARD: NotImplementedError 'histogram_mps' not implemented for 'Int' -- transformers/integrations/moe.py:383 grouped_mm_experts_forward calls torch.histc "
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/OLMoE-1B-7B-0125-DPO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        },
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "TypeError: Field 'tie_word_embeddings' expected int, got bool (value: False) -- transformers 5.4.0 rejects the OLMoE config. NOT the histc failure recorded for the base arm; a diff"
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "TypeError: Field 'tie_word_embeddings' expected int, got bool (value: False) -- transformers 5.4.0 rejects the OLMoE config. NOT the histc failure recorded for the base arm; a diff"
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/OLMoE-1B-7B-0125-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "Same tie_word_embeddings TypeError as the DPO arm."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "Same tie_word_embeddings TypeError as the DPO arm."
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/OLMoE-1B-7B-0125-SFT": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "load_failed",
+         "cause": "bin-only; torch >= 2.6"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3-1025-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "TypeError: Field 'tie_word_embeddings' expected int, got bool -- transformers 5.4.0 rejects the OLMo config, identical to the OLMoE arms."
+        }
+       ],
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "TypeError: Field 'tie_word_embeddings' expected int, got bool -- transformers 5.4.0 rejects the OLMo config, identical to the OLMoE arms."
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3-1125-32B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.5.1+cu124",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "CAPACITY (DISK, not memory): 64GB each, 128GB for the pair, 67GiB free. Would fit in RAM one at a time -- this is a different limit from the 70B pair and fixable by freeing disk."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "CUDA out of memory: 64.5 GB at fp16 against 47.37 GiB usable"
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "CUDA out of memory: 64.5 GB at fp16 against 47.37 GiB usable"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "CAPACITY (DISK, not memory): 64GB each, 128GB for the pair, 67GiB free. Would fit in RAM one at a time -- this is a different limit from the 70B pair and fixable by freeing disk."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "grid_v3_box_repaired",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": true
+   }
+  },
+  "allenai/Olmo-3-7B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3-7B-Think": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3.1-32B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3.1-32B-Instruct-DPO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "CAPACITY (DISK): see the base sibling."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "CAPACITY (DISK): see the base sibling."
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3.1-32B-Instruct-SFT": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-Hybrid-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_failed",
+         "cause": "model type `olmo_hybrid` not recognised by transformers 4.57.1."
+        }
+       ],
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_failed",
+         "cause": "model type `olmo_hybrid` not recognised by transformers 4.57.1."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "baichuan-inc/Baichuan2-7B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "bundled modelling code imports bitsandbytes; transformers refuses before loading a weight"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.9.x (image default)",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_vllm_0.27.1_passage_fleet",
+         "outcome": "load_failed",
+         "cause": "BaichuanForCausalLM removed from vLLM after v0.23.0"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "bundled modelling code imports bitsandbytes; transformers refuses before loading a weight"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.x (image default)",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_vllm_0.27.1_passage_fleet",
+         "outcome": "load_failed",
+         "cause": "BaichuanForCausalLM removed from vLLM after v0.23.0"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "baichuan-inc/Baichuan2-7B-Chat": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "as Baichuan2-7B-Base: bitsandbytes"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "as Baichuan2-7B-Base: bitsandbytes"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "bigscience/bloom-7b1": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "bigscience/bloomz-7b1": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "croissantllm/CroissantLLMBase": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "Loads; DELETES CJK CHARACTERS. 他既是美丽的又是恶心的，她想要 -> 他是美的是心的想要, dropping 既 丽 又 恶 ， 她 -- including BOTH halves of the 既...又 both-and construction. English is exact. || CJK deletion CON"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf540",
+         "outcome": "loads",
+         "cause": "completes 2,575 of 2,983 prompts; the shortfall is the declared CJK tokenizer defect, not a failure"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "Loads; DELETES CJK CHARACTERS. 他既是美丽的又是恶心的，她想要 -> 他是美的是心的想要, dropping 既 丽 又 恶 ， 她 -- including BOTH halves of the 既...又 both-and construction. English is exact. || CJK deletion CON"
+        }
+       ],
+       "works": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf540",
+         "outcome": "loads",
+         "cause": "completes 2,575 of 2,983 prompts; the shortfall is the declared CJK tokenizer defect, not a failure"
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "croissantllm/CroissantLLMChat-v0.1": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "Deletes CJK characters, IDENTICALLY to the Base arm: '他既是美丽的又是恶心的，她想要' -> '他是美的是心的想要', losing 6 of 15. Latin round-trips EXACTLY."
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "Deletes CJK characters, IDENTICALLY to the Base arm: '他既是美丽的又是恶心的，她想要' -> '他是美的是心的想要', losing 6 of 15. Latin round-trips EXACTLY."
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "deepseek-ai/deepseek-llm-7b-base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "**LOADS AND RUNS, AND SILENTLY DESTROYS THE PROMPT.** backend pre_tokenizer is Metaspace where the checkpoint's own tokenizer.json declares ByteLevel+Split, so encode('a b') == enc"
+        }
+       ],
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": "2.13.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf540_override",
+         "outcome": "ok",
+         "cause": "Round-trip VERIFIED with the loader the producer actually uses. AutoTokenizer still mangles at 5.4.0 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', every space delete"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_5.15.1_override",
+         "outcome": "ok",
+         "cause": "AutoTokenizer STILL mangles on CUDA at 5.15.1 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', reproducing the 5.14.1 entry exactly, so that observation is confirmed ra"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": ">=2.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "run_failed",
+         "cause": "RE-CONFIRMED 2026-08-10 at transformers 5.14.1: AutoTokenizer still resolves to LlamaTokenizer and still deletes every space -- 'He lay naked in his bed and' -> 'Helaynakedinhisbed"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "**LOADS AND RUNS, AND SILENTLY DESTROYS THE PROMPT.** backend pre_tokenizer is Metaspace where the checkpoint's own tokenizer.json declares ByteLevel+Split, so encode('a b') == enc"
+        }
+       ],
+       "works": [
+        {
+         "environment": "local_mps_tf540_override",
+         "outcome": "ok",
+         "cause": "Round-trip VERIFIED with the loader the producer actually uses. AutoTokenizer still mangles at 5.4.0 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', every space delete"
+        },
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "run_failed",
+         "cause": "RE-CONFIRMED 2026-08-10 at transformers 5.14.1: AutoTokenizer still resolves to LlamaTokenizer and still deletes every space -- 'He lay naked in his bed and' -> 'Helaynakedinhisbed"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_5.15.1_override",
+         "outcome": "ok",
+         "cause": "AutoTokenizer STILL mangles on CUDA at 5.15.1 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', reproducing the 5.14.1 entry exactly, so that observation is confirmed ra"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "deepseek-ai/deepseek-llm-7b-chat": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "As the base sibling: encode('a b') == encode('ab')."
+        }
+       ],
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": "2.13.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf540_override",
+         "outcome": "ok",
+         "cause": "Round-trip VERIFIED with the loader the producer actually uses. AutoTokenizer still mangles at 5.4.0 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', every space delete"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_5.15.1_override",
+         "outcome": "ok",
+         "cause": "AutoTokenizer STILL mangles on CUDA at 5.15.1 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', reproducing the 5.14.1 entry exactly, so that observation is confirmed ra"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "As the base sibling: encode('a b') == encode('ab')."
+        }
+       ],
+       "works": [
+        {
+         "environment": "local_mps_tf540_override",
+         "outcome": "ok",
+         "cause": "Round-trip VERIFIED with the loader the producer actually uses. AutoTokenizer still mangles at 5.4.0 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', every space delete"
+        },
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_5.15.1_override",
+         "outcome": "ok",
+         "cause": "AutoTokenizer STILL mangles on CUDA at 5.15.1 -- 'He lay naked in his bed and' -> 'Helaynakedinhisbedand', reproducing the 5.14.1 entry exactly, so that observation is confirmed ra"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "gl198976/mpt-7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "cannot import name '_expand_mask' from transformers.models -- mpt's BUNDLED modelling code imports a symbol transformers 5 removed."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "cannot import name '_expand_mask' from transformers.models -- mpt's BUNDLED modelling code imports a symbol transformers 5 removed."
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "gl198976/mpt-7b-instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "Same _expand_mask import as the base arm."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "Same _expand_mask import as the base arm."
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "google/gemma-2-9b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "google/gemma-2-9b-it": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "huggyllama/llama-7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "ibm-granite/granite-3.0-8b-base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "inceptionai/jais-family-6p7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4576",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4576",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "inceptionai/jais-family-6p7b-chat": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4576",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4576",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "internlm/internlm2-base-7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "modelling_internlm2.py imports einops through trust_remote_code; check_imports refuses"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": ">=2.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "run_failed",
+         "cause": "Same boundary-shift as the chat arm, verified on the box: AutoTokenizer 0/2, PreTrainedTokenizerFast 2/2. BOTH ARMS FAIL IDENTICALLY, so the pair is recoverable rather than lost."
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+         "outcome": "ok",
+         "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the "
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+         "outcome": "ok",
+         "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the "
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "modelling_internlm2.py imports einops through trust_remote_code; check_imports refuses"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "run_failed",
+         "cause": "Same boundary-shift as the chat arm, verified on the box: AutoTokenizer 0/2, PreTrainedTokenizerFast 2/2. BOTH ARMS FAIL IDENTICALLY, so the pair is recoverable rather than lost."
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "internlm/internlm2-chat-7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "as internlm2-base-7b: einops"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": ">=2.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "run_failed",
+         "cause": "Loads and runs; AutoTokenizer resolves to the repo's bundled InternLM2TokenizerFast (fetched under trust_remote_code) whose pre-tokenizer SHIFTS WORD BOUNDARIES. sent 'He lay naked"
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+         "outcome": "ok",
+         "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the "
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+         "outcome": "ok",
+         "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the "
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "as internlm2-base-7b: einops"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_transformers_5.14.1",
+         "outcome": "run_failed",
+         "cause": "Loads and runs; AutoTokenizer resolves to the repo's bundled InternLM2TokenizerFast (fetched under trust_remote_code) whose pre-tokenizer SHIFTS WORD BOUNDARIES. sent 'He lay naked"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "internlm/internlm2-chat-7b-sft": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "as internlm2-base-7b: einops"
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     },
+     {
+      "version": ">=2.6",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+         "outcome": "ok",
+         "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the "
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_transformers_4.57.1_sentencepiece_0.2.1",
+         "outcome": "ok",
+         "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the "
+        },
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "4.57.6",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf457",
+         "outcome": "load_failed",
+         "cause": "as internlm2-base-7b: einops"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "kakaocorp/kanana-1.5-8b-base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "kakaocorp/kanana-1.5-8b-instruct-2505": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "kakaocorp/kanana-2-3b-base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "kakaocorp/kanana-2-3b-instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "llm-jp/llm-jp-3-7.2b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "llm-jp/llm-jp-3-7.2b-instruct2": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "llm-jp/llm-jp-3-7.2b-instruct3": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "lomahony/eleuther-pythia6.9b-hh-dpo": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "lomahony/eleuther-pythia6.9b-hh-sft": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "m-a-p/CT-LLM-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "m-a-p/CT-LLM-SFT": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "m-a-p/CT-LLM-SFT-DPO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "m-a-p/neo_7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "m-a-p/neo_7b_instruct_v0.1": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "m-a-p/neo_7b_sft_v0.1": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "meta-llama/Llama-3.1-70B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "CAPACITY, not compatibility: ~140GB bf16 against 96GB unified memory. Cannot load on this box at native dtype in any configuration."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "CAPACITY, not compatibility: ~140GB bf16 against 96GB unified memory. Cannot load on this box at native dtype in any configuration."
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "meta-llama/Llama-3.1-70B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "CAPACITY: ~140GB bf16 against 96GB unified memory."
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "CAPACITY: ~140GB bf16 against 96GB unified memory."
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "meta-llama/Llama-3.1-8B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "meta-llama/Llama-3.1-8B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "mistralai/Mistral-7B-v0.1": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "mosaicml/mpt-7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "mosaicml/mpt-7b-instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_failed",
+         "cause": "AutoTokenizer OSError"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "openGPT-X/Teuken-7B-base-v0.6": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "Loads; normalises the FULLWIDTH COMMA to ASCII. Drops only ，. Milder than Croissant and a different kind of loss. || Normalises the FULLWIDTH COMMA to ASCII and nothing else: loses"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "2.9.x (image default)",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_vllm_0.27.1_passage_fleet",
+         "outcome": "run_failed",
+         "cause": "sentencepiece IdToPiece: OUT_OF_RANGE during cross-scoring, same defect as m-a-p/CT-LLM-Base"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps",
+         "outcome": "run_failed",
+         "cause": "Loads; normalises the FULLWIDTH COMMA to ASCII. Drops only ，. Milder than Croissant and a different kind of loss. || Normalises the FULLWIDTH COMMA to ASCII and nothing else: loses"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "5.x (image default)",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_vllm_0.27.1_passage_fleet",
+         "outcome": "run_failed",
+         "cause": "sentencepiece IdToPiece: OUT_OF_RANGE during cross-scoring, same defect as m-a-p/CT-LLM-Base"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "openGPT-X/Teuken-7B-instruct-v0.6": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "openbmb/MiniCPM5-1B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "openbmb/MiniCPM5-1B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "openbmb/MiniCPM5-1B-SFT": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "openchat/openchat-3.5-0106": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "stabilityai/stablelm-2-1_6b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "local_mps_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "stabilityai/stablelm-2-1_6b-chat": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "teknium/OpenHermes-2.5-Mistral-7B": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon-H1-1.5B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf540",
+         "outcome": "load_failed",
+         "cause": "transformers 5.4.0 config validation: \"Field 'use_cache' with value True doesn't match any type in (int, NoneType)\" -- the same shape as OLMoE's tie_word_embeddings bool/int reject"
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf540",
+         "outcome": "load_failed",
+         "cause": "transformers 5.4.0 config validation: \"Field 'use_cache' with value True doesn't match any type in (int, NoneType)\" -- the same shape as OLMoE's tie_word_embeddings bool/int reject"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon-H1-1.5B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf540",
+         "outcome": "load_failed",
+         "cause": "as Falcon-H1-1.5B-Base: use_cache validation on transformers 5.4.0"
+        }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "mixed"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "vast_rtx4090_cuda130_tf540",
+         "outcome": "load_failed",
+         "cause": "as Falcon-H1-1.5B-Base: use_cache validation on transformers 5.4.0"
+        }
+       ]
+      },
+      "verdict": "fails"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon-H1-7B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon-H1-7B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon3-10B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon3-10B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon3-3B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon3-3B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "loads",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon3-7B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon3-7B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon3-Mamba-7B-Base": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_a100_ssm_kernels",
+         "outcome": "loads",
+         "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_a100_ssm_kernels",
+         "outcome": "loads",
+         "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/Falcon3-Mamba-7B-Instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_a100_ssm_kernels",
+         "outcome": "loads",
+         "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_a100_ssm_kernels",
+         "outcome": "loads",
+         "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/falcon-mamba-7b": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_a100_ssm_kernels",
+         "outcome": "loads",
+         "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_a100_ssm_kernels",
+         "outcome": "loads",
+         "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/falcon-mamba-7b-instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_a100_ssm_kernels",
+         "outcome": "loads",
+         "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.14.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "vast_a100_ssm_kernels",
+         "outcome": "loads",
+         "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "togethercomputer/RedPajama-INCITE-7B-Chat": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "zai-org/glm-4-9b-chat-hf": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "zai-org/glm-4-9b-hf": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.11.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.4.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  }
+ }
+}

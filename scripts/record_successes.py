@@ -100,28 +100,47 @@ DEVICE_PREFIX = {"mps": "local_mps", "cuda": "cloud_cuda"}
 
 
 def env_name(device, tf, torch):
-    """(name, description) for a measured (device x toolchain), or (None, why).
+    """(name, definition) for a measured (device x toolchain), or (None, why).
 
     Naming follows what `observations.json` already uses -- `local_mps_tf457`,
     `cloud_cuda_transformers_5.14.1` -- rather than inventing a third scheme.
+
+    **THE DEFINITION IS STRUCTURED, NOT PROSE, AND THE FIRST VERSION WAS PROSE.**
+    The 14 hand-authored environments carry `device` / `torch` / `transformers`
+    as FIELDS; the five this function generated carried a `description` string
+    instead, so nothing could read a version out of them. That silently blocks
+    everything downstream that wants to compare versions across environments --
+    which is the whole point of recording them. A producer that does not inherit
+    its file's convention writes rows that only a human can use.
     """
+    from collections import OrderedDict as _OD
     pre = DEVICE_PREFIX.get((device or "").lower())
     if pre is None:
         return None, "unknown device %r" % device
+    where = "MPS (this Mac)" if pre == "local_mps" else "rented CUDA box"
     if not tf:
         #: **NOT FOLDED INTO A VERSIONED NAME.** The version fields were added
         #: mid-corpus. Naming these `local_mps` would assert the toolchain that
         #: `local_mps` declares (torch 2.11.0) for cells that never recorded one.
-        return pre + "_unversioned", (
-            "%s, library versions NOT RECORDED -- these cells predate the "
-            "version stamp on twp cells. Device is measured; toolchain is not."
-            % ("MPS (this Mac)" if pre == "local_mps" else "rented CUDA box"))
+        return pre + "_unversioned", _OD([
+            ("device", device),
+            ("torch", None),
+            ("transformers", None),
+            ("note", "%s. Library versions NOT RECORDED -- these cells predate "
+                     "the version stamp on twp cells. Device is measured; the "
+                     "toolchain is not, and null here means UNKNOWN, never "
+                     "'same as the versioned sibling'." % where),
+            ("source", "derived by record_successes.py from twp_cells_v4"),
+        ])
     cuda = "130" if "+cu130" in (torch or "") else ""
     tag = "tf" + tf.replace(".", "")[:4]
-    name = "%s%s_%s" % (pre, cuda, tag)
-    return name, ("%s, transformers %s, torch %s. Derived from the cells that ran "
-                  "in it." % ("MPS (this Mac)" if pre == "local_mps"
-                              else "rented CUDA box", tf, torch))
+    return "%s%s_%s" % (pre, cuda, tag), _OD([
+        ("device", device),
+        ("torch", torch),
+        ("transformers", tf),
+        ("note", "%s. Derived from the cells that actually ran in it." % where),
+        ("source", "derived by record_successes.py from twp_cells_v4"),
+    ])
 
 
 def main():
@@ -199,9 +218,9 @@ def main():
     models = {r["model"] for r in grouped}
     print("v4 corpus covers %d models across %d measured environments"
           % (len(models), len(envs_seen)))
-    for e, why in envs_seen.items():
+    for e, defn in envs_seen.items():
         n = sum(1 for r in add if r["environment"] == e)
-        print("   %-28s +%-4d %s" % (e, n, why[:64]))
+        print("   %-28s +%-4d %s" % (e, n, str(defn.get("note"))[:60]))
     print("  would ADD  %d load_ok observations" % len(add))
     print("  skipped    %d" % len(skip))
     clashes = [s for s in skip if "CONTRADICTS" in s[1]]
@@ -217,12 +236,15 @@ def main():
     if a.run:
         rec["observations"].extend(add)
         #: Register every environment we just named, so a reader can resolve it.
+        #: **STRUCTURED, matching the 14 hand-authored entries.** Also REPAIRS
+        #: any earlier entry this script wrote as prose: those carried a
+        #: `description` and no `transformers`/`torch`, so no consumer could
+        #: read a version out of them.
         envs = rec.setdefault("environments", OrderedDict())
-        for e, why in envs_seen.items():
-            if e not in envs:
-                envs[e] = OrderedDict([("description", why),
-                                       ("source", "derived by record_successes.py "
-                                                  "from twp_cells_v4")])
+        for e, defn in envs_seen.items():
+            cur = envs.get(e)
+            if cur is None or "transformers" not in cur:
+                envs[e] = defn
         json.dump(rec, open(RECORD, "w"), indent=1, ensure_ascii=False)
         print("\nwrote %d; observations now %d; environments now %d"
               % (len(add), len(rec["observations"]), len(envs)))
