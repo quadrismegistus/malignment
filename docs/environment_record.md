@@ -161,3 +161,61 @@ That first one is the next schema gap: `compute_dtype` is currently a property o
 ## The one-line rule
 
 **A fact that nothing checks is a fact you have already lost.** Recording it is the cheap half; making something fail without it is the half that works.
+
+---
+
+# How to build a fleet
+
+## The two commands
+
+    python scripts/fleet_shards.py --boxes 12 --write data/fleet_shards.json
+    python scripts/fleet_launch.py --plan data/fleet_shards.json --box 1 --yes
+
+`fleet_launch` is DRY RUN by default; `--yes` is what rents. Everything below runs inside it without being asked for.
+
+## What runs before a card is charged
+
+| step | what it refuses on | added |
+|---|---|---|
+| `check_record.py` | run it yourself first — 9 assertions, exits non-zero | 22 Aug |
+| `preflight_env` | a BLOCKER: an observation contradicting the declaration | 18 Aug |
+| `shard_profile` | derives the box from `sizing:` on the shard's biggest model | — |
+| disk sizing | `params_b × storage_dtype`, not a flat 15 GB/model | 22 Aug |
+| **card filter** | **refuses Turing for bf16 models, fails closed on unknown cards** | 22 Aug |
+| `too_big_for` | drops models exceeding the offer's VRAM, before download | — |
+| kernel install | `rc=5` if mamba-ssm/causal-conv1d fail to build | — |
+| HF assert | `rc=3` — blocklists the machine, never retries it | — |
+
+## What runs while it runs
+
+| guard | catches |
+|---|---|
+| stall detector | alive and producing nothing |
+| **throughput** | **producing 178× too slowly — idle kernels, wrong card, thermal** |
+| incremental rsync | a box lost at 2h50m of a 3h shard |
+| **emptiness** (at destroy) | **cells that arrived intact and contain nothing** |
+
+## Which files it draws on
+
+    roster/models/models.yaml          env.profile, revision, nickname   AUTHORED
+    roster/environments.yaml           profiles, boxes, sizing, cards    AUTHORED
+    roster/models/observations.json    (model x environment) outcomes    MERGED + DERIVED
+    roster/models/requirements.json    what each checkpoint NEEDS        DERIVED
+    roster/models/measurements.json    params_b, vocab, chat_template,
+                                       repos, config_dtype              MEASURED
+    roster/models/version_windows.json observed version POINTS           DERIVED
+    roster/models/edge_facts.json      per-PAIR facts (vocab mismatch)   DERIVED
+    data/model_twp_rates.jsonl         per-model s/cell, per device      MEASURED
+
+**Nothing in the launch path reads `~/github/malign-logits` any more.** The last read, in `preflight_env`, was retired 22 Aug once the merge made it redundant.
+
+**AUTHORED means hand-edit it. DERIVED means never.** Every derived file names its `_producer` and `_sources`, and `check_record.py::derived_not_stale` fails when one is older than a source, naming the command that clears it.
+
+## What still needs doing
+
+1. **Re-run the producers after editing an AUTHORED file.** The gate catches it, but only if you run the gate. `build_requirements.py`, `build_version_windows.py`, `build_edge_facts.py`.
+2. **`probe_repos.py` and `probe_config_dtype.py` are point-in-time.** A repo can become gated, or ungated. Nothing re-runs them on a schedule.
+3. **`prefill_census.py` covers 144 of 160.** The 16 uncovered read `chat_template: None`, which is not the same as NO_TEMPLATE.
+4. **`kind` taxonomy for mined findings has no home for `engine`, `perf`, `ruling`** — 45 of 180 land in `no-schema`. That bucket is the standing list of gaps.
+5. **`compute_dtype` is per model and should be per (model × card generation).** `cards.py` covers the bf16/Ampere case; the general form is not modelled.
+6. **Nothing runs the chatlog sweep on a schedule.** `workflows/chatlog_env_archaeology.js` + `mine_diff.py` are ready; the cadence is a decision, not code.
