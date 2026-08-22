@@ -31,6 +31,10 @@
 		n?: number;
 		statement?: string;
 		models?: string[];
+		//: set only on a synthesised `<name> (REVERSED)` shadow hub; `op` points
+		//: back at the operation the shadow contradicts.
+		rev?: boolean;
+		op?: string;
 	};
 	type Art = {
 		title: string;
@@ -91,21 +95,35 @@
 	//: WRITES x/y/vx/vy onto the nodes it is given, so passing `art.nodes` in would
 	//: let a grain switch inherit the previous layout and start the simulation from
 	//: a shape it should have been free to find.
-	//: A REVERSAL IS A CLAIM ABOUT A MODEL, NOT ABOUT A WORD PAIR, so it enters
-	//: both grains as a MODEL node -- at word grain that is the only third kind in
-	//: the picture, and it is honest for it to look different from the words around
-	//: it. Most reversed models already exist because another reading placed them;
-	//: on the sexual frame not one of the five does, since every reading that names
-	//: them calls them reversed. Those are synthesised, and carry `rev` so the
-	//: panel can say they are here for no other reason.
+	//: REVERSALS GET THEIR OWN HUB, NOT A LINE INTO SOMEBODY ELSE'S.
+	//:
+	//: The first version drew each reversal as a red dashed link from the model
+	//: straight to the operation it runs backwards. That put every reversed model
+	//: inside the cluster it is the counter-example to, and on the frames where
+	//: reversal is common it produced one messy component that said the opposite
+	//: of what the reversals mean.
+	//:
+	//: So each operation with reversals gets a SHADOW NODE, `<name> (REVERSED)`.
+	//: The reversed models attach to the shadow with ordinary links, so they
+	//: cluster with each other, and the shadow attaches to its operation by a
+	//: single red dotted link. The relation is still visible and it is now one
+	//: edge instead of N, positioned between two hubs rather than through a blob.
+	//:
+	//: A reversal is a claim about a MODEL, not a word pair, so it enters both
+	//: grains as a model node. Most reversed models already exist because another
+	//: reading placed them; on the sexual frame not one of the five does, since
+	//: every reading that names them calls them reversed. Those are synthesised
+	//: and carry `rev` so the panel can say they are here for no other reason.
 	function withRevs(ns: any[], ls: any[]) {
 		if (!showRev) return { nodes: ns, links: ls };
 		const at = new Map(ns.map((n) => [n.id, n]));
+		const byId = new Map(art.nodes.map((n) => [n.id, n]));
+		const hubs = new Map<string, any>();
 		for (const r of revLive) {
-			const id = 'M::' + r.model;
-			if (!at.has(id)) {
+			const mid = 'M::' + r.model;
+			if (!at.has(mid)) {
 				const n = {
-					id,
+					id: mid,
 					kind: 'model',
 					label: r.model,
 					group: null,
@@ -113,10 +131,30 @@
 					model: r.model,
 					rev: true
 				};
-				at.set(id, n);
+				at.set(mid, n);
 				ns.push(n);
 			}
-			ls.push({ source: id, target: r.op, rev: true });
+			const hid = 'REV::' + r.op;
+			if (!hubs.has(hid)) {
+				const src = byId.get(r.op);
+				const h = {
+					id: hid,
+					kind: 'op',
+					rev: true,
+					op: r.op,
+					label: (src?.label ?? r.op) + ' (REVERSED)',
+					//: The reading's own colour, so a shadow is legibly the same
+					//: rater's claim as the hub it hangs off.
+					group: src?.group ?? null,
+					component: null,
+					n: 0
+				};
+				hubs.set(hid, h);
+				ns.push(h);
+				ls.push({ source: hid, target: r.op, revlink: true });
+			}
+			hubs.get(hid).n += 1;
+			ls.push({ source: mid, target: hid });
 		}
 		return { nodes: ns, links: ls };
 	}
@@ -186,8 +224,15 @@
 			//: the model parks beside the operation it runs backwards without dragging
 			//: the operation anywhere. A cross link joins two HUBS and has no such
 			//: asymmetry to protect it, which is why that one stays at zero.
-			.strength((l: any) => (l.cross ? 0 : l.rev ? 0.2 : 0.35))
-			.distance((l: any) => (l.rev ? 70 : grain === 'word' ? 26 : 60)),
+			//: THE SHADOW LINK PULLS WEAKLY AND THE MODEL LINKS PULL NORMALLY. That
+			//: ordering is the whole point: the reversed models bind tightly to their
+			//: own shadow hub and the shadow is only loosely tethered to the operation
+			//: it contradicts, so the pair sits adjacent and legible instead of fused.
+			//: forceLink weights displacement by degree, so the shadow (a handful of
+			//: links) moves and the operation (dozens) stays put. A cross link joins
+			//: two full hubs and has no such asymmetry, which is why it stays at zero.
+			.strength((l: any) => (l.cross ? 0 : l.revlink ? 0.12 : 0.35))
+			.distance((l: any) => (l.revlink ? 95 : grain === 'word' ? 26 : 60)),
 		charge: forceManyBody().strength(grain === 'word' ? -22 : -180),
 		collide: forceCollide().radius((d: any) => (d.kind === 'op' ? 22 : 9)),
 		center: forceCenter(w / 2, H / 2),
@@ -319,7 +364,7 @@
 										y2={l.y2}
 										class="edge"
 										class:cross={view.links[i]?.cross}
-										class:rev={view.links[i]?.rev}
+										class:rev={view.links[i]?.revlink}
 									/>
 								{/each}
 								{#each nodes as n (n.id)}
@@ -332,21 +377,25 @@
 									  the opposite of what the reading says about them.
 									-->
 									{@const rev = n.id.startsWith('M::') && revByModel.has(n.model ?? '')}
+									{@const shadow = op && !!n.rev}
 									<!-- svelte-ignore a11y_click_events_have_key_events -->
 									<circle
 										cx={n.x}
 										cy={n.y}
 										class:hov={hover === n.id}
 										r={op ? Math.min(20, 7 + (n.n ?? 1) * 0.35) : rev ? 6 : grain === 'model' ? 6 : 3}
-										fill={op && n.group
-											? colour.get(n.group)
-											: n.rev
+										fill={shadow
+											? '#2a1416'
+											: op && n.group
+												? colour.get(n.group)
+												: n.rev
 												? '#3a2226'
 												: n.component === 0
 													? '#8b94a3'
 													: '#ffd43b'}
 										class:op
 										class:revnode={rev}
+										class:shadow
 										class:sel={picked?.id === n.id}
 										onpointerdown={(e) => down(e, n, simulation)}
 										onpointerenter={() => (hover = n.id)}
@@ -427,6 +476,31 @@
 						directions away -- but it is drawn, as a red dashed line to the operation it reverses.
 					</p>
 				{/if}
+			{:else if picked.kind === 'op' && picked.rev}
+				{@const src = art.nodes.find((x) => x.id === picked!.op)}
+				<header>
+					<i class="revdot"></i>
+					<strong>{picked.label}</strong>
+					<span class="muted">{picked.group}, {picked.n} model(s)</span>
+					<button class="close" onclick={() => (picked = null)}>close</button>
+				</header>
+				<p class="hint sm">
+					These models were read as running <b>{src?.label}</b> BACKWARDS. They are not members of
+					it, and they are excluded from the component count, because the same relation with its
+					sign flipped is not evidence for the cluster. The red dotted line is what they are a
+					counter-example to.
+				</p>
+				<p class="covh rev">why each was called reversed</p>
+				<div class="mems">
+					{#each revByOp.get(picked.op ?? '') ?? [] as r (r.model)}
+						<div class="mem rv">
+							<b>{r.model}</b>
+							<span class="fr">{r.a_words.join(' ') || DASH}</span>
+							<span class="to">{r.b_words.join(' ') || DASH}</span>
+							<p class="why">{r.how_you_know}</p>
+						</div>
+					{/each}
+				</div>
 			{:else if picked.kind === 'op'}
 				<header>
 					<i style:background={picked.group ? colour.get(picked.group) : undefined}></i>
@@ -447,7 +521,10 @@
 					{/each}
 				</div>
 				{#if revByOp.get(picked.id)?.length}
-					<p class="covh rev">runs it backwards, and is not a member</p>
+					<p class="covh rev">
+						runs it backwards, and is not a member -- also drawn as the
+						<b>{picked.label} (REVERSED)</b> node
+					</p>
 					<div class="mems">
 						{#each revByOp.get(picked.id) ?? [] as r (r.model)}
 							<div class="mem rv">
@@ -601,15 +678,34 @@
 	}
 	/* Longer dash and a warmer red than the group palette's #fa5252, so a
 	   reversal does not read as membership of the first reading. */
+	/* THE one link between a shadow hub and its operation. Dotted rather than
+	   dashed so it is distinguishable at a glance from a k=2 boundary crossing,
+	   which is also a broken line and means something entirely different. */
 	.edge.rev {
 		stroke: #ff6b6b;
-		stroke-opacity: 0.85;
-		stroke-width: 1.4;
-		stroke-dasharray: 6 3;
+		stroke-opacity: 0.9;
+		stroke-width: 1.8;
+		stroke-dasharray: 1.5 3.5;
+		stroke-linecap: round;
 	}
 	circle.revnode {
 		stroke: #ff6b6b;
 		stroke-width: 1.6;
+	}
+	/* A shadow hub is drawn as the negative of an operation: same size rule,
+	   hollow fill, dashed red rim. It should read as the outline of the thing it
+	   contradicts rather than as another operation in its own right. */
+	circle.shadow {
+		stroke: #ff6b6b;
+		stroke-width: 2;
+		stroke-dasharray: 4 3;
+	}
+	.revdot {
+		display: inline-block;
+		width: 0.6rem;
+		height: 0.6rem;
+		border-radius: 50%;
+		border: 2px dashed #ff6b6b;
 	}
 	text.revlab {
 		fill: #ff8787;
