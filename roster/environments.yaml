@@ -13,6 +13,51 @@
 # roster/models/observations.json -- seven models carry both a failure and a
 # success. Nor (architecture x engine) support: Aquila is not broken, vLLM
 # DELETED it after v0.24.0.
+
+# CARDS: compute capability, because bfloat16 IS NOT A MODEL PROPERTY ALONE.
+# `compute_dtype: bfloat16` is stored per model, and it is really a property of
+# (MODEL x CARD GENERATION): bf16 arrives with Ampere (cc 8.0). Baichuan2
+# auto-selects bf16 and FAILS TO LOAD on a Turing Quadro RTX 8000 (cc 7.5)
+# while loading fine on Ampere -- the same shape of mis-keying as `launch:`
+# (keyed on library pin when a box is a function of size) and repo status
+# (keyed on model x environment when a 404 is global).
+#
+# THIS IS NOT HYPOTHETICAL AND WE HAVE BEEN LUCKY. The Quadro RTX 8000 is our
+# MOST-RENTED card (48 of 116 gpu-labelled rate observations), the `dense` box
+# deliberately carries NO gpu_name filter (selection is by capability: VRAM,
+# link, disk), and offers are sorted by price -- as of 2026-08-22 the cheapest
+# 48 GB offer on the board IS a `Q RTX 8000`. Twelve models declare bfloat16
+# and not one has ever landed on a Turing card. Nothing prevented it.
+#
+# vast.ai does NOT expose compute capability on an offer: `cuda_max_good` is
+# the host driver's CUDA version, not the card's. `gpu_name` is the only
+# signal, and it is spelled differently in different feeds -- the search feed
+# says `Q RTX 8000` where the rate store says `Quadro RTX 8000`. Both spellings
+# are listed for that reason.
+#
+# UNKNOWN CARDS FAIL CLOSED for a bf16 requirement. A card we cannot name might
+# be Turing, and the cost of refusing an offer is one more search while the
+# cost of accepting a bad one is a load failure after paying for the download.
+cards:
+  _why: 'bfloat16 requires compute capability >= 8.0 (Ampere). Add a card here when a fleet first sees it; unknown names are refused for bf16 work.'
+  _unknown_policy: refuse-for-bf16
+  Q RTX 8000: {compute_capability: 7.5, arch: turing}
+  Quadro RTX 8000: {compute_capability: 7.5, arch: turing}
+  Tesla T4: {compute_capability: 7.5, arch: turing}
+  TITAN RTX: {compute_capability: 7.5, arch: turing}
+  RTX 4090: {compute_capability: 8.9, arch: ada}
+  NVIDIA GeForce RTX 4090: {compute_capability: 8.9, arch: ada}
+  RTX 6000Ada: {compute_capability: 8.9, arch: ada}
+  NVIDIA RTX 6000 Ada Generation: {compute_capability: 8.9, arch: ada}
+  L40S: {compute_capability: 8.9, arch: ada}
+  A100_SXM4: {compute_capability: 8.0, arch: ampere}
+  A100 SXM4: {compute_capability: 8.0, arch: ampere}
+  NVIDIA A100-SXM4-80GB: {compute_capability: 8.0, arch: ampere}
+  A100 PCIE: {compute_capability: 8.0, arch: ampere}
+  A6000: {compute_capability: 8.6, arch: ampere}
+  RTX 3090: {compute_capability: 8.6, arch: ampere}
+  H100 SXM: {compute_capability: 9.0, arch: hopper}
+  H100 PCIE: {compute_capability: 9.0, arch: hopper}
 profiles:
   # REQUIREMENT profiles -- what a MODEL needs.
   # `launch:` names the box below. AN ENVIRONMENT IS NOT A MACHINE SHAPE:

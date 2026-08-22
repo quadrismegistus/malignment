@@ -362,6 +362,40 @@ def gated_repos_are_known(v):
                             if r.get("state") == "gated_refused")))
 
 
+@check
+def cards_are_declared(v):
+    """Every card the fleet has actually rented must be in `cards:`.
+
+    INCIDENT-IN-WAITING: bf16 needs Ampere (cc 8.0), the `dense` box carries no
+    `gpu_name` filter by design, and the cheapest 48 GB offer on the board is
+    routinely a Turing `Q RTX 8000` (cc 7.5). Twelve models declare bfloat16 and
+    none has landed on Turing -- by luck. The offer filter now refuses unknown
+    cards, which is the safe direction and creates a NEW failure mode: a card
+    nobody declared silently refuses every bf16 offer, and the message blames
+    the card rather than the missing declaration.
+
+    So this asserts the table keeps up with what we rent. It reads the gpu names
+    in the rate store -- what boxes actually WERE -- not a list of what we
+    expect to see.
+    """
+    import cards as _cards
+    from malignment import rates
+    tbl = _cards.table()
+    seen = {o["gpu"] for o in rates.load() if o.get("gpu")}
+    bad = []
+    for g in sorted(seen):
+        cc, _arch = _cards.capability(g, tbl)
+        if cc is None:
+            bad.append("card %r has been rented but is not declared in "
+                       "environments.yaml `cards:` -- bf16 work would be "
+                       "refused on it with no explanation" % g)
+    if v:
+        print("        %d declared cards, %d distinct cards seen in the rate store"
+              % (len(tbl), len(seen)))
+    return bad, ("every rented card is declared (%d cards, %d seen)"
+                 % (len(tbl), len(seen)))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", default=None, help="run one check by name")

@@ -65,6 +65,7 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
 
 import box_guard                               # noqa: E402
+import cards                                   # noqa: E402
 from fleet_shards import seconds               # noqa: E402
 
 DEFAULT_IMAGE = "pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel"
@@ -372,6 +373,30 @@ def execute(b, models, roots, venv, a):
     offers = cloud.offers(a.box_profile, limit=5, gb=dl_gb, hours=hrs)
     if not offers:
         raise SystemExit("  no offers matched profile %r" % a.box_profile)
+    #: **bfloat16 NEEDS AMPERE, AND `dense` HAS NO CARD FILTER.** Selection for
+    #: the dense roster is deliberately by CAPABILITY (VRAM, link, disk) with no
+    #: `gpu_name`, offers sort by price, and the cheapest 48 GB board is
+    #: routinely a Turing `Q RTX 8000` (cc 7.5). Twelve models declare bf16 and
+    #: none had landed on Turing -- by luck, not by rule. Baichuan2 shows the
+    #: failure: it auto-selects bf16 and dies at LOAD on a Quadro RTX 8000,
+    #: after the download is paid for, with a dtype error naming neither the
+    #: card nor the reason. Unknown cards are refused, not allowed.
+    _bf = sorted({m for m in models
+                  if (_reqs().get(m) or {}).get("compute_dtype") == "bfloat16"})
+    if _bf:
+        keep = [o for o in offers if cards.ok_for(o.get("gpu_name"), "bfloat16")[0]]
+        dropped = [o for o in offers if o not in keep]
+        for o in dropped:
+            print("  card SKIP   #%s %s -- %s"
+                  % (o.get("id"), o.get("gpu_name"),
+                     cards.ok_for(o.get("gpu_name"), "bfloat16")[1]))
+        if not keep:
+            raise SystemExit(
+                "  no offer on this profile can run bfloat16, which %d model(s) "
+                "on this shard require: %s\n  Re-search, or split them onto an "
+                "Ampere+ box. Renting anyway buys a load failure after the "
+                "download." % (len(_bf), ", ".join(x.split("/")[-1] for x in _bf)))
+        offers = keep
     best = offers[0]
     print("  best offer  #%s  %sx %s  $%s/hr  %s"
           % (best.get("id"), best.get("num_gpus"), best.get("gpu_name"),
@@ -1146,6 +1171,19 @@ if missing:
 print("SSM KERNELS OK")
 KEOF
 """
+
+
+def _reqs():
+    """{model: requirements row} from roster/models/requirements.json.
+
+    Cached on the function so the offer loop does not re-read a 4,400-line file
+    per candidate.
+    """
+    import json as _j
+    if not hasattr(_reqs, "_c"):
+        p = os.path.join(ROOT, "roster/models/requirements.json")
+        _reqs._c = {r["model"]: r for r in _j.load(open(p))["requirements"]}
+    return _reqs._c
 
 
 def _params_b():
