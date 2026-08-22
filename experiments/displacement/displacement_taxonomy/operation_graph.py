@@ -466,6 +466,18 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
                                            [w.lower() for w in m.get("b_words") or []])
     tags = sorted({G.nodes[n]["reading"] for n in OPS})
     PAL = ["#fa5252", "#e8590c", "#4dabf7", "#b197fc", "#ffd43b", "#51cf66"]
+    #: RANKS TRAVEL WITH THE ARTIFACT. Without them the web panel can only sort
+    #: alphabetically, which is the same defect audit() had: `bastards` at rank 3
+    #: carrying 7.2% printed beside `birds` at rank 60 carrying 0.02% and nothing
+    #: told them apart. The consumer cannot recover this -- the sidecar is not
+    #: served -- so it is emitted here or the display cannot be fixed at all.
+    SC = sidecar(prompt) or {}
+    def rk(model, word):
+        r = (SC.get(model) or {}).get(word) or (SC.get(model) or {}).get(word.lower())
+        if not r:
+            return None
+        return {"ra": r.get("rank_a"), "rb": r.get("rank_b"),
+                "pa": round(r.get("p_a") or 0.0, 6), "pb": round(r.get("p_b") or 0.0, 6)}
     nodes = []
     for n in G:
         if n in OPS:
@@ -476,8 +488,9 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
         else:
             model, word = n.split("::", 1)
             side = "from" if any(True for _ in G.successors(n)) else "to"
-            nodes.append({"id": n, "kind": "word", "label": word, "model": model,
-                          "side": side, "group": None, "component": comp[n]})
+            nodes.append(dict({"id": n, "kind": "word", "label": word, "model": model,
+                               "side": side, "group": None, "component": comp[n]},
+                              **(rk(model, word) or {})))
     #: A LINK THAT CROSSES A COMPONENT BOUNDARY IS MARKED, NOT DROPPED. These are
     #: exactly the single-model bridges k=2 refuses to count -- the whole reason
     #: for the threshold -- so hiding them would make the picture agree with the
@@ -533,10 +546,23 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
             assert r["operation"] in names, \
                 "%s: reversed model %r cites operation %r, which that reading does not define" \
                 % (tag, r["model"], r["operation"])
+            #: ORDERED BY PROMINENCE ON THEIR OWN SIDE and carrying the numbers,
+            #: so even a consumer that only joins the list prints something
+            #: meaningful. A word with no table row keeps its place at the end
+            #: rather than vanishing.
+            def ranked(ws, side):
+                out = []
+                for w in [x.lower() for x in ws or []]:
+                    d = rk(r["model"], w) or {}
+                    out.append({"w": w, "r": d.get("ra" if side == "a" else "rb"),
+                                "o": d.get("rb" if side == "a" else "ra"),
+                                "p": d.get("pa" if side == "a" else "pb")})
+                return sorted(out, key=lambda x: (x["r"] is None, x["r"] or 0))
+            ra_, rb_ = ranked(r.get("a_words"), "a"), ranked(r.get("b_words"), "b")
             revs.append({"model": r["model"], "op": "OP[%s] %s" % (tag, r["operation"]),
-                         "reading": tag,
-                         "a_words": [w.lower() for w in r.get("a_words") or []],
-                         "b_words": [w.lower() for w in r.get("b_words") or []],
+                         "reading": tag, "a": ra_, "b": rb_,
+                         "a_words": [x["w"] for x in ra_],
+                         "b_words": [x["w"] for x in rb_],
                          "how_you_know": r.get("how_you_know") or ""})
     nid = {n["id"] for n in nodes}
     miss = sorted({r["op"] for r in revs} - nid)
@@ -575,7 +601,7 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
                               "models": len({x.split("::")[0] for x in c if "::" in x})}
                              for c in cc],
               "coverage": cov, "prompt": prompt, "k": k, "components_at_k1": n_at1,
-              "reversals": revs})
+              "reversals": revs, "ranked": bool(SC)})
     slug = re.sub(r"[^a-z0-9]+", "_", prefix.lower())[:34].strip("_")
     return write(art, os.path.join(HERE, "figures"), "opgraph_%s" % slug)
 

@@ -31,6 +31,12 @@
 		n?: number;
 		statement?: string;
 		models?: string[];
+		//: rank and mass of this (model, word) on each arm. `a` is the base column
+		//: and `b` the aligned one, fixed by the producer's column order.
+		ra?: number | null;
+		rb?: number | null;
+		pa?: number;
+		pb?: number;
 		//: set only on a synthesised `<name> (REVERSED)` shadow hub; `op` points
 		//: back at the operation the shadow contradicts.
 		rev?: boolean;
@@ -58,8 +64,11 @@
 		reading: string;
 		a_words: string[];
 		b_words: string[];
+		a?: RW[];
+		b?: RW[];
 		how_you_know: string;
 	};
+	type RW = { w: string; r: number | null; o: number | null; p: number | null };
 	let { art }: { art: Art } = $props();
 
 	const DASH = '—';
@@ -243,19 +252,50 @@
 		y: forceY(H / 2).strength(0.035)
 	});
 
-	//: Recovered from the ARTIFACT, never from the simulation's nodes, which d3 has
-	//: mutated in place.
-	function wordsFor(model: string, op?: string) {
+	const nodeById = $derived(new Map(art.nodes.map((n) => [n.id, n])));
+
+	//: BY PROMINENCE, NOT ALPHABETICALLY. This sorted() alphabetically and so put
+	//: a rank-3 word carrying 7% of the arm next to a rank-60 word carrying 0.02%
+	//: with nothing to tell them apart, which is the same defect the printed
+	//: report had. Ranks now ride on the word nodes, so the order is the reader's
+	//: order: most prominent on its own arm first.
+	//:
+	//: Recovered from the ARTIFACT, never from the simulation's nodes, which d3
+	//: has mutated in place.
+	function wordsFor(model: string, op?: string): { from: RW[]; to: RW[] } {
 		const f = new Set<string>();
 		const t = new Set<string>();
 		for (const l of art.links) {
-			if (l.source.startsWith(model + '::') && (!op || l.target === op))
-				f.add(l.source.split('::')[1]);
-			if (l.target.startsWith(model + '::') && (!op || l.source === op))
-				t.add(l.target.split('::')[1]);
+			if (l.source.startsWith(model + '::') && (!op || l.target === op)) f.add(l.source);
+			if (l.target.startsWith(model + '::') && (!op || l.source === op)) t.add(l.target);
 		}
-		return { from: [...f].sort(), to: [...t].sort() };
+		const pack = (ids: Set<string>, side: 'a' | 'b'): RW[] =>
+			[...ids]
+				.map((id) => {
+					const n = nodeById.get(id);
+					return {
+						w: id.split('::')[1],
+						r: (side === 'a' ? n?.ra : n?.rb) ?? null,
+						o: (side === 'a' ? n?.rb : n?.ra) ?? null,
+						p: (side === 'a' ? n?.pa : n?.pb) ?? null
+					};
+				})
+				//: A word with no rank sorts last rather than first, so an
+				//: unranked artifact degrades to arbitrary order instead of
+				//: silently claiming everything is rank zero.
+				.sort((x, y) => (x.r ?? 1e9) - (y.r ?? 1e9) || x.w.localeCompare(y.w));
+		return { from: pack(f, 'a'), to: pack(t, 'b') };
 	}
+	const fmt = (xs: RW[]) =>
+		xs.length
+			? xs
+					.map((x) =>
+						x.r == null
+							? x.w
+							: `${x.w} ${x.r}\u2192${x.o ?? '-'} ${((x.p ?? 0) * 100).toFixed(1)}%`
+					)
+					.join('   ')
+			: DASH;
 	const placedBy = (m: string) =>
 		art.nodes.filter((x) => x.kind === 'op' && x.models?.includes(m));
 	const toggle = (k: string) =>
@@ -495,8 +535,8 @@
 					{#each revByOp.get(picked.op ?? '') ?? [] as r (r.model)}
 						<div class="mem rv">
 							<b>{r.model}</b>
-							<span class="fr">{r.a_words.join(' ') || DASH}</span>
-							<span class="to">{r.b_words.join(' ') || DASH}</span>
+							<span class="fr">{fmt(r.a ?? [])}</span>
+							<span class="to">{fmt(r.b ?? [])}</span>
 							<p class="why">{r.how_you_know}</p>
 						</div>
 					{/each}
@@ -515,8 +555,8 @@
 						{@const ws = wordsFor(m, picked.id)}
 						<div class="mem">
 							<b>{m}</b>
-							<span class="fr">{ws.from.join(' ') || DASH}</span>
-							<span class="to">{ws.to.join(' ') || DASH}</span>
+							<span class="fr">{fmt(ws.from)}</span>
+							<span class="to">{fmt(ws.to)}</span>
 						</div>
 					{/each}
 				</div>
@@ -529,8 +569,8 @@
 						{#each revByOp.get(picked.id) ?? [] as r (r.model)}
 							<div class="mem rv">
 								<b>{r.model}</b>
-								<span class="fr">{r.a_words.join(' ') || DASH}</span>
-								<span class="to">{r.b_words.join(' ') || DASH}</span>
+								<span class="fr">{fmt(r.a ?? [])}</span>
+								<span class="to">{fmt(r.b ?? [])}</span>
 								<p class="why">{r.how_you_know}</p>
 							</div>
 						{/each}
@@ -549,8 +589,8 @@
 					<button class="close" onclick={() => (picked = null)}>close</button>
 				</header>
 				<p class="covh">pooled over every operation that placed it</p>
-				<p class="fr">{ws.from.join(' ') || DASH}</p>
-				<p class="to">{ws.to.join(' ') || DASH}</p>
+				<p class="fr">{fmt(ws.from)}</p>
+				<p class="to">{fmt(ws.to)}</p>
 				<p class="covh">placed by</p>
 				<ul class="ops">
 					{#each placedBy(who) as o (o.id)}
@@ -569,8 +609,8 @@
 						<div class="mem rv">
 							<b>{r.reading}</b>
 							<span class="muted">{r.op.replace(/^OP\[[^\]]*\]\s*/, '')}</span>
-							<span class="fr">{r.a_words.join(' ') || DASH}</span>
-							<span class="to">{r.b_words.join(' ') || DASH}</span>
+							<span class="fr">{fmt(r.a ?? [])}</span>
+							<span class="to">{fmt(r.b ?? [])}</span>
 							<p class="why">{r.how_you_know}</p>
 						</div>
 					{/each}
