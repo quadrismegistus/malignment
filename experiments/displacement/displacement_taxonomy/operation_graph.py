@@ -430,12 +430,48 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
     assert n_at1 is None or len(ocs) == n_at1 or n_cross > 0, \
         "k=%d gives %d components against %d at k=1, yet no link crosses a boundary" \
         % (k, len(ocs), n_at1)
+    #: REVERSALS ARE CARRIED, NOT DROPPED. A reversed model is one the rater says
+    #: runs the operation BACKWARDS, so it must not be a member -- it would put
+    #: the opposite movement inside the cluster the operation names -- but it is
+    #: a judgement ABOUT that operation and belongs on the panel beside it. The
+    #: UI draws it as a red dashed line from the model to the operation.
+    #:
+    #: Measured over the three 47-50 lineage prompts: a reversed model is NEVER
+    #: also placed in the same reading, so this cannot double-count a model, and
+    #: reversals attach almost exclusively to a reading's largest operation --
+    #: which is what "reversed" means here, the dominant relation run backwards.
+    revs = []
+    for tag, v in pairs:
+        names = {o["name"] for o in v.get("operations") or []}
+        for r in v.get("reversed") or []:
+            #: A reversal cites an operation name from its OWN reading. If the
+            #: name does not resolve, the rater named something they never
+            #: defined and the red line would point at nothing. Refuse: a line
+            #: to a missing hub is the silent-drop failure with a colour on it.
+            assert r["operation"] in names, \
+                "%s: reversed model %r cites operation %r, which that reading does not define" \
+                % (tag, r["model"], r["operation"])
+            revs.append({"model": r["model"], "op": "OP[%s] %s" % (tag, r["operation"]),
+                         "reading": tag,
+                         "a_words": [w.lower() for w in r.get("a_words") or []],
+                         "b_words": [w.lower() for w in r.get("b_words") or []],
+                         "how_you_know": r.get("how_you_know") or ""})
+    nid = {n["id"] for n in nodes}
+    miss = sorted({r["op"] for r in revs} - nid)
+    assert not miss, "reversal(s) pointing at a node that is not in the graph: %s" % miss[:3]
     cov = []
     for tag, v in pairs:
         inops = {m["model"] for o in v.get("operations") or [] for m in o.get("members") or []}
         cov.append({"reading": tag, "placed": len(inops),
                     "reversed": len(v.get("reversed") or []),
                     "unassigned": len(v.get("unassigned") or [])})
+    #: THE COVERAGE TABLE AND THE RED LINES COUNT THE SAME THING. `cov` has always
+    #: printed a `reversed` column; now something is drawn from the same field, and
+    #: a panel showing 13 lines beside a table saying 5 is the mismatch no reader
+    #: would suspect, because both would be internally consistent.
+    assert len(revs) == sum(c["reversed"] for c in cov), \
+        "%d reversal(s) to draw against %d in the coverage table" \
+        % (len(revs), sum(c["reversed"] for c in cov))
     art = graph(
         title=prompt,
         #: THE THRESHOLD IS DECLARED. Components here are over OPERATIONS, joined
@@ -447,8 +483,8 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
                   "operations are in one component only if they share at least k=%d models "
                   "(at k=1 there would be %s). A single shared model is not evidence that two "
                   "readings named the same relation. Only models placed in `operations` are "
-                  "here: `unassigned` carries no words and `reversed` is excluded, so between "
-                  "18%% and 98%% of what was sent reaches this graph depending on the rater."
+                  "here: `unassigned` carries no words, and `reversed` is excluded from the "
+                  "components and drawn as a red dashed line to the operation it runs backwards."
                   % (len(OPS), len(pairs), k,
                      "%d component(s)" % n_at1 if n_at1 is not None else "fewer")),
         nodes=nodes, links=links,
@@ -456,7 +492,8 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
         meta={"components": [{"operations": sum(1 for x in c if x in OPS),
                               "models": len({x.split("::")[0] for x in c if "::" in x})}
                              for c in cc],
-              "coverage": cov, "prompt": prompt, "k": k, "components_at_k1": n_at1})
+              "coverage": cov, "prompt": prompt, "k": k, "components_at_k1": n_at1,
+              "reversals": revs})
     slug = re.sub(r"[^a-z0-9]+", "_", prefix.lower())[:34].strip("_")
     return write(art, os.path.join(HERE, "figures"), "opgraph_%s" % slug)
 

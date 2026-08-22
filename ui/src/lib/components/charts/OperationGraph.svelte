@@ -41,7 +41,20 @@
 		meta?: {
 			components?: { operations: number; models: number }[];
 			coverage?: { reading: string; placed: number; reversed: number; unassigned: number }[];
+			reversals?: Rev[];
 		};
+	};
+	//: A MODEL THE RATER SAYS RUNS THE OPERATION BACKWARDS. Not a member -- it
+	//: would put the opposite movement inside the cluster -- but a judgement about
+	//: that operation, so it is drawn as a red dashed line to the hub rather than
+	//: left out of the picture entirely.
+	type Rev = {
+		model: string;
+		op: string;
+		reading: string;
+		a_words: string[];
+		b_words: string[];
+		how_you_know: string;
 	};
 	let { art }: { art: Art } = $props();
 
@@ -51,27 +64,73 @@
 	let hidden = $state<string[]>([]);
 	let picked = $state<Node | null>(null);
 	let hover = $state<string | null>(null);
+	let showRev = $state(true);
 	let w = $state(0);
 	let panel: HTMLDivElement | undefined = $state();
 
 	const colour = $derived(new Map(art.groups.map((g) => [g.key, g.colour])));
 	const live = $derived(art.nodes.filter((n) => n.kind !== 'op' || !hidden.includes(n.group!)));
 	const liveIds = $derived(new Set(live.map((n) => n.id)));
+	const revs = $derived(art.meta?.reversals ?? []);
+	//: Live reversals only: a reversal whose OPERATION has been filtered out of the
+	//: legend has nothing to point at, and a red line to a hidden hub is a line to
+	//: nowhere. Keyed on the op node so the filter needs no second rule.
+	const revLive = $derived(revs.filter((r) => liveIds.has(r.op)));
+	const revByOp = $derived.by(() => {
+		const m = new Map<string, Rev[]>();
+		for (const r of revLive) m.set(r.op, [...(m.get(r.op) ?? []), r]);
+		return m;
+	});
+	const revByModel = $derived.by(() => {
+		const m = new Map<string, Rev[]>();
+		for (const r of revLive) m.set(r.model, [...(m.get(r.model) ?? []), r]);
+		return m;
+	});
 
 	//: BUILT FRESH EVERY TIME, never handed the artifact's own objects. d3-force
 	//: WRITES x/y/vx/vy onto the nodes it is given, so passing `art.nodes` in would
 	//: let a grain switch inherit the previous layout and start the simulation from
 	//: a shape it should have been free to find.
+	//: A REVERSAL IS A CLAIM ABOUT A MODEL, NOT ABOUT A WORD PAIR, so it enters
+	//: both grains as a MODEL node -- at word grain that is the only third kind in
+	//: the picture, and it is honest for it to look different from the words around
+	//: it. Most reversed models already exist because another reading placed them;
+	//: on the sexual frame not one of the five does, since every reading that names
+	//: them calls them reversed. Those are synthesised, and carry `rev` so the
+	//: panel can say they are here for no other reason.
+	function withRevs(ns: any[], ls: any[]) {
+		if (!showRev) return { nodes: ns, links: ls };
+		const at = new Map(ns.map((n) => [n.id, n]));
+		for (const r of revLive) {
+			const id = 'M::' + r.model;
+			if (!at.has(id)) {
+				const n = {
+					id,
+					kind: 'model',
+					label: r.model,
+					group: null,
+					component: null,
+					model: r.model,
+					rev: true
+				};
+				at.set(id, n);
+				ns.push(n);
+			}
+			ls.push({ source: id, target: r.op, rev: true });
+		}
+		return { nodes: ns, links: ls };
+	}
+
 	const view = $derived.by(() => {
 		if (grain === 'word') {
 			const ns = live.map((n) => ({ ...n }));
 			const ok = new Set(ns.map((n) => n.id));
-			return {
-				nodes: ns,
-				links: art.links
+			return withRevs(
+				ns,
+				art.links
 					.filter((l) => ok.has(l.source) && ok.has(l.target))
 					.map((l) => ({ ...l }))
-			};
+			);
 		}
 		//: Model grain: one node per model, linked to every operation that placed it.
 		//: Multiplicity is dropped deliberately. The question here is "is this model
@@ -109,7 +168,7 @@
 				ls[prev].cross = false;
 			}
 		}
-		return { nodes: [...keep.values()], links: ls };
+		return withRevs([...keep.values()], ls);
 	});
 
 	//: CROSSING LINKS ARE DRAWN BUT EXERT NO FORCE. They stay in `data.links` --
@@ -121,8 +180,14 @@
 	const forces = $derived({
 		link: forceLink(view.links)
 			.id((d: any) => d.id)
-			.distance(grain === 'word' ? 26 : 60)
-			.strength((l: any) => (l.cross ? 0 : 0.35)),
+			//: A REV LINK PULLS, WEAKLY, AND THAT IS NOT A CONTRADICTION OF THE ABOVE.
+			//: forceLink weights displacement by degree, so a reversed model with one
+			//: link moves almost all of the distance and a 30-member hub almost none:
+			//: the model parks beside the operation it runs backwards without dragging
+			//: the operation anywhere. A cross link joins two HUBS and has no such
+			//: asymmetry to protect it, which is why that one stays at zero.
+			.strength((l: any) => (l.cross ? 0 : l.rev ? 0.2 : 0.35))
+			.distance((l: any) => (l.rev ? 70 : grain === 'word' ? 26 : 60)),
 		charge: forceManyBody().strength(grain === 'word' ? -22 : -180),
 		collide: forceCollide().radius((d: any) => (d.kind === 'op' ? 22 : 9)),
 		center: forceCenter(w / 2, H / 2),
@@ -204,6 +269,12 @@
 			{/each}
 		</span>
 		<span class="count">{view.nodes.length} nodes, {view.links.length} links</span>
+		{#if revs.length}
+			<button class="key rev" class:off={!showRev} onclick={() => (showRev = !showRev)}>
+				<i></i>{revLive.length} reversed
+				<span class="muted">{revByModel.size} models</span>
+			</button>
+		{/if}
 		{#each art.groups as g (g.key)}
 			<button class="key" class:off={hidden.includes(g.key)} onclick={() => toggle(g.key)}>
 				<i style:background={g.colour}></i>{g.label}
@@ -217,7 +288,7 @@
 	<div class="stage">
 		<div class="plot" bind:clientWidth={w} bind:this={panel}>
 			{#if w > 0}
-				{#key grain + hidden.join()}
+				{#key grain + hidden.join() + showRev}
 					<ForceSimulation data={view} {forces} cloneNodes={false} alphaDecay={0.02}>
 						{#snippet children({ nodes, linkPositions, simulation })}
 							<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -248,27 +319,60 @@
 										y2={l.y2}
 										class="edge"
 										class:cross={view.links[i]?.cross}
+										class:rev={view.links[i]?.rev}
 									/>
 								{/each}
 								{#each nodes as n (n.id)}
 									{@const op = n.kind === 'op'}
+									<!--
+									  ONLY A MODEL NODE CAN BE REVERSED, and `M::` is what makes one. At
+									  word grain a reversed model's WORD nodes are present because a
+									  DIFFERENT reading placed it forward, so testing the model name
+									  alone would paint ~460 words red on the asylum frame and assert
+									  the opposite of what the reading says about them.
+									-->
+									{@const rev = n.id.startsWith('M::') && revByModel.has(n.model ?? '')}
 									<!-- svelte-ignore a11y_click_events_have_key_events -->
 									<circle
 										cx={n.x}
 										cy={n.y}
 										class:hov={hover === n.id}
-										r={op ? Math.min(20, 7 + (n.n ?? 1) * 0.35) : grain === 'model' ? 6 : 3}
-										fill={op && n.group ? colour.get(n.group) : n.component === 0 ? '#8b94a3' : '#ffd43b'}
+										r={op ? Math.min(20, 7 + (n.n ?? 1) * 0.35) : rev ? 6 : grain === 'model' ? 6 : 3}
+										fill={op && n.group
+											? colour.get(n.group)
+											: n.rev
+												? '#3a2226'
+												: n.component === 0
+													? '#8b94a3'
+													: '#ffd43b'}
 										class:op
+										class:revnode={rev}
 										class:sel={picked?.id === n.id}
 										onpointerdown={(e) => down(e, n, simulation)}
 										onpointerenter={() => (hover = n.id)}
 										onpointerleave={() => (hover = null)}
 										onclick={() => (picked = n)}
 									>
-										<title>{op ? n.label + ' (' + n.n + ')' : n.label}</title>
+										<title
+											>{op
+												? n.label + ' (' + n.n + ')'
+												: rev
+													? n.label +
+														' - reversed by ' +
+														(revByModel.get(n.model ?? '') ?? []).length +
+														' reading(s)'
+													: n.label}</title
+										>
 									</circle>
-									{#if op || hover === n.id || picked?.id === n.id}
+									<!--
+									  REVERSED MODELS ARE ALWAYS LABELLED. The hover rule below exists
+									  because 55 model labels at once are a smear, but a red dot with no
+									  name answers none of the question a reader brings to this layer,
+									  which is WHICH model the annotator called backwards. There are 5,
+									  2 and 23 of them on the three prompts, and on the one where 23 is
+									  the answer the crowding IS the finding.
+									-->
+									{#if op || rev || hover === n.id || picked?.id === n.id}
 										<!--
 										  HUBS ALWAYS, MODELS ONLY ON HOVER OR SELECTION. Labelling
 										  every model node at 55 nodes produced an unreadable smear
@@ -276,7 +380,12 @@
 										  looks. The panel carries the identity anyway, so the label
 										  was redundant as well as illegible.
 										-->
-										<text x={n.x} y={n.y - (op ? 15 : 10)} class="lab" class:oplab={op}
+										<text
+											x={n.x}
+											y={n.y - (op ? 15 : 10)}
+											class="lab"
+											class:oplab={op}
+											class:revlab={rev && !op && hover !== n.id && picked?.id !== n.id}
 											>{n.label}</text
 										>
 									{/if}
@@ -312,8 +421,10 @@
 						</tbody>
 					</table>
 					<p class="hint sm">
-						<code>unassigned</code> carries no words and <code>reversed</code> is excluded, so a model
-						in neither column is absent from this graph entirely.
+						<code>unassigned</code> carries no words, so a model in that column is absent from this
+						graph entirely. <code>reversed</code> is excluded from the COMPONENTS -- it is the same
+						operation run backwards, and putting it inside the cluster would average the two
+						directions away -- but it is drawn, as a red dashed line to the operation it reverses.
 					</p>
 				{/if}
 			{:else if picked.kind === 'op'}
@@ -335,12 +446,29 @@
 						</div>
 					{/each}
 				</div>
+				{#if revByOp.get(picked.id)?.length}
+					<p class="covh rev">runs it backwards, and is not a member</p>
+					<div class="mems">
+						{#each revByOp.get(picked.id) ?? [] as r (r.model)}
+							<div class="mem rv">
+								<b>{r.model}</b>
+								<span class="fr">{r.a_words.join(' ') || DASH}</span>
+								<span class="to">{r.b_words.join(' ') || DASH}</span>
+								<p class="why">{r.how_you_know}</p>
+							</div>
+						{/each}
+					</div>
+				{/if}
 			{:else}
 				{@const who = picked.model ?? picked.label}
 				{@const ws = wordsFor(who)}
 				<header>
 					<strong>{who}</strong>
-					<span class="muted">component {picked.component + 1}</span>
+					<span class="muted"
+						>{picked.component == null
+							? 'in no component'
+							: 'component ' + (picked.component + 1)}</span
+					>
 					<button class="close" onclick={() => (picked = null)}>close</button>
 				</header>
 				<p class="covh">pooled over every operation that placed it</p>
@@ -351,8 +479,25 @@
 					{#each placedBy(who) as o (o.id)}
 						<li><i style:background={o.group ? colour.get(o.group) : undefined}></i>{o.label}
 							<span class="muted">{o.group}</span></li>
+					{:else}
+						<li class="muted">no operation places it; it is here only as a reversal</li>
 					{/each}
 				</ul>
+				{#if revByModel.get(who)?.length}
+					<p class="covh rev">
+						called REVERSED by {revByModel.get(who)?.length} of {art.meta?.coverage?.length ?? DASH}
+						reading(s)
+					</p>
+					{#each revByModel.get(who) ?? [] as r (r.reading + r.op)}
+						<div class="mem rv">
+							<b>{r.reading}</b>
+							<span class="muted">{r.op.replace(/^OP\[[^\]]*\]\s*/, '')}</span>
+							<span class="fr">{r.a_words.join(' ') || DASH}</span>
+							<span class="to">{r.b_words.join(' ') || DASH}</span>
+							<p class="why">{r.how_you_know}</p>
+						</div>
+					{/each}
+				{/if}
 			{/if}
 		</aside>
 	</div>
@@ -453,6 +598,38 @@
 		stroke-opacity: 0.55;
 		stroke-width: 1;
 		stroke-dasharray: 3 3;
+	}
+	/* Longer dash and a warmer red than the group palette's #fa5252, so a
+	   reversal does not read as membership of the first reading. */
+	.edge.rev {
+		stroke: #ff6b6b;
+		stroke-opacity: 0.85;
+		stroke-width: 1.4;
+		stroke-dasharray: 6 3;
+	}
+	circle.revnode {
+		stroke: #ff6b6b;
+		stroke-width: 1.6;
+	}
+	text.revlab {
+		fill: #ff8787;
+		font-size: 0.55rem;
+	}
+	.key.rev i {
+		background: #ff6b6b;
+	}
+	.covh.rev {
+		color: #ff8787;
+	}
+	.mem.rv {
+		border-left: 2px solid #ff6b6b;
+		padding-left: 0.4rem;
+	}
+	.mem.rv .why {
+		margin: 0.2rem 0 0;
+		font-size: 0.7rem;
+		line-height: 1.35;
+		color: var(--text-3);
 	}
 	svg {
 		cursor: grab;
