@@ -400,7 +400,57 @@ step is whether the shift happens at SFT or at DPO** -- instruction-following
 against preference-optimisation. Findings U established that SFT does the cutting
 for displacement; if abstraction also moves at SFT the two are one mechanism.
 
-**IT CANNOT BE RUN. There are no passages for any isolated SFT rung.** Measured
+**CORRECTED SAME DAY: IT CAN BE RUN, AND WAS.** The paragraph below said the
+ladder was blocked. That was wrong, and wrong in a specific way worth naming: I
+checked which models had PASSAGES in `gen_sequences` and concluded about which
+CHECKPOINTS exist. Different stores, different question. `OLMo-2-0425-1B-SFT`
+and both Olmo-3 SFT rungs are cached locally, along with the whole Think branch
+(`Think-SFT`, `Think-DPO`, `Think`) and its intermediate revisions. Generating
+the 1B ladder cost 33 minutes on this machine.
+
+**First result, `novel_arc/ladder_pilot.py`, one stem, n=150 per rung, 95%
+bootstrap CI on the step deltas:**
+
+    INTERIORITY (usas_x)
+      base -> SFT        +0.0275   [+0.0110, +0.0446]   *
+      SFT  -> DPO        +0.0062   [-0.0122, +0.0240]
+      DPO  -> Instruct   -0.0009   [-0.0154, +0.0146]
+      base -> endpoint   +0.0328   [+0.0184, +0.0466]   *
+
+    ABSTRACTION (rh_absconc_median)
+      base -> endpoint   -0.0739   [-0.1553, +0.0462]   UNRESOLVED
+
+**Interiority installs at SFT and nowhere else** -- which is Findings U's "SFT
+does the cutting" on a different construct. Abstraction is not resolvable on one
+stem: passage SD is 0.36-0.38 against a total move of 0.074, so even the TOTAL
+fails to clear zero and any step-share read off it is meaningless. A powered
+version needs a STEM-PAIRED design (~50 stems x 8 passages) rather than more
+passages on one stem, because stem is the largest variance component here
+(ICC 0.417-0.433).
+
+**THE WITHIN-SFT VERSION IS `meta/M05_emergence` IN THE OLD REPO, and it needs
+vLLM on cloud.** Think-SFT is the FIRST post-training of `Olmo-3-1025-7B` and
+publishes **45 checkpoints, contiguous at 1000-step spacing** (step1000..43000,
+enumerated in `data/m05_checkpoint_population.json`). At 14.4 s/passage locally
+that is days; under vLLM it is download-bound, ~600 GB of weights for the full
+ladder or ~170 GB log-spaced at 12 rungs. vLLM also MATCHES the engine the
+f11_l2 corpus was generated with, so cloud-generated rungs are comparable to the
+existing store while local HF-generated ones are not.
+
+**AND IT NEEDS A SEMANTIC SCREEN, WHICH IS NOT CHEAP.** `Think-SFT@step1000`
+continues a narrative stem with `"Date de publication: 00 novembre 2015 / Could
+you please translate this to English?"` -- fluent, English, normal type-token
+ratio, and not narrative. Lexical heuristics are blind to it: that passage
+scores `known 0.991, ttr 0.578, ascii 1.0` against base's `0.982 / 0.645 / 1.0`.
+The failure is GENRE, not fluency, so the screen is the coder's `mode_A == NONE`
+and therefore metered. Each checkpoint must report its screen-rejection RATE
+beside its score, or a falling curve and a rising incoherence rate cannot be
+told apart -- the same discipline as coverage-before-construct in `novel_arc`.
+
+---
+
+*Superseded, kept for the record:* **There are no passages for any isolated SFT
+rung.** Measured
 against `gen_sequences` free-generation passages:
 
     allenai/OLMo-2-0425-1B          7,214    OLMo-2-0425-1B-DPO       7,214
