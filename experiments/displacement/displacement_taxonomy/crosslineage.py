@@ -106,9 +106,35 @@ def resolve(prefix):
                         and str((st[k].get("meta") or {}).get("frame_prompt", ""))
                         .lower().startswith(prefix.lower())} - {None})
     if not cands:
-        raise SystemExit("no prompt in the slot corpus or the stage-1 codings "
-                         "starts with %r" % prefix)
+        #: AND THIRD, THE WHOLE CATALOGUE. The two sources above are the frames
+        #: this experiment has already worked on, which is the right default and
+        #: the wrong ceiling: the matched CONTROLS live in `transgressive_swap`
+        #: and are in neither. `pick_controls.py` selects them by measurement
+        #: from there, and without this they were unreachable by the instrument
+        #: that would run them -- so the control design was blocked by prefix
+        #: resolution rather than by anything about controls.
+        #:
+        #: Resolution is by TEXT here, which is safe only because the ambiguity
+        #: refusal below is on the distinct-text set: 61 catalogue strings carry
+        #: more than one `prompt_id`, and every one of them collapses to a single
+        #: candidate. Nothing downstream sees an id.
+        from malignment.prompts import Prompts
+        cands = sorted({x.text for x in Prompts.all()
+                        if x.text and x.text.lower().startswith(prefix.lower())})
+    if not cands:
+        raise SystemExit("no prompt in the slot corpus, the stage-1 codings or "
+                         "the catalogue starts with %r" % prefix)
     if len(cands) > 1:
+        #: AN EXACT MATCH IS NOT AMBIGUOUS. `She was so angry she wanted to` is a
+        #: proper prefix of sixteen longer frames in the corpus (`... to cry`,
+        #: `... to hit`), so prefix matching alone refuses one of this folder's
+        #: own 35, and no longer prefix exists that reaches it. Equality is the
+        #: one disambiguator that cannot pick a population by accident, which is
+        #: what the refusal exists to prevent: it is not "take the first", it is
+        #: "the caller named this one and no other".
+        exact = [c for c in cands if c == prefix]
+        if len(exact) == 1:
+            return exact[0]
         raise SystemExit("%r matches %d prompts; give more of it:\n  %s"
                          % (prefix, len(cands), "\n  ".join(repr(c) for c in cands[:8])))
     return cands[0]

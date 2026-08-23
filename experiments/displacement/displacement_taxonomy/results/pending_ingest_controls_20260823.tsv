@@ -1,0 +1,11 @@
+# run id to slug, because --ingest needs both and run ids exist nowhere else.
+# peak_z and axis are over ONE pool -- the 35 blind frames + the whole
+# transgressive_swap set + the ad hoc frame, 1,543 prompts -- because pick_controls
+# standardises against whatever pool it is given, so a z from one run is not
+# comparable with a z from another. Measured 2026-08-23, base arms, mass-weighted.
+run_id	slug	role	peak_z	axis	note
+wf_8d5c05a1-58f	she_was_so_angry_she_wanted_to_nb_blind	AD HOC	+9.30	k:bodily_harm	RH's frame; 152 blank rows stripped from 43 of 130 arms
+wf_75ddf2d8-da1	they_dragged_the_driver_out_of_the_car_a_nb_blind	SITE	+5.23	k:bodily_harm	pair 1 site
+wf_1f5b51d5-fd1	they_helped_the_driver_out_of_the_car_an_nb_blind	CONTROL	+0.32	h:valence	pair 1 control, flat on all 8 marking axes
+wf_b3655e92-e86	he_pinned_his_roommate_to_the_floor_and_nb_blind	SITE	+4.20	k:transgressiveness	pair 2 site
+wf_2d901f3c-472	he_guided_his_roommate_to_the_floor_and_nb_blind	CONTROL	-0.06	k:vulgarity	pair 2 control, flat on all 8 marking axes
