@@ -605,10 +605,27 @@ def execute(b, models, roots, venv, a):
     host, port, ip = _wait_ssh(cloud, iid)
     st.update({"ssh_host": host, "ssh_port": port, "public_ip": ip}); cloud.state(st)
     #: Tries the proxy name AND the public IP, for six minutes. Boot is a race.
-    working = cloud.verify_reachable(host, port, alt_host=ip)
-    if working and working != host:
-        print("  note        proxy host did not answer; using the IP %s" % working)
-        st["ssh_host"] = working; cloud.state(st)
+    #: **THE IP NEEDS THE CONTAINER'S MAPPED PORT, NOT THE PROXY'S.** vast.ai
+    #: publishes `ports: {"22/tcp": [{"HostPort": "44690"}]}` alongside
+    #: `ssh_port: 19558`; the first is the direct route and the second is the
+    #: proxy. Passing the IP with the proxy port made the fallback unusable --
+    #: every attempt hit a closed port and read as "still booting", which is what
+    #: killed the 2026-08-23 launch.
+    _dp = None
+    try:
+        _inst = {str(i.get("id")): i for i in
+                 json.loads(cloud.vastai("show", "instances", "--raw") or "[]")}
+        _pm = ((_inst.get(str(iid)) or {}).get("ports") or {}).get("22/tcp") or []
+        _dp = int(_pm[0]["HostPort"]) if _pm else None
+    except Exception:                                            # noqa: BLE001
+        _dp = None
+    working = cloud.verify_reachable(host, port, alt_host=ip, alt_port=_dp)
+    if working:
+        w_host, w_port = working
+        if (w_host, w_port) != (host, port):
+            print("  note        proxy did not answer; using %s:%s" % (w_host, w_port))
+            st["ssh_host"], st["ssh_port"] = w_host, w_port
+            cloud.state(st)
     if not working:
         #: **A BOX THAT NEVER ANSWERS IS A STATE, NOT A RACE.** The runbook's
         #: rule, and the L2 fleet lost 3 of 14 to retrying one. Blocklist the

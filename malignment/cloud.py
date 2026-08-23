@@ -281,7 +281,8 @@ def offers(name, limit=8, gb=0.0, hours=0.0):
     return out[:limit]
 
 
-def verify_reachable(host, port, tries=24, wait=15, alt_host=None):
+def verify_reachable(host, port, tries=24, wait=15, alt_host=None,
+                     alt_port=None):
     """A box that never answers is a STATE, not a race -- but BOOT IS A RACE.
 
     **CORRECTED 2026-08-19, having destroyed a healthy box for it.** This said
@@ -301,16 +302,31 @@ def verify_reachable(host, port, tries=24, wait=15, alt_host=None):
     not. Both are tried each round, so whichever works is found without a second
     policy.
     """
-    hosts = [h for h in (host, alt_host) if h]
+    #: **THE PORT VARIES WITH THE HOST, AND THE FIRST VERSION HELD IT FIXED.**
+    #: `alt_host` was tried on the PROXY's port. vast.ai publishes two routes and
+    #: they do not share a port: `ssh6.vast.ai:19558` is the proxy, while the IP
+    #: needs the container's mapped `22/tcp` -- 44690 on box 48459558. So the
+    #: fallback RH asked for was built and could never succeed: every attempt on
+    #: the IP hit a closed port and read as "still booting". Six minutes of that
+    #: is indistinguishable from a box that never came up, and it cost a launch
+    #: on 2026-08-23 -- rented, never provisioned, killed at the tool timeout
+    #: with the box left running and bare.
+    #:
+    #: Pairs, not a host list crossed with one port.
+    pairs = [(host, port)]
+    if alt_host:
+        pairs.append((alt_host, alt_port or port))
     for _ in range(tries):
-        for h in hosts:
+        for h, port in pairs:
             r = subprocess.run(["ssh", "-o", "StrictHostKeyChecking=no",
                                 "-o", "UserKnownHostsFile=/dev/null",
                                 "-o", "LogLevel=ERROR", "-o", "ConnectTimeout=10",
                                 "-p", str(port), "root@%s" % h, "true"],
                                capture_output=True)
             if r.returncode == 0:
-                return h
+                #: The PAIR, because a caller that stores the host and keeps the
+                #: old port has learned nothing.
+                return (h, port)
         time.sleep(wait)
     return None
 
