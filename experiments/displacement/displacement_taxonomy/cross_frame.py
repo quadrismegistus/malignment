@@ -239,6 +239,12 @@ def components(k=2):
             out.append(dict(prompt=prompt, domain=dom.get(prompt), k=k, no_blanks=nb,
                             names=[(t, o["name"], o.get("statement") or "",
                                     len(o.get("members") or [])) for t, o in ent],
+                            #: PER-OPERATION members kept beside the flattened
+                            #: `_members`. A component merged several operations
+                            #: because they SHARE models, but each operation still
+                            #: has its own member list, and that is the level a
+                            #: reader drills to: relation -> the models IT placed.
+                            _ops=[(t, o) for t, o in ent],
                             n_models=len({m["model"] for m in mem}), _members=mem))
     #: THE ID IS A NAME AND IT HAS TO MEAN ONE THING. Sorting on (prompt,
     #: n_models) alone left 19 of 94 slots in TIE GROUPS -- same sentence, same
@@ -531,59 +537,77 @@ DOMAIN_COLOUR = {"sexual": "#fa5252", "violence": "#e8590c",
                  "institutional": "#4dabf7", "identity": "#51cf66"}
 
 
-def emit_graph(groups_path=None, out="metagraph"):
-    """The meta-relation network as a `graph` artifact: component -> meta-relation.
+def emit_graph(groups_path=None, out="metagraph", cap=10):
+    """The meta-relation network, carrying all FOUR levels for the drill-down.
 
-    ## THE SAME SHAPE ONE LEVEL UP
+        meta-relation -> component -> within-prompt relation -> model + words
 
-    `operation_graph` draws `M##_word -> [operation] -> M##_word` with the
-    operation as a NODE. Here the hub is a META-RELATION and the leaves are the
-    per-frame COMPONENTS it grouped. What the picture is for is the one question
-    the counts answer badly: whether a relation survives a change of material.
-    A hub whose leaves are all one colour is confined to a domain; a hub with
-    four colours crossed every one.
+    ## WHY THE LEAVES ARE FAT
 
-    Leaves carry their DOMAIN as `group`, so the legend is domains rather than
-    raters -- the domain label was withheld from the rater and is exactly the
-    thing we want to see it did not use.
+    The per-frame graph puts every word on the canvas as its own node, so its
+    panel can recover words by walking links. Here the canvas is two levels --
+    component and meta-relation -- and the two levels BELOW a component are not
+    drawn at all. They still have to be readable, so they ride on the leaf.
 
-    Singletons are drawn. A component no rater could place is a fact about the
-    corpus, and leaving it out would make the picture look tidier than the
-    grouping was.
+    Words are capped per model per side and ordered by rank, so what a reader
+    sees first is what led the arm rather than an alphabetical tail.
     """
     import json as _json
     G = _json.load(open(groups_path or os.path.join(
         HERE, "results", "crossframe_groups_89_opus_medium.json")))
     M = as_read()
-    nodes, links = [], []
-    seen = set()
+    sc = {}
+    nodes, links, seen = [], [], set()
+
+    def words(model, ws, side, rows):
+        out = []
+        key = "rank_a" if side == "a" else "rank_b"
+        for w in [x.lower() for x in (ws or [])]:
+            r = rows.get(w) or rows.get(w.capitalize()) or {}
+            out.append({"w": w, "ra": r.get("rank_a"), "rb": r.get("rank_b"),
+                        "k": r.get(key)})
+        out.sort(key=lambda x: (x["k"] is None, x["k"] or 0))
+        return [{"w": x["w"], "ra": x["ra"], "rb": x["rb"]} for x in out[:cap]]
 
     def leaf(cid):
         if cid in seen or cid not in M:
             return
         seen.add(cid)
         c = M[cid]
-        #: ID IS `sentence::C##`, NOT bare `C##`. The consumer's model-grain
-        #: collapse splits a leaf id on `::` to find what to group it under, so a
-        #: bare id collapses every component to `M::C33` -- one node per
-        #: component, which is not a collapse at all. With the sentence first,
-        #: model grain becomes SENTENCE grain and answers "which sentences feed
-        #: this relation", which is the question the leaf colours raise.
+        if c["prompt"] not in sc:
+            sc[c["prompt"]] = OG.sidecar(c["prompt"], no_blanks=c.get("no_blanks", False)) or {}
+        rows_by = sc[c["prompt"]]
+        #: ONE ENTRY PER WITHIN-PROMPT RELATION, each carrying the models IT
+        #: placed. Operations inside a component overlap by construction -- that
+        #: is why they merged -- so a model can appear under two relations, and
+        #: seeing it twice with two different word lists IS the evidence the
+        #: merge rests on rather than a duplication to tidy away.
+        rels = []
+        for t, o in c["_ops"]:
+            mem = []
+            for m in sorted(o.get("members") or [], key=lambda m: m["model"]):
+                r = rows_by.get(m["model"]) or {}
+                mem.append({"model": m["model"],
+                            "from": words(m["model"], m.get("a_words"), "a", r),
+                            "to": words(m["model"], m.get("b_words"), "b", r)})
+            rels.append({"name": o["name"], "reading": t,
+                         "statement": o.get("statement") or "",
+                         "n": len(o.get("members") or []), "members": mem})
         nodes.append({"id": "%s::%s" % (c["prompt"], cid), "kind": "word", "label": cid,
-                      "group": c["domain"], "model": c["prompt"],
-                      "side": "to", "component": 0,
-                      "names": [n[1] for n in c["names"]],
-                      "n_models": c["n_models"]})
+                      "group": c["domain"], "model": c["prompt"], "side": "to",
+                      "component": 0, "cid": cid, "sentence": c["prompt"],
+                      "n_models": c["n_models"], "stripped": bool(c.get("no_blanks")),
+                      "relations": rels})
 
-    for i, g in enumerate(G["groups"]):
+    for g in G["groups"]:
         hid = "META %s" % g["name"]
         fr = {M[m]["prompt"] for m in g["members"] if m in M}
         ds = collections.Counter(M[m]["domain"] for m in g["members"] if m in M)
         nodes.append({"id": hid, "kind": "op", "label": g["name"], "group": None,
                       "component": 0, "n": len(g["members"]),
-                      "statement": g.get("statement", ""),
-                      "spans": g.get("spans", ""), "why": g.get("why", ""),
-                      "sentences": len(fr), "domains": dict(ds),
+                      "statement": g.get("statement", ""), "spans": g.get("spans", ""),
+                      "why": g.get("why", ""), "sentences": len(fr),
+                      "domains": dict(ds),
                       "models": sorted(m for m in g["members"] if m in M)})
         for m in g["members"]:
             leaf(m)
@@ -599,18 +623,23 @@ def emit_graph(groups_path=None, out="metagraph"):
         title="Cross-frame meta-relations",
         subtitle=("%d meta-relations over %d components from %d sentences, grouped by one "
                   "blind reader that saw no domain label and no model identity. A leaf is a "
-                  "per-frame component, coloured by the DOMAIN it came from; a hub is a "
-                  "relation the reader said they share. A hub whose leaves are one colour is "
-                  "confined to a domain. %d components no reader could place are drawn "
+                  "per-frame component coloured by the DOMAIN it came from; a hub is a "
+                  "relation the reader said they share. A hub whose leaves are one colour "
+                  "is confined to a domain. %d components no reader could place are drawn "
                   "unattached, because a corpus with unplaceable components should not look "
-                  "tidier than it is."
+                  "tidier than it is. Click a hub, then a component, to reach the models."
                   % (len(G["groups"]), len(seen), len({M[c]["prompt"] for c in seen}),
                      len(G.get("singletons") or []))),
         nodes=nodes, links=links,
         groups=[{"key": k, "label": "%s (%d)" % (k, dom[k]), "colour": v}
                 for k, v in DOMAIN_COLOUR.items() if k in dom],
-        meta={"raters": 1, "source": os.path.basename(groups_path or "opus_medium"),
+        meta={"chart_hint": "metagraph", "raters": 1,
               "components": [{"operations": len(G["groups"]), "models": len(seen)}]})
+    #: `graph()` VALIDATES, a different component DRAWS. Its dangling-endpoint
+    #: assert is exactly what this artifact needs; its two-level op/word panel is
+    #: not, so the chart NAME is overridden after validation rather than the
+    #: validation being skipped.
+    art["chart"] = "metagraph"
     return write(art, os.path.join(HERE, "figures"), out)
 
 
