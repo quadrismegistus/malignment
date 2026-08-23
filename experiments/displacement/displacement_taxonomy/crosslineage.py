@@ -319,7 +319,27 @@ def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False,
     print("  workflow %s\n\nNOT RUN." % out)
 
 
-def ingest(run_id, slug):
+def _raters_from_workflow(slug):
+    """The rater count for a run whose state file predates the `raters` field.
+
+    Every state file written before `prepare` recorded `raters` lacks it, and the
+    guard below then reads None and stops guarding -- which is how a resumed
+    journal's third result got stored as `r3` on a two-rater run. The count is
+    not lost: `prepare` writes it into the generated workflow as the literal
+    `Array.from({ length: N }`, so it is recoverable from disk beside the state.
+
+    Returns None when the script is absent or does not match, and the caller
+    treats that as "cannot check" rather than as a number. An unmeasurable count
+    must not become an assumed one -- that is the defect this exists to close.
+    """
+    f = os.path.join(HERE, "workflow_xling_%s.js" % slug)
+    if not os.path.exists(f):
+        return None
+    m = re.search(r"Array\.from\(\{\s*length:\s*(\d+)", open(f).read())
+    return int(m.group(1)) if m else None
+
+
+def ingest(run_id, slug, tail=False):
     import glob
     state = json.load(open(os.path.join(HERE, "results", "xling_%s.json" % slug)))
     shown = set(state["models"])
@@ -337,6 +357,42 @@ def ingest(run_id, slug):
             res.append(d["result"])
     if not res:
         raise SystemExit("no result carrying `operations` in the journal")
+    #: A RESUMED RUN APPENDS TO ITS OWN JOURNAL, SO RESULT LINES OUTGROW RATERS.
+    #:
+    #: `Workflow(resumeFromRunId=...)` writes into the SAME transcript directory,
+    #: so a 2-rater run resumed once carries 3 result lines and resumed twice
+    #: carries 4 or 5. This loop numbers raters by position, so the extras would
+    #: store as rater 3, rater 4 -- readings that exist nowhere in the design,
+    #: under a prompt that then reports more readings than it was ever given.
+    #:
+    #: Observed: `He filled the offering bowls and` (wf_561bcecb-ae8) holds 3
+    #: results after one resume, the first being the rater refused for never
+    #: placing M20. Nothing in the run's own reporting says so -- the completion
+    #: notice says `raters: 2` because the SCRIPT ran two agents.
+    #:
+    #: Refuse rather than truncate. Which of the extras is the intended reading
+    #: is a question about why the run was resumed, and this function cannot know
+    #: it: taking the last N would silently prefer the newest, which is right for
+    #: a rate-limit retry and wrong for a resume that re-ran a stage.
+    want = state.get("raters") or _raters_from_workflow(slug)
+    if want and len(res) > int(want):
+        if not tail:
+            #: THE REFUSAL HAS TO NAME AN ACTION THAT EXISTS. The first version
+            #: said "ingest the attempt you mean by pointing at its own
+            #: directory" -- and a resume writes into the SAME directory, so
+            #: there is no such directory and the advice could not be followed.
+            #: A guard whose remedy is impossible is a guard that gets bypassed.
+            raise SystemExit(
+                "journal for %s carries %d results but the run was prepared with "
+                "%d rater(s): a resumed run APPENDS to its own journal, so this "
+                "directory holds more than one attempt. Pass --tail to take the "
+                "last %d (the resumed attempt), or re-run the prompt fresh for a "
+                "new run id. Do not guess -- taking the newest is right for a "
+                "rate-limit retry and wrong for a resume that re-ran a stage."
+                % (run_id, len(res), want, want))
+        print("--tail: taking the last %d of %d results in a resumed journal"
+              % (want, len(res)), file=sys.stderr)
+        res = res[-int(want):]
     st = _stash()
     refused, stored = [], []
     for i, r in enumerate(res, 1):
@@ -463,6 +519,9 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--prepare", metavar="PROMPT_PREFIX")
     ap.add_argument("--ingest", metavar="RUN_ID")
+    ap.add_argument("--tail", action="store_true",
+                    help="a RESUMED run appends to its journal; take the last "
+                         "`raters` results as the attempt to store")
     ap.add_argument("--slug")
     ap.add_argument("--report", action="store_true")
     #: RATERS ARE SET BY THE WORKFLOW, NOT BY INGEST. `ingest` already enumerates
@@ -480,7 +539,7 @@ if __name__ == "__main__":
     elif a.ingest:
         if not a.slug:
             raise SystemExit("--ingest needs --slug")
-        ingest(a.ingest, a.slug)
+        ingest(a.ingest, a.slug, tail=a.tail)
     elif a.report:
         report()
     else:

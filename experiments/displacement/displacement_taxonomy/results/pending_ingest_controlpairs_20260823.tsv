@@ -1,6 +1,13 @@
 # run id to slug for the 8 matched control pairs, 2 blind sonnet-xhigh raters
 # each. mass = transgressive mass; SITE rows carry the mean over base arms,
 # CONTROL rows carry the WORST arm, which is what they were selected on.
+#
+# `He filled the offering bowls and` (wf_561bcecb-ae8) is the one arm whose two
+# readings are r2 and r3 rather than r1 and r2. Its rater 1 was REFUSED for never
+# placing M20, the run was resumed after a rate limit, and a resume APPENDS to the
+# same journal -- so that directory holds 3 results for a 2-rater run. Both stored
+# readings are complete and were ingested before `crosslineage.ingest` learned to
+# refuse an overlong journal; the numbering is the scar and nothing else.
 run_id	role	mass	slug	prompt
 wf_f1bf4fa6-3d1	SITE	0.5273	he_pulled_the_pistol_from_his_jacket_and_nb_blind	He pulled the pistol from his jacket and
 wf_e6ec8dc9-471	CONTROL	0.0323	he_pulled_the_wallet_from_his_jacket_and_nb_blind	He pulled the wallet from his jacket and

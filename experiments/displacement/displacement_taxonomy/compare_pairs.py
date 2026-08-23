@@ -40,6 +40,7 @@ transgression. All three are results; none of them is a failed run.
 """
 import argparse
 import collections
+import math
 import os
 import statistics
 import sys
@@ -76,6 +77,67 @@ def shape(prompt):
                 largest=max(sizes) if sizes else 0,
                 reversed=statistics.mean(rev), unassigned=statistics.mean(una),
                 names=[(t, o) for t, v in pairs for o in (v.get("operations") or [])])
+
+
+def sign_test(diffs):
+    """Exact two-sided sign test on the non-zero differences.
+
+    Chosen over a t test because n is 8 and these are counts of components, not
+    a quantity with a meaningful scale: the difference between 10 components and
+    2 is not four times the difference between 3 and 1. Ties are dropped, which
+    is the standard treatment and is reported, since dropping them shrinks an
+    already small n.
+    """
+    d = [x for x in diffs if x != 0]
+    n = len(d)
+    if not n:
+        return None, 0, 0
+    pos = sum(1 for x in d if x > 0)
+    k = max(pos, n - pos)
+    #: sum of the two tails at or beyond k, computed exactly -- at n <= 8 there
+    #: is no reason to approximate and every reason not to.
+    c = lambda a, b: math.comb(a, b)
+    tail = sum(c(n, i) for i in range(k, n + 1))
+    return min(1.0, 2.0 * tail / (2 ** n)), pos, n
+
+
+def paired(pairs):
+    """Site against its own control, pair by pair. The design is paired; the test must be.
+
+    ## WHY THIS IS HERE AND NOT A GLANCE AT THE MEDIANS
+
+    Run mid-sweep the medians read SITE 4.5 components / 16 largest against
+    CONTROL 3.0 / 28 and looked like a finding. Equalised at two readings per arm
+    they read 6.0 / 25.5 against 3.0 / 29 -- the largest-component gap, which was
+    the striking half, was almost entirely the reading-count artifact.
+
+    What remains is small and n is 8. A median that moves in the expected
+    direction across eight pairs is not evidence until something says how often
+    eight coin flips do that, and the answer here is: often enough to matter.
+    """
+    print()
+    metrics = [("components", "comps"), ("largest component", "largest"),
+               ("reversals/rater", "reversed"), ("unassigned/rater", "unassigned")]
+    print("  PAIRED, site against its OWN control (n = %d pairs)\n" % len(pairs))
+    print("  %-20s %10s %10s %8s %10s" % ("metric", "site>ctrl", "median d", "p", "verdict"))
+    for label, key in metrics:
+        ds = []
+        for site, ctrl in pairs:
+            a, b = shape(site["prompt"]), shape(ctrl["prompt"])
+            if a and b:
+                ds.append(a[key] - b[key])
+        if not ds:
+            continue
+        pv, pos, n = sign_test(ds)
+        print("  %-20s %6d / %-3d %10.1f %8s %10s"
+              % (label, pos, n, statistics.median(ds),
+                 "%.3f" % pv if pv is not None else "-",
+                 "" if pv is None or pv >= .05 else "  *"))
+    print("\n  Exact two-sided sign test, ties dropped, UNCORRECTED across 4 metrics.")
+    print("  At n = 8 the smallest attainable p is %.3f, so nothing here can reach"
+          % (2.0 / 2 ** 8))
+    print("  significance on fewer than 8 of 8 pairs agreeing. Read the direction")
+    print("  and the count, and treat the p as a reminder of how little 8 buys.")
 
 
 def main():
@@ -126,6 +188,7 @@ def main():
         print("  many raters have ingested, so an arm-vs-arm median here would")
         print("  measure the sweep's progress. Re-run when every arm has landed.")
         return
+    paired(pairs)
     for role in ("SITE", "CONTROL"):
         g = [s for r, _, s in out if r == role and s]
         if not g:
