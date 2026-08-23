@@ -1,0 +1,19 @@
+{
+ "_about": "The declared prompt set for the framed (prefill) measurement. The .txt beside this is what a fleet ships with --prompts-file.",
+ "_producer": "scripts/build_prompt_population.py",
+ "_sources": [
+  "roster/prompts",
+  "malign-logits/data/beam_sample_105.csv"
+ ],
+ "n": 840,
+ "groups": {
+  "F01": 49,
+  "F21": 51,
+  "M03": 252,
+  "PAIR105": 210,
+  "SLOT": 279
+ },
+ "collapsed": 1,
+ "near_duplicates": 0,
+ "in_corpus_domains": 840
+}

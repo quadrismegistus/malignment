@@ -238,6 +238,12 @@ def reload():
     return _load(force=True)
 
 
+#: The 105-pair transgressive sample, in the READ-ONLY archive. Declared here so
+#: the one archive dependency of this module has a name rather than being a
+#: literal inside a function.
+PAIRS_CSV = "/Users/rj416/github/malign-logits/data/beam_sample_105.csv"
+
+
 class Prompt:
     """One catalogue entry, keyed by prompt_id."""
 
@@ -349,6 +355,57 @@ class Prompts:
         because outputs are not stored -- see `roster/prompts/generated/`.
         """
         return Prompts.where(family="generated")
+
+    @staticmethod
+    def framed_population(pairs_csv=None):
+        """The declared prompt set for the FRAMED (prefill) measurement. 840 texts.
+
+        **A UNION OVER DISTINCT STRINGS, WHICH IS NOT WHAT SUMMING GIVES.**
+
+            F01       49      M03      252      PAIR105   210
+            F21       51      SLOT     279      ------------------
+                                                UNION     840
+
+        The parts sum to 841. Forty-eight duplicate strings sit inside the slot
+        corpus alone (327 entries, 279 texts), one inside F21, and one string is
+        shared between F01 and SLOT -- so summing the GROUPS gives 890 and
+        over-costs a fleet by 6%, and summing the distinct parts gives 841 and
+        is still wrong by one. Only the set union is right, and it is taken over
+        `.text` because the corpus is keyed by the string, not by the entry.
+
+        **RETURNS STRINGS, NOT PROMPT OBJECTS.** One text can be several
+        catalogue entries -- 127 entries share a text with another -- and a
+        framed cell is keyed by (model, prompt, frame, ...) with no entry in it.
+        Returning objects would invite a caller to measure the same surface
+        twice and count it as two.
+
+        The 105-pair transgressive sample lives in the READ-ONLY archive
+        (`malign-logits/data/beam_sample_105.csv`, seed 20260805). It is read,
+        never written, and the artifact built from this
+        (`roster/prompts/populations/prefill.txt`, via
+        `scripts/build_prompt_population.py`) lives here -- so the dependency is
+        on a source we could lose rather than on a file we could not rebuild.
+        Absent, the sample contributes nothing and the caller is told; it is not
+        silently 210 prompts short.
+        """
+        import csv as _csv
+        import os as _os
+        g = lambda p_, k: getattr(p_, k, None)                    # noqa: E731
+        ps = Prompts.all()
+        out = {
+            "F01": {p_.text for p_ in ps if g(p_, "finding") == "F01"},
+            "F21": {p_.text for p_ in ps if g(p_, "finding") == "F21"},
+            "M03": {p_.text for p_ in Prompts.institutional()},
+            "SLOT": {p_.text for p_ in ps
+                     if str(g(p_, "source") or "").startswith("SLOT")},
+        }
+        path = pairs_csv or PAIRS_CSV
+        if _os.path.exists(path):
+            with open(path) as fh:
+                out["PAIR105"] = {r["prompt"] for r in _csv.DictReader(fh)}
+        else:
+            out["PAIR105"] = set()
+        return out
 
     @staticmethod
     def chinese():
