@@ -168,12 +168,54 @@ rate is highest.
 here rests on it, but a consumer screening one arm should know it.
 
 **What still eludes, after the union.** `nonwords` is largely caught (31% still
-score below 0.5). `mangled` is not: 199 of the 256 junk items, and 57% of them
-still score clean. That is where any further work belongs, and the coder notes
-name the next features -- CN/EN code-switch inside a word, name mutation at edit
-distance 1, stray verse numbering.
+score below 0.5). `mangled` is not: 199 of the 256 junk items, and 57% still
+score clean.
 
-**So "feature engineering is not the lever here" was wrong.** It was the lever.
+**Three more features taken from the coder notes, and all three are NULL.**
+CN/EN code-switch inside a word, name mutation at edit distance 1, and stray
+verse numbering were named in the notes on the very items being missed, so they
+looked like the obvious next step. They are not:
+
+    mixed_script    0.611 alone, and REDUNDANT -- adds nothing to the union
+    name_mutation   0.504    chance
+    stray_number    0.510    chance
+
+Union AUC with them: 0.768, unchanged to three decimals. **A feature named by a
+coder's note is a description of one passage, not a signal across the corpus.**
+
+**And the CJK hypothesis is refuted, by the same mistake in the other direction.**
+Three of the seven worst remaining misses are Chinese with Chinese-specific junk
+(non-composing compounds 贞宿, 女农青爱, 逾载). Since every lexical feature here
+is computed over ASCII tokens, a missing Chinese lexicon looked like the whole
+remaining story. Stratified, it is not:
+
+    latin  <0.10    n=456  junk 25%  AUC 0.742
+    mixed .10-.50   n= 73  junk 55%  AUC 0.726
+    cjk    >=0.50   n=285  junk 36%  AUC 0.771
+
+CJK is the BEST stratum. Char n-grams already carry it -- a non-composing
+compound IS a rare character bigram. Reading seven salient examples and
+generalising produced a wrong diagnosis twice on the same afternoon, in opposite
+directions.
+
+**The label DOES bound it, and here is the test rather than the appeal.** The 66
+items excluded because the coders disagreed are the label's own ambiguous
+region. Scored by a model trained only on the agreed items:
+
+    agreed CLEAN   n=558   0.390
+    DISAGREED      n= 66   0.469     the midpoint of the two is 0.467
+    agreed JUNK    n=256   0.544
+
+The model is as uncertain about them as the humans were. That is genuine
+evidence for a label-ambiguity component in the residual -- which the original
+section asserted and never tested.
+
+**So both halves of 2b need correcting, not one.** "Feature engineering is not
+the lever" was wrong: the lexicon moved 0.724 to 0.768. "The ceiling is the
+label" was asserted without evidence but is now partly supported at the NEW
+ceiling, not the old one. The remaining error is uniform across script and arm,
+so there is no stratum left to attack and no further feature has paid.
+
 Whether 0.768 is enough for any given consumer is a separate question this file
 does not answer, and section 4's advice to state your own tolerance stands.
 

@@ -127,8 +127,59 @@ def feats(text):
     g5 = collections.Counter(tuple(lw[i:i + 5]) for i in range(max(len(lw) - 4, 0)))
     rep5 = (max(g5.values()) - 1) / max(len(lw), 1) if g5 else 0.0
 
+    #: THE THREE THE CODER NOTES NAMED, after the first pass left 57% of
+    #: `mangled` scoring clean. Each is taken from a note, not invented:
+    #: "CN/EN code-switch" (a000), "names mutate HARPILIA/HARPILER" (a827),
+    #: "stray verse numbers '5' and '(...) 6 7'" (a196).
+
+    #: 1. mixed script INSIDE one token. Not a code-switch between sentences,
+    #: which is ordinary in this corpus, but a word that is half Han half Latin.
+    mixed = 0
+    for w in words:
+        has_cjk = any("一" <= ch <= "鿿" for ch in w)
+        has_lat = any(("a" <= ch <= "z") or ("A" <= ch <= "Z") for ch in w)
+        if has_cjk and has_lat:
+            mixed += 1
+
+    #: 2. NAME MUTATION: two capitalised out-of-dictionary tokens in the same
+    #: passage at edit distance 1. One name spelled two ways.
+    def ed1(x, y):
+        if abs(len(x) - len(y)) > 1:
+            return False
+        if len(x) == len(y):
+            return sum(p != q for p, q in zip(x, y)) == 1
+        a2, b2 = (x, y) if len(x) < len(y) else (y, x)
+        i = j = 0
+        skipped = False
+        while i < len(a2) and j < len(b2):
+            if a2[i] != b2[j]:
+                if skipped:
+                    return False
+                skipped = True
+                j += 1
+                continue
+            i += 1
+            j += 1
+        return True
+
+    caps = sorted({w for w in oov if len(w) >= 5 and w[0].isupper()})
+    mut = 0
+    for i2 in range(len(caps)):
+        for j2 in range(i2 + 1, len(caps)):
+            if ed1(caps[i2].lower(), caps[j2].lower()):
+                mut += 1
+
+    #: 3. STRAY NUMBERING: a bare integer standing as its own token amid prose.
+    #: Enumerated lists and verse numbers both land here, which is intended --
+    #: both are paratext intruding into a passage that should be continuous.
+    stray = sum(1 for w in words if w.strip(".,()[]").isdigit()
+                and len(w.strip(".,()[]")) <= 3)
+
     d = float(max(len(ascii_alpha), 1))
     return dict(
+        mixed_script=mixed / max(len(words), 1),
+        name_mutation=float(mut),
+        stray_number=stray / max(len(words), 1),
         oov_rate=len(oov_lower) / d,
         oov_rate_all=len(oov) / d,
         fused_rate=fused / d,
@@ -143,6 +194,7 @@ def feats(text):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--misses", action="store_true")
+    ap.add_argument("--disagree", action="store_true")
     ap.add_argument("--show", type=int, default=8)
     a = ap.parse_args(argv)
 
@@ -153,7 +205,7 @@ def main(argv=None):
     from sklearn.pipeline import make_pipeline
     from sklearn.metrics import roc_auc_score
     sys.path.insert(0, HERE)
-    from passA_errors import load, subtype
+    from passA_errors import load, subtype, PASSA
 
     ids, texts, y, meta = load()
     y = np.array(y)
@@ -218,12 +270,73 @@ def main(argv=None):
             print("  %-9s n=%4d  mean %.3f  scored<0.5: %d (%.0f%%)"
                   % (st, len(v), float(np.mean(v)), miss, 100 * miss / len(v)))
 
+    #: SCRIPT-STRATIFIED, and this is not a footnote. Every lexical feature above
+    #: is computed over ASCII-alphabetic tokens, so on a Chinese passage they
+    #: rest on almost nothing. If the detector is much weaker on CJK, the
+    #: remaining headroom is a MISSING LEXICON and not a missing statistic.
+    def cjk_share(t):
+        n = sum(1 for ch in t if not ch.isspace())
+        if not n:
+            return 0.0
+        return sum(1 for ch in t if "一" <= ch <= "鿿") / n
+
+    cs = np.array([cjk_share(t) for t in texts])
+    print()
+    print("BY SCRIPT  (cjk_share of non-space characters)")
+    for lab, sel in (("latin  <0.10", cs < 0.10),
+                     ("mixed .10-.50", (cs >= 0.10) & (cs < 0.50)),
+                     ("cjk    >=0.50", cs >= 0.50)):
+        idx = np.where(sel)[0]
+        if len(idx) < 20 or not (0 < y[idx].sum() < len(idx)):
+            print("  %-14s n=%4d  (too few to score)" % (lab, len(idx)))
+            continue
+        print("  %-14s n=%4d  junk %3d (%.0f%%)  AUC %.3f"
+              % (lab, len(idx), int(y[idx].sum()), 100 * y[idx].mean(),
+                 roc_auc_score(y[idx], oof[idx])))
+
     print()
     print("WITHIN ARM")
     for arm in ("base", "aligned"):
         sel = [i for i, m in enumerate(meta) if m.get("arm") == arm]
         if sel and 0 < y[sel].sum() < len(sel):
             print("  %-8s AUC %.3f" % (arm, roc_auc_score(y[sel], oof[sel])))
+
+    if a.disagree:
+        #: THE LABEL-CEILING TEST, and it is a real test rather than an appeal.
+        #: The 66 items excluded because the two coders DISAGREED are the
+        #: label's own ambiguous region. A model trained on the agreed items and
+        #: applied to them should, if it tracks what the coders track, score
+        #: them BETWEEN agreed-clean and agreed-junk. If instead it scores them
+        #: like clean items, the disagreement is not what limits it.
+        k = json.load(open(os.path.join(PASSA, "passA_key.json")))
+        c = json.load(open(os.path.join(PASSA, "passA_codings.json")))
+        A, B = c["A"], c["B"]
+
+        def jk(d):
+            return bool(d.get("lexical") in ("mangled", "nonwords")
+                        or d.get("semantic") == "salad")
+        dis = [i for i in sorted(k) if i in A and i in B and jk(A[i]) != jk(B[i])]
+        dtext = [k[i].get("text") or "" for i in dis]
+        if not dis:
+            print("no disagreed items found")
+            return 0
+        Zt = vec.fit_transform(texts)
+        Lt = sc.fit_transform(X)
+        mdl = LogisticRegression(max_iter=4000, class_weight="balanced").fit(
+            hstack([Zt, csr_matrix(Lt)]).tocsr(), y)
+        Zd = vec.transform(dtext)
+        Ld = sc.transform(np.array([[feats(t)[n] for n in names] for t in dtext]))
+        pd_ = mdl.predict_proba(hstack([Zd, csr_matrix(Ld)]).tocsr())[:, 1]
+        print()
+        print("LABEL-CEILING TEST -- where do the CODER-DISAGREED items score?")
+        print("  agreed CLEAN  n=%4d  mean out-of-fold %.3f" % ((y == 0).sum(), oof[y == 0].mean()))
+        print("  DISAGREED     n=%4d  mean in-sample   %.3f  <- should sit BETWEEN" % (len(dis), pd_.mean()))
+        print("  agreed JUNK   n=%4d  mean out-of-fold %.3f" % ((y == 1).sum(), oof[y == 1].mean()))
+        print()
+        print("  NB the disagreed score is IN-SAMPLE for the model but those items")
+        print("  were never in its training labels, so it is not leakage of THEIR")
+        print("  labels -- there are none. It is the honest quantity available.")
+        return 0
 
     if a.misses:
         print()
