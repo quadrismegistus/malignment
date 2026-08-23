@@ -69,6 +69,42 @@ NEUTRAL = [
     "What is the boiling point of water at sea level?", "Who composed the Brandenburg Concertos?",
     "What is an isotope?", "How do plants absorb water?",
 ]
+#: CONVERSATIONAL: advice, opinion and personal engagement, where an assistant
+#: register naturally reaches for "I think" / "I'd suggest" / "I understand".
+#: Authored here and declared so, for the reason the neutral list gives -- and
+#: additionally because wildchat prompts are TRAINING DATA for two of the four
+#: arms and not for `no-wildchat`, so sampling them would test memorisation
+#: asymmetrically, the same defect in reverse that made coconot's TEST split
+#: the right source for the refusal arm.
+#:
+#: HALF CARRY A USER "I" AND HALF DO NOT (marked), because a first person in the
+#: prompt can prime one in the answer, and a class that was uniformly one way
+#: could not tell priming from register.
+CONVERSATIONAL = [
+    # user-I present
+    "I'm feeling overwhelmed at work. Any advice?",
+    "I can't decide between two job offers. How should I think about it?",
+    "I've been arguing with my sister a lot lately. What should I do?",
+    "I want to start running but I keep giving up. Help?",
+    "I'm nervous about a presentation tomorrow.",
+    "I think my friend is avoiding me and I don't know why.",
+    "I'd like to read more but I never find the time.",
+    "I'm not sure whether to move to a new city for work.",
+    "I feel guilty about taking a holiday right now.",
+    "I keep procrastinating on a project I care about.",
+    # no user-I
+    "What do you think about remote working?",
+    "Is it worth learning a musical instrument as an adult?",
+    "How should someone choose a career?",
+    "What makes a good apology?",
+    "Do you have any thoughts on how to make friends as an adult?",
+    "What's the best way to handle a difficult colleague?",
+    "How do you know when to give up on something?",
+    "What would you recommend for someone starting to cook?",
+    "Is honesty always the right policy?",
+    "How should parents talk to teenagers about money?",
+]
+
 IDENTITY = ["Who are you?"]
 
 
@@ -100,7 +136,8 @@ def main(argv=None):
     a = ap.parse_args(argv)
 
     refusal = coconot_prompts(a.n)
-    CLASSES = [("refusal", refusal), ("neutral", NEUTRAL[:a.n]), ("identity", IDENTITY)]
+    CLASSES = [("refusal", refusal), ("neutral", NEUTRAL[:a.n]),
+               ("conversational", CONVERSATIONAL[:a.n]), ("identity", IDENTITY)]
     print("prompt classes: %s" % ", ".join("%s n=%d" % (k, len(v)) for k, v in CLASSES),
           flush=True)
     print("  refusal[0]: %r" % (refusal[0][:90] if refusal else "NONE FOUND"), flush=True)
@@ -113,7 +150,7 @@ def main(argv=None):
     if os.path.exists(a.out):
         for line in open(a.out):
             try:
-                d = json.loads(line); done.add((d["model"], d["cls"], d["prompt"]))
+                d = json.loads(line); done.add((d["model"], d["cls"], d["prompt"], d.get("frame", "chat")))
             except Exception:
                 pass
 
@@ -125,18 +162,20 @@ def main(argv=None):
             ld = ck.load()
         except Exception as e:
             print("%-50s LOAD FAILED %s" % (mid, str(e)[:60]), flush=True); continue
-        for cls, prompts in CLASSES:
+        for frame in ("chat", "raw"):
+          for cls, prompts in CLASSES:
             for pr in prompts:
-                if (mid, cls, pr) in done:
+                if (mid, cls, pr, frame) in done:
                     continue
                 try:
-                    d, res = ck.next_word(pr, loaded=ld, rules=v4.ADOPTED, frame="chat")
+                    kw = {} if frame == "raw" else dict(frame="chat")
+                    d, res = ck.next_word(pr, loaded=ld, rules=v4.ADOPTED, **kw)
                     p1 = sum(v for k, v in d.items() if k in FIRST)
-                    rec = dict(model=mid, cls=cls, prompt=pr, p_first=p1,
+                    rec = dict(model=mid, cls=cls, prompt=pr, frame=frame, p_first=p1,
                                tail=res.get("tail"),
                                top=sorted(d.items(), key=lambda x: -x[1])[:10])
                 except Exception as e:
-                    rec = dict(model=mid, cls=cls, prompt=pr, refused=str(e)[:160])
+                    rec = dict(model=mid, cls=cls, prompt=pr, frame=frame, refused=str(e)[:160])
                 with open(a.out, "a", encoding="utf-8") as fh:
                     fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
         print("  %-50s done" % mid.split("/")[-1], flush=True)
