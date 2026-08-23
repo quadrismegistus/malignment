@@ -277,7 +277,13 @@ def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False,
     #: reaches the stash, and `real_models` is what `lineages_sha` is taken over,
     #: so a blind and a sighted reading of the same roster share a sha and stay
     #: comparable. Hashing the labels would have made them different populations.
-    state = {"prompt": prompt, "slug": slug, "models": [n for n, _ in tbl],
+    #: `raters` IS RECORDED BECAUSE A CONSUMER OTHERWISE GUESSES IT. The count
+    #: lives only in the generated workflow's JS until now, so `ingest_pending`
+    #: had to default to 2 to decide whether a run had fully landed -- and a
+    #: default that happens to be right is indistinguishable from a measurement
+    #: until the day someone prepares three.
+    state = {"prompt": prompt, "slug": slug, "raters": int(raters),
+             "models": [n for n, _ in tbl],
              "real_models": sorted(label) if label else [n for n, _ in tbl],
              "n_lineages": len(tbl), "blind": bool(blind),
              "unlabel": {v: k for k, v in label.items()},
