@@ -18,10 +18,46 @@ the trace is in the model's relation to what it was made to say.
 
 The self-surprisal effect sits at TOKEN positions [5,10), and token positions are
 tokenizer-specific -- deepseek's token 5 is not Yi's token 5. `score.word_bits`
-gives per-WORD surprisal, which is tokenizer-independent, so both sides are
-re-expressed at word grain and the bin is stated in words. At ~1.3 tokens/word
-the token bin [5,10) is roughly words [4,8); the word-grain self result is
-recomputed here rather than assumed to land in the same place.
+gives per-WORD surprisal, which is tokenizer-independent, so the REFERENCE side
+is reported at word grain, bins stated in words. At ~1.3 tokens/word the token
+bin [5,10) is roughly words [4,8).
+
+### THE SELF SIDE CANNOT BE MOVED TO WORD GRAIN, AND THIS PLAN SAID IT WOULD
+
+An earlier version of this docstring promised the self result would be
+"recomputed here rather than assumed to land in the same place." It cannot be,
+and the reason is worth keeping rather than quietly dropping.
+
+Word boundaries need byte offsets per token. `gen_scores` stores `logprobs` and
+nothing else positional; `gen_sequences` stores text and `n_tokens`. Recovering
+offsets means re-tokenising the decoded text with each lineage's own tokenizer
+and trusting the result to reproduce the stored token count. Measured on 40-60
+rows per lineage, it does not:
+
+    Yi-1.5-9B-Chat              36/40        salamandra-7b-instruct     5/40
+    AquilaChat2-7B              36/40        SmolLM2-360M-Instruct     26/40
+    eleuther-pythia6.9b-hh-dpo  34/40
+
+and the shortfall is NOT a constant offset that could be corrected. salamandra
+sits mostly at +1 but spreads over 0/+1/+2; SmolLM2 and Yi centre on 0 with a
+-1/-2 tail. That is real divergence on re-encode, not a convention.
+
+Keeping only the rows that match would drop ~87% of salamandra against ~10% of
+Yi -- selection on a nuisance that varies BY LINEAGE, which is the unit of every
+claim here. So the self side stays at its own token grain, where run.py measured
+it, and this file reports the reference at BOTH word grain and deepseek-token
+grain. Deepseek-token bins are legitimate because deepseek is one tokenizer
+across every passage; the tokenizer-specificity objection was always about
+comparing 42 different aligned tokenizers, never about the reference reader.
+
+The comparison is therefore "does a third party show a delta effect in the same
+early-continuation region", not "at identical indices". That is enough for the
+question being asked and the shortfall is stated rather than papered over.
+
+8 of the 46 aligned tokenizers also refuse `AutoTokenizer`; 7 load via
+`PreTrainedTokenizerFast` directly and Teuken-7B needs `tiktoken`, which is not
+installed. None of this is on the path any more, and it is recorded only so the
+next attempt does not rediscover it.
 
 ## THE JOIN IS DONE ONCE, AND CARRIED
 
@@ -57,6 +93,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
 
 WORD_BIN = (4, 8)          # words; the token [5,10) peak at ~1.3 tok/word
 MIN_TOKENS = 60
+MIN_ROWS = 40              # per lineage, to fit a 3-parameter OLS at all
+
+#: WORD bins, and DEEPSEEK-TOKEN bins. The token bins mirror run.py's exactly so
+#: the two sides can be read against each other; they are honest here because
+#: deepseek is ONE tokenizer across every passage, which is not true of the self
+#: side. See "THE SELF SIDE CANNOT BE MOVED TO WORD GRAIN" in the docstring.
+WORD_BINS = [(0, 1), (1, 4), (4, 8), (8, 16), (16, 24), (24, 48)]
+TOK_BINS = [(0, 1), (1, 5), (5, 10), (10, 20), (20, 30), (30, 60)]
 
 
 def _q(v):
@@ -161,6 +205,126 @@ def select(a):
     return picked
 
 
+def binom(k, n):
+    """Two-sided sign test. Same implementation as run.py, deliberately."""
+    return (min(1.0, 2 * sum(math.comb(n, j) for j in range(0, min(k, n - k) + 1))
+                / 2.0 ** n) if n else float("nan"))
+
+
+def selected():
+    """The rows this producer chose, from its own ids.jsonl. -> [dict]
+
+    Deduped on the FULL cell tuple and not on `sha`. The file opens in append
+    mode so a second --run doubles it, and one passage TEXT can legitimately
+    belong to two cells -- deduping on sha alone would silently drop a real row.
+    """
+    p = os.path.join(OUT, "reference_ids.jsonl")
+    if not os.path.exists(p):
+        print("no %s -- run --run first" % p)
+        return []
+    seen, out = set(), []
+    for line in open(p, encoding="utf-8"):
+        line = line.strip()
+        if not line:
+            continue
+        r = json.loads(line)
+        k = (r["sha"], r["pair"], r["prompt"], r["forced_word"], r["sample_idx"])
+        if k in seen:
+            continue
+        seen.add(k)
+        out.append(r)
+    return out
+
+
+def analyse(a):
+    """Per-lineage OLS of REFERENCE surprisal on (log q, delta), then a sign test.
+
+    The fit is run.py's, term for term -- y ~ 1 + log q + delta, one fit per
+    lineage, the lineage as the unit -- so the coefficient printed here and the
+    one printed there are the same quantity read by two different models.
+    """
+    import numpy as np
+    from malignment import score
+
+    rows = selected()
+    if not rows:
+        return 1
+    idx = score._index("surprisal")
+    bypair = collections.defaultdict(list)
+    unscored = 0
+    for r in rows:
+        s = idx.get(r["sha"])
+        if not s or not s.get("scored"):
+            unscored += 1
+            continue
+        bypair[r["pair"]].append((r, s))
+    print("%d selected rows, %d not yet in the store, %d lineages present"
+          % (len(rows), unscored, len(bypair)), flush=True)
+    if unscored:
+        print("  (--run is still going or was interrupted; this is a PARTIAL read)")
+
+    wres = collections.defaultdict(list)
+    tres = collections.defaultdict(list)
+    nfit = 0
+    for pr, items in sorted(bypair.items()):
+        X, wy, ty = [], [], []
+        for r, s in items:
+            q = r.get("q")
+            if not q or q <= 0:
+                continue
+            #: per-token bits straight from the block, and per-word bits via the
+            #: committed word_bits implementation. Both are deepseek's.
+            tok = score._block("surprisal", s)
+            wb = score.word_bits(s["text"])
+            if tok.size < TOK_BINS[-1][0] or len(wb) < WORD_BINS[-1][0]:
+                continue
+            X.append([1.0, math.log(q), r.get("delta") or 0.0])
+            ty.append(tok)
+            wy.append(np.array([w["bits"] for w in wb], dtype=np.float32))
+        if len(X) < MIN_ROWS:
+            continue
+        nfit += 1
+        Xm = np.array(X)
+        for bins, ys, acc in ((WORD_BINS, wy, wres), (TOK_BINS, ty, tres)):
+            for lo, hi in bins:
+                #: a passage shorter than the bin contributes nothing to it
+                #: rather than a truncated mean, which would be a length
+                #: statistic wearing a surprisal label.
+                keep = [i for i, v in enumerate(ys) if v.size >= hi]
+                if len(keep) < MIN_ROWS:
+                    continue
+                yy = np.array([float(ys[i][lo:hi].mean()) for i in keep])
+                c = np.linalg.lstsq(Xm[keep], yy, rcond=None)[0]
+                lab = "[%d,%d)" % (lo, hi)
+                acc[(lab, "logq")].append(c[1])
+                acc[(lab, "delta")].append(c[2])
+    print("fitted %d lineages (>= %d usable rows each)" % (nfit, MIN_ROWS))
+
+    for acc, bins, title in (
+            (wres, WORD_BINS, "REFERENCE (deepseek) surprisal, WORD bins after the forced word"),
+            (tres, TOK_BINS, "REFERENCE (deepseek) surprisal, DEEPSEEK-TOKEN bins")):
+        print()
+        print(title)
+        print("  %-10s %-7s %4s %10s %9s %9s" % ("bin", "term", "n", "median", "up/down", "sign p"))
+        for lo, hi in bins:
+            lab = "[%d,%d)" % (lo, hi)
+            for term in ("logq", "delta"):
+                v = acc.get((lab, term))
+                if not v:
+                    continue
+                dn = sum(1 for x in v if x < 0)
+                print("  %-10s %-7s %4d %10.5f %5d/%-3d %9.5f"
+                      % (lab, term, len(v), S.median(v), len(v) - dn, dn,
+                         binom(len(v) - dn, len(v))))
+    print()
+    print("Read `delta` against run.py's self-surprisal table. A delta effect")
+    print("here means the disturbance is IN THE TEXT and a third party sees it.")
+    print("Its absence, with logq present, means the trace is in the aligned")
+    print("model's relation to what it was made to say -- which is the sharper")
+    print("result, not the weaker one.")
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--per-pair", type=int, default=1000)
@@ -207,9 +371,7 @@ def main(argv=None):
         return 0
 
     if a.analyse:
-        print("analyse: not yet written -- word-grain regression over "
-              "results/reference_ids.jsonl and the score store")
-        return 1
+        return analyse(a)
     ap.print_help()
     return 0
 
