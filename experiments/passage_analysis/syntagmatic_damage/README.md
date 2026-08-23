@@ -135,29 +135,70 @@ run as the sensitivity and agrees throughout.
 
 ## THE RESULT: two effects with different shapes, and only one is alignment-specific
 
-M2, ALIGNED arm, median coefficient over 42 lineages:
+M2, ALIGNED arm, median coefficient over 42 lineages. CUMULATIVE windows:
 
     window     log p_gen                       delta
-    +1      -0.04965  7/35  p=2e-5      -0.34843  20/22  p=0.88   <- NULL
-    +10     -0.02479  3/39  p<1e-5      -0.38464   8/34  p=7e-5
-    +20     -0.02257  3/39  p<1e-5      -0.34986  10/32  p=9e-4
-    +30     -0.02312  3/39  p<1e-5      -0.34223  10/32  p=9e-4
-    all     -0.01428  8/34  p=7e-5      -0.16595  11/31  p=0.003
+    +1      -0.06285  4/38  p<1e-5      +0.09559  22/20  p=0.88   <- NULL
+    +10     -0.02627  4/38  p<1e-5      -0.21803  11/31  p=0.003
+    +20     -0.02619  3/39  p<1e-5      -0.31127  12/30  p=0.008
+    +30     -0.02386  4/38  p<1e-5      -0.34283  12/30  p=0.008
+    all     -0.01133  9/33  p=3e-4      -0.22257  13/29  p=0.020
+
+DISJOINT bins, which locate it rather than diluting it:
+
+    bin        log p_gen                       delta
+    [0,1)   -0.06285  4/38  p<1e-5      +0.09559  22/20  p=0.88   <- NULL
+    [1,5)   -0.03086  7/35  p=2e-5      -0.14768  14/28  p=0.044
+    [5,10)  -0.01440 13/29  p=0.020     -0.54192   5/37  p<1e-5   <- PEAK
+    [10,20) -0.02097  4/38  p<1e-5      -0.25184  14/28  p=0.044
+    [20,30) -0.01832  6/36  p<1e-5      -0.34437  11/31  p=0.003
+    [30,60) -0.01209  7/35  p=2e-5      -0.23448  16/26  p=0.16
 
 **`delta` survives beside `log p_gen` in the same fit.** Direction is not
 improbability under another name, and the effect is obtained WITHOUT discarding
 the range where fallers and risers do not overlap.
 
-**The two localise oppositely.** `log p_gen` is strongest at +1 (-0.0497) and
-halves thereafter: an improbable opening costs you at the very next token.
-`delta` is ABSENT at +1 (20/22, p=0.88) and appears from +10 through +30. How far
-a word MOVED does nothing at the joint and everything in the clause that follows.
+**The two localise oppositely.** `log p_gen` is strongest at the joint (-0.063 at
+[0,1)) and falls by a factor of four thereafter: an improbable opening costs you
+at the very next token. `delta` is ABSENT at the joint (22/20, p=0.88) and peaks
+at [5,10) (-0.542, 37 of 42 lineages, p<1e-5). How far a word MOVED does nothing
+where it lands and most five to ten tokens later.
 
-**And in the base arm `delta` is null everywhere:**
+**And in the base arm `delta` is null in every cumulative window:**
 
-    +1   +0.05224  21/21  p=1.00      +20  -0.06450  16/26  p=0.16
-    +10  -0.09791  17/25  p=0.28      +30  -0.05511  14/28  p=0.044
-                                      all  -0.02117  18/24  p=0.44
+    +1   -0.09216  21/21  p=1.00      +20  -0.70568  17/25  p=0.28
+    +10  -0.83827  16/26  p=0.16      +30  -0.51262  18/24  p=0.44
+                                      all  +0.27618  26/16  p=0.16
+
+At the peak bin itself the contrast is clean: base [5,10) `delta` is +0.01498,
+22/20, p=0.88, against aligned's -0.54192, 5/37, p<1e-5. Base is NOT null in
+every bin -- [1,5) is -2.478, 11/31, p=0.003 -- so the alignment-specific claim
+is located at [5,10) and after, not "base shows nothing anywhere."
+
+### These numbers are the CORRECTED ones. What the first pass measured
+
+The first pass keyed the arms lookup on `gen_scores.prompt`, which is TRUNCATED
+AT 60 CHARACTERS (max observed 61, mean 50) while the arms table carries prompts
+up to 148. Every long-prompt row failed to match and was silently dropped:
+455,296 of 1,809,088 forced rows, 25.2%. The loss was not uniform.
+
+    power domain      549 of 549 cells lost   100%  <- the entire domain
+    R_INVISIBLE      1175 of 2995 lost         39%
+    R_COMPARABLE      889 of 5174 lost         17%
+
+The `power` domain -- coercion, the stratum nearest F21 and M03 -- was absent
+from the measurement entirely. Nine 60-char keys also collide, and every
+collision is a MINIMAL PAIR, a coercive stem against its own neutral control
+("not mentioning the missing funds" against "scheduling the unit inspection").
+
+Two things kept this recoverable. `gen_scores.prompt_full` is populated on every
+row and the store holds both members of each colliding pair, so nothing was lost
+at write time. And no collision group contains a prompt of 60 characters or
+fewer, so a truncated key matched NOTHING rather than matching the wrong entry:
+the defect DROPPED rows, it never mis-assigned them.
+
+The corrected result is stronger, not weaker. The peak moved from -0.49017
+(4/38) to -0.54192 (5/37), same bin, same sign, same significance.
 
 `log p_gen` behaves the same in both arms (-0.02 to -0.10, significant
 throughout). So the base model is sensitive to how improbable a word was and
@@ -178,23 +219,25 @@ Each earlier instrument was blind to this region by construction:
     f15 F3b             faller vs matched, pooled over the whole passage,
                         third-party scorer, no probability term
 
-**`delta` lives at +10 to +30 and is null at +1.** An instrument with a ten-token
-window measures the one place the effect is not, and a whole-passage mean dilutes
-it -- which is visible here as the `all` row being the weakest non-null in the
-table (-0.166 against -0.385 at +10).
+**`delta` peaks at [5,10) and is null at the joint.** An instrument whose whole
+window is ten tokens straddles the peak while spending most of its length on the
+region where the effect is absent or weak, and a whole-passage mean dilutes it --
+visible here as the `all` coefficient (-0.223) being under half the peak bin's
+(-0.542).
 
 ## MAGNITUDE, stated plainly
 
 The coefficient is nats per unit of `delta`, and `delta` is a probability
 difference. At the observed medians -- faller -0.0299, riser +0.0879 -- the
-+10-token effect is:
+effect on a token in the peak bin is:
 
-    a typical FALLER   +0.0115 nats added to the following ten tokens
-    a typical RISER    -0.0338 nats removed
+    a typical FALLER   +0.0162 nats added, per token, at [5,10)
+    a typical RISER    -0.0476 nats removed
 
-Small in absolute terms and consistent in sign across 34 of 42 lineages. This is
-a real effect at a scale the campaign's earlier MDEs could not have resolved on
-ten tokens.
+Over the cumulative first ten tokens the same arithmetic gives +0.0065 and
+-0.0192. Small in absolute terms and consistent in sign across 37 of 42 lineages
+at the peak. This is a real effect at a scale the campaign's earlier MDEs could
+not have resolved on ten tokens.
 
 ## WHAT THIS IS AND IS NOT
 
