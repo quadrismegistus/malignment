@@ -165,7 +165,27 @@ def _ref():
                 "REFUSING: %s tokenizer does not round-trip under %s.\n"
                 "  sent %r\n  got  %r\nScoring would run on a corrupted string "
                 "and return plausible numbers." % (REF, REF_TOKENIZER, p, back))
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
+    #: mps is ALLOWED HERE AND ONLY HERE. The bge rule above binds the drift
+    #: axis; this docstring's own carve-out ("the surprisal model may use cuda
+    #: where present, since it is a different instrument") is the licence, and
+    #: the licence was cashed rather than assumed. Measured against CPU on 150
+    #: passages spanning 1-228 words, per-token bits vectors compared directly
+    #: (NOT through this store, which is content-addressed and would have
+    #: returned the CPU numbers on the second pass -- a check that cannot fire):
+    #:
+    #:     worst single-token difference   0.000303 bits
+    #:     worst passage-mean difference   0.000135 bits
+    #:     mean signed difference         +0.000084 bits
+    #:     correlation of passage means    1.00000000
+    #:     speed                           2.43 -> 0.48 s/passage, 5.1x
+    #:
+    #: The effects this instrument is used to resolve are 0.03-0.07 bits/token,
+    #: so the disagreement is ~250x below them. Reproduce with
+    #: experiments/passage_analysis/syntagmatic_damage/mps_check.py.
+    #: NB the store is SHARED and content-addressed: scores computed on mps are
+    #: served to every seat, which is why the agreement had to be measured.
+    dev = ("cuda" if torch.cuda.is_available()
+           else "mps" if torch.backends.mps.is_available() else "cpu")
     m = AutoModelForCausalLM.from_pretrained(
         REF, dtype=torch.float32, low_cpu_mem_usage=True).eval().to(dev)
     _CACHE["ref"] = (tk, m, dev)
@@ -266,8 +286,12 @@ def surprisal(texts, m=None, ids=None):
             #: mask rather than a guess -- see ref_surprisal.score's docstring.
             ends = np.array([len(t[:c1].encode())
                              for _, c1 in enc["offset_mapping"][1:]], dtype=np.int32)
+            #: `device` is provenance, not a key. Rows written before 2026-08-23
+            #: carry no such field and were CPU or cuda; the agreement
+            #: measurement in _ref is why mixing them in one store is sound.
             rows.append(dict(sha=sha(t), text=t, n_tokens=int(tid.shape[1]),
-                             n_bytes=len(t.encode()), ref=REF, scored=True))
+                             n_bytes=len(t.encode()), ref=REF, scored=True,
+                             device=dev))
             blocks.append((sur.astype(np.float32), ends))
         _append("surprisal", rows, blocks)
         idx = _index("surprisal")
