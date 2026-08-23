@@ -51,6 +51,23 @@ def main():
                     help="pass through to run_v4.py: measure one tranche of the "
                          "population. slots and cjk carry the information; latin "
                          "is 76%% of the runtime and v4 == v3 on it.")
+    #: **PASSED THROUGH TO run_v4.py, NOT INTERPRETED HERE.** queue_v4 decides
+    #: WHICH models run and in what order; the frame is a property of the
+    #: MEASUREMENT and belongs to the thing that measures. Interpreting it here
+    #: would give two places an opinion about what a framed cell is.
+    ap.add_argument("--frame", choices=["chat", "prefill"], default=None,
+                    help="pass through to run_v4.py: measure under a chat "
+                         "template. Omit for the raw untemplated surface.")
+    ap.add_argument("--system", default=None,
+                    help="pass through. OMIT for the template's own default; "
+                         "'' forces an empty system block, which is NOT the "
+                         "same thing -- see docs/prefill.md.")
+    ap.add_argument("--user-msg", default=None,
+                    help="pass through: the user turn before a prefill stem")
+    ap.add_argument("--prompts-file", default=None,
+                    help="pass through: one prompt per line. Without it each "
+                         "model measures the pairing population, which is not "
+                         "what a declared prompt set wants.")
     ap.add_argument("--python", default=None,
                     help="override; by default each model gets the venv its "
                          "roster profile requires")
@@ -140,9 +157,24 @@ def main():
         #: twp writes and flushes per prompt, so its cells survive and a later run
         #: resumes from them.
         try:
+            #: Built as a list, never a shell string: a system message is
+            #: arbitrary user text and would otherwise need quoting nobody
+            #: gets right twice.
+            _extra = []
+            if a.frame:
+                _extra += ["--frame", a.frame]
+            if a.system is not None:
+                #: `is not None`, not truthiness -- `--system ""` is a REAL and
+                #: different treatment from omitting it, and `if a.system`
+                #: would silently drop the empty one.
+                _extra += ["--system", a.system]
+            if a.user_msg is not None:
+                _extra += ["--user-msg", a.user_msg]
+            if a.prompts_file:
+                _extra += ["--prompts-file", a.prompts_file]
             r = subprocess.run([py, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
                                 "--model", m, "--cache"]
-                               + (["--only", a.only] if a.only else []),
+                               + (["--only", a.only] if a.only else []) + _extra,
                                cwd=ROOT, capture_output=True, text=True,
                                timeout=(a.max_model_min * 60 if a.max_model_min else None))
         except subprocess.TimeoutExpired:

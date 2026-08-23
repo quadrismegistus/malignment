@@ -237,6 +237,18 @@ def main():
                          "lost mid-run costs at most that much work rather than "
                          "the whole shard.")
     ap.add_argument("--max-hours", type=float, default=6.0)
+    ap.add_argument("--frame", choices=["chat", "prefill"], default=None,
+                    help="measure the shard under a CHAT TEMPLATE. Framed cells "
+                         "carry frame=<this> in twp_cells_v4 and are excluded "
+                         "from the _best views, which return raw only.")
+    ap.add_argument("--system", default=None,
+                    help="explicit system message. OMIT for the template's own "
+                         "default; '' forces an empty block and is NOT the same "
+                         "thing (docs/prefill.md).")
+    ap.add_argument("--user-msg", default=None)
+    ap.add_argument("--prompts-file", default=None,
+                    help="one prompt per line, shipped to the box. Without it "
+                         "each model measures the pairing population.")
     ap.add_argument("--i-know-the-record-is-broken", action="store_true",
                     help="rent even though check_record.py fails. For an "
                          "emergency, not for bookkeeping you mean to do later: "
@@ -548,6 +560,22 @@ def execute(b, models, roots, venv, a):
     # ---- provision ---------------------------------------------------------
     print("  ship        working tree -> /root/malignment (exact parity, no clone)")
     cloud.ssh_run(st, "mkdir -p /root/malignment")
+    #: **THE PROMPT SET IS SHIPPED, NOT NAMED.** `--prompts-file` puts
+    #: `/root/prompts.txt` in the run command, so the file has to arrive or every
+    #: stage dies on a path that does not exist -- after the box is rented and
+    #: the weights are pulled. Sent before the tree so a failure here costs
+    #: nothing.
+    if a.prompts_file:
+        _pf = os.path.abspath(os.path.expanduser(a.prompts_file))
+        if not os.path.exists(_pf):
+            raise SystemExit("  --prompts-file %s does not exist" % _pf)
+        _n = sum(1 for ln in open(_pf) if ln.strip())
+        pr = cloud.rsync(st, _pf, "/root/prompts.txt", is_file=True)
+        if pr.returncode:
+            raise SystemExit("  could not ship the prompt file (rc=%d) -- "
+                             "refusing to launch a run whose every stage would "
+                             "fail on a missing path" % pr.returncode)
+        print("  prompts     %d shipped -> /root/prompts.txt" % _n)
     cloud.rsync(st, ROOT, "/root/malignment",
                 #: **`data/` HOLDS AN ASSET, NOT ONLY DATA.** Excluding it whole
                 #: shipped a box that died on
@@ -788,22 +816,42 @@ def execute(b, models, roots, venv, a):
               "their own shard on a bigger profile:" % len(_too_big))
         for _m, (_need, _av) in sorted(_too_big.items()):
             print("     %-44s needs ~%.0f GB, usable ~%.0f GB" % (_m[:44], _need, _av))
+    #: **THE FRAME FLAGS GO TO queue_v4, WHICH PASSES THEM TO run_v4.** Quoted,
+    #: because a system message is arbitrary user text landing in a shell heredoc
+    #: and `--system ""` is a real treatment that must survive the round trip.
+    import shlex as _shlex
+    framed = ""
+    if a.frame:
+        framed += " --frame %s" % a.frame
+    if a.system is not None:
+        framed += " --system %s" % _shlex.quote(a.system)
+    if a.user_msg is not None:
+        framed += " --user-msg %s" % _shlex.quote(a.user_msg)
+    if a.prompts_file:
+        framed += " --prompts-file %s" % _shlex.quote("/root/prompts.txt")
     for r_ in roots:
         mem = [m for m in _lin2.get(r_, []) if m in models and m not in _too_big]
         if not mem:
             continue
-        cmds.append("./%s/bin/python scripts/queue_v4.py --models %s%s"
-                    % (venv, " ".join(mem), only))
-        cmds.append("./%s/bin/python scripts/topup_lineage.py --root %s "
-                    "--from-stash%s" % (venv, r_, only))
+        cmds.append("./%s/bin/python scripts/queue_v4.py --models %s%s%s"
+                    % (venv, " ".join(mem), only, framed))
+        #: **NO TOPUP ON A FRAMED RUN, AND THIS IS NOT AN OMISSION.**
+        #: `topup_lineage.py` takes no frame, so it would score the lineage's
+        #: word union against the RAW surface and write pass-2 cells that do not
+        #: belong to the pass-1 cells beside them -- two frames in one lineage
+        #: under one label. Pass 2 for a framed population is its own decision
+        #: and its own run, made once there is a framed union to take.
+        if not a.frame:
+            cmds.append("./%s/bin/python scripts/topup_lineage.py --root %s "
+                        "--from-stash%s" % (venv, r_, only))
         #: The wipe is what makes the disk saving real. Weights are
         #: re-downloadable; the cells they produced are already written and pulled.
         cmds.append("rm -rf /root/.cache/huggingface/hub/models--*")
     #: Anything in the shard no lineage claimed is still measured, at the end.
     orphan = [m for m in models if not any(m in _lin2.get(r_, []) for r_ in roots)]
     if orphan:
-        cmds.append("./%s/bin/python scripts/queue_v4.py --models %s%s"
-                    % (venv, " ".join(orphan), only))
+        cmds.append("./%s/bin/python scripts/queue_v4.py --models %s%s%s"
+                    % (venv, " ".join(orphan), only, framed))
     script = ["cd /root/malignment", ". /root/hfenv.sh",
               "rm -f /root/DONE /root/FAILED"]
     for i, c in enumerate(cmds):

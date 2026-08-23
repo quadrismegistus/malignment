@@ -51,6 +51,27 @@ def main():
     ap.add_argument("--cache", action="store_true",
                     help="prompt KV cache: ~4.5x, NOT bit-identical, part of the key")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--frame", choices=["chat", "prefill"], default=None,
+                    help="measure under a CHAT TEMPLATE. 'prefill' makes the "
+                         "stem a started ASSISTANT turn (the next word "
+                         "continues it); 'chat' makes it the USER turn (the "
+                         "next word begins the answer). Omit for the raw, "
+                         "untemplated surface, which is what every stored cell "
+                         "before 2026-08-22 is.")
+    #: **ABSENT IS NOT THE SAME AS EMPTY, AND THE DIFFERENCE IS MEASURED.**
+    #: Omitting `--system` passes the DEFAULT sentinel: supply NO system
+    #: message and let the template do whatever it ships with. `--system ""`
+    #: passes an explicit empty string, which DELETES a shipped persona on the
+    #: models that have one and ADDS an empty block on the models that do not
+    #: -- two opposite operations under one label, which is why
+    #: docs/prefill.md rules against it. `measurements.json` section
+    #: chat_template carries `sys_empty_ok` per model if you want it anyway.
+    ap.add_argument("--system", default=None,
+                    help="explicit system message. OMIT for the template's own "
+                         "default (recommended); '' forces an empty one, which "
+                         "is NOT the same thing.")
+    ap.add_argument("--user-msg", default="Hi.",
+                    help="the user turn placed before a prefill stem")
     ap.add_argument("--topup", action="store_true",
                     help="PASS 2 instead of pass 1: score_words4 over the lineage "
                          "union. Lives here because this is the per-model entry "
@@ -153,7 +174,11 @@ def main():
             return TWPRunner(ck).topup(rules=V4.ADOPTED, root=a.root,
                                        limit=a.limit, prompts=prompts,
                                        from_stash=a.from_stash)
-        return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit)
+        from malignment.generate import DEFAULT
+        return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit,
+                          frame=a.frame,
+                          system=DEFAULT if a.system is None else a.system,
+                          user_msg=a.user_msg)
     finally:
         sys.stdout = tee.stream
         tee.close()
