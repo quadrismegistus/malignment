@@ -203,10 +203,20 @@
 		}
 		const seen = new Map<string, number>();
 		const ls: any[] = [];
+		//: A HUB IS ONE BECAUSE `kind` SAYS SO, NOT BECAUSE ITS ID STARTS `OP[`.
+		//: That prefix is one producer's naming convention and this is the
+		//: consumer; hardcoding it meant a SECOND producer's hubs -- the
+		//: cross-frame `META ...` nodes -- were rewritten to `M::META ...`,
+		//: matched no node, and EVERY LINK WAS DROPPED. The graph drew 110
+		//: nodes and no edges, silently, because a link that fails this remap
+		//: is skipped rather than refused. `graph()`'s dangling-endpoint assert
+		//: cannot catch it: the artifact is valid and the CONSUMER invalidates
+		//: it afterwards.
+		const hubIds = new Set(art.nodes.filter((n) => n.kind === 'op').map((n) => n.id));
 		for (const l of art.links) {
 			if (!liveIds.has(l.source) || !liveIds.has(l.target)) continue;
-			const s = l.source.startsWith('OP[') ? l.source : 'M::' + l.source.split('::')[0];
-			const t = l.target.startsWith('OP[') ? l.target : 'M::' + l.target.split('::')[0];
+			const s = hubIds.has(l.source) ? l.source : 'M::' + l.source.split('::')[0];
+			const t = hubIds.has(l.target) ? l.target : 'M::' + l.target.split('::')[0];
 			const k = s + ' ' + t;
 			if (!keep.has(s) || !keep.has(t)) continue;
 			//: A COLLAPSED LINK IS CROSSING ONLY IF EVERY WORD LINK UNDER IT IS. One
@@ -436,13 +446,15 @@
 										r={op ? Math.min(20, 7 + (n.n ?? 1) * 0.35) : rev ? 6 : grain === 'model' ? 6 : 3}
 										fill={shadow
 											? '#2a1416'
-											: op && n.group
+											: n.group
 												? colour.get(n.group)
 												: n.rev
 												? '#3a2226'
-												: n.component === 0
-													? '#8b94a3'
-													: '#ffd43b'}
+												: op
+													? '#c8ccd4'
+													: n.component === 0
+														? '#8b94a3'
+														: '#ffd43b'}
 										class:op
 										class:revnode={rev}
 										class:shadow

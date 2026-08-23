@@ -527,12 +527,101 @@ def workflow(raters=2, model="sonnet", effort="xhigh", regenerate=False):
     return out
 
 
+DOMAIN_COLOUR = {"sexual": "#fa5252", "violence": "#e8590c",
+                 "institutional": "#4dabf7", "identity": "#51cf66"}
+
+
+def emit_graph(groups_path=None, out="metagraph"):
+    """The meta-relation network as a `graph` artifact: component -> meta-relation.
+
+    ## THE SAME SHAPE ONE LEVEL UP
+
+    `operation_graph` draws `M##_word -> [operation] -> M##_word` with the
+    operation as a NODE. Here the hub is a META-RELATION and the leaves are the
+    per-frame COMPONENTS it grouped. What the picture is for is the one question
+    the counts answer badly: whether a relation survives a change of material.
+    A hub whose leaves are all one colour is confined to a domain; a hub with
+    four colours crossed every one.
+
+    Leaves carry their DOMAIN as `group`, so the legend is domains rather than
+    raters -- the domain label was withheld from the rater and is exactly the
+    thing we want to see it did not use.
+
+    Singletons are drawn. A component no rater could place is a fact about the
+    corpus, and leaving it out would make the picture look tidier than the
+    grouping was.
+    """
+    import json as _json
+    G = _json.load(open(groups_path or os.path.join(
+        HERE, "results", "crossframe_groups_89_opus_medium.json")))
+    M = as_read()
+    nodes, links = [], []
+    seen = set()
+
+    def leaf(cid):
+        if cid in seen or cid not in M:
+            return
+        seen.add(cid)
+        c = M[cid]
+        #: ID IS `sentence::C##`, NOT bare `C##`. The consumer's model-grain
+        #: collapse splits a leaf id on `::` to find what to group it under, so a
+        #: bare id collapses every component to `M::C33` -- one node per
+        #: component, which is not a collapse at all. With the sentence first,
+        #: model grain becomes SENTENCE grain and answers "which sentences feed
+        #: this relation", which is the question the leaf colours raise.
+        nodes.append({"id": "%s::%s" % (c["prompt"], cid), "kind": "word", "label": cid,
+                      "group": c["domain"], "model": c["prompt"],
+                      "side": "to", "component": 0,
+                      "names": [n[1] for n in c["names"]],
+                      "n_models": c["n_models"]})
+
+    for i, g in enumerate(G["groups"]):
+        hid = "META %s" % g["name"]
+        fr = {M[m]["prompt"] for m in g["members"] if m in M}
+        ds = collections.Counter(M[m]["domain"] for m in g["members"] if m in M)
+        nodes.append({"id": hid, "kind": "op", "label": g["name"], "group": None,
+                      "component": 0, "n": len(g["members"]),
+                      "statement": g.get("statement", ""),
+                      "spans": g.get("spans", ""), "why": g.get("why", ""),
+                      "sentences": len(fr), "domains": dict(ds),
+                      "models": sorted(m for m in g["members"] if m in M)})
+        for m in g["members"]:
+            leaf(m)
+            if m in M:
+                links.append({"source": "%s::%s" % (M[m]["prompt"], m),
+                              "target": hid, "cross": len(ds) > 1})
+    for cid in G.get("singletons") or []:
+        leaf(cid)
+
+    from malignment.chartdata import graph, write
+    dom = collections.Counter(M[c]["domain"] for c in M)
+    art = graph(
+        title="Cross-frame meta-relations",
+        subtitle=("%d meta-relations over %d components from %d sentences, grouped by one "
+                  "blind reader that saw no domain label and no model identity. A leaf is a "
+                  "per-frame component, coloured by the DOMAIN it came from; a hub is a "
+                  "relation the reader said they share. A hub whose leaves are one colour is "
+                  "confined to a domain. %d components no reader could place are drawn "
+                  "unattached, because a corpus with unplaceable components should not look "
+                  "tidier than it is."
+                  % (len(G["groups"]), len(seen), len({M[c]["prompt"] for c in seen}),
+                     len(G.get("singletons") or []))),
+        nodes=nodes, links=links,
+        groups=[{"key": k, "label": "%s (%d)" % (k, dom[k]), "colour": v}
+                for k, v in DOMAIN_COLOUR.items() if k in dom],
+        meta={"raters": 1, "source": os.path.basename(groups_path or "opus_medium"),
+              "components": [{"operations": len(G["groups"]), "models": len(seen)}]})
+    return write(art, os.path.join(HERE, "figures"), out)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--doc", action="store_true")
     ap.add_argument("--ari", action="store_true")
     ap.add_argument("--features", action="store_true")
     ap.add_argument("--reversal", action="store_true")
+    ap.add_argument("--graph", action="store_true",
+                    help="write the meta-relation network as a `graph` artifact")
     ap.add_argument("--workflow", type=int, metavar="RATERS")
     ap.add_argument("--model", default="sonnet")
     ap.add_argument("--effort", default="xhigh")
@@ -553,6 +642,9 @@ def main():
               % (len(same), med(same), max(same)))
         print("  different frame %3d pairs  median ARI %+.3f  max %+.3f"
               % (len(cross), med(cross), max(cross)))
+        return
+    if a.graph:
+        emit_graph()
         return
     if a.workflow:
         workflow(a.workflow, a.model, a.effort, a.regenerate)
