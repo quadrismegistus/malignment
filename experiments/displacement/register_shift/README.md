@@ -1,32 +1,124 @@
 ---
-stub: true
-stub_written_by: dario, 2026-08-21, from the folder's own files
+id: register_shift
+status: RUN. G NOT SUPPORTED, G1 supported, G2 REVERSED. Producer `run.py`, rows in `results/by_lineage.csv`.
 question: Does alignment shift REGISTER -- vulgar to clinical, plain to euphemistic -- rather than only lowering transgressive mass?
-status: REGISTERED, NOT RUN. Registration frozen 2026-08-16; R1-R4 superseded by amendment A1 before any run.
 ---
 
 # register_shift
 
-**A STUB.** Written by a seat that did not do this work, from `registration.md`
-alone, so the folder is reachable from the panel. No finding is stated here
-because there is none yet.
+Runs the design frozen in `registration.md` **amendment A1**. R1-R4 in that file
+were superseded before any run and are not what this executes; the hypotheses are
+G, G1 and G2.
 
-## State
+    INSTRUMENT   k_register_level, English + Chinese, 1-7 continuous
+    STATISTIC    mass-weighted mean register, sum(mass x register) / sum(mass)
+    EDGE         base -> endpoint, the commodity form
+    UNIT         the lineage, n=50
 
-`registration.md` is the only document, and it is frozen. Read it rather than
-this file: it carries the hypotheses, what licensed freezing them, and the
-amendment that replaced them.
+# THE RESULT
 
-Two things in it are worth knowing before anyone opens the folder expecting a
-result:
+    SIGN-TEST MDE at alpha=.05: 33 of 50 (66%)  -- printed before any p
 
-- **R1-R4 were superseded before any run.** Amendment A1 carries the design that
-  was actually frozen. R1-R4 are kept as the record of what was registered solo,
-  not deleted.
-- The registration describes itself as **a confirmatory test of an existing
-  observation at scale, not a discovery** -- the hypotheses descend from a v1
-  finding made by hand on a handful of words (`cock -> penis`, `kill -> smite`).
+    G   reg_end - reg_base         30/50   median +0.0029   [-0.0410, +0.0247]   p=0.203
+    G1  reg_removed - reg_base      4/50   median -0.0221   [-0.0661, +0.0086]   p<1e-5
+    G2  reg_arrived - reg_base     12/50   median -0.0193   [-0.0736, +0.0300]   p=0.0003
+        SIGNATURE arrived-removed  31/50   median +0.0147   [-0.0877, +0.0951]   p=0.119
 
-## What running it needs
+    sensitivity, pre-committed, 43 pairs at coverage shift <=2pp
+    G                              24/43   median +0.0012                        p=0.542
+    SIGNATURE                      25/43   median +0.0082                        p=0.360
 
-A producer. There is none in this folder.
+**G is NOT SUPPORTED.** 30 of 50 against an MDE of 33, and per decision rule 2
+the null is a BOUND rather than a bare non-significance: the mean-register change
+base->endpoint lies in **[-0.0410, +0.0247]** on a 1-7 scale.
+
+**G1 IS SUPPORTED.** What leaves is low-register: 46 of 50 lineages, median
+-0.0221.
+
+**G2 IS REVERSED, significantly.** The registration predicted arriving mass would
+sit ABOVE the distribution mean. It sits **below** it -- 38 of 50 lineages,
+median -0.0193, p=0.0003. Direction was fixed in advance (rule 3), so this is
+reported as a surprise rather than absorbed.
+
+**The displacement signature does not clear.** `arrived > removed` is the
+registration's stated criterion, and arrived is indeed less low than removed
+(+0.0147), but at p=0.119 unadjusted and p=0.360 under the pre-committed
+coverage sensitivity.
+
+## What this means, stated at the strength the design allows
+
+Both what leaves and what arrives are below the distribution's mean register.
+**This is substitution WITHIN the low register, not movement up it.** The
+registration's decision rule 6 says G1/G2 are required for the word
+"displacement" and G alone licenses only "the register rises"; here G does not
+even license that, at this edge and this grain.
+
+Note this is the same shape R2 predicted for VIOLENCE -- "substitute within
+register (plain->plain) rather than across it" -- arriving as the whole-vocabulary
+result rather than as a domain contrast. R2 itself is not tested here.
+
+# THE GRAIN DISAGREEMENT, WHICH IS THE INTERESTING PART
+
+The same instrument on generated PASSAGES gives the opposite answer.
+`passage_analysis/passage_norms`, `norms_quadrants.parquet`, 25 lineage pairs
+with both arms, paired by lineage:
+
+    k_register_level   20 rise / 5 fall   median +0.0209   p=0.004
+    k_vulgarity         3 rise / 20 fall  median -0.0021   p=0.0005
+    brooke_formality   13 rise / 9 fall   median +0.0215   p=0.523
+
+So **register rises in generated text and does not rise at the next-word slot.**
+Same lexicon, same statistic, different grain: a bag of words over 200 generated
+tokens against a distribution over one position.
+
+**And within twp the answer depends on the EDGE.** An off-spec run comparing base
+against the median of ALL its aligned rungs, aggregating medians over prompts
+rather than pooling mass, gave 44/50 rises. The frozen spec -- base->ENDPOINT,
+pooled mass-weighted over shared prompts -- gives 30/50. Recorded because it says
+this quantity is edge-sensitive, and the registration fixed one edge in advance;
+the 44/50 is not a second result and must not be quoted as one.
+
+Three readings, none tested here:
+
+1. Register accumulates over a passage. A per-position effect too small to clear
+   at one slot could compound over 200 tokens.
+2. The endpoint is not the rung where it happens. Per-stage decomposition is
+   descriptive under the registration and has not been run.
+3. The two measure different things: what the model would say next given a stem,
+   against what it actually produces when sampling freely.
+
+Deciding between them is a per-stage decomposition on the twp side, which the
+registration permits as description.
+
+# WHAT IS CONFIRMATORY AND MUST BE LABELLED SO
+
+**S (the sexual subset) is not run here.** The registration discloses that
+vulgar-out/clinical-retained was observed in `removal_rates` exemplars
+(`cleavage +0.45, tits +0.40, fucking +0.35` stripped against `cock -0.20,
+wank -0.21` retained) BEFORE freezing, so S is a confirmatory test of an
+already-seen pattern and can never be reported as a discovery.
+
+A contextual version of the same contrast exists and was not built for this
+registration: `slot_ratings/sexual`'s `sexual_slot_en_v2` rates a word IN ITS
+SLOT on `euphemism`, `explicitness` and `genitality` over 2,599 (prompt, word)
+pairs covering 96.7% of base+aligned mass at the median prompt, and finds
+euphemism significant in 13 of 16 prompts (12 up, 1 down) against explicitness
+9/16 (0 up, 9 down) and genitality 8/16 (0 up, 8 down). That is a different
+population and a different instrument; it is not G, S, or a test of this
+registration, and it is cited here so the two are not conflated.
+
+# COVERAGE, the declared covariate
+
+    k-covered mass   base median 0.928   endpoint median 0.919
+    |within-pair shift|   median 0.53pp   max 6.81pp   pairs >2pp: 7
+
+Within the range amendment A1 anticipated. The pre-committed sensitivity drops
+those 7 and is reported above; it weakens both G and the signature.
+
+# WHAT IS NOT TESTED HERE
+
+R2 (the sexual-vs-violent interaction), R3 (archaic escape hatch), and R4's
+frequency-matched control. R4 was declared a GATE rather than a robustness check,
+so **no R1-style claim can be made from this run at all** -- but R1 is superseded,
+and G/G1/G2 carry no frequency gate in amendment A1. Whether they should is an
+open question this run does not settle.
