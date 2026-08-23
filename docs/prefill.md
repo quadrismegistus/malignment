@@ -141,9 +141,24 @@ A sweep over `DEFAULT` vs `""` would therefore pool two treatments under one nam
 
 The argument above shows `""` is two operations. It does not show `DEFAULT` is one, and I wrote the run recommendation as though it did. RH pushed on it; lacan measured it.
 
-**`DEFAULT` is non-uniform in the RESULT, and `""` is non-uniform only in the OPERATION — and the model conditions on the result.** Where `""` replaces a persona for one model and adds an empty block for another, every model still *ends up* with an empty system block. Under `DEFAULT` they end up in contexts that differ by 500 characters.
+**`DEFAULT` is non-uniform in the RESULT.** Under it, models end up in contexts differing by 500 characters of persona *content* — "You are Qwen, created by Alibaba Cloud" against nothing, **inside one lineage**.
 
-The confound is INSIDE the lineage, which is fatal for a ladder:
+> **CORRECTED 2026-08-23, second revision of this section.** This paragraph said `""` is non-uniform only in the OPERATION and uniform in the result, and that "every model still ends up with an empty system block". **That is false**, lacan withdrew it at [6553], and I had already written it here. Rendered with each model's own tokenizer, `Who are you?`, `system=""`:
+>
+>     neo_7b                  30 ch   '<s>[INST] Who are you? [/INST]'
+>                                     NO system role at all
+>     Qwen2.5-0.5B            92 ch   '<|im_start|>system\n<|im_end|>\n...'
+>     SmolLM2-360M-Instruct   92 ch   an EMPTY system block, present
+>
+> So `""` yields two different results too — a present-but-empty system turn on ChatML templates, and no system role whatever on neo. The two-operations argument higher up this page survives into the result; it does not stop at the operation.
+>
+> **What survives is the RANKING, not the claim of uniformity.** `DEFAULT` varies by 500+ characters of persona CONTENT; `""` varies by ~60 characters of STRUCTURE, and **no model receives a persona another does not**. Different in size and in kind.
+>
+> **The correct justification is weaker and is the one on record:** `""` is MORE uniform than `DEFAULT`, and its residual non-uniformity is structural rather than semantic. The adopted decision does not change; its stated reason does.
+
+The confound under `DEFAULT` is INSIDE the lineage, which is what makes it fatal for a ladder:
+
+
 
     Qwen2.5-0.5B            "You are a helpful assistant."
     Qwen2.5-0.5B-Instruct   "You are Qwen, created by Alibaba Cloud..."
@@ -159,6 +174,8 @@ so a base->aligned difference under `DEFAULT` is a persona difference AND an ali
 So an own-lab measurement under `DEFAULT` measures whether a model can repeat its own system prompt. On Qwen2.5 the aligned arm is TOLD it is Qwen and the base arm is not.
 
 **The size of the choice, on the arm that matters most:** neo_7b base, `Who are you?`, chat frame — `""` gives p(first person) 0.008, `DEFAULT` gives 0.1375. **17x.** The SFT and instruct rungs barely move (0.429 -> 0.4008, 0.735 -> 0.7759), so the system prompt matters most exactly where the model has least position of its own, which is the base arm every ladder contrast rests on.
+
+**AND A TRAP IF A THIRD ARM IS EVER ADDED.** On neo, `""` and a *supplied persona* produce the BYTE-IDENTICAL render — 30 characters, no system role, because the template discards any system text you give it and fires its 547-character preamble only when you supply none. So a fixed-persona arm that does not explicitly exclude neo will **silently duplicate the `""` arm**: two declared conditions, one context, and no error anywhere. lacan, [6553].
 
 **REVISED RECOMMENDATION: `system` is a FACTOR, not a constant.** Run `""` as the uniform condition. Run `DEFAULT` as a second cell on a subset — `neo_7b` is the natural place, being the one lineage whose three arms carry an identical 547-character preamble. If only one can be afforded, `""`.
 
