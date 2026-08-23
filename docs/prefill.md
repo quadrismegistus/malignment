@@ -117,6 +117,78 @@ Three things the wiring had to get right, none of which were visible from the ou
 
 `render()` returns `sys_supported`, and a template that silently drops a system block yields a condition wearing the wrong name. That flag must reach the stored cell.
 
+### WHICH FRAME TO RUN — decided 2026-08-22, on evidence
+
+RH: *"we want to find out which 1-2 frame types have the fewest assumptions and admit the best rung comparison, we can't afford to run all of them."*
+
+**Run ONE: `prefill`, `system=DEFAULT`, `user_msg="Hi."`.** — **SUPERSEDED 2026-08-23, see the amendment below: the uniform condition is `system=""`.**
+
+Fewest assumptions because it requires choosing no string at all. The persona is whatever the vendor ships, and `"Hi."` is a presence control already declared and justified in `generate.py` rather than invented for this. And rung B needs only this one, because the other arm of the contrast is `raw`, which is already measured for all 144 checkpoints. A second frame decomposes the wrapper's internals; it does not complete the rung.
+
+#### Why NOT `system=""`, which looks like the neutral option
+
+Because it is not one condition. Measured across three models, three prompts, JS between the two settings:
+
+    SmolLM2-360M-Instruct    0.049  0.117  0.013     DEFAULT 152 chars, "" 84   -> REPLACES a persona
+    OLMo-2-0425-1B-Instruct  0.011  0.010  0.009     DEFAULT  41 chars, "" 53   -> ADDS an empty block
+    TinyLlama-1.1B-Chat      0.013  0.007  0.004     DEFAULT  32 chars, "" 48   -> ADDS an empty block
+
+Where a template ships a persona, `""` **deletes** it. Where it ships none, `""` **adds** an empty system block. Opposite operations under one label, which `generate.py` already states: *"`system` MINUS `chat` IS NOT ALWAYS 'ADDING A SYSTEM PROMPT'. Where the template ships a default, it is 'replacing one system prompt with another', and the contrast means something different."*
+
+A sweep over `DEFAULT` vs `""` would therefore pool two treatments under one name and could not be declared as a single population.
+
+#### AMENDED 2026-08-23: THIS RULING IS RIGHT ABOUT `""` AND WRONG ABOUT WHAT FOLLOWS
+
+The argument above shows `""` is two operations. It does not show `DEFAULT` is one, and I wrote the run recommendation as though it did. RH pushed on it; lacan measured it.
+
+**`DEFAULT` is non-uniform in the RESULT, and `""` is non-uniform only in the OPERATION — and the model conditions on the result.** Where `""` replaces a persona for one model and adds an empty block for another, every model still *ends up* with an empty system block. Under `DEFAULT` they end up in contexts that differ by 500 characters.
+
+The confound is INSIDE the lineage, which is fatal for a ladder:
+
+    Qwen2.5-0.5B            "You are a helpful assistant."
+    Qwen2.5-0.5B-Instruct   "You are Qwen, created by Alibaba Cloud..."
+
+so a base->aligned difference under `DEFAULT` is a persona difference AND an alignment difference with nothing separating them. Same on kanana (no block -> empty block). Eleven of sixteen ladder wrappers carry a persona rather than turn markers.
+
+**And for identity prompts the shipped persona CONTAINS THE ANSWER.** lacan, on SmolLM2-360M-Instruct, `Who are you?`, `I am` prefilled, 4 draws:
+
+    system=DEFAULT   names Hugging Face   3 of 4
+    system=""        names any lab        0 of 4
+    system=neutral   names any lab        0 of 4
+
+So an own-lab measurement under `DEFAULT` measures whether a model can repeat its own system prompt. On Qwen2.5 the aligned arm is TOLD it is Qwen and the base arm is not.
+
+**The size of the choice, on the arm that matters most:** neo_7b base, `Who are you?`, chat frame — `""` gives p(first person) 0.008, `DEFAULT` gives 0.1375. **17x.** The SFT and instruct rungs barely move (0.429 -> 0.4008, 0.735 -> 0.7759), so the system prompt matters most exactly where the model has least position of its own, which is the base arm every ladder contrast rests on.
+
+**REVISED RECOMMENDATION: `system` is a FACTOR, not a constant.** Run `""` as the uniform condition. Run `DEFAULT` as a second cell on a subset — `neo_7b` is the natural place, being the one lineage whose three arms carry an identical 547-character preamble. If only one can be afforded, `""`.
+
+The three JS numbers above are not withdrawn: they are why `""` needs its operation stated, and they remain the reason `DEFAULT` vs `""` cannot be pooled. What is withdrawn is "fewest assumptions", which was true about choosing a string and false about the resulting context.
+
+#### Why NOT an instruction in the user turn
+
+`"Continue this text."` is a treatment, not a control, and its wording is arbitrary. On `Olmo-3-7B-Instruct` / *She was so angry she wanted to*:
+
+    user="Hi."                  n=43  tail 0.0998  kill 0.0117   break .164 hit .129 punch .121
+    user="Continue this text."  n=23  tail 0.0287  kill 0.0000   scream .441 shout .308
+    both slots                  n=16  tail 0.0160  kill 0.0000   shout .705
+
+It does not merely suppress -- it **redirects**, from physical (break/hit/punch) to vocal (scream/shout), and collapses the distribution onto one word. If that is interesting it is a separate experiment with its own registration.
+
+The user slot is also where the effect lives: the same sentence drives `kill` to 0 in the user turn but only to 0.0033 in the system turn, and an EMPTY user turn brings the exam blanks back (0.1095). So if a second frame is ever funded, vary the user slot, not the system slot -- but it needs a declared, defensible string first.
+
+#### What "as deployed" actually means, and why the persona must be stored
+
+`DEFAULT` is not a condition. It is the ABSENCE of an intervention -- `render` omits the system role entirely and whatever the template does on its own is what happens. That differs sharply between checkpoints:
+
+    Olmo-3-7B-Instruct   "You are a helpful function-calling AI assistant. You do not
+                          currently have access to any functions. <functions></functions>"
+    SmolLM2-360M         "You are a helpful AI assistant named SmolLM, trained by Hugging Face"
+    OLMo-2-1B-Instruct   (no system block at all)
+
+Olmo-3's default frame tells it that it is a **function-calling** assistant with an empty tool list. That is genuinely what the vendor ships, so it is genuinely as-deployed -- and it is not a neutral wrapper, and it is nothing like SmolLM2's.
+
+**So a between-model frame effect is partly a comparison of vendor persona policies.** That is a real property of deployment rather than a defect, but it must be visible: the rendered system text belongs beside the cells, or someone will read a between-model difference as a property of the weights. The census records it per model.
+
 ### Storage: a frame dimension that must never merge
 
 Third instance of one pattern in this corpus:
