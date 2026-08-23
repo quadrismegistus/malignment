@@ -1458,3 +1458,94 @@ def check_environments():
                             "which pins %s" % (name, sorted(need), prof["launch"],
                                                boxes[prof["launch"]].get("pins")))
     return problems
+
+
+#: Where the chat-template census lands. `prefill_census.py` measures it with
+#: TOKENIZERS ONLY -- no weights -- so this is cheap and says nothing about
+#: whether the model runs.
+MEASUREMENTS_PATH = os.path.join(ROOT, "roster", "models", "measurements.json")
+
+
+def framed(tier="ladder", measurements=None):
+    """The population for a FRAMED (chat-template) measurement. Declared, not found.
+
+    **"EVERY MODEL WITH A TEMPLATE" IS NOT A POPULATION, IT IS A LEFTOVER.** The
+    templatable set is 80 checkpoints and it mixes two unlike things: aligned
+    arms, where a chat frame is the model's intended use, and the handful of BASE
+    arms that happen to ship a template anyway. Measuring the union answers
+    neither question, and it is how a fleet buys 67,200 cells and then discovers
+    the contrast rests on a few arms.
+
+    **THE BINDING FACT IS THAT MOST BASES SHIP NO TEMPLATE.** Measured
+    2026-08-22 over `roster.lineages(ops=ALIGNING)`:
+
+        18 lineages hold 2+ templatable arms   -> a within-lineage contrast
+         7 lineages have a templatable ROOT    -> a base->aligned contrast
+        11 of those 18 CANNOT be measured at the base under any frame
+
+    That is not a coverage gap to be filled later. A base with no chat template
+    has no framed distribution to measure -- the treatment does not exist for it
+    -- so a design that needs one is impossible for 11 of 18 lineages rather
+    than merely incomplete. lacan withdrew a hypothesis on exactly this before
+    reading any result.
+
+    Three tiers, because they answer three different questions:
+
+        ladder   lineages whose ROOT is templatable, plus their templatable
+                 arms. The only tier where base -> aligned is a FRAMED contrast
+                 on both sides. 7 lineages.
+        within   lineages with 2+ templatable arms. Stage-to-stage among the
+                 aligned arms; the base is absent BY CONSTRUCTION and any
+                 "base" reading of this tier is wrong. 18 lineages.
+        all      every templatable checkpoint. Not a design. Provided because a
+                 coverage sweep is a legitimate thing to want, and naming it
+                 keeps it from being mistaken for one of the two above.
+
+    -> {"tier", "models", "lineages", "excluded"} where `lineages` maps root ->
+    the templatable arms under it, and `excluded` says WHY a lineage is not in
+    the tier rather than dropping it silently.
+    """
+    if tier not in ("ladder", "within", "all"):
+        raise ValueError("tier must be ladder|within|all, not %r" % tier)
+    if measurements is None:
+        with open(MEASUREMENTS_PATH) as fh:
+            measurements = json.load(fh)
+    sec = ((measurements.get("sections") or {}).get("chat_template") or {})
+    verdicts = sec.get("models") or {}
+    if not verdicts:
+        raise RuntimeError(
+            "measurements.json carries no chat_template section -- run "
+            "experiments/instrument_calibrations/generation_provenance/"
+            "prefill_census.py --write-measurements. Refusing to guess a "
+            "population from an unmeasured instrument.")
+    #: **RENDERS A PREFILL, not merely "has a template".** The census verdict
+    #: OK means the template rendered AND the stem landed last, which is the
+    #: property a framed word measurement needs; a template that reorders or
+    #: swallows the stem is useless here and is recorded as STEM_LOST.
+    ok = {m for m, v in verdicts.items() if v.get("verdict") == "OK"}
+    lin = lineages(ops=ALIGNING)
+    keep, excluded = {}, {}
+    for root, members in sorted(lin.items()):
+        arms = sorted(m for m in members if m in ok)
+        if tier == "all":
+            if arms:
+                keep[root] = arms
+            continue
+        if len(arms) < 2:
+            excluded[root] = ("%d templatable arm(s); a contrast needs 2"
+                              % len(arms))
+            continue
+        if tier == "ladder" and root not in ok:
+            #: NAMED, not dropped. This is the interesting exclusion: the base
+            #: exists and is measurable RAW, and has no framed counterpart.
+            excluded[root] = ("root ships no usable chat template (%s) -- "
+                              "base->aligned cannot be a framed contrast here"
+                              % (verdicts.get(root, {}).get("verdict")
+                                 or "unmeasured"))
+            continue
+        keep[root] = arms
+    models = sorted({m for arms in keep.values() for m in arms})
+    if tier == "all":
+        models = sorted(ok & {m for ms in lin.values() for m in ms})
+    return {"tier": tier, "models": models, "lineages": keep,
+            "excluded": excluded}
