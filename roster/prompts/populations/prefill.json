@@ -5,15 +5,16 @@
   "roster/prompts",
   "malign-logits/data/beam_sample_105.csv"
  ],
- "n": 840,
+ "n": 874,
  "groups": {
   "F01": 49,
   "F21": 51,
   "M03": 252,
   "PAIR105": 210,
-  "SLOT": 279
+  "SLOT": 279,
+  "SUBJECT": 34
  },
  "collapsed": 1,
  "near_duplicates": 0,
- "in_corpus_domains": 840
+ "in_corpus_domains": 874
 }

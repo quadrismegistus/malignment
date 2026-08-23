@@ -219,15 +219,30 @@ def _load(force=False):
                  "authored_by": rec.get("authored_by"),
                  "source": src, "family": "slots", "file": base})
 
-    for f in sorted(glob.glob(os.path.join(PROMPTS, "flat", "*.yaml"))):
-        base = os.path.basename(f)
-        doc = yaml.safe_load(open(f, encoding="utf-8")) or {}
-        for rec in doc.get("prompts") or []:
-            r = dict(rec)
-            r.setdefault("prompt_id", "%s_%d" % (doc.get("source", base), len(order)))
-            r.update({"source": doc.get("source"), "admitted": True,
-                      "family": "flat", "file": base})
-            add(r)
+    #: **`subject/` IS READ THE SAME WAY AS `flat/` AND KEPT SEPARATE ANYWAY.**
+    #: The record shape is identical, so the loop is shared; the FAMILY is not,
+    #: because these are the only prompts in the catalogue authored for the
+    #: FRAMED instrument. They are questions -- the other 2,983 are continuation
+    #: stems, and 0 of them are questions -- so a caller that wants "the
+    #: catalogue" and a caller that wants "things you can ask a chat model" want
+    #: different sets, and `family` is what lets them say which.
+    #:
+    #: One file per CLASS so provenance travels with the class and a class can be
+    #: excluded on its own: `subject_refusal` is coconot TEST (frozen strings,
+    #: derivation recorded in the file), the other three are authored. A control
+    #: drawn from a training mix is seen by some arms and not others, and that
+    #: fact has to survive into the catalogue rather than living in a docket post.
+    for sub, fam in (("flat", "flat"), ("subject", "subject")):
+        for f in sorted(glob.glob(os.path.join(PROMPTS, sub, "*.yaml"))):
+            base = os.path.basename(f)
+            doc = yaml.safe_load(open(f, encoding="utf-8")) or {}
+            for rec in doc.get("prompts") or []:
+                r = dict(rec)
+                r.setdefault("prompt_id",
+                             "%s_%d" % (doc.get("source", base), len(order)))
+                r.update({"source": doc.get("source"), "admitted": True,
+                          "family": fam, "file": base})
+                add(r)
 
     _CACHE.update(by_id=by_id, order=order)
     return by_id, order
@@ -363,8 +378,9 @@ class Prompts:
         **A UNION OVER DISTINCT STRINGS, WHICH IS NOT WHAT SUMMING GIVES.**
 
             F01       49      M03      252      PAIR105   210
-            F21       51      SLOT     279      ------------------
-                                                UNION     840
+            F21       51      SLOT     279      SUBJECT    34
+                                                ------------------
+                                                UNION     874
 
         The parts sum to 841. Forty-eight duplicate strings sit inside the slot
         corpus alone (327 entries, 279 texts), one inside F21, and one string is
@@ -398,6 +414,24 @@ class Prompts:
             "M03": {p_.text for p_ in Prompts.institutional()},
             "SLOT": {p_.text for p_ in ps
                      if str(g(p_, "source") or "").startswith("SLOT")},
+            #: **THE ONLY PROMPTS IN THE SET THAT ARE QUESTIONS.** The other 840
+            #: are continuation stems -- 0 questions, 1 occurrence of the word
+            #: "you" -- which suits the RAW instrument and suits `prefill`,
+            #: where the stem becomes a started assistant turn. It does not suit
+            #: `chat`, where "The capital of France is" is a user message nobody
+            #: would send, and it cannot ask the question the frame makes
+            #: askable at all: what the model becomes when it is ADDRESSED.
+            #:
+            #: `SUBJECT_NEUTRAL` is the one that makes the rest readable. Every
+            #: framed prompt is addressed, so an all-addressed population HAS NO
+            #: NULL -- without a floor you cannot separate "the model speaks in
+            #: the first person" from "the model was addressed at all". Measured
+            #: by lacan on Tulu-3-8B-SFT, first-person mass at the answer slot:
+            #: refusal 0.905, identity 0.806, conversational 0.034, neutral
+            #: 0.001. The floor costs 8 prompts and is what the other three are
+            #: read against.
+            "SUBJECT": {p_.text for p_ in ps
+                        if g(p_, "family") == "subject"},
         }
         path = pairs_csv or PAIRS_CSV
         if _os.path.exists(path):
