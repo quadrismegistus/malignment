@@ -1,6 +1,6 @@
 ---
 id: junk_passages
-status: CALIBRATED, and the honest answer is that surface features do not do it. AUC 0.715 cross-validated against coder-agreed junk. Ground truth and features are on disk; no detector is admitted.
+status: CALIBRATED. Three independent approaches land at 0.71-0.73 against coder-agreed validity, which is a ceiling in the LABEL rather than in the features. No detector admitted; the price list is the deliverable.
 question: Can a passage be screened as junk without paying for an LLM annotation?
 ---
 
@@ -75,7 +75,86 @@ Eight features, logistic regression, 5-fold cross-validated, n=814:
 of the corpus. The single best feature is gzip compressibility, which is a
 one-line computation and beats every hand-designed screen in the project.
 
-# 3. AND SURPRISAL IS DISQUALIFIED, WHICH MATTERS MOST
+# 2b. THREE APPROACHES, ONE CEILING -- AND IT IS THE LABEL
+
+The target is the one that matters operationally: **is this a valid text
+completion**, defined as NOT (`lexical in (mangled, nonwords)` or
+`semantic = salad`), on the 814 items where both coders agree. 31.4% invalid.
+
+    hand-built statistics, 8 features, logistic regression   AUC 0.715
+    character n-grams, char 1-4, TF-IDF x 60,000 features    AUC 0.731
+    character n-grams, char_wb 2-5                           AUC 0.714
+    word n-grams, 1-2                                        AUC 0.639
+
+    char 1-4, what a threshold costs
+      discard top 10%   catches 21% of invalid, loses  5% of valid
+      discard top 20%   catches 39%,            loses 11%
+      discard top 30%   catches 52%,            loses 20%
+
+**A linear model over 60,000 character n-grams beats gzip-ratio-plus-seven-
+numbers by 0.016.** Three approaches with nothing in common -- designed
+statistics, character shape, lexical content -- arriving within 0.09 of each
+other is the signature of a ceiling in the TARGET, not a shortfall in the
+features.
+
+**And the coders bound it.** On the two dimensions defining this label they
+agreed 802/880 on `lexical` and 795/880 on `semantic`: about one item in ten is
+a case two careful readers read differently. A classifier trained on the agreed
+subset is being asked to reproduce a judgement that is not fully reproducible
+between humans. 0.73 against that is not obviously far from what the label can
+support.
+
+**Consequence, and it is the practical one.** Feature engineering is not the
+lever here. More coded items is: 814 is small both for fitting and for measuring,
+and the same 5-fold CV on a few thousand would improve both. That is the same
+bottleneck the top of this file names, and nothing measured since has moved it.
+
+## Targets tried and what each returned, so nobody repeats them
+
+    narrative_A (13,557 rows)      best single feature 0.599
+                                   NOT a junk label -- it asks whether a passage
+                                   is NARRATIVE, and an essay or a task response
+                                   is non-narrative and well-formed
+    degeneracy (repetition or      combined AUC 0.653, and the STANDARD
+    lexical, 797 agreed, 42.3%)    degeneration metrics are at chance:
+                                   distinct2 0.494, distinct3 0.474,
+                                   distinct4 0.471, worst_window 0.502
+    validity (814 agreed, 31.4%)   0.715 / 0.731  <- the operational target
+
+**`distinct-n` being flat is worth recording.** It is the standard metric for
+the failure mode where a model loops, and this corpus barely has that: Pass A's
+`repetition` is `block` on 21 of 880 and `phrase` on 132. What the coders flag as
+`lexical: mangled` is code-switching, byte-marker residue and broken orthography
+-- their own notes say "CN/EN code-switch", "unreadable CN compounds", "'ogether'"
+-- which is why `nonascii` becomes the top single feature on that target and every
+repetition measure is silent.
+
+# 2c. A PER-MODEL GATE DOES NOT WORK EITHER, AND THE DISTRIBUTION SAYS WHY
+
+Before building a per-passage screen it is worth asking whether invalid text is
+confined to a few lineages, in which case a model-level exclusion with a stated
+criterion would be cleaner. It is not.
+
+    coded models with >=8 items: 44   overall degenerate rate 42.3%
+      worst   Llama-3.1-8B-Instruct 90% | neo_7b 76% | TinyLlama-Chat 68%
+      median  around 40%
+      best    Falcon3-7B-Instruct 6% | eleuther-pythia6.9b-hh-dpo 6%
+
+    drop  3 worst models: removes 13.1% of invalid items, and  7.0% of ALL items
+    drop  5 worst models: removes 20.2%,                      11.9%
+    drop  8 worst models: removes 30.0%,                      18.8%
+    drop 12 worst models: removes 42.4%,                      28.1%
+    drop 20 worst models: removes 63.8%,                      45.5%
+
+A smooth gradient with no natural cut. Dropping twenty of forty-four models buys
+64% of the invalid items at the cost of 45% of the corpus.
+
+**And it is not ordered by capability.** `Llama-3.1-8B-Instruct` at 90% sits
+above `SmolLM2-360M` at 47%. A 360M model produces cleaner text under this coding
+than Llama-3.1-8B-Instruct does, which is a further reason to read the label as
+picking up script-switching on the Chinese prompts rather than model quality.
+
+# 3. AND SURPRISAL IS DISQUALIFIED FOR SOME USES, WITH A NARROWER SCOPE THAN FIRST WRITTEN
 
 The tempting alternative is to screen on reference surprisal -- it is already
 computed for most passages and needs no new instrument. Measured against
@@ -98,10 +177,15 @@ surprising than the narrative ones. A single global surprisal threshold would
 screen some lineages hard, others not at all, and in thirteen cells would
 preferentially discard the GOOD passages.
 
-**Independently of that, screening on surprisal and then measuring surprisal
-differences is conditioning on the outcome.** Any experiment whose dependent
-variable is a surprisal, a drift or a norm computed from the same text must not
-use this screen at any threshold.
+**NARROWED (RH).** An earlier version of this section said that screening on
+surprisal and then measuring surprisal is conditioning on the outcome, full stop.
+That is too broad. Screening on the GENERATING model's SELF-surprisal and then
+measuring a THIRD PARTY's surprisal are different variables -- correlated, but
+not the same quantity, and the objection does not bar that pairing. It bars
+screening and measuring on the SAME scorer.
+
+What disqualifies the surprisal screen generally is the line above it: a median
+per-lineage AUC of 0.639 with 13 of 52 cells inverted.
 
 **One thing surprisal is NOT guilty of: arm-differential junk sensitivity.**
 Measured on the same 13,557, the junk penalty is symmetric:
