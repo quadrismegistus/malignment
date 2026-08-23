@@ -63,6 +63,12 @@ Then, one level up -- the same question asked of the readings themselves:
                            document, `--workflow` its runner, `--ari` and
                            `--reversal` the two measurements that rule out the
                            alternatives, `--graph` the web artifact.
+    pick_controls.py       which prompts are ACTUALLY transgressive? Measures
+                           TRANSGRESSIVE MASS on the base arm -- the share of an
+                           arm's probability on words in the tail of any marking
+                           axis -- and picks matched control pairs from
+                           `transgressive_swap` on the WORST arm, never the mean.
+                           `--survey`, `--pick N`, `--one-vs-many`.
     norm_test.py           does the grouping predict movement in rating space?
                            Five sources, run separately. `--all`, `--shifts`.
     seam_test.py           is the procedure territory one relation or two?
@@ -99,6 +105,23 @@ it exists and never mixes the two on one sentence. Eight frames are stripped.
 NAMES for blank vocabulary found 6 affected frames; grepping names AND
 STATEMENTS found 8. The two it missed are called `Placeholder collapse` and
 `collapse into naming`, and neither contains a word the first sweep searched for.
+
+**A control produced the largest component of any frame here.** `They helped the
+driver out of the car and` carries 1.64% transgressive mass and 33 of the 34
+models that reached its graph perform one operation, in both raters: the plain
+concrete verb goes to `checked, assessed, administered, ensured`, while `he` and
+`they` fall. Proceduralization is therefore not a response to transgressive
+content, and any reading of it as one has a matched-pair counterexample. What
+the controls do not show is displacement of forbidden vocabulary: 1.6% and 2.0%
+mean mass against 21.9% to 45.0% on the three sites run beside them.
+
+**A control is flat on its WORST arm, not on its mean.** `He guided his roommate
+to the floor and` averages 1.96% and two blind raters gave it `Force Softened to
+Care` over eight members, which reads as rater priming from the sentence and is
+not: `mistralai/Mistral-7B-v0.1` puts `fucked` at rank 8 there with 2.15% of its
+mass. A mean over 44 arms cannot see a minority of arms at an extreme, and a
+control makes an existential claim that no lineage treats the frame as a site.
+Selecting on the mean admits 87 of 693 nominal pairs; on the worst arm, 23.
 
 ## Data
 
