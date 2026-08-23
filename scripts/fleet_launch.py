@@ -65,6 +65,7 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
 
 import box_guard                               # noqa: E402
+from venvs import venv_for                     # noqa: E402
 import cards                                   # noqa: E402
 from fleet_shards import seconds               # noqa: E402
 
@@ -237,6 +238,10 @@ def main():
                          "lost mid-run costs at most that much work rather than "
                          "the whole shard.")
     ap.add_argument("--max-hours", type=float, default=6.0)
+    ap.add_argument("--models", nargs="*", default=None,
+                    help="explicit model ids instead of --plan/--box. For a "
+                         "declared population that is not a shard of the 144 -- "
+                         "e.g. roster.framed('ladder'). Must share one venv.")
     ap.add_argument("--frame", choices=["chat", "prefill"], default=None,
                     help="measure the shard under a CHAT TEMPLATE. Framed cells "
                          "carry frame=<this> in twp_cells_v4 and are excluded "
@@ -268,17 +273,60 @@ def main():
     a = ap.parse_args()
     if a.resume:
         return resume(a.resume)
-    if not a.box:
-        raise SystemExit("--box is required unless --resume is given")
-
-    plan = json.load(open(os.path.join(ROOT, a.plan)))
-    boxes = plan["boxes"]
-    if not 1 <= a.box <= len(boxes):
-        raise SystemExit("--box must be 1..%d" % len(boxes))
-    b = boxes[a.box - 1]
-    models, roots, venv = sorted(b["models"]), b["lineages"], b["venv"]
-
-    print("SHARD %d of %d" % (a.box, len(boxes)))
+    #: **AN EXPLICIT LIST IS A SHARD OF ONE, NOT A SECOND CODE PATH.** A pilot
+    #: measures a DECLARED population -- `roster.framed("ladder")` -- which is
+    #: 16 models over 7 lineages and has nothing to do with how `fleet_shards`
+    #: packs the 144 by seconds. Rather than teach the packer a second
+    #: population, the list is turned into the same shape a plan entry has, so
+    #: every gate below it (preflight, record, cards, disk, VRAM, run.sh) runs
+    #: unchanged and untested code is not what stands between us and a rental.
+    if a.models:
+        from malignment import roster as _r0
+        _lin0 = _r0.lineages(ops=_r0.ALIGNING)
+        models = sorted(set(a.models))
+        unknown = [m for m in models if not any(m in ms for ms in _lin0.values())]
+        if unknown:
+            raise SystemExit("not in any lineage: %s" % ", ".join(unknown))
+        roots = sorted({r for r, ms in _lin0.items() if any(m in ms for m in models)})
+        venvs = {os.path.basename(venv_for(m)) for m in models}
+        if len(venvs) != 1:
+            #: Same rule `fleet_shards.pack` enforces: never silently split.
+            raise SystemExit("that list spans %s -- one box, one venv. Split it."
+                             % sorted(venvs))
+        venv = venvs.pop()
+        #: **`per` IS THE TIME ESTIMATE'S INPUT, SO IT MUST BE REAL.** A plan
+        #: entry carries measured per-model cell counts; a zero here would price
+        #: the shard at zero hours and print a confident 0.0 h beside a rental.
+        #: With `--prompts-file` every model measures the same declared set, so
+        #: the count is the file's line count.
+        _n = 0
+        if a.prompts_file:
+            _pf0 = os.path.abspath(os.path.expanduser(a.prompts_file))
+            if os.path.exists(_pf0):
+                _n = sum(1 for ln in open(_pf0) if ln.strip())
+        if not _n:
+            raise SystemExit(
+                "--models needs --prompts-file: without a declared prompt set "
+                "the per-model cell count is unknown and the shard cannot be "
+                "priced or its ETA reported.")
+        b = {"models": models, "lineages": roots, "venv": venv,
+             "per": {m: _n for m in models}, "cells": _n * len(models)}
+        #: Everything downstream indexes scratch paths and state by `--box`;
+        #: an explicit list is box 0 so those stay one namespace rather than
+        #: growing a None branch each.
+        a.box = a.box or 0
+        print("EXPLICIT LIST  %d models over %d lineages (box %d)"
+              % (len(models), len(roots), a.box))
+    else:
+        if not a.box:
+            raise SystemExit("--box is required unless --resume or --models is given")
+        plan = json.load(open(os.path.join(ROOT, a.plan)))
+        boxes = plan["boxes"]
+        if not 1 <= a.box <= len(boxes):
+            raise SystemExit("--box must be 1..%d" % len(boxes))
+        b = boxes[a.box - 1]
+        models, roots, venv = sorted(b["models"]), b["lineages"], b["venv"]
+        print("SHARD %d of %d" % (a.box, len(boxes)))
     print("  venv      %s" % venv)
     print("  lineages  %d: %s" % (len(roots), ", ".join(r.split("/")[-1] for r in roots)))
     print("  models    %d" % len(models))
@@ -392,7 +440,24 @@ def main():
     #: `--box N` mean two different shards, and the same fix: derive both from one
     #: place rather than describing one in terms of the other.
     only_s = " --only %s" % a.only if a.only else ""
-    print("  will run, PER LINEAGE (pass 1 then pass 2, then wipe the weights):")
+    #: **AND THE FRAME FLAGS AND THE TOPUP SKIP MUST BE HERE TOO.** Adding
+    #: `--frame` broke the parity this comment was written to protect: the
+    #: preview kept advertising `topup_lineage` on a framed run that deliberately
+    #: skips it, and omitted the frame flags entirely. An operator reading it
+    #: would have been told the box does pass 2 with no template -- while the box
+    #: does pass 1 with one. Same defect, one release later, which is what a
+    #: parity comment cannot prevent on its own.
+    _preview_extra = only_s
+    if a.frame:
+        _preview_extra += " --frame %s" % a.frame
+    if a.system is not None:
+        _preview_extra += " --system %r" % a.system
+    if a.prompts_file:
+        _preview_extra += " --prompts-file /root/prompts.txt"
+    steps = 2 if a.frame else 3
+    print("  will run, PER LINEAGE (%s, then wipe the weights):"
+          % ("pass 1 ONLY -- no topup under a frame" if a.frame
+             else "pass 1 then pass 2"))
     shown = 0
     for r in roots:
         mem = [m for m in _l1.get(r, []) if m in models]
@@ -403,11 +468,13 @@ def main():
             continue
         print("      queue_v4.py --models %s%s   [%d model(s)]"
               % (" ".join(x.split("/")[-1] for x in mem[:3])
-                 + (" ..." if len(mem) > 3 else ""), only_s, len(mem)))
-        print("      topup_lineage.py --root %s --from-stash%s" % (r, only_s))
+                 + (" ..." if len(mem) > 3 else ""), _preview_extra, len(mem)))
+        if not a.frame:
+            print("      topup_lineage.py --root %s --from-stash%s" % (r, only_s))
         print("      rm -rf ~/.cache/huggingface/hub/models--*")
     if shown > 2:
-        print("      ... and %d more lineage(s), same three steps each" % (shown - 2))
+        print("      ... and %d more lineage(s), same %d steps each"
+              % (shown - 2, steps))
 
     if not a.yes:
         print("\n  DRY RUN -- nothing rented. Pass --yes to spend.")
