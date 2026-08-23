@@ -236,6 +236,7 @@ CREATE TABLE IF NOT EXISTS {db}.twp_cells_v4 (
     torch_version LowCardinality(String), transformers_version LowCardinality(String),
     frame LowCardinality(String),
     system_mode LowCardinality(String), user_msg LowCardinality(String),
+    render_sha String DEFAULT '',
     source LowCardinality(String), mtime DateTime
 ) ENGINE = ReplacingMergeTree(mtime)
 PRIMARY KEY (model, prompt, rule_version, rules, prompt_cache, topup)
@@ -515,6 +516,26 @@ def _user_msg(d):
     if isinstance(k, dict) and k.get("frame"):
         return str(k.get("user_msg") or "")
     return ""
+
+
+def _render_sha(d):
+    """sha256[:16] of the text the model actually saw. '' when not recorded.
+
+    **THE BODY, NOT THE KEY -- RH's ruling, 2026-08-23.** `frame` and
+    `system_mode` record what was REQUESTED. This records what the template
+    PRODUCED, and they are different questions: SmolLM3-3B's template calls
+    `strftime_now("%d %B %Y")`, so one checkpoint and one prompt render
+    differently on two days while agreeing on every key column.
+
+    Keying it would make that a different cell instead of a silent twin, and
+    that may yet be right -- but `Checkpoint.key()` warns that adding a field
+    unconditionally orphans every stored cell, and 41,952 framed ones exist. So
+    it is RECORDED first, so divergence can be SEEN, and keyed only if it is
+    ever observed. **`''` means not recorded, never "no render"** -- every cell
+    written before 2026-08-23 carries it, and reading '' as a render hash would
+    make 41,952 cells look identical to each other.
+    """
+    return str(d.get("render_sha") or "")
 
 
 def _key_body_agree(d, path):
@@ -798,6 +819,7 @@ def main():
                               "frame": _frame(d),
                               "system_mode": _system_mode(d),
                               "user_msg": _user_msg(d),
+                              "render_sha": _render_sha(d),
                               "topup": int(bool(d.get("topup"))),
                               "topup_words": int(d.get("topup_words") or 0),
                               "topup_mass": float(d.get("topup_mass") or 0.0),

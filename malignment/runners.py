@@ -78,6 +78,7 @@ not a default.
 """
 import argparse
 import collections
+import hashlib
 import json
 import os
 import socket
@@ -683,12 +684,37 @@ class TWPRunner:
                     #: -- the same silent no-op that made `frame="chat"` return
                     #: byte-identical numbers in `probs` until 3e5352b, one layer
                     #: down and writing to the corpus this time.
-                    _text, _pids = p, None
+                    _text, _pids, _rsha = p, None, ""
                     if frame is not None:
                         from . import generate as G
                         _text, _sys_ok = G.render(
                             ld, p, system=system, user_msg=user_msg,
                             prefill=(frame == "prefill"), template=True)
+                        #: **WHAT THE TEMPLATE PRODUCED, NOT WHAT WE ASKED FOR.**
+                        #: `frame` and `system_mode` record the REQUEST. Neither
+                        #: can see what the template put in the context on its
+                        #: own, and two cells agreeing on every key column can
+                        #: still have been measured on different text.
+                        #:
+                        #: Not hypothetical: SmolLM3-3B's template runs
+                        #: `strftime_now("%d %B %Y")` and stamps the render with
+                        #: TODAY'S DATE from the system clock, so the same
+                        #: checkpoint and prompt render differently on two days.
+                        #: Swept 2026-08-23 across all 80 framed-population
+                        #: templates for render-time constructs -- 2 hits, both
+                        #: SmolLM3 arms, 78 deterministic. Rare, and it only
+                        #: takes one to make a population inhomogeneous.
+                        #:
+                        #: **NON-KEY BY RH's RULING.** It could go in the key, and
+                        #: that would make a date change a different cell rather
+                        #: than a silent twin -- but `Checkpoint.key()` warns that
+                        #: adding a field unconditionally orphans every stored
+                        #: cell, and there are 41,952 framed ones. Recorded first
+                        #: so divergence is DETECTABLE; keyed later only if it is
+                        #: ever observed to diverge. Cells written before this
+                        #: carry '' -- not recorded, which is the true statement.
+                        _rsha = hashlib.sha256(
+                            _text.encode("utf-8")).hexdigest()[:16]
                         #: A tokenizer that DISCARDS the system message would
                         #: give a cell keyed with a treatment it never received.
                         #: `probs` refuses this; so must the writer.
@@ -721,6 +747,10 @@ class TWPRunner:
             #: averaging it into a table.
             rec.update(rows=rows, residual=res,
                        conservation=sum(w.values()) + res["total"])
+            #: Body, never key -- see the render above. `rules is None` is the v3
+            #: path, which cannot render and so has nothing to hash.
+            if rules is not None and frame is not None:
+                rec["render_sha"] = _rsha
             #: One append per cell, healed and flushed by the engine. The key
             #: carries the instrument, so a rule bump writes a NEW key rather
             #: than overwriting a measurement made by a different instrument.
