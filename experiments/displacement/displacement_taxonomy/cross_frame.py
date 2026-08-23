@@ -537,7 +537,18 @@ DOMAIN_COLOUR = {"sexual": "#fa5252", "violence": "#e8590c",
                  "institutional": "#4dabf7", "identity": "#51cf66"}
 
 
-def emit_graph(groups_path=None, out="metagraph", cap=10):
+#: WHICH GROUPINGS THE NETWORK IS BUILT FROM. One entry per rater; the hub ids
+#: carry the rater so two raters' relations are distinct nodes and a component
+#: links to one hub PER RATER. That is what makes this a network rather than a
+#: set of disjoint stars: with one rater every component belongs to exactly one
+#: group, so nothing can connect two hubs and the picture can only be 21 stars.
+#: Measured on the single-rater version: 25 connected components, 0 leaves with
+#: more than one hub.
+RATERS = [("opus-high", "crossframe_groups_89_opus_high.json"),
+          ("opus-med", "crossframe_groups_89_opus_medium.json")]
+
+
+def emit_graph(groups_path=None, out="metagraph", cap=10, raters=None):
     """The meta-relation network, carrying all FOUR levels for the drill-down.
 
         meta-relation -> component -> within-prompt relation -> model + words
@@ -553,8 +564,10 @@ def emit_graph(groups_path=None, out="metagraph", cap=10):
     sees first is what led the arm rather than an alphabetical tail.
     """
     import json as _json
-    G = _json.load(open(groups_path or os.path.join(
-        HERE, "results", "crossframe_groups_89_opus_medium.json")))
+    rs = [(lab, _json.load(open(os.path.join(HERE, "results", f))))
+          for lab, f in (raters or RATERS)]
+    if groups_path:
+        rs = [("rater", _json.load(open(groups_path)))]
     M = as_read()
     sc = {}
     nodes, links, seen = [], [], set()
@@ -599,12 +612,13 @@ def emit_graph(groups_path=None, out="metagraph", cap=10):
                       "n_models": c["n_models"], "stripped": bool(c.get("no_blanks")),
                       "relations": rels})
 
-    for g in G["groups"]:
-        hid = "META %s" % g["name"]
+    for lab, G in rs:
+      for g in G["groups"]:
+        hid = "META[%s] %s" % (lab, g["name"])
         fr = {M[m]["prompt"] for m in g["members"] if m in M}
         ds = collections.Counter(M[m]["domain"] for m in g["members"] if m in M)
         nodes.append({"id": hid, "kind": "op", "label": g["name"], "group": None,
-                      "component": 0, "n": len(g["members"]),
+                      "rater": lab, "component": 0, "n": len(g["members"]),
                       "statement": g.get("statement", ""), "spans": g.get("spans", ""),
                       "why": g.get("why", ""), "sentences": len(fr),
                       "domains": dict(ds),
@@ -614,8 +628,9 @@ def emit_graph(groups_path=None, out="metagraph", cap=10):
             if m in M:
                 links.append({"source": "%s::%s" % (M[m]["prompt"], m),
                               "target": hid, "cross": len(ds) > 1})
-    for cid in G.get("singletons") or []:
-        leaf(cid)
+    for lab, G in rs:
+        for cid in G.get("singletons") or []:
+            leaf(cid)
 
     from malignment.chartdata import graph, write
     dom = collections.Counter(M[c]["domain"] for c in M)
