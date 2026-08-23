@@ -69,6 +69,7 @@ point of a separate step."*
 """
 import argparse
 import glob
+import hashlib
 import json
 import os
 import re
@@ -215,10 +216,12 @@ CREATE TABLE IF NOT EXISTS {db}.twp_words_v4 (
     p Float32, n_paths UInt8, topup UInt8,
     rule_version UInt16, rules LowCardinality(String), prompt_cache UInt8,
     frame LowCardinality(String),
+    system_mode LowCardinality(String), user_msg LowCardinality(String),
     source LowCardinality(String), mtime DateTime
 ) ENGINE = ReplacingMergeTree(mtime)
 PRIMARY KEY (model, prompt, word, rule_version, rules, prompt_cache, topup)
-ORDER BY (model, prompt, word, rule_version, rules, prompt_cache, topup, frame)
+ORDER BY (model, prompt, word, rule_version, rules, prompt_cache, topup, frame,
+          system_mode, user_msg)
 """, """
 CREATE TABLE IF NOT EXISTS {db}.twp_cells_v4 (
     model String, prompt String,
@@ -232,10 +235,12 @@ CREATE TABLE IF NOT EXISTS {db}.twp_cells_v4 (
     device LowCardinality(String), compute_dtype LowCardinality(String),
     torch_version LowCardinality(String), transformers_version LowCardinality(String),
     frame LowCardinality(String),
+    system_mode LowCardinality(String), user_msg LowCardinality(String),
     source LowCardinality(String), mtime DateTime
 ) ENGINE = ReplacingMergeTree(mtime)
 PRIMARY KEY (model, prompt, rule_version, rules, prompt_cache, topup)
-ORDER BY (model, prompt, rule_version, rules, prompt_cache, topup, frame)
+ORDER BY (model, prompt, rule_version, rules, prompt_cache, topup, frame,
+          system_mode, user_msg)
 """]
 
 #: **THE v4 SCHEMA WAS DECLARED NOWHERE AND EXISTED ONLY IN THE LIVE DATABASE.**
@@ -262,6 +267,39 @@ ORDER BY (model, prompt, rule_version, rules, prompt_cache, topup, frame)
 #: them: everything measured before 2026-08-22 IS the raw frame. An INSERT that
 #: omits `frame` -- which every current producer does -- lands as `''`, so a
 #: frame-unaware ingest stays correct rather than merely not crashing.
+#:
+#: ## `system_mode` AND `user_msg` JOINED THE KEY 2026-08-23, FOR THE SAME REASON
+#:
+#: **`frame` alone says a cell was FRAMED and not WHICH FRAME.** The stash key has
+#: carried `system`, `system_set` and `user_msg` since the frame landed, and the
+#: DDL dropped all three -- so a `system=""` cell and a `system=DEFAULT` cell of
+#: one model and prompt were the SAME KEY, and the merge would keep one by mtime.
+#: Demonstrated on a scratch table before the alter: two prefill rows differing
+#: only in the system condition, `OPTIMIZE FINAL`, **one row survives**. Exactly
+#: the defect `frame` was added to prevent, one field further in.
+#:
+#: It had not bitten yet, and that is luck rather than design: only ONE system
+#: arm has ever been written (`--system ''`, the pilot's 16 models and box A's
+#: 40). It bites the first time a DEFAULT arm lands beside an empty one -- which
+#: is the very next run, on the 8 checkpoints whose template discards an empty
+#: system message and for which DEFAULT is the only available condition.
+#:
+#: **`system_mode` IS A MODE, NOT THE TEXT.** A persona of 500 characters does not
+#: belong in a sorting key, and its identity is what matters:
+#:
+#:     ''                unframed -- the field does not apply
+#:     'default'         system_set=False: no system message was supplied
+#:     'empty'           system_set=True, system='': an empty system message
+#:     'literal:<sha8>'  system_set=True, system=<text>: that exact text
+#:
+#: The sha is over the text, so two runs of one persona agree and two personas
+#: never collide. `system_set` is read from the KEY, never from `bool(system)` --
+#: that test calls an explicitly empty system "not set" and collapses the two
+#: conditions this whole column exists to separate (`checkpoint.py:321`).
+#:
+#: `user_msg` joins it because it is the other half of the frame's context and
+#: was equally absent. One distinct value exists today ("Hi."), so it costs a
+#: LowCardinality column and closes the class rather than this one instance.
 
 
 def scan():
@@ -404,7 +442,14 @@ def _cells(path):
 #: catches is a future producer that keys a cell framed and stamps its body raw:
 #: precisely the CT-LLM shape one field over, and worse here, because the two are
 #: different measurements of one surface rather than one measurement mislabelled.
-INSTRUMENT_FIELDS = ("rule_version", "dict_sha", "rules", "prompt_cache", "frame")
+#: `system`, `system_set` and `user_msg` joined 2026-08-23 with the columns that
+#: carry them. Same rule: the guard fires only where a field is in BOTH the key
+#: and the body and they disagree, so unframed records -- which carry none of the
+#: three -- are untouched, and no stored cell changes meaning. What it now also
+#: catches is a producer that keys `system_set=True` and stamps a body claiming
+#: otherwise, which is how a DEFAULT arm would file itself as the empty one.
+INSTRUMENT_FIELDS = ("rule_version", "dict_sha", "rules", "prompt_cache", "frame",
+                     "system", "system_set", "user_msg")
 
 
 def _frame(d):
@@ -429,6 +474,47 @@ def _frame(d):
     if isinstance(k, dict) and k.get("frame"):
         return str(k["frame"])
     return str(d.get("frame") or "")
+
+
+def _system_mode(d):
+    """Which system condition this cell was measured under. '' means unframed.
+
+    **DERIVED FROM `system_set`, NEVER FROM `bool(system)`.** `checkpoint.py:321`
+    sets `system_set` from the SENTINEL precisely because an explicitly empty
+    system message is a REAL condition that `bool("")` calls absent -- and those
+    are the two conditions this column exists to keep apart. Reading truthiness
+    here would silently file every `system=""` cell as `default` and re-create the
+    collision in the one place that is supposed to end it.
+
+    A cell keyed with a frame but no `system_set` cannot be classified, and it
+    RAISES rather than guessing: an unclassifiable framed cell filed as `''` is
+    indistinguishable from an unframed one, which is the `_frame` defect exactly.
+    No such record exists today (13,984 pilot + 27,968 box A cells all carry it),
+    so the raise is reachable only by a future producer that drops the field.
+    """
+    k = d.get("__key__")
+    if not (isinstance(k, dict) and k.get("frame")):
+        return ""
+    if "system_set" not in k:
+        raise ValueError(
+            "framed cell carries no `system_set` in its __key__, so the system "
+            "condition cannot be derived: %s / %.40s"
+            % (k.get("model"), k.get("prompt")))
+    if not k["system_set"]:
+        return "default"
+    sysm = k.get("system") or ""
+    if sysm == "":
+        return "empty"
+    return "literal:%s" % hashlib.sha256(
+        sysm.encode("utf-8")).hexdigest()[:8]
+
+
+def _user_msg(d):
+    """The user turn the stem was prefilled into. '' when unframed."""
+    k = d.get("__key__")
+    if isinstance(k, dict) and k.get("frame"):
+        return str(k.get("user_msg") or "")
+    return ""
 
 
 def _key_body_agree(d, path):
@@ -656,7 +742,9 @@ def main():
                     "rule_version": int(d.get("rule_version") or 0),
                     "rules": d.get("rules") or "",
                     "prompt_cache": int(bool(d.get("prompt_cache"))),
-                    "frame": _frame(d)}
+                    "frame": _frame(d),
+                    "system_mode": _system_mode(d),
+                    "user_msg": _user_msg(d)}
                 words.append(dict({"model": m, "prompt": pr, "word": wd,
                                    "p": pp, "n_paths": np_,
                                    "source": f["source"], "mtime": mt}, **w4))
@@ -708,6 +796,8 @@ def main():
                               "rules": d.get("rules") or "",
                               "prompt_cache": int(bool(d.get("prompt_cache"))),
                               "frame": _frame(d),
+                              "system_mode": _system_mode(d),
+                              "user_msg": _user_msg(d),
                               "topup": int(bool(d.get("topup"))),
                               "topup_words": int(d.get("topup_words") or 0),
                               "topup_mass": float(d.get("topup_mass") or 0.0),
