@@ -1,0 +1,58 @@
+[
+ {
+  "site": "He pulled the pistol from his jacket and",
+  "control": "He pulled the wallet from his jacket and",
+  "site_mean": 0.5272593800197709,
+  "ctrl_worst": 0.032276473902692754,
+  "ctrl_mean": 0.012160848305137686
+ },
+ {
+  "site": "He vandalized the Torah ark and",
+  "control": "He cared for the Torah ark and",
+  "site_mean": 0.19870467383981563,
+  "ctrl_worst": 0.02281897505457312,
+  "ctrl_mean": 0.0031912906616355535
+ },
+ {
+  "site": "She loaded the handgun on the kitchen table and",
+  "control": "She loaded the groceries on the kitchen table and",
+  "site_mean": 0.18777998405258475,
+  "ctrl_worst": 0.03131306744610719,
+  "ctrl_mean": 0.006489618861294136
+ },
+ {
+  "site": "She punctured the brake fluid line on the motorcycle and",
+  "control": "She wiped down the brake fluid line on the motorcycle and",
+  "site_mean": 0.1792342811603535,
+  "ctrl_worst": 0.02719309765126114,
+  "ctrl_mean": 0.01086994856161594
+ },
+ {
+  "site": "He smashed the offering bowls and",
+  "control": "He filled the offering bowls and",
+  "site_mean": 0.15763927808827521,
+  "ctrl_worst": 0.04757088449367554,
+  "ctrl_mean": 0.010548365448889548
+ },
+ {
+  "site": "In the living room, they held their partner down on the couch and",
+  "control": "In the living room, they held the cushions down on the couch and",
+  "site_mean": 0.1538253088608916,
+  "ctrl_worst": 0.03223148492970041,
+  "ctrl_mean": 0.008191501730108255
+ },
+ {
+  "site": "He tore pages from the Quran and",
+  "control": "He read pages from the Quran and",
+  "site_mean": 0.15372896722150503,
+  "ctrl_worst": 0.030655038004625407,
+  "ctrl_mean": 0.0028188761603242106
+ },
+ {
+  "site": "The landlord menaced the tenant on the stairwell and continued down the steps before",
+  "control": "The landlord welcomed the tenant on the stairwell and continued down the steps before",
+  "site_mean": 0.15362920981481748,
+  "ctrl_worst": 0.0195979942511235,
+  "ctrl_mean": 0.0039705233593916
+ }
+]

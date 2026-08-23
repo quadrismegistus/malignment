@@ -349,7 +349,7 @@ SITE_MIN = 0.10
 CTRL_MAX = 0.05
 
 
-def pick(n=8, limit=2000):
+def pick(n=8, limit=2000, emit=None):
     """Matched control pairs: same template, one word swapped, MEASURED apart.
 
     `domain=neutral` is the obvious control pool and the survey disqualifies it.
@@ -397,6 +397,15 @@ def pick(n=8, limit=2000):
     for sa, wb, mb, ta, tb in good[:n]:
         print("  %7.1f%% %7.2f%% %7.2f%%   %s" % (100 * sa, 100 * wb, 100 * mb, ta[:52]))
         print("  %8s %8s %8s   %s" % ("", "", "", tb[:52]))
+    if emit:
+        #: EMITTED, NEVER TRANSCRIBED. The table above truncates at 52 characters
+        #: and six of the eight top pairs are longer than that, so reading the
+        #: prompts off the display would silently run a different sentence. The
+        #: runner takes this file.
+        json.dump([{"site": ta, "control": tb, "site_mean": sa,
+                    "ctrl_worst": wb, "ctrl_mean": mb} for sa, wb, mb, ta, tb in good[:n]],
+                  open(emit, "w"), indent=1)
+        print("\n  wrote %d pair(s) to %s" % (min(n, len(good)), emit))
     return good
 
 
@@ -405,12 +414,15 @@ def main():
     ap.add_argument("--survey", action="store_true")
     ap.add_argument("--pick", type=int, metavar="N",
                     help="N matched control pairs, chosen by measurement")
+    ap.add_argument("--emit", metavar="PATH",
+                    help="write the chosen pairs as JSON, so a runner never "
+                         "transcribes a prompt off a truncated table")
     ap.add_argument("--one-vs-many", action="store_true",
                     help="does adding axes recover sites, or only relabel them?")
     ap.add_argument("--limit", type=int, default=260)
     a = ap.parse_args()
     if a.pick:
-        pick(a.pick)
+        pick(a.pick, emit=a.emit)
         return
     got, AX, CUT, arms = survey(a.limit)
     if a.one_vs_many:
