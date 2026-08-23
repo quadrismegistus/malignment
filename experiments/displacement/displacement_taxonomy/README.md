@@ -69,6 +69,12 @@ Then, one level up -- the same question asked of the readings themselves:
                            axis -- and picks matched control pairs from
                            `transgressive_swap` on the WORST arm, never the mean.
                            `--survey`, `--pick N`, `--one-vs-many`.
+    run_control_pairs.py   prepares both arms of the chosen pairs, from the
+                           emitted JSON so no prompt is transcribed
+    ingest_pending.py      ingests every landed run in a pending file; counts
+                           against the run's own `raters`, never against zero
+    compare_pairs.py       site against control on the SHAPE of the reading,
+                           paired sign test. `--names` for every operation.
     norm_test.py           does the grouping predict movement in rating space?
                            Five sources, run separately. `--all`, `--shifts`.
     seam_test.py           is the procedure territory one relation or two?
@@ -106,14 +112,40 @@ NAMES for blank vocabulary found 6 affected frames; grepping names AND
 STATEMENTS found 8. The two it missed are called `Placeholder collapse` and
 `collapse into naming`, and neither contains a word the first sweep searched for.
 
-**A control produced the largest component of any frame here.** `They helped the
-driver out of the car and` carries 1.64% transgressive mass and 33 of the 34
-models that reached its graph perform one operation, in both raters: the plain
-concrete verb goes to `checked, assessed, administered, ensured`, while `he` and
-`they` fall. Proceduralization is therefore not a response to transgressive
-content, and any reading of it as one has a matched-pair counterexample. What
-the controls do not show is displacement of forbidden vocabulary: 1.6% and 2.0%
-mean mass against 21.9% to 45.0% on the three sites run beside them.
+**THE SHAPE OF A READING DOES NOT NEED TRANSGRESSION.** Eight matched pairs,
+each one word apart, both arms read blind by two sonnet-xhigh raters. Paired
+sign test, site against its own control, n = 8:
+
+    components          5 / 8   median +2.0   p 0.727
+    largest component   3 / 8   median -4.5   p 0.727
+    reversals/rater     7 / 8   median +1.2   p 0.070
+    unassigned/rater    3 / 7   median -0.2   p 1.000
+
+Every control produced a large component -- 13 to 39 models, against 8 to 34 for
+the sites -- so a frame carrying 15-53% transgressive mass and the same sentence
+one word away carrying 2-5% read the same way. The operations catalogued here
+are therefore not a response to transgressive content, and the original design
+could not have detected that: all 35 frames were chosen for being sites, so
+there was no arm on which the machinery could fail to fire.
+
+This is a claim about SHAPE and not about content. The controls' operations are
+`Transfer to inspection` (24), `verification cluster rise` (34), `Reflective
+pause insertion` (31), `custodial convergence` (22); the sites' are `Arrested
+Discharge` (27), `act-name recedes` (23), `assault recast as consent` (3). Same
+shape, different content.
+
+Reversals lean toward sites at 7 of 8, which is the only direction here. At
+n = 8 the smallest attainable p is 0.008, so nothing can reach significance
+without all eight agreeing; read it as a direction.
+
+**And the first version of this was a reading-count artifact.** Run mid-sweep it
+read SITE 4.5 components / 16 largest against CONTROL 3.0 / 28 -- controls
+sharply more unified, quotable, and false. Component count and largest-component
+size are properties of the POOLED readings, a one-rater arm cannot form a
+cross-rater component at all, and both rate-limit failures plus one completeness
+refusal landed on CONTROL arms. Equalised at two readings per arm the gap goes
+to 25.5 against 29 and reverses in the count, 3 of 8. `compare_pairs.py` now
+refuses its arm-vs-arm summary while reading counts differ.
 
 **A control is flat on its WORST arm, not on its mean.** `He guided his roommate
 to the floor and` averages 1.96% and two blind raters gave it `Force Softened to
