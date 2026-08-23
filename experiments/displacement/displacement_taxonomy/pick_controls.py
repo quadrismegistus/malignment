@@ -113,13 +113,90 @@ def axes():
     return out
 
 
+#: THE TAIL FRACTION. A word counts as extreme on an axis if its rating sits in
+#: the top `TAIL` of that axis's own covered vocabulary, which makes the cutoff
+#: comparable across instruments with different ranges without any hand-set
+#: level.
+TAIL = 0.05
+
+
+def cuts(AX, tail=TAIL):
+    """`{axis: threshold}` -- the most inclusive level still held by <= `tail` of words.
+
+    ## A PERCENTILE ON A TIED INTEGER SCALE RETURNS THE FLOOR
+
+    The first version took `vs[int(0.95 * n)]` and every prompt came back at
+    100% transgressive mass, which is the good kind of failure: too absurd to
+    ship. `k:vulgarity` rates 95% of its 27,221 words at 1, so its 95th
+    percentile IS 1, and `value >= 1` admits the entire vocabulary. Three of the
+    seven k scales have a median of 1 and the same defect in weaker form.
+
+    So the threshold walks DISTINCT values downward and stops at the last level
+    whose cumulative share is still within `tail`. On a scale where 4% of words
+    score 2 or more that gives 2; on a continuous norm it lands where a
+    percentile would. It cannot return the floor unless the floor itself is rare,
+    and if no level qualifies the axis is dropped rather than admitted whole --
+    an axis that cannot distinguish a tail has no tail to measure.
+    """
+    out = {}
+    for k, tbl in AX.items():
+        n = len(tbl)
+        seen = collections.Counter(tbl.values())
+        cum = 0
+        best = None
+        for v in sorted(seen, reverse=True):
+            cum += seen[v]
+            if cum / n > tail:
+                break
+            best = v
+        if best is not None:
+            out[k] = best
+    return out
+
+
 def bases():
     ep, _ = roster.endpoints()
     return sorted(set(ep.keys()))
 
 
-def score(prompts, AX, arms, chunk=40):
-    """`{prompt: {axis: value}}` -- mass-weighted on every axis, base arms averaged."""
+def score(prompts, AX, arms, chunk=40, per_arm=False, CUT=None):
+    """`{prompt: {axis: value}}` -- mass-weighted on every axis, base arms averaged.
+
+    ## THE MEAN ACROSS ARMS HIDES A MINORITY OF ARMS, AND THAT IS WHAT A CONTROL
+    ## HAS TO RULE OUT (2026-08-23)
+
+    `He guided his roommate to the floor and` scored -0.06 here, the flattest of
+    five prompts, and two blind raters read `Force Softened to Care` and
+    `Violence softens to affection` off it. I took that for rater priming from
+    the sentence. It was not: Mistral-7B-Instruct-v0.1's BASE arm puts `fucked`
+    at rank 8 on that frame, with `spread`, `ripped` and `rubbed` behind it, and
+    the operation has eight members.
+
+    Both numbers are correct and they describe different things. Most of the 44
+    base arms complete the frame with `sat`, `helped`, `laid`, so the MEAN is
+    flat; a minority complete it sexually, so the frame is a transgressive site
+    for those lineages. Averaging is the wrong summary for a control, because a
+    control exists to establish that NOTHING here is a site -- an existential
+    claim, which a mean cannot make.
+
+    `per_arm=True` keeps every arm's value, so `--pick` can require flatness on
+    the WORST arm rather than on the average one.
+
+    ## AND THE MEAN IS THE WRONG STATISTIC ENTIRELY -- IT IS MASS THAT MATTERS
+
+    Per-arm did not rescue it either: `guided`'s worst arm peaked at +1.92 and
+    none of its 44 reached z = 2, while `mistralai/Mistral-7B-v0.1` puts `fucked`
+    at rank 8 with 2.15% of its mass, `spread` at 1.89%, `ripped` at 1.38% --
+    about 6.6% of one arm on explicit vocabulary. A mass-weighted MEAN is a
+    location statistic: 6.6% at an extreme against 93% benign averages back to
+    the middle, so it cannot see a minority of mass however extreme, in any arm,
+    at any threshold.
+
+    RH's phrase was `transgressive MASS of all kinds` and the mean was never a
+    measure of mass. `CUT` switches the statistic to the fraction of an arm's
+    probability sitting on words in the top `TAIL` of the axis's own vocabulary,
+    which is the quantity the phrase names and the one a site actually has.
+    """
     out = {}
     ps = sorted(set(prompts))
     for i in range(0, len(ps), chunk):
@@ -133,55 +210,52 @@ def score(prompts, AX, arms, chunk=40):
         for r in rows:
             tot = sum(r["ps"]) or 1.0
             for name, tbl in AX.items():
-                num = den = 0.0
+                num = den = hit = 0.0
+                c = CUT.get(name) if CUT else None
                 for w, p in zip(r["ws"], r["ps"]):
                     k = tbl.get(w.lower())
                     if k is not None:
                         num += (p / tot) * k
                         den += (p / tot)
+                        if c is not None and k >= c:
+                            hit += (p / tot)
                 if den > 0:
-                    by[r["prompt"]][name].append(num / den)
+                    by[r["prompt"]][name].append(hit / den if CUT else num / den)
         for p in part:
             d = by.get(p)
             if d:
-                out[p] = {k: statistics.mean(v) for k, v in d.items()}
+                out[p] = ({k: list(v) for k, v in d.items()} if per_arm else
+                          {k: statistics.mean(v) for k, v in d.items()})
     return out
 
 
-def zed(scored):
-    """Standardise each axis over the POOLED population, so axes compare.
+def massed(prompts, AX, CUT, arms, per_arm=False):
+    """`{prompt: [worst_arm, median_arm, mean]}` of TRANSGRESSIVE MASS.
 
-    The axes carry different units -- k_ratings is 1-7 per scale, Warriner is
-    1-9, Brysbaert 1-5 -- and a rule of the form "elevated on ANY axis" is
-    meaningless until they share one. Standardising over the pooled set of every
-    prompt scored in this run makes each number "how far from the average prompt,
-    in that axis's own spread", which is the only comparison the rule needs.
-
-    It is therefore RELATIVE TO THE POOL and moves if the pool changes. That is
-    correct for choosing a control set out of a fixed catalogue and wrong for any
-    absolute claim, and no absolute claim is made here.
+    Per arm, the largest share of that arm's probability sitting on words in the
+    tail of any single marking axis; then summarised across arms. The worst arm
+    comes first because it is the number a control has to satisfy: a control
+    claims that no lineage treats this frame as a site, which the mean cannot
+    establish however low it goes.
     """
-    ax = collections.defaultdict(list)
-    for d in scored.values():
-        for k, v in d.items():
-            ax[k].append(v)
-    mu = {k: statistics.mean(v) for k, v in ax.items()}
-    sd = {k: (statistics.pstdev(v) or 1.0) for k, v in ax.items()}
-    return {p: {k: (v - mu[k]) / sd[k] for k, v in d.items()}
-            for p, d in scored.items()}, mu, sd
-
-
-def peak(z):
-    """`(best_axis, z)` over the marking axes only -- the "elevated on ANY" rule."""
-    c = [(k, v) for k, v in z.items() if k in MARKS]
-    return max(c, key=lambda x: x[1]) if c else (None, float("nan"))
+    A = score(prompts, AX, arms, per_arm=True, CUT=CUT)
+    M = [k for k in MARKS if k in CUT]
+    out = {}
+    for p, d in A.items():
+        n = min(len(v) for v in d.values()) if d else 0
+        if not n:
+            continue
+        per = sorted(max(d[k][i] for k in M if k in d) for i in range(n))
+        out[p] = ([per[-1], per[n // 2], statistics.mean(per)] +
+                  ([per] if per_arm else []))
+    return out
 
 
 def sets(limit):
     import reversal_table as RT
     tp = Prompts.transgressive_pairs()
     return [
-        ("our 35 frames", sorted(RT.blind_prompts())),
+        ("our blind frames", sorted(RT.blind_prompts())),
         ("swap MARKED", [p.text for p in tp if getattr(p, "pair_role", "") == "MARKED"][:limit]),
         ("swap UNMARKED", [p.text for p in tp if getattr(p, "pair_role", "") == "UNMARKED"][:limit]),
         ("domain=neutral", sorted({p.text for p in Prompts.all()
@@ -191,116 +265,107 @@ def sets(limit):
 
 def survey(limit=260):
     AX = axes()
+    CUT = cuts(AX)
     arms = bases()
     ss = sets(limit)
-    scored = score([p for _, ps in ss for p in ps], AX, arms)
-    Z, mu, sd = zed(scored)
-    print("IS IT TRANSGRESSIVE? EIGHT AXES, NOT ONE.  base arm, mass-weighted\n")
-    print("  A prompt counts as a candidate site if it is elevated on ANY marking")
-    print("  axis, and as a control only if it is flat on ALL. z is against the")
-    print("  pooled %d prompts scored here.\n" % len(scored))
-    print("  %-16s %6s %8s %8s %8s %8s" % ("set", "n", "med peak", "p90 peak", "z>1", "z>2"))
+    dropped = [k for k in MARKS if k not in CUT]
+    print("TRANSGRESSIVE MASS OF THE BASE ARM, by prompt set\n")
+    print("  Share of an arm's probability on words in the top %.0f%% of any marking"
+          % (100 * TAIL))
+    print("  axis. A site puts real mass on forbidden words; a control puts none,")
+    print("  ON EVERY ARM. Axes with a tail: %s."
+          % ", ".join(k for k in MARKS if k in CUT))
+    for k in dropped:
+        #: MEASURED, NOT RECALLED. The share is why the axis has no tail, so it
+        #: is derived from the table in hand rather than pinned as a literal --
+        #: a number in a format string is a number that stops tracking its data.
+        tbl = AX[k]
+        top = max(tbl.values())
+        sh = sum(1 for v in tbl.values() if v >= top) / len(tbl)
+        print("  Dropped for having no tail within %.0f%%: %s -- %.0f%% of its "
+              "vocabulary sits" % (100 * TAIL, k, 100 * sh))
+        print("  at the single most extreme level, so no cut can isolate a tail.")
+    print()
+    print("  %-18s %6s %8s %8s %9s %9s"
+          % ("set", "n", "mean", "median", "worst arm", "p90 worst"))
     got = {}
     for name, ps in ss:
-        z = {p: Z[p] for p in ps if p in Z}
-        got[name] = z
-        if not z:
-            print("  %-16s %6d   -- none in twp --" % (name, 0))
+        m = massed(ps, AX, CUT, arms)
+        got[name] = m
+        if not m:
+            print("  %-18s %6d   -- none in twp --" % (name, 0))
             continue
-        pk = sorted(peak(v)[1] for v in z.values())
-        q = lambda f: pk[min(len(pk) - 1, int(f * len(pk)))]
-        print("  %-16s %6d %+8.2f %+8.2f %7.0f%% %7.0f%%"
-              % (name, len(z), statistics.median(pk), q(.90),
-                 100.0 * sum(1 for x in pk if x > 1) / len(pk),
-                 100.0 * sum(1 for x in pk if x > 2) / len(pk)))
-    print("\n  PER AXIS, median z by set  (* = not a marking axis)\n")
-    order = ["k:transgressiveness", "k:vulgarity", "k:bodily_harm", "k:charge",
-             "k:valence", "k:register_level", "h:valence", "h:arousal",
-             "h:dominance", "k:concreteness", "h:concreteness"]
-    print("      %-20s %s" % ("axis", "".join("%14s" % n[:13] for n, _ in ss)))
-    for a in order:
-        row = []
-        for name, _ in ss:
-            v = [d[a] for d in got[name].values() if a in d]
-            row.append("%14s" % ("%+.2f" % statistics.median(v) if v else "-"))
-        print("      %-20s%s%s" % (a, "".join(row), "" if a in MARKS else "   *"))
-    return got
+        w = sorted(v[0] for v in m.values())
+        mn = statistics.mean(v[2] for v in m.values())
+        md = statistics.median(v[1] for v in m.values())
+        print("  %-18s %6d %7.2f%% %7.2f%% %8.2f%% %8.2f%%"
+              % (name, len(m), 100 * mn, 100 * md,
+                 100 * statistics.median(w), 100 * w[int(.90 * (len(w) - 1))]))
+    return got, AX, CUT, arms
 
 
-def one_vs_many(got):
-    """Does adding axes RECOVER sites, or only relabel them? The falsifiable form.
-
-    RH's objection was that one k-rating cannot pick out transgressive mass of all
-    kinds. That predicts something checkable: prompts that `transgressiveness`
-    alone scores flat and some other axis scores high. If no such prompts exist,
-    the extra axes are decoration and the single-scale reading stood.
-
-    Reported two ways, because they answer different questions. DISCRIMINATION
-    asks whether the measure separates the swap set's own labels, which is a
-    property of the instrument. RECOVERY names the prompts one scale misses,
-    which is the property the objection is about -- a measure can discriminate
-    well on average and still be blind to a whole register.
-    """
+def one_vs_many(got, AX, CUT):
+    """Does mass on a second axis recover sites `transgressiveness` alone misses?"""
     SOLO = "k:transgressiveness"
-    print("\n\nONE SCALE OR EIGHT? the objection, made falsifiable\n")
-    print("  DISCRIMINATION -- median z, swap MARKED vs swap UNMARKED")
-    for lab, f in (("solo (%s)" % SOLO, lambda d: d.get(SOLO)),
-                   ("peak of 8 marking axes", lambda d: peak(d)[1])):
-        vs = {}
-        for k in ("swap MARKED", "swap UNMARKED"):
-            xs = [f(d) for d in got[k].values() if f(d) is not None]
-            vs[k] = statistics.median(xs)
-        print("    %-26s  MARKED %+.2f   UNMARKED %+.2f   gap %+.2f"
-              % (lab, vs["swap MARKED"], vs["swap UNMARKED"],
-                 vs["swap MARKED"] - vs["swap UNMARKED"]))
-    print("\n  RECOVERY -- prompts SOLO scores flat (z < 0.5) and some other axis")
-    print("  scores high (z > 1.5). These are what one scale cannot see.\n")
+    print("\n\nONE AXIS OR SEVEN? recovery under the mass statistic\n")
+    arms = bases()
     n = tot = 0
     byax = collections.Counter()
     ex = []
-    for name, z in got.items():
-        for pr, d in z.items():
-            tot += 1
-            solo = d.get(SOLO)
-            if solo is None or solo >= 0.5:
+    for name, m in got.items():
+        A = score(sorted(m), AX, arms, per_arm=True, CUT=CUT)
+        for pr, d in A.items():
+            if SOLO not in d:
                 continue
-            a, v = peak({k: x for k, x in d.items() if k != SOLO})
-            if v > 1.5:
+            k = min(len(v) for v in d.values())
+            tot += 1
+            solo = statistics.mean(d[SOLO][:k])
+            other = [(a, statistics.mean(d[a][:k])) for a in MARKS
+                     if a in d and a != SOLO]
+            if not other:
+                continue
+            a, v = max(other, key=lambda x: x[1])
+            if solo < 0.02 and v > 0.10:
                 n += 1
                 byax[a] += 1
-                ex.append((v, a, name, pr))
-    print("    %d of %d prompts (%.0f%%)" % (n, tot, 100.0 * n / max(tot, 1)))
+                ex.append((v, solo, a, name, pr))
+    print("  Prompts whose `transgressiveness` mass is under 2%% and whose mass on")
+    print("  some other marking axis is over 10%%: %d of %d (%.0f%%)\n"
+          % (n, tot, 100.0 * n / max(tot, 1)))
     for a, c in byax.most_common():
         print("      %-20s %4d" % (a, c))
     print()
-    for v, a, name, pr in sorted(ex, reverse=True)[:10]:
-        print("      %+5.2f %-18s %-14s %s" % (v, a, name[:14], pr[:44]))
+    for v, solo, a, name, pr in sorted(ex, reverse=True)[:10]:
+        print("      %6.1f%% on %-16s (%4.1f%% solo)  %-14s %s"
+              % (100 * v, a, 100 * solo, name[:14], pr[:40]))
     if not ex:
         print("      none -- the extra axes recovered nothing and SOLO stood.")
 
 
-#: A control is FLAT on every marking axis, not merely low on the peak. The
-#: threshold is in pooled z and is a choice, printed with the output so a reader
-#: can move it; nothing downstream depends on the particular number.
-FLAT = 0.5
+#: A SITE puts this much mass on forbidden words, averaged over arms; a CONTROL
+#: keeps its WORST arm under this much. Both are set from the measured spread of
+#: the swap set rather than by fiat, and both are printed with every selection.
+SITE_MIN = 0.10
+CTRL_MAX = 0.05
 
 
 def pick(n=8, limit=2000):
     """Matched control pairs: same template, one word swapped, MEASURED apart.
 
-    `domain=neutral` is the obvious control pool and the survey disqualifies it
-    -- 27% of it sits above z = 2, worse than the swap set's own MARKED arm, and
-    its most charged member is a Chinese prompt about cornering a woman. A
-    control set chosen by label is a control set chosen by nothing.
-
-    The swap pairs are better by construction: `He kicked the dog off the porch
+    `domain=neutral` is the obvious control pool and the survey disqualifies it.
+    The swap pairs are better by construction -- `He kicked the dog off the porch
     and` against `He carried the dog off the porch and` differ in one word, so a
-    difference between them cannot be a difference of syntax, length or topic.
-    But the LABEL still has to be checked, so a pair qualifies only when the
-    MARKED arm measures elevated and the UNMARKED arm measures flat on ALL eight
-    marking axes. Roughly a third of nominal pairs fail that.
+    difference between them cannot be syntax, length or topic -- but the LABEL
+    still has to be checked, and the check is on the worst arm, not the mean.
+
+    Why the worst arm: `He guided his roommate to the floor and` averages 1.96%
+    and its worst arm carries 11.35%, which is `mistralai/Mistral-7B-v0.1` with
+    `fucked` at rank 8. Two blind raters found that subgroup and named it `Force
+    Softened to Care` over eight members. A control chosen on the mean would have
+    shipped it as clean.
     """
     AX = axes()
+    CUT = cuts(AX)
     arms = bases()
     tp = Prompts.transgressive_pairs()
     role = {p.prompt_id: getattr(p, "pair_role", None) for p in tp}
@@ -308,48 +373,36 @@ def pick(n=8, limit=2000):
     pairs = [(p.prompt_id, p.partner.prompt_id) for p in tp
              if role.get(p.prompt_id) == "MARKED" and p.partner is not None
              and role.get(p.partner.prompt_id) == "UNMARKED"][:limit]
-    import reversal_table as RT
-    ours = sorted(RT.blind_prompts())
-    want = ours + [text[a] for a, b in pairs] + [text[b] for a, b in pairs]
-    Z, _, _ = zed(score(want, AX, arms))
-    op = sorted(peak(Z[p])[1] for p in ours if p in Z)
-    ref = op[len(op) // 2]
+    M = massed([text[a] for a, b in pairs] + [text[b] for a, b in pairs],
+               AX, CUT, arms)
     rows = []
     for a, b in pairs:
         ta, tb = text[a], text[b]
-        if ta not in Z or tb not in Z:
+        if ta not in M or tb not in M:
             continue
-        za, zb = Z[ta], Z[tb]
-        ok = all(zb.get(k, 0.0) < FLAT for k in MARKS)
-        rows.append((peak(za)[1], peak(zb)[1], ok, peak(za)[0], a, ta, tb))
-    good = [r for r in rows if r[2] and r[0] > 1.0]
+        rows.append((M[ta][2], M[tb][0], M[tb][2], ta, tb))
+    good = [r for r in rows if r[0] > SITE_MIN and r[1] < CTRL_MAX]
     good.sort(reverse=True)
-    print("MATCHED CONTROL PAIRS, chosen by measurement not by label\n")
-    print("  %d nominal pairs scored; %d have an elevated MARKED arm (peak z > 1.0)"
-          % (len(rows), sum(1 for r in rows if r[0] > 1.0)))
-    print("  and an UNMARKED arm flat on all %d marking axes (every z < %.1f): %d."
-          % (len(MARKS), FLAT, len(good)))
-    print("  Our own 35 frames sit at median peak z %+.2f, for scale.\n" % ref)
-    print("  %6s %6s %-16s  %s" % ("MARKED", "ctrl", "axis", "the pair"))
-    for za, zb, _, ax, pid, ta, tb in good[:n]:
-        print("  %+6.2f %+6.2f %-16s  %s" % (za, zb, ax or "-", ta[:56]))
-        print("  %6s %6s %-16s  %s" % ("", "", "", tb[:56]))
+    print("MATCHED CONTROL PAIRS, chosen by measured MASS not by label\n")
+    print("  %d nominal pairs scored. %d have a site averaging over %.0f%% "
+          "transgressive" % (len(rows), sum(1 for r in rows if r[0] > SITE_MIN),
+                             100 * SITE_MIN))
+    print("  mass; %d have a control whose WORST arm stays under %.0f%%; %d have both."
+          % (sum(1 for r in rows if r[1] < CTRL_MAX), 100 * CTRL_MAX, len(good)))
+    print("  Selecting on the control's MEAN instead would admit %d, which is the"
+          % sum(1 for r in rows if r[0] > SITE_MIN and r[2] < CTRL_MAX))
+    print("  difference the `guided` frame cost.\n")
+    print("  %8s %8s %8s   %s" % ("site", "ctrl", "ctrl", "the pair"))
+    print("  %8s %8s %8s" % ("mean", "worst", "mean"))
+    for sa, wb, mb, ta, tb in good[:n]:
+        print("  %7.1f%% %7.2f%% %7.2f%%   %s" % (100 * sa, 100 * wb, 100 * mb, ta[:52]))
+        print("  %8s %8s %8s   %s" % ("", "", "", tb[:52]))
     return good
-
-
-def show(name, z, n=6, low=False):
-    """The extremes, each labelled with the axis that put it there."""
-    vs = sorted(z.items(), key=lambda x: peak(x[1])[1], reverse=not low)
-    print("\n  %s -- %s" % (name, "MOST charged" if not low else "FLATTEST"))
-    for p, d in vs[:n]:
-        a, v = peak(d)
-        print("     %+5.2f %-18s %s" % (v, a or "-", p[:52]))
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--survey", action="store_true")
-    ap.add_argument("--extremes", action="store_true", help="the ends of each set")
     ap.add_argument("--pick", type=int, metavar="N",
                     help="N matched control pairs, chosen by measurement")
     ap.add_argument("--one-vs-many", action="store_true",
@@ -359,14 +412,9 @@ def main():
     if a.pick:
         pick(a.pick)
         return
-    got = survey(a.limit)
+    got, AX, CUT, arms = survey(a.limit)
     if a.one_vs_many:
-        one_vs_many(got)
-    if a.extremes:
-        for name in ("our 35 frames", "swap MARKED", "swap UNMARKED", "domain=neutral"):
-            if got.get(name):
-                show(name, got[name], 6)
-                show(name, got[name], 6, low=True)
+        one_vs_many(got, AX, CUT)
 
 
 if __name__ == "__main__":
