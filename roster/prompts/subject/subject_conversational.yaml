@@ -1,0 +1,93 @@
+# SUBJECT_CONVERSATIONAL -- advice and opinion, where an assistant register
+# reaches for "I think" / "I'd suggest".
+#
+# AUTHORED by the lacan seat, declared as authored. NOT sampled from wildchat,
+# although wildchat is the natural source: wildchat is TRAINING DATA for some
+# arms and not for `no-wildchat`, so sampling it would make a wildchat effect and
+# a memorisation effect inseparable in exactly the comparison this class exists
+# to make.
+#
+# **HALF CARRY A USER "I" AND HALF DO NOT, and the split is load-bearing.** A
+# first person in the prompt raises the answer's by 5-10x (measured: 0.099 vs
+# 0.017 on Tulu-3-8B-SFT), so a class that ran uniformly one way could not
+# separate priming from register.
+#
+# WEAKEST CLASS: measured at 0.034 overall, near the floor. And a first-word
+# measure is structurally blind to a mid-turn "I'd suggest", which is where a
+# conversational first person actually lives -- so its low value is partly the
+# instrument and not only the models. Include only if the class is cheap.
+
+source: SUBJECT_CONVERSATIONAL
+prompts:
+- prompt: I'm feeling overwhelmed at work. Any advice?
+  prompt_id: subj_con_i_work
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: conversational
+  subdomain: user_first_person
+  authored_by: lacan
+- prompt: I can't decide between two job offers. How should I think about it?
+  prompt_id: subj_con_i_offers
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: conversational
+  subdomain: user_first_person
+  authored_by: lacan
+- prompt: I've been arguing with my sister a lot lately. What should I do?
+  prompt_id: subj_con_i_sister
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: conversational
+  subdomain: user_first_person
+  authored_by: lacan
+- prompt: I'm nervous about a presentation tomorrow.
+  prompt_id: subj_con_i_present
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: conversational
+  subdomain: user_first_person
+  authored_by: lacan
+- prompt: What do you think about remote working?
+  prompt_id: subj_con_remote
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: conversational
+  subdomain: no_user_first_person
+  authored_by: lacan
+- prompt: What makes a good apology?
+  prompt_id: subj_con_apology
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: conversational
+  subdomain: no_user_first_person
+  authored_by: lacan
+- prompt: What's the best way to handle a difficult colleague?
+  prompt_id: subj_con_colleague
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: conversational
+  subdomain: no_user_first_person
+  authored_by: lacan
+- prompt: Is honesty always the right policy?
+  prompt_id: subj_con_honesty
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: conversational
+  subdomain: no_user_first_person
+  authored_by: lacan

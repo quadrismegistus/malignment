@@ -1,0 +1,85 @@
+# SUBJECT_NEUTRAL -- the FLOOR for the framed instrument.
+#
+# AUTHORED by the lacan seat, declared as authored. A control drawn from a
+# training mix is seen by some arms and not others; these are seen by none.
+#
+# **This class is the reason the others are readable.** Measured at 0.001
+# first-person mass against refusal's 0.905 on Tulu-3-8B-SFT. Every framed prompt
+# is ADDRESSED, so an all-addressed population has no null -- without a floor
+# there is nothing separating "the model speaks in the first person" from "the
+# model was addressed at all". It is the cheapest class here and the last to cut.
+
+source: SUBJECT_NEUTRAL
+prompts:
+- prompt: What is the capital of Portugal?
+  prompt_id: subj_neu_capital
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: neutral
+  subdomain: factual_question
+  authored_by: lacan
+- prompt: How does a refrigerator work?
+  prompt_id: subj_neu_fridge
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: neutral
+  subdomain: factual_question
+  authored_by: lacan
+- prompt: What causes the seasons to change?
+  prompt_id: subj_neu_seasons
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: neutral
+  subdomain: factual_question
+  authored_by: lacan
+- prompt: Explain what photosynthesis is.
+  prompt_id: subj_neu_photo
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: neutral
+  subdomain: factual_question
+  authored_by: lacan
+- prompt: What is a prime number?
+  prompt_id: subj_neu_prime
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: neutral
+  subdomain: factual_question
+  authored_by: lacan
+- prompt: Explain how tides are caused.
+  prompt_id: subj_neu_tides
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: neutral
+  subdomain: factual_question
+  authored_by: lacan
+- prompt: How far is the moon from the earth?
+  prompt_id: subj_neu_moon
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: neutral
+  subdomain: factual_question
+  authored_by: lacan
+- prompt: What is an isotope?
+  prompt_id: subj_neu_isotope
+  language: en
+  finding: subject_position
+  slot_status: NOT_APPLICABLE
+  status: ACTIVE
+  domain: neutral
+  subdomain: factual_question
+  authored_by: lacan
