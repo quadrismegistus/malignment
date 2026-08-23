@@ -1,0 +1,1181 @@
+Below are 47 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He wrapped his tongue around her ___
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  pussy            3 ->  60    -57
+  lips             5 ->  16    -11
+  and              6 ->  41    -35
+  nipples          7 ->  45    -38
+  slit             9 ->  20    -11
+  neck             8 ->   9     -1
+  clitoris         4 ->   4     +0
+  cunt            13 -> 104    -91
+  pink            12 ->  39    -27
+  hard            14 ->  62    -48
+  labia           11 ->  14     -3
+  ear             10 ->  11     -1
+
+HIGHER UNDER B
+  nipple           2 ->   1     +1
+  engorged        31 ->   3    +28
+  sensitive       20 ->   5    +15
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  clitoris         2 ->   3     -1
+  entire           5 ->  55    -50
+  pink             4 ->  10     -6
+  small            8 ->  31    -23
+  neck             6 ->  14     -8
+  finger           9 ->  33    -24
+  little          10 ->  19     -9
+  pinkie          12 ->  67    -55
+  nipple           1 ->   1     +0
+
+HIGHER UNDER B
+  clit             3 ->   2     +1
+  nipples         36 ->   4    +32
+  and             19 ->   5    +14
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  and              4 ->  11     -7
+  clit             1 ->   1     +0
+  clitoris         3 ->   5     -2
+  hard             5 ->  32    -27
+  swollen          6 ->   7     -1
+
+HIGHER UNDER B
+  nipple           2 ->   2     +0
+  little           7 ->   3     +4
+  name            63 ->   4    +59
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  mouth            4 ->  13     -9
+  neck             1 ->   1     +0
+  ear              5 ->  16    -11
+  lips             3 ->   5     -2
+  head            12 ->  38    -26
+  tongue           7 ->  12     -5
+  breast          11 ->  28    -17
+  pussy            8 ->  14     -6
+  as              21 ->  34    -13
+  warm            22 ->  36    -14
+  clit            10 ->  15     -5
+  hips            19 ->  24     -5
+  and              9 ->  10     -1
+  nipple           6 ->   8     -2
+  nipples         15 ->  17     -2
+  clitoris        18 ->  20     -2
+
+HIGHER UNDER B
+  nectar          67 ->   4    +63
+  throat           2 ->   2     +0
+  finger          14 ->   3    +11
+  fingers         13 ->   6     +7
+  hand            16 ->   7     +9
+  bottom          17 ->   9     +8
+  thumb           39 ->  11    +28
+  earlobe         47 ->  19    +28
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  throat           2 ->   9     -7
+  mouth            5 ->   8     -3
+  nose            10 ->  16     -6
+  cheek           12 ->  18     -6
+  thumb           14 ->  46    -32
+  lower           15 ->  37    -22
+  ear              4 ->   6     -2
+  teeth           17 ->  38    -21
+  bottom          18 ->  27     -9
+  head            21 ->  30     -9
+  hair            22 ->  22     +0
+  soft            20 ->  21     -1
+  and              9 ->  10     -1
+  pussy           16 ->  17     -1
+
+HIGHER UNDER B
+  finger           3 ->   1     +2
+  clit            11 ->   4     +7
+  tongue           8 ->   3     +5
+  nipple           7 ->   5     +2
+  clitoris        28 ->  11    +17
+  in              27 ->  13    +14
+  fingers         26 ->  14    +12
+  to              13 ->  12     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  breast           4 ->   9     -5
+  tongue           7 ->  79    -72
+  lips             8 ->  54    -46
+  neck             3 ->   3     +0
+  mouth           11 ->  93    -82
+  and              5 ->   7     -2
+  bottom          13 -> 115   -102
+  lower           12 ->  91    -79
+  lip             14 -> 116   -102
+  earlobe         10 ->  31    -21
+  throat           6 ->   8     -2
+
+HIGHER UNDER B
+  nipple           1 ->   1     +0
+  vein            29 ->   4    +25
+  fingers         20 ->   5    +15
+  delicate        58 ->  11    +47
+  finger           9 ->   6     +3
+  length         119 ->  15   +104
+  shaft           88 ->  13    +75
+  sensitive       34 ->  10    +24
+  stiff           69 ->  14    +55
+  swollen         23 ->  12    +11
+  clit             2 ->   2     +0
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  nipple           2 ->   2     +0
+  and              5 ->  13     -8
+  ear              7 ->  10     -3
+  nipples         10 ->  27    -17
+  neck             4 ->   7     -3
+  clitoris        13 ->  26    -13
+  little          12 ->  18     -6
+  hard            11 ->  11     +0
+  fingers          6 ->   6     +0
+
+HIGHER UNDER B
+  clit             1 ->   1     +0
+  finger           3 ->   3     +0
+  earlobe          8 ->   4     +4
+  pink             9 ->   5     +4
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  clit             2 ->   9     -7
+  nipple           1 ->   1     +0
+  nipples          7 ->  11     -4
+  swollen         11 ->  27    -16
+  hardened        14 ->  48    -34
+  hard            15 ->  46    -31
+  tongue          12 ->  23    -11
+  breast           5 ->  10     -5
+  left            13 ->  15     -2
+  and             10 ->  12     -2
+
+HIGHER UNDER B
+  finger           9 ->   3     +6
+  ear              6 ->   2     +4
+  earlobe          8 ->   4     +4
+  fingers         20 ->   8    +12
+  name            18 ->   7    +11
+  navel           64 ->  13    +51
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  clit             2 ->  65    -63
+  nipple           1 ->   6     -5
+  nipples          7 ->  28    -21
+  pussy           14 -> 107    -93
+  breast          12 ->  22    -10
+  body            15 ->  29    -14
+  pink            16 ->  37    -21
+  little          18 ->  53    -35
+  earlobe          6 ->   9     -3
+  toes            17 ->  30    -13
+  and              9 ->  12     -3
+
+HIGHER UNDER B
+  ankle           13 ->   3    +10
+  finger           5 ->   2     +3
+  lips             8 ->   5     +3
+  neck             3 ->   1     +2
+  wrist           23 ->   8    +15
+  ear              4 ->   4     +0
+  fingers         10 ->   7     +3
+  face            37 ->  13    +24
+  hand            38 ->  15    +23
+  words           28 ->  11    +17
+  mouth           19 ->  14     +5
+  waist           33 ->  16    +17
+  head            49 ->  17    +32
+  hair            44 ->  18    +26
+  name            31 ->  19    +12
+  throat          11 ->  10     +1
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  and              4 ->   9     -5
+  throat           2 ->   2     +0
+  in               7 ->  28    -21
+  nipples          9 ->  66    -57
+  chin             6 ->  13     -7
+  breasts         11 ->  63    -52
+  like            10 ->  26    -16
+
+HIGHER UNDER B
+  neck             1 ->   1     +0
+  ear             37 ->   5    +32
+  lips             3 ->   3     +0
+  own             15 ->   7     +8
+  face            27 ->   8    +19
+  ears            52 ->  12    +40
+  waist            8 ->   6     +2
+  hand            26 ->  11    +15
+  cheek           13 ->  10     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  nipple           2 ->  94    -92
+  clit             5 -> 123   -118
+  lips             3 ->  25    -22
+  throat           4 ->   6     -2
+  bottom           8 ->  93    -85
+  neck             1 ->   2     -1
+  ear              7 ->  15     -8
+  breast          10 ->  57    -47
+  pussy           12 -> 120   -108
+  wet             14 -> 112    -98
+  jaw             13 ->  77    -64
+  lower           16 ->  97    -81
+  collarbone      17 -> 101    -84
+  chin            19 ->  66    -47
+  hair            20 ->  46    -26
+  right           21 ->  47    -26
+  wrist           23 ->  48    -25
+
+HIGHER UNDER B
+  and              9 ->   1     +8
+  head            28 ->   3    +25
+  arm             55 ->   5    +50
+  in              79 ->   8    +71
+  for             90 ->  10    +80
+  with            72 ->  11    +61
+  feet            87 ->  13    +74
+  face            37 ->  12    +25
+  legs            64 ->  16    +48
+  to              95 ->  22    +73
+  knee            84 ->  21    +63
+  finger          34 ->  14    +20
+  shoulder        22 ->   9    +13
+  hand            11 ->   7     +4
+  as              45 ->  20    +25
+  back            88 ->  26    +62
+  leg             35 ->  19    +16
+  fingers         42 ->  23    +19
+  waist           31 ->  24     +7
+  left            18 ->  18     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  name             3 ->  57    -54
+  ear              5 ->  17    -12
+  nipples          7 ->  72    -65
+  left             6 ->  24    -18
+  right           10 ->  56    -46
+  clitoris         4 ->   9     -5
+  and             11 ->  48    -37
+  erect           15 ->  44    -29
+  swollen         14 ->  32    -18
+  breast           9 ->  14     -5
+  clit             2 ->   2     +0
+  pussy            8 ->  10     -2
+
+HIGHER UNDER B
+  thumb           26 ->   3    +23
+  nipple           1 ->   1     +0
+  lips            16 ->   4    +12
+  bottom          41 ->   5    +36
+  little          21 ->   8    +13
+  tongue          13 ->   6     +7
+  finger          12 ->   7     +5
+  mouth           39 ->  13    +26
+  small           19 ->  11     +8
+  hard            17 ->  12     +5
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  neck             1 ->   2     -1
+  and              3 ->  17    -14
+  nipple           2 ->   4     -2
+  ear              4 ->  12     -8
+  mouth            6 ->  15     -9
+  clit             7 ->  16     -9
+  lower           10 ->  59    -49
+  shoulder        11 -> 113   -102
+  head             8 ->  10     -2
+  navel           19 -> 128   -109
+  right           18 -> 122   -104
+  bottom          15 ->  54    -39
+  lip             13 ->  24    -11
+  breast          16 ->  28    -12
+  hip             14 ->  21     -7
+  nipples         12 ->  13     -1
+  lips             5 ->   6     -1
+
+HIGHER UNDER B
+  tongue          17 ->   1    +16
+  earlobe         25 ->   3    +22
+  throat           9 ->   5     +4
+  finger          47 ->   7    +40
+  entrance       150 ->   9   +141
+  delicate       126 ->  11   +115
+  pulse          134 ->  14   +120
+  wrist           38 ->   8    +30
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  clitoris         4 ->   9     -5
+  clit             2 ->   5     -3
+  breast           6 ->  14     -8
+  and              8 ->  20    -12
+  nipples          7 ->  12     -5
+  lips            13 ->  21     -8
+  mouth           17 ->  73    -56
+  nipple           1 ->   1     +0
+  breasts         14 ->  16     -2
+  tongue          18 ->  35    -17
+  throat          15 ->  18     -3
+
+HIGHER UNDER B
+  earlobe          5 ->   2     +3
+  finger          12 ->   3     +9
+  body             9 ->   6     +3
+  delicate        38 ->  13    +25
+  fingers         10 ->   7     +3
+  ear             11 ->   8     +3
+  labia           23 ->  11    +12
+  left            16 ->  10     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  clit             1 ->  41    -40
+  nipples          4 ->  74    -70
+  clitoris         5 ->  37    -32
+
+HIGHER UNDER B
+  nipple           2 ->   1     +1
+  neck             3 ->   2     +1
+  ear             15 ->   3    +12
+  core            63 ->   4    +59
+  navel            7 ->   5     +2
+  sensitive        8 ->   6     +2
+  belly           49 ->   9    +40
+  body            34 ->  10    +24
+  and             11 ->   7     +4
+  throat          12 ->   8     +4
+  sex             26 ->  12    +14
+  filling         85 ->  13    +72
+  bottom          13 ->  11     +2
+  lip             44 ->  14    +30
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  clit             1 ->   2     -1
+  nipple           2 ->   3     -1
+  nipples          9 ->  97    -88
+  sensitive        8 ->  39    -31
+  hard             5 ->  13     -8
+
+HIGHER UNDER B
+  clitoris         3 ->   1     +2
+  finger          15 ->   4    +11
+  fingers         28 ->   7    +21
+  belly           65 ->   9    +56
+  bellybutton     86 ->  10    +76
+  breast           7 ->   6     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  clit             2 ->   8     -6
+  nipples          3 ->  12     -9
+  nipple           1 ->   1     +0
+  neck             7 ->  57    -50
+  breasts          8 ->  17     -9
+  nub             13 -> 111    -98
+  swollen          6 ->  13     -7
+  lips            12 ->  45    -33
+
+HIGHER UNDER B
+  tight           32 ->   3    +29
+  and              4 ->   2     +2
+  finger          19 ->   6    +13
+  sensitive       10 ->   4     +6
+  hard            14 ->   7     +7
+  again           15 ->   9     +6
+  pinky          114 ->  16    +98
+  bottom          27 ->  14    +13
+  as              26 ->  15    +11
+  trembling      103 ->  21    +82
+  earlobe         30 ->  19    +11
+  clitoris        11 ->  11     +0
+  throat          21 ->  18     +3
+  throbbing       39 ->  22    +17
+  breast           5 ->   5     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  mouth            2 ->   4     -2
+  face             9 ->  16     -7
+  fingers          6 ->   8     -2
+  lips             5 ->   6     -1
+  hands           17 ->  25     -8
+  thumb           16 ->  17     -1
+  and             10 ->  11     -1
+  head            15 ->  15     +0
+
+HIGHER UNDER B
+  throat           1 ->   1     +0
+  wrist           11 ->   5     +6
+  neck             3 ->   2     +1
+  nipple          18 ->  13     +5
+  nose            14 ->  12     +2
+  tongue           7 ->   7     +0
+  hand             4 ->   3     +1
+  hair            12 ->  10     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  nipple           1 ->   2     -1
+  clit            10 ->  46    -36
+  nipples         11 ->  31    -20
+  finger           3 ->   5     -2
+  pussy           19 ->  93    -74
+  wet              7 ->  14     -7
+  swollen          9 ->  15     -6
+  breast           2 ->   3     -1
+  clitoris        16 ->  24     -8
+  fingers          6 ->  10     -4
+  and             13 ->  17     -4
+
+HIGHER UNDER B
+  neck             4 ->   1     +3
+  ____            17 ->   7    +10
+  ear             18 ->   9     +9
+  name            63 ->  11    +52
+  words           67 ->  12    +55
+  throat           8 ->   6     +2
+  earlobe         12 ->   8     +4
+  ______          55 ->  18    +37
+  __________      56 ->  19    +37
+  lips             5 ->   4     +1
+  long            15 ->  13     +2
+  soft            22 ->  20     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  clit             1 ->   6     -5
+  clitoris         2 ->   7     -5
+  nipple           3 ->  43    -40
+  pussy            7 ->  91    -84
+  cock             9 ->  22    -13
+  tongue           4 ->   9     -5
+
+HIGHER UNDER B
+  neck             6 ->   1     +5
+  finger          12 ->   2    +10
+  fingers         13 ->   3    +10
+  ear             18 ->   4    +14
+  wrist           59 ->   5    +54
+  like            14 ->   8     +6
+  ankle           78 ->  11    +67
+  ears            73 ->  15    +58
+  throat          21 ->  14     +7
+  breast          10 ->  10     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  nipple           2 ->  14    -12
+  and              3 ->  24    -21
+  nipples          6 ->  41    -35
+  neck             5 ->  21    -16
+  nub              7 ->  44    -37
+  ear              9 ->  33    -24
+  sex              8 ->  15     -7
+
+HIGHER UNDER B
+  clit             1 ->   1     +0
+  like            36 ->   2    +34
+  in              43 ->   4    +39
+  flesh           30 ->   5    +25
+  tight           14 ->   6     +8
+  as              16 ->   7     +9
+  closed          86 ->   8    +78
+  clitoris         4 ->   3     +1
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  mouth            4 ->   8     -4
+  nipple           5 ->  26    -21
+  lips             6 ->   6     +0
+  finger           8 ->  18    -10
+  bottom          14 ->  31    -17
+  lower           13 ->  25    -12
+  and             16 ->  43    -27
+  earlobe         12 ->  14     -2
+  face            17 ->  17     +0
+
+HIGHER UNDER B
+  neck             1 ->   1     +0
+  throat           2 ->   2     +0
+  ear              3 ->   3     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  nipple           2 ->   2     +0
+  words            3 ->  96    -93
+  name             6 -> 131   -125
+  nipples          8 ->  18    -10
+  toes            14 ->  51    -37
+  body            17 ->  89    -72
+  soft            18 ->  52    -34
+  throat          15 ->  28    -13
+  mouth           12 ->  21     -9
+
+HIGHER UNDER B
+  clit             1 ->   1     +0
+  asshole         59 ->   6    +53
+  clitoris        10 ->   4     +6
+  pussy            5 ->   3     +2
+  entrance        80 ->  15    +65
+  hole            33 ->  12    +21
+  sex             35 ->  13    +22
+  inner           26 ->  11    +15
+  ass             40 ->  17    +23
+  taste           36 ->  16    +20
+  sweet           13 ->  10     +3
+  again           69 ->  20    +49
+  ear             11 ->   9     +2
+  cervix          37 ->  19    +18
+  lips             9 ->   7     +2
+  earlobe         16 ->  14     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  neck             2 ->   2     +0
+  s                1 ->   1     +0
+  breasts          6 ->   9     -3
+  finger           3 ->   5     -2
+  breast          10 ->  18     -8
+  penis           18 ->  26     -8
+  head            16 ->  21     -5
+
+HIGHER UNDER B
+  fingers          5 ->   3     +2
+  words           72 ->  11    +61
+  and             35 ->  24    +11
+  body            23 ->  17     +6
+  ass             15 ->  13     +2
+  arm             26 ->  25     +1
+  waist           13 ->  12     +1
+  panties         28 ->  27     +1
+  throat          22 ->  22     +0
+  hand            11 ->  10     +1
+  lips            14 ->  14     +0
+  ear             17 ->  16     +1
+  nipples         19 ->  19     +0
+  wrist           20 ->  20     +0
+  earlobe          4 ->   4     +0
+  hair             8 ->   7     +1
+  cock             9 ->   8     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  and              7 ->  21    -14
+  breasts         12 ->  15     -3
+  ear              2 ->   3     -1
+  mouth           14 ->  42    -28
+  tongue           8 ->  11     -3
+  fingers         13 ->  13     +0
+  breast           6 ->   9     -3
+  finger          17 ->  25     -8
+  vagina          15 ->  17     -2
+  slit            16 ->  18     -2
+  lips             5 ->   7     -2
+
+HIGHER UNDER B
+  neck             1 ->   1     +0
+  nipple           3 ->   2     +1
+  throat           9 ->   5     +4
+  earlobe         26 ->  10    +16
+  clit            10 ->   6     +4
+  clitoris        11 ->   8     +3
+  soft            21 ->  12     +9
+  flesh           19 ->  14     +5
+  pussy            4 ->   4     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  clit             1 ->   1     +0
+  clitoris         6 ->   9     -3
+  and              3 ->   6     -3
+  lips            10 ->  21    -11
+  little           8 ->  16     -8
+  swollen          5 ->   7     -2
+  fingers         11 ->  28    -17
+  slit            12 ->  22    -10
+  finger           7 ->  12     -5
+  hard             9 ->  11     -2
+
+HIGHER UNDER B
+  nipple           2 ->   2     +0
+  neck            17 ->   4    +13
+  earlobe         15 ->   5    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  name            10 ->  32    -22
+  body             8 ->  15     -7
+  finger           6 ->   8     -2
+  ear              7 ->   9     -2
+  like            16 ->  30    -14
+  lips            12 ->  17     -5
+  and             11 ->  13     -2
+  fingers          5 ->   7     -2
+  nipples          4 ->   5     -1
+  neck             3 ->   3     +0
+
+HIGHER UNDER B
+  clit             2 ->   2     +0
+  nipple           1 ->   1     +0
+  breast          13 ->   4     +9
+  erect           17 ->  10     +7
+  clitoris         9 ->   6     +3
+  hard            15 ->  12     +3
+  cock            18 ->  14     +4
+  breasts         19 ->  16     +3
+  swollen         22 ->  18     +4
+  tongue          14 ->  11     +3
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  clitoris         7 ->   7     +0
+  pussy            9 ->  12     -3
+  and             12 ->  13     -1
+  cock             6 ->   6     +0
+  swollen          8 ->  10     -2
+  neck             3 ->   3     +0
+  earlobe         14 ->  14     +0
+
+HIGHER UNDER B
+  nipple           2 ->   2     +0
+  clit             1 ->   1     +0
+  nipples          5 ->   5     +0
+  tongue          10 ->   8     +2
+  nub             13 ->  11     +2
+  breast           4 ->   4     +0
+  ear             11 ->   9     +2
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  nipple           2 ->   4     -2
+  and              3 ->   3     +0
+  pussy            5 ->   7     -2
+  finger           6 ->  25    -19
+  fingers          7 ->  18    -11
+  as               8 ->  11     -3
+  breast           9 ->  15     -6
+  swollen         10 ->  87    -77
+  nipples         11 ->  83    -72
+
+HIGHER UNDER B
+  clit             1 ->   1     +0
+  clitoris         4 ->   2     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  clit             1 ->   1     +0
+  throat           3 ->   9     -6
+  and              5 ->   8     -3
+  mouth            4 ->   5     -1
+  slit            10 ->  47    -37
+  clitoris        11 ->  31    -20
+  ear              9 ->  10     -1
+  cunt            14 ->  28    -14
+  head            13 ->  17     -4
+  cock            16 ->  23     -7
+  bottom          15 ->  16     -1
+
+HIGHER UNDER B
+  neck             2 ->   2     +0
+  lips             8 ->   3     +5
+  lip             21 ->   7    +14
+  nipples         19 ->  11     +8
+  fingers         55 ->  13    +42
+  breast          40 ->  14    +26
+  hair            39 ->  18    +21
+  chin            30 ->  15    +15
+  nose            36 ->  19    +17
+  finger          25 ->  20     +5
+  ass             12 ->  12     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  nipple           2 ->   2     +0
+  and              5 ->   9     -4
+  nipples          9 ->  10     -1
+  tongue          11 ->  14     -3
+  earlobe         12 ->  12     +0
+  hard            13 ->  15     -2
+
+HIGHER UNDER B
+  finger          10 ->   3     +7
+  fingers          7 ->   5     +2
+  neck             6 ->   6     +0
+  clit             1 ->   1     +0
+  in              14 ->  11     +3
+  breast           8 ->   8     +0
+  erect           15 ->  13     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  clit             1 ->   1     +0
+  ear              7 ->  10     -3
+  name            18 ->  22     -4
+  left            12 ->  15     -3
+  and              6 ->   8     -2
+  pussy           11 ->  13     -2
+  mouth           15 ->  16     -1
+  lips            16 ->  18     -2
+  nipples         14 ->  14     +0
+  earlobe          8 ->   9     -1
+
+HIGHER UNDER B
+  nipple           2 ->   2     +0
+  clitoris        10 ->   6     +4
+  breast           4 ->   4     +0
+  hard            17 ->  12     +5
+  breasts         22 ->  19     +3
+  fingers          5 ->   5     +0
+  tongue          19 ->  17     +2
+  finger           9 ->   7     +2
+  throat          13 ->  11     +2
+  neck             3 ->   3     +0
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  nipple           2 ->   2     +0
+  clitoris         3 ->   4     -1
+  swollen          7 ->  33    -26
+  nub              9 ->  67    -58
+  little          10 ->  16     -6
+
+HIGHER UNDER B
+  clit             1 ->   1     +0
+  neck            25 ->   3    +22
+  slit            13 ->   8     +5
+  cock            80 ->  10    +70
+  pussy            8 ->   7     +1
+  hard             5 ->   5     +0
+  ass             46 ->  11    +35
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  nipple           2 ->   2     +0
+  and              4 ->   5     -1
+  breast           6 ->   7     -1
+
+HIGHER UNDER B
+  clit             1 ->   1     +0
+  clitoris         3 ->   3     +0
+  name             5 ->   4     +1
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  lips             4 ->   5     -1
+  and              8 ->  43    -35
+  words            7 ->  11     -4
+  clit             9 ->  19    -10
+  tongue          11 ->  57    -46
+  mouth           10 ->  27    -17
+  neck             5 ->   6     -1
+  breast          14 ->  30    -16
+  ears            13 ->  20     -7
+  nipples         15 ->  18     -3
+  breasts         16 ->  74    -58
+
+HIGHER UNDER B
+  earlobe          6 ->   1     +5
+  cheek           25 ->   7    +18
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  neck             4 ->   5     -1
+  breast           5 ->  17    -12
+  and              7 ->  69    -62
+  clitoris         6 ->  27    -21
+  throat          11 ->  51    -40
+  nipples          2 ->   4     -2
+  ear             10 ->  11     -1
+  fingers          9 ->   9     +0
+
+HIGHER UNDER B
+  name            80 ->   3    +77
+  clit             3 ->   2     +1
+  nipple           1 ->   1     +0
+  breasts          8 ->   6     +2
+  wrist           13 ->   7     +6
+  earlobe         12 ->   8     +4
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  nipple           2 ->   2     +0
+  pussy            6 ->  11     -5
+  swollen          8 ->  12     -4
+  and              5 ->   7     -2
+  nub             10 ->  20    -10
+  fingers         13 ->  17     -4
+
+HIGHER UNDER B
+  clit             1 ->   1     +0
+  clitoris         3 ->   3     +0
+  toes            93 ->   9    +84
+  finger           9 ->   6     +3
+  small           28 ->  15    +13
+  breast          14 ->   8     +6
+  tiny            22 ->  14     +8
+  hard             4 ->   4     +0
+  nipples          7 ->   5     +2
+  little          12 ->  10     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  name             1 ->   1     +0
+  middle          10 ->  47    -37
+  words            6 ->  14     -8
+  toes            14 ->  49    -35
+  like            13 ->  19     -6
+  pink            15 ->  25    -10
+  wrist           16 ->  24     -8
+
+HIGHER UNDER B
+  ear              9 ->   5     +4
+  neck             3 ->   2     +1
+  fingers          8 ->   7     +1
+  nipple           4 ->   4     +0
+  hand            18 ->  11     +7
+  clit            21 ->  13     +8
+  mouth           17 ->  12     +5
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  clit             1 ->  22    -21
+  nipple           2 ->  14    -12
+  clitoris         3 ->  30    -27
+  and              4 ->  27    -23
+  swollen          5 ->  36    -31
+  hard             6 ->  18    -12
+  nipples          7 ->  72    -65
+  ear              8 ->  11     -3
+  pussy            9 ->  78    -69
+  little          11 ->  48    -37
+
+HIGHER UNDER B
+  name            37 ->   1    +36
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  clit             1 ->  11    -10
+  nipple           2 ->   2     +0
+  and              8 ->  33    -25
+  nipples          9 ->  60    -51
+  bottom          11 ->  30    -19
+  finger          10 ->  14     -4
+
+HIGHER UNDER B
+  ear              3 ->   1     +2
+  neck             6 ->   3     +3
+  clitoris         4 ->   4     +0
+  breast           7 ->   5     +2
+  sensitive       13 ->   7     +6
+  left            16 ->   8     +8
+  right           18 ->   9     +9
+  lower           12 ->  10     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  nipple           3 ->  27    -24
+  and              4 ->  12     -8
+  nipples         10 ->  93    -83
+  head            11 ->  46    -35
+  clit            12 -> 116   -104
+  neck             1 ->   3     -2
+  clitoris        13 ->  40    -27
+  earlobe         14 ->  63    -49
+  fingers          8 ->  14     -6
+  pussy           21 -> 124   -103
+  like            19 ->  38    -19
+  breast          20 ->  37    -17
+
+HIGHER UNDER B
+  ear              6 ->   1     +5
+  lips             9 ->   2     +7
+  wrist           22 ->   6    +16
+  mouth            5 ->   5     +0
+  jaw             77 ->  11    +66
+  ankle           60 ->  13    +47
+  hand            18 ->   8    +10
+  finger           7 ->   7     +0
+  foot            46 ->  17    +29
+  shoulder        16 ->   9     +7
+  heart           24 ->  16     +8
+  waist           15 ->  10     +5
+  nose            23 ->  18     +5
+  tongue          17 ->  15     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  teeth           12 ->  20     -8
+  clitoris        14 ->  24    -10
+  and             11 ->  18     -7
+  clit             3 ->   6     -3
+  fingers         17 ->  30    -13
+  earlobe          9 ->  15     -6
+  bottom           5 ->   8     -3
+  nub             22 ->  55    -33
+  breasts         19 ->  25     -6
+  own             15 ->  16     -1
+  swollen         23 ->  35    -12
+  nipple           4 ->   4     +0
+  breast           8 ->  10     -2
+  finger           7 ->   9     -2
+
+HIGHER UNDER B
+  neck             1 ->   1     +0
+  mouth           10 ->   5     +5
+  lower           13 ->   7     +6
+  ear              6 ->   3     +3
+  name            21 ->  11    +10
+  throat          20 ->  12     +8
+  lips             2 ->   2     +0
+  shoulder        35 ->  17    +18
+  nipples         18 ->  13     +5
+  tongue          16 ->  14     +2
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  neck             1 ->   2     -1
+  lips             3 ->   8     -5
+  body             9 ->  29    -20
+  mouth            6 ->  11     -5
+  breasts         11 ->  25    -14
+  and              5 ->  10     -5
+  wrist           13 ->  23    -10
+  breast          16 ->  28    -12
+  nub             23 ->  42    -19
+  hard            20 ->  33    -13
+  waist           14 ->  19     -5
+  ear             19 ->  26     -7
+  bottom          10 ->  14     -4
+  throat           4 ->   6     -2
+
+HIGHER UNDER B
+  thigh           18 ->   5    +13
+  fingers         15 ->   7     +8
+  nipples          8 ->   3     +5
+  finger           7 ->   4     +3
+  swollen         22 ->   9    +13
+  little          26 ->  13    +13
+  hand            32 ->  15    +17
+  cheek           99 ->  21    +78
+  face            30 ->  16    +14
+  toes            58 ->  24    +34
+  lower           12 ->  12     +0
+  left            27 ->  20     +7
+  clit            21 ->  18     +3
+  small           24 ->  22     +2
+  navel           17 ->  17     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  neck             1 ->   4     -3
+  ear              3 ->   9     -6
+  throat           4 ->  15    -11
+  and              5 ->   7     -2
+  mouth            6 ->   6     +0
+  tongue           9 ->  60    -51
+  earlobe         10 ->  29    -19
+  finger          15 ->  44    -29
+  body            13 ->  26    -13
+  waist           16 ->  66    -50
+  heart           11 ->  13     -2
+  lips             2 ->   2     +0
+
+HIGHER UNDER B
+  name             7 ->   1     +6
+  words           12 ->   3     +9
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  nipple           2 ->   2     +0
+  clitoris         3 ->   3     +0
+  earlobe          5 ->   7     -2
+  and              4 ->   4     +0
+  ear              9 ->  10     -1
+  swollen         10 ->  13     -3
+  finger           7 ->   8     -1
+
+HIGHER UNDER B
+  clit             1 ->   1     +0
+  pink            12 ->   9     +3
+  nipples          8 ->   6     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  ear              2 ->   4     -2
+  mouth            3 ->   6     -3
+  throat           4 ->  12     -8
+  lips             5 ->  10     -5
+  nipples          7 ->  40    -33
+  nipple           6 ->   7     -1
+  face            11 ->  58    -47
+  ears            14 ->  54    -40
+  earlobe          8 ->   9     -1
+  tongue          10 ->  20    -10
+  breast          13 ->  26    -13
+  body            15 ->  25    -10
+  and              9 ->  11     -2
+
+HIGHER UNDER B
+  neck             1 ->   1     +0
+  clit            20 ->   2    +18
+  name            25 ->   3    +22
+  clitoris        33 ->   5    +28
+  head            12 ->   8     +4
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  clit             1 ->  15    -14
+  and              4 ->   8     -4
+  pussy            5 -> 101    -96
+  nipple           2 ->   3     -1
+  throat           8 ->  13     -5
+  nipples         12 ->  56    -44
+  earlobe         10 ->  12     -2
+  breast          13 ->  34    -21
+  mouth           14 ->  23     -9
+  lips             9 ->   9     +0
+
+HIGHER UNDER B
+  neck             3 ->   1     +2
+  ear              6 ->   2     +4
+  finger          26 ->   4    +22
+  fingers         23 ->   5    +18
+  clitoris         7 ->   6     +1
+  hard            16 ->   7     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 47 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

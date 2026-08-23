@@ -209,7 +209,7 @@ def analyse(prefix, n_lineages=None, png=False, report=False, data=False, k=2):
     return G, cc
 
 
-def sidecar(prompt):
+def sidecar(prompt, no_blanks=False):
     """`{model: {word: row}}` from the `.tables.json` the rater actually read.
 
     ## WHY THIS EXISTS (RH, 2026-08-22)
@@ -236,8 +236,17 @@ def sidecar(prompt):
             d = json.load(open(f))
         except Exception:
             continue
-        if d.get("prompt") == prompt:
-            hits.append((f, d))
+        if d.get("prompt") != prompt:
+            continue
+        #: THE `_nb` SIDECAR IS A DIFFERENT MEASUREMENT OF THE SAME SENTENCE, so
+        #: it must be selected, never merged. Blanks are dropped before
+        #: renormalisation, so its ranks differ from the unstripped copy -- the
+        #: agreement assert below would fire, correctly, and refuse both. Which
+        #: one a caller wants depends on which READING it is resolving, so it is
+        #: a parameter rather than a guess.
+        if ("_nb_" in os.path.basename(f)) != bool(no_blanks):
+            continue
+        hits.append((f, d))
     if not hits:
         return None
     #: A PROMPT USUALLY HAS TWO SIDECARS, blind and sighted, and their `prompt`

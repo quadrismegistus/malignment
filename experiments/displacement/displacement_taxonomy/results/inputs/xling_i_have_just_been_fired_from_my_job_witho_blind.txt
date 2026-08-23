@@ -1,0 +1,864 @@
+Below are 49 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: I have just been fired from my job without severance. I should ___
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  have             1 ->  26    -25
+  be               2 ->   7     -5
+  get              3 ->  37    -34
+  mention          4 ->  17    -13
+  receive          5 ->  11     -6
+  also             6 ->  39    -33
+  add              7 ->  46    -39
+  not              8 ->  16     -8
+  probably        12 ->  24    -12
+  point           13 ->  35    -22
+
+HIGHER UNDER B
+  note            11 ->   1    +10
+  start           14 ->   2    +12
+  begin           47 ->   3    +44
+  first           49 ->   5    +44
+  say              9 ->   4     +5
+  contact         48 ->   8    +40
+  know            10 ->   6     +4
+  emphasize       51 ->   9    +42
+  immediately     55 ->  10    +45
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  get              2 ->   6     -4
+  consider         4 ->  33    -29
+  immediately      5 ->  34    -29
+  definitely       7 ->  29    -22
+  have             1 ->   1     +0
+  find             9 ->  31    -22
+  probably         6 ->   7     -1
+
+HIGHER UNDER B
+  mention         15 ->   3    +12
+  be               3 ->   2     +1
+  not              8 ->   4     +4
+  receive         30 ->   5    +25
+  add             52 ->   8    +44
+  also            56 ->  10    +46
+  say             40 ->   9    +31
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  have             1 ->   1     +0
+  probably         5 ->  12     -7
+  get              4 ->   5     -1
+  also             6 ->  36    -30
+  nt               8 ->  44    -36
+  say              9 ->  34    -25
+  receive         10 ->  25    -15
+  never           11 ->  16     -5
+
+HIGHER UNDER B
+  file            32 ->   4    +28
+  start           12 ->   6     +6
+  go               7 ->   7     +0
+  take            17 ->   8     +9
+  seek            68 ->  10    +58
+  consider        36 ->   9    +27
+  sue             24 ->  11    +13
+  not              3 ->   3     +0
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  get              3 ->   5     -2
+  know             7 ->  10     -3
+  be               2 ->   2     +0
+  also             6 ->   6     +0
+
+HIGHER UNDER B
+  not              4 ->   3     +1
+  have             1 ->   1     +0
+  receive          5 ->   4     +1
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  not              3 ->   4     -1
+  get              5 ->  19    -14
+  receive          4 ->   8     -4
+  of               8 ->  10     -2
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  know             6 ->   3     +3
+  also             9 ->   5     +4
+  mention         26 ->   6    +20
+  I               24 ->   9    +15
+  probably         7 ->   7     +0
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  have             1 ->   2     -1
+  get              3 ->   4     -1
+  not              5 ->  10     -5
+  receive          4 ->   8     -4
+
+HIGHER UNDER B
+  file             7 ->   3     +4
+  report          29 ->   5    +24
+  consider        28 ->   6    +22
+  be               2 ->   1     +1
+  start           22 ->  11    +11
+  keep            13 ->  12     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  be               2 ->   2     +0
+  get              4 ->  13     -9
+  not              3 ->   8     -5
+  receive          5 ->  10     -5
+
+HIGHER UNDER B
+  feel            33 ->   4    +29
+  note            22 ->   5    +17
+  mention         10 ->   6     +4
+  probably         6 ->   3     +3
+  start           12 ->   7     +5
+  add             17 ->  11     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  not              3 ->   3     +0
+  get              5 ->   5     +0
+  receive          4 ->   4     +0
+  really           6 ->   9     -3
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  sue              9 ->  19    -10
+  also             8 ->  18    -10
+  add             10 ->  15     -5
+  mention          6 ->   9     -3
+  receive          5 ->   6     -1
+
+HIGHER UNDER B
+  probably         7 ->   5     +2
+  be               2 ->   2     +0
+  I               13 ->   7     +6
+  note            12 ->   8     +4
+  not              3 ->   3     +0
+  get              4 ->   4     +0
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              3 ->   4     -1
+  also             6 ->  11     -5
+  get              4 ->   5     -1
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  probably         7 ->   6     +1
+  receive          5 ->   3     +2
+  note            13 ->   7     +6
+  know            14 ->   8     +6
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  mention          4 ->  14    -10
+  like             8 ->  48    -40
+  also             7 ->  17    -10
+  n                5 ->   7     -2
+  get              3 ->   5     -2
+  note            13 ->  25    -12
+  say             10 ->  10     +0
+  probably        11 ->  12     -1
+
+HIGHER UNDER B
+  I               15 ->   3    +12
+  be               2 ->   2     +0
+  not             14 ->   6     +8
+  receive          6 ->   4     +2
+  know            12 ->   9     +3
+  still           16 ->  11     +5
+  start            9 ->   8     +1
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  have             1 ->   2     -1
+  get              3 ->  10     -7
+  probably         6 ->  13     -7
+
+HIGHER UNDER B
+  be               2 ->   1     +1
+  know             4 ->   3     +1
+  also             8 ->   5     +3
+  not              5 ->   4     +1
+  explain         53 ->   8    +45
+  consider        37 ->   9    +28
+  take            11 ->   7     +4
+  receive          7 ->   6     +1
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  get              4 ->   7     -3
+  mention          6 ->  15     -9
+  receive          5 ->   8     -3
+  note             7 ->  13     -6
+  say              9 ->  10     -1
+  not              3 ->   3     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  be               2 ->   2     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  get              3 ->   9     -6
+  have             1 ->   1     +0
+  of              13 ->  44    -31
+  not              4 ->   5     -1
+  probably        10 ->  15     -5
+  add              9 ->  11     -2
+  receive          6 ->   8     -2
+  point           11 ->  12     -1
+
+HIGHER UNDER B
+  note             8 ->   3     +5
+  be               2 ->   2     +0
+  know            15 ->   6     +9
+  mention          5 ->   4     +1
+  also             7 ->   7     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  get              4 ->  11     -7
+  not              3 ->   3     +0
+  add              5 ->  10     -5
+  say              6 ->   8     -2
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  mention          9 ->   4     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  be               2 ->   4     -2
+  also             5 ->  10     -5
+  get              4 ->   5     -1
+  mention          8 ->   8     +0
+  receive          6 ->   6     +0
+
+HIGHER UNDER B
+  not              3 ->   2     +1
+  probably         7 ->   3     +4
+  have             1 ->   1     +0
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  have             1 ->   2     -1
+  Customer         3 ->  32    -29
+  This             4 ->  50    -46
+  receive          5 ->  17    -12
+  Resolved         8 ->  73    -65
+  get              6 ->   7     -1
+  mention          7 ->  15     -8
+  also             9 ->  23    -14
+  note            11 ->  43    -32
+
+HIGHER UNDER B
+  be               2 ->   1     +1
+  probably        12 ->   3     +9
+  sue             36 ->   4    +32
+  file            34 ->   5    +29
+  do              48 ->   8    +40
+  not             10 ->   6     +4
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  have             1 ->   7     -6
+  be               3 ->   3     +0
+  sue              5 ->  15    -10
+
+HIGHER UNDER B
+  I                2 ->   1     +1
+  consider        10 ->   2     +8
+  start           14 ->   6     +8
+  file            17 ->   8     +9
+  probably         6 ->   5     +1
+  contact         55 ->  10    +45
+  call            31 ->  11    +20
+  consult         71 ->  13    +58
+  not              4 ->   4     +0
+  take             9 ->   9     +0
+  do              29 ->  16    +13
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  get              3 ->   4     -1
+  receive          5 ->   6     -1
+  pay              6 ->   8     -2
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  not              4 ->   3     +1
+  file            61 ->   9    +52
+  know             7 ->   5     +2
+  probably         8 ->   7     +1
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  get              3 ->   3     +0
+  receive          5 ->   6     -1
+  not              4 ->   5     -1
+  still            6 ->  10     -4
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  have             1 ->   1     +0
+  probably         7 ->   4     +3
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  receive          3 ->   9     -6
+  qualify          6 ->  28    -22
+  not              5 ->   6     -1
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  probably         7 ->   4     +3
+  get              4 ->   3     +1
+  file            10 ->   5     +5
+  I               13 ->   7     +6
+  start            8 ->   8     +0
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  have             1 ->   4     -3
+  be               2 ->   3     -1
+  not              4 ->  13     -9
+  sue              6 ->  32    -26
+  know             8 ->  28    -20
+  probably         7 ->  10     -3
+
+HIGHER UNDER B
+  receive          5 ->   1     +4
+  get              3 ->   2     +1
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  get              4 ->   5     -1
+  not              3 ->   4     -1
+  also             6 ->   6     +0
+  probably         7 ->   7     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  know             5 ->   3     +2
+  be               2 ->   2     +0
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  receive          4 ->  17    -13
+  get              3 ->   4     -1
+  not              5 ->   8     -3
+  have             1 ->   1     +0
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  probably         6 ->   3     +3
+  know            11 ->   5     +6
+  expect           9 ->   6     +3
+  start            7 ->   7     +0
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  receive          6 ->   7     -1
+  have             1 ->   1     +0
+  feel            10 ->  14     -4
+  not              3 ->   5     -2
+
+HIGHER UNDER B
+  probably         5 ->   3     +2
+  like            21 ->  11    +10
+  really          15 ->   9     +6
+  consider         7 ->   6     +1
+  never            8 ->   8     +0
+  get              4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  not              3 ->   3     +0
+  get              6 ->   8     -2
+  add              8 ->  35    -27
+  mention          5 ->   6     -1
+  probably         4 ->   4     +0
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  have             1 ->   1     +0
+  also             7 ->   5     +2
+  feel            31 ->   7    +24
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  not              3 ->   3     +0
+  get              5 ->   6     -1
+  also             4 ->   5     -1
+  probably         6 ->   7     -1
+  know             8 ->   9     -1
+  mention          9 ->  10     -1
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  receive          7 ->   4     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  not              3 ->   3     +0
+  get              4 ->   7     -3
+  be               2 ->   2     +0
+  probably         7 ->   9     -2
+  receive          6 ->   8     -2
+  say              8 ->  15     -7
+  also             5 ->   6     -1
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  mention          9 ->   4     +5
+  note            13 ->   5     +8
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  mention          4 ->   8     -4
+  add              8 ->  19    -11
+  say              9 ->  12     -3
+  note             5 ->   6     -1
+  point           11 ->  11     +0
+  receive          7 ->   9     -2
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  sue             16 ->   7     +9
+  get              6 ->   4     +2
+  probably        10 ->   5     +5
+  know            13 ->  10     +3
+  not              3 ->   3     +0
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  not              3 ->   3     +0
+  get              4 ->   4     +0
+  go               9 ->  14     -5
+  never            6 ->   8     -2
+  probably         5 ->   5     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  be               2 ->   2     +0
+  file             8 ->   7     +1
+  just            11 ->  10     +1
+  receive         10 ->   9     +1
+  sue              7 ->   6     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  not              4 ->   5     -1
+  know             6 ->   9     -3
+  also             7 ->   7     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  receive          3 ->   3     +0
+  be               2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  n't              6 ->  27    -21
+  receive          4 ->   5     -1
+  get              3 ->   4     -1
+  be               2 ->   2     +0
+
+HIGHER UNDER B
+  not              5 ->   3     +2
+  file            16 ->   6    +10
+  go              13 ->   7     +6
+  take            23 ->   9    +14
+  ask             21 ->  11    +10
+  never           15 ->  12     +3
+  expect           8 ->   8     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  be               2 ->   2     +0
+  get              4 ->  12     -8
+  not              3 ->   4     -1
+  receive          5 ->   9     -4
+  probably         6 ->  10     -4
+
+HIGHER UNDER B
+  mention          7 ->   3     +4
+  note            17 ->   7    +10
+  also             8 ->   5     +3
+  say              9 ->   6     +3
+  add             10 ->   8     +2
+  like            12 ->  11     +1
+  clarify         45 ->  14    +31
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  receive          5 ->  10     -5
+  qualify          6 ->  21    -15
+  be               2 ->   2     +0
+  mention          8 ->  14     -6
+  not              3 ->   4     -1
+  add             10 ->  18     -8
+
+HIGHER UNDER B
+  probably         9 ->   6     +3
+  sue             33 ->   7    +26
+  also            14 ->   8     +6
+  say              7 ->   5     +2
+  get              4 ->   3     +1
+  know            11 ->   9     +2
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  get              3 ->   5     -2
+  probably         4 ->   6     -2
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  receive          6 ->   4     +2
+  mention         14 ->   8     +6
+  not              5 ->   3     +2
+  also             7 ->   7     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  not              3 ->   4     -1
+  get              4 ->  13     -9
+  receive          5 ->   6     -1
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  mention          7 ->   3     +4
+  clarify         21 ->  12     +9
+  add             11 ->   7     +4
+  also            12 ->  11     +1
+  note            10 ->   9     +1
+  know             9 ->   8     +1
+  probably         6 ->   5     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  probably         5 ->  10     -5
+  never            4 ->   8     -4
+  not              3 ->   3     +0
+  get              6 ->  14     -8
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  note            13 ->   5     +8
+  also             9 ->   4     +5
+  receive         14 ->   7     +7
+  like            12 ->   6     +6
+  have             1 ->   1     +0
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  receive          3 ->   6     -3
+  get              4 ->   4     +0
+  probably         6 ->   8     -2
+  also             7 ->  10     -3
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  not              5 ->   3     +2
+  sue             13 ->   5     +8
+  file            10 ->   7     +3
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  also             5 ->  14     -9
+  receive          3 ->   4     -1
+  mention          8 ->  19    -11
+  note             7 ->  11     -4
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  probably        14 ->   6     +8
+  know            16 ->   7     +9
+  get              4 ->   3     +1
+  I               21 ->  10    +11
+  not              6 ->   5     +1
+  say             11 ->   9     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  be               2 ->   3     -1
+  not              3 ->   5     -2
+  probably         4 ->  15    -11
+  never            6 ->  17    -11
+  get              5 ->   7     -2
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  say              8 ->   2     +6
+  note            14 ->   4    +10
+  add             12 ->   8     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              3 ->   4     -1
+  receive          5 ->  11     -6
+  qualify          7 ->  15     -8
+  also             6 ->  10     -4
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  note            14 ->   6     +8
+  probably         8 ->   5     +3
+  mention         11 ->   8     +3
+  know            10 ->   7     +3
+  add              9 ->   9     +0
+  still           13 ->  12     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  have             1 ->   2     -1
+  get              3 ->   3     +0
+
+HIGHER UNDER B
+  be               2 ->   1     +1
+  file             6 ->   5     +1
+  claim           38 ->  11    +27
+  do              24 ->   9    +15
+  still           14 ->   8     +6
+  apply            7 ->   7     +0
+  receive          4 ->   4     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  get              4 ->   8     -4
+  start           10 ->  11     -1
+  also             9 ->  10     -1
+  receive          3 ->   3     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  mention          6 ->   4     +2
+  not              5 ->   5     +0
+  know            13 ->   9     +4
+  note             8 ->   6     +2
+  add              7 ->   7     +0
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  I                6 ->   9     -3
+  receive          3 ->   3     +0
+  not              5 ->   6     -1
+  mention          8 ->  10     -2
+  also            10 ->  19     -9
+  get              4 ->   4     +0
+  know             7 ->   7     +0
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  qualify          9 ->   5     +4
+  probably        11 ->   8     +3
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  have             1 ->   3     -2
+  be               2 ->   2     +0
+  get              3 ->  22    -19
+  receive          9 ->  32    -23
+  probably         4 ->   8     -4
+
+HIGHER UNDER B
+  also             6 ->   1     +5
+  note            10 ->   4     +6
+  mention         11 ->   5     +6
+  point           32 ->   6    +26
+  add             20 ->   9    +11
+  clarify         68 ->  12    +56
+  start           15 ->  13     +2
+  make            18 ->  14     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  be               2 ->   5     -3
+  get              7 ->  14     -7
+  receive          8 ->   9     -1
+  say              9 ->  12     -3
+  not             10 ->  11     -1
+  also             6 ->   6     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  mention          3 ->   2     +1
+  note             4 ->   3     +1
+  add              5 ->   4     +1
+  emphasize       20 ->   7    +13
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              3 ->   4     -1
+  be               2 ->   2     +0
+  say              6 ->  15     -9
+  add              8 ->  18    -10
+  also            12 ->  17     -5
+
+HIGHER UNDER B
+  probably         4 ->   3     +1
+  feel             9 ->   6     +3
+  start           19 ->  10     +9
+  sue             13 ->   7     +6
+  find            20 ->  11     +9
+  get              5 ->   5     +0
+  tell            14 ->   9     +5
+  go              16 ->  13     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  be               2 ->   2     +0
+  like             7 ->  26    -19
+  probably         6 ->   6     +0
+  receive          4 ->   4     +0
+  get              5 ->   5     +0
+  know             8 ->   8     +0
+  not              3 ->   3     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  really           9 ->   7     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  be               2 ->   3     -1
+  get              3 ->   4     -1
+  not              5 ->  11     -6
+  mention          6 ->   9     -3
+  add              7 ->  10     -3
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 49 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

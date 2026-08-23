@@ -1,0 +1,1337 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He started stroking his ___
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  dick             2 ->  10     -8
+  penis            3 ->  15    -12
+  hard             4 ->  38    -34
+  shaft            5 ->  21    -16
+  member           8 ->  31    -23
+  big             10 ->  87    -77
+  thick            9 ->  73    -64
+  length          15 ->  64    -49
+  chest           12 ->  22    -10
+  erection        14 ->  20     -6
+
+HIGHER UNDER B
+  chin            20 ->   3    +17
+  fingers         11 ->   1    +10
+  thumb           36 ->   5    +31
+  hand             6 ->   4     +2
+  finger          43 ->   8    +35
+  own              7 ->   6     +1
+  cat            114 ->   9   +105
+  hands           13 ->   7     +6
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  beard            1 ->  16    -15
+  wife's           2 ->  10     -8
+  mustache         5 ->  35    -30
+  hair             4 ->  12     -8
+  sister's         7 ->  66    -59
+  own              3 ->   6     -3
+
+HIGHER UNDER B
+  cock            50 ->   1    +49
+  penis           40 ->   2    +38
+  dick            52 ->   3    +49
+  shaft           47 ->   4    +43
+  crotch          25 ->   5    +20
+  big             30 ->   8    +22
+  member          48 ->   9    +39
+  erection        56 ->  11    +45
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  cock             1 ->  12    -11
+  penis            4 ->  17    -13
+  dick             5 ->  21    -16
+  crotch           7 -> 117   -110
+  face             9 ->  23    -14
+  erection        11 ->  97    -86
+  chest            6 ->   6     +0
+  fingers         12 ->  26    -14
+  arm             16 ->  37    -21
+  wife            14 ->  18     -4
+  own             13 ->  15     -2
+
+HIGHER UNDER B
+  beard            2 ->   1     +1
+  chin             3 ->   2     +1
+  goatee          20 ->   3    +17
+  mustache        24 ->   5    +19
+  hair             8 ->   4     +4
+  cat             61 ->   8    +53
+  long            21 ->   7    +14
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  cock             2 ->   5     -3
+  legs             3 ->  11     -8
+  fingers          5 ->  14     -9
+  penis           12 -> 117   -105
+  head            11 ->  26    -15
+  feet            13 ->  64    -51
+  balls            9 ->  15     -6
+  thighs           7 ->  10     -3
+  hips            16 ->  41    -25
+  lips            17 ->  37    -20
+  dick            15 ->  20     -5
+  body            18 ->  25     -7
+
+HIGHER UNDER B
+  chest            1 ->   1     +0
+  arms            19 ->   4    +15
+  beard           21 ->   6    +15
+  face             6 ->   3     +3
+  arm             23 ->   9    +14
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  penis            1 ->  16    -15
+  cock             2 ->  34    -32
+  dick            10 ->  37    -27
+  own              9 ->  14     -5
+  body            16 ->  71    -55
+  back            14 ->  43    -29
+  hand            15 ->  46    -31
+  chest            8 ->   8     +0
+  nose            13 ->  21     -8
+  dog             18 ->  82    -64
+  belly           12 ->  15     -3
+  hair             3 ->   3     +0
+
+HIGHER UNDER B
+  chin             5 ->   1     +4
+  beard            4 ->   2     +2
+  bald            25 ->   6    +19
+  mustache        60 ->  10    +50
+  long             7 ->   5     +2
+  thick           17 ->   9     +8
+  head             6 ->   4     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  cock             2 ->   4     -2
+  penis            1 ->   3     -2
+  dick             9 ->  31    -22
+  crotch          13 ->  33    -20
+  hard            10 ->  18     -8
+  hair             6 ->  10     -4
+  erection        18 ->  56    -38
+  big             20 ->  54    -34
+  long            11 ->  14     -3
+  hands           19 ->  20     -1
+
+HIGHER UNDER B
+  face             3 ->   1     +2
+  beard            4 ->   2     +2
+  chin            12 ->   5     +7
+  fingers         14 ->   8     +6
+  thigh           53 ->  13    +40
+  hand             7 ->   7     +0
+  neck            23 ->  17     +6
+  arm             22 ->  15     +7
+  shaft           16 ->  11     +5
+  thick           15 ->  12     +3
+  own             21 ->  16     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  cock             3 ->  22    -19
+  dick             8 ->  29    -21
+  penis            6 ->  18    -12
+  own             10 ->  16     -6
+  hand             9 ->   9     +0
+  lips            16 ->  30    -14
+  shaft           14 ->  20     -6
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  chin             2 ->   2     +0
+  chest           11 ->   5     +6
+  face             5 ->   4     +1
+  hair             4 ->   3     +1
+  mustache        21 ->   8    +13
+  thick           18 ->  11     +7
+  fingers         12 ->   7     +5
+  head             7 ->   6     +1
+  moustache       25 ->  14    +11
+  neck            15 ->  10     +5
+  long            17 ->  13     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  cock             3 ->  18    -15
+  face             4 ->   6     -2
+  hand            14 ->  17     -3
+  head             7 ->   7     +0
+  neck             8 ->  10     -2
+  chest           11 ->  14     -3
+  wife            16 ->  27    -11
+  own              9 ->   9     +0
+  hands           13 ->  13     +0
+  crotch          17 ->  22     -5
+  belly           20 ->  24     -4
+
+HIGHER UNDER B
+  chin             1 ->   1     +0
+  beard            2 ->   2     +0
+  mustache        21 ->  12     +9
+  fingers         12 ->   5     +7
+  thick           19 ->  15     +4
+  cheeks          15 ->  11     +4
+  jaw             18 ->  16     +2
+  long            10 ->   8     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  cock             1 ->   4     -3
+  dick             5 ->  37    -32
+  penis            6 ->  12     -6
+  hand             8 ->  14     -6
+  shaft           15 ->  31    -16
+  hands           12 ->  20     -8
+  finger          17 ->  30    -13
+  wife's          18 ->  32    -14
+  member          13 ->  13     +0
+  long            11 ->  11     +0
+
+HIGHER UNDER B
+  beard            2 ->   1     +1
+  chin             4 ->   3     +1
+  hair             3 ->   2     +1
+  mustache        26 ->  10    +16
+  face            16 ->   8     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  cock             1 ->  45    -44
+  penis            2 ->  55    -53
+  dick             3 -> 141   -138
+  shaft            7 -> 124   -117
+  own              6 ->  16    -10
+  hand             4 ->   8     -4
+  member          12 -> 122   -110
+  erection        14 -> 131   -117
+  hard            13 -> 126   -113
+  crotch          18 -> 101    -83
+  erect           19 -> 129   -110
+  fingers          8 ->  11     -3
+  chest           15 ->  24     -9
+
+HIGHER UNDER B
+  beard            9 ->   1     +8
+  chin            16 ->   2    +14
+  hair             5 ->   3     +2
+  cat             69 ->   4    +65
+  mustache       123 ->   7   +116
+  face            10 ->   5     +5
+  dog             64 ->   9    +55
+  goatee          96 ->  12    +84
+  belly           50 ->  10    +40
+  head            11 ->   6     +5
+  fur            129 ->  15   +114
+  long            20 ->  13     +7
+  arm             23 ->  17     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  penis            2 ->   7     -5
+  mustache         4 ->  10     -6
+  moustache        6 ->  38    -32
+  dick             8 ->  35    -27
+  hand             5 ->   9     -4
+  long             7 ->  22    -15
+  beard            1 ->   2     -1
+  fingers         16 ->  43    -27
+  cock            13 ->  23    -10
+  back            12 ->  21     -9
+  pussy           23 ->  66    -43
+  ass             22 ->  45    -23
+  hands           15 ->  26    -11
+  belly           10 ->  12     -2
+  legs            20 ->  25     -5
+  face            17 ->  19     -2
+  neck            14 ->  14     +0
+
+HIGHER UNDER B
+  head             9 ->   1     +8
+  chest           19 ->   4    +15
+  hair             3 ->   3     +0
+  chin            21 ->   6    +15
+  daughter        48 ->  13    +35
+  sister          24 ->   8    +16
+  wife            11 ->   5     +6
+  forehead        37 ->  18    +19
+  own             26 ->  15    +11
+  leg             27 ->  16    +11
+  girlfriend      18 ->  11     +7
+  right           29 ->  17    +12
+  arm             30 ->  20    +10
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  cock             2 -> 129   -127
+  hands            1 ->  13    -12
+  fingers          3 ->  18    -15
+  penis            5 ->  21    -16
+  wife's           8 ->  44    -36
+  beard           12 ->  74    -62
+  body            10 ->  35    -25
+  dick            17 -> 126   -109
+  tongue          15 ->  46    -31
+  own             11 ->  25    -14
+  wife            14 ->  39    -25
+  balls           22 -> 122   -100
+  lips            19 ->  42    -23
+  belly           16 ->  23     -7
+  hair             9 ->   9     +0
+
+HIGHER UNDER B
+  head             6 ->   1     +5
+  hand             4 ->   2     +2
+  back            55 ->   3    +52
+  chin            26 ->   4    +22
+  thumb           46 ->   5    +41
+  arm             27 ->   7    +20
+  neck            25 ->   8    +17
+  eyes            42 ->  12    +30
+  left            49 ->  15    +34
+  arms            29 ->  10    +19
+  ear             69 ->  19    +50
+  knee           111 ->  22    +89
+  finger          23 ->  16     +7
+  nose            21 ->  14     +7
+  legs            18 ->  17     +1
+  stomach         20 ->  20     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  cock             1 ->   3     -2
+  dick             2 ->   7     -5
+  shaft            5 ->  24    -19
+  big              4 ->  13     -9
+  penis            7 ->  28    -21
+  hard             6 ->  12     -6
+  huge            11 ->  39    -28
+  balls            9 ->  11     -2
+  thick            8 ->  10     -2
+
+HIGHER UNDER B
+  beard           17 ->   1    +16
+  hair            12 ->   2    +10
+  chin            37 ->   4    +33
+  long            10 ->   6     +4
+  hand            13 ->   8     +5
+  erection        18 ->   9     +9
+  chest           15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  chin             3 ->   6     -3
+  hair             1 ->   2     -1
+  hands            7 ->  82    -75
+  cock             5 ->  19    -14
+  face             4 ->  15    -11
+  fingers         10 ->  27    -17
+  hand             9 ->  20    -11
+  penis            8 ->  14     -6
+  legs            15 ->  61    -46
+  chest           12 ->  23    -11
+  balls           14 ->  33    -19
+  own             11 ->  16     -5
+
+HIGHER UNDER B
+  way             59 ->   3    +56
+  dog's          126 ->   7   +119
+  head            13 ->   5     +8
+  friend's       142 ->   9   +133
+  pet             35 ->   8    +27
+  girlfriend's    99 ->  10    +89
+  pen            106 ->  13    +93
+  dog             22 ->  11    +11
+  partner        152 ->  22   +130
+  cat             18 ->  12     +6
+  long             6 ->   4     +2
+  wife's          23 ->  18     +5
+  beard            2 ->   1     +1
+  arm             26 ->  21     +5
+  neck            20 ->  17     +3
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  penis            4 ->  19    -15
+  cock             3 ->  12     -9
+  head             6 ->  18    -12
+  face             7 ->  14     -7
+  dick            11 ->  95    -84
+  own              8 ->  15     -7
+  hair             5 ->   9     -4
+  crotch          14 ->  48    -34
+  horse           12 ->  22    -10
+  nose            16 ->  32    -16
+  moustache       15 ->  21     -6
+  chest            9 ->  10     -1
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  cat             13 ->   3    +10
+  dog's           52 ->   5    +47
+  whiskers        18 ->   4    +14
+  chin             2 ->   2     +0
+  cat's          107 ->   7   +100
+  mustache        17 ->   6    +11
+  pet             50 ->  13    +37
+  white           40 ->  17    +23
+  goatee          25 ->  16     +9
+  dog             19 ->  11     +8
+  long            10 ->   8     +2
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  beard            1 ->  18    -17
+  chin             2 ->  24    -22
+  hair             4 ->   5     -1
+  face             5 ->  63    -58
+  own              6 ->  29    -23
+  chest            7 ->  79    -72
+  head            10 ->  91    -81
+  fingers         11 ->  71    -60
+  neck            13 ->  86    -73
+  long            14 ->  72    -58
+  hand            15 ->  68    -53
+  balls           12 ->  32    -20
+  hands           16 ->  81    -65
+  back            17 ->  97    -80
+  stomach         20 -> 111    -91
+  belly           19 ->  61    -42
+  body            18 ->  21     -3
+
+HIGHER UNDER B
+  cock             3 ->   1     +2
+  penis            8 ->   2     +6
+  dick             9 ->   3     +6
+  erection        37 ->   4    +33
+  member          83 ->   7    +76
+  shaft           40 ->   6    +34
+  cat             60 ->   8    +52
+  little          49 ->   9    +40
+  massive         65 ->  11    +54
+  big             51 ->  10    +41
+  small          101 ->  12    +89
+  ego             88 ->  13    +75
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  dick             2 ->   6     -4
+  shaft            4 ->  16    -12
+  penis            7 ->  37    -30
+  own              3 ->   5     -2
+  chest           13 ->  69    -56
+  hair            12 ->  39    -27
+  length           9 ->  14     -5
+  erection         8 ->  12     -4
+  fingers         10 ->  17     -7
+
+HIGHER UNDER B
+  member           6 ->   1     +5
+  big             24 ->   3    +21
+  thick           16 ->   7     +9
+  massive         30 ->   8    +22
+  hard             5 ->   4     +1
+  rigid           72 ->   9    +63
+  already         51 ->  11    +40
+  huge            23 ->  10    +13
+  stiff           28 ->  15    +13
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  dick             3 -> 110   -107
+  hair             1 ->   5     -4
+  penis            6 -> 116   -110
+  cock             2 ->   4     -2
+  balls           11 ->  21    -10
+  hand             9 ->  13     -4
+  chest           10 ->  12     -2
+  hands           15 ->  29    -14
+  neck            16 ->  27    -11
+  fingers          4 ->   7     -3
+  erection        23 ->  55    -32
+  long            19 ->  31    -12
+  stomach         21 ->  35    -14
+  shaft           14 ->  17     -3
+  face            17 ->  19     -2
+  thumb           20 ->  22     -2
+
+HIGHER UNDER B
+  beard            8 ->   1     +7
+  head             5 ->   2     +3
+  chin            12 ->   3     +9
+  thigh           35 ->   9    +26
+  arm             31 ->  10    +21
+  crotch          13 ->   8     +5
+  leg             39 ->  15    +24
+  thighs          22 ->  11    +11
+  own              7 ->   6     +1
+  prick           32 ->  23     +9
+  back            26 ->  16    +10
+  lower           27 ->  20     +7
+  member          25 ->  18     +7
+  legs            18 ->  14     +4
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  horse            2 ->   5     -3
+  little           8 ->  17     -9
+  dogs             6 ->  13     -7
+  dog              1 ->   1     +0
+  nose            12 ->  25    -13
+  daughter        13 ->  19     -6
+  fingers         15 ->  22     -7
+  wife            10 ->  12     -2
+
+HIGHER UNDER B
+  pet              4 ->   2     +2
+  girlfriend      39 ->   9    +30
+  new              9 ->   6     +3
+  own             14 ->   8     +6
+  girlfriend's   107 ->  16    +91
+  son's           26 ->  11    +15
+  friend          33 ->  14    +19
+  cat              3 ->   3     +0
+  baby             7 ->   7     +0
+  toy             22 ->  15     +7
+  animal          11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  hair             9 ->  21    -12
+  hand             6 ->  11     -5
+  hands           10 ->  18     -8
+  fingers         13 ->  22     -9
+  lips            15 ->  29    -14
+  chest           16 ->  28    -12
+  face             8 ->   8     +0
+  head            11 ->  12     -1
+  own             12 ->  13     -1
+  moustache        4 ->   7     -3
+  cheek           14 ->  14     +0
+  long             5 ->   6     -1
+
+HIGHER UNDER B
+  chin             1 ->   1     +0
+  goatee          18 ->   4    +14
+  mustache         3 ->   3     +0
+  beard            2 ->   2     +0
+  chin．           27 ->  10    +17
+  jaw             17 ->   9     +8
+  ____             7 ->   5     +2
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  hand             3 ->  11     -8
+  hair             4 ->  12     -8
+  cock             7 ->  39    -32
+  chest            6 ->  14     -8
+  hands            5 ->   7     -2
+  stomach         11 ->  22    -11
+  leg             12 ->  34    -22
+  penis           14 ->  86    -72
+  tongue          15 ->  33    -18
+  own             16 ->  29    -13
+  belly           18 ->  41    -23
+  lips            17 ->  27    -10
+  left            19 ->  51    -32
+  legs            20 ->  47    -27
+  right           21 ->  59    -38
+  body            24 ->  69    -45
+  finger          22 ->  26     -4
+
+HIGHER UNDER B
+  beard            2 ->   2     +0
+  chin             1 ->   1     +0
+  jaw             30 ->   5    +25
+  neck            10 ->   4     +6
+  face             8 ->   3     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  dick             3 ->  22    -19
+  hair             2 ->   4     -2
+  beard            5 ->  23    -18
+  crotch           6 ->  16    -10
+  own              7 ->  42    -35
+  face             8 ->  73    -65
+  chest            9 ->  28    -19
+  head            11 ->  24    -13
+  chin            13 ->  35    -22
+  erection        10 ->  13     -3
+  balls           14 ->  32    -18
+  hand            15 ->  66    -51
+  fingers         16 ->  64    -48
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  penis            4 ->   2     +2
+  hard            12 ->   3     +9
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  face             3 ->   9     -6
+  hair             5 ->  15    -10
+  cheek            7 ->  12     -5
+  head             6 ->  11     -5
+  own              8 ->  13     -5
+  cock             9 ->  51    -42
+  nose            15 ->  92    -77
+  belly           16 ->  68    -52
+  arm             14 ->  21     -7
+  hand            13 ->  16     -3
+  lips            17 ->  56    -39
+
+HIGHER UNDER B
+  chin             2 ->   1     +1
+  whiskers        18 ->   5    +13
+  chest            4 ->   3     +1
+  mane            11 ->   4     +7
+  thick           22 ->   8    +14
+  long            12 ->   7     +5
+  neck            10 ->   6     +4
+  fur             32 ->  10    +22
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  dick             2 ->   3     -1
+  hand             6 ->  25    -19
+  hard             5 ->   5     +0
+  member           7 ->  12     -5
+  shaft            4 ->   4     +0
+  fingers         10 ->  35    -25
+  big             11 ->  17     -6
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  meat            24 ->   6    +18
+  penis            3 ->   2     +1
+  rod             19 ->   9    +10
+  long            18 ->  10     +8
+  prick           17 ->  11     +6
+  own              9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  hair             7 ->   7     +0
+  hand            10 ->  12     -2
+  left             8 ->   8     +0
+  nose             9 ->  11     -2
+  pet             18 ->  28    -10
+  friend          16 ->  19     -3
+  teeth           12 ->  14     -2
+  back            17 ->  17     +0
+  hands            5 ->   5     +0
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  dog              4 ->   2     +2
+  chin            14 ->   9     +5
+  head            11 ->  10     +1
+  son             19 ->  16     +3
+  mustache        22 ->  18     +4
+  fingers         15 ->  15     +0
+  whiskers        13 ->  13     +0
+  face             6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  dick             3 ->  73    -70
+  penis            5 ->  17    -12
+  long            10 ->  14     -4
+  prick           11 ->  22    -11
+
+HIGHER UNDER B
+  own              2 ->   2     +0
+  cock             1 ->   1     +0
+  hard             4 ->   3     +1
+  hand             6 ->   4     +2
+  meat            24 ->   7    +17
+  shaft            7 ->   5     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  chest            3 ->   4     -1
+  hair             2 ->   3     -1
+  cock             6 ->   7     -1
+  wife's           9 ->  43    -34
+  penis            8 ->  18    -10
+  dick            15 ->  52    -37
+  own              5 ->   5     +0
+  neck            17 ->  26     -9
+  mustache        11 ->  11     +0
+  moustache       13 ->  15     -2
+  head            12 ->  12     +0
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  chin             4 ->   2     +2
+  partner         36 ->   8    +28
+  long            14 ->  10     +4
+  wife             7 ->   6     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  dick             2 ->   3     -1
+  penis            3 ->   7     -4
+  big             11 ->  22    -11
+  hard             5 ->   9     -4
+  fingers          7 ->  14     -7
+  hands            8 ->  12     -4
+
+HIGHER UNDER B
+  erection        18 ->   2    +16
+  own              4 ->   4     +0
+  shaft            6 ->   5     +1
+  hair             9 ->   6     +3
+  cock             1 ->   1     +0
+  hand            10 ->   8     +2
+  erect           39 ->  13    +26
+  long            13 ->  11     +2
+  balls           12 ->  10     +2
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  shaft            4 ->   6     -2
+  dick             2 ->   2     +0
+  hair             7 ->   9     -2
+  erection        10 ->  13     -3
+  hand            13 ->  19     -6
+  penis            3 ->   3     +0
+  long            11 ->  14     -3
+  member          15 ->  16     -1
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  thick            9 ->   7     +2
+  hard             5 ->   4     +1
+  big             14 ->  11     +3
+  own              6 ->   5     +1
+  massive         16 ->  12     +4
+  meat            12 ->  10     +2
+  prick            8 ->   8     +0
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  chin             2 ->   3     -1
+  way             14 ->  16     -2
+  own             11 ->  12     -1
+  hair             6 ->   6     +0
+  hands            8 ->   9     -1
+  long            13 ->  13     +0
+  dick            10 ->  11     -1
+  face            16 ->  17     -1
+  big             18 ->  18     +0
+
+HIGHER UNDER B
+  hand             4 ->   2     +2
+  thumb           12 ->  10     +2
+  finger           7 ->   7     +0
+  cock             1 ->   1     +0
+  beard            5 ->   5     +0
+  arm             17 ->  15     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  dick             3 ->   7     -4
+  cock             1 ->   1     +0
+  erection        10 ->  15     -5
+  hand             9 ->  14     -5
+  hard             7 ->  10     -3
+  hands           12 ->  24    -12
+  member           8 ->   9     -1
+  penis            2 ->   3     -1
+  finger          14 ->  17     -3
+  hair             6 ->   8     -2
+  long            13 ->  13     +0
+
+HIGHER UNDER B
+  chin            11 ->   2     +9
+  beard           19 ->   6    +13
+  fingers          5 ->   5     +0
+  own              4 ->   4     +0
+  dog             21 ->  11    +10
+  cat             28 ->  12    +16
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  dick             2 ->   9     -7
+  hard            15 ->  63    -48
+  big             13 ->  41    -28
+  balls            9 ->  16     -7
+  penis            6 ->  11     -5
+  hands           16 ->  19     -3
+
+HIGHER UNDER B
+  hair             4 ->   1     +3
+  face             7 ->   3     +4
+  chest            5 ->   4     +1
+  own             14 ->   7     +7
+  chin             8 ->   6     +2
+  head            11 ->   8     +3
+  stomach         56 ->  12    +44
+  nose            55 ->  15    +40
+  pussy           51 ->  18    +33
+  dog             52 ->  20    +32
+  wife's          32 ->  17    +15
+  body            19 ->  14     +5
+  long            10 ->  10     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  chin             2 ->   2     +0
+  hair             4 ->   8     -4
+  chest            9 ->  15     -6
+  face            10 ->  14     -4
+  own              6 ->  10     -4
+  cock            16 ->  19     -3
+  goatee           8 ->   9     -1
+  moustache       13 ->  13     +0
+  cheek           11 ->  11     +0
+  hands            7 ->   7     +0
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  hand             3 ->   3     +0
+  fingers          5 ->   4     +1
+  thumb           15 ->   5    +10
+  mustache        12 ->   6     +6
+  thumbs          25 ->  16     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  dick             2 ->   2     +0
+  own              3 ->   3     +0
+  erection        10 ->  12     -2
+  shaft            9 ->   9     +0
+  penis            4 ->   5     -1
+  beard           14 ->  15     -1
+  chest           11 ->  13     -2
+  hand             8 ->   8     +0
+  hair             6 ->   6     +0
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  fingers          5 ->   4     +1
+  chin             7 ->   7     +0
+  face            13 ->  11     +2
+  hands           12 ->  10     +2
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  dick             2 ->   4     -2
+  prick            5 ->  44    -39
+  shaft            6 ->  11     -5
+  hand             7 ->   9     -2
+  fingers          9 ->  18     -9
+  penis            4 ->   5     -1
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  own              8 ->   3     +5
+  hard             3 ->   2     +1
+  thick           15 ->   6     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  thumb           10 ->  26    -16
+  hand             6 ->   8     -2
+  dick             5 ->   7     -2
+  shaft            7 ->  11     -4
+  erection        14 ->  25    -11
+  fingers          4 ->   5     -1
+  finger          12 ->  15     -3
+  hard            18 ->  20     -2
+  crotch          17 ->  17     +0
+
+HIGHER UNDER B
+  beard            2 ->   2     +0
+  hair             9 ->   4     +5
+  chin             8 ->   6     +2
+  own              3 ->   3     +0
+  cat             29 ->  18    +11
+  mustache        23 ->  14     +9
+  penis           16 ->  10     +6
+  long            22 ->  16     +6
+  chest           15 ->  13     +2
+  goatee          21 ->  19     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  hair             3 ->  13    -10
+  head             4 ->  37    -33
+  face             5 ->  15    -10
+  moustache        8 ->  20    -12
+  mustache         6 ->   6     +0
+  chest           12 ->  25    -13
+  neck            14 ->  36    -22
+
+HIGHER UNDER B
+  chin             2 ->   2     +0
+  beard            1 ->   1     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  beard            1 ->   2     -1
+  hair             3 ->   5     -2
+  fingers          6 ->  29    -23
+  dog              9 ->  50    -41
+  hands           14 ->  40    -26
+  chest            8 ->  15     -7
+  head             4 ->   6     -2
+  long            13 ->  27    -14
+  belly           11 ->  19     -8
+  neck            15 ->  21     -6
+
+HIGHER UNDER B
+  own              5 ->   3     +2
+  penis           31 ->   4    +27
+  genitals        93 ->  11    +82
+  stubble         86 ->  12    +74
+  lower           28 ->   9    +19
+  jaw             22 ->   8    +14
+  cock            36 ->  14    +22
+  leg             48 ->  16    +32
+  mustache        12 ->  10     +2
+  face             7 ->   7     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  own              3 ->   3     +0
+  prick           10 ->  27    -17
+  hand             7 ->  11     -4
+  fingers         12 ->  21     -9
+  thick           11 ->  18     -7
+  shaft            6 ->   7     -1
+  long             9 ->  14     -5
+  erection         8 ->  10     -2
+
+HIGHER UNDER B
+  chin            43 ->   6    +37
+  dick             2 ->   2     +0
+  beard           61 ->   8    +53
+  chest           30 ->  12    +18
+  cock             1 ->   1     +0
+  hair            13 ->   9     +4
+  penis            4 ->   4     +0
+  member          17 ->  13     +4
+  hard             5 ->   5     +0
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  beard            1 ->   1     +0
+  face             5 ->  10     -5
+  cheek           10 ->  16     -6
+  cheeks          18 ->  23     -5
+  hands           20 ->  20     +0
+  arm             17 ->  19     -2
+  dog             11 ->  13     -2
+  long            13 ->  14     -1
+
+HIGHER UNDER B
+  hair             3 ->   2     +1
+  head             8 ->   4     +4
+  chest            9 ->   5     +4
+  belly           28 ->  17    +11
+  own             14 ->   9     +5
+  fingers          7 ->   7     +0
+  neck            12 ->  11     +1
+  pet             15 ->  12     +3
+  forehead        31 ->  24     +7
+  dog's           25 ->  21     +4
+  stomach         22 ->  22     +0
+  fur             16 ->  15     +1
+  leg             19 ->  18     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  cock             1 ->   6     -5
+  fingers          2 ->  17    -15
+  dick             3 ->  70    -67
+  hand             4 ->  13     -9
+  thumb            5 ->  24    -19
+  penis            6 ->  36    -30
+  shaft            7 ->  67    -60
+  finger           8 ->  50    -42
+  hands            9 ->  71    -62
+  erection        10 ->  72    -62
+  tongue          11 ->  61    -50
+  member          12 ->  81    -69
+  hard            15 ->  58    -43
+  prick           16 ->  55    -39
+
+HIGHER UNDER B
+  beard           18 ->   1    +17
+  goatee          88 ->   2    +86
+  thick           21 ->   3    +18
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  dick             2 ->  18    -16
+  hard             5 ->  20    -15
+  big              9 ->  89    -80
+  shaft            6 ->  10     -4
+  erection         8 ->  33    -25
+  prick           12 ->  27    -15
+  manhood         13 ->  42    -29
+  long            10 ->  22    -12
+  member           7 ->  13     -6
+  penis            3 ->   5     -2
+  thick           11 ->  17     -6
+
+HIGHER UNDER B
+  own              4 ->   2     +2
+  beard           50 ->   3    +47
+  c               20 ->   4    +16
+  chin            92 ->   6    +86
+  cat            121 ->   8   +113
+  wife's          19 ->   7    +12
+  hair            51 ->   9    +42
+  thigh           23 ->  11    +12
+  horse           61 ->  14    +47
+  chest           24 ->  12    +12
+  hardening       29 ->  16    +13
+  hand            22 ->  15     +7
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  penis            1 ->   6     -5
+  cock             2 ->  21    -19
+  erection         6 ->  90    -84
+  dick             8 -> 103    -95
+  erect           13 ->  80    -67
+  nipples         14 ->  71    -57
+  member          16 ->  63    -47
+  crotch          20 ->  97    -77
+  long            15 ->  28    -13
+  large           25 ->  72    -47
+  hard            24 ->  68    -44
+  head             7 ->  11     -4
+  manhood         21 ->  37    -16
+  body            23 ->  32     -9
+  fingers         19 ->  22     -3
+  thigh           18 ->  20     -2
+
+HIGHER UNDER B
+  beard            5 ->   1     +4
+  cat             27 ->   4    +23
+  dog             43 ->   7    +36
+  chest           10 ->   5     +5
+  hair             3 ->   2     +1
+  pet            103 ->  15    +88
+  face            35 ->  12    +23
+  own              4 ->   3     +1
+  stomach         26 ->  14    +12
+  lips            39 ->  18    +21
+  mustache        38 ->  17    +21
+  neck            17 ->  13     +4
+  hands           40 ->  19    +21
+  legs            22 ->  16     +6
+  hand            11 ->   9     +2
+  chin             9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  dick             4 ->  54    -50
+  own              5 ->  15    -10
+  crotch           8 ->  25    -17
+  chin             3 ->   6     -3
+  beard            7 ->   7     +0
+  penis            9 ->  10     -1
+  head            13 ->  64    -51
+  chest           16 ->  82    -66
+  balls           20 ->  26     -6
+  long            17 ->  21     -4
+  member          18 ->  19     -1
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  hand            10 ->   4     +6
+  fingers          6 ->   3     +3
+  face            11 ->   5     +6
+  thumb           27 ->   8    +19
+  daughter's      43 ->  14    +29
+  son's           95 ->  16    +79
+  hair             2 ->   2     +0
+  thigh           24 ->  12    +12
+  manhood         14 ->   9     +5
+  wife's          21 ->  17     +4
+  erection        15 ->  13     +2
+  hands           12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  beard            1 ->   2     -1
+  fingers          8 ->  20    -12
+  hand             5 ->  11     -6
+  hands           15 ->  48    -33
+  mustache        11 ->  19     -8
+  head            10 ->  13     -3
+  face             4 ->   7     -3
+  long             9 ->   9     +0
+  neck            14 ->  14     +0
+
+HIGHER UNDER B
+  chin             2 ->   1     +1
+  chest            7 ->   4     +3
+  goatee          16 ->   5    +11
+  hair             3 ->   3     +0
+  own              6 ->   6     +0
+  jaw             39 ->  18    +21
+  stomach         27 ->  12    +15
+  dog             34 ->  21    +13
+  crotch          25 ->  15    +10
+  nose            26 ->  17     +9
+  moustache       13 ->  10     +3
+  right           23 ->  22     +1
+  arm             12 ->   8     +4
+  left            17 ->  16     +1
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  face             3 ->   7     -4
+  head             5 ->   9     -4
+  hand             8 ->  35    -27
+  lips            15 ->  65    -50
+  penis           13 ->  29    -16
+  dick            21 ->  57    -36
+  own             16 ->  33    -17
+  hands           20 ->  39    -19
+  neck            12 ->  17     -5
+  nose            17 ->  24     -7
+  arm             10 ->  14     -4
+  right           23 ->  25     -2
+  chest            7 ->  11     -4
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  chin             4 ->   3     +1
+  hair             2 ->   2     +0
+  mustache        18 ->   5    +13
+  cock             6 ->   4     +2
+  cheek           24 ->   8    +16
+  long             9 ->   6     +3
+  leg             11 ->  10     +1
+  thumb           32 ->  15    +17
+  fingers         22 ->  13     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  chin             2 ->   2     +0
+  hair             3 ->   3     +0
+  face             4 ->  14    -10
+  head             8 ->  17     -9
+  moustache        6 ->  11     -5
+  chest            5 ->   9     -4
+  own             10 ->  15     -5
+  nose            12 ->  31    -19
+  wife            15 ->  26    -11
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  whiskers        18 ->   6    +12
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  shaft            5 ->   5     +0
+  own              4 ->   4     +0
+  hand             9 ->  12     -3
+  fingers          7 ->   8     -1
+  hard             6 ->   6     +0
+  member          11 ->  11     +0
+
+HIGHER UNDER B
+  penis            3 ->   3     +0
+  cock             1 ->   1     +0
+  dick             2 ->   2     +0
+  chin            25 ->  10    +15
+  crotch          10 ->   9     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  chin             2 ->   3     -1
+  head             3 ->  13    -10
+  horse            4 ->   4     +0
+  face             5 ->   7     -2
+  hand             6 ->  10     -4
+  horse's         10 ->  84    -74
+  cheek           17 -> 113    -96
+  pony            16 ->  65    -49
+  hands           11 ->  31    -20
+  right           21 ->  71    -50
+  neck            14 ->  29    -15
+  long             8 ->  11     -3
+  fingers         18 ->  34    -16
+  chest           12 ->  21     -9
+  forehead         9 ->  12     -3
+  dog             19 ->  30    -11
+  stomach         22 ->  26     -4
+  moustache       15 ->  15     +0
+
+HIGHER UNDER B
+  wife            13 ->   2    +11
+  beard            1 ->   1     +0
+  cock            61 ->  19    +42
+  mustache        20 ->   6    +14
+  own             26 ->   8    +18
+  thumb           50 ->  20    +30
+  penis           36 ->  14    +22
+  wife's          25 ->   9    +16
+  bald            29 ->  17    +12
+  back            23 ->  16     +7
+  nose            24 ->  18     +6
+  arm             27 ->  22     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  dick             2 ->   6     -4
+  hard             4 ->  11     -7
+  shaft            7 ->  24    -17
+  balls            9 ->  15     -6
+  big             10 ->  25    -15
+  own              5 ->   9     -4
+
+HIGHER UNDER B
+  fingers          6 ->   2     +4
+  chest           22 ->   5    +17
+  hand             8 ->   4     +4
+  hair            13 ->   7     +6
+  hands           11 ->   8     +3
+  chin            56 ->  10    +46
+  penis            3 ->   3     +0
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -114,7 +114,10 @@ def resolve(prefix):
     return cands[0]
 
 
-def tables(prompt_prefix, want_rows=False):
+BLANK = re.compile(r"^_+$")
+
+
+def tables(prompt_prefix, want_rows=False, drop_blanks=False):
     """Rebuild every lineage's two-column table for one prompt, from twp.
 
     Rebuilt rather than recovered from the stage-1 job files: those were written
@@ -166,6 +169,25 @@ def tables(prompt_prefix, want_rows=False):
                   "AND model IN {ms:Array(String)} AND merged=1 GROUP BY model",
                   p=prompt, ms=models)
     W = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in rows}
+    #: BLANKS REMOVED BEFORE RENORMALISATION, WHICH IS WHY THIS IS NOT COSMETIC.
+    #:
+    #: 6 models of 50 emit runs of underscores, and on 27 of 35 frames at least
+    #: one reached the rater's table. Where it reached the TOP of the aligned
+    #: column, the rater named the whole operation after it: "Answer Withheld"
+    #: on a component whose other 44 cited words are `offer issue wait review
+    #: expedite take ask try` -- direct action to procedure, lost to one blank at
+    #: rank 11.
+    #:
+    #: Dropping them here rather than at display time means the mass is
+    #: redistributed and every RANK below a blank moves up. So a stripped table
+    #: is a different measurement of the same surface, not the same table with
+    #: rows hidden, and it must never pool with an unstripped one. That is what
+    #: the version suffix in `prepare` is for.
+    if drop_blanks:
+        cut = sum(1 for d in W.values() for w in d if BLANK.match(w))
+        W = {m: {w: p for w, p in d.items() if not BLANK.match(w)} for m, d in W.items()}
+        print("drop_blanks: removed %d blank-token rows across %d model arms"
+              % (cut, len(W)), file=sys.stderr)
     out, rowdata = [], {}
     for nick, b, a in pairs:
         if b not in W or a not in W:
@@ -184,8 +206,9 @@ def tables(prompt_prefix, want_rows=False):
     return (prompt, out, rowdata) if want_rows else (prompt, out)
 
 
-def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False):
-    prompt, tbl, rowdata = tables(prefix, want_rows=True)
+def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False,
+            no_blanks=False):
+    prompt, tbl, rowdata = tables(prefix, want_rows=True, drop_blanks=no_blanks)
     src = open(INSTRUMENT).read()
     #: ── BLIND: NEUTRAL FRAMING *AND* NEUTRAL LABELS ─────────────────────────
     #: Swapping the framing paragraph alone is not a blind. The headings carry
@@ -209,6 +232,8 @@ def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False):
                 .replace("{{fragment}}", prompt + " ___")
                 .replace("{{tables}}", body))
     slug = re.sub(r"[^a-z0-9]+", "_", prompt.lower())[:40].strip("_")
+    if no_blanks:
+        slug += "_nb"
     if blind:
         slug += "_blind"
     path = os.path.join(HERE, "results", "inputs", "xling_%s.txt" % slug)
@@ -231,7 +256,13 @@ def prepare(prefix, model=MODEL, effort=EFFORT, raters=1, blind=False):
              "n_lineages": len(tbl), "blind": bool(blind),
              "unlabel": {v: k for k, v in label.items()},
              "model": model, "effort": effort, "path": path,
-             "version": ver + ("b" if blind else "")}
+             #: `n` FOR NO-BLANKS, AND IT IS IN THE STASH KEY. A stripped
+             #: reading is a different measurement -- ranks move -- so it must
+             #: not silently pool with the original. The suffix also means
+             #: `blind_prompts()`, which tests `endswith("b")`, does not pick
+             #: these up by accident: they are opted into, never inherited.
+             "no_blanks": bool(no_blanks),
+             "version": ver + ("b" if blind else "") + ("n" if no_blanks else "")}
     json.dump(state, open(os.path.join(HERE, "results", "xling_%s.json" % slug), "w"), indent=1)
     #: Written beside the task under the REAL model names, whatever labels the
     #: rater saw, so a consumer never has to know whether a run was blind.
@@ -406,11 +437,14 @@ if __name__ == "__main__":
     #: every result carrying `operations` as rater 1..N, so the only thing that
     #: was missing was a way to ask for more than one.
     ap.add_argument("--raters", type=int, default=1)
+    ap.add_argument("--no-blanks", action="store_true",
+                    help="strip underscore-run tokens before renormalising; ranks move, "
+                         "so the reading is versioned separately and cannot pool")
     ap.add_argument("--blind", action="store_true",
                     help="neutral A/B framing AND anonymised model labels")
     a = ap.parse_args()
     if a.prepare:
-        prepare(a.prepare, raters=a.raters, blind=a.blind)
+        prepare(a.prepare, raters=a.raters, blind=a.blind, no_blanks=a.no_blanks)
     elif a.ingest:
         if not a.slug:
             raise SystemExit("--ingest needs --slug")

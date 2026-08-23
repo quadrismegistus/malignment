@@ -1,0 +1,918 @@
+Below are 42 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He put her mouth to his ___
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  cock             3 ->   6     -3
+  and              2 ->   2     +0
+  mouth            4 ->  25    -21
+  lips             5 ->  15    -10
+  neck             7 ->  17    -10
+  dick             8 ->  18    -10
+
+HIGHER UNDER B
+  ear              1 ->   1     +0
+  in              25 ->   3    +22
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  breast           2 ->  14    -12
+  ear              3 ->   4     -1
+  shoulder         4 ->   8     -4
+  heart            6 ->  23    -17
+
+HIGHER UNDER B
+  and              1 ->   1     +0
+  own              7 ->   2     +5
+  for             13 ->   5     +8
+  mouth           10 ->   7     +3
+  neck             9 ->   6     +3
+  as              19 ->   9    +10
+  in              23 ->  10    +13
+  chest            5 ->   3     +2
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  mouth            2 ->   7     -5
+  and              4 ->   5     -1
+  chin            10 ->  14     -4
+  cheek           12 ->  30    -18
+  face             7 ->   9     -2
+  as              11 ->  11     +0
+
+HIGHER UNDER B
+  ear              1 ->   1     +0
+  lips             3 ->   2     +1
+  neck             5 ->   3     +2
+  shoulder         8 ->   4     +4
+  throat           6 ->   6     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  lips             2 ->   8     -6
+  throat           3 ->  11     -8
+  mouth            4 ->   6     -2
+  and              9 ->  13     -4
+  groin           11 ->  24    -13
+  own              7 ->   7     +0
+  chest           12 ->  19     -7
+
+HIGHER UNDER B
+  nose             6 ->   2     +4
+  ears             8 ->   3     +5
+  ear              1 ->   1     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  and              1 ->   1     +0
+  ear              2 ->   2     +0
+  cheek           10 ->  42    -32
+  in               5 ->   7     -2
+  mouth            7 ->  10     -3
+  neck             6 ->   8     -2
+  as               8 ->  14     -6
+  for             11 ->  18     -7
+  own              9 ->  11     -2
+
+HIGHER UNDER B
+  lips             4 ->   3     +1
+  hand            15 ->   5    +10
+  cock            30 ->   9    +21
+  once            20 ->   6    +14
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  and              1 ->   2     -1
+  ear              3 ->   8     -5
+  again            6 ->  21    -15
+  mouth            9 ->  32    -23
+  neck            11 ->  41    -30
+  shoulder         7 ->  11     -4
+  hand            10 ->  36    -26
+  as              13 ->  42    -29
+  with            12 ->  34    -22
+  for             15 ->  38    -23
+  own              5 ->   5     +0
+
+HIGHER UNDER B
+  cock             2 ->   1     +1
+  throbbing       39 ->   4    +35
+  hard            17 ->   7    +10
+  swollen         49 ->  12    +37
+  prick           52 ->  14    +38
+  chest            4 ->   3     +1
+  lips             8 ->   6     +2
+  erection        22 ->   9    +13
+  groin           20 ->  13     +7
+  dick            14 ->  10     +4
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  cock             2 ->   3     -1
+  ear              4 ->  13     -9
+  own              3 ->   6     -3
+  hand             6 ->  10     -4
+  mouth           10 ->  59    -49
+  shoulder        13 ->  60    -47
+  chest           11 ->  45    -34
+  in               9 ->  15     -6
+  as              14 ->  23     -9
+  again           12 ->  20     -8
+  crotch          15 ->  22     -7
+
+HIGHER UNDER B
+  member           8 ->   2     +6
+  and              1 ->   1     +0
+  throbbing       30 ->   5    +25
+  erect           17 ->   7    +10
+  rod             23 ->   9    +14
+  stiff           55 ->  14    +41
+  shaft           29 ->  11    +18
+  penis            5 ->   4     +1
+  hard            20 ->  12     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  mouth            4 ->   7     -3
+  own              3 ->   6     -3
+  and              1 ->   1     +0
+  in               8 ->  10     -2
+  face            11 ->  12     -1
+
+HIGHER UNDER B
+  shoulder         6 ->   3     +3
+  lips             7 ->   5     +2
+  chest            5 ->   4     +1
+  ear              2 ->   2     +0
+  cock            23 ->  13    +10
+  skin            16 ->  11     +5
+  neck             9 ->   8     +1
+  heart           10 ->   9     +1
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  and              1 ->   2     -1
+  cock             4 ->   6     -2
+  penis            5 ->   7     -2
+  own             10 ->  42    -32
+  crotch           8 ->  14     -6
+  in              12 ->  28    -16
+  ears            11 ->  22    -11
+
+HIGHER UNDER B
+  chest            7 ->   4     +3
+  mouth            3 ->   3     +0
+  lips             6 ->   5     +1
+  breast           9 ->   8     +1
+  nose            19 ->  10     +9
+  nipple          13 ->   9     +4
+  face            28 ->  13    +15
+  shoulder        17 ->  11     +6
+  neck            14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  and              1 ->   5     -4
+  to               4 ->  14    -10
+  for              5 ->  23    -18
+  so               7 ->  52    -45
+  lips             2 ->   3     -1
+  in              10 ->  43    -33
+  again           11 ->  44    -33
+  as              14 ->  42    -28
+  own              6 ->   7     -1
+
+HIGHER UNDER B
+  ear              3 ->   1     +2
+  mouth            9 ->   2     +7
+  breast           8 ->   4     +4
+  ears            34 ->   8    +26
+  chest           12 ->   6     +6
+  neck            18 ->   9     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  and              2 ->   3     -1
+  own              4 ->  19    -15
+  neck             5 ->  32    -27
+  mouth            6 ->  13     -7
+  in               9 ->  22    -13
+  as               7 ->   7     +0
+  shoulder        10 ->  23    -13
+  with            11 ->  16     -5
+  chest           12 ->  20     -8
+  again           13 ->  50    -37
+  throat          14 ->  17     -3
+
+HIGHER UNDER B
+  lips             3 ->   2     +1
+  ear              1 ->   1     +0
+  face            16 ->   4    +12
+  ears            19 ->   5    +14
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  cock             1 ->   5     -4
+  penis            2 ->  31    -29
+  dick             4 ->  13     -9
+  crotch           5 ->  11     -6
+  groin            7 ->  52    -45
+  manhood         11 ->  34    -23
+  own              8 ->   9     -1
+  erection        12 ->  24    -12
+  hard            13 ->  25    -12
+  shaft           15 ->  53    -38
+  c               17 ->  81    -64
+
+HIGHER UNDER B
+  ear              6 ->   1     +5
+  and              3 ->   2     +1
+  chest           10 ->   3     +7
+  lips             9 ->   4     +5
+  neck            20 ->   6    +14
+  shoulder        31 ->   7    +24
+  hand            14 ->   8     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  ear              1 ->   2     -1
+  and              2 ->   3     -1
+  mouth            3 ->   7     -4
+  ears             6 ->  56    -50
+  heart            5 ->  14     -9
+  again            8 ->  51    -43
+  cock             7 ->  31    -24
+  chest           10 ->  17     -7
+
+HIGHER UNDER B
+  lips             4 ->   1     +3
+  cheek           25 ->   4    +21
+  own             18 ->   6    +12
+  shoulder         9 ->   5     +4
+  side            47 ->  10    +37
+  face            12 ->   8     +4
+  in              17 ->   9     +8
+  hand            15 ->  12     +3
+  neck            11 ->  11     +0
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  ear              1 ->   3     -2
+  mouth            4 ->   4     +0
+  chest            7 ->  18    -11
+  ears             6 ->  11     -5
+  penis            8 ->  17     -9
+  lips             5 ->   5     +0
+  as              10 ->  10     +0
+
+HIGHER UNDER B
+  own              3 ->   1     +2
+  and              2 ->   2     +0
+  in              20 ->   9    +11
+  so              18 ->   8    +10
+  wound           11 ->   6     +5
+  to               9 ->   7     +2
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  ear              1 ->   4     -3
+  lips             5 ->  30    -25
+  own              7 ->  27    -20
+  throat           6 ->  18    -12
+  heart           11 ->  20     -9
+  skin             9 ->  14     -5
+  mouth           12 ->  53    -41
+  cheek           13 ->  52    -39
+  nipple          15 ->  57    -42
+
+HIGHER UNDER B
+  and              2 ->   1     +1
+  as              10 ->   5     +5
+  chest            4 ->   3     +1
+  neck             3 ->   2     +1
+  sex             61 ->   8    +53
+  bare            23 ->   7    +16
+  shoulder         8 ->   6     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  and              2 ->   6     -4
+  neck             4 ->  14    -10
+  chest            5 ->  25    -20
+  nipple           6 ->  66    -60
+  breast          11 ->  76    -65
+  penis            8 ->  27    -19
+  shoulder        10 ->  34    -24
+  dick             7 ->  15     -8
+  mouth           12 ->  22    -10
+  again           13 ->  32    -19
+  own             16 ->  63    -47
+  skin            15 ->  35    -20
+  throat           9 ->  11     -2
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  member          30 ->   2    +28
+  crotch          17 ->   4    +13
+  hard            14 ->   5     +9
+  prick           21 ->   7    +14
+  throbbing       32 ->   8    +24
+  length          56 ->  10    +46
+  erection        20 ->   9    +11
+  shaft           29 ->  12    +17
+  ear              3 ->   3     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  neck             3 ->   4     -1
+  and              1 ->   2     -1
+  own              5 ->  16    -11
+  nipple           6 ->  36    -30
+  dick            14 ->  61    -47
+  lips             9 ->  12     -3
+  throat          11 ->  21    -10
+  shoulder        12 ->  15     -3
+
+HIGHER UNDER B
+  ear              2 ->   1     +1
+  crotch          50 ->   5    +45
+  as              10 ->   6     +4
+  mouth           13 ->   9     +4
+  cock             8 ->   7     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  own              2 ->   7     -5
+  lips             3 ->   6     -3
+  face             8 ->  13     -5
+  shoulder         6 ->  12     -6
+  cheek           11 ->  22    -11
+  ear             10 ->  19     -9
+  mouth           12 ->  17     -5
+  with             9 ->   9     +0
+  hand            16 ->  16     +0
+
+HIGHER UNDER B
+  and              1 ->   1     +0
+  in               7 ->   4     +3
+  chest           15 ->   5    +10
+  as               4 ->   2     +2
+  when             5 ->   3     +2
+  to              18 ->  10     +8
+  neck            14 ->   8     +6
+  but             20 ->  14     +6
+  while           19 ->  15     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  ear              2 ->   2     +0
+  lips             3 ->   6     -3
+  breast           5 ->   8     -3
+  mouth            9 ->  13     -4
+  ____            13 ->  17     -4
+  heart           12 ->  14     -2
+  hand            10 ->  11     -1
+  shoulder         8 ->   9     -1
+  throat          14 ->  15     -1
+
+HIGHER UNDER B
+  and              1 ->   1     +0
+  neck             7 ->   4     +3
+  in              11 ->   7     +4
+  for             15 ->  10     +5
+  to              16 ->  12     +4
+  chest            6 ->   5     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  and              2 ->   4     -2
+  cock             3 ->  23    -20
+  mouth            4 ->   6     -2
+  again            5 ->  11     -6
+  neck             6 ->   9     -3
+  own              8 ->  18    -10
+
+HIGHER UNDER B
+  ear              1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  ear              3 ->  10     -7
+  and              1 ->   1     +0
+  breast           8 ->  25    -17
+  neck             2 ->   4     -2
+  shoulder         5 ->   5     +0
+  mouth           15 ->  52    -37
+  knee            14 ->  28    -14
+  throat           9 ->  11     -2
+  arm             13 ->  22     -9
+  lips            11 ->  17     -6
+  head            17 ->  24     -7
+  cock            16 ->  16     +0
+
+HIGHER UNDER B
+  chest            4 ->   2     +2
+  forehead         7 ->   3     +4
+  thigh           12 ->   7     +5
+  own             23 ->   8    +15
+  ribs            34 ->  12    +22
+  cheek            6 ->   6     +0
+  leg             25 ->  13    +12
+  hair            28 ->  15    +13
+  as              18 ->  14     +4
+  face            10 ->   9     +1
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  ear              1 ->   2     -1
+  chest            5 ->  26    -21
+  neck             7 ->  49    -42
+  nipple          11 ->  18     -7
+  breast          13 ->  16     -3
+  mouth            6 ->   9     -3
+  again            8 ->   8     +0
+
+HIGHER UNDER B
+  cock             3 ->   3     +0
+  and              2 ->   1     +1
+  dick             9 ->   4     +5
+  own             17 ->   6    +11
+  lips            10 ->   7     +3
+  throbbing       45 ->  13    +32
+  shaft           24 ->  11    +13
+  with            19 ->  12     +7
+  as              12 ->  10     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  neck             6 ->  12     -6
+  and              2 ->   2     +0
+  cheek           17 ->  19     -2
+  left             3 ->   3     +0
+  nose            14 ->  17     -3
+  right           13 ->  15     -2
+  hand             5 ->   5     +0
+
+HIGHER UNDER B
+  ear              1 ->   1     +0
+  own             16 ->   9     +7
+  shoulder         9 ->   7     +2
+  in               7 ->   6     +1
+  face            12 ->  10     +2
+  mouth            8 ->   8     +0
+  chest            4 ->   4     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  and              2 ->   3     -1
+  cock             3 ->   6     -3
+  neck             5 ->   7     -2
+  lips             7 ->   8     -1
+  nipple           8 ->  66    -58
+
+HIGHER UNDER B
+  ear              1 ->   1     +0
+  chest            4 ->   2     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  and              1 ->   1     +0
+  mouth            4 ->  11     -7
+  ear              2 ->   3     -1
+  shoulder        11 ->  15     -4
+
+HIGHER UNDER B
+  lips             3 ->   2     +1
+  in               6 ->   4     +2
+  with             9 ->   6     +3
+  again            7 ->   7     +0
+  as               5 ->   5     +0
+  for             12 ->  10     +2
+  throat          19 ->  12     +7
+  chest           18 ->  13     +5
+  neck             8 ->   8     +0
+  own             10 ->   9     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  cock             2 ->  22    -20
+  and              1 ->   2     -1
+  dick             3 ->  43    -40
+  lips             4 ->  11     -7
+  mouth            9 ->  35    -26
+  penis           11 ->  52    -41
+  face            14 ->  37    -23
+  as              12 ->  15     -3
+
+HIGHER UNDER B
+  ear              8 ->   1     +7
+  neck             5 ->   3     +2
+  shoulder         6 ->   4     +2
+  finger          40 ->   9    +31
+  cheek           13 ->   6     +7
+  hand            16 ->   8     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  mouth            1 ->   2     -1
+  penis            6 ->   9     -3
+  breast           7 ->   8     -1
+  heart           13 ->  15     -2
+  own              9 ->  10     -1
+  nipple          14 ->  14     +0
+
+HIGHER UNDER B
+  ear              2 ->   1     +1
+  cock             5 ->   4     +1
+  chest            8 ->   6     +2
+  neck            10 ->   7     +3
+  and              3 ->   3     +0
+  dick            15 ->  13     +2
+  shoulder        12 ->  12     +0
+  crotch          11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  ear              1 ->   1     +0
+  again            4 ->   5     -1
+  breast          11 ->  11     +0
+
+HIGHER UNDER B
+  and              2 ->   2     +0
+  cock             5 ->   4     +1
+  lips             3 ->   3     +0
+  neck             6 ->   6     +0
+  mouth            8 ->   8     +0
+  chest            7 ->   7     +0
+  throat           9 ->   9     +0
+  shoulder        10 ->  10     +0
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  cock             1 ->   5     -4
+  own              6 ->  36    -30
+  dick             5 ->  12     -7
+
+HIGHER UNDER B
+  lips             7 ->   4     +3
+  mouth            4 ->   3     +1
+  <               70 ->   6    +64
+  face            18 ->   7    +11
+  shoulder        32 ->  11    +21
+  neck            12 ->   9     +3
+  chest           21 ->  10    +11
+  cheek           17 ->  13     +4
+  asshole         15 ->  14     +1
+  as               8 ->   8     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  ear              4 ->   6     -2
+  dick             3 ->   5     -2
+  lips             6 ->   9     -3
+  and              2 ->   2     +0
+  nipple           8 ->  15     -7
+  again           10 ->  25    -15
+  throat           9 ->  16     -7
+  erection        13 ->  46    -33
+  crotch          12 ->  35    -23
+  neck             7 ->   8     -1
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  mouth           11 ->   3     +8
+  hard            19 ->   7    +12
+  penis            5 ->   4     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  and              1 ->   2     -1
+  mouth            4 ->   5     -1
+  ear              3 ->   3     +0
+  as               6 ->  10     -4
+  neck             8 ->  13     -5
+  ears            11 ->  34    -23
+  in               7 ->   8     -1
+  penis           12 ->  25    -13
+  again           10 ->  15     -5
+  with            14 ->  21     -7
+  cock            13 ->  16     -3
+  for              9 ->   9     +0
+
+HIGHER UNDER B
+  lips             2 ->   1     +1
+  chest           18 ->   7    +11
+  hand            15 ->   6     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  and              1 ->   1     +0
+  ear              2 ->   3     -1
+  shoulder         3 ->  10     -7
+  groin            6 ->  43    -37
+  cock             7 ->  44    -37
+  penis           11 ->  23    -12
+  erection        20 ->  42    -22
+  mouth           16 ->  22     -6
+  breast           8 ->  12     -4
+  heart           13 ->  16     -3
+  as              12 ->  14     -2
+  cheek           14 ->  15     -1
+  in              21 ->  21     +0
+
+HIGHER UNDER B
+  own              4 ->   2     +2
+  neck             5 ->   4     +1
+  hand            18 ->   5    +13
+  for             19 ->   6    +13
+  nose            41 ->  11    +30
+  so              10 ->   7     +3
+  He              70 ->  19    +51
+  chest           15 ->   9     +6
+  face            52 ->  18    +34
+  lips             9 ->   8     +1
+  nipple          23 ->  17     +6
+  to              17 ->  13     +4
+  body            22 ->  20     +2
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  nipple           3 ->  13    -10
+  dick             5 ->  11     -6
+  penis            7 ->   7     +0
+  again            8 ->   8     +0
+  lips             6 ->   6     +0
+  prick           13 ->  35    -22
+  cockhead        12 ->  15     -3
+  hard            14 ->  16     -2
+
+HIGHER UNDER B
+  and              2 ->   1     +1
+  ear              4 ->   3     +1
+  mouth            9 ->   4     +5
+  neck            16 ->   9     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  and              2 ->   3     -1
+  chest            4 ->   5     -1
+  neck             7 ->  10     -3
+  shoulder         9 ->  12     -3
+  again           11 ->  14     -3
+  heart            8 ->   8     +0
+  mouth            5 ->   6     -1
+
+HIGHER UNDER B
+  lips             3 ->   2     +1
+  ear              1 ->   1     +0
+  own              6 ->   4     +2
+  in              10 ->   7     +3
+  as              13 ->   9     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  and              2 ->   2     +0
+  mouth            3 ->   6     -3
+  cock             4 ->  12     -8
+  crotch           8 ->  21    -13
+  lips             7 ->   9     -2
+  penis            9 ->  18     -9
+  throat          11 ->  14     -3
+
+HIGHER UNDER B
+  ear              1 ->   1     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  own              3 ->   5     -2
+  and              4 ->   4     +0
+  neck             9 ->  12     -3
+  as               8 ->   9     -1
+  hand             6 ->   6     +0
+
+HIGHER UNDER B
+  lips             1 ->   1     +0
+  mouth            2 ->   2     +0
+  chest           16 ->   8     +8
+  in               7 ->   7     +0
+  ear              5 ->   3     +2
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  and              1 ->   4     -3
+  as               7 ->  41    -34
+  dick             6 ->  28    -22
+  for             10 ->  34    -24
+  with            11 ->  27    -16
+  in               8 ->  12     -4
+  s               15 ->  35    -20
+  chest           14 ->  24    -10
+  cheek           13 ->  18     -5
+  crotch          12 ->  13     -1
+
+HIGHER UNDER B
+  ear              2 ->   1     +1
+  mouth            3 ->   2     +1
+  lips             5 ->   3     +2
+  earlobe         37 ->   6    +31
+  ass             19 ->   7    +12
+  thumb           60 ->  14    +46
+  shoulder        20 ->   9    +11
+  tongue          21 ->  10    +11
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  and              1 ->   4     -3
+  own              4 ->  10     -6
+  lips             5 ->  19    -14
+  again            7 ->  55    -48
+  in               8 ->  25    -17
+  with             9 ->  41    -32
+
+HIGHER UNDER B
+  ear              2 ->   1     +1
+  crotch          10 ->   2     +8
+  mouth            3 ->   3     +0
+  manhood         24 ->   6    +18
+  cock             6 ->   5     +1
+  groin           18 ->   7    +11
+  hole            35 ->   9    +26
+  chest           11 ->   8     +3
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  neck             3 ->   3     +0
+  shoulder         4 ->  20    -16
+  mouth            5 ->  18    -13
+  lips             6 ->  17    -11
+  chest            9 ->  14     -5
+  face            12 ->  50    -38
+  throat          14 ->  46    -32
+  for             10 ->  10     +0
+
+HIGHER UNDER B
+  and              1 ->   1     +0
+  ear              2 ->   2     +0
+  before          16 ->   6    +10
+  in              13 ->   4     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  mouth            3 ->   3     +0
+  ears             4 ->   7     -3
+
+HIGHER UNDER B
+  ear              1 ->   1     +0
+  and              2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  again            3 ->   4     -1
+  cock             5 ->   7     -2
+  nipple          17 ->  27    -10
+  as              13 ->  17     -4
+  for             16 ->  18     -2
+
+HIGHER UNDER B
+  and              1 ->   1     +0
+  mouth           11 ->  10     +1
+  lips            14 ->  13     +1
+  dick            12 ->  11     +1
+  own              4 ->   3     +1
+  penis           18 ->  14     +4
+  groin           19 ->  15     +4
+  breast           9 ->   9     +0
+  throat           8 ->   8     +0
+  ear              2 ->   2     +0
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  and              1 ->   2     -1
+  cock             4 ->   8     -4
+  dick             5 ->  14     -9
+  mouth            8 ->  10     -2
+  own              9 ->   9     +0
+  lips             3 ->   4     -1
+  penis            6 ->   6     +0
+  as              11 ->  17     -6
+  now             13 ->  16     -3
+
+HIGHER UNDER B
+  ear              2 ->   1     +1
+  again            7 ->   3     +4
+  to              12 ->   7     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 42 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

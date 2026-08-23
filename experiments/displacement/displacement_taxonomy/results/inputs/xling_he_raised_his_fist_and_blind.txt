@@ -1,0 +1,1764 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He raised his fist and ___
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  punched          1 ->   4     -3
+  hit              3 ->  25    -22
+  said             2 ->   5     -3
+  smashed          4 ->  47    -43
+  slapped          6 -> 143   -137
+  slammed          7 ->  29    -22
+  beat            15 -> 102    -87
+  struck          10 ->  37    -27
+  swung            8 ->  28    -20
+  shook           16 ->  49    -33
+  threw           22 ->  61    -39
+  knocked          9 ->  19    -10
+  roared          21 ->  57    -36
+  was             20 ->  39    -19
+  gave            18 ->  34    -16
+
+HIGHER UNDER B
+  shouted          5 ->   1     +4
+  pointed         13 ->   2    +11
+  made            17 ->   3    +14
+  charged         75 ->   9    +66
+  declared       140 ->  11   +129
+  brought         86 ->  10    +76
+  I               93 ->  15    +78
+  challenged      81 ->  14    +67
+  flexed         144 ->  17   +127
+  prepared        68 ->  12    +56
+  let             51 ->  13    +38
+  bellowed       133 ->  20   +113
+  braced         160 ->  23   +137
+  the             12 ->   6     +6
+  yelled          14 ->   7     +7
+  stepped         39 ->  18    +21
+  stared          37 ->  21    +16
+  glared          49 ->  24    +25
+  took            19 ->  16     +3
+  clenched        28 ->  22     +6
+  looked          11 ->   8     +3
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  declared         1 ->   4     -3
+  said             2 ->   5     -3
+  let              4 ->   7     -3
+  charged          7 ->  16     -9
+  shook            6 ->  12     -6
+  with            10 ->  39    -29
+  announced        8 ->  18    -10
+  threatened      12 ->  29    -17
+  thundered       13 ->  20     -7
+
+HIGHER UNDER B
+  shouted          9 ->   1     +8
+  roared           3 ->   2     +1
+  bellowed        51 ->   6    +45
+  screamed        50 ->   8    +42
+  called          42 ->   9    +33
+  the             61 ->  11    +50
+  yelled           5 ->   3     +2
+  demanded        36 ->  13    +23
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  punched          1 ->   3     -2
+  brought          6 ->  38    -32
+  smashed          4 ->  14    -10
+  slammed          2 ->   8     -6
+  pounded          3 ->   7     -4
+  pointed          5 ->  13     -8
+  knocked          9 ->  12     -3
+  the             14 ->  28    -14
+  tapped          16 ->  31    -15
+  swung           12 ->  18     -6
+  thumped         15 ->  20     -5
+  I               13 ->  16     -3
+  then            11 ->  15     -4
+
+HIGHER UNDER B
+  said            24 ->   1    +23
+  shouted         28 ->   4    +24
+  hit              8 ->   2     +6
+  gave            10 ->   5     +5
+  made            18 ->   9     +9
+  struck           7 ->   6     +1
+  banged          19 ->  10     +9
+  shook           17 ->  11     +6
+  asked          108 ->  17    +91
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  pointed          3 ->   5     -2
+  waved           11 -> 139   -128
+  swung           13 ->  64    -51
+  the             10 ->  60    -50
+  clenched         5 ->  20    -15
+  raised           9 ->  46    -37
+  said             1 ->   1     +0
+  he              14 ->  50    -36
+  threw           17 ->  37    -20
+  made             8 ->  23    -15
+  let              7 ->  13     -6
+  his              6 ->   7     -1
+  slammed         19 ->  31    -12
+  smirked         12 ->  17     -5
+
+HIGHER UNDER B
+  walked          22 ->   3    +19
+  spat            57 ->   8    +49
+  glared          23 ->   6    +17
+  looked           4 ->   4     +0
+  stomped         55 ->  14    +41
+  grinned         74 ->  18    +56
+  continued       56 ->  16    +40
+  swore           33 ->  10    +23
+  stormed        115 ->  29    +86
+  shouted          2 ->   2     +0
+  aimed           44 ->  21    +23
+  gave            16 ->   9     +7
+  stepped         38 ->  19    +19
+  laughed         18 ->  11     +7
+  took            20 ->  12     +8
+  punched         21 ->  15     +6
+  gestured        40 ->  27    +13
+  roared          27 ->  25     +2
+  called          28 ->  26     +2
+  started         32 ->  28     +4
+  yelled          24 ->  24     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  said             1 ->   7     -6
+  threw           15 ->  63    -48
+  I               22 ->  86    -64
+  he              24 ->  96    -72
+  yelled          17 ->  37    -20
+  shook           12 ->  32    -20
+  gave            14 ->  24    -10
+  his             25 ->  39    -14
+  the              3 ->   6     -3
+  swung           23 ->  30     -7
+  waved            6 ->  14     -8
+  called          20 ->  26     -6
+  held            16 ->  20     -4
+
+HIGHER UNDER B
+  let             21 ->  12     +9
+  smiled          18 ->  10     +8
+  started          9 ->   5     +4
+  signaled        71 ->  16    +55
+  walked           7 ->   4     +3
+  looked          13 ->   9     +4
+  shouted          2 ->   1     +1
+  pointed          4 ->   2     +2
+  began            5 ->   3     +2
+  turned          43 ->  17    +26
+  then            10 ->   8     +2
+  stood           44 ->  18    +26
+  made            19 ->  15     +4
+  stepped         84 ->  21    +63
+  gestured        31 ->  19    +12
+  spat            34 ->  22    +12
+  continued       38 ->  23    +15
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  said             3 ->  20    -17
+  the              2 ->   3     -1
+  pointed          5 ->  19    -14
+  waved            6 ->  28    -22
+  then            10 ->  31    -21
+  his              9 ->  17     -8
+  called           4 ->   7     -3
+  saluted         14 ->  82    -68
+  made            12 ->  16     -4
+  shook           16 ->  32    -16
+  gave            11 ->  14     -3
+  clenched        15 ->  29    -14
+  smiled          21 -> 103    -82
+  turned          19 ->  42    -23
+  took            22 ->  33    -11
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  bellowed        18 ->   4    +14
+  roared           7 ->   2     +5
+  let              8 ->   5     +3
+  screamed        17 ->   6    +11
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  said             4 ->   7     -3
+  shook            5 ->  10     -5
+  the              7 ->  14     -7
+  pointed          3 ->   6     -3
+  then            13 ->  24    -11
+  cried           23 ->  47    -24
+  brought         21 ->  32    -11
+  struck          22 ->  34    -12
+  made            15 ->  28    -13
+  called          19 ->  25     -6
+  gave            18 ->  21     -3
+  a               24 ->  37    -13
+  screamed        10 ->  12     -2
+  began            8 ->   9     -1
+  waved           11 ->  13     -2
+  his             12 ->  16     -4
+  started         17 ->  19     -2
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  roared          14 ->   2    +12
+  bellowed        20 ->   4    +16
+  pounded          6 ->   5     +1
+  declared        29 ->  11    +18
+  glared          53 ->  20    +33
+  smashed         41 ->  17    +24
+  saluted         39 ->  18    +21
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  punched          2 ->  26    -24
+  smashed          6 ->  19    -13
+  smacked         22 ->  81    -59
+  slapped          8 ->  27    -19
+  screamed         9 ->  28    -19
+  said             5 ->   6     -1
+  struck          10 ->  20    -10
+  hit             11 ->  21    -10
+  slammed          4 ->   4     +0
+  yelled          15 ->  17     -2
+  it              30 ->  30     +0
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  pointed          3 ->   2     +1
+  clenched        20 ->   5    +15
+  waved           19 ->   7    +12
+  pounded          7 ->   3     +4
+  looked          28 ->  12    +16
+  stared          40 ->  29    +11
+  I               24 ->  13    +11
+  roared          16 ->   8     +8
+  made            23 ->  18     +5
+  called          21 ->  16     +5
+  then            29 ->  24     +5
+  shook           26 ->  22     +4
+  his             27 ->  23     +4
+  gave            13 ->   9     +4
+  let             18 ->  14     +4
+  started         25 ->  25     +0
+  brought         14 ->  11     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  punched          1 ->   7     -6
+  said             2 ->   9     -7
+  yelled           8 ->  22    -14
+  smashed         11 ->  41    -30
+  hit              6 ->  11     -5
+  beat            13 ->  38    -25
+  pounded         16 ->  48    -32
+  waved           19 ->  61    -42
+  brought          9 ->  10     -1
+  struck           4 ->   5     -1
+  slammed         10 ->  12     -2
+  cried           22 ->  33    -11
+  then            15 ->  21     -6
+  started         17 ->  20     -3
+  began           18 ->  23     -5
+  she             27 ->  30     -3
+  swung           20 ->  24     -4
+
+HIGHER UNDER B
+  shouted          5 ->   1     +4
+  let             29 ->   3    +26
+  gave            23 ->   8    +15
+  the              3 ->   2     +1
+  I               12 ->   6     +6
+  took            26 ->  13    +13
+  screamed        33 ->  16    +17
+  shook            7 ->   4     +3
+  knocked         24 ->  15     +9
+  pointed         14 ->  14     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  said             2 ->   2     +0
+  yelled           4 ->  13     -9
+  waved           10 ->  40    -30
+  the              3 ->   4     -1
+  then            13 ->  22     -9
+  punched          9 ->  14     -5
+  his             12 ->  15     -3
+  clenched        23 ->  32     -9
+  she             24 ->  33     -9
+  held            16 ->  21     -5
+  pointed          5 ->   6     -1
+  roared          17 ->  20     -3
+  began           22 ->  25     -3
+  a               20 ->  23     -3
+  made            15 ->  17     -2
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  let             19 ->   7    +12
+  gave             8 ->   3     +5
+  slammed         18 ->   9     +9
+  struck          28 ->  12    +16
+  I                7 ->   5     +2
+  took            32 ->  19    +13
+  hit             26 ->  16    +10
+  screamed        11 ->  10     +1
+  it              21 ->  18     +3
+  brought         14 ->  11     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  the              2 ->  17    -15
+  smashed          6 ->  60    -54
+  swung            5 ->  45    -40
+  his              3 ->   8     -5
+  I                9 ->  68    -59
+  struck           7 ->  22    -15
+  hit             10 ->  28    -18
+  threw            8 ->  25    -17
+  punched         15 -> 124   -109
+  then            11 ->  21    -10
+  it              17 ->  87    -70
+  slammed         16 ->  38    -22
+  he              22 ->  39    -17
+  threatened      20 ->  33    -13
+  swore           14 ->  19     -5
+  cursed          23 ->  26     -3
+  began           25 ->  30     -5
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  said             4 ->   2     +2
+  cried           50 ->   4    +46
+  shook           21 ->   3    +18
+  raised          39 ->   5    +34
+  called          32 ->   6    +26
+  made            24 ->   7    +17
+  smiled         132 ->  14   +118
+  walked          85 ->  18    +67
+  waved           37 ->  13    +24
+  held            44 ->  20    +24
+  screamed        29 ->  15    +14
+  was             27 ->  16    +11
+  pointed         18 ->  10     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  punched          1 ->  29    -28
+  shouted          2 ->   7     -5
+  slammed          4 ->  32    -28
+  struck           6 ->  35    -29
+  smashed          8 -> 110   -102
+  roared          10 -> 126   -116
+  sent             9 -> 114   -105
+  said             5 ->  16    -11
+  aimed           20 -> 131   -111
+  charged         22 -> 109    -87
+  a               17 ->  37    -20
+  his             24 ->  59    -35
+  unleashed       30 -> 101    -71
+  the              3 ->   9     -6
+  hit             27 ->  50    -23
+  yelled          28 ->  51    -23
+  knocked         19 ->  26     -7
+  fired           23 ->  33    -10
+  was             29 ->  41    -12
+  slapped         16 ->  23     -7
+  made            12 ->  14     -2
+  pointed          7 ->  13     -6
+
+HIGHER UNDER B
+  kicked          11 ->   1    +10
+  raised          48 ->   3    +45
+  threw           21 ->   2    +19
+  pulled          39 ->   4    +35
+  then            36 ->   5    +31
+  waved           25 ->   6    +19
+  let             14 ->   8     +6
+  tapped         136 ->  18   +118
+  stood          104 ->  19    +85
+  pushed          13 ->  10     +3
+  laughed        133 ->  21   +112
+  ran            102 ->  24    +78
+  he              32 ->  15    +17
+  turned          40 ->  20    +20
+  stepped         42 ->  22    +20
+  shot            18 ->  12     +6
+  swung           15 ->  11     +4
+  shook           26 ->  17     +9
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  said             2 ->   8     -6
+  pointed          5 ->  26    -21
+  pumped          10 ->  51    -41
+  the              6 ->  13     -7
+  waved           13 ->  25    -12
+  his              7 ->  14     -7
+  he              20 ->  36    -16
+  held            21 ->  39    -18
+  then            17 ->  27    -10
+  saluted         18 ->  21     -3
+  looked          15 ->  20     -5
+  made            16 ->  19     -3
+  I               24 ->  24     +0
+  cried           11 ->  12     -1
+  gave             8 ->  11     -3
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  screamed         4 ->   2     +2
+  let             23 ->   4    +19
+  chanted         14 ->   5     +9
+  roared          26 ->   6    +20
+  bellowed        35 ->   9    +26
+  yelled           3 ->   3     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  said             2 ->  12    -10
+  pointed          3 ->  18    -15
+  the              5 ->  37    -32
+  roared           7 ->  25    -18
+  walked          15 -> 133   -118
+  hit             14 ->  93    -79
+  punched          6 ->  11     -5
+  his             12 ->  40    -28
+  made            17 ->  54    -37
+  turned          21 ->  75    -54
+  shook           20 ->  58    -38
+  looked          19 ->  41    -22
+  then            11 ->  22    -11
+  pounded         22 ->  33    -11
+  started         24 ->  36    -12
+  gave            23 ->  24     -1
+  took            16 ->  16     +0
+
+HIGHER UNDER B
+  slammed         28 ->   2    +26
+  charged         26 ->   5    +21
+  swung            9 ->   4     +5
+  raised          10 ->   6     +4
+  let             39 ->   7    +32
+  clenched        25 ->   8    +17
+  shouted          1 ->   1     +0
+  gestured       102 ->  14    +88
+  aimed           70 ->  15    +55
+  tapped         123 ->  19   +104
+  prepared        78 ->  20    +58
+  began           18 ->  10     +8
+  knocked         37 ->  17    +20
+  waved           40 ->  21    +19
+  struck           4 ->   3     +1
+  threw           13 ->  13     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  said             1 ->   3     -2
+  shouted          2 ->   4     -2
+  the              4 ->  17    -13
+  yelled           5 ->  16    -11
+  cried            6 ->  13     -7
+  his             12 ->  39    -27
+  pointed          8 ->  20    -12
+  gave            11 ->  23    -12
+  made            13 ->  24    -11
+  then            15 ->  25    -10
+  I               21 ->  36    -15
+  hit              7 ->  11     -4
+  swore           19 ->  21     -2
+  roared          20 ->  26     -6
+
+HIGHER UNDER B
+  struck           3 ->   1     +2
+  knocked         14 ->   2    +12
+  slammed         29 ->   5    +24
+  clenched        22 ->   6    +16
+  declared        18 ->   8    +10
+  smashed         17 ->   9     +8
+  brought         42 ->  14    +28
+  shook            9 ->   7     +2
+  broke           48 ->  18    +30
+  asked           32 ->  15    +17
+  began           16 ->  12     +4
+  punched         10 ->  10     +0
+  started         33 ->  19    +14
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  struck           2 ->   7     -5
+  swung            4 ->  17    -13
+  hit              5 ->  13     -8
+  then             9 ->  31    -22
+  the              7 ->  14     -7
+  said            10 ->  28    -18
+  clenched        16 ->  29    -13
+  it              19 ->  43    -24
+  aimed           14 ->  15     -1
+  made            20 ->  59    -39
+  was              6 ->   6     +0
+  took            22 ->  54    -32
+  began           18 ->  23     -5
+  he              23 -> 107    -84
+  smashed          8 ->   8     +0
+
+HIGHER UNDER B
+  punched          1 ->   1     +0
+  shouted         21 ->   4    +17
+  prepared        11 ->   3     +8
+  brought         15 ->   5    +10
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  smashed          1 ->  37    -36
+  punched          2 ->  12    -10
+  slammed          3 ->  62    -59
+  hit              5 ->  26    -21
+  threw           10 ->  52    -42
+  said             8 ->  25    -17
+  was              6 ->  10     -4
+  shouted         11 ->  20     -9
+  knocked          9 ->  13     -4
+  waved           16 ->  83    -67
+  beat            19 ->  65    -46
+  gave            18 ->  41    -23
+  swung            7 ->   8     -1
+  clenched        15 ->  31    -16
+
+HIGHER UNDER B
+  brought         20 ->   1    +19
+  pointed         14 ->   3    +11
+  aimed           21 ->   5    +16
+  a               28 ->   7    +21
+  made            13 ->   4     +9
+  roared          33 ->   9    +24
+  the             12 ->   6     +6
+  stepped         60 ->  15    +45
+  turned          61 ->  16    +45
+  struck           4 ->   2     +2
+  his             29 ->  14    +15
+  yelled          38 ->  18    +20
+  it              31 ->  17    +14
+  looked          17 ->  11     +6
+  then            22 ->  19     +3
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  smashed          3 ->  12     -9
+  punched          2 ->   4     -2
+  hit              8 ->  32    -24
+  swung           10 ->  42    -32
+  banged          15 ->  80    -65
+  smacked         12 ->  30    -18
+  clenched         9 ->  13     -4
+  he              21 ->  73    -52
+  threw           17 ->  28    -11
+  slapped         19 ->  43    -24
+  his             11 ->  14     -3
+  knocked         14 ->  21     -7
+  brought         18 ->  22     -4
+  said            16 ->  17     -1
+  then            20 ->  25     -5
+
+HIGHER UNDER B
+  pointed          7 ->   1     +6
+  called          56 ->   8    +48
+  the              6 ->   5     +1
+  roared          35 ->   9    +26
+  waved           38 ->  11    +27
+  declared        72 ->  16    +56
+  hammered        25 ->  10    +15
+  shouted         13 ->   7     +6
+  fired           42 ->  18    +24
+  gave            23 ->  15     +8
+  struck           4 ->   3     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  shook            4 ->   9     -5
+  gave             5 ->  13     -8
+  slapped         25 ->  51    -26
+  punched          7 ->   8     -1
+  raised          13 ->  24    -11
+  threw           11 ->  18     -7
+  swung           19 ->  29    -10
+  told            27 ->  32     -5
+  stood           26 ->  28     -2
+  his              9 ->  10     -1
+  called          22 ->  26     -4
+
+HIGHER UNDER B
+  shouted          2 ->   1     +1
+  asked           52 ->  22    +30
+  shot            23 ->  15     +8
+  I               24 ->  17     +7
+  he               8 ->   4     +4
+  began           12 ->   6     +6
+  clenched        36 ->  23    +13
+  ____            49 ->  27    +22
+  the              3 ->   3     +0
+  started         20 ->  19     +1
+  made            15 ->  11     +4
+  a               28 ->  21     +7
+  struck          16 ->  14     +2
+  held            10 ->   7     +3
+  hit             17 ->  16     +1
+  waved           14 ->  12     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  ____             2 ->  13    -11
+  shouted          1 ->   1     +0
+  struck           6 ->  21    -15
+  ______          14 ->  35    -21
+  cried           13 ->  28    -15
+  ________        15 ->  37    -22
+  made             5 ->   5     +0
+  swung           21 ->  34    -13
+
+HIGHER UNDER B
+  gave             3 ->   2     +1
+  pounded          9 ->   3     +6
+  the              4 ->   4     +0
+  smashed         19 ->  11     +8
+  she             31 ->  12    +19
+  slammed         38 ->  14    +24
+  bellowed        12 ->   8     +4
+  brought         27 ->  16    +11
+  then            11 ->   9     +2
+  delivered       41 ->  20    +21
+  they            29 ->  19    +10
+  took            36 ->  22    +14
+  clenched        30 ->  23     +7
+  a               16 ->  15     +1
+  screamed        10 ->  10     +0
+  let             18 ->  17     +1
+  said             8 ->   7     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  pounded          8 ->  51    -43
+  a               17 ->  52    -35
+  his             13 ->  25    -12
+  bellowed        26 ->  47    -21
+  clenched        20 ->  28     -8
+  threw           15 ->  19     -4
+  brought         24 ->  35    -11
+  smashed         27 ->  36     -9
+  pointed          6 ->  11     -5
+  yelled          12 ->  13     -1
+  swung           21 ->  23     -2
+  knocked          7 ->   9     -2
+  slammed          9 ->  10     -1
+  punched          1 ->   3     -2
+
+HIGHER UNDER B
+  struck           4 ->   1     +3
+  shouted          2 ->   2     +0
+  said            14 ->   5     +9
+  gave            11 ->   4     +7
+  began           10 ->   8     +2
+  made            22 ->  12    +10
+  drove           29 ->  14    +15
+  screamed        30 ->  18    +12
+
+8 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  knocked          1 ->  23    -22
+  punched          3 ->  49    -46
+  struck           6 ->  44    -38
+  pointed          9 ->  26    -17
+  hit             11 ->  75    -64
+  shook           12 -> 113   -101
+  smacked         13 ->  78    -65
+  pounded         15 ->  87    -72
+  made            17 ->  58    -41
+  a               19 ->  36    -17
+  it              23 -> 117    -94
+  looked          22 ->  57    -35
+  tapped          25 -> 106    -81
+  gave            26 ->  90    -64
+  his             18 ->  22     -4
+  swung           20 ->  30    -10
+  took            21 ->  28     -7
+  was             24 ->  24     +0
+
+HIGHER UNDER B
+  brought          7 ->   1     +6
+  felt            27 ->   2    +25
+  shouted         16 ->   3    +13
+  roared          28 ->   5    +23
+  blasted         98 ->   6    +92
+  yelled          30 ->   7    +23
+  unleashed      145 ->  12   +133
+  charged         82 ->  14    +68
+  shot            48 ->  15    +33
+  then            10 ->  10     +0
+  let             14 ->  13     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  said             2 ->   3     -1
+  kicked           6 ->  27    -21
+  threw            8 ->  34    -26
+  pointed          4 ->  14    -10
+  struck           3 ->   6     -3
+  smashed         15 ->  58    -43
+  cried           11 ->  26    -15
+  fired           13 ->  33    -20
+  yelled           5 ->  10     -5
+  started         21 ->  29     -8
+  swung           18 ->  21     -3
+  called          19 ->  20     -1
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  the              7 ->   2     +5
+  shook           28 ->   4    +24
+  let             32 ->   7    +25
+  his             12 ->   5     +7
+  a               33 ->  13    +20
+  waved           17 ->   8     +9
+  then            22 ->  11    +11
+  stepped         85 ->  19    +66
+  smiled          53 ->  18    +35
+  made            16 ->  15     +1
+  began           10 ->   9     +1
+  gave            20 ->  17     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  said             2 ->   5     -3
+  pointed          6 ->  23    -17
+  his              7 ->  20    -13
+  punched          9 ->  31    -22
+  looked          26 ->  43    -17
+  walked          20 ->  36    -16
+  called          28 ->  44    -16
+  threw           16 ->  35    -19
+  hit             23 ->  37    -14
+  waved           14 ->  24    -10
+  raised          19 ->  28     -9
+  gave             5 ->   7     -2
+  struck          27 ->  33     -6
+  smashed         29 ->  29     +0
+  then            22 ->  25     -3
+  cried           12 ->  14     -2
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  the              3 ->   2     +1
+  I               25 ->   6    +19
+  let             10 ->   4     +6
+  slammed         21 ->   9    +12
+  cheered         79 ->  22    +57
+  roared          24 ->  12    +12
+  yelled           4 ->   3     +1
+  shook           17 ->  11     +6
+  declared        35 ->  18    +17
+  pounded         31 ->  17    +14
+  clenched        18 ->  15     +3
+  smiled          37 ->  21    +16
+  began           11 ->  10     +1
+  it              30 ->  19    +11
+  screamed         8 ->   8     +0
+  made            13 ->  13     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  shouted          1 ->   2     -1
+  said             4 ->   6     -2
+  pounded         14 ->  20     -6
+  exclaimed       12 ->  13     -1
+  then            20 ->  22     -2
+  charged         21 ->  24     -3
+  the              7 ->  10     -3
+  roared           5 ->   5     +0
+  screamed        15 ->  16     -1
+  struck          10 ->  11     -1
+
+HIGHER UNDER B
+  smashed          3 ->   3     +0
+  slammed          6 ->   4     +2
+  punched         11 ->   7     +4
+  brought         19 ->  14     +5
+  shook           13 ->  12     +1
+  delivered       17 ->  15     +2
+  slapped         23 ->  19     +4
+  let              9 ->   8     +1
+  declared         2 ->   1     +1
+  took            18 ->  18     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  slammed          2 ->  37    -35
+  smashed          9 ->  61    -52
+  brought          5 ->  18    -13
+  pounded          8 ->  30    -22
+  gave             6 ->  13     -7
+  clenched         7 ->  16     -9
+  was             17 ->  28    -11
+  knocked         10 ->  17     -7
+  prepared        24 ->  40    -16
+  said            15 ->  19     -4
+  hit             16 ->  21     -5
+  it              22 ->  22     +0
+
+HIGHER UNDER B
+  let             20 ->   2    +18
+  punched          1 ->   1     +0
+  shouted         14 ->   4    +10
+  the              3 ->   3     +0
+  pointed         12 ->   6     +6
+  shook           13 ->   7     +6
+  flexed          56 ->  14    +42
+  roared          25 ->  10    +15
+  began           18 ->   8    +10
+  called          43 ->  20    +23
+  made            23 ->  11    +12
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  said             1 ->   2     -1
+  struck           2 ->   3     -1
+  cursed           8 ->  38    -30
+  he              17 ->  36    -19
+  beat            25 ->  52    -27
+  pointed          6 ->  19    -13
+  hit             16 ->  27    -11
+  the             11 ->  23    -12
+  waved           22 ->  31     -9
+  gave            13 ->  25    -12
+  his              7 ->  12     -5
+  punched          5 ->   9     -4
+
+HIGHER UNDER B
+  swung            9 ->   4     +5
+  raised          12 ->   5     +7
+  pounded         19 ->   7    +12
+  stood           36 ->  11    +25
+  shouted          3 ->   1     +2
+  bellowed        57 ->  17    +40
+  declared        20 ->  10    +10
+  spoke           38 ->  24    +14
+  made            10 ->   8     +2
+  roared          37 ->  26    +11
+  yelled          27 ->  15    +12
+  took            26 ->  21     +5
+  began           15 ->  13     +2
+  knocked         21 ->  16     +5
+  kicked          24 ->  20     +4
+  shook           14 ->  14     +0
+  called          23 ->  22     +1
+  started         18 ->  18     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  brought          7 ->  28    -21
+  slammed          2 ->   7     -5
+  shouted          5 ->  15    -10
+  smashed          8 ->  17     -9
+  yelled          13 ->  30    -17
+  threw           23 ->  50    -27
+  pointed         10 ->  19     -9
+  began           16 ->  26    -10
+  his             24 ->  34    -10
+  shook           17 ->  23     -6
+  let             19 ->  24     -5
+  clenched        29 ->  35     -6
+  was             11 ->  14     -3
+  prepared        15 ->  16     -1
+  said             1 ->   3     -2
+  the              9 ->   9     +0
+
+HIGHER UNDER B
+  punched          4 ->   1     +3
+  struck           3 ->   2     +1
+  hit             14 ->   4    +10
+  I               18 ->   6    +12
+  aimed           30 ->  11    +19
+  gave            20 ->   8    +12
+  made            25 ->  10    +15
+  knocked         26 ->  13    +13
+  swung            6 ->   5     +1
+  tried           35 ->  25    +10
+  waved           28 ->  22     +6
+  looked          22 ->  18     +4
+  then            12 ->  12     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  hit              8 ->  11     -3
+  the              6 ->   9     -3
+  said             7 ->   8     -1
+  punched          2 ->   3     -1
+  his             19 ->  23     -4
+  yelled          16 ->  20     -4
+  pointed          5 ->   5     +0
+  brought         12 ->  12     +0
+  he              24 ->  29     -5
+  made            13 ->  14     -1
+  it              20 ->  21     -1
+  banged          25 ->  27     -2
+  struck           4 ->   4     +0
+
+HIGHER UNDER B
+  slammed          1 ->   1     +0
+  shouted          3 ->   2     +1
+  knocked         10 ->   6     +4
+  let             18 ->  13     +5
+  bellowed        26 ->  22     +4
+  took            31 ->  25     +6
+  clenched        22 ->  19     +3
+  roared          28 ->  26     +2
+  then            21 ->  18     +3
+  pounded          9 ->   7     +2
+  looked          17 ->  17     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  I               10 ->  10     +0
+  the              2 ->   3     -1
+  made            12 ->  14     -2
+  knocked         15 ->  17     -2
+  his             11 ->  13     -2
+  then             5 ->   6     -1
+  shook            7 ->   8     -1
+  held            17 ->  21     -4
+  screamed        22 ->  25     -3
+  smashed         29 ->  29     +0
+  looked          24 ->  27     -3
+  roared          26 ->  28     -2
+
+HIGHER UNDER B
+  punched          1 ->   1     +0
+  shouted          3 ->   2     +1
+  brought          6 ->   5     +1
+  slammed          4 ->   4     +0
+  pounded         20 ->  16     +4
+  clenched        21 ->  19     +2
+  pointed          8 ->   7     +1
+  yelled          18 ->  18     +0
+  gave            23 ->  22     +1
+  started         28 ->  26     +2
+  said            13 ->  11     +2
+  let             14 ->  12     +2
+  began           27 ->  24     +3
+  hit             16 ->  15     +1
+  took            25 ->  23     +2
+  struck           9 ->   9     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  hit              7 ->  25    -18
+  the              3 ->  10     -7
+  swung           14 ->  57    -43
+  threw           20 ->  41    -21
+  it              15 ->  28    -13
+  took            23 ->  38    -15
+  charged         25 ->  47    -22
+  said             5 ->   8     -3
+  struck           6 ->   9     -3
+  his             11 ->  20     -9
+  looked          26 ->  55    -29
+  knocked          9 ->  15     -6
+  was             24 ->  26     -2
+  pointed         16 ->  19     -3
+  began           19 ->  21     -2
+  then            12 ->  17     -5
+  started         21 ->  22     -1
+
+HIGHER UNDER B
+  pounded         10 ->   3     +7
+  slammed          4 ->   2     +2
+  punched          1 ->   1     +0
+  smashed          8 ->   4     +4
+  brought         13 ->   6     +7
+  pumped          46 ->   7    +39
+  bellowed        42 ->  13    +29
+  drove           38 ->  14    +24
+  let             17 ->  11     +6
+  gave            22 ->  12    +10
+  yelled          18 ->  16     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  pointed          3 ->   8     -5
+  struck           1 ->   2     -1
+  fired           12 ->  38    -26
+  let             22 ->  47    -25
+  threw           11 ->  25    -14
+  looked          26 ->  49    -23
+  began            9 ->  20    -11
+  shot            25 ->  43    -18
+  smashed         18 ->  28    -10
+  the              6 ->  12     -6
+  pounded         24 ->  36    -12
+  beat            13 ->  18     -5
+  gave            23 ->  26     -3
+  said             4 ->   5     -1
+  then            14 ->  17     -3
+  waved           19 ->  19     +0
+
+HIGHER UNDER B
+  punched         17 ->   3    +14
+  shouted          2 ->   1     +1
+  smiled          15 ->   7     +8
+  hit              5 ->   4     +1
+  aimed           10 ->   6     +4
+  shook           31 ->  11    +20
+  clenched        51 ->  16    +35
+  slapped         38 ->  15    +23
+  held            43 ->  23    +20
+  knocked         36 ->  21    +15
+  slammed         21 ->  13     +8
+  raised          33 ->  24     +9
+  made            16 ->  14     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  slammed          1 ->   3     -2
+  smashed          5 ->  18    -13
+  punched          2 ->   2     +0
+  hit              4 ->   9     -5
+  shook            7 ->  13     -6
+  looked          17 ->  22     -5
+  then            18 ->  23     -5
+  was             21 ->  25     -4
+  made            16 ->  20     -4
+
+HIGHER UNDER B
+  let             14 ->   7     +7
+  clenched        25 ->  17     +8
+  shouted         24 ->  14    +10
+  brought          9 ->   4     +5
+  started         15 ->  10     +5
+  waved           22 ->  15     +7
+  squeezed        44 ->  30    +14
+  began           23 ->  19     +4
+  I               12 ->  11     +1
+  struck           3 ->   1     +2
+  pressed         29 ->  26     +3
+  prepared        33 ->  27     +6
+  pointed          8 ->   6     +2
+  swung           28 ->  28     +0
+  the             10 ->   8     +2
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  knocked          1 ->   2     -1
+  smashed         12 ->  13     -1
+  brought          3 ->   5     -2
+  slammed          5 ->   6     -1
+  hit              7 ->  11     -4
+  let             18 ->  22     -4
+  slapped         19 ->  21     -2
+  pounded         15 ->  16     -1
+
+HIGHER UNDER B
+  shook           11 ->   8     +3
+  shouted          9 ->   7     +2
+  I               10 ->  10     +0
+  said            13 ->  12     +1
+  punched          2 ->   1     +1
+  the              6 ->   3     +3
+  gave            17 ->  15     +2
+  looked          24 ->  20     +4
+  started         21 ->  19     +2
+  struck           4 ->   4     +0
+  made            20 ->  18     +2
+  then            14 ->  14     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  slammed          1 ->  25    -24
+  punched          2 ->  28    -26
+  brought          6 ->  35    -29
+  pounded         11 ->  61    -50
+  knocked          9 ->  26    -17
+  smashed         12 ->  59    -47
+  struck           7 ->  17    -10
+  hit             13 ->  37    -24
+  pointed         10 ->  19     -9
+  swung           16 ->  27    -11
+  banged          26 -> 130   -104
+  then            17 ->  21     -4
+  gave             8 ->   9     -1
+  it              22 ->  33    -11
+  waved           24 ->  38    -14
+  looked          23 ->  23     +0
+
+HIGHER UNDER B
+  shouted          5 ->   1     +4
+  began           21 ->   4    +17
+  walked         110 ->  10   +100
+  took            25 ->   6    +19
+  charged         72 ->  13    +59
+  marched        150 ->  14   +136
+  was             36 ->  11    +25
+  yelled          20 ->   7    +13
+  started         35 ->  12    +23
+  said            15 ->   5    +10
+  cried           48 ->  20    +28
+  let             14 ->   8     +6
+  made            27 ->  18     +9
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  shook            1 ->   4     -3
+  she             18 ->  40    -22
+  brought          3 ->   6     -3
+  I               12 ->  23    -11
+  banged          10 ->  18     -8
+  hit              8 ->  17     -9
+  the              6 ->   7     -1
+  then            11 ->  19     -8
+  knocked          7 ->   9     -2
+  smacked         26 ->  48    -22
+  pounded          2 ->   2     +0
+  thumped         24 ->  34    -10
+  his             21 ->  25     -4
+  slammed          4 ->   5     -1
+  swung           23 ->  29     -6
+  pointed         17 ->  22     -5
+  struck           9 ->  10     -1
+  held            19 ->  20     -1
+
+HIGHER UNDER B
+  shouted         20 ->   3    +17
+  yelled          34 ->  11    +23
+  roared          33 ->  12    +21
+  punched          5 ->   1     +4
+  said            25 ->  13    +12
+  gave            13 ->   8     +5
+  began           16 ->  14     +2
+  let             15 ->  15     +0
+  started         22 ->  21     +1
+  smashed         28 ->  24     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  punched          2 ->  15    -13
+  said             3 ->  24    -21
+  hit              4 ->  39    -35
+  smashed          7 ->  21    -14
+  waved            9 ->  29    -20
+  knocked         16 ->  32    -16
+  was             24 -> 111    -87
+  his             15 ->  28    -13
+  struck           8 ->  10     -2
+  looked          25 ->  45    -20
+  threw           19 ->  25     -6
+  pounded         18 ->  22     -4
+  made            20 ->  26     -6
+  pointed          6 ->   7     -1
+
+HIGHER UNDER B
+  roared          12 ->   1    +11
+  let             27 ->   4    +23
+  yelled          10 ->   3     +7
+  the             11 ->   6     +5
+  brought         34 ->  14    +20
+  bellowed       110 ->  19    +91
+  screamed        22 ->   9    +13
+  slammed          5 ->   5     +0
+  swore           50 ->  17    +33
+  shook           23 ->  11    +12
+  a               32 ->  18    +14
+  gave            14 ->   8     +6
+  cried           36 ->  20    +16
+  then            21 ->  13     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  yelled           4 ->  44    -40
+  punched         12 -> 147   -135
+  cried           10 ->  48    -38
+  shook            8 ->  30    -22
+  screamed        11 ->  43    -32
+  struck           9 ->  25    -16
+  pounded          6 ->  20    -14
+  knocked         18 -> 126   -108
+  roared          13 ->  24    -11
+  brought         19 ->  49    -30
+  pointed          3 ->   9     -6
+
+HIGHER UNDER B
+  cheered         20 ->   2    +18
+  declared        36 ->   6    +30
+  shouted          1 ->   1     +0
+  called          16 ->   8     +8
+  exclaimed       80 ->  12    +68
+  gave             7 ->   4     +3
+  made            14 ->   7     +7
+  vowed           64 ->  17    +47
+  I               41 ->  13    +28
+  hurled          46 ->  16    +30
+  saluted         52 ->  18    +34
+  cursed          54 ->  19    +35
+  nodded          47 ->  22    +25
+  waved            5 ->   5     +0
+  walked          43 ->  23    +20
+  began           15 ->  10     +5
+  the             17 ->  11     +6
+  then            22 ->  14     +8
+  he              21 ->  15     +6
+  took            29 ->  21     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  punched          1 ->  10     -9
+  slammed          4 ->  14    -10
+  brought          3 ->  11     -8
+  swung            8 ->  36    -28
+  the              2 ->   5     -3
+  struck           6 ->   9     -3
+  smashed          9 ->  25    -16
+  knocked          5 ->   6     -1
+  threw           23 ->  51    -28
+  then            11 ->  23    -12
+  was             26 ->  39    -13
+  it              27 ->  35     -8
+  let             14 ->  18     -4
+  pounded         16 ->  19     -3
+  started         21 ->  27     -6
+  a               19 ->  26     -7
+  his             18 ->  22     -4
+  I               17 ->  20     -3
+
+HIGHER UNDER B
+  shouted         15 ->   1    +14
+  said            10 ->   2     +8
+  shook           12 ->   3     +9
+  pointed         24 ->   4    +20
+  cried           35 ->  21    +14
+  yelled          29 ->  16    +13
+  roared          39 ->  24    +15
+  made            28 ->  13    +15
+  gave            20 ->  12     +8
+  began           13 ->   8     +5
+  hit              7 ->   7     +0
+  looked          22 ->  15     +7
+  clenched        25 ->  17     +8
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  shouted          1 ->  17    -16
+  said             6 ->  14     -8
+  yelled          16 ->  55    -39
+  swung           17 ->  28    -11
+  shook            8 ->  11     -3
+  slammed          4 ->   6     -2
+  gave             7 ->   7     +0
+  began           23 ->  35    -12
+  waved           21 ->  29     -8
+  his             22 ->  25     -3
+  looked          25 ->  26     -1
+  held            24 ->  24     +0
+
+HIGHER UNDER B
+  knocked          3 ->   1     +2
+  pounded          5 ->   3     +2
+  punched          2 ->   2     +0
+  banged          12 ->   4     +8
+  brought         11 ->   5     +6
+  tapped          63 ->  20    +43
+  hammered        33 ->  19    +14
+  struck          13 ->  10     +3
+  let             15 ->  12     +3
+  the             14 ->  13     +1
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  punched          1 ->  70    -69
+  pointed          2 ->  15    -13
+  slammed          7 ->  34    -27
+  pounded          6 ->  14     -8
+  knocked         14 -> 110    -96
+  gave            10 ->  39    -29
+  struck           3 ->   9     -6
+  smashed         12 ->  37    -25
+  slapped         17 ->  50    -33
+  brought          5 ->   8     -3
+  tapped          15 ->  33    -18
+  thumped         25 -> 143   -118
+  she             26 -> 121    -95
+  said             9 ->  13     -4
+  smacked         27 -> 127   -100
+  made            16 ->  19     -3
+  clenched        19 ->  26     -7
+  let             23 ->  24     -1
+  hit             20 ->  21     -1
+  a               24 ->  25     -1
+  he              28 ->  32     -4
+
+HIGHER UNDER B
+  the              4 ->   1     +3
+  his             22 ->   2    +20
+  yelled          44 ->   7    +37
+  looked          41 ->  10    +31
+  it              18 ->   5    +13
+  I               11 ->   4     +7
+  bellowed        37 ->  12    +25
+  then            21 ->   6    +15
+  shook            8 ->   3     +5
+  screamed        75 ->  18    +57
+  squeezed        55 ->  20    +35
+  waved           42 ->  16    +26
+  swung           33 ->  17    +16
+  held            30 ->  22     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  shouted          1 -> 126   -125
+  gave             3 -> 134   -131
+  struck           4 -> 199   -195
+  the              2 ->  15    -13
+  pointed          5 -> 165   -160
+  said             6 -> 106   -100
+  yelled           7 -> 152   -145
+  punched          8 -> 216   -208
+  brought          9 -> 174   -165
+  swung           10 -> 192   -182
+  threw           11 -> 145   -134
+  called          12 -> 149   -137
+  made            13 -> 143   -130
+  hit             14 -> 135   -121
+  roared          15 -> 125   -110
+  began           16 -> 132   -116
+  waved           17 -> 207   -190
+  cried           18 -> 139   -121
+  smashed         19 -> 214   -195
+  shook           20 -> 195   -175
+  declared        22 -> 201   -179
+  then            21 ->  84    -63
+  knocked         23 -> 212   -189
+  proclaimed      25 -> 187   -162
+  bellowed        24 ->  88    -64
+  screamed        27 -> 138   -111
+  let             29 -> 102    -73
+  his             26 ->  66    -40
+
+HIGHER UNDER B
+  The            135 ->   1   +134
+  He             136 ->   2   +134
+  I               28 ->   3    +25
+  It             141 ->   4   +137
+  There          168 ->   5   +163
+  Butch          187 ->   6   +181
+  This           182 ->   7   +175
+  His            137 ->   8   +129
+  That           203 ->   9   +194
+  words          133 ->  10   +123
+  What           179 ->  11   +168
+  Butters        237 ->  12   +225
+  When           169 ->  13   +156
+  Butcher        162 ->  14   +148
+  They           160 ->  17   +143
+  he              46 ->  16    +30
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  began            5 ->   7     -2
+  his             17 ->  77    -60
+  then            20 ->  60    -40
+  hit             14 ->  17     -3
+  struck           1 ->   3     -2
+  pointed          7 ->   9     -2
+  threw            8 ->  12     -4
+  punched          4 ->   6     -2
+  yelled           9 ->  13     -4
+  hurled          18 ->  25     -7
+  gave            21 ->  27     -6
+  waved           19 ->  24     -5
+  held            16 ->  20     -4
+  started         15 ->  15     +0
+
+HIGHER UNDER B
+  said             3 ->   1     +2
+  slammed          6 ->   4     +2
+  swung           10 ->   5     +5
+  shook           11 ->   8     +3
+  told            42 ->  14    +28
+  knocked         48 ->  18    +30
+  the             13 ->  10     +3
+  smashed         28 ->  16    +12
+  shouted          2 ->   2     +0
+  pulled          38 ->  19    +19
+  made            12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  shouted          1 ->  69    -68
+  hit              4 ->  22    -18
+  screamed        11 -> 151   -140
+  yelled          14 -> 139   -125
+  slammed          9 ->  33    -24
+  his              7 ->  26    -19
+  waved           17 -> 157   -140
+  punched         10 ->  20    -10
+  said             6 ->  12     -6
+  threw           22 ->  58    -36
+  swung           24 -> 170   -146
+  started         27 -> 176   -149
+  then            18 ->  28    -10
+  looked          26 ->  55    -29
+  shook           13 ->  14     -1
+  gave            19 ->  19     +0
+  began           23 ->  25     -2
+
+HIGHER UNDER B
+  the              3 ->   1     +2
+  roared          36 ->   3    +33
+  it              20 ->   5    +15
+  clenched        28 ->   6    +22
+  let             30 ->   7    +23
+  pointed          2 ->   2     +0
+  struck           5 ->   4     +1
+  I               21 ->   8    +13
+  bellowed       116 ->  15   +101
+  aimed           74 ->  16    +58
+  prepared        78 ->  21    +57
+  called          44 ->  17    +27
+  brought         12 ->  10     +2
+  made            15 ->  11     +4
+  smashed         25 ->  18     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  pointed          7 ->  14     -7
+  saluted         18 ->  46    -28
+  said             2 ->   6     -4
+  smiled          21 ->  38    -17
+  shook           17 ->  32    -15
+  roared          10 ->  17     -7
+  made            11 ->  13     -2
+  gave            12 ->  12     +0
+  then             9 ->   9     +0
+  pumped          19 ->  25     -6
+  struck          15 ->  16     -1
+  began           23 ->  29     -6
+  took            22 ->  22     +0
+
+HIGHER UNDER B
+  punched          4 ->   2     +2
+  yelled           5 ->   3     +2
+  screamed         8 ->   5     +3
+  shouted          1 ->   1     +0
+  I               37 ->  20    +17
+  brought         24 ->  15     +9
+  smashed         26 ->  19     +7
+  pounded         25 ->  21     +4
+  swore           31 ->  23     +8
+  swung           34 ->  24    +10
+  started         20 ->  18     +2
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  struck           2 ->  15    -13
+  swung            3 ->  18    -15
+  pointed          1 ->   4     -3
+  brought          7 ->  22    -15
+  threw            8 ->  27    -19
+  hit             10 ->  41    -31
+  knocked         11 ->  44    -33
+  he               9 ->  10     -1
+  it              15 ->  53    -38
+  his             12 ->  25    -13
+  pushed          17 ->  65    -48
+  smashed         18 ->  52    -34
+  punched         26 ->  62    -36
+  clenched        23 ->  32     -9
+  aimed           19 ->  24     -5
+  gave            22 ->  26     -4
+  let             14 ->  14     +0
+
+HIGHER UNDER B
+  shouted          5 ->   1     +4
+  said             6 ->   2     +4
+  yelled          21 ->   5    +16
+  screamed        25 ->   6    +19
+  looked          27 ->   7    +20
+  declared       104 ->   9    +95
+  roared          50 ->  17    +33
+  began           20 ->   8    +12
+  shook           45 ->  19    +26
+  started         16 ->  11     +5
+  took            30 ->  16    +14
+  made            24 ->  13    +11
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  said             2 ->  45    -43
+  then             8 ->  63    -55
+  punched          6 ->  16    -10
+  pointed          3 ->  13    -10
+  waved           14 ->  78    -64
+  his             12 ->  34    -22
+  the             13 ->  35    -22
+  gave             5 ->  11     -6
+  yelled           4 ->  10     -6
+  shouted          1 ->   5     -4
+  made            16 ->  27    -11
+  shook           21 ->  47    -26
+  threw           26 -> 106    -80
+  began           24 ->  51    -27
+  swung           22 ->  28     -6
+
+HIGHER UNDER B
+  pounded          9 ->   1     +8
+  slammed         11 ->   2     +9
+  roared          17 ->   3    +14
+  clenched        10 ->   4     +6
+  declared        41 ->   6    +35
+  looked          19 ->   8    +11
+  thumped         43 ->  12    +31
+  hammered       107 ->  15    +92
+  let             15 ->   9     +6
+  screamed         7 ->   7     +0
+  stared          51 ->  18    +33
+  held            20 ->  14     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  brought          1 ->   3     -2
+  then            12 ->  20     -8
+  pounded          9 ->  16     -7
+  shook            5 ->   7     -2
+  smashed          8 ->  14     -6
+  pointed          6 ->   8     -2
+  swung           27 ->  40    -13
+  shouted         21 ->  22     -1
+  looked          25 ->  26     -1
+  drove           26 ->  28     -2
+  started         18 ->  19     -1
+  banged          22 ->  23     -1
+  was             23 ->  24     -1
+  his             24 ->  25     -1
+
+HIGHER UNDER B
+  punched          3 ->   1     +2
+  let             10 ->   6     +4
+  struck           7 ->   5     +2
+  the              2 ->   2     +0
+  said            16 ->  12     +4
+  a               28 ->  21     +7
+  began           14 ->  10     +4
+  hit             11 ->   9     +2
+  made            15 ->  13     +2
+  yelled          29 ->  27     +2
+  knocked         13 ->  11     +2
+  I               17 ->  15     +2
+  slammed          4 ->   4     +0
+  gave            19 ->  17     +2
+  took            20 ->  18     +2
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  said             2 ->   3     -1
+  swung           10 -> 117   -107
+  the              5 ->  17    -12
+  swore            9 ->  27    -18
+  his              6 ->  16    -10
+  threw           20 -> 149   -129
+  pointed          3 ->   7     -4
+  then             8 ->  23    -15
+  banged          19 ->  68    -49
+  hit             17 ->  41    -24
+  struck          11 ->  20     -9
+  waved           21 ->  43    -22
+  called          22 ->  31     -9
+  shook           23 ->  28     -5
+  made             7 ->  12     -5
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  bellowed        42 ->   5    +37
+  cried           12 ->   4     +8
+  let             14 ->   6     +8
+  yelled           4 ->   2     +2
+  screamed        15 ->   8     +7
+  began           24 ->  10    +14
+  looked          13 ->   9     +4
+  glared          51 ->  18    +33
+  declared        43 ->  13    +30
+  roared          18 ->  11     +7
+  was             46 ->  19    +27
+  started         38 ->  14    +24
+  slammed         29 ->  21     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  said             2 ->  51    -49
+  punched          3 ->  24    -21
+  his              8 ->  38    -30
+  the              7 ->  14     -7
+  slammed          6 ->  10     -4
+  threw           15 ->  39    -24
+  struck          13 ->  19     -6
+  then            18 ->  55    -37
+  roared          12 ->  18     -6
+  pointed          9 ->   9     +0
+  cursed          22 -> 106    -84
+  yelled          11 ->  11     +0
+  he              29 -> 105    -76
+  smashed         17 ->  26     -9
+  slapped         25 ->  56    -31
+  hit             26 ->  64    -38
+  pushed          27 ->  37    -10
+  looked          21 ->  21     +0
+  gave            28 ->  33     -5
+
+HIGHER UNDER B
+  shouted          1 ->   1     +0
+  raised           4 ->   2     +2
+  let             24 ->   3    +21
+  charged         46 ->   5    +41
+  called          36 ->   8    +28
+  clenched         5 ->   4     +1
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

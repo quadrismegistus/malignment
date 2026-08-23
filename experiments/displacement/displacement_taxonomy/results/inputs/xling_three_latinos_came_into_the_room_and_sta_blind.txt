@@ -1,0 +1,1659 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: Three Latinos came into the room and started to ___
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  beat             6 -> 114   -108
+  ask              8 ->  21    -13
+  take             7 ->  14     -7
+  laugh            5 ->  11     -6
+  sing            11 ->  22    -11
+  play             3 ->   6     -3
+  make             4 ->   7     -3
+  get             14 ->  46    -32
+  undress         16 ->  45    -29
+  do              15 ->  33    -18
+  say             17 ->  28    -11
+  fight           24 -> 106    -82
+  shoot           18 ->  26     -8
+  yell            20 ->  55    -35
+  work            23 ->  43    -20
+  look            22 ->  35    -13
+  have            21 ->  23     -2
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  speak            2 ->   2     +0
+  chat            13 ->   3    +10
+  dance            9 ->   4     +5
+  unpack          60 ->  10    +50
+  argue           12 ->   5     +7
+  converse        70 ->  12    +58
+  discuss         19 ->   9    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  shine            1 -> 113   -112
+  draw             3 ->  98    -95
+  place            7 ->  79    -72
+  look             6 ->  15     -9
+  clean            4 ->   6     -2
+  evaluate         9 -> 114   -105
+  play            10 ->  11     -1
+  take            12 ->  29    -17
+  attack          13 ->  37    -24
+  set             14 ->  39    -25
+  relax           15 ->  73    -58
+  write           18 -> 110    -92
+  preach          20 -> 118    -98
+  party           19 ->  52    -33
+
+HIGHER UNDER B
+  dance            2 ->   1     +1
+  argue           24 ->   3    +21
+  speak           16 ->   2    +14
+  eat             87 ->   8    +79
+  sing            68 ->  10    +58
+  talk             5 ->   4     +1
+  discuss         44 ->   9    +35
+  ask            103 ->  13    +90
+  perform         70 ->  14    +56
+  do              21 ->  12     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  pray             5 ->  94    -89
+  tell             4 ->  23    -19
+  beat            15 -> 112    -97
+  yell             9 ->  41    -32
+  say             10 ->  27    -17
+  scream          22 -> 121    -99
+  look            14 ->  25    -11
+  sing            12 ->  21     -9
+  walk            21 ->  45    -24
+  ask              3 ->   7     -4
+  do              18 ->  28    -10
+  give            24 ->  46    -22
+  read            25 ->  44    -19
+  take             7 ->  11     -4
+  dance           11 ->  14     -3
+  get             17 ->  20     -3
+  play            13 ->  13     +0
+  make             6 ->   9     -3
+
+HIGHER UNDER B
+  speak            2 ->   2     +0
+  talk             1 ->   1     +0
+  eat             48 ->   4    +44
+  discuss         16 ->   3    +13
+  sit             40 ->   6    +34
+  chat            44 ->   8    +36
+  converse       138 ->  17   +121
+  laugh           20 ->  10    +10
+  listen          91 ->  16    +75
+  have            45 ->  15    +30
+  complain        57 ->  18    +39
+  engage          80 ->  19    +61
+  argue            8 ->   5     +3
+  work            19 ->  12     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  cry              5 ->  39    -34
+  pray             8 ->  18    -10
+  fight           11 ->  53    -42
+  chant            6 ->   7     -1
+  speak            4 ->   5     -1
+  ask             17 ->  30    -13
+  take            12 ->  22    -10
+  sit             16 ->  24     -8
+  read            14 ->  21     -7
+  argue           13 ->  17     -4
+
+HIGHER UNDER B
+  dance            3 ->   3     +0
+  talk             2 ->   1     +1
+  play             7 ->   4     +3
+  make            10 ->   6     +4
+  perform         52 ->  11    +41
+  gossip          40 ->  10    +30
+  share           38 ->  13    +25
+  discuss         19 ->   9    +10
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  talk             2 ->   3     -1
+  yell             5 ->  13     -8
+  tell            10 ->  25    -15
+  fight           12 ->  26    -14
+  get             15 ->  36    -21
+  question        18 ->  44    -26
+  argue            1 ->   1     +0
+  explain         16 ->  20     -4
+  ask              8 ->  11     -3
+  read            19 ->  27     -8
+  walk            17 ->  19     -2
+  cry             21 ->  24     -3
+
+HIGHER UNDER B
+  speak            3 ->   2     +1
+  sing             6 ->   4     +2
+  discuss         14 ->   9     +5
+  take            11 ->   7     +4
+  play             9 ->   6     +3
+  scream          20 ->  12     +8
+  work            34 ->  14    +20
+  dance           13 ->  10     +3
+  whisper         37 ->  21    +16
+  eat             30 ->  15    +15
+  chant           33 ->  17    +16
+  introduce       31 ->  18    +13
+  say             23 ->  16     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  talk             1 ->   2     -1
+  tell             6 ->  26    -20
+  say              9 ->  63    -54
+  yell             7 ->  19    -12
+  play            15 ->  51    -36
+  scream          17 ->  62    -45
+  make             5 ->  15    -10
+  get             11 ->  43    -32
+  cry             12 ->  37    -25
+  ask              4 ->  10     -6
+  eat             16 ->  27    -11
+  work            23 ->  31     -8
+  give            21 ->  24     -3
+  take             8 ->  11     -3
+  do              13 ->  17     -4
+  discuss         18 ->  18     +0
+
+HIGHER UNDER B
+  set             63 ->   4    +59
+  clean           34 ->   5    +29
+  unpack         154 ->  14   +140
+  chat            19 ->   6    +13
+  explain         22 ->   7    +15
+  unload         156 ->  21   +135
+  help            24 ->   9    +15
+  pack            75 ->  20    +55
+  chatter         98 ->  22    +76
+  speak            2 ->   1     +1
+  argue           10 ->   8     +2
+  question        29 ->  16    +13
+  fill            50 ->  23    +27
+  sing             3 ->   3     +0
+  look            20 ->  12     +8
+  stand           35 ->  25    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  talk             1 ->   3     -2
+  work            10 ->  23    -13
+  yell            19 ->  59    -40
+  get             18 ->  34    -16
+  say             22 ->  42    -20
+  beat            17 ->  26     -9
+  laugh           26 ->  36    -10
+  eat             27 ->  43    -16
+  make             9 ->  17     -8
+  take             3 ->   7     -4
+  fight           15 ->  22     -7
+  chat            16 ->  21     -5
+  ask              8 ->  11     -3
+  tell            25 ->  25     +0
+  look             7 ->   9     -2
+  argue           11 ->  13     -2
+
+HIGHER UNDER B
+  speak            4 ->   2     +2
+  sit             21 ->   4    +17
+  play             2 ->   1     +1
+  set             23 ->   6    +17
+  walk             5 ->   5     +0
+  fill            48 ->  12    +36
+  write           60 ->  20    +40
+  sing            12 ->  10     +2
+  pull            40 ->  19    +21
+  discuss         20 ->  16     +4
+  clean           14 ->  14     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  yell             4 ->  24    -20
+  take             6 ->  15     -9
+  sing             8 ->  19    -11
+  beat            11 ->  20     -9
+  ask             10 ->  16     -6
+  interrogate     21 ->  64    -43
+  question        17 ->  36    -19
+  shoot           22 ->  52    -30
+  move            20 ->  33    -13
+  say             15 ->  21     -6
+  play             3 ->   6     -3
+
+HIGHER UNDER B
+  speak            2 ->   2     +0
+  talk             1 ->   1     +0
+  chat            14 ->   5     +9
+  dance            7 ->   3     +4
+  argue            5 ->   4     +1
+  sit             36 ->  12    +24
+  drink           52 ->  14    +38
+  laugh           18 ->  11     +7
+  discuss         16 ->  10     +6
+  whisper         46 ->  17    +29
+  harass          23 ->  13    +10
+  make             9 ->   7     +2
+  look            13 ->   9     +4
+  fight           12 ->   8     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  beat             2 ->  13    -11
+  talk             1 ->   3     -2
+  shoot            3 ->  17    -14
+  attack           6 ->  23    -17
+  ask             11 ->  53    -42
+  yell            14 ->  34    -20
+  harass          16 ->  49    -33
+  hit             21 ->  92    -71
+  look            15 ->  24     -9
+  threaten        18 ->  58    -40
+  rob             17 ->  33    -16
+  pray            19 ->  20     -1
+
+HIGHER UNDER B
+  sing             8 ->   2     +6
+  speak            4 ->   1     +3
+  dance            7 ->   4     +3
+  make             9 ->   5     +4
+  discuss         30 ->   8    +22
+  chat            31 ->  11    +20
+  fight           10 ->   7     +3
+  get             24 ->  12    +12
+  cause          112 ->  19    +93
+  work            26 ->  15    +11
+  set             38 ->  18    +20
+  clean           20 ->  14     +6
+  take            13 ->   9     +4
+  argue           12 ->  10     +2
+  do              22 ->  16     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  talk             1 ->   1     +0
+  tell             9 ->  16     -7
+  beat            13 ->  36    -23
+  ask             14 ->  32    -18
+  play             4 ->   9     -5
+  sit             19 ->  41    -22
+  introduce       17 ->  26     -9
+  do              20 ->  24     -4
+  look            16 ->  19     -3
+  laugh           18 ->  21     -3
+  sing             5 ->   8     -3
+
+HIGHER UNDER B
+  speak            2 ->   2     +0
+  discuss          8 ->   3     +5
+  chat            22 ->   7    +15
+  argue            6 ->   5     +1
+  get             23 ->  12    +11
+  set              7 ->   6     +1
+  chant           45 ->  18    +27
+  clean           21 ->  14     +7
+  make            11 ->  11     +0
+  fight           25 ->  17     +8
+  take            10 ->  10     +0
+  work            15 ->  15     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  talk             1 ->   2     -1
+  fight            5 ->   8     -3
+  play             3 ->   5     -2
+  work             7 ->  16     -9
+  clean            8 ->  27    -19
+  have            15 ->  69    -54
+  do              12 ->  28    -16
+  look            16 ->  35    -19
+  eat             17 ->  34    -17
+  get             18 ->  39    -21
+  put             21 ->  61    -40
+  yell            22 ->  55    -33
+  take             9 ->  13     -4
+  shoot           10 ->  11     -1
+
+HIGHER UNDER B
+  dance            2 ->   1     +1
+  sing            14 ->   4    +10
+  speak           11 ->   7     +4
+  shout           48 ->  14    +34
+  make             6 ->   6     +0
+  move            23 ->  10    +13
+  walk            13 ->   9     +4
+  tell            19 ->  12     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  sing             3 ->  15    -12
+  dance            9 ->  37    -28
+  cry             10 ->  59    -49
+  play            11 ->  29    -18
+  shake            7 ->  20    -13
+  argue           12 ->  27    -15
+  ask              6 ->  11     -5
+  tell             5 ->   8     -3
+  chant           14 ->  34    -20
+  make            13 ->  17     -4
+  read            16 ->  90    -74
+  recite          17 ->  89    -72
+  get             19 ->  21     -2
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  speak            2 ->   2     +0
+  discuss          4 ->   3     +1
+  think          138 ->   9   +129
+  say             22 ->   5    +17
+  explain         18 ->   6    +12
+  sit             42 ->  10    +32
+  share           15 ->   7     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  set              5 ->  33    -28
+  sing             3 ->   6     -3
+  play             2 ->   4     -2
+  clean            7 ->  38    -31
+  work             8 ->  76    -68
+  dance            4 ->   5     -1
+  tell            14 ->  63    -49
+  take            10 ->  18     -8
+  pray            12 ->  19     -7
+  ask             15 ->  49    -34
+  look            13 ->  30    -17
+  beat            17 ->  23     -6
+  get             20 ->  54    -34
+  do              18 ->  26     -8
+  make            11 ->  11     +0
+
+HIGHER UNDER B
+  speak            6 ->   1     +5
+  argue            9 ->   3     +6
+  fight           23 ->   7    +16
+  drink           75 ->   8    +67
+  converse        61 ->  14    +47
+  yell            29 ->  10    +19
+  eat             25 ->  13    +12
+  discuss         16 ->   9     +7
+  chat            19 ->  12     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  talk             1 ->   3     -2
+  play             2 ->  15    -13
+  laugh            3 ->   6     -3
+  take             8 ->  18    -10
+  dance            4 ->   5     -1
+  make             7 ->  13     -6
+  sing             6 ->   8     -2
+  tell            11 ->  57    -46
+  look            10 ->  17     -7
+  yell            14 ->  29    -15
+  work            20 -> 128   -108
+  scream          19 ->  78    -59
+  clean           16 ->  43    -27
+  speak            9 ->   9     +0
+  say             25 ->  74    -49
+  eat             15 ->  28    -13
+  get             23 ->  49    -26
+  drink           26 ->  37    -11
+  do              24 ->  33     -9
+  ask             17 ->  22     -5
+  throw           22 ->  23     -1
+
+HIGHER UNDER B
+  argue            5 ->   1     +4
+  fight           13 ->   2    +11
+  beat            12 ->   4     +8
+  steal          130 ->   7   +123
+  converse        62 ->  12    +50
+  chat            46 ->  11    +35
+  discuss         18 ->  10     +8
+  shout           21 ->  14     +7
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  beat             1 ->   4     -3
+  take             3 ->  11     -8
+  work             4 ->  14    -10
+  ask             10 ->  37    -27
+  look             8 ->  22    -14
+  yell             6 ->  10     -4
+  interrogate     16 ->  84    -68
+  question        18 ->  89    -71
+  attack          14 ->  51    -37
+  search          21 ->  81    -60
+  put             15 ->  33    -18
+  hit             22 ->  72    -50
+  clean           12 ->  17     -5
+  tell            23 ->  31     -8
+  scream          17 ->  18     -1
+
+HIGHER UNDER B
+  argue           11 ->   1    +10
+  speak            5 ->   3     +2
+  talk             2 ->   2     +0
+  play            13 ->   5     +8
+  discuss         53 ->   8    +45
+  do               7 ->   6     +1
+  shout           20 ->   9    +11
+  make             9 ->   7     +2
+  laugh           40 ->  12    +28
+  dance           35 ->  13    +22
+  eat             47 ->  15    +32
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  speak            2 ->  16    -14
+  work             8 ->  34    -26
+  sit             14 ->  84    -70
+  tell            16 ->  81    -65
+  argue            6 ->  18    -12
+  get             13 ->  39    -26
+  clean           18 ->  38    -20
+  do              17 ->  32    -15
+  walk            19 ->  42    -23
+  make             9 ->  19    -10
+  sing             7 ->  12     -5
+  take            10 ->  15     -5
+  say             20 ->  25     -5
+  question        23 ->  26     -3
+
+HIGHER UNDER B
+  dance            5 ->   3     +2
+  play             3 ->   2     +1
+  talk             1 ->   1     +0
+  discuss         15 ->   5    +10
+  flirt          135 ->   8   +127
+  look            12 ->   6     +6
+  harass          37 ->   9    +28
+  chat            40 ->  13    +27
+  ask             11 ->   7     +4
+  read            26 ->  10    +16
+  mess            48 ->  14    +34
+  laugh           30 ->  11    +19
+  pray             4 ->   4     +0
+  beat            28 ->  17    +11
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  talk             1 ->  61    -60
+  speak            3 ->  24    -21
+  ask              9 -> 145   -136
+  look            13 -> 147   -134
+  beat             2 ->  10     -8
+  take             5 ->  13     -8
+  move            14 ->  59    -45
+  harass          18 -> 103    -85
+  work             4 ->  11     -7
+  do              12 ->  34    -22
+  walk            20 -> 139   -119
+  yell            17 ->  39    -22
+  get             23 ->  62    -39
+  shoot           21 ->  36    -15
+  help            22 ->  22     +0
+
+HIGHER UNDER B
+  whisper         70 ->   2    +68
+  act             76 ->   3    +73
+  clean            8 ->   1     +7
+  fire           119 ->   6   +113
+  eat             24 ->   4    +20
+  sing            11 ->   7     +4
+  steal           47 ->  12    +35
+  behave         167 ->  18   +149
+  perform         68 ->  16    +52
+  dance            6 ->   5     +1
+  make            10 ->   9     +1
+  assemble       150 ->  19   +131
+  trash          156 ->  23   +133
+  point           95 ->  21    +74
+  set             15 ->  14     +1
+  argue           16 ->  15     +1
+  attack          19 ->  17     +2
+  put             25 ->  20     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  sit              8 ->  39    -31
+  take             5 ->  17    -12
+  get             12 ->  25    -13
+  play             6 ->   9     -3
+  tell            10 ->  18     -8
+  look             9 ->  15     -6
+  set             14 ->  22     -8
+  fight           19 ->  30    -11
+  fill            20 ->  28     -8
+  make            13 ->  14     -1
+  converse        21 ->  24     -3
+
+HIGHER UNDER B
+  clean           40 ->   6    +34
+  speak            2 ->   2     +0
+  argue            4 ->   4     +0
+  dance            3 ->   3     +0
+  sing             7 ->   5     +2
+  laugh           35 ->  12    +23
+  talk             1 ->   1     +0
+  pray            29 ->  16    +13
+  discuss         18 ->   8    +10
+  beat            37 ->  23    +14
+  complain        26 ->  20     +6
+  ask             11 ->   7     +4
+  cry             25 ->  21     +4
+  help            16 ->  10     +6
+  do              22 ->  19     +3
+  chat            17 ->  13     +4
+  work            15 ->  11     +4
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  talk             1 ->   1     +0
+  explain         14 ->  43    -29
+  read             7 ->  13     -6
+  ask             12 ->  23    -11
+  speak            4 ->  10     -6
+  give            17 ->  34    -17
+  work            18 ->  25     -7
+  take            20 ->  27     -7
+  cry             16 ->  20     -4
+  tell             3 ->   6     -3
+  make             5 ->   8     -3
+
+HIGHER UNDER B
+  play             9 ->   3     +6
+  discuss          2 ->   2     +0
+  argue            8 ->   4     +4
+  chat            13 ->   7     +6
+  laugh           22 ->  12    +10
+  dance           38 ->  17    +21
+  stare           27 ->  16    +11
+  eat             11 ->   9     +2
+  whisper          6 ->   5     +1
+  sit             19 ->  15     +4
+  debate          15 ->  14     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  talk             1 ->   3     -2
+  speak            5 ->   7     -2
+  yell            17 ->  57    -40
+  make            10 ->  16     -6
+  ask             20 ->  51    -31
+  eat              8 ->  13     -5
+  work            14 ->  19     -5
+  laugh           22 ->  43    -21
+  look            16 ->  27    -11
+  say             21 ->  32    -11
+  shout           15 ->  26    -11
+  tell             9 ->  12     -3
+  do              19 ->  24     -5
+  sing            18 ->  18     +0
+
+HIGHER UNDER B
+  play             2 ->   1     +1
+  argue            3 ->   2     +1
+  discuss          4 ->   4     +0
+  quarrel         38 ->  11    +27
+  shake           13 ->   6     +7
+  fill            32 ->  14    +18
+  fight            6 ->   5     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  talk             1 ->   3     -2
+  tell             8 ->  32    -24
+  dance            3 ->   7     -4
+  sit             13 ->  41    -28
+  discuss         11 ->  14     -3
+  ask             14 ->  22     -8
+  have            12 ->  21     -9
+  chat            17 ->  28    -11
+  look            16 ->  26    -10
+  eat             15 ->  15     +0
+  walk            18 ->  20     -2
+
+HIGHER UNDER B
+  argue            6 ->   2     +4
+  speak            2 ->   1     +1
+  fight            7 ->   5     +2
+  play             5 ->   4     +1
+  build           42 ->  11    +31
+  make             9 ->   8     +1
+  scream          33 ->  12    +21
+  do              19 ->  10     +9
+  chant           36 ->  16    +20
+  attack          24 ->  13    +11
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  pray             2 -> 104   -102
+  speak            3 ->  62    -59
+  make             7 ->  90    -83
+  sing            10 ->  98    -88
+  play             6 ->  56    -50
+  tell            13 -> 123   -110
+  take             8 ->  39    -31
+  argue           11 ->  73    -62
+  beat            12 ->  76    -64
+  say             16 -> 134   -118
+  ask              4 ->  14    -10
+  walk            15 -> 101    -86
+  discuss         20 -> 115    -95
+  get             19 ->  79    -60
+  laugh           14 ->  31    -17
+  interrogate     22 -> 126   -104
+  sit             18 ->  36    -18
+  dance           24 ->  55    -31
+  work            21 ->  34    -13
+  help            23 ->  44    -21
+
+HIGHER UNDER B
+  set             37 ->   2    +35
+  clear           84 ->   5    +79
+  interview       82 ->   6    +76
+  question        17 ->   4    +13
+  teach           90 ->   7    +83
+  assemble       165 ->   9   +156
+  look             5 ->   3     +2
+  examine         56 ->  11    +45
+  chat            34 ->   8    +26
+  sketch         183 ->  12   +171
+  setup          185 ->  13   +172
+  flip           155 ->  16   +139
+  change          87 ->  15    +72
+  create         157 ->  18   +139
+  admire         170 ->  22   +148
+  feel            91 ->  21    +70
+  talk             1 ->   1     +0
+  explain         30 ->  17    +13
+  put             29 ->  19    +10
+  move            28 ->  20     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  cry              6 ->  30    -24
+  sing             5 ->  16    -11
+  ask              7 ->  18    -11
+  dance            2 ->   9     -7
+  shake           16 ->  42    -26
+  tell            12 ->  22    -10
+  sit             17 ->  27    -10
+  walk            19 ->  31    -12
+  play            20 ->  28     -8
+  make             8 ->  10     -2
+  laugh            4 ->   6     -2
+  scream          24 ->  29     -5
+  say             14 ->  15     -1
+  chat            23 ->  23     +0
+
+HIGHER UNDER B
+  chant           15 ->   3    +12
+  talk             1 ->   1     +0
+  whisper         18 ->   5    +13
+  argue           10 ->   2     +8
+  stare           28 ->  12    +16
+  spread          45 ->  20    +25
+  leave           31 ->  14    +17
+  get             11 ->   7     +4
+  shout           27 ->  13    +14
+  protest         26 ->  19     +7
+  yell            13 ->  11     +2
+  discuss          9 ->   8     +1
+  take            21 ->  17     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  sing             6 ->  15     -9
+  dance            5 ->  12     -7
+  take             4 ->   8     -4
+  work             8 ->  19    -11
+  clean           11 ->  18     -7
+  put             16 ->  27    -11
+  do              22 ->  39    -17
+  tell            13 ->  14     -1
+  make             9 ->  10     -1
+  give            20 ->  26     -6
+  play             3 ->   4     -1
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  argue           12 ->   3     +9
+  set              2 ->   2     +0
+  chat            17 ->   6    +11
+  discuss         19 ->   7    +12
+  debate          98 ->  21    +77
+  ask              7 ->   5     +2
+  sit             26 ->  17     +9
+  walk            15 ->  11     +4
+  help            25 ->  23     +2
+  speak           10 ->   9     +1
+  get             18 ->  16     +2
+  explain         23 ->  20     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  play             1 ->   1     +0
+  sit              4 ->   7     -3
+  read             8 ->  10     -2
+  eat              3 ->   5     -2
+  solve           16 ->  19     -3
+  speak            9 ->  11     -2
+  leave           13 ->  15     -2
+  work            20 ->  25     -5
+  move            18 ->  21     -3
+  arrange         19 ->  23     -4
+  look            17 ->  18     -1
+  talk             2 ->   3     -1
+  take            12 ->  13     -1
+
+HIGHER UNDER B
+  argue            5 ->   2     +3
+  count            6 ->   4     +2
+  discuss          7 ->   6     +1
+  dance           10 ->   8     +2
+  chat            11 ->   9     +2
+  whisper         34 ->  16    +18
+  share           14 ->  12     +2
+  sing            15 ->  14     +1
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  talk             2 ->   6     -4
+  ask              6 ->  33    -27
+  yell            18 ->  72    -54
+  clean            9 ->  30    -21
+  tell            12 ->  36    -24
+  do              17 ->  34    -17
+  sing             8 ->  19    -11
+  throw           20 ->  26     -6
+  get             15 ->  23     -8
+  shoot           21 ->  28     -7
+  dance            4 ->   4     +0
+  make             7 ->  11     -4
+
+HIGHER UNDER B
+  argue           10 ->   3     +7
+  play             3 ->   2     +1
+  fight           13 ->   5     +8
+  beat             1 ->   1     +0
+  engage         138 ->  14   +124
+  unload         108 ->  20    +88
+  question        40 ->  16    +24
+  work            16 ->   8     +8
+  discuss         36 ->  17    +19
+  attack          23 ->  12    +11
+  search          14 ->   9     +5
+  harass          39 ->  18    +21
+  move            22 ->  13     +9
+  speak           11 ->  10     +1
+  remove          38 ->  24    +14
+  help            29 ->  22     +7
+  look            19 ->  15     +4
+  set             24 ->  21     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  talk             1 ->   4     -3
+  get             13 ->  37    -24
+  eat              9 ->  13     -4
+  sit             15 ->  34    -19
+  yell            16 ->  24     -8
+  walk            14 ->  19     -5
+  tell            18 ->  33    -15
+  chat             7 ->   9     -2
+  argue           20 ->  21     -1
+
+HIGHER UNDER B
+  dance            4 ->   2     +2
+  speak            6 ->   5     +1
+  laugh           10 ->   6     +4
+  sing             2 ->   1     +1
+  tease           65 ->  18    +47
+  perform         45 ->  17    +28
+  chant           17 ->  11     +6
+  work            23 ->  15     +8
+  introduce       19 ->  14     +5
+  set             24 ->  16     +8
+  play             3 ->   3     +0
+  ask             11 ->  10     +1
+  move            12 ->  12     +0
+  take             8 ->   8     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  beat             2 ->  12    -10
+  talk             1 ->   1     +0
+  attack          13 ->  82    -69
+  ask              8 ->  20    -12
+  work            11 ->  18     -7
+  clean           12 ->  19     -7
+  walk            23 ->  50    -27
+  yell            17 ->  30    -13
+  remove          20 ->  45    -25
+  tell            21 ->  40    -19
+  say             18 ->  23     -5
+  fight           22 ->  39    -17
+  shoot           14 ->  16     -2
+
+HIGHER UNDER B
+  dance            9 ->   2     +7
+  play             5 ->   3     +2
+  make            10 ->   6     +4
+  sit             37 ->   9    +28
+  sing            19 ->  10     +9
+  argue            7 ->   7     +0
+  pick            49 ->  15    +34
+  do              15 ->  11     +4
+  laugh           32 ->  14    +18
+  throw           31 ->  17    +14
+  get             16 ->  13     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  sing             6 ->  12     -6
+  speak            4 ->   6     -2
+  talk             1 ->   2     -1
+  play             5 ->   8     -3
+  work            11 ->  11     +0
+
+HIGHER UNDER B
+  clean            9 ->   4     +5
+  take             3 ->   3     +0
+  strip           26 ->  19     +7
+  get             12 ->  10     +2
+  undress         32 ->  22    +10
+  beat             7 ->   5     +2
+  help            20 ->  20     +0
+  laugh           29 ->  23     +6
+  remove          18 ->  17     +1
+  make            10 ->   9     +1
+  argue           14 ->  14     +0
+  do              13 ->  13     +0
+  fight           15 ->  15     +0
+  set              8 ->   7     +1
+  look            16 ->  16     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  leave           14 ->  23     -9
+  get              9 ->  10     -1
+  move            16 ->  24     -8
+  look             2 ->   3     -1
+  gather          10 ->  13     -3
+  dance            6 ->   7     -1
+  take             8 ->   9     -1
+  sing            17 ->  18     -1
+  work            13 ->  15     -2
+  walk            22 ->  25     -3
+  play            20 ->  20     +0
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  introduce       12 ->   8     +4
+  speak            3 ->   2     +1
+  chat            21 ->  12     +9
+  greet           26 ->  21     +5
+  stand           15 ->  14     +1
+  discuss         23 ->  19     +4
+  argue            7 ->   6     +1
+  shake           18 ->  16     +2
+  ask             11 ->  11     +0
+  sit              5 ->   4     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  speak            2 ->   2     +0
+  take             4 ->  14    -10
+  beat            10 ->  45    -35
+  clean           13 ->  34    -21
+  pray            12 ->  24    -12
+  tell            14 ->  59    -45
+  work            17 ->  52    -35
+  do              21 ->  56    -35
+  throw           19 ->  46    -27
+  discuss         16 ->  19     -3
+  play             3 ->   4     -1
+  put             20 ->  30    -10
+  shoot           22 ->  31     -9
+  sing             5 ->  11     -6
+  ask              6 ->  12     -6
+  dance            7 ->   9     -2
+  make             8 ->  10     -2
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  harass          31 ->   3    +28
+  argue           15 ->   7     +8
+  yell            11 ->   5     +6
+  set             18 ->   8    +10
+  look             9 ->   6     +3
+  chat            35 ->  13    +22
+  shout           26 ->  15    +11
+  move            23 ->  16     +7
+  search          27 ->  17    +10
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  tell             3 ->  14    -11
+  shake            8 ->  27    -19
+  say             13 ->  58    -45
+  laugh            9 ->  21    -12
+  walk            14 ->  24    -10
+  speak            6 ->  10     -4
+  ask             11 ->  16     -5
+  argue            1 ->   2     -1
+  explain         19 ->  52    -33
+  question        18 ->  30    -12
+  pick            16 ->  17     -1
+  take             5 ->   5     +0
+  chat            21 ->  35    -14
+
+HIGHER UNDER B
+  talk             2 ->   1     +1
+  fight            7 ->   3     +4
+  scream          24 ->   9    +15
+  cry             45 ->  13    +32
+  beat            20 ->  11     +9
+  sing            15 ->   7     +8
+  make            10 ->   6     +4
+  eat             41 ->  15    +26
+  discuss         17 ->  12     +5
+  leave           34 ->  18    +16
+  get             12 ->   8     +4
+  yell             4 ->   4     +0
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  speak            2 ->   4     -2
+  beat            11 ->  23    -12
+  talk             1 ->   1     +0
+  work            16 ->  22     -6
+  yell            14 ->  19     -5
+  shoot           19 ->  30    -11
+  get             17 ->  17     +0
+  do              12 ->  13     -1
+  ask              9 ->  10     -1
+  take             7 ->   8     -1
+
+HIGHER UNDER B
+  argue            5 ->   5     +0
+  clean            4 ->   3     +1
+  dance            3 ->   2     +1
+  play             6 ->   6     +0
+  chat            33 ->  16    +17
+  discuss         36 ->  21    +15
+  set             15 ->  11     +4
+  look            10 ->   9     +1
+  question        23 ->  20     +3
+  sing             8 ->   7     +1
+  move            21 ->  15     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  beat            16 ->  54    -38
+  fight           10 ->  30    -20
+  attack          14 ->  23     -9
+  argue            2 ->   3     -1
+  move            19 ->  27     -8
+  take             8 ->  12     -4
+  walk            20 ->  28     -8
+  look            11 ->  16     -5
+  go              23 ->  32     -9
+  get             13 ->  15     -2
+  yell            18 ->  19     -1
+  do              22 ->  26     -4
+  laugh            7 ->   7     +0
+  dance            4 ->   4     +0
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  speak            3 ->   2     +1
+  chat            31 ->  13    +18
+  ask              6 ->   5     +1
+  converse        27 ->  14    +13
+  help            17 ->   8     +9
+  discuss         32 ->  18    +14
+  sing            15 ->  10     +5
+  pray            26 ->  17     +9
+  say             12 ->  11     +1
+  play             9 ->   9     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  talk             1 ->   3     -2
+  argue            5 ->  15    -10
+  beat             6 ->  14     -8
+  ask             12 ->  35    -23
+  shoot           10 ->  32    -22
+  work             8 ->   9     -1
+  clean           27 ->  90    -63
+  do              15 ->  22     -7
+  take             7 ->   8     -1
+  attack          25 ->  53    -28
+  undress         17 ->  30    -13
+  look            16 ->  28    -12
+  discuss         18 ->  34    -16
+  tell            24 ->  46    -22
+  sit             26 ->  42    -16
+  have            14 ->  16     -2
+  fight           20 ->  20     +0
+  pray            23 ->  26     -3
+  speak            4 ->   5     -1
+
+HIGHER UNDER B
+  dance            2 ->   1     +1
+  play             3 ->   2     +1
+  sing            13 ->   4     +9
+  laugh           53 ->  17    +36
+  drink           51 ->  18    +33
+  make            11 ->   6     +5
+  eat             28 ->  13    +15
+  get             22 ->  11    +11
+  fuck            19 ->  10     +9
+  strip           21 ->  12     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  set              6 ->  18    -12
+  take             2 ->   7     -5
+  unload          18 ->  86    -68
+  look             4 ->  11     -7
+  sit             12 ->  29    -17
+  work            10 ->  22    -12
+  circle          22 ->  56    -34
+  put             19 ->  36    -17
+  question        23 ->  44    -21
+  move            21 ->  34    -13
+  walk            15 ->  27    -12
+  search          17 ->  28    -11
+  help            13 ->  14     -1
+  get             16 ->  21     -5
+  beat             3 ->   5     -2
+
+HIGHER UNDER B
+  dance           11 ->   2     +9
+  fight           32 ->   6    +26
+  argue            9 ->   4     +5
+  play            20 ->  10    +10
+  eat             24 ->  13    +11
+  sing            14 ->   9     +5
+  attack          46 ->  15    +31
+  speak            5 ->   3     +2
+  hit             53 ->  19    +34
+  talk             1 ->   1     +0
+  do              38 ->  17    +21
+  shoot           25 ->  16     +9
+  tell            26 ->  20     +6
+  yell            30 ->  23     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  beat             3 ->  20    -17
+  shoot           10 ->  32    -22
+  fight            8 ->  19    -11
+  ask             12 ->  72    -60
+  take             5 ->  11     -6
+  attack          14 ->  91    -77
+  walk            15 ->  59    -44
+  harass          22 ->  68    -46
+  hit             23 ->  77    -54
+  say             19 ->  35    -16
+  tell            18 ->  26     -8
+  look            16 ->  23     -7
+  scream          28 ->  46    -18
+  clean           25 ->  31     -6
+  get             24 ->  27     -3
+  do              29 ->  30     -1
+  yell             9 ->   9     +0
+
+HIGHER UNDER B
+  speak            2 ->   1     +1
+  make            13 ->   6     +7
+  argue            6 ->   3     +3
+  sing             7 ->   5     +2
+  play             4 ->   4     +0
+  laugh           17 ->   8     +9
+  dance           11 ->   7     +4
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  beat             3 ->  25    -22
+  pray             7 ->  27    -20
+  sing             2 ->   5     -3
+  take             8 ->  16     -8
+  shoot           11 ->  20     -9
+  spray           22 ->  44    -22
+  tell            14 ->  26    -12
+  yell            19 ->  31    -12
+  dance            6 ->   8     -2
+  play             5 ->   7     -2
+  make             9 ->  12     -3
+  read            12 ->  14     -2
+  remove          21 ->  24     -3
+  ask             16 ->  18     -2
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  chat            45 ->   3    +42
+  discuss         31 ->  10    +21
+  work            15 ->   6     +9
+  argue           20 ->   9    +11
+  clean           10 ->   4     +6
+  eat             67 ->  19    +48
+  whisper         89 ->  22    +67
+  look            13 ->  11     +2
+  throw           17 ->  13     +4
+  act             48 ->  21    +27
+  speak            4 ->   2     +2
+  walk            23 ->  17     +6
+  do              18 ->  15     +3
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  beat             1 ->  12    -11
+  take             3 ->  11     -8
+  hit             18 ->  72    -54
+  yell             7 ->  21    -14
+  attack          16 ->  52    -36
+  threaten        21 -> 119    -98
+  look            12 ->  24    -12
+  shoot           11 ->  22    -11
+  ask              8 ->  16     -8
+  kick            23 ->  85    -62
+  question        19 ->  44    -25
+  shout           22 ->  28     -6
+  laugh           14 ->  15     -1
+
+HIGHER UNDER B
+  talk             2 ->   1     +1
+  speak            4 ->   2     +2
+  dance            6 ->   3     +3
+  sing             9 ->   4     +5
+  play             5 ->   5     +0
+  clean           30 ->   7    +23
+  make            10 ->   6     +4
+  argue           13 ->   8     +5
+  do              20 ->  10    +10
+  work            15 ->   9     +6
+  pray            59 ->  13    +46
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  play             1 ->   4     -3
+  sing             4 ->  10     -6
+  dance            2 ->   5     -3
+  work             7 ->  12     -5
+  clean            9 ->  20    -11
+  set              5 ->  11     -6
+  pray            14 ->  59    -45
+  sit             17 ->  49    -32
+  read            12 ->  21     -9
+  do              13 ->  22     -9
+  move            21 ->  23     -2
+  walk            22 ->  25     -3
+  ask             24 ->  26     -2
+  make            18 ->  18     +0
+
+HIGHER UNDER B
+  beat             8 ->   2     +6
+  talk             3 ->   1     +2
+  speak            6 ->   3     +3
+  look            11 ->   6     +5
+  search          16 ->   7     +9
+  fight           15 ->   9     +6
+  argue           20 ->  13     +7
+  put             30 ->  16    +14
+  discuss         23 ->  14     +9
+  attack          29 ->  17    +12
+  shoot           19 ->  15     +4
+  laugh           26 ->  19     +7
+  take            10 ->   8     +2
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  argue            2 ->  32    -30
+  beat            10 ->  52    -42
+  take             5 ->  21    -16
+  tell            14 -> 143   -129
+  question        12 ->  59    -47
+  ask              6 ->  24    -18
+  get             11 ->  38    -27
+  sing            18 -> 110    -92
+  say              9 ->  20    -11
+  interrogate     15 ->  37    -22
+  laugh           19 ->  83    -64
+  play            13 ->  29    -16
+  give            23 ->  99    -76
+  yell             4 ->   8     -4
+  look            20 ->  41    -21
+  work             7 ->  11     -4
+
+HIGHER UNDER B
+  speak            3 ->   2     +1
+  chant           30 ->   3    +27
+  talk             1 ->   1     +0
+  change          68 ->   4    +64
+  carry           62 ->   6    +56
+  put             40 ->   7    +33
+  discuss         43 ->  10    +33
+  move            24 ->   9    +15
+  converse       111 ->  14    +97
+  remove          47 ->  13    +34
+  push            38 ->  16    +22
+  make             8 ->   5     +3
+  throw           41 ->  22    +19
+  scream          16 ->  12     +4
+  walk            29 ->  18    +11
+  hit             21 ->  17     +4
+  help            22 ->  19     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  pray             6 ->  30    -24
+  work             4 ->  16    -12
+  tell            11 ->  40    -29
+  ask             15 ->  65    -50
+  sing             5 ->   9     -4
+  take             7 ->  10     -3
+  do              12 ->  21     -9
+  read            22 ->  29     -7
+  put             20 ->  27     -7
+  move            19 ->  23     -4
+  yell            23 ->  24     -1
+
+HIGHER UNDER B
+  play             2 ->   1     +1
+  make            10 ->   3     +7
+  dance            9 ->   5     +4
+  eat             21 ->   7    +14
+  speak            8 ->   6     +2
+  argue           14 ->   8     +6
+  mingle         112 ->  17    +95
+  discuss         18 ->  12     +6
+  chat            26 ->  15    +11
+  introduce       32 ->  18    +14
+  get             16 ->  13     +3
+  clean           13 ->  11     +2
+  look            17 ->  14     +3
+  prepare         25 ->  19     +6
+  remove          24 ->  20     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  fight            3 ->   7     -4
+  talk             1 ->   2     -1
+  speak            4 ->   5     -1
+  have             9 ->  20    -11
+  smoke           11 ->  24    -13
+  tell             7 ->  16     -9
+  say             18 ->  28    -10
+  take            16 ->  25     -9
+  sit             12 ->  14     -2
+  look            17 ->  18     -1
+
+HIGHER UNDER B
+  argue            2 ->   1     +1
+  discuss          6 ->   3     +3
+  eat             25 ->   8    +17
+  play             5 ->   4     +1
+  share           26 ->  12    +14
+  chat             8 ->   6     +2
+  laugh           19 ->  13     +6
+  dance           13 ->   9     +4
+  work            15 ->  11     +4
+  read            27 ->  17    +10
+  make            10 ->  10     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  talk             1 ->   6     -5
+  speak            2 ->   4     -2
+  tell             7 ->  64    -57
+  sing             3 ->  10     -7
+  ask             14 ->  42    -28
+  discuss          8 ->  12     -4
+  get             16 ->  25     -9
+  pray            18 ->  27     -9
+  introduce       19 ->  26     -7
+  walk            21 ->  32    -11
+  take            12 ->  16     -4
+  share           20 ->  24     -4
+  shake           22 ->  23     -1
+  look            15 ->  15     +0
+
+HIGHER UNDER B
+  dance            5 ->   1     +4
+  argue            9 ->   2     +7
+  fight           25 ->   5    +20
+  play             4 ->   3     +1
+  laugh           13 ->   7     +6
+  work            10 ->   8     +2
+  kiss            64 ->  14    +50
+  perform         39 ->  17    +22
+  have            17 ->  13     +4
+  make            11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  chat            11 ->  16     -5
+  play             4 ->  13     -9
+  make             8 ->  12     -4
+  ask              7 ->  10     -3
+  laugh           16 ->  18     -2
+  get             19 ->  27     -8
+  work            18 ->  24     -6
+  sing             6 ->   7     -1
+  tell            17 ->  20     -3
+  say             22 ->  28     -6
+  look             5 ->   6     -1
+  sit             21 ->  21     +0
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  speak            2 ->   2     +0
+  explain         28 ->  15    +13
+  argue           10 ->   4     +6
+  dance            3 ->   3     +0
+  set              9 ->   5     +4
+  shoot           24 ->  19     +5
+  take            12 ->   8     +4
+  clean           14 ->   9     +5
+  eat             13 ->  11     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  talk             1 ->   4     -3
+  walk             6 ->  32    -26
+  fight            7 ->  19    -12
+  look             8 ->  17     -9
+  tell            12 ->  23    -11
+  ask              5 ->  10     -5
+  watch           20 ->  35    -15
+  eat             21 ->  38    -17
+  yell            19 ->  29    -10
+  shoot           23 ->  46    -23
+  take            10 ->  11     -1
+  speak           16 ->  16     +0
+  laugh           24 ->  36    -12
+  stand           22 ->  24     -2
+  get             13 ->  14     -1
+  shake           25 ->  30     -5
+
+HIGHER UNDER B
+  play             2 ->   1     +1
+  argue            4 ->   2     +2
+  sing            15 ->   3    +12
+  perform         71 ->  12    +59
+  chat            18 ->   7    +11
+  discuss         39 ->  13    +26
+  have            14 ->   6     +8
+  listen          40 ->  18    +22
+  make            11 ->   9     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  set              8 ->  78    -70
+  take             4 ->  12     -8
+  ask             13 ->  79    -66
+  clean           16 ->  50    -34
+  do              12 ->  22    -10
+  look            14 ->  24    -10
+  work             7 ->  18    -11
+  sit             18 ->  52    -34
+  tell            17 ->  28    -11
+  say             23 ->  75    -52
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  dance            5 ->   2     +3
+  argue           15 ->   4    +11
+  sing             6 ->   5     +1
+  chat            19 ->   9    +10
+  eat             21 ->  11    +10
+  complain        91 ->  17    +74
+  make            11 ->   7     +4
+  fight           28 ->  13    +15
+  laugh            9 ->   8     +1
+  shoot           33 ->  15    +18
+  discuss         10 ->  10     +0
+  shout           22 ->  14     +8
+  beat            20 ->  16     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  yell             5 ->   7     -2
+  ask              3 ->   5     -2
+  question        11 ->  18     -7
+  beat             2 ->   2     +0
+  discuss         17 ->  29    -12
+  take             8 ->  14     -6
+  tell            18 ->  25     -7
+  sing            19 ->  20     -1
+  look            15 ->  16     -1
+  shout           23 ->  23     +0
+
+HIGHER UNDER B
+  fight           14 ->   9     +5
+  shoot            9 ->   8     +1
+  rob             52 ->  19    +33
+  attack          12 ->  10     +2
+  play            20 ->  13     +7
+  insult          48 ->  22    +26
+  talk             1 ->   1     +0
+  search          16 ->  15     +1
+  pray            21 ->  17     +4
+  hit             13 ->  12     +1
+  argue            4 ->   3     +1
+  make             6 ->   4     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  play             2 ->   3     -1
+  work             5 ->  12     -7
+  eat              7 ->  15     -8
+  read            14 ->  42    -28
+  sing             6 ->  10     -4
+  sit             15 ->  22     -7
+  say             22 ->  60    -38
+  discuss         10 ->  13     -3
+  argue            4 ->   6     -2
+  pray            16 ->  19     -3
+  chat            19 ->  23     -4
+  do              20 ->  25     -5
+  look            13 ->  14     -1
+  draw            21 ->  24     -3
+
+HIGHER UNDER B
+  talk             1 ->   1     +0
+  laugh           32 ->  11    +21
+  beat            57 ->  16    +41
+  dance            9 ->   4     +5
+  take             8 ->   5     +3
+  fight           17 ->   8     +9
+  walk            24 ->  18     +6
+  make            12 ->   9     +3
+  tell            11 ->   7     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  tell             3 ->  18    -15
+  ask              4 ->  17    -13
+  talk             1 ->   1     +0
+  take             8 ->  19    -11
+  say             19 ->  66    -47
+  get             17 ->  40    -23
+  pray            16 ->  33    -17
+  look            20 ->  82    -62
+  sit             23 -> 100    -77
+  walk            18 ->  22     -4
+  shake           22 ->  32    -10
+  discuss         10 ->  14     -4
+  give            24 ->  31     -7
+  laugh           12 ->  13     -1
+  eat             21 ->  24     -3
+  argue            9 ->  12     -3
+  make             5 ->   8     -3
+
+HIGHER UNDER B
+  dance           14 ->   3    +11
+  speak            2 ->   2     +0
+  sing            11 ->   4     +7
+  explain          7 ->   5     +2
+  introduce       15 ->   7     +8
+  share           34 ->  10    +24
+  play             6 ->   6     +0
+  joke            54 ->  11    +43
+  mingle          89 ->  16    +73
+  cheer           78 ->  15    +63
+  chat            13 ->   9     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

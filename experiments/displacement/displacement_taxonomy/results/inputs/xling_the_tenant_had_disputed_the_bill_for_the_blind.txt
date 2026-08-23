@@ -1,0 +1,1596 @@
+Below are 49 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: The tenant had disputed the bill for the repairs again, so the landlord decided to ___
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  sue              2 ->  89    -87
+  evict            4 ->  36    -32
+  have             6 ->  12     -6
+  get              7 ->  18    -11
+  go               5 ->   8     -3
+  call             9 ->  75    -66
+  make            12 ->  37    -25
+  bring           10 ->  26    -16
+  file            11 ->  27    -16
+  sell            17 -> 112    -95
+  put             15 ->  45    -30
+  try             13 ->  19     -6
+  do              19 ->  57    -38
+  hire            21 ->  78    -57
+  give            16 ->  30    -14
+  let             20 ->  31    -11
+  charge          18 ->  23     -5
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  issue           23 ->   2    +21
+  involve         52 ->   4    +48
+  send             3 ->   3     +0
+  seek            24 ->   5    +19
+  serve           14 ->   7     +7
+  escalate        66 ->  10    +56
+  apply           32 ->   9    +23
+  carry           56 ->  11    +45
+  ask             28 ->  13    +15
+  use              8 ->   6     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  sue              1 ->   3     -2
+  bring            2 ->  54    -52
+  serve            3 ->  14    -11
+  sell             5 ->  24    -19
+  recover          6 ->  51    -45
+  commence         9 ->  90    -81
+  use              7 ->  17    -10
+  call             8 ->   8     +0
+  have            11 ->  13     -2
+  enter           13 ->  39    -26
+  accept          16 ->  79    -63
+  repossess       15 ->  31    -16
+  seek            18 ->  50    -32
+  file            17 ->  26     -9
+  foreclose       19 ->  30    -11
+  re              21 ->  64    -43
+  execute         24 ->  87    -63
+  record          25 ->  63    -38
+  let             23 ->  35    -12
+
+HIGHER UNDER B
+  evict            4 ->   1     +3
+  increase        85 ->   5    +80
+  put             39 ->   4    +35
+  take            14 ->   2    +12
+  withhold        49 ->  11    +38
+  give            48 ->   9    +39
+  end             42 ->   7    +35
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  evict            1 ->  25    -24
+  serve            4 ->   8     -4
+  cut              8 ->  40    -32
+  bring            5 ->  14     -9
+  do              14 ->  28    -14
+  terminate       21 ->  56    -35
+  go               6 ->  10     -4
+  carry           20 ->  39    -19
+  issue           17 ->  26     -9
+  sell            24 ->  57    -33
+  have            12 ->  18     -6
+  start           13 ->  15     -2
+  remove          23 ->  31     -8
+  get              7 ->   7     +0
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  file            16 ->   3    +13
+  seek            15 ->   4    +11
+  call             9 ->   5     +4
+  sue              3 ->   2     +1
+  engage          79 ->  16    +63
+  send            10 ->   6     +4
+  change          25 ->  11    +14
+  ask             30 ->  17    +13
+  give            19 ->  12     +7
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  hire             7 ->  16     -9
+  pay              1 ->   5     -4
+  do              11 ->  21    -10
+  get             20 ->  43    -23
+  charge          18 ->  30    -12
+  file            10 ->  14     -4
+  try             22 ->  35    -13
+  put             13 ->  19     -6
+  settle          23 ->  34    -11
+  move            21 ->  29     -8
+  wait            15 ->  22     -7
+  make            12 ->  17     -5
+  give             6 ->   7     -1
+  write           25 ->  33     -8
+  bring           24 ->  24     +0
+  take             3 ->   4     -1
+
+HIGHER UNDER B
+  go               2 ->   1     +1
+  call             4 ->   2     +2
+  send             5 ->   3     +2
+  negotiate       67 ->  15    +52
+  not             32 ->  11    +21
+  let             14 ->   9     +5
+  repair          19 ->  10     +9
+  have             9 ->   8     +1
+  remove          16 ->  12     +4
+  hold            27 ->  18     +9
+  proceed         28 ->  20     +8
+  ask             17 ->  13     +4
+  sue              8 ->   6     +2
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  file             3 ->  20    -17
+  send             2 ->   2     +0
+  evict            7 ->  42    -35
+  ask              8 ->  34    -26
+  charge          16 ->  56    -40
+  cancel          15 ->  31    -16
+  give            12 ->  29    -17
+  try             25 ->  77    -52
+  get             24 ->  48    -24
+  remove          11 ->  22    -11
+  make            21 ->  36    -15
+  move            23 ->  38    -15
+  stop            26 ->  45    -19
+  call             5 ->  13     -8
+  close           31 ->  44    -13
+  pay             17 ->  25     -8
+  put             30 ->  35     -5
+  have             4 ->   7     -3
+  sue             14 ->  17     -3
+  terminate       10 ->  14     -4
+
+HIGHER UNDER B
+  escalate        35 ->   4    +31
+  issue            9 ->   3     +6
+  investigate     50 ->   5    +45
+  take             1 ->   1     +0
+  seek            20 ->   6    +14
+  conduct         92 ->  12    +80
+  hire            29 ->  10    +19
+  bring           13 ->   8     +5
+  increase        34 ->  11    +23
+  pursue          32 ->  15    +17
+  start           18 ->  16     +2
+  contact         28 ->  19     +9
+  write           19 ->  18     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  sue              2 ->   7     -5
+  file             3 ->   3     +0
+  go               6 ->  21    -15
+  evict            8 ->  18    -10
+  bring            9 ->  16     -7
+  call             5 ->   6     -1
+  charge          13 ->  50    -37
+  have            10 ->  27    -17
+  terminate       16 ->  58    -42
+  put             14 ->  28    -14
+  use             11 ->  13     -2
+  show            12 ->  14     -2
+  install         17 ->  20     -3
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  escalate        69 ->   4    +65
+  send             4 ->   2     +2
+  hire             7 ->   5     +2
+  confront       102 ->  11    +91
+  issue           35 ->   9    +26
+  seek            15 ->   8     +7
+  contact         23 ->  10    +13
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  sue              2 ->   5     -3
+  evict            1 ->   4     -3
+  go               6 ->  37    -31
+  bring           10 ->  57    -47
+  have            12 ->  44    -32
+  sell            15 ->  73    -58
+  use              9 ->  22    -13
+  hire            13 ->  40    -27
+  get             19 ->  83    -64
+  serve           14 ->  31    -17
+  do              21 ->  69    -48
+  give            17 ->  34    -17
+  file             4 ->   7     -3
+  change          18 ->  21     -3
+  make            16 ->  16     +0
+  withhold         8 ->  13     -5
+
+HIGHER UNDER B
+  cut             11 ->   2     +9
+  take             3 ->   1     +2
+  terminate        5 ->   3     +2
+  deduct          20 ->   6    +14
+  lock            38 ->   9    +29
+  disconnect     107 ->  12    +95
+  turn            46 ->  10    +36
+  stop            29 ->  11    +18
+  enforce         69 ->  15    +54
+  fix             26 ->  14    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  evict            3 ->  19    -16
+  bring            5 ->   7     -2
+  go               6 ->   9     -3
+  sell            15 ->  41    -26
+  cut             17 ->  29    -12
+  do              21 ->  51    -30
+  put             18 ->  30    -12
+  make            13 ->  22     -9
+  call             9 ->  13     -4
+  use             12 ->  14     -2
+  ask             10 ->  10     +0
+
+HIGHER UNDER B
+  sue              1 ->   1     +0
+  take             2 ->   2     +0
+  send             4 ->   3     +1
+  hire            11 ->   4     +7
+  charge           8 ->   5     +3
+  raise           14 ->   8     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  evict            4 ->   9     -5
+  go               2 ->   3     -1
+  sue              3 ->   5     -2
+  withhold         9 ->  29    -20
+  call             5 ->   6     -1
+  get              7 ->  13     -6
+  do              16 ->  28    -12
+  let             19 ->  36    -17
+  just            25 ->  55    -30
+  give            11 ->  18     -7
+  ask             20 ->  33    -13
+  make            13 ->  20     -7
+  try             18 ->  26     -8
+  hire            12 ->  17     -5
+  have             8 ->  12     -4
+  file            10 ->  10     +0
+  pay             15 ->  15     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  send             6 ->   2     +4
+  seek            21 ->   4    +17
+  deduct          22 ->   7    +15
+  consult         23 ->   8    +15
+  involve         50 ->  16    +34
+  bring           14 ->  11     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  sue              2 ->   2     +0
+  take             1 ->   1     +0
+  go               3 ->   7     -4
+  evict            9 ->  31    -22
+  bring            4 ->  11     -7
+  apply           15 ->  28    -13
+  issue           11 ->  18     -7
+  start           16 ->  34    -18
+  claim           19 ->  30    -11
+  pursue           8 ->  15     -7
+  make            17 ->  20     -3
+  get              7 ->  14     -7
+  sell            22 ->  39    -17
+  serve           20 ->  26     -6
+
+HIGHER UNDER B
+  seek            13 ->   4     +9
+  send            12 ->   3     +9
+  hire            14 ->   5     +9
+  deduct          18 ->   8    +10
+  call            21 ->  12     +9
+  involve         38 ->  13    +25
+  have            10 ->  10     +0
+  engage          26 ->  16    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  do               3 ->  20    -17
+  sue              2 ->   5     -3
+  get              5 ->  14     -9
+  what            13 -> 130   -117
+  show            16 ->  43    -27
+  hire            11 ->  22    -11
+  keep            17 ->  42    -25
+  fire            21 ->  36    -15
+  put             18 ->  19     -1
+  cancel          20 ->  21     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  contact         32 ->  10    +22
+  send            10 ->   6     +4
+  terminate       57 ->  17    +40
+  bring           24 ->  12    +12
+  call             6 ->   2     +4
+  file            22 ->  16     +6
+  make            15 ->   9     +6
+  ask             19 ->  15     +4
+  charge           7 ->   4     +3
+  increase        23 ->  18     +5
+  cut              9 ->   8     +1
+  have            12 ->  11     +1
+  go               8 ->   7     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  file             2 ->   6     -4
+  sue              1 ->   1     +0
+  take             3 ->  11     -8
+  go               5 ->  71    -66
+  pay              6 ->  36    -30
+  make             7 ->  18    -11
+  have             9 ->  32    -23
+  give            10 ->  28    -18
+  start           14 ->  60    -46
+  put             21 -> 160   -139
+  write           19 -> 133   -114
+  do              18 ->  99    -81
+  move            17 ->  80    -63
+  terminate       11 ->  21    -10
+  call             8 ->   9     -1
+  cancel          12 ->  22    -10
+
+HIGHER UNDER B
+  proceed         15 ->   3    +12
+  accept         128 ->   4   +124
+  request         94 ->   7    +87
+  hold            13 ->   5     +8
+  renegotiate    160 ->  15   +145
+  seek            52 ->  12    +40
+  wait            30 ->  10    +20
+  recalculate    154 ->  20   +134
+  require        135 ->  23   +112
+  reject         132 ->  24   +108
+  return          49 ->  13    +36
+  waive          139 ->  26   +113
+  send             4 ->   2     +2
+  re             151 ->  27   +124
+  pursue          16 ->   8     +8
+  repair          36 ->  16    +20
+  keep            31 ->  14    +17
+  ask             41 ->  25    +16
+  hire            28 ->  19     +9
+  withhold        20 ->  17     +3
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  sue              3 ->  19    -16
+  go               2 ->   5     -3
+  file             6 ->  10     -4
+  get              7 ->  22    -15
+  evict           14 ->  48    -34
+  have             9 ->  16     -7
+  try             10 ->  17     -7
+  check           21 ->  45    -24
+  make            13 ->  28    -15
+  use             19 ->  33    -14
+  pay             16 ->  31    -15
+  do              20 ->  27     -7
+  contact         11 ->  13     -2
+  bring           12 ->  12     +0
+  pursue          17 ->  20     -3
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  terminate       33 ->   4    +29
+  escalate       101 ->   9    +92
+  seek            18 ->   6    +12
+  involve         68 ->  14    +54
+  end             59 ->  15    +44
+  hire             5 ->   3     +2
+  send             4 ->   2     +2
+  write           30 ->  11    +19
+  give            15 ->   8     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  sue              1 ->   7     -6
+  file             7 ->  35    -28
+  deduct          12 -> 102    -90
+  go               5 ->  10     -5
+  have             8 ->  18    -10
+  appeal          13 ->  55    -42
+  give            10 ->  23    -13
+  charge           9 ->  16     -7
+  call             6 ->   9     -3
+  start           16 ->  71    -55
+  pay             21 -> 104    -83
+  make            18 ->  54    -36
+  use             11 ->  14     -3
+  put             15 ->  28    -13
+  bring           17 ->  30    -13
+  serve           19 ->  24     -5
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  escalate        88 ->   4    +84
+  hire            14 ->   5     +9
+  seek            29 ->   6    +23
+  evict            3 ->   2     +1
+  apply           50 ->   8    +42
+  install         67 ->  12    +55
+  enforce         45 ->  11    +34
+  cut             43 ->  13    +30
+  send             4 ->   3     +1
+  get             20 ->  15     +5
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  sue              2 ->   3     -1
+  have             4 ->   7     -3
+  get              3 ->   4     -1
+  put             13 ->  47    -34
+  evict           10 ->  27    -17
+  call            14 ->  39    -25
+  fix             19 ->  49    -30
+  do              15 ->  36    -21
+  go               8 ->  13     -5
+  serve           12 ->  21     -9
+  cut              7 ->  12     -5
+  use             17 ->  26     -9
+  file            18 ->  20     -2
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  send             5 ->   2     +3
+  inspect         57 ->  10    +47
+  write           36 ->   9    +27
+  involve         78 ->  14    +64
+  visit           49 ->  15    +34
+  install          9 ->   6     +3
+  apply           16 ->  11     +5
+  make             6 ->   5     +1
+  hire            11 ->   8     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  A                1 ->  11    -10
+  ___              3 ->  58    -55
+  file             7 ->  19    -12
+  pursue           5 ->   8     -3
+  issue           12 ->  53    -41
+  seek            11 ->  16     -5
+  have            10 ->  10     +0
+
+HIGHER UNDER B
+  send             4 ->   1     +3
+  get             16 ->   3    +13
+  wait            41 ->   7    +34
+  take             2 ->   2     +0
+  sue              6 ->   4     +2
+  hire             9 ->   5     +4
+  do              15 ->   9     +6
+  go               8 ->   6     +2
+  try             48 ->  14    +34
+  sell            42 ->  12    +30
+  give            25 ->  13    +12
+  call            20 ->  15     +5
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  A                2 ->   3     -1
+  sue              4 ->  17    -13
+  hire             8 ->  53    -45
+  charge           9 ->  25    -16
+  get             11 ->  41    -30
+  go               6 ->  10     -4
+  file             5 ->   8     -3
+  call            17 ->  68    -51
+  pursue          14 ->  21     -7
+  contact         16 ->  24     -8
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  deduct          12 ->   2    +10
+  do              13 ->   5     +8
+  give            18 ->   6    +12
+  provide         57 ->  11    +46
+  inspect         88 ->  13    +75
+  what           128 ->  15   +113
+  make            20 ->  12     +8
+  have            10 ->   9     +1
+  ___              7 ->   7     +0
+  seek            15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  take             2 ->   2     +0
+  hire             3 ->  15    -12
+  go               4 ->  17    -13
+  sue              8 ->  70    -62
+  fix              7 ->  66    -59
+  get             12 ->  33    -21
+  pursue          11 ->  21    -10
+  have            17 ->  50    -33
+  do              16 ->  44    -28
+  inspect         19 ->  39    -20
+  charge          10 ->  10     +0
+  use             13 ->  14     -1
+  contact         14 ->  16     -2
+
+HIGHER UNDER B
+  A                1 ->   1     +0
+  handle          20 ->   6    +14
+  address         18 ->   7    +11
+  seek            21 ->   8    +13
+  involve          9 ->   5     +4
+  check           23 ->   9    +14
+  ___              6 ->   4     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  cancel           6 ->  33    -27
+  terminate       10 ->  38    -28
+  take             1 ->   2     -1
+  put             21 ->  57    -36
+  remove          14 ->  40    -26
+  pay              9 ->  19    -10
+  move            29 ->  64    -35
+  send            16 ->  30    -14
+  charge           2 ->   4     -2
+  do              24 ->  44    -20
+  get             13 ->  22     -9
+  sue             17 ->  27    -10
+  file             4 ->  13     -9
+  call            23 ->  35    -12
+  have             8 ->  16     -8
+  make             7 ->  12     -5
+  ask             22 ->  24     -2
+
+HIGHER UNDER B
+  increase         3 ->   1     +2
+  investigate     25 ->   5    +20
+  negotiate       61 ->  17    +44
+  offer           33 ->  10    +23
+  escalate        60 ->  20    +40
+  issue           18 ->   7    +11
+  seek            19 ->   9    +10
+  settle          26 ->  14    +12
+  pursue          28 ->  15    +13
+  provide         70 ->  28    +42
+  ____            15 ->   8     +7
+  request         58 ->  26    +32
+  give             5 ->   3     +2
+  add             11 ->   6     +5
+  deduct          12 ->  11     +1
+  hold            31 ->  21    +10
+  use             20 ->  18     +2
+  require         30 ->  25     +5
+  change          27 ->  23     +4
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  _____            7 ->  11     -4
+  do              13 ->  21     -8
+  ________         5 ->   7     -2
+  ____             2 ->   3     -1
+  ______           3 ->   5     -2
+  go               6 ->   8     -2
+  call            12 ->  15     -3
+  get              8 ->  12     -4
+  _______         18 ->  20     -2
+  bring           16 ->  16     +0
+  give            17 ->  17     +0
+
+HIGHER UNDER B
+  file            10 ->   4     +6
+  sue              4 ->   2     +2
+  take             1 ->   1     +0
+  hire            11 ->   6     +5
+  send            15 ->  10     +5
+  seek            19 ->  14     +5
+  have            14 ->  13     +1
+  ___              9 ->   9     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  do               1 ->   4     -3
+  inspect          2 ->  77    -75
+  what             3 -> 110   -107
+  pay              7 ->  44    -37
+  get              5 ->   8     -3
+  ____             8 ->  28    -20
+  _____           10 ->  89    -79
+  come            15 ->  99    -84
+  visit           14 ->  66    -52
+  have             9 ->  19    -10
+  check           17 ->  39    -22
+  ___             11 ->  23    -12
+  ______          13 ->  29    -16
+  hire            20 ->  48    -28
+  make            12 ->  17     -5
+  go              19 ->  20     -1
+
+HIGHER UNDER B
+  take             6 ->   1     +5
+  cut             16 ->   3    +13
+  give            53 ->   5    +48
+  call             4 ->   2     +2
+  send            35 ->   7    +28
+  issue           80 ->  11    +69
+  file            64 ->  15    +49
+  let             41 ->  10    +31
+  change          24 ->   9    +15
+  end             46 ->  13    +33
+  terminate       43 ->  14    +29
+  charge          61 ->  16    +45
+  evict           18 ->   6    +12
+  put             27 ->  12    +15
+  |              106 ->  18    +88
+  contact         48 ->  21    +27
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  take             1 ->   4     -3
+  sue              2 ->  39    -37
+  file             3 ->   8     -5
+  go               7 ->  56    -49
+  send             9 ->  36    -27
+  sell            10 ->  60    -50
+  hire             6 ->   7     -1
+  bring           11 ->  74    -63
+  move            13 ->  52    -39
+  pursue          12 ->  21     -9
+  put             17 ->  75    -58
+  terminate       18 ->  51    -33
+  evict           16 ->  33    -17
+  do              20 ->  57    -37
+  use             21 ->  35    -14
+  give            23 ->  37    -14
+  try             24 ->  48    -24
+  serve           22 ->  22     +0
+
+HIGHER UNDER B
+  get              4 ->   1     +3
+  have             5 ->   2     +3
+  call             8 ->   3     +5
+  withhold        29 ->   5    +24
+  change          31 ->   6    +25
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  give             5 ->   7     -2
+  sue             13 ->  35    -22
+  make             7 ->  12     -5
+  do               9 ->  20    -11
+  pay              6 ->   6     +0
+  get             11 ->  18     -7
+  call            10 ->  16     -6
+  let             12 ->  15     -3
+  go               2 ->   4     -2
+  fight           16 ->  27    -11
+  fix             21 ->  34    -13
+  put             19 ->  24     -5
+  use             20 ->  28     -8
+  file            22 ->  22     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  have             3 ->   2     +1
+  send             4 ->   3     +1
+  appeal           8 ->   5     +3
+  bring           25 ->  11    +14
+  proceed         33 ->  17    +16
+  try             23 ->  13    +10
+  ask             14 ->   8     +6
+  act             30 ->  21     +9
+  move            17 ->   9     +8
+  hire            18 ->  14     +4
+  keep            24 ->  19     +5
+  settle          15 ->  10     +5
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  sue              2 ->  22    -20
+  evict            4 ->  25    -21
+  bring           13 ->  46    -33
+  sell            19 -> 132   -113
+  have             5 ->  10     -5
+  serve           16 ->  48    -32
+  call            17 ->  59    -42
+  make            11 ->  26    -15
+  get              7 ->   8     -1
+  hire            10 ->  13     -3
+  go               6 ->   6     +0
+  do              20 ->  27     -7
+  use              8 ->   9     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  handle         127 ->   5   +122
+  send             3 ->   2     +1
+  escalate        70 ->  15    +55
+  cut             12 ->   3     +9
+  withhold        18 ->   7    +11
+  stop            23 ->  11    +12
+  proceed         39 ->  18    +21
+  install         32 ->  16    +16
+  settle          45 ->  19    +26
+  file             9 ->   4     +5
+  report          40 ->  20    +20
+  terminate       15 ->  12     +3
+  seek            21 ->  17     +4
+  give            14 ->  14     +0
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  check           26 ->  40    -14
+  rent            10 ->  16     -6
+  pay             22 ->  32    -10
+  give             2 ->   3     -1
+  settle           9 ->   9     +0
+  keep            15 ->  19     -4
+  collect         21 ->  24     -3
+  have            25 ->  29     -4
+  cut             20 ->  21     -1
+  charge           7 ->   8     -1
+
+HIGHER UNDER B
+  evict            3 ->   2     +1
+  increase         8 ->   7     +1
+  add              6 ->   5     +1
+  sue             14 ->  10     +4
+  take             1 ->   1     +0
+  demolish        17 ->  12     +5
+  file            16 ->  14     +2
+  hire            33 ->  22    +11
+  send             4 ->   4     +0
+  move            30 ->  25     +5
+  apply           19 ->  18     +1
+  turn            18 ->  17     +1
+  put             11 ->  11     +0
+  enforce         23 ->  20     +3
+  install         27 ->  26     +1
+  fine            24 ->  23     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  go               2 ->  24    -22
+  get              6 ->  14     -8
+  sue              5 ->  11     -6
+  evict            4 ->   7     -3
+  do               8 ->  33    -25
+  call             9 ->  28    -19
+  put             11 ->  19     -8
+  let             12 ->  18     -6
+  bring           18 ->  36    -18
+  try             19 ->  37    -18
+  make            10 ->  12     -2
+  give            14 ->  20     -6
+  come            26 ->  43    -17
+  hire            13 ->  13     +0
+  move            20 ->  29     -9
+  rent            23 ->  32     -9
+  file            24 ->  26     -2
+  show            22 ->  23     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  deduct          32 ->   2    +30
+  install         25 ->   5    +20
+  replace         21 ->   6    +15
+  cut             31 ->   9    +22
+  increase        80 ->  17    +63
+  provide         84 ->  22    +62
+  send             3 ->   3     +0
+  use             16 ->   8     +8
+  end             39 ->  15    +24
+  terminate       27 ->  21     +6
+  withhold        15 ->  10     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  evict            1 ->   2     -1
+  sell             9 ->  28    -19
+  get             10 ->  12     -2
+  go               6 ->   8     -2
+  move            15 ->  32    -17
+  try             14 ->  27    -13
+  call            13 ->  17     -4
+  give             7 ->   7     +0
+  charge          18 ->  26     -8
+  make            11 ->  14     -3
+  remove          12 ->  13     -1
+  put             17 ->  21     -4
+  sue              3 ->   5     -2
+  pay             16 ->  20     -4
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  send             5 ->   4     +1
+  hire            24 ->   9    +15
+  file             4 ->   3     +1
+  seek            32 ->  11    +21
+  hold            46 ->  18    +28
+  contact         20 ->  10    +10
+  pursue          33 ->  19    +14
+  deduct          37 ->  24    +13
+  bring           30 ->  22     +8
+  use             21 ->  16     +5
+  proceed         25 ->  25     +0
+  terminate       19 ->  15     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  file             3 ->   3     +0
+  terminate        8 ->  29    -21
+  pursue          11 ->  24    -13
+  sue              2 ->   2     +0
+  try             14 ->  27    -13
+  seek             7 ->  16     -9
+  just            18 ->  32    -14
+  go               4 ->   4     +0
+  proceed         21 ->  30     -9
+  move            20 ->  28     -8
+  make            15 ->  19     -4
+  use             16 ->  17     -1
+  bring           13 ->  13     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  put             19 ->   6    +13
+  evict            5 ->   5     +0
+  send            12 ->   7     +5
+  serve           26 ->  11    +15
+  turn            30 ->  15    +15
+  cut             23 ->  14     +9
+  hire             9 ->   9     +0
+  have            17 ->  12     +5
+  get             10 ->  10     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  sue              2 ->   3     -1
+  evict            4 ->   4     +0
+  sell            15 ->  26    -11
+  give            16 ->  18     -2
+  use             18 ->  19     -1
+  make            12 ->  15     -3
+  issue           20 ->  20     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  consult         25 ->  13    +12
+  seek             9 ->   8     +1
+  send             7 ->   5     +2
+  file             8 ->   6     +2
+  call            11 ->  11     +0
+  hire            10 ->  10     +0
+  pursue          14 ->  12     +2
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  sell             3 ->   7     -4
+  remove          16 ->  18     -2
+  move            15 ->  17     -2
+  use             19 ->  21     -2
+  put              9 ->   9     +0
+  get             11 ->  12     -1
+  make            13 ->  15     -2
+  do              20 ->  20     +0
+  take             1 ->   1     +0
+
+HIGHER UNDER B
+  file             5 ->   4     +1
+  send            12 ->  11     +1
+  hire            18 ->  14     +4
+  have             4 ->   3     +1
+  evict            2 ->   2     +0
+  sue              6 ->   5     +1
+  charge          14 ->  13     +1
+  go               8 ->   8     +0
+  call             7 ->   6     +1
+  bring           17 ->  16     +1
+  contact         21 ->  19     +2
+  give            10 ->  10     +0
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  file             4 ->  12     -8
+  hire             2 ->   8     -6
+  put              8 ->  15     -7
+  appeal          14 ->  34    -20
+  call             5 ->   6     -1
+  try             19 ->  40    -21
+  sell            17 ->  30    -13
+  move            12 ->  17     -5
+  get              9 ->  10     -1
+  use             16 ->  20     -4
+  go               7 ->   9     -2
+  bring           21 ->  21     +0
+
+HIGHER UNDER B
+  evict           13 ->   5     +8
+  take             1 ->   1     +0
+  send            11 ->   3     +8
+  give            10 ->   7     +3
+  cancel          26 ->  13    +13
+  sue              3 ->   2     +1
+  do              15 ->  11     +4
+  make            20 ->  14     +6
+  pay             25 ->  19     +6
+  contact         22 ->  18     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  sell            10 ->  24    -14
+  pursue          13 ->  30    -17
+  sue              7 ->  18    -11
+  evict            4 ->   7     -3
+  do              17 ->  22     -5
+  terminate       18 ->  26     -8
+  start           20 ->  29     -9
+  proceed         26 ->  33     -7
+  go               3 ->   4     -1
+  file            11 ->  13     -2
+  end             25 ->  31     -6
+  withhold        22 ->  25     -3
+  seek             6 ->   9     -3
+
+HIGHER UNDER B
+  use             12 ->   5     +7
+  engage          39 ->  17    +22
+  hire            21 ->  11    +10
+  have             5 ->   3     +2
+  call            23 ->  15     +8
+  send             9 ->   6     +3
+  take             1 ->   1     +0
+  deduct           8 ->   8     +0
+  bring           15 ->  10     +5
+  contact         34 ->  27     +7
+  cut             28 ->  19     +9
+  let             29 ->  20     +9
+  get              2 ->   2     +0
+  pay             27 ->  21     +6
+  give            31 ->  28     +3
+  issue           14 ->  12     +2
+  serve           16 ->  14     +2
+  apply           24 ->  23     +1
+  make            19 ->  16     +3
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  call             4 ->   9     -5
+  get              3 ->   5     -2
+  replace         11 ->  19     -8
+  have             5 ->   8     -3
+  sell            24 ->  30     -6
+  use             23 ->  28     -5
+  install         16 ->  22     -6
+  put             13 ->  16     -3
+  let             18 ->  23     -5
+  do               9 ->  10     -1
+  remove          10 ->  11     -1
+  cut             25 ->  25     +0
+  send            21 ->  21     +0
+  go               6 ->   6     +0
+
+HIGHER UNDER B
+  terminate        8 ->   3     +5
+  evict            1 ->   1     +0
+  sue              7 ->   4     +3
+  file            28 ->  20     +8
+  make            12 ->   7     +5
+  take             2 ->   2     +0
+  bring           32 ->  27     +5
+  fix             22 ->  15     +7
+  just            27 ->  24     +3
+  charge          17 ->  14     +3
+  hire            15 ->  12     +3
+  pay             26 ->  26     +0
+  move            20 ->  17     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  sue              6 ->  31    -25
+  go               3 ->   6     -3
+  file            17 ->  81    -64
+  appeal          13 ->  43    -30
+  take             1 ->   1     +0
+  have             5 ->   5     +0
+  do              11 ->  21    -10
+  bring           14 ->  29    -15
+  pay             10 ->  16     -6
+  make             9 ->  12     -3
+  use             12 ->  13     -1
+  give            15 ->  18     -3
+  send             4 ->   4     +0
+
+HIGHER UNDER B
+  get              2 ->   2     +0
+  call             7 ->   3     +4
+  contact         21 ->   8    +13
+  hire             8 ->   7     +1
+  look            56 ->  14    +42
+  seek            18 ->   9     +9
+  keep            50 ->  17    +33
+  try             19 ->  11     +8
+  ask             16 ->  10     +6
+  put             20 ->  15     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  sue              2 ->   3     -1
+  evict            4 ->   7     -3
+  have             5 ->   8     -3
+  get              6 ->   9     -3
+  sell             8 ->  16     -8
+  try             10 ->  23    -13
+  put             15 ->  22     -7
+  do              13 ->  18     -5
+  make            14 ->  15     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  hire            11 ->   5     +6
+  file             9 ->   6     +3
+  send             7 ->   4     +3
+  pursue          18 ->  10     +8
+  withhold        28 ->  14    +14
+  give            17 ->  12     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  sue              3 ->  15    -12
+  go               2 ->   3     -1
+  apply            7 ->  48    -41
+  evict            5 ->  21    -16
+  issue            4 ->  18    -14
+  serve           11 ->  28    -17
+  bring           13 ->  41    -28
+  make            14 ->  31    -17
+  start           15 ->  26    -11
+  use             17 ->  22     -5
+  withhold        16 ->  16     +0
+  have            19 ->  35    -16
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  send            12 ->   2    +10
+  contact         31 ->   8    +23
+  call            25 ->   9    +16
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  call             3 ->  14    -11
+  have             8 ->  26    -18
+  withhold        12 ->  73    -61
+  make             7 ->  17    -10
+  go               4 ->  11     -7
+  raise            6 ->  12     -6
+  get             10 ->  20    -10
+  give            11 ->  19     -8
+  bring           16 ->  67    -51
+  let             14 ->  51    -37
+  show            19 ->  72    -53
+  sue             20 ->  74    -54
+  do              15 ->  39    -24
+  pay             13 ->  16     -3
+  ask             21 ->  48    -27
+  evict           18 ->  25     -7
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  terminate       22 ->   4    +18
+  hire             5 ->   3     +2
+  solve           40 ->   7    +33
+  resolve         32 ->   6    +26
+  handle          92 ->   9    +83
+  settle          41 ->   8    +33
+  inspect         33 ->  10    +23
+  visit            9 ->   5     +4
+  send             2 ->   2     +0
+  meet            39 ->  13    +26
+  end             45 ->  18    +27
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  evict            3 ->   8     -5
+  have             6 ->  26    -20
+  get              7 ->  23    -16
+  serve           14 ->  37    -23
+  try             13 ->  28    -15
+  sue              2 ->   2     +0
+  issue           23 ->  47    -24
+  terminate       20 ->  35    -15
+  put             16 ->  27    -11
+  use              8 ->  11     -3
+  do              21 ->  24     -3
+  make            18 ->  18     +0
+  ask             24 ->  30     -6
+  deduct          15 ->  16     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  send             5 ->   4     +1
+  file             9 ->   5     +4
+  hire            10 ->   6     +4
+  call            12 ->   7     +5
+  pursue          28 ->  13    +15
+  seek            25 ->   9    +16
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  sue              2 ->   2     +0
+  go               3 ->   4     -1
+  evict            6 ->  10     -4
+  do               9 ->  14     -5
+  put             14 ->  20     -6
+  seek            15 ->  19     -4
+  make             8 ->  11     -3
+  hire            12 ->  13     -1
+  withhold        16 ->  17     -1
+  use             11 ->  12     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  send             4 ->   3     +1
+  charge          17 ->   9     +8
+  file            13 ->   8     +5
+  cut             47 ->  16    +31
+  bring           10 ->   7     +3
+  get              5 ->   5     +0
+  have             7 ->   6     +1
+  deduct          21 ->  15     +6
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  have             3 ->  26    -23
+  sue              5 ->  29    -24
+  go               6 ->  31    -25
+  file            11 ->  95    -84
+  do               9 ->  36    -27
+  evict            1 ->   1     +0
+  throw           12 ->  48    -36
+  kick            13 ->  54    -41
+  bring           14 ->  52    -38
+  terminate       23 ->  97    -74
+  show            16 ->  39    -23
+  move            21 ->  47    -26
+  serve           22 ->  35    -13
+  put             18 ->  27     -9
+
+HIGHER UNDER B
+  hire            42 ->   3    +39
+  charge          33 ->   7    +26
+  cancel          38 ->   9    +29
+  call             4 ->   4     +0
+  take             2 ->   2     +0
+  add             39 ->  10    +29
+  install         46 ->  12    +34
+  speak          116 ->  17    +99
+  look            75 ->  14    +61
+  see             82 ->  18    +64
+  make            10 ->   6     +4
+  cut             20 ->  11     +9
+  rent            49 ->  23    +26
+  collect         72 ->  25    +47
+  write           43 ->  20    +23
+  sell            29 ->  16    +13
+  break           34 ->  24    +10
+  end             28 ->  21     +7
+  give            15 ->  13     +2
+  get              7 ->   5     +2
+  contact         24 ->  22     +2
+  send             8 ->   8     +0
+  use             17 ->  15     +2
+  remove          19 ->  19     +0
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  evict            2 ->   9     -7
+  go               4 ->  20    -16
+  sue              5 ->  14     -9
+  hire             9 ->  19    -10
+  get             10 ->  52    -42
+  serve            6 ->   8     -2
+  have             8 ->  11     -3
+  call            13 ->  90    -77
+  bring           12 ->  17     -5
+  put             15 ->  58    -43
+  withhold        11 ->  12     -1
+  do              16 ->  40    -24
+  give            18 ->  38    -20
+  use             17 ->  24     -7
+  make            19 ->  49    -30
+  terminate       14 ->  15     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  send             3 ->   2     +1
+  deduct          42 ->   3    +39
+  proceed         32 ->   5    +27
+  issue           23 ->   6    +17
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  do               3 ->  15    -12
+  write           14 ->  44    -30
+  get             11 ->  27    -16
+  give             6 ->  12     -6
+  make            10 ->  25    -15
+  put             12 ->  31    -19
+  cut             15 ->  39    -24
+  have             7 ->   9     -2
+  try             19 ->  40    -21
+  pay             16 ->  21     -5
+  go               2 ->   5     -3
+  show            22 ->  43    -21
+
+HIGHER UNDER B
+  send             8 ->   2     +6
+  terminate       50 ->   6    +44
+  involve         54 ->  13    +41
+  proceed        116 ->  20    +96
+  seek            60 ->  17    +43
+  hire            20 ->  10    +10
+  pursue          99 ->  23    +76
+  take             1 ->   1     +0
+  file            46 ->  22    +24
+  sue              5 ->   3     +2
+  charge          17 ->  11     +6
+  sell            25 ->  14    +11
+  apply           59 ->  29    +30
+  change          29 ->  18    +11
+  increase        37 ->  24    +13
+  evict            4 ->   4     +0
+  start           34 ->  28     +6
+  use             13 ->   7     +6
+  bring           21 ->  19     +2
+  ask             18 ->  16     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  sue              2 ->  36    -34
+  go               3 ->  39    -36
+  get              4 ->  20    -16
+  call             9 ->  26    -17
+  have            12 ->  28    -16
+  evict           11 ->  18     -7
+  file             5 ->  13     -8
+  carry           19 ->  65    -46
+  sell            22 -> 107    -85
+  start           15 ->  19     -4
+  bring           18 ->  22     -4
+  pursue          14 ->  14     +0
+  re              21 ->  23     -2
+  hire             8 ->  11     -3
+
+HIGHER UNDER B
+  escalate        23 ->   2    +21
+  take             1 ->   1     +0
+  involve         37 ->   4    +33
+  serve           10 ->   3     +7
+  seek            17 ->   6    +11
+  provide         84 ->   9    +75
+  use              6 ->   5     +1
+  terminate       16 ->   7     +9
+  follow          67 ->  12    +55
+  send            13 ->   8     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  go               2 ->   5     -3
+  evict            6 ->  17    -11
+  sue              9 ->  29    -20
+  terminate       14 ->  50    -36
+  issue           10 ->  33    -23
+  serve            5 ->   8     -3
+  start           13 ->  27    -14
+  end             20 ->  42    -22
+  apply           22 ->  43    -21
+  use              7 ->  13     -6
+  seek            16 ->  20     -4
+  change          25 ->  34     -9
+  withhold        19 ->  26     -7
+  let             26 ->  32     -6
+  make            17 ->  18     -1
+  give            23 ->  24     -1
+  put             12 ->  15     -3
+
+HIGHER UNDER B
+  call             8 ->   4     +4
+  take             1 ->   1     +0
+  check           28 ->   7    +21
+  send             4 ->   3     +1
+  visit           34 ->  12    +22
+  consult         31 ->  11    +20
+  have            11 ->   6     +5
+  get              3 ->   2     +1
+  contact         21 ->   9    +12
+  show            59 ->  19    +40
+  draw            63 ->  21    +42
+  ask             18 ->  10     +8
+  write           27 ->  16    +11
+  try             15 ->  14     +1
+  do              30 ->  22     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  sue              1 ->   3     -2
+  file             5 ->  17    -12
+  send             4 ->  13     -9
+  deduct           8 ->  42    -34
+  go               7 ->  19    -12
+  pursue           9 ->  43    -34
+  charge          11 ->  60    -49
+  bring           14 ->  46    -32
+  hire            20 -> 139   -119
+  have            16 ->  27    -11
+  call            22 ->  25     -3
+  seek            18 ->  18     +0
+  get             12 ->  14     -2
+
+HIGHER UNDER B
+  evict            2 ->   1     +1
+  move            10 ->   4     +6
+  intervene       65 ->   9    +56
+  change          17 ->   6    +11
+  enforce         26 ->   8    +18
+  sell            13 ->   7     +6
+  escalate        51 ->  15    +36
+  end             28 ->  11    +17
+  raise           15 ->  10     +5
+  increase        34 ->  16    +18
+  collect         19 ->  12     +7
+  terminate        6 ->   5     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  go               2 ->  12    -10
+  seek             6 ->  15     -9
+  get             11 ->  37    -26
+  try             14 ->  45    -31
+  ask             17 ->  44    -27
+  bring           13 ->  24    -11
+  make            16 ->  31    -15
+  sue              9 ->  13     -4
+  use             10 ->  14     -4
+  appeal          21 -> 100    -79
+  call            24 ->  56    -32
+  have            23 ->  47    -24
+  file            19 ->  25     -6
+  proceed         20 ->  20     +0
+  write           22 ->  27     -5
+
+HIGHER UNDER B
+  terminate       18 ->   2    +16
+  take             1 ->   1     +0
+  serve            4 ->   4     +0
+  issue            3 ->   3     +0
+  send             7 ->   5     +2
+  cancel          47 ->  11    +36
+  withhold        32 ->  10    +22
+  pursue          12 ->   8     +4
+  apply            8 ->   7     +1
+  start           15 ->   9     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  sell             3 ->   7     -4
+  evict            1 ->   2     -1
+  demolish        18 ->  57    -39
+  put              8 ->  17     -9
+  do              13 ->  23    -10
+  get              4 ->   8     -4
+  have             7 ->  10     -3
+  rent            15 ->  20     -5
+  make            14 ->  18     -4
+  move            19 ->  26     -7
+  change          21 ->  28     -7
+  use             24 ->  30     -6
+  serve           17 ->  21     -4
+  bring           23 ->  25     -2
+  sue             10 ->  11     -1
+
+HIGHER UNDER B
+  hire            22 ->   6    +16
+  file             9 ->   4     +5
+  take             2 ->   1     +1
+  terminate       11 ->   9     +2
+  increase        38 ->  16    +22
+  fix             25 ->  13    +12
+  call             6 ->   3     +3
+  withhold        72 ->  22    +50
+  charge          20 ->  14     +6
+  go               5 ->   5     +0
+  raise           27 ->  19     +8
+  send            12 ->  12     +0
+  give            16 ->  15     +1
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  bring            3 ->  10     -7
+  sue              2 ->   3     -1
+  go               4 ->   7     -3
+  hire             6 ->   9     -3
+  file            10 ->  15     -5
+  use             11 ->  16     -5
+  ask             15 ->  30    -15
+  do              13 ->  18     -5
+  pay             16 ->  19     -3
+  seek            14 ->  17     -3
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  send             7 ->   2     +5
+  evict           24 ->   8    +16
+  terminate       68 ->  12    +56
+  increase        43 ->  14    +29
+  have             8 ->   5     +3
+  raise           17 ->  13     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  sue              2 ->  90    -88
+  evict            3 ->  64    -61
+  go               4 ->  11     -7
+  take             1 ->   2     -1
+  charge           8 ->  43    -35
+  get              7 ->  23    -16
+  make            12 ->  49    -37
+  put             10 ->  33    -23
+  file             9 ->  17     -8
+  use             19 ->  54    -35
+  withhold        14 ->  37    -23
+  give            18 ->  42    -24
+  move            22 ->  75    -53
+  pursue          13 ->  28    -15
+  start           23 ->  62    -39
+  try             21 ->  51    -30
+  do              17 ->  25     -8
+
+HIGHER UNDER B
+  hire            15 ->   1    +14
+  increase        29 ->   4    +25
+  seek            24 ->   6    +18
+  consult         57 ->   7    +50
+  send             5 ->   3     +2
+  have             6 ->   5     +1
+  escalate        76 ->   9    +67
+  engage         107 ->  10    +97
+  employ          78 ->  12    +66
+  address        133 ->  14   +119
+  negotiate      131 ->  16   +115
+  involve        142 ->  19   +123
+  prepare         89 ->  18    +71
+  call            11 ->   8     +3
+  bring           20 ->  15     +5
+  write           16 ->  13     +3
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 49 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

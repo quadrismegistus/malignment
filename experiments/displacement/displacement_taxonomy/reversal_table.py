@@ -60,7 +60,9 @@ def blind_prompts():
     for k in X._stash():
         if not isinstance(k, dict) or k.get("stage") != "crosslineage":
             continue
-        if not str(k.get("version") or "").endswith("b"):
+        #: `x1b` and `x1bn` are both blind; the second is blanks-stripped. Both
+        #: are in scope here and `arm_for` picks between them downstream.
+        if not str(k.get("version") or "").endswith(("b", "bn")):
             continue
         p, n = k["frame_prompt"], k.get("n_lineages") or 0
         best[p] = max(best.get(p, 0), n)

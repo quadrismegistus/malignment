@@ -1,0 +1,1433 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: The Home Office had refused his visa for the third time, so he decided to ___
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  go               1 ->   5     -4
+  leave            5 ->  24    -19
+  come             6 ->  40    -34
+  sue              7 ->  27    -20
+  try              8 ->  18    -10
+  flee            12 ->  89    -77
+  move            10 ->  28    -18
+  return          11 ->  26    -15
+  travel          13 ->  30    -17
+  fight           14 ->  34    -20
+  fly             17 ->  56    -39
+  stay            21 ->  52    -31
+  do              23 ->  67    -44
+  get             19 ->  48    -29
+  give            18 ->  37    -19
+  use             20 ->  39    -19
+
+HIGHER UNDER B
+  appeal           3 ->   1     +2
+  apply            4 ->   3     +1
+  challenge       15 ->   4    +11
+  file            22 ->   7    +15
+  contest         92 ->   9    +83
+  pursue          65 ->  11    +54
+  approach        38 ->  10    +28
+  take             2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  go               2 ->   2     +0
+  take             1 ->   1     +0
+  represent        3 ->  61    -58
+  challenge        4 ->  28    -24
+  appeal           5 ->  12     -7
+  sue              8 ->  35    -27
+  leave            6 ->   9     -3
+  bring           11 ->  37    -26
+  move             9 ->  20    -11
+  return          12 ->  24    -12
+
+HIGHER UNDER B
+  come            29 ->   3    +26
+  travel          14 ->   4    +10
+  seek            13 ->   6     +7
+  break           52 ->  10    +42
+  fly             32 ->   8    +24
+  run             35 ->  11    +24
+  fight           44 ->  13    +31
+  flee            82 ->  15    +67
+  jump            46 ->  17    +29
+  try             19 ->  14     +5
+  claim           26 ->  16    +10
+  do              43 ->  19    +24
+  turn            38 ->  18    +20
+  make            10 ->   7     +3
+  stay             7 ->   5     +2
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  go               2 ->   5     -3
+  leave            8 ->  12     -4
+  stay             4 ->   9     -5
+  travel           9 ->  16     -7
+  return          11 ->  22    -11
+  try              7 ->   7     +0
+  come            10 ->  15     -5
+  cross           21 -> 102    -81
+  make             5 ->   6     -1
+  move            14 ->  23     -9
+  fly             16 ->  41    -25
+  flee            20 ->  50    -30
+  risk            19 ->  49    -30
+  self            22 ->  34    -12
+  give            15 ->  21     -6
+  turn            18 ->  18     +0
+  fight           12 ->  13     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  apply            3 ->   2     +1
+  challenge       23 ->   4    +19
+  appeal           6 ->   3     +3
+  launch          17 ->  10     +7
+  seek            13 ->   8     +5
+  start           27 ->  11    +16
+  sue             37 ->  14    +23
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  try              6 ->   7     -1
+  take             3 ->   3     +0
+  move             4 ->   5     -1
+  apply            7 ->   8     -1
+  get             15 ->  23     -8
+  use             17 ->  36    -19
+  fly             16 ->  28    -12
+  do              19 ->  35    -16
+  make             8 ->  10     -2
+  head            10 ->  12     -2
+  flee            13 ->  13     +0
+
+HIGHER UNDER B
+  go               2 ->   1     +1
+  travel           9 ->   6     +3
+  start           20 ->  16     +4
+  look            14 ->  14     +0
+  visit           18 ->  15     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  go               1 ->   2     -1
+  try              5 ->  11     -6
+  move             7 ->   9     -2
+  return           8 ->  10     -2
+  apply            4 ->   5     -1
+  make            10 ->  13     -3
+  stay            11 ->  14     -3
+  travel           6 ->   8     -2
+  come            12 ->  16     -4
+  get             13 ->  29    -16
+  cross           16 ->  19     -3
+  emigrate        17 ->  22     -5
+  start           14 ->  15     -1
+
+HIGHER UNDER B
+  take             3 ->   1     +2
+  appeal          15 ->   4    +11
+  sue             27 ->   7    +20
+  seek             9 ->   6     +3
+  challenge       67 ->  12    +55
+  use             18 ->  17     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  leave            5 ->  10     -5
+  stay             9 ->  23    -14
+  go               3 ->   3     +0
+  travel          10 ->  13     -3
+  move            14 ->  22     -8
+  apply            4 ->   4     +0
+  return          15 ->  21     -6
+  get             16 ->  31    -15
+  run             19 ->  29    -10
+  do              18 ->  25     -7
+  sue              8 ->   8     +0
+  try              6 ->   7     -1
+
+HIGHER UNDER B
+  appeal           1 ->   1     +0
+  take             2 ->   2     +0
+  seek            11 ->   6     +5
+  challenge        7 ->   5     +2
+  write           26 ->  12    +14
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  go               1 ->   5     -4
+  return           9 ->  17     -8
+  stay             8 ->  11     -3
+  fly             11 ->  13     -2
+  leave           12 ->  16     -4
+  travel           5 ->  10     -5
+  get             18 ->  34    -16
+  do              17 ->  25     -8
+  give            20 ->  32    -12
+  head            19 ->  27     -8
+  make             6 ->   8     -2
+  try              4 ->   6     -2
+
+HIGHER UNDER B
+  challenge       15 ->   3    +12
+  apply            3 ->   1     +2
+  appeal          10 ->   4     +6
+  take             2 ->   2     +0
+  seek            13 ->   9     +4
+  sue             49 ->  14    +35
+  come             7 ->   7     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  go               1 ->   1     +0
+  make            12 ->  15     -3
+  move            15 ->  20     -5
+  visit           19 ->  42    -23
+  try              8 ->  13     -5
+  get             18 ->  34    -16
+  leave            6 ->   9     -3
+  take             4 ->   6     -2
+  fly             16 ->  17     -1
+  break           13 ->  14     -1
+
+HIGHER UNDER B
+  seek             9 ->   3     +6
+  stay            10 ->   8     +2
+  defy            20 ->  11     +9
+  enter            7 ->   7     +0
+  come             5 ->   5     +0
+  travel           2 ->   2     +0
+  protest         30 ->  19    +11
+  appeal          14 ->  12     +2
+  flee            24 ->  18     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  sue              7 ->  27    -20
+  go               2 ->   3     -1
+  give            14 ->  34    -20
+  apply            4 ->   6     -2
+  do              13 ->  15     -2
+  leave           10 ->  11     -1
+  try              5 ->   7     -2
+  move            21 ->  30     -9
+  stay            18 ->  21     -3
+  get             16 ->  17     -1
+  fly             17 ->  19     -2
+  come             8 ->   9     -1
+  use             20 ->  22     -2
+  travel          12 ->  12     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  appeal           3 ->   2     +1
+  seek            11 ->   5     +6
+  make             6 ->   4     +2
+  challenge       23 ->  10    +13
+  visit           22 ->  13     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  come             3 ->  14    -11
+  try              4 ->   5     -1
+  fly              9 ->  10     -1
+  do              14 ->  44    -30
+  go               2 ->   3     -1
+  get             11 ->  11     +0
+  risk            13 ->  22     -9
+  give            20 ->  40    -20
+  fight           18 ->  33    -15
+  head            21 ->  38    -17
+  apply            7 ->   7     +0
+  stay            12 ->  15     -3
+  travel           8 ->   8     +0
+  break           16 ->  19     -3
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  appeal           6 ->   2     +4
+  seek            17 ->   6    +11
+  protest         47 ->  16    +31
+  visit           46 ->  18    +28
+  book            30 ->  17    +13
+  board           19 ->  12     +7
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  travel           5 ->  15    -10
+  try              4 ->  10     -6
+  go               1 ->   2     -1
+  fly             13 ->  75    -62
+  flee            14 ->  37    -23
+  cross           21 ->  78    -57
+  take             2 ->   3     -1
+  enter           20 ->  47    -27
+  get             12 ->  14     -2
+  settle          17 ->  32    -15
+  come            11 ->  11     +0
+  apply            7 ->   7     +0
+  seek            18 ->  27     -9
+  appeal          16 ->  22     -6
+  live            19 ->  24     -5
+
+HIGHER UNDER B
+  leave            3 ->   1     +2
+  start           27 ->   9    +18
+  stay             8 ->   5     +3
+  return           9 ->   6     +3
+  quit            70 ->  18    +52
+  change          55 ->  19    +36
+  move             6 ->   4     +2
+  work            29 ->  13    +16
+  write           37 ->  23    +14
+  give            26 ->  17     +9
+  make            10 ->   8     +2
+  visit           22 ->  16     +6
+  do              24 ->  20     +4
+  ask             23 ->  21     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  go               4 ->   8     -4
+  take             1 ->   5     -4
+  try              6 ->  39    -33
+  travel           5 ->   7     -2
+  make            10 ->  25    -15
+  stay             9 ->  22    -13
+  appeal           7 ->  11     -4
+  move             8 ->  12     -4
+  use             13 ->  19     -6
+  come            16 -> 116   -100
+  wait            18 ->  72    -54
+  visit           15 ->  27    -12
+  flee            19 ->  34    -15
+
+HIGHER UNDER B
+  apply            2 ->   1     +1
+  seek            11 ->   3     +8
+  resign          42 ->   6    +36
+  file            14 ->   4    +10
+  leave            3 ->   2     +1
+  request         76 ->  10    +66
+  withdraw        81 ->  13    +68
+  pursue          70 ->  15    +55
+  work            35 ->  14    +21
+  return          12 ->   9     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  sue              4 ->  16    -12
+  come             5 ->  13     -8
+  fight           10 ->  17     -7
+  take             1 ->   2     -1
+  make             7 ->   9     -2
+  get             12 ->  28    -16
+  do              17 ->  32    -15
+  travel          15 ->  22     -7
+  move            14 ->  18     -4
+  file            16 ->  19     -3
+  challenge        8 ->   8     +0
+
+HIGHER UNDER B
+  appeal           3 ->   1     +2
+  apply           11 ->   4     +7
+  try              6 ->   5     +1
+  leave           13 ->   7     +6
+  seek             9 ->   6     +3
+  fly             21 ->  10    +11
+  give            18 ->  11     +7
+  return          20 ->  12     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  stay             2 ->  25    -23
+  try              5 ->  12     -7
+  come             9 ->  35    -26
+  travel           3 ->   6     -3
+  go               1 ->   5     -4
+  move            10 ->  19     -9
+  return           6 ->   8     -2
+  leave            7 ->   7     +0
+  make            12 ->  16     -4
+  emigrate        15 ->  21     -6
+  flee            14 ->  18     -4
+
+HIGHER UNDER B
+  apply            8 ->   1     +7
+  seek            13 ->   3    +10
+  appeal          11 ->   4     +7
+  take             4 ->   2     +2
+  pursue          70 ->   9    +61
+  challenge       49 ->  10    +39
+  sue             37 ->  13    +24
+  fight           31 ->  11    +20
+  attempt         32 ->  17    +15
+  use             17 ->  14     +3
+  fly             16 ->  15     +1
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  stay             5 ->  31    -26
+  return           6 ->  14     -8
+  leave            4 ->   8     -4
+  come             9 ->  18     -9
+  move            16 ->  52    -36
+  make            12 ->  15     -3
+  go               1 ->   3     -2
+  enter           18 ->  68    -50
+  get             17 ->  37    -20
+  fly             14 ->  17     -3
+  break           15 ->  16     -1
+  use             19 ->  26     -7
+
+HIGHER UNDER B
+  appeal           3 ->   1     +2
+  take             2 ->   2     +0
+  sue             11 ->   4     +7
+  challenge       23 ->   7    +16
+  protest         37 ->  11    +26
+  launch          27 ->  10    +17
+  fight           20 ->  13     +7
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  leave            4 ->  25    -21
+  return           8 ->  43    -35
+  stay             7 ->  19    -12
+  make             6 ->  13     -7
+  apply            9 ->  11     -2
+  go               1 ->   3     -2
+  break           15 ->  82    -67
+  come            12 ->  23    -11
+  fight           16 ->  52    -36
+  risk            14 ->  28    -14
+  move            19 ->  48    -29
+  travel          10 ->  10     +0
+  get             13 ->  15     -2
+  try              3 ->   4     -1
+
+HIGHER UNDER B
+  appeal           5 ->   2     +3
+  take             2 ->   1     +1
+  write           63 ->   6    +57
+  challenge       17 ->   5    +12
+  give            21 ->   7    +14
+  consult         99 ->   8    +91
+  A               81 ->  17    +64
+  ignore          69 ->  18    +51
+  do              18 ->  12     +6
+  ask             34 ->  14    +20
+  fly             20 ->  16     +4
+  seek            11 ->   9     +2
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  try              4 ->   8     -4
+  travel           6 ->  17    -11
+  leave           12 ->  22    -10
+  fly             13 ->  35    -22
+  fight            9 ->  13     -4
+  stay            10 ->  11     -1
+  come            14 ->  19     -5
+  risk            19 ->  56    -37
+  enter           15 ->  34    -19
+  get             17 ->  26     -9
+  sue             16 ->  18     -2
+  take             1 ->   3     -2
+  make             5 ->   6     -1
+
+HIGHER UNDER B
+  appeal           2 ->   1     +1
+  seek            11 ->   4     +7
+  go               3 ->   2     +1
+  apply            7 ->   5     +2
+  A              116 ->  10   +106
+  file            27 ->   9    +18
+  challenge        8 ->   7     +1
+  bring           26 ->  12    +14
+  claim           23 ->  14     +9
+  ask             24 ->  15     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  stay             5 ->  17    -12
+  leave            2 ->   7     -5
+  go               1 ->   2     -1
+  return           6 ->  15     -9
+  move             9 ->  12     -3
+  come            11 ->  20     -9
+  take             3 ->   4     -1
+  give            17 ->  18     -1
+  make            10 ->  11     -1
+
+HIGHER UNDER B
+  appeal           7 ->   1     +6
+  file            18 ->   5    +13
+  try              8 ->   3     +5
+  challenge       15 ->   8     +7
+  seek            14 ->   9     +5
+  fight           16 ->  10     +6
+  write           25 ->  16     +9
+  do              19 ->  19     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  leave            3 ->   4     -1
+  return           6 ->   9     -3
+  come            15 ->  25    -10
+  make            13 ->  16     -3
+  withdraw        16 ->  19     -3
+  ask             12 ->  13     -1
+  try              9 ->  11     -2
+  travel          10 ->  10     +0
+
+HIGHER UNDER B
+  apply            1 ->   1     +0
+  go               2 ->   2     +0
+  appeal           4 ->   3     +1
+  file            11 ->   8     +3
+  visit           21 ->  14     +7
+  change          17 ->  12     +5
+  take             5 ->   5     +0
+  seek             7 ->   6     +1
+  use             19 ->  17     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  leave            1 ->   4     -3
+  come             8 ->  27    -19
+  return          15 ->  68    -53
+  stay             4 ->   7     -3
+  make            11 ->  24    -13
+  take             5 ->   6     -1
+  appeal           9 ->  11     -2
+  fly             10 ->  12     -2
+  sue             12 ->  19     -7
+  give            22 ->  32    -10
+  challenge       16 ->  21     -5
+
+HIGHER UNDER B
+  apply            2 ->   1     +1
+  go               3 ->   2     +1
+  seek             6 ->   3     +3
+  ____            14 ->   8     +6
+  use             17 ->   9     +8
+  enter           13 ->  10     +3
+  visit           36 ->  20    +16
+  ___             23 ->  13    +10
+  ________        21 ->  14     +7
+  travel           7 ->   5     +2
+  do              29 ->  22     +7
+  ______          25 ->  18     +7
+  move            20 ->  16     +4
+  ask             18 ->  15     +3
+  change          27 ->  26     +1
+  get             26 ->  25     +1
+  try             19 ->  17     +2
+  file            24 ->  23     +1
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  appeal           2 ->   7     -5
+  ______           4 ->   8     -4
+  _____           11 ->  44    -33
+  give             8 ->  13     -5
+  ____            13 ->  26    -13
+  return          14 ->  36    -22
+  move             9 ->  12     -3
+  ________        16 ->  27    -11
+  make            10 ->  11     -1
+  seek            15 ->  16     -1
+  _______         17 ->  17     +0
+
+HIGHER UNDER B
+  apply            1 ->   1     +0
+  go               3 ->   2     +1
+  try              7 ->   3     +4
+  leave            6 ->   4     +2
+  take             5 ->   5     +0
+  travel          12 ->   6     +6
+  ___             19 ->   9    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  take             1 ->  10     -9
+  go               3 ->   9     -6
+  try              6 ->  21    -15
+  stay             7 ->  45    -38
+  come             9 ->  90    -81
+  return           8 ->  27    -19
+  apply            4 ->   6     -2
+  travel          13 ->  46    -33
+  seek            12 ->  16     -4
+  fly             11 ->  14     -3
+  risk            15 ->  36    -21
+  fight           16 ->  24     -8
+  do              18 ->  40    -22
+  turn            19 ->  96    -77
+  use             20 ->  41    -21
+
+HIGHER UNDER B
+  appeal           2 ->   1     +1
+  sue             17 ->   2    +15
+  marry           52 ->   3    +49
+  see             70 ->   5    +65
+  challenge       14 ->   7     +7
+  make             5 ->   4     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  leave            5 ->   6     -1
+  get             11 ->  18     -7
+  flee            15 ->  29    -14
+  travel           7 ->   8     -1
+  return           9 ->  15     -6
+  stay            13 ->  17     -4
+  pay             17 ->  28    -11
+  fly             12 ->  14     -2
+  make             8 ->   9     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  go               2 ->   2     +0
+  look            68 ->  12    +56
+  try              3 ->   3     +0
+  move             6 ->   5     +1
+  appeal          10 ->   7     +3
+  start           22 ->  11    +11
+  challenge       31 ->  16    +15
+  come            16 ->  13     +3
+  apply            4 ->   4     +0
+  seek            14 ->  10     +4
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  go               1 ->   3     -2
+  leave           11 ->  45    -34
+  come            14 ->  53    -39
+  apply            4 ->   6     -2
+  travel           6 ->  10     -4
+  stay            16 ->  36    -20
+  seek            18 ->  38    -20
+  do               7 ->  12     -5
+  appeal           9 ->  14     -5
+  risk            21 ->  44    -23
+  fly             19 ->  33    -14
+  cross           22 ->  24     -2
+  use             23 ->  26     -3
+
+HIGHER UNDER B
+  set             27 ->   7    +20
+  try              5 ->   4     +1
+  fight            8 ->   5     +3
+  protest         32 ->   9    +23
+  take             2 ->   1     +1
+  flee            10 ->   8     +2
+  stage           38 ->  20    +18
+  challenge       26 ->  18     +8
+  act             24 ->  19     +5
+  turn            20 ->  17     +3
+  jump            15 ->  15     +0
+  get             17 ->  16     +1
+  sue             13 ->  13     +0
+  enter           12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  take             2 ->   2     +0
+  apply            1 ->   1     +0
+  try              3 ->   4     -1
+  use             17 ->  20     -3
+  work            13 ->  14     -1
+  appeal          18 ->  18     +0
+
+HIGHER UNDER B
+  travel           6 ->   6     +0
+  return           8 ->   7     +1
+  stay            12 ->   9     +3
+  move            11 ->  10     +1
+  run             14 ->  13     +1
+  go               5 ->   5     +0
+  make            15 ->  15     +0
+  seek             4 ->   3     +1
+  get             16 ->  16     +0
+  attempt         19 ->  17     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  go               1 ->   3     -2
+  return           3 ->   8     -5
+  leave            5 ->  11     -6
+  stay             2 ->   4     -2
+  fly             17 ->  40    -23
+  move            12 ->  13     -1
+  turn            14 ->  23     -9
+  flee            16 ->  21     -5
+  make             8 ->   9     -1
+  travel          10 ->  10     +0
+
+HIGHER UNDER B
+  take             4 ->   1     +3
+  appeal           6 ->   2     +4
+  apply            9 ->   5     +4
+  come            11 ->   7     +4
+  fight           13 ->  12     +1
+  challenge       21 ->  14     +7
+  bring           41 ->  17    +24
+  try              7 ->   6     +1
+  seek            15 ->  15     +0
+  emigrate        18 ->  16     +2
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  go               2 ->   6     -4
+  return           5 ->   8     -3
+  stay             7 ->   9     -2
+  get             13 ->  28    -15
+  make            11 ->  13     -2
+  move             9 ->  10     -1
+  try              4 ->   4     +0
+
+HIGHER UNDER B
+  take             6 ->   3     +3
+  appeal           8 ->   5     +3
+  leave            1 ->   1     +0
+  apply            3 ->   2     +1
+  travel          10 ->   7     +3
+  seek            12 ->  11     +1
+  start           20 ->  12     +8
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  travel           2 ->   9     -7
+  go               1 ->   2     -1
+  try             10 ->  17     -7
+  make             4 ->   7     -3
+  risk            14 ->  44    -30
+  leave            5 ->   6     -1
+  head            18 ->  30    -12
+  get             16 ->  26    -10
+  walk            17 ->  23     -6
+  cross           12 ->  13     -1
+  enter           15 ->  18     -3
+  apply            9 ->  11     -2
+
+HIGHER UNDER B
+  take             3 ->   1     +2
+  appeal          19 ->   8    +11
+  stay             8 ->   3     +5
+  sue             73 ->  12    +61
+  return           7 ->   4     +3
+  challenge       46 ->  19    +27
+  use             22 ->  15     +7
+  fly             11 ->  10     +1
+  bring           32 ->  20    +12
+  turn            23 ->  16     +7
+  come             6 ->   5     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  come             4 ->   6     -2
+  stay             5 ->   5     +0
+  cross           17 ->  20     -3
+  risk            14 ->  19     -5
+  fly              7 ->   8     -1
+  jump            19 ->  21     -2
+  do              16 ->  16     +0
+  get             13 ->  14     -1
+  travel           9 ->  10     -1
+
+HIGHER UNDER B
+  appeal           6 ->   4     +2
+  take             1 ->   1     +0
+  leave           10 ->   9     +1
+  go               2 ->   2     +0
+  return          12 ->  11     +1
+  seek            15 ->  13     +2
+  turn            22 ->  17     +5
+  give            18 ->  15     +3
+  fight           20 ->  18     +2
+  try              3 ->   3     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  go               1 ->   1     +0
+  return           8 ->   8     +0
+  stay             7 ->   7     +0
+  settle          19 ->  23     -4
+  come            11 ->  12     -1
+  make             9 ->   9     +0
+  seek            14 ->  14     +0
+  do              17 ->  17     +0
+  flee            18 ->  18     +0
+
+HIGHER UNDER B
+  take             2 ->   2     +0
+  leave            3 ->   3     +0
+  emigrate        12 ->  10     +2
+  move             4 ->   4     +0
+  apply            6 ->   6     +0
+  fight           26 ->  19     +7
+  travel           5 ->   5     +0
+  start           16 ->  15     +1
+  get             13 ->  13     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  appeal           3 ->   6     -3
+  apply            5 ->   9     -4
+  return          10 ->  19     -9
+  give            17 ->  53    -36
+  run             18 ->  34    -16
+  move            14 ->  15     -1
+  turn            19 ->  22     -3
+  stay            11 ->  13     -2
+  try              8 ->  10     -2
+  go               2 ->   4     -2
+  fight           12 ->  12     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  seek             9 ->   5     +4
+  make             6 ->   3     +3
+  leave            4 ->   2     +2
+  challenge       13 ->   8     +5
+  travel          15 ->  11     +4
+  embark          54 ->  16    +38
+  flee            16 ->  14     +2
+  come             7 ->   7     +0
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  try              5 ->   7     -2
+  appeal          11 ->  20     -9
+  get             13 ->  17     -4
+  apply            6 ->  10     -4
+  seek            15 ->  19     -4
+  fly             14 ->  14     +0
+  come             9 ->  11     -2
+  run             17 ->  18     -1
+  do              19 ->  22     -3
+  stay             8 ->   8     +0
+
+HIGHER UNDER B
+  leave            2 ->   1     +1
+  travel           3 ->   2     +1
+  return          10 ->   5     +5
+  take             4 ->   4     +0
+  emigrate        37 ->  15    +22
+  visit           20 ->  13     +7
+  move            12 ->   9     +3
+  flee            16 ->  12     +4
+  make             7 ->   6     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  go               3 ->   3     +0
+  try              4 ->   9     -5
+  stay            13 ->  20     -7
+  leave            6 ->  12     -6
+  return           9 ->  13     -4
+  fly             15 ->  17     -2
+  come             5 ->   7     -2
+  get             16 ->  27    -11
+  risk            17 ->  30    -13
+
+HIGHER UNDER B
+  appeal           2 ->   1     +1
+  challenge       11 ->   4     +7
+  make             8 ->   5     +3
+  fight           12 ->   8     +4
+  use             22 ->  14     +8
+  apply            7 ->   6     +1
+  travel          10 ->  10     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  get             13 ->  17     -4
+  go               1 ->   1     +0
+  make            10 ->  12     -2
+  head            16 ->  19     -3
+  try              7 ->   8     -1
+  join            20 ->  24     -4
+  travel           8 ->   9     -1
+  fly             11 ->  13     -2
+  visit           19 ->  22     -3
+  take             3 ->   5     -2
+  come            14 ->  15     -1
+  start           15 ->  16     -1
+  stay             6 ->   6     +0
+
+HIGHER UNDER B
+  leave            2 ->   2     +0
+  appeal          18 ->  11     +7
+  return           5 ->   4     +1
+  apply            4 ->   3     +1
+  seek            12 ->  10     +2
+  move             9 ->   7     +2
+  fight           27 ->  18     +9
+  flee            17 ->  14     +3
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  appeal           2 ->   7     -5
+  take             1 ->   1     +0
+  come             6 ->  15     -9
+  fly              8 ->  19    -11
+  go               3 ->   3     +0
+  do              15 ->  34    -19
+  challenge       11 ->  25    -14
+  launch          16 ->  28    -12
+  make             7 ->  10     -3
+  leave           12 ->  17     -5
+  fight           18 ->  20     -2
+  travel           5 ->   6     -1
+
+HIGHER UNDER B
+  try              4 ->   2     +2
+  move            22 ->   8    +14
+  apply           10 ->   4     +6
+  stay             9 ->   5     +4
+  build           42 ->  11    +31
+  return          19 ->  12     +7
+  set             30 ->  14    +16
+  seek            13 ->   9     +4
+  give            29 ->  18    +11
+  use             14 ->  13     +1
+  get             17 ->  16     +1
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  go               1 ->   3     -2
+  stay             4 ->  11     -7
+  try              6 ->  13     -7
+  leave            3 ->   4     -1
+  come            11 ->  22    -11
+  head            15 ->  36    -21
+  flee            17 ->  45    -28
+  get             16 ->  32    -16
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  appeal           5 ->   2     +3
+  launch          54 ->  14    +40
+  seek            18 ->   9     +9
+  sue             53 ->  18    +35
+  turn            19 ->  15     +4
+  fight           21 ->  17     +4
+  give            13 ->  12     +1
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  go               2 ->   3     -1
+  come             5 ->  12     -7
+  apply            7 ->  13     -6
+  leave            8 ->  10     -2
+  fly             13 ->  22     -9
+  stay             9 ->  11     -2
+  travel          10 ->  15     -5
+  return          11 ->  17     -6
+  sue             15 ->  21     -6
+  get             19 ->  48    -29
+  move            18 ->  29    -11
+  give            17 ->  24     -7
+  try              4 ->   7     -3
+  head            23 ->  31     -8
+  do              20 ->  20     +0
+  make             6 ->   6     +0
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  appeal           3 ->   2     +1
+  fight           12 ->   4     +8
+  seek            14 ->   5     +9
+  challenge       16 ->   8     +8
+  risk            22 ->   9    +13
+  write           27 ->  14    +13
+  launch          24 ->  16     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  go               1 ->   5     -4
+  stay             4 ->  15    -11
+  come            10 ->  44    -34
+  try              9 ->  27    -18
+  make             5 ->   8     -3
+  return           7 ->  11     -4
+  get             19 ->  32    -13
+  sue             12 ->  17     -5
+  bring           22 ->  33    -11
+  fly             21 ->  29     -8
+  do              23 ->  30     -7
+  fight           18 ->  25     -7
+  travel          11 ->  14     -3
+  seek            16 ->  20     -4
+
+HIGHER UNDER B
+  appeal           8 ->   1     +7
+  leave            3 ->   2     +1
+  apply            6 ->   3     +3
+  challenge       17 ->   6    +11
+  change          24 ->  12    +12
+  give            13 ->   7     +6
+  immigrate       44 ->  16    +28
+  write           25 ->  13    +12
+  start           14 ->   9     +5
+  move            15 ->  10     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  appeal           4 ->  15    -11
+  make             8 ->  11     -3
+  apply            7 ->   9     -2
+  challenge       16 ->  60    -44
+  fight           17 ->  40    -23
+  give            13 ->  17     -4
+  get             14 ->  22     -8
+  do              19 ->  27     -8
+  fly             20 ->  25     -5
+  try              5 ->   7     -2
+  go               1 ->   2     -1
+
+HIGHER UNDER B
+  come            10 ->   3     +7
+  leave            6 ->   5     +1
+  take             2 ->   1     +1
+  travel          12 ->   8     +4
+  cross           63 ->  18    +45
+  enter           34 ->  14    +20
+  move             9 ->   6     +3
+  join            30 ->  16    +14
+  seek            18 ->  13     +5
+  marry           15 ->  12     +3
+  start           22 ->  19     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  appeal           1 ->   3     -2
+  sue              4 ->  12     -8
+  make             6 ->  10     -4
+  fight           10 ->  15     -5
+  seek            11 ->  18     -7
+  do              13 ->  25    -12
+  get             15 ->  24     -9
+  try              7 ->   8     -1
+  challenge       12 ->  13     -1
+  travel          16 ->  17     -1
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  return          14 ->   6     +8
+  fly             19 ->   9    +10
+  go               3 ->   2     +1
+  protest         75 ->  22    +53
+  come             9 ->   5     +4
+  move            17 ->  11     +6
+  climb           52 ->  23    +29
+  use             25 ->  19     +6
+  leave            8 ->   7     +1
+  start           18 ->  14     +4
+  stay            22 ->  21     +1
+  give            21 ->  16     +5
+  walk            20 ->  20     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  travel           2 ->   8     -6
+  go               1 ->   4     -3
+  stay             7 ->  12     -5
+  apply            4 ->   6     -2
+  return           9 ->  15     -6
+  make             8 ->   9     -1
+  move            15 ->  45    -30
+  head            16 ->  43    -27
+  emigrate        21 ->  94    -73
+  come            10 ->  10     +0
+  board           17 ->  20     -3
+  fly             18 ->  21     -3
+  cross           13 ->  17     -4
+
+HIGHER UNDER B
+  try              3 ->   1     +2
+  take             5 ->   2     +3
+  appeal          12 ->   3     +9
+  attempt         54 ->  11    +43
+  seek            11 ->   7     +4
+  leave            6 ->   5     +1
+  fight           27 ->  14    +13
+  bring           31 ->  18    +13
+  walk            19 ->  16     +3
+  join            14 ->  13     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  stay             1 ->   5     -4
+  go               2 ->   9     -7
+  come             3 ->  14    -11
+  enter           11 ->  42    -31
+  risk            12 ->  43    -31
+  remain          16 ->  29    -13
+  do              14 ->  24    -10
+  get             15 ->  26    -11
+  travel           7 ->  13     -6
+  fly             17 ->  28    -11
+  return          10 ->  17     -7
+  live            18 ->  31    -13
+  leave            9 ->  11     -2
+
+HIGHER UNDER B
+  appeal          58 ->   1    +57
+  apply            8 ->   3     +5
+  challenge       67 ->   6    +61
+  take             5 ->   2     +3
+  seek            13 ->   8     +5
+  file           113 ->  15    +98
+  move            19 ->  10     +9
+  give            20 ->  12     +8
+  try              4 ->   4     +0
+  visit           26 ->  16    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  go               1 ->   4     -3
+  stay             5 ->  21    -16
+  try              4 ->   9     -5
+  leave            3 ->   5     -2
+  return           7 ->  12     -5
+  make             8 ->  14     -6
+  come            11 ->  27    -16
+  travel           9 ->  11     -2
+  flee            16 ->  47    -31
+  fly             17 ->  44    -27
+  get             14 ->  29    -15
+  turn            15 ->  28    -13
+  do              19 ->  33    -14
+  visit           13 ->  17     -4
+  take             2 ->   3     -1
+  give            21 ->  24     -3
+  write           20 ->  23     -3
+
+HIGHER UNDER B
+  appeal          12 ->   1    +11
+  apply            6 ->   2     +4
+  challenge       29 ->   7    +22
+  file            38 ->   8    +30
+  move            10 ->   6     +4
+  sue             22 ->  10    +12
+  seek            18 ->  13     +5
+  start           30 ->  15    +15
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  go               2 ->   7     -5
+  appeal           3 ->   3     +0
+  leave            9 ->  32    -23
+  try              4 ->   9     -5
+  sue             11 ->  27    -16
+  apply            7 ->  11     -4
+  return          12 ->  34    -22
+  travel          13 ->  37    -24
+  stay            17 ->  84    -67
+  make             6 ->  10     -4
+  come            14 ->  35    -21
+  launch          16 ->  31    -15
+  file            18 ->  24     -6
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  write           30 ->   5    +25
+  challenge        5 ->   2     +3
+  fight           10 ->   4     +6
+  turn            15 ->   8     +7
+  hire            35 ->  13    +22
+  protest         21 ->  12     +9
+  use             23 ->  14     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  appeal           2 ->   3     -1
+  come             7 ->  10     -3
+  leave            9 ->  20    -11
+  apply           11 ->  18     -7
+  go               3 ->   4     -1
+  challenge       12 ->  17     -5
+  try              4 ->   5     -1
+  turn            18 ->  27     -9
+  make             6 ->   9     -3
+  stay            15 ->  19     -4
+  run             19 ->  26     -7
+  return          17 ->  23     -6
+  get             21 ->  22     -1
+  use             20 ->  21     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  do              13 ->   6     +7
+  launch          10 ->   7     +3
+  protest         26 ->  12    +14
+  fight            5 ->   2     +3
+  start           24 ->  13    +11
+  live            29 ->  16    +13
+  set             25 ->  14    +11
+  sue              8 ->   8     +0
+  move            14 ->  11     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  return           8 ->  20    -12
+  apply            9 ->  16     -7
+  seek             4 ->  10     -6
+  leave            5 ->   9     -4
+  take             1 ->   3     -2
+  go               2 ->   5     -3
+  try              7 ->   8     -1
+  head            19 ->  25     -6
+  join            20 ->  33    -13
+  wait            18 ->  19     -1
+  move            12 ->  15     -3
+  use             17 ->  18     -1
+  travel           3 ->   6     -3
+
+HIGHER UNDER B
+  fight           15 ->   2    +13
+  stay             6 ->   1     +5
+  make            10 ->   4     +6
+  appeal          11 ->   7     +4
+  launch          29 ->  13    +16
+  turn            16 ->  11     +5
+  come            13 ->  12     +1
+  emigrate        23 ->  17     +6
+  visit           14 ->  14     +0
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  go               2 ->  12    -10
+  try              5 ->  27    -22
+  travel           6 ->   9     -3
+  make             7 ->   7     +0
+  get             13 ->  53    -40
+  fly             16 ->  32    -16
+  return          10 ->  14     -4
+  cross           18 ->  45    -27
+  do              21 ->  88    -67
+  use             17 ->  18     -1
+
+HIGHER UNDER B
+  appeal           3 ->   2     +1
+  take             1 ->   1     +0
+  fight           19 ->   3    +16
+  seek             9 ->   6     +3
+  come             8 ->   5     +3
+  apply            4 ->   4     +0
+  challenge       14 ->   8     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  flee             5 ->   7     -2
+  escape          13 ->  18     -5
+  make             8 ->   8     +0
+  do              19 ->  29    -10
+  get             18 ->  25     -7
+  apply           14 ->  16     -2
+  head            11 ->  15     -4
+  go               1 ->   1     +0
+  come            12 ->  12     +0
+  seek            10 ->  11     -1
+
+HIGHER UNDER B
+  travel           7 ->   5     +2
+  return           6 ->   6     +0
+  take             2 ->   2     +0
+  leave            3 ->   3     +0
+  try              4 ->   4     +0
+  risk            16 ->  10     +6
+  fight           27 ->  19     +8
+  stay             9 ->   9     +0
+  cross           17 ->  13     +4
+  use             20 ->  17     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  make             4 ->  11     -7
+  leave            3 ->   7     -4
+  stay             8 ->  32    -24
+  risk            13 ->  50    -37
+  come             6 ->  15     -9
+  return          12 ->  43    -31
+  jump            16 ->  44    -28
+  escape          14 ->  28    -14
+  enter           18 ->  26     -8
+  run              9 ->  10     -1
+  turn            23 ->  40    -17
+  flee            11 ->  13     -2
+  fight           19 ->  23     -4
+  defy            21 ->  24     -3
+  go               2 ->   2     +0
+  try              5 ->   6     -1
+  sail            20 ->  21     -1
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  travel          10 ->   3     +7
+  bring           41 ->   8    +33
+  seek             7 ->   4     +3
+  challenge       33 ->   9    +24
+  apply           15 ->   5    +10
+  break           29 ->  12    +17
+  start           51 ->  18    +33
+  act             37 ->  17    +20
+  embark          35 ->  19    +16
+  appeal          25 ->  16     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  leave            3 ->  14    -11
+  apply            4 ->   8     -4
+  try              7 ->  21    -14
+  stay             9 ->  32    -23
+  return          11 ->  30    -19
+  go               1 ->   2     -1
+  get             15 ->  26    -11
+  move             8 ->  11     -3
+  fly             13 ->  17     -4
+  head            18 ->  86    -68
+  flee            12 ->  12     +0
+  come            10 ->  10     +0
+  turn            16 ->  16     +0
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  appeal          21 ->   3    +18
+  fight           39 ->   5    +34
+  visit           17 ->   9     +8
+  seek            14 ->   7     +7
+  pack            27 ->  13    +14
+  find            28 ->  15    +13
+  travel           6 ->   6     +0
+  make             5 ->   4     +1
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

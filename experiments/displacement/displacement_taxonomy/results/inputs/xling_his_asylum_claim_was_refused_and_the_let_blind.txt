@@ -1,0 +1,1576 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: His asylum claim was refused and the letter ordered him to leave the country, so he ___
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  fled             1 ->  45    -44
+  left             3 ->  28    -25
+  went             2 ->   4     -2
+  decided          4 ->  11     -7
+  had              7 ->  26    -19
+  was              5 ->  13     -8
+  returned         6 ->  22    -16
+  took             9 ->  14     -5
+  moved           12 ->  48    -36
+  stayed          16 ->  49    -33
+  could           15 ->  33    -18
+  and             18 ->  54    -36
+  came            14 ->  17     -3
+
+HIGHER UNDER B
+  appealed        10 ->   1     +9
+  is              17 ->   2    +15
+  applied         11 ->   3     +8
+  filed           23 ->   5    +18
+  has             13 ->   6     +7
+  challenged      95 ->   9    +86
+  sought          20 ->   8    +12
+  cannot         100 ->  10    +90
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  appealed         1 ->  20    -19
+  absconded        3 ->  72    -69
+  attempted        5 ->  34    -29
+  travelled        6 ->  26    -20
+  took             2 ->   4     -2
+  could            7 ->  15     -8
+  committed        8 ->  30    -22
+  tried           10 ->  16     -6
+  started         12 ->  44    -32
+  broke           15 ->  70    -55
+  refused         14 ->  27    -13
+  stayed          11 ->  25    -14
+  and             18 ->  37    -19
+  should          21 ->  77    -56
+  sought          13 ->  17     -4
+  began           20 ->  35    -15
+
+HIGHER UNDER B
+  decided          9 ->   1     +8
+  went            16 ->   3    +13
+  fled             4 ->   2     +2
+  was             33 ->   6    +27
+  did             36 ->   7    +29
+  has             22 ->   5    +17
+  crossed         88 ->   9    +79
+  walked          52 ->  11    +41
+  is              19 ->   8    +11
+  returned        46 ->  10    +36
+  had             40 ->  13    +27
+  flew            35 ->  14    +21
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  went             1 ->   8     -7
+  appealed         6 ->  34    -28
+  returned         4 ->  10     -6
+  did              3 ->   7     -4
+  moved           13 ->  24    -11
+  fled             9 ->  14     -5
+  headed          17 -> 113    -96
+  packed          18 ->  39    -21
+  and             19 ->  26     -7
+  began           22 ->  27     -5
+
+HIGHER UNDER B
+  decided          5 ->   1     +4
+  had             12 ->   2    +10
+  left             8 ->   4     +4
+  is              10 ->   6     +4
+  has              7 ->   5     +2
+  would           31 ->  17    +14
+  sought          23 ->  15     +8
+  chose           34 ->  19    +15
+  stayed          16 ->  11     +5
+  started         20 ->  16     +4
+  refused         15 ->  13     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  could            3 ->  14    -11
+  was              2 ->   8     -6
+  fled             7 ->  19    -12
+  returned         5 ->  12     -7
+  came            12 ->  17     -5
+  had              4 ->   6     -2
+  and             15 ->  33    -18
+  became          16 ->  38    -22
+  spent           22 ->  61    -39
+  settled         19 ->  43    -24
+  has             21 ->  49    -28
+  travelled       23 ->  55    -32
+  ended           24 ->  52    -28
+  began           18 ->  23     -5
+  went             1 ->   2     -1
+
+HIGHER UNDER B
+  packed          13 ->   1    +12
+  left             9 ->   3     +6
+  did             11 ->   4     +7
+  took             6 ->   5     +1
+  wrote           25 ->  11    +14
+  applied         42 ->  15    +27
+  made            17 ->  10     +7
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  left             1 ->   3     -2
+  travelled        7 ->  26    -19
+  returned         6 ->   8     -2
+  was              5 ->   7     -2
+  did             11 ->  23    -12
+  and              9 ->  13     -4
+  applied         18 ->  36    -18
+  spent           14 ->  28    -14
+  is              17 ->  22     -5
+  made            19 ->  19     +0
+
+HIGHER UNDER B
+  decided          8 ->   5     +3
+  had             10 ->   6     +4
+  packed          15 ->   9     +6
+  took             4 ->   4     +0
+  could           21 ->  10    +11
+  became          47 ->  18    +29
+  fled             2 ->   1     +1
+  sought          24 ->  15     +9
+  started         27 ->  16    +11
+  traveled        28 ->  17    +11
+  has             12 ->  11     +1
+  moved           13 ->  12     +1
+  came            16 ->  14     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  was              1 ->   8     -7
+  went             2 ->   6     -4
+  travelled       15 ->  62    -47
+  came            18 ->  90    -72
+  applied         14 ->  37    -23
+  left             8 ->  12     -4
+  is              11 ->  20     -9
+  has             12 ->  28    -16
+  moved           10 ->  17     -7
+  could           17 ->  33    -16
+  appealed        22 ->  42    -20
+  did              4 ->   5     -1
+  spent           20 ->  24     -4
+  wrote           25 ->  26     -1
+  and             13 ->  15     -2
+
+HIGHER UNDER B
+  fled             5 ->   2     +3
+  decided          7 ->   3     +4
+  began           23 ->  10    +13
+  chose           19 ->   9    +10
+  set             21 ->  11    +10
+  sought          27 ->  13    +14
+  returned         3 ->   1     +2
+  attempted       57 ->  18    +39
+  embarked        91 ->  22    +69
+  had              6 ->   4     +2
+  turned          31 ->  16    +15
+  took             9 ->   7     +2
+  packed          44 ->  21    +23
+  made            16 ->  14     +2
+  started         24 ->  19     +5
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  fled             3 ->  15    -12
+  was              5 ->  12     -7
+  left            12 ->  20     -8
+  returned         9 ->  13     -4
+  has             14 ->  25    -11
+  had             16 ->  29    -13
+  and             21 ->  30     -9
+  moved           22 ->  33    -11
+  headed          17 ->  22     -5
+  made            15 ->  17     -2
+  went             1 ->   3     -2
+
+HIGHER UNDER B
+  decided          6 ->   1     +5
+  appealed         8 ->   5     +3
+  stayed           4 ->   4     +0
+  sought          11 ->   6     +5
+  did              2 ->   2     +0
+  hid             20 ->   9    +11
+  remained         7 ->   7     +0
+  approached      54 ->  18    +36
+  turned          18 ->  10     +8
+  tried           23 ->  16     +7
+  began           19 ->  14     +5
+  applied         10 ->   8     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  returned         1 ->   2     -1
+  was              3 ->   3     +0
+  went             4 ->   5     -1
+  fled            11 ->  21    -10
+  stayed           8 ->  10     -2
+  moved           20 ->  34    -14
+  and             17 ->  30    -13
+  took            14 ->  19     -5
+  had             18 ->  25     -7
+  decided          9 ->  13     -4
+  tried           16 ->  20     -4
+  applied          5 ->   7     -2
+  left            10 ->  12     -2
+  did              6 ->   8     -2
+  made            15 ->  16     -1
+
+HIGHER UNDER B
+  appealed         2 ->   1     +1
+  lodged          26 ->   4    +22
+  challenged      40 ->  14    +26
+  sought          13 ->   9     +4
+  remained         7 ->   6     +1
+  asked           24 ->  15     +9
+  refused         12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  did              2 ->   4     -2
+  left             4 ->  13     -9
+  went             1 ->   1     +0
+  returned         5 ->  11     -6
+  decided          3 ->   8     -5
+  moved           10 ->  19     -9
+  and             16 ->  26    -10
+  asked           17 ->  28    -11
+  fled            11 ->  12     -1
+  had             14 ->  16     -2
+  could           18 ->  23     -5
+  was              6 ->   6     +0
+
+HIGHER UNDER B
+  appealed         7 ->   2     +5
+  applied          9 ->   3     +6
+  made            13 ->   7     +6
+  is              19 ->  10     +9
+  disappeared     45 ->  14    +31
+  took             8 ->   5     +3
+  sought          12 ->   9     +3
+  has             27 ->  17    +10
+  became          43 ->  24    +19
+  should          39 ->  22    +17
+  began           30 ->  20    +10
+  stayed          20 ->  18     +2
+  packed          15 ->  15     +0
+  tried           21 ->  21     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  appealed         2 ->  13    -11
+  did              4 ->  10     -6
+  applied          6 ->  12     -6
+  went             1 ->   1     +0
+  asked           14 ->  30    -16
+  called           9 ->  20    -11
+  filed           18 ->  37    -19
+  left            12 ->  19     -7
+  turned          16 ->  22     -6
+  came            25 ->  47    -22
+  got             23 ->  41    -18
+  contacted        8 ->  11     -3
+  sought          19 ->  21     -2
+  took             7 ->   7     +0
+  returned        22 ->  29     -7
+  tried           24 ->  27     -3
+
+HIGHER UNDER B
+  is              10 ->   3     +7
+  was              5 ->   2     +3
+  has             13 ->   5     +8
+  fled            17 ->   6    +11
+  must            72 ->  14    +58
+  had             15 ->   8     +7
+  could           28 ->  15    +13
+  made            11 ->   9     +2
+  stayed          34 ->  17    +17
+  would           30 ->  18    +12
+  began           20 ->  16     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  fled             2 ->  10     -8
+  went             1 ->   4     -3
+  returned         5 ->   8     -3
+  moved            7 ->  14     -7
+  travelled       12 ->  77    -65
+  stayed          10 ->  25    -15
+  applied         14 ->  33    -19
+  remained        15 ->  56    -41
+  took             8 ->  12     -4
+  made            16 ->  22     -6
+
+HIGHER UNDER B
+  had             11 ->   5     +6
+  is              46 ->   6    +40
+  decided          6 ->   3     +3
+  was              4 ->   2     +2
+  left             3 ->   1     +2
+  must           106 ->  11    +95
+  has             30 ->   9    +21
+  could           25 ->  15    +10
+  did              9 ->   7     +2
+  asked           24 ->  18     +6
+  became          18 ->  16     +2
+  tried           17 ->  17     +0
+  and             13 ->  13     +0
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  has              4 ->  24    -20
+  went             2 ->   3     -1
+  took             8 ->  17     -9
+  appealed        12 ->  39    -27
+  is              11 ->  19     -8
+  applied         13 ->  34    -21
+  returned         6 ->   7     -1
+  sent            16 ->  48    -32
+  travelled       17 -> 105    -88
+  filed           14 ->  15     -1
+  decided          9 ->   9     +0
+  left             5 ->   6     -1
+  came            19 ->  26     -7
+  fled             3 ->   5     -2
+
+HIGHER UNDER B
+  was              1 ->   1     +0
+  could           18 ->   2    +16
+  had              7 ->   4     +3
+  remained        48 ->  12    +36
+  began           37 ->  11    +26
+  sought          20 ->  13     +7
+  traveled        45 ->  14    +31
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  did              4 ->   7     -3
+  went             1 ->   1     +0
+  appealed         6 ->   9     -3
+  set              7 ->  11     -4
+  left            11 ->  19     -8
+  wrote           12 ->  24    -12
+  decided          2 ->   2     +0
+  asked           17 ->  30    -13
+  returned        16 ->  27    -11
+  walked          15 ->  22     -7
+
+HIGHER UNDER B
+  had              9 ->   5     +4
+  was              5 ->   3     +2
+  applied         25 ->   8    +17
+  packed          34 ->  12    +22
+  killed          37 ->  15    +22
+  broke           78 ->  25    +53
+  fled             8 ->   6     +2
+  began           31 ->  16    +15
+  sought          24 ->  20     +4
+  has             22 ->  18     +4
+  jumped          30 ->  23     +7
+  is              18 ->  17     +1
+  made            13 ->  13     +0
+  turned          14 ->  14     +0
+  tried           10 ->  10     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  returned         1 ->   4     -3
+  was              4 ->  14    -10
+  fled             2 ->   5     -3
+  moved            6 ->  18    -12
+  left             5 ->   6     -1
+  flew             9 ->  39    -30
+  applied          8 ->  26    -18
+  travelled       12 ->  31    -19
+  had             11 ->  29    -18
+  appealed        18 ->  95    -77
+  escaped         16 ->  46    -30
+  is              17 ->  77    -60
+  and             15 ->  40    -25
+  came            21 ->  49    -28
+  set             19 ->  38    -19
+  arrived         23 ->  41    -18
+  made            14 ->  17     -3
+  began           24 ->  30     -6
+  has             20 ->  22     -2
+
+HIGHER UNDER B
+  did             26 ->   1    +25
+  embarked        65 ->   7    +58
+  took             7 ->   3     +4
+  chose           58 ->   8    +50
+  traveled        37 ->  11    +26
+  found           52 ->  13    +39
+  boarded         25 ->  12    +13
+  stayed          28 ->  15    +13
+  crossed         30 ->  16    +14
+  sought          13 ->  10     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  fled             1 ->   2     -1
+  and              7 ->  28    -21
+  applied          9 ->  18     -9
+  appealed         8 ->  13     -5
+  moved           11 ->  31    -20
+  was              6 ->   6     +0
+  had             13 ->  17     -4
+  sought          18 ->  41    -23
+  is              17 ->  26     -9
+  made            16 ->  20     -4
+  has             12 ->  14     -2
+  flew            20 ->  24     -4
+
+HIGHER UNDER B
+  left             2 ->   1     +1
+  set             23 ->   8    +15
+  decided          5 ->   3     +2
+  took            10 ->   7     +3
+  burnt          100 ->  10    +90
+  burned          77 ->  12    +65
+  returned         4 ->   4     +0
+  could           25 ->  19     +6
+  boarded         22 ->  16     +6
+  began           19 ->  15     +4
+  did             14 ->   9     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  did              6 ->  18    -12
+  decided          3 ->  12     -9
+  took             8 ->  24    -16
+  was              7 ->  10     -3
+  flew            17 ->  78    -61
+  began           19 ->  48    -29
+  has             16 ->  31    -15
+  moved           22 ->  41    -19
+  made            13 ->  21     -8
+  stayed          20 ->  29     -9
+  went             1 ->   2     -1
+
+HIGHER UNDER B
+  appealed         5 ->   1     +4
+  came            14 ->   5     +9
+  travelled       11 ->   6     +5
+  sought          21 ->   8    +13
+  applied          9 ->   7     +2
+  turned          30 ->  13    +17
+  filed           43 ->  15    +28
+  immediately     34 ->  14    +20
+  had             12 ->  11     +1
+  fled            10 ->   9     +1
+  left             4 ->   4     +0
+  contacted       18 ->  17     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  left             8 ->  29    -21
+  did              4 ->   8     -4
+  appealed         2 ->   5     -3
+  applied          7 ->  12     -5
+  returned        13 ->  24    -11
+  fled             9 ->  10     -1
+  sought          11 ->  13     -2
+  hid             15 ->  31    -16
+  went             1 ->   2     -1
+  stayed          20 ->  41    -21
+  made            16 ->  26    -10
+  filed           19 ->  30    -11
+  asked           17 ->  21     -4
+  lodged          14 ->  15     -1
+  turned          18 ->  19     -1
+
+HIGHER UNDER B
+  was              3 ->   1     +2
+  had             10 ->   3     +7
+  decided          5 ->   4     +1
+  is              24 ->   9    +15
+  could           12 ->   7     +5
+  took             6 ->   6     +0
+  faced          109 ->  18    +91
+  would           22 ->  11    +11
+  has             26 ->  14    +12
+  became          50 ->  20    +30
+  committed       28 ->  16    +12
+  contacted       21 ->  17     +4
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  did              1 ->   3     -2
+  left             3 ->   4     -1
+  decided          8 ->  13     -5
+  appealed         6 ->   9     -3
+  returned         5 ->   8     -3
+  applied          9 ->  14     -5
+  moved           11 ->  20     -9
+  took            10 ->  15     -5
+  stayed          16 ->  26    -10
+  and             17 ->  34    -17
+  immediately     18 ->  24     -6
+
+HIGHER UNDER B
+  fled             4 ->   2     +2
+  tried           19 ->   6    +13
+  went             2 ->   1     +1
+  came            12 ->   7     +5
+  was              7 ->   5     +2
+  made            14 ->  10     +4
+  attempted       52 ->  16    +36
+  sought          15 ->  11     +4
+  became          38 ->  18    +20
+  had             13 ->  12     +1
+  began           21 ->  17     +4
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  was              1 ->   1     +0
+  left             3 ->   6     -3
+  returned         4 ->   8     -4
+  moved            8 ->   9     -1
+  and             13 ->  27    -14
+  fled            11 ->  15     -4
+  did              9 ->  10     -1
+  stayed          15 ->  39    -24
+  made            19 ->  34    -15
+  spent           17 ->  29    -12
+  ended           16 ->  26    -10
+  could           12 ->  14     -2
+  went             2 ->   4     -2
+
+HIGHER UNDER B
+  decided          7 ->   2     +5
+  had              5 ->   3     +2
+  asked           26 ->  11    +15
+  has             23 ->  12    +11
+  sought          37 ->  20    +17
+  appealed        21 ->  13     +8
+  applied         10 ->   7     +3
+  is              20 ->  16     +4
+  sued            22 ->  18     +4
+  turned          18 ->  17     +1
+  wrote           24 ->  21     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  returned         7 ->  13     -6
+  went             3 ->   5     -2
+  left             5 ->   7     -2
+  fled             8 ->   8     +0
+  flew            14 ->  46    -32
+  has              4 ->   4     +0
+  travelled       13 ->  26    -13
+  took            11 ->  18     -7
+  moved           19 ->  50    -31
+  boarded         17 ->  34    -17
+  headed          16 ->  31    -15
+  set             21 ->  27     -6
+  made            18 ->  21     -3
+  turned          20 ->  20     +0
+
+HIGHER UNDER B
+  is               2 ->   2     +0
+  had              9 ->   6     +3
+  was              1 ->   1     +0
+  decided          6 ->   3     +3
+  must            48 ->  16    +32
+  should          67 ->  19    +48
+  asked           30 ->  15    +15
+  did             22 ->  12    +10
+  tried           24 ->  14    +10
+  could           28 ->  17    +11
+  will            15 ->  10     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  did              2 ->   6     -4
+  returned         5 ->   9     -4
+  boarded         10 ->  69    -59
+  set             11 ->  26    -15
+  made            13 ->  27    -14
+  stayed          12 ->  17     -5
+  went             7 ->   7     +0
+  left             4 ->   4     +0
+
+HIGHER UNDER B
+  was              1 ->   1     +0
+  had              8 ->   2     +6
+  fled             3 ->   3     +0
+  could           23 ->  10    +13
+  became          15 ->  11     +4
+  started         33 ->  13    +20
+  began           27 ->  12    +15
+  didn't          62 ->  15    +47
+  has             28 ->  14    +14
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  was              2 ->  58    -56
+  went             1 ->   2     -1
+  decided          3 ->  20    -17
+  did              4 ->  15    -11
+  took             5 ->  33    -28
+  fled             6 ->  12     -6
+  returned         8 -> 114   -106
+  appealed         9 ->  40    -31
+  has             10 ->  51    -41
+  moved           11 ->  46    -35
+  had             13 ->  50    -37
+  applied         12 ->  19     -7
+  is              15 ->  95    -80
+  made            14 ->  26    -12
+  came            16 -> 112    -96
+  sought          17 ->  75    -58
+  and             20 ->  70    -50
+  chose           18 ->  36    -18
+  flew            21 ->  88    -67
+  set             22 ->  76    -54
+  began           23 ->  77    -54
+  turned          24 -> 102    -78
+  stayed          19 ->  22     -3
+
+HIGHER UNDER B
+  packed          32 ->   1    +31
+  burnt          121 ->   4   +117
+  hid             60 ->   3    +57
+  burned         114 ->   5   +109
+  removed        110 ->   7   +103
+  prepared       115 ->   8   +107
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  went             4 ->   5     -1
+  fled             2 ->   3     -1
+  and              8 ->  23    -15
+  headed          16 ->  33    -17
+  escaped         12 ->  22    -10
+  did             11 ->  18     -7
+  moved            6 ->   8     -2
+  took             7 ->   9     -2
+  was              1 ->   1     +0
+
+HIGHER UNDER B
+  has             47 ->  12    +35
+  had              9 ->   6     +3
+  packed          22 ->  11    +11
+  set             10 ->   7     +3
+  decided         13 ->  10     +3
+  is              31 ->  16    +15
+  made            14 ->  13     +1
+  sent            40 ->  19    +21
+  spent           20 ->  15     +5
+  left             3 ->   2     +1
+  immediately     21 ->  17     +4
+  flew            15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  did              1 ->   2     -1
+  left             3 ->   9     -6
+  decided          4 ->   6     -2
+  and             10 ->  23    -13
+  packed          15 ->  45    -30
+  chose           17 ->  38    -21
+  walked          12 ->  17     -5
+  didn't          19 ->  24     -5
+
+HIGHER UNDER B
+  went             2 ->   1     +1
+  hid             24 ->   8    +16
+  was              7 ->   3     +4
+  took             6 ->   4     +2
+  remained        34 ->  11    +23
+  burned          77 ->  21    +56
+  set             14 ->  12     +2
+  tried           18 ->  15     +3
+  spent           41 ->  22    +19
+  made            13 ->  13     +0
+  moved           31 ->  20    +11
+  returned         8 ->   7     +1
+  began           21 ->  19     +2
+  applied         20 ->  18     +2
+  boarded         16 ->  16     +0
+  fled             5 ->   5     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  had              5 ->  10     -5
+  could           10 ->  13     -3
+  left             2 ->   2     +0
+  returned         6 ->   7     -1
+  must            17 ->  31    -14
+  did             14 ->  15     -1
+  fled             4 ->   4     +0
+  moved           11 ->  12     -1
+  turned          16 ->  17     -1
+
+HIGHER UNDER B
+  sought          13 ->   9     +4
+  took            12 ->  11     +1
+  has              8 ->   5     +3
+  is               9 ->   8     +1
+  went             7 ->   6     +1
+  applied         24 ->  18     +6
+  was              1 ->   1     +0
+  escaped         18 ->  16     +2
+  decided          3 ->   3     +0
+  traveled        20 ->  19     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  went             4 ->  10     -6
+  left             6 ->  16    -10
+  decided          5 ->   9     -4
+  did              7 ->  11     -4
+  returned         9 ->  12     -3
+  applied         10 ->  13     -3
+  moved           15 ->  29    -14
+  came            19 ->  48    -29
+  had             16 ->  21     -5
+  turned          22 ->  58    -36
+  tried           13 ->  19     -6
+  escaped         21 ->  25     -4
+  made            20 ->  20     +0
+
+HIGHER UNDER B
+  fled             1 ->   1     +0
+  stayed          12 ->   4     +8
+  was              2 ->   2     +0
+  chose           17 ->   6    +11
+  took             8 ->   5     +3
+  appealed         3 ->   3     +0
+  could           29 ->  14    +15
+  is              14 ->   7     +7
+  claimed         54 ->  18    +36
+  attempted       25 ->  17     +8
+  sought          18 ->  15     +3
+  has             11 ->   8     +3
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  went             2 ->   8     -6
+  did              8 ->  14     -6
+  left             3 ->   6     -3
+  has             16 ->  37    -21
+  came            13 ->  23    -10
+  is              17 ->  48    -31
+  moved           11 ->  13     -2
+  was              4 ->   4     +0
+  returned         7 ->   7     +0
+  flew            18 ->  21     -3
+  stayed          21 ->  25     -4
+
+HIGHER UNDER B
+  decided          9 ->   2     +7
+  had              5 ->   3     +2
+  fled             1 ->   1     +0
+  made            15 ->   9     +6
+  took             6 ->   5     +1
+  sought          14 ->  11     +3
+  packed          26 ->  15    +11
+  traveled        31 ->  20    +11
+  chose           24 ->  16     +8
+  could           12 ->  12     +0
+  applied         10 ->  10     +0
+  started         22 ->  18     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  appealed         2 ->  46    -44
+  went             1 ->   3     -2
+  did              5 ->   8     -3
+  took            10 ->  11     -1
+  applied         13 ->  14     -1
+  and             16 ->  19     -3
+  turned          20 ->  22     -2
+  was              3 ->   5     -2
+
+HIGHER UNDER B
+  fled             8 ->   1     +7
+  decided          6 ->   2     +4
+  had              4 ->   4     +0
+  returned         9 ->   6     +3
+  came            19 ->  12     +7
+  tried           23 ->  15     +8
+  contacted       18 ->  16     +2
+  left             7 ->   7     +0
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  fled             5 ->   8     -3
+  did              1 ->   2     -1
+  and             10 ->  19     -9
+  decided          4 ->   4     +0
+  left             9 ->  12     -3
+  set             12 ->  18     -6
+  packed          13 ->  17     -4
+  boarded         21 ->  28     -7
+  came            19 ->  24     -5
+  tried           22 ->  23     -1
+  stayed          20 ->  21     -1
+
+HIGHER UNDER B
+  went             2 ->   1     +1
+  appealed        11 ->   9     +2
+  has             15 ->  10     +5
+  could           17 ->  11     +6
+  contacted       35 ->  20    +15
+  turned          14 ->  13     +1
+  is              24 ->  16     +8
+  took             6 ->   5     +1
+  was              3 ->   3     +0
+  returned         8 ->   7     +1
+  travelled       25 ->  22     +3
+  asked           18 ->  14     +4
+  had              7 ->   6     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  left             2 ->   2     +0
+  decided          6 ->   6     +0
+  had              9 ->  10     -1
+  has             15 ->  21     -6
+  boarded         13 ->  17     -4
+  set             11 ->  12     -1
+  said            22 ->  24     -2
+  did              8 ->   8     +0
+  started         20 ->  20     +0
+  returned         4 ->   5     -1
+  headed          19 ->  19     +0
+
+HIGHER UNDER B
+  fled             3 ->   3     +0
+  went             1 ->   1     +0
+  took             5 ->   4     +1
+  packed          12 ->  11     +1
+  appealed        21 ->  16     +5
+  came            10 ->   9     +1
+  flew            14 ->  13     +1
+  and             17 ->  15     +2
+  began           23 ->  22     +1
+  was              7 ->   7     +0
+  made            18 ->  18     +0
+  moved           16 ->  14     +2
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  did              3 ->  23    -20
+  was              4 ->   7     -3
+  went             1 ->   5     -4
+  took             6 ->  16    -10
+  left             9 ->  15     -6
+  had             12 ->  19     -7
+  turned          14 ->  24    -10
+  fled             5 ->   6     -1
+  stayed          19 ->  30    -11
+  walked          21 ->  34    -13
+  came            11 ->  12     -1
+  tried           20 ->  29     -9
+  has             10 ->  10     +0
+  contacted       17 ->  20     -3
+
+HIGHER UNDER B
+  appealed         2 ->   1     +1
+  returned         8 ->   2     +6
+  decided          7 ->   3     +4
+  sought          16 ->   4    +12
+  flew            33 ->  13    +20
+  made            18 ->   8    +10
+  booked          54 ->  21    +33
+  chose           42 ->  18    +24
+  boarded         29 ->  17    +12
+  moved           15 ->   9     +6
+  applied         22 ->  14     +8
+  headed          38 ->  22    +16
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  decided          2 ->   6     -4
+  went             8 ->  11     -3
+  and             12 ->  25    -13
+  took             7 ->   8     -1
+  has              6 ->   7     -1
+  came            14 ->  30    -16
+  applied         16 ->  47    -31
+  asked           17 ->  42    -25
+  is              10 ->  12     -2
+  chose           18 ->  18     +0
+  had              5 ->   5     +0
+
+HIGHER UNDER B
+  was              3 ->   1     +2
+  fled             9 ->   3     +6
+  could           13 ->  10     +3
+  returned        11 ->   9     +2
+  flew            20 ->  13     +7
+  would           36 ->  15    +21
+  can             35 ->  16    +19
+  moved           21 ->  17     +4
+  did              4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  appealed         3 ->   5     -2
+  applied         11 ->  23    -12
+  went             1 ->   2     -1
+  did              7 ->   8     -1
+  flew            22 ->  38    -16
+  fled             8 ->  15     -7
+  returned         6 ->   6     +0
+  travelled       25 ->  28     -3
+  left            10 ->  13     -3
+  tried           23 ->  24     -1
+  sought           9 ->  12     -3
+  asked           20 ->  21     -1
+
+HIGHER UNDER B
+  was              2 ->   1     +1
+  decided          4 ->   3     +1
+  has             14 ->   9     +5
+  lodged          31 ->  19    +12
+  turned          12 ->   7     +5
+  had             15 ->  11     +4
+  came            13 ->  10     +3
+  took             5 ->   4     +1
+  moved           17 ->  16     +1
+  contacted       19 ->  17     +2
+  is              16 ->  14     +2
+  began           18 ->  18     +0
+  started         21 ->  20     +1
+  made            24 ->  22     +2
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  went             1 ->   1     +0
+  did             10 ->  15     -5
+  and              8 ->  14     -6
+  moved           12 ->  16     -4
+  flew            17 ->  17     +0
+  took             9 ->  12     -3
+  came            18 ->  19     -1
+  decided          6 ->   8     -2
+
+HIGHER UNDER B
+  appealed        11 ->   6     +5
+  fled             2 ->   2     +0
+  sought          15 ->   9     +6
+  filed           16 ->  11     +5
+  was              5 ->   5     +0
+  has              7 ->   7     +0
+  is              14 ->  10     +4
+  left             4 ->   4     +0
+  returned         3 ->   3     +0
+  applied         13 ->  13     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  did              1 ->   5     -4
+  appealed         2 ->  10     -8
+  fled             7 ->  24    -17
+  went             4 ->   4     +0
+  applied         10 ->  17     -7
+  disappeared     15 ->  61    -46
+  has              8 ->  11     -3
+  left            11 ->  15     -4
+  asked           18 ->  29    -11
+  flew            16 ->  20     -4
+  sought          14 ->  19     -5
+  is               9 ->   9     +0
+
+HIGHER UNDER B
+  decided          6 ->   1     +5
+  was              3 ->   2     +1
+  returned        12 ->   6     +6
+  set             17 ->   8     +9
+  had             13 ->   7     +6
+  killed          41 ->  13    +28
+  boarded         25 ->  12    +13
+  took             5 ->   3     +2
+  chose           42 ->  18    +24
+  came            29 ->  16    +13
+  made            20 ->  14     +6
+  tried           23 ->  22     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  did              3 ->  19    -16
+  went             1 ->   2     -1
+  moved            7 ->  16     -9
+  and             12 ->  28    -16
+  applied         10 ->  17     -7
+  headed          19 ->  47    -28
+  took             8 ->  10     -2
+  stayed          18 ->  36    -18
+  set             26 ->  46    -20
+  came            24 ->  42    -18
+  appealed         4 ->   8     -4
+  fled             6 ->   9     -3
+  became          21 ->  33    -12
+  sought          13 ->  14     -1
+  tried           17 ->  22     -5
+  made            20 ->  21     -1
+  returned         5 ->   6     -1
+
+HIGHER UNDER B
+  is              15 ->   4    +11
+  decided          9 ->   3     +6
+  has             22 ->   7    +15
+  will            73 ->  11    +62
+  had             11 ->   5     +6
+  could           39 ->  15    +24
+  would           55 ->  24    +31
+  left            16 ->  12     +4
+  chose           32 ->  20    +12
+  flew            23 ->  18     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  went             1 ->   2     -1
+  applied          7 ->  20    -13
+  took             4 ->  10     -6
+  returned        10 ->  25    -15
+  and             17 ->  68    -51
+  came            19 ->  62    -43
+  headed          21 ->  77    -56
+  made            14 ->  30    -16
+  turned          12 ->  17     -5
+  left            22 ->  55    -33
+  asked           18 ->  39    -21
+  lodged          24 ->  59    -35
+  moved           16 ->  22     -6
+  tried           26 ->  48    -22
+  did             11 ->  11     +0
+
+HIGHER UNDER B
+  was              3 ->   1     +2
+  is              13 ->   5     +8
+  fled             5 ->   4     +1
+  knew           102 ->  13    +89
+  sought           8 ->   6     +2
+  had             15 ->   9     +6
+  felt           100 ->  19    +81
+  disappeared     44 ->  14    +30
+  has              9 ->   8     +1
+  could           23 ->  12    +11
+  hid             29 ->  18    +11
+  began           25 ->  16     +9
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  has              2 ->  12    -10
+  is               3 ->  19    -16
+  went             1 ->   6     -5
+  appealed         6 ->  11     -5
+  and             13 ->  35    -22
+  returned         9 ->  17     -8
+  made            14 ->  24    -10
+  came            11 ->  13     -2
+  took             7 ->   8     -1
+  turned          19 ->  34    -15
+  filed           20 ->  29     -9
+  flew            18 ->  20     -2
+
+HIGHER UNDER B
+  was              5 ->   1     +4
+  left            10 ->   2     +8
+  had             15 ->   4    +11
+  applied          8 ->   5     +3
+  decided          4 ->   3     +1
+  could           41 ->   9    +32
+  fled            12 ->   7     +5
+  did             24 ->  10    +14
+  started         21 ->  14     +7
+  arrived         23 ->  18     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  left             6 ->  10     -4
+  appealed         9 ->  17     -8
+  did              2 ->   4     -2
+  took             8 ->   9     -1
+  headed          15 ->  44    -29
+  flew            25 ->  58    -33
+  boarded         14 ->  22     -8
+  travelled       23 ->  50    -27
+  returned         5 ->   8     -3
+  applied         12 ->  19     -7
+  turned          16 ->  21     -5
+  hid             24 ->  41    -17
+  could           13 ->  16     -3
+  and             19 ->  23     -4
+  made            18 ->  20     -2
+  sought          21 ->  26     -5
+
+HIGHER UNDER B
+  was              3 ->   1     +2
+  is              11 ->   6     +5
+  has             10 ->   7     +3
+  decided          4 ->   3     +1
+  didn't          38 ->  14    +24
+  fled             7 ->   5     +2
+  had             17 ->  11     +6
+  tried           31 ->  15    +16
+  stayed          22 ->  13     +9
+  moved           20 ->  12     +8
+  came            27 ->  18     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  appealed         2 ->   2     +0
+  applied          5 ->   9     -4
+  left             7 ->  13     -6
+  went             1 ->   1     +0
+  did              9 ->  14     -5
+  moved           13 ->  26    -13
+  and             17 ->  38    -21
+  asked           10 ->  10     +0
+  stayed          21 ->  41    -20
+  made            14 ->  16     -2
+  hid             25 ->  31     -6
+  turned          16 ->  21     -5
+  started         22 ->  27     -5
+  could           24 ->  24     +0
+
+HIGHER UNDER B
+  sued            18 ->  12     +6
+  contacted       20 ->  15     +5
+  wrote           40 ->  17    +23
+  had             15 ->  11     +4
+  decided          3 ->   3     +0
+  filed           12 ->   8     +4
+  headed          35 ->  20    +15
+  took             6 ->   5     +1
+  was              4 ->   4     +0
+  sent            33 ->  19    +14
+  is              23 ->  18     +5
+  has             29 ->  23     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  did              1 ->   9     -8
+  returned         3 ->  25    -22
+  left             6 ->  24    -18
+  decided          9 ->  21    -12
+  applied         14 -> 103    -89
+  went             4 ->  10     -6
+  could           16 ->  77    -61
+  flew            19 -> 101    -82
+  came            13 ->  23    -10
+  and             21 ->  61    -40
+  immediately     20 ->  37    -17
+  made            22 ->  40    -18
+  stayed          15 ->  17     -2
+
+HIGHER UNDER B
+  boarded         39 ->   4    +35
+  took             7 ->   3     +4
+  paid            62 ->   8    +54
+  would           23 ->   6    +17
+  was              5 ->   1     +4
+  filed           17 ->   7    +10
+  has             10 ->   5     +5
+  is              12 ->  11     +1
+  tried           18 ->  13     +5
+  chose           30 ->  15    +15
+  will            63 ->  16    +47
+  refused         40 ->  18    +22
+  fled             2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  and             11 ->  23    -12
+  returned         4 ->   6     -2
+  went             2 ->   3     -1
+  left             6 ->   9     -3
+  took            10 ->  13     -3
+  did              7 ->   8     -1
+  began           18 ->  24     -6
+  came            14 ->  15     -1
+  fled             5 ->   7     -2
+  stayed          21 ->  26     -5
+  moved           16 ->  17     -1
+  sought          19 ->  19     +0
+
+HIGHER UNDER B
+  was              1 ->   1     +0
+  had              9 ->   4     +5
+  is              17 ->  10     +7
+  decided          3 ->   2     +1
+  appealed         8 ->   5     +3
+  has             13 ->  11     +2
+  attempted       32 ->  18    +14
+  applied         12 ->  12     +0
+  would           39 ->  21    +18
+  chose           24 ->  20     +4
+  tried           20 ->  16     +4
+  made            15 ->  14     +1
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  fled             1 ->   6     -5
+  went             2 ->   7     -5
+  returned         5 ->  10     -5
+  took             7 ->  13     -6
+  escaped          9 ->  33    -24
+  travelled       11 ->  32    -21
+  sailed          15 ->  90    -75
+  wrote           13 ->  35    -22
+  jumped          16 ->  56    -40
+  set             17 ->  41    -24
+  and             19 ->  62    -43
+  ran             20 ->  28     -8
+  moved           12 ->  16     -4
+
+HIGHER UNDER B
+  applied         21 ->   3    +18
+  decided          3 ->   1     +2
+  has             32 ->   5    +27
+  is              35 ->   8    +27
+  appealed        31 ->   9    +22
+  was              4 ->   2     +2
+  filed           51 ->  17    +34
+  tried           22 ->  14     +8
+  did             33 ->  20    +13
+  started         28 ->  19     +9
+  flew            18 ->  18     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  did              1 ->   3     -2
+  went             2 ->   2     +0
+  has              9 ->  30    -21
+  tried           11 ->  37    -26
+  was              6 ->  11     -5
+  left             5 ->   8     -3
+  flew            16 ->  51    -35
+  is              10 ->  22    -12
+  fled             7 ->  10     -3
+  refused         17 ->  50    -33
+  didn't          21 -> 103    -82
+  came            20 ->  49    -29
+  appealed        18 ->  35    -17
+  ignored         12 ->  17     -5
+  complied        15 ->  23     -8
+  didn            19 ->  20     -1
+  took             4 ->   4     +0
+
+HIGHER UNDER B
+  decided          3 ->   1     +2
+  felt            74 ->  13    +61
+  boarded         35 ->   9    +26
+  chose           22 ->   7    +15
+  sought          26 ->  12    +14
+  had             14 ->   6     +8
+  feared         139 ->  21   +118
+  embarked       103 ->  19    +84
+  started         30 ->  16    +14
+  turned          34 ->  18    +16
+  returned         8 ->   5     +3
+  made            23 ->  15     +8
+  began           45 ->  24    +21
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  was              1 ->   4     -3
+  appealed         6 ->  19    -13
+  did              3 ->   5     -2
+  applied         14 ->  23     -9
+  had             12 ->  16     -4
+  fled             9 ->  10     -1
+  made            16 ->  26    -10
+  and             19 ->  35    -16
+  left             4 ->   7     -3
+  returned        11 ->  12     -1
+  sought          21 ->  33    -12
+  could           23 ->  30     -7
+  flew            24 ->  32     -8
+  moved           17 ->  20     -3
+  turned          18 ->  21     -3
+
+HIGHER UNDER B
+  is               7 ->   2     +5
+  decided          5 ->   3     +2
+  came            13 ->   9     +4
+  has              8 ->   6     +2
+  will            34 ->  15    +19
+  took            10 ->   8     +2
+  asked           27 ->  14    +13
+  started         25 ->  13    +12
+  stayed          15 ->  11     +4
+  said            31 ->  22     +9
+  tried           20 ->  17     +3
+  began           22 ->  18     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  was              1 ->   7     -6
+  returned         5 ->  10     -5
+  did             10 ->  18     -8
+  left             3 ->   5     -2
+  flew            11 ->  15     -4
+  entered         16 ->  28    -12
+  and             20 ->  34    -14
+  came            18 ->  29    -11
+  headed          21 ->  37    -16
+  departed        19 ->  23     -4
+  stayed          15 ->  17     -2
+
+HIGHER UNDER B
+  fled             4 ->   1     +3
+  decided          6 ->   2     +4
+  sought          14 ->   6     +8
+  moved            7 ->   4     +3
+  applied          8 ->   8     +0
+  crossed         23 ->  13    +10
+  traveled        42 ->  19    +23
+  made            22 ->  14     +8
+  had              9 ->   9     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  did              3 ->   9     -6
+  applied          5 ->  22    -17
+  went             1 ->   3     -2
+  could            8 ->  19    -11
+  made            14 ->  36    -22
+  asked           16 ->  46    -30
+  headed          19 ->  54    -35
+  turned          12 ->  13     -1
+  tried           20 ->  31    -11
+  came            24 ->  29     -5
+  returned         6 ->   7     -1
+  packed          18 ->  21     -3
+  set             23 ->  26     -3
+  had             22 ->  24     -2
+
+HIGHER UNDER B
+  decided          2 ->   1     +1
+  appealed         4 ->   2     +2
+  chose           40 ->  12    +28
+  embarked        79 ->  18    +61
+  was              7 ->   4     +3
+  sought          13 ->   6     +7
+  travelled        9 ->   5     +4
+  contacted       15 ->  11     +4
+  stayed          38 ->  17    +21
+  left            11 ->   8     +3
+  has             25 ->  15    +10
+  took            10 ->  10     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  flew            17 ->  24     -7
+  sought           5 ->  10     -5
+  is               7 ->  11     -4
+  appealed        14 ->  16     -2
+  took            10 ->  12     -2
+  stayed          19 ->  23     -4
+  returned         3 ->   3     +0
+  headed          22 ->  26     -4
+  travelled       20 ->  22     -2
+  has              4 ->   4     +0
+  moved           13 ->  13     +0
+
+HIGHER UNDER B
+  was              2 ->   2     +0
+  went             1 ->   1     +0
+  and             11 ->   6     +5
+  spent           24 ->  18     +6
+  applied          8 ->   5     +3
+  had             18 ->  17     +1
+  fled            12 ->   8     +4
+  decided         15 ->  14     +1
+  made            21 ->  19     +2
+  packed          25 ->  21     +4
+  came             9 ->   9     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  left             7 ->  13     -6
+  boarded          8 ->  24    -16
+  was              4 ->   6     -2
+  travelled       19 -> 118    -99
+  set             12 ->  28    -16
+  sailed          16 ->  56    -40
+  returned         6 ->   7     -1
+  did             13 ->  27    -14
+  moved           11 ->  21    -10
+  and             18 ->  33    -15
+  had              9 ->  14     -5
+
+HIGHER UNDER B
+  went             2 ->   1     +1
+  escaped         10 ->   5     +5
+  decided          5 ->   3     +2
+  turned          25 ->  11    +14
+  ran             42 ->  15    +27
+  headed          15 ->   8     +7
+  tried           21 ->  12     +9
+  started         39 ->  19    +20
+  applied         32 ->  16    +16
+  began           33 ->  18    +15
+  became          22 ->  17     +5
+  made            17 ->  10     +7
+  sought          23 ->  20     +3
+  crossed         28 ->  22     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  was              2 ->  17    -15
+  returned         6 ->  19    -13
+  left             4 ->   6     -2
+  did              8 ->  20    -12
+  is              10 ->  13     -3
+  flew            12 ->  16     -4
+  went             3 ->   3     +0
+  travelled       16 ->  54    -38
+  took             9 ->  10     -1
+  and             18 ->  50    -32
+  had              5 ->   5     +0
+
+HIGHER UNDER B
+  fled             1 ->   1     +0
+  decided          7 ->   2     +5
+  sought          19 ->   4    +15
+  packed          20 ->   8    +12
+  contacted       58 ->  11    +47
+  came            13 ->   7     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

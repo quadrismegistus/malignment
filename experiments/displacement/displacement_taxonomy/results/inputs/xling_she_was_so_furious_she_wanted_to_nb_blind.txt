@@ -1,0 +1,1672 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: She was so furious she wanted to ___
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  kill             1 ->  15    -14
+  go               3 ->  31    -28
+  die             10 -> 105    -95
+  throw            8 ->  26    -18
+  beat            11 ->  37    -26
+  cry              5 ->  16    -11
+  run             16 ->  82    -66
+  kick            15 ->  52    -37
+  bite            13 ->  34    -21
+  get             17 ->  97    -80
+  jump            19 ->  63    -44
+  slap            14 ->  23     -9
+  tear             7 ->   7     +0
+
+HIGHER UNDER B
+  scream           2 ->   1     +1
+  lash            51 ->   3    +48
+  strangle         9 ->   2     +7
+  punch            6 ->   4     +2
+  strike          59 ->   6    +53
+  spit            38 ->  10    +28
+  rip             18 ->   8    +10
+  smash           23 ->  11    +12
+  shake           95 ->  18    +77
+  shout           29 ->  12    +17
+  hurt            34 ->  14    +20
+  claw            49 ->  17    +32
+  do              20 ->  13     +7
+  take            12 ->   9     +3
+  tell            21 ->  19     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  kill             1 ->   2     -1
+  attack           6 ->  34    -28
+  run              5 ->  24    -19
+  strangle         2 ->   7     -5
+
+HIGHER UNDER B
+  scream           4 ->   1     +3
+  cry             65 ->   3    +62
+  rip             63 ->   5    +58
+  spit            10 ->   8     +2
+  hit             19 ->   9    +10
+  die             18 ->  10     +8
+  explode         52 ->  12    +40
+  stab            57 ->  13    +44
+  tear             7 ->   6     +1
+  bite            35 ->  14    +21
+  vomit           49 ->  16    +33
+  throw           11 ->  11     +0
+  go              20 ->  15     +5
+  shake           45 ->  18    +27
+  destroy         25 ->  17     +8
+  take            23 ->  19     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  throttle        15 ->  48    -33
+  slap             5 ->  10     -5
+  smash           13 ->  32    -19
+  punch           10 ->  21    -11
+  rip             12 ->  26    -14
+  shoot           24 ->  61    -37
+  go               9 ->  14     -5
+  kill             1 ->   1     +0
+  get             17 ->  25     -8
+  beat            20 ->  27     -7
+  smack           23 ->  29     -6
+  do              19 ->  23     -4
+  cry              8 ->   8     +0
+  burn            25 ->  31     -6
+
+HIGHER UNDER B
+  hit              4 ->   3     +1
+  tear             6 ->   5     +1
+  burst           64 ->  16    +48
+  explode         68 ->  18    +50
+  die             31 ->  11    +20
+  spit            14 ->   7     +7
+  break           40 ->  19    +21
+  shout           27 ->  13    +14
+  stomp           41 ->  24    +17
+  scream           2 ->   2     +0
+  put             28 ->  22     +6
+  kick            22 ->  17     +5
+  strangle         7 ->   6     +1
+  shake           21 ->  20     +1
+  jump            16 ->  12     +4
+  run             18 ->  15     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  kill             1 ->   7     -6
+  get              6 ->  15     -9
+  be              14 ->  64    -50
+  see             18 ->  68    -50
+  have            22 ->  42    -20
+  fight           13 ->  26    -13
+  burn            20 ->  34    -14
+  hurt             8 ->  16     -8
+  call            25 ->  38    -13
+  give            17 ->  28    -11
+  cut             21 ->  32    -11
+  beat             7 ->  10     -3
+  stab            19 ->  30    -11
+  go              16 ->  22     -6
+  rip              9 ->  17     -8
+  kick             3 ->   8     -5
+  take             5 ->   9     -4
+  shoot           23 ->  25     -2
+  smash           12 ->  14     -2
+  run             10 ->  11     -1
+
+HIGHER UNDER B
+  punch            4 ->   1     +3
+  throw            2 ->   2     +0
+  slap            11 ->   3     +8
+  tear            24 ->   4    +20
+  cry             28 ->   6    +22
+  hit             15 ->   5    +10
+  smack           35 ->  12    +23
+  strangle        45 ->  18    +27
+  break           29 ->  13    +16
+  jump            34 ->  19    +15
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  fight            4 ->   7     -3
+  throw            2 ->   5     -3
+  get             12 ->  30    -18
+  shoot           21 ->  59    -38
+  do              17 ->  34    -17
+  kick            22 ->  47    -25
+  go              11 ->  17     -6
+  make            19 ->  29    -10
+  take            14 ->  21     -7
+  have            16 ->  19     -3
+  tear             6 ->  12     -6
+
+HIGHER UNDER B
+  hit              3 ->   2     +1
+  hurt            10 ->   4     +6
+  run              8 ->   6     +2
+  beat             5 ->   3     +2
+  scream          23 ->   8    +15
+  lash            66 ->  18    +48
+  smash           25 ->  13    +12
+  rip             13 ->  10     +3
+  punch            9 ->   9     +0
+  break           24 ->  15     +9
+  knock           40 ->  24    +16
+  call            37 ->  23    +14
+  cut             18 ->  16     +2
+  cry             27 ->  22     +5
+  destroy         15 ->  14     +1
+  leave           20 ->  20     +0
+  burn            28 ->  25     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  kill             2 ->   5     -3
+  punch            5 ->  10     -5
+  rip              7 ->  24    -17
+  cry              6 ->  15     -9
+  break           12 ->  47    -35
+  go               9 ->  16     -7
+  hit             10 ->  19     -9
+  kick            13 ->  21     -8
+  murder          15 ->  28    -13
+  take            18 ->  25     -7
+  slap            19 ->  20     -1
+
+HIGHER UNDER B
+  scream           1 ->   1     +0
+  throw            3 ->   2     +1
+  lash            45 ->   4    +41
+  bite            14 ->   7     +7
+  crawl           29 ->   9    +20
+  strike          32 ->  12    +20
+  shake           23 ->  13    +10
+  hurt            17 ->  11     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  kill             2 ->   4     -2
+  hit              6 ->   6     +0
+  go               9 ->  21    -12
+  throw            5 ->   5     +0
+  kick            10 ->  16     -6
+  take            15 ->  20     -5
+  run             18 ->  35    -17
+  slap            13 ->  14     -1
+  hurt            17 ->  27    -10
+  punch            3 ->   3     +0
+  break           14 ->  15     -1
+  tear             8 ->  10     -2
+  murder          20 ->  22     -2
+  rip              7 ->   9     -2
+
+HIGHER UNDER B
+  scream           1 ->   1     +0
+  cry              4 ->   2     +2
+  shake           35 ->  13    +22
+  strangle        11 ->   7     +4
+  spit            16 ->  11     +5
+  bite            19 ->  12     +7
+  smash           12 ->   8     +4
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  cry              2 ->   3     -1
+  kill             3 ->   4     -1
+  slap             9 ->  15     -6
+  go              10 ->  17     -7
+  run             15 ->  22     -7
+  do              20 ->  25     -5
+  throw            5 ->   8     -3
+  take            11 ->  14     -3
+  burst           22 ->  23     -1
+
+HIGHER UNDER B
+  scream           1 ->   1     +0
+  hit              4 ->   2     +2
+  punch            6 ->   5     +1
+  tear             8 ->   6     +2
+  strangle         7 ->   7     +0
+  spit            19 ->  12     +7
+  bite            17 ->  13     +4
+  just            30 ->  18    +12
+  break           14 ->  10     +4
+  explode         28 ->  20     +8
+  smash           12 ->   9     +3
+  shake           13 ->  11     +2
+  shout           16 ->  16     +0
+  rip             21 ->  21     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  kill             1 ->   3     -2
+  hit              3 ->   5     -2
+  slap             6 ->  14     -8
+  tear            10 ->  35    -25
+  go               8 ->  12     -4
+  murder          23 ->  72    -49
+  punch            5 ->   7     -2
+  leave           11 ->  17     -6
+  give            14 ->  19     -5
+  strangle        18 ->  24     -6
+  break           16 ->  20     -4
+  kick            20 ->  26     -6
+  tell            17 ->  21     -4
+  take             9 ->  10     -1
+  get             19 ->  22     -3
+  explode         22 ->  23     -1
+
+HIGHER UNDER B
+  scream           2 ->   1     +1
+  spit             4 ->   2     +2
+  shout           36 ->   9    +27
+  rip             15 ->   8     +7
+  call            13 ->   6     +7
+  storm           63 ->  16    +47
+  throw            7 ->   4     +3
+  cry             12 ->  11     +1
+  make            25 ->  13    +12
+  lash            32 ->  18    +14
+  do              21 ->  15     +6
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  kill             1 ->   2     -1
+  slap             5 ->  22    -17
+  hit              2 ->   7     -5
+  punch            4 ->   9     -5
+  kick             9 ->  19    -10
+  murder          17 ->  46    -29
+  beat            21 ->  69    -48
+  throw            3 ->   4     -1
+  break           22 ->  55    -33
+  cry             10 ->  17     -7
+  die             15 ->  26    -11
+  go              11 ->  16     -5
+  tear            12 ->  15     -3
+  strangle        13 ->  14     -1
+  smash           19 ->  27     -8
+  get             16 ->  18     -2
+
+HIGHER UNDER B
+  scream           6 ->   1     +5
+  shout           45 ->   6    +39
+  rip              7 ->   3     +4
+  burn            18 ->   8    +10
+  yell            48 ->  13    +35
+  take             8 ->   5     +3
+  pull            28 ->  11    +17
+  blow            58 ->  24    +34
+  bite            20 ->  10    +10
+  give            23 ->  20     +3
+  be              24 ->  21     +3
+  destroy         25 ->  23     +2
+  spit            14 ->  12     +2
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  get              2 ->  15    -13
+  know             7 ->  39    -32
+  sue             15 -> 123   -108
+  punch            3 ->  12     -9
+  quit            16 ->  32    -16
+  cry             10 ->  21    -11
+  see             20 ->  34    -14
+  tell            11 ->  23    -12
+  hit              8 ->  17     -9
+  fight           12 ->  22    -10
+  write           27 ->  38    -11
+  leave            5 ->   5     +0
+  take             6 ->  11     -5
+  die             14 ->  18     -4
+  be              24 ->  25     -1
+  give            19 ->  20     -1
+
+HIGHER UNDER B
+  break            9 ->   3     +6
+  tear            32 ->  10    +22
+  throw           13 ->   4     +9
+  burn            26 ->   7    +19
+  scream          21 ->   6    +15
+  go               4 ->   2     +2
+  run             23 ->   8    +15
+  make            17 ->   9     +8
+  jump            31 ->  16    +15
+  destroy         22 ->  14     +8
+  do              18 ->  13     +5
+  beat            25 ->  19     +6
+  hurt            28 ->  24     +4
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  kill             1 ->  18    -17
+  throw            2 ->  12    -10
+  punch            3 ->  22    -19
+  kick             4 ->  82    -78
+  rip              6 -> 124   -118
+  strangle         9 ->  90    -81
+  tear             5 ->  30    -25
+  jump            10 ->  43    -33
+  slap            14 -> 129   -115
+  smash           12 ->  36    -24
+  explode         15 ->  79    -64
+  take             7 ->  21    -14
+  blow            13 ->  27    -14
+  hit              8 ->  14     -6
+  shoot           21 ->  32    -11
+  destroy         19 ->  26     -7
+
+HIGHER UNDER B
+  scream          11 ->   1    +10
+  be              56 ->   2    +54
+  see             97 ->   3    +94
+  run             22 ->   4    +18
+  break           31 ->   6    +25
+  leave           64 ->   9    +55
+  cry             17 ->   5    +12
+  die             33 ->  10    +23
+  spill          130 ->  15   +115
+  have            20 ->   7    +13
+  write          118 ->  19    +99
+  shout           91 ->  16    +75
+  make            41 ->  13    +28
+  go              16 ->   8     +8
+  get             18 ->  11     +7
+  stop           115 ->  23    +92
+  turn            42 ->  17    +25
+  hurt            45 ->  20    +25
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  kill             1 ->   6     -5
+  cry              7 ->  21    -14
+  hit              8 ->  13     -5
+  scream           2 ->   3     -1
+  punch            3 ->   7     -4
+  kick            17 ->  34    -17
+  die             18 ->  37    -19
+  bite            15 ->  30    -15
+  break           14 ->  18     -4
+  go              12 ->  14     -2
+
+HIGHER UNDER B
+  rip              6 ->   1     +5
+  tear             9 ->   2     +7
+  burn            19 ->   9    +10
+  throw            4 ->   4     +0
+  spit             5 ->   5     +0
+  strangle        10 ->   8     +2
+  drive           52 ->  15    +37
+  take            16 ->  12     +4
+  scratch         39 ->  16    +23
+  smash           13 ->  11     +2
+  turn            41 ->  17    +24
+  slap            11 ->  10     +1
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  kill             1 ->   2     -1
+  leave            3 ->  33    -30
+  shoot            6 ->  56    -50
+  go               4 ->  19    -15
+  get              8 ->  49    -41
+  die             14 -> 130   -116
+  run              7 ->  24    -17
+  know            17 -> 123   -106
+  have            15 ->  76    -61
+  murder          19 -> 129   -110
+  quit            22 -> 132   -110
+  burn            13 ->  34    -21
+  sue             16 ->  40    -24
+  take             5 ->  11     -6
+  call            21 ->  43    -22
+
+HIGHER UNDER B
+  tear            12 ->   1    +11
+  destroy         39 ->   3    +36
+  slap            38 ->   6    +32
+  strangle         9 ->   5     +4
+  smash           37 ->   7    +30
+  throttle        59 ->   9    +50
+  choke          118 ->  16   +102
+  break           10 ->   8     +2
+  hit             20 ->  10    +10
+  scream          32 ->  13    +19
+  knock           86 ->  23    +63
+  beat            25 ->  15    +10
+  strike          62 ->  22    +40
+  bite            50 ->  20    +30
+  kick            18 ->  14     +4
+  cry             42 ->  21    +21
+  give            27 ->  17    +10
+  pull            23 ->  18     +5
+  punch           35 ->  25    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  go               2 ->  16    -14
+  shoot            6 ->  18    -12
+  get             10 ->  23    -13
+  cut             12 ->  31    -19
+  fire            16 ->  29    -13
+  quit             9 ->  10     -1
+  do              17 ->  24     -7
+  burn            20 ->  27     -7
+  leave            7 ->   8     -1
+  take             8 ->   9     -1
+
+HIGHER UNDER B
+  hit              4 ->   2     +2
+  scream          38 ->   6    +32
+  destroy         25 ->   5    +20
+  tear            19 ->   7    +12
+  smash           31 ->  12    +19
+  break           21 ->  11    +10
+  throw            5 ->   3     +2
+  bite            22 ->  15     +7
+  spit            44 ->  28    +16
+  sue             13 ->  13     +0
+  fight           35 ->  26     +9
+  slap            23 ->  19     +4
+  kick            24 ->  21     +3
+  hurt            28 ->  25     +3
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  kill             1 ->  23    -22
+  go               2 ->  22    -20
+  throw            6 ->  24    -18
+  strangle         7 ->  19    -12
+  break            4 ->  10     -6
+  beat             8 ->  14     -6
+  slap             9 ->  27    -18
+  take            11 ->  30    -19
+  die             13 ->  44    -31
+  get             15 ->  46    -31
+  leave           18 ->  77    -59
+  cry             12 ->  18     -6
+  burn            21 ->  55    -34
+  tear            19 ->  40    -21
+  scream           5 ->   8     -3
+  destroy         14 ->  17     -3
+  call            22 ->  49    -27
+  fight           25 ->  71    -46
+  make            27 ->  50    -23
+  jump            23 ->  28     -5
+  hit              3 ->   5     -2
+
+HIGHER UNDER B
+  Options        132 ->   1   +131
+  A              126 ->   2   +124
+  You            128 ->   4   +124
+  punch           10 ->   3     +7
+  what           124 ->   6   +118
+  do              17 ->   7    +10
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  cry              4 ->  27    -23
+  kill             1 ->   3     -2
+  throw            6 ->  12     -6
+  go               8 ->  14     -6
+  beat             9 ->  18     -9
+  die             15 ->  36    -21
+  rip             10 ->  15     -5
+  slap             7 ->  11     -4
+  vomit           25 ->  74    -49
+  take            19 ->  34    -15
+  punch           18 ->  25     -7
+  find            26 ->  62    -36
+  run             23 ->  45    -22
+  leave           24 ->  49    -25
+  jump            27 ->  55    -28
+  curse           21 ->  22     -1
+
+HIGHER UNDER B
+  scream           5 ->   1     +4
+  smash            3 ->   2     +1
+  destroy         12 ->   5     +7
+  bite            13 ->   6     +7
+  throttle        94 ->  13    +81
+  break           11 ->   7     +4
+  hit             16 ->   8     +8
+  pull            17 ->   9     +8
+  strangle        14 ->  10     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  cry              7 ->  31    -24
+  vomit           16 ->  91    -75
+  spit            21 ->  34    -13
+  rip             18 ->  30    -12
+  die             25 ->  28     -3
+  kick            20 ->  24     -4
+  get             23 ->  26     -3
+  murder          17 ->  19     -2
+  beat             8 ->  12     -4
+  take            13 ->  14     -1
+
+HIGHER UNDER B
+  strangle         9 ->   4     +5
+  throw            4 ->   2     +2
+  break           12 ->   7     +5
+  slap            10 ->   6     +4
+  burn            33 ->  16    +17
+  destroy         14 ->  11     +3
+  punch           15 ->  13     +2
+  fight           22 ->  15     +7
+  scream          11 ->  10     +1
+  jump            24 ->  18     +6
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  beat             5 ->  13     -8
+  get              7 ->  16     -9
+  hit              2 ->   3     -1
+  cut              9 ->  22    -13
+  eat             15 ->  23     -8
+  tear            12 ->  19     -7
+  bite            21 ->  27     -6
+  blow             6 ->   9     -3
+  have            22 ->  25     -3
+  kick             4 ->   4     +0
+
+HIGHER UNDER B
+  throw            3 ->   2     +1
+  explode         26 ->   7    +19
+  what            11 ->   6     +5
+  jump            23 ->  10    +13
+  do               8 ->   5     +3
+  cry             16 ->  11     +5
+  break           10 ->   8     +2
+  scream          19 ->  15     +4
+  punch           13 ->  12     +1
+  hurt            14 ->  14     +0
+  lash            31 ->  21    +10
+  go              20 ->  17     +3
+  run             18 ->  18     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  get              7 ->  25    -18
+  go               8 ->  27    -19
+  kill             2 ->   3     -1
+  know            17 ->  64    -47
+  take             4 ->   9     -5
+  make            15 ->  34    -19
+  kick            14 ->  33    -19
+  give            20 ->  42    -22
+  leave           12 ->  30    -18
+  find            28 ->  45    -17
+  be              23 ->  36    -13
+  tell            24 ->  35    -11
+  blow            25 ->  32     -7
+  shoot           18 ->  26     -8
+  strike          10 ->  15     -5
+  beat            13 ->  16     -3
+  hit             19 ->  21     -2
+
+HIGHER UNDER B
+  do               1 ->   1     +0
+  break           22 ->   5    +17
+  throw            6 ->   4     +2
+  strangle        11 ->   6     +5
+  rip             16 ->   8     +8
+  what             3 ->   2     +1
+  grab            38 ->  14    +24
+  lash            26 ->  11    +15
+  smash           45 ->  18    +27
+  burst           27 ->  12    +15
+  burn            37 ->  19    +18
+  just            31 ->  17    +14
+  scream          21 ->  13     +8
+  pull            30 ->  20    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  smash            4 ->  14    -10
+  do               6 ->  13     -7
+  break            5 ->  11     -6
+  rip              7 ->  12     -5
+  what            16 ->  26    -10
+  leave           19 ->  58    -39
+  take            11 ->  16     -5
+  strangle        15 ->  19     -4
+  hit              8 ->   8     +0
+  tear             2 ->   4     -2
+  go              20 ->  22     -2
+
+HIGHER UNDER B
+  kill             1 ->   1     +0
+  scream           9 ->   2     +7
+  bite            13 ->   5     +8
+  throw            3 ->   3     +0
+  slap            18 ->   7    +11
+  kick            14 ->   9     +5
+  destroy         10 ->   6     +4
+  cry             41 ->  18    +23
+  murder          32 ->  17    +15
+  punch           12 ->  10     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  kill             1 ->   7     -6
+  hit              2 ->   5     -3
+  throw            5 ->  51    -46
+  punch            3 ->   4     -1
+  tear             7 ->  12     -5
+  go               8 ->  32    -24
+  rip             10 ->  22    -12
+  spit            11 ->  20     -9
+  scream           9 ->   9     +0
+  take            12 ->  29    -17
+  cry             14 ->  62    -48
+  kick            17 ->  34    -17
+  break           18 ->  61    -43
+  get             19 ->  23     -4
+  beat            21 ->  87    -66
+
+HIGHER UNDER B
+  strangle         4 ->   1     +3
+  hurt            13 ->   2    +11
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  hit              4 ->  17    -13
+  beat             6 ->  21    -15
+  get             10 ->  30    -20
+  punch           19 ->  58    -39
+  slap            25 ->  61    -36
+  kick            21 ->  42    -21
+  tell            24 ->  39    -15
+  go               3 ->   6     -3
+  run              9 ->  14     -5
+  have            26 ->  28     -2
+  cry             23 ->  26     -3
+  strangle        16 ->  18     -2
+
+HIGHER UNDER B
+  destroy         18 ->   3    +15
+  break           13 ->   5     +8
+  send            35 ->  11    +24
+  hurt            12 ->   7     +5
+  tear             5 ->   4     +1
+  throw            2 ->   2     +0
+  lash            40 ->  15    +25
+  burn            11 ->   8     +3
+  rip             17 ->  12     +5
+  leave           41 ->  25    +16
+  smash           14 ->  13     +1
+  start           32 ->  23     +9
+  cut             29 ->  22     +7
+  fight           22 ->  19     +3
+  give            28 ->  24     +4
+  make            20 ->  20     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  tear             2 ->   9     -7
+  smash            6 ->  17    -11
+  cry             16 ->  42    -26
+  break           10 ->  18     -8
+  kick            12 ->  20     -8
+  burn            15 ->  23     -8
+  murder          19 ->  26     -7
+  go               8 ->  12     -4
+  strangle         7 ->  10     -3
+  shoot           22 ->  24     -2
+
+HIGHER UNDER B
+  hit              4 ->   2     +2
+  throw            3 ->   3     +0
+  beat            17 ->   4    +13
+  rip              9 ->   6     +3
+  slap            14 ->   8     +6
+  grab            30 ->  15    +15
+  run             18 ->  11     +7
+  take            11 ->   7     +4
+  do              20 ->  14     +6
+  just            51 ->  21    +30
+  hurt            29 ->  16    +13
+  destroy         13 ->  13     +0
+  scream           5 ->   5     +0
+  punch           21 ->  19     +2
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  leave            2 ->   2     +0
+  burn            18 ->  26     -8
+  kill             5 ->   8     -3
+  be              21 ->  21     +0
+  break            7 ->  10     -3
+  cut             25 ->  27     -2
+  know            13 ->  18     -5
+  find            23 ->  25     -2
+  take            11 ->  14     -3
+  see             28 ->  29     -1
+  send            22 ->  23     -1
+  kick            19 ->  20     -1
+  smash           10 ->  11     -1
+
+HIGHER UNDER B
+  tear             9 ->   5     +4
+  call            12 ->   9     +3
+  throw            1 ->   1     +0
+  punch           20 ->  13     +7
+  go               8 ->   6     +2
+  shout           14 ->  12     +2
+  scream          27 ->  19     +8
+  slap            17 ->  17     +0
+  hit             16 ->  15     +1
+  tell             3 ->   3     +0
+  get              4 ->   4     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  kill             1 ->   2     -1
+  strangle         3 ->  19    -16
+  rip              8 ->  15     -7
+  spit            16 ->  78    -62
+  slap            21 ->  77    -56
+  get             13 ->  22     -9
+  shoot           19 ->  28     -9
+  smash           18 ->  24     -6
+  do              15 ->  21     -6
+  beat            11 ->  16     -5
+
+HIGHER UNDER B
+  hit              7 ->   1     +6
+  throw            4 ->   3     +1
+  scream           5 ->   4     +1
+  hurt            27 ->   7    +20
+  break           20 ->   9    +11
+  punch            9 ->   6     +3
+  fight           31 ->  14    +17
+  cry             12 ->  10     +2
+  burn            17 ->  12     +5
+  run             23 ->  17     +6
+  call            22 ->  18     +4
+  kick            14 ->  13     +1
+  see             24 ->  20     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  go               3 ->  23    -20
+  get              6 ->  30    -24
+  have            12 ->  42    -30
+  throw            2 ->   6     -4
+  be              16 ->  41    -25
+  see             22 ->  35    -13
+  call            28 ->  43    -15
+  take             7 ->  11     -4
+  make            27 ->  33     -6
+  leave           17 ->  26     -9
+  kick             9 ->  17     -8
+  run             11 ->  18     -7
+  fight           18 ->  22     -4
+  beat             8 ->  16     -8
+  jump            20 ->  28     -8
+  pull            25 ->  25     +0
+
+HIGHER UNDER B
+  scream          14 ->   2    +12
+  strangle         5 ->   3     +2
+  lash            39 ->   7    +32
+  rip             10 ->   5     +5
+  punch            4 ->   4     +0
+  tear            31 ->  12    +19
+  smash           15 ->   8     +7
+  cry             21 ->   9    +12
+  throttle        41 ->  19    +22
+  break           23 ->  13    +10
+  bite            49 ->  24    +25
+  spit            48 ->  27    +21
+  hurt            19 ->  14     +5
+  hit             13 ->  10     +3
+  slap            24 ->  15     +9
+  turn            44 ->  29    +15
+  smack           34 ->  21    +13
+  attack          26 ->  20     +6
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  cry              4 ->  15    -11
+  slap             8 ->  13     -5
+  punch            6 ->   7     -1
+  murder          19 ->  42    -23
+  smack           18 ->  30    -12
+  run             20 ->  35    -15
+  throttle        21 ->  29     -8
+  spit            13 ->  17     -4
+  call            15 ->  18     -3
+  go              10 ->  10     +0
+
+HIGHER UNDER B
+  scream           2 ->   2     +0
+  strangle         7 ->   3     +4
+  take            12 ->   6     +6
+  confront        96 ->  22    +74
+  beat            16 ->  11     +5
+  pull            29 ->  19    +10
+  get             22 ->  16     +6
+  kill             1 ->   1     +0
+  leave           28 ->  21     +7
+  tell            25 ->  20     +5
+  throw            5 ->   5     +0
+  break           14 ->  12     +2
+  kick            11 ->   9     +2
+  tear            17 ->  14     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  explode          3 ->   3     +0
+  destroy          4 ->   5     -1
+  shoot           15 ->  25    -10
+  tear             8 ->  12     -4
+  bite            20 ->  27     -7
+  burn            14 ->  18     -4
+  fight           18 ->  21     -3
+  kill             2 ->   2     +0
+  jump            24 ->  34    -10
+  throw            6 ->   7     -1
+  break           10 ->  11     -1
+  kick            11 ->  13     -2
+  shout           23 ->  24     -1
+  go              17 ->  17     +0
+  smash           16 ->  16     +0
+  hit              9 ->  10     -1
+
+HIGHER UNDER B
+  scream           1 ->   1     +0
+  strangle        22 ->  14     +8
+  slap             7 ->   6     +1
+  rip             13 ->   9     +4
+  punch           12 ->   8     +4
+  murder          26 ->  20     +6
+  take            19 ->  15     +4
+  do              29 ->  23     +6
+  get             25 ->  22     +3
+  yell            21 ->  19     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  cry              6 ->  10     -4
+  tear             5 ->   5     +0
+  take             7 ->   8     -1
+  go              11 ->  13     -2
+  strike          25 ->  27     -2
+  spit            22 ->  23     -1
+  die             23 ->  25     -2
+  get             18 ->  19     -1
+  smash           16 ->  16     +0
+  strangle         9 ->   9     +0
+  shake           21 ->  21     +0
+  grab            19 ->  20     -1
+  break           17 ->  17     +0
+
+HIGHER UNDER B
+  scream           2 ->   2     +0
+  punch           13 ->  11     +2
+  throw            4 ->   4     +0
+  slap             8 ->   6     +2
+  hit              3 ->   3     +0
+  rip             10 ->   7     +3
+  kill             1 ->   1     +0
+  hurt            15 ->  15     +0
+  smack           20 ->  18     +2
+  throttle        12 ->  12     +0
+  kick            24 ->  22     +2
+  beat            14 ->  14     +0
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  kill             1 ->   9     -8
+  throw            5 ->  13     -8
+  spit             8 ->  19    -11
+  cry              9 ->  12     -3
+  die             17 ->  49    -32
+  kick            15 ->  27    -12
+  bite            14 ->  22     -8
+  beat            12 ->  18     -6
+  explode         19 ->  21     -2
+  burst           16 ->  17     -1
+  jump            20 ->  25     -5
+
+HIGHER UNDER B
+  punch            4 ->   1     +3
+  hit              3 ->   2     +1
+  tear             7 ->   4     +3
+  smash           21 ->   6    +15
+  break           13 ->   7     +6
+  hurt            31 ->  11    +20
+  go              10 ->   8     +2
+  rip              6 ->   5     +1
+  do              25 ->  15    +10
+  take            11 ->  10     +1
+  knock           26 ->  16    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  tear             3 ->  19    -16
+  throw            2 ->   3     -1
+  beat            13 ->  23    -10
+  cut             17 ->  28    -11
+  kick             5 ->  13     -8
+  have            21 ->  33    -12
+  put             23 ->  34    -11
+  break            8 ->  15     -7
+  go               4 ->   9     -5
+  take             7 ->  12     -5
+  call            14 ->  16     -2
+  get             20 ->  26     -6
+  slap            15 ->  17     -2
+  give            22 ->  25     -3
+  smash           11 ->  14     -3
+  be              19 ->  20     -1
+
+HIGHER UNDER B
+  scream           6 ->   2     +4
+  punch           31 ->   5    +26
+  cry             30 ->   6    +24
+  yell            36 ->   7    +29
+  hit             12 ->   4     +8
+  run             18 ->  11     +7
+  die             29 ->  21     +8
+  make            32 ->  24     +8
+  jump            24 ->  22     +2
+  leave           10 ->   8     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  kill             2 ->   3     -1
+  cry              4 ->   7     -3
+  throw            5 ->   6     -1
+  slap             7 ->   8     -1
+  run             17 ->  23     -6
+  kick            10 ->  15     -5
+  smash           14 ->  17     -3
+  go               9 ->  12     -3
+  get             19 ->  25     -6
+  jump            20 ->  32    -12
+
+HIGHER UNDER B
+  scream           1 ->   1     +0
+  tear             8 ->   5     +3
+  spit            18 ->  14     +4
+  strangle        13 ->   9     +4
+  hit              3 ->   2     +1
+  take            15 ->  13     +2
+  grab            22 ->  18     +4
+  shout           30 ->  21     +9
+  shake           24 ->  19     +5
+  break           12 ->  11     +1
+  rip             11 ->  10     +1
+  pull            21 ->  20     +1
+  beat            16 ->  16     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  rip             11 ->  15     -4
+  tear             7 ->   9     -2
+  smash           14 ->  17     -3
+  jump            23 ->  28     -5
+  take            13 ->  14     -1
+  smack           22 ->  24     -2
+  kick            10 ->  11     -1
+  break           20 ->  23     -3
+
+HIGHER UNDER B
+  hurt             8 ->   4     +4
+  hit              2 ->   2     +0
+  scream           3 ->   3     +0
+  fight           27 ->  20     +7
+  cry             12 ->  10     +2
+  get             16 ->  13     +3
+  tell            19 ->  19     +0
+  strangle        15 ->  12     +3
+  strike          21 ->  21     +0
+  say             26 ->  22     +4
+  do              18 ->  18     +0
+  slap             9 ->   8     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  rip              7 ->  16     -9
+  strangle         9 ->  18     -9
+  beat            13 ->  50    -37
+  kick            12 ->  26    -14
+  slap            10 ->  19     -9
+  go               6 ->  10     -4
+  tear            17 ->  44    -27
+  grab            21 ->  51    -30
+  spit            18 ->  34    -16
+  hurt            19 ->  28     -9
+  bite            22 ->  35    -13
+  jump            14 ->  15     -1
+
+HIGHER UNDER B
+  smash           27 ->   5    +22
+  cry              3 ->   2     +1
+  explode         41 ->   9    +32
+  die             47 ->  11    +36
+  hit              4 ->   4     +0
+  tell            49 ->  12    +37
+  see             66 ->  23    +43
+  knock           50 ->  21    +29
+  take            11 ->   8     +3
+  leave           24 ->  20     +4
+  call            23 ->  22     +1
+  do              20 ->  17     +3
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  spit             8 ->  11     -3
+  smack           13 ->  18     -5
+  throw            5 ->   6     -1
+  cry              7 ->   8     -1
+  kick            16 ->  22     -6
+  shake           15 ->  19     -4
+  strike          10 ->  14     -4
+
+HIGHER UNDER B
+  scream           1 ->   1     +0
+  kill             4 ->   4     +0
+  strangle         9 ->   7     +2
+  punch            3 ->   3     +0
+  break           17 ->  10     +7
+  smash           11 ->   9     +2
+  rip             14 ->  13     +1
+  shout           20 ->  16     +4
+  hit              2 ->   2     +0
+  slap             6 ->   5     +1
+  tear            12 ->  12     +0
+  scratch         18 ->  15     +3
+  hurt            21 ->  20     +1
+  take            19 ->  17     +2
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  kill             1 ->  37    -36
+  go               4 ->  59    -55
+  take             3 ->  53    -50
+  get              8 ->  85    -77
+  call            11 ->  78    -67
+  slap            13 ->  31    -18
+  leave           17 ->  84    -67
+  rip              7 ->  11     -4
+  make            18 ->  75    -57
+  sue             21 ->  86    -65
+  give            20 ->  71    -51
+  hit             12 ->  16     -4
+  punch            5 ->   6     -1
+  fight           22 ->  62    -40
+  tear             6 ->   7     -1
+  beat            24 ->  92    -68
+  run             23 ->  73    -50
+  do              16 ->  27    -11
+  tell            28 ->  94    -66
+  put             27 ->  89    -62
+  shoot           25 ->  68    -43
+  cut             30 -> 102    -72
+  strangle        26 ->  32     -6
+  destroy         29 ->  33     -4
+  burn            19 ->  20     -1
+  break           15 ->  15     +0
+
+HIGHER UNDER B
+  scream          14 ->   1    +13
+  throw            2 ->   2     +0
+  spit            39 ->   4    +35
+  explode         71 ->   5    +66
+  smash            9 ->   3     +6
+  hurl            79 ->  10    +69
+  shout           52 ->   9    +43
+  yell            80 ->  12    +68
+  shake           95 ->  13    +82
+  stomp          114 ->  19    +95
+  throttle        67 ->  17    +50
+  burst           75 ->  18    +57
+  set             31 ->  14    +17
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  kill             2 ->   5     -3
+  tear             6 ->  17    -11
+  smash            7 ->  22    -15
+  spit            12 ->  49    -37
+  scream           1 ->   3     -2
+  smack           18 -> 109    -91
+  slap             9 ->  12     -3
+  burst           20 ->  50    -30
+  murder          13 ->  32    -19
+  kick            21 ->  41    -20
+  beat            23 ->  43    -20
+  shoot           19 ->  29    -10
+  get             22 ->  35    -13
+  go              24 ->  30     -6
+
+HIGHER UNDER B
+  punch            4 ->   1     +3
+  throw           10 ->   4     +6
+  quit            68 ->   8    +60
+  hit              3 ->   2     +1
+  leave           69 ->  13    +56
+  fight           58 ->  16    +42
+  walk            61 ->  21    +40
+  break           14 ->   9     +5
+  destroy         56 ->  24    +32
+  stab            38 ->  18    +20
+  hurt            42 ->  20    +22
+  burn            39 ->  25    +14
+  call            16 ->  11     +5
+  rip              8 ->   7     +1
+  throttle        26 ->  19     +7
+  run             25 ->  23     +2
+  do              17 ->  15     +2
+  take            15 ->  14     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  go               7 ->  17    -10
+  strangle         8 ->  12     -4
+  take            10 ->  13     -3
+  rip             12 ->  15     -3
+  cry              2 ->   4     -2
+  get             21 ->  36    -15
+  bite            20 ->  32    -12
+  beat            15 ->  21     -6
+  die             16 ->  23     -7
+  slap             9 ->  10     -1
+  throttle        19 ->  29    -10
+
+HIGHER UNDER B
+  hit              4 ->   2     +2
+  scream           5 ->   3     +2
+  spit            18 ->   6    +12
+  destroy         24 ->  14    +10
+  shake           47 ->  22    +25
+  hurt            40 ->  20    +20
+  break           14 ->   9     +5
+  shout           33 ->  19    +14
+  do              22 ->  16     +6
+  punch           13 ->   8     +5
+  shoot           25 ->  25     +0
+  smash           11 ->  11     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  cry              3 ->   6     -3
+  scream           2 ->   3     -1
+  kill             1 ->   1     +0
+  tear             8 ->  18    -10
+  throw            5 ->   5     +0
+  go              11 ->  23    -12
+  spit             7 ->   8     -1
+  murder          16 ->  22     -6
+  bite            17 ->  21     -4
+  take            13 ->  16     -3
+
+HIGHER UNDER B
+  punch            4 ->   2     +2
+  hit              6 ->   4     +2
+  kick            23 ->  11    +12
+  rip             19 ->  10     +9
+  smash           10 ->   7     +3
+  slap            25 ->  12    +13
+  hurt            31 ->  20    +11
+  run             21 ->  15     +6
+  burn            14 ->  13     +1
+  get             18 ->  17     +1
+  strangle         9 ->   9     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  scream           1 ->   7     -6
+  slap             6 ->  65    -59
+  throw            8 ->  40    -32
+  go               7 ->  29    -22
+  tear             9 ->  28    -19
+  rip             12 -> 122   -110
+  kick            18 ->  31    -13
+  do              21 ->  33    -12
+  beat            10 ->  17     -7
+  hurt            22 ->  27     -5
+  shout           19 ->  25     -6
+  get             16 ->  19     -3
+  hit              3 ->   6     -3
+
+HIGHER UNDER B
+  punch           11 ->   3     +8
+  call            20 ->   4    +16
+  cry              5 ->   2     +3
+  weep            37 ->   8    +29
+  drive           73 ->  11    +62
+  smash           15 ->   9     +6
+  find            77 ->  14    +63
+  break           17 ->  10     +7
+  die             24 ->  12    +12
+  crawl           75 ->  18    +57
+  lash            31 ->  15    +16
+  hurl            44 ->  20    +24
+  run             13 ->  13     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  kill             1 ->   2     -1
+  go               5 ->  24    -19
+  take            10 ->  26    -16
+  beat            15 ->  34    -19
+  get             11 ->  17     -6
+  do              14 ->  27    -13
+  tear             7 ->  14     -7
+  murder          19 ->  28     -9
+  rip             17 ->  20     -3
+  kick            24 ->  42    -18
+  slap             6 ->   9     -3
+  burn            22 ->  30     -8
+  smash            9 ->  11     -2
+  run             21 ->  23     -2
+
+HIGHER UNDER B
+  scream           3 ->   1     +2
+  punch            8 ->   3     +5
+  cry             16 ->   4    +12
+  yell            50 ->  12    +38
+  break           18 ->   7    +11
+  shout           30 ->  13    +17
+  destroy         27 ->  15    +12
+  strangle        12 ->   8     +4
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  kill             1 ->   3     -2
+  beat            10 ->  16     -6
+  hit              5 ->  10     -5
+  take             9 ->  14     -5
+  give            15 ->  20     -5
+  cry             21 ->  30     -9
+  burn            19 ->  21     -2
+  slap            17 ->  18     -1
+  kick            16 ->  17     -1
+
+HIGHER UNDER B
+  punch           12 ->   2    +10
+  break           13 ->   6     +7
+  rip              4 ->   4     +0
+  smash            8 ->   8     +0
+  yell            46 ->  22    +24
+  run             18 ->  12     +6
+  call            26 ->  19     +7
+  destroy         20 ->  15     +5
+  tell            27 ->  23     +4
+  get             14 ->  13     +1
+  go              11 ->  11     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  kill             1 ->  12    -11
+  leave            2 ->  16    -14
+  go               6 ->  33    -27
+  take             7 ->  28    -21
+  get              9 ->  52    -43
+  break            8 ->  21    -13
+  beat            13 ->  69    -56
+  call            14 ->  51    -37
+  make            17 ->  45    -28
+  murder          11 ->  19     -8
+  hurt            18 ->  56    -38
+  fight           22 ->  77    -55
+  cut             23 ->  43    -20
+  give            20 ->  31    -11
+  put             25 ->  38    -13
+  quit            21 ->  26     -5
+  kick            12 ->  13     -1
+  punch            3 ->   5     -2
+
+HIGHER UNDER B
+  strangle         4 ->   1     +3
+  scream          19 ->   2    +17
+  throw            5 ->   3     +2
+  puke            79 ->   6    +73
+  throttle        35 ->   7    +28
+  spit            41 ->   8    +33
+  hit             10 ->   4     +6
+  set             70 ->   9    +61
+  cry             24 ->  10    +14
+  slam           151 ->  15   +136
+  vomit           85 ->  17    +68
+  slap            15 ->  11     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  tear             3 ->   5     -2
+  rip             10 ->  18     -8
+  slap             2 ->   4     -2
+  die             20 ->  32    -12
+  smash           17 ->  24     -7
+  bite            21 ->  23     -2
+  go               9 ->  11     -2
+  burn            23 ->  31     -8
+  cry             16 ->  21     -5
+  strangle        11 ->  12     -1
+  scream           6 ->   7     -1
+
+HIGHER UNDER B
+  kill             1 ->   1     +0
+  throw            4 ->   2     +2
+  hurt            18 ->  10     +8
+  beat            12 ->   9     +3
+  punch            5 ->   3     +2
+  call            25 ->  19     +6
+  hit              7 ->   6     +1
+  pull            22 ->  17     +5
+  set             30 ->  20    +10
+  do              19 ->  16     +3
+  take            14 ->  13     +1
+  spit             8 ->   8     +0
+  break           15 ->  15     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  kill             1 ->   1     +0
+  punch            2 ->   6     -4
+  hit              4 ->  25    -21
+  throw            3 ->  12     -9
+  rip             11 ->  51    -40
+  slap            10 ->  28    -18
+  cry             25 ->  55    -30
+  strangle        24 ->  42    -18
+  tear            23 ->  34    -11
+  smash            6 ->   9     -3
+  knock           21 ->  24     -3
+  beat             8 ->  11     -3
+  quit            20 ->  22     -2
+
+HIGHER UNDER B
+  fight           12 ->   2    +10
+  get              5 ->   3     +2
+  know            14 ->   5     +9
+  make            32 ->   8    +24
+  take             7 ->   4     +3
+  stay            46 ->  17    +29
+  confront       143 ->  21   +122
+  put             27 ->  16    +11
+  give            13 ->  10     +3
+  call            15 ->  13     +2
+  destroy         22 ->  15     +7
+  do              19 ->  14     +5
+  leave            9 ->   7     +2
+  find            37 ->  26    +11
+  see             26 ->  23     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  kill             1 ->   8     -7
+  go               4 ->  21    -17
+  get             14 ->  62    -48
+  do              12 ->  29    -17
+  beat            15 ->  37    -22
+  die             19 ->  57    -38
+  call            23 ->  64    -41
+  slap            17 ->  30    -13
+  cut             24 ->  63    -39
+  kick            22 ->  38    -16
+  strangle        18 ->  26     -8
+  give            21 ->  31    -10
+  shoot           25 ->  27     -2
+  hit              6 ->   9     -3
+
+HIGHER UNDER B
+  scream           3 ->   1     +2
+  tear             5 ->   2     +3
+  shout           56 ->   6    +50
+  rip              9 ->   4     +5
+  throw            7 ->   5     +2
+  explode         49 ->  14    +35
+  leave           16 ->  10     +6
+  take             8 ->   7     +1
+  send            47 ->  18    +29
+  blow            32 ->  15    +17
+  destroy         33 ->  16    +17
+  set             26 ->  17     +9
+  burn            13 ->  13     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  throw            5 ->   7     -2
+  cry              8 ->  13     -5
+  slap             9 ->  10     -1
+  grab            25 ->  34     -9
+  smack           21 ->  32    -11
+  go              17 ->  22     -5
+  take            15 ->  20     -5
+  strangle         4 ->   5     -1
+  hurt            14 ->  15     -1
+  rip              7 ->   8     -1
+  hit              3 ->   3     +0
+  scream           2 ->   2     +0
+  shout           23 ->  26     -3
+  run             19 ->  19     +0
+
+HIGHER UNDER B
+  kill             1 ->   1     +0
+  punch           10 ->   6     +4
+  tear             6 ->   4     +2
+  murder          31 ->  18    +13
+  smash           13 ->   9     +4
+  knock           27 ->  24     +3
+  die             22 ->  21     +1
+  break           20 ->  17     +3
+  spit            16 ->  14     +2
+  strike          24 ->  23     +1
+  jump            26 ->  25     +1
+  kick            11 ->  11     +0
+  throttle        12 ->  12     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  kill             1 ->   2     -1
+  punish           4 ->  50    -46
+  tear             8 ->  32    -24
+  do               5 ->  18    -13
+  destroy          7 ->  15     -8
+  eat             24 ->  69    -45
+  murder          21 ->  52    -31
+  die             25 ->  62    -37
+  burn             6 ->  12     -6
+  get             13 ->  16     -3
+  strangle        16 ->  24     -8
+  make            15 ->  19     -4
+  kick            28 ->  31     -3
+  cry             22 ->  28     -6
+  go               9 ->   9     +0
+  fight           27 ->  29     -2
+  rip             14 ->  14     +0
+  attack          17 ->  17     +0
+  slap            19 ->  21     -2
+
+HIGHER UNDER B
+  scream           3 ->   1     +2
+  know            56 ->   5    +51
+  punch           12 ->   4     +8
+  shout           41 ->  10    +31
+  break           18 ->   7    +11
+  hit             10 ->   6     +4
+  yell            51 ->  22    +29
+  leave           20 ->  11     +9
+  smash           23 ->  13    +10
+  run             26 ->  20     +6
+  take            11 ->   8     +3
+  tell            29 ->  23     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  kill             1 ->   4     -3
+  hit              3 ->  10     -7
+  cry              4 ->  14    -10
+  go               5 ->  23    -18
+  kick             9 ->  28    -19
+  slap            11 ->  37    -26
+  smash           13 ->  24    -11
+  take             8 ->  16     -8
+  strangle        14 ->  27    -13
+  get             12 ->  19     -7
+  run             10 ->  11     -1
+  tear            18 ->  31    -13
+  call            25 ->  47    -22
+  leave           19 ->  29    -10
+  throw            2 ->   2     +0
+
+HIGHER UNDER B
+  scream           6 ->   1     +5
+  lash            70 ->   9    +61
+  spit            24 ->   6    +18
+  burn            23 ->   7    +16
+  quit            46 ->  17    +29
+  do              21 ->   5    +16
+  break           16 ->   8     +8
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -175,6 +175,28 @@ ENTRIES
 """
 
 
+def arm_for(pairs):
+    """Pick ONE arm per sentence: the blanks-stripped reading if it exists, else the original.
+
+    ## NEVER BOTH, AND WHY IT IS A CHOICE RATHER THAN A MERGE
+
+    Six sentences now carry two readings of the same 50 lineages: `x1b` and
+    `x1bn`. They are different MEASUREMENTS -- blanks are dropped before
+    renormalisation, so ranks move -- and pooling them would count one sentence
+    twice and mix two instruments while doing it.
+
+    Stripped wins where it exists. Measured across those six: 10 blank-named
+    operations fall to 1, and the coverage that disappears with them was largely
+    fictitious -- on `She was so furious` one rater had filed 47 of 50 models
+    under `Frozen-lead reshuffle` and `Top-choice flight`, whose statements
+    describe whether the top-ranked word stayed put and say nothing about the
+    treatment at all. Stripped, the same rater places 18 and abstains on the
+    rest, which is the honest number.
+    """
+    strip = [x for x in pairs if x[0].split(".")[0].endswith("bn")]
+    return strip or [x for x in pairs if x[0].split(".")[0].endswith("b")]
+
+
 def components(k=2):
     """Per frame, the k=2 components over its blind operations -- the unit to group.
 
@@ -194,10 +216,10 @@ def components(k=2):
     """
     out, dom = [], RT.domains()
     for prompt, n in sorted(RT.blind_prompts().items()):
-        pairs, _ = OG.readings(prompt, n)
-        pairs = [(t, v) for t, v in pairs if t.split(".")[0].endswith("b")]
+        pairs = arm_for(OG.readings(prompt, n)[0])
         if not pairs:
             continue
+        nb = pairs[0][0].split(".")[0].endswith("bn")
         G = OG.build(pairs)
         OPS = {x for x in G if G.nodes[x].get("kind") == "op"}
         ocs, _, _ = OG.op_components(G, OPS, k)
@@ -214,7 +236,7 @@ def components(k=2):
             if not ent:
                 continue
             mem = [m for _, o in ent for m in o.get("members") or []]
-            out.append(dict(prompt=prompt, domain=dom.get(prompt), k=k,
+            out.append(dict(prompt=prompt, domain=dom.get(prompt), k=k, no_blanks=nb,
                             names=[(t, o["name"], o.get("statement") or "",
                                     len(o.get("members") or [])) for t, o in ent],
                             n_models=len({m["model"] for m in mem}), _members=mem))
@@ -277,7 +299,11 @@ def document(min_n=2):
     does that work.
     """
     cs = components()
-    sc = {p: (OG.sidecar(p) or {}) for p in {c["prompt"] for c in cs}}
+    #: SIDECAR MUST MATCH THE ARM. A stripped reading's words carry stripped
+    #: ranks; resolving them against the unstripped table would print numbers
+    #: from a different measurement beside the right words.
+    sc = {c["prompt"]: (OG.sidecar(c["prompt"], no_blanks=c.get("no_blanks", False)) or {})
+          for c in cs}
     blocks = []
     for c in cs:
         f = lambda ps: "; ".join("%s (%d | %s>%s)" % x for x in ps) or "-"

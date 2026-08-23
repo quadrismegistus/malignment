@@ -1,0 +1,1387 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: The cop pinned him to the ground and started to ___
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  beat             1 ->  20    -19
+  punch            4 ->   8     -4
+  kick             5 ->  24    -19
+  drag             8 ->  47    -39
+  choke           11 ->  91    -80
+  put              9 ->  16     -7
+  take            10 ->  17     -7
+  pull            15 ->  69    -54
+  ask             16 ->  29    -13
+  hit             17 ->  79    -62
+  question        13 ->  21     -8
+
+HIGHER UNDER B
+  handcuff         2 ->   1     +1
+  search           3 ->   2     +1
+  frisk            7 ->   3     +4
+  cuff             6 ->   4     +2
+  administer      30 ->   5    +25
+  pat             24 ->   6    +18
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  zip              1 ->   3     -2
+  arrest           4 ->  21    -17
+  draw             5 ->  43    -38
+  punch            6 ->  19    -13
+  question         7 ->  15     -8
+
+HIGHER UNDER B
+  handcuff         2 ->   1     +1
+  cuff            32 ->   2    +30
+  put             12 ->   4     +8
+  kick            18 ->   6    +12
+  tie             29 ->   7    +22
+  hit             37 ->   9    +28
+  frisk           11 ->   8     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  beat             5 ->   8     -3
+  read             8 ->  19    -11
+  punch            9 ->  28    -19
+  kick            17 ->  39    -22
+  pat             15 ->  20     -5
+  go              13 ->  14     -1
+  yell            19 ->  25     -6
+  wrestle         16 ->  18     -2
+  pull            14 ->  15     -1
+  put              6 ->   6     +0
+  choke            7 ->   7     +0
+
+HIGHER UNDER B
+  cuff             2 ->   1     +1
+  handcuff         3 ->   3     +0
+  arrest          10 ->   4     +6
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  beat             1 ->   2     -1
+  stab            13 -> 109    -96
+  bite            16 ->  45    -29
+  shoot            6 ->  10     -4
+  thrash          14 ->  33    -19
+  search          17 ->  24     -7
+  take             8 ->  15     -7
+
+HIGHER UNDER B
+  drag             2 ->   1     +1
+  lift            24 ->   7    +17
+  punch            7 ->   5     +2
+  rape            15 ->   9     +6
+  push            10 ->   8     +2
+  pin             90 ->  18    +72
+  kick             3 ->   3     +0
+  choke            5 ->   4     +1
+  strangle        20 ->  12     +8
+  hit             25 ->  16     +9
+  struggle        46 ->  20    +26
+  whip            19 ->  17     +2
+  press           21 ->  19     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  beat             1 ->   3     -2
+  punch            3 ->   8     -5
+  choke            2 ->   4     -2
+  kick             7 ->  33    -26
+  hit             11 ->  38    -27
+  pull             5 ->  13     -8
+  rape            16 ->  58    -42
+  put              6 ->  17    -11
+  strangle        19 ->  49    -30
+  pound           18 ->  46    -28
+  assault         15 ->  29    -14
+  arrest          13 ->  22     -9
+  take            10 ->  15     -5
+  sexually        17 ->  21     -4
+
+HIGHER UNDER B
+  taser           20 ->   1    +19
+  handcuff         8 ->   2     +6
+  use              9 ->   5     +4
+  question        24 ->   9    +15
+  search          12 ->   7     +5
+  make            22 ->  10    +12
+  ask             23 ->  11    +12
+  interrogate     32 ->  12    +20
+  taste          147 ->  18   +129
+  tickle          25 ->  16     +9
+  frisk           39 ->  20    +19
+  restrain        40 ->  23    +17
+  verbally        14 ->  14     +0
+  strip           21 ->  19     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  beat             1 ->   3     -2
+  kick             2 ->  10     -8
+  kiss             7 ->  50    -43
+  strip           10 ->  62    -52
+  drag             6 ->  26    -20
+  attack          13 ->  99    -86
+  bite            17 ->  75    -58
+  pound            8 ->  22    -14
+  take            11 ->  30    -19
+  rape            20 ->  68    -48
+  pull            16 ->  54    -38
+  strangle        18 ->  57    -39
+  work             4 ->   6     -2
+  remove          14 ->  40    -26
+  make            19 ->  44    -25
+  punch           21 ->  37    -16
+  whip            22 ->  41    -19
+  hit              9 ->  15     -6
+  use             15 ->  27    -12
+
+HIGHER UNDER B
+  search           5 ->   1     +4
+  choke            3 ->   2     +1
+  pat             37 ->   4    +33
+  pepper          40 ->   5    +35
+  speak           45 ->   8    +37
+  question        51 ->   9    +42
+  interrogate    109 ->  12    +97
+  shake           12 ->   7     +5
+  cuff           122 ->  14   +108
+  talk            38 ->  11    +27
+  tap             74 ->  18    +56
+  frisk           44 ->  16    +28
+  do              23 ->  13    +10
+  tie             36 ->  17    +19
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  beat             1 ->   5     -4
+  search           2 ->   7     -5
+  choke            5 ->  14     -9
+  punch            6 ->  11     -5
+  kick             8 ->  18    -10
+  hit             12 ->  38    -26
+  take            10 ->  16     -6
+  strangle        14 ->  30    -16
+  question        16 ->  27    -11
+  get             19 ->  41    -22
+  give            21 ->  32    -11
+  remove          18 ->  24     -6
+  pat             20 ->  25     -5
+
+HIGHER UNDER B
+  cuff             4 ->   1     +3
+  handcuff         3 ->   2     +1
+  read            11 ->   3     +8
+  frisk           15 ->   9     +6
+  zip             38 ->  12    +26
+  arrest          17 ->  10     +7
+  interrogate     31 ->  13    +18
+  pull             7 ->   4     +3
+  drag             9 ->   6     +3
+  slap            13 ->   8     +5
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  kick             6 ->  16    -10
+  beat             2 ->   5     -3
+  handcuff         4 ->   4     +0
+  punch            7 ->   9     -2
+  hit              8 ->  11     -3
+  take            16 ->  28    -12
+  pull            15 ->  24     -9
+  drag            21 ->  35    -14
+  ask             10 ->  17     -7
+  slap            13 ->  21     -8
+  zip             22 ->  22     +0
+  twist           19 ->  19     +0
+
+HIGHER UNDER B
+  frisk            3 ->   1     +2
+  cuff             5 ->   2     +3
+  rough           20 ->   7    +13
+  threaten        28 ->  15    +13
+  question         9 ->   6     +3
+  choke           17 ->  10     +7
+  pepper          18 ->  14     +4
+  interrogate     14 ->  12     +2
+  read            11 ->   8     +3
+  cuss            23 ->  18     +5
+  apply           29 ->  20     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  beat             2 ->   8     -6
+  choke            3 ->   7     -4
+  punch            8 ->  18    -10
+  slap             9 ->  15     -6
+  hit             11 ->  62    -51
+  put             10 ->  22    -12
+  kick            14 ->  26    -12
+  give            12 ->  21     -9
+  pull            13 ->  19     -6
+  reach           16 ->  23     -7
+
+HIGHER UNDER B
+  cuff             4 ->   1     +3
+  frisk            5 ->   3     +2
+  read            19 ->   6    +13
+  handcuff         7 ->   4     +3
+  apply           47 ->  10    +37
+  get             24 ->   9    +15
+  feel            25 ->  13    +12
+  question        21 ->  12     +9
+  take            20 ->  11     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  beat             1 ->   5     -4
+  choke            2 ->   6     -4
+  punch            3 ->  11     -8
+  hit              5 ->  33    -28
+  kick             6 ->  13     -7
+  pummel           9 ->  35    -26
+  arrest           8 ->  12     -4
+  put             11 ->  25    -14
+  knee            15 ->  38    -23
+  pepper          12 ->  17     -5
+  pull            13 ->  16     -3
+
+HIGHER UNDER B
+  search           4 ->   1     +3
+  handcuff         7 ->   2     +5
+  frisk           16 ->   3    +13
+  cuff            17 ->   4    +13
+  read            63 ->   7    +56
+  yell            14 ->   8     +6
+  dig             35 ->  10    +25
+  pat             59 ->  14    +45
+  interrogate     33 ->  15    +18
+  get             23 ->  18     +5
+  kneel           24 ->  19     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  beat             1 ->   1     +0
+  handcuff         5 ->  33    -28
+  put              7 ->  46    -39
+  do              10 ->  53    -43
+  give             8 ->  29    -21
+  pat              6 ->  13     -7
+  search           3 ->   4     -1
+  take             4 ->   6     -2
+  cuff            11 ->  38    -27
+  torture         15 ->  16     -1
+
+HIGHER UNDER B
+  strangle        20 ->   3    +17
+  shoot           13 ->   5     +8
+  choke            2 ->   2     +0
+  hit             24 ->  10    +14
+  pull            12 ->   7     +5
+  punch           14 ->   9     +5
+  interrogate     17 ->  11     +6
+  kick             9 ->   8     +1
+  rape            29 ->  12    +17
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  beat             1 -> 137   -136
+  drag             2 ->  13    -11
+  choke            4 -> 140   -136
+  strip            5 -> 132   -127
+  strangle         7 -> 144   -137
+  tear             6 ->  94    -88
+  kick             8 ->  49    -41
+  punch            9 ->  97    -88
+  bite            12 -> 131   -119
+  grind           14 -> 130   -116
+  strike          15 -> 165   -150
+  torture         16 -> 184   -168
+  pull             3 ->   6     -3
+  lift            13 ->  76    -63
+  hit             17 -> 125   -108
+  attack          21 -> 129   -108
+  slowly          18 ->  55    -37
+  pound           22 -> 118    -96
+  rape            24 -> 180   -156
+  push            10 ->  16     -6
+  take            19 ->  35    -16
+  use             20 ->  40    -20
+
+HIGHER UNDER B
+  run             32 ->   1    +31
+  walk            11 ->   2     +9
+  fall           174 ->   3   +171
+  talk           113 ->   5   +108
+  move            23 ->   4    +19
+  cry            119 ->   7   +112
+  scream         117 ->   9   +108
+  crawl           50 ->  10    +40
+  roll            36 ->   8    +28
+  stand          167 ->  14   +153
+  climb           77 ->  12    +65
+  scratch        135 ->  15   +120
+  dig             44 ->  11    +33
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  choke            3 ->  12     -9
+  beat             4 ->  20    -16
+  punch            5 ->  10     -5
+  hit              6 ->  81    -75
+  kneel            8 ->  19    -11
+  put             12 ->  31    -19
+  strangle        14 ->  94    -80
+  squeeze         15 ->  51    -36
+  pound           18 ->  69    -51
+
+HIGHER UNDER B
+  cuff             1 ->   1     +0
+  search           7 ->   3     +4
+  handcuff         2 ->   2     +0
+  read            16 ->   5    +11
+  pat             37 ->   6    +31
+  frisk            9 ->   4     +5
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  beat             1 ->   8     -7
+  choke            2 ->  12    -10
+  kick             3 ->  50    -47
+  hit              4 ->  52    -48
+  punch            5 ->  18    -13
+  pull             6 ->  15     -9
+  drag            10 ->  39    -29
+  strangle        12 ->  55    -43
+  shoot           13 ->  66    -53
+  whip            14 ->  57    -43
+  tear            16 ->  46    -30
+  strike          18 ->  85    -67
+  take            15 ->  24     -9
+  rip             19 ->  76    -57
+  use             20 ->  31    -11
+
+HIGHER UNDER B
+  handcuff         8 ->   1     +7
+  handcuffs      110 ->   5   +105
+  pat             74 ->   6    +68
+  cuff            17 ->   4    +13
+  frisk            9 ->   2     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  beat             1 ->   6     -5
+  kick             5 ->  17    -12
+  cuff             2 ->   2     +0
+  hit              7 ->  10     -3
+  arrest           9 ->  18     -9
+  punch            4 ->   4     +0
+  search           8 ->  15     -7
+  take            15 ->  52    -37
+  strangle        17 ->  48    -31
+  scream          18 ->  33    -15
+  tie             13 ->  26    -13
+  put             12 ->  21     -9
+  twist           10 ->  12     -2
+
+HIGHER UNDER B
+  handcuff         3 ->   1     +2
+  frisk           14 ->   3    +11
+  pat             25 ->   7    +18
+  taser           29 ->  11    +18
+  apply           19 ->   8    +11
+  administer      50 ->  16    +34
+  interrogate     21 ->  13     +8
+  read            16 ->  14     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  beat             2 ->  30    -28
+  kick             4 ->  47    -43
+  choke            5 ->  29    -24
+  punch            9 ->  51    -42
+  frisk            6 ->  11     -5
+  hit             11 ->  93    -82
+  give            12 ->  39    -27
+  search           7 ->   8     -1
+  put             10 ->  10     +0
+  arrest          14 ->  34    -20
+  cuff             3 ->   4     -1
+
+HIGHER UNDER B
+  handcuff         1 ->   1     +0
+  walk            23 ->   2    +21
+  drag            18 ->   3    +15
+  take             8 ->   5     +3
+  read            19 ->   6    +13
+  do              25 ->   7    +18
+  cuffs          115 ->  14   +101
+  pat             22 ->  15     +7
+  pull            13 ->   9     +4
+  question        16 ->  12     +4
+  ask             21 ->  17     +4
+  get             17 ->  16     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  beat             1 ->   2     -1
+  choke            2 ->  14    -12
+  kick             7 ->  48    -41
+  hit              5 ->  17    -12
+  search          10 ->  19     -9
+  pummel          12 ->  49    -37
+  pat             13 ->  56    -43
+  pull            11 ->  16     -5
+  twist           17 ->  31    -14
+  drag            16 ->  28    -12
+
+HIGHER UNDER B
+  cuff             4 ->   1     +3
+  handcuff         3 ->   3     +0
+  slap             8 ->   5     +3
+  put             15 ->   8     +7
+  hand            94 ->  10    +84
+  read            14 ->   7     +7
+  punch            6 ->   4     +2
+  cuffs          111 ->  12    +99
+  wrestle         19 ->   9    +10
+  interrogate     36 ->  15    +21
+  frisk            9 ->   6     +3
+  give            21 ->  11    +10
+  apply           18 ->  13     +5
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  beat             1 ->   6     -5
+  strangle         5 ->  38    -33
+  choke            7 ->  18    -11
+  kick            12 ->  37    -25
+  rain            15 ->  68    -53
+  rip             19 ->  74    -55
+  pound           18 ->  55    -37
+  hit             11 ->  14     -3
+  handcuff         3 ->   8     -5
+  take            14 ->  15     -1
+  punch            2 ->   5     -3
+  squeeze         20 ->  32    -12
+  frisk            9 ->  10     -1
+
+HIGHER UNDER B
+  pat             16 ->   1    +15
+  slap             6 ->   2     +4
+  cuff            10 ->   3     +7
+  pull             4 ->   4     +0
+  write           93 ->  11    +82
+  search           8 ->   7     +1
+  unbutton        42 ->  16    +26
+  drag            21 ->  12     +9
+  put             13 ->   9     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  beat             1 ->   2     -1
+  kick             3 ->   3     +0
+  roll             9 ->  30    -21
+  choke            6 ->   9     -3
+  wrestle          8 ->  19    -11
+  rock            13 ->  26    -13
+  hit              5 ->   5     +0
+  walk            10 ->  18     -8
+  ______          14 ->  17     -3
+
+HIGHER UNDER B
+  drag             2 ->   1     +1
+  pull             4 ->   4     +0
+  hold            20 ->   7    +13
+  what            41 ->  13    +28
+  make            27 ->  12    +15
+  punch           15 ->  11     +4
+  force           28 ->  15    +13
+  lift            12 ->   8     +4
+  pick            24 ->  20     +4
+  push            11 ->  10     +1
+  ____             7 ->   6     +1
+  strangle        17 ->  14     +3
+  throw           16 ->  16     +0
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  beat             2 ->   7     -5
+  kick             6 ->  15     -9
+  handcuff         7 ->  10     -3
+  ____             4 ->   6     -2
+  cuff            16 ->  23     -7
+  pull            19 ->  41    -22
+  put             15 ->  19     -4
+  give            12 ->  13     -1
+  take            14 ->  16     -2
+  ___             18 ->  20     -2
+  read            21 ->  24     -3
+  ask             17 ->  17     +0
+
+HIGHER UNDER B
+  search           1 ->   1     +0
+  interrogate      8 ->   3     +5
+  question         5 ->   2     +3
+  what            25 ->  12    +13
+  ________         9 ->   5     +4
+  _______         13 ->   9     +4
+  __________      11 ->   8     +3
+  administer      44 ->  21    +23
+  frisk           22 ->  14     +8
+  do              20 ->  18     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  handcuff         4 ->   8     -4
+  beat             3 ->   5     -2
+  strangle        13 ->  71    -58
+  take             7 ->   9     -2
+  pull             8 ->  10     -2
+  punch           11 ->  22    -11
+  kick             9 ->  11     -2
+  frisk           14 ->  47    -33
+  tear            19 ->  35    -16
+  tie             20 ->  31    -11
+  pepper          17 ->  21     -4
+  shoot           10 ->  14     -4
+  question        16 ->  17     -1
+  search           2 ->   3     -1
+
+HIGHER UNDER B
+  cuff             1 ->   1     +0
+  read             6 ->   2     +4
+  choke            5 ->   4     +1
+  arrest          24 ->   7    +17
+  pat             26 ->  13    +13
+  apply           21 ->  12     +9
+  put             12 ->   6     +6
+  wrestle         15 ->  15     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  beat             1 ->  65    -64
+  punch            5 ->  31    -26
+  put              9 ->  22    -13
+  handcuff         3 ->   7     -4
+  hit             10 ->  23    -13
+  choke           13 ->  87    -74
+  take            12 ->  27    -15
+  interrogate     15 ->  39    -24
+  arrest          14 ->  29    -15
+  kick            19 ->  43    -24
+  drag            20 ->  60    -40
+  pull            21 ->  37    -16
+  give            23 ->  26     -3
+  question         7 ->  10     -3
+
+HIGHER UNDER B
+  read            18 ->   1    +17
+  frisk            4 ->   2     +2
+  look            59 ->   5    +54
+  yell             6 ->   4     +2
+  help           111 ->   9   +102
+  administer      27 ->   8    +19
+  cuff             8 ->   6     +2
+  ask             11 ->  11     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  beat             1 ->   2     -1
+  rape             3 ->   6     -3
+  punch            8 ->  24    -16
+  shoot           16 ->  99    -83
+  whip            12 ->  56    -44
+  pound            5 ->  12     -7
+  rip             14 ->  50    -36
+  take            11 ->  31    -20
+  shove           17 ->  26     -9
+  kick            10 ->  11     -1
+  tie             13 ->  17     -4
+
+HIGHER UNDER B
+  drag             2 ->   1     +1
+  pull             4 ->   3     +1
+  choke            7 ->   4     +3
+  strangle         6 ->   5     +1
+  swing           73 ->   9    +64
+  cuff            28 ->   7    +21
+  yank            33 ->  10    +23
+  kneel           72 ->  19    +53
+  search          39 ->  14    +25
+  interrogate     61 ->  16    +45
+  haul            32 ->  13    +19
+  hold            31 ->  20    +11
+  move            23 ->  18     +5
+  make            15 ->  15     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  beat             5 ->  10     -5
+  punch            6 ->   7     -1
+  cuff             3 ->   4     -1
+  put              8 ->  13     -5
+  pull            10 ->  16     -6
+  take            12 ->  27    -15
+  kick            17 ->  60    -43
+  drag             9 ->  11     -2
+  slap            13 ->  21     -8
+  interrogate     16 ->  25     -9
+  yell            18 ->  19     -1
+  walk            15 ->  15     +0
+
+HIGHER UNDER B
+  handcuff         1 ->   1     +0
+  frisk            4 ->   3     +1
+  search           2 ->   2     +0
+  ask             14 ->   6     +8
+  tie             19 ->   8    +11
+  read             7 ->   5     +2
+  question        25 ->  12    +13
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  question         1 ->   1     +0
+  investigate      2 ->   3     -1
+  interrogate      4 ->   4     +0
+  search           5 ->   6     -1
+  cuff            18 ->  26     -8
+  examine         15 ->  21     -6
+  pull             7 ->  10     -3
+  move            10 ->  16     -6
+  make            17 ->  20     -3
+
+HIGHER UNDER B
+  beat             3 ->   2     +1
+  run              9 ->   8     +1
+  shoot           25 ->  13    +12
+  call             8 ->   7     +1
+  shake           23 ->  14     +9
+  bind            13 ->   9     +4
+  drag            12 ->  11     +1
+  untie           22 ->  18     +4
+  cover           16 ->  15     +1
+  walk            24 ->  19     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  beat             2 ->   3     -1
+  cuff             3 ->   4     -1
+  punch            5 ->   6     -1
+  frisk            6 ->  76    -70
+  kick             7 ->   8     -1
+  choke           10 ->  16     -6
+  arrest           9 ->   9     +0
+  tase            16 ->  53    -37
+  strangle        13 ->  39    -26
+  pepper          11 ->  11     +0
+  hit             12 ->  15     -3
+  pistol          15 ->  26    -11
+
+HIGHER UNDER B
+  handcuff         1 ->   1     +0
+  search           4 ->   2     +2
+  interrogate     28 ->   5    +23
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  beat             1 ->   2     -1
+  choke            3 ->   7     -4
+  kick             4 ->  15    -11
+  punch            5 ->  23    -18
+  pull             9 ->  17     -8
+  put             11 ->  25    -14
+  hit              8 ->   9     -1
+  take             7 ->   8     -1
+  drag            10 ->  14     -4
+
+HIGHER UNDER B
+  search           2 ->   1     +1
+  question        54 ->   3    +51
+  interrogate    111 ->  12    +99
+  cuff            17 ->   6    +11
+  examine         77 ->  13    +64
+  administer      27 ->  10    +17
+  frisk           71 ->  16    +55
+  ask             22 ->  11    +11
+  handcuff        12 ->   5     +7
+  struggle         6 ->   4     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  cuff             2 ->   4     -2
+  yell             8 ->  16     -8
+  search           3 ->   6     -3
+  put              5 ->   7     -2
+  pull            11 ->  22    -11
+  pat             15 ->  42    -27
+  drag            13 ->  21     -8
+  arrest           7 ->   8     -1
+  punch           14 ->  23     -9
+  tell            22 ->  39    -17
+  get             23 ->  33    -10
+  frisk            9 ->  10     -1
+  slap            12 ->  12     +0
+  take            17 ->  20     -3
+
+HIGHER UNDER B
+  handcuff         1 ->   1     +0
+  choke           20 ->   5    +15
+  apply           29 ->  11    +18
+  pummel          32 ->  14    +18
+  administer      27 ->  13    +14
+  read             6 ->   2     +4
+  kick            10 ->   9     +1
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  beat             2 ->   5     -3
+  punch            6 ->  14     -8
+  feel             7 ->  12     -5
+  choke            8 ->  10     -2
+  kick            10 ->  15     -5
+  pull            11 ->  13     -2
+  rough           13 ->  17     -4
+  put             15 ->  16     -1
+
+HIGHER UNDER B
+  search           1 ->   1     +0
+  handcuff         5 ->   3     +2
+  cuff             3 ->   2     +1
+  frisk            4 ->   4     +0
+  question        12 ->   6     +6
+  interrogate     17 ->   8     +9
+  give            14 ->   9     +5
+  read            34 ->  18    +16
+  pat              9 ->   7     +2
+  yell            16 ->  11     +5
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  kick             2 ->   2     +0
+  search           9 ->  10     -1
+  drag             7 ->   7     +0
+  stomp           13 ->  13     +0
+  handcuff         8 ->   8     +0
+
+HIGHER UNDER B
+  beat             1 ->   1     +0
+  choke            3 ->   3     +0
+  punch            4 ->   4     +0
+  cuff             6 ->   6     +0
+  hit              5 ->   5     +0
+  put             12 ->  12     +0
+  pull            11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  beat             2 ->  11     -9
+  kick             8 ->  19    -11
+  hit             10 ->  24    -14
+  pull            11 ->  32    -21
+  arrest          12 ->  23    -11
+  put              7 ->   7     +0
+  take            13 ->  34    -21
+  shoot           15 ->  61    -46
+  give            16 ->  28    -12
+  strangle        17 ->  30    -13
+  choke            4 ->   6     -2
+
+HIGHER UNDER B
+  handcuff         1 ->   1     +0
+  frisk            9 ->   3     +6
+  search           3 ->   2     +1
+  cuff             6 ->   4     +2
+  punch            5 ->   5     +0
+  pound           23 ->   8    +15
+  place           19 ->   9    +10
+  pat             21 ->  12     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  beat             1 ->   5     -4
+  drag             2 ->   2     +0
+  fuck            15 ->  77    -62
+  tie             14 ->  30    -16
+  hit             11 ->  15     -4
+  pound           18 ->  65    -47
+  strangle         5 ->  11     -6
+  pull             9 ->  12     -3
+  rape             3 ->   6     -3
+  strip           16 ->  18     -2
+  abuse           17 ->  23     -6
+
+HIGHER UNDER B
+  cuff             6 ->   1     +5
+  choke            7 ->   4     +3
+  kick             4 ->   3     +1
+  arrest         140 ->  14   +126
+  punch           30 ->  13    +17
+  question        47 ->  16    +31
+  restrain       123 ->  22   +101
+  search          13 ->   7     +6
+  push            50 ->  17    +33
+  talk            56 ->  21    +35
+  give            44 ->  19    +25
+  kiss            49 ->  25    +24
+  yell            40 ->  20    +20
+  whip            38 ->  24    +14
+  take            10 ->   8     +2
+  put             12 ->  10     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  beat             8 ->  11     -3
+  slap             4 ->   7     -3
+  pull            10 ->  12     -2
+  kick            14 ->  38    -24
+  hit             11 ->  14     -3
+  take            12 ->  13     -1
+
+HIGHER UNDER B
+  cuff             2 ->   2     +0
+  search           3 ->   3     +0
+  pat              7 ->   4     +3
+  handcuff         1 ->   1     +0
+  frisk            6 ->   6     +0
+  apply           15 ->   9     +6
+  put              5 ->   5     +0
+  read            13 ->  10     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  choke            2 ->   3     -1
+  cuff             5 ->   8     -3
+  kick             9 ->   9     +0
+  pull            14 ->  15     -1
+  get             16 ->  20     -4
+  take            10 ->  10     +0
+  punch            6 ->   7     -1
+  hit             11 ->  12     -1
+  search          12 ->  13     -1
+
+HIGHER UNDER B
+  frisk            3 ->   2     +1
+  beat             4 ->   4     +0
+  pat              8 ->   6     +2
+  arrest          17 ->  14     +3
+  handcuff         1 ->   1     +0
+  put              7 ->   5     +2
+  knee            13 ->  11     +2
+  apply           19 ->  17     +2
+  yell            18 ->  18     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  beat             1 ->   3     -2
+  punch            2 ->  10     -8
+  handcuff         3 ->   8     -5
+  hit              8 ->  12     -4
+  kick            11 ->  20     -9
+  strangle        13 -> 118   -105
+  choke            6 ->   6     +0
+  yell            14 ->  61    -47
+  cuff             5 ->   5     +0
+  put             16 ->  36    -20
+  read            17 ->  24     -7
+
+HIGHER UNDER B
+  search           4 ->   1     +3
+  strip           43 ->   4    +39
+  frisk            7 ->   2     +5
+  fuck           116 ->  15   +101
+  check           59 ->  18    +41
+  take            30 ->  14    +16
+  look            36 ->  17    +19
+  go              33 ->  16    +17
+  question        34 ->  19    +15
+  pat              9 ->   7     +2
+  feel            12 ->  11     +1
+  drag            15 ->  13     +2
+  pull            10 ->   9     +1
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  cuff             1 ->   1     +0
+  pull             8 ->  28    -20
+  slap            11 ->  27    -16
+  drag            10 ->  18     -8
+  put              5 ->   7     -2
+  pat              7 ->   9     -2
+  zip             12 ->  13     -1
+  search           6 ->   6     +0
+
+HIGHER UNDER B
+  handcuff         2 ->   2     +0
+  question        17 ->   5    +12
+  frisk            3 ->   3     +0
+  read             4 ->   4     +0
+  arrest           9 ->   8     +1
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  punch            1 ->   3     -2
+  handcuff         5 ->  29    -24
+  beat             2 ->   2     +0
+  hit              4 ->   8     -4
+  kick             6 ->  10     -4
+  cuff             8 ->  12     -4
+  arrest          13 ->  80    -67
+  pummel          11 ->  37    -26
+  put             10 ->  14     -4
+  strangle         9 ->  11     -2
+  slap            15 ->  46    -31
+  pull            14 ->  24    -10
+
+HIGHER UNDER B
+  shout           30 ->   4    +26
+  yell            17 ->   5    +12
+  choke            3 ->   1     +2
+  scream          26 ->   7    +19
+  pepper          12 ->   9     +3
+  speak           90 ->  15    +75
+  talk            60 ->  16    +44
+  shove           66 ->  18    +48
+  kneel           37 ->  17    +20
+  ask             35 ->  19    +16
+  search           7 ->   6     +1
+  squeeze         16 ->  13     +3
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  beat             1 ->   4     -3
+  choke            4 ->  17    -13
+  punch            3 ->   7     -4
+  handcuff         7 ->  13     -6
+  kick             5 ->   8     -3
+  arrest           8 ->  16     -8
+  strangle        11 ->  21    -10
+  hit             10 ->  12     -2
+  pummel          13 ->  36    -23
+  pull            14 ->  28    -14
+  slap            16 ->  42    -26
+  take            17 ->  19     -2
+
+HIGHER UNDER B
+  cuff             2 ->   1     +1
+  read            18 ->   2    +16
+  search           6 ->   3     +3
+  question        15 ->   5    +10
+  interrogate     21 ->   6    +15
+  ask             31 ->  10    +21
+  pepper          12 ->  11     +1
+  frisk            9 ->   9     +0
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  cuff             2 ->   5     -3
+  search           4 ->   6     -2
+  kick             7 ->  10     -3
+  frisk           12 ->  26    -14
+  read            15 ->  35    -20
+  slap            14 ->  29    -15
+  yell            10 ->  13     -3
+  scream          20 ->  37    -17
+  squeeze         18 ->  28    -10
+  pull            11 ->  12     -1
+  question        22 ->  22     +0
+
+HIGHER UNDER B
+  handcuff         1 ->   1     +0
+  punch            5 ->   2     +3
+  choke            6 ->   4     +2
+  arrest          13 ->   8     +5
+  pummel          17 ->  11     +6
+  hit              8 ->   7     +1
+  twist           37 ->  15    +22
+  put              9 ->   9     +0
+  beat             3 ->   3     +0
+  pat             25 ->  17     +8
+  cry             16 ->  14     +2
+  apply           21 ->  18     +3
+  shout           19 ->  16     +3
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  handcuff         1 ->   3     -2
+  search           4 ->   7     -3
+  put              6 ->  10     -4
+  go              11 ->  24    -13
+  choke            5 ->   5     +0
+  punch           12 ->  30    -18
+  zip             13 ->  31    -18
+  reach           16 ->  32    -16
+  run             15 ->  29    -14
+  take            10 ->  12     -2
+
+HIGHER UNDER B
+  beat             3 ->   2     +1
+  cuff             2 ->   1     +1
+  slap            24 ->   9    +15
+  read             9 ->   4     +5
+  drag            26 ->  11    +15
+  pat             23 ->  16     +7
+  arrest          20 ->  14     +6
+  frisk            8 ->   8     +0
+  get             17 ->  15     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  cuff             2 ->   6     -4
+  search           3 ->   8     -5
+  punch            6 ->  20    -14
+  pull             9 ->  43    -34
+  kick            10 ->  32    -22
+  choke           11 ->  73    -62
+  frisk            7 ->   7     +0
+  take            12 ->  18     -6
+  put             13 ->  40    -27
+  strangle        16 ->  50    -34
+  pepper          15 ->  41    -26
+  use             14 ->  15     -1
+  beat             4 ->   5     -1
+
+HIGHER UNDER B
+  knee            24 ->   2    +22
+  handcuff         1 ->   1     +0
+  hit              5 ->   3     +2
+  pat              8 ->   4     +4
+  give            20 ->   9    +11
+  write           61 ->  10    +51
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  beat             1 ->  17    -16
+  choke            4 ->   6     -2
+  punch            5 ->   8     -3
+  kick             6 ->  35    -29
+  slap             8 ->  11     -3
+  hit             11 ->  25    -14
+  pull            12 ->  23    -11
+  strangle        14 ->  31    -17
+  drag            18 ->  27     -9
+  wrestle         15 ->  16     -1
+
+HIGHER UNDER B
+  handcuff         3 ->   1     +2
+  search           9 ->   3     +6
+  read             7 ->   4     +3
+  frisk           10 ->   5     +5
+  cuff             2 ->   2     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  strangle         4 -> 171   -167
+  kick             3 ->  11     -8
+  beat             1 ->   1     +0
+  choke            2 ->   8     -6
+  hit              7 ->  15     -8
+  punch            8 ->  12     -4
+  rape            16 -> 135   -119
+  take             6 ->   9     -3
+  tear            15 ->  41    -26
+  rip             13 ->  34    -21
+  pull            11 ->  19     -8
+  strike          19 ->  35    -16
+  tie             14 ->  18     -4
+
+HIGHER UNDER B
+  cuff            12 ->   2    +10
+  question        17 ->   3    +14
+  interrogate     18 ->   5    +13
+  search          10 ->   4     +6
+  drag             9 ->   7     +2
+  ask             32 ->  10    +22
+  threaten        50 ->  17    +33
+  restrain        22 ->  13     +9
+  handcuff        34 ->  16    +18
+  make            21 ->  14     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  beat             3 ->  12     -9
+  punch            4 ->  32    -28
+  choke            7 ->  61    -54
+  kick             6 ->   8     -2
+  tase             9 ->  38    -29
+  put              5 ->   5     +0
+  shoot           11 ->  55    -44
+  restrain        10 ->  17     -7
+  kneel           14 ->  56    -42
+  taser           16 ->  43    -27
+  hit             17 -> 130   -113
+  take            15 ->  16     -1
+  pull            21 ->  22     -1
+  pepper          22 ->  72    -50
+  use             23 ->  88    -65
+
+HIGHER UNDER B
+  handcuff         1 ->   1     +0
+  cuff             2 ->   2     +0
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  choke            2 ->   5     -3
+  pepper          14 ->  22     -8
+  tase            16 ->  37    -21
+  smash           21 ->  30     -9
+  shoot           18 ->  24     -6
+  pull            12 ->  16     -4
+  hit              6 ->   9     -3
+  cuff            10 ->  13     -3
+  put              8 ->  10     -2
+  take             9 ->  12     -3
+
+HIGHER UNDER B
+  beat             1 ->   1     +0
+  kick             4 ->   3     +1
+  punch            3 ->   2     +1
+  yell            17 ->   8     +9
+  drag            11 ->   7     +4
+  spray           20 ->  15     +5
+  scream          15 ->  14     +1
+  search           7 ->   6     +1
+  arrest          13 ->  11     +2
+  handcuff         5 ->   4     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  punch            1 ->   8     -7
+  beat             2 ->  11     -9
+  hit              8 ->  20    -12
+  choke            4 ->   5     -1
+  kick             9 -> 114   -105
+  strangle         5 ->   6     -1
+  strike          15 ->  60    -45
+  question        10 ->  14     -4
+  drag            11 ->  15     -4
+  take            14 ->  18     -4
+
+HIGHER UNDER B
+  handcuff         3 ->   1     +2
+  tie             13 ->   2    +11
+  spray           49 ->   9    +40
+  put             12 ->   7     +5
+  pull             7 ->   3     +4
+  subdue          37 ->  12    +25
+  cut             18 ->  10     +8
+  apply           31 ->  13    +18
+  haul            20 ->  16     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  beat             1 ->   3     -2
+  choke            3 ->   6     -3
+  handcuff         4 ->   9     -5
+  hit              5 ->  17    -12
+  kick             6 ->   8     -2
+  cuff             8 ->  23    -15
+  strangle        12 ->  42    -30
+  put             13 ->  52    -39
+  take            11 ->  25    -14
+  arrest           9 ->  14     -5
+  pound           14 ->  20     -6
+  slap            16 ->  16     +0
+
+HIGHER UNDER B
+  punch            2 ->   1     +1
+  question        15 ->   2    +13
+  pummel          10 ->   4     +6
+  interrogate     29 ->   7    +22
+  search           7 ->   5     +2
+  assault         22 ->  10    +12
+  frisk           24 ->  12    +12
+  rough           19 ->  11     +8
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  handcuff         2 ->   3     -1
+  beat             4 ->   6     -2
+  put              5 ->   5     +0
+  pull            10 ->  11     -1
+  kick             7 ->   8     -1
+  pound           13 ->  21     -8
+  pat              9 ->   9     +0
+  place           12 ->  16     -4
+  punch            3 ->   4     -1
+
+HIGHER UNDER B
+  cuff             1 ->   1     +0
+  search           6 ->   2     +4
+  frisk            8 ->   7     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  handcuff         1 ->   3     -2
+  read             2 ->   2     +0
+  frisk            4 ->  50    -46
+  cuff             5 ->  11     -6
+  tie              9 ->  38    -29
+  ask             10 ->  25    -15
+  take             6 ->   9     -3
+  put              7 ->   8     -1
+
+HIGHER UNDER B
+  interrogate     11 ->   4     +7
+  punch           27 ->   7    +20
+  kick            14 ->   6     +8
+  beat             8 ->   5     +3
+  administer      25 ->  10    +15
+  pistol          24 ->  12    +12
+  choke           34 ->  13    +21
+  strangle        93 ->  18    +75
+  pummel          92 ->  19    +73
+  hit             54 ->  17    +37
+  wrestle         30 ->  14    +16
+  feel            56 ->  21    +35
+  question        18 ->  16     +2
+  give            15 ->  15     +0
+  drag            31 ->  20    +11
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  beat             2 ->   4     -2
+  punch            5 ->  37    -32
+  hit              7 ->  31    -24
+  pull             8 ->  18    -10
+  put             10 ->  35    -25
+  kick            12 ->  53    -41
+  drag            13 ->  28    -15
+  take            11 ->  12     -1
+  choke            6 ->   9     -3
+  arrest          15 ->  21     -6
+  frisk            4 ->   7     -3
+  walk            17 ->  26     -9
+
+HIGHER UNDER B
+  handcuff         1 ->   1     +0
+  search           3 ->   2     +1
+  interrogate     14 ->   3    +11
+  lecture         50 ->   5    +45
+  question        18 ->   6    +12
+  read            70 ->  10    +60
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

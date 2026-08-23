@@ -1,0 +1,1717 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: It was his third visa application in two years, so the Home Office decided to ___
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  send             5 ->  24    -19
+  deport           4 ->  12     -8
+  take             7 ->  10     -3
+  give            10 ->  14     -4
+  ban             11 ->  16     -5
+  put             14 ->  19     -5
+  issue           12 ->  13     -1
+  charge          15 ->  32    -17
+  let             16 ->  38    -22
+  investigate     18 ->  31    -13
+  look            19 ->  25     -6
+  use             20 ->  29     -9
+
+HIGHER UNDER B
+  refuse           1 ->   1     +0
+  grant            3 ->   2     +1
+  revoke           6 ->   3     +3
+  decline         48 ->   9    +39
+  reject           8 ->   5     +3
+  turn            17 ->   8     +9
+  deny            13 ->   6     +7
+  interview       22 ->  11    +11
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  grant            1 ->   8     -7
+  deport           4 ->  17    -13
+  refuse           2 ->   2     +0
+  cancel           7 ->  19    -12
+  take             5 ->   7     -2
+
+HIGHER UNDER B
+  reject           3 ->   1     +2
+  deny             8 ->   3     +5
+  give             9 ->   4     +5
+  investigate     10 ->   6     +4
+  send             6 ->   5     +1
+  make            19 ->   9    +10
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  deport           3 ->  28    -25
+  send             2 ->  11     -9
+  give             9 ->  25    -16
+  interview       14 ->  24    -10
+  keep            16 ->  21     -5
+  detain          27 ->  62    -35
+  call            20 ->  34    -14
+  issue           12 ->  14     -2
+  stop            23 ->  33    -10
+  do              18 ->  27     -9
+  go              26 ->  41    -15
+  cancel          11 ->  12     -1
+  reject          21 ->  22     -1
+  treat           17 ->  18     -1
+
+HIGHER UNDER B
+  make             5 ->   2     +3
+  revoke           6 ->   3     +3
+  take             1 ->   1     +0
+  investigate     15 ->   7     +8
+  check           13 ->   8     +5
+  conduct         19 ->   9    +10
+  refuse           8 ->   5     +3
+  put              4 ->   4     +0
+  look             7 ->   6     +1
+  question        43 ->  16    +27
+  grant           22 ->  13     +9
+  review          28 ->  15    +13
+  consider        39 ->  20    +19
+  be              24 ->  17     +7
+  test            25 ->  19     +6
+  deny            10 ->  10     +0
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  send             5 ->  12     -7
+  give             1 ->   2     -1
+  take             3 ->   4     -1
+  do               7 ->  13     -6
+  allow           15 ->  31    -16
+  wait             6 ->   9     -3
+  put             10 ->  17     -7
+  let              2 ->   3     -1
+  look            18 ->  29    -11
+  investigate     21 ->  30     -9
+  delay            9 ->  11     -2
+  apply           17 ->  21     -4
+  issue           22 ->  27     -5
+  check           19 ->  19     +0
+
+HIGHER UNDER B
+  review           4 ->   1     +3
+  grant           11 ->   6     +5
+  pause           59 ->  14    +45
+  hold            12 ->   7     +5
+  make             8 ->   5     +3
+  extend          13 ->   8     +5
+  keep            20 ->  15     +5
+  proceed         42 ->  22    +20
+  go              14 ->  10     +4
+  reconsider      29 ->  18    +11
+  re              36 ->  23    +13
+  ask             16 ->  16     +0
+  expedite        23 ->  20     +3
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  grant            2 ->   4     -2
+  let              4 ->   6     -2
+  accept          13 ->  56    -43
+  make             7 ->  13     -6
+  wait            10 ->  32    -22
+  help            22 ->  69    -47
+  reject          18 ->  52    -34
+  put              9 ->  20    -11
+  give             1 ->   2     -1
+  allow           11 ->  25    -14
+  go              21 ->  39    -18
+  ask             12 ->  21     -9
+  do              25 ->  36    -11
+  suspend         23 ->  27     -4
+  cancel          17 ->  18     -1
+  send             3 ->   3     +0
+  use             15 ->  16     -1
+  delay           19 ->  19     +0
+
+HIGHER UNDER B
+  take             5 ->   1     +4
+  extend           8 ->   5     +3
+  deport          51 ->  10    +41
+  revoke          42 ->  12    +30
+  hold            40 ->  14    +26
+  conduct         65 ->  22    +43
+  expedite        30 ->  11    +19
+  review          16 ->   9     +7
+  offer           14 ->   8     +6
+  consider        35 ->  23    +12
+  keep            20 ->  15     +5
+  have            24 ->  17     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  look             4 ->  12     -8
+  send            10 ->  14     -4
+  have            19 ->  50    -31
+  use             15 ->  31    -16
+  make            12 ->  18     -6
+  review          13 ->  17     -4
+  get             14 ->  16     -2
+  conduct         24 ->  39    -15
+  contact         22 ->  32    -10
+  examine         20 ->  25     -5
+  do               8 ->  11     -3
+  let              6 ->   8     -2
+
+HIGHER UNDER B
+  treat           28 ->   6    +22
+  give             1 ->   1     +0
+  run              9 ->   4     +5
+  take             2 ->   2     +0
+  investigate      7 ->   5     +2
+  put             17 ->  10     +7
+  see             11 ->   9     +2
+  scrutinize      47 ->  20    +27
+  check            3 ->   3     +0
+  wait            16 ->  13     +3
+  keep            26 ->  21     +5
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  investigate      6 ->  36    -30
+  check            8 ->  35    -27
+  look            14 ->  43    -29
+  give             4 ->  12     -8
+  take             2 ->   8     -6
+  reject           3 ->  10     -7
+  interview       18 ->  42    -24
+  do              15 ->  18     -3
+  deny            20 ->  55    -35
+  refuse          16 ->  22     -6
+  detain          22 ->  33    -11
+  review          23 ->  30     -7
+  cancel          24 ->  31     -7
+  scrutinise      21 ->  24     -3
+  apply           19 ->  19     +0
+
+HIGHER UNDER B
+  send             1 ->   1     +0
+  conduct          7 ->   2     +5
+  escalate        36 ->   7    +29
+  refer            9 ->   3     +6
+  put             11 ->   4     +7
+  carry           13 ->   6     +7
+  bring           49 ->  16    +33
+  make             5 ->   5     +0
+  invite          34 ->  15    +19
+  impose          25 ->  14    +11
+  issue           32 ->  17    +15
+  hold            31 ->  20    +11
+  call            10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  check            6 ->   8     -2
+  make            11 ->  19     -8
+  give            13 ->  22     -9
+  do              20 ->  33    -13
+  call            16 ->  24     -8
+  send             5 ->   7     -2
+  take             4 ->   6     -2
+  have            22 ->  30     -8
+  be              18 ->  20     -2
+  get             27 ->  27     +0
+  put             15 ->  17     -2
+  reject           9 ->  13     -4
+  deny            21 ->  21     +0
+
+HIGHER UNDER B
+  dig              3 ->   1     +2
+  interview        2 ->   2     +0
+  refer           17 ->   4    +13
+  treat           26 ->  14    +12
+  refuse          12 ->  10     +2
+  subject         23 ->  15     +8
+  look             7 ->   5     +2
+  hold            14 ->  11     +3
+  delay           24 ->  16     +8
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  check            3 ->   9     -6
+  investigate      1 ->   5     -4
+  look             6 ->  12     -6
+  dig              8 ->  15     -7
+  do              11 ->  18     -7
+  give            10 ->  16     -6
+  refuse           4 ->   6     -2
+  send             9 ->  13     -4
+  go              17 ->  41    -24
+  deport          20 ->  36    -16
+  put             16 ->  26    -10
+  take             2 ->   2     +0
+  have            15 ->  19     -4
+  carry           18 ->  25     -7
+  ask             13 ->  14     -1
+
+HIGHER UNDER B
+  scrutinise      14 ->   1    +13
+  scrutinize      63 ->   4    +59
+  interview        5 ->   3     +2
+  review          24 ->  10    +14
+  reject          12 ->   8     +4
+  conduct         19 ->  11     +8
+  make             7 ->   7     +0
+  test            29 ->  17    +12
+  deny            21 ->  20     +1
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  check            6 ->   9     -3
+  give             9 ->  22    -13
+  take             5 ->   5     +0
+  look            12 ->  25    -13
+  do              15 ->  34    -19
+  put             17 ->  27    -10
+  ask              8 ->   8     +0
+  grant           21 ->  24     -3
+  deny            11 ->  13     -2
+  make            13 ->  15     -2
+  question        16 ->  19     -3
+
+HIGHER UNDER B
+  interview        2 ->   1     +1
+  investigate      3 ->   2     +1
+  refuse           4 ->   3     +1
+  scrutinize      78 ->  14    +64
+  invite          37 ->  12    +25
+  scrutinise      19 ->  10     +9
+  conduct         18 ->  11     +7
+  call            10 ->   7     +3
+  request         53 ->  21    +32
+  hold            27 ->  18     +9
+  deport          31 ->  20    +11
+  cancel          20 ->  17     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  investigate      1 ->  15    -14
+  check            3 ->  24    -21
+  look             4 ->  31    -27
+  revoke           7 ->  27    -20
+  interview       15 ->  45    -30
+  review           9 ->  13     -4
+  do              16 ->  37    -21
+  reject           8 ->  10     -2
+  deport          13 ->  23    -10
+  ask             22 ->  42    -20
+  carry           21 ->  35    -14
+  hold            17 ->  22     -5
+  deny             6 ->   7     -1
+  refer           26 ->  41    -15
+  suspend         25 ->  30     -5
+  put             24 ->  26     -2
+  keep            12 ->  12     +0
+  call            18 ->  19     -1
+  cancel          27 ->  33     -6
+
+HIGHER UNDER B
+  grant           14 ->   1    +13
+  make            11 ->   3     +8
+  issue           19 ->   5    +14
+  expedite        98 ->  11    +87
+  process         39 ->   9    +30
+  send            10 ->   6     +4
+  take             2 ->   2     +0
+  fast            46 ->  14    +32
+  speed           79 ->  17    +62
+  give             5 ->   4     +1
+  consider        20 ->   8    +12
+  let             28 ->  16    +12
+  treat           29 ->  18    +11
+  allow           37 ->  20    +17
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  give             1 ->  13    -12
+  check            3 ->  19    -16
+  extend           5 ->  25    -20
+  put              9 ->  59    -50
+  conduct         10 ->  36    -26
+  see             13 ->  87    -74
+  hold            11 ->  31    -20
+  use             12 ->  27    -15
+  interview       18 ->  57    -39
+  let             24 ->  76    -52
+  do              22 ->  60    -38
+  wait            16 ->  23     -7
+  ask              6 ->   7     -1
+  issue           19 ->  24     -5
+  take             4 ->   4     +0
+  offer           20 ->  21     -1
+
+HIGHER UNDER B
+  investigate     31 ->   3    +28
+  consider        42 ->   5    +37
+  review           8 ->   2     +6
+  increase        30 ->   8    +22
+  expand         153 ->  11   +142
+  reconsider      54 ->  10    +44
+  change          50 ->  12    +38
+  expedite        90 ->  22    +68
+  delay           15 ->   9     +6
+  provide         55 ->  20    +35
+  allow           34 ->  17    +17
+  look            23 ->  15     +8
+  make             7 ->   6     +1
+  send             2 ->   1     +1
+  keep            21 ->  18     +3
+  have            14 ->  14     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  interview        3 ->  22    -19
+  make             2 ->   6     -4
+  get              9 ->  30    -21
+  call            10 ->  13     -3
+  conduct         19 ->  39    -20
+  grant           17 ->  27    -10
+  check           18 ->  36    -18
+  go              16 ->  24     -8
+  turn            13 ->  14     -1
+  be              23 ->  53    -30
+  have            21 ->  38    -17
+  pay             20 ->  34    -14
+  play            24 ->  58    -34
+
+HIGHER UNDER B
+  refuse           4 ->   1     +3
+  give             7 ->   3     +4
+  deny            26 ->   8    +18
+  send             5 ->   4     +1
+  revoke          66 ->  15    +51
+  ask              6 ->   5     +1
+  reject           8 ->   7     +1
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  send             1 ->  25    -24
+  deport           2 ->  21    -19
+  investigate      5 ->  27    -22
+  give             7 ->  32    -25
+  do              10 ->  92    -82
+  look             8 ->  37    -29
+  take             3 ->  11     -8
+  check            9 ->  35    -26
+  revoke          11 ->  33    -22
+  let             16 ->  84    -68
+  act             20 -> 126   -106
+  refer           21 -> 121   -100
+  review           6 ->  10     -4
+  interview       24 ->  54    -30
+  cancel          22 ->  48    -26
+  question        23 ->  38    -15
+  issue           17 ->  20     -3
+  refuse          15 ->  16     -1
+
+HIGHER UNDER B
+  scrutinize     138 ->   4   +134
+  deny            12 ->   1    +11
+  reject          19 ->   2    +17
+  impose          86 ->   8    +78
+  tighten         48 ->   6    +42
+  conduct         27 ->   5    +22
+  assess          49 ->   9    +40
+  put             18 ->   7    +11
+  be               4 ->   3     +1
+  exercise       106 ->  15    +91
+  carry           25 ->  13    +12
+  increase        59 ->  17    +42
+  expedite        75 ->  19    +56
+  err            144 ->  24   +120
+  grant           14 ->  12     +2
+  hold            52 ->  23    +29
+  delay           44 ->  22    +22
+  apply           28 ->  18    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  send             4 ->  11     -7
+  ask              7 ->  23    -16
+  revoke          11 ->  26    -15
+  look             3 ->   5     -2
+  interview        9 ->  15     -6
+  do              13 ->  21     -8
+  reject          12 ->  13     -1
+  keep            18 ->  33    -15
+  deny            16 ->  28    -12
+  give            21 ->  36    -15
+  turn            20 ->  34    -14
+
+HIGHER UNDER B
+  investigate      1 ->   1     +0
+  take             2 ->   2     +0
+  refuse           8 ->   4     +4
+  refer           17 ->   7    +10
+  carry           19 ->  10     +9
+  check            5 ->   3     +2
+  scrutinize      69 ->  14    +55
+  conduct         10 ->   6     +4
+  call            14 ->   9     +5
+  intervene       35 ->  16    +19
+  treat           41 ->  18    +23
+  question        29 ->  17    +12
+  review          27 ->  19     +8
+  put             15 ->  12     +3
+  examine         23 ->  20     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  take             3 ->  21    -18
+  send             4 ->  22    -18
+  investigate      6 ->  25    -19
+  check           11 ->  43    -32
+  do              14 ->  53    -39
+  look             9 ->  26    -17
+  revoke          17 ->  93    -76
+  put              7 ->  11     -4
+  review          19 ->  37    -18
+  conduct         22 ->  61    -39
+  detain          24 ->  55    -31
+  issue           20 ->  31    -11
+  hold            25 ->  39    -14
+  give             8 ->   8     +0
+
+HIGHER UNDER B
+  deny             2 ->   2     +0
+  reject           1 ->   1     +0
+  be              30 ->   3    +27
+  turn            18 ->   5    +13
+  grant           13 ->   4     +9
+  interview       10 ->   6     +4
+  block           33 ->  10    +23
+  place           68 ->  15    +53
+  impose          61 ->  16    +45
+  approve         67 ->  18    +49
+  use             29 ->  12    +17
+  exercise        64 ->  23    +41
+  treat           37 ->  24    +13
+  go              27 ->  20     +7
+  ask             23 ->  19     +4
+  keep            21 ->  17     +4
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  reject           1 ->  11    -10
+  refer           10 ->  34    -24
+  interview        4 ->   7     -3
+  treat           14 ->  41    -27
+  revoke          23 ->  96    -73
+  be              21 ->  54    -33
+  investigate      8 ->  21    -13
+  check           13 ->  28    -15
+  deny            17 ->  40    -23
+  do              16 ->  27    -11
+  review          19 ->  30    -11
+  detain          24 ->  26     -2
+
+HIGHER UNDER B
+  finally         84 ->   6    +78
+  give             9 ->   5     +4
+  appoint        109 ->  19    +90
+  send             6 ->   4     +2
+  have            22 ->  12    +10
+  run             31 ->  14    +17
+  try             42 ->  18    +24
+  deport          11 ->   9     +2
+  use             26 ->  15    +11
+  look            12 ->  10     +2
+  make             5 ->   3     +2
+  double         101 ->  24    +77
+  carry           20 ->  13     +7
+  keep            29 ->  17    +12
+  fast-track      40 ->  22    +18
+  change          50 ->  25    +25
+  apply           25 ->  23     +2
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  take             1 ->   7     -6
+  check            2 ->  25    -23
+  investigate      9 ->  81    -72
+  make             7 ->  10     -3
+  look            11 ->  42    -31
+  send             6 ->   8     -2
+  deport          14 ->  32    -18
+  put             13 ->  22     -9
+  ask             15 ->  19     -4
+  carry           20 ->  99    -79
+  revoke          17 ->  37    -20
+  hold            21 ->  86    -65
+  interview       22 ->  73    -51
+  do              24 ->  55    -31
+  treat           25 ->  56    -31
+  call            23 ->  38    -15
+  have            26 ->  36    -10
+
+HIGHER UNDER B
+  grant           12 ->   1    +11
+  deny             3 ->   2     +1
+  refuse           8 ->   4     +4
+  reject           4 ->   3     +1
+  turn             5 ->   5     +0
+  finally         68 ->   9    +59
+  let             37 ->  11    +26
+  give            10 ->   6     +4
+  issue           35 ->  13    +22
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  grant            2 ->   5     -3
+  allow            7 ->  13     -6
+  let              6 ->  11     -5
+  extend           3 ->   4     -1
+  approve         22 ->  47    -25
+  put             10 ->  21    -11
+  cancel          12 ->  22    -10
+  reject          20 ->  29     -9
+  delay           19 ->  26     -7
+  keep            11 ->  15     -4
+  accept          26 ->  31     -5
+  postpone        23 ->  25     -2
+  hold            25 ->  27     -2
+  change          15 ->  17     -2
+
+HIGHER UNDER B
+  offer           18 ->   8    +10
+  issue           13 ->   6     +7
+  wait             9 ->   7     +2
+  use             33 ->  19    +14
+  look            24 ->  12    +12
+  review          14 ->  10     +4
+  expedite        32 ->  24     +8
+  take             4 ->   2     +2
+  do              27 ->  20     +7
+  reduce          28 ->  23     +5
+  ask             17 ->  14     +3
+  try             21 ->  18     +3
+  make             5 ->   3     +2
+  go              16 ->  16     +0
+  give             1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  make             3 ->   8     -5
+  speed            8 ->  12     -4
+  put             10 ->  18     -8
+  let             28 ->  47    -19
+  send            20 ->  28     -8
+  call            19 ->  26     -7
+  try             27 ->  30     -3
+  go              25 ->  29     -4
+  fast-track      14 ->  20     -6
+  do               5 ->   7     -2
+  ask             12 ->  14     -2
+
+HIGHER UNDER B
+  expedite        11 ->   6     +5
+  interview       16 ->   9     +7
+  conduct         17 ->  10     +7
+  refer           23 ->  13    +10
+  give             1 ->   1     +0
+  check            7 ->   5     +2
+  grant            6 ->   4     +2
+  issue           26 ->  17     +9
+  reject          48 ->  25    +23
+  look             4 ->   3     +1
+  take             2 ->   2     +0
+  examine         34 ->  24    +10
+  review          15 ->  15     +0
+  consider        24 ->  22     +2
+  investigate     21 ->  21     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  grant            1 ->   7     -6
+  reject           5 ->  27    -22
+  refuse           8 ->  45    -37
+  deport           9 ->  38    -29
+  turn            19 ->  85    -66
+  approve         20 ->  60    -40
+  deny            21 ->  47    -26
+  expedite        16 ->  30    -14
+  let             23 ->  36    -13
+  investigate     11 ->  17     -6
+  hold            17 ->  23     -6
+  send             4 ->   5     -1
+  carry           13 ->  18     -5
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  check           28 ->   4    +24
+  interview        3 ->   2     +1
+  make             6 ->   3     +3
+  apply           43 ->  13    +30
+  issue           22 ->  11    +11
+  review          52 ->  19    +33
+  look            14 ->   9     +5
+  fast-track      12 ->  10     +2
+  ask             18 ->  12     +6
+  process         26 ->  15    +11
+  do              25 ->  16     +9
+  conduct         10 ->   8     +2
+  put             15 ->  14     +1
+  treat           27 ->  21     +6
+  call            24 ->  20     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  reject           6 ->  16    -10
+  make             7 ->  28    -21
+  cancel           8 ->  14     -6
+  give             9 ->  50    -41
+  deny            11 ->  68    -57
+  grant           12 ->  80    -68
+  issue           13 ->  45    -32
+  send             4 ->   6     -2
+  use             14 ->  21     -7
+  review          17 ->  48    -31
+  look            18 ->  58    -40
+  do              16 ->  38    -22
+  ignore          20 ->  53    -33
+  investigate     19 ->  29    -10
+
+HIGHER UNDER B
+  withdraw        21 ->   2    +19
+  refuse           2 ->   1     +1
+  take             5 ->   4     +1
+  speed          110 ->   7   +103
+  delay           38 ->  10    +28
+  remove          22 ->   8    +14
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  grant            1 ->   7     -6
+  let              7 ->  17    -10
+  give             3 ->   8     -5
+  cancel          13 ->  26    -13
+  renew           17 ->  37    -20
+  ask             18 ->  36    -18
+  revoke           9 ->  12     -3
+  hold            12 ->  18     -6
+  allow           22 ->  34    -12
+  put             15 ->  15     +0
+  reject          10 ->  10     +0
+  keep            19 ->  23     -4
+  send             5 ->   6     -1
+  take             4 ->   5     -1
+  make            16 ->  16     +0
+
+HIGHER UNDER B
+  deport          14 ->   1    +13
+  extend           6 ->   2     +4
+  suspend          8 ->   4     +4
+  move            35 ->  11    +24
+  freeze          56 ->  25    +31
+  reconsider      26 ->  14    +12
+  start           36 ->  22    +14
+  throw           45 ->  28    +17
+  try             28 ->  20     +8
+  re              49 ->  31    +18
+  impose          43 ->  29    +14
+  review          20 ->  13     +7
+  look            25 ->  24     +1
+  stop            21 ->  19     +2
+  turn            23 ->  21     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  check            6 ->  22    -16
+  do               4 ->  11     -7
+  keep             7 ->   9     -2
+  look            21 ->  45    -24
+  hold            22 ->  43    -21
+  ask             15 ->  19     -4
+  grant           14 ->  17     -3
+  throw           19 ->  24     -5
+  have            20 ->  26     -6
+  investigate     12 ->  15     -3
+  be              10 ->  12     -2
+  give             5 ->   6     -1
+
+HIGHER UNDER B
+  deport           9 ->   3     +6
+  refuse          24 ->   8    +16
+  take             1 ->   1     +0
+  deny            13 ->   7     +6
+  make             8 ->   5     +3
+  play            38 ->  18    +20
+  tell            30 ->  20    +10
+  turn            18 ->  14     +4
+  get             17 ->  16     +1
+  send             2 ->   2     +0
+  reject          11 ->  10     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  investigate      1 ->   1     +0
+  review           2 ->   2     +0
+  check            5 ->   8     -3
+  conduct          3 ->   4     -1
+  hold            11 ->  25    -14
+  increase         7 ->  14     -7
+  give            25 ->  33     -8
+  pause           19 ->  27     -8
+  look            15 ->  24     -9
+  take             4 ->   5     -1
+  issue            8 ->  10     -2
+  reconsider      26 ->  28     -2
+
+HIGHER UNDER B
+  send             6 ->   3     +3
+  deport          37 ->  21    +16
+  re              10 ->   6     +4
+  revoke          23 ->  12    +11
+  apply           13 ->   9     +4
+  grant            9 ->   7     +2
+  prosecute       22 ->  17     +5
+  question        18 ->  11     +7
+  ask             27 ->  20     +7
+  put             28 ->  23     +5
+  freeze          40 ->  30    +10
+  make            21 ->  19     +2
+  extend          17 ->  15     +2
+  consider        24 ->  22     +2
+  cancel          33 ->  29     +4
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  revoke           1 ->  10     -9
+  do              16 ->  53    -37
+  deny             5 ->  13     -8
+  look            11 ->  23    -12
+  refuse           9 ->  15     -6
+  go              22 -> 103    -81
+  reject          19 ->  36    -17
+  turn            18 ->  30    -12
+  suspend         25 ->  56    -31
+  cancel           6 ->   9     -3
+  keep            13 ->  17     -4
+  ask             23 ->  41    -18
+  investigate     12 ->  14     -2
+  deport           7 ->   8     -1
+  take             3 ->   5     -2
+
+HIGHER UNDER B
+  conduct         24 ->   3    +21
+  put              8 ->   2     +6
+  place           52 ->  16    +36
+  detain          41 ->  18    +23
+  refer           48 ->  21    +27
+  make             2 ->   1     +1
+  review          14 ->   7     +7
+  scrutinize     121 ->  27    +94
+  carry           46 ->  24    +22
+  send            10 ->   6     +4
+  hold            29 ->  22     +7
+  consider        37 ->  25    +12
+  interview       17 ->  11     +6
+  give             4 ->   4     +0
+  treat           27 ->  26     +1
+  grant           15 ->  12     +3
+  check           20 ->  19     +1
+  ban             21 ->  20     +1
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  refuse           3 ->   8     -5
+  turn             8 ->  14     -6
+  deny             4 ->   6     -2
+  cancel          10 ->  20    -10
+  make             9 ->  16     -7
+  stop            16 ->  53    -37
+  deport          12 ->  17     -5
+  reject           1 ->   1     +0
+  issue           17 ->  34    -17
+  keep            15 ->  19     -4
+  ask             14 ->  15     -1
+
+HIGHER UNDER B
+  send             2 ->   2     +0
+  conduct         32 ->   7    +25
+  look             7 ->   4     +3
+  assess          18 ->  10     +8
+  take             5 ->   3     +2
+  check           19 ->  11     +8
+  review          24 ->  13    +11
+  focus           49 ->  23    +26
+  give             6 ->   5     +1
+  use             21 ->  18     +3
+  apply           26 ->  22     +4
+  hold            23 ->  21     +2
+  put             11 ->   9     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  cancel          19 ->  42    -23
+  issue           14 ->  23     -9
+  revoke          24 ->  41    -17
+  treat           20 ->  30    -10
+  deport          31 ->  57    -26
+  call            21 ->  27     -6
+  use             18 ->  19     -1
+  ban             23 ->  26     -3
+  ask             15 ->  16     -1
+  do              28 ->  31     -3
+  impose          32 ->  34     -2
+  interview       10 ->  14     -4
+  suspend         22 ->  22     +0
+  reject           2 ->   4     -2
+  deny             8 ->  12     -4
+  conduct         11 ->  15     -4
+  send             7 ->   9     -2
+  investigate      3 ->   5     -2
+
+HIGHER UNDER B
+  refuse           1 ->   1     +0
+  carry            9 ->   2     +7
+  look            17 ->   6    +11
+  take             5 ->   3     +2
+  contact         38 ->  20    +18
+  check           16 ->  13     +3
+  grant           13 ->  10     +3
+  put             12 ->  11     +1
+  keep            26 ->  17     +9
+  review          27 ->  21     +6
+  hold            25 ->  18     +7
+  stop            29 ->  24     +5
+  visit           30 ->  25     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  give             2 ->   3     -1
+  make             6 ->   8     -2
+  be              10 ->  13     -3
+  take             4 ->   5     -1
+  do               9 ->   9     +0
+  reject          14 ->  18     -4
+  put              5 ->   6     -1
+  go              17 ->  22     -5
+  test            19 ->  23     -4
+  grant           16 ->  20     -4
+  look            21 ->  27     -6
+  use             18 ->  21     -3
+
+HIGHER UNDER B
+  send             1 ->   1     +0
+  call             3 ->   2     +1
+  interview        7 ->   4     +3
+  hold            24 ->  15     +9
+  carry           25 ->  16     +9
+  conduct         15 ->  12     +3
+  invite          23 ->  17     +6
+  dig             20 ->  19     +1
+  ask             12 ->  11     +1
+  have            11 ->  10     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  deport           8 ->  10     -2
+  grant            4 ->   5     -1
+  let             13 ->  19     -6
+  give             2 ->   2     +0
+  turn            23 ->  27     -4
+  make            11 ->  11     +0
+  keep            12 ->  14     -2
+  suspend         26 ->  26     +0
+  refuse          16 ->  20     -4
+  fast            22 ->  23     -1
+  issue           17 ->  17     +0
+
+HIGHER UNDER B
+  deny             7 ->   4     +3
+  revoke           3 ->   3     +0
+  send             1 ->   1     +0
+  hold            18 ->  13     +5
+  check           21 ->  18     +3
+  review          20 ->  16     +4
+  investigate     14 ->  12     +2
+  look            24 ->  22     +2
+  detain          15 ->  15     +0
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  send             3 ->  18    -15
+  give             5 ->  15    -10
+  ask              7 ->  22    -15
+  do              10 ->  52    -42
+  check            9 ->  36    -27
+  have            17 ->  58    -41
+  deport          16 ->  44    -28
+  deny            20 ->  49    -29
+  get             23 ->  79    -56
+  keep            18 ->  31    -13
+  revoke          21 ->  34    -13
+  put             19 ->  26     -7
+  test            15 ->  19     -4
+  strip           22 ->  27     -5
+  grant           14 ->  14     +0
+
+HIGHER UNDER B
+  investigate      6 ->   1     +5
+  conduct          8 ->   2     +6
+  review          24 ->   6    +18
+  impose          50 ->   9    +41
+  look            13 ->   7     +6
+  increase        53 ->  13    +40
+  refuse          11 ->   8     +3
+  apply           30 ->  12    +18
+  extend          29 ->  11    +18
+  add             32 ->  17    +15
+  treat           27 ->  16    +11
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  deport           4 ->  19    -15
+  close            5 ->  12     -7
+  give             1 ->   5     -4
+  take             2 ->   7     -5
+  put              7 ->  13     -6
+  call            20 ->  54    -34
+  do               9 ->  16     -7
+  keep            14 ->  24    -10
+  investigate      6 ->   9     -3
+  look            16 ->  28    -12
+  try             19 ->  31    -12
+  be              25 ->  40    -15
+  go              24 ->  27     -3
+  stop            17 ->  21     -4
+  check           18 ->  20     -2
+
+HIGHER UNDER B
+  cancel           8 ->   1     +7
+  grant           12 ->   2    +10
+  deny            11 ->   4     +7
+  issue           10 ->   6     +4
+  reject          27 ->  10    +17
+  revoke          15 ->   8     +7
+  refuse          44 ->  17    +27
+  review          40 ->  18    +22
+  make            13 ->  11     +2
+  suspend         21 ->  14     +7
+  send             3 ->   3     +0
+  conduct         22 ->  15     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  send             4 ->  13     -9
+  do              16 ->  26    -10
+  deport          14 ->  20     -6
+  grant            6 ->  10     -4
+  deny            12 ->  18     -6
+  interview       23 ->  40    -17
+  issue           26 ->  39    -13
+  stop            22 ->  30     -8
+  give             5 ->   5     +0
+  revoke          18 ->  23     -5
+  make             8 ->   9     -1
+  reject           7 ->   8     -1
+  get             24 ->  29     -5
+  refer           19 ->  22     -3
+  check           13 ->  14     -1
+  turn            27 ->  27     +0
+  be              21 ->  21     +0
+
+HIGHER UNDER B
+  refuse           1 ->   1     +0
+  investigate      3 ->   2     +1
+  detain          11 ->   4     +7
+  question        34 ->  17    +17
+  carry           20 ->  12     +8
+  scrutinise      25 ->  15    +10
+  conduct         15 ->  11     +4
+  examine         30 ->  19    +11
+  put             10 ->   6     +4
+  review          17 ->  16     +1
+  look             9 ->   7     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  see              9 ->  13     -4
+  send             3 ->   4     -1
+  test             6 ->   8     -2
+  have            10 ->  10     +0
+  run             18 ->  23     -5
+  look            11 ->  12     -1
+  do               7 ->   7     +0
+  try             17 ->  19     -2
+  hold            16 ->  18     -2
+  interview       13 ->  15     -2
+
+HIGHER UNDER B
+  give             2 ->   2     +0
+  investigate      8 ->   6     +2
+  review          20 ->  11     +9
+  conduct         12 ->   9     +3
+  reject          28 ->  22     +6
+  assess          26 ->  21     +5
+  take             1 ->   1     +0
+  carry           14 ->  14     +0
+  check            4 ->   3     +1
+  make             5 ->   5     +0
+  ask             21 ->  20     +1
+  put             19 ->  17     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  interview        4 ->  15    -11
+  reject           6 ->  23    -17
+  deport          15 -> 114    -99
+  refuse          14 ->  58    -44
+  keep            12 ->  34    -22
+  call             8 ->  29    -21
+  grant           17 ->  74    -57
+  ask             10 ->  20    -10
+  put              9 ->  19    -10
+  make             5 ->   6     -1
+  give             3 ->   5     -2
+  send             1 ->   2     -1
+  pull            23 ->  30     -7
+  turn            19 ->  22     -3
+  be              20 ->  21     -1
+
+HIGHER UNDER B
+  investigate      7 ->   3     +4
+  take             2 ->   1     +1
+  look            22 ->   4    +18
+  treat           26 ->   8    +18
+  review          52 ->  11    +41
+  fast            64 ->  16    +48
+  run             50 ->  14    +36
+  use             18 ->   9     +9
+  go              39 ->  18    +21
+  get             21 ->  12     +9
+  check           13 ->   7     +6
+  refer           27 ->  17    +10
+  do              16 ->  13     +3
+  conduct         11 ->  10     +1
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  do               3 ->   8     -5
+  interview        6 ->  13     -7
+  check            4 ->   6     -2
+  be              15 ->  26    -11
+  run             11 ->  17     -6
+  play            24 ->  89    -65
+  deport          17 ->  23     -6
+  put              9 ->  12     -3
+  send            10 ->  11     -1
+  make            14 ->  16     -2
+  go              20 ->  29     -9
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  reject           7 ->   3     +4
+  cancel          31 ->  15    +16
+  conduct         13 ->   5     +8
+  investigate      2 ->   2     +0
+  carry           22 ->  14     +8
+  refuse          16 ->   9     +7
+  revoke          29 ->  20     +9
+  review          21 ->  19     +2
+  issue           34 ->  22    +12
+  scrutinize      32 ->  24     +8
+  ask             18 ->  18     +0
+  apply           27 ->  27     +0
+  deny             8 ->   7     +1
+  look            12 ->  10     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  check            3 ->  23    -20
+  send             2 ->  15    -13
+  interview        1 ->   2     -1
+  carry           13 ->  86    -73
+  ask              7 ->  32    -25
+  do               9 ->  28    -19
+  look            12 ->  29    -17
+  test            17 ->  46    -29
+  conduct          6 ->  17    -11
+  grant           18 ->  35    -17
+  visit           24 ->  73    -49
+  deport          26 ->  82    -56
+  refuse          23 ->  44    -21
+  put             10 ->  18     -8
+  use             27 ->  47    -20
+  refer           25 ->  43    -18
+  interrogate     22 ->  38    -16
+  go              20 ->  31    -11
+  make            11 ->  12     -1
+  reject          21 ->  26     -5
+
+HIGHER UNDER B
+  take             4 ->   1     +3
+  give             8 ->   4     +4
+  scrutinize      91 ->   6    +85
+  grill           19 ->   5    +14
+  treat           37 ->   8    +29
+  investigate      5 ->   3     +2
+  dig             39 ->  11    +28
+  be              28 ->  10    +18
+  really         104 ->  19    +85
+  play            41 ->  14    +27
+  get             16 ->   7     +9
+  scrutinise      35 ->  16    +19
+  delve           82 ->  20    +62
+  throw           52 ->  21    +31
+  have            14 ->   9     +5
+  call            15 ->  13     +2
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  investigate      4 ->  13     -9
+  do               7 ->  14     -7
+  carry            8 ->  17     -9
+  look             3 ->   7     -4
+  put             10 ->  20    -10
+  make             9 ->  12     -3
+  take             1 ->   2     -1
+  be              19 ->  47    -28
+  treat           20 ->  44    -24
+  dig             23 ->  58    -35
+  check           11 ->  15     -4
+  have            24 ->  37    -13
+  give             5 ->   5     +0
+  review          14 ->  16     -2
+  examine         22 ->  27     -5
+  scrutinise      21 ->  26     -5
+  ask             17 ->  19     -2
+
+HIGHER UNDER B
+  interview       12 ->   4     +8
+  conduct          2 ->   1     +1
+  refuse           6 ->   3     +3
+  consult         35 ->  10    +25
+  refer           15 ->   6     +9
+  reject          18 ->   9     +9
+  invite          29 ->  18    +11
+  send            13 ->   8     +5
+  issue           39 ->  24    +15
+  apply           32 ->  25     +7
+  use             30 ->  23     +7
+  hold            27 ->  22     +5
+  deny            26 ->  21     +5
+  call            16 ->  11     +5
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  investigate      3 ->   5     -2
+  look             5 ->  19    -14
+  have            19 ->  45    -26
+  take             2 ->   3     -1
+  throw           22 ->  43    -21
+  put              8 ->  18    -10
+  keep            18 ->  26     -8
+  make             9 ->  16     -7
+  deport           6 ->  10     -4
+  charge          15 ->  21     -6
+  turn            16 ->  20     -4
+  do              26 ->  30     -4
+  cancel          11 ->  13     -2
+  interview       24 ->  24     +0
+
+HIGHER UNDER B
+  refuse           1 ->   1     +0
+  ban             17 ->   6    +11
+  reject           4 ->   2     +2
+  send            12 ->   7     +5
+  deny             7 ->   4     +3
+  change          40 ->  17    +23
+  decline         14 ->   8     +6
+  stop            27 ->  15    +12
+  give            13 ->   9     +4
+  impose          20 ->  12     +8
+  review          25 ->  23     +2
+  use             21 ->  14     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  deport           4 ->  15    -11
+  refuse           1 ->   1     +0
+  take             2 ->   2     +0
+  reject           3 ->   4     -1
+  make             6 ->  17    -11
+  keep            15 ->  29    -14
+  send             5 ->   5     +0
+  put              7 ->  13     -6
+  cancel          13 ->  22     -9
+  look            14 ->  20     -6
+
+HIGHER UNDER B
+  deny             9 ->   3     +6
+  investigate     19 ->  10     +9
+  check           18 ->   9     +9
+  ban             35 ->  16    +19
+  suspend         23 ->  14     +9
+  revoke          17 ->  11     +6
+  turn            11 ->   8     +3
+  conduct         49 ->  21    +28
+  decline         26 ->  19     +7
+  interview       10 ->   6     +4
+  meet            48 ->  25    +23
+  ask             12 ->  12     +0
+  grant           37 ->  24    +13
+  give             8 ->   7     +1
+  do              29 ->  26     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  send             1 ->  12    -11
+  check            6 ->  46    -40
+  put              4 ->  21    -17
+  give             3 ->  10     -7
+  look            10 ->  39    -29
+  do               5 ->   9     -4
+  make             8 ->  27    -19
+  reject           7 ->  18    -11
+  ask             17 -> 119   -102
+  run             13 ->  35    -22
+  have            15 ->  73    -58
+  expedite        23 -> 128   -105
+  call            20 ->  77    -57
+  get             22 ->  79    -57
+  turn            25 ->  86    -61
+  go              21 ->  54    -33
+  test            24 ->  53    -29
+  use             19 ->  28     -9
+  refer           18 ->  20     -2
+
+HIGHER UNDER B
+  take             2 ->   1     +1
+  conduct         34 ->   2    +32
+  investigate      9 ->   3     +6
+  act             14 ->   4    +10
+  cancel          28 ->   5    +23
+  move            36 ->   6    +30
+  prioritise     125 ->  16   +109
+  strip           69 ->  15    +54
+  remove          47 ->  17    +30
+  push            40 ->  13    +27
+  review          30 ->  14    +16
+  revoke          37 ->  19    +18
+  deport          12 ->   8     +4
+  treat           11 ->   7     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  check            3 ->   8     -5
+  give             7 ->  40    -33
+  do               8 ->  28    -20
+  have             9 ->  26    -17
+  ask              5 ->  11     -6
+  make             4 ->   9     -5
+  look            10 ->  18     -8
+  deport          18 ->  77    -59
+  call            15 ->  21     -6
+  send             6 ->  10     -4
+  question        17 ->  37    -20
+  grant           20 ->  36    -16
+  keep            23 ->  65    -42
+  interview       19 ->  27     -8
+  put             21 ->  39    -18
+  reject          12 ->  15     -3
+  deny            24 ->  34    -10
+
+HIGHER UNDER B
+  investigate      1 ->   1     +0
+  scrutinise      13 ->   3    +10
+  review          25 ->   4    +21
+  scrutinize      42 ->   6    +36
+  carry           14 ->   5     +9
+  conduct         11 ->   7     +4
+  take             2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  give             1 ->   4     -3
+  be               5 ->  17    -12
+  make             4 ->   5     -1
+  take             2 ->   2     +0
+  put              8 ->  29    -21
+  let             10 ->  36    -26
+  call            11 ->  26    -15
+  throw           19 ->  51    -32
+  try             15 ->  30    -15
+  do              18 ->  39    -21
+  keep            17 ->  25     -8
+  go              12 ->  16     -4
+  check            7 ->   8     -1
+  grant           13 ->  14     -1
+
+HIGHER UNDER B
+  send             3 ->   1     +2
+  issue           29 ->   7    +22
+  reject          34 ->   9    +25
+  run             28 ->  11    +17
+  conduct         20 ->  10    +10
+  review          42 ->  20    +22
+  refer           66 ->  22    +44
+  consider        69 ->  23    +46
+  move            33 ->  19    +14
+  expedite        22 ->  15     +7
+  interview       31 ->  21    +10
+  hold            38 ->  24    +14
+  offer           21 ->  18     +3
+  ask              6 ->   3     +3
+  treat           16 ->  13     +3
+  investigate     14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  make             2 ->   7     -5
+  deny             9 ->  41    -32
+  send             5 ->  14     -9
+  refuse          16 -> 105    -89
+  have            13 ->  39    -26
+  throw           22 ->  58    -36
+  do              25 ->  54    -29
+  ask             17 ->  29    -12
+  give             7 ->  10     -3
+  look            18 ->  28    -10
+  be               6 ->   8     -2
+  revoke          21 ->  30     -9
+  cancel          23 ->  32     -9
+  put              8 ->  11     -3
+  use             14 ->  16     -2
+  turn            20 ->  21     -1
+  call            19 ->  19     +0
+  carry           15 ->  15     +0
+
+HIGHER UNDER B
+  review          26 ->   2    +24
+  investigate     11 ->   3     +8
+  conduct         12 ->   5     +7
+  tighten         42 ->   9    +33
+  reassess       124 ->  18   +106
+  grant           24 ->  13    +11
+  change          45 ->  17    +28
+  increase        49 ->  20    +29
+  take             1 ->   1     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  interview       10 ->  16     -6
+  make             6 ->  12     -6
+  give             7 ->  11     -4
+  reject          11 ->  15     -4
+  let             24 ->  33     -9
+  be              22 ->  28     -6
+  turn            13 ->  19     -6
+  keep            19 ->  27     -8
+  do              12 ->  13     -1
+  ask             16 ->  20     -4
+  deny            20 ->  24     -4
+  grant           25 ->  29     -4
+  stop            21 ->  21     +0
+  look            23 ->  23     +0
+
+HIGHER UNDER B
+  deport           3 ->   1     +2
+  withdraw        30 ->   9    +21
+  revoke          18 ->   7    +11
+  investigate     15 ->   8     +7
+  put              5 ->   5     +0
+  cancel           8 ->   6     +2
+  call             4 ->   4     +0
+  refuse          26 ->  18     +8
+  pay             32 ->  22    +10
+  detain          31 ->  25     +6
+  visit           17 ->  17     +0
+  use             14 ->  14     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  send             4 ->  22    -18
+  interview        5 ->  14     -9
+  test             7 ->  18    -11
+  examine          6 ->  13     -7
+  reject          10 ->  16     -6
+  take             1 ->   4     -3
+  stop            13 ->  17     -4
+  deny            22 ->  38    -16
+  wait            28 ->  82    -54
+  detain          25 ->  51    -26
+  turn            27 ->  71    -44
+  deport          24 ->  42    -18
+  keep            19 ->  24     -5
+  make            11 ->  11     +0
+  suspend         23 ->  34    -11
+  delay           18 ->  19     -1
+  put             12 ->  12     +0
+
+HIGHER UNDER B
+  carry            3 ->   1     +2
+  conduct          8 ->   2     +6
+  revoke          17 ->   5    +12
+  investigate     16 ->   7     +9
+  refuse          15 ->   6     +9
+  reconsider      54 ->  20    +34
+  re              21 ->   9    +12
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  check            2 ->  13    -11
+  do               5 ->  33    -28
+  make             4 ->  15    -11
+  look             7 ->  17    -10
+  put              8 ->  18    -10
+  call            20 ->  52    -32
+  try             25 ->  78    -53
+  charge          24 ->  50    -26
+  have            26 ->  43    -17
+  run             28 ->  47    -19
+  keep            27 ->  41    -14
+  get             23 ->  36    -13
+  turn            29 ->  30     -1
+  interview        9 ->  11     -2
+  investigate     11 ->  14     -3
+  carry           19 ->  19     +0
+  ask             13 ->  16     -3
+
+HIGHER UNDER B
+  send             3 ->   1     +2
+  refuse          18 ->   3    +15
+  apply           30 ->   7    +23
+  conduct         10 ->   5     +5
+  deny            17 ->   8     +9
+  reject          12 ->   6     +6
+  give             6 ->   4     +2
+  grant           15 ->  10     +5
+  play            14 ->   9     +5
+  be              16 ->  12     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  take             1 ->   1     +0
+  grant            4 ->   5     -1
+  send             2 ->   2     +0
+  be              10 ->  18     -8
+  let             18 ->  24     -6
+  make             6 ->   9     -3
+  give             3 ->   3     +0
+  have            25 ->  34     -9
+  allow           22 ->  27     -5
+  go              19 ->  21     -2
+  do              17 ->  19     -2
+  refer           15 ->  17     -2
+  ask             21 ->  22     -1
+
+HIGHER UNDER B
+  conduct         29 ->  12    +17
+  reject          20 ->  13     +7
+  review          14 ->  11     +3
+  investigate      5 ->   4     +1
+  interview       11 ->   7     +4
+  charge          23 ->  20     +3
+  deport          16 ->  14     +2
+  check            7 ->   6     +1
+  use             26 ->  23     +3
+  look             8 ->   8     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  send             2 ->   3     -1
+  be              11 ->  26    -15
+  do               5 ->  11     -6
+  call            16 ->  36    -20
+  ask              6 ->  14     -8
+  turn             7 ->  18    -11
+  ignore          28 -> 105    -77
+  keep            13 ->  20     -7
+  reject           8 ->  10     -2
+  see             19 ->  32    -13
+  try             24 ->  31     -7
+  deny            17 ->  21     -4
+  go              27 ->  39    -12
+  act             22 ->  28     -6
+  get             23 ->  24     -1
+  throw           20 ->  22     -2
+  deport          14 ->  16     -2
+
+HIGHER UNDER B
+  take             1 ->   1     +0
+  refuse          26 ->   8    +18
+  give             4 ->   2     +2
+  investigate     10 ->   5     +5
+  speed           35 ->  12    +23
+  treat           21 ->   9    +12
+  put             12 ->   6     +6
+  check           25 ->  13    +12
+  interview       30 ->  19    +11
+  cancel          46 ->  23    +23
+  look             9 ->   7     +2
+  let             18 ->  17     +1
+  grant           15 ->  15     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  give             1 ->   4     -3
+  let              7 ->  32    -25
+  put              9 ->  28    -19
+  take             5 ->   7     -2
+  revoke          14 ->  60    -46
+  tell            16 -> 100    -84
+  reject           8 ->  19    -11
+  deny            15 ->  47    -32
+  stop            13 ->  31    -18
+  cancel          20 -> 106    -86
+  call            19 ->  53    -34
+  make             4 ->   6     -2
+  ask             10 ->  17     -7
+  look            17 ->  22     -5
+  treat           12 ->  16     -4
+
+HIGHER UNDER B
+  be               2 ->   1     +1
+  expedite       120 ->   3   +117
+  review          47 ->   8    +39
+  hold            26 ->   9    +17
+  speed           57 ->  14    +43
+  delay           22 ->  11    +11
+  cut             18 ->  10     +8
+  scrutinize     163 ->  18   +145
+  act             21 ->  13     +8
+  investigate     31 ->  15    +16
+  grant            6 ->   5     +1
+  send             3 ->   2     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

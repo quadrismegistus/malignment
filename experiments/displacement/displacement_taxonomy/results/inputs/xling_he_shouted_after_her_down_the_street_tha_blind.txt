@@ -1,0 +1,1645 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He shouted after her down the street that she was a ___
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  whore            2 -> 116   -114
+  stupid           5 -> 139   -134
+  bitch            6 -> 201   -195
+  liar             7 ->  27    -20
+  disgrace        11 -> 118   -107
+  horrible        12 ->  76    -64
+  coward           9 ->  24    -15
+  very            13 ->  89    -76
+  slut            16 -> 162   -146
+  filthy          18 -> 155   -137
+  little          17 ->  72    -55
+  bad              3 ->   6     -3
+  silly           15 ->  32    -17
+  crazy           20 ->  93    -73
+  fucking         21 -> 176   -155
+  terrible        10 ->  10     +0
+  thief           19 ->  23     -4
+
+HIGHER UNDER B
+  fool             1 ->   1     +0
+  hero            94 ->   2    +92
+  good             4 ->   3     +1
+  star           130 ->   7   +123
+  beautiful       14 ->   4    +10
+  friend          95 ->   8    +87
+  remarkable     172 ->   9   +163
+  vision         165 ->  12   +153
+  dear           140 ->  11   +129
+  gift           176 ->  14   +162
+  foolish        106 ->  16    +90
+  witch            8 ->   5     +3
+  great           27 ->  13    +14
+  wicked          25 ->  15    +10
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  fool             1 ->  10     -9
+  wonderful        4 ->  38    -34
+  great            3 ->   7     -4
+  stupid           5 ->  11     -6
+  lucky            2 ->   3     -1
+  rotten          13 -> 115   -102
+  witch            7 ->  12     -5
+  foolish         16 ->  58    -42
+  loser           10 ->  25    -15
+
+HIGHER UNDER B
+  bad             15 ->   1    +14
+  thief           33 ->   5    +28
+  beautiful        6 ->   2     +4
+  terrible        18 ->   6    +12
+  silly           14 ->   4    +10
+  disgrace        12 ->   9     +3
+  beauty          34 ->  15    +19
+  real            62 ->  17    +45
+  whore           73 ->  20    +53
+  horrible        42 ->  18    +24
+  brave           30 ->  16    +14
+  liar            55 ->  22    +33
+  good             8 ->   8     +0
+  pretty          38 ->  21    +17
+  bitch           20 ->  19     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  fool             2 ->   8     -6
+  witch            4 ->  27    -23
+  whore            3 ->  10     -7
+  thief            7 ->  31    -24
+  crazy            6 ->  19    -13
+  coward           9 ->  18     -9
+  silly           14 ->  49    -35
+  slut            16 ->  20     -4
+  bitch           11 ->  11     +0
+  dirty           19 ->  26     -7
+  disgrace        13 ->  14     -1
+  big             20 ->  23     -3
+  little          12 ->  12     +0
+
+HIGHER UNDER B
+  liar             1 ->   1     +0
+  great           17 ->   3    +14
+  beautiful       28 ->   4    +24
+  terrible        15 ->   5    +10
+  good             5 ->   2     +3
+  very            18 ->   9     +9
+  loser           94 ->  15    +79
+  bad             10 ->   6     +4
+  horrible        34 ->  13    +21
+  wonderful       65 ->  16    +49
+  lying           33 ->  17    +16
+  stupid           8 ->   7     +1
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  bad              1 ->   4     -3
+  prostitute       5 ->  24    -19
+  murderer         6 ->  38    -32
+  witch            4 ->  11     -7
+  lesbian          9 ->  34    -25
+  whore            8 ->  20    -12
+  member          19 ->  57    -38
+  traitor         13 ->  28    -15
+  woman            7 ->  10     -3
+  slut            15 ->  32    -17
+  big             17 ->  26     -9
+  spy             22 ->  36    -14
+  liar            24 ->  30     -6
+
+HIGHER UNDER B
+  good             2 ->   1     +1
+  failure         58 ->   3    +55
+  coward          18 ->   6    +12
+  very            10 ->   5     +5
+  model           34 ->  14    +20
+  victim          31 ->  16    +15
+  thief            3 ->   2     +1
+  fool            37 ->  19    +18
+  genius          40 ->  21    +19
+  beautiful       25 ->  13    +12
+  hero            14 ->   8     +6
+  girl            23 ->  15     +8
+  friend          36 ->  22    +14
+  real            21 ->  17     +4
+  little          11 ->   7     +4
+  criminal        16 ->  12     +4
+  terrible        30 ->  23     +7
+  great           20 ->  18     +2
+  bit             12 ->   9     +3
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  whore            3 ->  22    -19
+  prostitute       7 ->  76    -69
+  woman            5 ->  10     -5
+  slut             6 ->  12     -6
+  murderer        10 ->  24    -14
+  tramp           22 -> 119    -97
+  fucking         24 -> 130   -106
+  big             15 ->  32    -17
+  girl            19 ->  56    -37
+  monster         12 ->  21     -9
+  bad              4 ->   5     -1
+  hypocrite       21 ->  28     -7
+  very            23 ->  25     -2
+  good             8 ->   9     -1
+  little          18 ->  18     +0
+  liar             1 ->   2     -1
+
+HIGHER UNDER B
+  fraud           27 ->   6    +21
+  great           11 ->   4     +7
+  fool             9 ->   3     +6
+  terrible        20 ->   7    +13
+  witch            2 ->   1     +1
+  disgrace        31 ->  13    +18
+  “good           89 ->  16    +73
+  traitor         13 ->   8     +5
+  “bad            56 ->  19    +37
+  beautiful       17 ->  11     +6
+  waste           64 ->  20    +44
+  horrible        32 ->  17    +15
+  coward          16 ->  15     +1
+  thief           14 ->  14     +0
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  whore            3 ->  10     -7
+  stupid           5 ->  12     -7
+  bitch            8 ->  37    -29
+  bad             10 ->  39    -29
+  liar             2 ->   2     +0
+  little          13 ->  59    -46
+  fucking         15 ->  35    -20
+  slut            14 ->  32    -18
+  silly           18 ->  36    -18
+  woman           12 ->  17     -5
+  good             4 ->   4     +0
+  dead            17 ->  18     -1
+
+HIGHER UNDER B
+  fool             1 ->   1     +0
+  beautiful       24 ->   5    +19
+  damn            16 ->   7     +9
+  thief           19 ->   8    +11
+  fine            29 ->  13    +16
+  monster         28 ->  15    +13
+  madwoman        26 ->  14    +12
+  coward           6 ->   3     +3
+  terrible        21 ->  16     +5
+  crazy            7 ->   6     +1
+  witch           11 ->  11     +0
+  traitor          9 ->   9     +0
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  liar             2 ->  13    -11
+  bitch            4 ->  27    -23
+  stupid           9 ->  21    -12
+  good             6 ->   7     -1
+  fucking         13 ->  88    -75
+  coward          10 ->  16     -6
+  little          18 ->  51    -33
+  lying           20 ->  29     -9
+  crazy           19 ->  23     -4
+  horrible        21 ->  25     -4
+  traitor         14 ->  15     -1
+
+HIGHER UNDER B
+  slut             3 ->   2     +1
+  whore            1 ->   1     +0
+  witch            8 ->   3     +5
+  bad              7 ->   4     +3
+  disgrace        22 ->   6    +16
+  dirty           16 ->   8     +8
+  fool             5 ->   5     +0
+  tramp           24 ->  14    +10
+  prostitute      15 ->  11     +4
+  worthless       17 ->  12     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  whore            1 ->  41    -40
+  bitch            5 ->  47    -42
+  fool             2 ->   2     +0
+  liar             6 ->   8     -2
+  harlot          17 ->  23     -6
+  stupid          15 ->  18     -3
+
+HIGHER UNDER B
+  slut             3 ->   1     +2
+  disgrace        10 ->   4     +6
+  good             4 ->   3     +1
+  fine             8 ->   5     +3
+  thief            7 ->   6     +1
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  whore            1 -> 125   -124
+  slut             2 ->  76    -74
+  bitch            3 -> 146   -143
+  fucking         12 -> 175   -163
+  disgrace        11 -> 129   -118
+  prostitute       7 ->  14     -7
+  fat              8 ->  22    -14
+  tramp           17 ->  43    -26
+  crazy           16 ->  35    -19
+  cow             18 ->  29    -11
+
+HIGHER UNDER B
+  terrible        26 ->   4    +22
+  very            23 ->   3    +20
+  horrible        27 ->   6    +21
+  bad             10 ->   5     +5
+  great           50 ->  11    +39
+  thief           13 ->   8     +5
+  cruel          124 ->  15   +109
+  monster         52 ->  16    +36
+  bloody          38 ->  13    +25
+  beautiful       47 ->  18    +29
+  fool            14 ->  10     +4
+  foolish        121 ->  27    +94
+  “               62 ->  24    +38
+  nasty           55 ->  20    +35
+  liar             4 ->   1     +3
+  witch            9 ->   9     +0
+  fake            69 ->  26    +43
+  rude            53 ->  25    +28
+  stupid           5 ->   2     +3
+  lying           15 ->  12     +3
+  coward          24 ->  17     +7
+  traitor         30 ->  23     +7
+  good            21 ->  19     +2
+  silly           22 ->  21     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  whore            1 -> 111   -110
+  slut             2 ->  37    -35
+  disgrace         5 -> 118   -113
+  bitch            6 -> 132   -126
+  fucking         17 -> 158   -141
+  fat             13 ->  51    -38
+  dirty           12 ->  18     -6
+  prostitute      15 ->  30    -15
+
+HIGHER UNDER B
+  terrible        10 ->   5     +5
+  witch            7 ->   2     +5
+  foolish         66 ->   8    +58
+  stupid           8 ->   3     +5
+  wicked          27 ->   9    +18
+  liar             3 ->   1     +2
+  crazy           11 ->   7     +4
+  fake            49 ->  12    +37
+  monster         36 ->  14    +22
+  beautiful       44 ->  15    +29
+  traitor         18 ->  11     +7
+  poor            37 ->  17    +20
+  “               57 ->  21    +36
+  thief           20 ->  13     +7
+  bloody          50 ->  22    +28
+  silly           31 ->  20    +11
+  horrible        14 ->  10     +4
+  lying           22 ->  19     +3
+  bad              4 ->   4     +0
+  fool             9 ->   6     +3
+  good            16 ->  16     +0
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  slut             1 ->  41    -40
+  whore            3 ->  55    -52
+  bitch            2 ->  25    -23
+  fucking          6 -> 130   -124
+  bad              4 ->  16    -12
+  cunt             8 -> 128   -120
+  good             5 ->   5     +0
+  fat             11 -> 162   -151
+  big              7 ->  12     -5
+  stupid          12 ->  76    -64
+  terrible        10 ->  29    -19
+  pig             17 -> 153   -136
+  hoe             19 -> 194   -175
+  loser           18 -> 133   -115
+  beautiful       13 ->  26    -13
+  fool            15 ->  31    -16
+  pretty          20 ->  36    -16
+
+HIGHER UNDER B
+  “               29 ->   1    +28
+  doctor         188 ->   2   +186
+  professional   179 ->   4   +175
+  witch           14 ->   3    +11
+  girl            54 ->   7    +47
+  lesbian         39 ->   9    +30
+  princess        76 ->  11    +65
+  little          24 ->   8    +16
+  free           116 ->  15   +101
+  teacher        203 ->  18   +185
+  nurse          184 ->  17   +167
+  virgin          57 ->  13    +44
+  woman           69 ->  14    +55
+  mother         132 ->  19   +113
+  police         205 ->  20   +185
+  cop            145 ->  23   +122
+  student        198 ->  28   +170
+  prostitute      16 ->  10     +6
+  bit             53 ->  24    +29
+  real            27 ->  21     +6
+  liar            28 ->  22     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  slut             1 -> 204   -203
+  whore            4 ->  78    -74
+  bitch            5 -> 145   -140
+  fool             3 ->  20    -17
+  bad              2 ->   9     -7
+  liar             7 ->  21    -14
+  witch            6 ->   6     +0
+  great           10 ->  55    -45
+  mess            19 -> 138   -119
+  terrible        13 ->  56    -43
+  prostitute      14 ->  36    -22
+  bit             15 ->  35    -20
+  very            16 ->  38    -22
+  monster         12 ->  14     -2
+
+HIGHER UNDER B
+  little           9 ->   1     +8
+  big             17 ->   2    +15
+  girl            40 ->   3    +37
+  woman           26 ->   5    +21
+  child           72 ->  10    +62
+  vampire         79 ->  11    +68
+  man            163 ->  15   +148
+  friend          44 ->  12    +32
+  mother         116 ->  16   +100
+  real            18 ->   8    +10
+  princess        73 ->  13    +60
+  ghost          126 ->  17   +109
+  doctor         174 ->  22   +152
+  good             8 ->   4     +4
+  baby            69 ->  19    +50
+  thief           42 ->  18    +24
+  beautiful       11 ->   7     +4
+  stranger        55 ->  23    +32
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  bitch            2 ->   4     -2
+  stupid           5 ->  15    -10
+  whore            1 ->   2     -1
+  bad              6 ->  16    -10
+  fool             8 ->  14     -6
+  fucking          7 ->  13     -6
+  good            11 ->  23    -12
+  cunt            15 ->  24     -9
+  crazy           19 ->  22     -3
+  little          16 ->  17     -1
+  thief           18 ->  18     +0
+
+HIGHER UNDER B
+  slut             3 ->   1     +2
+  piece           23 ->   6    +17
+  coward           9 ->   5     +4
+  liar             4 ->   3     +1
+  murderer        17 ->   8     +9
+  prostitute      12 ->   7     +5
+  traitor         27 ->  12    +15
+  dirty           14 ->  10     +4
+  witch           13 ->  11     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  whore            1 ->  36    -35
+  prostitute       4 ->  44    -40
+  fool             3 ->   6     -3
+  thief            6 ->  23    -17
+  slut             7 ->  10     -3
+  crazy           11 ->  63    -52
+  bitch            8 ->  13     -5
+  devil           15 -> 107    -92
+  murderer        16 -> 110    -94
+  monster         12 ->  42    -30
+  spy             13 ->  14     -1
+
+HIGHER UNDER B
+  witch            2 ->   1     +1
+  disgrace        17 ->   2    +15
+  terrible        19 ->   3    +16
+  freak           28 ->   7    +21
+  beautiful       31 ->   9    +22
+  bad              9 ->   5     +4
+  great           23 ->  11    +12
+  real            33 ->  16    +17
+  very            18 ->  12     +6
+  good            10 ->   8     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  whore            2 ->  34    -32
+  bitch            5 ->  20    -15
+  thief            3 ->   7     -4
+  bad              4 ->   9     -5
+  slut             9 ->  16     -7
+  traitor          8 ->  13     -5
+  prostitute      18 ->  95    -77
+  murderer        20 ->  90    -70
+  witch            6 ->   6     +0
+  stupid          13 ->  24    -11
+  lying           16 ->  22     -6
+  very            17 ->  17     +0
+
+HIGHER UNDER B
+  good            10 ->   2     +8
+  wicked          15 ->   5    +10
+  damned          11 ->   3     +8
+  liar             1 ->   1     +0
+  fool             7 ->   4     +3
+  damn            21 ->  10    +11
+  disgrace        12 ->   8     +4
+  silly           23 ->  11    +12
+  fine            61 ->  18    +43
+  devil           24 ->  14    +10
+  terrible        19 ->  15     +4
+  dirty           14 ->  12     +2
+  nasty           22 ->  19     +3
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  ___              3 -> 118   -115
+  A                2 ->  10     -8
+  whore            7 ->  37    -30
+  bitch            1 ->   5     -4
+  liar             5 ->  11     -6
+  slut             8 ->  21    -13
+  witch           11 ->  33    -22
+  fucking         16 ->  92    -76
+  thief           22 ->  96    -74
+  beautiful       18 ->  25     -7
+  stupid          12 ->  14     -2
+  crazy           13 ->  18     -5
+  coward          17 ->  20     -3
+
+HIGHER UNDER B
+  good             4 ->   1     +3
+  bad              9 ->   3     +6
+  horrible        20 ->   4    +16
+  disgrace         6 ->   2     +4
+  terrible        14 ->   6     +8
+  monster         32 ->   9    +23
+  great           15 ->   8     +7
+  really          55 ->  13    +42
+  wonderful       38 ->  16    +22
+  worthless       63 ->  19    +44
+  freak           28 ->  15    +13
+  very            19 ->  12     +7
+  moron           29 ->  22     +7
+  real            21 ->  17     +4
+  fool            10 ->   7     +3
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  bitch            1 ->  41    -40
+  whore            2 -> 166   -164
+  liar             3 ->  15    -12
+  fucking          7 -> 108   -101
+  slut             9 ->  38    -29
+  fool             4 ->   9     -5
+  thief           10 ->  30    -20
+  traitor         14 ->  53    -39
+  bad             11 ->  24    -13
+  lying           19 ->  89    -70
+  crazy           20 ->  55    -35
+  dirty           13 ->  32    -19
+  fat             22 ->  59    -37
+  selfish         12 ->  23    -11
+  disgrace         5 ->   6     -1
+
+HIGHER UNDER B
+  stupid           6 ->   1     +5
+  bloody          21 ->   2    +19
+  lousy           74 ->   4    +70
+  fine            32 ->   3    +29
+  wicked          46 ->   5    +41
+  dumb            26 ->   8    +18
+  snob           117 ->  11   +106
+  no              77 ->  13    +64
+  miserable       57 ->  14    +43
+  Options        221 ->  21   +200
+  cheat          108 ->  20    +88
+  no-good         55 ->  18    +37
+  terrible        17 ->  10     +7
+  spoiled         58 ->  19    +39
+  cheapskate     145 ->  26   +119
+  silly           18 ->  12     +6
+  cowardly       134 ->  29   +105
+  stuck           67 ->  31    +36
+  coward           8 ->   7     +1
+  woman           25 ->  22     +3
+  good            16 ->  16     +0
+  moron           27 ->  25     +2
+  beautiful       31 ->  27     +4
+  horrible        29 ->  28     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  fool             1 ->  11    -10
+  liar             2 ->  37    -35
+  bitch            4 -> 168   -164
+  crazy            3 ->  45    -42
+  lunatic          6 ->  33    -27
+  whore           10 -> 193   -183
+  stupid          11 -> 121   -110
+  moron            7 ->  20    -13
+  horrible        12 ->  75    -63
+  slut            16 -> 144   -128
+  coward          15 ->  57    -42
+  bad              5 ->  13     -8
+  dumb            20 -> 103    -83
+  fucking         26 -> 188   -162
+  thief           13 ->  35    -22
+  traitor         24 -> 138   -114
+  silly           21 ->  92    -71
+  selfish         23 -> 102    -79
+  terrible         8 ->  15     -7
+  witch           17 ->  24     -7
+
+HIGHER UNDER B
+  beautiful       19 ->   1    +18
+  real            25 ->   3    +22
+  good             9 ->   2     +7
+  little          31 ->   4    +27
+  lousy           37 ->   6    +31
+  great           29 ->   5    +24
+  waste           70 ->   7    +63
+  beauty          92 ->  12    +80
+  wonderful       30 ->  10    +20
+  stalker        119 ->  16   +103
+  jerk            22 ->   8    +14
+  spy            111 ->  18    +93
+  big             18 ->   9     +9
+  total           44 ->  17    +27
+  nice            91 ->  21    +70
+  wicked          67 ->  23    +44
+  very            14 ->  14     +0
+  disgrace        34 ->  22    +12
+  monster         27 ->  19     +8
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  fool             1 ->   4     -3
+  witch            5 ->  33    -28
+  coward           9 ->  46    -37
+  thief            7 ->  23    -16
+  slut            12 ->  27    -15
+  whore           16 ->  50    -34
+  hero             8 ->  11     -3
+  girl            11 ->  15     -4
+  murderer        22 ->  39    -17
+  disgrace        18 ->  28    -10
+  genius          17 ->  18     -1
+  liar             3 ->   3     +0
+  woman           19 ->  19     +0
+
+HIGHER UNDER B
+  good             4 ->   1     +3
+  fraud           28 ->   7    +21
+  nice            33 ->  12    +21
+  model           50 ->  14    +36
+  ____            10 ->   6     +4
+  bad              2 ->   2     +0
+  great            6 ->   5     +1
+  ______          45 ->  21    +24
+  perfect         43 ->  26    +17
+  star            34 ->  22    +12
+  complete        29 ->  20     +9
+  failure         35 ->  24    +11
+  mess            15 ->  10     +5
+  little          21 ->  13     +8
+  very            27 ->  25     +2
+  big             23 ->  16     +7
+  beautiful       14 ->   8     +6
+  real            13 ->   9     +4
+  terrible        20 ->  17     +3
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  bad              1 ->   2     -1
+  thief            4 ->   5     -1
+  wicked           7 ->  21    -14
+  whore            3 ->   4     -1
+  fool             5 ->   6     -1
+  disgrace         9 ->  15     -6
+  dirty           16 ->  20     -4
+  stupid          14 ->  19     -5
+  silly           11 ->  14     -3
+  terrible        12 ->  13     -1
+
+HIGHER UNDER B
+  liar             2 ->   1     +1
+  witch            6 ->   3     +3
+  ______          15 ->   9     +6
+  slut            10 ->   7     +3
+  ____            17 ->  10     +7
+  ________        20 ->  12     +8
+  _______         31 ->  16    +15
+  traitor         38 ->  18    +20
+  good             8 ->   8     +0
+  liar．           13 ->  11     +2
+  cheat           18 ->  17     +1
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  liar             2 ->  12    -10
+  bad              3 ->   7     -4
+  thief            8 ->  30    -22
+  witch            6 ->  26    -20
+  stupid           9 ->  33    -24
+  bitch           18 -> 138   -120
+  ____             5 ->  11     -6
+  horrible        20 -> 128   -108
+  _____           15 ->  44    -29
+  rotten          21 ->  48    -27
+  silly           19 ->  36    -17
+  big             23 ->  39    -16
+  ________        17 ->  28    -11
+  dirty           22 ->  25     -3
+
+HIGHER UNDER B
+  genius          48 ->   5    +43
+  disgrace        44 ->   6    +38
+  good             4 ->   2     +2
+  terrible        10 ->   3     +7
+  monster         57 ->  15    +42
+  hero            98 ->  16    +82
+  great           16 ->   8     +8
+  brave           97 ->  17    +80
+  fine            14 ->   9     +5
+  beautiful        7 ->   4     +3
+  fool             1 ->   1     +0
+  coward          13 ->  13     +0
+  very            11 ->  10     +1
+  ___             29 ->  18    +11
+  _______         36 ->  19    +17
+  waste           55 ->  23    +32
+  fraud           45 ->  22    +23
+  wonderful       35 ->  20    +15
+  real            24 ->  21     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  liar             3 -> 102    -99
+  slut             4 ->  46    -42
+  witch            2 ->   7     -5
+  whore            1 ->   5     -4
+  fool             5 ->  10     -5
+  good             6 ->  19    -13
+  disgrace         7 ->  43    -36
+  bitch            8 ->  22    -14
+  traitor          9 ->  86    -77
+  thief           10 ->  56    -46
+  murderer        13 ->  65    -52
+  coward          15 -> 106    -91
+  damned          16 ->  96    -80
+  dirty           14 ->  30    -16
+  bloody          17 ->  54    -37
+  bad             11 ->  13     -2
+  fine            18 ->  23     -5
+  stupid          12 ->  12     +0
+
+HIGHER UNDER B
+  silly           25 ->   1    +24
+  beautiful       62 ->   2    +60
+  wonderful       69 ->   3    +66
+  big             32 ->   4    +28
+  little          22 ->   6    +16
+  “fake          132 ->   9   +123
+  lovely          82 ->   8    +74
+  “whore         100 ->  11    +89
+  nice            95 ->  14    +81
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  thief            2 ->   6     -4
+  whore            6 ->  25    -19
+  traitor          7 -> 139   -132
+  witch            1 ->   3     -2
+  fool            17 ->  62    -45
+  woman            8 ->  18    -10
+  bitch            9 ->  16     -7
+  girl            11 ->  22    -11
+  bad              5 ->   5     +0
+  spy             14 ->  19     -5
+  disgrace        21 ->  28     -7
+  liar             4 ->   4     +0
+
+HIGHER UNDER B
+  beautiful       15 ->   2    +13
+  great           18 ->   8    +10
+  beauty          38 ->  15    +23
+  real            29 ->  13    +16
+  terrible        19 ->   9    +10
+  good            10 ->   7     +3
+  criminal        20 ->  10    +10
+  slut            22 ->  12    +10
+  friend          47 ->  21    +26
+  free            51 ->  23    +28
+  pretty          32 ->  20    +12
+  murderer        13 ->  11     +2
+  monster         25 ->  24     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  bitch            3 ->   4     -1
+  fool            10 ->  38    -28
+  good             7 ->  12     -5
+  traitor         13 ->  41    -28
+  liar             4 ->   5     -1
+  thief           12 ->  16     -4
+  stupid          14 ->  20     -6
+  fucking         16 ->  21     -5
+  disgrace        15 ->  17     -2
+
+HIGHER UNDER B
+  whore            1 ->   1     +0
+  slut             2 ->   2     +0
+  filthy          11 ->   7     +4
+  dirty            6 ->   3     +3
+  bad              9 ->   8     +1
+  b               34 ->  13    +21
+  crazy           27 ->  11    +16
+  dog             19 ->  10     +9
+  terrible        22 ->  14     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  lready           2 ->   7     -5
+  thief            4 ->   5     -1
+  spy              3 ->   3     +0
+  girl             8 ->  27    -19
+  friend           9 ->  31    -22
+  bit             16 ->  22     -6
+
+HIGHER UNDER B
+  liar             1 ->   1     +0
+  terrible        15 ->   8     +7
+  very            11 ->   6     +5
+  real            12 ->  10     +2
+  nice            24 ->  14    +10
+  great           13 ->  11     +2
+  fool            29 ->  15    +14
+  really          39 ->  16    +23
+  good             5 ->   2     +3
+  fraud           14 ->  12     +2
+  wonderful       62 ->  20    +42
+  traitor         25 ->  17     +8
+  genius          22 ->  18     +4
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  slut             4 -> 208   -204
+  whore            1 ->   5     -4
+  witch            2 ->   2     +0
+  stupid           9 ->  90    -81
+  traitor          8 ->  75    -67
+  fool             5 ->   7     -2
+  liar             3 ->   3     +0
+  fat             14 ->  36    -22
+  little          16 ->  44    -28
+  terrible        15 ->  28    -13
+  tramp           17 ->  26     -9
+  bitch            6 ->   6     +0
+  very            18 ->  22     -4
+  filthy          12 ->  13     -1
+
+HIGHER UNDER B
+  disgrace        10 ->   1     +9
+  spy             40 ->   8    +32
+  selfish         43 ->  10    +33
+  bad              7 ->   4     +3
+  lying           19 ->  12     +7
+  sight          176 ->  21   +155
+  cold           101 ->  19    +82
+  damned          61 ->  18    +43
+  lousy           34 ->  16    +18
+  worthless       31 ->  17    +14
+  thief           13 ->  11     +2
+  silly           24 ->  14    +10
+  big             23 ->  15     +8
+  dirty           20 ->  20     +0
+  good            11 ->   9     +2
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  whore            3 ->  22    -19
+  prostitute       6 ->  33    -27
+  good             1 ->   5     -4
+  slut            12 ->  73    -61
+  bitch           13 ->  50    -37
+  girl             9 ->  16     -7
+  bad              5 ->   6     -1
+  very            18 ->  44    -26
+  woman            8 ->  11     -3
+  fake            14 ->  25    -11
+  fool            10 ->  12     -2
+  man             21 ->  49    -28
+  real            15 ->  21     -6
+  little          17 ->  24     -7
+
+HIGHER UNDER B
+  monster         20 ->   4    +16
+  hero            59 ->   9    +50
+  thief            7 ->   3     +4
+  freak           29 ->   8    +21
+  witch            4 ->   1     +3
+  coward          16 ->   7     +9
+  killer          61 ->  14    +47
+  danger          76 ->  23    +53
+  ghost           62 ->  19    +43
+  fraud           33 ->  15    +18
+  criminal        47 ->  18    +29
+  demon           34 ->  17    +17
+  spy             19 ->  13     +6
+  liar             2 ->   2     +0
+  great           22 ->  20     +2
+  beautiful       11 ->  10     +1
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  whore            2 ->  50    -48
+  bitch            1 ->   7     -6
+  disgrace         6 ->  28    -22
+  slut             3 ->  10     -7
+  bad              4 ->   9     -5
+  fucking         14 -> 114   -100
+  stupid           9 ->  20    -11
+  horrible        15 ->  56    -41
+  fat             16 ->  53    -37
+  crazy           13 ->  30    -17
+  terrible        11 ->  15     -4
+  thief           12 ->  12     +0
+
+HIGHER UNDER B
+  witch            5 ->   1     +4
+  beautiful       18 ->   3    +15
+  liar             7 ->   2     +5
+  fool            10 ->   4     +6
+  wonderful       50 ->   8    +42
+  great           37 ->   6    +31
+  beauty         112 ->  13    +99
+  brave          127 ->  18   +109
+  lucky           67 ->  19    +48
+  heartless       39 ->  14    +25
+  coward          35 ->  16    +19
+  good             8 ->   5     +3
+  cold            70 ->  26    +44
+  lovely          57 ->  24    +33
+  fine            42 ->  22    +20
+  very            17 ->  11     +6
+  wicked          34 ->  25     +9
+  little          21 ->  21     +0
+  dirty           19 ->  17     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  bitch            1 ->   3     -2
+  stupid          16 ->  21     -5
+  fool            11 ->  13     -2
+  coward          10 ->  12     -2
+  bad              5 ->   6     -1
+  disgrace        20 ->  23     -3
+  traitor         21 ->  25     -4
+  good             4 ->   4     +0
+  terrible         8 ->  10     -2
+
+HIGHER UNDER B
+  very            12 ->   8     +4
+  thief            7 ->   7     +0
+  liar             6 ->   5     +1
+  beautiful       19 ->  14     +5
+  fucking         23 ->  20     +3
+  selfish         22 ->  19     +3
+  great           14 ->  11     +3
+  real            18 ->  17     +1
+  cunt            25 ->  22     +3
+  slut             3 ->   2     +1
+  crazy           27 ->  24     +3
+  prostitute      15 ->  15     +0
+  witch            9 ->   9     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  fool             1 ->   1     +0
+  witch            4 ->   6     -2
+  good             5 ->   8     -3
+  whore            2 ->   2     +0
+  thief           16 ->  19     -3
+  little          18 ->  20     -2
+  very            15 ->  17     -2
+  woman           20 ->  22     -2
+  coward          14 ->  14     +0
+
+HIGHER UNDER B
+  fucking         12 ->  11     +1
+  bitch            6 ->   4     +2
+  disgrace         3 ->   3     +0
+  crazy           13 ->  13     +0
+  liar             7 ->   5     +2
+  stupid           9 ->   7     +2
+  terrible        27 ->  18     +9
+  bad             10 ->  10     +0
+  beautiful       19 ->  15     +4
+  big             21 ->  21     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  whore            2 ->  23    -21
+  bitch            1 ->   5     -4
+  slut             4 ->   9     -5
+  dirty           10 ->  24    -14
+  witch            7 ->  14     -7
+  little          12 ->  37    -25
+  disgrace        21 -> 141   -120
+  fine            15 ->  28    -13
+  nice            22 ->  45    -23
+  big             17 ->  29    -12
+  good             6 ->  12     -6
+  lying           16 ->  21     -5
+  traitor         20 ->  27     -7
+
+HIGHER UNDER B
+  fool             5 ->   1     +4
+  stupid           8 ->   3     +5
+  liar             3 ->   2     +1
+  beautiful       13 ->   4     +9
+  brave          112 ->  11   +101
+  silly           29 ->  10    +19
+  very            11 ->   7     +4
+  crazy           14 ->   8     +6
+  bad              9 ->   6     +3
+  foolish        142 ->  16   +126
+  coward          18 ->  13     +5
+  real            19 ->  15     +4
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  thief            3 ->  11     -8
+  murderer         7 ->  20    -13
+  liar             2 ->   3     -1
+  traitor         10 ->  29    -19
+  disgrace        12 ->  34    -22
+  witch            4 ->   7     -3
+  fool            14 ->  23     -9
+  coward           8 ->   9     -1
+  dirty           17 ->  27    -10
+  fraud           19 ->  28     -9
+  little          15 ->  16     -1
+  tramp           16 ->  17     -1
+  whore            1 ->   1     +0
+
+HIGHER UNDER B
+  prostitute       9 ->   2     +7
+  slut             5 ->   4     +1
+  bitch           13 ->   6     +7
+  bad              6 ->   5     +1
+  lesbian         43 ->  12    +31
+  dog             20 ->  10    +10
+  virgin         110 ->  21    +89
+  good            11 ->   8     +3
+  hooker          38 ->  14    +24
+  pig             24 ->  15     +9
+  stupid          28 ->  18    +10
+  woman           18 ->  13     +5
+  terrible        25 ->  19     +6
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  bitch            1 ->   4     -3
+  whore            3 ->   8     -5
+  fool             5 ->   7     -2
+  stupid           9 ->  13     -4
+  slut             4 ->   6     -2
+  crazy           13 ->  27    -14
+  fucking         16 ->  28    -12
+  little          17 ->  22     -5
+  bad              8 ->   9     -1
+  dirty           14 ->  15     -1
+  coward          11 ->  12     -1
+  thief           19 ->  20     -1
+
+HIGHER UNDER B
+  liar             2 ->   1     +1
+  terrible        15 ->   3    +12
+  traitor         21 ->  14     +7
+  beautiful       26 ->  17     +9
+  very            10 ->  10     +0
+  wonderful       35 ->  19    +16
+  great           18 ->  16     +2
+  real            33 ->  18    +15
+  good             7 ->   2     +5
+  fine            12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  whore            1 ->   3     -2
+  slut             5 ->  10     -5
+  witch            6 ->   9     -3
+  little          14 ->  19     -5
+  bitch            7 ->   8     -1
+  good             8 ->  12     -4
+  fine            18 ->  22     -4
+  woman           17 ->  21     -4
+  dirty           15 ->  17     -2
+  damned          16 ->  18     -2
+
+HIGHER UNDER B
+  liar             3 ->   2     +1
+  fool             2 ->   1     +1
+  disgrace         4 ->   4     +0
+  bad             12 ->   5     +7
+  traitor         11 ->   7     +4
+  terrible        28 ->  15    +13
+  stupid           9 ->   6     +3
+  coward          13 ->  13     +0
+  crazy           19 ->  14     +5
+  lying           20 ->  16     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  tramp            9 ->  34    -25
+  thief           11 ->  17     -6
+  good            12 ->  20     -8
+  bad              4 ->   7     -3
+  bitch            3 ->   4     -1
+  filthy          19 ->  43    -24
+  very            20 ->  41    -21
+  beautiful       17 ->  26     -9
+  terrible        21 ->  38    -17
+  dirty            6 ->   9     -3
+
+HIGHER UNDER B
+  whore            1 ->   1     +0
+  slut             2 ->   2     +0
+  stupid           8 ->   3     +5
+  fucking          7 ->   5     +2
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  fool             1 ->   3     -2
+  bitch            3 ->   4     -1
+  fucking          7 ->  15     -8
+  damned          16 ->  24     -8
+  silly           15 ->  23     -8
+  selfish         10 ->  16     -6
+  bloody          22 ->  32    -10
+  crazy            9 ->  14     -5
+  liar             2 ->   2     +0
+  little          19 ->  20     -1
+  lying           20 ->  22     -2
+  stupid           5 ->   5     +0
+  good             6 ->   6     +0
+
+HIGHER UNDER B
+  whore            4 ->   1     +3
+  thief           18 ->  11     +7
+  slut             8 ->   7     +1
+  witch           11 ->   8     +3
+  disgrace        13 ->   9     +4
+  traitor         17 ->  12     +5
+  terrible        24 ->  18     +6
+  dirty           21 ->  17     +4
+  lousy           25 ->  19     +6
+  bad             12 ->  10     +2
+  damn            23 ->  21     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  whore            1 ->  39    -38
+  bitch            2 ->  10     -8
+  slut             5 ->  73    -68
+  stupid           9 ->  21    -12
+  prostitute      13 -> 102    -89
+  fucking         16 -> 104    -88
+  good             8 ->  11     -3
+  dirty           18 ->  75    -57
+  fat             17 ->  48    -31
+  murderer        11 ->  18     -7
+  “fucking        19 ->  77    -58
+  dog             20 ->  76    -56
+
+HIGHER UNDER B
+  liar             3 ->   1     +2
+  terrible        12 ->   3     +9
+  thief            4 ->   2     +2
+  disgrace        10 ->   6     +4
+  witch            7 ->   5     +2
+  traitor         14 ->   7     +7
+  fool            15 ->   8     +7
+  “               96 ->   9    +87
+  _______        117 ->  12   +105
+  hypocrite       66 ->  13    +53
+  monster         53 ->  15    +38
+  beautiful       44 ->  14    +30
+  bad              6 ->   4     +2
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  bitch            2 ->  14    -12
+  whore            1 ->   2     -1
+  witch            4 ->  10     -6
+  good             3 ->   3     +0
+  fool             6 ->   9     -3
+  liar             7 ->  13     -6
+  terrible        11 ->  19     -8
+  filthy          15 -> 106    -91
+  horrible        16 -> 123   -107
+  stupid          14 ->  69    -55
+  fine            17 ->  24     -7
+  bad              8 ->   8     +0
+
+HIGHER UNDER B
+  slut             5 ->   1     +4
+  traitor         10 ->   4     +6
+  beautiful       13 ->   5     +8
+  disappointment 109 ->  15    +94
+  loser           60 ->  17    +43
+  thief           12 ->   7     +5
+  great            9 ->   6     +3
+  very            20 ->  11     +9
+  prostitute      19 ->  12     +7
+  wonderful       18 ->  16     +2
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  bitch            1 ->   3     -2
+  cunt             4 ->  21    -17
+  stupid           5 ->   9     -4
+  fucking          3 ->   6     -3
+  racist          14 ->  36    -22
+  horrible        12 ->  29    -17
+  terrible        10 ->  17     -7
+  dumb            21 ->  44    -23
+  good             9 ->  12     -3
+  crazy           13 ->  25    -12
+  great           24 ->  47    -23
+  real            23 ->  33    -10
+  fat             11 ->  13     -2
+  dirty           17 ->  18     -1
+  fool            16 ->  16     +0
+
+HIGHER UNDER B
+  liar             6 ->   2     +4
+  whore            2 ->   1     +1
+  traitor         19 ->   5    +14
+  slut             7 ->   4     +3
+  coward          18 ->   8    +10
+  thief           59 ->  20    +39
+  disgrace        15 ->  10     +5
+  witch           22 ->  11    +11
+  filthy          27 ->  15    +12
+  nasty           34 ->  19    +15
+  bad              8 ->   7     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  fool             2 ->   4     -2
+  disgrace         8 ->  16     -8
+  good             5 ->   6     -1
+  bad              3 ->   5     -2
+  liar             1 ->   2     -1
+  stupid           7 ->   8     -1
+  coward          11 ->  26    -15
+  very            12 ->  22    -10
+  beautiful       14 ->  24    -10
+  terrible         9 ->  11     -2
+
+HIGHER UNDER B
+  thief            6 ->   1     +5
+  witch            4 ->   3     +1
+  slut            45 ->  10    +35
+  bitch           24 ->   9    +15
+  murderer        16 ->   7     +9
+  filthy          36 ->  15    +21
+  freak           28 ->  18    +10
+  crazy           13 ->  13     +0
+  little          15 ->  14     +1
+  whore           17 ->  17     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  stupid           2 ->  52    -50
+  whore            3 ->   8     -5
+  coward           7 ->  21    -14
+  good             8 ->  20    -12
+  silly           11 ->  44    -33
+  slut             9 ->  12     -3
+  crazy           12 -> 107    -95
+  witch           10 ->  10     +0
+  foolish         17 ->  96    -79
+  little          16 ->  93    -77
+  thief           18 ->  57    -39
+  bloody          19 ->  55    -36
+  fucking         14 ->  34    -20
+  worthless       15 ->  25    -10
+
+HIGHER UNDER B
+  disgrace         5 ->   2     +3
+  fool             1 ->   1     +0
+  traitor         23 ->   3    +20
+  failure        114 ->   7   +107
+  bad             13 ->   6     +7
+  waste          106 ->  11    +95
+  lost            67 ->   9    +58
+  liar             4 ->   4     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  whore            2 -> 132   -130
+  bitch            3 -> 123   -120
+  slut             4 ->  23    -19
+  disgrace         9 -> 125   -116
+  stupid           6 ->  17    -11
+  fucking         13 ->  54    -41
+  fool             7 ->  15     -8
+  filthy          17 ->  51    -34
+  coward          21 ->  48    -27
+  crazy           19 ->  32    -13
+  worthless       16 ->  27    -11
+  dirty           18 ->  22     -4
+  fat             20 ->  21     -1
+
+HIGHER UNDER B
+  liar             1 ->   1     +0
+  terrible        25 ->   7    +18
+  traitor          8 ->   3     +5
+  bad             12 ->   4     +8
+  great           24 ->   8    +16
+  lesbian         59 ->  11    +48
+  prostitute      33 ->  10    +23
+  thief            5 ->   2     +3
+  cheap           39 ->  14    +25
+  good            11 ->   5     +6
+  witch           10 ->   6     +4
+  hypocrite       29 ->  13    +16
+  tramp           49 ->  16    +33
+  complete        60 ->  20    +40
+  lazy            56 ->  24    +32
+  rotten          45 ->  25    +20
+  lying           15 ->   9     +6
+  pig             23 ->  18     +5
+  fraud           22 ->  19     +3
+  beautiful       14 ->  12     +2
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  beautiful        4 ->  18    -14
+  good             1 ->   6     -5
+  whore            9 ->  33    -24
+  witch            2 ->   4     -2
+  pretty          10 ->  40    -30
+  great            7 ->  11     -4
+  bitch           17 -> 111    -94
+  beauty          20 -> 129   -109
+  fine            21 -> 113    -92
+  nice            18 ->  47    -29
+  slut            16 ->  29    -13
+  woman           15 ->  26    -11
+  lovely          19 ->  31    -12
+  little          23 ->  44    -21
+  real            11 ->  12     -1
+  disgrace        13 ->  14     -1
+
+HIGHER UNDER B
+  liar             3 ->   1     +2
+  fool             8 ->   2     +6
+  total           85 ->   9    +76
+  terrible        12 ->   7     +5
+  bad              6 ->   5     +1
+  traitor         30 ->  10    +20
+  thief           14 ->   8     +6
+  fraud           57 ->  15    +42
+  coward          26 ->  13    +13
+  very             5 ->   3     +2
+  friend          28 ->  16    +12
+  stranger        29 ->  17    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  whore            1 ->   4     -3
+  slut             3 ->  13    -10
+  witch            4 ->   7     -3
+  bitch            7 -> 172   -165
+  bad              5 ->  18    -13
+  good             6 ->  21    -15
+  prostitute      12 ->  50    -38
+  fine            13 ->  39    -26
+  dirty           18 -> 158   -140
+  terrible        14 ->  38    -24
+  horrible        22 -> 162   -140
+  dog             15 ->  35    -20
+  pig             21 ->  59    -38
+  filthy          19 ->  41    -22
+  woman           16 ->  28    -12
+  traitor         23 ->  37    -14
+  thief            8 ->  11     -3
+  murderer        24 ->  32     -8
+
+HIGHER UNDER B
+  liar             2 ->   1     +1
+  fraud           42 ->   3    +39
+  cheat           72 ->   5    +67
+  fool             9 ->   2     +7
+  coward          20 ->   6    +14
+  failure         35 ->  10    +25
+  child           47 ->  12    +35
+  disgrace        10 ->   8     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  liar             2 ->   2     +0
+  disgrace         3 ->   4     -1
+  fool             4 ->  19    -15
+  bad              5 ->   6     -1
+  witch            6 ->   7     -1
+  slut            10 ->  21    -11
+  thief           14 ->  40    -26
+  traitor         15 ->  38    -23
+  good             9 ->  14     -5
+  terrible        12 ->  12     +0
+  filthy          13 ->  13     +0
+  horrible        16 ->  18     -2
+
+HIGHER UNDER B
+  whore            1 ->   1     +0
+  dirty            8 ->   3     +5
+  fat             18 ->   8    +10
+  dog             22 ->  10    +12
+  pig             20 ->  11     +9
+  dead            19 ->  15     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  liar             2 ->  15    -13
+  whore            3 ->  16    -13
+  good             5 ->  10     -5
+  bitch            9 ->  31    -22
+  little           6 ->  13     -7
+  slut            10 ->  27    -17
+  fool             1 ->   1     +0
+  stupid          15 -> 165   -150
+  pretty          11 ->  26    -15
+  prostitute      18 -> 202   -184
+  beautiful       14 ->  18     -4
+  horrible         8 ->   8     +0
+  thief           16 ->  21     -5
+
+HIGHER UNDER B
+  hypocrite       27 ->   2    +25
+  disgrace        19 ->   5    +14
+  coward          76 ->   9    +67
+  very             7 ->   4     +3
+  heartless       82 ->  11    +71
+  traitor         31 ->   7    +24
+  terrible        13 ->   6     +7
+  brave          162 ->  20   +142
+  great           17 ->  14     +3
+  real            35 ->  17    +18
+  witch           12 ->  12     +0
+  fraud           30 ->  19    +11
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  whore            5 ->  37    -32
+  slut             6 ->  22    -16
+  bitch            4 ->  16    -12
+  good             7 ->  18    -11
+  coward          15 ->  79    -64
+  traitor         13 ->  20     -7
+  little          19 ->  86    -67
+  dirty           14 ->  24    -10
+  crazy           17 ->  25     -8
+  very            18 ->  23     -5
+
+HIGHER UNDER B
+  terrible        11 ->   2     +9
+  _____          104 ->   3   +101
+  disgrace         3 ->   1     +2
+  ____           102 ->  10    +92
+  nasty           31 ->  13    +18
+  witch           10 ->   6     +4
+  lying           30 ->  14    +16
+  ______          22 ->  12    +10
+  cheat           39 ->  15    +24
+  loser           35 ->  17    +18
+  horrible        16 ->  11     +5
+  heartless       40 ->  19    +21
+  stupid           9 ->   8     +1
+  selfish         24 ->  21     +3
+  thief            8 ->   7     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  slut             4 ->  10     -6
+  liar             3 ->   6     -3
+  witch            7 ->   7     +0
+  damned          14 ->  25    -11
+  lying           16 ->  20     -4
+  silly           21 ->  34    -13
+  bloody          20 ->  26     -6
+  filthy          22 ->  32    -10
+  crazy           19 ->  23     -4
+  great           23 ->  24     -1
+
+HIGHER UNDER B
+  bitch            2 ->   1     +1
+  terrible        29 ->  16    +13
+  selfish         38 ->  18    +20
+  dirty           15 ->  11     +4
+  murderer        45 ->  21    +24
+  fucking         10 ->   8     +2
+  lousy           32 ->  22    +10
+  traitor         13 ->  12     +1
+  disgrace        17 ->  15     +2
+  good             8 ->   5     +3
+  bad              9 ->   9     +0
+  rotten          25 ->  19     +6
+  coward          18 ->  17     +1
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  slut             3 ->  64    -61
+  liar             2 ->  10     -8
+  whore            4 ->   7     -3
+  witch            1 ->   1     +0
+  bitch            5 ->  11     -6
+  dirty           12 ->  25    -13
+  fool             7 ->  12     -5
+  prostitute      14 ->  44    -30
+  stupid           8 ->  15     -7
+  thief           11 ->  18     -7
+  traitor         13 ->  21     -8
+
+HIGHER UNDER B
+  good             9 ->   2     +7
+  beautiful       51 ->   4    +47
+  coward          10 ->   3     +7
+  great           49 ->   6    +43
+  wonderful      150 ->   9   +141
+  terrible        24 ->   8    +16
+  bad              6 ->   5     +1
+  real            81 ->  14    +67
+  nice           121 ->  22    +99
+  fine            95 ->  19    +76
+  very            39 ->  17    +22
+  loser           87 ->  24    +63
+  mean            25 ->  16     +9
+  disgrace        15 ->  13     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  slut             2 -> 134   -132
+  bitch            3 ->  30    -27
+  whore            1 ->   1     +0
+  fucking         10 -> 104    -94
+  cunt            13 ->  83    -70
+  lesbian         17 -> 144   -127
+  dog             14 ->  38    -24
+  good             9 ->  26    -17
+  liar             5 ->   9     -4
+  filthy          16 ->  28    -12
+
+HIGHER UNDER B
+  witch            4 ->   2     +2
+  disgrace        11 ->   3     +8
+  traitor         28 ->   5    +23
+  dirty            7 ->   4     +3
+  beautiful       21 ->   7    +14
+  bad              6 ->   6     +0
+  waste           91 ->  16    +75
+  worthless       32 ->  11    +21
+  damn            53 ->  18    +35
+  terrible        25 ->  12    +13
+  great           29 ->  13    +16
+  piece           12 ->  10     +2
+  prostitute       8 ->   8     +0
+  fool            26 ->  17     +9
+  stupid          20 ->  14     +6
+  horrible        27 ->  19     +8
+  fat             15 ->  15     +0
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

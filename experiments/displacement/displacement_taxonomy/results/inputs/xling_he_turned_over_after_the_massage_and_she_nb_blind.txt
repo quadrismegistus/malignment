@@ -1,0 +1,1377 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He turned over after the massage and she saw his ___
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  cock             2 ->  44    -42
+  penis            3 ->  89    -86
+  erection         4 ->  91    -87
+  dick             5 ->  81    -76
+  hard             6 -> 101    -95
+  big              7 ->  31    -24
+  huge             8 -> 103    -95
+  body            10 ->  49    -39
+  erect           12 -> 187   -175
+  naked           13 ->  92    -79
+  cum             15 -> 143   -128
+  beautiful       16 ->  17     -1
+
+HIGHER UNDER B
+  eyes             9 ->   1     +8
+  phone           66 ->   3    +63
+  expression     100 ->   4    +96
+  worried        165 ->   5   +160
+  peaceful       185 ->   6   +179
+  tired          156 ->   9   +147
+  smile           58 ->   8    +50
+  heart           65 ->  10    +55
+  watch          135 ->  11   +124
+  back            11 ->   7     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  Adam's           2 ->  16    -14
+  big              3 ->  11     -8
+  dick             4 ->   7     -3
+  buttocks         6 ->  23    -17
+  penis            5 ->   6     -1
+  palm             9 ->  62    -53
+  silhouette      12 ->  98    -86
+  face             1 ->   1     +0
+
+HIGHER UNDER B
+  cock            10 ->   2     +8
+  chest           11 ->   3     +8
+  eyes             7 ->   4     +3
+  hand            68 ->   8    +60
+  back             8 ->   5     +3
+  limp           100 ->  12    +88
+  body            20 ->   9    +11
+  phone           70 ->  13    +57
+  white           18 ->  10     +8
+  skin            54 ->  14    +40
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  cock             5 ->  23    -18
+  bare             6 ->  11     -5
+  erection         8 ->  27    -19
+  penis           10 ->  58    -48
+  hands           14 ->  40    -26
+  dark            15 ->  30    -15
+  handsome        11 ->  12     -1
+
+HIGHER UNDER B
+  eyes             2 ->   1     +1
+  body             7 ->   5     +2
+  back             4 ->   3     +1
+  beautiful       12 ->   6     +6
+  muscles         31 ->   7    +24
+  shoulders       19 ->  10     +9
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  expression       3 ->   6     -3
+  head            10 ->  31    -21
+  hand             8 ->  17     -9
+  hands            5 ->   7     -2
+  lips             9 ->  15     -6
+  mouth           14 ->  22     -8
+  penis           11 ->  14     -3
+  naked           12 ->  13     -1
+
+HIGHER UNDER B
+  eyes             2 ->   2     +0
+  face             1 ->   1     +0
+  body             6 ->   3     +3
+  erect           54 ->   9    +45
+  back             7 ->   5     +2
+  shirt           19 ->   8    +11
+  dick            15 ->  10     +5
+  chest           16 ->  11     +5
+  cock             4 ->   4     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  penis            1 ->   2     -1
+  cock             2 ->   7     -5
+  erect           18 ->  80    -62
+  head            19 ->  70    -51
+  tongue          12 ->  26    -14
+  genitals        20 ->  55    -35
+  huge            10 ->  16     -6
+  back            17 ->  31    -14
+  whole           11 ->  17     -6
+  big              8 ->  13     -5
+  balls           23 ->  28     -5
+  naked           14 ->  18     -4
+  feet            21 ->  24     -3
+  hands            9 ->  11     -2
+
+HIGHER UNDER B
+  face             3 ->   1     +2
+  reflection     105 ->   9    +96
+  body             7 ->   3     +4
+  entire          22 ->  10    +12
+  hand            13 ->   8     +5
+  dick             5 ->   5     +0
+  full            31 ->  14    +17
+  ass             16 ->  12     +4
+  beautiful       40 ->  19    +21
+  eyes             6 ->   6     +0
+  underwear       32 ->  20    +12
+  erection         4 ->   4     +0
+  bare            15 ->  15     +0
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  body             3 ->   7     -4
+  chest            4 ->   6     -2
+  erection         9 -> 118   -109
+  naked            5 ->  47    -42
+  hand             6 ->  29    -23
+  bare            11 ->  32    -21
+  penis           20 -> 112    -92
+  beautiful       10 ->  28    -18
+  pupils          13 ->  34    -21
+  muscles         17 ->  38    -21
+  smile           12 ->  18     -6
+  skin            19 ->  23     -4
+  breathing       21 ->  25     -4
+  face             2 ->   2     +0
+
+HIGHER UNDER B
+  eyes             1 ->   1     +0
+  jaw              7 ->   3     +4
+  relief          27 ->   4    +23
+  gaze            45 ->   8    +37
+  forehead        36 ->   9    +27
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  cock             3 ->  19    -16
+  penis            4 ->  30    -26
+  erection         8 ->  18    -10
+  beautiful       16 ->  24     -8
+  backside        10 ->  12     -2
+  butt            14 ->  21     -7
+  chest           17 ->  25     -8
+  ass              7 ->   8     -1
+  tattoo           6 ->   7     -1
+  bare            13 ->  14     -1
+
+HIGHER UNDER B
+  back             1 ->   1     +0
+  face             2 ->   2     +0
+  naked            5 ->   3     +2
+  rear            19 ->   5    +14
+  side            15 ->   6     +9
+  profile          9 ->   4     +5
+  reflection      39 ->  11    +28
+  arm             23 ->  13    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  back             3 ->   3     +0
+  naked            7 ->  14     -7
+  beautiful        6 ->   8     -2
+  eyes             2 ->   2     +0
+  smile           10 ->  19     -9
+  body             9 ->  17     -8
+  broad           12 ->  12     +0
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  handsome         8 ->   5     +3
+  strong          11 ->   7     +4
+  pale            19 ->   9    +10
+  breathing       22 ->  10    +12
+  chest            4 ->   4     +0
+  lips            18 ->  11     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  penis            3 ->  14    -11
+  erection         4 ->  13     -9
+  back             1 ->   2     -1
+  cock            10 ->  18     -8
+  huge            12 ->  23    -11
+
+HIGHER UNDER B
+  face             2 ->   1     +1
+  eyes             5 ->   3     +2
+  scars           11 ->   5     +6
+  scar            15 ->   9     +6
+  profile         99 ->  15    +84
+  entire          16 ->  12     +4
+  tattoos         14 ->  11     +3
+  bare            13 ->  10     +3
+  tattoo           6 ->   4     +2
+  body             7 ->   6     +1
+  chest            9 ->   8     +1
+  erect            8 ->   7     +1
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  penis            4 ->  44    -40
+  back             2 ->   4     -2
+  erection         7 ->  84    -77
+  tattoo           5 ->  10     -5
+  body             6 ->  12     -6
+  naked            9 ->  19    -10
+  cock            12 ->  68    -56
+  left            14 ->  29    -15
+  whole           13 ->  25    -12
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  profile         15 ->   3    +12
+  eyes             3 ->   2     +1
+  chest           11 ->   5     +6
+  handsome        43 ->   8    +35
+  beautiful       10 ->   6     +4
+  smile           32 ->   9    +23
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  penis            1 ->  50    -49
+  erect            2 -> 131   -129
+  dick             3 -> 150   -147
+  erection         4 -> 140   -136
+  genitals         5 -> 118   -113
+  breasts          6 -> 120   -114
+  cock             9 -> 138   -129
+  naked           10 ->  37    -27
+  bare            12 ->  76    -64
+  testicles       14 -> 139   -125
+  balls           16 -> 173   -157
+  heart           13 ->  75    -62
+  private         18 -> 155   -137
+  chest           17 ->  35    -18
+
+HIGHER UNDER B
+  face             7 ->   1     +6
+  eyes             8 ->   2     +6
+  hands           19 ->   3    +16
+  hand            28 ->   4    +24
+  smile          156 ->   5   +151
+  head            45 ->   6    +39
+  red             58 ->   9    +49
+  legs            29 ->  10    +19
+  body            11 ->   7     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  eyes             2 ->   2     +0
+  erection         5 -> 169   -164
+  body             4 ->   8     -4
+  reaction         6 ->  29    -23
+  chest            8 ->  47    -39
+  hand             7 ->  16     -9
+  lips             9 ->  32    -23
+  cock            14 -> 168   -154
+  reflection      11 ->  26    -15
+  hard            17 -> 161   -144
+  head            13 ->  33    -20
+  hands           10 ->  14     -4
+  erect           20 -> 158   -138
+  big             18 -> 104    -86
+  naked           16 ->  66    -50
+  mouth           19 ->  71    -52
+  expression       3 ->   3     +0
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  new            132 ->   5   +127
+  name           139 ->   7   +132
+  clothes        110 ->   6   +104
+  back            12 ->   4     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  cock             1 ->   6     -5
+  penis            2 ->  56    -54
+  dick             5 ->  45    -40
+  hard             7 ->  15     -8
+  huge            10 ->  19     -9
+  erect           12 ->  72    -60
+  big             11 ->  17     -6
+  ass             14 -> 113    -99
+  beautiful        9 ->  12     -3
+  semi            16 ->  27    -11
+  back             6 ->   7     -1
+
+HIGHER UNDER B
+  face             3 ->   1     +2
+  eyes             8 ->   2     +6
+  chest           15 ->   4    +11
+  body            13 ->   5     +8
+  muscles         60 ->   8    +52
+  naked           18 ->   9     +9
+  erection         4 ->   3     +1
+  smile           49 ->  10    +39
+  bare            31 ->  11    +20
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  penis            1 -> 102   -101
+  cock             4 -> 172   -168
+  back             6 ->  68    -62
+  eyes             3 ->   3     +0
+  erection         5 ->  24    -19
+  genitals         8 -> 158   -150
+  swollen          7 ->  19    -12
+  erect            9 -> 175   -166
+  legs            10 ->  25    -15
+  naked           12 ->  41    -29
+  feet            13 ->  31    -18
+  limp            14 ->  38    -24
+  bare            15 ->  20     -5
+
+HIGHER UNDER B
+  bruised         50 ->   2    +48
+  face             2 ->   1     +1
+  bruises        128 ->   4   +124
+  scars          156 ->   6   +150
+  expression      49 ->   5    +44
+  breathing      118 ->   8   +110
+  smile           45 ->   9    +36
+  hairy           35 ->  10    +25
+  hand            23 ->  11    +12
+  chest           11 ->   7     +4
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  penis            3 ->   6     -3
+  erection         4 ->  49    -45
+  cock             6 ->  18    -12
+  back             5 ->   9     -4
+  hard             7 ->  77    -70
+  buttocks         8 ->  42    -34
+  ass             10 ->  85    -75
+  limp            13 -> 108    -95
+  body            11 ->  36    -25
+  erect           15 -> 114    -99
+  hand            12 ->  29    -17
+  naked           14 ->  16     -2
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  expression      16 ->   3    +13
+  tattoo          19 ->   4    +15
+  eyes             2 ->   2     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  eyes             2 ->   3     -1
+  face             1 ->   1     +0
+  chest            4 ->   4     +0
+  naked            6 ->  31    -25
+  body             5 ->   8     -3
+  stomach         13 ->  53    -40
+  nipples         15 ->  87    -72
+  bare             7 ->  14     -7
+  erection        10 ->  23    -13
+  muscles         14 ->  46    -32
+  beautiful       11 ->  24    -13
+  cock             9 ->   9     +0
+
+HIGHER UNDER B
+  back             3 ->   2     +1
+  hard            53 ->   6    +47
+  butt            39 ->   7    +32
+  lips             8 ->   5     +3
+  big             35 ->  10    +25
+  huge            58 ->  15    +43
+  lower           54 ->  16    +38
+  tattoo          61 ->  17    +44
+  half            95 ->  19    +76
+  manhood        106 ->  20    +86
+  abs             29 ->  13    +16
+  expression      21 ->  11    +10
+  ass             23 ->  18     +5
+  skin            12 ->  12     +0
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  penis            3 ->  24    -21
+  back             2 ->   3     -1
+  dick             5 ->  16    -11
+  bare            10 ->  46    -36
+  naked            8 ->  27    -19
+  ass             11 ->  25    -14
+  body             7 ->   8     -1
+
+HIGHER UNDER B
+  boner           65 ->   7    +58
+  member          33 ->  10    +23
+  hard            18 ->   6    +12
+  bulge           37 ->  15    +22
+  hard-on         87 ->  20    +67
+  semi           113 ->  21    +92
+  erect           14 ->  11     +3
+  huge            15 ->  12     +3
+  beautiful       12 ->   9     +3
+  big             17 ->  14     +3
+  massive         29 ->  18    +11
+  limp            25 ->  17     +8
+  butt            13 ->  13     +0
+  muscles         26 ->  19     +7
+  cock             4 ->   2     +2
+  eyes             9 ->   5     +4
+  face             1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  erection         3 -> 116   -113
+  penis            6 -> 162   -156
+  naked            4 ->  24    -20
+  dick            11 -> 161   -150
+  cock            10 ->  29    -19
+  body             9 ->  23    -14
+  lower           16 ->  26    -10
+  bare            14 ->  19     -5
+  eyes             2 ->   3     -1
+
+HIGHER UNDER B
+  profile         19 ->   2    +17
+  sleeping        13 ->   5     +8
+  back             5 ->   4     +1
+  head            23 ->   9    +14
+  broad           56 ->  13    +43
+  lips            30 ->  10    +20
+  soft            55 ->  15    +40
+  sleepy         106 ->  17    +89
+  arm             25 ->  12    +13
+  hand            12 ->   8     +4
+  tired           32 ->  14    +18
+  chest            8 ->   7     +1
+  expression       7 ->   6     +1
+  handsome        15 ->  11     +4
+  pale            24 ->  16     +8
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  eyes             2 ->   2     +0
+  expression       3 ->   3     +0
+  hand             5 ->  11     -6
+  mouth           11 ->  31    -20
+  head             6 ->  15     -9
+  heart            8 ->  16     -8
+  smile            4 ->   6     -2
+  lips             9 ->  13     -4
+  dark             7 ->  10     -3
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  reflection      12 ->   4     +8
+  name            30 ->   7    +23
+  pale            13 ->   5     +8
+  beautiful       18 ->   9     +9
+  hands           10 ->   8     +2
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  eyes             5 ->   7     -2
+  cock            10 ->  24    -14
+  naked            3 ->   4     -1
+  erection         8 ->  15     -7
+  big             11 ->  19     -8
+  beautiful       14 ->  28    -14
+  member          17 ->  20     -3
+
+HIGHER UNDER B
+  penis            1 ->   1     +0
+  chest            4 ->   3     +1
+  face             2 ->   2     +0
+  firm            25 ->  13    +12
+  pale            36 ->  17    +19
+  bare             7 ->   6     +1
+  soft            16 ->   9     +7
+  arm             27 ->  18     +9
+  hairy           18 ->  12     +6
+  back             6 ->   5     +1
+  manhood         13 ->  10     +3
+  long            19 ->  16     +3
+  hard             9 ->   8     +1
+  erect           15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  tattoo           3 ->  11     -8
+  penis            4 ->  41    -37
+  chest            5 ->  20    -15
+  bare             6 ->   7     -1
+  muscular         8 ->  51    -43
+  body             9 ->  62    -53
+  eyes            10 ->  15     -5
+  right           11 ->  16     -5
+  left            13 ->  25    -12
+  shoulder        14 ->  17     -3
+  muscles         19 ->  95    -76
+  stomach         18 ->  27     -9
+  buttocks        20 ->  39    -19
+  big             21 ->  23     -2
+  scar            22 ->  33    -11
+  arms            23 ->  28     -5
+  tattoos         24 ->  73    -49
+  large           25 ->  40    -15
+
+HIGHER UNDER B
+  back             1 ->   1     +0
+  face             2 ->   2     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  eyes             1 ->   9     -8
+  penis            3 ->  10     -7
+  face             2 ->   2     +0
+  cock             4 ->  28    -24
+  back             5 ->  58    -53
+  expression       6 ->  32    -26
+  naked            9 ->  35    -26
+  bare            10 ->  53    -43
+  hand            11 ->  65    -54
+  chest            7 ->  24    -17
+  dick            12 ->  36    -24
+
+HIGHER UNDER B
+  member          37 ->   1    +36
+  manly          118 ->   3   +115
+  Member         124 ->   5   +119
+  erection         8 ->   4     +4
+  manhood         39 ->   6    +33
+  partially      115 ->   8   +107
+  hard            20 ->   7    +13
+  half            33 ->  11    +22
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  body             5 ->  10     -5
+  arm             11 ->  20     -9
+  legs            10 ->  15     -5
+  mouth           15 ->  22     -7
+  head             6 ->   6     +0
+  feet            14 ->  19     -5
+  arms             7 ->   8     -1
+
+HIGHER UNDER B
+  eyes             2 ->   2     +0
+  face             1 ->   1     +0
+  hands            3 ->   3     +0
+  gaze            61 ->  12    +49
+  dark            13 ->   9     +4
+  back             9 ->   7     +2
+  hand             4 ->   4     +0
+  smile           12 ->  11     +1
+  expression       8 ->   5     +3
+  pale            19 ->  13     +6
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  eyes             2 ->   3     -1
+  dick             5 ->   9     -4
+  penis            6 ->  10     -4
+  face             3 ->   4     -1
+  erection         4 ->   5     -1
+  naked            9 ->  19    -10
+  body            14 ->  32    -18
+  hand            10 ->  20    -10
+  limp            16 ->  23     -7
+  erect           15 ->  16     -1
+  huge            17 ->  17     +0
+
+HIGHER UNDER B
+  morning         12 ->   2    +10
+  back            11 ->   8     +3
+  chest            8 ->   7     +1
+  hard             7 ->   6     +1
+  profile         46 ->  11    +35
+  hairy           36 ->  14    +22
+  sleeping        20 ->  15     +5
+  manhood         19 ->  13     +6
+  big             13 ->  12     +1
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  back             2 ->   2     +0
+  hat              6 ->  20    -14
+  shirt            5 ->  11     -6
+  card             8 ->  18    -10
+  favorite        12 ->  22    -10
+  left             4 ->   7     -3
+  number          14 ->  30    -16
+  hand             3 ->   5     -2
+  original        19 ->  58    -39
+  name            10 ->  12     -2
+  heart           17 ->  24     -7
+  book            16 ->  19     -3
+  head             9 ->  10     -1
+
+HIGHER UNDER B
+  reflection       7 ->   3     +4
+  face             1 ->   1     +0
+  hands           11 ->   4     +7
+  underwear       21 ->   9    +12
+  eyes            13 ->   6     +7
+  feet            15 ->   8     +7
+  watch           31 ->  14    +17
+  socks           25 ->  13    +12
+  expression      24 ->  17     +7
+  true            20 ->  15     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  penis            2 ->  13    -11
+  dick             4 -> 135   -131
+  limp            10 ->  39    -29
+  face             3 ->   6     -3
+  huge            11 ->  33    -22
+  butt            15 ->  72    -57
+  ass              7 ->  10     -3
+  erect           13 ->  19     -6
+  massive         14 ->  20     -6
+  body            16 ->  18     -2
+  beautiful        6 ->   8     -2
+
+HIGHER UNDER B
+  erection         5 ->   2     +3
+  handsome        24 ->   4    +20
+  cock             1 ->   1     +0
+  hand            17 ->   5    +12
+  hard             8 ->   3     +5
+  boner           30 ->   9    +21
+  morning         40 ->  12    +28
+  rigid           70 ->  16    +54
+  semi            94 ->  17    +77
+  big              9 ->   7     +2
+  large           22 ->  14     +8
+  eyes            12 ->  11     +1
+  back            18 ->  15     +3
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  penis            3 ->   4     -1
+  legs            10 ->  42    -32
+  head             8 ->  28    -20
+  hand             5 ->  10     -5
+  back            12 ->  38    -26
+  big             13 ->  46    -33
+  naked            6 ->   6     +0
+  face             1 ->   2     -1
+
+HIGHER UNDER B
+  eyes             2 ->   1     +1
+  muscles         71 ->   5    +66
+  scars           28 ->   9    +19
+  skin            16 ->   8     +8
+  heart           55 ->  13    +42
+  expression      48 ->  14    +34
+  chest            9 ->   7     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  penis            1 ->   3     -2
+  back             5 ->  18    -13
+  face             4 ->   6     -2
+  scars            7 -> 105    -98
+  tattoo          12 ->  39    -27
+  genitals        10 ->  27    -17
+  butt            13 ->  36    -23
+  ass             15 ->  44    -29
+  right           17 ->  48    -31
+  bare             9 ->  13     -4
+  chest           18 ->  45    -27
+  dick             6 ->   7     -1
+  body            14 ->  20     -6
+
+HIGHER UNDER B
+  erection         3 ->   1     +2
+  cock             2 ->   2     +0
+  erect           11 ->   4     +7
+  hard             8 ->   5     +3
+  very            26 ->   9    +17
+  huge            16 ->   8     +8
+  semi            59 ->  11    +48
+  big             19 ->  10     +9
+  package         37 ->  12    +25
+  flaccid         57 ->  19    +38
+  small           47 ->  17    +30
+  full            31 ->  14    +17
+  manhood         25 ->  15    +10
+  large           34 ->  16    +18
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  back             8 ->  13     -5
+  erection         5 ->   7     -2
+  ass             12 ->  17     -5
+  face             3 ->   4     -1
+  butt            17 ->  22     -5
+  long            18 ->  21     -3
+  naked           14 ->  16     -2
+
+HIGHER UNDER B
+  huge             7 ->   6     +1
+  cock             1 ->   1     +0
+  hard             4 ->   3     +1
+  massive         10 ->   8     +2
+  big              9 ->   9     +0
+  large           24 ->  20     +4
+  thick           15 ->  12     +3
+  bare            23 ->  19     +4
+  enormous        20 ->  15     +5
+  beautiful       13 ->  11     +2
+  penis            2 ->   2     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  hand             8 ->   8     +0
+  back             5 ->   5     +0
+  bare             9 ->  10     -1
+  legs            15 ->  18     -3
+  hands           12 ->  13     -1
+
+HIGHER UNDER B
+  chest            3 ->   3     +0
+  penis            4 ->   4     +0
+  hard            16 ->  15     +1
+  eyes             2 ->   2     +0
+  cock             6 ->   6     +0
+  dick            14 ->  14     +0
+  beautiful       13 ->  12     +1
+  erection        11 ->  11     +0
+  body             7 ->   7     +0
+  naked           10 ->   9     +1
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  back             3 ->   7     -4
+  erection         6 ->  13     -7
+  cock             5 ->   9     -4
+  penis            7 ->  11     -4
+  body             8 ->   8     +0
+  member          16 ->  67    -51
+  muscles         11 ->  18     -7
+  hard            12 ->  20     -8
+  manhood         19 ->  61    -42
+  hand            18 ->  43    -25
+  beautiful        9 ->  10     -1
+  perfect         14 ->  24    -10
+  naked           13 ->  15     -2
+  long            17 ->  19     -2
+
+HIGHER UNDER B
+  eyes             1 ->   1     +0
+  face             2 ->   2     +0
+  profile         10 ->   4     +6
+  chest            4 ->   3     +1
+  expression      33 ->   6    +27
+  jaw             68 ->  12    +56
+  strong          20 ->   5    +15
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  hard             5 ->  10     -5
+  big              7 ->  30    -23
+  stiff           12 ->  29    -17
+  back            11 ->  27    -16
+  ass             10 ->  22    -12
+  erect           13 ->  18     -5
+  dark            18 ->  37    -19
+  swollen         15 ->  23     -8
+  penis            3 ->   4     -1
+  bare            20 ->  24     -4
+  cum             19 ->  21     -2
+  naked            9 ->  11     -2
+
+HIGHER UNDER B
+  face             2 ->   1     +1
+  blood           64 ->   9    +55
+  dick             6 ->   5     +1
+  pussy           65 ->  13    +52
+  sore            79 ->  16    +63
+  stomach         38 ->  12    +26
+  crotch          16 ->   7     +9
+  erection         8 ->   6     +2
+  body            14 ->   8     +6
+  long            22 ->  15     +7
+  eyes             4 ->   3     +1
+  hand            17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  eyes             2 ->   3     -1
+  face             1 ->   1     +0
+  cock            11 ->  31    -20
+  erection         6 ->   9     -3
+  penis           14 ->  24    -10
+  naked            5 ->   8     -3
+  hand            13 ->  22     -9
+  bare             4 ->   4     +0
+
+HIGHER UNDER B
+  back             3 ->   2     +1
+  tattoo          10 ->   7     +3
+  body             8 ->   5     +3
+  chest            7 ->   6     +1
+  side            24 ->  13    +11
+  beautiful       16 ->  12     +4
+  expression      12 ->  11     +1
+  arm             17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  penis            8 ->   8     +0
+  bare             7 ->   7     +0
+  chest            6 ->   6     +0
+  hand            10 ->  15     -5
+  back             3 ->   3     +0
+  dick            13 ->  18     -5
+  hands           11 ->  14     -3
+  ass             17 ->  20     -3
+  body             9 ->  10     -1
+  cock             4 ->   4     +0
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  handsome        25 ->  16     +9
+  expression      14 ->   9     +5
+  eyes             2 ->   2     +0
+  naked           16 ->  12     +4
+  erection         5 ->   5     +0
+  hard            15 ->  13     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  erection         2 ->   7     -5
+  dick             4 ->   9     -5
+  penis            3 ->   3     +0
+  erect            7 ->  20    -13
+  face             6 ->  11     -5
+  eyes             8 ->  24    -16
+  semi            11 ->  37    -26
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  hard             5 ->   2     +3
+  thick           15 ->   6     +9
+  big              9 ->   4     +5
+  huge            10 ->   5     +5
+  large           13 ->   8     +5
+  massive         20 ->  10    +10
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  eyes             2 ->   5     -3
+  face             1 ->   1     +0
+  expression      10 ->  37    -27
+  chest            9 ->  18     -9
+  smile           11 ->  27    -16
+  body             8 ->   9     -1
+
+HIGHER UNDER B
+  penis            4 ->   2     +2
+  erection         5 ->   4     +1
+  dick            16 ->   8     +8
+  back             7 ->   6     +1
+  cock             3 ->   3     +0
+  bare            12 ->  10     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  body             3 ->  14    -11
+  naked            5 ->  16    -11
+  penis            8 -> 128   -120
+  erection         9 -> 115   -106
+  eyes             6 ->   6     +0
+  belly           15 ->  59    -44
+  stomach         10 ->  28    -18
+  right           17 ->  46    -29
+  left            14 ->  36    -22
+  swollen         19 ->  42    -23
+  beautiful       18 ->  29    -11
+
+HIGHER UNDER B
+  back             2 ->   2     +0
+  face             1 ->   1     +0
+  chest            4 ->   3     +1
+  bare             7 ->   4     +3
+  tattoo          11 ->   5     +6
+  muscles         29 ->   9    +20
+  profile         54 ->  11    +43
+  shoulder        49 ->  13    +36
+  scar            32 ->  10    +22
+  arm             13 ->   7     +6
+  scars           12 ->   8     +4
+  skin            16 ->  12     +4
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  back             2 ->  30    -28
+  face             4 ->  24    -20
+  naked            3 ->   9     -6
+  body             5 ->  31    -26
+  tattoo           7 ->  53    -46
+  left            13 ->  87    -74
+  scar            14 ->  81    -67
+  chest            8 ->  20    -12
+  penisSolution   16 -> 159   -143
+  cock            12 ->  23    -11
+  right           19 -> 125   -106
+  bare             6 ->  12     -6
+  scars           17 ->  61    -44
+  hairy           18 ->  83    -65
+  dick            11 ->  13     -2
+
+HIGHER UNDER B
+  private         25 ->   2    +23
+  pubic           39 ->   4    +35
+  genitals        10 ->   3     +7
+  underwear       49 ->   5    +44
+  penis            1 ->   1     +0
+  privates       137 ->   8   +129
+  nipples         15 ->   7     +8
+  erection         9 ->   6     +3
+  nipple          54 ->  10    +44
+  junk           124 ->  15   +109
+  ass             22 ->  11    +11
+  shirt           37 ->  14    +23
+  belly           21 ->  16     +5
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  penis            2 ->   5     -3
+  dick             5 ->  11     -6
+  cock             1 ->   2     -1
+  huge             8 ->  12     -4
+  big              9 ->  18     -9
+  ass             10 ->  23    -13
+  long            14 ->  27    -13
+  semi            16 ->  25     -9
+  erect           11 ->  13     -2
+  large           18 ->  26     -8
+  beautiful       12 ->  17     -5
+  manhood         15 ->  19     -4
+  butt            17 ->  21     -4
+  massive         19 ->  20     -1
+
+HIGHER UNDER B
+  face             6 ->   1     +5
+  back             7 ->   4     +3
+  eyes            20 ->   7    +13
+  chest           23 ->   8    +15
+  bare            31 ->   9    +22
+  smile           78 ->  14    +64
+  erection         3 ->   3     +0
+  body            13 ->  10     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  back             3 ->   3     +0
+  tears            7 ->  23    -16
+  body             4 ->   5     -1
+  hand             6 ->   9     -3
+  beautiful       15 ->  20     -5
+  hands           13 ->  17     -4
+  arm             10 ->  14     -4
+  hair             9 ->  11     -2
+  expression       8 ->   8     +0
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  chest            5 ->   4     +1
+  profile         16 ->   6    +10
+  eyes             2 ->   2     +0
+  bare            11 ->   7     +4
+  head            12 ->  10     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  eyes             1 ->   5     -4
+  face             2 ->   4     -2
+  back             5 ->  53    -48
+  penis            6 ->  41    -35
+  erection         4 ->  11     -7
+  naked           10 ->  68    -58
+  body             8 ->  25    -17
+  hand             7 ->  12     -5
+  smile           13 ->  92    -79
+  handsome        12 ->  51    -39
+  hands           17 ->  43    -26
+  chest            9 ->  10     -1
+
+HIGHER UNDER B
+  cock             3 ->   1     +2
+  dick            14 ->   2    +12
+  bare            16 ->   3    +13
+  watch          108 ->   6   +102
+  feet            47 ->   8    +39
+  profile         30 ->   9    +21
+  hairline       112 ->  17    +95
+  bulge           41 ->  13    +28
+  member          65 ->  16    +49
+  tattoo          74 ->  18    +56
+  hard            11 ->   7     +4
+  smooth          73 ->  19    +54
+  left            19 ->  15     +4
+  long            26 ->  20     +6
+  legs            15 ->  14     +1
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  erection         1 ->  20    -19
+  eyes             5 ->  46    -41
+  dick             7 ->  45    -38
+  penis            2 ->   3     -1
+  hand            14 ->  71    -57
+  naked           11 ->  37    -26
+  bare            12 ->  19     -7
+  body            16 ->  22     -6
+  long            19 ->  24     -5
+
+HIGHER UNDER B
+  full            31 ->   7    +24
+  hard-on         44 ->   9    +35
+  beautiful        9 ->   6     +3
+  enormous        50 ->  11    +39
+  huge            15 ->   8     +7
+  cock             6 ->   4     +2
+  massive         32 ->  13    +19
+  manhood         28 ->  14    +14
+  semi            49 ->  16    +33
+  erect            4 ->   1     +3
+  bulge           18 ->  12     +6
+  big             10 ->  10     +0
+  boxers          38 ->  21    +17
+  flaccid         26 ->  18     +8
+  soft            55 ->  23    +32
+  hard             8 ->   5     +3
+  chest           17 ->  17     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  penis            4 ->  92    -88
+  naked            5 ->  45    -40
+  body             3 ->   4     -1
+  erect            7 -> 117   -110
+  back             6 ->  12     -6
+  erection         9 -> 139   -130
+  cock            12 ->  88    -76
+  legs            14 ->  26    -12
+  bare            15 ->  30    -15
+  mouth           16 ->  21     -5
+  chest           11 ->  11     +0
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  eyes             2 ->   2     +0
+  name            68 ->   8    +60
+  expression      30 ->   6    +24
+  smile           31 ->   9    +22
+  lips            13 ->   5     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  dick             6 ->  73    -67
+  naked            4 ->  20    -16
+  face             1 ->   1     +0
+  hands           11 -> 199   -188
+  eyes             7 ->  28    -21
+  bare             9 ->  24    -15
+  chest            5 ->  11     -6
+  back            12 ->  59    -47
+  hand            14 ->  92    -78
+  legs            16 ->  65    -49
+  genitals        10 ->  12     -2
+  penis            2 ->   2     +0
+  phone           17 ->  47    -30
+  body             3 ->   5     -2
+
+HIGHER UNDER B
+  erection         8 ->   3     +5
+  cock            13 ->   4     +9
+  erect           15 ->   6     +9
+  beautiful       40 ->   7    +33
+  bulge           31 ->   8    +23
+  bulging        186 ->  16   +170
+  hard            39 ->  10    +29
+  scar            68 ->  17    +51
+  scars           53 ->  15    +38
+  huge            21 ->   9    +12
+  tattoo          24 ->  14    +10
+  private         18 ->  13     +5
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  face             1 ->   7     -6
+  eyes             7 ->  87    -80
+  scars            9 ->  17     -8
+  name            11 ->  35    -24
+  body             4 ->  10     -6
+  feet            12 ->  15     -3
+  beautiful       16 ->  37    -21
+  legs            13 ->  16     -3
+  bruised         15 ->  27    -12
+
+HIGHER UNDER B
+  back             2 ->   1     +1
+  tattoo           3 ->   2     +1
+  tattoos          8 ->   3     +5
+  belly           18 ->   9     +9
+  chest            6 ->   4     +2
+  stomach         14 ->   6     +8
+  naked           10 ->   8     +2
+  bare             5 ->   5     +0
+  butt            88 ->  12    +76
+  backside        46 ->  11    +35
+  private         66 ->  13    +53
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  lips             4 ->  12     -8
+  mouth            7 ->  42    -35
+  cock             5 ->  14     -9
+  dark            11 ->  49    -38
+  big              8 ->  13     -5
+  body             9 ->  18     -9
+  naked           10 ->  17     -7
+  beautiful       12 ->  24    -12
+  black           14 ->  32    -18
+  huge            17 ->  41    -24
+  eyes             2 ->   2     +0
+  tongue          18 ->  37    -19
+  hands           20 ->  34    -14
+
+HIGHER UNDER B
+  chest           13 ->   4     +9
+  stomach         24 ->   6    +18
+  penis            3 ->   3     +0
+  impressive     180 ->  16   +164
+  dick             6 ->   5     +1
+  eye             27 ->   9    +18
+  arm             33 ->  15    +18
+  back            19 ->   8    +11
+  pants           43 ->  19    +24
+  muscles         39 ->  21    +18
+  skin            34 ->  20    +14
+  legs            21 ->  11    +10
+  expression      36 ->  22    +14
+  hand            15 ->   7     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  penis            1 ->   2     -1
+  genitals         3 ->   7     -4
+  private          6 ->  15     -9
+  right            7 ->  26    -19
+  back             4 ->   8     -4
+  body            10 ->  22    -12
+  dick            14 ->  65    -51
+  head             8 ->  11     -3
+
+HIGHER UNDER B
+  eyes             5 ->   1     +4
+  left             9 ->   4     +5
+  mouth           55 ->  14    +41
+  erection        12 ->   5     +7
+  eye             64 ->  17    +47
+  heart           24 ->  10    +14
+  testicles       11 ->   6     +5
+  pants           17 ->   9     +8
+  erect           23 ->  13    +10
+  hands           29 ->  16    +13
+  hand            13 ->  12     +1
+  stomach         18 ->  18     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  face             2 ->   2     +0
+  cock             3 ->   4     -1
+  erection         4 ->   5     -1
+  eyes             7 ->  17    -10
+  naked           12 ->  27    -15
+  chest            9 ->  12     -3
+  hand            14 ->  21     -7
+  erect           16 ->  20     -4
+  hard            10 ->  10     +0
+  legs            13 ->  14     -1
+
+HIGHER UNDER B
+  penis            1 ->   1     +0
+  back             5 ->   3     +2
+  butt            20 ->   9    +11
+  dick             6 ->   6     +0
+  genitals        18 ->  11     +7
+  right           11 ->   8     +3
+  stomach         19 ->  15     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  penis            1 ->  12    -11
+  cock             2 ->   8     -6
+  nipples          9 -> 127   -118
+  erection         3 ->   4     -1
+  hard             4 ->   5     -1
+  dick            10 ->  19     -9
+  huge            18 ->  36    -18
+  big             14 ->  21     -7
+  eyes            12 ->  15     -3
+  hand            19 ->  22     -3
+  ass             16 ->  16     +0
+
+HIGHER UNDER B
+  back             6 ->   1     +5
+  bare             8 ->   2     +6
+  full            41 ->   9    +32
+  profile        125 ->  11   +114
+  body            11 ->   7     +4
+  erect           13 ->  10     +3
+  chest           15 ->  13     +2
+  face             5 ->   3     +2
+  naked            7 ->   6     +1
+  scars           17 ->  14     +3
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  cock             1 ->   3     -2
+  dick             3 ->   6     -3
+  erection         6 ->  20    -14
+  eyes             5 ->  15    -10
+  balls           10 ->  41    -31
+  ass             15 ->  51    -36
+  back            13 ->  23    -10
+  hand             8 ->  11     -3
+  stiff           16 ->  22     -6
+  cum             17 ->  24     -7
+  hands           12 ->  14     -2
+
+HIGHER UNDER B
+  bulging         76 ->   7    +69
+  face             4 ->   2     +2
+  erect           11 ->   5     +6
+  hard-on         96 ->   8    +88
+  hard             7 ->   4     +3
+  big              9 ->   9     +0
+  huge            18 ->  10     +8
+  bare            27 ->  13    +14
+  semi-hard      111 ->  17    +94
+  limp            47 ->  16    +31
+  chest           14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

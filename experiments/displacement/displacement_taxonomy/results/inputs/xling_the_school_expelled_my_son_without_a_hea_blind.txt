@@ -1,0 +1,822 @@
+Below are 45 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: The school expelled my son without a hearing. I should ___
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  like             1 ->  30    -29
+  have             2 ->  40    -38
+  sue              4 ->  55    -51
+  think            5 ->  42    -37
+  not              6 ->  35    -29
+  know             7 ->  12     -5
+  get              9 ->  57    -48
+  also            10 ->  44    -34
+  say              8 ->  13     -5
+
+HIGHER UNDER B
+  strongly        66 ->   1    +65
+  first           37 ->   3    +34
+  note            26 ->   4    +22
+  be               3 ->   2     +1
+  contact         48 ->   5    +43
+  start           46 ->   6    +40
+  begin           69 ->   7    +62
+  advise          60 ->   8    +52
+  point           33 ->   9    +24
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  file             2 ->  19    -17
+  take             3 ->  16    -13
+  be               1 ->   3     -2
+  bring            5 ->  30    -25
+  most             7 ->  38    -31
+
+HIGHER UNDER B
+  have             4 ->   1     +3
+  like            28 ->   2    +26
+  know            23 ->   4    +19
+  get              8 ->   5     +3
+  not              6 ->   6     +0
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  not              3 ->   6     -3
+  nt               4 ->  14    -10
+  never            6 ->  22    -16
+  know             5 ->   9     -4
+  say              8 ->  25    -17
+  like             9 ->  23    -14
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  have             1 ->   1     +0
+  get              7 ->   3     +4
+  file            17 ->   4    +13
+  at              19 ->   5    +14
+  receive         18 ->   7    +11
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  be               3 ->   3     +0
+  not              2 ->   2     +0
+  like             5 ->   6     -1
+  never            6 ->   7     -1
+  say              8 ->  14     -6
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  know             4 ->   4     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              3 ->   7     -4
+  never            5 ->   9     -4
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  appeal           7 ->   3     +4
+  file            12 ->   6     +6
+  know             4 ->   4     +0
+  go              10 ->   8     +2
+  get              6 ->   5     +1
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  not              2 ->   4     -2
+  never            4 ->  29    -25
+  be               3 ->   3     +0
+  say              7 ->  32    -25
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  file            18 ->   2    +16
+  sue              6 ->   5     +1
+  go              19 ->   7    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  know             6 ->  12     -6
+  not              3 ->   3     +0
+  sue              5 ->   6     -1
+
+HIGHER UNDER B
+  appeal           9 ->   5     +4
+  file            13 ->   7     +6
+  do              17 ->   9     +8
+  take            10 ->   8     +2
+  be               2 ->   2     +0
+  get              4 ->   4     +0
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  sue              3 ->   5     -2
+  have             1 ->   1     +0
+  never            9 ->  24    -15
+  go              12 ->  19     -7
+  appeal          11 ->  18     -7
+  file             7 ->   9     -2
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  get              5 ->   4     +1
+  seek            15 ->   8     +7
+  speak           21 ->  10    +11
+  know             6 ->   6     +0
+  not              4 ->   3     +1
+  receive         28 ->  14    +14
+  see             19 ->  13     +6
+  talk             8 ->   7     +1
+  contact         14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  n                3 ->   4     -1
+  be               2 ->   2     +0
+  never            6 ->  12     -6
+
+HIGHER UNDER B
+  not              4 ->   3     +1
+  get              9 ->   6     +3
+  receive         39 ->   8    +31
+  say             12 ->   7     +5
+  I               30 ->  10    +20
+  go              14 ->   9     +5
+  contact         34 ->  11    +23
+  know             5 ->   5     +0
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  never            4 ->   8     -4
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  not              3 ->   3     +0
+  say             23 ->   6    +17
+  also             6 ->   5     +1
+  know             5 ->   4     +1
+  feel             8 ->   7     +1
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  add              5 ->  25    -20
+  sue              6 ->  12     -6
+  say              7 ->  13     -6
+  mention          8 ->  37    -29
+  note            10 ->  33    -23
+  not              2 ->   3     -1
+  have             1 ->   1     +0
+
+HIGHER UNDER B
+  be               3 ->   2     +1
+  know             4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  add              3 ->  28    -25
+  like             2 ->   5     -3
+  say              4 ->  16    -12
+  also             6 ->  11     -5
+  note             8 ->   9     -1
+  mention         10 ->  13     -3
+  point           11 ->  19     -8
+  never            9 ->  10     -1
+  think           12 ->  17     -5
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  be               7 ->   2     +5
+  know            13 ->   3    +10
+  sue             20 ->   6    +14
+  file            33 ->   7    +26
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  add              3 ->  36    -33
+  not              4 ->   8     -4
+  say              5 ->  10     -5
+  mention          6 ->  31    -25
+  note             7 ->  40    -33
+  know             8 ->  18    -10
+  point           10 ->  42    -32
+  also            11 ->  16     -5
+  think           12 ->  41    -29
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  sue              9 ->   3     +6
+  be               2 ->   2     +0
+  take            26 ->   4    +22
+  go              18 ->   5    +13
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  have             1 ->  29    -28
+  be               2 ->  58    -56
+  not              3 ->  23    -20
+  get              6 ->  28    -22
+  like             9 ->  82    -73
+  know             7 ->  26    -19
+  report          10 ->  48    -38
+
+HIGHER UNDER B
+  file             8 ->   1     +7
+  write           40 ->   3    +37
+  challenge       59 ->   5    +54
+  sue              4 ->   2     +2
+  appeal           5 ->   4     +1
+  call            11 ->   6     +5
+  what            72 ->   7    +65
+  contest         68 ->   8    +60
+  seek            34 ->   9    +25
+  demand          48 ->  10    +38
+  request         61 ->  13    +48
+  ask             38 ->  11    +27
+  consult         58 ->  15    +43
+  contact         22 ->  12    +10
+  consider        35 ->  14    +21
+  question        63 ->  20    +43
+  complain        33 ->  18    +15
+  hire            41 ->  19    +22
+  fight           17 ->  17     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  have             1 ->   5     -4
+  not              5 ->  19    -14
+  know             9 ->  20    -11
+  fight           10 ->  29    -19
+  say             12 ->  65    -53
+  still           14 ->  41    -27
+  appeal           4 ->   9     -5
+
+HIGHER UNDER B
+  file             6 ->   3     +3
+  take             7 ->   4     +3
+  be               3 ->   2     +1
+  do              11 ->   6     +5
+  probably        16 ->   8     +8
+  send            23 ->  11    +12
+  get              8 ->   7     +1
+  go              13 ->  10     +3
+  hire            22 ->  12    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  have             2 ->   3     -1
+  be               3 ->   4     -1
+  sue              1 ->   1     +0
+  know             6 ->  25    -19
+  not              4 ->  10     -6
+
+HIGHER UNDER B
+  file             8 ->   2     +6
+  I               22 ->   6    +16
+  go              11 ->   7     +4
+  contact         30 ->   8    +22
+  call            14 ->   9     +5
+  take            13 ->  12     +1
+  get              5 ->   5     +0
+  hire            26 ->  15    +11
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  never            4 ->   5     -1
+  like             6 ->  33    -27
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  not              3 ->   3     +0
+  ask              8 ->   6     +2
+  get              9 ->   7     +2
+  know             5 ->   4     +1
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  sue              3 ->   4     -1
+  ____             6 ->   8     -2
+  take             5 ->   5     +0
+  seek             9 ->  10     -1
+  hire            11 ->  13     -2
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  file             4 ->   3     +1
+  be               2 ->   2     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  have             1 ->   3     -2
+  sue              3 ->   9     -6
+  be               2 ->   2     +0
+  not              6 ->  16    -10
+  appeal           7 ->  27    -20
+
+HIGHER UNDER B
+  file             4 ->   1     +3
+  call             9 ->   4     +5
+  contact         12 ->   6     +6
+  probably         8 ->   5     +3
+  check           47 ->   8    +39
+  talk            19 ->  10     +9
+  write           23 ->  11    +12
+  start           13 ->  12     +1
+  take            17 ->  13     +4
+  do              14 ->  14     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  be               2 ->   4     -2
+  not              3 ->   7     -4
+  never            4 ->  13     -9
+  know             5 ->  11     -6
+  sue              6 ->   8     -2
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  at               8 ->   2     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              3 ->   4     -1
+  never            5 ->   6     -1
+
+HIGHER UNDER B
+  know             4 ->   2     +2
+  speak           10 ->   5     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  sue              3 ->   3     +0
+  get              4 ->   4     +0
+  not              5 ->   5     +0
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  file             7 ->   6     +1
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  add              4 ->  12     -8
+  mention          5 ->   7     -2
+  not              3 ->   3     +0
+  point            9 ->  51    -42
+  note             7 ->  21    -14
+  say              8 ->  10     -2
+  be               2 ->   2     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  sue             12 ->   6     +6
+  know            10 ->   4     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  be               3 ->   3     +0
+  know             5 ->   5     +0
+  not              2 ->   2     +0
+  never            6 ->   6     +0
+  like             7 ->  21    -14
+  sue              4 ->   4     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  also             4 ->   8     -4
+  add              8 ->  20    -12
+  say             10 ->  18     -8
+  never           11 ->  14     -3
+  note            12 ->  16     -4
+  of               9 ->  12     -3
+  get              7 ->   9     -2
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  sue              5 ->   4     +1
+  know             6 ->   5     +1
+  like            22 ->   6    +16
+  file            18 ->  10     +8
+  think           15 ->   7     +8
+  not              3 ->   3     +0
+  receive         16 ->  11     +5
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              4 ->   5     -1
+  know             9 ->  13     -4
+  still           14 ->  18     -4
+
+HIGHER UNDER B
+  sue              3 ->   2     +1
+  file             6 ->   6     +0
+  take            11 ->   8     +3
+  talk            15 ->  14     +1
+  hire             7 ->   7     +0
+  fight           10 ->  10     +0
+  call            13 ->  11     +2
+  get              5 ->   4     +1
+  do              16 ->  15     +1
+  contact         17 ->  16     +1
+  just            12 ->  12     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  sue              4 ->   4     +0
+  not              3 ->   3     +0
+  like             6 ->   6     +0
+  be               2 ->   2     +0
+  never            5 ->   5     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              3 ->   7     -4
+  sue              4 ->  14    -10
+  know             6 ->  15     -9
+  get              5 ->   6     -1
+  go               8 ->  16     -8
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  file             7 ->   3     +4
+  appeal          14 ->   4    +10
+  talk            17 ->   5    +12
+  contact         24 ->   8    +16
+  fight           12 ->   9     +3
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  n't              3 ->   8     -5
+  be               2 ->   3     -1
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  not              4 ->   2     +2
+  of              13 ->   5     +8
+  get              6 ->   6     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  be               2 ->   3     -1
+  also             9 ->  11     -2
+  add              4 ->   5     -1
+  point            8 ->  10     -2
+  never            7 ->   8     -1
+
+HIGHER UNDER B
+  like             6 ->   4     +2
+  note            10 ->   7     +3
+  know            11 ->   9     +2
+  not              3 ->   2     +1
+  mention         12 ->  12     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  sue             10 ->  12     -2
+  never            9 ->  10     -1
+  like            12 ->  13     -1
+  add              6 ->   7     -1
+
+HIGHER UNDER B
+  note             5 ->   4     +1
+  be               2 ->   2     +0
+  also             8 ->   5     +3
+  not              3 ->   3     +0
+  point           13 ->   9     +4
+  know            11 ->  11     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  be               2 ->   2     +0
+  get              5 ->   5     +0
+  know             6 ->   6     +0
+
+HIGHER UNDER B
+  sue              3 ->   3     +0
+  nt              43 ->  10    +33
+  take            21 ->   9    +12
+  move            51 ->  14    +37
+  write           35 ->  13    +22
+  call            18 ->  11     +7
+  I               19 ->  15     +4
+  fight            8 ->   8     +0
+  file             7 ->   7     +0
+  not              4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  sue              1 ->   2     -1
+  get              4 ->   4     +0
+
+HIGHER UNDER B
+  be               3 ->   3     +0
+  take             6 ->   5     +1
+  talk            12 ->   8     +4
+  file             7 ->   7     +0
+  contact         16 ->  12     +4
+  also            14 ->  11     +3
+  appeal          10 ->  10     +0
+  hire            13 ->  13     +0
+  have             2 ->   1     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  have             1 ->   2     -1
+  of               6 ->  68    -62
+  not              2 ->   9     -7
+  add              8 ->  40    -32
+  say              7 ->  28    -21
+  mention          4 ->  12     -8
+
+HIGHER UNDER B
+  consult         59 ->   1    +58
+  sue             10 ->   5     +5
+  know             5 ->   4     +1
+  be               3 ->   3     +0
+  fight           46 ->   6    +40
+  seek            54 ->   7    +47
+  take            23 ->  10    +13
+  get             13 ->   8     +5
+  contact         45 ->  13    +32
+  file            15 ->  11     +4
+  challenge       58 ->  16    +42
+  hire            33 ->  15    +18
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  sue              3 ->   4     -1
+  like             7 ->  11     -4
+  get              6 ->   9     -3
+  know             5 ->   5     +0
+
+HIGHER UNDER B
+  not              4 ->   3     +1
+  be               2 ->   2     +0
+  have             1 ->   1     +0
+  note            28 ->   8    +20
+  file             9 ->   6     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  never            7 ->  17    -10
+  appeal           6 ->   9     -3
+  not              4 ->   6     -2
+  go               9 ->  10     -1
+
+HIGHER UNDER B
+  sue              3 ->   3     +0
+  be               2 ->   2     +0
+  file             8 ->   5     +3
+  get              5 ->   4     +1
+  fight           10 ->   7     +3
+  take            12 ->   8     +4
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  also             8 ->  16     -8
+  get              5 ->   6     -1
+  say              9 ->   9     +0
+
+HIGHER UNDER B
+  sue              7 ->   5     +2
+  know             3 ->   3     +0
+  not              4 ->   4     +0
+  be               2 ->   2     +0
+  never           10 ->   8     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  have             1 ->   2     -1
+  know             4 ->  28    -24
+  like             6 ->  29    -23
+  never            5 ->   9     -4
+  say              7 ->   8     -1
+  point            9 ->  20    -11
+  sue             11 ->  37    -26
+  also             8 ->  10     -2
+  not              3 ->   3     +0
+
+HIGHER UNDER B
+  be               2 ->   1     +1
+  tell            12 ->   4     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  know             4 ->  11     -7
+  not              3 ->   6     -3
+  never            6 ->  24    -18
+
+HIGHER UNDER B
+  appeal          13 ->   3    +10
+  get              7 ->   4     +3
+  sue              5 ->   5     +0
+  file            16 ->   7     +9
+  fight           27 ->   8    +19
+  hire            15 ->   9     +6
+  demand          21 ->  10    +11
+  be               2 ->   2     +0
+  talk            25 ->  12    +13
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  get              3 ->   4     -1
+  n't              4 ->   6     -2
+
+HIGHER UNDER B
+  be               2 ->   2     +0
+  appeal           6 ->   3     +3
+  file             8 ->   5     +3
+  do              13 ->  10     +3
+  contact         18 ->  11     +7
+  go               9 ->   9     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  not              3 ->   4     -1
+  have             1 ->   1     +0
+  get              4 ->   6     -2
+  appeal           7 ->   7     +0
+
+HIGHER UNDER B
+  sue              5 ->   3     +2
+  be               2 ->   2     +0
+  know             6 ->   5     +1
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  have             1 ->   1     +0
+  not              4 ->   7     -3
+
+HIGHER UNDER B
+  sue              3 ->   2     +1
+  file             7 ->   6     +1
+  get              6 ->   5     +1
+  know             5 ->   4     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  of               4 ->  15    -11
+  note             8 ->  29    -21
+  add              9 ->  32    -23
+  know             6 ->  14     -8
+  say             11 ->  30    -19
+  also             7 ->  10     -3
+  sue              5 ->   6     -1
+  get             10 ->  11     -1
+  not              3 ->   3     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  file            12 ->   4     +8
+  be               2 ->   2     +0
+  contact         26 ->   7    +19
+  appeal          16 ->   5    +11
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  not              3 ->   3     +0
+  get              6 ->   7     -1
+  be               2 ->   2     +0
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+  sue              5 ->   4     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  not              2 ->   2     +0
+  be               3 ->   4     -1
+  sue              4 ->  12     -8
+  say              5 ->  11     -6
+  know             6 ->   6     +0
+  like             7 ->  29    -22
+
+HIGHER UNDER B
+  have             1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 45 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

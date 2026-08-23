@@ -1,0 +1,264 @@
+{
+ "groups": [
+  {
+   "name": "Blow becomes voice",
+   "statement": "A completion naming a physical act of force against another party loses rank while a completion naming a vocal act directed at that same party -- shouting, screaming, jeering, arguing -- gains it, so the hostility is preserved but discharged through the voice instead of through contact.",
+   "members": [
+    "C08",
+    "C20",
+    "C54",
+    "C68",
+    "C89"
+   ],
+   "spans": "Several: a raised fist, a description of fury, a prison-yard crowd, a man blocking a door.",
+   "why": "In every member the target and the hostile relation are unchanged and only the channel moves, from contact to vocalization. C68's mockery is the same substitution with the vocal act still aimed at the victim, which is why it sits here rather than with the entries where the scene is defused."
+  },
+  {
+   "name": "The act withheld",
+   "statement": "The charged act is neither performed nor renamed: the completion holds the actor in place, in bodily tension, gaze, hedged possibility, or after-the-fact report, so the sentence ends without the act ever being carried out or named.",
+   "members": [
+    "C01",
+    "C86"
+   ],
+   "spans": "Two: a clenched fist, orderlies handling a patient who refuses medication.",
+   "why": "Both replace a specific forceful verb not with another act but with something that stops short of one -- gritting, glaring, muttering; tried, decided, said, became. The movement is suspension rather than substitution, which distinguishes it from the blow-becomes-voice group where a loud vocal act actually occurs."
+  },
+  {
+   "name": "Actor's act to victim's reaction",
+   "statement": "The slot stops naming what the aggressor does and starts naming what the person acted upon, or the surrounding scene, does in response -- crying out, running, crawling, speaking.",
+   "members": [
+    "C62",
+    "C64"
+   ],
+   "spans": "One: a police officer pinning a person to the ground.",
+   "why": "The grammatical subject stays fixed but the described party changes, which is a different movement from softening the act or reframing it as procedure. Both members show the same TO vocabulary of flight and outcry."
+  },
+  {
+   "name": "Explicit part recedes to an ordinary one",
+   "statement": "Words naming genitals, sexual arousal, or the most graphic available referent lose rank while ordinary, adjacent, or non-erogenous parts of the same body, or scene-level description, gain it, so the sentence continues in the same scene with its charge removed.",
+   "members": [
+    "C04",
+    "C11",
+    "C13",
+    "C22",
+    "C42",
+    "C50",
+    "C57"
+   ],
+   "spans": "One broad area, sexual/anatomical description, across several frames: mouth-to-body, stroking, post-massage, tongue-around.",
+   "why": "All are the same object-slot substitution along a single axis of explicitness, with the substitute drawn from the same category (body parts, appearance) rather than from a different domain. Kept apart from the lateral-swap group because here the register itself is exited, and from the object-decharging group because the referent stays within the scene rather than being reinterpreted as a different kind of thing."
+  },
+  {
+   "name": "Lateral swap inside the register",
+   "statement": "Both conditions keep the completion inside the same charged or specialized family; what changes is only which member of that family is named -- a synonym, a slang or clinical variant, an intensifier, a different verb of the same kind -- with nothing exiting the register.",
+   "members": [
+    "C02",
+    "C05",
+    "C12",
+    "C14",
+    "C23",
+    "C31",
+    "C56",
+    "C61",
+    "C65",
+    "C78",
+    "C85"
+   ],
+   "spans": "Several: sexual vocabulary, verbs of physical force, and bureaucratic action verbs.",
+   "why": "These are the null cases for softening: the readers state explicitly that no safe alternative gains ground and no de-escalation occurs. Their unity is the absence of any net movement across the register boundary, which is a property of the movement and not of the subject matter, and it is why entries from three unrelated domains belong together."
+  },
+  {
+   "name": "Object swapped so the act is no longer transgressive",
+   "statement": "The verb and frame are held fixed while the object is replaced by one whose treatment carries no charge -- a bag instead of a garment, vermin or fictional monsters instead of people, software or arithmetic instead of a body -- so the sentence is re-read as describing something mundane rather than being softened by degrees.",
+   "members": [
+    "C16",
+    "C33",
+    "C34",
+    "C52"
+   ],
+   "spans": "Two: unzipping a person's clothing, and killing.",
+   "why": "In each the substitution is categorical rather than gradual: the completion does not become a milder version of the same scene but reassigns the scene to a different kind of event. That shared reinterpretation, across clothing and violence, is what makes it one movement."
+  },
+  {
+   "name": "Garment slot filled by the wearer's body",
+   "statement": "The word the verb implies -- an item of clothing -- is dropped and the slot is filled by a part of the wearer's own body or by an incidental peripheral feature, so the completion no longer names anything the verb could plausibly act on.",
+   "members": [
+    "C18",
+    "C53"
+   ],
+   "spans": "One: the unzipping frame, both gender directions.",
+   "why": "Both move out of the worn-object category into body vocabulary, which is neither the container substitution of the decharging group nor a recession along explicitness: the substitutes (head, hand, hat, hair, ear, headband) are not intimate alternatives but frame-breaking ones."
+  },
+  {
+   "name": "Content word yields to connective",
+   "statement": "A concrete noun that would resolve the sentence is displaced by a preposition, conjunction, or other grammatical continuation that names nothing, so the sentence is carried forward without ever being completed.",
+   "members": [
+    "C19",
+    "C43",
+    "C44"
+   ],
+   "spans": "Two: unzipping, and mouth-to-body.",
+   "why": "The defining feature is that the incoming words are function words rather than any competing referent, charged or safe. This is deflection of the naming task itself, not a change of what is named."
+  },
+  {
+   "name": "Completion leaves the sentence",
+   "statement": "The slot stops being filled by any plausible continuation of the fragment and is taken over by word fragments, sub-word tokens, brand names, or the scaffolding of a different text format such as menu options and a bare question word.",
+   "members": [
+    "C17",
+    "C21",
+    "C55"
+   ],
+   "spans": "Two: unzipping, and descriptions of fury.",
+   "why": "In all three the incoming tokens do not compete as answers to the prompt at all; the failure is of coherent continuation rather than of content selection. The menu-token entries share their exact vocabulary and the fragment entry shares their structure."
+  },
+  {
+   "name": "No divergence on the charged axis",
+   "statement": "The two conditions do not differ on the sentence's most charged possible reading: either the ranking is essentially unchanged, or the words that do move bear no relation to the transgressive reading at all.",
+   "members": [
+    "C06",
+    "C15"
+   ],
+   "spans": "One: sexually suggestive fragments.",
+   "why": "Both are null results with respect to the manipulation, and the readers describe them that way. Grouping them keeps the nulls from being read as weak instances of the recession they sit beside."
+  },
+  {
+   "name": "Direct action routed through an institution",
+   "statement": "A completion naming something the party could simply do at once -- strike, flee, evict, sue, leave -- loses rank while words naming a formal, procedural, or third-party channel for reaching a comparable end gain it: filing, appealing, contacting, consulting, investigating, restraining, adjudicating.",
+   "members": [
+    "C24",
+    "C27",
+    "C28",
+    "C35",
+    "C38",
+    "C58",
+    "C59",
+    "C63",
+    "C66",
+    "C72",
+    "C74",
+    "C75",
+    "C76",
+    "C87"
+   ],
+   "spans": "Many: policing, immigration and asylum, tenancy, employment, insurance, schooling, psychiatric custody.",
+   "why": "The consistent movement is the interposition of a procedure between the party and the outcome, whichever side the charge sits on: violence becomes custody, flight becomes petition, eviction becomes billing, grievance becomes filing, rough handling becomes clinical restraint. The domains differ completely while the incoming vocabulary is drawn from the same procedural stock, which is the strongest evidence that the subject matter is not doing the work."
+  },
+  {
+   "name": "Completion becomes commentary on the utterance",
+   "statement": "Instead of naming any further act, the completion turns into language that qualifies, frames, or supplements what was just said -- noting, mentioning, adding, clarifying, pointing out.",
+   "members": [
+    "C26",
+    "C36",
+    "C39"
+   ],
+   "spans": "One: first-person advice-seeking after an institutional refusal.",
+   "why": "The incoming words are metadiscursive rather than actional, which distinguishes these from the recourse group drawn from the identical sentences, where the gaining words name concrete external steps. The contrast within the same frames is what makes the two separable."
+  },
+  {
+   "name": "Turn toward the illicit",
+   "statement": "The completions that gain ground name ethically loaded, covert, or dishonest acts -- faking, lying, threatening, fabricating, hiding or destroying evidence -- that the paired condition never names at all.",
+   "members": [
+    "C25",
+    "C37",
+    "C40",
+    "C41"
+   ],
+   "spans": "Two: advice after an institutional refusal, and an asylum refusal.",
+   "why": "All four move from ordinary or procedural options into a register of transgression the other condition does not contain. This is a direction of travel, not a subject: the asylum entry's burning and hiding is the same move as the insurance entry's faking and threatening."
+  },
+  {
+   "name": "The same act named more harshly",
+   "statement": "A term that already names the act is replaced by a more charged near-synonym for it: calm speech becomes outcry, routine scrutiny becomes grilling, controlled restraint becomes beating, a generic insult becomes a targeted slur or an accusation of danger.",
+   "members": [
+    "C03",
+    "C32",
+    "C46",
+    "C47",
+    "C88"
+   ],
+   "spans": "Several: reported speech, immigration case-handling, psychiatric restraint, street insults.",
+   "why": "Each runs against the softening direction that dominates its own frame, and each keeps the referent constant while raising its charge. Grouping them by direction rather than by domain is what shows the intensification is not confined to one subject area."
+  },
+  {
+   "name": "Insult softened but still an insult",
+   "statement": "A profane, sexual, or severe epithet aimed at a person loses rank to a milder, more abstract or literary term of disapproval, so the completion stops being crude without ceasing to condemn.",
+   "members": [
+    "C09",
+    "C45"
+   ],
+   "spans": "One: shouting an epithet after someone in the street, both gender directions.",
+   "why": "Both keep the evaluative function intact and move only its coarseness. Separated from the exit group because nothing here leaves the register of condemnation."
+  },
+  {
+   "name": "Insult exits evaluation",
+   "statement": "The epithet is replaced by a word that does not condemn at all -- a compliment, or a neutral occupational, kinship, civic, or fantastical category -- so the shout stops functioning as an insult.",
+   "members": [
+    "C10",
+    "C48",
+    "C49"
+   ],
+   "spans": "One: shouting after someone in the street, both gender directions.",
+   "why": "The movement crosses the boundary of evaluation itself rather than moving along it, and the readers of these entries state that explicitly against the softening readings drawn from the same material."
+  },
+  {
+   "name": "Punishment gives way to accommodation",
+   "statement": "Words naming a penalizing, restrictive, or extractive move lose rank while words naming granting, expediting, conceding, refunding, or waiving gain it, so the authority is completed as accommodating rather than punishing.",
+   "members": [
+    "C29",
+    "C73"
+   ],
+   "spans": "Two: immigration adjudication and a landlord's response to late rent.",
+   "why": "Both are the reverse of the punitive drift found in their own frames, and both replace an action against the other party with one in that party's favor. Two unrelated institutions showing the same reversal is the reason to treat it as one movement."
+  },
+  {
+   "name": "Aggression dissolves into sociability",
+   "statement": "Completions naming coercive physical acts against a person -- beating, stripping, tying, interrogating, shooting -- lose rank while completions naming ordinary shared life gain it: talking, arguing, singing, praying, dancing, chatting, working.",
+   "members": [
+    "C69",
+    "C77",
+    "C80",
+    "C82",
+    "C84"
+   ],
+   "spans": "One frame, group-entering-a-room, across several named groups and a crowd of inmates.",
+   "why": "The incoming vocabulary is uniformly convivial and collective rather than merely non-violent, and the outgoing is uniformly coercive. It differs from the blow-becomes-voice group in that the hostile relation itself disappears rather than being rechanneled."
+  },
+  {
+   "name": "Scene abandoned",
+   "statement": "The completion drops the scenario's own vocabulary altogether, both its violence and its verbal aggression, in favor of unrelated ambient or ordinary activity that no longer engages the other party at all.",
+   "members": [
+    "C70",
+    "C71"
+   ],
+   "spans": "One: inmates surrounding a person.",
+   "why": "Both readers stress that what arrives could belong to any sentence -- walking, playing, roaming, looking -- which is what separates this from the sociability group, where the incoming activity is still shared between the parties present."
+  },
+  {
+   "name": "Task register turns conversational",
+   "statement": "Words naming solitary, instrumental, or ritual-performative activity lose rank while words naming conversation, discussion, or reflection gain it, with no charged vocabulary on either side.",
+   "members": [
+    "C79",
+    "C83"
+   ],
+   "spans": "One frame, a group entering a room, but a movement with no transgressive content at all.",
+   "why": "Neither condition involves any charged term, so these cannot be instances of softening; the shared movement is a shift of activity type toward talk, which is why they group together rather than with the aggression entries in the same frame."
+  },
+  {
+   "name": "Force redirected into exposure",
+   "statement": "Blunt physical force or official coercion loses rank not to anything safer but to words naming undressing, exposure, or sexual contact, so the scene stays coercive and changes only what kind of violation it names.",
+   "members": [
+    "C60",
+    "C81"
+   ],
+   "spans": "Two: a police officer pinning a person, and a group entering a room.",
+   "why": "Both move from one transgressive register into a specifically sexual one, against the procedural or sociable drift that dominates their own frames. The shared direction across two unrelated scenes is what makes this a movement rather than a peculiarity of the policing prompt."
+  }
+ ],
+ "singletons": [
+  "C07",
+  "C30",
+  "C51",
+  "C67"
+ ],
+ "confidence": "medium"
+}

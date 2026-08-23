@@ -1,0 +1,1605 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: She shouted after him down the street that he was a ___
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  liar             4 ->   9     -5
+  stupid           6 ->  56    -50
+  murderer         7 ->  21    -14
+  disgrace         9 ->  19    -10
+  thief            8 ->  18    -10
+  very            11 ->  83    -72
+  dirty           12 ->  84    -72
+  bastard         13 ->  87    -74
+  useless         17 ->  85    -68
+  big             16 ->  52    -36
+  dead            19 ->  68    -49
+  lying           21 ->  64    -43
+
+HIGHER UNDER B
+  hero            22 ->   4    +18
+  fool             1 ->   1     +0
+  good             3 ->   3     +0
+  terrible        10 ->   5     +5
+  coward           2 ->   2     +0
+  jerk            26 ->   7    +19
+  horrible        14 ->   8     +6
+  waste           32 ->  10    +22
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  great            1 ->   8     -7
+  wonderful        3 -> 101    -98
+  good             2 ->   6     -4
+  rotten           5 -> 107   -102
+  loser            6 ->  10     -4
+  fool             7 ->   7     +0
+  cad             13 -> 114   -101
+  big             10 ->  24    -14
+  genius          12 ->  47    -35
+  despicable      17 -> 137   -120
+  crook           18 -> 133   -115
+  dangerous       16 ->  86    -70
+  filthy          19 ->  76    -57
+  very            14 ->  28    -14
+  cheat           15 ->  29    -14
+
+HIGHER UNDER B
+  thief            4 ->   1     +3
+  coward          40 ->   2    +38
+  disgrace         8 ->   3     +5
+  liar            73 ->   9    +64
+  bad             11 ->   4     +7
+  hero            69 ->  11    +58
+  disappointment 103 ->  13    +90
+  brave           23 ->  12    +11
+  fraud           39 ->  15    +24
+  horrible        35 ->  16    +19
+  silly           36 ->  17    +19
+  bastard         32 ->  18    +14
+  jerk            26 ->  14    +12
+  lucky            9 ->   5     +4
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  fool             1 ->   2     -1
+  coward           3 ->   6     -3
+  thief            4 ->  12     -8
+  murderer         6 ->  15     -9
+  bastard          9 ->  24    -15
+  dirty           10 ->  23    -13
+  crazy           18 ->  58    -40
+  pig             15 ->  27    -12
+  traitor         11 ->  19     -8
+  dead             8 ->  10     -2
+  big             14 ->  18     -4
+  stupid          12 ->  14     -2
+  no              16 ->  22     -6
+
+HIGHER UNDER B
+  liar             2 ->   1     +1
+  loser           31 ->   3    +28
+  great           13 ->   5     +8
+  fraud           34 ->   9    +25
+  terrible        19 ->   8    +11
+  good             5 ->   4     +1
+  lying           24 ->  11    +13
+  very            36 ->  17    +19
+  jerk            25 ->  13    +12
+  bad              7 ->   7     +0
+  criminal        28 ->  21     +7
+  filthy          23 ->  20     +3
+  disgrace        17 ->  16     +1
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  bad              2 ->   4     -2
+  murderer         4 ->  19    -15
+  man              8 ->  21    -13
+  big              6 ->  11     -5
+  hero            10 ->  15     -5
+  traitor         16 ->  26    -10
+  drunk           14 ->  20     -6
+  criminal         9 ->   9     +0
+  little          15 ->  16     -1
+  loser           21 ->  22     -1
+
+HIGHER UNDER B
+  good             3 ->   1     +2
+  coward           5 ->   3     +2
+  failure         59 ->  14    +45
+  friend          20 ->   8    +12
+  fool            12 ->   6     +6
+  liar             7 ->   5     +2
+  nice            18 ->  10     +8
+  very            11 ->   7     +4
+  real            17 ->  13     +4
+  genius          23 ->  18     +5
+  great           13 ->  12     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  murderer         3 ->   9     -6
+  big             11 ->  51    -40
+  man              7 ->  14     -7
+  bad              6 ->   7     -1
+  good            10 ->  16     -6
+  monster          8 ->  12     -4
+  hero            15 ->  35    -20
+  thief            5 ->   5     +0
+  pig             19 ->  39    -20
+
+HIGHER UNDER B
+  fraud           18 ->   3    +15
+  liar             1 ->   1     +0
+  terrible        20 ->  11     +9
+  witch           17 ->  10     +7
+  great           13 ->   8     +5
+  loser           66 ->  19    +47
+  coward           2 ->   2     +0
+  racist          21 ->  18     +3
+  traitor          9 ->   6     +3
+  fool             4 ->   4     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  fucking          7 ->  23    -16
+  good             9 ->  34    -25
+  bad             11 ->  47    -36
+  bastard          4 ->   6     -2
+  man             13 ->  56    -43
+  great           16 ->  57    -41
+  stupid           8 ->  13     -5
+  murderer        12 ->  29    -17
+  son             17 ->  43    -26
+  big             14 ->  17     -3
+  crazy           19 ->  21     -2
+
+HIGHER UNDER B
+  fool             1 ->   1     +0
+  liar             2 ->   2     +0
+  coward           3 ->   3     +0
+  disgrace        27 ->   7    +20
+  thief            5 ->   4     +1
+  damn            18 ->   8    +10
+  worthless       28 ->  11    +17
+  monster         15 ->  10     +5
+  madman          20 ->  12     +8
+  dead            10 ->   9     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  liar             2 ->   9     -7
+  stupid           9 ->  38    -29
+  thief            6 ->   8     -2
+  good             5 ->   7     -2
+  fucking         19 -> 107    -88
+  pig             11 ->  21    -10
+  son             13 ->  29    -16
+  lying           14 ->  26    -12
+  traitor         15 ->  27    -12
+  worthless       17 ->  22     -5
+  big             12 ->  16     -4
+  great           20 ->  20     +0
+  dirty           10 ->  14     -4
+
+HIGHER UNDER B
+  fool             1 ->   1     +0
+  bastard          4 ->   2     +2
+  coward           3 ->   3     +0
+  dead            24 ->   4    +20
+  jerk             8 ->   6     +2
+  disgrace        21 ->  11    +10
+  terrible        16 ->  10     +6
+  selfish         22 ->  12    +10
+  bad              7 ->   5     +2
+  lousy           18 ->  13     +5
+  no              28 ->  15    +13
+  rotten          26 ->  17     +9
+  real            31 ->  19    +12
+  loser           23 ->  18     +5
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  coward           3 ->  12     -9
+  bastard          5 ->  21    -16
+  fool             2 ->   3     -1
+  scoundrel       11 -> 100    -89
+  damned           9 ->  22    -13
+  liar             1 ->   2     -1
+  son             18 ->  38    -20
+  murderer        10 ->  14     -4
+  dog             14 ->  25    -11
+  pig             13 ->  18     -5
+
+HIGHER UNDER B
+  thief            4 ->   1     +3
+  cheat           21 ->   7    +14
+  disgrace        19 ->   8    +11
+  bum             22 ->  10    +12
+  no              17 ->   9     +8
+  good             6 ->   4     +2
+  brute           37 ->  17    +20
+  fraud           38 ->  19    +19
+  dirty            8 ->   5     +3
+  dead            29 ->  20     +9
+  cad             20 ->  15     +5
+  lying           15 ->  13     +2
+  traitor          7 ->   6     +1
+  bad             12 ->  11     +1
+  big             16 ->  16     +0
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  bastard          3 ->  62    -59
+  liar             2 ->   2     +0
+  pig              6 ->  30    -24
+  disgrace        11 -> 124   -113
+  fucking         14 -> 158   -144
+  jerk            10 ->  36    -26
+  fool             4 ->   7     -3
+  lying            7 ->  14     -7
+  no-good         17 ->  28    -11
+  loser           23 ->  33    -10
+  big             15 ->  24     -9
+  son             20 ->  25     -5
+  stupid          13 ->  17     -4
+
+HIGHER UNDER B
+  bloody           9 ->   3     +6
+  monster         18 ->   4    +14
+  coward           1 ->   1     +0
+  cad             46 ->  11    +35
+  menace         132 ->  18   +114
+  terrible        37 ->  10    +27
+  scoundrel       24 ->   8    +16
+  cruel           68 ->  19    +49
+  very            40 ->  15    +25
+  heartless       21 ->   9    +12
+  horrible        28 ->  12    +16
+  madman          79 ->  23    +56
+  thief            8 ->   6     +2
+  dirty            5 ->   5     +0
+  selfish         16 ->  16     +0
+  bum             25 ->  22     +3
+  traitor         22 ->  21     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  disgrace         5 -> 125   -120
+  fool             1 ->   1     +0
+  bastard          6 ->  87    -81
+  pig             13 ->  66    -53
+  liar             3 ->   3     +0
+  good            10 ->  18     -8
+  jerk             9 ->  12     -3
+  dirty           15 ->  24     -9
+  loser           11 ->  16     -5
+  bad              4 ->   6     -2
+  horrible        12 ->  14     -2
+
+HIGHER UNDER B
+  monster         16 ->   4    +12
+  terrible         7 ->   5     +2
+  bloody          21 ->   7    +14
+  foolish         86 ->  11    +75
+  menace         114 ->  15    +99
+  traitor         17 ->   9     +8
+  fake            90 ->  21    +69
+  complete        36 ->  17    +19
+  cruel           75 ->  22    +53
+  crazy           18 ->  10     +8
+  poor            27 ->  19     +8
+  very            23 ->  20     +3
+  stupid           8 ->   8     +0
+  thief           14 ->  13     +1
+  coward           2 ->   2     +0
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  bad              2 ->   9     -7
+  fucking          9 -> 136   -127
+  terrible         5 ->  14     -9
+  loser            8 ->  28    -20
+  good             3 ->   7     -4
+  pig             11 ->  26    -15
+  horrible        16 ->  56    -40
+  hero            13 ->  37    -24
+  disgrace        18 ->  36    -18
+  jerk            17 ->  22     -5
+  dirty           14 ->  20     -6
+  coward          10 ->  10     +0
+
+HIGHER UNDER B
+  liar             7 ->   1     +6
+  damn            54 ->   4    +50
+  “               46 ->   6    +40
+  foolish        148 ->   8   +140
+  thief           20 ->  11     +9
+  fine            33 ->  16    +17
+  great            4 ->   3     +1
+  traitor         28 ->  15    +13
+  son             23 ->  17     +6
+  real            12 ->  12     +0
+  bastard         15 ->  13     +2
+  dumb            19 ->  18     +1
+  big              6 ->   5     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  liar             1 ->  25    -24
+  bad              2 ->   5     -3
+  fool             3 ->  57    -54
+  jerk             7 -> 190   -183
+  monster          4 ->  18    -14
+  complete         8 -> 135   -127
+  murderer         6 ->  32    -26
+  bastard         12 -> 163   -151
+  loser           15 -> 175   -160
+  creep           16 -> 225   -209
+  terrible        10 ->  47    -37
+  disgrace        19 -> 210   -191
+  moron           21 -> 217   -196
+  dirty           22 -> 224   -202
+  great           11 ->  51    -40
+  horrible        20 -> 160   -140
+  coward           9 ->  30    -21
+  racist          26 -> 180   -154
+  rapist          23 -> 161   -138
+  bully           17 ->  63    -46
+  killer          18 ->  38    -20
+
+HIGHER UNDER B
+  man             35 ->   2    +33
+  good            14 ->   1    +13
+  friend          42 ->   3    +39
+  spy            118 ->   7   +111
+  member         131 ->   9   +122
+  doctor         184 ->  13   +171
+  hero            85 ->  12    +73
+  criminal        24 ->   6    +18
+  little          30 ->   8    +22
+  god            100 ->  14    +86
+  child           97 ->  15    +82
+  police         185 ->  17   +168
+  vampire         88 ->  16    +72
+  Christian      199 ->  19   +180
+  real            25 ->  11    +14
+  celebrity      160 ->  22   +138
+  stranger        57 ->  21    +36
+  thief           13 ->  10     +3
+  traitor         31 ->  23     +8
+  big              5 ->   4     +1
+  very            27 ->  20     +7
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  bastard          1 ->   3     -2
+  fool             4 ->   6     -2
+  pig             12 ->  48    -36
+  bad              9 ->  26    -17
+  murderer         6 ->  19    -13
+  fucking          5 ->  10     -5
+  good            10 ->  27    -17
+  selfish         17 ->  98    -81
+  pervert         18 ->  86    -68
+  jerk             7 ->  11     -4
+  dead            19 -> 101    -82
+  thief            8 ->   8     +0
+  stupid          16 ->  35    -19
+  son             13 ->  16     -3
+  dirty           15 ->  22     -7
+  loser           14 ->  15     -1
+  no              20 ->  23     -3
+
+HIGHER UNDER B
+  coward           2 ->   1     +1
+  piece           22 ->   4    +18
+  lazy            85 ->   9    +76
+  chicken        112 ->  12   +100
+  cowardly       158 ->  17   +141
+  failure         43 ->   7    +36
+  sissy           68 ->  20    +48
+  bum             34 ->  14    +20
+  lousy           44 ->  18    +26
+  traitor         21 ->  13     +8
+  rat             30 ->  21     +9
+  disgrace        11 ->   5     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  thief            2 ->  17    -15
+  fool             1 ->   2     -1
+  lunatic          6 ->  93    -87
+  crazy            7 ->  95    -88
+  murderer         5 ->  25    -20
+  monster          9 ->  29    -20
+  good            11 ->  32    -21
+  bastard         15 ->  39    -24
+  very            18 ->  42    -24
+  madman          16 ->  41    -25
+  great           13 ->  22     -9
+  dirty           17 ->  34    -17
+  criminal        14 ->  20     -6
+
+HIGHER UNDER B
+  coward           4 ->   1     +3
+  disgrace        12 ->   4     +8
+  liar             3 ->   3     +0
+  menace          78 ->  10    +68
+  freak           21 ->   6    +15
+  loser           77 ->  12    +65
+  useless        153 ->  15   +138
+  fraud           36 ->   9    +27
+  worthless       71 ->  13    +58
+  spy             20 ->   8    +12
+  traitor         10 ->   5     +5
+  communist       51 ->  16    +35
+  scoundrel       19 ->  11     +8
+  terrible        24 ->  14    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  thief            2 ->   6     -4
+  liar             1 ->   2     -1
+  murderer         6 ->  36    -30
+  fool             3 ->   4     -1
+  bad             11 ->  23    -12
+  traitor         10 ->  20    -10
+  bastard         13 ->  30    -17
+  scoundrel        9 ->  16     -7
+  damned           5 ->  10     -5
+  big             18 ->  33    -15
+  stupid          16 ->  29    -13
+  bloody          14 ->  18     -4
+  mean            12 ->  15     -3
+
+HIGHER UNDER B
+  disgrace         7 ->   3     +4
+  coward           4 ->   1     +3
+  very            17 ->   8     +9
+  cad             22 ->   9    +13
+  selfish         57 ->  13    +44
+  rotten          29 ->  11    +18
+  good            15 ->   7     +8
+  meanie          67 ->  17    +50
+  despicable      49 ->  19    +30
+  damn            21 ->  12     +9
+  terrible        23 ->  14     +9
+  dirty            8 ->   5     +3
+  wicked          37 ->  21    +16
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  A                1 ->   6     -5
+  jerk             3 ->  79    -76
+  liar             4 ->  15    -11
+  fucking          9 ->  92    -83
+  fool             8 ->  10     -2
+  thief           13 ->  87    -74
+  bastard         11 ->  50    -39
+  big             14 ->  33    -19
+  piece           22 ->  42    -20
+  stupid          19 ->  25     -6
+  moron           21 ->  24     -3
+  loser           18 ->  21     -3
+  murderer        17 ->  20     -3
+
+HIGHER UNDER B
+  good             5 ->   1     +4
+  disgrace         6 ->   3     +3
+  pervert         24 ->   5    +19
+  coward           2 ->   2     +0
+  bad              7 ->   4     +3
+  worthless       41 ->   7    +34
+  faggot          57 ->  11    +46
+  creep           15 ->   8     +7
+  cheat           79 ->  18    +61
+  horrible        16 ->   9     +7
+  monster         25 ->  14    +11
+  dead            23 ->  17     +6
+  great           20 ->  16     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  fool             3 ->  14    -11
+  bastard          4 ->  27    -23
+  pig              9 ->  72    -63
+  fucking         10 ->  91    -81
+  jerk             8 ->  37    -29
+  liar             2 ->   3     -1
+  thief           12 -> 105    -93
+  selfish          7 ->  20    -13
+  monster         16 -> 103    -87
+  dirty           14 ->  52    -38
+  bad             13 ->  32    -19
+  complete        15 ->  42    -27
+  disgrace         5 ->  11     -6
+  stupid           6 ->  15     -9
+  good            11 ->  22    -11
+
+HIGHER UNDER B
+  coward           1 ->   1     +0
+  Options        196 ->   2   +194
+  lousy           53 ->   4    +49
+  cowardly        42 ->   5    +37
+  miserable       34 ->   6    +28
+  fine            33 ->   7    +26
+  A              170 ->   8   +162
+  OPTIONS        194 ->  13   +181
+  cruel           68 ->  12    +56
+  no-good         31 ->  10    +21
+  terrible        17 ->   9     +8
+  no              52 ->  17    +35
+  horrible        23 ->  16     +7
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  coward           4 ->   4     +0
+  pig              9 ->  24    -15
+  liar             2 ->   3     -1
+  selfish         11 ->  44    -33
+  bad              5 ->   7     -2
+  stupid          14 ->  69    -55
+  fucking         21 -> 167   -146
+  horrible        18 -> 104    -86
+  disgrace        16 ->  45    -29
+  traitor         15 ->  35    -20
+  loser           20 ->  52    -32
+  thief           13 ->  25    -12
+  dirty           17 ->  37    -20
+  big              7 ->   9     -2
+
+HIGHER UNDER B
+  jerk             3 ->   1     +2
+  rotten          22 ->  10    +12
+  wonderful       85 ->  18    +67
+  genius          76 ->  19    +57
+  terrible        12 ->  11     +1
+  little          23 ->  12    +11
+  lunatic         28 ->  14    +14
+  mean            25 ->  15    +10
+  moron           10 ->   8     +2
+  lousy           27 ->  17    +10
+  complete        24 ->  13    +11
+  good             8 ->   6     +2
+  real            30 ->  20    +10
+  great           19 ->  16     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  fool             1 ->   4     -3
+  coward           3 ->   8     -5
+  thief            2 ->   5     -3
+  criminal         7 ->  15     -8
+  disgrace        14 ->  24    -10
+  loser           15 ->  20     -5
+  murderer         8 ->  13     -5
+
+HIGHER UNDER B
+  good             5 ->   1     +4
+  bad              6 ->   2     +4
+  great           10 ->   6     +4
+  man             11 ->   7     +4
+  liar             4 ->   3     +1
+  complete        20 ->  14     +6
+  nice            28 ->  16    +12
+  fraud           51 ->  21    +30
+  real            13 ->   9     +4
+  genius          16 ->  12     +4
+  danger          31 ->  23     +8
+  mean            25 ->  22     +3
+  very            18 ->  17     +1
+  little          19 ->  19     +0
+  big             12 ->  11     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  bad              1 ->   2     -1
+  thief            3 ->   5     -2
+  coward           6 ->   7     -1
+  thief．          14 ->  40    -26
+  stupid           8 ->  12     -4
+  selfish         15 ->  25    -10
+  scoundrel        7 ->   8     -1
+  big              9 ->  13     -4
+  foolish         10 ->  16     -6
+  great           13 ->  15     -2
+
+HIGHER UNDER B
+  liar             4 ->   3     +1
+  traitor         26 ->   6    +20
+  good             5 ->   4     +1
+  fool             2 ->   1     +1
+  murderer        29 ->  14    +15
+  cheat           12 ->  10     +2
+  terrible        11 ->   9     +2
+  good-for-nothing  30 ->  19    +11
+  criminal        16 ->  11     +5
+  disgrace        19 ->  17     +2
+  loser           22 ->  18     +4
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  liar             2 ->   6     -4
+  bad              5 ->   7     -2
+  thief            6 ->  15     -9
+  rotten          11 ->  31    -20
+  big              8 ->  28    -20
+  stupid          12 ->  29    -17
+  scoundrel        9 ->  13     -4
+  great           13 ->  16     -3
+
+HIGHER UNDER B
+  fool             1 ->   1     +0
+  hero            15 ->   4    +11
+  coward           3 ->   2     +1
+  monster         26 ->   5    +21
+  deadbeat        32 ->   9    +23
+  disgrace        30 ->  10    +20
+  terrible        10 ->   8     +2
+  pig             16 ->  11     +5
+  brave           43 ->  14    +29
+  genius          34 ->  19    +15
+  dirty           17 ->  17     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  liar             1 -> 115   -114
+  coward           2 ->  34    -32
+  thief            4 ->  49    -45
+  fool             3 ->  20    -17
+  bastard          5 ->  10     -5
+  traitor          9 -> 102    -93
+  murderer         7 ->  14     -7
+  dirty           10 ->  22    -12
+  dead            12 ->  25    -13
+  bloody          13 ->  54    -41
+  damned          15 ->  61    -46
+  pig             14 ->  38    -24
+  filthy          16 ->  41    -25
+  fucking         18 ->  79    -61
+  son             19 ->  83    -64
+  lying           20 -> 131   -111
+
+HIGHER UNDER B
+  good             6 ->   1     +5
+  sorry           99 ->   4    +95
+  fine            17 ->   3    +14
+  bad             11 ->   2     +9
+  no              24 ->   5    +19
+  rude           127 ->   8   +119
+  naughty         75 ->   9    +66
+  wonderful      128 ->  12   +116
+  rat             35 ->   7    +28
+  terrible        32 ->  11    +21
+  very            26 ->  13    +13
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  thief            1 ->   6     -5
+  traitor          3 ->  26    -23
+  fool             7 ->  21    -14
+  bad              5 ->  10     -5
+  Nazi            17 ->  74    -57
+  very            15 ->  20     -5
+
+HIGHER UNDER B
+  coward           4 ->   2     +2
+  good            10 ->   4     +6
+  liar             2 ->   1     +1
+  great           12 ->   7     +5
+  criminal         8 ->   5     +3
+  monster         13 ->   9     +4
+  murderer         6 ->   3     +3
+  hero            16 ->  11     +5
+  terrible        21 ->  14     +7
+  killer          33 ->  15    +18
+  man              9 ->   8     +1
+  friend          47 ->  19    +28
+  drunk           14 ->  13     +1
+  real            27 ->  17    +10
+  dangerous       28 ->  18    +10
+  disgrace        22 ->  16     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  good             4 ->  15    -11
+  traitor          8 ->  33    -25
+  coward           2 ->   2     +0
+  man             12 ->  34    -22
+  hero            18 ->  76    -58
+  thief            6 ->   8     -2
+  fool             5 ->   6     -1
+  great           16 ->  32    -16
+  fucking         14 ->  24    -10
+  murderer         3 ->   3     +0
+  big             19 ->  22     -3
+  dirty           11 ->  12     -1
+  killer          20 ->  20     +0
+
+HIGHER UNDER B
+  liar             1 ->   1     +0
+  disgrace        15 ->   7     +8
+  monster         13 ->   5     +8
+  jerk            23 ->  11    +12
+  dead            22 ->  13     +9
+  loser           45 ->  18    +27
+  pig              9 ->   9     +0
+  terrible        21 ->  14     +7
+  bastard          7 ->   4     +3
+  bad             10 ->  10     +0
+  lying           24 ->  17     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  lready           1 ->   4     -3
+  detective        6 ->  46    -40
+  thief            2 ->   3     -1
+  police           9 ->  70    -61
+  ghost           12 ->  25    -13
+  superhero       21 ->  87    -66
+  secret          16 ->  58    -42
+  magician        18 ->  47    -29
+  famous          14 ->  31    -17
+  boy             20 ->  48    -28
+  wizard          19 ->  26     -7
+  stranger         8 ->  14     -6
+  friend           7 ->  11     -4
+  spy              4 ->   6     -2
+
+HIGHER UNDER B
+  liar             3 ->   1     +2
+  good             5 ->   2     +3
+  nice            37 ->  10    +27
+  great           11 ->   5     +6
+  very            15 ->   9     +6
+  terrible        39 ->  12    +27
+  real            13 ->   7     +6
+  really          74 ->  15    +59
+  bad             10 ->   8     +2
+  fine            75 ->  16    +59
+  man             17 ->  13     +4
+  genius          43 ->  18    +25
+  fraud           45 ->  19    +26
+  big             25 ->  17     +8
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  bastard          4 -> 199   -195
+  traitor          3 ->  44    -41
+  fool             2 ->   5     -3
+  monster         11 ->  78    -67
+  jerk             7 ->  29    -22
+  stupid          19 -> 227   -208
+  nasty           21 -> 202   -181
+  rotten          17 ->  82    -65
+  terrible        20 ->  52    -32
+  liar             1 ->   1     +0
+  good            10 ->  13     -3
+  filthy          18 ->  21     -3
+  murderer        16 ->  20     -4
+  big             13 ->  18     -5
+  very            22 ->  24     -2
+  dead            12 ->  16     -4
+
+HIGHER UNDER B
+  disgrace         9 ->   2     +7
+  thief            6 ->   3     +3
+  brute           48 ->   9    +39
+  cad             27 ->   6    +21
+  selfish         31 ->   8    +23
+  spy             66 ->  12    +54
+  lying           15 ->   7     +8
+  self           132 ->  17   +115
+  man             23 ->  11    +12
+  Judas          203 ->  19   +184
+  scoundrel       29 ->  14    +15
+  cheat           40 ->  22    +18
+  lousy           37 ->  23    +14
+  coward           5 ->   4     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  good             4 ->  17    -13
+  bad              3 ->   4     -1
+  man              6 ->  15     -9
+  fool             9 ->  19    -10
+  dirty           13 ->  45    -32
+  boy             17 ->  47    -30
+  dog             16 ->  39    -23
+  terrorist       19 ->  35    -16
+  real            15 ->  28    -13
+  friend          21 ->  33    -12
+
+HIGHER UNDER B
+  thief            1 ->   1     +0
+  monster          5 ->   2     +3
+  dangerous       14 ->   7     +7
+  danger          78 ->  14    +64
+  freak           38 ->  11    +27
+  killer          18 ->  10     +8
+  spy              8 ->   5     +3
+  criminal        20 ->  12     +8
+  fraud           29 ->  16    +13
+  demon           31 ->  18    +13
+  coward           7 ->   6     +1
+  traitor         11 ->   8     +3
+  murderer        10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  bastard          1 ->  17    -16
+  disgrace         8 ->  35    -27
+  fucking         14 -> 153   -139
+  bad              3 ->   6     -3
+  horrible        12 ->  29    -17
+  stupid          10 ->  25    -15
+  shit            17 ->  87    -70
+  terrible         9 ->  11     -2
+  very            19 ->  27     -8
+
+HIGHER UNDER B
+  coward           5 ->   1     +4
+  good             4 ->   2     +2
+  fool             6 ->   4     +2
+  great           23 ->   9    +14
+  big             15 ->   7     +8
+  scoundrel       75 ->  15    +60
+  thief           13 ->   8     +5
+  cad             78 ->  16    +62
+  heartless       55 ->  18    +37
+  wonderful       59 ->  20    +39
+  lousy           30 ->  14    +16
+  jerk             7 ->   5     +2
+  rotten          18 ->  12     +6
+  pig             11 ->  10     +1
+  monster         22 ->  21     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  bastard          7 ->   9     -2
+  fool             2 ->   2     +0
+  pig              8 ->  10     -2
+  loser           18 ->  36    -18
+  stupid          21 ->  32    -11
+  dead            15 ->  21     -6
+  disgrace        16 ->  19     -3
+  jerk             3 ->   3     +0
+  good             4 ->   4     +0
+  moron           24 ->  24     +0
+
+HIGHER UNDER B
+  very            10 ->   7     +3
+  damn            45 ->  23    +22
+  real             9 ->   8     +1
+  thief           11 ->  11     +0
+  selfish         14 ->  13     +1
+  horrible        20 ->  16     +4
+  fucking         26 ->  18     +8
+  great           17 ->  15     +2
+  terrible        12 ->  12     +0
+  hero            23 ->  20     +3
+  coward           1 ->   1     +0
+  liar             5 ->   5     +0
+  bad              6 ->   6     +0
+  no              22 ->  22     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  fool             1 ->   1     +0
+  good             8 ->   9     -1
+  thief            5 ->   6     -1
+  damned          17 ->  24     -7
+  bastard         13 ->  14     -1
+  traitor          7 ->   8     -1
+  dirty           15 ->  19     -4
+  coward           2 ->   2     +0
+  dead            11 ->  12     -1
+
+HIGHER UNDER B
+  fucking          9 ->   5     +4
+  liar             3 ->   3     +0
+  disgrace         4 ->   4     +0
+  jerk            28 ->  20     +8
+  monster         19 ->  16     +3
+  terrible        26 ->  18     +8
+  crazy           16 ->  15     +1
+  big             14 ->  13     +1
+  stupid          10 ->  10     +0
+  murderer        12 ->  11     +1
+  man             18 ->  17     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  bastard          5 ->  20    -15
+  fucking         15 ->  49    -34
+  disgrace        16 -> 125   -109
+  dirty            7 ->  13     -6
+  pig             13 ->  27    -14
+  little          18 ->  59    -41
+  thief           21 ->  64    -43
+  nice            14 ->  15     -1
+  creep           19 ->  26     -7
+
+HIGHER UNDER B
+  liar             1 ->   1     +0
+  fool             3 ->   2     +1
+  jerk            10 ->   5     +5
+  big              4 ->   4     +0
+  real            11 ->   6     +5
+  stupid          12 ->   7     +5
+  great           17 ->  11     +6
+  horrible        22 ->  12    +10
+  wonderful       47 ->  16    +31
+  terrible        20 ->  14     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  thief            1 ->   5     -4
+  murderer         2 ->   4     -2
+  disgrace         8 ->  15     -7
+  traitor          5 ->   7     -2
+  drunk           17 ->  46    -29
+  fool             7 ->  10     -3
+  criminal        12 ->  19     -7
+  big             16 ->  24     -8
+  dirty           11 ->  14     -3
+
+HIGHER UNDER B
+  bad              6 ->   2     +4
+  bully           55 ->   9    +46
+  liar             3 ->   1     +2
+  dog             13 ->   6     +7
+  cheater        100 ->  16    +84
+  pig             10 ->   8     +2
+  rapist          51 ->  17    +34
+  man             14 ->  12     +2
+  good            15 ->  13     +2
+  fraud           19 ->  18     +1
+  terrible        25 ->  20     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  coward           2 ->   3     -1
+  fool             4 ->   4     +0
+  bastard          1 ->   2     -1
+  fucking          9 ->  12     -3
+  jerk            11 ->  23    -12
+  stupid          12 ->  20     -8
+  son             10 ->  11     -1
+  bum             19 ->  34    -15
+  dead            13 ->  13     +0
+  bloody          21 ->  32    -11
+  damn            16 ->  19     -3
+  disgrace        18 ->  26     -8
+  dirty            5 ->   8     -3
+
+HIGHER UNDER B
+  liar             3 ->   1     +2
+  terrible        22 ->   5    +17
+  murderer         7 ->   6     +1
+  traitor         14 ->  10     +4
+  hero            37 ->  22    +15
+  fine            29 ->  17    +12
+  real            27 ->  21     +6
+  very            25 ->  18     +7
+  no              20 ->  15     +5
+  thief           17 ->  16     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  dead             9 ->  15     -6
+  coward           1 ->   1     +0
+  fool             2 ->   2     +0
+  thief            4 ->   4     +0
+  good             7 ->  10     -3
+  man             16 ->  23     -7
+  dirty           10 ->  11     -1
+  stupid          15 ->  19     -4
+  traitor          6 ->   7     -1
+
+HIGHER UNDER B
+  liar             3 ->   3     +0
+  bad             11 ->   6     +5
+  monster         14 ->   9     +5
+  jerk            30 ->  14    +16
+  criminal        24 ->  16     +8
+  terrible        37 ->  17    +20
+  fraud           29 ->  20     +9
+  disgrace         5 ->   5     +0
+  scoundrel       23 ->  18     +5
+  murderer         8 ->   8     +0
+  bastard         12 ->  12     +0
+  pig             13 ->  13     +0
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  bastard          1 ->  11    -10
+  monster         11 ->  86    -75
+  good             8 ->  19    -11
+  murderer        13 ->  61    -48
+  big             15 ->  49    -34
+  dirty            9 ->  17     -8
+  dead            10 ->  15     -5
+  pig             17 ->  37    -20
+  thief            6 ->  10     -4
+  terrible        20 ->  40    -20
+  disgrace        19 ->  21     -2
+  bad              3 ->   7     -4
+
+HIGHER UNDER B
+  coward           5 ->   1     +4
+  jerk            12 ->   3     +9
+  loser           33 ->   8    +25
+  fool             2 ->   2     +0
+  stupid          14 ->   6     +8
+  faggot          67 ->  13    +54
+  liar             7 ->   4     +3
+  man             24 ->  12    +12
+  no              34 ->  14    +20
+  pussy           78 ->  18    +60
+  pervert         16 ->   9     +7
+  son             18 ->  16     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  fool             1 ->   1     +0
+  bastard          4 ->   5     -1
+  fucking         10 ->  25    -15
+  damned          18 ->  28    -10
+  stupid          12 ->  18     -6
+  selfish         11 ->  15     -4
+  pig              8 ->   9     -1
+  big             16 ->  19     -3
+  dirty           15 ->  17     -2
+
+HIGHER UNDER B
+  coward           2 ->   2     +0
+  thief            5 ->   4     +1
+  monster         20 ->  11     +9
+  liar             3 ->   3     +0
+  terrible        24 ->  14    +10
+  good             6 ->   6     +0
+  disgrace         7 ->   7     +0
+  murderer        22 ->  16     +6
+  bad              9 ->   8     +1
+  traitor         14 ->  10     +4
+  jerk            13 ->  12     +1
+  son             17 ->  13     +4
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  bastard          6 ->  40    -34
+  bad              5 ->  10     -5
+  murderer         8 ->  23    -15
+  good             7 ->  13     -6
+  coward           2 ->   3     -1
+  dead            13 ->  61    -48
+  pig             11 ->  24    -13
+  fucking         17 -> 121   -104
+  dirty           18 ->  68    -50
+  thief            3 ->   5     -2
+  pervert         23 -> 101    -78
+  piece           22 ->  90    -68
+  stupid          19 ->  45    -26
+  creep           21 ->  35    -14
+  bully           20 ->  30    -10
+
+HIGHER UNDER B
+  liar             1 ->   1     +0
+  jerk             4 ->   2     +2
+  fool             9 ->   4     +5
+  terrible        14 ->   7     +7
+  monster         10 ->   6     +4
+  traitor         29 ->  11    +18
+  big             12 ->   8     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  liar             1 ->  10     -9
+  coward           4 ->  38    -34
+  fool             2 ->   5     -3
+  bastard          6 ->  21    -15
+  horrible        17 -> 145   -128
+  terrible         8 ->  17     -9
+  dirty           15 ->  55    -40
+  disgrace        14 ->  20     -6
+  murderer        10 ->  11     -1
+
+HIGHER UNDER B
+  good             3 ->   1     +2
+  traitor          9 ->   2     +7
+  great           11 ->   6     +5
+  bad              7 ->   4     +3
+  thief            5 ->   3     +2
+  loser           21 ->   9    +12
+  slut           132 ->  15   +117
+  hero            82 ->  14    +68
+  son             12 ->   7     +5
+  very            24 ->  12    +12
+  failure         34 ->  18    +16
+  cad             13 ->   8     +5
+  pig             16 ->  13     +3
+  wonderful       30 ->  19    +11
+  scoundrel       18 ->  16     +2
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  jerk             3 ->   9     -6
+  good             6 ->  11     -5
+  dick             9 ->  42    -33
+  racist          10 ->  33    -23
+  piece           12 ->  44    -32
+  terrible        11 ->  23    -12
+  horrible        18 ->  53    -35
+  prick           25 ->  63    -38
+  faggot          26 ->  71    -45
+  son             21 ->  24     -3
+  real            22 ->  29     -7
+  pervert         23 ->  30     -7
+  stupid          15 ->  19     -4
+  great           27 ->  32     -5
+  bad              8 ->   8     +0
+  big             13 ->  15     -2
+
+HIGHER UNDER B
+  coward           1 ->   1     +0
+  fool             5 ->   3     +2
+  traitor         17 ->   5    +12
+  liar             2 ->   2     +0
+  bastard          4 ->   4     +0
+  disgrace        14 ->   7     +7
+  rat             82 ->  17    +65
+  dead            16 ->  10     +6
+  lousy           30 ->  13    +17
+  dirty           29 ->  14    +15
+  pig             20 ->  12     +8
+  thief           24 ->  16     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  fool             1 ->   3     -2
+  good             4 ->   9     -5
+  bad              5 ->   8     -3
+  hero             8 ->  16     -8
+  stupid           7 ->  14     -7
+  jerk            12 ->  30    -18
+  man             13 ->  29    -16
+  very            20 ->  46    -26
+  real            19 ->  45    -26
+  disgrace        17 ->  35    -18
+  big              9 ->  13     -4
+  mean            16 ->  28    -12
+  dirty           14 ->  17     -3
+  horrible        15 ->  18     -3
+  monster         18 ->  21     -3
+  terrible        11 ->  12     -1
+
+HIGHER UNDER B
+  thief            3 ->   1     +2
+  murderer        10 ->   4     +6
+  pig             25 ->   7    +18
+  bastard         21 ->   6    +15
+  scoundrel       50 ->  10    +40
+  no-good         74 ->  15    +59
+  traitor         24 ->  11    +13
+  liar             2 ->   2     +0
+  filthy          39 ->  20    +19
+  damn            31 ->  19    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  coward           3 ->   5     -2
+  liar             2 ->   4     -2
+  bastard          4 ->  18    -14
+  murderer         5 ->  27    -22
+  stupid          10 ->  81    -71
+  thief            7 ->  31    -24
+  dirty           13 ->  46    -33
+  dead             9 ->  22    -13
+  lying           11 ->  39    -28
+  good            17 ->  56    -39
+  filthy          12 ->  32    -20
+  scoundrel       18 ->  37    -19
+  son             15 ->  19     -4
+
+HIGHER UNDER B
+  fool             1 ->   1     +0
+  disgrace         6 ->   2     +4
+  traitor          8 ->   3     +5
+  piece           33 ->   7    +26
+  sorry           95 ->  10    +85
+  bad             16 ->   6    +10
+  miserable       25 ->   9    +16
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  coward           3 ->   3     +0
+  bastard          4 ->  29    -25
+  disgrace        11 ->  89    -78
+  fool             5 ->  21    -16
+  dead            18 -> 110    -92
+  good             8 ->  25    -17
+  liar             1 ->   2     -1
+  stupid          22 ->  53    -31
+  rat             20 ->  37    -17
+  worthless       16 ->  30    -14
+  bad              6 ->  11     -5
+  jerk            10 ->  17     -7
+  murderer        13 ->  16     -3
+  fraud           21 ->  26     -5
+
+HIGHER UNDER B
+  thief            2 ->   1     +1
+  lazy            37 ->   6    +31
+  crook           44 ->  10    +34
+  cheater         53 ->  14    +39
+  cheating        40 ->  13    +27
+  rotten          25 ->   9    +16
+  traitor          9 ->   4     +5
+  good-for-nothing  50 ->  19    +31
+  terrible        31 ->  15    +16
+  complete        54 ->  23    +31
+  deadbeat        48 ->  22    +26
+  cheat           14 ->   7     +7
+  lying           15 ->  12     +3
+  dirty           12 ->   8     +4
+  pig              7 ->   5     +2
+  big             19 ->  18     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  good             2 ->  11     -9
+  great            8 ->  27    -19
+  man              9 ->  24    -15
+  nice            14 ->  78    -64
+  real            12 ->  32    -20
+  big             10 ->  18     -8
+  very             7 ->   7     +0
+  coward           4 ->   5     -1
+  murderer        11 ->  15     -4
+  bastard         15 ->  19     -4
+
+HIGHER UNDER B
+  fool             5 ->   3     +2
+  fraud           18 ->   6    +12
+  thief            3 ->   2     +1
+  total          101 ->   9    +92
+  terrible        21 ->   8    +13
+  complete        51 ->  14    +37
+  bad              6 ->   4     +2
+  menace          41 ->  17    +24
+  traitor         13 ->  10     +3
+  liar             1 ->   1     +0
+  crook           19 ->  12     +7
+  criminal        17 ->  13     +4
+  jerk            22 ->  20     +2
+  scoundrel       16 ->  16     +0
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  bad              5 ->  19    -14
+  thief            2 ->   6     -4
+  dirty            9 ->  65    -56
+  good             8 ->  36    -28
+  pig             11 ->  53    -42
+  terrible        13 ->  48    -35
+  traitor         12 ->  34    -22
+  dead            16 ->  70    -54
+  big             20 ->  97    -77
+  great           19 ->  46    -27
+  man             15 ->  20     -5
+  very            24 ->  75    -51
+  pervert         23 ->  64    -41
+  bastard          7 ->  10     -3
+  monster         10 ->  12     -2
+  fool             3 ->   4     -1
+  creep           22 ->  31     -9
+  dog             17 ->  18     -1
+  murderer         6 ->   7     -1
+
+HIGHER UNDER B
+  liar             1 ->   1     +0
+  cheat           41 ->   3    +38
+  coward           4 ->   2     +2
+  deadbeat        57 ->   9    +48
+  fraud           33 ->   8    +25
+  disgrace        14 ->   5     +9
+  menace          71 ->  14    +57
+  sinner          40 ->  13    +27
+  scoundrel       18 ->  11     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  fool             1 ->   9     -8
+  disgrace         4 ->   6     -2
+  coward           3 ->   3     +0
+  thief            6 ->  14     -8
+  traitor         10 ->  25    -15
+  bad              7 ->  12     -5
+  hero            18 ->  42    -24
+  murderer         5 ->   8     -3
+  monster         15 ->  17     -2
+  good            14 ->  15     -1
+
+HIGHER UNDER B
+  dead             8 ->   2     +6
+  pig             12 ->   5     +7
+  dirty           11 ->   4     +7
+  big             19 ->  10     +9
+  piece           27 ->  13    +14
+  scumbag         44 ->  19    +25
+  jerk             9 ->   7     +2
+  fake            45 ->  23    +22
+  lying           32 ->  20    +12
+  terrible        13 ->  11     +2
+  loser           17 ->  16     +1
+  creep           22 ->  21     +1
+  worthless       23 ->  22     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  liar             3 ->  19    -16
+  fool             1 ->   1     +0
+  stupid          10 ->  81    -71
+  dead            12 -> 101    -89
+  good             2 ->   3     -1
+  little          15 ->  27    -12
+  horrible         7 ->  10     -3
+  nice            13 ->  20     -7
+  bad              4 ->   6     -2
+
+HIGHER UNDER B
+  coward          14 ->   2    +12
+  hero            20 ->   7    +13
+  very             6 ->   4     +2
+  brave           74 ->  11    +63
+  hypocrite       56 ->  12    +44
+  terrible         8 ->   8     +0
+  heartless       69 ->  14    +55
+  great            9 ->   9     +0
+  jerk             5 ->   5     +0
+  disgrace        23 ->  13    +10
+  brute           79 ->  18    +61
+  scoundrel       26 ->  17     +9
+  traitor         16 ->  16     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  coward           1 ->  10     -9
+  bastard          6 ->  51    -45
+  pig             11 ->  47    -36
+  good             9 ->  22    -13
+  big             19 ->  85    -66
+  fool             3 ->   5     -2
+  monster         16 ->  34    -18
+  traitor         10 ->  24    -14
+  thief            7 ->   8     -1
+  dirty           13 ->  20     -7
+  bad              4 ->   6     -2
+  stupid          14 ->  21     -7
+
+HIGHER UNDER B
+  jerk             8 ->   2     +6
+  disgrace         5 ->   1     +4
+  terrible        15 ->   4    +11
+  lying           33 ->   9    +24
+  loser           12 ->   7     +5
+  cheat           21 ->  12     +9
+  mean            17 ->  11     +6
+  heartless       44 ->  14    +30
+  nasty           42 ->  13    +29
+  cruel           54 ->  17    +37
+  lazy            57 ->  23    +34
+  cheater         27 ->  19     +8
+  scoundrel       22 ->  16     +6
+  selfish         20 ->  15     +5
+  cad             18 ->  18     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  bastard          3 ->   3     +0
+  liar             4 ->   8     -4
+  bloody           6 ->  12     -6
+  damned          14 ->  28    -14
+  fool             1 ->   1     +0
+  stupid          10 ->  19     -9
+  big             11 ->  22    -11
+  damn            21 ->  37    -16
+  lying           15 ->  20     -5
+  thief            9 ->  11     -2
+  pig              5 ->   6     -1
+  great           17 ->  25     -8
+
+HIGHER UNDER B
+  coward           2 ->   2     +0
+  selfish         28 ->  10    +18
+  murderer        24 ->  13    +11
+  terrible        30 ->  15    +15
+  dirty           12 ->   5     +7
+  jerk            39 ->  24    +15
+  lousy           23 ->  16     +7
+  fucking          8 ->   4     +4
+  heartless       27 ->  21     +6
+  shit            19 ->  14     +5
+  traitor         13 ->   9     +4
+  good             7 ->   7     +0
+  bad             18 ->  18     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  liar             1 ->   5     -4
+  thief            4 ->   7     -3
+  traitor          5 ->  10     -5
+  dirty            9 ->  21    -12
+  fool             3 ->   3     +0
+  murderer         8 ->  15     -7
+  man             15 ->  51    -36
+  pig             17 ->  35    -18
+  bastard         10 ->  13     -3
+  big             12 ->  12     +0
+
+HIGHER UNDER B
+  coward           2 ->   1     +1
+  good             6 ->   2     +4
+  bad              7 ->   4     +3
+  great           27 ->   9    +18
+  lousy           13 ->   8     +5
+  loser           33 ->  16    +17
+  selfish         78 ->  18    +60
+  terrible        35 ->  17    +18
+  disgrace        11 ->   6     +5
+  scoundrel       14 ->  11     +3
+  bum             16 ->  14     +2
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  liar             1 ->   9     -8
+  bastard         13 -> 126   -113
+  good             7 ->  22    -15
+  fucking         14 -> 165   -151
+  loser            5 ->  12     -7
+  dog             17 ->  84    -67
+  jerk            15 ->  37    -22
+  pig             16 ->  45    -29
+  piece            6 ->  15     -9
+  dead            22 -> 102    -80
+  disgusting      23 ->  96    -73
+  little          24 ->  87    -63
+  murderer        10 ->  17     -7
+  man             25 ->  95    -70
+  monster          4 ->   8     -4
+  fool            20 ->  31    -11
+  bad              2 ->   4     -2
+  pervert         12 ->  14     -2
+
+HIGHER UNDER B
+  traitor         21 ->   2    +19
+  coward           3 ->   1     +2
+  dirty            8 ->   3     +5
+  failure         73 ->   7    +66
+  disgrace        11 ->   5     +6
+  thief            9 ->   6     +3
+  fake            99 ->  13    +86
+  menace          93 ->  16    +77
+  terrible        19 ->  10     +9
+  great           18 ->  11     +7
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

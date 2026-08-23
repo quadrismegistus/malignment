@@ -1,0 +1,1510 @@
+Below are 50 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: She turned over after the massage and he saw her ___
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  pussy            1 -> 129   -128
+  breasts          2 ->  16    -14
+  nipples          4 ->  20    -16
+  tits             6 ->  85    -79
+  ass              8 -> 152   -144
+  panties         10 ->  92    -82
+  cunt            17 -> 219   -202
+  legs            13 ->  81    -68
+  wet             12 ->  59    -47
+  big             14 ->  57    -43
+  black           18 ->  63    -45
+  body            15 ->  42    -27
+  beautiful        7 ->   8     -1
+  bare             9 ->  12     -3
+
+HIGHER UNDER B
+  face             5 ->   1     +4
+  with            16 ->   2    +14
+  wearing         76 ->   3    +73
+  asleep          85 ->   7    +78
+  fully           48 ->   5    +43
+  eyes            33 ->   6    +27
+  smile          140 ->  10   +130
+  peaceful       204 ->  13   +191
+  looking         65 ->  11    +54
+  sleeping       142 ->  18   +124
+  smiling        153 ->  19   +134
+  expression     170 ->  21   +149
+  red             50 ->  17    +33
+  completely      21 ->  14     +7
+  back            19 ->  15     +4
+  in              11 ->   9     +2
+  as              28 ->  22     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  chest            1 ->   2     -1
+  toes             4 -> 148   -144
+  breasts          3 ->   5     -2
+  beautiful        2 ->   4     -2
+  turn             5 ->  41    -36
+  reflection       7 -> 131   -124
+  relax            9 -> 144   -135
+  breath           8 ->  34    -26
+  breast           6 ->  11     -5
+  heels           11 -> 174   -163
+  fingernails     16 -> 105    -89
+  closed          10 ->  16     -6
+  flat            15 ->  36    -21
+  bare            13 ->  18     -5
+
+HIGHER UNDER B
+  face            17 ->   1    +16
+  eyes            25 ->   3    +22
+  nipples        118 ->   7   +111
+  take            30 ->   6    +24
+  hand           113 ->  10   +103
+  white           23 ->   9    +14
+  sleeping       101 ->  14    +87
+  back            43 ->  13    +30
+  naked           14 ->   8     +6
+  open            64 ->  15    +49
+  make            24 ->  17     +7
+  breathing       12 ->  12     +0
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  lying            6 ->  52    -46
+  sleeping         7 ->  47    -40
+  naked            3 ->   5     -2
+  in              12 ->  46    -34
+  bare             8 ->   8     +0
+  face             1 ->   1     +0
+  for             16 -> 134   -118
+  sleep           18 -> 124   -106
+  looking         13 ->  26    -13
+  nipples         17 ->  24     -7
+  chest            9 ->  10     -1
+
+HIGHER UNDER B
+  beautiful        5 ->   2     +3
+  breasts          4 ->   3     +1
+  body            10 ->   6     +4
+  perfect        107 ->   9    +98
+  back            11 ->   7     +4
+  long            14 ->  11     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  sitting          2 ->  12    -10
+  lying            1 ->   3     -2
+  naked            6 ->  11     -5
+  on               8 ->   8     +0
+  standing        17 ->  83    -66
+  again           11 ->  13     -2
+  staring         15 ->  33    -18
+  and             14 ->  29    -15
+  laying           7 ->   7     +0
+  sleeping        12 ->  18     -6
+  head            19 ->  48    -29
+  looking         13 ->  17     -4
+  as              18 ->  31    -13
+
+HIGHER UNDER B
+  face             4 ->   1     +3
+  eyes            10 ->   4     +6
+  puffy          179 ->  10   +169
+  pant           133 ->  20   +113
+  pale            42 ->  16    +26
+  still            9 ->   6     +3
+  skin            55 ->  19    +36
+  legs            16 ->   9     +7
+  breasts         23 ->  15     +8
+  open            22 ->  14     +8
+  with             5 ->   5     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  naked            3 ->   6     -3
+  breast           5 ->  24    -19
+  hair             7 ->  26    -19
+  legs             6 ->  16    -10
+  panties         18 ->  62    -44
+  tits            10 ->  22    -12
+  eyes            11 ->  21    -10
+  lips            13 ->  27    -14
+  bare            12 ->  19     -7
+  in               9 ->   9     +0
+  belly           16 ->  23     -7
+
+HIGHER UNDER B
+  reflection      87 ->   8    +79
+  right           15 ->   4    +11
+  nipples         36 ->   7    +29
+  taut            86 ->  12    +74
+  tears           32 ->  13    +19
+  beautiful       19 ->  10     +9
+  pale            45 ->  17    +28
+  leg             30 ->  14    +16
+  body             8 ->   5     +3
+  boobs           68 ->  25    +43
+  breasts          1 ->   1     +0
+  face             2 ->   2     +0
+  as              17 ->  11     +6
+  full            24 ->  18     +6
+  with            20 ->  20     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  naked            3 ->  28    -25
+  breasts          4 -> 121   -117
+  body             6 ->  16    -10
+  chest            7 ->  13     -6
+  nipples         12 -> 104    -92
+  breathing       13 ->  46    -33
+  looking         15 ->  59    -44
+  mouth           11 ->  24    -13
+  head            14 ->  41    -27
+  smile            8 ->  12     -4
+
+HIGHER UNDER B
+  eyes             1 ->   1     +0
+  cheeks          20 ->   5    +15
+  neck             9 ->   4     +5
+  jaw             34 ->   7    +27
+  gaze            22 ->   6    +16
+  blue            30 ->   8    +22
+  lips             5 ->   3     +2
+  green           37 ->  11    +26
+  face             2 ->   2     +0
+  pale            17 ->  10     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  breasts          4 ->  15    -11
+  in               8 ->  22    -14
+  nipples         10 ->  33    -23
+  beautiful        6 ->  14     -8
+  sleeping        14 ->  34    -20
+  nude            12 ->  20     -8
+  ass              9 ->  10     -1
+  backside        13 ->  18     -5
+  body             5 ->   8     -3
+  eyes             7 ->   7     +0
+  smile           17 ->  17     +0
+
+HIGHER UNDER B
+  naked            1 ->   1     +0
+  face             2 ->   2     +0
+  profile         16 ->   4    +12
+  rear            21 ->   5    +16
+  back             3 ->   3     +0
+  bare            11 ->   6     +5
+  dark            31 ->  12    +19
+  perfect         20 ->  11     +9
+  full            15 ->   9     +6
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  back             3 ->   5     -2
+  eyes             2 ->   2     +0
+  naked            6 ->   6     +0
+  smile            7 ->   8     -1
+  in               9 ->  13     -4
+  body             8 ->  12     -4
+  long            10 ->  11     -1
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  pale            11 ->   7     +4
+  profile         12 ->   9     +3
+  tear            13 ->  10     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  back             2 ->   3     -1
+  breasts          3 ->   4     -1
+  face             1 ->   1     +0
+  naked           10 ->  30    -20
+  chest            8 ->  21    -13
+  buttocks        13 ->  29    -16
+  breast          11 ->  17     -6
+  body             6 ->   6     +0
+
+HIGHER UNDER B
+  eyes             4 ->   2     +2
+  tears           32 ->   8    +24
+  for              9 ->   7     +2
+  scar            15 ->  10     +5
+  in              28 ->  12    +16
+  smile           34 ->  14    +20
+  scars           12 ->  11     +1
+  entire          21 ->  13     +8
+  tattoos         23 ->  18     +5
+  full            18 ->  16     +2
+  tattoo           5 ->   5     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  naked            3 ->  11     -8
+  breasts          2 ->   4     -2
+  body             9 ->  19    -10
+  back             8 ->  10     -2
+  belly           10 ->  34    -24
+  long            15 ->  41    -26
+  legs            13 ->  36    -23
+  tattoo          11 ->  31    -20
+  stomach         14 ->  32    -18
+  bare             7 ->   8     -1
+  again           16 ->  21     -5
+  full            12 ->  16     -4
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  smile           20 ->   6    +14
+  profile         80 ->   9    +71
+  eyes             4 ->   2     +2
+  for             25 ->   7    +18
+  in               6 ->   3     +3
+  beauty          97 ->  15    +82
+  smiling         53 ->  12    +41
+  hair            34 ->  13    +21
+  lying           51 ->  18    +33
+  lovely          35 ->  17    +18
+  looking         27 ->  14    +13
+  beautiful        5 ->   5     +0
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  breasts          1 -> 133   -132
+  naked            2 ->  15    -13
+  breast           6 -> 136   -130
+  bare             8 -> 135   -127
+  bottom          10 -> 177   -167
+  vagina          12 -> 170   -158
+  underwear       14 -> 172   -158
+  body             7 ->  27    -20
+  legs             9 ->  44    -35
+  belly           16 -> 134   -118
+  chest           17 -> 142   -125
+  genitals        19 -> 198   -179
+  nipples         20 -> 206   -186
+  feet            13 ->  38    -25
+  nude            18 -> 130   -112
+  from            15 ->  42    -27
+  eyes             5 ->   9     -4
+
+HIGHER UNDER B
+  again           11 ->   1    +10
+  lying           47 ->   2    +45
+  standing        48 ->   5    +43
+  in               4 ->   3     +1
+  with            35 ->   6    +29
+  sitting         71 ->   7    +64
+  looking         58 ->   8    +50
+  smiling         99 ->  10    +89
+  smile           51 ->  12    +39
+  on              33 ->  11    +22
+  walking        169 ->  13   +156
+  off            200 ->  16   +184
+  as              23 ->  14     +9
+  back            26 ->  17     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  eyes             1 ->  21    -20
+  legs             4 -> 101    -97
+  body             3 ->  14    -11
+  lips             5 -> 112   -107
+  hands            6 -> 124   -118
+  mouth            7 -> 121   -114
+  breathing        8 ->  54    -46
+  head            14 -> 117   -103
+  breasts         17 -> 163   -146
+  look             9 ->  37    -28
+  hand            20 -> 151   -131
+  red             19 -> 107    -88
+  beautiful       12 ->  29    -17
+  flushed         10 ->  22    -12
+  hair            16 ->  25     -9
+
+HIGHER UNDER B
+  face             2 ->   1     +1
+  in              18 ->   2    +16
+  as              49 ->   3    +46
+  with            37 ->   5    +32
+  smiling         25 ->   4    +21
+  on              65 ->   6    +59
+  tired          164 ->   8   +156
+  again           62 ->  10    +52
+  back            32 ->   7    +25
+  sitting         71 ->  13    +58
+  old            185 ->  16   +169
+  new            165 ->  18   +147
+  lying           94 ->  17    +77
+  pale            55 ->  15    +40
+  naked           11 ->   9     +2
+  looking         13 ->  11     +2
+  smile           15 ->  12     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M47 ===
+HIGHER UNDER A
+  ass              6 ->  49    -43
+  naked            1 ->   4     -3
+  beautiful        5 ->  20    -15
+  from            11 ->  31    -20
+  for              8 ->  17     -9
+  in              10 ->  18     -8
+  back            13 ->  24    -11
+  perfect         18 ->  68    -50
+  big             16 ->  38    -22
+  pussy           14 ->  19     -5
+  bare             9 ->  11     -2
+  lying           15 ->  28    -13
+  full            20 ->  33    -13
+
+HIGHER UNDER B
+  eyes            12 ->   3     +9
+  face             2 ->   1     +1
+  breasts          3 ->   2     +1
+  body             7 ->   5     +2
+  smile           19 ->   7    +12
+  skin            71 ->  10    +61
+  chest           28 ->   8    +20
+  legs            27 ->   9    +18
+  looking         34 ->  12    +22
+  stomach         55 ->  15    +40
+  lips            58 ->  16    +42
+  smiling         24 ->  14    +10
+  tits            17 ->  13     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  breasts          1 ->  48    -47
+  naked            3 ->  24    -21
+  lying            6 -> 123   -117
+  chest            5 ->  46    -41
+  breast           9 -> 137   -128
+  nipples         12 -> 148   -136
+  pussy           15 -> 200   -185
+  panties         14 -> 121   -107
+  with            13 ->  59    -46
+  eyes             4 ->   4     +0
+  legs             7 ->   9     -2
+  body            16 ->  25     -9
+  in               8 ->  10     -2
+  bare            11 ->  14     -3
+
+HIGHER UNDER B
+  bruised         80 ->   2    +78
+  relaxed        148 ->   5   +143
+  beautiful       10 ->   3     +7
+  flushed        161 ->   8   +153
+  sleeping        34 ->   6    +28
+  breathing       52 ->  11    +41
+  soft           147 ->  13   +134
+  swollen         18 ->   7    +11
+  delicate       198 ->  18   +180
+  scars          200 ->  19   +181
+  sweaty         168 ->  20   +148
+  pale            58 ->  12    +46
+  exhausted      188 ->  22   +166
+  still           56 ->  15    +41
+  completely      69 ->  17    +52
+  hair            59 ->  23    +36
+  feet            42 ->  16    +26
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  breasts          2 ->  22    -20
+  back             4 ->  10     -6
+  naked            6 ->  14     -8
+  ass              7 ->  94    -87
+  pussy            9 -> 125   -116
+  breast          10 ->  84    -74
+  nipples          8 ->  54    -46
+  open            11 ->  20     -9
+  bare            14 ->  50    -36
+  legs            12 ->  19     -7
+  body            13 ->  27    -14
+  panties         16 -> 131   -115
+  lying           15 ->  99    -84
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  smile           19 ->   2    +17
+  expression      44 ->   3    +41
+  peaceful       148 ->   6   +142
+  smiling         36 ->   7    +29
+  facial         126 ->   8   +118
+  beautiful        5 ->   5     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  naked            2 ->  15    -13
+  eyes             3 ->  16    -13
+  breasts          4 ->   7     -3
+  nipples         10 ->  49    -39
+  body             6 ->  17    -11
+  bare            12 ->  33    -21
+  panties         15 ->  42    -27
+  whole           14 ->  29    -15
+  sleeping        13 ->  28    -15
+  skin            17 ->  26     -9
+
+HIGHER UNDER B
+  back             9 ->   1     +8
+  butt            28 ->   6    +22
+  feet           108 ->  13    +95
+  expression     113 ->  14    +99
+  underwear       89 ->  12    +77
+  bottom          51 ->  11    +40
+  pink            29 ->   9    +20
+  in               8 ->   4     +4
+  looking         63 ->  19    +44
+  smile           16 ->   8     +8
+  neck            27 ->  20     +7
+  beautiful        7 ->   5     +2
+  chest            5 ->   3     +2
+  legs            20 ->  18     +2
+  stomach         11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  breasts          2 ->   7     -5
+  naked            3 ->   5     -2
+  pussy            9 ->  38    -29
+  eyes             8 ->  15     -7
+  nipples         11 ->  55    -44
+  back             6 ->   9     -3
+  in              12 ->  43    -31
+
+HIGHER UNDER B
+  underwear       99 ->   6    +93
+  body             7 ->   4     +3
+  beautiful        5 ->   3     +2
+  bottom          30 ->  10    +20
+  ass             10 ->   8     +2
+  butt            24 ->  11    +13
+  panties         37 ->  12    +25
+  smiling         46 ->  17    +29
+  completely      32 ->  16    +16
+  face             1 ->   1     +0
+  bare             4 ->   2     +2
+  whole           15 ->  14     +1
+  scars           25 ->  18     +7
+  smile           13 ->  13     +0
+  big             27 ->  19     +8
+  gorgeous        28 ->  21     +7
+  large           23 ->  20     +3
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  naked            3 ->  28    -25
+  face             1 ->   1     +0
+  breasts          6 ->  54    -48
+  body             7 ->  49    -42
+  nipples         11 -> 144   -133
+  beautiful        5 ->   6     -1
+  panties         14 -> 146   -132
+  chest           12 ->  32    -20
+  bare            10 ->  22    -12
+  in               9 ->  13     -4
+
+HIGHER UNDER B
+  sleeping         4 ->   2     +2
+  profile         27 ->   4    +23
+  sleepy          58 ->   5    +53
+  breathing       65 ->   8    +57
+  lips            28 ->   7    +21
+  delicate        40 ->  12    +28
+  eyelids         76 ->  14    +62
+  soft            16 ->  10     +6
+  smile           13 ->  11     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  eyes             2 ->   2     +0
+  smile            3 ->   3     +0
+  look             8 ->  18    -10
+  head            10 ->  21    -11
+  lips            11 ->  25    -14
+  red             12 ->  24    -12
+
+HIGHER UNDER B
+  clearly         20 ->   5    +15
+  in               7 ->   4     +3
+  legs            16 ->   9     +7
+  face             1 ->   1     +0
+  pale            27 ->  17    +10
+  for             23 ->  14     +9
+  feet            13 ->  11     +2
+  beautiful       22 ->  13     +9
+  hands           14 ->  12     +2
+  as              19 ->  15     +4
+  hair            17 ->  16     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  naked            1 ->   1     +0
+  beautiful        5 ->  15    -10
+  nipples          9 ->  22    -13
+  eyes            12 ->  24    -12
+  big             13 ->  26    -13
+  butt            19 ->  36    -17
+  legs            20 ->  32    -12
+  pink            17 ->  28    -11
+  nipple          16 ->  20     -4
+  face             7 ->   7     +0
+  ass             10 ->  10     +0
+
+HIGHER UNDER B
+  in               6 ->   4     +2
+  breast           3 ->   3     +0
+  soft            26 ->  11    +15
+  panties         30 ->  14    +16
+  breasts          2 ->   2     +0
+  pubic           21 ->  13     +8
+  perfect         18 ->  12     +6
+  lying           14 ->   8     +6
+  back             8 ->   6     +2
+  bottom          25 ->  17     +8
+  sleeping        24 ->  18     +6
+  very            23 ->  19     +4
+  vagina          11 ->   9     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  face             1 ->   2     -1
+  breasts          2 ->  21    -19
+  eyes             5 ->  26    -21
+  body             6 ->  50    -44
+  belly            7 ->  37    -30
+  naked            4 ->   5     -1
+  chest           10 ->  56    -46
+  beautiful        9 ->  11     -2
+  stomach         11 ->  16     -5
+  buttocks        15 ->  68    -53
+  tattoo          13 ->  32    -19
+  breast          16 ->  33    -17
+  big             20 ->  47    -27
+  ass             18 ->  28    -10
+  smooth          19 ->  20     -1
+
+HIGHER UNDER B
+  back             3 ->   1     +2
+  neck            17 ->   3    +14
+  feet            34 ->   7    +27
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  face             2 ->  12    -10
+  breasts          3 ->  13    -10
+  naked            4 ->   5     -1
+  lying            5 ->  32    -27
+  bare             9 -> 110   -101
+  looking          8 ->  20    -12
+  smile           10 ->  44    -34
+  in              11 ->  61    -50
+  nipples         12 ->  96    -84
+  chest           13 ->  45    -32
+  expression      14 ->  18     -4
+  back            17 ->  89    -72
+  breast          16 ->  48    -32
+  smiling         15 ->  21     -6
+  hair            18 ->  58    -40
+
+HIGHER UNDER B
+  eyes             1 ->   1     +0
+  beautiful        6 ->   2     +4
+  dark            30 ->   3    +27
+  sleeping         7 ->   4     +3
+  graceful       115 ->   6   +109
+  good           113 ->   7   +106
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  eyes             3 ->  14    -11
+  in               2 ->   6     -4
+  pale            10 ->  49    -39
+  legs            15 ->  41    -26
+  head            14 ->  32    -18
+  body            17 ->  36    -19
+  naked           19 ->  87    -68
+  hair            20 ->  86    -66
+  arms            21 ->  51    -30
+  as              18 ->  35    -17
+  hands           11 ->  16     -5
+  with             5 ->   8     -3
+
+HIGHER UNDER B
+  sitting          7 ->   2     +5
+  lying            4 ->   3     +1
+  standing        13 ->   5     +8
+  smiling          6 ->   4     +2
+  again           16 ->   9     +7
+  looking          8 ->   7     +1
+  laying          28 ->  12    +16
+  sleeping        30 ->  13    +17
+  laughing        36 ->  17    +19
+  still           12 ->  11     +1
+  now             33 ->  19    +14
+  on              25 ->  15    +10
+  there           29 ->  18    +11
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M50 ===
+HIGHER UNDER A
+  naked            4 ->   6     -2
+  eyes             3 ->   3     +0
+  body            10 ->  32    -22
+  breasts          2 ->   2     +0
+  pussy           17 ->  38    -21
+  face             1 ->   1     +0
+  lying           11 ->  19     -8
+  breast          16 ->  22     -6
+  smile           18 ->  24     -6
+  nipples          9 ->  13     -4
+  bare            14 ->  18     -4
+  chest            6 ->  12     -6
+
+HIGHER UNDER B
+  sleeping         8 ->   4     +4
+  beautiful        5 ->   5     +0
+  full            19 ->   8    +11
+  hair            20 ->  11     +9
+  looking         15 ->  10     +5
+  ass             12 ->   9     +3
+  breathing       35 ->  16    +19
+  with            24 ->  15     +9
+  in               7 ->   7     +0
+  long            31 ->  17    +14
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  card             2 ->   8     -6
+  favorite         8 ->  20    -12
+  number           9 ->  15     -6
+  hand             3 ->   6     -3
+  turn            14 ->  72    -58
+  backpack        10 ->  16     -6
+  shirt           16 ->  43    -27
+  heart           15 ->  31    -16
+  left             4 ->   5     -1
+  wearing         18 ->  32    -14
+  lying           12 ->  13     -1
+  name             6 ->   7     -1
+  back            11 ->  11     +0
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  reflection      13 ->   4     +9
+  underwear       21 ->   9    +12
+  eyes            19 ->  10     +9
+  watch           20 ->  12     +8
+  feet            37 ->  17    +20
+  backside        17 ->  14     +3
+  expression      26 ->  18     +8
+  with             7 ->   3     +4
+  profile         28 ->  19     +9
+  in              27 ->  21     +6
+  smile            5 ->   2     +3
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  pussy            1 -> 163   -162
+  naked            6 ->  16    -10
+  panties          8 ->  47    -39
+  nipples         10 -> 108    -98
+  butt             7 ->  15     -8
+  legs             9 ->  13     -4
+  smile           19 ->  29    -10
+  big             17 ->  22     -5
+  back            16 ->  19     -3
+
+HIGHER UNDER B
+  tits            13 ->   2    +11
+  beautiful        3 ->   1     +2
+  breasts          5 ->   4     +1
+  asshole        101 ->  12    +89
+  looking         32 ->   8    +24
+  small           31 ->  11    +20
+  bare            18 ->   7    +11
+  body            11 ->   6     +5
+  in              15 ->   9     +6
+  clit            27 ->  17    +10
+  breast          22 ->  18     +4
+  exposed         28 ->  20     +8
+  completely      26 ->  21     +5
+  perfect         14 ->  14     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  in               4 ->   6     -2
+  looking          5 ->   9     -4
+  lying            7 ->  16     -9
+  legs             8 ->  14     -6
+  red             16 ->  24     -8
+  lips            14 ->  20     -6
+  bare            12 ->  18     -6
+  panties         18 ->  23     -5
+  hair            13 ->  17     -4
+  staring         11 ->  13     -2
+  face             2 ->   2     +0
+
+HIGHER UNDER B
+  naked            1 ->   1     +0
+  soft            30 ->   7    +23
+  beautiful        9 ->   4     +5
+  breasts          3 ->   3     +0
+  skin            17 ->  10     +7
+  smooth          53 ->  15    +38
+  pale            25 ->  12    +13
+  body            10 ->   8     +2
+  long            32 ->  19    +13
+  nude            15 ->  11     +4
+  eyes             6 ->   5     +1
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  breasts          2 ->  13    -11
+  bare             7 ->  12     -5
+  back             4 ->   7     -3
+  body             5 ->  11     -6
+  legs            11 ->  24    -13
+  naked            1 ->   1     +0
+  butt            14 ->  38    -24
+  ass              9 ->  14     -5
+  scars           12 ->  21     -9
+  whole           21 ->  42    -21
+  breast          20 ->  32    -12
+  right           13 ->  20     -7
+  left            16 ->  27    -11
+
+HIGHER UNDER B
+  completely      57 ->   5    +52
+  pubic           45 ->   6    +39
+  wearing         23 ->   8    +15
+  fully           73 ->  16    +57
+  nipples         18 ->  10     +8
+  erect           96 ->  25    +71
+  full            35 ->  18    +17
+  from            62 ->  26    +36
+  panties         22 ->  15     +7
+  nice            52 ->  29    +23
+  tattoos         33 ->  22    +11
+  red             44 ->  30    +14
+  big             28 ->  28     +0
+  pussy            8 ->   3     +5
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  ass              5 ->   7     -2
+  face             3 ->   6     -3
+  back             9 ->  10     -1
+  breasts          4 ->   5     -1
+  nude            13 ->  13     +0
+  naked            1 ->   1     +0
+  butt            14 ->  16     -2
+  full            11 ->  12     -1
+
+HIGHER UNDER B
+  bare             7 ->   3     +4
+  pussy            2 ->   2     +0
+  beautiful        6 ->   4     +2
+  perfect         10 ->   9     +1
+  body             8 ->   8     +0
+  big             18 ->  15     +3
+  nipples         12 ->  11     +1
+  tits            15 ->  14     +1
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  bare             6 ->   9     -3
+  in              10 ->  11     -1
+  again           18 ->  24     -6
+  eyes             5 ->   5     +0
+  naked            4 ->   4     +0
+  legs            11 ->  12     -1
+  nipples         15 ->  17     -2
+
+HIGHER UNDER B
+  breasts          2 ->   2     +0
+  beautiful        3 ->   3     +0
+  back             7 ->   6     +1
+  chest            8 ->   7     +1
+  ass             12 ->  10     +2
+  smile           17 ->  14     +3
+  breast           9 ->   8     +1
+  pussy           21 ->  18     +3
+  lovely          16 ->  16     +0
+  body            13 ->  13     +0
+  sleeping        19 ->  19     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  breasts          2 ->  10     -8
+  nipples          5 ->  50    -45
+  back             8 ->  21    -13
+  smile           10 ->  25    -15
+  tits            11 ->  72    -61
+  pussy           17 -> 113    -96
+  legs            13 ->  45    -32
+  breast          16 ->  37    -21
+  body             7 ->   9     -2
+  chest           15 ->  16     -1
+  right           20 ->  54    -34
+  hand            21 ->  48    -27
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  eyes             3 ->   2     +1
+  beautiful        6 ->   3     +3
+  profile         19 ->   5    +14
+  naked            4 ->   4     +0
+  perfect         14 ->   7     +7
+  sleeping        12 ->   8     +4
+  bare             9 ->   6     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  naked            2 ->   2     +0
+  breasts          6 ->  26    -20
+  ass              8 ->  22    -14
+  legs             3 ->   7     -4
+  bare            17 ->  35    -18
+  back            20 ->  41    -21
+  wet             14 ->  21     -7
+  spread          18 ->  25     -7
+  beautiful       11 ->  12     -1
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  pussy            4 ->   3     +1
+  stomach         47 ->  13    +34
+  in              10 ->   5     +5
+  red             30 ->  16    +14
+  eyes             7 ->   6     +1
+  hair            13 ->   9     +4
+  lips            15 ->  10     +5
+  with            19 ->  14     +5
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  eyes             2 ->   2     +0
+  naked            4 ->   4     +0
+  breasts          3 ->   3     +0
+  sleeping         8 ->  14     -6
+  smiling         14 ->  28    -14
+  in               5 ->   8     -3
+  smile            6 ->   9     -3
+  lying           10 ->  12     -2
+  bare            11 ->  13     -2
+  body            12 ->  15     -3
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  back             9 ->   5     +4
+  tears           20 ->  11     +9
+  profile         13 ->   7     +6
+  expression      15 ->  10     +5
+  beautiful        7 ->   6     +1
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  ass              4 ->   5     -1
+  pussy           11 ->  20     -9
+  bare             5 ->   6     -1
+  tits             7 ->   7     +0
+  nipples         15 ->  18     -3
+  breast          14 ->  15     -1
+  again           17 ->  21     -4
+  back             8 ->   9     -1
+  buttocks        20 ->  27     -7
+  in               9 ->  10     -1
+  breasts          1 ->   2     -1
+
+HIGHER UNDER B
+  face             2 ->   1     +1
+  beautiful        6 ->   4     +2
+  naked            3 ->   3     +0
+  lovely          10 ->   8     +2
+  pretty          13 ->  11     +2
+  smiling         27 ->  17    +10
+  big             16 ->  12     +4
+  long            19 ->  14     +5
+  profile         22 ->  19     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  breasts          1 ->   4     -3
+  naked            2 ->   5     -3
+  face             3 ->   8     -5
+  body             8 ->  17     -9
+  nipples          9 ->  21    -12
+  boobs           12 ->  32    -20
+  beautiful        7 ->   9     -2
+  bare            11 ->  20     -9
+  back            15 ->  26    -11
+  eyes            16 ->  23     -7
+  small           17 ->  18     -1
+
+HIGHER UNDER B
+  tits             5 ->   1     +4
+  ass              6 ->   3     +3
+  pussy            4 ->   2     +2
+  butt            22 ->   7    +15
+  hairy           52 ->  11    +41
+  big             10 ->   6     +4
+  legs            37 ->  14    +23
+  in              60 ->  15    +45
+  huge            28 ->  13    +15
+  sexy            43 ->  16    +27
+  panties         13 ->  10     +3
+  large           14 ->  12     +2
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  eyes             2 ->   3     -1
+  smile            6 ->  13     -7
+  lying            5 ->   5     +0
+  open             8 ->  14     -6
+
+HIGHER UNDER B
+  naked            3 ->   2     +1
+  face             1 ->   1     +0
+  for             11 ->   6     +5
+  ass             26 ->  11    +15
+  back            15 ->   9     +6
+  beautiful        9 ->   8     +1
+  bare            12 ->  10     +2
+  in               7 ->   7     +0
+  breasts          4 ->   4     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  naked            2 ->   9     -7
+  breasts          4 ->  33    -29
+  body             6 ->  31    -25
+  in               7 ->  13     -6
+  with            14 ->  49    -35
+  belly           13 ->  37    -24
+  beautiful       12 ->  22    -10
+  lying           16 -> 115    -99
+  stomach         15 ->  25    -10
+  hair            20 ->  32    -12
+  looking         19 ->  28     -9
+  sleeping         5 ->   6     -1
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  back             8 ->   3     +5
+  smile           11 ->   5     +6
+  eyes             3 ->   2     +1
+  bare             9 ->   4     +5
+  shoulder        89 ->  10    +79
+  skin            18 ->   7    +11
+  ribs           127 ->  12   +115
+  scars           17 ->  11     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  naked            1 ->   4     -3
+  face             3 ->  10     -7
+  back             5 ->  21    -16
+  body             9 ->  23    -14
+  legs            11 ->  28    -17
+  beautiful       14 ->  77    -63
+  right           15 ->  67    -52
+  again           17 ->  71    -54
+  butt            13 ->  32    -19
+  for              6 ->   6     +0
+  belly           10 ->  13     -3
+  hair            20 ->  54    -34
+  nipples          7 ->   8     -1
+  stomach         19 ->  26     -7
+  buttocks        18 ->  24     -6
+  nipple          12 ->  12     +0
+
+HIGHER UNDER B
+  breasts          2 ->   1     +1
+  boobs           26 ->   2    +24
+  panties         72 ->   5    +67
+  bra             33 ->   9    +24
+  vulva           39 ->  11    +28
+  ass             22 ->  14     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  ass              2 ->  15    -13
+  pussy            4 ->  10     -6
+  nipples         10 ->  62    -52
+  butt            14 ->  55    -41
+  perfect         12 ->  20     -8
+  gorgeous        16 ->  41    -25
+  large           18 ->  51    -33
+  tits            11 ->  13     -2
+  lovely          17 ->  38    -21
+  beautiful        6 ->   6     +0
+  panties         15 ->  18     -3
+
+HIGHER UNDER B
+  face             9 ->   3     +6
+  bare             7 ->   2     +5
+  back             5 ->   5     +0
+  lying           53 ->   9    +44
+  in              24 ->   8    +16
+  belly           40 ->  12    +28
+  eyes           105 ->  17    +88
+  smooth          59 ->  14    +45
+  stomach         65 ->  16    +49
+  full            13 ->  11     +2
+  breasts          1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  tears            3 ->  11     -8
+  lying            4 ->   9     -5
+  sitting          7 ->  21    -14
+  looking          8 ->  20    -12
+  crying          13 ->  45    -32
+  smiling         12 ->  22    -10
+  sleeping         5 ->   5     +0
+  eyes             2 ->   2     +0
+  with            15 ->  18     -3
+  back            10 ->  13     -3
+  on              20 ->  29     -9
+  hand            19 ->  23     -4
+  beautiful       16 ->  16     +0
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  for             17 ->   4    +13
+  again           11 ->   3     +8
+  smile           14 ->   6     +8
+  bare            34 ->  14    +20
+  profile         28 ->  10    +18
+  chest           21 ->  12     +9
+  lips            26 ->  15    +11
+  in               9 ->   8     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M46 ===
+HIGHER UNDER A
+  face             1 ->  28    -27
+  eyes             2 -> 116   -114
+  naked            4 ->  13     -9
+  breasts          3 ->   6     -3
+  body             6 ->  52    -46
+  looking          5 ->  16    -11
+  sleeping         8 -> 122   -114
+  smile            9 -> 157   -148
+  lying           10 -> 124   -114
+  beautiful        7 ->  34    -27
+  pussy           14 -> 186   -172
+  staring         15 -> 115   -100
+  smiling         16 -> 126   -110
+  back            17 -> 107    -90
+  in              12 ->  17     -5
+  small           18 ->  24     -6
+
+HIGHER UNDER B
+  breast          24 ->   1    +23
+  bra             81 ->   3    +78
+  nipples         11 ->   2     +9
+  tits            33 ->   5    +28
+  nipple          22 ->   4    +18
+  watch           72 ->   7    +65
+  plump          143 ->  11   +132
+  bare            26 ->   8    +18
+  from            59 ->  10    +49
+  left            53 ->  12    +41
+  snoozing       186 ->  14   +172
+  legs            13 ->   9     +4
+  pierced        173 ->  22   +151
+  red             58 ->  15    +43
+  hard           137 ->  19   +118
+  rear           155 ->  23   +132
+  feet           118 ->  18   +100
+  white           54 ->  21    +33
+  long            28 ->  20     +8
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  naked            1 ->   5     -4
+  breasts          3 ->   6     -3
+  ass              5 ->  19    -14
+  panties          7 ->  71    -64
+  nipples         10 ->  87    -77
+  butt             8 ->  21    -13
+  nude            14 ->  78    -64
+  again           13 ->  28    -15
+  legs            15 ->  27    -12
+  nipple          19 ->  45    -26
+  eyes            17 ->  29    -12
+  lying           16 ->  20     -4
+  body             9 ->   9     +0
+
+HIGHER UNDER B
+  face             2 ->   1     +1
+  in               4 ->   2     +2
+  back            12 ->   4     +8
+  beautiful        6 ->   3     +3
+  perfect         27 ->   7    +20
+  side            67 ->  12    +55
+  full            32 ->  10    +22
+  for             21 ->  11    +10
+  smile           36 ->  15    +21
+  completely      24 ->  14    +10
+  as              20 ->  13     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M48 ===
+HIGHER UNDER A
+  naked            2 ->  16    -14
+  back             4 ->  22    -18
+  breasts          6 ->  24    -18
+  nipples         15 -> 135   -120
+  body             8 ->  18    -10
+  underwear       16 ->  75    -59
+  legs             5 ->  10     -5
+  bare            12 ->  34    -22
+  stomach         18 ->  37    -19
+  mouth           11 ->  19     -8
+  chest           14 ->  23     -9
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  eyes             3 ->   2     +1
+  lips            17 ->   3    +14
+  standing        19 ->   4    +15
+  again           23 ->   7    +16
+  with            22 ->   8    +14
+  smile           34 ->  11    +23
+  sitting         37 ->  14    +23
+  hair            10 ->   6     +4
+  in               7 ->   5     +2
+  lying            9 ->   9     +0
+  looking         26 ->  17     +9
+  hands           21 ->  13     +8
+  feet            20 ->  15     +5
+  as              24 ->  20     +4
+  for             13 ->  12     +1
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  naked            3 ->   5     -2
+  breasts          2 ->   2     +0
+  bare             8 ->  23    -15
+  legs             9 ->  22    -13
+  breast          11 ->  24    -13
+  chest            6 ->  11     -5
+  nipples         10 ->  18     -8
+  boobs           13 ->  16     -3
+
+HIGHER UNDER B
+  face             1 ->   1     +0
+  in               7 ->   3     +4
+  as              14 ->   7     +7
+  body             4 ->   4     +0
+  smile           70 ->  12    +58
+  smiling         64 ->  13    +51
+  again           30 ->  10    +20
+  for             16 ->   8     +8
+  pale            34 ->  14    +20
+  perfect         31 ->  15    +16
+  eyes            12 ->   9     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  face             1 ->   4     -3
+  breasts          3 ->   6     -3
+  eyes             6 ->  26    -20
+  lying            9 ->  38    -29
+  beautiful        5 ->  14     -9
+  for             11 ->  32    -21
+  again           13 ->  54    -41
+  in               4 ->   9     -5
+  sleeping        14 ->  52    -38
+
+HIGHER UNDER B
+  naked            2 ->   1     +1
+  back             8 ->   2     +6
+  tattoo          53 ->   5    +48
+  bare             7 ->   3     +4
+  stomach         29 ->   7    +22
+  tattoos         76 ->  12    +64
+  belly           24 ->  10    +14
+  perfect         17 ->  11     +6
+  body            10 ->   8     +2
+  backside        62 ->  18    +44
+  nipples         32 ->  16    +16
+  feet            15 ->  15     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  eyes             2 ->   2     +0
+  naked            3 ->   5     -2
+  mouth            7 ->  35    -28
+  beautiful        6 ->  12     -6
+  legs            10 ->  23    -13
+  nipples         13 ->  29    -16
+  lips             5 ->   7     -2
+  sleeping         9 ->  13     -4
+
+HIGHER UNDER B
+  blushing       216 ->   9   +207
+  waking          57 ->   8    +49
+  skin            35 ->  10    +25
+  cheeks         118 ->  16   +102
+  smile           11 ->   4     +7
+  breathing        8 ->   6     +2
+  eyelids         52 ->  17    +35
+  chest           22 ->  14     +8
+  in              14 ->  11     +3
+  navel           85 ->  24    +61
+  thighs          54 ->  22    +32
+  moving          56 ->  27    +29
+  move            29 ->  19    +10
+  profile         28 ->  21     +7
+  hair            32 ->  25     +7
+  tongue          27 ->  26     +1
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M49 ===
+HIGHER UNDER A
+  breasts          2 ->   7     -5
+  legs             6 ->  27    -21
+  back             8 ->  28    -20
+  nipples         12 ->  50    -38
+  panties         17 ->  57    -40
+  right           10 ->  22    -12
+  penis           23 ->  95    -72
+  body             4 ->   5     -1
+  vagina          11 ->  15     -4
+  breast          14 ->  29    -15
+  head            19 ->  32    -13
+  belly           13 ->  20     -7
+  stomach         21 ->  30     -9
+  naked            3 ->   4     -1
+  with            16 ->  19     -3
+  in               5 ->   6     -1
+
+HIGHER UNDER B
+  and              9 ->   2     +7
+  eyes             7 ->   3     +4
+  phone           63 ->   8    +55
+  exposed         70 ->  13    +57
+  tattoo          38 ->  11    +27
+  heart           32 ->  10    +22
+  beautiful       54 ->  16    +38
+  again           48 ->  18    +30
+  left            20 ->   9    +11
+  face             1 ->   1     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  face             1 ->   1     +0
+  breasts          2 ->   4     -2
+  naked            3 ->   5     -2
+  eyes            14 ->  42    -28
+  beautiful       16 ->  27    -11
+  nipples          6 ->  12     -6
+  again           17 ->  34    -17
+
+HIGHER UNDER B
+  pussy            4 ->   2     +2
+  vagina           9 ->   3     +6
+  butt            13 ->   7     +6
+  right           11 ->   8     +3
+  bruises         54 ->  17    +37
+  nude            20 ->  13     +7
+  breast          15 ->  11     +4
+  stomach         18 ->  16     +2
+  left            19 ->  18     +1
+  ass             21 ->  19     +2
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M45 ===
+HIGHER UNDER A
+  nipples          4 ->  81    -77
+  tits             5 ->  37    -32
+  pussy            7 ->  49    -42
+  big              9 ->  55    -46
+  wet             11 ->  43    -32
+  panties         14 ->  82    -68
+  hard            16 ->  54    -38
+  ass              6 ->  12     -6
+  legs            12 ->  25    -13
+  breast          17 ->  39    -22
+  little          18 ->  32    -14
+  beautiful        8 ->  10     -2
+
+HIGHER UNDER B
+  sleeping        39 ->   4    +35
+  naked            1 ->   1     +0
+  bare             2 ->   2     +0
+  back            38 ->   5    +33
+  sleep          141 ->   8   +133
+  face            15 ->   6     +9
+  in              10 ->   7     +3
+  profile        146 ->  14   +132
+  full            24 ->  11    +13
+  backside       109 ->  15    +94
+  body            13 ->   9     +4
+  breasts          3 ->   3     +0
+  nude            20 ->  13     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  breasts          1 ->   8     -7
+  tits             5 -> 182   -177
+  pussy            6 -> 187   -181
+  boobs            7 -> 172   -165
+  nipples         10 -> 105    -95
+  eyes            12 ->  39    -27
+  face             2 ->   4     -2
+  hand            16 ->  73    -57
+  hands           18 ->  34    -16
+  breast          15 ->  25    -10
+  in              17 ->  21     -4
+
+HIGHER UNDER B
+  completely      39 ->   3    +36
+  naked            4 ->   1     +3
+  beautiful        3 ->   2     +1
+  soaking         73 ->   5    +68
+  fully           76 ->  11    +65
+  wearing         47 ->  13    +34
+  gorgeous        48 ->  14    +34
+  again           69 ->  20    +49
+  body             9 ->   6     +3
+  getting         38 ->  18    +20
+  big             13 ->   9     +4
+  with            35 ->  19    +16
+  chest           20 ->  15     +5
+  lying           21 ->  16     +5
+  standing        22 ->  17     +5
+  ass              8 ->   7     +1
+  wet             29 ->  22     +7
+  panties         14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.
