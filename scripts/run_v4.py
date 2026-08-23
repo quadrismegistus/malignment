@@ -63,13 +63,24 @@ def main():
     #: message and let the template do whatever it ships with. `--system ""`
     #: passes an explicit empty string, which DELETES a shipped persona on the
     #: models that have one and ADDS an empty block on the models that do not
-    #: -- two opposite operations under one label, which is why
-    #: docs/prefill.md rules against it. `measurements.json` section
-    #: chat_template carries `sys_empty_ok` per model if you want it anyway.
+    #: -- two opposite operations under one label.
+    #:
+    #: **CORRECTED 2026-08-23: this said docs/prefill.md "rules against" `""`.
+    #: It does not, and has not since the amendment on that page.** The current
+    #: ruling is `system` is a FACTOR, not a constant: run `""` as the UNIFORM
+    #: CONDITION and `DEFAULT` as a second cell on a subset. This comment was
+    #: quoting the superseded first recommendation, and it would have told the
+    #: next seat that the adopted arm was forbidden -- the pilot's 16 checkpoints
+    #: and box A's 40 all ran `""`.
+    #:
+    #: What survives from the two-operations argument is why the two CANNOT BE
+    #: POOLED (prefill.md, closing line), which is a different claim from `""`
+    #: being wrong. `measurements.json` section chat_template carries
+    #: `sys_empty_ok` per model.
     ap.add_argument("--system", default=None,
                     help="explicit system message. OMIT for the template's own "
-                         "default (recommended); '' forces an empty one, which "
-                         "is NOT the same thing.")
+                         "default; '' forces an empty one, which is NOT the same "
+                         "thing and is the adopted uniform condition.")
     ap.add_argument("--user-msg", default="Hi.",
                     help="the user turn placed before a prefill stem")
     ap.add_argument("--topup", action="store_true",
