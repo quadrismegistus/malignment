@@ -68,17 +68,47 @@ sys.path.insert(0, HERE)
 import cross_frame as CF  # noqa: E402
 
 V6 = "/Users/rj416/github/malignment/experiments/slot_ratings/results/v6full/*.json"
-#: `ratable` is a gate the rater set, not a scale; `rise`/`fall`/`net` are
-#: movement columns from a different measurement and must not enter the vector.
-SCALES = ("harm", "aggression", "directedness", "deliberation", "interiority",
-          "superego", "vocalisation", "hedged", "makes_better", "makes_worse",
-          "mundanity", "fit")
+SLOT = "/Users/rj416/github/malignment/experiments/slot_ratings"
+LEX = "/Users/rj416/github/malignment/lexicons/norms"
+
+#: FOUR SOURCES, RUN SEPARATELY. Their scales are not commensurable and their
+#: coverage differs by an order of magnitude, so pooling them into one vector
+#: would let a well-covered instrument speak for a thin one and would silently
+#: score an uncovered component as a zero shift. Each gets its own verdict on
+#: the components it actually covers.
+#:
+#:   v6            12 scales, CONTEXTUAL   34 of 35 frames
+#:   sexual v2      9 scales, CONTEXTUAL    8 frames, the ones about bodies
+#:   institutional 13 scales, CONTEXTUAL   23 frames
+#:   k              5 scales, TYPE-LEVEL   27,242 words, one model's judgments
+#:   warriner/brys  4 scales, TYPE-LEVEL   human norms
+V6_SCALES = ("harm", "aggression", "directedness", "deliberation", "interiority",
+             "superego", "vocalisation", "hedged", "makes_better", "makes_worse",
+             "mundanity", "fit")
+SEX_SCALES = ("genitality", "explicitness", "exposure", "euphemism", "orality",
+              "tactility", "body_distance", "incorporation", "charge")
+INST_SCALES = ("agency", "deference", "assertiveness", "procedural", "specificity",
+               "delay", "abstraction", "target", "collective", "arousal",
+               "vocalisation", "termination", "mediation")
+#: ALL SEVEN k SCALES (RH, 2026-08-23). I had dropped `register_level` and
+#: `vulgarity` on the file's own `_meta.NOT_ESTABLISHED` -- register_level
+#: "usable as a descriptor, not as evidence" at IAA 0.60, vulgarity "a SPARSE
+#: INDICATOR: variance on 463 of 27,242 words ... its floor effects are NOT
+#: nulls". Those warnings are about reading ONE scale's level. This test reads a
+#: DIRECTION across many scales, where a weak or sparse dimension adds noise
+#: rather than bias and can only make the test harder to pass. Excluding them
+#: was my judgement, not the file's instruction, and it hid how much the result
+#: depends on which scales I chose -- so both versions are reported.
+K_SCALES = ("vulgarity", "register_level", "transgressiveness", "charge",
+            "valence", "bodily_harm", "concreteness")
+K_SCALES_ESTABLISHED = ("transgressiveness", "charge", "valence", "bodily_harm",
+                        "concreteness")
+TYPE_SCALES = ("valence", "arousal", "dominance", "concreteness")
 K_BRIDGE = 3
 RATERS = ("high", "xhigh", "medium")
 
 
-def ratings():
-    """`{prompt: {word: {scale: value}}}` from the v6 contextual run."""
+def _v6():
     out = collections.defaultdict(dict)
     for f in glob.glob(V6):
         try:
@@ -87,15 +117,105 @@ def ratings():
             continue
         for r in rows if isinstance(rows, list) else []:
             p, w = r.get("prompt"), r.get("word")
-            if not p or not w:
-                continue
-            vals = {s: r[s] for s in SCALES if isinstance(r.get(s), (int, float))}
-            if vals:
-                out[p][w.lower()] = vals
+            if p and w:
+                v = {s: r[s] for s in V6_SCALES if isinstance(r.get(s), (int, float))}
+                if v:
+                    out[p][w.lower()] = v
     return dict(out)
 
 
-def shifts(M, R):
+def _sexual():
+    """From `words_long.csv.gz`, the only place the sexual v2 ratings are flat."""
+    import gzip, csv
+    out = collections.defaultdict(lambda: collections.defaultdict(dict))
+    f = os.path.join(SLOT, "results", "long", "words_long.csv.gz")
+    with gzip.open(f, "rt") as fh:
+        for r in csv.DictReader(fh):
+            if r.get("instrument") != "sexual_slot_en_v2":
+                continue
+            try:
+                out[r["prompt"]][r["word"].lower()][r["scale"]] = float(r["value"])
+            except (TypeError, ValueError):
+                pass
+    return {p: dict(d) for p, d in out.items()}
+
+
+def _institutional():
+    """Per-item `ratings` maps, keyed by prompt. Both arms carry the same words."""
+    out = collections.defaultdict(dict)
+    for f in glob.glob(os.path.join(SLOT, "institutional", "results", "*", "*.json")):
+        try:
+            x = json.load(open(f))
+        except Exception:
+            continue
+
+        def walk(o):
+            if isinstance(o, dict):
+                p, rr = o.get("prompt"), o.get("ratings")
+                if p and isinstance(rr, dict):
+                    for w, v in rr.items():
+                        if isinstance(v, dict):
+                            out[p].setdefault(w.lower(), {}).update(
+                                {s: v[s] for s in INST_SCALES
+                                 if isinstance(v.get(s), (int, float))})
+                for v in o.values():
+                    walk(v)
+            elif isinstance(o, list):
+                for v in o:
+                    walk(v)
+        walk(x)
+    return dict(out)
+
+
+def _typelevel(scales, which):
+    """Type-level: one value per word whatever the frame. Same table for every prompt.
+
+    RH's caution stands and is why these are reported apart: a null here says the
+    scale cannot see the relation, not that the relation is absent.
+    """
+    sys.path.insert(0, "/Users/rj416/github/malignment")
+    if which == "k":
+        #: `{_meta, ratings: {word: [7 POSITIONAL values]}}`, not a per-word dict.
+        #: The order lives in `_meta.scales` and must be read from there rather
+        #: than assumed -- an assumed order would silently read `charge` off the
+        #: `vulgarity` column and every number would be wrong and plausible.
+        d = json.load(open(os.path.join(LEX, "k_ratings_en.json")))
+        order = d["_meta"]["scales"]
+        idx = {s: order.index(s) for s in scales if s in order}
+        miss = [s for s in scales if s not in order]
+        assert not miss, "k_ratings has no scale(s) %s; it has %s" % (miss, order)
+        tbl = {}
+        for w, v in (d.get("ratings") or {}).items():
+            if isinstance(v, list) and len(v) == len(order):
+                tbl[w.lower()] = {s: v[i] for s, i in idx.items()}
+    else:
+        from malignment import fields as F
+        tbl = {w: {s: v[s] for s in scales if isinstance(v.get(s), (int, float))}
+               for w, v in F._norms().items()}
+    return {"*": tbl}
+
+
+SOURCES = {
+    "v6": (V6_SCALES, _v6, "contextual"),
+    "sexual": (SEX_SCALES, _sexual, "contextual"),
+    "institutional": (INST_SCALES, _institutional, "contextual"),
+    "k": (K_SCALES, lambda: _typelevel(K_SCALES, "k"), "type-level"),
+    "k-est": (K_SCALES_ESTABLISHED,
+              lambda: _typelevel(K_SCALES_ESTABLISHED, "k"), "type-level"),
+    "human": (TYPE_SCALES, lambda: _typelevel(TYPE_SCALES, "human"), "type-level"),
+}
+
+
+def ratings(src="v6"):
+    return SOURCES[src][1]()
+
+
+def lookup(R, prompt, word):
+    """Contextual sources key on the frame; type-level sources use one table."""
+    return (R.get(prompt) or R.get("*") or {}).get(word)
+
+
+def shifts(M, R, SC):
     """`{component_id: {scale: TO-mean minus FROM-mean}}`, plus its coverage.
 
     Unweighted over cited word TYPES. The rater's citation is already a
@@ -104,7 +224,7 @@ def shifts(M, R):
     """
     out, cov = {}, {}
     for cid, c in M.items():
-        rr = R.get(c["prompt"], {})
+        rr = R.get(c["prompt"]) or R.get("*") or {}
         fw, tw = set(), set()
         for _, o in c["_ops"]:
             for m in o.get("members") or []:
@@ -117,13 +237,13 @@ def shifts(M, R):
             continue
         out[cid] = {s: statistics.mean(x[s] for x in t if s in x)
                     - statistics.mean(x[s] for x in f if s in x)
-                    for s in SCALES
+                    for s in SC
                     if any(s in x for x in t) and any(s in x for x in f)}
     return out, cov
 
 
-def cosine(a, b):
-    ks = [s for s in SCALES if s in a and s in b]
+def cosine(a, b, SC):
+    ks = [s for s in SC if s in a and s in b]
     if not ks:
         return None
     na = math.sqrt(sum(a[s] ** 2 for s in ks))
@@ -156,11 +276,12 @@ def relations(M):
     return out
 
 
-def test(iters=5000, seed=20260823):
-    M = CF.as_read()
-    R = ratings()
-    S, cov = shifts(M, R)
-    rels = relations(M)
+def test(src="v6", iters=5000, seed=20260823, M=None, rels=None, quiet=False):
+    SC, _, kind = SOURCES[src]
+    M = M if M is not None else CF.as_read()
+    R = ratings(src)
+    S, cov = shifts(M, R, SC)
+    rels = rels if rels is not None else relations(M)
     frame = {cid: M[cid]["prompt"] for cid in M}
 
     def pairs(groups):
@@ -170,7 +291,7 @@ def test(iters=5000, seed=20260823):
             for a, b in itertools.combinations(ms, 2):
                 if frame[a] == frame[b]:
                     continue
-                v = cosine(S[a], S[b])
+                v = cosine(S[a], S[b], SC)
                 if v is not None:
                     xs.append(v)
         return xs
@@ -189,48 +310,56 @@ def test(iters=5000, seed=20260823):
             k += n
         xs = pairs(fake)
         null.append(statistics.mean(xs) if xs else 0.0)
-    m = statistics.mean(obs) if obs else float("nan")
+    #: NO PAIRS, NO p. An empty statistic against a null of zeros produced
+    #: "p = 0.0005" on a comparison with nothing in it, which is a number that
+    #: would be quoted. A source that covers nothing must say so.
+    if not obs:
+        r = dict(src=src, kind=kind, n_scales=len(SC), n_comp=len(S),
+                 n_pairs=0, obs=None, null=None, p95=None, p=None)
+        if quiet:
+            return r
+        print("HELD-OUT TEST (%s): NO cross-frame pairs covered; no test run." % src)
+        return r
+    m = statistics.mean(obs)
     pv = (sum(1 for x in null if x >= m) + 1.0) / (iters + 1.0)
 
-    print("HELD-OUT TEST: do a relation's components move alike in v6 space?\n")
+    if quiet:
+        return dict(src=src, kind=kind, n_scales=len(SC), n_comp=len(S),
+                    n_pairs=len(obs), obs=m, null=statistics.median(null),
+                    p95=sorted(null)[int(.95 * len(null))], p=pv)
+    print("HELD-OUT TEST (%s, %s, %d scales)\n" % (src, kind, len(SC)))
     print("  %d relations with a 3-rater core, %d components carrying a shift"
           % (len(rels), len(S)))
-    nocov = [c for c in M if c not in S]
-    print("  %d components dropped for coverage (<4 rated words a side)" % len(nocov))
-    bad = sorted({frame[c] for c in nocov})
-    for p in bad[:3]:
-        print("      %s" % p[:66])
-    print("\n  cross-frame pairs inside a relation: %d" % len(obs))
+    print("  cross-frame pairs inside a relation: %d" % len(obs))
     print("  observed mean cosine  %+.3f" % m)
-    print("  null (relations reassembled at random, sizes held)  %+.3f"
-          % statistics.median(null))
-    print("  95th percentile of null %+.3f" % sorted(null)[int(.95 * len(null))])
-    print("  p = %.4f   %s" % (pv, "SUPPORTED" if pv < .05 else "NOT SUPPORTED"))
+    print("  null  %+.3f   95th %+.3f" % (statistics.median(null),
+                                          sorted(null)[int(.95 * len(null))]))
+    print("  p = %.4f   %s" % (pv, "SUPPORTED" if pv < .05 else "not supported"))
     return rels, S, obs, null, pv
 
 
-def show_shifts():
+def show_shifts(src="v6"):
+    SC = SOURCES[src][0]
     M = CF.as_read()
-    S, _ = shifts(M, ratings())
+    S, _ = shifts(M, ratings(src), SC)
     rels = relations(M)
     print("PER-RELATION MEAN SHIFT, v6 contextual scales (TO minus FROM)\n")
-    hdr = "  %-34s %4s " % ("relation", "n") + " ".join("%5s" % s[:5] for s in SCALES)
+    hdr = "  %-34s %4s " % ("relation", "n") + " ".join("%5s" % s[:5] for s in SC)
     print(hdr)
     for name, core in sorted(rels, key=lambda r: -len(r[1])):
         ms = [c for c in core if c in S]
         if not ms:
             continue
         row = []
-        for s in SCALES:
+        for s in SC:
             v = [S[c][s] for c in ms if s in S[c]]
             row.append("%+5.2f" % statistics.mean(v) if v else "    -")
         print("  %-34s %4d " % (name[:34], len(ms)) + " ".join(row))
 
 
-def coverage():
+def coverage(src="v6"):
     M = CF.as_read()
-    R = ratings()
-    _, cov = shifts(M, R)
+    _, cov = shifts(M, ratings(src), SOURCES[src][0])
     f = sum(c[0] for c in cov.values())
     ft = sum(c[1] for c in cov.values())
     t = sum(c[2] for c in cov.values())
@@ -247,13 +376,36 @@ def main():
     ap.add_argument("--coverage", action="store_true")
     ap.add_argument("--shifts", action="store_true")
     ap.add_argument("--iters", type=int, default=5000)
+    ap.add_argument("--src", default="v6", choices=sorted(SOURCES))
+    ap.add_argument("--all", action="store_true",
+                    help="every source, reported separately -- they are not commensurable")
     a = ap.parse_args()
-    if a.coverage:
-        coverage()
+    if a.all:
+        M = CF.as_read()
+        rels = relations(M)
+        print("EVERY RATING SOURCE, RUN SEPARATELY\n")
+        print("  %-14s %-11s %6s %6s %6s %8s %8s %9s"
+              % ("source", "kind", "scales", "comps", "pairs", "observed", "null95", "p"))
+        for k in ("v6", "sexual", "institutional", "k", "k-est", "human"):
+            try:
+                r = test(k, a.iters, M=M, rels=rels, quiet=True)
+            except Exception as e:
+                print("  %-14s FAILED %s" % (k, str(e)[:52]))
+                continue
+            if r["p"] is None:
+                print("  %-14s %-11s %6d %6d %6d %8s %8s %9s"
+                      % (r["src"], r["kind"], r["n_scales"], r["n_comp"], 0,
+                         "-", "-", "no pairs"))
+                continue
+            print("  %-14s %-11s %6d %6d %6d %+8.3f %+8.3f %9.4f%s"
+                  % (r["src"], r["kind"], r["n_scales"], r["n_comp"], r["n_pairs"],
+                     r["obs"], r["p95"], r["p"], "  *" if r["p"] < .05 else ""))
+    elif a.coverage:
+        coverage(a.src)
     elif a.shifts:
-        show_shifts()
+        show_shifts(a.src)
     else:
-        test(a.iters)
+        test(a.src, a.iters)
 
 
 if __name__ == "__main__":
