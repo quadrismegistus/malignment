@@ -519,7 +519,13 @@ def workflow(raters=2, model="sonnet", effort="xhigh", regenerate=False):
     #: NAMED BY RATER MODEL. Overwriting the file would destroy the script that
     #: produced the readings already on disk, and a third rating is only
     #: comparable if the earlier one can still be shown to have run this document.
-    out = os.path.join(HERE, "workflow_crossframe_%s.js" % model)
+    #: NAMED BY MODEL **AND EFFORT**. Keyed by model alone, three Opus runs at
+    #: medium, high and xhigh overwrote one script, so the file on disk stopped
+    #: reproducing two of the three results it had produced. The results were
+    #: saved separately and nothing was lost, but a runner that cannot re-run
+    #: what it ran is a provenance gap of exactly the kind this file asserts
+    #: against elsewhere.
+    out = os.path.join(HERE, "workflow_crossframe_%s_%s.js" % (model, effort))
     open(out, "w").write(js)
     #: The generated script has to CONTAIN what it claims to run, checked rather
     #: than assumed -- a template that silently loses its file path produces a
@@ -545,6 +551,7 @@ DOMAIN_COLOUR = {"sexual": "#fa5252", "violence": "#e8590c",
 #: Measured on the single-rater version: 25 connected components, 0 leaves with
 #: more than one hub.
 RATERS = [("opus-high", "crossframe_groups_89_opus_high.json"),
+          ("opus-xhigh", "crossframe_groups_89_opus_xhigh.json"),
           ("opus-med", "crossframe_groups_89_opus_medium.json")]
 
 

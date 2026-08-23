@@ -70,7 +70,7 @@ Its entire ` +
   `object. Do not read any other file, and do not look anything up.`
 const rs = (await parallel(Array.from({ length: 1 }, (_, i) => () =>
   agent(TASK, { label: `crossframe r${i + 1}`, phase: 'Group', schema: SCHEMA,
-                model: "opus", effort: "medium" })))).filter(Boolean)
+                model: "opus", effort: "xhigh" })))).filter(Boolean)
 if (rs.length < 1)
   log(`WARNING: 1 rater(s) requested, ${rs.length} returned`)
 return { raters: rs.length, per_rater: rs.map((x) => ({
