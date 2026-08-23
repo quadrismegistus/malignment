@@ -619,6 +619,17 @@ def execute(b, models, roots, venv, a):
         _dp = int(_pm[0]["HostPort"]) if _pm else None
     except Exception:                                            # noqa: BLE001
         _dp = None
+    #: **SAY WHICH ROUTES WERE ACTUALLY TRIED.** `_dp` comes from the instance's
+    #: `ports` map, and if vast.ai has not populated it by the time we ask, the
+    #: fallback silently degrades to the IP-on-the-proxy-port form that could
+    #: never work -- the exact defect fixed on 2026-08-23. A failure then reads
+    #: as "machine is bad" when it may be "our fallback did not fire", and those
+    #: want opposite responses: blocklist versus fix the caller.
+    print("  routes      proxy %s:%s | direct %s:%s" % (host, port, ip, _dp or "UNKNOWN"))
+    if not _dp:
+        print("  WARNING     no mapped 22/tcp port in the instance record -- the "
+              "IP fallback will retry the PROXY port and cannot succeed on a box "
+              "whose proxy is down.")
     working = cloud.verify_reachable(host, port, alt_host=ip, alt_port=_dp)
     if working:
         w_host, w_port = working
