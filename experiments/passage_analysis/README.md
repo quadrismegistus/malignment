@@ -69,6 +69,12 @@ Nowhere near quotable. Exactly the shape a site-conditional page-grain effect wo
                                 Its corpus is gen_sequences, not twp, so it does
                                 not wait on lineage coverage the way the
                                 distribution-grain work does.
+    syntagmatic_damage/         PORTED, not re-run. When a model is forced to utter a
+                                word alignment demoted, what happens to the sentence
+                                around it? Nine archived measurements synthesised:
+                                alignment changes SELECTION and leaves COMBINATION
+                                alone. One gap named -- no true third-party scorer has
+                                ever read a forced passage.
 
 ## The tension worth keeping visible
 
