@@ -77,6 +77,11 @@ one-line computation and beats every hand-designed screen in the project.
 
 # 2b. THREE APPROACHES, ONE CEILING -- AND IT IS THE LABEL
 
+> **SUPERSEDED 2026-08-23. The ceiling was not the label; it was a blind spot
+> shared by all three approaches. A fourth approach clears it: AUC 0.768.
+> The section is left standing because the WAY it was wrong is the useful part.
+> See 2b-CORRECTION below.**
+
 The target is the one that matters operationally: **is this a valid text
 completion**, defined as NOT (`lexical in (mangled, nonwords)` or
 `semantic = salad`), on the 814 items where both coders agree. 31.4% invalid.
@@ -108,6 +113,69 @@ support.
 lever here. More coded items is: 814 is small both for fitting and for measuring,
 and the same 5-fold CV on a few thousand would improve both. That is the same
 bottleneck the top of this file names, and nothing measured since has moved it.
+
+# 2b-CORRECTION. THE CEILING WAS A BLIND SPOT, AND READING THE ERRORS FOUND IT
+
+RH pushed back: *"it's hard to believe we can't detect this lexically."* Correct,
+and the section above is wrong.
+
+**The reasoning failed at one word.** It claimed three approaches with "nothing
+in common -- designed statistics, character shape, lexical content" converged, so
+the ceiling must be in the target. But **word n-grams are not lexical content.**
+They are corpus-frequency statistics over the training set, exactly like the
+other two. All three representations were frequency-based and NOT ONE of them
+asks whether a string is a word. Their agreement was a shared blind spot being
+mistaken for a bound.
+
+**The errors say so plainly.** `passA_errors.py` scores out-of-fold and prints
+the junk that scores clean. It is not borderline material a coder might have
+gone either way on:
+
+    andclimbed  hewas  herhusband  youGeorgia     a missing space
+    wasn,t                                        a comma for an apostrophe
+    couldn' refresh                               a broken contraction
+    spritit  wel  continuied  screent  arketysh   not words
+    W R I T I N G & R E A D I N G                 a letter-spaced running head
+    HARPILIA / HARPILER                           one name, two spellings
+
+Char n-grams cannot recover `andclimbed`: its 4-grams `andc`, `ndcl`, `dcli` are
+each individually common. What is rare is the WORD, and the representation never
+forms one.
+
+**`lexical.py` adds the missing sense** -- dictionary membership against BYU's
+86k frequency-ranked list plus web2 (266,201 words), a fused-word test (an OOV
+string that splits into two dictionary words), comma-inside-word, broken
+contraction, letter-spaced runs, and verbatim 5-gram repetition.
+
+    SINGLE FEATURE, best of the new set
+      oov_rate_all    0.702    the best single feature yet found here,
+                               against gzip_ratio's 0.696
+
+    SAME FOLDS, SAME LABEL, THREE FEATURE SETS
+      char n-grams only   0.724
+      lexical only        0.688
+      UNION               0.768
+
+**Lexical features alone are WORSE than char n-grams. The union beats both.**
+That is the finding: the two families are complementary, not rival, and the
+earlier convergence measured only that all three had been drawn from one family.
+The largest gain is on the base arm, 0.678 -> 0.757, which is also where the junk
+rate is highest.
+
+**A rate the section above stated as balance.** Junk is 31.4% overall but
+**base 146/406 = 36.0% against aligned 110/408 = 27.0%.** The SAMPLE is balanced
+(406/408 items); the RATE is not, and those are different quantities. Nothing
+here rests on it, but a consumer screening one arm should know it.
+
+**What still eludes, after the union.** `nonwords` is largely caught (31% still
+score below 0.5). `mangled` is not: 199 of the 256 junk items, and 57% of them
+still score clean. That is where any further work belongs, and the coder notes
+name the next features -- CN/EN code-switch inside a word, name mutation at edit
+distance 1, stray verse numbering.
+
+**So "feature engineering is not the lever here" was wrong.** It was the lever.
+Whether 0.768 is enough for any given consumer is a separate question this file
+does not answer, and section 4's advice to state your own tolerance stands.
 
 ## Targets tried and what each returned, so nobody repeats them
 
