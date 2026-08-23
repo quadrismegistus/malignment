@@ -230,6 +230,28 @@ For the 8+ base arms that do ship a template, `raw base -> prefill base` is avai
     member      32        11             1        of 44
                 80        63             1
 
+### THE SCOPE SENTENCE THIS CENSUS FORCES, AND IT TRAVELS WITH EVERY FRAMED RESULT
+
+**Framed results describe COMMODITY CHAT ARMS. The research alignment arms are largely not templatable, and the loss is not random.** Broken down by alignment operation over every child arm in the roster (verified against `measurements.json`, 2026-08-23):
+
+    instruct   22/23 templatable   96%
+    rlvr        6/6                100%
+    dpo        13/18                72%
+    sft        26/39                67%
+
+A commodity instruct model ships a chat template because chat *is* its product. A preference-method ablation has no reason to ship one. So the frame systematically over-samples the former and under-samples the latter — and the latter is the population whose alignment this project is actually about.
+
+**The sharpest case: all four `archangel` variants are `NO_TEMPLATE`.**
+
+    archangel_sft-dpo_pythia2-8b     archangel_sft-ppo_pythia2-8b
+    archangel_sft-kto_pythia2-8b     archangel_sft-slic_pythia2-8b
+
+Those four are the only place in the roster where alignment METHOD can be compared — DPO against KTO against PPO against SLiC on one shared base. **So the framed instrument cannot answer "does the method matter" at all.** Not with reduced power, not with a wider interval: the arms do not exist under the frame, and no amount of spending creates them.
+
+Also absent, and disproportionately safety-trained: `beaver-7b-v1.0`, `AmberSafe`, `CT-LLM-SFT-DPO`, `bloomz-7b1` — the models closest to what a refusal-prompt class is for.
+
+**Write this beside a framed number, not underneath a pile of them.** A scope sentence that lives only in the doc becomes a caveat nobody carries; the reason it is here is so the next reader of a framed result knows which population it is about before they generalise it. See `[[feedback-artifact-does-not-carry-its-convention]]` — a median that died crossing a folder is the same failure with a different quantity.
+
 Zero `STEM_LOST`, zero `REFUSED`, zero `GATED`. **Where a template exists at all, the stem always lands last** — the word slot is where the design assumes.
 
 **The 9 bases independently reproduce the HTTP probe's 9.** Two instruments, different failure modes, same answer.
