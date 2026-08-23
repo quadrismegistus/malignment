@@ -47,7 +47,7 @@ surface screen tops out at AUC 0.73, and f15 measured that retention is
 arm-independent to within 0.7% -- so junk enters the faller-vs-riser contrast as
 noise, not bias, and screening would cost more power than it removes.
 """
-import argparse, collections, hashlib, json, math, os, random, statistics as S, sys
+import argparse, base64, collections, hashlib, json, math, os, random, statistics as S, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE = os.path.expanduser("~/github/malign-logits")
@@ -99,8 +99,18 @@ def select(a):
     picked = []
     for pr in pairs:
         al = pr.split(">")[1]
+        #: text comes back BASE64. ch.query parses JSONEachRow by splitting the
+        #: response with Python's splitlines(), which breaks on \x0b \x0c \x1c
+        #: \x1d \x1e \x85 U+2028 U+2029 -- none of which ClickHouse escapes. A
+        #: passage holding one becomes two lines and the JSON string is left
+        #: unterminated, so the whole lineage raised and was swallowed by the
+        #: except below. Yi alone has U+2028 in 2,104 rows and U+2029 in 2,114
+        #: of 11,872. Four lineages died this way (Yi, SmolLM3-3B, internlm2,
+        #: Llama-3.1-8B) and that is exactly the 42-vs-38 gap. Encoding in
+        #: transit keeps every such byte out of the line-splitting path.
         q = ("SELECT s.prompt_full AS prompt, s.forced_word AS forced_word, "
-             "s.sample_idx AS sample_idx, s.text AS text, s.n_tokens AS n_tokens "
+             "s.sample_idx AS sample_idx, base64Encode(s.text) AS text_b64, "
+             "s.n_tokens AS n_tokens "
              "FROM (SELECT prompt_full, forced_word, sample_idx, text, n_tokens "
              "      FROM malign_logits.gen_sequences WHERE corpus='passage' "
              "      AND model=%s AND forced_word != '' AND n_tokens >= %d) s "
@@ -137,9 +147,10 @@ def select(a):
         for ro, lst in byrole.items():
             rng.shuffle(lst)
             for r, k in lst[:want]:
+                txt = base64.b64decode(r["text_b64"]).decode("utf-8", "replace")
                 picked.append(dict(pair=pr, model=al, prompt=r["prompt"],
                                    forced_word=r["forced_word"],
-                                   sample_idx=r["sample_idx"], text=r["text"],
+                                   sample_idx=r["sample_idx"], text=txt,
                                    role=ro, delta=delt.get(k), q=prob.get(k)))
         got = len(picked) - n_before
         short = "" if got >= a.per_pair else "   SHORT (has %d joined rows)" % sum(len(v) for v in byrole.values())
