@@ -80,7 +80,29 @@ def readings(prefix, n_lineages=None):
             best[f] = k
         else:
             drop += 1
-    ks = sorted(best.values(),
+    ks = list(best.values())
+    #: ONE ARM PER SENTENCE, AND THE STRIPPED ONE WINS WHERE IT EXISTS.
+    #:
+    #: `--no-blanks` drops underscore tokens BEFORE renormalisation, so every
+    #: rank below a blank moves and `x1bn` is a different measurement of the same
+    #: surface from `x1b`. `cross_frame.arm_for` has always chosen between them.
+    #: This function did not, so the eight re-annotated frames pooled both arms
+    #: into one graph: operations read off two incompatible rank orders, joined
+    #: through the models they share, and the component count came out plausible
+    #: because a duplicate always connects to its original. Exactly the failure
+    #: the version suffix was added to prevent, one function away from the code
+    #: that prevents it.
+    #:
+    #: Found by `sidecar` refusing to pick a table for a mixed set, which is the
+    #: guard doing its job in a place nobody was looking: the visible symptom was
+    #: unranked words, and the cause was two readings that should never have met.
+    vs = {str(k.get("version", "")) for k in ks}
+    if any(v.endswith("n") for v in vs) and any(not v.endswith("n") for v in vs):
+        keep = [k for k in ks if str(k.get("version", "")).endswith("n")]
+        print("  (%d unstripped reading(s) set aside; this sentence has a stripped arm "
+              "and the two cannot pool)" % (len(ks) - len(keep)))
+        ks = keep
+    ks = sorted(ks,
                 key=lambda k: (k.get("version", ""), k.get("n_lineages") or 0, k.get("rater") or 0))
     if drop:
         print("  (dropped %d duplicate reading(s) with no provenance)" % drop)
@@ -209,6 +231,36 @@ def analyse(prefix, n_lineages=None, png=False, report=False, data=False, k=2):
     return G, cc
 
 
+def stripped(pairs):
+    """Are these readings of the STRIPPED table? Read it off the readings.
+
+    ## A FLAG THE CALLER MUST REMEMBER IS A FLAG THE CALLER FORGETS
+
+    `sidecar` takes `no_blanks` because the stripped and unstripped tables are
+    different measurements of one sentence and merging them is wrong. Both call
+    sites then took the default, so every `_nb` reading resolved to no sidecar at
+    all and printed unranked -- silently, with a one-line notice that reads like
+    a missing file rather than a mismatched selector. Eight frames were affected
+    and the notice was on every one of them.
+
+    The version string already carries it: `--no-blanks` appends `n`, which is
+    why a stripped reading records as `x1bn` and cannot pool with `x1b`. So the
+    answer is in the data and never needed asking, and this cannot go stale the
+    way remembering to pass the flag did.
+
+    Mixed versions are a refusal rather than a majority vote: pooling a stripped
+    and an unstripped reading of one sentence is the thing the suffix exists to
+    prevent, and a sidecar chosen for the majority would silently misrank the
+    minority.
+    """
+    vs = {str(t).split(".")[0] for t, _ in pairs}
+    nb = {v.endswith("n") for v in vs}
+    if len(nb) > 1:
+        raise SystemExit("readings mix stripped and unstripped tables (%s); they are "
+                         "different measurements and cannot pool" % ", ".join(sorted(vs)))
+    return bool(nb and nb.pop())
+
+
 def sidecar(prompt, no_blanks=False):
     """`{model: {word: row}}` from the `.tables.json` the rater actually read.
 
@@ -299,9 +351,10 @@ def audit(G, cc, OPS, pairs, prompt, width=68):
                 per[m["model"]][op] = ([w.lower() for w in m.get("a_words") or []],
                                        [w.lower() for w in m.get("b_words") or []])
     W = lambda t, i: textwrap.fill(t, width, initial_indent=i, subsequent_indent=i)
-    SC = sidecar(prompt)
+    SC = sidecar(prompt, stripped(pairs))
     if SC is None:
-        print("  (no .tables.json matched this prompt; words print unranked)\n")
+        print("  (no %s.tables.json matched this prompt; words print unranked)\n"
+              % ("STRIPPED " if stripped(pairs) else ""))
 
     def ranked(model, ws, side):
         """Cited words newest-first by PROMINENCE ON THEIR OWN SIDE, with rank and mass.
@@ -490,7 +543,7 @@ def emit(G, cc, OPS, pairs, prompt, prefix, k=2, n_at1=None, ocs=None, mods=None
     #: carrying 7.2% printed beside `birds` at rank 60 carrying 0.02% and nothing
     #: told them apart. The consumer cannot recover this -- the sidecar is not
     #: served -- so it is emitted here or the display cannot be fixed at all.
-    SC = sidecar(prompt) or {}
+    SC = sidecar(prompt, stripped(pairs)) or {}
     def rk(model, word):
         r = (SC.get(model) or {}).get(word) or (SC.get(model) or {}).get(word.lower())
         if not r:
