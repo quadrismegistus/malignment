@@ -1466,7 +1466,7 @@ def check_environments():
 MEASUREMENTS_PATH = os.path.join(ROOT, "roster", "models", "measurements.json")
 
 
-def framed(tier="ladder", measurements=None):
+def framed(tier="endpoints", measurements=None):
     """The population for a FRAMED (chat-template) measurement. Declared, not found.
 
     **"EVERY MODEL WITH A TEMPLATE" IS NOT A POPULATION, IT IS A LEFTOVER.** The
@@ -1489,8 +1489,29 @@ def framed(tier="ladder", measurements=None):
     than merely incomplete. lacan withdrew a hypothesis on exactly this before
     reading any result.
 
-    Three tiers, because they answer three different questions:
+    RH's declaration, 2026-08-23: **the population is every templatable model
+    inside the 144** -- the members of the 50 endpoint lineages. That is the
+    `endpoints` tier and the default.
 
+    Measured, it is 80 models, and **zero templatable checkpoints fall outside
+    the 144**, so `endpoints` and `all` name the same set today. They are kept
+    apart anyway: `all` is "anything templatable in any lineage" and `endpoints`
+    is "templatable within the declared population", and two rules agreeing once
+    is not one rule. The moment a templatable model is added outside the
+    endpoint lineages they diverge, and the caller who wanted the population
+    should not silently get the leftover.
+
+    **THE 144 RE-ADMITS ARMS `endpoints()` REJECTED.** Its filter excludes
+    ablations and inverted-direction models from SELECTION, not from MEMBERSHIP,
+    so the lineages carry 14 arms the endpoint rule turned down. That is
+    CLAUDE.md's standing caveat -- "144 is a choice that reads like a
+    consequence" -- and it applies here unchanged.
+
+    Four tiers, because they answer four different questions:
+
+        endpoints  templatable members of the 50 endpoint lineages. THE
+                   POPULATION. 80 models over 41 of the 50 lineages; the other
+                   9 contribute nothing templatable at all.
         ladder   lineages whose ROOT is templatable, plus their templatable
                  arms. The only tier where base -> aligned is a FRAMED contrast
                  on both sides. 7 lineages.
@@ -1505,8 +1526,9 @@ def framed(tier="ladder", measurements=None):
     the templatable arms under it, and `excluded` says WHY a lineage is not in
     the tier rather than dropping it silently.
     """
-    if tier not in ("ladder", "within", "all"):
-        raise ValueError("tier must be ladder|within|all, not %r" % tier)
+    if tier not in ("endpoints", "ladder", "within", "all"):
+        raise ValueError(
+            "tier must be endpoints|ladder|within|all, not %r" % tier)
     if measurements is None:
         with open(MEASUREMENTS_PATH) as fh:
             measurements = json.load(fh)
@@ -1524,12 +1546,27 @@ def framed(tier="ladder", measurements=None):
     #: swallows the stem is useless here and is recorded as STEM_LOST.
     ok = {m for m, v in verdicts.items() if v.get("verdict") == "OK"}
     lin = lineages(ops=ALIGNING)
+    if tier == "endpoints":
+        #: The 144: members of the lineages holding a resolved endpoint. Built
+        #: from `endpoints()` on every call rather than written down, because an
+        #: inline population filter is how `"lmo" in base` once found 4 of 6
+        #: OLMo lineages.
+        eps, unresolved = endpoints()
+        if unresolved:
+            raise SystemExit(
+                "%d lineages unresolved -- endpoints() returns CANDIDATES "
+                "rather than picking, and a caller ignoring that is choosing by "
+                "accident" % len(unresolved))
+        roots = {r for b in eps for r, ms in lin.items() if b in ms or b == r}
+        lin = {r: ms for r, ms in lin.items() if r in roots}
     keep, excluded = {}, {}
     for root, members in sorted(lin.items()):
         arms = sorted(m for m in members if m in ok)
-        if tier == "all":
+        if tier in ("all", "endpoints"):
             if arms:
                 keep[root] = arms
+            else:
+                excluded[root] = "no templatable arm in this lineage"
             continue
         if len(arms) < 2:
             excluded[root] = ("%d templatable arm(s); a contrast needs 2"
@@ -1545,7 +1582,5 @@ def framed(tier="ladder", measurements=None):
             continue
         keep[root] = arms
     models = sorted({m for arms in keep.values() for m in arms})
-    if tier == "all":
-        models = sorted(ok & {m for ms in lin.values() for m in ms})
     return {"tier": tier, "models": models, "lineages": keep,
             "excluded": excluded}

@@ -548,7 +548,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "HuggingFaceTB/SmolLM3-3B",
@@ -926,7 +926,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Qwen/Qwen2.5-0.5B-Instruct",
@@ -953,7 +953,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "Qwen/Qwen2.5-7B",
@@ -980,7 +980,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "Qwen/Qwen2.5-7B-Instruct",
@@ -1007,7 +1007,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "Qwen/Qwen3-8B",
@@ -1034,7 +1034,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "Qwen/Qwen3-8B-Base",
@@ -1061,7 +1061,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "RWKV/rwkv-4-7b-pile",
@@ -2525,7 +2525,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "ibm-granite/granite-3.0-8b-base",
@@ -2579,7 +2579,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "inceptionai/jais-family-6p7b",
@@ -2903,7 +2903,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "lomahony/eleuther-pythia6.9b-hh-dpo",
@@ -3065,7 +3065,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "m-a-p/neo_7b_instruct_v0.1",
@@ -3092,7 +3092,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "m-a-p/neo_7b_sft_v0.1",
@@ -3119,7 +3119,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "meta-llama/Llama-3.1-70B",
@@ -3335,7 +3335,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "mistralai/Mistral-7B-v0.1",
@@ -3605,7 +3605,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "stabilityai/stablelm-2-zephyr-1_6b",
@@ -3632,7 +3632,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
@@ -3659,7 +3659,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "teknium/OpenHermes-2.5-Mistral-7B",
@@ -4196,7 +4196,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "togethercomputer/RedPajama-INCITE-7B-Chat",
@@ -4304,7 +4304,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "zai-org/glm-4-9b-chat-hf",

@@ -2798,6 +2798,139 @@
    "cause": "",
    "fix": "VERIFIED 2026-08-22 to close the third point of a version HOLE. Loads AND runs: 65536/65536 logits finite on 'The capital of France is', argmax ' Paris' -- so this is a working forward pass, not merely a non-NaN one. Matters because the record held 4.57.1=load_ok and 5.4.0=load_failed for this checkpoint, and a chatlog claimed 5.14.1 works; version_windows.json refused to assert the point until someone observed it. LOAD IS NOT RUN: this family once loaded clean and returned all-NaN on 2,583/2,583 prompts.",
    "source": "scratchpad/falcon_probe.py under transformers 5.14.1"
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-0.5B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-7B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen2.5-7B-Instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen3-8B",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Qwen/Qwen3-8B-Base",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b_instruct_v0.1",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "m-a-p/neo_7b_sft_v0.1",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "huggyllama/llama-7b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "ibm-granite/granite-3.0-8b-instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "mistralai/Mistral-7B-Instruct-v0.1",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-1_6b-chat",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "stabilityai/stablelm-2-zephyr-1_6b",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/falcon-mamba-7b-instruct",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
   }
  ],
  "engine_support": {
