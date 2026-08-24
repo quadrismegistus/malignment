@@ -156,10 +156,27 @@ the two largest positive naming gains in the table.
 
 - **The floor is 1.8e-15.** Nothing here reaches it; `fit` frame-unit at 1.1e-35 is a
   frame count, not a model count.
-- **`base_naughty_mass` is not `k_transgressiveness`.** This folder's dose is mass on
-  a per-item declared naughty pole set; `norm_change` and `rate_and_magnitude` use a
-  rated scale. Nobody has checked that the two agree, so the dose results here and
-  there are not yet on the same axis.
+- **THE DOSE IS LIST MEMBERSHIP, NOT A RATING OR A PROJECTION.**
+  `base_naughty_mass` is `sum(p_base(w) for w in item["naughty"])` -- the base arm's
+  mass on the words the author hand-tagged, nothing else. Pole lists run **median 5
+  naughty words** (29 items have 2, 68 have 3 or fewer), and the resulting dose has
+  median 0.0494 against a `base_scored_mass` of 0.8132, with 2.2% of cells at exactly
+  zero. **So the dose regression is partly a regression on how much of a frame's
+  transgressive vocabulary the tagger wrote down.** `norm_change` and
+  `rate_and_magnitude` use `k_transgressiveness`, a rated continuum over every word;
+  the two have never been compared and are not the same construct.
+
+- **The declared pole axis is a bge quantity and this file does not use it.**
+  `slot_axis.Axis` is `centroid(embed(naughty)) - centroid(embed(nice))` in
+  prompt-conditioned bge-m3, unit length -- a rank-1 direction through two
+  median-5-word centroids. Everything above is computed from `dN_<scale>` and
+  `nullabs_<scale>`, the rated scales and permutations of those ratings, so the
+  results here are independent of how the axis was built. Purity is median 1.000
+  (0.7% of cells below, min 0.941): the tagging is consistent, it is thin.
+
+- **README.md's "the named scales see what the geometry cannot" is against that thin
+  axis**, not against the 25-component bge construct its own per-word section uses,
+  where the named scales tie rather than win.
 - **The naming gain is a ratio of medians per (lineage, scale).** A lineage with few
   gated cells in a domain counts as much as one with many -- correct for a claim
   about models, wrong for a claim about cells.
