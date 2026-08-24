@@ -1,7 +1,7 @@
 ---
 subject: norm_change
-status: FIRST RESULT, 2026-08-24. Seven declared hypotheses tested on 153 lineages, en and zh separately.
-headline: Alignment SWEETENS in both languages. It NARROWS valence in English and WIDENS it in Chinese.
+status: FIRST RESULT, corrected 2026-08-24. 50 endpoint lineages, en and zh separately.
+headline: Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only.
 data: ~/malignment-data/norm_change (3.0 GB, outside the checkout)
 ---
 
@@ -10,71 +10,99 @@ data: ~/malignment-data/norm_change (3.0 GB, outside the checkout)
 **Does alignment move the continuation distribution along word norms and
 semantic fields, across every endpoint pair there is?** The *whether* question.
 `emergence/capacities` and M05's B and H ask *when*, on the few lineages with
-checkpoints; this asks whether, at the endpoint, on 153 lineages.
+checkpoints; this asks whether, at the endpoint.
 
 Design in `registration.md` — a LIGHT registration, seven directional
-hypotheses, everything else explicitly exploratory. Producers: `run.py` builds
-the long tables, `analyse.py` does the statistics and touches nothing else.
+hypotheses, everything else explicitly exploratory. `run.py` builds the long
+tables, `analyse.py` does the statistics, `dose.py` the conditional version.
 
-    UNIT      the lineage (153)
+    UNIT      the lineage: 50 base->endpoint pairs from `roster.endpoints()`
     TEST      per lineage the median over its prompts of (aligned - base),
               then a sign test over lineages, TIES EXCLUDED AND REPORTED
     LANGS     en and zh separately, never pooled
 
-## THE RESULT
+## THE UNIT WAS WRONG IN THE FIRST VERSION, AND IT CHANGED TWO CONCLUSIONS
+
+Every number first published from this folder used **n=153**, the count of
+distinct `(base, aligned)` pairs in `movement`. That table is not a roster: it
+holds RUNGS (base->SFT, SFT->DPO) and TRANSITIVE pairs as well as endpoints,
+because `produce_movement` builds both on purpose — a word can fall at SFT and
+rise at DPO, so base->DPO is not recoverable from the rungs.
+
+153 edges sit over **85 base models**. `Llama-3.1-8B` alone contributes 11. So
+one pretrained model was voting eleven times in a test whose unit is the
+lineage. RH caught it: *"153 lineages? We have 50."*
+
+`roster.endpoints()` resolves **50**, all present in `movement`; the other 103
+edges are dropped. It exists precisely so this rule is not retyped per
+experiment — its own docstring records four shell heredocs that each filtered
+differently, one matching `"lmo" in base` and so finding 4 of 6 OLMo lineages.
+
+**What the inflation had manufactured:**
+
+    H1 concreteness, ENGLISH   n=153  p=0.003   SUPPORTED
+                               n= 50  p=0.119   not supported
+    H5 |valence|, CHINESE      n=153  p=2e-5    REVERSED (widening)
+                               n= 50  p=0.135   not supported
+
+The Chinese "widening" was the previous headline of this file. It does not
+survive the correct unit. **Neither claim should be cited from any earlier
+version.**
+
+## THE RESULT, 50 ENDPOINT LINEAGES
 
 ### English
 
-    H1  brysbaert_concreteness   -0.000470   72 up/ 79 dn/  2 tie  p=0.626   not supported
-    H1  k_concreteness           -0.006804   56 up/ 93 dn/  4 tie  p=0.003   SUPPORTED
-    H2  k_register_level         +0.003284  128 up/ 14 dn/ 11 tie  p<1e-5    SUPPORTED
-    H2  brooke_formality          0.000000   17 up/ 11 dn/125 tie  p=0.345   not supported
-    H3  X1 (interiority field)    0.000000    4 up/  1 dn/148 tie  p=0.375   not supported
-    H4  warriner_valence_z       +0.001891   91 up/ 57 dn/  5 tie  p=0.006   SUPPORTED
-    H4  k_valence_z              +0.000353   87 up/ 44 dn/ 22 tie  p=0.0002  SUPPORTED
-    H5  warriner_valence_absz    -0.003284   48 up/ 99 dn/  6 tie  p=3e-5    SUPPORTED
-    H5  k_valence_absz            0.000000   69 up/ 69 dn/ 15 tie  p=1.000   not supported
+    H2  k_register_level         +0.006298   45 up/ 4 dn/ 1 tie  p<1e-5    SUPPORTED
+    H2  k_register_level_z       +0.007063   45 up/ 5 dn/ 0 tie  p<1e-5    SUPPORTED
+    H4  warriner_valence         +0.009693   32 up/16 dn/ 2 tie  p=0.029   SUPPORTED
+    H4  k_valence                +0.002638   32 up/11 dn/ 7 tie  p=0.002   SUPPORTED
+    H5  warriner_valence_absz    -0.007682   16 up/34 dn/ 0 tie  p=0.015   SUPPORTED
+    H6  euphemism                +0.003428   38 up/ 6 dn/ 6 tie  p<1e-5    SUPPORTED
+    H7  mediation                +0.026846   33 up/16 dn/ 1 tie  p=0.021   SUPPORTED
+    H1  k_concreteness           -0.024823   19 up/31 dn/ 0 tie  p=0.119   not supported
+    H1  brysbaert_concreteness   -0.002776   21 up/27 dn/ 2 tie  p=0.471   not supported
+    H3  X1 (interiority field)    0.000000    2 up/ 1 dn/47 tie  p=1.000   not supported
+    H5  k_valence_absz           -0.000166   22 up/25 dn/ 3 tie  p=0.771   not supported
 
 ### Chinese
 
-    H1  concreteness_zh          -0.020627   21 up/125 dn/  4 tie  p<1e-5    SUPPORTED
-    H1  k_concreteness            0.000000   69 up/ 75 dn/  9 tie  p=0.677   not supported
-    H2  k_register_level         +0.002858  119 up/ 22 dn/ 12 tie  p<1e-5    SUPPORTED
-    H2  brooke_formality              ALL TIES (45 of 46) -- no signed evidence
-    H3  X1 (interiority field)    0.000000   31 up/ 22 dn/ 97 tie  p=0.272   not supported
-    H4  k_valence_z              +0.001822   99 up/ 42 dn/ 12 tie  p<1e-5    SUPPORTED
-    H4  warriner_valence_z        0.000000   17 up/ 29 dn/ 57 tie  p=0.104   not supported
-    H5  warriner_valence_absz     0.000000   14 up/ 34 dn/ 55 tie  p=0.006   SUPPORTED
-    H5  k_valence_absz           +0.003218   98 up/ 46 dn/  9 tie  p=2e-5    **REVERSED**
+    H1  concreteness_zh          -0.032509    8 up/40 dn/ 0 tie  p<1e-5    SUPPORTED
+    H1  concreteness_zh_z        -0.040895    8 up/40 dn/ 0 tie  p<1e-5    SUPPORTED
+    H2  k_register_level         +0.006170   38 up/ 5 dn/ 7 tie  p<1e-5    SUPPORTED
+    H4  k_valence                +0.002547   33 up/10 dn/ 7 tie  p=0.0006  SUPPORTED
+    H1  k_concreteness           -0.009366   18 up/29 dn/ 3 tie  p=0.144   not supported
+    H3  X1 (interiority field)    0.000000   12 up/ 6 dn/30 tie  p=0.238   not supported
+    H5  warriner_valence_absz     0.000000    6 up/12 dn/13 tie  p=0.238   not supported
+    H5  k_valence_absz           +0.005072   28 up/17 dn/ 5 tie  p=0.135   not supported
+    H6/H7                        no rated (prompt, word) overlap in zh
 
 ## WHAT LANDED
 
-**H4 IS THE NEW ONE, AND IT LANDS IN BOTH LANGUAGES.** Alignment shifts the
-continuation distribution toward the positive pole: `k_valence_z` up in English
-(p=0.0002) and Chinese (p<1e-5), `warriner_valence_z` up in English (p=0.006).
-M01's `C_deextremification` recorded that its **sweetening hypothesis "was never
-emitted"** — it confirmed the flattening and never tested the shift. This is the
-first measurement of it, and it is positive.
+**H2 REGISTER RISES IN BOTH LANGUAGES, and it is the strongest result here.**
+45 of 49 signed English lineages, 38 of 43 Chinese, p<1e-5 both. On
+`k_register_level`, the instrument built for it.
 
-**H5 REPLICATES IN ENGLISH AND REVERSES IN CHINESE.** English narrows
-(`warriner_valence_absz` -0.0033, p=3e-5), which is M01's de-extremification
-result on a different instrument and a different roster. Chinese **widens** on
-the K scale (+0.0032, 98 up/46 dn, p=2e-5). Alignment sweetens Chinese without
-flattening it — it pushes the mean up while spreading the extremes.
+**H4 VALENCE RISES IN BOTH LANGUAGES, and it had never been tested.** M01's
+`C_deextremification` records that its sweetening hypothesis "was never
+emitted" — it confirmed the flattening and never measured the shift. English
+`warriner_valence` +0.0097 (p=0.029) and `k_valence` +0.0026 (p=0.002); Chinese
+`k_valence` +0.0025 (p=0.0006).
 
-**That is the sharpest thing here and it is exactly where M01 said to look.**
-`O_crosslingual` found the affect signature does not travel to Chinese while the
-substitution does. This is finer: the *sign* flips on one component while
-another (H2 register, H4 valence) travels intact.
+**H5 NARROWING SURVIVES IN ENGLISH ONLY**, on Warriner (16 up/34 dn, p=0.015) —
+M01's de-extremification on a different instrument and roster. `k_valence_absz`
+is flat in English and in Chinese. **The Chinese REVERSAL reported earlier was
+an artefact of the wrong unit and is withdrawn.**
 
-**H2 holds in both** on `k_register_level`, the instrument built for it.
+**H1 CONCRETENESS FALLS IN CHINESE AND NOT IN ENGLISH.** `concreteness_zh`
+-0.0325, 8 up/40 dn, p<1e-5 — one of the cleanest splits in the folder. English
+`k_concreteness` moves the right way (-0.0248, 19 up/31 dn) but does not clear
+the bar at n=50. So the cross-lingual asymmetry is real but the OPPOSITE way
+round from the earlier version: Chinese de-concretizes, English does not.
 
-**H1 holds on the instrument matched to the language and not otherwise.**
-English `k_concreteness` falls (p=0.003) while Brysbaert is flat (p=0.63);
-Chinese falls on `concreteness_zh` (p<1e-5) while the English lexicons are flat.
-That pattern is what a working instrument looks like — the lexicon built for the
-language answers and the one applied across it does not.
-
+**And the instrument still has to match the language.** The English lexicons are
+flat under Chinese prompts and vice versa; only the lexicon built for the
+language answers.
 
 ## H6 AND H7 LAND, AND H6 WAS THE UNTESTED MOVE
 
@@ -97,12 +125,19 @@ before alignment touches anything. Outcome: `aligned - base` on some other
 scale. **It does not select on the outcome** -- a transgressive prompt could
 show a rise, a fall or nothing on any target with equal ease.
 
-    EN levels, 153 lineages         med slope     up/dn        p
+    EN levels, n=153 -- WITHDRAWN, awaiting recomputation on 50
+                                    med slope     up/dn        p
       warriner_dominance_z           +0.05831   117/ 36     <1e-5
       warriner_valence_z             +0.06457   114/ 39     <1e-5
       k_bodily_harm_z                -0.12738    31/122     <1e-5
       k_transgressiveness_z          -0.10448    31/122     <1e-5
       warriner_arousal_z             -0.05705    37/116     <1e-5
+
+**THE DOSE NUMBERS BELOW AND ABOVE ARE STILL ON n=153 AND ARE NOT TO BE
+CITED.** They inherit the same pseudo-replication the declared tests did;
+`dose.py` now restricts to `endpoint_pairs()` but has not been re-run.
+The DESIGN is unaffected -- the predictor is still measured before
+alignment and still does not select on the outcome.
 
 **Sweetening is DOSE-DEPENDENT, not uniform**: the more transgressive mass the
 base put at a prompt, the harder alignment sweetens it and the harder it cuts

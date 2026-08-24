@@ -52,6 +52,32 @@ MIN_PROMPTS = 25
 DOSE_DEFAULT = "k_transgressiveness"
 
 
+
+def endpoint_pairs():
+    """The 50 base->endpoint lineages, as "base>aligned" strings.
+
+    **THE MOVEMENT TABLE IS NOT A ROSTER.** It holds 153 edges over 85 base
+    models -- RUNGS (base->SFT, SFT->DPO) and TRANSITIVE pairs as well as
+    endpoints, because `produce_movement` builds both deliberately: a word can
+    fall at SFT and rise at DPO, so base->DPO is not recoverable from the rungs.
+
+    Counting those 153 as lineages is PSEUDO-REPLICATION. Llama-3.1-8B alone
+    contributes 11 edges, so one pretrained model votes eleven times in a sign
+    test whose unit is supposed to be the lineage. Every n=153 reported from
+    this folder before 2026-08-24 has that defect (RH caught it).
+
+    `roster.endpoints()` is the shared rule and exists precisely so this is not
+    retyped per experiment -- its docstring records four shell heredocs that
+    each filtered differently, one matching `"lmo" in base` and so finding 4 of
+    6 OLMo lineages. It resolves 50, all present in `movement`, and applies the
+    rulings: terminal under aligning ops only, no ablations, no attested
+    `direction: inverted` de-aligning finetunes.
+    """
+    from malignment import roster
+    ep, _unresolved = roster.endpoints()
+    return {"%s>%s" % (b, a) for b, a in ep.items()}
+
+
 def binom(k, n):
     if not n:
         return float("nan")
@@ -63,6 +89,7 @@ def read(name, keep=None):
     p = os.path.join(DATA, "%s_long.csv.gz" % name)
     if not os.path.exists(p):
         return None
+    EP = endpoint_pairs()
     out = {}
     with gzip.open(p, "rt", encoding="utf-8") as fh:
         head = fh.readline().rstrip("\n").split("\t")
@@ -77,9 +104,11 @@ def read(name, keep=None):
             b, a = v[ix["base_level"]], v[ix["aligned_level"]]
             if not b or not a or b == "\\N" or a == "\\N":
                 continue
+            lin = v[ix["base"]] + ">" + v[ix["aligned"]]
+            if lin not in EP:
+                continue
             try:
-                out[(v[ix["lang"]], v[ix["base"]] + ">" + v[ix["aligned"]],
-                     v[ix["prompt"]], sc)] = (float(b), float(a))
+                out[(v[ix["lang"]], lin, v[ix["prompt"]], sc)] = (float(b), float(a))
             except ValueError:
                 continue
     return out

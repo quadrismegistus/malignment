@@ -74,6 +74,32 @@ def _with_z(scales):
     return out
 
 
+
+def endpoint_pairs():
+    """The 50 base->endpoint lineages, as "base>aligned" strings.
+
+    **THE MOVEMENT TABLE IS NOT A ROSTER.** It holds 153 edges over 85 base
+    models -- RUNGS (base->SFT, SFT->DPO) and TRANSITIVE pairs as well as
+    endpoints, because `produce_movement` builds both deliberately: a word can
+    fall at SFT and rise at DPO, so base->DPO is not recoverable from the rungs.
+
+    Counting those 153 as lineages is PSEUDO-REPLICATION. Llama-3.1-8B alone
+    contributes 11 edges, so one pretrained model votes eleven times in a sign
+    test whose unit is supposed to be the lineage. Every n=153 reported from
+    this folder before 2026-08-24 has that defect (RH caught it).
+
+    `roster.endpoints()` is the shared rule and exists precisely so this is not
+    retyped per experiment -- its docstring records four shell heredocs that
+    each filtered differently, one matching `"lmo" in base` and so finding 4 of
+    6 OLMo lineages. It resolves 50, all present in `movement`, and applies the
+    rulings: terminal under aligning ops only, no ablations, no attested
+    `direction: inverted` de-aligning finetunes.
+    """
+    from malignment import roster
+    ep, _unresolved = roster.endpoints()
+    return {"%s>%s" % (b, a) for b, a in ep.items()}
+
+
 def binom(k, n):
     """Two-sided sign test. Same implementation the other producers use."""
     if not n:
@@ -101,7 +127,8 @@ def stream(name, want=None):
     p = os.path.join(LONG, "%s_long.csv.gz" % name)
     if not os.path.exists(p):
         return None
-    acc, seen, skipped = collections.defaultdict(lambda: array("d")), 0, 0
+    EP = endpoint_pairs()
+    acc, seen, skipped, off = collections.defaultdict(lambda: array("d")), 0, 0, 0
     with gzip.open(p, "rt", encoding="utf-8") as fh:
         head = fh.readline().rstrip("\n").split("\t")
         ix = {k: i for i, k in enumerate(head)}
@@ -125,10 +152,15 @@ def stream(name, want=None):
             except ValueError:
                 skipped += 1
                 continue
-            acc[(v[ix["lang"]], sc, v[ix["base"]] + ">" + v[ix["aligned"]])].append(d)
+            lin = v[ix["base"]] + ">" + v[ix["aligned"]]
+            if lin not in EP:
+                off += 1
+                continue
+            acc[(v[ix["lang"]], sc, lin)].append(d)
             seen += 1
-    print("  %-14s %s usable rows, %s skipped for a missing arm"
-          % (name, format(seen, ","), format(skipped, ",")))
+    print("  %-14s %s usable rows, %s skipped for a missing arm, %s dropped as "
+          "non-endpoint edges" % (name, format(seen, ","), format(skipped, ","),
+                                  format(off, ",")))
     return acc
 
 
