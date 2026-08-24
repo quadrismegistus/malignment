@@ -107,6 +107,45 @@ rhyme more in its own verse while tracking a given poet's chosen partner less** 
 more formulaic, less attentive. That is a hypothesis this instrument cannot test,
 and generating from the SFT ladder is what would test it.
 
+## WHAT WAS MIGRATED, AND WHAT THE COPIES CAN AND CANNOT DO
+
+Copied 2026-08-24 -- **copy, not move.** The archive still holds every one of
+these and was not written to. All five data files verified **md5-identical** to
+their sources, and `analyse.py` reproduces its numbers to the digit from the
+local copy.
+
+    results/         verse_capacity_cells.parquet    14M, 404,176 cells
+                     verse_capacity_rungs.parquet    67K, the analysis-ready table
+                     verse_error_rates.parquet       7.5K
+                     capacities_by_rung.parquet      94K
+                     capacity_examples.md            26K
+
+    producers/       verse_capacity.py               writes cells + rungs
+                     aggregate_capacities.py         writes capacities_by_rung
+                     m05_capacities_overview.py      writes verse_error_rates
+                     m05_capacity_examples.py        writes capacity_examples.md
+                     verse_capacity_figs.py          the figures
+                     verse_fleet_producer.py         the fleet runner
+                     rhyme_pull_pilot.py             `last_word`, imported by it
+
+    registration/    plan_verse_fleet.md             the declared design
+                     plan_rhyme.md
+
+**THE PRODUCERS ARE PROVENANCE, NOT A RUNNABLE PIPELINE HERE.** They are copied
+so the numbers can be audited against the code that made them, and they will NOT
+execute in place:
+
+- `ROOT = HERE/../../..` resolved to the archive's repo root; under this path it
+  resolves to `experiments/`, which is wrong.
+- Outputs are hard-coded archive-relative, e.g.
+  `OUT = "meta/M05_emergence/results/capacities_by_rung.parquet"`.
+- `verse_capacity.py` does `from malign_logits import ch`, the archive's package
+  and its ClickHouse layer, and reads `twp_words` -- so re-running the fleet
+  means the archive's environment and its store, not this one.
+
+Repointing them is a real port and has not been done. `analyse.py` is the only
+file here that runs against the local copy, and it reads the rung table only.
+
 ## WHAT ELSE IS IN THE ARCHIVE AND STILL UNREAD
 
 The fleet declared eight instruments and this ports one. Also delivered and with

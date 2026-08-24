@@ -39,8 +39,18 @@ these are different quantities and neither refutes the other.
 
 import os, sys
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+LOCAL = os.path.join(HERE, "results")
 ARCHIVE = os.path.expanduser("~/github/malign-logits/meta/M05_emergence/results")
-RUNGS = os.path.join(ARCHIVE, "verse_capacity_rungs.parquet")
+
+#: LOCAL FIRST, archive as fallback. The parquets were COPIED here on
+#: 2026-08-24 (copy, not move -- the archive is read-only and still holds them),
+#: so this folder no longer depends on another checkout being present. The
+#: fallback exists so the file still runs from a checkout where the copy has not
+#: landed, and it prints which root it used rather than leaving it to be guessed.
+RUNGS = os.path.join(LOCAL, "verse_capacity_rungs.parquet")
+if not os.path.exists(RUNGS):
+    RUNGS = os.path.join(ARCHIVE, "verse_capacity_rungs.parquet")
 
 
 def main():
@@ -51,6 +61,8 @@ def main():
         print("archive not found: %s" % RUNGS)
         return 1
     r = pd.read_parquet(RUNGS)
+    print("reading %s" % ("results/ (local copy)" if RUNGS.startswith(LOCAL)
+                          else "the M05 ARCHIVE -- local copy absent"))
     print("%d rung rows, %d checkpoints, ladders %s"
           % (len(r), r.model.nunique(), sorted(r.ladder.unique())))
 
