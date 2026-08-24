@@ -1,10 +1,42 @@
 ---
 question: Does a frame admit a transgressive continuation at all, before anyone pays to pole-tag it?
-status: RUN and WRITTEN UP, 2026-08-24. Four sets, one model, store-only.
+status: CLOSED, 2026-08-24. Run, written up, and not worth returning to.
 headline: 76% of sexual frames admit nothing; violence forecloses only 13%.
+disposition: Answered. Do not reopen unless someone is about to pay for pole-tagging.
 ---
 
 # frame_admittance
+
+## CLOSED. READ THE TABLE, DO NOT REOPEN THE FOLDER
+
+This asked one question, for one purpose, and got an answer. **If you are
+deciding where to spend tagging effort: sexual is mostly foreclosed, violence is
+where the pole lives, institutional is thin but present.** That is the whole
+usable content and it is in the table below.
+
+There is no further result to extract here, for four reasons worth stating so
+nobody re-derives them:
+
+1. **It was triage for a spend nobody is making.** Its output has no downstream
+   consumer (checked -- see the selection section), and the pole-tagging run it
+   was built to price has not been commissioned.
+2. **One base model, no arm contrast.** It cannot speak to alignment, which is
+   what every live question in this campaign needs. Adding models would make it
+   a different instrument, not a better one.
+3. **`admits` does not predict leverage, and the producer measured that before
+   writing it.** Across four tagging schemes share moved 6.6x while leverage
+   moved 24%, and a known-dead item beat a known mover on balanced share. So a
+   high `admits` does not identify a frame that will move under alignment, which
+   is the only thing that would make it worth more compute.
+4. **Its sharpest number is partly about its own seed list.** The 76% sexual
+   foreclosure is over frames that survived a seed-word filter which itself
+   dropped 27 frames as unmeasurable. Sharpening it means arguing about word
+   lists, not about models.
+
+What WOULD justify reopening: an actual decision to pay for pole-tagging a
+roster. At that point this ranking becomes a selection rule over the tagged set
+and everything downstream inherits it -- which is the one thing here that still
+has teeth, and it is written up below.
 
 **Triage, not a finding about alignment.** Roughly 276 institutional prompts sit
 measured on ~406 checkpoints with no pole tags, and tagging is the expensive
