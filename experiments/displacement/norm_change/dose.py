@@ -174,15 +174,98 @@ def report(target, sl):
     return (p, target, med, up, dn, n)
 
 
+def magnitude(a, langs):
+    """Does MORE MASS MOVE where the base arm is more transgressive?
+
+    M01 asked this as a BINARY contrast and answered it: `F_G_rate_magnitude`
+    finds the RATE null (n=33 pair-sites, p=0.148) and the MAGNITUDE confirmed
+    (d=0.748, p=6e-5) -- "alignment does not displace more often at
+    transgressive sites; it displaces HARDER". `Q_bridge` names the quantity:
+    `departed` is "how much mass leaves words at all".
+
+    This is the CONTINUOUS version, which had not been run. Three outcomes per
+    (lineage, prompt), each regressed on the same base-arm transgressive level:
+
+        departed   sum of p_base - p_aligned over fallers
+        arrived    sum of p_aligned - p_base over risers
+        n_movers   how many words moved at all -- M01's RATE, per prompt
+
+    Reporting all three matters because they can separate: more words moving
+    while less mass moves is a DISPERSAL, and a departed-only reading would
+    call it a smaller effect rather than a differently-shaped one.
+    """
+    import gzip, statistics as st
+    from malignment import ch
+    EP = endpoint_pairs()
+    print("MAGNITUDE DOSE: does more mass move where the base is transgressive?")
+    print("unit = the lineage; slope across prompts; %d endpoint pairs" % len(EP))
+    rows = ch.query(
+        "SELECT base, aligned, prompt, "
+        "sumIf(p_base - p_aligned, cls='faller') AS dep, "
+        "sumIf(p_aligned - p_base, cls='riser') AS arr, count() AS nm "
+        "FROM movement WHERE cls != 'still' GROUP BY base, aligned, prompt")
+    mag = {}
+    for r in rows:
+        lin = r["base"] + ">" + r["aligned"]
+        if lin in EP:
+            mag[(lin, r["prompt"])] = (float(r["dep"]), float(r["arr"]), int(r["nm"]))
+    dose = {}
+    with gzip.open(os.path.join(DATA, "levels_long.csv.gz"), "rt",
+                   encoding="utf-8") as fh:
+        head = fh.readline().rstrip("\n").split("\t")
+        ix = {k: i for i, k in enumerate(head)}
+        for line in fh:
+            v = line.rstrip("\n").split("\t")
+            if len(v) != len(head) or v[ix["scale"]] != DOSE:
+                continue
+            lin = v[ix["base"]] + ">" + v[ix["aligned"]]
+            if lin not in EP:
+                continue
+            try:
+                dose[(lin, v[ix["prompt"]], v[ix["lang"]])] = float(v[ix["base_level"]])
+            except ValueError:
+                pass
+    print()
+    print("  %-4s %-10s %4s %12s %8s %10s" % ("lang", "outcome", "n", "med slope", "up/dn", "p"))
+    for lang in langs:
+        for j, nm in ((0, "departed"), (1, "arrived"), (2, "n_movers")):
+            by = collections.defaultdict(lambda: ([], []))
+            for (lin, pr, lg), d in dose.items():
+                if lg != lang:
+                    continue
+                m = mag.get((lin, pr))
+                if not m:
+                    continue
+                by[lin][0].append(d)
+                by[lin][1].append(float(m[j]))
+            sl = {}
+            for lin, (xs, ys) in by.items():
+                if len(xs) < MIN_PROMPTS:
+                    continue
+                s2 = slope(xs, ys)
+                if s2 is not None:
+                    sl[lin] = s2
+            r = report(nm, sl)
+            if r:
+                p_, _t, med, up, dn, n = r
+                print("  %-4s %-10s %4d %+12.5f %4d/%-4d %10.6f%s"
+                      % (lang, nm, n, med, up, dn, p_, "  <-" if p_ < 0.05 else ""))
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
     ap.add_argument("--dose", default=DOSE_DEFAULT)
     ap.add_argument("--table", default="both", choices=("levels", "fields", "both"))
     ap.add_argument("--top", type=int, default=20)
+    ap.add_argument("--magnitude", action="store_true",
+                    help="does MORE MASS MOVE where the base is transgressive?")
     a = ap.parse_args(argv)
 
     langs = [a.lang] if a.lang else ["en", "zh"]
+    if a.magnitude:
+        return magnitude(a, langs)
     tables = ["levels", "fields"] if a.table == "both" else [a.table]
 
     print("DOSE-RESPONSE: does base-arm %s predict what alignment changes?" % a.dose)

@@ -421,6 +421,57 @@ worth knowing and it is NOT a confound for these numbers:
 The cross-frame contrast is a better instrument for WHERE the mass goes, and is
 worth having for that reason rather than as a repair to this.
 
+
+## DOES MORE MASS MOVE WHERE THE BASE IS TRANSGRESSIVE? (`dose.py --magnitude`)
+
+M01 asked this as a BINARY contrast and answered it. `F_G_rate_magnitude`:
+**the RATE is null (n=33 pair-sites, p=0.148) and the MAGNITUDE is confirmed
+(d=0.748, p=6e-5)** — *"alignment does not displace more often at transgressive
+sites; it displaces HARDER"*. `Q_bridge` names the quantity: `departed` is "how
+much mass leaves words at all", against `tail_excess` for direction — whether
+freed mass "re-lands on nameable substitute words or disperses into the
+unresolved tail".
+
+The CONTINUOUS version had not been run. Three outcomes per (lineage, prompt),
+each on the same base-arm transgressive level:
+
+    lang  outcome      n   med slope    up/dn        p
+    en    departed    50   +0.01107    41/ 9     6e-6
+    en    arrived     50   +0.01092    36/14     0.003
+    en    n_movers    50   +1.81360    44/ 6    <1e-6
+    zh    departed    47   -0.01010    10/37     1e-4
+    zh    arrived     47   -0.01882     6/41    <1e-6
+    zh    n_movers    47   +1.13203    31/16     0.040
+
+**ENGLISH CONFIRMS M01 AND EXTENDS IT.** More mass departs where the base is
+more transgressive (+0.0111, 41 of 50 lineages). `departed` and `arrived` agree
+to three decimals (+0.01107 / +0.01092), which is mass conservation and a check
+that the statistic is behaving.
+
+**BUT THE RATE IS NOT NULL HERE.** `n_movers` rises steeply (+1.81, 44 of 50,
+p<1e-6): at a transgressive prompt MORE WORDS move as well as more mass. M01's
+rate null was measured on 33 pair-sites as a binary twin contrast; this is a
+continuous slope over 50 lineages and thousands of prompts. They are not the
+same test and the difference is not evidence against M01 — but the continuous
+version does not reproduce the null, and that is worth saying plainly.
+
+**CHINESE INVERTS THE MASS AND KEEPS THE RATE.** Less mass moves at
+transgressive prompts (-0.0101 departed, -0.0188 arrived) while MORE WORDS move
+(+1.13). That is a DISPERSAL: many small movements instead of few large ones.
+
+Read against the "few large fallers" asymmetry above, the two agree. English
+concentrates displacement at loaded prompts; Chinese spreads it. A
+departed-only reading would have called the Chinese result a smaller effect
+rather than a differently-shaped one, which is why all three outcomes are
+reported.
+
+### Nothing in `experiments/displacement/` was measuring plain magnitude
+
+`displacement_axis` measures magnitude AND direction along author-declared pole
+axes; `displacement_taxonomy` asks what KIND of movement; `register_shift` asks
+about one scale. None of them asks how much mass moves at all. This is the
+first.
+
 ## WHAT DID NOT LAND, AND WHY IT IS NOT A NULL
 
 **H3 failed for want of MASS, not for want of an effect.** USAS `X1`
