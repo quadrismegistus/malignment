@@ -1,6 +1,6 @@
 ---
 question: What KINDS of movement does alignment produce, and how are they distributed?
-status: RUN. 35 frames read blind at 47-50 lineages, 89 components, grouped across frames by three raters and checked against five rating sources.
+status: RUN. 35 frames + 10 matched control pairs read blind at 42-50 lineages. 89 site components grouped across frames by three raters. 101 paired components (55 site, 46 control) grouped separately; role purity sits on the null in all three.
 ---
 
 # displacement_taxonomy
@@ -75,6 +75,10 @@ Then, one level up -- the same question asked of the readings themselves:
                            against the run's own `raters`, never against zero
     compare_pairs.py       site against control on the SHAPE of the reading,
                            paired sign test. `--names` for every operation.
+    pair_meta.py           do cross-frame relations respect the site/control
+                           boundary? Groups the paired components blind, then
+                           measures role purity against the exact paired null.
+                           `--doc`, `--workflow`, `--purity`.
     norm_test.py           does the grouping predict movement in rating space?
                            Five sources, run separately. `--all`, `--shifts`.
     seam_test.py           is the procedure territory one relation or two?
@@ -138,6 +142,50 @@ Reversals lean toward sites at 7 of 8, which is the only direction here. At
 n = 8 the smallest attainable p is 0.008, so nothing can reach significance
 without all eight agreeing; read it as a direction.
 
+**THE CONTENT DOES NOT NEED TRANSGRESSION EITHER.** `pair_meta.py` groups the
+101 within-prompt components of all ten pairs (55 site, 46 control) across
+frames, exactly as `cross_frame.py --doc` did for the 89, but tells the
+annotator nothing about pairs, roles, or transgressive mass. Role composition is
+computed afterwards from groups the annotator formed for its own reasons. Purity
+against the exact paired null (flip which arm of each pair is the site, all
+1,024 assignments enumerated):
+
+    rater          groups   purity   null    mixed   p
+    opus medium        21    0.803  0.803      10   0.496
+    opus xhigh         22    0.809  0.797      10   0.381
+    opus high          21    0.870  0.829       7   0.104
+
+All three sit on or near their null. The relations formed by grouping these
+components do not sort by role.
+
+This is the direction that proves something. The annotator could trivially have
+sorted by conspicuous content -- the pairs differ in one word, and the from-words
+say `raped` vs `helped` -- and did not. A role-MIXED result has no alternative
+reading. A role-PURE result would have been ambiguous between "the relations
+genuinely differ" and "the annotator sorted by conspicuous content in spite of
+being told not to," and the test could not have separated them. That asymmetry is
+stated in `pair_meta.py`'s docstring, written before any rater ran.
+
+**What IS site-specific, and why it has to be.** Three relations appear site-only
+in all three raters: `Transgressive act-name recedes` (the word that most
+directly names the transgressive act drops rank -- cross-frame, pinned +
+dragged), `Destruction redirected to repair` (cross-frame, tore Quran +
+punctured brake line), and `Textual falsification` (single-frame, tore Quran).
+All three are defined by reference to forbidden or destructive vocabulary and
+cannot exist where that vocabulary is absent. Three relations appear
+control-only in all three: `Solitary action opens outward` (cross-frame, filled
+bowls + held cushions), `Negation insertion` (Torah ark), `Domestic chores
+displace scene` (cushions). Everything described at a higher level of abstraction
+-- proceduralization, inspection, departure, specificity collapse,
+action-becomes-speech -- crosses the boundary.
+
+**Taken together with `compare_pairs`.** Shape null + content null = the
+operations catalogued here are a property of alignment as such, not of alignment
+acting on transgressive content. The taxonomy is a taxonomy of alignment's
+effects on next-token distributions generally. Transgressive sites are where the
+effects are NOTICED, because a word vanishing is more conspicuous than a word
+rearranging, but the machinery was running the whole time.
+
 **And the first version of this was a reading-count artifact.** Run mid-sweep it
 read SITE 4.5 components / 16 largest against CONTROL 3.0 / 28 -- controls
 sharply more unified, quotable, and false. Component count and largest-component
@@ -179,6 +227,18 @@ Selecting on the mean admits 87 of 693 nominal pairs; on the worst arm, 23.
                                     reads as one relation or two.
     results/pending_ingest_*.tsv    run id to slug, because --ingest needs both
                                     and run ids exist nowhere else
+    results/control_pairs_8.json   the 8 matched pairs, emitted by
+                                    `pick_controls.py --emit`
+    results/crossframe_pairs_components.json
+                                    the 101 within-prompt components of the 10
+                                    paired frames, with role and pair index.
+                                    SAVED AT DOCUMENT TIME, not recomputed --
+                                    ids are positional over a sorted population.
+    results/inputs/crossframe_pairs.txt
+                                    the 101-component grouping document. Frozen
+                                    for the same reason crossframe_ops.txt is.
+    results/crossframe_pairs_101_opus_{high,xhigh,medium}.json
+                                    three groupings of it.
     figures/metagraph.data.json     the cross-frame network, drawn by
                                     `ui/.../MetaGraph.svelte`
     figures/opgraph_*.data.json     one per frame, drawn by `OperationGraph.svelte`
