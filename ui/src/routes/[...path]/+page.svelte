@@ -40,31 +40,35 @@
 		{ id: 'plots', label: 'Plots', sub: 'registered figures, run on demand' }
 	] as const;
 
-	//: THE URL IS THE STATE, so a panel can be sent to someone (RH). Everything
-	//: that decides what is on screen lives in the query string and the
-	//: components read it back on load, which is what makes a link mean the same
-	//: thing in another browser:
+	//: THE URL IS THE STATE, so a panel can be sent to someone (RH). Path
+	//: segments replace query params, so the link reads as a hierarchy:
 	//:
-	//:     ?s=experiments&q=displacement_taxonomy&p=displacement-categories-7.md
+	//:     /experiments/displacement_taxonomy/displacement-categories-7.md
+	//:
+	//: Query-string form (`?s=experiments&q=...&p=...`) is still read on load so
+	//: old bookmarks survive, but every navigation writes path segments.
 	//:
 	//: `replaceState` rather than `goto`: a click that opens a pane is not a
 	//: navigation, and pushing history for each would make Back walk through
 	//: every chip the reader touched instead of leaving the app.
+	function urlState(): { s: string; q: string; p: string } {
+		const segs = page.url.pathname.split('/').filter(Boolean);
+		if (segs.length >= 1 && SECTIONS.some((x) => x.id === segs[0])) {
+			return { s: segs[0], q: segs[1] ?? '', p: segs.slice(2).join('/') };
+		}
+		const sp = page.url.searchParams;
+		return { s: sp.get('s') ?? '', q: sp.get('q') ?? '', p: sp.get('p') ?? '' };
+	}
+
 	function readSection() {
-		const s = page.url.searchParams.get('s');
-		return SECTIONS.some((x) => x.id === s) ? (s as string) : 'experiments';
+		const { s } = urlState();
+		return SECTIONS.some((x) => x.id === s) ? s : 'experiments';
 	}
 	let section: string = $state(readSection());
 
 	function setSection(id: string) {
 		section = id;
-		const u = new URL(page.url);
-		u.searchParams.set('s', id);
-		//: A section change invalidates the deeper keys; leaving them would make
-		//: the link say Roster while carrying an Experiments question.
-		u.searchParams.delete('q');
-		u.searchParams.delete('p');
-		replaceState(u, {});
+		replaceState('/' + id, {});
 	}
 	let health: Health | null = $state(null);
 	let down = $state('');

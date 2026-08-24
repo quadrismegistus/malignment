@@ -48,17 +48,18 @@
 	let error = $state('');
 	let loading = $state(false);
 
-	//: URL-BACKED SELECTION (RH: "i can't send you a link"). `q` is the question
-	//: and `p` the open pane, written on every click and read once on mount, so
-	//: a link reopens the same document rather than the panel's default.
+	//: URL-BACKED SELECTION (RH: "i can't send you a link"). Path segments
+	//: replace query params so the URL reads as a hierarchy:
+	//:
+	//:     /experiments/displacement_taxonomy/displacement-categories-7.md
+	//:
+	//: Old query-string links (`?s=experiments&q=...&p=...`) are still read on
+	//: load; new navigation always writes paths.
 	function syncUrl() {
-		const u = new URL(page.url);
-		u.searchParams.set('s', 'experiments');
-		if (selected) u.searchParams.set('q', selected);
-		else u.searchParams.delete('q');
-		if (selected && pane) u.searchParams.set('p', pane);
-		else u.searchParams.delete('p');
-		replaceState(u, {});
+		const parts = ['/experiments'];
+		if (selected) parts.push(selected);
+		if (selected && pane && pane !== 'readme') parts.push(pane);
+		replaceState(parts.join('/'), {});
 	}
 
 	async function loadIndex() {
@@ -72,13 +73,18 @@
 		//: RESTORE AFTER THE INDEX, not on mount: `open()` needs the question to
 		//: exist, and a link naming one that has since been renamed should land on
 		//: the register rather than on an error.
-		const q = page.url.searchParams.get('q');
+		//: READ FROM PATH FIRST, THEN QUERY PARAMS. Path takes precedence because
+		//: it is what the app now writes; query params are kept so old links work.
+		const segs = page.url.pathname.split('/').filter(Boolean);
+		const q = (segs.length >= 2 && segs[0] === 'experiments' ? segs[1] : null)
+			?? page.url.searchParams.get('q');
+		const p = (segs.length >= 3 && segs[0] === 'experiments' ? segs.slice(2).join('/') : null)
+			?? page.url.searchParams.get('p');
 		if (q?.startsWith('subject:')) {
 			openSubject(q.slice(8));
 			return;
 		}
 		if (!q || !index?.questions.some((x) => x.id === q)) return;
-		const p = page.url.searchParams.get('p');
 		open(q).then(() => {
 			if (!p) return;
 			if (p.startsWith('fig:') || ['readme', 'registration', 'population'].includes(p)) pane = p;
