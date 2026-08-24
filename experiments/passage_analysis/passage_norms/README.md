@@ -214,4 +214,29 @@ worth knowing before anyone reads it as a "strong verb" category.
 
 ## STATUS
 
-Folder opened. Producer not yet written, nothing run, no numbers.
+**Corrected 2026-08-24. The line here said "Folder opened. Producer not yet
+written, nothing run, no numbers." That was false, and false against the body of
+this same file**, which reports a completed disjoint-twin replication several
+screens above. A reader who trusted the header would have concluded the folder
+was empty and either skipped finished work or re-run it.
+
+What actually exists:
+
+    producers   measure.py, contrast.py
+    results     results/norms_ch/            per-model parquets
+                results/norms_quadrants.parquet
+                results/norms_ch.withdrawn_mixed_forced_word   (withdrawn, kept)
+
+    reported    10 keys replicate at q<.05 on BOTH corpora with the same sign
+                sign agreement 94/110 (85%) against 50% chance
+                no key CONTRADICTED -- none significant on both with opposite signs
+                the 16 sign flips all sit on a corpus-A effect of |0.0028| or less
+
+The numbers above are as stated in the body of this file, from the run that
+produced those artifacts. **They have not been independently recomputed in
+making this correction** -- the defect fixed here is a status line contradicting
+its own document, and nothing more is claimed.
+
+The `.withdrawn_mixed_forced_word` directory is a withdrawal kept beside the
+result rather than deleted; anyone reading the numbers should know why it is
+there before quoting them.
