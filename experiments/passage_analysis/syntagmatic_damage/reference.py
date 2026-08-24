@@ -205,6 +205,50 @@ def select(a):
     return picked
 
 
+def ctx_rows():
+    """The SAME population as --run, rebuilt with the model's own context.
+
+    THE ASYMMETRY THIS REPAIRS. `--run` scored the continuation ALONE, because
+    `score.surprisal` is content-addressed on the text and the stored `text` is
+    what follows the forced word -- no prompt, no forced word. The self-surprisal
+    side had both: `gen_scores.logprobs` come from teacher-forcing over
+    prompt + forced word + continuation. So the first comparison was
+    self-WITH-context against reference-WITHOUT-context, and its null on `delta`
+    is consistent with "no trace in the text" AND with "the reference was never
+    shown the joint where the trace lives".
+
+    RECONSTRUCTION, from the codebase's own convention rather than from the
+    shape of the strings: the forced word enters as `" " + word`
+    (`malign_logits/analysis.py:68` `text = prompt + " " + word`, and
+    `encode(" " + word)` in models.py:243, metrics.py:368/1027, circuit.py:320,
+    step_analysis.py:114, psyche.py:202). `text` is the raw decode of the
+    generated tokens and keeps its own leading space, which is why 91% of rows
+    in BOTH arms start with one.
+
+        full = prompt_full + " " + forced_word + text
+
+    `ctx_bytes` is the byte length of the prefix, so the continuation can be cut
+    out of the scored array exactly. Scoring is on `sha(full)`, a different key
+    from `sha(text)`, so the two runs cannot collide in the store.
+    """
+    from malignment import score
+    rows = selected()
+    idx = score._index("surprisal")
+    out, missing = [], 0
+    for r in rows:
+        s = idx.get(r["sha"])
+        if not s or not s.get("scored"):
+            missing += 1
+            continue
+        prefix = r["prompt"] + " " + r["forced_word"]
+        full = prefix + s["text"]
+        out.append(dict(r, full=full, ctx_bytes=len(prefix.encode()),
+                        text=s["text"], sha_full=score.sha(full)))
+    if missing:
+        print("  %d rows have no stored text and are skipped" % missing)
+    return out
+
+
 def binom(k, n):
     """Two-sided sign test. Same implementation as run.py, deliberately."""
     return (min(1.0, 2 * sum(math.comb(n, j) for j in range(0, min(k, n - k) + 1))
@@ -325,6 +369,134 @@ def analyse(a):
     return 0
 
 
+def run_ctx(a):
+    """Score prompt + forced word + continuation. Resumable; the store dedupes."""
+    from malignment import score
+    rows = ctx_rows()
+    if not rows:
+        print("no rows -- run --run first")
+        return 1
+    words = sum(len(r["full"].split()) for r in rows)
+    print("%d passages WITH CONTEXT, %d words" % (len(rows), words), flush=True)
+    if a.plan:
+        #: verify the reconstruction on real rows and score NOTHING. The check
+        #: that matters is that the prefix ends where the continuation begins.
+        #: slice the BYTES, not the characters. ctx_bytes is a byte offset and
+        #: the two diverge on every non-ASCII prompt -- an earlier version of
+        #: this check sliced `full[:ctx_bytes]` and reported 396 false failures,
+        #: all of them Chinese. The analysis compares ctx_bytes against
+        #: byte-ends, so it was never affected; only the check was.
+        bad = [r for r in rows
+               if r["full"].encode()[:r["ctx_bytes"]]
+               [-len(r["forced_word"].encode()):] != r["forced_word"].encode()]
+        print("rows whose prefix does not end in the forced word: %d" % len(bad))
+        for r in rows[:3]:
+            print()
+            print("  prefix  %r" % r["full"][:r["ctx_bytes"]][-70:])
+            print("  cont    %r" % r["full"][r["ctx_bytes"]:][:70])
+        json.dump(dict(n=len(rows), words=words),
+                  open(os.path.join(OUT, "reference_ctx_plan.json"), "w"), indent=1)
+        print()
+        print("-> results/reference_ctx_plan.json   (nothing scored)")
+        return 0
+    idp = os.path.join(OUT, "reference_ctx_ids.jsonl")
+    with open(idp, "a", encoding="utf-8") as fh:
+        for r in rows:
+            fh.write(json.dumps({k: r[k] for k in
+                                 ("sha_full", "sha", "pair", "model", "prompt",
+                                  "forced_word", "sample_idx", "role", "delta",
+                                  "q", "ctx_bytes")}, ensure_ascii=False) + "\n")
+    print("-> %s" % idp, flush=True)
+    B = 64
+    for i in range(0, len(rows), B):
+        score.surprisal([r["full"] for r in rows[i:i + B]])
+        if (i // B) % 10 == 0:
+            print("  scored %d/%d" % (min(i + B, len(rows)), len(rows)), flush=True)
+    print("scoring complete; store is content-addressed, rerun is free")
+    return 0
+
+
+def analyse_ctx(a):
+    """The same regression, on the continuation cut out of a context-scored pass.
+
+    Tokens are selected by BYTE END, not by index: the prefix tokenises to a
+    different number of deepseek tokens for every row, so a fixed offset would
+    silently mix prompt tokens into the window on some rows and drop
+    continuation tokens on others.
+    """
+    import numpy as np
+    from malignment import score
+    rows = ctx_rows()
+    idx = score._index("surprisal")
+    bypair = collections.defaultdict(list)
+    unscored = 0
+    for r in rows:
+        s = idx.get(r["sha_full"])
+        if not s or not s.get("scored"):
+            unscored += 1
+            continue
+        bypair[r["pair"]].append((r, s))
+    print("%d rows, %d not yet scored with context, %d lineages"
+          % (len(rows), unscored, len(bypair)))
+    if unscored:
+        print("  (PARTIAL read -- --run-ctx is still going or was interrupted)")
+    if not bypair:
+        return 1
+
+    res = collections.defaultdict(list)
+    nfit = 0
+    for pr, items in sorted(bypair.items()):
+        X, ys = [], []
+        for r, s in items:
+            q = r.get("q")
+            if not q or q <= 0:
+                continue
+            bits = score._block("surprisal", s)
+            ends = score._block("surprisal", s, "i32")
+            if bits.size != ends.size or bits.size == 0:
+                continue
+            #: the first token whose byte-end passes the prefix is the first
+            #: token of the continuation.
+            k = int(np.searchsorted(ends, r["ctx_bytes"], side="right"))
+            v = bits[k:]
+            if v.size < TOK_BINS[-1][0]:
+                continue
+            X.append([1.0, math.log(q), r.get("delta") or 0.0])
+            ys.append(v)
+        if len(X) < MIN_ROWS:
+            continue
+        nfit += 1
+        Xm = np.array(X)
+        for lo, hi in TOK_BINS:
+            keep = [i for i, v in enumerate(ys) if v.size >= hi]
+            if len(keep) < MIN_ROWS:
+                continue
+            yy = np.array([float(ys[i][lo:hi].mean()) for i in keep])
+            c = np.linalg.lstsq(Xm[keep], yy, rcond=None)[0]
+            lab = "[%d,%d)" % (lo, hi)
+            res[(lab, "logq")].append(c[1])
+            res[(lab, "delta")].append(c[2])
+    print("fitted %d lineages" % nfit)
+    print()
+    print("REFERENCE WITH CONTEXT -- deepseek reads prompt + forced word + continuation")
+    print("  %-10s %-7s %4s %10s %9s %9s" % ("bin", "term", "n", "median", "up/down", "sign p"))
+    for lo, hi in TOK_BINS:
+        lab = "[%d,%d)" % (lo, hi)
+        for term in ("logq", "delta"):
+            v = res.get((lab, term))
+            if not v:
+                continue
+            dn = sum(1 for x in v if x < 0)
+            print("  %-10s %-7s %4d %10.5f %5d/%-3d %9.5f"
+                  % (lab, term, len(v), S.median(v), len(v) - dn, dn,
+                     binom(len(v) - dn, len(v))))
+    print()
+    print("Against the CONTEXT-FREE pass, whose delta was null at [5,10)")
+    print("(-0.303, 17/24, p=0.35), and against run.py's SELF result at the")
+    print("same bin (-0.542, 5/37, p<1e-5).")
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--per-pair", type=int, default=1000)
@@ -332,8 +504,16 @@ def main(argv=None):
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--analyse", action="store_true")
+    ap.add_argument("--run-ctx", dest="run_ctx", action="store_true",
+                    help="score prompt + forced word + continuation")
+    ap.add_argument("--analyse-ctx", dest="analyse_ctx", action="store_true")
     a = ap.parse_args(argv)
     os.makedirs(OUT, exist_ok=True)
+
+    if a.run_ctx:
+        return run_ctx(a)
+    if a.analyse_ctx:
+        return analyse_ctx(a)
 
     if a.plan or a.run:
         rows = select(a)
