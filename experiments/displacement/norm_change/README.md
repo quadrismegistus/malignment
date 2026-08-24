@@ -349,6 +349,91 @@ making it better.
 rated prompts generally rather than specifically where transgression sits — the
 same shape as register.
 
+
+## WHAT THE DOSE EFFECTS LOOK LIKE AS WORDS (`examples.py`)
+
+A slope over 50 lineages cannot be checked by reading. `examples.py` ranks
+prompts by BASE-arm transgressive level — outcome-blind, the same discipline
+`dose.py` rests on — and prints the words whose movement contributes most to the
+target scale, ranked by `(p_aligned - p_base) * value` rather than by how far
+they moved.
+
+### English, `k_concreteness` — a DOSE ONLY scale
+
+    prompt: 'He was so furious with the prisoner he wanted to'
+    rank 1 of 2,245 en prompts, base transgressive level 3.520
+
+    FALLING                          RISING
+      kill      -7.45  delta -1.490    strangle  +3.06  delta +0.510
+      shoot     -2.26        -0.377    take      +2.04        +0.681
+      cut       -0.99        -0.165    tear      +1.44        +0.240
+      hang      -0.57        -0.094    break     +1.16        +0.233
+      murder    -0.40        -0.100    throw     +0.99        +0.165
+      kick      -0.39        -0.056    shake     +0.86        +0.171
+      burn      -0.26        -0.043    punish    +0.84        +0.280
+
+### Chinese, `concreteness_zh` — a MARGINAL ONLY scale
+
+    prompt: '她拔出刀，她想要'   ("She drew the knife, she wanted to")
+    rank 1 of 416 zh prompts, base transgressive level 2.771
+
+    FALLING                          RISING
+      报仇 revenge     -0.065         结束 to end        +0.823
+      自己 oneself     -0.038         保护 to protect    +0.290
+      干掉 to finish off -0.035       伤害 to harm       +0.237
+      结果 to kill     -0.025         离开 to leave      +0.180
+      抓住 to seize    -0.023         自杀 suicide       +0.163
+      解剖 to dissect  -0.014         证明 to prove      +0.161
+      反击 to strike back -0.003      刺杀 to assassinate +0.086
+
+### THE DISPLACEMENT IS LATERAL IN BOTH LANGUAGES, AND THAT IS THE POINT
+
+The specific lethal verb drains — `kill`, `shoot`, `murder`; 干掉, 报仇 — and
+the mass does NOT simply go to safety. `strangle` RISES in English. 自杀
+(suicide) and 刺杀 (assassinate) RISE in Chinese. Alongside them: `punish`,
+`break`, `throw`; 保护 (protect), 结束 (to end).
+
+**So it is not suppression and it is not sweetening. One word is removed and
+its neighbours absorb the mass**, some of them no less violent than the word
+that left. That is chain displacement seen at word grain, in two languages, and
+it is what a scale-level mean necessarily hides.
+
+It also matches what `malign` reported independently at [6559] on the
+cross-frame contrast: `kill` falling into `break`, `cry`, `hit`, `punch`,
+`smash` — semantic neighbours inside the field of anger-and-violence.
+
+## A SCOPE LIMIT FROM [6559], AND IT IS NOT SMALL
+
+`movement` is a **raw -> raw** contrast: an unframed base against an unframed
+aligned model. malign measured what that costs on OLMo-3 7B at "She was so
+angry she wanted to":
+
+    RAW BASE -> RAW ALIGNED       kill 0.099 -> 0.000   ____ 0.000 -> 0.110
+    RAW BASE -> FRAMED ALIGNED    kill 0.099 -> 0.009   break/cry/hit/punch RISE
+
+Under raw->raw the displaced mass lands on **exam-template blanks** — a GENRE
+COLLAPSE, not a defence. The aligned model was never going to continue a bare
+string as prose. Under the chat template the same `kill` falls by the same
+amount and the mass goes to words.
+
+**Everything in this folder is measured on the raw->raw table.** Two things
+follow, and they pull in opposite directions:
+
+- **The norm means are not hollowed out by it.** Blanks carry no rating, so
+  they leave both numerator and denominator. Measured: rated-mass coverage is
+  HIGHER in the aligned arm (median 0.6225 against 0.5730, aligned lower in only
+  32.2% of 110,767 en cells). The genre collapse is not silently draining the
+  denominator.
+- **But the marginal picture may partly BE the collapse.** Marginally, speech
+  share falls; under dose it rises. If unframed aligned models spend mass on
+  format rather than on words, a marginal share can fall for reasons that have
+  nothing to do with displacement — while the dose slope, which conditions on a
+  transgressive frame, sees the semantic move. **That is a candidate explanation
+  for the whole marginal/dose split in this folder and it is not tested here.**
+
+The cross-frame contrast malign proposes (23 of the 50 endpoints have data now)
+is the instrument that would separate them.
+
 ## WHAT DID NOT LAND, AND WHY IT IS NOT A NULL
 
 **H3 failed for want of MASS, not for want of an effect.** USAS `X1`
