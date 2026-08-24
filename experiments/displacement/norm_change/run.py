@@ -48,7 +48,15 @@ import argparse, collections, gzip, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
-OUT = os.path.join(HERE, "results", "long")
+#: MEASURED DATA LIVES OUTSIDE THE CHECKOUT (RH, 2026-08-24). 3.0 GB of
+#: gzipped long-form tables, in the same root as the score store. The repo
+#: keeps the producers and the write-up; the tables are reproducible from
+#: `run.py --run` and do not belong in git.
+DATA = os.path.join(os.path.expanduser(os.environ.get("LITMOD_DATA_DIR", "~")),
+                    "malignment-data", "norm_change") \
+    if os.environ.get("LITMOD_DATA_DIR") else \
+    os.path.expanduser("~/malignment-data/norm_change")
+OUT = DATA
 
 CJK = re.compile(r"[一-鿿㐀-䶿]")
 
@@ -289,6 +297,10 @@ def main(argv=None):
          [("prompt", "String"), ("word", "String"), ("upos", "String"),
           ("is_function", "UInt8"), ("freq", "Float64")])
 
+    lineages = [(r["base"], r["aligned"]) for r in
+                ch.query("SELECT DISTINCT base, aligned FROM movement ORDER BY base, aligned")]
+    print("chunking over %d lineages" % len(lineages), flush=True)
+
     #: THE MASS-WEIGHTING, in SQL. One row per (lineage, prompt, scale, arm),
     #: with coverage as the share of that arm's mass the rated words hold.
     print("aggregating levels...", flush=True)
@@ -301,15 +313,16 @@ def main(argv=None):
            sum(m.p_aligned) AS aligned_cov,
            count() AS n_words
     FROM movement m INNER JOIN nc_scale_tmp s ON m.word = s.word
+    {WHERE}
     GROUP BY base, aligned, prompt, scale
     FORMAT TabSeparatedWithNames"""
-    _write(ch, q, os.path.join(OUT, "levels_long.csv.gz"), a.lang)
+    _write(ch, q, os.path.join(OUT, "levels_long.csv.gz"), a.lang, lineages)
 
     print("aggregating fields...", flush=True)
     qf = q.replace("nc_scale_tmp s ON m.word = s.word", "nc_field_tmp s ON m.word = s.word") \
           .replace("s.scale AS scale", "s.field AS scale") \
           .replace("s.value", "s.weight")
-    _write(ch, qf, os.path.join(OUT, "fields_long.csv.gz"), a.lang)
+    _write(ch, qf, os.path.join(OUT, "fields_long.csv.gz"), a.lang, lineages)
 
     print("writing the word layer...", flush=True)
     qw = """
@@ -319,37 +332,60 @@ def main(argv=None):
            a.upos AS upos, a.is_function AS is_function, a.freq AS freq
     FROM movement m INNER JOIN nc_attr_tmp a
       ON m.word = a.word AND m.prompt = a.prompt
-    WHERE m.cls != 'still'
+    {WHERE} AND m.cls != 'still'
     FORMAT TabSeparatedWithNames"""
-    _write(ch, qw, os.path.join(OUT, "words_long.csv.gz"), a.lang)
+    _write(ch, qw, os.path.join(OUT, "words_long.csv.gz"), a.lang, lineages)
 
     print()
     print("-> %s" % OUT)
     return 0
 
 
-def _write(ch, q, path, lang=None):
-    """Stream a TSV result to gzip, adding `lang` from the prompt."""
-    out = ch.raw(q)
-    lines = out.splitlines()
-    if not lines:
-        print("  EMPTY: %s" % os.path.basename(path))
-        return
-    head = lines[0].split("\t")
-    ip = head.index("prompt")
-    kept = 0
+def _write(ch, q, path, lang=None, lineages=None):
+    """Stream a TSV result to gzip, adding `lang`, CHUNKED BY LINEAGE.
+
+    THE WHOLE-QUERY FORM DID NOT FIT. One row per (lineage, prompt, scale) is
+    153 x 4,482 x 45 = ~31M rows, which came back as 3.16 GB against `ch.raw`'s
+    2 GB guard. The guard was right and the query shape was wrong: raising the
+    limit would have moved a 3 GB string through Python to write it out again.
+
+    Chunking by lineage keeps the full grain -- prompt-level rows survive, so
+    exploration is still possible -- while no single result is more than about
+    1/153rd of the whole. The `{WHERE}` placeholder is filled per chunk.
+    """
+    lineages = lineages or []
+    kept, head = 0, None
     with gzip.open(path, "wt", encoding="utf-8", newline="") as fh:
-        fh.write("\t".join(head + ["lang"]) + "\n")
-        for line in lines[1:]:
-            p = line.split("\t")
-            if len(p) != len(head):
+        for i, (b, al) in enumerate(lineages, 1):
+            qq = q.replace("{WHERE}", "WHERE m.base = %s AND m.aligned = %s"
+                           % (_q(b), _q(al)))
+            out = ch.raw(qq)
+            lines = out.splitlines()
+            if len(lines) < 2:
                 continue
-            lg = _lang(p[ip])
-            if lang and lg != lang:
-                continue
-            fh.write(line + "\t" + lg + "\n")
-            kept += 1
+            h = lines[0].split("\t")
+            if head is None:
+                head = h
+                fh.write("\t".join(head + ["lang"]) + "\n")
+            ip = head.index("prompt")
+            for line in lines[1:]:
+                v = line.split("\t")
+                if len(v) != len(head):
+                    continue
+                lg = _lang(v[ip])
+                if lang and lg != lang:
+                    continue
+                fh.write(line + "\t" + lg + "\n")
+                kept += 1
+            if i % 25 == 0:
+                print("    %s: %d/%d lineages, %s rows"
+                      % (os.path.basename(path), i, len(lineages),
+                         format(kept, ",")), flush=True)
     print("  %-22s %s rows" % (os.path.basename(path), format(kept, ",")))
+
+
+def _q(v):
+    return "'" + str(v).replace("'", "''") + "'"
 
 
 if __name__ == "__main__":
