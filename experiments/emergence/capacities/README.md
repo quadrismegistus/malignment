@@ -56,9 +56,8 @@ running it, not by reading it:
       m05_class_mass.py         }  movement.word_probs
       m05_capacity_examples.py /
 
-    BLOCKED on the archive's task framework, and metered besides
-      m05_licit_run.py         needs malignment.tasks (absent); calls deepseek
-                               and claude-haiku. NOT RUN.
+    UNBLOCKED 2026-08-24, and its results are already paid for
+      m05_licit_run.py         see "THE LICIT TASK" below
 
     NOT REPOINTED, provenance only
       verse_fleet_producer.py  rhyme_pull_pilot.py  m05_syntax_tags.py
@@ -92,6 +91,42 @@ its one internal caller, is never called anywhere in the repo.
 So: verse regenerates from the live store, three analysis producers regenerate
 from local parquets, and the three curve-builders remain archive-only until
 someone rewrites their reads.
+
+### THE LICIT TASK: PORTED, AND `task.df` WORKS
+
+`malignment/tasks/` now exists -- `__init__.py` (empty, as in the archive) plus
+`code_m05_licit_v1.py`. The port was a file copy: the task imports only
+`typing`, `pydantic` and `largeliterarymodels.task`, and NOTHING from either
+project package.
+
+**Its 584 codings are already bought and are still on disk.**
+
+    LITMOD_DATA_DIR=~/.largeliterarymodels/data
+    LicitSetTask().df  ->  1,176 rows, 584 distinct prompts
+      deepseek/deepseek-v4-flash   584     the model of record
+      anthropic/claude-haiku-4-5   584     the declared second family
+      deepseek/deepseek-chat         8     the retired alias, superseded
+
+and they are the SAME 584: stripping the task's `TEXT:\n` wrapper, the stash
+prompts match `data/m05_licit_sets.json`'s keys **584 / 584**.
+
+**THE ENV VAR IS LOAD-BEARING AND THE DEFAULT IS WRONG FOR THIS STASH.** There
+are two roots, and `largeliterarymodels._data_dir()` prefers the wrong one here:
+
+    ~/github/largeliterarymodels/data/stash    185 tasks; has m05_sense_v1
+                                               and NOT m05_licit_v1
+    ~/.largeliterarymodels/data/stash          HAS m05_licit_v1
+
+Resolution order is `LITMOD_DATA_DIR`, then a non-empty package-relative `data/`
+outside site-packages, then `~/.largeliterarymodels/data`. The editable clone
+HAS a non-empty `data/`, so rule 2 wins and the licit stash is invisible.
+Unset, `LicitSetTask().df` returns **0 rows and no error** -- which reads as "the
+task was never run" rather than "you are looking in the other root".
+
+**So m05_licit_run.py should cost nothing to re-run**, every coding being
+cached -- but that is an inference from the stash contents, NOT a tested claim.
+It has not been run here, because a single cache miss is a paid call and the
+question this folder needed answering was whether the results survived. They did.
 
 ## THE VERSE FAMILIES
 
