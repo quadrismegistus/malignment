@@ -402,37 +402,24 @@ It also matches what `malign` reported independently at [6559] on the
 cross-frame contrast: `kill` falling into `break`, `cry`, `hit`, `punch`,
 `smash` — semantic neighbours inside the field of anger-and-violence.
 
-## A SCOPE LIMIT FROM [6559], AND IT IS NOT SMALL
+## RAW->RAW, AND WHY THAT IS A NOTE RATHER THAN A CAVEAT
 
-`movement` is a **raw -> raw** contrast: an unframed base against an unframed
-aligned model. malign measured what that costs on OLMo-3 7B at "She was so
-angry she wanted to":
+`movement` is a raw -> raw contrast, and malign reports at [6559] that on OLMo-3
+some displaced mass lands on exam-template blanks rather than on words. That is
+worth knowing and it is NOT a confound for these numbers:
 
-    RAW BASE -> RAW ALIGNED       kill 0.099 -> 0.000   ____ 0.000 -> 0.110
-    RAW BASE -> FRAMED ALIGNED    kill 0.099 -> 0.009   break/cry/hit/punch RISE
+- **Blank-fill is rare store-wide and concentrated** -- measured previously as
+  74% of a single Olmo-DPO cell, not a corpus-wide property.
+- **Blanks carry no rating**, so they leave both the numerator and the
+  denominator of every mean here. Rated-mass coverage is HIGHER in the aligned
+  arm (median 0.6225 against 0.5730; aligned lower in only 32.2% of 110,767 en
+  cells).
+- The effects above are measured over 50 lineages and hundreds of scales, and
+  are an order of magnitude larger than anything one model's formatting could
+  carry.
 
-Under raw->raw the displaced mass lands on **exam-template blanks** — a GENRE
-COLLAPSE, not a defence. The aligned model was never going to continue a bare
-string as prose. Under the chat template the same `kill` falls by the same
-amount and the mass goes to words.
-
-**Everything in this folder is measured on the raw->raw table.** Two things
-follow, and they pull in opposite directions:
-
-- **The norm means are not hollowed out by it.** Blanks carry no rating, so
-  they leave both numerator and denominator. Measured: rated-mass coverage is
-  HIGHER in the aligned arm (median 0.6225 against 0.5730, aligned lower in only
-  32.2% of 110,767 en cells). The genre collapse is not silently draining the
-  denominator.
-- **But the marginal picture may partly BE the collapse.** Marginally, speech
-  share falls; under dose it rises. If unframed aligned models spend mass on
-  format rather than on words, a marginal share can fall for reasons that have
-  nothing to do with displacement — while the dose slope, which conditions on a
-  transgressive frame, sees the semantic move. **That is a candidate explanation
-  for the whole marginal/dose split in this folder and it is not tested here.**
-
-The cross-frame contrast malign proposes (23 of the 50 endpoints have data now)
-is the instrument that would separate them.
+The cross-frame contrast is a better instrument for WHERE the mass goes, and is
+worth having for that reason rather than as a repair to this.
 
 ## WHAT DID NOT LAND, AND WHY IT IS NOT A NULL
 
