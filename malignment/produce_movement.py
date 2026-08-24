@@ -119,6 +119,42 @@ CREATE TABLE IF NOT EXISTS {db}.%(tbl)s (
 ORDER BY (rule, base, aligned, prompt, word)
 """
 
+DDL_V4 = """
+CREATE TABLE IF NOT EXISTS {db}.movement_v4 (
+    base String, aligned String,
+    prompt String, word String,
+    p_base Float32, p_aligned Float32, delta Float32,
+    cls LowCardinality(String),
+    rule LowCardinality(String), theta Float32,
+    frame_base LowCardinality(String),
+    frame_aligned LowCardinality(String),
+    system_mode_base LowCardinality(String),
+    system_mode_aligned LowCardinality(String)
+) ENGINE = ReplacingMergeTree
+ORDER BY (rule, frame_base, frame_aligned, base, aligned, prompt, word)
+"""
+
+#: **THE VALID FRAME COMBINATIONS AND WHY framed->raw IS REFUSED.**
+#:
+#: A framed base with a raw aligned is nonsensical: the base is measured inside
+#: a deployment template while the aligned is measured on a bare string. The
+#: delta would be (what the base produces in conversation) minus (what the
+#: aligned produces as a raw continuation), which answers no coherent question
+#: about alignment or deployment.
+#:
+#:     raw->raw        the existing contrast: both arms on bare strings
+#:     raw->framed     deployed displacement: bare base, templated aligned
+#:     framed->framed  within-frame: both arms templated (ladder tier)
+#:     framed->raw     REFUSED: nonsensical direction
+#:
+#: Checked in the producer at row construction time, not at query time, because
+#: a schema that permits a nonsensical row eventually holds one (lacan, [6560]).
+VALID_FRAME_COMBOS = {
+    ("", ""),               # raw -> raw
+    ("", "prefill"),        # raw -> framed
+    ("prefill", "prefill"), # framed -> framed
+}
+
 #: The graph, at the grain the views need it. Derived from `edges` every run, so
 #: it cannot drift from the roster: it has no independent existence to drift into.
 PAIRS_DDL = """
@@ -129,6 +165,20 @@ CREATE OR REPLACE TABLE {db}.pairs (
 """
 
 
+def _token_surface_models():
+    """Models whose words are tokens not words — refused from movement."""
+    bad = [r["model"] for r in ch.query(
+        (r"""SELECT model FROM {db}.%s GROUP BY model"""
+         % corpus.TABLES[_RV["v"]][0]) + r"""
+            HAVING countIf(startsWith(word, '▁') OR startsWith(word, 'Ġ')
+                           OR match(word, '^<0x[0-9A-Fa-f]{2}>$')) > 0""")]
+    if bad:
+        print("  REFUSING %d model(s): word surfaces are TOKENS, not words." % len(bad))
+        for m in bad:
+            print("     %s  -- re-measure; do not strip the marker" % m)
+    return set(bad)
+
+
 def buildable():
     """Every ANCESTOR -> DESCENDANT pair whose both arms have cells, with depth.
 
@@ -136,6 +186,10 @@ def buildable():
     taken on prompts, never one arm's list: taking either alone silently measures
     a different population, which is how a producer iterating a registry instead
     of the store once dropped 65% of amber's cells.
+
+    At v4, returns BOTH raw->raw pairs (frame_base='', frame_aligned='') AND
+    cross-frame pairs (frame_base='', frame_aligned='prefill') where the base
+    has raw cells and the aligned has framed cells.
     """
     par, op = {}, {}
     for r in ch.query("SELECT parent, child, op FROM {db}.edges"):
@@ -145,38 +199,33 @@ def buildable():
     _c = corpus.TABLES[_RV["v"]][1]
     have = {r["model"] for r in ch.query(
         "SELECT DISTINCT model FROM {db}.%s" % _c)}
-    #: **A GATE AT THE PRODUCER IS NOT REMEDIATION OF THE STORE.**
-    #: `ingest.token_space` refuses token-space payloads at the door, and that
-    #: was treated as quarantining `dolphin-2.6-mistral-7b-dpo`. It was not: the
-    #: rows were ALREADY ingested, so the next movement rebuild read them
-    #: straight out of `twp_words` and produced 588,427 rows whose edge carried
-    #: JS 0.7171 -- the single largest displacement in the corpus, 45% above the
-    #: next, and entirely an artefact of comparing `▁the` against `the`.
-    #:
-    #: The gate prevents recurrence; it cannot undo. So the producer checks the
-    #: STORE it is about to read, every run, and refuses loudly. A model removed
-    #: from the store cannot come back through the ingest, and a model that
-    #: somehow returns cannot reach `movement`.
-    bad = [r["model"] for r in ch.query(
-        (r"""SELECT model FROM {db}.%s GROUP BY model""" % corpus.TABLES[_RV["v"]][0]) + r"""
-            HAVING countIf(startsWith(word, '▁') OR startsWith(word, 'Ġ')
-                           OR match(word, '^<0x[0-9A-Fa-f]{2}>$')) > 0""")]
-    if bad:
-        print("  REFUSING %d model(s): word surfaces are TOKENS, not words." % len(bad))
-        for m in bad:
-            print("     %s  -- re-measure; do not strip the marker" % m)
-        have -= set(bad)
+    bad = _token_surface_models()
+    have -= bad
+
     out = []
     for m in par:
         x, d = m, 0
         while x in par:
             x, d = par[x], d + 1
             if x in have and m in have:
-                #: `relation` is the op of the LAST rung into the descendant, so a
-                #: depth-2 pair through SFT->DPO reads `dpo`. The stage that
-                #: produced the endpoint is what a GROUP BY wants; `depth` says
-                #: how far back the other arm sits.
-                out.append({"base": x, "aligned": m, "relation": op[m], "depth": d})
+                out.append({"base": x, "aligned": m, "relation": op[m],
+                            "depth": d, "frame_base": "", "frame_aligned": ""})
+    if _RV["v"] == 4:
+        have_framed = {r["model"] for r in ch.query(
+            "SELECT DISTINCT model FROM {db}.twp_cells_v4 "
+            "WHERE frame='prefill'")}
+        have_framed -= bad
+        n_cross = 0
+        for m in par:
+            x, d = m, 0
+            while x in par:
+                x, d = par[x], d + 1
+                if x in have and m in have_framed:
+                    out.append({"base": x, "aligned": m, "relation": op[m],
+                                "depth": d,
+                                "frame_base": "", "frame_aligned": "prefill"})
+                    n_cross += 1
+        print("  cross-frame pairs (raw->framed): %d" % n_cross)
     return out
 
 
@@ -215,10 +264,13 @@ def graph():
     return out
 
 
-def _arm(model):
-    """{prompt: ({word: p}, residual_total)} for one model, in ONE query.
+def _arm(model, frame=""):
+    """{prompt: ({word: p}, residual_total)} for one model at one frame.
 
     Bulk, not per-cell: the access shape is the variable, not the store.
+
+    `frame=""` is the raw (untemplated) surface — every cell before 2026-08-22.
+    `frame="prefill"` is the framed (chat-template) surface.
 
     ## AT v4 THIS PREFERS THE MERGED (TOPUP) CELL, AND THAT IS THE POINT
 
@@ -237,8 +289,20 @@ def _arm(model):
     plus the scored ones with `tail` decremented -- so preferring it is a choice
     of ONE row per (model, prompt), never a union of two. Where no topup cell
     exists the pass-1 cell is used, so coverage is never reduced by asking.
+
+    ## FRAMED CELLS HAVE NO TOPUP, AND THAT IS CORRECT
+
+    Topup is a pass-2 operation keyed on the LINEAGE UNION — which words a
+    model's siblings cleared but it did not. It exists for the raw arm because
+    the raw corpus is the one where displacement comparisons omit sub-theta
+    words. The framed arm has no topup by design: it is pass 1 only, and the
+    cross-frame delta compares the raw arm's merged words against the framed
+    arm's pass-1 words. That is an asymmetry of coverage, not an error — the
+    raw arm is as complete as it can be, and the framed arm is as complete as
+    its own measurement.
     """
     esc = model.replace("'", "\\'")
+    fesc = frame.replace("'", "\\'")
     if _RV["v"] == 3:
         wq = "SELECT prompt, word, p FROM {db}.twp_words WHERE model='%s'" % esc
         cq = "SELECT prompt, total FROM {db}.twp_cells WHERE model='%s'" % esc
@@ -260,7 +324,8 @@ def _arm(model):
         #: in five have no replicate at all. Same tuple, same order, same reason
         #: as `views.py` -- if one of these changes the other has to.
         wq = ("SELECT prompt, word, argMax(p, (topup, prompt_cache, mtime)) AS p "
-              "FROM {db}.twp_words_v4 WHERE model='%s' GROUP BY prompt, word" % esc)
+              "FROM {db}.twp_words_v4 WHERE model='%s' AND frame='%s' "
+              "GROUP BY prompt, word" % (esc, fesc))
         #: **NOT `total`. `total` IS STALE ON A TOPUP CELL.** Measured corpus-wide
         #: 2026-08-21: `total` == tail+drop+open+mojibake on 434,391 of 434,391
         #: pass-1 cells and on 984,857 of 984,857 v3 cells -- and on only 35,402
@@ -280,7 +345,8 @@ def _arm(model):
         #: therefore exact rather than a repair.
         cq = ("SELECT prompt, argMax(tail + drop + open + mojibake, "
               "(topup, prompt_cache, mtime)) AS total "
-              "FROM {db}.twp_cells_v4 WHERE model='%s' GROUP BY prompt" % esc)
+              "FROM {db}.twp_cells_v4 WHERE model='%s' AND frame='%s' "
+              "GROUP BY prompt" % (esc, fesc))
     words = collections.defaultdict(dict)
     for r in ch.query(wq):
         words[r["prompt"]][r["word"]] = r["p"]
@@ -316,7 +382,7 @@ def main():
     if a.scan or not a.run:
         return 0
 
-    ch.execute(DDL % {"tbl": MOVEMENT_TABLE[_RV["v"]]})
+    ch.execute((DDL_V4 if _RV["v"] == 4 else DDL) % {"tbl": MOVEMENT_TABLE[_RV["v"]]})
     #: THE GRAPH, REWRITTEN EVERY RUN AND FREE. CREATE OR REPLACE, so it cannot
     #: hold a pair the roster no longer declares.
     ch.execute(PAIRS_DDL)
@@ -346,18 +412,48 @@ def main():
         #: `movement_v4` created and EMPTY -- while printing a plausible
         #: incremental summary. The campaign's own rule-version trap, in the
         #: producer that names it in its module docstring.
-        have = {(r["base"], r["aligned"]) for r in ch.query(
-            "SELECT DISTINCT base, aligned FROM {db}.%s WHERE rule='%s'"
-            % (MOVEMENT_TABLE[_RV["v"]], rule.name))}
-        skip = [e for e in edges if (e["base"], e["aligned"]) in have]
-        edges = [e for e in edges if (e["base"], e["aligned"]) not in have]
+        if _RV["v"] == 4:
+            have = {(r["base"], r["aligned"], r.get("frame_base", ""),
+                     r.get("frame_aligned", "")) for r in ch.query(
+                "SELECT DISTINCT base, aligned, frame_base, frame_aligned "
+                "FROM {db}.%s WHERE rule='%s'"
+                % (MOVEMENT_TABLE[_RV["v"]], rule.name))}
+            skip = [e for e in edges if (e["base"], e["aligned"],
+                    e.get("frame_base", ""), e.get("frame_aligned", "")) in have]
+            edges = [e for e in edges if (e["base"], e["aligned"],
+                     e.get("frame_base", ""), e.get("frame_aligned", "")) not in have]
+        else:
+            have = {(r["base"], r["aligned"]) for r in ch.query(
+                "SELECT DISTINCT base, aligned FROM {db}.%s WHERE rule='%s'"
+                % (MOVEMENT_TABLE[_RV["v"]], rule.name))}
+            skip = [e for e in edges if (e["base"], e["aligned"]) in have]
+            edges = [e for e in edges if (e["base"], e["aligned"]) not in have]
         print("  incremental: %d pairs already present, %d to compute"
               " (--all to force)" % (len(skip), len(edges)))
+    _system_mode_cache = {}
+    if _RV["v"] == 4:
+        for r in ch.query(
+                "SELECT model, any(system_mode) AS sm FROM {db}.twp_cells_v4 "
+                "WHERE frame='prefill' GROUP BY model"):
+            _system_mode_cache[r["model"]] = r["sm"]
+
     rows = []
     n_cells = n_refused = 0
     for e in edges:
-        P, rp = _arm(e["base"])
-        Q, rq = _arm(e["aligned"])
+        fb = e.get("frame_base", "")
+        fa = e.get("frame_aligned", "")
+        if (fb, fa) not in VALID_FRAME_COMBOS:
+            print("  REFUSING %s -> %s: frame combo (%r, %r) is not valid"
+                  % (e["base"].split("/")[-1], e["aligned"].split("/")[-1], fb, fa))
+            continue
+        P, rp = _arm(e["base"], frame=fb)
+        Q, rq = _arm(e["aligned"], frame=fa)
+        sm_base = ""
+        sm_aligned = ""
+        if _RV["v"] == 4 and fa:
+            sm_aligned = _system_mode_cache.get(e["aligned"], "")
+        if _RV["v"] == 4 and fb:
+            sm_base = _system_mode_cache.get(e["base"], "")
         for prompt in set(P) & set(Q):
             #: REFUSED, not computed with a different null. `movement()` says an
             #: absent residual makes `exact_null` False, "a claim about the input,
@@ -393,14 +489,19 @@ def main():
                 #: other results today.
                 if w == RESIDUAL_KEY:
                     continue
-                rows.append({"base": e["base"], "aligned": e["aligned"],
-                             "prompt": prompt, "word": w,
-                             "p_base": float(P[prompt].get(w, 0.0)),
-                             "p_aligned": float(Q[prompt].get(w, 0.0)),
-                             "delta": float(d),
-                             "cls": "faller" if w in fall else
-                                    ("riser" if w in rise else "still"),
-                             "rule": rule.name, "theta": rule.theta})
+                row = {"base": e["base"], "aligned": e["aligned"],
+                       "prompt": prompt, "word": w,
+                       "p_base": float(P[prompt].get(w, 0.0)),
+                       "p_aligned": float(Q[prompt].get(w, 0.0)),
+                       "delta": float(d),
+                       "cls": "faller" if w in fall else
+                              ("riser" if w in rise else "still"),
+                       "rule": rule.name, "theta": rule.theta}
+                if _RV["v"] == 4:
+                    row.update({"frame_base": fb, "frame_aligned": fa,
+                                "system_mode_base": sm_base,
+                                "system_mode_aligned": sm_aligned})
+                rows.append(row)
         if len(rows) > 500_000:
             ch.insert(MOVEMENT_TABLE[_RV["v"]], rows); rows = []
             print("     ... %s rows" % format(
