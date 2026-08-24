@@ -157,25 +157,35 @@ All **250 fleet checkpoints are present in the live db**, none missing, 49.2M
 rows against the archive's 49.3M. So the migration happened and is complete at
 the checkpoint level.
 
-**It is not a copy, and re-running against the live db would not reproduce these
-numbers.** Row counts differ on 113 of 250 checkpoints and the difference runs
-BOTH ways -- the archive is ahead on 61 (+44,697) and the live db on 52
-(-2,552). It is concentrated on the endpoint models, and the composition says
-what happened:
+**AND ON THIS FLEET'S OWN DATA THE TWO STORES ARE IDENTICAL.** Restricted to the
+250 fleet checkpoints x the 1,586 prompts the cells table actually uses:
+
+    archive   33,148,202 rows   1,586 prompts   250 models
+    live      33,148,202 rows   1,586 prompts   250 models
+    sum(cityHash64(word)) matches exactly
+
+Every `(model, prompt)` cell the fleet used is present in the live db -- checked
+per model, **0 missing across all 250**. A recompute from `malignment.twp_words`
+would read the same rows.
+
+> **CORRECTED, same day.** An earlier version of this section said "re-running
+> against the live db would not reproduce these numbers." That was wrong, and
+> wrong in an instructive way: the two stores DO differ in total, by 293,216 rows
+> overall and on 113 of 250 checkpoints in BOTH directions, and I generalised
+> from that to the fleet's data without restricting to it. The difference lives
+> ENTIRELY in prompts the fleet never used -- other experiments on the same
+> checkpoints. Whole-table counts answered a question nobody asked.
+
+The store-level difference, kept because it is true of the stores and someone
+will hit it on other work:
 
                         archive                        live
     Olmo-3-1025-7B      4,413 prompts  497,440 rows    4,428 prompts  474,663
     pythia-6.9b         4,413          517,478         4,428          495,894
     Think-SFT           4,378          390,111         4,393          391,264
 
-**The live store has MORE distinct prompts (+15 everywhere) and MORE distinct
-words, but FEWER rows on the two base endpoints.** Broader coverage, shallower
-per cell. That is a different measurement generation, not a subset or a truncated
-transfer.
-
-So: the numbers in this README are the archive's, `results/` holds the archive's
-parquets, and anyone recomputing from `malignment.twp_words` should expect small
-differences and should say which store they read.
+The live store carries 15 MORE distinct prompts on every model. Its row deficit
+on the two base endpoints is in those non-fleet prompts, not here.
 
 ## WHAT IS STILL OWED FROM THIS FLEET
 
