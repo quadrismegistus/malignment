@@ -93,61 +93,67 @@ their size (`mass/faller` null, 25/25) while risers multiply and thin
 not a constant of alignment.
 
 
-## 5. THE MINIMAL-PAIR DESIGN SPANS ALMOST NONE OF THE TRANSGRESSIVE RANGE
+## 5. THE TRANSGRESSIVE MANIPULATION SPANS 3% OF THE AVAILABLE RANGE
 
 RH, 2026-08-24, on why the dose design is the sounder foundation: the M01
 minimal pairs are weak because **(a) the transgressive prompts were hardly
 transgressive** and **(b) the minimal pair changed the scene entirely.**
 
-(a) is checkable and it holds. Scoring M01's declared minimal-pair prompts on
-`k_transgressiveness` — the same base-arm dose this folder uses — against the
-corpus distribution of 2,245 English prompts:
+(a) is checkable. D's population is the 684 pair_ids with
+`contrast_type == transgressive_swap` (`results/population_d_684.json`), and the
+full set in `data/prompt_categorisation.json` is 1,509 prompts split
+`pair_role` MARKED / UNMARKED. Scoring them on `k_transgressiveness` — the same
+base-arm dose this folder uses — against 2,245 English corpus prompts:
 
-    transgression   declared level    n   med dose   corpus percentile
-    violence        4                 6      1.463         93%
-    profanity       2                 3      1.461         93%
-    substance       4                 1      1.172         79%
-    sexual          4                 3      1.086         67%
-    sexual          3                 5      1.060         59%
-    substance       3                 1      1.052         55%
-    sexual          2                 1      1.048         53%
-    substance       2                 2      1.011         24%
-    substance       5                 1      1.008         21%
-    violence        5                 1      1.000          0%
+    pair_role     n in corpus   med dose   corpus percentile   max
+    MARKED            496         1.105          70%          2.373
+    UNMARKED          628         1.023          37%          1.657
 
     corpus range 1.000 - 3.520      top decile begins at 1.378
 
-**M01's most transgressive site scores 1.463. The corpus reaches 3.520.** Its
-maximum sits at **18% of the available range** measured from the floor, and
-pooled across all 79 of its prompts the median percentile is **42%** — below the
-middle of the corpus it was meant to probe the top of.
+**THE MANIPULATION WORKS AND IT IS SMALL.** MARKED sits above UNMARKED, 70th
+percentile against 37th, so the design does what it says. But the gap between
+the arms is **0.082 on a corpus range of 2.520 — about 3% of the available
+range.** And the transgressive arm's MEDIAN sits below the corpus top decile
+threshold (1.105 against 1.378): **30% of ordinary corpus prompts are more
+transgressive than M01's typical transgressive site.**
 
-**And the declared levels do not track the measured charge.** The single
-`violence` level-5 prompt sits at the corpus FLOOR (0th percentile) while a
-`profanity` level-2 prompt sits at the 93rd. Several cells are n=1 and should
-not be read individually, but the ordering failure is visible across the table.
+Its most transgressive prompt reaches 2.373 where the corpus reaches 3.520.
 
-### WHY THIS MATTERS FOR F's RATE NULL
+### WHY THIS MATTERS FOR THE NULLS
 
-A design confined to the bottom fifth of a gradient has little leverage on that
-gradient. `F_G_rate_magnitude` found the rate null on 33 pair-sites; the
-continuous version over 50 lineages and 2,245 prompts does not reproduce it
-(`n_movers` +1.81, 44/50, p<1e-6). **That is what a range restriction predicts**,
-and it is a better explanation than either result being wrong.
+A two-level contrast separated by 3% of a gradient has little leverage on that
+gradient. Two M01 nulls sit exactly there:
 
-The same reasoning applies to D's arousal null: a per-swap test at sites that
-are, on measurement, ordinary prompts.
+    F's RATE null      33 pair-sites, p=0.148
+                       continuous: n_movers +1.81, 44/50, p<1e-6
+    D's AROUSAL null   D -0.02841, p=0.9967, "quotable"
+                       continuous: warriner_arousal -0.0701 under dose, p=9e-5
+
+**Range restriction predicts both**, and it is a better explanation than either
+result being wrong. Neither null is retracted by this; both should travel with
+the span of the manipulation that produced them.
+
+### A CORRECTION TO THIS SECTION'S OWN FIRST VERSION
+
+The first version of this section scored `data/f36_minimal_pairs.csv`, which
+carries a `trans_level` column — and RH pointed out that the transgressive_swap
+prompts *do not have a transgression level*, so that was a different design
+being measured under M01's name. Its numbers (median 42nd percentile, "18% of
+the range") described the wrong population and are withdrawn. The MARKED/UNMARKED
+figures above are the right ones, and they make a weaker but sounder version of
+the same point.
 
 ### (b) IS NOT TESTED HERE
 
 "The minimal pair changed the scene entirely" is a claim about how much the twin
 differs beyond its transgressive element. It is measurable — vocabulary overlap
 between the twins' base distributions would do it — and is not measured here.
-Recorded so the claim is not cited as though it had been.
+Recorded so it is not cited as though it had been.
 
 ### WHAT THE DOSE DESIGN BUYS, STATED PLAINLY
 
-    RANGE       the full 1.000-3.520 spread rather than its bottom fifth
+    RANGE       the full 1.000-3.520 spread rather than a 3% contrast inside it
     N           2,245 en prompts x 50 lineages against 33 pair-sites
     NO TWIN     nothing has to be matched, so nothing can be mismatched --
                 and R_decoy_negative is the registered negative that happened to
