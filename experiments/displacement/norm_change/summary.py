@@ -85,7 +85,8 @@ def load(name, endpoints, dose_scale=DOSE):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
-    ap.add_argument("--table", default="both", choices=("levels", "fields", "both"))
+    ap.add_argument("--table", default="both",
+                    choices=("levels", "fields", "contextual", "both", "all"))
     ap.add_argument("--min-n", type=int, default=10)
     a = ap.parse_args(argv)
 
@@ -108,8 +109,15 @@ def main(argv=None):
             for pr, bf, _af in rows:
                 dose_by[(lg, lin, pr)] = bf
 
-    tables = ["levels", "fields"] if a.table == "both" else [a.table]
+    tables = (["levels", "fields"] if a.table == "both"
+              else ["levels", "fields", "contextual"] if a.table == "all"
+              else [a.table])
     for name in tables:
+        #: the contextual table exists only where slot_ratings and the
+        #: movement roster overlap -- 279 prompts before the endpoint filter --
+        #: so its lineage counts are smaller and its scales are keyed
+        #: `<instrument>:<scale>`, two instruments rating one scale name being
+        #: two constructs rather than one.
         d, pr_ = (lv_d, lv_p) if name == "levels" else load(name, EP)
         if d is None:
             continue

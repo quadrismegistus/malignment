@@ -292,6 +292,63 @@ sign test over 50 lineages. Different selection rules on different rosters with
 different lexicon coverage, so **the ratios are comparable in direction and not
 in value**, and none of these four rows is a replication in the strict sense.
 
+
+## THE CONTEXTUAL RATINGS, SAME TREATMENT
+
+`summary.py --table contextual`. 115 scales over the prompts where
+`slot_ratings` and the endpoint roster overlap. English only — the contextual
+instruments have no Chinese counterpart.
+
+    scale                                MARGINAL            DOSE            shape
+    slot_institutional_v3:vocalisation  -0.0099 p=0.480   +0.3862 p=9e-5*   DOSE ONLY
+    slot_institutional_v2:vocalisation  -0.0119 p=0.253   +0.3369 p=2e-5*   DOSE ONLY
+    slot_rating_v6:makes_better         +0.0512 p<1e-5*   +0.2718 p<1e-5*   both
+    slot_rating_v6:makes_worse          -0.0247 p<1e-5*   -0.2566 p<1e-5*   both
+    slot_institutional_v3:termination   -0.1270 p<1e-5*   -0.3142 p=2e-5*   both
+    slot_institutional_v3:deference     +0.0477 p<1e-5*   +0.2277 p=0.033*  both
+    slot_rating_v6:deliberation         +0.0212 p=1e-5*   +0.1725 p=0.003*  both
+    slot_institutional_v3:abstraction   +0.1077 p<1e-5*   +0.0798 p=0.480   marginal only
+    slot_institutional_v3:procedural    +0.0925 p<1e-5*   +0.0906 p=0.119   marginal only
+    slot_rating_v6:fit                  +0.0918 p<1e-5*   -0.0259 p=0.203   marginal only
+    results:euphemism                   +0.0043 p<1e-5*        --           marginal only
+
+### VOCALISATION IS DOSE ONLY, AND TWO INSTRUMENT VERSIONS AGREE
+
+`vocalisation` is **flat marginally and among the steepest slopes in the folder
+under dose** — +0.386 (p=9e-5) on `slot_institutional_en_v3` and +0.337
+(p=2e-5) on v2, two instrument versions rating independently.
+
+**This is the same finding as the USAS fields, from an unrelated instrument.**
+The lexicon route gave `Q2.2 Speech acts` +0.0079 and `X3.2 Sensory: Sound`
++0.0179 under dose; the LLM-coded contextual route gives `vocalisation` +0.386.
+One is a word list, the other is a model rating a word in its frame. **Where the
+base arm was transgressive, alignment moves toward speaking.** Two instruments,
+one direction, and neither was built to test the other.
+
+### PROCEDURALISATION IS MARGINAL, DEFERENCE IS BOTH
+
+`abstraction` and `procedural` rise marginally with no dose slope: alignment
+proceduralises **everywhere**, not as a transgression response. `deference`
+rises both ways, harder under load. And `termination` FALLS on both — the
+aligned model is less likely to reach for quitting, and much less so at a loaded
+prompt.
+
+That is F21's shape arriving through a different door: the individual is
+proceduralised and made deferent, and the exit is closed.
+
+### makes_better UP, makes_worse DOWN, BOTH WAYS
+
++0.272 and -0.257 under dose, both p<1e-5, and both significant marginally too.
+The most direct statement of the alignment objective in the whole folder, and it
+is dose-dependent: the worse the base frame, the harder the model steers toward
+making it better.
+
+### H6 EUPHEMISM IS MARGINAL ONLY
+
++0.0043, p<1e-5 marginal, no dose slope resolvable. Euphemism rises across the
+rated prompts generally rather than specifically where transgression sits — the
+same shape as register.
+
 ## WHAT DID NOT LAND, AND WHY IT IS NOT A NULL
 
 **H3 failed for want of MASS, not for want of an effect.** USAS `X1`
