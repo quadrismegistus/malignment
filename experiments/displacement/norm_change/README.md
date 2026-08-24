@@ -243,6 +243,55 @@ language's own instrument. Chinese de-concretizes everywhere; English does it
 only under transgressive load. Same direction, different trigger — which is a
 sharper cross-lingual claim than "the signature does not travel".
 
+
+## "FEW LARGE FALLERS, MANY SMALL RISERS" — REPLICATES MARGINALLY, INVERTS UNDER DOSE
+
+M01 `T_category_flow.md` §14, *displacement along a chain*: **206 risers against
+36 fallers, fallers 3.8x larger each** (-0.01267 vs +0.00334), Mann-Whitney
+p=5.8e-09, "the ratio exceeds one in every lexicon". USAS specifically: 41
+risers, 4 fallers, 5.0x.
+
+That section's own discipline, which is followed here: **"Quote the magnitude;
+quote the count with its resolution."** The 206/36 count is carried by the
+fine-grained lexicons and is partly a statement about granularity; the magnitude
+ratio is what travels.
+
+Tested on this folder's USAS fields, 50 endpoint lineages, categories that clear
+p<0.05:
+
+    condition        risers  fallers   mean riser   mean faller   ratio    MW p
+    en MARGINAL           6        3     +0.00436      -0.00860   1.97x   0.197
+    zh MARGINAL          27       73     +0.00068      -0.00183   2.70x   1.4e-05
+    en DOSE              25       40     +0.01448      -0.00751   0.52x   0.034
+    zh DOSE              20       23     +0.00418      -0.00341   0.81x   0.061
+
+**MARGINALLY, THE MAGNITUDE RATIO REPLICATES.** English 1.97x and Chinese 2.70x
+against M01's 3.8x, same direction, and Chinese reaches p=1.4e-05. Fallers are
+individually larger than risers, which is the chain shape.
+
+**THE COUNT DOES NOT, AND M01 SAID IT WOULD NOT.** Chinese gives 73 fallers to
+27 risers — inverted. English has only 9 surviving categories against M01's 45
+for USAS, so its p=0.197 is a power statement, not a refutation. Both are the
+granularity caveat M01 recorded, arriving as predicted.
+
+**UNDER DOSE THE ASYMMETRY REVERSES, and that is new.** Where the base arm was
+transgressive the ratio is 0.52x in English (p=0.034): **few large RISERS, many
+small fallers** — the mirror image of the marginal shape. Mass does not drain
+from a few categories into many; it concentrates into a few.
+
+Read with the speech result that is the same shape: `Q2.2` falls marginally and
+rises under dose. **The chain-displacement picture is a property of the average
+prompt. At a transgressive prompt the model is not spreading mass down a chain,
+it is moving it somewhere in particular.**
+
+### What this comparison is NOT
+
+M01 counted **Bonferroni survivors** — categories whose delta is consistent
+across 43 edges by a one-sample t. This counts categories clearing p<0.05 on a
+sign test over 50 lineages. Different selection rules on different rosters with
+different lexicon coverage, so **the ratios are comparable in direction and not
+in value**, and none of these four rows is a replication in the strict sense.
+
 ## WHAT DID NOT LAND, AND WHY IT IS NOT A NULL
 
 **H3 failed for want of MASS, not for want of an effect.** USAS `X1`
