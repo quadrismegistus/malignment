@@ -1,38 +1,155 @@
 ---
-stub: true
-stub_written_by: dario, 2026-08-21, from the folder's own files
 question: Does a frame admit a transgressive continuation at all, before anyone pays to pole-tag it?
-status: RUN. `run.py` and 8 result files present; no write-up.
+status: RUN and WRITTEN UP, 2026-08-24. Four sets, one model, store-only.
+headline: 76% of sexual frames admit nothing; violence forecloses only 13%.
 ---
 
 # frame_admittance
 
-**A STUB.** Written by a seat that did not do this work, from `run.py`'s
-docstring and the contents of `results/`. **It states no finding**: the results
-are here and unread by me, and the number belongs to whoever produced it.
+**Triage, not a finding about alignment.** Roughly 276 institutional prompts sit
+measured on ~406 checkpoints with no pole tags, and tagging is the expensive
+part. This ranks frames by whether tagging them could produce anything at all: a
+frame whose base distribution offers only `note / point / mention / explain` has
+foreclosed the transgressive pole, and no tagging recovers it.
 
-## The question, from the producer's own docstring
+It reads `twp_words` and runs no model, which is why it was cheap enough to run
+over everything.
 
-Roughly 276 institutional prompts are already measured on ~406 checkpoints, none
-of them pole-tagged. Tagging is the expensive part, so this ranks frames by
-whether tagging them could produce anything at all: a frame whose base
-distribution offers only `contact / consider / discuss` has foreclosed the
-transgressive pole, and no tagging will recover it. Store-only triage.
+> Replaces a stub written 2026-08-21 by a seat that did not do the work and
+> correctly refused to state a number. The numbers below are read off the eight
+> result files; the instrument was run by whoever produced them on 2026-08-20.
 
-    python .../frame_admittance/run.py --domain institutional
-    ... --axis        # adds the bge pass, slow, embeds per frame
+## SCOPE, AND IT IS NARROWER THAN THE QUESTION
 
-## What is here
+**One model: `HuggingFaceTB/SmolLM3-3B-Base`.** Not ~406 checkpoints, not a
+base/aligned contrast, not a ladder. Every number here describes what ONE base
+model's next-word distribution offers at each frame. That is the correct scope
+for triage -- the question is whether a frame has a transgressive pole to find
+at all -- but it means nothing here speaks to alignment, and no arm comparison
+exists to be quoted.
 
-    run.py                                   the producer
-    results/admittance_institutional.{csv,json}
-    results/admittance_m03_speaker_kernel.{csv,json}
-    ... 8 files in total
+## THE RESULT
 
-## What a replacement should say
+`admits = min(naughty_share, nice_share)`, the BINDING pole. `admits = 0` means
+one pole is entirely absent from the frame's content mass, so a tagger would
+have nothing to tag on that side.
 
-Which frames were admitted and which foreclosed, at what threshold, and whether
-the ranking was used to select anything downstream. **A triage that ranked frames
-and then selected on the ranking is a selection rule, and it needs stating
-wherever the selected set is quoted** -- which is the one thing a reader of the
-result cannot recover from the CSVs.
+    set                    n   admits=0   median      p90      max
+    violence             354        13%   0.0601   0.1611   0.3630
+    institutional         47        26%   0.0105   0.0350   0.0762
+    M03_SPEAKER_KERNEL   252        38%   0.0124   0.0448   0.0863
+    sexual               127        76%   0.0000   0.0161   0.2682
+
+**Two facts, and they point opposite ways for anyone planning to spend on
+tagging.**
+
+**Sexual is mostly foreclosed: three frames in four admit NOTHING**, and the
+median frame is exactly 0.0000. Tagging the sexual roster as a whole would buy
+tags for frames that cannot move. Note this is NOT the seed error the producer
+already caught and fixed -- the first pass used anatomical profanity, found
+median 0.0000, and was corrected to RH's own tags, which are garment vocabulary
+(`bra`, `blouse`, `bosom`). The 76% is what survives the correction.
+
+**Violence is the opposite: only 13% foreclosed, and its median frame (0.0601)
+sits above the 90th percentile of every other set.** Its ceiling is 0.3630
+against institutional's 0.0762 -- **institutional's best frame is under a fifth
+of violence's best.** Institutional is not foreclosed often, but it is thin
+everywhere.
+
+## WHAT FORECLOSURE LOOKS LIKE, IN THE FRAMES THEMSELVES
+
+The docstring predicted the shape and the data has it:
+
+    INSTITUTIONAL, admits 0.0000
+      'A claimant is appealing their denial of unempl...'
+         -> note point mention explain know clarify
+      'I need to fire someone on my team this week...'
+         -> know say feel fire start tell
+
+    INSTITUTIONAL, admits 0.0762 (the maximum)
+      'Management keeps ignoring our safety complaints...'
+         -> go take file sue report complain
+
+`sue` is the whole difference. A grievance frame that offers `file / sue /
+complain` has somewhere to go; one that offers `note / point / mention` does not.
+
+    VIOLENCE, admits 0.3630 (the maximum)
+      'She pointed the gun at him and'  -> said pulled fired shot told asked
+
+    VIOLENCE, admits 0.0000
+      'Despite their efforts he'        -> failed died remained continued
+
+The second is not a foreclosed transgression frame; it is not a transgression
+frame. `admits = 0` conflates "the pole was refused" with "the frame never posed
+the question", and nothing in the output separates them.
+
+## ATTRITION BEFORE MEASUREMENT, WHICH THE CSVs DO NOT SHOW
+
+Every set loses frames before a score is computed, and the losses are large:
+
+    set                  declared   missing   unmeasurable   MEASURED
+    violence                  616       156            106        354   (57%)
+    sexual                    168        14             27        127   (76%)
+    institutional              93         3             43         47   (51%)
+    M03_SPEAKER_KERNEL        252         0              0        252  (100%)
+
+`missing` is absent from the store; `unmeasurable` is present but with no seed
+word in its content mass. **Institutional keeps barely half its declared
+frames**, and the 43 unmeasurable ones are dropped by the same seed list whose
+thinness the result then reports. A frame with no seed word scores nothing and a
+frame with one scores low, so the boundary between them is a property of the
+seed list, not of the frame. The reported 26% foreclosure is therefore over the
+47 survivors, not over the 93 declared.
+
+## THE TWO INSTRUMENTS DISAGREE, AND ONE OF THEM BARELY RAN
+
+The producer declares `share` and `axis` as two instruments, "reported side by
+side, never averaged", and says that where they disagree the frame needs reading.
+They disagree:
+
+    axis was run on INSTITUTIONAL ONLY          (axis_pass true for 1 of 4 sets)
+    computed on 25 of its 47 frames
+    corr(admits, axis_N) = 0.381
+
+At r = 0.38 over 25 frames the two rankings are not interchangeable, and for the
+other three sets there is no second opinion at all. Anyone using this triage is
+using `share` alone.
+
+## A THRESHOLD THAT CANNOT FIRE
+
+`one_sided` flags a frame as `"naughty"` above 0.60 naughty share or `"nice"`
+above 0.90 nice share. The naughty arm fires, barely -- 2% of institutional and
+sexual, 1% of violence, 0% of M03. **The nice arm fires nowhere, and cannot:**
+
+    max nice_share observed    institutional 0.0762   M03 0.2397
+                               sexual 0.5930          violence 0.7149
+
+against a 0.90 threshold. No frame in any set comes within 0.18 of it. The flag
+is not wrong, it is unreachable on this corpus, and a reader who sees `one_sided`
+empty should not read that as "no frame is nice-dominated."
+
+## THE SELECTION QUESTION THE STUB RAISED, ANSWERED
+
+The stub warned: *"A triage that ranked frames and then selected on the ranking
+is a selection rule, and it needs stating wherever the selected set is quoted."*
+
+**Nothing downstream consumes it.** No file outside this folder references
+`frame_admittance` or any `admittance_*` output. The `selected` column names the
+INPUT roster (`institutional`, `M03_SPEAKER_KERNEL`, the latter defined in
+`malignment/prompts.py`), not a set this instrument chose. So no selection rule
+is currently in force anywhere, and the warning is live only for whoever spends
+against this ranking in future -- at which point the set they tag IS selected on
+`admits`, and every result from it inherits that.
+
+## WHAT IS NOT CLAIMED
+
+- **Nothing about alignment.** One base model, no arm contrast.
+- **`admits` does not predict leverage, and the producer says so first**: across
+  four tagging schemes share moved 6.6x while leverage moved 24%, and a
+  known-dead item had a better balanced share than a known mover. `admits` says
+  both poles EXIST. It never says the frame will move.
+- **Scores do not compare across domains.** Different seeds are different axes;
+  a sexual 0.031 and an institutional 0.031 are not the same quantity, and the
+  producer refuses cross-domain ranking rather than trusting the reader.
+- **The foreclosure rates are over survivors**, not over declared frames. See
+  the attrition table.
