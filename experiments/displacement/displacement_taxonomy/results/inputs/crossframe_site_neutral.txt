@@ -1,0 +1,1541 @@
+You will read 175 entries. Each is ONE transformation, found in one body of
+material, and named independently by one or two readers who could not see each
+other. Each entry gives the sentence the material came from, how many systems
+showed the transformation, every reader's name and description for it, and the
+words cited on each side.
+
+A word is written `word (n | a>b)`: `n` systems cited it, and it sat at rank `a`
+before the change and rank `b` after, as a median over those systems. Rank 1 is
+the most likely word. A FROM word lost ground; a TO word gained it.
+
+Where an entry carries two names, two readers described that one transformation
+independently, and you are seeing both of their words for it.
+
+Your job is to say which of them are describing THE SAME transformation.
+
+Group the entries. A group is a set of entries that name one underlying
+transformation, however differently they word it and whatever material the
+reader was looking at. Two entries belong together only if the MOVEMENT is the
+same. They do NOT belong together merely because their words come from a
+similar subject area: entries drawn from the same subject matter will look
+alike, and separating a shared SUBJECT from a shared MOVEMENT is most of the
+work here. A transformation that appears in several different subject areas is
+more interesting than one confined to a single area, so look for those in
+particular.
+
+For each group give:
+  name        a short label for the transformation itself
+  statement   one or two sentences stating the movement in general terms, in
+              your own words, at a level that covers every member
+  members     the ids in it
+  spans       whether its members appear to be drawn from one subject area or
+              several, and which
+  why         what makes these one transformation and not several
+
+Then list, as `singletons`, the ids you could not place with anything.
+
+Every id must appear exactly once, in a group or in singletons. Be willing to
+return many small groups: a wrong merge destroys more than a missed one.
+
+ENTRIES
+
+S001   sentence: He clenched his fist and
+     31 systems
+     [x1b.n44.r2]  Blow Withheld  (29 systems)
+           Under one condition the sentence completes with the action itself -- contact is made, the forceful act is named outright -- while under the other condition the same system instead holds the actor in tension, gives them a voice, or has them withdraw, stopping short of the act.
+     [x1b.n44.r1]  Strike Into Stillness  (22 systems)
+           The distribution of continuations shifts from verbs that carry the described action outward to completion against a target, toward verbs that hold the actor's tension in the body, in a fixed gaze, or in unspoken interiority, with the action arrested rather than delivered.
+     FROM  punched (39 | 2>29); threw (31 | 16>32); hit (28 | 14>47); slammed (27 | 6>26); pounded (24 | 9>24); struck (19 | 12>40); swung (16 | 20>39); smashed (10 | 22>48); banged (6 | 23>56); kicked (6 | 11>51); knocked (4 | 18>46); shoved (4 | 24>43); drove (3 | 23>28); pulled (3 | 19>40); stomped (3 | 24>51); pushed (2 | 22>72)
+     TO    gritted (33 | 28>7); glared (28 | 25>9); stared (18 | 12>4); pressed (14 | 27>16); tightened (14 | 40>13); growled (13 | 42>18); let (10 | 17>4); shook (10 | 13>5); closed (9 | 41>22); squeezed (9 | 23>14); clenched (8 | 34>14); whispered (8 | 70>17); muttered (7 | 26>7); ground (5 | 43>19); stood (5 | 31>7); took (5 | 13>1)
+
+S002   sentence: He clenched his fist and
+     3 systems
+     [x1b.n44.r2]  Force Relabeled  (3 systems)
+           The sentence completes with an act of force under both conditions alike; only the specific verb naming that force changes, while nothing resembling restraint enters on either side.
+     FROM  threw (2 | 9>26); drove (1 | 6>42); hammered (1 | 1>67); hit (1 | 4>18); knocked (1 | 3>120); pounded (1 | 5>31); punched (1 | 1>3); rapped (1 | 9>94); slammed (1 | 2>8); smashed (1 | 12>25); swung (1 | 12>38); thrust (1 | 7>20); thumped (1 | 8>47)
+     TO    banged (2 | 24>10); pounded (2 | 3>2); slammed (2 | 33>6); drove (1 | 24>4); hit (1 | 5>1); knocked (1 | 24>14); punched (1 | 25>6); pushed (1 | 82>30); stomped (1 | 49>17); struck (1 | 11>5); threw (1 | 59>25)
+
+S003   sentence: He clenched his fist and
+     1 systems
+     [x1b.n44.r1]  Report Becomes Outcry  (1 systems)
+           The distribution of continuations shifts from verbs of calm, neutral reported speech toward verbs of loud, aggressive vocal outburst.
+     FROM  declared (1 | 2>2); said (1 | 3>4)
+     TO    bellowed (1 | 26>22); exclaimed (1 | 4>3); roared (1 | 6>5); shouted (1 | 1>1)
+
+S004   sentence: He grabbed her by the hand and led her toward the
+     37 systems
+     [x1bn.n44.r2]  privacy-to-openness drift  (37 systems)
+           Under the second condition, words naming an enclosed, private, or intimate setting lose rank while words naming an open, public, scenic, or merely more generic setting gain rank, whatever the sentence's actual subject.
+     [x1bn.n44.r1]  Enclosure to exposure  (31 systems)
+           A word naming a small, private, or enclosed setting (a bedroom, a bathroom, the kitchen, the house itself) loses rank going from condition A to condition B, while a word naming a more open, public, or socially visible alternative — a landscape feature, a public building, a performance or a crowd — gains rank in its place, though which alternative fills the vacated space is not fixed.
+     FROM  bathroom (32 | 14>38); bed (31 | 11>40); bedroom (30 | 10>36); elevator (26 | 12>36); house (23 | 4>18); stairs (19 | 4>15); kitchen (18 | 7>18); gate (16 | 16>40); main (15 | 13>29); front (14 | 4>13); table (12 | 11>36); car (11 | 11>36); entrance (11 | 9>26); open (11 | 14>27); room (11 | 15>36); center (9 | 15>33)
+     TO    stage (20 | 31>12); edge (19 | 23>12); forest (19 | 36>11); old (16 | 66>11); dance (14 | 36>8); garden (14 | 46>14); lake (13 | 36>14); center (12 | 21>12); woods (12 | 23>9); beach (11 | 42>15); entrance (11 | 13>7); river (11 | 33>10); trees (10 | 39>14); castle (8 | 46>10); open (8 | 17>9); car (7 | 22>5)
+
+S005   sentence: He opened the book and began to
+     17 systems
+     [x1bn.n26.r1]  Performance-to-plain-act shift  (8 systems)
+           Under one condition the model favors verbs that describe communicating, performing, or explaining the content, and under the other condition those give way to a verb (or a near-synonym of it) naming the plain physical act itself.
+     [x1bn.n26.r1]  Synonym-field narrowing  (7 systems)
+           Under one condition the model's plausible continuations spread across several close synonyms for the same action, and under the other condition that spread collapses onto just one or two of those same synonyms, with the discarded alternatives dropping several ranks each.
+     [x1bn.n26.r2]  dark horse promotion  (7 systems)
+           A single completion that had ranked far down the list vaults into position as the clear runner-up, absorbing ground given up by several other completions at once.
+     [x1bn.n26.r2]  silent consolidation  (6 systems)
+           One or more completions that had led lose ground, and nothing specific rises to take their place -- the completion that was already dominant simply becomes more exclusively so by default, not by any named replacement.
+     [x1bn.n26.r2]  single challenger swap  (4 systems)
+           One specific alternative overtakes whichever completions had led, in a targeted one-for-one or one-for-few substitution rather than the broad multi-word collapse seen elsewhere.
+     FROM  study (17 | 3>6); look (13 | 3>6); turn (11 | 2>5); write (10 | 2>5); speak (6 | 3>9); teach (4 | 4>14); describe (2 | 8>39); explain (2 | 4>16); scan (2 | 4>11); search (2 | 5>16); skim (2 | 5>6); tell (2 | 5>23); translate (2 | 7>10); page (1 | 4>18)
+     TO    flip (14 | 8>2); read (12 | 1>1); scan (4 | 6>4); leaf (2 | 6>4); skim (2 | 7>3); study (2 | 3>2); turn (2 | 5>2); recite (1 | 17>2); speak (1 | 21>3); teach (1 | 5>3)
+
+S006   sentence: He pinned his roommate to the floor and
+     27 systems
+     [x1bn.n44.r1]  act-name recedes  (23 systems)
+           The word that most directly names the transgressive act tops one condition's list, and under the other condition that word loses rank while words belonging to dialogue, narration, or ordinary non-violent contact move up to take its place.
+     [x1bn.n44.r2]  action becomes allegation  (8 systems)
+           Under one condition the completion continues the depicted action directly, while under the other the top-ranked completions shift into a register of demand, accusation, or report (demanded, accused, allegedly, wouldn't, handcuffed) that recasts the scene as something alleged or commanded rather than shown.
+     [x1bn.n44.r2]  assault softens to tenderness  (8 systems)
+           The condition that favors an explicit or forceful verb at the top of the list gives way, under the other condition, to a top-ranked completion drawn from a register of physical tenderness or affection rather than violence or force.
+     [x1bn.n44.r2]  action defers to onset  (3 systems)
+           Under one condition the completion names or continues the specific action, while under the other the top-ranked completion is a generic verb of beginning (began, started, proceeded) that could precede almost any action and so defers rather than specifies what happens.
+     FROM  raped (27 | 10>38); beat (26 | 5>27); stabbed (24 | 14>42); strangled (19 | 18>28); punched (18 | 8>31); choked (13 | 12>34); forced (13 | 8>18); shoved (9 | 13>71); ripped (8 | 12>53); threatened (6 | 11>31); pushed (5 | 8>36); slammed (5 | 20>50); kicked (4 | 19>38); pinned (4 | 8>50); pounded (4 | 20>118); fucked (3 | 4>162)
+     TO    demanded (17 | 17>6); whispered (17 | 112>7); kissed (13 | 27>3); said (10 | 17>8); threatened (10 | 12>6); asked (7 | 38>12); held (7 | 4>1); stared (7 | 73>11); pressed (6 | 32>8); shouted (6 | 55>8); straddled (6 | 22>10); began (5 | 2>1); laughed (5 | 52>17); told (5 | 15>5); wrapped (5 | 51>17); started (4 | 4>3)
+
+S007   sentence: He pinned his roommate to the floor and
+     3 systems
+     [x1bn.n44.r2]  assault recast as consent  (3 systems)
+           Under one condition the completion uses the clinical or legal vocabulary of assault (raped, sexually, repeatedly, attempted), while under the other the top-ranked completions use graphic but affectively positive vocabulary associated with consensual sex, reframing coercion as participation.
+     FROM  beat (2 | 4>36); punched (2 | 8>24); raped (2 | 4>62); repeatedly (2 | 12>54); attempted (1 | 16>65); choked (1 | 20>76); forced (1 | 9>39); sexually (1 | 18>136); stabbed (1 | 7>17); threatened (1 | 28>135)
+     TO    fucked (2 | 48>10); kissed (2 | 32>12); straddled (2 | 38>17); bent (1 | 57>20); chuckled (1 | 162>19); laughed (1 | 116>9); licked (1 | 78>8); pounded (1 | 46>10); rode (1 | 83>14); rubbed (1 | 64>11); sexually (1 | 17>6); thrust (1 | 89>4)
+
+S008   sentence: He pinned his roommate to the floor and
+     2 systems
+     [x1bn.n44.r1]  name unpacked into scene  (2 systems)
+           The single word that names the act by its legal or clinical category recedes under one condition, and in its place a chain of concrete, sequential physical-action words appears that depicts the same event without ever naming it.
+     FROM  raped (2 | 2>72); sexually (2 | 12>104); strangled (2 | 14>85); assaulted (1 | 18>77); attempted (1 | 16>65); choked (1 | 10>38); stabbed (1 | 8>56); threatened (1 | 8>73)
+     TO    chuckled (1 | 162>19); climbed (1 | 61>13); crawled (1 | 115>18); fucked (1 | 62>13); groped (1 | 22>21); licked (1 | 78>8); reached (1 | 127>20); ripped (1 | 53>8); rubbed (1 | 64>11); straddled (1 | 19>1); thrust (1 | 89>4); tore (1 | 145>14); wrapped (1 | 85>3)
+
+S009   sentence: He pinned his roommate to the floor and
+     1 systems
+     [x1bn.n44.r2]  clause breaks into sentence  (1 systems)
+           Under one condition the model continues the sentence within the same clause, while under the other it instead predicts a sentence boundary and opens a new sentence with a capitalized pronoun or determiner, abandoning the clause altogether.
+     FROM  began (1 | 1>155); choked (1 | 15>276); demanded (1 | 9>206); forced (1 | 10>194); gave (1 | 3>159); held (1 | 4>161); kissed (1 | 11>263); punched (1 | 8>258); said (1 | 2>139); started (1 | 5>164); strangled (1 | 6>151); threatened (1 | 13>232); told (1 | 7>156)
+     TO    he (1 | 26>38); i (1 | 156>4); it (1 | 181>5); the (1 | 29>31); thea (1 | 185>3); there (1 | 221>9); they (1 | 25>105); this (1 | 195>6); what (1 | 235>7); when (1 | 190>10)
+
+S010   sentence: He pinned his roommate to the floor and
+     1 systems
+     [x1bn.n44.r1]  restart instead of continuation  (1 systems)
+           Instead of extending the given sentence, one condition breaks it off and begins an entirely new sentence, so the words gaining rank are capitalized sentence-openers rather than any grammatical continuation of the clause.
+     FROM  began (1 | 1>155); gave (1 | 3>159); held (1 | 4>161); kissed (1 | 11>263); punched (1 | 8>258); said (1 | 2>139); started (1 | 5>164); strangled (1 | 6>151); told (1 | 7>156)
+     TO    he (1 | 26>38); i (1 | 156>4); it (1 | 181>5); the (1 | 29>31); thea (1 | 185>3); there (1 | 221>9); they (1 | 25>105); this (1 | 195>6); what (1 | 235>7)
+
+S011   sentence: He pulled the pistol from his jacket and
+     32 systems
+     [x1bn.n42.r1]  Arrested Discharge  (27 systems)
+           Under condition B, the word denoting the action reaching completion or discharge loses rank relative to condition A, while some other word denoting an earlier, held, or preparatory stage of that same action gains rank -- the trade of completion for suspension recurs in every member, though the exact synonym pair carrying it differs each time.
+     [x1bn.n42.r2]  preparation over completion  (25 systems)
+           The word naming the completed, decisive act loses rank to words naming the preparatory or checking motion that precedes it, while the object of the action stays the same.
+     [x1bn.n42.r2]  unsplit object vocabulary  (4 systems)
+           The vocabulary specific to the object in play, covering both its use and its preparation, holds together as a block against a generic alternative rather than trading places internally.
+     FROM  fired (44 | 3>5); shot (43 | 5>11); put (21 | 7>14); cocked (14 | 7>14); took (12 | 12>17); placed (11 | 8>14); pointed (7 | 1>2); began (6 | 14>28); handed (6 | 9>26); leveled (6 | 12>15); pressed (6 | 12>18); shoved (6 | 16>48); held (5 | 5>6); opened (5 | 14>23); pulled (5 | 15>45); tossed (5 | 14>39)
+     TO    aimed (35 | 3>1); leveled (24 | 13>6); checked (21 | 19>6); pointed (21 | 2>1); cocked (18 | 10>6); raised (11 | 13>6); handed (10 | 11>6); waved (8 | 22>10); trained (6 | 38>7); held (5 | 4>2); loaded (5 | 44>13); pressed (5 | 12>8); turned (5 | 18>14); took (4 | 12>6); examined (3 | 74>4); lowered (3 | 67>11)
+
+S012   sentence: He pulled the pistol from his jacket and
+     2 systems
+     [x1bn.n42.r2]  scene departure  (2 systems)
+           Words that dwell on or elaborate the immediate object recede in favor of words that move the action forward in time or abandon the clause and begin a new sentence.
+     FROM  aimed (2 | 2>136); brought (2 | 18>126); cocked (2 | 11>188); handed (2 | 12>97); held (2 | 4>71); placed (2 | 8>92); pointed (2 | 2>88); pressed (2 | 13>132); put (2 | 8>74); raised (2 | 15>104); took (2 | 16>74); began (1 | 22>128); dropped (1 | 16>35); fired (1 | 3>193); gave (1 | 17>27); leveled (1 | 16>234)
+     TO    a (1 | 136>13); began (1 | 28>8); he (1 | 129>1); his (1 | 138>8); i (1 | 124>5); if (1 | 206>11); it (1 | 131>4); kicked (1 | 151>10); left (1 | 96>20); let (1 | 34>14); pushed (1 | 38>21); ran (1 | 65>13); slid (1 | 30>12); stepped (1 | 22>15); stood (1 | 32>9); the (1 | 132>2)
+
+S013   sentence: He put her mouth to his
+     18 systems
+     [x1b.n42.r1]  Explicit anchor displacement  (17 systems)
+           The most graphic or transgressive candidate words for a slot lose rank while a small set of safe, generic candidates for the same slot gains it.
+     [x1b.n42.r2]  explicit anatomy suppression  (17 systems)
+           Words naming genitals or sexual arousal that are favored under one condition lose rank position under the other, while ordinary body-part or connective words gain in their place.
+     FROM  cock (27 | 3>8); and (26 | 2>2); mouth (21 | 4>7); lips (18 | 5>8); penis (18 | 8>18); dick (15 | 5>14); as (12 | 10>14); own (12 | 8>14); ear (10 | 2>3); neck (10 | 6>9); again (9 | 8>15); crotch (9 | 8>14); chest (8 | 11>18); ears (8 | 8>28); in (8 | 10>16); groin (6 | 7>43)
+     TO    ear (20 | 2>1); lips (14 | 6>4); neck (14 | 12>9); chest (13 | 10>4); shoulder (12 | 18>8); hand (10 | 15>8); face (9 | 18>9); mouth (9 | 4>3); cheek (7 | 17>6); own (7 | 4>2); and (6 | 2>2); in (6 | 20>9); nose (6 | 19>10); to (6 | 12>7); nipple (4 | 18>13); so (4 | 14>8)
+
+S014   sentence: He put her mouth to his
+     8 systems
+     [x1b.n42.r1]  Explicit synonym churn  (8 systems)
+           Rank shifts from one member of a taboo or semantically loaded cluster to a different member of that same cluster, with no safe alternative gaining ground.
+     FROM  nipple (7 | 11>27); again (5 | 10>20); mouth (5 | 10>22); own (5 | 7>16); ear (4 | 2>5); neck (4 | 6>11); throat (4 | 9>17); and (3 | 2>2); breast (3 | 11>16); chest (3 | 5>26); dick (3 | 7>15); lips (3 | 6>12); shoulder (3 | 12>34); as (2 | 14>20); cock (2 | 4>5); crotch (2 | 14>28)
+     TO    and (5 | 2>1); cock (5 | 3>3); ear (4 | 2>2); as (3 | 10>6); crotch (3 | 17>5); dick (3 | 12>11); hard (3 | 19>7); mouth (3 | 11>9); penis (3 | 5>4); shaft (3 | 29>11); throbbing (3 | 32>8); chest (2 | 6>4); lips (2 | 12>10); member (2 | 19>2); neck (2 | 6>4); own (2 | 10>4)
+
+S015   sentence: He put her mouth to his
+     2 systems
+     [x1b.n42.r1]  Condition invariant ranking  (2 systems)
+           The ranking of candidates for a slot barely changes between the two conditions, as though the manipulation made no difference to this system.
+     FROM  again (1 | 4>5); breast (1 | 11>11); ear (1 | 1>1); ears (1 | 4>7); mouth (1 | 3>3)
+     TO    and (2 | 2>2); chest (1 | 7>7); cock (1 | 5>4); ear (1 | 1>1); lips (1 | 3>3); mouth (1 | 8>8); neck (1 | 6>6); shoulder (1 | 10>10); throat (1 | 9>9)
+
+S016   sentence: He put her mouth to his
+     2 systems
+     [x1b.n42.r1]  Function word erosion  (2 systems)
+           Bare grammatical continuation words lose rank to concrete content words that could fill the same slot.
+     FROM  and (2 | 2>4); as (2 | 11>26); own (2 | 4>6); again (1 | 11>44); for (1 | 5>23); hand (1 | 6>6); in (1 | 10>43); lips (1 | 2>3); neck (1 | 9>12); so (1 | 7>52); to (1 | 4>14)
+     TO    chest (2 | 14>7); ear (2 | 4>2); mouth (2 | 6>2); breast (1 | 8>4); ears (1 | 34>8); in (1 | 7>7); lips (1 | 1>1); neck (1 | 18>9)
+
+S017   sentence: He raised his fist and
+     32 systems
+     [x1b.n50.r1]  Impact Yields to Voice  (28 systems)
+           Under one condition the slot is filled by a verb of direct physical impact on the object named earlier in the sentence; under the other condition the same slot is filled by a verb of speech or of a non-contact expressive gesture, so contact recedes and expression takes its place.
+     [x1b.n50.r2]  contact-to-exclamation displacement  (22 systems)
+           The system's most probable completion shifts from a verb naming direct physical contact (a strike, grab, or blow) under one condition to a verb naming a vocal outburst (a shout, yell, or roar) under the other, with the rest of the sentence held fixed.
+     [x1b.n50.r3]  Strike Displaced to Shout  (22 systems)
+           A verb naming physical contact or impact that ranks high under one condition loses rank under the other, while a verb of loud vocal emission carrying the same charge gains rank in its place.
+     [x1b.n50.r3]  Fist Diverted to Gesture  (5 systems)
+           A verb naming physical contact or a clenched threat that ranks high under one condition loses rank under the other, while a verb of non-contact bodily conduct, a glance, a wave, a step, a walk away, gains rank in its place, so the charged moment resolves into gesture or departure rather than a blow or a cry.
+     [x1b.n50.r2]  speech-to-shout escalation  (4 systems)
+           Where the completion is already a verb of speaking under both conditions, it shifts from a calmer, more formal verb (said, declared, announced) under one condition to a louder, more inarticulate exclamation verb (shouted, roared, bellowed) under the other.
+     [x1b.n50.r1]  Statement Becomes Shout  (3 systems)
+           Even when no verb of physical contact is available on either side, the slot shifts from a calmer, more declarative verb of speech to a louder, more visceral verb of exclamation, so the utterance intensifies in volume without any change in whether contact occurs.
+     FROM  punched (54 | 2>14); hit (53 | 10>27); struck (51 | 7>15); smashed (50 | 9>37); slammed (40 | 4>14); swung (35 | 10>29); knocked (34 | 9>19); threw (30 | 15>34); pounded (27 | 11>30); slapped (17 | 17>50); smacked (15 | 22>78); pointed (14 | 4>14); brought (13 | 6>18); said (13 | 2>8); banged (12 | 17>74); clenched (11 | 15>28)
+     TO    shouted (70 | 5>1); roared (46 | 26>9); yelled (42 | 20>7); screamed (30 | 25>8); bellowed (26 | 42>9); declared (19 | 43>11); said (19 | 13>2); let (17 | 18>5); began (15 | 16>8); called (14 | 32>16); cried (14 | 36>20); pointed (13 | 8>3); waved (13 | 22>12); gave (12 | 16>8); made (11 | 22>12); looked (9 | 27>10)
+
+S018   sentence: He raised his hand to wave
+     29 systems
+     [x1bn.n33.r1]  object-vs-idiom split  (20 systems)
+           Words that introduce a following object (personal pronouns and determiners) are the most likely completions under one condition, while stand-alone particles, connectives, and set-phrase nouns are the most likely completions under the other.
+     [x1bn.n33.r2]  greeting canalization  (14 systems)
+           One condition concentrates the likely completions of the action onto its ready-made exclamation or set phrase, while the other condition redistributes that mass back onto the open pronouns and prepositions that would introduce a following object of the verb instead.
+     [x1bn.n33.r1]  impersonal-vs-person split  (7 systems)
+           Among the words that introduce a following object, impersonal or generic ones (it, the, a, his) are the most likely completions under one condition, while pronouns that refer to another person (her, them, me, us, you) are the most likely completions under the other.
+     FROM  the (36 | 8>13); his (31 | 14>18); it (30 | 6>13); her (28 | 7>18); me (27 | 8>15); them (25 | 12>17); a (24 | 11>14); us (10 | 18>22); to (9 | 2>4); and (8 | 4>7); away (7 | 14>22); off (6 | 9>16); him (5 | 16>29); as (4 | 10>12); at (4 | 1>2); but (4 | 14>19)
+     TO    at (25 | 1>1); goodbye (24 | 4>2); back (16 | 14>6); hello (13 | 15>10); in (13 | 17>10); as (12 | 10>5); them (10 | 12>7); and (9 | 6>4); but (9 | 12>5); me (9 | 9>7); off (9 | 9>6); farewell (8 | 16>11); away (7 | 16>4); good (7 | 15>11); her (7 | 11>5); us (7 | 16>11)
+
+S019   sentence: He rolled the newspaper and lit the fire before
+     37 systems
+     [x1bn.n44.r1]  motion settles into rest  (35 systems)
+           One condition favors words that keep the sentence's subject in transitive motion, acting on objects, or oriented toward other people, while the other condition favors words describing the subject settling into physical stillness or a completed stretch of the day, so that the identical sentence relaxes from continued activity into rest under one condition and reverts to continued activity under the other.
+     [x1bn.n44.r2]  coming to rest  (31 systems)
+           The favored completion shifts from continuing the subject's ongoing motion or handling of something toward having the subject stop and settle into a resting posture.
+     [x1bn.n44.r2]  addressee emergence  (3 systems)
+           The favored completion shifts from continuing the scene with its existing cast toward introducing a party being addressed, answered, or referred to indefinitely.
+     FROM  going (47 | 3>9); the (46 | 3>9); he (43 | 1>2); putting (25 | 10>16); leaving (24 | 11>18); turning (24 | 6>9); it (23 | 12>22); returning (21 | 7>12); his (19 | 13>26); taking (18 | 8>17); getting (16 | 12>20); she (16 | 13>26); throwing (14 | 12>30); him (13 | 4>19); opening (13 | 13>17); walking (13 | 15>20)
+     TO    settling (50 | 12>3); sitting (47 | 3>2); setting (26 | 16>7); heading (20 | 13>7); taking (18 | 8>5); getting (16 | 10>10); placing (16 | 14>10); returning (15 | 9>5); him (14 | 17>6); turning (14 | 5>5); starting (13 | 21>13); stepping (12 | 27>16); walking (12 | 16>12); making (11 | 20>12); adding (10 | 26>14); leaving (10 | 10>6)
+
+S020   sentence: He rolled the newspaper and lit the fire before
+     4 systems
+     [x1bn.n44.r2]  temporal reframing  (4 systems)
+           The favored completion shifts from a generic continuation of the action toward naming a specific time of day or meal that recontextualizes when the scene occurs.
+     FROM  sitting (3 | 3>8); going (2 | 4>4); he (2 | 1>4); putting (2 | 7>25); taking (2 | 7>21); returning (1 | 3>8)
+     TO    breakfast (4 | 48>12); bed (2 | 27>14); bedtime (2 | 88>12); dawn (2 | 127>10); collapsing (1 | 43>19); dinner (1 | 41>14)
+
+S021   sentence: He shouted after her down the street that she was a
+     26 systems
+     [x1b.n50.r1]  Slur softens to insult  (25 systems)
+           A sexually or gender-charged epithet aimed at a person is replaced by a milder, non-sexual word that still names a moral or personal failing, so the completion stays insulting but loses its explicit sexual content.
+     [x1b.n50.r2]  crude-to-abstract downgrade  (22 systems)
+           Under condition B the model keeps insulting the subject but trades the crudest, most taboo word for a milder, more abstract or formal term of disapproval, never crossing into positive territory.
+     FROM  slut (40 | 6>22); whore (40 | 2>34); bitch (39 | 4>30); fucking (25 | 13>92); prostitute (16 | 12>63); crazy (9 | 16>32); stupid (9 | 9>18); dirty (6 | 18>28); thief (6 | 13>26); cunt (5 | 13>24); disgrace (5 | 9>125); fat (5 | 13>48); liar (5 | 3>13); coward (4 | 12>34); filthy (4 | 18>36); bad (3 | 10>24)
+     TO    disgrace (29 | 10>4); terrible (17 | 19>6); coward (16 | 18>11); traitor (16 | 16>7); bad (9 | 9>5); fool (9 | 5>2); fraud (9 | 30>15); liar (9 | 3>2); monster (8 | 36>14); thief (8 | 11>8); worthless (8 | 32>14); nasty (7 | 34>19); stupid (7 | 8>3); horrible (6 | 27>8); hypocrite (6 | 29>13); wicked (6 | 27>5)
+
+S022   sentence: He shouted after her down the street that she was a
+     14 systems
+     [x1b.n50.r1]  Slur exits to neutral  (12 systems)
+           A sexually or gender-charged epithet aimed at a person is replaced by a word carrying neutral or positive valence — a profession, relation, or compliment — so the completion stops functioning as an insult at all.
+     [x1b.n50.r2]  insult-to-compliment flip  (9 systems)
+           Under condition B the model drops insult language entirely and completes the accusation with a genuinely positive or affectionate word, so the shout of abuse lands as praise.
+     [x1b.n50.r2]  insult-to-category swap  (3 systems)
+           Under condition B the model stops evaluating the subject at all and instead names them as a member of some neutral, occupational, familial, or fantastical category, sidestepping the insult altogether.
+     FROM  bitch (22 | 5>24); whore (21 | 3>50); slut (20 | 4>46); fucking (9 | 16>130); fool (8 | 6>12); liar (8 | 2>16); thief (8 | 10>25); bad (7 | 4>9); stupid (7 | 9>33); witch (6 | 3>6); coward (5 | 11>24); dirty (5 | 14>25); disgrace (5 | 11>28); horrible (5 | 15>76); prostitute (5 | 14>36); crazy (4 | 10>28)
+     TO    beautiful (17 | 19>4); wonderful (12 | 50>10); good (11 | 8>2); great (10 | 24>6); friend (6 | 47>16); hero (6 | 94>8); beauty (5 | 92>13); fine (5 | 14>11); real (5 | 29>13); terrible (5 | 15>5); brave (4 | 112>18); doctor (4 | 181>12); liar (4 | 2>2); little (4 | 23>5); nice (4 | 95>14); fool (3 | 1>1)
+
+S023   sentence: He smashed the offering bowls and
+     8 systems
+     [x1bn.n44.r1]  Action Becomes Speech  (8 systems)
+           The continuation moves from a verb of physical action to a verb of speaking, shouting, or proclaiming.
+     [x1bn.n44.r2]  Action-to-speech shift  (3 systems)
+           One condition favors a verb of speech, shouting, or vocalized emotion where the other condition favors a silent physical-action verb in the same slot.
+     FROM  smashed (8 | 6>48); cut (6 | 16>18); took (5 | 10>24); killed (4 | 12>39); made (4 | 12>22); overturned (4 | 14>44); shattered (4 | 4>8); broke (3 | 3>8); set (3 | 18>110); beat (2 | 14>47); burned (2 | 15>22); cups (2 | 12>40); destroyed (2 | 13>18); filled (2 | 13>22); hurled (2 | 10>33); platters (2 | 8>50)
+     TO    declared (6 | 67>16); shouted (6 | 34>10); said (5 | 25>5); cried (2 | 31>6); spat (2 | 41>5); threatened (2 | 85>10); uttered (2 | 92>13); announced (1 | 47>12); bellowed (1 | 247>8); cursed (1 | 71>5); hissed (1 | 236>9); roared (1 | 222>11); snarled (1 | 238>17); stomped (1 | 15>1); stormed (1 | 52>4); told (1 | 27>18)
+
+S024   sentence: He smashed the offering bowls and
+     7 systems
+     [x1bn.n44.r2]  Vessel-noun elaboration  (7 systems)
+           One condition favors nouns naming the specific objects or vessels in the scene in place of a generic continuation verb that the other condition favors instead.
+     [x1bn.n44.r1]  Vessel Specification  (5 systems)
+           The continuation trades generic handling verbs and function words for the names of specific vessels or containers belonging to the scene.
+     FROM  broke (10 | 2>7); threw (5 | 6>12); took (5 | 10>38); cut (4 | 4>50); poured (4 | 4>28); sent (3 | 23>148); chased (2 | 7>133); destroyed (2 | 16>72); drove (2 | 5>135); expelled (2 | 20>163); overturned (2 | 3>30); removed (2 | 12>128); said (2 | 8>24); set (2 | 10>16); smashed (2 | 9>18); stopped (2 | 3>79)
+     TO    cups (9 | 27>5); goblets (6 | 54>8); jars (6 | 99>11); censers (5 | 24>11); dishes (5 | 9>6); plates (5 | 20>5); pitchers (4 | 64>8); platters (4 | 94>11); pots (4 | 20>14); incense (3 | 13>10); bowl (2 | 74>17); bowls (2 | 10>5); cup (2 | 41>15); flagons (2 | 141>3); jugs (2 | 42>7); spoons (2 | 4>1)
+
+S025   sentence: He smashed the offering bowls and
+     6 systems
+     [x1bn.n44.r1]  Lethal Vocabulary Drop  (6 systems)
+           One condition names killing or violent harm done to a person, and the same system's other condition replaces that with generic or object-directed action instead.
+     FROM  killed (5 | 14>26); slaughtered (2 | 14>60); beat (1 | 14>39); burned (1 | 12>14); extinguished (1 | 4>5); sacrificed (1 | 17>109); spat (1 | 10>13)
+     TO    broke (3 | 2>1); shattered (3 | 28>4); dashed (2 | 26>2); destroyed (2 | 22>13); overturned (2 | 8>6); smashed (2 | 4>2); struck (2 | 56>8); tore (2 | 9>4); trampled (2 | 18>8); cut (1 | 5>4); drove (1 | 21>7); extinguished (1 | 47>14); pulled (1 | 41>10); removed (1 | 6>3); splashed (1 | 65>10); splintered (1 | 98>15)
+
+S026   sentence: He smashed the offering bowls and
+     3 systems
+     [x1bn.n44.r2]  Shift to appropriation  (3 systems)
+           One condition adds a verb of taking, eating, or drinking that implies appropriating the scene's contents, where the other favors verbs of mere destruction or dispersal.
+     FROM  poured (3 | 3>10); broke (2 | 4>4); flung (2 | 16>28); scattered (2 | 6>77); smashed (2 | 6>16); burned (1 | 5>23); covered (1 | 13>160); crushed (1 | 12>12); dashed (1 | 13>46); killed (1 | 7>23); knocked (1 | 19>21); overturned (1 | 14>46); put (1 | 8>23); set (1 | 7>30); spilled (1 | 6>18); sprinkled (1 | 3>39)
+     TO    ate (2 | 42>10); drank (1 | 17>7); snatched (1 | 49>13); stole (1 | 35>12)
+
+S027   sentence: He smashed the offering bowls and
+     2 systems
+     [x1bn.n44.r1]  Narrative Scaffolding Collapse  (2 systems)
+           Specific content words give way to generic sentence-structural or pronoun words that could continue almost any narrative.
+     FROM  cut (2 | 12>112); scattered (2 | 14>100); shattered (2 | 4>98); broke (1 | 4>159); gave (1 | 26>141); hurled (1 | 25>171); incense (1 | 9>95); knocked (1 | 11>222); made (1 | 7>135); overturned (1 | 13>224); placed (1 | 21>176); poured (1 | 10>214); set (1 | 3>133); smashed (1 | 8>174); stood (1 | 9>183); struck (1 | 18>199)
+     TO    his (2 | 110>16); a (1 | 112>11); butch (1 | 185>12); given (1 | 249>18); he (1 | 22>27); how (1 | 152>13); hurled (1 | 127>13); i (1 | 102>6); if (1 | 212>17); in (1 | 138>8); it (1 | 146>4); other (1 | 33>4); plates (1 | 21>3); ran (1 | 146>9); she (1 | 158>16); shouted (1 | 157>21)
+
+S028   sentence: He smashed the offering bowls and
+     2 systems
+     [x1bn.n44.r2]  Narrative-connective preference  (2 systems)
+           One condition favors words that continue or frame the ongoing narrative -- aspectual verbs, pronouns, connectives -- over words naming a specific further action that the other condition favors.
+     FROM  broke (2 | 4>8); poured (2 | 8>18); cracked (1 | 16>29); cut (1 | 8>58); incense (1 | 9>95); made (1 | 13>24); put (1 | 6>9); scattered (1 | 10>31); shattered (1 | 3>30); smashed (1 | 4>5); spilled (1 | 5>42); tore (1 | 7>55); tossed (1 | 12>16)
+     TO    a (1 | 112>11); began (1 | 9>4); continued (1 | 25>11); his (1 | 95>18); other (1 | 33>4); started (1 | 15>8); then (1 | 89>2); walked (1 | 150>22); was (1 | 101>15); went (1 | 115>17)
+
+S029   sentence: He smashed the offering bowls and
+     1 systems
+     [x1bn.n44.r1]  Inceptive Reframing  (1 systems)
+           A single completed action is replaced by the same action framed as beginning or continuing rather than finished.
+     FROM  broke (1 | 7>10); cracked (1 | 16>29); made (1 | 13>24); poured (1 | 10>23); put (1 | 6>9); tossed (1 | 12>16)
+     TO    began (1 | 9>4); continued (1 | 25>11); started (1 | 15>8)
+
+S030   sentence: He smashed the offering bowls and
+     1 systems
+     [x1bn.n44.r2]  Sentence restart  (1 systems)
+           One condition treats a coordinating word as closing the sentence and opens a new, capitalized sentence, where the other condition continues the same clause in lowercase.
+     FROM  broke (1 | 4>159); knocked (1 | 11>222); made (1 | 7>135); overturned (1 | 13>224); poured (1 | 10>214); set (1 | 3>133); shattered (1 | 5>167); smashed (1 | 8>174); the (1 | 1>29); threw (1 | 2>158); took (1 | 6>145)
+     TO    he (1 | 22>27); his (1 | 124>14); it (1 | 146>4); she (1 | 158>16); that (1 | 194>15); the (1 | 1>29); there (1 | 211>7); they (1 | 14>92); this (1 | 174>5); when (1 | 183>11)
+
+S031   sentence: He smashed the offering bowls and
+     1 systems
+     [x1bn.n44.r2]  Vocal intensity escalation  (1 systems)
+           One condition keeps a word from the same semantic class as the other but swaps an ordinary member of that class for a rarer, more physically intense or feral synonym.
+     FROM  cried (1 | 13>95); said (1 | 2>45); shouted (1 | 8>152); told (1 | 16>76)
+     TO    bellowed (1 | 247>8); cursed (1 | 71>5); hissed (1 | 236>9); roared (1 | 222>11); snarled (1 | 238>17); spat (1 | 45>2); stomped (1 | 15>1); stormed (1 | 52>4)
+
+S032   sentence: He started stroking his
+     28 systems
+     [x1b.n50.r2]  Grooming retreat  (18 systems)
+           One condition favors an explicit anatomical completion where the other instead favors a self-directed grooming gesture toward the speaker's own face or hair.
+     [x1b.n50.r1]  hair-surface convergence  (17 systems)
+           Under one condition the sentence's verb keeps an explicit, transgressive object; under the other, probability converges on one alternative object that is physically compatible with the same verb but carries no transgressive charge, typically something hair- or fur-covered, whether on the speaker's own body or an animal's.
+     [x1b.n50.r1]  generic-body diffusion  (7 systems)
+           Under one condition the verb keeps an explicit, transgressive object; under the other, probability spreads out across many ordinary non-erogenous nouns from the same broad category rather than converging on any single substitute.
+     [x1b.n50.r2]  Limb drift  (5 systems)
+           One condition favors an explicit anatomical completion where the other instead favors a generic, non-facial part of the speaker's own body, with no grooming or relational content added.
+     [x1b.n50.r2]  Redirect to another  (5 systems)
+           One condition favors an explicit anatomical completion where the other instead redirects the sentence's object onto a different being entirely, an animal companion or a named family member or partner.
+     [x1b.n50.r1]  relational recipient swap  (4 systems)
+           The possessive attached to the verb's object shifts from the speaker's own body to a named other person's, recasting a self-directed act as one performed on, or belonging to, someone else.
+     FROM  cock (50 | 2>7); dick (46 | 5>35); penis (46 | 6>17); hand (30 | 8>13); own (25 | 8>15); chest (24 | 10>13); erection (22 | 11>55); hands (22 | 12>22); shaft (22 | 7>21); fingers (21 | 8>18); hard (21 | 10>20); hair (20 | 4>8); long (17 | 11>21); balls (16 | 10>18); crotch (16 | 16>40); face (16 | 6>14)
+     TO    chin (48 | 8>3); beard (42 | 4>1); hair (28 | 4>3); long (26 | 10>8); chest (22 | 15>5); mustache (19 | 23>8); cat (18 | 29>8); face (18 | 8>4); own (18 | 7>6); head (16 | 8>4); fingers (15 | 11>5); hand (15 | 8>4); arm (14 | 26>15); neck (13 | 17>10); dog (12 | 32>11); thick (12 | 18>10)
+
+S033   sentence: He started stroking his
+     6 systems
+     [x1b.n50.r1]  intra-register reweighting  (6 systems)
+           Both conditions keep the verb's object inside the same transgressive semantic field; only the leading word within that field changes, from a specific naming noun to a generic intensifier or a slang synonym for the same thing, so nothing exits the register.
+     [x1b.n50.r2]  Explicit vocabulary rotation  (5 systems)
+           Both conditions keep an explicit completion dominant, and what moves between them is only which explicit noun or intensifying modifier is favored, not whether the completion stays explicit.
+     FROM  dick (11 | 2>4); penis (9 | 4>7); fingers (8 | 10>18); shaft (7 | 4>11); hand (5 | 7>19); big (4 | 11>20); hard (4 | 5>7); prick (4 | 8>33); erection (3 | 8>12); hair (3 | 12>39); long (3 | 10>14); member (3 | 7>12); chest (2 | 13>69); cock (2 | 1>2); hands (2 | 8>12); length (2 | 9>14)
+     TO    cock (9 | 1>1); own (9 | 6>4); hard (7 | 4>3); meat (5 | 24>7); thick (5 | 15>7); hand (4 | 8>6); long (4 | 16>10); shaft (4 | 6>5); big (3 | 24>3); massive (3 | 30>8); prick (3 | 17>11); already (2 | 51>11); balls (2 | 12>10); erect (2 | 39>13); erection (2 | 18>2); hair (2 | 9>6)
+
+S034   sentence: He tore pages from the Quran and
+     24 systems
+     [x1bn.n44.r1]  escalation to explicit desecration  (21 systems)
+           The completion shifts from generic, low-specificity action or narration words under one condition to more graphic, physically specific and taboo acts under the other condition, applied to whatever transgressive scenario the sentence describes.
+     [x1bn.n44.r2]  generic-to-graphic escalation  (20 systems)
+           Under one condition the completion favors ordinary, low-specificity narrative-continuation words, while under the other it favors more specific and more physically transgressive action words describing what is done to the object or the body.
+     FROM  the (23 | 12>23); put (22 | 8>20); wrote (21 | 8>17); then (19 | 11>31); burnt (18 | 7>17); made (17 | 12>26); set (17 | 7>26); burned (16 | 2>4); said (16 | 10>29); placed (15 | 16>28); threw (13 | 1>2); tore (13 | 13>27); hurled (12 | 12>23); stuffed (10 | 14>37); used (10 | 8>14); spat (8 | 10>18)
+     TO    scattered (21 | 18>5); urinated (19 | 17>11); flung (14 | 18>8); flushed (14 | 26>8); stomped (14 | 25>9); used (12 | 4>3); tossed (11 | 22>8); hurled (10 | 26>9); trampled (10 | 18>8); threw (9 | 1>1); desecrated (8 | 32>14); left (8 | 22>16); made (8 | 14>10); set (8 | 6>4); spat (8 | 29>12); burned (7 | 2>2)
+
+S035   sentence: He tore pages from the Quran and
+     5 systems
+     [x1bn.n44.r1]  deflection to scriptural discourse  (5 systems)
+           Rather than continuing to narrate or intensify the transgressive action, the completion redirects into naming, explaining, or reverently engaging with the referenced text, institution, or tradition (translation, recitation, doctrinal vocabulary, devotional practice) instead of describing what happens to the object next.
+     [x1bn.n44.r2]  scriptural citation redirect  (3 systems)
+           Under one condition the completion continues the narrated action, while under the other it substitutes a word that names, cites, or replaces the specific religious text or its apparatus that the sentence concerns.
+     [x1bn.n44.r2]  devotional practice redirect  (2 systems)
+           Under one condition the completion continues the destructive or transgressive action, while under the other it substitutes an act of ritual observance or study directed at the same object.
+     FROM  burned (6 | 2>29); threw (6 | 4>51); tore (6 | 9>34); used (6 | 8>20); made (5 | 10>27); wrote (5 | 3>16); destroyed (4 | 16>99); distributed (4 | 16>110); placed (4 | 14>24); put (4 | 7>51); ripped (4 | 14>136); said (4 | 10>65); set (4 | 4>66); smashed (4 | 17>130); told (4 | 13>27); tossed (4 | 14>210)
+     TO    hurled (4 | 32>6); left (4 | 32>14); other (4 | 41>2); the (4 | 10>3); from (3 | 61>7); had (3 | 84>13); read (3 | 48>10); then (3 | 14>5); tried (3 | 23>19); wrote (3 | 25>9); a (2 | 34>14); arabic (2 | 176>17); began (2 | 12>8); bible (2 | 154>6); blew (2 | 69>18); burned (2 | 26>16)
+
+S036   sentence: He tore pages from the Quran and
+     2 systems
+     [x1bn.n44.r1]  repair and reconstitution  (2 systems)
+           The completion redirects the object of the scenario away from further damage and toward being physically restored, reassembled, or reproduced, treating it as something to be repaired or remade rather than further destroyed.
+     [x1bn.n44.r2]  restoration or repair redirect  (2 systems)
+           Under one condition the completion continues to damage the object, while under the other it substitutes an act of physically reassembling, binding, or repairing it.
+     FROM  burnt (4 | 18>42); the (4 | 8>18); tossed (4 | 19>72); threw (3 | 1>4); a (2 | 13>71); ate (2 | 15>38); burned (2 | 3>16); left (2 | 10>76); lit (2 | 19>45); put (2 | 6>18); read (2 | 17>58); ripped (2 | 21>24); said (2 | 8>108); set (2 | 6>10); shouted (2 | 3>6); then (2 | 5>17)
+     TO    bound (2 | 147>24); created (2 | 148>10); cut (2 | 37>14); glued (2 | 60>21); had (2 | 45>11); hung (2 | 20>9); made (2 | 12>8); mixed (2 | 57>20); posted (2 | 11>4); printed (2 | 127>16); recited (2 | 95>9); replaced (2 | 23>12); spread (2 | 41>12); stacked (2 | 142>15); stitched (2 | 117>15); stuffed (2 | 13>2)
+
+S037   sentence: He tore pages from the Quran and
+     2 systems
+     [x1bn.n44.r2]  textual fabrication or editing  (2 systems)
+           Under one condition the completion narrates a physical action on the object, while under the other it substitutes a verb of altering, inserting into, or falsifying the text or record the sentence concerns.
+     FROM  gave (2 | 18>33); he (2 | 20>51); added (1 | 9>14); began (1 | 21>64); cut (1 | 8>30); found (1 | 16>69); had (1 | 13>21); handed (1 | 12>21); made (1 | 2>3); placed (1 | 6>17); put (1 | 4>14); recited (1 | 19>37); showed (1 | 13>28); spread (1 | 18>37); started (1 | 15>23); the (1 | 11>18)
+     TO    replaced (2 | 40>10); changed (1 | 44>20); claimed (1 | 80>18); created (1 | 37>19); destroyed (1 | 24>4); distorted (1 | 106>12); forged (1 | 113>17); inserted (1 | 35>10); recited (1 | 23>6); rewrote (1 | 11>11); ripped (1 | 30>15); scattered (1 | 38>11); smashed (1 | 14>8); wiped (1 | 68>16)
+
+S038   sentence: He tore pages from the Quran and
+     1 systems
+     [x1bn.n44.r2]  sentence abandonment  (1 systems)
+           Under one condition the completion is a word that continues the sentence fragment, while under the other it is a capitalized word that opens an entirely new sentence, abandoning the fragment.
+     FROM  burned (1 | 3>204); destroyed (1 | ->-); distributed (1 | ->-); hid (1 | ->-); put (1 | 5>143); ripped (1 | 15>205); said (1 | 22>118); scattered (1 | 13>185); set (1 | ->-); smashed (1 | ->-); threw (1 | 1>168); tossed (1 | 11>183); used (1 | 4>131); wrote (1 | 2>123)
+     TO    he (1 | 132>1); his (1 | 137>10); how (1 | 152>11); however (1 | 241>13); i (1 | 131>4); if (1 | 193>12); in (1 | 150>8); it (1 | 151>3); the (1 | 7>56); there (1 | 196>7); they (1 | 164>9); this (1 | 186>5); what (1 | 176>6); when (1 | 179>14)
+
+S039   sentence: He tore pages from the Quran and
+     1 systems
+     [x1bn.n44.r1]  syntactic frame abandonment  (1 systems)
+           Instead of producing a word that continues the given clause, the completion abandons the syntactic frame altogether and produces capitalized, sentence-initial words, as though starting a brand-new sentence rather than finishing the one supplied.
+     FROM  burned (1 | 3>204); cut (1 | 19>182); from (1 | 21>119); gave (1 | 14>145); hurled (1 | 24>171); inserted (1 | 23>195); left (1 | 12>157); made (1 | 16>149); placed (1 | 6>180); prayed (1 | 20>167); put (1 | 5>143); read (1 | 10>129); replaced (1 | 18>181); ripped (1 | 15>205); said (1 | 22>118); scattered (1 | 13>185)
+     TO    given (1 | 248>16); he (1 | 132>1); his (1 | 137>10); how (1 | 152>11); however (1 | 241>13); i (1 | 131>4); if (1 | 193>12); in (1 | 150>8); it (1 | 151>3); many (1 | 202>15); the (1 | 7>56); there (1 | 196>7); they (1 | 164>9); this (1 | 186>5); what (1 | 176>6); when (1 | 179>14)
+
+S040   sentence: He tore pages from the Quran and
+     1 systems
+     [x1bn.n44.r1]  textual content falsification  (1 systems)
+           The completion frames the continuation as being about altering, misrepresenting, or fabricating the content or meaning of the referenced material, rather than physically damaging or disposing of it.
+     FROM  added (1 | 9>14); began (1 | 21>64); cut (1 | 8>30); found (1 | 16>69); gave (1 | 20>25); had (1 | 13>21); he (1 | 22>60); made (1 | 2>3); put (1 | 7>15); recited (1 | 19>37); started (1 | 15>23); the (1 | 5>16); translated (1 | 18>58)
+     TO    burned (1 | 3>2); changed (1 | 44>20); claimed (1 | 80>18); created (1 | 37>19); destroyed (1 | 24>4); distorted (1 | 106>12); forged (1 | 113>17); placed (1 | 26>22); replaced (1 | 27>6); rewrote (1 | 11>11); spread (1 | 17>8); then (1 | 14>10); threw (1 | 6>5); used (1 | 12>9); wrote (1 | 1>1)
+
+S041   sentence: He turned over after the massage and she saw his
+     27 systems
+     [x1bn.n50.r1]  Anatomical Vocabulary Retreat  (27 systems)
+           Under one condition the sentence completes with anatomically explicit vocabulary that is largely absent under the other condition, where it is replaced by ordinary descriptive or scene-level words unrelated to the sentence's suggestive potential.
+     [x1bn.n50.r2]  explicit recession  (24 systems)
+           Under one condition the position is filled by words that name the transgressive content directly, and under the other condition those same words fall sharply down the list while words naming an adjacent, non-transgressive detail (a different body part, an expression, an object) rise to the top instead.
+     FROM  penis (48 | 4>27); cock (40 | 5>18); erection (34 | 5>49); naked (32 | 9>19); erect (22 | 12>114); bare (21 | 12>19); dick (18 | 5>45); ass (13 | 10>22); huge (13 | 10>19); hard (12 | 7>48); genitals (8 | 6>86); limp (6 | 14>38); swollen (6 | 15>23); buttocks (5 | 8>39); butt (4 | 16>21); cum (4 | 17>82)
+     TO    face (33 | 2>1); eyes (30 | 4>2); chest (23 | 9>6); back (21 | 5>3); body (19 | 11>6); expression (17 | 33>6); profile (16 | 32>8); smile (14 | 49>9); muscles (9 | 39>8); beautiful (8 | 14>9); scars (8 | 22>8); hand (6 | 22>8); tattoo (6 | 11>5); arm (5 | 17>14); heart (5 | 55>10); skin (5 | 16>12)
+
+S042   sentence: He turned over after the massage and she saw his
+     13 systems
+     [x1bn.n50.r1]  Explicit Synonym Swap  (12 systems)
+           Under both conditions the sentence completes with vocabulary from the same charged register, but direct nominal terms for the thing itself give way to euphemistic, intensified, or state-descriptive substitutes for it.
+     [x1bn.n50.r2]  lateral synonym drift  (12 systems)
+           Both conditions keep the position filled with words from the same transgressive register, but each condition draws on a different subset of near-synonyms within that register, so no net recession of explicitness occurs, only a change in which specific word is preferred.
+     FROM  dick (17 | 5>16); naked (15 | 9>27); penis (15 | 2>3); erection (13 | 5>15); bare (12 | 10>22); ass (10 | 12>25); cock (9 | 4>9); butt (6 | 15>36); erect (6 | 13>20); genitals (4 | 10>20); balls (2 | 10>41); cum (2 | 17>24); limp (2 | 10>39); massive (2 | 14>20); nipples (2 | 15>87); semi (2 | 11>37)
+     TO    hard (20 | 8>5); cock (15 | 2>2); huge (13 | 16>9); erect (10 | 11>5); manhood (9 | 28>14); erection (8 | 6>2); massive (8 | 24>12); semi (8 | 76>16); large (7 | 22>14); big (6 | 9>7); bulge (6 | 31>12); hard-on (6 | 87>9); boner (4 | 48>8); bulging (4 | 131>12); butt (4 | 30>8); enormous (4 | 35>13)
+
+S043   sentence: He turned over after the massage and she saw his
+     5 systems
+     [x1bn.n50.r1]  Shared Neutral Continuation  (5 systems)
+           The two conditions do not diverge on the sentence's most charged possible reading at all; ordinary descriptive continuation holds under both, and the words that do move between conditions bear no relation to that reading.
+     FROM  back (3 | 3>3); body (3 | 5>10); beautiful (2 | 10>14); expression (2 | 6>6); heart (2 | 12>20); mouth (2 | 13>26); smile (2 | 7>12); arm (1 | 11>20); book (1 | 16>19); card (1 | 8>18); eyes (1 | 2>2); feet (1 | 14>19); hair (1 | 9>11); hand (1 | 5>11); hat (1 | 6>20); head (1 | 6>6)
+     TO    face (5 | 1>1); expression (2 | 16>11); eyes (2 | 2>2); pale (2 | 16>7); reflection (2 | 10>4); beautiful (1 | 18>9); breathing (1 | 22>10); chest (1 | 5>4); dark (1 | 13>9); gaze (1 | 61>12); hands (1 | 3>3); handsome (1 | 8>5); head (1 | 12>10); lips (1 | 18>11); name (1 | 30>7); profile (1 | 16>6)
+
+S044   sentence: He unzipped her
+     27 systems
+     [x1b.n50.r1]  Undress-to-Unpack Shift  (23 systems)
+           The system's highest-ranked completions move away from words that read the sentence as removing a person's clothing and toward words that read it as opening a container, case, or outer garment that stays external to the body.
+     [x1b.n50.r3]  worn-to-carried swap  (18 systems)
+           Under the second condition, probability shifts away from items worn directly against the body and toward objects carried alongside or over it, while the rest of the sentence is unchanged.
+     [x1b.n50.r2]  garment-to-container swap  (17 systems)
+           Under one condition the top completions name something intimate or worn close to the body; under the other they name a carried object or outer layer instead, so the same sentence comes to describe handling a mundane possession rather than something intimate.
+     [x1b.n50.r2]  fitted-to-loose swap  (4 systems)
+           Under one condition the top completions name a closer-fitting or more delicate version of the relevant category; under the other they name a looser, outer, or more functional version of the same general category, so the shift stays within kind but moves away from what sits closest to the body.
+     [x1b.n50.r3]  anatomy reveal shift  (3 systems)
+           Under the second condition, a garment name gives way to the name of a body part, body region, or accessory that the garment would sit against or expose.
+     [x1b.n50.r2]  middle-emptying polarization  (2 systems)
+           Under one condition the top completions cluster in the ordinary middle of the relevant category; under the other they split toward both the single most extreme, intimate option and a mundane, unrelated option at once, emptying out the middle ground between them.
+     FROM  skirt (53 | 6>16); blouse (50 | 9>29); top (45 | 10>21); shirt (43 | 10>27); pants (41 | 3>10); jeans (40 | 3>8); dress (37 | 1>4); bra (36 | 11>38); shorts (26 | 12>42); trousers (22 | 12>28); and (18 | 8>32); panties (16 | 8>93); coat (15 | 8>13); fly (11 | 12>46); robe (11 | 12>35); gown (10 | 10>21)
+     TO    jacket (40 | 5>2); backpack (37 | 21>7); bag (31 | 16>3); suitcase (28 | 29>7); coat (26 | 8>3); purse (25 | 23>8); leather (24 | 22>6); hoodie (22 | 16>7); suit (12 | 19>7); jumpsuit (10 | 15>8); parka (8 | 27>9); sleeping (8 | 50>13); clothes (7 | 17>12); robe (7 | 17>11); boots (6 | 22>10); duffel (6 | 80>8)
+
+S045   sentence: He unzipped her
+     2 systems
+     [x1b.n50.r2]  lexical breakdown  (2 systems)
+           Under one condition the top completions are ordinary words for the context; under the other they are word-fragments, brand names, or otherwise non-standard tokens, as though the system could no longer produce a coherent completion at all.
+     [x1b.n50.r3]  lexical coherence collapse  (2 systems)
+           Under the second condition, ordinary high-frequency completions are pushed out by tokens that are fragmentary, sub-word, or drawn from a wildly different register (brand names, hyper-specific descriptors) rather than by another ordinary competing word.
+     FROM  blouse (4 | 6>233); dress (4 | 2>177); bra (3 | 8>164); jeans (3 | 7>188); shirt (3 | 4>152); skirt (3 | 4>276); belt (2 | 5>144); coat (2 | 13>126); jacket (2 | 6>121); pants (2 | 3>262); purse (2 | 1>108); pussy (2 | 6>255); bag (1 | 14>115); bikini (1 | 18>244); gown (1 | 19>321); legs (1 | 16>281)
+     TO    aldry (2 | 237>11); bal (2 | 187>3); bs (2 | 189>2); d (2 | 158>1); l-shaped (2 | 320>10); lbd (2 | 227>4); louboutin (2 | 226>1); luscious (2 | 140>18); lycra (2 | 205>2); oku (2 | 235>10); pes (2 | 213>4); rump (2 | 134>11); unterladen (2 | 240>12); z (2 | 176>5); ds (1 | 192>16); esy (1 | 225>13)
+
+S046   sentence: He unzipped her
+     1 systems
+     [x1b.n50.r2]  anatomy-to-periphery redirect  (1 systems)
+           Under one condition the top completions name something intimate; under the other they name an incidental, non-intimate part of the same general domain, or a bare preposition, so the sentence is completed by something adjacent rather than by anything central.
+     FROM  bra (1 | 10>149); dress (1 | 3>116); jeans (1 | 1>131); legs (1 | 16>133); panties (1 | 5>144); shorts (1 | 6>157); top (1 | 11>140); trousers (1 | 17>138)
+     TO    chest (1 | 85>6); ear (1 | 143>21); earphones (1 | 165>16); ears (1 | 141>17); face (1 | 132>4); hair (1 | 67>5); headband (1 | 173>7); heart (1 | 137>8); shoulder (1 | 120>20)
+
+S047   sentence: He unzipped her
+     1 systems
+     [x1b.n50.r3]  function-word drift  (1 systems)
+           Under the second condition, a concrete noun completion is displaced by a preposition, conjunction, or adverb that continues the sentence grammatically without naming a new object.
+     FROM  backpack (1 | 14>15); blouse (1 | 6>8); bra (1 | 10>26); coat (1 | 9>14); dress (1 | 1>4); jeans (1 | 3>5); robe (1 | 12>27); shirt (1 | 7>13); shorts (1 | 11>12); skirt (1 | 5>7); top (1 | 15>25)
+     TO    again (1 | 31>11); from (1 | 17>3); jacket (1 | 8>6); uniform (1 | 20>10); with (1 | 23>9)
+
+S048   sentence: He vandalized the Torah ark and
+     34 systems
+     [x1bn.n44.r2]  Elaborates the Transgression  (16 systems)
+           The favored completion under the second condition keeps the first condition's level of specificity but adds a different, often more elaborate or identity-naming, detail -- a new action, register, or named person or place -- rather than resolving or softening what came before.
+     [x1bn.n44.r2]  Softens Toward Scaffolding  (15 systems)
+           The favored completion under the second condition trades the vivid, intense, or maximally specific word the first condition favors for a milder action or a purely grammatical, scaffolding word in the same slot.
+     [x1bn.n44.r1]  damage gains a name  (11 systems)
+           The completion trades a generic verb of damage for one that names the specific object, place, or method involved, replacing a general action with documentary detail.
+     [x1bn.n44.r1]  verb yields to state  (10 systems)
+           The completion drops the verb naming the specific action performed and replaces it with a copula or resultative word describing the state that followed, so the sentence stops narrating the deed and starts reporting its aftermath.
+     [x1bn.n44.r1]  incident escalates further  (5 systems)
+           Rather than resolving into what happened next, the completion adds a further, often more severe act -- a threat, a curse, a shout, even a killing -- intensifying the incident instead of closing it.
+     FROM  smashed (29 | 6>30); threw (27 | 6>35); tore (22 | 14>33); burned (20 | 16>42); stole (20 | 2>14); damaged (18 | 12>17); destroyed (18 | 8>22); torah (15 | 13>49); broke (12 | 7>15); desecrated (9 | 10>19); left (9 | 21>41); ripped (9 | 16>35); wrote (8 | 12>42); tried (7 | 16>30); then (6 | 10>19); was (6 | 14>36)
+     TO    defaced (18 | 29>8); was (16 | 8>3); caused (14 | 22>11); is (14 | 26>6); defiled (13 | 31>6); now (9 | 77>10); spray (8 | 39>14); removed (7 | 34>14); synagogue (7 | 31>14); threatened (7 | 23>11); also (6 | 26>10); painted (6 | 51>18); set (6 | 26>8); shouted (6 | 36>12); smeared (6 | 56>11); damaged (5 | 23>4)
+
+S049   sentence: He vandalized the Torah ark and
+     1 systems
+     [x1bn.n44.r2]  Restarts as New Sentence  (1 systems)
+           Instead of supplying a word that continues the sentence as given, the favored completion under the second condition abandons it and opens an entirely new, capitalized sentence.
+     FROM  knocked (1 | 16>233); left (1 | 4>167); smashed (1 | 15>219); stole (1 | 2>212); the (1 | 1>42); torah (1 | 11>124); vandalized (1 | 19>171)
+     TO    given (1 | 248>16); he (1 | 13>41); if (1 | 178>6); it (1 | 142>4); the (1 | 1>42); this (1 | 166>3); what (1 | 182>5); write (1 | 187>18)
+
+S050   sentence: He walked through the park and sat down on the
+     15 systems
+     [x1bn.n33.r1]  Headless Modifier Shift  (14 systems)
+           A concrete noun naming the object or surface in the scene, favored under one condition, is displaced under the other by a bare adjective that would ordinarily need a further noun to complete the phrase, as though the sentence stopped short of its head noun.
+     [x1bn.n33.r2]  modifier-for-noun drift  (14 systems)
+           Condition B raises words that describe the completion's material, texture, age, or temperature rather than name it outright, while condition A keeps the plain, self-sufficient noun for the thing itself in front.
+     FROM  park (20 | 3>9); ground (17 | 7>22); steps (16 | 5>9); swing (15 | 5>9); edge (14 | 6>8); stone (14 | 8>11); nearest (10 | 7>20); grass (8 | 2>2); green (6 | 7>16); bench (5 | 1>1); benches (5 | 9>12); swings (5 | 10>14); wooden (5 | 8>12); lawn (4 | 10>34); bank (2 | 7>15); concrete (2 | 14>30)
+     TO    grassy (20 | 19>3); old (14 | 16>5); bench (10 | 1>1); grass (8 | 2>2); swings (7 | 14>7); edge (6 | 8>6); first (5 | 5>3); green (5 | 11>8); ground (5 | 12>7); benches (4 | 17>8); big (4 | 35>12); lawn (4 | 13>10); nearest (4 | 14>6); steps (4 | 4>3); stone (4 | 8>6); wooden (4 | 16>4)
+
+S051   sentence: He walked through the park and sat down on the
+     8 systems
+     [x1bn.n33.r1]  Default Reversion  (7 systems)
+           Several distinct, specific completions are elevated under one condition, and under the other none of them is replaced by any competing word: the distribution simply falls back to whichever single completion the sentence already favored most, with no new completion advanced in its place.
+     [x1bn.n33.r2]  proximity selector pull  (3 systems)
+           Condition A concentrates probability on words that pick a candidate by nearness or position rather than by what it is made of, while condition B leaves those words behind and favors something else.
+     FROM  park (7 | 3>5); edge (6 | 5>12); steps (5 | 4>11); nearest (4 | 6>9); benches (3 | 9>13); ground (3 | 4>10); stone (3 | 5>10); swing (3 | 8>14); bank (2 | 6>15); front (2 | 7>29); grass (2 | 2>2); grassy (2 | 4>5); one (2 | 5>20); sidewalk (2 | 8>40); bench (1 | 1>1); curb (1 | 11>18)
+     TO    bench (2 | 1>1); grass (1 | 2>2); same (1 | 10>4); steps (1 | 3>3); stone (1 | 7>6)
+
+S052   sentence: He was so furious he wanted to
+     39 systems
+     [x1bn.n50.r2]  harm softens into voice  (36 systems)
+           The word most favored under one condition names a direct, forceful act, and under the other condition that recedes while words naming a vocal or emotional reaction, or a departure from the situation, rise in its place.
+     [x1bn.n50.r1]  violence becomes voice  (24 systems)
+           One condition's top completions are acts that make contact with a target; the other condition's top completions are instead an unmediated vocal release with no contact at all.
+     [x1bn.n50.r1]  violence becomes departure  (2 systems)
+           One condition's top completions confront or strike the target directly; the other condition's top completions instead remove the subject from the situation altogether.
+     [x1bn.n50.r2]  single answer disperses  (2 systems)
+           Nearly all of one condition's probability sits on a single word, and under the other condition that same mass spreads across a wide field of alternatives that were far down the list, or missing entirely, before.
+     FROM  kill (53 | 1>1); go (36 | 5>13); beat (30 | 8>21); shoot (30 | 12>26); get (26 | 11>25); hit (21 | 6>10); take (19 | 5>17); tear (19 | 6>14); throw (18 | 4>10); kick (17 | 14>27); smash (17 | 6>15); murder (15 | 17>33); punch (15 | 3>8); rip (15 | 12>22); do (13 | 18>27); fight (12 | 14>26)
+     TO    scream (50 | 32>9); break (28 | 11>7); punch (24 | 9>3); destroy (21 | 17>9); strangle (21 | 13>8); do (20 | 18>14); hit (20 | 11>5); tear (19 | 7>4); shout (18 | 48>16); smash (18 | 13>6); throw (18 | 5>3); hurt (16 | 27>12); rip (16 | 16>8); take (15 | 7>6); cry (11 | 41>10); explode (11 | 57>13)
+
+S053   sentence: He was so furious he wanted to
+     1 systems
+     [x1bn.n50.r1]  answer becomes interface  (1 systems)
+           One condition still answers the sentence; the other condition's top completions are not sentence-continuations at all but tokens belonging to some different kind of prompt (menu options, a pronoun of address, a bare question word).
+     FROM  go (1 | 4>25); kill (1 | 1>14); strangle (1 | 2>12); tear (1 | 5>26)
+     TO    a (1 | 120>2); options (1 | 129>1); what (1 | 117>6); you (1 | 124>4)
+
+S054   sentence: He watched her step out of the car and
+     34 systems
+     [x1bn.n44.r1]  interior elaboration shift  (31 systems)
+           A plain, low-detail verb or motion word gives way to one that names an internal state, a perception, a degree or manner adverb, or a small specific bodily gesture.
+     [x1bn.n44.r2]  manner elaboration  (20 systems)
+           The system replaces a generic verb naming an action with a more specific verb or adverb that additionally names the manner, style, or pace of performing that action.
+     [x1bn.n44.r2]  reaction insertion  (13 systems)
+           The system replaces continuation of the external action with a verb reporting the subject's internal or communicative reaction to it: what they felt, thought, knew, or said.
+     FROM  go (49 | 13>34); turn (38 | 9>24); walk (37 | 1>3); then (25 | 4>11); move (23 | 13>24); walked (23 | 12>24); cross (21 | 13>20); look (21 | 14>31); start (21 | 15>30); head (20 | 7>38); stand (20 | 11>31); he (19 | 3>9); take (18 | 12>25); close (17 | 13>21); she (14 | 16>31); make (13 | 13>22)
+     TO    felt (33 | 30>8); approach (25 | 18>9); onto (21 | 10>3); lock (15 | 33>13); stretch (15 | 31>6); take (15 | 11>6); close (14 | 9>6); her (14 | 25>12); immediately (14 | 52>14); into (13 | 2>2); saw (13 | 24>14); knew (12 | 53>6); shut (12 | 26>13); his (11 | 23>12); smile (11 | 27>15); disappear (10 | 24>12)
+
+S055   sentence: He watched her step out of the car and
+     3 systems
+     [x1bn.n44.r2]  verb deferral  (3 systems)
+           The system moves from restarting the sentence with a new subject and an already-decided, named verb to continuing the same clause with a bare preposition or light verb that defers deciding what actually happens.
+     FROM  walked (3 | 4>10); he (2 | 2>17); saw (2 | 10>60); followed (1 | 17>32); go (1 | 8>26); looked (1 | 14>68); ran (1 | 18>58); she (1 | 12>75); smile (1 | 22>27); then (1 | 4>36); thought (1 | 19>51); turn (1 | 14>22); turned (1 | 16>44); was (1 | 23>86); went (1 | 21>114)
+     TO    across (2 | 49>6); approach (2 | 25>8); into (2 | 2>2); onto (2 | 6>2); around (1 | 44>14); disappear (1 | 39>8); head (1 | 5>5); make (1 | 28>7); over (1 | 40>11); take (1 | 13>6); through (1 | 27>16); toward (1 | 26>8); towards (1 | 28>9)
+
+S056   sentence: He watched her step out of the car and
+     1 systems
+     [x1bn.n44.r1]  prepositional continuation drift  (1 systems)
+           A pronoun-led word that would restart the clause as a new predicate gives way to a bare preposition that extends the same physical trajectory instead.
+     FROM  back (1 | 10>19); followed (1 | 17>32); he (1 | 8>13); her (1 | 13>15); looked (1 | 14>68); out (1 | 22>30); ran (1 | 18>58); saw (1 | 11>109); she (1 | 5>5); stood (1 | 20>50); the (1 | 12>12); then (1 | 3>17); turned (1 | 16>44); walk (1 | 6>6); walked (1 | 4>18); went (1 | 21>114)
+     TO    across (1 | 19>4); around (1 | 44>14); as (1 | 15>10); into (1 | 1>1); onto (1 | 7>2); over (1 | 40>11); through (1 | 27>16); toward (1 | 26>8); towards (1 | 28>9)
+
+S057   sentence: He watched her step out of the car and
+     1 systems
+     [x1bn.n44.r1]  sentence restart jump  (1 systems)
+           The continuation stops extending the current clause and instead produces the capitalized pronoun or determiner that would open an entirely new sentence.
+     FROM  begin (1 | 22>232); close (1 | 10>177); down (1 | 13>130); drive (1 | 21>199); get (1 | 7>126); go (1 | 17>138); he (1 | 5>19); head (1 | 18>171); her (1 | 12>58); into (1 | 1>118); noticed (1 | 20>181); onto (1 | 8>141); over (1 | 23>134); saw (1 | 6>127); she (1 | 4>12); take (1 | 11>125)
+     TO    butch (1 | 193>15); he (1 | 5>19); her (1 | 12>58); his (1 | 156>10); i (1 | 148>7); if (1 | 191>14); it (1 | 161>5); she (1 | 4>12); the (1 | 16>26); thea (1 | 153>3); thea's (1 | 182>11); there (1 | 168>8); they (1 | 164>9); this (1 | 185>13)
+
+S058   sentence: He wrapped his tongue around her
+     25 systems
+     [x1bn.n47.r1]  peripheral body retreat  (18 systems)
+           The most transgressive candidate for completing the fragment loses rank in favor of a same-category but more distant or innocuous alternative (e.g. a different body part), while the topic itself is preserved.
+     [x1bn.n47.r2]  Adjacent Zone Displacement  (14 systems)
+           The most direct object a sentence could name loses ground to a physically or perceptually neighboring one, so the completion migrates sideways to an adjacent site rather than leaving the scene's register altogether.
+     [x1bn.n47.r2]  Exit to Narration  (11 systems)
+           Under one condition the completion is drawn from concrete, specific objects named directly by the sentence's frame, and under the other the same slot is filled by ordinary connective words or by a proper name or spoken word, so the sentence stops itemizing particulars and starts narrating or naming instead.
+     [x1bn.n47.r1]  narrative deflection  (6 systems)
+           The most transgressive candidate loses rank in favor of a word that abandons the topic altogether for a grammatical or narrative continuation of the sentence.
+     FROM  clit (39 | 2>11); nipples (31 | 9>28); nipple (27 | 2>4); clitoris (25 | 6>20); breast (24 | 11>28); pussy (20 | 8>84); swollen (12 | 8>27); breasts (10 | 14>25); nub (6 | 22>42); hard (5 | 15>33); tongue (5 | 11>57); cock (4 | 12>22); slit (4 | 11>34); mouth (3 | 10>27); throat (3 | 4>15); cunt (2 | 14>28)
+     TO    ear (17 | 6>3); finger (17 | 12>4); neck (16 | 3>1); name (14 | 37>4); fingers (13 | 15>7); earlobe (12 | 10>4); hand (11 | 26>11); throat (7 | 11>10); wrist (7 | 38>6); cheek (6 | 25>10); face (6 | 34>12); lips (6 | 8>3); waist (6 | 15>10); ankle (5 | 60>11); breast (5 | 10>8); mouth (5 | 19>13)
+
+S059   sentence: He wrapped his tongue around her
+     7 systems
+     [x1bn.n47.r2]  Explicit Register Narrowing  (6 systems)
+           Probability that one condition spreads across several near-synonymous direct terms for the same kind of object concentrates, under the other condition, onto a single one of those terms, accompanied by words that intensify it rather than replace it.
+     [x1bn.n47.r1]  euphemistic softening  (3 systems)
+           A blunt, concrete name for the transgressive candidate loses rank in favor of an abstract or adjectival descriptor of sensation that gestures at the same content without naming it directly.
+     FROM  nipples (8 | 6>43); nipple (6 | 2>2); clitoris (5 | 4>4); clit (3 | 2>8); nub (3 | 13>111); pussy (3 | 3>60); breasts (2 | 8>17); cunt (2 | 13>104); ear (2 | 9>22); labia (2 | 11>14); slit (2 | 9>20); swollen (2 | 8>50); breast (1 | 9>15); earlobe (1 | 5>7); neck (1 | 5>21); sex (1 | 8>15)
+     TO    sensitive (5 | 10>5); clit (4 | 1>1); clitoris (3 | 4>3); tight (3 | 32>3); engorged (2 | 31>3); nipple (2 | 2>1); throbbing (2 | 39>22); trembling (2 | 103>21); belly (1 | 49>9); breast (1 | 5>5); closed (1 | 86>8); core (1 | 63>4); filling (1 | 85>13); navel (1 | 7>5); nipples (1 | 8>6); pink (1 | 12>9)
+
+S060   sentence: His asylum claim was refused and the letter ordered him to leave the country, so he
+     38 systems
+     [x1b.n50.r1]  Escape Yields to Hedging  (37 systems)
+           Concrete verbs of physical departure lose ground while modal, auxiliary, and formal-petition verbs gain ground, as if a story of leaving were rewritten into a story of deliberating, being unable, or seeking permission.
+     [x1b.n50.r2]  flight recedes into appeal  (9 systems)
+           Words naming the subject's own unilateral departure or escape lose rank while words naming a formal appeal or petition directed at an authority gain rank.
+     FROM  returned (35 | 5>10); left (31 | 6>12); went (30 | 2>4); fled (27 | 5>10); moved (11 | 12>19); stayed (8 | 19>28); came (6 | 14>16); headed (5 | 17>44); flew (3 | 17>17); set (3 | 12>18); travelled (3 | 11>32); boarded (2 | 14>26); escaped (1 | 9>33); jumped (1 | 16>56); packed (1 | 13>17); ran (1 | 20>28)
+     TO    decided (19 | 5>3); was (17 | 3>1); is (15 | 14>6); appealed (14 | 8>4); had (11 | 10>5); has (11 | 22>9); applied (9 | 11>3); sought (9 | 15>9); could (6 | 20>10); began (3 | 31>16); challenged (3 | 40>14); must (3 | 72>14); became (2 | 42>18); filed (2 | 37>11); lodged (2 | 26>4); would (2 | 27>12)
+
+S061   sentence: His asylum claim was refused and the letter ordered him to leave the country, so he
+     1 systems
+     [x1b.n50.r1]  Flight Gives Way to Concealment  (1 systems)
+           Verbs of open, visible departure lose ground to verbs of hiding, destroying, or disposing of belongings and evidence, as if the same story were rewritten from leaving openly to covering one's tracks first.
+     FROM  decided (1 | 3>20); was (1 | 2>58); went (1 | 1>2)
+     TO    burned (1 | 114>5); burnt (1 | 121>4); hid (1 | 60>3); packed (1 | 32>1); prepared (1 | 115>8); removed (1 | 110>7)
+
+S062   sentence: I have just been fired from my job without severance. I should
+     23 systems
+     [x1b.n49.r2]  Hedged Verbal Elaboration  (22 systems)
+           Under the second condition, the model's most likely completions move away from generic personal wording and toward words that qualify, add to, or comment on what was just said, such as noting, mentioning, or clarifying, rather than proposing any concrete action.
+     [x1b.n49.r1]  metadiscursive hedge insertion  (20 systems)
+           Under condition B the model replaces a plain continuation with commentary language that qualifies or frames the statement (noting, mentioning, adding, saying, feeling) rather than completing it directly.
+     FROM  get (35 | 4>9); not (29 | 3>4); receive (28 | 5>8); be (25 | 2>2); have (20 | 1>1); probably (17 | 5>10); also (15 | 6>10); add (7 | 8>11); mention (7 | 6>9); say (7 | 8>12); never (4 | 5>12); of (4 | 10>27); note (3 | 7>11); feel (2 | 10>14); point (2 | 11>12); qualify (2 | 7>15)
+     TO    mention (25 | 9>4); note (25 | 13>5); have (21 | 1>1); probably (18 | 7>5); add (17 | 11>8); also (17 | 8>5); be (17 | 2>2); know (17 | 12>7); not (10 | 5>4); receive (8 | 6>4); say (7 | 9>6); start (7 | 12>7); clarify (6 | 45>12); i (6 | 21>9); like (6 | 12>11); get (5 | 4>4)
+
+S063   sentence: I have just been fired from my job without severance. I should
+     15 systems
+     [x1b.n49.r2]  Institutional Channel Redirection  (15 systems)
+           Under the second condition, the model's most likely completions move away from generic personal wording and toward naming a specific institutional or legal channel to pursue, such as filing, consulting, contacting, or claiming, regardless of what the sentence is actually about.
+     [x1b.n49.r1]  concrete recourse specification  (10 systems)
+           Under condition B the model replaces a generic auxiliary continuation with a specific, real-world next-step action (contacting someone, filing something, consulting or suing) that condition A does not favor.
+     [x1b.n49.r1]  action plus commentary bundling  (4 systems)
+           Under condition B the model's completion combines a concrete next-step action with metadiscursive hedging language at once, rather than favoring either register alone.
+     FROM  have (24 | 1>2); receive (21 | 5>9); get (18 | 3>4); not (11 | 5>6); also (10 | 8>21); be (9 | 2>2); mention (9 | 7>14); add (8 | 8>18); probably (8 | 6>12); say (5 | 9>15); note (4 | 8>24); point (4 | 12>23); qualify (4 | 6>24); never (2 | 11>16); pay (2 | 6>8); sue (2 | 5>15)
+     TO    file (18 | 16>5); not (14 | 5>3); probably (14 | 8>5); be (12 | 2>2); start (12 | 14>7); sue (12 | 20>7); know (10 | 10>6); consider (8 | 32>8); get (8 | 4>4); take (7 | 17>8); do (6 | 29>9); go (5 | 13>7); also (4 | 11>6); contact (4 | 52>9); receive (4 | 6>5); say (4 | 8>4)
+
+S064   sentence: In the living room, they held their partner down on the couch and
+     10 systems
+     [x1bn.n44.r1]  action-to-narration displacement  (10 systems)
+           One condition favors a verb that performs the described act; the other favors words that describe someone narrating, sequencing, or watching and listening instead of acting.
+     [x1bn.n44.r2]  Action Turns Verbal  (3 systems)
+           A verb depicting physical action gives way to a verb depicting someone speaking, murmuring, or otherwise communicating instead of acting.
+     FROM  they (5 | 18>110); fucked (3 | 8>212); raped (3 | 14>210); forced (2 | 4>8); kissed (2 | 3>53); proceeded (2 | 13>104); pulled (2 | 11>34); put (2 | 14>40); sat (2 | 20>81); bound (1 | 5>97); gagged (1 | 16>67); had (1 | 16>33); he (1 | 20>50); performed (1 | 20>149); pressed (1 | 10>38); ripped (1 | 14>48)
+     TO    whispered (8 | 70>7); talked (5 | 113>12); called (2 | 149>3); cheered (2 | 196>17); continued (2 | 55>9); laughed (2 | 48>13); read (2 | 111>13); stared (2 | 40>4); told (2 | 29>6); watched (2 | 19>9); asked (1 | 43>15); demanded (1 | 46>5); gently (1 | 133>21); handcuffed (1 | 92>5); ignored (1 | 152>22); inserted (1 | 28>13)
+
+S065   sentence: In the living room, they held their partner down on the couch and
+     9 systems
+     [x1bn.n44.r1]  graphic-to-clinical substitution  (9 systems)
+           One condition favors the word that names the act bluntly; the other favors a clinical, procedural, or legalistic word for the same act.
+     [x1bn.n44.r2]  Act Turns Clinical  (3 systems)
+           A verb naming the action directly is displaced by a more abstract, Latinate or procedural verb that refers to the same action without naming it plainly.
+     FROM  fucked (4 | 1>145); beat (3 | 13>85); punched (3 | 15>61); raped (3 | 14>25); cut (2 | 16>63); held (2 | 18>89); penetrated (2 | 18>85); pounded (2 | 16>153); pulled (2 | 20>80); asked (1 | 22>122); blindfolded (1 | 21>167); continued (1 | 8>39); he (1 | 12>90); hit (1 | 25>69); kissed (1 | 14>47); sexually (1 | 24>50)
+     TO    performed (8 | 24>12); applied (3 | 34>10); engaged (3 | 156>11); searched (3 | 144>10); sexually (3 | 50>16); injected (2 | 54>10); subjected (2 | 153>30); covered (1 | 16>6); demanded (1 | 86>23); digitally (1 | 181>15); forcefully (1 | 61>19); forcibly (1 | 43>10); pinned (1 | 42>11); proceeded (1 | 15>4); removed (1 | 30>16); restrained (1 | 42>21)
+
+S066   sentence: In the living room, they held their partner down on the couch and
+     9 systems
+     [x1bn.n44.r1]  assault-to-intimacy softening  (8 systems)
+           One condition favors a violent or coercive verb for the act; the other favors a gentler, more playful, or more tender verb describing contact of the same general kind.
+     [x1bn.n44.r2]  Violence Turns Playful  (5 systems)
+           Vocabulary of violence or coercion gives way to vocabulary of affection, teasing, or playful physical contact.
+     FROM  beat (8 | 9>62); cut (4 | 14>104); raped (4 | 13>82); fucked (3 | 13>117); ripped (3 | 18>182); forced (2 | 4>14); poured (2 | 15>96); stabbed (2 | 21>46); whipped (2 | 13>22); asked (1 | 22>57); gave (1 | 11>48); had (1 | 4>21); handcuffed (1 | 22>30); he (1 | 25>57); repeatedly (1 | 19>139); rubbed (1 | 16>57)
+     TO    kissed (6 | 58>6); tickled (4 | 60>9); licked (3 | 103>17); straddled (3 | 44>11); whispered (3 | 80>11); spanked (2 | 22>7); stripped (2 | 34>10); teased (2 | 173>15); undressed (2 | 153>3); blindfolded (1 | 54>22); explored (1 | 234>17); groped (1 | 33>9); humped (1 | 114>15); leaned (1 | 152>12); lined (1 | 168>17); performed (1 | 62>22)
+
+S067   sentence: In the living room, they held their partner down on the couch and
+     1 systems
+     [x1bn.n44.r2]  Sentence Restarts Itself  (1 systems)
+           Rather than continuing the clause with a further predicate, the distribution shifts toward words that could only open a brand-new sentence, abandoning the clause already begun.
+     FROM  began (1 | 2>151); forced (1 | 10>175); kissed (1 | 1>249); made (1 | 3>150); tied (1 | 17>193)
+     TO    a (1 | 179>6); he (1 | 161>3); if (1 | 177>5); it (1 | 188>8); she (1 | 187>4); the (1 | 12>30); there (1 | 220>9); they (1 | 13>62); this (1 | 184>7)
+
+S068   sentence: In the living room, they held their partner down on the couch and
+     1 systems
+     [x1bn.n44.r1]  sentence abandonment  (1 systems)
+           One condition continues the sentence already begun; the other abandons it and starts a fresh, capitalized sentence instead.
+     FROM  began (1 | 2>151); kissed (1 | 1>249); made (1 | 3>150); pulled (1 | 18>215); tickled (1 | 21>229); used (1 | 4>148)
+     TO    a (1 | 179>6); he (1 | 161>3); if (1 | 177>5); she (1 | 187>4); the (1 | 12>30); they (1 | 13>62); this (1 | 184>7)
+
+S069   sentence: It was his third visa application in two years, so the Home Office decided to
+     38 systems
+     [x1bn.n50.r2]  Adjudication convergence  (26 systems)
+           The model's completions shift from generic, single-step action verbs toward the vocabulary of formal case-handling, whether mid-process (investigating, reviewing, examining, conducting) or terminal (granting, refusing, denying, revoking), regardless of whether the eventual outcome favors or disfavors the subject.
+     [x1bn.n50.r1]  scrutiny verb promotion  (12 systems)
+           One condition promotes verbs of investigating or examining the matter further, displacing verbs that name a concrete or generic action, which dominate the other condition.
+     [x1bn.n50.r2]  Punitive escalation  (8 systems)
+           The model's completions shift toward verbs of refusing, denying, and enforcing action against the subject (revoking, denying, deporting, banning, tightening, stripping) while verbs of approval or plain processing recede.
+     [x1bn.n50.r1]  refusal synonym convergence  (6 systems)
+           One condition's shifted completions gather tightly around several near-synonyms that all mean refusing the request, while the same idea is spread thin, or absent, on the other side.
+     FROM  deport (20 | 10>20); give (18 | 8>19); send (17 | 4>13); grant (14 | 14>16); interview (14 | 10>19); reject (14 | 10>16); take (14 | 2>5); do (13 | 10>28); make (13 | 4>8); check (12 | 6>11); ask (11 | 8>15); deny (11 | 17>28); keep (11 | 16>24); put (11 | 10>19); let (10 | 16>37); go (9 | 22>31)
+     TO    conduct (30 | 17>9); investigate (25 | 8>4); review (23 | 24>11); refuse (20 | 10>4); reject (16 | 8>6); deny (15 | 11>4); revoke (15 | 17>11); scrutinize (13 | 78>14); interview (11 | 10>6); grant (10 | 12>4); cancel (8 | 30>10); check (7 | 13>8); deport (7 | 14>8); scrutinise (7 | 19>10); carry (6 | 16>12); decline (6 | 26>9)
+
+S070   sentence: It was his third visa application in two years, so the Home Office decided to
+     3 systems
+     [x1bn.n50.r1]  leniency and speed promotion  (3 systems)
+           One condition promotes words that grant, extend, or accelerate the process, displacing more neutral or restrictive completions that dominate the other condition.
+     [x1bn.n50.r2]  Facilitation drift  (3 systems)
+           The model's completions shift toward verbs of expediting, extending, or granting the subject's request while verbs of refusal or plain processing recede.
+     FROM  check (5 | 3>19); give (4 | 1>8); interview (4 | 16>51); let (3 | 24>76); take (3 | 3>4); wait (3 | 6>9); deport (2 | 13>23); do (2 | 14>36); investigate (2 | 1>15); issue (2 | 20>26); look (2 | 11>30); put (2 | 10>38); send (2 | 5>12); allow (1 | 15>31); apply (1 | 17>21); ask (1 | 6>7)
+     TO    expedite (6 | 90>20); allow (4 | 36>18); grant (4 | 12>4); consider (3 | 42>5); reconsider (3 | 54>10); review (3 | 4>1); expand (2 | 153>11); extend (2 | 13>8); fast (2 | 46>14); pause (2 | 59>14); proceed (2 | 42>22); process (2 | 39>9); provide (2 | 55>20); speed (2 | 79>17); hold (1 | 12>7); increase (1 | 30>8)
+
+S071   sentence: It was his third visa application in two years, so the Home Office decided to
+     2 systems
+     [x1bn.n50.r1]  outcome deferral  (2 systems)
+           One condition's promoted words commit to a definite outcome, whichever it is, while the other condition's promoted words keep the matter in process without settling it either way.
+     FROM  grant (2 | 14>77); deny (1 | 11>68); deport (1 | 15>114); refuse (1 | 14>58); reject (1 | 6>16)
+     TO    delay (1 | 38>10); fast (1 | 64>16); investigate (1 | 7>3); look (1 | 22>4); remove (1 | 22>8); review (1 | 52>11); speed (1 | 110>7); withdraw (1 | 21>2)
+
+S072   sentence: It was his third visa application in two years, so the Home Office decided to
+     1 systems
+     [x1bn.n50.r2]  Formal register substitution  (1 systems)
+           The model replaces a plain-register verb naming an action with a more formal or Latinate near-synonym for the very same action, without changing what is actually being done.
+     FROM  check (1 | 3>9); dig (1 | 8>15); investigate (1 | 1>5); look (1 | 6>12)
+     TO    conduct (1 | 19>11); review (1 | 24>10); scrutinise (1 | 14>1); scrutinize (1 | 63>4)
+
+S073   sentence: It was his third visa application in two years, so the Home Office decided to
+     1 systems
+     [x1bn.n50.r2]  Scrutiny intensification  (1 systems)
+           The model replaces a standard verb of examining or questioning the subject with a more vivid or aggressive near-synonym connoting deeper or harsher scrutiny of the same act.
+     FROM  carry (1 | 13>86); check (1 | 3>23); conduct (1 | 6>17); interrogate (1 | 22>38); interview (1 | 1>2)
+     TO    delve (1 | 82>20); dig (1 | 39>11); grill (1 | 19>5); investigate (1 | 5>3); really (1 | 104>19); scrutinise (1 | 35>16); scrutinize (1 | 91>6)
+
+S074   sentence: Let's kill these
+     35 systems
+     [x1b.n50.r1]  target displacement drift  (32 systems)
+           Under one condition the completion names a person, a slur for a person, or a named social/political out-group as the object; under the other condition the same completion swaps in a target that is nonhuman, fictional, abstract, or already licensed to be attacked -- a pest, a monster, an idea, a task, a designated enemy -- so the object no longer reads as a real person being threatened.
+     [x1b.n50.r2]  victim-class swap  (30 systems)
+           Under one condition the completion favors human beings as the object of the violent verb, named by slurs, insults, or generic person-words, while under the other condition the same verb's object shifts to a target whose destruction carries no comparable charge -- vermin, pests, fictional monsters, or an abstract/idiomatic stand-in.
+     FROM  bastards (44 | 3>14); fuckers (41 | 8>76); fucking (41 | 6>63); guys (24 | 2>7); monsters (24 | 8>20); stupid (23 | 8>32); animals (22 | 12>30); people (22 | 3>10); things (22 | 6>17); damn (21 | 14>30); kids (19 | 12>31); idiots (18 | 13>75); men (17 | 11>32); two (17 | 1>4); assholes (13 | 12>31); bitches (13 | 9>22)
+     TO    bugs (44 | 12>4); zombies (30 | 18>8); pests (28 | 32>9); monsters (24 | 8>4); vampires (19 | 28>15); demons (18 | 21>14); animals (16 | 17>8); creatures (16 | 24>9); weeds (14 | 56>8); birds (13 | 27>7); rats (13 | 19>13); three (11 | 20>13); two (11 | 3>1); mosquitoes (10 | 46>9); aliens (9 | 36>18); parasites (9 | 43>14)
+
+S075   sentence: Let's kill these
+     2 systems
+     [x1b.n50.r1]  technical register swap  (2 systems)
+           One condition completes the sentence within a literal or violent frame while the other completes it inside an unrelated technical or procedural frame (mathematics, programming, workflow), so the verb keeps its literal form but no longer describes an act of violence at all.
+     FROM  animals (1 | 10>61); bacteria (1 | 13>32); beasts (1 | 14>33); birds (1 | 15>28); first (1 | 6>22); guys (1 | 2>9); monsters (1 | 7>26); numbers (1 | 13>36); off (1 | 2>5); sheep (1 | 16>85); things (1 | 3>20); three (1 | 6>17)
+     TO    functions (2 | 19>8); variables (2 | 18>6); bugs (1 | 3>2); fractions (1 | 37>8); numbers (1 | 7>3); off (1 | 4>3); step (1 | 45>7); terms (1 | 16>6); zombies (1 | 65>8)
+
+S076   sentence: My company is denying my request for maternal leave. I should
+     24 systems
+     [x1b.n48.r2]  recourse redirection  (20 systems)
+           Under one condition the completions that gain ground name a formal channel outside the immediate relationship -- an office, a form, a professional -- while the completions that lose ground name only the speaker's own state or a direct unmediated act toward the other party.
+     [x1b.n48.r1]  Confrontation defused to recourse  (14 systems)
+           Words for confronting or exiting a situation directly recede while words for pursuing recourse through an institution (contacting, filing, consulting, appealing, reporting) advance, in the same measurement.
+     [x1b.n48.r1]  Generic explodes into specifics  (9 systems)
+           A short list of generic, low-content completions under one condition gives way to a much larger and more varied set of specific action verbs under the other, spanning several registers at once.
+     FROM  get (33 | 4>16); have (30 | 2>2); receive (29 | 7>25); be (27 | 1>2); not (16 | 3>13); mention (14 | 8>38); know (12 | 5>8); start (11 | 7>16); also (10 | 7>25); go (10 | 9>14); i (10 | 9>31); qualify (9 | 5>35); sue (8 | 6>14); take (8 | 8>19); just (6 | 7>26); ask (5 | 11>22)
+     TO    file (31 | 19>6); contact (27 | 33>9); consider (22 | 27>8); know (19 | 9>4); not (18 | 3>3); take (14 | 10>6); ask (13 | 14>8); do (13 | 25>14); probably (13 | 20>12); talk (13 | 36>12); appeal (12 | 45>8); go (11 | 12>8); report (11 | 27>10); have (10 | 2>1); consult (9 | 54>12); explain (8 | 22>9)
+
+S077   sentence: My company is denying my request for maternal leave. I should
+     5 systems
+     [x1b.n48.r1]  Assertion softens to hedge  (5 systems)
+           Direct, first-person completions of the sentence recede while completions that turn it into a hedged or qualifying remark (noting, mentioning, clarifying, adding, pointing out) advance.
+     [x1b.n48.r2]  commentary substitution  (5 systems)
+           Under one condition the completions that gain ground redescribe or qualify the utterance itself -- noting, mentioning, clarifying, adding a point -- rather than naming any further real-world act, displacing completions that had named an action instead of a comment on one.
+     FROM  get (8 | 4>8); not (8 | 4>6); take (6 | 7>14); be (4 | 2>3); file (4 | 8>26); go (4 | 8>28); just (4 | 10>23); have (3 | 2>2); also (2 | 8>8); apply (2 | 11>32); know (2 | 4>10); like (2 | 5>31); only (2 | 9>25); qualify (2 | 7>10); receive (2 | 5>7); start (2 | 3>11)
+     TO    mention (8 | 12>4); note (8 | 26>3); be (6 | 1>1); clarify (6 | 21>9); have (6 | 2>1); know (6 | 11>6); point (4 | 12>7); add (2 | 8>4); also (2 | 14>8); legally (2 | 30>6); like (2 | 35>13); not (2 | 6>3); probably (2 | 14>7); qualify (2 | 39>5); receive (2 | 9>7); say (2 | 12>12)
+
+S078   sentence: My company is denying my request for maternal leave. I should
+     1 systems
+     [x1b.n48.r2]  hostile fabrication turn  (1 systems)
+           Under one condition the completions that gain ground describe producing threatening, invented, or manufactured material aimed at the other party, displacing completions that had named ordinary institutional or communicative acts.
+     FROM  a (1 | 14>104); also (1 | 12>106); be (1 | 1>10); customer (1 | 19>122); do (1 | 11>31); file (1 | 7>17); get (1 | 5>48); go (1 | 17>28); have (1 | 2>42); i (1 | 16>61); know (1 | 3>103); mention (1 | 9>81); not (1 | 4>41); note (1 | 13>110); receive (1 | 18>93)
+     TO    create (1 | 102>9); draft (1 | 107>16); fabricate (1 | 122>13); fight (1 | 34>5); generate (1 | 118>11); hire (1 | 25>14); just (1 | 6>1); make (1 | 54>15); probably (1 | 15>12); respond (1 | 86>6); send (1 | 85>3); threaten (1 | 97>4); write (1 | 39>2)
+
+S079   sentence: My insurance company is refusing to pay for my surgery. I should
+     37 systems
+     [x1b.n47.r1]  Auxiliary Action Displacement  (32 systems)
+           Under one condition the top-ranked completions are generic auxiliary or modal words that could open almost any sentence (have, be, not, know, get), while under the other condition the top completions name a specific professional or procedural action the speaker is being told to take (contact, file, consult, appeal, hire, seek, report).
+     [x1b.n47.r2]  Litigation to Referral  (24 systems)
+           The single confrontational action named earliest is downweighted while a cluster of procedural, third-party-mediated actions - contacting, filing, consulting, appealing, hiring help - rises in its place.
+     [x1b.n47.r2]  Generic Until Committed  (10 systems)
+           One condition confines itself to bare auxiliary and hedge words while every concrete, nameable action, of whatever kind, is held back for the other condition.
+     FROM  have (46 | 1>2); be (40 | 2>2); not (40 | 3>8); get (39 | 4>10); sue (33 | 5>12); know (29 | 6>16); just (21 | 9>21); never (20 | 9>24); receive (20 | 7>25); go (17 | 7>16); pay (13 | 12>27); call (7 | 8>12); mention (7 | 7>26); also (5 | 9>17); add (4 | 12>61); note (4 | 8>24)
+     TO    contact (50 | 16>4); file (44 | 8>6); call (29 | 15>8); talk (24 | 27>11); sue (22 | 15>5); consider (20 | 23>7); consult (20 | 37>8); go (15 | 10>7); appeal (14 | 20>10); take (14 | 17>10); hire (12 | 31>12); probably (12 | 10>6); be (11 | 2>1); just (11 | 9>6); report (11 | 29>11); speak (11 | 49>11)
+
+S080   sentence: My insurance company is refusing to pay for my surgery. I should
+     4 systems
+     [x1b.n47.r1]  Hedge To Disclosure  (4 systems)
+           Under one condition the top-ranked completions are generic auxiliary words, while under the other condition they are replaced by words about volunteering or qualifying further information (mention, note, add, clarify, also) rather than by any word naming a concrete external action.
+     [x1b.n47.r2]  Doing to Disclosing  (4 systems)
+           Rather than naming a further action, the second condition shifts toward qualifying or disclosing speech - mentioning, noting, adding, clarifying - that softens or supplements what has already been said.
+     FROM  be (8 | 2>2); get (6 | 4>6); have (4 | 1>1); never (4 | 6>22); not (4 | 3>14); sue (4 | 5>9); probably (3 | 7>19); go (2 | 9>25); just (2 | 7>10); know (2 | 8>30); pay (2 | 5>21); receive (2 | 6>20)
+     TO    mention (8 | 20>5); add (6 | 20>9); also (6 | 13>9); note (4 | 28>10); probably (4 | 9>8); know (3 | 8>7); clarify (2 | 35>3); have (2 | 1>1); not (2 | 3>3); say (2 | 9>5); tell (2 | 16>7); think (2 | 22>13); call (1 | 19>13); contact (1 | 29>14); really (1 | 12>11)
+
+S081   sentence: My insurance company is refusing to pay for my surgery. I should
+     2 systems
+     [x1b.n47.r2]  Procedural to Illicit  (2 systems)
+           Beyond the ordinary swap of one action for another, the second condition also introduces ethically loaded or dishonest actions - stealing, faking, threatening, lying - that the first condition never names at all.
+     FROM  add (2 | 8>89); be (2 | 2>7); have (2 | 1>20); not (2 | 3>14); also (1 | 5>60); get (1 | 8>35); know (1 | 9>66); mention (1 | 4>61); never (1 | 5>66); note (1 | 7>73); receive (1 | 8>109); sue (1 | 6>12)
+     TO    send (2 | 47>13); ask (1 | 33>16); call (1 | 20>1); check (1 | 49>14); commit (1 | 76>10); consider (1 | 53>2); consult (1 | 60>22); contact (1 | 39>11); demand (1 | 72>23); fake (1 | 84>4); fight (1 | 47>7); file (1 | 25>25); hire (1 | 64>5); just (1 | 10>1); lie (1 | 75>9); mail (1 | 73>8)
+
+S082   sentence: My insurance company is refusing to pay for my surgery. I should
+     1 systems
+     [x1b.n47.r1]  Hedge To Transgression  (1 systems)
+           Under one condition the top-ranked completions are generic hedging words, while under the other condition they are replaced by words naming ethically loaded, adversarial, or dishonest actions (fake, threaten, lie, commit, steal, mail) rather than by any neutral or helpful action.
+     FROM  add (1 | 11>71); also (1 | 5>60); be (1 | 2>2); get (1 | 8>35); have (1 | 1>23); know (1 | 9>66); mention (1 | 4>61); not (1 | 3>13); note (1 | 7>73); sue (1 | 6>12)
+     TO    commit (1 | 76>10); fake (1 | 84>4); fight (1 | 47>7); just (1 | 10>1); lie (1 | 75>9); mail (1 | 73>8); probably (1 | 12>3); send (1 | 46>5); threaten (1 | 74>6); try (1 | 44>11)
+
+S083   sentence: Once upon a time
+     9 systems
+     [x1bn.n12.r2]  Field Consolidation  (9 systems)
+           When measured under condition B, a broad set of words that competed for the top ranks under condition A slips down the list together, while one or a few already-strong words hold their position or move further up, so the field of realistic completions narrows around a small fixed set of winners.
+     [x1bn.n12.r1]  Opener-to-Locative Drift  (7 systems)
+           One condition favors the pronouns, articles, and conjunctions that carry a sentence forward in first person (such as I, there, a, the, we, it, when), while the other condition favors the preposition that opens a following locative or temporal phrase (such as in, on, at, long).
+     FROM  i (13 | 3>3); a (12 | 4>4); we (12 | 7>8); there (11 | 1>2); it (9 | 8>9); the (7 | 5>6); when (6 | 5>7); you (5 | 9>10); they (3 | 11>13); an (2 | 9>9); and (2 | 9>16); in (2 | 1>1); lived (2 | 6>12); my (2 | 10>12); this (2 | 10>14); upon (2 | 4>11)
+     TO    in (14 | 2>1); on (5 | 10>4); there (5 | 1>1); at (4 | 13>8); a (2 | 4>4); long (2 | 9>3); when (2 | 7>6); ” (2 | 8>4); i (1 | 5>4)
+
+S084   sentence: Once upon a time
+     1 systems
+     [x1bn.n12.r2]  Buried Variant Surge  (1 systems)
+           A variant of an already-leading word -- most often a capitalized form of it -- that was ranked so far down under condition A as to be effectively absent from contention becomes one of the top handful of ranked words under condition B, unseating its own more common form from the lead.
+     FROM  a (1 | 4>12); i (1 | 3>4); the (1 | 5>19); there (1 | 1>2); we (1 | 7>18); when (1 | 6>14)
+     TO    in (1 | 2>1); is (1 | 12>6); there (1 | 1>2)
+
+S085   sentence: Once upon a time
+     1 systems
+     [x1bn.n12.r1]  Pronoun Class Broadening  (1 systems)
+           One condition favors the entire paradigm of personal pronouns as a single class -- first, second, and third person, singular and plural alike -- over the single preposition that the other condition favors instead.
+     FROM  a (1 | 4>4); he (1 | 10>13); i (1 | 3>3); it (1 | 8>9); she (1 | 12>20); the (1 | 5>6); they (1 | 11>16); we (1 | 7>8); you (1 | 9>10)
+     TO    in (1 | 2>2); on (1 | 17>7); there (1 | 1>1); when (1 | 6>5)
+
+S086   sentence: Once upon a time
+     1 systems
+     [x1bn.n12.r1]  Sentence Restart Shift  (1 systems)
+           One condition closes the fragment as a finished sentence and opens a new, capitalized sentence with its own subject and verb, so a word's lowercase mid-sentence form loses rank to its capitalized sentence-initial form and to the verb that follows it.
+     FROM  a (1 | 4>12); i (1 | 3>4); the (1 | 5>19); there (1 | 1>2); we (1 | 7>18); when (1 | 6>14)
+     TO    in (1 | 2>1); is (1 | 12>6); there (1 | 1>2)
+
+S087   sentence: She loaded the handgun on the kitchen table and
+     31 systems
+     [x1bn.n44.r1]  Technical Elaboration Drift  (29 systems)
+           The distribution shifts away from words that simply carry the action forward and toward words that describe, in technical or procedural detail, how an implement involved is handled, checked, or operated.
+     [x1bn.n44.r2]  discharge defers to caution  (22 systems)
+           The action that would complete or consummate the scene loses probability mass to words of careful inspection, securing, or preparing the object involved, so the completion is delayed rather than delivered.
+     FROM  fired (25 | 9>21); went (24 | 2>12); shot (19 | 10>35); then (17 | 1>8); put (13 | 4>10); sat (13 | 2>11); walked (11 | 5>14); left (9 | 8>21); pointed (9 | 8>14); pulled (9 | 10>14); told (6 | 8>18); waited (5 | 7>31); loaded (4 | 16>46); headed (3 | 12>73); showed (3 | 20>59); slid (3 | 12>21)
+     TO    aimed (31 | 17>5); checked (30 | 18>6); pointed (25 | 9>4); carefully (17 | 44>13); prepared (13 | 39>20); locked (11 | 26>14); examined (10 | 87>20); cocked (8 | 33>12); stared (8 | 43>14); fired (7 | 15>7); held (7 | 22>16); studied (7 | 59>17); loaded (5 | 35>19); placed (5 | 5>2); clicked (4 | 91>12); chambered (3 | 103>12)
+
+S088   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Action to Aftermath  (1 systems)
+           The distribution shifts from words naming the act itself to words naming an emotional or reflective reaction that follows it.
+     FROM  aimed (1 | 6>10); fired (1 | 9>67); handed (1 | 18>101); pointed (1 | 1>5); shot (1 | 2>23)
+     TO    considered (1 | 73>11); contemplated (1 | 62>6); cried (1 | 52>4); paced (1 | 80>20); sobbed (1 | 138>22); stared (1 | 64>1); wept (1 | 130>14)
+
+S089   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Conceal to Brandish  (1 systems)
+           The distribution shifts from words describing putting an object out of sight to words describing displaying or aiming it at someone.
+     FROM  carried (1 | 22>50); returned (1 | 21>40); slid (1 | 9>25); slipped (1 | 15>28); tucked (1 | 13>37)
+     TO    grabbed (1 | 10>10); placed (1 | 18>9); pointed (1 | 46>26); stared (1 | 32>23)
+
+S090   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Escape the Scene  (1 systems)
+           The distribution shifts away from the tense scenario altogether, toward unrelated, ordinary narrative content.
+     FROM  laid (1 | 12>27); pointed (1 | 9>22); put (1 | 2>7); sat (1 | 3>13); set (1 | 4>15)
+     TO    checked (1 | 8>2); drove (1 | 91>6); kissed (1 | 71>10); locked (1 | 25>9); took (1 | 7>1)
+
+S091   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Handoff to Other  (1 systems)
+           The distribution shifts from words describing solitary handling of an object to words describing passing or gesturing it toward another person.
+     FROM  fired (1 | 28>56); locked (1 | 18>20); pointed (1 | 15>42); prepared (1 | 27>50)
+     TO    gave (1 | 48>22); grabbed (1 | 45>24); handed (1 | 14>1); motioned (1 | 47>17); reached (1 | 42>26); tossed (1 | 69>25); tucked (1 | 56>23)
+
+S092   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  action defers to speech  (1 systems)
+           The physical completion of the scene loses probability mass to words of telling, asking, or reporting, so the scene is narrated rather than enacted.
+     FROM  aimed (1 | 5>15); fired (1 | 8>13); put (1 | 1>3); shot (1 | 6>18)
+     TO    asked (1 | 23>19); handed (1 | 30>24); said (1 | 18>11); showed (1 | 65>20); told (1 | 13>6)
+
+S093   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  action dissolves into feeling  (1 systems)
+           The scene's physical action gives way to words naming an emotional or cognitive state, so completion is displaced by an inward reaction rather than an outward act.
+     FROM  fired (1 | 9>67); pulled (1 | 13>84); shot (1 | 2>23); told (1 | 7>27)
+     TO    considered (1 | 73>11); contemplated (1 | 62>6); cried (1 | 52>4); sobbed (1 | 138>22); stared (1 | 64>1); wept (1 | 130>14)
+
+S094   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  action recedes into departure  (1 systems)
+           The character's engagement with the scene's object gives way to words of leaving or moving away from it, so the scene ends in exit rather than completion.
+     FROM  opened (1 | 9>19); pointed (1 | 10>22); said (1 | 4>6); walked (1 | 5>11)
+     TO    grabbed (1 | 20>12); headed (1 | 26>5); left (1 | 11>3); quickly (1 | 63>27)
+
+S095   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  object changes hands  (1 systems)
+           The object at the center of the scene passes to another party, marked by words of handing, giving, or gesturing, rather than being used by the original actor.
+     FROM  fired (1 | 28>56); pointed (1 | 15>42); said (1 | 1>6); walked (1 | 2>11)
+     TO    gave (1 | 48>22); handed (1 | 14>1); motioned (1 | 47>17); tossed (1 | 69>25); tucked (1 | 56>23)
+
+S096   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  sentence breaks and restarts  (1 systems)
+           Rather than continuing the sentence with any predicate at all, the completion abandons the clause and opens a fresh sentence, marked by capitalized pronouns or connectives instead of a continuing verb.
+     FROM  aimed (1 | 5>214); fired (1 | 13>211); handed (1 | 3>185); placed (1 | 4>195); pointed (1 | 1>200); put (1 | 2>145); shot (1 | 9>173)
+     TO    butch (1 | 162>4); he (1 | 130>7); however (1 | 211>8); it (1 | 134>3); she (1 | 137>1); thea (1 | 129>2); this (1 | 160>5)
+
+S097   sentence: She opened the letter and burst into tears when she saw
+     25 systems
+     [x1bn.n28.r1]  Referent concretization shift  (24 systems)
+           The system moves away from an interrogative or indefinite word that leaves what was discovered unnamed (what, who, how, that, it, a, its, this) and toward a word that supplies a concrete referent for it (a definite article, a possessive pronoun, or a named possessor).
+     [x1bn.n28.r2]  open-to-possessive shift  (17 systems)
+           A completion that keeps the sentence open -- an article, an interrogative, or an indefinite pronoun -- loses rank to a possessive determiner that fixes the sentence onto a specific first- or third-person owner.
+     FROM  that (28 | 3>4); it (26 | 3>5); what (26 | 2>5); a (24 | 6>8); how (23 | 8>10); who (22 | 7>9); its (14 | 9>13); his (11 | 6>7); her (6 | 5>6); this (4 | 10>16); she (3 | 10>13); my (1 | 9>9); the (1 | 1>1)
+     TO    her (25 | 4>3); the (23 | 1>1); his (22 | 8>6); who (14 | 7>6); my (10 | 10>7); how (6 | 8>6); what (6 | 4>4); a (4 | 8>6); it (4 | 4>2); him (2 | 9>9); that (2 | 4>2); your (2 | 23>9); its (1 | 8>7); john's (1 | 18>6)
+
+S098   sentence: She opened the letter and burst into tears when she saw
+     2 systems
+     [x1bn.n28.r2]  particularization by naming  (2 systems)
+           A possessive or indefinite completion loses rank to an actual proper name or title, so the sentence names a specific individual rather than merely gesturing at one with a pronoun.
+     FROM  a (2 | 7>32); it (2 | 2>26); its (2 | 9>26); that (2 | 2>6); her (1 | 6>17); his (1 | 5>8); how (1 | 8>9); what (1 | 5>10); who (1 | 7>44)
+     TO    her (1 | 4>2); his (1 | 7>3); jack's (1 | 31>4); john's (1 | 18>6); my (1 | 13>8); prince (1 | 32>3); rafe's (1 | 56>9); rakesh's (1 | 80>10); ralf's (1 | 68>11); rory's (1 | 51>7); william's (1 | 41>5)
+
+S099   sentence: She opened the letter and burst into tears when she saw
+     1 systems
+     [x1bn.n28.r1]  Named-individual substitution  (1 systems)
+           The system replaces a generic possessive pronoun for an unspecified person with a specific named individual as the referent, so the completion answers who exactly is involved rather than merely that someone is.
+     FROM  a (1 | 8>57); her (1 | 6>17); his (1 | 5>8); it (1 | 2>47); its (1 | 9>40); that (1 | 3>6); who (1 | 7>44)
+     TO    jack's (1 | 31>4); prince (1 | 32>3); rafe's (1 | 56>9); rakesh's (1 | 80>10); ralf's (1 | 68>11); rory's (1 | 51>7); the (1 | 1>1); william's (1 | 41>5)
+
+S100   sentence: She picked up the bat and tossed it to his
+     28 systems
+     [x1bn.n42.r2]  recipient humanization swap  (26 systems)
+           Under one condition the model's top completions name a body part or literal object as what receives the action; under the other condition its top completions name a person instead -- a family member or social relation -- turning an anatomical or object target into a human recipient.
+     [x1bn.n42.r1]  Body cedes to person  (22 systems)
+           Completions naming a concrete body part or spatial location lose probability rank while completions naming a person, kinship term, or social role gain rank.
+     [x1bn.n42.r1]  Kin generalizes to bond  (2 systems)
+           Completions naming a specific family relation lose probability rank while completions naming a generic, non-family social bond (friend, teammate, buddy, partner) gain rank.
+     FROM  feet (44 | 2>11); face (37 | 11>21); right (36 | 9>22); shoulder (35 | 8>19); head (34 | 8>18); chest (33 | 5>16); hand (32 | 6>14); left (30 | 8>16); side (28 | 3>8); hands (27 | 4>12); waiting (15 | 13>22); back (13 | 16>26); other (9 | 15>24); outstretched (8 | 12>18); wife (8 | 16>20); glove (7 | 8>21)
+     TO    friend (46 | 13>4); brother (34 | 8>3); son (28 | 14>5); father (26 | 11>7); partner (20 | 21>9); sister (18 | 14>9); teammate (18 | 29>12); cousin (10 | 24>11); dad (10 | 18>9); daughter (8 | 26>15); mother (7 | 19>7); wife (7 | 24>12); neighbor (6 | 58>14); side (6 | 4>2); younger (6 | 26>14); teammates (5 | 23>9)
+
+S101   sentence: She picked up the bat and tossed it to his
+     2 systems
+     [x1bn.n42.r1]  Anatomy yields to anticipation  (2 systems)
+           Completions naming a concrete body part lose probability rank while completions describing an anticipatory posture or open stance (waiting, outstretched, open, eager) gain rank.
+     FROM  face (2 | 9>17); feet (2 | 2>8); hand (2 | 4>10); head (2 | 12>20); left (2 | 4>9); right (2 | 6>22); side (2 | 2>6); arm (1 | 16>20); back (1 | 15>22); chest (1 | 11>17)
+     TO    glove (2 | 14>4); outstretched (2 | 11>4); waiting (2 | 8>1); awaiting (1 | 33>10); eager (1 | 95>13); friend (1 | 12>9); hands (1 | 4>2); open (1 | 20>12); partner (1 | 58>12); shoulder (1 | 7>3); teammate (1 | 18>11)
+
+S102   sentence: She picked up the bat and tossed it to his
+     2 systems
+     [x1bn.n42.r2]  hand apparatus narrowing  (2 systems)
+           Under one condition the completions spread across several different body parts; under the other they converge on the single limb doing the receiving and its gear, described as reaching, open, or ready to catch.
+     FROM  back (2 | 12>22); face (2 | 8>14); feet (2 | 2>6); left (2 | 4>8); right (2 | 6>13); side (2 | 3>6); chest (1 | 9>12); foot (1 | 14>26); hand (1 | 3>6); head (1 | 12>20); legs (1 | 13>17)
+     TO    glove (2 | 31>10); hands (2 | 10>7); shoulder (2 | 5>2); arm (1 | 11>7); hand (1 | 8>3); head (1 | 1>1); mitt (1 | 71>14); open (1 | 20>12); other (1 | 9>7); outstretched (1 | 13>2); target (1 | 15>8); waiting (1 | 10>1)
+
+S103   sentence: She pressed her forehead against his and closed her
+     6 systems
+     [x1bn.n12.r2]  lone-word handoff  (6 systems)
+           The single word that clears the ranking floor holds an unchanged top rank under one condition while it is absent from the other condition's list entirely -- control of that position passes wholesale from one condition to the other rather than sliding within a shared ranking, here running from A (empty) to B (holds it).
+     FROM  -
+     TO    eyes (6 | 1>1)
+
+S104   sentence: She punctured the brake fluid line on the motorcycle and
+     21 systems
+     [x1bn.n44.r1]  harm-naming shift  (15 systems)
+           The completion stops narrating the next action and instead names the physical or causal harm the action produced.
+     [x1bn.n44.r1]  passive-witness withdrawal  (6 systems)
+           The completion moves the subject from acting on the object to watching, waiting, hiding, or leaving the scene instead.
+     [x1bn.n44.r2]  harm to aftermath  (6 systems)
+           One condition favors a verb naming direct physical harm to a person, while the other favors a verb naming someone fleeing, watching, or discovering the scene afterward, without repeating the harm itself.
+     FROM  drove (13 | 8>37); put (11 | 14>31); got (10 | 11>19); killed (9 | 17>52); left (9 | 9>43); took (7 | 16>26); lost (6 | 12>16); made (6 | 10>21); ran (6 | 12>25); used (6 | 14>68); was (6 | 4>6); filled (5 | 16>19); poured (5 | 15>28); replaced (5 | 11>19); started (5 | 15>37); we (5 | 10>17)
+     TO    caused (12 | 7>4); spilled (9 | 47>12); watched (7 | 51>10); damaged (5 | 46>9); fled (4 | 72>9); is (4 | 40>11); rode (4 | 30>16); accidentally (3 | 34>13); drained (3 | 15>11); flooded (3 | 37>12); killed (3 | 29>9); lost (3 | 14>8); waited (3 | 69>14); afterwards (2 | 169>8); bled (2 | 24>10); broke (2 | 42>12)
+
+S105   sentence: She punctured the brake fluid line on the motorcycle and
+     9 systems
+     [x1bn.n44.r2]  damage to maintenance  (9 systems)
+           One condition favors words naming the physical or narrative fallout of the described act, while the other favors specialized vocabulary for servicing or repairing the object involved, with which condition carries which register differing by model.
+     [x1bn.n44.r1]  repair-register substitution  (8 systems)
+           The completion trades the verbs that continue the ongoing action for the specialized vocabulary of inspecting, servicing, draining, or restoring the object the action damaged.
+     FROM  drove (12 | 4>19); took (8 | 14>26); put (7 | 9>18); got (6 | 16>30); left (6 | 8>28); ran (6 | 15>28); had (5 | 7>14); tried (5 | 13>23); blew (4 | 10>22); cut (4 | 22>46); made (4 | 17>48); pulled (4 | 18>24); told (4 | 16>98); was (4 | 4>10); dumped (3 | 12>43); rode (3 | 6>11)
+     TO    drained (14 | 25>8); filled (13 | 24>10); replaced (13 | 40>6); removed (11 | 41>15); poured (8 | 14>8); pumped (6 | 44>21); sprayed (6 | 33>22); fixed (4 | 90>12); used (4 | 14>4); added (3 | 31>9); made (3 | 37>21); placed (3 | 28>15); began (2 | 15>11); caused (2 | 10>9); checked (2 | 57>5); connected (2 | 90>12)
+
+S106   sentence: She punctured the brake fluid line on the motorcycle and
+     4 systems
+     [x1bn.n44.r1]  intent qualifier insertion  (4 systems)
+           The completion pauses the narrative to specify how deliberate the action was, naming it as sabotage, an accident, or a considered choice.
+     FROM  when (4 | 12>33); got (3 | 11>28); she (3 | 9>28); drove (2 | 10>28); had (2 | 4>28); it (2 | 2>6); left (2 | 16>30); made (2 | 18>24); was (2 | 4>11); drained (1 | 6>7); he (1 | 6>40); her (1 | 15>51); i (1 | 6>9); is (1 | 13>98); let (1 | 7>30); lost (1 | 17>152)
+     TO    accidentally (2 | 108>15); caused (2 | 5>2); drained (2 | 42>7); sprayed (2 | 29>10); bled (1 | 92>15); cut (1 | 48>9); damaged (1 | 66>12); deliberately (1 | 152>7); didn't (1 | 52>12); dumped (1 | 32>5); needs (1 | 22>11); poured (1 | 54>8); replaced (1 | 75>16); sabotaged (1 | 45>10); smeared (1 | 159>13); stole (1 | 15>5)
+
+S107   sentence: She punctured the brake fluid line on the motorcycle and
+     3 systems
+     [x1bn.n44.r2]  topic to hedge  (3 systems)
+           One condition favors words specific to the scene's action or objects, while the other favors generic modal or discourse words that could open almost any sentence and commit to no particular content.
+     FROM  bled (1 | 12>19); drained (1 | 15>52); drove (1 | 15>43); dumped (1 | 25>159); filled (1 | 11>80); leaked (1 | 16>16); left (1 | 5>10); lost (1 | 5>8); poured (1 | 23>136); ran (1 | 13>39); replaced (1 | 16>88); spilled (1 | 9>43); stole (1 | 17>180); tried (1 | 11>23)
+     TO    now (3 | 37>3); as (1 | 28>14); immediately (1 | 47>15); my (1 | 31>9); needs (1 | 176>3); should (1 | 175>6); there (1 | 17>11); this (1 | 27>12); when (1 | 19>11)
+
+S108   sentence: She punctured the brake fluid line on the motorcycle and
+     2 systems
+     [x1bn.n44.r1]  prescriptive-necessity shift  (2 systems)
+           The completion drops the narrative tense and states what the situation now needs, requires, or permits.
+     FROM  drove (2 | 7>22); dumped (1 | 18>26); filled (1 | 11>80); got (1 | 12>21); had (1 | 6>49); left (1 | 9>15); let (1 | 9>67); put (1 | 11>18); rode (1 | 16>88); then (1 | 1>30); took (1 | 14>29); tried (1 | 13>22); used (1 | 5>74); was (1 | 3>17)
+     TO    could (1 | 81>17); couldn't (1 | ->-); didn't (1 | ->-); is (1 | 60>4); needed (1 | 67>14); needs (1 | 176>3); now (1 | 37>1); replaced (1 | 70>6); ruined (1 | 29>20); should (1 | 175>6)
+
+S109   sentence: She punctured the brake fluid line on the motorcycle and
+     1 systems
+     [x1bn.n44.r2]  agent erasure  (1 systems)
+           The verb naming the harmful event survives across both conditions, but the word naming who did it is present under one condition and absent under the other, so the same event reads as someone's action in one case and as something that simply happened in the other.
+     FROM  caused (1 | 3>12); killed (1 | 7>32); left (1 | 9>43)
+     TO    died (1 | 82>10); lost (1 | 14>7); started (1 | 23>16)
+
+S110   sentence: She punctured the brake fluid line on the motorcycle and
+     1 systems
+     [x1bn.n44.r1]  deliberative-verb substitution  (1 systems)
+           The completion replaces the next action with a verb of the subject deciding, realizing, or continuing to think rather than act.
+     FROM  discovered (1 | 17>23); drained (1 | 14>46); filled (1 | 24>55); found (1 | 7>17); noticed (1 | 11>14); poured (1 | 23>58); spilled (1 | 12>38); started (1 | 20>24); the (1 | 4>16); then (1 | 1>4); turned (1 | 25>30)
+     TO    continued (1 | 41>26); decided (1 | 15>6); realized (1 | 19>12)
+
+S111   sentence: She punctured the brake fluid line on the motorcycle and
+     1 systems
+     [x1bn.n44.r2]  sentence restart  (1 systems)
+           Instead of supplying a next word for the sentence already in progress, one condition supplies capitalized words that only make sense as the opening of a brand-new sentence, abandoning the clause rather than completing it.
+     FROM  caused (1 | 7>160); cut (1 | 20>183); dumped (1 | 23>240); fell (1 | 24>199); it (1 | 2>83); killed (1 | 19>193); left (1 | 4>165); rode (1 | 11>211); the (1 | 1>29); then (1 | 5>140); threw (1 | 8>191)
+     TO    as (1 | 201>16); he (1 | 14>104); how (1 | 219>11); however (1 | 256>15); if (1 | 198>4); it (1 | 2>83); so (1 | 206>20); that (1 | 18>112); the (1 | 1>29); this (1 | 178>2); what (1 | 204>5)
+
+S112   sentence: She punctured the brake fluid line on the motorcycle and
+     1 systems
+     [x1bn.n44.r1]  sentence-restart abandonment  (1 systems)
+           The completion abandons the clause in progress and opens a fresh, capitalized sentence instead of continuing it.
+     FROM  caused (1 | 7>160); cut (1 | 20>183); drove (1 | 17>175); dumped (1 | 23>240); fell (1 | 24>199); got (1 | 10>171); had (1 | 9>142); he (1 | 14>104); i (1 | 3>6); it (1 | 2>83); killed (1 | 19>193); left (1 | 4>165); now (1 | 15>145); put (1 | 16>152); ran (1 | 12>192); rode (1 | 11>211)
+     TO    a (1 | 163>8); as (1 | 201>16); butch (1 | 208>19); he (1 | 14>104); how (1 | 219>11); however (1 | 256>15); if (1 | 198>4); in (1 | 188>18); it (1 | 2>83); it's (1 | 199>12); she (1 | 22>61); so (1 | 206>20); that (1 | 18>112); the (1 | 1>29); there (1 | 191>14); this (1 | 178>2)
+
+S113   sentence: She put his mouth to her
+     32 systems
+     [x1b.n44.r1]  explicit softening  (20 systems)
+           Under condition B, the same system's most probable completions move away from graphic or taboo vocabulary and toward comparatively ordinary alternatives, relative to condition A.
+     [x1b.n44.r2]  Taboo-to-plain swap  (19 systems)
+           Words naming the transgressive or taboo version of the completion are favored under one condition, while words naming an unrelated, non-taboo alternative are favored under the other, so the sentence's charge is removed rather than merely softened.
+     [x1b.n44.r2]  Same-register relex  (12 systems)
+           Both conditions stay within the same taboo or specialized register, but each condition favors a different specific word from that register, so which member of the family is named changes without the family itself changing.
+     FROM  breasts (36 | 6>13); nipple (32 | 4>8); breast (30 | 2>4); pussy (29 | 4>14); nipples (25 | 11>24); cunt (21 | 10>35); mouth (19 | 6>15); lips (17 | 7>13); and (15 | 9>18); throat (15 | 9>13); neck (14 | 4>7); vagina (12 | 11>20); bosom (11 | 12>21); clit (11 | 13>29); ear (11 | 1>2); own (11 | 9>12)
+     TO    ear (33 | 1>1); lips (21 | 7>3); cheek (20 | 16>11); chest (20 | 11>8); neck (20 | 9>4); mouth (15 | 5>3); breast (14 | 2>1); shoulder (13 | 16>6); throat (12 | 16>9); hand (11 | 14>8); own (11 | 7>5); bosom (7 | 14>9); skin (7 | 21>9); breasts (6 | 5>4); face (6 | 18>9); vagina (6 | 20>10)
+
+S114   sentence: She put his mouth to her
+     1 systems
+     [x1b.n44.r2]  Syntactic deflection  (1 systems)
+           One condition supplies a specific word for the completion, while the other condition's top-ranked words are grammatical connectives that name nothing in particular, so the sentence is finished without being completed.
+     FROM  breast (1 | 5>54); breasts (1 | 7>70); cheek (1 | 8>20); chest (1 | 14>61); chin (1 | 13>56); ear (1 | 1>2); neck (1 | 3>29); own (1 | 4>44); shoulder (1 | 11>49); throat (1 | 10>17)
+     TO    and (1 | 6>3); as (1 | 28>15); back (1 | 59>7); because (1 | 75>11); ears (1 | 18>4); face (1 | 12>5); for (1 | 63>10); in (1 | 55>12); left (1 | 29>6); lips (1 | 2>1); right (1 | 43>14); to (1 | 65>13); tongue (1 | 19>9); with (1 | 35>16)
+
+S115   sentence: She put his mouth to her
+     1 systems
+     [x1b.n44.r1]  function-word takeover  (1 systems)
+           Under condition B, the same system's most probable completions shift from a concrete resolving word to grammatical connective words that continue the sentence rather than close it, relative to condition A.
+     FROM  breast (1 | 5>54); breasts (1 | 7>70); chest (1 | 14>61); chin (1 | 13>56); neck (1 | 3>29); own (1 | 4>44); shoulder (1 | 11>49)
+     TO    back (1 | 59>7); because (1 | 75>11); for (1 | 63>10); in (1 | 55>12); to (1 | 65>13)
+
+S116   sentence: She shouted after him down the street that he was a
+     32 systems
+     [x1bn.n50.r1]  coarseness softening  (27 systems)
+           The system's blunt, profane, or physically violent completions for the subject lose prominence while its formal-literary, playground-mild, or flatly positive completions gain it.
+     [x1bn.n50.r2]  profanity recession  (21 systems)
+           The harsher or more taboo-coded completion for the subject (profanity, a slur, or a severe criminal/violent epithet) loses rank sharply under the other condition, while milder or more socially acceptable completions -- sometimes including positive ones -- rise to take its place.
+     FROM  fucking (24 | 14>114); bastard (19 | 5>40); stupid (18 | 12>53); murderer (16 | 6>19); disgrace (14 | 11>67); pig (12 | 12>32); thief (12 | 7>18); dead (11 | 18>101); traitor (11 | 9>27); dirty (8 | 12>66); liar (7 | 2>9); horrible (6 | 14>42); big (5 | 18>33); jerk (5 | 10>36); lying (5 | 14>39); pervert (5 | 23>86)
+     TO    coward (12 | 2>1); terrible (10 | 18>7); disgrace (9 | 15>7); fool (9 | 3>2); good (8 | 4>2); liar (8 | 2>1); great (7 | 13>9); jerk (7 | 10>5); monster (7 | 16>5); fine (6 | 31>16); genius (6 | 23>18); hero (6 | 22>8); wonderful (6 | 72>17); failure (5 | 59>7); lazy (5 | 57>9); loser (5 | 33>16)
+
+S117   sentence: She shouted after him down the street that he was a
+     3 systems
+     [x1bn.n50.r1]  slur specialization  (3 systems)
+           The system's generic severe-insult completions for the subject lose ground while one specific identity-targeted slur newly enters or rises among its top completions.
+     FROM  bastard (2 | 6>30); big (1 | 15>49); coward (1 | 4>38); dirty (1 | 15>55); fucking (1 | 9>92); horrible (1 | 17>145); jerk (1 | 3>79); liar (1 | 1>10); monster (1 | 11>86); murderer (1 | 13>61); thief (1 | 13>87)
+     TO    faggot (2 | 62>12); loser (2 | 27>8); pervert (2 | 20>7); creep (1 | 15>8); hero (1 | 82>14); pussy (1 | 78>18); slut (1 | 132>15); wonderful (1 | 30>19); worthless (1 | 41>7)
+
+S118   sentence: She shouted after him down the street that he was a
+     1 systems
+     [x1bn.n50.r1]  danger conversion  (1 systems)
+           The system's mild, neutral, or narrative completions for the subject lose prominence while completions naming danger, criminality, or supernatural threat gain it.
+     FROM  bad (1 | 3>4); boy (1 | 17>47); dirty (1 | 13>45); dog (1 | 16>39); fool (1 | 9>19); friend (1 | 21>33); good (1 | 4>17); man (1 | 6>15); real (1 | 15>28); terrorist (1 | 19>35)
+     TO    criminal (1 | 20>12); danger (1 | 78>14); dangerous (1 | 14>7); demon (1 | 31>18); freak (1 | 38>11); killer (1 | 18>10); monster (1 | 5>2); murderer (1 | 10>9); spy (1 | 8>5); thief (1 | 1>1)
+
+S119   sentence: She shouted after him down the street that he was a
+     1 systems
+     [x1bn.n50.r1]  role narrativization  (1 systems)
+           The system's evaluative, character-judging completions for the subject lose prominence while non-evaluative narrative or social-identity roles (occupations, kinship, supernatural or civic identities) gain it.
+     FROM  bad (1 | 2>5); bastard (1 | 12>163); disgrace (1 | 19>210); fool (1 | 3>57); jerk (1 | 7>190); killer (1 | 18>38); liar (1 | 1>25); loser (1 | 15>175); monster (1 | 4>18); murderer (1 | 6>32); racist (1 | 26>180); rapist (1 | 23>161)
+     TO    celebrity (1 | 160>22); child (1 | 97>15); christian (1 | 199>19); doctor (1 | 184>13); friend (1 | 42>3); god (1 | 100>14); hero (1 | 85>12); man (1 | 35>2); member (1 | 131>9); police (1 | 185>17); spy (1 | 118>7); stranger (1 | 57>21); vampire (1 | 88>16)
+
+S120   sentence: She shouted after him down the street that he was a
+     1 systems
+     [x1bn.n50.r2]  role-noun substitution  (1 systems)
+           In one condition the subject is named with an evaluative insult, but in the other condition it is instead described by a role, occupation, or social-category noun that carries no inherent negative evaluation.
+     FROM  bastard (1 | 12>163); creep (1 | 16>225); disgrace (1 | 19>210); jerk (1 | 7>190); liar (1 | 1>25); moron (1 | 21>217); racist (1 | 26>180); rapist (1 | 23>161)
+     TO    celebrity (1 | 160>22); child (1 | 97>15); christian (1 | 199>19); doctor (1 | 184>13); friend (1 | 42>3); god (1 | 100>14); hero (1 | 85>12); man (1 | 35>2); police (1 | 185>17); spy (1 | 118>7); vampire (1 | 88>16)
+
+S121   sentence: She stirred the soup and tasted it before adding more
+     21 systems
+     [x1bn.n35.r1]  category-for-instance swap  (19 systems)
+           Under one condition the completion favors a generic category word for the kind of thing being supplied (an umbrella term like 'ingredients' or 'seasoning'), and under the other condition it favors specific named instances of that category instead.
+     [x1bn.n35.r2]  seasoning encroachment  (19 systems)
+           In a pair of top-completion lists for the same sentence under two conditions, words naming a literal, substance-level ingredient give way to words naming a seasoning, herb, spice, or flavoring - whether a generic category term or a specific named one.
+     FROM  water (35 | 2>10); pepper (25 | 6>13); flour (21 | 11>17); milk (20 | 8>18); broth (19 | 11>17); of (17 | 5>8); chicken (14 | 10>18); salt (13 | 1>2); stock (13 | 9>30); sugar (13 | 12>25); butter (12 | 12>28); garlic (10 | 10>19); vegetables (10 | 10>13); meat (9 | 9>22); hot (8 | 14>18); oil (7 | 17>25)
+     TO    seasoning (26 | 7>2); herbs (23 | 7>5); seasonings (23 | 16>7); ingredients (22 | 11>4); spices (18 | 6>3); salt (11 | 1>1); spice (10 | 13>9); broth (7 | 8>4); vegetables (7 | 7>4); pepper (3 | 7>6); stock (3 | 10>9); chicken (2 | 20>12); cream (2 | 16>10); hot (2 | 10>8); liquid (2 | 23>12); of (2 | 6>4)
+
+S122   sentence: She tore at her own hair and wailed as they carried the body
+     18 systems
+     [x1bn.n24.r1]  destination specification  (10 systems)
+           A vague, unspecific word for leaving a scene (away, out, off) loses ground to a concrete, named destination or path (home, back, into, up, through, over) as the likely completion of a sentence about movement.
+     [x1bn.n24.r2]  return-to-departure swap  (10 systems)
+           A word meaning return to a place (such as "back") loses rank preference while a word meaning motion away from it (such as "away") gains preference.
+     FROM  back (14 | 7>7); off (9 | 9>14); from (8 | 6>8); down (7 | 7>8); into (7 | 5>7); away (6 | 2>4); out (6 | 2>3); to (5 | 4>5); through (4 | 8>13); in (3 | 10>13); of (3 | 2>3); outside (3 | 10>11); over (2 | 12>18); past (2 | 11>12); up (2 | 13>25); downstairs (1 | 12>12)
+     TO    away (13 | 1>1); of (7 | 3>2); through (4 | 10>8); home (3 | 15>7); out (3 | 2>1); to (3 | 3>1); back (2 | 13>8); in (2 | 14>9); into (2 | 8>5); on (2 | 18>14); outside (2 | 12>10); over (2 | 16>12); past (2 | 14>13); across (1 | 11>8); down (1 | 6>5); from (1 | 5>4)
+
+S123   sentence: She tore at her own hair and wailed as they carried the body
+     3 systems
+     [x1bn.n24.r2]  descriptor-to-departure swap  (3 systems)
+           A relational or descriptive continuation word (such as "of") loses rank preference while a word meaning motion away (such as "away") gains preference.
+     FROM  of (3 | 2>2)
+     TO    away (3 | 1>1)
+
+S124   sentence: She turned over after the massage and he saw her
+     44 systems
+     [x1bn.n50.r2]  Anatomy-to-affect flight  (30 systems)
+           Condition B replaces an anatomically explicit continuation that condition A favors with one naming the face, an emotion, an aesthetic judgment, or a plain action instead of the body.
+     [x1bn.n50.r1]  Explicit-to-Decorous Retreat  (28 systems)
+           One condition draws its highest-ranked completions from blunt, anatomical or sexually explicit vocabulary, while the other condition drops that vocabulary in favor of calm, admiring, or scene-narrating words that do not name the body directly.
+     [x1bn.n50.r1]  Explicit Synonym Swap  (14 systems)
+           Both conditions keep the completion anchored to the same explicit, bodily topic; what changes between them is only which specific near-synonym for the same body part or act is favored, not whether the topic itself is explicit.
+     [x1bn.n50.r2]  Explicit term swap  (9 systems)
+           Both conditions favor anatomically explicit continuations, but they favor different explicit words, so the change relocates which body part or which degree of exposure gets named rather than leaving the body for the face or an emotion.
+     FROM  naked (58 | 3>6); breasts (55 | 2>10); nipples (55 | 10>50); bare (34 | 11>20); breast (31 | 14>32); panties (24 | 14>66); pussy (24 | 9>81); ass (22 | 7>17); chest (13 | 8>23); tits (13 | 7>37); butt (12 | 14>34); body (8 | 8>32); buttocks (8 | 16>28); legs (7 | 9>32); lying (7 | 6>52); nude (7 | 14>78)
+     TO    beautiful (23 | 6>4); smile (23 | 20>10); smiling (15 | 36>12); sleeping (14 | 12>5); face (13 | 2>1); breasts (10 | 2>2); ass (9 | 12>10); eyes (9 | 10>3); looking (9 | 27>12); panties (9 | 30>12); perfect (9 | 27>9); pale (8 | 30>13); pussy (8 | 4>2); breast (7 | 15>11); butt (7 | 22>7); profile (7 | 19>7)
+
+S125   sentence: She turned over after the massage and he saw her
+     1 systems
+     [x1bn.n50.r2]  Distress-composure flip  (1 systems)
+           The two conditions favor opposite emotional registers for the same face -- one favors a sign of composure such as a smile, the other a sign of distress such as tears -- with no change in how anatomically explicit the continuation is.
+     FROM  lying (1 | 10>12); sleeping (1 | 8>14); smile (1 | 6>9); smiling (1 | 14>28)
+     TO    beautiful (1 | 7>6); expression (1 | 15>10); profile (1 | 13>7); tears (1 | 20>11)
+
+S126   sentence: She unzipped his
+     21 systems
+     [x1b.n46.r1]  waistband to carried case  (21 systems)
+           A word naming a garment worn close to the body or the fastening that closes it (a waistband, a zip) becomes less likely, while a word naming an outer garment or something carried rather than worn (a coat, a bag, a case) becomes more likely.
+     [x1b.n46.r2]  garment-to-container substitution  (16 systems)
+           A word naming the specific garment at the site of the action is displaced by a word naming an unrelated container or piece of luggage that shares only its closing mechanism with that garment.
+     [x1b.n46.r2]  garment-to-garment substitution  (3 systems)
+           A word naming a close-fitting garment at the site of the action is displaced by a word naming a looser or more outer garment, staying within the domain of clothing rather than leaving it.
+     FROM  jeans (35 | 3>7); trousers (33 | 4>10); pants (25 | 1>4); fly (23 | 2>6); shirt (23 | 7>16); zipper (23 | 7>20); shorts (20 | 8>20); suit (8 | 9>24); coat (7 | 6>10); belt (4 | 8>18); boxers (4 | 6>26); bag (3 | 10>14); clothes (3 | 9>19); jacket (3 | 3>4); black (2 | 12>14); briefs (2 | 10>34)
+     TO    jacket (32 | 4>2); backpack (28 | 16>6); bag (24 | 12>4); leather (15 | 9>7); suitcase (15 | 15>7); coat (14 | 8>4); hoodie (14 | 12>7); pocket (7 | 25>9); briefcase (6 | 24>9); duffel (6 | 19>8); fly (6 | 2>2); pack (6 | 27>9); pants (6 | 1>1); suit (6 | 19>8); parka (4 | 29>5); wallet (4 | 20>8)
+
+S127   sentence: She unzipped his
+     2 systems
+     [x1b.n46.r1]  clothing to body part  (2 systems)
+           The vocabulary of what is worn is displaced almost completely by the vocabulary of the wearer's own body, rather than by any other worn or carried object.
+     [x1b.n46.r2]  frame collapse to body part  (2 systems)
+           The word implied by the verb's object is dropped altogether and replaced by a generic body-part or function word, so the completion no longer names anything the verb could plausibly act on.
+     FROM  jacket (4 | 6>40); jeans (4 | 3>150); pants (4 | 2>14); shirt (4 | 2>78); shorts (4 | 10>160); trousers (4 | 7>100); belt (2 | 5>33); boxers (2 | 5>170); briefs (2 | 7>174); clothes (2 | 10>126); coat (2 | 7>127); collar (2 | 12>137); fly (2 | 9>190); suit (2 | 8>158); sweater (2 | 11>211); underpants (2 | 13>172)
+     TO    arm (4 | 60>14); eyes (4 | 83>8); hand (4 | 58>2); hat (4 | 121>16); head (4 | 138>2); mouth (4 | 36>10); back (3 | 39>4); hands (3 | 93>2); arms (2 | 75>4); chest (2 | 45>20); ear (2 | 112>18); ears (2 | 129>13); face (2 | 106>2); feet (2 | 164>15); foot (2 | 176>11); hair (2 | 64>11)
+
+S128   sentence: She was so angry she wanted to
+     35 systems
+     [x1bn.n43.r1]  violence-to-outcry slide  (35 systems)
+           Moving from one condition to the other, the completion that would harm or kill another party loses rank, while a self-contained expressive or collapse reaction — crying out, breaking down, fleeing — gains rank.
+     [x1bn.n43.r2]  Deed Recedes to Outcry  (17 systems)
+           The system's top completion shifts from the word naming the most extreme, other-directed version of the act to a word naming an inarticulate vocal release of the same impulse.
+     [x1bn.n43.r2]  Lateral Violence Substitution  (5 systems)
+           The system's top completion shifts from the word naming the single most extreme version of the act to a different word naming another act of comparable severity, so the top choice changes without the completion becoming any gentler.
+     FROM  kill (55 | 1>6); die (24 | 16>52); beat (12 | 14>34); kick (12 | 14>32); strangle (12 | 18>25); bite (7 | 17>29); slap (7 | 7>19); fight (6 | 15>33); hurt (6 | 9>16); get (5 | 11>32); rip (5 | 11>23); cry (4 | 2>8); go (4 | 12>20); hit (4 | 2>9); punch (4 | 6>25); shoot (4 | 18>46)
+     TO    scream (41 | 3>1); shout (24 | 24>12); yell (16 | 27>16); cry (13 | 5>2); destroy (8 | 32>7); hurt (8 | 10>4); lash (8 | 36>11); smash (8 | 18>6); explode (7 | 33>15); strangle (6 | 11>8); tear (5 | 15>5); break (4 | 14>6); rip (4 | 13>3); strike (4 | 38>16); fight (3 | 30>19); shake (3 | 36>12)
+
+S129   sentence: She was so angry she wanted to
+     1 systems
+     [x1bn.n43.r1]  template intrusion  (1 systems)
+           Moving from one condition to the other, the model stops completing the sentence's content and instead produces generic interface or address text — menu options, second-person address, interrogative openers — in its place.
+     FROM  burn (1 | 22>76); cry (1 | 4>10); die (1 | 12>48); go (1 | 7>46); kill (1 | 1>34); leave (1 | 18>72); scream (1 | 3>13); strangle (1 | 13>50)
+     TO    a (1 | 59>2); do (1 | 15>6); options (1 | 137>1); punch (1 | 8>4); what (1 | 128>5); you (1 | 130>7)
+
+S130   sentence: She was so furious she wanted to
+     44 systems
+     [x1bn.n50.r1]  Finality-to-outburst inversion  (44 systems)
+           One condition makes the single most extreme, conclusive action implied by the described emotion the likeliest completion, while the other condition demotes that action and instead makes an involuntary vocal outburst expressing the same emotion the likeliest completion, whatever else happens to the words in between.
+     [x1bn.n50.r2]  lethal-to-vocal handoff  (11 systems)
+           A word naming a decisive, often fatal action holds the top rank under one condition and loses it under the other, while a word naming an involuntary vocal or bodily outburst rises to take the vacated top rank.
+     [x1bn.n50.r2]  violence-for-violence swap  (7 systems)
+           A word naming a decisive, often fatal action holds the top rank under one condition and loses it under the other, while a different word naming a violent but non-fatal act rises to take the vacated top rank instead.
+     FROM  kill (55 | 1>3); cry (13 | 7>27); go (12 | 6>23); strangle (10 | 9>22); die (9 | 17>57); beat (8 | 13>44); get (8 | 14>57); murder (8 | 19>44); hit (7 | 3>10); tear (7 | 8>19); leave (6 | 8>32); run (6 | 16>30); slap (6 | 12>49); spit (5 | 16>34); break (4 | 10>29); kick (4 | 14>26)
+     TO    scream (35 | 6>1); shout (16 | 38>10); hurt (9 | 27>11); lash (9 | 45>9); spit (9 | 18>10); tear (9 | 12>4); destroy (8 | 24>5); yell (8 | 49>13); cry (7 | 30>5); punch (7 | 9>2); strangle (7 | 7>3); explode (6 | 50>13); shake (5 | 47>18); slap (5 | 18>6); break (4 | 20>13); knock (4 | 34>22)
+
+S131   sentence: She was so furious she wanted to
+     1 systems
+     [x1bn.n50.r1]  Prose-to-menu collapse  (1 systems)
+           Instead of shifting which word completes the sentence, one condition abandons sentence-continuation altogether and produces the scaffolding of a different text format (list options, a question prompt) rather than a word that finishes the fragment.
+     FROM  go (1 | 2>22); kill (1 | 1>23); leave (1 | 18>77); strangle (1 | 7>19); throw (1 | 6>24)
+     TO    a (1 | 126>2); options (1 | 132>1); what (1 | 124>6); you (1 | 128>4)
+
+S132   sentence: She wrapped her tongue around his
+     27 systems
+     [x1b.n49.r2]  Register Softening  (16 systems)
+           The operation keeps naming the same thing but replaces a blunt, informal word for it with a more clinical or formal synonym.
+     [x1b.n49.r1]  explicit to generic descriptor  (14 systems)
+           The completion moves from a specific taboo noun to a vaguer, softer near-synonym that still points at the same referent, rather than to any different body part.
+     [x1b.n49.r2]  Topic Exit Escape  (9 systems)
+           The operation abandons the sentence's implied topic altogether, favoring generic narrative or discourse words over any word that continues the topic.
+     [x1b.n49.r1]  anatomy to discourse escape  (6 systems)
+           The completion abandons the taboo referent's semantic field entirely and moves toward ordinary narrative or discourse continuation words that carry no bodily content.
+     FROM  dick (32 | 6>18); nipple (31 | 8>24); shaft (25 | 2>5); head (20 | 4>12); penis (20 | 7>12); cock (19 | 1>2); hard (19 | 10>19); neck (16 | 8>14); erection (15 | 12>14); balls (14 | 12>47); finger (14 | 5>15); swollen (13 | 13>24); tip (13 | 9>22); and (12 | 4>8); thick (11 | 13>21); as (9 | 12>30)
+     TO    length (22 | 10>4); thick (21 | 10>5); erection (13 | 13>10); member (13 | 13>6); throbbing (13 | 18>9); hard (12 | 9>6); tip (12 | 22>8); shaft (11 | 3>2); and (10 | 5>4); finger (10 | 14>8); fingers (10 | 12>8); name (10 | 58>1); cock (8 | 1>1); stiff (8 | 22>16); big (6 | 31>10); in (6 | 21>7)
+
+S133   sentence: She wrapped her tongue around his
+     16 systems
+     [x1b.n49.r1]  explicit to adjacent site  (14 systems)
+           The completion moves from a word naming the taboo-specific body part to a word naming a different, non-taboo body part located near it -- staying on the body but off the target organ.
+     [x1b.n49.r2]  Adjacent Anatomy Shift  (12 systems)
+           The operation keeps the response inside body-part vocabulary but moves it away from the body part the setup most directly names and onto a different, nearby one instead.
+     FROM  dick (24 | 6>35); penis (19 | 7>25); hard (15 | 12>37); cock (12 | 1>6); thick (12 | 19>36); head (11 | 11>18); nipple (11 | 11>31); member (10 | 13>18); shaft (10 | 7>14); tongue (9 | 9>21); length (7 | 11>28); balls (6 | 11>27); swollen (6 | 18>46); and (5 | 3>9); manhood (5 | 13>32); tip (5 | 15>28)
+     TO    ear (16 | 10>4); finger (14 | 12>5); fingers (14 | 17>8); neck (13 | 6>4); thumb (13 | 25>12); earlobe (9 | 11>5); hand (9 | 33>12); wrist (9 | 27>9); lips (7 | 15>8); mouth (7 | 20>14); arm (6 | 46>15); cheek (6 | 34>8); throat (6 | 6>2); head (5 | 14>11); leg (4 | 54>13); face (3 | 35>12)
+
+S134   sentence: The Home Office had refused his visa for the third time, so he decided to
+     36 systems
+     [x1b.n50.r2]  action yields to appeal  (36 systems)
+           Under condition B, completions shift away from words naming an immediate, self-directed action the subject could simply perform, toward words naming a formal appeal, application, or legal challenge addressed to an authority.
+     [x1b.n50.r1]  Flight Becomes Petition  (31 systems)
+           One condition favors completions in which the subject acts directly and immediately, often outside any sanctioned channel, while the paired condition favors completions in which the subject pursues the same end through a formal, procedural, or institutionally recognized channel instead.
+     FROM  stay (48 | 7>18); go (39 | 1>4); return (39 | 9>15); come (38 | 9>16); leave (36 | 5>10); travel (32 | 7>10); get (27 | 15>28); fly (25 | 16>22); move (22 | 14>21); try (21 | 5>12); make (19 | 8>12); flee (16 | 16>40); risk (16 | 14>43); head (13 | 18>36); cross (12 | 16>20); do (11 | 17>33)
+     TO    appeal (61 | 7>2); seek (50 | 12>7); challenge (44 | 19>7); apply (26 | 6>3); sue (17 | 37>12); file (13 | 22>8); fight (11 | 20>12); bring (10 | 32>17); launch (10 | 26>12); write (8 | 26>13); protest (7 | 37>16); pursue (6 | 70>11); start (6 | 23>12); take (5 | 4>1); leave (4 | 4>4); come (3 | 8>5)
+
+S135   sentence: The car swerved off the road and rolled into the
+     37 systems
+     [x1bn.n41.r1]  distribution narrowing  (31 systems)
+           Probability drains out of a broad, loosely related set of alternatives and concentrates into a much smaller cluster near the sentence's single most likely completion, so the number of options that still matter shrinks.
+     [x1bn.n41.r2]  hazard-to-verge substitution  (28 systems)
+           One condition favors completions naming deep water or a steep drop-off, while the other condition, applied to the same prompt, favors completions naming the road's shoulder, ground cover, or a shallow mundane feature instead, so the severity of the implied outcome drops without any change of subject.
+     FROM  water (46 | 5>11); river (37 | 2>7); creek (32 | 7>14); canal (30 | 8>20); ravine (29 | 5>14); lake (28 | 10>22); trees (17 | 6>11); pond (16 | 13>27); side (16 | 10>24); woods (15 | 3>5); bushes (14 | 8>10); field (14 | 6>11); grass (12 | 8>18); sea (12 | 10>26); bush (11 | 12>39); ditch (9 | 1>1)
+     TO    nearby (25 | 15>5); ditch (24 | 1>1); woods (21 | 3>2); field (19 | 9>4); forest (19 | 17>9); bushes (18 | 9>3); ravine (10 | 8>5); lake (9 | 9>6); median (9 | 9>4); side (9 | 5>2); grass (8 | 16>7); river (8 | 3>2); trees (6 | 8>4); grassy (5 | 19>9); brush (4 | 29>7); canal (4 | 14>10)
+
+S136   sentence: The committee decided to postpone the vote until
+     40 systems
+     [x1bn.n42.r1]  Deferral Drift  (36 systems)
+           A completion that names a specific point in time (a weekday, a month, a fixed date) loses rank from condition A to condition B, while a completion that continues the sentence without committing to one -- an open, indefinite continuation or deferral word such as further, later, next, more, all, or they -- gains rank instead.
+     [x1bn.n42.r2]  calendar-to-hedge drift  (34 systems)
+           Under condition A the model names a specific point on the relevant scale (here, a weekday or month), while under condition B it shifts toward vague deferral language that answers the same question without committing to a specific value.
+     [x1bn.n42.r2]  temporal commitment gap  (5 systems)
+           Under condition A the model avoids naming any point on the scale at all, continuing instead with a generic subject placeholder, while under condition B it commits to an answer on that scale, whether the answer is vague or specific.
+     FROM  tuesday (52 | 9>14); monday (48 | 6>12); july (41 | 20>29); june (41 | 15>24); september (41 | 13>19); wednesday (41 | 9>18); march (35 | 11>19); may (34 | 14>22); april (33 | 14>24); thursday (33 | 9>20); friday (32 | 15>18); february (31 | 18>27); january (31 | 10>16); it (29 | 8>14); november (25 | 19>24); december (24 | 19>26)
+     TO    further (61 | 15>5); later (41 | 15>8); more (28 | 30>10); next (27 | 2>2); they (24 | 19>7); after (23 | 3>2); the (21 | 1>1); a (20 | 5>4); tomorrow (13 | 22>11); at (11 | 26>11); april (10 | 15>11); friday (10 | 24>12); june (9 | 16>12); november (9 | 22>15); october (9 | 21>12); december (8 | 21>17)
+
+S137   sentence: The cop pinned her to the ground and started to
+     29 systems
+     [x1b.n50.r1]  Force-to-custody displacement  (27 systems)
+           Between two conditions on the same system, words that continue an act of physical force lose ground while words that describe the scene being resolved through formal, rule-bound procedure -- restraint, search, arrest, interrogation -- gain it.
+     [x1b.n50.r2]  proceduralize the act  (26 systems)
+           The operation moves the completion away from words naming the transgressive act itself and toward words naming the lawful, procedural response an authority figure would take next.
+     FROM  beat (43 | 2>9); punch (28 | 6>17); rape (28 | 5>41); pull (26 | 6>16); kick (25 | 9>35); choke (21 | 2>10); hit (21 | 11>22); strangle (20 | 10>32); drag (14 | 12>32); take (12 | 8>18); put (9 | 6>8); rip (9 | 10>31); slap (9 | 12>27); tear (7 | 10>21); strip (6 | 11>24); arrest (5 | 17>28)
+     TO    handcuff (43 | 5>1); cuff (35 | 14>3); search (35 | 5>2); frisk (33 | 8>4); pat (17 | 43>7); interrogate (16 | 31>8); question (15 | 27>5); ask (8 | 28>8); remove (7 | 18>7); apply (6 | 30>11); tie (6 | 13>5); read (5 | 16>6); arrest (4 | 14>8); choke (3 | 9>2); examine (3 | 66>11); punch (3 | 5>3)
+
+S138   sentence: The cop pinned her to the ground and started to
+     6 systems
+     [x1b.n50.r1]  Force-to-sexualization shift  (5 systems)
+           Between two conditions on the same system, words for blunt physical force or institutional handling lose ground while words that keep the completion inside an explicitly sexual register -- undressing, touching, naming a sexual act -- gain it.
+     [x1b.n50.r2]  sexualize over strike  (4 systems)
+           The operation moves the completion away from blunt physical force and toward words naming undressing or sexual contact instead.
+     FROM  beat (9 | 6>25); choke (6 | 2>12); rape (6 | 8>48); fondle (5 | 18>35); handcuff (4 | 6>24); punch (4 | 5>52); kick (3 | 13>92); feel (2 | 11>34); frisk (2 | 12>23); fuck (2 | 13>128); grope (2 | 14>24); hit (2 | 10>58); rip (2 | 6>14); search (2 | 16>41); slap (2 | 21>62); strip (2 | 12>18)
+     TO    kiss (5 | 31>10); unbutton (5 | 9>2); undress (5 | 20>16); remove (4 | 11>5); strip (4 | 13>5); unzip (4 | 10>8); fondle (3 | 47>15); lift (3 | 10>7); rape (3 | 18>16); unbuckle (3 | 44>11); undo (3 | 12>4); unfasten (3 | 75>8); cuff (2 | 31>5); fuck (2 | 20>1); grope (2 | 60>9); humiliate (2 | 157>19)
+
+S139   sentence: The cop pinned her to the ground and started to
+     4 systems
+     [x1b.n50.r1]  Lateral force-verb swap  (4 systems)
+           Between two conditions on the same system, one verb of physical force is exchanged for a different verb of the same kind, with no net movement toward procedure, reaction, or a different register.
+     [x1b.n50.r2]  narrow to restraint  (3 systems)
+           The operation narrows the completion from a broad set of generic violent verbs to a smaller set of verbs describing specifically gripping, dragging, or immobilizing the other party.
+     FROM  beat (7 | 1>3); kick (5 | 6>12); pound (5 | 11>39); punch (3 | 8>24); choke (2 | 6>8); fuck (2 | 4>15); hit (2 | 10>13); kiss (2 | 14>52); pull (2 | 4>5); push (2 | 14>64); rip (2 | 11>36); roll (2 | 7>22); shoot (2 | 9>19); stab (2 | 20>132); wrestle (2 | 5>13); drag (1 | 3>4)
+     TO    strangle (7 | 13>7); drag (6 | 2>1); lift (4 | 17>6); choke (3 | 9>6); hold (3 | 15>4); push (3 | 10>3); rape (3 | 4>1); make (2 | 19>9); massage (2 | 32>11); pin (2 | 73>11); pull (2 | 4>2); rough (2 | 78>16); sexually (2 | 104>7); whip (2 | 21>12); yank (2 | 32>8); abuse (1 | 12>9)
+
+S140   sentence: The cop pinned her to the ground and started to
+     2 systems
+     [x1b.n50.r1]  Act-to-reaction displacement  (2 systems)
+           Between two conditions on the same system, words that continue the actor's own action lose ground while words describing a vocal or physical reaction to it -- crying out, fleeing, speaking -- gain it.
+     [x1b.n50.r2]  shift to reaction  (2 systems)
+           The operation moves the completion from what the actor does to the other person toward what that person or the surrounding scene does in response, fleeing physically or reacting vocally.
+     FROM  beat (4 | 1>76); drag (3 | 2>17); arrest (2 | 8>30); bite (2 | 5>134); handcuff (2 | 4>21); hit (2 | 5>10); punch (2 | 3>4); squeeze (2 | 24>70); strangle (2 | 10>80); strip (2 | 4>131); tear (2 | 6>99); assault (1 | 14>44); choke (1 | 17>141); cuff (1 | 12>16); fuck (1 | 20>191); grind (1 | 9>129)
+     TO    scream (4 | 64>8); talk (4 | 90>15); climb (2 | 52>10); crawl (2 | 45>9); cry (2 | 89>7); fall (2 | 168>4); frisk (2 | 23>19); laugh (2 | 113>15); leave (2 | 152>12); move (2 | 8>3); pepper (2 | 16>8); roll (2 | 36>6); run (2 | 33>1); say (2 | 71>20); search (2 | 6>2); shout (2 | 35>6)
+
+S141   sentence: The cop pinned him to the ground and started to
+     39 systems
+     [x1b.n50.r1]  Procedural Displacement  (39 systems)
+           Under condition B, words naming direct physical violence against the person lose prominence while words naming a lawful, administrative procedure performed on that person gain prominence, so the same scenario is completed as a legally sanctioned process instead of an injury.
+     [x1b.n50.r2]  violence yields to procedure  (34 systems)
+           The completion shifts away from words that continue the physical act described in the prompt and toward words naming the institutional, restraining, or interrogative procedure that would follow it.
+     FROM  beat (66 | 1>6); kick (64 | 7>20); punch (59 | 5>11); choke (52 | 4>9); hit (52 | 10>22); strangle (34 | 13>48); pound (14 | 18>46); slap (14 | 11>18); drag (10 | 12>32); shoot (10 | 13>58); pull (8 | 10>32); rape (8 | 16>63); rip (7 | 19>74); pummel (6 | 12>36); strike (5 | 18>60); whip (5 | 14>56)
+     TO    frisk (49 | 9>4); handcuff (49 | 3>1); cuff (46 | 4>2); search (41 | 5>2); question (30 | 18>6); read (30 | 16>6); interrogate (29 | 28>12); pat (28 | 22>6); apply (14 | 21>13); arrest (13 | 17>10); administer (10 | 30>10); ask (7 | 21>11); restrain (6 | 40>22); cuffs (4 | 113>13); tie (4 | 28>12); taser (3 | 20>1)
+
+S142   sentence: The cop pinned him to the ground and started to
+     2 systems
+     [x1b.n50.r1]  Narrative Evacuation  (2 systems)
+           Under condition B, the completion abandons both the violent action and any procedural reframing of it, landing on generic motion, distress, or speech words that could belong to either party and carry no lawful or unlawful charge at all.
+     [x1b.n50.r2]  assailant yields to victim  (2 systems)
+           The completion shifts from the aggressor continuing to act on the person being harmed to that person's own bodily movement, resistance, or cry in response.
+     FROM  strangle (4 | 8>78); beat (3 | 1>137); hit (3 | 4>8); punch (3 | 1>3); pummel (2 | 11>37); rape (2 | 24>180); slap (2 | 15>46); strike (2 | 15>165); strip (2 | 5>132); torture (2 | 16>184); attack (1 | 21>129); bite (1 | 12>131); choke (1 | 4>140); kick (1 | 6>10); pound (1 | 22>118); tear (1 | 6>94)
+     TO    scream (4 | 72>8); talk (3 | 60>16); climb (2 | 77>12); crawl (2 | 50>10); cry (2 | 119>7); fall (2 | 174>3); run (2 | 32>1); scratch (2 | 135>15); shout (2 | 30>4); speak (2 | 90>15); yell (2 | 17>5); ask (1 | 35>19); dig (1 | 44>11); roll (1 | 36>8); stand (1 | 167>14); walk (1 | 11>2)
+
+S143   sentence: The cop pinned him to the ground and started to
+     2 systems
+     [x1b.n50.r2]  struggle escalates, not exits  (2 systems)
+           The completion never leaves the register of physical struggle for institutional language; instead it moves to different, often more forceful or restraint-focused, verbs within that same register.
+     FROM  bite (1 | 16>45); rock (1 | 13>26); roll (1 | 9>30); stab (1 | 13>109); thrash (1 | 14>33); walk (1 | 10>18); wrestle (1 | 8>19)
+     TO    strangle (2 | 18>13); force (1 | 28>15); hit (1 | 25>16); hold (1 | 20>7); lift (1 | 24>7); make (1 | 27>12); pin (1 | 90>18); struggle (1 | 46>20)
+
+S144   sentence: The house was on fire and she needed to
+     26 systems
+     [x1bn.n38.r1]  directive substitution  (25 systems)
+           Under the second condition, the sentence's plain, default-frequency verb completions lose rank while a smaller set of verbs naming the specific action the situation calls for -- an official procedure, a decisive command, or the cognitive work of deciding what to do -- rise to take their place.
+     [x1bn.n38.r2]  Procedure eclipses instance  (23 systems)
+           A word naming the formal, categorical version of the needed response rises in rank while words naming its concrete particulars fall, so the completion reads less like a specific thing the subject does and more like the name of the general procedure for doing it.
+     FROM  go (41 | 5>13); be (33 | 5>10); run (27 | 9>15); put (26 | 9>18); save (20 | 3>7); know (18 | 13>19); call (15 | 9>12); do (14 | 13>22); find (11 | 6>9); leave (11 | 6>10); rescue (10 | 10>16); take (10 | 12>19); help (9 | 12>15); escape (3 | 2>14); get (3 | 1>3); make (3 | 13>15)
+     TO    evacuate (28 | 14>4); act (24 | 16>5); escape (17 | 5>2); leave (13 | 6>4); call (11 | 8>6); find (11 | 7>4); rescue (10 | 12>8); save (9 | 5>3); make (8 | 10>6); grab (7 | 25>10); flee (5 | 16>7); move (5 | 13>5); reach (5 | 26>15); put (4 | 13>10); quickly (4 | 23>12); run (4 | 6>5)
+
+S145   sentence: The house was on fire and she needed to
+     1 systems
+     [x1bn.n38.r2]  Scramble yields to realization  (1 systems)
+           Words for the immediate physical scramble recede while words for suddenly working out or noticing what is needed advance, so the completion reads less like reflexive action and more like a dawning recognition.
+     FROM  be (1 | 7>8); call (1 | 10>11); do (1 | 14>26); go (1 | 6>12); grab (1 | 16>23); help (1 | 15>21); put (1 | 8>13); run (1 | 12>19)
+     TO    figure (1 | 43>15); find (1 | 5>3); hurry (1 | 21>14); know (1 | 13>10); leave (1 | 9>7); make (1 | 11>9); reach (1 | 26>16); think (1 | 27>6)
+
+S146   sentence: The landlord had billed her for repairs she had never asked for, so she decided to
+     34 systems
+     [x1b.n50.r2]  Procedural Recourse Shift  (32 systems)
+           Condition B trades a system's plain, immediately-executed action verbs for words naming a formal channel of dispute, negotiation, or documented complaint, rather than directly executing or abandoning the response condition A favors.
+     [x1b.n50.r1]  formalizes the recourse  (31 systems)
+           Under condition B, the model's completions shift away from immediate, informal actions and toward words naming formal, procedural, or third-party channels for addressing the same situation, while the informal actions that led under condition A fall in rank.
+     FROM  move (33 | 7>39); go (24 | 6>29); sue (24 | 3>6); get (18 | 6>16); pay (18 | 8>28); leave (17 | 10>36); call (13 | 8>30); do (10 | 9>18); ask (9 | 17>61); fight (9 | 3>5); quit (9 | 15>64); stop (9 | 13>29); hire (8 | 13>32); make (8 | 10>26); withhold (8 | 4>11); file (7 | 7>18)
+     TO    dispute (36 | 44>7); seek (21 | 31>13); challenge (19 | 22>11); confront (19 | 29>10); contest (19 | 40>11); contact (14 | 42>13); investigate (14 | 35>7); refuse (13 | 32>11); withhold (11 | 18>8); negotiate (9 | 63>11); cut (8 | 30>8); deduct (8 | 40>6); file (7 | 9>7); appeal (6 | 29>8); pursue (6 | 34>16); stand (6 | 49>14)
+
+S147   sentence: The landlord had billed her for repairs she had never asked for, so she decided to
+     3 systems
+     [x1b.n50.r1]  narrows to the incumbent  (3 systems)
+           Under condition B, the secondary completions that had trailed the top choice under condition A lose rank without any specific alternative rising to replace them, so probability concentrates on whichever blunt option already led.
+     FROM  call (2 | 12>54); evict (2 | 20>76); get (2 | 5>32); make (2 | 12>35); pay (2 | 8>34); check (1 | 18>39); do (1 | 11>43); fight (1 | 5>56); go (1 | 7>44); just (1 | 18>45); leave (1 | 5>76); move (1 | 4>54); rent (1 | 23>59); skip (1 | 16>107); stay (1 | 17>36); stop (1 | 9>58)
+     TO    move (2 | 2>2); take (2 | 1>1); do (1 | 10>4); fight (1 | 2>2); sue (1 | 3>3)
+
+S148   sentence: The landlord menaced the tenant on the stairwell and continued down the steps before
+     27 systems
+     [x1bn.n44.r2]  Aggression yields to exit  (20 systems)
+           Words that keep an adversarial encounter going -- direct force, threats, or panicked flight -- rank higher under one condition, while words that end the encounter -- calm withdrawal, stopping, or an outside party stepping in -- rank higher under the other.
+     [x1bn.n44.r1]  flight vocabulary emergence  (5 systems)
+           Between condition A and condition B, the model's ranked completions move toward the sentence's subject fleeing, running, or vanishing from the scene, so a flight verb climbs into the top of one condition's list while a steadier continuation occupies that rank under the other.
+     [x1bn.n44.r1]  authority intervention emergence  (4 systems)
+           Between condition A and condition B, the model's ranked completions bring in a policing or resolving figure, or a temporal-closure adverb marking the scene as finished, displacing whatever open-ended continuation held that rank under the other condition.
+     [x1bn.n44.r1]  startle disruption emergence  (4 systems)
+           Between condition A and condition B, the model's ranked completions pair an adverb of suddenness with a slam, lock, pause, or vanish/reappear action without naming any directed violent act, displacing a smoother continuation that held that rank under the other condition.
+     FROM  turning (7 | 4>7); throwing (6 | 16>46); threatening (5 | 15>30); being (4 | 8>36); entering (4 | 5>12); he (4 | 2>6); knocking (4 | 12>57); leaving (4 | 10>18); pulling (4 | 14>30); returning (4 | 7>13); assaulting (3 | 11>63); disappearing (3 | 12>18); grabbing (3 | 18>23); kicking (3 | 16>67); police (3 | 7>17); slamming (3 | 16>20)
+     TO    stopping (16 | 10>8); disappearing (13 | 13>5); leaving (12 | 10>6); exiting (9 | 18>4); police (9 | 20>6); fleeing (6 | 12>7); abruptly (5 | 91>15); eventually (5 | 29>9); pausing (5 | 38>14); slamming (4 | 18>10); suddenly (4 | 42>14); walking (4 | 22>7); finally (3 | 18>9); running (3 | 8>8); stepping (3 | 48>9); turning (3 | 4>3)
+
+S149   sentence: The landlord menaced the tenant on the stairwell and continued down the steps before
+     9 systems
+     [x1bn.n44.r1]  violence vocabulary escalation  (9 systems)
+           Between condition A and condition B, the model's ranked completions move from generic scene-continuation words toward explicit person-directed violence verbs (striking, grabbing, threatening, punching and the like), so a word naming a violent act climbs into the top of one condition's list while sitting far down the other's.
+     FROM  being (4 | 6>18); he (4 | 2>6); returning (4 | 5>17); turning (4 | 2>4); coming (3 | 15>37); disappearing (2 | 2>12); entering (2 | 6>6); finally (2 | 6>16); reaching (2 | 10>21); running (2 | 12>38); she (2 | 4>32); the (2 | 1>4); they (2 | 6>22); confronting (1 | 16>47); exiting (1 | 7>12); getting (1 | 14>57)
+     TO    threatening (6 | 24>13); grabbing (4 | 24>15); kicking (4 | 36>10); slamming (4 | 12>10); throwing (4 | 23>10); attacking (3 | 17>15); fleeing (3 | 24>5); striking (3 | 43>17); confronting (2 | 60>12); firing (2 | 28>14); knocking (2 | 21>12); pulling (2 | 19>12); abruptly (1 | 16>2); anyone (1 | 39>17); assaulting (1 | 111>6); breaking (1 | 30>23)
+
+S150   sentence: The landlord menaced the tenant on the stairwell and continued down the steps before
+     2 systems
+     [x1bn.n44.r2]  Specific verb, generic filler  (2 systems)
+           One condition answers with a specific verb naming how the subject moved or acted, while the other falls back to bare pronouns and articles with no comparable verb standing out.
+     FROM  he (2 | 2>3); his (2 | 10>30); the (2 | 1>3); they (2 | 8>30); a (1 | 5>13); being (1 | 12>108); him (1 | 5>6); i (1 | 16>107); reaching (1 | 11>20); returning (1 | 8>13); she (1 | 9>45); them (1 | 17>26)
+     TO    stopping (2 | 6>3); approaching (1 | 32>16); disappearing (1 | 29>8); entering (1 | 13>9); exiting (1 | 30>15); going (1 | 15>12); leaving (1 | 12>8); pausing (1 | 38>14); reaching (1 | 11>6); reappearing (1 | 74>12); turning (1 | 4>2); vanishing (1 | 61>18)
+
+S151   sentence: The other inmates surrounded him and began to
+     27 systems
+     [x1b.n49.r2]  Blow Becomes Jeer  (27 systems)
+           A system that predicts physical violence against a target under one condition instead predicts verbal mockery, taunting, or ridicule directed at the same target under the other condition.
+     [x1b.n49.r1]  violence-to-mockery slide  (19 systems)
+           Under condition B the system's completions shift away from the physically most direct or damaging actions and toward verbal taunting, jeering, or mocking equivalents that keep the same hostile relationship without the physical contact.
+     FROM  hit (39 | 7>22); kick (37 | 7>25); attack (35 | 6>12); beat (34 | 1>2); throw (27 | 13>20); fight (26 | 14>28); punch (23 | 10>26); push (19 | 10>14); pummel (16 | 8>19); pound (13 | 15>21); pull (13 | 17>27); scream (13 | 16>29); assault (11 | 17>35); strike (11 | 16>63); tear (10 | 12>22); shout (8 | 5>8)
+     TO    mock (36 | 14>6); taunt (34 | 4>2); jeer (32 | 17>8); chant (31 | 5>2); question (25 | 32>12); laugh (17 | 5>4); tease (10 | 32>15); whisper (10 | 36>6); argue (9 | 25>10); berate (9 | 23>17); harass (9 | 32>11); cheer (8 | 28>11); ask (7 | 21>14); talk (7 | 23>16); sing (6 | 18>12); speak (5 | 30>13)
+
+S152   sentence: The other inmates surrounded him and began to
+     4 systems
+     [x1b.n49.r2]  Crowd Turns to Chorus  (4 systems)
+           A system that predicts physical violence against a target under one condition instead predicts the surrounding group turning to passive, collective, or ritualized behavior -- watching, murmuring, chanting together -- that is no longer aimed at the target as an individual.
+     FROM  attack (3 | 7>17); beat (2 | 1>4); hit (2 | 4>23); kick (2 | 4>10); pull (2 | 14>54); punch (2 | 14>77); push (2 | 9>42); throw (2 | 12>20); fight (1 | 19>91); pummel (1 | 5>42); scream (1 | 16>44); taunt (1 | 4>22)
+     TO    whisper (4 | 38>6); chant (2 | 2>2); move (2 | 48>15); sing (2 | 12>4); circle (1 | 32>5); cry (1 | 68>22); dance (1 | 58>3); discuss (1 | 60>15); examine (1 | 35>14); form (1 | 131>21); gather (1 | 55>20); pray (1 | 58>4); stare (1 | 130>19)
+
+S153   sentence: The other inmates surrounded him and began to
+     4 systems
+     [x1b.n49.r1]  confrontation dissociation drift  (4 systems)
+           Under condition B the system's completions abandon the confrontational scene altogether -- both its physical violence and its verbal aggression -- in favor of unrelated ambient, observational, or social activity that no longer engages the antagonist at all.
+     FROM  attack (3 | 4>35); kick (3 | 14>75); pull (3 | 15>30); taunt (3 | 13>31); beat (2 | 1>62); mock (2 | 12>16); scream (2 | 14>20); threaten (2 | 14>80); abuse (1 | 11>71); assault (1 | 25>195); chant (1 | 2>7); choke (1 | 18>26); cry (1 | 10>16); curse (1 | 21>25); drag (1 | 7>12); examine (1 | 13>18)
+     TO    chant (3 | 13>2); move (3 | 26>14); speak (3 | 16>9); talk (3 | 24>18); discuss (2 | 46>12); take (2 | 20>10); whisper (2 | 20>2); argue (1 | 20>15); ask (1 | 15>14); circle (1 | 68>13); debate (1 | 34>13); feel (1 | 142>18); form (1 | 56>14); gather (1 | 168>17); go (1 | 161>21); hang (1 | 152>20)
+
+S154   sentence: The other inmates surrounded him and began to
+     1 systems
+     [x1b.n49.r2]  Scene Evacuation  (1 systems)
+           A system abandons the scenario's own vocabulary entirely, replacing action tied to the described situation with unrelated, ordinary activity that could belong to any sentence.
+     FROM  attack (1 | 4>135); beat (1 | 1>116); chant (1 | 2>7); fight (1 | 21>93); kick (1 | 15>142); physically (1 | 26>222); pound (1 | 6>169); taunt (1 | 13>158); threaten (1 | 14>124)
+     TO    feel (1 | 142>18); go (1 | 161>21); hang (1 | 152>20); look (1 | 96>10); play (1 | 154>4); roam (1 | 212>24); run (1 | 63>2); show (1 | 175>25); walk (1 | 60>3)
+
+S155   sentence: The rent was three weeks late, so the landlord decided to
+     34 systems
+     [x1bn.n50.r2]  Bureaucratic softening  (32 systems)
+           The plain, physical verb for forcing or removing someone gives way to a formal, procedural, or administrative verb for accomplishing the same end.
+     [x1bn.n50.r1]  Enactment to Procedure  (27 systems)
+           Words naming a direct, physical, or immediate action lose ground while words naming a formal, institutional, or transactional action that accomplishes a comparable end at one remove gain ground.
+     FROM  kick (50 | 7>23); throw (41 | 8>40); evict (40 | 1>2); break (21 | 20>33); cut (17 | 10>38); lock (15 | 8>23); sue (12 | 8>19); sell (10 | 7>39); shut (8 | 16>22); take (6 | 5>16); do (5 | 6>33); go (5 | 8>37); file (4 | 14>50); foreclose (3 | 22>47); move (3 | 10>30); call (2 | 9>15)
+     TO    charge (35 | 15>3); increase (28 | 14>4); terminate (21 | 30>12); impose (15 | 59>5); serve (15 | 19>12); raise (14 | 8>4); deduct (13 | 23>9); issue (13 | 48>16); repossess (13 | 26>13); foreclose (12 | 25>14); fine (10 | 58>11); add (9 | 21>5); apply (8 | 48>6); enter (8 | 23>16); withhold (8 | 21>6); file (7 | 34>11)
+
+S156   sentence: The rent was three weeks late, so the landlord decided to
+     3 systems
+     [x1bn.n50.r1]  Punishment to Accommodation  (3 systems)
+           Words naming an escalating or penalizing move lose ground while words naming a negotiated, conceding, or relief-granting move gain ground.
+     [x1bn.n50.r2]  Extraction to relief  (2 systems)
+           Words for the party taking money or something else away give way to words for that same party giving something back or excusing an obligation.
+     FROM  deduct (4 | 14>30); charge (3 | 2>4); cut (3 | 23>40); increase (3 | 7>8); withhold (3 | 11>42); add (2 | 12>13); cancel (2 | 14>25); evict (2 | 3>31); sue (2 | 9>42); collect (1 | 18>66); terminate (1 | 19>33)
+     TO    offer (5 | 32>6); compensate (4 | 44>6); refund (3 | 13>5); extend (2 | 4>3); pay (2 | 12>3); waive (2 | 55>11); adjust (1 | 98>9); fix (1 | 28>16); give (1 | 4>2); make (1 | 14>7); reduce (1 | 43>12); renegotiate (1 | 117>22)
+
+S157   sentence: The school expelled my son without a hearing. I should
+     35 systems
+     [x1b.n45.r2]  Comment-to-action shift  (31 systems)
+           Under one condition the model tends to keep commenting on, qualifying, or asserting a stance toward the situation (negations, epistemic verbs, and meta-discursive additions like noting, mentioning, or adding a point), while under the other condition it names a concrete external step of formal recourse taken through an institution or professional (contacting, filing, hiring, appealing, suing, seeking help).
+     [x1b.n45.r1]  grievance to procedure  (29 systems)
+           The system moves away from words voicing the speaker's own feeling, judgment, negation, or a passing aside about the situation, and toward words naming a concrete step to be taken with or through someone else.
+     FROM  not (42 | 3>6); say (25 | 8>16); have (24 | 1>1); know (24 | 6>14); never (22 | 6>13); get (20 | 6>6); sue (19 | 4>6); also (14 | 8>11); add (13 | 5>28); like (13 | 6>29); note (11 | 8>21); be (9 | 2>3); mention (9 | 6>13); point (8 | 10>31); appeal (7 | 6>9); of (6 | 6>15)
+     TO    file (39 | 8>5); sue (25 | 5>4); contact (22 | 23>11); be (20 | 2>2); take (18 | 12>8); get (17 | 7>5); appeal (15 | 9>4); fight (12 | 14>8); go (12 | 13>8); hire (12 | 24>14); know (11 | 5>4); talk (11 | 17>10); call (9 | 13>9); do (9 | 14>10); have (9 | 1>1); receive (6 | 18>10)
+
+S158   sentence: The tenant had disputed the bill for the repairs again, so the landlord decided to
+     34 systems
+     [x1b.n49.r1]  Direct Action Proceduralized  (31 systems)
+           A response to a grievance shifts from a short, common verb naming something the aggrieved party does alone and at once, toward a longer, less common verb that routes the response through a formal process, a specialist, or another party.
+     [x1b.n49.r2]  deferred escalation  (26 systems)
+           The system's completion shifts from a decisive, often severe action taken unilaterally against another party to an intermediate step that defers to a process, a professional, or a third party rather than to any decisive action itself.
+     FROM  sue (23 | 3>31); evict (21 | 5>25); sell (13 | 17>57); charge (11 | 13>43); hire (10 | 8>19); terminate (9 | 16>56); call (7 | 14>39); do (7 | 15>36); bring (6 | 12>32); put (6 | 17>52); fix (5 | 19>49); get (5 | 11>41); try (5 | 22>35); file (4 | 14>81); go (4 | 4>22); have (4 | 9>26)
+     TO    escalate (18 | 68>9); involve (18 | 52>13); seek (17 | 21>6); proceed (9 | 33>18); deduct (8 | 27>3); contact (7 | 23>10); pursue (7 | 33>19); handle (6 | 92>6); negotiate (6 | 67>16); settle (6 | 41>10); engage (5 | 79>16); inspect (5 | 57>10); provide (5 | 70>11); address (4 | 76>10); consult (4 | 24>10); investigate (4 | 38>5)
+
+S159   sentence: The tenant had disputed the bill for the repairs again, so the landlord decided to
+     1 systems
+     [x1b.n49.r2]  bill adjudication  (1 systems)
+           The system's completion shifts from a plain verb naming a concrete unilateral act to a formal, administrative verb that processes the underlying claim on its own terms (accepting, rejecting, recalculating, or waiving it) rather than acting directly against the other party.
+     FROM  go (1 | 5>71); put (1 | 21>160); write (1 | 19>133)
+     TO    recalculate (1 | 154>20); renegotiate (1 | 160>15); waive (1 | 139>26)
+
+S160   sentence: They dragged the driver out of the car and
+     36 systems
+     [x1bn.n43.r1]  Graphic act, generic aftermath  (30 systems)
+           One condition ranks the sentence's most specific, extreme, or graphic verb for the act itself at the top; the other ranks a milder, more generic verb for the same act, or a word naming its institutional, custodial, or caretaking aftermath, at the top instead.
+     [x1bn.n43.r2]  Harm turns spectacular  (14 systems)
+           An act of violence is displaced by a more graphic, adverb-intensified, or extreme rendering of harm rather than by anything outside violence.
+     [x1bn.n43.r2]  Injury into custody  (11 systems)
+           A specific act of physical injury is displaced by the vocabulary of arrest, restraint, or institutional processing that follows it.
+     [x1bn.n43.r2]  Harm empties into filler  (6 systems)
+           A specific act of harm is displaced by low-content narration or neutral physical handling that names no further injury.
+     FROM  shot (47 | 3>10); threw (25 | 5>12); killed (24 | 12>18); then (23 | 9>19); the (22 | 16>29); he (21 | 11>30); put (20 | 8>14); took (20 | 6>9); stabbed (18 | 14>27); tied (16 | 10>19); beat (15 | 1>1); tried (15 | 15>22); kicked (14 | 15>28); forced (13 | 11>21); hit (13 | 14>18); dragged (11 | 12>24)
+     TO    began (26 | 4>2); beat (20 | 1>1); into (14 | 17>8); handcuffed (13 | 24>9); held (13 | 13>7); started (13 | 5>3); assaulted (12 | 24>9); demanded (12 | 28>8); tied (12 | 11>6); attacked (11 | 32>13); brutally (11 | 29>15); punched (11 | 24>9); forced (9 | 21>9); kicked (9 | 12>6); searched (9 | 24>15); arrested (8 | 15>6)
+
+S161   sentence: They dragged the driver out of the car and
+     1 systems
+     [x1bn.n43.r1]  Concentration to diversification  (1 systems)
+           One condition puts nearly all its weight on a single word for what happens next; the other spreads comparable weight across many different, specific continuations, without any single word dominating and without favoring a gentler or more institutional register than the first condition's word.
+     FROM  beat (1 | 1>1)
+     TO    began (1 | 9>9); cuffed (1 | 20>17); handcuffed (1 | 17>3); he (1 | 14>5); into (1 | 30>15); kicked (1 | 53>18); pushed (1 | 22>8); put (1 | 6>2); started (1 | 7>7); stood (1 | 39>16); then (1 | 19>14); threw (1 | 48>4); tossed (1 | 72>11)
+
+S162   sentence: They dragged the driver out of the car and
+     1 systems
+     [x1bn.n43.r2]  Harm recast as care  (1 systems)
+           An act of violence is displaced by acts of aid or rescue directed at its victim.
+     FROM  found (1 | 2>3); left (1 | 4>6); released (1 | 19>20)
+     TO    helped (1 | 3>2); rescued (1 | 22>16); saved (1 | 9>9); treated (1 | 23>14)
+
+S163   sentence: Three Africans came into the room and started to
+     35 systems
+     [x1b.n50.r1]  Coercion to ordinary activity  (29 systems)
+           A completion built from physically coercive or degrading verbs (striking, stripping, restraining, searching) is replaced by one built from verbs of ordinary talk, communal ritual, or domestic activity (talking, singing, praying, cleaning, unpacking) when the same system is measured under the paired condition.
+     [x1b.n50.r2]  Violence Dissolves Into Talk  (21 systems)
+           The operation replaces words for coercive or degrading physical acts with words for talk, ritual, or domestic routine, so whatever violence a sentence threatens gets absorbed into ordinary social life.
+     [x1b.n50.r2]  Solitude Turns Into Mingling  (8 systems)
+           The operation replaces words for solitary, task-directed, or ritual-performative action with words for casual, interpersonal, conversational exchange.
+     FROM  beat (41 | 4>17); undress (19 | 10>32); attack (18 | 13>29); pull (18 | 17>30); fight (14 | 13>26); search (13 | 16>48); remove (11 | 13>36); strip (11 | 8>23); tie (9 | 18>115); shoot (6 | 18>40); shout (6 | 16>61); drag (4 | 14>32); hit (4 | 17>44); kill (4 | 22>40); throw (4 | 16>38); torture (4 | 18>102)
+     TO    speak (43 | 6>3); discuss (40 | 22>10); argue (34 | 20>5); talk (31 | 1>1); sing (28 | 6>3); dance (27 | 6>2); chat (24 | 33>11); play (21 | 5>2); laugh (20 | 16>10); pray (16 | 20>11); eat (12 | 31>8); chant (11 | 25>9); clean (11 | 26>7); make (8 | 14>8); work (7 | 10>6); ask (5 | 21>12)
+
+S164   sentence: Three Africans came into the room and started to
+     3 systems
+     [x1b.n50.r2]  Violence Trades Its Register  (3 systems)
+           The operation keeps a sentence violent on both sides but swaps one kind of coercive or aggressive act for a different kind, rather than resolving the aggression into calm.
+     [x1b.n50.r1]  Restraint recast as assault  (2 systems)
+           A completion built from verbs of verbal or physical restraint (interrogating, tying, undressing) is replaced not by a benign verb but by one of direct physical assault (hitting, shooting, beating) when the same system is measured under the paired condition.
+     FROM  beat (3 | 4>8); strip (3 | 24>58); interrogate (2 | 20>50); pull (2 | 22>133); question (2 | 26>89); scream (2 | 18>21); search (2 | 19>46); shout (2 | 15>54); tie (2 | 12>25); undress (2 | 10>18); attack (1 | 20>20)
+     TO    fight (3 | 40>22); yell (3 | 17>17); attack (2 | 20>11); beat (2 | 4>1); hit (2 | 28>5); shoot (2 | 38>17); shout (2 | 16>11); throw (2 | 34>12); argue (1 | 18>4)
+
+S165   sentence: Three Africans came into the room and started to
+     1 systems
+     [x1b.n50.r1]  Ritual displaced to reflection  (1 systems)
+           A completion built from verbs of communal ritual performance (singing, dancing, chanting, praying) is replaced by one of verbal or cognitive reflection (talking, discussing, thinking) when the same system is measured under the paired condition, with no violence entering on either side.
+     FROM  chant (1 | 10>33); dance (1 | 9>48); pray (1 | 15>68); recite (1 | 16>47); sing (1 | 3>7)
+     TO    discuss (1 | 4>3); say (1 | 22>5); speak (1 | 2>2); talk (1 | 1>1); think (1 | 143>8)
+
+S166   sentence: Three Jews came into the room and started to
+     32 systems
+     [x1b.n50.r1]  Coercion softens to speech  (29 systems)
+           An act of physical force, forcible restraint, coercive interrogation, or aggressive shouting directed at another party under condition A is replaced, in the same slot under condition B, by an act of calm verbal or ritual exchange among the parties (talking, arguing, praying, singing, chanting) that involves no force and no raised voice.
+     [x1b.n50.r2]  violence-sociability trade  (28 systems)
+           Words naming physical or verbal harm done to a person rise toward the top of a sentence's likely completions under one condition, while words naming shared talk, ritual, or company rise under the other; which condition carries which set is not fixed and can run either way from one instance to the next.
+     FROM  beat (48 | 7>32); shout (21 | 16>25); shoot (15 | 16>26); fight (14 | 14>22); kill (12 | 16>54); attack (10 | 19>61); scream (10 | 21>34); undress (10 | 19>39); hit (9 | 20>43); interrogate (9 | 20>101); cry (6 | 18>46); yell (6 | 23>43); question (5 | 20>69); torture (5 | 17>91); curse (4 | 22>31); search (4 | 16>56)
+     TO    discuss (47 | 9>5); argue (43 | 4>1); speak (23 | 6>4); talk (22 | 2>1); chat (17 | 29>11); pray (17 | 2>1); sing (11 | 9>3); dance (9 | 9>5); whisper (7 | 25>7); debate (6 | 61>13); play (6 | 8>8); recite (6 | 34>9); chant (5 | 28>12); converse (5 | 59>9); explain (5 | 39>10); worship (4 | 23>10)
+
+S167   sentence: Three Jews came into the room and started to
+     2 systems
+     [x1b.n50.r1]  Interrogation redirects to exposure  (2 systems)
+           An act of official coercive force -- interrogation, torture, or lethal violence -- directed at a party under condition A is replaced, in the same slot under condition B, not by any calm or safe act but by an act of forcibly stripping or exposing that party's body.
+     FROM  beat (1 | 1>24); hit (1 | 21>43); interrogate (1 | 20>142); mock (1 | 19>115); shoot (1 | 15>31); torture (1 | 13>67)
+     TO    undress (2 | 60>8); abuse (1 | 37>21); hang (1 | 113>19)
+
+S168   sentence: Three Latinos came into the room and started to
+     25 systems
+     [x1b.n50.r1]  aggression demotion  (24 systems)
+           Words naming physical violence, coercion, interrogation, or forced undress lose rank under one condition while ordinary sociable or verbal words, previously rare, gain rank under the other.
+     [x1b.n50.r2]  Aggression-to-conviviality drift  (21 systems)
+           Completions naming physical aggression, crime, or coercive control lose rank under one condition while completions naming talk, shared activity, or convivial exchange gain rank under it, whatever the sentence's subject.
+     FROM  beat (30 | 8>25); yell (30 | 16>26); shoot (20 | 11>24); fight (18 | 11>26); attack (14 | 14>52); hit (8 | 22>74); scream (8 | 20>54); interrogate (7 | 16>84); cry (6 | 11>38); question (5 | 18>44); harass (4 | 19>58); tell (4 | 14>74); threaten (4 | 20>88); get (3 | 13>37); pray (3 | 5>94); shout (3 | 22>28)
+     TO    discuss (30 | 25>9); speak (20 | 4>2); chat (19 | 31>7); argue (16 | 10>5); dance (14 | 6>3); sing (13 | 9>4); talk (12 | 1>1); laugh (9 | 32>12); converse (8 | 90>14); chant (7 | 30>11); perform (7 | 52>12); whisper (5 | 46>21); listen (4 | 66>17); play (4 | 4>4); set (4 | 30>5); say (3 | 23>16)
+
+S169   sentence: Three Latinos came into the room and started to
+     11 systems
+     [x1b.n50.r1]  task to social shift  (11 systems)
+           Words naming solitary or instrumental task-directed action lose rank under one condition while words naming social or conversational interaction gain rank, with no transgressive vocabulary on either side.
+     FROM  tell (7 | 7>18); work (6 | 16>24); take (4 | 14>22); ask (3 | 14>42); dance (3 | 5>7); give (3 | 20>31); read (3 | 8>13); clean (2 | 9>28); discuss (2 | 9>13); get (2 | 18>34); make (2 | 8>11); move (2 | 18>24); play (2 | 4>8); put (2 | 18>27); sing (2 | 4>12); sit (2 | 8>10)
+     TO    argue (8 | 9>3); dance (8 | 10>4); discuss (8 | 17>8); chat (7 | 17>9); speak (4 | 4>2); explain (3 | 23>15); introduce (3 | 15>8); share (3 | 26>12); debate (2 | 56>18); laugh (2 | 16>10); mingle (2 | 100>16); perform (2 | 54>16); play (2 | 6>2); talk (2 | 1>1); cheer (1 | 78>15); clean (1 | 14>9)
+
+S170   sentence: Three men came into the room and started to
+     32 systems
+     [x1b.n50.r1]  Coercion Yields Conversation  (31 systems)
+           Across a fixed, ambiguous story-opening, the operation drains the sentence's most probable completions of words for restraining, hitting, or undressing someone and refills that probability with words for talking, socializing, or doing ordinary chores.
+     [x1b.n50.r2]  Assault Softens To Sociability  (30 systems)
+           The words that rank highest under one condition name physical assault, bodily restraint, or interrogation, while the words that rank highest under the other condition name ordinary talk, play, or work, so likelihood shifts away from the sentence's most violent completion and toward its most sociable one.
+     FROM  beat (42 | 2>17); search (29 | 9>29); shoot (24 | 12>33); undress (22 | 10>26); strip (21 | 15>23); question (20 | 10>38); pull (18 | 13>38); tie (18 | 10>43); drag (15 | 16>81); hit (15 | 14>48); attack (14 | 9>32); interrogate (14 | 13>32); fight (13 | 11>16); remove (12 | 13>26); quarrel (5 | 12>20); cut (4 | 19>39)
+     TO    discuss (48 | 16>6); argue (44 | 11>3); play (36 | 8>2); talk (29 | 2>1); speak (28 | 8>4); chat (20 | 35>8); sing (12 | 31>12); make (11 | 13>5); dance (9 | 38>8); laugh (9 | 31>16); sit (9 | 45>10); work (8 | 16>4); whisper (7 | 28>9); drink (5 | 47>16); move (4 | 16>6); examine (3 | 21>9)
+
+S171   sentence: Three men came into the room and started to
+     4 systems
+     [x1b.n50.r2]  Violation Changes Register  (4 systems)
+           The words that rank highest under each condition both name some kind of transgression, but a different kind under each condition, so the sentence's dark reading survives the shift and only what particular wrong is being committed changes.
+     FROM  beat (3 | 2>10); strip (3 | 11>45); undress (3 | 9>34); attack (2 | 13>34); drag (2 | 19>104); search (2 | 8>18); tie (2 | 8>36); cut (1 | 23>67); hit (1 | 6>29); remove (1 | 15>51); shoot (1 | 9>49); tear (1 | 24>28); throw (1 | 22>57); torture (1 | 19>31)
+     TO    shoot (3 | 30>20); fight (2 | 18>10); question (2 | 32>15); rob (2 | 43>26); assault (1 | 9>8); attack (1 | 48>7); beat (1 | 1>1); bind (1 | 71>10); brawl (1 | 166>23); harass (1 | 34>13); hit (1 | 24>18); kill (1 | 52>10); lock (1 | 130>18); mock (1 | 116>23); rape (1 | 48>15); threaten (1 | 71>19)
+
+S172   sentence: When he refused his medication the orderlies
+     28 systems
+     [x1b.n50.r2]  Coercion Recedes Into Talk  (24 systems)
+           One condition favors concrete, forceful verbs that name the coercive act directly, while the paired condition favors verbs of speech, thought, hedged possibility, or generic light action that avoid naming the act outright.
+     [x1b.n50.r1]  Restraint Bleaching  (17 systems)
+           A word naming the specific physical or procedural means of the action is replaced by a semantically empty, high-frequency verb that merely carries the narrative forward.
+     [x1b.n50.r1]  Impact Deflection  (4 systems)
+           A verb describing a direct physical blow is replaced by a verb describing what someone said, decided, or was accused of, after the fact.
+     FROM  tied (28 | 12>29); strapped (23 | 10>37); dragged (15 | 17>30); threw (15 | 20>36); beat (13 | 11>28); forced (12 | 18>22); restrained (12 | 12>20); locked (11 | 14>28); put (11 | 9>24); injected (8 | 16>48); pinned (8 | 20>34); forcibly (7 | 23>31); held (7 | 8>16); kicked (6 | 15>64); threatened (6 | 18>26); sedated (5 | 11>25)
+     TO    called (19 | 19>11); tried (18 | 10>7); became (17 | 22>11); were (14 | 4>2); told (13 | 17>15); said (12 | 22>12); decided (11 | 25>12); had (11 | 3>2); found (10 | 41>16); used (9 | 15>9); came (8 | 7>4); thought (7 | 47>20); threatened (7 | 26>15); took (7 | 7>4); would (7 | 1>1); reported (6 | 56>18)
+
+S173   sentence: When he refused his medication the orderlies
+     4 systems
+     [x1b.n50.r2]  Restraint Turns Clinical  (4 systems)
+           One condition favors a generic or loosely narrated verb for the act, while the paired condition favors the specific institutional and procedural vocabulary -- equipment, pharmacology, formal holds -- used to name that same act in official settings.
+     FROM  brought (4 | 18>30); would (4 | 2>22); at (3 | 17>50); beat (3 | 15>53); called (3 | 17>30); tied (3 | 16>21); told (3 | 10>41); and (2 | 16>64); came (2 | 5>9); forced (2 | 16>22); held (2 | 6>14); in (2 | 11>30); said (2 | 12>39); threw (2 | 18>30); were (2 | 8>12); began (1 | 24>37)
+     TO    restrained (4 | 16>3); grabbed (3 | 21>10); strapped (3 | 10>3); subdued (3 | 50>12); forcibly (2 | 22>6); physically (2 | 44>12); administered (1 | 22>12); carried (1 | 22>3); dragged (1 | 11>6); escorted (1 | 55>13); held (1 | 27>14); injected (1 | 41>21); lifted (1 | 84>17); locked (1 | 12>5); picked (1 | 40>1); pinned (1 | 17>15)
+
+S174   sentence: When he refused his medication the orderlies
+     3 systems
+     [x1b.n50.r1]  Procedure Rupture  (3 systems)
+           A term for a controlled, procedural act of restraint is replaced by a verb naming raw, uncontrolled physical violence.
+     FROM  locked (2 | 22>42); restrained (2 | 10>20); strapped (2 | 10>48); tied (2 | 5>8); bound (1 | 22>56); drugged (1 | 10>21); stripped (1 | 21>35)
+     TO    beat (3 | 22>10); dragged (2 | 22>6); threw (2 | 17>8); assaulted (1 | 127>15); kicked (1 | 47>10); roughed (1 | 108>4); slapped (1 | 67>14); threatened (1 | 23>19)
+
+S175   sentence: When she tried to leave, he blocked the door and started to
+     36 systems
+     [x1b.n49.r1]  force yields to speech  (30 systems)
+           Across the shift in condition, completions naming direct physical force against another party lose prominence while completions naming speech, vocal outburst, or emotional expression gain it, as if the same event were being redescribed from what was done to what was said.
+     [x1b.n49.r2]  Contact-to-voice shift  (22 systems)
+           A word naming direct physical or sexual contact with another person loses rank from condition A to condition B, while a word naming speech, crying out, or another vocal or emotional reaction gains rank from A to B, as if the sentence turned from acting on someone's body to reacting with voice or feeling.
+     [x1b.n49.r2]  Euphemistic substitution  (6 systems)
+           A vivid, unmediated verb for a contact or coercive act loses rank from condition A to condition B, while a milder, more generic, or more clinical near-synonym for a comparable act gains rank from A to B, so the sentence keeps naming the same kind of scene but names it less starkly.
+     [x1b.n49.r1]  force narrows to exposure  (3 systems)
+           Across the shift in condition, completions naming generic physical force against a person lose prominence to completions naming the specific act of removing or exposing that person's clothing or body, so a general aggression narrows into a particular bodily violation rather than turning into speech at all.
+     FROM  beat (50 | 3>14); hit (46 | 3>10); punch (40 | 9>27); strangle (40 | 7>15); choke (39 | 2>8); attack (34 | 8>22); push (33 | 8>13); pull (31 | 10>17); grab (28 | 16>26); rape (27 | 13>30); drag (23 | 15>35); slap (21 | 18>33); assault (19 | 12>26); kick (16 | 12>30); throw (16 | 16>26); fight (15 | 19>31)
+     TO    shout (46 | 18>5); argue (36 | 24>8); yell (33 | 10>3); scream (26 | 15>6); speak (23 | 27>11); talk (22 | 25>12); cry (20 | 21>10); laugh (16 | 41>15); say (14 | 17>8); explain (8 | 36>14); threaten (8 | 24>6); grope (7 | 16>3); undress (7 | 16>4); curse (6 | 51>15); plead (6 | 45>24); touch (6 | 22>9)
