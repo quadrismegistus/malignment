@@ -225,6 +225,36 @@ def compute_dtype(model_id, default=None):
     return dt, "roster env.dtype=%s" % name
 
 
+_CHAT_TPL_CACHE = None
+
+
+def _chat_template_override(model_id):
+    """A Jinja chat_template from roster/models/chat_templates.json, or None.
+
+    For checkpoints that ship no `chat_template` in their tokenizer but whose
+    training format is known and documented. Setting `tok.chat_template` at
+    load time makes `generate.render` work without any caller knowing the
+    override exists — which is the point: a framed measurement of AmberSafe
+    should not require a special code path.
+
+    **Only fires when the tokenizer ships nothing.** A model that already has a
+    template is never overridden, even if the file carries an entry for it.
+    """
+    global _CHAT_TPL_CACHE
+    if _CHAT_TPL_CACHE is None:
+        import json
+        p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "..", "roster", "models", "chat_templates.json")
+        try:
+            _CHAT_TPL_CACHE = json.load(open(p))
+        except (FileNotFoundError, json.JSONDecodeError):
+            _CHAT_TPL_CACHE = {}
+    entry = _CHAT_TPL_CACHE.get(model_id)
+    if isinstance(entry, dict):
+        return entry.get("template")
+    return None
+
+
 def _mpt_config(repo, revision):
     """Native MptConfig from a repo whose config.json predates strict typing."""
     import json
@@ -361,6 +391,11 @@ def load_for_twp(ck, dict_path=None, purge=False, say=None):
             tok, loader_id = T.load_tokenizer(
                 ck.repo, revision=ck.revision,
                 trust_remote_code=(mtype != "mpt"))
+            if not getattr(tok, "chat_template", None):
+                _tpl = _chat_template_override(ck.model_id)
+                if _tpl:
+                    tok.chat_template = _tpl
+                    say("  CHAT TEMPLATE OVERRIDE from roster/models/chat_templates.json")
             _dt, _why = compute_dtype(ck.repo)
             #: **ALWAYS SAY IT, INCLUDING THE DEFAULT.** This printed only when the
             #: dtype was NOT float16, so a mechanism that silently degraded to

@@ -1,0 +1,59 @@
+{
+ "_about": "Chat templates for checkpoints that ship none in their tokenizer. AUTHORED, not derived -- each template is sourced from the model's own training code, documentation, or repo, and cited below. A wrong template measures template-mismatch, not alignment, so these are conservative rather than inventive.",
+ "_how_used": "runners.load_for_twp sets tok.chat_template from this file when the tokenizer ships none. The override is logged. A model absent here AND absent in the tokenizer gets no template and cannot be framed -- which is the correct outcome for bloomz-7b1 and CT-LLM-SFT-DPO.",
+ "_verified": "Each template was tested on the loaded model with 'She was so angry she wanted to' and confirmed to produce coherent assistant-mode output (top-1 mass on a response word, not a continuation word). See the session that produced them.",
+
+ "BAAI/AquilaChat2-7B": {
+  "source": "predict.py in the model repo: template_map['AquilaChat2-7B'] -> 'aquila-v1' (NO_COLON_TWO style). Tokens <|startofpiece|>/<|endofpiece|> verified in added_tokens.json (ids 100000/100001).",
+  "template": "{% for m in messages %}{% if m['role']=='user' %}<|startofpiece|>{{ m['content'] }}{% elif m['role']=='assistant' %}<|endofpiece|>{{ m['content'] }}</s>{% endif %}{% endfor %}{% if add_generation_prompt %}<|endofpiece|>{% endif %}",
+  "gotchas": "Three OTHER templates in the same file belong to AquilaChat2-34B/-16K and legacy Aquila-v1, NOT this checkpoint."
+ },
+
+ "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+  "source": "github.com/ContextualAI/HALOs legacy branch, dataloader.py get_hh(): rewrites 'Human:' -> '\\n<|user|>\\n', 'Assistant:' -> '\\n<|assistant|>\\n'. config.yaml confirms defaults (wandb project 'archangel').",
+  "template": "{{ bos_token }}{% for message in messages %}{% if message['role'] == 'user' %}{{ '\n<|user|>\n' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\n<|assistant|>\n' + message['content'] }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ '\n<|assistant|>\n' }}{% endif %}",
+  "gotchas": "<|user|>/<|assistant|> are NOT registered special tokens -- plain BPE text. Use the legacy branch of HALOs, not main."
+ },
+
+ "lomahony/eleuther-pythia6.9b-hh-dpo": {
+  "source": "eric-mitchell/direct-preference-optimization reference implementation, recipe 'anthropic_dpo_pythia69': raw HH-RLHF convention, no rewriting. Circumstantial but strong -- no direct docs on this specific checkpoint.",
+  "template": "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\n\nHuman: ' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\n\nAssistant: ' + message['content'] }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ '\n\nAssistant:' }}{% endif %}",
+  "gotchas": "Inferred from the standard DPO reference codebase, not directly documented for this checkpoint."
+ },
+
+ "LLM360/AmberSafe": {
+  "source": "github.com/LLM360/amber-train instruction_finetune.sh -> FastChat train_mem.py; FastChat conversation.py get_conversation_template('vicuna') -> vicuna_v1.1. AmberChat's actual SFT training format. TESTED: Vicuna produces 84% mass on 'I' (assistant response mode); alternatives produce 57% or less.",
+  "template": "{{ 'A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user\\'s questions. ' }}{% for m in messages %}{% if m['role']=='user' %}USER: {{ m['content'] }} {% elif m['role']=='assistant' %}ASSISTANT: {{ m['content'] }}</s>{% endif %}{% endfor %}{% if add_generation_prompt %}ASSISTANT:{% endif %}",
+  "gotchas": "Four sources disagree (###Human, Vicuna, USER/ASSISTANT bare, raw). Vicuna v1.1 won on inference testing. AmberSafe's own DPO stage trained on bare unwrapped PKU-SafeRLHF prompts, so this template matches the SFT base (AmberChat) rather than the final DPO step."
+ },
+
+ "RWKV/rwkv-raven-7b": {
+  "source": "BlinkDL/rwkv-4-raven README (author's own card, explicitly labeled 'Best Prompt Format'): Bob/Alice persona names. TESTED: Bob/Alice and User/Bot both work (27% vs 24% on 'I'); ###Instruction/###Response is DEAD (100% mass on newline). Author's format chosen.",
+  "template": "{% for m in messages %}{% if m['role']=='user' %}{{ 'Bob: ' + m['content'] + '\n\n' }}{% elif m['role']=='assistant' %}{{ 'Alice: ' + m['content'] + '\n\n' }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ 'Alice:' }}{% endif %}",
+  "gotchas": "RWKV is a non-transformer RNN with no chat-token vocabulary. Trained on a MIX of formats (Alpaca, CodeAlpaca, Guanaco, GPT4All, ShareGPT), so multiple conventions partially work. Bob/Alice is the author's stated best."
+ },
+
+ "baichuan-inc/Baichuan2-7B-Chat": {
+  "source": "generation_config.json (user_token_id=195, assistant_token_id=196) + generation_utils.py build_chat_input in the model repo. Tokens decode as <reserved_106>/<reserved_107> via sentencepiece. Corroborated by official fine-tune.py.",
+  "template": "{% if messages[0]['role']=='system' %}{{ messages[0]['content'] }}{% set messages = messages[1:] %}{% endif %}{% for m in messages %}{% if m['role']=='user' %}<reserved_106>{{ m['content'] }}{% elif m['role']=='assistant' %}<reserved_107>{{ m['content'] }}{% endif %}{% endfor %}{% if add_generation_prompt %}<reserved_107>{% endif %}",
+  "gotchas": "tokenizer_config.json sets add_bos_token=false, overriding the class default. Must load via from_pretrained on this exact repo."
+ },
+
+ "gl198976/mpt-7b-instruct": {
+  "source": "Duplicate of mosaicml/mpt-7b-instruct. Dolly-style instruction/response format, documented in the model card. Single-turn only.",
+  "template": "{{ 'Below is an instruction that describes a task. Write a response that appropriately completes the request.\n### Instruction:\n' }}{{ messages[-1]['content'] }}{{ '\n### Response:\n' }}",
+  "gotchas": "Single-turn only -- multi-turn is undocumented. Requires trust_remote_code=True for the model, not the tokenizer."
+ },
+
+ "PKU-Alignment/beaver-7b-v1.0": {
+  "source": "github.com/PKU-Alignment/safe-rlhf constants.py: PROMPT_BEGIN='BEGINNING OF CONVERSATION: ', PROMPT_USER='USER: {input} ', PROMPT_ASSISTANT='ASSISTANT:'. Exact whitespace verified from source.",
+  "template": "{% for message in messages %}{% if message['role'] == 'user' %}{% if loop.first %}BEGINNING OF CONVERSATION: USER: {{ message['content'] }} {% else %}USER: {{ message['content'] }} {% endif %}{% elif message['role'] == 'assistant' %}ASSISTANT:{{ message['content'] }}{{ eos_token }}{% endif %}{% endfor %}{% if add_generation_prompt %}ASSISTANT:{% endif %}",
+  "gotchas": "No special tokens involved. Exact whitespace matters: one space after 'CONVERSATION:', one after 'USER:', none after 'ASSISTANT:'."
+ },
+
+ "togethercomputer/RedPajama-INCITE-7B-Chat": {
+  "source": "Official HF model card README: '<human>: [Instruction]\\n<bot>:'. Training data: OASST1 + Dolly2.",
+  "template": "{% for message in messages %}{% if message['role'] == 'user' %}{{ '<human>: ' + message['content'] + '\n' }}{% elif message['role'] == 'assistant' %}{{ '<bot>: ' + message['content'] + '\n' }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ '<bot>:' }}{% endif %}",
+  "gotchas": "<human>/<bot> are NOT registered special tokens -- plain text. Do not conflate with the sibling RedPajama-INCITE-7B-Instruct (different data/format)."
+ }
+}
