@@ -146,6 +146,65 @@ execute in place:
 Repointing them is a real port and has not been done. `analyse.py` is the only
 file here that runs against the local copy, and it reads the rung table only.
 
+## THE SOURCE twp DATA IS IN THE LIVE DB, BUT IT IS NOT THE SAME DATA
+
+The fleet read `twp_words` (NOT `twp_words_v4`). Checked 2026-08-24, both stores:
+
+    malign_logits.twp_words    95,180,535 rows    the archive, what the fleet read
+    malignment.twp_words       94,887,319 rows    the live db
+
+All **250 fleet checkpoints are present in the live db**, none missing, 49.2M
+rows against the archive's 49.3M. So the migration happened and is complete at
+the checkpoint level.
+
+**It is not a copy, and re-running against the live db would not reproduce these
+numbers.** Row counts differ on 113 of 250 checkpoints and the difference runs
+BOTH ways -- the archive is ahead on 61 (+44,697) and the live db on 52
+(-2,552). It is concentrated on the endpoint models, and the composition says
+what happened:
+
+                        archive                        live
+    Olmo-3-1025-7B      4,413 prompts  497,440 rows    4,428 prompts  474,663
+    pythia-6.9b         4,413          517,478         4,428          495,894
+    Think-SFT           4,378          390,111         4,393          391,264
+
+**The live store has MORE distinct prompts (+15 everywhere) and MORE distinct
+words, but FEWER rows on the two base endpoints.** Broader coverage, shallower
+per cell. That is a different measurement generation, not a subset or a truncated
+transfer.
+
+So: the numbers in this README are the archive's, `results/` holds the archive's
+parquets, and anyone recomputing from `malignment.twp_words` should expect small
+differences and should say which store they read.
+
+## WHAT IS STILL OWED FROM THIS FLEET
+
+Eight instruments were declared; this ports ONE. Now local in `results/` and
+unanalysed:
+
+- **Instrument 8, copy-pull vs rhyme-pull.** `copy_called_mean` and
+  `censored_called_mean` already ride in the rung table, and
+  `p_actual_word` / `p_nonpartner_word` / `p_target_word` sit per-cell in the
+  404,176-row `verse_capacity_cells.parquet`. The plan's framing: "rhyme is
+  repetition-with-difference, and the gap between the curves is the acquisition
+  of the difference." Everything needed is on disk; no run required.
+- **The error-rate surface.** `verse_error_rates.parquet`, 500 rows of
+  miss/false_alarm by margin over rhymed and unrhymed poems. Bears directly on
+  whether the pull measure has a usable operating point.
+- **The cell-level covariates.** `collides` and `censored` are per-cell flags
+  that nothing here conditions on. `censored_called_mean` runs ~0.19-0.39 in the
+  rung table, which is large enough that the headline pull could move under it.
+  **This is the one that could change a number in this README.**
+
+Not from this fleet but owed beside it:
+
+- **Instrument 6, the P-axis installation** (`p_axis_installation.json` in the
+  archive, not copied here): rho/CI/n for axis, armAUC, delta, named and
+  residual measures at SFT, DPO and Instruct rungs, floored and no-floor. Its
+  plan (`plan_p_axis_installation.md`) declares P1/Q1/Q2 directions and nothing
+  has been read against them. The plan's own fence: the axis's stability gate
+  still fails, so it is a descriptive drift curve and not a named-axis verdict.
+
 ## WHAT ELSE IS IN THE ARCHIVE AND STILL UNREAD
 
 The fleet declared eight instruments and this ports one. Also delivered and with
