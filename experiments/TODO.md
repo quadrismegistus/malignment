@@ -148,6 +148,61 @@ zero were indistinguishable.
 norm. None asks whether alignment changes the norm-to-frequency relationship,
 which is the confound `matched_nonmovers` now exists to control.
 
+## OUTSTANDING, 2026-08-24 — four things this section did not record
+
+**1. WHEN AND WHETHER ARE DIFFERENT DESIGNS AND MUST NOT BE MERGED** (RH,
+correcting a proposal to fold them into one folder). M05's B and H ask **when**,
+across pretraining checkpoints, on the few lineages that have them (OLMo-3,
+Pythia). M01's T/C/K ask **whether**, across ~50 base->aligned endpoint pairs.
+A folder holding both would blur the one distinction that makes either readable.
+
+**2. THE CONTINUOUS CONCRETENESS RESULT IS A KNOWN FUNCTION-WORD ARTEFACT, and
+only one side controls for it.** `M01 T_category_flow` §7, "not more abstract,
+less extreme", already measured it:
+
+    paired within-pair, verb-to-verb   MT-Conc -0.014  CI [-0.076,+0.048]
+                                       MDE 0.088 -- a BOUNDED NULL
+    all pairs, continuous mean         +0.107 p=7e-05 -- COMPOSITION
+      faller is a function word          +0.381   n=3,156
+      riser is a function word           -0.320   n=2,455
+      two lexical verbs                  +0.021 -- nothing
+    binned Concrete/Abstract/Neutral   Bowker p=2.6e-15 -- FIRES
+
+Function words sit at the abstract extreme of every concreteness norm, so
+swapping them in or out moves a mean without anything happening. **The
+CATEGORICAL route replicates; the CONTINUOUS route does not survive the
+control.** M05's H uses the continuous route (`dist_mean_k_concreteness`,
+-0.0292 p=3.6e-04) and its riders cover coder family, ranks-not-levels,
+register_level, vulgarity, charge-vs-arousal and censoring -- but NOT
+composition. H's unit is the whole distribution rather than riser-minus-faller
+pairs, so T's control does not transfer automatically. Nobody has checked, and
+**any re-do must carry this control from the start rather than bolt it on.**
+
+It is also why `M05 B_field_flow` reads oddly: its title is "alignment
+de-concretizes" while its own Result 1 says alignment "barely moves it" (largest
+shift 0.04, pretraining ~6x larger). B is the BINNED version, so B is probably
+right; H's continuous headline is the exposed one.
+
+**3. `slot_ratings` HAS ALREADY DONE PART OF THIS, contextually.** It rates words
+IN CONTEXT with per-domain LLM instruments -- `sexual_slot_en_v2` (9 scales),
+`slot_institutional_en_v3` (13), v6 general for identity and violence -- against
+the decontextualised word norms `fields.norms()` supplies. A re-do that ignores
+it repeats work and misses the one contrast nothing else has: **does a norm
+measured on the word out of context move the same way as the same norm measured
+on the word in its frame?** Its own README flags the confound to respect --
+instrument coverage runs in the direction of the finding, since institutional and
+sexual got bespoke instruments and identity did not.
+
+**4. `fields.norms()` NOW CARRIES MORE THAN THE ARCHIVE DID.** Warriner
+(valence/arousal/dominance), Brysbaert (concreteness), Brooke (formality, +1/-1
+over a 1,029-word seed list) and the seven K scales, en AND zh, each with its own
+`*_coverage` and an explicit rule that a miss contributes NOTHING rather than
+counting as neutral. M01 T §7 used a different set entirely (Lancaster
+sensorimotor, MRC, an MTurk concreteness set, Paivio over 37,563 words), so a
+re-do is not a replication on the same instrument and should not be reported as
+one. Two sparse ones are marked and must stay marked: `brooke_formality` and
+`k_vulgarity` (variance on 463 of 27,242 rated words).
+
 ---
 
 # 2. SEMANTIC FIELDS — where the mass goes when it moves
