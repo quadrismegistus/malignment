@@ -84,6 +84,14 @@ SOURCES = {
     "wordnet":   os.path.join(FIELDS, "wordnet_verb_supersenses.json"),
     "usas":      os.path.join(FIELDS, "usas_semantic_lexicon_en.txt"),
     "usas_tags": os.path.join(FIELDS, "usas_tagset.tsv"),
+    #: THE CHINESE USAS, added 2026-08-24. Same project, SAME TAGSET --
+    #: `usas_tags` decodes both, so a zh field name and an en field name are
+    #: the same field and are comparable. The pos vocabulary is NOT shared: zh
+    #: uses noun/verb/pnoun/adj/adv/prep/intj/conj against English's UPOS, so
+    #: any pos-conditioned read must branch on language. `usas_mwe_zh` is the
+    #: multiword table and is not consumed yet.
+    "usas_zh":     os.path.join(FIELDS, "usas_semantic_lexicon_zh.tsv"),
+    "usas_mwe_zh": os.path.join(FIELDS, "usas_mwe_zh.tsv"),
     "k_en":      os.path.join(NORMS, "k_ratings_en.json"),
     "k_zh":      os.path.join(NORMS, "k_ratings_zh.json"),
     "warriner":  os.path.join(NORMS, "BRM-emot-submit.csv"),
