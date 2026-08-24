@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """All capacities on one page, per ladder (RH, 2026-08-14).
 
-    uv run python meta/M05_emergence/scripts/m05_capacities_overview.py            # both
-    uv run python meta/M05_emergence/scripts/m05_capacities_overview.py olmo
+    uv run python experiments/emergence/verse_capacity/producers/m05_capacities_overview.py            # both
+    uv run python experiments/emergence/verse_capacity/producers/m05_capacities_overview.py olmo
 
 One line per capacity family across the full ladder, from
 capacities_by_rung.parquet (aggregate_capacities.py) and nothing else.
@@ -28,13 +28,15 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now the
+#: experiment folder, so data/ results/ figures/ sit beside this file.
+ROOT = os.path.abspath(os.path.join(HERE, ".."))
 os.chdir(ROOT)
 
 import pandas as pd  # noqa: E402
 
-FIGDIR = "meta/M05_emergence/figures"
-AGG = "meta/M05_emergence/results/capacities_by_rung.parquet"
+FIGDIR = "figures"
+AGG = "results/capacities_by_rung.parquet"
 INK, INK2 = "#0b0b0b", "#52514e"
 
 # house palette for the battery (m05_capacity_prob), extensions for the rest
@@ -71,7 +73,7 @@ def build(ladder):
     # producer). Replaces the pull-mass line: shares of poems are the
     # scale the rest of this page speaks.
     er = pd.read_parquet(
-        "meta/M05_emergence/results/verse_error_rates.parquet")
+        "results/verse_error_rates.parquet")
     er = er[er.margin == 0.05]
     key = (d[["model", "ckpt_idx", "role", "stage"]]
            .drop_duplicates("model").set_index("model"))

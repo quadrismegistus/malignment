@@ -131,20 +131,53 @@ local copy.
     registration/    plan_verse_fleet.md             the declared design
                      plan_rhyme.md
 
-**THE PRODUCERS ARE PROVENANCE, NOT A RUNNABLE PIPELINE HERE.** They are copied
-so the numbers can be audited against the code that made them, and they will NOT
-execute in place:
+**THE PIPELINE RUNS HERE, AND WAS VERIFIED BY RUNNING IT.** Repointed
+2026-08-24: `ROOT` is now the experiment folder, `OUT` is `results/`, the
+`malign_logits.` database prefixes are gone (the live `ch._guard` refuses any
+statement naming another database), and `from malign_logits import ch` is now
+`from malignment import ch`.
 
-- `ROOT = HERE/../../..` resolved to the archive's repo root; under this path it
-  resolves to `experiments/`, which is wrong.
-- Outputs are hard-coded archive-relative, e.g.
-  `OUT = "meta/M05_emergence/results/capacities_by_rung.parquet"`.
-- `verse_capacity.py` does `from malign_logits import ch`, the archive's package
-  and its ClickHouse layer, and reads `twp_words` -- so re-running the fleet
-  means the archive's environment and its store, not this one.
+    experiments/emergence/verse_capacity/producers/verse_capacity.py --out DIR
+    ... /aggregate_capacities.py --out FILE
+    ... /m05_capacities_overview.py          # figures/
 
-Repointing them is a real port and has not been done. `analyse.py` is the only
-file here that runs against the local copy, and it reads the rung table only.
+**The re-run against `malignment.twp_words` reproduces the archive exactly.**
+
+    verse_capacity.py     1,000 shared rung rows, max abs diff 0.000e+00 on
+                          called_mean, null_mean, pull_delta_mean/median,
+                          frac_positive, copy_called_mean, n_cells_present
+    aggregate_capacities  10,404 rows matched on the full key, 0 unmatched
+                          either way, max abs diff 1.19e-07 (float32
+                          round-trip, on `censored` only)
+
+and it GAINS a checkpoint: `Olmo-3-7B-Think`, 251 models against the archive's
+250, measured into `twp_words` after the fleet ran.
+
+### TWO THINGS THE MIGRATION HAD TO DECIDE
+
+**`rule_version = 3` was dropped, and that is exactly equivalent here.**
+`malignment.twp_words` has no `rule_version` column (nor `t1`, `theta`,
+`dict_sha`, `ingested`). Checked before removing the filter: all 33,148,202
+archive rows for this fleet's cells carry `rule_version = 3`, the sole value.
+
+**`twp_residual` DOES NOT EXIST in the live db**, so `censored` cannot be
+recomputed there. It holds expand's theta=0.001 residual and feeds
+`censored_called_mean`. The merge is now conditional and **announces the
+absence** rather than defaulting: a NaN is honest, a 0.0 would read as "nothing
+was censored", which is the opposite of not knowing. Every other column is
+unaffected, and `results/` still holds the archive's parquets WITH `censored`
+intact -- which is why `aggregate_capacities.py` still reproduces it.
+
+### `--out` EXISTS BECAUSE THE FIRST VERIFICATION RUN DESTROYED ITS OWN CONTROL
+
+Both producers wrote straight into `results/`. `aggregate_capacities.py` ran
+once that way and REPLACED the archived `capacities_by_rung.parquet` -- the file
+the comparison was against. Recoverable only because it was already committed.
+Both now take `--out`, and a verification run must use it.
+
+`verse_fleet_producer.py` and `rhyme_pull_pilot.py` are NOT repointed and remain
+provenance: they regenerate the raw fleet data through the archive's `twp`
+machinery, which is a different job from re-reading the store.
 
 ## THE SOURCE twp DATA IS IN THE LIVE DB, BUT IT IS NOT THE SAME DATA
 

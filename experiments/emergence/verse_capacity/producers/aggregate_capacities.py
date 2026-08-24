@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """One tidy per-rung capacity table, for plotting ease (RH, 2026-08-14).
 
-    uv run python meta/M05_emergence/scripts/aggregate_capacities.py
+    uv run python experiments/emergence/verse_capacity/producers/aggregate_capacities.py
 
 Everything the campaign has measured per pretraining rung, ONE file, ONE
 schema — so a ladder figure is a filter + a groupby, never a re-derivation:
@@ -25,8 +25,8 @@ schema — so a ladder figure is a filter + a groupby, never a re-derivation:
 
 Sources (this file DERIVES, never re-measures):
   data/pythia_curves.parquet, data/m05_curves.parquet   (M05 battery)
-  meta/M05_emergence/results/verse_capacity_rungs.parquet
-  meta/M05_emergence/results/sense_curve.json           (Pythia only)
+  results/verse_capacity_rungs.parquet
+  results/sense_curve.json           (Pythia only)
   data/m05_class_mass.parquet + m05_licit_sets*.json    (syntax: the
     per-rung strict/permissive licit share recomputed with
     m05_syntax_curve.py's own conventions — format band, equivalences,
@@ -37,7 +37,7 @@ plots it directly); the verse closure decomposition (.f16 not
 ingested); OLMo sense (its 22 ckpts are the sense study's own roster,
 no model ids in the JSON — unjoinable until its producer emits them).
 
-Output: meta/M05_emergence/results/capacities_by_rung.parquet
+Output: results/capacities_by_rung.parquet
 """
 import json
 import os
@@ -45,10 +45,12 @@ import os
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now the
+#: experiment folder, so data/ results/ figures/ sit beside this file.
+ROOT = os.path.abspath(os.path.join(HERE, ".."))
 os.chdir(ROOT)
 
-OUT = "meta/M05_emergence/results/capacities_by_rung.parquet"
+OUT = "results/capacities_by_rung.parquet"
 FAM = {"CAPACITY_REFERENCE": "capacity_reference",
        "CAPACITY_REASONING": "capacity_reasoning",
        "CAPACITY_DISCOURSE": "capacity_discourse",
@@ -97,7 +99,7 @@ def rung_key(curves):
 
 def verse(keys):
     s = pd.read_parquet(
-        "meta/M05_emergence/results/verse_capacity_rungs.parquet")
+        "results/verse_capacity_rungs.parquet")
     s["family"] = ("verse_" + s.rhymed.map({True: "rhymed",
                                             False: "unrhymed"})
                    + "_" + s.era)
@@ -128,7 +130,7 @@ def sense(keys_by_ladder):
     index compressed it onto the first 22 rungs in this file's first
     version (caught as a vertical line in fig26). Excluded until the
     sense producer emits model ids."""
-    sc = json.load(open("meta/M05_emergence/results/sense_curve.json"))
+    sc = json.load(open("results/sense_curve.json"))
     rows = []
     for ladder in ("pythia",):
         series = sc[ladder]["natural_by_ckpt"]
@@ -200,6 +202,19 @@ def syntax():
 
 
 def main():
+    #: `--out` ADDED ON MIGRATION, for the reason it was needed: this wrote
+    #: straight to results/capacities_by_rung.parquet and, on the first
+    #: verification run after the migration, REPLACED the archived copy the
+    #: README quotes. It was recoverable only because the file was committed.
+    #: A producer whose default output is the record it is being checked against
+    #: destroys the comparison by running.
+    global OUT
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=OUT,
+                    help="output parquet (default: results/, the archived copy)")
+    OUT = ap.parse_args().out
+
     py = pd.read_parquet("data/pythia_curves.parquet")
     ol = pd.read_parquet("data/m05_curves.parquet")
     keys = {"pythia": rung_key(py), "olmo": rung_key(ol)}
@@ -214,7 +229,7 @@ def main():
     print(out.groupby(["ladder", "family"]).size().unstack(0,
           fill_value=0).to_string())
     missing = set(pd.read_parquet(
-        "meta/M05_emergence/results/verse_capacity_rungs.parquet"
+        "results/verse_capacity_rungs.parquet"
     ).model) - set(allkeys.index)
     if missing:
         print(f"\nverse models with NO ckpt_idx (not in curves "

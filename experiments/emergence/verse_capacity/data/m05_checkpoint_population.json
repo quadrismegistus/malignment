@@ -1,0 +1,632 @@
+{
+ "_about": "M05 population: the Think-SFT acquisition ladder plus a declared log-spaced subsample of the Olmo-3-1025-7B base ladder. Checkpoints enumerated as (model_id, revision) strings; the unit of this experiment is the checkpoint, not the base/aligned pair. Subsample rule in the producer docstring -- a computation, not a curation.",
+ "_producer": "scripts/build_m05_population.py",
+ "_source_of_record": "data/model_revisions.json",
+ "_generated": "2026-08-11T09:29:05",
+ "n_checkpoints": 95,
+ "n_sft_steps": 43,
+ "n_rlvr_steps": 7,
+ "rlvr_available": 55,
+ "n_base_steps": 42,
+ "base_steps_by_stage": {
+  "stage1": 22,
+  "stage2": 7,
+  "stage3": 13
+ },
+ "base_ladder_available": {
+  "stage1": 1421,
+  "stage2": 49,
+  "stage3": 13
+ },
+ "checkpoints": [
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step0",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 0
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step1000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 1000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step2000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 2000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step3000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 3000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step4000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 4000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step6000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 6000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step8000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 8000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step11000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 11000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step16000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 16000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step23000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 23000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step32000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 32000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step45000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 45000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step64000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 64000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step91000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 91000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step128000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 128000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step181000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 181000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step256000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 256000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step362000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 362000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step512000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 512000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step724000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 724000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step1024000",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 1024000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage1-step1413814",
+   "role": "base_step",
+   "stage": "stage1",
+   "step": 1413814
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage2-step1000",
+   "role": "base_step",
+   "stage": "stage2",
+   "step": 1000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage2-step2000",
+   "role": "base_step",
+   "stage": "stage2",
+   "step": 2000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage2-step4000",
+   "role": "base_step",
+   "stage": "stage2",
+   "step": 4000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage2-step8000",
+   "role": "base_step",
+   "stage": "stage2",
+   "step": 8000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage2-step16000",
+   "role": "base_step",
+   "stage": "stage2",
+   "step": 16000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage2-step32000",
+   "role": "base_step",
+   "stage": "stage2",
+   "step": 32000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage2-step47684",
+   "role": "base_step",
+   "stage": "stage2",
+   "step": 47684
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step1000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 1000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step2000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 2000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step3000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 3000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step4000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 4000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step5000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 5000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step6000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 6000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step7000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 7000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step8000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 8000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step9000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 9000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step10000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 10000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step11000",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 11000
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step11900",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 11900
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "stage3-step11921",
+   "role": "base_step",
+   "stage": "stage3",
+   "step": 11921
+  },
+  {
+   "model_id": "allenai/Olmo-3-1025-7B",
+   "revision": "main",
+   "role": "base_endpoint"
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step1000",
+   "role": "sft_step",
+   "step": 1000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step2000",
+   "role": "sft_step",
+   "step": 2000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step3000",
+   "role": "sft_step",
+   "step": 3000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step4000",
+   "role": "sft_step",
+   "step": 4000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step5000",
+   "role": "sft_step",
+   "step": 5000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step6000",
+   "role": "sft_step",
+   "step": 6000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step7000",
+   "role": "sft_step",
+   "step": 7000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step8000",
+   "role": "sft_step",
+   "step": 8000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step9000",
+   "role": "sft_step",
+   "step": 9000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step10000",
+   "role": "sft_step",
+   "step": 10000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step11000",
+   "role": "sft_step",
+   "step": 11000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step12000",
+   "role": "sft_step",
+   "step": 12000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step13000",
+   "role": "sft_step",
+   "step": 13000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step14000",
+   "role": "sft_step",
+   "step": 14000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step15000",
+   "role": "sft_step",
+   "step": 15000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step16000",
+   "role": "sft_step",
+   "step": 16000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step17000",
+   "role": "sft_step",
+   "step": 17000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step18000",
+   "role": "sft_step",
+   "step": 18000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step19000",
+   "role": "sft_step",
+   "step": 19000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step20000",
+   "role": "sft_step",
+   "step": 20000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step21000",
+   "role": "sft_step",
+   "step": 21000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step22000",
+   "role": "sft_step",
+   "step": 22000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step23000",
+   "role": "sft_step",
+   "step": 23000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step24000",
+   "role": "sft_step",
+   "step": 24000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step25000",
+   "role": "sft_step",
+   "step": 25000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step26000",
+   "role": "sft_step",
+   "step": 26000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step27000",
+   "role": "sft_step",
+   "step": 27000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step28000",
+   "role": "sft_step",
+   "step": 28000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step29000",
+   "role": "sft_step",
+   "step": 29000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step30000",
+   "role": "sft_step",
+   "step": 30000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step31000",
+   "role": "sft_step",
+   "step": 31000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step32000",
+   "role": "sft_step",
+   "step": 32000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step33000",
+   "role": "sft_step",
+   "step": 33000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step34000",
+   "role": "sft_step",
+   "step": 34000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step35000",
+   "role": "sft_step",
+   "step": 35000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step36000",
+   "role": "sft_step",
+   "step": 36000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step37000",
+   "role": "sft_step",
+   "step": 37000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step38000",
+   "role": "sft_step",
+   "step": 38000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step39000",
+   "role": "sft_step",
+   "step": 39000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step40000",
+   "role": "sft_step",
+   "step": 40000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step41000",
+   "role": "sft_step",
+   "step": 41000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step42000",
+   "role": "sft_step",
+   "step": 42000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "step43000",
+   "role": "sft_step",
+   "step": 43000
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "revision": "main",
+   "role": "sft_endpoint"
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-DPO",
+   "revision": "main",
+   "role": "dpo_endpoint"
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "revision": "step_0025",
+   "role": "rlvr_step",
+   "step": 25
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "revision": "step_0050",
+   "role": "rlvr_step",
+   "step": 50
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "revision": "step_0100",
+   "role": "rlvr_step",
+   "step": 100
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "revision": "step_0200",
+   "role": "rlvr_step",
+   "step": 200
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "revision": "step_0400",
+   "role": "rlvr_step",
+   "step": 400
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "revision": "step_0800",
+   "role": "rlvr_step",
+   "step": 800
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "revision": "step_1375",
+   "role": "rlvr_step",
+   "step": 1375
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """Verse capacity figures (registry, plot_*_figs convention).
 
-    uv run python meta/M05_emergence/scripts/verse_capacity_figs.py            # all
-    uv run python meta/M05_emergence/scripts/verse_capacity_figs.py vc_olmo    # one
+    uv run python experiments/emergence/verse_capacity/producers/verse_capacity_figs.py            # all
+    uv run python experiments/emergence/verse_capacity/producers/verse_capacity_figs.py vc_olmo    # one
 
 vc_olmo: rhyme capacity across the FULL OLMo-3 ladder (base | SFT | DPO |
 RLVR), colored by era — Victorian-and-earlier (pre-1900) against modern
@@ -22,13 +22,15 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now the
+#: experiment folder, so data/ results/ figures/ sit beside this file.
+ROOT = os.path.abspath(os.path.join(HERE, ".."))
 os.chdir(ROOT)
 
 import pandas as pd  # noqa: E402
 
-FIGDIR = "meta/M05_emergence/figures"
-RUNGS = "meta/M05_emergence/results/verse_capacity_rungs.parquet"
+FIGDIR = "figures"
+RUNGS = "results/verse_capacity_rungs.parquet"
 
 VIOLET, ORANGE = "#4a3aa7", "#eb6834"   # house palette (m05_capacity_prob)
 INK, INK2 = "#0b0b0b", "#52514e"
@@ -146,7 +148,7 @@ def vc_olmo_scheme():
     rung summary only carries the rhymed/unrhymed cut)."""
     import numpy as np
     d = pd.read_parquet(
-        "meta/M05_emergence/results/verse_capacity_cells.parquet")
+        "results/verse_capacity_cells.parquet")
     pos = d.model.map(olmo_position)
     d = d[[p[0] is not None and "Olmo" in m
            for p, m in zip(pos, d.model)]].copy()
@@ -255,7 +257,7 @@ def vc_errors():
     results/verse_error_rates.parquet."""
     import numpy as np
     d = pd.read_parquet(
-        "meta/M05_emergence/results/verse_capacity_cells.parquet")
+        "results/verse_capacity_cells.parquet")
     d["pull"] = d.tclass - d.p_target_word
 
     rows = []
@@ -285,7 +287,7 @@ def vc_errors():
                 false_alarm=float((dl[~rh] > m).mean()),
                 n_rhymed=int(rh.sum()), n_unrhymed=int((~rh).sum())))
     R = pd.DataFrame(rows)
-    R.to_parquet("meta/M05_emergence/results/verse_error_rates.parquet")
+    R.to_parquet("results/verse_error_rates.parquet")
     print(f"rates: {len(R):,} rows")
 
     from plotnine import (aes, annotate, element_blank, element_line,

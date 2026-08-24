@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Verse capacity, first read: rhyme pull at the declared slots, per rung.
 
-    uv run python meta/M05_emergence/scripts/verse_capacity.py
+    uv run python experiments/emergence/verse_capacity/producers/verse_capacity.py
 
 Instrument 1 of plan_verse_fleet.md (rhyme pull/floor) plus instrument 8's
 free column (copy vs class), run against the ingested fleet ([5886],
@@ -51,7 +51,7 @@ class is the control WHERE UNCALLED (NONPARTNER_CALLED_AT in the
 producer: it is itself called at end1/end3 under ABAB, end1/end2 under
 AABB — the flag travels).
 
-Outputs (meta/M05_emergence/results/):
+Outputs (results/, or --out):
   verse_capacity_cells.parquet   one row per (model, manifest cell)
   verse_capacity_rungs.parquet   one row per (model, scheme-class, era):
                                  paired called-minus-null pull, companion
@@ -62,11 +62,14 @@ import json
 import os
 import re
 
-from malign_logits import ch as chdb
+from malignment import ch as chdb
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+#: MIGRATED 2026-08-24. Was ROOT = HERE/../../.. (the archive's repo root) with
+#: os.chdir(ROOT) and archive-relative paths throughout. ROOT is now the
+#: experiment folder, so data/ and results/ sit beside this file.
+ROOT = os.path.abspath(os.path.join(HERE, ".."))
 os.chdir(ROOT)
 
 import numpy as np  # noqa: E402
@@ -75,11 +78,11 @@ import pandas as pd  # noqa: E402
 CH = os.environ.get("MALIGN_CH_BIN", "/opt/homebrew/bin/clickhouse")
 MANIFEST = "data/verse_fleet_slot_manifest.json"
 RIME = "data/rime_class_vocab_v2.json"
-OUT = "meta/M05_emergence/results"
+OUT = "results"
 
 
 def ch(q, data=None):
-    """Local shim over `malign_logits.ch`, kept because the call sites below
+    """Local shim over `ch`, kept because the call sites below
     read well with a bare `ch(...)`.
 
     The module is imported as `chdb` rather than `ch` on purpose: this file
@@ -97,8 +100,8 @@ def ch(q, data=None):
 def load_temp_tables():
     cells = json.load(open(MANIFEST))["cells"]
     verse = [c for c in cells if c["cell_type"] == "verse"]
-    ch("DROP TABLE IF EXISTS malign_logits.vf_manifest_tmp")
-    ch("""CREATE TABLE malign_logits.vf_manifest_tmp (
+    ch("DROP TABLE IF EXISTS vf_manifest_tmp")
+    ch("""CREATE TABLE vf_manifest_tmp (
         cell_id UInt32, prompt String, id_human String, slot String,
         phase String, scheme String, era String,
         target_key String, nonpartner_key String,
@@ -115,21 +118,21 @@ def load_temp_tables():
             nonpartner_word=(c["nonpartner_word"] or "").lower(),
             actual_word=(c["actual_word"] or "").lower(),
             collides=str(c["context_collides_with"]))))
-    ch("INSERT INTO malign_logits.vf_manifest_tmp FORMAT JSONEachRow",
+    ch("INSERT INTO vf_manifest_tmp FORMAT JSONEachRow",
        "\n".join(rows))
 
     k2w = json.load(open(RIME))["key_to_words"]
     keys = {c["target_key"] for c in verse} | \
            {c["nonpartner_key"] for c in verse}
     keys.discard(None), keys.discard("")
-    ch("DROP TABLE IF EXISTS malign_logits.vf_rime_tmp")
-    ch("CREATE TABLE malign_logits.vf_rime_tmp (key String, word String)"
+    ch("DROP TABLE IF EXISTS vf_rime_tmp")
+    ch("CREATE TABLE vf_rime_tmp (key String, word String)"
        " ENGINE = MergeTree ORDER BY (key, word)")
     rrows = [json.dumps({"key": k, "word": w.lower()})
              for k in keys for w in k2w.get(k, [])]
-    ch("INSERT INTO malign_logits.vf_rime_tmp FORMAT JSONEachRow",
+    ch("INSERT INTO vf_rime_tmp FORMAT JSONEachRow",
        "\n".join(rrows))
-    n = ch("SELECT count() FROM malign_logits.vf_rime_tmp").strip()
+    n = ch("SELECT count() FROM vf_rime_tmp").strip()
     print(f"temp tables: {len(rows)} verse cells, {len(keys)} rime keys, "
           f"{n} class-member rows", flush=True)
     return verse
@@ -140,35 +143,47 @@ def pull_cells():
     WITH dedup AS (
       SELECT model, prompt, lowerUTF8(word) AS w, sum(mp) AS p
       FROM (SELECT model, prompt, word, max(p) AS mp
-            FROM malign_logits.twp_words
-            WHERE rule_version = 3
-              AND prompt IN (SELECT prompt FROM malign_logits.vf_manifest_tmp)
+            FROM twp_words
+            WHERE prompt IN (SELECT prompt FROM vf_manifest_tmp)
             GROUP BY model, prompt, word)
       GROUP BY model, prompt, w)
     SELECT d.model AS model, m.cell_id AS cell_id,
            sum(d.p) AS total_stored,
            sumIf(d.p, (m.target_key, d.w) IN
-             (SELECT key, word FROM malign_logits.vf_rime_tmp)) AS tclass,
+             (SELECT key, word FROM vf_rime_tmp)) AS tclass,
            sumIf(d.p, (m.nonpartner_key, d.w) IN
-             (SELECT key, word FROM malign_logits.vf_rime_tmp)) AS nclass,
+             (SELECT key, word FROM vf_rime_tmp)) AS nclass,
            sumIf(d.p, d.w = m.target_word) AS p_target_word,
            sumIf(d.p, d.w = m.nonpartner_word) AS p_nonpartner_word,
            sumIf(d.p, d.w = m.actual_word) AS p_actual_word
     FROM dedup d
-    INNER JOIN malign_logits.vf_manifest_tmp m ON d.prompt = m.prompt
+    INNER JOIN vf_manifest_tmp m ON d.prompt = m.prompt
     GROUP BY d.model, m.cell_id
     FORMAT Parquet"""
     d = chdb.parquet(q)
     man = pd.DataFrame(json.loads(x) for x in open_manifest_rows())
     d = d.merge(man, on="cell_id", how="left")
 
-    qr = """SELECT model, prompt, max(total) AS censored
-      FROM malign_logits.twp_residual
-      WHERE rule_version = 3
-        AND prompt IN (SELECT prompt FROM malign_logits.vf_manifest_tmp)
-      GROUP BY model, prompt FORMAT Parquet"""
-    res = chdb.parquet(qr)
-    d = d.merge(res, on=["model", "prompt"], how="left")
+    #: `twp_residual` DOES NOT EXIST IN THE LIVE DB. It holds expand's
+    #: theta=0.001 residual -- the unresolved mass per cell -- and supplies the
+    #: `censored` column, which becomes `censored_called_mean` downstream.
+    #: The archive has it; `malignment` was never given it.
+    #:
+    #: Failing here would block the whole re-run over one sidecar column, so the
+    #: merge is conditional and the absence is ANNOUNCED rather than filled with
+    #: a default. A NaN `censored` is honest; a 0.0 would read as "nothing was
+    #: censored", which is the opposite of not knowing.
+    if chdb.exists("twp_residual"):
+        qr = """SELECT model, prompt, max(total) AS censored
+          FROM twp_residual
+          WHERE prompt IN (SELECT prompt FROM vf_manifest_tmp)
+          GROUP BY model, prompt FORMAT Parquet"""
+        d = d.merge(chdb.parquet(qr), on=["model", "prompt"], how="left")
+    else:
+        print("  WARNING: twp_residual absent from this database. `censored` is "
+              "NaN and every quantity derived from it -- censored_called_mean -- "
+              "is NOT COMPUTED. Every other column is unaffected.", flush=True)
+        d["censored"] = float("nan")
     return d
 
 
@@ -263,6 +278,18 @@ def summarise(d):
 
 
 def main():
+    #: `--out` ADDED ON MIGRATION. This wrote straight into the results
+    #: directory, which now holds the FLEET'S OWN parquets copied from the
+    #: archive -- the record this folder's README quotes. A verification re-run
+    #: would have silently replaced them with its own output and there would
+    #: have been nothing left to compare against.
+    global OUT
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=OUT,
+                    help="output directory (default: results/, the archived copy)")
+    OUT = ap.parse_args().out
+
     load_temp_tables()
     d = pull_cells()
     os.makedirs(OUT, exist_ok=True)

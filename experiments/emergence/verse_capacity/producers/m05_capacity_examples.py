@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Exhibit document: what the two ladders actually say, prompt by prompt.
 
-    MALIGN_TWP_SOURCE=clickhouse uv run python meta/M05_emergence/scripts/m05_capacity_examples.py
+    MALIGN_TWP_SOURCE=clickhouse uv run python experiments/emergence/verse_capacity/producers/m05_capacity_examples.py
 
 For two probes per capacity family (reference, reasoning, discourse,
 packages, poetic), print the TOP of the next-word distribution at selected
@@ -11,7 +11,7 @@ arm). Raw distributions per checkpoint, no cross-ladder arithmetic: the two
 populations stay separate ([5425](b)/[5430]); putting their tables on one
 page is a reading aid, not a join.
 
-Writes meta/M05_emergence/results/capacity_examples.md. Exhibits, not
+Writes results/capacity_examples.md. Exhibits, not
 rates: nothing here aggregates, everything re-derives from word_probs.
 """
 import os
@@ -19,11 +19,13 @@ import sys
 
 os.environ.setdefault("MALIGN_TWP_SOURCE", "clickhouse")
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now the
+#: experiment folder, so data/ and results/ sit beside this file.
+ROOT = os.path.abspath(os.path.join(HERE, ".."))
 sys.path.insert(0, ROOT)
 os.chdir(ROOT)
 
-OUT = "meta/M05_emergence/results/capacity_examples.md"
+OUT = "results/capacity_examples.md"
 TOPN = 6
 
 #: (family, probe id, prompt, target, competitor); poetic carries both frames
@@ -111,7 +113,7 @@ def fmt_cell(wp, target, competitor):
 
 
 def main():
-    from malign_logits.movement import word_probs
+    from malignment.movement import word_probs
 
     olmo = resolve_olmo()
     pyth = pythia_models()
