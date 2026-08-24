@@ -75,6 +75,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEX = os.path.join(ROOT, "lexicons")
 FIELDS = os.path.join(LEX, "fields")
 NORMS = os.path.join(LEX, "norms")
+FREQ = os.path.join(LEX, "frequency")
 
 #: EVERY SOURCE DECLARED IN ONE PLACE, so `--check` can answer "what is missing"
 #: without importing anything, and so a lookup can refuse by name.
@@ -100,6 +101,24 @@ SOURCES = {
     "brooke_formal":   os.path.join(NORMS, "brooke_formality", "formal_seeds_100.txt"),
     "brooke_informal": os.path.join(NORMS, "brooke_formality", "informal_seeds_100.txt"),
     "brooke_pairs":    os.path.join(NORMS, "brooke_formality", "CTRWpairsfull.txt"),
+    #: CHINESE CONCRETENESS, added 2026-08-24. Xu & Li's 9,877 two-character
+    #: words. **THE PUBLISHED SCALE RUNS THE OTHER WAY FROM BRYSBAERT'S**:
+    #: low is CONCRETE (stone 1.24, table 1.30) and high is ABSTRACT (concept
+    #: 4.10, freedom 3.60), against Brysbaert where high is concrete. The file
+    #: carries `rating_published` as printed AND
+    #: `concreteness_high_is_concrete` reversed within the published range, so
+    #: a consumer joining zh to en picks a column rather than a sign.
+    "concreteness_zh": os.path.join(NORMS, "concreteness_zh_xu_li_2020.tsv"),
+    #: WORD FREQUENCY, in its own directory because it is neither a rating nor
+    #: a field: it is a corpus statistic, and the norms/fields split is
+    #: functional -- "give me a rating", "give me a field", "give me a
+    #: frequency" are three different asks. Needed for the function-word
+    #: composition control, which is what decides whether a concreteness
+    #: difference is semantics or just which words got swapped.
+    #: subtlex_ch carries `Dominant.PoS`, the only route to a zh function-word
+    #: test given there is no zh spaCy model installed.
+    "subtlex_us": os.path.join(FREQ, "subtlex_us.tsv"),
+    "subtlex_ch": os.path.join(FREQ, "subtlex_ch.tsv"),
 }
 
 TOKEN = re.compile(r"[A-Za-z][A-Za-z'-]*")

@@ -5,6 +5,10 @@ lexicons/norms vs lexicons/fields."*
 
     norms/    a CONTINUOUS RATING per word — valence, arousal, dominance,
               concreteness, and our seven K scales. A number on a scale.
+    frequency/  a CORPUS STATISTIC per word, added 2026-08-24. Not a rating:
+              nobody judged it, and it is used as a CONTROL rather than as an
+              outcome. Kept apart so "give me a rating" and "give me a
+              frequency" stay different asks.
     fields/   CATEGORICAL MEMBERSHIP — this word is in this semantic field.
               General Inquirer, USAS, RID, WordNet supersenses, FrameNet.
 
@@ -27,6 +31,9 @@ is here rather than assumed.
 | `fields/wordnet_verb_supersenses.json` | 2.10 | Princeton WordNet, 15 verb lexicographer files. Fellbaum, C. (ed.) (1998), *WordNet: An Electronic Lexical Database*. | WordNet License — redistribution permitted with the copyright notice |
 | `fields/usas_semantic_lexicon_en.txt`, `fields/usas_tagset.tsv` | 1.15 | UCREL Semantic Analysis System, Lancaster. Rayson, P., Archer, D., Piao, S. & McEnery, T. (2004). | free for research, attribution required |
 | `fields/usas_semantic_lexicon_zh.tsv`, `fields/usas_mwe_zh.tsv` | 2.77 | UCREL Chinese Semantic Tagger lexicon, same project. Added 2026-08-24 from `Dropbox/Prof/Articles/TheoryMachines/norms_sources/usas_zh` (`semantic_lexicon_chi.tsv`, `mwe-chi.tsv`), copied byte-identical. **Same tagset as the English** (`usas_tagset.tsv` decodes both); DIFFERENT pos vocabulary — zh uses `noun/verb/pnoun/adj/adv/prep/intj/conj`, en uses UPOS. 64,542 entries against English's 54,798. Tags need normalising before lookup -- strip polarity `+-@%` then the zh-only gender/number suffix (`m`, `f`, `n`, `c`, `mfn`) -- which decodes **99.4% of tag tokens** (230,596/231,946); the residue is tags that interleave the two (`A2.1+mfn`, `L2%c`) and is left undecoded rather than guessed at. | free for research, attribution required |
+| `norms/concreteness_zh_xu_li_2020.tsv` | 0.4 | Concreteness ratings of 9,877 two-character Chinese words. Converted 2026-08-24 from the published `.xlsx` with stdlib zipfile+ElementTree (no openpyxl, so the repo needs no extra dependency). **THE PUBLISHED SCALE IS REVERSED relative to Brysbaert**: low = concrete (石头 stone 1.24, 桌子 table 1.30), high = abstract (概念 concept 4.10, 自由 freedom 3.60), range 1.04-4.56. Verified against those anchors, not assumed. The file keeps `rating_published` as printed and adds `concreteness_high_is_concrete`, reversed within the published range, so joining zh to en is a column choice and not a sign error. | research use, attribution |
+| `frequency/subtlex_us.tsv` | 1.1 | SUBTLEX-US word frequencies, 60,385 words, `fpm`. Brysbaert & New (2009). | free for research |
+| `frequency/subtlex_ch.tsv` | 8.9 | SUBTLEX-CH, 99,122 words. Cai & Brysbaert (2010). Carries `W.million` and `Dominant.PoS` -- the latter is the ONLY route to a Chinese function-word test, there being no zh spaCy model installed. | free for research |
 | `fields/rid_regressive_imagery.csv` | 0.14 | Regressive Imagery Dictionary — Martindale, C. (1975), *Romantic Progression: The Psychology of Literary History*. | freely circulated for research |
 | `fields/metafields/framenet*` | small | FrameNet, ICSI Berkeley. Baker, C.F., Fillmore, C.J. & Lowe, J.B. (1998). | CC BY 3.0 |
 
