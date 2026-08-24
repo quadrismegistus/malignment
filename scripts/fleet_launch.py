@@ -1356,6 +1356,18 @@ echo "SSM shard: installing mamba kernels (this COMPILES and is slow)"
 # The first version ended `|| echo "returned non-zero"` and ran with `-q`, so the
 # failure arrived as "SSM KERNELS MISSING" with the REASON discarded. A guard that
 # hides why it fired costs a whole round trip to a live box to recover.
+# **`TORCH_CUDA_ARCH_LIST` AND `MAX_JOBS` ARE LOAD-BEARING.** Without them the
+# build either fails outright (no arch list -> compilation error on some images)
+# or uses one core and takes hours instead of minutes. The arch list is read from
+# the card at provision time; MAX_JOBS uses all cores because the build is CPU-
+# bound (CUDA kernel compilation is nvcc, which is single-threaded per TU but
+# pip launches one per source file). On 96 cores this takes ~15 min; on 1 core
+# it takes the ~4 hours that made someone say "kernels give no speedup" because
+# they never installed.
+ARCH=$(nvidia-smi --query-gpu=compute_cap --format=csv,noheader | head -1 | tr -d '[:space:]')
+export TORCH_CUDA_ARCH_LIST="${ARCH}"
+export MAX_JOBS=$(nproc)
+echo "  TORCH_CUDA_ARCH_LIST=$ARCH  MAX_JOBS=$MAX_JOBS"
 uv pip install --system-certs --python ./%(venv)s/bin/python \
     --no-build-isolation causal-conv1d mamba-ssm 2>&1 | tail -25
 ./%(venv)s/bin/python - <<'KEOF'
