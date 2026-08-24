@@ -137,11 +137,14 @@ This table exists because separating instrument registrations from hypothesis re
 | **L1** | the same claim at WORD level, via the lexicon | `division_of_labour/lexical_domains` | **NOT SUPPORTED AS TESTED** — +0.0024, CI ±0.047. Operationalisation later found wrong (see its README) |
 | **L2** | is it content or stimulus? sexual-word displacement measured *inside violence and neutral prompts* | `division_of_labour/lexical_domains` | **RUN** — under *sexual* prompts the effect runs BACKWARDS (−0.0433, 5/16); `taboo` is the one positive cell |
 | **L3** | does displaced mass leave the domain or move within it | `division_of_labour/lexical_domains` | **RUN** — both categories lose net mass; departure ≈ 2× arrival |
-| **R1a** | vulgar-register sexual mass FALLS under alignment | `register_shift` | not run |
-| **R1b** | clinical/euphemistic mass RISES — **required**, or it is suppression not displacement | `register_shift` | not run |
-| **R2** | the register signature is larger for sexual than violent | `register_shift` | not run |
-| **R3** | archaic violent mass rises (`smite`) | `register_shift` | not run — **declared underpowered, ineligible for a headline** |
-| **R4** | every R1/R2 effect survives frequency-matched controls | `register_shift` | not run — **a gate, not a robustness check** |
+| **R1a** | vulgar-register sexual mass FALLS under alignment | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |
+| **R1b** | clinical/euphemistic mass RISES — **required**, or it is suppression not displacement | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |
+| **R2** | the register signature is larger for sexual than violent | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |
+| **R3** | archaic violent mass rises (`smite`) | `register_shift` | **SUPERSEDED before any run** — was declared underpowered, ineligible for a headline |
+| **R4** | every R1/R2 effect survives frequency-matched controls | `register_shift` | **SUPERSEDED before any run** — was a gate, not a robustness check |
+| **G** | register RISES at the twp endpoint under alignment | `register_shift` | **NOT SUPPORTED** — 30/50 lineages, median +0.0029, p=0.203 |
+| **G1** | the rise is larger where transgressive mass fell | `register_shift` | **SUPPORTED** — 4/50, median −0.0221, p<1e-5 |
+| **G2** | it holds on the sexual subset | `register_shift` | **REVERSED** — 12/50, median −0.0193, p=0.0003 |
 | **A** | SEXUAL vocabulary is preferentially removed by SFT (vs frequency-matched neutral) | `division_of_labour/removal_rates` | **SUPPORTED** — +0.0894, CI [+0.023, +0.161]; SFT strips 37.7% of sexual vs 26.8% neutral |
 | **B** | VIOLENT vocabulary is preferentially removed by the preference stage | `division_of_labour/removal_rates` | **NOT SUPPORTED** — bounded to ±0.05; violence is SFT-dominated too |
 

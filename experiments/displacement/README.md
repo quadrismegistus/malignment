@@ -18,8 +18,11 @@ check the instruments (`instrument_calibrations`) or open the training data
 |---|---|---|
 | [`displacement_axis/`](displacement_axis/) | awaiting more lineages | how MUCH mass moves, and in which direction along an author-declared pole axis |
 | [`displacement_taxonomy/`](displacement_taxonomy/) | RUN | what KIND of movement, built from blind coders rather than from a metric |
-| [`register_shift/`](register_shift/) | REGISTERED, NOT RUN | does alignment shift REGISTER -- vulgar to clinical -- rather than only lowering transgressive mass |
-| [`salary_probe/`](salary_probe/) | PARKED | what alignment does to a distribution over money, after a two-lineage pilot |
+| [`register_shift/`](register_shift/) | RUN 2026-08-24 | does alignment shift REGISTER -- vulgar to clinical? G NOT supported (30/50, p=0.203), G1 supported, G2 REVERSED |
+
+`salary_probe/` moved to `../exploratory/salary_probe/` on 2026-08-24: parked
+after a two-lineage pilot and never promoted to a declared question, so it sits
+with the other unpromoted work rather than beside three live ones.
 
 The first two are the pair that motivates the grouping: `displacement_axis`
 gives a magnitude and a direction and cannot say what kind of movement produced
