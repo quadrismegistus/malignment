@@ -1,6 +1,6 @@
 ---
 question: What KINDS of movement does alignment produce, and how are they distributed?
-status: RUN. 35 frames + 10 matched control pairs read blind at 42-50 lineages. 89 site components grouped across frames by three raters. 101 paired components (55 site, 46 control) grouped separately; role purity sits on the null in all three.
+status: DONE (for now). 46 site frames + 15 neutrals + 10 matched control pairs read blind at 12-50 lineages, 2 raters each. 89 site components grouped by three raters and confirmed in rating space (5 sources, all p<0.02). 101 paired components grouped separately; purity sits on the null (p 0.38-0.50). 175 site+neutral components grouped; purity separates (p<0.001) but by vocabulary distance, not by operation type. Ten canonical meta-relations catalogued in TAXONOMY.md.
 ---
 
 # displacement_taxonomy
@@ -20,6 +20,10 @@ A README that restated them would be the second copy that drifts -- the failure
 `division_of_labour/README.md` names in as many words -- so what follows is
 routing and status, and every quantity lives where it was produced.
 
+    TAXONOMY.md                THE REFERENCE TABLE. Ten meta-relations with
+                               rating-space signatures, domain composition,
+                               crosses-to-controls status, and what each answers.
+    TODO.md                    paper figures and possible further work
     plan.md                    the design, and what was established before any of it
     RESUME.md                  state for a session arriving cold. READ THIS FIRST.
     ITERATIONS.md              what was tried and abandoned, with reasons
