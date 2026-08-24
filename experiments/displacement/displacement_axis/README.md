@@ -32,17 +32,26 @@ Validated by reproducing every hand-computed pilot2 figure exactly, per-pair row
 
 Reads `twp_words_v4` / `twp_cells_v4` and imports `slot_axis.Axis`. Runs no checkpoint and needs no server.
 
-> **READ `LINEAGE_AND_DOSE.md` BEFORE QUOTING ANY p-VALUE BELOW.** Every sign test in
-> this file uses the FRAME as the unit -- a frame's lineages are medianed away before
-> testing -- so these numbers generalise over this prompt corpus and are silent about
-> models. `lineage_dose.py` recomputes them on the lineage, the unit the rest of
-> `experiments/displacement/` uses, on the same pilot3 artifacts. 23 of 48 direction
-> results hold under both units and every loss is in `identity`: **`identity harm` is
-> 23/23 frames here and 13/20 lineages there, with seven models moving the other way.**
-> That file also runs the dose response this one never did, crossing its own
-> `base_naughty_mass` section with its own naming section: transgressive mass governs
-> whether the distribution moves and NOT how nameable the movement is (gain 12/21,
-> p=0.66).
+> **EVERY NUMBER BELOW IS pilot3, WHICH RAN 21 OF THE 50 ENDPOINT PAIRS.** That was a
+> data shortfall, not a design choice -- 25 `base absent` and 4 `endpoint absent`
+> against `twp_words_v4` as it then stood -- and it is over: **`pilot4` runs all 50
+> pairs, 15,150 cells, nothing skipped.** Rerun anything here with `--run pilot4`
+> before quoting it.
+>
+> **AND EVERY SIGN TEST BELOW USES THE FRAME AS THE UNIT** -- a frame's lineages are
+> medianed away before testing -- so these p-values generalise over this prompt corpus
+> and are silent about models. `lineage_dose.py` recomputes both collapses on pilot4.
+> 25 of 48 direction results hold under both units and the two now largely agree, but
+> two identity results here do not survive the larger roster (`aggression` 0.0018 ->
+> 0.40, `directedness` 0.043 -> 0.31), and **`identity harm`, reported below as 0 of
+> 24 frames, has 16 of 50 lineages moving the other way** against violence harm's
+> 5 of 50.
+>
+> `LINEAGE_AND_DOSE.md` also runs the dose response this file never did, crossing its
+> own `base_naughty_mass` quartile section with its own naming section: transgressive
+> mass governs whether the distribution moves and NOT how nameable the movement is
+> (gain 27/50, p=0.67). `mundanity` is the one scale significant on all three
+> quantities -- it rises, rises more under load, and is better named there.
 
 ## What the axis is, and what it is not
 

@@ -62,7 +62,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 #: globs below return [] instead of raising; `repo_root` refuses instead.
 from malignment.paths import REPO
 sys.path.insert(0, REPO); sys.path.insert(0, HERE)
-RES = os.path.join(HERE, "results", "pilot3")
+#: `--run` selects the run directory; pilot3 stays the default so every command
+#: already written against this file keeps meaning what it meant. A different
+#: run is a different DIRECTORY, so it cannot clobber the canonical artifact and
+#: the suffix guard below is about parameters only.
+RUN = "pilot3"
+RES = os.path.join(HERE, "results", RUN)
 LONG = os.path.join(RES, "long")
 SLOT = os.path.join(REPO, "experiments", "slot_ratings")
 DROP = {"n_eligible", "n_present", "rise", "fall", "net", "ratable"}
@@ -81,6 +86,7 @@ def contextual():
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--run", default=RUN, help="run directory under results/")
     ap.add_argument("--null-draws", type=int, default=40)
     ap.add_argument("--seed", type=int, default=20260820)
     ap.add_argument("--min-coverage", type=float, default=0.30,
@@ -89,6 +95,12 @@ def main(argv=None):
                     help="a (frame, scale) needs this much rating spread to enter "
                          "either table; below it dN is a number about nothing")
     a = ap.parse_args(argv)
+    global RES, LONG
+    RES = os.path.join(HERE, "results", a.run)
+    LONG = os.path.join(RES, "long")
+    if not os.path.isdir(RES):
+        ap.error("no such run: %s" % RES)
+    print("run: %s" % a.run)
     import numpy as np
     from scipy import stats
     import dedupe
@@ -287,8 +299,8 @@ def main(argv=None):
                          "null, and the frame-level collapse", _params=params,
                    cells=rows, frames=fr),
               open(os.path.join(RES, "mass_direction%s.json" % tag), "w"))
-    print("\n-> results/pilot3/mass_direction%s.json,"
-          " long/mass_cells%s.csv, long/mass_frames%s.csv" % (tag, tag, tag))
+    print("\n-> results/%s/mass_direction%s.json,"
+          " long/mass_cells%s.csv, long/mass_frames%s.csv" % (a.run, tag, tag, tag))
 
 
 if __name__ == "__main__":

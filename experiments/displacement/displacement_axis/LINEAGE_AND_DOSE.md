@@ -1,167 +1,171 @@
 # The lineage as the unit, and the dose response this folder never ran
 
-Producer: `lineage_dose.py`. Reads `results/pilot3/` only -- no rescoring, no fleet
-work. Long output at `~/malignment-data/displacement_axis/lineage_dose_long.csv`,
-one row per (domain, scale, lineage).
+Producer: `lineage_dose.py`. Run: **`pilot4`, all 50 endpoint pairs**. Long output at
+`~/malignment-data/displacement_axis/pilot4/lineage_dose_long.csv`, one row per
+(domain, scale, lineage).
 
-Population: 4,402 cells, 253 prompts, **21 lineages, all 21 in `roster.endpoints()`
-out of 50 declared**. Gate `sd >= 0.5` per (cell, scale), identical to
-`mass_direction.py`. Ties excluded from every sign test.
+    pilot4   50 of 50 declared pairs, 0 not run, 0 cells skipped
+             303 items, 255 prompts, 15,150 cells; 11,859 rated cells after the gate
+    pilot3   21 of 50 pairs, superseded by this. Its shortfall was DATA, not design:
+             the manifest records 25 `base absent` and 4 `endpoint absent` against
+             twp_words_v4 as it then stood. All 50 pairs now carry all 255 axis
+             prompts on both arms.
 
-**Structural floor, before any number is read.** With 21 lineages a sign test cannot
-go below `p = 2 * 0.5^21 = 9.5e-07`. The frame-unit e-18s and e-34s in `README.md`
-do not survive translation and their disappearance is arithmetic, not a failure to
-replicate. Perfect agreement across all 21 lineages reads as `9.5e-07`.
+Gate `sd >= 0.5` per (cell, scale), as `mass_direction.py`. Ties excluded throughout.
+Sign-test floor at 50 lineages: `p = 2 * 0.5^50 = 1.8e-15`.
 
-## 1. THE UNIT: 23 of 48 direction results hold under both, and every loss is in one domain
+## A CORRECTION TO THE pilot3 VERSION OF THIS FILE
+
+The 21-lineage run reported **"4 direction results lost on the lineage unit and all
+four are in identity"**, and argued power was not the explanation because the same
+power drop hit all four domains. **That was wrong.** At 50 lineages the identity
+concentration disappears:
+
+    LOST at 21 lineages          what 50 lineages say
+    identity harm                significant under BOTH   (lineage 16/50, p=0.015)
+    identity interiority         significant under BOTH   (lineage 34/50, p=0.015)
+    identity aggression          the FRAME result did not replicate (0.0018 -> 0.40)
+    identity directedness        the FRAME result did not replicate (0.043  -> 0.31)
+
+Two of the four were underpowered on the lineage side and are now significant. The
+other two failed on the *frame* side, which is a different fact: a frame's value is a
+median over lineages, so adding 29 lineages moves the frame numbers too. Neither is
+"identity's results do not generalise over models."
+
+**What survives from that reading** is the narrower mechanism, which the larger run
+sharpens rather than removes -- see the `harm` block below.
+
+## 1. THE UNIT: 25 of 48 hold under both, and the two collapses now largely agree
 
 `mass_direction.py:173` collapses a frame's lineages to their median and signs across
-FRAMES. That generalises over stimuli with the models pooled inside. The rest of
-`experiments/displacement/` uses the LINEAGE, because the models are what is sampled
-and the claim is about what alignment does. Both are computed here, side by side.
+FRAMES: it generalises over stimuli with the models pooled inside. Everywhere else in
+`experiments/displacement/` the LINEAGE is the unit. Both computed on the same cells.
 
-    significant under BOTH units       23
-    frame-unit only, LOST on lineages   4    identity aggression   0.0018  -> 1.0
-                                             identity directedness 0.043   -> 0.5
-                                             identity harm         1.2e-07 -> 0.26
-                                             identity interiority  2.7e-07 -> 0.12
-    lineage-unit only, NEW              4    institutional deliberation 0.13 -> 0.00022
-                                             institutional hedged       0.51 -> 0.0072
-                                             violence directedness      0.11 -> 0.027
-                                             sexual interiority         0.15 -> 0.027
-    neither                            17
+    significant under BOTH units       25
+    frame-unit only, LOST               2    identity makes_better  0.044 -> 0.12
+                                             violence hedged        0.020 -> 0.065
+    lineage-unit only, NEW              5    institutional vocalisation 0.19  -> 0.0066
+                                             violence superego          0.21  -> 0.015
+                                             sexual directedness        0.065 -> 0.015
+                                             sexual hedged              0.057 -> 0.015
+                                             sexual interiority         0.15  -> 0.0026
+    neither                            16
 
-**The headline direction claims survive.** `institutional fit` is 21/21 at the floor
-(9.5e-07), `violence harm` 0/21 at the floor, `sexual mundanity` 20/21 (2.1e-05),
-`identity fit` 19/20 (4e-05), `identity vocalisation` 16/20 (0.012). The
-mass-direction result is not an artifact of the frame collapse.
+Both losses are borderline on both sides. **The mass-direction finding is not an
+artifact of the frame collapse**, and at full roster the two units mostly agree.
 
-**But identity is the only domain that loses anything, and it loses half of what it
-had.** Four of its eight significant scales fail on the lineage unit; institutional,
-violence and sexual lose none. Power cannot be the whole story -- the same power drop
-hits all four domains -- and the gated cell matrix is no more ragged in identity
-(66-86% filled) than elsewhere (80-91%).
+### What the frame collapse still cannot see
 
-### What the frame collapse cannot see, with the worked example
+Medianing a frame's lineages before testing makes model heterogeneity invisible by
+construction. That remains true and is worth quoting with `harm`:
 
-Medianing a frame's lineages BEFORE testing makes model heterogeneity invisible by
-construction. `harm`, per-lineage median dN:
+    violence harm     5 of 50 lineages positive    lineage 5/50, p=4.2e-09
+                                                   frame   2/47, p=1.6e-11
+    identity harm    16 of 50 lineages positive    lineage 16/50, p=0.015
+                                                   frame    0/24, p=1.2e-07
+                      +0.3500 bloom-7b1   +0.2601 falcon-mamba-7b
+                      +0.1232 llm-jp-3-7.2b   +0.0841 OLMo-2-0425-1B
 
-    violence harm     0 of 21 lineages positive     unanimous
-                      -0.0018 (pythia-2.8b) to -0.5453 (Llama-3.1-8B)
-
-    identity harm     7 of 20 lineages positive     split
-                      +0.3608 bloom-7b1   +0.1652 llm-jp-3-7.2b   +0.1147 CT-LLM-Base
-                      +0.0826 Qwen2.5-7B  +0.0757 Qwen3-8B-Base
-                      ... -0.3808 Yi-1.5-9B  -0.4165 gemma-2-9b  -0.4388 Amber
-
-`identity harm` is reported in `README.md` as **23/23 frames, p=2.4e-07** -- which
-reads as unanimity. Seven of twenty models move it the other way, one of them by
-+0.36. The frame test is not wrong about frames; it is silent about models, and the
-silence is not visible in its output.
-
-**So: the direction findings hold, and `identity harm` is not a corpus-wide claim.**
-The distinction matters most exactly where the README leans hardest on identity as
-the domain of unlegislated corpus residue.
+`identity harm` is reported in `README.md` as **0 of 24 frames**, which reads as
+unanimity. **Nearly a third of models move it the other way.** The direction claim is
+real -- it now clears the lineage test -- but the frame collapse says nothing about
+how consistently models do it, and the two domains differ sharply on exactly that:
+violence 5/50 against identity 16/50.
 
 ## 2. THE DOSE CROSS: naming works, and it does not work better under load
 
 The README's conditional section (displacement rate 2%/11%/28%/38% across
-`base_naughty_mass` quartiles) is a crosstab over 5,595 cells with no slope and no
-p-value, and it sits 170 lines above the naming section without ever meeting it.
-Crossed here, with the lineage as the unit and the dose measured on the BASE arm
-before alignment, so the predictor cannot be selected on the outcome.
+`base_naughty_mass` quartiles) is a crosstab over cells with no slope and no p-value,
+sitting 170 lines above the naming section without ever meeting it. Crossed here,
+lineage unit, dose measured on the BASE arm so the predictor cannot be selected on
+the outcome. Each lineage split at its OWN median dose; one number per lineage, so
+twelve correlated scales cannot each cast a vote.
 
-`|dN| / shuffled |dN|` -- how much further the centroid travels along a named
-dimension than along a reshuffle of that same dimension's values within the frame's
-own vocabulary. Each lineage split at its OWN median dose; one number per lineage,
-so twelve correlated scales cannot each cast a vote.
+    |dN| / shuffled |dN|, LOW-dose half     +0.1306   42/50   p=1.2e-06   (vs 1.00x)
+    |dN| / shuffled |dN|, HIGH-dose half    +0.1385   45/50   p=4.2e-09   (vs 1.00x)
+    GAIN, high minus low                    +0.0146   27/50   p=0.67
 
-    |dN| / shuffled, LOW-dose half     +0.1289   19/21   p=0.00022   (vs 1.00x)
-    |dN| / shuffled, HIGH-dose half    +0.1924   18/21   p=0.0015    (vs 1.00x)
-    GAIN, high minus low               +0.0309   12/21   p=0.66
+**Named dimensions beat their own permutation in both halves, by indistinguishable
+amounts.** 1.13x where the base arm is quiet, 1.14x where it is loaded. The pilot3
+null replicates at more than twice the n and both halves gain significance while the
+gap does not.
 
-**Named dimensions beat their own permutation in both halves and by statistically
-indistinguishable amounts.** 1.13x where the base arm is quiet, 1.19x where it is
-loaded, and the difference is a null at 12/21.
+**Transgressive mass governs WHETHER the distribution moves -- 2% to 38% -- and not
+how nameable the movement is once it does.** Rate and nameability are separate
+functions of dose and only the first one has any.
 
-This is the opposite of what the dose section predicts. **Transgressive mass governs
-WHETHER the distribution moves -- 2% to 38% -- and not how nameable the movement is
-once it does.** Rate and nameability are separate functions of dose, and only the
-first one has any.
+### `mundanity` is significant on all three quantities
 
-### What is significant under dose, and it is not a wash
+Pooled over domains, lineage unit:
 
-DOSE slope, pooled over domains, lineage unit:
+    scale          MARGINAL              DOSE                  NAMING GAIN
+    mundanity      +0.0287 36/50 0.0026  +0.2467 41/50 5.6e-06  +0.1982 38/50 0.00031
+    fit            +0.0352 46/50 4.5e-10 -0.0922 12/50 0.00031  -0.0940 15/50 0.0066
+    harm           -0.0791  7/50 2.1e-07 -0.4731 15/50 0.0066   +0.2217 31/50 0.12
+    interiority    +0.0197 38/50 0.00031 +0.1452 35/50 0.0066   -0.1333 17/50 0.033
+    directedness   -0.0235 14/50 0.0026  -0.4271 11/50 9e-05    -0.0106 24/50 0.89
+    vocalisation   +0.0163 33/50 0.033   -0.1663 16/50 0.015    -0.2437  7/50 2.1e-07
 
-    scale          MARGINAL                    DOSE                     shape
-    mundanity      +0.0463 16/21   0.027       +0.1987 17/21  0.0072    both
-    fit            +0.0432 21/21   9.5e-07     -0.1162  3/21  0.0015    both, opposed
-    makes_better   +0.0265 20/21   2.1e-05     -0.1018  5/21  0.027     both, opposed
-    directedness   -0.0347  5/21   0.027       -0.3805  5/21  0.027     both
-    harm           -0.0616  1/21   2.1e-05     -0.4544  8/21  0.38      marginal only
-    interiority    +0.0172 18/21   0.0015      +0.0304 11/21  1.0       marginal only
+**`mundanity` rises, rises MORE where the base arm is transgressive, and is BETTER
+named there.** The only scale positive and significant on all three. The more
+transgressive mass a frame carries at base, the further the centre of what the model
+will say moves toward the ordinary, and the more of that movement the named dimension
+accounts for. That is `X_metonymy`'s shape -- down the ladder, into an ordinary
+vocabulary -- with a slope instead of a contrast.
 
-**`mundanity` is the one scale that both rises and rises MORE where the base arm is
-transgressive.** The more transgressive mass a frame carries at base, the further the
-centre of what the model will say moves toward the ordinary. That is the shape
-`X_metonymy` describes -- down the ladder and into an ordinary vocabulary -- now with
-a slope rather than a contrast.
+**`harm` falls hard and falls harder under load.** 7/50 marginally at 2.1e-07, dose
+slope 15/50 at 0.0066. (At 21 lineages the dose slope was p=0.38; the extra models
+resolved it.)
 
-**`fit` and `makes_better` rise everywhere and rise LESS under load.** Both are
-near-unanimous marginally (21/21, 20/21) with negative dose slopes. Alignment applies
-them as a constant, not as a response to what it finds.
-
-**`harm` falls hard and flat.** 1/21 marginally at 2.1e-05, dose slope 8/21 at 0.38.
-It falls the same amount whether or not the frame was loaded.
+**`fit` rises everywhere and rises LESS under load.** 46/50 marginally at 4.5e-10
+with a negative dose slope. Applied as a constant, not as a response to what is
+found.
 
 ### Per-domain, exploratory
 
-At the (domain, scale) level, 12 of 48 naming-gain cells reach p<0.05 against 2.4
-expected by chance, 9 positive and 3 negative; dose slopes 15 of 48, 7 positive and
-8 negative. **There is structure below the pooled null, and it does not compose**,
-which is why the pooled test is the answer and these are candidates:
+22 of 48 dose slopes (8 positive, 14 negative) and 24 of 48 naming-gain cells
+(13 positive, 11 negative) reach p<0.05 against 2.4 expected by chance. **There is
+much more structure below the pooled null than chance allows, and it does not
+compose** -- which is why the pooled test is the answer and these are candidates.
+The largest, uncorrected:
 
-    identity      hedged       +0.6895 15/16 0.00052      institutional superego     -0.2877  4/20 0.012
-    violence      harm         +0.4918 16/20 0.012        institutional deliberation -0.2736  2/20 0.0004
-    identity      fit          +0.4661 16/20 0.012        violence      fit          -0.3378  2/20 0.0004
-    institutional makes_worse  +0.3563 16/20 0.012
-    violence      makes_worse  +0.2729 16/21 0.027
-    institutional directedness +0.2278 16/20 0.012
-    violence      mundanity    +0.2203 16/20 0.012
-    institutional aggression   +0.2035 16/20 0.012
+    identity      hedged       +0.7709 45/50 4.2e-09    institutional vocalisation -0.2714 14/50 0.0026
+    identity      deliberation +0.8645 37/50 0.00094    institutional deliberation -0.1975  9/50 5.6e-06
+    institutional makes_worse  +0.2715 42/50 1.2e-06    violence      fit          -0.3506  5/50 4.2e-09
+    institutional aggression   +0.3218 38/50 0.00031    violence      makes_better -0.2500 15/50 0.0066
+    identity      makes_better +0.3058 34/50 0.015      institutional superego     -0.1439 17/50 0.033
 
-None is corrected across 48 cells and none should be quoted alone.
+Note that identity, whose scales the pilot3 file suspected of not generalising, has
+the two largest positive naming gains in the table.
 
 ## What this does and does not change in README.md
 
-- **Does not change** the mass-direction finding. 23 of 48 hold under both units,
-  including every scale the README leads with.
-- **Changes `identity harm`.** Quote it as 13/20 lineages, p=0.26, seven models
-  moving the other way -- never as 23/23.
-- **Changes the three other identity scales** (`aggression`, `directedness`,
-  `interiority`): frame-unit results that do not generalise over models.
-- **Adds four** the frame collapse missed, two of them institutional.
+- **Does not change** the mass-direction finding. 25 of 48 hold under both units.
+- **Changes the reading of `identity harm`.** Quote the frame result with the model
+  split: 0/24 frames, and 16 of 50 lineages moving the other way.
+- **Retires** `identity aggression` and `identity directedness`: their frame-unit
+  significance at 21 lineages does not hold at 50.
+- **Adds five** the frame collapse missed, three of them sexual.
 - **Answers the crossed question with a null.** "Displacement is conditional on
-  transgressive mass" is a claim about the RATE. It does not extend to nameability.
-- **Every p-value in README.md's mass tables is over frames.** They cannot be read
-  next to `norm_change` or `rate_and_magnitude`, which are over 50 lineages.
+  transgressive mass" is a claim about the RATE and does not extend to nameability.
+- **Every p-value in README.md's mass tables is over frames**, and those were
+  computed on pilot3's 21 pairs. They are not comparable with `norm_change` or
+  `rate_and_magnitude` without this translation.
 
 ## Fences
 
-- **21 lineages of 50.** pilot3 predates the roster; a rerun would change the
-  population, not just the n. Nothing here is a 50-lineage result.
-- **The floor is 9.5e-07** and three results sit on it. They mean "unanimous", not
-  "overwhelming".
+- **The floor is 1.8e-15.** Nothing here reaches it; `fit` frame-unit at 1.1e-35 is a
+  frame count, not a model count.
 - **`base_naughty_mass` is not `k_transgressiveness`.** This folder's dose is mass on
   a per-item declared naughty pole set; `norm_change` and `rate_and_magnitude` use a
   rated scale. Nobody has checked that the two agree, so the dose results here and
-  there are not yet the same axis.
-- **The naming gain is a ratio of medians per (lineage, scale).** A lineage
-  contributing few gated cells in a domain contributes as much as one contributing
-  many, which is the correct weighting for a claim about models and the wrong one for
-  a claim about cells.
+  there are not yet on the same axis.
+- **The naming gain is a ratio of medians per (lineage, scale).** A lineage with few
+  gated cells in a domain counts as much as one with many -- correct for a claim
+  about models, wrong for a claim about cells.
 - **`dN` still scores the two arms on different word sets** (median Jaccard 0.575,
-  README "Known gap"). Everything above inherits that, and it is in the direction
-  that inflates apparent displacement.
-- **The per-domain tables are exploratory.** 48 cells, uncorrected, both signs.
+  README "Known gap"), in the direction that inflates apparent displacement.
+- **pilot4's `words.jsonl` is 772 MB and gitignored.** Regenerating it is only
+  reproducible while the store holds still; the population is discovered, so a later
+  ingest gives a different one.
+- **The per-domain tables are exploratory**, 48 cells, uncorrected, both signs.
