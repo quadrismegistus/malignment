@@ -2931,6 +2931,62 @@
    "outcome": "load_ok",
    "cause": "",
    "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "01-ai/Yi-1.5-9B-Chat",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "google/gemma-2-9b-it",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `bf16`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "google/recurrentgemma-9b-it",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "openGPT-X/Teuken-7B-instruct-v0.6",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "zai-org/glm-4-9b-chat-hf",
+   "environment": "local_mps_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
   }
  ],
  "engine_support": {

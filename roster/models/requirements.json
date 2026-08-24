@@ -62,7 +62,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Alchan/mpt-7b-chat",
@@ -575,7 +575,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "HuggingFaceTB/SmolLM3-3B-Base",
@@ -656,7 +656,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "LLM360/Amber",
@@ -2444,7 +2444,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "google/recurrentgemma-9b",
@@ -2498,7 +2498,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "huggyllama/llama-7b",
@@ -3227,7 +3227,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "microsoft/Phi-4-reasoning-plus",
@@ -3443,7 +3443,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "openbmb/MiniCPM5-1B",
@@ -4331,7 +4331,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "zai-org/glm-4-9b-hf",
