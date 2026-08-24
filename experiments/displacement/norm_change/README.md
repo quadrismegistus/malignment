@@ -133,8 +133,8 @@ show a rise, a fall or nothing on any target with equal ease.
       k_transgressiveness_z          -0.10448    31/122     <1e-5
       warriner_arousal_z             -0.05705    37/116     <1e-5
 
-**THE DOSE NUMBERS BELOW AND ABOVE ARE STILL ON n=153 AND ARE NOT TO BE
-CITED.** They inherit the same pseudo-replication the declared tests did;
+**SUPERSEDED by the `summary.py` table above, which is on 50 lineages. The
+numbers in this section are the old n=153 ones and are NOT to be cited.** They inherit the same pseudo-replication the declared tests did;
 `dose.py` now restricts to `endpoint_pairs()` but has not been re-run.
 The DESIGN is unaffected -- the predictor is still measured before
 alignment and still does not select on the outcome.
@@ -176,6 +176,72 @@ its absolute mass rises. Restricted to movers, speech words are net risers:
 
 RH flagged the contradiction against findings elsewhere; it was a quantity
 error in the reporting, not a disagreement in the data.
+
+
+## MARGINAL vs DOSE, ONE TABLE (`summary.py`)
+
+Two questions about every scale on the same 50 lineages. MARGINAL: does it move
+under alignment on average? DOSE: does it move MORE where the base arm was more
+transgressive? They can disagree in every combination, which is why they print
+together.
+
+### English levels
+
+    scale                       MARGINAL          DOSE              reading
+    k_register_level          +0.0063 p<1e-5*   +0.0025 p=0.67    MARGINAL ONLY
+    k_register_level_z        +0.0071 p<1e-5*   +0.0028 p=0.67    MARGINAL ONLY
+    k_bodily_harm_z           -0.0043 p<1e-5*   -0.2125 p<1e-5*   both
+    k_transgressiveness_z     -0.0033 p<1e-5*   -0.1687 p<1e-5*   both
+    warriner_arousal_z        -0.0185 p<1e-5*   -0.0773 p=9e-5*   both
+    k_vulgarity_z             -0.0000 p=2e-5*   -0.0577 p<1e-5*   both
+    warriner_valence          +0.0102 p=0.029*  +0.1200 p=2e-5*   both
+    k_valence                 +0.0040 p=0.002*  +0.0806 p=3e-4*   both
+    k_concreteness            -0.0248 p=0.119   -0.1105 p=1e-5*   DOSE ONLY
+    brysbaert_concreteness    -0.0042 p=0.471   -0.0291 p=3e-4*   DOSE ONLY
+    warriner_dominance_z      +0.0061 p=0.085   +0.0922 p=9e-5*   DOSE ONLY
+    k_charge                  +0.0034 p=0.533   -0.0986 p=2e-5*   DOSE ONLY
+
+### THREE SHAPES, AND THE SHAPE IS THE RESULT
+
+**MARGINAL ONLY — moves everywhere alike.** `k_register_level` is the clearest
+thing in this folder marginally (45 up/4 dn, p<1e-5) and has NO dose slope at
+all (p=0.67). **Register rises across the board and not as a response to
+transgression.** It is a global stylistic shift, not a safety behaviour.
+
+**DOSE ONLY — moves only where the frame is loaded.** Concreteness, dominance
+and charge are flat on average and steep under dose. **H1 is rescued in a
+specific form: concreteness does fall, but only at transgressive prompts.**
+
+**And `warriner_dominance` is the case M01 got marginally and missed.**
+`C_deextremification` reports "H3 dominance dead". Marginally here it is dead
+too (p=0.085). Under dose it is +0.092, p=9e-5. A marginal test cannot see it;
+the finding is not wrong, it is incomplete.
+
+**BOTH — falls generally and falls harder where loaded.** The transgression
+cluster: bodily_harm, transgressiveness, vulgarity, arousal. Valence rises both
+ways.
+
+### THE SPEECH ANSWER, EXACTLY
+
+    Q2.2 Speech acts   MARGINAL -0.0130 p=0.003*   DOSE +0.0079 p=0.015*
+
+**Opposite signs, both significant.** Speech mass falls on average across all
+prompts and RISES where the base arm was transgressive. That is why the marginal
+sweep and M01's kill->scream direction looked like a contradiction: they are
+different conditions, and only the dose version is about displacement.
+
+### Chinese levels — a DIFFERENT structure, not a weaker one
+
+    concreteness_zh           -0.0325 p<1e-5*   +0.0049 p=0.56    MARGINAL ONLY
+    k_register_level          +0.0075 p<1e-5*   +0.0057 p=0.56    MARGINAL ONLY
+    k_bodily_harm_z           -0.0009 p<1e-5*   -0.1148 p=0.003*  both
+    k_valence                 +0.0038 p=6e-4*   +0.0646 p=0.008*  both
+    k_concreteness            -0.0160 p=0.144   -0.1088 p=0.001*  DOSE ONLY
+
+**Concreteness is MARGINAL ONLY in Chinese and DOSE ONLY in English**, on each
+language's own instrument. Chinese de-concretizes everywhere; English does it
+only under transgressive load. Same direction, different trigger — which is a
+sharper cross-lingual claim than "the signature does not travel".
 
 ## WHAT DID NOT LAND, AND WHY IT IS NOT A NULL
 
