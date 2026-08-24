@@ -228,6 +228,64 @@ def contextual_pos(ch, limit_lang=None):
     return out
 
 
+def contextual(ch, a):
+    """H6/H7: mass-weight the (prompt, word) slot ratings. -> contextual_long
+
+    **THE PROMPT IS IN THE JOIN KEY, WHICH IS THE WHOLE POINT.** These ratings
+    are of a word IN ITS FRAME, so the same word carries different numbers at
+    different prompts and a join on `word` alone would average them together
+    and destroy the thing being measured.
+
+    RESTRICTED TO THE OVERLAP, AND THE OVERLAP IS SMALL. 279 of the 534 rated
+    prompts appear in `movement`. Joining without that restriction would
+    compare a rated subset against an unrated remainder and report the
+    difference as an effect -- which is why `fields.slot_prompts()` exists.
+
+    THE TWO HYPOTHESES ARE NOT EQUALLY POWERED and this is known before the
+    numbers: inside the overlap `mediation` has 18,988 (prompt, word) pairs and
+    `euphemism` has 206. H6 is thin by construction, not by outcome.
+    """
+    from malignment import fields as F
+    idx = F._slot_index()
+    mp = {r["prompt"] for r in ch.query("SELECT DISTINCT prompt FROM movement")}
+    rows = []
+    for (pr, w), byinst in idx.items():
+        if pr not in mp:
+            continue
+        for inst, vals in byinst.items():
+            for scale, v in vals.items():
+                if scale == "ratable" or not isinstance(v, (int, float)) \
+                        or isinstance(v, bool):
+                    continue
+                rows.append({"prompt": pr, "word": w,
+                             "scale": "%s:%s" % (inst, scale), "value": float(v)})
+    print("contextual lookups: %s rows over %s prompts"
+          % (format(len(rows), ","), format(len({r["prompt"] for r in rows}), ",")),
+          flush=True)
+    push(ch, "nc_ctx_tmp", rows,
+         [("prompt", "String"), ("word", "String"),
+          ("scale", "String"), ("value", "Float64")])
+    lineages = [(r["base"], r["aligned"]) for r in
+                ch.query("SELECT DISTINCT base, aligned FROM movement ORDER BY base, aligned")]
+    q = """
+    SELECT m.base AS base, m.aligned AS aligned, m.prompt AS prompt,
+           c.scale AS scale,
+           sum(m.p_base    * c.value) / nullIf(sum(m.p_base),    0) AS base_level,
+           sum(m.p_aligned * c.value) / nullIf(sum(m.p_aligned), 0) AS aligned_level,
+           sum(m.p_base)    AS base_cov,
+           sum(m.p_aligned) AS aligned_cov,
+           count() AS n_words
+    FROM movement m INNER JOIN nc_ctx_tmp c
+      ON m.word = c.word AND m.prompt = c.prompt
+    {WHERE}
+    GROUP BY base, aligned, prompt, scale
+    FORMAT TabSeparatedWithNames"""
+    _write(ch, q, os.path.join(OUT, "contextual_long.csv.gz"), a.lang, lineages)
+    print()
+    print("-> %s" % OUT)
+    return 0
+
+
 def push(ch, name, rows, cols):
     """Replace a temp table with `rows`. DDL + JSONEachRow, the twp route."""
     import json
@@ -246,13 +304,18 @@ def main(argv=None):
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
+    ap.add_argument("--contextual", action="store_true",
+                    help="build contextual_long.csv.gz for H6/H7 and stop")
     a = ap.parse_args(argv)
-    if not (a.plan or a.run):
+    if not (a.plan or a.run or a.contextual):
         ap.print_help()
         return 0
 
     from malignment import ch
     os.makedirs(OUT, exist_ok=True)
+
+    if a.contextual:
+        return contextual(ch, a)
 
     words = vocabulary(ch)
     print("vocabulary: %s distinct words" % format(len(words), ","), flush=True)

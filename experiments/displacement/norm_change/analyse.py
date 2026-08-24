@@ -46,15 +46,32 @@ LONG = DATA
 
 #: (id, direction, scales, table). direction is the REGISTERED prediction, so a
 #: result that lands the other way reads as REVERSED rather than as a null.
+#: A DECLARED SCALE'S `_z` TWIN IS THE SAME HYPOTHESIS, not a new one. H2 says
+#: register rises; `k_register_level` and `k_register_level_z` are one claim on
+#: one construct, standardised or not. The first version matched literal names,
+#: so every twin fell through to EXPLORATORY and H2's own evidence was printed
+#: as an unregistered finding (RH caught it). `_absz` is NOT a twin -- it is a
+#: different quantity, extremity, which is why H5 names it explicitly and H1/H2
+#: do not inherit it.
 DECLARED = [
     ("H1", "down", ["brysbaert_concreteness", "k_concreteness", "concreteness_zh"], "levels"),
     ("H2", "up",   ["k_register_level", "brooke_formality"], "levels"),
     ("H3", "up",   ["X1"], "fields"),
-    ("H4", "up",   ["warriner_valence_z", "k_valence_z"], "levels"),
+    ("H4", "up",   ["warriner_valence", "k_valence"], "levels"),
     ("H5", "down", ["warriner_valence_absz", "k_valence_absz"], "levels"),
     ("H6", "up",   ["euphemism"], "contextual"),
     ("H7", "up",   ["mediation"], "contextual"),
 ]
+
+
+def _with_z(scales):
+    """A declared scale plus its `_z` twin. Never `_absz`: see DECLARED."""
+    out = []
+    for s in scales:
+        out.append(s)
+        if not s.endswith(("_z", "_absz")):
+            out.append(s + "_z")
+    return out
 
 
 def binom(k, n):
@@ -144,20 +161,29 @@ def report(label, scale, deltas, direction, tag):
     ties = n - up - dn
     eff = up + dn
     if eff < 3:
-        print("  %-4s %-26s %-11s n=%3d  ALL TIES (%d) -- no signed evidence"
-              % (label, scale[:26], tag, n, ties))
+        print("  %-4s %-34s %-11s n=%3d  ALL TIES (%d) -- no signed evidence"
+              % (label, scale[:34], tag, n, ties))
         return
     p = binom(up, eff)
     med = st.median(v)
     med_eff = st.median([x for x in v if x != 0])
-    if p >= 0.05:
+    if direction is None:
+        #: EXPLORATORY ROWS HAVE NO REGISTERED DIRECTION, so they get a SIGN and
+        #: never a verdict. The first version passed direction="up" as a default
+        #: and every falling scale printed REVERSED -- reversed against a
+        #: prediction nobody made. A verdict implies something was predicted.
+        verdict = ("rises" if med_eff > 0 else "falls") if p < 0.05 else "flat"
+    elif p >= 0.05:
         verdict = "not supported"
     elif (direction == "up" and med_eff > 0) or (direction == "down" and med_eff < 0):
         verdict = "SUPPORTED"
     else:
         verdict = "REVERSED"
-    print("  %-4s %-26s %-11s n=%3d  med %+.6f  med!=0 %+.6f  %3d up/%-3d dn/%-3d tie  p=%.5f  %s"
-          % (label, scale[:26], tag, n, med, med_eff, up, dn, ties, p, verdict))
+    #: SCALE COLUMN IS 34 WIDE, not 26. At 26 `warriner_valence_extremity`,
+    #: `..._z` and `..._absz` all truncate to one string and print as three
+    #: rows with one name and three different numbers.
+    print("  %-4s %-34s %-11s n=%3d  med %+.6f  med!=0 %+.6f  %3d up/%-3d dn/%-3d tie  p=%.5f  %s"
+          % (label, scale[:34], tag, n, med, med_eff, up, dn, ties, p, verdict))
 
 
 def main(argv=None):
@@ -166,13 +192,19 @@ def main(argv=None):
     ap.add_argument("--explore", action="store_true")
     a = ap.parse_args(argv)
 
-    declared = {s for _, _, ss, t in DECLARED for s in ss if t != "contextual"}
+    declared = {s for _, _, ss, t in DECLARED if t != "contextual" for s in _with_z(ss)}
     want = None if a.explore else declared
     print("reading %s" % LONG)
     acc = {}
-    for name in ("levels", "fields"):
-        t = stream(name, want)
+    for name in ("levels", "fields", "contextual"):
+        #: contextual is optional: it comes from `run.py --contextual` and the
+        #: declared tests for H1-H5 do not need it.
+        t = stream(name, None if name == "contextual" else want)
         if t is None:
+            if name == "contextual":
+                print("  contextual    absent -- run.py --contextual for H6/H7")
+                acc[name] = {}
+                continue
             print("missing %s_long.csv.gz -- run.py --run first" % name)
             return 1
         acc[name] = t
@@ -187,10 +219,20 @@ def main(argv=None):
         print("DECLARED -- the seven in registration.md")
         for hid, direction, scales, tbl in DECLARED:
             if tbl == "contextual":
-                print("  %-4s %-26s %-11s NOT YET WIRED -- needs the (prompt, word) join"
-                      % (hid, scales[0], "slot"))
+                #: the contextual table keys scales as `<instrument>:<scale>`,
+                #: because two instruments rating one scale NAME are not one
+                #: construct -- the same rule contextual_norms() follows.
+                hits = sorted({k[1] for k in acc["contextual"]
+                               if k[0] == lang and k[1].split(":")[-1] in scales})
+                if not hits:
+                    print("  %-4s %-34s %-11s no rated (prompt, word) overlap in %s"
+                          % (hid, scales[0], "slot", lang))
+                for sc in hits:
+                    d = per_lineage(acc["contextual"], lang, sc)
+                    if d:
+                        report(hid, sc, d, direction, "declared")
                 continue
-            for sc in scales:
+            for sc in _with_z(scales):
                 d = per_lineage(acc[tbl], lang, sc)
                 if d:
                     report(hid, sc, d, direction, "declared")
@@ -214,7 +256,7 @@ def main(argv=None):
                         rows.append((binom(up, up + dn) if up + dn >= 3 else 1.0, sc, d))
                 rows.sort()
                 for _p, sc, d in rows[:60]:
-                    report("--", sc, d, "up", "exploratory")
+                    report("--", sc, d, None, "exploratory")
                 if len(rows) > 60:
                     print("  ... %d more scales with n>=10, sorted by p; "
                           "none shown is NOT the same as none tested" % (len(rows) - 60))

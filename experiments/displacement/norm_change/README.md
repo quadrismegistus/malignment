@@ -75,6 +75,73 @@ Chinese falls on `concreteness_zh` (p<1e-5) while the English lexicons are flat.
 That pattern is what a working instrument looks like — the lexicon built for the
 language answers and the one applied across it does not.
 
+
+## H6 AND H7 LAND, AND H6 WAS THE UNTESTED MOVE
+
+    H6  results:euphemism                  +0.002392  104 up/22 dn/27 tie  p<1e-5   SUPPORTED
+    H7  slot_institutional_en_v3:mediation +0.005310   89 up/58 dn/ 6 tie  p=0.013  SUPPORTED
+
+**H6 applied the sexual instrument's `euphemism` scale to every rated prompt,
+not only to prompts marked sexual** -- the move `slot_ratings` never made, which
+is why the registration flagged it as worth a try. It holds: 104 of 126 signed
+lineages rise.
+
+Neither has any zh counterpart: the contextual ratings are English-only, so
+`slot_prompts()` and the Chinese roster do not intersect. Reported as no overlap
+rather than as a null.
+
+## THE DOSE-RESPONSE, WHICH RECOVERS WHAT THE MARGINAL MEANS HID
+
+`dose.py`. Predictor: the BASE arm's transgressive level at a prompt, measured
+before alignment touches anything. Outcome: `aligned - base` on some other
+scale. **It does not select on the outcome** -- a transgressive prompt could
+show a rise, a fall or nothing on any target with equal ease.
+
+    EN levels, 153 lineages         med slope     up/dn        p
+      warriner_dominance_z           +0.05831   117/ 36     <1e-5
+      warriner_valence_z             +0.06457   114/ 39     <1e-5
+      k_bodily_harm_z                -0.12738    31/122     <1e-5
+      k_transgressiveness_z          -0.10448    31/122     <1e-5
+      warriner_arousal_z             -0.05705    37/116     <1e-5
+
+**Sweetening is DOSE-DEPENDENT, not uniform**: the more transgressive mass the
+base put at a prompt, the harder alignment sweetens it and the harder it cuts
+harm and arousal.
+
+**`warriner_dominance` is the strongest positive slope, and M01 called dominance
+dead.** `C_deextremification` reports "H3 dominance dead" on a marginal test.
+Conditioned on transgressive dose it is the largest riser here (117/36, p<1e-5).
+A marginal test cannot see it. That is the argument for the design.
+
+### AND IT SETTLES THE SPEECH QUESTION THE OTHER WAY
+
+    EN fields, dose slopes           med slope     up/dn        p
+      X3.2  Sensory: Sound            +0.01789   112/ 41     <1e-5
+      A10-  Hiding/Hidden             +0.01377   113/ 40     <1e-5
+      S3.2  Relationship: sexual      +0.01316   113/ 40     <1e-5
+      Q1.3  Telecommunications        +0.00963   110/ 42     <1e-5
+      Q2.2  SPEECH ACTS               +0.00783   108/ 45     <1e-5
+      E3-   Calm/VIOLENT/Angry        -0.00383    46/107     <1e-5
+      E2+   Liking                    -0.00695    42/111     <1e-5
+      T2++  Time: beginning/ending    -0.01258    45/108     <1e-5
+
+**Speech acts RISE with transgressive dose while the VIOLENT pole falls.** That
+is M01's kill->scream at field level, and the largest riser of all is
+`X3.2 Sensory: Sound` -- which is what a scream IS.
+
+**THE MARGINAL FIELD MEANS SAID THE OPPOSITE AND THEY WERE THE WRONG QUANTITY.**
+The exploratory sweep reported `Q2.1`/`Q2.2` falling. That is a SHARE of rated
+mass, normalised by the rated denominator, and a field's share can fall while
+its absolute mass rises. Restricted to movers, speech words are net risers:
+
+    speech (Q2.1+Q2.2), movers, all lineages
+      riser rows  418,323  gaining 6625.18 mass
+      faller rows 379,653  losing  3353.09 mass
+      NET                          +3272.09
+
+RH flagged the contradiction against findings elsewhere; it was a quantity
+error in the reporting, not a disagreement in the data.
+
 ## WHAT DID NOT LAND, AND WHY IT IS NOT A NULL
 
 **H3 failed for want of MASS, not for want of an effect.** USAS `X1`
