@@ -235,6 +235,131 @@ def test(path, min_n=2):
                           if len({role[m] for m in gg if m in role}) > 1))
 
 
+PAIR_RATERS = [("opus-high", "crossframe_pairs_101_opus_high.json"),
+               ("opus-xhigh", "crossframe_pairs_101_opus_xhigh.json"),
+               ("opus-med", "crossframe_pairs_101_opus_medium.json")]
+
+ROLE_COLOUR = {"SITE": "#fa5252", "CONTROL": "#4dabf7"}
+
+
+def emit_graph(out="pairmeta"):
+    """The paired meta-relation network, coloured by ROLE not by domain.
+
+    Reuses `MetaGraph.svelte` from the 89-component metagraph by producing the
+    same artifact shape. Nodes carry `group` as the role label and the colour
+    map uses SITE=red, CONTROL=blue so mixed groups are visually obvious.
+    """
+    import json as _json, itertools as _it
+    from malignment.chartdata import graph, write
+    cs_map = {c["id"]: c for c in _json.load(open(IDS))}
+    cs_full = {c["id"]: c for c in build()}
+    rs = [(lab, _json.load(open(os.path.join(HERE, "results", f))))
+          for lab, f in PAIR_RATERS]
+    sc = {}
+    nodes, links, seen = [], [], set()
+    cap = 10
+
+    def words(model, ws, side, rows):
+        key = "rank_a" if side == "a" else "rank_b"
+        out = []
+        for w in [x.lower() for x in (ws or [])]:
+            r = rows.get(w) or rows.get(w.capitalize()) or {}
+            out.append({"w": w, "ra": r.get("rank_a"), "rb": r.get("rank_b"),
+                        "k": r.get(key)})
+        out.sort(key=lambda x: (x["k"] is None, x["k"] or 0))
+        return [{"w": x["w"], "ra": x["ra"], "rb": x["rb"]} for x in out[:cap]]
+
+    def leaf(cid):
+        if cid in seen or cid not in cs_full:
+            return
+        seen.add(cid)
+        c = cs_full[cid]
+        meta = cs_map.get(cid, {})
+        if c["prompt"] not in sc:
+            sc[c["prompt"]] = OG.sidecar(c["prompt"], no_blanks=c.get("no_blanks", False)) or {}
+        rows_by = sc[c["prompt"]]
+        rels = []
+        for t, o in c["_ops"]:
+            mem = []
+            for m in sorted(o.get("members") or [], key=lambda m: m["model"]):
+                r = rows_by.get(m["model"]) or {}
+                mem.append({"model": m["model"],
+                            "from": words(m["model"], m.get("a_words"), "a", r),
+                            "to": words(m["model"], m.get("b_words"), "b", r)})
+            rels.append({"name": o["name"], "reading": t,
+                         "statement": o.get("statement") or "",
+                         "n": len(o.get("members") or []), "members": mem})
+        nodes.append({"id": "%s::%s" % (c["prompt"], cid), "kind": "word", "label": cid,
+                      "group": meta.get("role", "?"), "model": c["prompt"], "side": "to",
+                      "component": 0, "cid": cid, "sentence": c["prompt"],
+                      "n_models": c["n_models"], "stripped": bool(c.get("no_blanks")),
+                      "role": meta.get("role"), "pair": meta.get("pair"),
+                      "relations": rels})
+
+    for lab, G in rs:
+        for g in G["groups"]:
+            hid = "META[%s] %s" % (lab, g["name"])
+            member_roles = collections.Counter(
+                cs_map[m]["role"] for m in g["members"] if m in cs_map)
+            nodes.append({"id": hid, "kind": "op", "label": g["name"], "group": None,
+                          "rater": lab, "component": 0, "n": len(g["members"]),
+                          "statement": g.get("statement", ""), "spans": g.get("spans", ""),
+                          "why": g.get("why", ""),
+                          "sentences": len({cs_map[m]["prompt"] for m in g["members"] if m in cs_map}),
+                          "roles": dict(member_roles),
+                          "models": sorted(m for m in g["members"] if m in cs_map)})
+            for m in g["members"]:
+                leaf(m)
+                if m in cs_full:
+                    links.append({"source": "%s::%s" % (cs_full[m]["prompt"], m),
+                                  "target": hid, "cross": len(member_roles) > 1})
+        for cid in G.get("singletons") or []:
+            leaf(cid)
+
+    hub_ids = [n["id"] for n in nodes if n["kind"] == "op"]
+    mem = {h: set(g) for h, g in
+           ((n["id"], n["models"]) for n in nodes if n["kind"] == "op")}
+    import networkx as _nx
+    Q = _nx.Graph()
+    Q.add_nodes_from(hub_ids)
+    for a, b in _it.combinations(sorted(hub_ids), 2):
+        if a.split("]")[0] != b.split("]")[0] and len(mem[a] & mem[b]) >= CF.K_BRIDGE:
+            Q.add_edge(a, b)
+    home = {}
+    for i, c in enumerate(_nx.connected_components(Q)):
+        for h in c:
+            home[h] = i
+    by_leaf = collections.defaultdict(list)
+    for l in links:
+        by_leaf[l["source"]].append(l)
+    for sid, ls in by_leaf.items():
+        cnt = collections.Counter(home.get(l["target"]) for l in ls)
+        mine = cnt.most_common(1)[0][0] if cnt else None
+        for l in ls:
+            l["weak"] = home.get(l["target"]) != mine
+
+    n_site = sum(1 for n in nodes if n["kind"] == "word" and n.get("role") == "SITE")
+    n_ctrl = sum(1 for n in nodes if n["kind"] == "word" and n.get("role") == "CONTROL")
+    n_mixed = sum(1 for n in nodes if n["kind"] == "op" and n.get("roles", {}).get("SITE") and n.get("roles", {}).get("CONTROL"))
+    art = graph(
+        title="Matched-pair meta-relations",
+        subtitle=("101 components from 10 matched pairs (one word apart), grouped by three "
+                  "blind raters told nothing about roles. Leaves coloured by ROLE: "
+                  "red = SITE (55), blue = CONTROL (46). A hub whose leaves are "
+                  "one colour is role-pure; mixed hubs are the evidence that "
+                  "the relation crosses the site/control boundary. "
+                  "%d of %d groups are role-mixed."
+                  % (n_mixed, len([n for n in nodes if n["kind"] == "op"]))),
+        nodes=nodes, links=links,
+        groups=[{"key": k, "label": "%s (%d)" % (k, {"SITE": n_site, "CONTROL": n_ctrl}[k]),
+                 "colour": v} for k, v in ROLE_COLOUR.items()],
+        meta={"chart_hint": "metagraph", "raters": len(rs),
+              "components": [{"operations": len([n for n in nodes if n["kind"] == "op"]),
+                              "models": len(seen)}]})
+    art["chart"] = "metagraph"
+    return write(art, os.path.join(HERE, "figures"), out)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--doc", action="store_true")
@@ -243,9 +368,14 @@ def main():
     ap.add_argument("--raters", type=int, default=1)
     ap.add_argument("--model", default="opus")
     ap.add_argument("--effort", default="high")
+    ap.add_argument("--graph", action="store_true",
+                    help="write the paired meta-relation network artifact")
     ap.add_argument("--purity", nargs="*", metavar="GROUPING.json")
     ap.add_argument("--min-n", type=int, default=2)
     a = ap.parse_args()
+    if a.graph:
+        emit_graph()
+        return
     if a.doc:
         return write_doc(a.force)
     if a.workflow:
