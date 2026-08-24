@@ -42,6 +42,7 @@ sign test over 50 endpoints from `roster.endpoints()`.
     en    n_fall-n_rise   50   -0.12651    24/26     0.888   NULL
     en    mass/faller     50   -0.00000    25/25     1.000   NULL
     en    mass/riser      50   -0.00189    16/34     0.015
+    en    tail_excess     50   -0.00875    12/38     3e-4
     zh    departed        47   -0.01010    10/37     1e-4
     zh    arrived         47   -0.01882     6/41    <1e-6
     zh    n_movers        47   +1.13203    31/16     0.040
@@ -50,6 +51,7 @@ sign test over 50 endpoints from `roster.endpoints()`.
     zh    n_fall-n_rise   47   -1.06453    17/30     0.079
     zh    mass/faller     46   -0.00167     4/42    <1e-6
     zh    mass/riser      47   -0.00745     3/44    <1e-6
+    zh    tail_excess     47   +0.01633    38/ 9     2.5e-5
 
 `n_fallers` / `n_risers` are the RATE SPLIT BY DIRECTION. Not `tail_excess`,
 which asks WHERE the freed mass lands; this asks whether the extra movement at a
@@ -116,6 +118,64 @@ shared effect. Split by direction it is not shared: English recruits departures
 AND arrivals symmetrically; Chinese recruits only arrivals. The aggregate hid a
 difference in kind.
 
+
+
+## DIRECTION: `tail_excess`, AND THE SHARPENING QUESTION IT ANSWERS BY CONSTRUCTION
+
+M01 `N_mass_migration` defines it: does freed mass "re-land on nameable words
+above the resolution floor (substitution) or disperse into the unresolvable tail
+(diffusion)?" **The comparison is against a proportional-renormalisation null**
+— what the distribution would look like if the freed mass were simply spread
+over the survivors in proportion to what they already held.
+
+    tail_base   = 1 - sum(p_base)           the theta-censored remainder
+    survivors   = 1 - faller_base           what the freed mass could land on
+    expected    = tail_base * (1 + departed / survivors)
+    tail_excess = tail_aligned - expected
+
+**THAT NULL IS THE CONTROL FOR GENERAL SHARPENING, and it is why the null is a
+null rather than a raw difference.** If alignment merely rescaled the
+distribution, freed mass would reach every survivor -- the tail included -- in
+proportion to its existing share. Subtracting that expectation leaves only the
+part that is NOT rescaling. A raw `tail_aligned - tail_base` would confound the
+two and is deliberately not computed here. The dose slope adds a second and
+independent layer: whether the excess is specific to transgressive frames.
+
+### THE LEVEL REPLICATES M01 IN BOTH LANGUAGES, UNANIMOUSLY
+
+    MARGINAL tail_excess LEVEL   en  -0.170276   0 up/50 dn   p<1e-15
+                                 zh  -0.133729   0 up/50 dn   p<1e-15
+
+Negative everywhere, all 50 lineages in each language. That is `O_crosslingual`'s
+**"the substitution travels"** — freed mass concentrates on nameable words
+rather than dispersing, in English and Chinese alike.
+
+### BUT THE DOSE SLOPE INVERTS BY LANGUAGE
+
+    en  tail_excess  -0.00875   12 up/38 dn   p=3e-4
+    zh  tail_excess  +0.01633   38 up/ 9 dn   p=2.5e-5
+
+**English becomes MORE substitutional as the frame loads** — the more
+transgressive the base, the further below the proportional null the tail sits.
+**Chinese becomes LESS so**, moving toward diffusion.
+
+**The sign of the slope is not the sign of the level.** Chinese remains
+net-substitutional throughout (level -0.134); the slope says only that
+transgressive frames push it toward the tail relative to neutral ones. Nothing
+here shows Chinese crossing into net diffusion, and it should not be read that
+way.
+
+### THIS IS THE SAME SPLIT THE OTHER OUTCOMES SHOW
+
+    ENGLISH under load   more mass moves, more words both ways, risers thin,
+                         and the mass lands on NAMEABLE WORDS
+    CHINESE under load   less mass moves, only arrivals recruit, everything
+                         shrinks, and the mass goes to the TAIL
+
+Both languages substitute. Under transgressive load English substitutes harder
+and Chinese disperses. Every outcome in this folder tells that story, and
+`tail_excess` is the one that says where the mass actually went.
+
 ## WHAT IS SHARED, AND NOT COPIED
 
 The dose is the base-arm mass-weighted mean of `k_transgressiveness`, read from
@@ -126,8 +186,9 @@ rungs and transitive pairs and would let one base model vote eleven times.
 
 ## NOT CLAIMED
 
-- **Direction.** Where the departed mass goes is `tail_excess`'s question and
-  this instrument is silent on it.
+- **Direction beyond the tail split.** `tail_excess` says whether mass reached
+  nameable words or the tail. It does NOT say WHICH nameable words -- that is
+  `displacement_axis`'s and `norm_change`'s question.
 - **That the Chinese inversion is understood.** It is measured, twice, on two
   outcomes that agree. Why a language would disperse where the other
   concentrates is not established here.

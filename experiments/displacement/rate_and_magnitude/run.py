@@ -86,6 +86,42 @@ def report(target, sl):
     return (binom(up, up + dn), target, st.median(v), up, dn, len(v))
 
 
+def _tail_excess(sum_base, sum_aligned, departed, faller_base):
+    """DIRECTION: does freed mass re-land on nameable words or go to the tail?
+
+    M01 `N_mass_migration`: "Probability is conserved, so 'the mass went
+    somewhere' is not a finding; the finding is whether it re-lands on nameable
+    words above the resolution floor (substitution) or disperses into the
+    unresolvable tail (diffusion). **The comparison is against a
+    proportional-renormalisation null** -- what the distribution would look like
+    if the freed mass were simply spread evenly over the survivors."
+
+    **THE NULL IS WHAT CONTROLS FOR GENERAL SHARPENING**, and that is the whole
+    reason it is the null rather than a raw tail difference. If alignment merely
+    rescaled the distribution, the freed mass would land on every survivor --
+    the tail included -- in proportion to what it already held. Subtracting that
+    expectation leaves only the part that is not rescaling. A raw
+    `tail_aligned - tail_base` would confound the two and is not computed here.
+
+        tail_base    = 1 - sum(p_base)          the theta-censored remainder
+        survivors    = 1 - faller_base          everything the freed mass could
+                                                land on, tail included
+        expected     = tail_base * (1 + departed / survivors)
+        tail_excess  = tail_aligned - expected
+
+    NEGATIVE means less mass reached the tail than proportional renormalisation
+    predicts -- it concentrated on nameable words. That is SUBSTITUTION, and
+    negative is the sign M01 found in both languages.
+    """
+    tail_base = 1.0 - sum_base
+    tail_aligned = 1.0 - sum_aligned
+    survivors = 1.0 - faller_base
+    if survivors <= 0 or tail_base < 0 or tail_aligned < 0:
+        return None
+    expected = tail_base * (1.0 + departed / survivors)
+    return tail_aligned - expected
+
+
 def measure(langs, min_prompts=MIN_PROMPTS):
     """Does MORE MASS MOVE where the base arm is more transgressive?
 
@@ -115,7 +151,12 @@ def measure(langs, min_prompts=MIN_PROMPTS):
         "SELECT base, aligned, prompt, "
         "sumIf(p_base - p_aligned, cls='faller') AS dep, "
         "sumIf(p_aligned - p_base, cls='riser') AS arr, count() AS nm, "
-        "countIf(cls='faller') AS nf, countIf(cls='riser') AS nr "
+        "countIf(cls='faller') AS nf, countIf(cls='riser') AS nr, "
+        #: the RESOLVED mass on each side. The twp store is theta-censored, so
+        #: 1 - sum(p) is the UNRESOLVED TAIL: everything below the floor, which
+        #: is where diffusion would put the freed mass.
+        "sum(p_base) AS sb, sum(p_aligned) AS sa, "
+        "sumIf(p_base, cls='faller') AS fb "
         "FROM movement WHERE cls != 'still' GROUP BY base, aligned, prompt")
     mag = {}
     for r in rows:
@@ -131,7 +172,9 @@ def measure(langs, min_prompts=MIN_PROMPTS):
                                        int(r["nm"]), int(r["nf"]), int(r["nr"]),
                                        int(r["nf"]) - int(r["nr"]),
                                        (float(r["dep"]) / int(r["nf"])) if int(r["nf"]) else None,
-                                       (float(r["arr"]) / int(r["nr"])) if int(r["nr"]) else None)
+                                       (float(r["arr"]) / int(r["nr"])) if int(r["nr"]) else None,
+                                       _tail_excess(float(r["sb"]), float(r["sa"]),
+                                                    float(r["dep"]), float(r["fb"])))
     dose = {}
     with gzip.open(os.path.join(DATA, "levels_long.csv.gz"), "rt",
                    encoding="utf-8") as fh:
@@ -153,7 +196,7 @@ def measure(langs, min_prompts=MIN_PROMPTS):
     for lang in langs:
         for j, nm in ((0, "departed"), (1, "arrived"), (2, "n_movers"),
                       (3, "n_fallers"), (4, "n_risers"), (5, "n_fall-n_rise"),
-                      (6, "mass/faller"), (7, "mass/riser")):
+                      (6, "mass/faller"), (7, "mass/riser"), (8, "tail_excess")):
             by = collections.defaultdict(lambda: ([], []))
             for (lin, pr, lg), d in dose.items():
                 if lg != lang:
