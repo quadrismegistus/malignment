@@ -78,7 +78,13 @@ Then, one level up -- the same question asked of the readings themselves:
     pair_meta.py           do cross-frame relations respect the site/control
                            boundary? Groups the paired components blind, then
                            measures role purity against the exact paired null.
-                           `--doc`, `--workflow`, `--purity`.
+                           `--doc`, `--workflow`, `--purity`, `--graph`.
+    site_neutral_meta.py   the same question on a COMBINED population: 146
+                           site components from 46 frames + 29 neutral
+                           components from 15 measured-flat frames. The null
+                           shuffles site/neutral labels across frames, 10,000
+                           permutations. `--doc`, `--workflow`, `--purity`,
+                           `--graph`.
     norm_test.py           does the grouping predict movement in rating space?
                            Five sources, run separately. `--all`, `--shifts`.
     seam_test.py           is the procedure territory one relation or two?
@@ -179,6 +185,36 @@ displace scene` (cushions). Everything described at a higher level of abstractio
 -- proceduralization, inspection, departure, specificity collapse,
 action-becomes-speech -- crosses the boundary.
 
+**THE SITE+NEUTRAL TEST SEPARATES, BUT BY VOCABULARY DISTANCE.**
+`site_neutral_meta.py` combines the 146 site components from 46 frames with 29
+neutral components from 15 measured-flat frames into one 175-component document.
+Purity is significantly above the null in all three raters:
+
+    rater          grps  purity   null  mixed  p       neut singles
+    opus medium      35   0.998  0.866     1   <0.001     20/29
+    opus xhigh       34   0.966  0.848     3   <0.001     18/29
+    opus high        31   0.979  0.844     2   <0.001     19/29
+
+But 18-20 of 29 neutral components are SINGLETONS: the annotator cannot match
+soup-stirring or park-sitting to anything about stabbing or desecration, so the
+neutrals sit outside the groups and purity is high by exclusion. The 1-3 mixed
+groups that do form are the movements abstract enough to bridge the vocabulary
+gap: sentence restart (syntactic, always mixed), deferral (visa + committee
+postponement), and action-to-deliberation (brake-line + house fire).
+
+The two tests answer different questions. The paired result (p 0.38-0.50) says
+relations cross the boundary when vocabulary is close enough to bridge. The
+site+neutral result (p < 0.001) says they separate when it is too wide. Together
+they locate the boundary of this instrument: it groups by movement, but movement
+is expressed in words, and words carry their subject.
+
+**Norm test replicated on the 175-component population.** 7 meta-relations
+survive k>=3 with all three raters. All five rating sources confirm the grouping
+predicts movement in rating space the raters never saw (p 0.0002 to 0.013). The
+7 are mostly site-only (6 pure, 1 mixed via Sentence restart), because the
+neutral singletons cannot form 3-rater relations. This validates the site
+taxonomy's internal coherence on the expanded population.
+
 **Taken together with `compare_pairs`.** Shape null + content null = the
 operations catalogued here are a property of alignment as such, not of alignment
 acting on transgressive content. The taxonomy is a taxonomy of alignment's
@@ -239,6 +275,15 @@ Selecting on the mean admits 87 of 693 nominal pairs; on the worst arm, 23.
                                     for the same reason crossframe_ops.txt is.
     results/crossframe_pairs_101_opus_{high,xhigh,medium}.json
                                     three groupings of it.
+    results/crossframe_site_neutral_components.json
+                                    the 175 within-prompt components of the
+                                    combined site+neutral document, with role.
+    results/inputs/crossframe_site_neutral.txt
+                                    the 175-component grouping document.
+    results/crossframe_siteneut_175_opus_{high,xhigh,medium}.json
+                                    three groupings of it.
     figures/metagraph.data.json     the cross-frame network, drawn by
                                     `ui/.../MetaGraph.svelte`
+    figures/pairmeta.data.json      the paired network (101, red/blue role)
+    figures/siteneut_meta.data.json the site+neutral network (175, red/blue role)
     figures/opgraph_*.data.json     one per frame, drawn by `OperationGraph.svelte`
