@@ -57,6 +57,29 @@ CJK = re.compile(r"[一-鿿㐀-䶿]")
 #: from the key rather than declared twice and allowed to drift.
 EN_NORM_PREFIXES = ("warriner_", "brysbaert_", "brooke_", "k_")
 
+#: H4 AND H5 NEED A SCALE-FREE EXTREMITY, so every continuous scale gets a
+#: z-scored twin and an absolute-z twin:
+#:
+#:     <scale>_z      (value - mean) / sd     H4: does the mean SHIFT
+#:     <scale>_absz   |z|                     H5: does the spread NARROW
+#:
+#: RH, 2026-08-24, correcting an earlier version that used |value - midpoint|:
+#: a nominal midpoint assumes the scale's centre is the population's centre,
+#: and the three sources here do not even share a range -- Warriner 1-9, the K
+#: scales 1-7, Xu & Li 1.04-4.56. z makes them one currency, which is also what
+#: M01 T section 7 did ("seven z-scored psycholinguistic norm sets").
+#:
+#: THE REFERENCE POPULATION IS THE CORPUS VOCABULARY, one row per word TYPE,
+#: not the lexicon and not token-weighted. Stated because it is a choice: a
+#: z against the full lexicon would answer "extreme for English", and this
+#: answers "extreme among the words these models actually put mass on", which
+#: is the question a narrowing hypothesis is about. It is computed ONCE over
+#: all lineages, so it cannot drift between arms and manufacture a difference.
+#:
+#: These are derived per-WORD and mass-weighted downstream like any other
+#: scale. Deriving them later from `words_long` would silently restrict them
+#: to MOVERS, since that table holds `cls != 'still'`.
+
 #: H3 names USAS X1. The finer codes ride along as exploration -- see the
 #: registration, which declares X1 as the test and X2..X5 as exploratory.
 INTERIORITY = ("X1", "X2", "X2.1", "X3", "X4", "X5")
@@ -112,7 +135,37 @@ def resolve(words):
         if codes:
             cats[w] = {c2: 1.0 / len(codes) for c2 in codes}
         attrs[w] = {"lang": lang, "freq": F.freq(w, lang)}
+    _add_z(cont)
     return cont, cats, attrs
+
+
+def _add_z(cont):
+    """Add `<scale>_z` and `<scale>_absz` in place, per scale, over word TYPES.
+
+    Population moments are taken once over every word carrying that scale, so
+    the z of a word is the same number in every lineage and arm. A per-arm z
+    would standardise away the very difference the study is measuring.
+    """
+    import statistics as st
+    vals = collections.defaultdict(list)
+    for d in cont.values():
+        for k, v in d.items():
+            vals[k].append(v)
+    mom = {}
+    for k, v in vals.items():
+        if len(v) < 30:
+            continue
+        sd = st.pstdev(v)
+        if sd > 0:
+            mom[k] = (st.fmean(v), sd)
+    for d in cont.values():
+        for k in list(d):
+            if k in mom:
+                mu, sd = mom[k]
+                z = (d[k] - mu) / sd
+                d[k + "_z"] = z
+                d[k + "_absz"] = abs(z)
+    return mom
 
 
 def contextual_pos(ch, limit_lang=None):
