@@ -2987,6 +2987,90 @@
    "outcome": "load_ok",
    "cause": "",
    "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `mps`, transformers 5.4.0 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-DPO",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-Instruct",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMo-2-0425-1B-SFT",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-DPO",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/OLMoE-1B-7B-0125-SFT",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct-DPO",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Instruct-SFT",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-DPO",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3-7B-Think-SFT",
+   "environment": "cloud_cuda130_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
   }
  ],
  "engine_support": {

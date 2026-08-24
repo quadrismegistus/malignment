@@ -5,7 +5,7 @@
   "roster/models/observations.json"
  ],
  "_absence": "A version with no row was never tried. Not a pass, not a failure, and the gap between two tested points is exactly as unknown as it looks.",
- "n": 147,
+ "n": 151,
  "models": {
   "01-ai/Yi-1.5-9B": {
    "torch": {
@@ -2752,6 +2752,11 @@
          "environment": "cloud_cuda130_tf4571",
          "outcome": "load_ok",
          "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
         }
        ]
       },
@@ -2800,9 +2805,22 @@
        ]
       },
       "verdict": "fails"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
-    "hole": false
+    "hole": true
    }
   },
   "allenai/OLMo-2-0425-1B-Instruct": {
@@ -2829,6 +2847,11 @@
          "environment": "cloud_cuda130_tf4571",
          "outcome": "load_ok",
          "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
         }
        ]
       },
@@ -2850,6 +2873,19 @@
         },
         {
          "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
          "outcome": "load_ok",
          "cause": null
         }
@@ -2883,6 +2919,11 @@
        "works": [
         {
          "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf5151",
          "outcome": "load_ok",
          "cause": null
         }
@@ -2920,9 +2961,22 @@
        ]
       },
       "verdict": "fails"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
-    "hole": false
+    "hole": true
    }
   },
   "allenai/OLMoE-1B-7B-0125": {
@@ -3019,6 +3073,11 @@
          "environment": "cloud_cuda130_tf4571",
          "outcome": "load_ok",
          "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
         }
        ]
       },
@@ -3066,6 +3125,19 @@
        ]
       },
       "verdict": "mixed"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
@@ -3093,6 +3165,11 @@
        "works": [
         {
          "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf5151",
          "outcome": "load_ok",
          "cause": null
         }
@@ -3130,9 +3207,22 @@
        ]
       },
       "verdict": "fails"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
-    "hole": false
+    "hole": true
    }
   },
   "allenai/OLMoE-1B-7B-0125-SFT": {
@@ -3157,6 +3247,11 @@
        "works": [
         {
          "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf5151",
          "outcome": "load_ok",
          "cause": null
         }
@@ -3194,9 +3289,22 @@
        ]
       },
       "verdict": "fails"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
-    "hole": false
+    "hole": true
    }
   },
   "allenai/Olmo-3-1025-7B": {
@@ -3382,6 +3490,19 @@
        ]
       },
       "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
@@ -3394,6 +3515,95 @@
        "works": [
         {
          "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3-7B-Instruct-DPO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3-7B-Instruct-SFT": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
          "outcome": "load_ok",
          "cause": null
         }
@@ -3420,6 +3630,19 @@
        ]
       },
       "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
@@ -3432,6 +3655,95 @@
        "works": [
         {
          "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3-7B-Think-DPO": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "allenai/Olmo-3-7B-Think-SFT": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf5151",
          "outcome": "load_ok",
          "cause": null
         }

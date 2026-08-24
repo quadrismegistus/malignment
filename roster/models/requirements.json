@@ -1472,7 +1472,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "allenai/OLMo-2-0425-1B-Instruct",
@@ -1499,7 +1499,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "allenai/OLMo-2-0425-1B-SFT",
@@ -1526,7 +1526,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "allenai/OLMoE-1B-7B-0125",
@@ -1580,7 +1580,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "allenai/OLMoE-1B-7B-0125-Instruct",
@@ -1607,7 +1607,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "allenai/OLMoE-1B-7B-0125-SFT",
@@ -1634,7 +1634,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "allenai/Olmo-3-1025-7B",
@@ -1715,7 +1715,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "allenai/Olmo-3-7B-Instruct-DPO",
@@ -1742,7 +1742,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "allenai/Olmo-3-7B-Instruct-SFT",
@@ -1769,7 +1769,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "allenai/Olmo-3-7B-Think",
@@ -1796,7 +1796,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "allenai/Olmo-3-7B-Think-DPO",
@@ -1823,7 +1823,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "allenai/Olmo-3-7B-Think-SFT",
@@ -1850,7 +1850,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "allenai/Olmo-3.1-32B-Instruct",
