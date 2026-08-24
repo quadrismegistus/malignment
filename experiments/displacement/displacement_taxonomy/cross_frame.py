@@ -197,7 +197,7 @@ def arm_for(pairs):
     return strip or [x for x in pairs if x[0].split(".")[0].endswith("b")]
 
 
-def components(k=2):
+def components(k=2, only=None):
     """Per frame, the k=2 components over its blind operations -- the unit to group.
 
     ## THE COMPONENT IS THE META-RELATION, NOT THE OPERATION
@@ -215,7 +215,15 @@ def components(k=2):
     twice by readers who could not see each other.
     """
     out, dom = [], RT.domains()
+    #: `only` RESTRICTS THE POPULATION AND THEREFORE THE IDS. A document built
+    #: over a subset numbers C01.. from that subset, so its ids do NOT resolve
+    #: against the frozen 89-component document and must never be handed to an
+    #: analysis expecting it. Callers passing `only` are responsible for giving
+    #: their document its own id prefix and its own path; `pair_meta.py` does.
+    want = None if only is None else set(only)
     for prompt, n in sorted(RT.blind_prompts().items()):
+        if want is not None and prompt not in want:
+            continue
         pairs = arm_for(OG.readings(prompt, n)[0])
         if not pairs:
             continue
@@ -550,6 +558,9 @@ DOMAIN_COLOUR = {"sexual": "#fa5252", "violence": "#e8590c",
 #: group, so nothing can connect two hubs and the picture can only be 21 stars.
 #: Measured on the single-rater version: 25 connected components, 0 leaves with
 #: more than one hub.
+#: HOW MANY SHARED COMPONENTS MAKE TWO HUBS ONE RELATION. RH, 2026-08-23.
+K_BRIDGE = 3
+
 RATERS = [("opus-high", "crossframe_groups_89_opus_high.json"),
           ("opus-xhigh", "crossframe_groups_89_opus_xhigh.json"),
           ("opus-med", "crossframe_groups_89_opus_medium.json")]
@@ -638,6 +649,53 @@ def emit_graph(groups_path=None, out="metagraph", cap=10, raters=None):
     for lab, G in rs:
         for cid in G.get("singletons") or []:
             leaf(cid)
+
+    #: ── THE k>=3 THRESHOLD, APPLIED TO THE DRAWN STRUCTURE ──────────────────
+    #:
+    #: k is how many per-frame COMPONENTS two hubs must share before the picture
+    #: treats them as one relation. Every rater groups every component, so a
+    #: component sits in one group per rater and two hubs "share" it when both
+    #: put it in their group.
+    #:
+    #: At k>=2 one 17-component blob fused `Lateral swap inside a register` to
+    #: `Harsher member of the same kind` -- two genuinely different
+    #: transformations -- on the strength of TWO shared components, against
+    #: 5-to-9-share edges inside each. RH saw it on the canvas before the numbers
+    #: said it. At k>=3 that blob splits into two unanimous relations with cores
+    #: of 6 and 5 where the merged version had core 0.
+    #:
+    #: WEAK EDGES ARE DRAWN, NOT DROPPED. A sub-threshold bridge is where two
+    #: relations touch, and hiding it would make the picture agree with the
+    #: threshold by concealing what the threshold is a judgement about -- the
+    #: same rule as the k=2 crossings in the per-frame graph. They carry no force
+    #: so they cannot pull two clusters together.
+    hub_ids = [n["id"] for n in nodes if n["kind"] == "op"]
+    mem = {h: set(g) for h, g in
+           ((n["id"], n["models"]) for n in nodes if n["kind"] == "op")}
+    import networkx as _nx
+    Q = _nx.Graph()
+    Q.add_nodes_from(hub_ids)
+    for a, b in itertools.combinations(sorted(hub_ids), 2):
+        if a.split("]")[0] != b.split("]")[0] and len(mem[a] & mem[b]) >= K_BRIDGE:
+            Q.add_edge(a, b)
+    home = {}
+    for i, c in enumerate(_nx.connected_components(Q)):
+        for h in c:
+            home[h] = i
+    #: A component's HOME is the cluster holding most of its hubs; its links
+    #: there are structural and its links elsewhere are the weak ones.
+    by_leaf = collections.defaultdict(list)
+    for l in links:
+        by_leaf[l["source"]].append(l)
+    for sid, ls in by_leaf.items():
+        cnt = collections.Counter(home.get(l["target"]) for l in ls)
+        mine = cnt.most_common(1)[0][0] if cnt else None
+        for l in ls:
+            l["weak"] = home.get(l["target"]) != mine
+    nclus = len({home[h] for h in hub_ids})
+    print("  k>=%d: %d hub clusters, %d weak links of %d"
+          % (K_BRIDGE, nclus, sum(1 for l in links if l["weak"]), len(links)),
+          file=sys.stderr)
 
     from malignment.chartdata import graph, write
     dom = collections.Counter(M[c]["domain"] for c in M)

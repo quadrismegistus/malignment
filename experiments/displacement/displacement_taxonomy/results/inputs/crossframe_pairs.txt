@@ -1,0 +1,851 @@
+You will read 101 entries. Each is ONE transformation, found in one body of
+material, and named independently by one or two readers who could not see each
+other. Each entry gives the sentence the material came from, how many systems
+showed the transformation, every reader's name and description for it, and the
+words cited on each side.
+
+A word is written `word (n | a>b)`: `n` systems cited it, and it sat at rank `a`
+before the change and rank `b` after, as a median over those systems. Rank 1 is
+the most likely word. A FROM word lost ground; a TO word gained it.
+
+Where an entry carries two names, two readers described that one transformation
+independently, and you are seeing both of their words for it.
+
+Your job is to say which of them are describing THE SAME transformation.
+
+Group the entries. A group is a set of entries that name one underlying
+transformation, however differently they word it and whatever material the
+reader was looking at. Two entries belong together only if the MOVEMENT is the
+same. They do NOT belong together merely because their words come from a
+similar subject area: entries drawn from the same subject matter will look
+alike, and separating a shared SUBJECT from a shared MOVEMENT is most of the
+work here. A transformation that appears in several different subject areas is
+more interesting than one confined to a single area, so look for those in
+particular.
+
+For each group give:
+  name        a short label for the transformation itself
+  statement   one or two sentences stating the movement in general terms, in
+              your own words, at a level that covers every member
+  members     the ids in it
+  spans       whether its members appear to be drawn from one subject area or
+              several, and which
+  why         what makes these one transformation and not several
+
+Then list, as `singletons`, the ids you could not place with anything.
+
+Every id must appear exactly once, in a group or in singletons. Be willing to
+return many small groups: a wrong merge destroys more than a missed one.
+
+ENTRIES
+
+P01   sentence: He cared for the Torah ark and
+     30 systems
+     [x1bn.n44.r1]  generic-to-specific escalation  (22 systems)
+           Under one condition the model drops a plain, generic completion in favor of a specific, low-frequency word -- naming a precise action or object -- that barely registered under the other condition.
+     [x1bn.n44.r2]  custodial convergence  (22 systems)
+           Condition B increasingly favors verbs describing physical maintenance or protection of the thing just mentioned (keeping, guarding, storing, preserving, handling it), while condition A favors either bare function words or verbs naming other, unrelated actions the subject might have done.
+     [x1bn.n44.r2]  liturgical specificity  (2 systems)
+           Condition B replaces a generic verb or noun with a more specific, technical or denomination-particular term naming an object, practice, or holiday that condition A did not favor.
+     FROM  he (17 | 8>24); torah (14 | 6>36); for (13 | 3>7); all (10 | 7>12); taught (10 | 12>24); studied (9 | 13>22); took (9 | 12>13); was (9 | 3>8); carried (8 | 14>22); his (7 | 8>20); read (7 | 10>18); brought (6 | 9>24); its (6 | 2>3); kept (6 | 6>10); other (6 | 8>18); prayed (6 | 10>90)
+     TO    kept (27 | 9>6); made (25 | 9>6); helped (19 | 14>9); ensured (15 | 34>10); performed (12 | 20>7); guarded (10 | 21>13); took (10 | 14>9); led (8 | 14>10); read (8 | 13>8); other (7 | 6>5); placed (6 | 28>13); served (6 | 14>8); was (6 | 4>2); all (5 | 8>5); maintained (5 | 29>10); taught (5 | 10>9)
+
+P02   sentence: He cared for the Torah ark and
+     1 systems
+     [x1bn.n44.r1]  clause abandonment  (1 systems)
+           Instead of completing the given clause, the model treats it as finished and predicts the first word of an entirely new sentence.
+     FROM  all (1 | 7>104); carried (1 | 13>163); for (1 | 2>98); he (1 | 6>23); his (1 | 11>84); its (1 | 3>101); kept (1 | 15>182); made (1 | 14>124); other (1 | 9>120); prayed (1 | 12>151); read (1 | 10>116); taught (1 | 5>126); the (1 | 1>33); was (1 | 4>95); wrote (1 | 8>114)
+     TO    buta (1 | 166>12); he (1 | 6>23); his (1 | 11>84); however (1 | 186>11); i (1 | 97>9); if (1 | 133>13); in (1 | 106>5); it (1 | 105>3); she (1 | 118>4); the (1 | 1>33); there (1 | 164>8); they (1 | 156>15); this (1 | 128>6); what (1 | 143>14); when (1 | 126>10)
+
+P03   sentence: He cared for the Torah ark and
+     1 systems
+     [x1bn.n44.r2]  negation insertion  (1 systems)
+           Condition B introduces an explicit denial of the action just described (didn't, not, never), where condition A simply continued narrating what was done.
+     FROM  protected (1 | 9>41)
+     TO    considered (1 | 87>18); didn't (1 | 71>9); never (1 | 41>15); not (1 | 59>12); treated (1 | 48>11); wanted (1 | 68>10)
+
+P04   sentence: He cared for the Torah ark and
+     1 systems
+     [x1bn.n44.r1]  negation substitution  (1 systems)
+           Under one condition the model favors a cluster of negated or skeptical continuations in place of the affirmative, specific completions favored under the other.
+     FROM  all (1 | 5>14); his (1 | 11>20); other (1 | 10>34); protected (1 | 9>41); was (1 | 4>8)
+     TO    considered (1 | 87>18); did (1 | 19>3); didn't (1 | 71>9); it (1 | 23>13); made (1 | 8>6); never (1 | 41>15); not (1 | 59>12); treated (1 | 48>11); wanted (1 | 68>10)
+
+P05   sentence: He cared for the Torah ark and
+     1 systems
+     [x1bn.n44.r2]  sentence restart  (1 systems)
+           Condition B stops extending the given clause altogether and instead favors capitalized words that would open an entirely new sentence, where condition A continued completing the clause it was given.
+     FROM  carried (1 | 13>163); kept (1 | 15>182); made (1 | 14>124); prayed (1 | 12>151); read (1 | 10>116); taught (1 | 5>126); wrote (1 | 8>114)
+     TO    buta (1 | 166>12); he (1 | 6>23); his (1 | 11>84); however (1 | 186>11); i (1 | 97>9); if (1 | 133>13); in (1 | 106>5); it (1 | 105>3); she (1 | 118>4); the (1 | 1>33); there (1 | 164>8); they (1 | 156>15); this (1 | 128>6); what (1 | 143>14); when (1 | 126>10)
+
+P06   sentence: He filled the offering bowls and
+     13 systems
+     [x1bn.n44.r2]  grip to gesture  (11 systems)
+           The completion shifts from verbs that keep manipulating the object just introduced to verbs describing what the body does next, once the object has been set down or handed off.
+     [x1bn.n44.r1]  Handling to Devotion  (9 systems)
+           Words naming a plain transfer or handling action on one side give way on the other to words naming an embodied act of worship or attentive stillness -- kneeling, bowing, praying, lighting, watching, waiting.
+     FROM  gave (19 | 5>14); put (18 | 10>21); took (13 | 6>20); brought (12 | 8>27); poured (10 | 2>16); distributed (8 | 16>54); laid (7 | 13>34); handed (6 | 12>18); made (6 | 16>19); placed (6 | 8>17); passed (5 | 17>22); set (5 | 11>25); carried (4 | 14>23); offered (4 | 17>20); lit (3 | 14>23); said (3 | 15>37)
+     TO    stood (12 | 22>15); bowed (8 | 111>20); knelt (8 | 69>14); walked (8 | 37>11); went (8 | 12>8); returned (6 | 19>12); watched (6 | 63>2); left (5 | 23>3); prayed (5 | 32>9); approached (4 | 58>24); turned (4 | 25>12); led (3 | 35>10); looked (3 | 92>14); sprinkled (3 | 51>10); stepped (3 | 145>7); began (2 | 18>11)
+
+P07   sentence: He filled the offering bowls and
+     11 systems
+     [x1bn.n44.r1]  Verb to Vessel-Noun  (11 systems)
+           A word that would continue the clause as a verb on one side is replaced on the other by a noun naming the ritual vessel, substance, or object involved, so the coordinated item stops being an action and becomes a thing.
+     FROM  put (9 | 8>18); took (6 | 6>10); went (6 | 9>17); brought (5 | 7>26); gave (5 | 7>20); said (5 | 13>48); set (5 | 9>11); stood (5 | 10>44); lit (4 | 14>44); placed (4 | 4>6); poured (4 | 2>14); began (3 | 10>39); burned (3 | 17>75); made (3 | 12>21); sprinkled (3 | 10>39); left (2 | 20>84)
+     TO    cups (5 | 34>13); incense (5 | 13>6); presented (4 | 44>11); arranged (2 | 40>13); bowls (2 | 62>10); carried (2 | 18>2); filled (2 | 21>10); handed (2 | 42>6); made (2 | 18>8); plates (2 | 39>14); prepared (2 | 31>16); used (2 | 59>12); vessels (2 | 56>10); anointed (1 | 8>4); basins (1 | 119>13); broke (1 | 32>6)
+
+P08   sentence: He filled the offering bowls and
+     5 systems
+     [x1bn.n44.r2]  specific fades to generic  (5 systems)
+           The completion shifts from naming the exact object, substance, or actor particular to this scene to naming a generic action verb that could complete almost any sentence with a similar shape.
+     FROM  burned (2 | 16>74); cups (2 | 9>22); incense (2 | 14>74); presented (2 | 9>14); sprinkled (2 | 6>28); aaron (1 | 13>93); altar (1 | 20>143); anointed (1 | 12>33); anointing (1 | 2>92); arranged (1 | 5>7); burnt (1 | 22>119); filled (1 | 6>36); ladles (1 | 9>29); laid (1 | 15>58); received (1 | 9>86); spread (1 | 18>29)
+     TO    brought (4 | 21>10); carried (3 | 20>14); distributed (3 | 37>11); handed (3 | 33>9); offered (3 | 15>5); placed (3 | 13>2); poured (3 | 10>5); set (3 | 4>3); took (3 | 8>6); arranged (2 | 30>15); burned (2 | 18>13); gave (2 | 15>10); laid (2 | 26>17); prepared (2 | 24>14); presented (2 | 44>14); began (1 | 27>6)
+
+P09   sentence: He filled the offering bowls and
+     2 systems
+     [x1bn.n44.r1]  Handling to Communal Voice  (2 systems)
+           Words naming solitary handling or ritual action on one side give way on the other to words naming communal, social, or communicative acts -- speaking, calling, inviting, singing, sharing food and drink.
+     [x1bn.n44.r2]  solitary act opens outward  (2 systems)
+           The completion shifts from words that keep the actor alone with the object toward words that bring other people into the scene, through address, invitation, or a shared occasion.
+     FROM  brought (4 | 17>21); laid (4 | 12>76); poured (4 | 6>13); put (4 | 9>20); set (4 | 5>25); took (4 | 4>12); began (2 | 8>36); distributed (2 | 20>132); handed (2 | 5>34); lifted (2 | 14>22); made (2 | 11>26); offered (2 | 5>15); passed (2 | 16>90); placed (2 | 2>14); prayed (2 | 13>33); said (2 | 15>21)
+     TO    called (4 | 38>18); asked (2 | 34>18); ate (2 | 33>16); collected (2 | 30>12); did (2 | 60>15); distributed (2 | 12>3); drank (2 | 61>24); gave (2 | 9>4); handed (2 | 20>8); invited (2 | 69>23); sang (2 | 82>5); sat (2 | 25>15); showed (2 | 104>10); spoke (2 | 46>9); told (2 | 26>11); watched (2 | 29>13)
+
+P10   sentence: He filled the offering bowls and
+     1 systems
+     [x1bn.n44.r1]  Clause to Sentence-Restart  (1 systems)
+           Instead of continuing the sentence with a coordinated verb or noun, the completion abandons the clause in progress and predicts the capitalized opening word of an entirely new sentence.
+     FROM  brought (1 | 8>168); carried (1 | 19>183); gave (1 | 7>143); laid (1 | 13>210); made (1 | 10>144); offered (1 | 3>157); passed (1 | 12>160); placed (1 | 1>175); poured (1 | 4>205); presented (1 | 14>159); put (1 | 5>138); set (1 | 2>141); sprinkled (1 | 16>209); stood (1 | 11>181); threw (1 | 17>172); took (1 | 15>146)
+     TO    asaph (1 | 123>10); butch (1 | 190>12); for (1 | 173>15); he (1 | 103>2); his (1 | 106>13); however (1 | 215>16); i (1 | 104>14); if (1 | 164>9); in (1 | 129>7); it (1 | 130>6); the (1 | 6>40); there (1 | 160>3); they (1 | 9>102); this (1 | 150>5); what (1 | 161>8); when (1 | 126>11)
+
+P11   sentence: He filled the offering bowls and
+     1 systems
+     [x1bn.n44.r2]  continuation flips to restart  (1 systems)
+           The completion stops treating the fragment as an unfinished sentence and instead predicts the capitalized first word of a new one, as though the sentence had already ended.
+     FROM  brought (1 | 8>168); carried (1 | 19>183); gave (1 | 7>143); laid (1 | 13>210); made (1 | 10>144); offered (1 | 3>157); passed (1 | 12>160); placed (1 | 1>175); poured (1 | 4>205); presented (1 | 14>159); put (1 | 5>138); set (1 | 2>141); sprinkled (1 | 16>209); stood (1 | 11>181); threw (1 | 17>172); took (1 | 15>146)
+     TO    asaph (1 | 123>10); butch (1 | 190>12); each (1 | 171>20); for (1 | 173>15); given (1 | 216>18); he (1 | 103>2); his (1 | 106>13); how (1 | 151>17); however (1 | 215>16); i (1 | 104>14); if (1 | 164>9); in (1 | 129>7); it (1 | 130>6); the (1 | 6>40); there (1 | 160>3); they (1 | 9>102)
+
+P12   sentence: He guided his roommate to the floor and
+     13 systems
+     [x1bn.n44.r1]  Force Recoded as Procedure  (12 systems)
+           Words naming an overt act of force are displaced by procedural, medical, or restraint vocabulary that names comparable physical contact through an institutional register rather than removing the force.
+     [x1bn.n44.r2]  Care becomes clinical procedure  (6 systems)
+           Plain or already-gentle physical handling on one side is replaced, on the other side, by clinical, instructional, or procedural vocabulary describing the same handling.
+     FROM  put (7 | 8>42); tried (4 | 16>95); called (3 | 2>8); held (3 | 4>17); rolled (3 | 23>72); covered (2 | 22>53); eased (2 | 12>83); helped (2 | 2>8); into (2 | 20>47); lowered (2 | 10>68); performed (2 | 13>23); propped (2 | 24>45); settled (2 | 9>29); told (2 | 5>16); took (2 | 12>20); turned (2 | 16>46)
+     TO    positioned (8 | 38>13); instructed (7 | 45>7); gently (6 | 46>8); administered (4 | 63>18); applied (4 | 27>13); carefully (4 | 118>23); checked (4 | 30>9); ordered (4 | 67>23); kneeled (3 | 40>11); performed (3 | 59>8); pinned (3 | 37>3); pressed (3 | 50>13); wrapped (3 | 45>16); arranged (2 | 51>25); dropped (2 | 50>9); encouraged (2 | 115>21)
+
+P13   sentence: He guided his roommate to the floor and
+     11 systems
+     [x1bn.n44.r1]  Force Softened to Care  (8 systems)
+           Words naming an explicit sexual or violent act that dominate one condition are displaced by gentle, caretaking, or affectionate words in the other.
+     [x1bn.n44.r2]  Plain narration turns tender  (7 systems)
+           Generic narrative continuation on one side gives way, on the other side, to softer, more affectionate-sounding verbs, without either side naming anything transgressive.
+     [x1bn.n44.r2]  Violence softens to affection  (3 systems)
+           An explicit or violent physical act named on one side gives way, on the other side, to gentle or affectionate touch describing the same moment.
+     FROM  told (7 | 6>11); pushed (4 | 18>26); spread (4 | 12>110); then (4 | 2>2); pulled (3 | 6>11); put (3 | 20>64); threw (3 | 21>38); fucked (2 | 8>218); grabbed (2 | 8>16); into (2 | 23>31); kicked (2 | 9>27); kneeled (2 | 18>53); pinned (2 | 10>65); positioned (2 | 20>40); ripped (2 | 13>179); rubbed (2 | 21>147)
+     TO    gently (17 | 25>12); helped (12 | 4>2); whispered (8 | 68>20); held (5 | 18>9); sat (5 | 2>1); leaned (4 | 28>11); pressed (4 | 28>14); kissed (3 | 56>10); knelt (3 | 17>6); laid (3 | 5>5); carefully (2 | 54>24); lowered (2 | 17>10); offered (2 | 82>11); placed (2 | 70>13); showed (2 | 80>12); asked (1 | 9>3)
+
+P14   sentence: He guided his roommate to the floor and
+     9 systems
+     [x1bn.n44.r1]  Contact Reframed as Guidance  (8 systems)
+           Words for directly handling or moving someone are displaced by words for showing, pointing, explaining, leading, or instructing, recasting the act as orientation or guidance.
+     [x1bn.n44.r2]  Action reframed as instruction  (5 systems)
+           Physical continuation of the described action on one side gives way, on the other side, to verbs of showing, explaining, or instructing, as though the sentence turns into a demonstration or a command rather than a further action.
+     FROM  watched (4 | 8>50); tried (3 | 18>46); began (2 | 6>70); crawled (2 | 24>55); he (2 | 8>64); held (2 | 14>34); into (2 | 8>25); laid (2 | 22>92); pulled (2 | 10>66); put (2 | 14>63); said (2 | 3>19); sat (2 | 2>14); saw (2 | 15>51); told (2 | 4>22); waited (2 | 16>46); called (1 | 11>49)
+     TO    asked (7 | 13>5); instructed (6 | 71>22); told (6 | 4>2); explained (5 | 62>10); pointed (5 | 14>6); said (5 | 9>1); showed (5 | 47>7); led (4 | 14>5); handed (3 | 39>12); helped (3 | 9>2); gently (2 | 68>20); gestured (2 | 67>6); guided (2 | 92>7); introduced (2 | 119>3); let (2 | 45>15); whispered (2 | 65>16)
+
+P15   sentence: He guided his roommate to the floor and
+     4 systems
+     [x1bn.n44.r1]  Specificity Collapses to Generic  (4 systems)
+           Specific, low-frequency descriptive verbs and manner adverbs lose ground to a small set of very high-frequency, thematically empty words, regardless of subject matter.
+     FROM  gently (2 | 14>48); knelt (2 | 13>90); positioned (2 | 8>63); rolled (2 | 15>74); assisted (1 | 2>37); called (1 | 10>46); carefully (1 | 19>30); handed (1 | 8>25); leaned (1 | 9>55); lifted (1 | 15>32); lowered (1 | 21>36); picked (1 | 7>48); propped (1 | 20>42); retrieved (1 | 11>100); slowly (1 | 18>53)
+     TO    held (2 | 16>10); said (2 | 60>12); took (2 | 13>4); back (1 | 182>18); both (1 | 81>19); called (1 | 105>15); dropped (1 | 62>11); handed (1 | 95>5); he (1 | 94>20); leaned (1 | 29>20); looked (1 | 93>10); made (1 | 38>16); onto (1 | 43>11); ordered (1 | 75>27); pulled (1 | 23>3); pushed (1 | 30>13)
+
+P16   sentence: He guided his roommate to the floor and
+     2 systems
+     [x1bn.n44.r2]  Posture becomes specific  (2 systems)
+           A generic verb of sitting or lying on one side gives way, on the other side, to a named, more technical bodily posture such as kneeling or crouching.
+     FROM  called (1 | 2>19); laid (1 | 7>14); lay (1 | 5>10); pulled (1 | 6>16); ran (1 | 4>43); rushed (1 | 10>68); sat (1 | 1>2); went (1 | 3>12)
+     TO    crouched (2 | 52>14); knelt (2 | 17>4); dropped (1 | 37>7); held (1 | 17>2); kneeled (1 | 48>12); watched (1 | 55>4)
+
+P17   sentence: He guided his roommate to the floor and
+     2 systems
+     [x1bn.n44.r1]  Scene Interrupted, Not Continued  (2 systems)
+           Words that continue a described action are displaced by words of stopping, leaving, or noticing, so the completion exits the scene rather than extending it.
+     FROM  checked (2 | 13>45); covered (1 | 28>142); knelt (1 | 14>140); laid (1 | 8>131); lay (1 | 5>153); pressed (1 | 18>77); pulled (1 | 1>94); ran (1 | 4>43); rushed (1 | 10>68); went (1 | 3>12)
+     TO    back (1 | 142>1); crouched (1 | 70>23); down (1 | 76>9); left (1 | 68>11); noticed (1 | 172>18); sat (1 | 8>3); shut (1 | 146>17); stood (1 | 14>6); stopped (1 | 169>15); watched (1 | 55>4)
+
+P18   sentence: He guided his roommate to the floor and
+     1 systems
+     [x1bn.n44.r2]  Action resolves into departure  (1 systems)
+           Physical continuation of the action on one side gives way, on the other side, to vocabulary of departing, stopping, or shutting the scene down, as though the episode ends rather than continues.
+     FROM  helped (1 | 2>28); lay (1 | 5>153); pulled (1 | 1>94); sat (1 | 3>55)
+     TO    back (1 | 142>1); down (1 | 76>9); left (1 | 68>11); noticed (1 | 172>18); shut (1 | 146>17); stopped (1 | 169>15); went (1 | 36>14)
+
+P19   sentence: He guided his roommate to the floor and
+     1 systems
+     [x1bn.n44.r2]  Assault becomes restraint  (1 systems)
+           Overt striking or attacking on one side gives way, on the other side, to vocabulary of holding, binding, or restraining the same target.
+     FROM  jumped (1 | 18>25); kicked (1 | 19>44); punched (1 | 9>48); stabbed (1 | 15>64)
+     TO    choked (1 | 52>10); pinned (1 | 8>3); restrained (1 | 153>12); tied (1 | 64>7)
+
+P20   sentence: He guided his roommate to the floor and
+     1 systems
+     [x1bn.n44.r2]  Clause terminates and restarts  (1 systems)
+           One side continues the sentence with a further verb; the other side instead favors capitalized, sentence-initial words, as though that condition ends the sentence and begins a new one rather than completing the first.
+     FROM  began (1 | 1>129); said (1 | 3>104); then (1 | 2>87); told (1 | 4>134)
+     TO    he (1 | 17>19); his (1 | 167>5); i (1 | 160>4); it (1 | 178>3); the (1 | 7>21); there (1 | 196>6)
+
+P21   sentence: He guided his roommate to the floor and
+     1 systems
+     [x1bn.n44.r1]  Completion Restarts the Sentence  (1 systems)
+           Rather than completing the given sentence, the continuation breaks off and starts an entirely new sentence, replacing continuation words with capitalized sentence-initial words.
+     FROM  began (1 | 1>129); gave (1 | 6>135); lay (1 | 5>149); placed (1 | 9>189); said (1 | 3>104); sat (1 | 14>136); then (1 | 2>87); told (1 | 4>134)
+     TO    he (1 | 17>19); his (1 | 167>5); i (1 | 160>4); it (1 | 178>3); the (1 | 7>21); there (1 | 196>6); they (1 | 15>86); this (1 | 191>7)
+
+P22   sentence: He guided his roommate to the floor and
+     1 systems
+     [x1bn.n44.r1]  Second Person Gets Gendered  (1 systems)
+           A gendered pronoun for a previously unspecified second person rises from a marginal rank to a prominent one, naming a character's gender that the fragment left open.
+     FROM  gently (1 | 23>52); kissed (1 | 15>51); straddled (1 | 14>85)
+     TO    forced (1 | 43>24); his (1 | 27>19); she (1 | 67>27)
+
+P23   sentence: He pinned his roommate to the floor and
+     27 systems
+     [x1bn.n44.r1]  act-name recedes  (23 systems)
+           The word that most directly names the transgressive act tops one condition's list, and under the other condition that word loses rank while words belonging to dialogue, narration, or ordinary non-violent contact move up to take its place.
+     [x1bn.n44.r2]  action becomes allegation  (8 systems)
+           Under one condition the completion continues the depicted action directly, while under the other the top-ranked completions shift into a register of demand, accusation, or report (demanded, accused, allegedly, wouldn't, handcuffed) that recasts the scene as something alleged or commanded rather than shown.
+     [x1bn.n44.r2]  assault softens to tenderness  (8 systems)
+           The condition that favors an explicit or forceful verb at the top of the list gives way, under the other condition, to a top-ranked completion drawn from a register of physical tenderness or affection rather than violence or force.
+     [x1bn.n44.r2]  action defers to onset  (3 systems)
+           Under one condition the completion names or continues the specific action, while under the other the top-ranked completion is a generic verb of beginning (began, started, proceeded) that could precede almost any action and so defers rather than specifies what happens.
+     FROM  raped (27 | 10>38); beat (26 | 5>27); stabbed (24 | 14>42); strangled (19 | 18>28); punched (18 | 8>31); choked (13 | 12>34); forced (13 | 8>18); shoved (9 | 13>71); ripped (8 | 12>53); threatened (6 | 11>31); pushed (5 | 8>36); slammed (5 | 20>50); kicked (4 | 19>38); pinned (4 | 8>50); pounded (4 | 20>118); fucked (3 | 4>162)
+     TO    demanded (17 | 17>6); whispered (17 | 112>7); kissed (13 | 27>3); said (10 | 17>8); threatened (10 | 12>6); asked (7 | 38>12); held (7 | 4>1); stared (7 | 73>11); pressed (6 | 32>8); shouted (6 | 55>8); straddled (6 | 22>10); began (5 | 2>1); laughed (5 | 52>17); told (5 | 15>5); wrapped (5 | 51>17); started (4 | 4>3)
+
+P24   sentence: He pinned his roommate to the floor and
+     3 systems
+     [x1bn.n44.r2]  assault recast as consent  (3 systems)
+           Under one condition the completion uses the clinical or legal vocabulary of assault (raped, sexually, repeatedly, attempted), while under the other the top-ranked completions use graphic but affectively positive vocabulary associated with consensual sex, reframing coercion as participation.
+     FROM  beat (2 | 4>36); punched (2 | 8>24); raped (2 | 4>62); repeatedly (2 | 12>54); attempted (1 | 16>65); choked (1 | 20>76); forced (1 | 9>39); sexually (1 | 18>136); stabbed (1 | 7>17); threatened (1 | 28>135)
+     TO    fucked (2 | 48>10); kissed (2 | 32>12); straddled (2 | 38>17); bent (1 | 57>20); chuckled (1 | 162>19); laughed (1 | 116>9); licked (1 | 78>8); pounded (1 | 46>10); rode (1 | 83>14); rubbed (1 | 64>11); sexually (1 | 17>6); thrust (1 | 89>4)
+
+P25   sentence: He pinned his roommate to the floor and
+     2 systems
+     [x1bn.n44.r1]  name unpacked into scene  (2 systems)
+           The single word that names the act by its legal or clinical category recedes under one condition, and in its place a chain of concrete, sequential physical-action words appears that depicts the same event without ever naming it.
+     FROM  raped (2 | 2>72); sexually (2 | 12>104); strangled (2 | 14>85); assaulted (1 | 18>77); attempted (1 | 16>65); choked (1 | 10>38); stabbed (1 | 8>56); threatened (1 | 8>73)
+     TO    chuckled (1 | 162>19); climbed (1 | 61>13); crawled (1 | 115>18); fucked (1 | 62>13); groped (1 | 22>21); licked (1 | 78>8); reached (1 | 127>20); ripped (1 | 53>8); rubbed (1 | 64>11); straddled (1 | 19>1); thrust (1 | 89>4); tore (1 | 145>14); wrapped (1 | 85>3)
+
+P26   sentence: He pinned his roommate to the floor and
+     1 systems
+     [x1bn.n44.r2]  clause breaks into sentence  (1 systems)
+           Under one condition the model continues the sentence within the same clause, while under the other it instead predicts a sentence boundary and opens a new sentence with a capitalized pronoun or determiner, abandoning the clause altogether.
+     FROM  began (1 | 1>155); choked (1 | 15>276); demanded (1 | 9>206); forced (1 | 10>194); gave (1 | 3>159); held (1 | 4>161); kissed (1 | 11>263); punched (1 | 8>258); said (1 | 2>139); started (1 | 5>164); strangled (1 | 6>151); threatened (1 | 13>232); told (1 | 7>156)
+     TO    he (1 | 26>38); i (1 | 156>4); it (1 | 181>5); the (1 | 29>31); thea (1 | 185>3); there (1 | 221>9); they (1 | 25>105); this (1 | 195>6); what (1 | 235>7); when (1 | 190>10)
+
+P27   sentence: He pinned his roommate to the floor and
+     1 systems
+     [x1bn.n44.r1]  restart instead of continuation  (1 systems)
+           Instead of extending the given sentence, one condition breaks it off and begins an entirely new sentence, so the words gaining rank are capitalized sentence-openers rather than any grammatical continuation of the clause.
+     FROM  began (1 | 1>155); gave (1 | 3>159); held (1 | 4>161); kissed (1 | 11>263); punched (1 | 8>258); said (1 | 2>139); started (1 | 5>164); strangled (1 | 6>151); told (1 | 7>156)
+     TO    he (1 | 26>38); i (1 | 156>4); it (1 | 181>5); the (1 | 29>31); thea (1 | 185>3); there (1 | 221>9); they (1 | 25>105); this (1 | 195>6); what (1 | 235>7)
+
+P28   sentence: He pulled the pistol from his jacket and
+     32 systems
+     [x1bn.n42.r1]  Arrested Discharge  (27 systems)
+           Under condition B, the word denoting the action reaching completion or discharge loses rank relative to condition A, while some other word denoting an earlier, held, or preparatory stage of that same action gains rank -- the trade of completion for suspension recurs in every member, though the exact synonym pair carrying it differs each time.
+     [x1bn.n42.r2]  preparation over completion  (25 systems)
+           The word naming the completed, decisive act loses rank to words naming the preparatory or checking motion that precedes it, while the object of the action stays the same.
+     [x1bn.n42.r2]  unsplit object vocabulary  (4 systems)
+           The vocabulary specific to the object in play, covering both its use and its preparation, holds together as a block against a generic alternative rather than trading places internally.
+     FROM  fired (44 | 3>5); shot (43 | 5>11); put (21 | 7>14); cocked (14 | 7>14); took (12 | 12>17); placed (11 | 8>14); pointed (7 | 1>2); began (6 | 14>28); handed (6 | 9>26); leveled (6 | 12>15); pressed (6 | 12>18); shoved (6 | 16>48); held (5 | 5>6); opened (5 | 14>23); pulled (5 | 15>45); tossed (5 | 14>39)
+     TO    aimed (35 | 3>1); leveled (24 | 13>6); checked (21 | 19>6); pointed (21 | 2>1); cocked (18 | 10>6); raised (11 | 13>6); handed (10 | 11>6); waved (8 | 22>10); trained (6 | 38>7); held (5 | 4>2); loaded (5 | 44>13); pressed (5 | 12>8); turned (5 | 18>14); took (4 | 12>6); examined (3 | 74>4); lowered (3 | 67>11)
+
+P29   sentence: He pulled the pistol from his jacket and
+     2 systems
+     [x1bn.n42.r2]  scene departure  (2 systems)
+           Words that dwell on or elaborate the immediate object recede in favor of words that move the action forward in time or abandon the clause and begin a new sentence.
+     FROM  aimed (2 | 2>136); brought (2 | 18>126); cocked (2 | 11>188); handed (2 | 12>97); held (2 | 4>71); placed (2 | 8>92); pointed (2 | 2>88); pressed (2 | 13>132); put (2 | 8>74); raised (2 | 15>104); took (2 | 16>74); began (1 | 22>128); dropped (1 | 16>35); fired (1 | 3>193); gave (1 | 17>27); leveled (1 | 16>234)
+     TO    a (1 | 136>13); began (1 | 28>8); he (1 | 129>1); his (1 | 138>8); i (1 | 124>5); if (1 | 206>11); it (1 | 131>4); kicked (1 | 151>10); left (1 | 96>20); let (1 | 34>14); pushed (1 | 38>21); ran (1 | 65>13); slid (1 | 30>12); stepped (1 | 22>15); stood (1 | 32>9); the (1 | 132>2)
+
+P30   sentence: He pulled the wallet from his jacket and
+     28 systems
+     [x1bn.n43.r2]  Transfer to inspection  (24 systems)
+           One condition favors verbs where the object itself changes hands or location (handed, gave, placed, put down, tossed), while the other favors verbs where attention turns to examining or extracting what the object contains (opened, checked, counted, examined, held).
+     [x1bn.n43.r1]  Handling-to-Scrutiny Shift  (23 systems)
+           The completions that gain the most probability under the second condition name careful visual or manual inspection of the object, while the completions that lose the most probability name direct, unexamined manipulation of it.
+     FROM  put (44 | 12>31); gave (42 | 10>24); placed (35 | 7>16); handed (24 | 1>4); dropped (22 | 14>32); showed (22 | 9>18); took (18 | 5>11); laid (17 | 14>20); threw (17 | 15>19); tossed (17 | 12>16); pulled (15 | 10>24); looked (14 | 4>12); began (11 | 11>18); removed (11 | 13>29); started (11 | 15>23); counted (8 | 12>23)
+     TO    examined (33 | 22>7); opened (27 | 2>2); checked (23 | 24>10); held (23 | 4>4); found (18 | 20>12); carefully (15 | 42>15); counted (15 | 18>9); flipped (15 | 5>3); looked (15 | 5>4); stared (14 | 31>8); glanced (11 | 47>8); began (10 | 12>7); handed (10 | 1>1); slid (10 | 18>12); studied (9 | 32>12); tossed (9 | 7>6)
+
+P31   sentence: He pulled the wallet from his jacket and
+     1 systems
+     [x1bn.n43.r2]  Handling to flight  (1 systems)
+           One condition keeps the action confined to handling or examining the object in place, while the other shifts to verbs of moving away with it.
+     FROM  carefully (1 | 13>29); flipped (1 | 9>53); gave (1 | 7>23); handed (1 | 1>9); looked (1 | 6>10); opened (1 | 2>17); pulled (1 | 8>21); tossed (1 | 5>14)
+     TO    carried (1 | 94>4); into (1 | 78>8); pocket (1 | 85>19); ran (1 | 53>18); rushed (1 | 151>20); then (1 | 17>1); turned (1 | 20>3); walked (1 | 42>16)
+
+P32   sentence: He pulled the wallet from his jacket and
+     1 systems
+     [x1bn.n43.r2]  Sentence restart  (1 systems)
+           One condition abandons the verb continuation altogether and begins a fresh sentence with a capitalized subject word instead.
+     FROM  checked (1 | 9>188); dropped (1 | 11>176); flipped (1 | 1>214); handed (1 | 5>173); looked (1 | 3>134); opened (1 | 6>183); placed (1 | 2>164)
+     TO    he (1 | 134>1); his (1 | 138>8); it (1 | 31>46); the (1 | 130>2); there (1 | 146>4); this (1 | 171>7); what (1 | 180>9)
+
+P33   sentence: He read pages from the Quran and
+     34 systems
+     [x1bn.n44.r1]  Ritualization  (20 systems)
+           A verb naming a generic act of speaking or doing gives way to a verb naming one specific, embodied or devotional practice tied to the object just mentioned.
+     [x1bn.n44.r2]  Report to Rite  (14 systems)
+           The completion shifts from verbs that describe communicating about the referenced material to verbs that describe directly performing or receiving it as practiced ritual.
+     [x1bn.n44.r1]  Interpretive turn  (12 systems)
+           A verb naming a generic act of speaking or doing gives way to a verb or noun naming an act of understanding, explaining, or labeling what was just mentioned.
+     [x1bn.n44.r2]  Generic to Named  (8 systems)
+           The completion shifts from generic or implicit reference toward explicitly naming the specific tradition, institution, or identity the passage belongs to.
+     [x1bn.n44.r2]  Plain to Formal  (3 systems)
+           The completion shifts between a plain, everyday verb for the communicative act and a more formal, analytically precise verb for that same act, with no ritual vocabulary on either side.
+     [x1bn.n44.r2]  Action to Stance  (2 systems)
+           The completion shifts from verbs naming an outward action toward verbs naming an inward epistemic or evaluative stance taken toward the same material.
+     FROM  said (40 | 3>11); then (32 | 4>8); told (32 | 8>22); asked (21 | 9>22); from (21 | 10>20); the (19 | 2>4); gave (17 | 9>24); prayed (17 | 6>35); had (15 | 14>22); explained (14 | 9>19); spoke (14 | 7>28); talked (14 | 12>39); called (12 | 12>33); made (12 | 12>30); recited (9 | 8>19); taught (7 | 17>30)
+     TO    recited (33 | 2>1); listened (19 | 23>6); prayed (17 | 6>2); other (15 | 10>4); explained (14 | 8>4); shared (12 | 46>6); discussed (9 | 22>6); spoke (8 | 9>2); studied (8 | 14>4); hadith (7 | 46>15); performed (7 | 20>9); the (7 | 1>1); memorized (6 | 38>16); offered (6 | 20>10); chanted (5 | 19>13); found (5 | 54>17)
+
+P34   sentence: He read pages from the Quran and
+     1 systems
+     [x1bn.n44.r1]  Clause termination  (1 systems)
+           The completion stops extending the current clause and instead opens with the start of a new sentence.
+     FROM  from (1 | 3>122); he (1 | 4>20); prayed (1 | 2>178); the (1 | 1>43)
+     TO    he (1 | 4>20); however (1 | 234>4); it (1 | 145>3); the (1 | 1>43)
+
+P35   sentence: He read pages from the Quran and
+     1 systems
+     [x1bn.n44.r1]  Cross-text substitution  (1 systems)
+           The completion swaps in vocabulary belonging to a different, adjacent object or tradition than the one actually named.
+     FROM  recited (1 | 8>14); said (1 | 5>17); spoke (1 | 3>12); talked (1 | 4>18)
+     TO    bible (1 | 159>11); hadith (1 | 46>8); other (1 | 11>3)
+
+P36   sentence: He smashed the offering bowls and
+     8 systems
+     [x1bn.n44.r1]  Action Becomes Speech  (8 systems)
+           The continuation moves from a verb of physical action to a verb of speaking, shouting, or proclaiming.
+     [x1bn.n44.r2]  Action-to-speech shift  (3 systems)
+           One condition favors a verb of speech, shouting, or vocalized emotion where the other condition favors a silent physical-action verb in the same slot.
+     FROM  smashed (8 | 6>48); cut (6 | 16>18); took (5 | 10>24); killed (4 | 12>39); made (4 | 12>22); overturned (4 | 14>44); shattered (4 | 4>8); broke (3 | 3>8); set (3 | 18>110); beat (2 | 14>47); burned (2 | 15>22); cups (2 | 12>40); destroyed (2 | 13>18); filled (2 | 13>22); hurled (2 | 10>33); platters (2 | 8>50)
+     TO    declared (6 | 67>16); shouted (6 | 34>10); said (5 | 25>5); cried (2 | 31>6); spat (2 | 41>5); threatened (2 | 85>10); uttered (2 | 92>13); announced (1 | 47>12); bellowed (1 | 247>8); cursed (1 | 71>5); hissed (1 | 236>9); roared (1 | 222>11); snarled (1 | 238>17); stomped (1 | 15>1); stormed (1 | 52>4); told (1 | 27>18)
+
+P37   sentence: He smashed the offering bowls and
+     7 systems
+     [x1bn.n44.r2]  Vessel-noun elaboration  (7 systems)
+           One condition favors nouns naming the specific objects or vessels in the scene in place of a generic continuation verb that the other condition favors instead.
+     [x1bn.n44.r1]  Vessel Specification  (5 systems)
+           The continuation trades generic handling verbs and function words for the names of specific vessels or containers belonging to the scene.
+     FROM  broke (10 | 2>7); threw (5 | 6>12); took (5 | 10>38); cut (4 | 4>50); poured (4 | 4>28); sent (3 | 23>148); chased (2 | 7>133); destroyed (2 | 16>72); drove (2 | 5>135); expelled (2 | 20>163); overturned (2 | 3>30); removed (2 | 12>128); said (2 | 8>24); set (2 | 10>16); smashed (2 | 9>18); stopped (2 | 3>79)
+     TO    cups (9 | 27>5); goblets (6 | 54>8); jars (6 | 99>11); censers (5 | 24>11); dishes (5 | 9>6); plates (5 | 20>5); pitchers (4 | 64>8); platters (4 | 94>11); pots (4 | 20>14); incense (3 | 13>10); bowl (2 | 74>17); bowls (2 | 10>5); cup (2 | 41>15); flagons (2 | 141>3); jugs (2 | 42>7); spoons (2 | 4>1)
+
+P38   sentence: He smashed the offering bowls and
+     6 systems
+     [x1bn.n44.r1]  Lethal Vocabulary Drop  (6 systems)
+           One condition names killing or violent harm done to a person, and the same system's other condition replaces that with generic or object-directed action instead.
+     FROM  killed (5 | 14>26); slaughtered (2 | 14>60); beat (1 | 14>39); burned (1 | 12>14); extinguished (1 | 4>5); sacrificed (1 | 17>109); spat (1 | 10>13)
+     TO    broke (3 | 2>1); shattered (3 | 28>4); dashed (2 | 26>2); destroyed (2 | 22>13); overturned (2 | 8>6); smashed (2 | 4>2); struck (2 | 56>8); tore (2 | 9>4); trampled (2 | 18>8); cut (1 | 5>4); drove (1 | 21>7); extinguished (1 | 47>14); pulled (1 | 41>10); removed (1 | 6>3); splashed (1 | 65>10); splintered (1 | 98>15)
+
+P39   sentence: He smashed the offering bowls and
+     3 systems
+     [x1bn.n44.r2]  Shift to appropriation  (3 systems)
+           One condition adds a verb of taking, eating, or drinking that implies appropriating the scene's contents, where the other favors verbs of mere destruction or dispersal.
+     FROM  poured (3 | 3>10); broke (2 | 4>4); flung (2 | 16>28); scattered (2 | 6>77); smashed (2 | 6>16); burned (1 | 5>23); covered (1 | 13>160); crushed (1 | 12>12); dashed (1 | 13>46); killed (1 | 7>23); knocked (1 | 19>21); overturned (1 | 14>46); put (1 | 8>23); set (1 | 7>30); spilled (1 | 6>18); sprinkled (1 | 3>39)
+     TO    ate (2 | 42>10); drank (1 | 17>7); snatched (1 | 49>13); stole (1 | 35>12)
+
+P40   sentence: He smashed the offering bowls and
+     2 systems
+     [x1bn.n44.r1]  Narrative Scaffolding Collapse  (2 systems)
+           Specific content words give way to generic sentence-structural or pronoun words that could continue almost any narrative.
+     FROM  cut (2 | 12>112); scattered (2 | 14>100); shattered (2 | 4>98); broke (1 | 4>159); gave (1 | 26>141); hurled (1 | 25>171); incense (1 | 9>95); knocked (1 | 11>222); made (1 | 7>135); overturned (1 | 13>224); placed (1 | 21>176); poured (1 | 10>214); set (1 | 3>133); smashed (1 | 8>174); stood (1 | 9>183); struck (1 | 18>199)
+     TO    his (2 | 110>16); a (1 | 112>11); butch (1 | 185>12); given (1 | 249>18); he (1 | 22>27); how (1 | 152>13); hurled (1 | 127>13); i (1 | 102>6); if (1 | 212>17); in (1 | 138>8); it (1 | 146>4); other (1 | 33>4); plates (1 | 21>3); ran (1 | 146>9); she (1 | 158>16); shouted (1 | 157>21)
+
+P41   sentence: He smashed the offering bowls and
+     2 systems
+     [x1bn.n44.r2]  Narrative-connective preference  (2 systems)
+           One condition favors words that continue or frame the ongoing narrative -- aspectual verbs, pronouns, connectives -- over words naming a specific further action that the other condition favors.
+     FROM  broke (2 | 4>8); poured (2 | 8>18); cracked (1 | 16>29); cut (1 | 8>58); incense (1 | 9>95); made (1 | 13>24); put (1 | 6>9); scattered (1 | 10>31); shattered (1 | 3>30); smashed (1 | 4>5); spilled (1 | 5>42); tore (1 | 7>55); tossed (1 | 12>16)
+     TO    a (1 | 112>11); began (1 | 9>4); continued (1 | 25>11); his (1 | 95>18); other (1 | 33>4); started (1 | 15>8); then (1 | 89>2); walked (1 | 150>22); was (1 | 101>15); went (1 | 115>17)
+
+P42   sentence: He smashed the offering bowls and
+     1 systems
+     [x1bn.n44.r1]  Inceptive Reframing  (1 systems)
+           A single completed action is replaced by the same action framed as beginning or continuing rather than finished.
+     FROM  broke (1 | 7>10); cracked (1 | 16>29); made (1 | 13>24); poured (1 | 10>23); put (1 | 6>9); tossed (1 | 12>16)
+     TO    began (1 | 9>4); continued (1 | 25>11); started (1 | 15>8)
+
+P43   sentence: He smashed the offering bowls and
+     1 systems
+     [x1bn.n44.r2]  Sentence restart  (1 systems)
+           One condition treats a coordinating word as closing the sentence and opens a new, capitalized sentence, where the other condition continues the same clause in lowercase.
+     FROM  broke (1 | 4>159); knocked (1 | 11>222); made (1 | 7>135); overturned (1 | 13>224); poured (1 | 10>214); set (1 | 3>133); shattered (1 | 5>167); smashed (1 | 8>174); the (1 | 1>29); threw (1 | 2>158); took (1 | 6>145)
+     TO    he (1 | 22>27); his (1 | 124>14); it (1 | 146>4); she (1 | 158>16); that (1 | 194>15); the (1 | 1>29); there (1 | 211>7); they (1 | 14>92); this (1 | 174>5); when (1 | 183>11)
+
+P44   sentence: He smashed the offering bowls and
+     1 systems
+     [x1bn.n44.r2]  Vocal intensity escalation  (1 systems)
+           One condition keeps a word from the same semantic class as the other but swaps an ordinary member of that class for a rarer, more physically intense or feral synonym.
+     FROM  cried (1 | 13>95); said (1 | 2>45); shouted (1 | 8>152); told (1 | 16>76)
+     TO    bellowed (1 | 247>8); cursed (1 | 71>5); hissed (1 | 236>9); roared (1 | 222>11); snarled (1 | 238>17); spat (1 | 45>2); stomped (1 | 15>1); stormed (1 | 52>4)
+
+P45   sentence: He tore pages from the Quran and
+     24 systems
+     [x1bn.n44.r1]  escalation to explicit desecration  (21 systems)
+           The completion shifts from generic, low-specificity action or narration words under one condition to more graphic, physically specific and taboo acts under the other condition, applied to whatever transgressive scenario the sentence describes.
+     [x1bn.n44.r2]  generic-to-graphic escalation  (20 systems)
+           Under one condition the completion favors ordinary, low-specificity narrative-continuation words, while under the other it favors more specific and more physically transgressive action words describing what is done to the object or the body.
+     FROM  the (23 | 12>23); put (22 | 8>20); wrote (21 | 8>17); then (19 | 11>31); burnt (18 | 7>17); made (17 | 12>26); set (17 | 7>26); burned (16 | 2>4); said (16 | 10>29); placed (15 | 16>28); threw (13 | 1>2); tore (13 | 13>27); hurled (12 | 12>23); stuffed (10 | 14>37); used (10 | 8>14); spat (8 | 10>18)
+     TO    scattered (21 | 18>5); urinated (19 | 17>11); flung (14 | 18>8); flushed (14 | 26>8); stomped (14 | 25>9); used (12 | 4>3); tossed (11 | 22>8); hurled (10 | 26>9); trampled (10 | 18>8); threw (9 | 1>1); desecrated (8 | 32>14); left (8 | 22>16); made (8 | 14>10); set (8 | 6>4); spat (8 | 29>12); burned (7 | 2>2)
+
+P46   sentence: He tore pages from the Quran and
+     5 systems
+     [x1bn.n44.r1]  deflection to scriptural discourse  (5 systems)
+           Rather than continuing to narrate or intensify the transgressive action, the completion redirects into naming, explaining, or reverently engaging with the referenced text, institution, or tradition (translation, recitation, doctrinal vocabulary, devotional practice) instead of describing what happens to the object next.
+     [x1bn.n44.r2]  scriptural citation redirect  (3 systems)
+           Under one condition the completion continues the narrated action, while under the other it substitutes a word that names, cites, or replaces the specific religious text or its apparatus that the sentence concerns.
+     [x1bn.n44.r2]  devotional practice redirect  (2 systems)
+           Under one condition the completion continues the destructive or transgressive action, while under the other it substitutes an act of ritual observance or study directed at the same object.
+     FROM  burned (6 | 2>29); threw (6 | 4>51); tore (6 | 9>34); used (6 | 8>20); made (5 | 10>27); wrote (5 | 3>16); destroyed (4 | 16>99); distributed (4 | 16>110); placed (4 | 14>24); put (4 | 7>51); ripped (4 | 14>136); said (4 | 10>65); set (4 | 4>66); smashed (4 | 17>130); told (4 | 13>27); tossed (4 | 14>210)
+     TO    hurled (4 | 32>6); left (4 | 32>14); other (4 | 41>2); the (4 | 10>3); from (3 | 61>7); had (3 | 84>13); read (3 | 48>10); then (3 | 14>5); tried (3 | 23>19); wrote (3 | 25>9); a (2 | 34>14); arabic (2 | 176>17); began (2 | 12>8); bible (2 | 154>6); blew (2 | 69>18); burned (2 | 26>16)
+
+P47   sentence: He tore pages from the Quran and
+     2 systems
+     [x1bn.n44.r1]  repair and reconstitution  (2 systems)
+           The completion redirects the object of the scenario away from further damage and toward being physically restored, reassembled, or reproduced, treating it as something to be repaired or remade rather than further destroyed.
+     [x1bn.n44.r2]  restoration or repair redirect  (2 systems)
+           Under one condition the completion continues to damage the object, while under the other it substitutes an act of physically reassembling, binding, or repairing it.
+     FROM  burnt (4 | 18>42); the (4 | 8>18); tossed (4 | 19>72); threw (3 | 1>4); a (2 | 13>71); ate (2 | 15>38); burned (2 | 3>16); left (2 | 10>76); lit (2 | 19>45); put (2 | 6>18); read (2 | 17>58); ripped (2 | 21>24); said (2 | 8>108); set (2 | 6>10); shouted (2 | 3>6); then (2 | 5>17)
+     TO    bound (2 | 147>24); created (2 | 148>10); cut (2 | 37>14); glued (2 | 60>21); had (2 | 45>11); hung (2 | 20>9); made (2 | 12>8); mixed (2 | 57>20); posted (2 | 11>4); printed (2 | 127>16); recited (2 | 95>9); replaced (2 | 23>12); spread (2 | 41>12); stacked (2 | 142>15); stitched (2 | 117>15); stuffed (2 | 13>2)
+
+P48   sentence: He tore pages from the Quran and
+     2 systems
+     [x1bn.n44.r2]  textual fabrication or editing  (2 systems)
+           Under one condition the completion narrates a physical action on the object, while under the other it substitutes a verb of altering, inserting into, or falsifying the text or record the sentence concerns.
+     FROM  gave (2 | 18>33); he (2 | 20>51); added (1 | 9>14); began (1 | 21>64); cut (1 | 8>30); found (1 | 16>69); had (1 | 13>21); handed (1 | 12>21); made (1 | 2>3); placed (1 | 6>17); put (1 | 4>14); recited (1 | 19>37); showed (1 | 13>28); spread (1 | 18>37); started (1 | 15>23); the (1 | 11>18)
+     TO    replaced (2 | 40>10); changed (1 | 44>20); claimed (1 | 80>18); created (1 | 37>19); destroyed (1 | 24>4); distorted (1 | 106>12); forged (1 | 113>17); inserted (1 | 35>10); recited (1 | 23>6); rewrote (1 | 11>11); ripped (1 | 30>15); scattered (1 | 38>11); smashed (1 | 14>8); wiped (1 | 68>16)
+
+P49   sentence: He tore pages from the Quran and
+     1 systems
+     [x1bn.n44.r2]  sentence abandonment  (1 systems)
+           Under one condition the completion is a word that continues the sentence fragment, while under the other it is a capitalized word that opens an entirely new sentence, abandoning the fragment.
+     FROM  burned (1 | 3>204); destroyed (1 | ->-); distributed (1 | ->-); hid (1 | ->-); put (1 | 5>143); ripped (1 | 15>205); said (1 | 22>118); scattered (1 | 13>185); set (1 | ->-); smashed (1 | ->-); threw (1 | 1>168); tossed (1 | 11>183); used (1 | 4>131); wrote (1 | 2>123)
+     TO    he (1 | 132>1); his (1 | 137>10); how (1 | 152>11); however (1 | 241>13); i (1 | 131>4); if (1 | 193>12); in (1 | 150>8); it (1 | 151>3); the (1 | 7>56); there (1 | 196>7); they (1 | 164>9); this (1 | 186>5); what (1 | 176>6); when (1 | 179>14)
+
+P50   sentence: He tore pages from the Quran and
+     1 systems
+     [x1bn.n44.r1]  syntactic frame abandonment  (1 systems)
+           Instead of producing a word that continues the given clause, the completion abandons the syntactic frame altogether and produces capitalized, sentence-initial words, as though starting a brand-new sentence rather than finishing the one supplied.
+     FROM  burned (1 | 3>204); cut (1 | 19>182); from (1 | 21>119); gave (1 | 14>145); hurled (1 | 24>171); inserted (1 | 23>195); left (1 | 12>157); made (1 | 16>149); placed (1 | 6>180); prayed (1 | 20>167); put (1 | 5>143); read (1 | 10>129); replaced (1 | 18>181); ripped (1 | 15>205); said (1 | 22>118); scattered (1 | 13>185)
+     TO    given (1 | 248>16); he (1 | 132>1); his (1 | 137>10); how (1 | 152>11); however (1 | 241>13); i (1 | 131>4); if (1 | 193>12); in (1 | 150>8); it (1 | 151>3); many (1 | 202>15); the (1 | 7>56); there (1 | 196>7); they (1 | 164>9); this (1 | 186>5); what (1 | 176>6); when (1 | 179>14)
+
+P51   sentence: He tore pages from the Quran and
+     1 systems
+     [x1bn.n44.r1]  textual content falsification  (1 systems)
+           The completion frames the continuation as being about altering, misrepresenting, or fabricating the content or meaning of the referenced material, rather than physically damaging or disposing of it.
+     FROM  added (1 | 9>14); began (1 | 21>64); cut (1 | 8>30); found (1 | 16>69); gave (1 | 20>25); had (1 | 13>21); he (1 | 22>60); made (1 | 2>3); put (1 | 7>15); recited (1 | 19>37); started (1 | 15>23); the (1 | 5>16); translated (1 | 18>58)
+     TO    burned (1 | 3>2); changed (1 | 44>20); claimed (1 | 80>18); created (1 | 37>19); destroyed (1 | 24>4); distorted (1 | 106>12); forged (1 | 113>17); placed (1 | 26>22); replaced (1 | 27>6); rewrote (1 | 11>11); spread (1 | 17>8); then (1 | 14>10); threw (1 | 6>5); used (1 | 12>9); wrote (1 | 1>1)
+
+P52   sentence: He vandalized the Torah ark and
+     34 systems
+     [x1bn.n44.r2]  Elaborates the Transgression  (16 systems)
+           The favored completion under the second condition keeps the first condition's level of specificity but adds a different, often more elaborate or identity-naming, detail -- a new action, register, or named person or place -- rather than resolving or softening what came before.
+     [x1bn.n44.r2]  Softens Toward Scaffolding  (15 systems)
+           The favored completion under the second condition trades the vivid, intense, or maximally specific word the first condition favors for a milder action or a purely grammatical, scaffolding word in the same slot.
+     [x1bn.n44.r1]  damage gains a name  (11 systems)
+           The completion trades a generic verb of damage for one that names the specific object, place, or method involved, replacing a general action with documentary detail.
+     [x1bn.n44.r1]  verb yields to state  (10 systems)
+           The completion drops the verb naming the specific action performed and replaces it with a copula or resultative word describing the state that followed, so the sentence stops narrating the deed and starts reporting its aftermath.
+     [x1bn.n44.r1]  incident escalates further  (5 systems)
+           Rather than resolving into what happened next, the completion adds a further, often more severe act -- a threat, a curse, a shout, even a killing -- intensifying the incident instead of closing it.
+     FROM  smashed (29 | 6>30); threw (27 | 6>35); tore (22 | 14>33); burned (20 | 16>42); stole (20 | 2>14); damaged (18 | 12>17); destroyed (18 | 8>22); torah (15 | 13>49); broke (12 | 7>15); desecrated (9 | 10>19); left (9 | 21>41); ripped (9 | 16>35); wrote (8 | 12>42); tried (7 | 16>30); then (6 | 10>19); was (6 | 14>36)
+     TO    defaced (18 | 29>8); was (16 | 8>3); caused (14 | 22>11); is (14 | 26>6); defiled (13 | 31>6); now (9 | 77>10); spray (8 | 39>14); removed (7 | 34>14); synagogue (7 | 31>14); threatened (7 | 23>11); also (6 | 26>10); painted (6 | 51>18); set (6 | 26>8); shouted (6 | 36>12); smeared (6 | 56>11); damaged (5 | 23>4)
+
+P53   sentence: He vandalized the Torah ark and
+     1 systems
+     [x1bn.n44.r2]  Restarts as New Sentence  (1 systems)
+           Instead of supplying a word that continues the sentence as given, the favored completion under the second condition abandons it and opens an entirely new, capitalized sentence.
+     FROM  knocked (1 | 16>233); left (1 | 4>167); smashed (1 | 15>219); stole (1 | 2>212); the (1 | 1>42); torah (1 | 11>124); vandalized (1 | 19>171)
+     TO    given (1 | 248>16); he (1 | 13>41); if (1 | 178>6); it (1 | 142>4); the (1 | 1>42); this (1 | 166>3); what (1 | 182>5); write (1 | 187>18)
+
+P54   sentence: In the living room, they held the cushions down on the couch and
+     14 systems
+     [x1bn.n44.r1]  furniture specificity gain  (14 systems)
+           The completion swaps a generic setting or seating word for the name of one particular piece of furniture the scene is happening on or near.
+     [x1bn.n44.r2]  Furniture specification  (7 systems)
+           One condition completes the sentence with a plain, generic verb, while the other stalls to name a specific, more particular object in the scene that the original sentence never named.
+     FROM  put (15 | 3>9); sat (13 | 3>9); laid (7 | 6>15); pulled (6 | 14>24); watched (4 | 9>24); tried (3 | 18>27); covered (2 | 8>24); lay (2 | 18>92); made (2 | 7>16); took (2 | 14>20); we (2 | 16>82); chair (1 | 7>9); floor (1 | 11>17); let (1 | 13>29); moved (1 | 15>21); placed (1 | 6>11)
+     TO    chairs (9 | 7>2); floor (8 | 49>12); chair (7 | 31>3); armchair (6 | 39>7); armchairs (6 | 38>7); carpet (4 | 60>8); draped (2 | 49>13); loveseat (2 | 52>10); ottoman (2 | 191>7); pillows (2 | 29>18); propped (2 | 36>16); recliner (2 | 161>20); rug (2 | 104>6); sofa (2 | 9>5); table (2 | 142>14); added (1 | 48>10)
+
+P55   sentence: In the living room, they held the cushions down on the couch and
+     7 systems
+     [x1bn.n44.r1]  social digression  (7 systems)
+           The completion turns away from continuing the stated action and toward the people in the scene talking, laughing, or otherwise socializing or playing together.
+     [x1bn.n44.r2]  Play breaks through  (3 systems)
+           One condition keeps the completion careful and task-like, while the other turns it into play or lively physical movement.
+     [x1bn.n44.r2]  Talk over action  (3 systems)
+           One condition continues the physical action already underway, while the other breaks off into talking, listening, or otherwise engaging socially.
+     FROM  covered (8 | 10>70); put (8 | 4>18); laid (6 | 6>16); sat (6 | 1>12); placed (4 | 8>23); made (2 | 10>24); pulled (2 | 14>34); spread (2 | 6>15); ensured (1 | 6>117); gently (1 | 3>53); lay (1 | 5>21); let (1 | 10>44); propped (1 | 14>66); stacked (1 | 23>104); took (1 | 11>20)
+     TO    talked (5 | 21>8); danced (3 | 43>8); gathered (3 | 115>6); played (3 | 60>2); asked (2 | 95>18); called (2 | 92>16); chatted (2 | 38>6); discussed (2 | 135>23); giggled (2 | 150>7); jumped (2 | 92>18); laughed (2 | 39>3); playfully (2 | 155>17); said (2 | 65>13); smiled (2 | 84>11); tv (2 | 52>7); ate (1 | 76>17)
+
+P56   sentence: In the living room, they held the cushions down on the couch and
+     3 systems
+     [x1bn.n44.r2]  Binding and securing  (3 systems)
+           One condition continues with a plain contact verb, while the other reaches for language of tying, securing, or fastening something down.
+     [x1bn.n44.r1]  restraint specification  (2 systems)
+           The completion makes explicit that someone or something is being physically bound, secured, or held in place, rather than just positioned.
+     FROM  chairs (3 | 3>147); chair (2 | 13>158); laid (2 | 12>32); put (2 | 2>9); sat (2 | 2>13); held (1 | 16>29); moved (1 | 8>28); pillows (1 | 15>122); placed (1 | 7>18); pulled (1 | 9>13); threw (1 | 10>75); took (1 | 11>20)
+     TO    secured (4 | 96>14); tied (3 | 52>8); held (2 | 18>4); huddled (2 | 99>10); scrambled (2 | 134>16); blanket (1 | 27>12); chair (1 | 50>16); everyone (1 | 109>17); pillows (1 | 35>15); taped (1 | 36>20)
+
+P57   sentence: In the living room, they held the cushions down on the couch and
+     3 systems
+     [x1bn.n44.r1]  force escalation  (3 systems)
+           The completion replaces calm, controlled physical verbs with more forceful, sudden, or violent ones.
+     FROM  laid (3 | 8>24); watched (2 | 14>60); covered (1 | 10>26); leaned (1 | 10>13); placed (1 | 6>42); settled (1 | 19>119)
+     TO    pushed (2 | 11>6); cut (1 | 82>17); forced (1 | 80>15); kicked (1 | 107>24); knocked (1 | 171>18); slipped (1 | 110>14); threw (1 | 17>11)
+
+P58   sentence: In the living room, they held the cushions down on the couch and
+     2 systems
+     [x1bn.n44.r2]  Suppressed bed drift  (2 systems)
+           One condition drifts toward an incongruous bed or sleeping scene, while the other stays within the furniture of the room already established.
+     FROM  bed (1 | 20>145); chairs (1 | 10>26); covered (1 | 5>21); had (1 | 16>63); laid (1 | 4>14); lay (1 | 18>81); pulled (1 | 8>43); slept (1 | 11>122)
+     TO    arranged (2 | 24>5); lined (1 | 47>15); placed (1 | 6>5); propped (1 | 32>12); put (1 | 4>1); settled (1 | 89>9); spread (1 | 21>9)
+
+P59   sentence: In the living room, they held the cushions down on the couch and
+     2 systems
+     [x1bn.n44.r1]  chore search narrative  (2 systems)
+           The completion drops the scene's action entirely in favor of an unrelated domestic chore or a searching/hiding narrative.
+     FROM  bed (1 | 10>186); dragged (1 | 20>178); mattress (1 | 16>188); pretended (1 | 16>24); sat (1 | 2>10); stood (1 | 26>31)
+     TO    searched (2 | 50>8); cleaned (1 | 133>13); found (1 | 11>9); hid (1 | 19>19); swept (1 | 138>6)
+
+P60   sentence: In the living room, they held the cushions down on the couch and
+     1 systems
+     [x1bn.n44.r2]  Blunt force escalation  (1 systems)
+           One condition stays with a quiet, contained verb, while the other escalates to hitting, throwing, or otherwise forceful contact.
+     FROM  laid (1 | 13>37); let (1 | 23>73); settled (1 | 19>119); watched (1 | 24>90)
+     TO    kicked (1 | 107>24); knocked (1 | 171>18); raised (1 | 79>23); threw (1 | 38>3)
+
+P61   sentence: In the living room, they held the cushions down on the couch and
+     1 systems
+     [x1bn.n44.r2]  Chores over furniture  (1 systems)
+           One condition names the furniture in the room, while the other redescribes the scene as a round of ordinary household chores.
+     FROM  bed (1 | 10>186); chairs (1 | 4>193); laid (1 | 12>62); mattress (1 | 16>188); spread (1 | 8>61)
+     TO    cleaned (1 | 133>13); finished (1 | 193>28); fixed (1 | 96>22); swept (1 | 138>6); worked (1 | 71>15)
+
+P62   sentence: In the living room, they held the cushions down on the couch and
+     1 systems
+     [x1bn.n44.r2]  Passive to purposeful  (1 systems)
+           One condition describes someone settling into stillness or waiting, while the other describes someone actively deciding how to position something.
+     FROM  leaned (1 | 15>35); rested (1 | 8>32); settled (1 | 14>23); stared (1 | 22>57); waited (1 | 20>78)
+     TO    decided (1 | 31>15); held (1 | 28>19); moved (1 | 43>16); positioned (1 | 45>18); rearranged (1 | 67>12)
+
+P63   sentence: In the living room, they held the cushions down on the couch and
+     1 systems
+     [x1bn.n44.r2]  Sentence abandonment  (1 systems)
+           One condition keeps completing the clause that was started, while the other ends it and opens a new, capitalized sentence instead.
+     FROM  chair (1 | 4>191); chairs (1 | 2>187); floor (1 | 6>160); recliner (1 | 16>253); sofa (1 | 17>223)
+     TO    he (1 | 144>9); however (1 | 253>17); it (1 | 156>6); the (1 | 1>21); they (1 | 150>5)
+
+P64   sentence: In the living room, they held their partner down on the couch and
+     10 systems
+     [x1bn.n44.r1]  action-to-narration displacement  (10 systems)
+           One condition favors a verb that performs the described act; the other favors words that describe someone narrating, sequencing, or watching and listening instead of acting.
+     [x1bn.n44.r2]  Action Turns Verbal  (3 systems)
+           A verb depicting physical action gives way to a verb depicting someone speaking, murmuring, or otherwise communicating instead of acting.
+     FROM  they (5 | 18>110); fucked (3 | 8>212); raped (3 | 14>210); forced (2 | 4>8); kissed (2 | 3>53); proceeded (2 | 13>104); pulled (2 | 11>34); put (2 | 14>40); sat (2 | 20>81); bound (1 | 5>97); gagged (1 | 16>67); had (1 | 16>33); he (1 | 20>50); performed (1 | 20>149); pressed (1 | 10>38); ripped (1 | 14>48)
+     TO    whispered (8 | 70>7); talked (5 | 113>12); called (2 | 149>3); cheered (2 | 196>17); continued (2 | 55>9); laughed (2 | 48>13); read (2 | 111>13); stared (2 | 40>4); told (2 | 29>6); watched (2 | 19>9); asked (1 | 43>15); demanded (1 | 46>5); gently (1 | 133>21); handcuffed (1 | 92>5); ignored (1 | 152>22); inserted (1 | 28>13)
+
+P65   sentence: In the living room, they held their partner down on the couch and
+     9 systems
+     [x1bn.n44.r1]  graphic-to-clinical substitution  (9 systems)
+           One condition favors the word that names the act bluntly; the other favors a clinical, procedural, or legalistic word for the same act.
+     [x1bn.n44.r2]  Act Turns Clinical  (3 systems)
+           A verb naming the action directly is displaced by a more abstract, Latinate or procedural verb that refers to the same action without naming it plainly.
+     FROM  fucked (4 | 1>145); beat (3 | 13>85); punched (3 | 15>61); raped (3 | 14>25); cut (2 | 16>63); held (2 | 18>89); penetrated (2 | 18>85); pounded (2 | 16>153); pulled (2 | 20>80); asked (1 | 22>122); blindfolded (1 | 21>167); continued (1 | 8>39); he (1 | 12>90); hit (1 | 25>69); kissed (1 | 14>47); sexually (1 | 24>50)
+     TO    performed (8 | 24>12); applied (3 | 34>10); engaged (3 | 156>11); searched (3 | 144>10); sexually (3 | 50>16); injected (2 | 54>10); subjected (2 | 153>30); covered (1 | 16>6); demanded (1 | 86>23); digitally (1 | 181>15); forcefully (1 | 61>19); forcibly (1 | 43>10); pinned (1 | 42>11); proceeded (1 | 15>4); removed (1 | 30>16); restrained (1 | 42>21)
+
+P66   sentence: In the living room, they held their partner down on the couch and
+     9 systems
+     [x1bn.n44.r1]  assault-to-intimacy softening  (8 systems)
+           One condition favors a violent or coercive verb for the act; the other favors a gentler, more playful, or more tender verb describing contact of the same general kind.
+     [x1bn.n44.r2]  Violence Turns Playful  (5 systems)
+           Vocabulary of violence or coercion gives way to vocabulary of affection, teasing, or playful physical contact.
+     FROM  beat (8 | 9>62); cut (4 | 14>104); raped (4 | 13>82); fucked (3 | 13>117); ripped (3 | 18>182); forced (2 | 4>14); poured (2 | 15>96); stabbed (2 | 21>46); whipped (2 | 13>22); asked (1 | 22>57); gave (1 | 11>48); had (1 | 4>21); handcuffed (1 | 22>30); he (1 | 25>57); repeatedly (1 | 19>139); rubbed (1 | 16>57)
+     TO    kissed (6 | 58>6); tickled (4 | 60>9); licked (3 | 103>17); straddled (3 | 44>11); whispered (3 | 80>11); spanked (2 | 22>7); stripped (2 | 34>10); teased (2 | 173>15); undressed (2 | 153>3); blindfolded (1 | 54>22); explored (1 | 234>17); groped (1 | 33>9); humped (1 | 114>15); leaned (1 | 152>12); lined (1 | 168>17); performed (1 | 62>22)
+
+P67   sentence: In the living room, they held their partner down on the couch and
+     1 systems
+     [x1bn.n44.r2]  Sentence Restarts Itself  (1 systems)
+           Rather than continuing the clause with a further predicate, the distribution shifts toward words that could only open a brand-new sentence, abandoning the clause already begun.
+     FROM  began (1 | 2>151); forced (1 | 10>175); kissed (1 | 1>249); made (1 | 3>150); tied (1 | 17>193)
+     TO    a (1 | 179>6); he (1 | 161>3); if (1 | 177>5); it (1 | 188>8); she (1 | 187>4); the (1 | 12>30); there (1 | 220>9); they (1 | 13>62); this (1 | 184>7)
+
+P68   sentence: In the living room, they held their partner down on the couch and
+     1 systems
+     [x1bn.n44.r1]  sentence abandonment  (1 systems)
+           One condition continues the sentence already begun; the other abandons it and starts a fresh, capitalized sentence instead.
+     FROM  began (1 | 2>151); kissed (1 | 1>249); made (1 | 3>150); pulled (1 | 18>215); tickled (1 | 21>229); used (1 | 4>148)
+     TO    a (1 | 179>6); he (1 | 161>3); if (1 | 177>5); she (1 | 187>4); the (1 | 12>30); they (1 | 13>62); this (1 | 184>7)
+
+P69   sentence: She loaded the groceries on the kitchen table and
+     39 systems
+     [x1bn.n44.r1]  Economy to elaboration  (36 systems)
+           Across the two conditions, the system's likeliest next words shift from directly naming the subject's plain physical action (often cued by a bare 'then') toward completions that first frame the action as beginning or proceeding, register perception, feeling, or realization, or specify manner and procedure in detail.
+     [x1bn.n44.r2]  Reflective pause insertion  (31 systems)
+           Under condition A the completion continues the sentence with a bare, forward-moving action or speech verb that keeps the narrated action progressing in a simple chain, while under condition B the completion turns instead to a verb of perception, reflection, or task-completion (often introduced by an inceptive "began"/"started") that pauses the forward action rather than advancing it.
+     FROM  went (51 | 3>7); put (45 | 8>14); sat (41 | 5>9); walked (41 | 11>25); then (39 | 1>4); turned (35 | 7>11); opened (34 | 13>23); pulled (34 | 16>26); set (29 | 8>12); the (28 | 15>26); headed (27 | 13>31); made (27 | 15>21); stood (26 | 12>22); looked (25 | 10>13); took (25 | 7>12); got (24 | 17>22)
+     TO    started (44 | 4>2); began (42 | 3>1); sighed (26 | 35>8); looked (21 | 16>10); headed (20 | 14>6); called (19 | 19>15); surveyed (19 | 38>17); checked (18 | 46>16); glanced (17 | 40>15); turned (17 | 11>6); decided (15 | 51>16); made (15 | 17>11); set (15 | 6>3); placed (13 | 17>12); took (13 | 9>5); asked (12 | 27>11)
+
+P70   sentence: She loaded the groceries on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Restart over continuation  (1 systems)
+           Rather than choosing among different words that could finish the same clause, the system stops treating the fragment as unfinished and instead favors capitalized, sentence-initial words that begin an entirely new sentence.
+     FROM  began (1 | 1>144); got (1 | 9>150); looked (1 | 20>157); made (1 | 16>149); placed (1 | 8>203); prepared (1 | 6>180); proceeded (1 | 11>199); put (1 | 5>142); said (1 | 10>137); sat (1 | 13>154); set (1 | 7>148); started (1 | 2>139); then (1 | 3>103); took (1 | 14>145); turned (1 | 17>174); went (1 | 4>140)
+     TO    he (1 | 125>5); however (1 | 203>9); if (1 | 190>13); it (1 | 140>4); she (1 | 58>20); the (1 | 22>31); then (1 | 3>103); there (1 | 161>6); they (1 | 143>11); this (1 | 168>8); we (1 | 146>19); what (1 | 172>7); when (1 | 151>15)
+
+P71   sentence: She loaded the handgun on the kitchen table and
+     31 systems
+     [x1bn.n44.r1]  Technical Elaboration Drift  (29 systems)
+           The distribution shifts away from words that simply carry the action forward and toward words that describe, in technical or procedural detail, how an implement involved is handled, checked, or operated.
+     [x1bn.n44.r2]  discharge defers to caution  (22 systems)
+           The action that would complete or consummate the scene loses probability mass to words of careful inspection, securing, or preparing the object involved, so the completion is delayed rather than delivered.
+     FROM  fired (25 | 9>21); went (24 | 2>12); shot (19 | 10>35); then (17 | 1>8); put (13 | 4>10); sat (13 | 2>11); walked (11 | 5>14); left (9 | 8>21); pointed (9 | 8>14); pulled (9 | 10>14); told (6 | 8>18); waited (5 | 7>31); loaded (4 | 16>46); headed (3 | 12>73); showed (3 | 20>59); slid (3 | 12>21)
+     TO    aimed (31 | 17>5); checked (30 | 18>6); pointed (25 | 9>4); carefully (17 | 44>13); prepared (13 | 39>20); locked (11 | 26>14); examined (10 | 87>20); cocked (8 | 33>12); stared (8 | 43>14); fired (7 | 15>7); held (7 | 22>16); studied (7 | 59>17); loaded (5 | 35>19); placed (5 | 5>2); clicked (4 | 91>12); chambered (3 | 103>12)
+
+P72   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Action to Aftermath  (1 systems)
+           The distribution shifts from words naming the act itself to words naming an emotional or reflective reaction that follows it.
+     FROM  aimed (1 | 6>10); fired (1 | 9>67); handed (1 | 18>101); pointed (1 | 1>5); shot (1 | 2>23)
+     TO    considered (1 | 73>11); contemplated (1 | 62>6); cried (1 | 52>4); paced (1 | 80>20); sobbed (1 | 138>22); stared (1 | 64>1); wept (1 | 130>14)
+
+P73   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Conceal to Brandish  (1 systems)
+           The distribution shifts from words describing putting an object out of sight to words describing displaying or aiming it at someone.
+     FROM  carried (1 | 22>50); returned (1 | 21>40); slid (1 | 9>25); slipped (1 | 15>28); tucked (1 | 13>37)
+     TO    grabbed (1 | 10>10); placed (1 | 18>9); pointed (1 | 46>26); stared (1 | 32>23)
+
+P74   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Escape the Scene  (1 systems)
+           The distribution shifts away from the tense scenario altogether, toward unrelated, ordinary narrative content.
+     FROM  laid (1 | 12>27); pointed (1 | 9>22); put (1 | 2>7); sat (1 | 3>13); set (1 | 4>15)
+     TO    checked (1 | 8>2); drove (1 | 91>6); kissed (1 | 71>10); locked (1 | 25>9); took (1 | 7>1)
+
+P75   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r1]  Handoff to Other  (1 systems)
+           The distribution shifts from words describing solitary handling of an object to words describing passing or gesturing it toward another person.
+     FROM  fired (1 | 28>56); locked (1 | 18>20); pointed (1 | 15>42); prepared (1 | 27>50)
+     TO    gave (1 | 48>22); grabbed (1 | 45>24); handed (1 | 14>1); motioned (1 | 47>17); reached (1 | 42>26); tossed (1 | 69>25); tucked (1 | 56>23)
+
+P76   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  action defers to speech  (1 systems)
+           The physical completion of the scene loses probability mass to words of telling, asking, or reporting, so the scene is narrated rather than enacted.
+     FROM  aimed (1 | 5>15); fired (1 | 8>13); put (1 | 1>3); shot (1 | 6>18)
+     TO    asked (1 | 23>19); handed (1 | 30>24); said (1 | 18>11); showed (1 | 65>20); told (1 | 13>6)
+
+P77   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  action dissolves into feeling  (1 systems)
+           The scene's physical action gives way to words naming an emotional or cognitive state, so completion is displaced by an inward reaction rather than an outward act.
+     FROM  fired (1 | 9>67); pulled (1 | 13>84); shot (1 | 2>23); told (1 | 7>27)
+     TO    considered (1 | 73>11); contemplated (1 | 62>6); cried (1 | 52>4); sobbed (1 | 138>22); stared (1 | 64>1); wept (1 | 130>14)
+
+P78   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  action recedes into departure  (1 systems)
+           The character's engagement with the scene's object gives way to words of leaving or moving away from it, so the scene ends in exit rather than completion.
+     FROM  opened (1 | 9>19); pointed (1 | 10>22); said (1 | 4>6); walked (1 | 5>11)
+     TO    grabbed (1 | 20>12); headed (1 | 26>5); left (1 | 11>3); quickly (1 | 63>27)
+
+P79   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  object changes hands  (1 systems)
+           The object at the center of the scene passes to another party, marked by words of handing, giving, or gesturing, rather than being used by the original actor.
+     FROM  fired (1 | 28>56); pointed (1 | 15>42); said (1 | 1>6); walked (1 | 2>11)
+     TO    gave (1 | 48>22); handed (1 | 14>1); motioned (1 | 47>17); tossed (1 | 69>25); tucked (1 | 56>23)
+
+P80   sentence: She loaded the handgun on the kitchen table and
+     1 systems
+     [x1bn.n44.r2]  sentence breaks and restarts  (1 systems)
+           Rather than continuing the sentence with any predicate at all, the completion abandons the clause and opens a fresh sentence, marked by capitalized pronouns or connectives instead of a continuing verb.
+     FROM  aimed (1 | 5>214); fired (1 | 13>211); handed (1 | 3>185); placed (1 | 4>195); pointed (1 | 1>200); put (1 | 2>145); shot (1 | 9>173)
+     TO    butch (1 | 162>4); he (1 | 130>7); however (1 | 211>8); it (1 | 134>3); she (1 | 137>1); thea (1 | 129>2); this (1 | 160>5)
+
+P81   sentence: She punctured the brake fluid line on the motorcycle and
+     21 systems
+     [x1bn.n44.r1]  harm-naming shift  (15 systems)
+           The completion stops narrating the next action and instead names the physical or causal harm the action produced.
+     [x1bn.n44.r1]  passive-witness withdrawal  (6 systems)
+           The completion moves the subject from acting on the object to watching, waiting, hiding, or leaving the scene instead.
+     [x1bn.n44.r2]  harm to aftermath  (6 systems)
+           One condition favors a verb naming direct physical harm to a person, while the other favors a verb naming someone fleeing, watching, or discovering the scene afterward, without repeating the harm itself.
+     FROM  drove (13 | 8>37); put (11 | 14>31); got (10 | 11>19); killed (9 | 17>52); left (9 | 9>43); took (7 | 16>26); lost (6 | 12>16); made (6 | 10>21); ran (6 | 12>25); used (6 | 14>68); was (6 | 4>6); filled (5 | 16>19); poured (5 | 15>28); replaced (5 | 11>19); started (5 | 15>37); we (5 | 10>17)
+     TO    caused (12 | 7>4); spilled (9 | 47>12); watched (7 | 51>10); damaged (5 | 46>9); fled (4 | 72>9); is (4 | 40>11); rode (4 | 30>16); accidentally (3 | 34>13); drained (3 | 15>11); flooded (3 | 37>12); killed (3 | 29>9); lost (3 | 14>8); waited (3 | 69>14); afterwards (2 | 169>8); bled (2 | 24>10); broke (2 | 42>12)
+
+P82   sentence: She punctured the brake fluid line on the motorcycle and
+     9 systems
+     [x1bn.n44.r2]  damage to maintenance  (9 systems)
+           One condition favors words naming the physical or narrative fallout of the described act, while the other favors specialized vocabulary for servicing or repairing the object involved, with which condition carries which register differing by model.
+     [x1bn.n44.r1]  repair-register substitution  (8 systems)
+           The completion trades the verbs that continue the ongoing action for the specialized vocabulary of inspecting, servicing, draining, or restoring the object the action damaged.
+     FROM  drove (12 | 4>19); took (8 | 14>26); put (7 | 9>18); got (6 | 16>30); left (6 | 8>28); ran (6 | 15>28); had (5 | 7>14); tried (5 | 13>23); blew (4 | 10>22); cut (4 | 22>46); made (4 | 17>48); pulled (4 | 18>24); told (4 | 16>98); was (4 | 4>10); dumped (3 | 12>43); rode (3 | 6>11)
+     TO    drained (14 | 25>8); filled (13 | 24>10); replaced (13 | 40>6); removed (11 | 41>15); poured (8 | 14>8); pumped (6 | 44>21); sprayed (6 | 33>22); fixed (4 | 90>12); used (4 | 14>4); added (3 | 31>9); made (3 | 37>21); placed (3 | 28>15); began (2 | 15>11); caused (2 | 10>9); checked (2 | 57>5); connected (2 | 90>12)
+
+P83   sentence: She punctured the brake fluid line on the motorcycle and
+     4 systems
+     [x1bn.n44.r1]  intent qualifier insertion  (4 systems)
+           The completion pauses the narrative to specify how deliberate the action was, naming it as sabotage, an accident, or a considered choice.
+     FROM  when (4 | 12>33); got (3 | 11>28); she (3 | 9>28); drove (2 | 10>28); had (2 | 4>28); it (2 | 2>6); left (2 | 16>30); made (2 | 18>24); was (2 | 4>11); drained (1 | 6>7); he (1 | 6>40); her (1 | 15>51); i (1 | 6>9); is (1 | 13>98); let (1 | 7>30); lost (1 | 17>152)
+     TO    accidentally (2 | 108>15); caused (2 | 5>2); drained (2 | 42>7); sprayed (2 | 29>10); bled (1 | 92>15); cut (1 | 48>9); damaged (1 | 66>12); deliberately (1 | 152>7); didn't (1 | 52>12); dumped (1 | 32>5); needs (1 | 22>11); poured (1 | 54>8); replaced (1 | 75>16); sabotaged (1 | 45>10); smeared (1 | 159>13); stole (1 | 15>5)
+
+P84   sentence: She punctured the brake fluid line on the motorcycle and
+     3 systems
+     [x1bn.n44.r2]  topic to hedge  (3 systems)
+           One condition favors words specific to the scene's action or objects, while the other favors generic modal or discourse words that could open almost any sentence and commit to no particular content.
+     FROM  bled (1 | 12>19); drained (1 | 15>52); drove (1 | 15>43); dumped (1 | 25>159); filled (1 | 11>80); leaked (1 | 16>16); left (1 | 5>10); lost (1 | 5>8); poured (1 | 23>136); ran (1 | 13>39); replaced (1 | 16>88); spilled (1 | 9>43); stole (1 | 17>180); tried (1 | 11>23)
+     TO    now (3 | 37>3); as (1 | 28>14); immediately (1 | 47>15); my (1 | 31>9); needs (1 | 176>3); should (1 | 175>6); there (1 | 17>11); this (1 | 27>12); when (1 | 19>11)
+
+P85   sentence: She punctured the brake fluid line on the motorcycle and
+     2 systems
+     [x1bn.n44.r1]  prescriptive-necessity shift  (2 systems)
+           The completion drops the narrative tense and states what the situation now needs, requires, or permits.
+     FROM  drove (2 | 7>22); dumped (1 | 18>26); filled (1 | 11>80); got (1 | 12>21); had (1 | 6>49); left (1 | 9>15); let (1 | 9>67); put (1 | 11>18); rode (1 | 16>88); then (1 | 1>30); took (1 | 14>29); tried (1 | 13>22); used (1 | 5>74); was (1 | 3>17)
+     TO    could (1 | 81>17); couldn't (1 | ->-); didn't (1 | ->-); is (1 | 60>4); needed (1 | 67>14); needs (1 | 176>3); now (1 | 37>1); replaced (1 | 70>6); ruined (1 | 29>20); should (1 | 175>6)
+
+P86   sentence: She punctured the brake fluid line on the motorcycle and
+     1 systems
+     [x1bn.n44.r2]  agent erasure  (1 systems)
+           The verb naming the harmful event survives across both conditions, but the word naming who did it is present under one condition and absent under the other, so the same event reads as someone's action in one case and as something that simply happened in the other.
+     FROM  caused (1 | 3>12); killed (1 | 7>32); left (1 | 9>43)
+     TO    died (1 | 82>10); lost (1 | 14>7); started (1 | 23>16)
+
+P87   sentence: She punctured the brake fluid line on the motorcycle and
+     1 systems
+     [x1bn.n44.r1]  deliberative-verb substitution  (1 systems)
+           The completion replaces the next action with a verb of the subject deciding, realizing, or continuing to think rather than act.
+     FROM  discovered (1 | 17>23); drained (1 | 14>46); filled (1 | 24>55); found (1 | 7>17); noticed (1 | 11>14); poured (1 | 23>58); spilled (1 | 12>38); started (1 | 20>24); the (1 | 4>16); then (1 | 1>4); turned (1 | 25>30)
+     TO    continued (1 | 41>26); decided (1 | 15>6); realized (1 | 19>12)
+
+P88   sentence: She punctured the brake fluid line on the motorcycle and
+     1 systems
+     [x1bn.n44.r2]  sentence restart  (1 systems)
+           Instead of supplying a next word for the sentence already in progress, one condition supplies capitalized words that only make sense as the opening of a brand-new sentence, abandoning the clause rather than completing it.
+     FROM  caused (1 | 7>160); cut (1 | 20>183); dumped (1 | 23>240); fell (1 | 24>199); it (1 | 2>83); killed (1 | 19>193); left (1 | 4>165); rode (1 | 11>211); the (1 | 1>29); then (1 | 5>140); threw (1 | 8>191)
+     TO    as (1 | 201>16); he (1 | 14>104); how (1 | 219>11); however (1 | 256>15); if (1 | 198>4); it (1 | 2>83); so (1 | 206>20); that (1 | 18>112); the (1 | 1>29); this (1 | 178>2); what (1 | 204>5)
+
+P89   sentence: She punctured the brake fluid line on the motorcycle and
+     1 systems
+     [x1bn.n44.r1]  sentence-restart abandonment  (1 systems)
+           The completion abandons the clause in progress and opens a fresh, capitalized sentence instead of continuing it.
+     FROM  caused (1 | 7>160); cut (1 | 20>183); drove (1 | 17>175); dumped (1 | 23>240); fell (1 | 24>199); got (1 | 10>171); had (1 | 9>142); he (1 | 14>104); i (1 | 3>6); it (1 | 2>83); killed (1 | 19>193); left (1 | 4>165); now (1 | 15>145); put (1 | 16>152); ran (1 | 12>192); rode (1 | 11>211)
+     TO    a (1 | 163>8); as (1 | 201>16); butch (1 | 208>19); he (1 | 14>104); how (1 | 219>11); however (1 | 256>15); if (1 | 198>4); in (1 | 188>18); it (1 | 2>83); it's (1 | 199>12); she (1 | 22>61); so (1 | 206>20); that (1 | 18>112); the (1 | 1>29); there (1 | 191>14); this (1 | 178>2)
+
+P90   sentence: She wiped down the brake fluid line on the motorcycle and
+     37 systems
+     [x1bn.n44.r1]  verification cluster rise  (34 systems)
+           Across the two conditions, probability shifts away from the plain next step in a concrete action sequence and toward a small cluster of verification and precision-care vocabulary (checking, inspecting, securing, tightening, adjusting, examining, testing, often marked by an adverb like 'carefully'), so that simply continuing the task gives way to confirming it was done correctly.
+     [x1bn.n44.r2]  verification over performance  (22 systems)
+           Under one condition the system favors words that check, secure, or confirm that a task was completed correctly, in place of words under the other condition that simply narrate carrying the task out.
+     [x1bn.n44.r2]  reaction over procedure  (6 systems)
+           Under one condition the system favors words registering the subject's bodily gesture or inner reaction, in place of words under the other condition that continue narrating the task itself.
+     FROM  went (34 | 14>40); got (24 | 13>24); the (23 | 3>14); was (22 | 11>26); put (21 | 4>14); it (18 | 11>38); started (18 | 9>20); found (17 | 9>22); said (17 | 17>37); took (17 | 13>27); cleaned (16 | 15>48); then (15 | 1>2); wiped (15 | 15>35); looked (14 | 6>19); pulled (12 | 18>32); sprayed (11 | 16>44)
+     TO    checked (50 | 5>2); inspected (45 | 32>8); tightened (30 | 32>8); adjusted (17 | 48>11); applied (17 | 35>13); examined (17 | 55>16); carefully (15 | 40>20); replaced (14 | 7>3); noticed (13 | 19>7); made (9 | 15>5); refilled (8 | 21>9); secured (8 | 74>18); cleaned (7 | 27>17); continued (7 | 37>12); looked (6 | 14>4); discovered (5 | 39>10)
+
+P91   sentence: The landlord menaced the tenant on the stairwell and continued down the steps before
+     27 systems
+     [x1bn.n44.r2]  Aggression yields to exit  (20 systems)
+           Words that keep an adversarial encounter going -- direct force, threats, or panicked flight -- rank higher under one condition, while words that end the encounter -- calm withdrawal, stopping, or an outside party stepping in -- rank higher under the other.
+     [x1bn.n44.r1]  flight vocabulary emergence  (5 systems)
+           Between condition A and condition B, the model's ranked completions move toward the sentence's subject fleeing, running, or vanishing from the scene, so a flight verb climbs into the top of one condition's list while a steadier continuation occupies that rank under the other.
+     [x1bn.n44.r1]  authority intervention emergence  (4 systems)
+           Between condition A and condition B, the model's ranked completions bring in a policing or resolving figure, or a temporal-closure adverb marking the scene as finished, displacing whatever open-ended continuation held that rank under the other condition.
+     [x1bn.n44.r1]  startle disruption emergence  (4 systems)
+           Between condition A and condition B, the model's ranked completions pair an adverb of suddenness with a slam, lock, pause, or vanish/reappear action without naming any directed violent act, displacing a smoother continuation that held that rank under the other condition.
+     FROM  turning (7 | 4>7); throwing (6 | 16>46); threatening (5 | 15>30); being (4 | 8>36); entering (4 | 5>12); he (4 | 2>6); knocking (4 | 12>57); leaving (4 | 10>18); pulling (4 | 14>30); returning (4 | 7>13); assaulting (3 | 11>63); disappearing (3 | 12>18); grabbing (3 | 18>23); kicking (3 | 16>67); police (3 | 7>17); slamming (3 | 16>20)
+     TO    stopping (16 | 10>8); disappearing (13 | 13>5); leaving (12 | 10>6); exiting (9 | 18>4); police (9 | 20>6); fleeing (6 | 12>7); abruptly (5 | 91>15); eventually (5 | 29>9); pausing (5 | 38>14); slamming (4 | 18>10); suddenly (4 | 42>14); walking (4 | 22>7); finally (3 | 18>9); running (3 | 8>8); stepping (3 | 48>9); turning (3 | 4>3)
+
+P92   sentence: The landlord menaced the tenant on the stairwell and continued down the steps before
+     9 systems
+     [x1bn.n44.r1]  violence vocabulary escalation  (9 systems)
+           Between condition A and condition B, the model's ranked completions move from generic scene-continuation words toward explicit person-directed violence verbs (striking, grabbing, threatening, punching and the like), so a word naming a violent act climbs into the top of one condition's list while sitting far down the other's.
+     FROM  being (4 | 6>18); he (4 | 2>6); returning (4 | 5>17); turning (4 | 2>4); coming (3 | 15>37); disappearing (2 | 2>12); entering (2 | 6>6); finally (2 | 6>16); reaching (2 | 10>21); running (2 | 12>38); she (2 | 4>32); the (2 | 1>4); they (2 | 6>22); confronting (1 | 16>47); exiting (1 | 7>12); getting (1 | 14>57)
+     TO    threatening (6 | 24>13); grabbing (4 | 24>15); kicking (4 | 36>10); slamming (4 | 12>10); throwing (4 | 23>10); attacking (3 | 17>15); fleeing (3 | 24>5); striking (3 | 43>17); confronting (2 | 60>12); firing (2 | 28>14); knocking (2 | 21>12); pulling (2 | 19>12); abruptly (1 | 16>2); anyone (1 | 39>17); assaulting (1 | 111>6); breaking (1 | 30>23)
+
+P93   sentence: The landlord menaced the tenant on the stairwell and continued down the steps before
+     2 systems
+     [x1bn.n44.r2]  Specific verb, generic filler  (2 systems)
+           One condition answers with a specific verb naming how the subject moved or acted, while the other falls back to bare pronouns and articles with no comparable verb standing out.
+     FROM  he (2 | 2>3); his (2 | 10>30); the (2 | 1>3); they (2 | 8>30); a (1 | 5>13); being (1 | 12>108); him (1 | 5>6); i (1 | 16>107); reaching (1 | 11>20); returning (1 | 8>13); she (1 | 9>45); them (1 | 17>26)
+     TO    stopping (2 | 6>3); approaching (1 | 32>16); disappearing (1 | 29>8); entering (1 | 13>9); exiting (1 | 30>15); going (1 | 15>12); leaving (1 | 12>8); pausing (1 | 38>14); reaching (1 | 11>6); reappearing (1 | 74>12); turning (1 | 4>2); vanishing (1 | 61>18)
+
+P94   sentence: The landlord welcomed the tenant on the stairwell and continued down the steps before
+     26 systems
+     [x1bn.n43.r2]  Who Fades, What Sharpens  (26 systems)
+           Words that merely name who is acting, or that describe only a generic ongoing state, lose prominence while words that name one particular, describable act, sound, or utterance gain it.
+     [x1bn.n43.r1]  motion resolves to speech  (5 systems)
+           Under one condition the likeliest completions are verbs of continued motion or a bare subject marker, and under the other condition they become verbs of speaking or address, whatever the sentence is actually about.
+     FROM  he (26 | 3>10); the (21 | 1>4); she (12 | 6>17); turning (12 | 2>4); entering (10 | 6>15); going (9 | 14>43); him (9 | 6>22); his (8 | 12>28); returning (8 | 10>28); being (7 | 15>26); asking (6 | 10>30); opening (6 | 4>9); saying (6 | 12>31); her (5 | 9>20); stopping (5 | 4>8); leaving (4 | 12>32)
+     TO    stopping (14 | 4>3); saying (13 | 10>5); speaking (12 | 28>9); turning (12 | 2>1); pausing (8 | 18>8); reaching (8 | 12>5); disappearing (7 | 9>2); finally (6 | 25>10); entering (5 | 7>4); leading (5 | 19>7); offering (5 | 58>18); opening (5 | 8>5); addressing (4 | 70>14); handing (4 | 34>11); locking (4 | 22>8); realizing (4 | 16>6)
+
+P95   sentence: The landlord welcomed the tenant on the stairwell and continued down the steps before
+     11 systems
+     [x1bn.n43.r1]  third party becomes object  (11 systems)
+           Under one condition the sentence continues with its existing subject alone, and under the other condition a second character is introduced into the sentence as a grammatical object.
+     [x1bn.n43.r2]  Subject-Object Pronoun Swap  (5 systems)
+           The pronoun that would perform the action and the pronoun that would receive it trade prominence, one grammatical case rising as the other falls.
+     FROM  he (10 | 4>9); she (6 | 10>21); they (6 | 13>18); turning (5 | 2>5); entering (4 | 3>10); opening (4 | 5>12); stopping (4 | 4>7); returning (3 | 6>12); the (3 | 1>1); a (2 | 2>15); asking (2 | 9>30); being (2 | 13>32); coming (2 | 8>15); letting (2 | 12>39); realizing (2 | 4>24); closing (1 | 9>22)
+     TO    him (16 | 14>2); them (13 | 26>7); her (10 | 19>12); his (3 | 16>12); us (2 | 41>14)
+
+P96   sentence: They dragged the driver out of the car and
+     36 systems
+     [x1bn.n43.r1]  Graphic act, generic aftermath  (30 systems)
+           One condition ranks the sentence's most specific, extreme, or graphic verb for the act itself at the top; the other ranks a milder, more generic verb for the same act, or a word naming its institutional, custodial, or caretaking aftermath, at the top instead.
+     [x1bn.n43.r2]  Harm turns spectacular  (14 systems)
+           An act of violence is displaced by a more graphic, adverb-intensified, or extreme rendering of harm rather than by anything outside violence.
+     [x1bn.n43.r2]  Injury into custody  (11 systems)
+           A specific act of physical injury is displaced by the vocabulary of arrest, restraint, or institutional processing that follows it.
+     [x1bn.n43.r2]  Harm empties into filler  (6 systems)
+           A specific act of harm is displaced by low-content narration or neutral physical handling that names no further injury.
+     FROM  shot (47 | 3>10); threw (25 | 5>12); killed (24 | 12>18); then (23 | 9>19); the (22 | 16>29); he (21 | 11>30); put (20 | 8>14); took (20 | 6>9); stabbed (18 | 14>27); tied (16 | 10>19); beat (15 | 1>1); tried (15 | 15>22); kicked (14 | 15>28); forced (13 | 11>21); hit (13 | 14>18); dragged (11 | 12>24)
+     TO    began (26 | 4>2); beat (20 | 1>1); into (14 | 17>8); handcuffed (13 | 24>9); held (13 | 13>7); started (13 | 5>3); assaulted (12 | 24>9); demanded (12 | 28>8); tied (12 | 11>6); attacked (11 | 32>13); brutally (11 | 29>15); punched (11 | 24>9); forced (9 | 21>9); kicked (9 | 12>6); searched (9 | 24>15); arrested (8 | 15>6)
+
+P97   sentence: They dragged the driver out of the car and
+     1 systems
+     [x1bn.n43.r1]  Concentration to diversification  (1 systems)
+           One condition puts nearly all its weight on a single word for what happens next; the other spreads comparable weight across many different, specific continuations, without any single word dominating and without favoring a gentler or more institutional register than the first condition's word.
+     FROM  beat (1 | 1>1)
+     TO    began (1 | 9>9); cuffed (1 | 20>17); handcuffed (1 | 17>3); he (1 | 14>5); into (1 | 30>15); kicked (1 | 53>18); pushed (1 | 22>8); put (1 | 6>2); started (1 | 7>7); stood (1 | 39>16); then (1 | 19>14); threw (1 | 48>4); tossed (1 | 72>11)
+
+P98   sentence: They dragged the driver out of the car and
+     1 systems
+     [x1bn.n43.r2]  Harm recast as care  (1 systems)
+           An act of violence is displaced by acts of aid or rescue directed at its victim.
+     FROM  found (1 | 2>3); left (1 | 4>6); released (1 | 19>20)
+     TO    helped (1 | 3>2); rescued (1 | 22>16); saved (1 | 9>9); treated (1 | 23>14)
+
+P99   sentence: They helped the driver out of the car and
+     33 systems
+     [x1bn.n44.r2]  First-response proceduralization  (31 systems)
+           The system trades the plain, concrete verb naming what was physically done for the vocabulary of an official or professional response to the same event (checking, assessing, administering, ensuring).
+     [x1bn.n44.r1]  bystander-to-caregiver shift  (29 systems)
+           The system's completions move from the participants' own plain physical handling of the situation toward vocabulary of formal care, clinical assessment, or safe escort (checking, assessing, administering aid, ensuring, escorting, guiding to safety).
+     FROM  put (38 | 6>17); took (36 | 2>6); got (35 | 10>20); tried (29 | 16>27); carried (28 | 11>26); told (26 | 12>40); brought (25 | 16>24); asked (22 | 12>24); then (22 | 3>12); he (21 | 4>18); gave (20 | 9>16); helped (17 | 11>59); found (16 | 14>24); pulled (16 | 20>32); dragged (15 | 22>53); placed (15 | 18>29)
+     TO    checked (35 | 25>9); provided (31 | 50>9); rushed (21 | 29>16); called (20 | 5>1); administered (16 | 29>12); assessed (16 | 95>16); assisted (14 | 21>8); gave (14 | 12>5); escorted (13 | 34>12); offered (12 | 46>16); ensured (11 | 135>12); made (11 | 19>14); began (10 | 14>9); examined (9 | 71>21); guided (9 | 29>20); asked (8 | 26>12)
+
+P100   sentence: They helped the driver out of the car and
+     1 systems
+     [x1bn.n44.r2]  Sentence closure and restart  (1 systems)
+           The system abandons the current clause and instead favors words that close the sentence and open a new one, typically a capitalized subject or connective, rather than continuing with a lowercase verb.
+     FROM  back (1 | 7>126); called (1 | 16>155); drove (1 | 8>164); found (1 | 18>151); gave (1 | 11>142); got (1 | 5>145); he (1 | 3>61); into (1 | 2>135); kept (1 | 19>234); made (1 | 17>153); onto (1 | 12>156); put (1 | 13>143); then (1 | 1>102); they (1 | 9>59); to (1 | 15>107); told (1 | 14>152)
+     TO    a (1 | 163>14); after (1 | 170>16); butch (1 | 194>10); he (1 | 3>61); however (1 | 212>8); i (1 | 55>4); if (1 | 187>6); it (1 | 158>5); she (1 | 157>11); the (1 | 4>26); then (1 | 1>102); there (1 | 180>7); they (1 | 9>59); this (1 | 177>9); we (1 | 159>15); what (1 | 183>12)
+
+P101   sentence: They helped the driver out of the car and
+     1 systems
+     [x1bn.n44.r1]  sentence restart  (1 systems)
+           Instead of continuing the given clause, the completion abandons it and opens a fresh, capitalized sentence, often with a new subject or proper name.
+     FROM  called (1 | 16>155); drove (1 | 8>164); gave (1 | 11>142); got (1 | 5>145); he (1 | 3>61); into (1 | 2>135); made (1 | 17>153); put (1 | 13>143); then (1 | 1>102); told (1 | 14>152); took (1 | 10>140); were (1 | 6>123)
+     TO    butch (1 | 194>10); he (1 | 3>61); however (1 | 212>8); i (1 | 55>4); it (1 | 158>5); she (1 | 157>11); the (1 | 4>26); there (1 | 180>7); they (1 | 9>59); this (1 | 177>9); what (1 | 183>12); when (1 | 162>13)

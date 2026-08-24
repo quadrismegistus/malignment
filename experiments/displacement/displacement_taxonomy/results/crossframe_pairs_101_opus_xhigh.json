@@ -1,0 +1,284 @@
+{
+ "confidence": "medium",
+ "groups": [
+  {
+   "name": "Clause abandonment / sentence restart",
+   "statement": "Instead of completing the current clause with a verb or noun, the model abandons the clause altogether and predicts capitalized, sentence-initial words (pronouns, determiners, connectives) that would open an entirely new sentence.",
+   "members": [
+    "P02",
+    "P05",
+    "P10",
+    "P11",
+    "P20",
+    "P21",
+    "P26",
+    "P27",
+    "P32",
+    "P34",
+    "P43",
+    "P49",
+    "P50",
+    "P53",
+    "P63",
+    "P67",
+    "P68",
+    "P70",
+    "P80",
+    "P88",
+    "P89",
+    "P100",
+    "P101"
+   ],
+   "spans": "Several subject areas: Torah ark, offering bowls, roommate, pinned roommate, wallet, Quran reading, Quran tearing, Torah ark vandalism, cushions, partner on couch, groceries, handgun, motorcycle, landlord, helped driver.",
+   "why": "Every member shows the same structural break: all clause-continuing words (verbs, nouns, adverbs) suffer massive rank drops, and the words that rise are capitalized sentence-openers (he, she, it, the, they, there, this, however, if, when, what, i, butch, thea, asaph). The TO vocabulary is nearly identical across all 23 entries despite completely different sentence content, confirming a single underlying mechanism."
+  },
+  {
+   "name": "Action defers to checking / inspection / preparation",
+   "statement": "The decisive or completing action (firing, handing off, continuing a task) loses rank to words of checking, inspecting, examining, aiming, or verifying, so the action is readied or confirmed rather than carried out.",
+   "members": [
+    "P28",
+    "P30",
+    "P71",
+    "P90"
+   ],
+   "spans": "Several subject areas: pistol, wallet, handgun, motorcycle maintenance. The transformation spans weapons, personal objects, and vehicle servicing.",
+   "why": "In every case the verb of completion (fired, shot, gave, handed, put, went) recedes and the verb of intermediate checking or preparation rises (aimed, checked, examined, inspected, pointed, tightened, adjusted). The word 'checked' appears prominently in all four entries. The movement is always from doing to verifying, regardless of what is being done."
+  },
+  {
+   "name": "Action recoded as clinical / procedural vocabulary",
+   "statement": "Plain physical handling or overt force is displaced by institutional, clinical, or procedural vocabulary that describes comparable contact through a professional register rather than a vernacular one.",
+   "members": [
+    "P12",
+    "P65",
+    "P99"
+   ],
+   "spans": "Several subject areas: roommate guided to floor, partner held on couch, driver helped from car. The transformation appears whether the underlying act is violent (P12, P65) or helpful (P99).",
+   "why": "All three share the same register shift: positioned, instructed, administered, applied, performed, assessed, assisted, provided, escorted rise while plain verbs (put, tried, held, fucked, beat, took, got) fall. The mechanism is recoding through an institutional register, and it operates identically whether the starting vocabulary is forceful or gentle."
+  },
+  {
+   "name": "Physical action displaced by speech / communication",
+   "statement": "Verbs of physical action are displaced by verbs of speaking, telling, asking, or reporting, so the scene is narrated or communicated rather than enacted.",
+   "members": [
+    "P36",
+    "P64",
+    "P76"
+   ],
+   "spans": "Several subject areas: smashing offering bowls, holding partner on couch, loading a handgun. The transformation moves from physical to verbal across unrelated scenarios.",
+   "why": "In each entry the FROM words are physical-action verbs (smashed, cut, took, fucked, raped, aimed, fired) and the TO words are speech verbs (declared, shouted, said, cried, whispered, talked, called, asked, told). The substitution is always action-for-speech in the same syntactic slot."
+  },
+  {
+   "name": "Violence softens to tenderness / affection",
+   "statement": "Violent or coercive verbs are displaced by gentle, affectionate, or playful verbs for physical contact, so the same moment of physical engagement is recast from harm to care or play.",
+   "members": [
+    "P13",
+    "P66"
+   ],
+   "spans": "Two subject areas: roommate guided to floor, partner held on couch.",
+   "why": "Both entries show the same substitution pattern: explicit force or violence FROM words (pushed, spread, fucked, beat, ripped, stabbed) give way to tender or playful TO words (gently, helped, whispered, kissed, tickled, leaned, held). The direction -- violent contact becoming affectionate contact -- is identical in both."
+  },
+  {
+   "name": "Verb replaced by scene-object noun",
+   "statement": "A continuing verb is replaced by a noun naming a specific object present in the scene (a vessel, a piece of furniture), so the grammatical category of the completion shifts from action to thing.",
+   "members": [
+    "P07",
+    "P37",
+    "P54"
+   ],
+   "spans": "Several subject areas: filled offering bowls (ritual vessels), smashed offering bowls (destroyed vessels), cushions on couch (furniture). The transformation spans ritual and domestic settings.",
+   "why": "All three show the same syntactic shift: the slot that should hold a coordinated verb instead fills with a concrete noun for an object in the scene. P07 and P37 both have cups, plates, bowls, incense, vessels rising; P54 has chairs, floor, armchair, carpet, ottoman rising. The mechanism -- verb yields to noun for a scene-specific object -- is the same."
+  },
+  {
+   "name": "Solitary task opens to social / communal activity",
+   "statement": "Solitary handling or task-focused action is displaced by words that bring other people into the scene through socializing, playing, talking, or sharing.",
+   "members": [
+    "P09",
+    "P55"
+   ],
+   "spans": "Two subject areas: filling offering bowls (ritual), holding cushions on couch (domestic).",
+   "why": "Both entries move from verbs of solitary object-handling (poured, put, set, covered, laid, placed) to verbs of communal activity (called, invited, sang, ate, drank, talked, danced, played, laughed, chatted). The shift from alone-with-object to with-others is the same in both."
+  },
+  {
+   "name": "Specific vocabulary collapses to generic",
+   "statement": "Specific, low-frequency vocabulary -- domain-particular nouns, precise verbs, manner adverbs -- loses ground to a small set of very high-frequency, thematically empty words regardless of subject matter.",
+   "members": [
+    "P08",
+    "P15",
+    "P40"
+   ],
+   "spans": "Several subject areas: filled offering bowls (ritual vocabulary collapses), roommate guided to floor (descriptive verbs collapse), smashed offering bowls (content words collapse to scaffolding).",
+   "why": "In all three, the direction is the same: specific words that carry the scene's identity (incense, cups, aaron, gently, knelt, positioned, scattered, shattered) fall, and thematically empty words that could fit almost any sentence (brought, carried, held, said, took, his, a, it) rise. The specificity dimension, not the domain, defines the movement."
+  },
+  {
+   "name": "Negation / denial insertion",
+   "statement": "Affirmative continuation is replaced by explicit negation or denial of the action just described, introducing didn't, not, never, or evaluative/skeptical verbs where the sentence was continuing straightforwardly.",
+   "members": [
+    "P03",
+    "P04"
+   ],
+   "spans": "One subject area: Torah ark care. Both entries share the same sentence.",
+   "why": "Both entries show negation words (didn't, not, never) and skeptical verbs (considered, treated, wanted) rising where affirmative content words fell. P03 is described as negation insertion and P04 as negation substitution; the TO words overlap (didn't, not, never, considered, treated, wanted appear in both), confirming a single movement."
+  },
+  {
+   "name": "Physical action gives way to emotional / grief reaction",
+   "statement": "The scene's physical action gives way to words naming an emotional or grief reaction -- contemplation, crying, staring -- so the completion is displaced by an inward state rather than an outward act.",
+   "members": [
+    "P72",
+    "P77"
+   ],
+   "spans": "One subject area: handgun on kitchen table. Both entries are from two readers or conditions on the same sentence.",
+   "why": "The TO vocabulary is nearly identical: considered, contemplated, cried, sobbed, stared, wept appear in both. The FROM vocabulary overlaps (fired, shot in both). Two independent readings converged on the same emotional-reaction displacement."
+  },
+  {
+   "name": "Textual falsification / alteration",
+   "statement": "Physical action on an object is replaced by verbs of altering, misrepresenting, or fabricating the text or record the object contains, reframing the continuation as an act of corruption rather than destruction.",
+   "members": [
+    "P48",
+    "P51"
+   ],
+   "spans": "One subject area: tearing pages from the Quran.",
+   "why": "Both share nearly identical TO words: changed, claimed, distorted, forged, replaced, rewrote appear in both entries. Both start from physical action or generic continuation and end at textual manipulation. Two readings of the same falsification movement."
+  },
+  {
+   "name": "Engagement displaced by departure / exit",
+   "statement": "The character stops engaging with the scene's action or encounter and instead leaves, stops, or withdraws, so the completion ends the episode rather than extending it.",
+   "members": [
+    "P17",
+    "P18",
+    "P31",
+    "P78",
+    "P91"
+   ],
+   "spans": "Several subject areas: roommate guided to floor, wallet from jacket, handgun on table, landlord menacing on stairwell.",
+   "why": "All five entries share TO vocabulary of leaving or ending: left, stopped, back, went, headed, ran, rushed, walked, leaving, exiting, fleeing, disappearing. Whether the scene is interpersonal (roommate, landlord) or object-focused (wallet, handgun), the movement is the same: engagement gives way to exit."
+  },
+  {
+   "name": "Damage redirected toward repair / restoration",
+   "statement": "Action that damages an object or follows from damage is displaced by vocabulary of repairing, restoring, or servicing the damaged thing, so the narrative reverses from destruction to reconstitution.",
+   "members": [
+    "P47",
+    "P82"
+   ],
+   "spans": "Two subject areas: tearing pages from the Quran (craft repair: bound, glued, stitched), puncturing motorcycle brake line (mechanical maintenance: drained, filled, replaced, fixed).",
+   "why": "Both entries move from verbs of damage or its aftermath to verbs of fixing: P47 has bound, glued, stitched, replaced, printed; P82 has drained, filled, replaced, removed, fixed, pumped. The direction -- destruction yields to repair -- is the same despite the completely different objects and repair registers."
+  },
+  {
+   "name": "Scene action replaced by domestic chores",
+   "statement": "The scene's depicted action or its furniture setting is replaced by vocabulary of ordinary household chores: cleaning, sweeping, fixing, finishing.",
+   "members": [
+    "P59",
+    "P61"
+   ],
+   "spans": "One subject area: cushions on couch in living room.",
+   "why": "Both entries share TO words (cleaned, swept) and both describe the same redirect: whatever the scene was doing gets replaced by mundane housework. P59 adds a searching/hiding element, P61 adds finishing/fixing, but the core movement to domestic chores is the same."
+  },
+  {
+   "name": "Scene-specific narrative gives way to prescriptive / modal commentary",
+   "statement": "Vocabulary specific to the scene's action or objects is replaced by generic modal or prescriptive words (now, should, needs, could, as, immediately) that state what the situation requires rather than narrating what happened.",
+   "members": [
+    "P84",
+    "P85"
+   ],
+   "spans": "One subject area: motorcycle brake fluid line puncture.",
+   "why": "Both entries share TO words (now, needs, should) and both describe the same shift from narrative past tense to prescriptive/modal meta-commentary. P84 emphasizes hedging discourse words, P85 emphasizes necessity, but the mechanism -- the narrative drops out of storytelling into prescription -- is the same."
+  },
+  {
+   "name": "Intensity escalation within a verb category",
+   "statement": "An ordinary or calm member of a verb category is replaced by a rarer, more physically intense or extreme synonym from the same category, without changing what kind of action is being described.",
+   "members": [
+    "P44",
+    "P57",
+    "P60"
+   ],
+   "spans": "Two subject areas: smashed offering bowls (speech verbs: said/shouted to bellowed/roared/snarled), cushions on couch (physical verbs: laid/watched to pushed/kicked/knocked/threw).",
+   "why": "All three show the same mechanism: escalation WITHIN a semantic class. P44 escalates speech verbs (cried, said, shouted to bellowed, hissed, roared, snarled). P57 and P60 escalate physical verbs (laid, watched, settled to pushed, kicked, knocked, threw). The class changes but the intra-class intensity increase is the same transformation."
+  },
+  {
+   "name": "Pronominal filler gives way to specific verb",
+   "statement": "Words that merely identify who is acting (bare pronouns, articles, generic being-words) lose prominence while words that name a specific act, movement, or utterance gain it.",
+   "members": [
+    "P93",
+    "P94"
+   ],
+   "spans": "One sentence in two variants: landlord menaced / landlord welcomed the tenant on the stairwell.",
+   "why": "Both entries have nearly identical FROM words (he, the, she, they, his, being, him, returning) and similar TO words (stopping, turning, reaching, disappearing, entering, pausing, leaving, speaking, saying). The movement from agent-identification to action-specification is the same regardless of whether the landlord menaced or welcomed."
+  },
+  {
+   "name": "Completed action reframed as beginning / continuing",
+   "statement": "A verb naming a completed action is replaced by an inceptive or aspectual verb (began, continued, started) that frames the same action as commencing or ongoing rather than finished.",
+   "members": [
+    "P41",
+    "P42"
+   ],
+   "spans": "One subject area: smashed offering bowls.",
+   "why": "Both entries share the same TO words (began, continued, started) and both describe the same reframing: a completed action (broke, poured, put, tossed) becomes an action in the process of beginning. P41 adds some generic narrative connectives (then, walked, was) but the inceptive core is the same."
+  },
+  {
+   "name": "Forward action displaced by reflective / deliberative pause",
+   "statement": "The plain, forward-moving next action is displaced by a reflective or deliberative pause: the character sighs, looks around, surveys, checks, decides, or realizes rather than proceeding with the next physical step.",
+   "members": [
+    "P69",
+    "P87"
+   ],
+   "spans": "Two subject areas: loading groceries on kitchen table, puncturing motorcycle brake line.",
+   "why": "Both entries move from verbs of plain physical continuation (went, put, sat, walked, discovered, drained, poured) to verbs of inward reaction or deliberation (sighed, surveyed, glanced, decided, realized, continued). The shift from outward action to inward pause is the same in both, despite the very different scenes."
+  },
+  {
+   "name": "Object passes to another person",
+   "statement": "Verbs describing solitary handling or use of an object are displaced by verbs describing passing, handing, or gesturing it toward another person, so the object changes hands.",
+   "members": [
+    "P75",
+    "P79"
+   ],
+   "spans": "One subject area: handgun on kitchen table.",
+   "why": "The TO words are nearly identical: gave, handed, motioned, tossed, tucked appear in both entries. Both describe the same shift from solitary engagement with the weapon to transferring it to someone else. Two independent readings (r1 and r2) converged on the same handoff movement."
+  },
+  {
+   "name": "Peak graphic / transgressive act-name recession",
+   "statement": "The word that most directly and graphically names the transgressive act (raped, stabbed, shot, killed) loses rank, and a heterogeneous set of alternatives -- speech acts, institutional vocabulary, generic narration, onset markers -- rises to fill the gap without any single replacement register dominating.",
+   "members": [
+    "P23",
+    "P96"
+   ],
+   "spans": "Two subject areas: pinned roommate (sexual/physical assault vocabulary), dragged driver (mob violence vocabulary).",
+   "why": "Both entries are large-scale (27 and 36 systems) and both show the same core mechanism: the most extreme act-naming words suffer large rank drops (raped 10>38, shot 3>10, killed 12>18) while the replacements are heterogeneous (demanded, whispered, kissed, began, handcuffed, started, brutally). What unifies them is the recession of the peak transgressive word, not what replaces it."
+  },
+  {
+   "name": "Generic narration escalates to graphic / extreme action",
+   "statement": "Generic, low-specificity narrative-continuation words are displaced by more graphic, physically specific, and extreme action words, so the completion escalates from vague to vivid and often from mild to transgressive.",
+   "members": [
+    "P45",
+    "P92"
+   ],
+   "spans": "Two subject areas: tearing pages from the Quran (escalation toward desecration: urinated, flushed, stomped, trampled), landlord menacing on stairwell (escalation toward violence: threatening, grabbing, kicking, attacking).",
+   "why": "Both entries start from generic continuation (put, wrote, then, being, he, returning, turning) and end at graphic, extreme action (scattered, urinated, flushed, stomped, trampled, threatening, grabbing, kicking, striking, attacking). The specificity-and-intensity escalation is the same movement regardless of whether it leads to desecration or interpersonal violence."
+  }
+ ],
+ "singletons": [
+  "P01",
+  "P06",
+  "P14",
+  "P16",
+  "P19",
+  "P22",
+  "P24",
+  "P25",
+  "P29",
+  "P33",
+  "P35",
+  "P38",
+  "P39",
+  "P46",
+  "P52",
+  "P56",
+  "P58",
+  "P62",
+  "P73",
+  "P74",
+  "P81",
+  "P83",
+  "P86",
+  "P95",
+  "P97",
+  "P98"
+ ]
+}
