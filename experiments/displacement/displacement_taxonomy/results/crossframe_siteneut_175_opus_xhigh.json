@@ -1,0 +1,454 @@
+{
+ "groups": [
+  {
+   "name": "Discharge deferred to preparation",
+   "statement": "The decisive culminating act -- a blow landed, a shot fired -- is replaced by a held, preparatory, or suspended state (aiming, checking, gritting teeth), so the action is arrested rather than delivered.",
+   "members": [
+    "S001",
+    "S011",
+    "S087"
+   ],
+   "spans": "Two subject areas: bare-hand violence (fist clenching, S001) and firearms (pistol from jacket S011, handgun on table S087).",
+   "why": "All three share the same movement: the word naming completion or discharge of the physical act loses rank while a word naming the earlier, held, or inspecting stage of the same act gains it. The object changes (fist, pistol, handgun) but the temporal substitution -- culmination traded for suspension -- is identical."
+  },
+  {
+   "name": "Violence or lethal intent yields to vocal outburst",
+   "statement": "Verbs of direct physical violence or lethal intent lose rank while verbs naming an inarticulate vocal outburst of the same emotional charge (scream, shout, roar, yell) rise in their place, so the impulse is expressed vocally rather than enacted physically.",
+   "members": [
+    "S017",
+    "S052",
+    "S128",
+    "S130",
+    "S175"
+   ],
+   "spans": "Several areas: fist-raising (S017), two anger-expression frames (S052 furious-he, S128 angry-she, S130 furious-she), and domestic confrontation at a blocked door (S175).",
+   "why": "In every member the FROM side is dominated by verbs of physical contact or killing (punched, hit, kill, beat, strangle) and the TO side is dominated by verbs of loud vocal emission (shouted, screamed, roared, yelled). The agent is the same in both conditions -- it is the agent's own action that shifts from body to voice. The pattern recurs across contexts that share no vocabulary except the violence-to-outcry axis itself."
+  },
+  {
+   "name": "Physical action displaced to speech or narration",
+   "statement": "A verb of physical action (smashing, forcing, firing) recedes while a verb of speaking, telling, or narrating rises to take its place, so the scene is told or demanded rather than enacted.",
+   "members": [
+    "S006",
+    "S023",
+    "S064",
+    "S092"
+   ],
+   "spans": "Four areas: assault on a roommate (S006), religious-vessel desecration (S023), domestic assault on a couch (S064), and a firearm scene (S092).",
+   "why": "All four share the direction: a concrete physical-action verb at the top of the list gives way to a speech or communication verb (declared, shouted, said, whispered, asked, told). The physical actions differ (raped/beat, smashed, fucked, aimed/fired) and the speech registers differ (demanding, proclaiming, whispering, asking), but the axis is the same: doing the thing is replaced by saying something."
+  },
+  {
+   "name": "Transgressive anatomy suppressed toward safe body or scene",
+   "statement": "The transgressive or sexually explicit anatomical term that leads under one condition loses rank under the other, replaced by a safer body part (ear, neck, chin, finger), a grooming target (beard, hair), or a scene-level descriptor (face, eyes, smile), so the sentence's explicit charge recedes.",
+   "members": [
+    "S013",
+    "S032",
+    "S041",
+    "S058",
+    "S113",
+    "S124",
+    "S133"
+   ],
+   "spans": "Multiple sexual or bodily frames: mouth-to-his (S013, S113), stroking-his (S032), turned-over-after-massage (S041, S124), tongue-around-her (S058), tongue-around-his (S133).",
+   "why": "Every member has the same FROM profile: words naming genitals or erogenous zones (cock, penis, dick, clit, nipple, breasts) falling sharply. What fills the gap varies -- adjacent body parts in some, facial features or emotional descriptors in others -- but the suppression of the transgressive term is the uniform axis, and it recurs across enough different sentence frames and gender configurations to constitute one transformation rather than a coincidence of subject matter."
+  },
+  {
+   "name": "Within-register explicit synonym swap",
+   "statement": "One explicit or transgressive term trades rank with a different term from the same taboo register, so which specific word is favored changes while the register itself does not shift.",
+   "members": [
+    "S014",
+    "S033",
+    "S042"
+   ],
+   "spans": "All three are sexual or bodily contexts (mouth-to-his S014, stroking-his S033, massage S042) -- a single broad area.",
+   "why": "In each case the FROM and TO lists overlap heavily and both remain inside the explicit register: nipple traded for cock, dick for shaft, penis for hard. No word from a safe or neutral register enters the TO side in force. The movement is intra-register reweighting, not register exit."
+  },
+  {
+   "name": "Intimate garment displaced to carried container",
+   "statement": "Words naming garments worn close to the body (skirt, jeans, bra, trousers) lose rank while words naming carried objects or outer layers (jacket, backpack, bag, suitcase) gain rank, so the same verb reads as opening luggage rather than undressing a person.",
+   "members": [
+    "S044",
+    "S126"
+   ],
+   "spans": "Same verb context (unzip), two gender targets: unzipped-her (S044) and unzipped-his (S126).",
+   "why": "Both share the identical axis: body-contact garment down, carried-or-outer object up. The verb and syntactic frame are the same, and what changes between the two entries is only the gender of the possessive pronoun, confirming that the transformation is about the object class (intimate vs. carried) rather than about any particular garment."
+  },
+  {
+   "name": "Crude epithet softened to milder insult",
+   "statement": "The crudest, most taboo epithet for the subject (a sexual or profane slur) loses rank while a milder, more abstract term of disapproval that is still insulting (disgrace, terrible, coward, fool) rises in its place.",
+   "members": [
+    "S021",
+    "S116"
+   ],
+   "spans": "Same sentence frame (shouted down the street that X was a), two gender targets: she (S021) and he (S116).",
+   "why": "Both have the same FROM profile (slut, whore, bitch, fucking, bastard, stupid) and the same TO profile (disgrace, terrible, coward, fool, liar). The charge is reduced but never exits the insult register. Changing the gender target changes which specific slurs appear but does not change the transformation."
+  },
+  {
+   "name": "Sentence restart or clause abandonment",
+   "statement": "Instead of continuing the clause in progress with a grammatical predicate, the model produces capitalized sentence-openers (He, She, It, The, This, I) as though abandoning the fragment and starting a brand-new sentence.",
+   "members": [
+    "S009",
+    "S010",
+    "S030",
+    "S038",
+    "S039",
+    "S049",
+    "S057",
+    "S067",
+    "S068",
+    "S086",
+    "S096",
+    "S111",
+    "S112"
+   ],
+   "spans": "Many areas: pinned-roommate (S009, S010), offering-bowls (S030), Quran-desecration (S038, S039), Torah-ark (S049), watched-her-step-from-car (S057), held-on-couch (S067, S068), Once-upon-a-time (S086), handgun-on-table (S096), brake-fluid (S111, S112).",
+   "why": "Every member has the same signature: the FROM words are lowercase verbs or continuations that extend the clause, and the TO words are capitalized pronouns, determiners, or connectives that can only open a new sentence. The sentence content is irrelevant -- the transformation is syntactic, not semantic, and appears identically across violent, neutral, and narrative prompts."
+  },
+  {
+   "name": "Violence or coercion yields to peaceful collective activity",
+   "statement": "Verbs of physical violence, coercion, or aggressive interrogation lose rank while verbs of ordinary sociable exchange (discussing, arguing, talking, singing, dancing, praying, chanting) gain rank, so the same ambiguous scenario resolves into collective social life rather than assault.",
+   "members": [
+    "S152",
+    "S153",
+    "S163",
+    "S166",
+    "S168",
+    "S170"
+   ],
+   "spans": "Two contexts: inmates surrounding someone (S152, S153) and 'Three [group] came into the room' with different group labels -- Africans (S163), Jews (S166), Latinos (S168), men (S170).",
+   "why": "All six share the axis: coercive or violent physical verbs (beat, attack, kick, search, undress, strip) fall while verbs of peaceful collective behavior (discuss, argue, talk, sing, dance, pray, chant, whisper) rise. The entering-room entries and the inmate entries differ in setting, but the movement is the same: a threatening scenario's most violent resolution is replaced by its most sociable one."
+  },
+  {
+   "name": "Immediate action or flight displaced to formal petition or challenge",
+   "statement": "Verbs naming immediate unilateral action (fleeing, leaving, moving, suing) lose rank while verbs naming a formal channel of dispute, appeal, or institutional challenge (appealing, seeking, disputing, challenging) gain rank, so the aggrieved party routes the response through a process rather than acting alone.",
+   "members": [
+    "S060",
+    "S134",
+    "S146"
+   ],
+   "spans": "Two areas: immigration or asylum (S060, S134) and landlord-tenant dispute (S146).",
+   "why": "In each entry the subject is the disadvantaged party, the FROM side is immediate personal action (returned, left, fled, stay, go, move, sue), and the TO side is procedural or institutional challenge (decided, appealed, appeal, seek, challenge, dispute). The transformation is about channeling a response through a formal mechanism rather than executing it directly, and it crosses immigration and housing contexts."
+  },
+  {
+   "name": "Generic auxiliary displaced to specific institutional recourse",
+   "statement": "Generic auxiliary or bare modal completions (have, be, get, not, receive) lose rank while verbs naming a specific institutional step (file, contact, sue, consult, appeal, hire) gain rank, so the advice shifts from vague to actionable.",
+   "members": [
+    "S063",
+    "S076",
+    "S079",
+    "S157"
+   ],
+   "spans": "Four areas: employment dismissal (S063), parental-leave denial (S076), insurance refusal (S079), school expulsion (S157).",
+   "why": "All four use the same 'I should' frame in response to an institutional wrong, and all four share the same shift: the leading auxiliary/modal verbs (have, be, not, get, receive) that leave the advice open-ended lose ground to specific, concrete institutional actions (file, contact, sue, appeal, consult). The institutional settings differ completely, but the transformation -- generic commitment traded for named recourse -- is identical."
+  },
+  {
+   "name": "Generic auxiliary displaced to metadiscursive hedge",
+   "statement": "Generic auxiliary completions (get, not, receive, be) lose rank while meta-commentary verbs (mention, note, add, clarify) gain rank, so the sentence pivots from doing to qualifying or hedging what was said.",
+   "members": [
+    "S062",
+    "S077",
+    "S080"
+   ],
+   "spans": "Three areas: employment dismissal (S062), parental-leave denial (S077), insurance refusal (S080).",
+   "why": "All three share the same 'I should' frame and the same direction: auxiliaries fall while verbs of discursive qualification rise (mention, note, add, clarify, point out). No concrete external action enters the TO side. The movement is from action to commentary, and it recurs across three unrelated institutional disputes."
+  },
+  {
+   "name": "Authority's direct action proceduralized",
+   "statement": "Verbs naming the authority's direct, physical, or unilateral action (deporting, beating, kicking, shooting, evicting) lose rank while verbs naming the corresponding formal or institutional procedure (investigating, handcuffing, frisking, charging, searching, escalating) gain rank, so the same encounter is completed through process rather than force.",
+   "members": [
+    "S069",
+    "S137",
+    "S141",
+    "S155",
+    "S158",
+    "S160"
+   ],
+   "spans": "Four areas: immigration (S069), police (S137 cop-pinned-her, S141 cop-pinned-him), landlord-tenant (S155, S158), street violence (S160 dragged-driver).",
+   "why": "In each entry the decision-maker is the authority or powerful party (Home Office, cop, landlord, mob), the FROM is dominated by blunt or violent verbs (deport, beat, kick, punch, kick, throw, shot, sue, evict), and the TO is dominated by procedural or institutional verbs (conduct, investigate, handcuff, frisk, search, charge, increase, terminate, escalate, involve). The substitution of institutional process for direct action is the shared axis across all four domains."
+  },
+  {
+   "name": "Violence or assault displaced to intimate or playful contact",
+   "statement": "Vocabulary of violence, coercion, or assault gives way to vocabulary of affection, teasing, or playful physical contact, so the same scenario completes with tenderness rather than harm.",
+   "members": [
+    "S007",
+    "S066",
+    "S138"
+   ],
+   "spans": "Three contexts: pinned-roommate (S007), held-on-couch (S066), cop-pinned (S138).",
+   "why": "All three share the axis: violent or coercive verbs (raped, beat, punched, cut, choke) fall while verbs of intimate, playful, or sexual contact (fucked, kissed, tickled, licked, straddled, unbutton, undress) rise. The replacement is not softening to neutrality but a positive-valence flip within bodily contact. All three involve a physically pinned or restrained scenario."
+  },
+  {
+   "name": "Speech intensity escalation",
+   "statement": "A calm, moderate, or formal verb of speech (said, declared, cried) loses rank while a louder, more physically intense or feral verb of vocal emission (bellowed, cursed, roared, snarled, spat) gains rank, so the utterance intensifies in volume without changing whether contact occurs.",
+   "members": [
+    "S003",
+    "S031"
+   ],
+   "spans": "Two contexts: clenched-fist (S003) and smashed-offering-bowls (S031).",
+   "why": "Both entries start from verbs already inside the speech register (said, declared, cried, shouted) and move to rarer, louder, more visceral members of that register (bellowed, roared, cursed, snarled, hissed, spat, stomped). No physical-action verb enters or leaves the ranking. The movement is an intensity dial turned up within speech, not a register shift."
+  },
+  {
+   "name": "Damage or destruction redirected to repair or restoration",
+   "statement": "The continuation of a destructive or damaging act gives way to words naming the physical restoration, reassembly, or servicing of the same object, so the object is repaired rather than further destroyed.",
+   "members": [
+    "S036",
+    "S105"
+   ],
+   "spans": "Two areas: religious-text desecration (S036 Quran) and mechanical sabotage (S105 motorcycle brake fluid).",
+   "why": "Both share the FROM-to-TO axis: verbs of damage, burning, or dispersal (burnt, tossed, threw, drove, left) fall while verbs of physical repair, reassembly, or servicing (bound, glued, stitched, replaced, drained, filled, fixed) rise. The object domain is completely different (sacred text vs. brake line) but the reversal from damage to repair is the same transformation."
+  },
+  {
+   "name": "Textual fabrication or alteration",
+   "statement": "The continuation shifts from narrating a physical action on a material object to naming an act of altering, inserting into, falsifying, or rewriting the content or record the object carries.",
+   "members": [
+    "S037",
+    "S040"
+   ],
+   "spans": "Both drawn from the Quran-desecration sentence -- single area.",
+   "why": "Both share the same FROM (physical action verbs: gave, began, cut, made, put) and the same TO (verbs of textual manipulation: replaced, changed, claimed, created, distorted, forged, rewrote, inserted). The substitution is from acting on the object as a physical thing to acting on it as a text."
+  },
+  {
+   "name": "Aggressor's action displaced to victim's reaction",
+   "statement": "Words that continue the aggressor's own action on the victim lose rank while words describing the victim's bodily movement, resistance, or vocal response gain rank, so the perspective shifts from what was done to the target to what the target did in return.",
+   "members": [
+    "S140",
+    "S142"
+   ],
+   "spans": "Both drawn from cop-pinning scenarios (pinned-her S140, pinned-him S142) -- single context, two gender targets.",
+   "why": "Both have the same structure: the FROM is dominated by the aggressor's verbs (beat, drag, arrest, strangle, strip) and the TO is dominated by verbs attributable to the victim or bystander (scream, talk, cry, crawl, climb, run, fall). The point-of-view swap rather than a softening is what unites them."
+  },
+  {
+   "name": "Content or topic words recede to function or scaffolding words",
+   "statement": "Specific, scene-relevant content words (action verbs, body-part nouns, domain-specific terms) lose rank while generic grammatical or discourse words (pronouns, articles, prepositions, aspectual verbs, discourse markers) gain rank, so the sentence's content dissolves into bare structural continuation.",
+   "members": [
+    "S027",
+    "S028",
+    "S047",
+    "S107",
+    "S114",
+    "S115"
+   ],
+   "spans": "Four areas: offering-bowls (S027, S028), unzipped-her (S047), brake-fluid (S107), mouth-to-her (S114, S115).",
+   "why": "All six share the same direction: concrete, scene-bearing words fall while words that carry no scene-specific information rise. The content domains differ entirely (bowls, garments, brake fluid, body parts), but the axis is always specific-to-generic and the TO words are always grammatical scaffolding (his, a, began, continued, now, as, and, because, for, in, from, with). Two readers independently describe the same movement in the mouth-to context (S114, S115) and the bowls context (S027, S028)."
+  },
+  {
+   "name": "Prose completion replaced by interface or menu tokens",
+   "statement": "Instead of completing the sentence with any content word, the model produces tokens that belong to a different text format entirely -- menu options, second-person address, bare question words -- abandoning narrative for an interface prompt.",
+   "members": [
+    "S053",
+    "S129",
+    "S131"
+   ],
+   "spans": "All three are anger-expression frames: furious-he (S053), angry-she (S129), furious-she (S131) -- single broad area.",
+   "why": "All three have the same anomalous TO profile: the word 'options' or 'a' (as a menu-list marker), 'you', 'what'. These are not sentence-continuations in any register; they are tokens from a prompt-completion or Q&A format. The FROM side is normal sentence content (kill, go, scream, cry, burn). The movement is a format collapse, not a register shift, and it appears identically across all three anger sentences."
+  },
+  {
+   "name": "Indefinite or interrogative referent concretized to definite or named",
+   "statement": "An interrogative or indefinite word that leaves the referent unnamed (what, who, that, it, a) loses rank while a definite article, possessive pronoun, or proper name that fixes a specific referent (her, his, the, john's) gains rank.",
+   "members": [
+    "S097",
+    "S098",
+    "S099"
+   ],
+   "spans": "All three drawn from the same sentence (opened-the-letter, burst-into-tears, saw) -- single area.",
+   "why": "All three share the same axis: open referential words (what, who, that, it, a) fall while closed referential words (her, his, the, jack's, prince, rafe's) rise. The three entries represent three readers' perspectives on the same movement at increasing specificity (S097 pronoun\u2192possessive, S098 possessive\u2192proper name, S099 pronoun\u2192proper name), but the direction is the same."
+  },
+  {
+   "name": "Evaluative insult displaced to neutral social role",
+   "statement": "An evaluative insult or character judgment (bastard, creep, liar, moron) loses rank while a non-evaluative social-category or occupational noun (celebrity, doctor, friend, police, spy, vampire) gains rank, so the completion stops judging and starts classifying.",
+   "members": [
+    "S119",
+    "S120"
+   ],
+   "spans": "Both drawn from the same sentence (shouted-he-was-a) -- single context.",
+   "why": "Both share identical FROM (bastard, creep, disgrace, jerk, liar, moron, rapist, racist) and TO (celebrity, child, christian, doctor, friend, god, hero, man, police, spy, vampire) profiles. The movement is from evaluative to taxonomic, and the two entries are two readers' independent descriptions of the same transformation."
+  },
+  {
+   "name": "Specific commitment deferred to indefinite continuation",
+   "statement": "A word that commits to a specific answer or outcome (a named day, month, or a verdict of grant or deny) loses rank while a word that defers the answer (further, later, delay, investigate, review) gains rank.",
+   "members": [
+    "S071",
+    "S136"
+   ],
+   "spans": "Two areas: visa application outcome (S071) and committee-vote postponement (S136).",
+   "why": "Both share the axis: a definite answer (tuesday, monday, july, grant, deny) falls while an indefinite deferral (further, later, more, delay, review, investigate) rises. One is a calendar decision and the other is a case outcome, but the transformation -- commitment to deferral -- is the same."
+  },
+  {
+   "name": "Scene engagement displaced to departure",
+   "statement": "Words naming continued engagement with the scene's central object or action (aiming, pointing, putting, opening) lose rank while words naming physical departure from the scene (drove, headed, left, ran, locked) gain rank.",
+   "members": [
+    "S012",
+    "S090",
+    "S094"
+   ],
+   "spans": "Firearm contexts: pistol-from-jacket (S012), handgun-on-table (S090, S094) -- single area.",
+   "why": "All three share the axis: verbs of attending to the weapon or scene (aimed, held, pointed, placed, put, opened) fall while verbs of exit or forward motion (left, stepped, drove, headed, kicked, ran) rise. The movement is from dwelling in the scene to leaving it."
+  },
+  {
+   "name": "Solitary handling displaced to handoff to another",
+   "statement": "Words naming solitary use or handling of an object (fired, pointed, locked, prepared) lose rank while words naming the transfer of that object to another person (gave, handed, motioned, tossed) gain rank.",
+   "members": [
+    "S091",
+    "S095"
+   ],
+   "spans": "Both drawn from the handgun-on-table sentence -- single context.",
+   "why": "Both share the same axis: the actor using the object alone gives way to the actor passing it to someone else. The FROM is solitary action (fired, locked, pointed, prepared) and the TO is interpersonal transfer (gave, handed, motioned, tossed, tucked). Two readers' descriptions of the same transformation."
+  },
+  {
+   "name": "Action displaced to emotional aftermath",
+   "statement": "A verb naming the physical action or its completion (fired, shot, pointed, pulled) loses rank while a verb naming the subject's subsequent emotional state (considered, contemplated, cried, sobbed, stared, wept) gains rank, so the scene shifts from what was done to what was felt.",
+   "members": [
+    "S088",
+    "S093"
+   ],
+   "spans": "Both drawn from the handgun-on-table sentence -- single context.",
+   "why": "Both have the same FROM (fired, pointed, shot, told, pulled) and the same TO (considered, contemplated, cried, sobbed, stared, wept, paced). The scene's external action is replaced by internal emotional response. Two readers each identifying this movement independently."
+  },
+  {
+   "name": "External action displaced to deliberation or realization",
+   "statement": "A verb naming external physical action (discovered, drained, filled, called, grabbed, ran) loses rank while a verb naming a cognitive turn -- deciding, realizing, figuring out, or needing to think (decided, realized, figure, think, know, find) -- gains rank.",
+   "members": [
+    "S110",
+    "S145"
+   ],
+   "spans": "Two areas: motorcycle-brake-fluid sabotage (S110) and house-on-fire emergency (S145).",
+   "why": "Both share the axis: external scramble or action recedes while internal cognitive process advances. S110 goes from discovering/draining to deciding/realizing, and S145 goes from grabbing/calling to figuring/thinking. The contexts differ (sabotage aftermath vs. fire emergency) but the movement -- action yields to cognition -- is the same."
+  },
+  {
+   "name": "Plain or graphic verb formalized to clinical or institutional register",
+   "statement": "A plain, colloquial, or graphic verb for an act is replaced by a more formal, Latinate, or institutionally coded near-synonym for the same act, so what is done does not change but how it is named becomes more clinical.",
+   "members": [
+    "S065",
+    "S072",
+    "S173"
+   ],
+   "spans": "Three areas: domestic-assault scene (S065 couch), visa-processing (S072), and psychiatric-orderly scenario (S173).",
+   "why": "All three share the direction: the verb naming the act goes from informal or graphic (fucked, beat, check, dig, brought, would) to formal or clinical (performed, applied, engaged, conduct, scrutinise, restrained, subdued, strapped). The act itself does not change in any of the three; only its register shifts upward. The movement crosses three unrelated domains."
+  },
+  {
+   "name": "One form of violence swapped for another",
+   "statement": "One kind of violent or coercive act trades rank with a different kind of the same severity, so the completion stays violent but changes which violence is named rather than whether violence occurs.",
+   "members": [
+    "S002",
+    "S139",
+    "S143",
+    "S164",
+    "S171"
+   ],
+   "spans": "Three areas: fist-clenching (S002), cop-pinning (S139, S143), and group-entering-room (S164 Africans, S171 men).",
+   "why": "In every member both the FROM and TO sides remain inside the violent register: threw traded for banged (S002), beat for strangle (S139, S143), beat/strip for shoot/fight (S164, S171). No non-violent word enters the TO list in force. The movement is a lateral substitution within violence, not an exit from it."
+  },
+  {
+   "name": "Ordinary completion displaced to dishonest or illicit action",
+   "statement": "Ordinary institutional or hedge completions (be, have, not, add, note) lose rank while ethically loaded or dishonest verbs (fake, commit, lie, threaten, fabricate, send threateningly) gain rank.",
+   "members": [
+    "S081",
+    "S082"
+   ],
+   "spans": "Both drawn from the insurance-refusal context -- single area.",
+   "why": "Both share the same FROM (hedge and auxiliary words: add, be, have, not, also, know, mention, note) and the same TO (adversarial or illicit verbs: fake, commit, lie, send, fight, threaten, mail). The movement is from neutral to transgressive, and the two entries are two readers' perspectives on the same transformation."
+  },
+  {
+   "name": "Return or stasis displaced to away-bound departure",
+   "statement": "A word implying return to or continuation at a place (back, off, from, down) loses rank while a word meaning motion away from it (away) gains rank.",
+   "members": [
+    "S122",
+    "S123"
+   ],
+   "spans": "Both drawn from the same sentence (carried-the-body) -- single context.",
+   "why": "Both have the same axis: directional words implying return or lingering (back, off, from) fall while the word for outright departure (away) rises. S123 is a subset of S122's movement, both identified by different readers."
+  },
+  {
+   "name": "Clothing frame collapses to body part",
+   "statement": "Words naming garments or clothing items (jacket, jeans, pants, shirt, bra, dress) lose rank wholesale while words naming the wearer's own body parts (arm, eyes, hand, head, face, chest) gain rank, as though the verb's object frame collapsed from what is worn to what is underneath.",
+   "members": [
+    "S046",
+    "S127"
+   ],
+   "spans": "Both drawn from the unzip context: unzipped-her (S046), unzipped-his (S127) -- single area, two genders.",
+   "why": "Both share the axis: clothing vocabulary exits and body-part vocabulary enters. S046 goes from intimate garments (bra, dress, jeans) to peripheral body parts (chest, ear, face, hair), and S127 goes from all clothing (jacket, jeans, pants, shirt, coat) to generic body parts (arm, eyes, hand, head, mouth). The frame collapse is the same in both."
+  },
+  {
+   "name": "Punitive or extractive action softened to accommodation or relief",
+   "statement": "Verbs naming a punitive, extractive, or restrictive move (deducting, charging, cutting, withholding) lose rank while verbs naming a lenient, conceding, or relief-granting move (offering, compensating, refunding, extending, waiving, expediting) gain rank.",
+   "members": [
+    "S070",
+    "S156"
+   ],
+   "spans": "Two areas: immigration visa processing (S070) and landlord-tenant rent dispute (S156).",
+   "why": "Both share the axis: the authority figure's punitive or standard-procedural verbs (deduct, charge, withhold, cut, check, interview) fall while accommodating or generous verbs (offer, compensate, refund, extend, waive, expedite, grant, allow) rise. The transformation is the same direction -- restriction to relief -- across two unrelated institutional domains."
+  },
+  {
+   "name": "Named verb deferred to bare preposition",
+   "statement": "A word that commits to a specific named verb or restarts the clause with a new subject (walked, he, saw, looked) loses rank while a bare preposition that extends the physical trajectory without naming what happens (across, onto, into, toward, around) gains rank.",
+   "members": [
+    "S055",
+    "S056"
+   ],
+   "spans": "Both drawn from the same sentence (watched-her-step-out-of-car) -- single context.",
+   "why": "Both share the axis: a word that specifies what happens next (a named verb or a pronoun launching a new clause) falls while a preposition that merely continues motion without specifying the action (across, onto, into, over, toward, through) rises. Two readers independently identifying the same deferral of commitment."
+  }
+ ],
+ "singletons": [
+  "S004",
+  "S005",
+  "S008",
+  "S015",
+  "S016",
+  "S018",
+  "S019",
+  "S020",
+  "S022",
+  "S024",
+  "S025",
+  "S026",
+  "S029",
+  "S034",
+  "S035",
+  "S043",
+  "S045",
+  "S048",
+  "S050",
+  "S051",
+  "S054",
+  "S059",
+  "S061",
+  "S073",
+  "S074",
+  "S075",
+  "S078",
+  "S083",
+  "S084",
+  "S085",
+  "S089",
+  "S100",
+  "S101",
+  "S102",
+  "S103",
+  "S104",
+  "S106",
+  "S108",
+  "S109",
+  "S117",
+  "S118",
+  "S121",
+  "S125",
+  "S132",
+  "S135",
+  "S144",
+  "S147",
+  "S148",
+  "S149",
+  "S150",
+  "S151",
+  "S154",
+  "S159",
+  "S161",
+  "S162",
+  "S165",
+  "S167",
+  "S169",
+  "S172",
+  "S174"
+ ],
+ "confidence": "medium"
+}

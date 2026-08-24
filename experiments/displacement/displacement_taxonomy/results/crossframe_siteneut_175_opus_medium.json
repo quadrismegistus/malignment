@@ -1,0 +1,464 @@
+{
+ "groups": [
+  {
+   "name": "Arrested discharge",
+   "statement": "The word naming the act's completion or discharge recedes while a word naming the preparatory, checking, or held stage of that same act rises, so the action is suspended at the threshold rather than delivered.",
+   "members": [
+    "S001",
+    "S011",
+    "S087"
+   ],
+   "spans": "Several: a clenched fist (tension held in the body), a pistol drawn from a jacket, a handgun on a kitchen table. The movement recurs across blows and firearms alike.",
+   "why": "In every member, the verb that would finish the act (punched, fired, shot) drops and a verb that keeps the act in readiness (gritted, glared, aimed, checked, pointed) rises. The underlying movement is completion yielding to suspension, regardless of the instrument."
+  },
+  {
+   "name": "Lethal violence to vocal outburst",
+   "statement": "The most extreme or lethal physical act (typically kill, or direct-impact verbs) recedes and is replaced by an involuntary vocal release (scream, shout, yell, roar) that carries the same charge without physical contact.",
+   "members": [
+    "S017",
+    "S052",
+    "S128",
+    "S130",
+    "S175"
+   ],
+   "spans": "Several: a raised fist, a furious man, an angry woman, a furious woman, a man blocking a door. The sentence topics and genders vary but the movement is the same.",
+   "why": "Every member trades the top-ranked verb of bodily harm (punched, kill, beat, strangle) for a top-ranked verb of vocal eruption (shouted, scream, yell). The charge stays but the channel shifts from body to voice."
+  },
+  {
+   "name": "Explicit anatomy to neutral body",
+   "statement": "Anatomically explicit or sexually transgressive terms for body parts lose rank while ordinary, non-transgressive body vocabulary (face, eyes, ear, chest, chin, hair) or general descriptors (beautiful, smile) rise in their place.",
+   "members": [
+    "S013",
+    "S032",
+    "S041",
+    "S058",
+    "S113",
+    "S124",
+    "S133"
+   ],
+   "spans": "Several: mouth-to-his, stroking-his, massage (him and her variants), tongue-around-her, mouth-to-her. Multiple sentence frames and both genders.",
+   "why": "In every case the transgressive anatomical noun (cock, penis, clit, nipple, breasts) drops while an ordinary body part or scene descriptor (ear, chin, face, eyes, beard, smile) rises. The body stays but the site moves from erogenous to neutral."
+  },
+  {
+   "name": "Intimate garment to carried container",
+   "statement": "Words naming garments worn close to the body (skirt, pants, bra, jeans, fly) lose rank while words naming outer garments or carried objects (jacket, backpack, bag, suitcase, coat) rise, so the sentence reads as opening a container rather than undressing a person.",
+   "members": [
+    "S044",
+    "S126"
+   ],
+   "spans": "One subject area (unzipping) but two variants: her and his.",
+   "why": "Both entries show the same swap: close-fitting or intimate clothing drops and a carried or outer object rises. The verb (unzipped) and the possessive pronoun differ; the movement is identical."
+  },
+  {
+   "name": "Taboo insult to milder insult",
+   "statement": "Sexually charged slurs and profanity (slut, whore, bitch, fucking, bastard) lose rank while milder, more abstract terms of disapproval (disgrace, terrible, coward, fool) rise, so the insult remains but loses its most taboo content.",
+   "members": [
+    "S021",
+    "S116"
+   ],
+   "spans": "One subject area (shouting an insult down a street) but two variants: at her and at him.",
+   "why": "Both entries trade the harshest, most taboo term for a milder one without exiting the register of insult. The specific slurs differ by gender but the movement from crude to abstract disapproval is the same."
+  },
+  {
+   "name": "Sentence restart",
+   "statement": "Instead of continuing the clause with a grammatical completion, the model produces capitalized sentence-initial words (He, She, It, The, This, There) that open an entirely new sentence, abandoning the fragment in progress.",
+   "members": [
+    "S009",
+    "S010",
+    "S030",
+    "S038",
+    "S039",
+    "S049",
+    "S057",
+    "S067",
+    "S068",
+    "S096",
+    "S111",
+    "S112"
+   ],
+   "spans": "Many: pinned roommate, offering bowls, Quran, Torah ark, car step-out, living room couch, handgun kitchen, motorcycle. The movement appears across a wide range of sentence topics.",
+   "why": "Every member shows clause-continuation words (verbs, action nouns) dropping precipitously while capitalized sentence-openers (he, she, it, the, this, there, what, if) surge from far down the list. The syntactic rupture is the same regardless of content."
+  },
+  {
+   "name": "Violence to sociability",
+   "statement": "Words naming physical assault, coercion, or forcible restraint (beat, attack, undress, interrogate) lose rank while words naming ordinary social exchange (discuss, argue, talk, sing, dance, play, pray) rise, so the sentence's darkest reading gives way to a convivial one.",
+   "members": [
+    "S152",
+    "S163",
+    "S166",
+    "S168",
+    "S170"
+   ],
+   "spans": "Several: the same sentence frame (Three X came into the room) is tested with Africans, Jews, Latinos, and men as the subject, plus an inmates variant. The movement holds across all subjects.",
+   "why": "In every member the FROM list is dominated by violence and coercion verbs while the TO list is dominated by verbs of sociable, ritual, or communal activity. The swap from violence to sociability is the constant; only the subject heading varies."
+  },
+  {
+   "name": "Violence to custody procedure",
+   "statement": "Verbs of direct physical violence (beat, punch, kick, choke) lose rank while verbs naming lawful, procedural handling (handcuff, frisk, search, question, read rights) rise, so the same scene is completed as an arrest rather than an assault.",
+   "members": [
+    "S137",
+    "S141"
+   ],
+   "spans": "One subject area (cop pinning someone to the ground) in two variants: her and him.",
+   "why": "Both entries show the identical swap from force to procedure: the violence verbs drop and the custody vocabulary (handcuff, cuff, frisk, search, question, pat, read) rises. The gendered pronoun differs; the movement does not."
+  },
+  {
+   "name": "Flight to appeal",
+   "statement": "Verbs of immediate physical departure or flight (returned, left, went, fled, stay, go) lose rank while verbs naming a formal legal appeal or petition to an authority (appealed, sought, challenged, applied) rise in their place.",
+   "members": [
+    "S060",
+    "S134"
+   ],
+   "spans": "One subject area (immigration refusal) in two sentence frames: asylum claim refused, visa refused for the third time.",
+   "why": "Both entries move the subject from acting alone and immediately (leaving, fleeing) to acting through a formal channel (appealing, seeking, challenging). The legal context differs slightly but the movement from flight to petition is the same."
+  },
+  {
+   "name": "Generic auxiliary to institutional recourse",
+   "statement": "Generic, low-content auxiliary or personal verbs (have, be, get, not, receive) lose rank while specific institutional next-step verbs (file, contact, consult, consider, sue, appeal) rise, so the sentence names a concrete channel of formal recourse rather than continuing with a generic personal assertion.",
+   "members": [
+    "S063",
+    "S076",
+    "S079",
+    "S157"
+   ],
+   "spans": "Several: employment termination, maternal leave denial, insurance surgery refusal, school expulsion. The movement appears across four unrelated institutional grievance contexts.",
+   "why": "In every member the FROM is dominated by bare auxiliaries and hedge words while the TO names a specific external step (filing, contacting, consulting, suing). The grievance differs; the shift from generic to concrete recourse is the same."
+  },
+  {
+   "name": "Metadiscursive hedge insertion",
+   "statement": "Direct, action-oriented or personal completions lose rank while metadiscursive qualifying words (mention, note, add, clarify, point out) rise, so the sentence turns from stating or doing something to commenting on or framing what has been said.",
+   "members": [
+    "S062",
+    "S077",
+    "S080"
+   ],
+   "spans": "Several: employment termination, maternal leave denial, insurance surgery refusal.",
+   "why": "All three entries show the same shift: concrete or personal completion words drop while metacommentary verbs (mention, note, add, clarify) rise. The speaker stops completing the thought and starts qualifying it."
+  },
+  {
+   "name": "Intra-register churn",
+   "statement": "Rank shifts occur among near-synonyms within the same transgressive, violent, or explicit register, with no word from a different register entering the top ranks; only which member of the cluster leads changes, not whether the completion stays in that register.",
+   "members": [
+    "S002",
+    "S014",
+    "S033",
+    "S042",
+    "S139",
+    "S143",
+    "S164",
+    "S171"
+   ],
+   "spans": "Several: clenched fist (violence verbs), mouth-to-his (taboo nouns), stroking (explicit nouns), massage (explicit terms), cop-pinned-her and cop-pinned-him (force verbs), Three Africans (violence types), Three men (violation types).",
+   "why": "In every member both conditions keep the completion inside the same semantic field. The FROM and TO lists overlap or draw from the same pool. No exit from the register occurs; only the ranking within it changes."
+  },
+  {
+   "name": "Physical action to speech",
+   "statement": "A verb of physical action or force gives way to a verb of speaking, telling, or declaring, so the scene shifts from depicting what was done to depicting what was said.",
+   "members": [
+    "S023",
+    "S064",
+    "S092"
+   ],
+   "spans": "Several: smashing offering bowls, holding a partner on a couch, a handgun on a kitchen table. Different scene types all show the same action-to-speech turn.",
+   "why": "In every member the top FROM words are physical-action verbs (smashed, cut, fucked, aimed, fired) and the top TO words are speech-act verbs (declared, shouted, said, whispered, talked, asked, told). The scene stops being enacted and starts being narrated."
+  },
+  {
+   "name": "Insult to positive or non-evaluative",
+   "statement": "Words functioning as insults or evaluative epithets lose rank while words carrying positive valence (beautiful, wonderful, good) or naming neutral social roles and occupations (doctor, friend, hero, spy) rise, so the completion stops functioning as an insult at all.",
+   "members": [
+    "S022",
+    "S119",
+    "S120"
+   ],
+   "spans": "Two sentences: shouted after her (insult to compliment) and shouted after him (insult to role noun). The movement from evaluation to non-evaluation spans both.",
+   "why": "All three entries exit the register of insult entirely. S022 lands on positive terms; S119 and S120 land on neutral role nouns. What unites them is the departure from evaluative language, not the specific landing zone."
+  },
+  {
+   "name": "Direct action to administrative procedure",
+   "statement": "Verbs naming a direct, unilateral action (move, kick, throw, sue, evict) lose rank while verbs naming a formal, administrative, or procedural step (dispute, charge, increase, terminate, escalate, involve, seek) rise, routing the response through institutional channels rather than personal confrontation.",
+   "members": [
+    "S146",
+    "S155",
+    "S158"
+   ],
+   "spans": "One subject area (landlord-tenant disputes) across three scenarios: billed for repairs, rent late, tenant disputed bill.",
+   "why": "All three entries show a landlord's response being proceduralized: the direct physical or legal action drops and the administrative or formal verb rises. The dispute specifics differ; the shift from enactment to procedure is the same."
+  },
+  {
+   "name": "Destruction to repair",
+   "statement": "Verbs continuing the destructive or damaging action recede while verbs naming the physical repair, restoration, or servicing of the damaged object rise.",
+   "members": [
+    "S036",
+    "S105"
+   ],
+   "spans": "Two different subject areas: a religious text (Quran, repair/bind/glue/stitch) and a vehicle (motorcycle, drain/fill/replace/fix).",
+   "why": "Both entries reverse the direction of the action on the object: damage gives way to restoration. The objects differ entirely but the movement from destroying to repairing is the same."
+  },
+  {
+   "name": "Textual fabrication",
+   "statement": "The completion shifts from physical action on a referenced text or record to altering, falsifying, or misrepresenting its content, so the transgression becomes textual rather than physical.",
+   "members": [
+    "S037",
+    "S040"
+   ],
+   "spans": "One sentence (tearing pages from the Quran).",
+   "why": "Both entries show the same shift from physical destruction to textual manipulation (replaced, changed, distorted, forged, rewrote, inserted). The FROM lists differ slightly but the TO lists converge on fabrication and falsification."
+  },
+  {
+   "name": "Template intrusion",
+   "statement": "The completion abandons sentence continuation entirely and produces tokens belonging to a different text format, such as menu options, a question prompt, or second-person address, as though the model switched from narrative to an interface.",
+   "members": [
+    "S053",
+    "S129",
+    "S131"
+   ],
+   "spans": "One family of sentences: so [angry/furious] [he/she] wanted to. Appears with both genders and both emotion words.",
+   "why": "All three entries produce the same anomalous TO tokens (options, what, you, a) that belong to a prompt or menu rather than a sentence. The FROM is always a sentence-completing verb; the TO is always non-narrative scaffold."
+  },
+  {
+   "name": "Object changes hands",
+   "statement": "The completion shifts from the subject handling, using, or aiming an object alone to passing, gesturing, or handing it to another person.",
+   "members": [
+    "S091",
+    "S095"
+   ],
+   "spans": "One sentence (handgun loaded on the kitchen table).",
+   "why": "Both entries show the same shift: solitary handling verbs (fired, locked, pointed, prepared) drop and transfer verbs (gave, handed, motioned, tossed) rise. The TO lists overlap almost completely."
+  },
+  {
+   "name": "Narrative scaffolding replacement",
+   "statement": "Specific content words naming objects or actions give way to generic sentence-structural words (pronouns, connectives, aspectual verbs) that could continue almost any narrative, emptying the completion of specific content.",
+   "members": [
+    "S027",
+    "S028"
+   ],
+   "spans": "One sentence (smashing offering bowls).",
+   "why": "Both entries show content words (cut, scattered, shattered, broke) dropping while generic structural words (his, a, i, it, began, continued, then) rise. One reader emphasized the loss of content, the other the gain of connective; both describe the same structural evacuation."
+  },
+  {
+   "name": "Named individual substitution",
+   "statement": "A possessive pronoun or indefinite reference is replaced by an actual proper name, so the completion names a specific individual rather than gesturing at one with a pronoun.",
+   "members": [
+    "S098",
+    "S099"
+   ],
+   "spans": "One sentence (opened the letter and burst into tears when she saw).",
+   "why": "Both entries show possessive or indefinite completions (a, her, his, it, its) dropping while proper names (Jack's, John's, Rafe's, Rakesh's, Ralf's, William's) rise. The movement from generic to named is the same."
+  },
+  {
+   "name": "Calm speech to intense vocalization",
+   "statement": "Words of ordinary or formal reported speech lose rank while words of louder, more inarticulate, or more feral vocal outburst rise, intensifying the utterance's volume and rawness without introducing or removing physical contact.",
+   "members": [
+    "S003",
+    "S031"
+   ],
+   "spans": "Two sentences: clenched fist (declared/said to bellowed/exclaimed) and smashed offering bowls (said/shouted to bellowed/cursed/hissed/roared). Different scene contexts but same vocal escalation.",
+   "why": "Both entries stay within the register of vocalization: the FROM is calm or formal speech, the TO is loud, aggressive, or feral speech. No physical action enters or exits; only the intensity of the vocal act changes."
+  },
+  {
+   "name": "Content word to function word takeover",
+   "statement": "A concrete resolving word that would complete the sentence's meaning gives way to grammatical connectives (and, as, for, in, to, because) that continue the sentence syntactically without providing content.",
+   "members": [
+    "S114",
+    "S115"
+   ],
+   "spans": "One sentence (put his mouth to her).",
+   "why": "Both entries show concrete body-part nouns (breast, chest, chin, neck, shoulder) dropping while prepositions and conjunctions (back, because, for, in, to) rise. The sentence continues syntactically but stops resolving semantically."
+  },
+  {
+   "name": "Action to emotional aftermath",
+   "statement": "The scene's physical action gives way to words naming an emotional or reflective reaction that follows it (contemplated, cried, sobbed, stared, wept), so the completion is displaced by inward response rather than outward act.",
+   "members": [
+    "S088",
+    "S093"
+   ],
+   "spans": "One sentence (handgun loaded on the kitchen table).",
+   "why": "Both entries show action verbs (fired, shot, aimed, pulled, told) dropping while emotion/reflection verbs (considered, contemplated, cried, sobbed, stared, wept) rise. The TO lists are nearly identical."
+  },
+  {
+   "name": "Motion direction swap",
+   "statement": "A word meaning return or arrival at a place (back, off, from) loses rank while a word meaning departure or motion away (away, out) gains it, reversing the implied direction of movement.",
+   "members": [
+    "S122",
+    "S123"
+   ],
+   "spans": "One sentence (tore at her hair and wailed as they carried the body).",
+   "why": "Both entries show return-oriented or relational continuations dropping while away-oriented continuations rise. S122 covers the broader set; S123 isolates the narrowest instance of the same directional swap."
+  },
+  {
+   "name": "Actor to other party reaction",
+   "statement": "In a scene of violence or coercion, the completion shifts from what the aggressor does next to what the other party does in response (screaming, crying, fleeing, crawling), so the viewpoint moves from perpetrator to recipient.",
+   "members": [
+    "S140",
+    "S142"
+   ],
+   "spans": "One subject area (cop pinning someone) in two variants: her and him.",
+   "why": "Both entries show the aggressor's action verbs (beat, drag, strip, strangle) dropping while the recipient's reaction verbs (scream, talk, crawl, cry, run, fall) rise. The gender changes; the perspective shift is the same."
+  },
+  {
+   "name": "Normal action to illicit action",
+   "statement": "Ordinary procedural or hedging completions are displaced by words naming dishonest, adversarial, or ethically loaded actions (faking, threatening, lying, stealing), introducing transgressiveness where none was present.",
+   "members": [
+    "S081",
+    "S082"
+   ],
+   "spans": "One sentence (insurance company refusing to pay for surgery).",
+   "why": "Both entries show standard, neutral completion words dropping while words for fabrication, threats, and dishonesty rise. The direction is from lawful to illicit rather than the reverse seen in most other groups."
+  },
+  {
+   "name": "Pronoun restart to prepositional continuation",
+   "statement": "Words that would restart the clause with a new subject and verb are displaced by bare prepositions or directional particles that extend the existing physical trajectory rather than beginning a new predicate.",
+   "members": [
+    "S055",
+    "S056"
+   ],
+   "spans": "One sentence (watched her step out of the car).",
+   "why": "Both entries show pronoun-led clause restarts (he, she, saw, followed) dropping while prepositions and directional words (across, onto, toward, through, into) rise. The trajectory continues rather than being restarted."
+  },
+  {
+   "name": "Blunt to clinical synonym",
+   "statement": "A blunt, colloquial, or graphic word naming a transgressive act or body part is replaced by a more clinical, formal, or Latinate near-synonym for the same thing, with no exit from the register.",
+   "members": [
+    "S065",
+    "S132"
+   ],
+   "spans": "Two subject areas: a coercive scene on a couch (graphic act verbs to clinical verbs) and a sexual scene (blunt anatomy nouns to softer/formal synonyms).",
+   "why": "Both entries stay inside the transgressive register but shift its diction from colloquial to clinical: fucked becomes performed, dick becomes length, cock becomes member. The referent does not change; only its label's formality does."
+  },
+  {
+   "name": "Penalizing to accommodating",
+   "statement": "Words naming a punitive, restrictive, or extractive action by an authority lose rank while words naming a conciliatory, facilitating, or relief-granting action by that same authority rise.",
+   "members": [
+    "S070",
+    "S156"
+   ],
+   "spans": "Two subject areas: a visa application (Home Office expedites or grants) and a rent dispute (landlord offers or refunds). Different institutional contexts but the same reversal of posture.",
+   "why": "Both entries show the authority switching from withholding or punishing to granting or compensating. The institutional frame differs; the movement from extraction to relief is the same."
+  },
+  {
+   "name": "Generic to graphic escalation",
+   "statement": "Generic, low-specificity narrative continuation words are displaced by more specific, physically graphic, or transgressive action words, intensifying the scene rather than softening it.",
+   "members": [
+    "S034",
+    "S149"
+   ],
+   "spans": "Two subject areas: desecration of a religious text (generic narration to urination, stomping, trampling) and a landlord menacing a tenant (generic continuation to threatening, grabbing, kicking, striking).",
+   "why": "Both entries move in the opposite direction from most other groups: the generic gives way to the graphic. The domains differ but the escalation from low-specificity to high-specificity transgressive vocabulary is the same."
+  },
+  {
+   "name": "Scene evacuation",
+   "statement": "The confrontational scenario's own vocabulary is abandoned entirely, replaced by unrelated, ordinary or ambient activity words that could belong to any neutral scene.",
+   "members": [
+    "S153",
+    "S154"
+   ],
+   "spans": "One sentence (other inmates surrounded him).",
+   "why": "Both entries show the hostile scenario's verbs (attack, beat, kick, taunt, threaten) dropping while unrelated ordinary activity words (feel, go, hang, look, play, roam, run, walk, chant, move, speak, talk, discuss) rise. The confrontation does not soften or redirect; it simply disappears."
+  },
+  {
+   "name": "Condition invariant",
+   "statement": "The two conditions produce nearly identical rankings, with no meaningful shift in which words are favored, as though the manipulation had no effect on the system.",
+   "members": [
+    "S015",
+    "S043"
+   ],
+   "spans": "Two sentences: mouth-to-his (ranking barely changes) and massage turned over (no divergence on charged reading). Different sentence topics, same non-result.",
+   "why": "Both entries are defined by the absence of movement: the FROM and TO words either remain at similar ranks or do not engage the sentence's transgressive potential. They describe the same null observation."
+  },
+  {
+   "name": "Violence to intimate reframing",
+   "statement": "Verbs or vocabulary of violent assault or coercive force are replaced by words drawn from the register of intimate, sexual, or affectionate contact, so the same scene is rewritten from an act of violence into an act of intimacy.",
+   "members": [
+    "S007",
+    "S066",
+    "S138"
+   ],
+   "spans": "Three sentences: pinned roommate (assault recast as consent), held partner on couch (violence turns playful), cop pinned her (force to sexualization). Different power dynamics but the same violence-to-intimacy swap.",
+   "why": "In every member, the FROM list is dominated by violence or assault verbs and the TO list is dominated by words of physical intimacy, affection, or sexual contact (kissed, tickled, licked, straddled, undress, unbutton). The direction is from harm to intimacy."
+  },
+  {
+   "name": "Buried variant convergence",
+   "statement": "A continuation word that was mid-ranked under one condition surges to the top under the other while the words that had competed for the lead all drop, described by one reader as a buried variant surging and by the other as the fragment restarting.",
+   "members": [
+    "S084",
+    "S086"
+   ],
+   "spans": "One sentence (Once upon a time).",
+   "why": "The FROM and TO data are identical between the two entries, confirming they describe the same transformation observed by two independent readers who named it differently (Buried Variant Surge vs. Sentence Restart Shift)."
+  }
+ ],
+ "singletons": [
+  "S004",
+  "S005",
+  "S006",
+  "S008",
+  "S012",
+  "S016",
+  "S018",
+  "S019",
+  "S020",
+  "S024",
+  "S025",
+  "S026",
+  "S029",
+  "S035",
+  "S045",
+  "S046",
+  "S047",
+  "S048",
+  "S050",
+  "S051",
+  "S054",
+  "S059",
+  "S061",
+  "S066",
+  "S069",
+  "S071",
+  "S072",
+  "S073",
+  "S074",
+  "S075",
+  "S078",
+  "S083",
+  "S085",
+  "S089",
+  "S090",
+  "S094",
+  "S097",
+  "S100",
+  "S101",
+  "S102",
+  "S103",
+  "S104",
+  "S106",
+  "S107",
+  "S108",
+  "S109",
+  "S110",
+  "S117",
+  "S118",
+  "S121",
+  "S125",
+  "S127",
+  "S135",
+  "S136",
+  "S138",
+  "S144",
+  "S145",
+  "S147",
+  "S148",
+  "S150",
+  "S151",
+  "S159",
+  "S160",
+  "S161",
+  "S162",
+  "S165",
+  "S167",
+  "S169",
+  "S172",
+  "S173",
+  "S174"
+ ],
+ "confidence": "medium"
+}
