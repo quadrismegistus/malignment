@@ -400,7 +400,18 @@ def word_probs(model, prompt, theta=0.001, mode="raw", cache=None):
 
     `collapsed` reports how many rows were folded, so a caller can see when it happened.
     """
-    from .cache import get_cache
+    #: THIS FUNCTION DOES NOT RUN IN THIS PACKAGE, AND THAT IS DELIBERATE.
+    #: Both of its backends were retired rather than ported: `.cache` (the
+    #: hashstash generation) and `.ch_read` (the point-query prefetch). See
+    #: produce_movement.py -- the cell-at-a-time shape is the one ClickHouse is
+    #: worst at, measured at 192 ms/cell against 0.097 ms/cell in bulk, so
+    #: analysis moved to SQL over the built `movement` table (56.3M rows).
+    #:
+    #: The import of `.cache` used to sit HERE, above the branch, so it killed
+    #: the default ClickHouse path too and every caller got a bare
+    #: ModuleNotFoundError naming a module they had no reason to care about.
+    #: The arithmetic and the fold rules below are still the reference
+    #: implementation and are still worth reading; only the READ is gone.
     #: CLICKHOUSE READ PATH, opt-in, ONE choke point for every caller.
     #:
     #: RH, 2026-08-10: migrate to ClickHouse. Every twp consumer reaches the
@@ -425,12 +436,28 @@ def word_probs(model, prompt, theta=0.001, mode="raw", cache=None):
     #: explained over 300 sampled cells. The one is a cell scored in THREE
     #: payload runs (194/197/201 words); ClickHouse applies a declared
     #: SOURCE_PRECEDENCE where the stash kept whichever it ingested first.
-    if _os.environ.get("MALIGN_TWP_SOURCE", "clickhouse").lower() == "clickhouse":
-        from .ch_read import ch_twp_payload
-        payload = ch_twp_payload(model, prompt, theta=theta, mode=mode)
-    else:
-        cm = cache or get_cache()
-        payload = cm.get_true_word_probs(model, prompt, theta=theta, mode=mode)
+    _src = _os.environ.get("MALIGN_TWP_SOURCE", "clickhouse").lower()
+    try:
+        if _src == "clickhouse":
+            from .ch_read import ch_twp_payload
+            payload = ch_twp_payload(model, prompt, theta=theta, mode=mode)
+        else:
+            from .cache import get_cache
+            cm = cache or get_cache()
+            payload = cm.get_true_word_probs(model, prompt, theta=theta, mode=mode)
+    except ImportError as e:
+        raise NotImplementedError(
+            "word_probs has no read backend in this package: %s.\n"
+            "The cell-at-a-time access shape was RETIRED, not lost. It is the "
+            "one ClickHouse is worst at -- 192 ms/cell point-querying against "
+            "0.097 ms/cell in bulk -- so `.cache` (hashstash) and `.ch_read` "
+            "(the prefetch) were both dropped and analysis moved to SQL.\n"
+            "Read the built table instead:\n"
+            "    ch.query(\"SELECT word, p_base, p_aligned, delta, cls FROM "
+            "movement WHERE base=%%s AND aligned=%%s AND prompt=%%s\")\n"
+            "built by `python -m malignment.produce_movement --run`, or query "
+            "`twp_words` directly for a single arm. The fold rules this module "
+            "documents still apply and are still implemented below." % e) from e
     if payload is None:
         return None
     rows = payload.get("rows") or []

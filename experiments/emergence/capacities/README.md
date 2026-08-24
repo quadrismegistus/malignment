@@ -41,20 +41,57 @@ ported:
                                     colorless-green phase, alignment RAISES
                                     natural share where it never touched grammar
 
-**And the non-verse families are DATA HERE, NOT A PIPELINE.**
-`aggregate_capacities.py` reads `p` and `absent` out of `data/pythia_curves.parquet`
-and `data/m05_curves.parquet` and averages them -- it aggregates, it does not
-compute. The seven producers that build those quantities from `twp` are still
-archive-only:
+### THE SEVEN UPSTREAM PRODUCERS ARE PORTED. FOUR RUN, THREE CANNOT.
 
-    m05_curves.py   m05_pythia_capacity.py   m05_syntax_tags.py
-    m05_licit_run.py   m05_class_mass.py   m05_syntax_curve.py
-    m05_sense_curve.py
+All seven were copied and repointed 2026-08-24. What each does here, checked by
+running it, not by reading it:
 
-So verse regenerates from the live store; the other families are frozen curves
-plus an aggregator. Adding a checkpoint, or wanting the syntax curve on a new
-model, needs those seven. `m05_licit_run.py` calls deepseek and claude-haiku for
-the licit sets, so that one carries a real cost and not just a repoint.
+    RUNS, AND REPRODUCES THE ARCHIVE BYTE FOR BYTE
+      m05_sense_curve.py       results/sense_curve.json          md5 identical
+      m05_syntax_curve.py      results/syntax_curve.json         md5 identical
+      m05_pythia_capacity.py   results/pythia_capacity_onsets.json  md5 identical
+
+    BLOCKED, and the block is by DESIGN rather than by omission
+      m05_curves.py            \  all three read twp through
+      m05_class_mass.py         }  movement.word_probs
+      m05_capacity_examples.py /
+
+    BLOCKED on the archive's task framework, and metered besides
+      m05_licit_run.py         needs malignment.tasks (absent); calls deepseek
+                               and claude-haiku. NOT RUN.
+
+    NOT REPOINTED, provenance only
+      verse_fleet_producer.py  rhyme_pull_pilot.py  m05_syntax_tags.py
+
+**`movement.word_probs` DOES NOT WORK IN THIS PACKAGE, AND IT IS NOT AN
+ACCIDENT.** Both of its read backends were retired rather than ported --
+`.cache` (the hashstash generation) and `.ch_read` (the point-query prefetch).
+`produce_movement.py` states why and gives the number: the cell-at-a-time shape
+is the one ClickHouse is worst at, **192 ms/cell point-querying against
+0.097 ms/cell in bulk**. RH, 2026-08-15: *"movement.py should be mainly for
+analysis, it produces the data for CH movement tables that is then consumed by
+others via CH queries."* The replacement is the built `movement` table --
+56,280,403 rows of `base, aligned, prompt, word, p_base, p_aligned, delta, cls`.
+
+So porting those three properly means **rewriting them as SQL**, not restoring a
+cache module. That is real work: `word_probs` exists to fold a partition -- one
+row per (word, FIRST token), where 20% of payloads carry a duplicated surface
+and a naive dict comprehension silently drops mass -- and the fold has to be
+reimplemented wherever the read moves.
+
+A side effect worth knowing about, fixed in passing: `word_probs` used to import
+`.cache` ABOVE the branch that chooses a backend, so the default ClickHouse path
+died on the legacy import and every caller got a bare `ModuleNotFoundError`
+naming a module they had no reason to care about. It now raises
+`NotImplementedError` saying the access shape was retired and pointing at the
+`movement` table. **The function is still dead; it now explains itself.**
+Confirmed dead first: outside this folder nothing calls it. Five of the six live
+modules that mention `word_probs` mention it only in comments, and `movers()`,
+its one internal caller, is never called anywhere in the repo.
+
+So: verse regenerates from the live store, three analysis producers regenerate
+from local parquets, and the three curve-builders remain archive-only until
+someone rewrites their reads.
 
 ## THE VERSE FAMILIES
 
