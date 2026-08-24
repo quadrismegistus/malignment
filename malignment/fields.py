@@ -1382,3 +1382,173 @@ def slot_scales():
         for inst, vals in byinst.items():
             out[inst].update(vals)
     return {k: sorted(v) for k, v in out.items()}
+
+
+# ---------------------------------------------------------------------------
+# ONE POS PIVOT, BECAUSE FOUR VOCABULARIES ARE IN PLAY
+#
+# Measured on the files themselves, 2026-08-24:
+#
+#   upos         spaCy en and the ENGLISH usas lexicon
+#                NOUN ADJ VERB PROPN ADV INTJ ADP NUM PRON DET SCONJ X ...
+#   usas_zh      the CHINESE usas lexicon, its own scheme
+#                noun verb pnoun adj adv prep conj det num pron part intj
+#                msr loc mark ono idiom fw pos
+#   subtlex_ch   SUBTLEX-CH `Dominant.PoS`, an ICTCLAS-style scheme
+#                nr n v a ns g m l vn d b t z nz r s q f o c an p nt ad ...
+#
+# UPOS is the pivot because `CONTENT_POS` is already UPOS and the English half
+# of every comparison speaks it. The mapping is LOSSY IN ONE DIRECTION ONLY --
+# several source tags collapse onto one UPOS and none splits -- so it is safe
+# for asking "is this a content word" and unsafe for recovering the original
+# tag, which is why `pos_map` returns the pivot and never pretends to invert.
+#
+# WHY THIS EXISTS AT ALL: the function-word composition control. M01
+# T_category_flow section 7 showed a continuous concreteness effect of +0.107
+# (p=7e-05) that was entirely function words moving in and out -- +0.381 where
+# the faller was one, -0.320 where the riser was, +0.021 between two lexical
+# verbs. Running that control bilingually needs one definition of "function
+# word" that both languages can answer, and no zh spaCy model exists.
+# ---------------------------------------------------------------------------
+
+_POS_PIVOT = {
+    "usas_zh": {
+        "noun": "NOUN", "pnoun": "PROPN", "verb": "VERB", "adj": "ADJ",
+        "adv": "ADV", "prep": "ADP", "conj": "CCONJ", "det": "DET",
+        "num": "NUM", "pron": "PRON", "part": "PART", "intj": "INTJ",
+        #: a Chinese classifier has no UPOS of its own; UD Chinese files them
+        #: with nouns and this follows that rather than inventing a category.
+        "msr": "NOUN", "loc": "NOUN",
+        "mark": "PART", "pos": "PART",
+        "ono": "INTJ",
+        #: multiword and foreign strings are not a part of speech
+        "idiom": "X", "fw": "X",
+    },
+    "subtlex_ch": {
+        "n": "NOUN", "nr": "PROPN", "ns": "PROPN", "nt": "PROPN", "nz": "PROPN",
+        "nx": "X", "an": "NOUN", "vn": "NOUN", "t": "NOUN", "s": "NOUN",
+        "f": "NOUN", "q": "NOUN",
+        "v": "VERB", "vd": "ADV", "vg": "VERB",
+        "a": "ADJ", "ad": "ADV", "ag": "ADJ", "b": "ADJ", "z": "ADJ",
+        "d": "ADV", "dg": "ADV",
+        "m": "NUM", "r": "PRON", "p": "ADP", "c": "CCONJ",
+        "u": "PART", "y": "PART", "k": "PART", "h": "PART",
+        "e": "INTJ", "o": "INTJ",
+        "w": "PUNCT",
+        #: `g` is a bound morpheme, not a word. It is X rather than NOUN
+        #: because guessing raises the content-word rate on exactly the
+        #: material the control is meant to exclude.
+        "g": "X", "l": "X", "i": "X", "j": "X",
+        #: the last six of the vocabulary, added after `pos_coverage` named
+        #: them rather than after guessing which existed.
+        "cc": "CCONJ", "mg": "NUM", "mq": "NUM",
+        "qt": "NOUN", "qv": "NOUN", "rg": "PRON", "tg": "NOUN",
+    },
+}
+
+
+def pos_map(tag, scheme):
+    """A source POS tag -> UPOS. -> str or None if the scheme does not know it.
+
+    `scheme` is "upos" (identity), "usas_zh" or "subtlex_ch". An unknown tag
+    returns None and is NEVER silently filed as X: an unmapped tag and a tag
+    genuinely meaning "other" have to stay distinguishable, or the coverage of
+    this mapping becomes invisible.
+    """
+    if tag is None:
+        return None
+    if scheme == "upos":
+        t = str(tag).upper()
+        return t if t.isalpha() else None
+    m = _POS_PIVOT.get(scheme)
+    if m is None:
+        raise MissingSource(
+            "no POS mapping for scheme %r; known: upos, %s"
+            % (scheme, ", ".join(sorted(_POS_PIVOT))))
+    return m.get(str(tag).strip().lower())
+
+
+def pos_coverage(scheme):
+    """{mapped, unmapped, tags} for a scheme against its own source file.
+
+    A mapping nobody has measured is a mapping nobody knows the holes in. This
+    reads the real vocabulary rather than the table above.
+    """
+    if scheme == "usas_zh":
+        seen = collections.Counter()
+        with open(_need("usas_zh"), encoding="utf-8", errors="replace") as fh:
+            next(fh, None)
+            for line in fh:
+                p = line.rstrip("\n").split("\t")
+                if len(p) >= 2:
+                    seen[p[1].strip().lower()] += 1
+    elif scheme == "subtlex_ch":
+        seen = collections.Counter(
+            (v[1] or "").lower() for v in _subtlex("zh").values() if v[1])
+    else:
+        raise MissingSource("pos_coverage: unknown scheme %r" % scheme)
+    mapped = sum(n for t, n in seen.items() if pos_map(t, scheme))
+    total = sum(seen.values())
+    return {"scheme": scheme, "tags": len(seen), "rows": total,
+            "mapped_rows": mapped,
+            "mapped_share": round(mapped / total, 4) if total else 0.0,
+            "unmapped_tags": sorted(t for t in seen if not pos_map(t, scheme))}
+
+
+def is_function_word(word, lang="en", context=None):
+    """Is this word a function word? -> bool or None when unknown.
+
+    THE CONTROL M01 T SECTION 7 NEEDS, and the reason it returns None rather
+    than False when the word is unknown: an unknown word counted as content
+    inflates exactly the group the control is protecting.
+
+    en goes through spaCy (`is_content_word`); zh has no spaCy model, so it
+    goes through SUBTLEX-CH's `Dominant.PoS` mapped to UPOS.
+    """
+    if lang == "en":
+        try:
+            return not is_content_word(word, context, lang)
+        except Exception:
+            return None
+    up = pos_map(dominant_pos(word, "zh"), "subtlex_ch")
+    return None if up is None else up not in CONTENT_POS
+
+
+def contextual_norms(prompt, word=None, instrument=None):
+    """Norms for a word IN ITS FRAME. -> flat dict, mirroring `norms`.
+
+        fields.contextual_norms(prompt, "acknowledge")
+        {'v6_harm': 1, 'v6_aggression': 1, ..., 'n_instruments': 1}
+
+    THE COUNTERPART TO `norms`, AND THE DIFFERENCE IS THE POINT. `norms` gives
+    a word one number everywhere; this gives it a number in one prompt, because
+    the raters saw the frame. `scream` after "She wanted to" and `scream` after
+    "The kettle began to" are the same word and not the same rating.
+
+    Keys are `<instrument>_<scale>` so two instruments rating the same scale
+    stay separable -- they are different constructs with one name, exactly as
+    `norms` keeps `warriner_valence` apart from `k_valence`. Pass `instrument`
+    to restrict.
+
+    With `word=None`, {word: flat dict} for every rated word in the prompt.
+    Returns {} for an unrated pair; check `slot_prompts()` before reading an
+    absence as a zero.
+    """
+    if word is None:
+        return {w: contextual_norms(prompt, w, instrument)
+                for w in slot_ratings(prompt)}
+    byinst = slot_ratings(prompt, word)
+    out = {}
+    used = 0
+    for inst, vals in sorted(byinst.items()):
+        if instrument and inst != instrument:
+            continue
+        used += 1
+        short = inst.replace("slot_rating_en_", "").replace("_slot_en_", "_")
+        for scale, v in sorted(vals.items()):
+            if scale == "ratable":
+                out["%s_ratable" % short] = bool(v)
+                continue
+            out["%s_%s" % (short, scale)] = v
+    out["n_instruments"] = used
+    return out
