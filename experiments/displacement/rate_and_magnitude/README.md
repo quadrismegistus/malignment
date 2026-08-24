@@ -33,13 +33,27 @@ neutral twin. This regresses three outcomes on a CONTINUOUS base-arm
 transgressive level, per lineage, across prompts, unit = the lineage,
 sign test over 50 endpoints from `roster.endpoints()`.
 
-    lang  outcome      n   med slope    up/dn        p
-    en    departed    50   +0.01107    41/ 9     6e-6
-    en    arrived     50   +0.01092    36/14     0.003
-    en    n_movers    50   +1.81360    44/ 6    <1e-6
-    zh    departed    47   -0.01010    10/37     1e-4
-    zh    arrived     47   -0.01882     6/41    <1e-6
-    zh    n_movers    47   +1.13203    31/16     0.040
+    lang  outcome          n   med slope    up/dn        p
+    en    departed        50   +0.01107    41/ 9     6e-6
+    en    arrived         50   +0.01092    36/14     0.003
+    en    n_movers        50   +1.81360    44/ 6    <1e-6
+    en    n_fallers       50   +0.77315    39/11     9e-5
+    en    n_risers        50   +0.86678    44/ 6    <1e-6
+    en    n_fall-n_rise   50   -0.12651    24/26     0.888   NULL
+    en    mass/faller     50   -0.00000    25/25     1.000   NULL
+    en    mass/riser      50   -0.00189    16/34     0.015
+    zh    departed        47   -0.01010    10/37     1e-4
+    zh    arrived         47   -0.01882     6/41    <1e-6
+    zh    n_movers        47   +1.13203    31/16     0.040
+    zh    n_fallers       47   -0.22221    20/27     0.382   NULL
+    zh    n_risers        47   +1.21460    35/12     0.001
+    zh    n_fall-n_rise   47   -1.06453    17/30     0.079
+    zh    mass/faller     46   -0.00167     4/42    <1e-6
+    zh    mass/riser      47   -0.00745     3/44    <1e-6
+
+`n_fallers` / `n_risers` are the RATE SPLIT BY DIRECTION. Not `tail_excess`,
+which asks WHERE the freed mass lands; this asks whether the extra movement at a
+loaded prompt is words LEAVING or words ARRIVING, and what each one carries.
 
 ## ENGLISH CONFIRMS M01'S MAGNITUDE AND BREAKS ITS RATE NULL
 
@@ -67,6 +81,40 @@ concentrates displacement at loaded prompts; Chinese spreads it.
 **Reporting all three outcomes is what makes that legible.** A departed-only
 reading would have called the Chinese result a smaller effect rather than a
 differently-shaped one.
+
+
+
+## SPLITTING THE RATE BY DIRECTION IS WHERE THE TWO LANGUAGES SEPARATE
+
+**ENGLISH: the counts rise TOGETHER and the risers thin out.** `n_fallers`
++0.773 and `n_risers` +0.867 both rise steeply, and their DIFFERENCE is null
+(-0.127, 24 up/26 dn, p=0.888) — symmetric. Meanwhile `mass/faller` is exactly
+null (25/25, p=1.000) while `mass/riser` FALLS (-0.0019, p=0.015).
+
+So at a transgressive English prompt: more words leave and more words arrive, in
+step; **each departing word carries the same mass it always did, and each
+arriving word carries less.** The extra mass is spread over more, smaller
+risers.
+
+**That is "few large fallers, many small risers" as a DOSE EFFECT.** M01 T §14
+found the shape marginally; here the transgressive frame is what produces it —
+fallers hold their size while risers multiply and thin.
+
+**CHINESE: only the arrivals increase, and everything shrinks.** `n_fallers` is
+null (-0.222, p=0.382) while `n_risers` rises (+1.215, p=0.001), and BOTH
+per-word masses fall hard (`mass/faller` -0.0017 at 4 up/42 dn; `mass/riser`
+-0.0075 at 3 up/44 dn, both p<1e-6).
+
+So a loaded Chinese prompt does not recruit more departures at all. The same
+words leave, each carrying less, and the mass they release is scattered across
+more and much smaller arrivals. **Dispersal on both sides of the ledger.**
+
+### WHY THIS IS THE INFORMATIVE CUT
+
+`n_movers` alone said "more words move" in both languages and looked like a
+shared effect. Split by direction it is not shared: English recruits departures
+AND arrivals symmetrically; Chinese recruits only arrivals. The aggregate hid a
+difference in kind.
 
 ## WHAT IS SHARED, AND NOT COPIED
 

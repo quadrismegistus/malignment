@@ -114,13 +114,24 @@ def measure(langs, min_prompts=MIN_PROMPTS):
     rows = ch.query(
         "SELECT base, aligned, prompt, "
         "sumIf(p_base - p_aligned, cls='faller') AS dep, "
-        "sumIf(p_aligned - p_base, cls='riser') AS arr, count() AS nm "
+        "sumIf(p_aligned - p_base, cls='riser') AS arr, count() AS nm, "
+        "countIf(cls='faller') AS nf, countIf(cls='riser') AS nr "
         "FROM movement WHERE cls != 'still' GROUP BY base, aligned, prompt")
     mag = {}
     for r in rows:
         lin = r["base"] + ">" + r["aligned"]
         if lin in EP:
-            mag[(lin, r["prompt"])] = (float(r["dep"]), float(r["arr"]), int(r["nm"]))
+            #: n_fallers and n_risers separately -- the RATE split by
+            #: direction. Not `tail_excess`, which asks WHERE the freed mass
+            #: lands; this asks whether the extra movement at a loaded prompt is
+            #: words LEAVING or words ARRIVING. The two can dissociate: mass can
+            #: depart through few large fallers while arriving across many small
+            #: risers, which is the shape M01 T section 14 named.
+            mag[(lin, r["prompt"])] = (float(r["dep"]), float(r["arr"]),
+                                       int(r["nm"]), int(r["nf"]), int(r["nr"]),
+                                       int(r["nf"]) - int(r["nr"]),
+                                       (float(r["dep"]) / int(r["nf"])) if int(r["nf"]) else None,
+                                       (float(r["arr"]) / int(r["nr"])) if int(r["nr"]) else None)
     dose = {}
     with gzip.open(os.path.join(DATA, "levels_long.csv.gz"), "rt",
                    encoding="utf-8") as fh:
@@ -140,13 +151,15 @@ def measure(langs, min_prompts=MIN_PROMPTS):
     print()
     print("  %-4s %-10s %4s %12s %8s %10s" % ("lang", "outcome", "n", "med slope", "up/dn", "p"))
     for lang in langs:
-        for j, nm in ((0, "departed"), (1, "arrived"), (2, "n_movers")):
+        for j, nm in ((0, "departed"), (1, "arrived"), (2, "n_movers"),
+                      (3, "n_fallers"), (4, "n_risers"), (5, "n_fall-n_rise"),
+                      (6, "mass/faller"), (7, "mass/riser")):
             by = collections.defaultdict(lambda: ([], []))
             for (lin, pr, lg), d in dose.items():
                 if lg != lang:
                     continue
                 m = mag.get((lin, pr))
-                if not m:
+                if not m or m[j] is None:
                     continue
                 by[lin][0].append(d)
                 by[lin][1].append(float(m[j]))
