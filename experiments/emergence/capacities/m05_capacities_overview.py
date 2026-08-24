@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """All capacities on one page, per ladder (RH, 2026-08-14).
 
-    uv run python experiments/emergence/verse_capacity/producers/m05_capacities_overview.py            # both
-    uv run python experiments/emergence/verse_capacity/producers/m05_capacities_overview.py olmo
+    uv run python experiments/emergence/capacities/m05_capacities_overview.py            # both
+    uv run python experiments/emergence/capacities/m05_capacities_overview.py olmo
 
 One line per capacity family across the full ladder, from
 capacities_by_rung.parquet (aggregate_capacities.py) and nothing else.
@@ -28,9 +28,9 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now the
+#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now this
 #: experiment folder, so data/ results/ figures/ sit beside this file.
-ROOT = os.path.abspath(os.path.join(HERE, ".."))
+ROOT = HERE
 os.chdir(ROOT)
 
 import pandas as pd  # noqa: E402

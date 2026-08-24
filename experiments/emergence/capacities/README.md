@@ -1,11 +1,62 @@
 ---
-subject: verse_capacity
+subject: capacities
 status: PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.
 headline: Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
 source: ~/github/malign-logits/meta/M05_emergence (read-only archive)
 ---
 
-# verse_capacity
+# capacities
+
+**M05's checkpoint-ladder capacity battery: what a model can do at each rung,
+and what post-training does to it.** Renamed from `verse_capacity` 2026-08-24 --
+verse is one family of eleven and the old name undersold the folder.
+
+## WHAT IS IN HERE, AND WHICH PARTS ARE WRITTEN UP
+
+`results/capacities_by_rung.parquet` carries **eleven families** over 250
+checkpoints on two ladders:
+
+    capacity_packages      semantic packages       mean_p_target, mean_p_competitor,
+    capacity_reference     facts                   absent_rate -- 250 rungs each
+    capacity_reasoning
+    capacity_discourse
+    poetic
+    sense                  natural_share, 154 rungs (Pythia only)
+    syntax                 strict_licit_share + _haiku, 250 rungs
+    verse_rhymed_1900+     called_pull, null, copy, censored,
+    verse_rhymed_pre-1900  pull_delta_median, frac_positive
+    verse_unrhymed_1900+
+    verse_unrhymed_pre-1900
+
+**Only the verse families are written up below**, because they were the ones with
+no findings document. The others already have theirs, in the archive and NOT yet
+ported:
+
+    findings/E_pythia_capacity.md   packages first, facts after phrases,
+                                    discourse last (Pythia, grade C, one lineage)
+    findings/F_syntax_curve.md      syntax installs as an event, after an
+                                    agrammatical phase, before any capacity, and
+                                    alignment never touches it
+    findings/G_sense_curve.md       sense installs with syntax, no
+                                    colorless-green phase, alignment RAISES
+                                    natural share where it never touched grammar
+
+**And the non-verse families are DATA HERE, NOT A PIPELINE.**
+`aggregate_capacities.py` reads `p` and `absent` out of `data/pythia_curves.parquet`
+and `data/m05_curves.parquet` and averages them -- it aggregates, it does not
+compute. The seven producers that build those quantities from `twp` are still
+archive-only:
+
+    m05_curves.py   m05_pythia_capacity.py   m05_syntax_tags.py
+    m05_licit_run.py   m05_class_mass.py   m05_syntax_curve.py
+    m05_sense_curve.py
+
+So verse regenerates from the live store; the other families are frozen curves
+plus an aggregator. Adding a checkpoint, or wanting the syntax curve on a new
+model, needs those seven. `m05_licit_run.py` calls deepseek and claude-haiku for
+the licit sets, so that one carries a real cost and not just a repoint.
+
+## THE VERSE FAMILIES
 
 **When does a model learn that a line-end is owed a rhyme, and what does
 post-training do to it?**
@@ -120,13 +171,17 @@ local copy.
                      capacities_by_rung.parquet      94K
                      capacity_examples.md            26K
 
-    producers/       verse_capacity.py               writes cells + rungs
+    (top level)      verse_capacity.py               writes cells + rungs
                      aggregate_capacities.py         writes capacities_by_rung
                      m05_capacities_overview.py      writes verse_error_rates
                      m05_capacity_examples.py        writes capacity_examples.md
                      verse_capacity_figs.py          the figures
                      verse_fleet_producer.py         the fleet runner
                      rhyme_pull_pilot.py             `last_word`, imported by it
+                     analyse.py                      the ported read (verse only)
+
+    data/            16 inputs -- manifests, rime vocab, curve parquets,
+                     licit sets, rosters
 
     registration/    plan_verse_fleet.md             the declared design
                      plan_rhyme.md
@@ -137,7 +192,7 @@ local copy.
 statement naming another database), and `from malign_logits import ch` is now
 `from malignment import ch`.
 
-    experiments/emergence/verse_capacity/producers/verse_capacity.py --out DIR
+    experiments/emergence/capacities/verse_capacity.py --out DIR
     ... /aggregate_capacities.py --out FILE
     ... /m05_capacities_overview.py          # figures/
 

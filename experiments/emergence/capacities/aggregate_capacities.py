@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """One tidy per-rung capacity table, for plotting ease (RH, 2026-08-14).
 
-    uv run python experiments/emergence/verse_capacity/producers/aggregate_capacities.py
+    uv run python experiments/emergence/capacities/aggregate_capacities.py
 
 Everything the campaign has measured per pretraining rung, ONE file, ONE
 schema — so a ladder figure is a filter + a groupby, never a re-derivation:
@@ -45,9 +45,9 @@ import os
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now the
+#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now this
 #: experiment folder, so data/ results/ figures/ sit beside this file.
-ROOT = os.path.abspath(os.path.join(HERE, ".."))
+ROOT = HERE
 os.chdir(ROOT)
 
 OUT = "results/capacities_by_rung.parquet"

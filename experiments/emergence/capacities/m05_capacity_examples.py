@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Exhibit document: what the two ladders actually say, prompt by prompt.
 
-    MALIGN_TWP_SOURCE=clickhouse uv run python experiments/emergence/verse_capacity/producers/m05_capacity_examples.py
+    MALIGN_TWP_SOURCE=clickhouse uv run python experiments/emergence/capacities/m05_capacity_examples.py
 
 For two probes per capacity family (reference, reasoning, discourse,
 packages, poetic), print the TOP of the next-word distribution at selected
@@ -21,7 +21,7 @@ os.environ.setdefault("MALIGN_TWP_SOURCE", "clickhouse")
 HERE = os.path.dirname(os.path.abspath(__file__))
 #: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now the
 #: experiment folder, so data/ and results/ sit beside this file.
-ROOT = os.path.abspath(os.path.join(HERE, ".."))
+ROOT = HERE
 sys.path.insert(0, ROOT)
 os.chdir(ROOT)
 

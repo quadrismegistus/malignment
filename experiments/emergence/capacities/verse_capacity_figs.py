@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """Verse capacity figures (registry, plot_*_figs convention).
 
-    uv run python experiments/emergence/verse_capacity/producers/verse_capacity_figs.py            # all
-    uv run python experiments/emergence/verse_capacity/producers/verse_capacity_figs.py vc_olmo    # one
+    uv run python experiments/emergence/capacities/verse_capacity_figs.py            # all
+    uv run python experiments/emergence/capacities/verse_capacity_figs.py vc_olmo    # one
 
 vc_olmo: rhyme capacity across the FULL OLMo-3 ladder (base | SFT | DPO |
 RLVR), colored by era — Victorian-and-earlier (pre-1900) against modern
@@ -22,9 +22,9 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now the
+#: MIGRATED 2026-08-24: ROOT was the archive repo root; it is now this
 #: experiment folder, so data/ results/ figures/ sit beside this file.
-ROOT = os.path.abspath(os.path.join(HERE, ".."))
+ROOT = HERE
 os.chdir(ROOT)
 
 import pandas as pd  # noqa: E402

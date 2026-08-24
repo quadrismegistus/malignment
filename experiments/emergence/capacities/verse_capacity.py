@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Verse capacity, first read: rhyme pull at the declared slots, per rung.
 
-    uv run python experiments/emergence/verse_capacity/producers/verse_capacity.py
+    uv run python experiments/emergence/capacities/verse_capacity.py
 
 Instrument 1 of plan_verse_fleet.md (rhyme pull/floor) plus instrument 8's
 free column (copy vs class), run against the ingested fleet ([5886],
@@ -66,10 +66,10 @@ from malignment import ch as chdb
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-#: MIGRATED 2026-08-24. Was ROOT = HERE/../../.. (the archive's repo root) with
-#: os.chdir(ROOT) and archive-relative paths throughout. ROOT is now the
-#: experiment folder, so data/ and results/ sit beside this file.
-ROOT = os.path.abspath(os.path.join(HERE, ".."))
+#: MIGRATED 2026-08-24. Was ROOT = HERE/../../.. (the archive's repo root)
+#: with archive-relative paths throughout. ROOT is now this experiment folder,
+#: so data/ and results/ sit beside this file.
+ROOT = HERE
 os.chdir(ROOT)
 
 import numpy as np  # noqa: E402
