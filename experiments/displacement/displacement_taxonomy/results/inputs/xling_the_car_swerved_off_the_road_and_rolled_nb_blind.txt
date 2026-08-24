@@ -1,0 +1,971 @@
+Below are 41 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: The car swerved off the road and rolled into the ___
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  river            2 ->   6     -4
+  water            3 ->  11     -8
+  canal            4 ->  20    -16
+  field            6 ->  12     -6
+  lake             7 ->  23    -16
+  sea             11 ->  67    -56
+  bush            12 ->  47    -35
+  side            14 ->  32    -18
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  bushes          10 ->   2     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  lake             2 ->  10     -8
+  canal            3 ->  11     -8
+  shallow          4 ->  12     -8
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  ravine           7 ->  49    -42
+  water            6 ->  19    -13
+  river            5 ->   7     -2
+  field            8 ->  11     -3
+  creek           10 ->  26    -16
+  grass            9 ->  15     -6
+
+HIGHER UNDER B
+  woods            2 ->   2     +0
+  nearby          11 ->   5     +6
+  tree            16 ->   6    +10
+  ditch            1 ->   1     +0
+  bushes           3 ->   3     +0
+  trees            4 ->   4     +0
+  grassy          61 ->  10    +51
+  forest          15 ->   8     +7
+  hedge           23 ->   9    +14
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  road             3 ->  17    -14
+  woods            2 ->   5     -3
+  water            6 ->  14     -8
+  grass            7 ->  13     -6
+  parking         10 ->  41    -31
+  forest          12 ->  20     -8
+  trees           16 ->  36    -20
+  lake            14 ->  31    -17
+  path            11 ->  18     -7
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  side             4 ->   2     +2
+  embankment       8 ->   3     +5
+  median           5 ->   4     +1
+  back             9 ->   6     +3
+  ravine          68 ->   7    +61
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  river            2 ->   7     -5
+  woods            5 ->  19    -14
+  water            4 ->  17    -13
+  ravine           6 ->  14     -8
+  side             7 ->  16     -9
+  bush            16 -> 127   -111
+  grass            3 ->   4     -1
+  street          24 ->  79    -55
+  pond            20 ->  41    -21
+  lake            23 ->  38    -15
+  parking         17 ->  29    -12
+  ground          14 ->  22     -8
+  yard            22 ->  25     -3
+  back             8 ->  10     -2
+
+HIGHER UNDER B
+  median           9 ->   2     +7
+  ditch            1 ->   1     +0
+  embankment      12 ->   3     +9
+  passenger       80 ->  12    +68
+  nearby          13 ->   6     +7
+  center          19 ->   8    +11
+  grassy          10 ->   5     +5
+  fence           28 ->  11    +17
+  path            11 ->   9     +2
+  concrete        18 ->  13     +5
+  opposite        15 ->  15     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  ditch            1 ->   1     +0
+  side             4 ->  15    -11
+  river            2 ->   3     -1
+  water            3 ->   8     -5
+  lake             6 ->  10     -4
+  grass           10 ->  70    -60
+  pond            11 ->  86    -75
+  canal            9 ->  40    -31
+
+HIGHER UNDER B
+  woods            5 ->   2     +3
+  field           14 ->   4    +10
+  forest          18 ->   6    +12
+  nearby          21 ->   9    +12
+  bushes          12 ->   7     +5
+  brush           69 ->  13    +56
+  creek            7 ->   5     +2
+  thick           89 ->  18    +71
+  drainage        17 ->  11     +6
+  nearest         28 ->  19     +9
+  embankment      22 ->  17     +5
+  stream          15 ->  14     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  woods            2 ->   5     -3
+  river            4 ->   7     -3
+  trees            5 ->  11     -6
+  creek            6 ->  13     -7
+  lake             7 ->  14     -7
+  water           12 ->  59    -47
+  pond            11 ->  44    -33
+  grass           14 ->  65    -51
+  canal           16 ->  43    -27
+  brush           13 ->  15     -2
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  nearby           8 ->   2     +6
+  field            9 ->   4     +5
+  forest          18 ->   6    +12
+  dense           81 ->   8    +73
+  bushes           3 ->   3     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  ravine           3 ->  50    -47
+  lake             7 ->  27    -20
+  river            9 ->  35    -26
+  woods            5 ->  10     -5
+  field            2 ->   2     +0
+  side            11 ->  15     -4
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  tree             6 ->   4     +2
+  fence           10 ->   5     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  river            2 ->  10     -8
+  water            5 ->  20    -15
+  canal            6 ->  17    -11
+  ravine           7 ->  13     -6
+  creek           11 ->  24    -13
+  bush             9 ->  16     -7
+  bushes           8 ->   9     -1
+  grass           12 ->  19     -7
+  woods            4 ->   4     +0
+
+HIGHER UNDER B
+  nearby          16 ->   2    +14
+  ditch            1 ->   1     +0
+  adjacent        34 ->   5    +29
+  parking         31 ->   6    +25
+  field            3 ->   3     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  ditch            1 ->   1     +0
+  river            2 ->   4     -2
+  ravine           5 ->   9     -4
+  creek            7 ->  20    -13
+  canal            8 ->  18    -10
+  water            4 ->   6     -2
+  bushes          10 ->  13     -3
+  field            6 ->   8     -2
+
+HIGHER UNDER B
+  nearby          18 ->   3    +15
+  woods            3 ->   2     +1
+  trees           11 ->   5     +6
+  lake             9 ->   7     +2
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  trees            4 ->  11     -7
+  ravine           5 ->  14     -9
+  river            2 ->   3     -1
+  tree             7 ->  23    -16
+  creek            9 ->  17     -8
+  pond            13 ->  60    -47
+  fence           10 ->  20    -10
+  bush            14 ->  54    -40
+
+HIGHER UNDER B
+  side            30 ->   4    +26
+  ditch            1 ->   1     +0
+  street          34 ->   8    +26
+  curb            62 ->  12    +50
+  yard            43 ->  13    +30
+  grass           17 ->  10     +7
+  water           12 ->   6     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  side             2 ->  18    -16
+  ditch            1 ->   3     -2
+  middle           5 ->  12     -7
+  road             3 ->   6     -3
+  water            9 ->  24    -15
+  lake            10 ->  19     -9
+  median          13 -> 105    -92
+  intersection    14 ->  35    -21
+  pond            16 ->  31    -15
+  path            15 ->  30    -15
+  ocean           17 ->  29    -12
+  grass            6 ->   8     -2
+  center          11 ->  11     +0
+
+HIGHER UNDER B
+  parking          8 ->   1     +7
+  woods           12 ->   4     +8
+  street           4 ->   2     +2
+  gutter          23 ->   7    +16
+  river            7 ->   5     +2
+  forest          45 ->   9    +36
+  driveway        21 ->  10    +11
+  left           105 ->  16    +89
+  lane            56 ->  13    +43
+  opposite        42 ->  14    +28
+  park            55 ->  15    +40
+  adjacent        69 ->  17    +52
+  ditchfield     133 ->  20   +113
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  river            2 ->   6     -4
+  water            3 ->   4     -1
+  ravine           4 ->  20    -16
+  woods            5 ->   7     -2
+  sea              6 ->  27    -21
+  bush             7 ->  18    -11
+  lake             8 ->  44    -36
+  creek           10 ->  37    -27
+  canal           16 ->  39    -23
+  bushes           9 ->  10     -1
+  forest          14 ->  17     -3
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  dirt            43 ->   5    +38
+  grass           12 ->   2    +10
+  field           11 ->   3     +8
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  woods            1 ->   4     -3
+  side             4 ->  61    -57
+  next             9 ->  79    -70
+  trees            7 ->  15     -8
+  bank            10 ->  33    -23
+  water            5 ->   8     -3
+  pond            13 ->  16     -3
+  creek            6 ->   7     -1
+  yard            17 ->  96    -79
+  ocean           14 ->  45    -31
+  stream          18 ->  41    -23
+  brush           15 ->  25    -10
+
+HIGHER UNDER B
+  ditch            3 ->   1     +2
+  bushes          16 ->   2    +14
+  nearby           8 ->   5     +3
+  bush            38 ->   6    +32
+  canal           36 ->  12    +24
+  mud             22 ->  11    +11
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  river            2 ->   8     -6
+  woods            3 ->   3     +0
+  ravine           4 ->   5     -1
+  water            5 ->  23    -18
+  forest           6 ->   6     +0
+  trees            9 ->  21    -12
+  creek           10 ->  11     -1
+  lake            12 ->  13     -1
+  grass           13 ->  18     -5
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  nearby           8 ->   2     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  river            3 ->  20    -17
+  ditch            1 ->   1     +0
+  water            4 ->  41    -37
+  creek            5 ->  25    -20
+  air              7 ->  63    -56
+  trees            6 ->  21    -15
+  side             8 ->  76    -68
+  lake            10 ->  28    -18
+  A               12 ->  81    -69
+  ravine          13 ->  62    -49
+  tree            14 ->  69    -55
+  field           11 ->  18     -7
+
+HIGHER UNDER B
+  bushes           9 ->   2     +7
+  brush           19 ->   4    +15
+  thicket         28 ->   5    +23
+  frozen          42 ->   7    +35
+  grass           22 ->   6    +16
+  gravel          49 ->   8    +41
+  soft            72 ->   9    +63
+  weeds           50 ->  10    +40
+  dirt            31 ->  11    +20
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  river            2 ->   5     -3
+  canal            5 ->  55    -50
+  median           8 ->  15     -7
+  sea             11 ->  28    -17
+  nearby          13 ->  42    -29
+  side            12 ->  31    -19
+  bushes          15 ->  39    -24
+  field           17 ->  63    -46
+  ravine          14 ->  14     +0
+  creek            6 ->   7     -1
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  water            3 ->   2     +1
+  ocean           10 ->   4     +6
+  woods            4 ->   3     +1
+  soft           112 ->  10   +102
+  Hudson          16 ->   9     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  ditch            1 ->   1     +0
+  creek            6 ->  10     -4
+  air             12 ->  73    -61
+  ravine           3 ->   5     -2
+  trees           10 ->  11     -1
+  water            5 ->   7     -2
+  field            4 ->   6     -2
+  lake             8 ->   8     +0
+
+HIGHER UNDER B
+  bushes           9 ->   4     +5
+  river            2 ->   2     +0
+  woods            7 ->   3     +4
+  shallow         28 ->  12    +16
+  bush            30 ->  13    +17
+  forest          11 ->   9     +2
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  ditch            1 ->   3     -2
+  field            3 ->  43    -40
+  woods            2 ->   6     -4
+  river            5 ->  28    -23
+  water            6 ->  66    -60
+  grass            9 ->  32    -23
+  side            10 ->  55    -45
+  air             11 ->  20     -9
+  bush            13 ->  24    -11
+  front           15 ->  98    -83
+  embankment      12 ->  12     +0
+
+HIGHER UNDER B
+  gully           40 ->   1    +39
+  bushes           7 ->   2     +5
+  forest          14 ->   5     +9
+  trees            4 ->   4     +0
+  dry             47 ->   9    +38
+  median          16 ->   7     +9
+  brush           39 ->  10    +29
+  drainage        35 ->  11    +24
+  ravine           8 ->   8     +0
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  parking          2 ->   5     -3
+  street           3 ->   6     -3
+  back            10 ->  44    -34
+  woods            5 ->  11     -6
+  road            15 ->  36    -21
+  house            8 ->  18    -10
+  trees           16 ->  23     -7
+  middle          11 ->  16     -5
+  garage          13 ->  15     -2
+  yard            17 ->  30    -13
+  river            7 ->  10     -3
+  alley           21 ->  31    -10
+  creek           19 ->  26     -7
+  water            6 ->   7     -1
+  tree            18 ->  20     -2
+  center          22 ->  24     -2
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  median          24 ->   3    +21
+  lake             9 ->   2     +7
+  nearby          42 ->  12    +30
+  weeds           45 ->  17    +28
+  mud             67 ->  19    +48
+  bushes          14 ->   8     +6
+  canyon          63 ->  22    +41
+  side             4 ->   4     +0
+  grass           23 ->  14     +9
+  driveway        12 ->   9     +3
+  field           20 ->  13     +7
+  gas             26 ->  21     +5
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  ditch            1 ->   1     +0
+  ravine           6 ->  12     -6
+  bushes           5 ->   7     -2
+  shallow         12 ->  16     -4
+  canal            7 ->  11     -4
+  grass           13 ->  21     -8
+  deep            14 ->  20     -6
+  median          15 ->  19     -4
+  brush           16 ->  18     -2
+
+HIGHER UNDER B
+  water            3 ->   2     +1
+  nearby          17 ->   5    +12
+  woods            4 ->   3     +1
+  lake             9 ->   6     +3
+  field           11 ->   8     +3
+  creek           10 ->   9     +1
+  pond            21 ->  13     +8
+  ocean           24 ->  14    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  water            7 ->  18    -11
+  trees            6 ->  12     -6
+  brush           10 ->  23    -13
+  ravine          14 -> 124   -110
+  bushes           3 ->   5     -2
+  lake            11 ->  20     -9
+  side            12 ->  21     -9
+  canal           15 ->  42    -27
+  middle          18 ->  33    -15
+  embankment      13 ->  15     -2
+  mud             16 ->  16     +0
+
+HIGHER UNDER B
+  field            4 ->   2     +2
+  cornfield       25 ->   7    +18
+  nearby           9 ->   6     +3
+  river            5 ->   4     +1
+  grassy          19 ->   9    +10
+  median          29 ->  11    +18
+  underbrush      68 ->  13    +55
+  forest          17 ->  10     +7
+  grass            8 ->   8     +0
+  ditch            1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  sea             10 ->  25    -15
+  median           7 ->   9     -2
+  bush            14 ->  44    -30
+  grass            4 ->   6     -2
+  front           15 ->  43    -28
+  side            13 ->  14     -1
+  field           12 ->  13     -1
+  water           11 ->  12     -1
+  embankment       5 ->   7     -2
+  yard            19 ->  38    -19
+  middle          16 ->  23     -7
+  trees           18 ->  18     +0
+  river            3 ->   4     -1
+  canal            8 ->   8     +0
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  nearby           9 ->   3     +6
+  woods            2 ->   2     +0
+  ravine          37 ->  10    +27
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  ditch            1 ->   4     -3
+  air             13 ->  18     -5
+  lake            16 ->  21     -5
+  canal           11 ->  14     -3
+  ravine           6 ->  10     -4
+  field            7 ->  11     -4
+
+HIGHER UNDER B
+  woods            3 ->   1     +2
+  trees            5 ->   2     +3
+  bushes           9 ->   5     +4
+  median           8 ->   7     +1
+  side            12 ->   9     +3
+  water           10 ->   8     +2
+  nearby          15 ->  12     +3
+  tree            14 ->  13     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  field            4 ->   4     +0
+  grass            6 ->   9     -3
+  ravine          10 ->  10     +0
+  bushes           5 ->   6     -1
+  river           11 ->  11     +0
+  forest           7 ->   7     +0
+  trees            3 ->   3     +0
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  woods            2 ->   2     +0
+  nearby           8 ->   5     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  grass            7 ->   8     -1
+  bushes           8 ->   9     -1
+  bush            12 ->  13     -1
+  water            3 ->   3     +0
+  trees            6 ->   7     -1
+  side            11 ->  11     +0
+  canal           10 ->  10     +0
+
+HIGHER UNDER B
+  river            2 ->   2     +0
+  ditch            1 ->   1     +0
+  ravine           4 ->   4     +0
+  woods            5 ->   5     +0
+  lake             9 ->   6     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  ditch            1 ->   1     +0
+  side            12 ->  17     -5
+  undergrowth      9 ->  16     -7
+  grass            8 ->  10     -2
+
+HIGHER UNDER B
+  bushes           4 ->   2     +2
+  trees            6 ->   4     +2
+  woods            7 ->   7     +0
+  underbrush      45 ->   8    +37
+  brush           28 ->  12    +16
+  ravine          14 ->   9     +5
+  shallow         20 ->  13     +7
+  soft            15 ->  15     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  woods            2 ->   3     -1
+  trees            3 ->   4     -1
+  brush           11 ->  11     +0
+  creek            7 ->   8     -1
+  ravine           5 ->   5     +0
+  field           12 ->  12     +0
+  water            6 ->   6     +0
+  bushes          10 ->  10     +0
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  river            4 ->   2     +2
+  lake             9 ->   7     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  ditch            1 ->   1     +0
+  water            2 ->   8     -6
+  ravine           6 ->  15     -9
+  field            7 ->  18    -11
+  river            3 ->   6     -3
+  trees            9 ->  21    -12
+  bushes          11 ->  28    -17
+  air             12 ->  22    -10
+  grass           13 ->  24    -11
+  lake            10 ->  12     -2
+
+HIGHER UNDER B
+  side            15 ->   2    +13
+  middle          21 ->   3    +18
+  path            55 ->   5    +50
+  garden          86 ->  11    +75
+  yard            42 ->  10    +32
+  center          45 ->  13    +32
+  centre          83 ->  20    +63
+  median          23 ->  14     +9
+  sea             19 ->  16     +3
+  nearby          18 ->  17     +1
+  pond            24 ->  19     +5
+  canal            4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  ditch            1 ->   1     +0
+  grass            4 ->  12     -8
+  brush           11 ->  26    -15
+  trees            3 ->   6     -3
+
+HIGHER UNDER B
+  ravine           7 ->   3     +4
+  woods            2 ->   2     +0
+  river            8 ->   5     +3
+  water            9 ->   7     +2
+  nearby          32 ->   9    +23
+  field            5 ->   4     +1
+  lake            12 ->  11     +1
+  forest          10 ->  10     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  ditch            1 ->   2     -1
+  bushes           5 ->   9     -4
+  field            7 ->  11     -4
+  lake             6 ->  10     -4
+  bush            10 ->  39    -29
+  woods            4 ->   5     -1
+  creek            9 ->  18     -9
+  trees            8 ->   8     +0
+  canal           12 ->  14     -2
+
+HIGHER UNDER B
+  ravine           3 ->   1     +2
+  canyon          21 ->   4    +17
+  forest          13 ->   6     +7
+  water           11 ->   7     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  side             7 ->  10     -3
+  field            5 ->   6     -1
+  bottom          12 ->  40    -28
+  river            3 ->   4     -1
+  ravine           8 ->  14     -6
+  creek            9 ->  13     -4
+
+HIGHER UNDER B
+  trees            4 ->   2     +2
+  ditch            1 ->   1     +0
+  lake            18 ->   8    +10
+  bushes          10 ->   7     +3
+  nearby          17 ->   9     +8
+  tree            19 ->  12     +7
+  brush           11 ->  11     +0
+  water            6 ->   5     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  water            3 ->   9     -6
+  pond             8 ->  27    -19
+  trees            4 ->   6     -2
+  creek            6 ->  12     -6
+  canal           11 ->  26    -15
+  median          10 ->  16     -6
+  yard            14 ->  31    -17
+  front           17 ->  45    -28
+  back            18 ->  66    -48
+  side            13 ->  25    -12
+  tree            16 ->  22     -6
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  woods            2 ->   2     +0
+  nearby          38 ->   5    +33
+  field           30 ->   8    +22
+  bushes           9 ->   4     +5
+  forest          22 ->  11    +11
+  river            5 ->   3     +2
+  grassy          45 ->  14    +31
+  grass           15 ->  10     +5
+  lake             7 ->   7     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  ditch            1 ->   3     -2
+  woods            2 ->  48    -46
+  trees            4 ->  18    -14
+  bushes           5 ->  13     -8
+  side             9 ->  66    -57
+  grass            8 ->  25    -17
+  forest          10 ->  72    -62
+  bush            11 ->  95    -84
+  water            7 ->  10     -3
+  sea             13 ->  19     -6
+  nearby          14 ->  16     -2
+
+HIGHER UNDER B
+  river            3 ->   1     +2
+  canal           12 ->   2    +10
+  creek           18 ->   4    +14
+  ravine          15 ->   5    +10
+  riverbank       66 ->   7    +59
+  pond            25 ->   8    +17
+  lake            16 ->   9     +7
+  ocean           38 ->  11    +27
+  mud             17 ->  12     +5
+  field            6 ->   6     +0
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  river            4 ->  18    -14
+  ravine           3 ->   6     -3
+  water            8 ->  35    -27
+  side            10 ->  24    -14
+  bushes           7 ->   7     +0
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  woods            2 ->   2     +0
+  nearby          51 ->   5    +46
+  field            6 ->   3     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  bushes           2 ->   8     -6
+  median           7 ->  18    -11
+  side             8 ->  12     -4
+  middle          12 ->  41    -29
+  water            6 ->  10     -4
+  mud             11 ->  16     -5
+  woods            3 ->   4     -1
+  trees           10 ->  13     -3
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  hedge           28 ->   6    +22
+  river            4 ->   2     +2
+  nearby          13 ->   5     +8
+  field           25 ->   9    +16
+  lake             5 ->   3     +2
+  guardrail       14 ->  11     +3
+  canal            9 ->   7     +2
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  water            4 ->  10     -6
+  lake            10 ->  22    -12
+  canal            6 ->  12     -6
+  bush            12 ->  24    -12
+  woods            2 ->   2     +0
+  air             16 ->  29    -13
+  side            13 ->  25    -12
+  tree            14 ->  17     -3
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  thicket         66 ->   7    +59
+  ravine           7 ->   5     +2
+  creek            5 ->   4     +1
+  gulley         128 ->  15   +113
+  nearby          15 ->   9     +6
+  dense          131 ->  16   +115
+  forest          23 ->  13    +10
+  river            3 ->   3     +0
+  deep            19 ->  14     +5
+  gully           11 ->  11     +0
+  bushes           9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  ditch            1 ->   2     -1
+  water            4 ->  11     -7
+  woods            3 ->   4     -1
+  side            13 ->  24    -11
+  median          14 ->  20     -6
+  creek            5 ->   6     -1
+  pond             8 ->  10     -2
+  bushes          12 ->  12     +0
+
+HIGHER UNDER B
+  river            2 ->   1     +1
+  ravine          11 ->   3     +8
+  lake             6 ->   5     +1
+  trees           10 ->   8     +2
+  canal            7 ->   7     +0
+  field            9 ->   9     +0
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  trees            5 ->   8     -3
+  side             7 ->  11     -4
+  ditch            1 ->   1     +0
+  bush            15 ->  26    -11
+  bushes          12 ->  16     -4
+  creek           11 ->  15     -4
+  yard            14 ->  18     -4
+  woods            4 ->   6     -2
+  tree            13 ->  14     -1
+  field            9 ->   9     +0
+  sea             16 ->  19     -3
+
+HIGHER UNDER B
+  river            3 ->   2     +1
+  lake            10 ->   4     +6
+  dirt            18 ->  10     +8
+  ravine           6 ->   5     +1
+  ocean           20 ->  12     +8
+  canal           17 ->  13     +4
+  pond            21 ->  17     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  river            2 ->   4     -2
+  creek            4 ->  10     -6
+  water            5 ->   8     -3
+  canal           11 ->  19     -8
+  side             9 ->  11     -2
+  icy             14 ->  35    -21
+  middle          13 ->  26    -13
+  deep            10 ->  12     -2
+  pond            15 ->  17     -2
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  woods            3 ->   2     +1
+  ravine           7 ->   3     +4
+  forest          27 ->   9    +18
+  field           12 ->   7     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  water            3 ->   7     -4
+  river            2 ->   4     -2
+  canal            7 ->  25    -18
+  sea              8 ->  14     -6
+  lake            12 ->  29    -17
+  creek           13 ->  38    -25
+  ocean           17 ->  36    -19
+  grass           14 ->  22     -8
+  pond            15 ->  17     -2
+
+HIGHER UNDER B
+  ditch            1 ->   1     +0
+  side             5 ->   2     +3
+  nearby          21 ->   9    +12
+  forest          10 ->   6     +4
+  house           40 ->  11    +29
+  bushes           6 ->   5     +1
+  ravine           9 ->   8     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 41 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

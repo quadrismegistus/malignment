@@ -153,5 +153,6 @@
  "model": "sonnet",
  "effort": "xhigh",
  "path": "/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/inputs/xling_my_insurance_company_is_refusing_to_pay_blind.txt",
- "version": "x1b"
+ "version": "x1b",
+ "raters": 2
 }

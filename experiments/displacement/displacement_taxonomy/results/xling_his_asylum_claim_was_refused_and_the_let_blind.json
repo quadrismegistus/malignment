@@ -162,5 +162,6 @@
  "model": "sonnet",
  "effort": "xhigh",
  "path": "/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/inputs/xling_his_asylum_claim_was_refused_and_the_let_blind.txt",
- "version": "x1b"
+ "version": "x1b",
+ "raters": 2
 }

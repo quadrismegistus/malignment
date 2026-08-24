@@ -1,0 +1,852 @@
+Below are 38 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: The house was on fire and she needed to ___
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  save             3 ->   7     -4
+  go               4 ->  14    -10
+  put              7 ->  10     -3
+  rescue           8 ->  16     -8
+  call             9 ->  12     -3
+  run             13 ->  30    -17
+  leave            5 ->   5     +0
+  find            11 ->  13     -2
+  escape           2 ->   2     +0
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  evacuate         6 ->   3     +3
+  know            12 ->   4     +8
+  act             22 ->   6    +16
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  make             3 ->  16    -13
+  know             4 ->  14    -10
+  call             2 ->   2     +0
+  rescue           5 ->   6     -1
+  act              6 ->  23    -17
+  decide          10 ->  43    -33
+  find             7 ->  11     -4
+  phone           11 ->  31    -20
+  choose          13 ->  44    -31
+  let              9 ->  12     -3
+  alert            8 ->   9     -1
+  run             15 ->  18     -3
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  put             23 ->   3    +20
+  save            16 ->   4    +12
+  leave           26 ->   7    +19
+  escape          14 ->   5     +9
+  go              17 ->   8     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  go               6 ->  13     -7
+  save             2 ->   8     -6
+  leave            9 ->  11     -2
+  know            13 ->  16     -3
+  act             15 ->  19     -4
+  let             16 ->  17     -1
+
+HIGHER UNDER B
+  evacuate         8 ->   2     +6
+  call            11 ->   6     +5
+  escape           4 ->   3     +1
+  put              5 ->   5     +0
+  find             7 ->   7     +0
+  rescue          10 ->   9     +1
+  make            12 ->  10     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  be               2 ->   3     -1
+  get              1 ->   1     +0
+  evacuate         3 ->   5     -2
+  save             9 ->  13     -4
+  stay            15 ->  30    -15
+  flee            11 ->  12     -1
+  put             16 ->  20     -4
+  move             8 ->  10     -2
+  call            14 ->  15     -1
+
+HIGHER UNDER B
+  go               5 ->   2     +3
+  escape           6 ->   4     +2
+  leave            7 ->   6     +1
+  know            13 ->   8     +5
+  run             12 ->  11     +1
+  make            10 ->   9     +1
+  take            17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  go               2 ->   6     -4
+  be               6 ->   9     -3
+  leave            4 ->   5     -1
+  get              1 ->   1     +0
+  move            12 ->  15     -3
+  take             9 ->  12     -3
+  use             15 ->  19     -4
+  make            10 ->  10     +0
+  run             11 ->  11     +0
+
+HIGHER UNDER B
+  escape           3 ->   2     +1
+  evacuate         5 ->   3     +2
+  find             7 ->   4     +3
+  flee            13 ->   7     +6
+  call             8 ->   8     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  go               4 ->  10     -6
+  be               8 ->  37    -29
+  leave            6 ->  17    -11
+  rescue          10 ->  26    -16
+  help             7 ->  11     -4
+  run              9 ->  14     -5
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  save             2 ->   2     +0
+  act             14 ->   6     +8
+  move            13 ->   5     +8
+  protect         16 ->   7     +9
+  grab            25 ->  12    +13
+  call            11 ->   8     +3
+  make            12 ->   9     +3
+  evacuate        19 ->  13     +6
+  escape           3 ->   3     +0
+  find             5 ->   4     +1
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  save             2 ->   4     -2
+  escape           3 ->   3     +0
+  find             4 ->   5     -1
+  be               6 ->  10     -4
+  run              7 ->  15     -8
+  go               8 ->  12     -4
+  call             9 ->   9     +0
+  make            13 ->  13     +0
+  put             14 ->  20     -6
+  know            11 ->  11     +0
+  do              15 ->  26    -11
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  act              5 ->   2     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  escape           2 ->   2     +0
+  save             9 ->  12     -3
+  know            14 ->  23     -9
+  take            12 ->  19     -7
+  call             8 ->   9     -1
+
+HIGHER UNDER B
+  leave            3 ->   3     +0
+  run              5 ->   4     +1
+  go               7 ->   7     +0
+  be               6 ->   6     +0
+  quickly         28 ->  14    +14
+  help            17 ->  11     +6
+  move            10 ->   8     +2
+  come            21 ->  16     +5
+  flee            16 ->  15     +1
+  make            13 ->  13     +0
+  put             11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  get              1 ->   3     -2
+  escape           2 ->  14    -12
+  be               4 ->   8     -4
+  save             8 ->  27    -19
+  run             11 ->  24    -13
+  put             14 ->  47    -33
+  stay            13 ->  18     -5
+
+HIGHER UNDER B
+  leave            3 ->   1     +2
+  evacuate         7 ->   2     +5
+  move             9 ->   5     +4
+  take            12 ->   7     +5
+  find             5 ->   4     +1
+  quickly         18 ->   9     +9
+  cross          105 ->  12    +93
+  call            15 ->  11     +4
+  return          32 ->  13    +19
+  reach           30 ->  15    +15
+  make            10 ->  10     +0
+  go               6 ->   6     +0
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  save             3 ->   7     -4
+  be               9 ->  14     -5
+  go               7 ->   8     -1
+  put             10 ->  25    -15
+  do              11 ->  15     -4
+  find             5 ->   6     -1
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  act              8 ->   4     +4
+  leave            4 ->   3     +1
+  run              6 ->   5     +1
+  escape           2 ->   2     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  save             3 ->   9     -6
+  be               4 ->  10     -6
+  go               5 ->  16    -11
+  know             8 ->  32    -24
+  call             9 ->  12     -3
+  do              10 ->  25    -15
+  run             11 ->  17     -6
+  make            13 ->  15     -2
+  put             14 ->  18     -4
+
+HIGHER UNDER B
+  leave            6 ->   3     +3
+  escape           2 ->   2     +0
+  act             25 ->   5    +20
+  evacuate        12 ->   4     +8
+  flee            16 ->   7     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  be               2 ->   7     -5
+  go               6 ->  12     -6
+  find             7 ->  20    -13
+  put              9 ->  18     -9
+  save             4 ->   6     -2
+  run              8 ->   9     -1
+  help            12 ->  31    -19
+  rescue          14 ->  19     -5
+  do              13 ->  14     -1
+  call            15 ->  17     -2
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  act             10 ->   3     +7
+  escape           3 ->   2     +1
+  make            11 ->   5     +6
+  leave            5 ->   4     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  escape           2 ->   5     -3
+  call             4 ->  16    -12
+  leave            6 ->  10     -4
+  go               7 ->  25    -18
+  evacuate         3 ->   3     +0
+  be               8 ->  32    -24
+  find             9 ->  35    -26
+  act             10 ->  36    -26
+  run             13 ->  26    -13
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  save             5 ->   2     +3
+  rescue          12 ->   4     +8
+  grab            25 ->   6    +19
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  get              1 ->   4     -3
+  find             4 ->   8     -4
+  leave            6 ->  24    -18
+  wake            10 ->  57    -47
+  go               9 ->  25    -16
+  rescue           7 ->  16     -9
+  run             11 ->  15     -4
+  put             13 ->  22     -9
+  flee            16 ->  18     -2
+
+HIGHER UNDER B
+  call             5 ->   3     +2
+  save             3 ->   2     +1
+  escape           2 ->   1     +1
+  retrieve        31 ->   5    +26
+  alert           37 ->   6    +31
+  check           29 ->  10    +19
+  grab             8 ->   7     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  find             7 ->  10     -3
+  run              5 ->   7     -2
+  flee            12 ->  23    -11
+  evacuate         9 ->  14     -5
+  help            14 ->  18     -4
+  be               3 ->   5     -2
+  make            13 ->  15     -2
+  escape           2 ->   3     -1
+  go               8 ->   9     -1
+  put             11 ->  12     -1
+
+HIGHER UNDER B
+  call            10 ->   2     +8
+  A               57 ->  11    +46
+  act             16 ->   8     +8
+  save             4 ->   4     +0
+  do              15 ->  13     +2
+  leave            6 ->   6     +0
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  go               2 ->   3     -1
+  find             3 ->  11     -8
+  escape           4 ->   6     -2
+  save             5 ->   9     -4
+  leave            6 ->  12     -6
+  make             8 ->  14     -6
+  be               9 ->  50    -41
+  run             10 ->  19     -9
+  move            12 ->  13     -1
+  do              13 ->  25    -12
+  see             14 ->  41    -27
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  go               3 ->   6     -3
+  be               2 ->   3     -1
+  run              5 ->   9     -4
+  leave            6 ->  10     -4
+  take            12 ->  20     -8
+  know            14 ->  17     -3
+  keep            11 ->  13     -2
+  move            13 ->  14     -1
+
+HIGHER UNDER B
+  escape           4 ->   2     +2
+  get              1 ->   1     +0
+  stay            10 ->   7     +3
+  save             7 ->   4     +3
+  put             15 ->  11     +4
+  evacuate        22 ->  12    +10
+  find             8 ->   5     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  escape           3 ->   5     -2
+  find             4 ->   9     -5
+  be               5 ->  36    -31
+  put              6 ->  16    -10
+  go               7 ->  27    -20
+  run              9 ->  18     -9
+  stop            11 ->  28    -17
+  call            12 ->  31    -19
+  make            13 ->  22     -9
+  leave            8 ->  10     -2
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  rescue          10 ->   3     +7
+  evacuate        14 ->   4    +10
+  grab            28 ->   6    +22
+  save             2 ->   2     +0
+  wake            16 ->   7     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  go               4 ->  13     -9
+  run              8 ->  17     -9
+  leave            6 ->   8     -2
+  know            13 ->  19     -6
+  put             12 ->  15     -3
+  take            14 ->  18     -4
+  help            10 ->  12     -2
+
+HIGHER UNDER B
+  escape           5 ->   3     +2
+  make             9 ->   5     +4
+  be               2 ->   2     +0
+  evacuate        17 ->   7    +10
+  act             18 ->   9     +9
+  rescue          22 ->  11    +11
+  find             7 ->   6     +1
+  call            11 ->  10     +1
+  move            15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  go               2 ->  10     -8
+  be               4 ->  12     -8
+  leave            3 ->   6     -3
+  know            13 ->  21     -8
+  call             8 ->  11     -3
+  do              14 ->  15     -1
+  evacuate        12 ->  14     -2
+
+HIGHER UNDER B
+  save             7 ->   2     +5
+  act             19 ->   5    +14
+  escape           6 ->   3     +3
+  find             5 ->   4     +1
+  rescue          21 ->   8    +13
+  help            10 ->   9     +1
+  make             9 ->   7     +2
+  get              1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  be               3 ->   5     -2
+  go               4 ->   7     -3
+  help            11 ->  15     -4
+  put              7 ->  10     -3
+  run             12 ->  14     -2
+  come            13 ->  19     -6
+  call             8 ->   9     -1
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  leave            2 ->   2     +0
+  escape           6 ->   3     +3
+  find             9 ->   6     +3
+  save             5 ->   4     +1
+  evacuate        10 ->   8     +2
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  save             3 ->   3     +0
+  escape           2 ->   2     +0
+  put              9 ->   9     +0
+  rescue           5 ->   6     -1
+  find             7 ->   8     -1
+  go              12 ->  12     +0
+  run             11 ->  11     +0
+  be              10 ->  10     +0
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  act              4 ->   4     +0
+  leave            6 ->   5     +1
+  call             8 ->   7     +1
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  go               3 ->   3     +0
+  be               8 ->   8     +0
+  find             5 ->   5     +0
+  leave            4 ->   4     +0
+  save             2 ->   2     +0
+  run              7 ->   7     +0
+  move            12 ->  14     -2
+  put              9 ->   9     +0
+  escape           6 ->   6     +0
+  make            10 ->  11     -1
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  evacuate        13 ->  12     +1
+  call            11 ->  10     +1
+  help            14 ->  13     +1
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  save             2 ->   6     -4
+  be               3 ->   4     -1
+  go               4 ->   7     -3
+  find             6 ->   9     -3
+  do              11 ->  17     -6
+  make            12 ->  12     +0
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  call             5 ->   2     +3
+  escape           8 ->   3     +5
+  leave            7 ->   5     +2
+  help            10 ->  10     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  find             4 ->   8     -4
+  know            11 ->  11     +0
+  be               5 ->   6     -1
+  put              7 ->   7     +0
+  make            12 ->  12     +0
+
+HIGHER UNDER B
+  save             3 ->   3     +0
+  escape           6 ->   4     +2
+  help            10 ->   9     +1
+  leave            8 ->   5     +3
+  go               2 ->   2     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  save             2 ->   2     +0
+  get              1 ->   1     +0
+  go               6 ->  12     -6
+  put              8 ->  13     -5
+  run             12 ->  19     -7
+  do              14 ->  26    -12
+  grab            16 ->  23     -7
+  help            15 ->  21     -6
+  be               7 ->   8     -1
+  call            10 ->  11     -1
+
+HIGHER UNDER B
+  find             5 ->   3     +2
+  think           27 ->   6    +21
+  figure          43 ->  15    +28
+  hurry           21 ->  14     +7
+  reach           26 ->  16    +10
+  make            11 ->   9     +2
+  know            13 ->  10     +3
+  leave            9 ->   7     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  go               6 ->  14     -8
+  be               9 ->  15     -6
+  save             2 ->   4     -2
+  put              7 ->  11     -4
+  run             11 ->  12     -1
+  do              13 ->  19     -6
+
+HIGHER UNDER B
+  escape           3 ->   2     +1
+  evacuate        18 ->   7    +11
+  act             15 ->   6     +9
+  call             8 ->   5     +3
+  find             4 ->   3     +1
+  make            12 ->  10     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  be               4 ->   7     -3
+  escape           2 ->   4     -2
+  find             5 ->   6     -1
+  evacuate         9 ->  12     -3
+  run             11 ->  16     -5
+  flee            12 ->  17     -5
+  make            13 ->  14     -1
+  go               8 ->  11     -3
+
+HIGHER UNDER B
+  leave            3 ->   2     +1
+  save             7 ->   3     +4
+  move            10 ->   8     +2
+  act             14 ->   9     +5
+  know            15 ->  10     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  put              9 ->  24    -15
+  go               3 ->   8     -5
+  find             7 ->   7     +0
+  call             4 ->   5     -1
+  be               6 ->   6     +0
+  rescue          14 ->  15     -1
+  get              1 ->   1     +0
+  run             11 ->  12     -1
+  know            13 ->  13     +0
+
+HIGHER UNDER B
+  escape           5 ->   2     +3
+  leave            8 ->   4     +4
+  evacuate        15 ->  10     +5
+  wake            10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  save             2 ->   3     -1
+  evacuate         8 ->  17     -9
+  go               7 ->  12     -5
+  be               6 ->   9     -3
+  wake            13 ->  20     -7
+  help            14 ->  21     -7
+  do              10 ->  15     -5
+  put             11 ->  11     +0
+
+HIGHER UNDER B
+  escape           3 ->   2     +1
+  act             12 ->   6     +6
+  find             5 ->   5     +0
+  leave            4 ->   4     +0
+  run             15 ->   7     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  save             2 ->   5     -3
+  be               3 ->   8     -5
+  go               5 ->  19    -14
+  put              7 ->  15     -8
+  find             6 ->  10     -4
+  call             9 ->  22    -13
+  make            10 ->  13     -3
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  evacuate        16 ->   3    +13
+  escape           4 ->   2     +2
+  reach           18 ->   4    +14
+  rescue          12 ->   7     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  save             3 ->   4     -1
+  put              4 ->  15    -11
+  take            18 ->  22     -4
+  know            17 ->  18     -1
+  go              11 ->  14     -3
+  make             9 ->  13     -4
+  leave           15 ->  17     -2
+  get              1 ->   2     -1
+  rescue          12 ->  12     +0
+  jump             7 ->   9     -2
+  be              10 ->  11     -1
+
+HIGHER UNDER B
+  escape           2 ->   1     +1
+  call             6 ->   3     +3
+  run              5 ->   5     +0
+  use             16 ->   7     +9
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  get              1 ->   2     -1
+  go               5 ->  17    -12
+  know            10 ->  16     -6
+  be               7 ->  11     -4
+  run              6 ->   7     -1
+
+HIGHER UNDER B
+  save             3 ->   1     +2
+  act             18 ->   5    +13
+  make             9 ->   6     +3
+  grab            13 ->  10     +3
+  leave            4 ->   4     +0
+  rescue          11 ->   9     +2
+  find             8 ->   8     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  be               4 ->   9     -5
+  go               5 ->   8     -3
+  put             12 ->  19     -7
+  know            13 ->  18     -5
+  run             10 ->  10     +0
+  find             7 ->   7     +0
+  make            11 ->  11     +0
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  evacuate         9 ->   4     +5
+  save             3 ->   3     +0
+  leave            6 ->   5     +1
+  call             8 ->   6     +2
+  escape           2 ->   2     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  be               7 ->  17    -10
+  find             5 ->   8     -3
+  run              9 ->  13     -4
+  call            11 ->  18     -7
+  evacuate         6 ->   7     -1
+  go              12 ->  24    -12
+  save             3 ->   4     -1
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  escape           2 ->   2     +0
+  leave            4 ->   3     +1
+  act             10 ->   5     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  get              1 ->   1     +0
+  go               6 ->   9     -3
+  be               5 ->   7     -2
+  know             8 ->  11     -3
+  help            12 ->  14     -2
+
+HIGHER UNDER B
+  escape           2 ->   2     +0
+  save             4 ->   3     +1
+  leave            7 ->   5     +2
+  call             9 ->   6     +3
+  run             10 ->   8     +2
+  evacuate        14 ->  12     +2
+  make            13 ->  13     +0
+  put             11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  escape           2 ->   3     -1
+  save             3 ->   7     -4
+  be               6 ->   9     -3
+  evacuate         9 ->  14     -5
+  help            15 ->  23     -8
+  rescue          16 ->  21     -5
+  run             17 ->  19     -2
+  move            13 ->  15     -2
+  leave            8 ->   8     +0
+  make            11 ->  13     -2
+  find             5 ->   6     -1
+  go              10 ->  10     +0
+
+HIGHER UNDER B
+  get              1 ->   1     +0
+  call            12 ->   4     +8
+  put              4 ->   2     +2
+  act              7 ->   5     +2
+  take            18 ->  12     +6
+  quickly         19 ->  16     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  be               2 ->  10     -8
+  go               5 ->  15    -10
+  put              8 ->   8     +0
+  save             4 ->   5     -1
+  run             10 ->  22    -12
+  know            12 ->  57    -45
+  find             6 ->   6     +0
+  make             9 ->   9     +0
+  do              14 ->  31    -17
+  take            16 ->  23     -7
+  jump            17 ->  24     -7
+  help            15 ->  17     -2
+
+HIGHER UNDER B
+  escape           7 ->   2     +5
+  act             19 ->   4    +15
+  leave            3 ->   3     +0
+  get              1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 38 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

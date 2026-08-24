@@ -1,0 +1,1081 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He cared for the Torah ark and ___
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  for              3 ->   7     -4
+  was              4 ->  18    -14
+  had              8 ->  32    -24
+  he               9 ->  45    -36
+  taught          11 ->  31    -20
+
+HIGHER UNDER B
+  its              2 ->   1     +1
+  kept             5 ->   3     +2
+  made             7 ->   4     +3
+  all              6 ->   5     +1
+  placed          37 ->   6    +31
+  cherished       78 ->   9    +69
+  stored          96 ->  12    +84
+  maintained      26 ->  10    +16
+  removed         30 ->  11    +19
+  other           10 ->   8     +2
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  its              1 ->   3     -2
+  all              3 ->   7     -4
+
+HIGHER UNDER B
+  was              8 ->   2     +6
+  the              2 ->   1     +1
+  performed       20 ->   5    +15
+  taught           7 ->   4     +3
+  cared           18 ->   6    +12
+  kept            46 ->   8    +38
+  helped          34 ->   9    +25
+  he              21 ->  10    +11
+  his             24 ->  12    +12
+  acted           26 ->  14    +12
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  for              3 ->   6     -3
+  Torah            8 ->  16     -8
+  he               5 ->   8     -3
+  other           13 ->  23    -10
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  kept             7 ->   4     +3
+  all              9 ->   5     +4
+  studied         20 ->  13     +7
+  cared           12 ->  10     +2
+  took            11 ->  11     +0
+  his             14 ->  12     +2
+  did             16 ->  15     +1
+  it              15 ->  14     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  for              5 ->  11     -6
+  she             12 -> 105    -93
+  Torah           11 ->  24    -13
+  he               8 ->  12     -4
+  all              9 ->  10     -1
+  would           13 ->  22     -9
+  other           14 ->  20     -6
+  knew            16 ->  17     -1
+
+HIGHER UNDER B
+  kept             7 ->   3     +4
+  was              2 ->   2     +0
+  it               6 ->   5     +1
+  spoke           34 ->   9    +25
+  gave            18 ->   8    +10
+  used            25 ->  14    +11
+  brought         26 ->  15    +11
+  a               23 ->  16     +7
+  his             10 ->   7     +3
+  did             15 ->  13     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  his              5 ->  11     -6
+  he              11 ->  24    -13
+  it              17 ->  40    -23
+  brought          9 ->  19    -10
+  gave             8 ->  17     -9
+  all              3 ->   6     -3
+  did             15 ->  22     -7
+  prepared        18 ->  27     -9
+  carried         19 ->  20     -1
+  for             13 ->  14     -1
+
+HIGHER UNDER B
+  kept             7 ->   3     +4
+  made             6 ->   4     +2
+  performed       20 ->   7    +13
+  preserved       31 ->   9    +22
+  its              2 ->   2     +0
+  helped          37 ->  16    +21
+  lit             12 ->   8     +4
+  used            28 ->  15    +13
+  the              1 ->   1     +0
+  had             14 ->  12     +2
+  other           16 ->  13     +3
+  taught          10 ->  10     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  for              4 ->  18    -14
+  he               9 ->  40    -31
+  his              8 ->  13     -5
+  it              14 ->  38    -24
+  all             10 ->  19     -9
+  its              3 ->   3     +0
+  made            11 ->  12     -1
+  gave            15 ->  16     -1
+
+HIGHER UNDER B
+  was              2 ->   2     +0
+  had              6 ->   4     +2
+  guarded         17 ->   7    +10
+  ensured         34 ->  11    +23
+  performed       21 ->   9    +12
+  would           12 ->   8     +4
+  kept             5 ->   5     +0
+  other            7 ->   6     +1
+  took            13 ->  10     +3
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  for              3 ->   6     -3
+  was              4 ->   5     -1
+  he              10 ->  31    -21
+  Torah            5 ->  11     -6
+  had             14 ->  43    -29
+  wrote            7 ->  13     -6
+  his             12 ->  17     -5
+  all              8 ->   9     -1
+  did             13 ->  14     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  its              2 ->   2     +0
+  recited         44 ->   7    +37
+  bimah          104 ->  12    +92
+  read             9 ->   3     +6
+  scrolls         15 ->   8     +7
+  other            6 ->   4     +2
+  placed          20 ->  15     +5
+  made            11 ->  10     +1
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  for              2 ->   4     -2
+  a               11 ->  27    -16
+  he               9 ->  15     -6
+  all             10 ->  10     +0
+
+HIGHER UNDER B
+  would            6 ->   3     +3
+  its              3 ->   2     +1
+  read             8 ->   8     +0
+  other            7 ->   7     +0
+  took            12 ->   9     +3
+  made            16 ->  11     +5
+  taught          13 ->  12     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  for              2 ->   4     -2
+  its              3 ->   3     +0
+  synagogue        5 ->  22    -17
+  all              6 ->  10     -4
+  he               9 ->  29    -20
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  was              4 ->   2     +2
+  made             8 ->   5     +3
+  took            19 ->   8    +11
+  kept            13 ->   7     +6
+  other            7 ->   6     +1
+  ensured         44 ->  14    +30
+  led             52 ->  16    +36
+  read            18 ->  12     +6
+  helped          14 ->   9     +5
+  performed       30 ->  17    +13
+  served          15 ->  11     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  Torah            6 ->  48    -42
+  he               5 ->  17    -12
+  for              3 ->   5     -2
+  synagogue       10 ->  32    -22
+  read             9 ->  18     -9
+  taught          15 ->  24     -9
+  would            8 ->   8     +0
+
+HIGHER UNDER B
+  made             7 ->   4     +3
+  ensured         90 ->  10    +80
+  its              4 ->   3     +1
+  was              2 ->   2     +0
+  other           12 ->   6     +6
+  maintained      29 ->  13    +16
+  saw             31 ->  15    +16
+  kept            11 ->   7     +4
+  all             13 ->   9     +4
+  took            17 ->  12     +5
+  helped          14 ->  11     +3
+  prepared        18 ->  16     +2
+  did             16 ->  14     +2
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  was              2 ->   3     -1
+  synagogue        5 ->  17    -12
+  led             12 ->  56    -44
+  other            6 ->  16    -10
+  prepared        15 ->  50    -35
+  prayed          18 ->  54    -36
+  Torah           11 ->  18     -7
+  took            13 ->  15     -2
+  for              9 ->  13     -4
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  its              3 ->   2     +1
+  all             10 ->   5     +5
+  it              41 ->   9    +32
+  had             19 ->   7    +12
+  brought         22 ->  10    +12
+  did              8 ->   6     +2
+  carried         14 ->  11     +3
+  would            4 ->   4     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  his              3 ->  27    -24
+  its              2 ->   6     -4
+  was              4 ->  12     -8
+  brought          6 ->  70    -64
+  placed           7 ->  68    -61
+  kept             8 ->  37    -29
+  made            11 ->  32    -21
+  used            10 ->  18     -8
+  did             12 ->  21     -9
+  studied         13 ->  22     -9
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  had              5 ->   2     +3
+  study          128 ->   3   +125
+  Rosh           127 ->   7   +120
+  Lev            145 ->   8   +137
+  Torah           21 ->   5    +16
+  kashrut        167 ->  11   +156
+  a                9 ->   4     +5
+  returned        66 ->  14    +52
+  it              32 ->  13    +19
+  he              20 ->   9    +11
+  other           19 ->  10     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  was              3 ->   5     -2
+  Torah            9 ->  92    -83
+  he               8 ->  29    -21
+  synagogue       10 ->  37    -27
+  studied         16 ->  34    -18
+  carried         14 ->  24    -10
+  served          12 ->  16     -4
+  all             17 ->  18     -1
+  took            15 ->  17     -2
+
+HIGHER UNDER B
+  for              2 ->   2     +0
+  the              1 ->   1     +0
+  assisted        48 ->   8    +40
+  ensured         29 ->   9    +20
+  made             6 ->   6     +0
+  tended          54 ->  12    +42
+  read             7 ->   7     +0
+  other            5 ->   4     +1
+  guarded         46 ->  13    +33
+  helped          13 ->  10     +3
+  kept            11 ->  11     +0
+  oversaw         21 ->  14     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  for              3 ->  18    -15
+  was              4 ->   9     -5
+  helped           7 ->  31    -24
+  also            14 ->  99    -85
+  a               12 ->  35    -23
+  his             15 ->  80    -65
+  he              13 ->  16     -3
+  had             10 ->  14     -4
+  would            5 ->   7     -2
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  scrolls        119 ->   3   +116
+  kept             9 ->   6     +3
+  all              8 ->   4     +4
+  the              1 ->   1     +0
+  placed          38 ->  11    +27
+  other            6 ->   5     +1
+  prayed          17 ->  10     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  for              4 ->   8     -4
+  he               7 ->  21    -14
+  was              3 ->   5     -2
+  helped           9 ->  18     -9
+  sang            11 ->  40    -29
+  read            10 ->  10     +0
+
+HIGHER UNDER B
+  its              2 ->   1     +1
+  performed       13 ->   6     +7
+  other            5 ->   3     +2
+  led              8 ->   7     +1
+  all              6 ->   4     +2
+  taught          18 ->   9     +9
+  lit             15 ->  11     +4
+  served          21 ->  12     +9
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  all              5 ->  14     -9
+  protected        9 ->  41    -32
+  its              2 ->   2     +0
+  other           10 ->  34    -24
+  was              4 ->   8     -4
+  his             11 ->  20     -9
+
+HIGHER UNDER B
+  did             19 ->   3    +16
+  he               7 ->   4     +3
+  made             8 ->   6     +2
+  didn't          71 ->   9    +62
+  wanted          68 ->  10    +58
+  treated         48 ->  11    +37
+  not             59 ->  12    +47
+  it              23 ->  13    +10
+  considered      87 ->  18    +69
+  never           41 ->  15    +26
+  took            16 ->  16     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  its              2 ->   3     -1
+  Torah            5 ->  10     -5
+  for              3 ->   4     -1
+  lit             12 ->  62    -50
+  oversaw         10 ->  30    -20
+  all              7 ->  12     -5
+  other           13 ->  18     -5
+  prepared        16 ->  25     -9
+
+HIGHER UNDER B
+  arranged        30 ->   6    +24
+  was              4 ->   2     +2
+  would            9 ->   5     +4
+  made            11 ->   8     +3
+  kept             8 ->   7     +1
+  it              35 ->  14    +21
+  also            39 ->  15    +24
+  had             15 ->  11     +4
+  repaired        25 ->  17     +8
+  brought         14 ->  13     +1
+  guarded         18 ->  16     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  he               4 ->   7     -3
+  its              3 ->   3     +0
+  Torah           15 ->  48    -33
+  served          12 ->  29    -17
+  read            11 ->  23    -12
+  had              9 ->  14     -5
+  his              6 ->   9     -3
+  for              5 ->   5     +0
+  took            16 ->  16     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  kept            13 ->   4     +9
+  not             25 ->  12    +13
+  brought         20 ->  11     +9
+  all              7 ->   6     +1
+  would            8 ->   8     +0
+  did             14 ->  13     +1
+  made            10 ->  10     +0
+  was              2 ->   2     +0
+  carried         17 ->  15     +2
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  its              2 ->   2     +0
+  he               4 ->  44    -40
+  was              5 ->  23    -18
+  his              6 ->  71    -65
+  kept             8 ->  77    -69
+  all              9 ->  27    -18
+  would            7 ->  11     -4
+  it              10 ->  92    -82
+  made            11 ->  61    -50
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  for              3 ->   3     +0
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  kept             2 ->   2     +0
+  Torah           11 ->  54    -43
+  he               6 ->  13     -7
+  his             13 ->  23    -10
+  would           12 ->  15     -3
+  had              5 ->   6     -1
+  it               7 ->   9     -2
+  all              8 ->  11     -3
+
+HIGHER UNDER B
+  its              3 ->   3     +0
+  made             9 ->   5     +4
+  helped          15 ->   7     +8
+  brought         20 ->  12     +8
+  felt            52 ->  14    +38
+  the              1 ->   1     +0
+  was              4 ->   4     +0
+  did             10 ->   8     +2
+  took            14 ->  10     +4
+  placed          18 ->  16     +2
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  led              4 ->   7     -3
+  its              3 ->   3     +0
+  lit              9 ->  24    -15
+  other            6 ->  12     -6
+  studied         13 ->  20     -7
+
+HIGHER UNDER B
+  taught           8 ->   4     +4
+  performed        7 ->   5     +2
+  was              2 ->   2     +0
+  made            17 ->  10     +7
+  kept            16 ->   9     +7
+  for             10 ->   8     +2
+  guarded         30 ->  13    +17
+  had             11 ->  11     +0
+  all             48 ->  19    +29
+  wore            50 ->  21    +29
+  acted           32 ->  18    +14
+  ensured         29 ->  17    +12
+  prayed          21 ->  14     +7
+  prepared        36 ->  22    +14
+  read            24 ->  23     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  was              2 ->   7     -5
+  recited          3 ->   6     -3
+  had             11 ->  15     -4
+  protected       14 ->  20     -6
+  ensured          8 ->   8     +0
+  offered         16 ->  17     -1
+
+HIGHER UNDER B
+  studied          6 ->   2     +4
+  would            4 ->   3     +1
+  performed        7 ->   5     +2
+  prayed          10 ->  10     +0
+  read             9 ->   9     +0
+  its              5 ->   4     +1
+  followed        12 ->  11     +1
+  never           17 ->  14     +3
+  observed        15 ->  13     +2
+  made            19 ->  16     +3
+  the              1 ->   1     +0
+  taught          13 ->  12     +1
+  kept            18 ->  18     +0
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  taught           3 ->  14    -11
+  its              4 ->  10     -6
+  kept             7 ->  15     -8
+  he               5 ->   8     -3
+  all              9 ->  20    -11
+  other           13 ->  22     -9
+  brought         16 ->  28    -12
+  carried         20 ->  29     -9
+  served          19 ->  26     -7
+  guarded         18 ->  23     -5
+  took            15 ->  17     -2
+
+HIGHER UNDER B
+  was              2 ->   2     +0
+  would           12 ->   3     +9
+  ensured         69 ->  11    +58
+  conducted       25 ->   9    +16
+  cleaned         31 ->  12    +19
+  made             8 ->   4     +4
+  the              1 ->   1     +0
+  led             10 ->   6     +4
+  helped          11 ->   7     +4
+  had             14 ->  13     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  he               5 ->  18    -13
+  for              4 ->   9     -5
+  didn't          21 ->  99    -78
+  did             10 ->  13     -3
+  it              13 ->  22     -9
+  other           19 ->  27     -8
+  took            15 ->  17     -2
+  said            17 ->  20     -3
+  didn            20 ->  24     -4
+  was              3 ->   6     -3
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  wanted           7 ->   3     +4
+  would           12 ->   5     +7
+  kept             6 ->   4     +2
+  knew            59 ->  14    +45
+  prayed          16 ->  11     +5
+  that            14 ->  12     +2
+  had              9 ->   8     +1
+  all              8 ->   7     +1
+  made            11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  for              3 ->   4     -1
+  kept             5 ->   8     -3
+  all              8 ->  11     -3
+  other           13 ->  34    -21
+  made             9 ->  13     -4
+  took            11 ->  17     -6
+  everything      10 ->  14     -4
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  was              4 ->   3     +1
+  did             14 ->   7     +7
+  he               7 ->   5     +2
+  saw             36 ->  15    +21
+  had             15 ->   9     +6
+  would           20 ->  12     +8
+  it              12 ->  10     +2
+  his              6 ->   6     +0
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  was              2 ->   2     +0
+  for              3 ->   3     +0
+  synagogue        6 ->   6     +0
+  taught           8 ->  14     -6
+  carried          7 ->   9     -2
+  other            9 ->  13     -4
+  studied         12 ->  16     -4
+  read            15 ->  18     -3
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  its              4 ->   4     +0
+  all             18 ->  12     +6
+  he               5 ->   5     +0
+  did             14 ->  10     +4
+  made            11 ->   7     +4
+  led             17 ->  17     +0
+  also            16 ->  15     +1
+  took            10 ->   8     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  all              6 ->   8     -2
+  for              4 ->   4     +0
+  placed           9 ->  14     -5
+  he               5 ->   5     +0
+  its              2 ->   2     +0
+
+HIGHER UNDER B
+  was              3 ->   3     +0
+  kept            12 ->   9     +3
+  other           14 ->  10     +4
+  Torah           17 ->  15     +2
+  prayed          13 ->  13     +0
+  had              8 ->   7     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  was              4 ->   8     -4
+  for              3 ->   4     -1
+  he               7 ->  13     -6
+  served          12 ->  17     -5
+  the              1 ->   1     +0
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  took             8 ->   3     +5
+  kept             9 ->   6     +3
+  helped           6 ->   5     +1
+  Torah           13 ->   9     +4
+  handled         49 ->  12    +37
+  other           10 ->  10     +0
+  made            11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  for              3 ->   4     -1
+  was              5 ->   5     +0
+  Torah            7 ->  12     -5
+  other            6 ->   7     -1
+  he               8 ->   9     -1
+  its              2 ->   2     +0
+  everything      13 ->  15     -2
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  made            10 ->   6     +4
+  kept            11 ->  10     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  would            7 ->   9     -2
+  took            11 ->  12     -1
+  made            13 ->  15     -2
+  had              3 ->   3     +0
+  his             10 ->  10     +0
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  the              1 ->   1     +0
+  for              4 ->   4     +0
+  was              5 ->   5     +0
+  kept             6 ->   6     +0
+  me              15 ->  14     +1
+  it              14 ->  13     +1
+  other           12 ->  11     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  for              2 ->   4     -2
+  Torah           11 ->  83    -72
+  led              7 ->  15     -8
+  taught          10 ->  25    -15
+  supervised      15 ->  50    -35
+  all              6 ->   7     -1
+  his              8 ->  11     -3
+  he               5 ->   5     +0
+
+HIGHER UNDER B
+  its              3 ->   2     +1
+  served          13 ->   6     +7
+  other           12 ->   8     +4
+  kept            23 ->  12    +11
+  was              4 ->   3     +1
+  also            19 ->  13     +6
+  performed       20 ->  14     +6
+  had              9 ->   9     +0
+  made            14 ->  10     +4
+  helped          16 ->  16     +0
+  the              1 ->   1     +0
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  for              4 ->   7     -3
+  he               5 ->  15    -10
+  was              3 ->   4     -1
+  its              2 ->   2     +0
+  had              8 ->   8     +0
+  would           10 ->  14     -4
+  took            11 ->  12     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  made             6 ->   3     +3
+  ensured         23 ->   9    +14
+  helped          16 ->  10     +6
+  other           14 ->  11     +3
+  all              7 ->   5     +2
+  kept             9 ->   6     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  lit              6 ->  51    -45
+  would            5 ->   9     -4
+  his             11 ->  36    -25
+  he               9 ->  20    -11
+  was              3 ->   4     -1
+  made             8 ->  10     -2
+  had             15 ->  19     -4
+  did             16 ->  23     -7
+  all             13 ->  15     -2
+  kept            12 ->  12     +0
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  for              4 ->   3     +1
+  performed       25 ->   7    +18
+  the              1 ->   1     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  for              4 ->  11     -7
+  he               7 ->  14     -7
+  other            6 ->   8     -2
+  cared           16 ->  31    -15
+  did             17 ->  24     -7
+  led             15 ->  21     -6
+  had             11 ->  13     -2
+  kept            14 ->  16     -2
+  would            9 ->   9     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  read             5 ->   4     +1
+  was              3 ->   3     +0
+  all             12 ->   5     +7
+  its              2 ->   2     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  other            8 ->  18    -10
+  he               6 ->   8     -2
+  kept             4 ->   6     -2
+  all              9 ->   9     +0
+  for              3 ->   3     +0
+  made             5 ->   5     +0
+  took            11 ->  12     -1
+  carried         13 ->  15     -2
+  would           12 ->  14     -2
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  the              1 ->   1     +0
+  was              7 ->   4     +3
+  lit             28 ->  10    +18
+  removed         15 ->  11     +4
+  read            10 ->   7     +3
+  had             14 ->  13     +1
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  other            9 ->  27    -18
+  prayed          15 -> 111    -96
+  all             14 ->  43    -29
+  had             11 ->  13     -2
+  studied         16 ->  24     -8
+  it              13 ->  20     -7
+
+HIGHER UNDER B
+  for              3 ->   1     +2
+  was              4 ->   3     +1
+  gave            20 ->   6    +14
+  kept             5 ->   5     +0
+  made             8 ->   8     +0
+  took            10 ->  10     +0
+  when            45 ->  12    +33
+  stored          86 ->  15    +71
+  worked          55 ->  14    +41
+  his             12 ->  11     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  the              1 ->  33    -32
+  for              2 ->  98    -96
+  its              3 -> 101    -98
+  was              4 ->  95    -91
+  taught           5 -> 126   -121
+  he               6 ->  23    -17
+  all              7 -> 104    -97
+  wrote            8 -> 114   -106
+  other            9 -> 120   -111
+  read            10 -> 116   -106
+  his             11 ->  84    -73
+  prayed          12 -> 151   -139
+  carried         13 -> 163   -150
+  made            14 -> 124   -110
+  kept            15 -> 182   -167
+
+HIGHER UNDER B
+  He              96 ->   1    +95
+  The            101 ->   2    +99
+  It             105 ->   3   +102
+  She            118 ->   4   +114
+  In             106 ->   5   +101
+  This           128 ->   6   +122
+  His             99 ->   7    +92
+  There          164 ->   8   +156
+  I               97 ->   9    +88
+  When           126 ->  10   +116
+  However        186 ->  11   +175
+  Buta           166 ->  12   +154
+  If             133 ->  13   +120
+  What           143 ->  14   +129
+  They           156 ->  15   +141
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  for              3 ->   4     -1
+  was              4 ->   6     -2
+  he               8 ->  16     -8
+  its              2 ->   2     +0
+  it              10 ->  20    -10
+  carried         13 ->  24    -11
+  brought         12 ->  15     -3
+  would            6 ->   7     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  all              5 ->   3     +2
+  kept             7 ->   5     +2
+  everything      29 ->  10    +19
+  made             9 ->   8     +1
+  always          11 ->   9     +2
+  looked          22 ->  12    +10
+  stood           14 ->  11     +3
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  was              3 ->  42    -39
+  for              4 ->  29    -25
+  other            5 ->  18    -13
+  prayed           8 ->  90    -82
+  he              11 ->  69    -58
+  cared           13 ->  60    -47
+  his             10 ->  20    -10
+  had             14 ->  46    -32
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  the              1 ->   1     +0
+  ensured         83 ->   4    +79
+  led             12 ->   5     +7
+  kept             6 ->   3     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  for              3 ->   4     -1
+  he               8 ->  20    -12
+  would            6 ->  11     -5
+  all              7 ->  10     -3
+  its              2 ->   3     -1
+  read            10 ->  12     -2
+  kept             5 ->   6     -1
+  taught          14 ->  18     -4
+  also            16 ->  19     -3
+  took            12 ->  13     -1
+
+HIGHER UNDER B
+  assisted        30 ->   9    +21
+  served           9 ->   5     +4
+  the              1 ->   1     +0
+  helped          13 ->   7     +6
+  was              4 ->   2     +2
+  made            11 ->   8     +3
+  supervised      35 ->  17    +18
+  guarded         21 ->  15     +6
+  led             17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  for              4 ->  15    -11
+  Torah            5 ->  25    -20
+  he               7 ->  43    -36
+  made             6 ->  14     -8
+  helped           8 ->  13     -5
+  taught          14 ->  35    -21
+  was              3 ->   3     +0
+  led              9 ->   9     +0
+  had             12 ->  12     +0
+  took            15 ->  23     -8
+
+HIGHER UNDER B
+  its              2 ->   1     +1
+  supervised      24 ->   4    +20
+  maintained      59 ->   8    +51
+  all             10 ->   5     +5
+  kept            13 ->   7     +6
+  other           11 ->   6     +5
+  handled         22 ->  11    +11
+  read            16 ->  10     +6
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  for              3 ->   4     -1
+  he               7 ->   8     -1
+  all              5 ->   5     +0
+  took            12 ->  15     -3
+  read            10 ->  14     -4
+  kept             6 ->   6     +0
+  his              9 ->  12     -3
+
+HIGHER UNDER B
+  its              2 ->   2     +0
+  made            14 ->  10     +4
+  would           11 ->   9     +2
+  was              4 ->   3     +1
+  it               8 ->   7     +1
+  had             13 ->  11     +2
+  used            16 ->  13     +3
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  taught           4 ->  15    -11
+  was              2 ->   2     +0
+  supervised      17 ->  86    -69
+  served          10 ->  26    -16
+  led             12 ->  30    -18
+  had             11 ->  17     -6
+  helped           5 ->   5     +0
+  he               6 ->   8     -2
+  assisted        18 ->  22     -4
+  also             9 ->  12     -3
+  Torah           19 ->  20     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  made             8 ->   4     +4
+  took            14 ->   7     +7
+  studied         24 ->  10    +14
+  its              3 ->   3     +0
+  read            15 ->   9     +6
+  became          25 ->  14    +11
+  all             13 ->  11     +2
+  other           16 ->  13     +3
+  wrote           20 ->  16     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  for              5 ->  17    -12
+  was              2 ->   5     -3
+  his              8 ->  43    -35
+  he              12 -> 101    -89
+  all              7 ->  11     -4
+  prayed          10 ->  18     -8
+
+HIGHER UNDER B
+  its              3 ->   2     +1
+  the              1 ->   1     +0
+  other            4 ->   3     +1
+  preserved       45 ->   6    +39
+  kept             6 ->   4     +2
+  safeguarded    104 ->  10    +94
+  repaired        37 ->   8    +29
+  made             9 ->   7     +2
+  helped          11 ->   9     +2
+  had             13 ->  12     +1
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

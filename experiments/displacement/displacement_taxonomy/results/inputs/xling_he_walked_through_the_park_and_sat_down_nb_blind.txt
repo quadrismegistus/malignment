@@ -1,0 +1,558 @@
+Below are 33 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He walked through the park and sat down on the ___
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  ground           4 ->   6     -2
+  edge             3 ->   5     -2
+  swing            5 ->  11     -6
+  park             7 ->   7     +0
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+  bench            1 ->   1     +0
+  nearest          6 ->   3     +3
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  park             3 ->   5     -2
+  bench            1 ->   1     +0
+  nearest          4 ->   8     -4
+  one              5 ->  20    -15
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  steps            3 ->   8     -5
+  edge             4 ->   4     +0
+  swing            6 ->  18    -12
+  nearest          7 ->  20    -13
+  stone            5 ->   5     +0
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+  bench            1 ->   1     +0
+  grassy          21 ->   3    +18
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  grass            1 ->   2     -1
+  ground           3 ->  22    -19
+  path             5 ->  34    -29
+  lawn             7 ->  29    -22
+  stone            4 ->   6     -2
+  sand             8 ->  13     -5
+  steps           10 ->  19     -9
+  sidewalk        15 ->  81    -66
+  rocks           11 ->  12     -1
+  gravel          16 ->  43    -27
+  concrete        14 ->  30    -16
+
+HIGHER UNDER B
+  bench            2 ->   1     +1
+  soft            22 ->   3    +19
+  wooden          21 ->   4    +17
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  grass            2 ->   4     -2
+  ground           6 ->  13     -7
+  edge             5 ->   7     -2
+  benches          7 ->  12     -5
+  fence            8 ->  14     -6
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  grassy          15 ->   5    +10
+  old             13 ->   6     +7
+  steps            3 ->   2     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  swing            3 ->   4     -1
+  steps            4 ->   9     -5
+  park             5 ->   8     -3
+  ground          11 ->  20     -9
+  first            9 ->  15     -6
+  nearest          7 ->  14     -7
+  swings          10 ->  12     -2
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+  bench            1 ->   1     +0
+  grassy          17 ->   7    +10
+  old             14 ->   5     +9
+  edge             8 ->   6     +2
+  stone            6 ->   3     +3
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  ground           8 ->  48    -40
+
+HIGHER UNDER B
+  first            5 ->   3     +2
+  old              6 ->   5     +1
+  bench            1 ->   1     +0
+  nearest         13 ->   8     +5
+  grassy           7 ->   7     +0
+  stone           10 ->   9     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  bench            1 ->   1     +0
+  park             4 ->  19    -15
+  green            6 ->  22    -16
+
+HIGHER UNDER B
+  first            2 ->   2     +0
+  grass            3 ->   3     +0
+  same             5 ->   4     +1
+  last            20 ->   5    +15
+  swings          14 ->   7     +7
+  edge             8 ->   6     +2
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  bench            1 ->   1     +0
+  park             3 ->  15    -12
+  stone            4 ->   9     -5
+  nearest          7 ->  16     -9
+  wooden           6 ->  14     -8
+  swing           10 ->  12     -2
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+  grassy          17 ->   5    +12
+  edge            11 ->   4     +7
+  first            5 ->   3     +2
+  green            8 ->   6     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  bench            1 ->   1     +0
+  park             3 ->   9     -6
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+  grassy          31 ->   3    +28
+  ground          13 ->   5     +8
+  steps            5 ->   4     +1
+  lawn             8 ->   6     +2
+  green           12 ->   8     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  steps            3 ->   3     +0
+  edge             5 ->  17    -12
+  park             6 ->  27    -21
+  sidewalk         8 ->  40    -32
+  front            7 ->  29    -22
+  grassy           4 ->   5     -1
+  benches          9 ->  13     -4
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  park             3 ->  13    -10
+  edge             4 ->   8     -4
+  swing            5 ->  12     -7
+  stone            8 ->  16     -8
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  steps            4 ->  24    -20
+  park             3 ->   8     -5
+  stone            6 ->  11     -5
+  swing            5 ->   9     -4
+  ground          10 ->  43    -33
+  first            9 ->  34    -25
+  edge             8 ->  12     -4
+  green            7 ->  10     -3
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  grassy          38 ->   3    +35
+  warm            57 ->   4    +53
+  old             24 ->   5    +19
+  benches         21 ->   6    +15
+  swings          23 ->   7    +16
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  bench            2 ->   2     +0
+  park             3 ->   5     -2
+  ground           5 ->  26    -21
+  bank             7 ->  15     -8
+  edge             6 ->   6     +0
+  green            4 ->   4     +0
+
+HIGHER UNDER B
+  grassy          13 ->   3    +10
+  grass            1 ->   1     +0
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  bench            1 ->   3     -2
+  swing            3 ->   7     -4
+  edge             4 ->  20    -16
+  park             5 ->  67    -62
+  stone            9 ->  34    -25
+  old             10 ->  28    -18
+  wooden          11 ->  25    -14
+
+HIGHER UNDER B
+  grass            2 ->   1     +1
+  ground           7 ->   2     +5
+  sidewalk        20 ->   5    +15
+  swings           6 ->   4     +2
+  playground      25 ->   6    +19
+  top             49 ->   9    +40
+  beach           47 ->  10    +37
+  steps            8 ->   8     +0
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  swings           5 ->  40    -35
+  edge             6 ->  56    -50
+  swing            7 ->  42    -35
+  nearest          8 ->  29    -21
+  same             9 ->  17     -8
+  steps           10 ->  55    -45
+  park             4 ->  12     -8
+  stone           14 ->  18     -4
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  old             16 ->   4    +12
+  first            3 ->   3     +0
+  only            22 ->   6    +16
+  wooden          12 ->   5     +7
+  path            46 ->   8    +38
+  wet             23 ->   9    +14
+  cold            34 ->  11    +23
+  ground          11 ->   7     +4
+  benches         13 ->  10     +3
+  big             38 ->  14    +24
+  lawn            18 ->  13     +5
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  bench            1 ->   1     +0
+  park             3 ->  10     -7
+  ground           8 ->  31    -23
+  edge             7 ->   8     -1
+  steps            5 ->   7     -2
+  stone            9 ->  12     -3
+
+HIGHER UNDER B
+  swings           6 ->   3     +3
+  grass            2 ->   2     +0
+  old             17 ->   4    +13
+  grassy          23 ->   6    +17
+  big             32 ->   9    +23
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  steps            3 ->  13    -10
+  ground           4 ->  22    -18
+  edge             5 ->  17    -12
+  benches          6 ->  56    -50
+  swing            8 ->  14     -6
+  nearest          9 ->  10     -1
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+  bench            1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  bench            1 ->   1     +0
+  park             3 ->   6     -3
+  steps            6 ->  14     -8
+  swing            9 ->  11     -2
+  wooden           8 ->  10     -2
+  benches         10 ->  12     -2
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+  grassy           4 ->   3     +1
+  edge             7 ->   5     +2
+  ground          12 ->   7     +5
+  swings          15 ->   9     +6
+  green           11 ->   8     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  grassy           3 ->   3     +0
+  edge             5 ->   6     -1
+  benches          4 ->   4     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  swings           6 ->   5     +1
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  park             3 ->   5     -2
+  swing            5 ->   7     -2
+  steps            4 ->   4     +0
+  ground           7 ->  11     -4
+  lawn            12 ->  40    -28
+  benches          9 ->  15     -6
+  edge             6 ->   9     -3
+  green           13 ->  21     -8
+  swings          11 ->  14     -3
+  stone           10 ->  10     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  nearest         15 ->   3    +12
+  old             28 ->   8    +20
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  bench            1 ->   1     +0
+  park             4 ->   4     +0
+  swing            3 ->   3     +0
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  edge             4 ->   4     +0
+  stone            5 ->   5     +0
+  ground          10 ->  11     -1
+  low             11 ->  12     -1
+  wall             9 ->   9     +0
+  steps            3 ->   3     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  grass            2 ->   2     +0
+  park             6 ->   6     +0
+  benches          8 ->   8     +0
+  curb             7 ->   7     +0
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  park             4 ->   5     -1
+  swing            8 ->  15     -7
+  ground           6 ->  10     -4
+  nearest          9 ->  11     -2
+  edge             5 ->   7     -2
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  same            10 ->   4     +6
+  steps            3 ->   3     +0
+  stone            7 ->   6     +1
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  park             5 ->  23    -18
+  same             4 ->   7     -3
+  stone            7 ->  17    -10
+  swing            3 ->   3     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  edge             6 ->   4     +2
+  wooden           8 ->   5     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  steps            3 ->  11     -8
+  stone            7 ->  19    -12
+  edge             4 ->   4     +0
+  same             6 ->   8     -2
+  park            10 ->  15     -5
+  wooden           9 ->   9     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  first            5 ->   3     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  bank             5 ->  16    -11
+  lawn             7 ->  17    -10
+  steps            6 ->  11     -5
+  edge             4 ->   5     -1
+  park             3 ->   3     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  swing            3 ->   4     -1
+  nearest          2 ->   2     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  edge            10 ->   5     +5
+  grass            4 ->   3     +1
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  edge             3 ->   6     -3
+  swing            5 ->   8     -3
+  steps            6 ->   9     -3
+  park             7 ->  10     -3
+  stone            9 ->  15     -6
+  nearest         10 ->  21    -11
+  wooden          11 ->  12     -1
+  ground           4 ->   4     +0
+
+HIGHER UNDER B
+  grass            2 ->   2     +0
+  bench            1 ->   1     +0
+  grassy          27 ->   3    +24
+  swings           8 ->   5     +3
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  grassy           4 ->   7     -3
+  swing            3 ->   3     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  steps            4 ->   5     -1
+  edge             3 ->   3     +0
+  stone            5 ->   7     -2
+  wall             7 ->  12     -5
+  curb            11 ->  18     -7
+  bank             8 ->  14     -6
+  lawn             9 ->   9     +0
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+  grass            2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  bench            1 ->   2     -1
+  green            5 ->  12     -7
+  park             3 ->   6     -3
+  benches          4 ->   7     -3
+  ground           7 ->  10     -3
+  edge             9 ->   9     +0
+
+HIGHER UNDER B
+  grass            2 ->   1     +1
+  lawn            12 ->   4     +8
+  steps            6 ->   3     +3
+  grassy           8 ->   5     +3
+  curb            16 ->   8     +8
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  grass            2 ->   2     +0
+  park             3 ->   5     -2
+  ground           4 ->   7     -3
+  steps            6 ->  17    -11
+  stone            5 ->  10     -5
+
+HIGHER UNDER B
+  bench            1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 33 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

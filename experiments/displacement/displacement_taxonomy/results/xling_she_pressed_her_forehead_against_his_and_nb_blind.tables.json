@@ -1,0 +1,207 @@
+{
+ "prompt": "She pressed her forehead against his and closed her",
+ "blind": true,
+ "tables": {
+  "Falcon3-7B-Instruct": {
+   "rows": [
+    {
+     "word": "own",
+     "side": "A",
+     "rank_a": 2,
+     "rank_b": 2,
+     "p_a": 0.018770258185391946,
+     "p_b": 0.015834040222709796,
+     "delta": -0.0029362179626821507
+    },
+    {
+     "word": "eyes",
+     "side": "B",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9782142046026645,
+     "p_b": 0.9798356417504386,
+     "delta": 0.001621437147774074
+    }
+   ],
+   "withheld": [],
+   "n_a": 1,
+   "n_b": 1
+  },
+  "Llama-3.1-8B-Instruct": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "B",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9974233933946839,
+     "p_b": 0.9991958400100666,
+     "delta": 0.0017724466153826723
+    }
+   ],
+   "withheld": [],
+   "n_a": 0,
+   "n_b": 1
+  },
+  "MiniCPM5-1B": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "A",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9858553119020991,
+     "p_b": 0.9846424242780086,
+     "delta": -0.0012128876240904418
+    }
+   ],
+   "withheld": [],
+   "n_a": 1,
+   "n_b": 0
+  },
+  "OLMo-2-0425-1B-Instruct": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "A",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9928434505146227,
+     "p_b": 0.9853179765740422,
+     "delta": -0.007525473940580563
+    }
+   ],
+   "withheld": [],
+   "n_a": 1,
+   "n_b": 0
+  },
+  "OLMoE-1B-7B-0125-Instruct": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "A",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9992408097976092,
+     "p_b": 0.9971184075018975,
+     "delta": -0.0021224022957117006
+    }
+   ],
+   "withheld": [],
+   "n_a": 1,
+   "n_b": 0
+  },
+  "Olmo-3-7B-Instruct": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "B",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9966072721886912,
+     "p_b": 0.9985102530383296,
+     "delta": 0.0019029808496384693
+    }
+   ],
+   "withheld": [],
+   "n_a": 0,
+   "n_b": 1
+  },
+  "Olmo-3.1-32B-Instruct": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "B",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9947934943490324,
+     "p_b": 0.9966533329374638,
+     "delta": 0.0018598385884314173
+    }
+   ],
+   "withheld": [],
+   "n_a": 0,
+   "n_b": 1
+  },
+  "RedPajama-INCITE-7B-Chat": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "B",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9999997899534665,
+     "p_b": 0.9999999999874158,
+     "delta": 2.1003394934382413e-07
+    }
+   ],
+   "withheld": [],
+   "n_a": 0,
+   "n_b": 1
+  },
+  "glm-4-9b-chat-hf": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "A",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9945961578394839,
+     "p_b": 0.9811123845670418,
+     "delta": -0.013483773272442101
+    }
+   ],
+   "withheld": [],
+   "n_a": 1,
+   "n_b": 0
+  },
+  "jais-family-6p7b-chat": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "B",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.998496596372397,
+     "p_b": 0.9999909542022332,
+     "delta": 0.0014943578298362015
+    }
+   ],
+   "withheld": [],
+   "n_a": 0,
+   "n_b": 1
+  },
+  "recurrentgemma-9b-it": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "B",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9977209894427486,
+     "p_b": 0.9988496345805131,
+     "delta": 0.0011286451377645612
+    }
+   ],
+   "withheld": [],
+   "n_a": 0,
+   "n_b": 1
+  },
+  "salamandra-7b-instruct": {
+   "rows": [
+    {
+     "word": "eyes",
+     "side": "A",
+     "rank_a": 1,
+     "rank_b": 1,
+     "p_a": 0.9948611044652711,
+     "p_b": 0.9942006556890991,
+     "delta": -0.0006604487761719957
+    }
+   ],
+   "withheld": [],
+   "n_a": 1,
+   "n_b": 0
+  }
+ }
+}

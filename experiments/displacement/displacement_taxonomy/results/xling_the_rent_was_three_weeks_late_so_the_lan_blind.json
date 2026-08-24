@@ -162,5 +162,6 @@
  "model": "sonnet",
  "effort": "xhigh",
  "path": "/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/inputs/xling_the_rent_was_three_weeks_late_so_the_lan_blind.txt",
- "version": "x1b"
+ "version": "x1b",
+ "raters": 1
 }

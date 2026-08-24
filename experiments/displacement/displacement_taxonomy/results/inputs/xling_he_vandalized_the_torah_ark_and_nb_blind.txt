@@ -1,0 +1,1475 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He vandalized the Torah ark and ___
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  the              2 ->   3     -1
+  stole            5 ->  14     -9
+  destroyed        4 ->   5     -1
+  threw            6 ->  13     -7
+  then             9 ->  31    -22
+  burned          10 ->  25    -15
+  removed         11 ->  37    -26
+  defiled         12 ->  38    -26
+  wrote            8 ->  10     -2
+  smashed         14 ->  26    -12
+  was             16 ->  30    -14
+  used            15 ->  16     -1
+
+HIGHER UNDER B
+  desecrated       1 ->   1     +0
+  broke            3 ->   2     +1
+  caused          17 ->   4    +13
+  spilled        111 ->   8   +103
+  made            19 ->   7    +12
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  sprayed          1 ->  92    -91
+  profaned         3 ->  57    -54
+  urinated         6 ->  77    -71
+  severely         7 ->  80    -73
+  spray            5 ->  16    -11
+  caused           4 ->   5     -1
+  replaced         9 ->  78    -69
+  spilled         11 ->  56    -45
+  defaced         15 ->  47    -32
+  other           13 ->  19     -6
+  broke           12 ->  13     -1
+  scrawled        17 ->  35    -18
+  committed       16 ->  20     -4
+
+HIGHER UNDER B
+  was             28 ->   1    +27
+  then             8 ->   3     +5
+  defiled         10 ->   4     +6
+  stole           35 ->   8    +27
+  is              18 ->   6    +12
+  now             96 ->  10    +86
+  set             38 ->   9    +29
+  destroyed       23 ->  11    +12
+  the             14 ->   7     +7
+  tried           51 ->  12    +39
+  desecrated       2 ->   2     +0
+  shouted         68 ->  17    +51
+  refused         34 ->  15    +19
+  insulted        19 ->  14     +5
+  killed          20 ->  18     +2
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  smashed          4 ->  25    -21
+  threw            3 ->  13    -10
+  tore             8 ->  33    -25
+  Torah            6 ->  19    -13
+  other            9 ->  26    -17
+  broke           11 ->  28    -17
+  even            20 ->  86    -66
+  set             18 ->  40    -22
+  the              1 ->   1     +0
+  damaged         12 ->  15     -3
+  made            15 ->  16     -1
+  burned          19 ->  27     -8
+  caused          17 ->  22     -5
+
+HIGHER UNDER B
+  scrawled       111 ->  11   +100
+  defaced         44 ->   8    +36
+  destroyed        2 ->   2     +0
+  attacked        45 ->  14    +31
+  stole            5 ->   3     +2
+  was             16 ->   6    +10
+  desecrated       7 ->   4     +3
+  painted         51 ->  18    +33
+  is              59 ->  20    +39
+  left            21 ->   9    +12
+  had             38 ->  17    +21
+  wrote           22 ->  10    +12
+  threatened      52 ->  21    +31
+  Jewish          42 ->  23    +19
+  yelled          54 ->  29    +25
+  synagogue       31 ->  24     +7
+  tried           13 ->   7     +6
+  a               10 ->   5     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  stole            2 ->   5     -3
+  Torah            7 ->  15     -8
+  a                5 ->   9     -4
+  burned          11 ->  26    -15
+  other           16 ->  28    -12
+  threw           20 ->  45    -25
+  put             23 ->  47    -24
+  he              14 ->  21     -7
+  had             22 ->  39    -17
+  his             21 ->  34    -13
+  broke           13 ->  18     -5
+  set             19 ->  22     -3
+
+HIGHER UNDER B
+  is               6 ->   1     +5
+  now             17 ->   6    +11
+  was              3 ->   3     +0
+  destroyed        4 ->   4     +0
+  caused          35 ->  13    +22
+  took             9 ->   8     +1
+  then             8 ->   7     +1
+  will            56 ->  19    +37
+  got             31 ->  14    +17
+  it              12 ->  10     +2
+  tried           15 ->  11     +4
+  committed       29 ->  17    +12
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  burned           4 ->  13     -9
+  threw            8 ->  35    -27
+  then            11 ->  33    -22
+  its             18 ->  58    -40
+  said            20 ->  50    -30
+  was             17 ->  37    -20
+  killed          23 ->  66    -43
+  a               13 ->  23    -10
+  other            9 ->  15     -6
+  took             7 ->  11     -4
+  tried           15 ->  17     -2
+  put             19 ->  19     +0
+  made            16 ->  16     +0
+  desecrated      14 ->  14     +0
+
+HIGHER UNDER B
+  destroyed        3 ->   1     +2
+  broke            2 ->   2     +0
+  damaged         35 ->   4    +31
+  set              6 ->   5     +1
+  smashed         21 ->   7    +14
+  left            10 ->   6     +4
+  caused          22 ->   9    +13
+  removed         24 ->  12    +12
+  hid             41 ->  20    +21
+  wrote           12 ->  10     +2
+  defiled         28 ->  18    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  other            5 ->  18    -13
+  a                9 ->  46    -37
+  stole            3 ->  10     -7
+  wrote            2 ->   8     -6
+  destroyed        8 ->   9     -1
+  damaged         17 ->  42    -25
+  was              6 ->   6     +0
+  made            16 ->  17     -1
+  took            19 ->  19     +0
+  broke           11 ->  15     -4
+  left            21 ->  22     -1
+  smashed         13 ->  14     -1
+
+HIGHER UNDER B
+  defiled         27 ->   3    +24
+  desecrated       4 ->   2     +2
+  committed       15 ->   5    +10
+  set              7 ->   4     +3
+  used            20 ->   7    +13
+  cursed          48 ->  20    +28
+  burned          14 ->  13     +1
+  then            18 ->  16     +2
+  threw           12 ->  11     +1
+  defaced         23 ->  21     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  a                2 ->   8     -6
+  stole            4 ->   9     -5
+  tore            14 ->  43    -29
+  then            12 ->  25    -13
+  was             15 ->  36    -21
+  destroyed       10 ->  18     -8
+  Torah           11 ->  17     -6
+  took            18 ->  32    -14
+  broke            8 ->  11     -3
+  he              19 ->  22     -3
+
+HIGHER UNDER B
+  defaced         16 ->   2    +14
+  damaged          7 ->   4     +3
+  smashed         13 ->   7     +6
+  defiled         33 ->  12    +21
+  other            3 ->   3     +0
+  put             34 ->  14    +20
+  left            17 ->  13     +4
+  placed          24 ->  15     +9
+  set             25 ->  16     +9
+  desecrated       6 ->   5     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  the              1 ->   5     -4
+  smashed          3 ->   8     -5
+  desecrated       4 ->   4     +0
+  Torah           15 ->  49    -34
+  other           11 ->  19     -8
+  burned          18 ->  47    -29
+  a                8 ->  15     -7
+  left            21 ->  41    -20
+  set             19 ->  33    -14
+  ripped          12 ->  21     -9
+  tossed          22 ->  23     -1
+  then            13 ->  17     -4
+
+HIGHER UNDER B
+  threw            7 ->   2     +5
+  assaulted       20 ->   7    +13
+  shouted         39 ->  12    +27
+  threatened      16 ->   9     +7
+  shattered       31 ->  14    +17
+  destroyed        5 ->   3     +2
+  cursed          43 ->  16    +27
+  tore            17 ->  13     +4
+  spray           40 ->  20    +20
+  broke            6 ->   6     +0
+  sprayed         23 ->  22     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  threw            3 ->   7     -4
+  wrote           13 ->  55    -42
+  tore            14 ->  25    -11
+  desecrated       4 ->   8     -4
+  smashed          7 ->  11     -4
+  burned           8 ->  15     -7
+  tried           19 ->  30    -11
+  threatened      20 ->  28     -8
+  its             21 ->  31    -10
+  prayer          17 ->  19     -2
+  synagogue       18 ->  20     -2
+  left            22 ->  29     -7
+  stole            2 ->   2     +0
+
+HIGHER UNDER B
+  other           11 ->   3     +8
+  destroyed        9 ->   4     +5
+  was             37 ->  10    +27
+  removed         46 ->  14    +32
+  damaged         16 ->  12     +4
+  broke           15 ->   9     +6
+  took            34 ->  17    +17
+  the              1 ->   1     +0
+  caused          32 ->  18    +14
+  set              5 ->   5     +0
+  then             6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  threw            2 ->   5     -3
+  stole            5 ->  14     -9
+  tried           15 ->  37    -22
+  spit            19 ->  61    -42
+  a                6 ->  13     -7
+  synagogue       17 ->  40    -23
+  he              18 ->  41    -23
+  then            10 ->  12     -2
+  tore            20 ->  27     -7
+  sprayed         16 ->  20     -4
+  was              7 ->  10     -3
+
+HIGHER UNDER B
+  damaged         11 ->   2     +9
+  destroyed       13 ->   6     +7
+  removed         34 ->  16    +18
+  spray-painted   29 ->  15    +14
+  defaced         39 ->  21    +18
+  caused          31 ->  19    +12
+  shattered       26 ->  17     +9
+  wrote           12 ->   9     +3
+  other            9 ->   7     +2
+  broke            8 ->   8     +0
+  left            30 ->  23     +7
+  ripped          21 ->  18     +3
+  set             14 ->  11     +3
+  smashed          3 ->   3     +0
+  desecrated       4 ->   4     +0
+  made            23 ->  22     +1
+  attacked        27 ->  25     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  smashed          2 ->   7     -5
+  broke            3 ->   9     -6
+  damaged          8 ->  59    -51
+  a                5 ->  21    -16
+  desecrated      10 ->  38    -28
+  beat            16 ->  71    -55
+  knocked         17 ->  73    -56
+  set             11 ->  11     +0
+  other           15 ->  32    -17
+  then             7 ->   8     -1
+  also            18 ->  36    -18
+  ran             22 ->  53    -31
+  shattered       14 ->  26    -12
+  was             12 ->  13     -1
+  tore            20 ->  22     -2
+
+HIGHER UNDER B
+  placed          50 ->   3    +47
+  the              1 ->   1     +0
+  hid             29 ->  12    +17
+  killed          97 ->  20    +77
+  scattered       43 ->  14    +29
+  took            13 ->   6     +7
+  said            40 ->  15    +25
+  put             52 ->  16    +36
+  removed         51 ->  19    +32
+  it              39 ->  18    +21
+  its             62 ->  24    +38
+  left            21 ->  10    +11
+  made            38 ->  25    +13
+  destroyed        9 ->   4     +5
+  had             23 ->  23     +0
+  burned          19 ->  17     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  desecrated       1 ->  14    -13
+  stole            3 ->  32    -29
+  threw            4 ->  38    -34
+  took             5 ->  40    -35
+  set              7 -> 106    -99
+  burned           8 -> 105    -97
+  destroyed        6 ->   7     -1
+  then            13 ->  49    -36
+  killed          17 -> 136   -119
+  smashed         18 -> 112    -94
+  attempted       16 ->  73    -57
+  his             14 ->  41    -27
+  made            21 ->  24     -3
+  left            10 ->  16     -6
+  broke           19 ->  19     +0
+
+HIGHER UNDER B
+  the              2 ->   1     +1
+  Torah           27 ->   2    +25
+  returned        90 ->   3    +87
+  its             28 ->   4    +24
+  Leviticus      146 ->  11   +135
+  damaged         37 ->  12    +25
+  used            11 ->   5     +6
+  placed          22 ->   8    +14
+  removed         25 ->  13    +12
+  tore            15 ->  10     +5
+  a               12 ->   9     +3
+  other            9 ->   6     +3
+  had             23 ->  15     +8
+  wrote           34 ->  18    +16
+  was             20 ->  17     +3
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  then             9 ->  25    -16
+  threw            6 ->  12     -6
+  destroyed        4 ->   9     -5
+  a                8 ->  11     -3
+  set             13 ->  19     -6
+  tried           16 ->  29    -13
+  he              20 ->  59    -39
+  smashed         12 ->  17     -5
+  threatened      18 ->  37    -19
+  tore            14 ->  16     -2
+  left            19 ->  32    -13
+  shattered       15 ->  21     -6
+
+HIGHER UNDER B
+  broke            2 ->   2     +0
+  other           10 ->   3     +7
+  defiled         32 ->   8    +24
+  stole            5 ->   4     +1
+  defaced         11 ->   6     +5
+  the              1 ->   1     +0
+  was              7 ->   5     +2
+  burned          22 ->  10    +12
+  took            46 ->  18    +28
+  synagogue       21 ->  13     +8
+  wrote           23 ->  15     +8
+  damaged         17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  stole            2 ->  13    -11
+  the              1 ->   6     -5
+  broke           10 ->  19     -9
+  damaged          7 ->  11     -4
+  smashed          5 ->   7     -2
+  wrote            9 ->  14     -5
+  threw            3 ->   5     -2
+  put             14 ->  49    -35
+  Torah           13 ->  37    -24
+  was             18 ->  51    -33
+  placed          16 ->  48    -32
+  took            15 ->  46    -31
+  then            12 ->  27    -15
+  tried           22 ->  69    -47
+  removed         20 ->  21     -1
+
+HIGHER UNDER B
+  defaced         30 ->   1    +29
+  desecrated       6 ->   2     +4
+  destroyed        8 ->   3     +5
+  tore             4 ->   4     +0
+  replaced        40 ->   8    +32
+  shattered       39 ->  10    +29
+  caused          31 ->  15    +16
+  smeared         45 ->  18    +27
+  other           19 ->  12     +7
+  drew            76 ->  20    +56
+  left            21 ->  16     +5
+  set             17 ->  17     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  threw            1 ->   5     -4
+  the              2 ->   3     -1
+  destroyed        5 ->  11     -6
+  then             7 ->  19    -12
+  was              9 ->  21    -12
+  smashed         10 ->  27    -17
+  stole            3 ->   7     -4
+  tried            8 ->  15     -7
+  took            17 ->  45    -28
+  burned          21 ->  42    -21
+  ripped          18 ->  35    -17
+  attempted       19 ->  31    -12
+  made            20 ->  30    -10
+  broke            4 ->   4     +0
+  damaged         13 ->  17     -4
+  tore            12 ->  13     -1
+
+HIGHER UNDER B
+  desecrated       6 ->   1     +5
+  other           11 ->   2     +9
+  defiled         16 ->   6    +10
+  caused          22 ->   8    +14
+  shouted         34 ->  12    +22
+  defaced         14 ->   9     +5
+  threatened      15 ->  10     +5
+  scattered       26 ->  14    +12
+  left            24 ->  16     +8
+  wrote           27 ->  18     +9
+  removed         30 ->  20    +10
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  smashed          4 ->  53    -49
+  Torah            6 -> 147   -141
+  stole            3 ->   8     -5
+  destroyed        5 ->  21    -16
+  he              11 ->  24    -13
+  was             13 ->  23    -10
+  removed         15 ->  33    -18
+  tore            16 ->  32    -16
+  a               10 ->  15     -5
+  threw           12 ->  16     -4
+  broke            2 ->   5     -3
+  other            9 ->  13     -4
+  even            19 ->  19     +0
+  then             8 ->  10     -2
+  desecrated      17 ->  17     +0
+
+HIGHER UNDER B
+  defaced         14 ->   1    +13
+  left            20 ->   4    +16
+  spray-painted  131 ->   6   +125
+  smeared         57 ->   7    +50
+  wrote            7 ->   2     +5
+  spray          141 ->  14   +127
+  damaged         23 ->   9    +14
+  also            18 ->  11     +7
+  tried           21 ->  12     +9
+  pelted          71 ->  20    +51
+  made            22 ->  18     +4
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  broke            3 ->  14    -11
+  its              6 ->  58    -52
+  then             7 ->  19    -12
+  threw            9 ->  31    -22
+  smashed         13 -> 105    -92
+  damaged          4 ->  17    -13
+  destroyed       10 ->  25    -15
+  Torah           19 ->  72    -53
+  took            15 ->  36    -21
+  a               14 ->  29    -15
+  wrote           21 -> 108    -87
+  set             17 ->  47    -30
+  burned          18 ->  35    -17
+
+HIGHER UNDER B
+  desecrated       5 ->   1     +4
+  tore            12 ->   2    +10
+  is              92 ->   5    +87
+  was             16 ->   6    +10
+  tried           20 ->   7    +13
+  now            134 ->  12   +122
+  ritual          83 ->  11    +72
+  physically     110 ->  13    +97
+  engaged        132 ->  18   +114
+  prayer          49 ->  16    +33
+  ripped          24 ->   9    +15
+  other            8 ->   8     +0
+  made            22 ->  15     +7
+  attempted       11 ->  10     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  smashed          7 ->  49    -42
+  damaged          4 ->  16    -12
+  destroyed        6 ->  22    -16
+  broke            5 ->  12     -7
+  stole            8 ->  17     -9
+  he              10 ->  24    -14
+  Torah           18 ->  48    -30
+  also            15 ->  40    -25
+  threw           19 ->  47    -28
+  left            17 ->  32    -15
+  wrote           11 ->  14     -3
+  said            21 ->  35    -14
+  made            14 ->  18     -4
+
+HIGHER UNDER B
+  was              3 ->   2     +1
+  is              26 ->   5    +21
+  the              1 ->   1     +0
+  nearly          39 ->   7    +32
+  desecrated      24 ->   6    +18
+  got             34 ->   8    +26
+  received        62 ->  15    +47
+  a                9 ->   4     +5
+  caused          16 ->  11     +5
+  other           20 ->  13     +7
+  had             13 ->   9     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  stole            2 ->  82    -80
+  desecrated       3 ->  46    -43
+  threw            6 ->  54    -48
+  damaged          7 ->  76    -69
+  Torah            9 -> 129   -120
+  broke            8 ->  21    -13
+  tore            11 ->  32    -21
+  left            16 -> 126   -110
+  defaced         14 ->  85    -71
+  made            17 ->  83    -66
+  destroyed       18 -> 101    -83
+  its             21 ->  60    -39
+  burned          15 ->  31    -16
+  smashed         23 ->  88    -65
+  then            13 ->  24    -11
+  was             24 ->  78    -54
+  wrote           20 ->  26     -6
+  ripped          10 ->  13     -3
+  set             22 ->  33    -11
+  other            4 ->   6     -2
+
+HIGHER UNDER B
+  several         35 ->   2    +33
+  some            26 ->   3    +23
+  two             38 ->   4    +34
+  tried           33 ->   7    +26
+  daubed         123 ->   9   +114
+  attempted       25 ->   8    +17
+  dais           154 ->  12   +142
+  smeared         53 ->  11    +42
+  over           146 ->  16   +130
+  the              1 ->   1     +0
+  spat           100 ->  17    +83
+  scattered      136 ->  18   +118
+  hurled         129 ->  19   +110
+  he              39 ->  15    +24
+  a                5 ->   5     +0
+  removed         19 ->  14     +5
+  replaced        12 ->  10     +2
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  defiled         15 ->  56    -41
+  it              18 ->  51    -33
+  did             19 ->  41    -22
+  then            10 ->  17     -7
+  had             26 ->  53    -27
+  threw           13 ->  22     -9
+  Torah           27 ->  42    -15
+  put             16 ->  28    -12
+  tore            23 ->  34    -11
+  took             6 ->  10     -4
+  removed         25 ->  33     -8
+  was             12 ->  16     -4
+  damaged         11 ->  13     -2
+  broke            2 ->   3     -1
+  burned           8 ->  12     -4
+
+HIGHER UNDER B
+  smashed          9 ->   1     +8
+  set             14 ->   7     +7
+  other           21 ->   9    +12
+  stole            5 ->   5     +0
+  a               30 ->  11    +19
+  threatened      36 ->  18    +18
+  left            24 ->  14    +10
+  caused          28 ->  20     +8
+  also            17 ->  15     +2
+  placed          20 ->  19     +1
+  made            22 ->  21     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  the              1 ->   4     -3
+  stole            2 ->   9     -7
+  wrote            3 ->  10     -7
+  a               10 ->  59    -49
+  what            13 -> 121   -108
+  other           11 ->  36    -25
+  left             7 ->  21    -14
+  painted         17 ->  33    -16
+  committed       23 ->  53    -30
+  removed         19 ->  26     -7
+  threatened      21 ->  27     -6
+  desecrated       5 ->   6     -1
+  destroyed        6 ->  11     -5
+
+HIGHER UNDER B
+  then            24 ->   3    +21
+  was              8 ->   2     +6
+  threw            4 ->   1     +3
+  caused          15 ->   7     +8
+  broke           12 ->   5     +7
+  urinated        39 ->  15    +24
+  defiled         62 ->  22    +40
+  later           38 ->  17    +21
+  tried           52 ->  23    +29
+  also            32 ->  18    +14
+  damaged          9 ->   8     +1
+  attacked        30 ->  24     +6
+  called          27 ->  20     +7
+  smashed         22 ->  16     +6
+  placed          28 ->  25     +3
+  spray-painted   18 ->  14     +4
+  made            14 ->  12     +2
+  used            16 ->  13     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  the              2 ->   3     -1
+  fled             6 ->   7     -1
+  is              12 ->  15     -3
+  was              5 ->   5     +0
+  claimed         13 ->  14     -1
+  used            10 ->  12     -2
+  took             8 ->   9     -1
+  left             1 ->   1     +0
+
+HIGHER UNDER B
+  broke            7 ->   6     +1
+  destroyed       26 ->  13    +13
+  stole            4 ->   4     +0
+  returned         9 ->   8     +1
+  replaced        11 ->  10     +1
+  threw           14 ->  11     +3
+  threatened      18 ->  16     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  stole            2 ->  69    -67
+  smashed          4 ->  35    -31
+  threw            3 ->   7     -4
+  the              1 ->   3     -2
+  destroyed        8 ->  36    -28
+  burned          16 ->  51    -35
+  tore            18 -> 191   -173
+  he              12 ->  26    -14
+  broke            6 ->  16    -10
+  damaged         22 ->  55    -33
+  a               13 ->  19     -6
+  took            23 ->  40    -17
+  ripped          21 ->  30     -9
+  set              9 ->  13     -4
+  tried           17 ->  17     +0
+
+HIGHER UNDER B
+  then             5 ->   1     +4
+  was              7 ->   2     +5
+  wrote           10 ->   4     +6
+  urinated        66 ->   5    +61
+  is              99 ->   8    +91
+  called          69 ->  11    +58
+  desecrated      11 ->   6     +5
+  later           56 ->  15    +41
+  made            19 ->   9    +10
+  used            20 ->  12     +8
+  painted         31 ->  18    +13
+  scrawled        15 ->  10     +5
+  put             27 ->  20     +7
+  other           14 ->  14     +0
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  other            3 ->  10     -7
+  a                9 ->  35    -26
+  then            13 ->  19     -6
+  took            16 ->  23     -7
+  tore            17 ->  21     -4
+  was             14 ->  16     -2
+  stole            5 ->   6     -1
+  removed         19 ->  20     -1
+
+HIGHER UNDER B
+  desecrated       4 ->   3     +1
+  caused          15 ->   7     +8
+  damaged          7 ->   4     +3
+  tried           12 ->   8     +4
+  destroyed        2 ->   1     +1
+  broke            6 ->   5     +1
+  threatened      28 ->  14    +14
+  used            21 ->  15     +6
+  left            18 ->  13     +5
+  defaced         34 ->  22    +12
+  wrote           22 ->  17     +5
+  attempted       24 ->  18     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  stole            2 ->   3     -1
+  threw            4 ->   7     -3
+  desecrated      10 ->  19     -9
+  other           11 ->  26    -15
+  broke            7 ->  12     -5
+  he               6 ->   8     -2
+  a               14 ->  18     -4
+  damaged         15 ->  17     -2
+
+HIGHER UNDER B
+  was              3 ->   2     +1
+  caused          17 ->   9     +8
+  then             9 ->   4     +5
+  its             31 ->  13    +18
+  his             30 ->  14    +16
+  tried            8 ->   6     +2
+  the              1 ->   1     +0
+  left            29 ->  15    +14
+  destroyed        5 ->   5     +0
+  had             19 ->  16     +3
+  smashed         12 ->  10     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  was              2 ->   7     -5
+  he               7 ->  13     -6
+  made            22 ->  29     -7
+  a               20 ->  21     -1
+  removed         19 ->  20     -1
+  destroyed       15 ->  17     -2
+  tried           14 ->  15     -1
+
+HIGHER UNDER B
+  wrote            8 ->   3     +5
+  sprayed         21 ->  18     +3
+  threw            5 ->   4     +1
+  set             16 ->  14     +2
+  stole            6 ->   6     +0
+  tore            13 ->  11     +2
+  scrawled        30 ->  26     +4
+  spray           28 ->  24     +4
+  other           11 ->   9     +2
+  left            25 ->  23     +2
+  put             23 ->  22     +1
+  defaced         12 ->  12     +0
+  broke           10 ->  10     +0
+  smashed         17 ->  16     +1
+  the              1 ->   1     +0
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  the              2 ->   2     +0
+  broke            6 ->   9     -3
+  smashed          3 ->   3     +0
+  destroyed        4 ->   4     +0
+  put             26 ->  30     -4
+  burned           7 ->  11     -4
+  tore             8 ->  12     -4
+  took            17 ->  17     +0
+  its             24 ->  26     -2
+  made            20 ->  23     -3
+  was             18 ->  18     +0
+  damaged         21 ->  21     +0
+
+HIGHER UNDER B
+  stole           11 ->   6     +5
+  desecrated       1 ->   1     +0
+  wrote           15 ->   8     +7
+  other            9 ->   7     +2
+  tried           16 ->  15     +1
+  threatened      23 ->  20     +3
+  replaced        29 ->  27     +2
+  defaced         10 ->  10     +0
+  then             5 ->   5     +0
+  defiled         13 ->  13     +0
+  ripped          27 ->  25     +2
+  used            19 ->  19     +0
+  attempted       28 ->  28     +0
+  a               25 ->  24     +1
+  removed         22 ->  22     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  then             4 ->  14    -10
+  the              1 ->   7     -6
+  threw            5 ->  11     -6
+  broke            8 ->  15     -7
+  stole            2 ->   6     -4
+  smashed         12 ->  32    -20
+  was             11 ->  27    -16
+  a               13 ->  24    -11
+  tried           17 ->  40    -23
+  left            21 ->  69    -48
+  he              16 ->  28    -12
+  attacked        23 ->  43    -20
+  burned          22 ->  35    -13
+  took            18 ->  23     -5
+  spat            24 ->  31     -7
+  used            15 ->  18     -3
+  threatened      25 ->  26     -1
+
+HIGHER UNDER B
+  desecrated       3 ->   1     +2
+  wrote            9 ->   2     +7
+  spray           10 ->   3     +7
+  destroyed        6 ->   4     +2
+  damaged          7 ->   5     +2
+  other           14 ->   8     +6
+  sprayed         31 ->  10    +21
+  synagogue       19 ->   9    +10
+  defaced         41 ->  12    +29
+  its             26 ->  13    +13
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  threw            3 ->   4     -1
+  smashed          5 ->  11     -6
+  stole            2 ->   2     +0
+  broke            8 ->  10     -2
+  he              20 ->  30    -10
+  ripped          13 ->  21     -8
+  put             19 ->  25     -6
+  tore            18 ->  22     -4
+
+HIGHER UNDER B
+  lit             28 ->  14    +14
+  took            10 ->   7     +3
+  tried           14 ->  12     +2
+  attempted       31 ->  20    +11
+  other           11 ->   9     +2
+  left            26 ->  19     +7
+  removed         21 ->  17     +4
+  a               15 ->  15     +0
+  the              1 ->   1     +0
+  also            27 ->  24     +3
+  caused          16 ->  16     +0
+  set             25 ->  23     +2
+  destroyed        7 ->   6     +1
+  desecrated       4 ->   3     +1
+  then             6 ->   5     +1
+  wrote            9 ->   8     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  broke            3 ->   6     -3
+  tore             2 ->   3     -1
+  then            11 ->  14     -3
+  burned          13 ->  16     -3
+  threw           14 ->  18     -4
+  ripped           6 ->  10     -4
+  took            24 ->  27     -3
+  wrote            9 ->   9     +0
+  removed         10 ->  11     -1
+  smashed          7 ->   7     +0
+  a                4 ->   4     +0
+  set             17 ->  21     -4
+  tried           15 ->  15     +0
+
+HIGHER UNDER B
+  damaged          5 ->   2     +3
+  the              1 ->   1     +0
+  desecrated      16 ->  12     +4
+  Torah           18 ->  13     +5
+  other           12 ->   8     +4
+  was             20 ->  17     +3
+  destroyed        8 ->   5     +3
+  vandalized      27 ->  24     +3
+  attempted       21 ->  20     +1
+  had             23 ->  22     +1
+  stole           19 ->  19     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  threw            4 ->  35    -31
+  stole            2 ->   4     -2
+  smashed          9 ->  30    -21
+  left            12 ->  57    -45
+  tried           11 ->  23    -12
+  desecrated      17 ->  83    -66
+  wrote           13 ->  26    -13
+  urinated        20 -> 119    -99
+  tore            18 ->  39    -21
+  broke            3 ->   9     -6
+  other            5 ->   8     -3
+  a                7 ->  10     -3
+  destroyed       10 ->  12     -2
+  damaged         14 ->  15     -1
+  also            21 ->  22     -1
+
+HIGHER UNDER B
+  now             38 ->   2    +36
+  was              8 ->   3     +5
+  is              51 ->   6    +45
+  he              15 ->   5    +10
+  it              80 ->  11    +69
+  the              1 ->   1     +0
+  has             88 ->  16    +72
+  had             55 ->  14    +41
+  killed          58 ->  19    +39
+  caused          16 ->  13     +3
+  its             32 ->  20    +12
+  took            27 ->  18     +9
+  made            19 ->  17     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  smashed          2 ->   4     -2
+  the              1 ->   1     +0
+  then             5 ->  19    -14
+  he              14 ->  63    -49
+  broke            4 ->  12     -8
+  tried            8 ->  11     -3
+  wrote           16 ->  22     -6
+
+HIGHER UNDER B
+  stole            7 ->   3     +4
+  desecrated       3 ->   2     +1
+  caused          36 ->  13    +23
+  defaced         19 ->  10     +9
+  other           20 ->  14     +6
+  damaged         21 ->  17     +4
+  made            15 ->  15     +0
+  was             12 ->   8     +4
+  left            11 ->   9     +2
+  set             17 ->  16     +1
+  committed       53 ->  23    +30
+  destroyed        9 ->   5     +4
+  scattered       34 ->  21    +13
+  used            30 ->  24     +6
+  threw            6 ->   6     +0
+  burned          10 ->   7     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  stole            2 ->   7     -5
+  threw            4 ->  10     -6
+  smashed          6 ->  77    -71
+  broke            7 ->  31    -24
+  destroyed        5 ->  15    -10
+  set              8 ->  23    -15
+  tore            13 ->  78    -65
+  ripped          17 ->  94    -77
+  damaged         12 ->  17     -5
+  burned          20 ->  26     -6
+  defaced         19 ->  25     -6
+  made            21 ->  28     -7
+  removed         14 ->  18     -4
+  then             9 ->   9     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  Torah           36 ->   6    +30
+  was             15 ->   4    +11
+  its             18 ->   5    +13
+  other           11 ->   3     +8
+  also            24 ->  11    +13
+  caused          42 ->  13    +29
+  several         50 ->  16    +34
+  synagogue       41 ->  14    +27
+  a               10 ->   8     +2
+  he              16 ->  12     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  smashed          3 ->  17    -14
+  then             4 ->  10     -6
+  the              1 ->   1     +0
+  broke            6 ->  12     -6
+  tore             8 ->  23    -15
+  ripped          12 ->  31    -19
+  destroyed        7 ->   8     -1
+  left            11 ->  21    -10
+  removed         20 ->  36    -16
+  its             18 ->  26     -8
+  damaged          9 ->  13     -4
+  took            17 ->  18     -1
+  other           13 ->  16     -3
+
+HIGHER UNDER B
+  desecrated       2 ->   2     +0
+  was             21 ->   7    +14
+  wrote           14 ->   4    +10
+  defaced         32 ->   9    +23
+  stole           15 ->   5    +10
+  threw            5 ->   3     +2
+  spray           10 ->   6     +4
+  painted         37 ->  19    +18
+  used            22 ->  15     +7
+  sprayed         38 ->  24    +14
+  made            31 ->  20    +11
+  caused          25 ->  22     +3
+  set             19 ->  14     +5
+  a               16 ->  11     +5
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  smashed          2 ->   2     +0
+  set              4 ->  10     -6
+  desecrated       3 ->   9     -6
+  stole            5 ->   7     -2
+  Torah           17 ->  47    -30
+  burned          14 ->  24    -10
+  then            12 ->  19     -7
+  ripped          15 ->  25    -10
+  damaged         13 ->  17     -4
+  took            16 ->  23     -7
+  tore             6 ->   6     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  broke           10 ->   3     +7
+  removed         23 ->  12    +11
+  destroyed        8 ->   4     +4
+  was             26 ->  13    +13
+  wrote           25 ->  18     +7
+  cursed          30 ->  21     +9
+  made            19 ->  14     +5
+  tried           20 ->  15     +5
+  hurled          21 ->  20     +1
+  a               11 ->  11     +0
+  shattered       18 ->  16     +2
+  other            7 ->   5     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  the              1 ->   8     -7
+  smashed          2 ->  14    -12
+  damaged          3 ->   7     -4
+  stole            7 ->  20    -13
+  a                9 ->  25    -16
+  threw           10 ->  45    -35
+  burned          11 -> 109    -98
+  left            13 ->  21     -8
+  then            12 ->  18     -6
+  made            14 ->  42    -28
+  spray           17 ->  59    -42
+  he              20 ->  67    -47
+  wrote           15 ->  29    -14
+  was             18 ->  30    -12
+  removed         19 ->  39    -20
+  tore            23 ->  79    -56
+  used            24 ->  53    -29
+
+HIGHER UNDER B
+  defaced          8 ->   1     +7
+  defiled         45 ->   6    +39
+  caused          21 ->   5    +16
+  broke            4 ->   2     +2
+  also            26 ->  10    +16
+  put             22 ->   9    +13
+  destroyed        5 ->   3     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  the              1 ->  42    -41
+  stole            2 -> 212   -210
+  other            3 -> 137   -134
+  left             4 -> 167   -163
+  a                5 ->  80    -75
+  broke            6 -> 201   -195
+  damaged          7 -> 153   -146
+  was              8 -> 117   -109
+  wrote            9 -> 135   -126
+  put             10 -> 145   -135
+  Torah           11 -> 124   -113
+  destroyed       12 -> 173   -161
+  took            14 -> 152   -138
+  smashed         15 -> 219   -204
+  knocked         16 -> 233   -217
+  tried           17 -> 205   -188
+  then            18 -> 123   -105
+  he              13 ->  41    -28
+  vandalized      19 -> 171   -152
+  threw           20 -> 177   -157
+  made            22 -> 165   -143
+  even            21 -> 118    -97
+  tore            23 -> 234   -211
+  caused          24 -> 170   -146
+  removed         25 -> 221   -196
+
+HIGHER UNDER B
+  The            130 ->   1   +129
+  He             129 ->   2   +127
+  This           166 ->   3   +163
+  It             142 ->   4   +138
+  What           182 ->   5   +177
+  If             178 ->   6   +172
+  I               93 ->   7    +86
+  A              139 ->   8   +131
+  In             136 ->   9   +127
+  There          195 ->  10   +185
+  How            174 ->  11   +163
+  However        226 ->  12   +214
+  They           172 ->  13   +159
+  When           162 ->  14   +148
+  Why            169 ->  15   +154
+  Given          248 ->  16   +232
+  You            163 ->  17   +146
+  Write          187 ->  18   +169
+  Many           175 ->  19   +156
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  threw            3 ->  14    -11
+  desecrated      10 ->  19     -9
+  smashed          8 ->  13     -5
+  defaced         11 ->  17     -6
+  tore            18 ->  32    -14
+  cursed          23 ->  69    -46
+  defiled         24 ->  67    -43
+  took            20 ->  30    -10
+  left            17 ->  22     -5
+  wrote           21 ->  28     -7
+  made            19 ->  23     -4
+  tried           15 ->  18     -3
+  broke            9 ->   9     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  set              6 ->   3     +3
+  was              2 ->   2     +0
+  stole            5 ->   4     +1
+  is              16 ->   7     +9
+  a               27 ->  10    +17
+  destroyed        7 ->   6     +1
+  threatened      31 ->  15    +16
+  other           13 ->   8     +5
+  attempted       35 ->  20    +15
+  caused          22 ->  16     +6
+  used            25 ->  21     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  then             3 ->   9     -6
+  stole            4 ->  10     -6
+  the              1 ->   4     -3
+  a                7 ->  23    -16
+  threw            9 ->  19    -10
+  tried            8 ->  16     -8
+  was             14 -> 113    -99
+  other           10 ->  24    -14
+  ripped          16 -> 106    -90
+  Jewish          15 ->  29    -14
+  wrote           13 ->  20     -7
+
+HIGHER UNDER B
+  desecrated      11 ->   1    +10
+  destroyed        5 ->   3     +2
+  defiled         31 ->   5    +26
+  broke            2 ->   2     +0
+  spray           38 ->  13    +25
+  smeared         56 ->  14    +42
+  defaced         28 ->  11    +17
+  caused          18 ->   8    +10
+  lit             19 ->  12     +7
+  smashed         12 ->   7     +5
+  damaged          6 ->   6     +0
+  set             21 ->  18     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  stole            6 ->  18    -12
+  smashed          5 ->   9     -4
+  broke            3 ->   5     -2
+  destroyed        8 ->  13     -5
+  then            10 ->  17     -7
+  tore            17 ->  33    -16
+  damaged         11 ->  15     -4
+  ripped          20 ->  30    -10
+  shattered       19 ->  26     -7
+  caused          15 ->  19     -4
+
+HIGHER UNDER B
+  desecrated       2 ->   2     +0
+  the              1 ->   1     +0
+  a                7 ->   4     +3
+  other            4 ->   3     +1
+  wrote            9 ->   6     +3
+  threw           12 ->   7     +5
+  threatened      23 ->  11    +12
+  defaced         14 ->   8     +6
+  was             13 ->  10     +3
+  pulpit          21 ->  14     +7
+  set             16 ->  12     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  a               11 ->  34    -23
+  he              14 ->  62    -48
+  then             3 ->  15    -12
+  smashed         13 ->  24    -11
+  made            16 ->  33    -17
+  was              8 ->  12     -4
+
+HIGHER UNDER B
+  threatened      15 ->   1    +14
+  damaged         17 ->   7    +10
+  wrote           12 ->   4     +8
+  Torah            2 ->   2     +0
+  desecrated       7 ->   5     +2
+  caused          29 ->  14    +15
+  left            18 ->  13     +5
+  tore            21 ->  16     +5
+  disrupted       71 ->  17    +54
+  spray           48 ->  20    +28
+  shattered       36 ->  21    +15
+  defaced         25 ->  18     +7
+  ripped          30 ->  22     +8
+  threw           10 ->  10     +0
+  synagogue       19 ->  19     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  stole            2 ->   2     +0
+  smashed          6 ->  15     -9
+  destroyed        3 ->   3     +0
+  the              1 ->   1     +0
+  took            12 ->  18     -6
+  shattered       18 ->  27     -9
+  removed         13 ->  16     -3
+  he              20 ->  28     -8
+  its             16 ->  19     -3
+  then             7 ->   8     -1
+  a               11 ->  11     +0
+
+HIGHER UNDER B
+  desecrated       5 ->   5     +0
+  broke            4 ->   4     +0
+  wrote            9 ->   6     +3
+  defiled         19 ->  13     +6
+  damaged          8 ->   7     +1
+  painted         33 ->  22    +11
+  caused          23 ->  17     +6
+  threatened      25 ->  21     +4
+  burned          29 ->  24     +5
+  left            22 ->  20     +2
+  other           17 ->  14     +3
+  threw           15 ->  10     +5
+  was             10 ->   9     +1
+  defaced         14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  smashed          2 ->  19    -17
+  destroyed        9 ->  30    -21
+  tore             8 ->  20    -12
+  shattered        7 ->  17    -10
+  threw           17 -> 101    -84
+  broke            5 ->   8     -3
+  its             16 ->  31    -15
+  Torah           10 ->  14     -4
+  a               14 ->  22     -8
+  burned          20 ->  47    -27
+  damaged         18 ->  36    -18
+  prayer          19 ->  23     -4
+
+HIGHER UNDER B
+  was             11 ->   3     +8
+  desecrated       3 ->   1     +2
+  wrote           12 ->   5     +7
+  set             27 ->   7    +20
+  also            30 ->  10    +20
+  took            38 ->  13    +25
+  painted         65 ->  18    +47
+  shouted         36 ->  16    +20
+  called          67 ->  21    +46
+  then             4 ->   4     +0
+  used            24 ->  15     +9
+  left            21 ->  12     +9
+  other            6 ->   6     +0
+  stole           15 ->   9     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  stole            2 ->  15    -13
+  the              1 ->   1     +0
+  tore             9 ->  48    -39
+  a                7 ->  17    -10
+  wrote           12 ->  30    -18
+  other           14 ->  39    -25
+  ripped          18 ->  61    -43
+  Torah           21 ->  91    -70
+  threw           19 ->  35    -16
+  smashed          3 ->   5     -2
+  was              8 ->   8     +0
+
+HIGHER UNDER B
+  destroyed        5 ->   2     +3
+  removed         16 ->   4    +12
+  damaged          6 ->   3     +3
+  left            10 ->   7     +3
+  caused          41 ->  13    +28
+  shattered       22 ->   9    +13
+  is              20 ->  11     +9
+  now             77 ->  19    +58
+  acted          127 ->  21   +106
+  created        117 ->  22    +95
+  posted          53 ->  18    +35
+  tried           15 ->  12     +3
+  defaced         11 ->  10     +1
+  vandalized      29 ->  20     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -162,5 +162,6 @@
  "model": "sonnet",
  "effort": "xhigh",
  "path": "/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/inputs/xling_he_turned_over_after_the_massage_and_she_blind.txt",
- "version": "x1b"
+ "version": "x1b",
+ "raters": 2
 }

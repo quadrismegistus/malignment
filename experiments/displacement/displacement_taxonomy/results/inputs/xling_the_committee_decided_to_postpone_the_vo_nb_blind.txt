@@ -1,0 +1,1216 @@
+Below are 42 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: The committee decided to postpone the vote until ___
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  it               6 ->  19    -13
+  Wednesday        7 ->  15     -8
+  after            3 ->   4     -1
+  March           15 ->  24     -9
+  Tuesday          8 ->  14     -6
+  November        17 ->  29    -12
+  tomorrow        14 ->  21     -7
+  at              23 ->  45    -22
+  June            19 ->  33    -14
+  July            22 ->  41    -19
+  this            20 ->  35    -15
+  April           21 ->  27     -6
+  January          9 ->  10     -1
+  Friday          16 ->  16     +0
+  September       12 ->  13     -1
+
+HIGHER UNDER B
+  further         11 ->   3     +8
+  next             2 ->   2     +0
+  more            33 ->   8    +25
+  they            10 ->   7     +3
+  all             24 ->   9    +15
+  the              1 ->   1     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  further          2 ->   6     -4
+  next             4 ->   4     +0
+  tomorrow         3 ->   3     +0
+  all              9 ->  30    -21
+  Friday           7 ->  16     -9
+
+HIGHER UNDER B
+  after            5 ->   2     +3
+  Monday           6 ->   5     +1
+  they            19 ->   8    +11
+  a                8 ->   7     +1
+  later           20 ->  11     +9
+  their           16 ->  12     +4
+  it              31 ->  13    +18
+  Thursday        13 ->  10     +3
+  Tuesday         10 ->   9     +1
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  January          6 ->  16    -10
+  March            8 ->  22    -14
+  Tuesday          7 ->  14     -7
+  February        10 ->  17     -7
+  Thursday        11 ->  21    -10
+  September       14 ->  24    -10
+  December        16 ->  32    -16
+  April           13 ->  20     -7
+  May             19 ->  34    -15
+  June            18 ->  25     -7
+  November        20 ->  26     -6
+  Friday          21 ->  27     -6
+  Wednesday       12 ->  15     -3
+  October         22 ->  29     -7
+  Monday           5 ->   6     -1
+  July            23 ->  28     -5
+  August          25 ->  42    -17
+
+HIGHER UNDER B
+  next             2 ->   2     +0
+  the              1 ->   1     +0
+  further         31 ->   5    +26
+  after            3 ->   3     +0
+  a                4 ->   4     +0
+  tomorrow        28 ->  10    +18
+  they            17 ->   7    +10
+  more            40 ->  11    +29
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  it              16 ->  29    -13
+  they            18 ->  38    -20
+  a                4 ->   6     -2
+  Friday          12 ->  22    -10
+  at               7 ->   8     -1
+  Wednesday       14 ->  21     -7
+  January         10 ->  15     -5
+
+HIGHER UNDER B
+  further          5 ->   4     +1
+  next             3 ->   2     +1
+  later            6 ->   5     +1
+  tomorrow        20 ->   9    +11
+  November        27 ->  14    +13
+  Monday           8 ->   7     +1
+  Tuesday         13 ->  11     +2
+  September       19 ->  13     +6
+  February        22 ->  17     +5
+  December        24 ->  19     +5
+  June            21 ->  20     +1
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  tomorrow         5 ->  14     -9
+  Monday           4 ->   6     -2
+  Tuesday          7 ->  13     -6
+  Wednesday       10 ->  18     -8
+  Thursday        11 ->  17     -6
+  Friday           9 ->  12     -3
+  its             12 ->  20     -8
+  later           15 ->  19     -4
+
+HIGHER UNDER B
+  a                2 ->   2     +0
+  further          8 ->   3     +5
+  after            6 ->   5     +1
+  they            33 ->   7    +26
+  May             18 ->   9     +9
+  an              23 ->  15     +8
+  September       26 ->  16    +10
+  June            16 ->   8     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  next             4 ->   6     -2
+  they             6 ->  16    -10
+  Monday           9 ->  21    -12
+  it              20 ->  29     -9
+  later           16 ->  22     -6
+  November        11 ->  17     -6
+  all              8 ->  12     -4
+
+HIGHER UNDER B
+  after            2 ->   1     +1
+  further          5 ->   4     +1
+  a                3 ->   3     +0
+  January          7 ->   5     +2
+  April           12 ->   7     +5
+  February        13 ->   8     +5
+  May             14 ->   9     +5
+  March           17 ->  10     +7
+  July            18 ->  13     +5
+  June            19 ->  15     +4
+  October         15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  a                4 ->   7     -3
+  the              1 ->   1     +0
+  it               8 ->   9     -1
+  we              10 ->  17     -7
+  Monday          12 ->  13     -1
+  after            2 ->   4     -2
+
+HIGHER UNDER B
+  more             7 ->   2     +5
+  further          3 ->   3     +0
+  they             6 ->   6     +0
+  next             5 ->   5     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  after            3 ->   3     +0
+  its              5 ->  16    -11
+  Wednesday        7 ->  22    -15
+  Tuesday          9 ->  17     -8
+  it               6 ->  12     -6
+  January         10 ->  13     -3
+  Monday          12 ->  15     -3
+  September       11 ->  14     -3
+  Thursday         8 ->   9     -1
+  February        17 ->  27    -10
+  April           15 ->  23     -8
+  June            18 ->  25     -7
+  May             16 ->  20     -4
+  December        20 ->  24     -4
+  November        22 ->  32    -10
+  July            24 ->  28     -4
+  their           21 ->  26     -5
+  a                4 ->   4     +0
+
+HIGHER UNDER B
+  next             2 ->   1     +1
+  further         28 ->   5    +23
+  more            32 ->   6    +26
+  they            19 ->   7    +12
+  later           13 ->   8     +5
+  tomorrow        25 ->  11    +14
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  its              5 ->  33    -28
+  a                4 ->   5     -1
+  it               7 ->  23    -16
+  September        9 ->  22    -13
+  May             10 ->  21    -11
+  June            14 ->  27    -13
+  July            19 ->  29    -10
+  October         12 ->  19     -7
+  December        21 ->  26     -5
+  January          8 ->  15     -7
+  March           11 ->  13     -2
+  November        17 ->  17     +0
+  Tuesday         13 ->  16     -3
+  February        23 ->  28     -5
+  April           18 ->  18     +0
+  after            3 ->   4     -1
+  Monday           6 ->   7     -1
+
+HIGHER UNDER B
+  further         15 ->   3    +12
+  the              1 ->   1     +0
+  next             2 ->   2     +0
+  they            16 ->   6    +10
+  more            30 ->  10    +20
+  later           24 ->   8    +16
+  Friday          27 ->   9    +18
+  tomorrow        25 ->  11    +14
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  tomorrow         2 ->   4     -2
+  Thursday         5 ->   8     -3
+  this            12 ->  22    -10
+  next             4 ->   5     -1
+  Friday          10 ->  12     -2
+  it               8 ->  10     -2
+  its             13 ->  14     -1
+  Wednesday        9 ->  11     -2
+
+HIGHER UNDER B
+  further         22 ->   9    +13
+  Monday          11 ->   6     +5
+  after            3 ->   2     +1
+  the              1 ->   1     +0
+  a                6 ->   3     +3
+  later           14 ->  13     +1
+  January         19 ->  15     +4
+  October         27 ->  20     +7
+  February        26 ->  19     +7
+  November        24 ->  18     +6
+  June            21 ->  17     +4
+  Tuesday          7 ->   7     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  Monday           3 ->  34    -31
+  Friday           6 ->  15     -9
+  Thursday         7 ->  21    -14
+  Wednesday        9 ->  43    -34
+  Tuesday         10 ->  40    -30
+  next             5 ->   5     +0
+  tomorrow         4 ->   4     +0
+  they            11 ->  12     -1
+  5               13 ->  14     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  after            2 ->   2     +0
+  it              12 ->   3     +9
+  all             19 ->   6    +13
+  one             16 ->   8     +8
+  at              44 ->  10    +34
+  later           21 ->   9    +12
+  two             18 ->  11     +7
+  a                8 ->   7     +1
+  10              17 ->  13     +4
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  next             2 ->   2     +0
+  it               5 ->  13     -8
+  after            3 ->   3     +0
+  Thursday         7 ->  22    -15
+  later            9 ->  18     -9
+  May              8 ->  16     -8
+  April           14 ->  24    -10
+  its             19 ->  30    -11
+  September       13 ->  23    -10
+  June            15 ->  19     -4
+  Wednesday       12 ->  14     -2
+  November        21 ->  26     -5
+  they            20 ->  25     -5
+  February        18 ->  20     -2
+  December        25 ->  27     -2
+  March            6 ->  10     -4
+
+HIGHER UNDER B
+  Monday          10 ->   5     +5
+  the              1 ->   1     +0
+  tomorrow        29 ->   6    +23
+  further         27 ->   7    +20
+  more            30 ->   8    +22
+  a                4 ->   4     +0
+  Tuesday         11 ->   9     +2
+  Friday          23 ->  15     +8
+  October         22 ->  17     +5
+  July            24 ->  21     +3
+  at              16 ->  11     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  after            2 ->   3     -1
+  June             9 ->  29    -20
+  January         11 ->  32    -21
+  March            8 ->  18    -10
+  a                4 ->   6     -2
+  February        18 ->  40    -22
+  May             16 ->  34    -18
+  its             14 ->  26    -12
+  April           15 ->  23     -8
+  Tuesday         10 ->  15     -5
+  July            22 ->  27     -5
+  September       13 ->  16     -3
+  next             3 ->   4     -1
+  it               6 ->  11     -5
+
+HIGHER UNDER B
+  further          5 ->   1     +4
+  they            24 ->   5    +19
+  Thursday        17 ->   7    +10
+  tomorrow        19 ->   9    +10
+  more            64 ->  13    +51
+  Wednesday       12 ->  10     +2
+  later           21 ->  12     +9
+  Friday          26 ->  14    +12
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  it               6 ->  17    -11
+  Monday          15 ->  28    -13
+  Tuesday         19 ->  32    -13
+  a                5 ->   6     -1
+  Thursday        22 ->  25     -3
+  January          7 ->  11     -4
+  June            17 ->  19     -2
+  September       11 ->  13     -2
+
+HIGHER UNDER B
+  their           12 ->   5     +7
+  its              4 ->   3     +1
+  after            2 ->   2     +0
+  later            8 ->   7     +1
+  November        14 ->   8     +6
+  October         10 ->   9     +1
+  May             13 ->  12     +1
+  April           18 ->  14     +4
+  December        20 ->  16     +4
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  Wednesday        5 ->  10     -5
+  Thursday         7 ->  14     -7
+  Monday           8 ->  12     -4
+  tomorrow         4 ->   6     -2
+  a                3 ->   5     -2
+  its             11 ->  17     -6
+  Tuesday          9 ->   9     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  after            6 ->   2     +4
+  further         14 ->   4    +10
+  it              10 ->   7     +3
+  later           12 ->   8     +4
+  Friday          13 ->  11     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  next             2 ->  19    -17
+  after            3 ->   7     -4
+  tomorrow         4 ->  15    -11
+  its              5 ->  12     -7
+  Wednesday        8 ->  23    -15
+  Thursday         9 ->  20    -11
+  March           18 ->  45    -27
+  April           15 ->  27    -12
+  Tuesday         13 ->  17     -4
+  October         17 ->  28    -11
+  A                7 ->   8     -1
+  December        19 ->  29    -10
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  a                6 ->   2     +4
+  there           30 ->   6    +24
+  more            33 ->  10    +23
+  they            37 ->  11    +26
+  January         16 ->   3    +13
+  Friday          24 ->  14    +10
+  June            11 ->   4     +7
+  it              10 ->   5     +5
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  tomorrow         5 ->  13     -8
+  it               6 ->  12     -6
+  its              9 ->  45    -36
+  Wednesday        7 ->   9     -2
+  October         15 ->  23     -8
+  Tuesday         11 ->  14     -3
+
+HIGHER UNDER B
+  after            3 ->   2     +1
+  they            19 ->   5    +14
+  July            31 ->  19    +12
+  a                4 ->   4     +0
+  further         13 ->   8     +5
+  June            29 ->  18    +11
+  December        17 ->  10     +7
+  November        20 ->  15     +5
+  Thursday        10 ->   7     +3
+  later           16 ->  16     +0
+  Monday          12 ->  11     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  after            3 ->  13    -10
+  a                4 ->  21    -17
+  its              5 ->  25    -20
+  the              1 ->   3     -2
+  Monday           6 ->  27    -21
+  Tuesday          7 ->  31    -24
+  Wednesday       10 ->  28    -18
+  Thursday         8 ->  20    -12
+  it              11 ->  35    -24
+  June            19 ->  26     -7
+  Friday          18 ->  22     -4
+  July            22 ->  33    -11
+  March           16 ->  17     -1
+  Jan             24 ->  44    -20
+  May             12 ->  14     -2
+  September       14 ->  15     -1
+  January          9 ->  10     -1
+
+HIGHER UNDER B
+  later           15 ->   2    +13
+  next             2 ->   1     +1
+  our             52 ->   4    +48
+  November        20 ->   5    +15
+  August          31 ->   7    +24
+  December        23 ->   6    +17
+  at              26 ->   9    +17
+  October         21 ->   8    +13
+  April           13 ->  11     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  after            2 ->   4     -2
+  they             7 ->  23    -16
+  it              15 ->  49    -34
+  a                4 ->   5     -1
+  July            18 ->  20     -2
+  November        14 ->  19     -5
+  later            6 ->   7     -1
+  December        16 ->  17     -1
+  May             10 ->  13     -3
+  September        9 ->  11     -2
+  Monday          11 ->  12     -1
+
+HIGHER UNDER B
+  further          5 ->   2     +3
+  next             3 ->   3     +0
+  the              1 ->   1     +0
+  tomorrow         8 ->   6     +2
+  April           13 ->   8     +5
+  March           19 ->   9    +10
+  January         12 ->  10     +2
+  another         20 ->  14     +6
+  October         21 ->  15     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  March           11 ->  24    -13
+  September       12 ->  19     -7
+  Wednesday        8 ->  12     -4
+  Tuesday          6 ->  10     -4
+  June            14 ->  23     -9
+  Thursday         7 ->  11     -4
+  January         13 ->  15     -2
+  August          16 ->  25     -9
+  Monday           4 ->   6     -2
+  Friday          15 ->  16     -1
+  July            18 ->  31    -13
+  October         17 ->  20     -3
+  February        19 ->  28     -9
+  April           20 ->  26     -6
+  December        23 ->  30     -7
+  today           24 ->  41    -17
+  November        21 ->  21     +0
+  tomorrow         5 ->   7     -2
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  further         25 ->   5    +20
+  after            3 ->   3     +0
+  a                9 ->   4     +5
+  next             2 ->   2     +0
+  they            34 ->   8    +26
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  the              2 ->   2     +0
+  next             3 ->   4     -1
+  everyone        13 ->  16     -3
+  tomorrow         6 ->   8     -2
+  later           10 ->  10     +0
+  Monday          12 ->  13     -1
+
+HIGHER UNDER B
+  further          5 ->   3     +2
+  a                7 ->   5     +2
+  all              8 ->   6     +2
+  more            11 ->  11     +0
+  at              14 ->  12     +2
+  Friday           9 ->   9     +0
+  after            1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  next             3 ->   5     -2
+  a                4 ->   4     +0
+  Monday           5 ->  11     -6
+  Wednesday       10 ->  17     -7
+  its             21 ->  34    -13
+  November        19 ->  30    -11
+  October         15 ->  21     -6
+  June            18 ->  24     -6
+  it               7 ->   9     -2
+  July            23 ->  28     -5
+  tomorrow         9 ->  10     -1
+  Friday          25 ->  25     +0
+  Tuesday         13 ->  14     -1
+  later            6 ->   7     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  further          8 ->   2     +6
+  they            12 ->   6     +6
+  September       11 ->   8     +3
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  Wednesday        8 ->  19    -11
+  it              21 ->  25     -4
+  Thursday        12 ->  21     -9
+  July            14 ->  20     -6
+  its             25 ->  26     -1
+  Tuesday         10 ->  15     -5
+  Friday          23 ->  24     -1
+  Monday           4 ->   6     -2
+  June            15 ->  16     -1
+  September        9 ->  13     -4
+
+HIGHER UNDER B
+  next             3 ->   2     +1
+  after            6 ->   4     +2
+  a                5 ->   5     +0
+  the              1 ->   1     +0
+  later           17 ->   8     +9
+  January          7 ->   7     +0
+  April           19 ->  12     +7
+  tomorrow        16 ->  11     +5
+  August          26 ->  23     +3
+  May             11 ->   9     +2
+  December        13 ->  10     +3
+  February        18 ->  14     +4
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  Tuesday          7 ->  20    -13
+  later            6 ->  11     -5
+  the              1 ->   1     +0
+  Wednesday        9 ->  13     -4
+  March           19 ->  29    -10
+  July            23 ->  31     -8
+  Friday          11 ->  17     -6
+  December        22 ->  25     -3
+  May             16 ->  22     -6
+  January         12 ->  16     -4
+  November        24 ->  24     +0
+  September       14 ->  18     -4
+  it              13 ->  14     -1
+  February        15 ->  15     +0
+
+HIGHER UNDER B
+  further         18 ->   5    +13
+  tomorrow        21 ->   7    +14
+  at              26 ->   9    +17
+  next             3 ->   2     +1
+  they            10 ->   8     +2
+  more            28 ->  21     +7
+  October         17 ->  12     +5
+  a                4 ->   4     +0
+  April           25 ->  23     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  they             6 ->   7     -1
+  tomorrow         4 ->   4     +0
+  all              8 ->   9     -1
+  a                5 ->   6     -1
+  more            11 ->  12     -1
+  there           13 ->  15     -2
+  later           10 ->  10     +0
+
+HIGHER UNDER B
+  next             2 ->   1     +1
+  after            3 ->   3     +0
+  further          7 ->   5     +2
+  Monday          12 ->  11     +1
+  it               9 ->   8     +1
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  Monday           4 ->   4     +0
+  tomorrow        24 ->  27     -3
+  Tuesday          9 ->  10     -1
+  Wednesday       15 ->  18     -3
+  Friday          18 ->  20     -2
+  Thursday        20 ->  23     -3
+  August          25 ->  25     +0
+  later            7 ->   8     -1
+  September       14 ->  15     -1
+  October         26 ->  26     +0
+  next             2 ->   2     +0
+  February        13 ->  13     +0
+
+HIGHER UNDER B
+  it               6 ->   6     +0
+  after            3 ->   3     +0
+  they            23 ->  17     +6
+  a                5 ->   5     +0
+  May              8 ->   7     +1
+  June            11 ->  11     +0
+  at              27 ->  24     +3
+  April           17 ->  14     +3
+  January         12 ->  12     +0
+  July            21 ->  21     +0
+  November        22 ->  22     +0
+  December        19 ->  19     +0
+  further         16 ->  16     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  Monday           6 ->  15     -9
+  a                4 ->  10     -6
+  March           13 ->  22     -9
+  September       18 ->  32    -14
+  Tuesday          5 ->   9     -4
+  Friday          25 ->  35    -10
+  July            22 ->  33    -11
+  it               9 ->  16     -7
+  they            14 ->  18     -4
+  June            20 ->  24     -4
+  at              24 ->  29     -5
+  December        17 ->  19     -2
+  February        15 ->  17     -2
+
+HIGHER UNDER B
+  after            3 ->   2     +1
+  the              1 ->   1     +0
+  further         28 ->   5    +23
+  November        21 ->   8    +13
+  its              7 ->   4     +3
+  later           12 ->   7     +5
+  Wednesday        8 ->   6     +2
+  April           19 ->  11     +8
+  May             16 ->  14     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  a                4 ->   4     +0
+  April            9 ->  13     -4
+  March           11 ->  14     -3
+  July            20 ->  25     -5
+  Tuesday         10 ->  12     -2
+  May             14 ->  17     -3
+  Friday          23 ->  27     -4
+  Jan             27 ->  30     -3
+  January         18 ->  18     +0
+  October         25 ->  28     -3
+  Monday           7 ->   9     -2
+  June            16 ->  16     +0
+
+HIGHER UNDER B
+  further         15 ->   5    +10
+  next             2 ->   2     +0
+  after            3 ->   3     +0
+  later           13 ->  11     +2
+  Wednesday       12 ->  10     +2
+  they            17 ->  15     +2
+  their           28 ->  22     +6
+  Thursday         8 ->   8     +0
+  the              1 ->   1     +0
+  at              22 ->  21     +1
+  September       19 ->  19     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  its              5 ->   7     -2
+  after            3 ->   3     +0
+  they             8 ->  32    -24
+  it               6 ->  11     -5
+  April           10 ->  31    -21
+  March            7 ->  25    -18
+  January          9 ->  27    -18
+  next             2 ->   2     +0
+  February        14 ->  30    -16
+  June            12 ->  23    -11
+  September       13 ->  26    -13
+  a                4 ->   4     +0
+  Tuesday         11 ->  13     -2
+  May             16 ->  16     +0
+  their           19 ->  21     -2
+  November        18 ->  20     -2
+  July            21 ->  24     -3
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  Thursday        20 ->   5    +15
+  Monday          15 ->   6     +9
+  Wednesday       25 ->   9    +16
+  this            29 ->  10    +19
+  Friday          30 ->  14    +16
+  tomorrow        27 ->  12    +15
+  later           17 ->   8     +9
+  today           31 ->  19    +12
+  at              26 ->  17     +9
+  October         23 ->  15     +8
+  further         22 ->  18     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  after            2 ->   4     -2
+  March            7 ->  19    -12
+  April           13 ->  24    -11
+  it               8 ->  15     -7
+  December        15 ->  21     -6
+  May             17 ->  26     -9
+  its             24 ->  36    -12
+  October         18 ->  22     -4
+  September        9 ->  14     -5
+  January         14 ->  17     -3
+  June            19 ->  25     -6
+  July            26 ->  29     -3
+  February        25 ->  27     -2
+  Tuesday          6 ->  12     -6
+
+HIGHER UNDER B
+  next             3 ->   2     +1
+  they            11 ->   5     +6
+  further         20 ->   6    +14
+  the              1 ->   1     +0
+  a                4 ->   3     +1
+  more            23 ->   7    +16
+  tomorrow        22 ->  11    +11
+  later           10 ->   8     +2
+  Thursday        12 ->  10     +2
+  Friday          27 ->  16    +11
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  next             2 ->   4     -2
+  tomorrow         4 ->  13     -9
+  the              1 ->   2     -1
+  Thursday         9 ->  20    -11
+  Tuesday         10 ->  24    -14
+  Friday          11 ->  28    -17
+  Wednesday       14 ->  52    -38
+  later            6 ->   6     +0
+  Monday          13 ->  21     -8
+
+HIGHER UNDER B
+  after            3 ->   1     +2
+  a                5 ->   3     +2
+  further         12 ->   5     +7
+  they             7 ->   7     +0
+  it               8 ->   8     +0
+  May             18 ->   9     +9
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  Wednesday        7 ->  18    -11
+  it               6 ->   9     -3
+  at              11 ->  25    -14
+  Thursday         9 ->  16     -7
+  Monday           4 ->   6     -2
+  its             19 ->  29    -10
+  Tuesday          8 ->  11     -3
+  Friday          10 ->  14     -4
+  April           17 ->  24     -7
+  September       16 ->  17     -1
+  July            18 ->  19     -1
+  February        24 ->  26     -2
+  after            3 ->   3     +0
+
+HIGHER UNDER B
+  next             2 ->   2     +0
+  the              1 ->   1     +0
+  further         25 ->   5    +20
+  they            13 ->   7     +6
+  tomorrow        21 ->  13     +8
+  March           12 ->   8     +4
+  May             15 ->  10     +5
+  November        26 ->  20     +6
+  later           20 ->  15     +5
+  December        27 ->  23     +4
+  January         22 ->  21     +1
+  October         23 ->  22     +1
+  June            14 ->  12     +2
+  August          28 ->  27     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  next             1 ->   1     +0
+  Thursday         4 ->  10     -6
+  it              12 ->  14     -2
+  Monday          13 ->  15     -2
+  tomorrow        22 ->  28     -6
+  after            3 ->   3     +0
+  later           14 ->  22     -8
+  Wednesday       19 ->  26     -7
+  Friday          18 ->  25     -7
+  its              5 ->  11     -6
+  May             10 ->  12     -2
+  January         16 ->  17     -1
+
+HIGHER UNDER B
+  the              2 ->   2     +0
+  further         15 ->   6     +9
+  a                6 ->   4     +2
+  September       11 ->   5     +6
+  July            26 ->  13    +13
+  December        27 ->  19     +8
+  June             9 ->   9     +0
+  March            7 ->   7     +0
+  April            8 ->   8     +0
+  November        28 ->  24     +4
+  they            29 ->  27     +2
+  at              23 ->  21     +2
+  August          25 ->  23     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  Monday           5 ->  18    -13
+  next             2 ->   3     -1
+  tomorrow         8 ->  12     -4
+  it              10 ->  23    -13
+  May             15 ->  60    -45
+  a                9 ->  14     -5
+  April           13 ->  27    -14
+  July            17 ->  38    -21
+  June            16 ->  32    -16
+  September       22 ->  49    -27
+  March           14 ->  22     -8
+  December        19 ->  33    -14
+  this            23 ->  41    -18
+  its             18 ->  26     -8
+  January         20 ->  25     -5
+  the              1 ->   1     +0
+
+HIGHER UNDER B
+  Thursday         4 ->   2     +2
+  Friday          12 ->   6     +6
+  Wednesday        6 ->   5     +1
+  Tuesday          7 ->   7     +0
+  to              71 ->  13    +58
+  all             49 ->  11    +38
+  Saturday        35 ->  10    +25
+  further         27 ->   9    +18
+  later           11 ->   8     +3
+  they            31 ->  15    +16
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  Monday           4 ->   8     -4
+  September        6 ->  24    -18
+  it               7 ->  23    -16
+  Tuesday          8 ->  13     -5
+  Thursday         9 ->  17     -8
+  March           10 ->  14     -4
+  June            11 ->  22    -11
+  May             12 ->  26    -14
+  Wednesday       13 ->  19     -6
+  November        14 ->  16     -2
+  April           17 ->  27    -10
+  October         15 ->  20     -5
+  December        20 ->  28     -8
+  July            22 ->  30     -8
+  August          25 ->  33     -8
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  next             3 ->   3     +0
+  further         16 ->   4    +12
+  after            2 ->   2     +0
+  a                5 ->   5     +0
+  later           23 ->   6    +17
+  they            26 ->   7    +19
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  next             2 ->   5     -3
+  Monday           7 ->  11     -4
+  tomorrow         4 ->   6     -2
+  Tuesday         12 ->  19     -7
+  Friday          11 ->  15     -4
+  later            9 ->  10     -1
+  it              13 ->  13     +0
+
+HIGHER UNDER B
+  after            3 ->   2     +1
+  the              1 ->   1     +0
+  further          6 ->   3     +3
+  a                5 ->   4     +1
+  more            17 ->   9     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  September        8 ->  23    -15
+  May              6 ->  10     -4
+  June             7 ->  15     -8
+  after            3 ->   6     -3
+  March           10 ->  18     -8
+  Wednesday       15 ->  29    -14
+  April           12 ->  19     -7
+  July            16 ->  32    -16
+  Thursday        17 ->  25     -8
+  February        18 ->  28    -10
+  December        19 ->  27     -8
+  October         20 ->  24     -4
+  Tuesday         11 ->  11     +0
+  its             22 ->  30     -8
+  November        24 ->  39    -15
+
+HIGHER UNDER B
+  further          4 ->   2     +2
+  the              1 ->   1     +0
+  they            26 ->   5    +21
+  a                5 ->   4     +1
+  all             36 ->   9    +27
+  Monday           9 ->   7     +2
+  it              13 ->   8     +5
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  a                4 ->   6     -2
+  it              17 ->  24     -7
+  their           18 ->  25     -7
+  its              5 ->   5     +0
+  January          8 ->  13     -5
+  after            3 ->   3     +0
+  May             15 ->  19     -4
+  October         20 ->  21     -1
+  November        21 ->  23     -2
+
+HIGHER UNDER B
+  next             2 ->   2     +0
+  March           10 ->   4     +6
+  later           19 ->  11     +8
+  April           11 ->   7     +4
+  tomorrow        27 ->  17    +10
+  Wednesday        9 ->   8     +1
+  June            16 ->  15     +1
+  December        22 ->  18     +4
+  February        14 ->  12     +2
+  Friday          24 ->  22     +2
+  July            23 ->  20     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  a                4 ->   6     -2
+  the              1 ->   3     -2
+  March            6 ->  19    -13
+  April           14 ->  32    -18
+  June             9 ->  27    -18
+  February        18 ->  36    -18
+  May             13 ->  24    -11
+  January          8 ->  21    -13
+  Monday          10 ->  20    -10
+  Jan             23 ->  37    -14
+  it               7 ->  12     -5
+  July            20 ->  28     -8
+  Nov             26 ->  33     -7
+  September       24 ->  26     -2
+  later           11 ->  11     +0
+
+HIGHER UNDER B
+  next             2 ->   1     +1
+  its              3 ->   2     +1
+  their           12 ->   5     +7
+  October         21 ->   7    +14
+  further         28 ->   8    +20
+  they            32 ->  13    +19
+  more            35 ->  16    +19
+  after            5 ->   4     +1
+  Tuesday         17 ->   9     +8
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  Tuesday          5 ->   7     -2
+  Wednesday        6 ->  10     -4
+  its             10 ->  15     -5
+  Monday           4 ->   5     -1
+  April           12 ->  19     -7
+  Friday          11 ->  12     -1
+  May             16 ->  22     -6
+  Thursday         8 ->   8     +0
+  June            13 ->  17     -4
+  July            18 ->  23     -5
+  after            3 ->   3     +0
+  this            23 ->  26     -3
+  November        19 ->  20     -1
+  December        24 ->  24     +0
+  February        21 ->  21     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  next             2 ->   2     +0
+  later           20 ->   9    +11
+  a                7 ->   4     +3
+  October         25 ->  16     +9
+  it              15 ->  11     +4
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  it               3 ->   5     -2
+  June            16 ->  27    -11
+  December        17 ->  26     -9
+  at              23 ->  31     -8
+  March           11 ->  16     -5
+  November        14 ->  20     -6
+  January          8 ->  11     -3
+  May             13 ->  18     -5
+  February        19 ->  23     -4
+  a                4 ->   6     -2
+  July            22 ->  24     -2
+  April           20 ->  22     -2
+  September       10 ->  13     -3
+
+HIGHER UNDER B
+  further          6 ->   4     +2
+  next             5 ->   3     +2
+  after            2 ->   2     +0
+  Monday           9 ->   8     +1
+  they             7 ->   7     +0
+  Friday          24 ->   9    +15
+  tomorrow        21 ->  10    +11
+  Tuesday         18 ->  14     +4
+  Thursday        26 ->  17     +9
+  later           15 ->  15     +0
+  October         12 ->  12     +0
+  more            25 ->  19     +6
+  Wednesday       27 ->  21     +6
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  its              6 ->  11     -5
+  it               7 ->  13     -6
+  March           11 ->  22    -11
+  January         13 ->  37    -24
+  a                4 ->   7     -3
+  April           14 ->  32    -18
+  June            15 ->  31    -16
+  Wednesday       10 ->  15     -5
+  September       16 ->  25     -9
+  July            19 ->  40    -21
+  May             18 ->  33    -15
+  October         21 ->  30     -9
+  February        23 ->  34    -11
+  November        24 ->  36    -12
+  the              1 ->   1     +0
+  Monday           5 ->   6     -1
+  Tuesday          8 ->   9     -1
+
+HIGHER UNDER B
+  after            3 ->   2     +1
+  tomorrow        17 ->   5    +12
+  later            9 ->   4     +5
+  further         22 ->   8    +14
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 42 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

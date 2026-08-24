@@ -145,5 +145,6 @@
  "effort": "xhigh",
  "path": "/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/inputs/xling_he_pinned_his_roommate_to_the_floor_and_nb_blind.txt",
  "no_blanks": true,
- "version": "x1bn"
+ "version": "x1bn",
+ "raters": 2
 }

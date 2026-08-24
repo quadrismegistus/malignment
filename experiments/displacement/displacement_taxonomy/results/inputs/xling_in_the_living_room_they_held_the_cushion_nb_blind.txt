@@ -1,0 +1,1531 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: In the living room, they held the cushions down on the couch and ___
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  sat              1 ->   1     +0
+  the              3 ->  12     -9
+  lay              5 ->  21    -16
+  let             10 ->  44    -34
+  said            13 ->  61    -48
+  laid             6 ->  22    -16
+  covered          9 ->  27    -18
+  spread          14 ->  34    -20
+  pulled          16 ->  38    -22
+  they            17 ->  45    -28
+  put              2 ->   6     -4
+  chairs          18 ->  36    -18
+  had             20 ->  53    -33
+  then             4 ->   8     -4
+  I               22 ->  55    -33
+  turned          12 ->  19     -7
+  placed          21 ->  24     -3
+  took            15 ->  16     -1
+
+HIGHER UNDER B
+  settled        100 ->   2    +98
+  tried           27 ->   4    +23
+  watched          7 ->   3     +4
+  made             8 ->   5     +3
+  waited          35 ->   9    +26
+  talked         103 ->  13    +90
+  carefully       86 ->  14    +72
+  discussed      135 ->  23   +112
+  looked          11 ->   7     +4
+  set             23 ->  10    +13
+  prepared        40 ->  20    +20
+  arranged        37 ->  18    +19
+  began           19 ->  11     +8
+  opened          32 ->  17    +15
+  started         26 ->  15    +11
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  gently           3 ->  53    -50
+  sat              1 ->   3     -2
+  ensured          6 -> 117   -111
+  flopped          7 ->  46    -39
+  chair            5 ->   6     -1
+  propped         14 ->  66    -52
+  covered         13 ->  48    -35
+  pillows         10 ->  15     -5
+  left            16 ->  43    -27
+  propelled       20 -> 128   -108
+  pillowed        21 -> 126   -105
+  laid            15 ->  33    -18
+  kept            22 -> 106    -84
+  stacked         23 -> 104    -81
+  threw           18 ->  29    -11
+  they            17 ->  21     -4
+  let             19 ->  23     -4
+  placed           9 ->   9     +0
+  made            11 ->  11     +0
+
+HIGHER UNDER B
+  then             8 ->   2     +6
+  tried           12 ->   5     +7
+  TV              52 ->   7    +45
+  stood           33 ->   8    +25
+  turned          75 ->  12    +63
+  said            65 ->  13    +52
+  chairs           4 ->   4     +0
+  put             28 ->  10    +18
+  began          119 ->  16   +103
+  asked           95 ->  18    +77
+  had             27 ->  14    +13
+  arranged        30 ->  17    +13
+  the              2 ->   1     +1
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  then             6 ->  13     -7
+  pulled           8 ->  15     -7
+  watched         10 ->  14     -4
+  spread           3 ->   7     -4
+  lay             14 ->  24    -10
+  set             11 ->  18     -7
+  I               19 ->  67    -48
+  waited          21 ->  59    -38
+  sat              1 ->   3     -2
+  looked          18 ->  31    -13
+  tried            9 ->   9     +0
+  got             20 ->  25     -5
+  turned          15 ->  16     -1
+
+HIGHER UNDER B
+  the              2 ->   1     +1
+  placed          16 ->   5    +11
+  made             5 ->   4     +1
+  arranged         4 ->   2     +2
+  covered         13 ->   8     +5
+  put              7 ->   6     +1
+  rearranged      23 ->  11    +12
+  used            38 ->  12    +26
+  laid            12 ->  10     +2
+  stretched       25 ->  19     +6
+  took            17 ->  17     +0
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  looked           2 ->   9     -7
+  sat              1 ->   5     -4
+  rested           8 ->  32    -24
+  watched         10 ->  33    -23
+  leaned          15 ->  35    -20
+  waited          20 ->  78    -58
+  turned          12 ->  20     -8
+  settled         14 ->  23     -9
+  stared          22 ->  57    -35
+  took            13 ->  21     -8
+  tried           16 ->  25     -9
+  let             21 ->  27     -6
+
+HIGHER UNDER B
+  placed           4 ->   2     +2
+  started          5 ->   3     +2
+  began            3 ->   1     +2
+  then            19 ->   7    +12
+  set              7 ->   6     +1
+  the              6 ->   4     +2
+  rearranged      67 ->  12    +55
+  stood           27 ->  13    +14
+  moved           43 ->  16    +27
+  positioned      45 ->  18    +27
+  decided         31 ->  15    +16
+  laid             9 ->   8     +1
+  held            28 ->  19     +9
+  arranged        29 ->  22     +7
+  spread          23 ->  17     +6
+  pulled          17 ->  11     +6
+  made            18 ->  14     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  the              2 ->   5     -3
+  put              5 ->  52    -47
+  I                3 ->  13    -10
+  placed           6 ->  23    -17
+  they             9 ->  39    -30
+  then            11 ->  37    -26
+  made            10 ->  24    -14
+  on              12 ->  29    -17
+  laid            20 ->  90    -70
+  a               27 -> 144   -117
+  she             19 ->  66    -47
+  set             23 ->  63    -40
+  spread          25 ->  69    -44
+  used            17 ->  26     -9
+  in              26 ->  47    -21
+  took            16 ->  20     -4
+
+HIGHER UNDER B
+  watched          4 ->   2     +2
+  looked          13 ->   3    +10
+  chatted         38 ->   6    +32
+  sat              1 ->   1     +0
+  started         14 ->   7     +7
+  talked          21 ->   8    +13
+  were             7 ->   4     +3
+  stared          39 ->  10    +29
+  smiled          84 ->  11    +73
+  ate             76 ->  17    +59
+  leaned          22 ->  14     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  sat              2 ->   5     -3
+  put              4 ->  30    -26
+  watched          6 ->  34    -28
+  lay             19 -> 102    -83
+  laid             9 ->  22    -13
+  they            23 -> 139   -116
+  looked          13 ->  27    -14
+  had             21 ->  54    -33
+  talked          24 ->  53    -29
+  took            22 ->  36    -14
+  each            20 ->  29     -9
+  I               18 ->  25     -7
+  made             7 ->  11     -4
+  turned          11 ->  17     -6
+  placed          12 ->  20     -8
+  pulled          10 ->  15     -5
+  on              25 ->  31     -6
+  started         16 ->  16     +0
+  then             3 ->   3     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  chairs          27 ->   2    +25
+  set              8 ->   4     +4
+  carefully       48 ->   6    +42
+  around          54 ->   9    +45
+  settled         15 ->   8     +7
+  table          142 ->  14   +128
+  draped          49 ->  13    +36
+  found           46 ->  19    +27
+  stood           38 ->  18    +20
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  the              2 ->   5     -3
+  I               13 -> 147   -134
+  had              9 ->  46    -37
+  then            11 ->  63    -52
+  on               8 ->  36    -28
+  put              3 ->   9     -6
+  watched          4 ->   7     -3
+  made             7 ->  12     -5
+  started         19 ->  42    -23
+  played          12 ->  21     -9
+  looked          20 ->  40    -20
+  talked          25 ->  52    -27
+  let             18 ->  24     -6
+  began           14 ->  19     -5
+  used            22 ->  28     -6
+  turned          27 ->  35     -8
+  threw           23 ->  29     -6
+
+HIGHER UNDER B
+  sat              1 ->   1     +0
+  chairs           5 ->   2     +3
+  set             10 ->   3     +7
+  leaned          30 ->   6    +24
+  danced          53 ->  14    +39
+  lay             24 ->   8    +16
+  floor           49 ->  16    +33
+  laid             6 ->   4     +2
+  spread          44 ->  17    +27
+  stared          38 ->  18    +20
+  piled           26 ->  15    +11
+  covered         17 ->  10     +7
+  tried           16 ->  11     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  on               4 ->   5     -1
+  covered          8 ->   9     -1
+  put              3 ->   3     +0
+  they            11 ->  18     -7
+  moved           15 ->  21     -6
+  took            16 ->  22     -6
+  made             9 ->  10     -1
+  placed           6 ->   7     -1
+
+HIGHER UNDER B
+  chairs           2 ->   1     +1
+  arranged        21 ->  13     +8
+  settled         25 ->  14    +11
+  set             10 ->   8     +2
+  stood           26 ->  17     +9
+  sat              7 ->   6     +1
+  propped         41 ->  19    +22
+  started         14 ->  11     +3
+  began           17 ->  16     +1
+  she             38 ->  20    +18
+  in              12 ->  12     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  sat              3 ->   9     -6
+  the              2 ->   3     -1
+  then             7 ->  15     -8
+  pushed          11 ->  27    -16
+  they            10 ->  23    -13
+  lay             20 ->  67    -47
+  tried           12 ->  21     -9
+  pulled          18 ->  24     -6
+  put              4 ->   5     -1
+  took            13 ->  18     -5
+  made             6 ->   6     +0
+  sofa            19 ->  20     -1
+  stood           16 ->  17     -1
+  waited          14 ->  14     +0
+
+HIGHER UNDER B
+  chairs           1 ->   1     +0
+  chair            8 ->   2     +6
+  armchair       122 ->   7   +115
+  armchairs       96 ->  11    +85
+  loveseat        52 ->  10    +42
+  placed          17 ->  12     +5
+  used             9 ->   8     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  sat              6 ->  28    -22
+  put              3 ->   6     -3
+  made             7 ->  12     -5
+  then             9 ->  20    -11
+  watched         14 ->  61    -47
+  laid            13 ->  47    -34
+  let             12 ->  30    -18
+  had              8 ->  11     -3
+  on               4 ->   5     -1
+  I               17 ->  26     -9
+  covered         15 ->  23     -8
+  floor           11 ->  17     -6
+  set             16 ->  19     -3
+
+HIGHER UNDER B
+  chairs           1 ->   1     +0
+  chair            5 ->   3     +2
+  armchair        21 ->   4    +17
+  the              2 ->   2     +0
+  armchairs       38 ->   7    +31
+  added           48 ->  10    +38
+  a               25 ->   9    +16
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  watched          7 ->  32    -25
+  he              14 ->  81    -67
+  she             13 ->  57    -44
+  talked          17 ->  74    -57
+  I               15 ->  55    -40
+  waited          18 ->  70    -52
+  tried           12 ->  29    -17
+  laughed         19 ->  45    -26
+  played          21 ->  39    -18
+  went            23 ->  42    -19
+  set             11 ->  16     -5
+  had              9 ->  13     -4
+  looked          10 ->  15     -5
+  sat              2 ->   2     +0
+  took            16 ->  18     -2
+  they             6 ->   6     +0
+  then             5 ->   5     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  placed          32 ->   7    +25
+  on              29 ->   8    +21
+  in              54 ->  12    +42
+  chairs          38 ->  11    +27
+  threw           49 ->  14    +35
+  spread          27 ->  10    +17
+  gave            51 ->  19    +32
+  made             4 ->   4     +0
+  used            39 ->  23    +16
+  put              3 ->   3     +0
+  were            30 ->  22     +8
+  covered         28 ->  24     +4
+  turned          24 ->  21     +3
+  started         22 ->  20     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  then             2 ->   9     -7
+  settled         19 -> 119   -100
+  laid            13 ->  37    -24
+  lay              8 ->  25    -17
+  put              7 ->  21    -14
+  watched         24 ->  90    -66
+  the              4 ->   8     -4
+  let             23 ->  73    -50
+  got             25 ->  69    -44
+  looked          17 ->  34    -17
+  they            18 ->  36    -18
+  pulled           5 ->  12     -7
+  set             21 ->  43    -22
+  began            3 ->   7     -4
+  made            12 ->  17     -5
+  spread           9 ->  15     -6
+  leaned          16 ->  19     -3
+  started         11 ->  14     -3
+
+HIGHER UNDER B
+  pushed           6 ->   2     +4
+  threw           38 ->   3    +35
+  turned          15 ->   4    +11
+  sat              1 ->   1     +0
+  placed          22 ->   6    +16
+  were            10 ->   5     +5
+  moved           28 ->  11    +17
+  knocked        171 ->  18   +153
+  stood           20 ->  10    +10
+  kept            65 ->  16    +49
+  kicked         107 ->  24    +83
+  raised          79 ->  23    +56
+  walked          43 ->  20    +23
+  their           51 ->  22    +29
+  took            14 ->  13     +1
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  watched          3 ->  29    -26
+  lay              5 ->   9     -4
+  laid             8 ->  16     -8
+  then            13 ->  34    -21
+  leaned          10 ->  13     -3
+  I               12 ->  17     -5
+  kept            21 ->  54    -33
+  took            14 ->  21     -7
+  on              15 ->  18     -3
+  told            20 ->  24     -4
+  chairs           4 ->   5     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  sat              2 ->   2     +0
+  put              6 ->   3     +3
+  covered          7 ->   4     +3
+  placed          19 ->   6    +13
+  piled           64 ->  14    +50
+  stood           29 ->  15    +14
+  used            18 ->  12     +6
+  threw           17 ->  11     +6
+  tried           11 ->   7     +4
+  pushed          16 ->  10     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  put              2 ->  16    -14
+  pulled           4 ->  24    -20
+  covered          8 ->  37    -29
+  then             6 ->  20    -14
+  began           12 ->  31    -19
+  tried           14 ->  71    -57
+  used            11 ->  23    -12
+  took            15 ->  52    -37
+  rolled          17 -> 117   -100
+  they            18 -> 139   -121
+  tied            21 -> 181   -160
+  opened          19 ->  67    -48
+  spread          13 ->  19     -6
+  turned          22 ->  75    -53
+  on              20 ->  51    -31
+  started         16 ->  34    -18
+  removed         24 ->  46    -22
+  made             7 ->   8     -1
+
+HIGHER UNDER B
+  chairs          28 ->   2    +26
+  the              1 ->   1     +0
+  ottoman        191 ->   7   +184
+  laid             5 ->   3     +2
+  set              9 ->   5     +4
+  floor          126 ->  11   +115
+  carpet          55 ->   9    +46
+  arranged        84 ->  12    +72
+  chair          137 ->  14   +123
+  found           33 ->  10    +23
+  placed          10 ->   6     +4
+  rearranged     125 ->  17   +108
+  carefully       31 ->  13    +18
+  under           71 ->  18    +53
+  lay             23 ->  15     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  they             5 -> 106   -101
+  on               3 ->   7     -4
+  put              4 ->  21    -17
+  sat             10 ->  30    -20
+  chairs           2 ->   3     -1
+  pulled          14 ->  41    -27
+  a               13 ->  29    -16
+  set              9 ->  12     -3
+  covered          6 ->  10     -4
+  took            16 ->  27    -11
+  in              15 ->  18     -3
+
+HIGHER UNDER B
+  played          60 ->   2    +58
+  used            24 ->   5    +19
+  made            12 ->   4     +8
+  under           25 ->  11    +14
+  chair            7 ->   6     +1
+  playfully      155 ->  17   +138
+  called          92 ->  16    +76
+  placed          11 ->   8     +3
+  arranged        41 ->  14    +27
+  loveseat        30 ->  15    +15
+  threw           17 ->  13     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  then             5 ->  16    -11
+  they             9 ->  90    -81
+  pulled           8 ->  43    -35
+  laid             7 ->  13     -6
+  chairs          10 ->  26    -16
+  had             16 ->  63    -47
+  bed             20 -> 145   -125
+  he              25 ->  72    -47
+  let             17 ->  23     -6
+  watched         22 ->  30     -8
+  covered         11 ->  14     -3
+  took            19 ->  21     -2
+  started         12 ->  12     +0
+
+HIGHER UNDER B
+  put              4 ->   1     +3
+  sat              2 ->   2     +0
+  began           18 ->   6    +12
+  arranged        35 ->   8    +27
+  placed           6 ->   5     +1
+  lay             13 ->   7     +6
+  spread          21 ->   9    +12
+  set             15 ->  10     +5
+  used            14 ->  11     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  the              1 ->   4     -3
+  then             4 ->  23    -19
+  placed           6 ->  42    -36
+  laid             7 ->  24    -17
+  covered         10 ->  26    -16
+  pulled          12 ->  40    -28
+  on              15 ->  74    -59
+  chairs          22 -> 153   -131
+  began           14 ->  70    -56
+  turned          19 ->  60    -41
+  I               11 ->  25    -14
+  stuffed         24 ->  71    -47
+  pushed          16 ->  35    -19
+  used            20 ->  31    -11
+  had             23 ->  28     -5
+
+HIGHER UNDER B
+  spread          13 ->   3    +10
+  set              9 ->   5     +4
+  slid            40 ->   9    +31
+  arranged        41 ->  10    +31
+  slipped        110 ->  14    +96
+  flipped         51 ->  13    +38
+  forced          80 ->  15    +65
+  he              37 ->  12    +25
+  looked          18 ->   8    +10
+  practiced      155 ->  21   +134
+  cut             82 ->  17    +65
+  examined        66 ->  18    +48
+  tried           17 ->  11     +6
+  pillows         58 ->  22    +36
+  she             30 ->  16    +14
+  put              3 ->   2     +1
+  watched          8 ->   7     +1
+  played          25 ->  19     +6
+  found           21 ->  20     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  sat              1 ->  12    -11
+  the              2 ->  11     -9
+  lay              4 ->  26    -22
+  laid             5 ->  16    -11
+  they            14 -> 165   -151
+  then             9 ->  34    -25
+  had              8 ->  24    -16
+  covered         18 -> 102    -84
+  put              7 ->  14     -7
+  spread          12 ->  25    -13
+  stared          15 ->  51    -36
+  slept           16 ->  45    -29
+  got             19 ->  43    -24
+
+HIGHER UNDER B
+  talked          20 ->   1    +19
+  laughed         39 ->   3    +36
+  giggled        150 ->   7   +143
+  squeezed        76 ->  10    +66
+  watched         13 ->   5     +8
+  read           130 ->  20   +110
+  danced          31 ->   9    +22
+  poured          59 ->  17    +42
+  did             37 ->  18    +19
+  jumped          60 ->  23    +37
+  took            10 ->   6     +4
+  sang            96 ->  27    +69
+  started         35 ->  19    +16
+  let             22 ->  15     +7
+  played          17 ->  13     +4
+  looked          27 ->  21     +6
+  tied            28 ->  22     +6
+  tried            6 ->   4     +2
+  used            11 ->   8     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  the              1 ->  13    -12
+  sat              2 ->   5     -3
+  made             4 ->  12     -8
+  laid             6 ->  14     -8
+  chairs           7 ->  38    -31
+  placed           8 ->  17     -9
+  pulled          10 ->  19     -9
+  I               11 ->  81    -70
+  on              12 ->  29    -17
+  set             13 ->  32    -19
+  draped          14 ->  53    -39
+  spread          16 ->  16     +0
+  turned          17 ->  43    -26
+  took            19 ->  67    -48
+  lay             18 ->  20     -2
+  pushed          20 ->  31    -11
+  covered         21 ->  45    -24
+  tried           22 -> 114    -92
+
+HIGHER UNDER B
+  used             9 ->   1     +8
+  put              3 ->   2     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  looked           3 ->  35    -32
+  watched         10 ->  78    -68
+  put              6 ->  14     -8
+  started         17 ->  43    -26
+  waited          22 ->  75    -53
+  began            5 ->  12     -7
+  were            19 ->  30    -11
+  turned          14 ->  24    -10
+  stared          16 ->  26    -10
+  leaned           9 ->  16     -7
+  covered         23 ->  32     -9
+  made            11 ->  15     -4
+  took            24 ->  33     -9
+  spread          15 ->  17     -2
+  laid            13 ->  13     +0
+
+HIGHER UNDER B
+  the              2 ->   2     +0
+  pulled           4 ->   3     +1
+  slid            27 ->   5    +22
+  settled         33 ->   8    +25
+  sat              1 ->   1     +0
+  placed           7 ->   4     +3
+  chairs          93 ->  10    +83
+  pushed          20 ->   7    +13
+  stood            8 ->   6     +2
+  gently          78 ->  20    +58
+  set             18 ->   9     +9
+  lay             32 ->  19    +13
+  then            12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  laid             4 ->   8     -4
+  then             5 ->  10     -5
+  lay              8 ->  16     -8
+  made             6 ->   6     +0
+  played          17 ->  42    -25
+  got             16 ->  33    -17
+  tried           14 ->  20     -6
+  spread           9 ->   9     +0
+  sat              1 ->   3     -2
+  had             12 ->  13     -1
+
+HIGHER UNDER B
+  covered         10 ->   4     +6
+  the              3 ->   1     +2
+  put              2 ->   2     +0
+  used            11 ->   7     +4
+  chairs          46 ->  15    +31
+  turned          23 ->  12    +11
+  hung            57 ->  17    +40
+  set             15 ->  11     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  sat              2 ->  10     -8
+  the              1 ->   1     +0
+  then             4 ->   5     -1
+  on              13 ->  30    -17
+  pretended       16 ->  24     -8
+  stood           26 ->  31     -5
+
+HIGHER UNDER B
+  set              5 ->   3     +2
+  searched        23 ->  13    +10
+  tried            9 ->   6     +3
+  found           11 ->   9     +2
+  started         15 ->  12     +3
+  used             6 ->   4     +2
+  locked          32 ->  22    +10
+  took            25 ->  18     +7
+  waited          17 ->  16     +1
+  went            18 ->  17     +1
+  made            14 ->  14     +0
+  covered          7 ->   7     +0
+  left            28 ->  26     +2
+  put              8 ->   8     +0
+  carefully       20 ->  20     +0
+  ran             27 ->  27     +0
+  hid             19 ->  19     +0
+  tied            21 ->  21     +0
+  placed           3 ->   2     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  chairs           1 ->   4     -3
+  chair            4 ->  32    -28
+  on               5 ->  18    -13
+  sofa             6 ->  21    -15
+  lounged          8 ->  25    -17
+  they             9 ->  38    -29
+  in              18 -> 111    -93
+  set             14 ->  33    -19
+  pulled          16 ->  27    -11
+  floor           25 ->  44    -19
+  had             19 ->  26     -7
+  watched         10 ->  12     -2
+  put              7 ->   7     +0
+
+HIGHER UNDER B
+  used            15 ->   3    +12
+  sat              3 ->   2     +1
+  the              2 ->   1     +1
+  made            12 ->   5     +7
+  began           41 ->  10    +31
+  then            11 ->   6     +5
+  found           39 ->  14    +25
+  spread          17 ->   9     +8
+  took            13 ->   8     +5
+  I               22 ->  11    +11
+  pushed          43 ->  20    +23
+  leaned          40 ->  17    +23
+  tried           26 ->  15    +11
+  placed          21 ->  13     +8
+  laid            24 ->  19     +5
+  looked          20 ->  16     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  sat              1 ->   2     -1
+  laid             3 ->  10     -7
+  I                5 ->  23    -18
+  put              4 ->   9     -5
+  they            17 -> 105    -88
+  we              13 ->  42    -29
+  he              20 ->  79    -59
+  had             18 ->  43    -25
+  a               16 ->  37    -21
+  on               6 ->  11     -5
+  then             9 ->  12     -3
+  stood           23 ->  33    -10
+  lay             14 ->  20     -6
+  my              22 ->  31     -9
+  draped          25 ->  25     +0
+  made            11 ->  13     -2
+
+HIGHER UNDER B
+  floor           49 ->   8    +41
+  pulled          12 ->   4     +8
+  chairs          15 ->   7     +8
+  used            10 ->   5     +5
+  arranged        60 ->  19    +41
+  poured          29 ->  16    +13
+  set              7 ->   3     +4
+  chair           69 ->  22    +47
+  began           67 ->  24    +43
+  started         47 ->  21    +26
+  placed           8 ->   6     +2
+  pushed          24 ->  15     +9
+  moved           21 ->  14     +7
+  looked          26 ->  18     +8
+  covered         19 ->  17     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  put              3 ->   6     -3
+  then             6 ->  10     -4
+  they            14 ->  26    -12
+  in              15 ->  25    -10
+  covered         10 ->  17     -7
+  on               5 ->   7     -2
+  tried           18 ->  27     -9
+  I                9 ->  13     -4
+  chair            7 ->   9     -2
+  used             8 ->  11     -3
+  pulled          17 ->  21     -4
+  pushed          13 ->  15     -2
+  had             16 ->  19     -3
+
+HIGHER UNDER B
+  lay             19 ->   3    +16
+  chairs           2 ->   2     +0
+  the              1 ->   1     +0
+  laid            11 ->   5     +6
+  made             4 ->   4     +0
+  recliner       161 ->  20   +141
+  began           24 ->  12    +12
+  floor           39 ->  18    +21
+  started         21 ->  14     +7
+  placed          20 ->  16     +4
+  sat             12 ->   8     +4
+  set             25 ->  22     +3
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  they             6 ->  15     -9
+  watched          3 ->   4     -1
+  jumped          15 ->  21     -6
+  the              1 ->   1     +0
+  threw           10 ->  14     -4
+  vacuumed        13 ->  13     +0
+  pulled          20 ->  29     -9
+  played          17 ->  22     -5
+  ate             25 ->  28     -3
+  sat             18 ->  20     -2
+  tried            5 ->   5     +0
+
+HIGHER UNDER B
+  began           12 ->   7     +5
+  started          9 ->   6     +3
+  waited          21 ->  16     +5
+  put              4 ->   3     +1
+  I               33 ->  25     +8
+  let              8 ->   8     +0
+  placed          22 ->  17     +5
+  sofa            29 ->  24     +5
+  set             23 ->  19     +4
+  used            11 ->  10     +1
+  took            16 ->  11     +5
+  looked          19 ->  18     +1
+  laid            28 ->  26     +2
+  got             24 ->  23     +1
+  made            14 ->  12     +2
+  then             2 ->   2     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  on               5 ->   8     -3
+  covered          6 ->   6     +0
+  sat              2 ->   3     -1
+  they            14 ->  17     -3
+  made             9 ->   9     +0
+  pulled          13 ->  13     +0
+  she             12 ->  12     +0
+
+HIGHER UNDER B
+  chairs           3 ->   2     +1
+  laid             7 ->   5     +2
+  set              8 ->   7     +1
+  then             4 ->   4     +0
+  spread          15 ->  14     +1
+  arranged        17 ->  15     +2
+  lay             16 ->  16     +0
+  placed          11 ->  11     +0
+  looked          18 ->  18     +0
+  put             10 ->  10     +0
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  covered          5 ->  21    -16
+  slept           11 -> 122   -111
+  put              3 ->   6     -3
+  laid             4 ->  14    -10
+  on              15 -> 126   -111
+  we              16 ->  84    -68
+  lay             18 ->  81    -63
+  I                8 ->  17     -9
+  then            12 ->  18     -6
+  had             14 ->  31    -17
+  used            19 ->  25     -6
+  let             20 ->  26     -6
+  chair           21 ->  23     -2
+
+HIGHER UNDER B
+  arranged        13 ->   2    +11
+  chairs           7 ->   4     +3
+  settled         89 ->   9    +80
+  moved           25 ->   8    +17
+  sat              2 ->   1     +1
+  spread          23 ->  11    +12
+  made             6 ->   5     +1
+  propped         32 ->  12    +20
+  placed           9 ->   7     +2
+  lined           47 ->  15    +32
+  set             10 ->  10     +0
+  pulled          17 ->  13     +4
+  took            27 ->  16    +11
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  sat              1 ->   3     -2
+  pulled          12 ->  23    -11
+  put              5 ->   6     -1
+  made             7 ->   9     -2
+  threw           15 ->  24     -9
+  then             9 ->  13     -4
+  pushed          20 ->  28     -8
+  took            18 ->  22     -4
+  lay             14 ->  15     -1
+  watched         10 ->  10     +0
+  spread          16 ->  17     -1
+
+HIGHER UNDER B
+  chairs           3 ->   2     +1
+  the              2 ->   1     +1
+  on              11 ->   8     +3
+  floor           24 ->  14    +10
+  arranged        17 ->  12     +5
+  covered          6 ->   5     +1
+  set              8 ->   7     +1
+  placed          13 ->  11     +2
+  let             27 ->  19     +8
+  laid             4 ->   4     +0
+  had             22 ->  18     +4
+  piled           19 ->  16     +3
+  pillows         23 ->  20     +3
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  then             4 ->   5     -1
+  covered          7 ->  11     -4
+  used            14 ->  21     -7
+  took            13 ->  18     -5
+  pulled          18 ->  19     -1
+  chairs          11 ->  13     -2
+  turned          22 ->  23     -1
+  the              2 ->   3     -1
+  he              17 ->  17     +0
+  started         16 ->  16     +0
+
+HIGHER UNDER B
+  sat              1 ->   1     +0
+  arranged        15 ->  10     +5
+  I                6 ->   6     +0
+  laid             3 ->   2     +1
+  set             10 ->   8     +2
+  placed          12 ->  12     +0
+  began           19 ->  14     +5
+  lay              9 ->   9     +0
+  spread          20 ->  15     +5
+  put              8 ->   7     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  put              2 ->  12    -10
+  chairs           4 -> 105   -101
+  I                7 ->  46    -39
+  then             5 ->  17    -12
+  covered         10 ->  91    -81
+  spread           6 ->  15     -9
+  laid             9 ->  14     -5
+  placed          11 ->  30    -19
+  we              19 -> 126   -107
+  the              1 ->   2     -1
+  pulled          15 ->  34    -19
+  on              22 ->  64    -42
+  played          17 ->  31    -14
+  had             18 ->  33    -15
+  let             23 ->  53    -30
+  pushed          20 ->  35    -15
+  they            13 ->  19     -6
+  set             16 ->  21     -5
+  moved           24 ->  38    -14
+
+HIGHER UNDER B
+  sat              3 ->   1     +2
+  took            21 ->   3    +18
+  gathered       115 ->   6   +109
+  settled         87 ->   7    +80
+  danced          43 ->   8    +35
+  watched         12 ->   5     +7
+  walked         164 ->  20   +144
+  arranged        32 ->   9    +23
+  jumped          92 ->  18    +74
+  ran            145 ->  22   +123
+  lay             26 ->  10    +16
+  stood           30 ->  11    +19
+  made             8 ->   4     +4
+  turned          34 ->  16    +18
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  sat              2 ->   4     -2
+  chairs           1 ->   1     +0
+  then             5 ->  11     -6
+  lay             11 ->  39    -28
+  settled         12 ->  33    -21
+  pulled          16 ->  31    -15
+  laid             6 ->  15     -9
+  spread          19 ->  35    -16
+  leaned          17 ->  23     -6
+  set             13 ->  18     -5
+
+HIGHER UNDER B
+  placed           7 ->   2     +5
+  tried           14 ->   6     +8
+  began           20 ->  10    +10
+  used            31 ->  13    +18
+  wrapped         32 ->  14    +18
+  watched          8 ->   7     +1
+  started         40 ->  17    +23
+  played          38 ->  19    +19
+  the              3 ->   3     +0
+  on               9 ->   8     +1
+  turned          25 ->  16     +9
+  took            15 ->  12     +3
+  covered         27 ->  20     +7
+  put             10 ->   9     +1
+  had             28 ->  22     +6
+  threw           24 ->  24     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  chairs           3 -> 147   -144
+  on               5 ->  46    -41
+  threw           10 ->  75    -65
+  moved            8 ->  28    -20
+  chair           13 -> 158   -145
+  pillows         15 -> 122   -107
+  turned          14 ->  22     -8
+  tried            7 ->  14     -7
+  pulled          20 ->  40    -20
+  laid            21 ->  38    -17
+  put              6 ->   7     -1
+  covered         12 ->  12     +0
+
+HIGHER UNDER B
+  then             4 ->   1     +3
+  sat              2 ->   2     +0
+  held            18 ->   4    +14
+  they             9 ->   5     +4
+  tied            52 ->   8    +44
+  set             16 ->   6    +10
+  began           34 ->  13    +21
+  everyone       109 ->  17    +92
+  secured        102 ->  18    +84
+  pushed          19 ->   9    +10
+  watched         17 ->  11     +6
+  waited          24 ->  15     +9
+  placed          22 ->  16     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  chairs           1 ->   1     +0
+  chair            3 ->  10     -7
+  sat              4 ->  12     -8
+  the              2 ->   2     +0
+  floor            6 ->  20    -14
+  then             5 ->  18    -13
+  watched         10 ->  35    -25
+  in              16 ->  43    -27
+  they            14 ->  33    -19
+  covered         21 ->  51    -30
+  pushed          17 ->  26     -9
+  put              8 ->  14     -6
+
+HIGHER UNDER B
+  began           39 ->   4    +35
+  made            11 ->   3     +8
+  started         26 ->   5    +21
+  had             34 ->   8    +26
+  used            12 ->   7     +5
+  I               20 ->  11     +9
+  took            35 ->  13    +22
+  sofa             9 ->   9     +0
+  on               7 ->   6     +1
+  bed             19 ->  15     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  sat              5 ->  11     -6
+  put              3 ->   3     +0
+  we              16 ->  79    -63
+  I               11 ->  24    -13
+  covered          7 ->  12     -5
+  let             13 ->  29    -16
+  the              2 ->   2     +0
+  watched         12 ->  14     -2
+  threw           14 ->  17     -3
+  laid            15 ->  16     -1
+  moved           19 ->  27     -8
+  placed           6 ->   8     -2
+  made            17 ->  20     -3
+  on               8 ->  10     -2
+  set             21 ->  22     -1
+  floor           23 ->  23     +0
+
+HIGHER UNDER B
+  chairs           1 ->   1     +0
+  sofa             9 ->   5     +4
+  armchairs       26 ->   6    +20
+  chair            4 ->   4     +0
+  armchair        39 ->   7    +32
+  couch           50 ->  15    +35
+  pulled          18 ->  13     +5
+  then            10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  the              1 ->   9     -8
+  sat              2 ->  30    -28
+  chairs           4 -> 193   -189
+  put              3 ->  59    -56
+  pulled           7 ->  84    -77
+  bed             10 -> 186   -176
+  on               9 -> 156   -147
+  spread           8 ->  61    -53
+  laid            12 ->  62    -50
+  lay             13 -> 114   -101
+  mattress        16 -> 188   -172
+  set             14 ->  75    -61
+  arranged         6 ->  17    -11
+  dragged         20 -> 178   -158
+  made             5 ->  11     -6
+  threw           22 ->  95    -73
+  I               24 ->  79    -55
+  began           25 ->  73    -48
+  turned          18 ->  42    -24
+  piled           19 ->  33    -14
+  carpet          21 ->  29     -8
+
+HIGHER UNDER B
+  listened       148 ->   1   +147
+  searched        78 ->   3    +75
+  then            11 ->   2     +9
+  looked          27 ->   4    +23
+  swept          138 ->   6   +132
+  circled        170 ->  12   +158
+  pretended      129 ->  10   +119
+  cleaned        133 ->  13   +120
+  carried         95 ->  14    +81
+  worked          71 ->  15    +56
+  laughed        143 ->  20   +123
+  walked         136 ->  21   +115
+  continued      159 ->  23   +136
+  crawled        151 ->  24   +127
+  gathered        82 ->  19    +63
+  finished       193 ->  28   +165
+  fixed           96 ->  22    +74
+  stood           41 ->  16    +25
+  covered         15 ->   5    +10
+  placed          26 ->   8    +18
+  took            17 ->   7    +10
+  cleared         31 ->  18    +13
+  propped         36 ->  26    +10
+  removed         33 ->  27     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  the              1 ->  21    -20
+  chairs           2 -> 187   -185
+  on               3 -> 132   -129
+  chair            4 -> 191   -187
+  put              5 -> 155   -150
+  floor            6 -> 160   -154
+  placed           7 -> 202   -195
+  in               8 -> 118   -110
+  made             9 -> 159   -150
+  sat             10 -> 171   -161
+  set             11 -> 157   -146
+  kept            12 -> 221   -209
+  table           13 -> 182   -169
+  pulled          14 -> 206   -192
+  recliner        16 -> 253   -237
+  sofa            17 -> 223   -206
+  watched         18 -> 181   -163
+  recliners       19 -> 258   -239
+  covered         20 -> 176   -156
+  threw           21 -> 192   -171
+
+HIGHER UNDER B
+  The            138 ->   1   +137
+  Thea           139 ->   2   +137
+  There          186 ->   3   +183
+  They           150 ->   5   +145
+  It             156 ->   6   +150
+  I               15 ->   4    +11
+  This           181 ->   7   +174
+  Butch          183 ->   8   +175
+  He             144 ->   9   +135
+  She            172 ->  10   +162
+  If             174 ->  11   +163
+  A              159 ->  12   +147
+  Ingrid         151 ->  13   +138
+  When           158 ->  14   +144
+  What           185 ->  15   +170
+  Myra           140 ->  16   +124
+  However        253 ->  17   +236
+  That           213 ->  18   +195
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  lay              3 ->  10     -7
+  began            4 ->   8     -4
+  took            12 ->  25    -13
+  put             10 ->  21    -11
+  spread          13 ->  24    -11
+  started          7 ->  11     -4
+  stood           11 ->  22    -11
+  held            19 ->  33    -14
+  were            14 ->  17     -3
+  leaned          15 ->  20     -5
+  laid            16 ->  19     -3
+
+HIGHER UNDER B
+  sat              1 ->   1     +0
+  the              2 ->   2     +0
+  waited          23 ->   7    +16
+  set             31 ->   9    +22
+  pulled           9 ->   6     +3
+  made             8 ->   5     +3
+  watched          6 ->   4     +2
+  listened        48 ->  23    +25
+  arranged        29 ->  15    +14
+  they            20 ->  13     +7
+  tried           21 ->  14     +7
+  placed          17 ->  12     +5
+  played          25 ->  18     +7
+  looked           5 ->   3     +2
+  then            18 ->  16     +2
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  sat              4 ->   9     -5
+  put              5 ->  13     -8
+  laid             6 ->  12     -6
+  made             7 ->  19    -12
+  they             8 ->  40    -32
+  on               3 ->   4     -1
+  spread          10 ->  27    -17
+  had             12 ->  35    -23
+  pulled          13 ->  42    -29
+  covered          9 ->  15     -6
+  lay             16 ->  62    -46
+  I               21 ->  59    -38
+  used            11 ->  16     -5
+  turned          17 ->  33    -16
+  a               19 ->  36    -17
+  then            14 ->  26    -12
+  set             20 ->  34    -14
+  in              18 ->  24     -6
+  placed          15 ->  21     -6
+
+HIGHER UNDER B
+  chairs           2 ->   1     +1
+  chair           31 ->   3    +28
+  arranged        23 ->   5    +18
+  rug            104 ->   6    +98
+  floor           59 ->   7    +52
+  carpet          65 ->   8    +57
+  played          28 ->  10    +18
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  chairs           2 ->   4     -2
+  the              1 ->   1     +0
+  then             7 ->  18    -11
+  chair           17 ->  63    -46
+  watched          6 ->  10     -4
+  tried            8 ->  11     -3
+  they            16 ->  26    -10
+  let             14 ->  23     -9
+
+HIGHER UNDER B
+  sat              3 ->   2     +1
+  made             5 ->   3     +2
+  set              9 ->   6     +3
+  arranged        53 ->  20    +33
+  gathered        47 ->  19    +28
+  covered         11 ->   7     +4
+  kept            34 ->  17    +17
+  turned          27 ->  15    +12
+  used            22 ->  14     +8
+  played          23 ->  16     +7
+  pulled          12 ->   9     +3
+  laid            15 ->  13     +2
+  lay             33 ->  25     +8
+  placed          26 ->  22     +4
+  in              28 ->  24     +4
+  I               30 ->  27     +3
+  on              10 ->   8     +2
+  held            13 ->  12     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  the              1 ->   8     -7
+  sat              3 ->  21    -18
+  put              2 ->   9     -7
+  laid            10 ->  38    -28
+  then            13 ->  72    -59
+  placed           7 ->  18    -11
+  made             8 ->  19    -11
+  chairs          12 ->  36    -24
+  had             19 ->  80    -61
+  they            17 ->  74    -57
+  set             22 ->  85    -63
+  threw           18 ->  66    -48
+  took            14 ->  23     -9
+  held            16 ->  29    -13
+  turned          15 ->  27    -12
+  pulled          11 ->  13     -2
+  kept            20 ->  30    -10
+
+HIGHER UNDER B
+  covered          4 ->   1     +3
+  draped          41 ->   4    +37
+  piled           23 ->   5    +18
+  pushed           6 ->   2     +4
+  used             5 ->   3     +2
+  huddled         99 ->  10    +89
+  secured         89 ->  11    +78
+  watched         21 ->   7    +14
+  stacked         69 ->  14    +55
+  scrambled      134 ->  16   +118
+  rolled          45 ->  12    +33
+  gathered        75 ->  17    +58
+  lined           37 ->  15    +22
+  tried            9 ->   6     +3
+  taped           36 ->  20    +16
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  took            11 ->  20     -9
+  sat              2 ->   5     -3
+  he              17 ->  38    -21
+  laid            14 ->  26    -12
+  she             18 ->  35    -17
+  pulled           9 ->  13     -4
+  I               22 ->  43    -21
+  spread           7 ->  11     -4
+  got             19 ->  30    -11
+  set             13 ->  17     -4
+  pushed          21 ->  28     -7
+
+HIGHER UNDER B
+  chairs           3 ->   2     +1
+  put              4 ->   3     +1
+  made             6 ->   6     +0
+  covered          5 ->   4     +1
+  chair           50 ->  16    +34
+  blanket         27 ->  12    +15
+  placed          15 ->   9     +6
+  on              12 ->   7     +5
+  pillows         35 ->  15    +20
+  tied            49 ->  19    +30
+  arranged        31 ->  21    +10
+  then             8 ->   8     +0
+  watched         16 ->  14     +2
+  tried           10 ->  10     +0
+  turned          20 ->  18     +2
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  laid             4 ->  15    -11
+  spread           5 ->   7     -2
+  placed           6 ->  11     -5
+  sat              3 ->   3     +0
+  covered          8 ->  14     -6
+  then             9 ->  18     -9
+  lay             11 ->  21    -10
+  set             10 ->  17     -7
+  told            19 ->  34    -15
+  we              17 ->  25     -8
+  let             18 ->  23     -5
+  asked           20 ->  24     -4
+
+HIGHER UNDER B
+  put              1 ->   1     +0
+  the              2 ->   2     +0
+  played          16 ->   5    +11
+  turned          21 ->   9    +12
+  on              12 ->   6     +6
+  chairs         102 ->  22    +80
+  arranged        15 ->   8     +7
+  were            38 ->  19    +19
+  they            24 ->  13    +11
+  took            26 ->  16    +10
+  had             14 ->  10     +4
+  made             7 ->   4     +3
+  got             23 ->  20     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  the              1 ->   8     -7
+  chairs           2 ->  12    -10
+  laid             6 ->  11     -5
+  I               10 ->  38    -28
+  on               9 ->  33    -24
+  pulled          13 ->  28    -15
+  lay             15 ->  39    -24
+  they            20 ->  57    -37
+  took            11 ->  20     -9
+  tried           19 ->  35    -16
+  piled           18 ->  21     -3
+
+HIGHER UNDER B
+  arranged        16 ->   2    +14
+  placed          14 ->   4    +10
+  spread           3 ->   1     +2
+  got             21 ->   7    +14
+  then             7 ->   3     +4
+  started         46 ->  10    +36
+  invited         50 ->  14    +36
+  added           95 ->  17    +78
+  wrapped         69 ->  19    +50
+  gathered        26 ->  15    +11
+  rearranged      78 ->  23    +55
+  began           39 ->  18    +21
+  draped          65 ->  26    +39
+  played          38 ->  22    +16
+  let             28 ->  24     +4
+  watched         25 ->  25     +0
+  put              5 ->   5     +0
+  turned          17 ->  16     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -162,5 +162,6 @@
  "model": "sonnet",
  "effort": "xhigh",
  "path": "/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/inputs/xling_three_latinos_came_into_the_room_and_sta_blind.txt",
- "version": "x1b"
+ "version": "x1b",
+ "raters": 2
 }

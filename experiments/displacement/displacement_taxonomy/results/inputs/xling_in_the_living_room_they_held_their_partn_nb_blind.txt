@@ -1,0 +1,1594 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: In the living room, they held their partner down on the couch and ___
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  fucked           1 -> 145   -144
+  started          2 ->   8     -6
+  then             6 ->  24    -18
+  had              4 ->  12     -8
+  made             5 ->  13     -8
+  they            12 ->  98    -86
+  gave            11 ->  77    -66
+  used             9 ->  17     -8
+  pounded         16 -> 153   -137
+  let             17 -> 130   -113
+  penetrated      18 ->  85    -67
+  the             22 ->  87    -65
+  got             21 ->  72    -51
+  put             10 ->  20    -10
+
+HIGHER UNDER B
+  performed       24 ->   1    +23
+  forced           7 ->   2     +5
+  proceeded       15 ->   4    +11
+  tied            13 ->   6     +7
+  took             8 ->   5     +3
+  began            3 ->   3     +0
+  raped           14 ->   7     +7
+  searched       144 ->   9   +135
+  removed         64 ->  10    +54
+  engaged        156 ->  11   +145
+  forcefully      61 ->  19    +42
+  covered         54 ->  18    +36
+  tried           32 ->  15    +17
+  did             19 ->  14     +5
+  continued       20 ->  16     +4
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  spanked          1 ->   8     -7
+  tied             3 ->   6     -3
+  proceeded        2 ->   4     -2
+  bound            5 ->  97    -92
+  straddled        7 ->  69    -62
+  painted         10 ->  68    -58
+  sped            11 -> 115   -104
+  gave             9 ->  23    -14
+  forced           6 ->  14     -8
+
+HIGHER UNDER B
+  began           47 ->   2    +45
+  started          4 ->   1     +3
+  then            27 ->   3    +24
+  handcuffed      92 ->   5    +87
+  continued       74 ->   7    +67
+  talked         116 ->   9   +107
+  they            90 ->  16    +74
+  took            22 ->  12    +10
+  covered         62 ->  19    +43
+  fucked          36 ->  20    +16
+  made            23 ->  18     +5
+  used            13 ->  11     +2
+  put             21 ->  15     +6
+  had             20 ->  17     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  kissed           1 ->   3     -2
+  then             6 ->  17    -11
+  pinned          12 ->  28    -16
+  pulled          17 ->  35    -18
+  rubbed          18 ->  25     -7
+  put             10 ->  15     -5
+  gave            15 ->  20     -5
+  fucked          14 ->  16     -2
+
+HIGHER UNDER B
+  took             5 ->   1     +4
+  made             3 ->   2     +1
+  proceeded        9 ->   6     +3
+  used             7 ->   5     +2
+  licked          20 ->   9    +11
+  had              8 ->   8     +0
+  spanked         42 ->  18    +24
+  teased          50 ->  22    +28
+  played          54 ->  24    +30
+  started         13 ->  10     +3
+  performed       22 ->  13     +9
+  did             21 ->  14     +7
+  went            16 ->  12     +4
+  slowly          24 ->  21     +3
+  pushed          28 ->  23     +5
+  spread          11 ->  11     +0
+  shoved          19 ->  19     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  whispered        4 ->  47    -43
+  watched         10 ->  31    -21
+  kissed          14 ->  68    -54
+  tried            8 ->  13     -5
+  took            15 ->  38    -23
+  looked          17 ->  25     -8
+  gave            16 ->  18     -2
+  told            20 ->  28     -8
+  continued       12 ->  12     +0
+  pressed         21 ->  29     -8
+  asked           23 ->  30     -7
+  let             22 ->  23     -1
+
+HIGHER UNDER B
+  then             7 ->   3     +4
+  held             3 ->   2     +1
+  used            11 ->   6     +5
+  pulled           6 ->   4     +2
+  began            1 ->   1     +0
+  helped          40 ->  10    +30
+  carried         54 ->  17    +37
+  forced          13 ->   9     +4
+  lifted          41 ->  14    +27
+  slowly          18 ->  11     +7
+  placed           9 ->   8     +1
+  laid            35 ->  16    +19
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  then             4 ->  11     -7
+  forced           5 ->   9     -4
+  put             12 ->  59    -47
+  had              6 ->  10     -4
+  they            13 ->  41    -28
+  fucked          14 ->  31    -17
+  the             19 ->  53    -34
+  he              20 ->  50    -30
+  took             8 ->  15     -7
+  used             9 ->  16     -7
+  asked           24 ->  45    -21
+  said            25 ->  34     -9
+  made             7 ->   7     +0
+  tried           22 ->  23     -1
+  proceeded       21 ->  22     -1
+  told            11 ->  13     -2
+  pulled          16 ->  18     -2
+  got             17 ->  17     +0
+
+HIGHER UNDER B
+  started          2 ->   1     +1
+  watched          3 ->   3     +0
+  whispered       65 ->   5    +60
+  stared          40 ->   4    +36
+  continued       15 ->   6     +9
+  talked          38 ->  12    +26
+  kissed          18 ->  14     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  then             2 ->   6     -4
+  had              8 ->  26    -18
+  tried            9 ->  33    -24
+  made             7 ->  17    -10
+  put             12 ->  28    -16
+  punched         15 ->  78    -63
+  watched         14 ->  64    -50
+  held            18 -> 106    -88
+  cut             21 ->  95    -74
+  the             17 ->  40    -23
+  beat            16 ->  27    -11
+  pulled          20 ->  34    -14
+  pinned          11 ->  13     -2
+  started          4 ->   5     -1
+  took             6 ->   7     -1
+
+HIGHER UNDER B
+  began            1 ->   1     +0
+  proceeded        3 ->   2     +1
+  forced          10 ->   4     +6
+  injected        65 ->   8    +57
+  used             5 ->   3     +2
+  searched        75 ->  10    +65
+  continued       23 ->   9    +14
+  performed       19 ->  11     +8
+  bound           28 ->  14    +14
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  took             1 ->   1     +0
+  had              4 ->  21    -17
+  proceeded        2 ->   3     -1
+  started          6 ->  15     -9
+  raped            7 ->  18    -11
+  gave            11 ->  48    -37
+  beat            12 ->  30    -18
+  made            10 ->  26    -16
+  whipped         13 ->  22     -9
+  tied             8 ->  10     -2
+
+HIGHER UNDER B
+  kissed          15 ->   5    +10
+  spanked         19 ->   6    +13
+  slapped         46 ->   9    +37
+  whispered       80 ->  11    +69
+  tickled         99 ->  12    +87
+  covered         22 ->   8    +14
+  used             5 ->   4     +1
+  blindfolded     47 ->  14    +33
+  shared          48 ->  17    +31
+  poured          32 ->  16    +16
+  smothered       62 ->  20    +42
+  forced           9 ->   7     +2
+  performed       14 ->  13     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  pulled          12 ->  29    -17
+  shot            21 ->  86    -65
+  tried           17 ->  45    -28
+  cut             18 ->  39    -21
+  sprayed         25 ->  52    -27
+  put             11 ->  17     -6
+  then             8 ->  11     -3
+  turned          23 ->  33    -10
+  watched         20 ->  25     -5
+  asked           16 ->  18     -2
+  held            19 ->  23     -4
+  gave            26 ->  26     +0
+  tied             7 ->   9     -2
+  covered         22 ->  22     +0
+  used             9 ->  10     -1
+
+HIGHER UNDER B
+  beat             2 ->   1     +1
+  filmed          63 ->  12    +51
+  raped           13 ->   7     +6
+  repeatedly      27 ->  13    +14
+  forced           6 ->   5     +1
+  started          4 ->   4     +0
+  began            3 ->   3     +0
+  gagged          37 ->  16    +21
+  taped           14 ->  14     +0
+  made            10 ->   8     +2
+  hit             15 ->  15     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  put              4 ->  14    -10
+  shoved          22 -> 155   -133
+  tied             7 ->  16     -9
+  tickled         12 ->  28    -16
+  beat             8 ->  15     -7
+  then             6 ->   8     -2
+  punched         24 ->  61    -37
+  raped           14 ->  25    -11
+  strangled       20 ->  38    -18
+  pulled          13 ->  23    -10
+  forced           2 ->   4     -2
+  placed          18 ->  26     -8
+  slapped         21 ->  34    -13
+  proceeded       19 ->  24     -5
+
+HIGHER UNDER B
+  started         16 ->   5    +11
+  ripped          34 ->  11    +23
+  injected        42 ->  13    +29
+  took             1 ->   1     +0
+  performed       27 ->  12    +15
+  applied         49 ->  18    +31
+  repeatedly      52 ->  20    +32
+  began            5 ->   3     +2
+  poured          10 ->   7     +3
+  tried            3 ->   2     +1
+  made            23 ->  19     +4
+  used             9 ->   6     +3
+  gave            36 ->  21    +15
+  removed         15 ->  10     +5
+  attempted       29 ->  22     +7
+  cut             11 ->   9     +2
+  covered         17 ->  17     +0
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  beat             1 ->   6     -5
+  punched          3 ->  14    -11
+  put              4 ->  12     -8
+  tried            8 ->  22    -14
+  hit             16 ->  40    -24
+  held            13 ->  23    -10
+  taped           24 ->  57    -33
+  stabbed         21 ->  46    -25
+  then             6 ->   9     -3
+  cut             15 ->  19     -4
+  pulled          18 ->  34    -16
+  tied             7 ->  11     -4
+  the             25 ->  35    -10
+  they            19 ->  28     -9
+  began            5 ->   5     +0
+
+HIGHER UNDER B
+  took             2 ->   1     +1
+  proceeded       11 ->   3     +8
+  used            10 ->   4     +6
+  repeatedly       9 ->   2     +7
+  ripped          20 ->   8    +12
+  sexually        72 ->  16    +56
+  performed       64 ->  24    +40
+  restrained      42 ->  21    +21
+  attacked        40 ->  25    +15
+  demanded        33 ->  17    +16
+  continued       23 ->  15     +8
+  made            27 ->  18     +9
+  covered         14 ->   7     +7
+  started         17 ->  13     +4
+  were            22 ->  20     +2
+  forced          12 ->  10     +2
+  threatened      28 ->  26     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  had              1 ->  23    -22
+  then             3 ->  17    -14
+  forced           6 ->  27    -21
+  gagged          16 ->  67    -51
+  proceeded       11 ->  28    -17
+  did             13 ->  38    -25
+  performed       20 -> 149   -129
+  put             15 ->  37    -22
+  used            17 ->  46    -29
+  tried            7 ->   8     -1
+  made             2 ->   3     -1
+  beat             9 ->  13     -4
+  got             21 ->  56    -35
+  gave            14 ->  25    -11
+  raped           24 ->  51    -27
+  hit             28 ->  52    -24
+  tied            22 ->  43    -21
+  played          27 ->  45    -18
+  took            12 ->  14     -2
+  watched         25 ->  29     -4
+  asked           23 ->  26     -3
+
+HIGHER UNDER B
+  began            4 ->   1     +3
+  stabbed         34 ->   5    +29
+  whispered      180 ->  18   +162
+  threatened      45 ->   9    +36
+  kissed           8 ->   2     +6
+  continued       42 ->  10    +32
+  shot            47 ->  16    +31
+  laughed         60 ->  19    +41
+  held            31 ->   7    +24
+  talked          32 ->  12    +20
+  he              57 ->  22    +35
+  told            26 ->  15    +11
+  said            37 ->  21    +16
+  the             18 ->  11     +7
+  she             33 ->  24     +9
+  started          5 ->   4     +1
+  they            10 ->   6     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  began            1 ->   1     +0
+  kissed           3 ->  53    -50
+  pulled           5 ->  33    -28
+  then             7 ->  49    -42
+  pressed         10 ->  38    -28
+  proceeded       15 -> 181   -166
+  forced           2 ->   4     -2
+  watched         11 ->  37    -26
+  they            18 -> 110    -92
+  used            13 ->  31    -18
+  had             17 ->  42    -25
+  held            16 ->  32    -16
+  pushed           8 ->  15     -7
+  started          4 ->   7     -3
+  took             9 ->  14     -5
+
+HIGHER UNDER B
+  called         149 ->   3   +146
+  demanded        46 ->   5    +41
+  told            20 ->   6    +14
+  slapped        122 ->   9   +113
+  shouted         90 ->  13    +77
+  asked           30 ->   8    +22
+  their           47 ->  12    +35
+  threw           27 ->  11    +16
+  made             6 ->   2     +4
+  ignored        152 ->  22   +130
+  threatened      81 ->  19    +62
+  a              106 ->  21    +85
+  knocked        136 ->  23   +113
+  laughed         52 ->  20    +32
+  dragged         23 ->  17     +6
+  continued       29 ->  18    +11
+  tried           14 ->  10     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  tied             3 ->  16    -13
+  fucked           5 ->  36    -31
+  had              9 ->  50    -41
+  used             8 ->  17     -9
+  blindfolded     21 -> 167   -146
+  then            20 ->  91    -71
+  held            19 ->  72    -53
+  they            17 ->  49    -32
+  gave            23 ->  94    -71
+  raped           15 ->  33    -18
+  told            22 ->  54    -32
+  made             6 ->   7     -1
+  put             10 ->  13     -3
+  beat            18 ->  23     -5
+  shoved          24 ->  34    -10
+  played          25 ->  27     -2
+
+HIGHER UNDER B
+  began            4 ->   1     +3
+  forced           2 ->   2     +0
+  kissed          11 ->   4     +7
+  started          7 ->   5     +2
+  watched         16 ->   6    +10
+  searched       195 ->  14   +181
+  pinned          42 ->  11    +31
+  ripped          26 ->   8    +18
+  tore            51 ->  15    +36
+  pulled          12 ->   9     +3
+  stripped        13 ->  10     +3
+  proceeded       14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  performed        1 ->  21    -20
+  then             4 ->  67    -63
+  had              3 ->   7     -4
+  tried            7 ->  85    -78
+  gave             9 -> 138   -129
+  the             10 ->  25    -15
+  put             14 -> 110    -96
+  beat            13 ->  43    -30
+  used             5 ->   6     -1
+  inserted        16 -> 115    -99
+  applied         21 -> 196   -175
+  they            20 -> 167   -147
+  cut             19 ->  69    -50
+  started          6 ->   8     -2
+  did             18 ->  34    -16
+  raped           17 ->  18     -1
+
+HIGHER UNDER B
+  forced           8 ->   1     +7
+  took            12 ->   3     +9
+  began            2 ->   2     +0
+  proceeded       11 ->   4     +7
+  violated       189 ->  10   +179
+  demanded       199 ->  11   +188
+  laughed        111 ->   9   +102
+  made            15 ->   5    +10
+  threatened     187 ->  12   +175
+  dragged         97 ->  13    +84
+  held            35 ->  14    +21
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  then             1 ->  23    -22
+  put              8 ->  22    -14
+  made             6 ->  15     -9
+  sat             16 -> 113    -97
+  had             12 ->  24    -12
+  started          9 ->  19    -10
+  one             17 ->  62    -45
+  each            18 ->  57    -39
+  the             24 -> 132   -108
+  rubbed          20 ->  61    -41
+  they            25 -> 161   -136
+  tied             4 ->   6     -2
+  placed          23 ->  32     -9
+  took            11 ->  16     -5
+  pulled          21 ->  29     -8
+  forced           3 ->   4     -1
+  kissed           7 ->   8     -1
+
+HIGHER UNDER B
+  blindfolded     10 ->   1     +9
+  began            2 ->   2     +0
+  whispered      135 ->   5   +130
+  proceeded        5 ->   3     +2
+  covered         19 ->   9    +10
+  stuffed         53 ->  18    +35
+  removed         14 ->   7     +7
+  inserted        28 ->  13    +15
+  played          27 ->  14    +13
+  tickled         22 ->  11    +11
+  performed       26 ->  17     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  proceeded        2 ->  12    -10
+  A               12 ->  80    -68
+  they            10 ->  37    -27
+  then            14 ->  51    -37
+  used             8 ->  22    -14
+  tied            16 ->  44    -28
+  continued       17 ->  49    -32
+  covered         23 -> 161   -138
+  the             18 ->  43    -25
+  started          3 ->   7     -4
+  straddled       21 ->  42    -21
+  placed          19 ->  20     -1
+  did             20 ->  23     -3
+  had              6 ->   9     -3
+  pulled          13 ->  13     +0
+  took             4 ->   6     -2
+
+HIGHER UNDER B
+  began            1 ->   1     +0
+  forced           7 ->   2     +5
+  beat           122 ->   5   +117
+  fucked          11 ->   3     +8
+  while           67 ->  11    +56
+  made             5 ->   4     +1
+  stripped        15 ->  10     +5
+  removed         33 ->  15    +18
+  gave             9 ->   8     +1
+  ripped          31 ->  16    +15
+  got             26 ->  14    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  began            2 ->   9     -7
+  tied             5 ->  18    -13
+  proceeded       10 ->  38    -28
+  fucked           4 ->  11     -7
+  continued       16 ->  57    -41
+  then            18 ->  45    -27
+  had             12 ->  23    -11
+  told            17 ->  33    -16
+  the             19 ->  42    -23
+  took             1 ->   1     +0
+  started          6 ->   7     -1
+  removed         14 ->  21     -7
+  tickled         20 ->  27     -7
+
+HIGHER UNDER B
+  licked          47 ->   4    +43
+  kissed           9 ->   2     +7
+  ran             83 ->  16    +67
+  thrust         111 ->  19    +92
+  slid            32 ->  12    +20
+  smothered       62 ->  17    +45
+  bit            103 ->  20    +83
+  used             8 ->   3     +5
+  rubbed          22 ->  10    +12
+  humped         159 ->  25   +134
+  nibbled        160 ->  26   +134
+  let             40 ->  22    +18
+  gave            11 ->   8     +3
+  played          21 ->  14     +7
+  choked          48 ->  28    +20
+  teased          33 ->  24     +9
+  pulled          15 ->  13     +2
+  forced           7 ->   6     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  forced           2 ->   8     -6
+  fucked           8 -> 212   -204
+  raped           14 -> 210   -196
+  they            18 -> 159   -141
+  stripped        10 ->  37    -27
+  ripped          16 ->  74    -58
+  beat            17 ->  70    -53
+  used             3 ->   4     -1
+  had             12 ->  28    -16
+  shot            25 ->  88    -63
+  made             5 ->  12     -7
+  continued       22 ->  52    -30
+  began            4 ->   6     -2
+  put             24 ->  55    -31
+  then            15 ->  23     -8
+  the             21 ->  45    -24
+  started          9 ->  14     -5
+  cut             20 ->  36    -16
+  pulled          23 ->  38    -15
+  watched         19 ->  19     +0
+
+HIGHER UNDER B
+  tied             6 ->   2     +4
+  whispered       54 ->   3    +51
+  laughed         36 ->   7    +29
+  read           111 ->  13    +98
+  performed       34 ->  11    +23
+  cheered        196 ->  17   +179
+  talked         113 ->  18    +95
+  did             13 ->   5     +8
+  gently         133 ->  21   +112
+  kissed          29 ->  16    +13
+  told            28 ->  15    +13
+  poured          41 ->  20    +21
+  pressed         53 ->  22    +31
+  proceeded       11 ->  10     +1
+  took             1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  began            1 ->  26    -25
+  started          3 -> 120   -117
+  put              5 ->  87    -82
+  raped            6 -> 113   -107
+  tied             8 ->  80    -72
+  had             10 ->  73    -63
+  then            12 ->  46    -34
+  proceeded       13 ->  31    -18
+  cut             14 ->  54    -40
+  made             9 ->  18     -9
+  forced           2 ->  11     -9
+  told            19 -> 106    -87
+  inserted        17 ->  71    -54
+  held            22 -> 144   -122
+  pulled          23 -> 138   -115
+  did             24 ->  91    -67
+  performed       18 ->  43    -25
+  tried           11 ->  13     -2
+  gave            20 ->  32    -12
+  used             7 ->  12     -5
+
+HIGHER UNDER B
+  covered         15 ->   1    +14
+  removed         16 ->   2    +14
+  orally         171 ->   3   +168
+  unplugged      185 ->   5   +180
+  attempted       51 ->   4    +47
+  voraciously    205 ->   7   +198
+  viciously      172 ->  10   +162
+  spread          21 ->   8    +13
+  sat             44 ->   9    +35
+  straddled       70 ->  14    +56
+  traced         180 ->  17   +163
+  masturbated     50 ->  15    +35
+  stuffed         64 ->  16    +48
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  watched         18 ->  91    -73
+  pressed         15 ->  33    -18
+  put              8 ->  22    -14
+  pushed           9 ->  23    -14
+  waited          21 ->  47    -26
+  proceeded        7 ->  17    -10
+  covered          5 ->  11     -6
+  the             17 ->  25     -8
+  placed          10 ->  18     -8
+  tried           11 ->  19     -8
+  held             6 ->   8     -2
+
+HIGHER UNDER B
+  began            1 ->   1     +0
+  then             4 ->   3     +1
+  stabbed         90 ->  10    +80
+  squeezed        20 ->   6    +14
+  were            12 ->   5     +7
+  used            19 ->   7    +12
+  ripped          68 ->  20    +48
+  dragged         44 ->  14    +30
+  tied            25 ->  15    +10
+  had             24 ->  16     +8
+  started          2 ->   2     +0
+  slammed         28 ->  21     +7
+  forced          14 ->   9     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  then             4 ->  15    -11
+  proceeded       11 ->  33    -22
+  the             14 ->  44    -30
+  forced           1 ->   1     +0
+  blindfolded     17 ->  63    -46
+  began            2 ->   8     -6
+  they            12 ->  30    -18
+  started          5 ->  12     -7
+  pulled          21 ->  26     -5
+  put             18 ->  19     -1
+  used             8 ->  14     -6
+
+HIGHER UNDER B
+  fucked          19 ->   5    +14
+  raped           15 ->   4    +11
+  had              6 ->   3     +3
+  tied             7 ->   6     +1
+  made             9 ->   7     +2
+  did             24 ->  10    +14
+  took             3 ->   2     +1
+  gave            13 ->   9     +4
+  performed       16 ->  13     +3
+  spanked         27 ->  18     +9
+  beat            22 ->  16     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  used             2 ->   2     +0
+  took             6 ->   8     -2
+  kicked          18 ->  28    -10
+  pinned          24 ->  33     -9
+  cut             20 ->  30    -10
+  shot            14 ->  23     -9
+  covered         11 ->  17     -6
+  stole           10 ->  12     -2
+  restrained      22 ->  24     -2
+  had              9 ->   9     +0
+  applied         21 ->  21     +0
+
+HIGHER UNDER B
+  threatened       5 ->   5     +0
+  beat            17 ->  13     +4
+  strangled       13 ->  10     +3
+  proceeded       19 ->  15     +4
+  raped           33 ->  22    +11
+  administered    39 ->  25    +14
+  forced          16 ->  14     +2
+  were             8 ->   6     +2
+  tried           12 ->  11     +1
+  killed          26 ->  18     +8
+  pushed           7 ->   7     +0
+  stabbed          4 ->   4     +0
+  then             1 ->   1     +0
+  started         25 ->  20     +5
+  attempted       23 ->  19     +4
+  tied             3 ->   3     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  tied             2 ->  11     -9
+  then             1 ->   4     -3
+  covered          9 ->  28    -19
+  raped           10 ->  31    -21
+  fucked          27 -> 188   -161
+  they            21 ->  67    -46
+  pulled          15 ->  36    -21
+  gave            23 ->  51    -28
+  cut             24 ->  38    -14
+  tickled         28 ->  43    -15
+  removed         25 ->  32     -7
+  held            22 ->  25     -3
+  performed       18 ->  22     -4
+  did             16 ->  19     -3
+  beat            13 ->  16     -3
+  straddled       26 ->  27     -1
+  the             17 ->  21     -4
+
+HIGHER UNDER B
+  began            4 ->   1     +3
+  forced           5 ->   3     +2
+  used             3 ->   2     +1
+  proceeded        8 ->   5     +3
+  stripped        20 ->   8    +12
+  engaged         81 ->  13    +68
+  made            11 ->   7     +4
+  had              6 ->   6     +0
+  started         12 ->  10     +2
+  continued       68 ->  17    +51
+  demanded        86 ->  23    +63
+  sexually        50 ->  20    +30
+  blindfolded     33 ->  14    +19
+  put             14 ->  12     +2
+  kissed          34 ->  15    +19
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  then             1 ->   4     -3
+  had              6 ->  26    -20
+  he              12 ->  90    -78
+  the             11 ->  62    -51
+  raped           14 ->  21     -7
+  took             5 ->   9     -4
+  shot            21 ->  59    -38
+  a               20 ->  53    -33
+  put              7 ->  11     -4
+  sexually        24 ->  50    -26
+  tried           13 ->  14     -1
+  beat            18 ->  27     -9
+  held            23 ->  28     -5
+  watched          8 ->   8     +0
+  pushed          22 ->  22     +0
+
+HIGHER UNDER B
+  began            2 ->   1     +1
+  started          4 ->   3     +1
+  used             3 ->   2     +1
+  applied         34 ->  10    +24
+  covered         16 ->   6    +10
+  forced           9 ->   5     +4
+  removed         30 ->  16    +14
+  strangled       29 ->  18    +11
+  tied            26 ->  17     +9
+  performed       19 ->  15     +4
+  pulled          10 ->   7     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  forced           4 ->  18    -14
+  tied            10 ->  39    -29
+  fucked          13 -> 117   -104
+  put             12 ->  28    -16
+  rubbed          16 ->  57    -41
+  raped           19 -> 145   -126
+  made             8 ->  16     -8
+  pulled          14 ->  24    -10
+  had             11 ->  14     -3
+  then             6 ->   8     -2
+  did             20 ->  35    -15
+  tried           17 ->  22     -5
+
+HIGHER UNDER B
+  began            1 ->   1     +0
+  started          3 ->   2     +1
+  straddled       44 ->  11    +33
+  kissed          18 ->   7    +11
+  went            35 ->  10    +25
+  groped          33 ->   9    +24
+  stripped        53 ->  15    +38
+  performed       22 ->  12    +10
+  licked          54 ->  17    +37
+  proceeded        7 ->   5     +2
+  pretended       81 ->  21    +60
+  ripped          27 ->  19     +8
+  gave             9 ->   6     +3
+  took             5 ->   4     +1
+  covered         24 ->  20     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  kissed           3 ->   6     -3
+  they             5 ->  13     -8
+  tickled         15 ->  20     -5
+  tried           17 ->  25     -8
+  put              6 ->   8     -2
+  gave             4 ->   7     -3
+  the             19 ->  24     -5
+  held            14 ->  16     -2
+  played          24 ->  31     -7
+  told            20 ->  23     -3
+  made             9 ->   9     +0
+  did             18 ->  18     +0
+  forced          10 ->  11     -1
+
+HIGHER UNDER B
+  began            1 ->   1     +0
+  started          8 ->   3     +5
+  fucked          12 ->   4     +8
+  proceeded       22 ->  14     +8
+  tied             7 ->   5     +2
+  took             2 ->   2     +0
+  spread          33 ->  22    +11
+  used            21 ->  17     +4
+  performed       27 ->  21     +6
+  pulled          16 ->  15     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  had              2 ->   6     -4
+  the             13 ->  19     -6
+  he              18 ->  21     -3
+  continued       23 ->  28     -5
+  then             7 ->   7     +0
+  began            1 ->   1     +0
+  tried           12 ->  13     -1
+  were            16 ->  16     +0
+  did             24 ->  25     -1
+  made             8 ->  11     -3
+  pulled          22 ->  23     -1
+  watched         19 ->  20     -1
+
+HIGHER UNDER B
+  held            11 ->   8     +3
+  used            15 ->  12     +3
+  took             4 ->   2     +2
+  cut             21 ->  18     +3
+  fucked          10 ->  10     +0
+  started          3 ->   3     +0
+  put             17 ->  15     +2
+  kissed           9 ->   9     +0
+  covered         25 ->  22     +3
+  proceeded       14 ->  14     +0
+  forced           6 ->   5     +1
+  tied             5 ->   4     +1
+  told            20 ->  17     +3
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  beat             2 ->  88    -86
+  tried            9 ->  74    -65
+  put              4 ->  22    -18
+  then            10 ->  45    -35
+  cut             14 -> 104    -90
+  made             7 ->  24    -17
+  played          17 ->  70    -53
+  watched         18 ->  86    -68
+  sat             19 -> 100    -81
+  poured          23 -> 150   -127
+  pulled          15 ->  41    -26
+  had             21 ->  56    -35
+  gave            13 ->  21     -8
+  rubbed          24 ->  43    -19
+  stabbed         22 ->  28     -6
+
+HIGHER UNDER B
+  straddled       47 ->   7    +40
+  tickled         20 ->   6    +14
+  took             5 ->   1     +4
+  tied             8 ->   2     +6
+  used             6 ->   5     +1
+  spanked         26 ->   8    +18
+  spread          88 ->  11    +77
+  fucked          35 ->  12    +23
+  teased         173 ->  15   +158
+  lined          168 ->  17   +151
+  began           12 ->   9     +3
+  licked         120 ->  19   +101
+  stripped        55 ->  18    +37
+  ripped          38 ->  16    +22
+  kissed          30 ->  14    +16
+  removed         32 ->  20    +12
+  proceeded       11 ->  10     +1
+  taped           34 ->  23    +11
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  had             10 ->  16     -6
+  kissed           9 ->  13     -4
+  pulled          17 ->  34    -17
+  tore            23 ->  56    -33
+  took             2 ->   7     -5
+  made             7 ->   9     -2
+  did             15 ->  18     -3
+  straddled       19 ->  22     -3
+  proceeded       18 ->  20     -2
+  they            22 ->  28     -6
+  pinned          14 ->  15     -1
+  gave            12 ->  14     -2
+
+HIGHER UNDER B
+  used             3 ->   1     +2
+  put              5 ->   2     +3
+  covered         13 ->   6     +7
+  whispered       91 ->  24    +67
+  restrained      48 ->  17    +31
+  tried           20 ->  12     +8
+  then            11 ->  10     +1
+  forced           6 ->   5     +1
+  placed          40 ->  21    +19
+  strapped        16 ->  11     +5
+  began            4 ->   4     +0
+  watched         21 ->  19     +2
+  the             25 ->  23     +2
+  started          8 ->   8     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  took             2 ->   3     -1
+  then             9 ->  13     -4
+  put             13 ->  16     -3
+  tied             7 ->   9     -2
+  covered         18 ->  24     -6
+  used            12 ->  15     -3
+  pulled          17 ->  21     -4
+  fucked          14 ->  14     +0
+  told            19 ->  19     +0
+
+HIGHER UNDER B
+  began            1 ->   1     +0
+  forced           3 ->   2     +1
+  proceeded        4 ->   4     +0
+  had              6 ->   5     +1
+  tried           16 ->  11     +5
+  repeatedly      21 ->  17     +4
+  held            15 ->  12     +3
+  they            27 ->  22     +5
+  she             22 ->  20     +2
+  made             8 ->   7     +1
+  the             20 ->  18     +2
+  raped           10 ->   8     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  fucked           1 ->   9     -8
+  started          3 ->   6     -3
+  continued        8 ->  39    -31
+  kissed          14 ->  47    -33
+  they            10 ->  15     -5
+  tied             7 ->  10     -3
+  one             17 ->  46    -29
+  used             9 ->  12     -3
+  then            15 ->  33    -18
+  put             19 ->  28     -9
+  began            2 ->   3     -1
+  gave            12 ->  14     -2
+
+HIGHER UNDER B
+  forced           5 ->   1     +4
+  raped           16 ->   5    +11
+  took             4 ->   2     +2
+  he              31 ->   8    +23
+  had              6 ->   4     +2
+  made            11 ->   7     +4
+  she             40 ->  11    +29
+  performed       94 ->  20    +74
+  went            26 ->  13    +13
+  whipped         39 ->  17    +22
+  beat            20 ->  18     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  fucked          10 -> 166   -156
+  beat             2 ->   8     -6
+  took             1 ->   5     -4
+  then            12 ->  53    -41
+  they            13 ->  52    -39
+  made             7 ->  12     -5
+  raped           15 ->  46    -31
+  had              9 ->  14     -5
+  sat             21 ->  59    -38
+  gave            24 ->  45    -21
+  put             23 ->  42    -19
+  pulled          16 ->  29    -13
+  held            20 ->  30    -10
+
+HIGHER UNDER B
+  began            5 ->   1     +4
+  proceeded        6 ->   2     +4
+  tied             3 ->   3     +0
+  forced           4 ->   4     +0
+  whispered       27 ->   9    +18
+  started         11 ->   6     +5
+  continued       36 ->  11    +25
+  tried           18 ->  10     +8
+  used             8 ->   7     +1
+  whipped         42 ->  17    +25
+  played          45 ->  21    +24
+  bound           43 ->  20    +23
+  poured          28 ->  19     +9
+  tickled         14 ->  13     +1
+  covered         22 ->  15     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  tied             1 ->   8     -7
+  cut             11 ->  52    -41
+  forced           4 ->  11     -7
+  taped           16 -> 168   -152
+  poured          14 ->  43    -29
+  pulled           9 ->  25    -16
+  put             10 ->  19     -9
+  asked           22 ->  57    -35
+  watched         25 ->  56    -31
+  gave            19 ->  37    -18
+  removed         24 ->  40    -16
+  made             5 ->  10     -5
+  covered         18 ->  23     -5
+  told            15 ->  15     +0
+
+HIGHER UNDER B
+  began            3 ->   1     +2
+  started         12 ->   3     +9
+  then             2 ->   2     +0
+  they            20 ->   4    +16
+  had             17 ->   5    +12
+  kissed         125 ->  17   +108
+  straddled       23 ->  13    +10
+  took             7 ->   6     +1
+  spread          42 ->  16    +26
+  worked          29 ->  18    +11
+  the             21 ->  14     +7
+  proceeded       13 ->  12     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  took             1 ->   6     -5
+  fucked           6 ->  12     -6
+  had              5 ->   8     -3
+  ripped          14 ->  48    -34
+  then             9 ->  24    -15
+  pulled          10 ->  23    -13
+  the             18 ->  46    -28
+  tied            15 ->  40    -25
+  sat             25 ->  49    -24
+  shoved          26 ->  50    -24
+  pushed          17 ->  32    -15
+  used            11 ->  18     -7
+  went            24 ->  31     -7
+  they            19 ->  26     -7
+  put             13 ->  17     -4
+  raped           16 ->  22     -6
+  proceeded       12 ->  14     -2
+
+HIGHER UNDER B
+  kissed           2 ->   1     +1
+  began            3 ->   2     +1
+  tickled         20 ->   5    +15
+  whispered       75 ->  10    +65
+  said            32 ->   9    +23
+  asked           43 ->  15    +28
+  told            21 ->  11    +10
+  tried           22 ->  13     +9
+  gave            33 ->  16    +17
+  made             8 ->   7     +1
+  covered         36 ->  20    +16
+  did             35 ->  21    +14
+  started          4 ->   3     +1
+  straddled       23 ->  19     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  cut              1 ->  17    -16
+  poured           7 ->  43    -36
+  beat             8 ->  33    -25
+  held             4 ->  13     -9
+  put              5 ->   9     -4
+  tried           12 ->  23    -11
+  one             14 ->  37    -23
+  stabbed         20 ->  63    -43
+  repeatedly      18 ->  48    -30
+  covered         16 ->  36    -20
+  then            15 ->  20     -5
+  went            17 ->  18     -1
+
+HIGHER UNDER B
+  proceeded       10 ->   1     +9
+  took             6 ->   2     +4
+  ripped          48 ->   7    +41
+  tore            40 ->  12    +28
+  kissed         145 ->  19   +126
+  removed         34 ->  11    +23
+  made            19 ->  10     +9
+  had             39 ->  16    +23
+  performed       62 ->  22    +40
+  started         11 ->   6     +5
+  forced           9 ->   5     +4
+  stripped        22 ->  14     +8
+  pulled          21 ->  15     +6
+  used            13 ->   8     +5
+  bound           24 ->  21     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  began            1 ->  20    -19
+  proceeded        7 -> 152   -145
+  beat             9 -> 189   -180
+  forced           4 ->  10     -6
+  had              8 ->  28    -20
+  made             6 ->  17    -11
+  held            13 ->  69    -56
+  ripped          18 -> 182   -164
+  used            10 ->  11     -1
+  repeatedly      19 -> 139   -120
+  went            15 ->  43    -28
+  turned          20 -> 126   -106
+  cut             23 -> 131   -108
+  shoved          22 -> 114    -92
+  put             17 ->  40    -23
+  tied            16 ->  30    -14
+  then            11 ->  21    -10
+  continued       12 ->  22    -10
+  pulled          14 ->  14     +0
+
+HIGHER UNDER B
+  undressed      153 ->   3   +150
+  started          5 ->   2     +3
+  took             3 ->   1     +2
+  kissed          98 ->   5    +93
+  stripped        42 ->   6    +36
+  licked         103 ->   7    +96
+  wrapped         69 ->   8    +61
+  leaned         152 ->  12   +140
+  let             62 ->   9    +53
+  positioned     162 ->  16   +146
+  undid          189 ->  23   +166
+  tried           32 ->  13    +19
+  watched         24 ->  18     +6
+  covered         21 ->  15     +6
+  gave            25 ->  19     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  kissed           1 -> 249   -248
+  began            2 -> 151   -149
+  made             3 -> 150   -147
+  used             4 -> 148   -144
+  gave             5 -> 156   -151
+  then             6 -> 119   -113
+  put              8 -> 145   -137
+  had              7 -> 136   -129
+  placed           9 -> 208   -199
+  forced          10 -> 175   -165
+  covered         11 -> 159   -148
+  started         14 -> 158   -144
+  told            15 -> 153   -138
+  asked           16 -> 143   -127
+  tied            17 -> 193   -176
+  they            13 ->  62    -49
+  pulled          18 -> 215   -197
+  tried           19 -> 196   -177
+  said            20 -> 142   -122
+  tickled         21 -> 229   -208
+  straddled       22 -> 147   -125
+  watched         23 -> 163   -140
+  played          24 -> 171   -147
+  the             12 ->  30    -18
+
+HIGHER UNDER B
+  The            156 ->   1   +155
+  They           163 ->   2   +161
+  He             161 ->   3   +158
+  She            187 ->   4   +183
+  If             177 ->   5   +172
+  A              179 ->   6   +173
+  This           184 ->   7   +177
+  It             188 ->   8   +180
+  There          220 ->   9   +211
+  What           214 ->  10   +204
+  Their          202 ->  12   +190
+  I              121 ->  11   +110
+  When           172 ->  13   +159
+  Thea           166 ->  14   +152
+  Given          271 ->  15   +256
+  With           199 ->  16   +183
+  In             175 ->  17   +158
+  While          195 ->  18   +177
+  After          200 ->  19   +181
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  raped            7 ->  47    -40
+  proceeded        4 ->  10     -6
+  used             5 ->   6     -1
+  cut             13 ->  25    -12
+  poured          12 ->  17     -5
+  had             16 ->  33    -17
+  put             15 ->  21     -6
+  then             8 ->   8     +0
+  held            14 ->  14     +0
+  tied            10 ->  11     -1
+
+HIGHER UNDER B
+  forced           3 ->   2     +1
+  made             6 ->   4     +2
+  told            38 ->   5    +33
+  began            1 ->   1     +0
+  pressed         60 ->  13    +47
+  watched         35 ->  15    +20
+  they            11 ->   9     +2
+  tried           19 ->  12     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  beat             8 ->  53    -45
+  made             3 ->  16    -13
+  held             9 ->  62    -53
+  then            15 -> 181   -166
+  told            20 -> 173   -153
+  threatened      22 -> 153   -131
+  the             13 ->  38    -25
+  put             21 ->  85    -64
+  repeatedly      12 ->  32    -20
+  tied            27 -> 163   -136
+  they            11 ->  27    -16
+  punched         28 ->  92    -64
+  covered         18 ->  34    -16
+  pulled          25 ->  54    -29
+  a               17 ->  28    -11
+  used             7 ->  13     -6
+  one             14 ->  19     -5
+  took             6 ->  11     -5
+  pinned          23 ->  26     -3
+  started          4 ->   6     -2
+  tried           10 ->  12     -2
+  had              5 ->   7     -2
+
+HIGHER UNDER B
+  forced           1 ->   1     +0
+  began            2 ->   2     +0
+  kissed          24 ->   3    +21
+  performed       26 ->   5    +21
+  proceeded       16 ->   4    +12
+  violently       79 ->  10    +69
+  forcefully      52 ->   8    +44
+  continued       41 ->   9    +32
+  explored       234 ->  17   +217
+  humped         114 ->  15    +99
+  whispered      194 ->  20   +174
+  attacked        55 ->  14    +41
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  then             3 ->  19    -16
+  tied             4 ->  11     -7
+  used             6 ->  13     -7
+  proceeded       14 ->  22     -8
+  watched         22 ->  48    -26
+  cut             10 ->  15     -5
+  forced           5 ->   8     -3
+  made            21 ->  35    -14
+  tried           16 ->  21     -5
+  held            18 ->  23     -5
+  took            20 ->  24     -4
+  raped           26 ->  32     -6
+  taped           24 ->  25     -1
+  duct            17 ->  18     -1
+
+HIGHER UNDER B
+  beat             1 ->   1     +0
+  repeatedly      12 ->   3     +9
+  punched         19 ->   4    +15
+  poured           2 ->   2     +0
+  stabbed         13 ->   5     +8
+  began            8 ->   6     +2
+  doused          42 ->  14    +28
+  choked          53 ->  17    +36
+  shot             7 ->   7     +0
+  the             23 ->  16     +7
+  gagged          25 ->  20     +5
+  started         11 ->  10     +1
+  covered          9 ->   9     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  started          3 ->   8     -5
+  gave             6 ->  18    -12
+  put              9 ->  37    -28
+  beat            13 ->  85    -72
+  tied            11 ->  38    -27
+  tried            5 ->  12     -7
+  held             8 ->  28    -20
+  made            16 ->  62    -46
+  then            18 ->  74    -56
+  asked           22 -> 122   -100
+  cut             10 ->  31    -21
+  proceeded       12 ->  34    -22
+  pulled          24 -> 125   -101
+  told            20 ->  54    -34
+  had             17 ->  39    -22
+  hit             25 ->  69    -44
+  forced           4 ->   6     -2
+  sprayed         23 ->  51    -28
+  used             7 ->  14     -7
+  poured          14 ->  29    -15
+  began            1 ->   4     -3
+  injected        21 ->  25     -4
+
+HIGHER UNDER B
+  sexually        48 ->   2    +46
+  took             2 ->   1     +1
+  kissed          26 ->   3    +23
+  repeatedly      15 ->   5    +10
+  choked          79 ->   9    +70
+  digitally      181 ->  15   +166
+  forcibly        43 ->  10    +33
+  performed       19 ->   7    +12
+  filmed          42 ->  11    +31
+  recorded        55 ->  13    +42
+  tickled         80 ->  17    +63
+  threatened      62 ->  16    +46
+  violated       167 ->  22   +145
+  touched         92 ->  23    +69
+  subjected      153 ->  30   +123
+  strangled       72 ->  21    +51
+  pressed         45 ->  26    +19
+  raped           39 ->  24    +15
+  punched         28 ->  20     +8
+  slapped         27 ->  19     +8
+  rubbed          29 ->  27     +2
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  raped            5 ->  14     -9
+  took             2 ->   5     -3
+  the             12 ->  25    -13
+  beat            16 ->  36    -20
+  then             7 ->  11     -4
+  he              25 ->  57    -32
+  had             20 ->  34    -14
+  poured          13 ->  20     -7
+  handcuffed      22 ->  30     -8
+  continued       18 ->  24     -6
+  pulled          21 ->  23     -2
+  proceeded       14 ->  16     -2
+
+HIGHER UNDER B
+  tied             1 ->   1     +0
+  forced           6 ->   4     +2
+  restrained      38 ->  12    +26
+  covered         15 ->  10     +5
+  blindfolded     54 ->  22    +32
+  watched         30 ->  18    +12
+  stripped        26 ->  15    +11
+  bound           19 ->  13     +6
+  held            10 ->   6     +4
+  used            24 ->  19     +5
+  started          3 ->   2     +1
+  tried            8 ->   7     +1
+  gagged          17 ->  17     +0
+  began            4 ->   3     +1
+  made             9 ->   8     +1
+  put             11 ->   9     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  forced           1 ->   4     -3
+  then             5 ->  22    -17
+  told            11 ->  29    -18
+  read            16 -> 114    -98
+  asked           19 ->  80    -61
+  gave            18 ->  71    -53
+  placed          20 ->  81    -61
+  pinned          13 ->  36    -23
+  used             8 ->  13     -5
+  cut             21 ->  56    -35
+  put              3 ->  10     -7
+  pushed          25 ->  59    -34
+  pulled          17 ->  32    -15
+  one             24 ->  44    -20
+  had             10 ->  14     -4
+  made             6 ->   9     -3
+
+HIGHER UNDER B
+  raped           12 ->   1    +11
+  took             7 ->   2     +5
+  began            9 ->   3     +6
+  started         23 ->   6    +17
+  beat            15 ->   8     +7
+  assaulted       90 ->  18    +72
+  were            26 ->  12    +14
+  tortured       113 ->  20    +93
+  laughed         83 ->  19    +64
+  repeatedly      32 ->  15    +17
+  ripped          33 ->  16    +17
+  played          14 ->  11     +3
+  threatened      50 ->  21    +29
+  proceeded       22 ->  17     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  fucked           9 -> 114   -105
+  put              8 ->  43    -35
+  took             4 ->  12     -8
+  pulled           5 ->  19    -14
+  spread           7 ->  18    -11
+  had             14 ->  57    -43
+  forced          15 ->  42    -27
+  made            13 ->  33    -20
+  then             3 ->   8     -5
+  removed         17 ->  32    -15
+  asked           23 -> 102    -79
+  the             22 ->  88    -66
+  one             20 ->  45    -25
+  got             19 ->  27     -8
+  proceeded       11 ->  14     -3
+
+HIGHER UNDER B
+  inserted        10 ->   1     +9
+  plunged        106 ->   5   +101
+  started          6 ->   4     +2
+  straddled       18 ->   7    +11
+  tied            12 ->   6     +6
+  gagged          86 ->  10    +76
+  blindfolded     79 ->   9    +70
+  whispered       84 ->  13    +71
+  bound           76 ->  16    +60
+  brought         50 ->  17    +33
+  fondled         43 ->  15    +28
+  sat             16 ->  11     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -1,0 +1,1450 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: She loaded the groceries on the kitchen table and ___
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  then             2 ->  17    -15
+  went             1 ->   7     -6
+  carried          5 ->  10     -5
+  looked          15 ->  32    -17
+  opened          16 ->  42    -26
+  called          14 ->  23     -9
+  stood           18 ->  70    -52
+  brought         19 -> 105    -86
+  said            20 ->  65    -45
+  walked          11 ->  14     -3
+  placed          17 ->  18     -1
+  set              9 ->  12     -3
+  sat              7 ->   9     -2
+
+HIGHER UNDER B
+  started         10 ->   1     +9
+  grabbed         31 ->   3    +28
+  began            8 ->   4     +4
+  put              3 ->   2     +1
+  headed           6 ->   5     +1
+  wiped           63 ->  13    +50
+  made            13 ->   8     +5
+  decided         70 ->  16    +54
+  poured          27 ->  15    +12
+  turned          12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  then             1 ->   1     +0
+
+HIGHER UNDER B
+  carried          2 ->   2     +0
+  headed          14 ->   4    +10
+  walked           3 ->   3     +0
+  went            17 ->   5    +12
+  put             11 ->   6     +5
+  looked          35 ->   7    +28
+  started         13 ->   8     +5
+  took            16 ->   9     +7
+  began           31 ->  11    +20
+  turned          24 ->  10    +14
+  set             30 ->  13    +17
+  made            23 ->  14     +9
+  stood           59 ->  17    +42
+  poured          42 ->  18    +24
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  went             4 ->   8     -4
+  turned           5 ->   7     -2
+  then             1 ->   4     -3
+  opened          10 ->  18     -8
+  pulled          12 ->  28    -16
+  walked          14 ->  32    -18
+  put              8 ->  10     -2
+  poured          13 ->  19     -6
+  headed          16 ->  62    -46
+  set              6 ->   6     +0
+  made            15 ->  20     -5
+  got             17 ->  25     -8
+  the             19 ->  29    -10
+  stared          20 ->  27     -7
+  grabbed         21 ->  26     -5
+
+HIGHER UNDER B
+  started          3 ->   2     +1
+  began            2 ->   1     +1
+  sat              9 ->   3     +6
+  I               32 ->  12    +20
+  took             7 ->   5     +2
+  sighed          42 ->  14    +28
+  proceeded       76 ->  17    +59
+  said            18 ->  11     +7
+  placed          22 ->  13     +9
+  smiled          38 ->  16    +22
+  let             27 ->  15    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  walked           8 ->  27    -19
+  went             2 ->   5     -3
+  sat              4 ->   4     +0
+  took             6 ->  12     -6
+  made            13 ->  19     -6
+  put             14 ->  18     -4
+  turned          20 ->  25     -5
+  picked          22 ->  30     -8
+  returned        24 ->  32     -8
+  left            11 ->  13     -2
+  settled         23 ->  26     -3
+  the             21 ->  22     -1
+  looked          25 ->  28     -3
+  set              5 ->   6     -1
+  got             15 ->  17     -2
+  began            7 ->   7     +0
+
+HIGHER UNDER B
+  headed           1 ->   1     +0
+  then             3 ->   2     +1
+  started          9 ->   3     +6
+  called          17 ->   9     +8
+  decided         43 ->  16    +27
+  asked           18 ->  11     +7
+  said            10 ->   8     +2
+  was             19 ->  15     +4
+  stood           16 ->  14     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  left             3 ->   6     -3
+  then             5 ->   5     +0
+  went             2 ->   3     -1
+  the              9 ->  18     -9
+  returned        10 ->  28    -18
+  put              6 ->  16    -10
+  ran             17 ->  30    -13
+  placed          14 ->  21     -7
+  sat             16 ->  24     -8
+  set              8 ->  11     -3
+  was             20 ->  36    -16
+  got              7 ->   7     +0
+
+HIGHER UNDER B
+  headed           1 ->   1     +0
+  made            13 ->   4     +9
+  walked           4 ->   2     +2
+  said            23 ->  14     +9
+  called          32 ->  15    +17
+  started         12 ->   8     +4
+  began           15 ->   9     +6
+  drove           19 ->  13     +6
+  we              18 ->  12     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  then             1 ->   4     -3
+  went             4 ->   9     -5
+  sat              2 ->   6     -4
+  put             12 ->  31    -19
+  the             15 ->  34    -19
+  opened          10 ->  13     -3
+  placed          13 ->  22     -9
+  took             8 ->  10     -2
+  left            18 ->  25     -7
+  made            14 ->  21     -7
+  pulled          22 ->  26     -4
+
+HIGHER UNDER B
+  turned           7 ->   2     +5
+  set              3 ->   1     +2
+  glanced         67 ->  11    +56
+  walked          11 ->   5     +6
+  picked          21 ->  12     +9
+  leaned          38 ->  19    +19
+  began            5 ->   3     +2
+  moved           25 ->  17     +8
+  grabbed         23 ->  15     +8
+  stepped         36 ->  23    +13
+  poured          19 ->  18     +1
+  looked          16 ->  14     +2
+  settled         29 ->  24     +5
+  headed           9 ->   8     +1
+  stood           20 ->  20     +0
+  closed          17 ->  16     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  then             2 ->   3     -1
+  took             6 ->  14     -8
+  said            13 ->  39    -26
+  went             4 ->   6     -2
+  put             14 ->  28    -14
+  got             17 ->  44    -27
+  looked           8 ->  12     -4
+  the             22 ->  48    -26
+  called          16 ->  33    -17
+  opened          11 ->  13     -2
+  turned           7 ->  10     -3
+  walked          15 ->  25    -10
+  made            18 ->  29    -11
+  headed          20 ->  24     -4
+  poured          19 ->  22     -3
+
+HIGHER UNDER B
+  sat              3 ->   1     +2
+  immediately     29 ->   9    +20
+  sighed          35 ->  11    +24
+  set              9 ->   5     +4
+  stood           12 ->   8     +4
+  paused          64 ->  18    +46
+  decided         51 ->  16    +35
+  glanced         34 ->  15    +19
+  pulled          10 ->   7     +3
+  grabbed         27 ->  17    +10
+  wiped           25 ->  19     +6
+  surveyed        30 ->  21     +9
+  reached         21 ->  20     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  went             3 ->   4     -1
+  looked           7 ->  13     -6
+  turned           5 ->   9     -4
+  took             6 ->  10     -4
+  headed          13 ->  25    -12
+  pulled          17 ->  31    -14
+  put             20 ->  46    -26
+  glanced         16 ->  28    -12
+  made            18 ->  34    -16
+  the             21 ->  38    -17
+  told            25 ->  43    -18
+  I               19 ->  30    -11
+  opened          12 ->  17     -5
+  gave            26 ->  40    -14
+  stood           24 ->  29     -5
+  found           23 ->  27     -4
+  walked          22 ->  22     +0
+  left            15 ->  15     +0
+
+HIGHER UNDER B
+  began            2 ->   1     +1
+  started          4 ->   2     +2
+  sighed          33 ->   6    +27
+  asked           11 ->   8     +3
+  proceeded       32 ->  16    +16
+  noticed         28 ->  14    +14
+  sat              8 ->   5     +3
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  went             4 ->  15    -11
+  put              6 ->   9     -3
+  unpacked        12 ->  36    -24
+  opened          11 ->  27    -16
+  walked          15 ->  63    -48
+  set             13 ->  32    -19
+  pulled           9 ->  12     -3
+  grabbed         21 ->  57    -36
+  then             3 ->   4     -1
+  turned          10 ->  11     -1
+  looked           8 ->  10     -2
+  reached         19 ->  26     -7
+  headed          14 ->  22     -8
+  said            16 ->  17     -1
+
+HIGHER UNDER B
+  began            1 ->   1     +0
+  started          2 ->   2     +0
+  took             5 ->   3     +2
+  let             56 ->   6    +50
+  sighed          27 ->   8    +19
+  was             18 ->   7    +11
+  surveyed        69 ->  18    +51
+  stood           33 ->  16    +17
+  I               22 ->  14     +8
+  called          17 ->  13     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  looked           3 ->  11     -8
+  sat              4 ->   8     -4
+  then             1 ->   4     -3
+  went             6 ->  13     -7
+  turned           7 ->   9     -2
+  set              9 ->  15     -6
+  stared          15 ->  34    -19
+  walked          18 ->  43    -25
+  opened          12 ->  27    -15
+  sighed          20 ->  47    -27
+  put             13 ->  20     -7
+  waited          21 ->  36    -15
+  the             22 ->  35    -13
+  pulled          11 ->  12     -1
+  said            19 ->  19     +0
+
+HIGHER UNDER B
+  began            2 ->   1     +1
+  headed          16 ->   5    +11
+  let             57 ->  16    +41
+  took             8 ->   3     +5
+  was             26 ->  10    +16
+  stood           14 ->   6     +8
+  started          5 ->   2     +3
+  leaned          31 ->  17    +14
+  closed          47 ->  24    +23
+  surveyed        38 ->  21    +17
+  gave            37 ->  22    +15
+  collapsed       29 ->  18    +11
+  called          17 ->  14     +3
+  smiled          28 ->  26     +2
+  reached         24 ->  23     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  then             1 ->   2     -1
+  put              2 ->   3     -1
+  brought         10 ->  31    -21
+  she             11 ->  48    -37
+  headed           6 ->  13     -7
+  we              17 -> 124   -107
+  carried         19 ->  88    -69
+  set              9 ->  12     -3
+  walked           8 ->  10     -2
+  was             16 ->  25     -9
+  got             14 ->  19     -5
+  placed          15 ->  18     -3
+  took             4 ->   4     +0
+  proceeded       20 ->  22     -2
+
+HIGHER UNDER B
+  went             3 ->   1     +2
+  opened          29 ->   8    +21
+  the             24 ->   9    +15
+  looked          37 ->  15    +22
+  turned          49 ->  16    +33
+  made            12 ->   7     +5
+  left            18 ->  11     +7
+  let             73 ->  20    +53
+  cleaned         56 ->  21    +35
+  found           31 ->  17    +14
+  began            7 ->   6     +1
+  started          5 ->   5     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  sat              1 ->   9     -8
+  headed          10 ->  95    -85
+  walked           9 ->  30    -21
+  pulled          11 ->  19     -8
+  said            23 -> 118    -95
+  got             20 ->  49    -29
+  stood           22 ->  63    -41
+  handed          19 ->  37    -18
+  looked          13 ->  21     -8
+  turned          12 ->  16     -4
+  the             15 ->  23     -8
+  grabbed         18 ->  27     -9
+  left            21 ->  28     -7
+  then             2 ->   3     -1
+  opened          16 ->  18     -2
+  made            14 ->  15     -1
+
+HIGHER UNDER B
+  put              8 ->   2     +6
+  began            3 ->   1     +2
+  placed          17 ->   5    +12
+  started          6 ->   4     +2
+  finished       117 ->  10   +107
+  unpacked        77 ->  13    +64
+  checked         46 ->  11    +35
+  decided         64 ->  14    +50
+  returned        30 ->  12    +18
+  carefully       47 ->  20    +27
+  proceeded       39 ->  22    +17
+  picked          36 ->  17    +19
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  sat              2 ->  10     -8
+  set              5 ->  13     -8
+  placed          13 ->  36    -23
+  unloaded        20 -> 166   -146
+  put              7 ->   8     -1
+  said            17 ->  37    -20
+  stood           10 ->  11     -1
+  went            11 ->  14     -3
+  sighed          12 ->  19     -7
+  stared          19 ->  28     -9
+  walked          16 ->  22     -6
+  surveyed        14 ->  16     -2
+  I               15 ->  20     -5
+
+HIGHER UNDER B
+  then             1 ->   1     +0
+  wiped           25 ->   4    +21
+  glanced         26 ->   9    +17
+  turned           8 ->   5     +3
+  took             9 ->   7     +2
+  smiled          31 ->  15    +16
+  headed          49 ->  24    +25
+  pulled          22 ->  12    +10
+  gave            41 ->  23    +18
+  looked           4 ->   3     +1
+  began            3 ->   2     +1
+  called          28 ->  21     +7
+  started          6 ->   6     +0
+  opened          21 ->  18     +3
+  watched         29 ->  25     +4
+  the             18 ->  17     +1
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  went             1 ->   7     -6
+  then             2 ->   4     -2
+  headed           5 ->  31    -26
+  walked           8 ->  71    -63
+  left            10 ->  93    -83
+  put              4 ->  10     -6
+  was             16 ->  63    -47
+  took            13 ->  23    -10
+  placed          15 ->  37    -22
+  got             11 ->  11     +0
+  carried         20 ->  78    -58
+  the             18 ->  48    -30
+  set              7 ->   8     -1
+  stood           19 ->  46    -27
+  made            14 ->  22     -8
+  sat              3 ->   5     -2
+
+HIGHER UNDER B
+  began            6 ->   1     +5
+  started          9 ->   2     +7
+  sighed         101 ->   3    +98
+  prepared        27 ->   6    +21
+  surveyed       122 ->  17   +105
+  let             84 ->  14    +70
+  stared          85 ->  20    +65
+  glanced         78 ->  19    +59
+  settled         70 ->  21    +49
+  opened          29 ->  12    +17
+  grabbed         32 ->  16    +16
+  closed          28 ->  18    +10
+  said            21 ->  15     +6
+  looked          17 ->  13     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  then             1 ->   4     -3
+  walked           4 ->  12     -8
+  said             6 ->  15     -9
+  sat              8 ->  30    -22
+  put              9 ->  32    -23
+  the             12 ->  77    -65
+  was             11 ->  54    -43
+  set             14 ->  34    -20
+  found           15 ->  18     -3
+  took            13 ->  13     +0
+
+HIGHER UNDER B
+  sighed          91 ->   2    +89
+  began            3 ->   1     +2
+  checked         24 ->   7    +17
+  opened           5 ->   5     +0
+  noticed         34 ->   8    +26
+  looked          30 ->  10    +20
+  counted         16 ->  11     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  then             1 ->  14    -13
+  began            3 ->  28    -25
+  sat              5 ->  37    -32
+  started          4 ->  10     -6
+  put              8 ->  44    -36
+  the             15 -> 120   -105
+  made            17 ->  77    -60
+  was             19 ->  39    -20
+  sighed          21 ->  49    -28
+  left            22 ->  60    -38
+  stood           16 ->  34    -18
+  opened          18 ->  29    -11
+  took             9 ->   9     +0
+  said            11 ->  16     -5
+  looked           7 ->   8     -1
+  walked          13 ->  17     -4
+  grabbed         23 ->  24     -1
+
+HIGHER UNDER B
+  went             2 ->   1     +1
+  headed          20 ->   2    +18
+  waited          32 ->   3    +29
+  checked         41 ->   4    +37
+  moved           29 ->   6    +23
+  gave            34 ->  13    +21
+  decided         25 ->  11    +14
+  turned           6 ->   5     +1
+  placed          12 ->  12     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  began            1 ->   3     -2
+  went             2 ->   4     -2
+  started          4 ->   9     -5
+  said             5 ->  56    -51
+  told             7 ->  15     -8
+  sat              9 ->  36    -27
+  called          10 ->  55    -45
+  left             6 ->   7     -1
+  took             8 ->  20    -12
+  turned          11 ->  40    -29
+  walked          13 ->  29    -16
+  asked           16 ->  51    -35
+  looked          15 ->  23     -8
+  opened          18 ->  70    -52
+  ran             23 ->  31     -8
+  got             22 ->  24     -2
+  gave            24 ->  27     -3
+
+HIGHER UNDER B
+  then             3 ->   1     +2
+  made            17 ->   2    +15
+
+7 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  went             3 ->   5     -2
+  sat              5 ->  13     -8
+  turned           6 ->  15     -9
+  walked          14 ->  56    -42
+  then             1 ->   3     -2
+  pulled          12 ->  25    -13
+  I               24 ->  78    -54
+  put             10 ->  14     -4
+  closed          16 ->  41    -25
+  grabbed         19 ->  39    -20
+  took             7 ->   8     -1
+  placed          15 ->  28    -13
+  opened          17 ->  30    -13
+  was             21 ->  27     -6
+  made            13 ->  19     -6
+  left            20 ->  24     -4
+
+HIGHER UNDER B
+  started          4 ->   1     +3
+  sighed          23 ->   7    +16
+  asked           45 ->  10    +35
+  surveyed        35 ->  12    +23
+  said            18 ->  11     +7
+  glanced         40 ->  17    +23
+  checked         58 ->  21    +37
+  waited          36 ->  16    +20
+  tried           32 ->  18    +14
+  called          28 ->  20     +8
+  began            2 ->   2     +0
+  headed          11 ->   9     +2
+  set              8 ->   4     +4
+  looked           9 ->   6     +3
+  washed          25 ->  23     +2
+  stared          22 ->  22     +0
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  then             1 ->   6     -5
+  sat              5 ->  29    -24
+  turned           7 ->  19    -12
+  set              4 ->   7     -3
+  began            8 ->  80    -72
+  started          9 ->  30    -21
+  headed          11 ->  31    -20
+  made            13 ->  39    -26
+  stood           12 ->  21     -9
+  opened          15 ->  48    -33
+  carried         16 ->  28    -12
+  poured          14 ->  18     -4
+  looked          17 ->  36    -19
+
+HIGHER UNDER B
+  put              3 ->   1     +2
+  took             6 ->   2     +4
+  removed         47 ->   4    +43
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  said             1 ->   8     -7
+  sat              7 ->  10     -3
+  went             4 ->   7     -3
+  opened          13 ->  24    -11
+  the             15 ->  25    -10
+  asked           17 ->  32    -15
+  put             10 ->  11     -1
+  told            25 ->  71    -46
+  looked          11 ->  15     -4
+  waited          21 ->  38    -17
+  left            24 ->  41    -17
+  stood           16 ->  22     -6
+  picked          22 ->  23     -1
+  took            12 ->  12     +0
+  pulled          18 ->  19     -1
+  closed          20 ->  20     +0
+
+HIGHER UNDER B
+  began            3 ->   1     +2
+  then             2 ->   2     +0
+  started          6 ->   3     +3
+  turned           5 ->   4     +1
+  smiled          39 ->  14    +25
+  settled         45 ->  18    +27
+  handed          34 ->  16    +18
+  grabbed         27 ->  17    +10
+  got             14 ->   9     +5
+  set              9 ->   5     +4
+  headed          19 ->  13     +6
+  made            23 ->  21     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  then             1 ->   2     -1
+  went             2 ->   8     -6
+  sat              6 ->  13     -7
+  set              9 ->  21    -12
+  turned           3 ->   9     -6
+  walked          12 ->  35    -23
+  looked           8 ->  17     -9
+  sighed          15 ->  58    -43
+  stood           18 ->  76    -58
+  opened          13 ->  31    -18
+  began            5 ->   6     -1
+  headed           7 ->  10     -3
+  made            16 ->  38    -22
+  stared          19 ->  55    -36
+  started          4 ->   4     +0
+  carried         20 ->  42    -22
+  the             14 ->  19     -5
+  was             17 ->  22     -5
+
+HIGHER UNDER B
+  pulled          21 ->   1    +20
+  took            10 ->   3     +7
+  reached         38 ->   7    +31
+  it              90 ->  12    +78
+  forgot         156 ->  16   +140
+  grabbed         29 ->  11    +18
+  shut            55 ->  14    +41
+  closed          33 ->  15    +18
+  put             11 ->   5     +6
+  kicked          80 ->  25    +55
+  gave            76 ->  24    +52
+  had             56 ->  23    +33
+  got             22 ->  18     +4
+  said            30 ->  20    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  then             1 ->   2     -1
+  left             2 ->   8     -6
+  put              6 ->   9     -3
+  sat              5 ->   7     -2
+  placed           4 ->   4     +0
+  was             14 ->  19     -5
+  took            13 ->  14     -1
+  found           20 ->  22     -2
+  noticed         15 ->  18     -3
+  walked           9 ->  11     -2
+
+HIGHER UNDER B
+  started          3 ->   1     +2
+  began           11 ->   3     +8
+  asked            8 ->   6     +2
+  realized        18 ->  15     +3
+  set             10 ->  10     +0
+  called          23 ->  20     +3
+  turned          16 ->  13     +3
+  checked         25 ->  21     +4
+  looked          31 ->  25     +6
+  made            19 ->  17     +2
+  prepared        24 ->  23     +1
+  headed          17 ->  16     +1
+  said            12 ->  12     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  went             2 ->  11     -9
+  headed          11 -> 138   -127
+  walked           9 ->  25    -16
+  carried         13 ->  52    -39
+  sat              6 ->   6     +0
+  I               12 ->  27    -15
+  she             15 ->  36    -21
+  waited          18 ->  37    -19
+  turned          19 ->  38    -19
+  pulled          21 ->  48    -27
+  left            16 ->  24     -8
+  the             17 ->  22     -5
+  then             1 ->   4     -3
+  looked          14 ->  18     -4
+  took             8 ->   8     +0
+  set              3 ->   5     -2
+
+HIGHER UNDER B
+  began            5 ->   1     +4
+  started          4 ->   2     +2
+  put              7 ->   3     +4
+  placed          20 ->   7    +13
+  arranged        37 ->  10    +27
+  sorted          54 ->  12    +42
+  quickly         66 ->  14    +52
+  checked         36 ->  13    +23
+  laid            33 ->  17    +16
+  was             25 ->  16     +9
+  called          22 ->  15     +7
+  made            10 ->   9     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  went             1 ->   6     -5
+  then             2 ->   9     -7
+  I                8 ->  20    -12
+  we              12 ->  33    -21
+  the              9 ->  19    -10
+  left            15 ->  25    -10
+  brought         26 ->  57    -31
+  took             4 ->   8     -4
+  carried         14 ->  21     -7
+  opened          23 ->  34    -11
+  was             19 ->  27     -8
+  put              3 ->   4     -1
+  stood           21 ->  26     -5
+
+HIGHER UNDER B
+  started         10 ->   3     +7
+  set              6 ->   1     +5
+  began            7 ->   2     +5
+  found           33 ->  13    +20
+  walked          11 ->   7     +4
+  made            17 ->  11     +6
+  headed          13 ->  10     +3
+  looked          25 ->  12    +13
+  stepped         48 ->  23    +25
+  checked         61 ->  24    +37
+  turned          22 ->  14     +8
+  sat              5 ->   5     +0
+  handed          28 ->  18    +10
+  placed          18 ->  16     +2
+  said            16 ->  15     +1
+  helped          20 ->  17     +3
+  got             24 ->  22     +2
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  turned           9 ->  39    -30
+  put              5 ->   6     -1
+  we              10 ->  32    -22
+  pulled          15 ->  47    -32
+  I                7 ->   8     -1
+  said            14 ->  28    -14
+  opened          12 ->  18     -6
+  told            21 ->  43    -22
+  sat              8 ->   9     -1
+  looked          11 ->  12     -1
+  got             16 ->  17     -1
+  grabbed         17 ->  19     -2
+  asked           19 ->  29    -10
+  walked          22 ->  36    -14
+  stood           20 ->  20     +0
+
+HIGHER UNDER B
+  began            4 ->   2     +2
+  went             2 ->   1     +1
+  started          3 ->   3     +0
+  decided         44 ->   7    +37
+  noticed         55 ->  16    +39
+  was             27 ->  10    +17
+  found           32 ->  15    +17
+  made            23 ->  14     +9
+  placed          18 ->  13     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  went             2 ->   2     +0
+  started          4 ->   5     -1
+  turned          11 ->  13     -2
+  put              8 ->   9     -1
+  headed          14 ->  19     -5
+  called          18 ->  20     -2
+  the             13 ->  16     -3
+  began            3 ->   3     +0
+  she             10 ->  12     -2
+  pulled          16 ->  17     -1
+  set             21 ->  24     -3
+  got             20 ->  23     -3
+  opened          22 ->  25     -3
+
+HIGHER UNDER B
+  then             1 ->   1     +0
+  looked           5 ->   4     +1
+  sighed           9 ->   8     +1
+  said            26 ->  14    +12
+  sat              7 ->   7     +0
+  walked          15 ->  10     +5
+  took             6 ->   6     +0
+  noticed         24 ->  22     +2
+  grabbed         23 ->  21     +2
+  smiled          12 ->  11     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  went             2 ->   2     +0
+  said            14 ->  18     -4
+  left            16 ->  16     +0
+  called          23 ->  25     -2
+  headed          12 ->  12     +0
+  we              21 ->  23     -2
+  returned        15 ->  15     +0
+  walked          10 ->  10     +0
+  closed          19 ->  22     -3
+  made            18 ->  19     -1
+  placed          20 ->  21     -1
+
+HIGHER UNDER B
+  set              6 ->   6     +0
+  then             1 ->   1     +0
+  carried          4 ->   3     +1
+  started          8 ->   7     +1
+  put              5 ->   5     +0
+  began           11 ->  11     +0
+  looked          13 ->  13     +0
+  turned           9 ->   9     +0
+  brought         22 ->  17     +5
+  stood           24 ->  20     +4
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  turned           3 ->  10     -7
+  waited          14 ->  93    -79
+  went             5 ->   8     -3
+  sat              1 ->   4     -3
+  stood           10 ->  21    -11
+  put             12 ->  22    -10
+  was             18 ->  34    -16
+  headed          21 ->  38    -17
+  called          13 ->  17     -4
+  walked          15 ->  15     +0
+  watched         20 ->  20     +0
+  took             9 ->  13     -4
+  set              8 ->  12     -4
+  then             2 ->   3     -1
+  began            4 ->   6     -2
+
+HIGHER UNDER B
+  sighed          11 ->   1    +10
+  started          7 ->   2     +5
+  surveyed        19 ->   7    +12
+  looked           6 ->   5     +1
+  glanced         17 ->   9     +8
+  frowned         41 ->  14    +27
+  stared          16 ->  11     +5
+  slumped         35 ->  18    +17
+  opened          23 ->  16     +7
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  put              4 ->   7     -3
+  sat              8 ->   9     -1
+  set              3 ->   5     -2
+  poured          22 ->  32    -10
+  headed          12 ->  15     -3
+  got             15 ->  19     -4
+  placed          14 ->  18     -4
+  stood           19 ->  28     -9
+  opened          13 ->  13     +0
+  reached         21 ->  29     -8
+  I               18 ->  20     -2
+  pulled          11 ->  11     +0
+  looked          10 ->  10     +0
+
+HIGHER UNDER B
+  went             2 ->   1     +1
+  began            6 ->   3     +3
+  started          7 ->   6     +1
+  turned           5 ->   4     +1
+  walked          20 ->  12     +8
+  called          23 ->  17     +6
+  returned        30 ->  23     +7
+  said            26 ->  21     +5
+  sighed          27 ->  22     +5
+  left            29 ->  24     +5
+  grabbed         17 ->  14     +3
+  took             9 ->   8     +1
+  made            16 ->  16     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  carried          3 ->   4     -1
+  left            15 ->  20     -5
+  went             1 ->   1     +0
+  grabbed         21 ->  24     -3
+  took             6 ->   8     -2
+  returned        22 ->  22     +0
+  brought         16 ->  17     -1
+  headed          10 ->  10     +0
+  walked          11 ->  12     -1
+  looked          12 ->  14     -2
+  then             2 ->   2     +0
+
+HIGHER UNDER B
+  set              4 ->   3     +1
+  began            9 ->   7     +2
+  started          7 ->   6     +1
+  put              5 ->   5     +0
+  placed          13 ->  11     +2
+  stood           18 ->  15     +3
+  got             20 ->  18     +2
+  turned          14 ->  13     +1
+  made            19 ->  19     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  then             1 ->   1     +0
+  turned           7 ->  49    -42
+  looked           6 ->  25    -19
+  went             4 ->  11     -7
+  pulled          14 ->  61    -47
+  opened          13 ->  54    -41
+  surveyed        18 -> 159   -141
+  set              9 ->  15     -6
+  stood           12 ->  36    -24
+  sat              3 ->   6     -3
+  began            2 ->   4     -2
+  headed          15 ->  29    -14
+  started          8 ->   8     +0
+  walked          11 ->  16     -5
+
+HIGHER UNDER B
+  made            17 ->   5    +12
+  prepared        70 ->  10    +60
+  the             20 ->   7    +13
+  was             25 ->   9    +16
+  noticed         40 ->  12    +28
+  took            10 ->   3     +7
+  cleaned        132 ->  20   +112
+  suddenly       134 ->  22   +112
+  realized        87 ->  19    +68
+  found           49 ->  17    +32
+  decided         71 ->  18    +53
+  wiped           28 ->  13    +15
+  had             86 ->  23    +63
+  she             47 ->  21    +26
+  waited          36 ->  24    +12
+  placed          16 ->  14     +2
+  put              5 ->   2     +3
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  then             1 ->   4     -3
+  set              6 ->   9     -3
+  went             3 ->   3     +0
+  turned           5 ->   7     -2
+  pulled           8 ->  18    -10
+  opened          10 ->  17     -7
+  made            12 ->  14     -2
+  sat             13 ->  21     -8
+  said            16 ->  34    -18
+  glanced         18 ->  37    -19
+
+HIGHER UNDER B
+  began            2 ->   1     +1
+  started          4 ->   2     +2
+  sighed          38 ->  10    +28
+  took             9 ->   5     +4
+  prepared        32 ->  15    +17
+  proceeded       47 ->  16    +31
+  wiped           17 ->  12     +5
+  called          15 ->  11     +4
+  checked         24 ->  19     +5
+  got             14 ->  13     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  asked            6 ->  37    -31
+  told             8 ->  68    -60
+  the              7 ->  19    -12
+  put              3 ->   9     -6
+  left            11 ->  39    -28
+  cleared         22 ->  92    -70
+  said            10 ->  13     -3
+  got             18 ->  36    -18
+  made            17 ->  24     -7
+  went             5 ->   6     -1
+
+HIGHER UNDER B
+  began            2 ->   2     +0
+  then             1 ->   1     +0
+  turned          15 ->   3    +12
+  sat              9 ->   4     +5
+  prepared        20 ->  10    +10
+  set             13 ->   7     +6
+  looked          31 ->  14    +17
+  took            12 ->   8     +4
+  walked          21 ->  15     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  went             1 ->   3     -2
+  pulled           7 ->  11     -4
+  sat              8 ->   9     -1
+  then             4 ->   4     +0
+  got             16 ->  20     -4
+  grabbed         15 ->  17     -2
+  walked          11 ->  14     -3
+  called          18 ->  27     -9
+  set             12 ->  13     -1
+  turned           6 ->   7     -1
+
+HIGHER UNDER B
+  began            2 ->   1     +1
+  started          3 ->   2     +1
+  put             10 ->   5     +5
+  sighed          54 ->  16    +38
+  made            17 ->  15     +2
+  headed          14 ->  10     +4
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  put              6 ->  13     -7
+  sat              9 ->  12     -3
+  opened          13 ->  15     -2
+  stood           12 ->  14     -2
+  unloaded        21 ->  35    -14
+  got             17 ->  20     -3
+  went             2 ->   2     +0
+  walked           7 ->   8     -1
+  set              8 ->   9     -1
+  unpacked        22 ->  28     -6
+  made            18 ->  21     -3
+  pulled          16 ->  17     -1
+  took             5 ->   5     +0
+  was             23 ->  25     -2
+
+HIGHER UNDER B
+  began            3 ->   3     +0
+  then             1 ->   1     +0
+  surveyed        15 ->  10     +5
+  noticed         31 ->  19    +12
+  headed          14 ->  11     +3
+  turned          11 ->   7     +4
+  called          20 ->  16     +4
+  looked          10 ->   6     +4
+  started          4 ->   4     +0
+  glanced         24 ->  22     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  went             1 ->   4     -3
+  put             10 ->  33    -23
+  turned           5 ->  11     -6
+  walked          13 ->  35    -22
+  returned        22 -> 117    -95
+  carried         19 ->  77    -58
+  got             18 ->  63    -45
+  made            11 ->  14     -3
+  found           20 ->  32    -12
+  opened          14 ->  19     -5
+  pulled          21 ->  26     -5
+  the             17 ->  20     -3
+  said            16 ->  18     -2
+
+HIGHER UNDER B
+  then             2 ->   1     +1
+  sat              3 ->   2     +1
+  set              4 ->   3     +1
+  slid           118 ->   9   +109
+  unpacked        99 ->  12    +87
+  straightened    96 ->  16    +80
+  laid            49 ->  15    +34
+  asked           33 ->  17    +16
+  called          15 ->  13     +2
+  looked          12 ->  10     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  began            1 -> 144   -143
+  started          2 -> 139   -137
+  then             3 -> 103   -100
+  went             4 -> 140   -136
+  put              5 -> 142   -137
+  prepared         6 -> 180   -174
+  set              7 -> 148   -141
+  placed           8 -> 203   -195
+  got              9 -> 150   -141
+  said            10 -> 137   -127
+  proceeded       11 -> 199   -188
+  wiped           12 -> 241   -229
+  sat             13 -> 154   -141
+  took            14 -> 145   -131
+  continued       15 -> 143   -128
+  made            16 -> 149   -133
+  turned          17 -> 174   -157
+  left            19 -> 162   -143
+  looked          20 -> 157   -137
+  was             21 -> 124   -103
+  the             22 ->  31     -9
+
+HIGHER UNDER B
+  She            131 ->   1   +130
+  The            128 ->   2   +126
+  Thea           126 ->   3   +123
+  It             140 ->   4   +136
+  He             125 ->   5   +120
+  There          161 ->   6   +155
+  What           172 ->   7   +165
+  This           168 ->   8   +160
+  However        203 ->   9   +194
+  They           143 ->  11   +132
+  Then           133 ->  12   +121
+  If             190 ->  13   +177
+  Butch          155 ->  14   +141
+  When           151 ->  15   +136
+  Given          242 ->  16   +226
+  After          141 ->  17   +124
+  How            234 ->  18   +216
+  We             146 ->  19   +127
+  she             58 ->  20    +38
+  I               18 ->  10     +8
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  sat              2 ->   6     -4
+  took             7 ->  17    -10
+  turned          11 ->  23    -12
+  went             6 ->   9     -3
+  pulled          16 ->  39    -23
+  got             20 ->  51    -31
+  looked          10 ->  13     -3
+  stood           12 ->  20     -8
+  opened          15 ->  22     -7
+  was             21 ->  29     -8
+
+HIGHER UNDER B
+  headed           9 ->   4     +5
+  started          4 ->   2     +2
+  began            1 ->   1     +0
+  waited          33 ->  10    +23
+  walked          13 ->   8     +5
+  then             5 ->   5     +0
+  set              3 ->   3     +0
+  said            19 ->  11     +8
+  asked           27 ->  18     +9
+  called          18 ->  12     +6
+  left            25 ->  16     +9
+  helped          24 ->  19     +5
+  handed          17 ->  14     +3
+  made            22 ->  21     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  went             6 ->  16    -10
+  sat              5 ->   9     -4
+  looked          10 ->  13     -3
+  turned           9 ->  10     -1
+  stood           11 ->  15     -4
+  headed          15 ->  80    -65
+  walked          16 ->  50    -34
+  made            17 ->  43    -26
+  put              7 ->   7     +0
+  pulled          13 ->  24    -11
+  sighed          14 ->  27    -13
+  said            21 ->  49    -28
+  leaned          19 ->  37    -18
+  then             1 ->   4     -3
+  brought         20 ->  20     +0
+
+HIGHER UNDER B
+  began            4 ->   1     +3
+  set              3 ->   2     +1
+  placed          12 ->   5     +7
+  sorted          87 ->   8    +79
+  took             8 ->   6     +2
+  carefully       74 ->  14    +60
+  checked         50 ->  12    +38
+  wiped           30 ->  11    +19
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  went             3 ->   4     -1
+  walked           9 ->  20    -11
+  headed          13 ->  23    -10
+  looked           5 ->  12     -7
+  took             6 ->  11     -5
+  turned           4 ->   9     -5
+  pulled          19 ->  28     -9
+  then             1 ->   2     -1
+  stepped         20 ->  29     -9
+  stood           12 ->  14     -2
+  made            16 ->  22     -6
+  placed          18 ->  19     -1
+
+HIGHER UNDER B
+  started         10 ->   3     +7
+  I               14 ->   6     +8
+  sat              2 ->   1     +1
+  set              8 ->   5     +3
+  began           11 ->   7     +4
+  was             35 ->  13    +22
+  asked           37 ->  16    +21
+  the             15 ->  10     +5
+  we              17 ->  15     +2
+  said            28 ->  17    +11
+  called          21 ->  18     +3
+  sighed          22 ->  21     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  went             4 ->  14    -10
+  then             1 ->   3     -2
+  the              7 ->  44    -37
+  I               13 -> 110    -97
+  began            2 ->   5     -3
+  sat              3 ->   7     -4
+  said            14 ->  76    -62
+  put              8 ->  18    -10
+  asked           15 ->  74    -59
+  set              9 ->  16     -7
+  called          20 ->  53    -33
+  made            22 ->  49    -27
+  headed          26 ->  78    -52
+  left            16 ->  35    -19
+  took            12 ->  21     -9
+  got             21 ->  39    -18
+  walked          11 ->  17     -6
+  placed          19 ->  31    -12
+  opened          18 ->  30    -12
+  pulled          24 ->  37    -13
+  was             23 ->  28     -5
+  told            17 ->  19     -2
+
+HIGHER UNDER B
+  looked          10 ->   1     +9
+  stared          41 ->   2    +39
+  sighed          28 ->   8    +20
+  watched         48 ->   9    +39
+  glanced         44 ->  10    +34
+  surveyed        93 ->  13    +80
+  poured          34 ->  12    +22
+  started          5 ->   4     +1
+  turned           6 ->   6     +0
+  stood           25 ->  11    +14
+  paused          92 ->  15    +77
+  reached         70 ->  20    +50
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  then             3 ->   9     -6
+  turned          10 ->  10     +0
+  stood           11 ->  12     -1
+  the             18 ->  28    -10
+  went             2 ->   3     -1
+  called          23 ->  27     -4
+  took             5 ->   5     +0
+  got             15 ->  18     -3
+  found           21 ->  22     -1
+  checked         16 ->  17     -1
+  pulled          20 ->  20     +0
+
+HIGHER UNDER B
+  set              6 ->   4     +2
+  started          4 ->   2     +2
+  began            1 ->   1     +0
+  sat              9 ->   7     +2
+  looked           8 ->   6     +2
+  placed          17 ->  15     +2
+  walked          22 ->  16     +6
+  opened          12 ->  11     +1
+  surveyed        14 ->  13     +1
+  was             19 ->  19     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  the              6 ->  18    -12
+  then             1 ->   4     -3
+  set              3 ->   6     -3
+  prepared        12 ->  25    -13
+  was             10 ->  17     -7
+  poured          23 ->  73    -50
+  put              7 ->   9     -2
+  looked          22 ->  46    -24
+  placed          15 ->  31    -16
+  told            26 ->  42    -16
+  I               20 ->  34    -14
+  he              21 ->  37    -16
+  said            17 ->  32    -15
+  her             24 ->  35    -11
+  walked          18 ->  23     -5
+  turned          13 ->  14     -1
+
+HIGHER UNDER B
+  went             4 ->   1     +3
+  waited          25 ->   8    +17
+  took             9 ->   5     +4
+  started          8 ->   3     +5
+  headed          49 ->  13    +36
+  began            2 ->   2     +0
+  asked           16 ->  11     +5
+  opened          34 ->  20    +14
+  made            11 ->  10     +1
+  left            28 ->  16    +12
+  arranged        35 ->  21    +14
+  called          19 ->  15     +4
+  got             14 ->  12     +2
+  brought         29 ->  19    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  went             2 ->   8     -6
+  then             1 ->   4     -3
+  headed           5 ->  12     -7
+  put             11 ->  22    -11
+  I               13 ->  41    -28
+  walked           6 ->  11     -5
+  left            19 ->  50    -31
+  the             14 ->  26    -12
+  opened          17 ->  39    -22
+  placed          20 ->  30    -10
+  made            12 ->  14     -2
+  was             22 ->  34    -12
+  pulled          21 ->  28     -7
+  got             15 ->  18     -3
+  set              7 ->  10     -3
+
+HIGHER UNDER B
+  began            3 ->   1     +2
+  started          4 ->   2     +2
+  sighed          77 ->   5    +72
+  sat             10 ->   3     +7
+  prepared        73 ->  13    +60
+  looked          16 ->   9     +7
+  decided         40 ->  17    +23
+  surveyed        90 ->  20    +70
+  glanced         69 ->  19    +50
+  took             9 ->   6     +3
+  watched         32 ->  15    +17
+  checked         50 ->  21    +29
+  turned           8 ->   7     +1
+  called          36 ->  23    +13
+  grabbed         18 ->  16     +2
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

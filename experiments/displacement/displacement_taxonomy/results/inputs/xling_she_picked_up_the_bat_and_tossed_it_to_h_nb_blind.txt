@@ -1,0 +1,1197 @@
+Below are 42 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: She picked up the bat and tossed it to his ___
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  feet             1 ->   5     -4
+  head             3 ->  50    -47
+  chest            4 ->  36    -32
+  shoulder         7 ->  27    -20
+  lips            10 ->  42    -32
+  left            14 ->  48    -34
+  face            16 ->  51    -35
+  right           17 ->  54    -37
+  wife             8 ->  11     -3
+  hand            13 ->  16     -3
+  son             18 ->  44    -26
+  brother          5 ->   8     -3
+  other           20 ->  33    -13
+
+HIGHER UNDER B
+  outstretched    25 ->   2    +23
+  waiting         19 ->   1    +18
+  sister           6 ->   4     +2
+  friend          11 ->   6     +5
+  mother           9 ->   7     +2
+  cousin          23 ->  10    +13
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  waiting          1 ->  29    -28
+  dad              3 ->   8     -5
+  glove            5 ->  40    -35
+  father           7 ->  10     -3
+  hand             8 ->  35    -27
+  plate           10 ->  24    -14
+
+HIGHER UNDER B
+  son              2 ->   1     +1
+  brother          4 ->   2     +2
+  daughter        12 ->   3     +9
+  friend           9 ->   4     +5
+  nephew          22 ->   6    +16
+  wife            20 ->   7    +13
+  cat             34 ->   9    +25
+  dog             40 ->  11    +29
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  feet             2 ->   7     -5
+  sister           5 ->   9     -4
+  hand             6 ->  10     -4
+  chest            8 ->  19    -11
+  shoulder         7 ->  12     -5
+  hands           12 ->  26    -14
+  mother          13 ->  23    -10
+  dad             14 ->  25    -11
+  waiting         19 ->  55    -36
+  roommate        16 ->  27    -11
+  head            15 ->  20     -5
+  cousin          17 ->  30    -13
+  face            11 ->  14     -3
+  other           22 ->  35    -13
+
+HIGHER UNDER B
+  father           4 ->   3     +1
+  brother          3 ->   2     +1
+  friend          18 ->   4    +14
+  side             1 ->   1     +0
+  opponent        64 ->  16    +48
+  room            29 ->  13    +16
+  partner         25 ->  11    +14
+  son              9 ->   5     +4
+  left            21 ->   8    +13
+  wife            10 ->   6     +4
+  right           20 ->  15     +5
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  left             2 ->   8     -6
+  right            1 ->   2     -1
+  feet             3 ->  18    -15
+  head             9 ->  58    -49
+  shoulder         8 ->  19    -11
+  face            10 ->  28    -18
+  back            12 ->  13     -1
+  mother          11 ->  11     +0
+  side             4 ->   6     -2
+
+HIGHER UNDER B
+  friend           5 ->   1     +4
+  dad             15 ->   4    +11
+  partner         14 ->   5     +9
+  brother          6 ->   3     +3
+  sister          13 ->   9     +4
+  mom             23 ->  10    +13
+  father           7 ->   7     +0
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  feet             2 ->   4     -2
+  left             5 ->   6     -1
+  side             4 ->   5     -1
+  right            6 ->  13     -7
+  face             7 ->  11     -4
+  back            10 ->  23    -13
+  chest            9 ->  12     -3
+  mother          12 ->  22    -10
+  foot            14 ->  26    -12
+  legs            13 ->  17     -4
+
+HIGHER UNDER B
+  hand             8 ->   3     +5
+  shoulder         3 ->   2     +1
+  head             1 ->   1     +0
+  teammate        42 ->  10    +32
+  target          15 ->   8     +7
+  mitt            71 ->  14    +57
+  hands           16 ->   9     +7
+  arm             11 ->   7     +4
+  mate            27 ->  15    +12
+  glove           48 ->  16    +32
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  father           2 ->  21    -19
+  right            1 ->   5     -4
+  son              4 ->  54    -50
+  left             3 ->   7     -4
+  brother          7 ->  28    -21
+  dad              9 ->  25    -16
+  mother          12 ->  41    -29
+  partner         13 ->  20     -7
+  wife            15 ->  67    -52
+  teammate        17 ->  22     -5
+
+HIGHER UNDER B
+  waiting         10 ->   2     +8
+  shoulder         6 ->   1     +5
+  other           11 ->   4     +7
+  hand             5 ->   3     +2
+  hands           18 ->   8    +10
+  side             8 ->   6     +2
+  knees           25 ->  11    +14
+  feet            16 ->  10     +6
+  opposite        38 ->  12    +26
+  back            14 ->   9     +5
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  feet             1 ->   6     -5
+  head             2 ->  17    -15
+  sister          12 ->  29    -17
+  father          11 ->  21    -10
+  side             4 ->   7     -3
+  mother          20 ->  50    -30
+  daughter        19 ->  28     -9
+  wife            21 ->  25     -4
+  hand            10 ->  16     -6
+  face             9 ->  14     -5
+  hands           18 ->  19     -1
+  back            24 ->  27     -3
+  right            7 ->  11     -4
+
+HIGHER UNDER B
+  waiting         17 ->   2    +15
+  brother          3 ->   1     +2
+  teammate        14 ->   4    +10
+  chest            6 ->   3     +3
+  partner         22 ->   8    +14
+  other           13 ->   9     +4
+  twin            53 ->  18    +35
+  left             5 ->   5     +0
+  lap             16 ->  12     +4
+  teammates       23 ->  15     +8
+  shoulder        15 ->  13     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  feet             4 ->  12     -8
+  head             1 ->   4     -3
+  shoulder         6 ->  10     -4
+  sister          12 ->  20     -8
+  other           22 ->  36    -14
+  waiting         13 ->  19     -6
+  right           21 ->  32    -11
+  face            11 ->  15     -4
+  wife            16 ->  17     -1
+  partner         20 ->  21     -1
+  mother           9 ->  11     -2
+  chest           14 ->  16     -2
+  hand             5 ->   6     -1
+  hands            7 ->   7     +0
+  arm             10 ->  13     -3
+
+HIGHER UNDER B
+  friend           3 ->   1     +2
+  dad             18 ->   5    +13
+  brother          8 ->   3     +5
+  back            15 ->   8     +7
+  father           2 ->   2     +0
+  side            17 ->   9     +8
+  mom             23 ->  14     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  feet             1 ->  11    -10
+  side             2 ->   9     -7
+  head            10 ->  18     -8
+  bed             19 ->  51    -32
+  end             18 ->  33    -15
+  corner          16 ->  28    -12
+  hands            4 ->  12     -8
+  other           13 ->  19     -6
+  right            7 ->  13     -6
+
+HIGHER UNDER B
+  chest            5 ->   1     +4
+  friend          12 ->   3     +9
+  shoulder        22 ->   7    +15
+  waiting         11 ->   5     +6
+  partner         15 ->   8     +7
+  left             3 ->   2     +1
+  son              6 ->   4     +2
+  brother          8 ->   6     +2
+  teammate        29 ->  15    +14
+  glove           17 ->  14     +3
+  gloved          31 ->  17    +14
+  opponent        28 ->  20     +8
+  face            21 ->  21     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  side             1 ->   6     -5
+  feet             4 ->  17    -13
+  father           6 ->  10     -4
+  chest            5 ->   7     -2
+  face            16 ->  26    -10
+  dad             19 ->  30    -11
+  little          18 ->  27     -9
+  mother          13 ->  20     -7
+  outstretched    17 ->  22     -5
+  wife            21 ->  24     -3
+  waiting         12 ->  13     -1
+  shoulder        15 ->  16     -1
+
+HIGHER UNDER B
+  hands            2 ->   1     +1
+  hand            11 ->   3     +8
+  left             3 ->   2     +1
+  friend          20 ->  11     +9
+  brother          8 ->   4     +4
+  other            9 ->   8     +1
+  nephew          24 ->  14    +10
+  daughter        23 ->  15     +8
+  sister          14 ->  12     +2
+  younger         26 ->  19     +7
+  glove           25 ->  18     +7
+  son              7 ->   5     +2
+  right           10 ->   9     +1
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  teammate         1 ->  10     -9
+  partner          3 ->   8     -5
+  right            5 ->   9     -4
+  shoulder         8 ->  38    -30
+  glove           11 ->  90    -79
+  teammates       10 ->  27    -17
+  left             6 ->   6     +0
+  feet            12 ->  55    -43
+  side            13 ->  29    -16
+  older           14 ->  26    -12
+  brother          2 ->   2     +0
+
+HIGHER UNDER B
+  friend           4 ->   1     +3
+  son              7 ->   3     +4
+  mother          53 ->   7    +46
+  father          16 ->   5    +11
+  sister           9 ->   4     +5
+  friends         38 ->  11    +27
+  dog             90 ->  14    +76
+  daughter        43 ->  13    +30
+  opponent        27 ->  12    +15
+  companion       40 ->  15    +25
+  younger         25 ->  16     +9
+  neighbor        22 ->  17     +5
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  right            6 ->  30    -24
+  brother          5 ->   9     -4
+  head             7 ->  12     -5
+  son             12 ->  34    -22
+  side             1 ->   4     -3
+  father          13 ->  23    -10
+  left             8 ->  10     -2
+  younger         18 ->  88    -70
+  friends         16 ->  22     -6
+  face             3 ->   3     +0
+  mother          15 ->  16     -1
+
+HIGHER UNDER B
+  ear             23 ->   6    +17
+  back            10 ->   5     +5
+  feet            11 ->   7     +4
+  hand             9 ->   8     +1
+  mouth           49 ->  15    +34
+  eyes            42 ->  19    +23
+  foot            29 ->  14    +15
+  hands           30 ->  18    +12
+  chest           21 ->  13     +8
+  shoulder         4 ->   2     +2
+  wife            26 ->  21     +5
+  partner         24 ->  20     +4
+  sister          14 ->  11     +3
+  friend           2 ->   1     +1
+  knee            17 ->  17     +0
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  feet             1 ->   5     -4
+  hands            3 ->   9     -6
+  hand             5 ->   8     -3
+  direction       10 ->  27    -17
+  face            13 ->  26    -13
+  outstretched    12 ->  19     -7
+  head             9 ->  13     -4
+  waiting          8 ->  12     -4
+
+HIGHER UNDER B
+  shoulder        14 ->   1    +13
+  left             6 ->   3     +3
+  son             15 ->   6     +9
+  chest            4 ->   4     +0
+  shoulders       63 ->  11    +52
+  right            7 ->   7     +0
+  arm             42 ->  14    +28
+  father          21 ->  15     +6
+  lap             11 ->  10     +1
+  side             2 ->   2     +0
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  side             1 ->   8     -7
+  father           6 ->  61    -55
+  feet             4 ->  14    -10
+  brother          2 ->   6     -4
+  mother          12 ->  85    -73
+  dad             15 ->  86    -71
+  back            16 ->  81    -65
+  chest           19 ->  46    -27
+  opponent        13 ->  16     -3
+  son             14 ->  24    -10
+  coach           21 ->  79    -58
+  shoulder        17 ->  20     -3
+  partner          5 ->   5     +0
+
+HIGHER UNDER B
+  friend           3 ->   1     +2
+  waiting         37 ->   4    +33
+  left             8 ->   2     +6
+  glove           54 ->  11    +43
+  cousin          25 ->  12    +13
+  bat             97 ->  17    +80
+  right            7 ->   3     +4
+  hand            20 ->  13     +7
+  teammate        10 ->   9     +1
+  other           11 ->  10     +1
+  wife             9 ->   7     +2
+  head            22 ->  18     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  feet             1 ->   6     -5
+  face             9 ->  20    -11
+  head            12 ->  52    -40
+  father           8 ->  12     -4
+  right            7 ->   8     -1
+  left            13 ->  17     -4
+  chest           14 ->  19     -5
+  friend          11 ->  11     +0
+  mother          19 ->  29    -10
+  mouth           20 ->  35    -15
+  sister          18 ->  18     +0
+
+HIGHER UNDER B
+  hand             4 ->   1     +3
+  side             2 ->   2     +0
+  son              3 ->   3     +0
+  outstretched    21 ->   7    +14
+  waiting         22 ->  13     +9
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  hand             1 ->  32    -31
+  side             2 ->  13    -11
+  hands            4 ->  21    -17
+  head             7 ->  56    -49
+  feet             6 ->  35    -29
+  left             9 ->  52    -43
+  chest           10 ->  77    -67
+  shoulder        11 ->  67    -56
+  face            13 ->  55    -42
+  right           14 ->  64    -50
+  wife            15 ->  29    -14
+  direction       16 ->  81    -65
+  grip            18 ->  72    -54
+  waiting         19 ->  47    -28
+  teammate        17 ->  20     -3
+  other           20 ->  24     -4
+
+HIGHER UNDER B
+  son              8 ->   1     +7
+  friend           3 ->   2     +1
+  best            34 ->   5    +29
+  younger         28 ->   4    +24
+  older           48 ->   6    +42
+  brother          5 ->   3     +2
+  little          39 ->   8    +31
+  father          12 ->   7     +5
+  dad             52 ->   9    +43
+  buddy           37 ->  10    +27
+  nephew          54 ->  11    +43
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  chest            2 ->   8     -6
+  face             6 ->  21    -15
+  head             7 ->  10     -3
+  left             8 ->  40    -32
+  side             3 ->   4     -1
+  right            9 ->  46    -37
+  shoulder        10 ->  17     -7
+  waiting         11 ->  13     -2
+  brother         14 ->  54    -40
+  other           17 ->  72    -55
+  back            16 ->  41    -25
+
+HIGHER UNDER B
+  hands            1 ->   1     +0
+  hand             5 ->   2     +3
+  lap             12 ->   5     +7
+  glove           25 ->   9    +16
+  chair           32 ->  12    +20
+  direction       13 ->   6     +7
+  friend          15 ->   7     +8
+  son             18 ->  11     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  feet             1 ->   3     -2
+  chest            5 ->  18    -13
+  face             3 ->   6     -3
+  left             7 ->  21    -14
+  hand             6 ->   9     -3
+  arms            12 ->  26    -14
+  right           11 ->  22    -11
+  shoulder        13 ->  27    -14
+
+HIGHER UNDER B
+  friend          10 ->   4     +6
+  hands            4 ->   2     +2
+  teammates       24 ->   8    +16
+  brother          8 ->   5     +3
+  teammate        32 ->  12    +20
+  mate            38 ->  15    +23
+  head             9 ->   7     +2
+  daughter        29 ->  16    +13
+  lap             15 ->  10     +5
+  assistant       41 ->  20    +21
+  son             17 ->  13     +4
+  team            19 ->  14     +5
+  sister          14 ->  11     +3
+  cousin          34 ->  25     +9
+  partner         26 ->  23     +3
+  friends         27 ->  24     +3
+  wife            18 ->  17     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  feet             1 ->  67    -66
+  side             3 ->  39    -36
+  hands            4 ->   7     -3
+  shoulder         5 ->  44    -39
+  hand             6 ->  38    -32
+  chest            8 ->  19    -11
+  friend          10 ->  13     -3
+  right           11 ->  73    -62
+  head            12 ->  51    -39
+  other           13 ->  32    -19
+  face            14 ->  23     -9
+  left            15 ->  59    -44
+  son             17 ->  24     -7
+  partner         18 ->  40    -22
+  outstretched    20 ->  37    -17
+
+HIGHER UNDER B
+  father           7 ->   1     +6
+  brother          2 ->   2     +0
+  mother          19 ->   3    +16
+  uncle           21 ->   4    +17
+  cousin          22 ->   6    +16
+  sister           9 ->   5     +4
+  sibling         81 ->   8    +73
+  s               72 ->  10    +62
+  direction       25 ->   9    +16
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  left             1 ->   6     -5
+  right            2 ->   5     -3
+  brother          3 ->   4     -1
+  son              6 ->   7     -1
+  wife             7 ->  15     -8
+  teammate         9 ->  14     -5
+  father          13 ->  32    -19
+  partner         15 ->  27    -12
+  other           14 ->  18     -4
+  team            16 ->  19     -3
+  back            12 ->  12     +0
+
+HIGHER UNDER B
+  side             4 ->   1     +3
+  feet             8 ->   2     +6
+  hand            20 ->  10    +10
+  shoulder        32 ->  11    +21
+  daughter        10 ->   8     +2
+  sister          11 ->   9     +2
+  foot            17 ->  13     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  hand             4 ->  16    -12
+  feet             2 ->  13    -11
+  hands            1 ->   4     -3
+  head             6 ->  19    -13
+  face            10 ->  40    -30
+  father           8 ->  21    -13
+  shoulder         5 ->   6     -1
+  son              9 ->  15     -6
+  right           14 ->  27    -13
+  dad             18 ->  32    -14
+  daughter        19 ->  30    -11
+  wife            16 ->  20     -4
+  waiting         23 ->  29     -6
+  room            21 ->  25     -4
+  left             7 ->   7     +0
+
+HIGHER UNDER B
+  brother         12 ->   1    +11
+  friend          13 ->   3    +10
+  other           20 ->   5    +15
+  side             3 ->   2     +1
+  roommate        43 ->  10    +33
+  partner         26 ->  12    +14
+  sister          17 ->   8     +9
+  twin           102 ->  18    +84
+  teammate        29 ->  14    +15
+  back            15 ->  11     +4
+  mate            41 ->  23    +18
+  cousin          22 ->  17     +5
+  younger         30 ->  22     +8
+  bed             34 ->  24    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  shoulder         5 ->  13     -8
+  feet             3 ->   6     -3
+  chest           10 ->  27    -17
+  right            6 ->  10     -4
+  left            13 ->  28    -15
+  wife            15 ->  21     -6
+  father          11 ->  14     -3
+  waiting         14 ->  16     -2
+  head            17 ->  25     -8
+  back            18 ->  26     -8
+  mother          19 ->  20     -1
+  side             4 ->   4     +0
+
+HIGHER UNDER B
+  hand             2 ->   1     +1
+  brother          7 ->   3     +4
+  partner         24 ->   9    +15
+  son              8 ->   5     +3
+  other            9 ->   7     +2
+  daughter        23 ->  15     +8
+  lap             16 ->   8     +8
+  uncle           26 ->  18     +8
+  friend          20 ->  12     +8
+  sister          21 ->  17     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  brother          3 ->   5     -2
+  face             5 ->  15    -10
+  left             6 ->   6     +0
+  right            7 ->   8     -1
+  head             8 ->  16     -8
+  son             10 ->  24    -14
+  sister           9 ->  22    -13
+  father          13 ->  31    -18
+  wife            14 ->  33    -19
+  shoulder        11 ->  18     -7
+  mother          18 ->  59    -41
+  cousin          22 ->  30     -8
+  chest           16 ->  21     -5
+  back            20 ->  27     -7
+  younger         21 ->  25     -4
+  other           12 ->  12     +0
+
+HIGHER UNDER B
+  side             2 ->   1     +1
+  direction       24 ->   4    +20
+  teammate        17 ->   7    +10
+  waiting         29 ->  10    +19
+  foot            23 ->  11    +12
+  opponent        26 ->  14    +12
+  partner         15 ->   9     +6
+  hand            19 ->  13     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  hands            3 ->  19    -16
+  dad              5 ->  14     -9
+  brother          1 ->   4     -3
+  shoulder         9 ->  20    -11
+  hand            10 ->  16     -6
+  father           2 ->   5     -3
+  mom             15 ->  26    -11
+  waiting         16 ->  23     -7
+  partner         17 ->  22     -5
+  glove           21 ->  35    -14
+  son              6 ->   6     +0
+  wife            20 ->  21     -1
+
+HIGHER UNDER B
+  head             7 ->   1     +6
+  side            13 ->   3    +10
+  feet             4 ->   2     +2
+  friend          11 ->   8     +3
+  other           26 ->  12    +14
+  face            31 ->  13    +18
+  mother          18 ->  11     +7
+  right           14 ->  10     +4
+  chest            8 ->   7     +1
+  left            12 ->   9     +3
+  teammate        23 ->  15     +8
+  little          22 ->  18     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  brother          7 ->   9     -2
+  father          11 ->  19     -8
+  head             6 ->   7     -1
+  dad             14 ->  20     -6
+  feet            10 ->  11     -1
+  chest            5 ->   5     +0
+  arms            18 ->  18     +0
+
+HIGHER UNDER B
+  waiting          3 ->   2     +1
+  direction        4 ->   4     +0
+  hands            1 ->   1     +0
+  outstretched     8 ->   6     +2
+  face            12 ->  10     +2
+
+8 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  feet             4 ->   5     -1
+  mother           2 ->   3     -1
+  side            12 ->  12     +0
+  sister           8 ->   8     +0
+  friend           6 ->   6     +0
+  left            22 ->  22     +0
+  right           15 ->  17     -2
+  chest           18 ->  21     -3
+  daughter        16 ->  16     +0
+
+HIGHER UNDER B
+  son              5 ->   4     +1
+  father           1 ->   1     +0
+  dad             20 ->  15     +5
+  waiting         19 ->  19     +0
+  head             9 ->   9     +0
+  cousin          11 ->  11     +0
+  partner          7 ->   7     +0
+  face            14 ->  14     +0
+  wife            10 ->  10     +0
+  hand            21 ->  20     +1
+  shoulder        13 ->  13     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  feet             1 ->   9     -8
+  side             2 ->   8     -6
+  left             4 ->  11     -7
+  hand             3 ->   6     -3
+  right            6 ->  13     -7
+  face             8 ->  16     -8
+  head            12 ->  20     -8
+  back            15 ->  22     -7
+  brother         16 ->  23     -7
+
+HIGHER UNDER B
+  waiting         10 ->   1     +9
+  outstretched    13 ->   2    +11
+  shoulder         7 ->   3     +4
+  glove           14 ->   4    +10
+  open            20 ->  12     +8
+  other            9 ->   7     +2
+  hands            5 ->   5     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  feet             1 ->   1     +0
+  hands            5 ->   7     -2
+  son              8 ->  14     -6
+  friend          15 ->  16     -1
+  partner          9 ->  13     -4
+  face            21 ->  32    -11
+  chest            6 ->  11     -5
+  brother         10 ->  12     -2
+  wife            22 ->  30     -8
+  daughter        20 ->  21     -1
+  father           7 ->   9     -2
+  right           17 ->  19     -2
+  lap             18 ->  18     +0
+
+HIGHER UNDER B
+  other            2 ->   2     +0
+  outstretched    14 ->   5     +9
+  waiting         12 ->   6     +6
+  side             3 ->   3     +0
+  hand             4 ->   4     +0
+  left            11 ->   8     +3
+  bed             26 ->  20     +6
+  open            19 ->  17     +2
+  sister          13 ->  10     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  feet             1 ->   2     -1
+  chest            3 ->   4     -1
+  right            7 ->  16     -9
+  bed              9 ->  33    -24
+  face             4 ->   7     -3
+  left             6 ->   8     -2
+
+HIGHER UNDER B
+  head             2 ->   1     +1
+  friend          13 ->   3    +10
+  brother          8 ->   5     +3
+  direction       35 ->  11    +24
+  bat             49 ->  14    +35
+  wife            27 ->  12    +15
+  son             18 ->  13     +5
+  teammate        71 ->  18    +53
+  s               29 ->  15    +14
+  father          11 ->   9     +2
+  shoulder        10 ->  10     +0
+  mother          17 ->  17     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  feet             1 ->   1     +0
+  shoulder         8 ->  12     -4
+  left            12 ->  16     -4
+  right           18 ->  24     -6
+  son             13 ->  14     -1
+  hands            2 ->   3     -1
+  hand             3 ->   4     -1
+  brother          5 ->   6     -1
+  chest            6 ->   7     -1
+  other           11 ->  11     +0
+  lap             14 ->  17     -3
+  mother          19 ->  19     +0
+
+HIGHER UNDER B
+  side             4 ->   2     +2
+  friend          15 ->  10     +5
+  outstretched     7 ->   5     +2
+  dad             16 ->  13     +3
+  face            20 ->  18     +2
+  sister          17 ->  15     +2
+  father           9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  shoulder         1 ->   5     -4
+  glove            6 ->  21    -15
+  hands            3 ->  11     -8
+  outstretched     8 ->  31    -23
+  hand             2 ->   3     -1
+  right            7 ->  13     -6
+  chest            5 ->   9     -4
+  feet            10 ->  14     -4
+  waiting         14 ->  49    -35
+  head            12 ->  18     -6
+  shoulders       13 ->  16     -3
+  arm             15 ->  37    -22
+  lap             16 ->  25     -9
+
+HIGHER UNDER B
+  son             20 ->   2    +18
+  brother         22 ->   4    +18
+  side             4 ->   1     +3
+  father          17 ->   6    +11
+  friend          41 ->   8    +33
+  partner         46 ->  12    +34
+  face             9 ->   7     +2
+  bat             76 ->  15    +61
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  feet             1 ->   4     -3
+  side             2 ->   9     -7
+  head            11 ->  26    -15
+  son             12 ->  15     -3
+  lap             16 ->  23     -7
+  brother          7 ->  12     -5
+  wife            19 ->  28     -9
+  father          13 ->  13     +0
+
+HIGHER UNDER B
+  hand             3 ->   1     +2
+  hands            4 ->   2     +2
+  outstretched     9 ->   3     +6
+  waiting         15 ->   7     +8
+  left             8 ->   5     +3
+  right            6 ->   6     +0
+  other           14 ->  10     +4
+  open            17 ->  14     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  feet             1 ->  11    -10
+  glove            8 ->  18    -10
+  side             5 ->   9     -4
+  direction       13 ->  21     -8
+  back            17 ->  26     -9
+  face            14 ->  16     -2
+  catcher         15 ->  17     -2
+  shoulder        12 ->  12     +0
+
+HIGHER UNDER B
+  hand             2 ->   1     +1
+  right            6 ->   2     +4
+  outstretched    19 ->   7    +12
+  left             3 ->   3     +0
+  head             7 ->   5     +2
+  brother         10 ->   6     +4
+  friend          20 ->  13     +7
+  son             18 ->  14     +4
+  chest            4 ->   4     +0
+  hands           11 ->  10     +1
+  father          16 ->  15     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  feet             2 ->   9     -7
+  chest            3 ->  19    -16
+  head             4 ->  18    -14
+  left             5 ->   5     +0
+  shoulder         6 ->  21    -15
+  hand             7 ->  14     -7
+  hands            8 ->  13     -5
+  back             9 ->  26    -17
+  face            10 ->  32    -22
+  outstretched    12 ->  15     -3
+
+HIGHER UNDER B
+  side             1 ->   1     +0
+  direction       31 ->   2    +29
+  friend          13 ->   3    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  side             1 ->  16    -15
+  feet             2 ->  64    -62
+  hands            4 ->  54    -50
+  hand             6 ->  40    -34
+  mother          11 ->  27    -16
+  father           7 ->   8     -1
+  sister           8 ->  13     -5
+  wife            12 ->  15     -3
+  son              5 ->   6     -1
+  left             9 ->  11     -2
+  right           13 ->  14     -1
+  other           14 ->  24    -10
+  face            17 ->  81    -64
+  shoulder        19 ->  59    -40
+
+HIGHER UNDER B
+  friend          10 ->   1     +9
+  teammate        18 ->   3    +15
+  brother          3 ->   2     +1
+  best            21 ->   4    +17
+  partner         16 ->   5    +11
+  neighbor        58 ->   7    +51
+  teammates       22 ->   9    +13
+  team            20 ->  10    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  face             1 ->   3     -2
+  feet             2 ->   8     -6
+  chest            4 ->  10     -6
+  head             5 ->   7     -2
+  back            10 ->  22    -12
+  side             3 ->   4     -1
+  mother          15 ->  31    -16
+  right           14 ->  30    -16
+  wife            11 ->  15     -4
+  left            21 ->  39    -18
+  father          12 ->  17     -5
+  sister          16 ->  24     -8
+  bat             13 ->  20     -7
+  daughter        17 ->  21     -4
+
+HIGHER UNDER B
+  friend           8 ->   1     +7
+  son              6 ->   2     +4
+  brother          9 ->   5     +4
+  partner         18 ->   9     +9
+  neighbor        62 ->  14    +48
+  teammate        40 ->  19    +21
+  cousin          24 ->  11    +13
+  younger         22 ->  13     +9
+  lap             19 ->  12     +7
+  hands           25 ->  18     +7
+  hand            20 ->  16     +4
+  shoulder         7 ->   6     +1
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  feet             2 ->   6     -4
+  side             1 ->   3     -2
+  left             3 ->   7     -4
+  right            7 ->  31    -24
+  hand             6 ->  14     -8
+  face            10 ->  18     -8
+  chest           11 ->  17     -6
+  head            13 ->  19     -6
+  shoulder         8 ->   8     +0
+  arm             16 ->  20     -4
+  other           15 ->  15     +0
+
+HIGHER UNDER B
+  waiting          5 ->   1     +4
+  hands            4 ->   2     +2
+  glove           14 ->   4    +10
+  outstretched     9 ->   5     +4
+  awaiting        33 ->  10    +23
+  eager           95 ->  13    +82
+  partner         58 ->  12    +46
+  teammate        18 ->  11     +7
+  friend          12 ->   9     +3
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  feet             1 ->   2     -1
+  side             2 ->   3     -1
+  hands            4 ->   7     -3
+  hand            10 ->  21    -11
+  bed             13 ->  39    -26
+  chest            5 ->   8     -3
+  waiting         11 ->  22    -11
+  brother         12 ->  13     -1
+
+HIGHER UNDER B
+  head             3 ->   1     +2
+  shoulder         7 ->   4     +3
+  friend          23 ->   9    +14
+  face             9 ->   6     +3
+  father           6 ->   5     +1
+  son             18 ->  11     +7
+  direction       30 ->  14    +16
+  dad             21 ->  12     +9
+  shoulders       22 ->  17     +5
+  left            20 ->  15     +5
+  right           19 ->  16     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  right            4 ->  28    -24
+  face             7 ->  20    -13
+  father          10 ->  40    -30
+  head             6 ->   9     -3
+  mother          13 ->  90    -77
+  left             3 ->   5     -2
+  son              9 ->  10     -1
+  wife            15 ->  71    -56
+  dad             14 ->  24    -10
+  shoulder        11 ->  14     -3
+  sister          12 ->  12     +0
+  younger         18 ->  36    -18
+  other           22 ->  35    -13
+  friend          20 ->  25     -5
+  older           19 ->  19     +0
+
+HIGHER UNDER B
+  feet             2 ->   1     +1
+  glove           40 ->   3    +37
+  open            33 ->   6    +27
+  outstretched    27 ->   8    +19
+  bench           54 ->  17    +37
+  girlfriend      29 ->  16    +13
+  brother          5 ->   4     +1
+  waiting         21 ->  13     +8
+  hand            17 ->  11     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  feet             2 ->   2     +0
+  chest            4 ->   9     -5
+  head             9 ->  12     -3
+  lap             10 ->  16     -6
+  face            13 ->  20     -7
+  outstretched    14 ->  17     -3
+  hand             6 ->   7     -1
+  left             3 ->   3     +0
+  hands           17 ->  28    -11
+  open            16 ->  18     -2
+  shoulder        11 ->  11     +0
+
+HIGHER UNDER B
+  side             1 ->   1     +0
+  teammate        26 ->   8    +18
+  right            5 ->   4     +1
+  father          12 ->  10     +2
+  friend          24 ->  15     +9
+  sister          21 ->  14     +7
+  brother          7 ->   5     +2
+  other            8 ->   6     +2
+  waiting         15 ->  13     +2
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  right            3 ->   6     -3
+  side             1 ->   2     -1
+  left             4 ->   7     -3
+  face             5 ->  10     -5
+  chest           10 ->  39    -29
+  hands            7 ->  15     -8
+  head             6 ->   9     -3
+  foot            12 ->  27    -15
+  hand             9 ->  13     -4
+
+HIGHER UNDER B
+  friend          13 ->   4     +9
+  son             14 ->   5     +9
+  brother          8 ->   3     +5
+  father          11 ->   8     +3
+  partner         20 ->  11     +9
+  cousin          28 ->  12    +16
+  companion       70 ->  14    +56
+  assistant       37 ->  17    +20
+  younger         25 ->  16     +9
+  wife            24 ->  18     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  son              2 ->  10     -8
+  feet             4 ->  46    -42
+  right            6 ->   7     -1
+  side             7 ->  35    -28
+  hand             8 ->  34    -26
+  brother          3 ->   3     +0
+  father           9 ->  14     -5
+  face            11 ->  86    -75
+  wife            10 ->  31    -21
+  head            13 ->  78    -65
+  shoulder        14 ->  49    -35
+  mother          16 ->  51    -35
+  other           17 ->  39    -22
+  hands           18 ->  67    -49
+  back            19 ->  56    -37
+  assistant       20 ->  29     -9
+  cousin          21 ->  30     -9
+  daughter        22 ->  28     -6
+
+HIGHER UNDER B
+  friend           1 ->   1     +0
+  teammate        12 ->   2    +10
+  buddy           43 ->   5    +38
+  little          24 ->   6    +18
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 42 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

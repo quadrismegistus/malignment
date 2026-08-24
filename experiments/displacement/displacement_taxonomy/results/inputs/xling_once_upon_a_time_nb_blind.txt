@@ -1,0 +1,231 @@
+Below are 12 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: Once upon a time ___
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  there            1 ->   2     -1
+  I                3 ->   4     -1
+  a                4 ->  12     -8
+  the              5 ->  19    -14
+  when             6 ->  14     -8
+  we               7 ->  18    -11
+
+HIGHER UNDER B
+  in               2 ->   1     +1
+  There           26 ->   3    +23
+  In              24 ->   5    +19
+  is              12 ->   6     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  there            1 ->   1     +0
+  not              3 ->  12     -9
+
+HIGHER UNDER B
+  I                7 ->   3     +4
+  in               4 ->   2     +2
+  a                5 ->   4     +1
+  the              9 ->   6     +3
+  we              11 ->   7     +4
+  my              10 ->   9     +1
+  it               8 ->   8     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  there            1 ->   2     -1
+  a                3 ->   3     +0
+  the              5 ->   8     -3
+  when             6 ->  12     -6
+  I                4 ->   5     -1
+  we               7 ->   7     +0
+  it               8 ->  11     -3
+  an               9 ->   9     +0
+
+HIGHER UNDER B
+  in               2 ->   1     +1
+  on              10 ->   4     +6
+  at              13 ->   6     +7
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  a                3 ->  11     -8
+  there            2 ->   2     +0
+  I                4 ->  13     -9
+  in               1 ->   1     +0
+
+HIGHER UNDER B
+  long             9 ->   3     +6
+  on               7 ->   4     +3
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  there            1 ->   3     -2
+  ”                2 ->   2     +0
+  upon             4 ->  11     -7
+  lived            6 ->  12     -6
+  when             5 ->   7     -2
+
+HIGHER UNDER B
+  in               3 ->   1     +2
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  there            1 ->   2     -1
+  I                3 ->   6     -3
+  a                4 ->   4     +0
+  we               6 ->  11     -5
+  it               7 ->   8     -1
+
+HIGHER UNDER B
+  in               2 ->   1     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  I                3 ->   3     +0
+  a                4 ->   4     +0
+  the              5 ->   6     -1
+  he              10 ->  13     -3
+  she             12 ->  20     -8
+  you              9 ->  10     -1
+  they            11 ->  16     -5
+  it               8 ->   9     -1
+  we               7 ->   8     -1
+
+HIGHER UNDER B
+  there            1 ->   1     +0
+  on              17 ->   7    +10
+  when             6 ->   5     +1
+  in               2 ->   2     +0
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  we               6 ->   6     +0
+  when             9 ->   9     +0
+  you              7 ->   7     +0
+  a                4 ->   4     +0
+  I                2 ->   2     +0
+  the              5 ->   5     +0
+
+HIGHER UNDER B
+  there            1 ->   1     +0
+  in               3 ->   3     +0
+  it               8 ->   8     +0
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  there            1 ->   2     -1
+  a                4 ->   5     -1
+  I                2 ->   3     -1
+  the              5 ->   6     -1
+  we               7 ->   8     -1
+  my              10 ->  12     -2
+  you              9 ->  10     -1
+
+HIGHER UNDER B
+  in               3 ->   1     +2
+  ”                8 ->   4     +4
+  at              13 ->   9     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  I                3 ->   3     +0
+  when             5 ->   6     -1
+  a                4 ->   4     +0
+  we               7 ->   7     +0
+  and              9 ->  16     -7
+  it               8 ->  12     -4
+
+HIGHER UNDER B
+  there            2 ->   2     +0
+  in               1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  I                2 ->   3     -1
+  the              5 ->   5     +0
+  we               7 ->   8     -1
+  you              6 ->   6     +0
+  it               9 ->   9     +0
+  this            10 ->  14     -4
+  they            11 ->  13     -2
+
+HIGHER UNDER B
+  there            1 ->   1     +0
+  in               3 ->   2     +1
+  a                4 ->   4     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  there            1 ->   1     +0
+  a                3 ->   5     -2
+  we               6 ->   7     -1
+  on               7 ->   8     -1
+
+HIGHER UNDER B
+  in               2 ->   2     +0
+  I                5 ->   4     +1
+  when             8 ->   6     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 12 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

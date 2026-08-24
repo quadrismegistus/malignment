@@ -1,0 +1,808 @@
+Below are 35 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: She stirred the soup and tasted it before adding more ___
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  water            2 ->  33    -31
+  salt             1 ->   1     +0
+  milk             8 ->  34    -26
+  stock            9 ->  30    -21
+  chicken          7 ->  13     -6
+  vegetables      10 ->  18     -8
+  broth           12 ->  19     -7
+  to              13 ->  66    -53
+  sugar           15 ->  40    -25
+  of               5 ->   8     -3
+
+HIGHER UNDER B
+  seasoning        4 ->   2     +2
+  ingredients     11 ->   3     +8
+  seasonings      16 ->   5    +11
+  spices           6 ->   4     +2
+  herbs           14 ->   7     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  seasoning        2 ->   2     +0
+  seasonings       3 ->   3     +0
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  salt             1 ->   2     -1
+  water            2 ->   8     -6
+  pepper           3 ->  10     -7
+  of               5 ->  17    -12
+  herbs            6 ->   6     +0
+  milk             8 ->  18    -10
+  butter           9 ->  24    -15
+  garlic          10 ->  16     -6
+  flour           11 ->  12     -1
+  vegetables      12 ->  15     -3
+  broth           13 ->  19     -6
+
+HIGHER UNDER B
+  seasoning        7 ->   1     +6
+  spices           4 ->   3     +1
+  ingredients     20 ->   4    +16
+  seasonings      24 ->   5    +19
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  salt             1 ->   3     -2
+  water            2 ->  12    -10
+  of               4 ->   8     -4
+  soup             6 ->  10     -4
+  to               8 ->  37    -29
+  milk            10 ->  17     -7
+  sugar           14 ->  54    -40
+  broth           12 ->  14     -2
+
+HIGHER UNDER B
+  vegetables       3 ->   1     +2
+  seasoning        9 ->   4     +5
+  ingredients      7 ->   2     +5
+  spices           5 ->   5     +0
+  seasonings      15 ->   6     +9
+  herbs           11 ->   7     +4
+  spice           13 ->   9     +4
+  cream           17 ->  11     +6
+  hot             16 ->  13     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  water            1 ->   3     -2
+  milk             3 ->   7     -4
+  meat             8 ->  22    -14
+  flour           16 ->  35    -19
+  chicken         13 ->  29    -16
+  butter          10 ->  17     -7
+  vegetables       9 ->  11     -2
+  oil             17 ->  23     -6
+  food            19 ->  21     -2
+  and             11 ->  14     -3
+  soup            15 ->  15     +0
+
+HIGHER UNDER B
+  broth            4 ->   1     +3
+  liquid          20 ->   6    +14
+  of               5 ->   4     +1
+  to               6 ->   5     +1
+  salt             2 ->   2     +0
+  seasoning       35 ->  12    +23
+  if              18 ->  10     +8
+  or              37 ->  16    +21
+  ingredients     14 ->   9     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  salt             1 ->   2     -1
+  water            2 ->  25    -23
+  stock            3 ->   7     -4
+  broth            9 ->  17     -8
+  of               8 ->  15     -7
+  milk            11 ->  36    -25
+  butter          13 ->  33    -20
+  chicken         14 ->  30    -16
+  meat            16 ->  48    -32
+  to              18 ->  74    -56
+  cream           10 ->  10     +0
+  pepper          15 ->  20     -5
+  flour           20 ->  41    -21
+  liquid          21 ->  47    -26
+  oil             19 ->  29    -10
+
+HIGHER UNDER B
+  herbs            7 ->   1     +6
+  ingredients      4 ->   3     +1
+  spices           6 ->   4     +2
+  thyme           32 ->   6    +26
+  vegetables       5 ->   5     +0
+  bay             59 ->   9    +50
+  chili           44 ->   8    +36
+  garlic          24 ->  12    +12
+  mushrooms       25 ->  14    +11
+  seasonings      17 ->  13     +4
+  potatoes        22 ->  16     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  water            3 ->  24    -21
+  of               5 ->   7     -2
+  broth           12 ->  48    -36
+  chicken          8 ->  13     -5
+  sugar           11 ->  20     -9
+  milk            13 ->  34    -21
+  stock           14 ->  33    -19
+  seasoning        4 ->   4     +0
+  flour           15 ->  19     -4
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  spices           2 ->   2     +0
+  herbs            6 ->   3     +3
+  seasonings       9 ->   5     +4
+  pepper           7 ->   6     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  salt             1 ->   1     +0
+  pepper           3 ->   7     -4
+  spice            6 ->  12     -6
+  basil            8 ->  10     -2
+
+HIGHER UNDER B
+  seasoning        2 ->   2     +0
+  herbs            5 ->   3     +2
+  thyme           15 ->   5    +10
+  spices           4 ->   4     +0
+  seasonings       9 ->   6     +3
+  paprika         13 ->   9     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  salt             1 ->   1     +0
+  pepper           6 ->  13     -7
+  ingredients      9 ->  10     -1
+  spice            8 ->   9     -1
+
+HIGHER UNDER B
+  herbs            5 ->   3     +2
+  seasoning        2 ->   2     +0
+  seasonings       7 ->   6     +1
+  thyme           16 ->   7     +9
+  broth           13 ->   8     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  salt             2 ->   9     -7
+  vegetables       3 ->  12     -9
+  seasonings       6 ->  46    -40
+  seasoning        7 ->  25    -18
+  noodles          9 ->  77    -68
+  pepper          10 ->  29    -19
+  spices          11 ->  19     -8
+  chicken         12 ->  20     -8
+  potatoes        13 ->  33    -20
+  beef            14 ->  69    -55
+  carrots         18 ->  78    -60
+  garlic          17 ->  65    -48
+  sugar           15 ->  23     -8
+  peppers         22 ->  58    -36
+  peas            20 ->  40    -20
+  rice            21 ->  31    -10
+  cheese          19 ->  28     -9
+
+HIGHER UNDER B
+  water            1 ->   1     +0
+  to              28 ->   4    +24
+  of               8 ->   3     +5
+  liquid          42 ->   6    +36
+  soup            39 ->   7    +32
+  hot             36 ->  11    +25
+  flour           23 ->   8    +15
+  boiling         71 ->  13    +58
+  ingredients      4 ->   2     +2
+  oil             53 ->  14    +39
+  milk             5 ->   5     +0
+  broth           16 ->  10     +6
+  butter          25 ->  15    +10
+  and             31 ->  16    +15
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  vegetables       4 ->  23    -19
+  ingredients      3 ->   6     -3
+  chicken          5 ->  54    -49
+  meat             6 ->  40    -34
+  noodles         11 ->  52    -41
+  milk             9 ->  12     -3
+  rice            10 ->  25    -15
+  soup            12 ->  24    -12
+  broth            1 ->   3     -2
+  flour           15 ->  36    -21
+  fish            16 ->  42    -26
+  herbs           13 ->  20     -7
+  seasoning       14 ->  21     -7
+  oil             17 ->  32    -15
+  spices          20 ->  26     -6
+  beans           19 ->  22     -3
+  pieces          21 ->  30     -9
+
+HIGHER UNDER B
+  to               8 ->   1     +7
+  water            2 ->   2     +0
+  salt             7 ->   4     +3
+  of              23 ->   5    +18
+  powder          80 ->   7    +73
+  ice             66 ->   8    +58
+  cold            49 ->   9    +40
+  food            33 ->  11    +22
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  of               2 ->   5     -3
+  seasoning        3 ->   4     -1
+  seasonings       8 ->  17     -9
+  pepper           6 ->   8     -2
+  sugar            9 ->  10     -1
+  spice            7 ->   9     -2
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  water            5 ->   3     +2
+  herbs           10 ->   6     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  salt             1 ->   6     -5
+  water            5 ->  10     -5
+  of               6 ->   8     -2
+  seasoning        2 ->   4     -2
+  milk            10 ->  56    -46
+  flour            8 ->  17     -9
+  pepper           9 ->  18     -9
+  noodles         11 ->  28    -17
+  butter          14 ->  52    -38
+  meat            15 ->  39    -24
+  cream           16 ->  19     -3
+
+HIGHER UNDER B
+  ingredients      3 ->   1     +2
+  vegetables       7 ->   2     +5
+  herbs           12 ->   5     +7
+  spices           4 ->   3     +1
+  broth           13 ->   7     +6
+  stock           17 ->   9     +8
+  or              35 ->  11    +24
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  water            2 ->  10     -8
+  pepper           6 ->  14     -8
+  flour            7 ->  15     -8
+  of               9 ->  13     -4
+  noodles         12 ->  12     +0
+  spices           3 ->   3     +0
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  herbs           11 ->   5     +6
+  broth            5 ->   4     +1
+  seasoning        4 ->   2     +2
+  vegetables      10 ->   6     +4
+  thyme           38 ->   8    +30
+  ingredients      8 ->   7     +1
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  water            2 ->  18    -16
+  flour            4 ->  12     -8
+  milk             6 ->  10     -4
+  herbs            9 ->  17     -8
+  stock           10 ->  11     -1
+  oil             11 ->  28    -17
+  butter          13 ->  44    -31
+  vegetables      12 ->  27    -15
+  ingredients     14 ->  23     -9
+  sugar           15 ->  26    -11
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  seasoning        3 ->   2     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  salt             1 ->   1     +0
+  of               4 ->   7     -3
+  water           10 ->  37    -27
+  seasonings       7 ->   8     -1
+  broth            9 ->  13     -4
+  sugar           12 ->  25    -13
+  herbs            6 ->   6     +0
+  garlic          11 ->  11     +0
+
+HIGHER UNDER B
+  seasoning        2 ->   2     +0
+  pepper           5 ->   3     +2
+  ingredients      8 ->   5     +3
+  spice           14 ->   9     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  water            2 ->  10     -8
+  of               3 ->   3     +0
+  spices           4 ->   6     -2
+  stock            8 ->  13     -5
+  vegetables      10 ->  11     -1
+  hot             13 ->  31    -18
+  ingredients     11 ->  12     -1
+  broth            6 ->   7     -1
+  milk            14 ->  49    -35
+  sugar            7 ->   9     -2
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  pepper           5 ->   2     +3
+  carrots         15 ->   5    +10
+  seasoning        9 ->   4     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  water            2 ->   8     -6
+  of               4 ->  28    -24
+  pepper           3 ->   3     +0
+  stock            5 ->   6     -1
+  spices           7 ->  12     -5
+  cream           12 ->  30    -18
+  flour           11 ->  11     +0
+  hot             13 ->  39    -26
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  seasoning       10 ->   2     +8
+  broth            8 ->   4     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  flour            7 ->  17    -10
+  water            4 ->   5     -1
+  spices          10 ->  37    -27
+  meat             9 ->  11     -2
+  to              13 ->  36    -23
+  salt            12 ->  21     -9
+  tomatoes        15 ->  19     -4
+  milk            17 ->  26     -9
+  wine            18 ->  25     -7
+  rice            19 ->  24     -5
+  herbs           23 ->  34    -11
+  butter          22 ->  22     +0
+  of               6 ->   6     +0
+
+HIGHER UNDER B
+  broth            2 ->   1     +1
+  ingredients      3 ->   3     +0
+  noodles         14 ->   8     +6
+  onions          16 ->  10     +6
+  beef            33 ->  12    +21
+  cream           28 ->  13    +15
+  potatoes        11 ->   9     +2
+  chicken          8 ->   7     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  salt             1 ->   1     +0
+  spices           3 ->  10     -7
+  pepper           6 ->  12     -6
+  seasoning        4 ->  11     -7
+  spice           13 ->  21     -8
+  parsley         14 ->  22     -8
+  stock           10 ->  17     -7
+
+HIGHER UNDER B
+  of               2 ->   2     +0
+  vegetables       8 ->   3     +5
+  potatoes         9 ->   6     +3
+  carrots         17 ->   7    +10
+  herbs            7 ->   4     +3
+  broth           11 ->   8     +3
+  chicken         12 ->   9     +3
+  noodles         23 ->  14     +9
+  cheese          38 ->  18    +20
+  cream           19 ->  13     +6
+  water            5 ->   5     +0
+  milk            18 ->  15     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  chicken          7 ->   9     -2
+  flour           11 ->  16     -5
+  pepper           5 ->   6     -1
+  ingredients      1 ->   1     +0
+  to              10 ->  12     -2
+  sugar            8 ->   8     +0
+  of              16 ->  18     -2
+
+HIGHER UNDER B
+  salt             2 ->   2     +0
+  seasoning        6 ->   5     +1
+  spices           3 ->   3     +0
+  vegetables       4 ->   4     +0
+  herbs            9 ->   7     +2
+  spice           13 ->  10     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  water            2 ->  14    -12
+  of               3 ->   3     +0
+  spices           4 ->   4     +0
+  sugar            6 ->   8     -2
+  pepper           5 ->   5     +0
+  chili            8 ->  17     -9
+  broth            7 ->   9     -2
+  soy             10 ->  19     -9
+  ginger          12 ->  27    -15
+  rice            13 ->  28    -15
+  flour           18 ->  60    -42
+  hot             14 ->  24    -10
+  garlic          11 ->  11     +0
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  seasoning        9 ->   2     +7
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  water            1 ->   3     -2
+  to               7 ->  29    -22
+  of               8 ->  14     -6
+  hot              9 ->  13     -4
+  fish            11 ->  27    -16
+  oil             15 ->  25    -10
+  soup            13 ->  17     -4
+
+HIGHER UNDER B
+  broth            3 ->   1     +2
+  seasoning        6 ->   5     +1
+  stock            4 ->   4     +0
+  seasonings      14 ->   7     +7
+  chicken         21 ->   9    +12
+  tomatoes        34 ->  12    +22
+  vegetable       37 ->  15    +22
+  tomato          22 ->  11    +11
+  liquid          26 ->  18     +8
+  spice           17 ->  16     +1
+  salt             2 ->   2     +0
+  pepper          12 ->  10     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  spice            5 ->   5     +0
+  pepper           6 ->   6     +0
+  spices           2 ->   3     -1
+  ingredients      7 ->   7     +0
+  of               4 ->   4     +0
+  water           11 ->  13     -2
+  vegetables      10 ->  10     +0
+  herbs            8 ->   9     -1
+
+HIGHER UNDER B
+  seasoning        3 ->   2     +1
+  salt             1 ->   1     +0
+  seasonings       9 ->   8     +1
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  water            1 ->   2     -1
+  to              10 ->  14     -4
+  of               3 ->   3     +0
+  meat             9 ->  11     -2
+  milk             5 ->   7     -2
+  pepper          14 ->  16     -2
+  butter          16 ->  18     -2
+  cream           17 ->  17     +0
+
+HIGHER UNDER B
+  salt             2 ->   1     +1
+  vegetables      11 ->   8     +3
+  broth           12 ->  10     +2
+  seasoning        7 ->   6     +1
+  ingredients     13 ->  12     +1
+  chicken         19 ->  15     +4
+  seasonings      15 ->  13     +2
+  herbs            6 ->   5     +1
+  hot              4 ->   4     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  pepper           3 ->   4     -1
+  salt             1 ->   1     +0
+  water            5 ->   8     -3
+  of               4 ->   5     -1
+
+HIGHER UNDER B
+  seasoning        2 ->   2     +0
+  spices           6 ->   3     +3
+  seasonings       8 ->   7     +1
+  herbs            7 ->   6     +1
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  water            2 ->   2     +0
+  wine             4 ->   9     -5
+  of               3 ->   3     +0
+  herbs            5 ->   5     +0
+  to              12 ->  17     -5
+  milk             6 ->   7     -1
+  oil             11 ->  15     -4
+  hot              7 ->  10     -3
+  pepper          10 ->  13     -3
+  bread           17 ->  20     -3
+  spices           8 ->  11     -3
+  carrots         20 ->  21     -1
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  seasoning        9 ->   4     +5
+  seasonings      18 ->   8    +10
+  stock           13 ->   6     +7
+  broth           14 ->  12     +2
+  vegetables      15 ->  14     +1
+  chicken         24 ->  19     +5
+  ingredients     16 ->  16     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  water            3 ->   8     -5
+  pepper           2 ->   2     +0
+  of               4 ->  10     -6
+  spices           6 ->   9     -3
+  soy              9 ->  51    -42
+  stock           10 ->  15     -5
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  vegetables      19 ->   4    +15
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  water            3 ->   6     -3
+  vegetables       4 ->   8     -4
+  flour            8 ->  17     -9
+  pepper           9 ->  20    -11
+  garlic          12 ->  24    -12
+  broth           11 ->  14     -3
+  saltSolution    18 ->  67    -49
+  milk            13 ->  13     +0
+  noodles         19 ->  41    -22
+  carrots         17 ->  18     -1
+
+HIGHER UNDER B
+  seasoning        2 ->   2     +0
+  salt             1 ->   1     +0
+  ingredients     15 ->   7     +8
+  herbs            5 ->   3     +2
+  seasonings      16 ->   9     +7
+  of               6 ->   4     +2
+  spices           7 ->   5     +2
+  stock           10 ->  10     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  water            3 ->   3     +0
+  herbs            6 ->   8     -2
+  spices           4 ->   4     +0
+  ingredients     11 ->  14     -3
+  vegetables      13 ->  13     +0
+  seasoning        2 ->   2     +0
+  pepper           9 ->  11     -2
+  of               5 ->   5     +0
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  salt             1 ->   2     -1
+  pepper           2 ->   8     -6
+  water            4 ->  27    -23
+  of               3 ->   6     -3
+  broth            5 ->  46    -41
+  stock            7 ->  41    -34
+  garlic           9 ->  28    -19
+  herbs           10 ->  11     -1
+  chicken         11 ->  35    -24
+  butter          12 ->  53    -41
+
+HIGHER UNDER B
+  spices           6 ->   1     +5
+  seasonings      28 ->   4    +24
+  seasoning        8 ->   3     +5
+  spice           13 ->   5     +8
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  water            1 ->   2     -1
+  ingredients      3 ->   6     -3
+  meat             7 ->  21    -14
+  of               6 ->  13     -7
+  vegetables       4 ->   7     -3
+  rice            10 ->  17     -7
+  fish            12 ->  35    -23
+  chicken         11 ->  23    -12
+  ginger          17 ->  36    -19
+  stock            8 ->   9     -1
+  pepper          14 ->  18     -4
+
+HIGHER UNDER B
+  salt             2 ->   1     +1
+  milk            16 ->   4    +12
+  cream           32 ->   8    +24
+  broth            5 ->   3     +2
+  sugar           27 ->  10    +17
+  butter          35 ->  16    +19
+  herbs           22 ->  12    +10
+  potatoes        23 ->  14     +9
+  spices           9 ->   5     +4
+  flour           15 ->  11     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  water            3 ->  25    -22
+  of               4 ->  16    -12
+  pepper           5 ->  12     -7
+  milk             8 ->  15     -7
+  garlic           9 ->  19    -10
+  sugar           13 ->  78    -65
+  flour           12 ->  22    -10
+  stock           14 ->  36    -22
+  hot             17 ->  18     -1
+  spices           2 ->   4     -2
+
+HIGHER UNDER B
+  vegetables      10 ->   2     +8
+  salt             1 ->   1     +0
+  ingredients     30 ->   3    +27
+  broth           11 ->   5     +6
+  herbs            7 ->   6     +1
+  seasonings      18 ->   8    +10
+  cream           16 ->   9     +7
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  water            4 ->   6     -2
+  herbs            7 ->  10     -3
+  seasoning        2 ->   2     +0
+  spices           5 ->   5     +0
+  seasonings       8 ->   9     -1
+  sugar           11 ->  18     -7
+  of               3 ->   3     +0
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  ingredients     10 ->   7     +3
+  garlic           9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  water            2 ->   5     -3
+  chicken          5 ->  14     -9
+  of               6 ->  10     -4
+  stock            9 ->  17     -8
+  broth            4 ->   7     -3
+  spices           3 ->   6     -3
+  pepper          10 ->  19     -9
+  vegetables      13 ->  15     -2
+  cream           16 ->  20     -4
+
+HIGHER UNDER B
+  salt             1 ->   1     +0
+  seasoning        8 ->   2     +6
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 35 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

@@ -163,5 +163,6 @@
  "effort": "xhigh",
  "path": "/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/inputs/xling_she_shouted_after_him_down_the_street_th_nb_blind.txt",
  "no_blanks": true,
- "version": "x1bn"
+ "version": "x1bn",
+ "raters": 2
 }

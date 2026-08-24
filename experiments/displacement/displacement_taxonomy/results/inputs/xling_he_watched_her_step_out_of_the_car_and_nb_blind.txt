@@ -1,0 +1,1486 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He watched her step out of the car and ___
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  he               3 ->  10     -7
+  then             4 ->  36    -32
+  go               8 ->  26    -18
+  she             12 ->  75    -63
+  stand           10 ->  24    -14
+  get             15 ->  65    -50
+  look            19 ->  83    -64
+  looked          18 ->  72    -54
+  come            17 ->  38    -21
+  turn            14 ->  22     -8
+  walked           6 ->   8     -2
+  disappear       11 ->  11     +0
+
+HIGHER UNDER B
+  into             2 ->   1     +1
+  onto             7 ->   3     +4
+  close            9 ->   4     +5
+  take            13 ->   6     +7
+  make            28 ->   7    +21
+  head             5 ->   5     +0
+  approach        32 ->   9    +23
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  onto             1 ->   2     -1
+  approached       5 ->  31    -26
+  approach         3 ->   9     -6
+
+HIGHER UNDER B
+  then             2 ->   1     +1
+  into             7 ->   3     +4
+  walk            10 ->   4     +6
+  thought          6 ->   5     +1
+  up              15 ->   8     +7
+  her             11 ->   7     +4
+  come            24 ->  10    +14
+  he              63 ->  11    +52
+  knew            20 ->  12     +8
+  down            39 ->  13    +26
+  the             28 ->  16    +12
+  back            42 ->  21    +21
+  cross           30 ->  19    +11
+  swing           27 ->  20     +7
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  then             4 ->   7     -3
+  onto             5 ->  19    -14
+  he               3 ->   4     -1
+  her             20 ->  55    -35
+  hurry           22 ->  61    -39
+  go              17 ->  29    -12
+  into             2 ->   3     -1
+  move            21 ->  25     -4
+  walked          19 ->  22     -3
+  start           18 ->  21     -3
+  stand           11 ->  15     -4
+
+HIGHER UNDER B
+  walk             1 ->   1     +0
+  close           10 ->   2     +8
+  lock            33 ->  10    +23
+  stride          58 ->  14    +44
+  head             6 ->   5     +1
+  cross            8 ->   6     +2
+  shut            14 ->   9     +5
+  take            13 ->  11     +2
+  approach        25 ->  17     +8
+  pull            39 ->  20    +19
+  enter           16 ->  16     +0
+  turn            12 ->  12     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  into             1 ->  24    -23
+  walk             2 -> 130   -128
+  turn             5 -> 149   -144
+  I               11 ->  54    -43
+  go              16 -> 137   -121
+  the             12 ->  33    -21
+  back            17 ->  52    -35
+  turned           7 ->  12     -5
+  then             4 ->   6     -2
+  walked           3 ->   5     -2
+  she              9 ->  10     -1
+
+HIGHER UNDER B
+  thought         14 ->   1    +13
+  saw              8 ->   2     +6
+  smiled          13 ->   4     +9
+  called         116 ->  13   +103
+  followed        69 ->  11    +58
+  ran             23 ->   8    +15
+  continued       66 ->  14    +52
+  he               6 ->   3     +3
+  stopped         64 ->  19    +45
+  reached         76 ->  21    +55
+  approached      79 ->  22    +57
+  felt            44 ->  17    +27
+  grabbed        121 ->  28    +93
+  quickly         60 ->  23    +37
+  started         27 ->  15    +12
+  knew            85 ->  29    +56
+  her             15 ->   9     +6
+  said            50 ->  27    +23
+  leaned          20 ->  18     +2
+  his             40 ->  26    +14
+  began           18 ->  16     +2
+  took            22 ->  20     +2
+  looked          10 ->   7     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  into             1 ->   4     -3
+  walk             3 ->  18    -15
+  turn             5 ->  23    -18
+  go               7 ->  33    -26
+  then             2 ->   2     +0
+  down             8 ->  31    -23
+  head             9 ->  34    -25
+  look            13 ->  46    -33
+  disappear       20 ->  78    -58
+  onto            16 ->  45    -29
+  get             19 ->  57    -38
+  put             18 ->  38    -20
+  start           14 ->  30    -16
+  the             15 ->  24     -9
+  take            12 ->  16     -4
+  smile            6 ->   7     -1
+
+HIGHER UNDER B
+  felt            45 ->   5    +40
+  was             21 ->   3    +18
+  saw             39 ->   8    +31
+  smiled          40 ->  11    +29
+  immediately     58 ->  13    +45
+  walked          11 ->   6     +5
+  her             32 ->  10    +22
+  followed        52 ->  15    +37
+  took            57 ->  17    +40
+  his             24 ->  12    +12
+  made            50 ->  21    +29
+  gave            71 ->  26    +45
+  looked          29 ->  20     +9
+  see             23 ->  19     +4
+  stare           34 ->  22    +12
+  she             17 ->  14     +3
+  follow          10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  walk             3 ->   5     -2
+  he               1 ->   2     -1
+  go               8 ->  76    -68
+  then             4 ->   8     -4
+  turn             9 ->  24    -15
+  she             16 ->  31    -15
+  move             7 ->  20    -13
+  the              6 ->  12     -6
+  take            21 ->  45    -24
+  stand           23 ->  47    -24
+  see             18 ->  23     -5
+
+HIGHER UNDER B
+  into             2 ->   1     +1
+  onto            19 ->   4    +15
+  disappear        5 ->   3     +2
+  up              15 ->   6     +9
+  felt            57 ->  13    +44
+  lock            62 ->  17    +45
+  round           50 ->  15    +35
+  straight       134 ->  19   +115
+  approach        17 ->   9     +8
+  his             10 ->   7     +3
+  towards         45 ->  22    +23
+  down            12 ->  10     +2
+  her             11 ->  11     +0
+  saw             20 ->  18     +2
+  smile           22 ->  21     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  walk             1 ->   3     -2
+  he               3 ->   9     -6
+  then             4 ->  17    -13
+  go              14 ->  69    -55
+  into             2 ->   5     -3
+  she             18 ->  80    -62
+  the             13 ->  45    -32
+  turn             5 ->  16    -11
+  look            21 ->  76    -55
+  come            22 ->  75    -53
+  start           19 ->  46    -27
+  saw             26 ->  65    -39
+  smile           15 ->  34    -19
+  open            23 ->  44    -21
+  shut            25 ->  33     -8
+  looked          24 ->  31     -7
+  close            6 ->  13     -7
+  head            10 ->  18     -8
+  onto             7 ->  14     -7
+  approach        12 ->  22    -10
+
+HIGHER UNDER B
+  stretch         38 ->   1    +37
+  pause           30 ->   2    +28
+  lock            28 ->   4    +24
+  lean            48 ->   7    +41
+  take             9 ->   6     +3
+  immediately     46 ->  11    +35
+  felt            32 ->  12    +20
+  adjust         100 ->  23    +77
+  noticed         16 ->  10     +6
+  straighten      61 ->  20    +41
+  freeze         133 ->  25   +108
+  nearly          85 ->  26    +59
+  stand            8 ->   8     +0
+  almost          55 ->  24    +31
+  his             20 ->  19     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  into             3 ->   4     -1
+  head             7 ->  12     -5
+  go              13 ->  22     -9
+  wondered        22 ->  37    -15
+  he              21 ->  24     -3
+  onto             4 ->   7     -3
+  disappear       17 ->  21     -4
+  saw              2 ->   3     -1
+  turn            10 ->  16     -6
+  start           16 ->  17     -1
+  felt             5 ->   5     +0
+
+HIGHER UNDER B
+  approach         6 ->   2     +4
+  stretch         15 ->   8     +7
+  stroll          20 ->  10    +10
+  walk             1 ->   1     +0
+  stand            8 ->   6     +2
+  approached      43 ->  20    +23
+  saunter         24 ->  18     +6
+  close           19 ->  14     +5
+  noticed         35 ->  23    +12
+  watched         11 ->  11     +0
+  move             9 ->   9     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  he               2 ->  11     -9
+  head             6 ->  43    -37
+  his              4 ->  14    -10
+  then             8 ->  25    -17
+  knew             9 ->  30    -21
+  enter           16 ->  66    -50
+  start           11 ->  29    -18
+  thought         10 ->  26    -16
+  walked          12 ->  33    -21
+  cross           17 ->  34    -17
+  move            13 ->  22     -9
+  look            19 ->  31    -12
+  was             22 ->  39    -17
+  walk             1 ->   2     -1
+
+HIGHER UNDER B
+  onto             5 ->   1     +4
+  into             3 ->   3     +0
+  stretch         70 ->   6    +64
+  take            23 ->   5    +18
+  couldn't        34 ->   7    +27
+  smile           27 ->  10    +17
+  smiled          15 ->   8     +7
+  stroll          39 ->  12    +27
+  felt             7 ->   4     +3
+  approach        18 ->   9     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  walk             1 ->   2     -1
+  he               2 ->  10     -8
+  then             4 ->  14    -10
+  she              5 ->  35    -30
+  turn             6 ->  25    -19
+  head            13 -> 122   -109
+  start            7 ->  22    -15
+  walked          12 ->  20     -8
+  looked          14 ->  28    -14
+  cross           15 ->  27    -12
+  saw             21 ->  49    -28
+  look             9 ->   9     +0
+  approach        19 ->  33    -14
+  close           18 ->  24     -6
+  his             22 ->  36    -14
+  begin           23 ->  32     -9
+
+HIGHER UNDER B
+  onto            16 ->   1    +15
+  stretch         24 ->   3    +21
+  take            11 ->   5     +6
+  felt            10 ->   6     +4
+  gaze            98 ->  13    +85
+  smile           31 ->   8    +23
+  glance          52 ->  12    +40
+  stand            8 ->   7     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  then             2 ->   9     -7
+  smile            6 -> 116   -110
+  he               7 ->  89    -82
+  saw              5 ->  11     -6
+  she              3 ->   6     -3
+  his             12 -> 162   -150
+  the              9 ->  30    -21
+  look            13 ->  39    -26
+  pull            17 ->  31    -14
+  see             20 ->  68    -48
+  back            15 ->  27    -12
+  her             18 ->  23     -5
+  wave            16 ->  18     -2
+  get             11 ->  13     -2
+  put             22 ->  26     -4
+  run             19 ->  19     +0
+  head             8 ->   8     +0
+
+HIGHER UNDER B
+  into             1 ->   1     +0
+  step            58 ->   3    +55
+  walk             4 ->   2     +2
+  go              14 ->   4    +10
+  onto            38 ->   5    +33
+  walked          35 ->  10    +25
+  make            45 ->  15    +30
+  turn            29 ->  14    +15
+  enter           53 ->  20    +33
+  begin           28 ->  16    +12
+  start           21 ->  12     +9
+  watch           24 ->  17     +7
+  take            10 ->   7     +3
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  walk             2 ->  12    -10
+  into             4 ->  83    -79
+  she              3 ->   9     -6
+  he               5 ->  13     -8
+  the              6 ->  19    -13
+  follow           7 ->  20    -13
+  watch           13 ->  96    -83
+  head            15 -> 117   -102
+  move            19 -> 174   -155
+  go              11 ->  29    -18
+  watched         12 ->  47    -35
+  down            17 ->  74    -57
+  take            10 ->  24    -14
+  walked           9 ->  18     -9
+  slowly          16 ->  50    -34
+  her             14 ->  37    -23
+  make            18 ->  42    -24
+
+HIGHER UNDER B
+  ran            103 ->   2   +101
+  followed        21 ->   3    +18
+  then             1 ->   1     +0
+  turned          59 ->   4    +55
+  quickly         79 ->   6    +73
+  run             40 ->   5    +35
+  took            44 ->   8    +36
+  stood           48 ->  10    +38
+  immediately     91 ->  16    +75
+  smiled          54 ->  14    +40
+  back            30 ->  11    +19
+  felt            51 ->  21    +30
+  approach        53 ->  22    +31
+  saw             27 ->  17    +10
+  looked          34 ->  23    +11
+  smile           20 ->  15     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  his              1 ->   8     -7
+  he               3 ->   6     -3
+  the              6 ->  10     -4
+  smile           13 ->  67    -54
+  stand           18 ->  39    -21
+  thought         19 ->  48    -29
+  knew            15 ->  27    -12
+  then            12 ->  20     -8
+  cross           10 ->  17     -7
+  take            17 ->  26     -9
+
+HIGHER UNDER B
+  close            7 ->   4     +3
+  onto             5 ->   2     +3
+  felt             8 ->   5     +3
+  walk             2 ->   1     +1
+  into             4 ->   3     +1
+  slam            34 ->   7    +27
+  shut            42 ->   9    +33
+  slowly          30 ->  12    +18
+  heard           65 ->  18    +47
+  lock            80 ->  22    +58
+  saw             31 ->  14    +17
+  breathe         97 ->  24    +73
+  move            23 ->  16     +7
+  noticed         24 ->  21     +3
+  walked          27 ->  23     +4
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  walk             1 ->   5     -4
+  go               2 ->  20    -18
+  then             4 ->  15    -11
+  he               6 ->  17    -11
+  stand            8 ->  78    -70
+  run              9 ->  33    -24
+  move            10 ->  24    -14
+  start           13 ->  70    -57
+  turn            18 ->  72    -54
+  enter           12 ->  18     -6
+  step            17 ->  48    -31
+  take            14 ->  25    -11
+
+HIGHER UNDER B
+  approach         7 ->   1     +6
+  approached     156 ->   2   +154
+  walked          46 ->   6    +40
+  close           55 ->  10    +45
+  onto            29 ->   8    +21
+  cross           16 ->   7     +9
+  make            15 ->   9     +6
+  down            30 ->  12    +18
+  head             5 ->   4     +1
+  felt            50 ->  13    +37
+  noticed         77 ->  16    +61
+  made           116 ->  19    +97
+  saw             19 ->  14     +5
+  into             3 ->   3     +0
+  disappear       11 ->  11     +0
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  he               2 ->   9     -7
+  saw              3 ->  11     -8
+  his              5 ->  15    -10
+  walk             1 ->   2     -1
+  the              6 ->  18    -12
+  run             11 ->  33    -22
+  open            12 ->  24    -12
+  move            13 ->  28    -15
+  walked          22 ->  59    -37
+  begin            8 ->   8     +0
+  go              15 ->  25    -10
+  a               18 ->  32    -14
+  into            19 ->  30    -11
+  watched         20 ->  26     -6
+
+HIGHER UNDER B
+  felt             4 ->   1     +3
+  head            10 ->   3     +7
+  knew            35 ->   7    +28
+  heard           16 ->   5    +11
+  shut            42 ->  16    +26
+  disappear       27 ->  13    +14
+  lock            36 ->  17    +19
+  admired         44 ->  19    +25
+  take            21 ->  14     +7
+  thought         14 ->  10     +4
+  close           17 ->  12     +5
+  then             7 ->   4     +3
+  her             24 ->  20     +4
+  immediately     29 ->  21     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  walk             1 ->   4     -3
+  head             4 ->  44    -40
+  walked           5 ->  43    -38
+  turn            10 ->  45    -35
+  look            12 ->  42    -30
+  approach        21 -> 124   -103
+  towards         22 -> 115    -93
+  down            25 -> 107    -82
+  saw             26 ->  92    -66
+  pull            23 ->  49    -26
+  run             14 ->  30    -16
+  start            8 ->  12     -4
+  make            11 ->  16     -5
+  begin           20 ->  27     -7
+  she             15 ->  21     -6
+  close           18 ->  23     -5
+  the             19 ->  24     -5
+  go              16 ->  20     -4
+
+HIGHER UNDER B
+  into             3 ->   1     +2
+  take             9 ->   3     +6
+  he               2 ->   2     +0
+  stand           17 ->   5    +12
+  breathe        131 ->   8   +123
+  her             13 ->   6     +7
+  felt            40 ->  10    +30
+  feel            88 ->  11    +77
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  walk             1 ->  12    -11
+  into             4 ->  70    -66
+  close            3 ->  11     -8
+  take             8 ->  78    -70
+  look            12 -> 136   -124
+  turn            13 ->  67    -54
+  smile           18 -> 138   -120
+  shut             7 ->  28    -21
+  stand           15 ->  57    -42
+  make            16 ->  51    -35
+  move            21 -> 131   -110
+  approach        20 -> 112    -92
+  go              22 ->  91    -69
+  start           23 -> 139   -116
+  the              9 ->  24    -15
+  she             10 ->  17     -7
+  felt            17 ->  20     -3
+
+HIGHER UNDER B
+  he               2 ->   1     +1
+  couldn't        46 ->   2    +44
+  onto            19 ->   3    +16
+  knew            51 ->   5    +46
+  was             30 ->   6    +24
+  almost          58 ->   7    +51
+  for             66 ->  10    +56
+  head             5 ->   4     +1
+  stood           68 ->  14    +54
+  paused         154 ->  15   +139
+  his             11 ->   9     +2
+  let             41 ->  16    +25
+  her             14 ->  13     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  walk             1 ->   2     -1
+  then             7 ->  11     -4
+  head            13 ->  29    -16
+  shut            16 ->  43    -27
+  go               8 ->  13     -5
+  walked          17 ->  46    -29
+  start           15 ->  30    -15
+  make            12 ->  18     -6
+  lock            11 ->  16     -5
+  stand            9 ->  12     -3
+  saw             14 ->  14     +0
+  up              20 ->  24     -4
+  approach        18 ->  20     -2
+  close            5 ->   9     -4
+
+HIGHER UNDER B
+  into             2 ->   1     +1
+  felt            23 ->   5    +18
+  wave            19 ->   7    +12
+  take             6 ->   6     +0
+  cross           10 ->   8     +2
+  onto             4 ->   3     +1
+  immediately     25 ->  10    +15
+  wait            44 ->  15    +29
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  walk             1 ->  33    -32
+  head             6 ->  87    -81
+  turn             5 ->  27    -22
+  into             8 ->  43    -35
+  disappear        7 ->  24    -17
+  stand            9 ->  77    -68
+  take            10 ->  34    -24
+  make            13 ->  89    -76
+  start           14 -> 125   -111
+  go              15 -> 153   -138
+  she             17 ->  86    -69
+  move            18 ->  90    -72
+  open            20 ->  74    -54
+  the             23 -> 122    -99
+  wave            24 ->  47    -23
+
+HIGHER UNDER B
+  onto            12 ->   1    +11
+  knew            65 ->   2    +63
+  heard           41 ->   5    +36
+  was             19 ->   6    +13
+  wondered        40 ->   8    +32
+  felt            16 ->   9     +7
+  hoped          119 ->  11   +108
+  snap           146 ->  14   +132
+  looked          43 ->  13    +30
+  lock            11 ->  10     +1
+  shut            28 ->  12    +16
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  then             3 ->  17    -14
+  walked           4 ->  18    -14
+  saw             11 -> 109    -98
+  she              5 ->   5     +0
+  looked          14 ->  68    -54
+  turned          16 ->  44    -28
+  he               8 ->  13     -5
+  went            21 -> 114    -93
+  ran             18 ->  58    -40
+  back            10 ->  19     -9
+  stood           20 ->  50    -30
+  followed        17 ->  32    -15
+  out             22 ->  30     -8
+  walk             6 ->   6     +0
+  the             12 ->  12     +0
+  her             13 ->  15     -2
+
+HIGHER UNDER B
+  onto             7 ->   2     +5
+  into             1 ->   1     +0
+  across          19 ->   4    +15
+  toward          26 ->   8    +18
+  towards         28 ->   9    +19
+  over            40 ->  11    +29
+  around          44 ->  14    +30
+  through         27 ->  16    +11
+  as              15 ->  10     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  walk             1 ->   3     -2
+  head             6 ->  10     -4
+  he               3 ->   4     -1
+  cross           13 ->  43    -30
+  go              20 ->  73    -53
+  walked          19 ->  55    -36
+  make             7 ->  19    -12
+  start           16 ->  32    -16
+  get             18 ->  35    -17
+  then             9 ->  17     -8
+  begin           12 ->  20     -8
+
+HIGHER UNDER B
+  onto             4 ->   1     +3
+  into             2 ->   2     +0
+  smile           26 ->   7    +19
+  pause           38 ->  18    +20
+  take            11 ->   6     +5
+  wave            35 ->  16    +19
+  run             10 ->   8     +2
+  lock            21 ->  13     +8
+  down            22 ->  15     +7
+  she             14 ->  11     +3
+  close           15 ->  12     +3
+  disappear       27 ->  22     +5
+  approach         5 ->   5     +0
+  saw             24 ->  21     +3
+  look            17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  then             6 ->   7     -1
+  walked           2 ->   3     -1
+  left            12 ->  27    -15
+  she              4 ->   4     +0
+  quickly         16 ->  22     -6
+  turn             8 ->  13     -5
+  said            19 ->  24     -5
+  the             22 ->  26     -4
+  went            18 ->  18     +0
+  see             15 ->  15     +0
+  looked           9 ->  11     -2
+
+HIGHER UNDER B
+  wave             7 ->   6     +1
+  saw              5 ->   5     +0
+  walk             1 ->   1     +0
+  into             3 ->   2     +1
+  waited          14 ->  12     +2
+  noticed         11 ->   9     +2
+  followed        13 ->  10     +3
+  turned          10 ->   8     +2
+  waved           21 ->  16     +5
+  take            17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  he               3 ->   7     -4
+  go               9 ->  22    -13
+  get             12 ->  27    -15
+  stand           13 ->  28    -15
+  turn            21 ->  50    -29
+  saw             14 ->  33    -19
+  down            15 ->  32    -17
+  then             4 ->   6     -2
+  look            10 ->  11     -1
+  take             8 ->   9     -1
+  make            20 ->  21     -1
+
+HIGHER UNDER B
+  onto             6 ->   2     +4
+  walk             1 ->   1     +0
+  head             7 ->   4     +3
+  stretch         16 ->  10     +6
+  close            5 ->   5     +0
+  walked          11 ->   8     +3
+  immediately     60 ->  20    +40
+  his             19 ->  12     +7
+  lock            22 ->  13     +9
+  approach        26 ->  14    +12
+  quickly         45 ->  19    +26
+  move            37 ->  17    +20
+  her             36 ->  18    +18
+  disappear       18 ->  15     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  walk             1 ->   2     -1
+  then             4 ->  13     -9
+  she              6 ->  31    -25
+  head             3 ->   5     -2
+  go              16 ->  60    -44
+  down             7 ->  22    -15
+  he              18 ->  61    -43
+  up               8 ->  20    -12
+  back            24 ->  37    -13
+  follow           5 ->   9     -4
+  across           9 ->  18     -9
+  start           22 ->  30     -8
+  look            17 ->  21     -4
+
+HIGHER UNDER B
+  into             2 ->   1     +1
+  felt           122 ->  12   +110
+  take            11 ->   3     +8
+  feel           128 ->  19   +109
+  her             26 ->   8    +18
+  onto            10 ->   4     +6
+  step            21 ->   7    +14
+  make            14 ->   6     +8
+  disappear       20 ->  10    +10
+  stand           23 ->  16     +7
+  the             19 ->  15     +4
+  smile           40 ->  25    +15
+  approach        13 ->  11     +2
+  turn            15 ->  14     +1
+  watch           30 ->  23     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  walk             1 ->   1     +0
+  move            13 ->  41    -28
+  into             5 ->   9     -4
+  look            12 ->  32    -20
+  stand           15 ->  23     -8
+  saw             17 ->  28    -11
+  go               8 ->  16     -8
+  turn             6 ->  11     -5
+  onto            19 ->  25     -6
+  run             18 ->  20     -2
+  cross           14 ->  17     -3
+  start           11 ->  15     -4
+  take            10 ->  12     -2
+
+HIGHER UNDER B
+  then             3 ->   2     +1
+  disappear       27 ->   5    +22
+  make             7 ->   4     +3
+  lock            72 ->   8    +64
+  close           23 ->   7    +16
+  wave            26 ->  13    +13
+  hurry           55 ->  18    +37
+  walked          16 ->  14     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  into             3 ->   4     -1
+  walk             1 ->   1     +0
+  he               2 ->   2     +0
+  head            10 ->  14     -4
+  wondered        14 ->  17     -3
+  turn            21 ->  30     -9
+  saw             20 ->  25     -5
+  cross            8 ->  10     -2
+  run             18 ->  23     -5
+  onto            15 ->  15     +0
+
+HIGHER UNDER B
+  then             4 ->   3     +1
+  his              6 ->   6     +0
+  take             7 ->   7     +0
+  close            5 ->   5     +0
+  felt            11 ->   8     +3
+  straighten      26 ->  16    +10
+  shut            23 ->  18     +5
+  approach        16 ->  13     +3
+  come            22 ->  21     +1
+  walked          25 ->  22     +3
+  make             9 ->   9     +0
+  move            13 ->  12     +1
+  stand           12 ->  11     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  move            11 ->  13     -2
+  open            22 ->  29     -7
+  turn             5 ->   6     -1
+  go              20 ->  26     -6
+  stand            7 ->   8     -1
+  heard           16 ->  17     -1
+  then             2 ->   2     +0
+  down            14 ->  16     -2
+
+HIGHER UNDER B
+  walk             1 ->   1     +0
+  he               4 ->   3     +1
+  felt             6 ->   5     +1
+  onto            29 ->  21     +8
+  lock            31 ->  23     +8
+  approach        15 ->  14     +1
+  cross           17 ->  15     +2
+  looked          23 ->  19     +4
+  watched          8 ->   7     +1
+  head            13 ->  11     +2
+  start           18 ->  18     +0
+  saw              9 ->   9     +0
+  close           10 ->  10     +0
+  look            24 ->  24     +0
+  walked          12 ->  12     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  he               4 ->  29    -25
+  into             3 ->   6     -3
+  then             7 ->  18    -11
+  she             20 ->  41    -21
+  smile           22 ->  47    -25
+  saw             13 ->  28    -15
+  head            18 ->  26     -8
+  his             12 ->  19     -7
+  felt            17 ->  23     -6
+  look            14 ->  21     -7
+  cross           15 ->  20     -5
+  turn             6 ->  13     -7
+  walk             1 ->   2     -1
+
+HIGHER UNDER B
+  close            2 ->   1     +1
+  stretch         23 ->   4    +19
+  take             5 ->   3     +2
+  move            10 ->   5     +5
+  adjust          26 ->   9    +17
+  onto            16 ->   8     +8
+  looked           8 ->   7     +1
+  smooth          84 ->  15    +69
+  stand           11 ->  11     +0
+  start           21 ->  12     +9
+  slam            32 ->  17    +15
+  shut            24 ->  14    +10
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  then             4 ->   5     -1
+  into             2 ->   4     -2
+  get             18 ->  30    -12
+  go               8 ->  14     -6
+  look            25 ->  31     -6
+  disappear       22 ->  26     -4
+  take            17 ->  20     -3
+  turn             9 ->  12     -3
+  watched         16 ->  18     -2
+  stand            7 ->   9     -2
+  walked          21 ->  24     -3
+  cross           14 ->  15     -1
+
+HIGHER UNDER B
+  walk             1 ->   1     +0
+  head             3 ->   2     +1
+  approach        15 ->   8     +7
+  he               5 ->   3     +2
+  make            10 ->   7     +3
+  close            6 ->   6     +0
+  her             34 ->  19    +15
+  she             11 ->  10     +1
+  felt            12 ->  11     +1
+  his             26 ->  23     +3
+  move            19 ->  16     +3
+  saw             20 ->  17     +3
+  onto            13 ->  13     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  run             25 ->  30     -5
+  disappear       17 ->  22     -5
+  head             7 ->  10     -3
+  get             21 ->  24     -3
+  go              14 ->  19     -5
+  climb           19 ->  21     -2
+  look             4 ->   6     -2
+  move             6 ->   7     -1
+  come            16 ->  18     -2
+  up              24 ->  25     -1
+  close           10 ->  13     -3
+  cross           15 ->  17     -2
+  then             2 ->   2     +0
+  turn             9 ->   9     +0
+  make            26 ->  27     -1
+  take            13 ->  15     -2
+
+HIGHER UNDER B
+  stand            5 ->   3     +2
+  felt            30 ->  23     +7
+  watched         20 ->  11     +9
+  approach        12 ->   8     +4
+  he               8 ->   5     +3
+  onto            22 ->  16     +6
+  saw             18 ->  14     +4
+  walk             1 ->   1     +0
+  begin           28 ->  26     +2
+  stare           23 ->  20     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  then             5 ->  24    -19
+  stand            8 ->  26    -18
+  her              9 ->  16     -7
+  into             2 ->   5     -3
+  go              14 ->  34    -20
+  up              16 ->  35    -19
+  move            12 ->  14     -2
+  the             18 ->  25     -7
+  make             7 ->  10     -3
+  turn            19 ->  21     -2
+  he               6 ->   6     +0
+
+HIGHER UNDER B
+  walked          13 ->   2    +11
+  walk             1 ->   1     +0
+  felt            23 ->   7    +16
+  close            4 ->   3     +1
+  hurry           48 ->  11    +37
+  take            10 ->   8     +2
+  onto            11 ->   9     +2
+  made            52 ->  15    +37
+  shut            17 ->  13     +4
+  she             15 ->  12     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  close            3 ->  12     -9
+  then             4 ->  14    -10
+  he               5 ->  10     -5
+  go              12 ->  37    -25
+  slam            15 ->  33    -18
+  shut            24 ->  40    -16
+  come            22 ->  36    -14
+  move            11 ->  18     -7
+  wondered        20 ->  28     -8
+  pull            26 ->  29     -3
+  stand           21 ->  25     -4
+  turn            18 ->  24     -6
+  cross           14 ->  16     -2
+
+HIGHER UNDER B
+  walk             1 ->   1     +0
+  make             6 ->   2     +4
+  approach        13 ->   5     +8
+  take             7 ->   4     +3
+  onto            17 ->   8     +9
+  stretch         31 ->  15    +16
+  felt            16 ->  11     +5
+  disappear       33 ->  19    +14
+  into             8 ->   6     +2
+  stride          23 ->  13    +10
+  walked          34 ->  20    +14
+  lock             9 ->   7     +2
+  start           10 ->   9     +1
+  begin           19 ->  17     +2
+  his             30 ->  22     +8
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  walk             1 ->   2     -1
+  go               5 ->  25    -20
+  then             3 ->   9     -6
+  enter            7 ->  13     -6
+  close           13 ->  37    -24
+  cross           10 ->  27    -17
+  follow          20 ->  47    -27
+  disappear       16 ->  34    -18
+  saw              6 ->  11     -5
+  walked          12 ->  20     -8
+  come            21 ->  38    -17
+  she             18 ->  26     -8
+  make            17 ->  23     -6
+  turn            14 ->  16     -2
+  look            22 ->  28     -6
+
+HIGHER UNDER B
+  into             2 ->   1     +1
+  he               4 ->   3     +1
+  felt            11 ->   5     +6
+  onto             9 ->   4     +5
+  approach        19 ->   6    +13
+  approached      59 ->  12    +47
+  his             23 ->   8    +15
+  watched         34 ->  14    +20
+  the             15 ->  10     +5
+  feel            71 ->  18    +53
+  immediately     52 ->  17    +35
+  head             8 ->   7     +1
+  her             29 ->  15    +14
+  a               53 ->  21    +32
+  smile           40 ->  24    +16
+  move            26 ->  22     +4
+  looked          24 ->  19     +5
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  then             4 ->   9     -5
+  he               2 ->   3     -1
+  pull            18 ->  39    -21
+  go              13 ->  32    -19
+  close            3 ->   5     -2
+  smiled          25 ->  57    -32
+  shut            15 ->  31    -16
+  slam            12 ->  24    -12
+  lock            17 ->  26     -9
+  look             9 ->  19    -10
+  take             7 ->  12     -5
+  saw             24 ->  29     -5
+  turn            20 ->  25     -5
+  move            10 ->  14     -4
+  his             14 ->  17     -3
+  make            19 ->  22     -3
+  head             6 ->   8     -2
+
+HIGHER UNDER B
+  walk             1 ->   1     +0
+  into             5 ->   2     +3
+  onto            23 ->   4    +19
+  stand           16 ->   6    +10
+  she             11 ->   7     +4
+  walked          40 ->  11    +29
+  stood           46 ->  20    +26
+  as              32 ->  15    +17
+  felt            30 ->  18    +12
+  start           21 ->  13     +8
+  the             22 ->  16     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  walk             1 ->   2     -1
+  he               4 ->   8     -4
+  cross            5 ->  17    -12
+  she             23 ->  45    -22
+  pull            14 ->  28    -14
+  then             8 ->  11     -3
+  start           22 ->  37    -15
+  go              21 ->  36    -15
+  turn            10 ->  12     -2
+  looked          13 ->  15     -2
+  move            20 ->  27     -7
+  close           16 ->  21     -5
+  open            18 ->  22     -4
+  the             12 ->  13     -1
+
+HIGHER UNDER B
+  onto             3 ->   3     +0
+  into             2 ->   1     +1
+  make             6 ->   4     +2
+  his             15 ->   7     +8
+  pause           34 ->  10    +24
+  shut            37 ->  20    +17
+  saw             33 ->  19    +14
+  stand            9 ->   5     +4
+  head             7 ->   6     +1
+  look            26 ->  16    +10
+  disappear       11 ->   9     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  then             4 ->  45    -41
+  stand            6 ->  34    -28
+  close            5 ->  20    -15
+  go              11 ->  60    -49
+  cross            9 ->  15     -6
+  saw             13 ->  22     -9
+  shut            15 ->  56    -41
+  take             7 ->  11     -4
+  run             19 ->  72    -53
+  climb           17 ->  47    -30
+
+HIGHER UNDER B
+  walk             1 ->   1     +0
+  onto            10 ->   2     +8
+  turn            14 ->   5     +9
+  make            24 ->   7    +17
+  look            12 ->   6     +6
+  straight       118 ->  10   +108
+  straighten      41 ->   9    +32
+  head             8 ->   8     +0
+  approach        18 ->  12     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  into             1 -> 118   -117
+  then             2 ->  91    -89
+  walk             3 -> 144   -141
+  saw              6 -> 127   -121
+  he               5 ->  19    -14
+  get              7 -> 126   -119
+  onto             8 -> 141   -133
+  she              4 ->  12     -8
+  walked           9 -> 137   -128
+  close           10 -> 177   -167
+  take            11 -> 125   -114
+  down            13 -> 130   -117
+  her             12 ->  58    -46
+  turn            14 -> 155   -141
+  watched         15 -> 157   -142
+  go              17 -> 138   -121
+  head            18 -> 171   -153
+  was             19 ->  97    -78
+  noticed         20 -> 181   -161
+  drive           21 -> 199   -178
+  begin           22 -> 232   -210
+  over            23 -> 134   -111
+  the             16 ->  26    -10
+
+HIGHER UNDER B
+  She            151 ->   1   +150
+  He             150 ->   2   +148
+  Thea           153 ->   3   +150
+  The            154 ->   4   +150
+  It             161 ->   5   +156
+  Her            155 ->   6   +149
+  I              148 ->   7   +141
+  There          168 ->   8   +160
+  They           164 ->   9   +155
+  His            156 ->  10   +146
+  Thea's         182 ->  11   +171
+  This           185 ->  13   +172
+  If             191 ->  14   +177
+  Butch          193 ->  15   +178
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  then             2 ->   6     -4
+  disappear        9 ->  30    -21
+  he               3 ->   8     -5
+  turn            12 ->  34    -22
+  down             8 ->  10     -2
+  her             10 ->  19     -9
+  go              16 ->  33    -17
+  back            14 ->  26    -12
+  take            19 ->  36    -17
+  follow          22 ->  39    -17
+  disappeared     18 ->  29    -11
+  saw             17 ->  20     -3
+
+HIGHER UNDER B
+  into             1 ->   1     +0
+  walked          11 ->   3     +8
+  onto             6 ->   2     +4
+  the              4 ->   4     +0
+  to              15 ->   9     +6
+  she              5 ->   5     +0
+  smiled          44 ->  15    +29
+  said            35 ->  16    +19
+  began           23 ->  11    +12
+  walk             7 ->   7     +0
+  turned          21 ->  13     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  he               1 ->   4     -3
+  then             4 ->  22    -18
+  looked           7 ->  31    -24
+  walk             6 ->  18    -12
+  smiled          11 ->  37    -26
+  walked          15 ->  41    -26
+  turn            17 ->  43    -26
+  watched          5 ->   8     -3
+  she             18 ->  49    -31
+  get             19 ->  69    -50
+  followed        16 ->  23     -7
+
+HIGHER UNDER B
+  onto             3 ->   1     +2
+  into             2 ->   2     +0
+  close            9 ->   3     +6
+  felt            14 ->   5     +9
+  take             8 ->   6     +2
+  approached      49 ->  11    +38
+  towards         74 ->  12    +62
+  her             42 ->  13    +29
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  into             2 ->   9     -7
+  walk             1 ->   1     +0
+  onto             9 ->  36    -27
+  then             5 ->   7     -2
+  disappear       12 ->  28    -16
+  watched         19 ->  34    -15
+  close           24 ->  53    -29
+  head             6 ->  18    -12
+  up              25 ->  46    -21
+  walked          11 ->  22    -11
+  looked          16 ->  23     -7
+  turn             7 ->  16     -9
+  go              20 ->  21     -1
+
+HIGHER UNDER B
+  knew            13 ->   4     +9
+  he               3 ->   2     +1
+  his             23 ->   5    +18
+  saw              4 ->   3     +1
+  immediately     37 ->   8    +29
+  her             14 ->   6     +8
+  was             33 ->  15    +18
+  the             17 ->  12     +5
+  noticed         22 ->  14     +8
+  she             10 ->  10     +0
+  thought         26 ->  20     +6
+  stand           21 ->  19     +2
+  take            15 ->  13     +2
+  run             18 ->  17     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  he               2 ->  24    -22
+  walked           4 ->  10     -6
+  then             6 ->  21    -15
+  she             12 ->  41    -29
+  go              11 ->  29    -18
+  close           13 ->  33    -20
+  walk             1 ->   3     -2
+  thought         19 ->  51    -32
+  the             21 ->  59    -38
+  was             23 ->  86    -63
+  saw              9 ->  12     -3
+  make            10 ->  11     -1
+  smile           22 ->  27     -5
+  looked          16 ->  16     +0
+
+HIGHER UNDER B
+  onto             5 ->   1     +4
+  into             3 ->   2     +1
+  watched         15 ->   5    +10
+  take             7 ->   4     +3
+  approach        18 ->   6    +12
+  across          79 ->   9    +70
+  disappear       39 ->   8    +31
+  felt             8 ->   7     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  then             3 ->   9     -6
+  go              12 ->  21     -9
+  move            22 ->  38    -16
+  he               4 ->   8     -4
+  she             20 ->  33    -13
+  turn            11 ->  14     -3
+  saw             15 ->  22     -7
+  get             14 ->  20     -6
+  come            19 ->  31    -12
+  stand            8 ->  12     -4
+  knew            23 ->  29     -6
+  wondered        21 ->  25     -4
+  slam            26 ->  26     +0
+  start           17 ->  19     -2
+
+HIGHER UNDER B
+  close            2 ->   2     +0
+  walk             1 ->   1     +0
+  onto            24 ->  11    +13
+  walked          16 ->  10     +6
+  cross            9 ->   5     +4
+  into            10 ->   6     +4
+  head             5 ->   3     +2
+  felt             6 ->   4     +2
+  lock            28 ->  15    +13
+  watched         13 ->  13     +0
+  approach        32 ->  18    +14
+  make            25 ->  16     +9
+  shut            31 ->  23     +8
+  the             30 ->  24     +6
+  pull            18 ->  17     +1
+  take             7 ->   7     +0
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  walk             1 ->   1     +0
+  approach         2 ->   7     -5
+  head             7 ->  56    -49
+  begin            9 ->  60    -51
+  go               8 ->  47    -39
+  enter           14 -> 158   -144
+  onto            13 ->  50    -37
+  come            18 -> 101    -83
+  cross           12 ->  40    -28
+  make            10 ->  29    -19
+  disappear       15 ->  34    -19
+  take            11 ->  21    -10
+
+HIGHER UNDER B
+  noticed         73 ->   6    +67
+  saw             31 ->   5    +26
+  felt            89 ->   8    +81
+  wondered        88 ->  13    +75
+  knew            55 ->  12    +43
+  walked           5 ->   3     +2
+  smiled          49 ->  14    +35
+  followed       135 ->  17   +118
+  turned         104 ->  18    +86
+  stood           56 ->  15    +41
+  turn            16 ->  10     +6
+  she             17 ->  11     +6
+  watched         86 ->  22    +64
+  realized       111 ->  23    +88
+  was             35 ->  19    +16
+  the             29 ->  16    +13
+  her             43 ->  24    +19
+  took            68 ->  26    +42
+  smile           21 ->  20     +1
+  he               4 ->   4     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  he               5 ->  33    -28
+  up               8 ->  25    -17
+  go              10 ->  78    -68
+  run             13 ->  44    -31
+  she              6 ->  10     -4
+  walked           9 ->  15     -6
+  look            15 ->  31    -16
+  then             4 ->   7     -3
+  head             7 ->  11     -4
+  down            11 ->  14     -3
+  was             18 ->  27     -9
+  the             16 ->  21     -5
+
+HIGHER UNDER B
+  onto             3 ->   2     +1
+  approach        19 ->   3    +16
+  walk             1 ->   1     +0
+  take            12 ->   5     +7
+  watch           20 ->   6    +14
+  move            23 ->   8    +15
+  stretch         39 ->  13    +26
+  her             14 ->   9     +5
+  make            17 ->  12     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

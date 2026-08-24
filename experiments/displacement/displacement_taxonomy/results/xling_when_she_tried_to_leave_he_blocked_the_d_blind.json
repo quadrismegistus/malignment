@@ -159,5 +159,6 @@
  "model": "sonnet",
  "effort": "xhigh",
  "path": "/Users/rj416/github/malignment/experiments/displacement/displacement_taxonomy/results/inputs/xling_when_she_tried_to_leave_he_blocked_the_d_blind.txt",
- "version": "x1b"
+ "version": "x1b",
+ "raters": 2
 }

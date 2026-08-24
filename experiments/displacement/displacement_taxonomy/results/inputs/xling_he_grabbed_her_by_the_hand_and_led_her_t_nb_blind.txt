@@ -1,0 +1,1290 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He grabbed her by the hand and led her toward the ___
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  door             1 ->   2     -1
+  house            3 ->  48    -45
+  stairs           2 ->   9     -7
+  front            5 ->  30    -25
+  elevator        12 ->  64    -52
+  room            15 -> 112    -97
+  car             14 ->  56    -42
+  bedroom          8 ->  36    -28
+  back             6 ->  11     -5
+  main            17 ->  35    -18
+  living          16 ->  26    -10
+  table           10 ->  18     -8
+  kitchen          4 ->   4     +0
+
+HIGHER UNDER B
+  water           19 ->   1    +18
+  dance           50 ->   3    +47
+  edge            28 ->   5    +23
+  sound          110 ->   7   +103
+  garden          52 ->  14    +38
+  exit             9 ->   8     +1
+  stage           24 ->  12    +12
+  pond           143 ->  21   +122
+  beach           42 ->  15    +27
+  lake            65 ->  17    +48
+  water's        144 ->  23   +121
+  light           40 ->  16    +24
+  clearing       140 ->  24   +116
+  river           32 ->  20    +12
+  bathroom        11 ->  10     +1
+  castle          36 ->  22    +14
+  entrance        13 ->  13     +0
+  bed              7 ->   6     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  exit             1 ->   2     -1
+  dance            3 ->  13    -10
+  stage            4 ->  16    -12
+  water            5 ->  34    -29
+
+HIGHER UNDER B
+  door             2 ->   1     +1
+  stairs           7 ->   3     +4
+  car             22 ->   4    +18
+  living          13 ->   5     +8
+  bed             38 ->   7    +31
+  back            35 ->   6    +29
+  front           11 ->   8     +3
+  house           14 ->   9     +5
+  kitchen         19 ->  10     +9
+  staircase       66 ->  11    +55
+  entrance        12 ->  12     +0
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  elevator         8 ->  41    -33
+  main             9 ->  30    -21
+  kitchen          7 ->  10     -3
+  car             10 ->  17     -7
+  bedroom         12 ->  20     -8
+  open            13 ->  25    -12
+  stairs           3 ->   4     -1
+  exit             6 ->   6     +0
+  bed             15 ->  23     -8
+  back             5 ->   5     +0
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  entrance        11 ->   7     +4
+  dance           17 ->   8     +9
+  stage           30 ->  12    +18
+  river           48 ->  14    +34
+  edge            16 ->   9     +7
+  house            4 ->   3     +1
+  table           14 ->  11     +3
+  front            2 ->   2     +0
+  dining          18 ->  13     +5
+  staircase       24 ->  15     +9
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  kitchen          8 ->  22    -14
+  gate            20 ->  96    -76
+  nearest         10 ->  17     -7
+  bathroom        21 ->  59    -38
+  exit             5 ->  10     -5
+  forest          14 ->  21     -7
+  building        13 ->  19     -6
+  center          17 ->  31    -14
+
+HIGHER UNDER B
+  open            11 ->   3     +8
+  back            12 ->   6     +6
+  car              4 ->   2     +2
+  beach           33 ->  13    +20
+  edge            24 ->  12    +12
+  elevator        16 ->   9     +7
+  river           15 ->  14     +1
+  hospital        42 ->  20    +22
+  window          30 ->  16    +14
+  entrance         7 ->   7     +0
+  woods           19 ->  15     +4
+  small           18 ->  18     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  bathroom         3 ->  42    -39
+  kitchen          6 ->  10     -4
+  bedroom         11 ->  71    -60
+  stairs           7 ->  16     -9
+  front            4 ->   5     -1
+  bed             12 ->  76    -64
+  elevator         9 ->  29    -20
+  other           15 ->  40    -25
+  back             2 ->   3     -1
+  bar             17 ->  44    -27
+  car              8 ->   8     +0
+  main            16 ->  23     -7
+
+HIGHER UNDER B
+  exit             5 ->   2     +3
+  entrance        10 ->   4     +6
+  door             1 ->   1     +0
+  river           33 ->   9    +24
+  center          41 ->  12    +29
+  open            34 ->  14    +20
+  lake            58 ->  15    +43
+  fountain        89 ->  18    +71
+  old             93 ->  19    +74
+  edge            20 ->  11     +9
+  window          13 ->   6     +7
+  house           14 ->   7     +7
+  nearest         18 ->  13     +5
+  small           22 ->  17     +5
+  large           24 ->  20     +4
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  front            2 ->   5     -3
+  house            9 ->  23    -14
+  elevator         8 ->  16     -8
+  car             13 ->  34    -21
+  room            15 ->  36    -21
+  window          14 ->  28    -14
+  kitchen          6 ->  10     -4
+
+HIGHER UNDER B
+  stairs           3 ->   2     +1
+  exit             5 ->   4     +1
+  back             4 ->   3     +1
+  stairwell       24 ->   9    +15
+  nearest         20 ->  11     +9
+  main            11 ->   6     +5
+  elevators       52 ->  15    +37
+  staircase       10 ->   8     +2
+  library         29 ->  17    +12
+  far             32 ->  18    +14
+  office          22 ->  14     +8
+  center          19 ->  13     +6
+  entrance         7 ->   7     +0
+  bathroom        12 ->  12     +0
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  stairs           2 ->   9     -7
+  front            4 ->  13     -9
+  house            9 ->  29    -20
+  bedroom          8 ->  14     -6
+  bed             10 ->  21    -11
+  bathroom        11 ->  18     -7
+  living          15 ->  20     -5
+
+HIGHER UNDER B
+  exit             6 ->   3     +3
+  kitchen          3 ->   2     +1
+  center          31 ->   7    +24
+  entrance        13 ->   6     +7
+  grand          144 ->  12   +132
+  main            14 ->   8     +6
+  dance           77 ->  15    +62
+  balcony         52 ->  16    +36
+  back             5 ->   4     +1
+  nearest         16 ->  10     +6
+  dining          12 ->  11     +1
+  edge            27 ->  17    +10
+  elevator         7 ->   5     +2
+  window          20 ->  19     +1
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  front            4 ->   7     -3
+  house            9 ->  22    -13
+  kitchen          5 ->   6     -1
+  elevator         8 ->  11     -3
+  window          12 ->  16     -4
+  nearest         10 ->  10     +0
+  table           15 ->  20     -5
+  bedroom         14 ->  15     -1
+  stairs           3 ->   3     +0
+  main            13 ->  13     +0
+
+HIGHER UNDER B
+  exit             2 ->   2     +0
+  back             6 ->   4     +2
+  edge            16 ->   9     +7
+  car             11 ->   8     +3
+  waiting         52 ->  12    +40
+  entrance         7 ->   5     +2
+  open            18 ->  14     +4
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  bedroom          6 ->  15     -9
+  house            2 ->   4     -2
+  front            4 ->   8     -4
+  dance            8 ->  16     -8
+  stairs           7 ->  10     -3
+  bed             11 ->  32    -21
+  bathroom        15 ->  54    -39
+  living          17 ->  43    -26
+  elevator        13 ->  30    -17
+
+HIGHER UNDER B
+  old             83 ->  13    +70
+  entrance        14 ->   7     +7
+  garden          48 ->  12    +36
+  stage           23 ->  11    +12
+  edge            12 ->   6     +6
+  trees           42 ->  14    +28
+  darkness        82 ->  24    +58
+  forest          36 ->  17    +19
+  castle          56 ->  22    +34
+  small           45 ->  20    +25
+  dark            34 ->  18    +16
+  lake            43 ->  21    +22
+  river           31 ->  19    +12
+  parking         32 ->  26     +6
+  waiting         27 ->  25     +2
+  back             3 ->   2     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  front            3 ->  13    -10
+  exit             2 ->   4     -2
+  bathroom        13 ->  33    -20
+  bedroom         11 ->  26    -15
+  kitchen          8 ->   9     -1
+  water           12 ->  17     -5
+
+HIGHER UNDER B
+  old             66 ->   6    +60
+  river           21 ->  10    +11
+  lake            27 ->  14    +13
+  stage           14 ->   8     +6
+  small           42 ->  15    +27
+  beach           37 ->  16    +21
+  edge            20 ->  18     +2
+  car              7 ->   7     +0
+  back             6 ->   5     +1
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  bed              3 ->  35    -32
+  stairs           6 ->  29    -23
+  table            2 ->   9     -7
+  doorway          9 ->  31    -22
+  kitchen         12 ->  40    -28
+  exit             7 ->  16     -9
+  front            4 ->   6     -2
+  bathroom        22 ->  68    -46
+  car             11 ->  13     -2
+  fireplace       20 ->  36    -16
+  large           13 ->  14     -1
+
+HIGHER UNDER B
+  window           8 ->   2     +6
+  light           19 ->   5    +14
+  small           21 ->   8    +13
+  edge            10 ->   4     +6
+  entrance        14 ->   7     +7
+  fire            18 ->  10     +8
+  house            5 ->   3     +2
+  open            15 ->  11     +4
+  other           24 ->  17     +7
+  river           25 ->  18     +7
+  back            17 ->  12     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  bedroom          5 ->  54    -49
+  stairs           7 -> 103    -96
+  house            6 ->  12     -6
+  entrance         8 ->  15     -7
+  back             3 ->   9     -6
+  exit            11 ->  21    -10
+  open            12 -> 102    -90
+  bathroom         4 ->   7     -3
+  kitchen          2 ->   4     -2
+  window          13 ->  39    -26
+
+HIGHER UNDER B
+  river           16 ->   2    +14
+  center          22 ->   3    +19
+  bank            49 ->   6    +43
+  forest          37 ->  10    +27
+  alley           64 ->  14    +50
+  old            112 ->  19    +93
+  dark            36 ->  13    +23
+  cliff          144 ->  23   +121
+  woods           24 ->  11    +13
+  edge            26 ->  16    +10
+  beach           57 ->  20    +37
+  sea             63 ->  22    +41
+  nearest         19 ->  17     +2
+  street          32 ->  24     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  stairs           6 ->  31    -25
+  exit             4 ->   6     -2
+  house            7 ->  24    -17
+  kitchen          5 ->  10     -5
+  lake            19 ->  44    -25
+  bed             12 ->  20     -8
+  water           13 ->  18     -5
+  main            18 ->  25     -7
+  open            22 ->  27     -5
+  river           20 ->  23     -3
+  stage           11 ->  13     -2
+  bedroom          8 ->   9     -1
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  back             2 ->   2     +0
+  front            3 ->   3     +0
+  center          17 ->   7    +10
+  edge            14 ->   5     +9
+  entrance         9 ->   4     +5
+  bar             27 ->  11    +16
+  dark            46 ->  14    +32
+  street          42 ->  16    +26
+  elevator        10 ->   8     +2
+  car             15 ->  12     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  door             1 ->   3     -2
+  house            2 ->  33    -31
+  stairs           3 ->  20    -17
+  kitchen          5 ->  49    -44
+  bed             12 -> 227   -215
+  table            9 -> 163   -154
+  steps           13 -> 176   -163
+  room             7 ->  36    -29
+  doorway         14 -> 112    -98
+  hall            15 ->  78    -63
+  front            8 ->  18    -10
+  back             6 ->   8     -2
+  open            16 ->  23     -7
+
+HIGHER UNDER B
+  exit             4 ->   1     +3
+  entrance        17 ->   2    +15
+  window          11 ->   4     +7
+  edge            21 ->   5    +16
+  park           137 ->   9   +128
+  main            26 ->   6    +20
+  safety         173 ->  15   +158
+  shelter        102 ->  12    +90
+  quiet          218 ->  17   +201
+  pond            83 ->  13    +70
+  building        28 ->  10    +18
+  town            61 ->  14    +47
+  castle          33 ->  11    +22
+  woods           54 ->  16    +38
+  car             10 ->   7     +3
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  front            2 ->  18    -16
+  house            4 ->   9     -5
+  stairs           7 ->  15     -8
+  street          10 ->  56    -46
+  exit             6 ->   6     +0
+  kitchen          5 ->   5     +0
+  elevator        13 ->  51    -38
+  open             9 ->  12     -3
+  gate            14 ->  41    -27
+  car             12 ->  36    -24
+
+HIGHER UNDER B
+  back             3 ->   2     +1
+  woods           26 ->   4    +22
+  entrance         8 ->   3     +5
+  forest          36 ->   7    +29
+  castle          37 ->  10    +27
+  pond           111 ->  20    +91
+  edge            34 ->  11    +23
+  dark            42 ->  13    +29
+  garden          46 ->  14    +32
+  center          11 ->   8     +3
+  light           30 ->  17    +13
+  tent            32 ->  19    +13
+  trees           33 ->  22    +11
+  barn            28 ->  21     +7
+  water           19 ->  16     +3
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  kitchen          6 ->  18    -12
+  stairs           5 ->   8     -3
+  entrance         9 ->  37    -28
+  elevator        13 ->  40    -27
+  main            12 ->  25    -13
+  front            2 ->   4     -2
+  bathroom        15 ->  43    -28
+  house            7 ->   7     +0
+  window          14 ->  14     +0
+  nearest         10 ->  11     -1
+
+HIGHER UNDER B
+  back             3 ->   2     +1
+  door             1 ->   1     +0
+  car              8 ->   5     +3
+  edge            11 ->   6     +5
+  beach           47 ->  10    +37
+  open            16 ->   9     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  house            5 ->  15    -10
+  edge             9 ->  22    -13
+  bed             16 -> 119   -103
+  bedroom         13 ->  72    -59
+  car             11 ->  23    -12
+  barn            18 ->  61    -43
+  main            17 ->  46    -29
+  water           15 ->  43    -28
+  forest          14 ->  29    -15
+  center          12 ->  17     -5
+  kitchen          6 ->   8     -2
+  entrance        10 ->  14     -4
+  stairs           7 ->   9     -2
+
+HIGHER UNDER B
+  back             3 ->   2     +1
+  staircase       30 ->   6    +24
+  dance           40 ->   7    +33
+  elevator         8 ->   4     +4
+  door             1 ->   1     +0
+  elevators      127 ->  10   +117
+  stable          99 ->  13    +86
+  stage           38 ->  12    +26
+  building        28 ->  11    +17
+  street          36 ->  16    +20
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  front            2 ->  17    -15
+  stairs           4 ->  18    -14
+  bed             16 -> 152   -136
+  bathroom        11 ->  33    -22
+  bedroom         15 ->  61    -46
+  room            12 ->  30    -18
+  house            6 ->   7     -1
+  elevator        18 ->  44    -26
+  other           19 ->  43    -24
+  entrance        10 ->  21    -11
+  water           20 ->  25     -5
+
+HIGHER UNDER B
+  back             3 ->   2     +1
+  edge             9 ->   5     +4
+  kitchen          5 ->   3     +2
+  exit             7 ->   4     +3
+  stage           31 ->   8    +23
+  garden          46 ->  13    +33
+  woods           23 ->   9    +14
+  crowd           44 ->  14    +30
+  forest          27 ->  11    +16
+  old             62 ->  20    +42
+  river           21 ->  12     +9
+  center           8 ->   6     +2
+  window          13 ->  10     +3
+  main            28 ->  19     +9
+  nearest         17 ->  15     +2
+  open            24 ->  22     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  door             1 ->   7     -6
+  front            3 ->  17    -14
+  house            4 ->  14    -10
+  back             5 ->  22    -17
+  exit             7 ->  69    -62
+  elevator         8 ->  46    -38
+  bedroom          9 ->  41    -32
+  car             10 ->  84    -74
+  entrance        11 ->  50    -39
+  edge            12 ->  45    -33
+  bed             14 ->  56    -42
+  bathroom        13 ->  26    -13
+
+HIGHER UNDER B
+  forest          42 ->   1    +41
+  kitchen          6 ->   3     +3
+  stairs           2 ->   2     +0
+  barn            26 ->   4    +22
+  trees           36 ->   5    +31
+  staircase       17 ->   6    +11
+  creek          122 ->   8   +114
+  castle          62 ->   9    +53
+  mouth          135 ->  10   +125
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  exit             2 ->   9     -7
+  front            6 ->  14     -8
+  other           11 ->  30    -19
+  house            4 ->   7     -3
+  gate            14 ->  31    -17
+  car             10 ->  16     -6
+  center          15 ->  33    -18
+  window           9 ->  13     -4
+  room            18 ->  44    -26
+  doorway         13 ->  20     -7
+  road            19 ->  29    -10
+  river           16 ->  21     -5
+  open            17 ->  17     +0
+
+HIGHER UNDER B
+  stairs           5 ->   2     +3
+  old             86 ->   8    +78
+  garden          24 ->   6    +18
+  forest          25 ->  11    +14
+  staircase       27 ->  12    +15
+  shadows        153 ->  18   +135
+  small           30 ->  15    +15
+  kitchen          3 ->   3     +0
+  edge            12 ->  10     +2
+  back             8 ->   4     +4
+  entrance         7 ->   5     +2
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  house            3 ->  18    -15
+  exit             2 ->   8     -6
+  front            5 ->  13     -8
+  stairs           4 ->   5     -1
+  car              9 ->  31    -22
+  elevator        11 ->  63    -52
+  back             6 ->   7     -1
+  building        13 ->  41    -28
+  main            10 ->  26    -16
+  gate            15 ->  53    -38
+  kitchen          7 ->  11     -4
+  bathroom        18 ->  43    -25
+
+HIGHER UNDER B
+  edge            14 ->   3    +11
+  center          12 ->   2    +10
+  open            22 ->   6    +16
+  lake            28 ->   9    +19
+  old             57 ->  12    +45
+  city            44 ->  14    +30
+  river           17 ->  10     +7
+  sea             80 ->  23    +57
+  stage           38 ->  19    +19
+  throne          66 ->  22    +44
+  window          29 ->  16    +13
+  forest          25 ->  15    +10
+  shore           49 ->  25    +24
+  castle          23 ->  17     +6
+  entrance         8 ->   4     +4
+  water           31 ->  24     +7
+  woods           20 ->  20     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  school           4 ->   6     -2
+  fountain        15 ->  31    -16
+  library          9 ->  12     -3
+  center           6 ->   7     -1
+  direction       13 ->  16     -3
+  heart           21 ->  28     -7
+  town            14 ->  18     -4
+  path            19 ->  22     -3
+  door             2 ->   2     +0
+  east            18 ->  19     -1
+  old              8 ->   8     +0
+
+HIGHER UNDER B
+  exit             1 ->   1     +0
+  house            5 ->   4     +1
+  temple          29 ->  15    +14
+  front           12 ->  11     +1
+  safety          17 ->  13     +4
+  garden          16 ->  14     +2
+  village         22 ->  20     +2
+  nearest          3 ->   3     +0
+  castle          20 ->  17     +3
+  light           10 ->   9     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  elevator         8 ->  27    -19
+  kitchen          7 ->  11     -4
+  bedroom         10 ->  30    -20
+  bathroom        14 ->  48    -34
+  car              9 ->  13     -4
+  exit             5 ->   5     +0
+  house            6 ->   6     +0
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  back             3 ->   3     +0
+  stairs           2 ->   2     +0
+  front            4 ->   4     +0
+  entrance        16 ->   8     +8
+  bed             12 ->   7     +5
+  edge            13 ->   9     +4
+  nearest         18 ->  12     +6
+  sound           83 ->  15    +68
+  main            11 ->  10     +1
+  center          31 ->  16    +15
+  staircase       15 ->  14     +1
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  house            3 ->   8     -5
+  front            2 ->   4     -2
+  kitchen         10 ->  19     -9
+  back             6 ->  10     -4
+  gate            16 ->  27    -11
+  stairs           7 ->   7     +0
+  bathroom        18 ->  28    -10
+  main            11 ->  17     -6
+  open            17 ->  21     -4
+
+HIGHER UNDER B
+  exit             5 ->   2     +3
+  door             1 ->   1     +0
+  entrance         4 ->   3     +1
+  nearest          9 ->   5     +4
+  elevator        20 ->   9    +11
+  woods           26 ->  13    +13
+  forest          47 ->  18    +29
+  beach           15 ->  12     +3
+  river           13 ->  11     +2
+  car              8 ->   6     +2
+  edge            23 ->  16     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  house            4 ->  13     -9
+  elevator        12 ->  20     -8
+  front            2 ->   6     -4
+  stairs           7 ->   9     -2
+  dance           14 ->  35    -21
+  bed             11 ->  14     -3
+  stage           16 ->  31    -15
+  exit             6 ->   8     -2
+  room            17 ->  24     -7
+  entrance        13 ->  16     -3
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  kitchen          3 ->   2     +1
+  car             10 ->   4     +6
+  window          19 ->  11     +8
+  water           18 ->  10     +8
+  back             5 ->   3     +2
+  living          15 ->  12     +3
+  bedroom          9 ->   5     +4
+  couch           21 ->  15     +6
+  bathroom         8 ->   7     +1
+  nearest         24 ->  17     +7
+  edge            25 ->  19     +6
+  other           20 ->  18     +2
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  water            9 ->  13     -4
+  front            4 ->   4     +0
+  stairs           5 ->   5     +0
+  house            7 ->   8     -1
+  river           16 ->  17     -1
+  back             2 ->   3     -1
+  edge            15 ->  15     +0
+  elevator        14 ->  14     +0
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  exit             3 ->   2     +1
+  bedroom          8 ->   7     +1
+  entrance        13 ->  11     +2
+  bathroom        12 ->  12     +0
+  kitchen          6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  rear            12 ->  15     -3
+  entrance        14 ->  17     -3
+  bed             10 ->  10     +0
+  other           18 ->  20     -2
+  steps           13 ->  13     +0
+  window          19 ->  21     -2
+  open            16 ->  16     +0
+  house            6 ->   7     -1
+
+HIGHER UNDER B
+  back             3 ->   3     +0
+  exit             8 ->   6     +2
+  stairs           2 ->   2     +0
+  front            5 ->   4     +1
+  living          17 ->  12     +5
+  nearest         22 ->  19     +3
+  elevator        11 ->  11     +0
+  edge            20 ->  18     +2
+  table            9 ->   9     +0
+  bathroom        15 ->  14     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  front            4 ->  19    -15
+  exit             6 ->  14     -8
+  back             5 ->   9     -4
+  elevator         7 ->  10     -3
+  water           14 ->  39    -25
+  living          10 ->  18     -8
+  open            19 ->  35    -16
+  bathroom        15 ->  23     -8
+  bed             12 ->  16     -4
+  car             11 ->  11     +0
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  house            8 ->   4     +4
+  stairs           2 ->   2     +0
+  kitchen          3 ->   3     +0
+  bedroom          9 ->   5     +4
+  entrance        13 ->   6     +7
+  dance           23 ->   7    +16
+  staircase       17 ->   8     +9
+  parking         30 ->  15    +15
+  nearest         18 ->  12     +6
+  elevators       16 ->  13     +3
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  front            2 ->   5     -3
+  house            6 ->   6     +0
+  kitchen          7 ->  10     -3
+  elevator         8 ->   9     -1
+  bedroom         12 ->  14     -2
+  nearest         15 ->  19     -4
+  car             11 ->  13     -2
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  entrance        10 ->   7     +3
+  edge            25 ->  15    +10
+  bed              9 ->   8     +1
+  center          14 ->  11     +3
+  exit             5 ->   4     +1
+  window          19 ->  17     +2
+  steps           18 ->  16     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  back             2 ->   3     -1
+  rear            13 ->  16     -3
+  car              8 ->   9     -1
+  edge            18 ->  19     -1
+  bathroom        12 ->  13     -1
+  house            5 ->   7     -2
+  open            17 ->  17     +0
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  kitchen          9 ->   8     +1
+  bedroom          7 ->   6     +1
+  exit             6 ->   5     +1
+  stairs           3 ->   2     +1
+  bed             11 ->  10     +1
+  living          15 ->  12     +3
+  staircase       14 ->  14     +0
+  table           20 ->  18     +2
+  front            4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  front            2 ->  10     -8
+  stairs           4 ->   4     +0
+  house            5 ->   7     -2
+  kitchen          6 ->   9     -3
+  dance            8 ->  17     -9
+  elevator         9 ->  23    -14
+  elevators       17 ->  53    -36
+  bar             12 ->  32    -20
+  water           13 ->  33    -20
+  main            14 ->  28    -14
+  open            18 ->  27     -9
+  car             15 ->  21     -6
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  back             3 ->   2     +1
+  entrance        11 ->   3     +8
+  bathroom        26 ->   8    +18
+  bed             10 ->   5     +5
+  couch           55 ->  11    +44
+  counter        126 ->  14   +112
+  small           27 ->  12    +15
+  edge            24 ->  13    +11
+  beach           39 ->  18    +21
+  woods           35 ->  16    +19
+  bedroom         16 ->  15     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  stairs           4 ->  12     -8
+  house            5 ->  15    -10
+  front            3 ->   4     -1
+  kitchen          6 ->   7     -1
+  table           11 ->  24    -13
+  main            16 ->  29    -13
+  open            15 ->  22     -7
+  bathroom        14 ->  20     -6
+
+HIGHER UNDER B
+  exit             7 ->   2     +5
+  door             1 ->   1     +0
+  dance           23 ->   8    +15
+  stage           37 ->   9    +28
+  bedroom          9 ->   5     +4
+  water           34 ->  18    +16
+  edge            27 ->  14    +13
+  window          24 ->  17     +7
+  elevator        10 ->  10     +0
+  entrance        13 ->  13     +0
+  living          12 ->  11     +1
+  bed              8 ->   6     +2
+  bar             17 ->  16     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  stairs           2 ->   8     -6
+  bed              8 ->  40    -32
+  bedroom          7 ->  22    -15
+  window           9 ->  13     -4
+  open            14 ->  36    -22
+  elevator        12 ->  14     -2
+
+HIGHER UNDER B
+  back             4 ->   2     +2
+  kitchen          3 ->   3     +0
+  house           11 ->   5     +6
+  library         62 ->   9    +53
+  light           57 ->  17    +40
+  street          41 ->  16    +25
+  front            6 ->   4     +2
+  stage           31 ->  15    +16
+  dining          18 ->  11     +7
+  room            19 ->  12     +7
+  hall            36 ->  19    +17
+  car             10 ->   7     +3
+  bathroom        24 ->  18     +6
+  entrance        13 ->  10     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  bed              4 ->   7     -3
+  stairs           2 ->   5     -3
+  bedroom          5 ->   6     -1
+  bathroom        10 ->  15     -5
+  living          14 ->  21     -7
+  exit             7 ->   9     -2
+
+HIGHER UNDER B
+  back             3 ->   2     +1
+  house            8 ->   4     +4
+  door             1 ->   1     +0
+  front            6 ->   3     +3
+  kitchen          9 ->   8     +1
+  center          18 ->  13     +5
+  window          33 ->  18    +15
+  car             13 ->  11     +2
+  entrance        15 ->  14     +1
+  edge            24 ->  17     +7
+  elevator        11 ->  10     +1
+  water           16 ->  16     +0
+  dance           12 ->  12     +0
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  stairs           4 ->   5     -1
+  back             3 ->   4     -1
+  main            10 ->  16     -6
+  lake            13 ->  24    -11
+  house            7 ->  10     -3
+  center          14 ->  17     -3
+  edge             9 ->  11     -2
+  gate            17 ->  19     -2
+  kitchen         11 ->  12     -1
+  front            2 ->   3     -1
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  exit             5 ->   2     +3
+  entrance         8 ->   6     +2
+  open            16 ->   9     +7
+  elevator        12 ->   8     +4
+  nearest         23 ->  14     +9
+  river           15 ->  13     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  stairs           3 ->  13    -10
+  kitchen          6 ->  21    -15
+  house            4 ->  11     -7
+  door             1 ->   1     +0
+  bed              7 ->  73    -66
+  table           16 -> 150   -134
+  front            2 ->   3     -1
+  living          15 ->  42    -27
+  steps           19 ->  39    -20
+  open            13 ->  19     -6
+  bedroom          8 ->  14     -6
+  elevator        17 ->  23     -6
+  back             5 ->   7     -2
+
+HIGHER UNDER B
+  car              9 ->   2     +7
+  exit            10 ->   4     +6
+  river           49 ->   8    +41
+  water           14 ->   5     +9
+  entrance        12 ->   6     +6
+  light           18 ->   9     +9
+  center          20 ->  10    +10
+  main            21 ->  15     +6
+  building        37 ->  17    +20
+  trees           36 ->  18    +18
+  nearest         29 ->  16    +13
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  front            2 ->   9     -7
+  stairs           5 ->  11     -6
+  bed             10 ->  25    -15
+  elevator        13 ->  32    -19
+  door             1 ->   1     +0
+  bedroom         17 ->  38    -21
+  back             3 ->   5     -2
+  center          12 ->  18     -6
+  room            16 ->  21     -5
+  main            11 ->  12     -1
+
+HIGHER UNDER B
+  exit             4 ->   2     +2
+  kitchen          7 ->   3     +4
+  edge            15 ->   4    +11
+  old             57 ->  10    +47
+  car              9 ->   6     +3
+  entrance         8 ->   8     +0
+  trees           52 ->  15    +37
+  stage           21 ->  13     +8
+  forest          37 ->  16    +21
+  window          14 ->  14     +0
+  open            23 ->  17     +6
+  building        22 ->  19     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  front            3 ->   6     -3
+  entrance         5 ->  13     -8
+  stairs          10 ->  20    -10
+  main            12 ->  26    -14
+  center          15 ->  45    -30
+  room             9 ->  15     -6
+  bathroom        13 ->  33    -20
+  large           18 ->  50    -32
+  gate            17 ->  28    -11
+  open            14 ->  19     -5
+  kitchen          6 ->  10     -4
+  window          16 ->  17     -1
+  back             7 ->   8     -1
+
+HIGHER UNDER B
+  door             1 ->   1     +0
+  nearest         11 ->   3     +8
+  car             26 ->   5    +21
+  old             44 ->   9    +35
+  exit             2 ->   2     +0
+  hospital        52 ->  12    +40
+  elevator        19 ->  11     +8
+  train           51 ->  16    +35
+  house            4 ->   4     +0
+  edge            20 ->  14     +6
+  small            8 ->   7     +1
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  front            4 ->  36    -32
+  stairs           2 ->  10     -8
+  bedroom          6 ->  12     -6
+  bed              8 ->  16     -8
+  house           10 ->  24    -14
+  kitchen          7 ->  11     -4
+  doorway         14 ->  76    -62
+  bar             16 ->  51    -35
+  dining          15 ->  43    -28
+  main            13 ->  34    -21
+
+HIGHER UNDER B
+  edge            35 ->   4    +31
+  open            17 ->   6    +11
+  exit             3 ->   2     +1
+  window          20 ->   7    +13
+  stage           27 ->   9    +18
+  spot           174 ->  17   +157
+  dance           31 ->  14    +17
+  back             5 ->   3     +2
+  beach           53 ->  19    +34
+  garden          39 ->  15    +24
+  nearest         37 ->  18    +19
+  entrance         9 ->   5     +4
+  living          11 ->   8     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  house            2 ->   3     -1
+  kitchen          3 ->  10     -7
+  front            4 ->   9     -5
+  dining          14 ->  28    -14
+  barn            18 ->  27     -9
+  entrance        16 ->  26    -10
+  open            11 ->  19     -8
+  stairs           5 ->   7     -2
+  back             6 ->   8     -2
+  window          13 ->  20     -7
+  elevator        15 ->  17     -2
+  edge            19 ->  22     -3
+
+HIGHER UNDER B
+  water            8 ->   2     +6
+  door             1 ->   1     +0
+  stage           17 ->   4    +13
+  trees           49 ->  12    +37
+  car              9 ->   5     +4
+  water's        133 ->  21   +112
+  bar             35 ->  13    +22
+  dance           53 ->  16    +37
+  light           20 ->  15     +5
+  woods           21 ->  18     +3
+  exit             7 ->   6     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  gate            11 -> 105    -94
+  front            3 ->   9     -6
+  entrance         8 ->  16     -8
+  kitchen          7 ->  14     -7
+  center          15 ->  38    -23
+  elevator        10 ->  17     -7
+  house            6 ->  11     -5
+  room            18 ->  33    -15
+  river           16 ->  20     -4
+  water           12 ->  15     -3
+
+HIGHER UNDER B
+  forest          29 ->   4    +25
+  exit             2 ->   2     +0
+  open            20 ->   5    +15
+  back             4 ->   3     +1
+  woods           19 ->   6    +13
+  small           42 ->  18    +24
+  edge            13 ->  10     +3
+  lake            17 ->  13     +4
+  car              9 ->   8     +1
+  window          14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  stairs           4 ->   5     -1
+  house            3 ->   4     -1
+  front            5 ->   6     -1
+  kitchen          6 ->  10     -4
+  bedroom          7 ->   8     -1
+  bed             11 ->  15     -4
+  bathroom        15 ->  17     -2
+  open            14 ->  16     -2
+  car              9 ->  11     -2
+
+HIGHER UNDER B
+  exit             8 ->   3     +5
+  door             1 ->   1     +0
+  water           12 ->   7     +5
+  back             2 ->   2     +0
+  staircase       16 ->  12     +4
+  edge            17 ->  13     +4
+  elevator        10 ->   9     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  door             1 ->   1     +0
+  house            2 ->   4     -2
+  window           6 ->  17    -11
+  back             4 ->  13     -9
+  table           11 ->  37    -26
+  gate            18 ->  38    -20
+  kitchen          8 ->  11     -3
+  water           16 ->  27    -11
+  entrance        10 ->  16     -6
+  open             9 ->  12     -3
+  light           12 ->  15     -3
+
+HIGHER UNDER B
+  exit             5 ->   2     +3
+  front            3 ->   3     +0
+  car             22 ->   6    +16
+  lake            36 ->  10    +26
+  woods           23 ->   9    +14
+  nearest         15 ->   7     +8
+  center          13 ->   8     +5
+  main            27 ->  18     +9
+  garden          28 ->  20     +8
+  river           14 ->  14     +0
+  edge             7 ->   5     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  stairs           4 ->  26    -22
+  house            6 ->  22    -16
+  back             5 ->  10     -5
+  kitchen          7 ->  13     -6
+  bathroom        14 -> 111    -97
+  bed             15 ->  94    -79
+  bedroom         13 ->  45    -32
+  bar             18 ->  47    -29
+  elevator        11 ->  23    -12
+  table           17 ->  34    -17
+  front            2 ->   4     -2
+
+HIGHER UNDER B
+  entrance         8 ->   3     +5
+  exit             3 ->   2     +1
+  door             1 ->   1     +0
+  group           36 ->   7    +29
+  sound           80 ->  14    +66
+  crowd           37 ->  11    +26
+  car              9 ->   5     +4
+  main            10 ->   6     +4
+  open            16 ->   9     +7
+  light           69 ->  20    +49
+  edge            12 ->   8     +4
+  large           21 ->  12     +9
+  nearest         32 ->  17    +15
+  gate            26 ->  15    +11
+  stage           31 ->  18    +13
+  center          22 ->  16     +6
+  other           20 ->  19     +1
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

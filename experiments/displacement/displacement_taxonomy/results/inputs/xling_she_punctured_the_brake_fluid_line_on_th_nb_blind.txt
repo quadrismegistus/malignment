@@ -1,0 +1,1432 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: She punctured the brake fluid line on the motorcycle and ___
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  then             1 ->  30    -29
+  was              3 ->  17    -14
+  used             5 ->  74    -69
+  had              6 ->  49    -43
+  the              4 ->   7     -3
+  put              7 ->  39    -32
+  let              9 ->  67    -58
+  drove            8 ->  29    -21
+  he              10 ->  25    -15
+  filled          11 ->  80    -69
+  got             13 ->  31    -18
+  took            14 ->  50    -36
+  ran             15 ->  41    -26
+  replaced        16 ->  88    -72
+  stole           17 -> 180   -163
+  left            18 -> 106    -88
+  tried           20 ->  87    -67
+  started         21 ->  81    -60
+  poured          23 -> 136   -113
+  we              24 ->  45    -21
+  blew            22 ->  23     -1
+  dumped          25 -> 159   -134
+  went            26 ->  60    -34
+
+HIGHER UNDER B
+  now             37 ->   1    +36
+  needs          176 ->   3   +173
+  it               2 ->   2     +0
+  is              60 ->   4    +56
+  should         175 ->   6   +169
+  I               12 ->   5     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  it               1 ->   1     +0
+  when             2 ->  17    -15
+  drained          6 ->  83    -77
+  spilled          5 ->  64    -59
+  got              7 ->  31    -24
+  filled           8 ->  57    -49
+  caused           3 ->   7     -4
+  left             9 ->  35    -26
+  drove           12 ->  47    -35
+  rode            13 ->  50    -37
+  let             11 ->  23    -12
+  noticed         15 ->  58    -43
+  forgot          17 ->  19     -2
+
+HIGHER UNDER B
+  had             18 ->   3    +15
+  was             43 ->   5    +38
+  the              4 ->   2     +2
+  now             10 ->   4     +6
+  I               51 ->  10    +41
+  didn't          16 ->   8     +8
+  then            22 ->   9    +13
+  it's            14 ->   6     +8
+  need            30 ->  12    +18
+  needed          19 ->  11     +8
+  we              96 ->  13    +83
+  he             114 ->  14   +100
+  ended           56 ->  15    +41
+  she             72 ->  16    +56
+  lost            35 ->  18    +17
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  then             2 ->   6     -4
+  left             5 ->  10     -5
+  she              7 ->  14     -7
+  he               9 ->  22    -13
+  was              6 ->   7     -1
+  we              10 ->  34    -24
+  tried           11 ->  23    -12
+  ran             13 ->  39    -26
+  put             12 ->  21     -9
+  drove           15 ->  43    -28
+  I                1 ->   4     -3
+  got             17 ->  19     -2
+
+HIGHER UNDER B
+  it               4 ->   1     +3
+  the              3 ->   2     +1
+  now             52 ->   3    +49
+  caused           8 ->   5     +3
+  my              31 ->   9    +22
+  had             14 ->   8     +6
+  when            19 ->  11     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  the              2 ->   2     +0
+  drove            4 ->  10     -6
+  left             3 ->   7     -4
+  was              5 ->   9     -4
+  told            11 ->  44    -33
+  blew            14 ->  37    -23
+  I               16 ->  34    -18
+  tried           13 ->  29    -16
+  put              9 ->  17     -8
+  had              8 ->  11     -3
+  started         12 ->  12     +0
+
+HIGHER UNDER B
+  then             1 ->   1     +0
+  drained         15 ->   3    +12
+  replaced        18 ->   4    +14
+  caused           7 ->   5     +2
+  pumped          56 ->  13    +43
+  removed         10 ->   8     +2
+  placed          28 ->  15    +13
+  it               6 ->   6     +0
+  took            17 ->  14     +3
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  the              1 ->   5     -4
+  was              3 ->  10     -7
+  she             14 ->  64    -50
+  drove           12 ->  45    -33
+  it               8 ->  26    -18
+  a               19 ->  59    -40
+  began           11 ->  17     -6
+  took            17 ->  31    -14
+  put             13 ->  18     -5
+  ran              7 ->  13     -6
+  blew             5 ->   8     -3
+  pulled          20 ->  29     -9
+  tried           16 ->  19     -3
+  got             18 ->  25     -7
+  caused          10 ->  12     -2
+
+HIGHER UNDER B
+  filled          35 ->   2    +33
+  used            15 ->   3    +12
+  let             42 ->   9    +33
+  drained         27 ->  11    +16
+  replaced       124 ->  14   +110
+  then             2 ->   1     +1
+  started          4 ->   4     +0
+  removed         41 ->  15    +26
+  immediately     45 ->  16    +29
+  waited          94 ->  21    +73
+  quickly        101 ->  24    +77
+  had              9 ->   7     +2
+  pumped          44 ->  27    +17
+  sprayed         33 ->  22    +11
+  poured          25 ->  20     +5
+  made            46 ->  28    +18
+  turned          30 ->  23     +7
+  left             6 ->   6     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  it               3 ->   9     -6
+  the              1 ->   1     +0
+  had              2 ->   3     -1
+  replaced         6 ->  17    -11
+  was              5 ->   6     -1
+  I                8 ->  18    -10
+  a               10 ->  31    -21
+  put             14 ->  44    -30
+  fixed           11 ->  24    -13
+  she             15 ->  32    -17
+  took            16 ->  28    -12
+  got              9 ->  11     -2
+  did             18 ->  25     -7
+
+HIGHER UNDER B
+  then             4 ->   2     +2
+  caused           7 ->   4     +3
+  now             13 ->   5     +8
+  broke           12 ->   7     +5
+  her             17 ->   8     +9
+  set             60 ->  15    +45
+  injected       116 ->  20    +96
+  suffered        82 ->  19    +63
+  subsequently   107 ->  21    +86
+  accidentally    34 ->  12    +22
+  flooded         37 ->  13    +24
+  started         22 ->  10    +12
+  spilled         55 ->  23    +32
+  damaged         36 ->  22    +14
+  is              24 ->  14    +10
+  tried           19 ->  16     +3
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  the              1 ->   6     -5
+  had              4 ->  29    -25
+  was              5 ->  23    -18
+  it               2 ->   2     +0
+  I                7 ->  31    -24
+  that            10 ->  52    -42
+  she             17 -> 129   -112
+  got             12 ->  34    -22
+  put              8 ->  19    -11
+  took            15 ->  26    -11
+  used            13 ->  21     -8
+  now             16 ->  22     -6
+  made            14 ->  16     -2
+
+HIGHER UNDER B
+  drained         40 ->   3    +37
+  then             3 ->   1     +2
+  filled          24 ->   7    +17
+  replaced        11 ->   4     +7
+  poured          18 ->   8    +10
+  stole           47 ->   9    +38
+  let             29 ->  10    +19
+  watched        125 ->  13   +112
+  set             78 ->  14    +64
+  caused           6 ->   5     +1
+  forced          54 ->  15    +39
+  steered        167 ->  20   +147
+  fixed           56 ->  18    +38
+  left            20 ->  12     +8
+  added           31 ->  17    +14
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  drove            3 ->   8     -5
+  poured           4 ->  10     -6
+  put              8 ->  24    -16
+  used            19 ->  65    -46
+  stole           10 ->  22    -12
+  told            17 ->  33    -16
+  filled          27 ->  89    -62
+  then             1 ->   2     -1
+  took            13 ->  20     -7
+  replaced        12 ->  19     -7
+  dumped          20 ->  28     -8
+  said            15 ->  18     -3
+  started         25 ->  35    -10
+  ran             24 ->  30     -6
+  let             16 ->  16     +0
+  went            26 ->  31     -5
+  left             5 ->   6     -1
+  the              2 ->   3     -1
+  I                9 ->  12     -3
+
+HIGHER UNDER B
+  it               6 ->   1     +5
+  caused          29 ->   5    +24
+  rode            11 ->   4     +7
+  watched         32 ->  11    +21
+  got             22 ->  13     +9
+  was             14 ->   9     +5
+  parked          54 ->  23    +31
+  disabled        45 ->  17    +28
+  drained          7 ->   7     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  the              2 ->   4     -2
+  it               1 ->   2     -1
+  she             12 ->  25    -13
+  he               5 ->   7     -2
+  slashed         20 -> 123   -103
+  I               10 ->  20    -10
+  tried            8 ->  16     -8
+  her             19 ->  50    -31
+  cut             11 ->  18     -7
+  drained         17 ->  26     -9
+  when            22 ->  45    -23
+  got             21 ->  27     -6
+  put              7 ->   9     -2
+  now              9 ->  10     -1
+  took            16 ->  17     -1
+
+HIGHER UNDER B
+  then             3 ->   1     +2
+  watched         51 ->   6    +45
+  waited          69 ->  14    +55
+  left            14 ->   8     +6
+  caused           6 ->   5     +1
+  also            26 ->  12    +14
+  was              4 ->   3     +1
+  made            24 ->  15     +9
+  hid             13 ->  11     +2
+  had             15 ->  13     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  it               1 ->   2     -1
+  the              2 ->   3     -1
+  he               8 ->  11     -3
+  we              10 ->  22    -12
+  I                3 ->   7     -4
+  killed          17 ->  52    -35
+  when            11 ->  29    -18
+  lost            16 ->  41    -25
+  she             13 ->  18     -5
+  that            12 ->  17     -5
+  then             4 ->   6     -2
+  left            14 ->  15     -1
+
+HIGHER UNDER B
+  caused           5 ->   1     +4
+  now              7 ->   5     +2
+  had              9 ->   8     +1
+  damaged         46 ->   9    +37
+  put             25 ->  10    +15
+  is              23 ->  12    +11
+  also            30 ->  14    +16
+  was              6 ->   4     +2
+  rode            33 ->  16    +17
+  got             15 ->  13     +2
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  now              2 ->   7     -5
+  the              1 ->   2     -1
+  she              6 ->  81    -75
+  her              9 -> 168   -159
+  was              4 ->   4     +0
+  had              5 ->   5     +0
+  lost            10 ->  34    -24
+  we              12 -> 101    -89
+  they            13 ->  64    -51
+  needed          15 ->  46    -31
+  I                8 ->   8     +0
+  a               17 ->  33    -16
+
+HIGHER UNDER B
+  fixed          123 ->   6   +117
+  it               3 ->   1     +2
+  found           88 ->  11    +77
+  is              16 ->   9     +7
+  removed        146 ->  20   +126
+  filled          59 ->  17    +42
+  replaced       109 ->  21    +88
+  made            37 ->  14    +23
+  has             27 ->  12    +15
+  blew            40 ->  16    +24
+  then             7 ->   3     +4
+  did             32 ->  15    +17
+  tried           47 ->  19    +28
+  put             34 ->  18    +16
+  got             11 ->  10     +1
+  caused          14 ->  13     +1
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  bled             7 -> 126   -119
+  noticed          9 ->  53    -44
+  was              6 ->  28    -22
+  had             13 ->  42    -29
+  drove           17 -> 152   -135
+  drained         15 ->  81    -66
+  attempted       12 ->  30    -18
+  discovered       2 ->   7     -5
+  removed         18 ->  74    -56
+  used            14 ->  38    -24
+  she             21 ->  37    -16
+  started         16 ->  21     -5
+
+HIGHER UNDER B
+  cut            128 ->   6   +122
+  caused           5 ->   1     +4
+  let             10 ->   3     +7
+  released        27 ->   8    +19
+  exposed        104 ->  15    +89
+  forced          31 ->  11    +20
+  spilled         47 ->  14    +33
+  it               4 ->   4     +0
+  damaged         77 ->  19    +58
+  accidentally    25 ->  13    +12
+  immediately     24 ->  12    +12
+  is              48 ->  18    +30
+  punctured       40 ->  20    +20
+  observed        20 ->  16     +4
+  left            19 ->  17     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  then             6 ->  10     -4
+  fell            13 ->  71    -58
+  it               2 ->   2     +0
+  was              3 ->   4     -1
+  he              19 ->  57    -38
+  we              11 ->  17     -6
+  ended           16 ->  27    -11
+  she              9 ->  11     -2
+  that            14 ->  23     -9
+  killed          20 ->  26     -6
+  I                5 ->   6     -1
+  her             17 ->  21     -4
+  ran             15 ->  20     -5
+  drove           18 ->  22     -4
+  lost             7 ->   9     -2
+
+HIGHER UNDER B
+  had              4 ->   3     +1
+  the              1 ->   1     +0
+  managed         91 ->  13    +78
+  caused           8 ->   5     +3
+  found           64 ->  16    +48
+  leaked          46 ->  14    +32
+  spilled         32 ->  12    +20
+  now             10 ->   7     +3
+  needed          57 ->  18    +39
+  got             12 ->   8     +4
+  tried           35 ->  19    +16
+  started         22 ->  15     +7
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  then             1 ->   5     -4
+  was              4 ->   6     -2
+  started          7 ->  46    -39
+  replaced         6 ->  15     -9
+  drove            8 ->  37    -29
+  ran              9 ->  48    -39
+  used            11 ->  70    -59
+  removed         15 -> 124   -109
+  put             12 ->  50    -38
+  rode            10 ->  32    -22
+  cut             21 -> 148   -127
+  got             13 ->  35    -22
+  poured          19 ->  87    -68
+  took            22 ->  65    -43
+  when            17 ->  41    -24
+  stopped         24 ->  79    -55
+  made            18 ->  26     -8
+  drained         25 ->  33     -8
+
+HIGHER UNDER B
+  now             65 ->   1    +64
+  caused           5 ->   2     +3
+  is             121 ->   9   +112
+  let             23 ->   8    +15
+  had             14 ->   7     +7
+  lost           109 ->  11    +98
+  flooded        100 ->  12    +88
+  immediately     59 ->  13    +46
+  I               20 ->  10    +10
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  the              2 ->   6     -4
+  was              5 ->  20    -15
+  let              7 ->  30    -23
+  got              8 ->  28    -20
+  put              9 ->  34    -25
+  when            10 ->  35    -25
+  drove           14 ->  38    -24
+  left            16 ->  31    -15
+  took            12 ->  17     -5
+  poured          20 ->  36    -16
+  used            24 ->  39    -15
+  drained          6 ->   7     -1
+  waited          13 ->  15     -2
+  made            22 ->  29     -7
+  started         21 ->  22     -1
+
+HIGHER UNDER B
+  caused           3 ->   1     +2
+  now             40 ->   4    +36
+  sabotaged       45 ->  10    +35
+  damaged         66 ->  12    +54
+  stole           15 ->   5    +10
+  watched         32 ->  13    +19
+  rode            19 ->   9    +10
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  the              2 ->   8     -6
+  was              5 ->  29    -24
+  made             6 ->  26    -20
+  left            10 ->  82    -72
+  used            14 -> 101    -87
+  said            13 ->  44    -31
+  replaced        15 ->  98    -83
+  A               18 -> 186   -168
+  claimed         19 -> 152   -133
+  put             21 ->  96    -75
+  drove            7 ->  23    -16
+  took            22 ->  69    -47
+  let             16 ->  28    -12
+  filled           9 ->  19    -10
+  caused           3 ->   4     -1
+  I               20 ->  27     -7
+  got             12 ->  15     -3
+  had              8 ->  14     -6
+
+HIGHER UNDER B
+  now             17 ->   3    +14
+  it               4 ->   1     +3
+  what            68 ->   5    +63
+  didn't          61 ->   7    +54
+  she             11 ->   6     +5
+  killed          53 ->   9    +44
+  spilled         58 ->  10    +48
+  it's            96 ->  12    +84
+  accidentally    90 ->  13    +77
+  has             69 ->  11    +58
+  almost          88 ->  17    +71
+  broke           71 ->  18    +53
+  this            62 ->  20    +42
+  is              30 ->  16    +14
+  did             24 ->  21     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  caused           4 ->   6     -2
+  then             3 ->   4     -1
+  was              5 ->  12     -7
+  left             7 ->  48    -41
+  got              8 ->  41    -33
+  made             6 ->  19    -13
+  killed          12 ->  60    -48
+  put             16 ->  84    -68
+  drove           14 ->  43    -29
+  I               13 ->  32    -19
+  started         15 ->  37    -22
+  the              1 ->   3     -2
+
+HIGHER UNDER B
+  it               2 ->   1     +1
+  let             11 ->   2     +9
+  when            10 ->   5     +5
+  afterwards     169 ->   8   +161
+  escaped         41 ->   9    +32
+  had              9 ->   7     +2
+  we              32 ->  10    +22
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  it               1 ->   2     -1
+  the              2 ->   4     -2
+  was              5 ->  10     -5
+  I                6 ->   9     -3
+  had              4 ->   5     -1
+  she              9 ->  19    -10
+  when            15 ->  31    -16
+  needed          10 ->  16     -6
+  got             11 ->  14     -3
+
+HIGHER UNDER B
+  caused           7 ->   3     +4
+  now              3 ->   1     +2
+  didn't          52 ->  12    +40
+  needs           22 ->  11    +11
+  it's            14 ->   8     +6
+  accidentally    42 ->  13    +29
+  is              12 ->   7     +5
+  then             8 ->   6     +2
+  spilled         20 ->  18     +2
+  has             17 ->  17     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  then             1 ->  24    -23
+  the              2 ->  54    -52
+  was              3 ->  47    -44
+  it               4 ->  93    -89
+  put              8 ->  62    -54
+  left             6 ->  43    -37
+  had             10 -> 122   -112
+  took            11 -> 143   -132
+  drove            5 ->  25    -20
+  used             7 ->  23    -16
+  poured          13 ->  79    -66
+  ran             14 ->  44    -30
+  started         16 -> 195   -179
+  got             12 ->  39    -27
+  sprayed         18 ->  76    -58
+  told            22 -> 152   -130
+  filled          19 ->  73    -54
+  made            20 ->  80    -60
+  let             15 ->  17     -2
+
+HIGHER UNDER B
+  stood          176 ->   1   +175
+  dragged        104 ->   2   +102
+  drained          9 ->   3     +6
+  placed          50 ->   4    +46
+  stands         208 ->   5   +203
+  deflated       171 ->   6   +165
+  secured        126 ->   7   +119
+  contaminated   197 ->   8   +189
+  pointed        159 ->   9   +150
+  rinsed         183 ->  10   +173
+  disconnected    74 ->  11    +63
+  connected       90 ->  12    +78
+  cleaned        153 ->  14   +139
+  submerged      192 ->  15   +177
+  removed         17 ->  13     +4
+  caused          21 ->  16     +5
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  it               2 ->   5     -3
+  was              3 ->   3     +0
+  caused           6 ->  13     -7
+  had              4 ->   4     +0
+  he               8 ->  22    -14
+  his             12 ->  30    -18
+  started         10 ->  14     -4
+  when            17 ->  31    -14
+  I               11 ->  18     -7
+  a                9 ->   9     +0
+  ran             13 ->  15     -2
+  drove           15 ->  19     -4
+
+HIGHER UNDER B
+  then             5 ->   2     +3
+  pulled          42 ->   8    +34
+  lost             7 ->   6     +1
+  immediately     40 ->  16    +24
+  spilled         36 ->  17    +19
+  got             16 ->   7     +9
+  let             23 ->  12    +11
+  began           20 ->  10    +10
+  left            14 ->  11     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  it               2 ->   3     -1
+  rode            19 ->  40    -21
+  let              6 ->  16    -10
+  got              5 ->  11     -6
+  that            21 ->  34    -13
+  now             13 ->  21     -8
+  filled          16 ->  22     -6
+  when            18 ->  24     -6
+  I               11 ->  14     -3
+  was              4 ->   5     -1
+  then             1 ->   1     +0
+  put             10 ->  13     -3
+  poured           8 ->   9     -1
+
+HIGHER UNDER B
+  had             12 ->   4     +8
+  spilled         14 ->   6     +8
+  caused           7 ->   7     +0
+  didn't          41 ->  18    +23
+  she              9 ->   8     +1
+  left            20 ->  10    +10
+  dumped          29 ->  20     +9
+  replaced        22 ->  15     +7
+  did             31 ->  23     +8
+  tried           24 ->  19     +5
+  drained         15 ->  12     +3
+  used            17 ->  17     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  the              4 ->  16    -12
+  then             1 ->   4     -3
+  drained         14 ->  46    -32
+  found            7 ->  17    -10
+  spilled         12 ->  38    -26
+  it               9 ->  13     -4
+  replaced        10 ->  15     -5
+  poured          23 ->  58    -35
+  filled          24 ->  55    -31
+  noticed         11 ->  14     -3
+  discovered      17 ->  23     -6
+  turned          25 ->  30     -5
+  started         20 ->  24     -4
+
+HIGHER UNDER B
+  drove           29 ->   7    +22
+  decided         15 ->   6     +9
+  had              3 ->   2     +1
+  was              5 ->   3     +2
+  couldn          16 ->   9     +7
+  lost            18 ->  10     +8
+  realized        19 ->  12     +7
+  continued       41 ->  26    +15
+  took            37 ->  20    +17
+  immediately     33 ->  19    +14
+  tried           43 ->  27    +16
+  caused           6 ->   5     +1
+  ran             31 ->  22     +9
+  stopped         22 ->  18     +4
+  left            13 ->  11     +2
+  set             34 ->  25     +9
+  now             36 ->  28     +8
+  got             32 ->  29     +3
+  needed           8 ->   8     +0
+  accidentally    21 ->  21     +0
+  used             2 ->   1     +1
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  he               6 ->  40    -34
+  ran             17 ->  71    -54
+  caused           5 ->   7     -2
+  she             20 ->  57    -37
+  that            19 ->  45    -26
+  they            16 ->  37    -21
+  watched         11 ->  30    -19
+  my              22 ->  51    -29
+  I                4 ->   6     -2
+  took            14 ->  26    -12
+  left            15 ->  28    -13
+  made            13 ->  19     -6
+  when            10 ->  14     -4
+
+HIGHER UNDER B
+  then             2 ->   2     +0
+  was              7 ->   4     +3
+  had              8 ->   5     +3
+  the              1 ->   1     +0
+  drained         48 ->  10    +38
+  it               3 ->   3     +0
+  accidentally   173 ->  17   +156
+  bled            92 ->  15    +77
+  sprayed         12 ->   8     +4
+  began           41 ->  13    +28
+  let             18 ->  11     +7
+  replaced        75 ->  16    +59
+  started         21 ->  12     +9
+  we               9 ->   9     +0
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  the              2 ->   8     -6
+  was              3 ->   9     -6
+  drove            4 ->  22    -18
+  then             1 ->   2     -1
+  took             5 ->  11     -6
+  caused          16 ->  89    -73
+  it               6 ->  16    -10
+  left            15 ->  63    -48
+  she             20 -> 132   -112
+  had              7 ->  14     -7
+  tried           11 ->  18     -7
+  went            19 ->  53    -34
+  also            21 ->  56    -35
+  got             14 ->  26    -12
+  cut             24 ->  54    -30
+  put              9 ->  13     -4
+
+HIGHER UNDER B
+  replaced         8 ->   1     +7
+  found           10 ->   3     +7
+  checked         57 ->   5    +52
+  filled          32 ->   6    +26
+  used            12 ->   4     +8
+  drained         56 ->  12    +44
+  discovered      40 ->  17    +23
+  removed         13 ->   7     +6
+  pulled          17 ->  10     +7
+  pumped          36 ->  21    +15
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  the              2 ->   4     -2
+  was              4 ->   7     -3
+  she              8 ->  10     -2
+  he              14 ->  52    -38
+  that            12 ->  24    -12
+  when            11 ->  18     -7
+  then             6 ->   8     -2
+  lost            16 ->  21     -5
+  got             10 ->  11     -1
+
+HIGHER UNDER B
+  I                5 ->   3     +2
+  had              3 ->   2     +1
+  it               1 ->   1     +0
+  we               9 ->   5     +4
+  now             13 ->   9     +4
+  replaced        62 ->  12    +50
+  has             37 ->  13    +24
+  caused           7 ->   6     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  filled          14 ->  15     -1
+  sprayed          8 ->  11     -3
+  she              9 ->  10     -1
+  when            19 ->  23     -4
+  is              20 ->  22     -2
+  all             18 ->  19     -1
+  got             10 ->  12     -2
+  bled            16 ->  16     +0
+  caused          11 ->  13     -2
+
+HIGHER UNDER B
+  had              4 ->   3     +1
+  spilled         12 ->   8     +4
+  I               13 ->   9     +4
+  it               2 ->   1     +1
+  then             7 ->   7     +0
+  was              6 ->   6     +0
+  lost             5 ->   5     +0
+  there           17 ->  17     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  the              2 ->   3     -1
+  threw            7 ->  12     -5
+  drove            4 ->   4     +0
+  ran             23 ->  28     -5
+  left            11 ->  14     -3
+  pulled          17 ->  20     -3
+  got             18 ->  19     -1
+  was              6 ->   7     -1
+  tried           22 ->  23     -1
+  took            12 ->  13     -1
+  it               5 ->   5     +0
+  put              9 ->   9     +0
+  turned          14 ->  15     -1
+  removed         19 ->  21     -2
+
+HIGHER UNDER B
+  poured           3 ->   2     +1
+  then             1 ->   1     +0
+  filled          21 ->  16     +5
+  drained         24 ->  22     +2
+  started          8 ->   6     +2
+  watched         20 ->  18     +2
+  sprayed         13 ->  10     +3
+  began           15 ->  11     +4
+  used            10 ->   8     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  was              2 ->  12    -10
+  it               4 ->  10     -6
+  had              5 ->  52    -47
+  now              6 ->  81    -75
+  I                9 ->  65    -56
+  got             12 -> 111    -99
+  she              8 ->  28    -20
+  is              13 ->  98    -85
+  the              3 ->   3     +0
+  drove            7 ->  17    -10
+  we              14 ->  89    -75
+  lost            17 -> 152   -135
+  when            16 ->  88    -72
+  her             15 ->  51    -36
+
+HIGHER UNDER B
+  caused          11 ->   2     +9
+  then             1 ->   1     +0
+  drained         35 ->   4    +31
+  deliberately   152 ->   7   +145
+  dumped          32 ->   5    +27
+  poured          54 ->   8    +46
+  smeared        159 ->  13   +146
+  cut             48 ->   9    +39
+  sprayed         46 ->  11    +35
+  left            10 ->   6     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  drove            8 ->  25    -17
+  I                4 ->   6     -2
+  she             10 ->  21    -11
+  was              7 ->   9     -2
+  poured          16 ->  31    -15
+  that             9 ->  17     -8
+  threw           20 ->  36    -16
+  put             15 ->  20     -5
+  got             18 ->  19     -1
+  we              19 ->  29    -10
+
+HIGHER UNDER B
+  then             3 ->   1     +2
+  left             6 ->   5     +1
+  when            17 ->   7    +10
+  watched         33 ->  10    +23
+  as              37 ->  16    +21
+  caused           5 ->   4     +1
+  let             21 ->  14     +7
+  also            25 ->  15    +10
+  took            11 ->   8     +3
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  then             2 ->   3     -1
+  drove            7 ->   7     +0
+  ran             12 ->  20     -8
+  took            16 ->  26    -10
+  crashed         11 ->  14     -3
+  started          8 ->   8     +0
+  that            15 ->  16     -1
+
+HIGHER UNDER B
+  caused           3 ->   2     +1
+  was              6 ->   4     +2
+  flooded         17 ->  11     +6
+  also            19 ->  15     +4
+  the              1 ->   1     +0
+  I               25 ->  17     +8
+  had              9 ->   9     +0
+  she             14 ->  12     +2
+  put             10 ->  10     +0
+  said            13 ->  13     +0
+  killed          22 ->  18     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  caused           3 ->  12     -9
+  then             4 ->   6     -2
+  I                6 ->   8     -2
+  killed           7 ->  32    -25
+  left             9 ->  43    -34
+  we               8 ->  14     -6
+  when            13 ->  20     -7
+
+HIGHER UNDER B
+  had             10 ->   4     +6
+  it               1 ->   1     +0
+  was              5 ->   3     +2
+  the              2 ->   2     +0
+  died            82 ->  10    +72
+  lost            14 ->   7     +7
+  is              51 ->   9    +42
+  now             11 ->   5     +6
+  her             38 ->  15    +23
+  got             21 ->  13     +8
+  started         23 ->  16     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  the              2 ->   6     -4
+  it               3 ->  17    -14
+  he              13 ->  78    -65
+  I               23 -> 138   -115
+  dumped          12 ->  43    -31
+  watched          8 ->  19    -11
+  put             11 ->  25    -14
+  pushed          15 ->  35    -20
+  ran             16 ->  32    -16
+  cut             19 ->  37    -18
+  went            28 ->  56    -28
+  then             1 ->   1     +0
+  got             27 ->  47    -20
+  drove            7 ->  14     -7
+  walked          24 ->  33     -9
+  was             18 ->  23     -5
+  took            20 ->  26     -6
+  rode             6 ->  11     -5
+
+HIGHER UNDER B
+  caused          36 ->   2    +34
+  used            21 ->   4    +17
+  added           31 ->   9    +22
+  poured          10 ->   7     +3
+  drained         25 ->   8    +17
+  filled          22 ->  10    +12
+  released        29 ->  13    +16
+  let              5 ->   3     +2
+  proceeded       87 ->  18    +69
+  replaced        40 ->  20    +20
+  removed         45 ->  24    +21
+  sprayed         37 ->  22    +15
+  set             17 ->  15     +2
+  made            26 ->  21     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  lost             5 ->   8     -3
+  caused           3 ->   3     +0
+  spilled          9 ->  43    -34
+  was              4 ->   5     -1
+  ran             14 ->  56    -42
+  her             11 ->  24    -13
+  bled            12 ->  19     -7
+  drained         15 ->  52    -37
+  then             6 ->  10     -4
+  leaked          16 ->  16     +0
+  had              8 ->   9     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  she             10 ->   4     +6
+  I               13 ->   6     +7
+  there           17 ->  11     +6
+  this            27 ->  12    +15
+  immediately     47 ->  15    +32
+  it               2 ->   2     +0
+  when            22 ->  13     +9
+  now              7 ->   7     +0
+  as              28 ->  14    +14
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  then             1 ->   2     -1
+  the              2 ->   3     -1
+  we              12 ->  32    -20
+  sent            18 ->  37    -19
+  caused          19 ->  26     -7
+  made            17 ->  23     -6
+  told            24 ->  28     -4
+  took            15 ->  21     -6
+  filled          16 ->  19     -3
+  said            23 ->  25     -2
+
+HIGHER UNDER B
+  I                9 ->   5     +4
+  was             14 ->   8     +6
+  now             38 ->  17    +21
+  waited          21 ->  13     +8
+  got             33 ->  18    +15
+  he              13 ->  11     +2
+  she             22 ->  15     +7
+  left             4 ->   4     +0
+  let              7 ->   7     +0
+  watched         20 ->  16     +4
+  rode            27 ->  22     +5
+  threw           25 ->  20     +5
+  poured          26 ->  24     +2
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  we               6 ->  11     -5
+  was              4 ->   5     -1
+  I                5 ->   7     -2
+  that            10 ->  32    -22
+  got              9 ->  12     -3
+  couldn't        11 ->  17     -6
+  then             7 ->   9     -2
+  she             13 ->  15     -2
+
+HIGHER UNDER B
+  caused          14 ->   6     +8
+  now              8 ->   4     +4
+  it               2 ->   2     +0
+  the              1 ->   1     +0
+  spilled         47 ->  10    +37
+  had              3 ->   3     +0
+  lost            12 ->   8     +4
+  is              24 ->  13    +11
+  has             25 ->  16     +9
+  bled            17 ->  14     +3
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  then             1 ->   3     -2
+  left             3 ->  18    -15
+  set              5 ->  26    -21
+  drove            6 ->  41    -35
+  threw            9 ->  61    -52
+  stole            4 ->  11     -7
+  put             10 ->  31    -21
+  started         26 -> 105    -79
+  she             18 ->  48    -30
+  the              2 ->   5     -3
+  had             21 ->  50    -29
+  placed          16 ->  38    -22
+  also            24 ->  39    -15
+  told            22 ->  36    -14
+  poured          15 ->  28    -13
+  made            13 ->  19     -6
+  removed         25 ->  32     -7
+  I               20 ->  24     -4
+  was             14 ->  20     -6
+  got             19 ->  21     -2
+  cut             17 ->  17     +0
+  used            11 ->  13     -2
+
+HIGHER UNDER B
+  replaced        38 ->   1    +37
+  caused           7 ->   2     +5
+  dumped          31 ->   7    +24
+  it              12 ->   4     +8
+  killed          29 ->   8    +21
+  attacked       133 ->  10   +123
+  sent            54 ->   9    +45
+  drank          141 ->  12   +129
+  spilled        112 ->  15    +97
+  took             8 ->   6     +2
+  that            23 ->  14     +9
+  released        47 ->  22    +25
+  ran             27 ->  16    +11
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  the              1 ->  29    -28
+  it               2 ->  83    -81
+  left             4 -> 165   -161
+  then             5 -> 140   -135
+  was              6 -> 128   -122
+  caused           7 -> 160   -153
+  threw            8 -> 191   -183
+  had              9 -> 142   -133
+  got             10 -> 171   -161
+  rode            11 -> 211   -200
+  ran             12 -> 192   -180
+  went            13 -> 159   -146
+  now             15 -> 145   -130
+  put             16 -> 152   -136
+  drove           17 -> 175   -158
+  he              14 -> 104    -90
+  killed          19 -> 193   -174
+  cut             20 -> 183   -163
+  took            21 -> 163   -142
+  that            18 -> 112    -94
+  dumped          23 -> 240   -217
+  fell            24 -> 199   -175
+  she             22 ->  61    -39
+  I                3 ->   6     -3
+
+HIGHER UNDER B
+  The            160 ->   1   +159
+  This           178 ->   2   +176
+  It             161 ->   3   +158
+  If             198 ->   4   +194
+  What           204 ->   5   +199
+  He             162 ->   7   +155
+  A              163 ->   8   +155
+  She            164 ->   9   +155
+  That           183 ->  10   +173
+  How            219 ->  11   +208
+  It's           199 ->  12   +187
+  When           174 ->  13   +161
+  There          191 ->  14   +177
+  However        256 ->  15   +241
+  As             201 ->  16   +185
+  You            176 ->  17   +159
+  In             188 ->  18   +170
+  Butch          208 ->  19   +189
+  So             206 ->  20   +186
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  was              6 ->   7     -1
+  had              5 ->   5     +0
+  has             15 ->  56    -41
+  then             4 ->   4     +0
+  she             13 ->  26    -13
+  got             12 ->  19     -7
+  I               10 ->  16     -6
+  didn't          17 ->  24     -7
+  is               7 ->  12     -5
+
+HIGHER UNDER B
+  now              3 ->   3     +0
+  it               2 ->   2     +0
+  the              1 ->   1     +0
+  drove           11 ->   6     +5
+  realized        64 ->  14    +50
+  started         14 ->   9     +5
+  caused          16 ->  11     +5
+  immediately     21 ->  13     +8
+  spilled         26 ->  17     +9
+  replaced         8 ->   8     +0
+  filled          18 ->  15     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  then             3 ->   5     -2
+  the              2 ->   4     -2
+  rode            16 ->  88    -72
+  drove            6 ->  16    -10
+  when            17 ->  32    -15
+  took            14 ->  29    -15
+  got             12 ->  21     -9
+  tried           13 ->  22     -9
+  put             11 ->  18     -7
+  left             9 ->  15     -6
+  dumped          18 ->  26     -8
+  it               1 ->   3     -2
+  was              4 ->   7     -3
+  spilled         10 ->  10     +0
+
+HIGHER UNDER B
+  caused           5 ->   1     +4
+  had              8 ->   2     +6
+  replaced        70 ->   6    +64
+  couldn          44 ->   9    +35
+  didn            32 ->  11    +21
+  needed          67 ->  14    +53
+  could           81 ->  17    +64
+  now             22 ->  13     +9
+  filled          15 ->  12     +3
+  we              20 ->  19     +1
+  ruined          29 ->  20     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  it               1 ->   6     -5
+  had              4 ->   7     -3
+  lost             6 ->  12     -6
+  fell            16 ->  85    -69
+  was              3 ->   3     +0
+  we               9 ->  14     -5
+  got             12 ->  24    -12
+  I                8 ->   9     -1
+  crashed         19 ->  32    -13
+  she             11 ->  17     -6
+  her             17 ->  23     -6
+  rode            20 ->  30    -10
+  went            14 ->  19     -5
+  he              18 ->  20     -2
+  the              2 ->   2     +0
+  now             15 ->  15     +0
+
+HIGHER UNDER B
+  drove            7 ->   1     +6
+  left            13 ->   5     +8
+  fled           109 ->  11    +98
+  caused          10 ->   8     +2
+  then             5 ->   4     +1
+  is              22 ->  10    +12
+  used            41 ->  16    +25
+  took            23 ->  13    +10
+  ran             21 ->  18     +3
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  it               3 ->   6     -3
+  the              2 ->   5     -3
+  I               10 -> 127   -117
+  had              6 ->  17    -11
+  she             11 ->  40    -29
+  sprayed         14 ->  69    -55
+  bled            15 ->  90    -75
+  got             13 ->  29    -16
+  used            17 ->  86    -69
+  he              20 ->  87    -67
+  killed          19 ->  60    -41
+  made             7 ->  11     -4
+  put             21 ->  43    -22
+  drove           12 ->  15     -3
+  stole            8 ->   9     -1
+
+HIGHER UNDER B
+  caused           1 ->   1     +0
+  left             9 ->   4     +5
+  was              4 ->   2     +2
+  fled            36 ->   7    +29
+  watched        122 ->  10   +112
+  then             5 ->   3     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  then             1 ->   1     +0
+  drove            5 ->   8     -3
+  stole           13 ->  23    -10
+  filled          14 ->  21     -7
+  took             6 ->   9     -3
+  ran             10 ->  14     -4
+  drained         19 ->  28     -9
+  flooded         20 ->  26     -6
+  started         11 ->  13     -2
+  tried            9 ->  12     -3
+  put              8 ->  11     -3
+
+HIGHER UNDER B
+  it               3 ->   2     +1
+  was              4 ->   4     +0
+  I               16 ->   6    +10
+  had             15 ->   7     +8
+  caused           7 ->   5     +2
+  she             26 ->  16    +10
+  we              21 ->  17     +4
+  let             25 ->  19     +6
+  made            18 ->  18     +0
+  left            12 ->  10     +2
+  punctured       23 ->  20     +3
+  got             17 ->  15     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  then             3 ->   9     -6
+  drove            6 ->  37    -31
+  ran              5 ->  19    -14
+  he              12 ->  51    -39
+  pumped          15 ->  58    -43
+  replaced        11 ->  34    -23
+  let              9 ->  21    -12
+  left            17 ->  45    -28
+  filled           8 ->  15     -7
+  when            14 ->  23     -9
+  she             18 ->  26     -8
+  got             13 ->  14     -1
+  put             10 ->  10     +0
+
+HIGHER UNDER B
+  it               2 ->   1     +1
+  bled            31 ->   5    +26
+  was              4 ->   3     +1
+  had              7 ->   4     +3
+  rode            28 ->   6    +22
+  spilled         29 ->   8    +21
+  caused          16 ->   7     +9
+  drained         33 ->  11    +22
+  now             32 ->  12    +20
+  fell            47 ->  18    +29
+  I               26 ->  13    +13
+  took            25 ->  16     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  had              5 ->  32    -27
+  was              2 ->   9     -7
+  then             7 ->  19    -12
+  she              6 ->  12     -6
+  got             10 ->  20    -10
+  it               3 ->   5     -2
+  drove           13 ->  57    -44
+  left            14 ->  55    -41
+  broke           15 ->  34    -19
+  we              12 ->  14     -2
+  ended           17 ->  22     -5
+  put             19 ->  27     -8
+  lost            18 ->  21     -3
+
+HIGHER UNDER B
+  caused           4 ->   1     +3
+  now              9 ->   3     +6
+  her             11 ->   4     +7
+  punctured       35 ->   7    +28
+  damaged         20 ->   8    +12
+  as              45 ->  10    +35
+  blew            25 ->  13    +12
+  when            16 ->  11     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

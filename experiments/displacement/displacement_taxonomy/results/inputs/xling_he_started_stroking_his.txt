@@ -1,4 +1,4 @@
-Below are 29 independent measurements of how one sentence gets
+Below are 50 independent measurements of how one sentence gets
 completed.
 
 Each measurement compares two versions of the same language model. Column A is
@@ -36,6 +36,27 @@ HIGHER UNDER B
   own              7 ->   6     +1
   cat            114 ->   9   +105
   hands           13 ->   7     +6
+
+=== MODEL AquilaChat2-7B ===
+HIGHER UNDER A
+  beard            1 ->  16    -15
+  wife's           2 ->  10     -8
+  mustache         5 ->  35    -30
+  hair             4 ->  12     -8
+  sister's         7 ->  66    -59
+  own              3 ->   6     -3
+
+HIGHER UNDER B
+  cock            50 ->   1    +49
+  penis           40 ->   2    +38
+  dick            52 ->   3    +49
+  shaft           47 ->   4    +43
+  crotch          25 ->   5    +20
+  big             30 ->   8    +22
+  member          48 ->   9    +39
+  erection        56 ->  11    +45
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
 
 === MODEL Baichuan2-7B-Chat ===
 HIGHER UNDER A
@@ -83,6 +104,134 @@ HIGHER UNDER B
   beard           21 ->   6    +15
   face             6 ->   3     +3
   arm             23 ->   9    +14
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL CroissantLLMChat-v0.1 ===
+HIGHER UNDER A
+  penis            1 ->  16    -15
+  cock             2 ->  34    -32
+  dick            10 ->  37    -27
+  own              9 ->  14     -5
+  body            16 ->  71    -55
+  back            14 ->  43    -29
+  hand            15 ->  46    -31
+  chest            8 ->   8     +0
+  nose            13 ->  21     -8
+  dog             18 ->  82    -64
+  belly           12 ->  15     -3
+  hair             3 ->   3     +0
+
+HIGHER UNDER B
+  chin             5 ->   1     +4
+  beard            4 ->   2     +2
+  bald            25 ->   6    +19
+  mustache        60 ->  10    +50
+  long             7 ->   5     +2
+  thick           17 ->   9     +8
+  head             6 ->   4     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Falcon-H1-1.5B-Instruct ===
+HIGHER UNDER A
+  cock             2 ->   4     -2
+  penis            1 ->   3     -2
+  dick             9 ->  31    -22
+  crotch          13 ->  33    -20
+  hard            10 ->  18     -8
+  hair             6 ->  10     -4
+  erection        18 ->  56    -38
+  big             20 ->  54    -34
+  long            11 ->  14     -3
+  hands           19 ->  20     -1
+
+HIGHER UNDER B
+  face             3 ->   1     +2
+  beard            4 ->   2     +2
+  chin            12 ->   5     +7
+  fingers         14 ->   8     +6
+  thigh           53 ->  13    +40
+  hand             7 ->   7     +0
+  neck            23 ->  17     +6
+  arm             22 ->  15     +7
+  shaft           16 ->  11     +5
+  thick           15 ->  12     +3
+  own             21 ->  16     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Falcon-H1-7B-Instruct ===
+HIGHER UNDER A
+  cock             3 ->  22    -19
+  dick             8 ->  29    -21
+  penis            6 ->  18    -12
+  own             10 ->  16     -6
+  hand             9 ->   9     +0
+  lips            16 ->  30    -14
+  shaft           14 ->  20     -6
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  chin             2 ->   2     +0
+  chest           11 ->   5     +6
+  face             5 ->   4     +1
+  hair             4 ->   3     +1
+  mustache        21 ->   8    +13
+  thick           18 ->  11     +7
+  fingers         12 ->   7     +5
+  head             7 ->   6     +1
+  moustache       25 ->  14    +11
+  neck            15 ->  10     +5
+  long            17 ->  13     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Falcon3-7B-Instruct ===
+HIGHER UNDER A
+  cock             3 ->  18    -15
+  face             4 ->   6     -2
+  hand            14 ->  17     -3
+  head             7 ->   7     +0
+  neck             8 ->  10     -2
+  chest           11 ->  14     -3
+  wife            16 ->  27    -11
+  own              9 ->   9     +0
+  hands           13 ->  13     +0
+  crotch          17 ->  22     -5
+  belly           20 ->  24     -4
+
+HIGHER UNDER B
+  chin             1 ->   1     +0
+  beard            2 ->   2     +0
+  mustache        21 ->  12     +9
+  fingers         12 ->   5     +7
+  thick           19 ->  15     +4
+  cheeks          15 ->  11     +4
+  jaw             18 ->  16     +2
+  long            10 ->   8     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Llama-3.1-70B-Instruct ===
+HIGHER UNDER A
+  cock             1 ->   4     -3
+  dick             5 ->  37    -32
+  penis            6 ->  12     -6
+  hand             8 ->  14     -6
+  shaft           15 ->  31    -16
+  hands           12 ->  20     -8
+  finger          17 ->  30    -13
+  wife's          18 ->  32    -14
+  member          13 ->  13     +0
+  long            11 ->  11     +0
+
+HIGHER UNDER B
+  beard            2 ->   1     +1
+  chin             4 ->   3     +1
+  hair             3 ->   2     +1
+  mustache        26 ->  10    +16
+  face            16 ->   8     +8
 
 4 word(s) are withheld because their position moved the opposite way to their prominence.
 
@@ -153,6 +302,44 @@ HIGHER UNDER B
   girlfriend      18 ->  11     +7
   right           29 ->  17    +12
   arm             30 ->  20    +10
+
+=== MODEL MiniCPM5-1B ===
+HIGHER UNDER A
+  cock             2 -> 129   -127
+  hands            1 ->  13    -12
+  fingers          3 ->  18    -15
+  penis            5 ->  21    -16
+  wife's           8 ->  44    -36
+  beard           12 ->  74    -62
+  body            10 ->  35    -25
+  dick            17 -> 126   -109
+  tongue          15 ->  46    -31
+  own             11 ->  25    -14
+  wife            14 ->  39    -25
+  balls           22 -> 122   -100
+  lips            19 ->  42    -23
+  belly           16 ->  23     -7
+  hair             9 ->   9     +0
+
+HIGHER UNDER B
+  head             6 ->   1     +5
+  hand             4 ->   2     +2
+  back            55 ->   3    +52
+  chin            26 ->   4    +22
+  thumb           46 ->   5    +41
+  arm             27 ->   7    +20
+  neck            25 ->   8    +17
+  eyes            42 ->  12    +30
+  left            49 ->  15    +34
+  arms            29 ->  10    +19
+  ear             69 ->  19    +50
+  knee           111 ->  22    +89
+  finger          23 ->  16     +7
+  nose            21 ->  14     +7
+  legs            18 ->  17     +1
+  stomach         20 ->  20     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
 
 === MODEL Mistral-7B-Instruct-v0.1 ===
 HIGHER UNDER A
@@ -271,6 +458,67 @@ HIGHER UNDER B
   big             51 ->  10    +41
   small          101 ->  12    +89
   ego             88 ->  13    +75
+
+=== MODEL Olmo-3.1-32B-Instruct ===
+HIGHER UNDER A
+  cock             1 ->   2     -1
+  dick             2 ->   6     -4
+  shaft            4 ->  16    -12
+  penis            7 ->  37    -30
+  own              3 ->   5     -2
+  chest           13 ->  69    -56
+  hair            12 ->  39    -27
+  length           9 ->  14     -5
+  erection         8 ->  12     -4
+  fingers         10 ->  17     -7
+
+HIGHER UNDER B
+  member           6 ->   1     +5
+  big             24 ->   3    +21
+  thick           16 ->   7     +9
+  massive         30 ->   8    +22
+  hard             5 ->   4     +1
+  rigid           72 ->   9    +63
+  already         51 ->  11    +40
+  huge            23 ->  10    +13
+  stiff           28 ->  15    +13
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Olmo-Hybrid-Instruct-DPO-7B ===
+HIGHER UNDER A
+  dick             3 -> 110   -107
+  hair             1 ->   5     -4
+  penis            6 -> 116   -110
+  cock             2 ->   4     -2
+  balls           11 ->  21    -10
+  hand             9 ->  13     -4
+  chest           10 ->  12     -2
+  hands           15 ->  29    -14
+  neck            16 ->  27    -11
+  fingers          4 ->   7     -3
+  erection        23 ->  55    -32
+  long            19 ->  31    -12
+  stomach         21 ->  35    -14
+  shaft           14 ->  17     -3
+  face            17 ->  19     -2
+  thumb           20 ->  22     -2
+
+HIGHER UNDER B
+  beard            8 ->   1     +7
+  head             5 ->   2     +3
+  chin            12 ->   3     +9
+  thigh           35 ->   9    +26
+  arm             31 ->  10    +21
+  crotch          13 ->   8     +5
+  leg             39 ->  15    +24
+  thighs          22 ->  11    +11
+  own              7 ->   6     +1
+  prick           32 ->  23     +9
+  back            26 ->  16    +10
+  lower           27 ->  20     +7
+  member          25 ->  18     +7
+  legs            18 ->  14     +4
 
 === MODEL Qwen2.5-0.5B-Instruct ===
 HIGHER UNDER A
@@ -421,6 +669,48 @@ HIGHER UNDER B
 
 1 word(s) are withheld because their position moved the opposite way to their prominence.
 
+=== MODEL Tanuki-8B-dpo-v1.0 ===
+HIGHER UNDER A
+  hair             7 ->   7     +0
+  hand            10 ->  12     -2
+  left             8 ->   8     +0
+  nose             9 ->  11     -2
+  pet             18 ->  28    -10
+  friend          16 ->  19     -3
+  teeth           12 ->  14     -2
+  back            17 ->  17     +0
+  hands            5 ->   5     +0
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  dog              4 ->   2     +2
+  chin            14 ->   9     +5
+  head            11 ->  10     +1
+  son             19 ->  16     +3
+  mustache        22 ->  18     +4
+  fingers         15 ->  15     +0
+  whiskers        13 ->  13     +0
+  face             6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL Teuken-7B-instruct-v0.6 ===
+HIGHER UNDER A
+  dick             3 ->  73    -70
+  penis            5 ->  17    -12
+  long            10 ->  14     -4
+  prick           11 ->  22    -11
+
+HIGHER UNDER B
+  own              2 ->   2     +0
+  cock             1 ->   1     +0
+  hard             4 ->   3     +1
+  hand             6 ->   4     +2
+  meat            24 ->   7    +17
+  shaft            7 ->   5     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
 === MODEL TinyLlama-1.1B-Chat-v1.0 ===
 HIGHER UNDER A
   chest            3 ->   4     -1
@@ -463,6 +753,27 @@ HIGHER UNDER B
   erect           39 ->  13    +26
   long            13 ->  11     +2
   balls           12 ->  10     +2
+
+=== MODEL Zamba2-7B-Instruct ===
+HIGHER UNDER A
+  shaft            4 ->   6     -2
+  dick             2 ->   2     +0
+  hair             7 ->   9     -2
+  erection        10 ->  13     -3
+  hand            13 ->  19     -6
+  penis            3 ->   3     +0
+  long            11 ->  14     -3
+  member          15 ->  16     -1
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  thick            9 ->   7     +2
+  hard             5 ->   4     +1
+  big             14 ->  11     +3
+  own              6 ->   5     +1
+  massive         16 ->  12     +4
+  meat            12 ->  10     +2
+  prick            8 ->   8     +0
 
 === MODEL archangel_sft-dpo_pythia2-8b ===
 HIGHER UNDER A
@@ -535,6 +846,29 @@ HIGHER UNDER B
 
 2 word(s) are withheld because their position moved the opposite way to their prominence.
 
+=== MODEL deepseek-llm-7b-chat ===
+HIGHER UNDER A
+  chin             2 ->   2     +0
+  hair             4 ->   8     -4
+  chest            9 ->  15     -6
+  face            10 ->  14     -4
+  own              6 ->  10     -4
+  cock            16 ->  19     -3
+  goatee           8 ->   9     -1
+  moustache       13 ->  13     +0
+  cheek           11 ->  11     +0
+  hands            7 ->   7     +0
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  hand             3 ->   3     +0
+  fingers          5 ->   4     +1
+  thumb           15 ->   5    +10
+  mustache        12 ->   6     +6
+  thumbs          25 ->  16     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
 === MODEL eleuther-pythia6.9b-hh-dpo ===
 HIGHER UNDER A
   dick             2 ->   2     +0
@@ -554,6 +888,50 @@ HIGHER UNDER B
   face            13 ->  11     +2
   hands           12 ->  10     +2
 
+=== MODEL falcon-7b-instruct ===
+HIGHER UNDER A
+  dick             2 ->   4     -2
+  prick            5 ->  44    -39
+  shaft            6 ->  11     -5
+  hand             7 ->   9     -2
+  fingers          9 ->  18     -9
+  penis            4 ->   5     -1
+
+HIGHER UNDER B
+  cock             1 ->   1     +0
+  own              8 ->   3     +5
+  hard             3 ->   2     +1
+  thick           15 ->   6     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL falcon-mamba-7b-instruct ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  thumb           10 ->  26    -16
+  hand             6 ->   8     -2
+  dick             5 ->   7     -2
+  shaft            7 ->  11     -4
+  erection        14 ->  25    -11
+  fingers          4 ->   5     -1
+  finger          12 ->  15     -3
+  hard            18 ->  20     -2
+  crotch          17 ->  17     +0
+
+HIGHER UNDER B
+  beard            2 ->   2     +0
+  hair             9 ->   4     +5
+  chin             8 ->   6     +2
+  own              3 ->   3     +0
+  cat             29 ->  18    +11
+  mustache        23 ->  14     +9
+  penis           16 ->  10     +6
+  long            22 ->  16     +6
+  chest           15 ->  13     +2
+  goatee          21 ->  19     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
 === MODEL gemma-2-9b-it ===
 HIGHER UNDER A
   hair             3 ->  13    -10
@@ -569,6 +947,33 @@ HIGHER UNDER B
   beard            1 ->   1     +0
 
 5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL glm-4-9b-chat-hf ===
+HIGHER UNDER A
+  beard            1 ->   2     -1
+  hair             3 ->   5     -2
+  fingers          6 ->  29    -23
+  dog              9 ->  50    -41
+  hands           14 ->  40    -26
+  chest            8 ->  15     -7
+  head             4 ->   6     -2
+  long            13 ->  27    -14
+  belly           11 ->  19     -8
+  neck            15 ->  21     -6
+
+HIGHER UNDER B
+  own              5 ->   3     +2
+  penis           31 ->   4    +27
+  genitals        93 ->  11    +82
+  stubble         86 ->  12    +74
+  lower           28 ->   9    +19
+  jaw             22 ->   8    +14
+  cock            36 ->  14    +22
+  leg             48 ->  16    +32
+  mustache        12 ->  10     +2
+  face             7 ->   7     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
 
 === MODEL granite-3.0-8b-instruct ===
 HIGHER UNDER A
@@ -591,6 +996,58 @@ HIGHER UNDER B
   penis            4 ->   4     +0
   member          17 ->  13     +4
   hard             5 ->   5     +0
+
+=== MODEL internlm2-chat-7b ===
+HIGHER UNDER A
+  beard            1 ->   1     +0
+  face             5 ->  10     -5
+  cheek           10 ->  16     -6
+  cheeks          18 ->  23     -5
+  hands           20 ->  20     +0
+  arm             17 ->  19     -2
+  dog             11 ->  13     -2
+  long            13 ->  14     -1
+
+HIGHER UNDER B
+  hair             3 ->   2     +1
+  head             8 ->   4     +4
+  chest            9 ->   5     +4
+  belly           28 ->  17    +11
+  own             14 ->   9     +5
+  fingers          7 ->   7     +0
+  neck            12 ->  11     +1
+  pet             15 ->  12     +3
+  forehead        31 ->  24     +7
+  dog's           25 ->  21     +4
+  stomach         22 ->  22     +0
+  fur             16 ->  15     +1
+  leg             19 ->  18     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL jais-family-6p7b-chat ===
+HIGHER UNDER A
+  cock             1 ->   6     -5
+  fingers          2 ->  17    -15
+  dick             3 ->  70    -67
+  hand             4 ->  13     -9
+  thumb            5 ->  24    -19
+  penis            6 ->  36    -30
+  shaft            7 ->  67    -60
+  finger           8 ->  50    -42
+  hands            9 ->  71    -62
+  erection        10 ->  72    -62
+  tongue          11 ->  61    -50
+  member          12 ->  81    -69
+  hard            15 ->  58    -43
+  prick           16 ->  55    -39
+
+HIGHER UNDER B
+  beard           18 ->   1    +17
+  goatee          88 ->   2    +86
+  thick           21 ->   3    +18
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
 
 === MODEL kanana-1.5-8b-instruct-2505 ===
 HIGHER UNDER A
@@ -620,6 +1077,45 @@ HIGHER UNDER B
   chest           24 ->  12    +12
   hardening       29 ->  16    +13
   hand            22 ->  15     +7
+
+=== MODEL kanana-2-3b-instruct ===
+HIGHER UNDER A
+  penis            1 ->   6     -5
+  cock             2 ->  21    -19
+  erection         6 ->  90    -84
+  dick             8 -> 103    -95
+  erect           13 ->  80    -67
+  nipples         14 ->  71    -57
+  member          16 ->  63    -47
+  crotch          20 ->  97    -77
+  long            15 ->  28    -13
+  large           25 ->  72    -47
+  hard            24 ->  68    -44
+  head             7 ->  11     -4
+  manhood         21 ->  37    -16
+  body            23 ->  32     -9
+  fingers         19 ->  22     -3
+  thigh           18 ->  20     -2
+
+HIGHER UNDER B
+  beard            5 ->   1     +4
+  cat             27 ->   4    +23
+  dog             43 ->   7    +36
+  chest           10 ->   5     +5
+  hair             3 ->   2     +1
+  pet            103 ->  15    +88
+  face            35 ->  12    +23
+  own              4 ->   3     +1
+  stomach         26 ->  14    +12
+  lips            39 ->  18    +21
+  mustache        38 ->  17    +21
+  neck            17 ->  13     +4
+  hands           40 ->  19    +21
+  legs            22 ->  16     +6
+  hand            11 ->   9     +2
+  chin             9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
 
 === MODEL llm-jp-3-7.2b-instruct3 ===
 HIGHER UNDER A
@@ -710,6 +1206,24 @@ HIGHER UNDER B
 
 2 word(s) are withheld because their position moved the opposite way to their prominence.
 
+=== MODEL recurrentgemma-9b-it ===
+HIGHER UNDER A
+  chin             2 ->   2     +0
+  hair             3 ->   3     +0
+  face             4 ->  14    -10
+  head             8 ->  17     -9
+  moustache        6 ->  11     -5
+  chest            5 ->   9     -4
+  own             10 ->  15     -5
+  nose            12 ->  31    -19
+  wife            15 ->  26    -11
+
+HIGHER UNDER B
+  beard            1 ->   1     +0
+  whiskers        18 ->   6    +12
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
 === MODEL rwkv-raven-7b ===
 HIGHER UNDER A
   shaft            5 ->   5     +0
@@ -765,9 +1279,28 @@ HIGHER UNDER B
 
 1 word(s) are withheld because their position moved the opposite way to their prominence.
 
+=== MODEL stablelm-2-1_6b-chat ===
+HIGHER UNDER A
+  cock             1 ->   1     +0
+  dick             2 ->   6     -4
+  hard             4 ->  11     -7
+  shaft            7 ->  24    -17
+  balls            9 ->  15     -6
+  big             10 ->  25    -15
+  own              5 ->   9     -4
+
+HIGHER UNDER B
+  fingers          6 ->   2     +4
+  chest           22 ->   5    +17
+  hand             8 ->   4     +4
+  hair            13 ->   7     +6
+  hands           11 ->   8     +3
+  chin            56 ->  10    +46
+  penis            3 ->   3     +0
+
 Answer these, in order. Fill `survey` before reading on.
 
-1. SURVEY. Look at all 29 tables and say what VARIES between them,
+1. SURVEY. Look at all 50 tables and say what VARIES between them,
    before naming anything they share. Which look unlike the others, and in what
    way? Two or three sentences. Answer this first and do not revise it after
    deciding what the common operation is.

@@ -1,0 +1,1332 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He smashed the offering bowls and ___
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  threw            1 ->   7     -6
+  broke            2 ->   5     -3
+  the              4 ->   4     +0
+  smashed          6 -> 129   -123
+  tore             7 ->  38    -31
+  flung           11 ->  99    -88
+  tossed          13 ->  92    -79
+  put             19 ->  82    -63
+  used            20 ->  64    -44
+  took            15 ->  49    -34
+  then            14 ->  34    -20
+  turned          16 ->  31    -15
+  poured          18 ->  32    -14
+  chalices         9 ->  19    -10
+  made            22 ->  25     -3
+  altar           17 ->  17     +0
+
+HIGHER UNDER B
+  scattered        3 ->   1     +2
+  destroyed       21 ->   2    +19
+  cut              5 ->   3     +2
+  censers         45 ->  10    +35
+  their           72 ->  11    +61
+  wine            56 ->  13    +43
+  screamed        31 ->  12    +19
+  yelled          75 ->  15    +60
+  shattered       10 ->   6     +4
+  jars            12 ->   9     +3
+  killed          27 ->  14    +13
+  spilled         25 ->  16     +9
+  burned           8 ->   8     +0
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  took             2 ->  36    -34
+  the              3 ->   5     -2
+  then             4 ->   8     -4
+  plates           5 ->  48    -43
+  jugs             6 ->  31    -25
+  licked           7 ->  57    -50
+  used             8 ->  56    -48
+  lids            11 ->  80    -69
+  pots            10 ->  29    -19
+  stamped          9 ->  10     -1
+
+HIGHER UNDER B
+  broke           22 ->   2    +20
+  trampled        83 ->   4    +79
+  shattered       12 ->   3     +9
+  smashed          1 ->   1     +0
+  shouted         14 ->   6     +8
+  even            36 ->   7    +29
+  shattering      93 ->   9    +84
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  poured           2 ->   6     -4
+  burned           5 ->  23    -18
+  went             8 ->  27    -19
+  lamps           13 -> 121   -108
+  smashed          7 ->  15     -8
+  spoons           6 ->  11     -5
+  overturned      14 ->  46    -32
+  dishes          10 ->  19     -9
+  their           18 ->  44    -26
+  flung           16 ->  33    -17
+  cups            12 ->  20     -8
+  chalices        17 ->  29    -12
+  vessels         20 ->  42    -22
+  knocked         19 ->  21     -2
+  broke            3 ->   3     +0
+
+HIGHER UNDER B
+  cut              4 ->   1     +3
+  took            34 ->   4    +30
+  tore            11 ->   5     +6
+  destroyed       30 ->   8    +22
+  ripped          51 ->  14    +37
+  snatched        49 ->  13    +36
+  crushed         32 ->  10    +22
+  stole           35 ->  12    +23
+  ate             42 ->  16    +26
+  chopped         41 ->  17    +24
+  shattered       15 ->   9     +6
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  broke            7 ->  10     -3
+  put              6 ->   9     -3
+  poured          10 ->  23    -13
+  then             4 ->   6     -2
+  a               11 ->  17     -6
+  cracked         16 ->  29    -13
+  made            13 ->  24    -11
+  tossed          12 ->  16     -4
+
+HIGHER UNDER B
+  began            9 ->   4     +5
+  smashed          2 ->   1     +1
+  started         15 ->   8     +7
+  set              5 ->   5     +0
+  continued       25 ->  11    +14
+  took             8 ->   7     +1
+  scooped         51 ->  20    +31
+  called          45 ->  18    +27
+  hit             19 ->  12     +7
+  picked          22 ->  13     +9
+  filled          34 ->  19    +15
+  threw            3 ->   3     +0
+  used            14 ->  14     +0
+  placed          17 ->  15     +2
+  opened          24 ->  21     +3
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  he               8 ->  47    -39
+  they            13 ->  62    -49
+  his             11 ->  38    -27
+  the              1 ->   1     +0
+  threw            4 ->   5     -1
+  then             9 ->  14     -5
+  smashed         17 ->  28    -11
+  said            14 ->  15     -1
+  took             6 ->  11     -5
+  all              5 ->   7     -2
+  put             19 ->  22     -3
+  went            20 ->  24     -4
+  broke            2 ->   4     -2
+
+HIGHER UNDER B
+  scattered       12 ->   3     +9
+  poured           3 ->   2     +1
+  set             10 ->   6     +4
+  filled          16 ->   8     +8
+  vowed           29 ->  10    +19
+  other           35 ->  13    +22
+  left            15 ->  12     +3
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  then             5 ->  12     -7
+  broke            7 ->  34    -27
+  threw            8 ->  23    -15
+  took            14 ->  38    -24
+  set             10 ->  16     -6
+  all             11 ->  17     -6
+  began           18 ->  61    -43
+  ran             19 ->  48    -29
+  pots            15 ->  20     -5
+  cups             6 ->   8     -2
+  bottles         17 ->  21     -4
+
+HIGHER UNDER B
+  spoons           4 ->   1     +3
+  plates           2 ->   2     +0
+  goblets         12 ->   5     +7
+  chipped         16 ->   7     +9
+  shattered        9 ->   4     +5
+  splintered      50 ->  11    +39
+  platters        38 ->  10    +28
+  spilled         13 ->   9     +4
+  table           34 ->  14    +20
+  drank           20 ->  13     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  threw            6 ->  12     -6
+  said             8 ->  24    -16
+  broke            4 ->   6     -2
+  smashed          9 ->  18     -9
+  struck          12 ->  29    -17
+  other           11 ->  17     -6
+
+HIGHER UNDER B
+  cups             2 ->   1     +1
+  poured           3 ->   3     +0
+  shattered        7 ->   5     +2
+  scattered        5 ->   4     +1
+  goblets         54 ->   8    +46
+  sprinkled       16 ->   7     +9
+  censers         65 ->  11    +54
+  cup             41 ->  15    +26
+  incense         13 ->  10     +3
+  pitchers        24 ->  14    +10
+  overturned      15 ->  13     +2
+  cast            17 ->  16     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  altars           7 ->  16     -9
+  broke            3 ->   8     -5
+  sent            17 ->  23     -6
+  killed          13 ->  18     -5
+  threw            4 ->   7     -3
+  said            16 ->  19     -3
+  spat            10 ->  13     -3
+  smashed          2 ->   3     -1
+
+HIGHER UNDER B
+  trampled         6 ->   2     +4
+  overturned       8 ->   5     +3
+  incense         12 ->   9     +3
+  censers         18 ->  10     +8
+  tore             5 ->   4     +1
+  extinguished    47 ->  14    +33
+  then             9 ->   6     +3
+  scattered       15 ->  12     +3
+  other           11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  incense          1 ->   2     -1
+  snuffed          9 ->  23    -14
+  put              7 ->  12     -5
+  sprinkled       11 ->  17     -6
+  killed          14 ->  43    -29
+  burned          12 ->  14     -2
+  tore             5 ->   7     -2
+  cut              3 ->   4     -1
+  extinguished     4 ->   5     -1
+
+HIGHER UNDER B
+  the              2 ->   1     +1
+  threw           13 ->   6     +7
+  removed          6 ->   3     +3
+  tables          48 ->  11    +37
+  took            15 ->   9     +6
+  overturned       8 ->   8     +0
+  scattered       10 ->  10     +0
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  burned           4 ->  13     -9
+  tore             5 ->  19    -14
+  threw            8 ->  14     -6
+  cut              2 ->   3     -1
+  then            11 ->  25    -14
+  he               6 ->   8     -2
+  used             7 ->   9     -2
+  drove           14 ->  32    -18
+  removed         15 ->  29    -14
+  ripped          13 ->  22     -9
+  chopped         10 ->  11     -1
+  put             17 ->  24     -7
+
+HIGHER UNDER B
+  shattered       16 ->   2    +14
+  the              1 ->   1     +0
+  broke            9 ->   5     +4
+  scattered       19 ->   6    +13
+  smashed         18 ->   7    +11
+  cups            29 ->  12    +17
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  ran              3 -> 116   -113
+  plates           4 ->  36    -32
+  dishes           6 ->  88    -82
+  the              1 ->   1     +0
+  cups             5 ->  16    -11
+  then             8 ->  33    -25
+  vases           12 -> 118   -106
+  jugs            17 -> 117   -100
+  lamps           16 ->  87    -71
+  jars            23 -> 112    -89
+  shouted         18 ->  60    -42
+  killed          21 ->  63    -42
+  utensils        24 ->  46    -22
+  threw            9 ->  17     -8
+  all             15 ->  20     -5
+  went            25 ->  30     -5
+  was             22 ->  24     -2
+
+HIGHER UNDER B
+  scattered       19 ->   2    +17
+  took            10 ->   3     +7
+  smashed         26 ->   6    +20
+  spilled         11 ->   4     +7
+  poured          76 ->   9    +67
+  overturned      52 ->  10    +42
+  spoons         148 ->  12   +136
+  made            13 ->   8     +5
+  spouted        141 ->  14   +127
+  filled          46 ->  13    +33
+  shattered        7 ->   7     +0
+  cut             14 ->  11     +3
+  blew            20 ->  15     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  poured           3 ->  15    -12
+  threw            2 ->   2     +0
+  smashed          4 ->  18    -14
+  scattered        9 -> 150   -141
+  set              7 ->  30    -23
+  took             5 ->  10     -5
+  put              8 ->  23    -15
+  covered         13 -> 160   -147
+  turned          15 ->  51    -36
+  gave            14 ->  27    -13
+  cursed          19 ->  25     -6
+  left            12 ->  20     -8
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  ate             42 ->   4    +38
+  broke           10 ->   3     +7
+  knocked         63 ->   7    +56
+  destroyed      134 ->  14   +120
+  tore            35 ->   8    +27
+  showed         152 ->  19   +133
+  he              31 ->   6    +25
+  their           83 ->  17    +66
+  was             26 ->   9    +17
+  made            27 ->  13    +14
+  they            16 ->  11     +5
+  shattered       18 ->  12     +6
+  then             6 ->   5     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  threw            3 ->  13    -10
+  plates           5 ->  10     -5
+  smashed         10 ->  64    -54
+  overturned      12 ->  59    -47
+  poured          13 ->  46    -33
+  set              8 ->  22    -14
+  spilled         14 ->  31    -17
+  took            11 ->  24    -13
+  scattered        1 ->   1     +0
+
+HIGHER UNDER B
+  the              2 ->   2     +0
+  tore            15 ->   3    +12
+  shattered       23 ->   5    +18
+  cut             25 ->   7    +18
+  rent           194 ->  11   +183
+  dashed          39 ->   9    +30
+  burned           7 ->   6     +1
+  trumpeted      191 ->  17   +174
+  all             71 ->  15    +56
+  burnt           70 ->  18    +52
+  trampled        29 ->  14    +15
+  dishes          34 ->  16    +18
+  tables          20 ->  19     +1
+  broke            4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  smashed          2 ->  64    -62
+  the              1 ->   5     -4
+  broke            3 ->   8     -5
+  then             8 ->  77    -69
+  cut              7 ->  14     -7
+  ran              9 ->  38    -29
+  hurled          10 ->  33    -23
+  shattered        5 ->   9     -4
+  other           12 ->  65    -53
+  was             13 ->  52    -39
+  set             18 -> 110    -92
+  beat            14 ->  47    -33
+  he              16 ->  62    -46
+  killed          17 ->  51    -34
+  made            15 ->  25    -10
+
+HIGHER UNDER B
+  poured          11 ->   1    +10
+  said            30 ->   3    +27
+  threw            6 ->   2     +4
+  declared       131 ->   7   +124
+  cried           31 ->   6    +25
+  scattered        4 ->   4     +0
+  shouted         34 ->  10    +24
+  flung           42 ->  11    +31
+  drank           70 ->  12    +58
+  uttered         92 ->  13    +79
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  cut              2 ->   3     -1
+  broke            3 ->   6     -3
+  burned           8 -> 120   -112
+  then             5 ->  23    -18
+  smashed          9 ->  28    -19
+  threw           11 ->  24    -13
+  poured          12 ->  35    -23
+  made            15 ->  54    -39
+  slaughtered     13 ->  41    -28
+  beat            14 ->  39    -25
+  killed          10 ->  13     -3
+  all              7 ->   9     -2
+
+HIGHER UNDER B
+  dashed           6 ->   2     +4
+  shattered       28 ->   4    +24
+  stepped         60 ->   8    +52
+  drove           21 ->   7    +14
+  pulled          41 ->  10    +31
+  splintered      98 ->  15    +83
+  doors           29 ->  11    +18
+  trampled        30 ->  14    +16
+  scattered       16 ->  12     +4
+  destroyed       33 ->  16    +17
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  poured           1 ->  12    -11
+  sprinkled        5 ->  75    -70
+  said             3 ->   6     -3
+  cups             7 ->  93    -86
+  plates          10 ->  74    -64
+  vessels         11 ->  76    -65
+  slaughtered     14 ->  80    -66
+  sacrificed      17 -> 109    -92
+  made            12 ->  26    -14
+  burned          15 ->  46    -31
+  he              16 ->  37    -21
+  the              2 ->   3     -1
+
+HIGHER UNDER B
+  dashed          46 ->   1    +45
+  smashed          6 ->   2     +4
+  broke            4 ->   4     +0
+  tore            13 ->   5     +8
+  shattered       31 ->   7    +24
+  struck          55 ->   8    +47
+  splashed        65 ->  10    +55
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  smashed          4 ->  10     -6
+  threw            7 ->  23    -16
+  scattered        8 ->  19    -11
+  burned          11 ->  26    -15
+  shattered        9 ->  11     -2
+  then            13 ->  18     -5
+  destroyed       15 ->  36    -21
+  spilled         16 ->  47    -31
+  trampled        18 -> 105    -87
+  poured           6 ->   6     +0
+  crushed         20 ->  39    -19
+  emptied         19 ->  25     -6
+
+HIGHER UNDER B
+  cut              1 ->   1     +0
+  the              2 ->   2     +0
+  struck          64 ->   5    +59
+  tore            17 ->   8     +9
+  what            96 ->  13    +83
+  killed           5 ->   4     +1
+  broke            3 ->   3     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  he               3 ->  20    -17
+  overturned       6 ->  61    -55
+  incense         12 ->  79    -67
+  cups            14 ->  63    -49
+  tables          18 ->  69    -51
+  was             15 ->  37    -22
+  took            13 ->  35    -22
+  then            11 ->  29    -18
+  smashed         16 ->  27    -11
+  tore            20 ->  36    -16
+  all             17 ->  25     -8
+  turned          10 ->  14     -4
+
+HIGHER UNDER B
+  scattered       19 ->   5    +14
+  broke            5 ->   3     +2
+  sent            39 ->   9    +30
+  shattered        9 ->   6     +3
+  cast            41 ->  10    +31
+  poured           4 ->   4     +0
+  cut              8 ->   8     +0
+  threw            2 ->   2     +0
+  flung           26 ->  11    +15
+  announced       47 ->  12    +35
+  trampled        48 ->  13    +35
+  beat           107 ->  21    +86
+  said             7 ->   7     +0
+  dashed          54 ->  19    +35
+  struck          24 ->  15     +9
+  spread          35 ->  17    +18
+  told            27 ->  18     +9
+  made            21 ->  16     +5
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  the              1 ->   4     -3
+  said             3 -> 174   -171
+  scattered        5 ->  29    -24
+  overturned       6 ->  25    -19
+  broke            7 ->  31    -24
+  would            8 ->  65    -57
+  they             9 -> 163   -154
+  cut              4 ->   6     -2
+  burned          11 ->  48    -37
+  then            14 -> 108    -94
+  furniture       13 ->  21     -8
+
+HIGHER UNDER B
+  smashed          2 ->   1     +1
+  sparrows       171 ->   2   +169
+  sprinkled       16 ->   3    +13
+  spilling       124 ->   5   +119
+  pitchers       103 ->   7    +96
+  pieces          64 ->   8    +56
+  spurred        177 ->  10   +167
+  replaced       116 ->  12   +104
+  spitted        115 ->  13   +102
+  carried        136 ->  14   +122
+  cups           135 ->  15   +120
+  used            10 ->   9     +1
+  tore            12 ->  11     +1
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  the              2 ->   2     +0
+  threw            1 ->   1     +0
+  then             6 ->  14     -8
+  poured           5 ->  10     -5
+  broke            4 ->   6     -2
+  said             9 ->  35    -26
+  he              21 ->  71    -50
+  started         16 ->  33    -17
+  put             10 ->  17     -7
+  brought         17 ->  28    -11
+  sat             12 ->  19     -7
+  took            11 ->  15     -4
+  made            15 ->  22     -7
+  began            8 ->   9     -1
+
+HIGHER UNDER B
+  spat            37 ->   8    +29
+  shouted         13 ->   5     +8
+  tossed          14 ->   7     +7
+  cast            36 ->  13    +23
+  plates          22 ->  11    +11
+  grabbed         58 ->  27    +31
+  utensils        34 ->  20    +14
+  let             52 ->  26    +26
+  placed          18 ->  12     +6
+  cups            23 ->  18     +5
+  returned        30 ->  21     +9
+  flung           29 ->  23     +6
+  left            19 ->  16     +3
+  shattered       25 ->  24     +1
+  set              7 ->   4     +3
+  smashed          3 ->   3     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  scattered        2 ->   4     -2
+  sprinkled        3 ->  39    -36
+  poured           4 ->  10     -6
+  the              1 ->   2     -1
+  spilled          6 ->  18    -12
+  killed           7 ->  23    -16
+  dashed          13 ->  46    -33
+  flung           15 ->  22     -7
+  broke            5 ->   5     +0
+  crushed         12 ->  12     +0
+
+HIGHER UNDER B
+  smashed          8 ->   1     +7
+  threw            9 ->   3     +6
+  drank           17 ->   7    +10
+  burned          11 ->   6     +5
+  destroyed       14 ->   9     +5
+  burnt           23 ->  11    +12
+  set             50 ->  13    +37
+  shattered       10 ->   8     +2
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  broke            2 ->   2     +0
+  then             5 ->   8     -3
+  used             6 ->  11     -5
+  left             4 ->   4     +0
+  other           15 ->  24     -9
+  made            12 ->  17     -5
+  caused          16 ->  23     -7
+
+HIGHER UNDER B
+  scattered        3 ->   3     +0
+  shattered        7 ->   5     +2
+  destroyed       10 ->   6     +4
+  spilled          9 ->   7     +2
+  threw           14 ->   9     +5
+  smashed         33 ->  18    +15
+  ran             18 ->  13     +5
+  tore            30 ->  20    +10
+  desecrated      21 ->  15     +6
+  set             23 ->  19     +4
+  killed          26 ->  22     +4
+  stole           13 ->  12     +1
+  sacred          17 ->  16     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  broken           5 ->  15    -10
+  smashed          4 ->  11     -7
+  bowls            6 ->  19    -13
+  basins           7 ->  21    -14
+  jugs            12 ->  92    -80
+  he              10 ->  29    -19
+  vessels         11 ->  33    -22
+
+HIGHER UNDER B
+  poured           3 ->   3     +0
+  broke            2 ->   2     +0
+  scattered       13 ->   4     +9
+  disrupted       68 ->   8    +60
+  destroyed       16 ->   7     +9
+  pulled          72 ->  10    +62
+  upset           30 ->  12    +18
+  cut             20 ->   9    +11
+  made            24 ->  13    +11
+  pots             9 ->   5     +4
+  altars          15 ->  14     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  poured           3 ->   6     -3
+  went             4 ->   7     -3
+  all              6 ->  22    -16
+  broke            2 ->   4     -2
+  trumpets         7 ->  15     -8
+  took            10 ->  24    -14
+
+HIGHER UNDER B
+  shouted         25 ->   2    +23
+  dishes           5 ->   3     +2
+  plates          20 ->   5    +15
+  chalices        21 ->   9    +12
+  cups            35 ->  11    +24
+  struck          16 ->  10     +6
+  filled          32 ->  17    +15
+  made            18 ->  13     +5
+  threw            8 ->   8     +0
+  shattered       23 ->  19     +4
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  the              2 ->   4     -2
+  scattered        4 ->  39    -35
+  destroyed        7 ->  11     -4
+  threw            6 ->   9     -3
+  took            10 ->  23    -13
+  made            11 ->  27    -16
+  put             13 ->  34    -21
+  overturned       8 ->   8     +0
+  cut             12 ->  19     -7
+  killed          15 ->  26    -11
+
+HIGHER UNDER B
+  broke            1 ->   1     +0
+  tore             5 ->   3     +2
+  smashed          3 ->   2     +1
+  struck          56 ->   7    +49
+  tables          14 ->   5     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  cut              3 ->   7     -4
+  sprinkled        4 ->   4     +0
+  overthrew       11 ->  17     -6
+  sacrificial     16 ->  23     -7
+  altar           13 ->  19     -6
+  broke            8 ->   9     -1
+  burned           7 ->   8     -1
+  other           10 ->  10     +0
+  cups            17 ->  18     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  threw            5 ->   3     +2
+  overturned       2 ->   2     +0
+  destroyed        9 ->   6     +3
+  dashed          20 ->  14     +6
+  drinking        15 ->  11     +4
+  shattered       19 ->  16     +3
+  censers         18 ->  15     +3
+  scattered        6 ->   5     +1
+  snuffed         12 ->  12     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  scattered        2 ->   2     +0
+  the              1 ->   1     +0
+  broke            4 ->   4     +0
+  said            16 ->  19     -3
+  overturned       7 ->  10     -3
+  put             15 ->  17     -2
+  all             24 ->  25     -1
+  dashed          19 ->  21     -2
+  cut             21 ->  22     -1
+  shattered       10 ->  11     -1
+  cast            22 ->  23     -1
+  made            13 ->  14     -1
+  they            11 ->  12     -1
+  spilled          8 ->   9     -1
+
+HIGHER UNDER B
+  smashed          3 ->   3     +0
+  threw            6 ->   6     +0
+  tore            12 ->   8     +4
+  then             9 ->   7     +2
+  poured           5 ->   5     +0
+  took            18 ->  15     +3
+  set             23 ->  20     +3
+  flung           17 ->  16     +1
+  shouted         20 ->  18     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  threw            2 ->   7     -5
+  cast             6 ->  22    -16
+  trampled         5 ->   8     -3
+  pitchers         9 ->  19    -10
+  poured          12 ->  25    -13
+  then            10 ->  13     -3
+  broke           16 ->  37    -21
+  overturned      11 ->  16     -5
+  cut             17 ->  30    -13
+  splintered      19 ->  43    -24
+  he              18 ->  35    -17
+  made            21 ->  38    -17
+  burned          20 ->  29     -9
+
+HIGHER UNDER B
+  shattered        3 ->   1     +2
+  scattered        4 ->   3     +1
+  trashed         13 ->   4     +9
+  splashed         7 ->   5     +2
+  brazenly        92 ->  15    +77
+  sprinkled        8 ->   6     +2
+  splattered      22 ->  11    +11
+  trash           29 ->  12    +17
+  tipped          14 ->   9     +5
+  ripped          26 ->  14    +12
+  tore            15 ->  10     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  threw            6 ->   8     -2
+  killed          15 ->  31    -16
+  smashed          4 ->   5     -1
+  all              9 ->  16     -7
+  tore            14 ->  19     -5
+  ripped          11 ->  11     +0
+  stopped         12 ->  12     +0
+  overturned      13 ->  13     +0
+  scattered       17 ->  17     +0
+
+HIGHER UNDER B
+  broke            2 ->   1     +1
+  shattered        3 ->   2     +1
+  cut              5 ->   4     +1
+  utensils        16 ->   7     +9
+  destroyed       10 ->  10     +0
+  then             7 ->   6     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  cut              8 ->  11     -3
+  they             9 ->   9     +0
+  his             15 ->  15     +0
+  their           12 ->  13     -1
+  hurled          16 ->  16     +0
+  all             17 ->  17     +0
+  flung           14 ->  14     +0
+  threw            4 ->   4     +0
+
+HIGHER UNDER B
+  smashed          2 ->   2     +0
+  the              1 ->   1     +0
+  broke            3 ->   3     +0
+  poured           6 ->   5     +1
+  scattered        7 ->   7     +0
+  shattered       10 ->   8     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  broke            2 ->   7     -5
+  shattered        3 ->  30    -27
+  the              1 ->   1     +0
+  spilled          5 ->  42    -37
+  smashed          4 ->   5     -1
+  cut              8 ->  58    -50
+  tore             7 ->  55    -48
+  poured           6 ->  12     -6
+  incense          9 ->  95    -86
+  scattered       10 ->  31    -21
+  he              11 ->  14     -3
+
+HIGHER UNDER B
+  then            89 ->   2    +87
+  plates          21 ->   3    +18
+  other           33 ->   4    +29
+  ran            146 ->   9   +137
+  made            15 ->   6     +9
+  a              112 ->  11   +101
+  took            87 ->  10    +77
+  hurled         127 ->  13   +114
+  threw           12 ->   8     +4
+  was            101 ->  15    +86
+  went           115 ->  17    +98
+  shouted        157 ->  21   +136
+  walked         150 ->  22   +128
+  his             95 ->  18    +77
+  filled          72 ->  20    +52
+  dishes          55 ->  16    +39
+  cups            36 ->  19    +17
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  they            11 ->  16     -5
+  smashed          2 ->   2     +0
+  pots            13 ->  14     -1
+
+HIGHER UNDER B
+  overturned       3 ->   3     +0
+  burned          10 ->   7     +3
+  destroyed       16 ->  11     +5
+  broke            4 ->   4     +0
+  then             5 ->   5     +0
+  threw            6 ->   6     +0
+  scattered       12 ->  12     +0
+  cut             17 ->  13     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  broke            1 ->   2     -1
+  threw            4 ->   7     -3
+  tore             9 -> 101    -92
+  smashed          7 ->  39    -32
+  sent            16 ->  49    -33
+  shouted         15 ->  37    -22
+  cried           19 ->  61    -42
+  they            17 ->  27    -10
+  he              13 ->  22     -9
+  made            11 ->  14     -3
+  began           21 ->  29     -8
+  then            12 ->  13     -1
+  spilled         10 ->  11     -1
+
+HIGHER UNDER B
+  scattered        3 ->   1     +2
+  shattered       14 ->   6     +8
+  said             6 ->   4     +2
+  declared        44 ->  12    +32
+  overturned      18 ->   8    +10
+  tables          84 ->  15    +69
+  trampled        26 ->  10    +16
+  spoons          39 ->  18    +21
+  cups            35 ->  17    +18
+  cursed          31 ->  21    +10
+  destroyed       25 ->  19     +6
+  flung           23 ->  20     +3
+  cut             20 ->  16     +4
+  poured           5 ->   5     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  cut              4 ->  29    -25
+  shattered        6 ->  17    -11
+  smashed          8 ->  50    -42
+  altars          10 ->  60    -50
+  ripped          13 ->  95    -82
+  poured           9 ->  24    -15
+  said             7 ->   9     -2
+  tore            16 ->  21     -5
+  incense         17 ->  41    -24
+  crushed         18 ->  43    -25
+  sprinkled       19 ->  34    -15
+
+HIGHER UNDER B
+  broke            5 ->   4     +1
+  scattered        3 ->   3     +0
+  killed          23 ->   5    +18
+  threw            2 ->   2     +0
+  took            46 ->   8    +38
+  fled           153 ->  13   +140
+  spilled         61 ->  11    +50
+  trays           66 ->  15    +51
+  sent            74 ->  16    +58
+  destroyed       12 ->   6     +6
+  trampled        14 ->   7     +7
+  made            27 ->  14    +13
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  cut              2 ->   7     -5
+  the              1 ->   1     +0
+  incense         13 ->  63    -50
+  their            9 ->  17     -8
+  tore             5 ->   9     -4
+  stood           10 ->  31    -21
+  gave            11 ->  42    -31
+  divided         12 ->  41    -29
+  made            18 ->  46    -28
+  burned           6 ->   8     -2
+  put             14 ->  20     -6
+  then            16 ->  23     -7
+
+HIGHER UNDER B
+  cups            27 ->   3    +24
+  broke            3 ->   2     +1
+  smashed          8 ->   4     +4
+  jars            99 ->  11    +88
+  flung           41 ->  12    +29
+  threw           49 ->  13    +36
+  destroyed       19 ->  10     +9
+  trampled        31 ->  15    +16
+  pots            25 ->  18     +7
+  wine            15 ->  14     +1
+  crushed         17 ->  16     +1
+  shattered        7 ->   6     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  overturned       3 ->  30    -27
+  broke            2 ->   2     +0
+  cut              6 ->  94    -88
+  poured           4 ->  32    -28
+  all              7 ->  35    -28
+  their            9 ->  54    -45
+  filled           5 ->  16    -11
+
+HIGHER UNDER B
+  scattered       19 ->   3    +16
+  sloshed        132 ->   4   +128
+  shattered       29 ->   6    +23
+  threw           11 ->   7     +4
+  then            21 ->   8    +13
+  bowls           10 ->   5     +5
+  cracked         92 ->  11    +81
+  dishes          36 ->   9    +27
+  jars            42 ->  12    +30
+  plates          90 ->  13    +77
+  bowl            74 ->  17    +57
+  defaced        134 ->  18   +116
+  urns           147 ->  20   +127
+  crushed         85 ->  21    +64
+  cups            69 ->  19    +50
+  knocked         15 ->  14     +1
+  made            23 ->  23     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  the              1 ->  29    -28
+  threw            2 -> 158   -156
+  set              3 -> 133   -130
+  broke            4 -> 159   -155
+  shattered        5 -> 167   -162
+  took             6 -> 145   -139
+  made             7 -> 135   -128
+  smashed          8 -> 174   -166
+  stood            9 -> 183   -174
+  poured          10 -> 214   -204
+  knocked         11 -> 222   -211
+  put             12 -> 136   -124
+  overturned      13 -> 224   -211
+  ran             15 -> 157   -142
+  left            16 -> 143   -127
+  they            14 ->  92    -78
+  cut             17 -> 166   -149
+  struck          18 -> 199   -181
+  scattered       19 -> 169   -150
+  utensils        20 -> 218   -198
+  placed          21 -> 176   -155
+  then            23 -> 111    -88
+  other           24 -> 130   -106
+  hurled          25 -> 171   -146
+  gave            26 -> 141   -115
+  vessels         27 -> 181   -154
+  used            28 -> 134   -106
+  he              22 ->  27     -5
+
+HIGHER UNDER B
+  The            130 ->   1   +129
+  He             122 ->   2   +120
+  They           135 ->   3   +132
+  It             146 ->   4   +142
+  This           174 ->   5   +169
+  There          211 ->   7   +204
+  I              102 ->   6    +96
+  In             138 ->   8   +130
+  What           184 ->   9   +175
+  12             132 ->  10   +122
+  When           183 ->  11   +172
+  Butch          185 ->  12   +173
+  How            152 ->  13   +139
+  His            124 ->  14   +110
+  That           194 ->  15   +179
+  She            158 ->  16   +142
+  If             212 ->  17   +195
+  Given          249 ->  18   +231
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  platters         8 ->  50    -42
+  smashed          5 ->   8     -3
+  cups            12 ->  40    -28
+  shattered        4 ->   7     -3
+  trampled        15 ->  61    -46
+  all             11 ->  19     -8
+  took             7 ->  10     -3
+  filled          13 ->  22     -9
+  sprinkled       10 ->  14     -4
+  cut             16 ->  18     -2
+
+HIGHER UNDER B
+  said            25 ->   5    +20
+  poured           3 ->   2     +1
+  threw            9 ->   4     +5
+  cast            35 ->  12    +23
+  made            30 ->  13    +17
+  set             53 ->  15    +38
+  declared        38 ->  16    +22
+  tore            17 ->  11     +6
+  put             28 ->  17    +11
+  burned          14 ->   9     +5
+  scattered        6 ->   6     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  the              1 ->  12    -11
+  said             2 ->  45    -43
+  threw            4 ->  20    -16
+  scattered        3 ->   6     -3
+  shouted          8 -> 152   -144
+  sent             5 ->  16    -11
+  went            12 -> 201   -189
+  cried           13 ->  95    -82
+  plates          17 -> 208   -191
+  then            11 ->  41    -30
+  told            16 ->  76    -60
+  broke           14 ->  47    -33
+  turned           6 ->  10     -4
+  all             23 -> 202   -179
+  flung           10 ->  29    -19
+  he              21 -> 104    -83
+  burned          20 ->  56    -36
+  fled            22 ->  68    -46
+  shattered        9 ->  15     -6
+
+HIGHER UNDER B
+  stomped         15 ->   1    +14
+  spat            45 ->   2    +43
+  tore             7 ->   3     +4
+  stormed         52 ->   4    +48
+  cursed          71 ->   5    +66
+  bellowed       247 ->   8   +239
+  hissed         236 ->   9   +227
+  roared         222 ->  11   +211
+  hurled          19 ->   7    +12
+  snarled        238 ->  17   +221
+  danced          51 ->  18    +33
+  called          29 ->  13    +16
+  ran             31 ->  19    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  broke            2 ->  13    -11
+  jars             8 ->  35    -27
+  then             7 ->  12     -5
+  pots            11 ->  50    -39
+  tossed          10 ->  10     +0
+  overturned       5 ->   5     +0
+  sprinkled        4 ->   4     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  threw            3 ->   2     +1
+  tore             6 ->   3     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  the              2 ->   8     -6
+  smashed          7 ->  48    -41
+  said             5 ->  17    -12
+  then             4 ->  11     -7
+  killed           8 ->  27    -19
+  made            10 ->  20    -10
+  tables          18 -> 136   -118
+  overturned      16 ->  28    -12
+  cut             19 ->  30    -11
+  destroyed       13 ->  18     -5
+  burned          15 ->  22     -7
+  sent            17 ->  24     -7
+
+HIGHER UNDER B
+  scattered        6 ->   2     +4
+  spilled         14 ->   3    +11
+  threatened      85 ->  10    +75
+  caused          22 ->   7    +15
+  broke            1 ->   1     +0
+  shattered        9 ->   5     +4
+  poured          11 ->   6     +5
+  tore            12 ->   9     +3
+  shouted         39 ->  12    +27
+  declared        67 ->  16    +51
+  left            44 ->  13    +31
+  flung           33 ->  14    +19
+  ripped          30 ->  15    +15
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  smashed          4 ->   8     -4
+  the              2 ->   6     -4
+  poured           3 ->   3     +0
+  overturned      11 ->  12     -1
+  destroyed       13 ->  22     -9
+  said            14 ->  19     -5
+  burned          12 ->  13     -1
+  cut              9 ->   9     +0
+
+HIGHER UNDER B
+  scattered        1 ->   1     +0
+  broke            5 ->   2     +3
+  shattered        7 ->   4     +3
+  ground          24 ->  14    +10
+  spilled         15 ->  11     +4
+  tossed          22 ->  15     +7
+  flung           10 ->  10     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  broke            2 ->  23    -21
+  stopped          3 ->  79    -76
+  spoons           4 ->  70    -66
+  drove            5 -> 135   -130
+  chased           7 -> 133   -126
+  turned           8 ->  55    -47
+  made             6 ->  31    -25
+  took            10 ->  67    -57
+  removed         12 -> 128   -116
+  destroyed       16 ->  72    -56
+  prevented       17 -> 168   -151
+  poured          13 ->  24    -11
+  plates          11 ->  15     -4
+  told            19 ->  95    -76
+  expelled        20 -> 163   -143
+  sent            23 -> 148   -125
+  statues         22 ->  41    -19
+  vessels         18 ->  28    -10
+  tables          21 ->  25     -4
+
+HIGHER UNDER B
+  pitchers       105 ->   1   +104
+  flagons        141 ->   3   +138
+  jars           115 ->   4   +111
+  cups            14 ->   5     +9
+  jugs            42 ->   7    +35
+  other           93 ->   8    +85
+  dishes           9 ->   6     +3
+  mixing         159 ->  10   +149
+  water          134 ->  11   +123
+  platters       150 ->  12   +138
+  goblets        130 ->  14   +116
+  pots            15 ->   9     +6
+  censers         24 ->  13    +11
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  broke            3 ->   5     -2
+  said             4 ->  13     -9
+  the              6 ->  39    -33
+  ground           9 -> 114   -105
+  poured          11 ->  40    -29
+  threw            5 ->  14     -9
+  trashed         16 ->  59    -43
+  filled          12 ->  24    -12
+  went             7 ->  12     -5
+  spilled         17 ->  51    -34
+  took            15 ->  37    -22
+  overturned      10 ->  19     -9
+  scattered       13 ->  18     -5
+
+HIGHER UNDER B
+  shattered       14 ->   3    +11
+  trampled         2 ->   1     +1
+  hurled          28 ->   4    +24
+  ripped           8 ->   6     +2
+  was             33 ->   9    +24
+  smashed         18 ->   7    +11
+  cursed          20 ->   8    +12
+  cut             41 ->  11    +30
+  destroyed       40 ->  15    +25
+  declared        26 ->  10    +16
+  began           35 ->  16    +19
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

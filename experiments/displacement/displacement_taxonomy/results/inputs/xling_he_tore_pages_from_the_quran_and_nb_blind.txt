@@ -1,0 +1,1408 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He tore pages from the Quran and ___
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  wrote            2 ->   8     -6
+  tore             3 ->  19    -16
+  ripped           4 ->  35    -31
+  burned          10 ->  45    -35
+  read            16 ->  86    -70
+  tried           12 ->  39    -27
+  showed          20 -> 111    -91
+  then            15 ->  37    -22
+  said            22 ->  80    -58
+  made            21 ->  36    -15
+  started         18 ->  29    -11
+  put              8 ->  15     -7
+  the              9 ->  16     -7
+  cut             24 ->  30     -6
+  began            5 ->  11     -6
+  used             7 ->  12     -5
+  placed          19 ->  20     -1
+  beat            13 ->  13     +0
+
+HIGHER UNDER B
+  threw            1 ->   1     +0
+  scattered       14 ->   4    +10
+  hurled           6 ->   2     +4
+  flung           11 ->   3     +8
+  broke           41 ->   6    +35
+  flushed         43 ->   7    +36
+  shredded        23 ->   5    +18
+  replaced        65 ->  10    +55
+  swore           67 ->  17    +50
+  other           55 ->  14    +41
+  scribbled       17 ->   9     +8
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  pasted           1 ->  45    -44
+  jotted           2 -> 127   -125
+  soaked           9 ->  88    -79
+  distributed      6 ->  22    -16
+  showed           5 ->  13     -8
+  wrote            7 ->  15     -8
+  placed          10 ->  21    -11
+  replaced        11 ->  68    -57
+  joked           15 -> 114    -99
+  recited         13 ->  27    -14
+  marked          17 ->  86    -69
+  put             12 ->  17     -5
+  made            19 ->  26     -7
+  the             16 ->  18     -2
+  had             21 ->  28     -7
+  held            14 ->  16     -2
+
+HIGHER UNDER B
+  threw            3 ->   1     +2
+  flung          117 ->   2   +115
+  then            22 ->   4    +18
+  burned          28 ->   6    +22
+  tossed          80 ->   7    +73
+  hurled         112 ->   9   +103
+  shouted        141 ->  11   +130
+  said            44 ->  10    +34
+  used            18 ->   8    +10
+  read            24 ->  12    +12
+  scattered       20 ->  14     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  tore             9 ->  32    -23
+  tossed           5 ->  13     -8
+  the              8 ->  20    -12
+  hurled          14 ->  58    -44
+  stuffed         16 ->  25     -9
+  set              4 ->   5     -1
+  burnt           11 ->  15     -4
+
+HIGHER UNDER B
+  put              6 ->   4     +2
+  scattered        3 ->   3     +0
+  left            13 ->   8     +5
+  used            10 ->   7     +3
+  gave            32 ->  10    +22
+  burned           2 ->   2     +0
+  distributed     26 ->  12    +14
+  said             7 ->   6     +1
+  then            12 ->   9     +3
+  placed          15 ->  11     +4
+  tried           17 ->  14     +3
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  the              5 ->  16    -11
+  cut              8 ->  30    -22
+  found           16 ->  69    -53
+  put              7 ->  15     -8
+  translated      18 ->  58    -40
+  began           21 ->  64    -43
+  he              22 ->  60    -38
+  started         15 ->  23     -8
+  recited         19 ->  37    -18
+  had             13 ->  21     -8
+  added            9 ->  14     -5
+  made             2 ->   3     -1
+  gave            20 ->  25     -5
+
+HIGHER UNDER B
+  destroyed       24 ->   4    +20
+  replaced        27 ->   6    +21
+  spread          17 ->   8     +9
+  wrote            1 ->   1     +0
+  distorted      106 ->  12    +94
+  threw            6 ->   5     +1
+  burned           3 ->   2     +1
+  used            12 ->   9     +3
+  forged         113 ->  17    +96
+  claimed         80 ->  18    +62
+  changed         44 ->  20    +24
+  created         37 ->  19    +18
+  then            14 ->  10     +4
+  placed          26 ->  22     +4
+  rewrote         11 ->  11     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  threw            1 ->   2     -1
+  burned           2 ->   3     -1
+  put              4 ->  14    -10
+  placed           6 ->  17    -11
+  tossed          19 -> 122   -103
+  said             8 ->  12     -4
+  the             11 ->  18     -7
+  gave            15 ->  41    -26
+  showed          13 ->  28    -15
+  he              17 ->  42    -25
+  handed          12 ->  21     -9
+  spread          18 ->  37    -19
+  read             5 ->   9     -4
+  tore            16 ->  29    -13
+
+HIGHER UNDER B
+  wrote            3 ->   1     +2
+  began            7 ->   4     +3
+  recited         23 ->   6    +17
+  started         10 ->   5     +5
+  scattered       38 ->  11    +27
+  inserted        35 ->  10    +25
+  wiped           68 ->  16    +52
+  replaced        52 ->  13    +39
+  smashed         14 ->   8     +6
+  ripped          30 ->  15    +15
+  made             9 ->   7     +2
+  cut             25 ->  19     +6
+  sent            20 ->  20     +0
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  read             3 ->  10     -7
+  burned           6 ->  37    -31
+  wrote            9 ->  72    -63
+  gave            10 ->  40    -30
+  the              5 ->   9     -4
+  handed          12 ->  25    -13
+  said            13 ->  29    -16
+  used            14 ->  79    -65
+  then            15 ->  82    -67
+  made            16 ->  34    -18
+
+HIGHER UNDER B
+  recited          4 ->   1     +3
+  flung           17 ->   3    +14
+  hurled          26 ->   6    +20
+  began            7 ->   5     +2
+  cursed          37 ->  12    +25
+  scattered       22 ->  11    +11
+  tossed          11 ->   8     +3
+  spread          19 ->  13     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  wrote            4 ->  17    -13
+  threw            1 ->   3     -2
+  made             7 ->  19    -12
+  put              8 ->  32    -24
+  tore            14 ->  56    -42
+  the             15 ->  31    -16
+  placed          16 ->  41    -25
+  from            18 ->  28    -10
+  burnt           11 ->  13     -2
+  read            10 ->  11     -1
+  stuffed         12 ->  12     +0
+
+HIGHER UNDER B
+  flushed         51 ->   5    +46
+  used             2 ->   1     +1
+  scattered        5 ->   4     +1
+  burned           3 ->   2     +1
+  set              6 ->   6     +0
+  stomped         75 ->   9    +66
+  hurled           9 ->   7     +2
+  lit             13 ->   8     +5
+  smashed         44 ->  10    +34
+  spat            43 ->  14    +29
+  crumpled        30 ->  16    +14
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  the              7 ->  15     -8
+  burned           2 ->   4     -2
+  tore             9 ->  20    -11
+  burnt            6 ->   6     +0
+  Quran           12 ->  29    -17
+  wrote            8 ->  13     -5
+  set             20 ->  53    -33
+  put             13 ->  22     -9
+  started         21 ->  31    -10
+  hurled          18 ->  23     -5
+  recited          3 ->   5     -2
+  tried           17 ->  19     -2
+  shouted         16 ->  17     -1
+
+HIGHER UNDER B
+  trampled         4 ->   2     +2
+  threw            1 ->   1     +0
+  used             5 ->   3     +2
+  drank           25 ->   9    +16
+  stomped         19 ->   7    +12
+  taunted         47 ->  16    +31
+  urinated        29 ->  14    +15
+  made            15 ->  12     +3
+  scattered       14 ->  11     +3
+  spat            11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  ate              3 ->  31    -28
+  threw            1 ->   1     +0
+  posted          13 ->  28    -15
+  wrote           15 ->  33    -18
+  burnt            6 ->   8     -2
+  tossed          17 ->  27    -10
+  said            10 ->  11     -1
+  flushed         11 ->  16     -5
+  threatened      14 ->  14     +0
+  placed          12 ->  12     +0
+
+HIGHER UNDER B
+  stepped         25 ->   6    +19
+  used             8 ->   4     +4
+  burned           2 ->   2     +0
+  trampled        16 ->  10     +6
+  put              7 ->   7     +0
+  insulted        31 ->  15    +16
+  set              4 ->   3     +1
+  gave            34 ->  19    +15
+  left            29 ->  18    +11
+  ripped          32 ->  22    +10
+  stomped          9 ->   9     +0
+  distributed     27 ->  21     +6
+  drew            19 ->  13     +6
+  desecrated      24 ->  23     +1
+  then             5 ->   5     +0
+  the             20 ->  20     +0
+  made            18 ->  17     +1
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  tossed           5 ->  18    -13
+  spat             9 ->  17     -8
+  dumped          20 ->  70    -50
+  hurled           3 ->   8     -5
+  said            16 ->  26    -10
+  burnt           21 ->  36    -15
+  stomped         13 ->  21     -8
+  set              8 ->  13     -5
+  burned           2 ->   4     -2
+  stuffed         15 ->  19     -4
+  put             10 ->  11     -1
+
+HIGHER UNDER B
+  used             7 ->   2     +5
+  scattered       12 ->   3     +9
+  placed          23 ->  10    +13
+  defaced         39 ->  15    +24
+  wrote           14 ->   7     +7
+  trampled        18 ->   9     +9
+  left            19 ->  14     +5
+  ripped          29 ->  20     +9
+  flushed         17 ->  16     +1
+  urinated         6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  threw            1 -> 152   -151
+  burned           2 -> 194   -192
+  wrote            4 -> 114   -110
+  set              5 -> 119   -114
+  then             3 ->   8     -5
+  tossed           6 -> 205   -199
+  scattered        9 -> 166   -157
+  put              7 ->  71    -64
+  used             8 ->  68    -60
+  destroyed       11 -> 162   -151
+  said            10 ->  76    -66
+  distributed     13 -> 145   -132
+  flung           14 -> 219   -205
+  hid             16 -> 155   -139
+  had             17 -> 123   -106
+  ripped          18 -> 232   -214
+  smashed         21 -> 229   -208
+  tried           19 -> 112    -93
+  made            20 ->  65    -45
+
+HIGHER UNDER B
+  the             12 ->   1    +11
+  hadith         218 ->   2   +216
+  hadiths        212 ->   4   +208
+  Hadith         165 ->   5   +160
+  other           15 ->   3    +12
+  its            131 ->   6   +125
+  to             128 ->   7   +121
+  Sunnah         164 ->  10   +154
+  from            97 ->   9    +88
+  Islamic        149 ->  11   +138
+  explain        221 ->  12   +209
+  verses         161 ->  13   +148
+  say            147 ->  14   +133
+  their          135 ->  15   +120
+  how            191 ->  17   +174
+  Hadiths        174 ->  18   +156
+  make           167 ->  19   +148
+  also            90 ->  16    +74
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  spread           5 -> 119   -114
+  placed           4 ->  21    -17
+  threw            6 ->  20    -14
+  recited          3 ->   6     -3
+  tore             9 ->  73    -64
+  used             8 ->  27    -19
+  began           11 ->  61    -50
+  handed          13 -> 145   -132
+  tossed          21 -> 214   -193
+  distributed     19 ->  75    -56
+  told            17 ->  36    -19
+  copied          15 ->  25    -10
+  read             2 ->   3     -1
+  cut             18 ->  19     -1
+  made            10 ->  10     +0
+
+HIGHER UNDER B
+  the              7 ->   2     +5
+  then            14 ->   4    +10
+  translated      91 ->   8    +83
+  said            20 ->   5    +15
+  from            61 ->   7    +54
+  Quranic        157 ->  14   +143
+  referred       145 ->  15   +130
+  had             84 ->  13    +71
+  a               45 ->  12    +33
+  Arabic         176 ->  17   +159
+  wrote            1 ->   1     +0
+  printed         58 ->  16    +42
+  put             16 ->  11     +5
+  took            12 ->   9     +3
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  set              4 ->  10     -6
+  trampled         7 ->  83    -76
+  urinated         6 ->  32    -26
+  spat             5 ->   9     -4
+  stomped         12 ->  88    -76
+  put             10 ->  22    -12
+  then            19 ->  74    -55
+  ate             17 ->  29    -12
+  said            14 ->  21     -7
+  burned           2 ->   4     -2
+  lit             16 ->  16     +0
+
+HIGHER UNDER B
+  hurled          11 ->   2     +9
+  scattered        8 ->   3     +5
+  flung           15 ->   6     +9
+  the             13 ->   7     +6
+  wrote           29 ->  12    +17
+  placed          23 ->  11    +12
+  made            22 ->  13     +9
+  burnt            9 ->   8     +1
+  tossed          18 ->  14     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  burned           2 ->  29    -27
+  wrote            3 ->  16    -13
+  made             6 ->  27    -21
+  tore             5 ->  20    -15
+  put              7 ->  51    -44
+  threw            1 ->   1     +0
+  then             9 ->  78    -69
+  burnt            8 ->  41    -33
+  ripped          10 ->  40    -30
+  said            11 ->  65    -54
+  read            14 ->  74    -60
+  beat            18 ->  72    -54
+  smashed         13 ->  32    -19
+  placed          17 ->  28    -11
+  gave            16 ->  17     -1
+
+HIGHER UNDER B
+  other           56 ->   2    +54
+  scattered       12 ->   4     +8
+  Bible          154 ->   6   +148
+  sent            38 ->   5    +33
+  showed          27 ->   7    +20
+  hurled          46 ->  10    +36
+  started         33 ->   8    +25
+  spread          22 ->  11    +11
+  the             19 ->   9    +10
+  used             4 ->   3     +1
+  held            50 ->  14    +36
+  defaced        101 ->  15    +86
+  tossed          15 ->  12     +3
+  began           21 ->  13     +8
+  blew            69 ->  18    +51
+  tried           23 ->  19     +4
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  wrote            4 ->   5     -1
+  set              7 ->  26    -19
+  put              8 ->  29    -21
+  said            13 ->  33    -20
+  began           10 ->  21    -11
+  placed          16 ->  36    -20
+  burned           3 ->   4     -1
+  made            12 ->  19     -7
+  the             19 ->  24     -5
+  tried           14 ->  17     -3
+  tore             5 ->   6     -1
+
+HIGHER UNDER B
+  scattered        6 ->   2     +4
+  flushed         66 ->  10    +56
+  distributed     87 ->  15    +72
+  spread          46 ->  16    +30
+  ate             15 ->   8     +7
+  stuffed         11 ->   7     +4
+  smeared         25 ->  14    +11
+  tossed          20 ->  12     +8
+  burnt            9 ->   9     +0
+  flung           17 ->  11     +6
+  hurled          18 ->  13     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  said             6 ->  29    -23
+  smashed          7 ->  80    -73
+  he               8 -> 102    -94
+  burned           2 ->   2     +0
+  the             12 ->  32    -20
+  destroyed       14 ->  37    -23
+  then            17 -> 100    -83
+  set              9 ->  19    -10
+  left            16 ->  54    -38
+  spat            15 ->  34    -19
+  wrote            5 ->  12     -7
+  hurled          10 ->  16     -6
+
+HIGHER UNDER B
+  made            11 ->   3     +8
+  tossed          46 ->   6    +40
+  threw            1 ->   1     +0
+  distributed     67 ->   8    +59
+  tried           13 ->   7     +6
+  handed          81 ->  13    +68
+  chucked         37 ->   9    +28
+  scattered       38 ->  10    +28
+  chewed          73 ->  15    +58
+  dropped         39 ->  14    +25
+  urinated        18 ->  11     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  the              7 ->  22    -15
+  then             8 ->  18    -10
+  put              4 ->  10     -6
+  shouted         16 ->  61    -45
+  set             15 ->  43    -28
+  told            10 ->  16     -6
+  burnt            6 ->   9     -3
+  scattered       11 ->  21    -10
+  made            13 ->  15     -2
+  was             14 ->  14     +0
+
+HIGHER UNDER B
+  flushed         17 ->   2    +15
+  said             3 ->   3     +0
+  defecated       43 ->   7    +36
+  desecrated      53 ->   8    +45
+  tried            9 ->   6     +3
+  used             5 ->   5     +0
+  flung           20 ->  12     +8
+  urinated        18 ->  13     +5
+  ate             12 ->  11     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  threw            1 ->   2     -1
+  used             5 ->  13     -8
+  stuffed         14 ->  80    -66
+  wrote            9 ->  18     -9
+  flung           13 ->  15     -2
+  said             6 ->   6     +0
+
+HIGHER UNDER B
+  burned           2 ->   1     +1
+  scattered        4 ->   3     +1
+  urinated        44 ->  11    +33
+  left            10 ->   5     +5
+  set             11 ->   8     +3
+  burnt           16 ->  12     +4
+  the              7 ->   7     +0
+  tried           12 ->  10     +2
+  put             15 ->  14     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  burned           2 ->  24    -22
+  set              3 ->  86    -83
+  hurled           4 ->  12     -8
+  tore             5 ->  25    -20
+  burnt            7 ->  56    -49
+  used             8 ->  46    -38
+  stuffed          9 ->  37    -28
+  began           11 ->  76    -65
+  started         12 ->  60    -48
+  then            13 ->  47    -34
+  made            18 ->  45    -27
+  scattered       16 ->  26    -10
+  stuck           15 ->  21     -6
+  handed          20 ->  67    -47
+  left            22 -> 119    -97
+
+HIGHER UNDER B
+  threw            1 ->   1     +0
+  ate             50 ->   2    +48
+  urinated        17 ->   3    +14
+  displayed       47 ->   8    +39
+  put             10 ->   4     +6
+  posted          21 ->   6    +15
+  flung           14 ->   7     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  wrote            1 ->   4     -3
+  said             5 ->   8     -3
+  started          8 ->  20    -12
+  told             9 ->  18     -9
+  the              3 ->   3     +0
+  recited          6 ->  10     -4
+  threw           20 ->  51    -31
+  translated      17 ->  35    -18
+  copied          16 ->  28    -12
+  destroyed       22 ->  36    -14
+  gave            15 ->  24     -9
+  made            12 ->  15     -3
+  called          21 ->  27     -6
+  used            11 ->  14     -3
+
+HIGHER UNDER B
+  studied         44 ->   7    +37
+  then            10 ->   5     +5
+  spent           53 ->  12    +41
+  read             2 ->   1     +1
+  began            4 ->   2     +2
+  left            18 ->  13     +5
+  was             13 ->   9     +4
+  tried           14 ->  11     +3
+  prayed          29 ->  17    +12
+  would           41 ->  23    +18
+  burned          26 ->  16    +10
+  he              30 ->  21     +9
+  had             19 ->  19     +0
+  took            23 ->  22     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  said             6 ->  13     -7
+  wrote            7 ->  19    -12
+  then            12 ->  54    -42
+  hurled           8 ->  10     -2
+  tossed           9 ->  14     -5
+  put             11 ->  16     -5
+  made            15 ->  21     -6
+  fed             13 ->  17     -4
+
+HIGHER UNDER B
+  used             3 ->   3     +0
+  set              4 ->   4     +0
+  burned           2 ->   2     +0
+  scattered       14 ->   5     +9
+  cut             47 ->   9    +38
+  sold            80 ->  15    +65
+  beat            24 ->   8    +16
+  the             10 ->   7     +3
+  tore            25 ->  12    +13
+  tried           20 ->  11     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  then             8 ->  25    -17
+  had              9 ->  23    -14
+  recited          4 ->  16    -12
+  left             7 ->  13     -6
+  was             12 ->  21     -9
+  he              24 ->  41    -17
+  gave            19 ->  28     -9
+  placed          10 ->  14     -4
+  said            21 ->  27     -6
+  found            6 ->   9     -3
+  sold            23 ->  31     -8
+  used             5 ->   8     -3
+  memorized       17 ->  18     -1
+
+HIGHER UNDER B
+  scattered       18 ->   5    +13
+  began           14 ->   4    +10
+  translated      11 ->   6     +5
+  started         13 ->   7     +6
+  threw           22 ->  10    +12
+  read             3 ->   3     +0
+  tossed          20 ->  11     +9
+  spread          28 ->  15    +13
+  muttered        30 ->  19    +11
+  wrote            2 ->   2     +0
+  studied         15 ->  12     +3
+  burned          27 ->  20     +7
+  turned          25 ->  22     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  burned           1 ->   3     -2
+  burnt            6 ->  83    -77
+  threw            2 ->   4     -2
+  spat            11 ->  92    -81
+  lit             12 -> 131   -119
+  tore            13 -> 178   -165
+  scattered        9 ->  18     -9
+  smashed         18 ->  68    -50
+  said            10 ->  15     -5
+  tried           17 ->  20     -3
+
+HIGHER UNDER B
+  used             4 ->   1     +3
+  urinated        14 ->   5     +9
+  then             7 ->   7     +0
+  replaced        37 ->   9    +28
+  was             45 ->  12    +33
+  stamped         15 ->  10     +5
+  made            20 ->  11     +9
+  put              8 ->   8     +0
+  ate             34 ->  14    +20
+  set              3 ->   2     +1
+  read            28 ->  16    +12
+  stomped         16 ->  13     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  burned           2 ->   3     -1
+  put              7 ->  20    -13
+  took            18 ->  51    -33
+  the             14 ->  31    -17
+  cut              6 ->   7     -1
+  placed           5 ->   6     -1
+  then            10 ->  21    -11
+  sent            19 ->  30    -11
+  had             22 ->  37    -15
+  showed           8 ->  11     -3
+  made             9 ->  15     -6
+  tore            21 ->  27     -6
+  stuffed         16 ->  19     -3
+  stuck           20 ->  24     -4
+  smashed         15 ->  17     -2
+  left            12 ->  14     -2
+
+HIGHER UNDER B
+  scattered        3 ->   2     +1
+  threw            1 ->   1     +0
+  held            17 ->   5    +12
+  used             4 ->   4     +0
+  flung           34 ->  12    +22
+  scrawled        28 ->  10    +18
+  hurled          41 ->  16    +25
+  shredded        55 ->  22    +33
+  waved           43 ->  18    +25
+  tossed          24 ->  13    +11
+  spread          13 ->   8     +5
+  began           33 ->  23    +10
+  wrote           11 ->   9     +2
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  burned           2 ->   3     -1
+  scattered       14 ->  76    -62
+  then             6 ->  22    -16
+  tried            9 ->  24    -15
+  put             11 ->  32    -21
+  placed          21 ->  42    -21
+  flushed         17 ->  33    -16
+  the             15 ->  23     -8
+  said            10 ->  12     -2
+  wrote           16 ->  18     -2
+  used             4 ->   7     -3
+
+HIGHER UNDER B
+  spat             3 ->   2     +1
+  urinated        12 ->   4     +8
+  spit             5 ->   5     +0
+  poured          29 ->   9    +20
+  stomped          7 ->   6     +1
+  beat            51 ->  21    +30
+  called          20 ->  11     +9
+  told            35 ->  17    +18
+  made            13 ->   8     +5
+  even            39 ->  20    +19
+  smashed         27 ->  14    +13
+  left            26 ->  16    +10
+  tore            19 ->  13     +6
+  tossed          22 ->  19     +3
+  destroyed       18 ->  15     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  ate              6 ->  11     -5
+  gave            10 ->  17     -7
+  made            11 ->  14     -3
+  fed             16 ->  24     -8
+  put              5 ->   5     +0
+  the             12 ->  13     -1
+  wrote           14 ->  18     -4
+
+HIGHER UNDER B
+  burned           2 ->   2     +0
+  set              9 ->   6     +3
+  threw            1 ->   1     +0
+  scattered       18 ->   9     +9
+  handed          15 ->  10     +5
+  desecrated      17 ->  15     +2
+  flushed          8 ->   8     +0
+  urinated        19 ->  16     +3
+  placed          13 ->  12     +1
+  used             3 ->   3     +0
+  then             7 ->   7     +0
+  burnt            4 ->   4     +0
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  burnt           14 ->  17     -3
+  made            17 ->  21     -4
+  the              7 ->  10     -3
+  distributed      4 ->   5     -1
+  placed          11 ->  12     -1
+  started         18 ->  18     +0
+  began           19 ->  20     -1
+  scattered       25 ->  26     -1
+  gave            15 ->  15     +0
+  used             6 ->   7     -1
+  other           24 ->  25     -1
+  put             13 ->  13     +0
+
+HIGHER UNDER B
+  ripped          10 ->   6     +4
+  threw            1 ->   1     +0
+  pasted          20 ->  16     +4
+  burned           2 ->   2     +0
+  tore             5 ->   4     +1
+  posted          26 ->  19     +7
+  showed          12 ->  11     +1
+  held             3 ->   3     +0
+  tried           16 ->  14     +2
+  wrote            9 ->   9     +0
+  read             8 ->   8     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  spat             5 ->  20    -15
+  then             7 ->  21    -14
+  urinated         8 ->  22    -14
+  called          13 ->  58    -45
+  the             16 ->  86    -70
+  stabbed         19 ->  67    -48
+  burned           4 ->   6     -2
+  wrote           21 ->  54    -33
+  tried           15 ->  24     -9
+  shouted         18 ->  27     -9
+  said            10 ->  14     -4
+  hurled          14 ->  17     -3
+  kicked          12 ->  12     +0
+
+HIGHER UNDER B
+  threw            1 ->   1     +0
+  set              3 ->   3     +0
+  used             6 ->   4     +2
+  beat             2 ->   2     +0
+  stuffed         11 ->   5     +6
+  desecrated      20 ->   8    +12
+  waved           27 ->  10    +17
+  scattered       17 ->   9     +8
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  wrote            4 ->   6     -2
+  hung             9 ->  30    -21
+  stuck           15 ->  35    -20
+  posted          18 ->  37    -19
+  burned           2 ->   3     -1
+  hurled          21 ->  33    -12
+  put              7 ->  14     -7
+  placed          20 ->  27     -7
+  set              5 ->   7     -2
+  the             10 ->  15     -5
+  tossed          19 ->  23     -4
+  burnt           13 ->  13     +0
+
+HIGHER UNDER B
+  used             3 ->   2     +1
+  tried            8 ->   5     +3
+  stomped         57 ->  19    +38
+  scattered       11 ->   8     +3
+  waved            6 ->   4     +2
+  distributed     38 ->  21    +17
+  replaced        33 ->  22    +11
+  handed          28 ->  18    +10
+  flushed         17 ->   9     +8
+  lit             26 ->  20     +6
+  left            22 ->  16     +6
+  said            14 ->  10     +4
+  read            23 ->  17     +6
+  urinated        12 ->  11     +1
+  made            24 ->  24     +0
+  then            16 ->  12     +4
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  wrote            9 ->  13     -4
+  waved           16 ->  25     -9
+  scribbled       23 ->  28     -5
+  made             7 ->   8     -1
+  used             8 ->  10     -2
+  held            13 ->  14     -1
+  a               17 ->  19     -2
+  the              2 ->   2     +0
+  placed          21 ->  22     -1
+  from            18 ->  20     -2
+  hurled          22 ->  23     -1
+  then            15 ->  17     -2
+  ripped           6 ->   6     +0
+  tore             3 ->   4     -1
+  scattered       12 ->  12     +0
+
+HIGHER UNDER B
+  threw            1 ->   1     +0
+  burned          14 ->   7     +7
+  began            4 ->   3     +1
+  read            25 ->  16     +9
+  set             26 ->  24     +2
+  tried           10 ->   9     +1
+  said            32 ->  26     +6
+  put             20 ->  15     +5
+  scrawled        24 ->  21     +3
+  started         19 ->  18     +1
+  flung            5 ->   5     +0
+  tossed          11 ->  11     +0
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  threw            1 ->   4     -3
+  burned           3 ->  16    -13
+  left            10 ->  76    -66
+  tossed          16 ->  75    -59
+  burnt           18 ->  59    -41
+  ate             15 ->  38    -23
+  lit             19 ->  45    -26
+  set              6 ->  10     -4
+  the              7 ->  13     -6
+
+HIGHER UNDER B
+  stuffed         13 ->   2    +11
+  recited         95 ->   9    +86
+  other           12 ->   6     +6
+  stacked        142 ->  15   +127
+  had             45 ->  11    +34
+  made             9 ->   5     +4
+  replaced        23 ->  12    +11
+  read            28 ->  17    +11
+  he              31 ->  18    +13
+  bound          147 ->  24   +123
+  mixed           57 ->  20    +37
+  glued           60 ->  21    +39
+  tried           34 ->  22    +12
+  scattered        4 ->   3     +1
+  put              8 ->   8     +0
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  used             1 ->   4     -3
+  stuffed          6 ->   9     -3
+  put              4 ->   6     -2
+  said             8 ->  11     -3
+  wrapped         13 ->  29    -16
+  wrote            5 ->   5     +0
+  lit             11 ->  13     -2
+  made             9 ->  10     -1
+  stuck           14 ->  17     -3
+  he              17 ->  20     -3
+  scattered       15 ->  15     +0
+  told            20 ->  22     -2
+
+HIGHER UNDER B
+  burned           2 ->   1     +1
+  set              7 ->   2     +5
+  burnt           12 ->   7     +5
+  threw            3 ->   3     +0
+  the             16 ->  12     +4
+  tried           18 ->  14     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  threw            1 ->   2     -1
+  wrote            5 ->  17    -12
+  scattered        4 ->  10     -6
+  said             6 ->  12     -6
+  made            12 ->  35    -23
+  trampled        11 ->  25    -14
+  put             10 ->  16     -6
+  ate             16 ->  51    -35
+  tore            15 ->  38    -23
+  placed          17 ->  28    -11
+  spat            13 ->  20     -7
+  the             18 ->  19     -1
+
+HIGHER UNDER B
+  burned           2 ->   1     +1
+  set              7 ->   3     +4
+  flushed         21 ->   5    +16
+  lit             14 ->   6     +8
+  stuffed          8 ->   7     +1
+  crumpled        43 ->   9    +34
+  then             9 ->   8     +1
+  tossed          20 ->  11     +9
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  set              4 ->   5     -1
+  urinated         7 ->   9     -2
+  lit              9 ->  14     -5
+  tried           13 ->  21     -8
+  stuffed         10 ->  12     -2
+  rubbed          17 ->  59    -42
+  burnt           11 ->  16     -5
+  then            16 ->  25     -9
+  shoved          15 ->  19     -4
+
+HIGHER UNDER B
+  used             1 ->   1     +0
+  put              5 ->   4     +1
+  threw            2 ->   2     +0
+  a               60 ->  10    +50
+  burned           3 ->   3     +0
+  placed          12 ->   8     +4
+  scattered       23 ->  13    +10
+  the             27 ->  15    +12
+  wrote            6 ->   6     +0
+  wiped           14 ->  11     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  set              3 ->  12     -9
+  used             4 ->   6     -2
+  burned           2 ->   2     +0
+  stamped          8 ->  39    -31
+  shouted         11 ->  30    -19
+  burnt            5 ->   8     -3
+  lit             15 ->  46    -31
+  placed          10 ->  18     -8
+  trampled         9 ->  16     -7
+  stomped         19 ->  33    -14
+  stuffed         13 ->  24    -11
+  stepped         14 ->  29    -15
+  tore            21 ->  34    -13
+  threatened      23 ->  35    -12
+  ate             17 ->  20     -3
+  put             16 ->  19     -3
+
+HIGHER UNDER B
+  recited         60 ->  11    +49
+  read            48 ->  10    +38
+  hurled          18 ->   3    +15
+  threw            1 ->   1     +0
+  wrote           25 ->   9    +16
+  left            45 ->  14    +31
+  the              7 ->   4     +3
+  chanted         51 ->  22    +29
+  walked          44 ->  26    +18
+  distributed     40 ->  25    +15
+  declared        41 ->  28    +13
+  then            22 ->  13     +9
+  called          29 ->  27     +2
+  a               24 ->  17     +7
+  other           26 ->  21     +5
+  tried           27 ->  23     +4
+  tossed          12 ->   7     +5
+  said             6 ->   5     +1
+  made            20 ->  15     +5
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  burned           1 ->  14    -13
+  used             3 ->  13    -10
+  set              4 ->  45    -41
+  lit              6 ->  74    -68
+  the              5 ->  15    -10
+  wrote            9 ->  64    -55
+  burnt           10 ->  55    -45
+  started         11 ->  68    -57
+  made             8 ->  26    -18
+  hurled          12 ->  31    -19
+  stuffed         16 ->  92    -76
+  ripped          20 ->  83    -63
+  fed             17 ->  30    -13
+  tossed          18 ->  24     -6
+  he              15 ->  17     -2
+
+HIGHER UNDER B
+  threw            2 ->   1     +1
+  displayed      108 ->   2   +106
+  showed          43 ->   3    +40
+  was             63 ->   6    +57
+  spit            64 ->   7    +57
+  trampled        72 ->  11    +61
+  waved           46 ->  12    +34
+  spat            29 ->   9    +20
+  flung           19 ->  10     +9
+  a               13 ->   5     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  threw            1 -> 168   -167
+  wrote            2 -> 123   -121
+  burned           3 -> 204   -201
+  used             4 -> 131   -127
+  put              5 -> 143   -138
+  placed           6 -> 180   -174
+  the              7 ->  56    -49
+  stuffed          8 -> 220   -212
+  stuck            9 -> 209   -200
+  read            10 -> 129   -119
+  tossed          11 -> 183   -172
+  left            12 -> 157   -145
+  scattered       13 -> 185   -172
+  gave            14 -> 145   -131
+  ripped          15 -> 205   -190
+  made            16 -> 149   -133
+  tore            17 -> 240   -223
+  replaced        18 -> 181   -163
+  cut             19 -> 182   -163
+  prayed          20 -> 167   -147
+  from            21 -> 119    -98
+  said            22 -> 118    -96
+  inserted        23 -> 195   -172
+  hurled          24 -> 171   -147
+  then            25 -> 117    -92
+  scribbled       26 -> 197   -171
+
+HIGHER UNDER B
+  He             132 ->   1   +131
+  The            135 ->   2   +133
+  It             151 ->   3   +148
+  This           186 ->   5   +181
+  I              131 ->   4   +127
+  What           176 ->   6   +170
+  There          196 ->   7   +189
+  In             150 ->   8   +142
+  They           164 ->   9   +155
+  His            137 ->  10   +127
+  How            152 ->  11   +141
+  If             193 ->  12   +181
+  However        241 ->  13   +228
+  When           179 ->  14   +165
+  Many           202 ->  15   +187
+  Given          248 ->  16   +232
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  threw            1 ->   2     -1
+  flung            3 ->   6     -3
+  put              9 ->  23    -14
+  wrote            7 ->  13     -6
+  tossed          16 ->  33    -17
+  used             6 ->   9     -3
+  smeared         18 ->  35    -17
+  hurled          10 ->  16     -6
+  smashed         15 ->  20     -5
+  then            14 ->  18     -4
+  burnt           20 ->  26     -6
+
+HIGHER UNDER B
+  scattered        5 ->   3     +2
+  the             12 ->   5     +7
+  placed           4 ->   4     +0
+  a               34 ->  11    +23
+  sold            35 ->  12    +23
+  hid             11 ->   8     +3
+  other           38 ->  17    +21
+  distributed     23 ->  14     +9
+  set              8 ->   7     +1
+  posted          31 ->  19    +12
+  displayed       41 ->  24    +17
+  spread          29 ->  21     +8
+  discarded       17 ->  15     +2
+  destroyed       26 ->  25     +1
+  left            13 ->  10     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  threw            1 ->   2     -1
+  shouted          9 -> 122   -113
+  put              4 ->  22    -18
+  said            10 ->  38    -28
+  then            11 ->  31    -20
+  was             20 ->  81    -61
+  threatened      14 ->  35    -21
+  the             13 ->  29    -16
+  burnt            8 ->  17     -9
+  left            17 ->  26     -9
+  set              3 ->   3     +0
+  used            12 ->  14     -2
+
+HIGHER UNDER B
+  burned           2 ->   1     +1
+  stomped         25 ->   4    +21
+  scattered       43 ->   5    +38
+  replaced        82 ->  11    +71
+  stamped          6 ->   6     +0
+  placed          18 ->   9     +9
+  hurled          15 ->  10     +5
+  scribbled       55 ->  15    +40
+  stuffed         32 ->  16    +16
+  desecrated      40 ->  19    +21
+  flung           16 ->  12     +4
+  spat            19 ->  13     +6
+  held            22 ->  18     +4
+  tried           21 ->  20     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  threw            1 ->   1     +0
+  tore             4 ->   9     -5
+  hurled           7 ->  17    -10
+  ripped          17 ->  51    -34
+  flung           21 ->  41    -20
+  shouted          8 ->  14     -6
+  tried           11 ->  18     -7
+  said            15 ->  19     -4
+  left            20 ->  20     +0
+
+HIGHER UNDER B
+  set              3 ->   3     +0
+  burned           2 ->   2     +0
+  spat             6 ->   4     +2
+  hung            24 ->  10    +14
+  posted          13 ->   7     +6
+  burnt            9 ->   6     +3
+  put             16 ->  11     +5
+  wrote            5 ->   5     +0
+  used            10 ->   8     +2
+  made            14 ->  12     +2
+  threatened      18 ->  15     +3
+  sent            19 ->  16     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  then             4 ->  30    -26
+  placed           9 ->  73    -64
+  put              8 ->  43    -35
+  the             11 -> 104    -93
+  burnt            6 ->  18    -12
+  set              5 ->   9     -4
+  made            12 ->  37    -25
+  told            17 ->  38    -21
+  was             15 ->  27    -12
+  shouted         20 ->  25     -5
+  wrote           10 ->  10     +0
+  stuffed          7 ->   7     +0
+  spat            14 ->  15     -1
+
+HIGHER UNDER B
+  used             3 ->   2     +1
+  threw            1 ->   1     +0
+  threatened      19 ->   4    +15
+  scattered       24 ->   5    +19
+  flushed         30 ->   8    +22
+  tossed          13 ->   6     +7
+  tore            21 ->  11    +10
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  tore            14 ->  27    -13
+  put              8 ->  11     -3
+  placed           9 ->  15     -6
+  tried            7 ->   8     -1
+  stuffed          6 ->   6     +0
+  hurled          18 ->  23     -5
+  held            17 ->  22     -5
+  then             5 ->   5     +0
+
+HIGHER UNDER B
+  burned           3 ->   3     +0
+  threw            1 ->   1     +0
+  used             2 ->   2     +0
+  trampled        15 ->   7     +8
+  spat            29 ->  17    +12
+  wrote            4 ->   4     +0
+  the             19 ->  14     +5
+  he              20 ->  18     +2
+  made            12 ->  10     +2
+  scattered       33 ->  19    +14
+  said            10 ->   9     +1
+  tossed          16 ->  16     +0
+  ripped          13 ->  13     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  threw            2 ->  17    -15
+  burned           1 ->   1     +0
+  burnt            3 ->   6     -3
+  then             7 ->  21    -14
+  spat             6 ->  16    -10
+
+HIGHER UNDER B
+  threpped       186 ->   5   +181
+  trampled        31 ->   4    +27
+  used             5 ->   3     +2
+  urinated        12 ->   7     +5
+  set              4 ->   2     +2
+  stomped         48 ->   9    +39
+  defecated       81 ->  12    +69
+  stamped         42 ->  11    +31
+  desecrated      21 ->  14     +7
+  made            11 ->  10     +1
+  scattered       29 ->  15    +14
+  put              9 ->   8     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  threw            1 ->   8     -7
+  said             8 -> 108   -100
+  then             5 ->  17    -12
+  a               13 ->  71    -58
+  put              6 ->  18    -12
+  the              9 ->  22    -13
+  waved           14 ->  47    -33
+  read            17 ->  58    -41
+  tore            19 ->  72    -53
+  tossed          22 ->  68    -46
+  burnt           18 ->  26     -8
+  ripped          21 ->  24     -3
+  shouted          3 ->   6     -3
+
+HIGHER UNDER B
+  burned           2 ->   1     +1
+  used             4 ->   2     +2
+  wrote            7 ->   3     +4
+  posted          11 ->   4     +7
+  created        148 ->  10   +138
+  stitched       117 ->  15   +102
+  placed          10 ->   5     +5
+  spread          41 ->  12    +29
+  printed        127 ->  16   +111
+  hung            20 ->   9    +11
+  cut             37 ->  14    +23
+  called          12 ->   7     +5
+  made            15 ->  11     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

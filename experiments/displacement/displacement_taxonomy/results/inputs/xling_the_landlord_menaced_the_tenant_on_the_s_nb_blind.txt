@@ -1,0 +1,1264 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: The landlord menaced the tenant on the stairwell and continued down the steps before ___
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  he               2 ->   4     -2
+  returning        4 ->  21    -17
+  entering         6 ->  62    -56
+  turning          5 ->  44    -39
+  I                7 ->  61    -54
+  coming           8 ->  36    -28
+  finally          9 ->   9     +0
+  leaving         10 ->  25    -15
+  a               12 ->  40    -28
+  going           13 ->  32    -19
+  disappearing    16 ->  90    -74
+  running         17 ->  99    -82
+  stopping        14 ->  22     -8
+  calling         18 ->  30    -12
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  being            3 ->   2     +1
+  they            15 ->   3    +12
+  police          55 ->   6    +49
+  eventually      27 ->   5    +22
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  finally          2 ->  18    -16
+  breaking         3 ->  24    -21
+  ultimately       4 -> 111   -107
+  pointing         6 ->  93    -87
+  eventually       7 ->  83    -76
+  cornering        8 ->  84    -76
+  exiting          5 ->  19    -14
+  assaulting      11 -> 112   -101
+  ordering        12 ->  76    -64
+  making          10 ->  23    -13
+
+HIGHER UNDER B
+  slamming       107 ->   2   +105
+  the              1 ->   1     +0
+  he               9 ->   3     +6
+  she             34 ->   4    +30
+  being           65 ->   5    +60
+  him             91 ->   8    +83
+  locking         48 ->   7    +41
+  turning         15 ->   6     +9
+  disappearing   109 ->   9   +100
+  her            102 ->  11    +91
+  continuing      86 ->  10    +76
+  them           116 ->  12   +104
+  stopping        99 ->  15    +84
+  knocking        81 ->  14    +67
+  they            54 ->  13    +41
+  running         94 ->  16    +78
+  shouting       108 ->  17    +91
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  he               2 ->   6     -4
+  she              6 ->   9     -3
+  disappearing     7 ->  15     -8
+  kicking         12 ->  99    -87
+  throwing        15 ->  71    -56
+  leaving         13 ->  23    -10
+  entering        16 ->  29    -13
+  running         14 ->  20     -6
+  going           11 ->  17     -6
+  stopping         8 ->   8     +0
+  they            17 ->  19     -2
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  police          10 ->   3     +7
+  being            4 ->   2     +2
+  returning        5 ->   5     +0
+  a                9 ->   7     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  being            3 ->  15    -12
+  they             5 ->  13     -8
+  closing         12 ->  19     -7
+  she             15 ->  28    -13
+  leaving         16 ->  30    -14
+  coming           6 ->  11     -5
+  running         20 ->  31    -11
+  reaching         8 ->  14     -6
+  going           17 ->  23     -6
+
+HIGHER UNDER B
+  him             13 ->   5     +8
+  he               2 ->   1     +1
+  finally          7 ->   4     +3
+  turning          4 ->   3     +1
+  stepping        42 ->   9    +33
+  stopping        27 ->  12    +15
+  suddenly        50 ->  17    +33
+  abruptly       105 ->  20    +85
+  making          14 ->   6     +8
+  disappearing    10 ->   7     +3
+  taking          18 ->  16     +2
+  moving          11 ->  10     +1
+  entering         9 ->   8     +1
+  exiting         19 ->  18     +1
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  he               2 ->   2     +0
+  calling          5 ->  19    -14
+  police           8 ->  30    -22
+  being            4 ->   6     -2
+  moving           7 ->  16     -9
+  running         10 ->  21    -11
+  taking          12 ->  20     -8
+  fleeing         13 ->  15     -2
+  pulling         20 ->  22     -2
+  coming          22 ->  25     -3
+  escaping        23 ->  24     -1
+  turning          6 ->   8     -2
+  she              9 ->  12     -3
+
+HIGHER UNDER B
+  leaving          3 ->   3     +0
+  finally         11 ->   4     +7
+  walking         14 ->   5     +9
+  eventually      29 ->   9    +20
+  getting         15 ->   7     +8
+  stopping        17 ->  10     +7
+  exiting         16 ->  11     +5
+  making          25 ->  13    +12
+  the              1 ->   1     +0
+  jumping         21 ->  14     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  the              1 ->   5     -4
+  he               2 ->   4     -2
+  they             7 ->  50    -43
+  she              9 ->  45    -36
+  being           12 -> 108    -96
+  I               16 -> 107    -91
+  him              5 ->   6     -1
+  his             14 ->  40    -26
+  reaching        11 ->  20     -9
+  returning        8 ->  13     -5
+  them            17 ->  26     -9
+
+HIGHER UNDER B
+  stopping         3 ->   1     +2
+  turning          4 ->   2     +2
+  coming           6 ->   3     +3
+  suddenly        31 ->   7    +24
+  disappearing    29 ->   8    +21
+  reappearing     74 ->  12    +62
+  abruptly        70 ->  15    +55
+  pausing         38 ->  14    +24
+  slamming        18 ->  10     +8
+  vanishing       61 ->  18    +43
+  approaching     32 ->  16    +16
+  breaking        15 ->  11     +4
+  opening         30 ->  19    +11
+  finally         10 ->   9     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  he               2 ->  11     -9
+  being            7 ->  20    -13
+  going            8 ->  12     -4
+  pulling         16 ->  38    -22
+  grabbing        14 ->  19     -5
+  getting         12 ->  15     -3
+  knocking        17 ->  36    -19
+  taking          18 ->  31    -13
+
+HIGHER UNDER B
+  exiting          5 ->   1     +4
+  turning          4 ->   3     +1
+  disappearing     9 ->   5     +4
+  opening         15 ->   8     +7
+  leaving          6 ->   6     +0
+  reaching        11 ->   7     +4
+  descending      59 ->  13    +46
+  stopping        10 ->   9     +1
+  confronting     37 ->  14    +23
+  returning       13 ->  10     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  he               2 ->   2     +0
+  the              1 ->   1     +0
+  a                5 ->  13     -8
+  his              7 ->  21    -14
+  they             8 ->  11     -3
+
+HIGHER UNDER B
+  stopping        10 ->   5     +5
+  reaching        11 ->   6     +5
+  leaving         12 ->   8     +4
+  entering        13 ->   9     +4
+  she              4 ->   4     +0
+  exiting         30 ->  15    +15
+  going           15 ->  12     +3
+  police          14 ->  14     +0
+  being            3 ->   3     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  turning          1 ->   2     -1
+  returning        3 ->   3     +0
+  he               4 ->   7     -3
+  firing          12 ->  48    -36
+  shooting         9 ->  27    -18
+  stopping         5 ->   5     +0
+  coming          15 ->  19     -4
+  being            6 ->   9     -3
+  she             11 ->  15     -4
+
+HIGHER UNDER B
+  disappearing    13 ->   4     +9
+  entering        10 ->   6     +4
+  striking        35 ->  12    +23
+  exiting         14 ->  10     +4
+  making          21 ->  13     +8
+  pushing         36 ->  17    +19
+  suddenly        17 ->  14     +3
+  pulling         16 ->  16     +0
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  returning        4 ->   6     -2
+  he               3 ->   4     -1
+  turning          2 ->   2     +0
+  assaulting      10 ->  63    -53
+  punching        14 ->  51    -37
+  throwing         8 ->  33    -25
+  coming          15 ->  40    -25
+  a               11 ->  20     -9
+  exiting         13 ->  19     -6
+  running         17 ->  22     -5
+
+HIGHER UNDER B
+  disappearing     9 ->   5     +4
+  being            5 ->   3     +2
+  leaving         18 ->   9     +9
+  finally         27 ->  13    +14
+  making          31 ->  14    +17
+  stopping        21 ->  11    +10
+  getting         16 ->  10     +6
+  grabbing        22 ->  15     +7
+  fleeing         32 ->  16    +16
+  reaching        23 ->  17     +6
+  suddenly        25 ->  21     +4
+  threatening     19 ->  18     +1
+  going           12 ->  12     +0
+  the              1 ->   1     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  what             6 -> 148   -142
+  being            7 ->  16     -9
+  she              3 ->   4     -1
+  dropping        18 ->  80    -62
+  grabbing        21 ->  67    -46
+  firing          12 ->  25    -13
+  returning        5 ->   7     -2
+  knocking        11 ->  18     -7
+  taking          16 ->  29    -13
+  finally         17 ->  30    -13
+  throwing        19 ->  32    -13
+  entering        13 ->  20     -7
+  reaching        15 ->  26    -11
+  you             20 ->  31    -11
+  they             9 ->  12     -3
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  calling         42 ->   9    +33
+  he               2 ->   2     +0
+  disappearing    28 ->   8    +20
+  stopping        52 ->  11    +41
+  saying           4 ->   3     +1
+  anyone          75 ->  13    +62
+  leaving         10 ->   5     +5
+  shouting        54 ->  17    +37
+  turning          8 ->   6     +2
+  going           29 ->  14    +15
+  him             14 ->  10     +4
+  coming          22 ->  15     +7
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  being            3 ->  16    -13
+  he               4 ->  11     -7
+  returning        5 ->   7     -2
+  threatening     17 -> 149   -132
+  they            10 ->  26    -16
+  knocking        13 ->  35    -22
+  getting         15 ->  37    -22
+  giving          12 ->  28    -16
+  going            6 ->   6     +0
+  a               18 ->  25     -7
+  attempting      19 ->  24     -5
+  calling          7 ->  10     -3
+
+HIGHER UNDER B
+  reaching        27 ->   2    +25
+  turning         11 ->   4     +7
+  exiting         23 ->   5    +18
+  making          22 ->   8    +14
+  proceeding      54 ->  14    +40
+  stopping        14 ->   9     +5
+  stepping        48 ->  17    +31
+  moving          16 ->  15     +1
+  finding         41 ->  20    +21
+  walking         33 ->  19    +14
+  taking          20 ->  18     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  turning          2 ->   6     -4
+  he               3 ->   5     -2
+  returning        4 ->  15    -11
+  entering         8 ->  12     -4
+  being            6 ->  10     -4
+  she              9 ->  11     -2
+  a               10 ->  13     -3
+  opening         13 ->  48    -35
+  pulling         14 ->  46    -32
+  his             11 ->  19     -8
+  threatening     15 ->  26    -11
+  going           12 ->  14     -2
+  stopping         7 ->   8     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  storming        74 ->   3    +71
+  leaving         24 ->   4    +20
+  slamming        18 ->   7    +11
+  him             76 ->   9    +67
+  disappearing     5 ->   2     +3
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  he               2 ->   3     -1
+  she              4 ->  17    -13
+  they             5 ->  14     -9
+  I                8 -> 117   -109
+  stopping         7 ->  31    -24
+  a                9 ->  43    -34
+  being            3 ->   5     -2
+  returning       10 ->  15     -5
+
+HIGHER UNDER B
+  disappearing    12 ->   1    +11
+  kicking         92 ->   6    +86
+  locking        103 ->   7    +96
+  turning          6 ->   4     +2
+  throwing        35 ->  10    +25
+  entering        21 ->  11    +10
+  coming          13 ->   9     +4
+  bursting        61 ->  13    +48
+  finally         11 ->   8     +3
+  reaching        19 ->  12     +7
+  slamming        55 ->  16    +39
+  grabbing        60 ->  18    +42
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  the              2 ->   6     -4
+  he               3 ->   8     -5
+  being            8 ->  28    -20
+  returning        6 ->  18    -12
+  his             12 ->  39    -27
+  finally          5 ->  12     -7
+  they            13 ->  34    -21
+  coming          15 ->  24     -9
+  I                9 ->  13     -4
+  she              7 ->   9     -2
+
+HIGHER UNDER B
+  turning          1 ->   1     +0
+  abruptly        16 ->   2    +14
+  disappearing    11 ->   3     +8
+  suddenly        10 ->   5     +5
+  stopping         4 ->   4     +0
+  firing          21 ->   7    +14
+  shouting        26 ->  11    +15
+  calling         24 ->  14    +10
+  slamming        14 ->  10     +4
+  threatening     20 ->  15     +5
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  A                2 ->  22    -20
+  leaving          8 ->  14     -6
+  turning          5 ->   6     -1
+  being            6 ->   8     -2
+  running         12 ->  51    -39
+  they             9 ->  10     -1
+  going           13 ->  20     -7
+  disappearing    16 -> 128   -112
+  making          15 ->  44    -29
+  walking         14 ->  21     -7
+
+HIGHER UNDER B
+  she             10 ->   2     +8
+  the              1 ->   1     +0
+  returning        3 ->   3     +0
+  her             70 ->   7    +63
+  calling         20 ->  11     +9
+  he               4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  A                2 -> 120   -118
+  the              1 ->   2     -1
+  being            5 ->  18    -13
+  turning          4 ->  12     -8
+  returning        6 ->  24    -18
+  a               17 ->  47    -30
+  realizing       14 ->  26    -12
+  her             15 ->  25    -10
+  him             13 ->  19     -6
+  coming          18 ->  22     -4
+  disappearing    12 ->  13     -1
+
+HIGHER UNDER B
+  he               3 ->   1     +2
+  stopping         7 ->   3     +4
+  leaving         10 ->   4     +6
+  unlocking      121 ->   6   +115
+  she              9 ->   5     +4
+  opening         45 ->   8    +37
+  what           111 ->  11   +100
+  entering        11 ->   7     +4
+  reaching        16 ->  10     +6
+  doing           59 ->  15    +44
+  they            26 ->  14    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  he               2 ->   8     -6
+  turning          6 ->  17    -11
+  being            7 ->  11     -4
+  entering         9 ->  13     -4
+  stopping         8 ->  12     -4
+  returning       10 ->  19     -9
+  reaching         4 ->   5     -1
+  opening         17 ->  22     -5
+  slamming        16 ->  20     -4
+  going           15 ->  18     -3
+  getting         14 ->  14     +0
+
+HIGHER UNDER B
+  leaving          3 ->   1     +2
+  disappearing    13 ->   3    +10
+  vanishing      104 ->   7    +97
+  A               12 ->   6     +6
+  exiting          5 ->   4     +1
+  confronting     18 ->  10     +8
+  she             21 ->  15     +6
+  they            19 ->  16     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  he               2 ->  32    -30
+  leaving          4 ->  24    -20
+  turning          3 ->   7     -4
+  returning        5 ->   9     -4
+  entering         6 ->   8     -2
+  being            8 ->  72    -64
+  coming          10 ->  45    -35
+  running          9 ->  12     -3
+  she             12 ->  66    -54
+  finally         13 ->  90    -77
+  threatening     15 ->  98    -83
+  throwing        16 ->  74    -58
+  slamming        17 ->  65    -48
+  pushing         19 ->  47    -28
+  exiting         14 ->  17     -3
+  grabbing        18 ->  23     -5
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  stopping        11 ->   2     +9
+  going            7 ->   3     +4
+  stepping       103 ->   4    +99
+  ceasing        141 ->   5   +136
+  walking         23 ->   6    +17
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  he               2 ->   2     +0
+  leaving          4 ->  16    -12
+  him             10 ->  75    -65
+  going            9 ->  24    -15
+  getting         14 ->  39    -25
+  calling          8 ->  13     -5
+  running         17 ->  23     -6
+  fleeing         16 ->  20     -4
+  taking          18 ->  22     -4
+  being           11 ->  14     -3
+  finally          5 ->   6     -1
+
+HIGHER UNDER B
+  turning          3 ->   3     +0
+  suddenly        40 ->  10    +30
+  climbing        29 ->   9    +20
+  heading         31 ->  11    +20
+  coming          12 ->   7     +5
+  making          25 ->  12    +13
+  retreating      15 ->   8     +7
+  they             6 ->   4     +2
+  pulling         26 ->  19     +7
+  jumping         32 ->  21    +11
+  returning        7 ->   5     +2
+  stopping        20 ->  18     +2
+  disappearing    19 ->  17     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  the              1 ->   6     -5
+  he               3 ->   4     -1
+  a               11 ->  49    -38
+  being            8 ->  30    -22
+  she             18 ->  46    -28
+  running         15 ->  27    -12
+  exiting          7 ->  12     -5
+  knocking        16 ->  33    -17
+  reaching        22 ->  41    -19
+
+HIGHER UNDER B
+  slamming         5 ->   2     +3
+  kicking         24 ->   8    +16
+  stopping        14 ->   7     +7
+  disappearing    19 ->   9    +10
+  entering         6 ->   5     +1
+  locking         57 ->  17    +40
+  threatening     23 ->  14     +9
+  opening         35 ->  21    +14
+  going           10 ->  10     +0
+  coming          17 ->  16     +1
+  backing         38 ->  22    +16
+  climbing        20 ->  18     +2
+  pulling         25 ->  20     +5
+  breaking        30 ->  23     +7
+  getting         13 ->  11     +2
+  throwing        21 ->  19     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  turning          1 ->   1     +0
+  exiting          9 ->  16     -7
+  reaching         6 ->  10     -4
+  ascending       17 ->  34    -17
+  returning        5 ->   5     +0
+  climbing        14 ->  24    -10
+  moving          15 ->  23     -8
+  heading         19 ->  27     -8
+  descending      18 ->  25     -7
+  leaving          4 ->   4     +0
+  stopping        10 ->  11     -1
+
+HIGHER UNDER B
+  being            3 ->   3     +0
+  the              2 ->   2     +0
+  running         12 ->   8     +4
+  he               7 ->   6     +1
+  anyone           8 ->   7     +1
+  they            28 ->  19     +9
+  hitting         30 ->  20    +10
+  escaping        13 ->  12     +1
+  realizing       24 ->  17     +7
+  falling         20 ->  14     +6
+  fleeing         16 ->  13     +3
+  coming          21 ->  15     +6
+  calling         25 ->  21     +4
+  disappearing    11 ->   9     +2
+  any             22 ->  18     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  he               2 ->   6     -4
+  him              5 ->  42    -37
+  turning          4 ->   5     -1
+  a                6 ->  12     -6
+  entering         7 ->  18    -11
+  his             11 ->  53    -42
+  her             10 ->  26    -16
+  she              8 ->  10     -2
+  pulling         14 ->  22     -8
+  returning       12 ->  13     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  being            3 ->   2     +1
+  police          20 ->   3    +17
+  exiting         29 ->   4    +25
+  leaving         16 ->   8     +8
+  finally         18 ->   9     +9
+  stopping         9 ->   7     +2
+  getting         13 ->  11     +2
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  he               2 ->   3     -1
+  the              1 ->   1     +0
+  returning        3 ->   6     -3
+  throwing        10 ->  20    -10
+  going           15 ->  51    -36
+  taking          12 ->  17     -5
+  kicking         16 ->  34    -18
+  being            9 ->  11     -2
+
+HIGHER UNDER B
+  finally          4 ->   2     +2
+  disappearing    27 ->   5    +22
+  turning          5 ->   4     +1
+  eventually      24 ->  14    +10
+  grabbing        18 ->  13     +5
+  knocking        11 ->   9     +2
+  stopping         8 ->   8     +0
+  they            13 ->  12     +1
+  pulling         20 ->  16     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  turning          2 ->   9     -7
+  returning        4 ->  23    -19
+  being            5 ->   7     -2
+  he               3 ->   3     +0
+  entering         6 ->   8     -2
+  him              9 -> 133   -124
+  his             17 ->  34    -17
+  finally         12 ->  29    -17
+  threatening     20 ->  35    -15
+  she             10 ->  16     -6
+  reaching        18 ->  20     -2
+  a               15 ->  18     -3
+
+HIGHER UNDER B
+  stopping         7 ->   2     +5
+  the              1 ->   1     +0
+  pulling         13 ->   5     +8
+  leaving          8 ->   4     +4
+  exiting         14 ->   6     +8
+  confronting     36 ->  13    +23
+  telling         38 ->  14    +24
+  they            25 ->  10    +15
+  striking        43 ->  17    +26
+  fleeing         24 ->  15     +9
+  calling         11 ->  11     +0
+  grabbing        16 ->  12     +4
+  going           19 ->  19     +0
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  he               2 ->   2     +0
+  his             13 ->  19     -6
+  she              4 ->   5     -1
+  a               10 ->  13     -3
+
+HIGHER UNDER B
+  turning          3 ->   3     +0
+  I               12 ->   8     +4
+  being            5 ->   4     +1
+  entering        11 ->   9     +2
+  grabbing        14 ->  12     +2
+  finally         17 ->  14     +3
+  returning        7 ->   7     +0
+  they             6 ->   6     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  he               2 ->   3     -1
+  the              1 ->   1     +0
+  going           10 ->  10     +0
+  I               16 ->  24     -8
+  entering        11 ->  11     +0
+  they             8 ->   8     +0
+  leaving         12 ->  12     +0
+  disappearing    18 ->  20     -2
+  being            5 ->   6     -1
+  finally          9 ->   9     +0
+
+HIGHER UNDER B
+  exiting         20 ->  15     +5
+  stopping         6 ->   5     +1
+  grabbing        21 ->  17     +4
+  returning        4 ->   4     +0
+  turning          3 ->   2     +1
+  she             13 ->  13     +0
+  calling         14 ->  14     +0
+  coming           7 ->   7     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  turning          3 ->   4     -1
+  he               2 ->   2     +0
+  being            4 ->   7     -3
+  stopping         5 ->  10     -5
+  leaving          7 ->  25    -18
+  exiting          9 ->  15     -6
+  punching        10 ->  87    -77
+  she              6 ->   6     +0
+  fleeing         12 ->  83    -71
+  returning       11 ->  48    -37
+  knocking        14 ->  69    -55
+  grabbing        16 ->  76    -60
+  running         17 ->  64    -47
+  a               15 ->  19     -4
+  pulling         19 ->  39    -20
+  getting         21 ->  38    -17
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  I               62 ->   3    +59
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  he               2 ->   5     -3
+  returning        6 ->  13     -7
+  turning          4 ->   7     -3
+  she              8 ->  11     -3
+  a               12 ->  17     -5
+  leaving          9 ->  10     -1
+  stopping        17 ->  19     -2
+  going           14 ->  14     +0
+  walking         15 ->  15     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  disappearing     3 ->   2     +1
+  fleeing         10 ->   3     +7
+  entering        16 ->   8     +8
+  running          7 ->   6     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  turning          3 ->   3     +0
+  disappearing    10 ->  18     -8
+  running         12 ->  16     -4
+  reaching        19 ->  23     -4
+  going           17 ->  19     -2
+  his             20 ->  21     -1
+  coming           9 ->  10     -1
+  stopping         8 ->   8     +0
+  a               15 ->  17     -2
+  entering        13 ->  14     -1
+
+HIGHER UNDER B
+  being            4 ->   4     +0
+  the              1 ->   1     +0
+  finally         11 ->   9     +2
+  police          23 ->  15     +8
+  she              6 ->   6     +0
+  I               16 ->  12     +4
+  returning        5 ->   5     +0
+  leaving         18 ->  13     +5
+  fleeing         14 ->  11     +3
+  he               2 ->   2     +0
+  they             7 ->   7     +0
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  returning        6 ->  27    -21
+  being            5 ->  10     -5
+  leaving          3 ->   6     -3
+  punching        12 ->  61    -49
+  kicking         16 ->  67    -51
+  exiting          7 ->  17    -10
+  throwing        18 ->  60    -42
+  getting         10 ->  18     -8
+  stopping        19 ->  35    -16
+  assaulting      15 ->  26    -11
+  attacking       14 ->  19     -5
+  threatening     24 ->  30     -6
+  going           21 ->  24     -3
+  fleeing          4 ->   5     -1
+  jumping         20 ->  21     -1
+
+HIGHER UNDER B
+  she              9 ->   2     +7
+  running          8 ->   4     +4
+  they            13 ->   7     +6
+  walking         22 ->   8    +14
+  disappearing    37 ->  11    +26
+  entering        17 ->   9     +8
+  finally         26 ->  13    +13
+  driving         29 ->  14    +15
+  eventually      28 ->  16    +12
+  making          23 ->  15     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  turning          3 ->   5     -2
+  disappearing     1 ->   2     -1
+  him              6 ->  56    -50
+  he               4 ->   4     +0
+  I                8 ->  71    -63
+  me              15 -> 133   -118
+  reaching         7 ->  16     -9
+  her             16 ->  40    -24
+  she              5 ->   6     -1
+  his             17 ->  27    -10
+  vanishing       11 ->  19     -8
+  opening         13 ->  20     -7
+
+HIGHER UNDER B
+  being           26 ->   3    +23
+  the              2 ->   1     +1
+  leaving         30 ->  11    +19
+  kicking         31 ->  12    +19
+  exiting         12 ->   7     +5
+  returning       18 ->  10     +8
+  anyone          39 ->  17    +22
+  they            23 ->  14     +9
+  stopping         9 ->   8     +1
+  entering        14 ->  13     +1
+  a               20 ->  15     +5
+  slamming        10 ->   9     +1
+  finally         19 ->  18     +1
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  she              3 ->  46    -43
+  I                5 ->  45    -40
+  we              11 ->  76    -65
+  his             10 ->  33    -23
+  they             8 ->  29    -21
+  him             12 ->  30    -18
+  going           14 ->  20     -6
+  entering        15 ->  22     -7
+
+HIGHER UNDER B
+  he               2 ->   2     +0
+  retreating      30 ->   5    +25
+  leaving         18 ->   4    +14
+  disappearing     6 ->   3     +3
+  stopping        20 ->   8    +12
+  returning       13 ->   6     +7
+  confronting     84 ->  11    +73
+  exiting         28 ->  10    +18
+  reaching         9 ->   9     +0
+  finally         27 ->  13    +14
+  coming          19 ->  12     +7
+  menacing       106 ->  15    +91
+  escaping        67 ->  16    +51
+  threatening     53 ->  17    +36
+  arriving        48 ->  18    +30
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  turning          2 ->   2     +0
+  returning        4 ->   5     -1
+  stopping         6 ->   9     -3
+  reaching         8 ->  11     -3
+  entering        10 ->  17     -7
+  disappearing     7 ->   7     +0
+  he               3 ->   3     +0
+  a               12 ->  14     -2
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  she             11 ->   6     +5
+  being            5 ->   4     +1
+  leaving         15 ->  10     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  returning        3 ->   9     -6
+  turning          2 ->   3     -1
+  the              1 ->   1     +0
+  coming           7 ->  41    -34
+  she              5 ->  11     -6
+  reaching        13 ->  26    -13
+  reappearing     15 ->  40    -25
+  exiting         14 ->  31    -17
+  stopping         9 ->  17     -8
+  confronting     16 ->  47    -31
+  going           12 ->  20     -8
+  being           10 ->  13     -3
+
+HIGHER UNDER B
+  fleeing         33 ->   4    +29
+  attacking       17 ->   5    +12
+  threatening     20 ->   8    +12
+  climbing        39 ->  14    +25
+  entering         8 ->   6     +2
+  jumping         35 ->  16    +19
+  pulling         30 ->  15    +15
+  opening         49 ->  18    +31
+  running         18 ->  12     +6
+  vanishing       43 ->  23    +20
+  leaving         11 ->  10     +1
+  firing          34 ->  22    +12
+  knocking        32 ->  21    +11
+  grabbing        25 ->  19     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  he               2 ->   3     -1
+  turning          3 ->   5     -2
+  they             5 ->  15    -10
+  I               11 ->  81    -70
+  his              6 ->  17    -11
+  she              7 ->  13     -6
+  a               10 ->  19     -9
+  realizing       14 ->  25    -11
+  stopping         9 ->  14     -5
+
+HIGHER UNDER B
+  returning        8 ->   1     +7
+  finally         12 ->   4     +8
+  eventually      72 ->   7    +65
+  officers       100 ->  11    +89
+  police          63 ->  10    +53
+  pausing         22 ->   8    +14
+  coming          13 ->   9     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  he               2 ->   6     -4
+  leaving          8 ->  14     -6
+  going           13 ->  22     -9
+  entering         4 ->   5     -1
+  the              1 ->   1     +0
+  coming          10 ->  15     -5
+  returning        6 ->   8     -2
+  a               16 ->  29    -13
+  exiting         15 ->  16     -1
+  getting         17 ->  18     -1
+
+HIGHER UNDER B
+  stopping         7 ->   2     +5
+  turning          3 ->   3     +0
+  suddenly        33 ->  11    +22
+  being            5 ->   4     +1
+  opening         18 ->  13     +5
+  slamming        47 ->  17    +30
+  reaching         9 ->   7     +2
+  she             12 ->   9     +3
+  him             11 ->  10     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  he               2 ->   3     -1
+  being            4 ->   8     -4
+  they            10 ->  22    -12
+  finally          9 ->  19    -10
+  stopping         8 ->  12     -4
+  his             11 ->  15     -4
+  disappearing    15 ->  17     -2
+  running         14 ->  14     +0
+  calling         20 ->  28     -8
+  leaving          5 ->   6     -1
+
+HIGHER UNDER B
+  him              3 ->   2     +1
+  me              16 ->   5    +11
+  them            13 ->   9     +4
+  returning        6 ->   4     +2
+  the              1 ->   1     +0
+  turning          7 ->   7     +0
+  entering        19 ->  10     +9
+  us              30 ->  18    +12
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  he               2 ->   7     -5
+  police           7 ->  17    -10
+  knocking        11 ->  78    -67
+  she              9 ->  13     -4
+  a               15 ->  59    -44
+  being            3 ->   3     +0
+  finally         16 ->  34    -18
+  walking         13 ->  20     -7
+  making          12 ->  15     -3
+  returning       14 ->  16     -2
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  fleeing          4 ->   2     +2
+  reaching        23 ->   9    +14
+  entering        10 ->   5     +5
+  they            17 ->  10     +7
+  turning          5 ->   4     +1
+  both            81 ->  14    +67
+  leaving          6 ->   6     +0
+  collapsing      40 ->  12    +28
+  exiting         18 ->  11     +7
+  running          8 ->   8     +0
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  he               2 ->   3     -1
+  turning          4 ->   5     -1
+  stopping         6 ->   8     -2
+  she              7 ->   9     -2
+  coming          10 ->  23    -13
+  threatening      9 ->  19    -10
+  confronting     17 ->  31    -14
+  shouting        13 ->  25    -12
+  entering        14 ->  24    -10
+  reaching        19 ->  28     -9
+  calling         16 ->  21     -5
+  the              1 ->   1     +0
+  going            8 ->  10     -2
+
+HIGHER UNDER B
+  police          20 ->   4    +16
+  being            3 ->   2     +1
+  security        89 ->  11    +78
+  a               11 ->   7     +4
+  other           81 ->  20    +61
+  slamming        24 ->  14    +10
+  eventually      29 ->  17    +12
+  leaving         25 ->  15    +10
+  running         12 ->  12     +0
+  punching        21 ->  18     +3
+  his             15 ->  13     +2
+  they            18 ->  16     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  he               2 ->   7     -5
+  being            3 ->   9     -6
+  a                5 ->  34    -29
+  turning          4 ->   8     -4
+  running         10 ->  50    -40
+  his             11 ->  40    -29
+  getting         14 ->  57    -43
+  she             20 ->  53    -33
+  making          22 ->  43    -21
+  coming          21 ->  37    -16
+  finally          8 ->  20    -12
+  taking          18 ->  25     -7
+  exiting         13 ->  19     -6
+  entering         7 ->  14     -7
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  disappearing    16 ->   2    +14
+  returning        9 ->   3     +6
+  threatening     25 ->   6    +19
+  leaving          6 ->   4     +2
+  fleeing         17 ->   5    +12
+  yelling         63 ->  13    +50
+  kicking         42 ->  11    +31
+  throwing        24 ->  10    +14
+  punching        35 ->  17    +18
+  striking        44 ->  21    +23
+  police          27 ->  16    +11
+  attacking       15 ->  15     +0
+  stopping        12 ->  12     +0
+  reaching        19 ->  18     +1
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  being            5 ->   6     -1
+  returning        3 ->   3     +0
+  police           7 ->   8     -1
+  he               2 ->   2     +0
+  going           11 ->  16     -5
+  running          9 ->  11     -2
+  grabbing        12 ->  15     -3
+  retreating      15 ->  20     -5
+  finally          8 ->  10     -2
+  coming          17 ->  19     -2
+  calling         16 ->  17     -1
+
+HIGHER UNDER B
+  fleeing         14 ->   7     +7
+  the              1 ->   1     +0
+  punching        29 ->  12    +17
+  following       24 ->  18     +6
+  exiting         21 ->  14     +7
+  she             10 ->   9     +1
+  leaving          4 ->   4     +0
+  stopping        13 ->  13     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  disappearing     4 ->  21    -17
+  turning          3 ->   4     -1
+  being            6 ->  27    -21
+  she              7 ->  46    -39
+  the              1 ->   1     +0
+  entering         5 ->   5     +0
+  returning        8 ->  16     -8
+  coming          13 ->  54    -41
+  a               15 ->  43    -28
+  running          9 ->  15     -6
+  he               2 ->   2     +0
+  stopping        11 ->  18     -7
+
+HIGHER UNDER B
+  assaulting     111 ->   6   +105
+  knocking        10 ->   3     +7
+  threatening     60 ->  12    +48
+  throwing        22 ->   7    +15
+  grabbing        23 ->   8    +15
+  shooting        58 ->  13    +45
+  reaching        16 ->  10     +6
+  attempting     112 ->  22    +90
+  striking        32 ->  14    +18
+  going           14 ->  11     +3
+  pulling         12 ->   9     +3
+  pushing         37 ->  17    +20
+  firing          52 ->  23    +29
+  attacking       59 ->  25    +34
+  breaking        31 ->  19    +12
+  hitting         34 ->  20    +14
+  taking          29 ->  24     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  he               2 ->   7     -5
+  entering         4 ->  11     -7
+  being           10 ->  56    -46
+  climbing        13 ->  62    -49
+  leaving         11 ->  21    -10
+  coming           8 ->  16     -8
+  going           15 ->  43    -28
+  they            12 ->  15     -3
+
+HIGHER UNDER B
+  turning          3 ->   1     +2
+  disappearing    17 ->   3    +14
+  stopping         9 ->   4     +5
+  returning        5 ->   5     +0
+  finally          6 ->   6     +0
+  locking         44 ->  10    +34
+  abruptly        91 ->  13    +78
+  pausing         67 ->  14    +53
+  slamming        16 ->   9     +7
+  reaching        14 ->  12     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

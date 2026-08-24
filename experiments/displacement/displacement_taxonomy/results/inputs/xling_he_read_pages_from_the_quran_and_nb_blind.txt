@@ -1,0 +1,1507 @@
+Below are 44 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He read pages from the Quran and ___
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  said             1 ->  30    -29
+  then             2 ->   8     -6
+  explained        7 -> 136   -129
+  spoke            8 ->  57    -49
+  gave            10 -> 158   -148
+  recited          4 ->   9     -5
+  told            14 -> 192   -178
+  he              16 -> 128   -112
+  answered        18 -> 131   -113
+  asked           19 -> 105    -86
+  also            21 -> 137   -116
+  the              3 ->   4     -1
+  a                9 ->  16     -7
+  from             5 ->   6     -1
+  sang            15 ->  37    -22
+  I               11 ->  24    -13
+  his             23 ->  73    -50
+  talked          12 ->  19     -7
+  hadith          22 ->  31     -9
+  was             17 ->  17     +0
+  made            20 ->  20     +0
+
+HIGHER UNDER B
+  listened        24 ->   1    +23
+  prayed           6 ->   2     +4
+  thought        186 ->   5   +181
+  meditated      181 ->   7   +174
+  other           13 ->   3    +10
+  memorized      156 ->  10   +146
+  felt           171 ->  11   +160
+  looked         102 ->  12    +90
+  closed         176 ->  15   +161
+  reflected      173 ->  14   +159
+  studied        154 ->  18   +136
+  found          152 ->  21   +131
+  smiled         148 ->  22   +126
+  pages           47 ->  13    +34
+  quotes          55 ->  23    +32
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  made             2 ->  41    -39
+  related          3 ->  82    -79
+  referred         4 ->  47    -43
+  the              5 ->  13     -8
+  compared         7 ->  15     -8
+  also             8 ->  21    -13
+  quoted          12 ->  54    -42
+  interpreted      9 ->  12     -3
+  declared        14 ->  42    -28
+  deduced         18 -> 109    -91
+  concluded       17 ->  51    -34
+  began           16 ->  30    -14
+  other           19 ->  64    -45
+  showed          11 ->  16     -5
+  commented       20 ->  25     -5
+
+HIGHER UNDER B
+  found            1 ->   1     +0
+  was             31 ->   3    +28
+  then             6 ->   2     +4
+  said            46 ->   5    +41
+  talked          42 ->   7    +35
+  translated      25 ->   6    +19
+  taught          24 ->   9    +15
+  tried           71 ->  11    +60
+  recited         10 ->   4     +6
+  discussed       15 ->   8     +7
+  learned        110 ->  17    +93
+  realized        97 ->  18    +79
+  told            37 ->  14    +23
+  understood      81 ->  19    +62
+  could           76 ->  20    +56
+  explained       13 ->  10     +3
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  explained        4 ->  17    -13
+  the              1 ->   4     -3
+  from             9 ->  43    -34
+  then             3 ->   5     -2
+  talked          12 ->  33    -21
+  asked            7 ->  16     -9
+  other            6 ->   9     -3
+  quoted          16 ->  25     -9
+  said             2 ->   3     -1
+  told            13 ->  14     -1
+  discussed       20 ->  56    -36
+  a               17 ->  22     -5
+  also            18 ->  21     -3
+
+HIGHER UNDER B
+  recited          5 ->   1     +4
+  prayed          11 ->   2     +9
+  listened        24 ->  11    +13
+  read            19 ->   8    +11
+  narrated        42 ->  18    +24
+  chanted         23 ->  13    +10
+  delivered       21 ->  15     +6
+  it              49 ->  20    +29
+  offered         26 ->  19     +7
+  gave            10 ->   6     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  I                9 ->  26    -17
+  wrote            7 ->  16     -9
+  told            10 ->  35    -25
+  then             2 ->   7     -5
+  recited         20 ->  72    -52
+  also            15 ->  55    -40
+  prayed          17 ->  56    -39
+  other           24 ->  71    -47
+  asked           11 ->  28    -17
+  the              1 ->   3     -2
+  made            22 ->  39    -17
+  was              6 ->   8     -2
+  learned         21 ->  31    -10
+  tried           12 ->  21     -9
+  got             19 ->  25     -6
+  had              4 ->   5     -1
+  did             16 ->  19     -3
+  spoke           23 ->  23     +0
+  said             5 ->   6     -1
+
+HIGHER UNDER B
+  believed        13 ->   2    +11
+  found            8 ->   1     +7
+  understood      82 ->  10    +72
+  came            30 ->  12    +18
+  it              18 ->   9     +9
+  saw             47 ->  13    +34
+  explained       14 ->  11     +3
+  decided         29 ->  14    +15
+  could           31 ->  15    +16
+  felt            33 ->  18    +15
+  his             32 ->  20    +12
+  knew            27 ->  17    +10
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  the              1 ->   4     -3
+  other            8 ->  13     -5
+  was              5 ->  12     -7
+  said            10 ->  17     -7
+  from            16 ->  51    -35
+  then             4 ->   8     -4
+  had              7 ->  10     -3
+  a               15 ->  37    -22
+  he              13 ->  27    -14
+  his             19 ->  36    -17
+  asked            9 ->  11     -2
+  learned         14 ->  22     -8
+  memorized        3 ->   6     -3
+
+HIGHER UNDER B
+  wrote           11 ->   2     +9
+  meditated       25 ->   7    +18
+  studied         12 ->   3     +9
+  recited          2 ->   1     +1
+  found           22 ->   9    +13
+  spent           38 ->  20    +18
+  saw             23 ->  14     +9
+  prayed           6 ->   5     +1
+  spoke           39 ->  23    +16
+  talked          26 ->  18     +8
+  started         18 ->  15     +3
+  tried           27 ->  21     +6
+  made            20 ->  19     +1
+  listened        17 ->  16     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  then             3 ->  11     -8
+  said             5 ->  17    -12
+  the              1 ->   1     +0
+  prayed          10 ->  46    -36
+  from            12 ->  43    -31
+  a                8 ->  25    -17
+  he              14 ->  21     -7
+  was             17 ->  30    -13
+  asked           13 ->  16     -3
+  wrote           16 ->  18     -2
+  found           19 ->  33    -14
+  his             20 ->  20     +0
+
+HIGHER UNDER B
+  recited          2 ->   2     +0
+  other            4 ->   3     +1
+  explained        6 ->   4     +2
+  would           15 ->   5    +10
+  shared          50 ->  13    +37
+  reflected       37 ->  10    +27
+  studied         11 ->   6     +5
+  spent           21 ->   9    +12
+  sometimes       31 ->  14    +17
+  translated      25 ->  12    +13
+  memorized        7 ->   7     +0
+  had              9 ->   8     +1
+  even            26 ->  19     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  then             4 ->  13     -9
+  said             5 ->  15    -10
+  asked            6 ->  12     -6
+  told            12 ->  62    -50
+  gave            13 ->  28    -15
+  also            16 ->  42    -26
+  called          19 ->  47    -28
+  made            15 ->  36    -21
+  sang            22 ->  43    -21
+  had             14 ->  19     -5
+  a               24 ->  41    -17
+  from             9 ->  11     -2
+  spoke           23 ->  31     -8
+  wept            18 ->  21     -3
+  listened        21 ->  23     -2
+
+HIGHER UNDER B
+  recited          3 ->   1     +2
+  prayed           2 ->   2     +0
+  whispered       58 ->   6    +52
+  other           17 ->   7    +10
+  offered          8 ->   4     +4
+  performed        7 ->   5     +2
+  lit             52 ->  10    +42
+  chanted         11 ->   8     +3
+  intoned         44 ->  14    +30
+  sprinkled       78 ->  16    +62
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  from             6 ->  10     -4
+  told            10 ->  25    -15
+  had             13 ->  20     -7
+  taught           8 ->   8     +0
+  was             14 ->  17     -3
+  made            12 ->  14     -2
+  other            7 ->   7     +0
+
+HIGHER UNDER B
+  explained        3 ->   3     +0
+  then             4 ->   4     +0
+  recited          2 ->   2     +0
+  responded       75 ->  16    +59
+  began           28 ->  13    +15
+  narrated        19 ->  11     +8
+  interpreted     34 ->  15    +19
+  said             5 ->   5     +0
+  Hadith          15 ->  12     +3
+  repeated        11 ->   9     +2
+  asked            9 ->   6     +3
+
+=== MODEL M43 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  preached        13 ->  67    -54
+  hadith          11 ->  37    -26
+  prayed           6 ->  19    -13
+  hadiths         21 ->  73    -52
+  said             3 ->   5     -2
+  a                9 ->  23    -14
+  was             20 ->  33    -13
+  he              22 ->  31     -9
+  told             4 ->   8     -4
+  other            8 ->  15     -7
+  listened        17 ->  22     -5
+  from            24 ->  28     -4
+  made            14 ->  17     -3
+
+HIGHER UNDER B
+  recited         15 ->   3    +12
+  explained       12 ->   4     +8
+  had            127 ->  20   +107
+  offered         33 ->  12    +21
+  interpreted    112 ->  21    +91
+  led             37 ->  18    +19
+  translated      25 ->  10    +15
+  gave             7 ->   7     +0
+  performed       40 ->  24    +16
+  quoted          19 ->  13     +6
+  talked          10 ->   9     +1
+  sang            18 ->  14     +4
+  asked           16 ->  11     +5
+  discussed       23 ->  16     +7
+  also            26 ->  25     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  said             1 ->   3     -2
+  then             4 ->   6     -2
+  called          10 ->  28    -18
+  shouted         19 ->  96    -77
+  urged           22 -> 141   -119
+  prayed           5 ->   5     +0
+  preached        21 ->  79    -58
+  chanted         23 ->  75    -52
+  talked          11 ->  20     -9
+  a               13 ->  23    -10
+  told             9 ->  12     -3
+  quoted          15 ->  21     -6
+  asked            8 ->   8     +0
+  from            18 ->  19     -1
+  led             12 ->  14     -2
+  he              24 ->  31     -7
+  spoke            6 ->   7     -1
+
+HIGHER UNDER B
+  recited          2 ->   1     +1
+  the              3 ->   2     +1
+  other            7 ->   4     +3
+  explained       20 ->  10    +10
+  read            44 ->  16    +28
+  some            36 ->  17    +19
+  performed       59 ->  24    +35
+  listened        30 ->  15    +15
+  gave            17 ->   9     +8
+  offered         43 ->  22    +21
+  sang            28 ->  18    +10
+  had             16 ->  11     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  prayed           1 ->   3     -2
+  said             2 ->   6     -4
+  recited          3 ->  14    -11
+  was              6 ->  12     -6
+  had             10 ->  86    -76
+  quoted          11 -> 116   -105
+  sang            13 -> 174   -161
+  told             8 ->  26    -18
+  spoke           12 ->  52    -40
+  called          18 -> 162   -144
+  began           17 -> 107    -90
+  other            7 ->   8     -1
+  wrote            9 ->  13     -4
+  made            14 ->  34    -20
+  talked          23 ->  53    -30
+  he              15 ->  29    -14
+  found           19 ->  24     -5
+  also            16 ->  23     -7
+  from            21 ->  33    -12
+  listened        24 ->  31     -7
+
+HIGHER UNDER B
+  explained       22 ->   4    +18
+  list           230 ->   5   +225
+  the              4 ->   1     +3
+  recite         168 ->  16   +152
+  understood      77 ->   7    +70
+  pray           145 ->  15   +130
+  learn          221 ->  21   +200
+  shared         101 ->  19    +82
+  discussed       87 ->  17    +70
+  translated      42 ->  10    +32
+  read            37 ->  11    +26
+  learned         29 ->  18    +11
+  memorized       31 ->  20    +11
+  heard           34 ->  22    +12
+  asked           20 ->   9    +11
+  then             5 ->   2     +3
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  recited          2 ->   6     -4
+  said             4 ->  20    -16
+  asked            7 ->  41    -34
+  prayed          10 -> 102    -92
+  told            12 -> 100    -88
+  memorized        5 ->  16    -11
+  was              9 ->  26    -17
+  wrote           11 ->  27    -16
+  heard           18 -> 141   -123
+  found           19 ->  29    -10
+  made            17 ->  23     -6
+  spent           21 ->  31    -10
+  studied          6 ->   7     -1
+  learned         13 ->  15     -2
+  listened         8 ->   8     +0
+
+HIGHER UNDER B
+  from            26 ->   3    +23
+  the              1 ->   1     +0
+  then             3 ->   2     +1
+  other           16 ->   4    +12
+  read            15 ->   5    +10
+  Quranic        146 ->  12   +134
+  referred       111 ->  14    +97
+  also            35 ->  11    +24
+  had             29 ->  10    +19
+  Islamic        131 ->  19   +112
+  a               20 ->  13     +7
+  did             52 ->  18    +34
+  used            39 ->  17    +22
+  tried           14 ->   9     +5
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  spoke            7 ->  17    -10
+  made            12 ->  60    -48
+  asked            9 ->  22    -13
+  talked          15 ->  55    -40
+  gave            11 ->  32    -21
+  was             14 ->  33    -19
+  then             5 ->   7     -2
+  also            18 ->  50    -32
+  said             2 ->   6     -4
+  a               10 ->  12     -2
+  led             19 ->  34    -15
+  told            17 ->  30    -13
+  prayed           3 ->   5     -2
+
+HIGHER UNDER B
+  recited          6 ->   2     +4
+  other            8 ->   3     +5
+  the              1 ->   1     +0
+  Hadith         164 ->   8   +156
+  sang             4 ->   4     +0
+  he              31 ->   9    +22
+  had             58 ->  16    +42
+  hadiths         21 ->  10    +11
+  hadith          22 ->  15     +7
+  verses          20 ->  13     +7
+  his             16 ->  14     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  the              1 ->   2     -1
+  then             2 ->   9     -7
+  said             3 ->  24    -21
+  was              5 ->  68    -63
+  prayed           6 -> 103    -97
+  recited         10 ->  90    -80
+  he               7 ->  49    -42
+  taught           8 ->  39    -31
+  had             13 -> 111    -98
+  wrote           14 ->  59    -45
+  it              19 -> 115    -96
+  made            20 ->  52    -32
+  his             22 ->  85    -63
+  memorized       21 ->  61    -40
+  gave            18 ->  30    -12
+  learned         17 ->  27    -10
+  studied         15 ->  15     +0
+
+HIGHER UNDER B
+  other           11 ->   1    +10
+  pondered        64 ->   3    +61
+  discussed       60 ->   5    +55
+  understood      55 ->   8    +47
+  explained       12 ->   6     +6
+  from             4 ->   4     +0
+  listened         9 ->   7     +2
+  various        156 ->  12   +144
+  Hadiths        191 ->  20   +171
+  shared         104 ->  13    +91
+  Sunnah          79 ->  16    +63
+  related         82 ->  17    +65
+  hadiths         37 ->  11    +26
+  translated      57 ->  19    +38
+  commented       38 ->  14    +24
+  began           29 ->  21     +8
+  tried           23 ->  18     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  the              2 ->   7     -5
+  said             3 ->  11     -8
+  asked            6 ->  25    -19
+  told             4 ->   9     -5
+  prayed           9 ->  14     -5
+  talked          10 ->  16     -6
+  then             1 ->   4     -3
+  had             17 ->  42    -25
+  invited         23 ->  48    -25
+  he              11 ->  19     -8
+  gave             5 ->   5     +0
+  hadith          22 ->  32    -10
+  was             15 ->  20     -5
+  made            14 ->  18     -4
+  from            19 ->  21     -2
+  recited         21 ->  22     -1
+
+HIGHER UNDER B
+  explained        7 ->   1     +6
+  discussed       18 ->   2    +16
+  shared          50 ->   6    +44
+  spoke            8 ->   3     +5
+  would           53 ->  12    +41
+  delivered       20 ->   8    +12
+  lectured        45 ->  17    +28
+  other           13 ->  10     +3
+  hadiths         58 ->  23    +35
+  repeated        56 ->  24    +32
+  taught          16 ->  15     +1
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  spoke            3 ->  12     -9
+  talked           4 ->  18    -14
+  said             5 ->  17    -12
+  recited          8 ->  14     -6
+  told             6 ->   9     -3
+  prayed          10 -> 123   -113
+  gave             9 ->  15     -6
+  he              12 ->  63    -51
+  asked           14 ->  59    -45
+  listened        17 -> 119   -102
+  made            16 ->  50    -34
+  had             21 ->  87    -66
+  was             15 ->  20     -5
+  also            22 ->  39    -17
+  his             23 ->  36    -13
+  taught          20 ->  21     -1
+
+HIGHER UNDER B
+  Bible           57 ->   1    +56
+  other           11 ->   3     +8
+  hadith          46 ->   8    +38
+  bible          159 ->  11   +148
+  shared          19 ->   7    +12
+  discussed       13 ->   6     +7
+  showed          24 ->  13    +11
+  from            18 ->  10     +8
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M44 ===
+HIGHER UNDER A
+  the              1 ->   3     -2
+  prayed           6 ->  21    -15
+  spoke           12 ->  25    -13
+  advised         23 -> 100    -77
+  a               18 ->  34    -16
+  gave             9 ->  13     -4
+  asked           16 ->  23     -7
+  taught          13 ->  17     -4
+  his             21 ->  30     -9
+  called          20 ->  27     -7
+  offered         24 ->  37    -13
+  talked          15 ->  18     -3
+  made            22 ->  26     -4
+  told             7 ->   8     -1
+  he              14 ->  15     -1
+  hadiths         19 ->  20     -1
+
+HIGHER UNDER B
+  other            5 ->   2     +3
+  recited          3 ->   1     +2
+  hadith          10 ->   5     +5
+  cried           25 ->   9    +16
+  wept            33 ->  11    +22
+  translated      30 ->  12    +18
+  Hadith          32 ->  14    +18
+  tried           41 ->  19    +22
+  performed       29 ->  22     +7
+  explained       11 ->  10     +1
+  was             17 ->  16     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  prayed           5 ->  35    -30
+  said             4 ->  10     -6
+  spoke            7 ->  30    -23
+  talked          13 ->  60    -47
+  told            10 ->  21    -11
+  from             8 ->  12     -4
+  gave            17 ->  32    -15
+  passages        18 ->  31    -13
+  the              1 ->   2     -1
+  then             2 ->   3     -1
+  he              14 ->  20     -6
+
+HIGHER UNDER B
+  recited          3 ->   1     +2
+  Surah           68 ->   6    +62
+  other            6 ->   4     +2
+  tried           21 ->   5    +16
+  made            16 ->   9     +7
+  explained       11 ->   7     +4
+  was             19 ->  13     +6
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  the              3 ->  45    -42
+  prayed           2 ->  11     -9
+  then             6 ->  62    -56
+  recited          7 ->  25    -18
+  asked            9 ->  33    -24
+  said             1 ->   6     -5
+  called          11 ->  23    -12
+  a               14 -> 106    -92
+  explained       15 ->  58    -43
+  made            17 ->  36    -19
+  had             18 ->  59    -41
+  sang            20 ->  53    -33
+  Bible           13 ->  15     -2
+  from            22 ->  78    -56
+  chanted         23 ->  64    -41
+  also            21 ->  34    -13
+  urged           19 ->  21     -2
+
+HIGHER UNDER B
+  talked           8 ->   1     +7
+  spoke            4 ->   2     +2
+  gave            10 ->   3     +7
+  encouraged      26 ->   5    +21
+  discussed       31 ->   7    +24
+  engaged        119 ->   8   +111
+  told             5 ->   4     +1
+  distributed     50 ->  10    +40
+  ate            140 ->  12   +128
+  quoted          12 ->   9     +3
+  repeatedly      79 ->  13    +66
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  recited          3 ->   6     -3
+  said             6 ->  10     -4
+  the              2 ->   3     -1
+  prayed           7 ->  12     -5
+  saw             11 ->  22    -11
+  started          8 ->  19    -11
+  told            19 ->  50    -31
+  he              13 ->  26    -13
+  memorized       12 ->  18     -6
+  from            18 ->  32    -14
+  realized        22 ->  45    -23
+  asked           16 ->  20     -4
+  was              4 ->   5     -1
+  tried           17 ->  21     -4
+  found            9 ->   9     +0
+  wrote           14 ->  15     -1
+
+HIGHER UNDER B
+  then             1 ->   1     +0
+  spent           23 ->   4    +19
+  began            5 ->   2     +3
+  studied         15 ->   7     +8
+  followed        24 ->  11    +13
+  later           46 ->  17    +29
+  came            21 ->  13     +8
+  became          27 ->  16    +11
+  felt            20 ->  14     +6
+  had             10 ->   8     +2
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  said             3 ->   5     -2
+  then             4 ->   6     -2
+  gave             9 ->  19    -10
+  told             8 ->  11     -3
+  a                6 ->  10     -4
+  started         17 ->  31    -14
+  was             14 ->  25    -11
+  began           10 ->  17     -7
+  he              21 ->  35    -14
+  made            12 ->  16     -4
+  preached        13 ->  18     -5
+  from            19 ->  24     -5
+  asked           11 ->  13     -2
+
+HIGHER UNDER B
+  other            7 ->   4     +3
+  recited          2 ->   2     +0
+  prayed           5 ->   3     +2
+  the              1 ->   1     +0
+  performed       20 ->   7    +13
+  spoke           18 ->   9     +9
+  chanted         15 ->   8     +7
+  listened        28 ->  14    +14
+  quoted          23 ->  12    +11
+  delivered       22 ->  20     +2
+  explained       16 ->  15     +1
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  then             4 ->  13     -9
+  had              2 ->   2     +0
+  recited         19 ->  37    -18
+  also             6 ->  14     -8
+  from            14 ->  24    -10
+  wrote           15 ->  27    -12
+  was              7 ->  11     -4
+  explained       22 ->  30     -8
+  found           20 ->  25     -5
+  memorized        8 ->  10     -2
+  prayed          17 ->  18     -1
+  made            21 ->  23     -2
+  understood      13 ->  15     -2
+  practiced       16 ->  17     -1
+
+HIGHER UNDER B
+  studied          3 ->   3     +0
+  hadith          70 ->  16    +54
+  commentaries    25 ->  12    +13
+  Hadith          18 ->   9     +9
+  other            9 ->   5     +4
+  meditated       12 ->   8     +4
+  analyzed        11 ->   7     +4
+  discussed       10 ->   6     +4
+  learned          5 ->   4     +1
+  the              1 ->   1     +0
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  then             2 ->   7     -5
+  said             5 ->  11     -6
+  he               9 ->  26    -17
+  told            10 ->  28    -18
+  asked           13 ->  27    -14
+  recited          8 ->   9     -1
+  gave             7 ->   8     -1
+  talked          12 ->  23    -11
+  quoted          20 ->  40    -20
+  a               16 ->  20     -4
+  his             17 ->  21     -4
+  prayed           4 ->   5     -1
+  had             22 ->  25     -3
+
+HIGHER UNDER B
+  spoke           11 ->   3     +8
+  explained        3 ->   1     +2
+  other           18 ->   6    +12
+  from             6 ->   4     +2
+  pondered       171 ->  17   +154
+  shared          61 ->  16    +45
+  discussed       32 ->  14    +18
+  found           92 ->  22    +70
+  was             23 ->  12    +11
+  Hadith          45 ->  19    +26
+  taught          15 ->  10     +5
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  then             4 ->   8     -4
+  the              3 ->   7     -4
+  said             6 ->   9     -3
+  he              18 ->  50    -32
+  gave            15 ->  28    -13
+  told            19 ->  41    -22
+  from            20 ->  67    -47
+  was             12 ->  18     -6
+  other           13 ->  17     -4
+  read            22 ->  61    -39
+  taught           8 ->  11     -3
+  had              9 ->  10     -1
+  asked           10 ->  13     -3
+  made            11 ->  12     -1
+
+HIGHER UNDER B
+  prayed           1 ->   1     +0
+  recited          2 ->   2     +0
+  studied         17 ->   4    +13
+  listened        14 ->   6     +8
+  explained        7 ->   5     +2
+  memorized       48 ->  19    +29
+  followed        33 ->  16    +17
+  discussed       29 ->  20     +9
+  answered         5 ->   3     +2
+  tried           21 ->  14     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  said             2 ->   9     -7
+  spoke            4 ->   6     -2
+  prayed           3 ->   3     +0
+  told             8 ->  22    -14
+  asked            9 ->  27    -18
+  the              1 ->   2     -1
+  from            10 ->  16     -6
+  then             6 ->   7     -1
+  explained       21 ->  45    -24
+  a               19 ->  37    -18
+  he              16 ->  25     -9
+  I               18 ->  34    -16
+  taught          17 ->  30    -13
+  gave            11 ->  13     -2
+
+HIGHER UNDER B
+  recited          5 ->   1     +4
+  listened        23 ->  10    +13
+  engaged        104 ->  15    +89
+  other           13 ->   5     +8
+  studied         60 ->  18    +42
+  had             15 ->   8     +7
+  memorized       38 ->  14    +24
+  spent           69 ->  21    +48
+  performed       41 ->  20    +21
+  shared          43 ->  23    +20
+  offered         25 ->  19     +6
+  made            12 ->  11     +1
+  was             14 ->  12     +2
+  tried           20 ->  17     +3
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  the              1 ->   1     +0
+  explained       16 ->  21     -5
+  hadiths         22 ->  30     -8
+  taught          21 ->  29     -8
+  he              14 ->  16     -2
+  said             3 ->   3     +0
+  a               11 ->  11     +0
+  gave            17 ->  18     -1
+  verses          13 ->  13     +0
+  told             9 ->  10     -1
+  made            15 ->  15     +0
+  from             6 ->   7     -1
+
+HIGHER UNDER B
+  other            4 ->   4     +0
+  then             2 ->   2     +0
+  pages            7 ->   6     +1
+  had             19 ->  14     +5
+  prayed          10 ->   8     +2
+  recited          5 ->   5     +0
+  also            29 ->  20     +9
+  wrote           18 ->  17     +1
+  spoke           20 ->  19     +1
+  sang            12 ->  12     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  said             3 ->   3     +0
+  recited          4 ->   5     -1
+  made            17 ->  24     -7
+  began           23 ->  29     -6
+  looked          22 ->  23     -1
+  asked            8 ->   9     -1
+  from             6 ->   8     -2
+  a               13 ->  13     +0
+  was             11 ->  11     +0
+  the              1 ->   1     +0
+  prayed          10 ->  10     +0
+  told            25 ->  25     +0
+
+HIGHER UNDER B
+  then             2 ->   2     +0
+  other            7 ->   6     +1
+  learned         14 ->  14     +0
+  listened         9 ->   7     +2
+  explained       21 ->  16     +5
+  discussed       27 ->  21     +6
+  quoted          15 ->  15     +0
+  memorized       24 ->  22     +2
+  tried           20 ->  18     +2
+  found           12 ->  12     +0
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  the              2 ->  14    -12
+  a                6 ->  19    -13
+  then             5 ->  13     -8
+  called          13 ->  23    -10
+  had             23 -> 127   -104
+  sang            20 ->  48    -28
+  his             24 ->  42    -18
+  told             9 ->  10     -1
+  made            17 ->  22     -5
+  also            22 ->  30     -8
+  explained       21 ->  25     -4
+  chanted         14 ->  17     -3
+
+HIGHER UNDER B
+  said             3 ->   2     +1
+  recited          8 ->   4     +4
+  prayed           1 ->   1     +0
+  praised         15 ->   5    +10
+  spoke            4 ->   3     +1
+  asked           10 ->   6     +4
+  gave            12 ->   7     +5
+  quoted          18 ->  11     +7
+  delivered       29 ->  15    +14
+  discussed       38 ->  18    +20
+  other           11 ->   9     +2
+  led             16 ->  12     +4
+  urged           34 ->  21    +13
+  talked          19 ->  16     +3
+  preached        25 ->  20     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  prayed           4 ->   6     -2
+  the              2 ->   3     -1
+  from            11 ->  26    -15
+  told            13 ->  22     -9
+  spoke            8 ->  12     -4
+  a                7 ->   7     +0
+  was             14 ->  14     +0
+  other           10 ->  11     -1
+  talked          15 ->  15     +0
+  he              17 ->  18     -1
+
+HIGHER UNDER B
+  recited          5 ->   4     +1
+  then             1 ->   1     +0
+  asked            6 ->   5     +1
+  performed       20 ->  13     +7
+  led             16 ->  10     +6
+  listened        26 ->  21     +5
+  also            27 ->  23     +4
+  offered         22 ->  19     +3
+  made            19 ->  17     +2
+  I               18 ->  16     +2
+  gave            12 ->   9     +3
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  then             2 ->   2     +0
+  pointed         12 ->  19     -7
+  said             3 ->   4     -1
+  looked          20 ->  30    -10
+  made            11 ->  18     -7
+  had             21 ->  24     -3
+  quoted           9 ->  10     -1
+  talked           5 ->   6     -1
+  spoke           14 ->  15     -1
+
+HIGHER UNDER B
+  passages        19 ->   5    +14
+  the              1 ->   1     +0
+  I               29 ->  21     +8
+  verses          26 ->  20     +6
+  from            16 ->  12     +4
+  other           13 ->  13     +0
+  tried           23 ->  23     +0
+  gave            22 ->  22     +0
+  he              15 ->  14     +1
+  recited          4 ->   3     +1
+
+6 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  spoke            5 ->  37    -32
+  gave             7 ->  32    -25
+  said             6 ->  16    -10
+  delivered       13 -> 100    -87
+  led             14 ->  77    -63
+  talked          10 ->  24    -14
+  from             8 ->  18    -10
+  told             9 ->  19    -10
+  asked           12 ->  26    -14
+  shared          19 ->  44    -25
+  quoted          24 -> 102    -78
+  a               16 ->  22     -6
+  chanted         23 ->  54    -31
+  called          25 ->  63    -38
+  explained       28 ->  61    -33
+  offered         21 ->  28     -7
+  discussed       30 ->  60    -30
+  also            15 ->  15     +0
+
+HIGHER UNDER B
+  other           18 ->   2    +16
+  he              26 ->   6    +20
+  prayers         54 ->  10    +44
+  listened        39 ->  11    +28
+  recited          4 ->   3     +1
+  found          136 ->  17   +119
+  performed       27 ->   9    +18
+  Allah          142 ->  21   +121
+  they            88 ->  20    +68
+  made            17 ->   7    +10
+  had             29 ->  14    +15
+  was             22 ->  12    +10
+  the              1 ->   1     +0
+  his             20 ->  13     +7
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  then             3 ->   7     -4
+  from             7 ->  20    -13
+  told             4 ->   9     -5
+  said             2 ->   3     -1
+  a               16 ->  30    -14
+  I               21 ->  34    -13
+  he              20 ->  33    -13
+  explained        8 ->  11     -3
+  asked           11 ->  15     -4
+
+HIGHER UNDER B
+  recited          5 ->   2     +3
+  Quran           15 ->   5    +10
+  other            9 ->   4     +5
+  led             17 ->  10     +7
+  shared          50 ->  21    +29
+  prayed          14 ->  13     +1
+  offered         22 ->  16     +6
+  gave            10 ->   8     +2
+  taught          27 ->  22     +5
+  showed          19 ->  18     +1
+  spoke           18 ->  17     +1
+  had             12 ->  12     +0
+  sang            24 ->  19     +5
+  the              1 ->   1     +0
+  Bible           25 ->  24     +1
+  talked           6 ->   6     +0
+  tried           23 ->  23     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  said             1 ->   5     -4
+  told             5 ->  18    -13
+  gave             6 ->  22    -16
+  prayed          15 ->  68    -53
+  his             16 ->  51    -35
+  wept            20 ->  81    -61
+  talked          21 ->  74    -53
+  I               27 ->  62    -35
+  spoke           11 ->  19     -8
+  made             8 ->  13     -5
+  they            25 ->  35    -10
+  listened        22 ->  28     -6
+  had             24 ->  29     -5
+  taught          26 ->  31     -5
+  explained       12 ->  14     -2
+  offered         23 ->  26     -3
+  asked            7 ->   8     -1
+  then             4 ->   4     +0
+
+HIGHER UNDER B
+  from             9 ->   1     +8
+  read            19 ->   6    +13
+  he              10 ->   7     +3
+  declared        58 ->  11    +47
+  other           14 ->   9     +5
+  claimed        151 ->  23   +128
+  recited          3 ->   3     +0
+  repeated        57 ->  20    +37
+  found           54 ->  21    +33
+  pages           38 ->  17    +21
+  called          28 ->  16    +12
+  was             18 ->  12     +6
+  wrote           13 ->  10     +3
+  the              2 ->   2     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  asked            4 ->  10     -6
+  then             1 ->   7     -6
+  from            10 ->  18     -8
+  called          11 ->  14     -3
+  urged           12 ->  13     -1
+  explained       16 ->  21     -5
+  a               17 ->  22     -5
+  also            21 ->  28     -7
+  told             6 ->   8     -2
+
+HIGHER UNDER B
+  prayed           7 ->   1     +6
+  talked           9 ->   6     +3
+  recited          8 ->   5     +3
+  spoke            5 ->   4     +1
+  said             2 ->   2     +0
+  performed       48 ->  20    +28
+  led             25 ->  15    +10
+  sang            15 ->   9     +6
+  began           39 ->  24    +15
+  Hadith          30 ->  23     +7
+  other           20 ->  16     +4
+  the              3 ->   3     +0
+  he              18 ->  17     +1
+  chanted         19 ->  19     +0
+  gave            13 ->  11     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  said             2 ->  18    -16
+  prayed           4 ->  12     -8
+  called          17 ->  44    -27
+  made            12 ->  20     -8
+  talked           6 ->   9     -3
+  sang            14 ->  22     -8
+  gave            10 ->  14     -4
+  chanted         23 ->  59    -36
+  urged           19 ->  25     -6
+  led              9 ->  11     -2
+  spoke            3 ->   4     -1
+  a               21 ->  27     -6
+  recited          5 ->   6     -1
+  preached        24 ->  30     -6
+
+HIGHER UNDER B
+  explained       13 ->   2    +11
+  the              1 ->   1     +0
+  shared          28 ->  15    +13
+  other           16 ->   7     +9
+  quoted          31 ->  17    +14
+  discussed       30 ->  19    +11
+  then             7 ->   3     +4
+  taught          40 ->  23    +17
+  had             15 ->   8     +7
+  from             8 ->   5     +3
+  Bible           37 ->  26    +11
+  encouraged      18 ->  13     +5
+  told            20 ->  16     +4
+  his             25 ->  21     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  said             4 ->  29    -25
+  from             3 ->   6     -3
+  then             2 ->   4     -2
+  had             14 -> 133   -119
+  told            12 ->  66    -54
+  prayed          15 ->  70    -55
+  pages           16 -> 102    -86
+  asked            9 ->  27    -18
+  translated       7 ->  12     -5
+  made            11 ->  28    -17
+  gave            17 ->  43    -26
+  recited          8 ->  19    -11
+  talked          22 -> 107    -85
+  called          21 ->  91    -70
+  other           13 ->  21     -8
+  listened        23 ->  97    -74
+  tried           20 ->  36    -16
+
+HIGHER UNDER B
+  was             30 ->   2    +28
+  the              1 ->   1     +0
+  explained        5 ->   3     +2
+  showed          60 ->   7    +53
+  hadith          80 ->   8    +72
+  a                6 ->   5     +1
+  Christianity   161 ->  17   +144
+  used            66 ->  11    +55
+  Islamic         97 ->  14    +83
+  Arabic          64 ->  15    +49
+  narrated       142 ->  20   +122
+  verses          40 ->  16    +24
+  his             24 ->  13    +11
+  spoke           18 ->  10     +8
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  the              1 ->  43    -42
+  prayed           2 -> 178   -176
+  from             3 -> 122   -119
+  he               4 ->  20    -16
+  recited          5 -> 209   -204
+  said             6 -> 131   -125
+  other            7 -> 136   -129
+  had              8 -> 129   -121
+  then             9 -> 123   -114
+  told            12 -> 147   -135
+  asked           11 -> 135   -124
+  was             10 -> 116   -106
+  talked          13 -> 186   -173
+  gave            14 -> 151   -137
+  explained       15 -> 144   -129
+  listened        16 -> 231   -215
+  made            17 -> 159   -142
+  wrote           18 -> 133   -115
+  translated      19 -> 168   -149
+  his             20 -> 103    -83
+
+HIGHER UNDER B
+  He             129 ->   1   +128
+  The            130 ->   2   +128
+  It             145 ->   3   +142
+  However        234 ->   4   +230
+  But            209 ->   5   +204
+  This           181 ->   6   +175
+  There          187 ->   8   +179
+  His            140 ->   9   +131
+  I               77 ->   7    +70
+  Many           195 ->  10   +185
+  What           180 ->  11   +169
+  They           156 ->  12   +144
+  Insha          155 ->  13   +142
+  In             144 ->  14   +130
+  Given          239 ->  15   +224
+  When           159 ->  16   +143
+  How            146 ->  17   +129
+  If             166 ->  18   +148
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  explained        3 ->   4     -1
+  told             5 ->  15    -10
+  talked           8 ->  39    -31
+  said             7 ->   9     -2
+  from            12 ->  26    -14
+  had             10 ->  19     -9
+  spoke           21 ->  54    -33
+  he              11 ->  17     -6
+  other           17 ->  31    -14
+  translated      20 ->  32    -12
+  taught           9 ->  11     -2
+  asked           22 ->  24     -2
+  wrote           23 ->  23     +0
+
+HIGHER UNDER B
+  recited          1 ->   1     +0
+  then             4 ->   3     +1
+  the              2 ->   2     +0
+  learned         19 ->   6    +13
+  reflected       89 ->  18    +71
+  memorized       27 ->  12    +15
+  practiced       60 ->  21    +39
+  discussed       18 ->  10     +8
+  listened        26 ->  16    +10
+  made            15 ->   8     +7
+  prayed          13 ->   7     +6
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  said             2 ->   6     -4
+  the              3 ->   7     -4
+  told             7 ->  27    -20
+  prayed           4 ->  13     -9
+  a                5 ->  11     -6
+  then             6 ->  10     -4
+  made            11 ->  33    -22
+  talked          10 ->  20    -10
+  called          13 ->  37    -24
+  asked           19 ->  59    -40
+  from            17 ->  31    -14
+  had             14 ->  22     -8
+  quoted          15 ->  23     -8
+  chanted         16 ->  21     -5
+  spoke           12 ->  12     +0
+
+HIGHER UNDER B
+  recited          1 ->   1     +0
+  shared          30 ->   2    +28
+  listened        20 ->   3    +17
+  explained        9 ->   4     +5
+  narrated       107 ->  14    +93
+  discussed       22 ->   8    +14
+  held            18 ->   9     +9
+  recounted       35 ->  15    +20
+  other            8 ->   5     +3
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  said             1 ->   6     -5
+  recited          3 ->   4     -1
+  sang            12 ->  17     -5
+  then             5 ->   7     -2
+  told             9 ->  13     -4
+  quoted          18 ->  23     -5
+  asked           17 ->  20     -3
+  led             20 ->  25     -5
+  called          15 ->  18     -3
+  he              23 ->  26     -3
+
+HIGHER UNDER B
+  spoke            2 ->   1     +1
+  gave             8 ->   5     +3
+  the              4 ->   2     +2
+  delivered       16 ->  12     +4
+  prayed           6 ->   3     +3
+  made            13 ->  11     +2
+  preached        21 ->  16     +5
+  talked          11 ->   9     +2
+  his             26 ->  19     +7
+  other           19 ->  15     +4
+  shared          27 ->  22     +5
+  a               10 ->  10     +0
+  had             22 ->  21     +1
+  explained       24 ->  24     +0
+  chanted         14 ->  14     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  the              2 ->  16    -14
+  said             3 ->  17    -14
+  then             4 ->  14    -10
+  recited          1 ->   5     -4
+  a               12 ->  35    -23
+  also            18 ->  44    -26
+  asked           20 ->  43    -23
+  from            13 ->  24    -11
+  other            8 ->  11     -3
+  wrote           23 ->  37    -14
+  made            14 ->  18     -4
+  prayed           5 ->   6     -1
+  performed       19 ->  21     -2
+  urged           24 ->  25     -1
+  taught          21 ->  23     -2
+
+HIGHER UNDER B
+  spoke           10 ->   1     +9
+  gave             6 ->   2     +4
+  offered         17 ->   3    +14
+  listened        15 ->   4    +11
+  shared          28 ->  10    +18
+  led             25 ->  13    +12
+  discussed       22 ->  15     +7
+  told             7 ->   7     +0
+  talked          11 ->   9     +2
+  played          29 ->  19    +10
+  delivered       31 ->  20    +11
+  explained        9 ->   8     +1
+  sang            16 ->  12     +4
+  preached        36 ->  22    +14
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  from             8 ->  10     -2
+  then             5 ->   8     -3
+  told             6 ->   7     -1
+  had             11 ->  15     -4
+  explained       13 ->  32    -19
+  said             4 ->   4     +0
+  urged           14 ->  29    -15
+  prayed           3 ->   3     +0
+  a               16 ->  23     -7
+  also            17 ->  24     -7
+  called          12 ->  13     -1
+  asked            9 ->   9     +0
+  the              2 ->   2     +0
+
+HIGHER UNDER B
+  recited          1 ->   1     +0
+  other           10 ->   6     +4
+  memorized       38 ->  17    +21
+  talked           7 ->   5     +2
+  made            18 ->  11     +7
+  spoke           20 ->  12     +8
+  tried           21 ->  16     +5
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  the              2 ->   4     -2
+  gave             7 ->  26    -19
+  called          10 ->  33    -23
+  from            14 ->  35    -21
+  taught          19 ->  57    -38
+  had             21 ->  74    -53
+  a               11 ->  20     -9
+  his             15 ->  18     -3
+  told            13 ->  15     -2
+  other            6 ->  10     -4
+  made            12 ->  14     -2
+  offered         18 ->  21     -3
+
+HIGHER UNDER B
+  listened        23 ->   3    +20
+  performed       16 ->   9     +7
+  recited          1 ->   1     +0
+  was              9 ->   7     +2
+  asked            8 ->   8     +0
+  began           25 ->  12    +13
+  tried           49 ->  19    +30
+  prayed           5 ->   5     +0
+  sang            17 ->  11     +6
+  explained       20 ->  13     +7
+  then             3 ->   2     +1
+  chanted         28 ->  16    +12
+  he              22 ->  17     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  said             3 ->  36    -33
+  from             5 ->  14     -9
+  the              2 ->   4     -2
+  then             4 ->   9     -5
+  a                8 ->  27    -19
+  read             9 ->  10     -1
+  told            12 ->  29    -17
+  was             18 ->  47    -29
+  he              24 ->  84    -60
+  made            22 ->  43    -21
+  asked           11 ->  19     -8
+  gave            14 ->  24    -10
+  explained       10 ->  16     -6
+  had             19 ->  23     -4
+  his             16 ->  21     -5
+
+HIGHER UNDER B
+  spoke            7 ->   2     +5
+  shared          58 ->   3    +55
+  recited          1 ->   1     +0
+  praised         40 ->   8    +32
+  talked          17 ->   7    +10
+  prayed          13 ->   6     +7
+  highlighted     90 ->  12    +78
+  discussed       41 ->  15    +26
+  preached        21 ->  11    +10
+  called          23 ->  18     +5
+  also            15 ->  13     +2
+  quoted          25 ->  20     +5
+  delivered       20 ->  17     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 44 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

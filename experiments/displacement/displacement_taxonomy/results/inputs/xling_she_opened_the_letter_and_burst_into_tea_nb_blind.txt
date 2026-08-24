@@ -1,0 +1,482 @@
+Below are 28 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: She opened the letter and burst into tears when she saw ___
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  it               4 ->   8     -4
+  that             2 ->   2     +0
+  her              3 ->   4     -1
+  his              5 ->   6     -1
+  a                8 ->  10     -2
+  my               9 ->  12     -3
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  who              7 ->   3     +4
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  it               3 ->   3     +0
+  that             2 ->   2     +0
+  a                8 ->  10     -2
+  his              7 ->   7     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  what             5 ->   5     +0
+  how              6 ->   6     +0
+  her              4 ->   4     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  that             2 ->   5     -3
+  his              6 ->   7     -1
+  how              9 ->  12     -3
+  she             10 ->  13     -3
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  what             5 ->   3     +2
+  her              4 ->   4     +0
+  who              7 ->   6     +1
+  him              8 ->   8     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  that             3 ->   4     -1
+  what             6 ->   8     -2
+  a                5 ->   7     -2
+  it               2 ->   2     +0
+  how              9 ->  12     -3
+  who              8 ->   9     -1
+
+HIGHER UNDER B
+  her              4 ->   3     +1
+  the              1 ->   1     +0
+  my              10 ->   6     +4
+  his              7 ->   5     +2
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  that             2 ->   4     -2
+  what             5 ->   8     -3
+  it               3 ->   3     +0
+  how              7 ->   7     +0
+  his              6 ->   6     +0
+  my               9 ->   9     +0
+  who             10 ->  11     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  a                8 ->   5     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  what             2 ->   3     -1
+  a                5 ->   8     -3
+  it               4 ->   5     -1
+  its              9 ->  14     -5
+  how              8 ->  10     -2
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  her              6 ->   4     +2
+  his             10 ->   7     +3
+  that             3 ->   2     +1
+  my              12 ->   9     +3
+  who              7 ->   6     +1
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  what             2 ->   4     -2
+  it               3 ->   5     -2
+  a                6 ->   8     -2
+  who              7 ->   9     -2
+  this            11 ->  19     -8
+  how             10 ->  10     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  her              4 ->   2     +2
+  his              8 ->   6     +2
+  my               9 ->   7     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  that             1 ->   2     -1
+  what             3 ->   3     +0
+  who              7 ->  18    -11
+  how              6 ->   8     -2
+  it               4 ->   4     +0
+  she             10 ->  13     -3
+
+HIGHER UNDER B
+  the              2 ->   1     +1
+  a                8 ->   6     +2
+  his              9 ->   7     +2
+  her              5 ->   5     +0
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  that             2 ->   4     -2
+  it               3 ->   3     +0
+  what             5 ->   8     -3
+  his              6 ->   7     -1
+  who              9 ->  28    -19
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  her              4 ->   2     +2
+  how              7 ->   5     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  what             2 ->   5     -3
+  it               5 ->   8     -3
+  that             3 ->   4     -1
+  a                6 ->   7     -1
+  who              9 ->  10     -1
+  how              8 ->   9     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  his              7 ->   2     +5
+  my              10 ->   6     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  that             2 ->   3     -1
+  the              1 ->   1     +0
+  her              4 ->   5     -1
+  what             5 ->   6     -1
+  how              6 ->   9     -3
+  its              7 ->  10     -3
+
+HIGHER UNDER B
+  it               3 ->   2     +1
+  his              9 ->   4     +5
+  a                8 ->   7     +1
+  who             10 ->   8     +2
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  that             2 ->   5     -3
+  what             5 ->  10     -5
+  it               3 ->   4     -1
+  a                6 ->   7     -1
+  how              8 ->   9     -1
+  its              9 ->  11     -2
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  his              7 ->   3     +4
+  her              4 ->   2     +2
+  John's          18 ->   6    +12
+  my              13 ->   8     +5
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  what             2 ->   6     -4
+  that             3 ->   4     -1
+  her              5 ->   7     -2
+  it               4 ->   5     -1
+  how             10 ->  39    -29
+  its              9 ->  15     -6
+  a                8 ->  10     -2
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  who              6 ->   2     +4
+  his              7 ->   3     +4
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  what             3 ->   5     -2
+  that             2 ->   2     +0
+  who              7 ->   9     -2
+  its             10 ->  13     -3
+  the              1 ->   1     +0
+  a                6 ->   6     +0
+
+HIGHER UNDER B
+  her              5 ->   4     +1
+  it               4 ->   3     +1
+  his              8 ->   7     +1
+  how              9 ->   8     +1
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  it               2 ->  47    -45
+  that             3 ->   6     -3
+  her              6 ->  17    -11
+  his              5 ->   8     -3
+  who              7 ->  44    -37
+  a                8 ->  57    -49
+  its              9 ->  40    -31
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  Prince          32 ->   3    +29
+  Jack's          31 ->   4    +27
+  William's       41 ->   5    +36
+  Rory's          51 ->   7    +44
+  Rafe's          56 ->   9    +47
+  Rakesh's        80 ->  10    +70
+  Ralf's          68 ->  11    +57
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  it               2 ->   2     +0
+  that             3 ->   5     -2
+  who              7 ->   9     -2
+  his              6 ->   6     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  her              5 ->   4     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  that             3 ->   4     -1
+  what             2 ->   2     +0
+  who              6 ->   6     +0
+  how              9 ->  14     -5
+  his              7 ->   8     -1
+  a                8 ->   9     -1
+  her              5 ->   5     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  it               2 ->   4     -2
+  that             3 ->   3     +0
+  a                7 ->   9     -2
+  who              8 ->   8     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  her              4 ->   2     +2
+  how              9 ->   7     +2
+  his              5 ->   5     +0
+  what             6 ->   6     +0
+  him             10 ->  10     +0
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  that             4 ->   5     -1
+  what             2 ->   3     -1
+  a                6 ->   6     +0
+  his              7 ->  12     -5
+  how              8 ->   9     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  her              5 ->   4     +1
+  who              9 ->   7     +2
+  it               3 ->   2     +1
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  that             2 ->   2     +0
+  it               3 ->   4     -1
+  her              5 ->   5     +0
+  how              8 ->   8     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  his              7 ->   7     +0
+  what             4 ->   3     +1
+  who              6 ->   6     +0
+  my              10 ->  10     +0
+  a                9 ->   9     +0
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  it               2 ->   4     -2
+  how              9 ->  10     -1
+  his              5 ->   5     +0
+  her              6 ->   6     +0
+  a                7 ->   8     -1
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  its              8 ->   7     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  what             2 ->   5     -3
+  who              6 ->  11     -5
+  its             10 ->  22    -12
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  that             4 ->   2     +2
+  his              9 ->   6     +3
+  it               5 ->   4     +1
+  her              3 ->   3     +0
+  a                7 ->   7     +0
+  how              8 ->   8     +0
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  her              2 ->   3     -1
+  it               5 ->   7     -2
+  a                6 ->   6     +0
+  that             4 ->   4     +0
+  this             9 ->  12     -3
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  his              7 ->   5     +2
+  what             3 ->   2     +1
+  who              8 ->   8     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  it               2 ->   6     -4
+  that             3 ->   3     +0
+  what             5 ->   5     +0
+  its              7 ->   8     -1
+  a                9 ->  11     -2
+  his              6 ->   7     -1
+  how             10 ->  10     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  who              8 ->   4     +4
+  her              4 ->   2     +2
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  what             2 ->   6     -4
+  who              7 ->   8     -1
+  that             4 ->   5     -1
+  how              9 ->  11     -2
+  its             10 ->  13     -3
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  it               3 ->   2     +1
+  your            23 ->   9    +14
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  who              5 ->   5     +0
+  her              6 ->   6     +0
+  a                7 ->   7     +0
+  the              1 ->   1     +0
+  that             4 ->   4     +0
+  how              9 ->   9     +0
+  his              8 ->   8     +0
+
+HIGHER UNDER B
+  what             2 ->   2     +0
+  it               3 ->   3     +0
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  who              7 ->   7     +0
+  it               2 ->   3     -1
+  a                8 ->   8     +0
+  its              9 ->   9     +0
+  her              5 ->   6     -1
+  his             10 ->  10     +0
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  how              6 ->   5     +1
+  what             4 ->   4     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  it               2 ->   6     -4
+  that             4 ->   5     -1
+  a                6 ->   7     -1
+  his              8 ->  12     -4
+
+HIGHER UNDER B
+  the              1 ->   1     +0
+  her              3 ->   2     +1
+  who              7 ->   3     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 28 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

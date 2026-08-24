@@ -1,0 +1,1114 @@
+Below are 42 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He pulled the pistol from his jacket and ___
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  fired            3 ->   5     -2
+  held             4 ->   6     -2
+  put              6 ->   9     -3
+  placed           8 ->  12     -4
+  looked          10 ->  19     -9
+  tossed          14 ->  23     -9
+  handed          16 ->  36    -20
+  took             9 ->  11     -2
+  shoved          15 ->  22     -7
+  turned          11 ->  17     -6
+  pressed         12 ->  15     -3
+  checked         17 ->  21     -4
+  raised          13 ->  14     -1
+
+HIGHER UNDER B
+  aimed            2 ->   1     +1
+  approached      98 ->   7    +91
+  stepped         31 ->   8    +23
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M31 ===
+HIGHER UNDER A
+  fired            2 ->   3     -1
+  put              5 ->   6     -1
+  shot             6 ->  27    -21
+  held             4 ->   4     +0
+  aimed            1 ->   2     -1
+  leveled          7 ->  13     -6
+
+HIGHER UNDER B
+  pointed          3 ->   1     +2
+  cocked           8 ->   5     +3
+  tossed          48 ->   7    +41
+  gestured        45 ->  10    +35
+  pressed         20 ->   9    +11
+  handed          28 ->  11    +17
+  placed           9 ->   8     +1
+  checked         21 ->  12     +9
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  fired            3 ->   5     -2
+  shot             5 ->  11     -6
+  handed           8 ->  25    -17
+  placed           7 ->  14     -7
+  tossed          12 ->  75    -63
+  cocked           6 ->   7     -1
+  put             15 ->  16     -1
+  laid            18 ->  22     -4
+  raised           9 ->   9     +0
+  trained         10 ->  10     +0
+
+HIGHER UNDER B
+  aimed            1 ->   1     +0
+  took            13 ->   4     +9
+  pointed          2 ->   2     +0
+  leveled         11 ->   6     +5
+  checked         17 ->   8     +9
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  handed           2 ->  11     -9
+  put              6 ->  24    -18
+  placed           5 ->  16    -11
+  threw           16 ->  39    -23
+  tossed          20 ->  77    -57
+  opened          10 ->  12     -2
+  then            17 ->  42    -25
+  the             23 ->  93    -70
+  said            19 ->  34    -15
+  looked           4 ->   7     -3
+  pressed         21 ->  30     -9
+  set             18 ->  22     -4
+  pointed          1 ->   2     -1
+  held             3 ->   5     -2
+
+HIGHER UNDER B
+  aimed            9 ->   1     +8
+  fired            8 ->   3     +5
+  shot            14 ->   4    +10
+  prepared        39 ->  15    +24
+  stood           22 ->  13     +9
+  took             7 ->   6     +1
+  pulled          12 ->   8     +4
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  fired            1 ->   5     -4
+  shot             4 ->  14    -10
+  put              6 ->  18    -12
+  opened          14 ->  23     -9
+  held             5 ->   6     -1
+  placed          10 ->  16     -6
+  the             16 ->  35    -19
+  started         13 ->  13     +0
+  said            17 ->  20     -3
+
+HIGHER UNDER B
+  aimed            3 ->   1     +2
+  pointed          2 ->   2     +0
+  cocked           7 ->   3     +4
+  handed           8 ->   4     +4
+  checked         23 ->   8    +15
+  waved           36 ->  15    +21
+  loaded          43 ->  17    +26
+  raised          18 ->  11     +7
+  took             9 ->   7     +2
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  fired            4 ->  10     -6
+  put              5 ->   7     -2
+  held             1 ->   3     -2
+  shot            13 ->  65    -52
+  opened          21 ->  71    -50
+  dropped         19 ->  48    -29
+  tossed          18 ->  35    -17
+  shoved          17 ->  34    -17
+  placed           7 ->   9     -2
+  handed          10 ->  14     -4
+  took            20 ->  29     -9
+  laid            15 ->  24     -9
+  showed          11 ->  13     -2
+
+HIGHER UNDER B
+  checked          8 ->   4     +4
+  pointed          2 ->   1     +1
+  aimed            3 ->   2     +1
+  peered          67 ->  11    +56
+  looked          12 ->   6     +6
+  extended        64 ->  19    +45
+  trained         48 ->  16    +32
+  turned          14 ->  12     +2
+  flicked         39 ->  17    +22
+  lowered         33 ->  18    +15
+  cocked           9 ->   8     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  shot             5 ->   9     -4
+  fired            3 ->   3     +0
+  cocked           7 ->  15     -8
+  put              8 ->  14     -6
+  placed          10 ->  19     -9
+  took            12 ->  35    -23
+  held             4 ->   4     +0
+  raised          11 ->  11     +0
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  aimed            2 ->   2     +0
+  waved           16 ->   7     +9
+  trained         15 ->   8     +7
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  shot             3 ->   3     +0
+  shoved           7 ->  21    -14
+  leveled         10 ->  20    -10
+  cocked          17 ->  27    -10
+  placed           9 ->  11     -2
+  put              6 ->   9     -3
+  held             5 ->   5     +0
+  said            16 ->  19     -3
+  pressed         14 ->  14     +0
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  fired            2 ->   2     +0
+  aimed            4 ->   4     +0
+  waved            8 ->   6     +2
+  started         12 ->   8     +4
+  began           11 ->   7     +4
+  emptied         21 ->  13     +8
+  turned          15 ->  10     +5
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M30 ===
+HIGHER UNDER A
+  fired            2 ->   4     -2
+  pointed          1 ->   2     -1
+  shoved          18 ->  87    -69
+  shot             5 ->   5     +0
+  looked          17 ->  34    -17
+  checked          8 ->  12     -4
+  turned          13 ->  19     -6
+  put              9 ->  11     -2
+  laid            15 ->  18     -3
+  pushed          19 ->  20     -1
+  handed          10 ->  13     -3
+  walked          11 ->  15     -4
+
+HIGHER UNDER B
+  aimed            3 ->   1     +2
+  held             4 ->   3     +1
+  pressed         12 ->   8     +4
+  cocked          16 ->   9     +7
+  took             6 ->   6     +0
+  placed           7 ->   7     +0
+  released        41 ->  16    +25
+  let             27 ->  14    +13
+  raised          14 ->  10     +4
+  stepped         21 ->  17     +4
+
+=== MODEL M29 ===
+HIGHER UNDER A
+  fired            2 ->   4     -2
+  shot             4 ->  12     -8
+  pointed          1 ->   1     +0
+  leveled         13 ->  31    -18
+  put              6 ->  10     -4
+
+HIGHER UNDER B
+  held             5 ->   2     +3
+  handed          10 ->   5     +5
+  aimed            3 ->   3     +0
+  pressed          9 ->   6     +3
+  examined       113 ->  15    +98
+  cocked          11 ->   8     +3
+  raised           8 ->   7     +1
+  laid            34 ->  16    +18
+  tossed          24 ->  18     +6
+  checked         19 ->  17     +2
+  looked          12 ->  11     +1
+  took            15 ->  13     +2
+  turned          14 ->  14     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  aimed            1 ->   2     -1
+  pointed          2 ->   4     -2
+  put              4 ->   9     -5
+  cocked           7 ->  18    -11
+  placed           9 ->  11     -2
+  gave            14 ->  28    -14
+  raised          11 ->  14     -3
+  looked          12 ->  12     +0
+
+HIGHER UNDER B
+  fired            3 ->   1     +2
+  pulled          15 ->   6     +9
+  shot             5 ->   3     +2
+  let             29 ->  13    +16
+  handed           8 ->   7     +1
+  began           13 ->  10     +3
+  loaded          38 ->  15    +23
+  drew            30 ->  16    +14
+  took            10 ->   8     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M42 ===
+HIGHER UNDER A
+  aimed            1 ->  85    -84
+  held             3 ->  11     -8
+  pointed          2 ->   7     -5
+  looked           5 ->  37    -32
+  cocked          13 -> 173   -160
+  handed           7 ->  26    -19
+  opened           8 ->  32    -24
+  put              9 ->  23    -14
+  placed          12 ->  22    -10
+  pressed         19 ->  83    -64
+  tossed          14 ->  43    -29
+  brought         20 ->  80    -60
+  carefully       23 -> 128   -105
+  took            11 ->  19     -8
+  dropped         16 ->  35    -19
+  raised          18 ->  34    -16
+  was             21 ->  41    -20
+  gave            17 ->  27    -10
+  walked          15 ->  16     -1
+
+HIGHER UNDER B
+  then            24 ->   1    +23
+  shot            10 ->   2     +8
+  threw           31 ->   4    +27
+  turned          26 ->   5    +21
+  pulled           6 ->   3     +3
+  began           28 ->   8    +20
+  kicked         151 ->  10   +141
+  stood           32 ->   9    +23
+  ran             65 ->  13    +52
+  left            96 ->  20    +76
+  he              59 ->  18    +41
+  slid            30 ->  12    +18
+  let             34 ->  14    +20
+  the             35 ->  17    +18
+  pushed          38 ->  21    +17
+  stepped         22 ->  15     +7
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M38 ===
+HIGHER UNDER A
+  fired            3 ->   6     -3
+  shot             5 ->  16    -11
+  cocked           7 ->  20    -13
+  put              8 ->  15     -7
+  pressed          9 ->  11     -2
+  placed           6 ->   9     -3
+  looked          14 ->  14     +0
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  aimed            2 ->   2     +0
+  raised          13 ->   4     +9
+  held             4 ->   3     +1
+  turned          10 ->   5     +5
+  leveled         12 ->   8     +4
+  took            11 ->   7     +4
+  slowly          52 ->  10    +42
+  stood           28 ->  12    +16
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  aimed            3 ->   3     +0
+  fired            2 ->   2     +0
+  shot             5 ->   8     -3
+  put              7 ->  29    -22
+  cocked           6 ->  10     -4
+  held             4 ->   4     +0
+  placed           8 ->  15     -7
+  looked          11 ->  22    -11
+  pulled          15 ->  40    -25
+  took             9 ->  13     -4
+  squeezed        14 ->  24    -10
+  turned          17 ->  17     +0
+  leveled         12 ->  12     +0
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  waved           16 ->   5    +11
+  loaded          50 ->   7    +43
+  raised          13 ->   6     +7
+  lowered         67 ->  11    +56
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M34 ===
+HIGHER UNDER A
+  shot             2 ->   5     -3
+  put             10 ->  19     -9
+  placed           8 ->  10     -2
+  opened          14 ->  21     -7
+  pressed         11 ->  11     +0
+  squeezed        13 ->  13     +0
+  took             7 ->   9     -2
+  began            6 ->   8     -2
+
+HIGHER UNDER B
+  aimed            4 ->   3     +1
+  cocked           9 ->   4     +5
+  pointed          3 ->   2     +1
+  fired            1 ->   1     +0
+  leveled         12 ->   7     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M40 ===
+HIGHER UNDER A
+  held             4 ->   5     -1
+  cocked           6 ->   8     -2
+  fired            3 ->   3     +0
+  began           13 ->  26    -13
+  took            16 ->  40    -24
+  put              7 ->  10     -3
+  leveled         15 ->  18     -3
+  handed          12 ->  14     -2
+  pressed         10 ->  11     -1
+
+HIGHER UNDER B
+  aimed            2 ->   1     +1
+  raised           9 ->   6     +3
+  turned          11 ->   9     +2
+  looked          14 ->  12     +2
+
+4 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M33 ===
+HIGHER UNDER A
+  fired            1 ->   6     -5
+  held             4 ->  23    -19
+  shot             3 ->   4     -1
+  put              6 ->  12     -6
+  pressed         10 ->  83    -73
+  began           12 ->  85    -73
+  waved           11 ->  37    -26
+  took             9 ->  18     -9
+  raised          13 ->  90    -77
+  handed          16 ->  78    -62
+  started         14 ->  38    -24
+  looked          15 ->  39    -24
+  cocked           7 ->  10     -3
+  shoved          17 ->  22     -5
+  placed           8 ->  11     -3
+  leveled         18 ->  21     -3
+
+HIGHER UNDER B
+  aimed            5 ->   1     +4
+  pointed          2 ->   2     +0
+  levelled        82 ->   3    +79
+  walked          27 ->   5    +22
+  straightened   125 ->   7   +118
+  aims           126 ->   8   +118
+  levels         132 ->   9   +123
+  killed          59 ->  13    +46
+
+=== MODEL M41 ===
+HIGHER UNDER A
+  held             5 ->   9     -4
+  put              6 ->  15     -9
+  shot             4 ->   4     +0
+  took            12 ->  31    -19
+  handed           9 ->  12     -3
+  placed           7 ->   7     +0
+  pulled          16 ->  92    -76
+  looked          14 ->  22     -8
+  turned          11 ->  11     +0
+  walked          18 ->  47    -29
+  cocked          10 ->  10     +0
+  began           17 ->  19     -2
+  started         19 ->  21     -2
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  aimed            3 ->   2     +1
+  leveled          8 ->   5     +3
+  raised          13 ->   6     +7
+  pressed         26 ->   8    +18
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  held             4 ->   5     -1
+  fired            2 ->   4     -2
+  put              6 ->   7     -1
+  tossed           7 ->  39    -32
+  handed           8 ->  37    -29
+  pressed          9 ->   9     +0
+  placed          10 ->  15     -5
+  cocked          11 ->  19     -8
+  raised          13 ->  13     +0
+  shoved          16 ->  63    -47
+  waved           15 ->  36    -21
+  turned          17 ->  43    -26
+  took            18 ->  23     -5
+
+HIGHER UNDER B
+  aimed            3 ->   1     +2
+  shot             5 ->   3     +2
+  leveled         12 ->   6     +6
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M35 ===
+HIGHER UNDER A
+  pointed          4 ->  10     -6
+  shot             5 ->  27    -22
+  fired            2 ->   5     -3
+  aimed            1 ->   3     -2
+  put              8 ->  17     -9
+  looked          14 ->  37    -23
+  cocked           9 ->  12     -3
+  started         17 ->  40    -23
+  pressed         19 ->  35    -16
+
+HIGHER UNDER B
+  handed           6 ->   2     +4
+  held             3 ->   1     +2
+  pulled          11 ->   4     +7
+  began           16 ->   7     +9
+  placed           7 ->   6     +1
+  took            12 ->   8     +4
+  laid            20 ->  14     +6
+  raised          15 ->  11     +4
+  tossed          22 ->  16     +6
+  turned          18 ->  15     +3
+  leaned          39 ->  18    +21
+  locked          38 ->  19    +19
+  squeezed        31 ->  20    +11
+  dropped         10 ->   9     +1
+  opened          13 ->  13     +0
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  shot             4 ->  11     -7
+  fired            2 ->   3     -1
+  pointed          1 ->   2     -1
+  put              6 ->  10     -4
+  said            16 ->  45    -29
+  took            11 ->  17     -6
+  the             12 ->  18     -6
+  cocked           7 ->   8     -1
+  walked          15 ->  19     -4
+
+HIGHER UNDER B
+  held             5 ->   4     +1
+  raised           8 ->   5     +3
+  leveled         13 ->   6     +7
+  aimed            3 ->   1     +2
+  checked         77 ->  16    +61
+  handed          29 ->  13    +16
+  stepped         32 ->  14    +18
+  placed           9 ->   7     +2
+  pressed         10 ->   9     +1
+  waved           17 ->  12     +5
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  pointed          1 ->   2     -1
+  fired            2 ->   3     -1
+  shot             4 ->   8     -4
+  put              7 ->  14     -7
+  opened          12 ->  20     -8
+  pulled          13 ->  15     -2
+  placed           9 ->   9     +0
+  cocked          17 ->  24     -7
+  slid            14 ->  16     -2
+
+HIGHER UNDER B
+  aimed            3 ->   1     +2
+  took             6 ->   5     +1
+  raised          10 ->   6     +4
+  held             5 ->   4     +1
+  checked         19 ->  13     +6
+  began            8 ->   7     +1
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M28 ===
+HIGHER UNDER A
+  pointed          1 ->   3     -2
+  cocked           6 ->  10     -4
+  put              7 ->  15     -8
+  held             5 ->   6     -1
+  shot             4 ->   4     +0
+  began           13 ->  23    -10
+  pressed         11 ->  12     -1
+
+HIGHER UNDER B
+  aimed            3 ->   1     +2
+  fired            2 ->   2     +0
+  handed           8 ->   5     +3
+  leveled         12 ->   8     +4
+  checked         23 ->  11    +12
+  stood           20 ->  14     +6
+  raised          14 ->  13     +1
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  pointed          1 ->   1     +0
+  put              9 ->  12     -3
+  placed           6 ->   8     -2
+  aimed            3 ->   3     +0
+  shot             5 ->   5     +0
+  waved           12 ->  15     -3
+
+HIGHER UNDER B
+  held             2 ->   2     +0
+  raised           8 ->   6     +2
+  fired            4 ->   4     +0
+  leveled         13 ->  11     +2
+  took            15 ->  13     +2
+  checked         19 ->  17     +2
+  looked          11 ->  10     +1
+  pressed          7 ->   7     +0
+  cocked          10 ->   9     +1
+  turned          16 ->  16     +0
+  pulled          14 ->  14     +0
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  shot             7 ->   7     +0
+  handed           8 ->   9     -1
+  put              6 ->   6     +0
+  tossed          16 ->  17     -1
+  waved           18 ->  25     -7
+  dropped         14 ->  15     -1
+  shoved          13 ->  14     -1
+  placed           4 ->   4     +0
+  started         22 ->  22     +0
+  flipped         20 ->  20     +0
+  pressed         12 ->  12     +0
+  showed          19 ->  19     +0
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  aimed            2 ->   2     +0
+  cocked          11 ->  11     +0
+  checked         10 ->  10     +0
+  held             3 ->   3     +0
+  laid             9 ->   8     +1
+  leveled         15 ->  13     +2
+  tucked          21 ->  18     +3
+  fired            5 ->   5     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  shot             5 ->  27    -22
+  aimed            2 ->   3     -1
+  looked           8 ->  35    -27
+  placed           9 ->  18     -9
+  put             10 ->  19     -9
+  fired            4 ->   7     -3
+  turned          14 ->  50    -36
+  took            12 ->  13     -1
+  raised          11 ->  11     +0
+  walked          15 ->  22     -7
+  began           18 ->  44    -26
+  pressed         16 ->  30    -14
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  held             3 ->   2     +1
+  leveled         13 ->   4     +9
+  checked          7 ->   6     +1
+  cocked           6 ->   5     +1
+  chambered       21 ->   8    +13
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  fired            4 ->   4     +0
+  shot             5 ->   8     -3
+  cocked          14 ->  18     -4
+  leveled         13 ->  13     +0
+  threw           17 ->  19     -2
+  put             10 ->  12     -2
+  placed           7 ->   9     -2
+  raised           9 ->  10     -1
+
+HIGHER UNDER B
+  aimed            2 ->   2     +0
+  pointed          1 ->   1     +0
+  held             3 ->   3     +0
+  waved            8 ->   6     +2
+  pressed          6 ->   5     +1
+  handed          11 ->   7     +4
+
+5 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M32 ===
+HIGHER UNDER A
+  shot             3 ->   5     -2
+  fired            4 ->   4     +0
+  tossed          12 ->  12     +0
+  put              8 ->   9     -1
+  took            14 ->  16     -2
+  waved           15 ->  17     -2
+  threw           16 ->  18     -2
+  pressed         13 ->  13     +0
+  handed          10 ->  10     +0
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  held             5 ->   3     +2
+  aimed            2 ->   2     +0
+  checked          7 ->   6     +1
+  placed           9 ->   8     +1
+  laid            19 ->  15     +4
+  cocked          11 ->  11     +0
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  aimed            2 ->   5     -3
+  held             5 ->   6     -1
+  put              6 ->  12     -6
+  shoved          16 -> 129   -113
+  handed           7 ->   9     -2
+  tossed          21 ->  67    -46
+  pressed         13 ->  36    -23
+  looked          18 ->  39    -21
+  turned          12 ->  21     -9
+  laid            22 ->  41    -19
+  stepped         14 ->  26    -12
+  raised          19 ->  34    -15
+  fired            3 ->   3     +0
+  waved           15 ->  30    -15
+  placed           8 ->  13     -5
+  checked         20 ->  22     -2
+
+HIGHER UNDER B
+  shot             4 ->   2     +2
+  walked           9 ->   4     +5
+  began           17 ->   7    +10
+  cocked          11 ->   8     +3
+  pointed          1 ->   1     +0
+  pulled          38 ->  10    +28
+  loaded          64 ->  15    +49
+  started         30 ->  14    +16
+  opened          41 ->  16    +25
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  held             3 ->   4     -1
+  cocked           7 ->  12     -5
+  shoved           8 ->  13     -5
+  tossed          10 ->  16     -6
+  laid            16 ->  26    -10
+  checked         18 ->  30    -12
+  set             19 ->  24     -5
+  handed           5 ->   6     -1
+
+HIGHER UNDER B
+  fired            2 ->   2     +0
+  pointed          1 ->   1     +0
+  shot             6 ->   5     +1
+  aimed            4 ->   3     +1
+  took            11 ->   7     +4
+  said            23 ->  15     +8
+  pressed         14 ->  11     +3
+  placed          12 ->   9     +3
+  put             13 ->  10     +3
+  raised          15 ->  14     +1
+  turned          17 ->  17     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M27 ===
+HIGHER UNDER A
+  fired            3 ->  16    -13
+  pointed          1 ->   2     -1
+  shot             5 ->  31    -26
+  cocked           9 ->  85    -76
+  leveled          6 ->   9     -3
+  pressed         13 ->  38    -25
+  waved           12 ->  28    -16
+  the             14 ->  29    -15
+  said            15 ->  41    -26
+  put              7 ->   7     +0
+
+HIGHER UNDER B
+  checked         29 ->   5    +24
+  placed           8 ->   4     +4
+  handed          11 ->   6     +5
+  aimed            2 ->   1     +1
+  held             4 ->   3     +1
+  showed          17 ->   8     +9
+  set             52 ->  12    +40
+  laid            18 ->  10     +8
+  looked          48 ->  13    +35
+  turned          26 ->  14    +12
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  fired            1 ->   3     -2
+  shot             4 ->   5     -1
+  took             9 ->  17     -8
+  aimed            2 ->   2     +0
+  pressed         12 ->  20     -8
+  turned          14 ->  21     -7
+  looked          13 ->  16     -3
+  raised          11 ->  13     -2
+  put              6 ->   8     -2
+  cocked           7 ->   9     -2
+  leveled          8 ->  10     -2
+
+HIGHER UNDER B
+  pointed          3 ->   1     +2
+  held             5 ->   4     +1
+  handed          22 ->   7    +15
+  placed          10 ->   6     +4
+  waved           31 ->  12    +19
+  checked         15 ->  11     +4
+  began           17 ->  14     +3
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  put              7 ->  13     -6
+  looked           9 ->  17     -8
+  held             4 ->   4     +0
+  placed           6 ->   9     -3
+  walked          14 ->  19     -5
+  checked         16 ->  29    -13
+  aimed            1 ->   2     -1
+
+HIGHER UNDER B
+  pointed          2 ->   1     +1
+  leveled         15 ->   6     +9
+  raised          12 ->   7     +5
+  waved           28 ->  15    +13
+  turned          19 ->  14     +5
+  cocked          11 ->  10     +1
+  shot             5 ->   5     +0
+  trained         25 ->  16     +9
+  pressed         13 ->  12     +1
+  handed           8 ->   8     +0
+  fired            3 ->   3     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  shot             5 ->  10     -5
+  fired            4 ->   6     -2
+  handed           9 ->  26    -17
+  placed           6 ->  12     -6
+  shoved          11 ->  71    -60
+  laid            12 ->  46    -34
+  pressed          8 ->  13     -5
+  turned          13 ->  28    -15
+  cocked          10 ->  14     -4
+  tossed          16 ->  58    -42
+  threw           17 ->  92    -75
+  raised          18 ->  34    -16
+  looked          15 ->  17     -2
+
+HIGHER UNDER B
+  aimed            1 ->   1     +0
+  cupped         118 ->   4   +114
+  pointed          2 ->   2     +0
+  coughed        119 ->   7   +112
+  held             3 ->   3     +0
+  showed          29 ->   9    +20
+  leveled         14 ->   8     +6
+  slammed         35 ->  11    +24
+  put              7 ->   5     +2
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  pointed          1 -> 170   -169
+  aimed            2 -> 188   -186
+  fired            3 -> 193   -190
+  held             4 -> 131   -127
+  placed           5 -> 162   -157
+  put              6 -> 124   -118
+  pressed          7 -> 180   -173
+  stuck            8 -> 198   -190
+  cocked           9 -> 204   -195
+  swung           10 -> 186   -176
+  tucked          11 -> 202   -191
+  raised          12 -> 175   -163
+  squeezed        13 -> 230   -217
+  waved           14 -> 220   -206
+  trained         15 -> 219   -204
+  leveled         16 -> 234   -218
+  brought         17 -> 172   -155
+  handed          18 -> 168   -150
+  shot            19 -> 143   -124
+  took            20 -> 129   -109
+  shoved          21 -> 216   -195
+  began           22 -> 128   -106
+  said            23 -> 118    -95
+
+HIGHER UNDER B
+  He             129 ->   1   +128
+  The            132 ->   2   +130
+  Thea           140 ->   3   +137
+  It             131 ->   4   +127
+  I              124 ->   5   +119
+  There          163 ->   6   +157
+  This           168 ->   7   +161
+  His            138 ->   8   +130
+  Thea's         218 ->   9   +209
+  What           194 ->  10   +184
+  If             206 ->  11   +195
+  When           170 ->  12   +158
+  A              136 ->  13   +123
+  They           171 ->  14   +157
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  pointed          3 ->   4     -1
+  put              7 ->  11     -4
+  took             8 ->  12     -4
+  held             5 ->   5     +0
+  threw           12 ->  59    -47
+  pressed          6 ->   6     +0
+  cocked          13 ->  15     -2
+  raised           9 ->  10     -1
+
+HIGHER UNDER B
+  fired            1 ->   1     +0
+  aimed            2 ->   2     +0
+  shot             4 ->   3     +1
+  started         14 ->   8     +6
+  began           11 ->   7     +4
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M37 ===
+HIGHER UNDER A
+  fired            3 ->   5     -2
+  shot             5 ->  23    -18
+  put              6 ->  13     -7
+  pointed          1 ->   2     -1
+  pulled          15 ->  45    -30
+  cocked          13 ->  19     -6
+  pressed         12 ->  16     -4
+  began           17 ->  29    -12
+  raised           7 ->   7     +0
+  took            11 ->  12     -1
+  handed           8 ->   9     -1
+  looked          10 ->  10     +0
+  turned          16 ->  17     -1
+  the             18 ->  20     -2
+
+HIGHER UNDER B
+  aimed            2 ->   1     +1
+  leveled         14 ->   4    +10
+  checked         23 ->   6    +17
+  held             4 ->   3     +1
+  clicked         36 ->  11    +25
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M39 ===
+HIGHER UNDER A
+  held             5 ->   5     +0
+  looked           7 ->  18    -11
+  checked         12 ->  22    -10
+  cocked           6 ->   9     -3
+  took            10 ->  11     -1
+  raised          11 ->  13     -2
+  stood           17 ->  24     -7
+  turned          14 ->  16     -2
+  waved           16 ->  19     -3
+
+HIGHER UNDER B
+  shot             3 ->   1     +2
+  aimed            4 ->   4     +0
+  put              8 ->   6     +2
+  pressed         15 ->   8     +7
+  placed           9 ->   7     +2
+  said            18 ->  12     +6
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  fired            3 ->   5     -2
+  shot             1 ->   3     -2
+  put              6 ->  14     -8
+  began            7 ->  22    -15
+  placed           8 ->  20    -12
+  said            10 ->  62    -52
+  opened          15 ->  55    -40
+  started          9 ->  15     -6
+  walked          13 ->  17     -4
+
+HIGHER UNDER B
+  aimed            4 ->   2     +2
+  pointed          2 ->   1     +1
+  held             5 ->   4     +1
+  trained         29 ->   6    +23
+  stared          49 ->   7    +42
+  leveled         19 ->   8    +11
+
+3 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  put              6 ->   7     -1
+  tossed           9 ->  10     -1
+  threw           15 ->  22     -7
+  cocked           8 ->   8     +0
+  laid            18 ->  26     -8
+  shoved          20 ->  23     -3
+  checked         12 ->  18     -6
+  waved           21 ->  21     +0
+  took            11 ->  16     -5
+  fired            2 ->   3     -1
+  looked          17 ->  17     +0
+
+HIGHER UNDER B
+  aimed            4 ->   2     +2
+  pointed          1 ->   1     +0
+  shot             5 ->   5     +0
+  raised          13 ->   9     +4
+  placed           7 ->   6     +1
+  turned          22 ->  15     +7
+  pressed         19 ->  14     +5
+  stepped         16 ->  13     +3
+  walked          23 ->  19     +4
+  leveled         14 ->  12     +2
+
+2 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  shot             4 ->   9     -5
+  placed           6 ->  12     -6
+  put              7 ->  10     -3
+  fired            3 ->   3     +0
+  held             5 ->   7     -2
+  aimed            2 ->   2     +0
+
+HIGHER UNDER B
+  pointed          1 ->   1     +0
+  cocked          10 ->   4     +6
+  raised           9 ->   6     +3
+  took             8 ->   5     +3
+  pressed         12 ->   8     +4
+  leveled         16 ->  13     +3
+  began           11 ->  11     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M36 ===
+HIGHER UNDER A
+  fired            3 ->  10     -7
+  pulled           5 ->  46    -41
+  pointed          2 ->   3     -1
+  held             4 ->   8     -4
+  put              6 ->  63    -57
+  shot             9 ->  67    -58
+  opened          14 ->  71    -57
+  placed           7 ->   9     -2
+  brought         17 ->  78    -61
+  raised          11 ->  18     -7
+  began           15 ->  48    -33
+  the             19 ->  52    -33
+  took            10 ->  11     -1
+  leveled         18 ->  24     -6
+  looked          13 ->  15     -2
+  pressed         16 ->  17     -1
+
+HIGHER UNDER B
+  aimed            1 ->   1     +0
+  checked         12 ->   2    +10
+  examined        74 ->   4    +70
+  trained         61 ->   6    +55
+  holstered       29 ->   5    +24
+  slowly          34 ->  12    +22
+  loaded          44 ->  13    +31
+  squeezed        23 ->  14     +9
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 42 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.

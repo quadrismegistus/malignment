@@ -1,0 +1,296 @@
+Below are 26 independent measurements of how one sentence gets
+completed.
+
+Each table below is ONE system, measured under two conditions, A and B. The
+same system produced both columns, so a difference between them is a CHANGE to
+that system, not a difference between two systems. **Condition A is the same
+condition in every table, and so is B** -- the pairing is consistent throughout,
+so an operation can run in one direction in one table and backwards in another.
+The words are those whose position differs most between A and B, ordered by how
+much of the difference rests on them. Position 1 is the likeliest completion under
+that condition; a dash means the word does not appear in that condition's list
+at all.
+
+The systems are unrelated to each other and the two conditions are the same
+throughout. You are seeing the same sentence measured across all of them.
+Nothing else about A or B is stated because nothing else is needed: describe
+only what the words do.
+
+FRAGMENT: He opened the book and began to ___
+
+=== MODEL M05 ===
+HIGHER UNDER A
+  turn             2 ->   2     +0
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+
+=== MODEL M03 ===
+HIGHER UNDER A
+  study            3 ->   4     -1
+  look             2 ->   3     -1
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  flip             4 ->   2     +2
+
+=== MODEL M21 ===
+HIGHER UNDER A
+  turn             2 ->   9     -7
+  look             3 ->   6     -3
+  page             4 ->  18    -14
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  recite          17 ->   2    +15
+  speak           21 ->   3    +18
+
+=== MODEL M02 ===
+HIGHER UNDER A
+  read             1 ->   1     +0
+
+HIGHER UNDER B
+  (none -- no word on this side clears the floor)
+
+=== MODEL M09 ===
+HIGHER UNDER A
+  write            2 ->   5     -3
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+
+=== MODEL M20 ===
+HIGHER UNDER A
+  look             2 ->   5     -3
+  flip             5 ->  46    -41
+  turn             6 ->  17    -11
+  study            3 ->   3     +0
+
+HIGHER UNDER B
+  write            4 ->   2     +2
+  speak           10 ->   4     +6
+  read             1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M10 ===
+HIGHER UNDER A
+  speak            2 ->   4     -2
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+
+=== MODEL M25 ===
+HIGHER UNDER A
+  study            2 ->   6     -4
+  look             3 ->   8     -5
+
+HIGHER UNDER B
+  flip            17 ->   2    +15
+  read             1 ->   1     +0
+  skim             7 ->   3     +4
+
+=== MODEL M04 ===
+HIGHER UNDER A
+  turn             2 ->   6     -4
+  look             3 ->   5     -2
+  search           5 ->  16    -11
+  study            6 ->  13     -7
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  flip             4 ->   2     +2
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M18 ===
+HIGHER UNDER A
+  study            3 ->  10     -7
+  write            2 ->   4     -2
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+
+=== MODEL M15 ===
+HIGHER UNDER A
+  read             1 ->   1     +0
+  study            3 ->   5     -2
+
+HIGHER UNDER B
+  speak            2 ->   2     +0
+  teach            5 ->   3     +2
+
+=== MODEL M16 ===
+HIGHER UNDER A
+  turn             2 ->  17    -15
+  study            3 ->  26    -23
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+
+=== MODEL M13 ===
+HIGHER UNDER A
+  read             1 ->   1     +0
+  look             2 ->   9     -7
+  turn             3 ->   5     -2
+
+HIGHER UNDER B
+  flip            14 ->   2    +12
+  scan             5 ->   3     +2
+  study            4 ->   4     +0
+
+=== MODEL M06 ===
+HIGHER UNDER A
+  read             1 ->   1     +0
+
+HIGHER UNDER B
+  (none -- no word on this side clears the floor)
+
+=== MODEL M26 ===
+HIGHER UNDER A
+  search           3 ->   3     +0
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  turn             2 ->   2     +0
+
+=== MODEL M11 ===
+HIGHER UNDER A
+  speak            3 ->  12     -9
+  explain          4 ->  16    -12
+  tell             5 ->  23    -18
+  teach            6 ->  18    -12
+  study            2 ->   2     +0
+  describe         8 ->  39    -31
+  translate        7 ->  10     -3
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  flip            57 ->   3    +54
+
+=== MODEL M22 ===
+HIGHER UNDER A
+  write            2 ->   3     -1
+
+HIGHER UNDER B
+  study            3 ->   2     +1
+  read             1 ->   1     +0
+  look             4 ->   4     +0
+  flip             5 ->   5     +0
+
+=== MODEL M12 ===
+HIGHER UNDER A
+  teach            2 ->  10     -8
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+
+=== MODEL M14 ===
+HIGHER UNDER A
+  (none -- no word on this side clears the floor)
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  write            2 ->   2     +0
+  study            3 ->   3     +0
+
+=== MODEL M17 ===
+HIGHER UNDER A
+  look             2 ->   3     -1
+  write            3 ->   7     -4
+  study            4 ->   5     -1
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  turn             5 ->   2     +3
+  leaf             6 ->   4     +2
+
+=== MODEL M24 ===
+HIGHER UNDER A
+  speak            4 ->   9     -5
+  turn             2 ->   4     -2
+  write            3 ->   5     -2
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  flip             8 ->   2     +6
+
+=== MODEL M23 ===
+HIGHER UNDER A
+  turn             2 ->   2     +0
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+
+=== MODEL M08 ===
+HIGHER UNDER A
+  turn             2 ->   2     +0
+  scan             4 ->  11     -7
+  leaf             3 ->   3     +0
+  study            5 ->  17    -12
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+
+1 word(s) are withheld because their position moved the opposite way to their prominence.
+
+=== MODEL M01 ===
+HIGHER UNDER A
+  teach            2 ->   3     -1
+  turn             3 ->   8     -5
+
+HIGHER UNDER B
+  study           16 ->   2    +14
+  read             1 ->   1     +0
+
+=== MODEL M19 ===
+HIGHER UNDER A
+  read             1 ->   1     +0
+
+HIGHER UNDER B
+  (none -- no word on this side clears the floor)
+
+=== MODEL M07 ===
+HIGHER UNDER A
+  look             4 ->   7     -3
+  study            3 ->   5     -2
+  skim             5 ->   6     -1
+  turn             2 ->   3     -1
+
+HIGHER UNDER B
+  read             1 ->   1     +0
+  flip             6 ->   2     +4
+  scan             7 ->   4     +3
+
+Answer these, in order. Fill `survey` before reading on.
+
+1. SURVEY. Look at all 26 tables and say what VARIES between them,
+   before naming anything they share. Which look unlike the others, and in what
+   way? Two or three sentences. Answer this first and do not revise it after
+   deciding what the common operation is.
+
+2. OPERATIONS. State the kinds of change you find. For each:
+
+     name        two to four words of your own invention.
+     statement   one sentence saying what the operation is, phrased so it would
+                 apply to a sentence on some other subject.
+     members     one entry per model performing it, each giving the model's
+                 exact name, the words on its A side that the operation moves
+                 FROM, and the words on its B side it moves TO. Use the words as
+                 they appear in that model's table.
+
+   There is no target number of operations. One is a legitimate answer.
+
+3. REVERSED. Any model performing one of your operations BACKWARDS: the words
+   your operation moves away from are the ones this model's B column favours,
+   and the words it moves toward are in this model's A column. Give the model,
+   the operation it reverses, its A words, its B words, and one sentence on how
+   you know. This may be empty.
+
+4. UNASSIGNED. Models whose table fits no operation you named, with a reason.
+
+5. CONFIDENCE for the reading as a whole.
+
+Every model listed above must appear exactly once across members, reversed and
+unassigned. Do not omit a model because its table is hard to read; put it in
+unassigned and say so.
