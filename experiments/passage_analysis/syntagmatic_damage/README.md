@@ -205,6 +205,41 @@ throughout). So the base model is sensitive to how improbable a word was and
 INDIFFERENT to whether alignment moved it; the aligned model is sensitive to
 both. The interaction is alignment-specific.
 
+
+## THE THIRD-PARTY READER DOES NOT SEE IT, WITH OR WITHOUT THE JOINT
+
+deepseek-llm-7b-base scored the same 40,984 passages over 42 lineages TWICE: the
+continuation alone, and then `prompt + " " + forced_word + continuation`, so the
+reader could see the joint the aligned model was made to cross.
+
+    [5,10)                      median    up/down   sign p
+    SELF (run.py, aligned)     -0.54192     5/37    <1e-5    the effect
+    REFERENCE, no context      -0.30285    17/24     0.35    null
+    REFERENCE, with context    -0.44075    17/25     0.28    null
+
+**`logq` is significant in the reference in both passes** -- with context,
+p=7e-5 at [0,1), 0.008 at [1,5), 0.044 at [5,10), <1e-5 at [10,20). The reader
+tracks how improbable the opening word was. It does not track how far alignment
+MOVED it.
+
+**And the null is a consistency null, not a magnitude null.** The reference
+median at [5,10) is -0.441, four fifths of the self coefficient's -0.542. What
+collapses is agreement across lineages: 37 of 42 share the sign on the self
+measure against 25 of 42 on the reference. So the claim is not "a third party
+measures nothing" -- it is that a third party's per-lineage estimates do not
+line up, while the aligned model's do.
+
+**This is the branch the design named in advance as the sharper one.** From
+reference.py's docstring, written before the run: *"If no, the self-surprisal
+result stands unchanged and gets sharper: the trace is in the model's relation
+to what it was made to say."* The context pass removes the one alternative
+explanation that survived the first pass -- that the reference had simply never
+been shown where the trace lives.
+
+**What it does NOT license.** deepseek is one reader. A null from one model is
+not a property of text, and a second reference model is the obvious next step
+before anything here is phrased as "no reader can see it".
+
 ## WHY THE ARCHIVE FOUND NULLS HERE, AND WHY THAT IS NOT A CONTRADICTION
 
 Each earlier instrument was blind to this region by construction:
