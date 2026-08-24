@@ -1324,14 +1324,20 @@ def _slot_index():
                     d = json.load(fh)
             except Exception:
                 continue
-            if isinstance(d, dict) and isinstance(d.get("prompts"), list):
-                recs, inst = d["prompts"], d.get("instrument") or os.path.basename(f)
-            elif isinstance(d, list) and d and isinstance(d[0], dict) \
-                    and "word" in d[0] and "prompt" in d[0]:
-                recs = d
+            inst = d.get("instrument") if isinstance(d, dict) else None
+            if not inst:
                 inst = "v6full" if os.sep + "v6full" + os.sep in f else \
                     os.path.basename(os.path.dirname(f))
-            else:
+            #: THREE SHAPES, and the third was missed on the first pass.
+            #: `{"prompts": [...]}` and a bare list of records were handled;
+            #: `{"pairs": [[name, [records...]], ...]}` was not, and it is
+            #: where the institutional v3 ratings live -- so `mediation` and
+            #: `termination`, two of the scales this index exists to serve,
+            #: were silently absent. A file whose shape is unrecognised is
+            #: skipped without a word, which is why the gap showed up only
+            #: when a named scale could not be found.
+            recs = _slot_records(d)
+            if not recs:
                 continue
             for r in recs:
                 if not isinstance(r, dict):
@@ -1346,6 +1352,45 @@ def _slot_index():
                     idx[(p, w)].setdefault(inst, {}).update(vals)
     return dict(idx)
 
+
+
+def _slot_records(d):
+    """Flatten the rating-file shapes into [record]. -> list
+
+    Shapes seen in the tree: {"prompts": [rec]}, a bare [rec], and
+    {"pairs": [[label, [rec]]]} (nested arbitrarily). Anything without both
+    `prompt` and `word` is not a rating row and is dropped.
+    """
+    out = []
+
+    def walk(x, depth=0):
+        if depth > 8:
+            return
+        if isinstance(x, dict):
+            if "prompt" in x and "word" in x:
+                out.append(x)
+                return
+            #: THE FOURTH SHAPE. The institutional and slot-explorer files are
+            #: SLOT ITEMS, not rating rows: one object per (prompt, item) whose
+            #: `ratings` is {word: {scale: value}}. That is where `mediation`,
+            #: `termination` and the sexual instrument's `euphemism` live, so
+            #: an index that only understood flat rows was missing whole
+            #: instruments while looking complete.
+            if isinstance(x.get("ratings"), dict) and x.get("prompt"):
+                for w, vals in x["ratings"].items():
+                    if isinstance(vals, dict):
+                        rec = {"prompt": x["prompt"], "word": w}
+                        rec.update(vals)
+                        out.append(rec)
+                return
+            for v in x.values():
+                walk(v, depth + 1)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v, depth + 1)
+
+    walk(d)
+    return out
 
 def slot_ratings(prompt, word=None):
     """Contextual ratings for a word IN A PROMPT. -> {instrument: {scale: val}}
