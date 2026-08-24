@@ -32,6 +32,18 @@ Validated by reproducing every hand-computed pilot2 figure exactly, per-pair row
 
 Reads `twp_words_v4` / `twp_cells_v4` and imports `slot_axis.Axis`. Runs no checkpoint and needs no server.
 
+> **READ `LINEAGE_AND_DOSE.md` BEFORE QUOTING ANY p-VALUE BELOW.** Every sign test in
+> this file uses the FRAME as the unit -- a frame's lineages are medianed away before
+> testing -- so these numbers generalise over this prompt corpus and are silent about
+> models. `lineage_dose.py` recomputes them on the lineage, the unit the rest of
+> `experiments/displacement/` uses, on the same pilot3 artifacts. 23 of 48 direction
+> results hold under both units and every loss is in `identity`: **`identity harm` is
+> 23/23 frames here and 13/20 lineages there, with seven models moving the other way.**
+> That file also runs the dose response this one never did, crossing its own
+> `base_naughty_mass` section with its own naming section: transgressive mass governs
+> whether the distribution moves and NOT how nameable the movement is (gain 12/21,
+> p=0.66).
+
 ## What the axis is, and what it is not
 
 **The poles are per-frame and author-declared, not one semantic good/evil axis** (RH, 2026-08-18). "Naughty/nice" is shorthand for what a given frame's alignment will and will not say, and its content varies by domain deliberately: explicit against euphemistic in the sexual frames, blunt against procedural in the institutional ones. There are roughly 300 local axes here, not one global one.
