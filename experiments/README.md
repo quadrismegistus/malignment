@@ -142,6 +142,16 @@ This table exists because separating instrument registrations from hypothesis re
 | **R2** | the register signature is larger for sexual than violent | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |
 | **R3** | archaic violent mass rises (`smite`) | `register_shift` | **SUPERSEDED before any run** — was declared underpowered, ineligible for a headline |
 | **R4** | every R1/R2 effect survives frequency-matched controls | `register_shift` | **SUPERSEDED before any run** — was a gate, not a robustness check |
+| **NC-H1** | concreteness FALLS under alignment | `norm_change` | **SPLIT BY LANGUAGE** — zh SUPPORTED (`concreteness_zh` -0.033, 8/40, p<1e-5); en not supported marginally (p=0.119) but SUPPORTED under dose (-0.110, p=1e-5) |
+| **NC-H2** | register RISES | `norm_change` | **SUPPORTED, BOTH LANGUAGES** — en 45/4, zh 38/5, both p<1e-5. MARGINAL ONLY: no dose slope (p=0.67), so it rises everywhere alike rather than as a transgression response |
+| **NC-H3** | the interiority FIELD (USAS X1) rises | `norm_change` | **NOT SUPPORTED, AND IT IS A COVERAGE FAILURE** — tied in 47 of 50 en lineages; the field carries no mass in either arm at most prompts |
+| **NC-H4** | valence becomes slightly MORE POSITIVE | `norm_change` | **SUPPORTED, BOTH LANGUAGES** — en `warriner_valence` +0.0097 p=0.029, zh `k_valence` +0.0025 p=6e-4. M01's `C_deextremification` records that sweetening "was never emitted"; this is the first test |
+| **NC-H5** | \|valence\| DECREASES (narrowing) | `norm_change` | **ENGLISH ONLY** — `warriner_valence_absz` -0.0077, 16/34, p=0.015. Not supported in zh |
+| **NC-H6** | euphemism RISES (sexual instrument, applied beyond sexual prompts) | `norm_change` | **SUPPORTED** — +0.0034, 38/6, p<1e-5. The cross-domain application `slot_ratings` never made |
+| **NC-H7** | mediation RISES (institutional instrument) | `norm_change` | **SUPPORTED** — +0.0268, 33/16, p=0.021 |
+| **RM-1** | more MASS moves where the base arm is transgressive | `rate_and_magnitude` | **EN SUPPORTED, ZH REVERSED** — en departed +0.0111 (41/9, p=6e-6); zh -0.0101 (10/37, p=1e-4). Continuous version of M01 `F_G_rate_magnitude` |
+| **RM-2** | the RATE is null at transgressive sites (M01 F) | `rate_and_magnitude` | **NOT REPRODUCED** — `n_movers` +1.81, 44/6, p<1e-6 in en. M01's null was 33 pair-sites binary; this is a continuous slope over 50 lineages, so not evidence against it |
+| **RM-3** | freed mass lands on NAMEABLE words, not the tail (`tail_excess`) | `rate_and_magnitude` | **LEVEL: SUPPORTED, BOTH LANGUAGES, UNANIMOUS** — en -0.170, zh -0.134, 0 up/50 dn each, p<1e-15. Replicates M01 `O_crosslingual`. **DOSE SLOPE INVERTS**: en -0.0088 (more substitutional under load), zh +0.0163 (toward diffusion) |
 | **G** | register RISES at the twp endpoint under alignment | `register_shift` | **NOT SUPPORTED** — 30/50 lineages, median +0.0029, p=0.203 |
 | **G1** | the rise is larger where transgressive mass fell | `register_shift` | **SUPPORTED** — 4/50, median −0.0221, p<1e-5 |
 | **G2** | it holds on the sexual subset | `register_shift` | **REVERSED** — 12/50, median −0.0193, p=0.0003 |
