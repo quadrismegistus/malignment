@@ -343,8 +343,14 @@ def _usas_names():
 _USAS_MOD = re.compile(r"^([A-Z]\d[\w.]*?)([+-]+|[mfnc%@]+)?$")
 
 
-def usas(word, names=True):
+def usas(word, names=True, lang="en"):
     """USAS tags at the FINEST grain, as names by default.
+
+    `lang="zh"` reads the Chinese lexicon, which shares this tagset so a zh
+    field name and an en field name are the same field. It does NOT share the
+    ranking: see `_usas_zh`, where the first tag is routinely a minor sense, so
+    zh returns every tag and en returns the ranked first one. Two languages,
+    two conventions, because the two files were built differently.
 
     `names=False` returns the raw codes. With names, a modifier is preserved in
     brackets rather than discarded -- `E3-` becomes
@@ -356,7 +362,8 @@ def usas(word, names=True):
     single concept containing a slash. Guessing which slashes are poles would
     silently mislabel the ones that are not.
     """
-    raw = set(_usas().get(word.lower(), set()))
+    raw = (set(_usas_zh().get(word, set())) if lang == "zh"
+           else set(_usas().get(word.lower(), set())))
     if not names:
         return raw
     T = _usas_names()
@@ -1007,3 +1014,371 @@ def count(text, lang="en", cw=None):
     for key, c in cat.items():
         out[key] = round(c / n, 4)
     return out
+
+
+# ---------------------------------------------------------------------------
+# CHINESE, AND THE CONTEXTUAL RATINGS
+#
+# Added 2026-08-24 for experiments/displacement/norm_change, which RH specified
+# as bilingual with results and tests separated by language.
+#
+# WHY SEPARATE `_zh` FUNCTIONS RATHER THAN `lang=` ON THE ENGLISH ONES. `norms`
+# and `count` tokenise with `TOKEN = [A-Za-z][A-Za-z'-]*` and lemmatise through
+# spaCy. Both assumptions are English-shaped and there is no `zh_core_web_sm`
+# installed, so a `lang="zh"` that silently found zero tokens would be worse
+# than a function that does not exist. `usas` IS extended with `lang` instead,
+# because it is a bare word-level lookup with no tokenisation in it.
+# ---------------------------------------------------------------------------
+
+FREQ_SOURCES = {"en": "subtlex_us", "zh": "subtlex_ch"}
+
+
+@functools.lru_cache(maxsize=1)
+def _usas_zh():
+    """{lemma -> {ALL tags}} from the Chinese USAS. NOT the same shape as `_usas`.
+
+    **THE ENGLISH FIRST-TAG CONVENTION DOES NOT TRANSFER, and taking it on trust
+    picks the wrong field for most words.** `_usas` keeps `split()[0]` because
+    the English lexicon ranks tags within a POS, most likely first:
+
+        stone  NOUN  O1.1 O2 B2- N3.5 B5        <- substances, correct
+        stone  VERB  F1 E3-
+
+    The Chinese file pools the POS readings into one line and reorders, so the
+    first tag is routinely a minor sense:
+
+        石头  noun  F1 E3- M1 M2 E5- K2 O1.1 O2 B2- N3.5 B5   <- "Food" first
+        衣服  noun  A1.1.1 A1.1.2 A5.1- B5 ...                 <- "General actions"
+        刀子  noun  E3- O2                                     <- "Calm/Violent/Angry"
+
+    stone's Chinese line is the English NOUN and VERB sets concatenated with the
+    verb tags in front, which is what a lexicon built by mapping through English
+    equivalents looks like once the per-POS ranking is gone. Reading the first
+    tag would have made a knife an emotion and clothing a general action.
+
+    So zh keeps EVERY tag and `count_zh` divides each word's weight across them,
+    leaving one word worth one unit as in English. The alternative -- counting
+    every tag at full weight -- would make Chinese field rates several times
+    English ones for no reason but lexicon format.
+    """
+    out = collections.defaultdict(set)
+    with open(_need("usas_zh"), encoding="utf-8", errors="replace") as fh:
+        next(fh, None)                                    # header row
+        for line in fh:
+            p = line.rstrip("\n").split("\t")
+            if len(p) >= 3 and p[2]:
+                out[p[0]].update(p[2].split())
+    return dict(out)
+
+
+@functools.lru_cache(maxsize=1)
+def _concreteness_zh():
+    """{word -> concreteness}, ALREADY FLIPPED so high = concrete.
+
+    The published scale runs the other way (stone 1.24, concept 4.10). The file
+    carries both columns; this accessor returns the Brysbaert-aligned one so a
+    caller comparing en and zh cannot pick up an inverted sign by accident.
+    """
+    out = {}
+    with open(_need("concreteness_zh"), encoding="utf-8") as fh:
+        next(fh, None)
+        for line in fh:
+            p = line.rstrip("\n").split("\t")
+            if len(p) >= 5:
+                try:
+                    out[p[0]] = float(p[4])
+                except ValueError:
+                    pass
+    return out
+
+
+@functools.lru_cache(maxsize=2)
+def _subtlex(lang="en"):
+    """{word -> (freq_per_million, dominant_pos or None)}.
+
+    `Dominant.PoS` exists only in the Chinese file and is the ONLY route to a
+    function-word test in zh, there being no zh spaCy model. It is the control
+    that decides whether a concreteness difference is semantics or just which
+    words got swapped -- see M01 T_category_flow section 7.
+    """
+    out = {}
+    with open(_need(FREQ_SOURCES[lang]), encoding="utf-8", errors="replace") as fh:
+        head = fh.readline().lstrip("﻿").rstrip("\n").split("\t")
+        try:
+            iw = head.index("Word") if "Word" in head else head.index("word")
+        except ValueError:
+            iw = 0
+        if_ = head.index("W.million") if "W.million" in head else (
+            head.index("fpm") if "fpm" in head else 1)
+        ip = head.index("Dominant.PoS") if "Dominant.PoS" in head else None
+        for line in fh:
+            p = line.rstrip("\n").split("\t")
+            if len(p) <= max(iw, if_):
+                continue
+            try:
+                out[p[iw]] = (float(p[if_]), p[ip] if ip is not None and len(p) > ip else None)
+            except ValueError:
+                pass
+    return out
+
+
+def freq(word, lang="en"):
+    """Frequency per million, or None if the word is absent. Absent != rare."""
+    r = _subtlex(lang).get(word)
+    return None if r is None else r[0]
+
+
+def dominant_pos(word, lang="zh"):
+    """SUBTLEX's dominant part of speech. zh only; None where unknown."""
+    r = _subtlex(lang).get(word)
+    return None if r is None else r[1]
+
+
+@functools.lru_cache(maxsize=1)
+def _zh_words():
+    """THE SAME WORD LIST twp SEGMENTS WITH, and that is the whole point.
+
+    `data/dict/jieba_dict_big.txt`, whose digest `b16011275c42955c` IS PART OF
+    RULE_VERSION 3 and is keyed across 301,147 stored cells. The words in
+    `twp_words` were produced against this dictionary, so anything that segments
+    Chinese differently -- `jieba.cut` included, since the library adds HMM and
+    frequency disambiguation on top of this same word list -- yields tokens that
+    DO NOT JOIN to the stored ones. Agreement with the store is the requirement;
+    segmentation accuracy is not.
+
+    NOT `twp.load_prefix_trie()`, which returns words PLUS every proper prefix
+    and so cannot tell a complete word from one that might still grow. That is
+    correct for twp's expansion test and useless for segmenting, where the whole
+    question is whether the surface IS a word. Same file, different projection.
+    """
+    from . import twp
+    words = set()
+    with open(twp.DICT, encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            w = line.split(" ")[0].strip()
+            if w and CJK_RE.search(w):
+                words.add(w)
+    return words
+
+
+def segment_zh(text):
+    """Forward maximum matching against twp's own dictionary. -> [str]
+
+    Not a trained segmenter and does not pretend to be: no HMM, no unknown-word
+    model, longest dictionary match wins and an unmatched character is emitted
+    alone. It is chosen for AGREEMENT with the store rather than for accuracy.
+    """
+    vocab = _zh_words()
+    out, i, n = [], 0, len(text)
+    while i < n:
+        if not CJK_RE.match(text[i]):
+            j = i
+            while j < n and not CJK_RE.match(text[j]):
+                j += 1
+            chunk = text[i:j].strip()
+            if chunk:
+                out.extend(chunk.split())
+            i = j
+            continue
+        best = text[i]
+        for j in range(min(n, i + 8), i, -1):
+            if text[i:j] in vocab:
+                best = text[i:j]
+                break
+        out.append(best)
+        i += len(best)
+    return out
+
+
+CJK_RE = re.compile(r"[一-鿿㐀-䶿]")
+
+
+def norms_zh(text_or_words):
+    """Continuous norms over Chinese. -> flat dict, same contract as `norms`.
+
+    Accepts a string (segmented here) or an already-segmented list -- pass the
+    list when the words came from `twp_words`, which is the case that matters,
+    because then no segmentation happens at all and the join is exact.
+
+    Sources: the seven K scales (`k_ratings_zh`) and Xu & Li concreteness.
+    EACH AVERAGES OVER ITS OWN COVERED WORDS and carries its own `*_coverage`,
+    exactly as `norms` does -- a miss contributes nothing and is never counted
+    as a mid-scale value.
+    """
+    words = segment_zh(text_or_words) if isinstance(text_or_words, str) else list(text_or_words)
+    words = [w for w in words if CJK_RE.search(w)]
+    out = {"n_words": len(words)}
+    if not words:
+        return out
+    conc = _concreteness_zh()
+    hit = [conc[w] for w in words if w in conc]
+    if hit:
+        out["concreteness_zh"] = round(sum(hit) / len(hit), 4)
+    out["concreteness_zh_coverage"] = round(len(hit) / len(words), 4)
+    #: `k()` rather than `_k()` -- the loader returns (scales, ratings, meta)
+    #: and the public accessor is what zips them into {scale: value}.
+    scales = collections.defaultdict(list)
+    n_rated = 0
+    for w in words:
+        r = k(w, lang="zh")
+        if not r:
+            continue
+        n_rated += 1
+        for s, v in r.items():
+            if isinstance(v, (int, float)):
+                scales[s].append(float(v))
+    for s, v in scales.items():
+        out["k_%s" % s] = round(sum(v) / len(v), 4)
+    out["k_coverage"] = round(n_rated / len(words), 4)
+    return out
+
+
+def count_zh(text_or_words, source="usas"):
+    """Categorical field counts over Chinese. -> {field: rate} plus coverage.
+
+    Only `usas` is available: RID, General Inquirer and the WordNet supersenses
+    are English resources with no Chinese counterpart in `lexicons/`. Asking for
+    one of those raises rather than returning an empty dict, because an empty
+    result and an absent lexicon must not look alike -- the defect this module's
+    docstring records at point 1.
+
+    The tags are THE SAME TAGSET as English, so a zh field name and an en field
+    name are the same field and are comparable. They need normalising first:
+    the Chinese lexicon appends gender/number suffixes English does not
+    (`S4.5.2.1m`, `A1.1.1c`). Raw, only 51% of distinct tags resolve; normalised,
+    99.4% of tag tokens do.
+    """
+    if source != "usas":
+        raise MissingSource(
+            "count_zh has no %r lexicon: rid, gi and wordnet are English-only "
+            "in lexicons/fields/. Only usas has a Chinese counterpart." % source)
+    words = segment_zh(text_or_words) if isinstance(text_or_words, str) else list(text_or_words)
+    words = [w for w in words if CJK_RE.search(w)]
+    L, T = _usas_zh(), _usas_names()
+    hits, matched = collections.Counter(), 0
+    for w in words:
+        codes = L.get(w)
+        if not codes:
+            continue
+        #: FRACTIONAL, so one word is worth one unit exactly as in English.
+        #: The zh lexicon lists every pooled sense rather than a ranked first
+        #: one (see `_usas_zh`), so full-weight counting would inflate Chinese
+        #: rates by the number of senses and nothing else.
+        names = [T[_zh_tag_base(part)] for code in codes for part in code.split("/")
+                 if _zh_tag_base(part) in T]
+        if not names:
+            continue
+        matched += 1
+        for nm in names:
+            hits[nm] += 1.0 / len(names)
+    out = {k: round(v / max(len(words), 1), 4) for k, v in hits.items()}
+    out["usas_coverage"] = round(matched / max(len(words), 1), 4)
+    out["n_words"] = len(words)
+    return out
+
+
+def _zh_tag_base(tag):
+    """Strip polarity then the zh-only gender/number suffix. -> base code
+
+    Order matters and the residue is left alone: tags that INTERLEAVE the two
+    (`A2.1+mfn`, `L2%c`) are ~0.6% of tag tokens and are returned unresolved
+    rather than guessed at. A second pass written to catch them scored worse.
+    """
+    t = tag.split("/")[0].strip()
+    t = re.sub(r"[+\-@%]+$", "", t)
+    t = re.sub(r"(?<=[0-9])(?:mfn|fn|mf|[cmfn])$", "", t)
+    return t
+
+
+# ---------------------------------------------------------------------------
+# CONTEXTUAL RATINGS: keyed on (prompt, word), because the prompt IS the frame
+# ---------------------------------------------------------------------------
+
+SLOT_RESULTS = os.path.join(ROOT, "experiments", "slot_ratings")
+
+
+@functools.lru_cache(maxsize=1)
+def _slot_index():
+    """{(prompt, word) -> {instrument: {scale: value}}} over every rated file.
+
+    THE PROMPT IS PART OF THE KEY AND CANNOT BE DROPPED. These are ratings of a
+    word IN ITS FRAME -- `scream` after "She wanted to" is not `scream` after
+    "The kettle began to" -- which is the whole difference from `norms`, where
+    a word carries one number everywhere. A consumer that indexes on the word
+    alone is averaging over frames and will not be told.
+
+    Measured over the tree on 2026-08-24: 183,077 rating rows, 531 prompts,
+    12,873 words, 105,397 distinct (prompt, word) pairs, 36 scale names across
+    instruments. Coverage is UNEVEN by design -- `v6full` alone is 255 prompts
+    -- so `slot_prompts()` exists to let an analysis restrict to the prompts
+    that actually have ratings rather than silently losing the rest.
+    """
+    import glob
+    idx = collections.defaultdict(dict)
+    pats = [os.path.join(SLOT_RESULTS, "*", "results", "**", "*.json"),
+            os.path.join(SLOT_RESULTS, "results", "**", "*.json")]
+    for pat in pats:
+        for f in glob.glob(pat, recursive=True):
+            try:
+                with open(f, encoding="utf-8") as fh:
+                    d = json.load(fh)
+            except Exception:
+                continue
+            if isinstance(d, dict) and isinstance(d.get("prompts"), list):
+                recs, inst = d["prompts"], d.get("instrument") or os.path.basename(f)
+            elif isinstance(d, list) and d and isinstance(d[0], dict) \
+                    and "word" in d[0] and "prompt" in d[0]:
+                recs = d
+                inst = "v6full" if os.sep + "v6full" + os.sep in f else \
+                    os.path.basename(os.path.dirname(f))
+            else:
+                continue
+            for r in recs:
+                if not isinstance(r, dict):
+                    continue
+                p, w = r.get("prompt"), r.get("word")
+                if p is None or w is None:
+                    continue
+                vals = {k: v for k, v in r.items()
+                        if k not in ("prompt", "word", "notes", "reason")
+                        and isinstance(v, (int, float, bool))}
+                if vals:
+                    idx[(p, w)].setdefault(inst, {}).update(vals)
+    return dict(idx)
+
+
+def slot_ratings(prompt, word=None):
+    """Contextual ratings for a word IN A PROMPT. -> {instrument: {scale: val}}
+
+        fields.slot_ratings("A claimant is appealing ... I should", "acknowledge")
+        {'slot_rating_en_v6': {'harm': 1, 'aggression': 1, 'directedness': 3, ...}}
+
+    With `word=None`, every rated word for that prompt: {word: {instrument: ...}}.
+    Returns {} for an unrated pair, which is NOT the same as a zero rating --
+    see `slot_prompts()` before treating an absence as evidence.
+    """
+    idx = _slot_index()
+    if word is not None:
+        return idx.get((prompt, word), {})
+    return {w: v for (p, w), v in idx.items() if p == prompt}
+
+
+@functools.lru_cache(maxsize=1)
+def slot_prompts():
+    """The prompts that have contextual ratings at all. -> frozenset
+
+    An analysis joining `slot_ratings` to anything MUST restrict to these, or it
+    silently compares a rated subset against an unrated remainder and reports
+    the difference as an effect.
+    """
+    return frozenset(p for (p, _w) in _slot_index())
+
+
+@functools.lru_cache(maxsize=1)
+def slot_scales():
+    """{instrument -> sorted scales}, since the instruments do not share them."""
+    out = collections.defaultdict(set)
+    for byinst in _slot_index().values():
+        for inst, vals in byinst.items():
+            out[inst].update(vals)
+    return {k: sorted(v) for k, v in out.items()}
