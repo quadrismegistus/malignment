@@ -197,3 +197,67 @@ mode. Worth stating so the next matched-control design is proposed knowingly.
     Y_* superego cluster   theory-facing; a different question
     Z_ladders_regimes      the ladder, which is `emergence/`'s subject
     zh_sites_unit_limited  unit-limited by construction; analysis cannot fill it
+
+## WHAT IS STILL WORTH REDOING: P's UNNAMED AXIS, CONDITIONALLY
+
+`P_unnamed_axis` is the one M01 finding today's work gives a new handle on.
+
+Its claim: **"none of the eighteen rated norms predicts which way alignment
+moves a word"**, held out by word. Word identity carries +0.121 AUC of headroom
+over base probability; 300 unsupervised GloVe dimensions recover 18-21% of that
+headroom while the rated norms recover **7%**. Every named component — register,
+concreteness, length — is a minority share, and the unnamed residual outpredicts
+all of them. Its nameable face has the provisional name INTERIORITY,
+enacted -> represented.
+
+**P tested MARGINAL prediction. Today's central result is that many named norms
+are DOSE ONLY** — flat on average, steep where the frame is transgressive:
+
+    k_concreteness       MARGINAL p=0.119   DOSE p=1e-5
+    warriner_dominance   MARGINAL p=0.085   DOSE p=9e-5
+    k_charge             MARGINAL p=0.533   DOSE p=2e-5
+    vocalisation         MARGINAL p=0.480   DOSE p=9e-5
+
+**So P's failure may be the same marginal/conditional split, and its 7% may be a
+marginal 7%.** The question worth asking is P's own, conditioned:
+
+> Held out by word, do the rated norms predict direction BETTER at prompts where
+> the base arm carries transgressive charge than at neutral ones?
+
+If yes, the named vocabulary is not inadequate — it is context-dependent, and P's
+ceiling was measured in the wrong condition. If no, P stands harder than before,
+because the most favourable condition has been tried.
+
+**This is a real re-do, not a re-read.** It needs P's held-out-by-word protocol
+and its measured ceiling, not this folder's lineage-level sign tests, and the
+ceiling has to be recomputed within dose strata or the comparison is against the
+wrong baseline. `K_word_properties`'s instrument facts stand and are reusable.
+
+## AND ONE CELL M01 DECLARED UNFILLABLE IS PARTLY FILLED
+
+`zh_sites_unit_limited`: *"The Chinese site question is unit-limited... the test
+has 17 independent units where it needs between 235 and 428. No amount of
+reanalysis fixes that, and the ceiling is set by how many Chinese-competent base
+checkpoints exist in the world."*
+
+That was correct **about that unit**. The dose design does not use it: 50
+lineages over 416 Chinese prompts, a continuous predictor, no twin to match. It
+returns Chinese results at p<1e-15 (`tail_excess` level, 0 up/50 dn) and p<1e-5
+(register, valence mean).
+
+**The finding said reanalysis could not fix it, and reanalysis did not — a
+different instrument did.** The bounded negative was a statement about the
+minimal-pair unit, not about Chinese, and it should be cited that way.
+
+## NOT WORTH REDOING, AND WHY
+
+    B_frozen               froze and never fired; nothing to redo
+    H1/H2_alignment_depth  a different instrument; nothing here bears on it
+    J_arch_displacement    architecture, not norms
+    S_annotation           the order-reversal design that replaced R; intact
+    X_metonymy             live in the X campaign, not superseded here
+    Y_* superego cluster   theory-facing; a different question
+    Z_ladders_regimes      the ladder, which is `emergence/`'s subject
+    L_M_found_prose        adjacent to tail_excess but a different mechanism
+                           claim (BOUNDARY BLUR, not tail contraction) and not
+                           tested by anything here
