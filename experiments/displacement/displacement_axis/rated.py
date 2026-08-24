@@ -129,7 +129,11 @@ RESULTS = os.path.join(HERE, "results")
 #: not encode how deep under `experiments/` it sits. A wrong root makes the
 #: globs below return [] instead of raising; `repo_root` refuses instead.
 from malignment.paths import REPO
-NORMS = os.path.join(os.path.dirname(os.path.dirname(HERE)), "lexicons", "norms")
+#: NOT `dirname(dirname(HERE))`, which was correct while this lived at
+#: `experiments/displacement_axis/` and silently became `experiments/lexicons/norms`
+#: when the folder moved under `experiments/displacement/`. The comment above is
+#: the reason REPO exists; the line below it used to ignore it.
+NORMS = os.path.join(REPO, "lexicons", "norms")
 TABLE = "twp_words_v4"
 
 

@@ -39,7 +39,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 #: globs below return [] instead of raising; `repo_root` refuses instead.
 from malignment.paths import REPO
 sys.path.insert(0, REPO); sys.path.insert(0, HERE)
-RES = os.path.join(HERE, "results", "pilot3")
+#: `--run` selects the run directory; pilot3 stays the default so every
+#: command already written against this file keeps meaning what it meant.
+RUN = "pilot3"
+RES = os.path.join(HERE, "results", RUN)
 SR = os.path.join(REPO, "experiments", "slot_ratings")
 
 S2 = ["orality", "tactility", "genitality", "incorporation", "body_distance",
@@ -86,9 +89,15 @@ def load_sex():
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--run", default=RUN, help="run directory under results/")
     ap.add_argument("--min-lineages", type=int, default=10)
     ap.add_argument("--min-words", type=int, default=30)
     a = ap.parse_args(argv)
+    global RES
+    RES = os.path.join(HERE, "results", a.run)
+    if not os.path.isdir(RES):
+        ap.error("no such run: %s" % RES)
+    print("run: %s" % a.run)
     import numpy as np
     from scipy import stats
     from malignment import slot_axis as SA
@@ -262,7 +271,7 @@ def main(argv=None):
     json.dump(dict(_what="leave-one-lineage-out with the three instruments, "
                          "identical words within each comparison", **out),
               open(os.path.join(RES, "loo_all.json"), "w"), indent=1)
-    print("-> results/pilot3/loo_all.json")
+    print("-> results/%s/loo_all.json" % a.run)
 
 
 if __name__ == "__main__":

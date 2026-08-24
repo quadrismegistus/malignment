@@ -32,7 +32,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 #: globs below return [] instead of raising; `repo_root` refuses instead.
 from malignment.paths import REPO
 sys.path.insert(0, REPO)
-RESULTS = os.path.join(HERE, "results", "pilot3")
+#: `--run` selects the run directory; pilot3 stays the default so every
+#: command already written against this file keeps meaning what it meant.
+RUN = os.environ.get("AXIS_RUN", "pilot3")
+RESULTS = os.path.join(HERE, "results", RUN)
 SLOT = os.path.join(REPO, "experiments", "slot_ratings")
 NORMS = os.path.join(REPO, "lexicons", "norms")
 DROP = {"n_eligible", "n_present", "rise", "fall", "net", "ratable"}

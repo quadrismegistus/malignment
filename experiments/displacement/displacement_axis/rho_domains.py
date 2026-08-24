@@ -36,7 +36,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 #: globs below return [] instead of raising; `repo_root` refuses instead.
 from malignment.paths import REPO
 sys.path.insert(0, REPO); sys.path.insert(0, HERE)
-RES = os.path.join(HERE, "results", "pilot3")
+#: `--run` selects the run directory; pilot3 stays the default so every
+#: command already written against this file keeps meaning what it meant.
+RUN = "pilot3"
+RES = os.path.join(HERE, "results", RUN)
 
 
 def load():
@@ -51,11 +54,17 @@ def load():
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--run", default=RUN, help="run directory under results/")
     ap.add_argument("--splits", type=int, default=40)
     ap.add_argument("--seed", type=int, default=20260820)
     ap.add_argument("--min-lineages", type=int, default=8)
     ap.add_argument("--min-words", type=int, default=40)
     a = ap.parse_args(argv)
+    global RES
+    RES = os.path.join(HERE, "results", a.run)
+    if not os.path.isdir(RES):
+        ap.error("no such run: %s" % RES)
+    print("run: %s" % a.run)
     import numpy as np, random
     from scipy import stats
     from axis_variants import ratings
@@ -234,7 +243,7 @@ def main(argv=None):
                          "R2 over %d splits, all 12 v6 scales, no selection"
                          % a.splits, rows=frames),
               open(os.path.join(RES, "rho_domains.json"), "w"), indent=1)
-    print("\n-> results/pilot3/rho_domains.json")
+    print("\n-> results/%s/rho_domains.json" % a.run)
 
 
 if __name__ == "__main__":

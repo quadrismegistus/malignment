@@ -33,15 +33,26 @@ import argparse, collections, csv, json, os, random, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-RES = os.path.join(HERE, "results", "pilot3")
+#: `--run` selects the run directory; pilot3 stays the default so every
+#: command already written against this file keeps meaning what it meant.
+RUN = "pilot3"
+RES = os.path.join(HERE, "results", RUN)
 LONG = os.path.join(RES, "long")
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--run", default=RUN, help="run directory under results/")
     ap.add_argument("--splits", type=int, default=40)
     ap.add_argument("--seed", type=int, default=20260820)
     a = ap.parse_args(argv)
+    global RES
+    RES = os.path.join(HERE, "results", a.run)
+    global LONG
+    LONG = os.path.join(RES, "long")
+    if not os.path.isdir(RES):
+        ap.error("no such run: %s" % RES)
+    print("run: %s" % a.run)
     import numpy as np
     os.makedirs(LONG, exist_ok=True)
 
@@ -53,7 +64,14 @@ def main(argv=None):
            for c in (json.loads(l) for l in open(os.path.join(RES, "cells.jsonl")))}
 
     rng = random.Random(a.seed)
-    KS = [1, 2, 4, 8, 12, 16]
+    #: The sweep must REACH the data. Fixed at [1,2,4,8,12,16] it answered
+    #: "still climbing at 16" on pilot3's 20 fitting lineages, which was the
+    #: honest reading there; run unchanged on pilot4's 49 it prints the same
+    #: sentence while saying nothing about lineages 17-49. Extended to the
+    #: roster, with the test block held out.
+    #: The per-frame loop below already skips any k that does not leave room for
+    #: the 4-lineage test block, so this list only has to REACH the data.
+    KS = [1, 2, 4, 8, 12, 16, 24, 32, 40, 45]
     import dedupe
     prompt_of = {c["item_id"]: c["prompt"]
                  for c in (json.loads(l) for l in open(os.path.join(RES, "cells.jsonl")))}
@@ -135,8 +153,19 @@ def main(argv=None):
         if v:
             print("   %-20d %+9.3f %7d/%-4d"
                   % (k, float(np.median(v)), sum(1 for x in v if x > 0), len(v)))
-    print("\n   still climbing at 16, which is the argument for leave-one-out.")
-    print("\n-> results/pilot3/long/protocol_ceiling.csv, protocol_growth.csv")
+    #: State what the curve DID, rather than a sentence written when it stopped
+    #: at 16. A rise over the last two points is not convergence.
+    grew = {k: float(np.median([r["r2"] for r in rows_b if r["fit_lineages"] == k]))
+            for k in KS if any(r["fit_lineages"] == k for r in rows_b)}
+    got = sorted(grew)
+    if len(got) >= 2:
+        d = grew[got[-1]] - grew[got[-2]]
+        print("\n   last step %d -> %d lineages: R2 %+0.4f -> %+0.4f (%+0.4f). %s"
+              % (got[-2], got[-1], grew[got[-2]], grew[got[-1]], d,
+                 "STILL CLIMBING -- leave-one-out, and the magnitude numbers are "
+                 "still bounded by lineage count." if d > 0.005 else
+                 "FLATTENING -- the fitting half is no longer the binding constraint."))
+    print("\n-> results/%s/long/protocol_ceiling.csv, protocol_growth.csv" % a.run)
 
 
 if __name__ == "__main__":

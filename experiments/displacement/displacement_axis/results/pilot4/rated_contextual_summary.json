@@ -1,0 +1,101 @@
+{
+ "_what": "contextual slot_ratings run through displacement_axis's own statistic, for comparison with bge (dN_position) and k_ratings (rated.jsonl)",
+ "summary": [
+  {
+   "scale": "aggression",
+   "cells": 15150,
+   "down_frac": 0.46884488448844885,
+   "median_dN": 0.0,
+   "beats_null": 0.49229922992299235,
+   "spearman_vs_bge": 0.41940762891178
+  },
+  {
+   "scale": "deliberation",
+   "cells": 15150,
+   "down_frac": 0.45808580858085807,
+   "median_dN": 0.0,
+   "beats_null": 0.46211771177117716,
+   "spearman_vs_bge": -0.16658561859662901
+  },
+  {
+   "scale": "directedness",
+   "cells": 15150,
+   "down_frac": 0.49597359735973595,
+   "median_dN": 0.0,
+   "beats_null": 0.5286798679867987,
+   "spearman_vs_bge": 0.28057611354086553
+  },
+  {
+   "scale": "fit",
+   "cells": 15150,
+   "down_frac": 0.3056105610561056,
+   "median_dN": 0.029361275835130485,
+   "beats_null": 0.45848734873487346,
+   "spearman_vs_bge": 0.03144746080281341
+  },
+  {
+   "scale": "harm",
+   "cells": 15150,
+   "down_frac": 0.49471947194719473,
+   "median_dN": 0.0,
+   "beats_null": 0.404972497249725,
+   "spearman_vs_bge": 0.4201790442413316
+  },
+  {
+   "scale": "hedged",
+   "cells": 15150,
+   "down_frac": 0.49465346534653465,
+   "median_dN": 0.0,
+   "beats_null": 0.42332233223322335,
+   "spearman_vs_bge": -0.2134084577109173
+  },
+  {
+   "scale": "interiority",
+   "cells": 15150,
+   "down_frac": 0.4203960396039604,
+   "median_dN": 0.0071016914907712225,
+   "beats_null": 0.5354015401540154,
+   "spearman_vs_bge": -0.29586893394852387
+  },
+  {
+   "scale": "makes_better",
+   "cells": 15150,
+   "down_frac": 0.4444884488448845,
+   "median_dN": 0.012899882216736991,
+   "beats_null": 0.5813641364136414,
+   "spearman_vs_bge": -0.5320770397467219
+  },
+  {
+   "scale": "makes_worse",
+   "cells": 15150,
+   "down_frac": 0.5382178217821783,
+   "median_dN": -0.011576334794203169,
+   "beats_null": 0.5828217821782178,
+   "spearman_vs_bge": 0.6179387315464901
+  },
+  {
+   "scale": "mundanity",
+   "cells": 15150,
+   "down_frac": 0.4433003300330033,
+   "median_dN": 0.024143725706336383,
+   "beats_null": 0.5932783278327832,
+   "spearman_vs_bge": -0.630237637200383
+  },
+  {
+   "scale": "superego",
+   "cells": 15150,
+   "down_frac": 0.4498349834983498,
+   "median_dN": 0.0,
+   "beats_null": 0.43105610561056107,
+   "spearman_vs_bge": -0.22638500706380255
+  },
+  {
+   "scale": "vocalisation",
+   "cells": 15150,
+   "down_frac": 0.33940594059405943,
+   "median_dN": 0.0,
+   "beats_null": 0.44315181518151814,
+   "spearman_vs_bge": -0.19158845355246773
+  }
+ ]
+}
