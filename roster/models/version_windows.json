@@ -5,7 +5,7 @@
   "roster/models/observations.json"
  ],
  "_absence": "A version with no row was never tried. Not a pass, not a failure, and the gap between two tested points is exactly as unknown as it looks.",
- "n": 151,
+ "n": 152,
  "models": {
   "01-ai/Yi-1.5-9B": {
    "torch": {
@@ -2350,12 +2350,38 @@
        ]
       },
       "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
    },
    "transformers": {
     "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
      {
       "version": "5.4.0",
       "verdicts": {
@@ -4162,9 +4188,16 @@
          "outcome": "load_failed",
          "cause": "as Baichuan2-7B-Base: bitsandbytes"
         }
+       ],
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
        ]
       },
-      "verdict": "fails"
+      "verdict": "mixed"
      }
     ],
     "hole": false
@@ -4177,6 +4210,11 @@
        "works": [
         {
          "environment": "local_mps_tf457",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf4571",
          "outcome": "load_ok",
          "cause": null
         }
@@ -5148,6 +5186,11 @@
          "environment": "cloud_cuda130_tf4576",
          "outcome": "load_ok",
          "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
         }
        ]
       },
@@ -5158,6 +5201,19 @@
    },
    "transformers": {
     "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
      {
       "version": "4.57.6",
       "verdicts": {
@@ -7596,6 +7652,44 @@
          "environment": "vast_a100_ssm_kernels",
          "outcome": "loads",
          "cause": "Runs, but on the NAIVE sequential scan: transformers' FalconMamba integration does not use mamba-ssm/causal-conv1d and emits 'the fast path is not available ... pip install kernels"
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   }
+  },
+  "tiiuae/falcon-7b-instruct": {
+   "torch": {
+    "points": [
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     }
+    ],
+    "hole": false
+   },
+   "transformers": {
+    "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf4571",
+         "outcome": "load_ok",
+         "cause": null
         }
        ]
       },

@@ -1229,7 +1229,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
@@ -2066,7 +2066,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "bigscience/bloom-7b1",
@@ -2633,7 +2633,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "internlm/internlm2-base-7b",
@@ -4136,7 +4136,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "tiiuae/falcon-mamba-7b",

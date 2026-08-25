@@ -3071,6 +3071,34 @@
    "outcome": "load_ok",
    "cause": "",
    "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "Zyphra/Zamba2-7B-Instruct",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `ssm`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "baichuan-inc/Baichuan2-7B-Chat",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "inceptionai/jais-family-6p7b-chat",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "tiiuae/falcon-7b-instruct",
+   "environment": "cloud_cuda130_tf4571",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
   }
  ],
  "engine_support": {
