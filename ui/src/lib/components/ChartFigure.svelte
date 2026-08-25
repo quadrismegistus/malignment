@@ -11,6 +11,7 @@
 -->
 <script lang="ts">
 	import { CHARTS } from './charts/registry';
+	import ExportPng from './charts/ExportPng.svelte';
 
 	let { url, name }: { url: string; name: string } = $props();
 
@@ -55,7 +56,10 @@
 {:else if art}
 	{#if CHARTS[art.chart]}
 		{@const Chart = CHARTS[art.chart]}
-		<Chart {art} />
+		<div class="chart-wrap" style="position: relative">
+			<ExportPng filename={name.replace('.data.json', '')} />
+			<Chart {art} />
+		</div>
 	{:else}
 		<p class="err">
 			<code>{name}</code> declares <code>chart: {art.chart}</code>, which this app has no
