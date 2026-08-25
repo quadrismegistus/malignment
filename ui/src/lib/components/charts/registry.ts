@@ -4,6 +4,7 @@ import ParCoords from './ParCoords.svelte';
 import QuadrantMap from './QuadrantMap.svelte';
 import OperationGraph from './OperationGraph.svelte';
 import MetaGraph from './MetaGraph.svelte';
+import DoseScatter from './DoseScatter.svelte';
 
 /**
  * chart type -> component, keyed by the `chart` field a producer writes into its
@@ -23,5 +24,6 @@ export const CHARTS: Record<string, Component<any>> = {
 	//: The cross-frame network. Same canvas shape as `graph`, different PANEL:
 	//: four levels, two of them not drawn. Its producer sets this name after
 	//: `graph()` validates the artifact.
-	metagraph: MetaGraph
+	metagraph: MetaGraph,
+	dose_scatter: DoseScatter
 };
