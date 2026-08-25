@@ -237,7 +237,7 @@
 	.chart-area { height: 280px; position: relative; }
 	.chart-area :global(.tick text) { font-size: 9px; fill: var(--text-3); }
 	.tip {
-		position: absolute; top: 8px; right: 8px;
+		position: absolute; bottom: 32px; left: 40px;
 		background: var(--panel, #fff); border: 1px solid var(--rule, #ddd);
 		border-radius: 6px; padding: 6px 10px; font-size: 0.72rem;
 		box-shadow: 0 2px 8px rgba(0,0,0,0.12); pointer-events: none;
