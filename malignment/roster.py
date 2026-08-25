@@ -1465,6 +1465,41 @@ def check_environments():
 #: whether the model runs.
 MEASUREMENTS_PATH = os.path.join(ROOT, "roster", "models", "measurements.json")
 
+TEMPLATE_OVERHEAD_PATH = os.path.join(ROOT, "roster", "models", "template_overhead.json")
+
+_OVERHEAD_CACHE = None
+
+
+def template_overhead(model_id=None):
+    """How many characters a model's chat template injects beyond the prompt.
+
+    Returns the full dict if `model_id` is None, or the entry for one model.
+
+    **THIS IS THE SYSTEM CONTENT, MEASURED.** `system_mode` records what we
+    ASKED FOR ('empty' vs 'default'). This records what the template PRODUCED --
+    which is the axis that matters for cross-model comparison.
+
+    A model at `system_mode='empty'` with 544 chars of overhead (neo) received
+    more persona content than a model at `system_mode='default'` with 23 chars
+    (archangel). The label says one thing; the render says another. This
+    measurement is the render.
+
+        overhead_chars              bare render minus probe length
+        empty_overhead_chars        same, with system=""
+        empty_identical_to_default  True if "" collapses to DEFAULT
+        has_persona                 overhead > 100 chars
+        bare_render_sample          first 200 chars of the bare render
+    """
+    global _OVERHEAD_CACHE
+    if _OVERHEAD_CACHE is None:
+        try:
+            _OVERHEAD_CACHE = json.load(open(TEMPLATE_OVERHEAD_PATH))
+        except (FileNotFoundError, json.JSONDecodeError):
+            _OVERHEAD_CACHE = {}
+    if model_id is None:
+        return {k: v for k, v in _OVERHEAD_CACHE.items() if not k.startswith("_")}
+    return _OVERHEAD_CACHE.get(model_id, {})
+
 
 def framed(tier="endpoints", measurements=None):
     """The population for a FRAMED (chat-template) measurement. Declared, not found.

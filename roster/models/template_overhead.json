@@ -1,0 +1,623 @@
+{
+ "_about": "Template overhead per model: how many characters the chat template adds beyond the prompt text and minimal role markers. DERIVED from the tokenizer, not from cells — a property of the checkpoint, not the measurement.",
+ "_producer": "measured by rendering a fixed probe prompt and subtracting len(probe)",
+ "_probe": "Continue: test",
+ "01-ai/Yi-1.5-9B-Chat": {
+  "overhead_chars": 50,
+  "empty_overhead_chars": 50,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "BAAI/AquilaChat2-7B": {
+  "overhead_chars": 30,
+  "empty_overhead_chars": 30,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "override",
+  "has_persona": false,
+  "bare_render_sample": "<|startofpiece|>Continue: test<|endofpiece|>"
+ },
+ "BSC-LT/salamandra-7b-instruct": {
+  "overhead_chars": 1488,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are Salamandra, a language model developed by the Language Technology Unit at the Barcelona Supercomputing Center, an interdisciplinary group of developers. You can find more in"
+ },
+ "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+  "overhead_chars": 38,
+  "empty_overhead_chars": 38,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "override",
+  "has_persona": false,
+  "bare_render_sample": "<|endoftext|>\n<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "HuggingFaceH4/mistral-7b-sft-beta": {
+  "overhead_chars": 28,
+  "empty_overhead_chars": 44,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test</s>\n<|assistant|>\n"
+ },
+ "HuggingFaceH4/zephyr-7b-beta": {
+  "overhead_chars": 28,
+  "empty_overhead_chars": 44,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test</s>\n<|assistant|>\n"
+ },
+ "HuggingFaceTB/SmolLM2-360M-Instruct": {
+  "overhead_chars": 148,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are a helpful AI assistant named SmolLM, trained by Hugging Face<|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "HuggingFaceTB/SmolLM3-3B": {
+  "overhead_chars": 1354,
+  "empty_overhead_chars": 1354,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\n## Metadata\n\nKnowledge Cutoff Date: June 2025\nToday Date: 25 August 2026\nReasoning Mode: /think\n\n## Custom Instructions\n\nYou are a helpful AI assistant named SmolLM, trained by Hugg"
+ },
+ "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO": {
+  "overhead_chars": 1354,
+  "empty_overhead_chars": 1354,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\n## Metadata\n\nKnowledge Cutoff Date: June 2025\nToday Date: 25 August 2026\nReasoning Mode: /think\n\n## Custom Instructions\n\nYou are a helpful AI assistant named SmolLM, trained by Hugg"
+ },
+ "NousResearch/Hermes-3-Llama-3.1-8B": {
+  "overhead_chars": 125,
+  "empty_overhead_chars": 97,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|begin_of_text|><|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+  "overhead_chars": 53,
+  "empty_overhead_chars": 83,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s><|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+  "overhead_chars": 102,
+  "empty_overhead_chars": 156,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<s><|start_header_id|>user<|end_header_id|>\n\nContinue: test<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+ },
+ "Qwen/Qwen2.5-0.5B": {
+  "overhead_chars": 108,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "Qwen/Qwen2.5-0.5B-Instruct": {
+  "overhead_chars": 148,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "Qwen/Qwen2.5-7B": {
+  "overhead_chars": 108,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "Qwen/Qwen2.5-7B-Instruct": {
+  "overhead_chars": 148,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "Qwen/Qwen3-8B": {
+  "overhead_chars": 50,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "Qwen/Qwen3-8B-Base": {
+  "overhead_chars": 50,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+  "overhead_chars": 28,
+  "empty_overhead_chars": 44,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test</s>\n<|assistant|>\n"
+ },
+ "Zyphra/Zamba2-7B-Instruct": {
+  "overhead_chars": 50,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+  "overhead_chars": 24,
+  "empty_overhead_chars": 36,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+  "overhead_chars": 24,
+  "empty_overhead_chars": 36,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+  "overhead_chars": 24,
+  "empty_overhead_chars": 36,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+  "overhead_chars": 24,
+  "empty_overhead_chars": 36,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+  "overhead_chars": 24,
+  "empty_overhead_chars": 36,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+  "overhead_chars": 24,
+  "empty_overhead_chars": 36,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "allenai/Llama-3.1-Tulu-3.1-8B": {
+  "overhead_chars": 24,
+  "empty_overhead_chars": 36,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "allenai/OLMo-2-0425-1B-DPO": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/OLMo-2-0425-1B-Instruct": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/OLMo-2-0425-1B-SFT": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/OLMoE-1B-7B-0125-DPO": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/OLMoE-1B-7B-0125-Instruct": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/OLMoE-1B-7B-0125-SFT": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/Olmo-3-7B-Instruct": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/Olmo-3-7B-Instruct-DPO": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/Olmo-3-7B-Instruct-SFT": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/Olmo-3-7B-Think": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/Olmo-3-7B-Think-DPO": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/Olmo-3-7B-Think-SFT": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'tie_word_embeddings':\n    TypeError: Field 'tie_word"
+ },
+ "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+  "overhead_chars": 203,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are a helpful function-calling AI assistant. You do not currently have access to any functions. <functions></functions><|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_"
+ },
+ "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+  "overhead_chars": 203,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are a helpful function-calling AI assistant. You do not currently have access to any functions. <functions></functions><|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_"
+ },
+ "baichuan-inc/Baichuan2-7B-Chat": {
+  "overhead_chars": 28,
+  "empty_overhead_chars": 28,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "override",
+  "has_persona": false,
+  "bare_render_sample": "<reserved_106>Continue: test<reserved_107>"
+ },
+ "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+  "overhead_chars": 50,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "croissantllm/CroissantLLMChat-v0.1": {
+  "overhead_chars": 50,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "deepseek-ai/deepseek-llm-7b-chat": {
+  "overhead_chars": 39,
+  "empty_overhead_chars": 41,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<｜begin▁of▁sentence｜>User: Continue: test\n\nAssistant:"
+ },
+ "google/gemma-2-9b-it": {
+  "overhead_chars": 60,
+  "empty_overhead_chars": 60,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<bos><start_of_turn>user\nContinue: test<end_of_turn>\n<start_of_turn>model\n"
+ },
+ "google/recurrentgemma-9b-it": {
+  "overhead_chars": 60,
+  "empty_overhead_chars": 60,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<bos><start_of_turn>user\nContinue: test<end_of_turn>\n<start_of_turn>model\n"
+ },
+ "huggyllama/llama-7b": {
+  "overhead_chars": 18,
+  "empty_overhead_chars": 37,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s>[INST] Continue: test [/INST]"
+ },
+ "ibm-granite/granite-3.0-8b-instruct": {
+  "overhead_chars": 93,
+  "empty_overhead_chars": 147,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|start_of_role|>user<|end_of_role|>Continue: test<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>"
+ },
+ "inceptionai/jais-family-6p7b-chat": {
+  "overhead_chars": 360,
+  "empty_overhead_chars": 123,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "### Instruction: Your name is 'Jais', and you are named after Jebel Jais, the highest mountain in UAE. You were made by 'Inception' in the UAE. You are a helpful, respectful, and honest assistant. Alw"
+ },
+ "internlm/internlm2-chat-7b": {
+  "overhead_chars": 53,
+  "empty_overhead_chars": 83,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s><|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "internlm/internlm2-chat-7b-sft": {
+  "overhead_chars": 53,
+  "empty_overhead_chars": 83,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s><|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "kakaocorp/kanana-1.5-8b-base": {
+  "overhead_chars": 116,
+  "empty_overhead_chars": 170,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|begin_of_text|><|start_header_id|>user<|end_header_id|>\n\nContinue: test<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+ },
+ "kakaocorp/kanana-1.5-8b-instruct-2505": {
+  "overhead_chars": 171,
+  "empty_overhead_chars": 225,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nContinue: test<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+ },
+ "kakaocorp/kanana-2-3b-instruct": {
+  "overhead_chars": 69,
+  "empty_overhead_chars": 99,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+ },
+ "llm-jp/llm-jp-3-7.2b-instruct2": {
+  "overhead_chars": 23,
+  "empty_overhead_chars": 58,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s>\n\n### 指示:\nContinue: test\n\n### 応答:\n"
+ },
+ "llm-jp/llm-jp-3-7.2b-instruct3": {
+  "overhead_chars": 23,
+  "empty_overhead_chars": 58,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s>\n\n### 指示:\nContinue: test\n\n### 応答:\n"
+ },
+ "m-a-p/neo_7b": {
+  "overhead_chars": 544,
+  "empty_overhead_chars": 18,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<s>[INST] <<SYS>>\nYou are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, "
+ },
+ "m-a-p/neo_7b_instruct_v0.1": {
+  "overhead_chars": 544,
+  "empty_overhead_chars": 18,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<s>[INST] <<SYS>>\nYou are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, "
+ },
+ "m-a-p/neo_7b_sft_v0.1": {
+  "overhead_chars": 544,
+  "empty_overhead_chars": 18,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<s>[INST] <<SYS>>\nYou are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, "
+ },
+ "meta-llama/Llama-3.1-8B-Instruct": {
+  "overhead_chars": 233,
+  "empty_overhead_chars": 233,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nContinue: test<|eot_id|>"
+ },
+ "mistralai/Mistral-7B-Instruct-v0.1": {
+  "overhead_chars": 19,
+  "empty_overhead_chars": 21,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s> [INST] Continue: test [/INST]"
+ },
+ "openGPT-X/Teuken-7B-instruct-v0.6": {
+  "overhead_chars": 163,
+  "empty_overhead_chars": 163,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "System: A chat between a human and an artificial intelligence assistant.The assistant gives helpful and polite answers to the human's questions.\nUser: Continue: test\nAssistant: "
+ },
+ "openbmb/MiniCPM5-1B": {
+  "overhead_chars": 53,
+  "empty_overhead_chars": 83,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s><|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "openbmb/MiniCPM5-1B-Base": {
+  "overhead_chars": 53,
+  "empty_overhead_chars": 83,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s><|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "openbmb/MiniCPM5-1B-SFT": {
+  "overhead_chars": 53,
+  "empty_overhead_chars": 83,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s><|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "openchat/openchat-3.5-0106": {
+  "overhead_chars": 60,
+  "empty_overhead_chars": 96,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s>GPT4 Correct User: Continue: test<|end_of_turn|>GPT4 Correct Assistant:"
+ },
+ "stabilityai/stablelm-2-1_6b-chat": {
+  "overhead_chars": 108,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": true,
+  "bare_render_sample": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "stabilityai/stablelm-2-zephyr-1_6b": {
+  "overhead_chars": 37,
+  "empty_overhead_chars": 62,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test<|endoftext|>\n<|assistant|>\n"
+ },
+ "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+  "overhead_chars": 58,
+  "empty_overhead_chars": 23,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s>以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。\n\n### 指示:\nContinue: test\n\n### 応答:\n"
+ },
+ "teknium/OpenHermes-2.5-Mistral-7B": {
+  "overhead_chars": 50,
+  "empty_overhead_chars": 80,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "tiiuae/Falcon-H1-1.5B-Instruct": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'use_cache':\n    TypeError: Field 'use_cache' with va"
+ },
+ "tiiuae/Falcon-H1-7B-Instruct": {
+  "error": "StrictDataclassFieldValidationError: Validation error for field 'use_cache':\n    TypeError: Field 'use_cache' with va"
+ },
+ "tiiuae/Falcon3-7B-Instruct": {
+  "overhead_chars": 24,
+  "empty_overhead_chars": 36,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|user|>\nContinue: test\n<|assistant|>\n"
+ },
+ "tiiuae/falcon-7b-instruct": {
+  "overhead_chars": 20,
+  "empty_overhead_chars": 20,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "\n\nUser: Continue: test\n\nAssistant:"
+ },
+ "tiiuae/falcon-mamba-7b-instruct": {
+  "overhead_chars": 67,
+  "empty_overhead_chars": 97,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<|begin_of_text|><|im_start|>user\nContinue: test<|im_end|>\n<|im_start|>assistant\n"
+ },
+ "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+  "overhead_chars": 58,
+  "empty_overhead_chars": 23,
+  "empty_identical_to_default": false,
+  "system_mode": "empty",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "<s>以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。\n\n### 指示:\nContinue: test\n\n### 応答:\n"
+ },
+ "zai-org/glm-4-9b-chat-hf": {
+  "overhead_chars": 34,
+  "empty_overhead_chars": 34,
+  "empty_identical_to_default": true,
+  "system_mode": "default",
+  "template_source": "native",
+  "has_persona": false,
+  "bare_render_sample": "[gMASK]<sop><|user|>\nContinue: test<|assistant|>"
+ }
+}
