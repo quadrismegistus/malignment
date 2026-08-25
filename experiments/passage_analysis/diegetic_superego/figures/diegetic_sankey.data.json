@@ -1,0 +1,141 @@
+{
+ "chart": "diegetic_sankey",
+ "title": "Where does the passage go? Base vs aligned",
+ "subtitle": "62,681 passages coded for scene content. Alignment does not increase refusal or frame exit; it increases guilt, hesitation and moralisation INSIDE the scene it keeps writing.",
+ "base": {
+  "nodes": [
+   "all passages",
+   "sexual scene",
+   "no sexual scene",
+   "clean scene",
+   "superego in scene",
+   "consent hesitation",
+   "guilt / shame",
+   "moralisation",
+   "frame exit",
+   "continues",
+   "refusal"
+  ],
+  "links": [
+   {
+    "source": "all passages",
+    "target": "sexual scene",
+    "value": 15489
+   },
+   {
+    "source": "all passages",
+    "target": "no sexual scene",
+    "value": 14892
+   },
+   {
+    "source": "sexual scene",
+    "target": "clean scene",
+    "value": 13325
+   },
+   {
+    "source": "sexual scene",
+    "target": "superego in scene",
+    "value": 2110
+   },
+   {
+    "source": "superego in scene",
+    "target": "consent hesitation",
+    "value": 1532
+   },
+   {
+    "source": "superego in scene",
+    "target": "guilt / shame",
+    "value": 485
+   },
+   {
+    "source": "superego in scene",
+    "target": "moralisation",
+    "value": 319
+   },
+   {
+    "source": "no sexual scene",
+    "target": "frame exit",
+    "value": 6994
+   },
+   {
+    "source": "no sexual scene",
+    "target": "continues",
+    "value": 7898
+   },
+   {
+    "source": "no sexual scene",
+    "target": "refusal",
+    "value": 59
+   }
+  ],
+  "total": 30381
+ },
+ "aligned": {
+  "nodes": [
+   "all passages",
+   "sexual scene",
+   "no sexual scene",
+   "clean scene",
+   "superego in scene",
+   "consent hesitation",
+   "guilt / shame",
+   "moralisation",
+   "frame exit",
+   "continues",
+   "refusal"
+  ],
+  "links": [
+   {
+    "source": "all passages",
+    "target": "sexual scene",
+    "value": 15159
+   },
+   {
+    "source": "all passages",
+    "target": "no sexual scene",
+    "value": 17141
+   },
+   {
+    "source": "sexual scene",
+    "target": "clean scene",
+    "value": 11633
+   },
+   {
+    "source": "sexual scene",
+    "target": "superego in scene",
+    "value": 2901
+   },
+   {
+    "source": "superego in scene",
+    "target": "consent hesitation",
+    "value": 2213
+   },
+   {
+    "source": "superego in scene",
+    "target": "guilt / shame",
+    "value": 761
+   },
+   {
+    "source": "superego in scene",
+    "target": "moralisation",
+    "value": 518
+   },
+   {
+    "source": "no sexual scene",
+    "target": "frame exit",
+    "value": 6883
+   },
+   {
+    "source": "no sexual scene",
+    "target": "continues",
+    "value": 10258
+   },
+   {
+    "source": "no sexual scene",
+    "target": "refusal",
+    "value": 735
+   }
+  ],
+  "total": 32300
+ }
+}
