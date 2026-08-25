@@ -7,6 +7,7 @@ import MetaGraph from './MetaGraph.svelte';
 import DoseScatter from './DoseScatter.svelte';
 import DoseTrends from './DoseTrends.svelte';
 import CapacityCurves from './CapacityCurves.svelte';
+import NormAcquisition from './NormAcquisition.svelte';
 
 /**
  * chart type -> component, keyed by the `chart` field a producer writes into its
@@ -29,5 +30,6 @@ export const CHARTS: Record<string, Component<any>> = {
 	metagraph: MetaGraph,
 	dose_scatter: DoseScatter,
 	dose_trends: DoseTrends,
-	capacity_curves: CapacityCurves
+	capacity_curves: CapacityCurves,
+	norm_acquisition: NormAcquisition
 };
