@@ -1,6 +1,6 @@
 ---
 subject: emergence
-status: PARTIAL PORT from M05. Capacities ported; findings A-G ported; curve-builders and figure producers blocked on movement.word_probs retirement.
+status: PORTED. All three intermediate tables regenerable from CH in bulk. Findings E-G ported with md5-identical outputs. Findings A-D read the regenerated parquets; their figure producers are not yet ported.
 ---
 
 # emergence
@@ -21,6 +21,13 @@ The source is `~/github/malign-logits/meta/M05_emergence` (read-only archive). T
 
 ### PORTED, reproduces the archive
 
+    capacities/produce_curve_data.py     REPLACES m05_curves.py. Builds m05_curves.parquet
+                                         and pythia_curves.parquet from twp_words in bulk.
+                                         49,210 + 80,290 rows, ~2 min each.
+    capacities/produce_class_mass.py     REPLACES m05_class_mass.py. Builds
+                                         m05_class_mass.parquet (989,462 rows, both ladders).
+    capacities/produce_sense_mass.py     REPLACES m05_sense_mass.py. Builds
+                                         m05_sense_mass.parquet (552,064 rows, both ladders).
     capacities/m05_sense_curve.py        sense_curve.json           md5 identical
     capacities/m05_syntax_curve.py       syntax_curve.json          md5 identical
     capacities/m05_pythia_capacity.py    pythia_capacity_onsets.json md5 identical
@@ -39,13 +46,15 @@ The source is `~/github/malign-logits/meta/M05_emergence` (read-only archive). T
                                                colorless-green phase; alignment
                                                RAISES natural share
 
-### BLOCKED on movement.word_probs
+### SUPERSEDED (archived)
 
-Three curve-builders read per-cell word distributions through `movement.word_probs`, whose two backends (hashstash cache and point-query prefetch) were retired rather than ported. The replacement is the `movement` table (56M rows in ClickHouse), and porting these means rewriting the reads as SQL, not restoring the cache. This is real work: `word_probs` folds a partition where 20% of payloads carry duplicated surfaces, and the fold has to be reimplemented wherever the read moves.
+    m05_curves.py.archive      superseded by produce_curve_data.py
+    m05_class_mass.py.archive  superseded by produce_class_mass.py
 
-    m05_curves.py              the main curve-builder (A, B, C, D depend on it)
-    m05_class_mass.py          field flow per checkpoint
-    m05_capacity_examples.py   per-prompt examples at specific rungs
+### REMAINING on movement.word_probs
+
+    m05_capacity_examples.py   per-prompt examples at specific rungs. Same fix
+                               as the others; low priority (illustrative).
 
 ### NOT YET PORTED (findings)
 
@@ -85,10 +94,12 @@ These build the parquet files that the curve-builders and findings read:
 
 ## Outstanding work
 
-1. **Port the three blocked curve-builders** by rewriting their reads against the `movement` table. This unblocks findings A-D, which are the core emergence results (event vs drift, field flow, affective convergence, word trajectories). The data is in ClickHouse; only the access pattern needs to change.
+1. **Web figures** for the curves (syntax, sense, capacity acquisition). The data is in the parquets; the drawing is the next step.
 
-2. **Port finding H (norm acquisition)**. This is the emergence-axis counterpart of `experiments/displacement/norm_change`: instead of "does alignment move norms at the endpoint," it asks "when does each norm shift install on the ladder." The two results should be presented together, and H's producer (`m05_norm_acquisition.py`) reads only from a local parquet, not from `word_probs`, so it is not blocked by the same dependency.
+2. **Port finding H (norm acquisition)**. This is the emergence-axis counterpart of `experiments/displacement/norm_change`: instead of "does alignment move norms at the endpoint," it asks "when does each norm shift install on the ladder." H's producer reads only from a local parquet, not from `word_probs`.
 
-3. **Port the figure producers** for the findings that are already here (E, F, G). The five PNG files in `capacities/figures/` are archive copies; the scripts that drew them are ported and run, but the remaining ~73 figures have no producer in this repo.
+3. **Port the figure producers** for findings A-D. The parquets they read are now regenerated; only the plotnine drawing scripts remain in the archive.
 
-4. **Decide whether lens_ladder and pole_sep are worth porting.** Both are instrument notes or nulls rather than findings. The lens ladder bounds what activation ratios can measure; pole_sep discharges an owed debt from finding A. Neither carries a claim the paper needs, but both constrain claims other findings might make.
+4. **Port `m05_capacity_examples.py`** — per-word examples at specific rungs. Same bulk-CH fix. Low priority (illustrative).
+
+5. **Decide whether lens_ladder and pole_sep are worth porting.** Both are instrument notes or nulls. Neither carries a claim the paper needs.
